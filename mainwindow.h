@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QCheckBox>
+#include <QComboBox>
+#include <QDateTime>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -69,8 +71,14 @@ public:
 
     void about();
 
+    QComboBox *cboxDataClass;
+    int c_row = 0;
+
 
 private slots:
+    void dataClassChange_dp();
+    void dataClassChange_nv();
+
     void on_btnOpen_clicked();
 
     void on_btnTestWrite_clicked();
@@ -236,6 +244,14 @@ private slots:
     void on_btnSaveAs_clicked();
 
     void on_btnKernelAdd_Del_clicked();
+
+    void on_table_dp_add_cellClicked(int row, int column);
+
+    void on_table_dp_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_nv_add_cellClicked(int row, int column);
+
+    void on_table_nv_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
 private:
     Ui::MainWindow *ui;

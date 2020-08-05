@@ -49,6 +49,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionSave_As, &QAction::triggered, this, &MainWindow::on_btnSaveAs_clicked);
     connect(ui->actionAbout_2, &QAction::triggered, this, &MainWindow::about);
 
+    ui->btnSave->setEnabled(false);
+    ui->actionSave->setEnabled(false);
+
+    QFileInfo appInfo(qApp->applicationFilePath());
+    ui->statusbar->showMessage(tr("最后的编译时间(Last modified): ") + appInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss"));
+
 }
 
 MainWindow::~MainWindow()
@@ -86,6 +92,7 @@ void MainWindow::on_btnOpen_clicked()
     loadding = false;
 
     ui->btnSave->setEnabled(true);
+    ui->actionSave->setEnabled(true);
 }
 
 void MainWindow::on_btnTestWrite_clicked()
@@ -3347,7 +3354,11 @@ void MainWindow::on_btnSaveAs_clicked()
         setWindowTitle(title + "    " + PlistFileName);
     else
         return;
+
     SavePlist(PlistFileName);
+
+    ui->btnSave->setEnabled(true);
+    ui->actionSave->setEnabled(true);
 
 }
 
@@ -3360,4 +3371,73 @@ void MainWindow::about()
 void MainWindow::on_btnKernelAdd_Del_clicked()
 {
     del_item(ui->table_kernel_add);
+}
+
+void MainWindow::on_table_dp_add_cellClicked(int row, int column)
+{
+    cboxDataClass = new QComboBox;
+    cboxDataClass->addItem("Data");
+    cboxDataClass->addItem("String");
+    cboxDataClass->addItem("Number");
+    cboxDataClass->addItem("");
+    connect(cboxDataClass, SIGNAL(currentIndexChanged(QString)), this, SLOT(dataClassChange_dp()));
+    c_row = row;
+    if(column == 1)
+    {
+
+        ui->table_dp_add->setCellWidget(row , column , cboxDataClass);
+        cboxDataClass->setCurrentText(ui->table_dp_add->item(row , 1)->text());
+
+    }
+
+}
+
+void MainWindow::on_table_dp_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    if(currentRow == 0 && currentColumn == 0 && previousColumn == 0)
+    {
+
+    }
+
+    ui->table_dp_add->removeCellWidget(previousRow , 1);
+
+}
+
+void MainWindow::dataClassChange_dp()
+{
+    ui->table_dp_add->item(c_row , 1)->setText(cboxDataClass->currentText());
+}
+
+void MainWindow::dataClassChange_nv()
+{
+    ui->table_nv_add->item(c_row , 1)->setText(cboxDataClass->currentText());
+}
+
+void MainWindow::on_table_nv_add_cellClicked(int row, int column)
+{
+    cboxDataClass = new QComboBox;
+    cboxDataClass->addItem("Data");
+    cboxDataClass->addItem("String");
+    cboxDataClass->addItem("Number");
+    cboxDataClass->addItem("");
+    connect(cboxDataClass, SIGNAL(currentIndexChanged(QString)), this, SLOT(dataClassChange_nv()));
+    c_row = row;
+    if(column == 1)
+    {
+
+        ui->table_nv_add->setCellWidget(row , column , cboxDataClass);
+        cboxDataClass->setCurrentText(ui->table_nv_add->item(row , 1)->text());
+
+
+    }
+}
+
+void MainWindow::on_table_nv_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    if(currentRow == 0 && currentColumn == 0 && previousColumn == 0)
+    {
+
+    }
+
+    ui->table_nv_add->removeCellWidget(previousRow , 1);
 }
