@@ -120,10 +120,7 @@ void MainWindow::on_btnTestWrite_clicked()
         qDebug() << Reg.value("1/class").toString();
         qDebug() << Reg.value("1/value").toString();
 
-        //Reg.beginGroup("mainwindow");
-        //Reg.setValue("size", 12);
-        //Reg.setValue("fullScreen", false);
-        //Reg.endGroup();
+
 
 }
 
@@ -162,10 +159,6 @@ void MainWindow::on_btnParse_clicked()
     qDebug() << map3["Comment"].toString();
     qDebug() << map3["Enabled"].toBool();
     qDebug() << map3["Path"].toString();
-
-    //qDebug() << map["FadtEnableReset"].toBool();
-    //qDebug() << map["NormalizeHeaders"];
-
 
 
 }
@@ -3375,15 +3368,17 @@ void MainWindow::on_btnKernelAdd_Del_clicked()
 
 void MainWindow::on_table_dp_add_cellClicked(int row, int column)
 {
-    cboxDataClass = new QComboBox;
-    cboxDataClass->addItem("Data");
-    cboxDataClass->addItem("String");
-    cboxDataClass->addItem("Number");
-    cboxDataClass->addItem("");
-    connect(cboxDataClass, SIGNAL(currentIndexChanged(QString)), this, SLOT(dataClassChange_dp()));
-    c_row = row;
+
     if(column == 1)
     {
+
+        cboxDataClass = new QComboBox;
+        cboxDataClass->addItem("Data");
+        cboxDataClass->addItem("String");
+        cboxDataClass->addItem("Number");
+        cboxDataClass->addItem("");
+        connect(cboxDataClass, SIGNAL(currentIndexChanged(QString)), this, SLOT(dataClassChange_dp()));
+        c_row = row;
 
         ui->table_dp_add->setCellWidget(row , column , cboxDataClass);
         cboxDataClass->setCurrentText(ui->table_dp_add->item(row , 1)->text());
@@ -3415,15 +3410,17 @@ void MainWindow::dataClassChange_nv()
 
 void MainWindow::on_table_nv_add_cellClicked(int row, int column)
 {
-    cboxDataClass = new QComboBox;
-    cboxDataClass->addItem("Data");
-    cboxDataClass->addItem("String");
-    cboxDataClass->addItem("Number");
-    cboxDataClass->addItem("");
-    connect(cboxDataClass, SIGNAL(currentIndexChanged(QString)), this, SLOT(dataClassChange_nv()));
-    c_row = row;
+
     if(column == 1)
     {
+        cboxDataClass = new QComboBox;
+        cboxDataClass->addItem("Data");
+        cboxDataClass->addItem("String");
+        cboxDataClass->addItem("Number");
+        cboxDataClass->addItem("");
+        connect(cboxDataClass, SIGNAL(currentIndexChanged(QString)), this, SLOT(dataClassChange_nv()));
+        c_row = row;
+
 
         ui->table_nv_add->setCellWidget(row , column , cboxDataClass);
         cboxDataClass->setCurrentText(ui->table_nv_add->item(row , 1)->text());
