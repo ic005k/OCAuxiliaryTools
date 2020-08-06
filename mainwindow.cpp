@@ -1865,6 +1865,7 @@ QVariantMap MainWindow::SaveDeviceProperties()
     QVariantMap subMap;
     QVariantMap dictList;
     QVariantMap valueList;
+    QVariantList arrayList;
     for(int i = 0; i < ui->table_dp_add0->rowCount(); i ++)
     {
 
@@ -1897,7 +1898,25 @@ QVariantMap MainWindow::SaveDeviceProperties()
     subMap["Add"] = dictList;
 
     //Delete
-    //这部分暂时不写，因为没有样本数据
+    dictList.clear(); //先清理之前的数据
+    for(int i = 0; i < ui->table_dp_del0->rowCount(); i ++)
+    {
+
+        valueList.clear(); //先必须清理下列表，很重要
+        arrayList.clear();
+
+        //先加载表中的数据
+        ui->table_dp_del0->setCurrentCell(i , 0);
+        on_table_dp_del0_cellClicked(i , 0);
+
+        for(int k = 0; k < ui->table_dp_del->rowCount(); k ++)
+        {
+            arrayList.append(ui->table_dp_del->item(k , 0)->text());
+        }
+        dictList[ui->table_dp_del0->item(i , 0)->text()] = arrayList;
+
+    }
+    subMap["Delete"] = dictList;
 
     return subMap;
 
