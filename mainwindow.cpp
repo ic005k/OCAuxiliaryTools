@@ -453,7 +453,8 @@ void MainWindow::initui_dp()
     QTableWidgetItem *id0;
 
     //Add
-    ui->table_dp_add0->setColumnWidth(0,300);
+    ui->table_dp_add0->setColumnWidth(0,400);
+    ui->table_dp_add0->setMinimumWidth(400);
     id0 = new QTableWidgetItem(tr("PCI设备列表\nPCILists"));
     ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
 
@@ -462,7 +463,7 @@ void MainWindow::initui_dp()
     id0 = new QTableWidgetItem(tr("键\nKey"));
     ui->table_dp_add->setHorizontalHeaderItem(0, id0);
 
-    ui->table_dp_add->setColumnWidth(2,260);
+    ui->table_dp_add->setColumnWidth(2,250);
     id0 = new QTableWidgetItem(tr("值\nValue"));
     ui->table_dp_add->setHorizontalHeaderItem(2, id0);
 
@@ -471,20 +472,14 @@ void MainWindow::initui_dp()
 
     //Delete
 
-    ui->table_dp_del0->setColumnWidth(0,300);
+    ui->table_dp_del0->setColumnWidth(0,400);
+    ui->table_dp_del0->setMinimumWidth(400);
     id0 = new QTableWidgetItem(tr("PCI设备列表\nPCILists"));
     ui->table_dp_del0->setHorizontalHeaderItem(0, id0);
 
-    ui->table_dp_del->setColumnWidth(0,660);
+    ui->table_dp_del->setColumnWidth(0,780);
     id0 = new QTableWidgetItem(tr("值\nValue"));
     ui->table_dp_del->setHorizontalHeaderItem(0, id0);
-
-    /*ui->table_dp_del->setColumnWidth(2,260);
-    id0 = new QTableWidgetItem(tr("值\nValue"));
-    ui->table_dp_del->setHorizontalHeaderItem(2, id0);
-
-    id0 = new QTableWidgetItem(tr("数据类型\nClass"));
-    ui->table_dp_del->setHorizontalHeaderItem(1, id0);*/
 
 
 }
@@ -1064,16 +1059,17 @@ void MainWindow::initui_nvram()
     QTableWidgetItem *id0;
 
     //Add
-    ui->table_nv_add0->setColumnWidth(0,300);
+    ui->table_nv_add0->setColumnWidth(0,500);
+    ui->table_nv_add0->setMinimumWidth(500);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_add0->setHorizontalHeaderItem(0, id0);
 
 
-    ui->table_nv_add->setColumnWidth(0,360);
+    ui->table_nv_add->setColumnWidth(0,300);
     id0 = new QTableWidgetItem(tr("键\nKey"));
     ui->table_nv_add->setHorizontalHeaderItem(0, id0);
 
-    ui->table_nv_add->setColumnWidth(2,360);
+    ui->table_nv_add->setColumnWidth(2,350);
     id0 = new QTableWidgetItem(tr("值\nValue"));
     ui->table_nv_add->setHorizontalHeaderItem(2, id0);
 
@@ -1082,11 +1078,11 @@ void MainWindow::initui_nvram()
 
     //Delete
 
-    ui->table_nv_del0->setColumnWidth(0,300);
+    ui->table_nv_del0->setColumnWidth(0,600);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_del0->setHorizontalHeaderItem(0, id0);
 
-    ui->table_nv_del->setColumnWidth(0,660);
+    ui->table_nv_del->setColumnWidth(0,600);
     id0 = new QTableWidgetItem(tr("值\nValue"));
     ui->table_nv_del->setHorizontalHeaderItem(0, id0);
 
@@ -1094,11 +1090,11 @@ void MainWindow::initui_nvram()
 
     //LegacySchema
 
-    ui->table_nv_ls0->setColumnWidth(0,300);
+    ui->table_nv_ls0->setColumnWidth(0,600);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_ls0->setHorizontalHeaderItem(0, id0);
 
-    ui->table_nv_ls->setColumnWidth(0,660);
+    ui->table_nv_ls->setColumnWidth(0,600);
     id0 = new QTableWidgetItem(tr("值\nValue"));
     ui->table_nv_ls->setHorizontalHeaderItem(0, id0);
 
@@ -1497,7 +1493,7 @@ void MainWindow::initui_UEFI()
     //Drivers
     QTableWidgetItem *id0;
 
-    ui->table_uefi_drivers->setColumnWidth(0,900);
+    ui->table_uefi_drivers->setColumnWidth(0,1200);
     id0 = new QTableWidgetItem(tr("驱动名称\nDrivers"));
     ui->table_uefi_drivers->setHorizontalHeaderItem(0, id0);
 
