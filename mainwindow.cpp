@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "OpenCore配置文件编辑器 V0.6.0";
+    title = "OpenCore配置文件编辑器 V0.6.1";
     setWindowTitle(title);
 
     initui_acpi();
