@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1400</width>
+    <width>1300</width>
     <height>736</height>
    </rect>
   </property>
@@ -95,7 +95,7 @@
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
       <property name="currentIndex">
-       <number>6</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -814,247 +814,133 @@
            <attribute name="title">
             <string>Quirks</string>
            </attribute>
-           <widget class="QLabel" name="label">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>38</y>
-              <width>191</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Cpuid1Data</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editCpuid1Data">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>70</y>
-              <width>221</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_2">
-            <property name="geometry">
-             <rect>
-              <x>540</x>
-              <y>40</y>
-              <width>231</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Cpuid1Mask</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editCpuid1Mask">
-            <property name="geometry">
-             <rect>
-              <x>540</x>
-              <y>70</y>
-              <width>241</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleCpuPmCfgLock">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>140</y>
-              <width>271</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleCpuPmCfgLock</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleXcpmCfgLock">
-            <property name="geometry">
-             <rect>
-              <x>310</x>
-              <y>136</y>
-              <width>261</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleXcpmCfgLock</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleXcpmExtraMsrs">
-            <property name="geometry">
-             <rect>
-              <x>590</x>
-              <y>136</y>
-              <width>331</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleXcpmExtraMsrs</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleXcpmForceBoost">
-            <property name="geometry">
-             <rect>
-              <x>940</x>
-              <y>136</y>
-              <width>351</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleXcpmForceBoost</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkCustomSMBIOSGuid">
-            <property name="geometry">
-             <rect>
-              <x>310</x>
-              <y>300</y>
-              <width>261</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>CustomSMBIOSGuid</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkDisableIoMapper">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>190</y>
-              <width>271</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>DisableIoMapper</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkDisableRtcChecksum">
-            <property name="geometry">
-             <rect>
-              <x>310</x>
-              <y>190</y>
-              <width>271</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>DisableRtcChecksum</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkDummyPowerManagement">
-            <property name="geometry">
-             <rect>
-              <x>590</x>
-              <y>190</y>
-              <width>341</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>DummyPowerManagement</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkExternalDiskIcons">
-            <property name="geometry">
-             <rect>
-              <x>940</x>
-              <y>190</y>
-              <width>361</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ExternalDiskIcons</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkIncreasePciBarSize">
-            <property name="geometry">
-             <rect>
-              <x>590</x>
-              <y>300</y>
-              <width>311</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>IncreasePciBarSize</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkLapicKernelPanic">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>240</y>
-              <width>261</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>LapicKernelPanic</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkPanicNoKextDump">
-            <property name="geometry">
-             <rect>
-              <x>310</x>
-              <y>250</y>
-              <width>271</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>PanicNoKextDump</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkPowerTimeoutKernelPanic">
-            <property name="geometry">
-             <rect>
-              <x>590</x>
-              <y>250</y>
-              <width>331</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>PowerTimeoutKernelPanic</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkThirdPartyDrives">
-            <property name="geometry">
-             <rect>
-              <x>940</x>
-              <y>250</y>
-              <width>361</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ThirdPartyDrives</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkXhciPortLimit">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>300</y>
-              <width>251</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>XhciPortLimit</string>
-            </property>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout_36">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Cpuid1Data</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="editCpuid1Data"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Cpuid1Mask</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="editCpuid1Mask"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="chkAppleCpuPmCfgLock">
+              <property name="text">
+               <string>AppleCpuPmCfgLock</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="chkAppleXcpmExtraMsrs">
+              <property name="text">
+               <string>AppleXcpmExtraMsrs</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="chkIncreasePciBarSize">
+              <property name="text">
+               <string>IncreasePciBarSize</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="chkAppleXcpmCfgLock">
+              <property name="text">
+               <string>AppleXcpmCfgLock</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="chkDisableIoMapper">
+              <property name="text">
+               <string>DisableIoMapper</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="chkAppleXcpmForceBoost">
+              <property name="text">
+               <string>AppleXcpmForceBoost</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="chkCustomSMBIOSGuid">
+              <property name="text">
+               <string>CustomSMBIOSGuid</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QCheckBox" name="chkDisableRtcChecksum">
+              <property name="text">
+               <string>DisableRtcChecksum</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QCheckBox" name="chkLapicKernelPanic">
+              <property name="text">
+               <string>LapicKernelPanic</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="chkDummyPowerManagement">
+              <property name="text">
+               <string>DummyPowerManagement</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QCheckBox" name="chkXhciPortLimit">
+              <property name="text">
+               <string>XhciPortLimit</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QCheckBox" name="chkPanicNoKextDump">
+              <property name="text">
+               <string>PanicNoKextDump</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="chkExternalDiskIcons">
+              <property name="text">
+               <string>ExternalDiskIcons</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QCheckBox" name="chkPowerTimeoutKernelPanic">
+              <property name="text">
+               <string>PowerTimeoutKernelPanic</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="2">
+             <widget class="QCheckBox" name="chkThirdPartyDrives">
+              <property name="text">
+               <string>ThirdPartyDrives</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
@@ -1068,500 +954,252 @@
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabMisc">
           <property name="currentIndex">
-           <number>5</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tabWidgetPage1">
            <attribute name="title">
             <string>Boot-引导</string>
            </attribute>
-           <widget class="QLabel" name="label_3">
-            <property name="geometry">
-             <rect>
-              <x>40</x>
-              <y>30</y>
-              <width>471</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ConsoleAttributes-文本启动菜单颜色</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editConsoleAttributes">
-            <property name="geometry">
-             <rect>
-              <x>40</x>
-              <y>60</y>
-              <width>231</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_6">
-            <property name="geometry">
-             <rect>
-              <x>600</x>
-              <y>100</y>
-              <width>361</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>PickerMode-启动菜单模式</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_4">
-            <property name="geometry">
-             <rect>
-              <x>600</x>
-              <y>30</y>
-              <width>341</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>HibernateMode-休眠模式</string>
-            </property>
-           </widget>
-           <widget class="QComboBox" name="cboxPickerMode">
-            <property name="geometry">
-             <rect>
-              <x>600</x>
-              <y>130</y>
-              <width>161</width>
-              <height>32</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QComboBox" name="cboxHibernateMode">
-            <property name="geometry">
-             <rect>
-              <x>600</x>
-              <y>60</y>
-              <width>161</width>
-              <height>32</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkPollAppleHotKeys">
-            <property name="geometry">
-             <rect>
-              <x>590</x>
-              <y>280</y>
-              <width>421</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>PollAppleHotKeys-模拟苹果热键</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkHideAuxiliary">
-            <property name="geometry">
-             <rect>
-              <x>40</x>
-              <y>280</y>
-              <width>461</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>HideAuxiliary-隐藏辅助条目</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkShowPicker">
-            <property name="geometry">
-             <rect>
-              <x>590</x>
-              <y>240</y>
-              <width>421</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ShowPicker-显示引导菜单</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_5">
-            <property name="geometry">
-             <rect>
-              <x>40</x>
-              <y>171</y>
-              <width>471</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>PickerAttributes-GUI设置属性</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editPickerAttributes">
-            <property name="geometry">
-             <rect>
-              <x>40</x>
-              <y>200</y>
-              <width>231</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_8">
-            <property name="geometry">
-             <rect>
-              <x>40</x>
-              <y>100</y>
-              <width>471</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>TakeoffDelay-快捷键延迟</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editTakeoffDelay">
-            <property name="geometry">
-             <rect>
-              <x>40</x>
-              <y>130</y>
-              <width>231</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkPickerAudioAssist">
-            <property name="geometry">
-             <rect>
-              <x>40</x>
-              <y>240</y>
-              <width>471</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>PickerAudioAssist-语音辅助</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_7">
-            <property name="geometry">
-             <rect>
-              <x>593</x>
-              <y>170</y>
-              <width>241</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Timeout-倒计时</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editTimeout">
-            <property name="geometry">
-             <rect>
-              <x>600</x>
-              <y>200</y>
-              <width>191</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout_15">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>ConsoleAttributes-文本启动菜单颜色</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="editConsoleAttributes"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>TakeoffDelay-快捷键延迟</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="editTakeoffDelay"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>PickerAttributes-GUI设置属性</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="editPickerAttributes"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Timeout-倒计时</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="editTimeout"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>HibernateMode-休眠模式</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QComboBox" name="cboxHibernateMode"/>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>PickerMode-启动菜单模式</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QComboBox" name="cboxPickerMode"/>
+            </item>
+            <item row="6" column="0">
+             <widget class="QCheckBox" name="chkPickerAudioAssist">
+              <property name="text">
+               <string>PickerAudioAssist-语音辅助</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QCheckBox" name="chkShowPicker">
+              <property name="text">
+               <string>ShowPicker-显示引导菜单</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <widget class="QCheckBox" name="chkHideAuxiliary">
+              <property name="text">
+               <string>HideAuxiliary-隐藏辅助条目</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QCheckBox" name="chkPollAppleHotKeys">
+              <property name="text">
+               <string>PollAppleHotKeys-模拟苹果热键</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tabWidgetPage2">
            <attribute name="title">
             <string>Debug-调试</string>
            </attribute>
-           <widget class="QCheckBox" name="chkAppleDebug">
-            <property name="geometry">
-             <rect>
-              <x>109</x>
-              <y>79</y>
-              <width>261</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleDebug</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_10">
-            <property name="geometry">
-             <rect>
-              <x>624</x>
-              <y>78</y>
-              <width>221</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>DisplayLevel</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editDisplayLevel">
-            <property name="geometry">
-             <rect>
-              <x>620</x>
-              <y>100</y>
-              <width>221</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkApplePanic">
-            <property name="geometry">
-             <rect>
-              <x>109</x>
-              <y>130</y>
-              <width>291</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ApplePanic</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkSerialInit">
-            <property name="geometry">
-             <rect>
-              <x>110</x>
-              <y>230</y>
-              <width>321</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>SerialInit</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkDisableWatchDog">
-            <property name="geometry">
-             <rect>
-              <x>109</x>
-              <y>180</y>
-              <width>351</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>DisableWatchDog</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkSysReport">
-            <property name="geometry">
-             <rect>
-              <x>110</x>
-              <y>280</y>
-              <width>321</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>SysReport</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_9">
-            <property name="geometry">
-             <rect>
-              <x>619</x>
-              <y>150</y>
-              <width>221</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>DisplayDelay</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editDisplayDelay">
-            <property name="geometry">
-             <rect>
-              <x>620</x>
-              <y>180</y>
-              <width>221</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_11">
-            <property name="geometry">
-             <rect>
-              <x>622</x>
-              <y>220</y>
-              <width>181</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Target</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editTarget">
-            <property name="geometry">
-             <rect>
-              <x>620</x>
-              <y>240</y>
-              <width>221</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout_24">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>DisplayLevel</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="editDisplayLevel"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>DisplayDelay</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="editDisplayDelay"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Target</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="editTarget"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="chkAppleDebug">
+              <property name="text">
+               <string>AppleDebug</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QCheckBox" name="chkApplePanic">
+              <property name="text">
+               <string>ApplePanic</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="chkDisableWatchDog">
+              <property name="text">
+               <string>DisableWatchDog</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QCheckBox" name="chkSerialInit">
+              <property name="text">
+               <string>SerialInit</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <widget class="QCheckBox" name="chkSysReport">
+              <property name="text">
+               <string>SysReport</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tabWidgetPage3">
            <attribute name="title">
             <string>Security-安全</string>
            </attribute>
-           <widget class="QCheckBox" name="chkAllowNvramReset">
-            <property name="geometry">
-             <rect>
-              <x>18</x>
-              <y>73</y>
-              <width>441</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AllowNvramReset-允许复位NVRAM</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_13">
-            <property name="geometry">
-             <rect>
-              <x>552</x>
-              <y>70</y>
-              <width>271</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ExposeSensitiveData</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editExposeSensitiveData">
-            <property name="geometry">
-             <rect>
-              <x>550</x>
-              <y>100</y>
-              <width>261</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAllowSetDefault">
-            <property name="geometry">
-             <rect>
-              <x>18</x>
-              <y>150</y>
-              <width>511</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AllowSetDefault-允许Ctrl+回车设置默认启动盘</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_14">
-            <property name="geometry">
-             <rect>
-              <x>552</x>
-              <y>161</y>
-              <width>231</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>HaltLevel</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editHaltLevel">
-            <property name="geometry">
-             <rect>
-              <x>550</x>
-              <y>190</y>
-              <width>261</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAuthRestart">
-            <property name="geometry">
-             <rect>
-              <x>18</x>
-              <y>230</y>
-              <width>391</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AuthRestart</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_15">
-            <property name="geometry">
-             <rect>
-              <x>552</x>
-              <y>252</y>
-              <width>231</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ScanPolicy</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editScanPolicy">
-            <property name="geometry">
-             <rect>
-              <x>550</x>
-              <y>280</y>
-              <width>261</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_12">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>290</y>
-              <width>211</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>BootProtect</string>
-            </property>
-           </widget>
-           <widget class="QComboBox" name="cboxBootProtect">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>320</y>
-              <width>191</width>
-              <height>32</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_16">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>370</y>
-              <width>201</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Vault</string>
-            </property>
-           </widget>
-           <widget class="QComboBox" name="cboxVault">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>390</y>
-              <width>191</width>
-              <height>32</height>
-             </rect>
-            </property>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout_25">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>ExposeSensitiveData</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="editExposeSensitiveData"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>HaltLevel</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="editHaltLevel"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_15">
+              <property name="text">
+               <string>ScanPolicy</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="editScanPolicy"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_12">
+              <property name="text">
+               <string>BootProtect</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QComboBox" name="cboxBootProtect"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_16">
+              <property name="text">
+               <string>Vault</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QComboBox" name="cboxVault"/>
+            </item>
+            <item row="5" column="0" colspan="2">
+             <widget class="QCheckBox" name="chkAllowNvramReset">
+              <property name="text">
+               <string>AllowNvramReset-允许复位NVRAM</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0" colspan="2">
+             <widget class="QCheckBox" name="chkAllowSetDefault">
+              <property name="text">
+               <string>AllowSetDefault-允许Ctrl+回车设置默认启动盘</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <widget class="QCheckBox" name="chkAuthRestart">
+              <property name="text">
+               <string>AuthRestart</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tabWidgetPage4">
            <attribute name="title">
@@ -1984,147 +1622,72 @@
            <attribute name="title">
             <string>Generic</string>
            </attribute>
-           <widget class="QLabel" name="label_17">
-            <property name="geometry">
-             <rect>
-              <x>140</x>
-              <y>30</y>
-              <width>131</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>MLB</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editMLB">
-            <property name="geometry">
-             <rect>
-              <x>140</x>
-              <y>60</y>
-              <width>331</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_18">
-            <property name="geometry">
-             <rect>
-              <x>140</x>
-              <y>110</y>
-              <width>271</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>SystemProductName-机型</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editSystemProductName">
-            <property name="geometry">
-             <rect>
-              <x>140</x>
-              <y>140</y>
-              <width>331</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_19">
-            <property name="geometry">
-             <rect>
-              <x>140</x>
-              <y>180</y>
-              <width>441</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>SystemSerialNumber-序列号</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editSystemSerialNumber">
-            <property name="geometry">
-             <rect>
-              <x>140</x>
-              <y>210</y>
-              <width>400</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_20">
-            <property name="geometry">
-             <rect>
-              <x>600</x>
-              <y>30</y>
-              <width>151</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ROM</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editROM">
-            <property name="geometry">
-             <rect>
-              <x>600</x>
-              <y>60</y>
-              <width>331</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_21">
-            <property name="geometry">
-             <rect>
-              <x>140</x>
-              <y>250</y>
-              <width>191</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>SystemUUID</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editSystemUUID">
-            <property name="geometry">
-             <rect>
-              <x>140</x>
-              <y>280</y>
-              <width>561</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAdviseWindows">
-            <property name="geometry">
-             <rect>
-              <x>140</x>
-              <y>330</y>
-              <width>291</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AdviseWindows</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkSpoofVendor">
-            <property name="geometry">
-             <rect>
-              <x>490</x>
-              <y>330</y>
-              <width>281</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>SpoofVendor</string>
-            </property>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout_26">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_17">
+              <property name="text">
+               <string>MLB</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="editMLB"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_20">
+              <property name="text">
+               <string>ROM</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="editROM"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_18">
+              <property name="text">
+               <string>SystemProductName-机型</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="editSystemProductName"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_19">
+              <property name="text">
+               <string>SystemSerialNumber-序列号</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="editSystemSerialNumber"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_21">
+              <property name="text">
+               <string>SystemUUID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="editSystemUUID"/>
+            </item>
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="chkAdviseWindows">
+              <property name="text">
+               <string>AdviseWindows</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QCheckBox" name="chkSpoofVendor">
+              <property name="text">
+               <string>SpoofVendor</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
@@ -2138,256 +1701,133 @@
         <item row="0" column="0" colspan="6">
          <widget class="QTabWidget" name="tabUEFI">
           <property name="currentIndex">
-           <number>6</number>
+           <number>5</number>
           </property>
           <widget class="QWidget" name="tab_22">
            <attribute name="title">
             <string>APFS设置-APFS</string>
            </attribute>
-           <widget class="QCheckBox" name="chkEnableJumpstart">
-            <property name="geometry">
-             <rect>
-              <x>90</x>
-              <y>50</y>
-              <width>221</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>EnableJumpstart</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkGlobalConnect">
-            <property name="geometry">
-             <rect>
-              <x>320</x>
-              <y>50</y>
-              <width>221</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>GlobalConnect</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkJumpstartHotPlug">
-            <property name="geometry">
-             <rect>
-              <x>90</x>
-              <y>100</y>
-              <width>281</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>JumpstartHotPlug</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkHideVerbose">
-            <property name="geometry">
-             <rect>
-              <x>560</x>
-              <y>50</y>
-              <width>211</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>HideVerbose</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editMinVersion">
-            <property name="geometry">
-             <rect>
-              <x>330</x>
-              <y>210</y>
-              <width>211</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_30">
-            <property name="geometry">
-             <rect>
-              <x>330</x>
-              <y>170</y>
-              <width>141</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>MinVersion</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editMinDate">
-            <property name="geometry">
-             <rect>
-              <x>90</x>
-              <y>210</y>
-              <width>201</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_31">
-            <property name="geometry">
-             <rect>
-              <x>90</x>
-              <y>170</y>
-              <width>141</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>MinDate</string>
-            </property>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout_31">
+            <item row="0" column="0" colspan="2">
+             <widget class="QCheckBox" name="chkEnableJumpstart">
+              <property name="text">
+               <string>EnableJumpstart</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2" colspan="2">
+             <widget class="QCheckBox" name="chkHideVerbose">
+              <property name="text">
+               <string>HideVerbose</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <widget class="QCheckBox" name="chkJumpstartHotPlug">
+              <property name="text">
+               <string>JumpstartHotPlug</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2" colspan="2">
+             <widget class="QCheckBox" name="chkGlobalConnect">
+              <property name="text">
+               <string>GlobalConnect</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_31">
+              <property name="text">
+               <string>MinDate</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="editMinDate"/>
+            </item>
+            <item row="2" column="2">
+             <widget class="QLabel" name="label_30">
+              <property name="text">
+               <string>MinVersion</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QLineEdit" name="editMinVersion"/>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tab_23">
            <attribute name="title">
             <string>Audio设置-Audio</string>
            </attribute>
-           <widget class="QLabel" name="label_32">
-            <property name="geometry">
-             <rect>
-              <x>120</x>
-              <y>50</y>
-              <width>151</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AudioCodec</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editAudioCodec">
-            <property name="geometry">
-             <rect>
-              <x>120</x>
-              <y>90</y>
-              <width>113</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_33">
-            <property name="geometry">
-             <rect>
-              <x>310</x>
-              <y>50</y>
-              <width>231</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AudioDevice</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editAudioDevice">
-            <property name="geometry">
-             <rect>
-              <x>310</x>
-              <y>90</y>
-              <width>281</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_34">
-            <property name="geometry">
-             <rect>
-              <x>610</x>
-              <y>50</y>
-              <width>141</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AudioOut</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editAudioOut">
-            <property name="geometry">
-             <rect>
-              <x>610</x>
-              <y>90</y>
-              <width>113</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_35">
-            <property name="geometry">
-             <rect>
-              <x>800</x>
-              <y>50</y>
-              <width>171</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>MinimumVolume</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editMinimumVolume">
-            <property name="geometry">
-             <rect>
-              <x>800</x>
-              <y>90</y>
-              <width>113</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_36">
-            <property name="geometry">
-             <rect>
-              <x>1030</x>
-              <y>50</y>
-              <width>181</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>VolumeAmplifier</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editVolumeAmplifier">
-            <property name="geometry">
-             <rect>
-              <x>1030</x>
-              <y>90</y>
-              <width>113</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkPlayChime">
-            <property name="geometry">
-             <rect>
-              <x>350</x>
-              <y>190</y>
-              <width>191</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>PlayChime</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAudioSupport">
-            <property name="geometry">
-             <rect>
-              <x>120</x>
-              <y>190</y>
-              <width>201</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AudioSupport</string>
-            </property>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout_32">
+            <item row="0" column="0" colspan="2">
+             <widget class="QLabel" name="label_32">
+              <property name="text">
+               <string>AudioCodec</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLineEdit" name="editAudioCodec"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_33">
+              <property name="text">
+               <string>AudioDevice</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLineEdit" name="editAudioDevice"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_34">
+              <property name="text">
+               <string>AudioOut</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QLineEdit" name="editAudioOut"/>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <widget class="QLabel" name="label_35">
+              <property name="text">
+               <string>MinimumVolume</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QLineEdit" name="editMinimumVolume"/>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QLabel" name="label_36">
+              <property name="text">
+               <string>VolumeAmplifier</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QLineEdit" name="editVolumeAmplifier"/>
+            </item>
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="chkAudioSupport">
+              <property name="text">
+               <string>AudioSupport</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1" colspan="2">
+             <widget class="QCheckBox" name="chkPlayChime">
+              <property name="text">
+               <string>PlayChime</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tab_24">
            <attribute name="title">
@@ -2442,564 +1882,298 @@
            <attribute name="title">
             <string>键盘设置-Input</string>
            </attribute>
-           <widget class="QCheckBox" name="chkKeyFiltering">
-            <property name="geometry">
-             <rect>
-              <x>130</x>
-              <y>80</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>KeyFiltering</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkKeySupport">
-            <property name="geometry">
-             <rect>
-              <x>130</x>
-              <y>140</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>KeySupport</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkKeySwap">
-            <property name="geometry">
-             <rect>
-              <x>130</x>
-              <y>210</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>KeySwap</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkPointerSupport">
-            <property name="geometry">
-             <rect>
-              <x>130</x>
-              <y>280</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>PointerSupport</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editKeyForgetThreshold">
-            <property name="geometry">
-             <rect>
-              <x>460</x>
-              <y>120</y>
-              <width>113</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_37">
-            <property name="geometry">
-             <rect>
-              <x>460</x>
-              <y>80</y>
-              <width>231</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>KeyForgetThreshold</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editPointerSupportMode">
-            <property name="geometry">
-             <rect>
-              <x>730</x>
-              <y>120</y>
-              <width>113</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_38">
-            <property name="geometry">
-             <rect>
-              <x>730</x>
-              <y>80</y>
-              <width>271</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>PointerSupportMode</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editKeyMergeThreshold">
-            <property name="geometry">
-             <rect>
-              <x>460</x>
-              <y>200</y>
-              <width>113</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_39">
-            <property name="geometry">
-             <rect>
-              <x>460</x>
-              <y>160</y>
-              <width>221</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>KeyMergeThreshold</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="editTimerResolution">
-            <property name="geometry">
-             <rect>
-              <x>730</x>
-              <y>200</y>
-              <width>113</width>
-              <height>21</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_40">
-            <property name="geometry">
-             <rect>
-              <x>730</x>
-              <y>160</y>
-              <width>271</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>TimerResolution</string>
-            </property>
-           </widget>
-           <widget class="QComboBox" name="cboxKeySupportMode">
-            <property name="geometry">
-             <rect>
-              <x>450</x>
-              <y>280</y>
-              <width>191</width>
-              <height>32</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_23">
-            <property name="geometry">
-             <rect>
-              <x>460</x>
-              <y>240</y>
-              <width>211</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>KeySupportMode</string>
-            </property>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout_33">
+            <item row="0" column="0" colspan="2">
+             <widget class="QLabel" name="label_37">
+              <property name="text">
+               <string>KeyForgetThreshold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLineEdit" name="editKeyForgetThreshold"/>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <widget class="QLabel" name="label_39">
+              <property name="text">
+               <string>KeyMergeThreshold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLineEdit" name="editKeyMergeThreshold"/>
+            </item>
+            <item row="2" column="0" colspan="2">
+             <widget class="QLabel" name="label_23">
+              <property name="text">
+               <string>KeySupportMode</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QComboBox" name="cboxKeySupportMode"/>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <widget class="QLabel" name="label_38">
+              <property name="text">
+               <string>PointerSupportMode</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QLineEdit" name="editPointerSupportMode"/>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QLabel" name="label_40">
+              <property name="text">
+               <string>TimerResolution</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QLineEdit" name="editTimerResolution"/>
+            </item>
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="chkKeyFiltering">
+              <property name="text">
+               <string>KeyFiltering</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1" colspan="2">
+             <widget class="QCheckBox" name="chkKeySwap">
+              <property name="text">
+               <string>KeySwap</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QCheckBox" name="chkKeySupport">
+              <property name="text">
+               <string>KeySupport</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1" colspan="2">
+             <widget class="QCheckBox" name="chkPointerSupport">
+              <property name="text">
+               <string>PointerSupport</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tab_26">
            <attribute name="title">
             <string>显示输出设置-Output</string>
            </attribute>
-           <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
-            <property name="geometry">
-             <rect>
-              <x>110</x>
-              <y>40</y>
-              <width>351</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ClearScreenOnModeSwitch</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
-            <property name="geometry">
-             <rect>
-              <x>110</x>
-              <y>140</y>
-              <width>371</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>IgnoreTextInGraphics</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkDirectGopRendering">
-            <property name="geometry">
-             <rect>
-              <x>110</x>
-              <y>90</y>
-              <width>361</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>DirectGopRendering</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkProvideConsoleGop">
-            <property name="geometry">
-             <rect>
-              <x>110</x>
-              <y>190</y>
-              <width>371</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ProvideConsoleGop</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkReconnectOnResChange">
-            <property name="geometry">
-             <rect>
-              <x>660</x>
-              <y>40</y>
-              <width>361</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ReconnectOnResChange</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkSanitiseClearScreen">
-            <property name="geometry">
-             <rect>
-              <x>660</x>
-              <y>140</y>
-              <width>391</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>SanitiseClearScreen</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkReplaceTabWithSpace">
-            <property name="geometry">
-             <rect>
-              <x>660</x>
-              <y>90</y>
-              <width>391</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ReplaceTabWithSpace</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkUgaPassThrough">
-            <property name="geometry">
-             <rect>
-              <x>660</x>
-              <y>190</y>
-              <width>411</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>UgaPassThrough</string>
-            </property>
-           </widget>
-           <widget class="QComboBox" name="cboxConsoleMode">
-            <property name="geometry">
-             <rect>
-              <x>110</x>
-              <y>270</y>
-              <width>281</width>
-              <height>32</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_24">
-            <property name="geometry">
-             <rect>
-              <x>110</x>
-              <y>230</y>
-              <width>351</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>ConsoleMode(e.g. 80x24)</string>
-            </property>
-           </widget>
-           <widget class="QComboBox" name="cboxResolution">
-            <property name="geometry">
-             <rect>
-              <x>510</x>
-              <y>270</y>
-              <width>311</width>
-              <height>32</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_25">
-            <property name="geometry">
-             <rect>
-              <x>510</x>
-              <y>230</y>
-              <width>661</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Resolution(e.g. 1920x1080@32) or (e.g. 1920x1080)</string>
-            </property>
-           </widget>
-           <widget class="QComboBox" name="cboxTextRenderer">
-            <property name="geometry">
-             <rect>
-              <x>110</x>
-              <y>360</y>
-              <width>291</width>
-              <height>32</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_26">
-            <property name="geometry">
-             <rect>
-              <x>110</x>
-              <y>320</y>
-              <width>131</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>TextRenderer</string>
-            </property>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout_34">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
+              <property name="text">
+               <string>ClearScreenOnModeSwitch</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="2">
+             <widget class="QCheckBox" name="chkReconnectOnResChange">
+              <property name="text">
+               <string>ReconnectOnResChange</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
+              <property name="text">
+               <string>IgnoreTextInGraphics</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QCheckBox" name="chkSanitiseClearScreen">
+              <property name="text">
+               <string>SanitiseClearScreen</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="chkDirectGopRendering">
+              <property name="text">
+               <string>DirectGopRendering</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" colspan="2">
+             <widget class="QCheckBox" name="chkReplaceTabWithSpace">
+              <property name="text">
+               <string>ReplaceTabWithSpace</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QCheckBox" name="chkProvideConsoleGop">
+              <property name="text">
+               <string>ProvideConsoleGop</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QCheckBox" name="chkUgaPassThrough">
+              <property name="text">
+               <string>UgaPassThrough</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_24">
+              <property name="text">
+               <string>ConsoleMode(e.g. 80x24)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2" colspan="3">
+             <widget class="QComboBox" name="cboxConsoleMode"/>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <widget class="QLabel" name="label_25">
+              <property name="text">
+               <string>Resolution(e.g. 1920x1080@32) or (e.g. 1920x1080)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2" colspan="3">
+             <widget class="QComboBox" name="cboxResolution"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_26">
+              <property name="text">
+               <string>TextRenderer</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2" colspan="3">
+             <widget class="QComboBox" name="cboxTextRenderer"/>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tab_27">
            <attribute name="title">
             <string>协议覆盖-ProtocolOverrides</string>
            </attribute>
-           <widget class="QCheckBox" name="chkAppleEvent">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>230</y>
-              <width>211</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleEvent</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleAudio">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>30</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleAudio</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleDebugLog">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>160</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleDebugLog</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleBootPolicy">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>90</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleBootPolicy</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleRtcRam">
-            <property name="geometry">
-             <rect>
-              <x>240</x>
-              <y>230</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleRtcRam</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleFramebufferInfo">
-            <property name="geometry">
-             <rect>
-              <x>240</x>
-              <y>30</y>
-              <width>231</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleFramebufferInfo</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleKeyMap">
-            <property name="geometry">
-             <rect>
-              <x>240</x>
-              <y>160</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleKeyMap</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleImageConversion">
-            <property name="geometry">
-             <rect>
-              <x>240</x>
-              <y>90</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleImageConversion</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkDeviceProperties">
-            <property name="geometry">
-             <rect>
-              <x>490</x>
-              <y>230</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>DeviceProperties</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleSmcIo">
-            <property name="geometry">
-             <rect>
-              <x>490</x>
-              <y>30</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleSmcIo</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkDataHub">
-            <property name="geometry">
-             <rect>
-              <x>490</x>
-              <y>160</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>DataHub</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkAppleUserInterfaceTheme">
-            <property name="geometry">
-             <rect>
-              <x>490</x>
-              <y>90</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>AppleUserInterfaceTheme</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkUnicodeCollation">
-            <property name="geometry">
-             <rect>
-              <x>760</x>
-              <y>230</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>UnicodeCollation</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkFirmwareVolume">
-            <property name="geometry">
-             <rect>
-              <x>760</x>
-              <y>30</y>
-              <width>261</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>FirmwareVolume</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkOSInfo">
-            <property name="geometry">
-             <rect>
-              <x>760</x>
-              <y>160</y>
-              <width>251</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>OSInfo</string>
-            </property>
-           </widget>
-           <widget class="QCheckBox" name="chkHashServices">
-            <property name="geometry">
-             <rect>
-              <x>760</x>
-              <y>90</y>
-              <width>271</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>HashServices</string>
-            </property>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout_35">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="chkAppleAudio">
+              <property name="text">
+               <string>AppleAudio</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="chkAppleFramebufferInfo">
+              <property name="text">
+               <string>AppleFramebufferInfo</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="chkAppleSmcIo">
+              <property name="text">
+               <string>AppleSmcIo</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="chkFirmwareVolume">
+              <property name="text">
+               <string>FirmwareVolume</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="chkAppleBootPolicy">
+              <property name="text">
+               <string>AppleBootPolicy</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="chkAppleImageConversion">
+              <property name="text">
+               <string>AppleImageConversion</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QCheckBox" name="chkAppleUserInterfaceTheme">
+              <property name="text">
+               <string>AppleUserInterfaceTheme</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QCheckBox" name="chkHashServices">
+              <property name="text">
+               <string>HashServices</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="chkAppleDebugLog">
+              <property name="text">
+               <string>AppleDebugLog</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="chkAppleKeyMap">
+              <property name="text">
+               <string>AppleKeyMap</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="chkDataHub">
+              <property name="text">
+               <string>DataHub</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="chkOSInfo">
+              <property name="text">
+               <string>OSInfo</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="chkAppleEvent">
+              <property name="text">
+               <string>AppleEvent</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="chkAppleRtcRam">
+              <property name="text">
+               <string>AppleRtcRam</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="chkDeviceProperties">
+              <property name="text">
+               <string>DeviceProperties</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QCheckBox" name="chkUnicodeCollation">
+              <property name="text">
+               <string>UnicodeCollation</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tab_28">
            <attribute name="title">
@@ -3114,7 +2288,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1400</width>
+     <width>1300</width>
      <height>24</height>
     </rect>
    </property>

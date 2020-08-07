@@ -308,7 +308,7 @@ void MainWindow::initui_acpi()
     id0 = new QTableWidgetItem(tr("文件\nPath"));
     ui->table_acpi_add->setHorizontalHeaderItem(0, id0);
 
-    ui->table_acpi_add->setColumnWidth(1,560);
+    ui->table_acpi_add->setColumnWidth(1,350);
     id0 = new QTableWidgetItem(tr("注释\nComment"));
     ui->table_acpi_add->setHorizontalHeaderItem(1, id0);
 
@@ -326,7 +326,7 @@ void MainWindow::initui_acpi()
     id0 = new QTableWidgetItem(tr("表长度\nTableLength"));
     ui->table_acpi_del->setHorizontalHeaderItem(2,id0);
 
-    ui->table_acpi_del->setColumnWidth(3,560);
+    ui->table_acpi_del->setColumnWidth(3,250);
     id0 = new QTableWidgetItem(tr("注释\nComment"));
     ui->table_acpi_del->setHorizontalHeaderItem(3,id0);
 
@@ -388,7 +388,7 @@ void MainWindow::initui_booter()
     id0 = new QTableWidgetItem(tr("地址\nAddress"));
     ui->table_booter->setHorizontalHeaderItem(0, id0);
 
-    ui->table_booter->setColumnWidth(1,600);
+    ui->table_booter->setColumnWidth(1,350);
     id0 = new QTableWidgetItem(tr("注释\nComment"));
     ui->table_booter->setHorizontalHeaderItem(1, id0);
 
@@ -459,11 +459,11 @@ void MainWindow::initui_dp()
     ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
 
 
-    ui->table_dp_add->setColumnWidth(0,360);
+    ui->table_dp_add->setColumnWidth(0,300);
     id0 = new QTableWidgetItem(tr("键\nKey"));
     ui->table_dp_add->setHorizontalHeaderItem(0, id0);
 
-    ui->table_dp_add->setColumnWidth(2,250);
+    ui->table_dp_add->setColumnWidth(2,200);
     id0 = new QTableWidgetItem(tr("值\nValue"));
     ui->table_dp_add->setHorizontalHeaderItem(2, id0);
 
@@ -477,7 +477,7 @@ void MainWindow::initui_dp()
     id0 = new QTableWidgetItem(tr("PCI设备列表\nPCILists"));
     ui->table_dp_del0->setHorizontalHeaderItem(0, id0);
 
-    ui->table_dp_del->setColumnWidth(0,780);
+    ui->table_dp_del->setColumnWidth(0,350);
     id0 = new QTableWidgetItem(tr("值\nValue"));
     ui->table_dp_del->setHorizontalHeaderItem(0, id0);
 
