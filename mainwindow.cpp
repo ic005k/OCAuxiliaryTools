@@ -2683,25 +2683,7 @@ void MainWindow::on_btnBooter_Del_clicked()
     del_item(ui->table_booter);
 }
 
-void MainWindow::on_btnDP_Add0_clicked()
-{
-    //add_item(ui->table_dp_add0);
-}
 
-void MainWindow::on_btnDP_Del0_clicked()
-{
-    del_item(ui->table_dp_add0);
-}
-
-void MainWindow::on_btnDP_Add_clicked()
-{
-    //add_item(ui->table_dp_add);
-}
-
-void MainWindow::on_btnDP_Del_clicked()
-{
-    del_item(ui->table_dp_add);
-}
 
 void MainWindow::on_btnDPDel_Add0_clicked()
 {
@@ -3383,8 +3365,9 @@ void MainWindow::on_btnSaveAs_clicked()
 
 void MainWindow::about()
 {
-    QMessageBox::about(this, tr("About Application"),
-             tr("OpenCoreConfig is an open source full-platform OpenCore configuration file manager."));
+
+    QMessageBox::about(this , tr("About") ,
+                       QString::fromLocal8Bit("<a style='color: blue;' href = https://github.com/ic005k/QtOpenCoreConfig> Open source cross-platform OpenCore Configurator</a>"));
 }
 
 void MainWindow::on_btnKernelAdd_Del_clicked()
