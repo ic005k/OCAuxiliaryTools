@@ -1075,7 +1075,7 @@ void MainWindow::initui_nvram()
     ui->table_nv_add0->setHorizontalHeaderItem(0, id0);
 
 
-    ui->table_nv_add->setColumnWidth(0,300);
+    ui->table_nv_add->setColumnWidth(0,200);
     id0 = new QTableWidgetItem(tr("键\nKey"));
     ui->table_nv_add->setHorizontalHeaderItem(0, id0);
 
