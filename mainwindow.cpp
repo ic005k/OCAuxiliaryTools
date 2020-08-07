@@ -19,8 +19,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    //setWindowIcon(QIcon(QStringLiteral(":/icon.png")));
-
     title = "OpenCore配置文件编辑器 V0.6.0";
     setWindowTitle(title);
 
@@ -853,6 +851,10 @@ void MainWindow::initui_misc()
     ui->cboxBootProtect->addItem("None");
     ui->cboxBootProtect->addItem("Bootstrap");
 
+    ui->cboxDmgLoading->addItem("Disabled");
+    ui->cboxDmgLoading->addItem("Signed");
+    ui->cboxDmgLoading->addItem("Any");
+
     ui->cboxVault->addItem("Optional");
     ui->cboxVault->addItem("Basic");
     ui->cboxVault->addItem("Secure");
@@ -985,6 +987,14 @@ void MainWindow::ParserMisc(QVariantMap map)
         ui->cboxVault->setCurrentIndex(1);
     if(hm.trimmed() == "Secure")
         ui->cboxVault->setCurrentIndex(2);
+
+    hm = map_security["DmgLoading"].toString();
+    if(hm.trimmed() == "Disabled")
+        ui->cboxDmgLoading->setCurrentIndex(0);
+    if(hm.trimmed() == "Signed")
+        ui->cboxDmgLoading->setCurrentIndex(1);
+    if(hm.trimmed() == "Any")
+        ui->cboxDmgLoading->setCurrentIndex(2);
 
 
     //BlessOverride(数组)
@@ -2077,6 +2087,7 @@ QVariantMap MainWindow::SaveMisc()
     valueList["AuthRestart"] = getChkBool(ui->chkAuthRestart);
 
     valueList["BootProtect"] = ui->cboxBootProtect->currentText();
+    valueList["DmgLoading"] = ui->cboxDmgLoading->currentText();
     valueList["Vault"] = ui->cboxVault->currentText();
 
     valueList["ExposeSensitiveData"] = ui->editExposeSensitiveData->text().toLongLong();
