@@ -95,7 +95,7 @@
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -493,7 +493,7 @@
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabDP">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_13">
            <attribute name="title">
@@ -954,7 +954,7 @@
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabMisc">
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="tabWidgetPage1">
            <attribute name="title">
@@ -1169,30 +1169,40 @@
              <widget class="QComboBox" name="cboxBootProtect"/>
             </item>
             <item row="4" column="0">
+             <widget class="QLabel" name="label_27">
+              <property name="text">
+               <string>DmgLoading</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QComboBox" name="cboxDmgLoading"/>
+            </item>
+            <item row="5" column="0">
              <widget class="QLabel" name="label_16">
               <property name="text">
                <string>Vault</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
+            <item row="5" column="1">
              <widget class="QComboBox" name="cboxVault"/>
             </item>
-            <item row="5" column="0" colspan="2">
+            <item row="6" column="0" colspan="2">
              <widget class="QCheckBox" name="chkAllowNvramReset">
               <property name="text">
                <string>AllowNvramReset-允许复位NVRAM</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="0" colspan="2">
+            <item row="7" column="0" colspan="2">
              <widget class="QCheckBox" name="chkAllowSetDefault">
               <property name="text">
                <string>AllowSetDefault-允许Ctrl+回车设置默认启动盘</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="0">
+            <item row="8" column="0">
              <widget class="QCheckBox" name="chkAuthRestart">
               <property name="text">
                <string>AuthRestart</string>
