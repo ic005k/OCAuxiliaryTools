@@ -1070,7 +1070,8 @@ void MainWindow::initui_nvram()
 
     //Add
     ui->table_nv_add0->setColumnWidth(0,500);
-    ui->table_nv_add0->setMinimumWidth(500);
+    ui->table_nv_add0->setMinimumWidth(300);
+    ui->table_nv_add0->setMaximumWidth(500);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_add0->setHorizontalHeaderItem(0, id0);
 
@@ -1107,6 +1108,11 @@ void MainWindow::initui_nvram()
     ui->table_nv_ls->setColumnWidth(0,600);
     id0 = new QTableWidgetItem(tr("值\nValue"));
     ui->table_nv_ls->setHorizontalHeaderItem(0, id0);
+
+    QSplitter *splitterMain = new QSplitter(Qt::Horizontal,this);
+    splitterMain->addWidget(ui->table_nv_add0);
+    splitterMain->addWidget(ui->table_nv_add);
+    ui->gridLayout_nv_add->addWidget(splitterMain);
 
 
 }
