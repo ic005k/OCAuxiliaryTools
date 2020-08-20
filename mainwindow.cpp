@@ -3233,7 +3233,9 @@ void MainWindow::on_btnKernelAdd_Up_clicked()
     QTableWidget *t = new QTableWidget;
     t = ui->table_kernel_add;
 
-    if(t->rowCount() == 0 || t->currentRow() == 0)
+    t->setFocus();
+
+    if(t->rowCount() == 0 || t->currentRow() == 0 || t->currentRow() < 0)
         return;
 
     int cr = t->currentRow();
@@ -3281,7 +3283,7 @@ void MainWindow::on_btnKernelAdd_Down_clicked()
     QTableWidget *t = new QTableWidget;
     t = ui->table_kernel_add;
 
-    if(t->currentRow() == t->rowCount() - 1)
+    if(t->currentRow() == t->rowCount() - 1 || t->currentRow() < 0)
         return;
 
     int cr = t->currentRow();

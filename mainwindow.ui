@@ -95,7 +95,10 @@
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
       <property name="currentIndex">
-       <number>5</number>
+       <number>2</number>
+      </property>
+      <property name="documentMode">
+       <bool>true</bool>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -141,6 +144,9 @@
          <widget class="QTabWidget" name="tabACPI">
           <property name="currentIndex">
            <number>2</number>
+          </property>
+          <property name="documentMode">
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_9">
            <attribute name="title">
@@ -314,6 +320,9 @@
          <widget class="QTabWidget" name="tabBooter">
           <property name="currentIndex">
            <number>0</number>
+          </property>
+          <property name="documentMode">
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_12">
            <attribute name="title">
@@ -493,7 +502,10 @@
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabDP">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
+          </property>
+          <property name="documentMode">
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_13">
            <attribute name="title">
@@ -518,35 +530,34 @@
               <column/>
              </widget>
             </item>
-            <item row="1" column="0" rowspan="2" colspan="2">
+            <item row="1" column="0">
              <widget class="QPushButton" name="btnDPAdd_Add0">
               <property name="text">
                <string>增加条目-Add</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="2" rowspan="2">
+            <item row="1" column="1">
+             <spacer name="horizontalSpacer_18">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>19</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="2">
              <widget class="QPushButton" name="btnDPAdd_Del0">
               <property name="text">
                <string>删除条目-Delete</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="4" rowspan="2">
-             <widget class="QPushButton" name="btnDPAdd_Add">
-              <property name="text">
-               <string>增加条目-Add</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5" rowspan="2">
-             <widget class="QPushButton" name="btnDPAdd_Del">
-              <property name="text">
-               <string>删除条目-Delete</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="3">
+            <item row="1" column="3">
              <spacer name="horizontalSpacer_5">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -559,6 +570,20 @@
               </property>
              </spacer>
             </item>
+            <item row="1" column="4">
+             <widget class="QPushButton" name="btnDPAdd_Add">
+              <property name="text">
+               <string>增加条目-Add</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QPushButton" name="btnDPAdd_Del">
+              <property name="text">
+               <string>删除条目-Delete</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="tab_14">
@@ -566,6 +591,22 @@
             <string>删除-Delete</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_10">
+            <item row="0" column="0" colspan="3">
+             <widget class="QTableWidget" name="table_dp_del0">
+              <property name="columnCount">
+               <number>1</number>
+              </property>
+              <column/>
+             </widget>
+            </item>
+            <item row="0" column="3" colspan="3">
+             <widget class="QTableWidget" name="table_dp_del">
+              <property name="columnCount">
+               <number>1</number>
+              </property>
+              <column/>
+             </widget>
+            </item>
             <item row="1" column="0">
              <widget class="QPushButton" name="btnDPDel_Add0">
               <property name="text">
@@ -573,19 +614,24 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1" colspan="2">
+            <item row="1" column="1">
+             <spacer name="horizontalSpacer_19">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>153</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="2">
              <widget class="QPushButton" name="btnDPDel_Del0">
               <property name="text">
                <string>删除条目-Delete</string>
               </property>
-             </widget>
-            </item>
-            <item row="0" column="2" colspan="4">
-             <widget class="QTableWidget" name="table_dp_del">
-              <property name="columnCount">
-               <number>1</number>
-              </property>
-              <column/>
              </widget>
             </item>
             <item row="1" column="3">
@@ -601,25 +647,17 @@
               </property>
              </spacer>
             </item>
-            <item row="1" column="5">
-             <widget class="QPushButton" name="btnDPDel_Del">
-              <property name="text">
-               <string>删除条目-Delete</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0" colspan="2">
-             <widget class="QTableWidget" name="table_dp_del0">
-              <property name="columnCount">
-               <number>1</number>
-              </property>
-              <column/>
-             </widget>
-            </item>
             <item row="1" column="4">
              <widget class="QPushButton" name="btnDPDel_Add">
               <property name="text">
                <string>增加条目-add</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QPushButton" name="btnDPDel_Del">
+              <property name="text">
+               <string>删除条目-Delete</string>
               </property>
              </widget>
             </item>
@@ -637,7 +675,10 @@
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabKernel">
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
+          </property>
+          <property name="documentMode">
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_15">
            <attribute name="title">
@@ -955,6 +996,9 @@
          <widget class="QTabWidget" name="tabMisc">
           <property name="currentIndex">
            <number>2</number>
+          </property>
+          <property name="documentMode">
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tabWidgetPage1">
            <attribute name="title">
@@ -1382,6 +1426,9 @@
           <property name="currentIndex">
            <number>0</number>
           </property>
+          <property name="documentMode">
+           <bool>true</bool>
+          </property>
           <widget class="QWidget" name="tab_18">
            <attribute name="title">
             <string>增加-Add</string>
@@ -1631,6 +1678,9 @@
           <property name="currentIndex">
            <number>0</number>
           </property>
+          <property name="documentMode">
+           <bool>true</bool>
+          </property>
           <widget class="QWidget" name="tab_21">
            <attribute name="title">
             <string>Generic</string>
@@ -1715,6 +1765,9 @@
          <widget class="QTabWidget" name="tabUEFI">
           <property name="currentIndex">
            <number>5</number>
+          </property>
+          <property name="documentMode">
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_22">
            <attribute name="title">
