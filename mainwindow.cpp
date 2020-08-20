@@ -3229,10 +3229,11 @@ void MainWindow::on_btnUEFIDrivers_Del_clicked()
 
 void MainWindow::on_btnKernelAdd_Up_clicked()
 {
+
     QTableWidget *t = new QTableWidget;
     t = ui->table_kernel_add;
 
-    if(t->currentRow() == 0)
+    if(t->rowCount() == 0 || t->currentRow() == 0)
         return;
 
     int cr = t->currentRow();
