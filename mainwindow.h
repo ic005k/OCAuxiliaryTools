@@ -6,6 +6,7 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDateTime>
+#include <QSplitter>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -160,14 +161,6 @@ private slots:
     void on_btnBooter_Add_clicked();
 
     void on_btnBooter_Del_clicked();
-
-    void on_btnDP_Add0_clicked();
-
-    void on_btnDP_Del0_clicked();
-
-    void on_btnDP_Add_clicked();
-
-    void on_btnDP_Del_clicked();
 
     void on_btnDPDel_Add0_clicked();
 
