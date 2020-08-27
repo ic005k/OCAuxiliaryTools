@@ -27,6 +27,7 @@ public:
     void ParserNvram(QVariantMap map);
     void ParserPlatformInfo(QVariantMap map);
     void ParserUEFI(QVariantMap map);
+    void openFile(QString PlistFileName);
 
     void SavePlist(QString FileName);
     bool getBool(QTableWidget *table , int row, int column);
@@ -248,5 +249,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    void reg_win();
 };
 #endif // MAINWINDOW_H

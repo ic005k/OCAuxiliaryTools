@@ -10,6 +10,8 @@
 #include <QMessageBox>
 
 QString PlistFileName;
+QVector<QString> filelist;
+QWidgetList wdlist;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -50,6 +52,20 @@ MainWindow::MainWindow(QWidget *parent)
     ui->btnSave->setEnabled(false);
     ui->actionSave->setEnabled(false);
 
+#ifdef Q_OS_WIN32
+
+   reg_win();
+
+#endif
+
+#ifdef Q_OS_LINUX
+
+#endif
+
+#ifdef Q_OS_MAC
+
+#endif
+
     QFileInfo appInfo(qApp->applicationFilePath());
     ui->statusbar->showMessage(tr("最后的编译时间(Last modified): ") + appInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss"));
 
@@ -60,14 +76,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
-
-void MainWindow::on_btnOpen_clicked()
+void MainWindow::openFile(QString PlistFileName)
 {
-    QFileDialog fd;
-
-    PlistFileName = fd.getOpenFileName(this,"配置文件","","配置文件(*.plist);;所有文件(*.*)");
     if(!PlistFileName.isEmpty())
         setWindowTitle(title + "    " + PlistFileName);
     else
@@ -91,6 +101,17 @@ void MainWindow::on_btnOpen_clicked()
 
     ui->btnSave->setEnabled(true);
     ui->actionSave->setEnabled(true);
+
+}
+
+
+void MainWindow::on_btnOpen_clicked()
+{
+    QFileDialog fd;
+
+    PlistFileName = fd.getOpenFileName(this,"配置文件","","配置文件(*.plist);;所有文件(*.*)");
+
+    openFile(PlistFileName);
 }
 
 void MainWindow::on_btnTestWrite_clicked()
@@ -3455,4 +3476,40 @@ void MainWindow::on_table_nv_add_currentCellChanged(int currentRow, int currentC
     }
 
     ui->table_nv_add->removeCellWidget(previousRow , 1);
+}
+
+void MainWindow::reg_win()
+{
+        QString appPath = qApp->applicationFilePath();
+
+        QString dir = qApp->applicationDirPath();
+        // 注意路径的替换
+        appPath.replace("/", "\\");
+        QString type = "QtiASL";
+        QSettings *regType = new QSettings("HKEY_CLASSES_ROOT\\.plist", QSettings::NativeFormat);
+        QSettings *regIcon = new QSettings("HKEY_CLASSES_ROOT\\.plist\\DefaultIcon", QSettings::NativeFormat);
+        QSettings *regShell = new QSettings("HKEY_CLASSES_ROOT\\QtOpenCoreConfig\\shell\\open\\command", QSettings::NativeFormat);
+
+        regType->remove("Default");
+        regType->setValue("Default", type);
+
+        regIcon->remove("Default");
+        // 0 使用当前程序内置图标
+        regIcon->setValue("Default", appPath + ",1");
+
+         // 百分号问题
+        QString shell = "\"" + appPath + "\" ";
+        shell = shell + "\"%1\"";
+
+        regShell->remove("Default");
+        regShell->setValue("Default", shell);
+
+        delete regIcon;
+        delete regShell;
+        delete regType;
+
+        // 通知系统刷新
+#ifdef Q_OS_WIN32
+        //::SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST|SHCNF_FLUSH, 0, 0);
+#endif
 }
