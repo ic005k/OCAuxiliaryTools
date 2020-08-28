@@ -75,11 +75,19 @@ public:
 
     QComboBox *cboxDataClass;
     int c_row = 0;
+    QComboBox *cboxArch;
+
+
+public slots:
 
 
 private slots:
     void dataClassChange_dp();
     void dataClassChange_nv();
+    //void archChange(QTableWidget *t, int col);
+    void arch_addChange();
+    void arch_blockChange();
+    void arch_patchChange();
 
     void on_btnOpen_clicked();
 
@@ -246,6 +254,12 @@ private slots:
     void on_table_nv_add_cellClicked(int row, int column);
 
     void on_table_nv_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_kernel_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_kernel_block_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_kernel_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
 private:
     Ui::MainWindow *ui;

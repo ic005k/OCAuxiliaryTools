@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "OpenCore配置文件编辑器 V0.6.1";
+    title = "OpenCore配置文件编辑器 V0.6.1-2020.08.27";
     setWindowTitle(title);
 
     initui_acpi();
@@ -581,8 +581,11 @@ void MainWindow::ParserDP(QVariantMap map)
 
 void MainWindow::initui_kernel()
 {
+
     QTableWidgetItem *id0;
     //Add
+    ui->table_kernel_add->setColumnCount(8);
+
     ui->table_kernel_add->setColumnWidth(0,250);
     id0 = new QTableWidgetItem(tr("捆绑路径\nBundlePath"));
     ui->table_kernel_add->setHorizontalHeaderItem(0, id0);
@@ -611,7 +614,12 @@ void MainWindow::initui_kernel()
     id0 = new QTableWidgetItem(tr("启用\nEnabled"));
     ui->table_kernel_add->setHorizontalHeaderItem(6, id0);
 
+    ui->table_kernel_add->setColumnWidth(0,250);
+    id0 = new QTableWidgetItem(tr("Kext架构\nArch"));
+    ui->table_kernel_add->setHorizontalHeaderItem(7, id0);
+
     //Block
+    ui->table_kernel_block->setColumnCount(6);
     ui->table_kernel_block->setColumnWidth(0,350);
     id0 = new QTableWidgetItem(tr("标识符\nIdentifier"));
     ui->table_kernel_block->setHorizontalHeaderItem(0, id0);
@@ -632,7 +640,11 @@ void MainWindow::initui_kernel()
     id0 = new QTableWidgetItem(tr("启用\nEnabled"));
     ui->table_kernel_block->setHorizontalHeaderItem(4, id0);
 
+    id0 = new QTableWidgetItem(tr("Kext架构\nArch"));
+    ui->table_kernel_block->setHorizontalHeaderItem(5, id0);
+
     //Patch
+    ui->table_kernel_patch->setColumnCount(14);
     ui->table_kernel_patch->setColumnWidth(0,300);
     id0 = new QTableWidgetItem(tr("标识符\nIdentifier"));
     ui->table_kernel_patch->setHorizontalHeaderItem(0, id0);
@@ -685,7 +697,18 @@ void MainWindow::initui_kernel()
     id0 = new QTableWidgetItem(tr("启用\nEnabled"));
     ui->table_kernel_patch->setHorizontalHeaderItem(12, id0);
 
+    id0 = new QTableWidgetItem(tr("Kext架构\nArch"));
+    ui->table_kernel_patch->setHorizontalHeaderItem(13, id0);
 
+    //Scheme
+    ui->cboxKernelArch->addItem("Auto");
+    ui->cboxKernelArch->addItem("i386");
+    ui->cboxKernelArch->addItem("x86_64");
+
+    ui->cboxKernelCache->addItem("Auto");
+    ui->cboxKernelCache->addItem("Cacheless");
+    ui->cboxKernelCache->addItem("Mkext");
+    ui->cboxKernelCache->addItem("Prelinked");
 
 }
 
@@ -725,8 +748,13 @@ void MainWindow::ParserKernel(QVariantMap map)
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_kernel_add->setItem(i, 5, newItem1);
 
-
         init_enabled_data(ui->table_kernel_add , i , 6 , map3["Enabled"].toString());
+
+        newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_kernel_add->setItem(i, 7, newItem1);
+
+
 
     }
 
@@ -757,7 +785,9 @@ void MainWindow::ParserKernel(QVariantMap map)
 
         init_enabled_data(ui->table_kernel_block , i , 4 , map3["Enabled"].toString());
 
-
+        newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_kernel_block->setItem(i, 5, newItem1);
 
     }
 
@@ -825,7 +855,9 @@ void MainWindow::ParserKernel(QVariantMap map)
 
         init_enabled_data(ui->table_kernel_patch , i , 12 , map3["Enabled"].toString());
 
-
+        newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_kernel_patch->setItem(i, 13, newItem1);
 
     }
     //Emulate
@@ -853,6 +885,30 @@ void MainWindow::ParserKernel(QVariantMap map)
     ui->chkThirdPartyDrives->setChecked(map_quirks["ThirdPartyDrives"].toBool());
     ui->chkXhciPortLimit->setChecked(map_quirks["XhciPortLimit"].toBool());
 
+    //Scheme
+    QVariantMap map_Scheme = map["Scheme"].toMap();
+    ui->chkFuzzyMatch->setChecked(map_Scheme["FuzzyMatch"].toBool());
+
+    QString hm = map_Scheme["KernelArch"].toString();
+    if(hm.trimmed() == "Auto")
+        ui->cboxKernelArch->setCurrentIndex(0);
+    if(hm.trimmed() == "i386")
+        ui->cboxKernelArch->setCurrentIndex(1);
+    if(hm.trimmed() == "x86_64")
+        ui->cboxKernelArch->setCurrentIndex(2);
+
+    hm = map_Scheme["KernelCache"].toString();
+    if(hm.trimmed() == "Auto")
+        ui->cboxKernelCache->setCurrentIndex(0);
+    if(hm.trimmed() == "Cacheless")
+        ui->cboxKernelCache->setCurrentIndex(1);
+    if(hm.trimmed() == "Mkext")
+        ui->cboxKernelCache->setCurrentIndex(2);
+    if(hm.trimmed() == "Prelinked")
+        ui->cboxKernelCache->setCurrentIndex(3);
+
+
+
 
 }
 
@@ -879,6 +935,11 @@ void MainWindow::initui_misc()
     ui->cboxVault->addItem("Optional");
     ui->cboxVault->addItem("Basic");
     ui->cboxVault->addItem("Secure");
+
+    ui->cboxSecureBootModel->setEditable(true);
+    ui->cboxSecureBootModel->addItem("Disabled");
+    ui->cboxSecureBootModel->addItem("Default");
+
 
     //BlessOverride
     QTableWidgetItem *id0;
@@ -1016,6 +1077,13 @@ void MainWindow::ParserMisc(QVariantMap map)
         ui->cboxDmgLoading->setCurrentIndex(1);
     if(hm.trimmed() == "Any")
         ui->cboxDmgLoading->setCurrentIndex(2);
+
+    ui->editApECID->setText(map_security["ApECID"].toString());
+
+    hm = map_security["SecureBootModel"].toString().trimmed();
+    if(hm == "")
+        hm = "Disabled";
+    ui->cboxSecureBootModel->setCurrentText(hm);
 
 
     //BlessOverride(数组)
@@ -1670,6 +1738,8 @@ void MainWindow::ParserUEFI(QVariantMap map)
     ui->chkHashServices->setChecked(map_po["HashServices"].toBool());
     ui->chkOSInfo->setChecked(map_po["OSInfo"].toBool());
     ui->chkUnicodeCollation->setChecked(map_po["UnicodeCollation"].toBool());
+    ui->chkAppleImg4Verification->setChecked(map_po["AppleImg4Verification"].toBool());
+    ui->chkAppleSecureBoot->setChecked(map_po["AppleSecureBoot"].toBool());
 
     //Quirks
     QVariantMap map_uefi_Quirks = map["Quirks"].toMap();
@@ -1974,6 +2044,7 @@ QVariantMap MainWindow::SaveKernel()
         valueList["MinKernel"] = ui->table_kernel_add->item(i , 4)->text();
         valueList["MaxKernel"] = ui->table_kernel_add->item(i , 5)->text();
         valueList["Enabled"] = getBool(ui->table_kernel_add , i , 6);
+        valueList["Arch"] = ui->table_kernel_add->item(i , 7)->text();
 
         dictList.append(valueList);
         subMap["Add"] = dictList;
@@ -1989,6 +2060,7 @@ QVariantMap MainWindow::SaveKernel()
         valueList["MinKernel"] = ui->table_kernel_block->item(i , 2)->text();
         valueList["MaxKernel"] = ui->table_kernel_block->item(i , 3)->text();
         valueList["Enabled"] = getBool(ui->table_kernel_block , i , 4);
+        valueList["Arch"] = ui->table_kernel_block->item(i , 5)->text();
 
         dictList.append(valueList);
         subMap["Block"] = dictList;
@@ -2012,6 +2084,7 @@ QVariantMap MainWindow::SaveKernel()
         valueList["Limit"] = ui->table_kernel_patch->item(i , 10)->text().toLongLong();
         valueList["Skip"] = ui->table_kernel_patch->item(i , 11)->text().toLongLong();
         valueList["Enabled"] = getBool(ui->table_kernel_patch , i , 12);
+        valueList["Arch"] = ui->table_kernel_patch->item(i , 13)->text();
 
         dictList.append(valueList);
         subMap["Patch"] = dictList;
@@ -2042,6 +2115,13 @@ QVariantMap MainWindow::SaveKernel()
     mapQuirks["XhciPortLimit"] = getChkBool(ui->chkXhciPortLimit);
 
     subMap["Quirks"] = mapQuirks;
+
+    //Scheme
+    QVariantMap mapScheme;
+    mapScheme["FuzzyMatch"] = getChkBool(ui->chkFuzzyMatch);
+    mapScheme["KernelArch"] = ui->cboxKernelArch->currentText();
+    mapScheme["KernelCache"] = ui->cboxKernelCache->currentText();
+    subMap["Scheme"] = mapScheme;
 
 
     return  subMap;
@@ -2123,6 +2203,13 @@ QVariantMap MainWindow::SaveMisc()
     qDebug() << ui->editHaltLevel->text().toLongLong(nullptr , 16);
 
     valueList["ScanPolicy"] = ui->editScanPolicy->text().toLongLong();
+
+    valueList["ApECID"] = ui->editApECID->text().toLongLong();
+
+    QString hm = ui->cboxSecureBootModel->currentText().trimmed();
+    if(hm == "")
+        hm = "Disabled";
+    valueList["SecureBootModel"] = hm;
 
     subMap["Security"] = valueList;
 
@@ -2353,6 +2440,8 @@ QVariantMap MainWindow::SaveUEFI()
     dictList["HashServices"] = getChkBool(ui->chkHashServices);
     dictList["OSInfo"] = getChkBool(ui->chkOSInfo);
     dictList["UnicodeCollation"] = getChkBool(ui->chkUnicodeCollation);
+    dictList["AppleImg4Verification"] = getChkBool(ui->chkAppleImg4Verification);
+    dictList["AppleSecureBoot"] = getChkBool(ui->chkAppleSecureBoot);
 
     subMap["ProtocolOverrides"] = dictList;
 
@@ -2535,16 +2624,67 @@ void MainWindow::on_table_booter_cellClicked(int row, int column)
 void MainWindow::on_table_kernel_add_cellClicked(int row, int column)
 {
     enabled_change(ui->table_kernel_add , row , column , 6);
+
+    if(column == 7)
+    {
+
+        cboxArch = new QComboBox;
+        cboxArch->addItem("Any");
+        cboxArch->addItem("i386");
+        cboxArch->addItem("x86_64");
+        cboxArch->addItem("");
+
+        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this, SLOT(arch_addChange()));
+        c_row = row;
+
+        ui->table_kernel_add->setCellWidget(row , column , cboxArch);
+        cboxArch->setCurrentText(ui->table_kernel_add->item(row , 7)->text());
+
+    }
 }
 
 void MainWindow::on_table_kernel_block_cellClicked(int row, int column)
 {
     enabled_change(ui->table_kernel_block , row , column , 4);
+
+    if(column == 5)
+    {
+
+        cboxArch = new QComboBox;
+        cboxArch->addItem("Any");
+        cboxArch->addItem("i386");
+        cboxArch->addItem("x86_64");
+        cboxArch->addItem("");
+
+        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this, SLOT(arch_blockChange()));
+        c_row = row;
+
+        ui->table_kernel_block->setCellWidget(row , column , cboxArch);
+        cboxArch->setCurrentText(ui->table_kernel_block->item(row , 5)->text());
+
+    }
 }
 
 void MainWindow::on_table_kernel_patch_cellClicked(int row, int column)
 {
     enabled_change(ui->table_kernel_patch , row , column , 12);
+
+    if(column == 13)
+    {
+
+        cboxArch = new QComboBox;
+        cboxArch->addItem("Any");
+        cboxArch->addItem("i386");
+        cboxArch->addItem("x86_64");
+        cboxArch->addItem("");
+
+        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this, SLOT(arch_patchChange()));
+        c_row = row;
+
+        ui->table_kernel_patch->setCellWidget(row , column , cboxArch);
+        cboxArch->setCurrentText(ui->table_kernel_patch->item(row , 13)->text());
+
+    }
 }
 
 void MainWindow::on_tableEntries_cellClicked(int row, int column)
@@ -2572,6 +2712,10 @@ void MainWindow::on_btnKernelPatchAdd_clicked()
 {
     add_item(ui->table_kernel_patch , 12);
     init_enabled_data(ui->table_kernel_patch , ui->table_kernel_patch->rowCount() - 1 , 12 , "true");
+
+    QTableWidgetItem *newItem1 = new QTableWidgetItem("Any");
+    newItem1->setTextAlignment(Qt::AlignCenter);
+    ui->table_kernel_patch->setItem(ui->table_kernel_patch->currentRow() , 13 , newItem1);
 }
 
 void MainWindow::on_btnKernelPatchDel_clicked()
@@ -2916,6 +3060,10 @@ void MainWindow::on_btnKernelAdd_Add_clicked()
         t->setItem(row - 1 , 5 , new QTableWidgetItem(""));
         init_enabled_data(t , row - 1 , 6 , "true");
 
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("x86_64");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        t->setItem(row - 1 , 7 , newItem1);
+
 
         //如果里面还有PlugIns目录，则需要继续遍历插件目录
         QDir piDir(filePath + "/" + fileInfo.fileName() + "/Contents/PlugIns/");
@@ -2962,6 +3110,11 @@ void MainWindow::on_btnKernelAdd_Add_clicked()
                         t->setItem(row - 1 , 5 , new QTableWidgetItem(""));
                         init_enabled_data(t , row - 1 , 6 , "true");
 
+                        QTableWidgetItem *newItem1 = new QTableWidgetItem("x86_64");
+                        newItem1->setTextAlignment(Qt::AlignCenter);
+                        t->setItem(row - 1 , 7 , newItem1);
+
+
                     }
                 }
             }
@@ -2983,6 +3136,11 @@ void MainWindow::on_btnKernelBlock_Add_clicked()
 {
     add_item(ui->table_kernel_block , 4);
     init_enabled_data(ui->table_kernel_block , ui->table_kernel_block->currentRow() , 4 , "true");
+
+    QTableWidgetItem *newItem1 = new QTableWidgetItem("Any");
+    newItem1->setTextAlignment(Qt::AlignCenter);
+    ui->table_kernel_block->setItem(ui->table_kernel_block->currentRow() , 5 , newItem1);
+
 }
 
 void MainWindow::on_btnKernelBlock_Del_clicked()
@@ -3261,7 +3419,7 @@ void MainWindow::on_btnKernelAdd_Up_clicked()
 
     int cr = t->currentRow();
     //先将上面的内容进行备份
-    QString item[7];
+    QString item[8];
     item[0] = t->item(cr - 1 , 0)->text();
     item[1] = t->item(cr - 1 , 1)->text();
     item[2] = t->item(cr - 1 , 2)->text();
@@ -3269,6 +3427,7 @@ void MainWindow::on_btnKernelAdd_Up_clicked()
     item[4] = t->item(cr - 1 , 4)->text();
     item[5] = t->item(cr - 1 , 5)->text();
     item[6] = t->item(cr - 1 , 6)->text();
+    item[7] = t->item(cr - 1 , 7)->text();
     //将下面的内容移到上面
     t->item(cr - 1 , 0)->setText(t->item(cr , 0)->text());
     t->item(cr - 1 , 1)->setText(t->item(cr , 1)->text());
@@ -3282,6 +3441,8 @@ void MainWindow::on_btnKernelAdd_Up_clicked()
     else
         t->item(cr - 1 , 6)->setCheckState(Qt::Unchecked);
 
+    t->item(cr - 1 , 7)->setText(t->item(cr , 7)->text());
+
     //最后将之前的备份恢复到下面
     t->item(cr , 0)->setText(item[0]);
     t->item(cr , 1)->setText(item[1]);
@@ -3294,6 +3455,8 @@ void MainWindow::on_btnKernelAdd_Up_clicked()
         t->item(cr , 6)->setCheckState(Qt::Checked);
     else
         t->item(cr , 6)->setCheckState(Qt::Unchecked);
+
+    t->item(cr , 7)->setText(item[7]);
 
     t->setCurrentCell(cr - 1 , t->currentColumn());
 
@@ -3309,7 +3472,7 @@ void MainWindow::on_btnKernelAdd_Down_clicked()
 
     int cr = t->currentRow();
     //先将下面的内容进行备份
-    QString item[7];
+    QString item[8];
     item[0] = t->item(cr + 1 , 0)->text();
     item[1] = t->item(cr + 1 , 1)->text();
     item[2] = t->item(cr + 1 , 2)->text();
@@ -3317,6 +3480,7 @@ void MainWindow::on_btnKernelAdd_Down_clicked()
     item[4] = t->item(cr + 1 , 4)->text();
     item[5] = t->item(cr + 1 , 5)->text();
     item[6] = t->item(cr + 1 , 6)->text();
+    item[7] = t->item(cr + 1 , 7)->text();
     //将上面的内容移到下面
     t->item(cr + 1 , 0)->setText(t->item(cr , 0)->text());
     t->item(cr + 1 , 1)->setText(t->item(cr , 1)->text());
@@ -3330,6 +3494,8 @@ void MainWindow::on_btnKernelAdd_Down_clicked()
     else
         t->item(cr + 1 , 6)->setCheckState(Qt::Unchecked);
 
+    t->item(cr + 1 , 7)->setText(t->item(cr , 7)->text());
+
     //最后将之前的备份恢复到上面
     t->item(cr , 0)->setText(item[0]);
     t->item(cr , 1)->setText(item[1]);
@@ -3342,6 +3508,8 @@ void MainWindow::on_btnKernelAdd_Down_clicked()
         t->item(cr , 6)->setCheckState(Qt::Checked);
     else
         t->item(cr , 6)->setCheckState(Qt::Unchecked);
+
+    t->item(cr , 7)->setText(item[7]);
 
     t->setCurrentCell(cr + 1 , t->currentColumn());
 
@@ -3397,7 +3565,7 @@ void MainWindow::about()
 {
 
     QMessageBox::about(this , tr("About") ,
-                       QString::fromLocal8Bit("<a style='color: blue;' href = https://github.com/ic005k/QtOpenCoreConfig> Open source cross-platform OpenCore Configurator</a>"));
+                       QString::fromLocal8Bit("<a style='color: blue;' href = https://github.com/ic005k/QtOpenCoreConfig> Open source cross-platform OpenCore configurator</a><br><a style='color: blue;' href = https://github.com/acidanthera/OpenCorePkg/releases>OpenCore</a><br><a style='color: blue;' href = https://github.com/williambj1/OpenCore-Factory/releases>OpenCore-Factory</a><br><a style='color: blue;' href = https://github.com/ic005k/QtiASL>QtiASL</a>"));
 }
 
 void MainWindow::on_btnKernelAdd_Del_clicked()
@@ -3435,6 +3603,21 @@ void MainWindow::on_table_dp_add_currentCellChanged(int currentRow, int currentC
 
     ui->table_dp_add->removeCellWidget(previousRow , 1);
 
+}
+
+void MainWindow::arch_addChange()
+{
+    ui->table_kernel_add->item(c_row , 7)->setText(cboxArch->currentText());
+}
+
+void MainWindow::arch_blockChange()
+{
+    ui->table_kernel_block->item(c_row , 5)->setText(cboxArch->currentText());
+}
+
+void MainWindow::arch_patchChange()
+{
+    ui->table_kernel_patch->item(c_row , 13)->setText(cboxArch->currentText());
 }
 
 void MainWindow::dataClassChange_dp()
@@ -3512,4 +3695,34 @@ void MainWindow::reg_win()
 #ifdef Q_OS_WIN32
         //::SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST|SHCNF_FLUSH, 0, 0);
 #endif
+}
+
+void MainWindow::on_table_kernel_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    if(currentRow == 0 && currentColumn == 0 && previousColumn == 0)
+    {
+
+    }
+
+    ui->table_kernel_add->removeCellWidget(previousRow , 7);
+}
+
+void MainWindow::on_table_kernel_block_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    if(currentRow == 0 && currentColumn == 0 && previousColumn == 0)
+    {
+
+    }
+
+    ui->table_kernel_block->removeCellWidget(previousRow , 5);
+}
+
+void MainWindow::on_table_kernel_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    if(currentRow == 0 && currentColumn == 0 && previousColumn == 0)
+    {
+
+    }
+
+    ui->table_kernel_patch->removeCellWidget(previousRow , 13);
 }

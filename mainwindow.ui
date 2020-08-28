@@ -95,7 +95,7 @@
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
       <property name="currentIndex">
-       <number>2</number>
+       <number>7</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -675,7 +675,7 @@
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabKernel">
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -983,6 +983,40 @@
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="tab_30">
+           <attribute name="title">
+            <string>Scheme</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_37">
+            <item row="0" column="0" colspan="2">
+             <widget class="QCheckBox" name="chkFuzzyMatch">
+              <property name="text">
+               <string>FuzzyMatch</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_43">
+              <property name="text">
+               <string>KernelArch</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="cboxKernelArch"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_42">
+              <property name="text">
+               <string>KernelCache</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QComboBox" name="cboxKernelCache"/>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -1232,21 +1266,41 @@
             <item row="5" column="1">
              <widget class="QComboBox" name="cboxVault"/>
             </item>
-            <item row="6" column="0" colspan="2">
+            <item row="6" column="0">
+             <widget class="QLabel" name="label_44">
+              <property name="text">
+               <string>ApECID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QLineEdit" name="editApECID"/>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="label_45">
+              <property name="text">
+               <string>SecureBootModel</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QComboBox" name="cboxSecureBootModel"/>
+            </item>
+            <item row="8" column="0" colspan="2">
              <widget class="QCheckBox" name="chkAllowNvramReset">
               <property name="text">
                <string>AllowNvramReset-允许复位NVRAM</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="0" colspan="2">
+            <item row="9" column="0" colspan="2">
              <widget class="QCheckBox" name="chkAllowSetDefault">
               <property name="text">
                <string>AllowSetDefault-允许Ctrl+回车设置默认启动盘</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="0">
+            <item row="10" column="0">
              <widget class="QCheckBox" name="chkAuthRestart">
               <property name="text">
                <string>AuthRestart</string>
@@ -2236,6 +2290,20 @@
              <widget class="QCheckBox" name="chkUnicodeCollation">
               <property name="text">
                <string>UnicodeCollation</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QCheckBox" name="chkAppleImg4Verification">
+              <property name="text">
+               <string>AppleImg4Verification</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="chkAppleSecureBoot">
+              <property name="text">
+               <string>AppleSecureBoot</string>
               </property>
              </widget>
             </item>
