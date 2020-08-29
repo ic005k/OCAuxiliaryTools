@@ -22,11 +22,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    myapp.cpp \
     plistparser.cpp \
     plistserializer.cpp
 
 HEADERS += \
     mainwindow.h \
+    myapp.h \
     plistparser.h \
     plistserializer.h
 
