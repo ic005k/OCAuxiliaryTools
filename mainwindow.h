@@ -7,6 +7,10 @@
 #include <QComboBox>
 #include <QDateTime>
 #include <QSplitter>
+#include <QProcess>
+#include <QTextCodec>
+#include <QTextBlock>
+#include <QUuid>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -67,7 +71,7 @@ public:
     QString ByteToHexStr(QByteArray ba);
 
     QString title;
-    bool loadding = false; //数据是否加载中，用于 设备属性 等表
+    bool loading = false; //数据是否加载中，用于 设备属性 等表
 
     void test(bool test);//用于测试按钮的可视
 
@@ -84,7 +88,8 @@ public slots:
 private slots:
     void dataClassChange_dp();
     void dataClassChange_nv();
-    //void archChange(QTableWidget *t, int col);
+    void readResult();
+    void readResultSystemInfo();
     void arch_addChange();
     void arch_blockChange();
     void arch_patchChange();
@@ -261,8 +266,17 @@ private slots:
 
     void on_table_kernel_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
+    void on_cboxSystemProductName_currentIndexChanged(const QString &arg1);
+
+    void on_btnGenerate_clicked();
+
+    void on_btnSystemUUID_clicked();
+
 private:
     Ui::MainWindow *ui;
     void reg_win();
+    QString getSystemProductName(QString arg1);
+    QProcess *gs;
+    QProcess *si;
 };
 #endif // MAINWINDOW_H

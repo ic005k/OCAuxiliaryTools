@@ -95,7 +95,7 @@
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
       <property name="currentIndex">
-       <number>7</number>
+       <number>6</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -1706,13 +1706,6 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QCheckBox" name="chkAutomatic">
-          <property name="text">
-           <string>Automatic</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="3">
          <widget class="QCheckBox" name="chkUpdateSMBIOS">
           <property name="text">
@@ -1727,10 +1720,17 @@
           </property>
          </widget>
         </item>
+        <item row="3" column="0">
+         <widget class="QCheckBox" name="chkAutomatic">
+          <property name="text">
+           <string>Automatic</string>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="0" colspan="5">
          <widget class="QTabWidget" name="tabPlatformInfo">
           <property name="currentIndex">
-           <number>0</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1741,54 +1741,68 @@
            </attribute>
            <layout class="QGridLayout" name="gridLayout_26">
             <item row="0" column="0">
-             <widget class="QLabel" name="label_17">
-              <property name="text">
-               <string>MLB</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="editMLB"/>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_20">
-              <property name="text">
-               <string>ROM</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLineEdit" name="editROM"/>
-            </item>
-            <item row="2" column="0">
              <widget class="QLabel" name="label_18">
               <property name="text">
                <string>SystemProductName-机型</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="editSystemProductName"/>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="cboxSystemProductName"/>
             </item>
-            <item row="3" column="0">
+            <item row="0" column="2">
+             <widget class="QPushButton" name="btnGenerate">
+              <property name="text">
+               <string>生成-Generate</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
              <widget class="QLabel" name="label_19">
               <property name="text">
                <string>SystemSerialNumber-序列号</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
+            <item row="1" column="1">
              <widget class="QLineEdit" name="editSystemSerialNumber"/>
             </item>
-            <item row="4" column="0">
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_17">
+              <property name="text">
+               <string>MLB</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="editMLB"/>
+            </item>
+            <item row="3" column="0">
              <widget class="QLabel" name="label_21">
               <property name="text">
                <string>SystemUUID</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
+            <item row="3" column="1">
              <widget class="QLineEdit" name="editSystemUUID"/>
+            </item>
+            <item row="3" column="2">
+             <widget class="QPushButton" name="btnSystemUUID">
+              <property name="text">
+               <string>生成-Generate</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_20">
+              <property name="text">
+               <string>ROM</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="editROM"/>
             </item>
             <item row="5" column="0">
              <widget class="QCheckBox" name="chkAdviseWindows">
@@ -1801,6 +1815,511 @@
              <widget class="QCheckBox" name="chkSpoofVendor">
               <property name="text">
                <string>SpoofVendor</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_32">
+           <attribute name="title">
+            <string>DataHub</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_39">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_46">
+              <property name="text">
+               <string>ARTFrequency</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="editARTFrequency"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_47">
+              <property name="text">
+               <string>BoardProduct</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="editBoardProduct"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_48">
+              <property name="text">
+               <string>BoardRevision</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="editBoardRevision"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_49">
+              <property name="text">
+               <string>DevicePathsSupported</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="editDevicePathsSupported"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_50">
+              <property name="text">
+               <string>FSBFrequency</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="editFSBFrequency"/>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_51">
+              <property name="text">
+               <string>InitialTSC</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QLineEdit" name="editInitialTSC"/>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="label_52">
+              <property name="text">
+               <string>PlatformName</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QLineEdit" name="editPlatformName"/>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="label_53">
+              <property name="text">
+               <string>SmcBranch</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QLineEdit" name="editSmcBranch"/>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLabel" name="label_54">
+              <property name="text">
+               <string>SmcPlatform</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1">
+             <widget class="QLineEdit" name="editSmcPlatform"/>
+            </item>
+            <item row="9" column="0">
+             <widget class="QLabel" name="label_55">
+              <property name="text">
+               <string>SmcRevision</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="1">
+             <widget class="QLineEdit" name="editSmcRevision"/>
+            </item>
+            <item row="10" column="0">
+             <widget class="QLabel" name="label_56">
+              <property name="text">
+               <string>StartupPowerEvents</string>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="1">
+             <widget class="QLineEdit" name="editStartupPowerEvents"/>
+            </item>
+            <item row="11" column="0">
+             <widget class="QLabel" name="label_57">
+              <property name="text">
+               <string>SystemProductName</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="1">
+             <widget class="QLineEdit" name="editSystemProductName"/>
+            </item>
+            <item row="12" column="0">
+             <widget class="QLabel" name="label_58">
+              <property name="text">
+               <string>SystemSerialNumber</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="1">
+             <widget class="QLineEdit" name="editSystemSerialNumber_data"/>
+            </item>
+            <item row="13" column="0">
+             <widget class="QLabel" name="label_59">
+              <property name="text">
+               <string>SystemUUID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="1">
+             <widget class="QLineEdit" name="editSystemUUID_data"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_33">
+           <attribute name="title">
+            <string>PlatformNVRAM</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_40">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_60">
+              <property name="text">
+               <string>BID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="editBID"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_61">
+              <property name="text">
+               <string>FirmwareFeatures</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="editFirmwareFeatures"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_62">
+              <property name="text">
+               <string>FirmwareFeaturesMask</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="editFirmwareFeaturesMask"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_63">
+              <property name="text">
+               <string>MLB</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="editMLB_2"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_64">
+              <property name="text">
+               <string>ROM</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="editROM_2"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_34">
+           <attribute name="title">
+            <string>SMBIOS</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_41">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_65">
+              <property name="text">
+               <string>BIOSReleaseDate</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="2">
+             <widget class="QLineEdit" name="editBIOSReleaseDate"/>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="label_66">
+              <property name="text">
+               <string>ChassisVersion</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4" colspan="2">
+             <widget class="QLineEdit" name="editChassisVersion"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_67">
+              <property name="text">
+               <string>BIOSVendor</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" colspan="2">
+             <widget class="QLineEdit" name="editBIOSVendor"/>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLabel" name="label_68">
+              <property name="text">
+               <string>FirmwareFeatures</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4" colspan="2">
+             <widget class="QLineEdit" name="editFirmwareFeatures_2"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_69">
+              <property name="text">
+               <string>BIOSVersion</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" colspan="2">
+             <widget class="QLineEdit" name="editBIOSVersion"/>
+            </item>
+            <item row="2" column="3">
+             <widget class="QLabel" name="label_92">
+              <property name="text">
+               <string>FirmwareFeaturesMask</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="5">
+             <widget class="QLineEdit" name="editFirmwareFeaturesMask_2"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_71">
+              <property name="text">
+               <string>BoardAssetTag</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QLineEdit" name="editBoardAssetTag"/>
+            </item>
+            <item row="3" column="3">
+             <widget class="QLabel" name="label_70">
+              <property name="text">
+               <string>MemoryFormFactor</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="4" colspan="2">
+             <widget class="QLineEdit" name="editMemoryFormFactor"/>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QLabel" name="label_73">
+              <property name="text">
+               <string>BoardLocationInChassis</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QLineEdit" name="editBoardLocationInChassis"/>
+            </item>
+            <item row="4" column="3">
+             <widget class="QLabel" name="label_72">
+              <property name="text">
+               <string>PlatformFeature</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="5">
+             <widget class="QLineEdit" name="editPlatformFeature"/>
+            </item>
+            <item row="5" column="0" colspan="2">
+             <widget class="QLabel" name="label_75">
+              <property name="text">
+               <string>BoardManufacturer</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="2">
+             <widget class="QLineEdit" name="editBoardManufacturer"/>
+            </item>
+            <item row="5" column="3" colspan="2">
+             <widget class="QLabel" name="label_74">
+              <property name="text">
+               <string>ProcessorType</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="5">
+             <widget class="QLineEdit" name="editProcessorType"/>
+            </item>
+            <item row="6" column="0" colspan="2">
+             <widget class="QLabel" name="label_77">
+              <property name="text">
+               <string>BoardProduct</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="2">
+             <widget class="QLineEdit" name="editBoardProduct_2"/>
+            </item>
+            <item row="6" column="3" colspan="2">
+             <widget class="QLabel" name="label_76">
+              <property name="text">
+               <string>SmcVersion</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="5">
+             <widget class="QLineEdit" name="editSmcVersion"/>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="label_79">
+              <property name="text">
+               <string>BoardSerialNumber</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="2">
+             <widget class="QLineEdit" name="editBoardSerialNumber"/>
+            </item>
+            <item row="7" column="3" colspan="2">
+             <widget class="QLabel" name="label_78">
+              <property name="text">
+               <string>SystemFamily</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="5">
+             <widget class="QLineEdit" name="editSystemFamily"/>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLabel" name="label_81">
+              <property name="text">
+               <string>BoardType</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="2">
+             <widget class="QLineEdit" name="editBoardType"/>
+            </item>
+            <item row="8" column="3">
+             <widget class="QLabel" name="label_80">
+              <property name="text">
+               <string>SystemManufacturer</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="5">
+             <widget class="QLineEdit" name="editSystemManufacturer"/>
+            </item>
+            <item row="9" column="0">
+             <widget class="QLabel" name="label_83">
+              <property name="text">
+               <string>BoardVersion</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="2">
+             <widget class="QLineEdit" name="editBoardVersion"/>
+            </item>
+            <item row="9" column="3">
+             <widget class="QLabel" name="label_82">
+              <property name="text">
+               <string>SystemProductName</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="5">
+             <widget class="QLineEdit" name="editSystemProductName_2"/>
+            </item>
+            <item row="10" column="0">
+             <widget class="QLabel" name="label_85">
+              <property name="text">
+               <string>ChassisAssetTag</string>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="2">
+             <widget class="QLineEdit" name="editChassisAssetTag"/>
+            </item>
+            <item row="10" column="3">
+             <widget class="QLabel" name="label_84">
+              <property name="text">
+               <string>SystemSKUNumber</string>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="5">
+             <widget class="QLineEdit" name="editSystemSKUNumber"/>
+            </item>
+            <item row="11" column="0">
+             <widget class="QLabel" name="label_87">
+              <property name="text">
+               <string>ChassisManufacturer</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="2">
+             <widget class="QLineEdit" name="editChassisManufacturer"/>
+            </item>
+            <item row="11" column="3">
+             <widget class="QLabel" name="label_86">
+              <property name="text">
+               <string>SystemSerialNumber</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="5">
+             <widget class="QLineEdit" name="editSystemSerialNumber_2"/>
+            </item>
+            <item row="12" column="0">
+             <widget class="QLabel" name="label_89">
+              <property name="text">
+               <string>ChassisSerialNumber</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="2">
+             <widget class="QLineEdit" name="editChassisSerialNumber"/>
+            </item>
+            <item row="12" column="3">
+             <widget class="QLabel" name="label_88">
+              <property name="text">
+               <string>SystemUUID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="5">
+             <widget class="QLineEdit" name="editSystemUUID_2"/>
+            </item>
+            <item row="13" column="0">
+             <widget class="QLabel" name="label_91">
+              <property name="text">
+               <string>ChassisType</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="2">
+             <widget class="QLineEdit" name="editChassisType"/>
+            </item>
+            <item row="13" column="3">
+             <widget class="QLabel" name="label_90">
+              <property name="text">
+               <string>SystemVersion</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="5">
+             <widget class="QLineEdit" name="editSystemVersion"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_31">
+           <attribute name="title">
+            <string>系统信息-SystemInfo</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_38">
+            <item row="0" column="0">
+             <widget class="QTextEdit" name="textMacInfo">
+              <property name="readOnly">
+               <bool>true</bool>
               </property>
              </widget>
             </item>

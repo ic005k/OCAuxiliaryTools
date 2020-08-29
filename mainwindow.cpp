@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "OpenCore配置文件编辑器 V0.6.1-2020.08.27";
+    title = "QtOpenCoreConfigurator V0.6.1-2020.08.27";
     setWindowTitle(title);
 
     initui_acpi();
@@ -86,7 +86,7 @@ void MainWindow::openFile(QString PlistFileName)
     QFile file(PlistFileName);
     QVariantMap map = PListParser::parsePList(&file).toMap();
 
-    loadding = true;
+    loading = true;
 
     ParserACPI(map);
     ParserBooter(map);
@@ -97,7 +97,7 @@ void MainWindow::openFile(QString PlistFileName)
     ParserPlatformInfo(map);
     ParserUEFI(map);
 
-    loadding = false;
+    loading = false;
 
     ui->btnSave->setEnabled(true);
     ui->actionSave->setEnabled(true);
@@ -1371,12 +1371,12 @@ void MainWindow::on_table_dp_add0_cellClicked(int row, int column)
     //读取ini数据并加载到table_dp_add中
     //qDebug() << row;
 
-    loadding = true;
+    loading = true;
 
     if(column == 0)
         read_ini("table_dp_add0" , ui->table_dp_add , row);
 
-    loadding = false;
+    loading = false;
 }
 
 void MainWindow::on_table_dp_add_itemSelectionChanged()
@@ -1391,19 +1391,19 @@ void MainWindow::on_table_dp_add_itemChanged(QTableWidgetItem *item)
 
     }
     //当条目有修改时，重新写入数据
-    if(!loadding)  //数据已经加载完成后
+    if(!loading)  //数据已经加载完成后
         write_ini("table_dp_add0" , ui->table_dp_add, ui->table_dp_add0->currentRow());
 
 }
 
 void MainWindow::on_table_nv_add0_cellClicked(int row, int column)
 {
-    loadding = true;
+    loading = true;
 
     if(column == 0)
         read_ini("table_nv_add0" , ui->table_nv_add , row);
 
-    loadding = false;
+    loading = false;
 }
 
 void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem *item)
@@ -1414,7 +1414,7 @@ void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem *item)
     }
 
     //当条目有修改时，重新写入数据
-    if(!loadding)  //数据已经加载完成后
+    if(!loading)  //数据已经加载完成后
         write_ini("table_nv_add0" , ui->table_nv_add, ui->table_nv_add0->currentRow());
 
 }
@@ -1484,22 +1484,22 @@ void MainWindow::write_value_ini(QString tablename , QTableWidget *subtable , in
 
 void MainWindow::on_table_nv_del0_cellClicked(int row, int column)
 {
-    loadding = true;
+    loading = true;
 
     if(column == 0)
         read_value_ini(ui->table_nv_del0->objectName() , ui->table_nv_del , row);
 
-    loadding = false;
+    loading = false;
 }
 
 void MainWindow::on_table_nv_ls0_cellClicked(int row, int column)
 {
-    loadding = true;
+    loading = true;
 
     if(column == 0)
         read_value_ini(ui->table_nv_ls0->objectName() , ui->table_nv_ls , row);
 
-    loadding = false;
+    loading = false;
 }
 
 void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem *item)
@@ -1509,7 +1509,7 @@ void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem *item)
 
     }
 
-    if(!loadding)
+    if(!loading)
         write_value_ini(ui->table_nv_del0->objectName() , ui->table_nv_del , ui->table_nv_del0->currentRow());
 }
 
@@ -1520,18 +1520,18 @@ void MainWindow::on_table_nv_ls_itemChanged(QTableWidgetItem *item)
 
     }
 
-    if(!loadding)
+    if(!loading)
         write_value_ini(ui->table_nv_ls0->objectName() , ui->table_nv_ls , ui->table_nv_ls0->currentRow());
 }
 
 void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
 {
-    loadding = true;
+    loading = true;
 
     if(column == 0)
         read_value_ini(ui->table_dp_del0->objectName() , ui->table_dp_del , row);
 
-    loadding = false;
+    loading = false;
 
 }
 
@@ -1543,16 +1543,178 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem *item)
     }
 
 
-    if(!loadding)
+    if(!loading)
         write_value_ini(ui->table_dp_del0->objectName() , ui->table_dp_del , ui->table_dp_del0->currentRow());
 }
 
 void MainWindow::initui_PlatformInfo()
 {
+
     ui->cboxUpdateSMBIOSMode->addItem("TryOverwrite");
     ui->cboxUpdateSMBIOSMode->addItem("Create");
     ui->cboxUpdateSMBIOSMode->addItem("Overwrite");
     ui->cboxUpdateSMBIOSMode->addItem("Custom");
+
+    //ui->cboxSystemProductName->setEditable(true);
+    QStringList pi;
+    pi.push_back("");
+    pi.push_back("MacPro1,1    Intel Core Xeon 5130 x2 @ 2.00 GHz");
+    pi.push_back("MacPro2,1    Intel Xeon X5365 x2 @ 3.00 GHz");
+    pi.push_back("MacPro3,1    Intel Xeon E5462 x2 @ 2.80 GHz");
+    pi.push_back("MacPro4,1    Intel Xeon W3520 @ 2.66 GHz");
+    pi.push_back("MacPro5,1    Intel Xeon W3530 @ 2.80 GHz");
+    pi.push_back("MacPro6,1    Intel Xeon E5-1620 v2 @ 3.70 GHz");
+    pi.push_back("MacPro7,1    Intel Xeon W-3245M CPU @ 3.20 GHz");
+
+    pi.push_back("MacBook1,1    Intel Core Duo T2400 @ 1.83 GHz");
+    pi.push_back("MacBook2,1    Intel Core 2 Duo T5600 @ 1.83 GHz");
+    pi.push_back("MacBook3,1    Intel Core 2 Duo T7500 @ 2.20 GHz");
+    pi.push_back("MacBook4,1    Intel Core 2 Duo T8300 @ 2.40 GHz");
+    pi.push_back("MacBook5,1    Intel Core 2 Duo P8600 @ 2.40 GHz");
+    pi.push_back("MacBook5,2    Intel Core 2 Duo P7450 @ 2.13 GHz");
+    pi.push_back("MacBook6,1    Intel Core 2 Duo P7550 @ 2.26 GHz");
+    pi.push_back("MacBook7,1    Intel Core 2 Duo P8600 @ 2.40 GHz");
+    pi.push_back("MacBook8,1    Intel Core M 5Y51 @ 1.10 GHz");
+    pi.push_back("MacBook9,1    Intel Core m3-6Y30 @ 1.10 GHz");
+    pi.push_back("MacBook10,1  Intel Core m3-7Y32 @ 1.10 GHz");
+
+    pi.push_back("MacBookAir1,1    Intel Core 2 Duo P7500 @ 1.60 GHz");
+    pi.push_back("MacBookAir2,1    Intel Core 2 Duo SL9600 @ 2.13 GHz");
+    pi.push_back("MacBookAir3,1    Intel Core 2 Duo SU9400 @ 1.40 GHz");
+    pi.push_back("MacBookAir3,2    Intel Core 2 Duo SL9400 @ 1.86 GHz");
+    pi.push_back("MacBookAir4,1    Intel Core i5-2467M @ 1.60 GHz");
+    pi.push_back("MacBookAir4,2    Intel Core i5-2557M @ 1.70 GHz");
+    pi.push_back("MacBookAir5,1    Intel Core i5-3317U @ 1.70 GHz");
+    pi.push_back("MacBookAir5,2    Intel Core i5-3317U @ 1.70GHz");
+    pi.push_back("MacBookAir6,1    Intel Core i5-4250U @ 1.30 GHz");
+    pi.push_back("MacBookAir6,2    Intel Core i5-4250U @ 1.30 GHz");
+    pi.push_back("MacBookAir7,1    Intel Core i5-5250U @ 1.60 GHz");
+    pi.push_back("MacBookAir7,2    Intel Core i5-5250U @ 1.60 GHz");
+    pi.push_back("MacBookAir8,1    Intel Core i5-8210Y @ 1.60 GHz");
+    pi.push_back("MacBookAir8,2    Intel Core i5-8210Y @ 1.60 GHz");
+    pi.push_back("MacBookAir9,1    Intel Core i3-1000NG4 @ 1.10 GHz");
+
+    pi.push_back("MacBookPro1,1    Intel Core Duo L2400 @ 1.66 GHz");
+    pi.push_back("MacBookPro1,2    Intel Core Duo T2600 @ 2.16 GHz");
+    pi.push_back("MacBookPro2,1    Intel Core 2 Duo T7600 @ 2.33 GHz");
+    pi.push_back("MacBookPro2,2    Intel Core 2 Duo T7400 @ 2.16 GHz");
+    pi.push_back("MacBookPro3,1    Intel Core 2 Duo T7700 @ 2.40 GHz");
+    pi.push_back("MacBookPro4,1    Intel Core 2 Duo T8300 @ 2.40 GHz");
+    pi.push_back("MacBookPro5,1    Intel Core 2 Duo P8600 @ 2.40 GHz");
+    pi.push_back("MacBookPro5,2    Intel Core 2 Duo T9600 @ 2.80 GHz");
+    pi.push_back("MacBookPro5,3    Intel Core 2 Duo P8800 @ 2.66 GHz");
+    pi.push_back("MacBookPro5,4    Intel Core 2 Duo P8700 @ 2.53 GHz");
+    pi.push_back("MacBookPro5,5    Intel Core 2 Duo P7550 @ 2.26 GHz");
+    pi.push_back("MacBookPro6,1    Intel Core i5-540M @ 2.53 GHz");
+    pi.push_back("MacBookPro6,2    Intel Core i5-520M @ 2.40 GHz");
+    pi.push_back("MacBookPro7,1    Intel Core 2 Duo P8600 @ 2.40 GHz");
+    pi.push_back("MacBookPro8,1    Intel Core i5-2415M @ 2.30 GHz");
+    pi.push_back("MacBookPro8,2    Intel Core i7-2675QM @ 2.20 GHz");
+    pi.push_back("MacBookPro8,3    Intel Core i7-2820QM @ 2.30 GHz");
+    pi.push_back("MacBookPro9,1    Intel Core i7-3615QM @ 2.30 GHz");
+    pi.push_back("MacBookPro9,2    Intel Core i5-3210M @ 2.50 GHz");
+    pi.push_back("MacBookPro10,1    Intel Core i7-3615QM @ 2.30 GHz");
+    pi.push_back("MacBookPro10,2    Intel Core i5-3210M @ 2.50 GHz");
+    pi.push_back("MacBookPro11,1    Intel Core i5-4258U @ 2.40 GHz");
+    pi.push_back("MacBookPro11,2    Intel Core i7-4770HQ @ 2.20 GHz");
+    pi.push_back("MacBookPro11,3    Intel Core i7-4850HQ @ 2.30 GHz");
+    pi.push_back("MacBookPro11,4    Intel Core i7-4770HQ @ 2.20 GHz");
+    pi.push_back("MacBookPro11,5    Intel Core i7-4870HQ @ 2.50 GHz");
+    pi.push_back("MacBookPro12,1    Intel Core i5-5257U @ 2.70 GHz");
+    pi.push_back("MacBookPro13,1    Intel Core i5-6360U @ 2.00 GHz");
+    pi.push_back("MacBookPro13,2    Intel Core i7-6567U @ 3.30 GHz");
+    pi.push_back("MacBookPro13,3    Intel Core i7-6700HQ @ 2.60 GHz");
+    pi.push_back("MacBookPro14,1    Intel Core i5-7360U @ 2.30 GHz");
+    pi.push_back("MacBookPro14,2    Intel Core i5-7267U @ 3.10 GHz");
+    pi.push_back("MacBookPro14,3    Intel Core i7-7700HQ @ 2.80 GHz");
+    pi.push_back("MacBookPro15,1    Intel Core i7-8750H @ 2.20 GHz");
+    pi.push_back("MacBookPro15,2    Intel Core i7-8559U @ 2.70 GHz");
+    pi.push_back("MacBookPro15,3    Intel Core i7-8850H @ 2.60 GHz");
+    pi.push_back("MacBookPro15,4    Intel Core i5-8257U @ 1.40 GHz");
+    pi.push_back("MacBookPro16,1    Intel Core i7-9750H @ 2.60 GHz");
+    pi.push_back("MacBookPro16,2    Intel Core i5-1038NG7 @ 2.00 GHz");
+    pi.push_back("MacBookPro16,3    Intel Core i5-8257U @ 1.40 GHz");
+    pi.push_back("MacBookPro16,4    Intel Core i7-9750H @ 2.60 GHz");
+
+    pi.push_back("Macmini1,1    Intel Core Solo T1200 @ 1.50 GHz");
+    pi.push_back("Macmini2,1    Intel Core 2 Duo T5600 @ 1.83 GHz");
+    pi.push_back("Macmini3,1    Intel Core 2 Duo P7350 @ 2.00 GHz");
+    pi.push_back("Macmini4,1    Intel Core 2 Duo P8600 @ 2.40 GHz");
+    pi.push_back("Macmini5,1    Intel Core i5-2415M @ 2.30 GHz");
+    pi.push_back("Macmini5,2    Intel Core i5-2520M @ 2.50 GHz");
+    pi.push_back("Macmini5,3    Intel Core i7-2635QM @ 2.00 GHz");
+    pi.push_back("Macmini6,1    Intel Core i5-3210M @ 2.50 GHz");
+    pi.push_back("Macmini6,2    Intel Core i7-3615QM @ 2.30 GHz");
+    pi.push_back("Macmini7,1    Intel Core i5-4260U @ 1.40 GHz");
+    pi.push_back("Macmini8,1    Intel Core i7-8700B @ 3.20 GHz");
+
+    pi.push_back("Xserve1,1    Intel Xeon 5130 x2 @ 2.00 GHz");
+    pi.push_back("Xserve2,1    Intel Xeon E5462 x2 @ 2.80 GHz");
+    pi.push_back("Xserve3,1    Intel Xeon E5520 x2 @ 2.26 GHz");
+
+    pi.push_back("iMacPro1,1    Intel Xeon W-2140B CPU @ 3.20 GHz");
+
+    pi.push_back("iMac4,1    Intel Core Duo T2400 @ 1.83 GHz");
+    pi.push_back("iMac4,2    Intel Core Duo T2400 @ 1.83 GHz");
+    pi.push_back("iMac5,1    Intel Core 2 Duo T7200 @ 2.00 GHz");
+    pi.push_back("iMac5,2    Intel Core 2 Duo T5600 @ 1.83 GHz");
+    pi.push_back("iMac6,1    Intel Core 2 Duo T7400 @ 2.16 GHz");
+    pi.push_back("iMac7,1    Intel Core 2 Duo T7300 @ 2.00 GHz");
+    pi.push_back("iMac8,1    Intel Core 2 Duo E8435 @ 3.06 GHz");
+    pi.push_back("iMac9,1    Intel Core 2 Duo E8135 @ 2.66 GHz");
+    pi.push_back("iMac10,1    Intel Core 2 Duo E7600 @ 3.06 GHz");
+    pi.push_back("iMac11,1    Intel Core i5-750 @ 2.66 GHz");
+    pi.push_back("iMac11,2    Intel Core i3-540 @ 3.06 GHz");
+    pi.push_back("iMac11,3    Intel Core i5-760 @ 2.80 GHz");
+    pi.push_back("iMac12,1    Intel Core i5-2400S @ 2.50 GHz");
+    pi.push_back("iMac12,2    Intel Core i7-2600 @ 3.40 GHz");
+    pi.push_back("iMac13,1    Intel Core i7-3770S @ 3.10 GHz");
+    pi.push_back("iMac13,2    Intel Core i5-3470S @ 2.90 GHz");
+    pi.push_back("iMac13,3    Intel Core i5-3470S @ 2.90 GHz");
+    pi.push_back("iMac14,1    Intel Core i5-4570R @ 2.70 GHz");
+    pi.push_back("iMac14,2    Intel Core i7-4771 @ 3.50 GHz");
+    pi.push_back("iMac14,3    Intel Core i5-4570S @ 2.90 GHz");
+    pi.push_back("iMac14,4    Intel Core i5-4260U @ 1.40 GHz");
+    pi.push_back("iMac15,1    Intel Core i7-4790k @ 4.00 GHz");
+    pi.push_back("iMac16,1    Intel Core i5-5250U @ 1.60 GHz");
+    pi.push_back("iMac16,2    Intel Core i5-5675R @ 3.10 GHz");
+    pi.push_back("iMac17,1    Intel Core i5-6500 @ 3.20 GHz");
+    pi.push_back("iMac18,1    Intel Core i5-7360U @ 2.30 GHz");
+    pi.push_back("iMac18,2    Intel Core i5-7400 @ 3.00 GHz");
+    pi.push_back("iMac18,3    Intel Core i5-7600K @ 3.80 GHz");
+    pi.push_back("iMac19,1    Intel Core i9-9900K @ 3.60 GHz");
+    pi.push_back("iMac19,2    Intel Core i5-8500 @ 3.00 GHz");
+    pi.push_back("iMac20,1    Intel Core i5-10500 @ 3.10 GHz");
+    pi.push_back("iMac20,2    Intel Core i9-10910 @ 3.60 GHz");
+
+    ui->cboxSystemProductName->addItems(pi);
+
+    //获取当前Mac信息
+    QFileInfo appInfo(qApp->applicationDirPath());
+    si = new QProcess;
+#ifdef Q_OS_WIN32
+    QFile file(appInfo.filePath() + "/macserial.exe");
+    if(file.exists())
+        gs->execute(appInfo.filePath() + "/macserial.exe" , QStringList() << "-s");//阻塞
+    else
+    {
+        ui->tabPlatformInfo->removeTab(4);
+        ui->btnGenerate->setEnabled(false);
+        ui->btnSystemUUID->setEnabled(false);
+    }
+
+#endif
+
+#ifdef Q_OS_LINUX
+   gs->execute(appInfo.filePath() + "/macserial" , QStringList() << "-s");
+
+#endif
+
+#ifdef Q_OS_MAC
+    si->start(appInfo.filePath() + "/macserial" , QStringList() << "-s");
+#endif
+    connect(si , SIGNAL(finished(int)) , this , SLOT(readResultSystemInfo()));
+
 
 }
 
@@ -1580,16 +1742,137 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     //Generic
     QVariantMap mapGeneric = map["Generic"].toMap();
     ui->chkAdviseWindows->setChecked(mapGeneric["AdviseWindows"].toBool());
+
     ui->editMLB->setText(mapGeneric["MLB"].toString());
+    if(ui->editMLB_2->text().trimmed() == "")
+        ui->editMLB_2->setText(mapGeneric["MLB"].toString());
 
     QByteArray ba = mapGeneric["ROM"].toByteArray();
     QString va = ba.toHex().toUpper();
     ui->editROM->setText(va);
+    if(ui->editROM_2->text().trimmed() == "")
+        ui->editROM_2->setText(va);
 
     ui->chkSpoofVendor->setChecked(mapGeneric["SpoofVendor"].toBool());
-    ui->editSystemProductName->setText(mapGeneric["SystemProductName"].toString());
+
+    //机型
+    QString spn = mapGeneric["SystemProductName"].toString();
+    for(int i = 0; i < ui->cboxSystemProductName->count(); i++)
+    {
+        if(getSystemProductName(ui->cboxSystemProductName->itemText(i)) == spn)
+        {
+            ui->cboxSystemProductName->setCurrentIndex(i);
+
+            break;
+        }
+
+
+    }
+
+
+    if(ui->editSystemProductName->text().trimmed() == "")
+        ui->editSystemProductName->setText(mapGeneric["SystemProductName"].toString());
+    if(ui->editSystemProductName_2->text().trimmed() == "")
+        ui->editSystemProductName_2->setText(mapGeneric["SystemProductName"].toString());
+
     ui->editSystemSerialNumber->setText(mapGeneric["SystemSerialNumber"].toString());
+    if(ui->editSystemSerialNumber_data->text().trimmed() == "")
+        ui->editSystemSerialNumber_data->setText(mapGeneric["SystemSerialNumber"].toString());
+    if(ui->editSystemSerialNumber_2->text().trimmed() == "")
+        ui->editSystemSerialNumber_2->setText(mapGeneric["SystemSerialNumber"].toString());
+
     ui->editSystemUUID->setText(mapGeneric["SystemUUID"].toString());
+    if(ui->editSystemUUID_data->text().trimmed() == "")
+        ui->editSystemUUID_data->setText(mapGeneric["SystemUUID"].toString());
+    if(ui->editSystemUUID_2->text().trimmed() == "")
+        ui->editSystemUUID_2->setText(mapGeneric["SystemUUID"].toString());
+
+
+    //DataHub
+    QVariantMap mapDataHub = map["DataHub"].toMap();
+    ui->editARTFrequency->setText(mapDataHub["ARTFrequency"].toString());
+    ui->editBoardProduct->setText(mapDataHub["BoardProduct"].toString());
+    ui->editBoardRevision->setText(ByteToHexStr(mapDataHub["BoardRevision"].toByteArray()));
+    ui->editDevicePathsSupported->setText(mapDataHub["DevicePathsSupported"].toString());
+    ui->editFSBFrequency->setText(mapDataHub["FSBFrequency"].toString());
+    ui->editInitialTSC->setText(mapDataHub["InitialTSC"].toString());
+    ui->editPlatformName->setText(mapDataHub["PlatformName"].toString());
+    ui->editSmcBranch->setText(ByteToHexStr(mapDataHub["SmcBranch"].toByteArray()));
+    ui->editSmcPlatform->setText(ByteToHexStr(mapDataHub["SmcPlatform"].toByteArray()));
+    ui->editSmcRevision->setText(ByteToHexStr(mapDataHub["SmcRevision"].toByteArray()));
+    ui->editStartupPowerEvents->setText(mapDataHub["StartupPowerEvents"].toString());
+
+    ui->editSystemProductName->setText(mapDataHub["SystemProductName"].toString());
+    if(ui->cboxSystemProductName->currentText() == "")
+    {
+        for(int i = 0; i < ui->cboxSystemProductName->count(); i++)
+        {
+            if(getSystemProductName(ui->cboxSystemProductName->itemText(i)) == mapDataHub["SystemProductName"].toString())
+            {
+                ui->cboxSystemProductName->setCurrentIndex(i);
+                break;
+            }
+
+        }
+
+    }
+
+    ui->editSystemSerialNumber_data->setText(mapDataHub["SystemSerialNumber"].toString());
+    if(ui->editSystemSerialNumber->text().trimmed() == "")
+        ui->editSystemSerialNumber->setText(mapDataHub["SystemSerialNumber"].toString());
+
+    ui->editSystemUUID_data->setText(mapDataHub["SystemUUID"].toString());
+    if(ui->editSystemUUID->text().trimmed() == "")
+        ui->editSystemUUID->setText(mapDataHub["SystemUUID"].toString());
+
+    //PlatformNVRAM
+    QVariantMap mapPlatformNVRAM = map["PlatformNVRAM"].toMap();
+
+    ui->editBID->setText(mapPlatformNVRAM["BID"].toString());
+
+    ui->editMLB_2->setText(mapPlatformNVRAM["MLB"].toString());
+    if(ui->editMLB->text().trimmed() == "")
+        ui->editMLB->setText(mapPlatformNVRAM["MLB"].toString());
+
+    ui->editFirmwareFeatures->setText(ByteToHexStr(mapPlatformNVRAM["FirmwareFeatures"].toByteArray()));
+    ui->editFirmwareFeaturesMask->setText(ByteToHexStr(mapPlatformNVRAM["FirmwareFeaturesMask"].toByteArray()));
+
+    ui->editROM_2->setText(ByteToHexStr(mapPlatformNVRAM["ROM"].toByteArray()));
+    if(ui->editROM->text().trimmed() == "")
+        ui->editROM->setText(ByteToHexStr(mapPlatformNVRAM["ROM"].toByteArray()));
+
+    //SMBIOS
+    QVariantMap mapSMBIOS = map["SMBIOS"].toMap();
+
+    ui->editBIOSReleaseDate->setText(mapSMBIOS["BIOSReleaseDate"].toString());
+    ui->editBIOSVendor->setText(mapSMBIOS["BIOSVendor"].toString());
+    ui->editBIOSVersion->setText(mapSMBIOS["BIOSVersion"].toString());
+    ui->editBoardAssetTag->setText(mapSMBIOS["BoardAssetTag"].toString());
+    ui->editBoardLocationInChassis->setText(mapSMBIOS["BoardLocationInChassis"].toString());
+    ui->editBoardManufacturer->setText(mapSMBIOS["BoardManufacturer"].toString());
+    ui->editBoardProduct_2->setText(mapSMBIOS["BoardProduct"].toString());
+    ui->editBoardSerialNumber->setText(mapSMBIOS["BoardSerialNumber"].toString());
+    ui->editBoardType->setText(mapSMBIOS["BoardType"].toString());
+    ui->editBoardVersion->setText(mapSMBIOS["BoardVersion"].toString());
+    ui->editChassisAssetTag->setText(mapSMBIOS["ChassisAssetTag"].toString());
+    ui->editChassisManufacturer->setText(mapSMBIOS["ChassisManufacturer"].toString());
+    ui->editChassisSerialNumber->setText(mapSMBIOS["ChassisSerialNumber"].toString());
+    ui->editChassisType->setText(mapSMBIOS["ChassisType"].toString());
+    ui->editChassisVersion->setText(mapSMBIOS["ChassisVersion"].toString());
+    ui->editFirmwareFeatures_2->setText(ByteToHexStr(mapSMBIOS["FirmwareFeatures"].toByteArray()));
+    ui->editFirmwareFeaturesMask_2->setText(ByteToHexStr(mapSMBIOS["FirmwareFeaturesMask"].toByteArray()));
+    ui->editMemoryFormFactor->setText(mapSMBIOS["MemoryFormFactor"].toString());
+    ui->editPlatformFeature->setText(mapSMBIOS["PlatformFeature"].toString());
+    ui->editProcessorType->setText(mapSMBIOS["ProcessorType"].toString());
+    ui->editSmcVersion->setText(ByteToHexStr(mapSMBIOS["SmcVersion"].toByteArray()));
+    ui->editSystemFamily->setText(mapSMBIOS["SystemFamily"].toString());
+    ui->editSystemManufacturer->setText(mapSMBIOS["SystemManufacturer"].toString());
+    ui->editSystemProductName_2->setText(mapSMBIOS["SystemProductName"].toString());
+    ui->editSystemSKUNumber->setText(mapSMBIOS["SystemSKUNumber"].toString());
+    ui->editSystemSerialNumber_2->setText(mapSMBIOS["SystemSerialNumber"].toString());
+    ui->editSystemUUID_2->setText(mapSMBIOS["SystemUUID"].toString());
+    ui->editSystemVersion->setText(mapSMBIOS["SystemVersion"].toString());
+
 
 }
 
@@ -2334,17 +2617,86 @@ QVariantMap MainWindow::SavePlatformInfo()
     valueList["MLB"] = ui->editMLB->text();
     valueList["ROM"] = HexStrToByte(ui->editROM->text());
     valueList["SpoofVendor"] = getChkBool(ui->chkSpoofVendor);
-    valueList["SystemProductName"] = ui->editSystemProductName->text();
+    valueList["SystemProductName"] = getSystemProductName(ui->cboxSystemProductName->currentText());
     valueList["SystemSerialNumber"] = ui->editSystemSerialNumber->text();
     valueList["SystemUUID"] = ui->editSystemUUID->text();
 
     subMap["Generic"] = valueList;
+
+    //DataHub
+    valueList.clear();
+    valueList["ARTFrequency"] = ui->editARTFrequency->text().toLongLong();
+    valueList["BoardProduct"] = ui->editBoardProduct->text();
+    valueList["BoardRevision"] = HexStrToByte(ui->editBoardRevision->text());
+    valueList["DevicePathsSupported"] = ui->editDevicePathsSupported->text().toLongLong();
+    valueList["FSBFrequency"] = ui->editFSBFrequency->text().toLongLong();
+    valueList["InitialTSC"] = ui->editInitialTSC->text().toLongLong();
+    valueList["PlatformName"] = ui->editPlatformName->text();
+    valueList["SmcBranch"] = HexStrToByte(ui->editSmcBranch->text());
+    valueList["SmcPlatform"] = HexStrToByte(ui->editSmcPlatform->text());
+    valueList["SmcRevision"] = HexStrToByte(ui->editSmcRevision->text());
+    valueList["StartupPowerEvents"] = ui->editStartupPowerEvents->text().toLongLong();
+    valueList["SystemProductName"] = ui->editSystemProductName->text();
+    valueList["SystemSerialNumber"] = ui->editSystemSerialNumber_data->text();
+    valueList["SystemUUID"] = ui->editSystemUUID_data->text();
+
+    subMap["DataHub"] = valueList;
+
+
+    //PlatformNVRAM
+    valueList.clear();
+    valueList["BID"] = ui->editBID->text();
+    valueList["MLB"] = ui->editMLB_2->text();
+
+    valueList["FirmwareFeatures"] = HexStrToByte(ui->editFirmwareFeatures->text());
+    valueList["FirmwareFeaturesMask"] = HexStrToByte(ui->editFirmwareFeaturesMask->text());
+    valueList["ROM"] = HexStrToByte(ui->editROM_2->text());
+
+    subMap["PlatformNVRAM"] = valueList;
+
+    //SMBIOS
+    valueList.clear();
+    valueList["BIOSReleaseDate"] = ui->editBIOSReleaseDate->text();
+    valueList["BIOSVendor"] = ui->editBIOSVendor->text();
+    valueList["BIOSVersion"] = ui->editBIOSVersion->text();
+    valueList["BoardAssetTag"] = ui->editBoardAssetTag->text();
+    valueList["BoardLocationInChassis"] = ui->editBoardLocationInChassis->text();
+    valueList["BoardManufacturer"] = ui->editBoardManufacturer->text();
+    valueList["BoardProduct"] = ui->editBoardProduct_2->text();
+    valueList["BoardSerialNumber"] = ui->editBoardSerialNumber->text();
+    valueList["BoardType"] = ui->editBoardType->text().toLongLong();
+    valueList["BoardVersion"] = ui->editBoardVersion->text();
+    valueList["ChassisAssetTag"] = ui->editChassisAssetTag->text();
+    valueList["ChassisManufacturer"] = ui->editChassisManufacturer->text();
+    valueList["ChassisSerialNumber"] = ui->editChassisSerialNumber->text();
+    valueList["ChassisType"] = ui->editChassisType->text().toLongLong();
+    valueList["ChassisVersion"] = ui->editChassisVersion->text();
+    valueList["FirmwareFeatures"] = HexStrToByte(ui->editFirmwareFeatures_2->text());
+    valueList["FirmwareFeaturesMask"] = HexStrToByte(ui->editFirmwareFeaturesMask_2->text());
+    valueList["MemoryFormFactor"] = ui->editMemoryFormFactor->text().toLongLong();
+    valueList["PlatformFeature"] = ui->editPlatformFeature->text().toLongLong();
+    valueList["ProcessorType"] = ui->editProcessorType->text().toLongLong();
+    valueList["SmcVersion"] = HexStrToByte(ui->editSmcVersion->text());
+    valueList["SystemFamily"] = ui->editSystemFamily->text();
+    valueList["SystemManufacturer"] = ui->editSystemManufacturer->text();
+    valueList["SystemProductName"] = ui->editSystemProductName_2->text();
+    valueList["SystemSKUNumber"] = ui->editSystemSKUNumber->text();
+    valueList["SystemSerialNumber"] = ui->editSystemSerialNumber_2->text();
+    valueList["SystemUUID"] = ui->editSystemUUID_2->text();
+    valueList["SystemVersion"] = ui->editSystemVersion->text();
+
+    subMap["SMBIOS"] = valueList;
+
+
+
+
 
     subMap["Automatic"] = getChkBool(ui->chkAutomatic);
     subMap["UpdateDataHub"] = getChkBool(ui->chkUpdateDataHub);
     subMap["UpdateNVRAM"] = getChkBool(ui->chkUpdateNVRAM);
     subMap["UpdateSMBIOS"] = getChkBool(ui->chkUpdateSMBIOS);
     subMap["UpdateSMBIOSMode"] = ui->cboxUpdateSMBIOSMode->currentText();
+
 
 
     return subMap;
@@ -2732,7 +3084,7 @@ void MainWindow::on_btnQuickOpen1_clicked()
     QFile file(FileName);
     QVariantMap map = PListParser::parsePList(&file).toMap();
 
-    loadding = true;
+    loading = true;
 
     ParserACPI(map);
     ParserBooter(map);
@@ -2743,7 +3095,7 @@ void MainWindow::on_btnQuickOpen1_clicked()
     ParserPlatformInfo(map);
     ParserUEFI(map);
 
-    loadding = false;
+    loading = false;
 }
 
 void MainWindow::on_btnQuickOpen2_clicked()
@@ -2753,7 +3105,7 @@ void MainWindow::on_btnQuickOpen2_clicked()
     QFile file(FileName);
     QVariantMap map = PListParser::parsePList(&file).toMap();
 
-    loadding = true;
+    loading = true;
 
     ParserACPI(map);
     ParserBooter(map);
@@ -2764,7 +3116,7 @@ void MainWindow::on_btnQuickOpen2_clicked()
     ParserPlatformInfo(map);
     ParserUEFI(map);
 
-    loadding = false;
+    loading = false;
 
 }
 
@@ -2775,7 +3127,7 @@ void MainWindow::on_btnQuickOpen3_clicked()
     QFile file(FileName);
     QVariantMap map = PListParser::parsePList(&file).toMap();
 
-    loadding = true;
+    loading = true;
 
     ParserACPI(map);
     ParserBooter(map);
@@ -2786,7 +3138,7 @@ void MainWindow::on_btnQuickOpen3_clicked()
     ParserPlatformInfo(map);
     ParserUEFI(map);
 
-    loadding = false;
+    loading = false;
 }
 
 void MainWindow::add_item(QTableWidget *table , int total_column)
@@ -2902,9 +3254,9 @@ void MainWindow::on_btnDPDel_Add_clicked()
     if(ui->table_dp_del0->rowCount() == 0)
         return;
 
-    loadding = true;
+    loading = true;
     add_item(ui->table_dp_del , 1);
-    loadding = false;
+    loading = false;
 
     //保存数据
     write_value_ini(ui->table_dp_del0->objectName() , ui->table_dp_del , ui->table_dp_del0->currentRow());
@@ -2985,9 +3337,9 @@ void MainWindow::on_btnDPAdd_Add_clicked()
     if(ui->table_dp_add0->rowCount() == 0)
         return;
 
-    loadding = true;
+    loading = true;
     add_item(ui->table_dp_add , 3);
-    loadding = false;
+    loading = false;
 
     //保存数据
     write_ini(ui->table_dp_add0->objectName() , ui->table_dp_add , ui->table_dp_add0->currentRow());
@@ -3200,9 +3552,9 @@ void MainWindow::on_btnNVRAMAdd_Add_clicked()
     if(ui->table_nv_add0->rowCount() == 0)
         return;
 
-    loadding = true;
+    loading = true;
     add_item(ui->table_nv_add , 3);
-    loadding = false;
+    loading = false;
 
     //保存数据
     write_ini(ui->table_nv_add0->objectName() , ui->table_nv_add , ui->table_nv_add0->currentRow());
@@ -3260,9 +3612,9 @@ void MainWindow::on_btnNVRAMDel_Add_clicked()
     if(ui->table_nv_del0->rowCount() == 0)
         return;
 
-    loadding = true;
+    loading = true;
     add_item(ui->table_nv_del , 1);
-    loadding = false;
+    loading = false;
 
     //保存数据
     write_value_ini(ui->table_nv_del0->objectName() , ui->table_nv_del , ui->table_nv_del0->currentRow());
@@ -3284,9 +3636,9 @@ void MainWindow::on_btnNVRAMLS_Add_clicked()
     if(ui->table_nv_ls0->rowCount() == 0)
         return;
 
-    loadding = true;
+    loading = true;
     add_item(ui->table_nv_ls , 1);
-    loadding = false;
+    loading = false;
 
     //保存数据
     write_value_ini(ui->table_nv_ls0->objectName() , ui->table_nv_ls , ui->table_nv_ls0->currentRow());
@@ -3725,4 +4077,118 @@ void MainWindow::on_table_kernel_patch_currentCellChanged(int currentRow, int cu
     }
 
     ui->table_kernel_patch->removeCellWidget(previousRow , 13);
+}
+
+QString MainWindow::getSystemProductName(QString arg1)
+{
+    QString str;
+    for(int i = 0; i < arg1.count(); i++)
+    {
+        if(arg1.mid(i , 1) == " ")
+        {
+            str = arg1.mid(0 , i).trimmed();
+
+            break;
+
+        }
+    }
+
+    return str;
+
+}
+
+void MainWindow::on_cboxSystemProductName_currentIndexChanged(const QString &arg1)
+{
+    if(!loading && arg1 != "")
+    {
+        QFileInfo appInfo(qApp->applicationDirPath());
+        gs = new QProcess;
+
+        QString str = getSystemProductName(arg1);
+        ui->editSystemProductName->setText(str);
+        ui->editSystemProductName_2->setText(str);
+
+    #ifdef Q_OS_WIN32
+    // win
+       QFile file(appInfo.filePath() + "/macserial.exe");
+
+       gs->execute(appInfo.filePath() + "/macserial.exe" , QStringList() << "-m" << str);//阻塞
+
+    #endif
+
+    #ifdef Q_OS_LINUX
+    // linux
+       gs->execute(appInfo.filePath() + "/macserial" , QStringList() << "-m" << str);
+
+    #endif
+
+    #ifdef Q_OS_MAC
+    // mac
+        gs->start(appInfo.filePath() + "/macserial" , QStringList() << "-m" << str);
+
+    #endif
+
+        connect(gs , SIGNAL(finished(int)) , this , SLOT(readResult()));
+
+    }
+}
+
+void MainWindow::readResult()
+{
+
+    QTextEdit *textMacInfo = new QTextEdit;
+    QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
+    textMacInfo->clear();
+    QString result = gbkCodec->toUnicode(gs->readAll());
+    textMacInfo->append(result);
+
+
+    QString str = textMacInfo->document()->findBlockByNumber(0).text().trimmed();
+    QString str1, str2;
+    for(int i = 0; i < str.count(); i++)
+    {
+        if(str.mid(i , 1) == "|")
+        {
+            str1 = str.mid(0 , i).trimmed();
+            str2 = str.mid(i + 1 , str.count() - i + 1).trimmed();
+        }
+    }
+
+
+    ui->editSystemSerialNumber->setText(str1);
+    ui->editSystemSerialNumber_data->setText(str1);
+    ui->editSystemSerialNumber_2->setText(str1);
+
+    ui->editMLB->setText(str2);
+    ui->editMLB_2->setText(str2);
+
+    on_btnSystemUUID_clicked();
+
+
+}
+
+void MainWindow::readResultSystemInfo()
+{
+    ui->textMacInfo->clear();
+    QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
+    QString result = gbkCodec->toUnicode(si->readAll());
+    ui->textMacInfo->append(result);
+    //qDebug() << result;
+
+}
+
+void MainWindow::on_btnGenerate_clicked()
+{
+    on_cboxSystemProductName_currentIndexChanged(ui->cboxSystemProductName->currentText());
+}
+
+void MainWindow::on_btnSystemUUID_clicked()
+{
+    QUuid id = QUuid::createUuid();
+    QString strTemp = id.toString();
+    QString strId = strTemp.mid(1 , strTemp.count() - 2).toUpper();
+
+    ui->editSystemUUID->setText(strId);
+    ui->editSystemUUID_data->setText(strId);
+    ui->editSystemUUID_2->setText(strId);
 }
