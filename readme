@@ -6,9 +6,6 @@ OpenCore逐渐流行起来，一直想做一款开源的跨平台的oc配置文�
 
 linux下的可执行文件，暂时没法发布（目前机器上没有安装Linux），有需要的同学可自行进行编译。
 
-目前我这边的编译环境（建议使用Qt5进行编译）：
-Win10：Qt5.14.2
-Mac Big Sur beta3：Qt5.15.0
 
 特别感谢以下开源内容：
 https://github.com/reillywatson/qtplist
