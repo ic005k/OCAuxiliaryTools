@@ -95,7 +95,7 @@
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
       <property name="currentIndex">
-       <number>6</number>
+       <number>4</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -675,7 +675,7 @@
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabKernel">
           <property name="currentIndex">
-           <number>2</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -794,6 +794,58 @@
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="tab_35">
+           <attribute name="title">
+            <string>强制-Force</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_42">
+            <item row="0" column="0" colspan="3">
+             <widget class="QTableWidget" name="table_kernel_Force">
+              <property name="rowCount">
+               <number>0</number>
+              </property>
+              <property name="columnCount">
+               <number>8</number>
+              </property>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="btnKernelForce_Add">
+              <property name="text">
+               <string>增加条目-Add</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="btnKernelForce_Del">
+              <property name="text">
+               <string>删除条目-Delete</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <spacer name="horizontalSpacer_20">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>922</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
           <widget class="QWidget" name="tab_17">
            <attribute name="title">
             <string>补丁-Patch</string>
@@ -863,7 +915,7 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
+            <item row="0" column="1" colspan="3">
              <widget class="QLineEdit" name="editCpuid1Data"/>
             </item>
             <item row="1" column="0">
@@ -873,7 +925,7 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
+            <item row="1" column="1" colspan="3">
              <widget class="QLineEdit" name="editCpuid1Mask"/>
             </item>
             <item row="2" column="0">
@@ -978,6 +1030,13 @@
              <widget class="QCheckBox" name="chkThirdPartyDrives">
               <property name="text">
                <string>ThirdPartyDrives</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="3">
+             <widget class="QCheckBox" name="chkDisableLinkeditJettison">
+              <property name="text">
+               <string>DisableLinkeditJettison</string>
               </property>
              </widget>
             </item>
@@ -1277,33 +1336,60 @@
              <widget class="QLineEdit" name="editApECID"/>
             </item>
             <item row="7" column="0">
+             <widget class="QLabel" name="label_93">
+              <property name="text">
+               <string>PasswordHash</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QLineEdit" name="editPasswordHash"/>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLabel" name="label_94">
+              <property name="text">
+               <string>PasswordSalt</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1">
+             <widget class="QLineEdit" name="editPasswordSalt"/>
+            </item>
+            <item row="9" column="0">
              <widget class="QLabel" name="label_45">
               <property name="text">
                <string>SecureBootModel</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="1">
+            <item row="9" column="1">
              <widget class="QComboBox" name="cboxSecureBootModel"/>
             </item>
-            <item row="8" column="0" colspan="2">
+            <item row="10" column="0" colspan="2">
              <widget class="QCheckBox" name="chkAllowNvramReset">
               <property name="text">
                <string>AllowNvramReset-允许复位NVRAM</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="0" colspan="2">
+            <item row="11" column="0" colspan="2">
              <widget class="QCheckBox" name="chkAllowSetDefault">
               <property name="text">
                <string>AllowSetDefault-允许Ctrl+回车设置默认启动盘</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="0">
+            <item row="12" column="0">
              <widget class="QCheckBox" name="chkAuthRestart">
               <property name="text">
                <string>AuthRestart</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="0">
+             <widget class="QCheckBox" name="chkEnablePassword">
+              <property name="text">
+               <string>EnablePassword</string>
               </property>
              </widget>
             </item>

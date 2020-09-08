@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator V0.6.1-2020.08.27";
+    title = "QtOpenCoreConfigurator V0.6.1-2020.09.08";
     setWindowTitle(title);
 
     initui_acpi();
@@ -643,6 +643,46 @@ void MainWindow::initui_kernel()
     id0 = new QTableWidgetItem(tr("Kext架构\nArch"));
     ui->table_kernel_block->setHorizontalHeaderItem(5, id0);
 
+    //Force
+    ui->table_kernel_Force->setColumnCount(9);
+
+    ui->table_kernel_Force->setColumnWidth(0,250);
+    id0 = new QTableWidgetItem(tr("捆绑路径\nBundlePath"));
+    ui->table_kernel_Force->setHorizontalHeaderItem(0, id0);
+
+    ui->table_kernel_Force->setColumnWidth(1,250);
+    id0 = new QTableWidgetItem(tr("注释\nComment"));
+    ui->table_kernel_Force->setHorizontalHeaderItem(1, id0);
+
+    ui->table_kernel_Force->setColumnWidth(2,250);
+    id0 = new QTableWidgetItem(tr("二进制文件路径\nExecutablePath"));
+    ui->table_kernel_Force->setHorizontalHeaderItem(2, id0);
+
+    ui->table_kernel_Force->setColumnWidth(3,250);
+    id0 = new QTableWidgetItem(tr("标识符\nIdentifier"));
+    ui->table_kernel_Force->setHorizontalHeaderItem(3, id0);
+
+
+    ui->table_kernel_Force->setColumnWidth(0,250);
+    id0 = new QTableWidgetItem(tr("Plist路径\nPlistPath"));
+    ui->table_kernel_Force->setHorizontalHeaderItem(4, id0);
+
+    ui->table_kernel_Force->setColumnWidth(0,250);
+    id0 = new QTableWidgetItem(tr("最小内核\nMinKernel"));
+    ui->table_kernel_Force->setHorizontalHeaderItem(5, id0);
+
+    ui->table_kernel_Force->setColumnWidth(0,250);
+    id0 = new QTableWidgetItem(tr("最大内核\nMaxKernel"));
+    ui->table_kernel_Force->setHorizontalHeaderItem(6, id0);
+
+    ui->table_kernel_Force->setColumnWidth(0,250);
+    id0 = new QTableWidgetItem(tr("启用\nEnabled"));
+    ui->table_kernel_Force->setHorizontalHeaderItem(7, id0);
+
+    ui->table_kernel_Force->setColumnWidth(0,250);
+    id0 = new QTableWidgetItem(tr("Kext架构\nArch"));
+    ui->table_kernel_Force->setHorizontalHeaderItem(8, id0);
+
     //Patch
     ui->table_kernel_patch->setColumnCount(14);
     ui->table_kernel_patch->setColumnWidth(0,300);
@@ -791,6 +831,50 @@ void MainWindow::ParserKernel(QVariantMap map)
 
     }
 
+    //分析"Force"
+    QVariantList map_Force = map["Force"].toList();
+
+    ui->table_kernel_Force->setRowCount(map_Force.count());//设置行的列数
+    for(int i = 0;i < map_Force.count(); i++)
+    {
+        QVariantMap map3 = map_Force.at(i).toMap();
+
+        QTableWidgetItem *newItem1;
+
+        newItem1 = new QTableWidgetItem(map3["BundlePath"].toString());
+        ui->table_kernel_Force->setItem(i, 0, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["Comment"].toString());
+        ui->table_kernel_Force->setItem(i, 1, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["ExecutablePath"].toString());
+        ui->table_kernel_Force->setItem(i, 2, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["Identifier"].toString());
+        ui->table_kernel_Force->setItem(i, 3, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["PlistPath"].toString());
+        ui->table_kernel_Force->setItem(i, 4, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_kernel_Force->setItem(i, 5, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_kernel_Force->setItem(i, 6, newItem1);
+
+        init_enabled_data(ui->table_kernel_Force , i , 7 , map3["Enabled"].toString());
+
+        newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_kernel_Force->setItem(i, 8, newItem1);
+
+
+
+    }
+
+
     //Patch
     QVariantList map_patch = map["Patch"].toList();
 
@@ -884,6 +968,7 @@ void MainWindow::ParserKernel(QVariantMap map)
     ui->chkPowerTimeoutKernelPanic->setChecked(map_quirks["PowerTimeoutKernelPanic"].toBool());
     ui->chkThirdPartyDrives->setChecked(map_quirks["ThirdPartyDrives"].toBool());
     ui->chkXhciPortLimit->setChecked(map_quirks["XhciPortLimit"].toBool());
+    ui->chkDisableLinkeditJettison->setChecked(map_quirks["DisableLinkeditJettison"].toBool());
 
     //Scheme
     QVariantMap map_Scheme = map["Scheme"].toMap();
@@ -1084,6 +1169,10 @@ void MainWindow::ParserMisc(QVariantMap map)
     if(hm == "")
         hm = "Disabled";
     ui->cboxSecureBootModel->setCurrentText(hm);
+
+    ui->chkEnablePassword->setChecked(map_security["EnablePassword"].toBool());
+    ui->editPasswordHash->setText(ByteToHexStr(map_security["PasswordHash"].toByteArray()));
+    ui->editPasswordSalt->setText(ByteToHexStr(map_security["PasswordSalt"].toByteArray()));
 
 
     //BlessOverride(数组)
@@ -2349,6 +2438,25 @@ QVariantMap MainWindow::SaveKernel()
         subMap["Block"] = dictList;
     }
 
+    //Force
+    dictList.clear();
+    valueList.clear();
+    for(int i = 0; i < ui->table_kernel_Force->rowCount(); i ++)
+    {
+        valueList["BundlePath"] = ui->table_kernel_Force->item(i , 0)->text();
+        valueList["Comment"] = ui->table_kernel_Force->item(i , 1)->text();
+        valueList["ExecutablePath"] = ui->table_kernel_Force->item(i , 2)->text();
+        valueList["Identifier"] = ui->table_kernel_Force->item(i , 3)->text();
+        valueList["PlistPath"] = ui->table_kernel_Force->item(i , 4)->text();
+        valueList["MinKernel"] = ui->table_kernel_Force->item(i , 5)->text();
+        valueList["MaxKernel"] = ui->table_kernel_Force->item(i , 6)->text();
+        valueList["Enabled"] = getBool(ui->table_kernel_Force , i , 7);
+        valueList["Arch"] = ui->table_kernel_Force->item(i , 8)->text();
+
+        dictList.append(valueList);
+        subMap["Force"] = dictList;
+    }
+
     //Patch
     dictList.clear();
     valueList.clear();
@@ -2396,6 +2504,7 @@ QVariantMap MainWindow::SaveKernel()
     mapQuirks["PowerTimeoutKernelPanic"] = getChkBool(ui->chkPowerTimeoutKernelPanic);
     mapQuirks["ThirdPartyDrives"] = getChkBool(ui->chkThirdPartyDrives);
     mapQuirks["XhciPortLimit"] = getChkBool(ui->chkXhciPortLimit);
+    mapQuirks["DisableLinkeditJettison"] = getChkBool(ui->chkDisableLinkeditJettison);
 
     subMap["Quirks"] = mapQuirks;
 
@@ -2475,10 +2584,13 @@ QVariantMap MainWindow::SaveMisc()
     valueList["AllowNvramReset"] = getChkBool(ui->chkAllowNvramReset);
     valueList["AllowSetDefault"] = getChkBool(ui->chkAllowSetDefault);
     valueList["AuthRestart"] = getChkBool(ui->chkAuthRestart);
+    valueList["EnablePassword"] = getChkBool(ui->chkEnablePassword);
 
     valueList["BootProtect"] = ui->cboxBootProtect->currentText();
     valueList["DmgLoading"] = ui->cboxDmgLoading->currentText();
     valueList["Vault"] = ui->cboxVault->currentText();
+    valueList["PasswordHash"] = HexStrToByte(ui->editPasswordHash->text());
+    valueList["PasswordSalt"] = HexStrToByte(ui->editPasswordSalt->text());
 
     valueList["ExposeSensitiveData"] = ui->editExposeSensitiveData->text().toLongLong();
 
@@ -3962,6 +4074,11 @@ void MainWindow::arch_addChange()
     ui->table_kernel_add->item(c_row , 7)->setText(cboxArch->currentText());
 }
 
+void MainWindow::arch_ForceChange()
+{
+    ui->table_kernel_Force->item(c_row , 8)->setText(cboxArch->currentText());
+}
+
 void MainWindow::arch_blockChange()
 {
     ui->table_kernel_block->item(c_row , 5)->setText(cboxArch->currentText());
@@ -4191,4 +4308,62 @@ void MainWindow::on_btnSystemUUID_clicked()
     ui->editSystemUUID->setText(strId);
     ui->editSystemUUID_data->setText(strId);
     ui->editSystemUUID_2->setText(strId);
+}
+
+void MainWindow::on_table_kernel_Force_cellClicked(int row, int column)
+{
+    enabled_change(ui->table_kernel_Force , row , column , 7);
+
+    if(column == 8)
+    {
+
+        cboxArch = new QComboBox;
+        cboxArch->addItem("Any");
+        cboxArch->addItem("i386");
+        cboxArch->addItem("x86_64");
+        cboxArch->addItem("");
+
+        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this, SLOT(arch_ForceChange()));
+        c_row = row;
+
+        ui->table_kernel_Force->setCellWidget(row , column , cboxArch);
+        cboxArch->setCurrentText(ui->table_kernel_Force->item(row , 8)->text());
+
+    }
+}
+
+void MainWindow::on_table_kernel_Force_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    if(currentRow == 0 && currentColumn == 0 && previousColumn == 0)
+    {
+
+    }
+
+    ui->table_kernel_Force->removeCellWidget(previousRow , 8);
+}
+
+void MainWindow::on_btnKernelForce_Add_clicked()
+{
+    QTableWidget *t = new QTableWidget;
+    t = ui->table_kernel_Force;
+    int row = t->rowCount() + 1;
+
+    t->setRowCount(row);
+    t->setItem(row - 1 , 0 , new QTableWidgetItem(""));
+    t->setItem(row - 1 , 1 , new QTableWidgetItem(""));
+    t->setItem(row - 1 , 2 , new QTableWidgetItem(""));
+    t->setItem(row - 1 , 3 , new QTableWidgetItem(""));
+    t->setItem(row - 1 , 4 , new QTableWidgetItem("Contents/Info.plist"));
+    t->setItem(row - 1 , 5 , new QTableWidgetItem(""));
+    t->setItem(row - 1 , 6 , new QTableWidgetItem(""));
+    init_enabled_data(t , row - 1 , 7 , "false");
+
+    QTableWidgetItem *newItem1 = new QTableWidgetItem("Any");
+    newItem1->setTextAlignment(Qt::AlignCenter);
+    t->setItem(row - 1 , 8 , newItem1);
+}
+
+void MainWindow::on_btnKernelForce_Del_clicked()
+{
+    del_item(ui->table_kernel_Force);
 }

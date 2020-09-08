@@ -91,6 +91,7 @@ private slots:
     void readResult();
     void readResultSystemInfo();
     void arch_addChange();
+    void arch_ForceChange();
     void arch_blockChange();
     void arch_patchChange();
 
@@ -271,6 +272,14 @@ private slots:
     void on_btnGenerate_clicked();
 
     void on_btnSystemUUID_clicked();
+
+    void on_table_kernel_Force_cellClicked(int row, int column);
+
+    void on_table_kernel_Force_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_btnKernelForce_Add_clicked();
+
+    void on_btnKernelForce_Del_clicked();
 
 private:
     Ui::MainWindow *ui;
