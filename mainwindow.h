@@ -11,6 +11,14 @@
 #include <QTextCodec>
 #include <QTextBlock>
 #include <QUuid>
+#include <QMimeData>
+#include <QSaveFile>
+
+#ifdef Q_OS_WIN32
+#include <stdio.h>
+#include<windows.h>
+#include<tchar.h>
+#endif
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -84,12 +92,17 @@ public:
 
 public slots:
 
+protected:
+    void dragEnterEvent (QDragEnterEvent *e);
+    void dropEvent (QDropEvent *e);
+
 
 private slots:
     void dataClassChange_dp();
     void dataClassChange_nv();
     void readResult();
     void readResultSystemInfo();
+    void readResultDiskInfo();
     void arch_addChange();
     void arch_ForceChange();
     void arch_blockChange();
@@ -98,8 +111,6 @@ private slots:
     void on_btnOpen_clicked();
 
     void on_btnTestWrite_clicked();
-
-    void on_btnTestRead_clicked();
 
     void on_btnParse_clicked();
 
@@ -281,11 +292,17 @@ private slots:
 
     void on_btnKernelForce_Del_clicked();
 
+    void on_btnMountEsp_clicked();
+
 private:
     Ui::MainWindow *ui;
     void reg_win();
+    void mount_esp();
+    void mount_esp_mac(QString strEfiDisk);
+    void runAdmin(QString file, QString arg);
     QString getSystemProductName(QString arg1);
     QProcess *gs;
     QProcess *si;
+    QProcess *di;
 };
 #endif // MAINWINDOW_H

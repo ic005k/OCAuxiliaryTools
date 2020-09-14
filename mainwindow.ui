@@ -51,9 +51,9 @@
      </widget>
     </item>
     <item row="0" column="4">
-     <widget class="QPushButton" name="btnTestRead">
+     <widget class="QPushButton" name="btnMountEsp">
       <property name="text">
-       <string>测试读取</string>
+       <string>挂载ESP-MountESP</string>
       </property>
      </widget>
     </item>
@@ -95,7 +95,7 @@
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
       <property name="currentIndex">
-       <number>4</number>
+       <number>8</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -1816,7 +1816,7 @@
         <item row="1" column="0" colspan="5">
          <widget class="QTabWidget" name="tabPlatformInfo">
           <property name="currentIndex">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3015,6 +3015,16 @@
         </item>
         <item row="2" column="5">
          <widget class="QLineEdit" name="editTscSyncTimeout"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_36">
+       <attribute name="title">
+        <string>磁盘信息-DiskInfo</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_43">
+        <item row="0" column="0">
+         <widget class="QTextEdit" name="textDiskInfo"/>
         </item>
        </layout>
       </widget>

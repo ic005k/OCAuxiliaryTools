@@ -21,17 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator V0.6.1-2020.09.08";
+    title = "QtOpenCoreConfigurator V0.6.1-2020.09.13";
     setWindowTitle(title);
-
-    initui_acpi();
-    initui_booter();
-    initui_dp();
-    initui_kernel();
-    initui_misc();
-    initui_nvram();
-    initui_PlatformInfo();
-    initui_UEFI();
 
     ui->tabTotal->setCurrentIndex(0);
     ui->tabACPI->setCurrentIndex(0);
@@ -43,6 +34,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabPlatformInfo->setCurrentIndex(0);
     ui->tabUEFI->setCurrentIndex(0);
 
+    initui_booter();
+    initui_dp();
+    initui_kernel();
+    initui_misc();
+    initui_nvram();
+    initui_PlatformInfo();
+    initui_UEFI();
+    initui_acpi();
+
     //主菜单
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen_clicked);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::on_btnSave_clicked);
@@ -51,6 +51,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->btnSave->setEnabled(false);
     ui->actionSave->setEnabled(false);
+
+    //接受文件拖放打开
+    this->setAcceptDrops(true);
+
+    ui->tabTotal->removeTab(8);
 
 #ifdef Q_OS_WIN32
 
@@ -143,10 +148,6 @@ void MainWindow::on_btnTestWrite_clicked()
 
 }
 
-void MainWindow::on_btnTestRead_clicked()
-{
-
-}
 
 void MainWindow::on_btnParse_clicked()
 {
@@ -3984,7 +3985,6 @@ void MainWindow::test(bool test)
     if(test)
     {
         ui->btnTestWrite->setVisible(1);
-        ui->btnTestRead->setVisible(1);
 
         ui->btnParse->setVisible(1);
         ui->btnSerialize->setVisible(1);
@@ -3997,7 +3997,6 @@ void MainWindow::test(bool test)
     else
     {
         ui->btnTestWrite->setVisible(0);
-        ui->btnTestRead->setVisible(0);
 
         ui->btnParse->setVisible(0);
         ui->btnSerialize->setVisible(0);
@@ -4366,4 +4365,145 @@ void MainWindow::on_btnKernelForce_Add_clicked()
 void MainWindow::on_btnKernelForce_Del_clicked()
 {
     del_item(ui->table_kernel_Force);
+}
+
+void MainWindow::dragEnterEvent (QDragEnterEvent *e)
+{
+
+    if (e->mimeData()->hasFormat("text/uri-list")) {
+        e->acceptProposedAction();
+    }
+}
+
+void MainWindow::dropEvent (QDropEvent *e)
+{
+    QList<QUrl> urls = e->mimeData()->urls();
+    if (urls.isEmpty()) {
+        return;
+    }
+
+    QString fileName = urls.first().toLocalFile();
+    if (fileName.isEmpty()) {
+        return;
+    }
+
+    PlistFileName = fileName;
+    openFile(fileName);
+
+}
+
+void MainWindow::runAdmin(QString file, QString arg)
+{
+#ifdef Q_OS_WIN32
+    QString exePath = file;
+    WCHAR exePathArray[1024] = {0};
+    exePath.toWCharArray(exePathArray);
+
+    QString command = arg;//"-mount:*";//带参数运行
+    WCHAR commandArr[1024] = {0};
+    command.toWCharArray(commandArr);
+    HINSTANCE hNewExe = ShellExecute(NULL, L"runas", exePathArray, commandArr, NULL, SW_SHOWMAXIMIZED);//SW_NORMAL SW_SHOWMAXIMIZED
+    if(hNewExe){};
+
+#endif
+
+}
+
+void MainWindow::mount_esp()
+{
+
+
+#ifdef Q_OS_WIN32
+    //di = new QProcess;
+    //di->execute("mountvol.exe", QStringList() << "x:" << "/s");//阻塞
+
+    QString exec = QCoreApplication::applicationDirPath() + "/FindESP.exe";
+
+    //runAdmin(exec, "-unmount:*");
+    runAdmin(exec, "-mount:*");//可选参数-Updater
+
+    QString exec2 = QCoreApplication::applicationDirPath() + "/winfile.exe";
+
+    runAdmin(exec2, NULL);//此时参数为空
+
+#endif
+
+#ifdef Q_OS_LINUX
+
+
+#endif
+
+#ifdef Q_OS_MAC
+    di = new QProcess;
+    di->start("diskutil" , QStringList() << "list");
+    connect(di , SIGNAL(finished(int)) , this , SLOT(readResultDiskInfo()));
+
+#endif
+
+
+}
+
+void MainWindow::readResultDiskInfo()
+{
+    ui->textDiskInfo->clear();
+    ui->textDiskInfo->setReadOnly(true);
+    QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
+    QString result = gbkCodec->toUnicode(di->readAll());
+    ui->textDiskInfo->append(result);
+
+    QString str0, str1, strEfiDisk;
+    int count = ui->textDiskInfo->document()->lineCount();
+    for(int i = 0; i < count; i++)
+    {
+        str0 = ui->textDiskInfo->document()->findBlockByNumber(i).text().trimmed();
+        str1 = str0.mid(3, str0.count() - 3).trimmed();
+
+        if(str1.mid(0, 3).toUpper() == "EFI")
+        {
+
+            strEfiDisk = str1.mid(str1.count() - 7, 7);
+            mount_esp_mac(strEfiDisk);
+
+        }
+
+        //qDebug() << strEfiDisk << str1;
+    }
+
+}
+
+void MainWindow::mount_esp_mac(QString strEfiDisk)
+{
+    QString str5 = "diskutil mount " + strEfiDisk;
+    QString str_ex = "do shell script " + QString::fromLatin1("\"%1\"").arg(str5) + " with administrator privileges";
+
+
+    QString fileName = QDir::homePath() + "/qtocc.applescript";
+    QFile fi(fileName);
+    if(fi.exists())
+        fi.remove();
+
+    QSaveFile file(fileName);
+    QString errorMessage;
+    if (file.open(QFile::WriteOnly | QFile::Text)) {
+
+        QTextStream out(&file);
+        out << str_ex;
+        if (!file.commit()) {
+            errorMessage = tr("Cannot write file %1:\n%2.")
+                           .arg(QDir::toNativeSeparators(fileName), file.errorString());
+        }
+    } else {
+        errorMessage = tr("Cannot open file %1 for writing:\n%2.")
+                       .arg(QDir::toNativeSeparators(fileName), file.errorString());
+    }
+
+
+    QProcess *dm = new QProcess;
+    dm->execute("osascript", QStringList() << fileName);
+}
+
+
+void MainWindow::on_btnMountEsp_clicked()
+{
+    mount_esp();
 }
