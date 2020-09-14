@@ -7,8 +7,10 @@ OpenCore逐渐流行起来，一直想做一款开源的跨平台的oc配置文�
 linux下的可执行文件，暂时没法发布（目前机器上没有安装Linux），有需要的同学可自行进行编译。
 
 
-特别感谢以下开源内容：
+QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
 https://github.com/reillywatson/qtplist
+https://github.com/bluer007/FindESP
+https://github.com/microsoft/winfile
 
 
 
