@@ -14,8 +14,8 @@
    <string>OpenCore配置器</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>Resources/images/icon.png</normaloff>Resources/images/icon.png</iconset>
+   <iconset resource="qtocc.qrc">
+    <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -3090,6 +3090,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="qtocc.qrc"/>
+ </resources>
  <connections/>
 </ui>

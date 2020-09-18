@@ -64,10 +64,12 @@ MainWindow::MainWindow(QWidget *parent)
 #endif
 
 #ifdef Q_OS_LINUX
+   ui->btnMountEsp->setEnabled(false);
 
 #endif
 
 #ifdef Q_OS_MAC
+
 
 #endif
 
@@ -1797,6 +1799,9 @@ void MainWindow::initui_PlatformInfo()
 
 #ifdef Q_OS_LINUX
    gs->execute(appInfo.filePath() + "/macserial" , QStringList() << "-s");
+   /*暂时屏蔽*/
+   ui->tabPlatformInfo->removeTab(4);
+   ui->btnGenerate->setEnabled(false);
 
 #endif
 
