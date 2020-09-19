@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator V0.6.1-2020.09.13";
+    title = "QtOpenCoreConfigurator V0.6.2-2020.09.18";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -1400,6 +1400,8 @@ void MainWindow::write_ini(QString table_name , QTableWidget *mytable, int i)
 
     //记录总数
     Reg.setValue("total" , mytable->rowCount());
+
+    IniFile.push_back(plistPath);
 }
 
 void MainWindow::read_ini(QString table_name , QTableWidget *mytable , int i)
@@ -1571,6 +1573,8 @@ void MainWindow::write_value_ini(QString tablename , QTableWidget *subtable , in
 
         //记录总数
         Reg.setValue("total" , subtable->rowCount());
+
+        IniFile.push_back(plistPath);
 
 }
 
@@ -4511,4 +4515,21 @@ void MainWindow::mount_esp_mac(QString strEfiDisk)
 void MainWindow::on_btnMountEsp_clicked()
 {
     mount_esp();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if(event){};
+
+    for(int i = 0; i < IniFile.count(); i++)
+    {
+        QFile file(IniFile.at(i));
+        //qDebug() << IniFile.at(i);
+        if(file.exists())
+        {
+            file.remove();
+            i = -1;
+        }
+    }
+
 }

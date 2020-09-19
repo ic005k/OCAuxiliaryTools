@@ -95,6 +95,7 @@ public slots:
 protected:
     void dragEnterEvent (QDragEnterEvent *e);
     void dropEvent (QDropEvent *e);
+    void closeEvent(QCloseEvent *event);
 
 
 private slots:
@@ -304,5 +305,6 @@ private:
     QProcess *gs;
     QProcess *si;
     QProcess *di;
+    QVector<QString> IniFile;
 };
 #endif // MAINWINDOW_H

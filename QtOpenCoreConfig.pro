@@ -10,7 +10,11 @@ CONFIG += c++11
 
 unix:!macx:{
 
+    QMAKE_RPATHDIR=$ORIGIN
     QMAKE_LFLAGS += -no-pie
+    QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN/lib\'"
+    QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\'"
+    QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN/platforms\'"
 }
 
 # The following define makes your compiler emit warnings if you use
