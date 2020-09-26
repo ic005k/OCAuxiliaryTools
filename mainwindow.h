@@ -87,7 +87,10 @@ public:
 
     QComboBox *cboxDataClass;
     int c_row = 0;
+
     QComboBox *cboxArch;
+
+    QComboBox *cboxReservedMemoryType;
 
 
 public slots:
@@ -108,6 +111,7 @@ private slots:
     void arch_ForceChange();
     void arch_blockChange();
     void arch_patchChange();
+    void ReservedMemoryTypeChange();
 
     void on_btnOpen_clicked();
 
@@ -294,6 +298,8 @@ private slots:
     void on_btnKernelForce_Del_clicked();
 
     void on_btnMountEsp_clicked();
+
+    void on_table_uefi_ReservedMemory_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
 private:
     Ui::MainWindow *ui;

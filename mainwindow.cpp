@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator V0.6.2-2020.09.18";
+    title = "QtOpenCoreConfigurator V0.6.2-2020.09.25";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -2009,7 +2009,7 @@ void MainWindow::initui_UEFI()
     id0 = new QTableWidgetItem(tr("地址\nAddress"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(0, id0);
 
-    ui->table_uefi_ReservedMemory->setColumnWidth(1,360);
+    ui->table_uefi_ReservedMemory->setColumnWidth(1,320);
     id0 = new QTableWidgetItem(tr("注释\nComment"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(1, id0);
 
@@ -2017,8 +2017,13 @@ void MainWindow::initui_UEFI()
     id0 = new QTableWidgetItem(tr("大小\nSize"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(2, id0);
 
-    id0 = new QTableWidgetItem(tr("启用\nEnabled"));
+    ui->table_uefi_ReservedMemory->setColumnWidth(3,210);
+    id0 = new QTableWidgetItem(tr("类型\nType"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(3, id0);
+
+    id0 = new QTableWidgetItem(tr("启用\nEnabled"));
+    ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(4, id0);
+
 
 
 }
@@ -2152,9 +2157,10 @@ void MainWindow::ParserUEFI(QVariantMap map)
         newItem1 = new QTableWidgetItem(map_sub["Size"].toString());
         ui->table_uefi_ReservedMemory->setItem(i, 2, newItem1);
 
-        init_enabled_data(ui->table_uefi_ReservedMemory , i , 3 , map_sub["Enabled"].toString());
+        newItem1 = new QTableWidgetItem(map_sub["Type"].toString());
+        ui->table_uefi_ReservedMemory->setItem(i, 3, newItem1);
 
-
+        init_enabled_data(ui->table_uefi_ReservedMemory , i , 4 , map_sub["Enabled"].toString());
 
 
     }
@@ -2941,7 +2947,8 @@ QVariantMap MainWindow::SaveUEFI()
         valueList["Address"] = ui->table_uefi_ReservedMemory->item(i , 0)->text().toLongLong();
         valueList["Comment"] = ui->table_uefi_ReservedMemory->item(i , 1)->text();
         valueList["Size"] = ui->table_uefi_ReservedMemory->item(i , 2)->text().toLongLong();
-        valueList["Enabled"] = getBool(ui->table_uefi_ReservedMemory , i ,3);
+        valueList["Type"] = ui->table_uefi_ReservedMemory->item(i , 3)->text();
+        valueList["Enabled"] = getBool(ui->table_uefi_ReservedMemory , i ,4);
 
         arrayList.append(valueList);
     }
@@ -3177,7 +3184,40 @@ void MainWindow::on_tableTools_cellClicked(int row, int column)
 
 void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
 {
-    enabled_change(ui->table_uefi_ReservedMemory , row , column , 3);
+    enabled_change(ui->table_uefi_ReservedMemory , row , column , 4);
+
+    if(column == 3)
+    {
+
+        cboxReservedMemoryType = new QComboBox(this);
+        QStringList sl_type;
+        sl_type.append("");
+        sl_type.append("Reserved");
+        sl_type.append("LoaderCode");
+        sl_type.append("LoaderData");
+        sl_type.append("BootServiceCode");
+        sl_type.append("BootServiceData");
+        sl_type.append("RuntimeCode");
+        sl_type.append("RuntimeData");
+        sl_type.append("Available");
+        sl_type.append("Persistent");
+        sl_type.append("UnusableMemory");
+        sl_type.append("ACPIReclaimMemory");
+        sl_type.append("ACPIMemoryNVS");
+        sl_type.append("MemoryMappedIO");
+        sl_type.append("MemoryMappedIOPortSpace");
+        sl_type.append("PalCode");
+        cboxReservedMemoryType->addItems(sl_type);
+
+        connect(cboxReservedMemoryType, SIGNAL(currentIndexChanged(QString)), this, SLOT(ReservedMemoryTypeChange()));
+        c_row = row;
+
+        ui->table_uefi_ReservedMemory->setCellWidget(row , column , cboxReservedMemoryType);
+        cboxReservedMemoryType->setCurrentText(ui->table_uefi_ReservedMemory->item(row , 3)->text());
+
+    }
+
+
 }
 
 
@@ -3847,8 +3887,8 @@ void MainWindow::on_btnNVRAMLS_Del_clicked()
 
 void MainWindow::on_btnUEFIRM_Add_clicked()
 {
-    add_item(ui->table_uefi_ReservedMemory , 3);
-    init_enabled_data(ui->table_uefi_ReservedMemory , ui->table_uefi_ReservedMemory->rowCount() - 1 , 3 , "true");
+    add_item(ui->table_uefi_ReservedMemory , 4);
+    init_enabled_data(ui->table_uefi_ReservedMemory , ui->table_uefi_ReservedMemory->rowCount() - 1 , 4 , "true");
 }
 
 void MainWindow::on_btnUEFIRM_Del_clicked()
@@ -4095,6 +4135,11 @@ void MainWindow::arch_blockChange()
 void MainWindow::arch_patchChange()
 {
     ui->table_kernel_patch->item(c_row , 13)->setText(cboxArch->currentText());
+}
+
+void MainWindow::ReservedMemoryTypeChange()
+{
+    ui->table_uefi_ReservedMemory->item(c_row , 3)->setText(cboxReservedMemoryType->currentText());
 }
 
 void MainWindow::dataClassChange_dp()
@@ -4532,4 +4577,14 @@ void MainWindow::closeEvent(QCloseEvent *event)
         }
     }
 
+}
+
+void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    if(currentRow == 0 && currentColumn == 0 && previousColumn == 0)
+    {
+
+    }
+
+    ui->table_uefi_ReservedMemory->removeCellWidget(previousRow , 3);
 }

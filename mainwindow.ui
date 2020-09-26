@@ -95,7 +95,7 @@
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
       <property name="currentIndex">
-       <number>8</number>
+       <number>7</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -2423,7 +2423,7 @@
         <item row="0" column="0" colspan="6">
          <widget class="QTabWidget" name="tabUEFI">
           <property name="currentIndex">
-           <number>5</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2922,8 +2922,9 @@
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="table_uefi_ReservedMemory">
               <property name="columnCount">
-               <number>4</number>
+               <number>5</number>
               </property>
+              <column/>
               <column/>
               <column/>
               <column/>
