@@ -13,6 +13,9 @@
 #include <QUuid>
 #include <QMimeData>
 #include <QSaveFile>
+#include <QTranslator>
+#include <QDesktopServices>
+#include <QToolTip>
 
 #ifdef Q_OS_WIN32
 #include <stdio.h>
@@ -31,6 +34,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
     void ParserACPI(QVariantMap map);//分析ACPI
     void ParserBooter(QVariantMap map);
     void ParserDP(QVariantMap map);
@@ -84,6 +88,9 @@ public:
     void test(bool test);//用于测试按钮的可视
 
     void about();
+
+    void loadLocal();
+    bool zh_cn = false;
 
     QComboBox *cboxDataClass;
     int c_row = 0;
@@ -176,8 +183,6 @@ private slots:
     void on_btnQuickOpen1_clicked();
 
     void on_btnQuickOpen2_clicked();
-
-    void on_btnQuickOpen3_clicked();
 
     void on_btnACPIAdd_Del_clicked();
 
@@ -300,6 +305,8 @@ private slots:
     void on_btnMountEsp_clicked();
 
     void on_table_uefi_ReservedMemory_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_btnHelp_clicked();
 
 private:
     Ui::MainWindow *ui;
