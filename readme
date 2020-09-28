@@ -4,9 +4,6 @@ OpenCore逐渐流行起来，一直想做一款开源的跨平台的oc配置文�
 
 该软件是根据oc最新的开发版提供的Sample.plist为蓝本，使用该软件前，建议将oc升级到最新版或最新的开发版。
 
-建议Linux用户在程序文件目录内执行 sudo cp lib* /usr/lib 将库文件拷贝到/usr/lib下面。
-
-
 QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
 https://github.com/reillywatson/qtplist
 https://github.com/bluer007/FindESP
