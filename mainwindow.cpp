@@ -93,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
     QToolTip::setPalette(palette);
     QToolTip::setFont(font);  //设置ToolTip字体
 
+
 }
 
 MainWindow::~MainWindow()
@@ -642,6 +643,7 @@ void MainWindow::ParserDP(QVariantMap map)
 void MainWindow::initui_kernel()
 {
 
+
     QTableWidgetItem *id0;
     //Add
     ui->table_kernel_add->setColumnCount(8);
@@ -677,6 +679,7 @@ void MainWindow::initui_kernel()
     ui->table_kernel_add->setColumnWidth(0,250);
     id0 = new QTableWidgetItem("Arch");
     ui->table_kernel_add->setHorizontalHeaderItem(7, id0);
+
 
     //Block
     ui->table_kernel_block->setColumnCount(6);
@@ -4671,5 +4674,4 @@ void MainWindow::on_btnHelp_clicked()
 
     QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
 
-    //setWindowTitle(appInfo.filePath());
 }
