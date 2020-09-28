@@ -1036,12 +1036,14 @@ void MainWindow::ParserKernel(QVariantMap map)
     ui->chkFuzzyMatch->setChecked(map_Scheme["FuzzyMatch"].toBool());
 
     QString hm = map_Scheme["KernelArch"].toString();
-    if(hm.trimmed() == "Auto")
+    /*if(hm.trimmed() == "Auto")
         ui->cboxKernelArch->setCurrentIndex(0);
     if(hm.trimmed() == "i386")
         ui->cboxKernelArch->setCurrentIndex(1);
     if(hm.trimmed() == "x86_64")
-        ui->cboxKernelArch->setCurrentIndex(2);
+        ui->cboxKernelArch->setCurrentIndex(2);*/
+    ui->cboxKernelArch->setCurrentText(hm.trimmed());
+
 
     hm = map_Scheme["KernelCache"].toString();
     if(hm.trimmed() == "Auto")
