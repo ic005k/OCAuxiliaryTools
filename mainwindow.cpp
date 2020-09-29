@@ -17,14 +17,14 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
 
     loadLocal();
 
-
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.2-2020.09.28";
+    title = "QtOpenCoreConfigurator   V0.6.2-2020.09.29";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabPlatformInfo->setCurrentIndex(0);
     ui->tabUEFI->setCurrentIndex(0);
 
+    init_tr_str();
+
     initui_booter();
     initui_dp();
     initui_kernel();
@@ -45,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     initui_PlatformInfo();
     initui_UEFI();
     initui_acpi();
+
 
     //主菜单
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen_clicked);
@@ -83,7 +86,7 @@ MainWindow::MainWindow(QWidget *parent)
 #endif
 
     QFileInfo appInfo(qApp->applicationFilePath());
-    ui->statusbar->showMessage(tr("最后的编译时间(Last modified): ") + appInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss"));
+    ui->statusbar->showMessage(tr("Last modified): ") + appInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss"));
 
 
     //设置QToolTip颜色
@@ -92,7 +95,6 @@ MainWindow::MainWindow(QWidget *parent)
     palette.setColor(QPalette::Inactive,QPalette::ToolTipText,QColor(50, 50, 255, 255)); 	//设置ToolTip字体色
     QToolTip::setPalette(palette);
     QToolTip::setFont(font);  //设置ToolTip字体
-
 
 }
 
@@ -345,93 +347,78 @@ void MainWindow::initui_acpi()
     QTableWidgetItem *id0;
     //ACPI-Add
     ui->table_acpi_add->setColumnWidth(0,450);
-    id0 = new QTableWidgetItem("Path");
+    id0 = new QTableWidgetItem(tr("Path"));
     ui->table_acpi_add->setHorizontalHeaderItem(0, id0);
 
     ui->table_acpi_add->setColumnWidth(1,350);
-    id0 = new QTableWidgetItem("Comment");
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_acpi_add->setHorizontalHeaderItem(1, id0);
 
-    id0 = new QTableWidgetItem("Enabled");
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_acpi_add->setHorizontalHeaderItem(2, id0);
 
-    if(zh_cn)
-    {
-        ui->table_acpi_add->horizontalHeaderItem(0)->setToolTip("AML文件");
-        ui->table_acpi_add->horizontalHeaderItem(1)->setToolTip("注释");
-        ui->table_acpi_add->horizontalHeaderItem(2)->setToolTip("是否启用");
-    }
 
     //ACPI-Delete
-    id0=new QTableWidgetItem("TableSignature");
+    id0=new QTableWidgetItem(tr("TableSignature"));
     ui->table_acpi_del->setHorizontalHeaderItem(0, id0);
 
     ui->table_acpi_del->setColumnWidth(1,250);
-    id0 = new QTableWidgetItem("OemTableId");
+    id0 = new QTableWidgetItem(tr("OemTableId"));
     ui->table_acpi_del->setHorizontalHeaderItem(1,id0);
 
-    id0 = new QTableWidgetItem("TableLength");
+    id0 = new QTableWidgetItem(tr("TableLength"));
     ui->table_acpi_del->setHorizontalHeaderItem(2,id0);
 
     ui->table_acpi_del->setColumnWidth(3,250);
-    id0 = new QTableWidgetItem("Comment");
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_acpi_del->setHorizontalHeaderItem(3,id0);
 
-    id0 = new QTableWidgetItem("All");
+    id0 = new QTableWidgetItem(tr("All"));
     ui->table_acpi_del->setHorizontalHeaderItem(4,id0);
 
-    id0 = new QTableWidgetItem("Enabled");
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_acpi_del->setHorizontalHeaderItem(5,id0);
 
-    if(zh_cn)
-    {
-        ui->table_acpi_del->horizontalHeaderItem(0)->setToolTip("匹配表签名等于该值，除非全为零。");
-        ui->table_acpi_del->horizontalHeaderItem(1)->setToolTip("匹配表OEM ID等于此值，除非全为零。");
-        ui->table_acpi_del->horizontalHeaderItem(2)->setToolTip("匹配表大小等于此值，除非为0。");
-        ui->table_acpi_del->horizontalHeaderItem(3)->setToolTip("注释");
-        ui->table_acpi_del->horizontalHeaderItem(4)->setToolTip("如果设置为true，则将删除所有符合条件的ACPI表。 否则，只有第一个匹配的表。");
-        ui->table_acpi_del->horizontalHeaderItem(5)->setToolTip("是否启用");
-    }
 
     //ACPI-Patch
     ui->table_acpi_patch->setColumnWidth(0,150);
-    id0=new QTableWidgetItem("TableSignature");
+    id0=new QTableWidgetItem(tr("TableSignature"));
     ui->table_acpi_patch->setHorizontalHeaderItem(0, id0);
 
-    id0 = new QTableWidgetItem("OemTableId");
+    id0 = new QTableWidgetItem(tr("OemTableId"));
     ui->table_acpi_patch->setHorizontalHeaderItem(1,id0);
 
-    id0 = new QTableWidgetItem("TableLength");
+    id0 = new QTableWidgetItem(tr("TableLength"));
     ui->table_acpi_patch->setHorizontalHeaderItem(2,id0);
 
     ui->table_acpi_patch->setColumnWidth(3,200);
-    id0 = new QTableWidgetItem("Find");
+    id0 = new QTableWidgetItem(tr("Find"));
     ui->table_acpi_patch->setHorizontalHeaderItem(3,id0);
 
     ui->table_acpi_patch->setColumnWidth(4,200);
-    id0 = new QTableWidgetItem("Replace");
+    id0 = new QTableWidgetItem(tr("Replace"));
     ui->table_acpi_patch->setHorizontalHeaderItem(4,id0);
 
     ui->table_acpi_patch->setColumnWidth(5,300);
-    id0 = new QTableWidgetItem("Comment");
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_acpi_patch->setHorizontalHeaderItem(5,id0);
 
-    id0 = new QTableWidgetItem("Mask");
+    id0 = new QTableWidgetItem(tr("Mask"));
     ui->table_acpi_patch->setHorizontalHeaderItem(6,id0);
 
-    id0 = new QTableWidgetItem("ReplaceMask");
+    id0 = new QTableWidgetItem(tr("ReplaceMask"));
     ui->table_acpi_patch->setHorizontalHeaderItem(7,id0);
 
-    id0 = new QTableWidgetItem("Count");
+    id0 = new QTableWidgetItem(tr("Count"));
     ui->table_acpi_patch->setHorizontalHeaderItem(8,id0);
 
-    id0 = new QTableWidgetItem("Limit");
+    id0 = new QTableWidgetItem(tr("Limit"));
     ui->table_acpi_patch->setHorizontalHeaderItem(9,id0);
 
-    id0 = new QTableWidgetItem("Skip");
+    id0 = new QTableWidgetItem(tr("Skip"));
     ui->table_acpi_patch->setHorizontalHeaderItem(10,id0);
 
-    id0 = new QTableWidgetItem("Enabled");
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_acpi_patch->setHorizontalHeaderItem(11,id0);
 
     if(zh_cn)
@@ -458,14 +445,14 @@ void MainWindow::initui_booter()
     QTableWidgetItem *id0;
 
     ui->table_booter->setColumnWidth(0,450);
-    id0 = new QTableWidgetItem("Address");
+    id0 = new QTableWidgetItem(tr("Address"));
     ui->table_booter->setHorizontalHeaderItem(0, id0);
 
     ui->table_booter->setColumnWidth(1,350);
-    id0 = new QTableWidgetItem("Comment");
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_booter->setHorizontalHeaderItem(1, id0);
 
-    id0 = new QTableWidgetItem("Enabled");
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_booter->setHorizontalHeaderItem(2, id0);
 
     if(zh_cn)
@@ -535,30 +522,30 @@ void MainWindow::initui_dp()
     //Add
     ui->table_dp_add0->setColumnWidth(0,400);
     ui->table_dp_add0->setMinimumWidth(400);
-    id0 = new QTableWidgetItem("PCILists");
+    id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
 
 
     ui->table_dp_add->setColumnWidth(0,300);
-    id0 = new QTableWidgetItem("Key");
+    id0 = new QTableWidgetItem(tr("Key"));
     ui->table_dp_add->setHorizontalHeaderItem(0, id0);
 
     ui->table_dp_add->setColumnWidth(2,200);
-    id0 = new QTableWidgetItem("Value");
+    id0 = new QTableWidgetItem(tr("Value"));
     ui->table_dp_add->setHorizontalHeaderItem(2, id0);
 
-    id0 = new QTableWidgetItem("Class");
+    id0 = new QTableWidgetItem(tr("Class"));
     ui->table_dp_add->setHorizontalHeaderItem(1, id0);
 
     //Delete
 
     ui->table_dp_del0->setColumnWidth(0,400);
     ui->table_dp_del0->setMinimumWidth(400);
-    id0 = new QTableWidgetItem("PCILists");
+    id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_del0->setHorizontalHeaderItem(0, id0);
 
     ui->table_dp_del->setColumnWidth(0,350);
-    id0 = new QTableWidgetItem("Value");
+    id0 = new QTableWidgetItem(tr("Value"));
     ui->table_dp_del->setHorizontalHeaderItem(0, id0);
 
 
@@ -649,123 +636,131 @@ void MainWindow::initui_kernel()
     ui->table_kernel_add->setColumnCount(8);
 
     ui->table_kernel_add->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("BundlePath");
+    id0 = new QTableWidgetItem(tr("BundlePath"));
     ui->table_kernel_add->setHorizontalHeaderItem(0, id0);
+    ui->table_kernel_add->horizontalHeaderItem(0)->setToolTip(strBundlePath);
 
     ui->table_kernel_add->setColumnWidth(1,250);
-    id0 = new QTableWidgetItem("Comment");
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_kernel_add->setHorizontalHeaderItem(1, id0);
+    ui->table_kernel_add->horizontalHeaderItem(1)->setToolTip(strComment);
 
     ui->table_kernel_add->setColumnWidth(2,250);
-    id0 = new QTableWidgetItem("ExecutablePath");
+    id0 = new QTableWidgetItem(tr("ExecutablePath"));
     ui->table_kernel_add->setHorizontalHeaderItem(2, id0);
+    ui->table_kernel_add->horizontalHeaderItem(2)->setToolTip(strExecutablePath);
 
     ui->table_kernel_add->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("PlistPath");
+    id0 = new QTableWidgetItem(tr("PlistPath"));
     ui->table_kernel_add->setHorizontalHeaderItem(3, id0);
+    ui->table_kernel_add->horizontalHeaderItem(3)->setToolTip(strPlistPath);
 
     ui->table_kernel_add->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("MinKernel");
+    id0 = new QTableWidgetItem(tr("MinKernel"));
     ui->table_kernel_add->setHorizontalHeaderItem(4, id0);
+    ui->table_kernel_add->horizontalHeaderItem(4)->setToolTip(strMinKernel);
 
     ui->table_kernel_add->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("MaxKernel");
+    id0 = new QTableWidgetItem(tr("MaxKernel"));
     ui->table_kernel_add->setHorizontalHeaderItem(5, id0);
+    ui->table_kernel_add->horizontalHeaderItem(5)->setToolTip(strMaxKernel);
 
     ui->table_kernel_add->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("Enabled");
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_kernel_add->setHorizontalHeaderItem(6, id0);
+    ui->table_kernel_add->horizontalHeaderItem(6)->setToolTip(strEnabled);
 
     ui->table_kernel_add->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("Arch");
+    id0 = new QTableWidgetItem(tr("Arch"));
     ui->table_kernel_add->setHorizontalHeaderItem(7, id0);
+    ui->table_kernel_add->horizontalHeaderItem(7)->setToolTip(strArch);
 
 
     //Block
     ui->table_kernel_block->setColumnCount(6);
     ui->table_kernel_block->setColumnWidth(0,350);
-    id0 = new QTableWidgetItem("Identifier");
+    id0 = new QTableWidgetItem(tr("Identifier"));
     ui->table_kernel_block->setHorizontalHeaderItem(0, id0);
 
     ui->table_kernel_block->setColumnWidth(1,350);
-    id0 = new QTableWidgetItem("Comment");
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_kernel_block->setHorizontalHeaderItem(1, id0);
 
     ui->table_kernel_block->setColumnWidth(2,250);
-    id0 = new QTableWidgetItem("MinKernel");
+    id0 = new QTableWidgetItem(tr("MinKernel"));
     ui->table_kernel_block->setHorizontalHeaderItem(2, id0);
 
     ui->table_kernel_block->setColumnWidth(3,250);
-    id0 = new QTableWidgetItem("MaxKernel");
+    id0 = new QTableWidgetItem(tr("MaxKernel"));
     ui->table_kernel_block->setHorizontalHeaderItem(3, id0);
 
     ui->table_kernel_block->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("Enabled");
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_kernel_block->setHorizontalHeaderItem(4, id0);
 
-    id0 = new QTableWidgetItem("Arch");
+    id0 = new QTableWidgetItem(tr("Arch"));
     ui->table_kernel_block->setHorizontalHeaderItem(5, id0);
 
     //Force
     ui->table_kernel_Force->setColumnCount(9);
 
     ui->table_kernel_Force->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("BundlePath");
+    id0 = new QTableWidgetItem(tr("BundlePath"));
     ui->table_kernel_Force->setHorizontalHeaderItem(0, id0);
 
     ui->table_kernel_Force->setColumnWidth(1,250);
-    id0 = new QTableWidgetItem("Comment");
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_kernel_Force->setHorizontalHeaderItem(1, id0);
 
     ui->table_kernel_Force->setColumnWidth(2,250);
-    id0 = new QTableWidgetItem("ExecutablePath");
+    id0 = new QTableWidgetItem(tr("ExecutablePath"));
     ui->table_kernel_Force->setHorizontalHeaderItem(2, id0);
 
     ui->table_kernel_Force->setColumnWidth(3,250);
-    id0 = new QTableWidgetItem("Identifier");
+    id0 = new QTableWidgetItem(tr("Identifier"));
     ui->table_kernel_Force->setHorizontalHeaderItem(3, id0);
 
 
     ui->table_kernel_Force->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("PlistPath");
+    id0 = new QTableWidgetItem(tr("PlistPath"));
     ui->table_kernel_Force->setHorizontalHeaderItem(4, id0);
 
     ui->table_kernel_Force->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("MinKernel");
+    id0 = new QTableWidgetItem(tr("MinKernel"));
     ui->table_kernel_Force->setHorizontalHeaderItem(5, id0);
 
     ui->table_kernel_Force->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("MaxKernel");
+    id0 = new QTableWidgetItem(tr("MaxKernel"));
     ui->table_kernel_Force->setHorizontalHeaderItem(6, id0);
 
     ui->table_kernel_Force->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("Enabled");
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_kernel_Force->setHorizontalHeaderItem(7, id0);
 
     ui->table_kernel_Force->setColumnWidth(0,250);
-    id0 = new QTableWidgetItem("Arch");
+    id0 = new QTableWidgetItem(tr("Arch"));
     ui->table_kernel_Force->setHorizontalHeaderItem(8, id0);
 
     //Patch
     ui->table_kernel_patch->setColumnCount(14);
     ui->table_kernel_patch->setColumnWidth(0,300);
-    id0 = new QTableWidgetItem("Identifier");
+    id0 = new QTableWidgetItem(tr("Identifier"));
     ui->table_kernel_patch->setHorizontalHeaderItem(0, id0);
 
     ui->table_kernel_patch->setColumnWidth(0,350);
-    id0 = new QTableWidgetItem("Base");
+    id0 = new QTableWidgetItem(tr("Base"));
     ui->table_kernel_patch->setHorizontalHeaderItem(1, id0);
 
     ui->table_kernel_patch->setColumnWidth(0,350);
-    id0 = new QTableWidgetItem("Identifier");
+    id0 = new QTableWidgetItem(tr("Identifier"));
     ui->table_kernel_patch->setHorizontalHeaderItem(2, id0);
 
     ui->table_kernel_patch->setColumnWidth(3,300);
-    id0 = new QTableWidgetItem("Find");
+    id0 = new QTableWidgetItem(tr("Find"));
     ui->table_kernel_patch->setHorizontalHeaderItem(3, id0);
 
     ui->table_kernel_patch->setColumnWidth(4,300);
-    id0 = new QTableWidgetItem("Replace");
+    id0 = new QTableWidgetItem(tr("Replace"));
     ui->table_kernel_patch->setHorizontalHeaderItem(4, id0);
 
     ui->table_kernel_patch->setColumnWidth(0,350);
@@ -773,34 +768,34 @@ void MainWindow::initui_kernel()
     ui->table_kernel_patch->setHorizontalHeaderItem(5, id0);
 
     ui->table_kernel_patch->setColumnWidth(0,350);
-    id0 = new QTableWidgetItem("ReplaceMask");
+    id0 = new QTableWidgetItem(tr("ReplaceMask"));
     ui->table_kernel_patch->setHorizontalHeaderItem(6, id0);
 
     ui->table_kernel_patch->setColumnWidth(0,350);
-    id0 = new QTableWidgetItem("MinKernel");
+    id0 = new QTableWidgetItem(tr("MinKernel"));
     ui->table_kernel_patch->setHorizontalHeaderItem(7, id0);
 
     ui->table_kernel_patch->setColumnWidth(0,350);
-    id0 = new QTableWidgetItem("MaxKernel");
+    id0 = new QTableWidgetItem(tr("MaxKernel"));
     ui->table_kernel_patch->setHorizontalHeaderItem(8, id0);
 
     ui->table_kernel_patch->setColumnWidth(0,350);
-    id0 = new QTableWidgetItem("Count");
+    id0 = new QTableWidgetItem(tr("Count"));
     ui->table_kernel_patch->setHorizontalHeaderItem(9, id0);
 
     ui->table_kernel_patch->setColumnWidth(0,350);
-    id0 = new QTableWidgetItem("Limit");
+    id0 = new QTableWidgetItem(tr("Limit"));
     ui->table_kernel_patch->setHorizontalHeaderItem(10, id0);
 
     ui->table_kernel_patch->setColumnWidth(0,350);
-    id0 = new QTableWidgetItem("Skip");
+    id0 = new QTableWidgetItem(tr("Skip"));
     ui->table_kernel_patch->setHorizontalHeaderItem(11, id0);
 
     ui->table_kernel_patch->setColumnWidth(0,350);
-    id0 = new QTableWidgetItem("Enabled");
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_kernel_patch->setHorizontalHeaderItem(12, id0);
 
-    id0 = new QTableWidgetItem("Arch");
+    id0 = new QTableWidgetItem(tr("Arch"));
     ui->table_kernel_patch->setHorizontalHeaderItem(13, id0);
 
     //Scheme
@@ -1095,49 +1090,49 @@ void MainWindow::initui_misc()
     //BlessOverride
     QTableWidgetItem *id0;
     ui->tableBlessOverride->setColumnWidth(0,1150);
-    id0 = new QTableWidgetItem("BlessOverride");
+    id0 = new QTableWidgetItem(tr("BlessOverride"));
     ui->tableBlessOverride->setHorizontalHeaderItem(0, id0);
 
     //Entries
     ui->tableEntries->setColumnWidth(0,550);
-    id0 = new QTableWidgetItem("Path");
+    id0 = new QTableWidgetItem(tr("Path"));
     ui->tableEntries->setHorizontalHeaderItem(0, id0);
 
-    id0 = new QTableWidgetItem("Arguments");
+    id0 = new QTableWidgetItem(tr("Arguments"));
     ui->tableEntries->setHorizontalHeaderItem(1, id0);
 
-    id0 = new QTableWidgetItem("Name");
+    id0 = new QTableWidgetItem(tr("Name"));
     ui->tableEntries->setHorizontalHeaderItem(2, id0);
 
     ui->tableEntries->setColumnWidth(3,250);
-    id0 = new QTableWidgetItem("Comment");
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->tableEntries->setHorizontalHeaderItem(3, id0);
 
-    id0 = new QTableWidgetItem("Auxiliary");
+    id0 = new QTableWidgetItem(tr("Auxiliary"));
     ui->tableEntries->setHorizontalHeaderItem(4, id0);
 
-    id0 = new QTableWidgetItem("Enabled");
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->tableEntries->setHorizontalHeaderItem(5, id0);
 
     //Tools
     ui->tableTools->setColumnWidth(0 , 450);
-    id0 = new QTableWidgetItem("Path");
+    id0 = new QTableWidgetItem(tr("Path"));
     ui->tableTools->setHorizontalHeaderItem(0, id0);
 
-    id0 = new QTableWidgetItem("Arguments");
+    id0 = new QTableWidgetItem(tr("Arguments"));
     ui->tableTools->setHorizontalHeaderItem(1, id0);
 
-    id0 = new QTableWidgetItem("Name");
+    id0 = new QTableWidgetItem(tr("Name"));
     ui->tableTools->setHorizontalHeaderItem(2, id0);
 
     ui->tableTools->setColumnWidth(3,250);
-    id0 = new QTableWidgetItem("Comment");
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->tableTools->setHorizontalHeaderItem(3, id0);
 
-    id0 = new QTableWidgetItem("Auxiliary");
+    id0 = new QTableWidgetItem(tr("Auxiliary"));
     ui->tableTools->setHorizontalHeaderItem(4, id0);
 
-    id0 = new QTableWidgetItem("Enabled");
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->tableTools->setHorizontalHeaderItem(5, id0);
 
 
@@ -1321,24 +1316,24 @@ void MainWindow::initui_nvram()
 
 
     ui->table_nv_add->setColumnWidth(0,200);
-    id0 = new QTableWidgetItem("Key");
+    id0 = new QTableWidgetItem(tr("Key"));
     ui->table_nv_add->setHorizontalHeaderItem(0, id0);
 
     ui->table_nv_add->setColumnWidth(2,350);
-    id0 = new QTableWidgetItem("Value");
+    id0 = new QTableWidgetItem(tr("Value"));
     ui->table_nv_add->setHorizontalHeaderItem(2, id0);
 
-    id0 = new QTableWidgetItem("Class");
+    id0 = new QTableWidgetItem(tr("Class"));
     ui->table_nv_add->setHorizontalHeaderItem(1, id0);
 
     //Delete
 
     ui->table_nv_del0->setColumnWidth(0,600);
-    id0 = new QTableWidgetItem("UUID");
+    id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_del0->setHorizontalHeaderItem(0, id0);
 
     ui->table_nv_del->setColumnWidth(0,600);
-    id0 = new QTableWidgetItem("Value");
+    id0 = new QTableWidgetItem(tr("Value"));
     ui->table_nv_del->setHorizontalHeaderItem(0, id0);
 
 
@@ -1346,11 +1341,11 @@ void MainWindow::initui_nvram()
     //LegacySchema
 
     ui->table_nv_ls0->setColumnWidth(0,600);
-    id0 = new QTableWidgetItem("UUID");
+    id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_ls0->setHorizontalHeaderItem(0, id0);
 
     ui->table_nv_ls->setColumnWidth(0,600);
-    id0 = new QTableWidgetItem("Value");
+    id0 = new QTableWidgetItem(tr("Value"));
     ui->table_nv_ls->setHorizontalHeaderItem(0, id0);
 
     QSplitter *splitterMain = new QSplitter(Qt::Horizontal,this);
@@ -2046,7 +2041,7 @@ void MainWindow::initui_UEFI()
     QTableWidgetItem *id0;
 
     ui->table_uefi_drivers->setColumnWidth(0,1200);
-    id0 = new QTableWidgetItem("Drivers");
+    id0 = new QTableWidgetItem(tr("Drivers"));
     ui->table_uefi_drivers->setHorizontalHeaderItem(0, id0);
 
     //KeySupportMode
@@ -2071,22 +2066,22 @@ void MainWindow::initui_UEFI()
     //ReservedMemory
 
     ui->table_uefi_ReservedMemory->setColumnWidth(0,300);
-    id0 = new QTableWidgetItem("Address");
+    id0 = new QTableWidgetItem(tr("Address"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(0, id0);
 
     ui->table_uefi_ReservedMemory->setColumnWidth(1,320);
-    id0 = new QTableWidgetItem("Comment");
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(1, id0);
 
     ui->table_uefi_ReservedMemory->setColumnWidth(2,300);
-    id0 = new QTableWidgetItem("Size");
+    id0 = new QTableWidgetItem(tr("Size"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(2, id0);
 
     ui->table_uefi_ReservedMemory->setColumnWidth(3,210);
-    id0 = new QTableWidgetItem("Type");
+    id0 = new QTableWidgetItem(tr("Type"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(3, id0);
 
-    id0 = new QTableWidgetItem("Enabled");
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(4, id0);
 
 
@@ -4123,7 +4118,7 @@ void MainWindow::about()
 {
 
     QMessageBox::about(this , tr("About") ,
-                       QString::fromLocal8Bit("<a style='color: blue;' href = https://github.com/ic005k/QtOpenCoreConfig> Open source cross-platform OpenCore configurator</a><br><a style='color: blue;' href = https://github.com/acidanthera/OpenCorePkg/releases>OpenCore</a><br><a style='color: blue;' href = https://github.com/williambj1/OpenCore-Factory/releases>OpenCore-Factory</a><br><a style='color: blue;' href = https://github.com/ic005k/QtiASL>QtiASL</a>"));
+                       QString::fromLocal8Bit("<a style='color: blue;' href = https://github.com/ic005k/QtOpenCoreConfig>QtOpenCoreConfigurator</a><br><a style='color: blue;' href = https://github.com/acidanthera/OpenCorePkg/releases>OpenCore</a><br><a style='color: blue;' href = https://github.com/williambj1/OpenCore-Factory/releases>OpenCore-Factory</a><br><a style='color: blue;' href = https://github.com/ic005k/QtiASL>QtiASL</a>"));
 }
 
 void MainWindow::on_btnKernelAdd_Del_clicked()
@@ -4640,7 +4635,7 @@ void MainWindow::loadLocal()
        QTextCodec *codec = QTextCodec::codecForName("System");
        QTextCodec::setCodecForLocale(codec);
 
-       QTranslator translator;
+       static QTranslator translator; //该对象要一直存在，注意用static
        QLocale locale;
        if( locale.language() == QLocale::English )  //获取系统语言环境
        {
@@ -4664,8 +4659,6 @@ void MainWindow::loadLocal()
 
 }
 
-
-
 void MainWindow::on_btnHelp_clicked()
 {
 
@@ -4673,5 +4666,18 @@ void MainWindow::on_btnHelp_clicked()
     QString qtManulFile = appInfo.filePath()  + "/Configuration.pdf";
 
     QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
+
+}
+
+void MainWindow::init_tr_str()
+{
+    strArch = tr("Kext architecture (Any, i386, x86_64).");
+    strBundlePath = tr("Kext bundle path (e.g. Lilu.kext or MyKext.kext/Contents/PlugIns/MySubKext.kext).");
+    strComment = tr("Comment.");
+    strEnabled = tr("This kernel driver will not be added unless set to true.");
+    strExecutablePath = tr("Kext executable path relative to bundle (e.g. Contents/MacOS/Lilu).");
+    strMaxKernel = tr("Adds kernel driver on specified macOS version or older.");
+    strMinKernel = tr("Adds kernel driver on specified macOS version or newer.");
+    strPlistPath = tr(" Kext Info.plist path relative to bundle (e.g. Contents/Info.plist).");
 
 }
