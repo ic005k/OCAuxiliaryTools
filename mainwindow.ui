@@ -95,7 +95,7 @@
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -911,7 +911,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabKernel">
           <property name="currentIndex">
-           <number>5</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1141,7 +1141,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
           </widget>
           <widget class="QWidget" name="tab_29">
            <attribute name="title">
-            <string>Quirks</string>
+            <string>Quirks + Emulate</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_36">
             <item row="0" column="0">

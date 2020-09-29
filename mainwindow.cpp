@@ -4487,9 +4487,10 @@ void MainWindow::dropEvent (QDropEvent *e)
 
 }
 
+#ifdef Q_OS_WIN32
 void MainWindow::runAdmin(QString file, QString arg)
 {
-#ifdef Q_OS_WIN32
+
     QString exePath = file;
     WCHAR exePathArray[1024] = {0};
     exePath.toWCharArray(exePathArray);
@@ -4500,9 +4501,8 @@ void MainWindow::runAdmin(QString file, QString arg)
     HINSTANCE hNewExe = ShellExecute(NULL, L"runas", exePathArray, commandArr, NULL, SW_SHOWMAXIMIZED);//SW_NORMAL SW_SHOWMAXIMIZED
     if(hNewExe){};
 
-#endif
-
 }
+#endif
 
 void MainWindow::mount_esp()
 {

@@ -627,18 +627,19 @@ to boot-args and log the largest one that won’t cause boot failure.</source>
         <location filename="mainwindow.ui" line="986"/>
         <source>Block</source>
         <oldsource>阻止-Block</oldsource>
-        <translation>Block（阻止）</translation>
+        <translation type="unfinished">Block（阻止）</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1035"/>
         <source>Force</source>
         <oldsource>强制-Force</oldsource>
-        <translation>Force（强制）</translation>
+        <translation type="unfinished">Force（强制）</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1144"/>
-        <source>Quirks</source>
-        <translation>Quirks（怪异选项）</translation>
+        <source>Quirks + Emulate</source>
+        <oldsource>Quirks &amp; Emulate</oldsource>
+        <translation type="unfinished">Quirks + Emulate（内核杂项 + 仿冒CPU）</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1150"/>
@@ -3752,7 +3753,7 @@ Note 2 : Resetting NVRAM will also erase all the boot options otherwise not back
     <message>
         <location filename="mainwindow.ui" line="3756"/>
         <source>APFS</source>
-        <translation></translation>
+        <translation type="unfinished">APFS（APFS文件系统）</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="4072"/>
