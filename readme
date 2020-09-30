@@ -4,6 +4,8 @@ OpenCore逐渐流行起来，一直想做一款开源的跨平台的oc配置文�
 
 该软件是根据oc最新的开发版提供的Sample.plist为蓝本，使用该软件前，建议将oc升级到最新版或最新的开发版。
 
+目前软件支持中、英文界面。
+
 QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
 https://github.com/reillywatson/qtplist
 https://github.com/bluer007/FindESP
@@ -21,3 +23,5 @@ Linux版：链接: https://pan.baidu.com/s/1HvWmAIca-L3THOzLOtKHdA 提取码: 8q
 pcbeta远景链接：http://bbs.pcbeta.com/viewthread-1866148-1-1.html
 
 insanelymac链接：https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/
+
+![截图](https://github.com/ic005k/QtiASL/blob/master/qtocc.png)
