@@ -4,7 +4,12 @@ OpenCore逐渐流行起来，一直想做一款开源的跨平台的oc配置文�
 
 该软件是根据oc最新的开发版提供的Sample.plist为蓝本，使用该软件前，建议将oc升级到最新版或最新的开发版。
 
-目前软件支持中、英文界面。
+特点：
+1.多语言支持（目前支持中文和英文界面）
+2.开源、跨平台（win、mac、linux）
+3.各功能选项采用悬浮提示和状态栏提示
+4.完全可视化对Config.plist进行编辑
+5.紧跟OpenCore最新开发版，完全与之同步
 
 QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
 https://github.com/reillywatson/qtplist
