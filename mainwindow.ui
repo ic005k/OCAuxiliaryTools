@@ -95,7 +95,7 @@
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -2758,10 +2758,10 @@ not using Automatic may lead to hard to debug errors.</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1" colspan="2">
+            <item row="0" column="1">
              <widget class="QComboBox" name="cboxSystemProductName"/>
             </item>
-            <item row="0" column="3">
+            <item row="0" column="2">
              <widget class="QPushButton" name="btnGenerate">
               <property name="text">
                <string>Generate</string>
@@ -2781,7 +2781,7 @@ not using Automatic may lead to hard to debug errors.</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
+            <item row="1" column="1">
              <widget class="QLineEdit" name="editSystemSerialNumber"/>
             </item>
             <item row="2" column="0">
@@ -2797,7 +2797,7 @@ not using Automatic may lead to hard to debug errors.</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="2">
+            <item row="2" column="1">
              <widget class="QLineEdit" name="editMLB"/>
             </item>
             <item row="3" column="0">
@@ -2813,17 +2813,39 @@ not using Automatic may lead to hard to debug errors.</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="2">
+            <item row="3" column="1">
              <widget class="QLineEdit" name="editSystemUUID"/>
             </item>
-            <item row="3" column="3">
+            <item row="3" column="2">
              <widget class="QPushButton" name="btnSystemUUID">
               <property name="text">
                <string>Generate</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="0" colspan="2">
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_96">
+              <property name="toolTip">
+               <string>Valid values:
+• Auto — use the original PlatformFeature value.
+• Upgradable — explicitly unset PT_FEATURE_HAS_SOLDERED_SYSTEM_MEMORY (0x2) in PlatformFeature. 
+• Soldered — explicitly set PT_FEATURE_HAS_SOLDERED_SYSTEM_MEMORY (0x2) in PlatformFeature.
+
+Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemoryReporter.spreporter
+will ignore PT_FEATURE_HAS_SOLDERED_SYSTEM_MEMORY and assume that system memory is non-upgradable.</string>
+              </property>
+              <property name="statusTip">
+               <string> Indicates whether system memory is upgradable in PlatformFeature. This controls the visibility of the Memory tab in About This Mac.</string>
+              </property>
+              <property name="text">
+               <string>SystemMemoryStatus</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QComboBox" name="cboxSystemMemoryStatus"/>
+            </item>
+            <item row="5" column="0">
              <widget class="QLabel" name="label_95">
               <property name="toolTip">
                <string> Combined of Processor Major and Minor types.</string>
@@ -2836,10 +2858,10 @@ not using Automatic may lead to hard to debug errors.</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
+            <item row="5" column="1">
              <widget class="QLineEdit" name="editProcessorTypeGeneric"/>
             </item>
-            <item row="5" column="0">
+            <item row="6" column="0">
              <widget class="QLabel" name="label_20">
               <property name="toolTip">
                <string>Refer to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
@@ -2852,10 +2874,10 @@ not using Automatic may lead to hard to debug errors.</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="2">
+            <item row="6" column="1">
              <widget class="QLineEdit" name="editROM"/>
             </item>
-            <item row="6" column="0">
+            <item row="7" column="0">
              <widget class="QCheckBox" name="chkAdviseWindows">
               <property name="toolTip">
                <string>Added bits to FirmwareFeatures: • FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - Without this bit it is not possible to reboot to Windows
@@ -2871,7 +2893,7 @@ Windows installed on a drive with EFI partition being the first partition on the
               </property>
              </widget>
             </item>
-            <item row="6" column="1" colspan="2">
+            <item row="7" column="1">
              <widget class="QCheckBox" name="chkSpoofVendor">
               <property name="toolTip">
                <string>It is dangerous to use Apple in SMBIOS vendor fields for reasons given in SystemManufacturer description.

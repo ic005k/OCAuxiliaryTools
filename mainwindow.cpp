@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.2-2020.09.29";
+    title = "QtOpenCoreConfigurator   V0.6.2-2020.09.30";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -1709,6 +1709,12 @@ void MainWindow::initui_PlatformInfo()
     ui->cboxUpdateSMBIOSMode->addItem("Overwrite");
     ui->cboxUpdateSMBIOSMode->addItem("Custom");
 
+    ui->cboxSystemMemoryStatus->addItem("");
+    ui->cboxSystemMemoryStatus->addItem("Auto");
+    ui->cboxSystemMemoryStatus->addItem("Upgradable");
+    ui->cboxSystemMemoryStatus->addItem("Soldered");
+
+
     //ui->cboxSystemProductName->setEditable(true);
     QStringList pi;
     pi.push_back("");
@@ -1913,6 +1919,8 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     ui->chkSpoofVendor->setChecked(mapGeneric["SpoofVendor"].toBool());
 
     ui->editProcessorTypeGeneric->setText(mapGeneric["ProcessorType"].toString());
+
+    ui->cboxSystemMemoryStatus->setCurrentText(mapGeneric["SystemMemoryStatus"].toString().trimmed());
 
     //机型
     QString spn = mapGeneric["SystemProductName"].toString();
@@ -2824,6 +2832,7 @@ QVariantMap MainWindow::SavePlatformInfo()
     valueList.clear();
     valueList["AdviseWindows"] = getChkBool(ui->chkAdviseWindows);
     valueList["MLB"] = ui->editMLB->text();
+    valueList["SystemMemoryStatus"] = ui->cboxSystemMemoryStatus->currentText().trimmed();
     valueList["ProcessorType"] = ui->editProcessorTypeGeneric->text().toLongLong();
     valueList["ROM"] = HexStrToByte(ui->editROM->text());
     valueList["SpoofVendor"] = getChkBool(ui->chkSpoofVendor);
