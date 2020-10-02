@@ -10,6 +10,7 @@ OpenCore逐渐流行起来，一直想做一款开源的跨平台的oc配置文�
 3.各功能选项采用悬浮提示和状态栏提示
 4.完全可视化对Config.plist进行编辑
 5.紧跟OpenCore最新开发版，完全与之同步
+6.一键挂载ESP分区（mac、win）
 
 QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
 https://github.com/reillywatson/qtplist
