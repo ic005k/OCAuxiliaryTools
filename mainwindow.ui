@@ -95,7 +95,7 @@
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
       <property name="currentIndex">
-       <number>6</number>
+       <number>3</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -1139,9 +1139,9 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_29">
+          <widget class="QWidget" name="tab_37">
            <attribute name="title">
-            <string>Quirks + Emulate</string>
+            <string>Emulate</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_36">
             <item row="0" column="0">
@@ -1175,7 +1175,7 @@ older models can be found in the Special NOTES section of acidanthera/bugtracker
               </property>
              </widget>
             </item>
-            <item row="0" column="1" colspan="3">
+            <item row="0" column="1">
              <widget class="QLineEdit" name="editCpuid1Data">
               <property name="statusTip">
                <string> Sequence of EAX, EBX, ECX, EDX values to replace CPUID (1) call in XNU kernel.</string>
@@ -1195,7 +1195,7 @@ older models can be found in the Special NOTES section of acidanthera/bugtracker
               </property>
              </widget>
             </item>
-            <item row="1" column="1" colspan="3">
+            <item row="1" column="1">
              <widget class="QLineEdit" name="editCpuid1Mask">
               <property name="statusTip">
                <string> Bit mask of active bits in Cpuid1Data.</string>
@@ -1203,6 +1203,69 @@ older models can be found in the Special NOTES section of acidanthera/bugtracker
              </widget>
             </item>
             <item row="2" column="0">
+             <widget class="QCheckBox" name="chkDummyPowerManagement">
+              <property name="toolTip">
+               <string>Note 1 : This option is a preferred alternative to NullCpuPowerManagement.kext for CPUs without native power
+management driver in macOS.
+Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManagement on unsupported platforms,
+it can also be used to disable this kext in other situations (e.g. with Cpuid1Data left blank).</string>
+              </property>
+              <property name="statusTip">
+               <string>Disables AppleIntelCpuPowerManagement.</string>
+              </property>
+              <property name="text">
+               <string>DummyPowerManagement</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_97">
+              <property name="toolTip">
+               <string>Note: Refer to Add MaxKernel description for matching logic.</string>
+              </property>
+              <property name="statusTip">
+               <string> Emulates CPUID and applies DummyPowerManagement on specified macOS version or older.</string>
+              </property>
+              <property name="text">
+               <string>MaxKernel</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="editMaxKernel">
+              <property name="statusTip">
+               <string> Sequence of EAX, EBX, ECX, EDX values to replace CPUID (1) call in XNU kernel.</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_98">
+              <property name="toolTip">
+               <string>Note: Refer to Add MaxKernel description for matching logic.</string>
+              </property>
+              <property name="statusTip">
+               <string>Emulates CPUID and applies DummyPowerManagement on specified macOS version or newer.</string>
+              </property>
+              <property name="text">
+               <string>MinKernel</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="editMinKernel">
+              <property name="statusTip">
+               <string> Bit mask of active bits in Cpuid1Data.</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_29">
+           <attribute name="title">
+            <string>Quirks</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_44">
+            <item row="0" column="0">
              <widget class="QCheckBox" name="chkAppleCpuPmCfgLock">
               <property name="toolTip">
                <string>Certain firmwares lock PKG_CST_CONFIG_CONTROL MSR register. To check its state one can use bundled
@@ -1230,7 +1293,7 @@ try to use an offset without checking.</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="0" column="1">
              <widget class="QCheckBox" name="chkAppleXcpmExtraMsrs">
               <property name="toolTip">
                <string>This is normally used in conjunction with Emulate section on Haswell-E, Broadwell-E, Skylake-SP, and similar
@@ -1246,7 +1309,7 @@ use AppleIntelCpuPowerManagement.kext for the former.</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="2">
+            <item row="0" column="2">
              <widget class="QCheckBox" name="chkIncreasePciBarSize">
               <property name="toolTip">
                <string>Note: This option should be avoided whenever possible. In general the necessity of this option means misconfigured
@@ -1260,7 +1323,7 @@ or broken firmware.</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="3">
+            <item row="0" column="3">
              <widget class="QCheckBox" name="chkAppleXcpmCfgLock">
               <property name="toolTip">
                <string>Note: This option should be avoided whenever possible. See AppleCpuPmCfgLock description for more details.</string>
@@ -1274,7 +1337,7 @@ or broken firmware.</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
+            <item row="1" column="0">
              <widget class="QCheckBox" name="chkDisableIoMapper">
               <property name="toolTip">
                <string>Note: This option is a preferred alternative to deleting DMAR ACPI table and disabling VT-d in firmware preferences,
@@ -1288,7 +1351,7 @@ which does not break VT-d support in other systems in case they need it.</string
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
+            <item row="1" column="1">
              <widget class="QCheckBox" name="chkAppleXcpmForceBoost">
               <property name="toolTip">
                <string>This patch writes 0xFF00 to MSR_IA32_PERF_CONTROL (0x199), effectively setting maximum multiplier for all the
@@ -1305,7 +1368,7 @@ patch.</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="2">
+            <item row="1" column="2">
              <widget class="QCheckBox" name="chkCustomSMBIOSGuid">
               <property name="toolTip">
                <string> Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops.</string>
@@ -1318,7 +1381,7 @@ patch.</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="3">
+            <item row="1" column="3">
              <widget class="QCheckBox" name="chkDisableRtcChecksum">
               <property name="toolTip">
                <string>Note 1 : This option will not protect other areas from being overwritten, see RTCMemoryFixup kernel extension
@@ -1334,7 +1397,7 @@ AppleRtcRam protocol description if this is desired.</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
+            <item row="2" column="0">
              <widget class="QCheckBox" name="chkLapicKernelPanic">
               <property name="toolTip">
                <string>Disables kernel panic on LAPIC interrupts.</string>
@@ -1347,21 +1410,22 @@ AppleRtcRam protocol description if this is desired.</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
-             <widget class="QCheckBox" name="chkDummyPowerManagement">
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="chkLegacyCommpage">
               <property name="toolTip">
-               <string>Note: This option is a preferred alternative to NullCpuPowerManagement.kext for CPUs without native power
-management driver in macOS.</string>
+               <string>Replaces the default 64-bit commpage bcopy implementation with one that does not require
+SSSE3, useful for legacy platforms. This prevents a commpage no match for last panic due to no available
+64-bit bcopy functions that do not require SSSE3.</string>
               </property>
               <property name="statusTip">
-               <string>Disables AppleIntelCpuPowerManagement.</string>
+               <string>Requirement: 10.4 - 10.6</string>
               </property>
               <property name="text">
-               <string>DummyPowerManagement</string>
+               <string>LegacyCommpage</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
+            <item row="2" column="2">
              <widget class="QCheckBox" name="chkXhciPortLimit">
               <property name="toolTip">
                <string>Note: This option should be avoided whenever possible. USB port limit is imposed by the amount of used bits in
@@ -1377,7 +1441,7 @@ solution is to limit the amount of used ports to 15 (discarding some). More deta
               </property>
              </widget>
             </item>
-            <item row="4" column="3">
+            <item row="2" column="3">
              <widget class="QCheckBox" name="chkPanicNoKextDump">
               <property name="toolTip">
                <string>Requirement: 10.13 (not required for older)</string>
@@ -1391,7 +1455,7 @@ solution is to limit the amount of used ports to 15 (discarding some). More deta
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
+            <item row="3" column="0">
              <widget class="QCheckBox" name="chkExternalDiskIcons">
               <property name="toolTip">
                <string>Note: This option should be avoided whenever possible. Modern firmwares usually have compatible AHCI
@@ -1405,7 +1469,7 @@ controllers.</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
+            <item row="3" column="1">
              <widget class="QCheckBox" name="chkPowerTimeoutKernelPanic">
               <property name="toolTip">
                <string>An additional security measure was added to macOS Catalina (10.15) causing kernel panic on power change
@@ -1421,7 +1485,7 @@ otherwise equivalent to this quirk.</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="2">
+            <item row="3" column="2">
              <widget class="QCheckBox" name="chkThirdPartyDrives">
               <property name="toolTip">
                <string>Note: This option may be avoided on user preference. NVMe SSDs are compatible without the change. For AHCI
@@ -1437,7 +1501,7 @@ utility creates EnableTRIM variable in APPLE_BOOT_VARIABLE_GUID namespace with 0
               </property>
              </widget>
             </item>
-            <item row="5" column="3">
+            <item row="3" column="3">
              <widget class="QCheckBox" name="chkDisableLinkeditJettison">
               <property name="toolTip">
                <string>This option lets Lilu.kext and possibly some others function in macOS Big Sur with best performance without
@@ -1448,6 +1512,20 @@ keepsyms=1 boot argument.</string>
               </property>
               <property name="text">
                <string>DisableLinkeditJettison</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QCheckBox" name="chkExtendBTFeatureFlags">
+              <property name="toolTip">
+               <string>Note: This option is a substitution for BT4LEContinuityFixup.kext, which does not function properly due to late
+patching progress.</string>
+              </property>
+              <property name="statusTip">
+               <string>Set FeatureFlags to 0x0F for full functionality of Bluetooth, including Continuity.</string>
+              </property>
+              <property name="text">
+               <string>ExtendBTFeatureFlags</string>
               </property>
              </widget>
             </item>
@@ -2835,7 +2913,8 @@ Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemory
 will ignore PT_FEATURE_HAS_SOLDERED_SYSTEM_MEMORY and assume that system memory is non-upgradable.</string>
               </property>
               <property name="statusTip">
-               <string> Indicates whether system memory is upgradable in PlatformFeature. This controls the visibility of the Memory tab in About This Mac.</string>
+               <string> Indicates whether system memory is upgradable in PlatformFeature. This controls the visibility
+ of the Memory tab in About This Mac.</string>
               </property>
               <property name="text">
                <string>SystemMemoryStatus</string>

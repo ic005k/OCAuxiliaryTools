@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.2-2020.09.30";
+    title = "QtOpenCoreConfigurator   V0.6.2-2020.10.06";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -1007,6 +1007,9 @@ void MainWindow::ParserKernel(QVariantMap map)
     QVariantMap map_Emulate = map["Emulate"].toMap();
     ui->editCpuid1Data->setText(ByteToHexStr(map_Emulate["Cpuid1Data"].toByteArray()));
     ui->editCpuid1Mask->setText(ByteToHexStr(map_Emulate["Cpuid1Mask"].toByteArray()));
+    ui->chkDummyPowerManagement->setChecked(map_Emulate["DummyPowerManagement"].toBool());
+    ui->editMaxKernel->setText(map_Emulate["MaxKernel"].toString());
+    ui->editMinKernel->setText(map_Emulate["MinKernel"].toString());
 
 
     //Quirks
@@ -1019,7 +1022,6 @@ void MainWindow::ParserKernel(QVariantMap map)
     ui->chkCustomSMBIOSGuid->setChecked(map_quirks["CustomSMBIOSGuid"].toBool());
     ui->chkDisableIoMapper->setChecked(map_quirks["DisableIoMapper"].toBool());
     ui->chkDisableRtcChecksum->setChecked(map_quirks["DisableRtcChecksum"].toBool());
-    ui->chkDummyPowerManagement->setChecked(map_quirks["DummyPowerManagement"].toBool());
     ui->chkExternalDiskIcons->setChecked(map_quirks["ExternalDiskIcons"].toBool());
     ui->chkIncreasePciBarSize->setChecked(map_quirks["IncreasePciBarSize"].toBool());
     ui->chkLapicKernelPanic->setChecked(map_quirks["LapicKernelPanic"].toBool());
@@ -1028,6 +1030,9 @@ void MainWindow::ParserKernel(QVariantMap map)
     ui->chkThirdPartyDrives->setChecked(map_quirks["ThirdPartyDrives"].toBool());
     ui->chkXhciPortLimit->setChecked(map_quirks["XhciPortLimit"].toBool());
     ui->chkDisableLinkeditJettison->setChecked(map_quirks["DisableLinkeditJettison"].toBool());
+
+    ui->chkExtendBTFeatureFlags->setChecked(map_quirks["ExtendBTFeatureFlags"].toBool());
+    ui->chkLegacyCommpage->setChecked(map_quirks["LegacyCommpage"].toBool());
 
     //Scheme
     QVariantMap map_Scheme = map["Scheme"].toMap();
@@ -2569,6 +2574,10 @@ QVariantMap MainWindow::SaveKernel()
     QVariantMap mapValue;
     mapValue["Cpuid1Data"] = HexStrToByte(ui->editCpuid1Data->text());
     mapValue["Cpuid1Mask"] = HexStrToByte(ui->editCpuid1Mask->text());
+    mapValue["DummyPowerManagement"] = getChkBool(ui->chkDummyPowerManagement);
+    mapValue["MaxKernel"] = ui->editMaxKernel->text().trimmed();
+    mapValue["MinKernel"] = ui->editMinKernel->text().trimmed();
+
     subMap["Emulate"] = mapValue;
 
     //Quirks
@@ -2580,7 +2589,6 @@ QVariantMap MainWindow::SaveKernel()
     mapQuirks["CustomSMBIOSGuid"] = getChkBool(ui->chkCustomSMBIOSGuid);
     mapQuirks["DisableIoMapper"] = getChkBool(ui->chkDisableIoMapper);
     mapQuirks["DisableRtcChecksum"] = getChkBool(ui->chkDisableRtcChecksum);
-    mapQuirks["DummyPowerManagement"] = getChkBool(ui->chkDummyPowerManagement);
     mapQuirks["ExternalDiskIcons"] = getChkBool(ui->chkExternalDiskIcons);
     mapQuirks["IncreasePciBarSize"] = getChkBool(ui->chkIncreasePciBarSize);
     mapQuirks["LapicKernelPanic"] = getChkBool(ui->chkLapicKernelPanic);
@@ -2589,6 +2597,9 @@ QVariantMap MainWindow::SaveKernel()
     mapQuirks["ThirdPartyDrives"] = getChkBool(ui->chkThirdPartyDrives);
     mapQuirks["XhciPortLimit"] = getChkBool(ui->chkXhciPortLimit);
     mapQuirks["DisableLinkeditJettison"] = getChkBool(ui->chkDisableLinkeditJettison);
+
+    mapQuirks["LegacyCommpage"] = getChkBool(ui->chkLegacyCommpage);
+    mapQuirks["ExtendBTFeatureFlags"] = getChkBool(ui->chkExtendBTFeatureFlags);
 
     subMap["Quirks"] = mapQuirks;
 
