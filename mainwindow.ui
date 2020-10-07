@@ -1176,11 +1176,7 @@ older models can be found in the Special NOTES section of acidanthera/bugtracker
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="editCpuid1Data">
-              <property name="statusTip">
-               <string> Sequence of EAX, EBX, ECX, EDX values to replace CPUID (1) call in XNU kernel.</string>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="editCpuid1Data"/>
             </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label_2">
@@ -1196,11 +1192,7 @@ older models can be found in the Special NOTES section of acidanthera/bugtracker
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="editCpuid1Mask">
-              <property name="statusTip">
-               <string> Bit mask of active bits in Cpuid1Data.</string>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="editCpuid1Mask"/>
             </item>
             <item row="2" column="0">
              <widget class="QCheckBox" name="chkDummyPowerManagement">
@@ -1232,11 +1224,7 @@ it can also be used to disable this kext in other situations (e.g. with Cpuid1Da
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QLineEdit" name="editMaxKernel">
-              <property name="statusTip">
-               <string> Sequence of EAX, EBX, ECX, EDX values to replace CPUID (1) call in XNU kernel.</string>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="editMaxKernel"/>
             </item>
             <item row="4" column="0">
              <widget class="QLabel" name="label_98">
@@ -1252,11 +1240,7 @@ it can also be used to disable this kext in other situations (e.g. with Cpuid1Da
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QLineEdit" name="editMinKernel">
-              <property name="statusTip">
-               <string> Bit mask of active bits in Cpuid1Data.</string>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="editMinKernel"/>
             </item>
            </layout>
           </widget>
