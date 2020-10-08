@@ -357,6 +357,8 @@ void MainWindow::initui_acpi()
     id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_acpi_add->setHorizontalHeaderItem(2, id0);
 
+    ui->table_acpi_add->setAlternatingRowColors(true);//底色交替显示
+
 
     //ACPI-Delete
     id0=new QTableWidgetItem(tr("TableSignature"));
@@ -378,6 +380,8 @@ void MainWindow::initui_acpi()
 
     id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_acpi_del->setHorizontalHeaderItem(5,id0);
+
+    ui->table_acpi_del->setAlternatingRowColors(true);
 
 
     //ACPI-Patch
@@ -421,6 +425,8 @@ void MainWindow::initui_acpi()
     id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_acpi_patch->setHorizontalHeaderItem(11,id0);
 
+    ui->table_acpi_patch->setAlternatingRowColors(true);
+
     if(zh_cn)
     {
         ui->table_acpi_patch->horizontalHeaderItem(0)->setToolTip("匹配表签名等于该值，除非全为零。");
@@ -454,6 +460,8 @@ void MainWindow::initui_booter()
 
     id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_booter->setHorizontalHeaderItem(2, id0);
+
+    ui->table_booter->setAlternatingRowColors(true);
 
     if(zh_cn)
     {
@@ -524,6 +532,7 @@ void MainWindow::initui_dp()
     ui->table_dp_add0->setMinimumWidth(400);
     id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
+    ui->table_dp_add0->setAlternatingRowColors(true);
 
 
     ui->table_dp_add->setColumnWidth(0,300);
@@ -537,16 +546,20 @@ void MainWindow::initui_dp()
     id0 = new QTableWidgetItem(tr("Class"));
     ui->table_dp_add->setHorizontalHeaderItem(1, id0);
 
+    ui->table_dp_add->setAlternatingRowColors(true);
+
     //Delete
 
     ui->table_dp_del0->setColumnWidth(0,400);
     ui->table_dp_del0->setMinimumWidth(400);
     id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_del0->setHorizontalHeaderItem(0, id0);
+    ui->table_dp_del0->setAlternatingRowColors(true);
 
     ui->table_dp_del->setColumnWidth(0,350);
     id0 = new QTableWidgetItem(tr("Value"));
     ui->table_dp_del->setHorizontalHeaderItem(0, id0);
+    ui->table_dp_del->setAlternatingRowColors(true);
 
 
 }
@@ -675,6 +688,8 @@ void MainWindow::initui_kernel()
     ui->table_kernel_add->setHorizontalHeaderItem(7, id0);
     ui->table_kernel_add->horizontalHeaderItem(7)->setToolTip(strArch);
 
+    ui->table_kernel_add->setAlternatingRowColors(true);
+
 
     //Block
     ui->table_kernel_block->setColumnCount(6);
@@ -700,6 +715,9 @@ void MainWindow::initui_kernel()
 
     id0 = new QTableWidgetItem(tr("Arch"));
     ui->table_kernel_block->setHorizontalHeaderItem(5, id0);
+
+    ui->table_kernel_block->setAlternatingRowColors(true);
+
 
     //Force
     ui->table_kernel_Force->setColumnCount(9);
@@ -740,6 +758,9 @@ void MainWindow::initui_kernel()
     ui->table_kernel_Force->setColumnWidth(0,250);
     id0 = new QTableWidgetItem(tr("Arch"));
     ui->table_kernel_Force->setHorizontalHeaderItem(8, id0);
+
+    ui->table_kernel_Force->setAlternatingRowColors(true);
+
 
     //Patch
     ui->table_kernel_patch->setColumnCount(14);
@@ -797,6 +818,9 @@ void MainWindow::initui_kernel()
 
     id0 = new QTableWidgetItem(tr("Arch"));
     ui->table_kernel_patch->setHorizontalHeaderItem(13, id0);
+
+    ui->table_kernel_patch->setAlternatingRowColors(true);
+
 
     //Scheme
     ui->cboxKernelArch->addItem("Auto");
@@ -1098,6 +1122,9 @@ void MainWindow::initui_misc()
     id0 = new QTableWidgetItem(tr("BlessOverride"));
     ui->tableBlessOverride->setHorizontalHeaderItem(0, id0);
 
+    ui->tableBlessOverride->setAlternatingRowColors(true);
+
+
     //Entries
     ui->tableEntries->setColumnWidth(0,550);
     id0 = new QTableWidgetItem(tr("Path"));
@@ -1119,6 +1146,8 @@ void MainWindow::initui_misc()
     id0 = new QTableWidgetItem(tr("Enabled"));
     ui->tableEntries->setHorizontalHeaderItem(5, id0);
 
+    ui->tableEntries->setAlternatingRowColors(true);
+
     //Tools
     ui->tableTools->setColumnWidth(0 , 450);
     id0 = new QTableWidgetItem(tr("Path"));
@@ -1139,6 +1168,8 @@ void MainWindow::initui_misc()
 
     id0 = new QTableWidgetItem(tr("Enabled"));
     ui->tableTools->setHorizontalHeaderItem(5, id0);
+
+    ui->tableTools->setAlternatingRowColors(true);
 
 
 }
@@ -1318,6 +1349,7 @@ void MainWindow::initui_nvram()
     ui->table_nv_add0->setMaximumWidth(500);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_add0->setHorizontalHeaderItem(0, id0);
+    ui->table_nv_add0->setAlternatingRowColors(true);
 
 
     ui->table_nv_add->setColumnWidth(0,200);
@@ -1331,15 +1363,22 @@ void MainWindow::initui_nvram()
     id0 = new QTableWidgetItem(tr("Class"));
     ui->table_nv_add->setHorizontalHeaderItem(1, id0);
 
+    ui->table_nv_add->setAlternatingRowColors(true);
+
     //Delete
 
     ui->table_nv_del0->setColumnWidth(0,600);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_del0->setHorizontalHeaderItem(0, id0);
 
+    ui->table_nv_del0->setAlternatingRowColors(true);
+
+
     ui->table_nv_del->setColumnWidth(0,600);
     id0 = new QTableWidgetItem(tr("Value"));
     ui->table_nv_del->setHorizontalHeaderItem(0, id0);
+
+    ui->table_nv_del->setAlternatingRowColors(true);
 
 
 
@@ -1348,10 +1387,12 @@ void MainWindow::initui_nvram()
     ui->table_nv_ls0->setColumnWidth(0,600);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_ls0->setHorizontalHeaderItem(0, id0);
+    ui->table_nv_ls0->setAlternatingRowColors(true);
 
     ui->table_nv_ls->setColumnWidth(0,600);
     id0 = new QTableWidgetItem(tr("Value"));
     ui->table_nv_ls->setHorizontalHeaderItem(0, id0);
+    ui->table_nv_ls->setAlternatingRowColors(true);
 
     QSplitter *splitterMain = new QSplitter(Qt::Horizontal,this);
     splitterMain->addWidget(ui->table_nv_add0);
@@ -2056,6 +2097,7 @@ void MainWindow::initui_UEFI()
     ui->table_uefi_drivers->setColumnWidth(0,1200);
     id0 = new QTableWidgetItem(tr("Drivers"));
     ui->table_uefi_drivers->setHorizontalHeaderItem(0, id0);
+    ui->table_uefi_drivers->setAlternatingRowColors(true);
 
     //KeySupportMode
     ui->cboxKeySupportMode->addItem("Auto");
@@ -2096,6 +2138,8 @@ void MainWindow::initui_UEFI()
 
     id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(4, id0);
+
+    ui->table_uefi_ReservedMemory->setAlternatingRowColors(true);
 
 
 

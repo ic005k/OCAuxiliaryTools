@@ -911,7 +911,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabKernel">
           <property name="currentIndex">
-           <number>4</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
