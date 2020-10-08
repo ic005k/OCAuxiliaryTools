@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.2-2020.10.06";
+    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.07";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -36,6 +36,24 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabNVRAM->setCurrentIndex(0);
     ui->tabPlatformInfo->setCurrentIndex(0);
     ui->tabUEFI->setCurrentIndex(0);
+
+    QString tabBarStyle1 = "QTabBar::tab {min-width:100px;color: rgba(150,150,150);border: 2px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:5px;}\
+            QTabBar::tab:!selected {margin-top: 5px;} \
+            QTabBar::tab:selected {color: rgba(255,255,255);}";
+
+    QString tabBarStyle2 = "QTabBar::tab {min-width:100px;color: black;background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #eeeeee, stop: 1 gray);border: 0px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:5px;}\
+             QTabBar::tab:!selected {margin-top: 5px;} \
+             QTabBar::tab:selected {color: blue;}";
+
+    QString tabBarStyle3 = "QTabWidget::pane{border:none;}\
+             QTabWidget::tab-bar{alignment:left;}\
+             QTabBar::tab{background:transparent;color:black;min-width:15ex;min-height:3ex;}\
+             QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
+             QTabBar::tab:selected{border-color: white;background:blue;color:white;}";
+
+
+    ui->tabTotal->setStyleSheet(tabBarStyle3);
+
 
     init_tr_str();
 
@@ -90,11 +108,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     //设置QToolTip颜色
-    QPalette palette = QToolTip::palette();
+    /*QPalette palette = QToolTip::palette();
     palette.setColor(QPalette::Inactive,QPalette::ToolTipBase,Qt::white);   //设置ToolTip背景色
     palette.setColor(QPalette::Inactive,QPalette::ToolTipText,QColor(50, 50, 255, 255)); 	//设置ToolTip字体色
     QToolTip::setPalette(palette);
-    QToolTip::setFont(font);  //设置ToolTip字体
+    QToolTip::setFont(font);*/  //设置ToolTip字体
 
 }
 
@@ -1901,13 +1919,15 @@ void MainWindow::initui_PlatformInfo()
 #ifdef Q_OS_WIN32
     QFile file(appInfo.filePath() + "/macserial.exe");
     if(file.exists())
-        gs->execute(appInfo.filePath() + "/macserial.exe" , QStringList() << "-s");//阻塞
+        gs->execute(appInfo.filePath() + "/macserial.exe" , QStringList() << "-s");//阻塞execute
     else
     {
-        ui->tabPlatformInfo->removeTab(4);
+
         ui->btnGenerate->setEnabled(false);
         ui->btnSystemUUID->setEnabled(false);
     }
+
+    ui->tabPlatformInfo->removeTab(4);
 
 #endif
 
@@ -4387,13 +4407,13 @@ void MainWindow::on_cboxSystemProductName_currentIndexChanged(const QString &arg
     // win
        QFile file(appInfo.filePath() + "/macserial.exe");
 
-       gs->execute(appInfo.filePath() + "/macserial.exe" , QStringList() << "-m" << str);//阻塞
+       gs->start(appInfo.filePath() + "/macserial.exe" , QStringList() << "-m" << str);//阻塞为execute
 
     #endif
 
     #ifdef Q_OS_LINUX
     // linux
-       gs->execute(appInfo.filePath() + "/macserial" , QStringList() << "-m" << str);
+       gs->start(appInfo.filePath() + "/macserial" , QStringList() << "-m" << str);
 
     #endif
 
@@ -4416,9 +4436,11 @@ void MainWindow::readResult()
     textMacInfo->clear();
     QString result = gbkCodec->toUnicode(gs->readAll());
     textMacInfo->append(result);
+    //取第三行的数据，第一行留给提示用
+    QString str = textMacInfo->document()->findBlockByNumber(2).text().trimmed();
 
+    //qDebug() << result;
 
-    QString str = textMacInfo->document()->findBlockByNumber(0).text().trimmed();
     QString str1, str2;
     for(int i = 0; i < str.count(); i++)
     {

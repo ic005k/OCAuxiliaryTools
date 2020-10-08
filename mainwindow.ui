@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1300</width>
-    <height>736</height>
+    <width>1200</width>
+    <height>721</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -94,8 +94,11 @@
     </item>
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -1593,7 +1596,7 @@ stability reasons. I.e. by specifying Mkext one will disable Prelinked for e.g. 
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabMisc">
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5010,7 +5013,7 @@ with macOS boot entries by design.</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1300</width>
+     <width>1200</width>
      <height>24</height>
     </rect>
    </property>
