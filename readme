@@ -1,17 +1,20 @@
 开源跨平台的OpenCore配置文件编辑器
 
-OpenCore逐渐流行起来，一直想做一款开源的跨平台的oc配置文件编辑器，目前终于达成。这样在mac之外的平台下配置oc显得格外轻松，特别是win和linux平台。
+OpenCore逐渐流行起来，一直想做一款开源跨平台的oc配置文件编辑器，目前终于达成。这样在mac之外的平台下配置oc显得格外轻松，特别是win和linux平台。
 
 该软件是根据oc最新的开发版提供的Sample.plist为蓝本，使用该软件前，建议将oc升级到最新版或最新的开发版。
 
+OC的开发版可以在此下载（软件『关于』里面也有这个友链）：https://github.com/williambj1/OpenCore-Factory/releases  感谢@williambj1提供！
+
 特点：
-0.稳健的plist文件底层读写代码，确保文件读写的正确性
+0.稳健的plist文件底层读写代码，确保数据读写的正确性
 1.多语言支持（目前支持中文和英文界面）
 2.开源、跨平台（win、mac、linux）
 3.各功能选项采用悬浮提示和状态栏提示
 4.完全可视化对Config.plist进行编辑
 5.紧跟OpenCore最新开发版，完全与之同步
 6.一键挂载ESP分区（mac、win）
+......
 
 QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
 https://github.com/reillywatson/qtplist
