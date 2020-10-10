@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
+    <width>1359</width>
     <height>721</height>
    </rect>
   </property>
@@ -98,7 +98,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -191,6 +191,9 @@ waking from hibernation.</string>
         </item>
         <item row="0" column="0" colspan="5">
          <widget class="QTabWidget" name="tabACPI">
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
+          </property>
           <property name="currentIndex">
            <number>0</number>
           </property>
@@ -370,6 +373,9 @@ waking from hibernation.</string>
        <layout class="QGridLayout" name="gridLayout_6">
         <item row="0" column="0" colspan="6">
          <widget class="QTabWidget" name="tabBooter">
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
+          </property>
           <property name="currentIndex">
            <number>0</number>
           </property>
@@ -740,6 +746,9 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
        <layout class="QGridLayout" name="gridLayout_8">
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabDP">
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
+          </property>
           <property name="currentIndex">
            <number>1</number>
           </property>
@@ -913,6 +922,9 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
        <layout class="QGridLayout" name="gridLayout_11">
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabKernel">
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
+          </property>
           <property name="currentIndex">
            <number>6</number>
           </property>
@@ -1595,8 +1607,11 @@ stability reasons. I.e. by specifying Mkext one will disable Prelinked for e.g. 
        <layout class="QGridLayout" name="gridLayout_16">
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabMisc">
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
+          </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2474,6 +2489,9 @@ A continuously updated variable list can be found in a corresponding document: N
         </item>
         <item row="0" column="0" colspan="3">
          <widget class="QTabWidget" name="tabNVRAM">
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
+          </property>
           <property name="currentIndex">
            <number>0</number>
           </property>
@@ -2799,6 +2817,9 @@ not using Automatic may lead to hard to debug errors.</string>
         </item>
         <item row="1" column="0" colspan="5">
          <widget class="QTabWidget" name="tabPlatformInfo">
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
+          </property>
           <property name="currentIndex">
            <number>0</number>
           </property>
@@ -3833,6 +3854,9 @@ central registration process.</string>
        <layout class="QGridLayout" name="gridLayout_28">
         <item row="0" column="0" colspan="6">
          <widget class="QTabWidget" name="tabUEFI">
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
+          </property>
           <property name="currentIndex">
            <number>5</number>
           </property>
@@ -5013,7 +5037,7 @@ with macOS boot entries by design.</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1200</width>
+     <width>1359</width>
      <height>24</height>
     </rect>
    </property>

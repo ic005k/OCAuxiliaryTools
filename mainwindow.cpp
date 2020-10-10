@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.07";
+    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.10";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -37,6 +37,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabPlatformInfo->setCurrentIndex(0);
     ui->tabUEFI->setCurrentIndex(0);
 
+    QString tabBarStyle0 = "QTabBar::tab {min-width:100px;border: 0px solid;border-top-left-radius: 5px;border-top-right-radius: 5px;padding:2px;}\
+            QTabBar::tab:!selected {margin-top: 2px;}\
+            QTabWidget::pane{border:none;}\
+            QTabBar::tab{background:transparent;color:black;}\
+            QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
+            QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
+
     QString tabBarStyle1 = "QTabBar::tab {min-width:100px;color: rgba(150,150,150);border: 2px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:5px;}\
             QTabBar::tab:!selected {margin-top: 5px;} \
             QTabBar::tab:selected {color: rgba(255,255,255);}";
@@ -47,12 +54,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     QString tabBarStyle3 = "QTabWidget::pane{border:none;}\
              QTabWidget::tab-bar{alignment:left;}\
-             QTabBar::tab{background:transparent;color:black;min-width:15ex;min-height:3ex;}\
+             QTabBar::tab{background:transparent;color:black;}\
              QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
-             QTabBar::tab:selected{border-color: white;background:blue;color:white;}";
+             QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
 
-
-    ui->tabTotal->setStyleSheet(tabBarStyle3);
+    //ui->tabTotal->setStyleSheet(tabBarStyle0);
 
 
     init_tr_str();
@@ -127,6 +133,45 @@ void MainWindow::openFile(QString PlistFileName)
         setWindowTitle(title + "    " + PlistFileName);
     else
         return;
+
+    //初始化
+    //ACPI
+    ui->table_acpi_add->setRowCount(0);
+    ui->table_acpi_del->setRowCount(0);
+    ui->table_acpi_patch->setRowCount(0);
+
+    //Booter
+    ui->table_booter->setRowCount(0);
+
+    //DP
+    ui->table_dp_add0->setRowCount(0);
+    ui->table_dp_add->setRowCount(0);
+    ui->table_dp_del0->setRowCount(0);
+    ui->table_dp_del->setRowCount(0);
+
+    //Kernel
+    ui->table_kernel_add->setRowCount(0);
+    ui->table_kernel_block->setRowCount(0);
+    ui->table_kernel_Force->setRowCount(0);
+    ui->table_kernel_patch->setRowCount(0);
+
+    //Misc
+    ui->tableBlessOverride->setRowCount(0);
+    ui->tableEntries->setRowCount(0);
+    ui->tableTools->setRowCount(0);
+
+    //UEFI
+    ui->table_uefi_drivers->setRowCount(0);
+    ui->table_uefi_ReservedMemory->setRowCount(0);
+
+    //NVRAM
+    ui->table_nv_add0->setRowCount(0);
+    ui->table_nv_add->setRowCount(0);
+    ui->table_nv_del0->setRowCount(0);
+    ui->table_nv_del->setRowCount(0);
+    ui->table_nv_ls0->setRowCount(0);
+    ui->table_nv_ls->setRowCount(0);
+
 
     QFile file(PlistFileName);
     QVariantMap map = PListParser::parsePList(&file).toMap();
@@ -1370,6 +1415,7 @@ void MainWindow::initui_nvram()
     ui->table_nv_add0->setAlternatingRowColors(true);
 
 
+
     ui->table_nv_add->setColumnWidth(0,200);
     id0 = new QTableWidgetItem(tr("Key"));
     ui->table_nv_add->setHorizontalHeaderItem(0, id0);
@@ -1382,6 +1428,7 @@ void MainWindow::initui_nvram()
     ui->table_nv_add->setHorizontalHeaderItem(1, id0);
 
     ui->table_nv_add->setAlternatingRowColors(true);
+
 
     //Delete
 
@@ -1407,10 +1454,12 @@ void MainWindow::initui_nvram()
     ui->table_nv_ls0->setHorizontalHeaderItem(0, id0);
     ui->table_nv_ls0->setAlternatingRowColors(true);
 
+
     ui->table_nv_ls->setColumnWidth(0,600);
     id0 = new QTableWidgetItem(tr("Value"));
     ui->table_nv_ls->setHorizontalHeaderItem(0, id0);
     ui->table_nv_ls->setAlternatingRowColors(true);
+
 
     QSplitter *splitterMain = new QSplitter(Qt::Horizontal,this);
     splitterMain->addWidget(ui->table_nv_add0);
