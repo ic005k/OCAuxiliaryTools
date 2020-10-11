@@ -1984,7 +1984,7 @@ void MainWindow::initui_PlatformInfo()
    gs->execute(appInfo.filePath() + "/macserial" , QStringList() << "-s");
    /*暂时屏蔽*/
    ui->tabPlatformInfo->removeTab(4);
-   ui->btnGenerate->setEnabled(false);
+   ui->btnGenerate->setEnabled(true);
 
 #endif
 
