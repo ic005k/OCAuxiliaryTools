@@ -274,7 +274,7 @@ hibernation functioning. Use MmioWhitelist section to do this.</source>
         <source>This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot
 argument. The behaviour with this quirk enabled is supposed to match T2-based model behaviour. Read this
 archived article to understand how to use single user mode with this quirk enabled.</source>
-        <translation>这是一个安全选项，允许通过忽略CMD + S热键和-s boot参数来限制单用户模式的使用。 启用此怪癖的行为应该与基于T2的模型行为相匹配。 阅读此存档文章，以了解如何在启用此怪癖的情况下使用单用户模式。</translation>
+        <translation type="unfinished">这是一个安全选项，允许通过忽略CMD + S热键和-s boot参数来限制单用户模式的使用。 启用此选项的行为应该与基于T2的模型行为相匹配。 阅读此存档文章，以了解如何在启用此选项的情况下使用单用户模式。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="478"/>
@@ -292,8 +292,8 @@ archived article to understand how to use single user mode with this quirk enabl
 protocol implemented in OpenRuntime.efi.
 Note: This quirk can also be used as an ugly workaround to buggy UEFI runtime services implementations that
 fail to write variables to NVRAM and break the rest of the operating system.</source>
-        <translation>这是一种安全选项，允许您限制macOS中的NVRAM访问。 此怪癖需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。
-注意：此怪癖也可用作解决UEFI运行时服务实现错误的丑陋解决方法，这些实现未能将变量写入NVRAM并破坏了操作系统的其余部分。</translation>
+        <translation type="unfinished">这是一种安全选项，允许您限制macOS中的NVRAM访问。 此选项需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。
+注意：此选项也可用作解决UEFI运行时服务实现错误的不完善的解决方法，这些实现未能将变量写入NVRAM并破坏了操作系统的其余部分。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="494"/>
@@ -333,7 +333,8 @@ quirk tries to patch boot.efi to lift that limitation and let some other value (
 requires ProvideCustomSlide to be enabled.
 Note: The necessity of this quirk is determined by safe mode availability. If booting to safe mode fails, this option
 can be tried to be enabled.</source>
-        <translation>此选项与在启动到安全模式时遇到问题的用户有关（例如，通过按住shift或使用-x boot参数）。 默认情况下，安全模式会强制滑动0，就好像系统是使用slide = 0引导参数启动的。 这个怪癖尝试修补boot.efi以解除该限制，并使用其他值（从1到255）。 此怪癖要求启用ProvideCustomSlide。 注意：此怪癖的必要性取决于安全模式的可用性。 如果启动到安全模式失败，则可以尝试启用此选项。</translation>
+        <translation type="unfinished">此选项与在启动到安全模式时遇到问题的用户有关（例如，通过按住shift或使用-x boot参数）。 默认情况下，安全模式会强制滑动0，就好像系统是使用slide = 0引导参数启动的。 这个选项尝试修补boot.efi以解除该限制，并使用其他值（从1到255）。 此选项要求启用ProvideCustomSlide。 
+注意：此选项的必要性取决于安全模式的可用性。 如果启动到安全模式失败，则可以尝试启用此选项。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="530"/>
@@ -353,7 +354,8 @@ OpenRuntime.efi.
 Note: This quirk may potentially weaken firmware security, please use RebuildAppleMemoryMap if your firmware
 supports memory attributes table (MAT). Refer to OCABC: MAT support is 1/0 log entry to determine whether
 MAT is supported.</source>
-        <translation>此选项通过在执行期间从CR0寄存器中删除写保护（WP）位来绕过UEFI运行时服务代码页中的RˆX权限。 此怪癖需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。 注意：此怪癖可能会削弱固件的安全性，如果您的固件支持内存属性表（MAT），请使用RebuildAppleMemoryMap。 请参阅OCABC：MAT支持是1/0日志条目，以确定是否支持MAT。</translation>
+        <translation type="unfinished">此选项通过在执行期间从CR0寄存器中删除写保护（WP）位来绕过UEFI运行时服务代码页中的RˆX权限。 此选项需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。 
+注意：此选项可能会削弱固件的安全性，如果您的固件支持内存属性表（MAT），请使用RebuildAppleMemoryMap。 请参阅OCABC：MAT支持是1/0日志条目，以确定是否支持MAT。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="548"/>
@@ -371,7 +373,8 @@ MAT is supported.</source>
 current memory map and retrying ExitBootServices call.
 Note: The necessity of this quirk is determined by early boot crashes of the firmware. Do not use this unless you
 fully understand the consequences.</source>
-        <translation>尝试通过获取当前内存映射并重试ExitBootServices调用来确保即使使用了过期的MemoryMap键参数也可以成功退出ExitBootServices调用。 注意：此怪癖的必要性取决于固件的早期启动崩溃。 除非您完全了解后果，否则请勿使用此功能。</translation>
+        <translation type="unfinished">尝试通过获取当前内存映射并重试ExitBootServices调用来确保即使使用了过期的MemoryMap键参数也可以成功退出ExitBootServices调用。 
+注意：此选项的必要性取决于固件的早期启动崩溃。 除非您完全了解后果，否则请勿使用此功能。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="564"/>
@@ -392,7 +395,8 @@ at runtime for NVRAM support.
 This quirk attempts to fix types of these regions, e.g. ACPI NVS for CSM or MMIO for MMIO.
 Note: The necessity of this quirk is determined by artifacts, sleep wake issues, and boot failures. In general only
 very old firmwares need this quirk.</source>
-        <translation>一些固件错误地映射了选定的内存区域：•CSM区域可以标记为引导服务代码或数据，从而将其留作XNU内核的可用内存。 •MMIO区域可以标记为保留内存并保持未映射状态，但是可能需要在运行时对其进行访问以支持NVRAM。 这个怪癖尝试修复这些区域的类型，例如 CSM的ACPI NVS或MMIO的MMIO。 注意：此怪癖的必要性由工件，睡眠唤醒问题和引导失败确定。 通常，只有非常老的固件才需要此怪癖。</translation>
+        <translation type="unfinished">一些固件错误地映射了选定的内存区域：•CSM区域可以标记为引导服务代码或数据，从而将其留作XNU内核的可用内存。 •MMIO区域可以标记为保留内存并保持未映射状态，但是可能需要在运行时对其进行访问以支持NVRAM。 这个选项尝试修复这些区域的类型，例如 CSM的ACPI NVS或MMIO的MMIO。 
+注意：此选项的必要性由工件，睡眠唤醒问题和引导失败确定。 通常，只有非常老的固件才需要此选项。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="583"/>
@@ -409,7 +413,8 @@ very old firmwares need this quirk.</source>
         <source>Reports security violation during attempts to write to db, dbx, PK, and KEK variables from the operating system.
 Note: This quirk mainly attempts to avoid issues with NVRAM implementations with problematic defragmentation,
 such as select Insyde or MacPro5,1.</source>
-        <translation>在尝试从操作系统写入db，dbx，PK和KEK变量期间报告安全冲突。 注意：此怪癖主要试图避免NVRAM实施中出现问题的碎片整理问题，例如select Insyde或MacPro5,1。</translation>
+        <translation type="unfinished">在尝试从操作系统写入db，dbx，PK和KEK变量期间报告安全冲突。 
+注意：此选项主要试图避免NVRAM实施中出现问题的碎片整理问题，例如select Insyde或MacPro5,1。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="598"/>
@@ -429,7 +434,7 @@ affect memory management, like DevirtualiseMmio, ProtectMemoryRegions, or Rebuil
 may also break other quirks depending on the effects of these.
 Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest might run unreliably with
 more than one virtual core.” message.</source>
-        <translation>包括硬件和虚拟机（例如VMware）在内的某些现代固件可能会在驱动程序加载和相关操作期间更新指向UEFI服务的指针。 因此，这直接破坏了影响内存管理的其他怪癖，例如DevirtualiseMmio，ProtectMemoryRegions或RebuildAppleMemoryMap，并且还可能破坏其他怪癖，具体取决于这些怪癖。
+        <translation type="unfinished">包括硬件和虚拟机（例如VMware）在内的某些现代固件可能会在驱动程序加载和相关操作期间更新指向UEFI服务的指针。 因此，这直接破坏了影响内存管理的其他选项，例如DevirtualiseMmio，ProtectMemoryRegions或RebuildAppleMemoryMap，并且还可能破坏其他选项，具体取决于这些选项。
 注意：在VMware上，可以通过“您的Mac OS来宾系统可能不可靠地在多个虚拟内核上运行”来诊断此问题。 信息。</translation>
     </message>
     <message>
@@ -451,8 +456,8 @@ pseudo random value among the available ones. This also ensures that slide= argu
 operating system for security reasons.
 Note: The necessity of this quirk is determined by OCABC: Only N/256 slide values are usable! message
 in the debug log. If the message is present, this option is to be enabled.</source>
-        <translation>此选项对固件执行内存映射分析，并检查是否可以使用所有幻灯片（从1到255）。 由于boot.efi使用rdrand或伪随机rdtsc随机生成此值，因此当它选择冲突的幻灯片时可能会导致启动失败。 如果存在潜在冲突，此选项将强制macOS使用可用随机值中的伪随机值。 这也可以确保出于安全原因，slide =参数不会传递给操作系统。
-注意：此怪癖的必要性由OCABC决定：仅N / 256个滑块值可用！ 消息在调试日志中。 如果显示该消息，则将启用此选项。</translation>
+        <translation type="unfinished">此选项对固件执行内存映射分析，并检查是否可以使用所有幻灯片（从1到255）。 由于boot.efi使用rdrand或伪随机rdtsc随机生成此值，因此当它选择冲突的幻灯片时可能会导致启动失败。 如果存在潜在冲突，此选项将强制macOS使用可用随机值中的伪随机值。 这也可以确保出于安全原因，slide =参数不会传递给操作系统。
+注意：此选项的必要性由OCABC决定：仅N / 256个滑块值可用！ 消息在调试日志中。 如果显示该消息，则将启用此选项。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="635"/>
@@ -481,11 +486,11 @@ SyncRuntimePermissions.
 Note 2 : The necessity of this quirk is determined by early boot failures. This quirk replaces EnableWriteUnprotector
 on firmwares supporting memory attributes table (MAT). This quirk is generally unnecessary when using
 OpenDuetPkg, but may be required to boot macOS 10.6 and earlier for unclear reasons.</source>
-        <translation>Apple内核在解析UEFI内存映射时有一些限制：
+        <translation type="unfinished">Apple内核在解析UEFI内存映射时有一些限制：
 •内存映射大小不得超过4096字节，因为Apple内核将其映射为单个4K页面。由于某些固件具有非常大的内存映射（大约超过100个条目），Apple内核将在启动时崩溃。
-•内存属性表被忽略。 EfiRuntimeServicesCode内存静态获取RX权限，所有其他内存类型获取RW权限。由于某些固件驱动程序可能会在运行时写入全局变量，因此，除非驱动程序.data节具有EfiRuntimeServicesData类型，否则Apple内核将在调用UEFI运行时服务时崩溃。要解决这些限制，此怪癖将内存属性表权限应用于传递给Apple内核的内存映射，并且如果生成的内存映射超过4 KB，则可以选择尝试统一相似类型的连续插槽。
+•内存属性表被忽略。 EfiRuntimeServicesCode内存静态获取RX权限，所有其他内存类型获取RW权限。由于某些固件驱动程序可能会在运行时写入全局变量，因此，除非驱动程序.data节具有EfiRuntimeServicesData类型，否则Apple内核将在调用UEFI运行时服务时崩溃。要解决这些限制，此选项将内存属性表权限应用于传递给Apple内核的内存映射，并且如果生成的内存映射超过4 KB，则可以选择尝试统一相似类型的连续插槽。
 注1：由于许多固件附带不正确的内存保护表，因此该问题通常与SyncRuntimePermissions一起使用。
-注2：此怪癖的必要性取决于早期启动故障。此怪癖取代了支持内存属性表（MAT）的固件上的EnableWriteUnprotector。使用OpenDuetPkg时，通常不需要此怪癖，但出于不清楚的原因，可能需要引导macOS 10.6和更早版本。</translation>
+注2：此选项的必要性取决于早期启动故障。此选项取代了支持内存属性表（MAT）的固件上的EnableWriteUnprotector。使用OpenDuetPkg时，通常不需要此选项，但出于不清楚的原因，可能需要引导macOS 10.6和更早版本。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="662"/>
@@ -504,8 +509,8 @@ crashes. This quirk workarounds the problem by performing early boot identity ma
 addresses to physical memory.
 Note: The necessity of this quirk is determined by early boot failures. Currently new firmwares with memory
 protection support (like OVMF) do not support this quirk due to acidanthera/bugtracker#719.</source>
-        <translation>在SetVirtualAddresses调用之后，某些固件通过虚拟地址访问内存，这会导致早期启动崩溃。 该怪异解决方法通过执行分配的虚拟地址到物理内存的早期启动身份映射来解决该问题。
-注意：此怪癖的必要性取决于早期启动故障。 目前，由于acidanthera / bugtracker＃719，支持内存保护的新固件（例如OVMF）不支持此功能。</translation>
+        <translation type="unfinished">在SetVirtualAddresses调用之后，某些固件通过虚拟地址访问内存，这会导致早期启动崩溃。 该怪异解决方法通过执行分配的虚拟地址到物理内存的早期启动身份映射来解决该问题。
+注意：此选项的必要性取决于早期启动故障。 目前，由于acidanthera / bugtracker＃719，支持内存保护的新固件（例如OVMF）不支持此功能。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="679"/>
@@ -543,12 +548,12 @@ enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.</source>
 This quirk tries to update memory map and memory attributes table to correct this.
 Note: The necessity of this quirk is determined by early boot failures either in macOS or in Linux/Windows. In
 general only firmwares released in 2018 or later are affected.</source>
-        <translation>某些固件无法正确处理运行时权限：
+        <translation type="unfinished">某些固件无法正确处理运行时权限：
 •它们错误地将OpenRuntime标记为在内存映射中不可执行。
 •它们在内存属性表中错误地将OpenRuntime标记为不可执行。
 •加载OpenRuntime之后，它们将从内存属性表中丢失条目。
-•它们将内存属性表中的项目标记为读写执行。 此怪癖尝试更新内存映射和内存属性表以更正此问题。
-注意：此怪癖的必要性取决于macOS或Linux / Windows中的早期启动故障。 通常，仅2018年或之后发布的固件会受到影响。</translation>
+•它们将内存属性表中的项目标记为读写执行。 此选项尝试更新内存映射和内存属性表以更正此问题。
+注意：此选项的必要性取决于macOS或Linux / Windows中的早期启动故障。 通常，仅2018年或之后发布的固件会受到影响。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="713"/>
@@ -950,7 +955,7 @@ controllers.</source>
 timeout for Apple drivers. Sometimes it may cause issues on misconfigured hardware, notably digital audio, which
 sometimes fails to wake up. For debug kernels setpowerstate_panic=0 boot argument should be used, which is
 otherwise equivalent to this quirk.</source>
-        <translation>向macOS Catalina（10.15）添加了额外的安全措施，导致Apple驱动程序的电源更改超时导致内核崩溃。 有时，它可能会导致配置错误的硬件出现问题，尤其是数字音频，有时无法唤醒。 对于调试内核，应使用setpowerstate_panic = 0引导参数，否则它等同于此怪癖。</translation>
+        <translation type="unfinished">向macOS Catalina（10.15）添加了额外的安全措施，导致Apple驱动程序的电源更改超时导致内核崩溃。 有时，它可能会导致配置错误的硬件出现问题，尤其是数字音频，有时无法唤醒。 对于调试内核，应使用setpowerstate_panic = 0引导参数，否则它等同于此选项。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1483"/>
@@ -1915,10 +1920,10 @@ patching AppleSmbios.kext and AppleACPIPlatform.kext to read from another GUID: 
 &quot;EB9D2D35&quot; (in ASCII), done automatically by CustomSMBIOSGuid quirk.
 Note: A side effect of using Custom approach is making SMBIOS updates exclusive to macOS, avoiding a collission
 with existing Windows activation and custom OEM software but potentially breaking Apple-specific tools.</source>
-        <translation>•TryOverwrite-如果新大小小于对齐页面的原始大小，并且旧版区域解锁没有问题，则覆盖。否则创建。某些固件有问题。
+        <translation type="unfinished">•TryOverwrite-如果新大小小于对齐页面的原始大小，并且旧版区域解锁没有问题，则覆盖。否则创建。某些固件有问题。
 •创建-使用在AllocateMaxAddress处新分配的EfiReservedMemoryType替换表，而没有任何后备。
 •覆盖-如果现有gEfiSmbiosTableGuid和gEfiSmbiosTable3Guid数据适合新大小，则将其覆盖。否则以未指定状态中止。
-•自定义-将SMBIOS表（gEfiSmbios（3）TableGuid）写入gOcCustomSmbios（3）TableGuid，以解决固件在ExitBootServices覆盖SMBIOS内容的问题。否则等效于创建。需要修补AppleSmbios.kext和AppleACPIPlatform.kext以便从另一个GUID读取：“ EB9D2D31”-“ EB9D2D35”（ASCII），由CustomSMBIOSGuid怪癖自动完成。注意：使用自定义方法的副作用是使SMBIOS更新仅适用于macOS，从而避免了与现有Windows激活和自定义OEM软件的冲突，但有可能破坏Apple专用工具。</translation>
+•自定义-将SMBIOS表（gEfiSmbios（3）TableGuid）写入gOcCustomSmbios（3）TableGuid，以解决固件在ExitBootServices覆盖SMBIOS内容的问题。否则等效于创建。需要修补AppleSmbios.kext和AppleACPIPlatform.kext以便从另一个GUID读取：“ EB9D2D31”-“ EB9D2D35”（ASCII），由CustomSMBIOSGuid选项自动完成。注意：使用自定义方法的副作用是使SMBIOS更新仅适用于macOS，从而避免了与现有Windows激活和自定义OEM软件的冲突，但有可能破坏Apple专用工具。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2795"/>
@@ -3973,10 +3978,10 @@ RequestBootVarRouting enabled. As Windows bootloader option will not be created 
 firmware will attempt to create it itself, and then corrupt its boot option list.
 This quirk removes all duplicates in BootOrder variable attempting to resolve the consequences of the bugs upon
 OpenCore loading. It is recommended to use this key along with BootProtect option.</source>
-        <translation>此怪癖需要启用RequestBootVarRouting，因此需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。通过在RequestBootVarRouting怪癖的帮助下将Boot前缀变量重定向到单独的GUID名称空间，我们实现了多个目标：
+        <translation type="unfinished">此选项需要启用RequestBootVarRouting，因此需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。通过在RequestBootVarRouting选项的帮助下将Boot前缀变量重定向到单独的GUID名称空间，我们实现了多个目标：
 •操作系统被监禁，并且只能由OpenCore引导环境控制，以增强安全性。
 •操作系统不会与OpenCore引导优先级混为一谈，并且对于需要在中间使用OpenCore进行重新引导的情况，可以保证流畅的更新和休眠唤醒。
-•可能不兼容的引导条目（例如macOS条目）不会被删除或以任何方式损坏。但是，某些固件在启动时会通过检查可用磁盘上的文件是否存在来进行自身的启动选项扫描。此扫描经常包含非标准位置，例如Windows Bootloader路径。通常这不是问题，但是某些固件（尤其是APTIO V上的ASUS固件）存在错误。对于他们来说，扫描的执行不当，并且由于BootOrder条目重复（每个选项将被添加两次），固件首选项可能会意外损坏（无法对NVRAM进行引导）。要触发该错误，应具有一些有效的启动选项（例如OpenCore），然后在启用RequestBootVarRouting的情况下安装Windows。由于Windows安装程序不会创建Windows引导程序选项，因此固件将尝试自行创建它，然后破坏其引导选项列表。这个怪癖会删除BootOrder变量中的所有重复项，以尝试解决OpenCore加载时错误的后果。建议将此键与BootProtect选项一起使用。</translation>
+•可能不兼容的引导条目（例如macOS条目）不会被删除或以任何方式损坏。但是，某些固件在启动时会通过检查可用磁盘上的文件是否存在来进行自身的启动选项扫描。此扫描经常包含非标准位置，例如Windows Bootloader路径。通常这不是问题，但是某些固件（尤其是APTIO V上的ASUS固件）存在错误。对于他们来说，扫描的执行不当，并且由于BootOrder条目重复（每个选项将被添加两次），固件首选项可能会意外损坏（无法对NVRAM进行引导）。要触发该错误，应具有一些有效的启动选项（例如OpenCore），然后在启用RequestBootVarRouting的情况下安装Windows。由于Windows安装程序不会创建Windows引导程序选项，因此固件将尝试自行创建它，然后破坏其引导选项列表。这个选项会删除BootOrder变量中的所有重复项，以尝试解决OpenCore加载时错误的后果。建议将此键与BootProtect选项一起使用。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="4894"/>
@@ -4010,7 +4015,7 @@ may freeze upon boot. Not recommended unless required.</source>
     <message>
         <location filename="mainwindow.ui" line="4921"/>
         <source>Note: The quirk is mostly relevant for select HP laptops with no drives listed.</source>
-        <translation>注意：该怪癖与未列出驱动器的某些HP笔记本电脑最相关。</translation>
+        <translation type="unfinished">注意：该选项与未列出驱动器的某些HP笔记本电脑最相关。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="4924"/>
@@ -4029,7 +4034,7 @@ may freeze upon boot. Not recommended unless required.</source>
 namely ASUS Z87-Pro, when using FileVault 2 in particular. It seems that for some reason they execute code
 in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. A better
 approach should be found in some future. Expect 3-5 seconds to be enough in case the quirk is needed.</source>
-        <translation>特别是在使用FileVault 2时，要避免在某些APTIO IV固件（即ASUS Z87-Pro）上规避“仍然等待根设备”消息，这是一个非常丑陋的怪癖。 似乎由于某种原因，它们与EXIT_BOOT_SERVICES并行执行代码，这导致无法从macOS访问SATA控制器。 将来会找到更好的方法。 预计需要3-5秒，以备不时之需。</translation>
+        <translation type="unfinished">特别是在使用FileVault 2时，要避免在某些APTIO IV固件（即ASUS Z87-Pro）上规避“仍然等待根设备”消息，这是一个非常丑陋的选项。 似乎由于某种原因，它们与EXIT_BOOT_SERVICES并行执行代码，这导致无法从macOS访问SATA控制器。 将来会找到更好的方法。 预计需要3-5秒，以备不时之需。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="4954"/>
@@ -4054,7 +4059,7 @@ variant of VoodooTSCSync for newer laptops).
 Note: The reason this quirk cannot replace the kernel driver is because it cannot operate in ACPI S3 mode (sleep
 wake) and because the UEFI firmwares provide very limited multicore support preventing the precise update of
 the MSR registers.</source>
-        <translation>该怪癖的主要目的是在运行调试XNU内核时在某些服务器和便携式计算机模型上启用早期引导TSC同步。对于调试内核，在任何kext可能导致所有其他解决方案出现问题之前，TSC需要在内核之间保持同步。超时以微秒为单位指定，并取决于平台上存在的内核数量，建议的起始值为500000。这是一个实验性的怪癖，仅应用于上述问题。在所有其他情况下，怪癖可能会使操作系统不稳定，因此不建议这样做。在其他情况下，推荐的解决方案是安装内核驱动程序，例如VoodooTSCSync，TSCAdjustReset或CpuTscSync（VoodooTSCSync的更专业版本，用于较新的笔记本电脑）。
+        <translation type="unfinished">该选项的主要目的是在运行调试XNU内核时在某些服务器和便携式计算机模型上启用早期引导TSC同步。对于调试内核，在任何kext可能导致所有其他解决方案出现问题之前，TSC需要在内核之间保持同步。超时以微秒为单位指定，并取决于平台上存在的内核数量，建议的起始值为500000。这是一个实验性的选项，仅应用于上述问题。在所有其他情况下，该选项可能会使操作系统不稳定，因此不建议这样做。在其他情况下，推荐的解决方案是安装内核驱动程序，例如VoodooTSCSync，TSCAdjustReset或CpuTscSync（VoodooTSCSync的更专业版本，用于较新的笔记本电脑）。
 注意：该问题无法替换内核驱动程序的原因是，它无法在ACPI S3模式（睡眠唤醒）下运行，并且因为UEFI固件提供了非常有限的多核支持，从而无法精确更新MSR寄存器。</translation>
     </message>
     <message>
@@ -4090,7 +4095,7 @@ when it is not required.</source>
 boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required
 to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible
 with macOS boot entries by design.</source>
-        <translation>此怪癖需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。 当固件删除不兼容的启动项时，该怪癖可以保留默认的启动项。 简而言之，您需要启用此怪癖才能在设计上与macOS引导项不兼容的固件中可靠地使用“启动磁盘”首选项窗格。</translation>
+        <translation type="unfinished">此选项需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。 当固件删除不兼容的启动项时，该选项可以保留默认的启动项。 简而言之，您需要启用此选项才能在设计上与macOS引导项不兼容的固件中可靠地使用“启动磁盘”首选项窗格。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="5008"/>

@@ -577,7 +577,7 @@ public:
 #endif
 
 #ifdef Q_OS_LINUX
-            s.rwidth() = 285; // 设置每个tabBar中item的大小
+            s.rwidth() = 230; // 设置每个tabBar中item的大小
             s.rheight() = 35;
 #endif
 
