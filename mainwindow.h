@@ -543,7 +543,7 @@ public:
 #endif
 
 #ifdef Q_OS_LINUX
-  painter->setFont(QFont("微软雅黑", 13, QFont::Bold));
+  painter->setFont(QFont("微软雅黑", 12, QFont::Bold));
 #endif
 
 #ifdef Q_OS_MAC
@@ -629,7 +629,7 @@ public:
 #endif
 
 #ifdef Q_OS_LINUX
-  painter->setFont(QFont("微软雅黑", 15, QFont::Bold));
+  painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
 #endif
 
 #ifdef Q_OS_MAC
