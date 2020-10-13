@@ -6,7 +6,6 @@
 #include <QFileDialog>
 #include <QSettings>
 #include <QBuffer>
-#include <QDebug>
 #include <QMessageBox>
 
 QString PlistFileName;
@@ -24,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.10";
+    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.12";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -36,6 +35,21 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabNVRAM->setCurrentIndex(0);
     ui->tabPlatformInfo->setCurrentIndex(0);
     ui->tabUEFI->setCurrentIndex(0);
+
+    ui->btnExportSub->setVisible(false);
+    ui->btnImportSub->setVisible(false);
+
+    ui->tabTotal->tabBar()->setTabToolTip(0, tr("ACPI"));
+    ui->tabTotal->tabBar()->setTabToolTip(1, tr("Booter"));
+
+    ui->tabTotal->tabBar()->setTabToolTip(2, tr("DeviceProperties"));
+    //ui->tabTotal->tabBar()->setTabText(2, tr("Device\nProperties"));
+
+    ui->tabTotal->tabBar()->setTabToolTip(3, tr("Kernel"));
+    ui->tabTotal->tabBar()->setTabToolTip(4, tr("Misc"));
+    ui->tabTotal->tabBar()->setTabToolTip(5, tr("NVRAM"));
+    ui->tabTotal->tabBar()->setTabToolTip(6, tr("PlatformInfo"));
+    ui->tabTotal->tabBar()->setTabToolTip(7, tr("UEFI"));
 
     QString tabBarStyle0 = "QTabBar::tab {min-width:100px;border: 0px solid;border-top-left-radius: 5px;border-top-right-radius: 5px;padding:2px;}\
             QTabBar::tab:!selected {margin-top: 2px;}\
@@ -58,7 +72,21 @@ MainWindow::MainWindow(QWidget *parent)
              QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
              QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
 
-    //ui->tabTotal->setStyleSheet(tabBarStyle0);
+    //ui->tabTotal->setStyleSheet(tabBarStyle3);
+    ui->tabTotal->tabBar()->setStyle(new CustomTabStyle4);
+    ui->tabACPI->tabBar()->setStyle(new CustomTabStyle5);
+    ui->tabBooter->tabBar()->setStyle(new CustomTabStyle5);
+    ui->tabDP->tabBar()->setStyle(new CustomTabStyle5);
+    ui->tabKernel->tabBar()->setStyle(new CustomTabStyle5);
+    ui->tabMisc->tabBar()->setStyle(new CustomTabStyle5);
+    ui->tabNVRAM->tabBar()->setStyle(new CustomTabStyle5);
+    ui->tabPlatformInfo->tabBar()->setStyle(new CustomTabStyle5);
+    ui->tabUEFI->tabBar()->setStyle(new CustomTabStyle5);
+
+    ui->tabTotal->setIconSize(QSize(32, 32));
+    QIcon icon;
+    icon.addFile(":/acpi.png");
+    //ui->tabTotal->tabBar()->setTabIcon(0, icon);
 
 
     init_tr_str();
@@ -95,6 +123,8 @@ MainWindow::MainWindow(QWidget *parent)
 
    font.setPixelSize(17);
 
+   ui->tabTotal->setDocumentMode(false);
+
 #endif
 
 #ifdef Q_OS_LINUX
@@ -119,6 +149,7 @@ MainWindow::MainWindow(QWidget *parent)
     palette.setColor(QPalette::Inactive,QPalette::ToolTipText,QColor(50, 50, 255, 255)); 	//设置ToolTip字体色
     QToolTip::setPalette(palette);
     QToolTip::setFont(font);*/  //设置ToolTip字体
+
 
 }
 
@@ -199,7 +230,7 @@ void MainWindow::on_btnOpen_clicked()
 {
     QFileDialog fd;
 
-    PlistFileName = fd.getOpenFileName(this,"配置文件","","配置文件(*.plist);;所有文件(*.*)");
+    PlistFileName = fd.getOpenFileName(this,"Config file","","Config file(*.plist);;所有文件(*.*)");
 
     openFile(PlistFileName);
 }
@@ -406,6 +437,9 @@ void MainWindow::ParserACPI(QVariantMap map)
 
 void MainWindow::initui_acpi()
 {
+
+    ui->btnExportMaster->setText(tr("Export") + "  ACPI");
+    ui->btnImportMaster->setText(tr("Import") + "  ACPI");
 
     QTableWidgetItem *id0;
     //ACPI-Add
@@ -2381,6 +2415,7 @@ void MainWindow::SavePlist(QString FileName)
 
 
     OpenCore["ACPI"] = SaveACPI();
+
     OpenCore["Booter"] = SaveBooter();
     OpenCore["DeviceProperties"] = SaveDeviceProperties();
     OpenCore["Kernel"] = SaveKernel();
@@ -2396,8 +2431,10 @@ void MainWindow::SavePlist(QString FileName)
 QVariantMap MainWindow::SaveACPI()
 {
     //ACPI
+
     //Add
     QVariantMap acpiMap;
+
     QVariantList acpiAdd;
     QVariantMap acpiAddSub;
 
@@ -2410,11 +2447,11 @@ QVariantMap MainWindow::SaveACPI()
         acpiAdd.append(acpiAddSub); //最后一层
         acpiMap["Add"] = acpiAdd; //第二层
 
-
     }
 
 
     //Delete
+
     QVariantList acpiDel;
     QVariantMap acpiDelSub;
     QString str;
@@ -2440,10 +2477,11 @@ QVariantMap MainWindow::SaveACPI()
     }
 
 
+
     //Patch
+
     QVariantList acpiPatch;
     QVariantMap acpiPatchSub;
-
 
     for(int i = 0; i < ui->table_acpi_patch->rowCount(); i ++)
     {
@@ -2472,8 +2510,10 @@ QVariantMap MainWindow::SaveACPI()
 
     }
 
+
     //Quirks
     QVariantMap acpiQuirks;
+
     acpiQuirks["FadtEnableReset"] = getChkBool(ui->chkFadtEnableReset);
     acpiQuirks["NormalizeHeaders"] = getChkBool(ui->chkNormalizeHeaders);
     acpiQuirks["RebaseRegions"] = getChkBool(ui->chkRebaseRegions);
@@ -2481,7 +2521,6 @@ QVariantMap MainWindow::SaveACPI()
     acpiQuirks["ResetLogoStatus"] = getChkBool(ui->chkResetLogoStatus);
 
     acpiMap["Quirks"] = acpiQuirks;
-
 
     return  acpiMap;
 
@@ -4209,23 +4248,10 @@ void MainWindow::test(bool test)
     {
         ui->btnTestWrite->setVisible(1);
 
-        ui->btnParse->setVisible(1);
-        ui->btnSerialize->setVisible(1);
-
-        ui->btnQuickOpen1->setVisible(1);
-        ui->btnQuickOpen2->setVisible(1);
-
-
     }
     else
     {
         ui->btnTestWrite->setVisible(0);
-
-        ui->btnParse->setVisible(0);
-        ui->btnSerialize->setVisible(0);
-
-        ui->btnQuickOpen1->setVisible(0);
-        ui->btnQuickOpen2->setVisible(0);
 
     }
 }
@@ -4815,4 +4841,231 @@ void MainWindow::init_tr_str()
     strMinKernel = tr("Adds kernel driver on specified macOS version or newer.");
     strPlistPath = tr(" Kext Info.plist path relative to bundle (e.g. Contents/Info.plist).");
 
+}
+
+void MainWindow::on_btnExportMaster_clicked()
+{
+    QFileDialog fd;
+    QString defname;
+    int index = ui->tabTotal->currentIndex();
+
+    switch (index) {
+        case 0:defname = "ACPI";
+        break;
+        case 1:defname = "Booter";
+        break;
+        case 2:defname = "DeviceProperties";
+        break;
+        case 3:defname = "Kernel";
+        break;
+        case 4:defname = "Misc";
+        break;
+        case 5:defname = "NVRAM";
+        break;
+        case 6:defname = "PlatformInfo";
+        break;
+        case 7:defname = "UEFI";
+
+    }
+
+
+    QString FileName = fd.getSaveFileName(this,tr("Save File"), defname,tr("Config file(*.plist);;All files(*.*)"));
+    if(FileName.isEmpty())
+        return;
+
+    QVariantMap OpenCore;
+
+    switch (index) {
+        case 0:
+        OpenCore["ACPI"] = SaveACPI();
+
+        break;
+
+        case 1:OpenCore["Booter"] = SaveBooter();
+        break;
+
+        case 2:OpenCore["DeviceProperties"] = SaveDeviceProperties();
+        break;
+
+        case 3:OpenCore["Kernel"] = SaveKernel();
+        break;
+
+        case 4:OpenCore["Misc"] = SaveMisc();
+        break;
+
+        case 5:OpenCore["NVRAM"] = SaveNVRAM();
+        break;
+
+        case 6:OpenCore["PlatformInfo"] = SavePlatformInfo();
+        break;
+
+        case 7: OpenCore["UEFI"] = SaveUEFI();
+        break;
+
+    }
+
+    PListSerializer::toPList(OpenCore , FileName);
+
+
+}
+
+void MainWindow::on_btnImportMaster_clicked()
+{
+    QFileDialog fd;
+    QString defname;
+    int index = ui->tabTotal->currentIndex();
+
+    switch (index) {
+        case 0:defname = "ACPI.plist";
+        break;
+        case 1:defname = "Booter.plist";
+        break;
+        case 2:defname = "DeviceProperties.plist";
+        break;
+        case 3:defname = "Kernel.plist";
+        break;
+        case 4:defname = "Misc.plist";
+        break;
+        case 5:defname = "NVRAM.plist";
+        break;
+        case 6:defname = "PlatformInfo.plist";
+        break;
+        case 7:defname = "UEFI.plist";
+
+    }
+
+
+    QString FileName = fd.getOpenFileName(this,tr("Open File"), defname,tr("Config file(*.plist);;All files(*.*)"));
+    if(FileName.isEmpty())
+        return;
+
+    loading = true;
+
+    QFile file(FileName);
+    QVariantMap map = PListParser::parsePList(&file).toMap();
+
+    switch (index) {
+        case 0:
+        //ACPI
+        ui->table_acpi_add->setRowCount(0);
+        ui->table_acpi_del->setRowCount(0);
+        ui->table_acpi_patch->setRowCount(0);
+        ParserACPI(map);
+
+        break;
+
+        case 1:
+        //Booter
+        ui->table_booter->setRowCount(0);
+        ParserBooter(map);
+        break;
+
+        case 2:
+        //DP
+        ui->table_dp_add0->setRowCount(0);
+        ui->table_dp_add->setRowCount(0);
+        ui->table_dp_del0->setRowCount(0);
+        ui->table_dp_del->setRowCount(0);
+        ParserDP(map);
+        break;
+
+        case 3:
+        //Kernel
+        ui->table_kernel_add->setRowCount(0);
+        ui->table_kernel_block->setRowCount(0);
+        ui->table_kernel_Force->setRowCount(0);
+        ui->table_kernel_patch->setRowCount(0);
+        ParserKernel(map);
+        break;
+
+        case 4:
+        //Misc
+        ui->tableBlessOverride->setRowCount(0);
+        ui->tableEntries->setRowCount(0);
+        ui->tableTools->setRowCount(0);
+        ParserMisc(map);
+        break;
+
+        case 5:
+        //NVRAM
+        ui->table_nv_add0->setRowCount(0);
+        ui->table_nv_add->setRowCount(0);
+        ui->table_nv_del0->setRowCount(0);
+        ui->table_nv_del->setRowCount(0);
+        ui->table_nv_ls0->setRowCount(0);
+        ui->table_nv_ls->setRowCount(0);
+        ParserNvram(map);
+        break;
+
+        case 6:
+        ParserPlatformInfo(map);
+        break;
+
+        case 7:
+        //UEFI
+        ui->table_uefi_drivers->setRowCount(0);
+        ui->table_uefi_ReservedMemory->setRowCount(0);
+        ParserUEFI(map);
+        break;
+
+    }
+
+    loading = false;
+
+}
+
+void MainWindow::on_tabTotal_tabBarClicked(int index)
+{
+
+
+    switch (index) {
+
+    case 0:
+        ui->btnExportMaster->setText(tr("Export") + "  ACPI");
+        ui->btnImportMaster->setText(tr("Import") + "  ACPI");
+        break;
+
+    case 1:
+        ui->btnExportMaster->setText(tr("Export") + "  Booter");
+        ui->btnImportMaster->setText(tr("Import") + "  Booter");
+        break;
+
+    case 2:
+        ui->btnExportMaster->setText(tr("Export") + "  DeviceProperties");
+        ui->btnImportMaster->setText(tr("Import") + "  DeviceProperties");
+        break;
+
+    case 3:
+        ui->btnExportMaster->setText(tr("Export") + "  Kernel");
+        ui->btnImportMaster->setText(tr("Import") + "  Kernel");
+        break;
+
+    case 4:
+        ui->btnExportMaster->setText(tr("Export") + "  Misc");
+        ui->btnImportMaster->setText(tr("Import") + "  Misc");
+        break;
+
+    case 5:
+        ui->btnExportMaster->setText(tr("Export") + "  NVRAM");
+        ui->btnImportMaster->setText(tr("Import") + "  NVRAM");
+        break;
+
+    case 6:
+        ui->btnExportMaster->setText(tr("Export") + "  PlatformInfo");
+        ui->btnImportMaster->setText(tr("Import") + "  PlatformInfo");
+        break;
+
+    case 7:
+        ui->btnExportMaster->setText(tr("Export") + "  UEFI");
+        ui->btnImportMaster->setText(tr("Import") + "  UEFI");
+        break;
+
+    }
+
+
+}
+
+void MainWindow::on_tabTotal_currentChanged(int index)
+{
+    on_tabTotal_tabBarClicked(index);
 }

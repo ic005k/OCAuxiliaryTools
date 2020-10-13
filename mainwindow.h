@@ -16,6 +16,9 @@
 #include <QTranslator>
 #include <QDesktopServices>
 #include <QToolTip>
+#include <QProxyStyle>
+#include <QPainter>
+#include <QDebug>
 
 #ifdef Q_OS_WIN32
 #include <stdio.h>
@@ -308,6 +311,14 @@ private slots:
 
     void on_btnHelp_clicked();
 
+    void on_btnExportMaster_clicked();
+
+    void on_btnImportMaster_clicked();
+
+    void on_tabTotal_tabBarClicked(int index);
+
+    void on_tabTotal_currentChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     void reg_win();
@@ -332,4 +343,307 @@ private:
     QString strPlistPath;
 
 };
+
+class CustomTabStyle1 : public QProxyStyle//继承QProxyStyle
+{
+public:
+    QSize sizeFromContents(ContentsType type, const QStyleOption *option,
+                           const QSize &size, const QWidget *widget) const
+    {
+        QSize tabsize = QProxyStyle::sizeFromContents(type, option, size, widget);
+        if (type == QStyle::CT_TabBarTab) {
+            tabsize.transpose();
+            tabsize.rwidth() = 105;
+            tabsize.rheight() = 80;
+        }
+        return tabsize;
+    }
+    //重写函数drawControl，绘图控制
+    //ControlElement控制元件,option,QStyle选项，painter绘图，widget对象
+    void drawControl(ControlElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget) const
+    {
+        if (element == CE_TabBarTabLabel) {//如果元件是TabBarTabLabel
+            if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab *>(option)) {
+                QRect allRect = tab->rect;//获取tab矩形框
+                painter->setFont(QFont("楷体", 18, QFont::Bold));
+                if (tab->state & QStyle::State_Selected) {
+                    painter->save();
+                    painter->setPen(0x555555);//设置颜色
+                    painter->setBrush(QBrush(0x282828));//设置Brush颜色
+                    painter->drawRect(allRect.adjusted(3, 3, -3, -3));
+                    // painter->restore();//恢复
+                }
+                QTextOption option;//这里设置文本样式
+                option.setAlignment(Qt::AlignCenter);//设置对其方式。居中对齐
+                if (tab->state & QStyle::State_Selected) {
+                    painter->setPen(0xf8fcff);//设置颜色
+                }
+                else {
+                    painter->setPen(0x5d5d5d);
+                }
+
+                painter->drawText(allRect, tab->text, option);//绘制文本
+                return;
+            }
+        }
+        if (element == CE_TabBarTab) {
+            QProxyStyle::drawControl(element, option, painter, widget);
+        }
+    }
+};
+class CustomTabStyle2 : public QProxyStyle
+{
+public:
+    QSize sizeFromContents(ContentsType type, const QStyleOption *option,
+        const QSize &size, const QWidget *widget) const
+    {
+        QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
+        if (type == QStyle::CT_TabBarTab)
+        {
+            s.transpose();
+            s.rwidth() = 105;
+            s.rheight() = 80;
+        }
+        return s;
+    }
+
+    void drawControl(ControlElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget) const
+    {
+
+        if (element == CE_TabBarTabLabel)
+        {
+
+            if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab *>(option))
+            {
+
+
+                QTextOption option;
+                option.setAlignment(Qt::AlignCenter);
+
+                QStyleOptionTab opt(*tab);
+                opt.shape = QTabBar::RoundedNorth;
+
+                //QIcon icon(":/acpi.png");
+                //opt.icon = icon;
+
+                opt.palette.setCurrentColorGroup(QPalette::Disabled);
+                opt.state |= QStyle::State_Sunken;
+                painter->setFont(QFont("楷体", 18, QFont::Bold));
+                QProxyStyle::drawControl(element, &opt, painter, widget);
+
+
+                return;
+            }
+        }
+
+        QProxyStyle::drawControl(element, option, painter, widget);
+    }
+};
+
+class CustomTabStyle3 : public QProxyStyle
+{
+public:
+    QSize sizeFromContents(ContentsType type, const QStyleOption *option,
+                           const QSize &size, const QWidget *widget) const
+    {
+        QSize tabsize = QProxyStyle::sizeFromContents(type, option, size, widget);
+        if (type == QStyle::CT_TabBarTab) {
+            tabsize.transpose();
+            tabsize.rwidth() = 140;
+            tabsize.rheight() = 80;
+        }
+        return tabsize;
+    }
+    //重写函数drawControl，绘图控制
+    //ControlElement控制元件,option,QStyle选项，painter绘图，widget对象
+    void drawControl(ControlElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget) const
+    {
+        if (element == CE_TabBarTabLabel) {//如果元件是TabBarTabLabel
+            if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab *>(option)) {
+                QRect allRect = tab->rect;//获取tab矩形框
+                if (tab->state & QStyle::State_Selected) {
+                    painter->save();
+                    painter->setPen(0x89cfff);//设置颜色
+                    painter->setBrush(QBrush(0x89cfff));//设置Brush颜色
+                    painter->drawRect(allRect.adjusted(6, 6, -6, -6));
+                    painter->restore();//恢复
+                }
+
+                QTextOption option;//这里设置文本样式
+                option.setAlignment(Qt::AlignCenter);//设置对其方式。居中对齐
+
+                if (tab->state & QStyle::State_Selected) {
+                    painter->setPen(0xf8fcff);//设置颜色
+                }
+                else {
+                    painter->setPen(0x5d5d5d);
+                }
+                painter->setFont(QFont("楷体", 18, QFont::Bold));
+                painter->drawText(allRect, tab->text, option);//绘制文本
+                return;
+            }
+        }
+        if (element == CE_TabBarTab) {
+            QProxyStyle::drawControl(element, option, painter, widget);
+        }
+    }
+};
+
+class CustomTabStyle4 : public QProxyStyle
+{
+public:
+    QSize sizeFromContents(ContentsType type, const QStyleOption *option,
+        const QSize &size, const QWidget *widget) const
+    {
+        QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
+        if (type == QStyle::CT_TabBarTab) {
+            s.transpose();
+            s.rwidth() = 105; // 设置每个tabBar中item的大小
+            s.rheight() = 75;
+        }
+        return s;
+    }
+    void drawControl(ControlElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget) const
+    {
+        if (element == CE_TabBarTabLabel) {
+            if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab *>(option)) {
+                QRect allRect = tab->rect;
+                allRect.setWidth(allRect.width() - 2); //选中后的凸起
+                allRect.setHeight(allRect.height() - 2);
+                //选中状态
+                if (tab->state & QStyle::State_Selected) {
+                    //save用以保护坐标，restore用来退出状态
+                    painter->save();
+                    painter->setBrush(QBrush(0x004ea1));
+                    //矩形
+                    //painter->drawRect(allRect.adjusted(0, 0, 0, 0));
+                    //带有弧线矩形
+                    painter->drawRoundedRect(tab->rect, 5, 5);
+                    painter->restore();
+                }
+                //hover状态
+                else if(tab->state & QStyle::State_MouseOver){
+                    painter->save();
+                    //painter->setBrush(QBrush(0x004ea1));
+                    painter->setBrush(QBrush(0x7B68EE));
+                    painter->drawRoundedRect(allRect, 8, 8);
+                    painter->restore();
+                }
+                else{
+                    painter->save();
+                    painter->setBrush(QBrush(0x78aadc));
+                    painter->drawRoundedRect(allRect, 8, 8);
+                    painter->restore();
+                }
+                QTextOption option;
+                option.setAlignment(Qt::AlignCenter);
+
+#ifdef Q_OS_WIN32
+   painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
+#endif
+
+#ifdef Q_OS_LINUX
+  painter->setFont(QFont("微软雅黑", 13, QFont::Bold));
+#endif
+
+#ifdef Q_OS_MAC
+  painter->setFont(QFont("微软雅黑", 18, QFont::Bold));
+#endif
+
+                painter->setPen(0xffffff);
+                painter->drawText(allRect, tab->text, option);
+                return;
+            }
+        }
+        if (element == CE_TabBarTab) {
+            QProxyStyle::drawControl(element, option, painter, widget);
+        }
+    }
+};
+
+class CustomTabStyle5 : public QProxyStyle
+{
+public:
+    QSize sizeFromContents(ContentsType type, const QStyleOption *option,
+        const QSize &size, const QWidget *widget) const
+    {
+        QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
+        if (type == QStyle::CT_TabBarTab) {
+            s.transpose();
+
+#ifdef Q_OS_WIN32
+            s.rwidth() = 330; // 设置每个tabBar中item的大小
+            s.rheight() = 35;
+#endif
+
+#ifdef Q_OS_LINUX
+            s.rwidth() = 285; // 设置每个tabBar中item的大小
+            s.rheight() = 35;
+#endif
+
+#ifdef Q_OS_MAC
+            s.rwidth() = 170; // 设置每个tabBar中item的大小
+            s.rheight() = 35;
+#endif
+
+        }
+        return s;
+    }
+    void drawControl(ControlElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget) const
+    {
+        if (element == CE_TabBarTabLabel) {
+            if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab *>(option)) {
+                QRect allRect = tab->rect;
+                allRect.setWidth(allRect.width() - 2); //选中后的凸起
+                allRect.setHeight(allRect.height() - 2);
+                //选中状态
+                if (tab->state & QStyle::State_Selected) {
+                    //save用以保护坐标，restore用来退出状态
+                    painter->save();
+                    painter->setBrush(QBrush(0x004ea1));
+                    //矩形
+                    //painter->drawRect(allRect.adjusted(0, 0, 0, 0));
+                    //带有弧线矩形
+                    painter->drawRoundedRect(tab->rect, 5, 5);
+                    painter->restore();
+                }
+                //hover状态
+                else if(tab->state & QStyle::State_MouseOver){
+                    painter->save();
+                    //painter->setBrush(QBrush(0x004ea1));
+                    painter->setBrush(QBrush(0x7B68EE));
+                    painter->drawRoundedRect(allRect, 8, 8);
+                    painter->restore();
+                }
+                else{
+                    painter->save();
+                    painter->setBrush(QBrush(0x78aadc));
+                    painter->drawRoundedRect(allRect, 8, 8);
+                    painter->restore();
+                }
+                QTextOption option;
+                option.setAlignment(Qt::AlignCenter);
+
+#ifdef Q_OS_WIN32
+   painter->setFont(QFont("微软雅黑", 9, QFont::Bold));
+#endif
+
+#ifdef Q_OS_LINUX
+  painter->setFont(QFont("微软雅黑", 15, QFont::Bold));
+#endif
+
+#ifdef Q_OS_MAC
+  painter->setFont(QFont("微软雅黑", 13, QFont::Bold));
+#endif
+                painter->setPen(0xffffff);
+                painter->drawText(allRect, tab->text, option);
+                return;
+            }
+        }
+        if (element == CE_TabBarTab) {
+            QProxyStyle::drawControl(element, option, painter, widget);
+        }
+    }
+};
+
 #endif // MAINWINDOW_H

@@ -44,44 +44,44 @@
      </widget>
     </item>
     <item row="0" column="3">
-     <widget class="QPushButton" name="btnTestWrite">
-      <property name="text">
-       <string>测试写入</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="4">
      <widget class="QPushButton" name="btnMountEsp">
       <property name="text">
        <string>MountESP</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="5">
-     <widget class="QPushButton" name="btnParse">
+    <item row="0" column="4">
+     <widget class="QPushButton" name="btnTestWrite">
       <property name="text">
-       <string>parse</string>
+       <string>测试写入</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="5">
+     <widget class="QPushButton" name="btnExportMaster">
+      <property name="text">
+       <string>ExportMaster</string>
       </property>
      </widget>
     </item>
     <item row="0" column="6">
-     <widget class="QPushButton" name="btnSerialize">
+     <widget class="QPushButton" name="btnExportSub">
       <property name="text">
-       <string>serialize</string>
+       <string>ExportSub</string>
       </property>
      </widget>
     </item>
     <item row="0" column="7">
-     <widget class="QPushButton" name="btnQuickOpen1">
+     <widget class="QPushButton" name="btnImportMaster">
       <property name="text">
-       <string>打开Sample</string>
+       <string>ImportMaster</string>
       </property>
      </widget>
     </item>
     <item row="0" column="8">
-     <widget class="QPushButton" name="btnQuickOpen2">
+     <widget class="QPushButton" name="btnImportSub">
       <property name="text">
-       <string>打开SampleFull</string>
+       <string>ImportSub</string>
       </property>
      </widget>
     </item>
@@ -94,11 +94,14 @@
     </item>
     <item row="1" column="0" colspan="10">
      <widget class="QTabWidget" name="tabTotal">
+      <property name="tabPosition">
+       <enum>QTabWidget::West</enum>
+      </property>
       <property name="tabShape">
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -741,7 +744,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>DeviceProperties</string>
+        <string>DP</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_8">
         <item row="0" column="0">
@@ -2720,7 +2723,7 @@ A continuously updated variable list can be found in a corresponding document: N
       </widget>
       <widget class="QWidget" name="tab_7">
        <attribute name="title">
-        <string>PlatformInfo</string>
+        <string>PI</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_27">
         <item row="3" column="2">
@@ -3858,7 +3861,7 @@ central registration process.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
