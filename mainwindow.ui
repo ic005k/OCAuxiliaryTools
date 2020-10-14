@@ -101,7 +101,13 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -1537,28 +1543,40 @@ patching progress.</string>
            <attribute name="title">
             <string>Scheme</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_37">
-            <item row="0" column="0" colspan="2">
-             <widget class="QCheckBox" name="chkFuzzyMatch">
-              <property name="toolTip">
-               <string>On macOS 10.6 and earlier kernelcache filename has a checksum, which essentially is adler32 from SMBIOS
+           <widget class="QCheckBox" name="chkFuzzyMatch">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>26</y>
+              <width>99</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="toolTip">
+             <string>On macOS 10.6 and earlier kernelcache filename has a checksum, which essentially is adler32 from SMBIOS
 product name and EfiBoot device path. On certain firmwares EfiBoot device path differs between UEFI and
 macOS due to ACPI or hardware specifics, rendering kernelcache checksum as always different.
 This setting allows matching the latest kernelcache with a suitable architecture when the kernelcache without
 suffix is unavailable, improving macOS 10.6 boot performance on several platforms.</string>
-              </property>
-              <property name="statusTip">
-               <string>Use kernelcache with different checksums when available.</string>
-              </property>
-              <property name="text">
-               <string>FuzzyMatch</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_43">
-              <property name="toolTip">
-               <string>On macOS 10.7 and earlier XNU kernel can boot with architectures different from the usual x86_64. This setting
+            </property>
+            <property name="statusTip">
+             <string>Use kernelcache with different checksums when available.</string>
+            </property>
+            <property name="text">
+             <string>FuzzyMatch</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_43">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>83</y>
+              <width>101</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <property name="toolTip">
+             <string>On macOS 10.7 and earlier XNU kernel can boot with architectures different from the usual x86_64. This setting
 will use the specified architecture to boot macOS when it is supported by the macOS and the configuration:
 • Auto — Choose the preferred architecture automatically.
 • i386 — Use i386 (32-bit) kernel when available.
@@ -1567,37 +1585,55 @@ capable processors. On macOS 64-bit capable processors are assumed to support SS
 for older 64-bit capable Pentium processors, which cause some applications to crash on macOS 10.6. The
 behaviour corresponds to -legacy kernel boot argument.
 • x86_64 — Use x86_64 (64-bit) kernel when available.</string>
-              </property>
-              <property name="statusTip">
-               <string> Prefer specified kernel architecture (Auto, i386, i386-user32, x86_64) when available.</string>
-              </property>
-              <property name="text">
-               <string>KernelArch</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QComboBox" name="cboxKernelArch"/>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_42">
-              <property name="toolTip">
-               <string>Different variants of macOS support different kernel caching variants designed to improve boot performance. This
+            </property>
+            <property name="statusTip">
+             <string> Prefer specified kernel architecture (Auto, i386, i386-user32, x86_64) when available.</string>
+            </property>
+            <property name="text">
+             <string>KernelArch</string>
+            </property>
+           </widget>
+           <widget class="QComboBox" name="cboxKernelArch">
+            <property name="geometry">
+             <rect>
+              <x>420</x>
+              <y>79</y>
+              <width>221</width>
+              <height>32</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_42">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>150</y>
+              <width>111</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <property name="toolTip">
+             <string>Different variants of macOS support different kernel caching variants designed to improve boot performance. This
 setting allows to prevent using faster kernel caching variants if slower variants are available for debugging and
 stability reasons. I.e. by specifying Mkext one will disable Prelinked for e.g. 10.6 but not 10.7.</string>
-              </property>
-              <property name="statusTip">
-               <string> Prefer specified kernel cache type (Auto, Cacheless, Mkext, Prelinked) when available.</string>
-              </property>
-              <property name="text">
-               <string>KernelCache</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QComboBox" name="cboxKernelCache"/>
-            </item>
-           </layout>
+            </property>
+            <property name="statusTip">
+             <string> Prefer specified kernel cache type (Auto, Cacheless, Mkext, Prelinked) when available.</string>
+            </property>
+            <property name="text">
+             <string>KernelCache</string>
+            </property>
+           </widget>
+           <widget class="QComboBox" name="cboxKernelCache">
+            <property name="geometry">
+             <rect>
+              <x>420</x>
+              <y>146</y>
+              <width>221</width>
+              <height>32</height>
+             </rect>
+            </property>
+           </widget>
           </widget>
          </widget>
         </item>

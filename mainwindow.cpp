@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.12";
+    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.13";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -72,22 +72,22 @@ MainWindow::MainWindow(QWidget *parent)
              QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
              QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
 
-    //ui->tabTotal->setStyleSheet(tabBarStyle3);
-    ui->tabTotal->tabBar()->setStyle(new CustomTabStyle4);
-    ui->tabACPI->tabBar()->setStyle(new CustomTabStyle5);
-    ui->tabBooter->tabBar()->setStyle(new CustomTabStyle5);
-    ui->tabDP->tabBar()->setStyle(new CustomTabStyle5);
-    ui->tabKernel->tabBar()->setStyle(new CustomTabStyle5);
-    ui->tabMisc->tabBar()->setStyle(new CustomTabStyle5);
-    ui->tabNVRAM->tabBar()->setStyle(new CustomTabStyle5);
-    ui->tabPlatformInfo->tabBar()->setStyle(new CustomTabStyle5);
-    ui->tabUEFI->tabBar()->setStyle(new CustomTabStyle5);
+    //ui->tabACPI->setStyleSheet(tabBarStyle3);
+    ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
+    //ui->tabACPI->tabBar()->setStyle(new CustomTabStyle2);
+    //ui->tabBooter->tabBar()->setStyle(new CustomTabStyle5);
+    //ui->tabDP->tabBar()->setStyle(new CustomTabStyle5);
+    //ui->tabKernel->tabBar()->setStyle(new CustomTabStyle5);
+    //ui->tabMisc->tabBar()->setStyle(new CustomTabStyle5);
+    //ui->tabNVRAM->tabBar()->setStyle(new CustomTabStyle5);
+    //ui->tabPlatformInfo->tabBar()->setStyle(new CustomTabStyle5);
+    //ui->tabUEFI->tabBar()->setStyle(new CustomTabStyle5);
 
-    ui->tabTotal->setIconSize(QSize(32, 32));
+    ui->tabTotal->setIconSize(QSize(64, 64));
+
     QIcon icon;
-    icon.addFile(":/acpi.png");
-    //ui->tabTotal->tabBar()->setTabIcon(0, icon);
-
+    icon.addFile(":/icon.png");
+    //ui->tabTotal->setTabIcon(1, icon);
 
     init_tr_str();
 
@@ -99,7 +99,6 @@ MainWindow::MainWindow(QWidget *parent)
     initui_PlatformInfo();
     initui_UEFI();
     initui_acpi();
-
 
     //主菜单
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen_clicked);
@@ -4480,7 +4479,7 @@ void MainWindow::on_cboxSystemProductName_currentIndexChanged(const QString &arg
 
     #ifdef Q_OS_WIN32
     // win
-       QFile file(appInfo.filePath() + "/macserial.exe");
+       //QFile file(appInfo.filePath() + "/macserial.exe");
 
        gs->start(appInfo.filePath() + "/macserial.exe" , QStringList() << "-m" << str);//阻塞为execute
 
@@ -4499,6 +4498,7 @@ void MainWindow::on_cboxSystemProductName_currentIndexChanged(const QString &arg
     #endif
 
         connect(gs , SIGNAL(finished(int)) , this , SLOT(readResult()));
+        //connect(gs , SIGNAL(readyRead()) , this , SLOT(readResult()));
 
     }
 }

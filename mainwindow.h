@@ -157,8 +157,6 @@ private slots:
 
     void on_table_acpi_add_cellClicked(int row, int column);
 
-
-
     void on_table_acpi_del_cellClicked(int row, int column);
 
     void on_table_acpi_patch_cellClicked(int row, int column);
@@ -176,8 +174,6 @@ private slots:
     void on_tableTools_cellClicked(int row, int column);
 
     void on_table_uefi_ReservedMemory_cellClicked(int row, int column);
-
-
 
     void on_btnKernelPatchAdd_clicked();
 
@@ -401,8 +397,8 @@ public:
         if (type == QStyle::CT_TabBarTab)
         {
             s.transpose();
-            s.rwidth() = 105;
-            s.rheight() = 80;
+            s.rwidth() = 110;
+            s.rheight() = 75;
         }
         return s;
     }
@@ -416,6 +412,7 @@ public:
             if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab *>(option))
             {
 
+                //QRect allRect = tab->rect;
 
                 QTextOption option;
                 option.setAlignment(Qt::AlignCenter);
@@ -428,12 +425,26 @@ public:
 
                 opt.palette.setCurrentColorGroup(QPalette::Disabled);
                 opt.state |= QStyle::State_Sunken;
-                painter->setFont(QFont("楷体", 18, QFont::Bold));
-                QProxyStyle::drawControl(element, &opt, painter, widget);
 
+#ifdef Q_OS_WIN32
+   painter->setFont(QFont("微软雅黑", 9, QFont::Bold));
+#endif
+
+#ifdef Q_OS_LINUX
+  painter->setFont(QFont("微软雅黑", 11, QFont::Bold));
+#endif
+
+#ifdef Q_OS_MAC
+  painter->setFont(QFont("微软雅黑", 15, QFont::Bold));
+#endif
+
+                //painter->drawText(allRect, tab->text, option);//绘制文本
+
+                QProxyStyle::drawControl(element, &opt, painter, widget);
 
                 return;
             }
+
         }
 
         QProxyStyle::drawControl(element, option, painter, widget);
@@ -449,8 +460,8 @@ public:
         QSize tabsize = QProxyStyle::sizeFromContents(type, option, size, widget);
         if (type == QStyle::CT_TabBarTab) {
             tabsize.transpose();
-            tabsize.rwidth() = 140;
-            tabsize.rheight() = 80;
+            tabsize.rwidth() = 105;
+            tabsize.rheight() = 75;
         }
         return tabsize;
     }
@@ -465,7 +476,7 @@ public:
                     painter->save();
                     painter->setPen(0x89cfff);//设置颜色
                     painter->setBrush(QBrush(0x89cfff));//设置Brush颜色
-                    painter->drawRect(allRect.adjusted(6, 6, -6, -6));
+                    painter->drawRect(allRect.adjusted(0, 0, -0, -0));
                     painter->restore();//恢复
                 }
 
@@ -478,7 +489,17 @@ public:
                 else {
                     painter->setPen(0x5d5d5d);
                 }
-                painter->setFont(QFont("楷体", 18, QFont::Bold));
+#ifdef Q_OS_WIN32
+   painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
+#endif
+
+#ifdef Q_OS_LINUX
+  painter->setFont(QFont("微软雅黑", 12, QFont::Bold));
+#endif
+
+#ifdef Q_OS_MAC
+  painter->setFont(QFont("微软雅黑", 16, QFont::Bold));
+#endif
                 painter->drawText(allRect, tab->text, option);//绘制文本
                 return;
             }
@@ -508,17 +529,17 @@ public:
         if (element == CE_TabBarTabLabel) {
             if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab *>(option)) {
                 QRect allRect = tab->rect;
-                allRect.setWidth(allRect.width() - 2); //选中后的凸起
-                allRect.setHeight(allRect.height() - 2);
+                allRect.setWidth(allRect.width() + 0); //选中后的凸起
+                allRect.setHeight(allRect.height() + 0);
                 //选中状态
                 if (tab->state & QStyle::State_Selected) {
                     //save用以保护坐标，restore用来退出状态
                     painter->save();
                     painter->setBrush(QBrush(0x004ea1));
                     //矩形
-                    //painter->drawRect(allRect.adjusted(0, 0, 0, 0));
+                    painter->drawRect(allRect.adjusted(0, 0, 0, 0));
                     //带有弧线矩形
-                    painter->drawRoundedRect(tab->rect, 5, 5);
+                    //painter->drawRoundedRect(tab->rect, 5, 5);
                     painter->restore();
                 }
                 //hover状态
@@ -526,15 +547,22 @@ public:
                     painter->save();
                     //painter->setBrush(QBrush(0x004ea1));
                     painter->setBrush(QBrush(0x7B68EE));
-                    painter->drawRoundedRect(allRect, 8, 8);
+
+                    painter->drawRect(allRect.adjusted(0, 0, 0, 0));
+                    //painter->drawRoundedRect(allRect, 5, 5);
+
                     painter->restore();
                 }
                 else{
                     painter->save();
                     painter->setBrush(QBrush(0x78aadc));
-                    painter->drawRoundedRect(allRect, 8, 8);
+
+                    painter->drawRect(allRect.adjusted(0, 0, 0, 0));//底色按钮
+                    //painter->drawRoundedRect(allRect, 5, 5);
+
                     painter->restore();
                 }
+
                 QTextOption option;
                 option.setAlignment(Qt::AlignCenter);
 
@@ -547,8 +575,9 @@ public:
 #endif
 
 #ifdef Q_OS_MAC
-  painter->setFont(QFont("微软雅黑", 18, QFont::Bold));
+  painter->setFont(QFont("微软雅黑", 16, QFont::Bold));
 #endif
+
 
                 painter->setPen(0xffffff);
                 painter->drawText(allRect, tab->text, option);
@@ -558,7 +587,7 @@ public:
         if (element == CE_TabBarTab) {
             QProxyStyle::drawControl(element, option, painter, widget);
         }
-    }
+   }
 };
 
 class CustomTabStyle5 : public QProxyStyle
