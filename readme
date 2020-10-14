@@ -16,20 +16,15 @@ OC的开发版可以在此下载（软件『关于』里面也有这个友链）
 4.完全可视化对Config.plist进行编辑
 5.紧跟OpenCore最新开发版，完全与之同步
 6.一键挂载ESP分区（mac、win）
+7.模块的导入与导出
 ......
+
+github下载文件可以尝试采用：https://toolwa.com/github/
 
 QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
 https://github.com/reillywatson/qtplist
 https://github.com/bluer007/FindESP
 https://github.com/microsoft/winfile
-
-
-
-百度云下载(由于软件版本迭代迅速，此处可能不会及时更新，建议到发行页面 https://github.com/ic005k/QtOpenCoreConfig/releases  下载最新版)：
-V0.6.2-2020.09.28版本
-win版：链接: https://pan.baidu.com/s/1mWLii8vYdoSClrK1hgt3uQ 提取码: 3a96
-Mac版：链接: https://pan.baidu.com/s/177coxK_B3zJSQ6xPXvvAVg 提取码: dqc4
-Linux版：链接: https://pan.baidu.com/s/1HvWmAIca-L3THOzLOtKHdA 提取码: 8q5d
 
 讨论区：
 pcbeta远景链接：http://bbs.pcbeta.com/viewthread-1866148-1-1.html
