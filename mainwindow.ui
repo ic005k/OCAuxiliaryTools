@@ -101,7 +101,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -2762,56 +2762,7 @@ A continuously updated variable list can be found in a corresponding document: N
         <string>PI</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_27">
-        <item row="3" column="2">
-         <widget class="QCheckBox" name="chkUpdateNVRAM">
-          <property name="toolTip">
-           <string>These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. All the other
-fields are to be specified with NVRAM section.
-If UpdateNVRAM is set to false the aforementioned variables can be updated with NVRAM section. If UpdateNVRAM
-is set to true the behaviour is undefined when any of the fields are present in NVRAM section.</string>
-          </property>
-          <property name="statusTip">
-           <string> Update NVRAM fields related to platform information.</string>
-          </property>
-          <property name="text">
-           <string>UpdateNVRAM</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="4">
-         <widget class="QComboBox" name="cboxUpdateSMBIOSMode"/>
-        </item>
-        <item row="3" column="1">
-         <widget class="QCheckBox" name="chkUpdateDataHub">
-          <property name="toolTip">
-           <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
-Automatic value.</string>
-          </property>
-          <property name="statusTip">
-           <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
-\nAutomatic value.</string>
-          </property>
-          <property name="text">
-           <string>UpdateDataHub</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <widget class="QCheckBox" name="chkUpdateSMBIOS">
-          <property name="toolTip">
-           <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
-Automatic value.</string>
-          </property>
-          <property name="statusTip">
-           <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
- Automatic value.</string>
-          </property>
-          <property name="text">
-           <string>UpdateSMBIOS</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="4">
+        <item row="1" column="5">
          <widget class="QLabel" name="label_22">
           <property name="toolTip">
            <string>• TryOverwrite — Overwrite if new size is &lt;= than the page-aligned original and there are no issues with
@@ -2835,7 +2786,7 @@ with existing Windows activation and custom OEM software but potentially breakin
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="2" column="0">
          <widget class="QCheckBox" name="chkAutomatic">
           <property name="toolTip">
            <string>Enabling this option is useful when Generic section is flexible enough:
@@ -2854,13 +2805,76 @@ not using Automatic may lead to hard to debug errors.</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="5">
+        <item row="2" column="1">
+         <widget class="QCheckBox" name="chkCustomMemory">
+          <property name="toolTip">
+           <string>Use custom memory configuration defined in the Memory section. This completely replaces any
+existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
+          </property>
+          <property name="statusTip">
+           <string>Use custom memory configuration defined in the Memory section. This completely replaces any existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
+          </property>
+          <property name="text">
+           <string>CustomMemory</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QCheckBox" name="chkUpdateDataHub">
+          <property name="toolTip">
+           <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
+Automatic value.</string>
+          </property>
+          <property name="statusTip">
+           <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
+\nAutomatic value.</string>
+          </property>
+          <property name="text">
+           <string>UpdateDataHub</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QCheckBox" name="chkUpdateNVRAM">
+          <property name="toolTip">
+           <string>These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. All the other
+fields are to be specified with NVRAM section.
+If UpdateNVRAM is set to false the aforementioned variables can be updated with NVRAM section. If UpdateNVRAM
+is set to true the behaviour is undefined when any of the fields are present in NVRAM section.</string>
+          </property>
+          <property name="statusTip">
+           <string> Update NVRAM fields related to platform information.</string>
+          </property>
+          <property name="text">
+           <string>UpdateNVRAM</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QCheckBox" name="chkUpdateSMBIOS">
+          <property name="toolTip">
+           <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
+Automatic value.</string>
+          </property>
+          <property name="statusTip">
+           <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
+ Automatic value.</string>
+          </property>
+          <property name="text">
+           <string>UpdateSMBIOS</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="5">
+         <widget class="QComboBox" name="cboxUpdateSMBIOSMode"/>
+        </item>
+        <item row="0" column="0" colspan="6">
          <widget class="QTabWidget" name="tabPlatformInfo">
           <property name="tabShape">
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3292,6 +3306,192 @@ SystemSerialNumber in Unicode.</string>
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="tab_38">
+           <attribute name="title">
+            <string>Memory</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_38">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_105">
+              <property name="toolTip">
+               <string>Specifies the data width, in bits, of the memory. A DataWidth of 0 and a TotalWidth of 8
+indicates that the device is being used solely to provide 8 error-correction bits.</string>
+              </property>
+              <property name="statusTip">
+               <string>Specifies the data width, in bits, of the memory. A DataWidth of 0 and a TotalWidth of 8 indicates that the device is being used solely to provide 8 error-correction bits.</string>
+              </property>
+              <property name="text">
+               <string>DataWidth</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="2">
+             <widget class="QLineEdit" name="editDataWidth"/>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="label_102">
+              <property name="toolTip">
+               <string> Specifies the primary hardware error correction or detection method supported by the memory.
+• 0x01 — Other
+• 0x02 — Unknown
+• 0x03 — None
+• 0x04 — Parity
+• 0x05 — Single-bit ECC
+• 0x06 — Multi-bit ECC
+• 0x07 — CRC</string>
+              </property>
+              <property name="statusTip">
+               <string>Physical Memory Array (Type 16) — Memory Error Correction</string>
+              </property>
+              <property name="text">
+               <string>ErrorCorrection</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLineEdit" name="editErrorCorrection"/>
+            </item>
+            <item row="0" column="5">
+             <widget class="QLabel" name="label_100">
+              <property name="toolTip">
+               <string> Specifies the form factor of the memory. On Macs this should usually be DIMM or SODIMM.
+Commonly used form factors are listed below.
+When CustomMemory is false, this value is automatically set based on Mac product name.
+• 0x01 — Other
+• 0x02 — Unknown
+• 0x09 — DIMM
+• 0x0D — SODIMM
+• 0x0F — FB-DIMM</string>
+              </property>
+              <property name="statusTip">
+               <string>Memory Device (Type 17) — Form Factor</string>
+              </property>
+              <property name="text">
+               <string>FormFactor</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="6">
+             <widget class="QLineEdit" name="editFormFactor"/>
+            </item>
+            <item row="0" column="7">
+             <widget class="QLabel" name="label_99">
+              <property name="toolTip">
+               <string>Specifies the maximum amount of memory, in bytes, supported by the system.</string>
+              </property>
+              <property name="statusTip">
+               <string> Physical Memory Array (Type 16) — Maximum Capacity</string>
+              </property>
+              <property name="text">
+               <string>MaxCapacity</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="8">
+             <widget class="QLineEdit" name="editMaxCapacity"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_101">
+              <property name="toolTip">
+               <string> Specifies the total width, in bits, of the memory, including any check or error-correction bits. If
+there are no error-correction bits, this value should be equal to DataWidth.</string>
+              </property>
+              <property name="text">
+               <string>TotalWidth</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" colspan="2">
+             <widget class="QLineEdit" name="editTotalWidth"/>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLabel" name="label_103">
+              <property name="toolTip">
+               <string>Description: Specifies the memory type. Commonly used types are listed below.
+• 0x01 — Other
+• 0x02 — Unknown
+• 0x0F — SDRAM
+• 0x12 — DDR
+• 0x13 — DDR2
+• 0x14 — DDR2 FB-DIMM
+• 0x18 — DDR3
+• 0x1A — DDR4
+• 0x1B — LPDDR
+• 0x1C — LPDDR2
+• 0x1D — LPDDR3
+• 0x1E — LPDDR4</string>
+              </property>
+              <property name="text">
+               <string>Type</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QLineEdit" name="editType"/>
+            </item>
+            <item row="1" column="5">
+             <widget class="QLabel" name="label_104">
+              <property name="toolTip">
+               <string> Specifies additional memory type information.
+• Bit 0 — Reserved, set to 0
+• Bit 1 — Other
+• Bit 2 — Unknown
+• Bit 7 — Synchronous
+• Bit 13 — Registered (buffered)
+• Bit 14 — Unbuffered (unregistered)</string>
+              </property>
+              <property name="text">
+               <string>TypeDetail</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="6">
+             <widget class="QLineEdit" name="editTypeDetail"/>
+            </item>
+            <item row="2" column="0" colspan="9">
+             <widget class="QTableWidget" name="tableDevices">
+              <property name="columnCount">
+               <number>8</number>
+              </property>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+             </widget>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <widget class="QPushButton" name="btnDevices_add">
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QPushButton" name="btnDevices_del">
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3" colspan="6">
+             <spacer name="horizontalSpacer_23">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>1015</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
           <widget class="QWidget" name="tab_33">
            <attribute name="title">
             <string>PlatformNVRAM</string>
@@ -3421,7 +3621,7 @@ SystemSerialNumber in Unicode.</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="4" colspan="2">
+            <item row="0" column="4">
              <widget class="QLineEdit" name="editChassisVersion"/>
             </item>
             <item row="1" column="0">
@@ -3455,7 +3655,7 @@ FirmwareFeatures. Upper 64 bits match ExtendedFirmwareFeatures.</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="4" colspan="2">
+            <item row="1" column="4">
              <widget class="QLineEdit" name="editFirmwareFeatures_2"/>
             </item>
             <item row="2" column="0">
@@ -3493,7 +3693,7 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
               </property>
              </widget>
             </item>
-            <item row="2" column="5">
+            <item row="2" column="4">
              <widget class="QLineEdit" name="editFirmwareFeaturesMask_2"/>
             </item>
             <item row="3" column="0">
@@ -3513,20 +3713,22 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
              <widget class="QLineEdit" name="editBoardAssetTag"/>
             </item>
             <item row="3" column="3">
-             <widget class="QLabel" name="label_70">
+             <widget class="QLabel" name="label_72">
               <property name="toolTip">
-               <string>Memory form factor. On Macs it should be DIMM or SODIMM.</string>
+               <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to
+not provide this table.</string>
               </property>
               <property name="statusTip">
-               <string>Memory form factor. On Macs it should be DIMM or SODIMM.</string>
+               <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to
+ not provide this table.</string>
               </property>
               <property name="text">
-               <string>MemoryFormFactor</string>
+               <string>PlatformFeature</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="4" colspan="2">
-             <widget class="QLineEdit" name="editMemoryFormFactor"/>
+            <item row="3" column="4">
+             <widget class="QLineEdit" name="editPlatformFeature"/>
             </item>
             <item row="4" column="0" colspan="2">
              <widget class="QLabel" name="label_73">
@@ -3545,24 +3747,22 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
              <widget class="QLineEdit" name="editBoardLocationInChassis"/>
             </item>
             <item row="4" column="3">
-             <widget class="QLabel" name="label_72">
+             <widget class="QLabel" name="label_74">
               <property name="toolTip">
-               <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to
-not provide this table.</string>
+               <string> Combined of Processor Major and Minor types.</string>
               </property>
               <property name="statusTip">
-               <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to
- not provide this table.</string>
+               <string> Combined of Processor Major and Minor types.</string>
               </property>
               <property name="text">
-               <string>PlatformFeature</string>
+               <string>ProcessorType</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="5">
-             <widget class="QLineEdit" name="editPlatformFeature"/>
+            <item row="4" column="4">
+             <widget class="QLineEdit" name="editProcessorType"/>
             </item>
-            <item row="5" column="0" colspan="2">
+            <item row="5" column="0">
              <widget class="QLabel" name="label_75">
               <property name="toolTip">
                <string> Board manufacturer. All rules of SystemManufacturer do apply.</string>
@@ -3578,23 +3778,25 @@ not provide this table.</string>
             <item row="5" column="2">
              <widget class="QLineEdit" name="editBoardManufacturer"/>
             </item>
-            <item row="5" column="3" colspan="2">
-             <widget class="QLabel" name="label_74">
+            <item row="5" column="3">
+             <widget class="QLabel" name="label_76">
               <property name="toolTip">
-               <string> Combined of Processor Major and Minor types.</string>
+               <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when
+zero.</string>
               </property>
               <property name="statusTip">
-               <string> Combined of Processor Major and Minor types.</string>
+               <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when
+ zero.</string>
               </property>
               <property name="text">
-               <string>ProcessorType</string>
+               <string>SmcVersion</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="5">
-             <widget class="QLineEdit" name="editProcessorType"/>
+            <item row="5" column="4">
+             <widget class="QLineEdit" name="editSmcVersion"/>
             </item>
-            <item row="6" column="0" colspan="2">
+            <item row="6" column="0">
              <widget class="QLabel" name="label_77">
               <property name="toolTip">
                <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older
@@ -3612,23 +3814,21 @@ models.</string>
             <item row="6" column="2">
              <widget class="QLineEdit" name="editBoardProduct_2"/>
             </item>
-            <item row="6" column="3" colspan="2">
-             <widget class="QLabel" name="label_76">
+            <item row="6" column="3">
+             <widget class="QLabel" name="label_78">
               <property name="toolTip">
-               <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when
-zero.</string>
+               <string>Family name. May look like iMac Pro.</string>
               </property>
               <property name="statusTip">
-               <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when
- zero.</string>
+               <string>Family name. May look like iMac Pro.</string>
               </property>
               <property name="text">
-               <string>SmcVersion</string>
+               <string>SystemFamily</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="5">
-             <widget class="QLineEdit" name="editSmcVersion"/>
+            <item row="6" column="4">
+             <widget class="QLineEdit" name="editSystemFamily"/>
             </item>
             <item row="7" column="0">
              <widget class="QLabel" name="label_79">
@@ -3646,21 +3846,24 @@ zero.</string>
             <item row="7" column="2">
              <widget class="QLineEdit" name="editBoardSerialNumber"/>
             </item>
-            <item row="7" column="3" colspan="2">
-             <widget class="QLabel" name="label_78">
+            <item row="7" column="3">
+             <widget class="QLabel" name="label_80">
               <property name="toolTip">
-               <string>Family name. May look like iMac Pro.</string>
+               <string> OEM manufacturer of the particular board. Shall not be specified unless strictly required. Should
+not contain Apple Inc., as this confuses numerous services present in the operating system, such as firmware
+updates, eficheck, as well as kernel extensions developed in Acidanthera, such as Lilu and its plugins. In addition
+it will also make some operating systems like Linux unbootable.</string>
               </property>
               <property name="statusTip">
-               <string>Family name. May look like iMac Pro.</string>
+               <string>SMBIOS: System Information (Type 1) — Manufacturer</string>
               </property>
               <property name="text">
-               <string>SystemFamily</string>
+               <string>SystemManufacturer</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="5">
-             <widget class="QLineEdit" name="editSystemFamily"/>
+            <item row="7" column="4">
+             <widget class="QLineEdit" name="editSystemManufacturer"/>
             </item>
             <item row="8" column="0">
              <widget class="QLabel" name="label_81">
@@ -3681,23 +3884,25 @@ Module), refer to Table 15 – Baseboard: Board Type for more details.</string>
              <widget class="QLineEdit" name="editBoardType"/>
             </item>
             <item row="8" column="3">
-             <widget class="QLabel" name="label_80">
+             <widget class="QLabel" name="label_82">
               <property name="toolTip">
-               <string> OEM manufacturer of the particular board. Shall not be specified unless strictly required. Should
-not contain Apple Inc., as this confuses numerous services present in the operating system, such as firmware
-updates, eficheck, as well as kernel extensions developed in Acidanthera, such as Lilu and its plugins. In addition
-it will also make some operating systems like Linux unbootable.</string>
+               <string> Preferred Mac model used to mark the device as supported by the operating system. This value
+must be specified by any configuration for later automatic generation of the related values in this and other
+SMBIOS tables and related configuration parameters. If SystemProductName is not compatible with the target
+operating system, -no_compat_check boot argument may be used as an override.
+Note: If SystemProductName is unknown, and related fields are unspecified, default values should be assumed as
+being set to MacPro6,1 data. The list of known products can be found in AppleModels.</string>
               </property>
               <property name="statusTip">
-               <string>SMBIOS: System Information (Type 1) — Manufacturer</string>
+               <string>SMBIOS: System Information (Type 1), Product Name</string>
               </property>
               <property name="text">
-               <string>SystemManufacturer</string>
+               <string>SystemProductName</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="5">
-             <widget class="QLineEdit" name="editSystemManufacturer"/>
+            <item row="8" column="4">
+             <widget class="QLineEdit" name="editSystemProductName_2"/>
             </item>
             <item row="9" column="0">
              <widget class="QLabel" name="label_83">
@@ -3716,25 +3921,20 @@ it will also make some operating systems like Linux unbootable.</string>
              <widget class="QLineEdit" name="editBoardVersion"/>
             </item>
             <item row="9" column="3">
-             <widget class="QLabel" name="label_82">
+             <widget class="QLabel" name="label_84">
               <property name="toolTip">
-               <string> Preferred Mac model used to mark the device as supported by the operating system. This value
-must be specified by any configuration for later automatic generation of the related values in this and other
-SMBIOS tables and related configuration parameters. If SystemProductName is not compatible with the target
-operating system, -no_compat_check boot argument may be used as an override.
-Note: If SystemProductName is unknown, and related fields are unspecified, default values should be assumed as
-being set to MacPro6,1 data. The list of known products can be found in AppleModels.</string>
+               <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.</string>
               </property>
               <property name="statusTip">
-               <string>SMBIOS: System Information (Type 1), Product Name</string>
+               <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.</string>
               </property>
               <property name="text">
-               <string>SystemProductName</string>
+               <string>SystemSKUNumber</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="5">
-             <widget class="QLineEdit" name="editSystemProductName_2"/>
+            <item row="9" column="4">
+             <widget class="QLineEdit" name="editSystemSKUNumber"/>
             </item>
             <item row="10" column="0">
              <widget class="QLabel" name="label_85">
@@ -3753,20 +3953,20 @@ being set to MacPro6,1 data. The list of known products can be found in AppleMod
              <widget class="QLineEdit" name="editChassisAssetTag"/>
             </item>
             <item row="10" column="3">
-             <widget class="QLabel" name="label_84">
+             <widget class="QLabel" name="label_86">
               <property name="toolTip">
-               <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.</string>
+               <string> Product serial number in defined format. Known formats are described in macserial.</string>
               </property>
               <property name="statusTip">
-               <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.</string>
+               <string> Product serial number in defined format. Known formats are described in macserial.</string>
               </property>
               <property name="text">
-               <string>SystemSKUNumber</string>
+               <string>SystemSerialNumber</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="5">
-             <widget class="QLineEdit" name="editSystemSKUNumber"/>
+            <item row="10" column="4">
+             <widget class="QLineEdit" name="editSystemSerialNumber_2"/>
             </item>
             <item row="11" column="0">
              <widget class="QLabel" name="label_87">
@@ -3785,20 +3985,22 @@ being set to MacPro6,1 data. The list of known products can be found in AppleMod
              <widget class="QLineEdit" name="editChassisManufacturer"/>
             </item>
             <item row="11" column="3">
-             <widget class="QLabel" name="label_86">
+             <widget class="QLabel" name="label_88">
               <property name="toolTip">
-               <string> Product serial number in defined format. Known formats are described in macserial.</string>
+               <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no
+central registration process.</string>
               </property>
               <property name="statusTip">
-               <string> Product serial number in defined format. Known formats are described in macserial.</string>
+               <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no
+ central registration process.</string>
               </property>
               <property name="text">
-               <string>SystemSerialNumber</string>
+               <string>SystemUUID</string>
               </property>
              </widget>
             </item>
-            <item row="11" column="5">
-             <widget class="QLineEdit" name="editSystemSerialNumber_2"/>
+            <item row="11" column="4">
+             <widget class="QLineEdit" name="editSystemUUID_2"/>
             </item>
             <item row="12" column="0">
              <widget class="QLabel" name="label_89">
@@ -3817,22 +4019,20 @@ being set to MacPro6,1 data. The list of known products can be found in AppleMod
              <widget class="QLineEdit" name="editChassisSerialNumber"/>
             </item>
             <item row="12" column="3">
-             <widget class="QLabel" name="label_88">
+             <widget class="QLabel" name="label_90">
               <property name="toolTip">
-               <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no
-central registration process.</string>
+               <string> Product iteration version number. May look like 1.1.</string>
               </property>
               <property name="statusTip">
-               <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no
- central registration process.</string>
+               <string> Product iteration version number. May look like 1.1.</string>
               </property>
               <property name="text">
-               <string>SystemUUID</string>
+               <string>SystemVersion</string>
               </property>
              </widget>
             </item>
-            <item row="12" column="5">
-             <widget class="QLineEdit" name="editSystemUUID_2"/>
+            <item row="12" column="4">
+             <widget class="QLineEdit" name="editSystemVersion"/>
             </item>
             <item row="13" column="0">
              <widget class="QLabel" name="label_91">
@@ -3850,29 +4050,13 @@ central registration process.</string>
             <item row="13" column="2">
              <widget class="QLineEdit" name="editChassisType"/>
             </item>
-            <item row="13" column="3">
-             <widget class="QLabel" name="label_90">
-              <property name="toolTip">
-               <string> Product iteration version number. May look like 1.1.</string>
-              </property>
-              <property name="statusTip">
-               <string> Product iteration version number. May look like 1.1.</string>
-              </property>
-              <property name="text">
-               <string>SystemVersion</string>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="5">
-             <widget class="QLineEdit" name="editSystemVersion"/>
-            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="tab_31">
            <attribute name="title">
             <string>SystemInfo</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_38">
+           <layout class="QGridLayout" name="gridLayout_37">
             <item row="0" column="0">
              <widget class="QTextEdit" name="textMacInfo">
               <property name="readOnly">

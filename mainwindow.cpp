@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.13";
+    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.19";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -1861,6 +1861,39 @@ void MainWindow::initui_PlatformInfo()
     ui->cboxSystemMemoryStatus->addItem("Soldered");
 
 
+    //Memory-Devices
+    QTableWidgetItem *id0;
+    ui->tableDevices->setColumnWidth(0,150);
+    id0 = new QTableWidgetItem(tr("AssetTag"));
+    ui->tableDevices->setHorizontalHeaderItem(0, id0);
+
+    id0 = new QTableWidgetItem(tr("BankLocator"));
+    ui->tableDevices->setHorizontalHeaderItem(1, id0);
+
+    ui->tableDevices->setColumnWidth(2,200);
+    id0 = new QTableWidgetItem(tr("DeviceLocator"));
+    ui->tableDevices->setHorizontalHeaderItem(2, id0);
+
+    id0 = new QTableWidgetItem(tr("Manufacturer"));
+    ui->tableDevices->setHorizontalHeaderItem(3, id0);
+
+    id0 = new QTableWidgetItem(tr("PartNumber"));
+    ui->tableDevices->setHorizontalHeaderItem(4, id0);
+
+    ui->tableDevices->setColumnWidth(5,200);
+    id0 = new QTableWidgetItem(tr("SerialNumber"));
+    ui->tableDevices->setHorizontalHeaderItem(5, id0);
+
+    id0 = new QTableWidgetItem(tr("Size"));
+    ui->tableDevices->setHorizontalHeaderItem(6, id0);
+
+    id0 = new QTableWidgetItem(tr("Speed"));
+    ui->tableDevices->setHorizontalHeaderItem(7, id0);
+
+    ui->tableDevices->setAlternatingRowColors(true);//底色交替显示
+
+
+
     //ui->cboxSystemProductName->setEditable(true);
     QStringList pi;
     pi.push_back("");
@@ -2036,6 +2069,7 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
         return;
 
     ui->chkAutomatic->setChecked(map["Automatic"].toBool());
+    ui->chkCustomMemory->setChecked(map["CustomMemory"].toBool());
     ui->chkUpdateDataHub->setChecked(map["UpdateDataHub"].toBool());
     ui->chkUpdateNVRAM->setChecked(map["UpdateNVRAM"].toBool());
     ui->chkUpdateSMBIOS->setChecked(map["UpdateSMBIOS"].toBool());
@@ -2140,6 +2174,64 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     if(ui->editSystemUUID->text().trimmed() == "")
         ui->editSystemUUID->setText(mapDataHub["SystemUUID"].toString());
 
+
+    //Memory
+    QVariantMap mapMemory = map["Memory"].toMap();
+    ui->editDataWidth->setText(mapMemory["DataWidth"].toString());
+    ui->editErrorCorrection->setText(mapMemory["ErrorCorrection"].toString());
+    ui->editFormFactor->setText(mapMemory["FormFactor"].toString());
+    ui->editMaxCapacity->setText(mapMemory["MaxCapacity"].toString());
+    ui->editTotalWidth->setText(mapMemory["TotalWidth"].toString());
+    ui->editType->setText(mapMemory["Type"].toString());
+    ui->editTypeDetail->setText(mapMemory["TypeDetail"].toString());
+
+    //Memory-Devices
+    QVariantList mapMemoryDevices = mapMemory["Devices"].toList();
+
+    ui->tableDevices->setRowCount(mapMemoryDevices.count());//设置行的列数
+    for(int i = 0;i < mapMemoryDevices.count(); i++)
+    {
+        QVariantMap map3 = mapMemoryDevices.at(i).toMap();
+
+        QTableWidgetItem *newItem1;
+
+        newItem1 = new QTableWidgetItem(map3["AssetTag"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->tableDevices->setItem(i, 0, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["BankLocator"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->tableDevices->setItem(i, 1, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["DeviceLocator"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->tableDevices->setItem(i, 2, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["Manufacturer"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->tableDevices->setItem(i, 3, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["PartNumber"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->tableDevices->setItem(i, 4, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["SerialNumber"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->tableDevices->setItem(i, 5, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["Size"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->tableDevices->setItem(i, 6, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["Speed"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->tableDevices->setItem(i, 7, newItem1);
+
+
+
+    }
+
+
     //PlatformNVRAM
     QVariantMap mapPlatformNVRAM = map["PlatformNVRAM"].toMap();
 
@@ -2176,7 +2268,7 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     ui->editChassisVersion->setText(mapSMBIOS["ChassisVersion"].toString());
     ui->editFirmwareFeatures_2->setText(ByteToHexStr(mapSMBIOS["FirmwareFeatures"].toByteArray()));
     ui->editFirmwareFeaturesMask_2->setText(ByteToHexStr(mapSMBIOS["FirmwareFeaturesMask"].toByteArray()));
-    ui->editMemoryFormFactor->setText(mapSMBIOS["MemoryFormFactor"].toString());
+    //ui->editMemoryFormFactor->setText(mapSMBIOS["MemoryFormFactor"].toString());
     ui->editPlatformFeature->setText(mapSMBIOS["PlatformFeature"].toString());
     ui->editProcessorType->setText(mapSMBIOS["ProcessorType"].toString());
     ui->editSmcVersion->setText(ByteToHexStr(mapSMBIOS["SmcVersion"].toByteArray()));
@@ -2990,6 +3082,42 @@ QVariantMap MainWindow::SavePlatformInfo()
     subMap["DataHub"] = valueList;
 
 
+    //Memory
+    valueList.clear();
+    valueList["DataWidth"] = ui->editDataWidth->text().toLongLong();
+    valueList["ErrorCorrection"] = ui->editErrorCorrection->text().toLongLong();
+    valueList["FormFactor"] = ui->editFormFactor->text().toLongLong();
+    valueList["MaxCapacity"] = ui->editMaxCapacity->text().toLongLong();
+    valueList["TotalWidth"] = ui->editTotalWidth->text().toLongLong();
+    valueList["Type"] = ui->editType->text().toLongLong();
+    valueList["TypeDetail"] = ui->editTypeDetail->text().toLongLong();
+
+
+    //Memory-Devices
+    QVariantMap Map;
+    QVariantList Array;
+    QVariantMap AddSub;
+
+    for(int i = 0; i < ui->tableDevices->rowCount(); i ++)
+    {
+        AddSub["AssetTag"] = ui->tableDevices->item(i , 0)->text();
+        AddSub["BankLocator"] = ui->tableDevices->item(i , 1)->text();
+        AddSub["DeviceLocator"] = ui->tableDevices->item(i , 2)->text();
+        AddSub["Manufacturer"] = ui->tableDevices->item(i , 3)->text();
+        AddSub["PartNumber"] = ui->tableDevices->item(i , 4)->text();
+        AddSub["SerialNumber"] = ui->tableDevices->item(i , 5)->text();
+        AddSub["Size"] = ui->tableDevices->item(i , 6)->text().toLongLong();
+        AddSub["Speed"] = ui->tableDevices->item(i , 7)->text().toLongLong();
+
+        Array.append(AddSub); //最后一层
+        Map["Devices"] = Array; //第二层
+
+    }
+
+    valueList["Devices"] =Map["Devices"];
+
+    subMap["Memory"] = valueList;
+
     //Generic
     valueList.clear();
     valueList["AdviseWindows"] = getChkBool(ui->chkAdviseWindows);
@@ -3035,7 +3163,7 @@ QVariantMap MainWindow::SavePlatformInfo()
     valueList["ChassisVersion"] = ui->editChassisVersion->text();
     valueList["FirmwareFeatures"] = HexStrToByte(ui->editFirmwareFeatures_2->text());
     valueList["FirmwareFeaturesMask"] = HexStrToByte(ui->editFirmwareFeaturesMask_2->text());
-    valueList["MemoryFormFactor"] = ui->editMemoryFormFactor->text().toLongLong();
+    //valueList["MemoryFormFactor"] = ui->editMemoryFormFactor->text().toLongLong();
     valueList["PlatformFeature"] = ui->editPlatformFeature->text().toLongLong();
     valueList["ProcessorType"] = ui->editProcessorType->text().toLongLong();
     valueList["SmcVersion"] = HexStrToByte(ui->editSmcVersion->text());
@@ -3054,6 +3182,7 @@ QVariantMap MainWindow::SavePlatformInfo()
 
 
     subMap["Automatic"] = getChkBool(ui->chkAutomatic);
+    subMap["CustomMemory"] = getChkBool(ui->chkCustomMemory);
     subMap["UpdateDataHub"] = getChkBool(ui->chkUpdateDataHub);
     subMap["UpdateNVRAM"] = getChkBool(ui->chkUpdateNVRAM);
     subMap["UpdateSMBIOS"] = getChkBool(ui->chkUpdateSMBIOS);
@@ -5068,4 +5197,16 @@ void MainWindow::on_tabTotal_tabBarClicked(int index)
 void MainWindow::on_tabTotal_currentChanged(int index)
 {
     on_tabTotal_tabBarClicked(index);
+}
+
+void MainWindow::on_btnDevices_add_clicked()
+{
+    int row = ui->tableDevices->rowCount() + 1;
+
+    ui->tableDevices->setRowCount(row);
+}
+
+void MainWindow::on_btnDevices_del_clicked()
+{
+    del_item(ui->tableDevices);
 }

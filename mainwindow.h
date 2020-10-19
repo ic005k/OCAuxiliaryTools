@@ -315,6 +315,10 @@ private slots:
 
     void on_tabTotal_currentChanged(int index);
 
+    void on_btnDevices_add_clicked();
+
+    void on_btnDevices_del_clicked();
+
 private:
     Ui::MainWindow *ui;
     void reg_win();
@@ -420,25 +424,25 @@ public:
                 QStyleOptionTab opt(*tab);
                 opt.shape = QTabBar::RoundedNorth;
 
-                //QIcon icon(":/icon.png");
+                //QIcon icon(":/acpi.png");
                 //opt.icon = icon;
 
-
+                opt.palette.setCurrentColorGroup(QPalette::Disabled);
                 opt.state |= QStyle::State_Sunken;
 
 #ifdef Q_OS_WIN32
-                opt.palette.setCurrentColorGroup(QPalette::Disabled);
-                painter->setFont(QFont("微软雅黑", 9, QFont::Bold));
+   painter->setFont(QFont("微软雅黑", 9, QFont::Bold));
 #endif
 
 #ifdef Q_OS_LINUX
-                painter->setFont(QFont("微软雅黑", 11, QFont::Bold));
+  painter->setFont(QFont("微软雅黑", 11, QFont::Bold));
 #endif
 
 #ifdef Q_OS_MAC
-                opt.palette.setCurrentColorGroup(QPalette::Disabled);
-                painter->setFont(QFont("微软雅黑", 15, QFont::Bold));
+  painter->setFont(QFont("微软雅黑", 15, QFont::Bold));
 #endif
+
+                //painter->drawText(allRect, tab->text, option);//绘制文本
 
                 QProxyStyle::drawControl(element, &opt, painter, widget);
 
