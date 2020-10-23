@@ -229,7 +229,7 @@ void MainWindow::on_btnOpen_clicked()
 {
     QFileDialog fd;
 
-    PlistFileName = fd.getOpenFileName(this,"Config file","","Config file(*.plist);;所有文件(*.*)");
+    PlistFileName = fd.getOpenFileName(this,"Config file","","Config file(*.plist);;All files(*.*)");
 
     openFile(PlistFileName);
 }
