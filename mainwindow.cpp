@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.19";
+    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.21";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -3113,8 +3113,10 @@ QVariantMap MainWindow::SavePlatformInfo()
         Map["Devices"] = Array; //第二层
 
     }
-
-    valueList["Devices"] =Map["Devices"];
+    if(ui->tableDevices->rowCount() > 0) //里面有数据才进行保存的动作
+    {
+        valueList["Devices"] =Map["Devices"];
+    }
 
     subMap["Memory"] = valueList;
 
@@ -5201,9 +5203,8 @@ void MainWindow::on_tabTotal_currentChanged(int index)
 
 void MainWindow::on_btnDevices_add_clicked()
 {
-    int row = ui->tableDevices->rowCount() + 1;
 
-    ui->tableDevices->setRowCount(row);
+    add_item(ui->tableDevices, 8);
 }
 
 void MainWindow::on_btnDevices_del_clicked()
