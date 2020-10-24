@@ -416,7 +416,7 @@ public:
             if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab *>(option))
             {
 
-                //QRect allRect = tab->rect;
+                QRect allRect = tab->rect;
 
                 QTextOption option;
                 option.setAlignment(Qt::AlignCenter);
@@ -427,22 +427,23 @@ public:
                 //QIcon icon(":/acpi.png");
                 //opt.icon = icon;
 
-                opt.palette.setCurrentColorGroup(QPalette::Disabled);
-                opt.state |= QStyle::State_Sunken;
 
 #ifdef Q_OS_WIN32
-   painter->setFont(QFont("微软雅黑", 9, QFont::Bold));
+                opt.palette.setCurrentColorGroup(QPalette::Disabled);
+                opt.state |= QStyle::State_Sunken;
+                painter->setFont(QFont("微软雅黑", 9, QFont::Bold));
 #endif
 
 #ifdef Q_OS_LINUX
-  painter->setFont(QFont("微软雅黑", 11, QFont::Bold));
+                painter->setFont(QFont("微软雅黑", 11, QFont::Bold));
+
 #endif
 
 #ifdef Q_OS_MAC
-  painter->setFont(QFont("微软雅黑", 15, QFont::Bold));
+                opt.palette.setCurrentColorGroup(QPalette::Disabled);
+                opt.state |= QStyle::State_Sunken;
+                painter->setFont(QFont("微软雅黑", 15, QFont::Bold));
 #endif
-
-                //painter->drawText(allRect, tab->text, option);//绘制文本
 
                 QProxyStyle::drawControl(element, &opt, painter, widget);
 
