@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.21";
+    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.29";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -1139,7 +1139,9 @@ void MainWindow::ParserKernel(QVariantMap map)
     ui->chkAppleXcpmCfgLock->setChecked(map_quirks["AppleXcpmCfgLock"].toBool());
     ui->chkAppleXcpmExtraMsrs->setChecked(map_quirks["AppleXcpmExtraMsrs"].toBool());
     ui->chkAppleXcpmForceBoost->setChecked(map_quirks["AppleXcpmForceBoost"].toBool());
+
     ui->chkCustomSMBIOSGuid->setChecked(map_quirks["CustomSMBIOSGuid"].toBool());
+
     ui->chkDisableIoMapper->setChecked(map_quirks["DisableIoMapper"].toBool());
     ui->chkDisableRtcChecksum->setChecked(map_quirks["DisableRtcChecksum"].toBool());
     ui->chkExternalDiskIcons->setChecked(map_quirks["ExternalDiskIcons"].toBool());
@@ -2082,7 +2084,13 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     if(usm.trimmed() == "Overwrite")
         ui->cboxUpdateSMBIOSMode->setCurrentIndex(2);
     if(usm.trimmed() == "Custom")
+    {
         ui->cboxUpdateSMBIOSMode->setCurrentIndex(3);
+        ui->chkCustomSMBIOSGuid->setChecked(true);//联动
+    }
+    else
+        ui->chkCustomSMBIOSGuid->setChecked(false);
+
 
     //Generic
     QVariantMap mapGeneric = map["Generic"].toMap();
@@ -2412,6 +2420,7 @@ void MainWindow::ParserUEFI(QVariantMap map)
     ui->chkReplaceTabWithSpace->setChecked(map_output["ReplaceTabWithSpace"].toBool());
     ui->chkSanitiseClearScreen->setChecked(map_output["SanitiseClearScreen"].toBool());
     ui->chkUgaPassThrough->setChecked(map_output["UgaPassThrough"].toBool());
+    ui->chkForceResolution->setChecked(map_output["ForceResolution"].toBool());
 
 
     ui->cboxConsoleMode->setCurrentText(map_output["ConsoleMode"].toString());
@@ -3259,6 +3268,8 @@ QVariantMap MainWindow::SaveUEFI()
     dictList["ReplaceTabWithSpace"] = getChkBool(ui->chkReplaceTabWithSpace);
     dictList["SanitiseClearScreen"] = getChkBool(ui->chkSanitiseClearScreen);
     dictList["UgaPassThrough"] = getChkBool(ui->chkUgaPassThrough);
+    dictList["ForceResolution"] = getChkBool(ui->chkForceResolution);
+
 
     dictList["ConsoleMode"] = ui->cboxConsoleMode->currentText();
     dictList["Resolution"] = ui->cboxResolution->currentText();
@@ -5210,4 +5221,12 @@ void MainWindow::on_btnDevices_add_clicked()
 void MainWindow::on_btnDevices_del_clicked()
 {
     del_item(ui->tableDevices);
+}
+
+void MainWindow::on_cboxUpdateSMBIOSMode_currentIndexChanged(const QString &arg1)
+{
+    if(arg1 == "Custom")
+        ui->chkCustomSMBIOSGuid->setChecked(true);//联动
+    else
+        ui->chkCustomSMBIOSGuid->setChecked(false);
 }

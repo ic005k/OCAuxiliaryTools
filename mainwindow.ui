@@ -935,7 +935,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2812,7 +2812,8 @@ not using Automatic may lead to hard to debug errors.</string>
 existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
           </property>
           <property name="statusTip">
-           <string>Use custom memory configuration defined in the Memory section. This completely replaces any existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
+           <string>Use custom memory configuration defined in the Memory section. This completely replaces any
+ existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
           </property>
           <property name="text">
            <string>CustomMemory</string>
@@ -3318,7 +3319,8 @@ SystemSerialNumber in Unicode.</string>
 indicates that the device is being used solely to provide 8 error-correction bits.</string>
               </property>
               <property name="statusTip">
-               <string>Specifies the data width, in bits, of the memory. A DataWidth of 0 and a TotalWidth of 8 indicates that the device is being used solely to provide 8 error-correction bits.</string>
+               <string>Specifies the data width, in bits, of the memory. A DataWidth of 0 and a TotalWidth of 8
+ indicates that the device is being used solely to provide 8 error-correction bits.</string>
               </property>
               <property name="text">
                <string>DataWidth</string>
@@ -4081,7 +4083,7 @@ central registration process.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -4587,7 +4589,7 @@ Note: This option only applies to System renderer.</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1" colspan="2">
+            <item row="0" column="1">
              <widget class="QCheckBox" name="chkReconnectOnResChange">
               <property name="toolTip">
                <string>On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which
@@ -4601,6 +4603,21 @@ required.</string>
               </property>
               <property name="text">
                <string>ReconnectOnResChange</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="chkForceResolution">
+              <property name="toolTip">
+               <string>Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such
+as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max
+will try to pull the largest available resolution from the connected display’s EDID.
+Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is
+currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel
+iGPUs.</string>
+              </property>
+              <property name="text">
+               <string>ForceResolution</string>
               </property>
              </widget>
             </item>
@@ -4644,7 +4661,7 @@ it is recommended not to use this option unless there is an obvious benefit as i
               </property>
              </widget>
             </item>
-            <item row="1" column="1" colspan="2">
+            <item row="1" column="1">
              <widget class="QCheckBox" name="chkReplaceTabWithSpace">
               <property name="toolTip">
                <string>Some firmwares do not print tab characters or even everything that follows them, causing difficulties
@@ -4657,7 +4674,7 @@ Note: This option only applies to System renderer.</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
+            <item row="1" column="2">
              <widget class="QCheckBox" name="chkProvideConsoleGop">
               <property name="toolTip">
                <string>macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact
@@ -4674,7 +4691,7 @@ with newer GPUs.</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
+            <item row="1" column="3">
              <widget class="QCheckBox" name="chkUgaPassThrough">
               <property name="toolTip">
                <string>Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI
@@ -4703,7 +4720,7 @@ Note: This field is best to be left empty on most firmwares.</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="2" colspan="3">
+            <item row="2" column="2">
              <widget class="QComboBox" name="cboxConsoleMode"/>
             </item>
             <item row="3" column="0" colspan="2">
@@ -4727,7 +4744,7 @@ added with ProvideConsoleGop set to true.</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="2" colspan="3">
+            <item row="3" column="2">
              <widget class="QComboBox" name="cboxResolution"/>
             </item>
             <item row="4" column="0">
@@ -4765,7 +4782,7 @@ BuiltinGraphics may work for them.</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="2" colspan="3">
+            <item row="4" column="2">
              <widget class="QComboBox" name="cboxTextRenderer"/>
             </item>
            </layout>

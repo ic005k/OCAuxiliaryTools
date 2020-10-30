@@ -319,6 +319,8 @@ private slots:
 
     void on_btnDevices_del_clicked();
 
+    void on_cboxUpdateSMBIOSMode_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     void reg_win();
@@ -416,7 +418,7 @@ public:
             if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab *>(option))
             {
 
-                QRect allRect = tab->rect;
+                //QRect allRect = tab->rect;
 
                 QTextOption option;
                 option.setAlignment(Qt::AlignCenter);
@@ -428,6 +430,7 @@ public:
                 //opt.icon = icon;
 
 
+
 #ifdef Q_OS_WIN32
                 opt.palette.setCurrentColorGroup(QPalette::Disabled);
                 opt.state |= QStyle::State_Sunken;
@@ -436,7 +439,6 @@ public:
 
 #ifdef Q_OS_LINUX
                 painter->setFont(QFont("微软雅黑", 11, QFont::Bold));
-
 #endif
 
 #ifdef Q_OS_MAC
@@ -444,6 +446,8 @@ public:
                 opt.state |= QStyle::State_Sunken;
                 painter->setFont(QFont("微软雅黑", 15, QFont::Bold));
 #endif
+
+                //painter->drawText(allRect, tab->text, option);//绘制文本
 
                 QProxyStyle::drawControl(element, &opt, painter, widget);
 
