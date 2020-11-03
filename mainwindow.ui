@@ -1537,6 +1537,19 @@ patching progress.</string>
               </property>
              </widget>
             </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="chkForceSecureBootScheme">
+              <property name="toolTip">
+               <string>Note: This option is required on virtual machines when using SecureBootModel different from x86legacy.</string>
+              </property>
+              <property name="statusTip">
+               <string>Force x86 scheme for IMG4 verification.</string>
+              </property>
+              <property name="text">
+               <string>ForceSecureBootScheme</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="tab_30">
@@ -2875,7 +2888,7 @@ Automatic value.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3586,6 +3599,20 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
             </item>
             <item row="4" column="1">
              <widget class="QLineEdit" name="editROM_2"/>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_106">
+              <property name="toolTip">
+               <string>Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id
+for boot services only. Value found on Macs is equal to SMBIOS SystemUUID.</string>
+              </property>
+              <property name="text">
+               <string>SystemUUID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QLineEdit" name="editSystemUUID_PNVRAM"/>
             </item>
            </layout>
           </widget>

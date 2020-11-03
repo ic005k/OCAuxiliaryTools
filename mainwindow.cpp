@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.3-2020.10.29";
+    title = "QtOpenCoreConfigurator   V0.6.3-2020.11.03";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -1156,6 +1156,8 @@ void MainWindow::ParserKernel(QVariantMap map)
     ui->chkExtendBTFeatureFlags->setChecked(map_quirks["ExtendBTFeatureFlags"].toBool());
     ui->chkLegacyCommpage->setChecked(map_quirks["LegacyCommpage"].toBool());
 
+    ui->chkForceSecureBootScheme->setChecked(map_quirks["ForceSecureBootScheme"].toBool());
+
     //Scheme
     QVariantMap map_Scheme = map["Scheme"].toMap();
     ui->chkFuzzyMatch->setChecked(map_Scheme["FuzzyMatch"].toBool());
@@ -2256,6 +2258,8 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     if(ui->editROM->text().trimmed() == "")
         ui->editROM->setText(ByteToHexStr(mapPlatformNVRAM["ROM"].toByteArray()));
 
+    ui->editSystemUUID_PNVRAM->setText(mapPlatformNVRAM["SystemUUID"].toString());
+
     //SMBIOS
     QVariantMap mapSMBIOS = map["SMBIOS"].toMap();
 
@@ -2853,6 +2857,8 @@ QVariantMap MainWindow::SaveKernel()
     mapQuirks["LegacyCommpage"] = getChkBool(ui->chkLegacyCommpage);
     mapQuirks["ExtendBTFeatureFlags"] = getChkBool(ui->chkExtendBTFeatureFlags);
 
+    mapQuirks["ForceSecureBootScheme"] = getChkBool(ui->chkForceSecureBootScheme);
+
     subMap["Quirks"] = mapQuirks;
 
     //Scheme
@@ -3152,6 +3158,8 @@ QVariantMap MainWindow::SavePlatformInfo()
     valueList["FirmwareFeatures"] = HexStrToByte(ui->editFirmwareFeatures->text());
     valueList["FirmwareFeaturesMask"] = HexStrToByte(ui->editFirmwareFeaturesMask->text());
     valueList["ROM"] = HexStrToByte(ui->editROM_2->text());
+
+    valueList["SystemUUID"] = ui->editSystemUUID_PNVRAM->text();
 
     subMap["PlatformNVRAM"] = valueList;
 
