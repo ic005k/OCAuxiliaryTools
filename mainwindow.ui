@@ -101,7 +101,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1663,7 +1663,7 @@ stability reasons. I.e. by specifying Mkext one will disable Prelinked for e.g. 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2278,7 +2278,7 @@ bootable. Operating systems shipped before the specified model was released will
             <item row="9" column="1">
              <widget class="QComboBox" name="cboxSecureBootModel"/>
             </item>
-            <item row="10" column="0" colspan="2">
+            <item row="10" column="0">
              <widget class="QCheckBox" name="chkAllowNvramReset">
               <property name="toolTip">
                <string>Note 1 : It is known that some Lenovo laptops have a firmware bug, which makes them unbootable after performing
@@ -2293,7 +2293,7 @@ Note 2 : Resetting NVRAM will also erase all the boot options otherwise not back
               </property>
              </widget>
             </item>
-            <item row="11" column="0" colspan="2">
+            <item row="11" column="0">
              <widget class="QCheckBox" name="chkAllowSetDefault">
               <property name="toolTip">
                <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.</string>
@@ -2323,7 +2323,21 @@ despite being removed as soon as OpenCore starts, may be considered a security r
               </property>
              </widget>
             </item>
-            <item row="13" column="0">
+            <item row="13" column="0" colspan="2">
+             <widget class="QCheckBox" name="chkBlacklistAppleUpdate">
+              <property name="toolTip">
+               <string>Note: This option exists due to some operating systems, namely macOS Big Sur, being incapable of disabling
+firmware updates with the NVRAM variable (run-efi-updater).</string>
+              </property>
+              <property name="statusTip">
+               <string>Ignore boot options trying to update Apple peripheral firmware (e.g. MultiUpdater.efi).</string>
+              </property>
+              <property name="text">
+               <string>BlacklistAppleUpdate</string>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="0">
              <widget class="QCheckBox" name="chkEnablePassword">
               <property name="toolTip">
                <string>Password protection ensures that sensitive operations like booting a non-default operating system (e.g. macOS
@@ -2341,6 +2355,31 @@ Note: This functionality is currently in development and is not ready for daily 
              </widget>
             </item>
            </layout>
+           <zorder>label_13</zorder>
+           <zorder>editExposeSensitiveData</zorder>
+           <zorder>label_14</zorder>
+           <zorder>editHaltLevel</zorder>
+           <zorder>label_15</zorder>
+           <zorder>editScanPolicy</zorder>
+           <zorder>label_12</zorder>
+           <zorder>cboxBootProtect</zorder>
+           <zorder>label_27</zorder>
+           <zorder>cboxDmgLoading</zorder>
+           <zorder>label_16</zorder>
+           <zorder>cboxVault</zorder>
+           <zorder>label_44</zorder>
+           <zorder>editApECID</zorder>
+           <zorder>label_93</zorder>
+           <zorder>editPasswordHash</zorder>
+           <zorder>label_94</zorder>
+           <zorder>editPasswordSalt</zorder>
+           <zorder>label_45</zorder>
+           <zorder>cboxSecureBootModel</zorder>
+           <zorder>chkAllowNvramReset</zorder>
+           <zorder>chkAuthRestart</zorder>
+           <zorder>chkEnablePassword</zorder>
+           <zorder>chkAllowSetDefault</zorder>
+           <zorder>chkBlacklistAppleUpdate</zorder>
           </widget>
           <widget class="QWidget" name="tabWidgetPage4">
            <attribute name="title">

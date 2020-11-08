@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.3-2020.11.03";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.11.07";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -1226,6 +1226,8 @@ void MainWindow::initui_misc()
 
 
     //Entries
+    ui->tableEntries->setColumnCount(7);
+
     ui->tableEntries->setColumnWidth(0,550);
     id0 = new QTableWidgetItem(tr("Path"));
     ui->tableEntries->setHorizontalHeaderItem(0, id0);
@@ -1246,9 +1248,14 @@ void MainWindow::initui_misc()
     id0 = new QTableWidgetItem(tr("Enabled"));
     ui->tableEntries->setHorizontalHeaderItem(5, id0);
 
+    id0 = new QTableWidgetItem(tr("TextMode"));
+    ui->tableEntries->setHorizontalHeaderItem(6, id0);
+
     ui->tableEntries->setAlternatingRowColors(true);
 
     //Tools
+    ui->tableTools->setColumnCount(8);
+
     ui->tableTools->setColumnWidth(0 , 450);
     id0 = new QTableWidgetItem(tr("Path"));
     ui->tableTools->setHorizontalHeaderItem(0, id0);
@@ -1268,6 +1275,12 @@ void MainWindow::initui_misc()
 
     id0 = new QTableWidgetItem(tr("Enabled"));
     ui->tableTools->setHorizontalHeaderItem(5, id0);
+
+    id0 = new QTableWidgetItem(tr("RealPath"));
+    ui->tableTools->setHorizontalHeaderItem(6, id0);
+
+    id0 = new QTableWidgetItem(tr("TextMode"));
+    ui->tableTools->setHorizontalHeaderItem(7, id0);
 
     ui->tableTools->setAlternatingRowColors(true);
 
@@ -1332,6 +1345,7 @@ void MainWindow::ParserMisc(QVariantMap map)
     ui->chkAllowNvramReset->setChecked(map_security["AllowNvramReset"].toBool());
     ui->chkAllowSetDefault->setChecked(map_security["AllowSetDefault"].toBool());
     ui->chkAuthRestart->setChecked(map_security["AuthRestart"].toBool());
+    ui->chkBlacklistAppleUpdate->setChecked(map_security["BlacklistAppleUpdate"].toBool());
 
     hm = map_security["BootProtect"].toString();
     if(hm.trimmed() == "None")
@@ -1406,6 +1420,7 @@ void MainWindow::ParserMisc(QVariantMap map)
 
         init_enabled_data(ui->tableEntries , i , 4 , map3["Auxiliary"].toString());
         init_enabled_data(ui->tableEntries , i , 5 , map3["Enabled"].toString());
+        init_enabled_data(ui->tableEntries , i , 6 , map3["TextMode"].toString());
     }
 
     //Tools
@@ -1433,6 +1448,10 @@ void MainWindow::ParserMisc(QVariantMap map)
         init_enabled_data(ui->tableTools , i , 4 , map3["Auxiliary"].toString());
 
         init_enabled_data(ui->tableTools , i , 5 , map3["Enabled"].toString());
+
+        init_enabled_data(ui->tableTools , i , 6 , map3["RealPath"].toString());
+
+        init_enabled_data(ui->tableTools , i , 7 , map3["TextMode"].toString());
     }
 
 
@@ -2549,9 +2568,11 @@ QVariantMap MainWindow::SaveACPI()
         acpiAddSub["Enabled"] = getBool(ui->table_acpi_add , i , 2);
 
         acpiAdd.append(acpiAddSub); //最后一层
-        acpiMap["Add"] = acpiAdd; //第二层
+
 
     }
+
+    acpiMap["Add"] = acpiAdd; //第二层
 
 
     //Delete
@@ -2575,10 +2596,11 @@ QVariantMap MainWindow::SaveACPI()
         acpiDelSub["Enabled"] = getBool(ui->table_acpi_del , i , 5);
 
         acpiDel.append(acpiDelSub); //最后一层
-        acpiMap["Delete"] = acpiDel; //第二层
 
 
     }
+
+    acpiMap["Delete"] = acpiDel; //第二层
 
 
 
@@ -2609,10 +2631,10 @@ QVariantMap MainWindow::SaveACPI()
         acpiPatchSub["Enabled"] = getBool(ui->table_acpi_patch , i , 11);
 
         acpiPatch.append(acpiPatchSub); //最后一层
-        acpiMap["Patch"] = acpiPatch; //第二层
-
 
     }
+
+    acpiMap["Patch"] = acpiPatch; //第二层
 
 
     //Quirks
@@ -2650,10 +2672,10 @@ QVariantMap MainWindow::SaveBooter()
         valueList["Enabled"] = getBool(ui->table_booter , i , 2);
 
         arrayList.append(valueList); //最后一层
-        subMap["MmioWhitelist"] = arrayList; //第二层
-
 
     }
+
+    subMap["MmioWhitelist"] = arrayList; //第二层
 
     //Quirks
     QVariantMap mapQuirks;
@@ -2764,8 +2786,10 @@ QVariantMap MainWindow::SaveKernel()
         valueList["Arch"] = ui->table_kernel_add->item(i , 7)->text();
 
         dictList.append(valueList);
-        subMap["Add"] = dictList;
+
     }
+
+    subMap["Add"] = dictList;
 
     //Block
     dictList.clear();//必须先清理之前的数据，否则之前的数据会加到当前数据里面来
@@ -2780,8 +2804,10 @@ QVariantMap MainWindow::SaveKernel()
         valueList["Arch"] = ui->table_kernel_block->item(i , 5)->text();
 
         dictList.append(valueList);
-        subMap["Block"] = dictList;
+
     }
+
+    subMap["Block"] = dictList;
 
     //Force
     dictList.clear();
@@ -2799,8 +2825,10 @@ QVariantMap MainWindow::SaveKernel()
         valueList["Arch"] = ui->table_kernel_Force->item(i , 8)->text();
 
         dictList.append(valueList);
-        subMap["Force"] = dictList;
+
     }
+
+    subMap["Force"] = dictList;
 
     //Patch
     dictList.clear();
@@ -2823,8 +2851,10 @@ QVariantMap MainWindow::SaveKernel()
         valueList["Arch"] = ui->table_kernel_patch->item(i , 13)->text();
 
         dictList.append(valueList);
-        subMap["Patch"] = dictList;
+
     }
+
+    subMap["Patch"] = dictList;
 
     //Emulate
     QVariantMap mapValue;
@@ -2925,6 +2955,7 @@ QVariantMap MainWindow::SaveMisc()
         valueList["Comment"] = ui->tableEntries->item(i , 3)->text();
         valueList["Auxiliary"] = getBool(ui->tableEntries , i ,4);
         valueList["Enabled"] = getBool(ui->tableEntries , i ,5);
+        valueList["TextMode"] = getBool(ui->tableEntries , i ,6);
 
         dictList.append(valueList);
 
@@ -2937,6 +2968,7 @@ QVariantMap MainWindow::SaveMisc()
     valueList["AllowNvramReset"] = getChkBool(ui->chkAllowNvramReset);
     valueList["AllowSetDefault"] = getChkBool(ui->chkAllowSetDefault);
     valueList["AuthRestart"] = getChkBool(ui->chkAuthRestart);
+    valueList["BlacklistAppleUpdate"] = getChkBool(ui->chkBlacklistAppleUpdate);
     valueList["EnablePassword"] = getChkBool(ui->chkEnablePassword);
 
     valueList["BootProtect"] = ui->cboxBootProtect->currentText();
@@ -2972,6 +3004,8 @@ QVariantMap MainWindow::SaveMisc()
         valueList["Comment"] = ui->tableTools->item(i , 3)->text();
         valueList["Auxiliary"] = getBool(ui->tableTools , i ,4);
         valueList["Enabled"] = getBool(ui->tableTools , i ,5);
+        valueList["RealPath"] = getBool(ui->tableTools , i ,6);
+        valueList["TextMode"] = getBool(ui->tableTools , i ,7);
 
         dictList.append(valueList);
 
@@ -3125,13 +3159,15 @@ QVariantMap MainWindow::SavePlatformInfo()
         AddSub["Speed"] = ui->tableDevices->item(i , 7)->text().toLongLong();
 
         Array.append(AddSub); //最后一层
-        Map["Devices"] = Array; //第二层
 
     }
-    if(ui->tableDevices->rowCount() > 0) //里面有数据才进行保存的动作
-    {
-        valueList["Devices"] =Map["Devices"];
-    }
+
+    Map["Devices"] = Array; //第二层
+
+    //if(ui->tableDevices->rowCount() > 0) //里面有数据才进行保存的动作
+    //{
+        valueList["Devices"] = Map["Devices"];
+    //}
 
     subMap["Memory"] = valueList;
 
@@ -3556,6 +3592,8 @@ void MainWindow::on_tableEntries_cellClicked(int row, int column)
     enabled_change(ui->tableEntries , row , column , 5);
 
     enabled_change(ui->tableEntries , row , column , 4);
+
+    enabled_change(ui->tableEntries , row , column , 6);
 }
 
 void MainWindow::on_tableTools_cellClicked(int row, int column)
@@ -3563,6 +3601,10 @@ void MainWindow::on_tableTools_cellClicked(int row, int column)
     enabled_change(ui->tableTools , row , column , 5);
 
     enabled_change(ui->tableTools , row , column , 4);
+
+    enabled_change(ui->tableTools , row , column , 6);
+
+    enabled_change(ui->tableTools , row , column , 7);
 }
 
 void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
@@ -4037,18 +4079,21 @@ void MainWindow::on_btnMiscBO_Del_clicked()
 
 void MainWindow::on_btnMiscEntries_Add_clicked()
 {
-    add_item(ui->tableEntries , 5);
+    add_item(ui->tableEntries , 6);
 
     init_enabled_data(ui->tableEntries , ui->tableEntries->rowCount() - 1 , 4 , "false");
     init_enabled_data(ui->tableEntries , ui->tableEntries->rowCount() - 1 , 5 , "true");
+    init_enabled_data(ui->tableEntries , ui->tableEntries->rowCount() - 1 , 6 , "false");
 }
 
 void MainWindow::on_btnMiscTools_Add_clicked()
 {
-    add_item(ui->tableTools , 5);
+    add_item(ui->tableTools , 7);
 
     init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 4 , "false");
     init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 5 , "true");
+    init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 6 , "false");
+    init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 7 , "false");
 }
 
 void MainWindow::on_btnMiscEntries_Del_clicked()
