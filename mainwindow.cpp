@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.11.07";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.11.12";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -1215,6 +1215,31 @@ void MainWindow::initui_misc()
     ui->cboxSecureBootModel->addItem("Disabled");
     ui->cboxSecureBootModel->addItem("Default");
 
+    QString qfile = QDir::homePath() + "/QtOCC1.ini";
+    QFileInfo fi(qfile);
+    if(fi.exists())
+    {
+        QSettings Reg(qfile, QSettings::IniFormat);
+
+        ui->chk1->setChecked(Reg.value("1").toBool());
+        ui->chk2->setChecked(Reg.value("2").toBool());
+        ui->chk3->setChecked(Reg.value("3").toBool());
+        ui->chk4->setChecked(Reg.value("4").toBool());
+        ui->chk5->setChecked(Reg.value("5").toBool());
+        ui->chk6->setChecked(Reg.value("6").toBool());
+        ui->chk7->setChecked(Reg.value("7").toBool());
+        ui->chk8->setChecked(Reg.value("8").toBool());
+        ui->chk9->setChecked(Reg.value("9").toBool());
+        ui->chk10->setChecked(Reg.value("10").toBool());
+        ui->chk11->setChecked(Reg.value("11").toBool());
+        ui->chk12->setChecked(Reg.value("12").toBool());
+        ui->chk13->setChecked(Reg.value("13").toBool());
+        ui->chk14->setChecked(Reg.value("14").toBool());
+        ui->chk15->setChecked(Reg.value("15").toBool());
+        ui->chk16->setChecked(Reg.value("16").toBool());
+
+    }
+
 
     //BlessOverride
     QTableWidgetItem *id0;
@@ -1460,6 +1485,19 @@ void MainWindow::ParserMisc(QVariantMap map)
 
 void MainWindow::initui_nvram()
 {
+
+    QString y = QString::number(QDate::currentDate().year());
+    QString m = QString::number(QDate::currentDate().month());
+    QString d = QString::number(QDate::currentDate().day());
+
+    QString h = QString::number(QTime::currentTime().hour());
+    QString mm = QString::number(QTime::currentTime().minute());
+    QString s = QString::number(QTime::currentTime().second());
+
+    CurrentDateTime = y + m + d + h + mm + s;
+
+    qDebug() << CurrentDateTime;
+
     QTableWidgetItem *id0;
 
     //Add
@@ -1470,6 +1508,8 @@ void MainWindow::initui_nvram()
     ui->table_nv_add0->setHorizontalHeaderItem(0, id0);
     ui->table_nv_add0->setAlternatingRowColors(true);
 
+    ui->table_nv_add0->setContextMenuPolicy (Qt::CustomContextMenu);
+    connect(ui->table_nv_add0, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_menu0(QPoint)));
 
 
     ui->table_nv_add->setColumnWidth(0,200);
@@ -1484,6 +1524,9 @@ void MainWindow::initui_nvram()
     ui->table_nv_add->setHorizontalHeaderItem(1, id0);
 
     ui->table_nv_add->setAlternatingRowColors(true);
+
+    ui->table_nv_add->setContextMenuPolicy (Qt::CustomContextMenu);
+    connect(ui->table_nv_add, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_menu(QPoint)));
 
 
     //Delete
@@ -1609,7 +1652,7 @@ void MainWindow::ParserNvram(QVariantMap map)
 
 void MainWindow::write_ini(QString table_name , QTableWidget *mytable, int i)
 {
-    QString plistPath = QDir::homePath() + "/" + table_name + QString::number(i + 1) + ".ini";
+    QString plistPath = QDir::homePath() + "/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
     //qDebug() << plistPath;
     QFile file(plistPath);
     if(file.exists()) //如果文件存在，则先删除它
@@ -1633,7 +1676,7 @@ void MainWindow::write_ini(QString table_name , QTableWidget *mytable, int i)
 
 void MainWindow::read_ini(QString table_name , QTableWidget *mytable , int i)
 {
-    QString plistPath = QDir::homePath() + "/" + table_name + QString::number(i + 1) + ".ini";
+    QString plistPath = QDir::homePath() + "/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
     //qDebug() << plistPath;
     QFile file(plistPath);
     if(file.exists())
@@ -1664,7 +1707,7 @@ void MainWindow::read_ini(QString table_name , QTableWidget *mytable , int i)
 
 void MainWindow::read_value_ini(QString table_name , QTableWidget *mytable , int i)
 {
-    QString plistPath = QDir::homePath() + "/" + table_name + QString::number(i + 1) + ".ini";
+    QString plistPath = QDir::homePath() + "/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
     //qDebug() << plistPath;
     QFile file(plistPath);
     if(file.exists())
@@ -1784,7 +1827,7 @@ void MainWindow::write_value_ini(QString tablename , QTableWidget *subtable , in
 
 
 
-        QString plistPath = QDir::homePath() + "/" + tablename + QString::number(i + 1) + ".ini";
+        QString plistPath = QDir::homePath() + "/" + CurrentDateTime + tablename + QString::number(i + 1) + ".ini";
         //qDebug() << plistPath;
         QFile file(plistPath);
         if(file.exists()) //如果文件存在，则先删除它
@@ -3790,7 +3833,7 @@ void MainWindow::on_btnDPDel_Del0_clicked()
     int delindex = ui->table_dp_del0->currentRow();
     int count = ui->table_dp_del0->rowCount();
 
-    QString qz = QDir::homePath() + "/" + ui->table_dp_del0->objectName();
+    QString qz = QDir::homePath() + "/" + CurrentDateTime + ui->table_dp_del0->objectName();
     QFile file(qz + QString::number(delindex + 1) + ".ini");
     del_item(ui->table_dp_del0);
     if(file.exists())
@@ -3840,21 +3883,25 @@ void MainWindow::on_btnACPIAdd_Add_clicked()
 {
     QFileDialog fd;
 
-    QString FileName = fd.getOpenFileName(this,"文件","","文件(*.aml);;所有文件(*.*)");
+    QStringList FileName = fd.getOpenFileNames(this,"文件","","文件(*.aml);;所有文件(*.*)");
     if(FileName.isEmpty())
 
         return;
 
-    //QFile file(FileName);
-    int row = ui->table_acpi_add->rowCount() + 1;
+    for(int i = 0; i < FileName.count(); i ++)
+    {
+        int row = ui->table_acpi_add->rowCount() + 1;
 
-    ui->table_acpi_add->setRowCount(row);
-    ui->table_acpi_add->setItem(row - 1 , 0 , new QTableWidgetItem(QFileInfo(FileName).fileName()));
-    ui->table_acpi_add->setItem(row - 1 , 1 , new QTableWidgetItem(""));
-    init_enabled_data(ui->table_acpi_add , row - 1 , 2 , "true");
+        ui->table_acpi_add->setRowCount(row);
+        ui->table_acpi_add->setItem(row - 1 , 0 , new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+        ui->table_acpi_add->setItem(row - 1 , 1 , new QTableWidgetItem(""));
+        init_enabled_data(ui->table_acpi_add , row - 1 , 2 , "true");
 
-    ui->table_acpi_add->setFocus();
-    ui->table_acpi_add->setCurrentCell(row - 1 , 0);
+        ui->table_acpi_add->setFocus();
+        ui->table_acpi_add->setCurrentCell(row - 1 , 0);
+
+    }
+
 
 }
 
@@ -3873,7 +3920,7 @@ void MainWindow::on_btnDPAdd_Del0_clicked()
     int delindex = ui->table_dp_add0->currentRow();
     int count = ui->table_dp_add0->rowCount();
 
-    QString qz = QDir::homePath() + "/" + ui->table_dp_add0->objectName();
+    QString qz = QDir::homePath() + "/" + CurrentDateTime + ui->table_dp_add0->objectName();
     QFile file(qz + QString::number(delindex + 1) + ".ini");
     del_item(ui->table_dp_add0);
     if(file.exists())
@@ -4135,7 +4182,7 @@ void MainWindow::on_btnNVRAMAdd_Del0_clicked()
     int delindex = ui->table_nv_add0->currentRow();
     int count = ui->table_nv_add0->rowCount();
 
-    QString qz = QDir::homePath() + "/" + ui->table_nv_add0->objectName();
+    QString qz = QDir::homePath() + "/" + CurrentDateTime + ui->table_nv_add0->objectName();
     QFile file(qz + QString::number(delindex + 1) + ".ini");
     del_item(ui->table_nv_add0);
     if(file.exists())
@@ -4220,7 +4267,7 @@ void MainWindow::on_btnNVRAMDel_Del0_clicked()
     int delindex = ui->table_nv_del0->currentRow();
     int count = ui->table_nv_del0->rowCount();
 
-    QString qz = QDir::homePath() + "/" + ui->table_nv_del0->objectName();
+    QString qz = QDir::homePath() + "/" + CurrentDateTime + ui->table_nv_del0->objectName();
     QFile file(qz + QString::number(delindex + 1) + ".ini");
     del_item(ui->table_nv_del0);
     if(file.exists())
@@ -4251,7 +4298,7 @@ void MainWindow::on_btnNVRAMLS_Del0_clicked()
     int delindex = ui->table_nv_ls0->currentRow();
     int count = ui->table_nv_ls0->rowCount();
 
-    QString qz = QDir::homePath() + "/" + ui->table_nv_ls0->objectName();
+    QString qz = QDir::homePath() + "/" + CurrentDateTime + ui->table_nv_ls0->objectName();
     QFile file(qz + QString::number(delindex + 1) + ".ini");
     del_item(ui->table_nv_ls0);
     if(file.exists())
@@ -4307,19 +4354,23 @@ void MainWindow::on_btnUEFIDrivers_Add_clicked()
 {
     QFileDialog fd;
 
-    QString FileName = fd.getOpenFileName(this,"文件","","文件(*.efi);;所有文件(*.*)");
+    QStringList FileName = fd.getOpenFileNames(this,"文件","","文件(*.efi);;所有文件(*.*)");
     if(FileName.isEmpty())
 
         return;
 
-    //QFile file(FileName);
-    int row = ui->table_uefi_drivers->rowCount() + 1;
+    for(int i = 0; i < FileName.count(); i ++)
+    {
+        int row = ui->table_uefi_drivers->rowCount() + 1;
 
-    ui->table_uefi_drivers->setRowCount(row);
-    ui->table_uefi_drivers->setItem(row - 1 , 0 , new QTableWidgetItem(QFileInfo(FileName).fileName()));
+        ui->table_uefi_drivers->setRowCount(row);
+        ui->table_uefi_drivers->setItem(row - 1 , 0 , new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
 
-    ui->table_uefi_drivers->setFocus();
-    ui->table_uefi_drivers->setCurrentCell(row - 1 , 0);
+        ui->table_uefi_drivers->setFocus();
+        ui->table_uefi_drivers->setCurrentCell(row - 1 , 0);
+
+    }
+
 }
 
 void MainWindow::on_btnUEFIDrivers_Del_clicked()
@@ -4974,6 +5025,33 @@ void MainWindow::closeEvent(QCloseEvent *event)
         }
     }
 
+    QString qfile = QDir::homePath() + "/QtOCC.ini";
+    QFile file(qfile);
+    //QSettings Reg(qfile, QSettings::NativeFormat);
+    QSettings Reg(qfile, QSettings::IniFormat);
+    Reg.setValue("1" , ui->chk1->isChecked());
+    Reg.setValue("2" , ui->chk2->isChecked());
+    Reg.setValue("3" , ui->chk3->isChecked());
+    Reg.setValue("4" , ui->chk4->isChecked());
+    Reg.setValue("5" , ui->chk5->isChecked());
+    Reg.setValue("6" , ui->chk6->isChecked());
+    Reg.setValue("7" , ui->chk7->isChecked());
+    Reg.setValue("8" , ui->chk8->isChecked());
+    Reg.setValue("9" , ui->chk9->isChecked());
+    Reg.setValue("10" , ui->chk10->isChecked());
+    Reg.setValue("11" , ui->chk11->isChecked());
+    Reg.setValue("12" , ui->chk12->isChecked());
+    Reg.setValue("13" , ui->chk13->isChecked());
+    Reg.setValue("14" , ui->chk14->isChecked());
+    Reg.setValue("15" , ui->chk15->isChecked());
+    Reg.setValue("16" , ui->chk16->isChecked());
+
+    if(this->isWindowModified())
+    {
+
+    }
+
+
 }
 
 void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
@@ -5283,3 +5361,1553 @@ void MainWindow::on_cboxUpdateSMBIOSMode_currentIndexChanged(const QString &arg1
     else
         ui->chkCustomSMBIOSGuid->setChecked(false);
 }
+
+int MainWindow::ExposeSensitiveData()
+{
+    int a, b, c, d;
+    if(ui->chk01->isChecked()) a = 1; else a = 0;
+
+    if(ui->chk02->isChecked()) b = 2; else b = 0;
+
+    if(ui->chk04->isChecked()) c = 4; else c = 0;
+
+    if(ui->chk08->isChecked()) d = 8; else d = 0;
+
+    ui->editExposeSensitiveData->setText(QString::number(a + b + c + d));
+
+    return a + b + c + d;
+}
+
+void MainWindow::on_chk01_clicked()
+{
+    ExposeSensitiveData();
+
+}
+
+void MainWindow::on_chk02_clicked()
+{
+    ExposeSensitiveData();
+}
+
+void MainWindow::on_chk04_clicked()
+{
+    ExposeSensitiveData();
+}
+
+void MainWindow::on_chk08_clicked()
+{
+    ExposeSensitiveData();
+}
+
+void MainWindow::on_editExposeSensitiveData_textChanged(const QString &arg1)
+{
+    int val = arg1.toInt();
+    if(val == 0)
+    {
+        ui->chk01->setChecked(false);
+        ui->chk02->setChecked(false);
+        ui->chk04->setChecked(false);
+        ui->chk08->setChecked(false);
+    }
+
+    if(val == 1)
+    {
+        ui->chk01->setChecked(true);
+        ui->chk02->setChecked(false);
+        ui->chk04->setChecked(false);
+        ui->chk08->setChecked(false);
+    }
+
+    if(val == 2)
+    {
+        ui->chk01->setChecked(false);
+        ui->chk02->setChecked(true);
+        ui->chk04->setChecked(false);
+        ui->chk08->setChecked(false);
+    }
+
+    if(val == 3)
+    {
+        ui->chk01->setChecked(1);
+        ui->chk02->setChecked(1);
+        ui->chk04->setChecked(0);
+        ui->chk08->setChecked(0);
+    }
+
+    if(val == 4)
+    {
+        ui->chk01->setChecked(0);
+        ui->chk02->setChecked(0);
+        ui->chk04->setChecked(1);
+        ui->chk08->setChecked(0);
+    }
+
+    if(val == 5)
+    {
+        ui->chk01->setChecked(1);
+        ui->chk02->setChecked(0);
+        ui->chk04->setChecked(1);
+        ui->chk08->setChecked(0);
+    }
+
+    if(val == 6)
+    {
+        ui->chk01->setChecked(0);
+        ui->chk02->setChecked(1);
+        ui->chk04->setChecked(1);
+        ui->chk08->setChecked(0);
+    }
+
+    if(val == 7)
+    {
+        ui->chk01->setChecked(1);
+        ui->chk02->setChecked(1);
+        ui->chk04->setChecked(1);
+        ui->chk08->setChecked(0);
+    }
+
+    if(val == 8)
+    {
+        ui->chk01->setChecked(0);
+        ui->chk02->setChecked(0);
+        ui->chk04->setChecked(0);
+        ui->chk08->setChecked(1);
+    }
+
+    if(val == 9)
+    {
+        ui->chk01->setChecked(1);
+        ui->chk02->setChecked(0);
+        ui->chk04->setChecked(0);
+        ui->chk08->setChecked(1);
+    }
+
+    if(val == 10)
+    {
+        ui->chk01->setChecked(0);
+        ui->chk02->setChecked(1);
+        ui->chk04->setChecked(0);
+        ui->chk08->setChecked(1);
+    }
+
+    if(val == 11)
+    {
+        ui->chk01->setChecked(1);
+        ui->chk02->setChecked(1);
+        ui->chk04->setChecked(0);
+        ui->chk08->setChecked(1);
+    }
+
+    if(val == 12)
+    {
+        ui->chk01->setChecked(0);
+        ui->chk02->setChecked(0);
+        ui->chk04->setChecked(1);
+        ui->chk08->setChecked(1);
+    }
+
+    if(val == 13)
+    {
+        ui->chk01->setChecked(1);
+        ui->chk02->setChecked(0);
+        ui->chk04->setChecked(1);
+        ui->chk08->setChecked(1);
+    }
+
+    if(val == 14)
+    {
+        ui->chk01->setChecked(0);
+        ui->chk02->setChecked(1);
+        ui->chk04->setChecked(1);
+        ui->chk08->setChecked(1);
+    }
+
+    if(val == 15)
+    {
+        ui->chk01->setChecked(1);
+        ui->chk02->setChecked(1);
+        ui->chk04->setChecked(1);
+        ui->chk08->setChecked(1);
+    }
+
+
+}
+
+void MainWindow::ScanPolicy()
+{
+
+
+    if(ui->chk1->isChecked()) v1 = 1; else v1 = 0;
+    if(ui->chk2->isChecked()) v2 = 2; else v2 = 0;
+    if(ui->chk3->isChecked()) v3 = 256; else v3 = 0;
+    if(ui->chk4->isChecked()) v4 = 512; else v4 = 0;
+    if(ui->chk5->isChecked()) v5 = 1024; else v5 = 0;
+    if(ui->chk6->isChecked()) v6 = 2048; else v6 = 0;
+    if(ui->chk7->isChecked()) v7 = 4096; else v7 = 0;
+    if(ui->chk8->isChecked()) v8 = 65536; else v8 = 0;
+    if(ui->chk9->isChecked()) v9 = 131072; else v9 = 0;
+    if(ui->chk10->isChecked()) v10 = 262144; else v10 = 0;
+    if(ui->chk11->isChecked()) v11 = 524288; else v11 = 0;
+    if(ui->chk12->isChecked()) v12 = 1048576; else v12 = 0;
+    if(ui->chk13->isChecked()) v13 = 2097152; else v13 = 0;
+    if(ui->chk14->isChecked()) v14 = 4194304; else v14 = 0;
+    if(ui->chk15->isChecked()) v15 = 8388608; else v15 = 0;
+    if(ui->chk16->isChecked()) v16 = 16777216; else v16 = 0;
+
+    int total = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11 + v12 + v13 + v14 + v15 + v16;
+
+    ui->editScanPolicy->setText(QString::number(total));
+
+
+
+}
+
+void MainWindow::on_chk1_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk2_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk3_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk4_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk5_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk6_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk7_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk8_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk9_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk10_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk11_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk12_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk13_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk14_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk15_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_chk16_clicked()
+{
+    ScanPolicy();
+}
+
+void MainWindow::on_editScanPolicy_textChanged(const QString &arg1)
+{
+
+
+    int total = arg1.toInt();
+
+    chk.clear();
+    chk.append(ui->chk1);
+    chk.append(ui->chk2);
+    chk.append(ui->chk3);
+    chk.append(ui->chk4);
+    chk.append(ui->chk5);
+    chk.append(ui->chk6);
+    chk.append(ui->chk7);
+    chk.append(ui->chk8);
+    chk.append(ui->chk9);
+    chk.append(ui->chk10);
+    chk.append(ui->chk11);
+    chk.append(ui->chk12);
+    chk.append(ui->chk13);
+    chk.append(ui->chk14);
+    chk.append(ui->chk15);
+    chk.append(ui->chk16);
+
+    v1 = 1;
+    v2 = 2;
+    v3 = 256;
+    v4 = 512;
+    v5 = 1024;
+    v6 = 2048;
+    v7 = 4096;
+    v8 = 65536;
+    v9 = 131072;
+    v10 = 262144;
+    v11 = 524288;
+    v12 = 1048576;
+    v13 = 2097152;
+    v14 = 4194304;
+    v15 = 8388608;
+    v16 = 16777216;
+
+    v.clear();
+    v.append(v1);
+    v.append(v2);
+    v.append(v3);
+    v.append(v4);
+    v.append(v5);
+    v.append(v6);
+    v.append(v7);
+    v.append(v8);
+    v.append(v9);
+    v.append(v10);
+    v.append(v11);
+    v.append(v12);
+    v.append(v13);
+    v.append(v14);
+    v.append(v15);
+    v.append(v16);
+
+    scanPolicy = true;
+    pickerAttributes = false;
+
+    for(int i = 0; i < 16; i ++)
+        chk.at(i)->setChecked(false);
+
+    method(v, total);
+
+
+}
+
+void MainWindow::method(QVector<int> nums, int sum)
+{
+
+    QVector<int> list;
+
+    method(nums, sum, list, -1);
+}
+
+void MainWindow::method(QVector<int> nums, int sum, QVector<int> list, int index)
+{
+    if(sum == 0)
+    {
+        for(int val : list)
+        {
+            //qDebug() << val;
+            for(int i = 0; i < nums.count(); i ++)
+            {
+
+                if(scanPolicy)
+                {
+                    if(val == v.at(i))
+                    {
+
+                        chk.at(i)->setChecked(true);
+
+                    }
+
+                }
+
+                if(pickerAttributes)
+                {
+                    if(val == v_pa.at(i))
+                    {
+                         chk_pa.at(i)->setChecked(true);
+                    }
+
+                }
+
+
+            }
+
+
+
+
+        }
+
+
+    }
+    else if(sum > 0)
+    {
+        for (int i = index + 1; i < nums.count(); i++)
+        {
+            list.append(nums.at(i));
+            method(nums, sum - nums.at(i), list, i);
+            list.remove(list.size() - 1);
+
+        }
+    }
+
+
+}
+
+void MainWindow::methodDisplayLevel(QVector<unsigned int> nums, unsigned int sum)
+{
+
+    QVector<unsigned int> list;
+
+    methodDisplayLevel(nums, sum, list, -1);
+}
+
+void MainWindow::methodDisplayLevel(QVector<unsigned int> nums, unsigned int sum, QVector<unsigned int> list, int index)
+{
+    if(sum == 0)
+    {
+        for(unsigned int val : list)
+        {
+            qDebug() << val;
+            for(int i = 0; i < 19; i ++)
+            {
+
+                if(val == vDisplayLevel.at(i))
+                {
+                    chkDisplayLevel.at(i)->setChecked(true);
+                }
+
+            }
+        }
+
+
+    }
+    else if(sum > 0)
+    {
+        for (int i = index + 1; i < nums.count(); i++)
+        {
+            list.append(nums.at(i));
+            methodDisplayLevel(nums, sum - nums.at(i), list, i);
+            list.remove(list.size() - 1);
+
+        }
+    }
+
+
+}
+
+void MainWindow::DisplayLevel()
+{
+
+    click = true;
+
+    vd1 = 1;
+    vd2 = 2;
+    vd3 = 4;
+    vd4 = 8;
+    vd5 = 16;
+    vd6 = 32;
+    vd7 = 64;
+    vd8 = 128;
+    vd9 = 256;
+    vd10 = 1024;
+    vd11 = 4096;
+    vd12 = 16384;
+    vd13 = 65536;
+    vd14 = 131072;
+    vd15 = 524288;
+    vd16 = 1048576;
+    vd17 = 2097152;
+    vd18 = 4194304;
+    vd19 = 2147483648;
+
+    vDisplayLevel.clear();
+    vDisplayLevel.append(vd1);
+    vDisplayLevel.append(vd2);
+    vDisplayLevel.append(vd3);
+    vDisplayLevel.append(vd4);
+    vDisplayLevel.append(vd5);
+    vDisplayLevel.append(vd6);
+    vDisplayLevel.append(vd7);
+    vDisplayLevel.append(vd8);
+    vDisplayLevel.append(vd9);
+    vDisplayLevel.append(vd10);
+    vDisplayLevel.append(vd11);
+    vDisplayLevel.append(vd12);
+    vDisplayLevel.append(vd13);
+    vDisplayLevel.append(vd14);
+    vDisplayLevel.append(vd15);
+    vDisplayLevel.append(vd16);
+    vDisplayLevel.append(vd17);
+    vDisplayLevel.append(vd18);
+    vDisplayLevel.append(vd19);
+
+    chkDisplayLevel.clear();
+    chkDisplayLevel.append(ui->chkD1);
+    chkDisplayLevel.append(ui->chkD2);
+    chkDisplayLevel.append(ui->chkD3);
+    chkDisplayLevel.append(ui->chkD4);
+    chkDisplayLevel.append(ui->chkD5);
+    chkDisplayLevel.append(ui->chkD6);
+    chkDisplayLevel.append(ui->chkD7);
+    chkDisplayLevel.append(ui->chkD8);
+    chkDisplayLevel.append(ui->chkD9);
+    chkDisplayLevel.append(ui->chkD10);
+    chkDisplayLevel.append(ui->chkD11);
+    chkDisplayLevel.append(ui->chkD12);
+    chkDisplayLevel.append(ui->chkD13);
+    chkDisplayLevel.append(ui->chkD14);
+    chkDisplayLevel.append(ui->chkD15);
+    chkDisplayLevel.append(ui->chkD16);
+    chkDisplayLevel.append(ui->chkD17);
+    chkDisplayLevel.append(ui->chkD18);
+    chkDisplayLevel.append(ui->chkD19);
+
+    unsigned int total = 0;
+    for(int i = 0; i < 19; i ++)
+    {
+        if(!chkDisplayLevel.at(i)->isChecked())
+        {
+            vDisplayLevel.remove(i);
+            vDisplayLevel.insert(i, 0);
+
+        }
+
+    }
+
+    for(int i = 0; i < 19; i ++)
+    {
+        total = total + vDisplayLevel.at(i);
+    }
+
+    ui->editDisplayLevel->setText(QString::number(total));
+
+    click = false;
+
+}
+
+
+void MainWindow::on_chkD1_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD2_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD3_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD4_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD5_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD6_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD7_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD8_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD9_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD10_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD11_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD12_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD13_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD14_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD15_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD16_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD17_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD18_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_chkD19_clicked()
+{
+    DisplayLevel();
+}
+
+void MainWindow::on_editDisplayLevel_textChanged(const QString &arg1)
+{
+    if(click) return;
+
+    unsigned int total = arg1.toULongLong();
+
+    vd1 = 1;
+    vd2 = 2;
+    vd3 = 4;
+    vd4 = 8;
+    vd5 = 16;
+    vd6 = 32;
+    vd7 = 64;
+    vd8 = 128;
+    vd9 = 256;
+    vd10 = 1024;
+    vd11 = 4096;
+    vd12 = 16384;
+    vd13 = 65536;
+    vd14 = 131072;
+    vd15 = 524288;
+    vd16 = 1048576;
+    vd17 = 2097152;
+    vd18 = 4194304;
+    vd19 = 2147483648;
+
+    vDisplayLevel.clear();
+    vDisplayLevel.append(vd1);
+    vDisplayLevel.append(vd2);
+    vDisplayLevel.append(vd3);
+    vDisplayLevel.append(vd4);
+    vDisplayLevel.append(vd5);
+    vDisplayLevel.append(vd6);
+    vDisplayLevel.append(vd7);
+    vDisplayLevel.append(vd8);
+    vDisplayLevel.append(vd9);
+    vDisplayLevel.append(vd10);
+    vDisplayLevel.append(vd11);
+    vDisplayLevel.append(vd12);
+    vDisplayLevel.append(vd13);
+    vDisplayLevel.append(vd14);
+    vDisplayLevel.append(vd15);
+    vDisplayLevel.append(vd16);
+    vDisplayLevel.append(vd17);
+    vDisplayLevel.append(vd18);
+    vDisplayLevel.append(vd19);
+
+    chkDisplayLevel.clear();
+    chkDisplayLevel.append(ui->chkD1);
+    chkDisplayLevel.append(ui->chkD2);
+    chkDisplayLevel.append(ui->chkD3);
+    chkDisplayLevel.append(ui->chkD4);
+    chkDisplayLevel.append(ui->chkD5);
+    chkDisplayLevel.append(ui->chkD6);
+    chkDisplayLevel.append(ui->chkD7);
+    chkDisplayLevel.append(ui->chkD8);
+    chkDisplayLevel.append(ui->chkD9);
+    chkDisplayLevel.append(ui->chkD10);
+    chkDisplayLevel.append(ui->chkD11);
+    chkDisplayLevel.append(ui->chkD12);
+    chkDisplayLevel.append(ui->chkD13);
+    chkDisplayLevel.append(ui->chkD14);
+    chkDisplayLevel.append(ui->chkD15);
+    chkDisplayLevel.append(ui->chkD16);
+    chkDisplayLevel.append(ui->chkD17);
+    chkDisplayLevel.append(ui->chkD18);
+    chkDisplayLevel.append(ui->chkD19);
+
+    for(int i = 0; i < 19; i ++)
+    {
+        chkDisplayLevel.at(i)->setChecked(false);
+    }
+
+    methodDisplayLevel(vDisplayLevel, total);
+
+
+}
+
+void MainWindow::on_btnDLSetAll_clicked()
+{
+    chkDisplayLevel.clear();
+    chkDisplayLevel.append(ui->chkD1);
+    chkDisplayLevel.append(ui->chkD2);
+    chkDisplayLevel.append(ui->chkD3);
+    chkDisplayLevel.append(ui->chkD4);
+    chkDisplayLevel.append(ui->chkD5);
+    chkDisplayLevel.append(ui->chkD6);
+    chkDisplayLevel.append(ui->chkD7);
+    chkDisplayLevel.append(ui->chkD8);
+    chkDisplayLevel.append(ui->chkD9);
+    chkDisplayLevel.append(ui->chkD10);
+    chkDisplayLevel.append(ui->chkD11);
+    chkDisplayLevel.append(ui->chkD12);
+    chkDisplayLevel.append(ui->chkD13);
+    chkDisplayLevel.append(ui->chkD14);
+    chkDisplayLevel.append(ui->chkD15);
+    chkDisplayLevel.append(ui->chkD16);
+    chkDisplayLevel.append(ui->chkD17);
+    chkDisplayLevel.append(ui->chkD18);
+    chkDisplayLevel.append(ui->chkD19);
+
+    for(int i = 0; i < 19; i ++)
+    {
+        chkDisplayLevel.at(i)->setChecked(true);
+    }
+
+    DisplayLevel();
+}
+
+void MainWindow::on_btnDLClear_clicked()
+{
+
+    chkDisplayLevel.clear();
+    chkDisplayLevel.append(ui->chkD1);
+    chkDisplayLevel.append(ui->chkD2);
+    chkDisplayLevel.append(ui->chkD3);
+    chkDisplayLevel.append(ui->chkD4);
+    chkDisplayLevel.append(ui->chkD5);
+    chkDisplayLevel.append(ui->chkD6);
+    chkDisplayLevel.append(ui->chkD7);
+    chkDisplayLevel.append(ui->chkD8);
+    chkDisplayLevel.append(ui->chkD9);
+    chkDisplayLevel.append(ui->chkD10);
+    chkDisplayLevel.append(ui->chkD11);
+    chkDisplayLevel.append(ui->chkD12);
+    chkDisplayLevel.append(ui->chkD13);
+    chkDisplayLevel.append(ui->chkD14);
+    chkDisplayLevel.append(ui->chkD15);
+    chkDisplayLevel.append(ui->chkD16);
+    chkDisplayLevel.append(ui->chkD17);
+    chkDisplayLevel.append(ui->chkD18);
+    chkDisplayLevel.append(ui->chkD19);
+
+    for(int i = 0; i < 19; i ++)
+    {
+        chkDisplayLevel.at(i)->setChecked(false);
+    }
+
+    DisplayLevel();
+}
+
+void MainWindow::PickerAttributes()
+{
+    pav1 = 1;
+    pav2 = 2;
+    pav3 = 4;
+    pav4 = 8;
+
+    chk_pa.clear();
+    chk_pa.append(ui->chkPA1);
+    chk_pa.append(ui->chkPA2);
+    chk_pa.append(ui->chkPA3);
+    chk_pa.append(ui->chkPA4);
+
+    v_pa.clear();
+    v_pa.append(pav1);
+    v_pa.append(pav2);
+    v_pa.append(pav3);
+    v_pa.append(pav4);
+
+
+    for(int i = 0; i < v_pa.count(); i ++)
+    {
+        if(!chk_pa.at(i)->isChecked())
+        {
+            v_pa.remove(i);
+            v_pa.insert(i, 0);
+        }
+
+    }
+
+    int total = 0;
+    for(int i = 0; i < v_pa.count(); i ++)
+    {
+        total = total + v_pa.at(i);
+    }
+
+    ui->editPickerAttributes->setText(QString::number(total));
+}
+
+void MainWindow::on_chkPA1_clicked()
+{
+    PickerAttributes();
+}
+
+void MainWindow::on_chkPA2_clicked()
+{
+    PickerAttributes();
+}
+
+void MainWindow::on_chkPA3_clicked()
+{
+    PickerAttributes();
+}
+
+void MainWindow::on_chkPA4_clicked()
+{
+    PickerAttributes();
+}
+
+void MainWindow::on_editPickerAttributes_textChanged(const QString &arg1)
+{
+    int total = arg1.toInt();
+
+    pav1 = 1;
+    pav2 = 2;
+    pav3 = 4;
+    pav4 = 8;
+
+    chk_pa.clear();
+    chk_pa.append(ui->chkPA1);
+    chk_pa.append(ui->chkPA2);
+    chk_pa.append(ui->chkPA3);
+    chk_pa.append(ui->chkPA4);
+
+    v_pa.clear();
+    v_pa.append(pav1);
+    v_pa.append(pav2);
+    v_pa.append(pav3);
+    v_pa.append(pav4);
+
+    scanPolicy = false;
+    pickerAttributes = true;
+
+    for(int i = 0; i < v_pa.count(); i ++)
+        chk_pa.at(i)->setChecked(false);
+
+    method(v_pa, total);
+
+}
+
+void MainWindow::contextMenuEvent(QContextMenuEvent *event)
+{
+
+    Q_UNUSED(event);
+
+    QMenu menu(ui->table_nv_add);
+
+    QAction *actionbootargs = new QAction("boot-args");
+
+
+    menu.addAction(actionbootargs);
+
+    //menu.exec();
+
+}
+
+void MainWindow::show_menu(const QPoint pos)
+{
+
+    if(ui->table_nv_add0->currentIndex().data().toString() == "7C436110-AB2A-4BBB-A880-FE41995C9F82")
+    {
+
+        //设置菜单选项
+        QMenu *menu = new QMenu(ui->table_nv_add);
+
+        QAction *act1 = new QAction("+  boot-args", ui->table_nv_add);
+        connect (act1, SIGNAL(triggered()), this, SLOT(on_nv1()));
+
+        QAction *act2 = new QAction("+  bootercfg", ui->table_nv_add);
+        connect (act2, SIGNAL(triggered()), this, SLOT(on_nv2()));
+
+        QAction *act3 = new QAction("+  bootercfg-once", ui->table_nv_add);
+        connect (act3, SIGNAL(triggered()), this, SLOT(on_nv3()));
+
+        QAction *act4 = new QAction("+  efiboot-perf-record", ui->table_nv_add);
+        connect (act4, SIGNAL(triggered()), this, SLOT(on_nv4()));
+
+
+        QAction *act5 = new QAction("+  fmm-computer-name", ui->table_nv_add);
+        connect (act5, SIGNAL(triggered()), this, SLOT(on_nv5()));
+
+        QAction *act6 = new QAction("+  nvda_drv", ui->table_nv_add);
+        connect (act6, SIGNAL(triggered()), this, SLOT(on_nv6()));
+
+        QAction *act7 = new QAction("+  run-efi-updater", ui->table_nv_add);
+        connect (act7, SIGNAL(triggered()), this, SLOT(on_nv7()));
+
+        QAction *act8 = new QAction("+  StartupMute", ui->table_nv_add);
+        connect (act8, SIGNAL(triggered()), this, SLOT(on_nv8()));
+
+        QAction *act9 = new QAction("+  SystemAudioVolume", ui->table_nv_add);
+        connect (act9, SIGNAL(triggered()), this, SLOT(on_nv9()));
+
+        QAction *act10 = new QAction("+  csr-active-config", ui->table_nv_add);
+        connect (act10, SIGNAL(triggered()), this, SLOT(on_nv10()));
+
+        QAction *act11 = new QAction("+  prev-lang:kbd", ui->table_nv_add);
+        connect (act11, SIGNAL(triggered()), this, SLOT(on_nv11()));
+
+        QAction *act12 = new QAction("+  security-mode", ui->table_nv_add);
+        connect (act12, SIGNAL(triggered()), this, SLOT(on_nv12()));
+
+        menu->addAction(act1);
+        menu->addAction(act2);
+        menu->addAction(act3);
+        menu->addAction(act4);
+        menu->addAction(act5);
+        menu->addAction(act6);
+        menu->addAction(act7);
+        menu->addAction(act8);
+        menu->addAction(act9);
+        menu->addAction(act10);
+        menu->addAction(act11);
+        menu->addAction(act12);
+
+        menu->move (cursor ().pos ());
+        menu->show ();
+        //获得鼠标点击的x，y坐标点
+        int x = pos.x ();
+        int y = pos.y ();
+        QModelIndex index = ui->table_nv_add->indexAt (QPoint(x,y));
+        int row = index.row ();//获得QTableWidget列表点击的行数
+        QMessageBox box;
+        box.setText(QString::number(row));
+        //box.exec();
+
+    }
+
+
+}
+
+void MainWindow::on_nv1()
+{
+
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "boot-args")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("boot-args"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("String");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+
+}
+
+void MainWindow::on_nv2()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "bootercfg")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("bootercfg"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("Data");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+}
+
+void MainWindow::on_nv3()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "bootercfg-once")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("bootercfg-once"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("Data");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+}
+
+void MainWindow::on_nv4()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "efiboot-perf-record")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("efiboot-perf-record"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("Data");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+}
+
+void MainWindow::on_nv5()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "fmm-computer-name")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("fmm-computer-name"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("String");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+}
+
+void MainWindow::on_nv6()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "nvda_drv")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("nvda_drv"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("String");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+}
+
+void MainWindow::on_nv7()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "run-efi-updater")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("run-efi-updater"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("String");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+}
+
+void MainWindow::on_nv8()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "StartupMute")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("StartupMute"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("Data");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+}
+
+void MainWindow::on_nv9()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "SystemAudioVolume")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("SystemAudioVolume"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("Data");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+}
+
+void MainWindow::on_nv10()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "csr-active-config")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("csr-active-config"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("Data");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+}
+
+void MainWindow::on_nv11()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "prev-lang:kbd")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("prev-lang:kbd"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("Data");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+}
+
+void MainWindow::on_nv12()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add->item(i, 0)->text();
+        if(str == "security-mode")
+        {
+            ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add_clicked();
+
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 0 , new QTableWidgetItem("security-mode"));
+
+        QTableWidgetItem *newItem1 = new QTableWidgetItem("Data");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
+
+
+    }
+
+}
+
+void MainWindow::show_menu0(const QPoint pos)
+{
+    //设置菜单选项
+    QMenu *menu = new QMenu(ui->table_nv_add0);
+
+    QAction *act1 = new QAction("+  4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14", ui->table_nv_add0);
+    connect (act1, SIGNAL(triggered()), this, SLOT(on_nv01()));
+
+    QAction *act2 = new QAction("+  7C436110-AB2A-4BBB-A880-FE41995C9F82", ui->table_nv_add0);
+    connect (act2, SIGNAL(triggered()), this, SLOT(on_nv02()));
+
+    QAction *act3 = new QAction("+  8BE4DF61-93CA-11D2-AA0D-00E098032B8C", ui->table_nv_add0);
+    connect (act3, SIGNAL(triggered()), this, SLOT(on_nv03()));
+
+    QAction *act4 = new QAction("+  4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102", ui->table_nv_add0);
+    connect (act4, SIGNAL(triggered()), this, SLOT(on_nv04()));
+
+    menu->addAction(act1);
+    menu->addAction(act2);
+    menu->addAction(act3);
+    menu->addAction(act4);
+
+    menu->move (cursor ().pos ());
+    menu->show ();
+    //获得鼠标点击的x，y坐标点
+    int x = pos.x ();
+    int y = pos.y ();
+    QModelIndex index = ui->table_nv_add0->indexAt (QPoint(x,y));
+    int row = index.row ();//获得QTableWidget列表点击的行数
+    QMessageBox box;
+    box.setText(QString::number(row));
+    //box.exec();
+
+}
+
+void MainWindow::on_nv01()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add0->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add0->item(i, 0)->text();
+        if(str == "4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14")
+        {
+            ui->table_nv_add0->setCurrentCell(i, 0);
+            on_table_nv_add0_cellClicked(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add0_clicked();
+
+        ui->table_nv_add0->setItem(ui->table_nv_add0->rowCount() - 1 , 0 , new QTableWidgetItem("4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14"));
+
+    }
+
+
+}
+
+void MainWindow::on_nv02()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add0->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add0->item(i, 0)->text();
+        if(str == "7C436110-AB2A-4BBB-A880-FE41995C9F82")
+        {
+            ui->table_nv_add0->setCurrentCell(i, 0);
+            on_table_nv_add0_cellClicked(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add0_clicked();
+
+        ui->table_nv_add0->setItem(ui->table_nv_add0->rowCount() - 1 , 0 , new QTableWidgetItem("7C436110-AB2A-4BBB-A880-FE41995C9F82"));
+
+    }
+
+
+}
+
+void MainWindow::on_nv03()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add0->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add0->item(i, 0)->text();
+        if(str == "8BE4DF61-93CA-11D2-AA0D-00E098032B8C")
+        {
+            ui->table_nv_add0->setCurrentCell(i, 0);
+            on_table_nv_add0_cellClicked(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add0_clicked();
+
+        ui->table_nv_add0->setItem(ui->table_nv_add0->rowCount() - 1 , 0 , new QTableWidgetItem("8BE4DF61-93CA-11D2-AA0D-00E098032B8C"));
+
+    }
+
+
+}
+
+void MainWindow::on_nv04()
+{
+
+    bool re = false;
+
+    for(int i = 0; i < ui->table_nv_add0->rowCount(); i ++)
+    {
+        QString str;
+        str = ui->table_nv_add0->item(i, 0)->text();
+        if(str == "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102")
+        {
+            ui->table_nv_add0->setCurrentCell(i, 0);
+            on_table_nv_add0_cellClicked(i, 0);
+            re = true;
+
+        }
+
+    }
+
+
+
+    if(!re)
+    {
+        on_btnNVRAMAdd_Add0_clicked();
+
+        ui->table_nv_add0->setItem(ui->table_nv_add0->rowCount() - 1 , 0 , new QTableWidgetItem("4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102"));
+
+    }
+
+
+}
+
+
+

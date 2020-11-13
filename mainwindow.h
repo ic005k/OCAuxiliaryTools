@@ -110,8 +110,34 @@ protected:
     void dropEvent (QDropEvent *e);
     void closeEvent(QCloseEvent *event);
 
+#ifndef QT_NO_CONTEXTMENU
+    void contextMenuEvent(QContextMenuEvent *event);// override;
+#endif // QT_NO_CONTEXTMENU
+
+
 
 private slots:
+    void on_nv1();
+    void on_nv2();
+    void on_nv3();
+    void on_nv4();
+    void on_nv5();
+    void on_nv6();
+    void on_nv7();
+    void on_nv8();
+    void on_nv9();
+    void on_nv10();
+    void on_nv11();
+    void on_nv12();
+
+    void on_nv01();
+    void on_nv02();
+    void on_nv03();
+    void on_nv04();
+
+    void show_menu(QPoint);
+    void show_menu0(QPoint);
+
     void dataClassChange_dp();
     void dataClassChange_nv();
     void readResult();
@@ -321,8 +347,107 @@ private slots:
 
     void on_cboxUpdateSMBIOSMode_currentIndexChanged(const QString &arg1);
 
+    void on_chk01_clicked();
+
+    void on_chk02_clicked();
+
+    void on_chk04_clicked();
+
+    void on_chk08_clicked();
+
+    void on_editExposeSensitiveData_textChanged(const QString &arg1);
+
+    void on_chk1_clicked();
+
+    void on_chk2_clicked();
+
+    void on_chk3_clicked();
+
+    void on_chk4_clicked();
+
+    void on_chk5_clicked();
+
+    void on_chk6_clicked();
+
+    void on_chk7_clicked();
+
+    void on_chk8_clicked();
+
+    void on_chk9_clicked();
+
+    void on_chk10_clicked();
+
+    void on_chk11_clicked();
+
+    void on_chk12_clicked();
+
+    void on_chk13_clicked();
+
+    void on_chk14_clicked();
+
+    void on_chk15_clicked();
+
+    void on_chk16_clicked();
+
+    void on_editScanPolicy_textChanged(const QString &arg1);
+
+    void on_chkD1_clicked();
+
+    void on_chkD2_clicked();
+
+    void on_chkD3_clicked();
+
+    void on_chkD4_clicked();
+
+    void on_chkD5_clicked();
+
+    void on_chkD6_clicked();
+
+    void on_chkD7_clicked();
+
+    void on_chkD8_clicked();
+
+    void on_chkD9_clicked();
+
+    void on_chkD10_clicked();
+
+    void on_chkD11_clicked();
+
+    void on_chkD12_clicked();
+
+    void on_chkD13_clicked();
+
+    void on_chkD14_clicked();
+
+    void on_chkD15_clicked();
+
+    void on_chkD16_clicked();
+
+    void on_chkD17_clicked();
+
+    void on_chkD18_clicked();
+
+    void on_chkD19_clicked();
+
+    void on_editDisplayLevel_textChanged(const QString &arg1);
+
+    void on_btnDLSetAll_clicked();
+
+    void on_btnDLClear_clicked();
+
+    void on_chkPA1_clicked();
+
+    void on_chkPA2_clicked();
+
+    void on_chkPA3_clicked();
+
+    void on_chkPA4_clicked();
+
+    void on_editPickerAttributes_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
+    QString CurrentDateTime;
     void reg_win();
     void mount_esp();
     void mount_esp_mac(QString strEfiDisk);
@@ -335,6 +460,8 @@ private:
 
     void init_tr_str();
 
+    int ExposeSensitiveData();
+
     QString strArch;
     QString strBundlePath;
     QString strComment;
@@ -343,6 +470,31 @@ private:
     QString strMaxKernel;
     QString strMinKernel;
     QString strPlistPath;
+
+    int v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16;
+    void method(QVector<int> nums, int sum);
+    void method(QVector<int> nums, int sum, QVector<int> list, int index);
+    void ScanPolicy();
+    bool scanPolicy = false;
+    QVector<QCheckBox *> chk;
+    QVector<int> v;
+
+    unsigned int vd1, vd2, vd3, vd4, vd5, vd6, vd7, vd8, vd9, vd10, vd11, vd12, vd13, vd14, vd15, vd16, vd17, vd18, vd19;
+    void DisplayLevel();
+    void methodDisplayLevel(QVector<unsigned int> nums, unsigned int sum);
+    void methodDisplayLevel(QVector<unsigned int> nums, unsigned int sum, QVector<unsigned int> list, int index);
+    QVector<QCheckBox *> chkDisplayLevel;
+    QVector<unsigned int> vDisplayLevel;
+
+    bool click = false;
+
+    int pav1, pav2, pav3, pav4;
+    QVector<QCheckBox *> chk_pa;
+    QVector<int> v_pa;
+    void PickerAttributes();
+    bool pickerAttributes = false;
+
+
 
 };
 
