@@ -494,6 +494,8 @@ private:
     void PickerAttributes();
     bool pickerAttributes = false;
 
+    QString SaveFileName;
+
 
 
 };

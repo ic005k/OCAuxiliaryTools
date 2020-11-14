@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.11.12";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.11.13";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -160,7 +160,10 @@ MainWindow::~MainWindow()
 void MainWindow::openFile(QString PlistFileName)
 {
     if(!PlistFileName.isEmpty())
+    {
         setWindowTitle(title + "    " + PlistFileName);
+        SaveFileName = PlistFileName;
+    }
     else
         return;
 
@@ -2560,7 +2563,7 @@ void MainWindow::on_btnSave_clicked()
 {
     //QString FileName = QDir::homePath() + "/test.plist";
 
-    SavePlist(PlistFileName);
+    SavePlist(SaveFileName);
 }
 
 bool MainWindow::getBool(QTableWidget *table, int row, int column)
@@ -4507,7 +4510,10 @@ void MainWindow::on_btnSaveAs_clicked()
 
     PlistFileName = fd.getSaveFileName(this,"配置文件","","配置文件(*.plist);;所有文件(*.*)");
     if(!PlistFileName.isEmpty())
+    {
         setWindowTitle(title + "    " + PlistFileName);
+        SaveFileName = PlistFileName;
+    }
     else
         return;
 
