@@ -101,7 +101,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -462,7 +462,7 @@ Note: Most but Apple and VMware firmwares need this quirk.</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
+           <item row="0" column="2">
             <spacer name="horizontalSpacer_37">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -475,7 +475,7 @@ Note: Most but Apple and VMware firmwares need this quirk.</string>
              </property>
             </spacer>
            </item>
-           <item row="0" column="2">
+           <item row="0" column="3">
             <widget class="QCheckBox" name="chkDevirtualiseMmio">
              <property name="toolTip">
               <string>This option reduces stolen memory footprint from the memory map by removing runtime bit for known memory
@@ -495,7 +495,7 @@ hibernation functioning. Use MmioWhitelist section to do this.</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="3">
+           <item row="0" column="4" colspan="2">
             <spacer name="horizontalSpacer_40">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -508,7 +508,7 @@ hibernation functioning. Use MmioWhitelist section to do this.</string>
              </property>
             </spacer>
            </item>
-           <item row="0" column="4">
+           <item row="0" column="6" colspan="2">
             <widget class="QCheckBox" name="chkDisableSingleUser">
              <property name="toolTip">
               <string>This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot
@@ -523,7 +523,7 @@ archived article to understand how to use single user mode with this quirk enabl
              </property>
             </widget>
            </item>
-           <item row="0" column="5">
+           <item row="0" column="8">
             <spacer name="horizontalSpacer_43">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -536,7 +536,7 @@ archived article to understand how to use single user mode with this quirk enabl
              </property>
             </spacer>
            </item>
-           <item row="0" column="6">
+           <item row="0" column="9">
             <widget class="QCheckBox" name="chkDisableVariableWrite">
              <property name="toolTip">
               <string>This is a security option allowing one to restrict NVRAM access in macOS. This quirk requires OC_FIRMWARE_RUNTIME
@@ -552,7 +552,7 @@ fail to write variables to NVRAM and break the rest of the operating system.</st
              </property>
             </widget>
            </item>
-           <item row="0" column="7">
+           <item row="0" column="10">
             <spacer name="horizontalSpacer_46">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -565,7 +565,7 @@ fail to write variables to NVRAM and break the rest of the operating system.</st
              </property>
             </spacer>
            </item>
-           <item row="0" column="8">
+           <item row="0" column="11">
             <widget class="QCheckBox" name="chkDiscardHibernateMap">
              <property name="toolTip">
               <string>This option forces XNU kernel to ignore newly supplied memory map and assume that it did not change after
@@ -583,7 +583,7 @@ unless you fully understand the consequences.</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
+           <item row="1" column="0" colspan="2">
             <widget class="QCheckBox" name="chkEnableWriteUnprotector">
              <property name="toolTip">
               <string>This option bypasses RˆX permissions in code pages of UEFI runtime services by removing write protection (WP)
@@ -601,7 +601,7 @@ MAT is supported.</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
+           <item row="1" column="2">
             <spacer name="horizontalSpacer_38">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -614,7 +614,7 @@ MAT is supported.</string>
              </property>
             </spacer>
            </item>
-           <item row="1" column="2">
+           <item row="1" column="3">
             <widget class="QCheckBox" name="chkForceExitBootServices">
              <property name="toolTip">
               <string>Try to ensure that ExitBootServices call succeeds even with outdated MemoryMap key argument by obtaining
@@ -630,7 +630,7 @@ fully understand the consequences.</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="3">
+           <item row="1" column="4" colspan="2">
             <spacer name="horizontalSpacer_41">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -643,7 +643,7 @@ fully understand the consequences.</string>
              </property>
             </spacer>
            </item>
-           <item row="1" column="4">
+           <item row="1" column="6" colspan="2">
             <widget class="QCheckBox" name="chkProtectMemoryRegions">
              <property name="toolTip">
               <string>Some firmwares incorrectly map select memory regions:
@@ -662,7 +662,7 @@ very old firmwares need this quirk.</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="5">
+           <item row="1" column="8">
             <spacer name="horizontalSpacer_45">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -675,7 +675,7 @@ very old firmwares need this quirk.</string>
              </property>
             </spacer>
            </item>
-           <item row="1" column="6">
+           <item row="1" column="9">
             <widget class="QCheckBox" name="chkProtectSecureBoot">
              <property name="toolTip">
               <string>Reports security violation during attempts to write to db, dbx, PK, and KEK variables from the operating system.
@@ -690,7 +690,7 @@ such as select Insyde or MacPro5,1.</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="7">
+           <item row="1" column="10">
             <spacer name="horizontalSpacer_47">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -703,7 +703,7 @@ such as select Insyde or MacPro5,1.</string>
              </property>
             </spacer>
            </item>
-           <item row="1" column="8">
+           <item row="1" column="11">
             <widget class="QCheckBox" name="chkProtectUefiServices">
              <property name="toolTip">
               <string>Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to
@@ -721,7 +721,7 @@ more than one virtual core.” message.</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
+           <item row="2" column="0" colspan="2">
             <widget class="QCheckBox" name="chkRebuildAppleMemoryMap">
              <property name="toolTip">
               <string>Apple kernel has several limitations in parsing UEFI memory map:
@@ -748,7 +748,7 @@ OpenDuetPkg, but may be required to boot macOS 10.6 and earlier for unclear reas
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="2" column="2">
             <spacer name="horizontalSpacer_39">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -761,7 +761,7 @@ OpenDuetPkg, but may be required to boot macOS 10.6 and earlier for unclear reas
              </property>
             </spacer>
            </item>
-           <item row="2" column="2">
+           <item row="2" column="3">
             <widget class="QCheckBox" name="chkSetupVirtualMap">
              <property name="toolTip">
               <string>Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot
@@ -778,7 +778,7 @@ protection support (like OVMF) do not support this quirk due to acidanthera/bugt
              </property>
             </widget>
            </item>
-           <item row="2" column="3">
+           <item row="2" column="4" colspan="2">
             <spacer name="horizontalSpacer_42">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -791,7 +791,7 @@ protection support (like OVMF) do not support this quirk due to acidanthera/bugt
              </property>
             </spacer>
            </item>
-           <item row="2" column="4">
+           <item row="2" column="6" colspan="2">
             <widget class="QCheckBox" name="chkSignalAppleOS">
              <property name="toolTip">
               <string>This quirk is useful on Mac firmwares, which behave differently in different OS. For example, it is supposed to
@@ -805,7 +805,7 @@ enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="5">
+           <item row="2" column="8">
             <spacer name="horizontalSpacer_44">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -818,7 +818,7 @@ enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.</string>
              </property>
             </spacer>
            </item>
-           <item row="2" column="6">
+           <item row="2" column="9">
             <widget class="QCheckBox" name="chkSyncRuntimePermissions">
              <property name="toolTip">
               <string>Some firmwares either fail to properly handle runtime permissions:
@@ -838,7 +838,7 @@ general only firmwares released in 2018 or later are affected.</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="7">
+           <item row="2" column="10">
             <spacer name="horizontalSpacer_48">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -851,7 +851,7 @@ general only firmwares released in 2018 or later are affected.</string>
              </property>
             </spacer>
            </item>
-           <item row="2" column="8">
+           <item row="2" column="11">
             <widget class="QCheckBox" name="chkProvideCustomSlide">
              <property name="toolTip">
               <string>This option performs memory map analysis of your firmware and checks whether all slides (from 1 to 255) can be
@@ -888,7 +888,44 @@ can be tried to be enabled.</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="2">
+           <item row="3" column="1" colspan="2">
+            <spacer name="horizontalSpacer_67">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>111</width>
+               <height>13</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="3" column="3" colspan="2">
+            <widget class="QCheckBox" name="chkAllowRelocationBlock">
+             <property name="toolTip">
+              <string>Relocation block is a scratch buffer allocated in lower 4 GB to be used for loading the kernel and related structures
+by EfiBoot on firmwares where lower memory is otherwise occupied by the (assumed to be) non-runtime data.
+Right before kernel startup the relocation block is copied back to lower addresses. Similarly all the other addresses
+pointing to relocation block are also carefully adjusted. Relocation block can be used when:
+• No better slide exists (all the memory is used)
+• slide=0 is forced (by an argument or safe mode)
+• KASLR (slide) is unsupported (this is macOS 10.7 or older)
+This quirk requires ProvideCustomSlide to also be enabled and generally needs AvoidRuntimeDefrag to work
+correctly. Hibernation is not supported when booting with a relocation block (but relocation block is not always
+used when the quirk is enabled).
+Note: While this quirk is required to run older macOS versions on platforms with used lower memory it is not
+compatible with some hardware and macOS 11. In this case you may try to use EnableSafeModeSlide instead.</string>
+             </property>
+             <property name="statusTip">
+              <string>Allows booting macOS through a relocation block.</string>
+             </property>
+             <property name="text">
+              <string>AllowRelocationBlock</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="5" colspan="2">
             <widget class="QLabel" name="label_41">
              <property name="toolTip">
               <string>This option overrides the maximum slide of 255 by a user specified value between 1 and 254 inclusive when
@@ -908,7 +945,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="3" colspan="2">
+           <item row="3" column="7" colspan="2">
             <widget class="QLineEdit" name="editProvideMaxSlide"/>
            </item>
           </layout>
@@ -1831,7 +1868,7 @@ stability reasons. I.e. by specifying Mkext one will disable Prelinked for e.g. 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -6332,7 +6369,17 @@ the MSR registers.</string>
     <addaction name="separator"/>
     <addaction name="actionAbout_2"/>
    </widget>
+   <widget class="QMenu" name="menuResources">
+    <property name="title">
+     <string>Resources</string>
+    </property>
+    <addaction name="actionOpenCore"/>
+    <addaction name="actionOpenCore_Factory"/>
+    <addaction name="actionOpenCore_Forum"/>
+    <addaction name="actionSimplified_Chinese_Manual"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuResources"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">
@@ -6368,6 +6415,26 @@ the MSR registers.</string>
   <action name="actionAbout_3">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionOpenCore_Forum">
+   <property name="text">
+    <string>OpenCore Forum</string>
+   </property>
+  </action>
+  <action name="actionOpenCore_Factory">
+   <property name="text">
+    <string>OpenCore Factory</string>
+   </property>
+  </action>
+  <action name="actionOpenCore">
+   <property name="text">
+    <string>OpenCore</string>
+   </property>
+  </action>
+  <action name="actionSimplified_Chinese_Manual">
+   <property name="text">
+    <string>Simplified Chinese Manual</string>
    </property>
   </action>
  </widget>

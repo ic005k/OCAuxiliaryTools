@@ -117,6 +117,11 @@ protected:
 
 
 private slots:
+    void on_line1();
+    void on_line2();
+    void on_line3();
+    void on_line4();
+
     void on_nv1();
     void on_nv2();
     void on_nv3();
@@ -495,6 +500,8 @@ private:
     bool pickerAttributes = false;
 
     QString SaveFileName;
+
+    void init_menu();
 
 
 

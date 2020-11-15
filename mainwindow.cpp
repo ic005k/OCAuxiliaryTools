@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.11.13";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.11.14";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -91,6 +91,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     init_tr_str();
 
+    init_menu();
+
     initui_booter();
     initui_dp();
     initui_kernel();
@@ -100,14 +102,6 @@ MainWindow::MainWindow(QWidget *parent)
     initui_UEFI();
     initui_acpi();
 
-    //主菜单
-    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen_clicked);
-    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::on_btnSave_clicked);
-    connect(ui->actionSave_As, &QAction::triggered, this, &MainWindow::on_btnSaveAs_clicked);
-    connect(ui->actionAbout_2, &QAction::triggered, this, &MainWindow::about);
-
-    ui->btnSave->setEnabled(false);
-    ui->actionSave->setEnabled(false);
 
     //接受文件拖放打开
     this->setAcceptDrops(true);
@@ -616,6 +610,8 @@ void MainWindow::ParserBooter(QVariantMap map)
     ui->chkSetupVirtualMap->setChecked(map_quirks["SetupVirtualMap"].toBool());
     ui->chkSignalAppleOS->setChecked(map_quirks["SignalAppleOS"].toBool());
     ui->chkSyncRuntimePermissions->setChecked(map_quirks["SyncRuntimePermissions"].toBool());
+
+    ui->chkAllowRelocationBlock->setChecked(map_quirks["AllowRelocationBlock"].toBool());
 
 
 
@@ -2726,6 +2722,7 @@ QVariantMap MainWindow::SaveBooter()
     //Quirks
     QVariantMap mapQuirks;
     mapQuirks["AvoidRuntimeDefrag"] = getChkBool(ui->chkAvoidRuntimeDefrag);
+    mapQuirks["AllowRelocationBlock"] = getChkBool(ui->chkAllowRelocationBlock);
     mapQuirks["DevirtualiseMmio"] = getChkBool(ui->chkDevirtualiseMmio);
     mapQuirks["DisableSingleUser"] = getChkBool(ui->chkDisableSingleUser);
     mapQuirks["DisableVariableWrite"] = getChkBool(ui->chkDisableVariableWrite);
@@ -4138,12 +4135,32 @@ void MainWindow::on_btnMiscEntries_Add_clicked()
 
 void MainWindow::on_btnMiscTools_Add_clicked()
 {
-    add_item(ui->tableTools , 7);
 
-    init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 4 , "false");
-    init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 5 , "true");
-    init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 6 , "false");
-    init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 7 , "false");
+    QFileDialog fd;
+
+    QStringList FileName = fd.getOpenFileNames(this,"tools efi file","","file(*.efi);;all files(*.*)");
+    if(FileName.isEmpty())
+
+        return;
+
+    for(int i = 0; i < FileName.count(); i ++)
+    {
+        add_item(ui->tableTools , 7);
+
+        int row = ui->tableTools->rowCount();
+
+        ui->tableTools->setItem(row - 1 , 0 , new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+
+        ui->tableTools->setFocus();
+        ui->tableTools->setCurrentCell(row - 1 , 0);
+
+        init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 4 , "false");
+        init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 5 , "true");
+        init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 6 , "false");
+        init_enabled_data(ui->tableTools , ui->tableTools->rowCount() - 1 , 7 , "false");
+
+    }
+
 }
 
 void MainWindow::on_btnMiscEntries_Del_clicked()
@@ -4528,7 +4545,7 @@ void MainWindow::about()
 {
 
     QMessageBox::about(this , tr("About") ,
-                       QString::fromLocal8Bit("<a style='color: blue;' href = https://github.com/ic005k/QtOpenCoreConfig>QtOpenCoreConfigurator</a><br><a style='color: blue;' href = https://github.com/acidanthera/OpenCorePkg/releases>OpenCore</a><br><a style='color: blue;' href = https://github.com/williambj1/OpenCore-Factory/releases>OpenCore-Factory</a><br><a style='color: blue;' href = https://github.com/ic005k/QtiASL>QtiASL</a>"));
+                       QString::fromLocal8Bit("<a style='color: blue;' href = https://github.com/ic005k/QtOpenCoreConfig>QtOpenCoreConfigurator</a><br><a style='color: blue;' href = https://github.com/ic005k/QtiASL>QtiASL</a>"));
 }
 
 void MainWindow::on_btnKernelAdd_Del_clicked()
@@ -6914,6 +6931,59 @@ void MainWindow::on_nv04()
 
 
 }
+
+void MainWindow::init_menu()
+{
+    //主菜单
+    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen_clicked);
+    ui->actionOpen->setShortcut(tr("ctrl+o"));
+
+    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::on_btnSave_clicked);
+    ui->actionSave->setShortcut(tr("ctrl+s"));
+
+    connect(ui->actionSave_As, &QAction::triggered, this, &MainWindow::on_btnSaveAs_clicked);
+    ui->actionSave_As->setShortcut(tr("ctrl+shift+s"));
+
+    connect(ui->actionAbout_2, &QAction::triggered, this, &MainWindow::about);
+
+    connect(ui->actionOpenCore, &QAction::triggered, this, &MainWindow::on_line1);
+    connect(ui->actionOpenCore_Factory, &QAction::triggered, this, &MainWindow::on_line2);
+    connect(ui->actionOpenCore_Forum, &QAction::triggered, this, &MainWindow::on_line3);
+
+    connect(ui->actionSimplified_Chinese_Manual, &QAction::triggered, this, &MainWindow::on_line4);
+    if(!zh_cn) ui->actionSimplified_Chinese_Manual->setVisible(false);
+
+
+    ui->btnSave->setEnabled(false);
+    ui->actionSave->setEnabled(false);
+
+}
+
+void MainWindow::on_line1()
+{
+    QUrl url(QString("https://github.com/acidanthera/OpenCorePkg/releases"));
+    QDesktopServices::openUrl(url);
+
+}
+
+void MainWindow::on_line2()
+{
+    QUrl url(QString("https://github.com/williambj1/OpenCore-Factory/releases"));
+    QDesktopServices::openUrl(url);
+}
+
+void MainWindow::on_line3()
+{
+    QUrl url(QString("https://www.insanelymac.com/forum/topic/338516-opencore-discussion/"));
+    QDesktopServices::openUrl(url);
+}
+
+void MainWindow::on_line4()
+{
+    QUrl url(QString("https://oc.skk.moe/"));
+    QDesktopServices::openUrl(url);
+}
+
 
 
 
