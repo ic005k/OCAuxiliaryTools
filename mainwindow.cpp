@@ -57,22 +57,22 @@ MainWindow::MainWindow(QWidget *parent)
             QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
             QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
 
-    QString tabBarStyle1 = "QTabBar::tab {min-width:100px;color: rgba(150,150,150);border: 2px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:5px;}\
+            QString tabBarStyle1 = "QTabBar::tab {min-width:100px;color: rgba(150,150,150);border: 2px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:5px;}\
             QTabBar::tab:!selected {margin-top: 5px;} \
             QTabBar::tab:selected {color: rgba(255,255,255);}";
 
-    QString tabBarStyle2 = "QTabBar::tab {min-width:100px;color: black;background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #eeeeee, stop: 1 gray);border: 0px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:5px;}\
-             QTabBar::tab:!selected {margin-top: 5px;} \
-             QTabBar::tab:selected {color: blue;}";
+            QString tabBarStyle2 = "QTabBar::tab {min-width:100px;color: black;background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #eeeeee, stop: 1 gray);border: 0px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:5px;}\
+            QTabBar::tab:!selected {margin-top: 5px;} \
+            QTabBar::tab:selected {color: blue;}";
 
-    QString tabBarStyle3 = "QTabWidget::pane{border:none;}\
-             QTabWidget::tab-bar{alignment:left;}\
-             QTabBar::tab{background:transparent;color:black;}\
-             QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
-             QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
+            QString tabBarStyle3 = "QTabWidget::pane{border:none;}\
+            QTabWidget::tab-bar{alignment:left;}\
+            QTabBar::tab{background:transparent;color:black;}\
+            QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
+            QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
 
-    //ui->tabACPI->setStyleSheet(tabBarStyle3);
-    ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
+            //ui->tabACPI->setStyleSheet(tabBarStyle3);
+            ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
 
 
     ui->tabTotal->setIconSize(QSize(64, 64));
@@ -104,23 +104,23 @@ MainWindow::MainWindow(QWidget *parent)
 
 #ifdef Q_OS_WIN32
 
-   reg_win();
+    reg_win();
 
-   font.setPixelSize(17);
+    font.setPixelSize(17);
 
-   ui->tabTotal->setDocumentMode(false);
+    ui->tabTotal->setDocumentMode(false);
 
 #endif
 
 #ifdef Q_OS_LINUX
-   ui->btnMountEsp->setEnabled(false);
+    ui->btnMountEsp->setEnabled(false);
 
-   font.setPixelSize(12);
+    font.setPixelSize(12);
 
 #endif
 
 #ifdef Q_OS_MAC
-   font.setPixelSize(12);
+    font.setPixelSize(12);
 
 #endif
 
@@ -142,9 +142,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_recentFiles = new RecentFiles(this);
     if(!zh_cn)
-       m_recentFiles->attachToMenuAfterItem(ui->menuFile, "Save As...", SLOT(recentOpen(QString)));//在此处插入菜单
+        m_recentFiles->attachToMenuAfterItem(ui->menuFile, "Save As...", SLOT(recentOpen(QString)));//在此处插入菜单
     else
-       m_recentFiles->attachToMenuAfterItem(ui->menuFile, "另存...", SLOT(recentOpen(QString)));//在此处插入菜单
+        m_recentFiles->attachToMenuAfterItem(ui->menuFile, "另存...", SLOT(recentOpen(QString)));//在此处插入菜单
 
     m_recentFiles->setNumOfRecentFiles(10);//最多显示最近的文件个数
 
@@ -159,7 +159,7 @@ MainWindow::~MainWindow()
 void MainWindow::recentOpen(QString filename)
 {
 
-     openFile(filename);
+    openFile(filename);
 }
 
 void MainWindow::openFile(QString PlistFileName)
@@ -255,28 +255,28 @@ void MainWindow::on_btnOpen_clicked()
 
 void MainWindow::on_btnTestWrite_clicked()
 {
-        QString  plistPath = QDir::homePath() + "/xx.plist";
-        qDebug() << plistPath;
+    QString  plistPath = QDir::homePath() + "/xx.plist";
+    qDebug() << plistPath;
 
-        //QString  plistPath = "E:/xxx.plist";
+    //QString  plistPath = "E:/xxx.plist";
 
-        QSettings Reg(plistPath, QSettings::NativeFormat);
+    QSettings Reg(plistPath, QSettings::NativeFormat);
 
-        Reg.setValue("ACPI", true);
-        qDebug() << Reg.value("ACPI");
+    Reg.setValue("ACPI", true);
+    qDebug() << Reg.value("ACPI");
 
-        int i = 1;
-        QString str_key = "/key";
-        QString str_class = "/class";
-        QString str_value ="/value";
+    int i = 1;
+    QString str_key = "/key";
+    QString str_class = "/class";
+    QString str_value ="/value";
 
-        Reg.setValue(QString::number(i) + str_key,"key1");
-        Reg.setValue("1/class","class1");
-        Reg.setValue("1/value","value1");
+    Reg.setValue(QString::number(i) + str_key,"key1");
+    Reg.setValue("1/class","class1");
+    Reg.setValue("1/value","value1");
 
-        qDebug() << Reg.value("1/key").toString();
-        qDebug() << Reg.value("1/class").toString();
-        qDebug() << Reg.value("1/value").toString();
+    qDebug() << Reg.value("1/key").toString();
+    qDebug() << Reg.value("1/class").toString();
+    qDebug() << Reg.value("1/value").toString();
 
 
 
@@ -286,17 +286,17 @@ void MainWindow::on_btnTestWrite_clicked()
 void MainWindow::on_btnParse_clicked()
 {
     QByteArray sample = "\
-<?xml version=\"1.0\" encoding=\"UTF-8\"?>\
-<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\
-<plist version=\"1.0\">\
-<dict>\
-    <key>SomeKey</key>\
-    <string>Value1</string>\
-    <key>MyOtherKey</key>\
-    <string>Value2</string>\
-</dict>\
-</plist>";
-    QBuffer buffer(&sample);
+            <?xml version=\"1.0\" encoding=\"UTF-8\"?>\
+            <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\
+            <plist version=\"1.0\">\
+            <dict>\
+            <key>SomeKey</key>\
+            <string>Value1</string>\
+            <key>MyOtherKey</key>\
+            <string>Value2</string>\
+            </dict>\
+            </plist>";
+            QBuffer buffer(&sample);
     //QVariantMap map = PListParser::parsePList(&buffer).toMap();
     QFile file(QDir::homePath() + "/com.xx.plist");
     QVariantMap map = PListParser::parsePList(&file).toMap();
@@ -734,7 +734,7 @@ void MainWindow::ParserDP(QVariantMap map)
 
             }
             else
-            newItem1 = new QTableWidgetItem(map_sub[map_sub.keys().at(j)].toString());
+                newItem1 = new QTableWidgetItem(map_sub[map_sub.keys().at(j)].toString());
             ui->table_dp_add->setItem(j, 2, newItem1);
 
         }
@@ -1640,7 +1640,7 @@ void MainWindow::ParserNvram(QVariantMap map)
                 newItem1 = new QTableWidgetItem(va);
             }
             else
-            newItem1 = new QTableWidgetItem(map_sub[map_sub.keys().at(j)].toString());
+                newItem1 = new QTableWidgetItem(map_sub[map_sub.keys().at(j)].toString());
             ui->table_nv_add->setItem(j, 2, newItem1);
 
         }
@@ -1762,6 +1762,8 @@ void MainWindow::on_table_dp_add0_cellClicked(int row, int column)
         read_ini("table_dp_add0" , ui->table_dp_add , row);
 
     loading = false;
+
+    ui->statusbar->showMessage(ui->table_dp_add0->currentItem()->text());
 }
 
 void MainWindow::on_table_dp_add_itemSelectionChanged()
@@ -1792,6 +1794,8 @@ void MainWindow::on_table_nv_add0_cellClicked(int row, int column)
         read_ini("table_nv_add0" , ui->table_nv_add , row);
 
     loading = false;
+
+    ui->statusbar->showMessage(ui->table_nv_add0->currentItem()->text());
 }
 
 void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem *item)
@@ -1854,24 +1858,24 @@ void MainWindow::write_value_ini(QString tablename , QTableWidget *subtable , in
 
 
 
-        QString plistPath = QDir::homePath() + "/" + CurrentDateTime + tablename + QString::number(i + 1) + ".ini";
-        //qDebug() << plistPath;
-        QFile file(plistPath);
-        if(file.exists()) //如果文件存在，则先删除它
-            file.remove();
-        //QSettings Reg(plistPath, QSettings::NativeFormat);
-        QSettings Reg(plistPath, QSettings::IniFormat);//全平台都采用ini格式
+    QString plistPath = QDir::homePath() + "/" + CurrentDateTime + tablename + QString::number(i + 1) + ".ini";
+    //qDebug() << plistPath;
+    QFile file(plistPath);
+    if(file.exists()) //如果文件存在，则先删除它
+        file.remove();
+    //QSettings Reg(plistPath, QSettings::NativeFormat);
+    QSettings Reg(plistPath, QSettings::IniFormat);//全平台都采用ini格式
 
-        for(int k = 0; k < subtable->rowCount(); k++)
-        {
-            Reg.setValue(QString::number(k + 1) + "/key", subtable->item(k , 0)->text());
+    for(int k = 0; k < subtable->rowCount(); k++)
+    {
+        Reg.setValue(QString::number(k + 1) + "/key", subtable->item(k , 0)->text());
 
-        }
+    }
 
-        //记录总数
-        Reg.setValue("total" , subtable->rowCount());
+    //记录总数
+    Reg.setValue("total" , subtable->rowCount());
 
-        IniFile.push_back(plistPath);
+    IniFile.push_back(plistPath);
 
 }
 
@@ -1883,6 +1887,8 @@ void MainWindow::on_table_nv_del0_cellClicked(int row, int column)
         read_value_ini(ui->table_nv_del0->objectName() , ui->table_nv_del , row);
 
     loading = false;
+
+    ui->statusbar->showMessage(ui->table_nv_del0->currentItem()->text());
 }
 
 void MainWindow::on_table_nv_ls0_cellClicked(int row, int column)
@@ -1893,6 +1899,8 @@ void MainWindow::on_table_nv_ls0_cellClicked(int row, int column)
         read_value_ini(ui->table_nv_ls0->objectName() , ui->table_nv_ls , row);
 
     loading = false;
+
+    ui->statusbar->showMessage(ui->table_nv_ls0->currentItem()->text());
 }
 
 void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem *item)
@@ -1931,6 +1939,8 @@ void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
         read_value_ini(ui->table_dp_del0->objectName() , ui->table_dp_del , row);
 
     loading = false;
+
+    ui->statusbar->showMessage(ui->table_dp_del0->currentItem()->text());
 
 }
 
@@ -2149,10 +2159,10 @@ void MainWindow::initui_PlatformInfo()
 #endif
 
 #ifdef Q_OS_LINUX
-   gs->execute(appInfo.filePath() + "/macserial" , QStringList() << "-s");
-   /*暂时屏蔽*/
-   ui->tabPlatformInfo->removeTab(4);
-   ui->btnGenerate->setEnabled(true);
+    gs->execute(appInfo.filePath() + "/macserial" , QStringList() << "-s");
+    /*暂时屏蔽*/
+    ui->tabPlatformInfo->removeTab(4);
+    ui->btnGenerate->setEnabled(true);
 
 #endif
 
@@ -3253,7 +3263,7 @@ QVariantMap MainWindow::SavePlatformInfo()
 
     //if(ui->tableDevices->rowCount() > 0) //里面有数据才进行保存的动作
     //{
-        valueList["Devices"] = Map["Devices"];
+    valueList["Devices"] = Map["Devices"];
     //}
 
     subMap["Memory"] = valueList;
@@ -3318,9 +3328,6 @@ QVariantMap MainWindow::SavePlatformInfo()
     valueList["SystemVersion"] = ui->editSystemVersion->text();
 
     subMap["SMBIOS"] = valueList;
-
-
-
 
 
     subMap["Automatic"] = getChkBool(ui->chkAutomatic);
@@ -3547,6 +3554,8 @@ void MainWindow::on_table_acpi_add_cellClicked(int row, int column)
 
     enabled_change(ui->table_acpi_add , row , column , 2);
 
+    ui->statusbar->showMessage(ui->table_acpi_add->currentItem()->text());
+
 }
 
 void MainWindow::init_enabled_data(QTableWidget *table , int row , int column , QString str)
@@ -3590,22 +3599,26 @@ void MainWindow::enabled_change(QTableWidget *table , int row , int column , int
     }
 }
 
-
-
 void MainWindow::on_table_acpi_del_cellClicked(int row, int column)
 {
     enabled_change(ui->table_acpi_del , row , column , 4);
     enabled_change(ui->table_acpi_del , row , column , 5);
+
+    ui->statusbar->showMessage(ui->table_acpi_del->currentItem()->text());
 }
 
 void MainWindow::on_table_acpi_patch_cellClicked(int row, int column)
 {
     enabled_change(ui->table_acpi_patch , row , column , 11);
+
+    ui->statusbar->showMessage(ui->table_acpi_patch->currentItem()->text());
 }
 
 void MainWindow::on_table_booter_cellClicked(int row, int column)
 {
     enabled_change(ui->table_booter , row , column , 2);
+
+    ui->statusbar->showMessage(ui->table_booter->currentItem()->text());
 }
 
 void MainWindow::on_table_kernel_add_cellClicked(int row, int column)
@@ -3628,6 +3641,8 @@ void MainWindow::on_table_kernel_add_cellClicked(int row, int column)
         cboxArch->setCurrentText(ui->table_kernel_add->item(row , 7)->text());
 
     }
+
+    ui->statusbar->showMessage(ui->table_kernel_add->currentItem()->text());
 }
 
 void MainWindow::on_table_kernel_block_cellClicked(int row, int column)
@@ -3650,6 +3665,9 @@ void MainWindow::on_table_kernel_block_cellClicked(int row, int column)
         cboxArch->setCurrentText(ui->table_kernel_block->item(row , 5)->text());
 
     }
+
+    ui->statusbar->showMessage(ui->table_kernel_block->currentItem()->text());
+
 }
 
 void MainWindow::on_table_kernel_patch_cellClicked(int row, int column)
@@ -3672,6 +3690,8 @@ void MainWindow::on_table_kernel_patch_cellClicked(int row, int column)
         cboxArch->setCurrentText(ui->table_kernel_patch->item(row , 13)->text());
 
     }
+
+    ui->statusbar->showMessage(ui->table_kernel_patch->currentItem()->text());
 }
 
 void MainWindow::on_tableEntries_cellClicked(int row, int column)
@@ -3681,6 +3701,8 @@ void MainWindow::on_tableEntries_cellClicked(int row, int column)
     enabled_change(ui->tableEntries , row , column , 4);
 
     enabled_change(ui->tableEntries , row , column , 6);
+
+    ui->statusbar->showMessage(ui->tableEntries->currentItem()->text());
 }
 
 void MainWindow::on_tableTools_cellClicked(int row, int column)
@@ -3692,6 +3714,8 @@ void MainWindow::on_tableTools_cellClicked(int row, int column)
     enabled_change(ui->tableTools , row , column , 6);
 
     enabled_change(ui->tableTools , row , column , 7);
+
+    ui->statusbar->showMessage(ui->tableTools->currentItem()->text());
 }
 
 void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
@@ -3728,6 +3752,9 @@ void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
         cboxReservedMemoryType->setCurrentText(ui->table_uefi_ReservedMemory->item(row , 3)->text());
 
     }
+
+
+    ui->statusbar->showMessage(ui->table_uefi_ReservedMemory->currentItem()->text());
 
 
 }
@@ -4014,19 +4041,19 @@ void MainWindow::on_btnKernelAdd_Add_clicked()
     QStringList FileName;
 
 #ifdef Q_OS_WIN32
-// win
-   FileName.append(fd.getExistingDirectory());
-   //qDebug() << FileName[0];
+    // win
+    FileName.append(fd.getExistingDirectory());
+    //qDebug() << FileName[0];
 #endif
 
 #ifdef Q_OS_LINUX
-// linux
-   FileName.append(fd.getExistingDirectory());
+    // linux
+    FileName.append(fd.getExistingDirectory());
 #endif
 
 #ifdef Q_OS_MAC
-// mac
-   FileName = fd.getOpenFileNames(this,"kext文件","","kext文件(*.kext);;所有文件(*.*)");
+    // mac
+    FileName = fd.getOpenFileNames(this,"kext文件","","kext文件(*.kext);;所有文件(*.*)");
 #endif
 
 
@@ -4620,6 +4647,8 @@ void MainWindow::on_table_dp_add_cellClicked(int row, int column)
 
     }
 
+    ui->statusbar->showMessage(ui->table_dp_add->currentItem()->text());
+
 }
 
 void MainWindow::on_table_dp_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
@@ -4687,6 +4716,8 @@ void MainWindow::on_table_nv_add_cellClicked(int row, int column)
 
 
     }
+
+    ui->statusbar->showMessage(ui->table_nv_add->currentItem()->text());
 }
 
 void MainWindow::on_table_nv_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
@@ -4701,37 +4732,37 @@ void MainWindow::on_table_nv_add_currentCellChanged(int currentRow, int currentC
 
 void MainWindow::reg_win()
 {
-        QString appPath = qApp->applicationFilePath();
+    QString appPath = qApp->applicationFilePath();
 
-        QString dir = qApp->applicationDirPath();
-        // 注意路径的替换
-        appPath.replace("/", "\\");
-        QString type = "QtiASL";
-        QSettings *regType = new QSettings("HKEY_CLASSES_ROOT\\.plist", QSettings::NativeFormat);
-        QSettings *regIcon = new QSettings("HKEY_CLASSES_ROOT\\.plist\\DefaultIcon", QSettings::NativeFormat);
-        QSettings *regShell = new QSettings("HKEY_CLASSES_ROOT\\QtOpenCoreConfig\\shell\\open\\command", QSettings::NativeFormat);
+    QString dir = qApp->applicationDirPath();
+    // 注意路径的替换
+    appPath.replace("/", "\\");
+    QString type = "QtiASL";
+    QSettings *regType = new QSettings("HKEY_CLASSES_ROOT\\.plist", QSettings::NativeFormat);
+    QSettings *regIcon = new QSettings("HKEY_CLASSES_ROOT\\.plist\\DefaultIcon", QSettings::NativeFormat);
+    QSettings *regShell = new QSettings("HKEY_CLASSES_ROOT\\QtOpenCoreConfig\\shell\\open\\command", QSettings::NativeFormat);
 
-        regType->remove("Default");
-        regType->setValue("Default", type);
+    regType->remove("Default");
+    regType->setValue("Default", type);
 
-        regIcon->remove("Default");
-        // 0 使用当前程序内置图标
-        regIcon->setValue("Default", appPath + ",1");
+    regIcon->remove("Default");
+    // 0 使用当前程序内置图标
+    regIcon->setValue("Default", appPath + ",1");
 
-         // 百分号问题
-        QString shell = "\"" + appPath + "\" ";
-        shell = shell + "\"%1\"";
+    // 百分号问题
+    QString shell = "\"" + appPath + "\" ";
+    shell = shell + "\"%1\"";
 
-        regShell->remove("Default");
-        regShell->setValue("Default", shell);
+    regShell->remove("Default");
+    regShell->setValue("Default", shell);
 
-        delete regIcon;
-        delete regShell;
-        delete regType;
+    delete regIcon;
+    delete regShell;
+    delete regType;
 
-        // 通知系统刷新
+    // 通知系统刷新
 #ifdef Q_OS_WIN32
-        //::SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST|SHCNF_FLUSH, 0, 0);
+    //::SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST|SHCNF_FLUSH, 0, 0);
 #endif
 }
 
@@ -4794,25 +4825,25 @@ void MainWindow::on_cboxSystemProductName_currentIndexChanged(const QString &arg
         ui->editSystemProductName->setText(str);
         ui->editSystemProductName_2->setText(str);
 
-    #ifdef Q_OS_WIN32
-    // win
-       //QFile file(appInfo.filePath() + "/macserial.exe");
+#ifdef Q_OS_WIN32
+        // win
+        //QFile file(appInfo.filePath() + "/macserial.exe");
 
-       gs->start(appInfo.filePath() + "/macserial.exe" , QStringList() << "-m" << str);//阻塞为execute
+        gs->start(appInfo.filePath() + "/macserial.exe" , QStringList() << "-m" << str);//阻塞为execute
 
-    #endif
+#endif
 
-    #ifdef Q_OS_LINUX
-    // linux
-       gs->start(appInfo.filePath() + "/macserial" , QStringList() << "-m" << str);
-
-    #endif
-
-    #ifdef Q_OS_MAC
-    // mac
+#ifdef Q_OS_LINUX
+        // linux
         gs->start(appInfo.filePath() + "/macserial" , QStringList() << "-m" << str);
 
-    #endif
+#endif
+
+#ifdef Q_OS_MAC
+        // mac
+        gs->start(appInfo.filePath() + "/macserial" , QStringList() << "-m" << str);
+
+#endif
 
         connect(gs , SIGNAL(finished(int)) , this , SLOT(readResult()));
         //connect(gs , SIGNAL(readyRead()) , this , SLOT(readResult()));
@@ -4905,6 +4936,8 @@ void MainWindow::on_table_kernel_Force_cellClicked(int row, int column)
         cboxArch->setCurrentText(ui->table_kernel_Force->item(row , 8)->text());
 
     }
+
+    ui->statusbar->showMessage(ui->table_kernel_Force->currentItem()->text());
 }
 
 void MainWindow::on_table_kernel_Force_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
@@ -5066,11 +5099,11 @@ void MainWindow::mount_esp_mac(QString strEfiDisk)
         out << str_ex;
         if (!file.commit()) {
             errorMessage = tr("Cannot write file %1:\n%2.")
-                           .arg(QDir::toNativeSeparators(fileName), file.errorString());
+                    .arg(QDir::toNativeSeparators(fileName), file.errorString());
         }
     } else {
         errorMessage = tr("Cannot open file %1 for writing:\n%2.")
-                       .arg(QDir::toNativeSeparators(fileName), file.errorString());
+                .arg(QDir::toNativeSeparators(fileName), file.errorString());
     }
 
 
@@ -5117,9 +5150,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
         {
 
             choice = QMessageBox::warning(this, tr("Application"),
-                                   tr("The document has been modified.\n"
-                                      "Do you want to save your changes?\n\n") + SaveFileName,
-                                   QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+                                          tr("The document has been modified.\n"
+                                             "Do you want to save your changes?\n\n") + SaveFileName,
+                                          QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
 
         }
         else
@@ -5137,7 +5170,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
         switch (choice)
         {
-            case QMessageBox::Save:
+        case QMessageBox::Save:
 
             closeSave = true;
             if(SaveFileName == "")
@@ -5178,30 +5211,30 @@ void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(int currentRow,
 
 void MainWindow::loadLocal()
 {
-       QTextCodec *codec = QTextCodec::codecForName("System");
-       QTextCodec::setCodecForLocale(codec);
+    QTextCodec *codec = QTextCodec::codecForName("System");
+    QTextCodec::setCodecForLocale(codec);
 
-       static QTranslator translator; //该对象要一直存在，注意用static
-       QLocale locale;
-       if( locale.language() == QLocale::English )  //获取系统语言环境
-       {
+    static QTranslator translator; //该对象要一直存在，注意用static
+    QLocale locale;
+    if( locale.language() == QLocale::English )  //获取系统语言环境
+    {
 
-           zh_cn = false;
+        zh_cn = false;
 
-       }
-       else if( locale.language() == QLocale::Chinese )
-       {
+    }
+    else if( locale.language() == QLocale::Chinese )
+    {
 
-           bool tr = false;
-           tr = translator.load(":/cn.qm");
-           if(tr)
-           {
-               qApp->installTranslator(&translator);
-               zh_cn = true;
-           }
+        bool tr = false;
+        tr = translator.load(":/cn.qm");
+        if(tr)
+        {
+            qApp->installTranslator(&translator);
+            zh_cn = true;
+        }
 
-           ui->retranslateUi(this);
-       }
+        ui->retranslateUi(this);
+    }
 
 }
 
@@ -5235,21 +5268,21 @@ void MainWindow::on_btnExportMaster_clicked()
     int index = ui->tabTotal->currentIndex();
 
     switch (index) {
-        case 0:defname = "ACPI";
+    case 0:defname = "ACPI";
         break;
-        case 1:defname = "Booter";
+    case 1:defname = "Booter";
         break;
-        case 2:defname = "DeviceProperties";
+    case 2:defname = "DeviceProperties";
         break;
-        case 3:defname = "Kernel";
+    case 3:defname = "Kernel";
         break;
-        case 4:defname = "Misc";
+    case 4:defname = "Misc";
         break;
-        case 5:defname = "NVRAM";
+    case 5:defname = "NVRAM";
         break;
-        case 6:defname = "PlatformInfo";
+    case 6:defname = "PlatformInfo";
         break;
-        case 7:defname = "UEFI";
+    case 7:defname = "UEFI";
 
     }
 
@@ -5261,30 +5294,30 @@ void MainWindow::on_btnExportMaster_clicked()
     QVariantMap OpenCore;
 
     switch (index) {
-        case 0:
+    case 0:
         OpenCore["ACPI"] = SaveACPI();
 
         break;
 
-        case 1:OpenCore["Booter"] = SaveBooter();
+    case 1:OpenCore["Booter"] = SaveBooter();
         break;
 
-        case 2:OpenCore["DeviceProperties"] = SaveDeviceProperties();
+    case 2:OpenCore["DeviceProperties"] = SaveDeviceProperties();
         break;
 
-        case 3:OpenCore["Kernel"] = SaveKernel();
+    case 3:OpenCore["Kernel"] = SaveKernel();
         break;
 
-        case 4:OpenCore["Misc"] = SaveMisc();
+    case 4:OpenCore["Misc"] = SaveMisc();
         break;
 
-        case 5:OpenCore["NVRAM"] = SaveNVRAM();
+    case 5:OpenCore["NVRAM"] = SaveNVRAM();
         break;
 
-        case 6:OpenCore["PlatformInfo"] = SavePlatformInfo();
+    case 6:OpenCore["PlatformInfo"] = SavePlatformInfo();
         break;
 
-        case 7: OpenCore["UEFI"] = SaveUEFI();
+    case 7: OpenCore["UEFI"] = SaveUEFI();
         break;
 
     }
@@ -5301,21 +5334,21 @@ void MainWindow::on_btnImportMaster_clicked()
     int index = ui->tabTotal->currentIndex();
 
     switch (index) {
-        case 0:defname = "ACPI.plist";
+    case 0:defname = "ACPI.plist";
         break;
-        case 1:defname = "Booter.plist";
+    case 1:defname = "Booter.plist";
         break;
-        case 2:defname = "DeviceProperties.plist";
+    case 2:defname = "DeviceProperties.plist";
         break;
-        case 3:defname = "Kernel.plist";
+    case 3:defname = "Kernel.plist";
         break;
-        case 4:defname = "Misc.plist";
+    case 4:defname = "Misc.plist";
         break;
-        case 5:defname = "NVRAM.plist";
+    case 5:defname = "NVRAM.plist";
         break;
-        case 6:defname = "PlatformInfo.plist";
+    case 6:defname = "PlatformInfo.plist";
         break;
-        case 7:defname = "UEFI.plist";
+    case 7:defname = "UEFI.plist";
 
     }
 
@@ -5330,7 +5363,7 @@ void MainWindow::on_btnImportMaster_clicked()
     QVariantMap map = PListParser::parsePList(&file).toMap();
 
     switch (index) {
-        case 0:
+    case 0:
         //ACPI
         ui->table_acpi_add->setRowCount(0);
         ui->table_acpi_del->setRowCount(0);
@@ -5339,13 +5372,13 @@ void MainWindow::on_btnImportMaster_clicked()
 
         break;
 
-        case 1:
+    case 1:
         //Booter
         ui->table_booter->setRowCount(0);
         ParserBooter(map);
         break;
 
-        case 2:
+    case 2:
         //DP
         ui->table_dp_add0->setRowCount(0);
         ui->table_dp_add->setRowCount(0);
@@ -5354,7 +5387,7 @@ void MainWindow::on_btnImportMaster_clicked()
         ParserDP(map);
         break;
 
-        case 3:
+    case 3:
         //Kernel
         ui->table_kernel_add->setRowCount(0);
         ui->table_kernel_block->setRowCount(0);
@@ -5363,7 +5396,7 @@ void MainWindow::on_btnImportMaster_clicked()
         ParserKernel(map);
         break;
 
-        case 4:
+    case 4:
         //Misc
         ui->tableBlessOverride->setRowCount(0);
         ui->tableEntries->setRowCount(0);
@@ -5371,7 +5404,7 @@ void MainWindow::on_btnImportMaster_clicked()
         ParserMisc(map);
         break;
 
-        case 5:
+    case 5:
         //NVRAM
         ui->table_nv_add0->setRowCount(0);
         ui->table_nv_add->setRowCount(0);
@@ -5382,11 +5415,11 @@ void MainWindow::on_btnImportMaster_clicked()
         ParserNvram(map);
         break;
 
-        case 6:
+    case 6:
         ParserPlatformInfo(map);
         break;
 
-        case 7:
+    case 7:
         //UEFI
         ui->table_uefi_drivers->setRowCount(0);
         ui->table_uefi_ReservedMemory->setRowCount(0);
@@ -5863,7 +5896,7 @@ void MainWindow::method(QVector<int> nums, int sum, QVector<int> list, int index
                 {
                     if(val == v_pa.at(i))
                     {
-                         chk_pa.at(i)->setChecked(true);
+                        chk_pa.at(i)->setChecked(true);
                     }
 
                 }
@@ -8495,4 +8528,55 @@ void MainWindow::clear_temp_data()
         }
     }
 
+}
+
+
+
+void MainWindow::on_table_dp_del_cellClicked(int row, int column)
+{
+    Q_UNUSED(row);
+    Q_UNUSED(column);
+
+    ui->statusbar->showMessage(ui->table_dp_del->currentItem()->text());
+}
+
+void MainWindow::on_tableBlessOverride_cellClicked(int row, int column)
+{
+    Q_UNUSED(row);
+    Q_UNUSED(column);
+
+    ui->statusbar->showMessage(ui->tableBlessOverride->currentItem()->text());
+}
+
+void MainWindow::on_table_nv_del_cellClicked(int row, int column)
+{
+    Q_UNUSED(row);
+    Q_UNUSED(column);
+
+    ui->statusbar->showMessage(ui->table_nv_del->currentItem()->text());
+}
+
+void MainWindow::on_table_nv_ls_cellClicked(int row, int column)
+{
+    Q_UNUSED(row);
+    Q_UNUSED(column);
+
+    ui->statusbar->showMessage(ui->table_nv_ls->currentItem()->text());
+}
+
+void MainWindow::on_tableDevices_cellClicked(int row, int column)
+{
+    Q_UNUSED(row);
+    Q_UNUSED(column);
+
+    ui->statusbar->showMessage(ui->tableDevices->currentItem()->text());
+
+}
+
+void MainWindow::on_table_uefi_drivers_cellClicked(int row, int column)
+{
+    Q_UNUSED(row);
+    Q_UNUSED(column);
+
+    ui->statusbar->showMessage(ui->table_uefi_drivers->currentItem()->text());
 }

@@ -118,8 +118,6 @@ protected:
     void contextMenuEvent(QContextMenuEvent *event);// override;
 #endif // QT_NO_CONTEXTMENU
 
-
-
 private slots:
     void on_line1();
     void on_line2();
@@ -916,6 +914,18 @@ private slots:
 
     void on_cboxTextRenderer_currentIndexChanged(const QString &arg1);
 
+    void on_table_dp_del_cellClicked(int row, int column);
+
+    void on_tableBlessOverride_cellClicked(int row, int column);
+
+    void on_table_nv_del_cellClicked(int row, int column);
+
+    void on_table_nv_ls_cellClicked(int row, int column);
+
+    void on_tableDevices_cellClicked(int row, int column);
+
+    void on_table_uefi_drivers_cellClicked(int row, int column);
+
 private:
     Ui::MainWindow *ui;
 
@@ -1038,7 +1048,7 @@ class CustomTabStyle2 : public QProxyStyle
 {
 public:
     QSize sizeFromContents(ContentsType type, const QStyleOption *option,
-        const QSize &size, const QWidget *widget) const
+                           const QSize &size, const QWidget *widget) const
     {
         QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
         if (type == QStyle::CT_TabBarTab)
@@ -1140,15 +1150,15 @@ public:
                     painter->setPen(0x5d5d5d);
                 }
 #ifdef Q_OS_WIN32
-   painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
+                painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
 #endif
 
 #ifdef Q_OS_LINUX
-  painter->setFont(QFont("微软雅黑", 12, QFont::Bold));
+                painter->setFont(QFont("微软雅黑", 12, QFont::Bold));
 #endif
 
 #ifdef Q_OS_MAC
-  painter->setFont(QFont("微软雅黑", 16, QFont::Bold));
+                painter->setFont(QFont("微软雅黑", 16, QFont::Bold));
 #endif
                 painter->drawText(allRect, tab->text, option);//绘制文本
                 return;
@@ -1164,7 +1174,7 @@ class CustomTabStyle4 : public QProxyStyle
 {
 public:
     QSize sizeFromContents(ContentsType type, const QStyleOption *option,
-        const QSize &size, const QWidget *widget) const
+                           const QSize &size, const QWidget *widget) const
     {
         QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
         if (type == QStyle::CT_TabBarTab) {
@@ -1217,15 +1227,15 @@ public:
                 option.setAlignment(Qt::AlignCenter);
 
 #ifdef Q_OS_WIN32
-   painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
+                painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
 #endif
 
 #ifdef Q_OS_LINUX
-  painter->setFont(QFont("微软雅黑", 12, QFont::Bold));
+                painter->setFont(QFont("微软雅黑", 12, QFont::Bold));
 #endif
 
 #ifdef Q_OS_MAC
-  painter->setFont(QFont("微软雅黑", 16, QFont::Bold));
+                painter->setFont(QFont("微软雅黑", 16, QFont::Bold));
 #endif
 
 
@@ -1237,14 +1247,14 @@ public:
         if (element == CE_TabBarTab) {
             QProxyStyle::drawControl(element, option, painter, widget);
         }
-   }
+    }
 };
 
 class CustomTabStyle5 : public QProxyStyle
 {
 public:
     QSize sizeFromContents(ContentsType type, const QStyleOption *option,
-        const QSize &size, const QWidget *widget) const
+                           const QSize &size, const QWidget *widget) const
     {
         QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
         if (type == QStyle::CT_TabBarTab) {
@@ -1304,15 +1314,15 @@ public:
                 option.setAlignment(Qt::AlignCenter);
 
 #ifdef Q_OS_WIN32
-   painter->setFont(QFont("微软雅黑", 9, QFont::Bold));
+                painter->setFont(QFont("微软雅黑", 9, QFont::Bold));
 #endif
 
 #ifdef Q_OS_LINUX
-  painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
+                painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
 #endif
 
 #ifdef Q_OS_MAC
-  painter->setFont(QFont("微软雅黑", 13, QFont::Bold));
+                painter->setFont(QFont("微软雅黑", 13, QFont::Bold));
 #endif
                 painter->setPen(0xffffff);
                 painter->drawText(allRect, tab->text, option);
