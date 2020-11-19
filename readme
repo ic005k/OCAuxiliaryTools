@@ -4,9 +4,9 @@ OpenCore逐渐流行起来，一直想做一款开源跨平台的oc配置文件�
 
 该软件是根据oc最新的开发版提供的Sample.plist为蓝本，使用该软件前，建议将oc升级到最新版或最新的开发版。
 
-OC的开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/releases  感谢@williambj1提供！该链接已放入软件的“资源”菜单。
-
-非官方简体中文参考手册：https://github.com/SukkaW/OpenCore-Document-zh_Hans  感谢@SukkaW！该链接已放入软件的“资源”菜单。
+OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/releases  感谢@williambj1提供！
+非官方简体中文参考手册：https://github.com/SukkaW/OpenCore-Document-zh_Hans  感谢@SukkaW！
+以上链接已放入软件的“资源”菜单。
 
 关于软件各功能的解读（翻译）: 由于时间关系，没有细致地去润色及排版，在此表示歉意，同时建议大家研读原版OC说明书。
 
@@ -25,7 +25,7 @@ OC的开发版可以在此下载：https://github.com/williambj1/OpenCore-Factor
 11.软件UI自适应各种分辨率，包括winpe和linux livecd等等
 ......
 
-github下载文件可以尝试采用：https://toolwa.com/github/
+国内github下载文件建议采用：https://toolwa.com/github/
 
 QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
 https://github.com/reillywatson/qtplist
