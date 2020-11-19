@@ -101,7 +101,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -123,7 +123,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -964,7 +964,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1140,7 +1140,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3452,7 +3452,7 @@ bootable. Operating systems shipped before the specified model was released will
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3749,7 +3749,7 @@ A continuously updated variable list can be found in a corresponding document: N
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5087,7 +5087,7 @@ with existing Windows activation and custom OEM software but potentially breakin
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -6356,7 +6356,7 @@ the MSR registers.</string>
      <x>0</x>
      <y>0</y>
      <width>1359</width>
-     <height>24</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -6376,7 +6376,11 @@ the MSR registers.</string>
     <addaction name="actionOpenCore"/>
     <addaction name="actionOpenCore_Factory"/>
     <addaction name="actionOpenCore_Forum"/>
+    <addaction name="actionOpenCanopyIcons"/>
     <addaction name="actionSimplified_Chinese_Manual"/>
+    <addaction name="separator"/>
+    <addaction name="actionPlist_editor"/>
+    <addaction name="actionDSDT_SSDT_editor"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuResources"/>
@@ -6435,6 +6439,21 @@ the MSR registers.</string>
   <action name="actionSimplified_Chinese_Manual">
    <property name="text">
     <string>Simplified Chinese Manual</string>
+   </property>
+  </action>
+  <action name="actionPlist_editor">
+   <property name="text">
+    <string>Plist editor</string>
+   </property>
+  </action>
+  <action name="actionDSDT_SSDT_editor">
+   <property name="text">
+    <string>DSDT&amp;&amp;SSDT editor</string>
+   </property>
+  </action>
+  <action name="actionOpenCanopyIcons">
+   <property name="text">
+    <string>OpenCanopyIcons</string>
    </property>
   </action>
  </widget>

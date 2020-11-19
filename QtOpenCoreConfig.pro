@@ -35,13 +35,15 @@ SOURCES += \
     mainwindow.cpp \
     myapp.cpp \
     plistparser.cpp \
-    plistserializer.cpp
+    plistserializer.cpp \
+    recentfiles.cpp
 
 HEADERS += \
     mainwindow.h \
     myapp.h \
     plistparser.h \
-    plistserializer.h
+    plistserializer.h \
+    recentfiles.h
 
 FORMS += \
     mainwindow.ui

@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     test(false);  //是否显示测试按钮
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.11.14";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.11.19";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -43,7 +43,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabTotal->tabBar()->setTabToolTip(1, tr("Booter"));
 
     ui->tabTotal->tabBar()->setTabToolTip(2, tr("DeviceProperties"));
-    //ui->tabTotal->tabBar()->setTabText(2, tr("Device\nProperties"));
 
     ui->tabTotal->tabBar()->setTabToolTip(3, tr("Kernel"));
     ui->tabTotal->tabBar()->setTabToolTip(4, tr("Misc"));
@@ -74,14 +73,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //ui->tabACPI->setStyleSheet(tabBarStyle3);
     ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
-    //ui->tabACPI->tabBar()->setStyle(new CustomTabStyle2);
-    //ui->tabBooter->tabBar()->setStyle(new CustomTabStyle5);
-    //ui->tabDP->tabBar()->setStyle(new CustomTabStyle5);
-    //ui->tabKernel->tabBar()->setStyle(new CustomTabStyle5);
-    //ui->tabMisc->tabBar()->setStyle(new CustomTabStyle5);
-    //ui->tabNVRAM->tabBar()->setStyle(new CustomTabStyle5);
-    //ui->tabPlatformInfo->tabBar()->setStyle(new CustomTabStyle5);
-    //ui->tabUEFI->tabBar()->setStyle(new CustomTabStyle5);
+
 
     ui->tabTotal->setIconSize(QSize(64, 64));
 
@@ -143,7 +135,20 @@ MainWindow::MainWindow(QWidget *parent)
     QToolTip::setPalette(palette);
     QToolTip::setFont(font);*/  //设置ToolTip字体
 
+    //最近打开的文件
+    QCoreApplication::setOrganizationName("ic005k");
+    QCoreApplication::setOrganizationDomain("github.com/ic005k");
+    QCoreApplication::setApplicationName("QtOpenCoreConfig");
 
+    m_recentFiles = new RecentFiles(this);
+    if(!zh_cn)
+       m_recentFiles->attachToMenuAfterItem(ui->menuFile, "Save As...", SLOT(recentOpen(QString)));//在此处插入菜单
+    else
+       m_recentFiles->attachToMenuAfterItem(ui->menuFile, "另存...", SLOT(recentOpen(QString)));//在此处插入菜单
+
+    m_recentFiles->setNumOfRecentFiles(10);//最多显示最近的文件个数
+
+    this->setWindowModified(false);
 }
 
 MainWindow::~MainWindow()
@@ -151,15 +156,30 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::recentOpen(QString filename)
+{
+
+     openFile(filename);
+}
+
 void MainWindow::openFile(QString PlistFileName)
 {
     if(!PlistFileName.isEmpty())
     {
-        setWindowTitle(title + "    " + PlistFileName);
+        setWindowTitle(title + "      [*]" + PlistFileName);
         SaveFileName = PlistFileName;
     }
     else
         return;
+
+
+    QSettings settings;
+    QFileInfo fInfo(PlistFileName);
+
+    settings.setValue("currentDirectory", fInfo.absolutePath());
+    //qDebug() << settings.fileName(); //最近打开的文件所保存的位置
+    m_recentFiles->setMostRecentFile(PlistFileName);
+
 
     //初始化
     //ACPI
@@ -218,6 +238,8 @@ void MainWindow::openFile(QString PlistFileName)
 
     ui->btnSave->setEnabled(true);
     ui->actionSave->setEnabled(true);
+
+    this->setWindowModified(false);
 
 }
 
@@ -1757,6 +1779,9 @@ void MainWindow::on_table_dp_add_itemChanged(QTableWidgetItem *item)
     if(!loading)  //数据已经加载完成后
         write_ini("table_dp_add0" , ui->table_dp_add, ui->table_dp_add0->currentRow());
 
+
+    this->setWindowModified(true);
+
 }
 
 void MainWindow::on_table_nv_add0_cellClicked(int row, int column)
@@ -1779,6 +1804,9 @@ void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem *item)
     //当条目有修改时，重新写入数据
     if(!loading)  //数据已经加载完成后
         write_ini("table_nv_add0" , ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+
+    this->setWindowModified(true);
 
 }
 
@@ -1876,6 +1904,9 @@ void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem *item)
 
     if(!loading)
         write_value_ini(ui->table_nv_del0->objectName() , ui->table_nv_del , ui->table_nv_del0->currentRow());
+
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_table_nv_ls_itemChanged(QTableWidgetItem *item)
@@ -1887,6 +1918,9 @@ void MainWindow::on_table_nv_ls_itemChanged(QTableWidgetItem *item)
 
     if(!loading)
         write_value_ini(ui->table_nv_ls0->objectName() , ui->table_nv_ls , ui->table_nv_ls0->currentRow());
+
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
@@ -1910,6 +1944,9 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem *item)
 
     if(!loading)
         write_value_ini(ui->table_dp_del0->objectName() , ui->table_dp_del , ui->table_dp_del0->currentRow());
+
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::initui_PlatformInfo()
@@ -2590,6 +2627,13 @@ void MainWindow::SavePlist(QString FileName)
     OpenCore["UEFI"] = SaveUEFI();
 
     PListSerializer::toPList(OpenCore , FileName);
+
+    this->setWindowModified(false);
+
+    if(closeSave)
+    {
+        clear_temp_data();
+    }
 
 }
 
@@ -4528,11 +4572,15 @@ void MainWindow::on_btnSaveAs_clicked()
     PlistFileName = fd.getSaveFileName(this,"配置文件","","配置文件(*.plist);;所有文件(*.*)");
     if(!PlistFileName.isEmpty())
     {
-        setWindowTitle(title + "    " + PlistFileName);
+        setWindowTitle(title + "      [*]" + PlistFileName);
         SaveFileName = PlistFileName;
     }
     else
+    {
+        if(closeSave)  clear_temp_data();
+
         return;
+    }
 
     SavePlist(PlistFileName);
 
@@ -4545,7 +4593,7 @@ void MainWindow::about()
 {
 
     QMessageBox::about(this , tr("About") ,
-                       QString::fromLocal8Bit("<a style='color: blue;' href = https://github.com/ic005k/QtOpenCoreConfig>QtOpenCoreConfigurator</a><br><a style='color: blue;' href = https://github.com/ic005k/QtiASL>QtiASL</a>"));
+                       QString::fromLocal8Bit("<a style='color: blue;' href = https://github.com/ic005k/QtOpenCoreConfig>QtOpenCoreConfigurator</a><br><a style='color: blue;' "));
 }
 
 void MainWindow::on_btnKernelAdd_Del_clicked()
@@ -4770,6 +4818,9 @@ void MainWindow::on_cboxSystemProductName_currentIndexChanged(const QString &arg
         //connect(gs , SIGNAL(readyRead()) , this , SLOT(readResult()));
 
     }
+
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::readResult()
@@ -5037,17 +5088,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     if(event){};
 
-    for(int i = 0; i < IniFile.count(); i++)
-    {
-        QFile file(IniFile.at(i));
-        //qDebug() << IniFile.at(i);
-        if(file.exists())
-        {
-            file.remove();
-            i = -1;
-        }
-    }
-
     QString qfile = QDir::homePath() + "/QtOCC.ini";
     QFile file(qfile);
     //QSettings Reg(qfile, QSettings::NativeFormat);
@@ -5069,9 +5109,58 @@ void MainWindow::closeEvent(QCloseEvent *event)
     Reg.setValue("15" , ui->chk15->isChecked());
     Reg.setValue("16" , ui->chk16->isChecked());
 
+
     if(this->isWindowModified())
     {
+        int choice;
+        if(!zh_cn)
+        {
 
+            choice = QMessageBox::warning(this, tr("Application"),
+                                   tr("The document has been modified.\n"
+                                      "Do you want to save your changes?\n\n") + SaveFileName,
+                                   QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+
+        }
+        else
+        {
+            QMessageBox message(QMessageBox::Warning,"QtiASL","文件内容已修改，是否保存？\n\n" + SaveFileName);
+            message.setStandardButtons (QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+            message.setButtonText (QMessageBox::Save,QString("保 存"));
+            message.setButtonText (QMessageBox::Cancel,QString("取 消"));
+            message.setButtonText (QMessageBox::Discard,QString("放 弃"));
+            message.setDefaultButton(QMessageBox::Save);
+            choice = message.exec();
+
+        }
+
+
+        switch (choice)
+        {
+            case QMessageBox::Save:
+
+            closeSave = true;
+            if(SaveFileName == "")
+                on_btnSaveAs_clicked();
+            else
+                on_btnSave_clicked();
+
+            event->accept();
+            break;
+        case QMessageBox::Discard:
+            clear_temp_data();
+            event->accept();
+            break;
+        case QMessageBox::Cancel:
+            event->ignore();
+            break;
+        }
+    }
+    else
+    {
+        clear_temp_data();
+
+        event->accept();
     }
 
 
@@ -5554,6 +5643,9 @@ void MainWindow::on_editExposeSensitiveData_textChanged(const QString &arg1)
     }
 
 
+    this->setWindowModified(true);
+
+
 }
 
 void MainWindow::ScanPolicy()
@@ -5731,6 +5823,9 @@ void MainWindow::on_editScanPolicy_textChanged(const QString &arg1)
         chk.at(i)->setChecked(false);
 
     method(v, total);
+
+
+    this->setWindowModified(true);
 
 
 }
@@ -6101,6 +6196,9 @@ void MainWindow::on_editDisplayLevel_textChanged(const QString &arg1)
     methodDisplayLevel(vDisplayLevel, total);
 
 
+    this->setWindowModified(true);
+
+
 }
 
 void MainWindow::on_btnDLSetAll_clicked()
@@ -6253,6 +6351,9 @@ void MainWindow::on_editPickerAttributes_textChanged(const QString &arg1)
         chk_pa.at(i)->setChecked(false);
 
     method(v_pa, total);
+
+
+    this->setWindowModified(true);
 
 }
 
@@ -6953,6 +7054,12 @@ void MainWindow::init_menu()
     connect(ui->actionSimplified_Chinese_Manual, &QAction::triggered, this, &MainWindow::on_line4);
     if(!zh_cn) ui->actionSimplified_Chinese_Manual->setVisible(false);
 
+    connect(ui->actionOpenCanopyIcons, &QAction::triggered, this, &MainWindow::on_line5);
+
+    connect(ui->actionPlist_editor, &QAction::triggered, this, &MainWindow::on_line20);
+    connect(ui->actionDSDT_SSDT_editor, &QAction::triggered, this, &MainWindow::on_line21);
+
+
 
     ui->btnSave->setEnabled(false);
     ui->actionSave->setEnabled(false);
@@ -6984,6 +7091,1408 @@ void MainWindow::on_line4()
     QDesktopServices::openUrl(url);
 }
 
+void MainWindow::on_line5()
+{
+    QUrl url(QString("https://github.com/blackosx/OpenCanopyIcons"));
+    QDesktopServices::openUrl(url);
+}
 
 
+void MainWindow::on_line20()
+{
+    QUrl url(QString("https://www.insanelymac.com/forum/topic/345512-open-source-cross-platform-plist-file-editor-plistedplus/"));
+    QDesktopServices::openUrl(url);
+}
 
+void MainWindow::on_line21()
+{
+    QUrl url(QString("https://www.insanelymac.com/forum/topic/344860-open-source-cross-platform-dsdtssdt-analysis-editor/"));
+    QDesktopServices::openUrl(url);
+}
+
+
+void MainWindow::on_table_acpi_add_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+    //qDebug() << item->text();
+
+}
+
+void MainWindow::on_table_acpi_add_currentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous)
+{
+    Q_UNUSED(current);
+    Q_UNUSED(previous);
+
+}
+
+void MainWindow::on_table_acpi_del_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_acpi_patch_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_booter_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_dp_add0_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_dp_del0_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_kernel_add_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_kernel_block_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_kernel_Force_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_kernel_patch_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_tableBlessOverride_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_tableEntries_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_tableTools_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_nv_add0_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_nv_del0_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_nv_ls0_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_tableDevices_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_uefi_drivers_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_table_uefi_ReservedMemory_itemChanged(QTableWidgetItem *item)
+{
+    Q_UNUSED(item);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkFadtEnableReset_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkNormalizeHeaders_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkRebaseRegions_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkResetHwSig_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkResetLogoStatus_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAvoidRuntimeDefrag_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkEnableWriteUnprotector_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkRebuildAppleMemoryMap_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkEnableSafeModeSlide_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDevirtualiseMmio_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkForceExitBootServices_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkSetupVirtualMap_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAllowRelocationBlock_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDisableSingleUser_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkProtectMemoryRegions_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkSignalAppleOS_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDisableVariableWrite_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkProtectSecureBoot_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkSyncRuntimePermissions_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDiscardHibernateMap_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkProtectUefiServices_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkProvideCustomSlide_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleCpuPmCfgLock_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDisableIoMapper_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkLapicKernelPanic_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkExternalDiskIcons_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkExtendBTFeatureFlags_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkForceSecureBootScheme_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkPowerTimeoutKernelPanic_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkLegacyCommpage_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleXcpmForceBoost_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleXcpmExtraMsrs_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkIncreasePciBarSize_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkCustomSMBIOSGuid_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkXhciPortLimit_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkThirdPartyDrives_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDisableLinkeditJettison_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkPanicNoKextDump_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDisableRtcChecksum_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleXcpmCfgLock_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkFuzzyMatch_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkHideAuxiliary_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkPickerAudioAssist_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkPollAppleHotKeys_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkShowPicker_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleDebug_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkApplePanic_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDisableWatchDog_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkSysReport_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkSerialInit_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAllowNvramReset_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAllowSetDefault_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAuthRestart_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkBlacklistAppleUpdate_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkEnablePassword_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkLegacyEnable_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkLegacyOverwrite_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkWriteFlash_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAutomatic_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkCustomMemory_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkUpdateDataHub_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkUpdateNVRAM_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkUpdateSMBIOS_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAdviseWindows_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkSpoofVendor_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkEnableJumpstart_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkJumpstartHotPlug_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkHideVerbose_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkGlobalConnect_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDeduplicateBootOrder_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkIgnoreInvalidFlexRatio_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkReleaseUsbOwnership_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkRequestBootVarRouting_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkUnblockFsConnect_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAudioSupport_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkPlayChime_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkConnectDrivers_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkKeyFiltering_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkKeySwap_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkKeySupport_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkPointerSupport_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkClearScreenOnModeSwitch_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDirectGopRendering_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkReconnectOnResChange_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkReplaceTabWithSpace_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkForceResolution_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkProvideConsoleGop_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkIgnoreTextInGraphics_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkUgaPassThrough_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkSanitiseClearScreen_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleAudio_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleBootPolicy_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleDebugLog_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleEvent_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleImg4Verification_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleSecureBoot_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleRtcRam_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleKeyMap_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleImageConversion_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleFramebufferInfo_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleSmcIo_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkAppleUserInterfaceTheme_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDataHub_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkOSInfo_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkHashServices_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkFirmwareVolume_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDeviceProperties_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkUnicodeCollation_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editProvideMaxSlide_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editCpuid1Data_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editCpuid1Mask_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkDummyPowerManagement_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editMaxKernel_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editMinKernel_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxKernelArch_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxKernelCache_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editConsoleAttributes_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editTakeoffDelay_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editTimeout_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxHibernateMode_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxPickerMode_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editDisplayDelay_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editTarget_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editHaltLevel_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editApECID_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxBootProtect_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editPasswordHash_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editPasswordSalt_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxDmgLoading_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxVault_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxSecureBootModel_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemSerialNumber_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editMLB_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemUUID_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxSystemMemoryStatus_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editProcessorTypeGeneric_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editROM_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editARTFrequency_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBoardProduct_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBoardRevision_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editDevicePathsSupported_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editFSBFrequency_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editInitialTSC_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editPlatformName_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSmcBranch_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSmcPlatform_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSmcRevision_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editStartupPowerEvents_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemProductName_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemSerialNumber_data_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemUUID_data_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editDataWidth_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editTotalWidth_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editErrorCorrection_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editType_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editFormFactor_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editTypeDetail_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editMaxCapacity_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBID_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editFirmwareFeatures_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editFirmwareFeaturesMask_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editMLB_2_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editROM_2_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemUUID_PNVRAM_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBIOSReleaseDate_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBIOSVendor_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBIOSVersion_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBoardAssetTag_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBoardLocationInChassis_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBoardManufacturer_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBoardProduct_2_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBoardSerialNumber_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBoardType_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editBoardVersion_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editChassisAssetTag_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editChassisManufacturer_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editChassisSerialNumber_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editChassisType_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemVersion_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemUUID_2_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemSerialNumber_2_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemSKUNumber_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemProductName_2_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemManufacturer_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSystemFamily_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSmcVersion_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editProcessorType_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editPlatformFeature_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editFirmwareFeaturesMask_2_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editFirmwareFeatures_2_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editChassisVersion_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editExitBootServicesDelay_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editTscSyncTimeout_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editMinDate_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editMinVersion_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editAudioCodec_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editAudioDevice_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editAudioOut_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editMinimumVolume_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editVolumeAmplifier_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editKeyForgetThreshold_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editKeyMergeThreshold_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxKeySupportMode_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editPointerSupportMode_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editTimerResolution_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxConsoleMode_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxResolution_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxTextRenderer_currentIndexChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::clear_temp_data()
+{
+    for(int i = 0; i < IniFile.count(); i++)
+    {
+        QFile file(IniFile.at(i));
+        //qDebug() << IniFile.at(i);
+        if(file.exists())
+        {
+            file.remove();
+            i = -1;
+        }
+    }
+
+}
