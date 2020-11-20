@@ -75,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent)
             ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
 
 
-    ui->tabTotal->setIconSize(QSize(64, 64));
+    ui->tabTotal->setIconSize(QSize(50, 45));
 
     QIcon icon;
     icon.addFile(":/icon.png");
@@ -1517,7 +1517,7 @@ void MainWindow::initui_nvram()
 
     CurrentDateTime = y + m + d + h + mm + s;
 
-    qDebug() << CurrentDateTime;
+    //qDebug() << CurrentDateTime;
 
     QTableWidgetItem *id0;
 
@@ -3336,8 +3336,6 @@ QVariantMap MainWindow::SavePlatformInfo()
     subMap["UpdateNVRAM"] = getChkBool(ui->chkUpdateNVRAM);
     subMap["UpdateSMBIOS"] = getChkBool(ui->chkUpdateSMBIOS);
     subMap["UpdateSMBIOSMode"] = ui->cboxUpdateSMBIOSMode->currentText();
-
-
 
     return subMap;
 
@@ -5441,6 +5439,7 @@ void MainWindow::on_tabTotal_tabBarClicked(int index)
     case 0:
         ui->btnExportMaster->setText(tr("Export") + "  ACPI");
         ui->btnImportMaster->setText(tr("Import") + "  ACPI");
+
         break;
 
     case 1:
@@ -5898,18 +5897,11 @@ void MainWindow::method(QVector<int> nums, int sum, QVector<int> list, int index
                     {
                         chk_pa.at(i)->setChecked(true);
                     }
-
                 }
-
 
             }
 
-
-
-
         }
-
-
     }
     else if(sum > 0)
     {
@@ -5921,7 +5913,6 @@ void MainWindow::method(QVector<int> nums, int sum, QVector<int> list, int index
 
         }
     }
-
 
 }
 
@@ -5950,8 +5941,6 @@ void MainWindow::methodDisplayLevel(QVector<unsigned int> nums, unsigned int sum
 
             }
         }
-
-
     }
     else if(sum > 0)
     {
@@ -5963,8 +5952,6 @@ void MainWindow::methodDisplayLevel(QVector<unsigned int> nums, unsigned int sum
 
         }
     }
-
-
 }
 
 void MainWindow::DisplayLevel()
@@ -6231,7 +6218,6 @@ void MainWindow::on_editDisplayLevel_textChanged(const QString &arg1)
 
     this->setWindowModified(true);
 
-
 }
 
 void MainWindow::on_btnDLSetAll_clicked()
@@ -6478,7 +6464,6 @@ void MainWindow::show_menu(const QPoint pos)
 
     }
 
-
 }
 
 void MainWindow::on_nv1()
@@ -6512,9 +6497,7 @@ void MainWindow::on_nv1()
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1 , 1 , newItem1);
 
-
     }
-
 
 }
 
@@ -6535,7 +6518,6 @@ void MainWindow::on_nv2()
         }
 
     }
-
 
 
     if(!re)
@@ -6675,7 +6657,6 @@ void MainWindow::on_nv6()
         }
 
     }
-
 
 
     if(!re)
@@ -6967,7 +6948,6 @@ void MainWindow::on_nv01()
 
     }
 
-
 }
 
 void MainWindow::on_nv02()
@@ -6998,7 +6978,6 @@ void MainWindow::on_nv02()
         ui->table_nv_add0->setItem(ui->table_nv_add0->rowCount() - 1 , 0 , new QTableWidgetItem("7C436110-AB2A-4BBB-A880-FE41995C9F82"));
 
     }
-
 
 }
 
@@ -7031,7 +7010,6 @@ void MainWindow::on_nv03()
 
     }
 
-
 }
 
 void MainWindow::on_nv04()
@@ -7062,7 +7040,6 @@ void MainWindow::on_nv04()
         ui->table_nv_add0->setItem(ui->table_nv_add0->rowCount() - 1 , 0 , new QTableWidgetItem("4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102"));
 
     }
-
 
 }
 

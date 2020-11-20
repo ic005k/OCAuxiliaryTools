@@ -166,10 +166,6 @@ private slots:
 
     void on_btnTestWrite_clicked();
 
-    void on_btnParse_clicked();
-
-    void on_btnSerialize_clicked();
-
     void on_table_dp_add0_cellClicked(int row, int column);
 
     void on_table_dp_add_itemSelectionChanged();
@@ -217,10 +213,6 @@ private slots:
     void on_btnKernelPatchAdd_clicked();
 
     void on_btnKernelPatchDel_clicked();
-
-    void on_btnQuickOpen1_clicked();
-
-    void on_btnQuickOpen2_clicked();
 
     void on_btnACPIAdd_Del_clicked();
 
@@ -993,11 +985,17 @@ private:
 
     void clear_temp_data();
 
+    void on_btnParse_clicked();
 
+    void on_btnSerialize_clicked();
+
+    void on_btnQuickOpen1_clicked();
+
+    void on_btnQuickOpen2_clicked();
 
 };
 
-class CustomTabStyle1 : public QProxyStyle//继承QProxyStyle
+class CustomTabStyle1 : public QProxyStyle
 {
 public:
     QSize sizeFromContents(ContentsType type, const QStyleOption *option,
@@ -1007,35 +1005,36 @@ public:
         if (type == QStyle::CT_TabBarTab) {
             tabsize.transpose();
             tabsize.rwidth() = 105;
-            tabsize.rheight() = 80;
+            tabsize.rheight() = 75;
         }
         return tabsize;
     }
-    //重写函数drawControl，绘图控制
+
     //ControlElement控制元件,option,QStyle选项，painter绘图，widget对象
     void drawControl(ControlElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget) const
     {
         if (element == CE_TabBarTabLabel) {//如果元件是TabBarTabLabel
             if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab *>(option)) {
                 QRect allRect = tab->rect;//获取tab矩形框
-                painter->setFont(QFont("楷体", 18, QFont::Bold));
+                painter->setFont(QFont("微软雅黑", 18, QFont::Bold));
                 if (tab->state & QStyle::State_Selected) {
                     painter->save();
-                    painter->setPen(0x555555);//设置颜色
-                    painter->setBrush(QBrush(0x282828));//设置Brush颜色
-                    painter->drawRect(allRect.adjusted(3, 3, -3, -3));
-                    // painter->restore();//恢复
+                    painter->setPen(0x3399FF);
+                    painter->setBrush(QBrush(0x3399FF));
+                    painter->drawRect(allRect.adjusted(2, 2, -2, -2));
+                    painter->restore();
                 }
-                QTextOption option;//这里设置文本样式
-                option.setAlignment(Qt::AlignCenter);//设置对其方式。居中对齐
+
+                QTextOption option;
+                option.setAlignment(Qt::AlignCenter);
                 if (tab->state & QStyle::State_Selected) {
-                    painter->setPen(0xf8fcff);//设置颜色
+                    painter->setPen(0xf8fcff);
                 }
                 else {
                     painter->setPen(0x5d5d5d);
                 }
 
-                painter->drawText(allRect, tab->text, option);//绘制文本
+                painter->drawText(allRect, tab->text, option);
                 return;
             }
         }
@@ -1044,6 +1043,7 @@ public:
         }
     }
 };
+
 class CustomTabStyle2 : public QProxyStyle
 {
 public:
@@ -1081,7 +1081,6 @@ public:
                 //opt.icon = icon;
 
 
-
 #ifdef Q_OS_WIN32
                 opt.palette.setCurrentColorGroup(QPalette::Disabled);
                 opt.state |= QStyle::State_Sunken;
@@ -1089,13 +1088,13 @@ public:
 #endif
 
 #ifdef Q_OS_LINUX
-                painter->setFont(QFont("微软雅黑", 11, QFont::Bold));
+                painter->setFont(QFont("", 11, QFont::Bold));
 #endif
 
 #ifdef Q_OS_MAC
                 opt.palette.setCurrentColorGroup(QPalette::Disabled);
                 opt.state |= QStyle::State_Sunken;
-                painter->setFont(QFont("微软雅黑", 15, QFont::Bold));
+                painter->setFont(QFont("", 15, QFont::Bold));
 #endif
 
                 //painter->drawText(allRect, tab->text, option);//绘制文本
@@ -1125,7 +1124,7 @@ public:
         }
         return tabsize;
     }
-    //重写函数drawControl，绘图控制
+
     //ControlElement控制元件,option,QStyle选项，painter绘图，widget对象
     void drawControl(ControlElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget) const
     {
@@ -1134,17 +1133,17 @@ public:
                 QRect allRect = tab->rect;//获取tab矩形框
                 if (tab->state & QStyle::State_Selected) {
                     painter->save();
-                    painter->setPen(0x89cfff);//设置颜色
-                    painter->setBrush(QBrush(0x89cfff));//设置Brush颜色
+                    painter->setPen(0x89cfff);
+                    painter->setBrush(QBrush(0x89cfff));
                     painter->drawRect(allRect.adjusted(0, 0, -0, -0));
-                    painter->restore();//恢复
+                    painter->restore();
                 }
 
                 QTextOption option;//这里设置文本样式
-                option.setAlignment(Qt::AlignCenter);//设置对其方式。居中对齐
+                option.setAlignment(Qt::AlignCenter);
 
                 if (tab->state & QStyle::State_Selected) {
-                    painter->setPen(0xf8fcff);//设置颜色
+                    painter->setPen(0xf8fcff);
                 }
                 else {
                     painter->setPen(0x5d5d5d);
@@ -1160,7 +1159,7 @@ public:
 #ifdef Q_OS_MAC
                 painter->setFont(QFont("微软雅黑", 16, QFont::Bold));
 #endif
-                painter->drawText(allRect, tab->text, option);//绘制文本
+                painter->drawText(allRect, tab->text, option);
                 return;
             }
         }
@@ -1179,7 +1178,7 @@ public:
         QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
         if (type == QStyle::CT_TabBarTab) {
             s.transpose();
-            s.rwidth() = 105; // 设置每个tabBar中item的大小
+            s.rwidth() = 105;
             s.rheight() = 75;
         }
         return s;
@@ -1261,18 +1260,18 @@ public:
             s.transpose();
 
 #ifdef Q_OS_WIN32
-            s.rwidth() = 330; // 设置每个tabBar中item的大小
-            s.rheight() = 35;
+            s.rwidth() = 105;
+            s.rheight() = 75;
 #endif
 
 #ifdef Q_OS_LINUX
-            s.rwidth() = 230; // 设置每个tabBar中item的大小
-            s.rheight() = 35;
+            s.rwidth() = 105;
+            s.rheight() = 75;
 #endif
 
 #ifdef Q_OS_MAC
-            s.rwidth() = 170; // 设置每个tabBar中item的大小
-            s.rheight() = 35;
+            s.rwidth() = 105;
+            s.rheight() = 75;
 #endif
 
         }
