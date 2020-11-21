@@ -1,10 +1,10 @@
 #ifndef RECENTFILES_H
 #define RECENTFILES_H
 
-#include <QObject>
-#include <QStringList>
 #include <QMainWindow>
+#include <QObject>
 #include <QSettings>
+#include <QStringList>
 
 class QMenu;
 class QAction;
@@ -18,47 +18,45 @@ class QAction;
  * It handles user-settable number of most recently accessed files, provides
  * a sub-menu that allows the user to select recently used files for opening.
  */
-class RecentFiles : public QObject
-{
-    Q_OBJECT
+class RecentFiles : public QObject {
+  Q_OBJECT
 public:
-    explicit RecentFiles(QMainWindow *parent=NULL); /* Parent mainwindow, just for proper heirarchy, not actually used outside QObject constr */
-    ~RecentFiles();
+  explicit RecentFiles(
+      QMainWindow *parent =
+          NULL); /* Parent mainwindow, just for proper heirarchy, not actually
+                    used outside QObject constr */
+  ~RecentFiles();
 
-    /// Inserts the sub-menu into another Menu
-    ///  param menu   The parent menu where the sub-menu should be inserted
-    ///  param text   Text of menu item after which Recent menu is inserted
-    void attachToMenuAfterItem(QMenu *menu, QString text, const char *slotName);
+  void attachToMenuAfterItem(QMenu *menu, QString text, const char *slotName);
 
-    QStringList getRecentFiles() const;                     ///< application calls this to get list of recent files
-    void        setMostRecentFile(const QString fileName);  ///< called when each new file is opened
-    QString     strippedName(const QString &fullFileName);  ///< returns filename from full path
+  QStringList getRecentFiles() const;
+  void setMostRecentFile(const QString fileName);
+  QString strippedName(const QString &fullFileName);
 
-    void        setMenuEnabled(bool tf);
+  void setMenuEnabled(bool tf);
 
-    /// returns how many recent files are being remenbered.  see setNumOfRecentFiles()
-    int         numberOfRecentFilesToSave();
+  int numberOfRecentFilesToSave();
 
-    static const int MaxRecentFiles = 15;  ///< Max number of names we keep.
+  static const int MaxRecentFiles = 15; ///< Max number of names we keep.
 
 public slots:
-    /// The application can set the number of recent files retained/reported here
-    void setNumOfRecentFiles(int n);
+  /// The application can set the number of recent files retained/reported here
+  void setNumOfRecentFiles(int n);
 
 signals:
-    void openFile(QString fileName); ///< emitted when user selects item from "Open Recent" sub-menu
-    void newMaxFilesShown(int);     ///< tells observers that the number of recent files being remembered has changed.
+  void openFile(QString fileName);
+  void newMaxFilesShown(int);
 
 private slots:
-    void openRecentFile(); ///< menu items signal this when user selects item from "Open Recent" sub-menu
+  void openRecentFile();
 
 private:
-    void purgeMissingFilesFromList(QStringList &recentFileList);
-    void updateRecentFiles(QSettings &settings);  ///< call this with each new filename
+  void purgeMissingFilesFromList(QStringList &recentFileList);
+  void updateRecentFiles(QSettings &settings);
 
-    QMenu *m_recentMenu;
-    QAction *m_recentMenuTriggeredAction;
-    QAction *m_recentFileActions[MaxRecentFiles]; ///< QActions created in file menu for storing recent files
+  QMenu *m_recentMenu;
+  QAction *m_recentMenuTriggeredAction;
+  QAction *m_recentFileActions[MaxRecentFiles];
 };
 
 #endif // RECENTFILES_H

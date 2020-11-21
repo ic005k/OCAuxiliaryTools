@@ -19,80 +19,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QPushButton" name="btnOpen">
-      <property name="text">
-       <string>Open</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="btnSave">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="text">
-       <string>Save</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QPushButton" name="btnSaveAs">
-      <property name="text">
-       <string>Save As...</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QPushButton" name="btnMountEsp">
-      <property name="text">
-       <string>MountESP</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="4">
-     <widget class="QPushButton" name="btnTestWrite">
-      <property name="text">
-       <string>测试写入</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="5">
-     <widget class="QPushButton" name="btnExportMaster">
-      <property name="text">
-       <string>ExportMaster</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="6">
-     <widget class="QPushButton" name="btnExportSub">
-      <property name="text">
-       <string>ExportSub</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="7">
-     <widget class="QPushButton" name="btnImportMaster">
-      <property name="text">
-       <string>ImportMaster</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="8">
-     <widget class="QPushButton" name="btnImportSub">
-      <property name="text">
-       <string>ImportSub</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="9">
-     <widget class="QPushButton" name="btnHelp">
-      <property name="text">
-       <string>Help</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="10">
+    <item row="1" column="0" colspan="8">
      <widget class="QTabWidget" name="tabTotal">
       <property name="tabPosition">
        <enum>QTabWidget::West</enum>
@@ -6346,6 +6273,65 @@ the MSR registers.</string>
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QPushButton" name="btnSaveAs">
+      <property name="text">
+       <string>Save As...</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="4">
+     <widget class="QPushButton" name="btnOcvalidate">
+      <property name="text">
+       <string>OC Validate</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QPushButton" name="btnMountEsp">
+      <property name="text">
+       <string>MountESP</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="btnSave">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Save</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="7">
+     <widget class="QPushButton" name="btnHelp">
+      <property name="text">
+       <string>Help</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="5">
+     <widget class="QPushButton" name="btnExportMaster">
+      <property name="text">
+       <string>ExportMaster</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="6">
+     <widget class="QPushButton" name="btnImportMaster">
+      <property name="text">
+       <string>ImportMaster</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QPushButton" name="btnOpen">
+      <property name="text">
+       <string>Open</string>
+      </property>
      </widget>
     </item>
    </layout>
