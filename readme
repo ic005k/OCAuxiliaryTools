@@ -2,7 +2,7 @@
 
 OpenCore逐渐流行起来，一直想做一款开源跨平台的oc配置文件编辑器，目前终于达成。这样在mac之外的平台下配置oc显得格外轻松，特别是win和linux平台。
 
-该软件是根据oc最新的开发版提供的Sample.plist为蓝本，使用该软件前，建议将oc升级到最新版或最新的开发版。
+该软件是根据oc最新的开发版提供的SampleCustom.plist为蓝本，使用该软件前，建议将oc升级到最新的开发版。
 
 OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/releases  感谢@williambj1提供！
 非官方简体中文参考手册：https://github.com/SukkaW/OpenCore-Document-zh_Hans  感谢@SukkaW！
@@ -10,7 +10,7 @@ OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/r
 
 关于软件各功能的解读（翻译）: 由于时间关系，没有细致地去润色及排版，在此表示歉意，同时建议大家研读原版OC说明书。
 
-特点：
+特点包括但不限于：
 0.稳健的plist文件底层读写代码，确保数据读写的正确性
 1.多语言支持（目前支持中文和英文界面），自动识别操作系统语言并根据语种加载相应本土化的功能
 2.开源、跨平台（win、mac、linux均提供二进制文件的下载）
