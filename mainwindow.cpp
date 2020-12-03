@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     test(false);
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.11.26";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.03";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
