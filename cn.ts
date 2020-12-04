@@ -4711,7 +4711,7 @@ UUID</translation>
         <location filename="mainwindow.cpp" line="761"/>
         <location filename="mainwindow.cpp" line="835"/>
         <source>BundlePath</source>
-        <translation>捆绑路径
+        <translation type="unfinished">Kext文件
 BundlePath</translation>
     </message>
     <message>
