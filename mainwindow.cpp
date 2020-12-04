@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     test(false);
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.03";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.04";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -3518,6 +3518,8 @@ void MainWindow::on_btnKernelPatchAdd_clicked()
     newItem1->setTextAlignment(Qt::AlignCenter);
     ui->table_kernel_patch->setItem(ui->table_kernel_patch->currentRow(), 13,
         newItem1);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnKernelPatchDel_clicked()
@@ -3583,15 +3585,24 @@ void MainWindow::add_item(QTableWidget* table, int total_column)
 
 void MainWindow::del_item(QTableWidget* table)
 {
+
+    if (table->rowCount() == 0)
+        return;
+
     int t = table->currentRow();
     table->removeRow(t);
     table->setFocus();
     table->setCurrentCell(t - 1, 0);
     if (t == 0)
         table->setCurrentCell(0, 0);
+
+    this->setWindowModified(true);
 }
 
-void MainWindow::on_btnACPIAdd_Del_clicked() { del_item(ui->table_acpi_add); }
+void MainWindow::on_btnACPIAdd_Del_clicked()
+{
+    del_item(ui->table_acpi_add);
+}
 
 void MainWindow::on_btnACPIDel_Add_clicked()
 {
@@ -3601,15 +3612,22 @@ void MainWindow::on_btnACPIDel_Add_clicked()
         "false");
     init_enabled_data(ui->table_acpi_del, ui->table_acpi_del->rowCount() - 1, 5,
         "true");
+
+    this->setWindowModified(true);
 }
 
-void MainWindow::on_btnACPIDel_Del_clicked() { del_item(ui->table_acpi_del); }
+void MainWindow::on_btnACPIDel_Del_clicked()
+{
+    del_item(ui->table_acpi_del);
+}
 
 void MainWindow::on_btnACPIPatch_Add_clicked()
 {
     add_item(ui->table_acpi_patch, 11);
     init_enabled_data(ui->table_acpi_patch, ui->table_acpi_patch->rowCount() - 1,
         11, "true");
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnACPIPatch_Del_clicked()
@@ -3622,9 +3640,14 @@ void MainWindow::on_btnBooter_Add_clicked()
     add_item(ui->table_booter, 2);
     init_enabled_data(ui->table_booter, ui->table_booter->rowCount() - 1, 2,
         "true");
+
+    this->setWindowModified(true);
 }
 
-void MainWindow::on_btnBooter_Del_clicked() { del_item(ui->table_booter); }
+void MainWindow::on_btnBooter_Del_clicked()
+{
+    del_item(ui->table_booter);
+}
 
 void MainWindow::on_btnDPDel_Add0_clicked()
 {
@@ -3634,10 +3657,15 @@ void MainWindow::on_btnDPDel_Add0_clicked()
 
     write_value_ini(ui->table_dp_del0->objectName(), ui->table_dp_del,
         ui->table_dp_del0->rowCount() - 1);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnDPDel_Del0_clicked()
 {
+    if (ui->table_dp_del0->rowCount() == 0)
+        return;
+
     //先记住被删的条目位置
     int delindex = ui->table_dp_del0->currentRow();
     int count = ui->table_dp_del0->rowCount();
@@ -3660,7 +3688,10 @@ void MainWindow::on_btnDPDel_Del0_clicked()
         ui->table_dp_del->setRowCount(0);
     }
 
-    on_table_dp_del0_cellClicked(ui->table_dp_del0->currentRow(), 0);
+    if (ui->table_dp_del0->rowCount() > 0)
+        on_table_dp_del0_cellClicked(ui->table_dp_del0->currentRow(), 0);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnDPDel_Add_clicked()
@@ -3675,6 +3706,8 @@ void MainWindow::on_btnDPDel_Add_clicked()
     //保存数据
     write_value_ini(ui->table_dp_del0->objectName(), ui->table_dp_del,
         ui->table_dp_del0->currentRow());
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnDPDel_Del_clicked()
@@ -3707,6 +3740,8 @@ void MainWindow::on_btnACPIAdd_Add_clicked()
         ui->table_acpi_add->setFocus();
         ui->table_acpi_add->setCurrentCell(row - 1, 0);
     }
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnDPAdd_Add0_clicked()
@@ -3716,10 +3751,16 @@ void MainWindow::on_btnDPAdd_Add0_clicked()
     on_btnDPAdd_Add_clicked(); //同时右边增加一个新条目
     write_ini(ui->table_dp_add0->objectName(), ui->table_dp_add,
         ui->table_dp_add0->rowCount() - 1);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnDPAdd_Del0_clicked()
 {
+
+    if (ui->table_dp_add0->rowCount() == 0)
+        return;
+
     //先记住被删的条目位置
     int delindex = ui->table_dp_add0->currentRow();
     int count = ui->table_dp_add0->rowCount();
@@ -3742,7 +3783,10 @@ void MainWindow::on_btnDPAdd_Del0_clicked()
         ui->table_dp_add->setRowCount(0);
     }
 
-    on_table_dp_add0_cellClicked(ui->table_dp_add0->currentRow(), 0);
+    if (ui->table_dp_add0->rowCount() > 0)
+        on_table_dp_add0_cellClicked(ui->table_dp_add0->currentRow(), 0);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnDPAdd_Add_clicked()
@@ -3757,6 +3801,8 @@ void MainWindow::on_btnDPAdd_Add_clicked()
     //保存数据
     write_ini(ui->table_dp_add0->objectName(), ui->table_dp_add,
         ui->table_dp_add0->currentRow());
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnDPAdd_Del_clicked()
@@ -3888,6 +3934,8 @@ void MainWindow::on_btnKernelAdd_Add_clicked()
         t->setFocus();
         t->setCurrentCell(row - 1, 0);
     }
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnKernelBlock_Add_clicked()
@@ -3900,6 +3948,8 @@ void MainWindow::on_btnKernelBlock_Add_clicked()
     newItem1->setTextAlignment(Qt::AlignCenter);
     ui->table_kernel_block->setItem(ui->table_kernel_block->currentRow(), 5,
         newItem1);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnKernelBlock_Del_clicked()
@@ -3912,6 +3962,8 @@ void MainWindow::on_btnMiscBO_Add_clicked()
     add_item(ui->tableBlessOverride, 1);
     ui->tableBlessOverride->setItem(ui->tableBlessOverride->currentRow(), 0,
         new QTableWidgetItem(""));
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnMiscBO_Del_clicked()
@@ -3929,6 +3981,8 @@ void MainWindow::on_btnMiscEntries_Add_clicked()
         "true");
     init_enabled_data(ui->tableEntries, ui->tableEntries->rowCount() - 1, 6,
         "false");
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnMiscTools_Add_clicked()
@@ -3962,11 +4016,19 @@ void MainWindow::on_btnMiscTools_Add_clicked()
         init_enabled_data(ui->tableTools, ui->tableTools->rowCount() - 1, 7,
             "false");
     }
+
+    this->setWindowModified(true);
 }
 
-void MainWindow::on_btnMiscEntries_Del_clicked() { del_item(ui->tableEntries); }
+void MainWindow::on_btnMiscEntries_Del_clicked()
+{
+    del_item(ui->tableEntries);
+}
 
-void MainWindow::on_btnMiscTools_Del_clicked() { del_item(ui->tableTools); }
+void MainWindow::on_btnMiscTools_Del_clicked()
+{
+    del_item(ui->tableTools);
+}
 
 void MainWindow::on_btnNVRAMAdd_Add0_clicked()
 {
@@ -3976,6 +4038,8 @@ void MainWindow::on_btnNVRAMAdd_Add0_clicked()
 
     write_ini(ui->table_nv_add0->objectName(), ui->table_nv_add,
         ui->table_nv_add0->rowCount() - 1);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnNVRAMAdd_Add_clicked()
@@ -3990,13 +4054,19 @@ void MainWindow::on_btnNVRAMAdd_Add_clicked()
     //保存数据
     write_ini(ui->table_nv_add0->objectName(), ui->table_nv_add,
         ui->table_nv_add0->currentRow());
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnNVRAMAdd_Del0_clicked()
 {
+    int count = ui->table_nv_add0->rowCount();
+
+    if (count == 0)
+        return;
+
     //先记住被删的条目位置
     int delindex = ui->table_nv_add0->currentRow();
-    int count = ui->table_nv_add0->rowCount();
 
     QString qz = QDir::homePath() + "/" + CurrentDateTime + ui->table_nv_add0->objectName();
     QFile file(qz + QString::number(delindex + 1) + ".ini");
@@ -4016,7 +4086,10 @@ void MainWindow::on_btnNVRAMAdd_Del0_clicked()
         ui->table_nv_add->setRowCount(0);
     }
 
-    on_table_nv_add0_cellClicked(ui->table_nv_add0->currentRow(), 0);
+    if (ui->table_nv_add0->rowCount() > 0)
+        on_table_nv_add0_cellClicked(ui->table_nv_add0->currentRow(), 0);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnNVRAMAdd_Del_clicked()
@@ -4034,6 +4107,8 @@ void MainWindow::on_btnNVRAMDel_Add0_clicked()
 
     write_value_ini(ui->table_nv_del0->objectName(), ui->table_nv_del,
         ui->table_nv_del0->rowCount() - 1);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnNVRAMDel_Add_clicked()
@@ -4048,6 +4123,8 @@ void MainWindow::on_btnNVRAMDel_Add_clicked()
     //保存数据
     write_value_ini(ui->table_nv_del0->objectName(), ui->table_nv_del,
         ui->table_nv_del0->currentRow());
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnNVRAMLS_Add0_clicked()
@@ -4058,6 +4135,8 @@ void MainWindow::on_btnNVRAMLS_Add0_clicked()
 
     write_value_ini(ui->table_nv_ls0->objectName(), ui->table_nv_ls,
         ui->table_nv_ls0->rowCount() - 1);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnNVRAMLS_Add_clicked()
@@ -4072,10 +4151,15 @@ void MainWindow::on_btnNVRAMLS_Add_clicked()
     //保存数据
     write_value_ini(ui->table_nv_ls0->objectName(), ui->table_nv_ls,
         ui->table_nv_ls0->currentRow());
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnNVRAMDel_Del0_clicked()
 {
+    if (ui->table_nv_del0->rowCount() == 0)
+        return;
+
     //先记住被删的条目位置
     int delindex = ui->table_nv_del0->currentRow();
     int count = ui->table_nv_del0->rowCount();
@@ -4098,11 +4182,17 @@ void MainWindow::on_btnNVRAMDel_Del0_clicked()
         ui->table_nv_del->setRowCount(0);
     }
 
-    on_table_nv_del0_cellClicked(ui->table_nv_del0->currentRow(), 0);
+    if (ui->table_nv_del0->rowCount() > 0)
+        on_table_nv_del0_cellClicked(ui->table_nv_del0->currentRow(), 0);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnNVRAMLS_Del0_clicked()
 {
+    if (ui->table_nv_ls0->rowCount() == 0)
+        return;
+
     //先记住被删的条目位置
     int delindex = ui->table_nv_ls0->currentRow();
     int count = ui->table_nv_ls0->rowCount();
@@ -4125,7 +4215,10 @@ void MainWindow::on_btnNVRAMLS_Del0_clicked()
         ui->table_nv_ls->setRowCount(0);
     }
 
-    on_table_nv_ls0_cellClicked(ui->table_nv_ls0->currentRow(), 0);
+    if (ui->table_nv_ls0->rowCount() > 0)
+        on_table_nv_ls0_cellClicked(ui->table_nv_ls0->currentRow(), 0);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnNVRAMDel_Del_clicked()
@@ -4151,6 +4244,8 @@ void MainWindow::on_btnUEFIRM_Add_clicked()
     add_item(ui->table_uefi_ReservedMemory, 4);
     init_enabled_data(ui->table_uefi_ReservedMemory,
         ui->table_uefi_ReservedMemory->rowCount() - 1, 4, "true");
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnUEFIRM_Del_clicked()
@@ -4177,6 +4272,8 @@ void MainWindow::on_btnUEFIDrivers_Add_clicked()
         ui->table_uefi_drivers->setFocus();
         ui->table_uefi_drivers->setCurrentCell(row - 1, 0);
     }
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnUEFIDrivers_Del_clicked()
@@ -4237,6 +4334,8 @@ void MainWindow::on_btnKernelAdd_Up_clicked()
     t->item(cr, 7)->setText(item[7]);
 
     t->setCurrentCell(cr - 1, t->currentColumn());
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnKernelAdd_Down_clicked()
@@ -4289,6 +4388,8 @@ void MainWindow::on_btnKernelAdd_Down_clicked()
     t->item(cr, 7)->setText(item[7]);
 
     t->setCurrentCell(cr + 1, t->currentColumn());
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::test(bool test)
@@ -4670,6 +4771,11 @@ void MainWindow::on_btnKernelForce_Add_clicked()
     QTableWidgetItem* newItem1 = new QTableWidgetItem("Any");
     newItem1->setTextAlignment(Qt::AlignCenter);
     t->setItem(row - 1, 8, newItem1);
+
+    t->setFocus();
+    t->setCurrentCell(row - 1, 0);
+
+    this->setWindowModified(true);
 }
 
 void MainWindow::on_btnKernelForce_Del_clicked()
@@ -5175,9 +5281,17 @@ void MainWindow::on_tabTotal_currentChanged(int index)
     on_tabTotal_tabBarClicked(index);
 }
 
-void MainWindow::on_btnDevices_add_clicked() { add_item(ui->tableDevices, 8); }
+void MainWindow::on_btnDevices_add_clicked()
+{
+    add_item(ui->tableDevices, 8);
 
-void MainWindow::on_btnDevices_del_clicked() { del_item(ui->tableDevices); }
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_btnDevices_del_clicked()
+{
+    del_item(ui->tableDevices);
+}
 
 void MainWindow::on_cboxUpdateSMBIOSMode_currentIndexChanged(
     const QString& arg1)
