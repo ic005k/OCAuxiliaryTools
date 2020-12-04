@@ -43,7 +43,7 @@ public:
 
     RecentFiles* m_recentFiles;
 
-    void ParserACPI(QVariantMap map); //分析ACPI
+    void ParserACPI(QVariantMap map);
     void ParserBooter(QVariantMap map);
     void ParserDP(QVariantMap map);
     void ParserKernel(QVariantMap map);
@@ -66,7 +66,7 @@ public:
     QVariantMap SavePlatformInfo();
     QVariantMap SaveUEFI();
 
-    void initui_acpi(); //初始化acpiui
+    void initui_acpi();
     void initui_booter();
     void initui_dp();
     void initui_kernel();
@@ -93,9 +93,9 @@ public:
     QString ByteToHexStr(QByteArray ba);
 
     QString title;
-    bool loading = false; //数据是否加载中，用于 设备属性 等表
+    bool loading = false;
 
-    void test(bool test); //用于测试按钮的可视
+    void test(bool test);
 
     void about();
 
@@ -1215,7 +1215,7 @@ public:
                     // painter->drawRoundedRect(tab->rect, 5, 5);
                     painter->restore();
                 }
-                // hover状态
+
                 else if (tab->state & QStyle::State_MouseOver) {
                     painter->save();
                     // painter->setBrush(QBrush(0x004ea1));
@@ -1229,7 +1229,7 @@ public:
                     painter->save();
                     painter->setBrush(QBrush(0x78aadc));
 
-                    painter->drawRect(allRect.adjusted(0, 0, 0, 0)); //底色按钮
+                    painter->drawRect(allRect.adjusted(0, 0, 0, 0));
                     // painter->drawRoundedRect(allRect, 5, 5);
 
                     painter->restore();
@@ -1306,7 +1306,7 @@ public:
                     painter->drawRoundedRect(tab->rect, 5, 5);
                     painter->restore();
                 }
-                // hover状态
+
                 else if (tab->state & QStyle::State_MouseOver) {
                     painter->save();
                     // painter->setBrush(QBrush(0x004ea1));
