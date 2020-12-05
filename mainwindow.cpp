@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     test(false);
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.04";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.05";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -122,12 +122,10 @@ MainWindow::MainWindow(QWidget* parent)
 
     //设置QToolTip颜色
     /*QPalette palette = QToolTip::palette();
-palette.setColor(QPalette::Inactive,QPalette::ToolTipBase,Qt::white);
-//设置ToolTip背景色
-palette.setColor(QPalette::Inactive,QPalette::ToolTipText,QColor(50, 50, 255,
-255)); 	//设置ToolTip字体色 QToolTip::setPalette(palette);
-QToolTip::setFont(font);*/
-    //设置ToolTip字体
+    palette.setColor(QPalette::Inactive, QPalette::ToolTipBase, Qt::white);*/
+    //设置ToolTip背景色
+    /*palette.setColor(QPalette::Inactive, QPalette::ToolTipText, QColor(50, 50, 255, 255));
+    QToolTip::setFont(font);*/
 
     //最近打开的文件
     QCoreApplication::setOrganizationName("ic005k");
@@ -326,7 +324,7 @@ void MainWindow::ParserACPI(QVariantMap map)
     //分析"Add"
     QVariantList map_add = map["Add"].toList();
     // qDebug() << map_add;
-    ui->table_acpi_add->setRowCount(map_add.count()); //设置行的列数
+    ui->table_acpi_add->setRowCount(map_add.count());
     for (int i = 0; i < map_add.count(); i++) {
         QVariantMap map3 = map_add.at(i).toMap();
 
@@ -342,7 +340,7 @@ void MainWindow::ParserACPI(QVariantMap map)
     //分析Delete
     QVariantList map_del = map["Delete"].toList();
     // qDebug() << map_del;
-    ui->table_acpi_del->setRowCount(map_del.count()); //设置行的列数
+    ui->table_acpi_del->setRowCount(map_del.count());
     for (int i = 0; i < map_del.count(); i++) {
         QVariantMap map3 = map_del.at(i).toMap();
 
@@ -367,7 +365,7 @@ void MainWindow::ParserACPI(QVariantMap map)
 
     //分析Patch
     QVariantList map_patch = map["Patch"].toList();
-    ui->table_acpi_patch->setRowCount(map_patch.count()); //设置行的列数
+    ui->table_acpi_patch->setRowCount(map_patch.count());
     for (int i = 0; i < map_patch.count(); i++) {
         QVariantMap map3 = map_patch.at(i).toMap();
 
@@ -568,7 +566,7 @@ void MainWindow::ParserBooter(QVariantMap map)
     QVariantList map_add = map["MmioWhitelist"].toList();
 
     // qDebug() << map_add;
-    ui->table_booter->setRowCount(map_add.count()); //设置行的列数
+    ui->table_booter->setRowCount(map_add.count());
     for (int i = 0; i < map_add.count(); i++) {
         QVariantMap map3 = map_add.at(i).toMap();
 
@@ -918,7 +916,7 @@ void MainWindow::ParserKernel(QVariantMap map)
     //分析"Add"
     QVariantList map_add = map["Add"].toList();
 
-    ui->table_kernel_add->setRowCount(map_add.count()); //设置行的列数
+    ui->table_kernel_add->setRowCount(map_add.count());
     for (int i = 0; i < map_add.count(); i++) {
         QVariantMap map3 = map_add.at(i).toMap();
 
@@ -954,7 +952,7 @@ void MainWindow::ParserKernel(QVariantMap map)
     // Block
     QVariantList map_block = map["Block"].toList();
 
-    ui->table_kernel_block->setRowCount(map_block.count()); //设置行的列数
+    ui->table_kernel_block->setRowCount(map_block.count());
     for (int i = 0; i < map_block.count(); i++) {
         QVariantMap map3 = map_block.at(i).toMap();
 
@@ -984,7 +982,7 @@ void MainWindow::ParserKernel(QVariantMap map)
     //分析"Force"
     QVariantList map_Force = map["Force"].toList();
 
-    ui->table_kernel_Force->setRowCount(map_Force.count()); //设置行的列数
+    ui->table_kernel_Force->setRowCount(map_Force.count());
     for (int i = 0; i < map_Force.count(); i++) {
         QVariantMap map3 = map_Force.at(i).toMap();
 
@@ -1023,7 +1021,7 @@ void MainWindow::ParserKernel(QVariantMap map)
     // Patch
     QVariantList map_patch = map["Patch"].toList();
 
-    ui->table_kernel_patch->setRowCount(map_patch.count()); //设置行的列数
+    ui->table_kernel_patch->setRowCount(map_patch.count());
     for (int i = 0; i < map_patch.count(); i++) {
         QVariantMap map3 = map_patch.at(i).toMap();
 
@@ -1344,7 +1342,7 @@ void MainWindow::ParserMisc(QVariantMap map)
 
     // BlessOverride(数组)
     QVariantList map_BlessOverride = map["BlessOverride"].toList();
-    ui->tableBlessOverride->setRowCount(map_BlessOverride.count()); //设置行的列数
+    ui->tableBlessOverride->setRowCount(map_BlessOverride.count());
     for (int i = 0; i < map_BlessOverride.count(); i++) {
         QTableWidgetItem* newItem1;
         newItem1 = new QTableWidgetItem(map_BlessOverride.at(i).toString());
@@ -1353,7 +1351,7 @@ void MainWindow::ParserMisc(QVariantMap map)
 
     // Entries
     QVariantList map_Entries = map["Entries"].toList();
-    ui->tableEntries->setRowCount(map_Entries.count()); //设置行的列数
+    ui->tableEntries->setRowCount(map_Entries.count());
     for (int i = 0; i < map_Entries.count(); i++) {
         QVariantMap map3 = map_Entries.at(i).toMap();
 
@@ -1379,7 +1377,7 @@ void MainWindow::ParserMisc(QVariantMap map)
 
     // Tools
     QVariantList map_Tools = map["Tools"].toList();
-    ui->tableTools->setRowCount(map_Tools.count()); //设置行的列数
+    ui->tableTools->setRowCount(map_Tools.count());
     for (int i = 0; i < map_Tools.count(); i++) {
         QVariantMap map3 = map_Tools.at(i).toMap();
 
@@ -2147,7 +2145,7 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     // Memory-Devices
     QVariantList mapMemoryDevices = mapMemory["Devices"].toList();
 
-    ui->tableDevices->setRowCount(mapMemoryDevices.count()); //设置行的列数
+    ui->tableDevices->setRowCount(mapMemoryDevices.count());
     for (int i = 0; i < mapMemoryDevices.count(); i++) {
         QVariantMap map3 = mapMemoryDevices.at(i).toMap();
 
@@ -3263,25 +3261,22 @@ QByteArray MainWindow::HexStrToByte(QString value)
     int k = 0;
     ba.resize(len / 2);
     for (int i = 0; i < len / 2; i++) {
-
-        // qDebug() << i << k;
-
         byte.push_back(value.mid(k, 2));
         ba[k / 2] = byte[k / 2].toUInt(nullptr, 16);
         k = k + 2;
     }
 
-    /*QString c1 , c2 , c3 , c4;
-c1 = value.mid(0 , 2);
-c2 = value.mid(2 , 2);
-c3 = value.mid(4 , 2);
-c4 = value.mid(6 , 2);
+    /*QString c1, c2, c3, c4;
+    c1 = value.mid(0, 2);
+    c2 = value.mid(2, 2);
+    c3 = value.mid(4, 2);
+    c4 = value.mid(6, 2);
 
-ba.resize(4);
-ba[0] = c1.toUInt(nullptr , 16);
-ba[1] = c2.toUInt(nullptr , 16);
-ba[2] = c3.toUInt(nullptr , 16);
-ba[3] = c4.toUInt(nullptr , 16);*/
+    ba.resize(4);
+    ba[0] = c1.toUInt(nullptr, 16);
+    ba[1] = c2.toUInt(nullptr, 16);
+    ba[2] = c3.toUInt(nullptr, 16);
+    ba[3] = c4.toUInt(nullptr, 16);*/
 
     return ba;
 }
@@ -3312,6 +3307,8 @@ QByteArray MainWindow::HexStringToByteArray(QString HexString)
 
 void MainWindow::on_table_acpi_add_cellClicked(int row, int column)
 {
+    if (!ui->table_acpi_add->currentIndex().isValid())
+        return;
 
     enabled_change(ui->table_acpi_add, row, column, 2);
 
@@ -3334,20 +3331,23 @@ void MainWindow::init_enabled_data(QTableWidget* table, int row, int column,
         chkbox->setCheckState(Qt::Unchecked);
 }
 
-void MainWindow::enabled_change(QTableWidget* table, int row, int column,
-    int cc)
+void MainWindow::enabled_change(QTableWidget* table, int row, int column, int cc)
 {
-    if (column == cc) {
-        if (table->item(row, column)->checkState() == Qt::Checked) {
 
-            table->item(row, column)->setTextAlignment(Qt::AlignCenter);
-            table->item(row, column)->setText("true");
+    if (table->currentIndex().isValid()) {
 
-        } else {
-            if (table->item(row, column)->checkState() == Qt::Unchecked) {
+        if (column == cc) {
+            if (table->item(row, column)->checkState() == Qt::Checked) {
 
                 table->item(row, column)->setTextAlignment(Qt::AlignCenter);
-                table->item(row, column)->setText("false");
+                table->item(row, column)->setText("true");
+
+            } else {
+                if (table->item(row, column)->checkState() == Qt::Unchecked) {
+
+                    table->item(row, column)->setTextAlignment(Qt::AlignCenter);
+                    table->item(row, column)->setText("false");
+                }
             }
         }
     }
@@ -3355,6 +3355,9 @@ void MainWindow::enabled_change(QTableWidget* table, int row, int column,
 
 void MainWindow::on_table_acpi_del_cellClicked(int row, int column)
 {
+    if (!ui->table_acpi_del->currentIndex().isValid())
+        return;
+
     enabled_change(ui->table_acpi_del, row, column, 4);
     enabled_change(ui->table_acpi_del, row, column, 5);
 
@@ -3363,6 +3366,9 @@ void MainWindow::on_table_acpi_del_cellClicked(int row, int column)
 
 void MainWindow::on_table_acpi_patch_cellClicked(int row, int column)
 {
+    if (!ui->table_acpi_patch->currentIndex().isValid())
+        return;
+
     enabled_change(ui->table_acpi_patch, row, column, 11);
 
     ui->statusbar->showMessage(ui->table_acpi_patch->currentItem()->text());
@@ -3370,6 +3376,9 @@ void MainWindow::on_table_acpi_patch_cellClicked(int row, int column)
 
 void MainWindow::on_table_booter_cellClicked(int row, int column)
 {
+    if (!ui->table_booter->currentIndex().isValid())
+        return;
+
     enabled_change(ui->table_booter, row, column, 2);
 
     ui->statusbar->showMessage(ui->table_booter->currentItem()->text());
@@ -3377,6 +3386,9 @@ void MainWindow::on_table_booter_cellClicked(int row, int column)
 
 void MainWindow::on_table_kernel_add_cellClicked(int row, int column)
 {
+    if (!ui->table_kernel_add->currentIndex().isValid())
+        return;
+
     enabled_change(ui->table_kernel_add, row, column, 6);
 
     if (column == 7) {
@@ -3400,6 +3412,9 @@ void MainWindow::on_table_kernel_add_cellClicked(int row, int column)
 
 void MainWindow::on_table_kernel_block_cellClicked(int row, int column)
 {
+    if (!ui->table_kernel_block->currentIndex().isValid())
+        return;
+
     enabled_change(ui->table_kernel_block, row, column, 4);
 
     if (column == 5) {
@@ -3423,6 +3438,9 @@ void MainWindow::on_table_kernel_block_cellClicked(int row, int column)
 
 void MainWindow::on_table_kernel_patch_cellClicked(int row, int column)
 {
+    if (!ui->table_kernel_patch->currentIndex().isValid())
+        return;
+
     enabled_change(ui->table_kernel_patch, row, column, 12);
 
     if (column == 13) {
@@ -3446,6 +3464,9 @@ void MainWindow::on_table_kernel_patch_cellClicked(int row, int column)
 
 void MainWindow::on_tableEntries_cellClicked(int row, int column)
 {
+    if (!ui->tableEntries->currentIndex().isValid())
+        return;
+
     enabled_change(ui->tableEntries, row, column, 5);
 
     enabled_change(ui->tableEntries, row, column, 4);
@@ -3457,6 +3478,9 @@ void MainWindow::on_tableEntries_cellClicked(int row, int column)
 
 void MainWindow::on_tableTools_cellClicked(int row, int column)
 {
+    if (!ui->tableTools->currentIndex().isValid())
+        return;
+
     enabled_change(ui->tableTools, row, column, 5);
 
     enabled_change(ui->tableTools, row, column, 4);
@@ -3470,6 +3494,10 @@ void MainWindow::on_tableTools_cellClicked(int row, int column)
 
 void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
 {
+
+    if (!ui->table_uefi_ReservedMemory->currentIndex().isValid())
+        return;
+
     enabled_change(ui->table_uefi_ReservedMemory, row, column, 4);
 
     if (column == 3) {
@@ -3723,7 +3751,7 @@ void MainWindow::on_btnACPIAdd_Add_clicked()
 {
     QFileDialog fd;
 
-    QStringList FileName = fd.getOpenFileNames(this, "文件", "", "文件(*.aml);;所有文件(*.*)");
+    QStringList FileName = fd.getOpenFileNames(this, "file", "", "acpi file(*.aml);;all(*.*)");
     if (FileName.isEmpty())
 
         return;
@@ -3830,8 +3858,8 @@ void MainWindow::on_btnKernelAdd_Add_clicked()
 
 #ifdef Q_OS_MAC
     // mac
-    FileName = fd.getOpenFileNames(this, "kext文件", "",
-        "kext文件(*.kext);;所有文件(*.*)");
+    FileName = fd.getOpenFileNames(this, "kext", "",
+        "kext(*.kext);;all(*.*)");
 #endif
 
     int file_count = FileName.count();
@@ -3991,7 +4019,7 @@ void MainWindow::on_btnMiscTools_Add_clicked()
     QFileDialog fd;
 
     QStringList FileName = fd.getOpenFileNames(this, "tools efi file", "",
-        "file(*.efi);;all files(*.*)");
+        "efi file(*.efi);;all files(*.*)");
     if (FileName.isEmpty())
 
         return;
@@ -4257,7 +4285,7 @@ void MainWindow::on_btnUEFIDrivers_Add_clicked()
 {
     QFileDialog fd;
 
-    QStringList FileName = fd.getOpenFileNames(this, "文件", "", "文件(*.efi);;所有文件(*.*)");
+    QStringList FileName = fd.getOpenFileNames(this, "file", "", "efi file(*.efi);;all(*.*)");
     if (FileName.isEmpty())
 
         return;
@@ -4404,8 +4432,8 @@ void MainWindow::on_btnSaveAs_clicked()
 {
     QFileDialog fd;
 
-    PlistFileName = fd.getSaveFileName(this, "配置文件", "",
-        "配置文件(*.plist);;所有文件(*.*)");
+    PlistFileName = fd.getSaveFileName(this, "plist", "",
+        "plist(*.plist);;all(*.*)");
     if (!PlistFileName.isEmpty()) {
         setWindowTitle(title + "      [*]" + PlistFileName);
         SaveFileName = PlistFileName;
@@ -4720,6 +4748,9 @@ void MainWindow::on_btnSystemUUID_clicked()
 
 void MainWindow::on_table_kernel_Force_cellClicked(int row, int column)
 {
+    if (!ui->table_kernel_Force->currentIndex().isValid())
+        return;
+
     enabled_change(ui->table_kernel_Force, row, column, 7);
 
     if (column == 8) {
