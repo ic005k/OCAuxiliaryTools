@@ -28,7 +28,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -321,6 +321,63 @@ waking from hibernation.</string>
           <property name="documentMode">
            <bool>true</bool>
           </property>
+          <widget class="QWidget" name="tab_39">
+           <attribute name="title">
+            <string>Patch</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_66">
+            <item row="0" column="0" colspan="3">
+             <widget class="QTableWidget" name="table_Booter_patch">
+              <property name="rowCount">
+               <number>0</number>
+              </property>
+              <property name="columnCount">
+               <number>13</number>
+              </property>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="btnBooterPatchAdd">
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="btnBooterPatchDel">
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <spacer name="horizontalSpacer_75">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>1023</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
           <widget class="QWidget" name="tab_12">
            <attribute name="title">
             <string>MmioWhitelist</string>
@@ -1067,7 +1124,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>

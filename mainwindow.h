@@ -162,6 +162,7 @@ private slots:
     void arch_ForceChange();
     void arch_blockChange();
     void arch_patchChange();
+    void arch_Booter_patchChange();
     void ReservedMemoryTypeChange();
 
     void on_btnOpen_clicked();
@@ -938,6 +939,14 @@ private slots:
     void on_btnOcvalidate_clicked();
 
     void readResultCheckData();
+
+    void on_btnBooterPatchAdd_clicked();
+
+    void on_btnBooterPatchDel_clicked();
+
+    void on_table_Booter_patch_cellClicked(int row, int column);
+
+    void on_table_Booter_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
 private:
     Ui::MainWindow* ui;

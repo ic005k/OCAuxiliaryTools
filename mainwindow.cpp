@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     test(false);
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.05";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.06";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -537,6 +537,57 @@ void MainWindow::initui_booter()
 {
     QTableWidgetItem* id0;
 
+    // Patch
+
+    ui->table_Booter_patch->setColumnCount(11);
+
+    ui->table_Booter_patch->setColumnWidth(0, 300);
+    id0 = new QTableWidgetItem(tr("Identifier"));
+    ui->table_Booter_patch->setHorizontalHeaderItem(0, id0);
+
+    ui->table_Booter_patch->setColumnWidth(1, 350);
+    id0 = new QTableWidgetItem(tr("Comment"));
+    ui->table_Booter_patch->setHorizontalHeaderItem(1, id0);
+
+    ui->table_Booter_patch->setColumnWidth(2, 300);
+    id0 = new QTableWidgetItem(tr("Find"));
+    ui->table_Booter_patch->setHorizontalHeaderItem(2, id0);
+
+    ui->table_Booter_patch->setColumnWidth(3, 300);
+    id0 = new QTableWidgetItem(tr("Replace"));
+    ui->table_Booter_patch->setHorizontalHeaderItem(3, id0);
+
+    ui->table_Booter_patch->setColumnWidth(4, 350);
+    id0 = new QTableWidgetItem(tr("Mask"));
+    ui->table_Booter_patch->setHorizontalHeaderItem(4, id0);
+
+    ui->table_Booter_patch->setColumnWidth(5, 350);
+    id0 = new QTableWidgetItem(tr("ReplaceMask"));
+    ui->table_Booter_patch->setHorizontalHeaderItem(5, id0);
+
+    ui->table_Booter_patch->setColumnWidth(0, 350);
+    id0 = new QTableWidgetItem(tr("Count"));
+    ui->table_Booter_patch->setHorizontalHeaderItem(6, id0);
+
+    ui->table_Booter_patch->setColumnWidth(0, 350);
+    id0 = new QTableWidgetItem(tr("Limit"));
+    ui->table_Booter_patch->setHorizontalHeaderItem(7, id0);
+
+    ui->table_Booter_patch->setColumnWidth(0, 350);
+    id0 = new QTableWidgetItem(tr("Skip"));
+    ui->table_Booter_patch->setHorizontalHeaderItem(8, id0);
+
+    ui->table_Booter_patch->setColumnWidth(0, 350);
+    id0 = new QTableWidgetItem(tr("Enabled"));
+    ui->table_Booter_patch->setHorizontalHeaderItem(9, id0);
+
+    id0 = new QTableWidgetItem(tr("Arch"));
+    ui->table_Booter_patch->setHorizontalHeaderItem(10, id0);
+
+    ui->table_Booter_patch->setAlternatingRowColors(true);
+
+    //MmioWhitelist
+
     ui->table_booter->setColumnWidth(0, 450);
     id0 = new QTableWidgetItem(tr("Address"));
     ui->table_booter->setHorizontalHeaderItem(0, id0);
@@ -563,9 +614,67 @@ void MainWindow::ParserBooter(QVariantMap map)
     if (map.isEmpty())
         return;
 
+    // Patch
+    QVariantList map_patch = map["Patch"].toList();
+
+    ui->table_Booter_patch->setRowCount(map_patch.count());
+    for (int i = 0; i < map_patch.count(); i++) {
+        QVariantMap map3 = map_patch.at(i).toMap();
+
+        QByteArray ba = map3["Find"].toByteArray();
+
+        QTableWidgetItem* newItem1;
+
+        newItem1 = new QTableWidgetItem(map3["Identifier"].toString());
+        ui->table_Booter_patch->setItem(i, 0, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["Comment"].toString());
+        ui->table_Booter_patch->setItem(i, 1, newItem1);
+
+        //此时需要将ASCII转换成HEX
+        QByteArray tohex = map3["Find"].toByteArray();
+        QString va = tohex.toHex().toUpper();
+        newItem1 = new QTableWidgetItem(va);
+        ui->table_Booter_patch->setItem(i, 2, newItem1);
+
+        tohex = map3["Replace"].toByteArray();
+        va = tohex.toHex().toUpper();
+        newItem1 = new QTableWidgetItem(va);
+        ui->table_Booter_patch->setItem(i, 3, newItem1);
+
+        tohex = map3["Mask"].toByteArray();
+        va = tohex.toHex().toUpper();
+        newItem1 = new QTableWidgetItem(va);
+        ui->table_Booter_patch->setItem(i, 4, newItem1);
+
+        tohex = map3["ReplaceMask"].toByteArray();
+        va = tohex.toHex().toUpper();
+        newItem1 = new QTableWidgetItem(va);
+        ui->table_Booter_patch->setItem(i, 5, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["Count"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_Booter_patch->setItem(i, 6, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["Limit"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_Booter_patch->setItem(i, 7, newItem1);
+
+        newItem1 = new QTableWidgetItem(map3["Skip"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_Booter_patch->setItem(i, 8, newItem1);
+
+        init_enabled_data(ui->table_Booter_patch, i, 9, map3["Enabled"].toString());
+
+        newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_Booter_patch->setItem(i, 10, newItem1);
+    }
+
+    //MmioWhitelist
+
     QVariantList map_add = map["MmioWhitelist"].toList();
 
-    // qDebug() << map_add;
     ui->table_booter->setRowCount(map_add.count());
     for (int i = 0; i < map_add.count(); i++) {
         QVariantMap map3 = map_add.at(i).toMap();
@@ -847,7 +956,7 @@ void MainWindow::initui_kernel()
     ui->table_kernel_patch->setHorizontalHeaderItem(1, id0);
 
     ui->table_kernel_patch->setColumnWidth(0, 350);
-    id0 = new QTableWidgetItem(tr("Identifier"));
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_kernel_patch->setHorizontalHeaderItem(2, id0);
 
     ui->table_kernel_patch->setColumnWidth(3, 300);
@@ -1086,6 +1195,7 @@ void MainWindow::ParserKernel(QVariantMap map)
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_kernel_patch->setItem(i, 13, newItem1);
     }
+
     // Emulate
     QVariantMap map_Emulate = map["Emulate"].toMap();
     ui->editCpuid1Data->setText(
@@ -2573,10 +2683,37 @@ QVariantMap MainWindow::SaveACPI()
 
 QVariantMap MainWindow::SaveBooter()
 {
-    // MmioWhitelist
+
     QVariantMap subMap;
     QVariantList arrayList;
     QVariantMap valueList;
+
+    // Patch
+    arrayList.clear();
+    valueList.clear();
+    for (int i = 0; i < ui->table_Booter_patch->rowCount(); i++) {
+        valueList["Identifier"] = ui->table_Booter_patch->item(i, 0)->text();
+
+        valueList["Comment"] = ui->table_Booter_patch->item(i, 1)->text();
+        valueList["Find"] = HexStrToByte(ui->table_Booter_patch->item(i, 2)->text());
+        valueList["Replace"] = HexStrToByte(ui->table_Booter_patch->item(i, 3)->text());
+        valueList["Mask"] = HexStrToByte(ui->table_Booter_patch->item(i, 4)->text());
+        valueList["ReplaceMask"] = HexStrToByte(ui->table_Booter_patch->item(i, 5)->text());
+
+        valueList["Count"] = ui->table_Booter_patch->item(i, 6)->text().toLongLong();
+        valueList["Limit"] = ui->table_Booter_patch->item(i, 7)->text().toLongLong();
+        valueList["Skip"] = ui->table_Booter_patch->item(i, 8)->text().toLongLong();
+        valueList["Enabled"] = getBool(ui->table_Booter_patch, i, 9);
+        valueList["Arch"] = ui->table_Booter_patch->item(i, 10)->text();
+
+        arrayList.append(valueList);
+    }
+
+    subMap["Patch"] = arrayList;
+
+    // MmioWhitelist
+    arrayList.clear();
+    valueList.clear();
 
     for (int i = 0; i < ui->table_booter->rowCount(); i++) {
 
@@ -4516,6 +4653,11 @@ void MainWindow::arch_blockChange()
 void MainWindow::arch_patchChange()
 {
     ui->table_kernel_patch->item(c_row, 13)->setText(cboxArch->currentText());
+}
+
+void MainWindow::arch_Booter_patchChange()
+{
+    ui->table_Booter_patch->item(c_row, 10)->setText(cboxArch->currentText());
 }
 
 void MainWindow::ReservedMemoryTypeChange()
@@ -8150,4 +8292,56 @@ void MainWindow::readResultCheckData()
         box.setText(result);
 
     box.exec();
+}
+
+void MainWindow::on_btnBooterPatchAdd_clicked()
+{
+    add_item(ui->table_Booter_patch, 10);
+    init_enabled_data(ui->table_Booter_patch,
+        ui->table_Booter_patch->rowCount() - 1, 9, "true");
+
+    QTableWidgetItem* newItem1 = new QTableWidgetItem("Any");
+    newItem1->setTextAlignment(Qt::AlignCenter);
+    ui->table_Booter_patch->setItem(ui->table_Booter_patch->currentRow(), 10,
+        newItem1);
+
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_btnBooterPatchDel_clicked()
+{
+    del_item(ui->table_Booter_patch);
+}
+
+void MainWindow::on_table_Booter_patch_cellClicked(int row, int column)
+{
+    if (!ui->table_Booter_patch->currentIndex().isValid())
+        return;
+
+    enabled_change(ui->table_Booter_patch, row, column, 9);
+
+    if (column == 10) {
+
+        cboxArch = new QComboBox;
+        cboxArch->addItem("Any");
+        cboxArch->addItem("i386");
+        cboxArch->addItem("x86_64");
+        cboxArch->addItem("");
+
+        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this, SLOT(arch_Booter_patchChange()));
+        c_row = row;
+
+        ui->table_Booter_patch->setCellWidget(row, column, cboxArch);
+        cboxArch->setCurrentText(ui->table_Booter_patch->item(row, 10)->text());
+    }
+
+    ui->statusbar->showMessage(ui->table_Booter_patch->currentItem()->text());
+}
+
+void MainWindow::on_table_Booter_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    if (currentRow == 0 && currentColumn == 0 && previousColumn == 0) {
+    }
+
+    ui->table_Booter_patch->removeCellWidget(previousRow, 10);
 }
