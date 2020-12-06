@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     test(false);
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.06";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.07";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -2358,6 +2358,13 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
 
 void MainWindow::initui_UEFI()
 {
+    //Audio
+    QStringList list;
+    list.append("Audo");
+    list.append("Enabled");
+    list.append("Disabled");
+    ui->cboxPlayChime->addItems(list);
+
     // Drivers
     QTableWidgetItem* id0;
 
@@ -2426,7 +2433,12 @@ void MainWindow::ParserUEFI(QVariantMap map)
     //分析Audio
     QVariantMap map_audio = map["Audio"].toMap();
     ui->chkAudioSupport->setChecked(map_audio["AudioSupport"].toBool());
-    ui->chkPlayChime->setChecked(map_audio["PlayChime"].toBool());
+
+    QString strPlayChime = map_audio["PlayChime"].toString();
+    if (strPlayChime == "true" || strPlayChime == "false")
+        ui->cboxPlayChime->setCurrentText("Auto");
+    else
+        ui->cboxPlayChime->setCurrentText(map_audio["PlayChime"].toString());
 
     ui->editAudioCodec->setText(map_audio["AudioCodec"].toString());
     ui->editAudioDevice->setText(map_audio["AudioDevice"].toString());
@@ -3274,7 +3286,7 @@ QVariantMap MainWindow::SaveUEFI()
     dictList["AudioOut"] = ui->editAudioOut->text().toLongLong();
     dictList["AudioSupport"] = getChkBool(ui->chkAudioSupport);
     dictList["MinimumVolume"] = ui->editMinimumVolume->text().toLongLong();
-    dictList["PlayChime"] = getChkBool(ui->chkPlayChime);
+    dictList["PlayChime"] = ui->cboxPlayChime->currentText();
     dictList["VolumeAmplifier"] = ui->editVolumeAmplifier->text().toLongLong();
     subMap["Audio"] = dictList;
 

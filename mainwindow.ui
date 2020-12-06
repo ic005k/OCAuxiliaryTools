@@ -28,7 +28,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5113,7 +5113,7 @@ with existing Windows activation and custom OEM software but potentially breakin
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5233,7 +5233,7 @@ versions can be found in OpenCore boot log and OcApfsLib.</string>
             <string>Audio</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_32">
-            <item row="0" column="0" colspan="2">
+            <item row="0" column="0">
              <widget class="QLabel" name="label_32">
               <property name="toolTip">
                <string>Normally this contains first audio codec address on the builtin analog audio controller (HDEF). Audio codec
@@ -5252,7 +5252,7 @@ IOHDACodecAddress field.</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="2">
+            <item row="0" column="1">
              <widget class="QLineEdit" name="editAudioCodec"/>
             </item>
             <item row="1" column="0">
@@ -5274,7 +5274,7 @@ the first available audio controller to be used.</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
+            <item row="1" column="1">
              <widget class="QLineEdit" name="editAudioDevice"/>
             </item>
             <item row="2" column="0">
@@ -5295,10 +5295,10 @@ The quickest way to find the right port is to bruteforce the values from 0 to N 
               </property>
              </widget>
             </item>
-            <item row="2" column="2">
+            <item row="2" column="1">
              <widget class="QLineEdit" name="editAudioOut"/>
             </item>
-            <item row="3" column="0" colspan="2">
+            <item row="3" column="0">
              <widget class="QLabel" name="label_35">
               <property name="toolTip">
                <string>Screen reader will use this volume level, when the calculated volume level is less than MinimumVolume. Boot
@@ -5312,10 +5312,10 @@ chime sound will not play if the calculated volume level is less than MinimumVol
               </property>
              </widget>
             </item>
-            <item row="3" column="2">
+            <item row="3" column="1">
              <widget class="QLineEdit" name="editMinimumVolume"/>
             </item>
-            <item row="4" column="0" colspan="2">
+            <item row="4" column="0">
              <widget class="QLabel" name="label_36">
               <property name="toolTip">
                <string>Volume level range read from SystemAudioVolume varies depending on the codec. To transform read value in
@@ -5334,10 +5334,38 @@ Note: the transformation used in macOS is not linear, but it is very close and t
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
+            <item row="4" column="1">
              <widget class="QLineEdit" name="editVolumeAmplifier"/>
             </item>
             <item row="5" column="0">
+             <widget class="QLabel" name="label_70">
+              <property name="toolTip">
+               <string>Enabling this setting plays boot chime through builtin audio support. Volume level is determined by MinimumVolume
+and VolumeAmplifier settings and SystemAudioVolume NVRAM variable. Possible values include:
+
+• Auto — Enables chime when StartupMute NVRAM variable is not present or set to 00. 
+• Enabled — Enables chime unconditionally.
+• Disabled — Disables chime unconditionally.
+
+Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid conflicts when the firmware
+is able to play boot chime.</string>
+              </property>
+              <property name="statusTip">
+               <string>Play chime sound at startup.</string>
+              </property>
+              <property name="text">
+               <string>PlayChime</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QComboBox" name="cboxPlayChime">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
              <widget class="QCheckBox" name="chkAudioSupport">
               <property name="toolTip">
                <string>Enabling this setting routes audio playback from builtin protocols to a dedicated audio port (AudioOut) of the
@@ -5348,22 +5376,6 @@ specified codec (AudioCodec) located on the audio controller (AudioDevice).</str
               </property>
               <property name="text">
                <string>AudioSupport</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1" colspan="2">
-             <widget class="QCheckBox" name="chkPlayChime">
-              <property name="toolTip">
-               <string>Enabling this setting plays boot chime through builtin audio support. Volume level is determined by MinimumVolume
-and VolumeAmplifier settings and SystemAudioVolume NVRAM variable.
-Note: this setting is separate from StartupMute NVRAM variable to avoid conflicts when the firmware is able to
-play boot chime.</string>
-              </property>
-              <property name="statusTip">
-               <string> Play chime sound at startup.</string>
-              </property>
-              <property name="text">
-               <string>PlayChime</string>
               </property>
              </widget>
             </item>
