@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     test(false);
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.07";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.08";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -101,7 +101,7 @@ MainWindow::MainWindow(QWidget* parent)
     reg_win();
     font.setPixelSize(17);
     ui->tabTotal->setDocumentMode(false);
-    ui->btnOcvalidate->setEnabled(false);
+    ui->btnOcvalidate->setEnabled(true);
 
 #endif
 
@@ -6153,18 +6153,21 @@ void MainWindow::PickerAttributes()
     pav2 = 2;
     pav3 = 4;
     pav4 = 8;
+    pav5 = 16;
 
     chk_pa.clear();
     chk_pa.append(ui->chkPA1);
     chk_pa.append(ui->chkPA2);
     chk_pa.append(ui->chkPA3);
     chk_pa.append(ui->chkPA4);
+    chk_pa.append(ui->chkPA5);
 
     v_pa.clear();
     v_pa.append(pav1);
     v_pa.append(pav2);
     v_pa.append(pav3);
     v_pa.append(pav4);
+    v_pa.append(pav5);
 
     for (int i = 0; i < v_pa.count(); i++) {
         if (!chk_pa.at(i)->isChecked()) {
@@ -6189,6 +6192,11 @@ void MainWindow::on_chkPA3_clicked() { PickerAttributes(); }
 
 void MainWindow::on_chkPA4_clicked() { PickerAttributes(); }
 
+void MainWindow::on_chkPA5_clicked()
+{
+    PickerAttributes();
+}
+
 void MainWindow::on_editPickerAttributes_textChanged(const QString& arg1)
 {
     int total = arg1.toInt();
@@ -6197,18 +6205,21 @@ void MainWindow::on_editPickerAttributes_textChanged(const QString& arg1)
     pav2 = 2;
     pav3 = 4;
     pav4 = 8;
+    pav5 = 16;
 
     chk_pa.clear();
     chk_pa.append(ui->chkPA1);
     chk_pa.append(ui->chkPA2);
     chk_pa.append(ui->chkPA3);
     chk_pa.append(ui->chkPA4);
+    chk_pa.append(ui->chkPA5);
 
     v_pa.clear();
     v_pa.append(pav1);
     v_pa.append(pav2);
     v_pa.append(pav3);
     v_pa.append(pav4);
+    v_pa.append(pav5);
 
     scanPolicy = false;
     pickerAttributes = true;
@@ -7407,11 +7418,7 @@ void MainWindow::on_chkAudioSupport_stateChanged(int arg1)
     this->setWindowModified(true);
 }
 
-void MainWindow::on_chkPlayChime_stateChanged(int arg1)
-{
-    Q_UNUSED(arg1);
-    this->setWindowModified(true);
-}
+
 
 void MainWindow::on_chkConnectDrivers_stateChanged(int arg1)
 {
@@ -8275,6 +8282,7 @@ void MainWindow::on_btnOcvalidate_clicked()
     QFileInfo appInfo(qApp->applicationDirPath());
     chkdata = new QProcess;
 #ifdef Q_OS_WIN32
+    chkdata->start(appInfo.filePath() + "/ocvalidate.exe", QStringList() << SaveFileName);
 
 #endif
 
@@ -8357,3 +8365,11 @@ void MainWindow::on_table_Booter_patch_currentCellChanged(int currentRow, int cu
 
     ui->table_Booter_patch->removeCellWidget(previousRow, 10);
 }
+
+void MainWindow::on_cboxPlayChime_currentTextChanged(const QString& arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+

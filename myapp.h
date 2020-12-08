@@ -6,10 +6,14 @@
 
 class MyApplication : public QApplication {
 public:
-  MyApplication(int &argc, char **argv) : QApplication(argc, argv) {}
+    MyApplication(int& argc, char** argv)
+        : QApplication(argc, argv)
+    {
+    }
 
-  bool event(QEvent *event);
-  void new_win();
+    bool event(QEvent* event);
+
+    void new_win();
 };
 
 #endif // MYAPP_H

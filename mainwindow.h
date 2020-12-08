@@ -658,8 +658,6 @@ private slots:
 
     void on_chkAudioSupport_stateChanged(int arg1);
 
-    void on_chkPlayChime_stateChanged(int arg1);
-
     void on_chkConnectDrivers_stateChanged(int arg1);
 
     void on_chkKeyFiltering_stateChanged(int arg1);
@@ -948,6 +946,10 @@ private slots:
 
     void on_table_Booter_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
+    void on_cboxPlayChime_currentTextChanged(const QString& arg1);
+
+    void on_chkPA5_clicked();
+
 private:
     Ui::MainWindow* ui;
 
@@ -1006,7 +1008,7 @@ private:
 
     bool click = false;
 
-    int pav1, pav2, pav3, pav4;
+    int pav1, pav2, pav3, pav4, pav5;
     QVector<QCheckBox*> chk_pa;
     QVector<int> v_pa;
     void PickerAttributes();

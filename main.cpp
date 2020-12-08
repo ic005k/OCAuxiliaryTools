@@ -5,35 +5,37 @@
 extern QVector<QString> filelist;
 extern QWidgetList wdlist;
 extern QString PlistFileName;
-MainWindow *mw_one;
+MainWindow* mw_one;
 
-int main(int argc, char *argv[]) {
-  // QApplication a(argc, argv);
-  MyApplication *a = new MyApplication(argc, argv);
+int main(int argc, char* argv[])
+{
 
-#ifdef Q_OS_WIN32
-
-  PlistFileName = QString::fromLocal8Bit(argv[1]); //解决乱码
+#ifdef Q_OS_LINUX
+    qputenv("QT_ENABLE_HIGHDPI_SCALING", "1");
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 
 #endif
 
-#ifdef Q_OS_LINUX
+    // QApplication a(argc, argv);
+    MyApplication* a = new MyApplication(argc, argv);
 
+#ifdef Q_OS_WIN32
+    PlistFileName = QString::fromLocal8Bit(argv[1]); //解决乱码
 #endif
 
 #ifdef Q_OS_MAC
 
 #endif
 
-  if (!PlistFileName.isEmpty()) {
-    a->new_win();
-  }
+    if (!PlistFileName.isEmpty()) {
+        a->new_win();
+    }
 
-  else {
+    else {
 
-    mw_one = new MainWindow();
-    mw_one->show();
-  }
+        mw_one = new MainWindow();
+        mw_one->show();
+    }
 
-  return a->exec();
+    return a->exec();
 }

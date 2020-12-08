@@ -19,44 +19,43 @@ class QAction;
  * a sub-menu that allows the user to select recently used files for opening.
  */
 class RecentFiles : public QObject {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit RecentFiles(
-      QMainWindow *parent =
-          NULL); /* Parent mainwindow, just for proper heirarchy, not actually
+    explicit RecentFiles(
+        QMainWindow* parent = NULL); /* Parent mainwindow, just for proper heirarchy, not actually
                     used outside QObject constr */
-  ~RecentFiles();
+    ~RecentFiles();
 
-  void attachToMenuAfterItem(QMenu *menu, QString text, const char *slotName);
+    void attachToMenuAfterItem(QMenu* menu, QString text, const char* slotName);
 
-  QStringList getRecentFiles() const;
-  void setMostRecentFile(const QString fileName);
-  QString strippedName(const QString &fullFileName);
+    QStringList getRecentFiles() const;
+    void setMostRecentFile(const QString fileName);
+    QString strippedName(const QString& fullFileName);
 
-  void setMenuEnabled(bool tf);
+    void setMenuEnabled(bool tf);
 
-  int numberOfRecentFilesToSave();
+    int numberOfRecentFilesToSave();
 
-  static const int MaxRecentFiles = 15; ///< Max number of names we keep.
+    static const int MaxRecentFiles = 15; ///< Max number of names we keep.
 
 public slots:
-  /// The application can set the number of recent files retained/reported here
-  void setNumOfRecentFiles(int n);
+    /// The application can set the number of recent files retained/reported here
+    void setNumOfRecentFiles(int n);
 
 signals:
-  void openFile(QString fileName);
-  void newMaxFilesShown(int);
+    void openFile(QString fileName);
+    void newMaxFilesShown(int);
 
 private slots:
-  void openRecentFile();
+    void openRecentFile();
 
 private:
-  void purgeMissingFilesFromList(QStringList &recentFileList);
-  void updateRecentFiles(QSettings &settings);
+    void purgeMissingFilesFromList(QStringList& recentFileList);
+    void updateRecentFiles(QSettings& settings);
 
-  QMenu *m_recentMenu;
-  QAction *m_recentMenuTriggeredAction;
-  QAction *m_recentFileActions[MaxRecentFiles];
+    QMenu* m_recentMenu;
+    QAction* m_recentMenuTriggeredAction;
+    QAction* m_recentFileActions[MaxRecentFiles];
 };
 
 #endif // RECENTFILES_H
