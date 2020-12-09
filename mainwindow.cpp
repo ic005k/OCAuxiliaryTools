@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     test(false);
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.08";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.09";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -7418,8 +7418,6 @@ void MainWindow::on_chkAudioSupport_stateChanged(int arg1)
     this->setWindowModified(true);
 }
 
-
-
 void MainWindow::on_chkConnectDrivers_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
@@ -8371,5 +8369,3 @@ void MainWindow::on_cboxPlayChime_currentTextChanged(const QString& arg1)
     Q_UNUSED(arg1);
     this->setWindowModified(true);
 }
-
-

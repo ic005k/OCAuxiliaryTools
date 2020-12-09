@@ -4,6 +4,7 @@
 // Qt includes
 #include <QDate>
 #include <QDateTime>
+#include <QDebug>
 #include <QDir>
 #include <QDomDocument>
 #include <QDomElement>
@@ -88,13 +89,12 @@ QDomElement PListSerializer::serializeMap(QDomDocument& doc,
 
 QString PListSerializer::toPList(const QVariant& variant, QString FileName)
 {
-    QDomDocument document(
-        QStringLiteral("plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" "
-                       "\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\""));
-    document.appendChild(document.createProcessingInstruction(
-        QStringLiteral("xml"),
-        QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")));
+    QDomDocument document("plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\"");
+
+    document.appendChild(document.createProcessingInstruction(QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")));
+
     QDomElement plist = document.createElement(QStringLiteral("plist"));
+
     plist.setAttribute(QStringLiteral("version"), QStringLiteral("1.0"));
     document.appendChild(plist);
     plist.appendChild(serializeElement(document, variant));
@@ -105,7 +105,8 @@ QString PListSerializer::toPList(const QVariant& variant, QString FileName)
         //   return false;
         QTextStream out(&file);
         out.setCodec("UTF-8");
-        document.save(out, 4, QDomNode::EncodingFromTextStream);
+        //document.save(out, 4, QDomNode::EncodingFromTextStream);
+        document.save(out, 4, QDomNode::EncodingFromDocument);
         file.close();
     }
 
