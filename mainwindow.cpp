@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     test(false);
 
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.09";
+    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.10";
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -2360,7 +2360,7 @@ void MainWindow::initui_UEFI()
 {
     //Audio
     QStringList list;
-    list.append("Audo");
+    list.append("Auto");
     list.append("Enabled");
     list.append("Disabled");
     ui->cboxPlayChime->addItems(list);
