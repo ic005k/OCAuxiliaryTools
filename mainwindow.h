@@ -20,6 +20,15 @@
 #include <QTranslator>
 #include <QUuid>
 
+//网络相关头文件
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
+//JSON相关头文件
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+
 #include "recentfiles.h"
 
 #ifdef Q_OS_WIN32
@@ -950,8 +959,20 @@ private slots:
 
     void on_chkPA5_clicked();
 
+    void on_btnCheckUpdate_clicked();
+
+    void replyFinished(QNetworkReply* reply);
+
 private:
     Ui::MainWindow* ui;
+
+    QNetworkAccessManager* manager;
+    int parse_UpdateJSON(QString str);
+    bool mac = false;
+    bool win = false;
+    bool linux = false;
+
+    QString CurVerison = "V1.0";
 
     QString CurrentDateTime;
 

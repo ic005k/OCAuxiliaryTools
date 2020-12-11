@@ -22,8 +22,8 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-
-    title = "QtOpenCoreConfigurator   V0.6.4-2020.12.10";
+    CurVerison = "20201210";
+    title = "QtOpenCoreConfigurator   V0.6.4-" + CurVerison;
     setWindowTitle(title);
 
     ui->tabTotal->setCurrentIndex(0);
@@ -102,18 +102,19 @@ MainWindow::MainWindow(QWidget* parent)
     font.setPixelSize(17);
     ui->tabTotal->setDocumentMode(false);
     ui->btnOcvalidate->setEnabled(true);
-
+    win = true;
 #endif
 
 #ifdef Q_OS_LINUX
     ui->btnMountEsp->setEnabled(false);
     font.setPixelSize(12);
     ui->btnOcvalidate->setEnabled(false);
-
+    linux = true;
 #endif
 
 #ifdef Q_OS_MAC
     font.setPixelSize(12);
+    mac = true;
 #endif
 
     QFileInfo appInfo(qApp->applicationFilePath());
@@ -135,12 +136,15 @@ MainWindow::MainWindow(QWidget* parent)
     m_recentFiles = new RecentFiles(this);
     if (!zh_cn)
         m_recentFiles->attachToMenuAfterItem(
-            ui->menuFile, "Save As...", SLOT(recentOpen(QString))); //在此处插入菜单
+            ui->menuFile, "Save As...", SLOT(recentOpen(QString)));
     else
         m_recentFiles->attachToMenuAfterItem(
-            ui->menuFile, "另存...", SLOT(recentOpen(QString))); //在此处插入菜单
+            ui->menuFile, "另存...", SLOT(recentOpen(QString)));
 
     m_recentFiles->setNumOfRecentFiles(10);
+
+    manager = new QNetworkAccessManager(this);
+    connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
 
     this->setWindowModified(false);
 }
@@ -8368,4 +8372,79 @@ void MainWindow::on_cboxPlayChime_currentTextChanged(const QString& arg1)
 {
     Q_UNUSED(arg1);
     this->setWindowModified(true);
+}
+
+void MainWindow::on_btnCheckUpdate_clicked()
+{
+
+    QNetworkRequest quest;
+    quest.setUrl(QUrl("https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/latest"));
+    quest.setHeader(QNetworkRequest::UserAgentHeader, "RT-Thread ART");
+    manager->get(quest);
+}
+
+void MainWindow::replyFinished(QNetworkReply* reply)
+{
+    QString str = reply->readAll();
+    QMessageBox box;
+    box.setText(str);
+    //box.exec();
+    //qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
+
+    parse_UpdateJSON(str);
+
+    reply->deleteLater();
+}
+
+int MainWindow::parse_UpdateJSON(QString str)
+{
+
+    QJsonParseError err_rpt;
+    QJsonDocument root_Doc = QJsonDocument::fromJson(str.toUtf8(), &err_rpt);
+
+    if (err_rpt.error != QJsonParseError::NoError) {
+        QMessageBox::critical(this, "", tr("Network error!"));
+        return -1;
+    }
+    if (root_Doc.isObject()) {
+        QJsonObject root_Obj = root_Doc.object();
+
+        QString macUrl, winUrl, linuxUrl;
+        QVariantList list = root_Obj.value("assets").toArray().toVariantList();
+        for (int i = 0; i < list.count(); i++) {
+            QVariantMap map = list[i].toMap();
+            QFileInfo file(map["name"].toString());
+            if (file.suffix().toLower() == "zip")
+                macUrl = map["browser_download_url"].toString();
+
+            if (file.suffix().toLower() == "7z")
+                winUrl = map["browser_download_url"].toString();
+
+            if (file.suffix() == "AppImage")
+                linuxUrl = map["browser_download_url"].toString();
+        }
+
+        QJsonObject PulseValue = root_Obj.value("assets").toObject();
+        QString Verison = root_Obj.value("tag_name").toString();
+        QString Url;
+        if (mac)
+            Url = macUrl;
+        if (win)
+            Url = winUrl;
+        if (linux)
+            Url = linuxUrl;
+
+        QString UpdateTime = root_Obj.value("published_at").toString();
+        QString ReleaseNote = root_Obj.value("body").toString();
+
+        if (Verison > CurVerison) {
+            QString warningStr = tr("New version detected!") + "\n" + tr("Version: ") + "V" + Verison + "\n" + tr("Published at: ") + UpdateTime + "\n" + tr("Release Notes: ") + "\n" + ReleaseNote;
+            int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
+            if (ret == 0) {
+                QDesktopServices::openUrl(QUrl(Url));
+            }
+        } else
+            QMessageBox::information(this, "", tr("It is currently the latest version!"));
+    }
+    return 0;
 }

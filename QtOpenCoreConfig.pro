@@ -1,5 +1,6 @@
 QT       += core gui
 QT       += xml
+QT       += network
 
 ICON = Icon.icns
 RC_FILE += myapp.rc
