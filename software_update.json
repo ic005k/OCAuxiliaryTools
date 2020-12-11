@@ -2,9 +2,9 @@
 "PulseSensor":
 	{
 		"LatestVerison":"V1.1",
-		"Url":"https://www.demo.com/Demo_v1.1.exe",
+		"Url":"https://www.demo.com/Demo_v1.1.zip",
 		"UpdateTime":"2020-13-31",
-      		"ReleaseNote":"\n1.添加更新说明，包含版本号，下载链接，更新时间，更新说明.\n2.优化“关于”界面"
+      		"ReleaseNote":"\n1.添加更新说明，包含版本号，下载链接，更新时间，更新说明.\n2.其他方面的升级等"
 	},
 
 }
