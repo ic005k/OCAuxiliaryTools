@@ -22,11 +22,14 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20201210";
+    CurVerison = "20201212";
     title = "QtOpenCoreConfigurator   V0.6.4-" + CurVerison;
     setWindowTitle(title);
 
-    ui->tabTotal->setCurrentIndex(0);
+    QDir dir;
+    if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/"))
+
+        ui->tabTotal->setCurrentIndex(0);
     ui->tabACPI->setCurrentIndex(0);
     ui->tabBooter->setCurrentIndex(0);
     ui->tabDP->setCurrentIndex(0);
@@ -109,7 +112,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui->btnMountEsp->setEnabled(false);
     font.setPixelSize(12);
     ui->btnOcvalidate->setEnabled(false);
-    linux = true;
+    linuxOS = true;
 #endif
 
 #ifdef Q_OS_MAC
@@ -1669,7 +1672,7 @@ void MainWindow::ParserNvram(QVariantMap map)
 
 void MainWindow::write_ini(QString table_name, QTableWidget* mytable, int i)
 {
-    QString plistPath = QDir::homePath() + "/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
     // qDebug() << plistPath;
     QFile file(plistPath);
     if (file.exists()) //如果文件存在，则先删除它
@@ -1694,7 +1697,7 @@ void MainWindow::write_ini(QString table_name, QTableWidget* mytable, int i)
 
 void MainWindow::read_ini(QString table_name, QTableWidget* mytable, int i)
 {
-    QString plistPath = QDir::homePath() + "/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
     // qDebug() << plistPath;
     QFile file(plistPath);
     if (file.exists()) {
@@ -1723,7 +1726,7 @@ void MainWindow::read_ini(QString table_name, QTableWidget* mytable, int i)
 void MainWindow::read_value_ini(QString table_name, QTableWidget* mytable,
     int i)
 {
-    QString plistPath = QDir::homePath() + "/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
     // qDebug() << plistPath;
     QFile file(plistPath);
     if (file.exists()) {
@@ -1830,13 +1833,13 @@ void MainWindow::write_value_ini(QString tablename, QTableWidget* subtable,
     int i)
 {
 
-    QString plistPath = QDir::homePath() + "/" + CurrentDateTime + tablename + QString::number(i + 1) + ".ini";
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + tablename + QString::number(i + 1) + ".ini";
     // qDebug() << plistPath;
     QFile file(plistPath);
-    if (file.exists()) //如果文件存在，则先删除它
+    if (file.exists())
         file.remove();
     // QSettings Reg(plistPath, QSettings::NativeFormat);
-    QSettings Reg(plistPath, QSettings::IniFormat); //全平台都采用ini格式
+    QSettings Reg(plistPath, QSettings::IniFormat);
 
     for (int k = 0; k < subtable->rowCount(); k++) {
         Reg.setValue(QString::number(k + 1) + "/key", subtable->item(k, 0)->text());
@@ -2570,8 +2573,6 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
 void MainWindow::on_btnSave_clicked()
 {
-    // QString FileName = QDir::homePath() + "/test.plist";
-
     SavePlist(SaveFileName);
 }
 
@@ -3851,7 +3852,7 @@ void MainWindow::on_btnDPDel_Del0_clicked()
     int delindex = ui->table_dp_del0->currentRow();
     int count = ui->table_dp_del0->rowCount();
 
-    QString qz = QDir::homePath() + "/" + CurrentDateTime + ui->table_dp_del0->objectName();
+    QString qz = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + ui->table_dp_del0->objectName();
     QFile file(qz + QString::number(delindex + 1) + ".ini");
     del_item(ui->table_dp_del0);
     if (file.exists())
@@ -3946,7 +3947,7 @@ void MainWindow::on_btnDPAdd_Del0_clicked()
     int delindex = ui->table_dp_add0->currentRow();
     int count = ui->table_dp_add0->rowCount();
 
-    QString qz = QDir::homePath() + "/" + CurrentDateTime + ui->table_dp_add0->objectName();
+    QString qz = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + ui->table_dp_add0->objectName();
     QFile file(qz + QString::number(delindex + 1) + ".ini");
     del_item(ui->table_dp_add0);
     if (file.exists())
@@ -4249,7 +4250,7 @@ void MainWindow::on_btnNVRAMAdd_Del0_clicked()
     //先记住被删的条目位置
     int delindex = ui->table_nv_add0->currentRow();
 
-    QString qz = QDir::homePath() + "/" + CurrentDateTime + ui->table_nv_add0->objectName();
+    QString qz = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + ui->table_nv_add0->objectName();
     QFile file(qz + QString::number(delindex + 1) + ".ini");
     del_item(ui->table_nv_add0);
     if (file.exists())
@@ -4345,7 +4346,7 @@ void MainWindow::on_btnNVRAMDel_Del0_clicked()
     int delindex = ui->table_nv_del0->currentRow();
     int count = ui->table_nv_del0->rowCount();
 
-    QString qz = QDir::homePath() + "/" + CurrentDateTime + ui->table_nv_del0->objectName();
+    QString qz = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + ui->table_nv_del0->objectName();
     QFile file(qz + QString::number(delindex + 1) + ".ini");
     del_item(ui->table_nv_del0);
     if (file.exists())
@@ -4378,7 +4379,7 @@ void MainWindow::on_btnNVRAMLS_Del0_clicked()
     int delindex = ui->table_nv_ls0->currentRow();
     int count = ui->table_nv_ls0->rowCount();
 
-    QString qz = QDir::homePath() + "/" + CurrentDateTime + ui->table_nv_ls0->objectName();
+    QString qz = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + ui->table_nv_ls0->objectName();
     QFile file(qz + QString::number(delindex + 1) + ".ini");
     del_item(ui->table_nv_ls0);
     if (file.exists())
@@ -4684,11 +4685,13 @@ void MainWindow::ReservedMemoryTypeChange()
 
 void MainWindow::dataClassChange_dp()
 {
+    ui->table_dp_add->item(c_row, 1)->setTextAlignment(Qt::AlignCenter);
     ui->table_dp_add->item(c_row, 1)->setText(cboxDataClass->currentText());
 }
 
 void MainWindow::dataClassChange_nv()
 {
+    ui->table_nv_add->item(c_row, 1)->setTextAlignment(Qt::AlignCenter);
     ui->table_nv_add->item(c_row, 1)->setText(cboxDataClass->currentText());
 }
 
@@ -5073,7 +5076,7 @@ void MainWindow::mount_esp_mac(QString strEfiDisk)
     QString str5 = "diskutil mount " + strEfiDisk;
     QString str_ex = "do shell script " + QString::fromLatin1("\"%1\"").arg(str5) + " with administrator privileges";
 
-    QString fileName = QDir::homePath() + "/qtocc.applescript";
+    QString fileName = QDir::homePath() + "/.config/QtOCC/qtocc.applescript";
     QFile fi(fileName);
     if (fi.exists())
         fi.remove();
@@ -5097,14 +5100,17 @@ void MainWindow::mount_esp_mac(QString strEfiDisk)
     dm->execute("osascript", QStringList() << fileName);
 }
 
-void MainWindow::on_btnMountEsp_clicked() { mount_esp(); }
+void MainWindow::on_btnMountEsp_clicked()
+{
+    mount_esp();
+}
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
     if (event) {
     };
 
-    QString qfile = QDir::homePath() + "/QtOCC.ini";
+    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
     QFile file(qfile);
     // QSettings Reg(qfile, QSettings::NativeFormat);
     QSettings Reg(qfile, QSettings::IniFormat);
@@ -8431,7 +8437,7 @@ int MainWindow::parse_UpdateJSON(QString str)
             Url = macUrl;
         if (win)
             Url = winUrl;
-        if (linux)
+        if (linuxOS)
             Url = linuxUrl;
 
         QString UpdateTime = root_Obj.value("published_at").toString();

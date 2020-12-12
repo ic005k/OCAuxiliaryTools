@@ -970,7 +970,7 @@ private:
     int parse_UpdateJSON(QString str);
     bool mac = false;
     bool win = false;
-    bool linux = false;
+    bool linuxOS = false;
 
     QString CurVerison = "V1.0";
 

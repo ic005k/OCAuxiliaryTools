@@ -94,7 +94,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -3604,7 +3604,7 @@ bootable. Operating systems shipped before the specified model was released will
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3614,19 +3614,6 @@ bootable. Operating systems shipped before the specified model was released will
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_17">
-            <item row="0" column="0" rowspan="2" colspan="7">
-             <layout class="QGridLayout" name="gridLayout_nv_add"/>
-            </item>
-            <item row="1" column="4" colspan="3">
-             <widget class="QTableWidget" name="table_nv_add">
-              <property name="columnCount">
-               <number>3</number>
-              </property>
-              <column/>
-              <column/>
-              <column/>
-             </widget>
-            </item>
             <item row="2" column="0">
              <widget class="QPushButton" name="btnNVRAMAdd_Add0">
               <property name="text">
@@ -3647,6 +3634,33 @@ bootable. Operating systems shipped before the specified model was released will
               </property>
              </spacer>
             </item>
+            <item row="1" column="4" colspan="3">
+             <widget class="QTableWidget" name="table_nv_add">
+              <property name="columnCount">
+               <number>3</number>
+              </property>
+              <column/>
+              <column/>
+              <column/>
+             </widget>
+            </item>
+            <item row="2" column="6">
+             <widget class="QPushButton" name="btnNVRAMAdd_Del">
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="5">
+             <widget class="QPushButton" name="btnNVRAMAdd_Add">
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" rowspan="2" colspan="7">
+             <layout class="QGridLayout" name="gridLayout_nv_add"/>
+            </item>
             <item row="2" column="2">
              <widget class="QPushButton" name="btnNVRAMAdd_Del0">
               <property name="text">
@@ -3666,20 +3680,6 @@ bootable. Operating systems shipped before the specified model was released will
                </size>
               </property>
              </spacer>
-            </item>
-            <item row="2" column="5">
-             <widget class="QPushButton" name="btnNVRAMAdd_Add">
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="6">
-             <widget class="QPushButton" name="btnNVRAMAdd_Del">
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-             </widget>
             </item>
            </layout>
            <widget class="QTableWidget" name="table_nv_add0">
