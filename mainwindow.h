@@ -963,6 +963,8 @@ private slots:
 
     void replyFinished(QNetworkReply* reply);
 
+    void on_chkSaveDataHub_clicked();
+
 private:
     Ui::MainWindow* ui;
 

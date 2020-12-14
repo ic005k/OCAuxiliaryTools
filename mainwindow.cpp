@@ -22,14 +22,14 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20201212";
+    CurVerison = "20201214";
     title = "QtOpenCoreConfigurator   V0.6.4-" + CurVerison;
     setWindowTitle(title);
 
     QDir dir;
-    if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/"))
+    if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) { }
 
-        ui->tabTotal->setCurrentIndex(0);
+    ui->tabTotal->setCurrentIndex(0);
     ui->tabACPI->setCurrentIndex(0);
     ui->tabBooter->setCurrentIndex(0);
     ui->tabDP->setCurrentIndex(0);
@@ -1289,29 +1289,6 @@ void MainWindow::initui_misc()
     ui->cboxSecureBootModel->addItem("Disabled");
     ui->cboxSecureBootModel->addItem("Default");
 
-    QString qfile = QDir::homePath() + "/QtOCC1.ini";
-    QFileInfo fi(qfile);
-    if (fi.exists()) {
-        QSettings Reg(qfile, QSettings::IniFormat);
-
-        ui->chk1->setChecked(Reg.value("1").toBool());
-        ui->chk2->setChecked(Reg.value("2").toBool());
-        ui->chk3->setChecked(Reg.value("3").toBool());
-        ui->chk4->setChecked(Reg.value("4").toBool());
-        ui->chk5->setChecked(Reg.value("5").toBool());
-        ui->chk6->setChecked(Reg.value("6").toBool());
-        ui->chk7->setChecked(Reg.value("7").toBool());
-        ui->chk8->setChecked(Reg.value("8").toBool());
-        ui->chk9->setChecked(Reg.value("9").toBool());
-        ui->chk10->setChecked(Reg.value("10").toBool());
-        ui->chk11->setChecked(Reg.value("11").toBool());
-        ui->chk12->setChecked(Reg.value("12").toBool());
-        ui->chk13->setChecked(Reg.value("13").toBool());
-        ui->chk14->setChecked(Reg.value("14").toBool());
-        ui->chk15->setChecked(Reg.value("15").toBool());
-        ui->chk16->setChecked(Reg.value("16").toBool());
-    }
-
     // BlessOverride
     QTableWidgetItem* id0;
     ui->tableBlessOverride->setColumnWidth(0, 1150);
@@ -1925,6 +1902,13 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item)
 
 void MainWindow::initui_PlatformInfo()
 {
+    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+    QFileInfo fi(qfile);
+    if (fi.exists()) {
+        QSettings Reg(qfile, QSettings::IniFormat);
+
+        ui->chkSaveDataHub->setChecked(Reg.value("SaveDataHub").toBool());
+    }
 
     ui->cboxUpdateSMBIOSMode->addItem("TryOverwrite");
     ui->cboxUpdateSMBIOSMode->addItem("Create");
@@ -3153,7 +3137,8 @@ QVariantMap MainWindow::SavePlatformInfo()
     valueList["SystemSerialNumber"] = ui->editSystemSerialNumber_data->text();
     valueList["SystemUUID"] = ui->editSystemUUID_data->text();
 
-    subMap["DataHub"] = valueList;
+    if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+        subMap["DataHub"] = valueList;
 
     // Memory
     valueList.clear();
@@ -3190,7 +3175,10 @@ QVariantMap MainWindow::SavePlatformInfo()
     valueList["Devices"] = Map["Devices"];
     //}
 
-    subMap["Memory"] = valueList;
+    if (ui->chkCustomMemory->isChecked()) {
+        if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+            subMap["Memory"] = valueList;
+    }
 
     // Generic
     valueList.clear();
@@ -3222,7 +3210,8 @@ QVariantMap MainWindow::SavePlatformInfo()
 
     valueList["SystemUUID"] = ui->editSystemUUID_PNVRAM->text();
 
-    subMap["PlatformNVRAM"] = valueList;
+    if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+        subMap["PlatformNVRAM"] = valueList;
 
     // SMBIOS
     valueList.clear();
@@ -3256,7 +3245,8 @@ QVariantMap MainWindow::SavePlatformInfo()
     valueList["SystemUUID"] = ui->editSystemUUID_2->text();
     valueList["SystemVersion"] = ui->editSystemVersion->text();
 
-    subMap["SMBIOS"] = valueList;
+    if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+        subMap["SMBIOS"] = valueList;
 
     subMap["Automatic"] = getChkBool(ui->chkAutomatic);
     subMap["CustomMemory"] = getChkBool(ui->chkCustomMemory);
@@ -5114,22 +5104,7 @@ void MainWindow::closeEvent(QCloseEvent* event)
     QFile file(qfile);
     // QSettings Reg(qfile, QSettings::NativeFormat);
     QSettings Reg(qfile, QSettings::IniFormat);
-    Reg.setValue("1", ui->chk1->isChecked());
-    Reg.setValue("2", ui->chk2->isChecked());
-    Reg.setValue("3", ui->chk3->isChecked());
-    Reg.setValue("4", ui->chk4->isChecked());
-    Reg.setValue("5", ui->chk5->isChecked());
-    Reg.setValue("6", ui->chk6->isChecked());
-    Reg.setValue("7", ui->chk7->isChecked());
-    Reg.setValue("8", ui->chk8->isChecked());
-    Reg.setValue("9", ui->chk9->isChecked());
-    Reg.setValue("10", ui->chk10->isChecked());
-    Reg.setValue("11", ui->chk11->isChecked());
-    Reg.setValue("12", ui->chk12->isChecked());
-    Reg.setValue("13", ui->chk13->isChecked());
-    Reg.setValue("14", ui->chk14->isChecked());
-    Reg.setValue("15", ui->chk15->isChecked());
-    Reg.setValue("16", ui->chk16->isChecked());
+    Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
 
     if (this->isWindowModified()) {
         int choice;
@@ -8453,4 +8428,9 @@ int MainWindow::parse_UpdateJSON(QString str)
             QMessageBox::information(this, "", tr("It is currently the latest version!"));
     }
     return 0;
+}
+
+void MainWindow::on_chkSaveDataHub_clicked()
+{
+    this->setWindowModified(true);
 }
