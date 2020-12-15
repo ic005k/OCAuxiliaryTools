@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20201214";
+    CurVerison = "20201215";
     title = "QtOpenCoreConfigurator   V0.6.4-" + CurVerison;
     setWindowTitle(title);
 
@@ -4596,13 +4596,12 @@ void MainWindow::on_btnSaveAs_clicked()
 
 void MainWindow::about()
 {
+    QString strIcon = tr("Icon designer:  Mirone(Brazil)");
+    QString strUrl = "<a style='color: blue;' href = "
+                     "https://github.com/ic005k/QtOpenCoreConfig>QtOpenCoreConfigurator</"
+                     "a><br><a style='color: blue;'<\n><br>";
 
-    QMessageBox::about(
-        this, tr("About"),
-        QString::fromLocal8Bit(
-            "<a style='color: blue;' href = "
-            "https://github.com/ic005k/QtOpenCoreConfig>QtOpenCoreConfigurator</"
-            "a><br><a style='color: blue;' "));
+    QMessageBox::about(this, tr("About"), strUrl + "\n" + strIcon);
 }
 
 void MainWindow::on_btnKernelAdd_Del_clicked()
