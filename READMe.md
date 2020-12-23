@@ -44,11 +44,11 @@ OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/r
 
 ### QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
 
-https://github.com/reillywatson/qtplist
+[reillywatson](https://github.com/reillywatson/qtplist)
 
-https://github.com/bluer007/FindESP
+[bluer007](https://github.com/bluer007/FindESP)
 
-https://github.com/microsoft/winfile
+[microsoft](https://github.com/microsoft/winfile)
 
 ## 讨论区：
 
