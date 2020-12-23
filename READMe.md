@@ -14,33 +14,33 @@ OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/r
 
 ## 特点包括但不限于：
 
-0.稳健的plist文件底层读写代码，确保数据读写的正确性
+* 稳健的plist文件底层读写代码，确保数据读写的正确性
 
-1.多语言支持（目前支持中文和英文界面），自动识别操作系统语言并根据语种加载相应本土化的功能
+* 多语言支持（目前支持中文和英文界面），自动识别操作系统语言并根据语种加载相应本土化的功能
 
-2.开源、跨平台（win、mac、linux均提供二进制文件的下载）
+* 开源、跨平台（win、mac、linux均提供二进制文件的下载）
 
-3.各功能选项采用悬浮提示和状态栏提示
+* 各功能选项采用悬浮提示和状态栏提示
 
-4.完全可视化对Config.plist进行编辑
+* 完全可视化对Config.plist进行编辑
 
-5.紧跟OpenCore最新开发版，完全与之同步
+* 紧跟OpenCore最新开发版，完全与之同步
 
-6.一键挂载ESP分区（mac、win）
+* 一键挂载ESP分区（mac、win）
 
-7.模块的导入与导出
+* 模块的导入与导出
 
-8.双击打开文件、拖拽文件到软件界面打开文件，打开文件的历史记录显示
+* 双击打开文件、拖拽文件到软件界面打开文件，打开文件的历史记录显示
 
-9.三个平台均采用OC官方的macserial来生成序列号
+* 三个平台均采用OC官方的macserial来生成序列号
 
-10.软件采用全键值写入，完美配合OC的ocvalidate数据检查
+* 软件采用全键值写入，完美配合OC的ocvalidate数据检查
 
-11.软件UI自适应各种分辨率，包括winpe和linux livecd等等
+* 软件UI自适应各种分辨率，包括winpe和linux livecd等等
 
 ......
 
-### 国内github下载文件建议采用：https://toolwa.com/github/
+### [国内github下载文件建议采用](https://toolwa.com/github/)
 
 ### QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
 
@@ -52,9 +52,9 @@ https://github.com/microsoft/winfile
 
 ## 讨论区：
 
-pcbeta远景链接：http://bbs.pcbeta.com/viewthread-1866148-1-1.html
+[pcbeta远景](http://bbs.pcbeta.com/viewthread-1866148-1-1.html)
 
-insanelymac链接：https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/
+[insanelymac](https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/)
 
 
 ### 备注：此项目开始于2020年8月
