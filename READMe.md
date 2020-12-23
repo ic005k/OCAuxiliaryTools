@@ -1,6 +1,6 @@
 # 开源跨平台的OpenCore配置文件编辑器
 
-    OpenCore逐渐流行起来，一直想做一款开源跨平台的OC配置文件编辑器，目前终于达成。这样在mac之外的平台下配置OC显得格外轻松，特别是win和linux平台。
+OpenCore逐渐流行起来，一直想做一款开源跨平台的OC配置文件编辑器，目前终于达成。这样在mac之外的平台下配置OC显得格外轻松，特别是win和linux平台。
 
 该软件是根据OC最新的开发版提供的SampleCustom.plist为蓝本，使用该软件前，建议将OC升级到最新的开发版。
 
@@ -50,12 +50,12 @@ https://github.com/bluer007/FindESP
 
 https://github.com/microsoft/winfile
 
-讨论区：
+## 讨论区：
 
 pcbeta远景链接：http://bbs.pcbeta.com/viewthread-1866148-1-1.html
 
 insanelymac链接：https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/
 
 
-备注：此项目开始于2020年8月
+## 备注：此项目开始于2020年8月
 
