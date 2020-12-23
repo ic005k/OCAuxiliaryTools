@@ -4,7 +4,7 @@ OpenCore逐渐流行起来，一直想做一款开源跨平台的oc配置文件�
 
 该软件是根据oc最新的开发版提供的SampleCustom.plist为蓝本，使用该软件前，建议将oc升级到最新的开发版。
 
-OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/releases  感谢@williambj1提供！
+OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/releases  感谢@williambj1！
 
 非官方简体中文参考手册：https://github.com/SukkaW/OpenCore-Document-zh_Hans  感谢@SukkaW！
 
