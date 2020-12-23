@@ -40,9 +40,9 @@ OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/r
 
 ......
 
-国内github下载文件建议采用：https://toolwa.com/github/
+### 国内github下载文件建议采用：https://toolwa.com/github/
 
-QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
+### QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
 
 https://github.com/reillywatson/qtplist
 
