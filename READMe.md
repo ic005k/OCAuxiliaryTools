@@ -30,7 +30,7 @@ OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/r
 
 7.模块的导入与导出
 
-8.双击打开文件、拖拽文件到软件界面打开文件
+8.双击打开文件、拖拽文件到软件界面打开文件，打开文件的历史记录显示
 
 9.三个平台均采用OC官方的macserial来生成序列号
 
