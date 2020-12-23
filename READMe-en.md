@@ -7,8 +7,6 @@ This software is based on SampleCustom.plist provided by the latest development 
 
 OC development version can be downloaded here: https://github.com/williambj1/OpenCore-Factory/releases thanks @williambj1!
 
-Unofficial simplified Chinese reference manual: https://github.com/SukkaW/OpenCore-Document-zh_Hans thanks @SukkaW!
-
 The above links have been put into the "resources" menu of the software.
 
 Interpretation (translation) of various functions of the software: Due to time constraints, I apologize for not finishing and typesetting in detail, and suggest that you study the original OC instructions.
