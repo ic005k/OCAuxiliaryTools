@@ -5,31 +5,49 @@ OpenCore逐渐流行起来，一直想做一款开源跨平台的oc配置文件�
 该软件是根据oc最新的开发版提供的SampleCustom.plist为蓝本，使用该软件前，建议将oc升级到最新的开发版。
 
 OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/releases  感谢@williambj1提供！
+
 非官方简体中文参考手册：https://github.com/SukkaW/OpenCore-Document-zh_Hans  感谢@SukkaW！
+
 以上链接已放入软件的“资源”菜单。
 
 关于软件各功能的解读（翻译）: 由于时间关系，没有细致地去润色及排版，在此表示歉意，同时建议大家研读原版OC说明书。
 
 特点包括但不限于：
+
 0.稳健的plist文件底层读写代码，确保数据读写的正确性
+
 1.多语言支持（目前支持中文和英文界面），自动识别操作系统语言并根据语种加载相应本土化的功能
+
 2.开源、跨平台（win、mac、linux均提供二进制文件的下载）
+
 3.各功能选项采用悬浮提示和状态栏提示
+
 4.完全可视化对Config.plist进行编辑
+
 5.紧跟OpenCore最新开发版，完全与之同步
+
 6.一键挂载ESP分区（mac、win）
+
 7.模块的导入与导出
+
 8.双击打开文件、拖拽文件到软件界面打开文件
+
 9.三个平台均采用OC官方的macserial来生成序列号
+
 10.软件采用全键值写入，完美配合OC的ocvalidate数据检查
+
 11.软件UI自适应各种分辨率，包括winpe和linux livecd等等
+
 ......
 
 国内github下载文件建议采用：https://toolwa.com/github/
 
 QtOpenCoreConfig的诞生离不开以下第三方开源软件的支持，感谢！
+
 https://github.com/reillywatson/qtplist
+
 https://github.com/bluer007/FindESP
+
 https://github.com/microsoft/winfile
 
 讨论区：
