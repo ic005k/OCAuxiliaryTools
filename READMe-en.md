@@ -1,3 +1,4 @@
+[English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-en.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md)
 # Open source cross-platform OpenCore profile editor
 
 OpenCore has gradually become popular, and has always wanted to be an open source cross-platform OC configuration file editor, which has finally been achieved. Therefore, it is very easy to configure OC on platforms other than mac, especially win and linux platforms.
@@ -48,7 +49,7 @@ Interpretation (translation) of various functions of the software: Due to time c
 
 ## Discussion area:
 
-[pcbeta] (http://bbs.pcbeta.com/viewthread-1866148-1-1.html) | [insanelymac](https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/)
+[pcbeta](http://bbs.pcbeta.com/viewthread-1866148-1-1.html) | [insanelymac](https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/)
 
 
 ### Note: This project started in August 2020
