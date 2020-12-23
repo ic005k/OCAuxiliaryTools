@@ -1,8 +1,8 @@
 开源跨平台的OpenCore配置文件编辑器
 
-OpenCore逐渐流行起来，一直想做一款开源跨平台的oc配置文件编辑器，目前终于达成。这样在mac之外的平台下配置oc显得格外轻松，特别是win和linux平台。
+OpenCore逐渐流行起来，一直想做一款开源跨平台的OC配置文件编辑器，目前终于达成。这样在mac之外的平台下配置OC显得格外轻松，特别是win和linux平台。
 
-该软件是根据oc最新的开发版提供的SampleCustom.plist为蓝本，使用该软件前，建议将oc升级到最新的开发版。
+该软件是根据OC最新的开发版提供的SampleCustom.plist为蓝本，使用该软件前，建议将OC升级到最新的开发版。
 
 OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/releases  感谢@williambj1！
 
