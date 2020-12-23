@@ -41,15 +41,12 @@ Interpretation (translation) of various functions of the software: Due to time c
 
 ......
 
-### [Domestic github Download File Recommendation ](https://toolwa.com/github/)
-
 ### QtOpenCoreConfig was born without the support of the following third-party open source software, thank you!
 
 [reillywatson](https://github.com/reillywatson/qtplist)&nbsp; &nbsp; &nbsp; &nbsp; [bluer007](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp; [microsoft](https://github.com/microsoft/winfile)
 
 ## Discussion area:
 
-[pcbeta](http://bbs.pcbeta.com/viewthread-1866148-1-1.html) | [insanelymac](https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/)
-
+[insanelymac](https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/)
 
 ### Note: This project started in August 2020
