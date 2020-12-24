@@ -39,7 +39,7 @@ Interpretation (translation) of various functions of the software: Due to time c
 
 ......
 
-### The birth of QtOpenCoreConfig is inseparable from the support of the following third-party open source software, thank you!
+### Thanks for the support of the following third-party open source software!
 
 [reillywatson](https://github.com/reillywatson/qtplist)&nbsp; &nbsp; &nbsp; &nbsp; [bluer007](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp; [microsoft](https://github.com/microsoft/winfile)
 
