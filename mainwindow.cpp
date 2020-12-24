@@ -22,8 +22,8 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20201217";
-    title = "QtOpenCoreConfigurator   V0.6.4-" + CurVerison;
+    CurVerison = "20201222";
+    title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison;
     setWindowTitle(title);
 
     QDir dir;
@@ -104,7 +104,7 @@ MainWindow::MainWindow(QWidget* parent)
     reg_win();
     font.setPixelSize(17);
     ui->tabTotal->setDocumentMode(false);
-    ui->btnOcvalidate->setEnabled(true);
+    ui->btnOcvalidate->setEnabled(false);
     win = true;
 #endif
 
@@ -2516,8 +2516,8 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
     // Quirks
     QVariantMap map_uefi_Quirks = map["Quirks"].toMap();
-    ui->chkDeduplicateBootOrder->setChecked(
-        map_uefi_Quirks["DeduplicateBootOrder"].toBool());
+    //ui->chkDeduplicateBootOrder->setChecked(
+    //    map_uefi_Quirks["DeduplicateBootOrder"].toBool());
     ui->chkIgnoreInvalidFlexRatio->setChecked(
         map_uefi_Quirks["IgnoreInvalidFlexRatio"].toBool());
     ui->chkReleaseUsbOwnership->setChecked(
@@ -3352,7 +3352,9 @@ QVariantMap MainWindow::SaveUEFI()
 
     // Quirks
     dictList.clear();
-    dictList["DeduplicateBootOrder"] = getChkBool(ui->chkDeduplicateBootOrder);
+
+    //dictList["DeduplicateBootOrder"] = getChkBool(ui->chkDeduplicateBootOrder);
+
     dictList["IgnoreInvalidFlexRatio"] = getChkBool(ui->chkIgnoreInvalidFlexRatio);
     dictList["ReleaseUsbOwnership"] = getChkBool(ui->chkReleaseUsbOwnership);
     dictList["RequestBootVarRouting"] = getChkBool(ui->chkRequestBootVarRouting);
@@ -7361,12 +7363,6 @@ void MainWindow::on_chkHideVerbose_stateChanged(int arg1)
 }
 
 void MainWindow::on_chkGlobalConnect_stateChanged(int arg1)
-{
-    Q_UNUSED(arg1);
-    this->setWindowModified(true);
-}
-
-void MainWindow::on_chkDeduplicateBootOrder_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
     this->setWindowModified(true);

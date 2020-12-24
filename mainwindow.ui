@@ -94,7 +94,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -6322,48 +6322,6 @@ im4m manifest files used by Apple Secure Boot.</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_28">
            <item row="0" column="0" colspan="2">
-            <widget class="QCheckBox" name="chkDeduplicateBootOrder">
-             <property name="toolTip">
-              <string>This quirk requires RequestBootVarRouting to be enabled and therefore OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi.
-By redirecting Boot prefixed variables to a separate GUID namespace with the help of RequestBootVarRouting
-quirk we achieve multiple goals:
-• Operating systems are jailed and only controlled by OpenCore boot environment to enhance security.
-• Operating systems do not mess with OpenCore boot priority, and guarantee fluent updates and hibernation
-wakes for cases that require reboots with OpenCore in the middle.
-• Potentially incompatible boot entries, such as macOS entries, are not deleted or anyhow corrupted.
-However, some firmwares do their own boot option scanning upon startup by checking file presence on the
-available disks. Quite often this scanning includes non-standard locations, such as Windows Bootloader paths.
-Normally it is not an issue, but some firmwares, ASUS firmwares on APTIO V in particular, have bugs. For them
-scanning is implemented improperly, and firmware preferences may get accidentally corrupted due to BootOrder
-entry duplication (each option will be added twice) making it impossible to boot without resetting NVRAM.
-To trigger the bug one should have some valid boot options (e.g. OpenCore) and then install Windows with
-RequestBootVarRouting enabled. As Windows bootloader option will not be created by Windows installer, the
-firmware will attempt to create it itself, and then corrupt its boot option list.
-This quirk removes all duplicates in BootOrder variable attempting to resolve the consequences of the bugs upon
-OpenCore loading. It is recommended to use this key along with BootProtect option.</string>
-             </property>
-             <property name="statusTip">
-              <string>Remove duplicate entries in BootOrder variable in EFI_GLOBAL_VARIABLE_GUID.</string>
-             </property>
-             <property name="text">
-              <string>DeduplicateBootOrder</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <spacer name="horizontalSpacer_71">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>106</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="3">
             <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
              <property name="toolTip">
               <string>Note: While the option is not supposed to induce harm on unaffected firmwares, its usage is not recommended
@@ -6378,20 +6336,20 @@ when it is not required.</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="4">
+           <item row="0" column="2" colspan="2">
             <spacer name="horizontalSpacer_70">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>105</width>
-               <height>20</height>
+               <width>198</width>
+               <height>17</height>
               </size>
              </property>
             </spacer>
            </item>
-           <item row="0" column="5">
+           <item row="0" column="4" colspan="2">
             <widget class="QCheckBox" name="chkReleaseUsbOwnership">
              <property name="toolTip">
               <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
@@ -6415,8 +6373,8 @@ may freeze upon boot. Not recommended unless required.</string>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>89</width>
-               <height>20</height>
+               <width>168</width>
+               <height>17</height>
               </size>
              </property>
             </spacer>
@@ -6445,8 +6403,8 @@ with macOS boot entries by design.</string>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>101</width>
-               <height>20</height>
+               <width>165</width>
+               <height>17</height>
               </size>
              </property>
             </spacer>
@@ -6481,7 +6439,7 @@ approach should be found in some future. Expect 3-5 seconds to be enough in case
              </property>
             </widget>
            </item>
-           <item row="1" column="1" colspan="3">
+           <item row="1" column="1" colspan="2">
             <widget class="QLineEdit" name="editExitBootServicesDelay">
              <property name="minimumSize">
               <size>
@@ -6497,7 +6455,7 @@ approach should be found in some future. Expect 3-5 seconds to be enough in case
              </property>
             </widget>
            </item>
-           <item row="1" column="4">
+           <item row="1" column="3" colspan="2">
             <widget class="QLabel" name="label_29">
              <property name="toolTip">
               <string>The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop

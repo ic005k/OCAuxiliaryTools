@@ -655,8 +655,6 @@ private slots:
 
     void on_chkGlobalConnect_stateChanged(int arg1);
 
-    void on_chkDeduplicateBootOrder_stateChanged(int arg1);
-
     void on_chkIgnoreInvalidFlexRatio_stateChanged(int arg1);
 
     void on_chkReleaseUsbOwnership_stateChanged(int arg1);
