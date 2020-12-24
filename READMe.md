@@ -41,6 +41,8 @@ OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/r
 
 ......
 
+[!截图](https://github.com/ic005k/QtOpenCoreConfig/blob/master/qtocc.png)
+
 ### [国内github下载文件推荐](https://toolwa.com/github/)
 
 ### 感谢以下第三方开源软件的支持！
