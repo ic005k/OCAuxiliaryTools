@@ -39,6 +39,8 @@ OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/r
 
 * 软件UI自适应各种分辨率，包括winpe和linux livecd等等
 
+* 内置更新检查
+
 ......
 
 ![截图](https://github.com/ic005k/QtOpenCoreConfig/blob/master/qtocc.png)
