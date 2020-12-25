@@ -37,6 +37,8 @@ Interpretation (translation) of various functions of the software: Due to time c
 
 * Software UI adapts to various resolutions, including winpe and linux livecd, etc.
 
+* Built-in update check
+
 ......
 
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/qtocc.png)
