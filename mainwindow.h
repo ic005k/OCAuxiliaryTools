@@ -29,6 +29,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
+#include "aboutdialog.h"
 #include "recentfiles.h"
 
 #ifdef Q_OS_WIN32
@@ -117,6 +118,8 @@ public:
     QComboBox* cboxArch;
 
     QComboBox* cboxReservedMemoryType;
+
+    aboutDialog* aboutDlg;
 
 public slots:
 

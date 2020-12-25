@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget* parent)
     title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison;
     setWindowTitle(title);
 
+    aboutDlg = new aboutDialog(this);
+
     QDir dir;
     if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) { }
 
@@ -4598,12 +4600,14 @@ void MainWindow::on_btnSaveAs_clicked()
 
 void MainWindow::about()
 {
-    QString strIcon = tr("Icon designer:  Mirone(Brazil)");
-    QString strUrl = "<a style='color: blue;' href = "
-                     "https://github.com/ic005k/QtOpenCoreConfig>QtOpenCoreConfigurator</"
-                     "a><br><a style='color: blue;'<\n><br>";
+    //QString strIcon = tr("Icon designer:  Mirone(Brazil)");
+    //QString strUrl = "<a style='color: blue;' href = "
+    //                 "https://github.com/ic005k/QtOpenCoreConfig>QtOpenCoreConfigurator</"
+    //                 "a><br><a style='color: blue;'<\n><br>";
 
-    QMessageBox::about(this, tr("About"), strUrl + "\n" + strIcon);
+    //QMessageBox::about(this, tr("About"), strUrl + "\n" + strIcon);
+    aboutDlg->setModal(true);
+    aboutDlg->show();
 }
 
 void MainWindow::on_btnKernelAdd_Del_clicked()
