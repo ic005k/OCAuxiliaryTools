@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>498</width>
-    <height>194</height>
+    <width>553</width>
+    <height>221</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,33 +30,20 @@
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>100</y>
-     <width>291</width>
+     <y>150</y>
+     <width>571</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>Icon designer:  Mirone(Brazil)</string>
+    <string>Icon Designer: Mirone (Brazil) </string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btnOk">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>150</y>
-     <width>96</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>OK</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="lblIcon">
    <property name="geometry">
     <rect>
      <x>12</x>
-     <y>12</y>
+     <y>40</y>
      <width>141</width>
      <height>111</height>
     </rect>
@@ -69,13 +56,57 @@
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>60</y>
+     <y>50</y>
      <width>291</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label1">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>90</y>
+     <width>521</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Contributor: eSaF (England, UK)    [file structure]</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>120</y>
+     <width>561</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Contributor: Sherlocks (Seoul, Korea)    [file structure]</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="btnOk">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>180</y>
+     <width>81</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>OK</string>
    </property>
   </widget>
  </widget>

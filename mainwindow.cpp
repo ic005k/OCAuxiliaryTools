@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20201222";
+    CurVerison = "20201225";
     title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison;
     setWindowTitle(title);
 
@@ -41,16 +41,16 @@ MainWindow::MainWindow(QWidget* parent)
     ui->tabPlatformInfo->setCurrentIndex(0);
     ui->tabUEFI->setCurrentIndex(0);
 
-    ui->tabTotal->tabBar()->setTabToolTip(0, tr("ACPI"));
-    ui->tabTotal->tabBar()->setTabToolTip(1, tr("Booter"));
+    //ui->tabTotal->tabBar()->setTabToolTip(0, tr("ACPI"));
+    //ui->tabTotal->tabBar()->setTabToolTip(1, tr("Booter"));
 
-    ui->tabTotal->tabBar()->setTabToolTip(2, tr("DeviceProperties"));
+    //ui->tabTotal->tabBar()->setTabToolTip(2, tr("DeviceProperties"));
 
-    ui->tabTotal->tabBar()->setTabToolTip(3, tr("Kernel"));
-    ui->tabTotal->tabBar()->setTabToolTip(4, tr("Misc"));
-    ui->tabTotal->tabBar()->setTabToolTip(5, tr("NVRAM"));
-    ui->tabTotal->tabBar()->setTabToolTip(6, tr("PlatformInfo"));
-    ui->tabTotal->tabBar()->setTabToolTip(7, tr("UEFI"));
+    //ui->tabTotal->tabBar()->setTabToolTip(3, tr("Kernel"));
+    //ui->tabTotal->tabBar()->setTabToolTip(4, tr("Misc"));
+    //ui->tabTotal->tabBar()->setTabToolTip(5, tr("NVRAM"));
+    //ui->tabTotal->tabBar()->setTabToolTip(6, tr("PlatformInfo"));
+    //ui->tabTotal->tabBar()->setTabToolTip(7, tr("UEFI"));
 
     QString tabBarStyle0 = "QTabBar::tab {min-width:100px;border: 0px solid;border-top-left-radius: 5px;border-top-right-radius: 5px;padding:2px;}\
             QTabBar::tab:!selected {margin-top: 2px;}\
@@ -74,9 +74,9 @@ MainWindow::MainWindow(QWidget* parent)
             QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
 
     // ui->tabACPI->setStyleSheet(tabBarStyle3);
-    ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
+    //ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
 
-    ui->tabTotal->setIconSize(QSize(50, 45));
+    //ui->tabTotal->setIconSize(QSize(50, 45));
 
     QIcon icon;
     icon.addFile(":/icon.png");
@@ -104,10 +104,37 @@ MainWindow::MainWindow(QWidget* parent)
 
 #ifdef Q_OS_WIN32
     reg_win();
-    font.setPixelSize(17);
+    font.setPixelSize(18);
     ui->tabTotal->setDocumentMode(false);
     ui->btnOcvalidate->setEnabled(false);
     win = true;
+    ui->btnACPIAdd_Add->setFont(font);
+    ui->btnACPIAdd_Del->setFont(font);
+
+    ui->btnACPIDel_Add->setFont(font);
+    ui->btnACPIDel_Del->setFont(font);
+
+    ui->btnACPIPatch_Add->setFont(font);
+    ui->btnACPIPatch_Del->setFont(font);
+
+    ui->btnBooterPatchAdd->setFont(font);
+    ui->btnBooterPatchDel->setFont(font);
+    ui->btnBooter_Add->setFont(font);
+    ui->btnBooter_Del->setFont(font);
+
+    ui->btnDPAdd_Add->setFont(font);
+    ui->btnDPAdd_Add0->setFont(font);
+    ui->btnDPAdd_Del->setFont(font);
+    ui->btnDPAdd_Del0->setFont(font);
+    ui->btnDPDel_Add->setFont(font);
+    ui->btnDPDel_Add0->setFont(font);
+    ui->btnDPDel_Del->setFont(font);
+    ui->btnDPDel_Del0->setFont(font);
+
+    ui->btnKernelAdd_Add->setFont(font);
+    ui->btnKernelAdd_Del->setFont(font);
+    ui->btnACPIDel_Add->setFont(font);
+
 #endif
 
 #ifdef Q_OS_LINUX
@@ -120,6 +147,7 @@ MainWindow::MainWindow(QWidget* parent)
 #ifdef Q_OS_MAC
     font.setPixelSize(12);
     mac = true;
+    ui->tabTotal->setDocumentMode(false);
 #endif
 
     QFileInfo appInfo(qApp->applicationFilePath());
@@ -227,13 +255,12 @@ void MainWindow::openFile(QString PlistFileName)
 
     loading = false;
 
-    ui->btnSave->setEnabled(true);
     ui->actionSave->setEnabled(true);
 
     this->setWindowModified(false);
 }
 
-void MainWindow::on_btnOpen_clicked()
+void MainWindow::on_btnOpen()
 {
     QFileDialog fd;
 
@@ -2557,7 +2584,7 @@ void MainWindow::ParserUEFI(QVariantMap map)
     }
 }
 
-void MainWindow::on_btnSave_clicked()
+void MainWindow::on_btnSave()
 {
     SavePlist(SaveFileName);
 }
@@ -4576,7 +4603,7 @@ void MainWindow::test(bool test)
     }
 }
 
-void MainWindow::on_btnSaveAs_clicked()
+void MainWindow::on_btnSaveAs()
 {
     QFileDialog fd;
 
@@ -4594,7 +4621,6 @@ void MainWindow::on_btnSaveAs_clicked()
 
     SavePlist(PlistFileName);
 
-    ui->btnSave->setEnabled(true);
     ui->actionSave->setEnabled(true);
 }
 
@@ -5095,7 +5121,7 @@ void MainWindow::mount_esp_mac(QString strEfiDisk)
     dm->execute("osascript", QStringList() << fileName);
 }
 
-void MainWindow::on_btnMountEsp_clicked()
+void MainWindow::on_btnMountEsp()
 {
     mount_esp();
 }
@@ -5138,9 +5164,9 @@ void MainWindow::closeEvent(QCloseEvent* event)
 
             closeSave = true;
             if (SaveFileName == "")
-                on_btnSaveAs_clicked();
+                on_btnSaveAs();
             else
-                on_btnSave_clicked();
+                on_btnSave();
 
             event->accept();
             break;
@@ -5193,7 +5219,7 @@ void MainWindow::loadLocal()
     }
 }
 
-void MainWindow::on_btnHelp_clicked()
+void MainWindow::on_btnHelp()
 {
 
     QFileInfo appInfo(qApp->applicationDirPath());
@@ -5216,7 +5242,7 @@ void MainWindow::init_tr_str()
         " Kext Info.plist path relative to bundle (e.g. Contents/Info.plist).");
 }
 
-void MainWindow::on_btnExportMaster_clicked()
+void MainWindow::on_btnExportMaster()
 {
     QFileDialog fd;
     QString defname;
@@ -5293,7 +5319,7 @@ void MainWindow::on_btnExportMaster_clicked()
     PListSerializer::toPList(OpenCore, FileName);
 }
 
-void MainWindow::on_btnImportMaster_clicked()
+void MainWindow::on_btnImportMaster()
 {
     QFileDialog fd;
     QString defname;
@@ -6750,18 +6776,42 @@ void MainWindow::on_nv04()
 
 void MainWindow::init_menu()
 {
-    //主菜单
+    //File
     connect(ui->actionOpen, &QAction::triggered, this,
-        &MainWindow::on_btnOpen_clicked);
+        &MainWindow::on_btnOpen);
     ui->actionOpen->setShortcut(tr("ctrl+o"));
 
     connect(ui->actionSave, &QAction::triggered, this,
-        &MainWindow::on_btnSave_clicked);
+        &MainWindow::on_btnSave);
     ui->actionSave->setShortcut(tr("ctrl+s"));
 
     connect(ui->actionSave_As, &QAction::triggered, this,
-        &MainWindow::on_btnSaveAs_clicked);
+        &MainWindow::on_btnSaveAs);
     ui->actionSave_As->setShortcut(tr("ctrl+shift+s"));
+
+    //Tools
+    connect(ui->btnMountEsp, &QAction::triggered, this,
+        &MainWindow::on_btnMountEsp);
+    ui->btnMountEsp->setShortcut(tr("ctrl+m"));
+
+    connect(ui->btnOcvalidate, &QAction::triggered, this,
+        &MainWindow::on_btnOcvalidate);
+    ui->btnOcvalidate->setShortcut(tr("ctrl+l"));
+
+    connect(ui->btnExportMaster, &QAction::triggered, this,
+        &MainWindow::on_btnExportMaster);
+
+    connect(ui->btnImportMaster, &QAction::triggered, this,
+        &MainWindow::on_btnImportMaster);
+
+    //Help
+    connect(ui->btnHelp, &QAction::triggered, this,
+        &MainWindow::on_btnHelp);
+    ui->btnHelp->setShortcut(tr("ctrl+p"));
+
+    connect(ui->btnCheckUpdate, &QAction::triggered, this,
+        &MainWindow::on_btnCheckUpdate);
+    ui->btnCheckUpdate->setShortcut(tr("ctrl+u"));
 
     connect(ui->actionAbout_2, &QAction::triggered, this, &MainWindow::about);
 
@@ -6784,7 +6834,6 @@ void MainWindow::init_menu()
     connect(ui->actionDSDT_SSDT_editor, &QAction::triggered, this,
         &MainWindow::on_line21);
 
-    ui->btnSave->setEnabled(false);
     ui->actionSave->setEnabled(false);
 }
 
@@ -8259,7 +8308,7 @@ void MainWindow::on_table_uefi_drivers_cellClicked(int row, int column)
     ui->statusbar->showMessage(ui->table_uefi_drivers->currentItem()->text());
 }
 
-void MainWindow::on_btnOcvalidate_clicked()
+void MainWindow::on_btnOcvalidate()
 {
     QFileInfo appInfo(qApp->applicationDirPath());
     chkdata = new QProcess;
@@ -8284,7 +8333,7 @@ void MainWindow::readResultCheckData()
     QString result = chkdata->readAll();
     QString str;
 
-    if (result.trimmed() == "Read fail")
+    if (result.trimmed() == "Failed to read")
         return;
     QMessageBox box;
     if (result.trimmed().mid(0, 4) == "Done") {
@@ -8354,7 +8403,7 @@ void MainWindow::on_cboxPlayChime_currentTextChanged(const QString& arg1)
     this->setWindowModified(true);
 }
 
-void MainWindow::on_btnCheckUpdate_clicked()
+void MainWindow::on_btnCheckUpdate()
 {
 
     QNetworkRequest quest;

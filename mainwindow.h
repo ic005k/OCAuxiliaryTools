@@ -177,7 +177,7 @@ private slots:
     void arch_Booter_patchChange();
     void ReservedMemoryTypeChange();
 
-    void on_btnOpen_clicked();
+    void on_btnOpen();
 
     void on_table_dp_add0_cellClicked(int row, int column);
 
@@ -201,7 +201,7 @@ private slots:
 
     void on_table_dp_del_itemChanged(QTableWidgetItem* item);
 
-    void on_btnSave_clicked();
+    void on_btnSave();
 
     void on_table_acpi_add_cellClicked(int row, int column);
 
@@ -313,7 +313,7 @@ private slots:
 
     void on_btnKernelAdd_Down_clicked();
 
-    void on_btnSaveAs_clicked();
+    void on_btnSaveAs();
 
     void on_btnKernelAdd_Del_clicked();
 
@@ -358,18 +358,18 @@ private slots:
 
     void on_btnKernelForce_Del_clicked();
 
-    void on_btnMountEsp_clicked();
+    void on_btnMountEsp();
 
     void on_table_uefi_ReservedMemory_currentCellChanged(int currentRow,
         int currentColumn,
         int previousRow,
         int previousColumn);
 
-    void on_btnHelp_clicked();
+    void on_btnHelp();
 
-    void on_btnExportMaster_clicked();
+    void on_btnExportMaster();
 
-    void on_btnImportMaster_clicked();
+    void on_btnImportMaster();
 
     void on_tabTotal_tabBarClicked(int index);
 
@@ -944,7 +944,7 @@ private slots:
 
     void on_table_uefi_drivers_cellClicked(int row, int column);
 
-    void on_btnOcvalidate_clicked();
+    void on_btnOcvalidate();
 
     void readResultCheckData();
 
@@ -960,7 +960,7 @@ private slots:
 
     void on_chkPA5_clicked();
 
-    void on_btnCheckUpdate_clicked();
+    void on_btnCheckUpdate();
 
     void replyFinished(QNetworkReply* reply);
 

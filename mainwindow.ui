@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1359</width>
-    <height>721</height>
+    <width>1200</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,82 +19,19 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QPushButton" name="btnOpen">
-      <property name="text">
-       <string>Open</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="btnSave">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="text">
-       <string>Save</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QPushButton" name="btnSaveAs">
-      <property name="text">
-       <string>Save As...</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QPushButton" name="btnMountEsp">
-      <property name="text">
-       <string>MountESP</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="4">
-     <widget class="QPushButton" name="btnOcvalidate">
-      <property name="text">
-       <string>OC Validate</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="5">
-     <widget class="QPushButton" name="btnExportMaster">
-      <property name="text">
-       <string>ExportMaster</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="6">
-     <widget class="QPushButton" name="btnImportMaster">
-      <property name="text">
-       <string>ImportMaster</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="7">
-     <widget class="QPushButton" name="btnHelp">
-      <property name="text">
-       <string>Help</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="8">
-     <widget class="QPushButton" name="btnCheckUpdate">
-      <property name="text">
-       <string>CheckUpdate</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="9">
+    <item row="0" column="0" colspan="2">
      <widget class="QTabWidget" name="tabTotal">
+      <property name="toolTip">
+       <string/>
+      </property>
       <property name="tabPosition">
-       <enum>QTabWidget::West</enum>
+       <enum>QTabWidget::North</enum>
       </property>
       <property name="tabShape">
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -103,7 +40,7 @@
        </size>
       </property>
       <property name="documentMode">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -116,10 +53,10 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <widget class="QWidget" name="tab_9">
            <attribute name="title">
@@ -143,16 +80,46 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnACPIAdd_Add">
+             <widget class="QToolButton" name="btnACPIAdd_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnACPIAdd_Del">
+             <widget class="QToolButton" name="btnACPIAdd_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -193,16 +160,46 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnACPIDel_Add">
+             <widget class="QToolButton" name="btnACPIDel_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnACPIDel_Del">
+             <widget class="QToolButton" name="btnACPIDel_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -249,16 +246,46 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnACPIPatch_Add">
+             <widget class="QToolButton" name="btnACPIPatch_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnACPIPatch_Del">
+             <widget class="QToolButton" name="btnACPIPatch_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -378,20 +405,23 @@ waking from hibernation.</string>
        <layout class="QGridLayout" name="gridLayout_53">
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabBooter">
+          <property name="toolTip">
+           <string/>
+          </property>
           <property name="tabShape">
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <widget class="QWidget" name="tab_39">
            <attribute name="title">
             <string>Patch</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_66">
+           <layout class="QGridLayout" name="gridLayout_60">
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="table_Booter_patch">
               <property name="rowCount">
@@ -416,16 +446,46 @@ waking from hibernation.</string>
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnBooterPatchAdd">
+             <widget class="QToolButton" name="btnBooterPatchAdd">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnBooterPatchDel">
+             <widget class="QToolButton" name="btnBooterPatchDel">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -459,6 +519,50 @@ waking from hibernation.</string>
               <column/>
              </widget>
             </item>
+            <item row="1" column="0">
+             <widget class="QToolButton" name="btnBooter_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QToolButton" name="btnBooter_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
+              </property>
+             </widget>
+            </item>
             <item row="1" column="2">
              <spacer name="horizontalSpacer_4">
               <property name="orientation">
@@ -471,20 +575,6 @@ waking from hibernation.</string>
                </size>
               </property>
              </spacer>
-            </item>
-            <item row="1" column="0">
-             <widget class="QPushButton" name="btnBooter_Add">
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QPushButton" name="btnBooter_Del">
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-             </widget>
             </item>
            </layout>
           </widget>
@@ -1005,7 +1095,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>DP</string>
+        <string>DeviceProperties</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_8">
         <item row="0" column="0">
@@ -1017,7 +1107,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <number>1</number>
           </property>
           <property name="documentMode">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <widget class="QWidget" name="tab_13">
            <attribute name="title">
@@ -1043,33 +1133,50 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnDPAdd_Add0">
+             <widget class="QToolButton" name="btnDPAdd_Add0">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <spacer name="horizontalSpacer_18">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+             <widget class="QToolButton" name="btnDPAdd_Del0">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>19</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="btnDPAdd_Del0">
               <property name="text">
                <string>DeleteItem</string>
               </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
+              </property>
              </widget>
             </item>
-            <item row="1" column="3">
+            <item row="1" column="2" colspan="2">
              <spacer name="horizontalSpacer_5">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -1083,16 +1190,49 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
              </spacer>
             </item>
             <item row="1" column="4">
-             <widget class="QPushButton" name="btnDPAdd_Add">
+             <widget class="QToolButton" name="btnDPAdd_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string/>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="5">
-             <widget class="QPushButton" name="btnDPAdd_Del">
+             <widget class="QToolButton" name="btnDPAdd_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -1120,33 +1260,50 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnDPDel_Add0">
+             <widget class="QToolButton" name="btnDPDel_Add0">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <spacer name="horizontalSpacer_19">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+             <widget class="QToolButton" name="btnDPDel_Del0">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>153</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="btnDPDel_Del0">
               <property name="text">
                <string>DeleteItem</string>
               </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
+              </property>
              </widget>
             </item>
-            <item row="1" column="3">
+            <item row="1" column="2" colspan="2">
              <spacer name="horizontalSpacer_6">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -1160,16 +1317,46 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
              </spacer>
             </item>
             <item row="1" column="4">
-             <widget class="QPushButton" name="btnDPDel_Add">
+             <widget class="QToolButton" name="btnDPDel_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="5">
-             <widget class="QPushButton" name="btnDPDel_Del">
+             <widget class="QToolButton" name="btnDPDel_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -1190,10 +1377,10 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <widget class="QWidget" name="tab_15">
            <attribute name="title">
@@ -1218,30 +1405,90 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnKernelAdd_Add">
+             <widget class="QToolButton" name="btnKernelAdd_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnKernelAdd_Del">
+             <widget class="QToolButton" name="btnKernelAdd_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QPushButton" name="btnKernelAdd_Up">
+             <widget class="QToolButton" name="btnKernelAdd_Up">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Up</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/up.png</normaloff>:/up.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="3">
-             <widget class="QPushButton" name="btnKernelAdd_Down">
+             <widget class="QToolButton" name="btnKernelAdd_Down">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Down</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/down.png</normaloff>:/down.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -1281,16 +1528,46 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnKernelBlock_Add">
+             <widget class="QToolButton" name="btnKernelBlock_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnKernelBlock_Del">
+             <widget class="QToolButton" name="btnKernelBlock_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -1333,16 +1610,46 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnKernelForce_Add">
+             <widget class="QToolButton" name="btnKernelForce_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnKernelForce_Del">
+             <widget class="QToolButton" name="btnKernelForce_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -1390,16 +1697,46 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnKernelPatchAdd">
+             <widget class="QToolButton" name="btnKernelPatchAdd">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnKernelPatchDel">
+             <widget class="QToolButton" name="btnKernelPatchDel">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -1924,10 +2261,10 @@ stability reasons. I.e. by specifying Mkext one will disable Prelinked for e.g. 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <widget class="QWidget" name="tabWidgetPage1">
            <attribute name="title">
@@ -3467,16 +3804,46 @@ bootable. Operating systems shipped before the specified model was released will
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnMiscBO_Add">
+             <widget class="QToolButton" name="btnMiscBO_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnMiscBO_Del">
+             <widget class="QToolButton" name="btnMiscBO_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -3514,16 +3881,46 @@ bootable. Operating systems shipped before the specified model was released will
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnMiscEntries_Add">
+             <widget class="QToolButton" name="btnMiscEntries_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnMiscEntries_Del">
+             <widget class="QToolButton" name="btnMiscEntries_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -3561,16 +3958,46 @@ bootable. Operating systems shipped before the specified model was released will
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnMiscTools_Add">
+             <widget class="QToolButton" name="btnMiscTools_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnMiscTools_Del">
+             <widget class="QToolButton" name="btnMiscTools_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -3607,68 +4034,58 @@ bootable. Operating systems shipped before the specified model was released will
            <number>0</number>
           </property>
           <property name="documentMode">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <widget class="QWidget" name="tab_18">
            <attribute name="title">
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_17">
-            <item row="2" column="0">
-             <widget class="QPushButton" name="btnNVRAMAdd_Add0">
+            <item row="1" column="0">
+             <widget class="QToolButton" name="btnNVRAMAdd_Add0">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <spacer name="horizontalSpacer_21">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
-              <property name="sizeHint" stdset="0">
+              <property name="iconSize">
                <size>
-                <width>121</width>
-                <height>20</height>
+                <width>28</width>
+                <height>28</height>
                </size>
               </property>
-             </spacer>
-            </item>
-            <item row="1" column="4" colspan="3">
-             <widget class="QTableWidget" name="table_nv_add">
-              <property name="columnCount">
-               <number>3</number>
-              </property>
-              <column/>
-              <column/>
-              <column/>
              </widget>
             </item>
-            <item row="2" column="6">
-             <widget class="QPushButton" name="btnNVRAMAdd_Del">
+            <item row="1" column="1">
+             <widget class="QToolButton" name="btnNVRAMAdd_Del0">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
-             </widget>
-            </item>
-            <item row="2" column="5">
-             <widget class="QPushButton" name="btnNVRAMAdd_Add">
-              <property name="text">
-               <string>AddItem</string>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
-            <item row="0" column="0" rowspan="2" colspan="7">
-             <layout class="QGridLayout" name="gridLayout_nv_add"/>
-            </item>
-            <item row="2" column="2">
-             <widget class="QPushButton" name="btnNVRAMAdd_Del0">
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="3" colspan="2">
+            <item row="1" column="2">
              <spacer name="horizontalSpacer_13">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -3681,21 +4098,73 @@ bootable. Operating systems shipped before the specified model was released will
               </property>
              </spacer>
             </item>
+            <item row="1" column="3">
+             <widget class="QToolButton" name="btnNVRAMAdd_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QToolButton" name="btnNVRAMAdd_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" colspan="5">
+             <layout class="QGridLayout" name="gridLayout_nv_add">
+              <item row="0" column="0">
+               <widget class="QTableWidget" name="table_nv_add0">
+                <property name="columnCount">
+                 <number>1</number>
+                </property>
+                <column/>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QTableWidget" name="table_nv_add">
+                <property name="columnCount">
+                 <number>3</number>
+                </property>
+                <column/>
+                <column/>
+                <column/>
+               </widget>
+              </item>
+             </layout>
+            </item>
            </layout>
-           <widget class="QTableWidget" name="table_nv_add0">
-            <property name="geometry">
-             <rect>
-              <x>35</x>
-              <y>22</y>
-              <width>331</width>
-              <height>271</height>
-             </rect>
-            </property>
-            <property name="columnCount">
-             <number>1</number>
-            </property>
-            <column/>
-           </widget>
           </widget>
           <widget class="QWidget" name="tab_19">
            <attribute name="title">
@@ -3719,30 +4188,46 @@ bootable. Operating systems shipped before the specified model was released will
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnNVRAMDel_Add0">
+             <widget class="QToolButton" name="btnNVRAMDel_Add0">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnNVRAMDel_Del0">
+             <widget class="QToolButton" name="btnNVRAMDel_Del0">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
-             </widget>
-            </item>
-            <item row="1" column="4">
-             <widget class="QPushButton" name="btnNVRAMDel_Add">
-              <property name="text">
-               <string>AddItem</string>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
-             <widget class="QPushButton" name="btnNVRAMDel_Del">
-              <property name="text">
-               <string>DeleteItem</string>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -3758,6 +4243,50 @@ bootable. Operating systems shipped before the specified model was released will
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="1" column="4">
+             <widget class="QToolButton" name="btnNVRAMDel_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QToolButton" name="btnNVRAMDel_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -3783,16 +4312,46 @@ bootable. Operating systems shipped before the specified model was released will
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnNVRAMLS_Add0">
+             <widget class="QToolButton" name="btnNVRAMLS_Add0">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnNVRAMLS_Del0">
+             <widget class="QToolButton" name="btnNVRAMLS_Del0">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -3810,16 +4369,46 @@ bootable. Operating systems shipped before the specified model was released will
              </spacer>
             </item>
             <item row="1" column="4">
-             <widget class="QPushButton" name="btnNVRAMLS_Add">
+             <widget class="QToolButton" name="btnNVRAMLS_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
             <item row="1" column="5">
-             <widget class="QPushButton" name="btnNVRAMLS_Del">
+             <widget class="QToolButton" name="btnNVRAMLS_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
@@ -3892,7 +4481,7 @@ A continuously updated variable list can be found in a corresponding document: N
       </widget>
       <widget class="QWidget" name="tab_7">
        <attribute name="title">
-        <string>PI</string>
+        <string>PlatformInfo</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_54">
         <item row="0" column="0">
@@ -3901,10 +4490,10 @@ A continuously updated variable list can be found in a corresponding document: N
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <widget class="QWidget" name="tab_21">
            <attribute name="title">
@@ -3932,7 +4521,12 @@ A continuously updated variable list can be found in a corresponding document: N
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QPushButton" name="btnGenerate">
+             <widget class="QToolButton" name="btnGenerate">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Generate</string>
               </property>
@@ -3987,7 +4581,12 @@ A continuously updated variable list can be found in a corresponding document: N
              <widget class="QLineEdit" name="editSystemUUID"/>
             </item>
             <item row="3" column="2">
-             <widget class="QPushButton" name="btnSystemUUID">
+             <widget class="QToolButton" name="btnSystemUUID">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Generate</string>
               </property>
@@ -4361,10 +4960,10 @@ indicates that the device is being used solely to provide 8 error-correction bit
               </property>
              </widget>
             </item>
-            <item row="0" column="1" colspan="2">
+            <item row="0" column="1">
              <widget class="QLineEdit" name="editDataWidth"/>
             </item>
-            <item row="0" column="3">
+            <item row="0" column="2">
              <widget class="QLabel" name="label_102">
               <property name="toolTip">
                <string> Specifies the primary hardware error correction or detection method supported by the memory.
@@ -4384,10 +4983,10 @@ indicates that the device is being used solely to provide 8 error-correction bit
               </property>
              </widget>
             </item>
-            <item row="0" column="4">
+            <item row="0" column="3">
              <widget class="QLineEdit" name="editErrorCorrection"/>
             </item>
-            <item row="0" column="5">
+            <item row="0" column="4">
              <widget class="QLabel" name="label_100">
               <property name="toolTip">
                <string> Specifies the form factor of the memory. On Macs this should usually be DIMM or SODIMM.
@@ -4407,10 +5006,10 @@ When CustomMemory is false, this value is automatically set based on Mac product
               </property>
              </widget>
             </item>
-            <item row="0" column="6">
+            <item row="0" column="5">
              <widget class="QLineEdit" name="editFormFactor"/>
             </item>
-            <item row="0" column="7">
+            <item row="0" column="6">
              <widget class="QLabel" name="label_99">
               <property name="toolTip">
                <string>Specifies the maximum amount of memory, in bytes, supported by the system.</string>
@@ -4423,7 +5022,7 @@ When CustomMemory is false, this value is automatically set based on Mac product
               </property>
              </widget>
             </item>
-            <item row="0" column="8">
+            <item row="0" column="7">
              <widget class="QLineEdit" name="editMaxCapacity"/>
             </item>
             <item row="1" column="0">
@@ -4437,10 +5036,10 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
               </property>
              </widget>
             </item>
-            <item row="1" column="1" colspan="2">
+            <item row="1" column="1">
              <widget class="QLineEdit" name="editTotalWidth"/>
             </item>
-            <item row="1" column="3">
+            <item row="1" column="2">
              <widget class="QLabel" name="label_103">
               <property name="toolTip">
                <string>Description: Specifies the memory type. Commonly used types are listed below.
@@ -4462,10 +5061,10 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
+            <item row="1" column="3">
              <widget class="QLineEdit" name="editType"/>
             </item>
-            <item row="1" column="5">
+            <item row="1" column="4">
              <widget class="QLabel" name="label_104">
               <property name="toolTip">
                <string> Specifies additional memory type information.
@@ -4481,10 +5080,10 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
               </property>
              </widget>
             </item>
-            <item row="1" column="6">
+            <item row="1" column="5">
              <widget class="QLineEdit" name="editTypeDetail"/>
             </item>
-            <item row="2" column="0" colspan="9">
+            <item row="2" column="0" colspan="8">
              <widget class="QTableWidget" name="tableDevices">
               <property name="columnCount">
                <number>8</number>
@@ -4499,21 +5098,51 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
               <column/>
              </widget>
             </item>
-            <item row="3" column="0" colspan="2">
-             <widget class="QPushButton" name="btnDevices_add">
+            <item row="3" column="0">
+             <widget class="QToolButton" name="btnDevices_add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QPushButton" name="btnDevices_del">
-              <property name="text">
-               <string>DeleteItem</string>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
-            <item row="3" column="3" colspan="6">
+            <item row="3" column="1">
+             <widget class="QToolButton" name="btnDevices_del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2" colspan="6">
              <spacer name="horizontalSpacer_23">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -5264,10 +5893,10 @@ with existing Windows activation and custom OEM software but potentially breakin
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <widget class="QWidget" name="tab_22">
            <attribute name="title">
@@ -5537,7 +6166,7 @@ specified codec (AudioCodec) located on the audio controller (AudioDevice).</str
             <string>Drivers</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_29">
-            <item row="0" column="0" colspan="5">
+            <item row="0" column="0" colspan="4">
              <widget class="QTableWidget" name="table_uefi_drivers">
               <property name="columnCount">
                <number>1</number>
@@ -5545,21 +6174,64 @@ specified codec (AudioCodec) located on the audio controller (AudioDevice).</str
               <column/>
              </widget>
             </item>
-            <item row="1" column="0" rowspan="2">
-             <widget class="QPushButton" name="btnUEFIDrivers_Add">
+            <item row="1" column="0">
+             <widget class="QToolButton" name="btnUEFIDrivers_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
-             </widget>
-            </item>
-            <item row="1" column="1" rowspan="2">
-             <widget class="QPushButton" name="btnUEFIDrivers_Del">
-              <property name="text">
-               <string>DeleteItem</string>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
               </property>
              </widget>
             </item>
-            <item row="1" column="3" rowspan="2" colspan="2">
+            <item row="1" column="1">
+             <widget class="QToolButton" name="btnUEFIDrivers_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>28</width>
+                <height>28</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <spacer name="horizontalSpacer_17">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>739</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="3">
              <widget class="QCheckBox" name="chkConnectDrivers">
               <property name="toolTip">
                <string>This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
@@ -5575,19 +6247,6 @@ Enable this option to be able to see all the boot options when having multiple d
                <string>ConnectDrivers</string>
               </property>
              </widget>
-            </item>
-            <item row="2" column="2">
-             <spacer name="horizontalSpacer_17">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>739</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -6285,14 +6944,24 @@ im4m manifest files used by Apple Secure Boot.</string>
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QPushButton" name="btnUEFIRM_Add">
+             <widget class="QToolButton" name="btnUEFIRM_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QPushButton" name="btnUEFIRM_Del">
+             <widget class="QToolButton" name="btnUEFIRM_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -6518,7 +7187,7 @@ the MSR registers.</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1359</width>
+     <width>1200</width>
      <height>24</height>
     </rect>
    </property>
@@ -6545,8 +7214,27 @@ the MSR registers.</string>
     <addaction name="actionPlist_editor"/>
     <addaction name="actionDSDT_SSDT_editor"/>
    </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Auxiliary tools</string>
+    </property>
+    <addaction name="btnMountEsp"/>
+    <addaction name="btnOcvalidate"/>
+    <addaction name="separator"/>
+    <addaction name="btnExportMaster"/>
+    <addaction name="btnImportMaster"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="btnHelp"/>
+    <addaction name="btnCheckUpdate"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuTools"/>
    <addaction name="menuResources"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">
@@ -6617,6 +7305,36 @@ the MSR registers.</string>
   <action name="actionOpenCanopyIcons">
    <property name="text">
     <string>OpenCanopyIcons</string>
+   </property>
+  </action>
+  <action name="btnMountEsp">
+   <property name="text">
+    <string>MountESP</string>
+   </property>
+  </action>
+  <action name="btnOcvalidate">
+   <property name="text">
+    <string>OC Validate</string>
+   </property>
+  </action>
+  <action name="btnExportMaster">
+   <property name="text">
+    <string>ExportMaster</string>
+   </property>
+  </action>
+  <action name="btnImportMaster">
+   <property name="text">
+    <string>ImportMaster</string>
+   </property>
+  </action>
+  <action name="btnHelp">
+   <property name="text">
+    <string>Documentation</string>
+   </property>
+  </action>
+  <action name="btnCheckUpdate">
+   <property name="text">
+    <string>CheckUpdate</string>
    </property>
   </action>
  </widget>

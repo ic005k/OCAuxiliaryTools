@@ -31,7 +31,9 @@ aboutDialog::aboutDialog(QWidget* parent)
     QImage* img = new QImage();
 
     img->load(":/icon.png");
-    ui->label->setPixmap(QPixmap::fromImage(*img));
+    ui->lblIcon->setPixmap(QPixmap::fromImage(*img));
+
+    //ui->label_3->setText("The above members have provided pertinent comments on the config.plist file and code structure, thank you!" + "\n" + "And thanks to all the participants!");
 }
 
 aboutDialog::~aboutDialog()

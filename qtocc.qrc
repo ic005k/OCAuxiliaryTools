@@ -2,5 +2,9 @@
     <qresource prefix="/">
         <file>icon.png</file>
         <file>cn.qm</file>
+        <file>add.png</file>
+        <file>del.png</file>
+        <file>down.png</file>
+        <file>up.png</file>
     </qresource>
 </RCC>
