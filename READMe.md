@@ -53,7 +53,7 @@ OC开发版可以在此下载：https://github.com/williambj1/OpenCore-Factory/r
 
 ## 讨论区：
 
-[pcbeta远景](http://bbs.pcbeta.com/viewthread-1866148-1-1.html)&nbsp;&nbsp;&nbsp;&nbsp;[insanelymac](https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/)
+[insanelymac](https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/)
 
 
 ### 备注：此项目开始于2020年8月
