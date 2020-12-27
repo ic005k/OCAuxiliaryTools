@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>553</width>
+    <width>740</width>
     <height>221</height>
    </rect>
   </property>
@@ -91,19 +91,14 @@
     <string>Contributor: Sherlocks (Seoul, Korea)    [file structure]</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="btnOk">
+  <widget class="QPushButton" name="btnOk">
    <property name="geometry">
     <rect>
-     <x>430</x>
+     <x>600</x>
      <y>180</y>
-     <width>81</width>
-     <height>22</height>
+     <width>113</width>
+     <height>32</height>
     </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
    </property>
    <property name="text">
     <string>OK</string>

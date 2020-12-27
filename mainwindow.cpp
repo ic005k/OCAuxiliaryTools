@@ -22,8 +22,8 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20201225";
-    title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison;
+    CurVerison = "20201226";
+    title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
     aboutDlg = new aboutDialog(this);
@@ -108,32 +108,6 @@ MainWindow::MainWindow(QWidget* parent)
     ui->tabTotal->setDocumentMode(false);
     ui->btnOcvalidate->setEnabled(false);
     win = true;
-    ui->btnACPIAdd_Add->setFont(font);
-    ui->btnACPIAdd_Del->setFont(font);
-
-    ui->btnACPIDel_Add->setFont(font);
-    ui->btnACPIDel_Del->setFont(font);
-
-    ui->btnACPIPatch_Add->setFont(font);
-    ui->btnACPIPatch_Del->setFont(font);
-
-    ui->btnBooterPatchAdd->setFont(font);
-    ui->btnBooterPatchDel->setFont(font);
-    ui->btnBooter_Add->setFont(font);
-    ui->btnBooter_Del->setFont(font);
-
-    ui->btnDPAdd_Add->setFont(font);
-    ui->btnDPAdd_Add0->setFont(font);
-    ui->btnDPAdd_Del->setFont(font);
-    ui->btnDPAdd_Del0->setFont(font);
-    ui->btnDPDel_Add->setFont(font);
-    ui->btnDPDel_Add0->setFont(font);
-    ui->btnDPDel_Del->setFont(font);
-    ui->btnDPDel_Del0->setFont(font);
-
-    ui->btnKernelAdd_Add->setFont(font);
-    ui->btnKernelAdd_Del->setFont(font);
-    ui->btnACPIDel_Add->setFont(font);
 
 #endif
 
@@ -189,7 +163,7 @@ void MainWindow::recentOpen(QString filename) { openFile(filename); }
 void MainWindow::openFile(QString PlistFileName)
 {
     if (!PlistFileName.isEmpty()) {
-        setWindowTitle(title + "      [*]" + PlistFileName);
+        setWindowTitle(title + PlistFileName);
         SaveFileName = PlistFileName;
     } else
         return;
@@ -2464,6 +2438,7 @@ void MainWindow::ParserUEFI(QVariantMap map)
     ui->editAudioDevice->setText(map_audio["AudioDevice"].toString());
     ui->editAudioOut->setText(map_audio["AudioOut"].toString());
     ui->editMinimumVolume->setText(map_audio["MinimumVolume"].toString());
+    ui->editSetupDelay->setText(map_audio["SetupDelay"].toString());
     ui->editVolumeAmplifier->setText(map_audio["VolumeAmplifier"].toString());
 
     // Drivers
@@ -3310,6 +3285,7 @@ QVariantMap MainWindow::SaveUEFI()
     dictList["AudioOut"] = ui->editAudioOut->text().toLongLong();
     dictList["AudioSupport"] = getChkBool(ui->chkAudioSupport);
     dictList["MinimumVolume"] = ui->editMinimumVolume->text().toLongLong();
+    dictList["SetupDelay"] = ui->editSetupDelay->text().toLongLong();
     dictList["PlayChime"] = ui->cboxPlayChime->currentText();
     dictList["VolumeAmplifier"] = ui->editVolumeAmplifier->text().toLongLong();
     subMap["Audio"] = dictList;
@@ -3792,11 +3768,33 @@ void MainWindow::del_item(QTableWidget* table)
     if (table->rowCount() == 0)
         return;
 
-    int t = table->currentRow();
-    table->removeRow(t);
+    int row = table->currentRow();
+
+    //std::vector<int> vecItemIndex; //保存选中行的索引
+    QItemSelectionModel* selections = table->selectionModel(); //返回当前的选择模式
+    QModelIndexList selectedsList = selections->selectedIndexes(); //返回所有选定的模型项目索引列表
+
+    for (int i = 0; i < selectedsList.count(); i++) {
+
+        //vecItemIndex.push_back(selectedsList.at(i).row());
+        int t = selectedsList.at(i).row();
+        table->removeRow(t);
+
+        selections = table->selectionModel();
+        selectedsList = selections->selectedIndexes();
+
+        i = -1;
+        qDebug() << t;
+    }
+
+    if (row > table->rowCount()) {
+
+        row = table->rowCount();
+    }
+
     table->setFocus();
-    table->setCurrentCell(t - 1, 0);
-    if (t == 0)
+    table->setCurrentCell(row - 1, 0);
+    if (row == 0)
         table->setCurrentCell(0, 0);
 
     this->setWindowModified(true);
@@ -3927,6 +3925,12 @@ void MainWindow::on_btnACPIAdd_Add_clicked()
     QFileDialog fd;
 
     QStringList FileName = fd.getOpenFileNames(this, "file", "", "acpi file(*.aml);;all(*.*)");
+
+    addACPIItem(FileName);
+}
+
+void MainWindow::addACPIItem(QStringList FileName)
+{
     if (FileName.isEmpty())
 
         return;
@@ -4021,22 +4025,27 @@ void MainWindow::on_btnKernelAdd_Add_clicked()
     QStringList FileName;
 
 #ifdef Q_OS_WIN32
-    // win
+
     FileName.append(fd.getExistingDirectory());
     // qDebug() << FileName[0];
 #endif
 
 #ifdef Q_OS_LINUX
-    // linux
+
     FileName.append(fd.getExistingDirectory());
 #endif
 
 #ifdef Q_OS_MAC
-    // mac
+
     FileName = fd.getOpenFileNames(this, "kext", "",
         "kext(*.kext);;all(*.*)");
 #endif
+    //qDebug() << FileName[0];
+    AddKexts(FileName);
+}
 
+void MainWindow::AddKexts(QStringList FileName)
+{
     int file_count = FileName.count();
 
     if (file_count == 0 || FileName[0] == "")
@@ -4195,6 +4204,12 @@ void MainWindow::on_btnMiscTools_Add_clicked()
 
     QStringList FileName = fd.getOpenFileNames(this, "tools efi file", "",
         "efi file(*.efi);;all files(*.*)");
+
+    addEFITools(FileName);
+}
+
+void MainWindow::addEFITools(QStringList FileName)
+{
     if (FileName.isEmpty())
 
         return;
@@ -4461,6 +4476,12 @@ void MainWindow::on_btnUEFIDrivers_Add_clicked()
     QFileDialog fd;
 
     QStringList FileName = fd.getOpenFileNames(this, "file", "", "efi file(*.efi);;all(*.*)");
+
+    addEFIDrivers(FileName);
+}
+
+void MainWindow::addEFIDrivers(QStringList FileName)
+{
     if (FileName.isEmpty())
 
         return;
@@ -5011,13 +5032,89 @@ void MainWindow::dropEvent(QDropEvent* e)
         return;
     }
 
-    QString fileName = urls.first().toLocalFile();
-    if (fileName.isEmpty()) {
+    QStringList fileList;
+    for (int i = 0; i < urls.count(); i++) {
+        fileList.append(urls.at(i).toLocalFile());
+    }
+
+    //QString fileName = urls.first().toLocalFile();
+    if (fileList.isEmpty()) {
         return;
     }
 
-    PlistFileName = fileName;
-    openFile(fileName);
+    //plist
+    QFileInfo fi(fileList.at(0));
+    if (fi.suffix().toLower() == "plist") {
+
+        PlistFileName = fileList.at(0);
+        openFile(PlistFileName);
+    }
+
+    //aml
+    if (fi.suffix().toLower() == "aml") {
+
+        if (ui->tabTotal->currentIndex() == 0 && ui->tabACPI->currentIndex() == 0) {
+
+            addACPIItem(fileList);
+        }
+    }
+
+    //kext
+    QString fileSuffix;
+#ifdef Q_OS_WIN32
+    fileSuffix = fi.suffix().toLower();
+#endif
+
+#ifdef Q_OS_LINUX
+    fileSuffix = fi.suffix().toLower();
+#endif
+
+#ifdef Q_OS_MAC
+    QString str1 = fileList.at(0);
+    QString str2 = str1.mid(str1.length() - 5, 4);
+    fileSuffix = str2.toLower();
+#endif
+
+    //qDebug() << fi.suffix().toLower() << fileList.at(0) << fileSuffix;
+    if (fileSuffix == "kext") {
+        if (ui->tabTotal->currentIndex() == 3 && ui->tabKernel->currentIndex() == 0) {
+            QStringList kextList;
+            for (int i = 0; i < fileList.count(); i++) {
+                QString str3 = fileList.at(i);
+                QString str4;
+#ifdef Q_OS_WIN32
+                str4 = str3.mid(0, str3.length());
+#endif
+
+#ifdef Q_OS_LINUX
+                str4 = str3.mid(0, str3.length());
+#endif
+
+#ifdef Q_OS_MAC
+                str4 = str3.mid(0, str3.length() - 1);
+#endif
+
+                kextList.append(str4);
+                //qDebug() << str4;
+            }
+
+            AddKexts(kextList);
+        }
+    }
+
+    //efi tools
+    if (fi.suffix().toLower() == "efi") {
+        if (ui->tabTotal->currentIndex() == 4 && ui->tabMisc->currentIndex() == 5) {
+            addEFITools(fileList);
+        }
+    }
+
+    //efi drivers
+    if (fi.suffix().toLower() == "efi") {
+        if (ui->tabTotal->currentIndex() == 7 && ui->tabUEFI->currentIndex() == 2) {
+            addEFIDrivers(fileList);
+        }
+    }
 }
 
 #ifdef Q_OS_WIN32
@@ -8480,5 +8577,11 @@ int MainWindow::parse_UpdateJSON(QString str)
 
 void MainWindow::on_chkSaveDataHub_clicked()
 {
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSetupDelay_textChanged(const QString& arg1)
+{
+    Q_UNUSED(arg1);
     this->setWindowModified(true);
 }

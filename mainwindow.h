@@ -121,6 +121,14 @@ public:
 
     aboutDialog* aboutDlg;
 
+    void addACPIItem(QStringList FileName);
+
+    void AddKexts(QStringList FileName);
+
+    void addEFITools(QStringList FileName);
+
+    void addEFIDrivers(QStringList FileName);
+
 public slots:
 
 protected:
@@ -965,6 +973,8 @@ private slots:
     void replyFinished(QNetworkReply* reply);
 
     void on_chkSaveDataHub_clicked();
+
+    void on_editSetupDelay_textChanged(const QString& arg1);
 
 private:
     Ui::MainWindow* ui;
