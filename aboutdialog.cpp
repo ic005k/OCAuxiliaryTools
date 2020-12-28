@@ -33,7 +33,8 @@ aboutDialog::aboutDialog(QWidget* parent)
     img->load(":/icon.png");
     ui->lblIcon->setPixmap(QPixmap::fromImage(*img));
 
-    //ui->label_3->setText("The above members have provided pertinent comments on the config.plist file and code structure, thank you!" + "\n" + "And thanks to all the participants!");
+    QFileInfo appInfo(qApp->applicationFilePath());
+    ui->lblLastModi->setText(tr("Last modified: ") + appInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss"));
 }
 
 aboutDialog::~aboutDialog()

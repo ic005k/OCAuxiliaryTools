@@ -104,6 +104,19 @@
     <string>OK</string>
    </property>
   </widget>
+  <widget class="QLabel" name="lblLastModi">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>190</y>
+     <width>381</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

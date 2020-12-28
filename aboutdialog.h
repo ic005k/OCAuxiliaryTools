@@ -1,7 +1,9 @@
 #ifndef ABOUTDIALOG_H
 #define ABOUTDIALOG_H
 
+#include <QDateTime>
 #include <QDialog>
+#include <QFileInfo>
 
 namespace Ui {
 class aboutDialog;

@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20201226";
+    CurVerison = "20201227";
     title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -123,10 +123,6 @@ MainWindow::MainWindow(QWidget* parent)
     mac = true;
     ui->tabTotal->setDocumentMode(false);
 #endif
-
-    QFileInfo appInfo(qApp->applicationFilePath());
-    ui->statusbar->showMessage(
-        tr("Last modified): ") + appInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss"));
 
     //设置QToolTip颜色
     /*QPalette palette = QToolTip::palette();
@@ -4125,11 +4121,9 @@ void MainWindow::AddKexts(QStringList FileName)
                         int row = t->rowCount() + 1;
 
                         t->setRowCount(row);
-                        t->setItem(row - 1, 0,
-                            new QTableWidgetItem(QFileInfo(FileName[j]).fileName() + "/Contents/PlugIns/" + kext_file[i + 2]));
+                        t->setItem(row - 1, 0, new QTableWidgetItem(QFileInfo(FileName[j]).fileName() + "/Contents/PlugIns/" + kext_file[i + 2]));
                         t->setItem(row - 1, 1, new QTableWidgetItem(""));
-                        t->setItem(row - 1, 2,
-                            new QTableWidgetItem("Contents/MacOS/" + fileInfoList.fileName()));
+                        t->setItem(row - 1, 2, new QTableWidgetItem("Contents/MacOS/" + fileInfoList.fileName()));
                         t->setItem(row - 1, 3, new QTableWidgetItem("Contents/Info.plist"));
                         t->setItem(row - 1, 4, new QTableWidgetItem(""));
                         t->setItem(row - 1, 5, new QTableWidgetItem(""));
@@ -4138,6 +4132,27 @@ void MainWindow::AddKexts(QStringList FileName)
                         QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
                         newItem1->setTextAlignment(Qt::AlignCenter);
                         t->setItem(row - 1, 7, newItem1);
+
+                    } else { //不存在二进制文件，只存在一个Info.plist文件的情况
+
+                        QDir fileDir(filePath + "/" + fileInfo.fileName() + "/Contents/PlugIns/" + kext_file[i + 2] + "/Contents/");
+                        if (fileDir.exists()) {
+                            //写入到表里
+                            int row = t->rowCount() + 1;
+
+                            t->setRowCount(row);
+                            t->setItem(row - 1, 0, new QTableWidgetItem(QFileInfo(FileName[j]).fileName() + "/Contents/PlugIns/" + kext_file[i + 2]));
+                            t->setItem(row - 1, 1, new QTableWidgetItem(""));
+                            t->setItem(row - 1, 2, new QTableWidgetItem(""));
+                            t->setItem(row - 1, 3, new QTableWidgetItem("Contents/Info.plist"));
+                            t->setItem(row - 1, 4, new QTableWidgetItem(""));
+                            t->setItem(row - 1, 5, new QTableWidgetItem(""));
+                            init_enabled_data(t, row - 1, 6, "true");
+
+                            QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
+                            newItem1->setTextAlignment(Qt::AlignCenter);
+                            t->setItem(row - 1, 7, newItem1);
+                        }
                     }
                 }
             }
@@ -4653,6 +4668,7 @@ void MainWindow::about()
     //                 "a><br><a style='color: blue;'<\n><br>";
 
     //QMessageBox::about(this, tr("About"), strUrl + "\n" + strIcon);
+
     aboutDlg->setModal(true);
     aboutDlg->show();
 }
