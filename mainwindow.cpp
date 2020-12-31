@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20201227";
+    CurVerison = "20201231";
     title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -106,7 +106,8 @@ MainWindow::MainWindow(QWidget* parent)
     reg_win();
     font.setPixelSize(18);
     ui->tabTotal->setDocumentMode(false);
-    ui->btnOcvalidate->setEnabled(false);
+    ui->btnOcvalidate->setEnabled(true);
+    //ui->tabPlatformInfo->tabBar()->removeTab(5);
     win = true;
 
 #endif
@@ -114,7 +115,8 @@ MainWindow::MainWindow(QWidget* parent)
 #ifdef Q_OS_LINUX
     ui->btnMountEsp->setEnabled(false);
     font.setPixelSize(12);
-    ui->btnOcvalidate->setEnabled(false);
+    ui->btnOcvalidate->setEnabled(true);
+    ui->tabPlatformInfo->tabBar()->removeTab(5);
     linuxOS = true;
 #endif
 
@@ -122,6 +124,7 @@ MainWindow::MainWindow(QWidget* parent)
     font.setPixelSize(12);
     mac = true;
     ui->tabTotal->setDocumentMode(false);
+
 #endif
 
     //设置QToolTip颜色
@@ -2098,14 +2101,14 @@ void MainWindow::initui_PlatformInfo()
         ui->btnSystemUUID->setEnabled(false);
     }
 
-    ui->tabPlatformInfo->removeTab(4);
+    ui->tabPlatformInfo->removeTab(5);
 
 #endif
 
 #ifdef Q_OS_LINUX
     gs->execute(appInfo.filePath() + "/macserial", QStringList() << "-s");
     /*暂时屏蔽*/
-    ui->tabPlatformInfo->removeTab(4);
+    ui->tabPlatformInfo->removeTab(5);
     ui->btnGenerate->setEnabled(true);
 
 #endif
@@ -6958,7 +6961,7 @@ void MainWindow::on_line1()
 
 void MainWindow::on_line2()
 {
-    QUrl url(QString("https://github.com/williambj1/OpenCore-Factory/releases"));
+    QUrl url(QString("https://github.com/acidanthera/OpenCorePkg/actions"));
     QDesktopServices::openUrl(url);
 }
 
