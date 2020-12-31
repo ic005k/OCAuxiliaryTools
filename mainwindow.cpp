@@ -59,9 +59,9 @@ MainWindow::MainWindow(QWidget* parent)
             QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
             QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
 
-    QString tabBarStyle1 = "QTabBar::tab {min-width:100px;color: rgba(150,150,150);border: 2px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:5px;}\
-            QTabBar::tab:!selected {margin-top: 5px;} \
-            QTabBar::tab:selected {color: rgba(255,255,255);}";
+    QString tabBarStyle1 = "QTabBar::tab {min-width:100px;color: rgba(120,120,120);border: 1px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:2px;}\
+            QTabBar::tab:!selected {margin-top: 2px;} \
+            QTabBar::tab:selected {color: rgba(0,0,255);}";
 
     QString tabBarStyle2 = "QTabBar::tab {min-width:100px;color: black;background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #eeeeee, stop: 1 gray);border: 0px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:5px;}\
             QTabBar::tab:!selected {margin-top: 5px;} \
@@ -73,7 +73,7 @@ MainWindow::MainWindow(QWidget* parent)
             QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
             QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
 
-    // ui->tabACPI->setStyleSheet(tabBarStyle3);
+    //ui->tabTotal->setStyleSheet(tabBarStyle1);
     //ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
 
     //ui->tabTotal->setIconSize(QSize(50, 45));
@@ -8431,6 +8431,7 @@ void MainWindow::on_btnOcvalidate()
 #endif
 
 #ifdef Q_OS_LINUX
+    chkdata->start(appInfo.filePath() + "/ocvalidate", QStringList() << SaveFileName);
 
 #endif
 
