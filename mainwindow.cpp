@@ -107,7 +107,7 @@ MainWindow::MainWindow(QWidget* parent)
     font.setPixelSize(18);
     ui->tabTotal->setDocumentMode(false);
     ui->btnOcvalidate->setEnabled(true);
-    //ui->tabPlatformInfo->tabBar()->removeTab(5);
+
     win = true;
 
 #endif
@@ -116,7 +116,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui->btnMountEsp->setEnabled(false);
     font.setPixelSize(12);
     ui->btnOcvalidate->setEnabled(true);
-    ui->tabPlatformInfo->tabBar()->removeTab(5);
+
     linuxOS = true;
 #endif
 
@@ -741,34 +741,37 @@ void MainWindow::initui_dp()
     QTableWidgetItem* id0;
 
     // Add
-    ui->table_dp_add0->setColumnWidth(0, 400);
-    ui->table_dp_add0->setMinimumWidth(400);
+    ui->table_dp_add0->setColumnWidth(0, 475);
+    ui->table_dp_add0->setMinimumWidth(500);
+
     id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
     ui->table_dp_add0->setAlternatingRowColors(true);
 
     ui->table_dp_add->setColumnWidth(0, 300);
+    ui->table_dp_add->setMinimumWidth(700);
+
     id0 = new QTableWidgetItem(tr("Key"));
     ui->table_dp_add->setHorizontalHeaderItem(0, id0);
 
-    ui->table_dp_add->setColumnWidth(2, 200);
-    id0 = new QTableWidgetItem(tr("Value"));
-    ui->table_dp_add->setHorizontalHeaderItem(2, id0);
-
     id0 = new QTableWidgetItem(tr("Class"));
     ui->table_dp_add->setHorizontalHeaderItem(1, id0);
+
+    ui->table_dp_add->setColumnWidth(2, 260);
+    id0 = new QTableWidgetItem(tr("Value"));
+    ui->table_dp_add->setHorizontalHeaderItem(2, id0);
 
     ui->table_dp_add->setAlternatingRowColors(true);
 
     // Delete
 
-    ui->table_dp_del0->setColumnWidth(0, 400);
+    ui->table_dp_del0->setColumnWidth(0, 500);
     ui->table_dp_del0->setMinimumWidth(400);
     id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_del0->setHorizontalHeaderItem(0, id0);
     ui->table_dp_del0->setAlternatingRowColors(true);
 
-    ui->table_dp_del->setColumnWidth(0, 350);
+    ui->table_dp_del->setColumnWidth(0, 500);
     id0 = new QTableWidgetItem(tr("Value"));
     ui->table_dp_del->setHorizontalHeaderItem(0, id0);
     ui->table_dp_del->setAlternatingRowColors(true);
