@@ -11,6 +11,7 @@
 QString PlistFileName;
 QVector<QString> filelist;
 QWidgetList wdlist;
+QTableWidget* tableDatabase;
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -22,11 +23,12 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20201231";
+    CurVerison = "20210102";
     title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
     aboutDlg = new aboutDialog(this);
+    myDatabase = new dlgDatabase(this);
 
     QDir dir;
     if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) { }
@@ -43,9 +45,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     //ui->tabTotal->tabBar()->setTabToolTip(0, tr("ACPI"));
     //ui->tabTotal->tabBar()->setTabToolTip(1, tr("Booter"));
-
     //ui->tabTotal->tabBar()->setTabToolTip(2, tr("DeviceProperties"));
-
     //ui->tabTotal->tabBar()->setTabToolTip(3, tr("Kernel"));
     //ui->tabTotal->tabBar()->setTabToolTip(4, tr("Misc"));
     //ui->tabTotal->tabBar()->setTabToolTip(5, tr("NVRAM"));
@@ -4043,16 +4043,30 @@ void MainWindow::on_btnKernelAdd_Add_clicked()
         "kext(*.kext);;all(*.*)");
 #endif
     //qDebug() << FileName[0];
-    AddKexts(FileName);
+    addKexts(FileName);
 }
 
-void MainWindow::AddKexts(QStringList FileName)
+void MainWindow::addKexts(QStringList FileName)
 {
     int file_count = FileName.count();
 
     if (file_count == 0 || FileName[0] == "")
 
         return;
+
+    for (int k = 0; k < FileName.count(); k++) {
+        QString file = FileName.at(k);
+        QFileInfo fi(file);
+        if (fi.baseName().toLower() == "lilu") {
+            FileName.removeAt(k);
+            FileName.insert(0, file);
+        }
+
+        if (fi.baseName().toLower() == "virtualsmc") {
+            FileName.removeAt(k);
+            FileName.insert(1, file);
+        }
+    }
 
     for (int j = 0; j < file_count; j++) {
         QFileInfo fileInfo(FileName[j]);
@@ -5120,7 +5134,7 @@ void MainWindow::dropEvent(QDropEvent* e)
                 //qDebug() << str4;
             }
 
-            AddKexts(kextList);
+            addKexts(kextList);
         }
     }
 
@@ -6909,39 +6923,36 @@ void MainWindow::init_menu()
     ui->actionSave_As->setShortcut(tr("ctrl+shift+s"));
 
     //Tools
-    connect(ui->btnMountEsp, &QAction::triggered, this,
-        &MainWindow::on_btnMountEsp);
+    connect(ui->btnMountEsp, &QAction::triggered, this, &MainWindow::on_btnMountEsp);
     ui->btnMountEsp->setShortcut(tr("ctrl+m"));
 
-    connect(ui->btnOcvalidate, &QAction::triggered, this,
-        &MainWindow::on_btnOcvalidate);
+    connect(ui->btnOcvalidate, &QAction::triggered, this, &MainWindow::on_btnOcvalidate);
     ui->btnOcvalidate->setShortcut(tr("ctrl+l"));
 
-    connect(ui->btnExportMaster, &QAction::triggered, this,
-        &MainWindow::on_btnExportMaster);
+    connect(ui->actionGenerateEFI, &QAction::triggered, this, &MainWindow::on_GenerateEFI);
+    //ui->actionGenerateEFI->setShortcut(tr("ctrl+e"));
 
-    connect(ui->btnImportMaster, &QAction::triggered, this,
-        &MainWindow::on_btnImportMaster);
+    connect(ui->btnExportMaster, &QAction::triggered, this, &MainWindow::on_btnExportMaster);
+
+    connect(ui->btnImportMaster, &QAction::triggered, this, &MainWindow::on_btnImportMaster);
 
     //Help
-    connect(ui->btnHelp, &QAction::triggered, this,
-        &MainWindow::on_btnHelp);
+    connect(ui->btnHelp, &QAction::triggered, this, &MainWindow::on_btnHelp);
     ui->btnHelp->setShortcut(tr("ctrl+p"));
 
-    connect(ui->btnCheckUpdate, &QAction::triggered, this,
-        &MainWindow::on_btnCheckUpdate);
+    connect(ui->btnCheckUpdate, &QAction::triggered, this, &MainWindow::on_btnCheckUpdate);
     ui->btnCheckUpdate->setShortcut(tr("ctrl+u"));
+
+    connect(ui->actionDatabase, &QAction::triggered, this, &MainWindow::on_Database);
+    ui->actionDatabase->setShortcut(tr("ctrl+d"));
 
     connect(ui->actionAbout_2, &QAction::triggered, this, &MainWindow::about);
 
     connect(ui->actionOpenCore, &QAction::triggered, this, &MainWindow::on_line1);
-    connect(ui->actionOpenCore_Factory, &QAction::triggered, this,
-        &MainWindow::on_line2);
-    connect(ui->actionOpenCore_Forum, &QAction::triggered, this,
-        &MainWindow::on_line3);
+    connect(ui->actionOpenCore_Factory, &QAction::triggered, this, &MainWindow::on_line2);
+    connect(ui->actionOpenCore_Forum, &QAction::triggered, this, &MainWindow::on_line3);
 
-    connect(ui->actionSimplified_Chinese_Manual, &QAction::triggered, this,
-        &MainWindow::on_line4);
+    connect(ui->actionSimplified_Chinese_Manual, &QAction::triggered, this, &MainWindow::on_line4);
     if (!zh_cn)
         ui->actionSimplified_Chinese_Manual->setVisible(false);
 
@@ -6954,6 +6965,31 @@ void MainWindow::init_menu()
         &MainWindow::on_line21);
 
     ui->actionSave->setEnabled(false);
+}
+
+void MainWindow::on_Database()
+{
+    myDatabase->setModal(true);
+    myDatabase->show();
+
+    QFileInfo appInfo(qApp->applicationDirPath());
+
+    QString dirpath = appInfo.filePath() + "/Database/";
+    //设置要遍历的目录
+    QDir dir(dirpath);
+    //设置文件过滤器
+    QStringList nameFilters;
+    //设置文件过滤格式
+    nameFilters << "*.plist";
+    //将过滤后的文件名称存入到files列表中
+    QStringList files = dir.entryList(nameFilters, QDir::Files | QDir::Readable, QDir::Name);
+    tableDatabase->setRowCount(0);
+    tableDatabase->setRowCount(files.count());
+    for (int i = 0; i < files.count(); i++) {
+        QTableWidgetItem* newItem1;
+        newItem1 = new QTableWidgetItem(files.at(i));
+        tableDatabase->setItem(i, 0, newItem1);
+    }
 }
 
 void MainWindow::on_line1()
@@ -8607,4 +8643,192 @@ void MainWindow::on_editSetupDelay_textChanged(const QString& arg1)
 {
     Q_UNUSED(arg1);
     this->setWindowModified(true);
+}
+
+void MainWindow::on_GenerateEFI()
+{
+
+    QDir dir;
+    QString strDatabase;
+
+    QFileInfo appInfo(qApp->applicationDirPath());
+    QString pathSource = appInfo.filePath() + "/Database/";
+
+    QString pathTarget = QDir::homePath() + "/Desktop/EFI/";
+
+    DeleteDirectory(pathTarget);
+    //dir.rmdir(path);
+    if (dir.mkpath(pathTarget)) { }
+
+    //BOOT
+    QString pathBoot = pathTarget + "BOOT/";
+    if (dir.mkpath(pathBoot)) { }
+    QFile::copy(pathSource + "EFI/BOOT/BOOTx64.efi", pathBoot + "BOOTx64.efi");
+
+    //OC/ACPI
+    QString pathOCACPI = pathTarget + "OC/ACPI/";
+    if (dir.mkpath(pathOCACPI)) { }
+    for (int i = 0; i < ui->table_acpi_add->rowCount(); i++) {
+        ui->table_acpi_add->setCurrentCell(i, 0);
+        QString file = ui->table_acpi_add->currentItem()->text();
+        QFileInfo fi(pathSource + "EFI/OC/ACPI/" + file);
+        if (fi.exists())
+            QFile::copy(pathSource + "EFI/OC/ACPI/" + file, pathOCACPI + file);
+        else
+            strDatabase = strDatabase + "EFI/OC/ACPI/" + file + "\n";
+    }
+
+    //OC/Bootstrap
+    QString pathOCBootstrap = pathTarget + "OC/Bootstrap/";
+    if (dir.mkpath(pathOCBootstrap)) { }
+    QFile::copy(pathSource + "EFI/OC/Bootstrap/Bootstrap.efi", pathOCBootstrap + "Bootstrap.efi");
+
+    //OC/Drivers
+    QString pathOCDrivers = pathTarget + "OC/Drivers/";
+    if (dir.mkpath(pathOCDrivers)) { }
+    for (int i = 0; i < ui->table_uefi_drivers->rowCount(); i++) {
+        ui->table_uefi_drivers->setCurrentCell(i, 0);
+        QString file = ui->table_uefi_drivers->currentItem()->text();
+        QString str0 = pathSource + "EFI/OC/Drivers/" + file;
+        if (!str0.contains("#")) {
+            QFileInfo fi(str0);
+            if (fi.exists())
+                QFile::copy(str0, pathOCDrivers + file);
+            else
+                strDatabase = strDatabase + "EFI/OC/Drivers/" + file + "\n";
+        }
+    }
+
+    //OC/Kexts
+    QString pathOCKexts = pathTarget + "OC/Kexts/";
+    if (dir.mkpath(pathOCKexts)) { }
+    for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
+        ui->table_kernel_add->setCurrentCell(i, 0);
+        QString file = ui->table_kernel_add->currentItem()->text();
+        QString str0 = pathSource + "EFI/OC/Kexts/" + file;
+        QDir kextDir(str0);
+
+        if (!str0.contains("#")) {
+
+            if (kextDir.exists())
+                copyDirectoryFiles(str0, pathOCKexts + file, true);
+            else
+                strDatabase = strDatabase + "EFI/OC/Kexts/" + file + "\n";
+        }
+    }
+
+    //OC/Resources
+    QString pathOCResources = pathTarget + "OC/Resources/";
+    copyDirectoryFiles(pathSource + "EFI/OC/Resources/", pathOCResources, true);
+
+    //OC/Tools
+    QString pathOCTools = pathTarget + "OC/Tools/";
+    if (dir.mkpath(pathOCTools)) { }
+    for (int i = 0; i < ui->tableTools->rowCount(); i++) {
+        ui->tableTools->setCurrentCell(i, 0);
+        QString file = ui->tableTools->currentItem()->text();
+        QString str0 = pathSource + "EFI/OC/Tools/" + file;
+        if (!str0.contains("#")) {
+            QFileInfo fi(str0);
+            if (fi.exists())
+                QFile::copy(str0, pathOCTools + file);
+            else
+                strDatabase = strDatabase + "EFI/OC/Tools/" + file + "\n";
+        }
+    }
+
+    //OC/OpenCore.efi
+    QFile::copy(pathSource + "EFI/OC/OpenCore.efi", pathTarget + "OC/OpenCore.efi");
+
+    //OC/Config.plist
+    SavePlist(pathTarget + "OC/Config.plist");
+
+    QMessageBox box;
+    if (strDatabase != "")
+        box.setText(tr("Finished generating the EFI folder on the desktop.") + "\n" + tr("The following files do not exist in the database at the moment, please add them yourself:") + "\n" + strDatabase);
+    else
+        box.setText(tr("Finished generating the EFI folder on the desktop."));
+    box.exec();
+}
+
+bool MainWindow::DeleteDirectory(const QString& path)
+{
+    if (path.isEmpty()) {
+        return false;
+    }
+
+    QDir dir(path);
+    if (!dir.exists()) {
+        return true;
+    }
+
+    dir.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot);
+    QFileInfoList fileList = dir.entryInfoList();
+    foreach (QFileInfo fi, fileList) {
+        if (fi.isFile()) {
+            fi.dir().remove(fi.fileName());
+        } else {
+            DeleteDirectory(fi.absoluteFilePath());
+        }
+    }
+    return dir.rmpath(dir.absolutePath());
+}
+
+//拷贝文件：
+bool MainWindow::copyFileToPath(QString sourceDir, QString toDir, bool coverFileIfExist)
+{
+    toDir.replace("\\", "/");
+    if (sourceDir == toDir) {
+        return true;
+    }
+    if (!QFile::exists(sourceDir)) {
+        return false;
+    }
+    QDir* createfile = new QDir;
+    bool exist = createfile->exists(toDir);
+    if (exist) {
+        if (coverFileIfExist) {
+            createfile->remove(toDir);
+        }
+    } //end if
+
+    if (!QFile::copy(sourceDir, toDir)) {
+        return false;
+    }
+    return true;
+}
+
+//拷贝文件夹：
+bool MainWindow::copyDirectoryFiles(const QString& fromDir, const QString& toDir, bool coverFileIfExist)
+{
+    QDir sourceDir(fromDir);
+    QDir targetDir(toDir);
+    if (!targetDir.exists()) { /**< 如果目标目录不存在，则进行创建 */
+        if (!targetDir.mkdir(targetDir.absolutePath()))
+            return false;
+    }
+
+    QFileInfoList fileInfoList = sourceDir.entryInfoList();
+    foreach (QFileInfo fileInfo, fileInfoList) {
+        if (fileInfo.fileName() == "." || fileInfo.fileName() == "..")
+            continue;
+
+        if (fileInfo.isDir()) { /**< 当为目录时，递归的进行copy */
+            if (!copyDirectoryFiles(fileInfo.filePath(),
+                    targetDir.filePath(fileInfo.fileName()),
+                    coverFileIfExist))
+                return false;
+        } else { /**< 当允许覆盖操作时，将旧文件进行删除操作 */
+            if (coverFileIfExist && targetDir.exists(fileInfo.fileName())) {
+                targetDir.remove(fileInfo.fileName());
+            }
+
+            /// 进行文件copy
+            if (!QFile::copy(fileInfo.filePath(),
+                    targetDir.filePath(fileInfo.fileName()))) {
+                return false;
+            }
+        }
+    }
+    return true;
 }

@@ -30,6 +30,7 @@
 #include <QJsonObject>
 
 #include "aboutdialog.h"
+#include "dlgdatabase.h"
 #include "recentfiles.h"
 
 #ifdef Q_OS_WIN32
@@ -123,13 +124,20 @@ public:
 
     void addACPIItem(QStringList FileName);
 
-    void AddKexts(QStringList FileName);
+    void addKexts(QStringList FileName);
 
     void addEFITools(QStringList FileName);
 
     void addEFIDrivers(QStringList FileName);
 
+    bool DeleteDirectory(const QString& path);
+
+    bool copyDirectoryFiles(const QString& fromDir, const QString& toDir, bool coverFileIfExist);
+
+    bool copyFileToPath(QString sourceDir, QString toDir, bool coverFileIfExist);
+
 public slots:
+    void on_GenerateEFI();
 
 protected:
     void dragEnterEvent(QDragEnterEvent* e);
@@ -141,6 +149,7 @@ protected:
 #endif // QT_NO_CONTEXTMENU
 
 private slots:
+    void on_Database();
     void on_line1();
     void on_line2();
     void on_line3();
@@ -978,6 +987,8 @@ private slots:
 
 private:
     Ui::MainWindow* ui;
+
+    dlgDatabase* myDatabase;
 
     QNetworkAccessManager* manager;
     int parse_UpdateJSON(QString str);
