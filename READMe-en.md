@@ -17,6 +17,8 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 
 * 稳健的plist文件底层读写代码，确保数据读写的正确性
 
+* 根据配置文件在桌面上生成EFI文件夹
+
 * 多语言支持（目前支持中文和英文界面），自动识别操作系统语言并根据语种加载相应本土化的功能
 
 * 开源、跨平台（win、mac、linux均提供二进制文件的下载）
