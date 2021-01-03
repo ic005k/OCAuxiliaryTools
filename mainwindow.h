@@ -130,6 +130,8 @@ public:
 
     void addEFIDrivers(QStringList FileName);
 
+    int deleteDirfile(QString dirName);
+
     bool DeleteDirectory(const QString& path);
 
     bool copyDirectoryFiles(const QString& fromDir, const QString& toDir, bool coverFileIfExist);
@@ -149,6 +151,7 @@ protected:
 #endif // QT_NO_CONTEXTMENU
 
 private slots:
+    void on_ShareConfig();
     void on_Database();
     void on_line1();
     void on_line2();

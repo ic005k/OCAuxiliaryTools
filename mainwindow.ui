@@ -31,7 +31,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -415,98 +415,11 @@ waking from hibernation.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
           </property>
-          <widget class="QWidget" name="tab_39">
-           <attribute name="title">
-            <string>Patch</string>
-           </attribute>
-           <layout class="QGridLayout" name="gridLayout_60">
-            <item row="0" column="0" colspan="3">
-             <widget class="QTableWidget" name="table_Booter_patch">
-              <property name="rowCount">
-               <number>0</number>
-              </property>
-              <property name="columnCount">
-               <number>13</number>
-              </property>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QToolButton" name="btnBooterPatchAdd">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QToolButton" name="btnBooterPatchDel">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <spacer name="horizontalSpacer_75">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>1023</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </widget>
           <widget class="QWidget" name="tab_12">
            <attribute name="title">
             <string>MmioWhitelist</string>
@@ -581,47 +494,131 @@ waking from hibernation.</string>
             </item>
            </layout>
           </widget>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QGroupBox" name="groupBox_9">
-          <property name="title">
-           <string/>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_6">
-           <item row="0" column="0">
-            <widget class="QCheckBox" name="chkAvoidRuntimeDefrag">
-             <property name="toolTip">
-              <string>This option fixes UEFI runtime services (date, time, NVRAM, power control, etc.) support on many firmwares
+          <widget class="QWidget" name="tab_40">
+           <attribute name="title">
+            <string>Patch</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_38">
+            <item row="0" column="0" colspan="3">
+             <widget class="QTableWidget" name="table_Booter_patch">
+              <property name="rowCount">
+               <number>0</number>
+              </property>
+              <property name="columnCount">
+               <number>13</number>
+              </property>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QToolButton" name="btnBooterPatchAdd">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QToolButton" name="btnBooterPatchDel">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <spacer name="horizontalSpacer_75">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>1131</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_34">
+           <attribute name="title">
+            <string>Quirks</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="chkAvoidRuntimeDefrag">
+              <property name="toolTip">
+               <string>This option fixes UEFI runtime services (date, time, NVRAM, power control, etc.) support on many firmwares
 using SMM backing for select services like variable storage. SMM may try to access physical addresses, but they
 get moved by boot.efi.
 Note: Most but Apple and VMware firmwares need this quirk.</string>
-             </property>
-             <property name="statusTip">
-              <string>Protect from boot.efi runtime memory defragmentation.</string>
-             </property>
-             <property name="text">
-              <string>AvoidRuntimeDefrag</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <spacer name="horizontalSpacer_37">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>87</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="3">
-            <widget class="QCheckBox" name="chkDevirtualiseMmio">
-             <property name="toolTip">
-              <string>This option reduces stolen memory footprint from the memory map by removing runtime bit for known memory
+              </property>
+              <property name="statusTip">
+               <string>Protect from boot.efi runtime memory defragmentation.</string>
+              </property>
+              <property name="text">
+               <string>AvoidRuntimeDefrag</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer_37">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>80</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="chkDevirtualiseMmio">
+              <property name="toolTip">
+               <string>This option reduces stolen memory footprint from the memory map by removing runtime bit for known memory
 regions. This quirk may result in the increase of KASLR slides available, but is not necessarily compatible with
 the target board without additional measures. In general this frees from 64 to 256 megabytes of memory (present
 in the debug log), and on some platforms it is the only way to boot macOS, which otherwise fails with allocation
@@ -629,245 +626,245 @@ error at bootloader stage.
 This option is generally useful on all firmwares except some very old ones, like Sandy Bridge. On select firmwares
 it may require a list of exceptional addresses that still need to get their virtual addresses for proper NVRAM and
 hibernation functioning. Use MmioWhitelist section to do this.</string>
-             </property>
-             <property name="statusTip">
-              <string>Remove runtime attribute from select MMIO regions.</string>
-             </property>
-             <property name="text">
-              <string>DevirtualiseMmio</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="4" colspan="2">
-            <spacer name="horizontalSpacer_40">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>88</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="6" colspan="2">
-            <widget class="QCheckBox" name="chkDisableSingleUser">
-             <property name="toolTip">
-              <string>This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot
+              </property>
+              <property name="statusTip">
+               <string>Remove runtime attribute from select MMIO regions.</string>
+              </property>
+              <property name="text">
+               <string>DevirtualiseMmio</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <spacer name="horizontalSpacer_40">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>81</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="5" colspan="2">
+             <widget class="QCheckBox" name="chkDisableSingleUser">
+              <property name="toolTip">
+               <string>This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot
 argument. The behaviour with this quirk enabled is supposed to match T2-based model behaviour. Read this
 archived article to understand how to use single user mode with this quirk enabled.</string>
-             </property>
-             <property name="statusTip">
-              <string>Disable single user mode.</string>
-             </property>
-             <property name="text">
-              <string>DisableSingleUser</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="8">
-            <spacer name="horizontalSpacer_43">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>88</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="9">
-            <widget class="QCheckBox" name="chkDisableVariableWrite">
-             <property name="toolTip">
-              <string>This is a security option allowing one to restrict NVRAM access in macOS. This quirk requires OC_FIRMWARE_RUNTIME
+              </property>
+              <property name="statusTip">
+               <string>Disable single user mode.</string>
+              </property>
+              <property name="text">
+               <string>DisableSingleUser</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="7">
+             <spacer name="horizontalSpacer_43">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>80</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="8">
+             <widget class="QCheckBox" name="chkDisableVariableWrite">
+              <property name="toolTip">
+               <string>This is a security option allowing one to restrict NVRAM access in macOS. This quirk requires OC_FIRMWARE_RUNTIME
 protocol implemented in OpenRuntime.efi.
 Note: This quirk can also be used as an ugly workaround to buggy UEFI runtime services implementations that
 fail to write variables to NVRAM and break the rest of the operating system.</string>
-             </property>
-             <property name="statusTip">
-              <string>Protect from macOS NVRAM write access.</string>
-             </property>
-             <property name="text">
-              <string>DisableVariableWrite</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="10">
-            <spacer name="horizontalSpacer_46">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>87</width>
-               <height>13</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="11">
-            <widget class="QCheckBox" name="chkDiscardHibernateMap">
-             <property name="toolTip">
-              <string>This option forces XNU kernel to ignore newly supplied memory map and assume that it did not change after
+              </property>
+              <property name="statusTip">
+               <string>Protect from macOS NVRAM write access.</string>
+              </property>
+              <property name="text">
+               <string>DisableVariableWrite</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="9">
+             <spacer name="horizontalSpacer_46">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>80</width>
+                <height>13</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="10">
+             <widget class="QCheckBox" name="chkDiscardHibernateMap">
+              <property name="toolTip">
+               <string>This option forces XNU kernel to ignore newly supplied memory map and assume that it did not change after
 waking from hibernation. This behaviour is required to work by Windows, which mandates to preserve runtime
 memory size and location after S4 wake.
 Note: This may be used to workaround buggy memory maps on older hardware, and is now considered rare legacy.
 Examples of such hardware are Ivy Bridge laptops with Insyde firmware, like Acer V3-571G. Do not use this
 unless you fully understand the consequences.</string>
-             </property>
-             <property name="statusTip">
-              <string>Reuse original hibernate memory map.</string>
-             </property>
-             <property name="text">
-              <string>DiscardHibernateMap</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QCheckBox" name="chkEnableWriteUnprotector">
-             <property name="toolTip">
-              <string>This option bypasses RˆX permissions in code pages of UEFI runtime services by removing write protection (WP)
+              </property>
+              <property name="statusTip">
+               <string>Reuse original hibernate memory map.</string>
+              </property>
+              <property name="text">
+               <string>DiscardHibernateMap</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <widget class="QCheckBox" name="chkEnableWriteUnprotector">
+              <property name="toolTip">
+               <string>This option bypasses RˆX permissions in code pages of UEFI runtime services by removing write protection (WP)
 bit from CR0 register during their execution. This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in
 OpenRuntime.efi.
 Note: This quirk may potentially weaken firmware security, please use RebuildAppleMemoryMap if your firmware
 supports memory attributes table (MAT). Refer to OCABC: MAT support is 1/0 log entry to determine whether
 MAT is supported.</string>
-             </property>
-             <property name="statusTip">
-              <string> Permit write access to UEFI runtime services code.</string>
-             </property>
-             <property name="text">
-              <string>EnableWriteUnprotector</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <spacer name="horizontalSpacer_38">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>87</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="1" column="3">
-            <widget class="QCheckBox" name="chkForceExitBootServices">
-             <property name="toolTip">
-              <string>Try to ensure that ExitBootServices call succeeds even with outdated MemoryMap key argument by obtaining
+              </property>
+              <property name="statusTip">
+               <string> Permit write access to UEFI runtime services code.</string>
+              </property>
+              <property name="text">
+               <string>EnableWriteUnprotector</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <spacer name="horizontalSpacer_38">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>80</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="3">
+             <widget class="QCheckBox" name="chkForceExitBootServices">
+              <property name="toolTip">
+               <string>Try to ensure that ExitBootServices call succeeds even with outdated MemoryMap key argument by obtaining
 current memory map and retrying ExitBootServices call.
 Note: The necessity of this quirk is determined by early boot crashes of the firmware. Do not use this unless you
 fully understand the consequences.</string>
-             </property>
-             <property name="statusTip">
-              <string>Retry ExitBootServices with new memory map on failure.</string>
-             </property>
-             <property name="text">
-              <string>ForceExitBootServices</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="4" colspan="2">
-            <spacer name="horizontalSpacer_41">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>88</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="1" column="6" colspan="2">
-            <widget class="QCheckBox" name="chkProtectMemoryRegions">
-             <property name="toolTip">
-              <string>Some firmwares incorrectly map select memory regions:
+              </property>
+              <property name="statusTip">
+               <string>Retry ExitBootServices with new memory map on failure.</string>
+              </property>
+              <property name="text">
+               <string>ForceExitBootServices</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <spacer name="horizontalSpacer_41">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>81</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="5" colspan="2">
+             <widget class="QCheckBox" name="chkProtectMemoryRegions">
+              <property name="toolTip">
+               <string>Some firmwares incorrectly map select memory regions:
 • CSM region can be marked as boot services code or data, which leaves it as free memory for XNU kernel.
 • MMIO regions can be marked as reserved memory and stay unmapped, but may be required to be accessible
 at runtime for NVRAM support.
 This quirk attempts to fix types of these regions, e.g. ACPI NVS for CSM or MMIO for MMIO.
 Note: The necessity of this quirk is determined by artifacts, sleep wake issues, and boot failures. In general only
 very old firmwares need this quirk.</string>
-             </property>
-             <property name="statusTip">
-              <string>Protect memory regions from incorrect access.</string>
-             </property>
-             <property name="text">
-              <string>ProtectMemoryRegions</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="8">
-            <spacer name="horizontalSpacer_45">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>88</width>
-               <height>13</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="1" column="9">
-            <widget class="QCheckBox" name="chkProtectSecureBoot">
-             <property name="toolTip">
-              <string>Reports security violation during attempts to write to db, dbx, PK, and KEK variables from the operating system.
+              </property>
+              <property name="statusTip">
+               <string>Protect memory regions from incorrect access.</string>
+              </property>
+              <property name="text">
+               <string>ProtectMemoryRegions</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="7">
+             <spacer name="horizontalSpacer_45">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>80</width>
+                <height>13</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="8">
+             <widget class="QCheckBox" name="chkProtectSecureBoot">
+              <property name="toolTip">
+               <string>Reports security violation during attempts to write to db, dbx, PK, and KEK variables from the operating system.
 Note: This quirk mainly attempts to avoid issues with NVRAM implementations with problematic defragmentation,
 such as select Insyde or MacPro5,1.</string>
-             </property>
-             <property name="statusTip">
-              <string>Protect UEFI Secure Boot variables from being written.</string>
-             </property>
-             <property name="text">
-              <string>ProtectSecureBoot</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="10">
-            <spacer name="horizontalSpacer_47">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>87</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="1" column="11">
-            <widget class="QCheckBox" name="chkProtectUefiServices">
-             <property name="toolTip">
-              <string>Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to
+              </property>
+              <property name="statusTip">
+               <string>Protect UEFI Secure Boot variables from being written.</string>
+              </property>
+              <property name="text">
+               <string>ProtectSecureBoot</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="9">
+             <spacer name="horizontalSpacer_47">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>80</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="10">
+             <widget class="QCheckBox" name="chkProtectUefiServices">
+              <property name="toolTip">
+               <string>Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to
 UEFI services during driver loading and related actions. Consequentially this directly breaks other quirks that
 affect memory management, like DevirtualiseMmio, ProtectMemoryRegions, or RebuildAppleMemoryMap, and
 may also break other quirks depending on the effects of these.
 Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest might run unreliably with
 more than one virtual core.” message.</string>
-             </property>
-             <property name="statusTip">
-              <string>Protect UEFI services from being overridden by the firmware.</string>
-             </property>
-             <property name="text">
-              <string>ProtectUefiServices</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0" colspan="2">
-            <widget class="QCheckBox" name="chkRebuildAppleMemoryMap">
-             <property name="toolTip">
-              <string>Apple kernel has several limitations in parsing UEFI memory map:
+              </property>
+              <property name="statusTip">
+               <string>Protect UEFI services from being overridden by the firmware.</string>
+              </property>
+              <property name="text">
+               <string>ProtectUefiServices</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0" colspan="2">
+             <widget class="QCheckBox" name="chkRebuildAppleMemoryMap">
+              <property name="toolTip">
+               <string>Apple kernel has several limitations in parsing UEFI memory map:
 • Memory map size must not exceed 4096 bytes as Apple kernel maps it as a single 4K page. Since some
 firmwares have very large memory maps (approximately over 100 entries) Apple kernel will crash at boot.
 • Memory attributes table is ignored. EfiRuntimeServicesCode memory statically gets RX permissions, and
@@ -882,89 +879,89 @@ SyncRuntimePermissions.
 Note 2 : The necessity of this quirk is determined by early boot failures. This quirk replaces EnableWriteUnprotector
 on firmwares supporting memory attributes table (MAT). This quirk is generally unnecessary when using
 OpenDuetPkg, but may be required to boot macOS 10.6 and earlier for unclear reasons.</string>
-             </property>
-             <property name="statusTip">
-              <string>Generate Memory Map compatible with macOS.</string>
-             </property>
-             <property name="text">
-              <string>RebuildAppleMemoryMap</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <spacer name="horizontalSpacer_39">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>87</width>
-               <height>13</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="2" column="3">
-            <widget class="QCheckBox" name="chkSetupVirtualMap">
-             <property name="toolTip">
-              <string>Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot
+              </property>
+              <property name="statusTip">
+               <string>Generate Memory Map compatible with macOS.</string>
+              </property>
+              <property name="text">
+               <string>RebuildAppleMemoryMap</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <spacer name="horizontalSpacer_39">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>80</width>
+                <height>13</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="chkSetupVirtualMap">
+              <property name="toolTip">
+               <string>Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot
 crashes. This quirk workarounds the problem by performing early boot identity mapping of assigned virtual
 addresses to physical memory.
 Note: The necessity of this quirk is determined by early boot failures. Currently new firmwares with memory
 protection support (like OVMF) do not support this quirk due to acidanthera/bugtracker#719.</string>
-             </property>
-             <property name="statusTip">
-              <string> Setup virtual memory at SetVirtualAddresses.</string>
-             </property>
-             <property name="text">
-              <string>SetupVirtualMap</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="4" colspan="2">
-            <spacer name="horizontalSpacer_42">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>88</width>
-               <height>13</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="2" column="6" colspan="2">
-            <widget class="QCheckBox" name="chkSignalAppleOS">
-             <property name="toolTip">
-              <string>This quirk is useful on Mac firmwares, which behave differently in different OS. For example, it is supposed to
+              </property>
+              <property name="statusTip">
+               <string> Setup virtual memory at SetVirtualAddresses.</string>
+              </property>
+              <property name="text">
+               <string>SetupVirtualMap</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="4">
+             <spacer name="horizontalSpacer_42">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>81</width>
+                <height>13</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="5">
+             <widget class="QCheckBox" name="chkSignalAppleOS">
+              <property name="toolTip">
+               <string>This quirk is useful on Mac firmwares, which behave differently in different OS. For example, it is supposed to
 enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.</string>
-             </property>
-             <property name="statusTip">
-              <string> Report macOS being loaded through OS Info for any OS.</string>
-             </property>
-             <property name="text">
-              <string>SignalAppleOS</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="8">
-            <spacer name="horizontalSpacer_44">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>88</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="2" column="9">
-            <widget class="QCheckBox" name="chkSyncRuntimePermissions">
-             <property name="toolTip">
-              <string>Some firmwares either fail to properly handle runtime permissions:
+              </property>
+              <property name="statusTip">
+               <string> Report macOS being loaded through OS Info for any OS.</string>
+              </property>
+              <property name="text">
+               <string>SignalAppleOS</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="7">
+             <spacer name="horizontalSpacer_44">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>80</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="8">
+             <widget class="QCheckBox" name="chkSyncRuntimePermissions">
+              <property name="toolTip">
+               <string>Some firmwares either fail to properly handle runtime permissions:
 • They incorrectly mark OpenRuntime as not executable in the memory map.
 • They incorrectly mark OpenRuntime as not executable in the memory attributes table.
 • They lose entries from the memory attributes table after OpenRuntime is loaded.
@@ -972,82 +969,82 @@ enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.</string>
 This quirk tries to update memory map and memory attributes table to correct this.
 Note: The necessity of this quirk is determined by early boot failures either in macOS or in Linux/Windows. In
 general only firmwares released in 2018 or later are affected.</string>
-             </property>
-             <property name="statusTip">
-              <string>Update memory permissions for runtime environment.</string>
-             </property>
-             <property name="text">
-              <string>SyncRuntimePermissions</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="10">
-            <spacer name="horizontalSpacer_48">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>87</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="2" column="11">
-            <widget class="QCheckBox" name="chkProvideCustomSlide">
-             <property name="toolTip">
-              <string>This option performs memory map analysis of your firmware and checks whether all slides (from 1 to 255) can be
+              </property>
+              <property name="statusTip">
+               <string>Update memory permissions for runtime environment.</string>
+              </property>
+              <property name="text">
+               <string>SyncRuntimePermissions</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="9">
+             <spacer name="horizontalSpacer_48">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>80</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="10">
+             <widget class="QCheckBox" name="chkProvideCustomSlide">
+              <property name="toolTip">
+               <string>This option performs memory map analysis of your firmware and checks whether all slides (from 1 to 255) can be
 used. As boot.efi generates this value randomly with rdrand or pseudo randomly rdtsc, there is a chance of
 boot failure when it chooses a conflicting slide. In case potential conflicts exist, this option forces macOS to use a
 pseudo random value among the available ones. This also ensures that slide= argument is never passed to the
 operating system for security reasons.
 Note: The necessity of this quirk is determined by OCABC: Only N/256 slide values are usable! message
 in the debug log. If the message is present, this option is to be enabled.</string>
-             </property>
-             <property name="statusTip">
-              <string>Provide custom KASLR slide on low memory.</string>
-             </property>
-             <property name="text">
-              <string>ProvideCustomSlide</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QCheckBox" name="chkEnableSafeModeSlide">
-             <property name="toolTip">
-              <string>This option is relevant to the users that have issues booting to safe mode (e.g. by holding shift or using -x boot
+              </property>
+              <property name="statusTip">
+               <string>Provide custom KASLR slide on low memory.</string>
+              </property>
+              <property name="text">
+               <string>ProvideCustomSlide</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="chkEnableSafeModeSlide">
+              <property name="toolTip">
+               <string>This option is relevant to the users that have issues booting to safe mode (e.g. by holding shift or using -x boot
 argument). By default safe mode forces 0 slide as if the system was launched with slide=0 boot argument. This
 quirk tries to patch boot.efi to lift that limitation and let some other value (from 1 to 255) be used. This quirk
 requires ProvideCustomSlide to be enabled.
 Note: The necessity of this quirk is determined by safe mode availability. If booting to safe mode fails, this option
 can be tried to be enabled.</string>
-             </property>
-             <property name="statusTip">
-              <string> Patch bootloader to have KASLR enabled in safe mode.</string>
-             </property>
-             <property name="text">
-              <string>EnableSafeModeSlide</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1" colspan="2">
-            <spacer name="horizontalSpacer_67">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>111</width>
-               <height>13</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="3" column="3" colspan="2">
-            <widget class="QCheckBox" name="chkAllowRelocationBlock">
-             <property name="toolTip">
-              <string>Relocation block is a scratch buffer allocated in lower 4 GB to be used for loading the kernel and related structures
+              </property>
+              <property name="statusTip">
+               <string> Patch bootloader to have KASLR enabled in safe mode.</string>
+              </property>
+              <property name="text">
+               <string>EnableSafeModeSlide</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1" colspan="2">
+             <spacer name="horizontalSpacer_67">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>103</width>
+                <height>13</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="3">
+             <widget class="QCheckBox" name="chkAllowRelocationBlock">
+              <property name="toolTip">
+               <string>Relocation block is a scratch buffer allocated in lower 4 GB to be used for loading the kernel and related structures
 by EfiBoot on firmwares where lower memory is otherwise occupied by the (assumed to be) non-runtime data.
 Right before kernel startup the relocation block is copied back to lower addresses. Similarly all the other addresses
 pointing to relocation block are also carefully adjusted. Relocation block can be used when:
@@ -1059,19 +1056,32 @@ correctly. Hibernation is not supported when booting with a relocation block (bu
 used when the quirk is enabled).
 Note: While this quirk is required to run older macOS versions on platforms with used lower memory it is not
 compatible with some hardware and macOS 11. In this case you may try to use EnableSafeModeSlide instead.</string>
-             </property>
-             <property name="statusTip">
-              <string>Allows booting macOS through a relocation block.</string>
-             </property>
-             <property name="text">
-              <string>AllowRelocationBlock</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="5" colspan="2">
-            <widget class="QLabel" name="label_41">
-             <property name="toolTip">
-              <string>This option overrides the maximum slide of 255 by a user specified value between 1 and 254 inclusive when
+              </property>
+              <property name="statusTip">
+               <string>Allows booting macOS through a relocation block.</string>
+              </property>
+              <property name="text">
+               <string>AllowRelocationBlock</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="4">
+             <spacer name="horizontalSpacer_18">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>81</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="5">
+             <widget class="QLabel" name="label_41">
+              <property name="toolTip">
+               <string>This option overrides the maximum slide of 255 by a user specified value between 1 and 254 inclusive when
 ProvideCustomSlide is enabled. It is believed that modern firmwares allocate pool memory from top to bottom,
 effectively resulting in free memory at the time of slide scanning being later used as temporary memory during
 kernel loading. In case those memory are unavailable, this option can stop evaluating higher slides.
@@ -1079,19 +1089,20 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
 and the randomized slide fall into the unavailable range. When AppleDebug is enabled, usually the debug log may
 contain messages like AAPL: [EB|‘LD:LKC] } Err(0x9). To find the optimal value, manually append slide=X
 to boot-args and log the largest one that won’t cause boot failure.</string>
-             </property>
-             <property name="statusTip">
-              <string>Provide maximum KASLR slide when higher ones are unavailable.</string>
-             </property>
-             <property name="text">
-              <string>ProvideMaxSlide</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="7" colspan="2">
-            <widget class="QLineEdit" name="editProvideMaxSlide"/>
-           </item>
-          </layout>
+              </property>
+              <property name="statusTip">
+               <string>Provide maximum KASLR slide when higher ones are unavailable.</string>
+              </property>
+              <property name="text">
+               <string>ProvideMaxSlide</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="6" colspan="2">
+             <widget class="QLineEdit" name="editProvideMaxSlide"/>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -7271,6 +7282,7 @@ the MSR registers.</string>
     </property>
     <addaction name="btnHelp"/>
     <addaction name="actionDatabase"/>
+    <addaction name="actionShareConfig"/>
     <addaction name="separator"/>
     <addaction name="btnCheckUpdate"/>
     <addaction name="actionAbout_2"/>
@@ -7399,6 +7411,11 @@ the MSR registers.</string>
   <action name="actionGenerateEFI">
    <property name="text">
     <string>Generate EFI on the desktop</string>
+   </property>
+  </action>
+  <action name="actionShareConfig">
+   <property name="text">
+    <string>Share your Config.plist</string>
    </property>
   </action>
  </widget>

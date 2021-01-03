@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210102";
+    CurVerison = "20210103";
     title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -6946,6 +6946,9 @@ void MainWindow::init_menu()
     connect(ui->actionDatabase, &QAction::triggered, this, &MainWindow::on_Database);
     ui->actionDatabase->setShortcut(tr("ctrl+d"));
 
+    connect(ui->actionShareConfig, &QAction::triggered, this, &MainWindow::on_ShareConfig);
+    ui->actionShareConfig->setShortcut(tr("ctrl+r"));
+
     connect(ui->actionAbout_2, &QAction::triggered, this, &MainWindow::about);
 
     connect(ui->actionOpenCore, &QAction::triggered, this, &MainWindow::on_line1);
@@ -8656,8 +8659,8 @@ void MainWindow::on_GenerateEFI()
 
     QString pathTarget = QDir::homePath() + "/Desktop/EFI/";
 
-    DeleteDirectory(pathTarget);
-    //dir.rmdir(path);
+    deleteDirfile(pathTarget);
+
     if (dir.mkpath(pathTarget)) { }
 
     //BOOT
@@ -8671,9 +8674,9 @@ void MainWindow::on_GenerateEFI()
     for (int i = 0; i < ui->table_acpi_add->rowCount(); i++) {
         ui->table_acpi_add->setCurrentCell(i, 0);
         QString file = ui->table_acpi_add->currentItem()->text();
-        QFileInfo fi(pathSource + "EFI/OC/ACPI/" + file);
+        QFileInfo fi(pathSource + "EFI/OC/ACPI/" + file.toLower());
         if (fi.exists())
-            QFile::copy(pathSource + "EFI/OC/ACPI/" + file, pathOCACPI + file);
+            QFile::copy(pathSource + "EFI/OC/ACPI/" + file.toLower(), pathOCACPI + file);
         else
             strDatabase = strDatabase + "EFI/OC/ACPI/" + file + "\n";
     }
@@ -8691,9 +8694,9 @@ void MainWindow::on_GenerateEFI()
         QString file = ui->table_uefi_drivers->currentItem()->text();
         QString str0 = pathSource + "EFI/OC/Drivers/" + file;
         if (!str0.contains("#")) {
-            QFileInfo fi(str0);
+            QFileInfo fi(str0.toLower());
             if (fi.exists())
-                QFile::copy(str0, pathOCDrivers + file);
+                QFile::copy(str0.toLower(), pathOCDrivers + file);
             else
                 strDatabase = strDatabase + "EFI/OC/Drivers/" + file + "\n";
         }
@@ -8706,12 +8709,12 @@ void MainWindow::on_GenerateEFI()
         ui->table_kernel_add->setCurrentCell(i, 0);
         QString file = ui->table_kernel_add->currentItem()->text();
         QString str0 = pathSource + "EFI/OC/Kexts/" + file;
-        QDir kextDir(str0);
+        QDir kextDir(str0.toLower());
 
         if (!str0.contains("#")) {
 
             if (kextDir.exists())
-                copyDirectoryFiles(str0, pathOCKexts + file, true);
+                copyDirectoryFiles(str0.toLower(), pathOCKexts + file, true);
             else
                 strDatabase = strDatabase + "EFI/OC/Kexts/" + file + "\n";
         }
@@ -8729,9 +8732,9 @@ void MainWindow::on_GenerateEFI()
         QString file = ui->tableTools->currentItem()->text();
         QString str0 = pathSource + "EFI/OC/Tools/" + file;
         if (!str0.contains("#")) {
-            QFileInfo fi(str0);
+            QFileInfo fi(str0.toLower());
             if (fi.exists())
-                QFile::copy(str0, pathOCTools + file);
+                QFile::copy(str0.toLower(), pathOCTools + file);
             else
                 strDatabase = strDatabase + "EFI/OC/Tools/" + file + "\n";
         }
@@ -8749,6 +8752,40 @@ void MainWindow::on_GenerateEFI()
     else
         box.setText(tr("Finished generating the EFI folder on the desktop."));
     box.exec();
+}
+
+int MainWindow::deleteDirfile(QString dirName)
+{
+    QDir directory(dirName);
+    if (!directory.exists()) {
+        return true;
+    }
+
+    QString srcPath = QDir::toNativeSeparators(dirName);
+    if (!srcPath.endsWith(QDir::separator()))
+        srcPath += QDir::separator();
+
+    QStringList fileNames = directory.entryList(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::Hidden);
+    bool error = false;
+    for (QStringList::size_type i = 0; i != fileNames.size(); ++i) {
+        QString filePath = srcPath + fileNames.at(i);
+        QFileInfo fileInfo(filePath);
+        if (fileInfo.isFile() || fileInfo.isSymLink()) {
+            QFile::setPermissions(filePath, QFile::WriteOwner);
+            if (!QFile::remove(filePath)) {
+                error = true;
+            }
+        } else if (fileInfo.isDir()) {
+            if (!deleteDirfile(filePath)) {
+                error = true;
+            }
+        }
+    }
+
+    if (!directory.rmdir(QDir::toNativeSeparators(directory.path()))) {
+        error = true;
+    }
+    return !error;
 }
 
 bool MainWindow::DeleteDirectory(const QString& path)
@@ -8831,4 +8868,10 @@ bool MainWindow::copyDirectoryFiles(const QString& fromDir, const QString& toDir
         }
     }
     return true;
+}
+
+void MainWindow::on_ShareConfig()
+{
+    QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfig/issues"));
+    QDesktopServices::openUrl(url);
 }
