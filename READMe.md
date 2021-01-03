@@ -13,6 +13,10 @@ Interpretation (translation) of various functions of the software: Due to time c
 
 * robust plist file bottom reading and writing code to ensure the correctness of data reading and writing
 
+* Built-in configuration file database
+
+* Generate EFI folders on the desktop based on configuration files
+
 * Multilingual support (at present, Chinese and English interfaces are supported), which automatically recognizes the operating system language and loads the corresponding localized functions according to the language.
 
 * open source, cross-platform (win, mac, linux all provide binary file download)
