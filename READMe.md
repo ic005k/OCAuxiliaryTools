@@ -5,7 +5,7 @@ OpenCore has gradually become popular, and has always wanted to be an open sourc
 
 This software is based on SampleCustom.plist provided by the latest development version of OC. It is recommended to upgrade OC to the latest development version before using this software.
 
-OC development version can be downloaded here: https://github.com/acidanthera/OpenCorePkg/actions
+OC development version can be downloaded [here](https://github.com/acidanthera/OpenCorePkg/actions).
 
 Interpretation (translation) of various functions of the software: Due to time constraints, I apologize for not finishing and typesetting in detail, and suggest that you study the original OC instructions.
 
