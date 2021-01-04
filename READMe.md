@@ -13,7 +13,7 @@ Interpretation (translation) of various functions of the software: Due to time c
 
 * robust plist file bottom reading and writing code to ensure the correctness of data reading and writing
 
-* Built-in configuration file database
+* Built-in configuration file database ([Share configuration file](https://github.com/ic005k/QtOpenCoreConfigDatabase/issues))
 
 * Generate EFI folders on the desktop based on configuration files
 
