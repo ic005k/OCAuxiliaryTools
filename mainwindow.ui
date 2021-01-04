@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1328</width>
-    <height>863</height>
+    <width>1200</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -53,7 +53,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -307,47 +307,24 @@
             </item>
            </layout>
           </widget>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QGroupBox" name="groupBox_8">
-          <property name="title">
-           <string/>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="0">
-            <widget class="QCheckBox" name="chkFadtEnableReset">
-             <property name="toolTip">
-              <string>Mainly required on legacy hardware and few laptops. Can also fix power-button shortcuts. Not recommended
-unless required.</string>
-             </property>
-             <property name="statusTip">
-              <string>Provide reset register and flag in FADT table to enable reboot and shutdown.</string>
-             </property>
-             <property name="text">
-              <string>FadtEnableReset</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QCheckBox" name="chkNormalizeHeaders">
-             <property name="toolTip">
-              <string> Cleanup ACPI header fields to workaround macOS ACPI implementation bug causing boot crashes.
-Reference: Debugging AppleACPIPlatform on 10.13 by Alex James aka theracermaster. The issue is fixed in
-macOS Mojave (10.14).</string>
-             </property>
-             <property name="statusTip">
-              <string> Cleanup ACPI header fields to workaround macOS ACPI implementation bug causing boot crashes.</string>
-             </property>
-             <property name="text">
-              <string>NormalizeHeaders</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QCheckBox" name="chkRebaseRegions">
-             <property name="toolTip">
-              <string>ACPI tables are often generated dynamically by underlying firmware implementation. 
+          <widget class="QWidget" name="tab_39">
+           <attribute name="title">
+            <string>Quirks</string>
+           </attribute>
+           <widget class="QWidget" name="gridLayoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>70</x>
+              <y>40</y>
+              <width>271</width>
+              <height>251</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_28">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="chkRebaseRegions">
+               <property name="toolTip">
+                <string>ACPI tables are often generated dynamically by underlying firmware implementation. 
 Among the position-independent code, 
 ACPI tables may contain physical addresses of MMIO areas used for device configuration,
 usually grouped in regions (e.g. OperationRegion). Changing firmware settings or hardware configuration,
@@ -360,43 +337,74 @@ or remove writes and reads for the affected areas.
 When nothing else helps this option could be tried to avoid stalls at PCI Configuration Begin phase of macOS
 booting by attempting to fix the ACPI addresses. It does not do magic, and only works with most common cases.
 Do not use unless absolutely required.</string>
-             </property>
-             <property name="statusTip">
-              <string>Attempt to heuristically relocate ACPI memory regions. Not recommended.</string>
-             </property>
-             <property name="text">
-              <string>RebaseRegions</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="3">
-            <widget class="QCheckBox" name="chkResetHwSig">
-             <property name="toolTip">
-              <string>This works around firmwares that fail to maintain hardware signature across the reboots and cause issues with
+               </property>
+               <property name="statusTip">
+                <string>Attempt to heuristically relocate ACPI memory regions. Not recommended.</string>
+               </property>
+               <property name="text">
+                <string>RebaseRegions</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="chkResetHwSig">
+               <property name="toolTip">
+                <string>This works around firmwares that fail to maintain hardware signature across the reboots and cause issues with
 waking from hibernation.</string>
-             </property>
-             <property name="statusTip">
-              <string>Reset FACS table HardwareSignature value to 0.</string>
-             </property>
-             <property name="text">
-              <string>ResetHwSig</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="4">
-            <widget class="QCheckBox" name="chkResetLogoStatus">
-             <property name="toolTip">
-              <string>This works around firmwares that provide BGRT table but fail to handle screen updates afterwards.</string>
-             </property>
-             <property name="statusTip">
-              <string>Reset BGRT table Displayed status field to false.</string>
-             </property>
-             <property name="text">
-              <string>ResetLogoStatus</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+               </property>
+               <property name="statusTip">
+                <string>Reset FACS table HardwareSignature value to 0.</string>
+               </property>
+               <property name="text">
+                <string>ResetHwSig</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkFadtEnableReset">
+               <property name="toolTip">
+                <string>Mainly required on legacy hardware and few laptops. Can also fix power-button shortcuts. Not recommended
+unless required.</string>
+               </property>
+               <property name="statusTip">
+                <string>Provide reset register and flag in FADT table to enable reboot and shutdown.</string>
+               </property>
+               <property name="text">
+                <string>FadtEnableReset</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkNormalizeHeaders">
+               <property name="toolTip">
+                <string> Cleanup ACPI header fields to workaround macOS ACPI implementation bug causing boot crashes.
+Reference: Debugging AppleACPIPlatform on 10.13 by Alex James aka theracermaster. The issue is fixed in
+macOS Mojave (10.14).</string>
+               </property>
+               <property name="statusTip">
+                <string> Cleanup ACPI header fields to workaround macOS ACPI implementation bug causing boot crashes.</string>
+               </property>
+               <property name="text">
+                <string>NormalizeHeaders</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="chkResetLogoStatus">
+               <property name="toolTip">
+                <string>This works around firmwares that provide BGRT table but fail to handle screen updates afterwards.</string>
+               </property>
+               <property name="statusTip">
+                <string>Reset BGRT table Displayed status field to false.</string>
+               </property>
+               <property name="text">
+                <string>ResetLogoStatus</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -2275,7 +2283,7 @@ stability reasons. I.e. by specifying Mkext one will disable Prelinked for e.g. 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -2527,6 +2535,31 @@ options. The following values are supported:
                </item>
                <item row="4" column="1">
                 <widget class="QComboBox" name="cboxPickerMode">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLabel" name="label_10">
+                 <property name="toolTip">
+                  <string>The following values are supported:
+• Auto — Automatically select one set of icons based on DefaultBackground colour.
+• Default — Normal icon set (without prefix).
+• Old — Vintage icon set (Old filename prefix).
+• Modern — Nouveau icon set (Modern filename prefix).
+• Other value — Custom icon set if supported by the resources.</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Choose specific icon set used for boot management.</string>
+                 </property>
+                 <property name="text">
+                  <string>PickerVariant</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QComboBox" name="cboxPickerVariant">
                  <property name="editable">
                   <bool>true</bool>
                  </property>
@@ -5900,14 +5933,31 @@ with existing Windows activation and custom OEM software but potentially breakin
        <attribute name="title">
         <string>UEFI</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_55">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="1" column="0">
+         <widget class="QCheckBox" name="chkConnectDrivers">
+          <property name="toolTip">
+           <string>This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
+Examples of such drivers are filesystem or audio drivers. While effective, this option may not be necessary for
+drivers performing automatic connection, and may slightly slowdown the boot.
+Note: Some firmwares, made by Apple in particular, only connect the boot drive to speedup the boot process.
+Enable this option to be able to see all the boot options when having multiple drives.</string>
+          </property>
+          <property name="statusTip">
+           <string> Perform UEFI controller connection after driver loading.</string>
+          </property>
+          <property name="text">
+           <string>ConnectDrivers</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabUEFI">
           <property name="tabShape">
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -5916,90 +5966,34 @@ with existing Windows activation and custom OEM software but potentially breakin
            <attribute name="title">
             <string>APFS</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_31">
-            <item row="0" column="0" colspan="2">
-             <widget class="QCheckBox" name="chkEnableJumpstart">
-              <property name="toolTip">
-               <string>APFS EFI driver is bundled in all bootable APFS containers. This option performs loading of signed APFS
+           <widget class="QWidget" name="gridLayoutWidget_3">
+            <property name="geometry">
+             <rect>
+              <x>60</x>
+              <y>40</y>
+              <width>341</width>
+              <height>351</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_55">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkEnableJumpstart">
+               <property name="toolTip">
+                <string>APFS EFI driver is bundled in all bootable APFS containers. This option performs loading of signed APFS
 drivers with respect to ScanPolicy. See more details in “EFI Jumpstart” section of Apple File System Reference.</string>
-              </property>
-              <property name="statusTip">
-               <string> Load embedded APFS drivers from APFS containers.</string>
-              </property>
-              <property name="text">
-               <string>EnableJumpstart</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2" colspan="2">
-             <widget class="QCheckBox" name="chkHideVerbose">
-              <property name="toolTip">
-               <string>APFS verbose output can be useful for debugging.</string>
-              </property>
-              <property name="statusTip">
-               <string>Hide verbose output from APFS driver.</string>
-              </property>
-              <property name="text">
-               <string>HideVerbose</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0" colspan="2">
-             <widget class="QCheckBox" name="chkJumpstartHotPlug">
-              <property name="toolTip">
-               <string>Performs APFS driver loading not only at OpenCore startup but also during boot picker. This permits APFS
-USB hot plug. Disable if not required.</string>
-              </property>
-              <property name="statusTip">
-               <string> Load APFS drivers for newly connected devices.</string>
-              </property>
-              <property name="text">
-               <string>JumpstartHotPlug</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2" colspan="2">
-             <widget class="QCheckBox" name="chkGlobalConnect">
-              <property name="toolTip">
-               <string>Instead of partition handle connection normally used for APFS driver loading every handle is connected recursively.
-This may take more time than usual but can be the only way to access APFS partitions on some firmwares like
-those found on older HP laptops.</string>
-              </property>
-              <property name="statusTip">
-               <string> Perform full device connection during APFS loading.</string>
-              </property>
-              <property name="text">
-               <string>GlobalConnect</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_31">
-              <property name="toolTip">
-               <string>APFS driver date connects APFS driver with the calendar release date. Older versions of APFS drivers may
-contain unpatched vulnerabilities, which can be used to inflict harm on your computer. This option permits
-restricting APFS drivers to only recent releases.
-• 0 — require the default supported release date of APFS in OpenCore. The default release date will increase
-with time and thus this setting is recommended. Currently set to 2018/06/21.
-• -1 — permit any release date to load (strongly discouraged).
-• Other — use custom minimal APFS release date, e.g. 20200401 for 2020/04/01. APFS release dates can be
-found in OpenCore boot log and OcApfsLib.</string>
-              </property>
-              <property name="statusTip">
-               <string>Minimal allowed APFS driver date.</string>
-              </property>
-              <property name="text">
-               <string>MinDate</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="editMinDate"/>
-            </item>
-            <item row="2" column="2">
-             <widget class="QLabel" name="label_30">
-              <property name="toolTip">
-               <string>APFS driver version connects APFS driver with the macOS release. APFS drivers from older macOS releases will
+               </property>
+               <property name="statusTip">
+                <string> Load embedded APFS drivers from APFS containers.</string>
+               </property>
+               <property name="text">
+                <string>EnableJumpstart</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0">
+              <widget class="QLabel" name="label_30">
+               <property name="toolTip">
+                <string>APFS driver version connects APFS driver with the macOS release. APFS drivers from older macOS releases will
 become unsupported and thus may contain unpatched vulnerabilities, which can be used to inflict harm on your
 computer. This option permits restricting APFS drivers to only modern macOS versions.
 • 0 — require the default supported version of APFS in OpenCore. The default version will increase with
@@ -6008,19 +6002,85 @@ App Store (748077008000000).
 • -1 — permit any version to load (strongly discouraged).
 • Other — use custom minimal APFS version, e.g. 1412101001000000 from macOS Catalina 10.15.4. APFS
 versions can be found in OpenCore boot log and OcApfsLib.</string>
-              </property>
-              <property name="statusTip">
-               <string>Minimal allowed APFS driver version.</string>
-              </property>
-              <property name="text">
-               <string>MinVersion</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="3">
-             <widget class="QLineEdit" name="editMinVersion"/>
-            </item>
-           </layout>
+               </property>
+               <property name="statusTip">
+                <string>Minimal allowed APFS driver version.</string>
+               </property>
+               <property name="text">
+                <string>MinVersion</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_31">
+               <property name="toolTip">
+                <string>APFS driver date connects APFS driver with the calendar release date. Older versions of APFS drivers may
+contain unpatched vulnerabilities, which can be used to inflict harm on your computer. This option permits
+restricting APFS drivers to only recent releases.
+• 0 — require the default supported release date of APFS in OpenCore. The default release date will increase
+with time and thus this setting is recommended. Currently set to 2018/06/21.
+• -1 — permit any release date to load (strongly discouraged).
+• Other — use custom minimal APFS release date, e.g. 20200401 for 2020/04/01. APFS release dates can be
+found in OpenCore boot log and OcApfsLib.</string>
+               </property>
+               <property name="statusTip">
+                <string>Minimal allowed APFS driver date.</string>
+               </property>
+               <property name="text">
+                <string>MinDate</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkGlobalConnect">
+               <property name="toolTip">
+                <string>Instead of partition handle connection normally used for APFS driver loading every handle is connected recursively.
+This may take more time than usual but can be the only way to access APFS partitions on some firmwares like
+those found on older HP laptops.</string>
+               </property>
+               <property name="statusTip">
+                <string> Perform full device connection during APFS loading.</string>
+               </property>
+               <property name="text">
+                <string>GlobalConnect</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="chkHideVerbose">
+               <property name="toolTip">
+                <string>APFS verbose output can be useful for debugging.</string>
+               </property>
+               <property name="statusTip">
+                <string>Hide verbose output from APFS driver.</string>
+               </property>
+               <property name="text">
+                <string>HideVerbose</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="chkJumpstartHotPlug">
+               <property name="toolTip">
+                <string>Performs APFS driver loading not only at OpenCore startup but also during boot picker. This permits APFS
+USB hot plug. Disable if not required.</string>
+               </property>
+               <property name="statusTip">
+                <string> Load APFS drivers for newly connected devices.</string>
+               </property>
+               <property name="text">
+                <string>JumpstartHotPlug</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QLineEdit" name="editMinDate"/>
+             </item>
+             <item row="13" column="1">
+              <widget class="QLineEdit" name="editMinVersion"/>
+             </item>
+            </layout>
+           </widget>
           </widget>
           <widget class="QWidget" name="tab_23">
            <attribute name="title">
@@ -6261,23 +6321,6 @@ specified codec (AudioCodec) located on the audio controller (AudioDevice).</str
                </size>
               </property>
              </spacer>
-            </item>
-            <item row="1" column="3">
-             <widget class="QCheckBox" name="chkConnectDrivers">
-              <property name="toolTip">
-               <string>This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
-Examples of such drivers are filesystem or audio drivers. While effective, this option may not be necessary for
-drivers performing automatic connection, and may slightly slowdown the boot.
-Note: Some firmwares, made by Apple in particular, only connect the boot drive to speedup the boot process.
-Enable this option to be able to see all the boot options when having multiple drives.</string>
-              </property>
-              <property name="statusTip">
-               <string> Perform UEFI controller connection after driver loading.</string>
-              </property>
-              <property name="text">
-               <string>ConnectDrivers</string>
-              </property>
-             </widget>
             </item>
            </layout>
           </widget>
@@ -6957,6 +7000,157 @@ im4m manifest files used by Apple Secure Boot.</string>
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="tab_41">
+           <attribute name="title">
+            <string>Quirks</string>
+           </attribute>
+           <widget class="QWidget" name="gridLayoutWidget_2">
+            <property name="geometry">
+             <rect>
+              <x>60</x>
+              <y>40</y>
+              <width>341</width>
+              <height>301</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_31">
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_29">
+               <property name="toolTip">
+                <string>The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop
+models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores
+before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds
+and depends on the amount of cores present on the platform, the recommended starting value is 500000.
+This is an experimental quirk, which should only be used for the aforementioned problem. In all other cases the
+quirk may render the operating system unstable and is not recommended. The recommended solution in the
+other cases is to install a kernel driver like VoodooTSCSync, TSCAdjustReset, or CpuTscSync (a more specialised
+variant of VoodooTSCSync for newer laptops).
+Note: The reason this quirk cannot replace the kernel driver is because it cannot operate in ACPI S3 mode (sleep
+wake) and because the UEFI firmwares provide very limited multicore support preventing the precise update of
+the MSR registers.</string>
+               </property>
+               <property name="statusTip">
+                <string>Attempts to perform TSC synchronisation with a specified timeout.</string>
+               </property>
+               <property name="text">
+                <string>TscSyncTimeout</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_28">
+               <property name="toolTip">
+                <string>This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,
+namely ASUS Z87-Pro, when using FileVault 2 in particular. It seems that for some reason they execute code
+in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. A better
+approach should be found in some future. Expect 3-5 seconds to be enough in case the quirk is needed.</string>
+               </property>
+               <property name="statusTip">
+                <string>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</string>
+               </property>
+               <property name="text">
+                <string>ExitBootServicesDelay</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
+               <property name="toolTip">
+                <string>Note: While the option is not supposed to induce harm on unaffected firmwares, its usage is not recommended
+when it is not required.</string>
+               </property>
+               <property name="statusTip">
+                <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
+ register. These values may cause macOS boot failure on Intel platforms.</string>
+               </property>
+               <property name="text">
+                <string>IgnoreInvalidFlexRatio</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="chkRequestBootVarRouting">
+               <property name="toolTip">
+                <string>This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default
+boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required
+to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible
+with macOS boot entries by design.</string>
+               </property>
+               <property name="statusTip">
+                <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
+ OC_VENDOR_VARIABLE_GUID.</string>
+               </property>
+               <property name="text">
+                <string>RequestBootVarRouting</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="chkUnblockFsConnect">
+               <property name="toolTip">
+                <string>Note: The quirk is mostly relevant for select HP laptops with no drives listed.</string>
+               </property>
+               <property name="statusTip">
+                <string>Some firmwares block partition handles by opening them in By Driver mode, which results in File
+ System protocols being unable to install.</string>
+               </property>
+               <property name="text">
+                <string>UnblockFsConnect</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkReleaseUsbOwnership">
+               <property name="toolTip">
+                <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
+manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
+may freeze upon boot. Not recommended unless required.</string>
+               </property>
+               <property name="statusTip">
+                <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
+ manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
+ may freeze upon boot. Not recommended unless required.</string>
+               </property>
+               <property name="text">
+                <string>ReleaseUsbOwnership</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="editExitBootServicesDelay">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QLineEdit" name="editTscSyncTimeout">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
           <widget class="QWidget" name="tab_28">
            <attribute name="title">
             <string>ReservedMemory</string>
@@ -7035,188 +7229,6 @@ im4m manifest files used by Apple Secure Boot.</string>
           </widget>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QGroupBox" name="groupBox_13">
-          <property name="title">
-           <string/>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_28">
-           <item row="0" column="0" colspan="2">
-            <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
-             <property name="toolTip">
-              <string>Note: While the option is not supposed to induce harm on unaffected firmwares, its usage is not recommended
-when it is not required.</string>
-             </property>
-             <property name="statusTip">
-              <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
- register. These values may cause macOS boot failure on Intel platforms.</string>
-             </property>
-             <property name="text">
-              <string>IgnoreInvalidFlexRatio</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2" colspan="2">
-            <spacer name="horizontalSpacer_70">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>198</width>
-               <height>17</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="4" colspan="2">
-            <widget class="QCheckBox" name="chkReleaseUsbOwnership">
-             <property name="toolTip">
-              <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
-manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
-may freeze upon boot. Not recommended unless required.</string>
-             </property>
-             <property name="statusTip">
-              <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
- manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
- may freeze upon boot. Not recommended unless required.</string>
-             </property>
-             <property name="text">
-              <string>ReleaseUsbOwnership</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="6">
-            <spacer name="horizontalSpacer_69">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>168</width>
-               <height>17</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="7">
-            <widget class="QCheckBox" name="chkRequestBootVarRouting">
-             <property name="toolTip">
-              <string>This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default
-boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required
-to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible
-with macOS boot entries by design.</string>
-             </property>
-             <property name="statusTip">
-              <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
- OC_VENDOR_VARIABLE_GUID.</string>
-             </property>
-             <property name="text">
-              <string>RequestBootVarRouting</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="8">
-            <spacer name="horizontalSpacer_68">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>165</width>
-               <height>17</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="9">
-            <widget class="QCheckBox" name="chkUnblockFsConnect">
-             <property name="toolTip">
-              <string>Note: The quirk is mostly relevant for select HP laptops with no drives listed.</string>
-             </property>
-             <property name="statusTip">
-              <string>Some firmwares block partition handles by opening them in By Driver mode, which results in File
- System protocols being unable to install.</string>
-             </property>
-             <property name="text">
-              <string>UnblockFsConnect</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_28">
-             <property name="toolTip">
-              <string>This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,
-namely ASUS Z87-Pro, when using FileVault 2 in particular. It seems that for some reason they execute code
-in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. A better
-approach should be found in some future. Expect 3-5 seconds to be enough in case the quirk is needed.</string>
-             </property>
-             <property name="statusTip">
-              <string>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</string>
-             </property>
-             <property name="text">
-              <string>ExitBootServicesDelay</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1" colspan="2">
-            <widget class="QLineEdit" name="editExitBootServicesDelay">
-             <property name="minimumSize">
-              <size>
-               <width>150</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>16777215</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="3" colspan="2">
-            <widget class="QLabel" name="label_29">
-             <property name="toolTip">
-              <string>The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop
-models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores
-before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds
-and depends on the amount of cores present on the platform, the recommended starting value is 500000.
-This is an experimental quirk, which should only be used for the aforementioned problem. In all other cases the
-quirk may render the operating system unstable and is not recommended. The recommended solution in the
-other cases is to install a kernel driver like VoodooTSCSync, TSCAdjustReset, or CpuTscSync (a more specialised
-variant of VoodooTSCSync for newer laptops).
-Note: The reason this quirk cannot replace the kernel driver is because it cannot operate in ACPI S3 mode (sleep
-wake) and because the UEFI firmwares provide very limited multicore support preventing the precise update of
-the MSR registers.</string>
-             </property>
-             <property name="statusTip">
-              <string>Attempts to perform TSC synchronisation with a specified timeout.</string>
-             </property>
-             <property name="text">
-              <string>TscSyncTimeout</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="5">
-            <widget class="QLineEdit" name="editTscSyncTimeout">
-             <property name="minimumSize">
-              <size>
-               <width>150</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>16777215</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_36">
@@ -7238,7 +7250,7 @@ the MSR registers.</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1328</width>
+     <width>1200</width>
      <height>24</height>
     </rect>
    </property>

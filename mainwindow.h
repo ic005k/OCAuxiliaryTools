@@ -988,6 +988,8 @@ private slots:
 
     void on_editSetupDelay_textChanged(const QString& arg1);
 
+    void on_cboxPickerVariant_currentTextChanged(const QString& arg1);
+
 private:
     Ui::MainWindow* ui;
 

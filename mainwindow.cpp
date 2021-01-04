@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210103";
+    CurVerison = "20210104";
     title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -437,7 +437,7 @@ void MainWindow::initui_acpi()
 
     QTableWidgetItem* id0;
     // ACPI-Add
-    ui->table_acpi_add->setColumnWidth(0, 450);
+    ui->table_acpi_add->setColumnWidth(0, 550);
     id0 = new QTableWidgetItem(tr("Path"));
     ui->table_acpi_add->setHorizontalHeaderItem(0, id0);
 
@@ -449,12 +449,13 @@ void MainWindow::initui_acpi()
     ui->table_acpi_add->setHorizontalHeaderItem(2, id0);
 
     ui->table_acpi_add->setAlternatingRowColors(true); //底色交替显示
+    //ui->table_acpi_add->horizontalHeader()->setStretchLastSection(true); //设置充满表宽度
 
     // ACPI-Delete
     id0 = new QTableWidgetItem(tr("TableSignature"));
     ui->table_acpi_del->setHorizontalHeaderItem(0, id0);
 
-    ui->table_acpi_del->setColumnWidth(1, 250);
+    ui->table_acpi_del->setColumnWidth(1, 350);
     id0 = new QTableWidgetItem(tr("OemTableId"));
     ui->table_acpi_del->setHorizontalHeaderItem(1, id0);
 
@@ -472,6 +473,7 @@ void MainWindow::initui_acpi()
     ui->table_acpi_del->setHorizontalHeaderItem(5, id0);
 
     ui->table_acpi_del->setAlternatingRowColors(true);
+    //ui->table_acpi_del->horizontalHeader()->setStretchLastSection(true);
 
     // ACPI-Patch
     ui->table_acpi_patch->setColumnWidth(0, 150);
@@ -515,6 +517,7 @@ void MainWindow::initui_acpi()
     ui->table_acpi_patch->setHorizontalHeaderItem(11, id0);
 
     ui->table_acpi_patch->setAlternatingRowColors(true);
+    ui->table_acpi_patch->horizontalHeader()->setStretchLastSection(true);
 
     if (zh_cn) {
         ui->table_acpi_patch->horizontalHeaderItem(0)->setToolTip(
@@ -594,6 +597,7 @@ void MainWindow::initui_booter()
     ui->table_Booter_patch->setHorizontalHeaderItem(10, id0);
 
     ui->table_Booter_patch->setAlternatingRowColors(true);
+    ui->table_Booter_patch->horizontalHeader()->setStretchLastSection(true);
 
     //MmioWhitelist
 
@@ -601,7 +605,7 @@ void MainWindow::initui_booter()
     id0 = new QTableWidgetItem(tr("Address"));
     ui->table_booter->setHorizontalHeaderItem(0, id0);
 
-    ui->table_booter->setColumnWidth(1, 350);
+    ui->table_booter->setColumnWidth(1, 400);
     id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_booter->setHorizontalHeaderItem(1, id0);
 
@@ -609,6 +613,7 @@ void MainWindow::initui_booter()
     ui->table_booter->setHorizontalHeaderItem(2, id0);
 
     ui->table_booter->setAlternatingRowColors(true);
+    //ui->table_booter->horizontalHeader()->setStretchLastSection(true);
 
     if (zh_cn) {
         ui->table_booter->horizontalHeaderItem(0)->setToolTip("地址");
@@ -746,7 +751,9 @@ void MainWindow::initui_dp()
 
     id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
+
     ui->table_dp_add0->setAlternatingRowColors(true);
+    ui->table_dp_add0->horizontalHeader()->setStretchLastSection(true);
 
     ui->table_dp_add->setColumnWidth(0, 300);
     ui->table_dp_add->setMinimumWidth(700);
@@ -762,6 +769,7 @@ void MainWindow::initui_dp()
     ui->table_dp_add->setHorizontalHeaderItem(2, id0);
 
     ui->table_dp_add->setAlternatingRowColors(true);
+    ui->table_dp_add->horizontalHeader()->setStretchLastSection(true);
 
     // Delete
 
@@ -769,12 +777,16 @@ void MainWindow::initui_dp()
     ui->table_dp_del0->setMinimumWidth(400);
     id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_del0->setHorizontalHeaderItem(0, id0);
+
     ui->table_dp_del0->setAlternatingRowColors(true);
+    ui->table_dp_del0->horizontalHeader()->setStretchLastSection(true);
 
     ui->table_dp_del->setColumnWidth(0, 500);
     id0 = new QTableWidgetItem(tr("Value"));
     ui->table_dp_del->setHorizontalHeaderItem(0, id0);
+
     ui->table_dp_del->setAlternatingRowColors(true);
+    ui->table_dp_del->horizontalHeader()->setStretchLastSection(true);
 }
 
 void MainWindow::ParserDP(QVariantMap map)
@@ -1278,6 +1290,12 @@ void MainWindow::initui_misc()
     ui->cboxPickerMode->addItem("External");
     ui->cboxPickerMode->addItem("Apple");
 
+    ui->cboxPickerVariant->addItem("Auto");
+    ui->cboxPickerVariant->addItem("Default");
+    ui->cboxPickerVariant->addItem("Old");
+    ui->cboxPickerVariant->addItem("Modern");
+    ui->cboxPickerVariant->addItem("Other value");
+
     // Security
     ui->cboxBootProtect->addItem("None");
     ui->cboxBootProtect->addItem("Bootstrap");
@@ -1301,6 +1319,7 @@ void MainWindow::initui_misc()
     ui->tableBlessOverride->setHorizontalHeaderItem(0, id0);
 
     ui->tableBlessOverride->setAlternatingRowColors(true);
+    ui->tableBlessOverride->horizontalHeader()->setStretchLastSection(true);
 
     // Entries
     ui->tableEntries->setColumnCount(7);
@@ -1382,6 +1401,11 @@ void MainWindow::ParserMisc(QVariantMap map)
 
     hm = map_boot["PickerMode"].toString();
     ui->cboxPickerMode->setCurrentText(hm.trimmed());
+
+    hm = map_boot["PickerVariant"].toString();
+    if (hm == "")
+        hm = "Auto";
+    ui->cboxPickerVariant->setCurrentText(hm.trimmed());
 
     ui->chkPollAppleHotKeys->setChecked(map_boot["PollAppleHotKeys"].toBool());
     ui->chkShowPicker->setChecked(map_boot["ShowPicker"].toBool());
@@ -1523,12 +1547,13 @@ void MainWindow::initui_nvram()
     QTableWidgetItem* id0;
 
     // Add
-    ui->table_nv_add0->setColumnWidth(0, 470);
+    ui->table_nv_add0->setColumnWidth(0, 450);
     ui->table_nv_add0->setMinimumWidth(300);
     ui->table_nv_add0->setMaximumWidth(470);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_add0->setHorizontalHeaderItem(0, id0);
     ui->table_nv_add0->setAlternatingRowColors(true);
+    ui->table_nv_add0->horizontalHeader()->setStretchLastSection(true);
 
     ui->table_nv_add0->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->table_nv_add0, SIGNAL(customContextMenuRequested(QPoint)), this,
@@ -1546,6 +1571,7 @@ void MainWindow::initui_nvram()
     ui->table_nv_add->setHorizontalHeaderItem(1, id0);
 
     ui->table_nv_add->setAlternatingRowColors(true);
+    ui->table_nv_add->horizontalHeader()->setStretchLastSection(true);
 
     ui->table_nv_add->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->table_nv_add, SIGNAL(customContextMenuRequested(QPoint)), this,
@@ -1553,29 +1579,33 @@ void MainWindow::initui_nvram()
 
     // Delete
 
-    ui->table_nv_del0->setColumnWidth(0, 600);
+    ui->table_nv_del0->setColumnWidth(0, 500);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_del0->setHorizontalHeaderItem(0, id0);
 
     ui->table_nv_del0->setAlternatingRowColors(true);
+    ui->table_nv_del0->horizontalHeader()->setStretchLastSection(true);
 
-    ui->table_nv_del->setColumnWidth(0, 600);
+    ui->table_nv_del->setColumnWidth(0, 500);
     id0 = new QTableWidgetItem(tr("Value"));
     ui->table_nv_del->setHorizontalHeaderItem(0, id0);
 
     ui->table_nv_del->setAlternatingRowColors(true);
+    ui->table_nv_del->horizontalHeader()->setStretchLastSection(true);
 
     // LegacySchema
 
-    ui->table_nv_ls0->setColumnWidth(0, 600);
+    ui->table_nv_ls0->setColumnWidth(0, 500);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_ls0->setHorizontalHeaderItem(0, id0);
     ui->table_nv_ls0->setAlternatingRowColors(true);
+    ui->table_nv_ls0->horizontalHeader()->setStretchLastSection(true);
 
-    ui->table_nv_ls->setColumnWidth(0, 600);
+    ui->table_nv_ls->setColumnWidth(0, 500);
     id0 = new QTableWidgetItem(tr("Value"));
     ui->table_nv_ls->setHorizontalHeaderItem(0, id0);
     ui->table_nv_ls->setAlternatingRowColors(true);
+    ui->table_nv_ls->horizontalHeader()->setStretchLastSection(true);
 
     QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
     splitterMain->addWidget(ui->table_nv_add0);
@@ -1955,6 +1985,7 @@ void MainWindow::initui_PlatformInfo()
     ui->tableDevices->setHorizontalHeaderItem(7, id0);
 
     ui->tableDevices->setAlternatingRowColors(true); //底色交替显示
+    //ui->tableDevices->horizontalHeader()->setStretchLastSection(true);
 
     // ui->cboxSystemProductName->setEditable(true);
     QStringList pi;
@@ -2364,10 +2395,11 @@ void MainWindow::initui_UEFI()
     // Drivers
     QTableWidgetItem* id0;
 
-    ui->table_uefi_drivers->setColumnWidth(0, 1200);
+    ui->table_uefi_drivers->setColumnWidth(0, 1000);
     id0 = new QTableWidgetItem(tr("Drivers"));
     ui->table_uefi_drivers->setHorizontalHeaderItem(0, id0);
     ui->table_uefi_drivers->setAlternatingRowColors(true);
+    ui->table_uefi_drivers->horizontalHeader()->setStretchLastSection(true);
 
     // KeySupportMode
     ui->cboxKeySupportMode->addItem("Auto");
@@ -2409,6 +2441,7 @@ void MainWindow::initui_UEFI()
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(4, id0);
 
     ui->table_uefi_ReservedMemory->setAlternatingRowColors(true);
+    //ui->table_uefi_ReservedMemory->horizontalHeader()->setStretchLastSection(true);
 }
 
 void MainWindow::ParserUEFI(QVariantMap map)
@@ -2958,6 +2991,7 @@ QVariantMap MainWindow::SaveMisc()
     valueList["PickerAttributes"] = ui->editPickerAttributes->text().toLongLong();
     valueList["PickerAudioAssist"] = getChkBool(ui->chkPickerAudioAssist);
     valueList["PickerMode"] = ui->cboxPickerMode->currentText();
+    valueList["PickerVariant"] = ui->cboxPickerVariant->currentText();
     valueList["PollAppleHotKeys"] = getChkBool(ui->chkPollAppleHotKeys);
     valueList["ShowPicker"] = getChkBool(ui->chkShowPicker);
     valueList["TakeoffDelay"] = ui->editTakeoffDelay->text().toLongLong();
@@ -5287,7 +5321,7 @@ void MainWindow::closeEvent(QCloseEvent* event)
             message.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
             message.setButtonText(QMessageBox::Save, QString("保 存"));
             message.setButtonText(QMessageBox::Cancel, QString("取 消"));
-            message.setButtonText(QMessageBox::Discard, QString("放 弃"));
+            message.setButtonText(QMessageBox::Discard, QString("不保存"));
             message.setDefaultButton(QMessageBox::Save);
             choice = message.exec();
         }
@@ -8674,9 +8708,9 @@ void MainWindow::on_GenerateEFI()
     for (int i = 0; i < ui->table_acpi_add->rowCount(); i++) {
         ui->table_acpi_add->setCurrentCell(i, 0);
         QString file = ui->table_acpi_add->currentItem()->text();
-        QFileInfo fi(pathSource + "EFI/OC/ACPI/" + file.toLower());
+        QFileInfo fi(pathSource + "EFI/OC/ACPI/" + file);
         if (fi.exists())
-            QFile::copy(pathSource + "EFI/OC/ACPI/" + file.toLower(), pathOCACPI + file);
+            QFile::copy(pathSource + "EFI/OC/ACPI/" + file, pathOCACPI + file);
         else
             strDatabase = strDatabase + "EFI/OC/ACPI/" + file + "\n";
     }
@@ -8694,9 +8728,9 @@ void MainWindow::on_GenerateEFI()
         QString file = ui->table_uefi_drivers->currentItem()->text();
         QString str0 = pathSource + "EFI/OC/Drivers/" + file;
         if (!str0.contains("#")) {
-            QFileInfo fi(str0.toLower());
+            QFileInfo fi(str0);
             if (fi.exists())
-                QFile::copy(str0.toLower(), pathOCDrivers + file);
+                QFile::copy(str0, pathOCDrivers + file);
             else
                 strDatabase = strDatabase + "EFI/OC/Drivers/" + file + "\n";
         }
@@ -8709,12 +8743,12 @@ void MainWindow::on_GenerateEFI()
         ui->table_kernel_add->setCurrentCell(i, 0);
         QString file = ui->table_kernel_add->currentItem()->text();
         QString str0 = pathSource + "EFI/OC/Kexts/" + file;
-        QDir kextDir(str0.toLower());
+        QDir kextDir(str0);
 
         if (!str0.contains("#")) {
 
             if (kextDir.exists())
-                copyDirectoryFiles(str0.toLower(), pathOCKexts + file, true);
+                copyDirectoryFiles(str0, pathOCKexts + file, true);
             else
                 strDatabase = strDatabase + "EFI/OC/Kexts/" + file + "\n";
         }
@@ -8732,9 +8766,9 @@ void MainWindow::on_GenerateEFI()
         QString file = ui->tableTools->currentItem()->text();
         QString str0 = pathSource + "EFI/OC/Tools/" + file;
         if (!str0.contains("#")) {
-            QFileInfo fi(str0.toLower());
+            QFileInfo fi(str0);
             if (fi.exists())
-                QFile::copy(str0.toLower(), pathOCTools + file);
+                QFile::copy(str0, pathOCTools + file);
             else
                 strDatabase = strDatabase + "EFI/OC/Tools/" + file + "\n";
         }
@@ -8874,4 +8908,10 @@ void MainWindow::on_ShareConfig()
 {
     QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfig/issues"));
     QDesktopServices::openUrl(url);
+}
+
+void MainWindow::on_cboxPickerVariant_currentTextChanged(const QString& arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
 }
