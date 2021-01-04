@@ -8906,7 +8906,7 @@ bool MainWindow::copyDirectoryFiles(const QString& fromDir, const QString& toDir
 
 void MainWindow::on_ShareConfig()
 {
-    QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfig/issues"));
+    QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfigDatabase/issues"));
     QDesktopServices::openUrl(url);
 }
 
