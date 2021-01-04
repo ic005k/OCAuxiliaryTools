@@ -17,7 +17,7 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 
 * 稳健的plist文件底层读写代码，确保数据读写的正确性
 
-* 内置配置文件数据库
+* 内置配置文件数据库（[分享配置文件](https://github.com/ic005k/QtOpenCoreConfigDatabase/issues))
 
 * 根据配置文件在桌面上生成EFI文件夹
 
