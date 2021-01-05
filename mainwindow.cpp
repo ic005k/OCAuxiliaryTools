@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210104";
+    CurVerison = "20210105";
     title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
