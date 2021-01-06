@@ -124,6 +124,7 @@ MainWindow::MainWindow(QWidget* parent)
     font.setPixelSize(12);
     mac = true;
     ui->tabTotal->setDocumentMode(false);
+    //ui->btnCheckUpdate->setVisible(false);
 
 #endif
 
