@@ -23,8 +23,8 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210106";
-    title = "QtOpenCoreConfigurator   V0.6.5-" + CurVerison + "        [*] ";
+    CurVerison = "20210112";
+    title = "QtOpenCoreConfigurator   V0.6.6-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
     aboutDlg = new aboutDialog(this);
@@ -52,14 +52,14 @@ MainWindow::MainWindow(QWidget* parent)
     //ui->tabTotal->tabBar()->setTabToolTip(6, tr("PlatformInfo"));
     //ui->tabTotal->tabBar()->setTabToolTip(7, tr("UEFI"));
 
-    QString tabBarStyle0 = "QTabBar::tab {min-width:100px;border: 0px solid;border-top-left-radius: 5px;border-top-right-radius: 5px;padding:2px;}\
+    QString tabBarStyle0 = "QTabBar::tab {min-width:100px;border: 1px solid;border-top-left-radius: 5px;border-top-right-radius: 5px;padding:2px;}\
             QTabBar::tab:!selected {margin-top: 2px;}\
             QTabWidget::pane{border:none;}\
             QTabBar::tab{background:transparent;color:black;}\
             QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
             QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
 
-    QString tabBarStyle1 = "QTabBar::tab {min-width:100px;color: rgba(120,120,120);border: 1px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:2px;}\
+    QString tabBarStyle1 = "QTabBar::tab {min-width:100px;color: rgba(120,120,120);border: 1px solid;border-top-left-radius: 6px;border-top-right-radius: 6px;padding:1px;}\
             QTabBar::tab:!selected {margin-top: 2px;} \
             QTabBar::tab:selected {color: rgba(0,0,255);}";
 
@@ -73,14 +73,10 @@ MainWindow::MainWindow(QWidget* parent)
             QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
             QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
 
-    //ui->tabTotal->setStyleSheet(tabBarStyle1);
+    QString tabBarStyle4 = "QTabBar::tab:selected{background:rgba(30, 160, 255, 255);}";
+
+    //ui->tabTotal->setStyleSheet(tabBarStyle4);
     //ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
-
-    //ui->tabTotal->setIconSize(QSize(50, 45));
-
-    QIcon icon;
-    icon.addFile(":/icon.png");
-    // ui->tabTotal->setTabIcon(1, icon);
 
     init_tr_str();
 
@@ -2178,6 +2174,7 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     // Generic
     QVariantMap mapGeneric = map["Generic"].toMap();
     ui->chkAdviseWindows->setChecked(mapGeneric["AdviseWindows"].toBool());
+    ui->chkMaxBIOSVersion->setChecked(mapGeneric["MaxBIOSVersion"].toBool());
 
     ui->editMLB->setText(mapGeneric["MLB"].toString());
     if (ui->editMLB_2->text().trimmed() == "")
@@ -3224,6 +3221,7 @@ QVariantMap MainWindow::SavePlatformInfo()
     // Generic
     valueList.clear();
     valueList["AdviseWindows"] = getChkBool(ui->chkAdviseWindows);
+    valueList["MaxBIOSVersion"] = getChkBool(ui->chkMaxBIOSVersion);
     valueList["MLB"] = ui->editMLB->text();
     valueList["SystemMemoryStatus"] = ui->cboxSystemMemoryStatus->currentText().trimmed();
     valueList["ProcessorType"] = ui->editProcessorTypeGeneric->text().toLongLong();
