@@ -31,7 +31,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="2" colspan="2">
+   <item row="0" column="2">
     <widget class="QToolButton" name="btnFind">
      <property name="text">
       <string>...</string>
@@ -48,7 +48,7 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0" colspan="3">
+   <item row="1" column="0" colspan="4">
     <widget class="QTableWidget" name="tableDatabase">
      <property name="columnCount">
       <number>1</number>
@@ -56,7 +56,7 @@
      <column/>
     </widget>
    </item>
-   <item row="1" column="3">
+   <item row="1" column="4">
     <widget class="QTableWidget" name="tableDatabaseFind">
      <property name="columnCount">
       <number>1</number>
@@ -64,7 +64,7 @@
      <column/>
     </widget>
    </item>
-   <item row="2" column="0" colspan="4">
+   <item row="2" column="0" colspan="5">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tip: Simply place the configuration file in the Database directory in the root of the app.&lt;/p&gt;&lt;p&gt;Double-click the entry to open it and generate a new EFI folder on the desktop.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

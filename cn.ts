@@ -4,25 +4,25 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="7300"/>
+        <location filename="mainwindow.ui" line="7301"/>
         <source>Open</source>
         <oldsource>打开-Open</oldsource>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7305"/>
+        <location filename="mainwindow.ui" line="7306"/>
         <source>Save</source>
         <oldsource>保存-Save</oldsource>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7310"/>
+        <location filename="mainwindow.ui" line="7311"/>
         <source>Save As...</source>
         <oldsource>另存-Save As...</oldsource>
         <translation>另存...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7370"/>
+        <location filename="mainwindow.ui" line="7371"/>
         <source>MountESP</source>
         <oldsource>挂载ESP-MountESP</oldsource>
         <translation>挂载ESP分区</translation>
@@ -113,7 +113,7 @@
         <translation>ACPI（电源管理）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7282"/>
+        <location filename="mainwindow.ui" line="7283"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
@@ -2224,12 +2224,12 @@ existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is
         <translation>Generic（通用）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7390"/>
+        <location filename="mainwindow.ui" line="7391"/>
         <source>Documentation</source>
         <translation>官方文档</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7395"/>
+        <location filename="mainwindow.ui" line="7396"/>
         <source>CheckUpdate</source>
         <translation>检查更新</translation>
     </message>
@@ -3084,57 +3084,62 @@ is able to play boot chime.</source>
         <translation>辅助工具</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7355"/>
+        <location filename="mainwindow.ui" line="7356"/>
         <source>PlistEDPlus</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7360"/>
+        <location filename="mainwindow.ui" line="7361"/>
         <source>QtiASL</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7375"/>
+        <location filename="mainwindow.ui" line="7376"/>
         <source>OC Validate</source>
         <translation>OC验证</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7405"/>
+        <location filename="mainwindow.ui" line="7406"/>
         <source>Config Database</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7410"/>
+        <location filename="mainwindow.ui" line="7411"/>
         <source>Database</source>
         <translation>数据库</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7415"/>
+        <location filename="mainwindow.ui" line="7416"/>
         <source>Generate EFI on the desktop</source>
         <translation>在桌面上生成EFI文件夹</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7420"/>
+        <location filename="mainwindow.ui" line="7421"/>
         <source>Share your Config.plist</source>
         <translation>分享您的Config.plist</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7335"/>
+        <location filename="mainwindow.ui" line="7426"/>
+        <source>Open database directory</source>
+        <translation>打开数据库目录</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="7336"/>
         <source>OpenCore Forum</source>
         <translation>OpenCore讨论区（国际）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7340"/>
+        <location filename="mainwindow.ui" line="7341"/>
         <source>OpenCore Factory</source>
         <translation>OpenCore工厂</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7345"/>
+        <location filename="mainwindow.ui" line="7346"/>
         <source>OpenCore</source>
         <translation>OpenCore官方</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7350"/>
+        <location filename="mainwindow.ui" line="7351"/>
         <source>Simplified Chinese Manual</source>
         <translation>简体中文参考手册（非官方）</translation>
     </message>
@@ -3147,7 +3152,7 @@ is able to play boot chime.</source>
         <translation type="vanished">DSDT&amp;&amp;SSDT编辑器</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7365"/>
+        <location filename="mainwindow.ui" line="7366"/>
         <source>OpenCanopyIcons</source>
         <translation>OC图标合集</translation>
     </message>
@@ -3203,12 +3208,12 @@ not provide this table.</source>
         <translation>处理器主要和次要类型的组合。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7380"/>
+        <location filename="mainwindow.ui" line="7381"/>
         <source>ExportMaster</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7385"/>
+        <location filename="mainwindow.ui" line="7386"/>
         <source>ImportMaster</source>
         <translation></translation>
     </message>
@@ -4748,19 +4753,19 @@ with macOS boot entries by design.</source>
         <translation type="vanished">相关资源</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7315"/>
+        <location filename="mainwindow.ui" line="7316"/>
         <source>关于-About</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7320"/>
+        <location filename="mainwindow.ui" line="7321"/>
         <source>Exit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7325"/>
-        <location filename="mainwindow.ui" line="7330"/>
-        <location filename="mainwindow.ui" line="7400"/>
+        <location filename="mainwindow.ui" line="7326"/>
+        <location filename="mainwindow.ui" line="7331"/>
+        <location filename="mainwindow.ui" line="7401"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -5171,79 +5176,79 @@ Do you want to save your changes?
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6974"/>
+        <location filename="mainwindow.cpp" line="6982"/>
         <source>ctrl+p</source>
         <oldsource>ctrl+h</oldsource>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6977"/>
+        <location filename="mainwindow.cpp" line="6985"/>
         <source>ctrl+u</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6980"/>
+        <location filename="mainwindow.cpp" line="6969"/>
         <source>ctrl+d</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6983"/>
+        <location filename="mainwindow.cpp" line="6974"/>
         <source>ctrl+r</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8532"/>
+        <location filename="mainwindow.cpp" line="8534"/>
         <source>OK!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8627"/>
+        <location filename="mainwindow.cpp" line="8629"/>
         <source>Network error!</source>
         <translation>网络错误！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8662"/>
+        <location filename="mainwindow.cpp" line="8664"/>
         <source>New version detected!</source>
         <translation>检测到新版本！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8662"/>
+        <location filename="mainwindow.cpp" line="8664"/>
         <source>Version: </source>
         <translation>版本：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8662"/>
+        <location filename="mainwindow.cpp" line="8664"/>
         <source>Published at: </source>
         <translation>更新时间：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8662"/>
+        <location filename="mainwindow.cpp" line="8664"/>
         <source>Release Notes: </source>
         <translation>更新说明：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8663"/>
+        <location filename="mainwindow.cpp" line="8665"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8663"/>
+        <location filename="mainwindow.cpp" line="8665"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8668"/>
+        <location filename="mainwindow.cpp" line="8670"/>
         <source>It is currently the latest version!</source>
         <translation>目前是最新版本！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8784"/>
         <location filename="mainwindow.cpp" line="8786"/>
+        <location filename="mainwindow.cpp" line="8788"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8784"/>
+        <location filename="mainwindow.cpp" line="8786"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
@@ -5426,6 +5431,10 @@ Do you want to save your changes?
         <location filename="dlgdatabase.ui" line="37"/>
         <source>...</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Open database directory</source>
+        <translation type="vanished">打开数据库目录</translation>
     </message>
     <message>
         <location filename="dlgdatabase.ui" line="70"/>

@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210112";
+    CurVerison = "20210118";
     title = "QtOpenCoreConfigurator   V0.6.6-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -6965,6 +6965,14 @@ void MainWindow::init_menu()
     connect(ui->actionGenerateEFI, &QAction::triggered, this, &MainWindow::on_GenerateEFI);
     //ui->actionGenerateEFI->setShortcut(tr("ctrl+e"));
 
+    connect(ui->actionDatabase, &QAction::triggered, this, &MainWindow::on_Database);
+    ui->actionDatabase->setShortcut(tr("ctrl+d"));
+
+    connect(ui->actionOpen_database_directory, &QAction::triggered, this, &MainWindow::on_btnOpenDir_clicked);
+
+    connect(ui->actionShareConfig, &QAction::triggered, this, &MainWindow::on_ShareConfig);
+    ui->actionShareConfig->setShortcut(tr("ctrl+r"));
+
     connect(ui->btnExportMaster, &QAction::triggered, this, &MainWindow::on_btnExportMaster);
 
     connect(ui->btnImportMaster, &QAction::triggered, this, &MainWindow::on_btnImportMaster);
@@ -6975,12 +6983,6 @@ void MainWindow::init_menu()
 
     connect(ui->btnCheckUpdate, &QAction::triggered, this, &MainWindow::on_btnCheckUpdate);
     ui->btnCheckUpdate->setShortcut(tr("ctrl+u"));
-
-    connect(ui->actionDatabase, &QAction::triggered, this, &MainWindow::on_Database);
-    ui->actionDatabase->setShortcut(tr("ctrl+d"));
-
-    connect(ui->actionShareConfig, &QAction::triggered, this, &MainWindow::on_ShareConfig);
-    ui->actionShareConfig->setShortcut(tr("ctrl+r"));
 
     connect(ui->actionAbout_2, &QAction::triggered, this, &MainWindow::about);
 
@@ -8913,4 +8915,17 @@ void MainWindow::on_cboxPickerVariant_currentTextChanged(const QString& arg1)
 {
     Q_UNUSED(arg1);
     this->setWindowModified(true);
+}
+
+void MainWindow::on_tabACPI_currentChanged(int index)
+{
+    Q_UNUSED(index);
+}
+
+void MainWindow::on_btnOpenDir_clicked()
+{
+    QFileInfo appInfo(qApp->applicationDirPath());
+    QString dirpath = appInfo.filePath() + "/Database/";
+    QString dir = "file:" + dirpath;
+    QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
 }

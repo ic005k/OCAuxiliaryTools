@@ -151,6 +151,7 @@ protected:
 #endif // QT_NO_CONTEXTMENU
 
 private slots:
+    void on_btnOpenDir_clicked();
     void on_ShareConfig();
     void on_Database();
     void on_line1();
@@ -989,6 +990,8 @@ private slots:
     void on_editSetupDelay_textChanged(const QString& arg1);
 
     void on_cboxPickerVariant_currentTextChanged(const QString& arg1);
+
+    void on_tabACPI_currentChanged(int index);
 
 private:
     Ui::MainWindow* ui;

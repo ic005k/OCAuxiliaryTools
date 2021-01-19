@@ -31,7 +31,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -53,7 +53,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -4703,7 +4703,8 @@ Windows installed on a drive with EFI partition being the first partition on the
 PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</string>
               </property>
               <property name="statusTip">
-               <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</string>
+               <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic
+ PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</string>
               </property>
               <property name="text">
                <string>MaxBIOSVersion</string>
@@ -7268,6 +7269,7 @@ may freeze upon boot. Not recommended unless required.</string>
     <addaction name="separator"/>
     <addaction name="actionGenerateEFI"/>
     <addaction name="actionDatabase"/>
+    <addaction name="actionOpen_database_directory"/>
     <addaction name="actionShareConfig"/>
     <addaction name="separator"/>
     <addaction name="btnExportMaster"/>
@@ -7417,6 +7419,11 @@ may freeze upon boot. Not recommended unless required.</string>
   <action name="actionShareConfig">
    <property name="text">
     <string>Share your Config.plist</string>
+   </property>
+  </action>
+  <action name="actionOpen_database_directory">
+   <property name="text">
+    <string>Open database directory</string>
    </property>
   </action>
  </widget>

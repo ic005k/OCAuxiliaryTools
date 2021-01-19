@@ -14,6 +14,8 @@ public:
     explicit dlgDatabase(QWidget* parent = nullptr);
     ~dlgDatabase();
 
+public slots:
+
 private slots:
     void on_tableDatabase_cellDoubleClicked(int row, int column);
 
