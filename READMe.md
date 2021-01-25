@@ -1,13 +1,7 @@
 [English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-en.md)
 # Open source cross-platform OpenCore configuration file editor
 
-OpenCore has gradually become popular, and has always wanted to be an open source cross-platform OC configuration file editor, which has finally been achieved. Therefore, it is very easy to configure OC on platforms other than mac, especially win and linux platforms.
-
-This software is based on SampleCustom.plist provided by the latest development version of OC. It is recommended to upgrade OC to the latest development version before using this software.
-
 OC development version can be downloaded [here](https://github.com/acidanthera/OpenCorePkg/actions).
-
-Interpretation (translation) of various functions of the software: Due to time constraints, I apologize for not finishing and typesetting in detail, and suggest that you study the original OC instructions.
 
 ## Features include but are not limited to:
 
