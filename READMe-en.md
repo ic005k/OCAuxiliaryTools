@@ -1,15 +1,11 @@
 [English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-en.md)
 # 开源跨平台的OpenCore配置文件编辑器
 
-OpenCore逐渐流行起来，一直想做一款开源跨平台的OC配置文件编辑器，目前终于达成。这样在mac之外的平台下配置OC显得格外轻松，特别是win和linux平台。
-
-该软件是根据OC最新的开发版提供的SampleCustom.plist为蓝本，使用该软件前，建议将OC升级到最新的开发版。
-
 OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actions
 
 非官方简体中文参考手册：https://github.com/SukkaW/OpenCore-Document-zh_Hans  感谢@SukkaW！
 
-以上链接已放入软件的“资源”菜单。
+以上链接已放入软件的“帮助”菜单。
 
 关于软件各功能的解读（翻译）: 由于时间关系，没有细致地去润色及排版，在此表示歉意，同时建议大家研读原版OC说明书。
 
