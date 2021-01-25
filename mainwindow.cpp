@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210118";
+    CurVerison = "20210125";
     title = "QtOpenCoreConfigurator   V0.6.6-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -1231,31 +1231,27 @@ void MainWindow::ParserKernel(QVariantMap map)
     // Quirks
     QVariantMap map_quirks = map["Quirks"].toMap();
 
-    ui->chkAppleCpuPmCfgLock->setChecked(
-        map_quirks["AppleCpuPmCfgLock"].toBool());
+    ui->chkAppleCpuPmCfgLock->setChecked(map_quirks["AppleCpuPmCfgLock"].toBool());
     ui->chkAppleXcpmCfgLock->setChecked(map_quirks["AppleXcpmCfgLock"].toBool());
-    ui->chkAppleXcpmExtraMsrs->setChecked(
-        map_quirks["AppleXcpmExtraMsrs"].toBool());
-    ui->chkAppleXcpmForceBoost->setChecked(
-        map_quirks["AppleXcpmForceBoost"].toBool());
+    ui->chkAppleXcpmExtraMsrs->setChecked(map_quirks["AppleXcpmExtraMsrs"].toBool());
+    ui->chkAppleXcpmForceBoost->setChecked(map_quirks["AppleXcpmForceBoost"].toBool());
 
     ui->chkCustomSMBIOSGuid->setChecked(map_quirks["CustomSMBIOSGuid"].toBool());
 
     ui->chkDisableIoMapper->setChecked(map_quirks["DisableIoMapper"].toBool());
-    ui->chkDisableRtcChecksum->setChecked(
-        map_quirks["DisableRtcChecksum"].toBool());
-    ui->chkExternalDiskIcons->setChecked(
-        map_quirks["ExternalDiskIcons"].toBool());
-    ui->chkIncreasePciBarSize->setChecked(
-        map_quirks["IncreasePciBarSize"].toBool());
+    ui->chkDisableRtcChecksum->setChecked(map_quirks["DisableRtcChecksum"].toBool());
+    ui->chkExternalDiskIcons->setChecked(map_quirks["ExternalDiskIcons"].toBool());
+    ui->chkIncreasePciBarSize->setChecked(map_quirks["IncreasePciBarSize"].toBool());
     ui->chkLapicKernelPanic->setChecked(map_quirks["LapicKernelPanic"].toBool());
     ui->chkPanicNoKextDump->setChecked(map_quirks["PanicNoKextDump"].toBool());
-    ui->chkPowerTimeoutKernelPanic->setChecked(
-        map_quirks["PowerTimeoutKernelPanic"].toBool());
+    ui->chkPowerTimeoutKernelPanic->setChecked(map_quirks["PowerTimeoutKernelPanic"].toBool());
+
+    ui->editSetApfsTrimTimeout->setText(map_quirks["SetApfsTrimTimeout"].toString());
+
     ui->chkThirdPartyDrives->setChecked(map_quirks["ThirdPartyDrives"].toBool());
+
     ui->chkXhciPortLimit->setChecked(map_quirks["XhciPortLimit"].toBool());
-    ui->chkDisableLinkeditJettison->setChecked(
-        map_quirks["DisableLinkeditJettison"].toBool());
+    ui->chkDisableLinkeditJettison->setChecked(map_quirks["DisableLinkeditJettison"].toBool());
 
     ui->chkExtendBTFeatureFlags->setChecked(
         map_quirks["ExtendBTFeatureFlags"].toBool());
@@ -2949,7 +2945,11 @@ QVariantMap MainWindow::SaveKernel()
     mapQuirks["LapicKernelPanic"] = getChkBool(ui->chkLapicKernelPanic);
     mapQuirks["PanicNoKextDump"] = getChkBool(ui->chkPanicNoKextDump);
     mapQuirks["PowerTimeoutKernelPanic"] = getChkBool(ui->chkPowerTimeoutKernelPanic);
+
+    mapQuirks["SetApfsTrimTimeout"] = ui->editSetApfsTrimTimeout->text().toLongLong();
+
     mapQuirks["ThirdPartyDrives"] = getChkBool(ui->chkThirdPartyDrives);
+
     mapQuirks["XhciPortLimit"] = getChkBool(ui->chkXhciPortLimit);
     mapQuirks["DisableLinkeditJettison"] = getChkBool(ui->chkDisableLinkeditJettison);
 
