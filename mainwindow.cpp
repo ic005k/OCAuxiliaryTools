@@ -4937,20 +4937,20 @@ void MainWindow::on_cboxSystemProductName_currentIndexChanged(
         // win
         // QFile file(appInfo.filePath() + "/macserial.exe");
 
-        gs->start(appInfo.filePath() + "/macserial.exe",
+        gs->start(appInfo.filePath() + "/Database/win/macserial.exe",
             QStringList() << "-m" << str); //阻塞为execute
 
 #endif
 
 #ifdef Q_OS_LINUX
         // linux
-        gs->start(appInfo.filePath() + "/macserial", QStringList() << "-m" << str);
+        gs->start(appInfo.filePath() + "/Database/linux/macserial", QStringList() << "-m" << str);
 
 #endif
 
 #ifdef Q_OS_MAC
         // mac
-        gs->start(appInfo.filePath() + "/macserial", QStringList() << "-m" << str);
+        gs->start(appInfo.filePath() + "/Database/mac/macserial", QStringList() << "-m" << str);
 
 #endif
 
@@ -5389,7 +5389,7 @@ void MainWindow::on_btnHelp()
 {
 
     QFileInfo appInfo(qApp->applicationDirPath());
-    QString qtManulFile = appInfo.filePath() + "/Configuration.pdf";
+    QString qtManulFile = appInfo.filePath() + "/Database/doc/Configuration.pdf";
 
     QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
 }
@@ -8506,18 +8506,18 @@ void MainWindow::on_btnOcvalidate()
     QFileInfo appInfo(qApp->applicationDirPath());
     chkdata = new QProcess;
 #ifdef Q_OS_WIN32
-    chkdata->start(appInfo.filePath() + "/ocvalidate.exe", QStringList() << SaveFileName);
+    chkdata->start(appInfo.filePath() + "/Database/win/ocvalidate.exe", QStringList() << SaveFileName);
 
 #endif
 
 #ifdef Q_OS_LINUX
-    chkdata->start(appInfo.filePath() + "/ocvalidate", QStringList() << SaveFileName);
+    chkdata->start(appInfo.filePath() + "/Database/linux/ocvalidate", QStringList() << SaveFileName);
 
 #endif
 
 #ifdef Q_OS_MAC
 
-    chkdata->start(appInfo.filePath() + "/ocvalidate", QStringList() << SaveFileName);
+    chkdata->start(appInfo.filePath() + "/Database/mac/ocvalidate", QStringList() << SaveFileName);
 #endif
     connect(chkdata, SIGNAL(finished(int)), this, SLOT(readResultCheckData()));
 }
