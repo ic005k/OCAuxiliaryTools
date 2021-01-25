@@ -2118,9 +2118,9 @@ void MainWindow::initui_PlatformInfo()
     QFileInfo appInfo(qApp->applicationDirPath());
     si = new QProcess;
 #ifdef Q_OS_WIN32
-    QFile file(appInfo.filePath() + "/macserial.exe");
+    QFile file(appInfo.filePath() + "/Database/win/macserial.exe");
     if (file.exists())
-        gs->execute(appInfo.filePath() + "/macserial.exe",
+        gs->execute(appInfo.filePath() + "/Database/win/macserial.exe",
             QStringList() << "-s"); //阻塞execute
     else {
 
@@ -2133,7 +2133,7 @@ void MainWindow::initui_PlatformInfo()
 #endif
 
 #ifdef Q_OS_LINUX
-    gs->execute(appInfo.filePath() + "/macserial", QStringList() << "-s");
+    gs->execute(appInfo.filePath() + "/Database/linux/macserial", QStringList() << "-s");
     /*暂时屏蔽*/
     ui->tabPlatformInfo->removeTab(5);
     ui->btnGenerate->setEnabled(true);
@@ -2141,7 +2141,7 @@ void MainWindow::initui_PlatformInfo()
 #endif
 
 #ifdef Q_OS_MAC
-    si->start(appInfo.filePath() + "/macserial", QStringList() << "-s");
+    si->start(appInfo.filePath() + "/Database/mac/macserial", QStringList() << "-s");
 #endif
     connect(si, SIGNAL(finished(int)), this, SLOT(readResultSystemInfo()));
 }
