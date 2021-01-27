@@ -31,7 +31,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5658,7 +5658,7 @@ Enable this option to be able to see all the boot options when having multiple d
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>7</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -6767,7 +6767,21 @@ im4m manifest files used by Apple Secure Boot.</string>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_31">
-             <item row="6" column="0">
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="chkUnblockFsConnect">
+               <property name="toolTip">
+                <string>Note: The quirk is mostly relevant for select HP laptops with no drives listed.</string>
+               </property>
+               <property name="statusTip">
+                <string>Some firmwares block partition handles by opening them in By Driver mode, which results in File
+ System protocols being unable to install.</string>
+               </property>
+               <property name="text">
+                <string>UnblockFsConnect</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
               <widget class="QLabel" name="label_29">
                <property name="toolTip">
                 <string>The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop
@@ -6790,69 +6804,7 @@ the MSR registers.</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_28">
-               <property name="toolTip">
-                <string>This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,
-namely ASUS Z87-Pro, when using FileVault 2 in particular. It seems that for some reason they execute code
-in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. A better
-approach should be found in some future. Expect 3-5 seconds to be enough in case the quirk is needed.</string>
-               </property>
-               <property name="statusTip">
-                <string>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</string>
-               </property>
-               <property name="text">
-                <string>ExitBootServicesDelay</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
-               <property name="toolTip">
-                <string>Note: While the option is not supposed to induce harm on unaffected firmwares, its usage is not recommended
-when it is not required.</string>
-               </property>
-               <property name="statusTip">
-                <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
- register. These values may cause macOS boot failure on Intel platforms.</string>
-               </property>
-               <property name="text">
-                <string>IgnoreInvalidFlexRatio</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="0">
-              <widget class="QCheckBox" name="chkRequestBootVarRouting">
-               <property name="toolTip">
-                <string>This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default
-boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required
-to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible
-with macOS boot entries by design.</string>
-               </property>
-               <property name="statusTip">
-                <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
- OC_VENDOR_VARIABLE_GUID.</string>
-               </property>
-               <property name="text">
-                <string>RequestBootVarRouting</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="chkUnblockFsConnect">
-               <property name="toolTip">
-                <string>Note: The quirk is mostly relevant for select HP laptops with no drives listed.</string>
-               </property>
-               <property name="statusTip">
-                <string>Some firmwares block partition handles by opening them in By Driver mode, which results in File
- System protocols being unable to install.</string>
-               </property>
-               <property name="text">
-                <string>UnblockFsConnect</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
               <widget class="QCheckBox" name="chkReleaseUsbOwnership">
                <property name="toolTip">
                 <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
@@ -6869,7 +6821,22 @@ may freeze upon boot. Not recommended unless required.</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
+               <property name="toolTip">
+                <string>Note: While the option is not supposed to induce harm on unaffected firmwares, its usage is not recommended
+when it is not required.</string>
+               </property>
+               <property name="statusTip">
+                <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
+ register. These values may cause macOS boot failure on Intel platforms.</string>
+               </property>
+               <property name="text">
+                <string>IgnoreInvalidFlexRatio</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
               <widget class="QLineEdit" name="editExitBootServicesDelay">
                <property name="minimumSize">
                 <size>
@@ -6885,7 +6852,7 @@ may freeze upon boot. Not recommended unless required.</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="1">
+             <item row="7" column="1">
               <widget class="QLineEdit" name="editTscSyncTimeout">
                <property name="minimumSize">
                 <size>
@@ -6898,6 +6865,53 @@ may freeze upon boot. Not recommended unless required.</string>
                  <width>150</width>
                  <height>16777215</height>
                 </size>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_28">
+               <property name="toolTip">
+                <string>This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,
+namely ASUS Z87-Pro, when using FileVault 2 in particular. It seems that for some reason they execute code
+in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. A better
+approach should be found in some future. Expect 3-5 seconds to be enough in case the quirk is needed.</string>
+               </property>
+               <property name="statusTip">
+                <string>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</string>
+               </property>
+               <property name="text">
+                <string>ExitBootServicesDelay</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="chkRequestBootVarRouting">
+               <property name="toolTip">
+                <string>This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default
+boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required
+to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible
+with macOS boot entries by design.</string>
+               </property>
+               <property name="statusTip">
+                <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
+ OC_VENDOR_VARIABLE_GUID.</string>
+               </property>
+               <property name="text">
+                <string>RequestBootVarRouting</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkDisableSecurityPolicy">
+               <property name="toolTip">
+                <string>Note: This setting disables various security features of the firmware, defeating the purpose of any kind of Secure
+Boot. Do NOT enable if you use UEFI Secure Boot.</string>
+               </property>
+               <property name="statusTip">
+                <string>Disable platform security policy.</string>
+               </property>
+               <property name="text">
+                <string>DisableSecurityPolicy</string>
                </property>
               </widget>
              </item>

@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210125";
+    CurVerison = "20210127";
     title = "QtOpenCoreConfigurator   V0.6.6-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -2549,8 +2549,9 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
     // Quirks
     QVariantMap map_uefi_Quirks = map["Quirks"].toMap();
-    //ui->chkDeduplicateBootOrder->setChecked(
-    //    map_uefi_Quirks["DeduplicateBootOrder"].toBool());
+
+    ui->chkDisableSecurityPolicy->setChecked(map_uefi_Quirks["DisableSecurityPolicy"].toBool());
+
     ui->chkIgnoreInvalidFlexRatio->setChecked(
         map_uefi_Quirks["IgnoreInvalidFlexRatio"].toBool());
     ui->chkReleaseUsbOwnership->setChecked(
@@ -3393,7 +3394,7 @@ QVariantMap MainWindow::SaveUEFI()
     // Quirks
     dictList.clear();
 
-    //dictList["DeduplicateBootOrder"] = getChkBool(ui->chkDeduplicateBootOrder);
+    dictList["DisableSecurityPolicy"] = getChkBool(ui->chkDisableSecurityPolicy);
 
     dictList["IgnoreInvalidFlexRatio"] = getChkBool(ui->chkIgnoreInvalidFlexRatio);
     dictList["ReleaseUsbOwnership"] = getChkBool(ui->chkReleaseUsbOwnership);
