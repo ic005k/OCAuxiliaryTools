@@ -6969,7 +6969,7 @@ void MainWindow::init_menu()
     connect(ui->actionDatabase, &QAction::triggered, this, &MainWindow::on_Database);
     ui->actionDatabase->setShortcut(tr("ctrl+d"));
 
-    connect(ui->actionOpen_database_directory, &QAction::triggered, this, &MainWindow::on_btnOpenDir_clicked);
+    connect(ui->actionOpen_database_directory, &QAction::triggered, this, &MainWindow::OpenDir_clicked);
 
     connect(ui->actionShareConfig, &QAction::triggered, this, &MainWindow::on_ShareConfig);
     ui->actionShareConfig->setShortcut(tr("ctrl+r"));
@@ -8923,10 +8923,22 @@ void MainWindow::on_tabACPI_currentChanged(int index)
     Q_UNUSED(index);
 }
 
-void MainWindow::on_btnOpenDir_clicked()
+void MainWindow::OpenDir_clicked()
 {
     QFileInfo appInfo(qApp->applicationDirPath());
     QString dirpath = appInfo.filePath() + "/Database/";
     QString dir = "file:" + dirpath;
     QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
+}
+
+void MainWindow::on_chkDisableSecurityPolicy_stateChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_editSetApfsTrimTimeout_textChanged(const QString& arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
 }

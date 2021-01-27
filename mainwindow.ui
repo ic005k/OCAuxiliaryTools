@@ -14,7 +14,7 @@
    <string/>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+   <iconset resource="qtocc.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -31,7 +31,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -93,7 +93,7 @@
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -115,7 +115,7 @@
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -173,7 +173,7 @@
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -195,7 +195,7 @@
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -259,7 +259,7 @@
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -281,7 +281,7 @@
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -454,7 +454,7 @@ macOS Mojave (10.14).</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -476,7 +476,7 @@ macOS Mojave (10.14).</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -541,7 +541,7 @@ macOS Mojave (10.14).</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -563,7 +563,7 @@ macOS Mojave (10.14).</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1005,7 +1005,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1027,7 +1027,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1065,7 +1065,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1087,7 +1087,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1132,7 +1132,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1154,7 +1154,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1189,7 +1189,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1211,7 +1211,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1277,7 +1277,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1299,7 +1299,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1321,7 +1321,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>Up</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/up.png</normaloff>:/up.png</iconset>
               </property>
               <property name="iconSize">
@@ -1343,7 +1343,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>Down</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/down.png</normaloff>:/down.png</iconset>
               </property>
               <property name="iconSize">
@@ -1400,7 +1400,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1422,7 +1422,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1482,7 +1482,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1504,7 +1504,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1569,7 +1569,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1591,7 +1591,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3517,7 +3517,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3539,7 +3539,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3594,7 +3594,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3616,7 +3616,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3671,7 +3671,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3693,7 +3693,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3755,7 +3755,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3777,7 +3777,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3812,7 +3812,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3834,7 +3834,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3901,7 +3901,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3923,7 +3923,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3958,7 +3958,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3980,7 +3980,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -4025,7 +4025,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -4047,7 +4047,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -4082,7 +4082,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -4104,7 +4104,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -4847,7 +4847,7 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -4869,7 +4869,7 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -5987,7 +5987,7 @@ specified codec (AudioCodec) located on the audio controller (AudioDevice).</str
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -6009,7 +6009,7 @@ specified codec (AudioCodec) located on the audio controller (AudioDevice).</str
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -6946,7 +6946,7 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -6968,7 +6968,7 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -7018,7 +7018,7 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
      <x>0</x>
      <y>0</y>
      <width>1328</width>
-     <height>24</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -7198,7 +7198,7 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
   </action>
  </widget>
  <resources>
-  <include location="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc"/>
+  <include location="qtocc.qrc"/>
  </resources>
  <connections/>
 </ui>
