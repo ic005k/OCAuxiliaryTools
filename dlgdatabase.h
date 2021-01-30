@@ -27,6 +27,8 @@ private slots:
 
     void on_tableDatabaseFind_cellDoubleClicked(int row, int column);
 
+    void on_btnRefreshAll_clicked();
+
 private:
     Ui::dlgDatabase* ui;
 };

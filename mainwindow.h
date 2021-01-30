@@ -1071,8 +1071,6 @@ private:
     void PickerAttributes();
     bool pickerAttributes = false;
 
-    QString SaveFileName;
-
     void init_menu();
 
     bool closeSave = false;

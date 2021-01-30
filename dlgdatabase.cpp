@@ -4,6 +4,7 @@
 
 extern QTableWidget* tableDatabase;
 extern MainWindow* mw_one;
+extern QString SaveFileName;
 
 dlgDatabase::dlgDatabase(QWidget* parent)
     : QDialog(parent)
@@ -119,4 +120,23 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column)
     mw_one->openFile(dirpath + file);
 
     mw_one->on_GenerateEFI();
+}
+
+void dlgDatabase::on_btnRefreshAll_clicked()
+{
+    QString bakFile;
+    if (!SaveFileName.isEmpty()) {
+        bakFile = SaveFileName;
+    }
+
+    ui->tableDatabase->setCurrentCell(0, 0);
+    for (int i = 0; i < ui->tableDatabase->rowCount(); i++) {
+        ui->tableDatabase->setCurrentCell(i, 0);
+        QString file = ui->tableDatabase->currentItem()->text();
+        mw_one->openFile(file);
+        mw_one->SavePlist(file);
+    }
+
+    if (!bakFile.isEmpty())
+        mw_one->openFile(bakFile);
 }

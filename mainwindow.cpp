@@ -9,6 +9,7 @@
 #include <QSettings>
 
 QString PlistFileName;
+QString SaveFileName;
 QVector<QString> filelist;
 QWidgetList wdlist;
 QTableWidget* tableDatabase;
@@ -23,7 +24,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210127";
+    CurVerison = "20210130";
     title = "QtOpenCoreConfigurator   V0.6.6-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 

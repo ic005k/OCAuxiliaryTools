@@ -71,6 +71,16 @@
      </property>
     </widget>
    </item>
+   <item row="0" column="3">
+    <widget class="QToolButton" name="btnRefreshAll">
+     <property name="toolTip">
+      <string>Save all profiles in the table to the latest version</string>
+     </property>
+     <property name="text">
+      <string>Refresh all</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources>
