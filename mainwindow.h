@@ -787,8 +787,6 @@ private slots:
 
     void on_editApECID_textChanged(const QString& arg1);
 
-    void on_cboxBootProtect_currentIndexChanged(const QString& arg1);
-
     void on_editPasswordHash_textChanged(const QString& arg1);
 
     void on_editPasswordSalt_textChanged(const QString& arg1);
@@ -997,6 +995,10 @@ private slots:
 
     void on_editSetApfsTrimTimeout_textChanged(const QString& arg1);
 
+    void on_cboxLauncherOption_currentTextChanged(const QString& arg1);
+
+    void on_cboxLauncherPath_currentTextChanged(const QString& arg1);
+
 private:
     Ui::MainWindow* ui;
 
@@ -1074,6 +1076,8 @@ private:
     void init_menu();
 
     bool closeSave = false;
+
+    bool osx1012 = false;
 
     void clear_temp_data();
 

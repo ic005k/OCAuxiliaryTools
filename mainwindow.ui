@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1328</width>
-    <height>729</height>
+    <width>1250</width>
+    <height>685</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string/>
   </property>
   <property name="windowIcon">
-   <iconset resource="qtocc.qrc">
+   <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -31,7 +31,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -53,7 +53,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -93,7 +93,7 @@
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -115,7 +115,7 @@
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -173,7 +173,7 @@
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -195,7 +195,7 @@
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -259,7 +259,7 @@
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -281,7 +281,7 @@
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -454,7 +454,7 @@ macOS Mojave (10.14).</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -476,7 +476,7 @@ macOS Mojave (10.14).</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -541,7 +541,7 @@ macOS Mojave (10.14).</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -563,7 +563,7 @@ macOS Mojave (10.14).</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -966,7 +966,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -1005,7 +1005,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1027,7 +1027,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1065,7 +1065,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1087,7 +1087,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1132,7 +1132,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1154,7 +1154,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1189,7 +1189,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1211,7 +1211,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1239,7 +1239,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -1277,7 +1277,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1299,7 +1299,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1321,7 +1321,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>Up</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/up.png</normaloff>:/up.png</iconset>
               </property>
               <property name="iconSize">
@@ -1343,7 +1343,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>Down</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/down.png</normaloff>:/down.png</iconset>
               </property>
               <property name="iconSize">
@@ -1400,7 +1400,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1422,7 +1422,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1482,7 +1482,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1504,7 +1504,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1569,7 +1569,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1591,7 +1591,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -2169,7 +2169,7 @@ behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -2182,12 +2182,56 @@ behaviour corresponds to -legacy kernel boot argument.
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>210</y>
+              <y>195</y>
               <width>371</width>
               <height>321</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_58">
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_15">
+               <property name="toolTip">
+                <string>Default stays for launched OpenCore.efi, any other path, e.g. EFILauncher.efi, can be used to provide
+custom loaders, which are supposed to load OpenCore.efi themselves.</string>
+               </property>
+               <property name="statusTip">
+                <string>Launch path for LauncherOption.</string>
+               </property>
+               <property name="text">
+                <string>LauncherPath</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_108">
+               <property name="toolTip">
+                <string>Valid values:
+• Disabled — do nothing.
+• Full — create or update top-priority boot option in UEFI variable storage at bootloader startup. For this
+option to work RequestBootVarRouting is required to be enabled.
+• Short — create a short boot option instead of a complete one. This variant is useful for some older firmwares,
+Insyde in particular, but possibly others, which cannot handle full device paths.
+This option provides integration with third-party operating system installation and upgrade at the times they
+overwrite EFIBOOTBOOTx64.efi file. By creating a custom option in this file path becomes no longer used for
+bootstrapping OpenCore. The path used for bootstrapping is specified in LauncherPath option.
+
+Note 1 : Some types of firmware may have faulty NVRAM, no boot option support, or other incompatibilities.
+While unlikely, the use of this option may even cause boot failures. This option should be used without any
+warranty exclusively on the boards known to be compatible. Check acidanthera/bugtracker#1222 for some known
+issues with Haswell and other boards.
+
+Note 2 : Be aware that while NVRAM reset executed from OpenCore should not erase the boot option created in
+Bootstrap, executing NVRAM reset prior to loading OpenCore will remove it. For significant implementation
+updates (e.g. in OpenCore 0.6.4) make sure to perform NVRAM reset with Bootstrap disabled before reenabling.</string>
+               </property>
+               <property name="statusTip">
+                <string>Register launcher option in firmware preferences for persistence.</string>
+               </property>
+               <property name="text">
+                <string>LauncherOption</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_3">
                <property name="toolTip">
@@ -2228,10 +2272,10 @@ help testing proper GOP functioning.</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="2">
-              <widget class="QLineEdit" name="editTakeoffDelay"/>
+             <item row="0" column="2">
+              <widget class="QLineEdit" name="editConsoleAttributes"/>
              </item>
-             <item row="1" column="0">
+             <item row="12" column="0">
               <widget class="QLabel" name="label_8">
                <property name="toolTip">
                 <string>Introducing a delay may give extra time to hold the right action hotkey sequence to e.g. boot to recovery mode.
@@ -2246,14 +2290,24 @@ hotkeys at all due to the nature of the keyboard driver.</string>
                </property>
               </widget>
              </item>
-             <item row="8" column="2">
-              <widget class="QComboBox" name="cboxPickerVariant">
-               <property name="editable">
-                <bool>true</bool>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="toolTip">
+                <string>Description: Hibernation detection mode. The following modes are supported:
+• None — Avoid hibernation for your own good.
+• Auto — Use RTC and NVRAM detection.
+• RTC — Use RTC detection.
+• NVRAM — Use NVRAM detection.</string>
+               </property>
+               <property name="statusTip">
+                <string>Hibernation detection mode. </string>
+               </property>
+               <property name="text">
+                <string>HibernateMode</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="0">
+             <item row="10" column="0">
               <widget class="QLabel" name="label_6">
                <property name="toolTip">
                 <string>Picker describes underlying boot management with an optional user interface responsible for handling boot
@@ -2270,7 +2324,7 @@ options. The following values are supported:
                </property>
               </widget>
              </item>
-             <item row="7" column="2">
+             <item row="10" column="2">
               <widget class="QComboBox" name="cboxPickerMode">
                <property name="editable">
                 <bool>true</bool>
@@ -2278,36 +2332,27 @@ options. The following values are supported:
               </widget>
              </item>
              <item row="2" column="2">
-              <widget class="QLineEdit" name="editTimeout"/>
+              <widget class="QComboBox" name="cboxLauncherOption">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
-             <item row="3" column="2">
+             <item row="1" column="2">
               <widget class="QComboBox" name="cboxHibernateMode">
                <property name="editable">
                 <bool>true</bool>
                </property>
               </widget>
              </item>
-             <item row="0" column="2">
-              <widget class="QLineEdit" name="editConsoleAttributes"/>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_4">
-               <property name="toolTip">
-                <string>Description: Hibernation detection mode. The following modes are supported:
-• None — Avoid hibernation for your own good.
-• Auto — Use RTC and NVRAM detection.
-• RTC — Use RTC detection.
-• NVRAM — Use NVRAM detection.</string>
-               </property>
-               <property name="statusTip">
-                <string>Hibernation detection mode. The following modes are supported:</string>
-               </property>
-               <property name="text">
-                <string>HibernateMode</string>
+             <item row="11" column="2">
+              <widget class="QComboBox" name="cboxPickerVariant">
+               <property name="editable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
+             <item row="11" column="0">
               <widget class="QLabel" name="label_10">
                <property name="toolTip">
                 <string>The following values are supported:
@@ -2325,7 +2370,17 @@ options. The following values are supported:
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item row="12" column="2">
+              <widget class="QLineEdit" name="editTakeoffDelay"/>
+             </item>
+             <item row="3" column="2">
+              <widget class="QComboBox" name="cboxLauncherPath">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0">
               <widget class="QLabel" name="label_7">
                <property name="toolTip">
                 <string> Timeout in seconds in boot picker before automatic booting of the default boot entry. Use 0 to  disable timer.</string>
@@ -2339,77 +2394,8 @@ options. The following values are supported:
                </property>
               </widget>
              </item>
-             <item row="9" column="0">
-              <widget class="QCheckBox" name="chkHideAuxiliary">
-               <property name="toolTip">
-                <string>An entry is considered auxiliary when at least one of the following applies:
-• Entry is macOS recovery.
-• Entry is macOS Time Machine.
-• Entry is explicitly marked as Auxiliary. • Entry is system (e.g. Reset NVRAM).
-To see all entries picker menu needs to be reloaded in extended mode by pressing Spacebar key. Hiding auxiliary
-entries may increase boot performance for multidisk systems.</string>
-               </property>
-               <property name="statusTip">
-                <string>Hides auxiliary entries from picker menu by default.</string>
-               </property>
-               <property name="text">
-                <string>HideAuxiliary</string>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="0">
-              <widget class="QCheckBox" name="chkPollAppleHotKeys">
-               <property name="toolTip">
-                <string>In addition to action hotkeys, which are partially described in PickerMode section and are normally handled
-by Apple BDS, there exist modifier keys, which are handled by operating system bootloader, namely boot.efi.
-These keys allow to change operating system behaviour by providing different boot modes.
-On some firmwares it may be problematic to use modifier keys due to driver incompatibilities. To workaround
-this problem this option allows registering select hotkeys in a more permissive manner from within boot picker.
-Such extensions include the support of tapping on keys in addition to holding and pressing Shift along with
-other keys instead of just Shift alone, which is not detectible on many PS/2 keyboards. This list of known
-modifier hotkeys includes:
-• CMD+C+MINUS — disable board compatibility checking.
-• CMD+K — boot release kernel, similar to kcsuffix=release. • CMD+S — single user mode.
-• CMD+S+MINUS — disable KASLR slide, requires disabled SIP.
-• CMD+V — verbose mode.
-• Shift — safe mode.</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable modifier hotkey handling in boot picker.</string>
-               </property>
-               <property name="text">
-                <string>PollAppleHotKeys</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="0">
-              <widget class="QCheckBox" name="chkPickerAudioAssist">
-               <property name="toolTip">
-                <string>For macOS bootloader screen reader preference is set in preferences.efires archive in isVOEnabled.int32
-file and is controlled by the operating system. For OpenCore screen reader support this option is an independent
-equivalent. Toggling screen reader support in both OpenCore boot picker and macOS bootloader FileVault 2
-login window can also be done with Command + F5 key combination.</string>
-               </property>
-               <property name="statusTip">
-                <string>Enable screen reader by default in boot picker.</string>
-               </property>
-               <property name="text">
-                <string>PickerAudioAssist</string>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="0">
-              <widget class="QCheckBox" name="chkShowPicker">
-               <property name="toolTip">
-                <string>Show simple boot picker to allow boot entry selection.</string>
-               </property>
-               <property name="statusTip">
-                <string> Show simple boot picker to allow boot entry selection.</string>
-               </property>
-               <property name="text">
-                <string>ShowPicker</string>
-               </property>
-              </widget>
+             <item row="13" column="2">
+              <widget class="QLineEdit" name="editTimeout"/>
              </item>
             </layout>
            </widget>
@@ -2418,7 +2404,7 @@ login window can also be done with Command + F5 key combination.</string>
              <rect>
               <x>20</x>
               <y>60</y>
-              <width>599</width>
+              <width>641</width>
               <height>111</height>
              </rect>
             </property>
@@ -2485,6 +2471,90 @@ login window can also be done with Command + F5 key combination.</string>
              </item>
              <item row="0" column="1">
               <widget class="QLineEdit" name="editPickerAttributes"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="gridLayoutWidget_24">
+            <property name="geometry">
+             <rect>
+              <x>490</x>
+              <y>190</y>
+              <width>171</width>
+              <height>321</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_64">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="chkPollAppleHotKeys">
+               <property name="toolTip">
+                <string>In addition to action hotkeys, which are partially described in PickerMode section and are normally handled
+by Apple BDS, there exist modifier keys, which are handled by operating system bootloader, namely boot.efi.
+These keys allow to change operating system behaviour by providing different boot modes.
+On some firmwares it may be problematic to use modifier keys due to driver incompatibilities. To workaround
+this problem this option allows registering select hotkeys in a more permissive manner from within boot picker.
+Such extensions include the support of tapping on keys in addition to holding and pressing Shift along with
+other keys instead of just Shift alone, which is not detectible on many PS/2 keyboards. This list of known
+modifier hotkeys includes:
+• CMD+C+MINUS — disable board compatibility checking.
+• CMD+K — boot release kernel, similar to kcsuffix=release. • CMD+S — single user mode.
+• CMD+S+MINUS — disable KASLR slide, requires disabled SIP.
+• CMD+V — verbose mode.
+• Shift — safe mode.</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable modifier hotkey handling in boot picker.</string>
+               </property>
+               <property name="text">
+                <string>PollAppleHotKeys</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkHideAuxiliary">
+               <property name="toolTip">
+                <string>An entry is considered auxiliary when at least one of the following applies:
+• Entry is macOS recovery.
+• Entry is macOS Time Machine.
+• Entry is explicitly marked as Auxiliary. • Entry is system (e.g. Reset NVRAM).
+To see all entries picker menu needs to be reloaded in extended mode by pressing Spacebar key. Hiding auxiliary
+entries may increase boot performance for multidisk systems.</string>
+               </property>
+               <property name="statusTip">
+                <string>Hides auxiliary entries from picker menu by default.</string>
+               </property>
+               <property name="text">
+                <string>HideAuxiliary</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkPickerAudioAssist">
+               <property name="toolTip">
+                <string>For macOS bootloader screen reader preference is set in preferences.efires archive in isVOEnabled.int32
+file and is controlled by the operating system. For OpenCore screen reader support this option is an independent
+equivalent. Toggling screen reader support in both OpenCore boot picker and macOS bootloader FileVault 2
+login window can also be done with Command + F5 key combination.</string>
+               </property>
+               <property name="statusTip">
+                <string>Enable screen reader by default in boot picker.</string>
+               </property>
+               <property name="text">
+                <string>PickerAudioAssist</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="chkShowPicker">
+               <property name="toolTip">
+                <string>Show simple boot picker to allow boot entry selection.</string>
+               </property>
+               <property name="statusTip">
+                <string> Show simple boot picker to allow boot entry selection.</string>
+               </property>
+               <property name="text">
+                <string>ShowPicker</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -3290,29 +3360,35 @@ firmware updates with the NVRAM variable (run-efi-updater).</string>
               <property name="title">
                <string/>
               </property>
-              <layout class="QGridLayout" name="gridLayout_46">
+              <layout class="QGridLayout" name="gridLayout_65">
                <item row="0" column="0">
-                <widget class="QLabel" name="label_14">
-                 <property name="toolTip">
-                  <string> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message
+                <layout class="QGridLayout" name="gridLayout_46">
+                 <item row="1" column="1">
+                  <widget class="QComboBox" name="cboxDmgLoading">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_14">
+                   <property name="toolTip">
+                    <string> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message
 of HaltLevel. Possible values match DisplayLevel values.</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message
+                   </property>
+                   <property name="statusTip">
+                    <string> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message
  of HaltLevel. Possible values match DisplayLevel values.</string>
-                 </property>
-                 <property name="text">
-                  <string>HaltLevel</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QLineEdit" name="editHaltLevel"/>
-               </item>
-               <item row="0" column="2">
-                <widget class="QLabel" name="label_44">
-                 <property name="toolTip">
-                  <string>Setting this value to any non-zero 64-bit integer will allow using personalised Apple Secure Boot identifiers. If
+                   </property>
+                   <property name="text">
+                    <string>HaltLevel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_44">
+                   <property name="toolTip">
+                    <string>Setting this value to any non-zero 64-bit integer will allow using personalised Apple Secure Boot identifiers. If
 you want to use this setting, make sure to generate a random 64-bit number with a cryptographically secure
 random number generator. With this value set and SecureBootModel valid and not Disabled it is possible to
 achieve Full Security of Apple Secure Boot.
@@ -3321,70 +3397,41 @@ Until your operating system is personalised you will only be able to load macOS 
 DMG recovery you could always download it with macrecovery utility and put to com.apple.recovery.boot
 as explained in Tips and Tricks section. Keep in mind that DMG loading needs to be set to Signed to use any
 DMG with Apple Secure Boot.</string>
-                 </property>
-                 <property name="statusTip">
-                  <string>Apple Enclave Identifier.</string>
-                 </property>
-                 <property name="text">
-                  <string>ApECID</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3">
-                <widget class="QLineEdit" name="editApECID"/>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_12">
-                 <property name="toolTip">
-                  <string>Valid values:
-• None — do nothing.
-• Bootstrap — create or update top-priority EFIOCBootstrapBootstrap.efi boot option (Boot9696)
-in UEFI variable storage at bootloader startup. For this option to work RequestBootVarRouting is required
-to be enabled.
-This option provides integration with third-party operating system installation and upgrade at the times they
-overwrite EFIBOOTBOOTx64.efi file. By creating a custom option in Bootstrap mode this file path becomes
-no longer used for bootstraping OpenCore.
-Note 1 : Some firmewares may have broken NVRAM, no boot option support, or various other incompatibilities
-of any kind. While unlikely, the use of this option may even cause boot failure. Use at your own risk on boards
-known to be compatible.
-Note 2 : Be warned that while NVRAM reset executed from OpenCore should not erase the boot option created
-in Bootstrap, executing NVRAM reset prior to loading OpenCore will remove it.</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> Attempt to provide bootloader persistence.</string>
-                 </property>
-                 <property name="text">
-                  <string>BootProtect</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="cboxBootProtect">
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QLabel" name="label_93">
-                 <property name="toolTip">
-                  <string>Password hash used when EnabledPassword is set.</string>
-                 </property>
-                 <property name="statusTip">
-                  <string>Password hash used when EnabledPassword is set.</string>
-                 </property>
-                 <property name="text">
-                  <string>PasswordHash</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3">
-                <widget class="QLineEdit" name="editPasswordHash"/>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_27">
-                 <property name="toolTip">
-                  <string>Valid values:
+                   </property>
+                   <property name="statusTip">
+                    <string>Apple Enclave Identifier.</string>
+                   </property>
+                   <property name="text">
+                    <string>ApECID</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="editApECID"/>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLineEdit" name="editHaltLevel"/>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_93">
+                   <property name="toolTip">
+                    <string>Password hash used when EnabledPassword is set.</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Password hash used when EnabledPassword is set.</string>
+                   </property>
+                   <property name="text">
+                    <string>PasswordHash</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QLineEdit" name="editPasswordHash"/>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_27">
+                   <property name="toolTip">
+                    <string>Valid values:
 • Disabled — loading DMG images will fail. Disabled policy will still let macOS Recovery to load in most
 cases as there usually are boot.efi files compatible with Apple Secure Boot. Manually downloaded DMG
 images stored in com.apple.recovery.boot directories will not load, however.
@@ -3393,67 +3440,44 @@ let any Apple-signed macOS Recovery to load regardless of Apple Secure Boot stat
 be desired.
 • Any — any DMG images will mount as normal filesystems. Any policy is strongly not recommended and will
 cause a boot failure when Apple Secure Boot is activated.</string>
-                 </property>
-                 <property name="statusTip">
-                  <string>Define Disk Image (DMG) loading policy used for macOS Recovery.</string>
-                 </property>
-                 <property name="text">
-                  <string>DmgLoading</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QComboBox" name="cboxDmgLoading">
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <widget class="QLabel" name="label_94">
-                 <property name="toolTip">
-                  <string> Password salt used when EnabledPassword is set.</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> Password salt used when EnabledPassword is set.</string>
-                 </property>
-                 <property name="text">
-                  <string>PasswordSalt</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3">
-                <widget class="QLineEdit" name="editPasswordSalt"/>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_16">
-                 <property name="toolTip">
-                  <string>Valid values:
+                   </property>
+                   <property name="statusTip">
+                    <string>Define Disk Image (DMG) loading policy used for macOS Recovery.</string>
+                   </property>
+                   <property name="text">
+                    <string>DmgLoading</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="2">
+                  <widget class="QLabel" name="label_16">
+                   <property name="toolTip">
+                    <string>Valid values:
 • Optional — require nothing, no vault is enforced, insecure.
 • Basic — require vault.plist file present in OC directory. This provides basic filesystem integrity verification
 and may protect from unintentional filesystem corruption.
 • Secure — require vault.sig signature file for vault.plist in OC directory. This includes Basic integrity
 checking but also attempts to build a trusted bootchain.</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> Enables vaulting mechanism in OpenCore.</string>
-                 </property>
-                 <property name="text">
-                  <string>Vault</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QComboBox" name="cboxVault">
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QLabel" name="label_45">
-                 <property name="toolTip">
-                  <string>Sets Apple Secure Boot hardware model and policy. Specifying this value defines which operating systems will be
+                   </property>
+                   <property name="statusTip">
+                    <string> Enables vaulting mechanism in OpenCore.</string>
+                   </property>
+                   <property name="text">
+                    <string>Vault</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="3">
+                  <widget class="QComboBox" name="cboxVault">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QLabel" name="label_45">
+                   <property name="toolTip">
+                    <string>Sets Apple Secure Boot hardware model and policy. Specifying this value defines which operating systems will be
 bootable. Operating systems shipped before the specified model was released will not boot. Valid values:
 • Default — Recent available model, currently set to j137. • Disabled — No model, Secure Boot will be disabled.
 • j137 — iMacPro1,1 (December 2017) minimum macOS 10.13.2 (17C2111)
@@ -3472,21 +3496,39 @@ bootable. Operating systems shipped before the specified model was released will
 • j215 — MacBookPro16,4 (June 2020) minimum macOS 10.15.5 (19F96)
 • j185 — iMac20,1 (August 2020) minimum macOS 10.15.6 (19G2005)
 • j185f — iMac20,2 (August 2020) minimum macOS 10.15.6 (19G2005)</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> Apple Secure Boot hardware model.</string>
-                 </property>
-                 <property name="text">
-                  <string>SecureBootModel</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="3">
-                <widget class="QComboBox" name="cboxSecureBootModel">
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                </widget>
+                   </property>
+                   <property name="statusTip">
+                    <string> Apple Secure Boot hardware model.</string>
+                   </property>
+                   <property name="text">
+                    <string>SecureBootModel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="3">
+                  <widget class="QComboBox" name="cboxSecureBootModel">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QLabel" name="label_94">
+                   <property name="toolTip">
+                    <string> Password salt used when EnabledPassword is set.</string>
+                   </property>
+                   <property name="statusTip">
+                    <string> Password salt used when EnabledPassword is set.</string>
+                   </property>
+                   <property name="text">
+                    <string>PasswordSalt</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="3">
+                  <widget class="QLineEdit" name="editPasswordSalt"/>
+                 </item>
+                </layout>
                </item>
               </layout>
              </widget>
@@ -3517,7 +3559,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3539,7 +3581,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3594,7 +3636,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3616,7 +3658,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3671,7 +3713,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3693,7 +3735,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3734,7 +3776,7 @@ bootable. Operating systems shipped before the specified model was released will
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -3755,7 +3797,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3777,7 +3819,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3812,7 +3854,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3834,7 +3876,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3901,7 +3943,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3923,7 +3965,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3958,7 +4000,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3980,7 +4022,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -4025,7 +4067,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -4047,7 +4089,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -4082,7 +4124,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -4104,7 +4146,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -4847,7 +4889,7 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -4869,7 +4911,7 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -5634,31 +5676,14 @@ with existing Windows activation and custom OEM software but potentially breakin
        <attribute name="title">
         <string>UEFI</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="1" column="0">
-         <widget class="QCheckBox" name="chkConnectDrivers">
-          <property name="toolTip">
-           <string>This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
-Examples of such drivers are filesystem or audio drivers. While effective, this option may not be necessary for
-drivers performing automatic connection, and may slightly slowdown the boot.
-Note: Some firmwares, made by Apple in particular, only connect the boot drive to speedup the boot process.
-Enable this option to be able to see all the boot options when having multiple drives.</string>
-          </property>
-          <property name="statusTip">
-           <string> Perform UEFI controller connection after driver loading.</string>
-          </property>
-          <property name="text">
-           <string>ConnectDrivers</string>
-          </property>
-         </widget>
-        </item>
+       <layout class="QGridLayout" name="gridLayout_59">
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabUEFI">
           <property name="tabShape">
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -5987,7 +6012,7 @@ specified codec (AudioCodec) located on the audio controller (AudioDevice).</str
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -6009,7 +6034,7 @@ specified codec (AudioCodec) located on the audio controller (AudioDevice).</str
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -6946,7 +6971,7 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -6968,7 +6993,7 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="qtocc.qrc">
+               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -6996,6 +7021,32 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
           </widget>
          </widget>
         </item>
+        <item row="1" column="0">
+         <widget class="QGroupBox" name="groupBox_6">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="chkConnectDrivers">
+             <property name="toolTip">
+              <string>This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
+Examples of such drivers are filesystem or audio drivers. While effective, this option may not be necessary for
+drivers performing automatic connection, and may slightly slowdown the boot.
+Note: Some firmwares, made by Apple in particular, only connect the boot drive to speedup the boot process.
+Enable this option to be able to see all the boot options when having multiple drives.</string>
+             </property>
+             <property name="statusTip">
+              <string> Perform UEFI controller connection after driver loading.</string>
+             </property>
+             <property name="text">
+              <string>ConnectDrivers</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_36">
@@ -7017,8 +7068,8 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1328</width>
-     <height>30</height>
+     <width>1250</width>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -7198,7 +7249,7 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
   </action>
  </widget>
  <resources>
-  <include location="qtocc.qrc"/>
+  <include location="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc"/>
  </resources>
  <connections/>
 </ui>

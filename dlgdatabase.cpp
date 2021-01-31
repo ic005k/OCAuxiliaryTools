@@ -130,11 +130,15 @@ void dlgDatabase::on_btnRefreshAll_clicked()
     }
 
     ui->tableDatabase->setCurrentCell(0, 0);
+
+    QFileInfo appInfo(qApp->applicationDirPath());
+    QString dirpath = appInfo.filePath() + "/Database/";
+
     for (int i = 0; i < ui->tableDatabase->rowCount(); i++) {
         ui->tableDatabase->setCurrentCell(i, 0);
         QString file = ui->tableDatabase->currentItem()->text();
-        mw_one->openFile(file);
-        mw_one->SavePlist(file);
+        mw_one->openFile(dirpath + file);
+        mw_one->SavePlist(dirpath + file);
     }
 
     if (!bakFile.isEmpty())

@@ -9,7 +9,7 @@ IDI_ICON1 ICON DISCARDABLE "my.ico"
 #endif
 
 VS_VERSION_INFO VERSIONINFO
-    //FILEVERSION 0.6.6 - 20210127
+    FILEVERSION 0,6,6
     PRODUCTVERSION 1,0,0,10
     FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
@@ -27,8 +27,8 @@ VS_VERSION_INFO VERSIONINFO
             BEGIN
                 VALUE "CompanyName", ""
                 VALUE "FileDescription", ""
-                VALUE "FileVersion", "0.6.6 - 20210130\0"
-                VALUE "ProductVersion", "0.6.6 - 20210130\0"
+                VALUE "FileVersion", "0.6.6 - 20210131\0"
+                VALUE "ProductVersion", "0.6.6 - 20210131\0"
                 VALUE "LegalCopyright", "\0"
                 VALUE "LegalTrademarks", ""
                 VALUE "OriginalFilename", "QtOpenCoreConfig\0"

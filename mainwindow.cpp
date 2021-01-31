@@ -21,10 +21,12 @@ MainWindow::MainWindow(QWidget* parent)
 
     ui->setupUi(this);
 
+    //osx1012 = true;
+
     loadLocal();
 
     test(false);
-    CurVerison = "20210130";
+    CurVerison = "20210131";
     title = "QtOpenCoreConfigurator   V0.6.6-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -76,8 +78,53 @@ MainWindow::MainWindow(QWidget* parent)
 
     QString tabBarStyle4 = "QTabBar::tab:selected{background:rgba(30, 160, 255, 255);}";
 
-    //ui->tabTotal->setStyleSheet(tabBarStyle4);
+    if (osx1012)
+        ui->tabTotal->setStyleSheet(tabBarStyle4);
     //ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
+
+    ui->gridLayout->setMargin(1);
+
+    ui->gridLayout_52->setMargin(0);
+    ui->gridLayout_3->setMargin(0);
+    ui->gridLayout_4->setMargin(0);
+    ui->gridLayout_5->setMargin(0);
+    ui->gridLayout_28->setMargin(0);
+
+    ui->gridLayout_53->setMargin(0);
+    ui->gridLayout_7->setMargin(0);
+    ui->gridLayout_38->setMargin(0);
+
+    ui->gridLayout_8->setMargin(0);
+    ui->gridLayout_9->setMargin(0);
+    ui->gridLayout_10->setMargin(0);
+
+    ui->gridLayout_11->setMargin(0);
+    ui->gridLayout_12->setMargin(0);
+    ui->gridLayout_13->setMargin(0);
+    ui->gridLayout_42->setMargin(0);
+    ui->gridLayout_14->setMargin(0);
+
+    ui->gridLayout_16->setMargin(0);
+    ui->gridLayout_48->setMargin(0);
+    ui->gridLayout_20->setMargin(0);
+    ui->gridLayout_21->setMargin(0);
+    ui->gridLayout_22->setMargin(0);
+
+    ui->gridLayout_23->setMargin(0);
+    ui->gridLayout_17->setMargin(0);
+    ui->gridLayout_18->setMargin(0);
+    ui->gridLayout_19->setMargin(0);
+
+    ui->gridLayout_54->setMargin(0);
+    ui->gridLayout_32->setMargin(0);
+    ui->gridLayout_41->setMargin(0);
+    ui->gridLayout_37->setMargin(0);
+
+    ui->gridLayout_29->setMargin(0);
+    ui->gridLayout_30->setMargin(0);
+    ui->gridLayout_59->setMargin(0);
+
+    ui->gridLayout_43->setMargin(0);
 
     init_tr_str();
 
@@ -121,7 +168,8 @@ MainWindow::MainWindow(QWidget* parent)
     font.setPixelSize(12);
     mac = true;
     ui->tabTotal->setDocumentMode(false);
-    //ui->btnCheckUpdate->setVisible(false);
+    if (osx1012)
+        ui->btnCheckUpdate->setVisible(false);
 
 #endif
 
@@ -1280,6 +1328,12 @@ void MainWindow::initui_misc()
     ui->cboxHibernateMode->addItem("RTC");
     ui->cboxHibernateMode->addItem("NVRAM");
 
+    ui->cboxLauncherOption->addItem("Disabled");
+    ui->cboxLauncherOption->addItem("Full");
+    ui->cboxLauncherOption->addItem("Short");
+
+    ui->cboxLauncherPath->addItem("Default");
+
     ui->cboxPickerMode->addItem("Builtin");
     ui->cboxPickerMode->addItem("External");
     ui->cboxPickerMode->addItem("Apple");
@@ -1291,8 +1345,8 @@ void MainWindow::initui_misc()
     ui->cboxPickerVariant->addItem("Other value");
 
     // Security
-    ui->cboxBootProtect->addItem("None");
-    ui->cboxBootProtect->addItem("Bootstrap");
+    //ui->cboxBootProtect->addItem("None");
+    //ui->cboxBootProtect->addItem("Bootstrap");
 
     ui->cboxDmgLoading->addItem("Disabled");
     ui->cboxDmgLoading->addItem("Signed");
@@ -1389,6 +1443,16 @@ void MainWindow::ParserMisc(QVariantMap map)
     QString hm = map_boot["HibernateMode"].toString();
     ui->cboxHibernateMode->setCurrentText(hm.trimmed());
 
+    hm = map_boot["LauncherOption"].toString();
+    if (hm == "")
+        hm = "Disabled";
+    ui->cboxLauncherOption->setCurrentText(hm.trimmed());
+
+    hm = map_boot["LauncherPath"].toString();
+    if (hm == "")
+        hm = "Default";
+    ui->cboxLauncherPath->setCurrentText(hm.trimmed());
+
     ui->chkHideAuxiliary->setChecked(map_boot["HideAuxiliary"].toBool());
     ui->editPickerAttributes->setText(map_boot["PickerAttributes"].toString());
     ui->chkPickerAudioAssist->setChecked(map_boot["PickerAudioAssist"].toBool());
@@ -1429,8 +1493,8 @@ void MainWindow::ParserMisc(QVariantMap map)
     ui->chkBlacklistAppleUpdate->setChecked(
         map_security["BlacklistAppleUpdate"].toBool());
 
-    hm = map_security["BootProtect"].toString();
-    ui->cboxBootProtect->setCurrentText(hm.trimmed());
+    //hm = map_security["BootProtect"].toString();
+    //ui->cboxBootProtect->setCurrentText(hm.trimmed());
 
     ui->editExposeSensitiveData->setText(
         map_security["ExposeSensitiveData"].toString());
@@ -2988,6 +3052,10 @@ QVariantMap MainWindow::SaveMisc()
     valueList["ConsoleAttributes"] = ui->editConsoleAttributes->text().toLongLong();
     valueList["HibernateMode"] = ui->cboxHibernateMode->currentText();
     valueList["HideAuxiliary"] = getChkBool(ui->chkHideAuxiliary);
+
+    valueList["LauncherOption"] = ui->cboxLauncherOption->currentText();
+    valueList["LauncherPath"] = ui->cboxLauncherPath->currentText();
+
     valueList["PickerAttributes"] = ui->editPickerAttributes->text().toLongLong();
     valueList["PickerAudioAssist"] = getChkBool(ui->chkPickerAudioAssist);
     valueList["PickerMode"] = ui->cboxPickerMode->currentText();
@@ -3038,7 +3106,7 @@ QVariantMap MainWindow::SaveMisc()
     valueList["BlacklistAppleUpdate"] = getChkBool(ui->chkBlacklistAppleUpdate);
     valueList["EnablePassword"] = getChkBool(ui->chkEnablePassword);
 
-    valueList["BootProtect"] = ui->cboxBootProtect->currentText();
+    //valueList["BootProtect"] = ui->cboxBootProtect->currentText();
     valueList["DmgLoading"] = ui->cboxDmgLoading->currentText();
     valueList["Vault"] = ui->cboxVault->currentText();
     valueList["PasswordHash"] = HexStrToByte(ui->editPasswordHash->text());
@@ -7940,12 +8008,6 @@ void MainWindow::on_editApECID_textChanged(const QString& arg1)
     this->setWindowModified(true);
 }
 
-void MainWindow::on_cboxBootProtect_currentIndexChanged(const QString& arg1)
-{
-    Q_UNUSED(arg1);
-    this->setWindowModified(true);
-}
-
 void MainWindow::on_editPasswordHash_textChanged(const QString& arg1)
 {
     Q_UNUSED(arg1);
@@ -8939,6 +9001,18 @@ void MainWindow::on_chkDisableSecurityPolicy_stateChanged(int arg1)
 }
 
 void MainWindow::on_editSetApfsTrimTimeout_textChanged(const QString& arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxLauncherOption_currentTextChanged(const QString& arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_cboxLauncherPath_currentTextChanged(const QString& arg1)
 {
     Q_UNUSED(arg1);
     this->setWindowModified(true);
