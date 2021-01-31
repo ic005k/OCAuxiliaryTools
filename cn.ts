@@ -2965,7 +2965,7 @@ issues with Haswell and other boards.
 Note 2 : Be aware that while NVRAM reset executed from OpenCore should not erase the boot option created in
 Bootstrap, executing NVRAM reset prior to loading OpenCore will remove it. For significant implementation
 updates (e.g. in OpenCore 0.6.4) make sure to perform NVRAM reset with Bootstrap disabled before reenabling.</source>
-        <translation>有效值。
+        <translation type="unfinished">有效值：
 - Disabled - 不做任何事情。
 - Full - 在启动器启动时在 UEFI 变量存储中创建或更新最高优先级的启动选项。为了使这个选项发挥作用，需要启用 RequestBootVarRouting。
 - Short - 创建一个短的启动选项，而不是一个完整的启动选项。这个变量对一些旧固件很有用，尤其是Insyde，但也可能对其他无法处理完整设备路径的固件有用。
