@@ -997,6 +997,8 @@ private slots:
 
     void on_cboxLauncherOption_currentTextChanged(const QString& arg1);
 
+    void on_chkUseRawUuidEncoding_stateChanged(int arg1);
+
     void on_cboxLauncherPath_currentTextChanged(const QString& arg1);
 
 private:

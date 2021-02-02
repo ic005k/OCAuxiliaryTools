@@ -4,25 +4,25 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="7122"/>
+        <location filename="mainwindow.ui" line="7161"/>
         <source>Open</source>
         <oldsource>打开-Open</oldsource>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7127"/>
+        <location filename="mainwindow.ui" line="7166"/>
         <source>Save</source>
         <oldsource>保存-Save</oldsource>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7132"/>
+        <location filename="mainwindow.ui" line="7171"/>
         <source>Save As...</source>
         <oldsource>另存-Save As...</oldsource>
         <translation>另存...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7192"/>
+        <location filename="mainwindow.ui" line="7231"/>
         <source>MountESP</source>
         <oldsource>挂载ESP-MountESP</oldsource>
         <translation>挂载ESP分区</translation>
@@ -113,7 +113,7 @@
         <translation>ACPI（电源管理）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7104"/>
+        <location filename="mainwindow.ui" line="7143"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
@@ -182,8 +182,8 @@ waking from hibernation.</source>
         <location filename="mainwindow.ui" line="4067"/>
         <location filename="mainwindow.ui" line="4124"/>
         <location filename="mainwindow.ui" line="4889"/>
-        <location filename="mainwindow.ui" line="6012"/>
-        <location filename="mainwindow.ui" line="6971"/>
+        <location filename="mainwindow.ui" line="6051"/>
+        <location filename="mainwindow.ui" line="7010"/>
         <source>AddItem</source>
         <translation>增加条目</translation>
     </message>
@@ -211,8 +211,8 @@ waking from hibernation.</source>
         <location filename="mainwindow.ui" line="4089"/>
         <location filename="mainwindow.ui" line="4146"/>
         <location filename="mainwindow.ui" line="4911"/>
-        <location filename="mainwindow.ui" line="6034"/>
-        <location filename="mainwindow.ui" line="6993"/>
+        <location filename="mainwindow.ui" line="6073"/>
+        <location filename="mainwindow.ui" line="7032"/>
         <source>DeleteItem</source>
         <translation>删除条目</translation>
     </message>
@@ -583,7 +583,7 @@ to boot-args and log the largest one that won’t cause boot failure.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6305"/>
+        <location filename="mainwindow.ui" line="6344"/>
         <source>Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such
 as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max
 will try to pull the largest available resolution from the connected display’s EDID.
@@ -593,13 +593,13 @@ iGPUs.</source>
         <translation>说明：在默认情况下（例如在旧版Intel GMA和第一代Intel HD Graphics（Ironlake / Arrandale）上）无法使用所需分辨率的情况下，强制设置分辨率。 将“分辨率”设置为“最大”将尝试从连接的显示器的EDID中获取最大的可用分辨率。 注意：此选项取决于存在的OC_FORCE_RESOLUTION_PROTOCOL协议。 目前仅OpenDuetPkg支持此协议。 OpenDuetPkg实现当前仅支持Intel iGPU。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6313"/>
+        <location filename="mainwindow.ui" line="6352"/>
         <source>ForceResolution</source>
         <translation></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="960"/>
-        <location filename="mainwindow.ui" line="6608"/>
+        <location filename="mainwindow.ui" line="6647"/>
         <source>DeviceProperties</source>
         <oldsource>设备属性配置-DeviceProperties</oldsource>
         <translation>DeviceProperties（设备属性）</translation>
@@ -721,7 +721,7 @@ it can also be used to disable this kext in other situations (e.g. with Cpuid1Da
         <location filename="mainwindow.ui" line="312"/>
         <location filename="mainwindow.ui" line="594"/>
         <location filename="mainwindow.ui" line="1737"/>
-        <location filename="mainwindow.ui" line="6783"/>
+        <location filename="mainwindow.ui" line="6822"/>
         <source>Quirks</source>
         <translation>Quirks（选项）</translation>
     </message>
@@ -1850,7 +1850,7 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>PlatformInfo（机型平台信息）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5611"/>
+        <location filename="mainwindow.ui" line="5644"/>
         <source>These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. All the other
 fields are to be specified with NVRAM section.
 If UpdateNVRAM is set to false the aforementioned variables can be updated with NVRAM section. If UpdateNVRAM
@@ -1858,51 +1858,51 @@ is set to true the behaviour is undefined when any of the fields are present in 
         <translation>这些字段是从“常规”或“平台NVRAM”部分读取的，具体取决于“自动”值。 所有其他字段都将在NVRAM部分中指定。 如果UpdateNVRAM设置为false，则可以使用NVRAM部分更新上述变量。 如果UpdateNVRAM设置为true，则当NVRAM部分中存在任何字段时，行为是不确定的。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5617"/>
+        <location filename="mainwindow.ui" line="5650"/>
         <source> Update NVRAM fields related to platform information.</source>
         <translation>更新与平台信息有关的NVRAM字段。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5620"/>
+        <location filename="mainwindow.ui" line="5653"/>
         <source>UpdateNVRAM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5596"/>
+        <location filename="mainwindow.ui" line="5629"/>
         <source>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
 Automatic value.</source>
         <translation>更新数据中心字段。 这些字段是根据“自动”值从“通用”或“ DataHub”部分读取的。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5600"/>
+        <location filename="mainwindow.ui" line="5633"/>
         <source>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
 \nAutomatic value.</source>
         <translation>更新数据中心字段。 这些字段是根据\ nAutomatic值从Generic或DataHub部分读取的。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5604"/>
+        <location filename="mainwindow.ui" line="5637"/>
         <source>UpdateDataHub</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5627"/>
+        <location filename="mainwindow.ui" line="5695"/>
         <source>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
 Automatic value.</source>
         <translation>更新SMBIOS字段。 这些字段是从“常规”或“ SMBIOS”部分读取的，具体取决于“自动”值。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5631"/>
+        <location filename="mainwindow.ui" line="5699"/>
         <source>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
  Automatic value.</source>
         <translation>更新SMBIOS字段。 这些字段是从“常规”或“ SMBIOS”部分读取的，具体取决于“自动”值。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5635"/>
+        <location filename="mainwindow.ui" line="5703"/>
         <source>UpdateSMBIOS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5642"/>
+        <location filename="mainwindow.ui" line="5577"/>
         <source>• TryOverwrite — Overwrite if new size is &lt;= than the page-aligned original and there are no issues with
 legacy region unlock. Create otherwise. Has issues with some firmwares.
 • Create — Replace the tables with newly allocated EfiReservedMemoryType at AllocateMaxAddress without
@@ -2162,17 +2162,17 @@ firmware updates with the NVRAM variable (run-efi-updater).</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5656"/>
+        <location filename="mainwindow.ui" line="5591"/>
         <source> Update SMBIOS fields approach.</source>
         <translation>更新SMBIOS字段的方法。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5659"/>
+        <location filename="mainwindow.ui" line="5594"/>
         <source>UpdateSMBIOSMode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5549"/>
+        <location filename="mainwindow.ui" line="5551"/>
         <source>Enabling this option is useful when Generic section is flexible enough:
 • When enabled SMBIOS, DataHub, and PlatformNVRAM data is unused.
 • When disabled Generic section is unused.
@@ -2185,30 +2185,30 @@ not using Automatic may lead to hard to debug errors.</source>
 警告：强烈建议在打算更新平台信息时将此选项设置为false。 这样做的唯一原因是对存在的SMBIOS等进行较小的校正时。 在所有其他情况下，不使用“自动”可能会导致难以调试的错误。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5557"/>
+        <location filename="mainwindow.ui" line="5559"/>
         <source>Generate PlatformInfo based on Generic section instead of using values from DataHub, NVRAM,
  and SMBIOS sections.</source>
         <translation>根据通用部分而不是使用DataHub，NVRAM和SMBIOS部分的值生成PlatformInfo。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5561"/>
+        <location filename="mainwindow.ui" line="5563"/>
         <source>Automatic</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5581"/>
+        <location filename="mainwindow.ui" line="5614"/>
         <source>Use custom memory configuration defined in the Memory section. This completely replaces any
 existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</source>
         <translation>使用“内存”部分中定义的自定义内存配置。 这将完全替换SMBIOS中的任何现有内存配置，并且仅在UpdateSMBIOS设置为true时才处于活动状态。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5585"/>
+        <location filename="mainwindow.ui" line="5618"/>
         <source>Use custom memory configuration defined in the Memory section. This completely replaces any
  existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</source>
         <translation>使用“内存”部分中定义的自定义内存配置。 这将完全替换SMBIOS中的任何现有内存配置，并且仅在UpdateSMBIOS设置为true时才处于活动状态。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5589"/>
+        <location filename="mainwindow.ui" line="5622"/>
         <source>CustomMemory</source>
         <translation>CustomMemory</translation>
     </message>
@@ -2218,12 +2218,12 @@ existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is
         <translation>Generic（通用）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7212"/>
+        <location filename="mainwindow.ui" line="7251"/>
         <source>Documentation</source>
         <translation>官方文档</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7217"/>
+        <location filename="mainwindow.ui" line="7256"/>
         <source>CheckUpdate</source>
         <translation>检查更新</translation>
     </message>
@@ -2465,7 +2465,7 @@ However, certain firmwares may not provide valid values otherwise, which could b
     </message>
     <message>
         <location filename="mainwindow.ui" line="4458"/>
-        <location filename="mainwindow.ui" line="6679"/>
+        <location filename="mainwindow.ui" line="6718"/>
         <source>DataHub</source>
         <translation>DataHub（数据Hub）</translation>
     </message>
@@ -2965,7 +2965,7 @@ issues with Haswell and other boards.
 Note 2 : Be aware that while NVRAM reset executed from OpenCore should not erase the boot option created in
 Bootstrap, executing NVRAM reset prior to loading OpenCore will remove it. For significant implementation
 updates (e.g. in OpenCore 0.6.4) make sure to perform NVRAM reset with Bootstrap disabled before reenabling.</source>
-        <translation type="unfinished">有效值：
+        <translation>有效值：
 - Disabled - 不做任何事情。
 - Full - 在启动器启动时在 UEFI 变量存储中创建或更新最高优先级的启动选项。为了使这个选项发挥作用，需要启用 RequestBootVarRouting。
 - Short - 创建一个短的启动选项，而不是一个完整的启动选项。这个变量对一些旧固件很有用，尤其是Insyde，但也可能对其他无法处理完整设备路径的固件有用。
@@ -3103,34 +3103,84 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
         <translation>BoardAssetTag</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5568"/>
-        <location filename="mainwindow.ui" line="5571"/>
+        <location filename="mainwindow.ui" line="5601"/>
+        <location filename="mainwindow.ui" line="5604"/>
         <source>Whether to keep data such as Datahub when selecting Automatic</source>
         <translation>选择Automatic时是否保留Datahub之类的数据</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5574"/>
+        <location filename="mainwindow.ui" line="5607"/>
         <source>Keep data such as Datahub</source>
         <translation>保留Datahub等数据</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5835"/>
+        <location filename="mainwindow.ui" line="5660"/>
+        <source>Each UUID AABBCCDD-EEFF-GGHH-IIJJ-KKLLMMNNOOPP is essentially a hexadecimal 16-byte number. It can be
+encoded in two ways:
+
+• Big Endian — by writing all the bytes as they are without making any order changes ({AA BB CC DD EE FF
+GG HH II JJ KK LL MM NN OO PP}). This method is also known as RFC 4122 encoding or Raw encoding.
+• Little Endian — by interpreting the bytes as numbers and using Little Endian byte representation ({DD
+CC BB AA FF EE HH GG II JJ KK LL MM NN OO PP}).
+
+SMBIOS specification did not explicitly specify the encoding format for the UUID up to SMBIOS 2.6, where it
+stated that Little Endian encoding shall be used. This led to the confusion in both firmware implementations
+and system software as different vendors used different encodings prior to that.
+
+• Apple uses Big Endian format everywhere but it ignores SMBIOS UUID within macOS.
+• dmidecode uses Big Endian format for SMBIOS 2.5.x or lower and Little Endian for 2.6 and newer.
+Acidanthera dmidecode prints all the three.
+• Windows uses Little Endian format everywhere, but it only affects the visual representation of the values.
+
+OpenCore always sets a recent SMBIOS version (currently 3.2) when generating the modified DMI tables. If
+UseRawUuidEncoding is enabled, then Big Endian format is used to store the SystemUUID data. Otherwise
+Little Endian is used.
+
+Note: Since UUIDs used in DataHub and NVRAM are not standardised and are added by Apple, this preference
+does not affect them. Unlike SMBIOS they are always stored in the Big Endian format.</source>
+        <translation>每个UUID AABBCCDD-EEFF-GGHH-IIJJ-KKLLMMNNOOPP基本上是一个16字节的十六进制数字。它可以用两种方式进行编码。
+
+- Big Endian - 将所有字节按原样写入，不做任何顺序改变（{AA BB CC DD EE FF GG HH II JJ KK LL MM NN OO PP}）。这种方法也被称为RFC 4122编码或原始编码。
+- Little Endian - 将字节解释为数字，并使用Little Endian字节表示法（{DD CC BB AA FF EE HH GG II JJ KK LL MM NN OO PP}）。
+
+SMBIOS规范并没有明确规定UUID的编码格式，直到SMBIOS 2.6，它规定应使用Little Endian编码。这就导致了固件实现和系统软件的混乱，因为在此之前不同的厂商使用了不同的编码。
+
+ - 苹果到处使用Big Endian格式，但在macOS内它忽略了SMBIOS UUID。
+ - dmidecode对SMBIOS 2.5.x或更低版本使用Big Endian格式，对2.6及更新版本使用Little Endian格式。Acidanthera dmidecode可以打印这三种格式。
+ - Windows到处使用Little Endian格式，但它只影响数值的视觉表现。
+
+OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本（目前是3.2）。如果启用UseRawUuidEncoding，则使用Big Endian格式来存储SystemUUID数据。否则使用Little Endian格式。
+
+注意：由于DataHub和NVRAM中使用的UUID不是标准化的，是由Apple添加的，所以这个偏好不会影响它们。与SMBIOS不同，它们总是以Big Endian格式存储。</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="5685"/>
+        <source>Use raw encoding for SMBIOS UUIDs.</source>
+        <translation>对SMBIOS UUID使用原始编码。</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="5688"/>
+        <source>UseRawUuidEncoding</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="5874"/>
         <source>Some codecs require a vendor-specific delay after the reconfiguration (e.g. volume setting). This option makes it
  configurable. In general the necessary delay may be as long as 0.5 seconds.</source>
         <translation>某些编解码器在重新配置后需要特定于供应商的延迟（例如音量设置）。此选项可对其进行配置。一般来说，必要的延迟时间可能长达 0.5 秒。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5839"/>
+        <location filename="mainwindow.ui" line="5878"/>
         <source> Audio codec reconfiguration delay in microseconds.</source>
         <translation>音频编解码器重新配置延迟，单位为微秒。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5842"/>
+        <location filename="mainwindow.ui" line="5881"/>
         <source>SetupDelay</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5938"/>
+        <location filename="mainwindow.ui" line="5977"/>
         <source>Enabling this setting plays boot chime through builtin audio support. Volume level is determined by MinimumVolume
 and VolumeAmplifier settings and SystemAudioVolume NVRAM variable. Possible values include:
 
@@ -3149,88 +3199,88 @@ is able to play boot chime.</source>
 注意：Enabled可以与StartupMute NVRAM变量分开使用，以避免在固件能够播放启动铃声时发生冲突。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5949"/>
+        <location filename="mainwindow.ui" line="5988"/>
         <source>Play chime sound at startup.</source>
         <translation>在启动时播放提示音。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6932"/>
+        <location filename="mainwindow.ui" line="6971"/>
         <source>Note: This setting disables various security features of the firmware, defeating the purpose of any kind of Secure
 Boot. Do NOT enable if you use UEFI Secure Boot.</source>
         <translation>注意：此设置会禁用固件的各种安全功能，从而失去任何一种安全启动的目的。如果您使用UEFI安全启动，请勿启用。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6936"/>
+        <location filename="mainwindow.ui" line="6975"/>
         <source>Disable platform security policy.</source>
         <translation>禁用平台安全策略。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6939"/>
+        <location filename="mainwindow.ui" line="6978"/>
         <source>DisableSecurityPolicy</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7086"/>
+        <location filename="mainwindow.ui" line="7125"/>
         <source>Auxiliary tools</source>
         <translation>辅助工具</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7177"/>
+        <location filename="mainwindow.ui" line="7216"/>
         <source>PlistEDPlus</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7182"/>
+        <location filename="mainwindow.ui" line="7221"/>
         <source>QtiASL</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7197"/>
+        <location filename="mainwindow.ui" line="7236"/>
         <source>OC Validate</source>
         <translation>OC验证</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7227"/>
+        <location filename="mainwindow.ui" line="7266"/>
         <source>Config Database</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7232"/>
+        <location filename="mainwindow.ui" line="7271"/>
         <source>Database</source>
         <translation>数据库</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7237"/>
+        <location filename="mainwindow.ui" line="7276"/>
         <source>Generate EFI on the desktop</source>
         <translation>在桌面上生成EFI文件夹</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7242"/>
+        <location filename="mainwindow.ui" line="7281"/>
         <source>Share your Config.plist</source>
         <translation>分享您的Config.plist</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7247"/>
+        <location filename="mainwindow.ui" line="7286"/>
         <source>Open database directory</source>
         <translation>打开数据库目录</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7157"/>
+        <location filename="mainwindow.ui" line="7196"/>
         <source>OpenCore Forum</source>
         <translation>OpenCore讨论区（国际）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7162"/>
+        <location filename="mainwindow.ui" line="7201"/>
         <source>OpenCore Factory</source>
         <translation>OpenCore工厂</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7167"/>
+        <location filename="mainwindow.ui" line="7206"/>
         <source>OpenCore</source>
         <translation>OpenCore官方</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7172"/>
+        <location filename="mainwindow.ui" line="7211"/>
         <source>Simplified Chinese Manual</source>
         <translation>简体中文参考手册（非官方）</translation>
     </message>
@@ -3243,7 +3293,7 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</source>
         <translation type="vanished">DSDT&amp;&amp;SSDT编辑器</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7187"/>
+        <location filename="mainwindow.ui" line="7226"/>
         <source>OpenCanopyIcons</source>
         <translation>OC图标合集</translation>
     </message>
@@ -3299,12 +3349,12 @@ not provide this table.</source>
         <translation>处理器主要和次要类型的组合。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7202"/>
+        <location filename="mainwindow.ui" line="7241"/>
         <source>ExportMaster</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7207"/>
+        <location filename="mainwindow.ui" line="7246"/>
         <source>ImportMaster</source>
         <translation></translation>
     </message>
@@ -3618,71 +3668,71 @@ central registration process.</source>
         <translation>SystemInfo（系统信息）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5708"/>
+        <location filename="mainwindow.ui" line="5747"/>
         <source>APFS EFI driver is bundled in all bootable APFS containers. This option performs loading of signed APFS
 drivers with respect to ScanPolicy. See more details in “EFI Jumpstart” section of Apple File System Reference.</source>
         <translation>APFS EFI驱动程序捆绑在所有可启动的APFS容器中。 此选项执行与ScanPolicy相关的已签名APFS驱动程序的加载。 在Apple文件系统参考的“ EFI Jumpstart”部分中查看更多详细信息。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5712"/>
+        <location filename="mainwindow.ui" line="5751"/>
         <source> Load embedded APFS drivers from APFS containers.</source>
         <translation>从APFS容器加载嵌入式APFS驱动程序。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5715"/>
+        <location filename="mainwindow.ui" line="5754"/>
         <source>EnableJumpstart</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5778"/>
+        <location filename="mainwindow.ui" line="5817"/>
         <source>APFS verbose output can be useful for debugging.</source>
         <translation>APFS详细输出对调试很有用。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5781"/>
+        <location filename="mainwindow.ui" line="5820"/>
         <source>Hide verbose output from APFS driver.</source>
         <translation>隐藏APFS驱动程序的详细输出。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5784"/>
+        <location filename="mainwindow.ui" line="5823"/>
         <source>HideVerbose</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5791"/>
+        <location filename="mainwindow.ui" line="5830"/>
         <source>Performs APFS driver loading not only at OpenCore startup but also during boot picker. This permits APFS
 USB hot plug. Disable if not required.</source>
         <translation>不仅在OpenCore启动时而且在启动选择器期间执行APFS驱动程序加载。 这允许APFS USB热插拔。 如果不需要，请禁用。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5795"/>
+        <location filename="mainwindow.ui" line="5834"/>
         <source> Load APFS drivers for newly connected devices.</source>
         <translation>为新连接的设备加载APFS驱动程序。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5798"/>
+        <location filename="mainwindow.ui" line="5837"/>
         <source>JumpstartHotPlug</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5763"/>
+        <location filename="mainwindow.ui" line="5802"/>
         <source>Instead of partition handle connection normally used for APFS driver loading every handle is connected recursively.
 This may take more time than usual but can be the only way to access APFS partitions on some firmwares like
 those found on older HP laptops.</source>
         <translation>代替通常用于APFS驱动程序加载的分区句柄连接，每个句柄都是递归连接的。 这可能比平时花费更多的时间，但可能是访问某些固件（例如旧式HP笔记本电脑上的固件）上的APFS分区的唯一方法。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5768"/>
+        <location filename="mainwindow.ui" line="5807"/>
         <source> Perform full device connection during APFS loading.</source>
         <translation>在APFS加载期间执行完整的设备连接。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5771"/>
+        <location filename="mainwindow.ui" line="5810"/>
         <source>GlobalConnect</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5743"/>
+        <location filename="mainwindow.ui" line="5782"/>
         <source>APFS driver date connects APFS driver with the calendar release date. Older versions of APFS drivers may
 contain unpatched vulnerabilities, which can be used to inflict harm on your computer. This option permits
 restricting APFS drivers to only recent releases.
@@ -3697,17 +3747,17 @@ found in OpenCore boot log and OcApfsLib.</source>
 •其他-使用自定义的最低APFS发行日期，例如 2020/04/01为20200401。 APFS的发布日期可以在OpenCore引导日志和OcApfsLib中找到。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5753"/>
+        <location filename="mainwindow.ui" line="5792"/>
         <source>Minimal allowed APFS driver date.</source>
         <translation>允许的最小APFS驱动程序日期。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5756"/>
+        <location filename="mainwindow.ui" line="5795"/>
         <source>MinDate</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5722"/>
+        <location filename="mainwindow.ui" line="5761"/>
         <source>APFS driver version connects APFS driver with the macOS release. APFS drivers from older macOS releases will
 become unsupported and thus may contain unpatched vulnerabilities, which can be used to inflict harm on your
 computer. This option permits restricting APFS drivers to only modern macOS versions.
@@ -3723,23 +3773,23 @@ versions can be found in OpenCore boot log and OcApfsLib.</source>
 •其他-使用自定义的最低APFS版本，例如 来自macOS Catalina 10.15.4的1412101001000000。 可以在OpenCore引导日志和OcApfsLib中找到APFS版本。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5733"/>
+        <location filename="mainwindow.ui" line="5772"/>
         <source>Minimal allowed APFS driver version.</source>
         <translation>允许的最低APFS驱动程序版本。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5736"/>
+        <location filename="mainwindow.ui" line="5775"/>
         <source>MinVersion</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5813"/>
+        <location filename="mainwindow.ui" line="5852"/>
         <source>Audio</source>
         <oldsource>Audio设置-Audio</oldsource>
         <translation>Audio（音频）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5919"/>
+        <location filename="mainwindow.ui" line="5958"/>
         <source>Normally this contains first audio codec address on the builtin analog audio controller (HDEF). Audio codec
 addresses, e.g. 2, can be found in the debug log (marked in bold-italic):
 OCAU: 1/3 PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x1)/VenMsg(&lt;redacted&gt;,00000000) (4 outputs)
@@ -3753,17 +3803,17 @@ OCAU：2/3 PciRoot（0x0）/ Pci（0x3,0x0）/ VenMsg（&lt;已编辑&gt;，0000
 OCAU：3/3 PciRoot（0x0）/ Pci（0x1B，0x0）/ VenMsg（&lt;已编辑&gt; ， 02000000）（7个输出）作为替代，可以从I / O注册表中的IOHDACodecDevice类获取此值，该值包含在IOHDACodecAddress字段中 。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5928"/>
+        <location filename="mainwindow.ui" line="5967"/>
         <source>Codec address on the specified audio controller for audio support.</source>
         <translation>用于音频支持的指定音频控制器上的编解码器地址。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5931"/>
+        <location filename="mainwindow.ui" line="5970"/>
         <source>AudioCodec</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5849"/>
+        <location filename="mainwindow.ui" line="5888"/>
         <source>Normally this contains builtin analog audio controller (HDEF) device path, e.g. PciRoot(0x0)/Pci(0x1b,0x0).
 The list of recognised audio controllers can be found in the debug log (marked in bold-italic):
 OCAU: 1/3 PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x1)/VenMsg(&lt;redacted&gt;,00000000) (4 outputs)
@@ -3777,17 +3827,17 @@ OCAU：2/3 PciRoot（0x0）/ Pci（0x3,0x0）/ VenMsg（&lt;已编辑&gt;，0000
 OCAU：3/3 PciRoot（0x0）/ Pci（0x1B，0x0）/ VenMsg（&lt;已编辑&gt;，02000000）（7个输出）作为替代，gfxutil -f HDEF命令可在macOS中使用。 指定空的设备路径将导致使用第一个可用的音频控制器。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5858"/>
+        <location filename="mainwindow.ui" line="5897"/>
         <source>Device path of the specified audio controller for audio support.</source>
         <translation>用于音频支持的指定音频控制器的设备路径。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5861"/>
+        <location filename="mainwindow.ui" line="5900"/>
         <source>AudioDevice</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5959"/>
+        <location filename="mainwindow.ui" line="5998"/>
         <source>Normally this contains the index of the green out of the builtin analog audio controller (HDEF). The number of
 output nodes (N) in the debug log (marked in bold-italic):
 OCAU: 1/3 PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x1)/VenMsg(&lt;redacted&gt;,00000000) (4 outputs)
@@ -3800,33 +3850,33 @@ OCAU：2/3 PciRoot（0x0）/ Pci（0x3,0x0）/ VenMsg（&lt;已编辑&gt;，0000
 OCAU：3/3 PciRoot（0x0）/ Pci（0x1B，0x0）/ VenMsg（&lt;已编辑&gt;，02000000）（7个输出）查找正确端口的最快方法是将值从0暴力破解到N-1。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5967"/>
+        <location filename="mainwindow.ui" line="6006"/>
         <source> Index of the output port of the specified codec starting from 0.</source>
         <translation>指定编解码器输出端口的索引，从0开始。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5970"/>
+        <location filename="mainwindow.ui" line="6009"/>
         <source>AudioOut</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5905"/>
+        <location filename="mainwindow.ui" line="5944"/>
         <source>Screen reader will use this volume level, when the calculated volume level is less than MinimumVolume. Boot
 chime sound will not play if the calculated volume level is less than MinimumVolume.</source>
         <translation>当计算出的音量级别小于MinimumVolume时，屏幕阅读器将使用此音量级别。 如果计算出的音量小于MinimumVolume，则不会发出开机提示音。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5909"/>
+        <location filename="mainwindow.ui" line="5948"/>
         <source>Minimal heard volume level from 0 to 100.</source>
         <translation>最小音量从0到100。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5912"/>
+        <location filename="mainwindow.ui" line="5951"/>
         <source>MinimumVolume</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5886"/>
+        <location filename="mainwindow.ui" line="5925"/>
         <source>Volume level range read from SystemAudioVolume varies depending on the codec. To transform read value in
 [0, 127] range into raw volume range [0, 100] the read value is scaled to VolumeAmplifier percents:
 RawV olume = MIN(
@@ -3837,28 +3887,28 @@ Note: the transformation used in macOS is not linear, but it is very close and t
         <translation>从SystemAudioVolume读取的音量级别范围取决于编解码器。 要将[0，127]范围内的读取值转换为原始音量范围[0，100]，应将读取值缩放为VolumeAmplifier百分比：RawV olume = MIN（SystemAudioV olume * V olumeAmplifier 100，100）注意： macOS不是线性的，但是非常接近，因此细微差别被忽略了。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5895"/>
+        <location filename="mainwindow.ui" line="5934"/>
         <source>Multiplication coefficient for system volume to raw volume linear translation from 0 to 1000.</source>
         <translation>系统体积到原始体积线性转换的乘数范围是0到1000。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5898"/>
+        <location filename="mainwindow.ui" line="5937"/>
         <source>VolumeAmplifier</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5977"/>
+        <location filename="mainwindow.ui" line="6016"/>
         <source>Enabling this setting routes audio playback from builtin protocols to a dedicated audio port (AudioOut) of the
 specified codec (AudioCodec) located on the audio controller (AudioDevice).</source>
         <translation>启用此设置会将音频播放从内置协议路由到位于音频控制器（AudioDevice）上的指定编解码器（AudioCodec）的专用音频端口（AudioOut）。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5981"/>
+        <location filename="mainwindow.ui" line="6020"/>
         <source>Activate audio support by connecting to a backend driver.</source>
         <translation>通过连接到后端驱动程序来激活音频支持。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5984"/>
+        <location filename="mainwindow.ui" line="6023"/>
         <source>AudioSupport</source>
         <translation></translation>
     </message>
@@ -3874,19 +3924,19 @@ play boot chime.</source>
         <translation type="vanished">在启动时播放提示音。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5952"/>
+        <location filename="mainwindow.ui" line="5991"/>
         <source>PlayChime</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5993"/>
-        <location filename="mainwindow.cpp" line="2454"/>
+        <location filename="mainwindow.ui" line="6032"/>
+        <location filename="mainwindow.cpp" line="2458"/>
         <source>Drivers</source>
         <oldsource>UEFI驱动-Drivers</oldsource>
         <translation>Drivers（驱动）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7033"/>
+        <location filename="mainwindow.ui" line="7072"/>
         <source>This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
 Examples of such drivers are filesystem or audio drivers. While effective, this option may not be necessary for
 drivers performing automatic connection, and may slightly slowdown the boot.
@@ -3896,18 +3946,18 @@ Enable this option to be able to see all the boot options when having multiple d
 注意：某些固件（尤其是Apple制造的固件）仅连接引导驱动器以加快引导过程。 启用此选项可以在拥有多个驱动器时查看所有引导选项。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7040"/>
+        <location filename="mainwindow.ui" line="7079"/>
         <source> Perform UEFI controller connection after driver loading.</source>
         <translation>驱动程序加载后执行UEFI控制器连接。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7043"/>
+        <location filename="mainwindow.ui" line="7082"/>
         <source>ConnectDrivers</source>
         <oldsource>ConnectDrivers-连接驱动</oldsource>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6065"/>
+        <location filename="mainwindow.ui" line="6104"/>
         <source>Input</source>
         <oldsource>键盘设置-Input</oldsource>
         <translation>Input（键盘输入）</translation>
@@ -3929,17 +3979,17 @@ every platform is different it may be reasonable to check every value from 1 to 
 注意：某些平台可能要求更高或更低的不同值。例如，当在OpenCanopy中检测到按键遗失时，请尝试将此值增加（例如，增加到10），而在检测到按键停滞时，请尝试减小此值。由于每个平台都不相同，因此检查从1到25的每个值可能是合理的。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6109"/>
+        <location filename="mainwindow.ui" line="6148"/>
         <source>Remove key unless it was submitted during this timeout in milliseconds.</source>
         <translation>除非在此超时期间（以毫秒为单位）提交了密钥，否则请除去密钥。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6112"/>
+        <location filename="mainwindow.ui" line="6151"/>
         <source>KeyForgetThreshold</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6183"/>
+        <location filename="mainwindow.ui" line="6222"/>
         <source>Similarly to KeyForgetThreshold, this option works around the sequential nature of key submission. To be able
 to recognise simultaneously pressed keys in the situation when all keys arrive sequentially, we are required to set
 a timeout within which we assume the keys were pressed together.
@@ -3950,17 +4000,17 @@ for slower.</source>
         <translation>与KeyForgetThreshold相似，此选项可解决密钥提交的顺序性质。 为了能够在所有按键顺序到达的情况下识别同时按下的按键，我们需要设置一个超时时间，在此时间内我们假定按键被同时按下。 按住多个键将分别每2毫秒和1毫秒报告一次VMware和APTIOV。 对于同一平台，一个接一个地按下键会导致至少6到10毫秒的延迟。 此选项的建议值为2毫秒，但对于较快的平台，可能会减小，而对于较慢的平台，可能会增加。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6192"/>
+        <location filename="mainwindow.ui" line="6231"/>
         <source>Assume simultaneous combination for keys submitted within this timeout in milliseconds.</source>
         <translation>假设在此超时时间内提交的密钥同时进行组合（以毫秒为单位）。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6195"/>
+        <location filename="mainwindow.ui" line="6234"/>
         <source>KeyMergeThreshold</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6158"/>
+        <location filename="mainwindow.ui" line="6197"/>
         <source>• Auto — Performs automatic choice as available with the following preference: AMI, V2, V1. • V1 — Uses UEFI standard legacy input protocol EFI_SIMPLE_TEXT_INPUT_PROTOCOL. • V2 — Uses UEFI standard modern input protocol EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL. • AMI — Uses APTIO input protocol AMI_EFIKEYCODE_PROTOCOL.
 Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular specified protocol. This may
 change in the future versions.</source>
@@ -3971,33 +4021,33 @@ change in the future versions.</source>
 注意：当前，V1，V2和AMI与“自动”不同，仅对特定的指定协议进行过滤。 在将来的版本中，这可能会更改。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6163"/>
+        <location filename="mainwindow.ui" line="6202"/>
         <source> Set internal keyboard input translation to AppleKeyMapAggregator protocol mode.</source>
         <translation>将内部键盘输入转换设置为AppleKeyMapAggregator协议模式。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6166"/>
+        <location filename="mainwindow.ui" line="6205"/>
         <source>KeySupportMode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6119"/>
+        <location filename="mainwindow.ui" line="6158"/>
         <source>Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS
 boards. More details can be found in LongSoft/UefiTool#116.</source>
         <translation>当前，唯一受支持的变量是ASUS，它使用了某些Z87和Z97 ASUS板上可用的专用协议。 可以在LongSoft / UefiTool＃116中找到更多详细信息。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6123"/>
+        <location filename="mainwindow.ui" line="6162"/>
         <source> Set OEM protocol used for internal pointer driver.</source>
         <translation>设置用于内部指针驱动程序的OEM协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6126"/>
+        <location filename="mainwindow.ui" line="6165"/>
         <source>PointerSupportMode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6133"/>
+        <location filename="mainwindow.ui" line="6172"/>
         <source>This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
 Setting a lower value generally improves performance and responsiveness of the interface and input handling.
 The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS Z87 boards use 60000 for the
@@ -4005,82 +4055,82 @@ interface. Apple boards use 100000. You may leave it as 0 in case there are issu
         <translation>此选项允许以100纳秒为单位的指定值更新固件体系结构计时器周期。 设置较低的值通常可以提高界面和输入处理的性能和响应能力。 推荐值是50000（5毫秒）或更高。 选择ASUS Z87主板时，请使用60000作为接口。 苹果主板使用100000。如果有问题，可以将其保留为0。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6139"/>
+        <location filename="mainwindow.ui" line="6178"/>
         <source>Set architecture timer resolution.</source>
         <translation>设置架构计时器分辨率。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6142"/>
+        <location filename="mainwindow.ui" line="6181"/>
         <source>TimerResolution</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6080"/>
+        <location filename="mainwindow.ui" line="6119"/>
         <source>Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
 This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and
 108 in version 2.8).</source>
         <translation>显然，某些GA Z77P-D3等主板可能会通过所有输入协议在EFI_INPUT_KEY中返回未初始化的数据。 此选项丢弃既不是ASCII也不在UEFI规范中定义的键（请参见2.8版中的表107和108）。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6085"/>
+        <location filename="mainwindow.ui" line="6124"/>
         <source> Enable keyboard input sanity checking.</source>
         <translation>启用键盘输入的健全性检查。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6088"/>
+        <location filename="mainwindow.ui" line="6127"/>
         <source>KeyFiltering</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6202"/>
+        <location filename="mainwindow.ui" line="6241"/>
         <source>This option may be useful for keyboard layouts with Option key situated to the right of Command key.</source>
         <translation>对于在Command键右侧具有Option键的键盘布局，此选项可能很有用。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6205"/>
+        <location filename="mainwindow.ui" line="6244"/>
         <source>Swap Command and Option keys during submission.</source>
         <translation>提交期间交换Command和Option键。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6208"/>
+        <location filename="mainwindow.ui" line="6247"/>
         <source>KeySwap</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6215"/>
+        <location filename="mainwindow.ui" line="6254"/>
         <source>This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),
 to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as
 OpenUsbKbDxe, this option should never be enabled.</source>
         <translation>此选项根据AppleGenericInput aka（AptioInputFix）激活内部键盘拦截器驱动程序，以填充AppleKeyMapAggregator数据库以实现输入功能。 如果使用单独的驱动程序，例如OpenUsbKbDxe，则永远不要启用此选项。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6220"/>
+        <location filename="mainwindow.ui" line="6259"/>
         <source> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</source>
         <translation>启用内部键盘输入到AppleKeyMapAggregator协议的转换。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6223"/>
+        <location filename="mainwindow.ui" line="6262"/>
         <source>KeySupport</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6230"/>
+        <location filename="mainwindow.ui" line="6269"/>
         <source>This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM
 protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER_PROTOCOL is broken.</source>
         <translation>此选项通过选择OEM协议来实现标准UEFI指针协议（EFI_SIMPLE_POINTER_PROTOCOL）。 选项可以是在Z87 ASUS板，其中EFI_SIMPLE_POINTER_PROTOCOL被破坏是有用的。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6234"/>
+        <location filename="mainwindow.ui" line="6273"/>
         <source> Enable internal pointer driver.</source>
         <translation>启用内部指针驱动程序。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6237"/>
+        <location filename="mainwindow.ui" line="6276"/>
         <source>PointerSupport</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6377"/>
+        <location filename="mainwindow.ui" line="6416"/>
         <source>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
 fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
 switching to text mode.
@@ -4088,7 +4138,7 @@ Note: This option only applies to System renderer.</source>
         <translation>从图形模式切换到文本模式时，某些固件仅清除屏幕的一部分，使以前绘制的图像片段可见。 此选项在切换到文本模式之前用黑色填充整个图形屏幕。 注意：此选项仅适用于系统渲染器。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6383"/>
+        <location filename="mainwindow.ui" line="6422"/>
         <source>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
  fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
  switching to text mode.
@@ -4096,12 +4146,12 @@ Note: This option only applies to System renderer.</source>
         <translation>从图形模式切换到文本模式时，某些固件仅清除屏幕的一部分，使以前绘制的图像片段可见。 此选项在切换到文本模式之前用黑色填充整个图形屏幕。 注意：此选项仅适用于系统渲染器。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6389"/>
+        <location filename="mainwindow.ui" line="6428"/>
         <source>ClearScreenOnModeSwitch</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6274"/>
+        <location filename="mainwindow.ui" line="6313"/>
         <source>On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which
 produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
 Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is
@@ -4111,17 +4161,17 @@ required.</source>
  注意：从Shell启动OpenCore时，此逻辑可能会导致黑屏，因此它是可选的。 在0.5.2之前的版本中，此选项为强制性且不可配置。 除非需要，否则请勿使用此功能。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6281"/>
+        <location filename="mainwindow.ui" line="6320"/>
         <source>Reconnect console controllers after changing screen resolution.</source>
         <translation>更改屏幕分辨率后，重新连接控制台控制器。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6284"/>
+        <location filename="mainwindow.ui" line="6323"/>
         <source>ReconnectOnResChange</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6320"/>
+        <location filename="mainwindow.ui" line="6359"/>
         <source> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,
 because random text may appear over graphical images and cause UI corruption. Setting this option to true will
 discard all text output when console control is in mode different from Text.
@@ -4129,12 +4179,12 @@ Note: This option only applies to System renderer.</source>
         <translation>选择固件可在图形和文本模式下在屏幕上输出文本。 这通常是意外的，因为随机文本可能会出现在图形图像上并导致UI损坏。 当控制台控件处于不同于“文本”的模式时，将此选项设置为true将丢弃所有文本输出。 注意：此选项仅适用于系统渲染器。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6326"/>
+        <location filename="mainwindow.ui" line="6365"/>
         <source>IgnoreTextInGraphics</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6261"/>
+        <location filename="mainwindow.ui" line="6300"/>
         <source> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear
 screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
 Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to
@@ -4142,23 +4192,23 @@ empty string for this to work.</source>
         <translation>某些固件在尝试使用大尺寸显示（例如2K或4K）时尝试清除屏幕内容时，将屏幕分辨率重置为故障保护值（例如1024x768）。 此选项尝试应用解决方法。 注意：此选项仅适用于系统渲染器。 在所有已知的受影响系统上，必须将ConsoleMode设置为空字符串才能起作用。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6267"/>
+        <location filename="mainwindow.ui" line="6306"/>
         <source>SanitiseClearScreen</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6291"/>
+        <location filename="mainwindow.ui" line="6330"/>
         <source>On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,
 it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.</source>
         <translation>在某些固件上，这可能会提供更好的性能，甚至修复渲染问题，例如在MacPro5,1上。 但是，除非有明显的好处，否则建议不要使用此选项，因为它甚至可能导致滚动速度变慢。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6295"/>
+        <location filename="mainwindow.ui" line="6334"/>
         <source> Use builtin graphics output protocol renderer for console.</source>
         <translation>使用内置的图形输出协议渲染器作为控制台。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6298"/>
+        <location filename="mainwindow.ui" line="6337"/>
         <source>DirectGopRendering</source>
         <translation></translation>
     </message>
@@ -4172,12 +4222,12 @@ Note: This option only applies to System renderer.
 注意：此选项仅适用于系统渲染器。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6370"/>
+        <location filename="mainwindow.ui" line="6409"/>
         <source>ReplaceTabWithSpace</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6333"/>
+        <location filename="mainwindow.ui" line="6372"/>
         <source>macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact
 location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and
 UGA, if present, are available on the console handle.
@@ -4187,33 +4237,33 @@ with newer GPUs.</source>
 注意：此选项还将替换控制台句柄上损坏的GOP协议，在MacPro5,1上，较新的GPU可能就是这种情况。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6340"/>
+        <location filename="mainwindow.ui" line="6379"/>
         <source>Ensure GOP (Graphics Output Protocol) on console handle.</source>
         <translation>确保控制台手柄上的GOP（图形输出协议）。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6343"/>
+        <location filename="mainwindow.ui" line="6382"/>
         <source>ProvideConsoleGop</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6350"/>
+        <location filename="mainwindow.ui" line="6389"/>
         <source>Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI
 applications like EfiBoot from 10.4.</source>
         <translation>某些固件未实现传统的UGA协议，但较早的EFI应用程序（如10.4版的EfiBoot）可能需要屏幕输出。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6354"/>
+        <location filename="mainwindow.ui" line="6393"/>
         <source> Provide UGA protocol instances on top of GOP protocol.</source>
         <translation>在GOP协议之上提供UGA协议实例。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6357"/>
+        <location filename="mainwindow.ui" line="6396"/>
         <source>UgaPassThrough</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6415"/>
+        <location filename="mainwindow.ui" line="6454"/>
         <source>Set to empty string not to change console mode. Set to Max to try to use largest available console mode. Currently
 Builtin text renderer supports only one console mode, so this option is ignored.
 Note: This field is best to be left empty on most firmwares.</source>
@@ -4221,17 +4271,17 @@ Note: This field is best to be left empty on most firmwares.</source>
 注意：在大多数固件上，最好将此字段留空。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6420"/>
+        <location filename="mainwindow.ui" line="6459"/>
         <source>Sets console output mode as specified with the WxH (e.g. 80x24) formatted string.</source>
         <translation>按照WxH（例如80x24）格式的字符串指定的设置控制台输出模式。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6423"/>
+        <location filename="mainwindow.ui" line="6462"/>
         <source>ConsoleMode(e.g. 80x24)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6430"/>
+        <location filename="mainwindow.ui" line="6469"/>
         <source>• Set to WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080) formatted string to request custom resolution
 from GOP if available.
 • Set to empty string not to change screen resolution.
@@ -4247,17 +4297,17 @@ added with ProvideConsoleGop set to true.</source>
 注意：如果控制台句柄没有GOP协议，这将失败。 当固件不提供固件时，可以将ProvideConsoleGop设置为true进行添加。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6441"/>
+        <location filename="mainwindow.ui" line="6480"/>
         <source> Sets console output screen resolution.</source>
         <translation>设置控制台输出屏幕分辨率。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6444"/>
+        <location filename="mainwindow.ui" line="6483"/>
         <source>Resolution(e.g. 1920x1080@32) or (e.g. 1920x1080)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6458"/>
+        <location filename="mainwindow.ui" line="6497"/>
         <source>Currently two renderers are supported: Builtin and System. System renderer uses firmware services for text
 rendering. Builtin bypassing firmware services and performs text rendering on its own. Different renderers
 support a different set of options. It is recommended to use Builtin renderer, as it supports HiDPI mode and
@@ -4289,23 +4339,23 @@ BuiltinGraphics may work for them.</source>
 •SystemGeneric-假设系统渲染器运行正常，则将其与系统ConsoleControl一起使用。 BuiltinGraphics的使用通常很简单。对于大多数平台，必须启用ProvideConsoleGop，将Resolution设置为Max。 BuiltinText变体是一些非常老旧且有故障的笔记本电脑固件的替代BuiltinGraphics，只能在文本模式下绘制。系统协议的使用更为复杂。通常，首选设置是SystemGraphics或SystemText。启用ProvideConsoleGop，将“分辨率”设置为“最大”，启用“ ReplaceTabWithSpace”在几乎所有平台上都很有用。 SanitiseClearScreen，IgnoreTextInGraphics和ClearScreenOnModeSwitch更具体，它们的使用取决于固件。注意：某些Mac，即MacPro5,1，可能在较新的GPU上的控制台输出已损坏，因此只有BuiltinGraphics可以为它们工作。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6483"/>
+        <location filename="mainwindow.ui" line="6522"/>
         <source> Chooses renderer for text going through standard console output.</source>
         <translation>为通过标准控制台输出的文本选择渲染器。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6486"/>
+        <location filename="mainwindow.ui" line="6525"/>
         <source>TextRenderer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6502"/>
+        <location filename="mainwindow.ui" line="6541"/>
         <source>ProtocolOverrides</source>
         <oldsource>协议覆盖-ProtocolOverrides</oldsource>
         <translation>ProtocolOverrides（协议覆盖）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6703"/>
+        <location filename="mainwindow.ui" line="6742"/>
         <source>Apple audio protocols allow macOS bootloader and OpenCore to play sounds and signals for screen reading or
 audible error reporting. Supported protocols are beep generation and VoiceOver. VoiceOver protocol is specific to
 Gibraltar machines (T2) and is not supported before macOS High Sierra (10.13). Instead older macOS versions
@@ -4318,201 +4368,201 @@ audio.</source>
 注意：需要在“ UEFI音频”部分中配置后端音频驱动程序，这些协议才能流音频。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6713"/>
+        <location filename="mainwindow.ui" line="6752"/>
         <source>Reinstalls Apple audio protocols with builtin versions.</source>
         <translation>重新安装具有内置版本的Apple音频协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6716"/>
+        <location filename="mainwindow.ui" line="6755"/>
         <source>AppleAudio</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6723"/>
+        <location filename="mainwindow.ui" line="6762"/>
         <source> Reinstalls Apple Framebuffer Info protocol with a builtin version. This may be used to override
 framebuffer information on VMs or legacy Macs to improve compatibility with legacy EfiBoot like the one in
 macOS 10.4.</source>
         <translation>重新安装具有内置版本的Apple Framebuffer Info协议。 这可用于覆盖VM或旧版Mac上的帧缓冲区信息，以提高与旧版EfiBoot的兼容性，例如macOS 10.4中的版本。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6728"/>
+        <location filename="mainwindow.ui" line="6767"/>
         <source> Reinstalls Apple Framebuffer Info protocol with a builtin version. This may be used to override
  framebuffer information on VMs or legacy Macs to improve compatibility with legacy EfiBoot like the one in
  macOS 10.4.</source>
         <translation>重新安装具有内置版本的Apple Framebuffer Info协议。 这可用于覆盖VM或旧版Mac上的帧缓冲区信息，以提高与旧版EfiBoot的兼容性，例如macOS 10.4中的版本。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6733"/>
+        <location filename="mainwindow.ui" line="6772"/>
         <source>AppleFramebufferInfo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6571"/>
+        <location filename="mainwindow.ui" line="6610"/>
         <source>This protocol replaces legacy VirtualSmc UEFI driver, and is compatible with any SMC kernel extension.
 However, in case FakeSMC kernel extension is used, manual NVRAM key variable addition may be needed.</source>
         <translation>该协议替代了旧版VirtualSmc UEFI驱动程序，并且与任何SMC内核扩展兼容。 但是，如果使用FakeSMC内核扩展，则可能需要手动添加NVRAM键变量。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6575"/>
+        <location filename="mainwindow.ui" line="6614"/>
         <source>Reinstalls Apple SMC I/O protocol with a builtin version.</source>
         <translation>重新安装具有内置版本的Apple SMC I / O协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6578"/>
+        <location filename="mainwindow.ui" line="6617"/>
         <source>AppleSmcIo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6615"/>
+        <location filename="mainwindow.ui" line="6654"/>
         <source>Note: Several virtual machines including VMware may have corrupted cursor image in HiDPI mode and thus
 may also require this setting to be enabled.</source>
         <translation>注意：包括VMware在内的多个虚拟机可能在HiDPI模式下损坏了光标图像，因此可能还需要启用此设置。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6619"/>
+        <location filename="mainwindow.ui" line="6658"/>
         <source> Forcibly wraps Firmware Volume protocols or installs new to support custom cursor images for
  File Vault 2. Should be set to true to ensure File Vault 2 compatibility on everything but VMs and legacy Macs.</source>
         <translation>强制包装固件卷协议或安装新的协议以支持File Vault 2的自定义光标图像。应设置为true以确保File Vault 2在VM和旧版Mac之外的所有兼容性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6623"/>
+        <location filename="mainwindow.ui" line="6662"/>
         <source>FirmwareVolume</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6656"/>
+        <location filename="mainwindow.ui" line="6695"/>
         <source>Note: Some Macs, namely MacPro5,1, do have APFS compatibility, but their Apple Boot Policy protocol contains
 recovery detection issues, thus using this option is advised on them as well.</source>
         <translation>注意：某些Mac（即MacPro5,1）确实具有APFS兼容性，但是其Apple Boot Policy协议包含恢复检测问题，因此建议在其上也使用此选项。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6660"/>
+        <location filename="mainwindow.ui" line="6699"/>
         <source> Reinstalls Apple Boot Policy protocol with a builtin version. This may be used to ensure APFS
  compatibility on VMs or legacy Macs.</source>
         <translation>重新安装具有内置版本的Apple Boot Policy协议。 这可用于确保VM或旧版Mac上的APFS兼容性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6664"/>
+        <location filename="mainwindow.ui" line="6703"/>
         <source>AppleBootPolicy</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6740"/>
-        <location filename="mainwindow.ui" line="6743"/>
+        <location filename="mainwindow.ui" line="6779"/>
+        <location filename="mainwindow.ui" line="6782"/>
         <source>Reinstalls Apple Image Conversion protocol with a builtin version.</source>
         <translation>重新安装具有内置版本的Apple Image Conversion协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6746"/>
+        <location filename="mainwindow.ui" line="6785"/>
         <source>AppleImageConversion</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6517"/>
-        <location filename="mainwindow.ui" line="6520"/>
+        <location filename="mainwindow.ui" line="6556"/>
+        <location filename="mainwindow.ui" line="6559"/>
         <source>Reinstalls Apple User Interface Theme protocol with a builtin version.</source>
         <translation>重新安装具有内置版本的Apple用户界面主题协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6523"/>
+        <location filename="mainwindow.ui" line="6562"/>
         <source>AppleUserInterfaceTheme</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6686"/>
+        <location filename="mainwindow.ui" line="6725"/>
         <source>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure
 File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size
 with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.</source>
         <translation>强制使用内置版本重新安装Hash Services协议。 应该设置为true以确保在提供损坏的SHA-1哈希的平台上与File Vault 2兼容。 可以通过将UIScale设置为02的无效光标大小来诊断，在APTIO V之前的一般平台（Haswell和更早版本）中会受到影响。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6691"/>
+        <location filename="mainwindow.ui" line="6730"/>
         <source>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure
  File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size
  with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.</source>
         <translation>强制使用内置版本重新安装Hash Services协议。 应该设置为true以确保在提供损坏的SHA-1哈希的平台上与File Vault 2兼容。 可以通过将UIScale设置为02的无效光标大小来诊断，在APTIO V之前的一般平台（Haswell和更早版本）中会受到影响。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6696"/>
+        <location filename="mainwindow.ui" line="6735"/>
         <source>HashServices</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6545"/>
-        <location filename="mainwindow.ui" line="6548"/>
+        <location filename="mainwindow.ui" line="6584"/>
+        <location filename="mainwindow.ui" line="6587"/>
         <source>Reinstalls Apple Debug Log protocol with a builtin version.</source>
         <translation>重新安装具有内置版本的Apple Debug Log协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6551"/>
+        <location filename="mainwindow.ui" line="6590"/>
         <source>AppleDebugLog</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6768"/>
-        <location filename="mainwindow.ui" line="6771"/>
+        <location filename="mainwindow.ui" line="6807"/>
+        <location filename="mainwindow.ui" line="6810"/>
         <source> Reinstalls Apple Key Map protocols with builtin versions.</source>
         <translation>重新安装具有内置版本的Apple Key Map协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6774"/>
+        <location filename="mainwindow.ui" line="6813"/>
         <source>AppleKeyMap</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6671"/>
+        <location filename="mainwindow.ui" line="6710"/>
         <source> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the
 protocol was already installed.</source>
         <translation>重新安装具有内置版本的Data Hub协议。 如果已经安装了协议，这将删除所有以前的属性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6675"/>
+        <location filename="mainwindow.ui" line="6714"/>
         <source> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the
  protocol was already installed.</source>
         <translation>重新安装具有内置版本的Data Hub协议。 如果已经安装了协议，这将删除所有以前的属性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6530"/>
+        <location filename="mainwindow.ui" line="6569"/>
         <source>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive
 notifications from macOS bootloader, by the firmware or by other applications.</source>
         <translation>强制使用内置版本重新安装OS Info协议。 该协议通常用于通过固件或其他应用程序从macOS引导加载程序接收通知。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6534"/>
+        <location filename="mainwindow.ui" line="6573"/>
         <source>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive
  notifications from macOS bootloader, by the firmware or by other applications.</source>
         <translation>强制使用内置版本重新安装OS Info协议。 该协议通常用于通过固件或其他应用程序从macOS引导加载程序接收通知。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6538"/>
+        <location filename="mainwindow.ui" line="6577"/>
         <source>OSInfo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6585"/>
+        <location filename="mainwindow.ui" line="6624"/>
         <source>Reinstalls Apple Event protocol with a builtin version. This may be used to ensure File Vault 2
 compatibility on VMs or legacy Macs.</source>
         <translation>重新安装具有内置版本的Apple Event协议。 这可用于确保VM或旧版Mac上的File Vault 2兼容性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6589"/>
+        <location filename="mainwindow.ui" line="6628"/>
         <source>Reinstalls Apple Event protocol with a builtin version. This may be used to ensure File Vault 2
  compatibility on VMs or legacy Macs.</source>
         <translation>重新安装具有内置版本的Apple Event协议。 这可用于确保VM或旧版Mac上的File Vault 2兼容性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6593"/>
+        <location filename="mainwindow.ui" line="6632"/>
         <source>AppleEvent</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6643"/>
-        <location filename="mainwindow.ui" line="6646"/>
+        <location filename="mainwindow.ui" line="6682"/>
+        <location filename="mainwindow.ui" line="6685"/>
         <source>Reinstalls Apple RTC RAM protocol with builtin version.</source>
         <translation>重新安装具有内置版本的Apple RTC RAM协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6649"/>
+        <location filename="mainwindow.ui" line="6688"/>
         <source>AppleRtcRam</source>
         <translation></translation>
     </message>
@@ -4590,17 +4640,17 @@ Note 2 : Resetting NVRAM will also erase all the boot options otherwise not back
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5677"/>
+        <location filename="mainwindow.ui" line="5716"/>
         <source>UEFI</source>
         <translation>UEFI（统一可扩展固件接口）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="5693"/>
+        <location filename="mainwindow.ui" line="5732"/>
         <source>APFS</source>
         <translation>APFS（APFS文件系统）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6095"/>
+        <location filename="mainwindow.ui" line="6134"/>
         <source>AppleKeyMapAggregator protocol is supposed to contain a fixed length buffer of currently pressed keys. However,
 the majority of the drivers only report key presses as interrupts and pressing and holding the key on the keyboard
 results in subsequent submissions of this key with some defined time interval. As a result we use a timeout to
@@ -4616,12 +4666,12 @@ every platform is different it may be reasonable to check every value from 1 to 
         <translation>AppleKeyMapAggregator协议应该包含当前按下的键的固定长度缓冲区。但是，大多数驱动程序仅将按键按下报告为中断，并且按住键盘上的按键会导致在一定的时间间隔内随后提交该按键。因此，一旦超时到期，并且没有新提交的键发生，我们将使用超时从缓冲区中删除一次按下的键。此选项允许根据您的平台设置此超时。在大多数平台上均可使用的建议值为5毫秒。作为参考，在VMware上按住一个键大约每2毫秒重复一次，而APTIO V的相同值是3-4毫秒。因此，可以在较快的平台上设置稍低的值，而在较慢的平台上设置稍高的值，以提高响应速度。注意：某些平台可能要求更高或更低的不同值。例如，当在OpenCanopy中检测到按键遗失时，请尝试将此值增加（例如，增加到10），而在检测到按键停滞时，请尝试减小此值。由于每个平台都不同，因此检查从1到25的每个值可能是合理的。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6246"/>
+        <location filename="mainwindow.ui" line="6285"/>
         <source>Output</source>
         <translation>Output（显示输出）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6364"/>
+        <location filename="mainwindow.ui" line="6403"/>
         <source>Some firmwares do not print tab characters or even everything that follows them, causing difficulties
 or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. This option
 makes the console output spaces instead of tabs.
@@ -4630,58 +4680,58 @@ Note: This option only applies to System renderer.</source>
 注意：此选项仅适用于系统渲染器。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6600"/>
+        <location filename="mainwindow.ui" line="6639"/>
         <source> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties
 if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.</source>
         <translation>重新安装具有内置版本的设备属性协议。 如果已经安装，它将删除所有以前的属性。 这可用于确保在VM或旧版Mac上具有完全兼容性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6604"/>
+        <location filename="mainwindow.ui" line="6643"/>
         <source> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties
  if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.</source>
         <translation>重新安装具有内置版本的设备属性协议。 如果已经安装，它将删除所有以前的属性。 这可用于确保在VM或旧版Mac上具有完全兼容性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6630"/>
-        <location filename="mainwindow.ui" line="6633"/>
+        <location filename="mainwindow.ui" line="6669"/>
+        <location filename="mainwindow.ui" line="6672"/>
         <source> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.</source>
         <translation>强制使用内置版本重新安装Unicode整理服务。 应该设置为true以确保UEFI Shell在提供残破的Unicode排序规则的平台上具有兼容性。 通常，Ivy Bridge和更早版本上的旧版Insyde和APTIO平台会受到影响。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6636"/>
+        <location filename="mainwindow.ui" line="6675"/>
         <source>UnicodeCollation</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6753"/>
+        <location filename="mainwindow.ui" line="6792"/>
         <source> Reinstalls Apple IMG4 Verification protocol with a builtin version. This protocol is used to verify
 im4m manifest files used by Apple Secure Boot.</source>
         <translation>重新安装具有内置版本的Apple IMG4 Verification协议。 此协议用于验证Apple Secure Boot使用的im4m清单文件。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6757"/>
+        <location filename="mainwindow.ui" line="6796"/>
         <source> Reinstalls Apple IMG4 Verification protocol with a builtin version. This protocol is used to verify
  im4m manifest files used by Apple Secure Boot.</source>
         <translation>重新安装具有内置版本的Apple IMG4 Verification协议。 此协议用于验证Apple Secure Boot使用的im4m清单文件。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6761"/>
+        <location filename="mainwindow.ui" line="6800"/>
         <source>AppleImg4Verification</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6558"/>
-        <location filename="mainwindow.ui" line="6561"/>
+        <location filename="mainwindow.ui" line="6597"/>
+        <location filename="mainwindow.ui" line="6600"/>
         <source> Reinstalls Apple Secure Boot protocol with a builtin version.</source>
         <translation>重新安装具有内置版本的Apple Secure Boot协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6564"/>
+        <location filename="mainwindow.ui" line="6603"/>
         <source>AppleSecureBoot</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6948"/>
+        <location filename="mainwindow.ui" line="6987"/>
         <source>ReservedMemory</source>
         <oldsource>保留内存-ReservedMemory</oldsource>
         <translation>ReservedMemory（保留内存）</translation>
@@ -4714,42 +4764,42 @@ OpenCore loading. It is recommended to use this key along with BootProtect optio
         <translation type="vanished">在EFI_GLOBAL_VARIABLE_GUID中的BootOrder变量中删除重复的条目。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6835"/>
+        <location filename="mainwindow.ui" line="6874"/>
         <source>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
 manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
 may freeze upon boot. Not recommended unless required.</source>
         <translation>尝试从固件驱动程序中分离USB控制器所有权。 尽管大多数固件都设法做到这一点，或者至少有一个选择，但某些固件却没有。 结果，操作系统可能会在启动时冻结。 除非需要，否则不建议使用。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6840"/>
+        <location filename="mainwindow.ui" line="6879"/>
         <source>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
  manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
  may freeze upon boot. Not recommended unless required.</source>
         <translation>尝试从固件驱动程序中分离USB控制器所有权。 尽管大多数固件都设法做到这一点，或者至少有一个选择，但某些固件却没有。 结果，操作系统可能会在启动时冻结。 除非需要，否则不建议使用。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6845"/>
+        <location filename="mainwindow.ui" line="6884"/>
         <source>ReleaseUsbOwnership</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6798"/>
+        <location filename="mainwindow.ui" line="6837"/>
         <source>Note: The quirk is mostly relevant for select HP laptops with no drives listed.</source>
         <translation>注意：该选项与未列出驱动器的某些HP笔记本电脑最相关。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6801"/>
+        <location filename="mainwindow.ui" line="6840"/>
         <source>Some firmwares block partition handles by opening them in By Driver mode, which results in File
  System protocols being unable to install.</source>
         <translation>某些固件通过在“按驱动程序”模式下打开分区句柄来阻止分区句柄，这导致无法安装文件系统协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6805"/>
+        <location filename="mainwindow.ui" line="6844"/>
         <source>UnblockFsConnect</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6899"/>
+        <location filename="mainwindow.ui" line="6938"/>
         <source>This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,
 namely ASUS Z87-Pro, when using FileVault 2 in particular. It seems that for some reason they execute code
 in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. A better
@@ -4757,17 +4807,17 @@ approach should be found in some future. Expect 3-5 seconds to be enough in case
         <translation>特别是在使用FileVault 2时，要避免在某些APTIO IV固件（即ASUS Z87-Pro）上规避“仍然等待根设备”消息，这是一个非常丑陋的选项。 似乎由于某种原因，它们与EXIT_BOOT_SERVICES并行执行代码，这导致无法从macOS访问SATA控制器。 将来会找到更好的方法。 预计需要3-5秒，以备不时之需。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6905"/>
+        <location filename="mainwindow.ui" line="6944"/>
         <source>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</source>
         <translation>在EXIT_BOOT_SERVICES事件之后增加延迟（以微秒为单位）。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6908"/>
+        <location filename="mainwindow.ui" line="6947"/>
         <source>ExitBootServicesDelay</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6812"/>
+        <location filename="mainwindow.ui" line="6851"/>
         <source>The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop
 models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores
 before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds
@@ -4783,34 +4833,34 @@ the MSR registers.</source>
 注意：该问题无法替换内核驱动程序的原因是，它无法在ACPI S3模式（睡眠唤醒）下运行，并且因为UEFI固件提供了非常有限的多核支持，从而无法精确更新MSR寄存器。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6825"/>
+        <location filename="mainwindow.ui" line="6864"/>
         <source>Attempts to perform TSC synchronisation with a specified timeout.</source>
         <translation>尝试执行具有指定超时的TSC同步。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6828"/>
+        <location filename="mainwindow.ui" line="6867"/>
         <source>TscSyncTimeout</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6852"/>
+        <location filename="mainwindow.ui" line="6891"/>
         <source>Note: While the option is not supposed to induce harm on unaffected firmwares, its usage is not recommended
 when it is not required.</source>
         <translation>注意：虽然该选件不应该对不受影响的固件造成损害，但不建议不要使用该选件。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6856"/>
+        <location filename="mainwindow.ui" line="6895"/>
         <source>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
  register. These values may cause macOS boot failure on Intel platforms.</source>
         <translation>某些固件，即APTIO IV，可能在MSR_FLEX_RATIO（0x194）MSR寄存器中包含无效值。 这些值可能会导致Intel平台上的macOS引导失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6860"/>
+        <location filename="mainwindow.ui" line="6899"/>
         <source>IgnoreInvalidFlexRatio</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6915"/>
+        <location filename="mainwindow.ui" line="6954"/>
         <source>This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default
 boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required
 to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible
@@ -4818,24 +4868,24 @@ with macOS boot entries by design.</source>
         <translation>此选项需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。 当固件删除不兼容的启动项时，该选项可以保留默认的启动项。 简而言之，您需要启用此选项才能在设计上与macOS引导项不兼容的固件中可靠地使用“启动磁盘”首选项窗格。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6921"/>
+        <location filename="mainwindow.ui" line="6960"/>
         <source> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
  OC_VENDOR_VARIABLE_GUID.</source>
         <translation>请求将所有Boot前缀变量从EFI_GLOBAL_VARIABLE_GUID重定向到OC_VENDOR_VARIABLE_GUID。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="6925"/>
+        <location filename="mainwindow.ui" line="6964"/>
         <source>RequestBootVarRouting</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7054"/>
+        <location filename="mainwindow.ui" line="7093"/>
         <source>DiskInfo</source>
         <oldsource>磁盘信息-DiskInfo</oldsource>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7077"/>
+        <location filename="mainwindow.ui" line="7116"/>
         <source>File</source>
         <oldsource>文件-File</oldsource>
         <translation>文件</translation>
@@ -4845,19 +4895,19 @@ with macOS boot entries by design.</source>
         <translation type="vanished">相关资源</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7137"/>
+        <location filename="mainwindow.ui" line="7176"/>
         <source>关于-About</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7142"/>
+        <location filename="mainwindow.ui" line="7181"/>
         <source>Exit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="7147"/>
-        <location filename="mainwindow.ui" line="7152"/>
-        <location filename="mainwindow.ui" line="7222"/>
+        <location filename="mainwindow.ui" line="7186"/>
+        <location filename="mainwindow.ui" line="7191"/>
+        <location filename="mainwindow.ui" line="7261"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -4890,7 +4940,7 @@ Mask</translation>
         <location filename="mainwindow.cpp" line="1069"/>
         <location filename="mainwindow.cpp" line="1392"/>
         <location filename="mainwindow.cpp" line="1420"/>
-        <location filename="mainwindow.cpp" line="2495"/>
+        <location filename="mainwindow.cpp" line="2499"/>
         <source>Enabled</source>
         <translation>是否启用
 Enabled</translation>
@@ -4916,14 +4966,14 @@ Replace</translation>
         <translation type="obsolete">Kext捆绑包路径（例如Lilu.kext或MyKext.kext / Contents / PlugIns / MySubKext.kext）。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5466"/>
+        <location filename="mainwindow.cpp" line="5470"/>
         <source>Kext bundle path (e.g. Lilu.kext or MyKext.kext/Contents/PlugIns/MySubKext.kext).</source>
         <translation>Kext捆绑包路径（例如Lilu.kext或MyKext.kext / Contents / PlugIns / MySubKext.kext）。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1607"/>
-        <location filename="mainwindow.cpp" line="1637"/>
-        <location filename="mainwindow.cpp" line="1653"/>
+        <location filename="mainwindow.cpp" line="1611"/>
+        <location filename="mainwindow.cpp" line="1641"/>
+        <location filename="mainwindow.cpp" line="1657"/>
         <source>UUID</source>
         <translation>通用唯一标识符
 UUID</translation>
@@ -4947,7 +4997,7 @@ BundlePath</translation>
         <location filename="mainwindow.cpp" line="1029"/>
         <location filename="mainwindow.cpp" line="1386"/>
         <location filename="mainwindow.cpp" line="1414"/>
-        <location filename="mainwindow.cpp" line="2484"/>
+        <location filename="mainwindow.cpp" line="2488"/>
         <source>Comment</source>
         <translation>注释
 Comment</translation>
@@ -5021,27 +5071,27 @@ ReplaceMask</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="481"/>
-        <location filename="mainwindow.cpp" line="5670"/>
-        <location filename="mainwindow.cpp" line="5676"/>
+        <location filename="mainwindow.cpp" line="5674"/>
+        <location filename="mainwindow.cpp" line="5680"/>
+        <location filename="mainwindow.cpp" line="5685"/>
+        <location filename="mainwindow.cpp" line="5690"/>
+        <location filename="mainwindow.cpp" line="5695"/>
+        <location filename="mainwindow.cpp" line="5700"/>
+        <location filename="mainwindow.cpp" line="5705"/>
+        <location filename="mainwindow.cpp" line="5710"/>
+        <source>Export</source>
+        <translation>导出</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="482"/>
+        <location filename="mainwindow.cpp" line="5675"/>
         <location filename="mainwindow.cpp" line="5681"/>
         <location filename="mainwindow.cpp" line="5686"/>
         <location filename="mainwindow.cpp" line="5691"/>
         <location filename="mainwindow.cpp" line="5696"/>
         <location filename="mainwindow.cpp" line="5701"/>
         <location filename="mainwindow.cpp" line="5706"/>
-        <source>Export</source>
-        <translation>导出</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="482"/>
-        <location filename="mainwindow.cpp" line="5671"/>
-        <location filename="mainwindow.cpp" line="5677"/>
-        <location filename="mainwindow.cpp" line="5682"/>
-        <location filename="mainwindow.cpp" line="5687"/>
-        <location filename="mainwindow.cpp" line="5692"/>
-        <location filename="mainwindow.cpp" line="5697"/>
-        <location filename="mainwindow.cpp" line="5702"/>
-        <location filename="mainwindow.cpp" line="5707"/>
+        <location filename="mainwindow.cpp" line="5711"/>
         <source>Import</source>
         <translation>导入</translation>
     </message>
@@ -5106,7 +5156,7 @@ Skip</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="651"/>
-        <location filename="mainwindow.cpp" line="2480"/>
+        <location filename="mainwindow.cpp" line="2484"/>
         <source>Address</source>
         <translation>地址
 Address</translation>
@@ -5120,7 +5170,7 @@ PCILists</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="807"/>
-        <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="1621"/>
         <source>Key</source>
         <translation>键
 Key</translation>
@@ -5128,16 +5178,16 @@ Key</translation>
     <message>
         <location filename="mainwindow.cpp" line="814"/>
         <location filename="mainwindow.cpp" line="831"/>
-        <location filename="mainwindow.cpp" line="1621"/>
-        <location filename="mainwindow.cpp" line="1644"/>
-        <location filename="mainwindow.cpp" line="1659"/>
+        <location filename="mainwindow.cpp" line="1625"/>
+        <location filename="mainwindow.cpp" line="1648"/>
+        <location filename="mainwindow.cpp" line="1663"/>
         <source>Value</source>
         <translation>值
 Value</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="810"/>
-        <location filename="mainwindow.cpp" line="1624"/>
+        <location filename="mainwindow.cpp" line="1628"/>
         <source>Class</source>
         <translation>数据类型
 Class</translation>
@@ -5177,50 +5227,50 @@ TextMode</translation>
 RealPath</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2015"/>
+        <location filename="mainwindow.cpp" line="2019"/>
         <source>AssetTag</source>
         <translation>资产标签
 AssetTag</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2018"/>
+        <location filename="mainwindow.cpp" line="2022"/>
         <source>BankLocator</source>
         <translation>插槽位置
 BankLocator</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2022"/>
+        <location filename="mainwindow.cpp" line="2026"/>
         <source>DeviceLocator</source>
         <translation>设备位置
 DeviceLocator</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2025"/>
+        <location filename="mainwindow.cpp" line="2029"/>
         <source>Manufacturer</source>
         <translation>制造商
 Manufacturer</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2028"/>
+        <location filename="mainwindow.cpp" line="2032"/>
         <source>PartNumber</source>
         <translation>零件号
 PartNumber</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2032"/>
+        <location filename="mainwindow.cpp" line="2036"/>
         <source>SerialNumber</source>
         <translation>序号
 SerialNumber</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2035"/>
-        <location filename="mainwindow.cpp" line="2488"/>
+        <location filename="mainwindow.cpp" line="2039"/>
+        <location filename="mainwindow.cpp" line="2492"/>
         <source>Size</source>
         <translation>容量
 Size</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2038"/>
+        <location filename="mainwindow.cpp" line="2042"/>
         <source>Speed</source>
         <translation>频率
 Speed</translation>
@@ -5230,12 +5280,12 @@ Speed</translation>
         <translation type="obsolete">图标设计： Mirone (巴西)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5377"/>
+        <location filename="mainwindow.cpp" line="5381"/>
         <source>Application</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5378"/>
+        <location filename="mainwindow.cpp" line="5382"/>
         <source>The document has been modified.
 Do you want to save your changes?
 
@@ -5243,166 +5293,166 @@ Do you want to save your changes?
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7014"/>
+        <location filename="mainwindow.cpp" line="7018"/>
         <source>ctrl+o</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7018"/>
+        <location filename="mainwindow.cpp" line="7022"/>
         <source>ctrl+s</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7022"/>
+        <location filename="mainwindow.cpp" line="7026"/>
         <source>ctrl+shift+s</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7026"/>
+        <location filename="mainwindow.cpp" line="7030"/>
         <source>ctrl+m</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7029"/>
+        <location filename="mainwindow.cpp" line="7033"/>
         <source>ctrl+l</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7048"/>
+        <location filename="mainwindow.cpp" line="7052"/>
         <source>ctrl+p</source>
         <oldsource>ctrl+h</oldsource>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7051"/>
+        <location filename="mainwindow.cpp" line="7055"/>
         <source>ctrl+u</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7035"/>
+        <location filename="mainwindow.cpp" line="7039"/>
         <source>ctrl+d</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7040"/>
+        <location filename="mainwindow.cpp" line="7044"/>
         <source>ctrl+r</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8594"/>
+        <location filename="mainwindow.cpp" line="8598"/>
         <source>OK!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8689"/>
+        <location filename="mainwindow.cpp" line="8693"/>
         <source>Network error!</source>
         <translation>网络错误！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8724"/>
+        <location filename="mainwindow.cpp" line="8728"/>
         <source>New version detected!</source>
         <translation>检测到新版本！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8724"/>
+        <location filename="mainwindow.cpp" line="8728"/>
         <source>Version: </source>
         <translation>版本：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8724"/>
+        <location filename="mainwindow.cpp" line="8728"/>
         <source>Published at: </source>
         <translation>更新时间：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8724"/>
+        <location filename="mainwindow.cpp" line="8728"/>
         <source>Release Notes: </source>
         <translation>更新说明：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8725"/>
+        <location filename="mainwindow.cpp" line="8729"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8725"/>
+        <location filename="mainwindow.cpp" line="8729"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8730"/>
+        <location filename="mainwindow.cpp" line="8734"/>
         <source>It is currently the latest version!</source>
         <translation>目前是最新版本！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8846"/>
-        <location filename="mainwindow.cpp" line="8848"/>
+        <location filename="mainwindow.cpp" line="8850"/>
+        <location filename="mainwindow.cpp" line="8852"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8846"/>
+        <location filename="mainwindow.cpp" line="8850"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="4840"/>
-        <location filename="mainwindow.cpp" line="2492"/>
+        <location filename="mainwindow.cpp" line="2496"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="3551"/>
+        <location filename="mainwindow.cpp" line="3555"/>
         <source>错误：</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5465"/>
+        <location filename="mainwindow.cpp" line="5469"/>
         <source>Kext architecture (Any, i386, x86_64).</source>
         <translation>Kext架构（Any，i386，x86_64）。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5468"/>
+        <location filename="mainwindow.cpp" line="5472"/>
         <source>Comment.</source>
         <translation>注释</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5469"/>
+        <location filename="mainwindow.cpp" line="5473"/>
         <source>This kernel driver will not be added unless set to true.</source>
         <translation>是否启用</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5470"/>
+        <location filename="mainwindow.cpp" line="5474"/>
         <source>Kext executable path relative to bundle (e.g. Contents/MacOS/Lilu).</source>
         <translation>相对于包的Kext可执行路径（例如Contents / MacOS / Lilu）。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5471"/>
+        <location filename="mainwindow.cpp" line="5475"/>
         <source>Adds kernel driver on specified macOS version or older.</source>
         <translation>在指定的macOS版本或更早版本上添加内核驱动程序。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5472"/>
+        <location filename="mainwindow.cpp" line="5476"/>
         <source>Adds kernel driver on specified macOS version or newer.</source>
         <translation>在指定的macOS版本或更高版本上添加内核驱动程序。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5473"/>
+        <location filename="mainwindow.cpp" line="5477"/>
         <source> Kext Info.plist path relative to bundle (e.g. Contents/Info.plist).</source>
         <translation>相对于包的Kext Info.plist路径（例如Contents / Info.plist）。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5509"/>
+        <location filename="mainwindow.cpp" line="5513"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5510"/>
-        <location filename="mainwindow.cpp" line="5587"/>
+        <location filename="mainwindow.cpp" line="5514"/>
+        <location filename="mainwindow.cpp" line="5591"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5586"/>
+        <location filename="mainwindow.cpp" line="5590"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
@@ -5424,13 +5474,13 @@ Do you want to save your changes?
         <translation type="obsolete">除非设置为true，否则不会添加此ACPI表。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5344"/>
+        <location filename="mainwindow.cpp" line="5348"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5348"/>
+        <location filename="mainwindow.cpp" line="5352"/>
         <source>Cannot open file %1 for writing:
 %2.</source>
         <translation></translation>

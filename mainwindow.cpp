@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210131";
+    CurVerison = "20210202";
     title = "QtOpenCoreConfigurator   V0.6.6-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -2222,6 +2222,7 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     ui->chkUpdateDataHub->setChecked(map["UpdateDataHub"].toBool());
     ui->chkUpdateNVRAM->setChecked(map["UpdateNVRAM"].toBool());
     ui->chkUpdateSMBIOS->setChecked(map["UpdateSMBIOS"].toBool());
+    ui->chkUseRawUuidEncoding->setChecked(map["UseRawUuidEncoding"].toBool());
 
     QString usm = map["UpdateSMBIOSMode"].toString();
     ui->cboxUpdateSMBIOSMode->setCurrentText(usm.trimmed());
@@ -3362,6 +3363,9 @@ QVariantMap MainWindow::SavePlatformInfo()
     subMap["UpdateDataHub"] = getChkBool(ui->chkUpdateDataHub);
     subMap["UpdateNVRAM"] = getChkBool(ui->chkUpdateNVRAM);
     subMap["UpdateSMBIOS"] = getChkBool(ui->chkUpdateSMBIOS);
+
+    subMap["UseRawUuidEncoding"] = getChkBool(ui->chkUseRawUuidEncoding);
+
     subMap["UpdateSMBIOSMode"] = ui->cboxUpdateSMBIOSMode->currentText();
 
     return subMap;
@@ -9013,6 +9017,12 @@ void MainWindow::on_cboxLauncherOption_currentTextChanged(const QString& arg1)
 }
 
 void MainWindow::on_cboxLauncherPath_currentTextChanged(const QString& arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkUseRawUuidEncoding_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
     this->setWindowModified(true);

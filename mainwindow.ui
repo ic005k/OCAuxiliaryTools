@@ -31,7 +31,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5542,104 +5542,39 @@ central registration process.</string>
           <property name="title">
            <string/>
           </property>
-          <layout class="QGridLayout" name="gridLayout_27">
+          <layout class="QGridLayout" name="gridLayout_66">
            <item row="0" column="0">
-            <widget class="QCheckBox" name="chkAutomatic">
-             <property name="toolTip">
-              <string>Enabling this option is useful when Generic section is flexible enough:
+            <layout class="QGridLayout" name="gridLayout_27">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkAutomatic">
+               <property name="toolTip">
+                <string>Enabling this option is useful when Generic section is flexible enough:
 • When enabled SMBIOS, DataHub, and PlatformNVRAM data is unused.
 • When disabled Generic section is unused.
 Warning: It is strongly discouraged set this option to false when intending to update platform information.
 The only reason to do that is when doing minor correction of the SMBIOS present and alike. In all other cases
 not using Automatic may lead to hard to debug errors.</string>
-             </property>
-             <property name="statusTip">
-              <string>Generate PlatformInfo based on Generic section instead of using values from DataHub, NVRAM,
+               </property>
+               <property name="statusTip">
+                <string>Generate PlatformInfo based on Generic section instead of using values from DataHub, NVRAM,
  and SMBIOS sections.</string>
-             </property>
-             <property name="text">
-              <string>Automatic</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QCheckBox" name="chkSaveDataHub">
-             <property name="toolTip">
-              <string>Whether to keep data such as Datahub when selecting Automatic</string>
-             </property>
-             <property name="statusTip">
-              <string>Whether to keep data such as Datahub when selecting Automatic</string>
-             </property>
-             <property name="text">
-              <string>Keep data such as Datahub</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QCheckBox" name="chkCustomMemory">
-             <property name="toolTip">
-              <string>Use custom memory configuration defined in the Memory section. This completely replaces any
-existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
-             </property>
-             <property name="statusTip">
-              <string>Use custom memory configuration defined in the Memory section. This completely replaces any
- existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
-             </property>
-             <property name="text">
-              <string>CustomMemory</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="3">
-            <widget class="QCheckBox" name="chkUpdateDataHub">
-             <property name="toolTip">
-              <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
-Automatic value.</string>
-             </property>
-             <property name="statusTip">
-              <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
-\nAutomatic value.</string>
-             </property>
-             <property name="text">
-              <string>UpdateDataHub</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="4">
-            <widget class="QCheckBox" name="chkUpdateNVRAM">
-             <property name="toolTip">
-              <string>These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. All the other
-fields are to be specified with NVRAM section.
-If UpdateNVRAM is set to false the aforementioned variables can be updated with NVRAM section. If UpdateNVRAM
-is set to true the behaviour is undefined when any of the fields are present in NVRAM section.</string>
-             </property>
-             <property name="statusTip">
-              <string> Update NVRAM fields related to platform information.</string>
-             </property>
-             <property name="text">
-              <string>UpdateNVRAM</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="5">
-            <widget class="QCheckBox" name="chkUpdateSMBIOS">
-             <property name="toolTip">
-              <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
-Automatic value.</string>
-             </property>
-             <property name="statusTip">
-              <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
- Automatic value.</string>
-             </property>
-             <property name="text">
-              <string>UpdateSMBIOS</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="6">
-            <widget class="QLabel" name="label_22">
-             <property name="toolTip">
-              <string>• TryOverwrite — Overwrite if new size is &lt;= than the page-aligned original and there are no issues with
+               </property>
+               <property name="text">
+                <string>Automatic</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QComboBox" name="cboxUpdateSMBIOSMode">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QLabel" name="label_22">
+               <property name="toolTip">
+                <string>• TryOverwrite — Overwrite if new size is &lt;= than the page-aligned original and there are no issues with
 legacy region unlock. Create otherwise. Has issues with some firmwares.
 • Create — Replace the tables with newly allocated EfiReservedMemoryType at AllocateMaxAddress without
 any fallbacks.
@@ -5651,21 +5586,125 @@ patching AppleSmbios.kext and AppleACPIPlatform.kext to read from another GUID: 
 &quot;EB9D2D35&quot; (in ASCII), done automatically by CustomSMBIOSGuid quirk.
 Note: A side effect of using Custom approach is making SMBIOS updates exclusive to macOS, avoiding a collission
 with existing Windows activation and custom OEM software but potentially breaking Apple-specific tools.</string>
-             </property>
-             <property name="statusTip">
-              <string> Update SMBIOS fields approach.</string>
-             </property>
-             <property name="text">
-              <string>UpdateSMBIOSMode</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="7">
-            <widget class="QComboBox" name="cboxUpdateSMBIOSMode">
-             <property name="editable">
-              <bool>true</bool>
-             </property>
-            </widget>
+               </property>
+               <property name="statusTip">
+                <string> Update SMBIOS fields approach.</string>
+               </property>
+               <property name="text">
+                <string>UpdateSMBIOSMode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkSaveDataHub">
+               <property name="toolTip">
+                <string>Whether to keep data such as Datahub when selecting Automatic</string>
+               </property>
+               <property name="statusTip">
+                <string>Whether to keep data such as Datahub when selecting Automatic</string>
+               </property>
+               <property name="text">
+                <string>Keep data such as Datahub</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="chkCustomMemory">
+               <property name="toolTip">
+                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
+existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
+               </property>
+               <property name="statusTip">
+                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
+ existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
+               </property>
+               <property name="text">
+                <string>CustomMemory</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="chkUpdateDataHub">
+               <property name="toolTip">
+                <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
+Automatic value.</string>
+               </property>
+               <property name="statusTip">
+                <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
+\nAutomatic value.</string>
+               </property>
+               <property name="text">
+                <string>UpdateDataHub</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkUpdateNVRAM">
+               <property name="toolTip">
+                <string>These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. All the other
+fields are to be specified with NVRAM section.
+If UpdateNVRAM is set to false the aforementioned variables can be updated with NVRAM section. If UpdateNVRAM
+is set to true the behaviour is undefined when any of the fields are present in NVRAM section.</string>
+               </property>
+               <property name="statusTip">
+                <string> Update NVRAM fields related to platform information.</string>
+               </property>
+               <property name="text">
+                <string>UpdateNVRAM</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="chkUseRawUuidEncoding">
+               <property name="toolTip">
+                <string>Each UUID AABBCCDD-EEFF-GGHH-IIJJ-KKLLMMNNOOPP is essentially a hexadecimal 16-byte number. It can be
+encoded in two ways:
+
+• Big Endian — by writing all the bytes as they are without making any order changes ({AA BB CC DD EE FF
+GG HH II JJ KK LL MM NN OO PP}). This method is also known as RFC 4122 encoding or Raw encoding.
+• Little Endian — by interpreting the bytes as numbers and using Little Endian byte representation ({DD
+CC BB AA FF EE HH GG II JJ KK LL MM NN OO PP}).
+
+SMBIOS specification did not explicitly specify the encoding format for the UUID up to SMBIOS 2.6, where it
+stated that Little Endian encoding shall be used. This led to the confusion in both firmware implementations
+and system software as different vendors used different encodings prior to that.
+
+• Apple uses Big Endian format everywhere but it ignores SMBIOS UUID within macOS.
+• dmidecode uses Big Endian format for SMBIOS 2.5.x or lower and Little Endian for 2.6 and newer.
+Acidanthera dmidecode prints all the three.
+• Windows uses Little Endian format everywhere, but it only affects the visual representation of the values.
+
+OpenCore always sets a recent SMBIOS version (currently 3.2) when generating the modified DMI tables. If
+UseRawUuidEncoding is enabled, then Big Endian format is used to store the SystemUUID data. Otherwise
+Little Endian is used.
+
+Note: Since UUIDs used in DataHub and NVRAM are not standardised and are added by Apple, this preference
+does not affect them. Unlike SMBIOS they are always stored in the Big Endian format.</string>
+               </property>
+               <property name="statusTip">
+                <string>Use raw encoding for SMBIOS UUIDs.</string>
+               </property>
+               <property name="text">
+                <string>UseRawUuidEncoding</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="chkUpdateSMBIOS">
+               <property name="toolTip">
+                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
+Automatic value.</string>
+               </property>
+               <property name="statusTip">
+                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
+ Automatic value.</string>
+               </property>
+               <property name="text">
+                <string>UpdateSMBIOS</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
