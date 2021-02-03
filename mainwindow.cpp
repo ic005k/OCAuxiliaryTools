@@ -183,16 +183,10 @@ MainWindow::MainWindow(QWidget* parent)
     //最近打开的文件
     QCoreApplication::setOrganizationName("ic005k");
     QCoreApplication::setOrganizationDomain("github.com/ic005k");
-    QCoreApplication::setApplicationName("QtOpenCoreConfig");
+    QCoreApplication::setApplicationName("OC Auxiliary Tools");
 
     m_recentFiles = new RecentFiles(this);
-    if (!zh_cn)
-        m_recentFiles->attachToMenuAfterItem(
-            ui->menuFile, "Save As...", SLOT(recentOpen(QString)));
-    else
-        m_recentFiles->attachToMenuAfterItem(
-            ui->menuFile, "另存...", SLOT(recentOpen(QString)));
-
+    m_recentFiles->attachToMenuAfterItem(ui->menuFile, tr("Save As..."), SLOT(recentOpen(QString)));
     m_recentFiles->setNumOfRecentFiles(10);
 
     manager = new QNetworkAccessManager(this);
