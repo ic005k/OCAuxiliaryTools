@@ -27,13 +27,13 @@ VS_VERSION_INFO VERSIONINFO
             BEGIN
                 VALUE "CompanyName", ""
                 VALUE "FileDescription", ""
-                VALUE "FileVersion", "0.6.6 - 20210202\0"
-                VALUE "ProductVersion", "0.6.6 - 20210202\0"
+                VALUE "FileVersion", "0.6.6 - 20210203\0"
+                VALUE "ProductVersion", "0.6.6 - 20210203\0"
                 VALUE "LegalCopyright", "\0"
                 VALUE "LegalTrademarks", ""
-                VALUE "OriginalFilename", "QtOpenCoreConfig\0"
-                VALUE "ProductName", "QtOpenCoreConfig"
-                VALUE "InternalName", "QtOpenCoreConfig\0"
+                VALUE "OriginalFilename", "OCAT\0"
+                VALUE "ProductName", "OCAT"
+                VALUE "InternalName", "OCAT\0"
            END
         END
 

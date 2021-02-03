@@ -6,117 +6,80 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>740</width>
-    <height>236</height>
+    <width>727</width>
+    <height>183</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>About</string>
   </property>
-  <widget class="QLabel" name="linkLabel1">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>23</y>
-     <width>291</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label2">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>150</y>
-     <width>571</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Icon Designer: Mirone (Brazil) </string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblIcon">
-   <property name="geometry">
-    <rect>
-     <x>12</x>
-     <y>40</y>
-     <width>141</width>
-     <height>111</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="linkLabel2">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>50</y>
-     <width>291</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label1">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>90</y>
-     <width>521</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Contributor: eSaF (England, UK)    [file structure]</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>120</y>
-     <width>561</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Contributor: Sherlocks (Seoul, Korea)    [file structure]</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnOk">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>180</y>
-     <width>113</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>OK</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblLastModi">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>190</y>
-     <width>381</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <widget class="QLabel" name="lblIcon">
+     <property name="maximumSize">
+      <size>
+       <width>128</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Icon</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="5" column="0">
+      <widget class="QLabel" name="lblLastModi">
+       <property name="text">
+        <string>lastModi</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="linkLabel1">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>link1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label1">
+       <property name="text">
+        <string>Contributor: eSaF (England, UK)    [file structure]</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="linkLabel2">
+       <property name="text">
+        <string>link2</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label2">
+       <property name="text">
+        <string>Icon Designer: Mirone (Brazil) </string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Contributor: Sherlocks (Seoul, Korea)    [file structure]</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

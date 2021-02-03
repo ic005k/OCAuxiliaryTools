@@ -13,7 +13,7 @@ aboutDialog::aboutDialog(QWidget* parent)
     setMinimumHeight(this->height());
 
     QString strUrl1 = "<a style='color: blue;' href = "
-                      "https://github.com/ic005k/QtOpenCoreConfig>QtOpenCoreConfigurator</"
+                      "https://github.com/ic005k/QtOpenCoreConfig>OC Auxiliary Tools</"
                       "a><br><a style='color: blue;'<\n><br>";
 
     ui->linkLabel1->setOpenExternalLinks(true);
@@ -40,9 +40,4 @@ aboutDialog::aboutDialog(QWidget* parent)
 aboutDialog::~aboutDialog()
 {
     delete ui;
-}
-
-void aboutDialog::on_btnOk_clicked()
-{
-    this->close();
 }

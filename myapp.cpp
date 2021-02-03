@@ -37,6 +37,7 @@ void MyApplication::new_win()
 
         if (newfile) {
             MainWindow* mw = new MainWindow();
+            mw_one = mw;
             mw->openFile(PlistFileName);
             mw->show();
             filelist.push_back(PlistFileName);

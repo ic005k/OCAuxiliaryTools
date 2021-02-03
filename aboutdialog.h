@@ -17,7 +17,6 @@ public:
     ~aboutDialog();
 
 private slots:
-    void on_btnOk_clicked();
 
 private:
     Ui::aboutDialog* ui;

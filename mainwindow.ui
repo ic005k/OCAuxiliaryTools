@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>1250</width>
-    <height>685</height>
+    <height>756</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string/>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+   <iconset resource="qtocc.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -31,7 +31,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>8</number>
       </property>
       <property name="iconSize">
        <size>
@@ -53,7 +53,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -93,7 +93,7 @@
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -115,7 +115,7 @@
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -173,7 +173,7 @@
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -195,7 +195,7 @@
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -259,7 +259,7 @@
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -281,7 +281,7 @@
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -314,10 +314,10 @@
            <widget class="QWidget" name="gridLayoutWidget">
             <property name="geometry">
              <rect>
-              <x>70</x>
-              <y>40</y>
-              <width>271</width>
-              <height>251</height>
+              <x>30</x>
+              <y>30</y>
+              <width>361</width>
+              <height>191</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_28">
@@ -423,7 +423,7 @@ macOS Mojave (10.14).</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -454,7 +454,7 @@ macOS Mojave (10.14).</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -476,7 +476,7 @@ macOS Mojave (10.14).</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -541,7 +541,7 @@ macOS Mojave (10.14).</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -563,7 +563,7 @@ macOS Mojave (10.14).</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -966,7 +966,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -1005,7 +1005,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1027,7 +1027,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1065,7 +1065,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1087,7 +1087,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1132,7 +1132,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1154,7 +1154,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1189,7 +1189,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1211,7 +1211,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1239,7 +1239,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -1277,7 +1277,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1299,7 +1299,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1321,7 +1321,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>Up</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/up.png</normaloff>:/up.png</iconset>
               </property>
               <property name="iconSize">
@@ -1343,7 +1343,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>Down</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/down.png</normaloff>:/down.png</iconset>
               </property>
               <property name="iconSize">
@@ -1400,7 +1400,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1422,7 +1422,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1482,7 +1482,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1504,7 +1504,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -1569,7 +1569,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -1591,7 +1591,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -2479,7 +2479,7 @@ options. The following values are supported:
              <rect>
               <x>490</x>
               <y>190</y>
-              <width>171</width>
+              <width>188</width>
               <height>321</height>
              </rect>
             </property>
@@ -3559,7 +3559,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3581,7 +3581,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3636,7 +3636,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3658,7 +3658,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3713,7 +3713,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3735,7 +3735,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3776,7 +3776,7 @@ bootable. Operating systems shipped before the specified model was released will
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -3797,7 +3797,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3819,7 +3819,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3854,7 +3854,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3876,7 +3876,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -3943,7 +3943,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -3965,7 +3965,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -4000,7 +4000,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -4022,7 +4022,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -4067,7 +4067,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -4089,7 +4089,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -4124,7 +4124,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -4146,7 +4146,7 @@ bootable. Operating systems shipped before the specified model was released will
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -4229,6 +4229,178 @@ A continuously updated variable list can be found in a corresponding document: N
         <string>PlatformInfo</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_54">
+        <item row="1" column="0">
+         <widget class="QGroupBox" name="groupBox_12">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_66">
+           <item row="0" column="0">
+            <layout class="QGridLayout" name="gridLayout_27">
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkUpdateNVRAM">
+               <property name="toolTip">
+                <string>These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. All the other
+fields are to be specified with NVRAM section.
+If UpdateNVRAM is set to false the aforementioned variables can be updated with NVRAM section. If UpdateNVRAM
+is set to true the behaviour is undefined when any of the fields are present in NVRAM section.</string>
+               </property>
+               <property name="statusTip">
+                <string> Update NVRAM fields related to platform information.</string>
+               </property>
+               <property name="text">
+                <string>UpdateNVRAM</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkAutomatic">
+               <property name="toolTip">
+                <string>Enabling this option is useful when Generic section is flexible enough:
+• When enabled SMBIOS, DataHub, and PlatformNVRAM data is unused.
+• When disabled Generic section is unused.
+Warning: It is strongly discouraged set this option to false when intending to update platform information.
+The only reason to do that is when doing minor correction of the SMBIOS present and alike. In all other cases
+not using Automatic may lead to hard to debug errors.</string>
+               </property>
+               <property name="statusTip">
+                <string>Generate PlatformInfo based on Generic section instead of using values from DataHub, NVRAM,
+ and SMBIOS sections.</string>
+               </property>
+               <property name="text">
+                <string>Automatic</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="chkUpdateDataHub">
+               <property name="toolTip">
+                <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
+Automatic value.</string>
+               </property>
+               <property name="statusTip">
+                <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
+\nAutomatic value.</string>
+               </property>
+               <property name="text">
+                <string>UpdateDataHub</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="chkCustomMemory">
+               <property name="toolTip">
+                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
+existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
+               </property>
+               <property name="statusTip">
+                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
+ existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
+               </property>
+               <property name="text">
+                <string>CustomMemory</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkSaveDataHub">
+               <property name="toolTip">
+                <string>Whether to keep data such as Datahub when selecting Automatic</string>
+               </property>
+               <property name="statusTip">
+                <string>Whether to keep data such as Datahub when selecting Automatic</string>
+               </property>
+               <property name="text">
+                <string>Keep data such as Datahub</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="chkUpdateSMBIOS">
+               <property name="toolTip">
+                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
+Automatic value.</string>
+               </property>
+               <property name="statusTip">
+                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
+ Automatic value.</string>
+               </property>
+               <property name="text">
+                <string>UpdateSMBIOS</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="chkUseRawUuidEncoding">
+               <property name="toolTip">
+                <string>Each UUID AABBCCDD-EEFF-GGHH-IIJJ-KKLLMMNNOOPP is essentially a hexadecimal 16-byte number. It can be
+encoded in two ways:
+
+• Big Endian — by writing all the bytes as they are without making any order changes ({AA BB CC DD EE FF
+GG HH II JJ KK LL MM NN OO PP}). This method is also known as RFC 4122 encoding or Raw encoding.
+• Little Endian — by interpreting the bytes as numbers and using Little Endian byte representation ({DD
+CC BB AA FF EE HH GG II JJ KK LL MM NN OO PP}).
+
+SMBIOS specification did not explicitly specify the encoding format for the UUID up to SMBIOS 2.6, where it
+stated that Little Endian encoding shall be used. This led to the confusion in both firmware implementations
+and system software as different vendors used different encodings prior to that.
+
+• Apple uses Big Endian format everywhere but it ignores SMBIOS UUID within macOS.
+• dmidecode uses Big Endian format for SMBIOS 2.5.x or lower and Little Endian for 2.6 and newer.
+Acidanthera dmidecode prints all the three.
+• Windows uses Little Endian format everywhere, but it only affects the visual representation of the values.
+
+OpenCore always sets a recent SMBIOS version (currently 3.2) when generating the modified DMI tables. If
+UseRawUuidEncoding is enabled, then Big Endian format is used to store the SystemUUID data. Otherwise
+Little Endian is used.
+
+Note: Since UUIDs used in DataHub and NVRAM are not standardised and are added by Apple, this preference
+does not affect them. Unlike SMBIOS they are always stored in the Big Endian format.</string>
+               </property>
+               <property name="statusTip">
+                <string>Use raw encoding for SMBIOS UUIDs.</string>
+               </property>
+               <property name="text">
+                <string>UseRawUuidEncoding</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QLabel" name="label_22">
+               <property name="toolTip">
+                <string>• TryOverwrite — Overwrite if new size is &lt;= than the page-aligned original and there are no issues with
+legacy region unlock. Create otherwise. Has issues with some firmwares.
+• Create — Replace the tables with newly allocated EfiReservedMemoryType at AllocateMaxAddress without
+any fallbacks.
+• Overwrite — Overwrite existing gEfiSmbiosTableGuid and gEfiSmbiosTable3Guid data if it fits new size.
+Abort with unspecified state otherwise.
+• Custom — Write SMBIOS tables (gEfiSmbios(3)TableGuid) to gOcCustomSmbios(3)TableGuid to workaround
+firmwares overwriting SMBIOS contents at ExitBootServices. Otherwise equivalent to Create. Requires
+patching AppleSmbios.kext and AppleACPIPlatform.kext to read from another GUID: &quot;EB9D2D31&quot; -
+&quot;EB9D2D35&quot; (in ASCII), done automatically by CustomSMBIOSGuid quirk.
+Note: A side effect of using Custom approach is making SMBIOS updates exclusive to macOS, avoiding a collission
+with existing Windows activation and custom OEM software but potentially breaking Apple-specific tools.</string>
+               </property>
+               <property name="statusTip">
+                <string> Update SMBIOS fields approach.</string>
+               </property>
+               <property name="text">
+                <string>UpdateSMBIOSMode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QComboBox" name="cboxUpdateSMBIOSMode">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabPlatformInfo">
           <property name="tabShape">
@@ -4244,13 +4416,13 @@ A continuously updated variable list can be found in a corresponding document: N
            <attribute name="title">
             <string>Generic</string>
            </attribute>
-           <widget class="QWidget" name="gridLayoutWidget_7">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>981</width>
-              <height>411</height>
+              <width>789</width>
+              <height>361</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_26">
@@ -4409,6 +4581,12 @@ will ignore PT_FEATURE_HAS_SOLDERED_SYSTEM_MEMORY and assume that system memory 
              </item>
              <item row="0" column="1">
               <widget class="QComboBox" name="cboxSystemProductName">
+               <property name="minimumSize">
+                <size>
+                 <width>500</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="editable">
                 <bool>true</bool>
                </property>
@@ -4457,12 +4635,12 @@ However, certain firmwares may not provide valid values otherwise, which could b
            <attribute name="title">
             <string>DataHub</string>
            </attribute>
-           <widget class="QWidget" name="gridLayoutWidget_8">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>631</width>
+              <width>691</width>
               <height>469</height>
              </rect>
             </property>
@@ -4639,7 +4817,14 @@ modern Macs.</string>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="editARTFrequency"/>
+              <widget class="QLineEdit" name="editARTFrequency">
+               <property name="minimumSize">
+                <size>
+                 <width>500</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
              </item>
              <item row="12" column="0">
               <widget class="QLabel" name="label_58">
@@ -4889,7 +5074,7 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -4911,7 +5096,7 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -4941,18 +5126,25 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
            <attribute name="title">
             <string>PlatformNVRAM</string>
            </attribute>
-           <widget class="QWidget" name="gridLayoutWidget_6">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
-              <x>30</x>
-              <y>30</y>
-              <width>591</width>
-              <height>281</height>
+              <x>20</x>
+              <y>20</y>
+              <width>691</width>
+              <height>197</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_40">
              <item row="0" column="1">
-              <widget class="QLineEdit" name="editBID"/>
+              <widget class="QLineEdit" name="editBID">
+               <property name="minimumSize">
+                <size>
+                 <width>500</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_61">
@@ -5537,178 +5729,6 @@ central registration process.</string>
           </widget>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QGroupBox" name="groupBox_12">
-          <property name="title">
-           <string/>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_66">
-           <item row="0" column="0">
-            <layout class="QGridLayout" name="gridLayout_27">
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkAutomatic">
-               <property name="toolTip">
-                <string>Enabling this option is useful when Generic section is flexible enough:
-• When enabled SMBIOS, DataHub, and PlatformNVRAM data is unused.
-• When disabled Generic section is unused.
-Warning: It is strongly discouraged set this option to false when intending to update platform information.
-The only reason to do that is when doing minor correction of the SMBIOS present and alike. In all other cases
-not using Automatic may lead to hard to debug errors.</string>
-               </property>
-               <property name="statusTip">
-                <string>Generate PlatformInfo based on Generic section instead of using values from DataHub, NVRAM,
- and SMBIOS sections.</string>
-               </property>
-               <property name="text">
-                <string>Automatic</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="4">
-              <widget class="QComboBox" name="cboxUpdateSMBIOSMode">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="4">
-              <widget class="QLabel" name="label_22">
-               <property name="toolTip">
-                <string>• TryOverwrite — Overwrite if new size is &lt;= than the page-aligned original and there are no issues with
-legacy region unlock. Create otherwise. Has issues with some firmwares.
-• Create — Replace the tables with newly allocated EfiReservedMemoryType at AllocateMaxAddress without
-any fallbacks.
-• Overwrite — Overwrite existing gEfiSmbiosTableGuid and gEfiSmbiosTable3Guid data if it fits new size.
-Abort with unspecified state otherwise.
-• Custom — Write SMBIOS tables (gEfiSmbios(3)TableGuid) to gOcCustomSmbios(3)TableGuid to workaround
-firmwares overwriting SMBIOS contents at ExitBootServices. Otherwise equivalent to Create. Requires
-patching AppleSmbios.kext and AppleACPIPlatform.kext to read from another GUID: &quot;EB9D2D31&quot; -
-&quot;EB9D2D35&quot; (in ASCII), done automatically by CustomSMBIOSGuid quirk.
-Note: A side effect of using Custom approach is making SMBIOS updates exclusive to macOS, avoiding a collission
-with existing Windows activation and custom OEM software but potentially breaking Apple-specific tools.</string>
-               </property>
-               <property name="statusTip">
-                <string> Update SMBIOS fields approach.</string>
-               </property>
-               <property name="text">
-                <string>UpdateSMBIOSMode</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkSaveDataHub">
-               <property name="toolTip">
-                <string>Whether to keep data such as Datahub when selecting Automatic</string>
-               </property>
-               <property name="statusTip">
-                <string>Whether to keep data such as Datahub when selecting Automatic</string>
-               </property>
-               <property name="text">
-                <string>Keep data such as Datahub</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="chkCustomMemory">
-               <property name="toolTip">
-                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
-existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
-               </property>
-               <property name="statusTip">
-                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
- existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
-               </property>
-               <property name="text">
-                <string>CustomMemory</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="chkUpdateDataHub">
-               <property name="toolTip">
-                <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
-Automatic value.</string>
-               </property>
-               <property name="statusTip">
-                <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
-\nAutomatic value.</string>
-               </property>
-               <property name="text">
-                <string>UpdateDataHub</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="chkUpdateNVRAM">
-               <property name="toolTip">
-                <string>These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. All the other
-fields are to be specified with NVRAM section.
-If UpdateNVRAM is set to false the aforementioned variables can be updated with NVRAM section. If UpdateNVRAM
-is set to true the behaviour is undefined when any of the fields are present in NVRAM section.</string>
-               </property>
-               <property name="statusTip">
-                <string> Update NVRAM fields related to platform information.</string>
-               </property>
-               <property name="text">
-                <string>UpdateNVRAM</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="chkUseRawUuidEncoding">
-               <property name="toolTip">
-                <string>Each UUID AABBCCDD-EEFF-GGHH-IIJJ-KKLLMMNNOOPP is essentially a hexadecimal 16-byte number. It can be
-encoded in two ways:
-
-• Big Endian — by writing all the bytes as they are without making any order changes ({AA BB CC DD EE FF
-GG HH II JJ KK LL MM NN OO PP}). This method is also known as RFC 4122 encoding or Raw encoding.
-• Little Endian — by interpreting the bytes as numbers and using Little Endian byte representation ({DD
-CC BB AA FF EE HH GG II JJ KK LL MM NN OO PP}).
-
-SMBIOS specification did not explicitly specify the encoding format for the UUID up to SMBIOS 2.6, where it
-stated that Little Endian encoding shall be used. This led to the confusion in both firmware implementations
-and system software as different vendors used different encodings prior to that.
-
-• Apple uses Big Endian format everywhere but it ignores SMBIOS UUID within macOS.
-• dmidecode uses Big Endian format for SMBIOS 2.5.x or lower and Little Endian for 2.6 and newer.
-Acidanthera dmidecode prints all the three.
-• Windows uses Little Endian format everywhere, but it only affects the visual representation of the values.
-
-OpenCore always sets a recent SMBIOS version (currently 3.2) when generating the modified DMI tables. If
-UseRawUuidEncoding is enabled, then Big Endian format is used to store the SystemUUID data. Otherwise
-Little Endian is used.
-
-Note: Since UUIDs used in DataHub and NVRAM are not standardised and are added by Apple, this preference
-does not affect them. Unlike SMBIOS they are always stored in the Big Endian format.</string>
-               </property>
-               <property name="statusTip">
-                <string>Use raw encoding for SMBIOS UUIDs.</string>
-               </property>
-               <property name="text">
-                <string>UseRawUuidEncoding</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="chkUpdateSMBIOS">
-               <property name="toolTip">
-                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
-Automatic value.</string>
-               </property>
-               <property name="statusTip">
-                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
- Automatic value.</string>
-               </property>
-               <property name="text">
-                <string>UpdateSMBIOS</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_8">
@@ -6051,7 +6071,7 @@ specified codec (AudioCodec) located on the audio controller (AudioDevice).</str
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -6073,7 +6093,7 @@ specified codec (AudioCodec) located on the audio controller (AudioDevice).</str
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -7010,7 +7030,7 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
                <string>AddItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/add.png</normaloff>:/add.png</iconset>
               </property>
               <property name="iconSize">
@@ -7032,7 +7052,7 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
                <string>DeleteItem</string>
               </property>
               <property name="icon">
-               <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+               <iconset resource="qtocc.qrc">
                 <normaloff>:/del.png</normaloff>:/del.png</iconset>
               </property>
               <property name="iconSize">
@@ -7122,7 +7142,7 @@ Enable this option to be able to see all the boot options when having multiple d
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
-     <string>Auxiliary tools</string>
+     <string>Edit</string>
     </property>
     <addaction name="btnMountEsp"/>
     <addaction name="btnOcvalidate"/>
@@ -7288,7 +7308,7 @@ Enable this option to be able to see all the boot options when having multiple d
   </action>
  </widget>
  <resources>
-  <include location="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc"/>
+  <include location="qtocc.qrc"/>
  </resources>
  <connections/>
 </ui>

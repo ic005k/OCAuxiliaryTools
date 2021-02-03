@@ -26,8 +26,8 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210202";
-    title = "QtOpenCoreConfigurator   V0.6.6-" + CurVerison + "        [*] ";
+    CurVerison = "20210203";
+    title = "OC Auxiliary Tools   V0.6.6-" + CurVerison + "        [*] ";
     setWindowTitle(title);
 
     aboutDlg = new aboutDialog(this);
@@ -167,7 +167,7 @@ MainWindow::MainWindow(QWidget* parent)
 #ifdef Q_OS_MAC
     font.setPixelSize(12);
     mac = true;
-    ui->tabTotal->setDocumentMode(false);
+
     if (osx1012)
         ui->btnCheckUpdate->setVisible(false);
 
@@ -2182,16 +2182,12 @@ void MainWindow::initui_PlatformInfo()
     //获取当前Mac信息
     QFileInfo appInfo(qApp->applicationDirPath());
     si = new QProcess;
+
 #ifdef Q_OS_WIN32
     QFile file(appInfo.filePath() + "/Database/win/macserial.exe");
     if (file.exists())
         gs->execute(appInfo.filePath() + "/Database/win/macserial.exe",
             QStringList() << "-s"); //阻塞execute
-    else {
-
-        ui->btnGenerate->setEnabled(false);
-        ui->btnSystemUUID->setEnabled(false);
-    }
 
     ui->tabPlatformInfo->removeTab(5);
 
@@ -2199,15 +2195,15 @@ void MainWindow::initui_PlatformInfo()
 
 #ifdef Q_OS_LINUX
     gs->execute(appInfo.filePath() + "/Database/linux/macserial", QStringList() << "-s");
-    /*暂时屏蔽*/
+
     ui->tabPlatformInfo->removeTab(5);
-    ui->btnGenerate->setEnabled(true);
 
 #endif
 
 #ifdef Q_OS_MAC
     si->start(appInfo.filePath() + "/Database/mac/macserial", QStringList() << "-s");
 #endif
+
     connect(si, SIGNAL(finished(int)), this, SLOT(readResultSystemInfo()));
 }
 
@@ -7059,6 +7055,7 @@ void MainWindow::init_menu()
     ui->btnCheckUpdate->setShortcut(tr("ctrl+u"));
 
     connect(ui->actionAbout_2, &QAction::triggered, this, &MainWindow::about);
+    ui->actionAbout_2->setMenuRole(QAction::AboutRole);
 
     connect(ui->actionOpenCore, &QAction::triggered, this, &MainWindow::on_line1);
     connect(ui->actionOpenCore_Factory, &QAction::triggered, this, &MainWindow::on_line2);
