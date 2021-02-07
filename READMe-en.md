@@ -1,5 +1,7 @@
 [English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-en.md)
-# 开源跨平台的OpenCore配置文件编辑器
+# 开源跨平台的OpenCore辅助工具
+
+OC辅助工具 = Config.plist编辑器 + Config.plist数据库 + ...
 
 OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actions
 
@@ -43,7 +45,7 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 
 ......
 
-![截图](https://github.com/ic005k/QtOpenCoreConfig/blob/master/qtocc.png)
+![截图](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat2.png)
 
 ### [国内github下载文件推荐](https://toolwa.com/github/)
 
