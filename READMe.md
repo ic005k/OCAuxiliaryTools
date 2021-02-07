@@ -1,7 +1,7 @@
 [English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-en.md)
 # Open source cross-platform OpenCore auxiliary tools
 
-OC auxiliary tools = Config.plist editor + Config.plist database + ...
+OC auxiliary tools（OCAT or ocat for short） = Config.plist editor + Config.plist database + ...
 
 OC development version can be downloaded [here](https://github.com/acidanthera/OpenCorePkg/actions).
 
