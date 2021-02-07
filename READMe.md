@@ -37,7 +37,7 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 
 ......
 
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/qtocc.png)
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat2.png)
 
 ### Thanks for the support of the following open source software!
 
