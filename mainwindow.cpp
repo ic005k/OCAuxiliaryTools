@@ -26,9 +26,39 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210203";
+    CurVerison = "20210207";
     title = "OC Auxiliary Tools   V0.6.6-" + CurVerison + "        [*] ";
     setWindowTitle(title);
+
+    QFont font;
+#ifdef Q_OS_WIN32
+    reg_win();
+    font.setPixelSize(18);
+    ui->tabTotal->setDocumentMode(false);
+    ui->btnOcvalidate->setEnabled(true);
+
+    win = true;
+
+#endif
+
+#ifdef Q_OS_LINUX
+    ui->btnMountEsp->setEnabled(false);
+    font.setPixelSize(12);
+    ui->btnOcvalidate->setEnabled(true);
+
+    linuxOS = true;
+#endif
+
+#ifdef Q_OS_MAC
+    font.setPixelSize(12);
+    mac = true;
+
+    if (osx1012)
+        ui->btnCheckUpdate->setVisible(false);
+
+#endif
+
+    init_menu();
 
     aboutDlg = new aboutDialog(this);
     myDatabase = new dlgDatabase(this);
@@ -82,7 +112,9 @@ MainWindow::MainWindow(QWidget* parent)
         ui->tabTotal->setStyleSheet(tabBarStyle4);
     //ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
 
-    ui->gridLayout->setMargin(1);
+    ui->gridLayout->setMargin(5);
+    ui->centralwidget->layout()->setMargin(5);
+    ui->centralwidget->layout()->setSpacing(0);
 
     ui->gridLayout_52->setMargin(0);
     ui->gridLayout_3->setMargin(0);
@@ -128,8 +160,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     init_tr_str();
 
-    init_menu();
-
     initui_booter();
     initui_dp();
     initui_kernel();
@@ -143,35 +173,6 @@ MainWindow::MainWindow(QWidget* parent)
     this->setAcceptDrops(true);
 
     ui->tabTotal->removeTab(8);
-
-    QFont font;
-
-#ifdef Q_OS_WIN32
-    reg_win();
-    font.setPixelSize(18);
-    ui->tabTotal->setDocumentMode(false);
-    ui->btnOcvalidate->setEnabled(true);
-
-    win = true;
-
-#endif
-
-#ifdef Q_OS_LINUX
-    ui->btnMountEsp->setEnabled(false);
-    font.setPixelSize(12);
-    ui->btnOcvalidate->setEnabled(true);
-
-    linuxOS = true;
-#endif
-
-#ifdef Q_OS_MAC
-    font.setPixelSize(12);
-    mac = true;
-
-    if (osx1012)
-        ui->btnCheckUpdate->setVisible(false);
-
-#endif
 
     //设置QToolTip颜色
     /*QPalette palette = QToolTip::palette();
@@ -3644,6 +3645,7 @@ void MainWindow::on_table_kernel_add_cellClicked(int row, int column)
     if (column == 7) {
 
         cboxArch = new QComboBox;
+        cboxArch->setEditable(true);
         cboxArch->addItem("Any");
         cboxArch->addItem("i386");
         cboxArch->addItem("x86_64");
@@ -3670,13 +3672,13 @@ void MainWindow::on_table_kernel_block_cellClicked(int row, int column)
     if (column == 5) {
 
         cboxArch = new QComboBox;
+        cboxArch->setEditable(true);
         cboxArch->addItem("Any");
         cboxArch->addItem("i386");
         cboxArch->addItem("x86_64");
         cboxArch->addItem("");
 
-        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this,
-            SLOT(arch_blockChange()));
+        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this, SLOT(arch_blockChange()));
         c_row = row;
 
         ui->table_kernel_block->setCellWidget(row, column, cboxArch);
@@ -3696,6 +3698,7 @@ void MainWindow::on_table_kernel_patch_cellClicked(int row, int column)
     if (column == 13) {
 
         cboxArch = new QComboBox;
+        cboxArch->setEditable(true);
         cboxArch->addItem("Any");
         cboxArch->addItem("i386");
         cboxArch->addItem("x86_64");
@@ -5092,6 +5095,7 @@ void MainWindow::on_table_kernel_Force_cellClicked(int row, int column)
     if (column == 8) {
 
         cboxArch = new QComboBox;
+        cboxArch->setEditable(true);
         cboxArch->addItem("Any");
         cboxArch->addItem("i386");
         cboxArch->addItem("x86_64");
@@ -7006,6 +7010,51 @@ void MainWindow::on_nv04()
 
 void MainWindow::init_menu()
 {
+    ui->listMain->setIconSize(QSize(35, 35));
+    if (win) {
+        ui->listMain->setMaximumHeight(75);
+        ui->listSub->setMaximumHeight(30);
+    }
+
+    if (linuxOS) {
+        ui->listMain->setMaximumHeight(70);
+        ui->listSub->setMaximumHeight(28);
+    }
+
+    //ui->listMain->setViewMode(QListView::IconMode);
+    ui->listMain->setViewMode(QListWidget::IconMode);
+    //ui->listMain->setViewMode(QListView::ListMode);
+
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m1.png"), tr("ACPI")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m2.png"), tr("Booter")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m3.png"), tr("DeviceProperties")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m4.png"), tr("Kernel")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m5.png"), tr("Misc")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m6.png"), tr("NVRAM")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m7.png"), tr("PlatformInfo")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m8.png"), tr("UEFI")));
+    ui->listMain->setCurrentRow(0);
+    ui->tabTotal->tabBar()->setHidden(true);
+
+    ui->tabACPI->tabBar()->setVisible(false);
+    ui->tabBooter->tabBar()->setHidden(true);
+    ui->tabDP->tabBar()->setHidden(true);
+    ui->tabKernel->tabBar()->setHidden(true);
+    ui->tabMisc->tabBar()->setHidden(true);
+    ui->tabPlatformInfo->tabBar()->setHidden(true);
+    ui->tabNVRAM->tabBar()->setHidden(true);
+    ui->tabUEFI->tabBar()->setHidden(true);
+
+    int index = ui->tabACPI->currentIndex();
+    ui->listSub->clear();
+
+    ui->listSub->setViewMode(QListWidget::IconMode);
+    ui->listSub->addItem(tr("Add"));
+    ui->listSub->addItem(tr("Delete"));
+    ui->listSub->addItem(tr("Patch"));
+    ui->listSub->addItem(tr("Quirks"));
+    ui->listSub->setCurrentRow(index);
+
     //File
     connect(ui->actionOpen, &QAction::triggered, this,
         &MainWindow::on_btnOpen);
@@ -8627,6 +8676,7 @@ void MainWindow::on_table_Booter_patch_cellClicked(int row, int column)
     if (column == 10) {
 
         cboxArch = new QComboBox;
+        cboxArch->setEditable(true);
         cboxArch->addItem("Any");
         cboxArch->addItem("i386");
         cboxArch->addItem("x86_64");
@@ -9017,4 +9067,192 @@ void MainWindow::on_chkUseRawUuidEncoding_stateChanged(int arg1)
 {
     Q_UNUSED(arg1);
     this->setWindowModified(true);
+}
+
+void MainWindow::on_listMain_itemSelectionChanged()
+{
+    ui->tabTotal->setCurrentIndex(ui->listMain->currentRow());
+
+    if (ui->listMain->currentRow() == 0) {
+
+        int index = ui->tabACPI->currentIndex();
+
+        ui->listSub->clear();
+        ui->listSub->setViewMode(QListWidget::IconMode);
+
+        ui->listSub->addItem(tr("Add"));
+        ui->listSub->addItem(tr("Delete"));
+        ui->listSub->addItem(tr("Patch"));
+        ui->listSub->addItem(tr("Quirks"));
+
+        ui->listSub->setCurrentRow(index);
+    }
+
+    if (ui->listMain->currentRow() == 1) {
+
+        int index = ui->tabBooter->currentIndex();
+
+        ui->listSub->clear();
+        ui->listSub->setViewMode(QListWidget::IconMode);
+
+        ui->listSub->addItem(tr("MmioWhitelist"));
+        ui->listSub->addItem(tr("Patch"));
+        ui->listSub->addItem(tr("Quirks"));
+
+        ui->listSub->setCurrentRow(index);
+    }
+
+    if (ui->listMain->currentRow() == 2) {
+
+        int index = ui->tabDP->currentIndex();
+
+        ui->listSub->clear();
+        ui->listSub->setViewMode(QListWidget::IconMode);
+
+        ui->listSub->addItem(tr("Add"));
+        ui->listSub->addItem(tr("Delete"));
+
+        ui->listSub->setCurrentRow(index);
+    }
+
+    if (ui->listMain->currentRow() == 3) {
+
+        int index = ui->tabKernel->currentIndex();
+
+        ui->listSub->clear();
+        ui->listSub->setViewMode(QListWidget::IconMode);
+
+        ui->listSub->addItem(tr("Add"));
+        ui->listSub->addItem(tr("Block"));
+        ui->listSub->addItem(tr("Force"));
+        ui->listSub->addItem(tr("Patch"));
+        ui->listSub->addItem(tr("Emulate"));
+        ui->listSub->addItem(tr("Quirks"));
+        ui->listSub->addItem(tr("Scheme"));
+
+        ui->listSub->setCurrentRow(index);
+    }
+
+    if (ui->listMain->currentRow() == 4) {
+
+        int index = ui->tabMisc->currentIndex();
+
+        ui->listSub->clear();
+        ui->listSub->setViewMode(QListWidget::IconMode);
+
+        ui->listSub->addItem(tr("Boot"));
+        ui->listSub->addItem(tr("Debug"));
+        ui->listSub->addItem(tr("Security"));
+        ui->listSub->addItem(tr("BlessOverride"));
+        ui->listSub->addItem(tr("Entries"));
+        ui->listSub->addItem(tr("Tools"));
+
+        ui->listSub->setCurrentRow(index);
+    }
+
+    if (ui->listMain->currentRow() == 5) {
+
+        int index = ui->tabNVRAM->currentIndex();
+
+        ui->listSub->clear();
+        ui->listSub->setViewMode(QListWidget::IconMode);
+
+        ui->listSub->addItem(tr("Add"));
+        ui->listSub->addItem(tr("Delete"));
+        ui->listSub->addItem(tr("LegacySchema"));
+
+        ui->listSub->setCurrentRow(index);
+    }
+
+    if (ui->listMain->currentRow() == 6) {
+
+        int index = ui->tabPlatformInfo->currentIndex();
+
+        ui->listSub->clear();
+        ui->listSub->setViewMode(QListWidget::IconMode);
+
+        ui->listSub->addItem(tr("Generic"));
+        ui->listSub->addItem(tr("DataHub"));
+        ui->listSub->addItem(tr("Memory"));
+        ui->listSub->addItem(tr("PlatformNVRAM"));
+        ui->listSub->addItem(tr("SMBIOS"));
+        if (mac)
+            ui->listSub->addItem(tr("SystemInfo"));
+
+        ui->listSub->setCurrentRow(index);
+    }
+
+    if (ui->listMain->currentRow() == 7) {
+
+        int index = ui->tabUEFI->currentIndex();
+
+        ui->listSub->clear();
+        ui->listSub->setViewMode(QListWidget::IconMode);
+
+        ui->listSub->addItem(tr("APFS"));
+        ui->listSub->addItem(tr("Audio"));
+        ui->listSub->addItem(tr("Drivers"));
+        ui->listSub->addItem(tr("Input"));
+        ui->listSub->addItem(tr("Output"));
+        ui->listSub->addItem(tr("ProtocolOverrides"));
+        ui->listSub->addItem(tr("Quirks"));
+        ui->listSub->addItem(tr("ReservedMemory"));
+
+        ui->listSub->setCurrentRow(index);
+    }
+}
+
+void MainWindow::on_listSub_itemSelectionChanged()
+{
+    if (ui->listMain->currentRow() == 0) {
+        ui->tabACPI->setCurrentIndex(ui->listSub->currentRow());
+    }
+
+    if (ui->listMain->currentRow() == 1) {
+        ui->tabBooter->setCurrentIndex(ui->listSub->currentRow());
+    }
+
+    if (ui->listMain->currentRow() == 2) {
+        ui->tabDP->setCurrentIndex(ui->listSub->currentRow());
+    }
+
+    if (ui->listMain->currentRow() == 3) {
+        ui->tabKernel->setCurrentIndex(ui->listSub->currentRow());
+    }
+
+    if (ui->listMain->currentRow() == 4) {
+        ui->tabMisc->setCurrentIndex(ui->listSub->currentRow());
+    }
+
+    if (ui->listMain->currentRow() == 5) {
+        ui->tabNVRAM->setCurrentIndex(ui->listSub->currentRow());
+    }
+
+    if (ui->listMain->currentRow() == 6) {
+        ui->tabPlatformInfo->setCurrentIndex(ui->listSub->currentRow());
+    }
+
+    if (ui->listMain->currentRow() == 7) {
+        ui->tabUEFI->setCurrentIndex(ui->listSub->currentRow());
+    }
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
+
+    Q_UNUSED(event);
+    int index = ui->listMain->currentRow();
+
+    ui->listMain->setViewMode(QListWidget::IconMode);
+
+    ui->listMain->clear();
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m1.png"), tr("ACPI")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m2.png"), tr("Booter")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m3.png"), tr("DeviceProperties")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m4.png"), tr("Kernel")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m5.png"), tr("Misc")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m6.png"), tr("NVRAM")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m7.png"), tr("PlatformInfo")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m8.png"), tr("UEFI")));
+    ui->listMain->setCurrentRow(index);
 }

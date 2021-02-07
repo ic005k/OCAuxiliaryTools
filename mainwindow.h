@@ -142,12 +142,13 @@ public slots:
     void on_GenerateEFI();
 
 protected:
-    void dragEnterEvent(QDragEnterEvent* e);
-    void dropEvent(QDropEvent* e);
-    void closeEvent(QCloseEvent* event);
+    void dragEnterEvent(QDragEnterEvent* e) override;
+    void dropEvent(QDropEvent* e) override;
+    void closeEvent(QCloseEvent* event) override;
+    virtual void resizeEvent(QResizeEvent* event) override;
 
 #ifndef QT_NO_CONTEXTMENU
-    void contextMenuEvent(QContextMenuEvent* event); // override;
+    void contextMenuEvent(QContextMenuEvent* event) override;
 #endif // QT_NO_CONTEXTMENU
 
 private slots:
@@ -1000,6 +1001,10 @@ private slots:
     void on_chkUseRawUuidEncoding_stateChanged(int arg1);
 
     void on_cboxLauncherPath_currentTextChanged(const QString& arg1);
+
+    void on_listMain_itemSelectionChanged();
+
+    void on_listSub_itemSelectionChanged();
 
 private:
     Ui::MainWindow* ui;

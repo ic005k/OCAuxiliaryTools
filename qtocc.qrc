@@ -7,5 +7,13 @@
         <file>down.png</file>
         <file>up.png</file>
         <file>find.png</file>
+        <file>icon/m1.png</file>
+        <file>icon/m2.png</file>
+        <file>icon/m3.png</file>
+        <file>icon/m4.png</file>
+        <file>icon/m5.png</file>
+        <file>icon/m6.png</file>
+        <file>icon/m7.png</file>
+        <file>icon/m8.png</file>
     </qresource>
 </RCC>

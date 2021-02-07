@@ -7,8 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>1250</width>
-    <height>756</height>
+    <height>759</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string/>
@@ -19,7 +25,27 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" colspan="2">
+    <item row="0" column="0">
+     <widget class="QListWidget" name="listMain">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>62</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QListWidget" name="listSub">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>22</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
      <widget class="QTabWidget" name="tabTotal">
       <property name="toolTip">
        <string/>
@@ -31,7 +57,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>8</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -40,7 +66,7 @@
        </size>
       </property>
       <property name="documentMode">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -56,7 +82,7 @@
            <number>0</number>
           </property>
           <property name="documentMode">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_9">
            <attribute name="title">
@@ -426,7 +452,7 @@ macOS Mojave (10.14).</string>
            <number>0</number>
           </property>
           <property name="documentMode">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_12">
            <attribute name="title">
@@ -969,7 +995,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <number>0</number>
           </property>
           <property name="documentMode">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_13">
            <attribute name="title">
@@ -1242,7 +1268,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <number>0</number>
           </property>
           <property name="documentMode">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_15">
            <attribute name="title">
@@ -2172,7 +2198,7 @@ behaviour corresponds to -legacy kernel boot argument.
            <number>0</number>
           </property>
           <property name="documentMode">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tabWidgetPage1">
            <attribute name="title">
@@ -3779,7 +3805,7 @@ bootable. Operating systems shipped before the specified model was released will
            <number>0</number>
           </property>
           <property name="documentMode">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_18">
            <attribute name="title">
@@ -4407,10 +4433,10 @@ with existing Windows activation and custom OEM software but potentially breakin
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_21">
            <attribute name="title">
@@ -4635,275 +4661,269 @@ However, certain firmwares may not provide valid values otherwise, which could b
            <attribute name="title">
             <string>DataHub</string>
            </attribute>
-           <widget class="QWidget" name="layoutWidget">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>20</y>
-              <width>691</width>
-              <height>469</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_39">
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="editFSBFrequency"/>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="editDevicePathsSupported"/>
-             </item>
-             <item row="8" column="1">
-              <widget class="QLineEdit" name="editSmcPlatform"/>
-             </item>
-             <item row="9" column="1">
-              <widget class="QLineEdit" name="editSmcRevision"/>
-             </item>
-             <item row="7" column="1">
-              <widget class="QLineEdit" name="editSmcBranch"/>
-             </item>
-             <item row="11" column="1">
-              <widget class="QLineEdit" name="editSystemProductName"/>
-             </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="label_54">
-               <property name="toolTip">
-                <string> Sets RPlt in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to
+           <layout class="QGridLayout" name="gridLayout_68">
+            <item row="0" column="0">
+             <layout class="QGridLayout" name="gridLayout_39">
+              <item row="0" column="2">
+               <widget class="QLabel" name="label_47">
+                <property name="toolTip">
+                 <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct
+in ASCII.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct
+ in ASCII.</string>
+                </property>
+                <property name="text">
+                 <string>BoardProduct</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="editBoardRevision"/>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="editSmcPlatform"/>
+              </item>
+              <item row="2" column="3">
+               <widget class="QLineEdit" name="editInitialTSC"/>
+              </item>
+              <item row="5" column="3">
+               <widget class="QLineEdit" name="editSystemProductName"/>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="label_51">
+                <property name="toolTip">
+                 <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
+                </property>
+                <property name="text">
+                 <string>InitialTSC</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QLabel" name="label_55">
+                <property name="toolTip">
+                 <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
+SMC REV key.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
+ SMC REV key.</string>
+                </property>
+                <property name="text">
+                 <string>SmcRevision</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QLineEdit" name="editDevicePathsSupported"/>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="editPlatformName"/>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="editFSBFrequency"/>
+              </item>
+              <item row="0" column="3">
+               <widget class="QLineEdit" name="editBoardProduct"/>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="editARTFrequency">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="3">
+               <widget class="QLineEdit" name="editSmcBranch"/>
+              </item>
+              <item row="1" column="2">
+               <widget class="QLabel" name="label_49">
+                <property name="toolTip">
+                 <string> Sets DevicePathsSupported in gEfiMiscSubClassGuid. Must be set to 1 for AppleACPIPlatform.kext to append SATA device paths to Boot#### and efi-boot-device-data variables. Set to 1 on all
+modern Macs.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Type: plist integer, 32-bit</string>
+                </property>
+                <property name="text">
+                 <string>DevicePathsSupported</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_50">
+                <property name="toolTip">
+                 <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
+                </property>
+                <property name="text">
+                 <string>FSBFrequency</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_54">
+                <property name="toolTip">
+                 <string> Sets RPlt in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to
 generate SMC RPlt key.</string>
-               </property>
-               <property name="statusTip">
-                <string>Type: plist data, 8 bytes</string>
-               </property>
-               <property name="text">
-                <string>SmcPlatform</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="0">
-              <widget class="QLabel" name="label_56">
-               <property name="toolTip">
-                <string>Known bits read by X86PlatformPlugin.kext: • 0x00000001 — Shutdown cause was a PWROK event (Same as GEN_PMCON_2 bit 0)
+                </property>
+                <property name="statusTip">
+                 <string>Type: plist data, 8 bytes</string>
+                </property>
+                <property name="text">
+                 <string>SmcPlatform</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_56">
+                <property name="toolTip">
+                 <string>Known bits read by X86PlatformPlugin.kext: • 0x00000001 — Shutdown cause was a PWROK event (Same as GEN_PMCON_2 bit 0)
 • 0x00000002 — Shutdown cause was a SYS_PWROK event (Same as GEN_PMCON_2 bit 1)
 • 0x00000004 — Shutdown cause was a THRMTRIP# event (Same as GEN_PMCON_2 bit 3)
 • 0x00000008 — Rebooted due to a SYS_RESET# event (Same as GEN_PMCON_2 bit 4)
 • 0x00000010 — Power Failure (Same as GEN_PMCON_3 bit 1 PWR_FLR) • 0x00000020 — Loss of RTC Well Power (Same as GEN_PMCON_3 bit 2 RTC_PWR_STS) • 0x00000040 — General Reset Status (Same as GEN_PMCON_3 bit 9 GEN_RST_STS) • 0xffffff80 — SUS Well Power Loss (Same as GEN_PMCON_3 bit 14)
 • 0x00010000 — Wake cause was a ME Wake event (Same as PRSTS bit 0, ME_WAKE_STS) • 0x00020000 — Cold Reboot was ME Induced event (Same as PRSTS bit 1 ME_HRST_COLD_STS) • 0x00040000 — Warm Reboot was ME Induced event (Same as PRSTS bit 2 ME_HRST_WARM_STS) • 0x00080000 — Shutdown was ME Induced event (Same as PRSTS bit 3 ME_HOST_PWRDN) • 0x00100000 — Global reset ME Wachdog Timer event (Same as PRSTS bit 6)
 • 0x00200000 — Global reset PowerManagment Wachdog Timer event (Same as PRSTS bit 15)</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets StartupPowerEvents in gEfiMiscSubClassGuid. Value found on Macs is power management
+                </property>
+                <property name="statusTip">
+                 <string> Sets StartupPowerEvents in gEfiMiscSubClassGuid. Value found on Macs is power management
  state bitmask, normally 0.</string>
-               </property>
-               <property name="text">
-                <string>StartupPowerEvents</string>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="1">
-              <widget class="QLineEdit" name="editSystemSerialNumber_data"/>
-             </item>
-             <item row="6" column="1">
-              <widget class="QLineEdit" name="editPlatformName"/>
-             </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="label_57">
-               <property name="toolTip">
-                <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName
-in Unicode.</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName
- in Unicode.</string>
-               </property>
-               <property name="text">
-                <string>SystemProductName</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="label_55">
-               <property name="toolTip">
-                <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
-SMC REV key.</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
- SMC REV key.</string>
-               </property>
-               <property name="text">
-                <string>SmcRevision</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_47">
-               <property name="toolTip">
-                <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct
-in ASCII.</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct
- in ASCII.</string>
-               </property>
-               <property name="text">
-                <string>BoardProduct</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_46">
-               <property name="toolTip">
-                <string>This value contains CPU ART frequency, also known as crystal clock frequency. Its existence is exclusive to
+                </property>
+                <property name="text">
+                 <string>StartupPowerEvents</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="3">
+               <widget class="QLineEdit" name="editSmcRevision"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_48">
+                <property name="toolTip">
+                 <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal
+board revision (e.g. 01).</string>
+                </property>
+                <property name="statusTip">
+                 <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal
+ board revision (e.g. 01).</string>
+                </property>
+                <property name="text">
+                 <string>BoardRevision</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="editStartupPowerEvents"/>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLabel" name="label_53">
+                <property name="toolTip">
+                 <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
+SMC RBr key.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
+ SMC RBr key.</string>
+                </property>
+                <property name="text">
+                 <string>SmcBranch</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_46">
+                <property name="toolTip">
+                 <string>This value contains CPU ART frequency, also known as crystal clock frequency. Its existence is exclusive to
 Skylake generation and newer. The value is specified in Hz, and is normally 24 MHz for client Intel segment, 25
 MHz for server Intel segment, and 19.2 MHz for Intel Atom CPUs. macOS till 10.15 inclusive assumes 24 MHz
 by default.
 Note: On Intel Skylake X ART frequency may be a little less (approx. 0.25%) than 24 or 25 MHz due to special
 EMI-reduction circuit as described in Acidanthera Bugtracker.</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets ARTFrequency in gEfiProcessorSubClassGuid.</string>
-               </property>
-               <property name="text">
-                <string>ARTFrequency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_48">
-               <property name="toolTip">
-                <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal
-board revision (e.g. 01).</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal
- board revision (e.g. 01).</string>
-               </property>
-               <property name="text">
-                <string>BoardRevision</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="editInitialTSC"/>
-             </item>
-             <item row="7" column="0">
-              <widget class="QLabel" name="label_53">
-               <property name="toolTip">
-                <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
-SMC RBr key.</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
- SMC RBr key.</string>
-               </property>
-               <property name="text">
-                <string>SmcBranch</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="editBoardRevision"/>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_49">
-               <property name="toolTip">
-                <string> Sets DevicePathsSupported in gEfiMiscSubClassGuid. Must be set to 1 for AppleACPIPlatform.kext to append SATA device paths to Boot#### and efi-boot-device-data variables. Set to 1 on all
-modern Macs.</string>
-               </property>
-               <property name="statusTip">
-                <string>Type: plist integer, 32-bit</string>
-               </property>
-               <property name="text">
-                <string>DevicePathsSupported</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editARTFrequency">
-               <property name="minimumSize">
-                <size>
-                 <width>500</width>
-                 <height>0</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="0">
-              <widget class="QLabel" name="label_58">
-               <property name="toolTip">
-                <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS
+                </property>
+                <property name="statusTip">
+                 <string>Sets ARTFrequency in gEfiProcessorSubClassGuid.</string>
+                </property>
+                <property name="text">
+                 <string>ARTFrequency</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_52">
+                <property name="toolTip">
+                 <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
+                </property>
+                <property name="text">
+                 <string>PlatformName</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="2">
+               <widget class="QLabel" name="label_57">
+                <property name="toolTip">
+                 <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName
+in Unicode.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName
+ in Unicode.</string>
+                </property>
+                <property name="text">
+                 <string>SystemProductName</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_58">
+                <property name="toolTip">
+                 <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS
 SystemSerialNumber in Unicode.</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS
+                </property>
+                <property name="statusTip">
+                 <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS
  SystemSerialNumber in Unicode.</string>
-               </property>
-               <property name="text">
-                <string>SystemSerialNumber</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_51">
-               <property name="toolTip">
-                <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
-               </property>
-               <property name="text">
-                <string>InitialTSC</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_52">
-               <property name="toolTip">
-                <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
-               </property>
-               <property name="text">
-                <string>PlatformName</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="1">
-              <widget class="QLineEdit" name="editStartupPowerEvents"/>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_50">
-               <property name="toolTip">
-                <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
-               </property>
-               <property name="text">
-                <string>FSBFrequency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="editBoardProduct"/>
-             </item>
-             <item row="13" column="0">
-              <widget class="QLabel" name="label_59">
-               <property name="toolTip">
-                <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.</string>
-               </property>
-               <property name="text">
-                <string>SystemUUID</string>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="1">
-              <widget class="QLineEdit" name="editSystemUUID_data"/>
-             </item>
-            </layout>
-           </widget>
+                </property>
+                <property name="text">
+                 <string>SystemSerialNumber</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QLineEdit" name="editSystemSerialNumber_data"/>
+              </item>
+              <item row="6" column="2">
+               <widget class="QLabel" name="label_59">
+                <property name="toolTip">
+                 <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.</string>
+                </property>
+                <property name="text">
+                 <string>SystemUUID</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="3">
+               <widget class="QLineEdit" name="editSystemUUID_data"/>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tab_38">
            <attribute name="title">
@@ -5252,464 +5272,468 @@ for boot services only. Value found on Macs is equal to SMBIOS SystemUUID.</stri
            <attribute name="title">
             <string>SMBIOS</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_41">
+           <layout class="QGridLayout" name="gridLayout_67">
             <item row="0" column="0">
-             <widget class="QLabel" name="label_65">
-              <property name="toolTip">
-               <string> Firmware release date. Similar to BIOSVersion. May look like 12/08/2017.</string>
-              </property>
-              <property name="statusTip">
-               <string> Firmware release date. Similar to BIOSVersion. May look like 12/08/2017.</string>
-              </property>
-              <property name="text">
-               <string>BIOSReleaseDate</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1" colspan="2">
-             <widget class="QLineEdit" name="editBIOSReleaseDate"/>
-            </item>
-            <item row="0" column="3">
-             <widget class="QLabel" name="label_66">
-              <property name="toolTip">
-               <string> Should match BoardProduct.</string>
-              </property>
-              <property name="statusTip">
-               <string> Should match BoardProduct.</string>
-              </property>
-              <property name="text">
-               <string>ChassisVersion</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="4">
-             <widget class="QLineEdit" name="editChassisVersion"/>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_67">
-              <property name="toolTip">
-               <string> BIOS Vendor. All rules of SystemManufacturer do apply.</string>
-              </property>
-              <property name="statusTip">
-               <string> BIOS Vendor. All rules of SystemManufacturer do apply.</string>
-              </property>
-              <property name="text">
-               <string>BIOSVendor</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1" colspan="2">
-             <widget class="QLineEdit" name="editBIOSVendor"/>
-            </item>
-            <item row="1" column="3">
-             <widget class="QLabel" name="label_68">
-              <property name="toolTip">
-               <string> 64-bit firmware features bitmask. Refer to AppleFeatures.h for more details. Lower 32 bits match
+             <layout class="QGridLayout" name="gridLayout_41">
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="editFirmwareFeatures_2"/>
+              </item>
+              <item row="3" column="4">
+               <widget class="QLabel" name="label_87">
+                <property name="toolTip">
+                 <string>Board manufacturer. All rules of SystemManufacturer do apply.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Board manufacturer. All rules of SystemManufacturer do apply.</string>
+                </property>
+                <property name="text">
+                 <string>ChassisManufacturer</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLabel" name="label_85">
+                <property name="toolTip">
+                 <string>Chassis type name. Varies, could be empty or MacBook-Aluminum.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Chassis type name. Varies, could be empty or MacBook-Aluminum.</string>
+                </property>
+                <property name="text">
+                 <string>ChassisAssetTag</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="3">
+               <widget class="QLineEdit" name="editSystemProductName_2"/>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="editBoardVersion"/>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_68">
+                <property name="toolTip">
+                 <string> 64-bit firmware features bitmask. Refer to AppleFeatures.h for more details. Lower 32 bits match
 FirmwareFeatures. Upper 64 bits match ExtendedFirmwareFeatures.</string>
-              </property>
-              <property name="statusTip">
-               <string> 64-bit firmware features bitmask. Refer to AppleFeatures.h for more details. Lower 32 bits match
+                </property>
+                <property name="statusTip">
+                 <string> 64-bit firmware features bitmask. Refer to AppleFeatures.h for more details. Lower 32 bits match
  FirmwareFeatures. Upper 64 bits match ExtendedFirmwareFeatures.</string>
-              </property>
-              <property name="text">
-               <string>FirmwareFeatures</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="4">
-             <widget class="QLineEdit" name="editFirmwareFeatures_2"/>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_69">
-              <property name="toolTip">
-               <string> Firmware version. This value gets updated and takes part in update delivery configuration and
-macOS version compatibility. This value could look like MM71.88Z.0234.B00.1809171422 in older firmwares,
-and is described in BiosId.h. In newer firmwares it should look like 236.0.0.0.0 or 220.230.16.0.0 (iBridge:
-16.16.2542.0.0,0). iBridge version is read from BridgeOSVersion variable, and is only present on macs with
-T2.</string>
-              </property>
-              <property name="statusTip">
-               <string>BIOS Information (Type 0) — BIOS Version</string>
-              </property>
-              <property name="text">
-               <string>BIOSVersion</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1" colspan="2">
-             <widget class="QLineEdit" name="editBIOSVersion"/>
-            </item>
-            <item row="2" column="3">
-             <widget class="QLabel" name="label_92">
-              <property name="toolTip">
-               <string> Supported bits of extended firmware features bitmask. Refer to AppleFeatures.h for more details.
-Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFeaturesMask.</string>
-              </property>
-              <property name="statusTip">
-               <string> Supported bits of extended firmware features bitmask. Refer to AppleFeatures.h for more details.
- Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFeaturesMask.</string>
-              </property>
-              <property name="text">
-               <string>FirmwareFeaturesMask</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="4">
-             <widget class="QLineEdit" name="editFirmwareFeaturesMask_2"/>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="label_71">
-              <property name="toolTip">
-               <string>Asset tag number. Varies, may be empty or Type2 - Board Asset Tag.</string>
-              </property>
-              <property name="statusTip">
-               <string>Asset tag number. Varies, may be empty or Type2 - Board Asset Tag.</string>
-              </property>
-              <property name="text">
-               <string>BoardAssetTag</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QLineEdit" name="editBoardAssetTag"/>
-            </item>
-            <item row="3" column="3">
-             <widget class="QLabel" name="label_72">
-              <property name="toolTip">
-               <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to
-not provide this table.</string>
-              </property>
-              <property name="statusTip">
-               <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to
- not provide this table.</string>
-              </property>
-              <property name="text">
-               <string>PlatformFeature</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="4">
-             <widget class="QLineEdit" name="editPlatformFeature"/>
-            </item>
-            <item row="4" column="0" colspan="2">
-             <widget class="QLabel" name="label_73">
-              <property name="toolTip">
-               <string>Varies, may be empty or Part Component.</string>
-              </property>
-              <property name="statusTip">
-               <string>Varies, may be empty or Part Component.</string>
-              </property>
-              <property name="text">
-               <string>BoardLocationInChassis</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="2">
-             <widget class="QLineEdit" name="editBoardLocationInChassis"/>
-            </item>
-            <item row="4" column="3">
-             <widget class="QLabel" name="label_74">
-              <property name="toolTip">
-               <string> Combined of Processor Major and Minor types.</string>
-              </property>
-              <property name="statusTip">
-               <string> Combined of Processor Major and Minor types.</string>
-              </property>
-              <property name="text">
-               <string>ProcessorType</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="4">
-             <widget class="QLineEdit" name="editProcessorType"/>
-            </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="label_75">
-              <property name="toolTip">
-               <string> Board manufacturer. All rules of SystemManufacturer do apply.</string>
-              </property>
-              <property name="statusTip">
-               <string> Board manufacturer. All rules of SystemManufacturer do apply.</string>
-              </property>
-              <property name="text">
-               <string>BoardManufacturer</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="2">
-             <widget class="QLineEdit" name="editBoardManufacturer"/>
-            </item>
-            <item row="5" column="3">
-             <widget class="QLabel" name="label_76">
-              <property name="toolTip">
-               <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when
+                </property>
+                <property name="text">
+                 <string>FirmwareFeatures</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="2">
+               <widget class="QLabel" name="label_76">
+                <property name="toolTip">
+                 <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when
 zero.</string>
-              </property>
-              <property name="statusTip">
-               <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when
+                </property>
+                <property name="statusTip">
+                 <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when
  zero.</string>
-              </property>
-              <property name="text">
-               <string>SmcVersion</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="4">
-             <widget class="QLineEdit" name="editSmcVersion"/>
-            </item>
-            <item row="6" column="0">
-             <widget class="QLabel" name="label_77">
-              <property name="toolTip">
-               <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older
-models.</string>
-              </property>
-              <property name="statusTip">
-               <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older
- models.</string>
-              </property>
-              <property name="text">
-               <string>BoardProduct</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="2">
-             <widget class="QLineEdit" name="editBoardProduct_2"/>
-            </item>
-            <item row="6" column="3">
-             <widget class="QLabel" name="label_78">
-              <property name="toolTip">
-               <string>Family name. May look like iMac Pro.</string>
-              </property>
-              <property name="statusTip">
-               <string>Family name. May look like iMac Pro.</string>
-              </property>
-              <property name="text">
-               <string>SystemFamily</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="4">
-             <widget class="QLineEdit" name="editSystemFamily"/>
-            </item>
-            <item row="7" column="0">
-             <widget class="QLabel" name="label_79">
-              <property name="toolTip">
-               <string>Board serial number in defined format. Known formats are described in macserial.</string>
-              </property>
-              <property name="statusTip">
-               <string>Board serial number in defined format. Known formats are described in macserial.</string>
-              </property>
-              <property name="text">
-               <string>BoardSerialNumber</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="2">
-             <widget class="QLineEdit" name="editBoardSerialNumber"/>
-            </item>
-            <item row="7" column="3">
-             <widget class="QLabel" name="label_80">
-              <property name="toolTip">
-               <string> OEM manufacturer of the particular board. Shall not be specified unless strictly required. Should
-not contain Apple Inc., as this confuses numerous services present in the operating system, such as firmware
-updates, eficheck, as well as kernel extensions developed in Acidanthera, such as Lilu and its plugins. In addition
-it will also make some operating systems like Linux unbootable.</string>
-              </property>
-              <property name="statusTip">
-               <string>SMBIOS: System Information (Type 1) — Manufacturer</string>
-              </property>
-              <property name="text">
-               <string>SystemManufacturer</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="4">
-             <widget class="QLineEdit" name="editSystemManufacturer"/>
-            </item>
-            <item row="8" column="0">
-             <widget class="QLabel" name="label_81">
-              <property name="toolTip">
-               <string> Either 0xA (Motherboard (includes processor, memory, and I/O) or 0xB (Processor/Memory
-Module), refer to Table 15 – Baseboard: Board Type for more details.</string>
-              </property>
-              <property name="statusTip">
-               <string> Either 0xA (Motherboard (includes processor, memory, and I/O) or 0xB (Processor/Memory
- Module), refer to Table 15 – Baseboard: Board Type for more details.</string>
-              </property>
-              <property name="text">
-               <string>BoardType</string>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="2">
-             <widget class="QLineEdit" name="editBoardType"/>
-            </item>
-            <item row="8" column="3">
-             <widget class="QLabel" name="label_82">
-              <property name="toolTip">
-               <string> Preferred Mac model used to mark the device as supported by the operating system. This value
+                </property>
+                <property name="text">
+                 <string>SmcVersion</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QLineEdit" name="editProcessorType"/>
+              </item>
+              <item row="5" column="4">
+               <widget class="QLabel" name="label_72">
+                <property name="toolTip">
+                 <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to
+not provide this table.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to
+ not provide this table.</string>
+                </property>
+                <property name="text">
+                 <string>PlatformFeature</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="3">
+               <widget class="QLineEdit" name="editChassisAssetTag"/>
+              </item>
+              <item row="7" column="2">
+               <widget class="QLabel" name="label_82">
+                <property name="toolTip">
+                 <string> Preferred Mac model used to mark the device as supported by the operating system. This value
 must be specified by any configuration for later automatic generation of the related values in this and other
 SMBIOS tables and related configuration parameters. If SystemProductName is not compatible with the target
 operating system, -no_compat_check boot argument may be used as an override.
 Note: If SystemProductName is unknown, and related fields are unspecified, default values should be assumed as
 being set to MacPro6,1 data. The list of known products can be found in AppleModels.</string>
-              </property>
-              <property name="statusTip">
-               <string>SMBIOS: System Information (Type 1), Product Name</string>
-              </property>
-              <property name="text">
-               <string>SystemProductName</string>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="4">
-             <widget class="QLineEdit" name="editSystemProductName_2"/>
-            </item>
-            <item row="9" column="0">
-             <widget class="QLabel" name="label_83">
-              <property name="toolTip">
-               <string>Board version number. Varies, may match SystemProductName or SystemProductVersion.</string>
-              </property>
-              <property name="statusTip">
-               <string>Board version number. Varies, may match SystemProductName or SystemProductVersion.</string>
-              </property>
-              <property name="text">
-               <string>BoardVersion</string>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="2">
-             <widget class="QLineEdit" name="editBoardVersion"/>
-            </item>
-            <item row="9" column="3">
-             <widget class="QLabel" name="label_84">
-              <property name="toolTip">
-               <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.</string>
-              </property>
-              <property name="statusTip">
-               <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.</string>
-              </property>
-              <property name="text">
-               <string>SystemSKUNumber</string>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="4">
-             <widget class="QLineEdit" name="editSystemSKUNumber"/>
-            </item>
-            <item row="10" column="0">
-             <widget class="QLabel" name="label_85">
-              <property name="toolTip">
-               <string>Chassis type name. Varies, could be empty or MacBook-Aluminum.</string>
-              </property>
-              <property name="statusTip">
-               <string>Chassis type name. Varies, could be empty or MacBook-Aluminum.</string>
-              </property>
-              <property name="text">
-               <string>ChassisAssetTag</string>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="2">
-             <widget class="QLineEdit" name="editChassisAssetTag"/>
-            </item>
-            <item row="10" column="3">
-             <widget class="QLabel" name="label_86">
-              <property name="toolTip">
-               <string> Product serial number in defined format. Known formats are described in macserial.</string>
-              </property>
-              <property name="statusTip">
-               <string> Product serial number in defined format. Known formats are described in macserial.</string>
-              </property>
-              <property name="text">
-               <string>SystemSerialNumber</string>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="4">
-             <widget class="QLineEdit" name="editSystemSerialNumber_2"/>
-            </item>
-            <item row="11" column="0">
-             <widget class="QLabel" name="label_87">
-              <property name="toolTip">
-               <string>Board manufacturer. All rules of SystemManufacturer do apply.</string>
-              </property>
-              <property name="statusTip">
-               <string>Board manufacturer. All rules of SystemManufacturer do apply.</string>
-              </property>
-              <property name="text">
-               <string>ChassisManufacturer</string>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="2">
-             <widget class="QLineEdit" name="editChassisManufacturer"/>
-            </item>
-            <item row="11" column="3">
-             <widget class="QLabel" name="label_88">
-              <property name="toolTip">
-               <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no
+                </property>
+                <property name="statusTip">
+                 <string>SMBIOS: System Information (Type 1), Product Name</string>
+                </property>
+                <property name="text">
+                 <string>SystemProductName</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="editBoardAssetTag"/>
+              </item>
+              <item row="5" column="5">
+               <widget class="QLineEdit" name="editPlatformFeature"/>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_89">
+                <property name="toolTip">
+                 <string> Should match SystemSerialNumber.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Should match SystemSerialNumber.</string>
+                </property>
+                <property name="text">
+                 <string>ChassisSerialNumber</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="5">
+               <widget class="QLineEdit" name="editBoardManufacturer"/>
+              </item>
+              <item row="2" column="5">
+               <widget class="QLineEdit" name="editBoardType"/>
+              </item>
+              <item row="1" column="4">
+               <widget class="QLabel" name="label_75">
+                <property name="toolTip">
+                 <string> Board manufacturer. All rules of SystemManufacturer do apply.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Board manufacturer. All rules of SystemManufacturer do apply.</string>
+                </property>
+                <property name="text">
+                 <string>BoardManufacturer</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <widget class="QLabel" name="label_69">
+                <property name="toolTip">
+                 <string> Firmware version. This value gets updated and takes part in update delivery configuration and
+macOS version compatibility. This value could look like MM71.88Z.0234.B00.1809171422 in older firmwares,
+and is described in BiosId.h. In newer firmwares it should look like 236.0.0.0.0 or 220.230.16.0.0 (iBridge:
+16.16.2542.0.0,0). iBridge version is read from BridgeOSVersion variable, and is only present on macs with
+T2.</string>
+                </property>
+                <property name="statusTip">
+                 <string>BIOS Information (Type 0) — BIOS Version</string>
+                </property>
+                <property name="text">
+                 <string>BIOSVersion</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QLineEdit" name="editBoardLocationInChassis"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="label_67">
+                <property name="toolTip">
+                 <string> BIOS Vendor. All rules of SystemManufacturer do apply.</string>
+                </property>
+                <property name="statusTip">
+                 <string> BIOS Vendor. All rules of SystemManufacturer do apply.</string>
+                </property>
+                <property name="text">
+                 <string>BIOSVendor</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="3">
+               <widget class="QLineEdit" name="editSmcVersion"/>
+              </item>
+              <item row="3" column="5">
+               <widget class="QLineEdit" name="editChassisManufacturer"/>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_74">
+                <property name="toolTip">
+                 <string> Combined of Processor Major and Minor types.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Combined of Processor Major and Minor types.</string>
+                </property>
+                <property name="text">
+                 <string>ProcessorType</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="3">
+               <widget class="QLineEdit" name="editFirmwareFeaturesMask_2"/>
+              </item>
+              <item row="7" column="1">
+               <widget class="QLineEdit" name="editSystemManufacturer"/>
+              </item>
+              <item row="7" column="5">
+               <widget class="QLineEdit" name="editSystemSKUNumber"/>
+              </item>
+              <item row="4" column="3">
+               <widget class="QLineEdit" name="editChassisType"/>
+              </item>
+              <item row="1" column="2">
+               <widget class="QLabel" name="label_73">
+                <property name="toolTip">
+                 <string>Varies, may be empty or Part Component.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Varies, may be empty or Part Component.</string>
+                </property>
+                <property name="text">
+                 <string>BoardLocationInChassis</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="5">
+               <widget class="QLineEdit" name="editChassisVersion"/>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="editBIOSReleaseDate"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_71">
+                <property name="toolTip">
+                 <string>Asset tag number. Varies, may be empty or Type2 - Board Asset Tag.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Asset tag number. Varies, may be empty or Type2 - Board Asset Tag.</string>
+                </property>
+                <property name="text">
+                 <string>BoardAssetTag</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="2">
+               <widget class="QLabel" name="label_92">
+                <property name="toolTip">
+                 <string> Supported bits of extended firmware features bitmask. Refer to AppleFeatures.h for more details.
+Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFeaturesMask.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Supported bits of extended firmware features bitmask. Refer to AppleFeatures.h for more details.
+ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFeaturesMask.</string>
+                </property>
+                <property name="text">
+                 <string>FirmwareFeaturesMask</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="4">
+               <widget class="QLabel" name="label_81">
+                <property name="toolTip">
+                 <string> Either 0xA (Motherboard (includes processor, memory, and I/O) or 0xB (Processor/Memory
+Module), refer to Table 15 – Baseboard: Board Type for more details.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Either 0xA (Motherboard (includes processor, memory, and I/O) or 0xB (Processor/Memory
+ Module), refer to Table 15 – Baseboard: Board Type for more details.</string>
+                </property>
+                <property name="text">
+                 <string>BoardType</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="label_80">
+                <property name="toolTip">
+                 <string> OEM manufacturer of the particular board. Shall not be specified unless strictly required. Should
+not contain Apple Inc., as this confuses numerous services present in the operating system, such as firmware
+updates, eficheck, as well as kernel extensions developed in Acidanthera, such as Lilu and its plugins. In addition
+it will also make some operating systems like Linux unbootable.</string>
+                </property>
+                <property name="statusTip">
+                 <string>SMBIOS: System Information (Type 1) — Manufacturer</string>
+                </property>
+                <property name="text">
+                 <string>SystemManufacturer</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_77">
+                <property name="toolTip">
+                 <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older
+models.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older
+ models.</string>
+                </property>
+                <property name="text">
+                 <string>BoardProduct</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="4">
+               <widget class="QLabel" name="label_84">
+                <property name="toolTip">
+                 <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.</string>
+                </property>
+                <property name="text">
+                 <string>SystemSKUNumber</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="editBoardProduct_2"/>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="label_79">
+                <property name="toolTip">
+                 <string>Board serial number in defined format. Known formats are described in macserial.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Board serial number in defined format. Known formats are described in macserial.</string>
+                </property>
+                <property name="text">
+                 <string>BoardSerialNumber</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="4">
+               <widget class="QLabel" name="label_78">
+                <property name="toolTip">
+                 <string>Family name. May look like iMac Pro.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Family name. May look like iMac Pro.</string>
+                </property>
+                <property name="text">
+                 <string>SystemFamily</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_83">
+                <property name="toolTip">
+                 <string>Board version number. Varies, may match SystemProductName or SystemProductVersion.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Board version number. Varies, may match SystemProductName or SystemProductVersion.</string>
+                </property>
+                <property name="text">
+                 <string>BoardVersion</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QLabel" name="label_91">
+                <property name="toolTip">
+                 <string> Chassis type, refer to Table 17 — System Enclosure or Chassis Types for more details.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Chassis type, refer to Table 17 — System Enclosure or Chassis Types for more details.</string>
+                </property>
+                <property name="text">
+                 <string>ChassisType</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="5">
+               <widget class="QLineEdit" name="editSystemFamily"/>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="editChassisSerialNumber"/>
+              </item>
+              <item row="4" column="4">
+               <widget class="QLabel" name="label_66">
+                <property name="toolTip">
+                 <string> Should match BoardProduct.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Should match BoardProduct.</string>
+                </property>
+                <property name="text">
+                 <string>ChassisVersion</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5">
+               <widget class="QLineEdit" name="editBIOSVersion"/>
+              </item>
+              <item row="2" column="3">
+               <widget class="QLineEdit" name="editBoardSerialNumber"/>
+              </item>
+              <item row="0" column="3">
+               <widget class="QLineEdit" name="editBIOSVendor"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_65">
+                <property name="toolTip">
+                 <string> Firmware release date. Similar to BIOSVersion. May look like 12/08/2017.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Firmware release date. Similar to BIOSVersion. May look like 12/08/2017.</string>
+                </property>
+                <property name="text">
+                 <string>BIOSReleaseDate</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="label_86">
+                <property name="toolTip">
+                 <string> Product serial number in defined format. Known formats are described in macserial.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Product serial number in defined format. Known formats are described in macserial.</string>
+                </property>
+                <property name="text">
+                 <string>SystemSerialNumber</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <widget class="QLineEdit" name="editSystemSerialNumber_2"/>
+              </item>
+              <item row="8" column="2">
+               <widget class="QLabel" name="label_88">
+                <property name="toolTip">
+                 <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no
 central registration process.</string>
-              </property>
-              <property name="statusTip">
-               <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no
+                </property>
+                <property name="statusTip">
+                 <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no
  central registration process.</string>
-              </property>
-              <property name="text">
-               <string>SystemUUID</string>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="4">
-             <widget class="QLineEdit" name="editSystemUUID_2"/>
-            </item>
-            <item row="12" column="0">
-             <widget class="QLabel" name="label_89">
-              <property name="toolTip">
-               <string> Should match SystemSerialNumber.</string>
-              </property>
-              <property name="statusTip">
-               <string> Should match SystemSerialNumber.</string>
-              </property>
-              <property name="text">
-               <string>ChassisSerialNumber</string>
-              </property>
-             </widget>
-            </item>
-            <item row="12" column="2">
-             <widget class="QLineEdit" name="editChassisSerialNumber"/>
-            </item>
-            <item row="12" column="3">
-             <widget class="QLabel" name="label_90">
-              <property name="toolTip">
-               <string> Product iteration version number. May look like 1.1.</string>
-              </property>
-              <property name="statusTip">
-               <string> Product iteration version number. May look like 1.1.</string>
-              </property>
-              <property name="text">
-               <string>SystemVersion</string>
-              </property>
-             </widget>
-            </item>
-            <item row="12" column="4">
-             <widget class="QLineEdit" name="editSystemVersion"/>
-            </item>
-            <item row="13" column="0">
-             <widget class="QLabel" name="label_91">
-              <property name="toolTip">
-               <string> Chassis type, refer to Table 17 — System Enclosure or Chassis Types for more details.</string>
-              </property>
-              <property name="statusTip">
-               <string> Chassis type, refer to Table 17 — System Enclosure or Chassis Types for more details.</string>
-              </property>
-              <property name="text">
-               <string>ChassisType</string>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="2">
-             <widget class="QLineEdit" name="editChassisType"/>
+                </property>
+                <property name="text">
+                 <string>SystemUUID</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="3">
+               <widget class="QLineEdit" name="editSystemUUID_2"/>
+              </item>
+              <item row="8" column="4">
+               <widget class="QLabel" name="label_90">
+                <property name="toolTip">
+                 <string> Product iteration version number. May look like 1.1.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Product iteration version number. May look like 1.1.</string>
+                </property>
+                <property name="text">
+                 <string>SystemVersion</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="5">
+               <widget class="QLineEdit" name="editSystemVersion"/>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -5745,7 +5769,7 @@ central registration process.</string>
            <number>0</number>
           </property>
           <property name="documentMode">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <widget class="QWidget" name="tab_22">
            <attribute name="title">
