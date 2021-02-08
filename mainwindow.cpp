@@ -7134,7 +7134,13 @@ void MainWindow::on_Database()
     //设置文件过滤格式
     nameFilters << "*.plist";
     //将过滤后的文件名称存入到files列表中
-    QStringList files = dir.entryList(nameFilters, QDir::Files | QDir::Readable, QDir::Name);
+    QStringList filesTemp = dir.entryList(nameFilters, QDir::Files | QDir::Readable, QDir::Name);
+    QStringList files;
+    for (int j = 0; j < filesTemp.count(); j++) {
+        if (filesTemp.at(j).mid(0, 1) != ".")
+            files.append(filesTemp.at(j));
+    }
+
     tableDatabase->setRowCount(0);
     tableDatabase->setRowCount(files.count());
     for (int i = 0; i < files.count(); i++) {
