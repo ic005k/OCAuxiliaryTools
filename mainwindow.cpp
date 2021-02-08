@@ -3107,7 +3107,7 @@ QVariantMap MainWindow::SaveMisc()
     valueList["ExposeSensitiveData"] = ui->editExposeSensitiveData->text().toLongLong();
 
     valueList["HaltLevel"] = ui->editHaltLevel->text().toLongLong(nullptr, 10);
-    qDebug() << ui->editHaltLevel->text().toLongLong(nullptr, 16);
+    //qDebug() << ui->editHaltLevel->text().toLongLong(nullptr, 16);
 
     valueList["ScanPolicy"] = ui->editScanPolicy->text().toLongLong();
 
@@ -3886,7 +3886,7 @@ void MainWindow::del_item(QTableWidget* table)
         selectedsList = selections->selectedIndexes();
 
         i = -1;
-        qDebug() << t;
+        //qDebug() << t;
     }
 
     if (row > table->rowCount()) {
@@ -4216,11 +4216,11 @@ void MainWindow::addKexts(QStringList FileName)
             QFileInfoList fileList = piDir.entryInfoList();
             int fileCount = fileList.count();
             QVector<QString> kext_file;
-            qDebug() << fileCount;
+            //qDebug() << fileCount;
             for (int i = 0; i < fileCount; i++) //找出里面的kext文件(目录）
             {
                 kext_file.push_back(fileList[i].fileName());
-                qDebug() << kext_file.at(i);
+                //qDebug() << kext_file.at(i);
             }
 
             if (fileCount >= 3) //里面有目录
@@ -6119,7 +6119,7 @@ void MainWindow::methodDisplayLevel(QVector<unsigned int> nums,
 {
     if (sum == 0) {
         for (unsigned int val : list) {
-            qDebug() << val;
+            //qDebug() << val;
             for (int i = 0; i < 19; i++) {
 
                 if (val == vDisplayLevel.at(i)) {
