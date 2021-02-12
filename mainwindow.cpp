@@ -26,8 +26,8 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210207";
-    title = "OC Auxiliary Tools   V0.6.6-" + CurVerison + "        [*] ";
+    CurVerison = "20210213";
+    title = "OC Auxiliary Tools   V0.6.7    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
     QFont font;
@@ -5372,26 +5372,21 @@ void MainWindow::closeEvent(QCloseEvent* event)
     Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
 
     if (this->isWindowModified()) {
+
+        this->setFocus();
+
         int choice;
-        if (!zh_cn) {
 
-            choice = QMessageBox::warning(
-                this, tr("Application"),
-                tr("The document has been modified.\n"
-                   "Do you want to save your changes?\n\n")
-                    + SaveFileName,
-                QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        QMessageBox message(QMessageBox::Warning, tr("Application"),
+            tr("The document has been modified.") + "\n" + tr("Do you want to save your changes?") + "\n\n"
+                + SaveFileName,
+            QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
 
-        } else {
-            QMessageBox message(QMessageBox::Warning, "QtiASL",
-                "文件内容已修改，是否保存？\n\n" + SaveFileName);
-            message.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-            message.setButtonText(QMessageBox::Save, QString("保 存"));
-            message.setButtonText(QMessageBox::Cancel, QString("取 消"));
-            message.setButtonText(QMessageBox::Discard, QString("不保存"));
-            message.setDefaultButton(QMessageBox::Save);
-            choice = message.exec();
-        }
+        message.setButtonText(QMessageBox::Save, QString(tr("Save")));
+        message.setButtonText(QMessageBox::Cancel, QString(tr("Cancel")));
+        message.setButtonText(QMessageBox::Discard, QString(tr("Discard")));
+        message.setDefaultButton(QMessageBox::Save);
+        choice = message.exec();
 
         switch (choice) {
         case QMessageBox::Save:
@@ -5409,6 +5404,7 @@ void MainWindow::closeEvent(QCloseEvent* event)
             event->accept();
             break;
         case QMessageBox::Cancel:
+            ui->listMain->setFocus();
             event->ignore();
             break;
         }
@@ -7148,6 +7144,30 @@ void MainWindow::on_Database()
         newItem1 = new QTableWidgetItem(files.at(i));
         tableDatabase->setItem(i, 0, newItem1);
     }
+
+    //Read database version information
+    QString strLastModify = QFileInfo(appInfo.filePath() + "/Database/EFI/OC/OpenCore.efi").lastModified().toString();
+
+    QString DatabaseVer;
+    QString fileVer = appInfo.filePath() + "/Database/EFI/ver.txt";
+
+    if (QFileInfo(fileVer).exists()) {
+        QFile file(fileVer);
+        if (!file.open(QFile::ReadOnly | QFile::Text)) {
+            QMessageBox::warning(this, tr("Application"),
+                tr("Cannot read file %1:\n%2.")
+                    .arg(QDir::toNativeSeparators(fileVer), file.errorString()));
+
+        } else {
+
+            QTextStream in(&file);
+            in.setCodec("UTF-8");
+            QString text = in.readAll();
+            DatabaseVer = text + "    " + strLastModify;
+        }
+
+        myDatabase->setWindowTitle(tr("Configuration file database") + " : " + DatabaseVer);
+    }
 }
 
 void MainWindow::on_line1()
@@ -8640,17 +8660,33 @@ void MainWindow::readResultCheckData()
 {
     QString result = chkdata->readAll();
     QString str;
+    QString strMsg;
 
     if (result.trimmed() == "Failed to read")
         return;
+
     QMessageBox box;
+
     if (result.trimmed().mid(0, 4) == "Done") {
         str = tr("OK!");
-        box.setText(result + "\n" + str);
-    } else
-        box.setText(result);
+        strMsg = result + "\n" + str;
 
-    box.exec();
+    } else
+        strMsg = result;
+
+    this->setFocus();
+
+    QMessageBox::StandardButton btn = box.information(NULL, NULL, strMsg, QMessageBox::Ok);
+
+    switch (btn) {
+    case QMessageBox::Ok:
+        ui->listMain->setFocus();
+        break;
+
+    default:
+        ui->listMain->setFocus();
+        break;
+    }
 }
 
 void MainWindow::on_btnBooterPatchAdd_clicked()
@@ -8775,6 +8811,7 @@ int MainWindow::parse_UpdateJSON(QString str)
         QString UpdateTime = root_Obj.value("published_at").toString();
         QString ReleaseNote = root_Obj.value("body").toString();
 
+        this->setFocus();
         if (Verison > CurVerison) {
             QString warningStr = tr("New version detected!") + "\n" + tr("Version: ") + "V" + Verison + "\n" + tr("Published at: ") + UpdateTime + "\n" + tr("Release Notes: ") + "\n" + ReleaseNote;
             int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
@@ -8783,6 +8820,7 @@ int MainWindow::parse_UpdateJSON(QString str)
             }
         } else
             QMessageBox::information(this, "", tr("It is currently the latest version!"));
+        ui->listMain->setFocus();
     }
     return 0;
 }
