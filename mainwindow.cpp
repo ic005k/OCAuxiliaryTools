@@ -1833,10 +1833,10 @@ void MainWindow::on_table_dp_add_itemChanged(QTableWidgetItem* item)
     }
     //当条目有修改时，重新写入数据
     if (!loading) //数据已经加载完成后
-        write_ini("table_dp_add0", ui->table_dp_add,
-            ui->table_dp_add0->currentRow());
+        write_ini("table_dp_add0", ui->table_dp_add, ui->table_dp_add0->currentRow());
 
-    this->setWindowModified(true);
+    if (!loading)
+        this->setWindowModified(true);
 }
 
 void MainWindow::on_table_nv_add0_cellClicked(int row, int column)
@@ -1861,7 +1861,8 @@ void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item)
         write_ini("table_nv_add0", ui->table_nv_add,
             ui->table_nv_add0->currentRow());
 
-    this->setWindowModified(true);
+    if (!loading)
+        this->setWindowModified(true);
 }
 
 void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
@@ -1947,11 +1948,11 @@ void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem* item)
     if (item->text().isEmpty()) {
     }
 
-    if (!loading)
-        write_value_ini(ui->table_nv_del0->objectName(), ui->table_nv_del,
-            ui->table_nv_del0->currentRow());
+    if (!loading) {
+        write_value_ini(ui->table_nv_del0->objectName(), ui->table_nv_del, ui->table_nv_del0->currentRow());
 
-    this->setWindowModified(true);
+        this->setWindowModified(true);
+    }
 }
 
 void MainWindow::on_table_nv_ls_itemChanged(QTableWidgetItem* item)
@@ -1959,11 +1960,11 @@ void MainWindow::on_table_nv_ls_itemChanged(QTableWidgetItem* item)
     if (item->text().isEmpty()) {
     }
 
-    if (!loading)
-        write_value_ini(ui->table_nv_ls0->objectName(), ui->table_nv_ls,
-            ui->table_nv_ls0->currentRow());
+    if (!loading) {
+        write_value_ini(ui->table_nv_ls0->objectName(), ui->table_nv_ls, ui->table_nv_ls0->currentRow());
 
-    this->setWindowModified(true);
+        this->setWindowModified(true);
+    }
 }
 
 void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
@@ -1987,7 +1988,8 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item)
         write_value_ini(ui->table_dp_del0->objectName(), ui->table_dp_del,
             ui->table_dp_del0->currentRow());
 
-    this->setWindowModified(true);
+    if (!loading)
+        this->setWindowModified(true);
 }
 
 void MainWindow::initui_PlatformInfo()
@@ -7036,8 +7038,10 @@ void MainWindow::init_hardware_info()
 
     if (mac) {
 
+        ui->tabTotal->removeTab(8);
+
         //ui->listHardwareInfo->addItem(tr("CPU") + "  :  ");
-        ui->listHardwareInfo->addItem(tr("CPU") + "  :  \n\n" + getMacInfo("sysctl machdep.cpu"));
+        ui->listHardwareInfo->addItem(tr("CPU") + "  :  \n" + getMacInfo("sysctl machdep.cpu"));
 
         //ui->listHardwareInfo->addItem("");
 
@@ -7061,6 +7065,8 @@ void MainWindow::init_hardware_info()
     }
 
     if (linuxOS) {
+
+        ui->tabTotal->removeTab(8);
     }
 }
 
@@ -7089,8 +7095,11 @@ void MainWindow::init_menu()
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m6.png"), tr("NVRAM")));
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m7.png"), tr("PlatformInfo")));
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m8.png"), tr("UEFI")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
+
+    if (win)
+        ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
     ui->listMain->setCurrentRow(0);
+
     ui->tabTotal->tabBar()->setHidden(true);
 
     ui->tabACPI->tabBar()->setVisible(false);
@@ -7313,13 +7322,15 @@ void MainWindow::on_table_booter_itemChanged(QTableWidgetItem* item)
 void MainWindow::on_table_dp_add0_itemChanged(QTableWidgetItem* item)
 {
     Q_UNUSED(item);
-    this->setWindowModified(true);
+    if (!loading)
+        this->setWindowModified(true);
 }
 
 void MainWindow::on_table_dp_del0_itemChanged(QTableWidgetItem* item)
 {
     Q_UNUSED(item);
-    this->setWindowModified(true);
+    if (!loading)
+        this->setWindowModified(true);
 }
 
 void MainWindow::on_table_kernel_add_itemChanged(QTableWidgetItem* item)
@@ -7367,19 +7378,25 @@ void MainWindow::on_tableTools_itemChanged(QTableWidgetItem* item)
 void MainWindow::on_table_nv_add0_itemChanged(QTableWidgetItem* item)
 {
     Q_UNUSED(item);
-    this->setWindowModified(true);
+
+    if (!loading)
+        this->setWindowModified(true);
 }
 
 void MainWindow::on_table_nv_del0_itemChanged(QTableWidgetItem* item)
 {
     Q_UNUSED(item);
-    this->setWindowModified(true);
+
+    if (!loading)
+        this->setWindowModified(true);
 }
 
 void MainWindow::on_table_nv_ls0_itemChanged(QTableWidgetItem* item)
 {
     Q_UNUSED(item);
-    this->setWindowModified(true);
+
+    if (!loading)
+        this->setWindowModified(true);
 }
 
 void MainWindow::on_tableDevices_itemChanged(QTableWidgetItem* item)
@@ -9368,7 +9385,10 @@ void MainWindow::resizeEvent(QResizeEvent* event)
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m6.png"), tr("NVRAM")));
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m7.png"), tr("PlatformInfo")));
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m8.png"), tr("UEFI")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
+
+    if (win)
+        ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
+
     ui->listMain->setCurrentRow(index);
 }
 
