@@ -15,5 +15,6 @@
         <file>icon/m6.png</file>
         <file>icon/m7.png</file>
         <file>icon/m8.png</file>
+        <file>icon/m9.png</file>
     </qresource>
 </RCC>

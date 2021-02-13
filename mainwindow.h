@@ -138,6 +138,20 @@ public:
 
     bool copyFileToPath(QString sourceDir, QString toDir, bool coverFileIfExist);
 
+    QString getWMIC(const QString& cmd);
+    QString getCpuName();
+    QString getCpuId();
+    QString getCpuCoresNum();
+    QString getCpuLogicalProcessorsNum();
+    QString getDiskNum();
+    QString getBaseBordNum();
+    QString getBiosNum();
+    QString getMainboardName();
+    QString getMainboardUUID();
+    QString getMainboardVendor();
+
+    QString getMacInfo(const QString& cmd);
+
 public slots:
     void on_GenerateEFI();
 
@@ -1081,6 +1095,8 @@ private:
     bool pickerAttributes = false;
 
     void init_menu();
+
+    void init_hardware_info();
 
     bool closeSave = false;
 

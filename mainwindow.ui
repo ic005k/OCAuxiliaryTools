@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1250</width>
+    <width>1300</width>
     <height>759</height>
    </rect>
   </property>
@@ -57,7 +57,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>8</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7132,6 +7132,23 @@ Enable this option to be able to see all the boot options when having multiple d
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab_42">
+       <attribute name="title">
+        <string>Hardware Information</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_69">
+        <item row="0" column="0">
+         <widget class="QListWidget" name="listHardwareInfo"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QToolButton" name="btnGenerateFromHardware">
+          <property name="text">
+           <string>Generate EFI folder on the desktop from hardware information (experimental in nature)</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="tab_36">
        <attribute name="title">
         <string>DiskInfo</string>
@@ -7151,7 +7168,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1250</width>
+     <width>1300</width>
      <height>24</height>
     </rect>
    </property>

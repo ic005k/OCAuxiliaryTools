@@ -60,6 +60,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     init_menu();
 
+    init_hardware_info();
+
     aboutDlg = new aboutDialog(this);
     myDatabase = new dlgDatabase(this);
 
@@ -158,6 +160,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     ui->gridLayout_43->setMargin(0);
 
+    ui->gridLayout_69->setMargin(0);
+
     init_tr_str();
 
     initui_booter();
@@ -171,8 +175,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     //接受文件拖放打开
     this->setAcceptDrops(true);
-
-    ui->tabTotal->removeTab(8);
 
     //设置QToolTip颜色
     /*QPalette palette = QToolTip::palette();
@@ -7004,6 +7006,64 @@ void MainWindow::on_nv04()
     }
 }
 
+void MainWindow::init_hardware_info()
+{
+    ui->btnGenerateFromHardware->setEnabled(false);
+    ui->tabTotal->removeTab(9);
+
+    if (win) {
+        ui->listHardwareInfo->addItem(tr("CpuName") + "  :  " + getCpuName());
+        ui->listHardwareInfo->addItem(tr("CpuId") + "  :  " + getCpuId());
+        ui->listHardwareInfo->addItem(tr("CpuCoresNum") + "  :  " + getCpuCoresNum());
+        ui->listHardwareInfo->addItem(tr("CpuCpuLogicalProcessorsNum") + "  :  " + getCpuLogicalProcessorsNum());
+
+        ui->listHardwareInfo->addItem("");
+
+        ui->listHardwareInfo->addItem(tr("MainboardName") + "  :  " + getMainboardName());
+        ui->listHardwareInfo->addItem(tr("BaseBordNum") + "  :  " + getBaseBordNum());
+        ui->listHardwareInfo->addItem(tr("MainboardUUID") + "  :  " + getMainboardUUID());
+        ui->listHardwareInfo->addItem(tr("BiosNum") + "  :  " + getBiosNum());
+        ui->listHardwareInfo->addItem(tr("MainboardVendor") + "  :  " + getMainboardVendor());
+
+        ui->listHardwareInfo->addItem("");
+
+        ui->listHardwareInfo->addItem(tr("DiskNum") + "  :  " + getDiskNum());
+
+        ui->listHardwareInfo->addItem("");
+
+        ui->listHardwareInfo->addItem(tr("Physical Memory") + "  :  " + getWMIC("wmic memorychip get Capacity"));
+    }
+
+    if (mac) {
+
+        //ui->listHardwareInfo->addItem(tr("CPU") + "  :  ");
+        ui->listHardwareInfo->addItem(tr("CPU") + "  :  \n\n" + getMacInfo("sysctl machdep.cpu"));
+
+        //ui->listHardwareInfo->addItem("");
+
+        //ui->listHardwareInfo->addItem(getMacInfo("system_profiler SPEthernetDataType"));
+
+        //ui->listHardwareInfo->addItem("");
+
+        //ui->listHardwareInfo->addItem(getMacInfo("system_profiler SPAudioDataType"));
+
+        //ui->listHardwareInfo->addItem("");
+
+        //ui->listHardwareInfo->addItem(getMacInfo("system_profiler SPCameraDataType"));
+
+        //ui->listHardwareInfo->addItem("");
+
+        //ui->listHardwareInfo->addItem(getMacInfo("system_profiler SPSerialATADataType"));
+
+        //ui->listHardwareInfo->addItem("");
+
+        //ui->listHardwareInfo->addItem(getMacInfo("system_profiler SPUSBDataType"));
+    }
+
+    if (linuxOS) {
+    }
+}
+
 void MainWindow::init_menu()
 {
     ui->listMain->setIconSize(QSize(35, 35));
@@ -7029,6 +7089,7 @@ void MainWindow::init_menu()
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m6.png"), tr("NVRAM")));
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m7.png"), tr("PlatformInfo")));
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m8.png"), tr("UEFI")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
     ui->listMain->setCurrentRow(0);
     ui->tabTotal->tabBar()->setHidden(true);
 
@@ -9244,6 +9305,15 @@ void MainWindow::on_listMain_itemSelectionChanged()
 
         ui->listSub->setCurrentRow(index);
     }
+
+    if (ui->listMain->currentRow() == 8) {
+
+        ui->tabTotal->setCurrentIndex(8);
+
+        ui->listSub->clear();
+        ui->listSub->setViewMode(QListWidget::IconMode);
+        ui->listSub->addItem(tr("Hardware Information"));
+    }
 }
 
 void MainWindow::on_listSub_itemSelectionChanged()
@@ -9298,5 +9368,85 @@ void MainWindow::resizeEvent(QResizeEvent* event)
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m6.png"), tr("NVRAM")));
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m7.png"), tr("PlatformInfo")));
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m8.png"), tr("UEFI")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
     ui->listMain->setCurrentRow(index);
+}
+
+QString MainWindow::getWMIC(const QString& cmd)
+{
+    QProcess p;
+    p.start(cmd);
+    p.waitForFinished();
+    QString result = QString::fromLocal8Bit(p.readAllStandardOutput());
+    QStringList list = cmd.split(" ");
+    result = result.remove(list.last(), Qt::CaseInsensitive);
+    result = result.replace("\r", "");
+    result = result.replace("\n", "");
+    result = result.simplified();
+    return result;
+}
+
+QString MainWindow::getCpuName() //获取cpu名称：wmic cpu get Name
+{
+    return getWMIC("wmic cpu get name");
+}
+
+QString MainWindow::getCpuId() //查询cpu序列号：wmic cpu get processorid
+{
+    return getWMIC("wmic cpu get processorid");
+}
+
+QString MainWindow::getCpuCoresNum() //获取cpu核心数：wmic cpu get NumberOfCores
+{
+    return getWMIC("wmic cpu get NumberOfCores");
+}
+
+QString MainWindow::getCpuLogicalProcessorsNum() //获取cpu线程数：wmic cpu get NumberOfLogicalProcessors
+{
+    return getWMIC("wmic cpu get NumberOfLogicalProcessors");
+}
+
+QString MainWindow::getDiskNum() //查看硬盘：wmic diskdrive get serialnumber
+{
+    return getWMIC("wmic diskdrive where index=0 get serialnumber");
+}
+
+QString MainWindow::getBaseBordNum() //查询主板序列号：wmic baseboard get serialnumber
+{
+    return getWMIC("wmic baseboard get serialnumber");
+}
+
+QString MainWindow::getBiosNum() //查询BIOS序列号：wmic bios get serialnumber
+{
+    return getWMIC("wmic bios get serialnumber");
+}
+
+QString MainWindow::getMainboardName()
+{
+    return getWMIC("wmic csproduct get Name");
+}
+
+QString MainWindow::getMainboardUUID()
+{
+    return getWMIC("wmic csproduct get uuid");
+}
+
+QString MainWindow::getMainboardVendor()
+{
+    return getWMIC("wmic csproduct get Vendor");
+}
+
+QString MainWindow::getMacInfo(const QString& cmd)
+{
+    QProcess p;
+    p.start(cmd);
+    p.waitForFinished();
+    QString result = QString::fromLocal8Bit(p.readAllStandardOutput());
+    //QStringList list = cmd.split(" ");
+    //result = result.remove(list.last(), Qt::CaseInsensitive);
+    //result = result.replace("\r", "");
+    //result = result.replace("\n", "");
+    //result = result.simplified();
+    result = result.replace("machdep.cpu.", "");
+    return result;
 }

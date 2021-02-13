@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>798</width>
-    <height>551</height>
+    <height>620</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,7 +37,7 @@
       <string>...</string>
      </property>
      <property name="icon">
-      <iconset resource="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc">
+      <iconset resource="qtocc.qrc">
        <normaloff>:/find.png</normaloff>:/find.png</iconset>
      </property>
      <property name="iconSize">
@@ -45,6 +45,16 @@
        <width>20</width>
        <height>20</height>
       </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QToolButton" name="btnRefreshAll">
+     <property name="toolTip">
+      <string>Save all profiles in the table to the latest version</string>
+     </property>
+     <property name="text">
+      <string>Refresh all</string>
      </property>
     </widget>
    </item>
@@ -71,20 +81,10 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="3">
-    <widget class="QToolButton" name="btnRefreshAll">
-     <property name="toolTip">
-      <string>Save all profiles in the table to the latest version</string>
-     </property>
-     <property name="text">
-      <string>Refresh all</string>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <resources>
-  <include location="../../../DataBak/qt-test/QtOpenCoreConfig/qtocc.qrc"/>
+  <include location="qtocc.qrc"/>
  </resources>
  <connections/>
 </ui>
