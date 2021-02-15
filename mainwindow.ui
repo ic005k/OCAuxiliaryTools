@@ -33,6 +33,9 @@
         <height>64</height>
        </size>
       </property>
+      <property name="movement">
+       <enum>QListView::Static</enum>
+      </property>
      </widget>
     </item>
     <item row="1" column="0">
@@ -57,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5766,7 +5769,7 @@ central registration process.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>7</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>

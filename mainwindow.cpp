@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210213";
+    CurVerison = "20210215";
     title = "OC Auxiliary Tools   V0.6.7    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -3760,6 +3760,7 @@ void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
     if (column == 3) {
 
         cboxReservedMemoryType = new QComboBox(this);
+        cboxReservedMemoryType->setEditable(true);
         QStringList sl_type;
         sl_type.append("");
         sl_type.append("Reserved");
@@ -7086,6 +7087,8 @@ void MainWindow::init_menu()
     //ui->listMain->setViewMode(QListView::IconMode);
     ui->listMain->setViewMode(QListWidget::IconMode);
     //ui->listMain->setViewMode(QListView::ListMode);
+    ui->listMain->setMovement(QListView::Static); //静止拖动
+    ui->listSub->setMovement(QListView::Static);
 
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m1.png"), tr("ACPI")));
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m2.png"), tr("Booter")));
@@ -9017,7 +9020,10 @@ void MainWindow::on_GenerateEFI()
         box.setText(tr("Finished generating the EFI folder on the desktop.") + "\n" + tr("The following files do not exist in the database at the moment, please add them yourself:") + "\n" + strDatabase);
     else
         box.setText(tr("Finished generating the EFI folder on the desktop."));
+
+    this->setFocus();
     box.exec();
+    ui->listMain->setFocus();
 }
 
 int MainWindow::deleteDirfile(QString dirName)
