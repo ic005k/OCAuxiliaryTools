@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -4436,7 +4436,7 @@ with existing Windows activation and custom OEM software but potentially breakin
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5155,19 +5155,12 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
               <x>20</x>
               <y>20</y>
               <width>691</width>
-              <height>197</height>
+              <height>209</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_40">
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editBID">
-               <property name="minimumSize">
-                <size>
-                 <width>500</width>
-                 <height>0</height>
-                </size>
-               </property>
-              </widget>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="editROM_2"/>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_61">
@@ -5184,15 +5177,6 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="editFirmwareFeatures"/>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="editMLB_2"/>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="editFirmwareFeaturesMask"/>
-             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_60">
                <property name="toolTip">
@@ -5205,6 +5189,20 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
                 <string>BID</string>
                </property>
               </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_106">
+               <property name="toolTip">
+                <string>Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id
+for boot services only. Value found on Macs is equal to SMBIOS SystemUUID.</string>
+               </property>
+               <property name="text">
+                <string>SystemUUID</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="editFirmwareFeatures"/>
              </item>
              <item row="3" column="0">
               <widget class="QLabel" name="label_63">
@@ -5221,20 +5219,11 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_62">
-               <property name="toolTip">
-                <string> Specifies the values of NVRAM variables:
-• 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:FirmwareFeaturesMask
-• 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ExtendedFirmwareFeaturesMask</string>
-               </property>
-               <property name="statusTip">
-                <string> This variable comes in pair with FirmwareFeatures.</string>
-               </property>
-               <property name="text">
-                <string>FirmwareFeaturesMask</string>
-               </property>
-              </widget>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="editMLB_2"/>
+             </item>
+             <item row="6" column="1">
+              <widget class="QLineEdit" name="editSystemUUID_PNVRAM"/>
              </item>
              <item row="4" column="0">
               <widget class="QLabel" name="label_64">
@@ -5251,22 +5240,56 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="editROM_2"/>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="editBID">
+               <property name="minimumSize">
+                <size>
+                 <width>500</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_106">
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="editFirmwareFeaturesMask"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_62">
                <property name="toolTip">
-                <string>Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id
-for boot services only. Value found on Macs is equal to SMBIOS SystemUUID.</string>
+                <string> Specifies the values of NVRAM variables:
+• 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:FirmwareFeaturesMask
+• 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ExtendedFirmwareFeaturesMask</string>
+               </property>
+               <property name="statusTip">
+                <string> This variable comes in pair with FirmwareFeatures.</string>
                </property>
                <property name="text">
-                <string>SystemUUID</string>
+                <string>FirmwareFeaturesMask</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_109">
+               <property name="toolTip">
+                <string>Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_SSN and 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:SSN.</string>
+               </property>
+               <property name="statusTip">
+                <string>Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_SSN and 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:SSN.</string>
+               </property>
+               <property name="text">
+                <string>SystemSerialNumber</string>
                </property>
               </widget>
              </item>
              <item row="5" column="1">
-              <widget class="QLineEdit" name="editSystemUUID_PNVRAM"/>
+              <widget class="QLineEdit" name="editSystemSerialNumber_PlatformNVRAM">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="statusTip">
+                <string/>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>

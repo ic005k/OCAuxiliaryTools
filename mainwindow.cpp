@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210215";
+    CurVerison = "20210217";
     title = "OC Auxiliary Tools   V0.6.7    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -2394,6 +2394,8 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     if (ui->editROM->text().trimmed() == "")
         ui->editROM->setText(ByteToHexStr(mapPlatformNVRAM["ROM"].toByteArray()));
 
+    ui->editSystemSerialNumber_PlatformNVRAM->setText(mapPlatformNVRAM["SystemSerialNumber"].toString());
+
     ui->editSystemUUID_PNVRAM->setText(mapPlatformNVRAM["SystemUUID"].toString());
 
     // SMBIOS
@@ -3312,6 +3314,8 @@ QVariantMap MainWindow::SavePlatformInfo()
     valueList["FirmwareFeatures"] = HexStrToByte(ui->editFirmwareFeatures->text());
     valueList["FirmwareFeaturesMask"] = HexStrToByte(ui->editFirmwareFeaturesMask->text());
     valueList["ROM"] = HexStrToByte(ui->editROM_2->text());
+
+    valueList["SystemSerialNumber"] = ui->editSystemSerialNumber_PlatformNVRAM->text();
 
     valueList["SystemUUID"] = ui->editSystemUUID_PNVRAM->text();
 
@@ -8748,9 +8752,9 @@ void MainWindow::readResultCheckData()
 
     QMessageBox box;
 
-    if (result.trimmed().mid(0, 4) == "Done") {
-        str = tr("OK!");
-        strMsg = result + "\n" + str;
+    if (result.contains("No issues found")) {
+        str = tr("OK !");
+        strMsg = result + "\n\n" + str;
 
     } else
         strMsg = result;
