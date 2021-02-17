@@ -9480,3 +9480,9 @@ QString MainWindow::getMacInfo(const QString& cmd)
     result = result.replace("machdep.cpu.", "");
     return result;
 }
+
+void MainWindow::on_editSystemSerialNumber_PlatformNVRAM_textChanged(const QString& arg1)
+{
+    Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}

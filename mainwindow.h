@@ -1020,6 +1020,8 @@ private slots:
 
     void on_listSub_itemSelectionChanged();
 
+    void on_editSystemSerialNumber_PlatformNVRAM_textChanged(const QString& arg1);
+
 private:
     Ui::MainWindow* ui;
 
