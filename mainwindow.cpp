@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210217";
+    CurVerison = "20210219";
     title = "OC Auxiliary Tools   V0.6.7    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -2476,6 +2476,8 @@ void MainWindow::initui_UEFI()
     ui->cboxTextRenderer->addItem("SystemText");
     ui->cboxTextRenderer->addItem("SystemGeneric");
 
+    ui->chkGopPassThrough->setVisible(false);
+
     // ReservedMemory
 
     ui->table_uefi_ReservedMemory->setColumnWidth(0, 300);
@@ -2507,7 +2509,7 @@ void MainWindow::ParserUEFI(QVariantMap map)
     if (map.isEmpty())
         return;
 
-    //分析APFS
+    //APFS
     QVariantMap map_apfs = map["APFS"].toMap();
     ui->chkEnableJumpstart->setChecked(map_apfs["EnableJumpstart"].toBool());
     ui->chkGlobalConnect->setChecked(map_apfs["GlobalConnect"].toBool());
@@ -2516,7 +2518,7 @@ void MainWindow::ParserUEFI(QVariantMap map)
     ui->editMinDate->setText(map_apfs["MinDate"].toString());
     ui->editMinVersion->setText(map_apfs["MinVersion"].toString());
 
-    //分析Audio
+    //Audio
     QVariantMap map_audio = map["Audio"].toMap();
     ui->chkAudioSupport->setChecked(map_audio["AudioSupport"].toBool());
 
@@ -2545,7 +2547,7 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
     ui->chkConnectDrivers->setChecked(map["ConnectDrivers"].toBool());
 
-    //分析Input
+    //Input
     QVariantMap map_input = map["Input"].toMap();
     ui->chkKeyFiltering->setChecked(map_input["KeyFiltering"].toBool());
     ui->chkKeySupport->setChecked(map_input["KeySupport"].toBool());
@@ -2564,22 +2566,17 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
     // Output
     QVariantMap map_output = map["Output"].toMap();
-    ui->chkClearScreenOnModeSwitch->setChecked(
-        map_output["ClearScreenOnModeSwitch"].toBool());
-    ui->chkDirectGopRendering->setChecked(
-        map_output["DirectGopRendering"].toBool());
-    ui->chkIgnoreTextInGraphics->setChecked(
-        map_output["IgnoreTextInGraphics"].toBool());
-    ui->chkProvideConsoleGop->setChecked(
-        map_output["ProvideConsoleGop"].toBool());
-    ui->chkReconnectOnResChange->setChecked(
-        map_output["ReconnectOnResChange"].toBool());
-    ui->chkReplaceTabWithSpace->setChecked(
-        map_output["ReplaceTabWithSpace"].toBool());
-    ui->chkSanitiseClearScreen->setChecked(
-        map_output["SanitiseClearScreen"].toBool());
+    ui->chkClearScreenOnModeSwitch->setChecked(map_output["ClearScreenOnModeSwitch"].toBool());
+    ui->chkDirectGopRendering->setChecked(map_output["DirectGopRendering"].toBool());
+    ui->chkIgnoreTextInGraphics->setChecked(map_output["IgnoreTextInGraphics"].toBool());
+    ui->chkProvideConsoleGop->setChecked(map_output["ProvideConsoleGop"].toBool());
+    ui->chkReconnectOnResChange->setChecked(map_output["ReconnectOnResChange"].toBool());
+    ui->chkReplaceTabWithSpace->setChecked(map_output["ReplaceTabWithSpace"].toBool());
+    ui->chkSanitiseClearScreen->setChecked(map_output["SanitiseClearScreen"].toBool());
     ui->chkUgaPassThrough->setChecked(map_output["UgaPassThrough"].toBool());
     ui->chkForceResolution->setChecked(map_output["ForceResolution"].toBool());
+
+    //ui->chkGopPassThrough->setChecked(map_output["GopPassThrough"].toBool());
 
     ui->cboxConsoleMode->setCurrentText(map_output["ConsoleMode"].toString());
     ui->cboxResolution->setCurrentText(map_output["Resolution"].toString());
@@ -3433,6 +3430,8 @@ QVariantMap MainWindow::SaveUEFI()
     dictList["SanitiseClearScreen"] = getChkBool(ui->chkSanitiseClearScreen);
     dictList["UgaPassThrough"] = getChkBool(ui->chkUgaPassThrough);
     dictList["ForceResolution"] = getChkBool(ui->chkForceResolution);
+
+    //dictList["GopPassThrough"] = getChkBool(ui->chkGopPassThrough);
 
     dictList["ConsoleMode"] = ui->cboxConsoleMode->currentText();
     dictList["Resolution"] = ui->cboxResolution->currentText();
@@ -9405,6 +9404,9 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 QString MainWindow::getWMIC(const QString& cmd)
 {
     QProcess p;
+    QStringList sl;
+    QString str = "";
+    sl << str;
     p.start(cmd);
     p.waitForFinished();
     QString result = QString::fromLocal8Bit(p.readAllStandardOutput());
@@ -9469,7 +9471,9 @@ QString MainWindow::getMainboardVendor()
 QString MainWindow::getMacInfo(const QString& cmd)
 {
     QProcess p;
-    p.start(cmd);
+    QStringList sl;
+    sl << "";
+    p.start(cmd, sl);
     p.waitForFinished();
     QString result = QString::fromLocal8Bit(p.readAllStandardOutput());
     //QStringList list = cmd.split(" ");

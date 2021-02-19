@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5271,10 +5271,12 @@ for boot services only. Value found on Macs is equal to SMBIOS SystemUUID.</stri
              <item row="5" column="0">
               <widget class="QLabel" name="label_109">
                <property name="toolTip">
-                <string>Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_SSN and 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:SSN.</string>
+                <string>Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_SSN and
+ 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:SSN.</string>
                </property>
                <property name="statusTip">
-                <string>Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_SSN and 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:SSN.</string>
+                <string>Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_SSN and
+ 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:SSN.</string>
                </property>
                <property name="text">
                 <string>SystemSerialNumber</string>
@@ -5792,7 +5794,7 @@ central registration process.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>7</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -6354,158 +6356,11 @@ protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER
            <attribute name="title">
             <string>Output</string>
            </attribute>
-           <widget class="QWidget" name="gridLayoutWidget_11">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>20</y>
-              <width>899</width>
-              <height>181</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_34">
-             <item row="1" column="3">
-              <widget class="QCheckBox" name="chkSanitiseClearScreen">
-               <property name="toolTip">
-                <string> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear
-screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
-Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to
-empty string for this to work.</string>
-               </property>
-               <property name="text">
-                <string>SanitiseClearScreen</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="chkReconnectOnResChange">
-               <property name="toolTip">
-                <string>On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which
-produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
-Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is
-optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless
-required.</string>
-               </property>
-               <property name="statusTip">
-                <string>Reconnect console controllers after changing screen resolution.</string>
-               </property>
-               <property name="text">
-                <string>ReconnectOnResChange</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="chkDirectGopRendering">
-               <property name="toolTip">
-                <string>On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,
-it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.</string>
-               </property>
-               <property name="statusTip">
-                <string> Use builtin graphics output protocol renderer for console.</string>
-               </property>
-               <property name="text">
-                <string>DirectGopRendering</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="chkForceResolution">
-               <property name="toolTip">
-                <string>Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such
-as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max
-will try to pull the largest available resolution from the connected display’s EDID.
-Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is
-currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel
-iGPUs.</string>
-               </property>
-               <property name="text">
-                <string>ForceResolution</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
-               <property name="toolTip">
-                <string> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,
-because random text may appear over graphical images and cause UI corruption. Setting this option to true will
-discard all text output when console control is in mode different from Text.
-Note: This option only applies to System renderer.</string>
-               </property>
-               <property name="text">
-                <string>IgnoreTextInGraphics</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkProvideConsoleGop">
-               <property name="toolTip">
-                <string>macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact
-location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and
-UGA, if present, are available on the console handle.
-Note: This option will also replace broken GOP protocol on console handle, which may be the case on MacPro5,1
-with newer GPUs.</string>
-               </property>
-               <property name="statusTip">
-                <string>Ensure GOP (Graphics Output Protocol) on console handle.</string>
-               </property>
-               <property name="text">
-                <string>ProvideConsoleGop</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="chkUgaPassThrough">
-               <property name="toolTip">
-                <string>Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI
-applications like EfiBoot from 10.4.</string>
-               </property>
-               <property name="statusTip">
-                <string> Provide UGA protocol instances on top of GOP protocol.</string>
-               </property>
-               <property name="text">
-                <string>UgaPassThrough</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="chkReplaceTabWithSpace">
-               <property name="toolTip">
-                <string>Some firmwares do not print tab characters or even everything that follows them, causing difficulties
-or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. This option
-makes the console output spaces instead of tabs.
-Note: This option only applies to System renderer.</string>
-               </property>
-               <property name="text">
-                <string>ReplaceTabWithSpace</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
-               <property name="toolTip">
-                <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
-fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
-switching to text mode.
-Note: This option only applies to System renderer.</string>
-               </property>
-               <property name="statusTip">
-                <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
- fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
- switching to text mode.
- Note: This option only applies to System renderer.</string>
-               </property>
-               <property name="text">
-                <string>ClearScreenOnModeSwitch</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
            <widget class="QWidget" name="gridLayoutWidget_12">
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>260</y>
+              <y>300</y>
               <width>831</width>
               <height>104</height>
              </rect>
@@ -6600,6 +6455,160 @@ BuiltinGraphics may work for them.</string>
               <widget class="QComboBox" name="cboxTextRenderer">
                <property name="editable">
                 <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="gridLayoutWidget_6">
+            <property name="geometry">
+             <rect>
+              <x>13</x>
+              <y>29</y>
+              <width>831</width>
+              <height>201</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_34">
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="chkForceResolution">
+               <property name="toolTip">
+                <string>Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such
+as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max
+will try to pull the largest available resolution from the connected display’s EDID.
+Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is
+currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel
+iGPUs.</string>
+               </property>
+               <property name="text">
+                <string>ForceResolution</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="chkDirectGopRendering">
+               <property name="toolTip">
+                <string>On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,
+it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.</string>
+               </property>
+               <property name="statusTip">
+                <string> Use builtin graphics output protocol renderer for console.</string>
+               </property>
+               <property name="text">
+                <string>DirectGopRendering</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
+               <property name="toolTip">
+                <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
+fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
+switching to text mode.
+Note: This option only applies to System renderer.</string>
+               </property>
+               <property name="statusTip">
+                <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
+ fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
+ switching to text mode.
+ Note: This option only applies to System renderer.</string>
+               </property>
+               <property name="text">
+                <string>ClearScreenOnModeSwitch</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QCheckBox" name="chkGopPassThrough">
+               <property name="text">
+                <string>GopPassThrough</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
+               <property name="toolTip">
+                <string> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,
+because random text may appear over graphical images and cause UI corruption. Setting this option to true will
+discard all text output when console control is in mode different from Text.
+Note: This option only applies to System renderer.</string>
+               </property>
+               <property name="text">
+                <string>IgnoreTextInGraphics</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkProvideConsoleGop">
+               <property name="toolTip">
+                <string>macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact
+location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and
+UGA, if present, are available on the console handle.
+Note: This option will also replace broken GOP protocol on console handle, which may be the case on MacPro5,1
+with newer GPUs.</string>
+               </property>
+               <property name="statusTip">
+                <string>Ensure GOP (Graphics Output Protocol) on console handle.</string>
+               </property>
+               <property name="text">
+                <string>ProvideConsoleGop</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="chkReconnectOnResChange">
+               <property name="toolTip">
+                <string>On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which
+produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
+Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is
+optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless
+required.</string>
+               </property>
+               <property name="statusTip">
+                <string>Reconnect console controllers after changing screen resolution.</string>
+               </property>
+               <property name="text">
+                <string>ReconnectOnResChange</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="chkReplaceTabWithSpace">
+               <property name="toolTip">
+                <string>Some firmwares do not print tab characters or even everything that follows them, causing difficulties
+or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. This option
+makes the console output spaces instead of tabs.
+Note: This option only applies to System renderer.</string>
+               </property>
+               <property name="text">
+                <string>ReplaceTabWithSpace</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QCheckBox" name="chkSanitiseClearScreen">
+               <property name="toolTip">
+                <string> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear
+screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
+Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to
+empty string for this to work.</string>
+               </property>
+               <property name="text">
+                <string>SanitiseClearScreen</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="chkUgaPassThrough">
+               <property name="toolTip">
+                <string>Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI
+applications like EfiBoot from 10.4.</string>
+               </property>
+               <property name="statusTip">
+                <string> Provide UGA protocol instances on top of GOP protocol.</string>
+               </property>
+               <property name="text">
+                <string>UgaPassThrough</string>
                </property>
               </widget>
              </item>
@@ -7258,22 +7267,12 @@ Enable this option to be able to see all the boot options when having multiple d
     <string>Save As...</string>
    </property>
   </action>
-  <action name="actionAbout">
-   <property name="text">
-    <string>关于-About</string>
-   </property>
-  </action>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
    </property>
   </action>
   <action name="actionAbout_2">
-   <property name="text">
-    <string>About</string>
-   </property>
-  </action>
-  <action name="actionAbout_3">
    <property name="text">
     <string>About</string>
    </property>
@@ -7341,16 +7340,6 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="btnCheckUpdate">
    <property name="text">
     <string>CheckUpdate</string>
-   </property>
-  </action>
-  <action name="actionAbout_4">
-   <property name="text">
-    <string>About</string>
-   </property>
-  </action>
-  <action name="actionConfigDatabase">
-   <property name="text">
-    <string>Config Database</string>
    </property>
   </action>
   <action name="actionDatabase">
