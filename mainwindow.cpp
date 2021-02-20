@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210219";
+    CurVerison = "20210220";
     title = "OC Auxiliary Tools   V0.6.7    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -4203,9 +4203,12 @@ void MainWindow::addKexts(QStringList FileName)
         t->setItem(row - 1, 0,
             new QTableWidgetItem(QFileInfo(FileName[j]).fileName()));
         t->setItem(row - 1, 1, new QTableWidgetItem(""));
-        t->setItem(
-            row - 1, 2,
-            new QTableWidgetItem("Contents/MacOS/" + fileInfoList.fileName()));
+
+        if (fileInfoList.fileName() != "")
+            t->setItem(row - 1, 2, new QTableWidgetItem("Contents/MacOS/" + fileInfoList.fileName()));
+        else
+            t->setItem(row - 1, 2, new QTableWidgetItem(""));
+
         t->setItem(row - 1, 3, new QTableWidgetItem("Contents/Info.plist"));
         t->setItem(row - 1, 4, new QTableWidgetItem(""));
         t->setItem(row - 1, 5, new QTableWidgetItem(""));
@@ -4251,7 +4254,9 @@ void MainWindow::addKexts(QStringList FileName)
                         t->setRowCount(row);
                         t->setItem(row - 1, 0, new QTableWidgetItem(QFileInfo(FileName[j]).fileName() + "/Contents/PlugIns/" + kext_file[i + 2]));
                         t->setItem(row - 1, 1, new QTableWidgetItem(""));
+
                         t->setItem(row - 1, 2, new QTableWidgetItem("Contents/MacOS/" + fileInfoList.fileName()));
+
                         t->setItem(row - 1, 3, new QTableWidgetItem("Contents/Info.plist"));
                         t->setItem(row - 1, 4, new QTableWidgetItem(""));
                         t->setItem(row - 1, 5, new QTableWidgetItem(""));
