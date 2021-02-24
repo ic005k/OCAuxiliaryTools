@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210220";
+    CurVerison = "20210224";
     title = "OC Auxiliary Tools   V0.6.7    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -2476,8 +2476,6 @@ void MainWindow::initui_UEFI()
     ui->cboxTextRenderer->addItem("SystemText");
     ui->cboxTextRenderer->addItem("SystemGeneric");
 
-    ui->chkGopPassThrough->setVisible(false);
-
     // ReservedMemory
 
     ui->table_uefi_ReservedMemory->setColumnWidth(0, 300);
@@ -2576,7 +2574,7 @@ void MainWindow::ParserUEFI(QVariantMap map)
     ui->chkUgaPassThrough->setChecked(map_output["UgaPassThrough"].toBool());
     ui->chkForceResolution->setChecked(map_output["ForceResolution"].toBool());
 
-    //ui->chkGopPassThrough->setChecked(map_output["GopPassThrough"].toBool());
+    ui->chkGopPassThrough->setChecked(map_output["GopPassThrough"].toBool());
 
     ui->cboxConsoleMode->setCurrentText(map_output["ConsoleMode"].toString());
     ui->cboxResolution->setCurrentText(map_output["Resolution"].toString());
@@ -3431,7 +3429,7 @@ QVariantMap MainWindow::SaveUEFI()
     dictList["UgaPassThrough"] = getChkBool(ui->chkUgaPassThrough);
     dictList["ForceResolution"] = getChkBool(ui->chkForceResolution);
 
-    //dictList["GopPassThrough"] = getChkBool(ui->chkGopPassThrough);
+    dictList["GopPassThrough"] = getChkBool(ui->chkGopPassThrough);
 
     dictList["ConsoleMode"] = ui->cboxConsoleMode->currentText();
     dictList["Resolution"] = ui->cboxResolution->currentText();
@@ -9493,5 +9491,10 @@ QString MainWindow::getMacInfo(const QString& cmd)
 void MainWindow::on_editSystemSerialNumber_PlatformNVRAM_textChanged(const QString& arg1)
 {
     Q_UNUSED(arg1);
+    this->setWindowModified(true);
+}
+
+void MainWindow::on_chkGopPassThrough_clicked()
+{
     this->setWindowModified(true);
 }

@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -6463,13 +6463,27 @@ BuiltinGraphics may work for them.</string>
            <widget class="QWidget" name="gridLayoutWidget_6">
             <property name="geometry">
              <rect>
-              <x>13</x>
+              <x>20</x>
               <y>29</y>
               <width>831</width>
-              <height>201</height>
+              <height>191</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_34">
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="chkDirectGopRendering">
+               <property name="toolTip">
+                <string>On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,
+it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.</string>
+               </property>
+               <property name="statusTip">
+                <string> Use builtin graphics output protocol renderer for console.</string>
+               </property>
+               <property name="text">
+                <string>DirectGopRendering</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="2">
               <widget class="QCheckBox" name="chkForceResolution">
                <property name="toolTip">
@@ -6482,20 +6496,6 @@ iGPUs.</string>
                </property>
                <property name="text">
                 <string>ForceResolution</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="chkDirectGopRendering">
-               <property name="toolTip">
-                <string>On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,
-it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.</string>
-               </property>
-               <property name="statusTip">
-                <string> Use builtin graphics output protocol renderer for console.</string>
-               </property>
-               <property name="text">
-                <string>DirectGopRendering</string>
                </property>
               </widget>
              </item>
@@ -6518,44 +6518,47 @@ Note: This option only applies to System renderer.</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="2">
-              <widget class="QCheckBox" name="chkGopPassThrough">
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="chkUgaPassThrough">
+               <property name="toolTip">
+                <string>Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI
+applications like EfiBoot from 10.4.</string>
+               </property>
+               <property name="statusTip">
+                <string> Provide UGA protocol instances on top of GOP protocol.</string>
+               </property>
                <property name="text">
-                <string>GopPassThrough</string>
+                <string>UgaPassThrough</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="chkSanitiseClearScreen">
                <property name="toolTip">
-                <string> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,
-because random text may appear over graphical images and cause UI corruption. Setting this option to true will
-discard all text output when console control is in mode different from Text.
+                <string> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear
+screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
+Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to
+empty string for this to work.</string>
+               </property>
+               <property name="text">
+                <string>SanitiseClearScreen</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QCheckBox" name="chkReplaceTabWithSpace">
+               <property name="toolTip">
+                <string>Some firmwares do not print tab characters or even everything that follows them, causing difficulties
+or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. This option
+makes the console output spaces instead of tabs.
 Note: This option only applies to System renderer.</string>
                </property>
                <property name="text">
-                <string>IgnoreTextInGraphics</string>
+                <string>ReplaceTabWithSpace</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkProvideConsoleGop">
-               <property name="toolTip">
-                <string>macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact
-location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and
-UGA, if present, are available on the console handle.
-Note: This option will also replace broken GOP protocol on console handle, which may be the case on MacPro5,1
-with newer GPUs.</string>
-               </property>
-               <property name="statusTip">
-                <string>Ensure GOP (Graphics Output Protocol) on console handle.</string>
-               </property>
-               <property name="text">
-                <string>ProvideConsoleGop</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
+             <item row="1" column="2">
               <widget class="QCheckBox" name="chkReconnectOnResChange">
                <property name="toolTip">
                 <string>On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which
@@ -6572,43 +6575,47 @@ required.</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="chkReplaceTabWithSpace">
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="chkProvideConsoleGop">
                <property name="toolTip">
-                <string>Some firmwares do not print tab characters or even everything that follows them, causing difficulties
-or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. This option
-makes the console output spaces instead of tabs.
+                <string>macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact
+location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and
+UGA, if present, are available on the console handle.
+Note: This option will also replace broken GOP protocol on console handle, which may be the case on MacPro5,1
+with newer GPUs.</string>
+               </property>
+               <property name="statusTip">
+                <string>Ensure GOP (Graphics Output Protocol) on console handle.</string>
+               </property>
+               <property name="text">
+                <string>ProvideConsoleGop</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
+               <property name="toolTip">
+                <string> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,
+because random text may appear over graphical images and cause UI corruption. Setting this option to true will
+discard all text output when console control is in mode different from Text.
 Note: This option only applies to System renderer.</string>
                </property>
                <property name="text">
-                <string>ReplaceTabWithSpace</string>
+                <string>IgnoreTextInGraphics</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="3">
-              <widget class="QCheckBox" name="chkSanitiseClearScreen">
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkGopPassThrough">
                <property name="toolTip">
-                <string> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear
-screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
-Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to
-empty string for this to work.</string>
-               </property>
-               <property name="text">
-                <string>SanitiseClearScreen</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="chkUgaPassThrough">
-               <property name="toolTip">
-                <string>Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI
-applications like EfiBoot from 10.4.</string>
+                <string>Some types of firmware do not implement the GOP protocol, this option provides it via a UGA-based proxy.
+This option requires ProvideConsoleGop to be enabled.</string>
                </property>
                <property name="statusTip">
-                <string> Provide UGA protocol instances on top of GOP protocol.</string>
+                <string>Provide GOP protocol instances on top of UGA protocol instances.</string>
                </property>
                <property name="text">
-                <string>UgaPassThrough</string>
+                <string>GopPassThrough</string>
                </property>
               </widget>
              </item>

@@ -1022,6 +1022,8 @@ private slots:
 
     void on_editSystemSerialNumber_PlatformNVRAM_textChanged(const QString& arg1);
 
+    void on_chkGopPassThrough_clicked();
+
 private:
     Ui::MainWindow* ui;
 
