@@ -952,8 +952,6 @@ private slots:
 
     void on_editKeyForgetThreshold_textEdited(const QString& arg1);
 
-    void on_editKeyMergeThreshold_textEdited(const QString& arg1);
-
     void on_cboxKeySupportMode_currentIndexChanged(const QString& arg1);
 
     void on_editPointerSupportMode_textEdited(const QString& arg1);

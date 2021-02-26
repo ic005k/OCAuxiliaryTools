@@ -5794,7 +5794,7 @@ central registration process.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -6185,20 +6185,44 @@ specified codec (AudioCodec) located on the audio controller (AudioDevice).</str
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_33">
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="chkKeyFiltering">
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="chkPointerSupport">
                <property name="toolTip">
-                <string>Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
-This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and
-108 in version 2.8).</string>
+                <string>This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM
+protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER_PROTOCOL is broken.</string>
                </property>
                <property name="statusTip">
-                <string> Enable keyboard input sanity checking.</string>
+                <string> Enable internal pointer driver.</string>
                </property>
                <property name="text">
-                <string>KeyFiltering</string>
+                <string>PointerSupport</string>
                </property>
               </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_23">
+               <property name="toolTip">
+                <string>• Auto — Performs automatic choice as available with the following preference: AMI, V2, V1. • V1 — Uses UEFI standard legacy input protocol EFI_SIMPLE_TEXT_INPUT_PROTOCOL. • V2 — Uses UEFI standard modern input protocol EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL. • AMI — Uses APTIO input protocol AMI_EFIKEYCODE_PROTOCOL.
+Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular specified protocol. This may
+change in the future versions.</string>
+               </property>
+               <property name="statusTip">
+                <string> Set internal keyboard input translation to AppleKeyMapAggregator protocol mode.</string>
+               </property>
+               <property name="text">
+                <string>KeySupportMode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cboxKeySupportMode">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="editPointerSupportMode"/>
              </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_37">
@@ -6224,21 +6248,40 @@ every platform is different it may be reasonable to check every value from 1 to 
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_38">
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="chkKeySupport">
                <property name="toolTip">
-                <string>Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS
-boards. More details can be found in LongSoft/UefiTool#116.</string>
+                <string>This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),
+to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as
+OpenUsbKbDxe, this option should never be enabled.</string>
                </property>
                <property name="statusTip">
-                <string> Set OEM protocol used for internal pointer driver.</string>
+                <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
                </property>
                <property name="text">
-                <string>PointerSupportMode</string>
+                <string>KeySupport</string>
                </property>
               </widget>
              </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="editTimerResolution"/>
+             </item>
              <item row="4" column="0">
+              <widget class="QCheckBox" name="chkKeyFiltering">
+               <property name="toolTip">
+                <string>Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
+This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and
+108 in version 2.8).</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable keyboard input sanity checking.</string>
+               </property>
+               <property name="text">
+                <string>KeyFiltering</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
               <widget class="QLabel" name="label_40">
                <property name="toolTip">
                 <string>This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
@@ -6255,59 +6298,6 @@ interface. Apple boards use 100000. You may leave it as 0 in case there are issu
               </widget>
              </item>
              <item row="4" column="1">
-              <widget class="QLineEdit" name="editTimerResolution"/>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="editPointerSupportMode"/>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="editKeyMergeThreshold"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_23">
-               <property name="toolTip">
-                <string>• Auto — Performs automatic choice as available with the following preference: AMI, V2, V1. • V1 — Uses UEFI standard legacy input protocol EFI_SIMPLE_TEXT_INPUT_PROTOCOL. • V2 — Uses UEFI standard modern input protocol EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL. • AMI — Uses APTIO input protocol AMI_EFIKEYCODE_PROTOCOL.
-Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular specified protocol. This may
-change in the future versions.</string>
-               </property>
-               <property name="statusTip">
-                <string> Set internal keyboard input translation to AppleKeyMapAggregator protocol mode.</string>
-               </property>
-               <property name="text">
-                <string>KeySupportMode</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QComboBox" name="cboxKeySupportMode">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editKeyForgetThreshold"/>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_39">
-               <property name="toolTip">
-                <string>Similarly to KeyForgetThreshold, this option works around the sequential nature of key submission. To be able
-to recognise simultaneously pressed keys in the situation when all keys arrive sequentially, we are required to set
-a timeout within which we assume the keys were pressed together.
-Holding multiple keys results in reports every 2 and 1 milliseconds for VMware and APTIO V respectively.
-Pressing keys one after the other results in delays of at least 6 and 10 milliseconds for the same platforms. The
-recommended value for this option is 2 milliseconds, but it may be decreased for faster platforms and increased
-for slower.</string>
-               </property>
-               <property name="statusTip">
-                <string>Assume simultaneous combination for keys submitted within this timeout in milliseconds.</string>
-               </property>
-               <property name="text">
-                <string>KeyMergeThreshold</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
               <widget class="QCheckBox" name="chkKeySwap">
                <property name="toolTip">
                 <string>This option may be useful for keyboard layouts with Option key situated to the right of Command key.</string>
@@ -6320,32 +6310,20 @@ for slower.</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="chkKeySupport">
-               <property name="toolTip">
-                <string>This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),
-to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as
-OpenUsbKbDxe, this option should never be enabled.</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
-               </property>
-               <property name="text">
-                <string>KeySupport</string>
-               </property>
-              </widget>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="editKeyForgetThreshold"/>
              </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="chkPointerSupport">
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_38">
                <property name="toolTip">
-                <string>This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM
-protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER_PROTOCOL is broken.</string>
+                <string>Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS
+boards. More details can be found in LongSoft/UefiTool#116.</string>
                </property>
                <property name="statusTip">
-                <string> Enable internal pointer driver.</string>
+                <string> Set OEM protocol used for internal pointer driver.</string>
                </property>
                <property name="text">
-                <string>PointerSupport</string>
+                <string>PointerSupportMode</string>
                </property>
               </widget>
              </item>

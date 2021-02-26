@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210224";
+    CurVerison = "20210226";
     title = "OC Auxiliary Tools   V0.6.7    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -2554,7 +2554,9 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
     ui->editKeyForgetThreshold->setText(
         map_input["KeyForgetThreshold"].toString());
-    ui->editKeyMergeThreshold->setText(map_input["KeyMergeThreshold"].toString());
+
+    //ui->editKeyMergeThreshold->setText(map_input["KeyMergeThreshold"].toString());
+
     ui->editPointerSupportMode->setText(
         map_input["PointerSupportMode"].toString());
     ui->editTimerResolution->setText(map_input["TimerResolution"].toString());
@@ -3409,7 +3411,9 @@ QVariantMap MainWindow::SaveUEFI()
     dictList["PointerSupport"] = getChkBool(ui->chkPointerSupport);
 
     dictList["KeyForgetThreshold"] = ui->editKeyForgetThreshold->text().toLongLong();
-    dictList["KeyMergeThreshold"] = ui->editKeyMergeThreshold->text().toLongLong();
+
+    //dictList["KeyMergeThreshold"] = ui->editKeyMergeThreshold->text().toLongLong();
+
     dictList["PointerSupportMode"] = ui->editPointerSupportMode->text();
     dictList["TimerResolution"] = ui->editTimerResolution->text().toLongLong();
 
@@ -8619,12 +8623,6 @@ void MainWindow::on_editKeyForgetThreshold_textEdited(const QString& arg1)
     this->setWindowModified(true);
 }
 
-void MainWindow::on_editKeyMergeThreshold_textEdited(const QString& arg1)
-{
-    Q_UNUSED(arg1);
-    this->setWindowModified(true);
-}
-
 void MainWindow::on_cboxKeySupportMode_currentIndexChanged(
     const QString& arg1)
 {
@@ -8956,10 +8954,10 @@ void MainWindow::on_GenerateEFI()
             strDatabase = strDatabase + "EFI/OC/ACPI/" + file + "\n";
     }
 
-    //OC/Bootstrap
-    QString pathOCBootstrap = pathTarget + "OC/Bootstrap/";
-    if (dir.mkpath(pathOCBootstrap)) { }
-    QFile::copy(pathSource + "EFI/OC/Bootstrap/Bootstrap.efi", pathOCBootstrap + "Bootstrap.efi");
+    //OC/Bootstrap（在新版OC中已弃用）
+    //QString pathOCBootstrap = pathTarget + "OC/Bootstrap/";
+    //if (dir.mkpath(pathOCBootstrap)) { }
+    //QFile::copy(pathSource + "EFI/OC/Bootstrap/Bootstrap.efi", pathOCBootstrap + "Bootstrap.efi");
 
     //OC/Drivers
     QString pathOCDrivers = pathTarget + "OC/Drivers/";
