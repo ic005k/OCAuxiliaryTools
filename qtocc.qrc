@@ -16,5 +16,17 @@
         <file>icon/m7.png</file>
         <file>icon/m8.png</file>
         <file>icon/m9.png</file>
+        <file>icon/open.png</file>
+        <file>icon/save.png</file>
+        <file>icon/saveas.png</file>
+        <file>icon/db.png</file>
+        <file>icon/efi.png</file>
+        <file>icon/esp.png</file>
+        <file>icon/ov.png</file>
+        <file>icon/opendb.png</file>
+        <file>icon/redo.png</file>
+        <file>icon/undo.png</file>
+        <file>icon/cu.png</file>
+        <file>icon/ocf.png</file>
     </qresource>
 </RCC>

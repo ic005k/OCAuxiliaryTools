@@ -18,6 +18,8 @@
 #include <QTextCodec>
 #include <QToolTip>
 #include <QTranslator>
+#include <QUndoStack>
+#include <QUndoView>
 #include <QUuid>
 
 //网络相关头文件
@@ -53,6 +55,13 @@ public:
     ~MainWindow();
 
     RecentFiles* m_recentFiles;
+    QLineEdit* lineEdit;
+    QTableWidget* myTable = new QTableWidget;
+    void initLineEdit(QTableWidget* Table, int previousRow, int previousColumn, int currentRow, int currentColumn);
+    void removeWidget(QTableWidget* table);
+    void removeAllLineEdit();
+    bool writeINI = false;
+    void goTable(QTableWidget* table);
 
     void ParserACPI(QVariantMap map);
     void ParserBooter(QVariantMap map);
@@ -90,14 +99,13 @@ public:
     void add_item(QTableWidget* table, int total_column);
     void del_item(QTableWidget* table);
 
-    void write_ini(QString table_name, QTableWidget* mytable, int i);
-    void read_ini(QString table_name, QTableWidget* mytable, int i);
+    void write_ini(QTableWidget* table, QTableWidget* mytable, int i);
+    void read_ini(QTableWidget* table, QTableWidget* mytable, int i);
 
     void init_key_class_value(QTableWidget* table, QTableWidget* subtable);
-    void init_value(QVariantMap map_fun, QTableWidget* table,
-        QTableWidget* subtable);
-    void write_value_ini(QString tablename, QTableWidget* subtable, int i);
-    void read_value_ini(QString table_name, QTableWidget* mytable, int i);
+    void init_value(QVariantMap map_fun, QTableWidget* table, QTableWidget* subtable);
+    void write_value_ini(QTableWidget* table, QTableWidget* subtable, int i);
+    void read_value_ini(QTableWidget* table, QTableWidget* mytable, int i);
 
     QByteArray HexStringToByteArray(QString HexString);
     QByteArray HexStrToByte(QString value);
@@ -1022,10 +1030,132 @@ private slots:
 
     void on_chkGopPassThrough_clicked();
 
+    void on_table_dp_add0_itemSelectionChanged();
+
+    void on_table_dp_del0_itemSelectionChanged();
+
+    void on_table_nv_add0_itemSelectionChanged();
+
+    void on_table_nv_del0_itemSelectionChanged();
+
+    void on_table_nv_ls0_itemSelectionChanged();
+
+    void on_table_acpi_add_itemEntered(QTableWidgetItem* item);
+
+    void on_table_acpi_add_cellEntered(int row, int column);
+
+    void on_lineEdit_textChanged(const QString& arg1);
+
+    void on_lineEdit_textEdited(const QString& arg1);
+
+    void on_table_nv_ls_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_acpi_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_nv_add0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_acpi_del_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_acpi_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_booter_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_tableBlessOverride_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_tableEntries_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_tableTools_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_tableDevices_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_uefi_drivers_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_dp_add0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_dp_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_dp_del_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_tabBooter_currentChanged(int index);
+
+    void on_tabDP_currentChanged(int index);
+
+    void on_tabKernel_currentChanged(int index);
+
+    void on_tabMisc_currentChanged(int index);
+
+    void on_tabNVRAM_currentChanged(int index);
+
+    void on_tabPlatformInfo_currentChanged(int index);
+
+    void on_tabUEFI_currentChanged(int index);
+
+    void on_table_dp_add0_currentItemChanged(QTableWidgetItem* current, QTableWidgetItem* previous);
+
+    void on_table_nv_add0_currentItemChanged(QTableWidgetItem* current, QTableWidgetItem* previous);
+
+    void on_table_nv_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_nv_ls0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_nv_del_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_dp_add0_cellDoubleClicked(int row, int column);
+
+    void on_table_dp_add_cellDoubleClicked(int row, int column);
+
+    void on_table_dp_del0_cellDoubleClicked(int row, int column);
+
+    void on_table_acpi_add_cellDoubleClicked(int row, int column);
+
+    void on_table_acpi_del_cellDoubleClicked(int row, int column);
+
+    void on_table_acpi_patch_cellDoubleClicked(int row, int column);
+
+    void on_table_booter_cellDoubleClicked(int row, int column);
+
+    void on_table_Booter_patch_cellDoubleClicked(int row, int column);
+
+    void on_table_kernel_add_cellDoubleClicked(int row, int column);
+
+    void on_table_kernel_block_cellDoubleClicked(int row, int column);
+
+    void on_table_kernel_Force_cellDoubleClicked(int row, int column);
+
+    void on_table_kernel_patch_cellDoubleClicked(int row, int column);
+
+    void on_tableBlessOverride_cellDoubleClicked(int row, int column);
+
+    void on_tableEntries_cellDoubleClicked(int row, int column);
+
+    void on_tableTools_cellDoubleClicked(int row, int column);
+
+    void on_table_nv_add0_cellDoubleClicked(int row, int column);
+
+    void on_table_nv_add_cellDoubleClicked(int row, int column);
+
+    void on_table_nv_del0_cellDoubleClicked(int row, int column);
+
+    void on_table_nv_del_cellDoubleClicked(int row, int column);
+
+    void on_table_nv_ls0_cellDoubleClicked(int row, int column);
+
+    void on_table_nv_ls_cellDoubleClicked(int row, int column);
+
+    void on_tableDevices_cellDoubleClicked(int row, int column);
+
+    void on_table_uefi_drivers_cellDoubleClicked(int row, int column);
+
+    void on_table_uefi_ReservedMemory_cellDoubleClicked(int row, int column);
+
+    void on_table_dp_del_cellDoubleClicked(int row, int column);
+
 private:
     Ui::MainWindow* ui;
 
     dlgDatabase* myDatabase;
+
+    void setTableEdit();
 
     QNetworkAccessManager* manager;
     int parse_UpdateJSON(QString str);
@@ -1115,6 +1245,11 @@ private:
     void on_btnQuickOpen2_clicked();
 
     void on_btnTestWrite_clicked();
+
+    QUndoStack* undoStack = nullptr;
+    QUndoView* undoView = nullptr;
+    QAction* undoAction = nullptr;
+    QAction* redoAction = nullptr;
 };
 
 class CustomTabStyle1 : public QProxyStyle {

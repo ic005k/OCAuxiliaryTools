@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "commands.h"
 #include "plistparser.h"
 #include "plistserializer.h"
 #include "ui_mainwindow.h"
@@ -26,7 +27,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210226";
+    CurVerison = "20210303";
     title = "OC Auxiliary Tools   V0.6.7    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -173,6 +174,8 @@ MainWindow::MainWindow(QWidget* parent)
     initui_UEFI();
     initui_acpi();
 
+    setTableEdit();
+
     //接受文件拖放打开
     this->setAcceptDrops(true);
 
@@ -217,6 +220,8 @@ void MainWindow::openFile(QString PlistFileName)
     // qDebug() << settings.fileName(); //最近打开的文件所保存的位置
     m_recentFiles->setMostRecentFile(PlistFileName);
 
+    loading = true;
+
     //初始化
     // ACPI
     ui->table_acpi_add->setRowCount(0);
@@ -258,8 +263,6 @@ void MainWindow::openFile(QString PlistFileName)
     QFile file(PlistFileName);
     QVariantMap map = PListParser::parsePList(&file).toMap();
 
-    loading = true;
-
     ParserACPI(map);
     ParserBooter(map);
     ParserDP(map);
@@ -274,6 +277,8 @@ void MainWindow::openFile(QString PlistFileName)
     ui->actionSave->setEnabled(true);
 
     this->setWindowModified(false);
+
+    undoStack->clear();
 }
 
 void MainWindow::on_btnOpen()
@@ -885,7 +890,7 @@ void MainWindow::ParserDP(QVariantMap map)
 
         //保存子条目里面的数据，以便以后加载
 
-        write_ini("table_dp_add0", ui->table_dp_add, i);
+        write_ini(ui->table_dp_add0, ui->table_dp_add, i);
     }
 
     int last = ui->table_dp_add0->rowCount();
@@ -1719,7 +1724,7 @@ void MainWindow::ParserNvram(QVariantMap map)
 
         //保存子条目里面的数据，以便以后加载
 
-        write_ini("table_nv_add0", ui->table_nv_add, i);
+        write_ini(ui->table_nv_add0, ui->table_nv_add, i);
     }
 
     int last = ui->table_nv_add0->rowCount();
@@ -1737,10 +1742,17 @@ void MainWindow::ParserNvram(QVariantMap map)
     ui->chkWriteFlash->setChecked(map["WriteFlash"].toBool());
 }
 
-void MainWindow::write_ini(QString table_name, QTableWidget* mytable, int i)
+void MainWindow::write_ini(QTableWidget* table, QTableWidget* mytable, int i)
 {
-    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
+    QString name = table->item(i, 0)->text().trimmed();
+    if (name == "")
+        name = "Item" + QString::number(i + 1);
+
+    name = name.replace("/", "-");
+
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
     // qDebug() << plistPath;
+
     QFile file(plistPath);
     if (file.exists()) //如果文件存在，则先删除它
         file.remove();
@@ -1750,10 +1762,8 @@ void MainWindow::write_ini(QString table_name, QTableWidget* mytable, int i)
 
     for (int k = 0; k < mytable->rowCount(); k++) {
         Reg.setValue(QString::number(k + 1) + "/key", mytable->item(k, 0)->text());
-        Reg.setValue(QString::number(k + 1) + "/class",
-            mytable->item(k, 1)->text());
-        Reg.setValue(QString::number(k + 1) + "/value",
-            mytable->item(k, 2)->text());
+        Reg.setValue(QString::number(k + 1) + "/class", mytable->item(k, 1)->text());
+        Reg.setValue(QString::number(k + 1) + "/value", mytable->item(k, 2)->text());
     }
 
     //记录总数
@@ -1762,10 +1772,17 @@ void MainWindow::write_ini(QString table_name, QTableWidget* mytable, int i)
     IniFile.push_back(plistPath);
 }
 
-void MainWindow::read_ini(QString table_name, QTableWidget* mytable, int i)
+void MainWindow::read_ini(QTableWidget* table, QTableWidget* mytable, int i)
 {
-    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
+    QString name = table->item(i, 0)->text().trimmed();
+    if (name == "")
+        name = "Item" + QString::number(i + 1);
+
+    name = name.replace("/", "-");
+
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
     // qDebug() << plistPath;
+
     QFile file(plistPath);
     if (file.exists()) {
         QSettings Reg(plistPath, QSettings::IniFormat);
@@ -1790,11 +1807,17 @@ void MainWindow::read_ini(QString table_name, QTableWidget* mytable, int i)
     }
 }
 
-void MainWindow::read_value_ini(QString table_name, QTableWidget* mytable,
-    int i)
+void MainWindow::read_value_ini(QTableWidget* table, QTableWidget* mytable, int i)
 {
-    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table_name + QString::number(i + 1) + ".ini";
+    QString name = table->item(i, 0)->text().trimmed();
+    if (name == "")
+        name = "Item" + QString::number(i + 1);
+
+    name = name.replace("/", "-");
+
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
     // qDebug() << plistPath;
+
     QFile file(plistPath);
     if (file.exists()) {
         QSettings Reg(plistPath, QSettings::IniFormat);
@@ -1812,41 +1835,36 @@ void MainWindow::read_value_ini(QString table_name, QTableWidget* mytable,
 
 void MainWindow::on_table_dp_add0_cellClicked(int row, int column)
 {
-    //读取ini数据并加载到table_dp_add中
-    // qDebug() << row;
 
-    loading = true;
-
-    if (column == 0)
-        read_ini("table_dp_add0", ui->table_dp_add, row);
-
-    loading = false;
+    Q_UNUSED(row);
+    Q_UNUSED(column);
 
     ui->statusbar->showMessage(ui->table_dp_add0->currentItem()->text());
 }
 
-void MainWindow::on_table_dp_add_itemSelectionChanged() { }
+void MainWindow::on_table_dp_add_itemSelectionChanged()
+{
+}
 
 void MainWindow::on_table_dp_add_itemChanged(QTableWidgetItem* item)
 {
     if (item->text().isEmpty()) {
     }
-    //当条目有修改时，重新写入数据
-    if (!loading) //数据已经加载完成后
-        write_ini("table_dp_add0", ui->table_dp_add, ui->table_dp_add0->currentRow());
 
-    if (!loading)
+    //当条目有修改时，重新写入数据
+    if (writeINI) //数据已经加载完成后
+    {
+        write_ini(ui->table_dp_add0, ui->table_dp_add, ui->table_dp_add0->currentRow());
+
         this->setWindowModified(true);
+    }
 }
 
 void MainWindow::on_table_nv_add0_cellClicked(int row, int column)
 {
-    loading = true;
 
-    if (column == 0)
-        read_ini("table_nv_add0", ui->table_nv_add, row);
-
-    loading = false;
+    Q_UNUSED(row);
+    Q_UNUSED(column);
 
     ui->statusbar->showMessage(ui->table_nv_add0->currentItem()->text());
 }
@@ -1857,9 +1875,8 @@ void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item)
     }
 
     //当条目有修改时，重新写入数据
-    if (!loading) //数据已经加载完成后
-        write_ini("table_nv_add0", ui->table_nv_add,
-            ui->table_nv_add0->currentRow());
+    if (writeINI) //数据已经加载完成后
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
 
     if (!loading)
         this->setWindowModified(true);
@@ -1890,19 +1907,24 @@ void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
         }
 
         //保存子条目里面的数据，以便以后加载
-        write_value_ini(table->objectName(), subtable, i);
+        write_value_ini(table, subtable, i);
     }
 
     int last = table->rowCount();
     table->setCurrentCell(last - 1, 0);
 }
 
-void MainWindow::write_value_ini(QString tablename, QTableWidget* subtable,
-    int i)
+void MainWindow::write_value_ini(QTableWidget* table, QTableWidget* subtable, int i)
 {
 
-    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + tablename + QString::number(i + 1) + ".ini";
+    QString name = table->item(i, 0)->text().trimmed();
+    if (name == "")
+        name = "Item" + QString::number(i + 1);
+    name = name.replace("/", "-");
+
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
     // qDebug() << plistPath;
+
     QFile file(plistPath);
     if (file.exists())
         file.remove();
@@ -1921,24 +1943,17 @@ void MainWindow::write_value_ini(QString tablename, QTableWidget* subtable,
 
 void MainWindow::on_table_nv_del0_cellClicked(int row, int column)
 {
-    loading = true;
 
-    if (column == 0)
-        read_value_ini(ui->table_nv_del0->objectName(), ui->table_nv_del, row);
-
-    loading = false;
+    Q_UNUSED(row);
+    Q_UNUSED(column);
 
     ui->statusbar->showMessage(ui->table_nv_del0->currentItem()->text());
 }
 
 void MainWindow::on_table_nv_ls0_cellClicked(int row, int column)
 {
-    loading = true;
-
-    if (column == 0)
-        read_value_ini(ui->table_nv_ls0->objectName(), ui->table_nv_ls, row);
-
-    loading = false;
+    Q_UNUSED(row);
+    Q_UNUSED(column);
 
     ui->statusbar->showMessage(ui->table_nv_ls0->currentItem()->text());
 }
@@ -1948,8 +1963,8 @@ void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem* item)
     if (item->text().isEmpty()) {
     }
 
-    if (!loading) {
-        write_value_ini(ui->table_nv_del0->objectName(), ui->table_nv_del, ui->table_nv_del0->currentRow());
+    if (writeINI) {
+        write_value_ini(ui->table_nv_del0, ui->table_nv_del, ui->table_nv_del0->currentRow());
 
         this->setWindowModified(true);
     }
@@ -1960,8 +1975,8 @@ void MainWindow::on_table_nv_ls_itemChanged(QTableWidgetItem* item)
     if (item->text().isEmpty()) {
     }
 
-    if (!loading) {
-        write_value_ini(ui->table_nv_ls0->objectName(), ui->table_nv_ls, ui->table_nv_ls0->currentRow());
+    if (writeINI) {
+        write_value_ini(ui->table_nv_ls0, ui->table_nv_ls, ui->table_nv_ls0->currentRow());
 
         this->setWindowModified(true);
     }
@@ -1969,12 +1984,6 @@ void MainWindow::on_table_nv_ls_itemChanged(QTableWidgetItem* item)
 
 void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
 {
-    loading = true;
-
-    if (column == 0)
-        read_value_ini(ui->table_dp_del0->objectName(), ui->table_dp_del, row);
-
-    loading = false;
 
     ui->statusbar->showMessage(ui->table_dp_del0->currentItem()->text());
 }
@@ -1984,12 +1993,11 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item)
     if (item->text().isEmpty()) {
     }
 
-    if (!loading)
-        write_value_ini(ui->table_dp_del0->objectName(), ui->table_dp_del,
-            ui->table_dp_del0->currentRow());
+    if (writeINI) {
+        write_value_ini(ui->table_dp_del0, ui->table_dp_del, ui->table_dp_del0->currentRow());
 
-    if (!loading)
         this->setWindowModified(true);
+    }
 }
 
 void MainWindow::initui_PlatformInfo()
@@ -2520,6 +2528,8 @@ void MainWindow::ParserUEFI(QVariantMap map)
     QVariantMap map_audio = map["Audio"].toMap();
     ui->chkAudioSupport->setChecked(map_audio["AudioSupport"].toBool());
 
+    ui->chkResetTrafficClass->setChecked(map_audio["ResetTrafficClass"].toBool());
+
     QString strPlayChime = map_audio["PlayChime"].toString();
     if (strPlayChime == "true" || strPlayChime == "false")
         ui->cboxPlayChime->setCurrentText("Auto");
@@ -2609,6 +2619,8 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
     // Quirks
     QVariantMap map_uefi_Quirks = map["Quirks"].toMap();
+
+    ui->chkActivateHpetSupport->setChecked(map_uefi_Quirks["ActivateHpetSupport"].toBool());
 
     ui->chkDisableSecurityPolicy->setChecked(map_uefi_Quirks["DisableSecurityPolicy"].toBool());
 
@@ -3392,6 +3404,9 @@ QVariantMap MainWindow::SaveUEFI()
     dictList["MinimumVolume"] = ui->editMinimumVolume->text().toLongLong();
     dictList["SetupDelay"] = ui->editSetupDelay->text().toLongLong();
     dictList["PlayChime"] = ui->cboxPlayChime->currentText();
+
+    dictList["ResetTrafficClass"] = getChkBool(ui->chkResetTrafficClass);
+
     dictList["VolumeAmplifier"] = ui->editVolumeAmplifier->text().toLongLong();
     subMap["Audio"] = dictList;
 
@@ -3466,6 +3481,8 @@ QVariantMap MainWindow::SaveUEFI()
 
     // Quirks
     dictList.clear();
+
+    dictList["ActivateHpetSupport"] = getChkBool(ui->chkActivateHpetSupport);
 
     dictList["DisableSecurityPolicy"] = getChkBool(ui->chkDisableSecurityPolicy);
 
@@ -3571,6 +3588,8 @@ void MainWindow::on_table_acpi_add_cellClicked(int row, int column)
         return;
 
     enabled_change(ui->table_acpi_add, row, column, 2);
+
+    //on_table_acpi_add_currentCellChanged(row, column, row, column);
 
     ui->statusbar->showMessage(ui->table_acpi_add->currentItem()->text());
 }
@@ -3795,8 +3814,7 @@ void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
             ui->table_uefi_ReservedMemory->item(row, 3)->text());
     }
 
-    ui->statusbar->showMessage(
-        ui->table_uefi_ReservedMemory->currentItem()->text());
+    ui->statusbar->showMessage(ui->table_uefi_ReservedMemory->currentItem()->text());
 }
 
 void MainWindow::on_btnKernelPatchAdd_clicked()
@@ -3890,7 +3908,125 @@ void MainWindow::del_item(QTableWidget* table)
 
         //vecItemIndex.push_back(selectedsList.at(i).row());
         int t = selectedsList.at(i).row();
-        table->removeRow(t);
+
+        //删除部分的Redo/Undo
+        QStringList fieldList;
+        for (int j = 0; j < table->columnCount(); j++) {
+            fieldList.append(table->item(t, j)->text());
+        }
+        int tabIndex = ui->tabTotal->currentIndex();
+        int subtabIndex;
+        QString subtabStr;
+        if (tabIndex == 0) {
+            subtabIndex = ui->tabACPI->currentIndex();
+            subtabStr = ui->tabACPI->tabText(subtabIndex);
+        }
+
+        if (tabIndex == 1) {
+            subtabIndex = ui->tabBooter->currentIndex();
+            subtabStr = ui->tabBooter->tabText(subtabIndex);
+        }
+
+        if (tabIndex == 2) {
+            subtabIndex = ui->tabDP->currentIndex();
+            subtabStr = ui->tabDP->tabText(subtabIndex);
+        }
+
+        if (tabIndex == 3) {
+            subtabIndex = ui->tabKernel->currentIndex();
+            subtabStr = ui->tabKernel->tabText(subtabIndex);
+        }
+
+        if (tabIndex == 4) {
+            subtabIndex = ui->tabMisc->currentIndex();
+            subtabStr = ui->tabMisc->tabText(subtabIndex);
+        }
+
+        if (tabIndex == 5) {
+            subtabIndex = ui->tabNVRAM->currentIndex();
+            subtabStr = ui->tabNVRAM->tabText(subtabIndex);
+        }
+
+        if (tabIndex == 6) {
+            subtabIndex = ui->tabPlatformInfo->currentIndex();
+            subtabStr = ui->tabPlatformInfo->tabText(subtabIndex);
+        }
+
+        if (tabIndex == 7) {
+            subtabIndex = ui->tabUEFI->currentIndex();
+            subtabStr = ui->tabUEFI->tabText(subtabIndex);
+        }
+        QString text = ui->tabTotal->tabText(tabIndex) + " -> " + subtabStr + " -> " + fieldList.at(0);
+
+        QTableWidget* table0 = NULL;
+        int table0CurrentRow = -1;
+        bool loadINI = false;
+        bool writeINI = false;
+
+        if (table == ui->table_dp_add0) {
+            table0 = ui->table_dp_add;
+            table0CurrentRow = ui->table_dp_add0->currentRow();
+            loadINI = true;
+        }
+
+        if (table == ui->table_dp_add) {
+            table0 = ui->table_dp_add0;
+            table0CurrentRow = ui->table_dp_add0->currentRow();
+            writeINI = true;
+        }
+
+        if (table == ui->table_dp_del0) {
+            table0 = ui->table_dp_del;
+            table0CurrentRow = ui->table_dp_del0->currentRow();
+            loadINI = true;
+        }
+
+        if (table == ui->table_dp_del) {
+            table0 = ui->table_dp_del0;
+            table0CurrentRow = ui->table_dp_del0->currentRow();
+            writeINI = false;
+        }
+
+        if (table == ui->table_nv_add0) {
+            table0 = ui->table_nv_add;
+            table0CurrentRow = ui->table_nv_add0->currentRow();
+            loadINI = true;
+        }
+
+        if (table == ui->table_nv_add) {
+            table0 = ui->table_nv_add0;
+            table0CurrentRow = ui->table_nv_add0->currentRow();
+            writeINI = true;
+        }
+
+        if (table == ui->table_nv_del0) {
+            table0 = ui->table_nv_del;
+            table0CurrentRow = ui->table_nv_del0->currentRow();
+            loadINI = true;
+        }
+
+        if (table == ui->table_nv_del) {
+            table0 = ui->table_nv_del0;
+            table0CurrentRow = ui->table_nv_del0->currentRow();
+            writeINI = false;
+        }
+
+        if (table == ui->table_nv_ls0) {
+            table0 = ui->table_nv_ls;
+            table0CurrentRow = ui->table_nv_ls0->currentRow();
+            loadINI = true;
+        }
+
+        if (table == ui->table_nv_ls) {
+            table0 = ui->table_nv_ls0;
+            table0CurrentRow = ui->table_nv_ls0->currentRow();
+            writeINI = false;
+        }
+
+        QUndoCommand* deleteCommand = new DeleteCommand(writeINI, loadINI, table0, table0CurrentRow, table, t, text, fieldList);
+        undoStack->push(deleteCommand);
+
+        //table->removeRow(t);
 
         selections = table->selectionModel();
         selectedsList = selections->selectedIndexes();
@@ -3968,8 +4104,7 @@ void MainWindow::on_btnDPDel_Add0_clicked()
     ui->table_dp_del->setRowCount(0); //先清除右边表中的所有条目
     on_btnDPDel_Add_clicked(); //同时右边增加一个新条目
 
-    write_value_ini(ui->table_dp_del0->objectName(), ui->table_dp_del,
-        ui->table_dp_del0->rowCount() - 1);
+    write_value_ini(ui->table_dp_del0, ui->table_dp_del, ui->table_dp_del0->rowCount() - 1);
 
     this->setWindowModified(true);
 }
@@ -4017,7 +4152,7 @@ void MainWindow::on_btnDPDel_Add_clicked()
     loading = false;
 
     //保存数据
-    write_value_ini(ui->table_dp_del0->objectName(), ui->table_dp_del,
+    write_value_ini(ui->table_dp_del0, ui->table_dp_del,
         ui->table_dp_del0->currentRow());
 
     this->setWindowModified(true);
@@ -4028,8 +4163,7 @@ void MainWindow::on_btnDPDel_Del_clicked()
     del_item(ui->table_dp_del);
 
     //保存数据
-    write_value_ini(ui->table_dp_del0->objectName(), ui->table_dp_del,
-        ui->table_dp_del0->currentRow());
+    write_value_ini(ui->table_dp_del0, ui->table_dp_del, ui->table_dp_del0->currentRow());
 }
 
 void MainWindow::on_btnACPIAdd_Add_clicked()
@@ -4051,8 +4185,11 @@ void MainWindow::addACPIItem(QStringList FileName)
         int row = ui->table_acpi_add->rowCount() + 1;
 
         ui->table_acpi_add->setRowCount(row);
-        ui->table_acpi_add->setItem(
-            row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+
+        QUndoCommand* addCommand = new AddCommand(ui->table_acpi_add, row - 1, 0, QFileInfo(FileName.at(i)).fileName());
+        undoStack->push(addCommand);
+        //ui->table_acpi_add->setItem(row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+
         ui->table_acpi_add->setItem(row - 1, 1, new QTableWidgetItem(""));
         init_enabled_data(ui->table_acpi_add, row - 1, 2, "true");
 
@@ -4065,13 +4202,16 @@ void MainWindow::addACPIItem(QStringList FileName)
 
 void MainWindow::on_btnDPAdd_Add0_clicked()
 {
+    loading = true;
+
     add_item(ui->table_dp_add0, 1);
     ui->table_dp_add->setRowCount(0); //先清除右边表中的所有条目
     on_btnDPAdd_Add_clicked(); //同时右边增加一个新条目
-    write_ini(ui->table_dp_add0->objectName(), ui->table_dp_add,
-        ui->table_dp_add0->rowCount() - 1);
+    write_ini(ui->table_dp_add0, ui->table_dp_add, ui->table_dp_add0->rowCount() - 1);
 
     this->setWindowModified(true);
+
+    loading = false;
 }
 
 void MainWindow::on_btnDPAdd_Del0_clicked()
@@ -4081,13 +4221,15 @@ void MainWindow::on_btnDPAdd_Del0_clicked()
         return;
 
     //先记住被删的条目位置
-    int delindex = ui->table_dp_add0->currentRow();
+    /*int delindex = ui->table_dp_add0->currentRow();
     int count = ui->table_dp_add0->rowCount();
 
     QString qz = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + ui->table_dp_add0->objectName();
-    QFile file(qz + QString::number(delindex + 1) + ".ini");
+    QFile file(qz + QString::number(delindex + 1) + ".ini");*/
+
     del_item(ui->table_dp_add0);
-    if (file.exists())
+
+    /*if (file.exists())
         file.remove();
 
     //改名，以适应新的索引
@@ -4096,7 +4238,7 @@ void MainWindow::on_btnDPAdd_Del0_clicked()
             QFile file(qz + QString::number(i + 2) + ".ini");
             file.rename(qz + QString::number(i + 1) + ".ini");
         }
-    }
+    }*/
 
     if (ui->table_dp_add0->rowCount() == 0) {
         ui->table_dp_add->setRowCount(0);
@@ -4118,8 +4260,7 @@ void MainWindow::on_btnDPAdd_Add_clicked()
     loading = false;
 
     //保存数据
-    write_ini(ui->table_dp_add0->objectName(), ui->table_dp_add,
-        ui->table_dp_add0->currentRow());
+    write_ini(ui->table_dp_add0, ui->table_dp_add, ui->table_dp_add0->currentRow());
 
     this->setWindowModified(true);
 }
@@ -4127,8 +4268,7 @@ void MainWindow::on_btnDPAdd_Add_clicked()
 void MainWindow::on_btnDPAdd_Del_clicked()
 {
     del_item(ui->table_dp_add);
-    write_ini(ui->table_dp_add0->objectName(), ui->table_dp_add,
-        ui->table_dp_add0->currentRow());
+    write_ini(ui->table_dp_add0, ui->table_dp_add, ui->table_dp_add0->currentRow());
 }
 
 void MainWindow::on_btnKernelAdd_Add_clicked()
@@ -4404,7 +4544,7 @@ void MainWindow::on_btnNVRAMAdd_Add0_clicked()
     ui->table_nv_add->setRowCount(0); //先清除右边表中的所有条目
     on_btnNVRAMAdd_Add_clicked(); //同时右边增加一个新条目
 
-    write_ini(ui->table_nv_add0->objectName(), ui->table_nv_add,
+    write_ini(ui->table_nv_add0, ui->table_nv_add,
         ui->table_nv_add0->rowCount() - 1);
 
     this->setWindowModified(true);
@@ -4420,8 +4560,7 @@ void MainWindow::on_btnNVRAMAdd_Add_clicked()
     loading = false;
 
     //保存数据
-    write_ini(ui->table_nv_add0->objectName(), ui->table_nv_add,
-        ui->table_nv_add0->currentRow());
+    write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
 
     this->setWindowModified(true);
 }
@@ -4463,8 +4602,7 @@ void MainWindow::on_btnNVRAMAdd_Del0_clicked()
 void MainWindow::on_btnNVRAMAdd_Del_clicked()
 {
     del_item(ui->table_nv_add);
-    write_ini(ui->table_nv_add0->objectName(), ui->table_nv_add,
-        ui->table_nv_add0->currentRow());
+    write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
 }
 
 void MainWindow::on_btnNVRAMDel_Add0_clicked()
@@ -4473,8 +4611,7 @@ void MainWindow::on_btnNVRAMDel_Add0_clicked()
     ui->table_nv_del->setRowCount(0); //先清除右边表中的所有条目
     on_btnNVRAMDel_Add_clicked(); //同时右边增加一个新条目
 
-    write_value_ini(ui->table_nv_del0->objectName(), ui->table_nv_del,
-        ui->table_nv_del0->rowCount() - 1);
+    write_value_ini(ui->table_nv_del0, ui->table_nv_del, ui->table_nv_del0->rowCount() - 1);
 
     this->setWindowModified(true);
 }
@@ -4489,8 +4626,7 @@ void MainWindow::on_btnNVRAMDel_Add_clicked()
     loading = false;
 
     //保存数据
-    write_value_ini(ui->table_nv_del0->objectName(), ui->table_nv_del,
-        ui->table_nv_del0->currentRow());
+    write_value_ini(ui->table_nv_del0, ui->table_nv_del, ui->table_nv_del0->currentRow());
 
     this->setWindowModified(true);
 }
@@ -4501,8 +4637,7 @@ void MainWindow::on_btnNVRAMLS_Add0_clicked()
     ui->table_nv_ls->setRowCount(0); //先清除右边表中的所有条目
     on_btnNVRAMLS_Add_clicked(); //同时右边增加一个新条目
 
-    write_value_ini(ui->table_nv_ls0->objectName(), ui->table_nv_ls,
-        ui->table_nv_ls0->rowCount() - 1);
+    write_value_ini(ui->table_nv_ls0, ui->table_nv_ls, ui->table_nv_ls0->rowCount() - 1);
 
     this->setWindowModified(true);
 }
@@ -4517,8 +4652,7 @@ void MainWindow::on_btnNVRAMLS_Add_clicked()
     loading = false;
 
     //保存数据
-    write_value_ini(ui->table_nv_ls0->objectName(), ui->table_nv_ls,
-        ui->table_nv_ls0->currentRow());
+    write_value_ini(ui->table_nv_ls0, ui->table_nv_ls, ui->table_nv_ls0->currentRow());
 
     this->setWindowModified(true);
 }
@@ -4594,8 +4728,7 @@ void MainWindow::on_btnNVRAMDel_Del_clicked()
     del_item(ui->table_nv_del);
 
     //保存数据
-    write_value_ini(ui->table_nv_del0->objectName(), ui->table_nv_del,
-        ui->table_nv_del0->currentRow());
+    write_value_ini(ui->table_nv_del0, ui->table_nv_del, ui->table_nv_del0->currentRow());
 }
 
 void MainWindow::on_btnNVRAMLS_Del_clicked()
@@ -4603,8 +4736,7 @@ void MainWindow::on_btnNVRAMLS_Del_clicked()
     del_item(ui->table_nv_ls);
 
     //保存数据
-    write_value_ini(ui->table_nv_ls0->objectName(), ui->table_nv_ls,
-        ui->table_nv_ls0->currentRow());
+    write_value_ini(ui->table_nv_ls0, ui->table_nv_ls, ui->table_nv_ls0->currentRow());
 }
 
 void MainWindow::on_btnUEFIRM_Add_clicked()
@@ -4823,13 +4955,15 @@ void MainWindow::on_table_dp_add_cellClicked(int row, int column)
         cboxDataClass->addItem("String");
         cboxDataClass->addItem("Number");
         cboxDataClass->addItem("");
-        connect(cboxDataClass, SIGNAL(currentIndexChanged(QString)), this,
-            SLOT(dataClassChange_dp()));
+        connect(cboxDataClass, SIGNAL(currentIndexChanged(QString)), this, SLOT(dataClassChange_dp()));
         c_row = row;
 
         ui->table_dp_add->setCellWidget(row, column, cboxDataClass);
         cboxDataClass->setCurrentText(ui->table_dp_add->item(row, 1)->text());
-    }
+
+    } //else
+
+    //  on_table_dp_add_currentCellChanged(row, column, row, column);
 
     ui->statusbar->showMessage(ui->table_dp_add->currentItem()->text());
 }
@@ -4839,10 +4973,22 @@ void MainWindow::on_table_dp_add_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
-    if (currentRow == 0 && currentColumn == 0 && previousColumn == 0) {
-    }
 
     ui->table_dp_add->removeCellWidget(previousRow, 1);
+
+    //Undo Redo
+    ui->table_dp_add->removeCellWidget(previousRow, previousColumn);
+
+    if (currentColumn != 1) {
+
+        myTable = new QTableWidget;
+        myTable = ui->table_dp_add;
+
+        //initLineEdit(myTable, previousRow, previousColumn, currentRow, currentColumn);
+    } else {
+        //myTable->removeCellWidget(previousRow, previousColumn);
+        //lineEdit = NULL;
+    }
 }
 
 void MainWindow::arch_addChange()
@@ -4880,12 +5026,18 @@ void MainWindow::dataClassChange_dp()
 {
     ui->table_dp_add->item(c_row, 1)->setTextAlignment(Qt::AlignCenter);
     ui->table_dp_add->item(c_row, 1)->setText(cboxDataClass->currentText());
+
+    if (!loading)
+        write_ini(ui->table_dp_add0, ui->table_dp_add, ui->table_dp_add0->currentRow());
 }
 
 void MainWindow::dataClassChange_nv()
 {
     ui->table_nv_add->item(c_row, 1)->setTextAlignment(Qt::AlignCenter);
     ui->table_nv_add->item(c_row, 1)->setText(cboxDataClass->currentText());
+
+    if (!loading)
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
 }
 
 void MainWindow::on_table_nv_add_cellClicked(int row, int column)
@@ -4913,10 +5065,45 @@ void MainWindow::on_table_nv_add_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
-    if (currentRow == 0 && currentColumn == 0 && previousColumn == 0) {
-    }
 
     ui->table_nv_add->removeCellWidget(previousRow, 1);
+
+    //Undo Redo
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_nv_add->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previousColumn, int currentRow, int currentColumn)
+{
+
+    if (!loading) {
+
+        if (Table->rowCount() == 0)
+            return;
+
+        //Table->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+        Table->removeCellWidget(previousRow, previousColumn);
+        removeAllLineEdit();
+
+        lineEdit = new QLineEdit(this);
+        //lineEdit->setContextMenuPolicy(Qt::NoContextMenu);//屏蔽自身下拉菜单
+        Table->setCurrentCell(currentRow, currentColumn);
+        Table->setCellWidget(currentRow, currentColumn, lineEdit);
+
+        loading = true;
+        if (Table->currentIndex().isValid())
+            lineEdit->setText(Table->item(currentRow, currentColumn)->text());
+
+        loading = false;
+
+        lineEdit->setFocus();
+        lineEdit->setClearButtonEnabled(true);
+
+        connect(lineEdit, &QLineEdit::textChanged, this, &MainWindow::on_lineEdit_textEdited);
+    }
 }
 
 void MainWindow::reg_win()
@@ -4962,10 +5149,14 @@ void MainWindow::on_table_kernel_add_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
-    if (currentRow == 0 && currentColumn == 0 && previousColumn == 0) {
-    }
 
     ui->table_kernel_add->removeCellWidget(previousRow, 7);
+
+    //Undo Redo
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_kernel_add->removeCellWidget(previousRow, previousColumn);
 }
 
 void MainWindow::on_table_kernel_block_currentCellChanged(int currentRow,
@@ -4973,10 +5164,14 @@ void MainWindow::on_table_kernel_block_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
-    if (currentRow == 0 && currentColumn == 0 && previousColumn == 0) {
-    }
 
     ui->table_kernel_block->removeCellWidget(previousRow, 5);
+
+    //Undo Redo
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_kernel_block->removeCellWidget(previousRow, previousColumn);
 }
 
 void MainWindow::on_table_kernel_patch_currentCellChanged(int currentRow,
@@ -4984,10 +5179,14 @@ void MainWindow::on_table_kernel_patch_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
-    if (currentRow == 0 && currentColumn == 0 && previousColumn == 0) {
-    }
 
     ui->table_kernel_patch->removeCellWidget(previousRow, 13);
+
+    //Undo Redo
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_kernel_patch->removeCellWidget(previousRow, previousColumn);
 }
 
 QString MainWindow::getSystemProductName(QString arg1)
@@ -5132,10 +5331,14 @@ void MainWindow::on_table_kernel_Force_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
-    if (currentRow == 0 && currentColumn == 0 && previousColumn == 0) {
-    }
 
     ui->table_kernel_Force->removeCellWidget(previousRow, 8);
+
+    //Undo Redo
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_kernel_Force->removeCellWidget(previousRow, previousColumn);
 }
 
 void MainWindow::on_btnKernelForce_Add_clicked()
@@ -5433,10 +5636,14 @@ void MainWindow::closeEvent(QCloseEvent* event)
 void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(
     int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    if (currentRow == 0 && currentColumn == 0 && previousColumn == 0) {
-    }
 
     ui->table_uefi_ReservedMemory->removeCellWidget(previousRow, 3);
+
+    //Undo Redo
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_uefi_ReservedMemory->removeCellWidget(previousRow, previousColumn);
 }
 
 void MainWindow::loadLocal()
@@ -7113,6 +7320,9 @@ void MainWindow::init_menu()
         ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
     ui->listMain->setCurrentRow(0);
 
+    //ui->listMain->setVisible(false);
+    //ui->listSub->setVisible(false);
+
     ui->tabTotal->tabBar()->setHidden(true);
 
     ui->tabACPI->tabBar()->setVisible(false);
@@ -7134,31 +7344,52 @@ void MainWindow::init_menu()
     ui->listSub->addItem(tr("Quirks"));
     ui->listSub->setCurrentRow(index);
 
-    //File
-    connect(ui->actionOpen, &QAction::triggered, this,
-        &MainWindow::on_btnOpen);
+    //Open
+    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen);
     ui->actionOpen->setShortcut(tr("ctrl+o"));
+    ui->actionOpen->setIcon(QIcon(":/icon/open.png"));
+    ui->toolBar->addAction(ui->actionOpen);
 
-    connect(ui->actionSave, &QAction::triggered, this,
-        &MainWindow::on_btnSave);
+    //Save
+    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::on_btnSave);
     ui->actionSave->setShortcut(tr("ctrl+s"));
+    ui->actionSave->setIcon(QIcon(":/icon/save.png"));
+    ui->toolBar->addAction(ui->actionSave);
 
-    connect(ui->actionSave_As, &QAction::triggered, this,
-        &MainWindow::on_btnSaveAs);
+    //SaveAs
+    connect(ui->actionSave_As, &QAction::triggered, this, &MainWindow::on_btnSaveAs);
     ui->actionSave_As->setShortcut(tr("ctrl+shift+s"));
+    ui->actionSave_As->setIcon(QIcon(":/icon/saveas.png"));
+    ui->toolBar->addAction(ui->actionSave_As);
 
     //Tools
+    //MountESP
     connect(ui->btnMountEsp, &QAction::triggered, this, &MainWindow::on_btnMountEsp);
     ui->btnMountEsp->setShortcut(tr("ctrl+m"));
+    ui->btnMountEsp->setIcon(QIcon(":/icon/esp.png"));
+    ui->toolBar->addSeparator();
+    ui->toolBar->addAction(ui->btnMountEsp);
 
+    //OC Validate
     connect(ui->btnOcvalidate, &QAction::triggered, this, &MainWindow::on_btnOcvalidate);
     ui->btnOcvalidate->setShortcut(tr("ctrl+l"));
+    ui->btnOcvalidate->setIcon(QIcon(":/icon/ov.png"));
+    ui->toolBar->addAction(ui->btnOcvalidate);
 
+    //GenerateEFI
     connect(ui->actionGenerateEFI, &QAction::triggered, this, &MainWindow::on_GenerateEFI);
     //ui->actionGenerateEFI->setShortcut(tr("ctrl+e"));
+    ui->actionGenerateEFI->setIcon(QIcon(":/icon/efi.png"));
+    ui->toolBar->addAction(ui->actionGenerateEFI);
 
+    //Open DataBase
     connect(ui->actionDatabase, &QAction::triggered, this, &MainWindow::on_Database);
     ui->actionDatabase->setShortcut(tr("ctrl+d"));
+    ui->actionDatabase->setIcon(QIcon(":/icon/db.png"));
+    ui->toolBar->addAction(ui->actionDatabase);
+
+    ui->actionOpen_database_directory->setIcon(QIcon(":/icon/opendb.png"));
+    ui->toolBar->addAction(ui->actionOpen_database_directory);
 
     connect(ui->actionOpen_database_directory, &QAction::triggered, this, &MainWindow::OpenDir_clicked);
 
@@ -7196,6 +7427,44 @@ void MainWindow::init_menu()
         &MainWindow::on_line21);
 
     ui->actionSave->setEnabled(false);
+
+    //Undo/Redo
+    undoStack = new QUndoStack(this);
+
+    undoView = new QUndoView(undoStack);
+    undoView->setWindowTitle(tr("Command List"));
+    //undoView->show();
+    undoView->setAttribute(Qt::WA_QuitOnClose, false);
+
+    undoAction = undoStack->createUndoAction(this, tr("Undo"));
+    //undoAction->setShortcuts(QKeySequence::Undo);
+
+    redoAction = undoStack->createRedoAction(this, tr("Redo"));
+    //redoAction->setShortcuts(QKeySequence::Redo);
+    ui->menuTools->addSeparator();
+    ui->menuTools->addAction(undoAction);
+    ui->menuTools->addAction(redoAction);
+
+    ui->toolBar->addSeparator();
+
+    //Undo
+    undoAction->setShortcut(tr("ctrl+z"));
+    undoAction->setIcon(QIcon(":/icon/undo.png"));
+    ui->toolBar->addAction(undoAction);
+
+    //Redo
+    redoAction->setShortcut(tr("ctrl+shift+z"));
+    redoAction->setIcon(QIcon(":/icon/redo.png"));
+    ui->toolBar->addAction(redoAction);
+
+    //OC工厂
+    ui->toolBar->addSeparator();
+    ui->actionOpenCore_Factory->setIcon(QIcon(":/icon/ocf.png"));
+    ui->toolBar->addAction(ui->actionOpenCore_Factory);
+
+    //检查更新
+    ui->btnCheckUpdate->setIcon(QIcon(":/icon/cu.png"));
+    ui->toolBar->addAction(ui->btnCheckUpdate);
 }
 
 void MainWindow::on_Database()
@@ -7303,12 +7572,11 @@ void MainWindow::on_line21()
 void MainWindow::on_table_acpi_add_itemChanged(QTableWidgetItem* item)
 {
     Q_UNUSED(item);
+
     this->setWindowModified(true);
-    // qDebug() << item->text();
 }
 
-void MainWindow::on_table_acpi_add_currentItemChanged(
-    QTableWidgetItem* current, QTableWidgetItem* previous)
+void MainWindow::on_table_acpi_add_currentItemChanged(QTableWidgetItem* current, QTableWidgetItem* previous)
 {
     Q_UNUSED(current);
     Q_UNUSED(previous);
@@ -7335,15 +7603,21 @@ void MainWindow::on_table_booter_itemChanged(QTableWidgetItem* item)
 void MainWindow::on_table_dp_add0_itemChanged(QTableWidgetItem* item)
 {
     Q_UNUSED(item);
-    if (!loading)
+
+    if (writeINI) {
+        write_ini(ui->table_dp_add0, ui->table_dp_add, ui->table_dp_add0->currentRow());
         this->setWindowModified(true);
+    }
 }
 
 void MainWindow::on_table_dp_del0_itemChanged(QTableWidgetItem* item)
 {
     Q_UNUSED(item);
-    if (!loading)
+
+    if (writeINI) {
+        write_value_ini(ui->table_dp_del0, ui->table_dp_del, ui->table_dp_del0->currentRow());
         this->setWindowModified(true);
+    }
 }
 
 void MainWindow::on_table_kernel_add_itemChanged(QTableWidgetItem* item)
@@ -7392,24 +7666,30 @@ void MainWindow::on_table_nv_add0_itemChanged(QTableWidgetItem* item)
 {
     Q_UNUSED(item);
 
-    if (!loading)
+    if (writeINI) {
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
         this->setWindowModified(true);
+    }
 }
 
 void MainWindow::on_table_nv_del0_itemChanged(QTableWidgetItem* item)
 {
     Q_UNUSED(item);
 
-    if (!loading)
+    if (writeINI) {
+        write_value_ini(ui->table_nv_del0, ui->table_nv_del, ui->table_nv_del0->currentRow());
         this->setWindowModified(true);
+    }
 }
 
 void MainWindow::on_table_nv_ls0_itemChanged(QTableWidgetItem* item)
 {
     Q_UNUSED(item);
 
-    if (!loading)
+    if (writeINI) {
+        write_value_ini(ui->table_nv_ls0, ui->table_nv_ls, ui->table_nv_ls0->currentRow());
         this->setWindowModified(true);
+    }
 }
 
 void MainWindow::on_tableDevices_itemChanged(QTableWidgetItem* item)
@@ -8690,6 +8970,7 @@ void MainWindow::on_tableBlessOverride_cellClicked(int row, int column)
 
 void MainWindow::on_table_nv_del_cellClicked(int row, int column)
 {
+
     Q_UNUSED(row);
     Q_UNUSED(column);
 
@@ -8698,6 +8979,7 @@ void MainWindow::on_table_nv_del_cellClicked(int row, int column)
 
 void MainWindow::on_table_nv_ls_cellClicked(int row, int column)
 {
+
     Q_UNUSED(row);
     Q_UNUSED(column);
 
@@ -8714,6 +8996,7 @@ void MainWindow::on_tableDevices_cellClicked(int row, int column)
 
 void MainWindow::on_table_uefi_drivers_cellClicked(int row, int column)
 {
+
     Q_UNUSED(row);
     Q_UNUSED(column);
 
@@ -8821,10 +9104,14 @@ void MainWindow::on_table_Booter_patch_cellClicked(int row, int column)
 
 void MainWindow::on_table_Booter_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    if (currentRow == 0 && currentColumn == 0 && previousColumn == 0) {
-    }
 
     ui->table_Booter_patch->removeCellWidget(previousRow, 10);
+
+    //Undo Redo
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_Booter_patch->removeCellWidget(previousRow, previousColumn);
 }
 
 void MainWindow::on_cboxPlayChime_currentTextChanged(const QString& arg1)
@@ -9495,4 +9782,881 @@ void MainWindow::on_editSystemSerialNumber_PlatformNVRAM_textChanged(const QStri
 void MainWindow::on_chkGopPassThrough_clicked()
 {
     this->setWindowModified(true);
+}
+
+void MainWindow::on_table_dp_add0_itemSelectionChanged()
+{
+    //读取ini数据并加载到table_dp_add中
+
+    if (!ui->table_dp_add0->currentIndex().isValid())
+        return;
+
+    if (!loading) {
+
+        removeAllLineEdit();
+
+        loading = true;
+        read_ini(ui->table_dp_add0, ui->table_dp_add, ui->table_dp_add0->currentRow());
+        loading = false;
+        ui->statusbar->showMessage(ui->table_dp_add0->currentItem()->text());
+    }
+}
+
+void MainWindow::on_table_dp_del0_itemSelectionChanged()
+{
+    if (!ui->table_dp_del0->currentIndex().isValid())
+        return;
+
+    if (!loading) {
+
+        removeAllLineEdit();
+
+        loading = true;
+        read_value_ini(ui->table_dp_del0, ui->table_dp_del, ui->table_dp_del0->currentRow());
+        loading = false;
+
+        ui->statusbar->showMessage(ui->table_dp_del0->currentItem()->text());
+    }
+}
+
+void MainWindow::on_table_nv_add0_itemSelectionChanged()
+{
+    if (!loading) {
+
+        removeAllLineEdit();
+
+        loading = true;
+
+        read_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        loading = false;
+
+        ui->statusbar->showMessage(ui->table_nv_add0->currentItem()->text());
+    }
+}
+
+void MainWindow::on_table_nv_del0_itemSelectionChanged()
+{
+    if (!loading) {
+
+        removeAllLineEdit();
+
+        loading = true;
+
+        read_value_ini(ui->table_nv_del0, ui->table_nv_del, ui->table_nv_del0->currentRow());
+
+        loading = false;
+
+        ui->statusbar->showMessage(ui->table_nv_del0->currentItem()->text());
+    }
+}
+
+void MainWindow::on_table_nv_ls0_itemSelectionChanged()
+{
+    if (!loading) {
+
+        removeAllLineEdit();
+
+        loading = true;
+
+        read_value_ini(ui->table_nv_ls0, ui->table_nv_ls, ui->table_nv_ls0->currentRow());
+
+        loading = false;
+
+        ui->statusbar->showMessage(ui->table_nv_ls0->currentItem()->text());
+    }
+}
+
+void MainWindow::on_table_acpi_add_itemEntered(QTableWidgetItem* item)
+{
+    Q_UNUSED(item);
+}
+
+void MainWindow::on_table_acpi_add_cellEntered(int row, int column)
+{
+    Q_UNUSED(row);
+    Q_UNUSED(column);
+}
+
+void MainWindow::on_lineEdit_textChanged(const QString& arg1)
+{
+}
+
+void MainWindow::on_lineEdit_textEdited(const QString& arg1)
+{
+
+    if (!loading) {
+
+        int row;
+        int col;
+        QString oldText;
+        row = myTable->currentRow();
+        col = myTable->currentColumn();
+        oldText = myTable->item(row, col)->text();
+        QUndoCommand* editCommand = new EditCommand(oldText, myTable, myTable->currentRow(), myTable->currentColumn(), arg1);
+        undoStack->push(editCommand);
+
+        this->setWindowModified(true);
+    }
+}
+
+void MainWindow::on_table_nv_ls_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_nv_ls->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::on_table_acpi_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_acpi_add->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::on_table_nv_add0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    //Undo Redo
+    if (!loading) {
+
+        Q_UNUSED(currentRow);
+        Q_UNUSED(currentColumn);
+
+        ui->table_nv_add0->removeCellWidget(previousRow, previousColumn);
+    }
+}
+
+void MainWindow::on_table_acpi_del_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    //Undo Redo
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_acpi_del->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::on_table_acpi_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_acpi_patch->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::on_table_booter_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_booter->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::on_tableBlessOverride_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->tableBlessOverride->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::on_tableEntries_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->tableEntries->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::on_tableTools_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->tableTools->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::on_tableDevices_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->tableDevices->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::on_table_uefi_drivers_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_uefi_drivers->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::on_table_dp_add0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    //Undo Redo
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+    if (!loading) {
+
+        ui->table_dp_add0->removeCellWidget(previousRow, previousColumn);
+    }
+}
+
+void MainWindow::on_table_dp_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    if (!loading) {
+
+        ui->table_dp_del0->removeCellWidget(previousRow, previousColumn);
+    }
+}
+
+void MainWindow::on_table_dp_del_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_dp_del->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::removeWidget(QTableWidget* table)
+{
+    int row = table->currentRow();
+    int col = table->currentColumn();
+
+    table->removeCellWidget(row, col);
+
+    lineEdit = NULL;
+}
+
+void MainWindow::on_tabBooter_currentChanged(int index)
+{
+    Q_UNUSED(index);
+}
+
+void MainWindow::on_tabDP_currentChanged(int index)
+{
+    Q_UNUSED(index);
+}
+
+void MainWindow::removeAllLineEdit()
+{
+
+    //ACPI
+    removeWidget(ui->table_acpi_add);
+    removeWidget(ui->table_acpi_del);
+    removeWidget(ui->table_acpi_patch);
+
+    //Booter
+    removeWidget(ui->table_booter);
+    removeWidget(ui->table_Booter_patch);
+
+    //DP
+    removeWidget(ui->table_dp_add0);
+    removeWidget(ui->table_dp_add);
+    removeWidget(ui->table_dp_del0);
+    removeWidget(ui->table_dp_del);
+
+    //Kernel
+    removeWidget(ui->table_kernel_Force);
+    removeWidget(ui->table_kernel_add);
+    removeWidget(ui->table_kernel_block);
+    removeWidget(ui->table_kernel_patch);
+
+    //Misc
+    removeWidget(ui->tableBlessOverride);
+    removeWidget(ui->tableEntries);
+    removeWidget(ui->tableTools);
+
+    //NVRAM
+    removeWidget(ui->table_nv_add0);
+    removeWidget(ui->table_nv_add);
+    removeWidget(ui->table_nv_del0);
+    removeWidget(ui->table_nv_del);
+    removeWidget(ui->table_nv_ls0);
+    removeWidget(ui->table_nv_ls);
+
+    //PI
+    removeWidget(ui->tableDevices);
+
+    //UEFI
+    removeWidget(ui->table_uefi_drivers);
+    removeWidget(ui->table_uefi_ReservedMemory);
+}
+
+void MainWindow::goTable(QTableWidget* table)
+{
+    //ACPI
+    if (table == ui->table_acpi_add) {
+        ui->listMain->setCurrentRow(0);
+        ui->listSub->setCurrentRow(0);
+
+        //ui->tabTotal->setCurrentIndex(0);
+        //ui->tabACPI->setCurrentIndex(0);
+    }
+
+    if (table == ui->table_acpi_del) {
+
+        ui->listMain->setCurrentRow(0);
+        ui->listSub->setCurrentRow(1);
+
+        //ui->tabTotal->setCurrentIndex(0);
+        //ui->tabACPI->setCurrentIndex(1);
+    }
+
+    if (table == ui->table_acpi_patch) {
+
+        ui->listMain->setCurrentRow(0);
+        ui->listSub->setCurrentRow(2);
+
+        //ui->tabTotal->setCurrentIndex(0);
+        //ui->tabACPI->setCurrentIndex(2);
+    }
+
+    //Booter
+    if (table == ui->table_booter) {
+
+        ui->listMain->setCurrentRow(1);
+        ui->listSub->setCurrentRow(0);
+
+        //ui->tabTotal->setCurrentIndex(1);
+        //ui->tabBooter->setCurrentIndex(0);
+    }
+    if (table == ui->table_Booter_patch) {
+
+        ui->listMain->setCurrentRow(1);
+        ui->listSub->setCurrentRow(1);
+
+        //ui->tabTotal->setCurrentIndex(1);
+        //ui->tabBooter->setCurrentIndex(1);
+    }
+
+    //DP
+    if (table == ui->table_dp_add0) {
+
+        ui->listMain->setCurrentRow(2);
+        ui->listSub->setCurrentRow(0);
+
+        //ui->tabTotal->setCurrentIndex(2);
+        //ui->tabDP->setCurrentIndex(0);
+    }
+    if (table == ui->table_dp_add) {
+
+        ui->listMain->setCurrentRow(2);
+        ui->listSub->setCurrentRow(0);
+
+        //ui->tabTotal->setCurrentIndex(2);
+        //ui->tabDP->setCurrentIndex(0);
+    }
+    if (table == ui->table_dp_del0) {
+
+        ui->listMain->setCurrentRow(2);
+        ui->listSub->setCurrentRow(1);
+
+        //ui->tabTotal->setCurrentIndex(2);
+        //ui->tabDP->setCurrentIndex(1);
+    }
+    if (table == ui->table_dp_del) {
+
+        ui->listMain->setCurrentRow(2);
+        ui->listSub->setCurrentRow(1);
+
+        //ui->tabTotal->setCurrentIndex(2);
+        //ui->tabDP->setCurrentIndex(1);
+    }
+
+    //Kernel
+    if (table == ui->table_kernel_Force) {
+
+        ui->listMain->setCurrentRow(3);
+        ui->listSub->setCurrentRow(2);
+
+        //ui->tabTotal->setCurrentIndex(3);
+        //ui->tabKernel->setCurrentIndex(2);
+    }
+
+    if (table == ui->table_kernel_add) {
+
+        ui->listMain->setCurrentRow(3);
+        ui->listSub->setCurrentRow(0);
+
+        //ui->tabTotal->setCurrentIndex(3);
+        //ui->tabKernel->setCurrentIndex(0);
+    }
+
+    if (table == ui->table_kernel_block) {
+
+        ui->listMain->setCurrentRow(3);
+        ui->listSub->setCurrentRow(1);
+
+        //ui->tabTotal->setCurrentIndex(3);
+        //ui->tabKernel->setCurrentIndex(1);
+    }
+
+    if (table == ui->table_kernel_patch) {
+
+        ui->listMain->setCurrentRow(3);
+        ui->listSub->setCurrentRow(3);
+
+        //ui->tabTotal->setCurrentIndex(3);
+        //ui->tabKernel->setCurrentIndex(3);
+    }
+
+    //Misc
+    if (table == ui->tableBlessOverride) {
+
+        ui->listMain->setCurrentRow(4);
+        ui->listSub->setCurrentRow(3);
+
+        //ui->tabTotal->setCurrentIndex(4);
+        //ui->tabMisc->setCurrentIndex(3);
+    }
+
+    if (table == ui->tableEntries) {
+
+        ui->listMain->setCurrentRow(4);
+        ui->listSub->setCurrentRow(4);
+
+        //ui->tabTotal->setCurrentIndex(4);
+        //ui->tabMisc->setCurrentIndex(4);
+    }
+
+    if (table == ui->tableTools) {
+
+        ui->listMain->setCurrentRow(4);
+        ui->listSub->setCurrentRow(5);
+
+        //ui->tabTotal->setCurrentIndex(4);
+        //ui->tabMisc->setCurrentIndex(5);
+    }
+
+    //NVRAM
+    if (table == ui->table_nv_add0) {
+
+        ui->listMain->setCurrentRow(5);
+        ui->listSub->setCurrentRow(0);
+
+        //ui->tabTotal->setCurrentIndex(5);
+        //ui->tabNVRAM->setCurrentIndex(0);
+    }
+
+    if (table == ui->table_nv_add) {
+
+        ui->listMain->setCurrentRow(5);
+        ui->listSub->setCurrentRow(0);
+
+        //ui->tabTotal->setCurrentIndex(5);
+        //ui->tabNVRAM->setCurrentIndex(0);
+    }
+
+    if (table == ui->table_nv_del0) {
+
+        ui->listMain->setCurrentRow(5);
+        ui->listSub->setCurrentRow(1);
+
+        //ui->tabTotal->setCurrentIndex(5);
+        //ui->tabNVRAM->setCurrentIndex(1);
+    }
+
+    if (table == ui->table_nv_del) {
+
+        ui->listMain->setCurrentRow(5);
+        ui->listSub->setCurrentRow(1);
+
+        //ui->tabTotal->setCurrentIndex(5);
+        //ui->tabNVRAM->setCurrentIndex(1);
+    }
+
+    if (table == ui->table_nv_ls0) {
+
+        ui->listMain->setCurrentRow(5);
+        ui->listSub->setCurrentRow(2);
+
+        //ui->tabTotal->setCurrentIndex(5);
+        //ui->tabNVRAM->setCurrentIndex(2);
+    }
+
+    if (table == ui->table_nv_ls) {
+
+        ui->listMain->setCurrentRow(5);
+        ui->listSub->setCurrentRow(2);
+
+        //ui->tabTotal->setCurrentIndex(5);
+        //ui->tabNVRAM->setCurrentIndex(2);
+    }
+
+    //PI
+    if (table == ui->tableDevices) {
+
+        ui->listMain->setCurrentRow(6);
+        ui->listSub->setCurrentRow(2);
+
+        //ui->tabTotal->setCurrentIndex(6);
+        //ui->tabPlatformInfo->setCurrentIndex(2);
+    }
+
+    //UEFI
+    if (table == ui->table_uefi_drivers) {
+
+        ui->listMain->setCurrentRow(7);
+        ui->listSub->setCurrentRow(2);
+
+        //ui->tabTotal->setCurrentIndex(7);
+        //ui->tabUEFI->setCurrentIndex(2);
+    }
+
+    if (table == ui->table_uefi_ReservedMemory) {
+
+        ui->listMain->setCurrentRow(7);
+        ui->listSub->setCurrentRow(7);
+
+        //ui->tabTotal->setCurrentIndex(7);
+        //ui->tabUEFI->setCurrentIndex(7);
+    }
+}
+
+void MainWindow::on_tabKernel_currentChanged(int index)
+{
+    Q_UNUSED(index);
+}
+
+void MainWindow::on_tabMisc_currentChanged(int index)
+{
+    Q_UNUSED(index);
+}
+
+void MainWindow::on_tabNVRAM_currentChanged(int index)
+{
+    Q_UNUSED(index);
+}
+
+void MainWindow::on_tabPlatformInfo_currentChanged(int index)
+{
+    Q_UNUSED(index);
+}
+
+void MainWindow::on_tabUEFI_currentChanged(int index)
+{
+    Q_UNUSED(index);
+}
+
+void MainWindow::on_table_dp_add0_currentItemChanged(QTableWidgetItem* current, QTableWidgetItem* previous)
+{
+}
+
+void MainWindow::on_table_nv_add0_currentItemChanged(QTableWidgetItem* current, QTableWidgetItem* previous)
+{
+}
+
+void MainWindow::on_table_nv_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    if (!loading) {
+
+        Q_UNUSED(currentRow);
+        Q_UNUSED(currentColumn);
+
+        ui->table_nv_del0->removeCellWidget(previousRow, previousColumn);
+    }
+}
+
+void MainWindow::on_table_nv_ls0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    if (!loading) {
+
+        Q_UNUSED(currentRow);
+        Q_UNUSED(currentColumn);
+
+        ui->table_nv_ls0->removeCellWidget(previousRow, previousColumn);
+    }
+}
+
+void MainWindow::on_table_nv_del_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+
+    Q_UNUSED(currentRow);
+    Q_UNUSED(currentColumn);
+
+    ui->table_nv_del->removeCellWidget(previousRow, previousColumn);
+}
+
+void MainWindow::on_table_dp_add0_cellDoubleClicked(int row, int column)
+{
+
+    myTable = new QTableWidget;
+    myTable = ui->table_dp_add0;
+
+    initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_dp_add_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_dp_add;
+
+    initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_dp_del0_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_dp_del0;
+
+    initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_acpi_add_cellDoubleClicked(int row, int column)
+{
+    if (ui->table_acpi_add->currentColumn() != 2) {
+
+        myTable = new QTableWidget;
+        myTable = ui->table_acpi_add;
+
+        initLineEdit(myTable, row, column, row, column);
+    }
+}
+
+void MainWindow::setTableEdit()
+{
+    //ACPI
+    ui->table_acpi_add->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_acpi_del->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_acpi_patch->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    //Booter
+    ui->table_booter->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_Booter_patch->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    //DP
+    ui->table_dp_add0->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_dp_add->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_dp_del0->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_dp_del->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    //Kernel
+    ui->table_kernel_Force->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_kernel_add->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_kernel_block->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_kernel_patch->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    //Misc
+    ui->tableBlessOverride->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableEntries->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableTools->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    //NVRAM
+    ui->table_nv_add0->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_nv_add->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_nv_del0->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_nv_del->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_nv_ls0->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_nv_ls->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    //PI
+    ui->tableDevices->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    //UEFI
+    ui->table_uefi_drivers->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->table_uefi_ReservedMemory->setEditTriggers(QAbstractItemView::NoEditTriggers);
+}
+
+void MainWindow::on_table_acpi_del_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_acpi_del;
+
+    int col = myTable->currentColumn();
+
+    if (col != 4 && col != 5)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_acpi_patch_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_acpi_patch;
+
+    int col = myTable->currentColumn();
+
+    if (col != 11)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_booter_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_booter;
+
+    int col = myTable->currentColumn();
+
+    if (col != 2)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_Booter_patch_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_Booter_patch;
+
+    int col = myTable->currentColumn();
+
+    if (col != 9 && col != 10)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_kernel_add_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_kernel_add;
+
+    int col = myTable->currentColumn();
+
+    if (col != 6 && col != 7)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_kernel_block_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_kernel_block;
+
+    int col = myTable->currentColumn();
+
+    if (col != 4 && col != 5)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_kernel_Force_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_kernel_Force;
+
+    int col = myTable->currentColumn();
+
+    if (col != 7 && col != 8)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_kernel_patch_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_kernel_patch;
+
+    int col = myTable->currentColumn();
+
+    if (col != 12 && col != 13)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_tableBlessOverride_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->tableBlessOverride;
+
+    initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_tableEntries_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->tableEntries;
+
+    if (column != 4 && column != 5 && column != 6)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_tableTools_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->tableTools;
+
+    if (column != 4 && column != 5 && column != 6 && column != 7)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_nv_add0_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_nv_add0;
+
+    initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_nv_add_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_nv_add;
+
+    if (column != 1)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_nv_del0_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_nv_del0;
+
+    initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_nv_del_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_nv_del;
+
+    initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_nv_ls0_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_nv_ls0;
+
+    initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_nv_ls_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_nv_ls;
+
+    initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_tableDevices_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->tableDevices;
+
+    initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_uefi_drivers_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_uefi_drivers;
+
+    initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_uefi_ReservedMemory_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_uefi_ReservedMemory;
+
+    if (column != 3 && column != 4)
+        initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_table_dp_del_cellDoubleClicked(int row, int column)
+{
+    myTable = new QTableWidget;
+    myTable = ui->table_dp_del;
+
+    initLineEdit(myTable, row, column, row, column);
 }

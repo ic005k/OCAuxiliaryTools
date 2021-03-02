@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1300</width>
-    <height>759</height>
+    <height>767</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -25,6 +25,16 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <widget class="QListWidget" name="listSub">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>24</height>
+       </size>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0">
      <widget class="QListWidget" name="listMain">
       <property name="maximumSize">
@@ -35,16 +45,6 @@
       </property>
       <property name="movement">
        <enum>QListView::Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QListWidget" name="listSub">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>24</height>
-       </size>
       </property>
      </widget>
     </item>
@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -82,7 +82,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -452,7 +452,7 @@ macOS Mojave (10.14).</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1268,7 +1268,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2198,7 +2198,7 @@ behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -4436,7 +4436,7 @@ with existing Windows activation and custom OEM software but potentially breakin
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5794,7 +5794,7 @@ central registration process.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>7</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5933,27 +5933,6 @@ USB hot plug. Disable if not required.</string>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_61">
-             <item row="5" column="1">
-              <widget class="QComboBox" name="cboxPlayChime">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_107">
-               <property name="toolTip">
-                <string>Some codecs require a vendor-specific delay after the reconfiguration (e.g. volume setting). This option makes it
- configurable. In general the necessary delay may be as long as 0.5 seconds.</string>
-               </property>
-               <property name="statusTip">
-                <string> Audio codec reconfiguration delay in microseconds.</string>
-               </property>
-               <property name="text">
-                <string>SetupDelay</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_33">
                <property name="toolTip">
@@ -5973,25 +5952,51 @@ the first available audio controller to be used.</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="editMinimumVolume"/>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_34">
+               <property name="toolTip">
+                <string>Normally this contains the index of the green out of the builtin analog audio controller (HDEF). The number of
+output nodes (N) in the debug log (marked in bold-italic):
+OCAU: 1/3 PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x1)/VenMsg(&lt;redacted&gt;,00000000) (4 outputs)
+OCAU: 2/3 PciRoot(0x0)/Pci(0x3,0x0)/VenMsg(&lt;redacted&gt;,00000000) (1 outputs)
+OCAU: 3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,02000000) (7 outputs)
+The quickest way to find the right port is to bruteforce the values from 0 to N - 1.</string>
+               </property>
+               <property name="statusTip">
+                <string> Index of the output port of the specified codec starting from 0.</string>
+               </property>
+               <property name="text">
+                <string>AudioOut</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="editAudioDevice"/>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_35">
+               <property name="toolTip">
+                <string>Screen reader will use this volume level, when the calculated volume level is less than MinimumVolume. Boot
+chime sound will not play if the calculated volume level is less than MinimumVolume.</string>
+               </property>
+               <property name="statusTip">
+                <string>Minimal heard volume level from 0 to 100.</string>
+               </property>
+               <property name="text">
+                <string>MinimumVolume</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QLineEdit" name="editVolumeAmplifier"/>
              </item>
              <item row="2" column="1">
               <widget class="QLineEdit" name="editAudioOut"/>
              </item>
              <item row="7" column="1">
-              <widget class="QLineEdit" name="editVolumeAmplifier"/>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="editAudioDevice"/>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editAudioCodec"/>
-             </item>
-             <item row="6" column="1">
               <widget class="QLineEdit" name="editSetupDelay"/>
              </item>
-             <item row="7" column="0">
+             <item row="8" column="0">
               <widget class="QLabel" name="label_36">
                <property name="toolTip">
                 <string>Volume level range read from SystemAudioVolume varies depending on the codec. To transform read value in
@@ -6010,17 +6015,10 @@ Note: the transformation used in macOS is not linear, but it is very close and t
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_35">
-               <property name="toolTip">
-                <string>Screen reader will use this volume level, when the calculated volume level is less than MinimumVolume. Boot
-chime sound will not play if the calculated volume level is less than MinimumVolume.</string>
-               </property>
-               <property name="statusTip">
-                <string>Minimal heard volume level from 0 to 100.</string>
-               </property>
-               <property name="text">
-                <string>MinimumVolume</string>
+             <item row="5" column="1">
+              <widget class="QComboBox" name="cboxPlayChime">
+               <property name="editable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -6043,6 +6041,23 @@ IOHDACodecAddress field.</string>
                </property>
               </widget>
              </item>
+             <item row="9" column="0">
+              <widget class="QCheckBox" name="chkAudioSupport">
+               <property name="toolTip">
+                <string>Enabling this setting routes audio playback from builtin protocols to a dedicated audio port (AudioOut) of the
+specified codec (AudioCodec) located on the audio controller (AudioDevice).</string>
+               </property>
+               <property name="statusTip">
+                <string>Activate audio support by connecting to a backend driver.</string>
+               </property>
+               <property name="text">
+                <string>AudioSupport</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="editMinimumVolume"/>
+             </item>
              <item row="5" column="0">
               <widget class="QLabel" name="label_70">
                <property name="toolTip">
@@ -6064,35 +6079,36 @@ is able to play boot chime.</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_34">
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="editAudioCodec"/>
+             </item>
+             <item row="7" column="0">
+              <widget class="QLabel" name="label_107">
                <property name="toolTip">
-                <string>Normally this contains the index of the green out of the builtin analog audio controller (HDEF). The number of
-output nodes (N) in the debug log (marked in bold-italic):
-OCAU: 1/3 PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x1)/VenMsg(&lt;redacted&gt;,00000000) (4 outputs)
-OCAU: 2/3 PciRoot(0x0)/Pci(0x3,0x0)/VenMsg(&lt;redacted&gt;,00000000) (1 outputs)
-OCAU: 3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,02000000) (7 outputs)
-The quickest way to find the right port is to bruteforce the values from 0 to N - 1.</string>
+                <string>Some codecs require a vendor-specific delay after the reconfiguration (e.g. volume setting). This option makes it
+ configurable. In general the necessary delay may be as long as 0.5 seconds.</string>
                </property>
                <property name="statusTip">
-                <string> Index of the output port of the specified codec starting from 0.</string>
+                <string> Audio codec reconfiguration delay in microseconds.</string>
                </property>
                <property name="text">
-                <string>AudioOut</string>
+                <string>SetupDelay</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="chkAudioSupport">
+             <item row="10" column="0">
+              <widget class="QCheckBox" name="chkResetTrafficClass">
                <property name="toolTip">
-                <string>Enabling this setting routes audio playback from builtin protocols to a dedicated audio port (AudioOut) of the
-specified codec (AudioCodec) located on the audio controller (AudioDevice).</string>
+                <string>AppleHDA kext will function correctly only if TCSEL register is configured to use TC0 traffic class. Refer to Intel
+I/O Controller Hub 9 (ICH9) Family Datasheet (or any other ICH datasheet) for more details about this register.
+Note: This option is independent from AudioSupport. If AppleALC is used it is preferred to use AppleALC
+alctsel property instead.</string>
                </property>
                <property name="statusTip">
-                <string>Activate audio support by connecting to a backend driver.</string>
+                <string> Set HDA Traffic Class Select Register to TC0.</string>
                </property>
                <property name="text">
-                <string>AudioSupport</string>
+                <string>ResetTrafficClass</string>
                </property>
               </widget>
              </item>
@@ -6895,7 +6911,7 @@ im4m manifest files used by Apple Secure Boot.</string>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_31">
-             <item row="4" column="0">
+             <item row="5" column="0">
               <widget class="QCheckBox" name="chkUnblockFsConnect">
                <property name="toolTip">
                 <string>Note: The quirk is mostly relevant for select HP laptops with no drives listed.</string>
@@ -6909,7 +6925,23 @@ im4m manifest files used by Apple Secure Boot.</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="0">
+             <item row="8" column="1">
+              <widget class="QLineEdit" name="editTscSyncTimeout">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
               <widget class="QLabel" name="label_29">
                <property name="toolTip">
                 <string>The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop
@@ -6932,71 +6964,7 @@ the MSR registers.</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="chkReleaseUsbOwnership">
-               <property name="toolTip">
-                <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
-manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
-may freeze upon boot. Not recommended unless required.</string>
-               </property>
-               <property name="statusTip">
-                <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
- manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
- may freeze upon boot. Not recommended unless required.</string>
-               </property>
-               <property name="text">
-                <string>ReleaseUsbOwnership</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
-               <property name="toolTip">
-                <string>Note: While the option is not supposed to induce harm on unaffected firmwares, its usage is not recommended
-when it is not required.</string>
-               </property>
-               <property name="statusTip">
-                <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
- register. These values may cause macOS boot failure on Intel platforms.</string>
-               </property>
-               <property name="text">
-                <string>IgnoreInvalidFlexRatio</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="editExitBootServicesDelay">
-               <property name="minimumSize">
-                <size>
-                 <width>150</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>150</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="1">
-              <widget class="QLineEdit" name="editTscSyncTimeout">
-               <property name="minimumSize">
-                <size>
-                 <width>150</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>150</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
+             <item row="6" column="0">
               <widget class="QLabel" name="label_28">
                <property name="toolTip">
                 <string>This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,
@@ -7013,6 +6981,54 @@ approach should be found in some future. Expect 3-5 seconds to be enough in case
               </widget>
              </item>
              <item row="3" column="0">
+              <widget class="QCheckBox" name="chkReleaseUsbOwnership">
+               <property name="toolTip">
+                <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
+manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
+may freeze upon boot. Not recommended unless required.</string>
+               </property>
+               <property name="statusTip">
+                <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
+ manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
+ may freeze upon boot. Not recommended unless required.</string>
+               </property>
+               <property name="text">
+                <string>ReleaseUsbOwnership</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
+               <property name="toolTip">
+                <string>Note: While the option is not supposed to induce harm on unaffected firmwares, its usage is not recommended
+when it is not required.</string>
+               </property>
+               <property name="statusTip">
+                <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
+ register. These values may cause macOS boot failure on Intel platforms.</string>
+               </property>
+               <property name="text">
+                <string>IgnoreInvalidFlexRatio</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QLineEdit" name="editExitBootServicesDelay">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
               <widget class="QCheckBox" name="chkRequestBootVarRouting">
                <property name="toolTip">
                 <string>This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default
@@ -7029,7 +7045,7 @@ with macOS boot entries by design.</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
+             <item row="1" column="0">
               <widget class="QCheckBox" name="chkDisableSecurityPolicy">
                <property name="toolTip">
                 <string>Note: This setting disables various security features of the firmware, defeating the purpose of any kind of Secure
@@ -7040,6 +7056,20 @@ Boot. Do NOT enable if you use UEFI Secure Boot.</string>
                </property>
                <property name="text">
                 <string>DisableSecurityPolicy</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkActivateHpetSupport">
+               <property name="toolTip">
+                <string>Older boards like ICH6 may not always have HPET setting in the firmware preferences, this option tries to force
+enable it.</string>
+               </property>
+               <property name="statusTip">
+                <string>Activates HPET support.</string>
+               </property>
+               <property name="text">
+                <string>ActivateHpetSupport</string>
                </property>
               </widget>
              </item>
@@ -7237,6 +7267,17 @@ Enable this option to be able to see all the boot options when having multiple d
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
   <action name="actionOpen">
    <property name="text">
     <string>Open</string>

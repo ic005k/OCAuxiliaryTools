@@ -33,6 +33,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     aboutdialog.cpp \
+    commands.cpp \
     dlgdatabase.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -43,6 +44,7 @@ SOURCES += \
 
 HEADERS += \
     aboutdialog.h \
+    commands.h \
     dlgdatabase.h \
     mainwindow.h \
     myapp.h \
