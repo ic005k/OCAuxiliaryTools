@@ -6,7 +6,6 @@
         <file>del.png</file>
         <file>down.png</file>
         <file>up.png</file>
-        <file>find.png</file>
         <file>icon/m1.png</file>
         <file>icon/m2.png</file>
         <file>icon/m3.png</file>
@@ -31,5 +30,8 @@
         <file>icon/doc.png</file>
         <file>icon/new.png</file>
         <file>qt_zh_CN.qm</file>
+        <file>icon/1.png</file>
+        <file>icon/2.png</file>
+        <file>icon/find.png</file>
     </qresource>
 </RCC>

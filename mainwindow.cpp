@@ -1619,16 +1619,17 @@ void MainWindow::initui_nvram()
 
     // Add
     ui->table_nv_add0->setColumnWidth(0, 450);
+
     ui->table_nv_add0->setMinimumWidth(300);
-    ui->table_nv_add0->setMaximumWidth(470);
+    ui->table_nv_add0->setMaximumWidth(525);
+
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_add0->setHorizontalHeaderItem(0, id0);
     ui->table_nv_add0->setAlternatingRowColors(true);
     ui->table_nv_add0->horizontalHeader()->setStretchLastSection(true);
 
     ui->table_nv_add0->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->table_nv_add0, SIGNAL(customContextMenuRequested(QPoint)), this,
-        SLOT(show_menu0(QPoint)));
+    connect(ui->table_nv_add0, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_menu0(QPoint)));
 
     ui->table_nv_add->setColumnWidth(0, 200);
     id0 = new QTableWidgetItem(tr("Key"));
@@ -1645,8 +1646,13 @@ void MainWindow::initui_nvram()
     ui->table_nv_add->horizontalHeader()->setStretchLastSection(true);
 
     ui->table_nv_add->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->table_nv_add, SIGNAL(customContextMenuRequested(QPoint)), this,
-        SLOT(show_menu(QPoint)));
+    connect(ui->table_nv_add, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_menu(QPoint)));
+
+    // 分割窗口
+    QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
+    splitterMain->addWidget(ui->table_nv_add0);
+    splitterMain->addWidget(ui->table_nv_add);
+    ui->gridLayout_nv_add->addWidget(splitterMain);
 
     // Delete
 
@@ -1677,11 +1683,6 @@ void MainWindow::initui_nvram()
     ui->table_nv_ls->setHorizontalHeaderItem(0, id0);
     ui->table_nv_ls->setAlternatingRowColors(true);
     ui->table_nv_ls->horizontalHeader()->setStretchLastSection(true);
-
-    QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
-    splitterMain->addWidget(ui->table_nv_add0);
-    splitterMain->addWidget(ui->table_nv_add);
-    ui->gridLayout_nv_add->addWidget(splitterMain);
 }
 
 void MainWindow::ParserNvram(QVariantMap map)
@@ -1850,6 +1851,8 @@ void MainWindow::on_table_dp_add0_cellClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
+    removeWidget(ui->table_dp_add);
+
     ui->statusbar->showMessage(ui->table_dp_add0->currentItem()->text());
 }
 
@@ -1876,6 +1879,8 @@ void MainWindow::on_table_nv_add0_cellClicked(int row, int column)
 
     Q_UNUSED(row);
     Q_UNUSED(column);
+
+    removeWidget(ui->table_nv_add);
 
     ui->statusbar->showMessage(ui->table_nv_add0->currentItem()->text());
 }
@@ -1958,6 +1963,8 @@ void MainWindow::on_table_nv_del0_cellClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
+    removeWidget(ui->table_nv_del);
+
     ui->statusbar->showMessage(ui->table_nv_del0->currentItem()->text());
 }
 
@@ -1965,6 +1972,8 @@ void MainWindow::on_table_nv_ls0_cellClicked(int row, int column)
 {
     Q_UNUSED(row);
     Q_UNUSED(column);
+
+    removeWidget(ui->table_nv_ls);
 
     ui->statusbar->showMessage(ui->table_nv_ls0->currentItem()->text());
 }
@@ -1998,6 +2007,9 @@ void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
 
     Q_UNUSED(row);
     Q_UNUSED(column);
+
+    removeWidget(ui->table_dp_del);
+
     ui->statusbar->showMessage(ui->table_dp_del0->currentItem()->text());
 }
 
@@ -7520,6 +7532,32 @@ void MainWindow::init_menu()
     //文档
     ui->btnHelp->setIcon(QIcon(":/icon/doc.png"));
     ui->toolBar->addAction(ui->btnHelp);
+
+    ui->toolBar->addSeparator();
+
+    //搜索框
+    //ui->toolBar->addWidget(ui->cboxFind);
+
+    ui->cboxFind->setVisible(false);
+    ui->actionFind->setVisible(false);
+    ui->actionGo_to_the_previous->setVisible(false);
+    ui->actionGo_to_the_next->setVisible(false);
+    ui->pushButton->setVisible(false);
+
+    //查找
+    ui->actionFind->setShortcut(tr("ctrl+f"));
+    ui->actionFind->setIcon(QIcon(":/icon/find.png"));
+    ui->toolBar->addAction(ui->actionFind);
+
+    //转到上一个
+    ui->actionGo_to_the_previous->setShortcut(tr("ctrl+3"));
+    ui->actionGo_to_the_previous->setIcon(QIcon(":/icon/1.png"));
+    ui->toolBar->addAction(ui->actionGo_to_the_previous);
+
+    //转到下一个
+    ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
+    ui->actionGo_to_the_next->setIcon(QIcon(":/icon/2.png"));
+    ui->toolBar->addAction(ui->actionGo_to_the_next);
 }
 
 void MainWindow::on_Database()
@@ -10715,4 +10753,84 @@ void MainWindow::on_actionNewWindow_triggered()
     QProcess* process = new QProcess;
     process->setEnvironment(process->environment());
     process->start(pathSource, arguments);
+}
+
+/* 获取所有控件 */
+
+QObjectList MainWindow::getAllUIControls(QObject* parent)
+{
+    QObjectList lstOfChildren, lstTemp;
+    if (parent) {
+        lstOfChildren = parent->children();
+    }
+    if (lstOfChildren.isEmpty()) {
+        return lstOfChildren;
+    }
+
+    lstTemp = lstOfChildren; /*  这里要注意，如果不拷贝原先的list，直接使用，会有问题； */
+
+    foreach (QObject* obj, lstTemp) {
+        QObjectList lst = getAllUIControls(obj);
+        if (!lst.isEmpty()) {
+            lstOfChildren.append(lst);
+        }
+    }
+    return lstOfChildren;
+}
+
+/* 获取界面上所有按钮；
+
+   当然也可以是所有的lineEdit或其他；
+
+*/
+
+QObjectList MainWindow::getAllCheckBox(QObjectList lstUIControls)
+{
+    QObjectList lstOfCheckBox;
+    foreach (QObject* obj, lstUIControls) {
+        if (obj->metaObject()->className() == QStringLiteral("QCheckBox")) {
+            lstOfCheckBox.append(obj);
+        }
+    }
+    return lstOfCheckBox;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    QObjectList listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabACPI));
+    for (int i = 0; i < listOfCheckBox.size(); i++) {
+        QString name = listOfCheckBox.at(i)->objectName();
+        //qDebug() << listOfCheckBox.at(i)->objectName();
+        QCheckBox* chkBox = (QCheckBox*)listOfCheckBox.at(i);
+        qDebug() << chkBox->text();
+        if (name.contains("Status")) {
+
+            QString style = "QCheckBox{background-color:rgb(255,0,0,255);color:rgb(255,255,255);}";
+
+            chkBox->setStyleSheet(style);
+
+            chkBox->setText(chkBox->text() + "99999");
+        }
+    }
+    qDebug() << listOfCheckBox.count();
+}
+
+void MainWindow::on_actionFind_triggered()
+{
+    //QString findText = ui->cboxFind->currentText();
+    for (int i = 0; i < ui->listMain->count(); i++) {
+        ui->listMain->setCurrentRow(i);
+
+        for (int j = 0; j < ui->listSub->count(); j++) {
+            ui->listSub->setCurrentRow(j);
+        }
+    }
+}
+
+void MainWindow::on_actionGo_to_the_previous_triggered()
+{
+}
+
+void MainWindow::on_actionGo_to_the_next_triggered()
+{
 }

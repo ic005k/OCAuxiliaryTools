@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -82,7 +82,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -426,12 +426,47 @@ macOS Mojave (10.14).</string>
                <property name="statusTip">
                 <string>Reset BGRT table Displayed status field to false.</string>
                </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
                <property name="text">
                 <string>ResetLogoStatus</string>
                </property>
               </widget>
              </item>
             </layout>
+           </widget>
+           <widget class="QPushButton" name="pushButton">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>240</y>
+              <width>113</width>
+              <height>32</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>PushButton</string>
+            </property>
+           </widget>
+           <widget class="QComboBox" name="cboxFind">
+            <property name="geometry">
+             <rect>
+              <x>40</x>
+              <y>290</y>
+              <width>300</width>
+              <height>32</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>300</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
            </widget>
           </widget>
          </widget>
@@ -7306,6 +7341,10 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="btnExportMaster"/>
     <addaction name="btnImportMaster"/>
     <addaction name="separator"/>
+    <addaction name="actionFind"/>
+    <addaction name="actionGo_to_the_previous"/>
+    <addaction name="actionGo_to_the_next"/>
+    <addaction name="separator"/>
     <addaction name="actionPlist_editor"/>
     <addaction name="actionDSDT_SSDT_editor"/>
    </widget>
@@ -7454,6 +7493,21 @@ Enable this option to be able to see all the boot options when having multiple d
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="text">
+    <string>Find</string>
+   </property>
+  </action>
+  <action name="actionGo_to_the_previous">
+   <property name="text">
+    <string>Go to the previous</string>
+   </property>
+  </action>
+  <action name="actionGo_to_the_next">
+   <property name="text">
+    <string>Go to the next</string>
    </property>
   </action>
  </widget>

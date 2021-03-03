@@ -55,6 +55,9 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    QObjectList getAllUIControls(QObject* parent);
+    QObjectList getAllCheckBox(QObjectList lstUIControls);
+
     RecentFiles* m_recentFiles;
     QLineEdit* lineEdit;
     QTableWidget* myTable = new QTableWidget;
@@ -1150,6 +1153,14 @@ private slots:
     void on_editTargetHex_textChanged(const QString& arg1);
 
     void on_actionNewWindow_triggered();
+
+    void on_pushButton_clicked();
+
+    void on_actionFind_triggered();
+
+    void on_actionGo_to_the_previous_triggered();
+
+    void on_actionGo_to_the_next_triggered();
 
 private:
     Ui::MainWindow* ui;
