@@ -125,12 +125,9 @@ void EditCommand::undo()
     mw_one->writeINI = true;
     m_table->setItem(m_row, m_col, new QTableWidgetItem(m_oldText));
 
-    if (mw_one->lineEdit != NULL) {
-
-        m_table->setCurrentCell(m_row, m_col);
-        m_table->setCellWidget(m_row, m_col, mw_one->lineEdit);
-        mw_one->lineEdit->setText(m_oldText);
-    }
+    m_table->setCurrentCell(m_row, m_col);
+    m_table->setCellWidget(m_row, m_col, mw_one->lineEdit);
+    mw_one->lineEdit->setText(m_oldText);
 
     mw_one->loading = false;
     mw_one->writeINI = false;

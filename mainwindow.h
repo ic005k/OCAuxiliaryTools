@@ -6,6 +6,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QDesktopServices>
+#include <QLatin1Char>
 #include <QMainWindow>
 #include <QMimeData>
 #include <QPainter>
@@ -1044,9 +1045,9 @@ private slots:
 
     void on_table_acpi_add_cellEntered(int row, int column);
 
-    void on_lineEdit_textChanged(const QString& arg1);
+    void lineEdit_textChanged(const QString& arg1);
 
-    void on_lineEdit_textEdited(const QString& arg1);
+    void lineEdit_textEdited(const QString& arg1);
 
     void on_table_nv_ls_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
@@ -1089,10 +1090,6 @@ private slots:
     void on_tabPlatformInfo_currentChanged(int index);
 
     void on_tabUEFI_currentChanged(int index);
-
-    void on_table_dp_add0_currentItemChanged(QTableWidgetItem* current, QTableWidgetItem* previous);
-
-    void on_table_nv_add0_currentItemChanged(QTableWidgetItem* current, QTableWidgetItem* previous);
 
     void on_table_nv_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
@@ -1149,6 +1146,10 @@ private slots:
     void on_table_uefi_ReservedMemory_cellDoubleClicked(int row, int column);
 
     void on_table_dp_del_cellDoubleClicked(int row, int column);
+
+    void on_editTargetHex_textChanged(const QString& arg1);
+
+    void on_actionNewWindow_triggered();
 
 private:
     Ui::MainWindow* ui;

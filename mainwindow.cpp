@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210303";
+    CurVerison = "20210304";
     title = "OC Auxiliary Tools   V0.6.7    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -1346,6 +1346,17 @@ void MainWindow::initui_misc()
     ui->cboxPickerVariant->addItem("Modern");
     ui->cboxPickerVariant->addItem("Other value");
 
+    //Debug
+    QRegExp regx("[A-Fa-f0-9]{2}"); //两位16进制
+    QValidator* validator = new QRegExpValidator(regx, ui->editTargetHex);
+    ui->editTargetHex->setValidator(validator);
+    ui->editTargetHex->setPlaceholderText("00");
+
+    QRegExp regx1("[0-9]{3}");
+    QValidator* validator1 = new QRegExpValidator(regx1, ui->editTarget);
+    ui->editTarget->setValidator(validator1);
+    ui->editTarget->setPlaceholderText("000");
+
     // Security
     //ui->cboxBootProtect->addItem("None");
     //ui->cboxBootProtect->addItem("Bootstrap");
@@ -1985,6 +1996,8 @@ void MainWindow::on_table_nv_ls_itemChanged(QTableWidgetItem* item)
 void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
 {
 
+    Q_UNUSED(row);
+    Q_UNUSED(column);
     ui->statusbar->showMessage(ui->table_dp_del0->currentItem()->text());
 }
 
@@ -4973,6 +4986,7 @@ void MainWindow::on_table_dp_add_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
+    Q_UNUSED(currentRow);
 
     ui->table_dp_add->removeCellWidget(previousRow, 1);
 
@@ -5089,7 +5103,9 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         removeAllLineEdit();
 
         lineEdit = new QLineEdit(this);
-        //lineEdit->setContextMenuPolicy(Qt::NoContextMenu);//屏蔽自身下拉菜单
+
+        //lineEdit->setContextMenuPolicy(Qt::NoContextMenu); //屏蔽自身下拉菜单
+
         Table->setCurrentCell(currentRow, currentColumn);
         Table->setCellWidget(currentRow, currentColumn, lineEdit);
 
@@ -5102,7 +5118,7 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         lineEdit->setFocus();
         lineEdit->setClearButtonEnabled(true);
 
-        connect(lineEdit, &QLineEdit::textChanged, this, &MainWindow::on_lineEdit_textEdited);
+        connect(lineEdit, &QLineEdit::textChanged, this, &MainWindow::lineEdit_textEdited);
     }
 }
 
@@ -5652,6 +5668,7 @@ void MainWindow::loadLocal()
     QTextCodec::setCodecForLocale(codec);
 
     static QTranslator translator; //该对象要一直存在，注意用static
+    static QTranslator translator1;
     QLocale locale;
     if (locale.language() == QLocale::English) //获取系统语言环境
     {
@@ -5664,6 +5681,13 @@ void MainWindow::loadLocal()
         tr = translator.load(":/cn.qm");
         if (tr) {
             qApp->installTranslator(&translator);
+            zh_cn = true;
+        }
+
+        bool tr1 = false;
+        tr1 = translator1.load(":/qt_zh_CN.qm");
+        if (tr1) {
+            qApp->installTranslator(&translator1);
             zh_cn = true;
         }
 
@@ -6106,6 +6130,11 @@ void MainWindow::on_editExposeSensitiveData_textChanged(const QString& arg1)
         ui->chk08->setChecked(1);
     }
 
+    //10 to 16
+    unsigned int dec = arg1.toULongLong();
+    QString hex = QString("%1").arg(dec, 2, 16, QLatin1Char('0')); // 保留2位，不足补零
+    ui->lblExposeSensitiveData->setText("0x" + hex.toUpper());
+
     this->setWindowModified(true);
 }
 
@@ -6279,6 +6308,11 @@ void MainWindow::on_editScanPolicy_textChanged(const QString& arg1)
         chk.at(i)->setChecked(false);
 
     method(v, total);
+
+    //10 to 16
+    unsigned int dec = arg1.toULongLong();
+    QString hex = QString("%1").arg(dec, 8, 16, QLatin1Char('0')); // 保留8位，不足补零
+    ui->lblScanPolicy->setText("0x" + hex.toUpper());
 
     this->setWindowModified(true);
 }
@@ -6478,6 +6512,12 @@ void MainWindow::on_chkD19_clicked() { DisplayLevel(); }
 
 void MainWindow::on_editDisplayLevel_textChanged(const QString& arg1)
 {
+
+    //10 to 16
+    unsigned int dec = arg1.toULongLong();
+    QString hex = QString("%1").arg(dec, 8, 16, QLatin1Char('0')); // 保留8位，不足补零
+    ui->lblDisplayLevel->setText("0x" + hex.toUpper());
+
     if (click)
         return;
 
@@ -6696,6 +6736,11 @@ void MainWindow::on_editPickerAttributes_textChanged(const QString& arg1)
         chk_pa.at(i)->setChecked(false);
 
     method(v_pa, total);
+
+    //10 to 16
+    unsigned int dec = arg1.toULongLong();
+    QString hex = QString("%1").arg(dec, 2, 16, QLatin1Char('0')); // 保留2位，不足补零
+    ui->lblPickerAttributes->setText("0x" + hex.toUpper());
 
     this->setWindowModified(true);
 }
@@ -7344,6 +7389,10 @@ void MainWindow::init_menu()
     ui->listSub->addItem(tr("Quirks"));
     ui->listSub->setCurrentRow(index);
 
+    //New
+    ui->actionNewWindow->setIcon(QIcon(":/icon/new.png"));
+    ui->toolBar->addAction(ui->actionNewWindow);
+
     //Open
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen);
     ui->actionOpen->setShortcut(tr("ctrl+o"));
@@ -7448,12 +7497,12 @@ void MainWindow::init_menu()
     ui->toolBar->addSeparator();
 
     //Undo
-    undoAction->setShortcut(tr("ctrl+z"));
+    undoAction->setShortcut(tr("ctrl+1"));
     undoAction->setIcon(QIcon(":/icon/undo.png"));
     ui->toolBar->addAction(undoAction);
 
     //Redo
-    redoAction->setShortcut(tr("ctrl+shift+z"));
+    redoAction->setShortcut(tr("ctrl+2"));
     redoAction->setIcon(QIcon(":/icon/redo.png"));
     ui->toolBar->addAction(redoAction);
 
@@ -7465,6 +7514,12 @@ void MainWindow::init_menu()
     //检查更新
     ui->btnCheckUpdate->setIcon(QIcon(":/icon/cu.png"));
     ui->toolBar->addAction(ui->btnCheckUpdate);
+
+    ui->toolBar->addSeparator();
+
+    //文档
+    ui->btnHelp->setIcon(QIcon(":/icon/doc.png"));
+    ui->toolBar->addAction(ui->btnHelp);
 }
 
 void MainWindow::on_Database()
@@ -8433,13 +8488,24 @@ void MainWindow::on_editDisplayDelay_textChanged(const QString& arg1)
 
 void MainWindow::on_editTarget_textChanged(const QString& arg1)
 {
-    Q_UNUSED(arg1);
+    //10转16
+    int dec = arg1.toInt();
+
+    //QString hex = QString("%1").arg(dec, 2, 16, QLatin1Char('0')); // 保留2位，不足补零
+    QString hex = QString("%1").arg(dec, 0, 16, QLatin1Char('0'));
+
+    ui->editTargetHex->setText(hex.toUpper());
+
     this->setWindowModified(true);
 }
 
 void MainWindow::on_editHaltLevel_textChanged(const QString& arg1)
 {
-    Q_UNUSED(arg1);
+    //10 to 16
+    unsigned int dec = arg1.toULongLong();
+    QString hex = QString("%1").arg(dec, 8, 16, QLatin1Char('0')); // 保留8位，不足补零
+    ui->lblHaltLevel->setText("0x" + hex.toUpper());
+
     this->setWindowModified(true);
 }
 
@@ -9793,8 +9859,6 @@ void MainWindow::on_table_dp_add0_itemSelectionChanged()
 
     if (!loading) {
 
-        removeAllLineEdit();
-
         loading = true;
         read_ini(ui->table_dp_add0, ui->table_dp_add, ui->table_dp_add0->currentRow());
         loading = false;
@@ -9809,8 +9873,6 @@ void MainWindow::on_table_dp_del0_itemSelectionChanged()
 
     if (!loading) {
 
-        removeAllLineEdit();
-
         loading = true;
         read_value_ini(ui->table_dp_del0, ui->table_dp_del, ui->table_dp_del0->currentRow());
         loading = false;
@@ -9822,8 +9884,6 @@ void MainWindow::on_table_dp_del0_itemSelectionChanged()
 void MainWindow::on_table_nv_add0_itemSelectionChanged()
 {
     if (!loading) {
-
-        removeAllLineEdit();
 
         loading = true;
 
@@ -9839,8 +9899,6 @@ void MainWindow::on_table_nv_del0_itemSelectionChanged()
 {
     if (!loading) {
 
-        removeAllLineEdit();
-
         loading = true;
 
         read_value_ini(ui->table_nv_del0, ui->table_nv_del, ui->table_nv_del0->currentRow());
@@ -9854,8 +9912,6 @@ void MainWindow::on_table_nv_del0_itemSelectionChanged()
 void MainWindow::on_table_nv_ls0_itemSelectionChanged()
 {
     if (!loading) {
-
-        removeAllLineEdit();
 
         loading = true;
 
@@ -9878,11 +9934,12 @@ void MainWindow::on_table_acpi_add_cellEntered(int row, int column)
     Q_UNUSED(column);
 }
 
-void MainWindow::on_lineEdit_textChanged(const QString& arg1)
+void MainWindow::lineEdit_textChanged(const QString& arg1)
 {
+    Q_UNUSED(arg1);
 }
 
-void MainWindow::on_lineEdit_textEdited(const QString& arg1)
+void MainWindow::lineEdit_textEdited(const QString& arg1)
 {
 
     if (!loading) {
@@ -10346,14 +10403,6 @@ void MainWindow::on_tabUEFI_currentChanged(int index)
     Q_UNUSED(index);
 }
 
-void MainWindow::on_table_dp_add0_currentItemChanged(QTableWidgetItem* current, QTableWidgetItem* previous)
-{
-}
-
-void MainWindow::on_table_nv_add0_currentItemChanged(QTableWidgetItem* current, QTableWidgetItem* previous)
-{
-}
-
 void MainWindow::on_table_nv_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
     if (!loading) {
@@ -10412,7 +10461,7 @@ void MainWindow::on_table_dp_del0_cellDoubleClicked(int row, int column)
 
 void MainWindow::on_table_acpi_add_cellDoubleClicked(int row, int column)
 {
-    if (ui->table_acpi_add->currentColumn() != 2) {
+    if (column != 2) {
 
         myTable = new QTableWidget;
         myTable = ui->table_acpi_add;
@@ -10470,9 +10519,7 @@ void MainWindow::on_table_acpi_del_cellDoubleClicked(int row, int column)
     myTable = new QTableWidget;
     myTable = ui->table_acpi_del;
 
-    int col = myTable->currentColumn();
-
-    if (col != 4 && col != 5)
+    if (column != 4 && column != 5)
         initLineEdit(myTable, row, column, row, column);
 }
 
@@ -10481,9 +10528,7 @@ void MainWindow::on_table_acpi_patch_cellDoubleClicked(int row, int column)
     myTable = new QTableWidget;
     myTable = ui->table_acpi_patch;
 
-    int col = myTable->currentColumn();
-
-    if (col != 11)
+    if (column != 11)
         initLineEdit(myTable, row, column, row, column);
 }
 
@@ -10492,9 +10537,7 @@ void MainWindow::on_table_booter_cellDoubleClicked(int row, int column)
     myTable = new QTableWidget;
     myTable = ui->table_booter;
 
-    int col = myTable->currentColumn();
-
-    if (col != 2)
+    if (column != 2)
         initLineEdit(myTable, row, column, row, column);
 }
 
@@ -10503,9 +10546,7 @@ void MainWindow::on_table_Booter_patch_cellDoubleClicked(int row, int column)
     myTable = new QTableWidget;
     myTable = ui->table_Booter_patch;
 
-    int col = myTable->currentColumn();
-
-    if (col != 9 && col != 10)
+    if (column != 9 && column != 10)
         initLineEdit(myTable, row, column, row, column);
 }
 
@@ -10514,9 +10555,7 @@ void MainWindow::on_table_kernel_add_cellDoubleClicked(int row, int column)
     myTable = new QTableWidget;
     myTable = ui->table_kernel_add;
 
-    int col = myTable->currentColumn();
-
-    if (col != 6 && col != 7)
+    if (column != 6 && column != 7)
         initLineEdit(myTable, row, column, row, column);
 }
 
@@ -10525,9 +10564,7 @@ void MainWindow::on_table_kernel_block_cellDoubleClicked(int row, int column)
     myTable = new QTableWidget;
     myTable = ui->table_kernel_block;
 
-    int col = myTable->currentColumn();
-
-    if (col != 4 && col != 5)
+    if (column != 4 && column != 5)
         initLineEdit(myTable, row, column, row, column);
 }
 
@@ -10536,9 +10573,7 @@ void MainWindow::on_table_kernel_Force_cellDoubleClicked(int row, int column)
     myTable = new QTableWidget;
     myTable = ui->table_kernel_Force;
 
-    int col = myTable->currentColumn();
-
-    if (col != 7 && col != 8)
+    if (column != 7 && column != 8)
         initLineEdit(myTable, row, column, row, column);
 }
 
@@ -10547,9 +10582,7 @@ void MainWindow::on_table_kernel_patch_cellDoubleClicked(int row, int column)
     myTable = new QTableWidget;
     myTable = ui->table_kernel_patch;
 
-    int col = myTable->currentColumn();
-
-    if (col != 12 && col != 13)
+    if (column != 12 && column != 13)
         initLineEdit(myTable, row, column, row, column);
 }
 
@@ -10659,4 +10692,27 @@ void MainWindow::on_table_dp_del_cellDoubleClicked(int row, int column)
     myTable = ui->table_dp_del;
 
     initLineEdit(myTable, row, column, row, column);
+}
+
+void MainWindow::on_editTargetHex_textChanged(const QString& arg1)
+{
+    bool ok;
+
+    QString hex = arg1;
+
+    int dec = hex.toInt(&ok, 16);
+
+    ui->editTarget->setText(QString::number(dec));
+}
+
+void MainWindow::on_actionNewWindow_triggered()
+{
+    QFileInfo appInfo(qApp->applicationDirPath());
+    QString pathSource = appInfo.filePath() + "/OC Auxiliary Tools";
+    QStringList arguments;
+    QString fn = "";
+    arguments << fn;
+    QProcess* process = new QProcess;
+    process->setEnvironment(process->environment());
+    process->start(pathSource, arguments);
 }

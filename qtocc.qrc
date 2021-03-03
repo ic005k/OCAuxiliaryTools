@@ -28,5 +28,8 @@
         <file>icon/undo.png</file>
         <file>icon/cu.png</file>
         <file>icon/ocf.png</file>
+        <file>icon/doc.png</file>
+        <file>icon/new.png</file>
+        <file>qt_zh_CN.qm</file>
     </qresource>
 </RCC>

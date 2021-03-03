@@ -995,7 +995,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1268,7 +1268,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2198,7 +2198,7 @@ behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2501,6 +2501,13 @@ options. The following values are supported:
              <item row="0" column="1">
               <widget class="QLineEdit" name="editPickerAttributes"/>
              </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="lblPickerAttributes">
+               <property name="text">
+                <string>0x00</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
            <widget class="QWidget" name="gridLayoutWidget_24">
@@ -2765,7 +2772,7 @@ login window can also be done with Command + F5 key combination.</string>
             <widget class="QToolButton" name="btnDLSetAll">
              <property name="geometry">
               <rect>
-               <x>320</x>
+               <x>530</x>
                <y>30</y>
                <width>81</width>
                <height>22</height>
@@ -2778,7 +2785,7 @@ login window can also be done with Command + F5 key combination.</string>
             <widget class="QToolButton" name="btnDLClear">
              <property name="geometry">
               <rect>
-               <x>430</x>
+               <x>620</x>
                <y>30</y>
                <width>81</width>
                <height>22</height>
@@ -2786,6 +2793,19 @@ login window can also be done with Command + F5 key combination.</string>
              </property>
              <property name="text">
               <string>Clear</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="lblDisplayLevel">
+             <property name="geometry">
+              <rect>
+               <x>310</x>
+               <y>30</y>
+               <width>181</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>0x00000000</string>
              </property>
             </widget>
            </widget>
@@ -2885,14 +2905,11 @@ this option.</string>
              <rect>
               <x>20</x>
               <y>270</y>
-              <width>291</width>
+              <width>481</width>
               <height>80</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_49">
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editDisplayDelay"/>
-             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_9">
                <property name="toolTip">
@@ -2929,8 +2946,29 @@ different amount of logging may be read (from least to most).</string>
                </property>
               </widget>
              </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="editDisplayDelay"/>
+             </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="editTarget"/>
+              <widget class="QLineEdit" name="editTarget">
+               <property name="clearButtonEnabled">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>&lt;== HEX  0x</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QLineEdit" name="editTargetHex">
+               <property name="clearButtonEnabled">
+                <bool>false</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -2949,10 +2987,38 @@ different amount of logging may be read (from least to most).</string>
                <string>ExposeSensitiveData</string>
               </property>
               <layout class="QGridLayout" name="gridLayout_45">
+               <item row="3" column="0" colspan="3">
+                <widget class="QCheckBox" name="chk04">
+                 <property name="text">
+                  <string>Expose OpenCore version in boot picker menu title</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" colspan="3">
+                <widget class="QCheckBox" name="chk08">
+                 <property name="text">
+                  <string>Expose OEM information as a set of UEFI variables</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="3">
+                <widget class="QCheckBox" name="chk02">
+                 <property name="text">
+                  <string>Expose OpenCore version as an UEFI variable</string>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="0">
                 <widget class="QLineEdit" name="editExposeSensitiveData"/>
                </item>
-               <item row="0" column="1">
+               <item row="1" column="0" colspan="3">
+                <widget class="QCheckBox" name="chk01">
+                 <property name="text">
+                  <string>Expose printable booter path as an UEFI variable</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
                 <spacer name="horizontalSpacer_24">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -2965,31 +3031,10 @@ different amount of logging may be read (from least to most).</string>
                  </property>
                 </spacer>
                </item>
-               <item row="1" column="0" colspan="2">
-                <widget class="QCheckBox" name="chk01">
+               <item row="0" column="1">
+                <widget class="QLabel" name="lblExposeSensitiveData">
                  <property name="text">
-                  <string>Expose printable booter path as an UEFI variable</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0" colspan="2">
-                <widget class="QCheckBox" name="chk02">
-                 <property name="text">
-                  <string>Expose OpenCore version as an UEFI variable</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0" colspan="2">
-                <widget class="QCheckBox" name="chk04">
-                 <property name="text">
-                  <string>Expose OpenCore version in boot picker menu title</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0" colspan="2">
-                <widget class="QCheckBox" name="chk08">
-                 <property name="text">
-                  <string>Expose OEM information as a set of UEFI variables</string>
+                  <string>0x00</string>
                  </property>
                 </widget>
                </item>
@@ -3005,163 +3050,6 @@ different amount of logging may be read (from least to most).</string>
                <string>ScanPolicy</string>
               </property>
               <layout class="QGridLayout" name="gridLayout_25">
-               <item row="0" column="0">
-                <widget class="QLineEdit" name="editScanPolicy">
-                 <property name="maximumSize">
-                  <size>
-                   <width>187</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1" colspan="7">
-                <spacer name="horizontalSpacer_66">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>994</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="0" colspan="2">
-                <widget class="QCheckBox" name="chk1">
-                 <property name="text">
-                  <string>OC_SCAN_FILE_SYSTEM_LOCK</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <spacer name="horizontalSpacer_30">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>70</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="3">
-                <widget class="QCheckBox" name="chk5">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_ESP</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4">
-                <spacer name="horizontalSpacer_25">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>71</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="5">
-                <widget class="QCheckBox" name="chk9">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_SASEX</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="6">
-                <spacer name="horizontalSpacer_34">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>70</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="7">
-                <widget class="QCheckBox" name="chk13">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_USB</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QCheckBox" name="chk2">
-                 <property name="text">
-                  <string>OC_SCAN_DEVICE_LOCK</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="2">
-                <spacer name="horizontalSpacer_32">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>70</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="2" column="3">
-                <widget class="QCheckBox" name="chk6">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_NTFS</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="4">
-                <spacer name="horizontalSpacer_28">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>71</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="2" column="5">
-                <widget class="QCheckBox" name="chk10">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_SCSI</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="6">
-                <spacer name="horizontalSpacer_36">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>70</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="2" column="7">
-                <widget class="QCheckBox" name="chk14">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_FIREWIRE</string>
-                 </property>
-                </widget>
-               </item>
                <item row="3" column="0">
                 <widget class="QCheckBox" name="chk3">
                  <property name="text">
@@ -3169,27 +3057,7 @@ different amount of logging may be read (from least to most).</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="2">
-                <spacer name="horizontalSpacer_31">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>70</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="3" column="3">
-                <widget class="QCheckBox" name="chk7">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_EXT</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="4">
+               <item row="3" column="5">
                 <spacer name="horizontalSpacer_26">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -3202,15 +3070,22 @@ different amount of logging may be read (from least to most).</string>
                  </property>
                 </spacer>
                </item>
-               <item row="3" column="5">
-                <widget class="QCheckBox" name="chk11">
+               <item row="2" column="6">
+                <widget class="QCheckBox" name="chk10">
                  <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_NVME</string>
+                  <string>OC_SCAN_ALLOW_DEVICE_SCSI</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="6">
-                <spacer name="horizontalSpacer_35">
+               <item row="1" column="4">
+                <widget class="QCheckBox" name="chk5">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_FS_ESP</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <spacer name="horizontalSpacer_32">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -3222,12 +3097,18 @@ different amount of logging may be read (from least to most).</string>
                  </property>
                 </spacer>
                </item>
-               <item row="3" column="7">
-                <widget class="QCheckBox" name="chk15">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_SDCARD</string>
+               <item row="0" column="2" colspan="7">
+                <spacer name="horizontalSpacer_66">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                </widget>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>994</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
                <item row="4" column="0">
                 <widget class="QCheckBox" name="chk4">
@@ -3236,7 +3117,34 @@ different amount of logging may be read (from least to most).</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="2">
+               <item row="4" column="8">
+                <widget class="QCheckBox" name="chk16">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_PCI</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_34">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>70</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="6">
+                <widget class="QCheckBox" name="chk11">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_NVME</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="3">
                 <spacer name="horizontalSpacer_29">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -3249,14 +3157,7 @@ different amount of logging may be read (from least to most).</string>
                  </property>
                 </spacer>
                </item>
-               <item row="4" column="3">
-                <widget class="QCheckBox" name="chk8">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_SATA</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="4">
+               <item row="4" column="5">
                 <spacer name="horizontalSpacer_27">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -3269,14 +3170,165 @@ different amount of logging may be read (from least to most).</string>
                  </property>
                 </spacer>
                </item>
-               <item row="4" column="5">
+               <item row="3" column="7">
+                <spacer name="horizontalSpacer_35">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>70</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="0">
+                <widget class="QCheckBox" name="chk2">
+                 <property name="text">
+                  <string>OC_SCAN_DEVICE_LOCK</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="4">
+                <widget class="QCheckBox" name="chk6">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_FS_NTFS</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="8">
+                <widget class="QCheckBox" name="chk14">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_FIREWIRE</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="3">
+                <widget class="QCheckBox" name="chk1">
+                 <property name="text">
+                  <string>OC_SCAN_FILE_SYSTEM_LOCK</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLineEdit" name="editScanPolicy">
+                 <property name="maximumSize">
+                  <size>
+                   <width>187</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QCheckBox" name="chk9">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_SASEX</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="5">
+                <spacer name="horizontalSpacer_28">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>71</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="3">
+                <spacer name="horizontalSpacer_30">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>70</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="3">
+                <spacer name="horizontalSpacer_31">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>70</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="8">
+                <widget class="QCheckBox" name="chk13">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_USB</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="7">
+                <spacer name="horizontalSpacer_36">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>70</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="4" column="4">
+                <widget class="QCheckBox" name="chk8">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_SATA</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="6">
                 <widget class="QCheckBox" name="chk12">
                  <property name="text">
                   <string>OC_SCAN_ALLOW_DEVICE_ATAPI</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="6">
+               <item row="1" column="5">
+                <spacer name="horizontalSpacer_25">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>71</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="4">
+                <widget class="QCheckBox" name="chk7">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_FS_EXT</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="8">
+                <widget class="QCheckBox" name="chk15">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_SDCARD</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="7">
                 <spacer name="horizontalSpacer_33">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -3289,10 +3341,10 @@ different amount of logging may be read (from least to most).</string>
                  </property>
                 </spacer>
                </item>
-               <item row="4" column="7">
-                <widget class="QCheckBox" name="chk16">
+               <item row="0" column="1">
+                <widget class="QLabel" name="lblScanPolicy">
                  <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_PCI</string>
+                  <string>0x00000000</string>
                  </property>
                 </widget>
                </item>
@@ -3478,31 +3530,6 @@ cause a boot failure when Apple Secure Boot is activated.</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="2">
-                  <widget class="QLabel" name="label_16">
-                   <property name="toolTip">
-                    <string>Valid values:
-• Optional — require nothing, no vault is enforced, insecure.
-• Basic — require vault.plist file present in OC directory. This provides basic filesystem integrity verification
-and may protect from unintentional filesystem corruption.
-• Secure — require vault.sig signature file for vault.plist in OC directory. This includes Basic integrity
-checking but also attempts to build a trusted bootchain.</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Enables vaulting mechanism in OpenCore.</string>
-                   </property>
-                   <property name="text">
-                    <string>Vault</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="3">
-                  <widget class="QComboBox" name="cboxVault">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="1" column="2">
                   <widget class="QLabel" name="label_45">
                    <property name="toolTip">
@@ -3556,6 +3583,38 @@ bootable. Operating systems shipped before the specified model was released will
                  </item>
                  <item row="0" column="3">
                   <widget class="QLineEdit" name="editPasswordSalt"/>
+                 </item>
+                 <item row="3" column="2">
+                  <widget class="QLabel" name="label_16">
+                   <property name="toolTip">
+                    <string>Valid values:
+• Optional — require nothing, no vault is enforced, insecure.
+• Basic — require vault.plist file present in OC directory. This provides basic filesystem integrity verification
+and may protect from unintentional filesystem corruption.
+• Secure — require vault.sig signature file for vault.plist in OC directory. This includes Basic integrity
+checking but also attempts to build a trusted bootchain.</string>
+                   </property>
+                   <property name="statusTip">
+                    <string> Enables vaulting mechanism in OpenCore.</string>
+                   </property>
+                   <property name="text">
+                    <string>Vault</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="3">
+                  <widget class="QComboBox" name="cboxVault">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="2">
+                  <widget class="QLabel" name="lblHaltLevel">
+                   <property name="text">
+                    <string>0x00000000</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
@@ -3805,7 +3864,7 @@ bootable. Operating systems shipped before the specified model was released will
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -7226,6 +7285,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionNewWindow"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
@@ -7386,6 +7446,14 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionOpen_database_directory">
    <property name="text">
     <string>Open database directory</string>
+   </property>
+  </action>
+  <action name="actionNewWindow">
+   <property name="text">
+    <string>New Window</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
  </widget>
