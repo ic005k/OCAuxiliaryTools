@@ -36,7 +36,7 @@ public:
 
     int numberOfRecentFilesToSave();
 
-    static const int MaxRecentFiles = 15; ///< Max number of names we keep.
+    static const int MaxRecentFiles = 21; ///< Max number of names we keep.
 
 public slots:
     /// The application can set the number of recent files retained/reported here

@@ -425,6 +425,10 @@ private slots:
         int previousColumn);
 
     void on_cboxSystemProductName_currentIndexChanged(const QString& arg1);
+    void on_editExposeSensitiveData_textChanged(const QString& arg1);
+    void on_editScanPolicy_textChanged(const QString& arg1);
+    void on_editDisplayLevel_textChanged(const QString& arg1);
+    void on_editPickerAttributes_textChanged(const QString& arg1);
 
     void on_btnGenerate_clicked();
 
@@ -472,8 +476,6 @@ private slots:
 
     void on_chk08_clicked();
 
-    void on_editExposeSensitiveData_textChanged(const QString& arg1);
-
     void on_chk1_clicked();
 
     void on_chk2_clicked();
@@ -505,8 +507,6 @@ private slots:
     void on_chk15_clicked();
 
     void on_chk16_clicked();
-
-    void on_editScanPolicy_textChanged(const QString& arg1);
 
     void on_chkD1_clicked();
 
@@ -546,8 +546,6 @@ private slots:
 
     void on_chkD19_clicked();
 
-    void on_editDisplayLevel_textChanged(const QString& arg1);
-
     void on_btnDLSetAll_clicked();
 
     void on_btnDLClear_clicked();
@@ -559,8 +557,6 @@ private slots:
     void on_chkPA3_clicked();
 
     void on_chkPA4_clicked();
-
-    void on_editPickerAttributes_textChanged(const QString& arg1);
 
     void on_table_acpi_add_itemChanged(QTableWidgetItem* item);
 
@@ -603,413 +599,9 @@ private slots:
 
     void on_table_uefi_ReservedMemory_itemChanged(QTableWidgetItem* item);
 
-    void on_chkFadtEnableReset_stateChanged(int arg1);
-
-    void on_chkNormalizeHeaders_stateChanged(int arg1);
-
-    void on_chkRebaseRegions_stateChanged(int arg1);
-
-    void on_chkResetHwSig_stateChanged(int arg1);
-
-    void on_chkResetLogoStatus_stateChanged(int arg1);
-
-    void on_chkAvoidRuntimeDefrag_stateChanged(int arg1);
-
-    void on_chkEnableWriteUnprotector_stateChanged(int arg1);
-
-    void on_chkRebuildAppleMemoryMap_stateChanged(int arg1);
-
-    void on_chkEnableSafeModeSlide_stateChanged(int arg1);
-
-    void on_chkDevirtualiseMmio_stateChanged(int arg1);
-
-    void on_chkForceExitBootServices_stateChanged(int arg1);
-
-    void on_chkSetupVirtualMap_stateChanged(int arg1);
-
-    void on_chkAllowRelocationBlock_stateChanged(int arg1);
-
-    void on_chkDisableSingleUser_stateChanged(int arg1);
-
-    void on_chkProtectMemoryRegions_stateChanged(int arg1);
-
-    void on_chkSignalAppleOS_stateChanged(int arg1);
-
-    void on_chkDisableVariableWrite_stateChanged(int arg1);
-
-    void on_chkProtectSecureBoot_stateChanged(int arg1);
-
-    void on_chkSyncRuntimePermissions_stateChanged(int arg1);
-
-    void on_chkDiscardHibernateMap_stateChanged(int arg1);
-
-    void on_chkProtectUefiServices_stateChanged(int arg1);
-
-    void on_chkProvideCustomSlide_stateChanged(int arg1);
-
-    void on_chkAppleCpuPmCfgLock_stateChanged(int arg1);
-
-    void on_chkDisableIoMapper_stateChanged(int arg1);
-
-    void on_chkLapicKernelPanic_stateChanged(int arg1);
-
-    void on_chkExternalDiskIcons_stateChanged(int arg1);
-
-    void on_chkExtendBTFeatureFlags_stateChanged(int arg1);
-
-    void on_chkForceSecureBootScheme_stateChanged(int arg1);
-
-    void on_chkPowerTimeoutKernelPanic_stateChanged(int arg1);
-
-    void on_chkLegacyCommpage_stateChanged(int arg1);
-
-    void on_chkAppleXcpmForceBoost_stateChanged(int arg1);
-
-    void on_chkAppleXcpmExtraMsrs_stateChanged(int arg1);
-
-    void on_chkIncreasePciBarSize_stateChanged(int arg1);
-
-    void on_chkCustomSMBIOSGuid_stateChanged(int arg1);
-
-    void on_chkXhciPortLimit_stateChanged(int arg1);
-
-    void on_chkThirdPartyDrives_stateChanged(int arg1);
-
-    void on_chkDisableLinkeditJettison_stateChanged(int arg1);
-
-    void on_chkPanicNoKextDump_stateChanged(int arg1);
-
-    void on_chkDisableRtcChecksum_stateChanged(int arg1);
-
-    void on_chkAppleXcpmCfgLock_stateChanged(int arg1);
-
-    void on_chkFuzzyMatch_stateChanged(int arg1);
-
-    void on_chkHideAuxiliary_stateChanged(int arg1);
-
-    void on_chkPickerAudioAssist_stateChanged(int arg1);
-
-    void on_chkPollAppleHotKeys_stateChanged(int arg1);
-
-    void on_chkShowPicker_stateChanged(int arg1);
-
-    void on_chkAppleDebug_stateChanged(int arg1);
-
-    void on_chkApplePanic_stateChanged(int arg1);
-
-    void on_chkDisableWatchDog_stateChanged(int arg1);
-
-    void on_chkSysReport_stateChanged(int arg1);
-
-    void on_chkSerialInit_stateChanged(int arg1);
-
-    void on_chkAllowNvramReset_stateChanged(int arg1);
-
-    void on_chkAllowSetDefault_stateChanged(int arg1);
-
-    void on_chkAuthRestart_stateChanged(int arg1);
-
-    void on_chkBlacklistAppleUpdate_stateChanged(int arg1);
-
-    void on_chkEnablePassword_stateChanged(int arg1);
-
-    void on_chkLegacyEnable_stateChanged(int arg1);
-
-    void on_chkLegacyOverwrite_stateChanged(int arg1);
-
-    void on_chkWriteFlash_stateChanged(int arg1);
-
-    void on_chkAutomatic_stateChanged(int arg1);
-
-    void on_chkCustomMemory_stateChanged(int arg1);
-
-    void on_chkUpdateDataHub_stateChanged(int arg1);
-
-    void on_chkUpdateNVRAM_stateChanged(int arg1);
-
-    void on_chkUpdateSMBIOS_stateChanged(int arg1);
-
-    void on_chkAdviseWindows_stateChanged(int arg1);
-
-    void on_chkSpoofVendor_stateChanged(int arg1);
-
-    void on_chkEnableJumpstart_stateChanged(int arg1);
-
-    void on_chkJumpstartHotPlug_stateChanged(int arg1);
-
-    void on_chkHideVerbose_stateChanged(int arg1);
-
-    void on_chkGlobalConnect_stateChanged(int arg1);
-
-    void on_chkIgnoreInvalidFlexRatio_stateChanged(int arg1);
-
-    void on_chkReleaseUsbOwnership_stateChanged(int arg1);
-
-    void on_chkRequestBootVarRouting_stateChanged(int arg1);
-
-    void on_chkUnblockFsConnect_stateChanged(int arg1);
-
-    void on_chkAudioSupport_stateChanged(int arg1);
-
-    void on_chkConnectDrivers_stateChanged(int arg1);
-
-    void on_chkKeyFiltering_stateChanged(int arg1);
-
-    void on_chkKeySwap_stateChanged(int arg1);
-
-    void on_chkKeySupport_stateChanged(int arg1);
-
-    void on_chkPointerSupport_stateChanged(int arg1);
-
-    void on_chkClearScreenOnModeSwitch_stateChanged(int arg1);
-
-    void on_chkDirectGopRendering_stateChanged(int arg1);
-
-    void on_chkReconnectOnResChange_stateChanged(int arg1);
-
-    void on_chkReplaceTabWithSpace_stateChanged(int arg1);
-
-    void on_chkForceResolution_stateChanged(int arg1);
-
-    void on_chkProvideConsoleGop_stateChanged(int arg1);
-
-    void on_chkIgnoreTextInGraphics_stateChanged(int arg1);
-
-    void on_chkUgaPassThrough_stateChanged(int arg1);
-
-    void on_chkSanitiseClearScreen_stateChanged(int arg1);
-
-    void on_chkAppleAudio_stateChanged(int arg1);
-
-    void on_chkAppleBootPolicy_stateChanged(int arg1);
-
-    void on_chkAppleDebugLog_stateChanged(int arg1);
-
-    void on_chkAppleEvent_stateChanged(int arg1);
-
-    void on_chkAppleImg4Verification_stateChanged(int arg1);
-
-    void on_chkAppleSecureBoot_stateChanged(int arg1);
-
-    void on_chkAppleRtcRam_stateChanged(int arg1);
-
-    void on_chkAppleKeyMap_stateChanged(int arg1);
-
-    void on_chkAppleImageConversion_stateChanged(int arg1);
-
-    void on_chkAppleFramebufferInfo_stateChanged(int arg1);
-
-    void on_chkAppleSmcIo_stateChanged(int arg1);
-
-    void on_chkAppleUserInterfaceTheme_stateChanged(int arg1);
-
-    void on_chkDataHub_stateChanged(int arg1);
-
-    void on_chkOSInfo_stateChanged(int arg1);
-
-    void on_chkHashServices_stateChanged(int arg1);
-
-    void on_chkFirmwareVolume_stateChanged(int arg1);
-
-    void on_chkDeviceProperties_stateChanged(int arg1);
-
-    void on_chkUnicodeCollation_stateChanged(int arg1);
-
-    void on_editProvideMaxSlide_textChanged(const QString& arg1);
-
-    void on_editCpuid1Data_textChanged(const QString& arg1);
-
-    void on_editCpuid1Mask_textChanged(const QString& arg1);
-
-    void on_chkDummyPowerManagement_stateChanged(int arg1);
-
-    void on_editMaxKernel_textChanged(const QString& arg1);
-
-    void on_editMinKernel_textChanged(const QString& arg1);
-
     void on_cboxKernelArch_currentIndexChanged(const QString& arg1);
 
     void on_cboxKernelCache_currentIndexChanged(const QString& arg1);
-
-    void on_editConsoleAttributes_textChanged(const QString& arg1);
-
-    void on_editTakeoffDelay_textChanged(const QString& arg1);
-
-    void on_editTimeout_textChanged(const QString& arg1);
-
-    void on_cboxHibernateMode_currentIndexChanged(const QString& arg1);
-
-    void on_cboxPickerMode_currentIndexChanged(const QString& arg1);
-
-    void on_editDisplayDelay_textChanged(const QString& arg1);
-
-    void on_editTarget_textChanged(const QString& arg1);
-
-    void on_editHaltLevel_textChanged(const QString& arg1);
-
-    void on_editApECID_textChanged(const QString& arg1);
-
-    void on_editPasswordHash_textChanged(const QString& arg1);
-
-    void on_editPasswordSalt_textChanged(const QString& arg1);
-
-    void on_cboxDmgLoading_currentIndexChanged(const QString& arg1);
-
-    void on_cboxVault_currentIndexChanged(const QString& arg1);
-
-    void on_cboxSecureBootModel_currentIndexChanged(const QString& arg1);
-
-    void on_editSystemSerialNumber_textChanged(const QString& arg1);
-
-    void on_editMLB_textChanged(const QString& arg1);
-
-    void on_editSystemUUID_textChanged(const QString& arg1);
-
-    void on_cboxSystemMemoryStatus_currentIndexChanged(const QString& arg1);
-
-    void on_editProcessorTypeGeneric_textChanged(const QString& arg1);
-
-    void on_editROM_textChanged(const QString& arg1);
-
-    void on_editARTFrequency_textChanged(const QString& arg1);
-
-    void on_editBoardProduct_textChanged(const QString& arg1);
-
-    void on_editBoardRevision_textChanged(const QString& arg1);
-
-    void on_editDevicePathsSupported_textChanged(const QString& arg1);
-
-    void on_editFSBFrequency_textChanged(const QString& arg1);
-
-    void on_editInitialTSC_textChanged(const QString& arg1);
-
-    void on_editPlatformName_textChanged(const QString& arg1);
-
-    void on_editSmcBranch_textChanged(const QString& arg1);
-
-    void on_editSmcPlatform_textChanged(const QString& arg1);
-
-    void on_editSmcRevision_textChanged(const QString& arg1);
-
-    void on_editStartupPowerEvents_textChanged(const QString& arg1);
-
-    void on_editSystemProductName_textChanged(const QString& arg1);
-
-    void on_editSystemSerialNumber_data_textChanged(const QString& arg1);
-
-    void on_editSystemUUID_data_textChanged(const QString& arg1);
-
-    void on_editDataWidth_textChanged(const QString& arg1);
-
-    void on_editTotalWidth_textChanged(const QString& arg1);
-
-    void on_editErrorCorrection_textChanged(const QString& arg1);
-
-    void on_editType_textChanged(const QString& arg1);
-
-    void on_editFormFactor_textChanged(const QString& arg1);
-
-    void on_editTypeDetail_textChanged(const QString& arg1);
-
-    void on_editMaxCapacity_textChanged(const QString& arg1);
-
-    void on_editBID_textChanged(const QString& arg1);
-
-    void on_editFirmwareFeatures_textChanged(const QString& arg1);
-
-    void on_editFirmwareFeaturesMask_textChanged(const QString& arg1);
-
-    void on_editMLB_2_textChanged(const QString& arg1);
-
-    void on_editROM_2_textChanged(const QString& arg1);
-
-    void on_editSystemUUID_PNVRAM_textChanged(const QString& arg1);
-
-    void on_editBIOSReleaseDate_textChanged(const QString& arg1);
-
-    void on_editBIOSVendor_textChanged(const QString& arg1);
-
-    void on_editBIOSVersion_textChanged(const QString& arg1);
-
-    void on_editBoardAssetTag_textChanged(const QString& arg1);
-
-    void on_editBoardLocationInChassis_textChanged(const QString& arg1);
-
-    void on_editBoardManufacturer_textChanged(const QString& arg1);
-
-    void on_editBoardProduct_2_textChanged(const QString& arg1);
-
-    void on_editBoardSerialNumber_textChanged(const QString& arg1);
-
-    void on_editBoardType_textChanged(const QString& arg1);
-
-    void on_editBoardVersion_textEdited(const QString& arg1);
-
-    void on_editChassisAssetTag_textEdited(const QString& arg1);
-
-    void on_editChassisManufacturer_textEdited(const QString& arg1);
-
-    void on_editChassisSerialNumber_textEdited(const QString& arg1);
-
-    void on_editChassisType_textEdited(const QString& arg1);
-
-    void on_editSystemVersion_textEdited(const QString& arg1);
-
-    void on_editSystemUUID_2_textEdited(const QString& arg1);
-
-    void on_editSystemSerialNumber_2_textEdited(const QString& arg1);
-
-    void on_editSystemSKUNumber_textEdited(const QString& arg1);
-
-    void on_editSystemProductName_2_textEdited(const QString& arg1);
-
-    void on_editSystemManufacturer_textEdited(const QString& arg1);
-
-    void on_editSystemFamily_textEdited(const QString& arg1);
-
-    void on_editSmcVersion_textEdited(const QString& arg1);
-
-    void on_editProcessorType_textEdited(const QString& arg1);
-
-    void on_editPlatformFeature_textEdited(const QString& arg1);
-
-    void on_editFirmwareFeaturesMask_2_textEdited(const QString& arg1);
-
-    void on_editFirmwareFeatures_2_textEdited(const QString& arg1);
-
-    void on_editChassisVersion_textEdited(const QString& arg1);
-
-    void on_editExitBootServicesDelay_textEdited(const QString& arg1);
-
-    void on_editTscSyncTimeout_textEdited(const QString& arg1);
-
-    void on_editMinDate_textEdited(const QString& arg1);
-
-    void on_editMinVersion_textEdited(const QString& arg1);
-
-    void on_editAudioCodec_textEdited(const QString& arg1);
-
-    void on_editAudioDevice_textEdited(const QString& arg1);
-
-    void on_editAudioOut_textEdited(const QString& arg1);
-
-    void on_editMinimumVolume_textEdited(const QString& arg1);
-
-    void on_editVolumeAmplifier_textEdited(const QString& arg1);
-
-    void on_editKeyForgetThreshold_textEdited(const QString& arg1);
-
-    void on_cboxKeySupportMode_currentIndexChanged(const QString& arg1);
-
-    void on_editPointerSupportMode_textEdited(const QString& arg1);
-
-    void on_editTimerResolution_textEdited(const QString& arg1);
-
-    void on_cboxConsoleMode_currentIndexChanged(const QString& arg1);
-
-    void on_cboxResolution_currentIndexChanged(const QString& arg1);
-
-    void on_cboxTextRenderer_currentIndexChanged(const QString& arg1);
 
     void on_table_dp_del_cellClicked(int row, int column);
 
@@ -1035,39 +627,19 @@ private slots:
 
     void on_table_Booter_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
-    void on_cboxPlayChime_currentTextChanged(const QString& arg1);
-
-    void on_chkPA5_clicked();
-
     void on_btnCheckUpdate();
 
     void replyFinished(QNetworkReply* reply);
 
-    void on_chkSaveDataHub_clicked();
-
-    void on_editSetupDelay_textChanged(const QString& arg1);
-
-    void on_cboxPickerVariant_currentTextChanged(const QString& arg1);
-
-    void on_chkDisableSecurityPolicy_stateChanged(int arg1);
+    void on_chkPA5_clicked();
+    void on_editTarget_textChanged(const QString& arg1);
+    void on_editHaltLevel_textChanged(const QString& arg1);
 
     void on_tabACPI_currentChanged(int index);
-
-    void on_editSetApfsTrimTimeout_textChanged(const QString& arg1);
-
-    void on_cboxLauncherOption_currentTextChanged(const QString& arg1);
-
-    void on_chkUseRawUuidEncoding_stateChanged(int arg1);
-
-    void on_cboxLauncherPath_currentTextChanged(const QString& arg1);
 
     void on_listMain_itemSelectionChanged();
 
     void on_listSub_itemSelectionChanged();
-
-    void on_editSystemSerialNumber_PlatformNVRAM_textChanged(const QString& arg1);
-
-    void on_chkGopPassThrough_clicked();
 
     void on_table_dp_add0_itemSelectionChanged();
 
@@ -1211,8 +783,12 @@ private slots:
 
     void on_table_acpi_add_cellPressed(int row, int column);
 
+    void setWM();
+
 private:
     Ui::MainWindow* ui;
+
+    void initRecentFilesForToolBar();
 
     dlgDatabase* myDatabase;
 
@@ -1292,6 +868,8 @@ private:
     bool pickerAttributes = false;
 
     void init_menu();
+
+    void init_setWindowModified();
 
     void init_hardware_info();
 

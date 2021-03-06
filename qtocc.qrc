@@ -36,5 +36,6 @@
         <file>icon/ok.png</file>
         <file>icon/clear.png</file>
         <file>icon/about.png</file>
+        <file>icon/rp.png</file>
     </qresource>
 </RCC>
