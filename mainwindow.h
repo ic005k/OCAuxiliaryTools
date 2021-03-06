@@ -2,11 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QCheckBox>
+#include <QClipboard>
 #include <QComboBox>
 #include <QDateTime>
 #include <QDebug>
 #include <QDesktopServices>
 #include <QLatin1Char>
+#include <QListWidgetItem>
 #include <QMainWindow>
 #include <QMimeData>
 #include <QPainter>
@@ -55,8 +57,37 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    QAction* clearTextsAction;
+
     QObjectList getAllUIControls(QObject* parent);
     QObjectList getAllCheckBox(QObjectList lstUIControls);
+    QObjectList getAllTableWidget(QObjectList lstUIControls);
+    QObjectList getAllLineEdit(QObjectList lstUIControls);
+    QObjectList getAllLabel(QObjectList lstUIControls);
+    QObjectList getAllComboBox(QObjectList lstUIControls);
+    QObjectList listOfCheckBox;
+    QObjectList listOfTableWidget;
+    QObjectList listOfLabel;
+    QObjectList listOfLineEdit;
+    QObjectList listOfComboBox;
+    void findTable(QTableWidget* t, QString text);
+    int findCount = 0;
+    QObjectList listOfCheckBoxResults;
+    QObjectList listOfTableWidgetResults;
+    QObjectList listOfLabelResults;
+    QObjectList listOfLineEditResults;
+    QObjectList listOfComboBoxResults;
+    QStringList listNameResults;
+    int indexOfResults = 0;
+    void goResults(int index);
+    QWidget* currentTabWidget;
+    QWidget* getSubTabWidget(int m, int s);
+    QWidget* currentMainTabWidget;
+    int red = 0;
+    void clearCheckBoxMarker();
+    void clearLabelMarker();
+    void clearComboBoxMarker();
+    void clearLineEditMarker();
 
     RecentFiles* m_recentFiles;
     QLineEdit* lineEdit;
@@ -172,12 +203,16 @@ protected:
     void dropEvent(QDropEvent* e) override;
     void closeEvent(QCloseEvent* event) override;
     virtual void resizeEvent(QResizeEvent* event) override;
+    void keyPressEvent(QKeyEvent* event) override; //键盘按下事件
+    void keyReleaseEvent(QKeyEvent* event) override; //键盘松开事件
 
 #ifndef QT_NO_CONTEXTMENU
     void contextMenuEvent(QContextMenuEvent* event) override;
 #endif // QT_NO_CONTEXTMENU
 
 private slots:
+    void clearFindTexts();
+    void copyText(QListWidget* listW);
     void OpenDir_clicked();
     void on_ShareConfig();
     void on_Database();
@@ -1050,6 +1085,8 @@ private slots:
 
     void lineEdit_textChanged(const QString& arg1);
 
+    void setEditText();
+
     void lineEdit_textEdited(const QString& arg1);
 
     void on_table_nv_ls_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
@@ -1162,10 +1199,26 @@ private slots:
 
     void on_actionGo_to_the_next_triggered();
 
+    void on_cboxFind_currentIndexChanged(int index);
+
+    void on_cboxFind_currentTextChanged(const QString& arg1);
+
+    void on_listFind_currentRowChanged(int currentRow);
+
+    void on_cboxFind_currentIndexChanged(const QString& arg1);
+
+    void on_listFind_itemClicked(QListWidgetItem* item);
+
+    void on_table_acpi_add_cellPressed(int row, int column);
+
 private:
     Ui::MainWindow* ui;
 
     dlgDatabase* myDatabase;
+
+    QAction* pTrailingAction;
+
+    QMenu* reFileMenu;
 
     void setTableEdit();
 

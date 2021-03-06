@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210304";
+    CurVerison = "20210306";
     title = "OC Auxiliary Tools   V0.6.7    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -78,15 +78,6 @@ MainWindow::MainWindow(QWidget* parent)
     ui->tabNVRAM->setCurrentIndex(0);
     ui->tabPlatformInfo->setCurrentIndex(0);
     ui->tabUEFI->setCurrentIndex(0);
-
-    //ui->tabTotal->tabBar()->setTabToolTip(0, tr("ACPI"));
-    //ui->tabTotal->tabBar()->setTabToolTip(1, tr("Booter"));
-    //ui->tabTotal->tabBar()->setTabToolTip(2, tr("DeviceProperties"));
-    //ui->tabTotal->tabBar()->setTabToolTip(3, tr("Kernel"));
-    //ui->tabTotal->tabBar()->setTabToolTip(4, tr("Misc"));
-    //ui->tabTotal->tabBar()->setTabToolTip(5, tr("NVRAM"));
-    //ui->tabTotal->tabBar()->setTabToolTip(6, tr("PlatformInfo"));
-    //ui->tabTotal->tabBar()->setTabToolTip(7, tr("UEFI"));
 
     QString tabBarStyle0 = "QTabBar::tab {min-width:100px;border: 1px solid;border-top-left-radius: 5px;border-top-right-radius: 5px;padding:2px;}\
             QTabBar::tab:!selected {margin-top: 2px;}\
@@ -203,7 +194,10 @@ MainWindow::MainWindow(QWidget* parent)
 
 MainWindow::~MainWindow() { delete ui; }
 
-void MainWindow::recentOpen(QString filename) { openFile(filename); }
+void MainWindow::recentOpen(QString filename)
+{
+    openFile(filename);
+}
 
 void MainWindow::openFile(QString PlistFileName)
 {
@@ -5130,7 +5124,8 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         lineEdit->setFocus();
         lineEdit->setClearButtonEnabled(true);
 
-        connect(lineEdit, &QLineEdit::textChanged, this, &MainWindow::lineEdit_textEdited);
+        connect(lineEdit, &QLineEdit::returnPressed, this, &MainWindow::setEditText);
+        connect(lineEdit, &QLineEdit::textChanged, this, &MainWindow::lineEdit_textChanged);
     }
 }
 
@@ -5617,6 +5612,15 @@ void MainWindow::closeEvent(QCloseEvent* event)
     QSettings Reg(qfile, QSettings::IniFormat);
     Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
 
+    //搜索历史记录保存
+    int textTotal = ui->cboxFind->count();
+    Reg.setValue("textTotal", textTotal);
+    for (int i = 0; i < textTotal; i++) {
+        Reg.setValue(QString::number(i), ui->cboxFind->itemText(i));
+    }
+
+    file.close();
+
     if (this->isWindowModified()) {
 
         this->setFocus();
@@ -5968,6 +5972,8 @@ void MainWindow::on_tabTotal_tabBarClicked(int index)
 void MainWindow::on_tabTotal_currentChanged(int index)
 {
     on_tabTotal_tabBarClicked(index);
+
+    currentMainTabWidget = ui->tabTotal->widget(index);
 }
 
 void MainWindow::on_btnDevices_add_clicked()
@@ -7377,9 +7383,6 @@ void MainWindow::init_menu()
         ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
     ui->listMain->setCurrentRow(0);
 
-    //ui->listMain->setVisible(false);
-    //ui->listSub->setVisible(false);
-
     ui->tabTotal->tabBar()->setHidden(true);
 
     ui->tabACPI->tabBar()->setVisible(false);
@@ -7410,6 +7413,13 @@ void MainWindow::init_menu()
     ui->actionOpen->setShortcut(tr("ctrl+o"));
     ui->actionOpen->setIcon(QIcon(":/icon/open.png"));
     ui->toolBar->addAction(ui->actionOpen);
+    /*QToolButton* btn0 = new QToolButton(this);
+    btn0->setIcon(QIcon(":/icon/open.png"));
+    btn0->setPopupMode(QToolButton::InstantPopup);
+    ui->toolBar->addWidget(btn0);
+    reFileMenu = new QMenu(this);
+    reFileMenu->addMenu("recentFileListId");
+    btn0->setMenu(reFileMenu);*/
 
     //Save
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::on_btnSave);
@@ -7536,12 +7546,38 @@ void MainWindow::init_menu()
     ui->toolBar->addSeparator();
 
     //搜索框
-    //ui->toolBar->addWidget(ui->cboxFind);
+    ui->toolBar->addWidget(ui->lblCount);
+    ui->toolBar->addWidget(ui->cboxFind);
+    ui->cboxFind->lineEdit()->setClearButtonEnabled(true);
+    ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
+    connect(ui->cboxFind->lineEdit(), &QLineEdit::returnPressed, this, &MainWindow::on_actionFind_triggered);
 
-    ui->cboxFind->setVisible(false);
-    ui->actionFind->setVisible(false);
-    ui->actionGo_to_the_previous->setVisible(false);
-    ui->actionGo_to_the_next->setVisible(false);
+    // 清除搜索历史
+    clearTextsAction = new QAction(this);
+    clearTextsAction->setToolTip(tr("Clear search history"));
+    clearTextsAction->setIcon(QIcon(":/icon/clear.png"));
+    //ui->cboxFind->lineEdit()->addAction(clearTextsAction, QLineEdit::TrailingPosition);
+    ui->cboxFind->lineEdit()->addAction(clearTextsAction, QLineEdit::LeadingPosition);
+    connect(clearTextsAction, SIGNAL(triggered()), this, SLOT(clearFindTexts()));
+
+    // 读取搜索历史
+    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+    QFile file(qfile);
+    QSettings Reg(qfile, QSettings::IniFormat);
+    int textTotal = Reg.value("textTotal").toInt();
+    for (int i = 0; i < textTotal; i++) {
+        ui->cboxFind->addItem(Reg.value(QString::number(i)).toString());
+    }
+    file.close();
+    ui->cboxFind->setCurrentText("");
+    if (textTotal > 0)
+        clearTextsAction->setEnabled(true);
+    else
+        clearTextsAction->setEnabled(false);
+
+    ui->dockWidgetContents->layout()->setMargin(1);
+    ui->dockFind->close();
+
     ui->pushButton->setVisible(false);
 
     //查找
@@ -7558,6 +7594,99 @@ void MainWindow::init_menu()
     ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
     ui->actionGo_to_the_next->setIcon(QIcon(":/icon/2.png"));
     ui->toolBar->addAction(ui->actionGo_to_the_next);
+
+    ui->toolBar->addSeparator();
+
+    // About
+    ui->actionAbout_2->setIcon(QIcon(":/icon/about.png"));
+    ui->toolBar->addAction(ui->actionAbout_2);
+
+    //Copy Label
+    listOfLabel.clear();
+    listOfLabel = getAllLabel(getAllUIControls(ui->tabTotal));
+    for (int i = 0; i < listOfLabel.count(); i++) {
+        QLabel* w = (QLabel*)listOfLabel.at(i);
+        //lbl->setTextInteractionFlags(Qt::TextSelectableByMouse);
+
+        w->setContextMenuPolicy(Qt::CustomContextMenu);
+
+        QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
+        QMenu* copyMenu = new QMenu(this);
+        copyMenu->addAction(copyAction);
+        connect(copyAction, &QAction::triggered, [=]() {
+            QString str = copyAction->text().trimmed();
+            QString str1 = str.replace(tr("CopyText"), "");
+
+            QClipboard* clipboard = QApplication::clipboard();
+            clipboard->setText(str1.trimmed());
+        });
+
+        connect(w, &QLabel::customContextMenuRequested, [=](const QPoint& pos) {
+            Q_UNUSED(pos);
+            copyMenu->exec(QCursor::pos());
+        });
+    }
+
+    //Copy CheckBox
+    listOfCheckBox.clear();
+    listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabTotal));
+    for (int i = 0; i < listOfCheckBox.count(); i++) {
+        QCheckBox* w = (QCheckBox*)listOfCheckBox.at(i);
+
+        w->setContextMenuPolicy(Qt::CustomContextMenu);
+
+        QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
+        QMenu* copyMenu = new QMenu(this);
+        copyMenu->addAction(copyAction);
+        connect(copyAction, &QAction::triggered, [=]() {
+            //qDebug() << QObject::sender()->objectName();
+            QString str = copyAction->text().trimmed();
+            QString str1 = str.replace(tr("CopyText"), "");
+
+            QClipboard* clipboard = QApplication::clipboard();
+            clipboard->setText(str1.trimmed());
+        });
+
+        connect(w, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
+            Q_UNUSED(pos);
+            copyMenu->exec(QCursor::pos());
+        });
+    }
+
+    // Copy list
+    copyText(ui->listFind);
+    copyText(ui->listMain);
+    copyText(ui->listSub);
+
+    //lineEdit
+    pTrailingAction = new QAction(this);
+    pTrailingAction->setIcon(QIcon(":/icon/ok.png"));
+}
+
+void MainWindow::copyText(QListWidget* listW)
+{
+    listW->setContextMenuPolicy(Qt::CustomContextMenu);
+    QAction* copyAction3 = new QAction(tr("CopyText"));
+    QMenu* copyMenu3 = new QMenu(this);
+    copyMenu3->addAction(copyAction3);
+    connect(copyAction3, &QAction::triggered, [=]() {
+        QString str = listW->item(listW->currentRow())->text().trimmed();
+
+        QClipboard* clipboard = QApplication::clipboard();
+        clipboard->setText(str);
+    });
+
+    connect(listW, &QListWidget::customContextMenuRequested, [=](const QPoint& pos) {
+        Q_UNUSED(pos);
+        if (listW->count() > 0)
+            copyMenu3->exec(QCursor::pos());
+    });
+}
+
+void MainWindow::clearFindTexts()
+{
+    ui->cboxFind->clear();
+    clearTextsAction->setEnabled(false);
 }
 
 void MainWindow::on_Database()
@@ -9551,7 +9680,8 @@ void MainWindow::on_cboxPickerVariant_currentTextChanged(const QString& arg1)
 
 void MainWindow::on_tabACPI_currentChanged(int index)
 {
-    Q_UNUSED(index);
+
+    currentTabWidget = ui->tabACPI->widget(index);
 }
 
 void MainWindow::OpenDir_clicked()
@@ -9974,13 +10104,18 @@ void MainWindow::on_table_acpi_add_cellEntered(int row, int column)
 
 void MainWindow::lineEdit_textChanged(const QString& arg1)
 {
+
     Q_UNUSED(arg1);
+    lineEdit->removeAction(pTrailingAction);
+    lineEdit->setWindowModified(true);
 }
 
-void MainWindow::lineEdit_textEdited(const QString& arg1)
+void MainWindow::setEditText()
 {
-
     if (!loading) {
+
+        if (!lineEdit->isWindowModified())
+            return;
 
         int row;
         int col;
@@ -9988,11 +10123,19 @@ void MainWindow::lineEdit_textEdited(const QString& arg1)
         row = myTable->currentRow();
         col = myTable->currentColumn();
         oldText = myTable->item(row, col)->text();
-        QUndoCommand* editCommand = new EditCommand(oldText, myTable, myTable->currentRow(), myTable->currentColumn(), arg1);
+        QUndoCommand* editCommand = new EditCommand(oldText, myTable, myTable->currentRow(), myTable->currentColumn(), lineEdit->text());
         undoStack->push(editCommand);
+
+        lineEdit->addAction(pTrailingAction, QLineEdit::TrailingPosition);
 
         this->setWindowModified(true);
     }
+}
+
+void MainWindow::lineEdit_textEdited(const QString& arg1)
+{
+
+    Q_UNUSED(arg1);
 }
 
 void MainWindow::on_table_nv_ls_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
@@ -10132,12 +10275,12 @@ void MainWindow::removeWidget(QTableWidget* table)
 
 void MainWindow::on_tabBooter_currentChanged(int index)
 {
-    Q_UNUSED(index);
+    currentTabWidget = ui->tabBooter->widget(index);
 }
 
 void MainWindow::on_tabDP_currentChanged(int index)
 {
-    Q_UNUSED(index);
+    currentTabWidget = ui->tabDP->widget(index);
 }
 
 void MainWindow::removeAllLineEdit()
@@ -10418,27 +10561,27 @@ void MainWindow::goTable(QTableWidget* table)
 
 void MainWindow::on_tabKernel_currentChanged(int index)
 {
-    Q_UNUSED(index);
+    currentTabWidget = ui->tabKernel->widget(index);
 }
 
 void MainWindow::on_tabMisc_currentChanged(int index)
 {
-    Q_UNUSED(index);
+    currentTabWidget = ui->tabMisc->widget(index);
 }
 
 void MainWindow::on_tabNVRAM_currentChanged(int index)
 {
-    Q_UNUSED(index);
+    currentTabWidget = ui->tabNVRAM->widget(index);
 }
 
 void MainWindow::on_tabPlatformInfo_currentChanged(int index)
 {
-    Q_UNUSED(index);
+    currentTabWidget = ui->tabPlatformInfo->widget(index);
 }
 
 void MainWindow::on_tabUEFI_currentChanged(int index)
 {
-    Q_UNUSED(index);
+    currentTabWidget = ui->tabUEFI->widget(index);
 }
 
 void MainWindow::on_table_nv_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
@@ -10756,7 +10899,6 @@ void MainWindow::on_actionNewWindow_triggered()
 }
 
 /* 获取所有控件 */
-
 QObjectList MainWindow::getAllUIControls(QObject* parent)
 {
     QObjectList lstOfChildren, lstTemp;
@@ -10778,12 +10920,7 @@ QObjectList MainWindow::getAllUIControls(QObject* parent)
     return lstOfChildren;
 }
 
-/* 获取界面上所有按钮；
-
-   当然也可以是所有的lineEdit或其他；
-
-*/
-
+// 获取所有的chkbox
 QObjectList MainWindow::getAllCheckBox(QObjectList lstUIControls)
 {
     QObjectList lstOfCheckBox;
@@ -10795,9 +10932,53 @@ QObjectList MainWindow::getAllCheckBox(QObjectList lstUIControls)
     return lstOfCheckBox;
 }
 
+QObjectList MainWindow::getAllTableWidget(QObjectList lstUIControls)
+{
+    QObjectList lstOfTableWidget;
+    foreach (QObject* obj, lstUIControls) {
+        if (obj->metaObject()->className() == QStringLiteral("QTableWidget")) {
+            lstOfTableWidget.append(obj);
+        }
+    }
+    return lstOfTableWidget;
+}
+
+QObjectList MainWindow::getAllLabel(QObjectList lstUIControls)
+{
+    QObjectList lstOfLabel;
+    foreach (QObject* obj, lstUIControls) {
+        if (obj->metaObject()->className() == QStringLiteral("QLabel")) {
+            lstOfLabel.append(obj);
+        }
+    }
+    return lstOfLabel;
+}
+
+QObjectList MainWindow::getAllLineEdit(QObjectList lstUIControls)
+{
+    QObjectList lstOfLineEdit;
+    foreach (QObject* obj, lstUIControls) {
+        if (obj->metaObject()->className() == QStringLiteral("QLineEdit")) {
+            lstOfLineEdit.append(obj);
+        }
+    }
+    return lstOfLineEdit;
+}
+
+QObjectList MainWindow::getAllComboBox(QObjectList lstUIControls)
+{
+    QObjectList lstOfComboBox;
+    foreach (QObject* obj, lstUIControls) {
+        if (obj->metaObject()->className() == QStringLiteral("QComboBox")) {
+            lstOfComboBox.append(obj);
+        }
+    }
+    return lstOfComboBox;
+}
+
 void MainWindow::on_pushButton_clicked()
 {
-    QObjectList listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabACPI));
+    listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabACPI));
     for (int i = 0; i < listOfCheckBox.size(); i++) {
         QString name = listOfCheckBox.at(i)->objectName();
         //qDebug() << listOfCheckBox.at(i)->objectName();
@@ -10817,20 +10998,1177 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_actionFind_triggered()
 {
-    //QString findText = ui->cboxFind->currentText();
-    for (int i = 0; i < ui->listMain->count(); i++) {
-        ui->listMain->setCurrentRow(i);
+    QString findText = ui->cboxFind->currentText().trimmed();
 
-        for (int j = 0; j < ui->listSub->count(); j++) {
-            ui->listSub->setCurrentRow(j);
+    if (findText == "")
+        return;
+
+    if (ui->cboxFind->count() > 0)
+        clearTextsAction->setEnabled(true);
+
+    findCount = 0;
+    listNameResults.clear();
+    loading = true;
+    ui->listFind->clear();
+    loading = false;
+    indexOfResults = -1;
+
+    //清理标记
+    clearCheckBoxMarker();
+    clearComboBoxMarker();
+    clearLabelMarker();
+    clearLineEditMarker();
+
+    listOfCheckBoxResults.clear();
+    listOfLabelResults.clear();
+    listOfLineEditResults.clear();
+    listOfComboBoxResults.clear();
+    listOfTableWidgetResults.clear();
+
+    //CheckBox  1
+    listOfCheckBox.clear();
+    listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabTotal));
+
+    listOfCheckBoxResults.clear();
+
+    for (int i = 0; i < listOfCheckBox.count(); i++) {
+        QCheckBox* chkbox = (QCheckBox*)listOfCheckBox.at(i);
+        if (chkbox->text().toLower().contains(findText.trimmed().toLower())) {
+            findCount++;
+            listOfCheckBoxResults.append(chkbox);
+            listNameResults.append("1" + chkbox->objectName());
+            ui->listFind->addItem(chkbox->text());
+
+            //qDebug() << chkbox->objectName() << chkbox->text();
+        }
+    }
+
+    //Table  2
+    listOfTableWidget.clear();
+    listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
+    listOfTableWidgetResults.clear();
+    for (int i = 0; i < listOfTableWidget.count(); i++) {
+        QTableWidget* t;
+        t = (QTableWidget*)listOfTableWidget.at(i);
+
+        // DP
+        if (t == ui->table_dp_add0) {
+            if (t->rowCount() > 0) {
+                for (int j = 0; j < t->rowCount(); j++) {
+                    t->setCurrentCell(j, 0);
+                    findTable(ui->table_dp_add, findText);
+                }
+            }
+        }
+
+        if (t == ui->table_dp_del0) {
+            if (t->rowCount() > 0) {
+                for (int j = 0; j < t->rowCount(); j++) {
+                    t->setCurrentCell(j, 0);
+                    findTable(ui->table_dp_del, findText);
+                }
+            }
+        }
+
+        // NVRAM
+        if (t == ui->table_nv_add0) {
+            if (t->rowCount() > 0) {
+                for (int j = 0; j < t->rowCount(); j++) {
+                    t->setCurrentCell(j, 0);
+                    findTable(ui->table_nv_add, findText);
+                }
+            }
+        }
+
+        if (t == ui->table_nv_del0) {
+            if (t->rowCount() > 0) {
+                for (int j = 0; j < t->rowCount(); j++) {
+                    t->setCurrentCell(j, 0);
+                    findTable(ui->table_nv_del, findText);
+                }
+            }
+        }
+
+        if (t == ui->table_nv_ls0) {
+            if (t->rowCount() > 0) {
+                for (int j = 0; j < t->rowCount(); j++) {
+                    t->setCurrentCell(j, 0);
+                    findTable(ui->table_nv_ls, findText);
+                }
+            }
+        }
+
+        //qDebug() << t->rowCount() << t->objectName();
+        if (t != ui->table_dp_add && t != ui->table_dp_del && t != ui->table_nv_add && t != ui->table_nv_del && t != ui->table_nv_ls)
+            findTable(t, findText);
+    }
+
+    //Label  3
+    listOfLabel.clear();
+    listOfLabel = getAllLabel(getAllUIControls(ui->tabTotal));
+    listOfLabelResults.clear();
+    for (int i = 0; i < listOfLabel.count(); i++) {
+        QLabel* lbl = (QLabel*)listOfLabel.at(i);
+        if (lbl->text().toLower().contains(findText.trimmed().toLower())) {
+
+            findCount++;
+            listOfLabelResults.append(lbl);
+            listNameResults.append("3" + lbl->objectName());
+
+            ui->listFind->addItem(lbl->text());
+
+            //qDebug() << lbl->objectName() << lbl->text();
+        }
+    }
+
+    //LineEdit  4
+    listOfLineEdit.clear();
+    listOfLineEdit = getAllLineEdit(getAllUIControls(ui->tabTotal));
+    listOfComboBox.clear();
+    listOfComboBox = getAllComboBox(getAllUIControls(ui->tabTotal));
+    listOfLineEditResults.clear();
+    for (int i = 0; i < listOfLineEdit.count(); i++) {
+        QLineEdit* edit = (QLineEdit*)listOfLineEdit.at(i);
+        bool add = true;
+
+        for (int j = 0; j < listOfComboBox.count(); j++) {
+            QComboBox* cbox = (QComboBox*)listOfComboBox.at(j);
+            if (edit == cbox->lineEdit()) {
+                add = false;
+            }
+        }
+
+        if (edit == lineEdit)
+            add = false;
+
+        if (add) {
+
+            if (edit->text().toLower().contains(findText.trimmed().toLower())) {
+
+                findCount++;
+                listOfLineEditResults.append(edit);
+                listNameResults.append("4" + edit->objectName());
+
+                ui->listFind->addItem(edit->text());
+
+                //qDebug() << edit << edit->objectName() << edit->text();
+            }
+        }
+    }
+
+    //ComboBox  5
+    listOfComboBox.clear();
+    listOfComboBox = getAllComboBox(getAllUIControls(ui->tabTotal));
+    listOfComboBoxResults.clear();
+    for (int i = 0; i < listOfComboBox.count(); i++) {
+        QComboBox* cbox = (QComboBox*)listOfComboBox.at(i);
+        if (cbox != ui->cboxFind) {
+            if (cbox->currentText().toLower().contains(findText.trimmed().toLower())) {
+
+                findCount++;
+                listOfComboBoxResults.append(cbox);
+                listNameResults.append("5" + cbox->objectName());
+
+                ui->listFind->addItem(cbox->currentText());
+
+                //qDebug() << cbox->objectName() << cbox->currentText();
+            }
+        }
+    }
+
+    ui->lblCount->setText(QString::number(findCount));
+
+    if (listNameResults.count() > 0) {
+        ui->dockFind->show();
+
+        ui->listFind->setCurrentRow(0);
+
+        goResults(0);
+
+        if (red < 55) {
+
+            QPalette palette;
+            palette = ui->cboxFind->palette();
+            palette.setColor(QPalette::Base, QColor(50, 50, 50));
+            palette.setColor(QPalette::Text, Qt::white); //字色
+            ui->cboxFind->setPalette(palette);
+
+        } else {
+
+            QPalette palette;
+            palette = ui->cboxFind->palette();
+            palette.setColor(QPalette::Base, Qt::white);
+            palette.setColor(QPalette::Text, Qt::black); //字色
+            ui->cboxFind->setPalette(palette);
+        }
+
+    } else {
+        //字色
+        QPalette palette;
+        palette.setColor(QPalette::Text, Qt::white);
+        ui->cboxFind->setPalette(palette);
+
+        palette = ui->cboxFind->palette();
+        palette.setColor(QPalette::Base, QColor(255, 70, 70));
+        ui->cboxFind->setPalette(palette);
+    }
+}
+
+void MainWindow::findTable(QTableWidget* t, QString text)
+{
+    for (int i = 0; i < t->rowCount(); i++) {
+        for (int j = 0; j < t->columnCount(); ++j) {
+            if (t->item(i, j)->text().trimmed().toLower().contains(text.trimmed().toLower())) {
+
+                findCount++;
+                listOfTableWidgetResults.append(t);
+                listNameResults.append("2" + t->objectName());
+
+                ui->listFind->addItem(t->item(i, j)->text());
+
+                //命名规则：当前位置+对象名称
+                QString name = QString::number(listNameResults.count() - 1) + t->objectName();
+
+                QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + name + ".ini";
+                // qDebug() << plistPath;
+
+                QFile file(plistPath);
+                if (file.exists()) //如果文件存在，则先删除它
+                    file.remove();
+
+                QSettings Reg(plistPath, QSettings::IniFormat);
+
+                Reg.setValue("row", i);
+                Reg.setValue("col", j);
+
+                if (t == ui->table_dp_add) {
+                    Reg.setValue("leftTable", ui->table_dp_add0->objectName());
+                    Reg.setValue("leftTableRow", ui->table_dp_add0->currentRow());
+                }
+
+                if (t == ui->table_dp_del) {
+                    Reg.setValue("leftTable", ui->table_dp_del0->objectName());
+                    Reg.setValue("leftTableRow", ui->table_dp_del0->currentRow());
+                }
+
+                if (t == ui->table_nv_add) {
+                    Reg.setValue("leftTable", ui->table_nv_add0->objectName());
+                    Reg.setValue("leftTableRow", ui->table_nv_add0->currentRow());
+                }
+
+                if (t == ui->table_nv_del) {
+                    Reg.setValue("leftTable", ui->table_nv_del0->objectName());
+                    Reg.setValue("leftTableRow", ui->table_nv_del0->currentRow());
+                }
+
+                if (t == ui->table_nv_ls) {
+                    Reg.setValue("leftTable", ui->table_nv_ls0->objectName());
+                    Reg.setValue("leftTableRow", ui->table_nv_ls0->currentRow());
+                }
+
+                IniFile.push_back(plistPath);
+
+                //qDebug() << t << t->objectName() << i << j;
+            }
         }
     }
 }
 
 void MainWindow::on_actionGo_to_the_previous_triggered()
 {
+    if (listNameResults.count() == 0)
+        return;
+
+    int row = ui->listFind->currentRow();
+    row = row - 1;
+    if (row == -1)
+        row = 0;
+
+    ui->listFind->setCurrentRow(row);
+    goResults(row);
 }
 
 void MainWindow::on_actionGo_to_the_next_triggered()
 {
+    if (listNameResults.count() == 0)
+        return;
+
+    int row = ui->listFind->currentRow();
+    row = row + 1;
+    if (row == ui->listFind->count())
+        row = ui->listFind->count() - 1;
+
+    ui->listFind->setCurrentRow(row);
+    goResults(row);
+}
+
+void MainWindow::goResults(int index)
+{
+    QString objName = listNameResults.at(index);
+    //qDebug() << objName;
+    QString name = objName.mid(1, objName.length() - 1);
+    bool end = false;
+
+    //获取背景色
+    QPalette pal = this->palette();
+    QBrush brush = pal.window();
+    red = brush.color().red();
+
+    //清理chkbox标记
+    clearCheckBoxMarker();
+    clearLabelMarker();
+    clearLineEditMarker();
+    clearComboBoxMarker();
+
+    //chkbox
+    if (objName.mid(0, 1) == "1") {
+
+        for (int i = 0; i < ui->listMain->count(); i++) {
+
+            if (end)
+                break;
+
+            ui->listMain->setCurrentRow(i);
+            for (int j = 0; j < ui->listSub->count(); j++) {
+
+                if (end)
+                    break;
+
+                ui->listSub->setCurrentRow(j);
+                currentTabWidget = getSubTabWidget(i, j);
+                listOfCheckBox.clear();
+                listOfCheckBox = getAllCheckBox(getAllUIControls(currentTabWidget));
+                for (int k = 0; k < listOfCheckBox.count(); k++) {
+
+                    if (listOfCheckBox.at(k)->objectName() == name) {
+                        //qDebug() << name;
+                        QString style = "QCheckBox{background-color:rgb(255,0,0);color:rgb(255,255,255);}";
+                        QCheckBox* w = (QCheckBox*)listOfCheckBox.at(k);
+                        w->setStyleSheet(style);
+                        end = true;
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!end) {
+
+            for (int i = 0; i < ui->listMain->count(); i++) {
+
+                if (end)
+                    break;
+
+                ui->listMain->setCurrentRow(i);
+                listOfCheckBox.clear();
+                listOfCheckBox = getAllCheckBox(getAllUIControls(currentMainTabWidget));
+                for (int k = 0; k < listOfCheckBox.count(); k++) {
+
+                    if (listOfCheckBox.at(k)->objectName() == name) {
+                        //qDebug() << name;
+                        QString style = "QCheckBox{background-color:rgb(255,0,0);color:rgb(255,255,255);}";
+                        QCheckBox* w = (QCheckBox*)listOfCheckBox.at(k);
+                        w->setStyleSheet(style);
+                        end = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    //table 2
+    if (objName.mid(0, 1) == "2") {
+
+        for (int i = 0; i < ui->listMain->count(); i++) {
+
+            if (end)
+                break;
+
+            ui->listMain->setCurrentRow(i);
+            for (int j = 0; j < ui->listSub->count(); j++) {
+
+                if (end)
+                    break;
+
+                ui->listSub->setCurrentRow(j);
+                currentTabWidget = getSubTabWidget(i, j);
+                listOfTableWidget.clear();
+                listOfTableWidget = getAllTableWidget(getAllUIControls(currentTabWidget));
+                for (int k = 0; k < listOfTableWidget.count(); k++) {
+
+                    if (listOfTableWidget.at(k)->objectName() == name) {
+
+                        QString nameINI = QString::number(index) + name;
+
+                        QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + nameINI + ".ini";
+
+                        QFile file(plistPath);
+                        if (file.exists()) {
+                            QSettings Reg(plistPath, QSettings::IniFormat);
+                            int row = Reg.value("row").toInt();
+                            int col = Reg.value("col").toInt();
+
+                            if (Reg.value("leftTable").toString() == ui->table_dp_add0->objectName()) {
+                                ui->table_dp_add0->setCurrentCell(Reg.value("leftTableRow").toInt(), 0);
+                            }
+
+                            if (Reg.value("leftTable").toString() == ui->table_dp_del0->objectName()) {
+                                ui->table_dp_del0->setCurrentCell(Reg.value("leftTableRow").toInt(), 0);
+                            }
+
+                            if (Reg.value("leftTable").toString() == ui->table_nv_add0->objectName()) {
+                                ui->table_nv_add0->setCurrentCell(Reg.value("leftTableRow").toInt(), 0);
+                            }
+
+                            if (Reg.value("leftTable").toString() == ui->table_nv_del0->objectName()) {
+                                ui->table_nv_del0->setCurrentCell(Reg.value("leftTableRow").toInt(), 0);
+                            }
+
+                            if (Reg.value("leftTable").toString() == ui->table_nv_ls0->objectName()) {
+                                ui->table_nv_ls0->setCurrentCell(Reg.value("leftTableRow").toInt(), 0);
+                            }
+
+                            QTableWidget* w = (QTableWidget*)listOfTableWidget.at(k);
+                            w->setFocus();
+                            w->setCurrentCell(row, col);
+                        }
+
+                        end = true;
+
+                        qDebug() << name << plistPath << index << nameINI;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    //label  3
+    if (objName.mid(0, 1) == "3") {
+
+        for (int i = 0; i < ui->listMain->count(); i++) {
+
+            if (end)
+                break;
+
+            ui->listMain->setCurrentRow(i);
+            for (int j = 0; j < ui->listSub->count(); j++) {
+
+                if (end)
+                    break;
+
+                ui->listSub->setCurrentRow(j);
+                currentTabWidget = getSubTabWidget(i, j);
+                listOfLabel.clear();
+                listOfLabel = getAllLabel(getAllUIControls(currentTabWidget));
+                for (int k = 0; k < listOfLabel.count(); k++) {
+
+                    if (listOfLabel.at(k)->objectName() == name) {
+                        //qDebug() << name;
+                        QString style = "QLabel{background-color:rgb(255,0,0);color:rgb(255,255,255);}";
+                        QLabel* w = (QLabel*)listOfLabel.at(k);
+                        w->setStyleSheet(style);
+                        end = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!end) {
+
+            for (int i = 0; i < ui->listMain->count(); i++) {
+
+                if (end)
+                    break;
+
+                ui->listMain->setCurrentRow(i);
+                listOfLabel.clear();
+                listOfLabel = getAllLabel(getAllUIControls(currentMainTabWidget));
+                for (int k = 0; k < listOfLabel.count(); k++) {
+
+                    if (listOfLabel.at(k)->objectName() == name) {
+                        //qDebug() << name;
+                        QString style = "QLabel{background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
+                        QLabel* w = (QLabel*)listOfLabel.at(k);
+                        w->setStyleSheet(style);
+                        end = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    //lineedit  4
+    if (objName.mid(0, 1) == "4") {
+
+        for (int i = 0; i < ui->listMain->count(); i++) {
+
+            if (end)
+                break;
+
+            ui->listMain->setCurrentRow(i);
+            for (int j = 0; j < ui->listSub->count(); j++) {
+
+                if (end)
+                    break;
+
+                ui->listSub->setCurrentRow(j);
+                currentTabWidget = getSubTabWidget(i, j);
+                listOfLineEdit.clear();
+                listOfLineEdit = getAllLineEdit(getAllUIControls(currentTabWidget));
+                for (int k = 0; k < listOfLineEdit.count(); k++) {
+
+                    if (listOfLineEdit.at(k)->objectName() == name) {
+                        //qDebug() << name;
+                        QString style = "QLineEdit{background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
+                        QLineEdit* w = (QLineEdit*)listOfLineEdit.at(k);
+                        w->setStyleSheet(style);
+                        end = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!end) {
+
+            for (int i = 0; i < ui->listMain->count(); i++) {
+
+                if (end)
+                    break;
+
+                ui->listMain->setCurrentRow(i);
+                listOfLineEdit.clear();
+                listOfLineEdit = getAllLineEdit(getAllUIControls(currentMainTabWidget));
+                for (int k = 0; k < listOfLineEdit.count(); k++) {
+
+                    if (listOfLineEdit.at(k)->objectName() == name) {
+                        //qDebug() << name;
+                        QString style = "QLineEdit{background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
+                        QLineEdit* w = (QLineEdit*)listOfLineEdit.at(k);
+                        w->setStyleSheet(style);
+                        end = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    //combobox  5
+    if (objName.mid(0, 1) == "5") {
+
+        for (int i = 0; i < ui->listMain->count(); i++) {
+
+            if (end)
+                break;
+
+            ui->listMain->setCurrentRow(i);
+            for (int j = 0; j < ui->listSub->count(); j++) {
+
+                if (end)
+                    break;
+
+                ui->listSub->setCurrentRow(j);
+                currentTabWidget = getSubTabWidget(i, j);
+                listOfComboBox.clear();
+                listOfComboBox = getAllComboBox(getAllUIControls(currentTabWidget));
+                for (int k = 0; k < listOfComboBox.count(); k++) {
+
+                    if (listOfComboBox.at(k)->objectName() == name) {
+                        //qDebug() << name;
+                        QString style = "QComboBox{background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
+                        QComboBox* w = (QComboBox*)listOfComboBox.at(k);
+                        w->setStyleSheet(style);
+                        end = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!end) {
+
+            for (int i = 0; i < ui->listMain->count(); i++) {
+
+                if (end)
+                    break;
+
+                ui->listMain->setCurrentRow(i);
+                listOfComboBox.clear();
+                listOfComboBox = getAllComboBox(getAllUIControls(currentMainTabWidget));
+                for (int k = 0; k < listOfComboBox.count(); k++) {
+
+                    if (listOfComboBox.at(k)->objectName() == name) {
+                        //qDebug() << name;
+                        QString style = "QComboBox{background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
+                        QComboBox* w = (QComboBox*)listOfComboBox.at(k);
+                        w->setStyleSheet(style);
+                        end = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    ui->lblCount->setText(QString::number(findCount) + " ( " + QString::number(ui->listFind->currentRow() + 1) + " ) ");
+}
+
+void MainWindow::on_cboxFind_currentIndexChanged(int index)
+{
+    Q_UNUSED(index);
+}
+
+void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1)
+{
+    if (arg1.trimmed() == "") {
+        ui->lblCount->setText("0");
+        listNameResults.clear();
+
+        loading = true;
+        ui->listFind->clear();
+        loading = false;
+
+        clearCheckBoxMarker();
+        clearComboBoxMarker();
+        clearLabelMarker();
+        clearLineEditMarker();
+
+        //获取背景色
+        QPalette pal = this->palette();
+        QBrush brush = pal.window();
+        red = brush.color().red();
+
+        if (red < 55) {
+
+            QPalette palette;
+            palette = ui->cboxFind->palette();
+            palette.setColor(QPalette::Base, QColor(50, 50, 50));
+            palette.setColor(QPalette::Text, Qt::white); //字色
+            ui->cboxFind->setPalette(palette);
+
+        } else {
+
+            QPalette palette;
+            palette = ui->cboxFind->palette();
+            palette.setColor(QPalette::Base, Qt::white);
+            palette.setColor(QPalette::Text, Qt::black); //字色
+            ui->cboxFind->setPalette(palette);
+        }
+    }
+
+    //on_actionFind_triggered();
+}
+
+void MainWindow::clearCheckBoxMarker()
+{
+    for (int i = 0; i < listOfCheckBoxResults.count(); i++) {
+        QString style;
+        if (red > 55)
+            style = "QCheckBox{background-color:rgba(255,0,0,0);color:rgb(0,0,0);}";
+        else
+            style = "QCheckBox{background-color:rgba(255,0,0,0);color:rgb(225,225,225);}";
+        QCheckBox* w = (QCheckBox*)listOfCheckBoxResults.at(i);
+        w->setStyleSheet(style);
+    }
+}
+
+void MainWindow::clearLabelMarker()
+{
+    for (int i = 0; i < listOfLabelResults.count(); i++) {
+        QString style;
+        if (red > 55)
+            style = "QLabel{background-color:rgba(255,0,0,0);color:rgb(0,0,0);}";
+        else
+            style = "QLabel{background-color:rgba(255,0,0,0);color:rgb(225,225,225);}";
+        QLabel* w = (QLabel*)listOfLabelResults.at(i);
+        w->setStyleSheet(style);
+    }
+}
+
+void MainWindow::clearComboBoxMarker()
+{
+    for (int i = 0; i < listOfComboBoxResults.count(); i++) {
+        QString style;
+        if (red > 55)
+            style = "QComboBox{background-color:rgb(255,255,255);color:rgb(0,0,0);}";
+        else
+            style = "QComboBox{background-color:rgb(0,0,0);color:rgb(225,225,225);}";
+        QComboBox* w = (QComboBox*)listOfComboBoxResults.at(i);
+        w->setStyleSheet(style);
+    }
+}
+
+void MainWindow::clearLineEditMarker()
+{
+    for (int i = 0; i < listOfLineEditResults.count(); i++) {
+        QString style;
+        if (red > 55)
+            style = "QLineEdit{background-color:rgb(255,255,255);color:rgb(0,0,0);}";
+        else
+            style = "QLineEdit{background-color:rgb(25,25,25);color:rgb(225,225,225);}";
+        QLineEdit* w = (QLineEdit*)listOfLineEditResults.at(i);
+        w->setStyleSheet(style);
+    }
+}
+
+void MainWindow::on_listFind_currentRowChanged(int currentRow)
+{
+    Q_UNUSED(currentRow);
+
+    //if (!loading)
+    //    goResults(currentRow);
+}
+
+void MainWindow::on_cboxFind_currentIndexChanged(const QString& arg1)
+{
+    Q_UNUSED(arg1);
+    on_actionFind_triggered();
+}
+
+void MainWindow::on_listFind_itemClicked(QListWidgetItem* item)
+{
+    Q_UNUSED(item);
+    goResults(ui->listFind->currentRow());
+}
+
+QWidget* MainWindow::getSubTabWidget(int m, int s)
+{
+    if (m == 0) {
+        if (s == 0)
+            return ui->tabACPI1;
+        if (s == 1)
+            return ui->tabACPI2;
+        if (s == 2)
+            return ui->tabACPI3;
+        if (s == 3)
+            return ui->tabACPI4;
+    }
+
+    if (m == 1) {
+        switch (s) {
+        case 0:
+            return ui->tabBooter1;
+            break;
+        case 1:
+            return ui->tabBooter2;
+            break;
+        case 2:
+            return ui->tabBooter3;
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    if (m == 2) {
+        switch (s) {
+        case 0:
+            return ui->tabDP1;
+            break;
+        case 1:
+            return ui->tabDP2;
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    if (m == 3) {
+        switch (s) {
+        case 0:
+            return ui->tabKernel1;
+            break;
+        case 1:
+            return ui->tabKernel2;
+            break;
+        case 2:
+            return ui->tabKernel3;
+            break;
+        case 3:
+            return ui->tabKernel4;
+            break;
+        case 4:
+            return ui->tabKernel5;
+            break;
+        case 5:
+            return ui->tabKernel6;
+            break;
+        case 6:
+            return ui->tabKernel7;
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    if (m == 4) {
+        switch (s) {
+        case 0:
+            return ui->tabMisc1;
+            break;
+        case 1:
+            return ui->tabMisc2;
+            break;
+        case 2:
+            return ui->tabMisc3;
+            break;
+        case 3:
+            return ui->tabMisc4;
+            break;
+        case 4:
+            return ui->tabMisc5;
+            break;
+        case 5:
+            return ui->tabMisc6;
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    if (m == 5) {
+        switch (s) {
+        case 0:
+            return ui->tabNVRAM1;
+            break;
+        case 1:
+            return ui->tabNVRAM2;
+            break;
+        case 2:
+            return ui->tabNVRAM3;
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    if (m == 6) {
+        switch (s) {
+        case 0:
+            return ui->tabPlatformInfo1;
+            break;
+        case 1:
+            return ui->tabPlatformInfo2;
+            break;
+        case 2:
+            return ui->tabPlatformInfo3;
+            break;
+        case 3:
+            return ui->tabPlatformInfo4;
+            break;
+        case 4:
+            return ui->tabPlatformInfo5;
+            break;
+        case 5:
+            return ui->tabPlatformInfo6;
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    if (m == 7) {
+        switch (s) {
+        case 0:
+            return ui->tabUEFI1;
+            break;
+        case 1:
+            return ui->tabUEFI2;
+            break;
+        case 2:
+            return ui->tabUEFI3;
+            break;
+        case 3:
+            return ui->tabUEFI4;
+            break;
+        case 4:
+            return ui->tabUEFI5;
+            break;
+        case 5:
+            return ui->tabUEFI6;
+            break;
+        case 6:
+            return ui->tabUEFI7;
+            break;
+        case 7:
+            return ui->tabUEFI8;
+            break;
+
+        default:
+            break;
+        }
+    }
+}
+
+void MainWindow::on_table_acpi_add_cellPressed(int row, int column)
+{
+    Q_UNUSED(row);
+    Q_UNUSED(column);
+}
+
+//键盘按下事件
+void MainWindow::keyPressEvent(QKeyEvent* event)
+{
+    switch (event->key()) {
+    //ESC键
+    case Qt::Key_Escape:
+        //qDebug() << "ESC";
+        break;
+    //回车键
+    case Qt::Key_Return:
+        QTableWidget* t;
+
+        // ACPI
+        t = ui->table_acpi_add;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_acpi_add_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_acpi_del;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_acpi_del_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_acpi_patch;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_acpi_patch_cellDoubleClicked(row, col);
+        }
+
+        // Booter
+        t = ui->table_booter;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_booter_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_Booter_patch;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_Booter_patch_cellDoubleClicked(row, col);
+        }
+
+        // DP
+        t = ui->table_dp_add0;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_dp_add0_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_dp_add;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_dp_add_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_dp_del0;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_dp_del0_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_dp_del;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_dp_del_cellDoubleClicked(row, col);
+        }
+
+        // Kernel
+        t = ui->table_kernel_add;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_kernel_add_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_kernel_block;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_kernel_block_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_kernel_Force;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_kernel_Force_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_kernel_patch;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_kernel_patch_cellDoubleClicked(row, col);
+        }
+
+        // Misc
+        t = ui->tableBlessOverride;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_tableBlessOverride_cellDoubleClicked(row, col);
+        }
+
+        t = ui->tableEntries;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_tableEntries_cellDoubleClicked(row, col);
+        }
+
+        t = ui->tableTools;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_tableTools_cellDoubleClicked(row, col);
+        }
+
+        // NVRAM
+        t = ui->table_nv_add0;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_nv_add0_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_nv_add;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_nv_add_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_nv_del0;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_nv_del0_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_nv_del;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_nv_del_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_nv_ls0;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_nv_ls0_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_nv_ls;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_nv_ls_cellDoubleClicked(row, col);
+        }
+
+        // PI
+        t = ui->tableDevices;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_tableDevices_cellDoubleClicked(row, col);
+        }
+
+        // UEFI
+        t = ui->table_uefi_drivers;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_uefi_drivers_cellDoubleClicked(row, col);
+        }
+
+        t = ui->table_uefi_ReservedMemory;
+        if (t->hasFocus()) {
+            int row, col;
+            row = t->currentRow();
+            col = t->currentColumn();
+            on_table_uefi_ReservedMemory_cellDoubleClicked(row, col);
+        }
+
+        break;
+    //退格键
+    case Qt::Key_Backspace:
+        //qDebug() << "Back";
+        break;
+    //空格键
+    case Qt::Key_Space:
+        //qDebug() << "Space";
+        break;
+    //F1键
+    case Qt::Key_F1:
+        //qDebug() << "F1";
+        break;
+    }
+
+    //先检测Ctrl键是否按下
+    if (event->modifiers() == Qt::ControlModifier) {
+        //如果是，那么再检测M键是否按下
+        if (event->key() == Qt::Key_M) {
+            //按下则使窗口最大化
+            this->setWindowState(Qt::WindowMaximized);
+        }
+    }
+}
+
+//键盘释放事件
+void MainWindow::keyReleaseEvent(QKeyEvent* event)
+{
+    //方向UP键
+    if (event->key() == Qt::Key_Up) {
+        //qDebug() << "release: "
+        //         << "up";
+    }
 }

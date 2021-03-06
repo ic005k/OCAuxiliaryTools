@@ -38,7 +38,7 @@
      </property>
      <property name="icon">
       <iconset resource="qtocc.qrc">
-       <normaloff>:/find.png</normaloff>:/find.png</iconset>
+       <normaloff>:/icon/find.png</normaloff>:/icon/find.png</iconset>
      </property>
      <property name="iconSize">
       <size>

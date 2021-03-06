@@ -33,5 +33,8 @@
         <file>icon/1.png</file>
         <file>icon/2.png</file>
         <file>icon/find.png</file>
+        <file>icon/ok.png</file>
+        <file>icon/clear.png</file>
+        <file>icon/about.png</file>
     </qresource>
 </RCC>
