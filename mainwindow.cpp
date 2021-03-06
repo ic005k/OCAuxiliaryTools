@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     test(false);
     CurVerison = "20210307";
-    title = "OC Auxiliary Tools   V0.6.7    " + CurVerison + "        [*] ";
+    title = "OC Auxiliary Tools   V0.6.8    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
     QFont font;
@@ -772,39 +772,27 @@ void MainWindow::ParserBooter(QVariantMap map)
     // Quirks
     QVariantMap map_quirks = map["Quirks"].toMap();
 
-    ui->chkAvoidRuntimeDefrag->setChecked(
-        map_quirks["AvoidRuntimeDefrag"].toBool());
+    ui->chkAvoidRuntimeDefrag->setChecked(map_quirks["AvoidRuntimeDefrag"].toBool());
     ui->chkDevirtualiseMmio->setChecked(map_quirks["DevirtualiseMmio"].toBool());
-    ui->chkDisableSingleUser->setChecked(
-        map_quirks["DisableSingleUser"].toBool());
-    ui->chkDisableVariableWrite->setChecked(
-        map_quirks["DisableVariableWrite"].toBool());
-    ui->chkDiscardHibernateMap->setChecked(
-        map_quirks["DiscardHibernateMap"].toBool());
-    ui->chkEnableSafeModeSlide->setChecked(
-        map_quirks["EnableSafeModeSlide"].toBool());
-    ui->chkEnableWriteUnprotector->setChecked(
-        map_quirks["EnableWriteUnprotector"].toBool());
-    ui->chkForceExitBootServices->setChecked(
-        map_quirks["ForceExitBootServices"].toBool());
-    ui->chkProtectMemoryRegions->setChecked(
-        map_quirks["ProtectMemoryRegions"].toBool());
-    ui->chkProtectSecureBoot->setChecked(
-        map_quirks["ProtectSecureBoot"].toBool());
-    ui->chkProtectUefiServices->setChecked(
-        map_quirks["ProtectUefiServices"].toBool());
-    ui->chkProvideCustomSlide->setChecked(
-        map_quirks["ProvideCustomSlide"].toBool());
+    ui->chkDisableSingleUser->setChecked(map_quirks["DisableSingleUser"].toBool());
+    ui->chkDisableVariableWrite->setChecked(map_quirks["DisableVariableWrite"].toBool());
+    ui->chkDiscardHibernateMap->setChecked(map_quirks["DiscardHibernateMap"].toBool());
+    ui->chkEnableSafeModeSlide->setChecked(map_quirks["EnableSafeModeSlide"].toBool());
+    ui->chkEnableWriteUnprotector->setChecked(map_quirks["EnableWriteUnprotector"].toBool());
+    ui->chkForceExitBootServices->setChecked(map_quirks["ForceExitBootServices"].toBool());
+    ui->chkProtectMemoryRegions->setChecked(map_quirks["ProtectMemoryRegions"].toBool());
+    ui->chkProtectSecureBoot->setChecked(map_quirks["ProtectSecureBoot"].toBool());
+    ui->chkProtectUefiServices->setChecked(map_quirks["ProtectUefiServices"].toBool());
+    ui->chkProvideCustomSlide->setChecked(map_quirks["ProvideCustomSlide"].toBool());
     ui->editProvideMaxSlide->setText(map_quirks["ProvideMaxSlide"].toString());
-    ui->chkRebuildAppleMemoryMap->setChecked(
-        map_quirks["RebuildAppleMemoryMap"].toBool());
+    ui->chkRebuildAppleMemoryMap->setChecked(map_quirks["RebuildAppleMemoryMap"].toBool());
     ui->chkSetupVirtualMap->setChecked(map_quirks["SetupVirtualMap"].toBool());
     ui->chkSignalAppleOS->setChecked(map_quirks["SignalAppleOS"].toBool());
-    ui->chkSyncRuntimePermissions->setChecked(
-        map_quirks["SyncRuntimePermissions"].toBool());
+    ui->chkSyncRuntimePermissions->setChecked(map_quirks["SyncRuntimePermissions"].toBool());
 
-    ui->chkAllowRelocationBlock->setChecked(
-        map_quirks["AllowRelocationBlock"].toBool());
+    ui->chkAllowRelocationBlock->setChecked(map_quirks["AllowRelocationBlock"].toBool());
+
+    ui->chkForceBooterSignature->setChecked(map_quirks["ForceBooterSignature"].toBool());
 }
 
 void MainWindow::initui_dp()
@@ -2890,6 +2878,9 @@ QVariantMap MainWindow::SaveBooter()
     mapQuirks["EnableSafeModeSlide"] = getChkBool(ui->chkEnableSafeModeSlide);
     mapQuirks["EnableWriteUnprotector"] = getChkBool(ui->chkEnableWriteUnprotector);
     mapQuirks["ForceExitBootServices"] = getChkBool(ui->chkForceExitBootServices);
+
+    mapQuirks["ForceBooterSignature"] = getChkBool(ui->chkForceBooterSignature);
+
     mapQuirks["ProtectMemoryRegions"] = getChkBool(ui->chkProtectMemoryRegions);
     mapQuirks["ProtectSecureBoot"] = getChkBool(ui->chkProtectSecureBoot);
     mapQuirks["ProtectUefiServices"] = getChkBool(ui->chkProtectUefiServices);

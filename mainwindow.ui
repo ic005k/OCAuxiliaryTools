@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -987,6 +987,22 @@ such as select Insyde or MacPro5,1.</string>
                </property>
                <property name="text">
                 <string>ProtectSecureBoot</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QCheckBox" name="chkForceBooterSignature">
+               <property name="toolTip">
+                <string>Booter signature, essentially a SHA-1 hash of the loaded image, is used by Mac EFI to verify the authenticity of
+the bootloader when waking from hibernation. This option forces macOS to use OpenCore launcher SHA-1 hash
+as a booter signature to let OpenCore shim hibernation wake on Mac EFI firmware.
+Note: OpenCore launcher path is determined from LauncherPath property.</string>
+               </property>
+               <property name="statusTip">
+                <string>Set macOS boot-signature to OpenCore launcher.</string>
+               </property>
+               <property name="text">
+                <string>ForceBooterSignature</string>
                </property>
               </widget>
              </item>
