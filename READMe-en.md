@@ -13,6 +13,16 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 
 ## 特点包括但不限于：
 
+* 强大的关键词搜索功能，包括检索不可视的数据表
+
+* 所有的标签和检查框文本均支持复制（右键菜单）
+
+* 无限级别的撤消和重做（打开新文件时自动清除）
+
+* 多进程和单进程之间复制行和粘贴行
+
+* 内置良好的数据结构，以适应OpenCore的迅速迭代
+
 * 稳健的plist文件底层读写代码，确保数据读写的正确性
 
 * 内置配置文件数据库（[分享配置文件](https://github.com/ic005k/QtOpenCoreConfigDatabase/issues))
