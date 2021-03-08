@@ -17,31 +17,17 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 
 * Well-built data structures to accommodate rapid iterations of OpenCore
 
-* robust plist file bottom reading and writing code to ensure the correctness of data reading and writing
-
 * Built-in configuration file database ([Share configuration file](https://github.com/ic005k/QtOpenCoreConfigDatabase/issues))
 
 * Generate EFI folders on the desktop based on configuration files
 
-* Multilingual support (at present, Chinese and English interfaces are supported), which automatically recognizes the operating system language and loads the corresponding localized functions according to the language.
-
-* open source, cross-platform (win, mac, linux all provide binary file download)
-
 * Each function option adopts suspension prompt and status bar prompt
 
-* edit Config.plist completely and visually
-
 * Keep up with the latest development version of OpenCore and keep pace with it completely
-
-* mount ESP partition (mac, win) with one click
-
-* module import and export
 
 * Double-click to open the file, drag and drop the file to the software interface to open the file, and open the file history display
 
 * All three platforms use OC's official macserial to generate serial numbers
-
-* the software is written with all key values, which perfectly cooperates with OCvalidate data check of oc
 
 * Software UI adapts to various resolutions, including winpe and linux livecd, etc.
 
