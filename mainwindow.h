@@ -57,6 +57,11 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    void initCopyPasteLine();
+    void loadReghtTable(QTableWidget* t0, QTableWidget* t);
+    void endPasteLine(QTableWidget* w, int row, QString colText0);
+    void endDelLeftTable(QTableWidget* t0);
+
     QAction* clearTextsAction;
 
     QObjectList getAllUIControls(QObject* parent);

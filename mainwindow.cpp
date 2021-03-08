@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210307";
+    CurVerison = "20210308";
     title = "OC Auxiliary Tools   V0.6.8    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -62,6 +62,8 @@ MainWindow::MainWindow(QWidget* parent)
     init_menu();
 
     init_setWindowModified();
+
+    initCopyPasteLine();
 
     init_hardware_info();
 
@@ -1859,6 +1861,8 @@ void MainWindow::on_table_dp_add0_cellClicked(int row, int column)
 
     removeWidget(ui->table_dp_add);
 
+    loadReghtTable(ui->table_dp_add0, ui->table_dp_add);
+
     ui->statusbar->showMessage(ui->table_dp_add0->currentItem()->text());
 }
 
@@ -1888,7 +1892,7 @@ void MainWindow::on_table_nv_add0_cellClicked(int row, int column)
 
     removeWidget(ui->table_nv_add);
 
-    ui->statusbar->showMessage(ui->table_nv_add0->currentItem()->text());
+    loadReghtTable(ui->table_nv_add0, ui->table_nv_add);
 }
 
 void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item)
@@ -1971,7 +1975,7 @@ void MainWindow::on_table_nv_del0_cellClicked(int row, int column)
 
     removeWidget(ui->table_nv_del);
 
-    ui->statusbar->showMessage(ui->table_nv_del0->currentItem()->text());
+    loadReghtTable(ui->table_nv_del0, ui->table_nv_del);
 }
 
 void MainWindow::on_table_nv_ls0_cellClicked(int row, int column)
@@ -1981,7 +1985,7 @@ void MainWindow::on_table_nv_ls0_cellClicked(int row, int column)
 
     removeWidget(ui->table_nv_ls);
 
-    ui->statusbar->showMessage(ui->table_nv_ls0->currentItem()->text());
+    loadReghtTable(ui->table_nv_ls0, ui->table_nv_ls);
 }
 
 void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem* item)
@@ -2016,7 +2020,7 @@ void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
 
     removeWidget(ui->table_dp_del);
 
-    ui->statusbar->showMessage(ui->table_dp_del0->currentItem()->text());
+    loadReghtTable(ui->table_dp_del0, ui->table_dp_del);
 }
 
 void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item)
@@ -4254,25 +4258,7 @@ void MainWindow::on_btnDPAdd_Del0_clicked()
     if (ui->table_dp_add0->rowCount() == 0)
         return;
 
-    //先记住被删的条目位置
-    /*int delindex = ui->table_dp_add0->currentRow();
-    int count = ui->table_dp_add0->rowCount();
-
-    QString qz = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + ui->table_dp_add0->objectName();
-    QFile file(qz + QString::number(delindex + 1) + ".ini");*/
-
     del_item(ui->table_dp_add0);
-
-    /*if (file.exists())
-        file.remove();
-
-    //改名，以适应新的索引
-    if (delindex < count) {
-        for (int i = delindex; i < ui->table_dp_add0->rowCount(); i++) {
-            QFile file(qz + QString::number(i + 2) + ".ini");
-            file.rename(qz + QString::number(i + 1) + ".ini");
-        }
-    }*/
 
     if (ui->table_dp_add0->rowCount() == 0) {
         ui->table_dp_add->setRowCount(0);
@@ -5618,8 +5604,6 @@ void MainWindow::on_btnMountEsp()
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
-    if (event) {
-    };
 
     QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
     QFile file(qfile);
@@ -6850,7 +6834,9 @@ void MainWindow::show_menu(const QPoint pos)
         menu->addAction(act12);
 
         menu->move(cursor().pos());
-        menu->show();
+
+        //menu->show();
+
         //获得鼠标点击的x，y坐标点
         int x = pos.x();
         int y = pos.y();
@@ -7197,7 +7183,7 @@ void MainWindow::show_menu0(const QPoint pos)
     menu->addAction(act4);
 
     menu->move(cursor().pos());
-    menu->show();
+    //menu->show();
     //获得鼠标点击的x，y坐标点
     int x = pos.x();
     int y = pos.y();
@@ -8769,73 +8755,27 @@ void MainWindow::on_table_dp_add0_itemSelectionChanged()
 {
     //读取ini数据并加载到table_dp_add中
 
-    if (!ui->table_dp_add0->currentIndex().isValid())
-        return;
-
-    if (!loading) {
-
-        loading = true;
-        read_ini(ui->table_dp_add0, ui->table_dp_add, ui->table_dp_add0->currentRow());
-        loading = false;
-        ui->statusbar->showMessage(ui->table_dp_add0->currentItem()->text());
-    }
+    loadReghtTable(ui->table_dp_add0, ui->table_dp_add);
 }
 
 void MainWindow::on_table_dp_del0_itemSelectionChanged()
 {
-    if (!ui->table_dp_del0->currentIndex().isValid())
-        return;
-
-    if (!loading) {
-
-        loading = true;
-        read_value_ini(ui->table_dp_del0, ui->table_dp_del, ui->table_dp_del0->currentRow());
-        loading = false;
-
-        ui->statusbar->showMessage(ui->table_dp_del0->currentItem()->text());
-    }
+    loadReghtTable(ui->table_dp_del0, ui->table_dp_del);
 }
 
 void MainWindow::on_table_nv_add0_itemSelectionChanged()
 {
-    if (!loading) {
-
-        loading = true;
-
-        read_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        loading = false;
-
-        ui->statusbar->showMessage(ui->table_nv_add0->currentItem()->text());
-    }
+    loadReghtTable(ui->table_nv_add0, ui->table_nv_add);
 }
 
 void MainWindow::on_table_nv_del0_itemSelectionChanged()
 {
-    if (!loading) {
-
-        loading = true;
-
-        read_value_ini(ui->table_nv_del0, ui->table_nv_del, ui->table_nv_del0->currentRow());
-
-        loading = false;
-
-        ui->statusbar->showMessage(ui->table_nv_del0->currentItem()->text());
-    }
+    loadReghtTable(ui->table_nv_del0, ui->table_nv_del);
 }
 
 void MainWindow::on_table_nv_ls0_itemSelectionChanged()
 {
-    if (!loading) {
-
-        loading = true;
-
-        read_value_ini(ui->table_nv_ls0, ui->table_nv_ls, ui->table_nv_ls0->currentRow());
-
-        loading = false;
-
-        ui->statusbar->showMessage(ui->table_nv_ls0->currentItem()->text());
-    }
+    loadReghtTable(ui->table_nv_ls0, ui->table_nv_ls);
 }
 
 void MainWindow::on_table_acpi_add_itemEntered(QTableWidgetItem* item)
@@ -10953,4 +10893,257 @@ void MainWindow::init_setWindowModified()
 void MainWindow::setWM()
 {
     this->setWindowModified(true);
+}
+
+void MainWindow::initCopyPasteLine()
+{
+    listOfTableWidget.clear();
+    listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
+    for (int i = 0; i < listOfTableWidget.count(); i++) {
+        QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
+
+        w->setContextMenuPolicy(Qt::CustomContextMenu);
+
+        QAction* copyAction = new QAction(tr("Copy Line"));
+        QAction* pasteAction = new QAction(tr("Paste Line"));
+        QMenu* popMenu = new QMenu(this);
+        popMenu->addAction(copyAction);
+        popMenu->addAction(pasteAction);
+
+        // 复制行
+        connect(copyAction, &QAction::triggered, [=]() {
+            if (w->rowCount() == 0)
+                return;
+
+            QString name = w->objectName();
+            QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
+            QFile file(qfile);
+
+            QItemSelectionModel* selections = w->selectionModel(); //返回当前的选择模式
+            QModelIndexList selectedsList = selections->selectedIndexes(); //返回所有选定的模型项目索引列表
+
+            QSettings Reg(qfile, QSettings::IniFormat);
+            Reg.setValue("rowCount", selectedsList.count());
+            Reg.setValue("CurrentDateTime", CurrentDateTime);
+
+            for (int i = 0; i < selectedsList.count(); i++) {
+
+                int curRow = selectedsList.at(i).row();
+                w->setCurrentCell(curRow, 0);
+
+                for (int j = 0; j < w->columnCount(); j++) {
+                    Reg.setValue(QString::number(i) + "/col" + QString::number(j), w->item(w->currentRow(), j)->text());
+                }
+            }
+            file.close();
+        });
+
+        // 粘贴行
+        connect(pasteAction, &QAction::triggered, [=]() {
+            QString name = w->objectName();
+            QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
+            QSettings Reg(qfile, QSettings::IniFormat);
+
+            QFile file(qfile);
+
+            if (file.exists()) {
+
+                int rowCount = Reg.value("rowCount").toInt();
+                for (int i = 0; i < rowCount; i++) {
+
+                    loading = true;
+
+                    QString text = Reg.value(QString::number(i) + "/col" + QString::number(0)).toString().trimmed();
+                    QString oldColText0 = text;
+                    int row = 0;
+                    if (w->rowCount() > 0)
+                        row = w->currentRow();
+
+                    bool re = false;
+                    int reCount = 0;
+                    if (w->rowCount() > 0) {
+                        if (w == ui->table_dp_add0 || w == ui->table_dp_del0 || w == ui->table_nv_add0 || w == ui->table_nv_del0 || w == ui->table_nv_ls0) {
+
+                            for (int k = 0; k < w->rowCount(); k++) {
+
+                                if (w->item(k, 0)->text().trimmed().contains(text)) {
+                                    re = true;
+                                    reCount++;
+                                }
+                            }
+                        }
+                    }
+
+                    if (w->rowCount() > 0)
+                        w->setCurrentCell(row, 0);
+
+                    QStringList colTextList;
+                    for (int j = 0; j < w->columnCount(); j++) {
+
+                        text = Reg.value(QString::number(i) + "/col" + QString::number(j)).toString().trimmed();
+
+                        if (re) {
+
+                            text = text + "-" + QString::number(reCount);
+                        }
+
+                        colTextList.append(text);
+                    }
+
+                    // Undo / Redo
+                    QString infoStr;
+                    for (int x = 0; x < colTextList.count(); x++) {
+                        infoStr = infoStr + "  [" + colTextList.at(x) + "]";
+                    }
+                    QString infoText = QString::number(row + 1) + "  " + infoStr;
+                    QUndoCommand* pastelineCommand = new CopyPasteLineCommand(w, row, 0, infoText, colTextList, oldColText0);
+                    undoStack->push(pastelineCommand);
+
+                    loading = false;
+                }
+            }
+            file.close();
+        });
+
+        connect(w, &QTableWidget::customContextMenuRequested, [=](const QPoint& pos) {
+            Q_UNUSED(pos);
+
+            QString name = w->objectName();
+            QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
+            QFile file(qfile);
+            if (file.exists()) {
+
+                QSettings Reg(qfile, QSettings::IniFormat);
+
+                pasteAction->setEnabled(true);
+
+                if (w == ui->table_dp_add0 || w == ui->table_dp_del0 || w == ui->table_nv_add0 || w == ui->table_nv_del0 || w == ui->table_nv_ls0) {
+
+                    QString dirpath = QDir::homePath() + "/.config/QtOCC/";
+
+                    QString text = Reg.value("0/col" + QString::number(0)).toString().trimmed();
+
+                    text = text.replace("/", "-");
+                    QString oldRightTable = Reg.value("CurrentDateTime").toString() + w->objectName() + text + ".ini";
+                    QFileInfo fi(dirpath + oldRightTable);
+                    //qDebug() << dirpath + oldRightTable << text;
+                    if (!fi.exists())
+                        pasteAction->setEnabled(false);
+                    else
+                        copyAction->setEnabled(true);
+                }
+
+            } else
+                pasteAction->setEnabled(false);
+
+            if (w->rowCount() == 0)
+                copyAction->setEnabled(false);
+            else
+                copyAction->setEnabled(true);
+
+            popMenu->exec(QCursor::pos());
+        });
+    }
+}
+
+void MainWindow::loadReghtTable(QTableWidget* t0, QTableWidget* t)
+{
+
+    if (!t0->currentIndex().isValid())
+        return;
+
+    if (!loading) {
+
+        loading = true;
+        read_ini(t0, t, t0->currentRow());
+        loading = false;
+        ui->statusbar->showMessage(t0->currentItem()->text());
+    }
+}
+
+void MainWindow::endPasteLine(QTableWidget* w, int row, QString colText0)
+{
+    w->setCurrentCell(row, 0);
+
+    if (w == ui->table_dp_add0 || w == ui->table_dp_del0 || w == ui->table_nv_add0 || w == ui->table_nv_del0 || w == ui->table_nv_ls0) {
+
+        QString name = w->objectName();
+        QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
+        QSettings Reg(qfile, QSettings::IniFormat);
+
+        QString dirpath = QDir::homePath() + "/.config/QtOCC/";
+
+        colText0 = colText0.replace("/", "-");
+        QString oldRightTable = Reg.value("CurrentDateTime").toString() + w->objectName() + colText0 + ".ini";
+
+        QString newText = w->item(row, 0)->text().trimmed();
+        newText = newText.replace("/", "-");
+        QString newReghtTable = CurrentDateTime + w->objectName() + newText + ".ini";
+
+        qDebug() << oldRightTable;
+        qDebug() << newReghtTable;
+
+        QFileInfo fi(dirpath + oldRightTable);
+        if (fi.exists()) {
+            QFile::copy(dirpath + oldRightTable, dirpath + newReghtTable);
+            IniFile.push_back(dirpath + newReghtTable);
+        }
+
+        if (w == ui->table_dp_add0) {
+            loading = false;
+            loadReghtTable(w, ui->table_dp_add);
+        }
+
+        if (w == ui->table_dp_del0) {
+            loading = false;
+            loadReghtTable(w, ui->table_dp_del);
+        }
+
+        if (w == ui->table_nv_add0) {
+            loading = false;
+            loadReghtTable(w, ui->table_nv_add);
+        }
+
+        if (w == ui->table_nv_del0) {
+            loading = false;
+            loadReghtTable(w, ui->table_nv_del);
+        }
+
+        if (w == ui->table_nv_ls0) {
+            loading = false;
+            loadReghtTable(w, ui->table_nv_ls);
+        }
+    }
+}
+
+void MainWindow::endDelLeftTable(QTableWidget* t0)
+{
+    QTableWidget* t;
+
+    if (t0 == ui->table_dp_add0 || t0 == ui->table_dp_del0 || t0 == ui->table_nv_add0 || t0 == ui->table_nv_del0 || t0 == ui->table_nv_ls0) {
+
+        if (t0 == ui->table_dp_add0)
+            t = ui->table_dp_add;
+
+        if (t0 == ui->table_dp_del0)
+            t = ui->table_dp_del;
+
+        if (t0 == ui->table_nv_add0)
+            t = ui->table_nv_add;
+
+        if (t0 == ui->table_nv_del0)
+            t = ui->table_nv_del;
+
+        if (t0 == ui->table_nv_ls0)
+            t = ui->table_nv_ls;
+
+        if (t0->rowCount() == 0) {
+            t->setRowCount(0);
+        }
+
+        if (t0->rowCount() > 0) {
+
+            loadReghtTable(t0, t);
+        }
+    }
 }

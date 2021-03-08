@@ -71,6 +71,11 @@ void DeleteCommand::redo()
 
     m_table->removeRow(m_row);
 
+    if (m_table0 != NULL) {
+
+        mw_one->endDelLeftTable(m_table);
+    }
+
     mw_one->loading = false;
 }
 
@@ -99,6 +104,7 @@ void AddCommand::redo()
     m_table->setItem(m_row, m_col, new QTableWidgetItem(m_text));
 }
 
+// Edit
 EditCommand::EditCommand(QString oldText, QTableWidget* table, int row, int col, QString text, QUndoCommand* parent)
 {
     Q_UNUSED(parent);
@@ -157,6 +163,54 @@ void EditCommand::redo()
     mw_one->writeINI = false;
 
     mw_one->lineEdit->setWindowModified(false);
+}
+
+// CopyPasteLine
+CopyPasteLineCommand::CopyPasteLineCommand(QTableWidget* table, int row, int col, QString text, QStringList colTextList, QString oldColText0, QUndoCommand* parent)
+{
+    Q_UNUSED(parent);
+    m_table = table;
+    m_row = row;
+    m_col = col;
+    m_text = text;
+    m_colTextList = colTextList;
+    m_oldColText0 = oldColText0;
+
+    setText(QObject::tr("Paste Line") + "  " + text);
+}
+
+CopyPasteLineCommand::~CopyPasteLineCommand()
+{
+}
+
+void CopyPasteLineCommand::undo()
+{
+    m_table->removeRow(m_row);
+
+    mw_one->endDelLeftTable(m_table);
+
+    mw_one->goTable(m_table);
+}
+
+void CopyPasteLineCommand::redo()
+{
+    m_table->insertRow(m_row);
+
+    for (int i = 0; i < m_colTextList.count(); i++) {
+        QString colText = m_colTextList.at(i);
+        if (colText == "false" || colText == "true") {
+
+            mw_one->init_enabled_data(m_table, m_row, i, colText);
+
+        } else {
+
+            m_table->setItem(m_row, i, new QTableWidgetItem(colText));
+        }
+    }
+
+    mw_one->endPasteLine(m_table, m_row, m_oldColText0);
+
+    mw_one->goTable(m_table);
 }
 
 QString createCommandString(QString cmdStr)

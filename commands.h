@@ -107,6 +107,23 @@ private:
     QString m_oldText;
 };
 
+class CopyPasteLineCommand : public QUndoCommand {
+public:
+    CopyPasteLineCommand(QTableWidget* table, int row, int col, QString text, QStringList colTextList, QString oldColText0, QUndoCommand* parent = nullptr);
+    ~CopyPasteLineCommand();
+
+    void undo() override;
+    void redo() override;
+
+private:
+    QTableWidget* m_table;
+    int m_row;
+    int m_col;
+    QString m_text;
+    QStringList m_colTextList;
+    QString m_oldColText0;
+};
+
 QString createCommandString(QString cmdStr);
 
 #endif
