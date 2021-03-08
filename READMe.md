@@ -7,6 +7,16 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 
 ## Features include but are not limited to:
 
+* Powerful keyword search function, including retrieval of unseen data tables
+
+* All tabs and checkbox text are supported for copying (right-click menu)
+
+* Unlimited levels of undo and redo (automatically cleared when opening a new file)
+
+* Copy and paste rows between multiple processes and single processes
+
+* Well-built data structures to accommodate rapid iterations of OpenCore
+
 * robust plist file bottom reading and writing code to ensure the correctness of data reading and writing
 
 * Built-in configuration file database ([Share configuration file](https://github.com/ic005k/QtOpenCoreConfigDatabase/issues))
