@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -2262,7 +2262,7 @@ behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2300,25 +2300,29 @@ custom loaders, which are supposed to load OpenCore.efi themselves.</string>
                <property name="toolTip">
                 <string>Valid values:
 • Disabled — do nothing.
-• Full — create or update top-priority boot option in UEFI variable storage at bootloader startup. For this
-option to work RequestBootVarRouting is required to be enabled.
-• Short — create a short boot option instead of a complete one. This variant is useful for some older firmwares,
-Insyde in particular, but possibly others, which cannot handle full device paths.
-This option provides integration with third-party operating system installation and upgrade at the times they
-overwrite EFIBOOTBOOTx64.efi file. By creating a custom option in this file path becomes no longer used for
-bootstrapping OpenCore. The path used for bootstrapping is specified in LauncherPath option.
-
-Note 1 : Some types of firmware may have faulty NVRAM, no boot option support, or other incompatibilities.
-While unlikely, the use of this option may even cause boot failures. This option should be used without any
-warranty exclusively on the boards known to be compatible. Check acidanthera/bugtracker#1222 for some known
-issues with Haswell and other boards.
-
-Note 2 : Be aware that while NVRAM reset executed from OpenCore should not erase the boot option created in
-Bootstrap, executing NVRAM reset prior to loading OpenCore will remove it. For significant implementation
-updates (e.g. in OpenCore 0.6.4) make sure to perform NVRAM reset with Bootstrap disabled before reenabling.</string>
+• Full — create or update the top priority boot option in UEFI variable storage at bootloader startup.
+– For this option to work, RequestBootVarRouting is required to be enabled.
+• Short — create a short boot option instead of a complete one.
+– This variant is useful for some older types of firmware, typically from Insyde, that are unable to manage
+full device paths.
+• System — create no boot option but assume specified custom option is blessed.
+– This variant is useful when relying on ForceBooterSignature quirk and OpenCore launcher path
+management happens through bless utilities without involving OpenCore.
+This option allows integration with third-party operating system installation and upgrades (which may overwrite
+the EFIBOOTBOOTx64.efi file). The BOOTx64.efi file is no longer used for bootstrapping OpenCore if a
+custom option is created. The custom path used for bootstrapping can be specified by using the LauncherPath
+option.
+Note 1 : Some types of firmware may have NVRAM implementation flaws, no boot option support, or other
+incompatibilities. While unlikely, the use of this option may result in boot failures and should only be used
+exclusively on boards known to be compatible. Refer to acidanthera/bugtracker#1222 for some known issues
+affecting Haswell and other boards.
+Note 2 : While NVRAM resets executed from OpenCore would not typically erase the boot option created in
+Bootstrap, executing NVRAM resets prior to loading OpenCore will erase the boot option. Therefore, for
+significant implementation updates, such as was the case with OpenCore 0.6.4, an NVRAM reset should be
+executed with Bootstrap disabled, after which it can be re-enabled.</string>
                </property>
                <property name="statusTip">
-                <string>Register launcher option in firmware preferences for persistence.</string>
+                <string> Register the launcher option in the firmware preferences for persistence.</string>
                </property>
                <property name="text">
                 <string>LauncherOption</string>

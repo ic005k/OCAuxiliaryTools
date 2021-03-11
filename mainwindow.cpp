@@ -1341,6 +1341,7 @@ void MainWindow::initui_misc()
     ui->cboxLauncherOption->addItem("Disabled");
     ui->cboxLauncherOption->addItem("Full");
     ui->cboxLauncherOption->addItem("Short");
+    ui->cboxLauncherOption->addItem("System");
 
     ui->cboxLauncherPath->addItem("Default");
 
