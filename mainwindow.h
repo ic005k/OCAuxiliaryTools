@@ -16,6 +16,7 @@
 #include <QProxyStyle>
 #include <QSaveFile>
 #include <QSplitter>
+#include <QStyledItemDelegate>
 #include <QTableWidget>
 #include <QTextBlock>
 #include <QTextCodec>
@@ -57,6 +58,10 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    void clearAllTableSelection();
+
+    QTableWidget* getLeftTable(QTableWidget* table);
+    int getLetfTableCurrentRow(QTableWidget* table);
     void initCopyPasteLine();
     void loadReghtTable(QTableWidget* t0, QTableWidget* t);
     void endPasteLine(QTableWidget* w, int row, QString colText0);
@@ -268,8 +273,6 @@ private slots:
     void on_btnOpen();
 
     void on_table_dp_add0_cellClicked(int row, int column);
-
-    void on_table_dp_add_itemSelectionChanged();
 
     void on_table_dp_add_itemChanged(QTableWidgetItem* item);
 
@@ -563,50 +566,15 @@ private slots:
 
     void on_chkPA4_clicked();
 
-    void on_table_acpi_add_itemChanged(QTableWidgetItem* item);
-
-    void on_table_acpi_add_currentItemChanged(QTableWidgetItem* current,
-        QTableWidgetItem* previous);
-
-    void on_table_acpi_del_itemChanged(QTableWidgetItem* item);
-
-    void on_table_acpi_patch_itemChanged(QTableWidgetItem* item);
-
-    void on_table_booter_itemChanged(QTableWidgetItem* item);
-
     void on_table_dp_add0_itemChanged(QTableWidgetItem* item);
 
     void on_table_dp_del0_itemChanged(QTableWidgetItem* item);
-
-    void on_table_kernel_add_itemChanged(QTableWidgetItem* item);
-
-    void on_table_kernel_block_itemChanged(QTableWidgetItem* item);
-
-    void on_table_kernel_Force_itemChanged(QTableWidgetItem* item);
-
-    void on_table_kernel_patch_itemChanged(QTableWidgetItem* item);
-
-    void on_tableBlessOverride_itemChanged(QTableWidgetItem* item);
-
-    void on_tableEntries_itemChanged(QTableWidgetItem* item);
-
-    void on_tableTools_itemChanged(QTableWidgetItem* item);
 
     void on_table_nv_add0_itemChanged(QTableWidgetItem* item);
 
     void on_table_nv_del0_itemChanged(QTableWidgetItem* item);
 
     void on_table_nv_ls0_itemChanged(QTableWidgetItem* item);
-
-    void on_tableDevices_itemChanged(QTableWidgetItem* item);
-
-    void on_table_uefi_drivers_itemChanged(QTableWidgetItem* item);
-
-    void on_table_uefi_ReservedMemory_itemChanged(QTableWidgetItem* item);
-
-    void on_cboxKernelArch_currentIndexChanged(const QString& arg1);
-
-    void on_cboxKernelCache_currentIndexChanged(const QString& arg1);
 
     void on_table_dp_del_cellClicked(int row, int column);
 
@@ -793,6 +761,10 @@ private slots:
 private:
     Ui::MainWindow* ui;
 
+    QString orgComboBoxStyle;
+    QString orgLineEditStyle;
+    QString orgLabelStyle;
+    QString orgCheckBoxStyle;
     void initRecentFilesForToolBar();
 
     dlgDatabase* myDatabase;
@@ -898,6 +870,8 @@ private:
     QUndoView* undoView = nullptr;
     QAction* undoAction = nullptr;
     QAction* redoAction = nullptr;
+
+    void setComboBoxStyle(QComboBox* w);
 };
 
 class CustomTabStyle1 : public QProxyStyle {

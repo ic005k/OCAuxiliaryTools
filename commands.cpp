@@ -21,6 +21,7 @@ DeleteCommand::DeleteCommand(bool writeINI, bool loadINI, QTableWidget* table0, 
 
 void DeleteCommand::undo()
 {
+    mw_one->clearAllTableSelection();
 
     mw_one->goTable(m_table);
 
@@ -166,7 +167,7 @@ void EditCommand::redo()
 }
 
 // CopyPasteLine
-CopyPasteLineCommand::CopyPasteLineCommand(QTableWidget* table, int row, int col, QString text, QStringList colTextList, QString oldColText0, QUndoCommand* parent)
+CopyPasteLineCommand::CopyPasteLineCommand(QTableWidget* table, int row, int col, QString text, QStringList colTextList, QString oldColText0, bool writeini, bool writevalueini, int leftTableCurrentRow, QUndoCommand* parent)
 {
     Q_UNUSED(parent);
     m_table = table;
@@ -175,6 +176,9 @@ CopyPasteLineCommand::CopyPasteLineCommand(QTableWidget* table, int row, int col
     m_text = text;
     m_colTextList = colTextList;
     m_oldColText0 = oldColText0;
+    m_writeini = writeini;
+    m_writevalueini = writevalueini;
+    m_leftTableCurrentRow = leftTableCurrentRow;
 
     setText(QObject::tr("Paste Line") + "  " + text);
 }
@@ -185,15 +189,33 @@ CopyPasteLineCommand::~CopyPasteLineCommand()
 
 void CopyPasteLineCommand::undo()
 {
+
+    if (m_writeini || m_writevalueini)
+        mw_one->getLeftTable(m_table)->setCurrentCell(m_leftTableCurrentRow, 0);
+
     m_table->removeRow(m_row);
 
     mw_one->endDelLeftTable(m_table);
 
     mw_one->goTable(m_table);
+
+    if (m_writeini) {
+
+        mw_one->write_ini(mw_one->getLeftTable(m_table), m_table, mw_one->getLeftTable(m_table)->currentRow());
+    }
+
+    if (m_writevalueini) {
+
+        mw_one->write_value_ini(mw_one->getLeftTable(m_table), m_table, mw_one->getLeftTable(m_table)->currentRow());
+    }
 }
 
 void CopyPasteLineCommand::redo()
 {
+
+    if (m_writeini || m_writevalueini)
+        mw_one->getLeftTable(m_table)->setCurrentCell(m_leftTableCurrentRow, 0);
+
     m_table->insertRow(m_row);
 
     for (int i = 0; i < m_colTextList.count(); i++) {
@@ -211,6 +233,16 @@ void CopyPasteLineCommand::redo()
     mw_one->endPasteLine(m_table, m_row, m_oldColText0);
 
     mw_one->goTable(m_table);
+
+    if (m_writeini) {
+
+        mw_one->write_ini(mw_one->getLeftTable(m_table), m_table, mw_one->getLeftTable(m_table)->currentRow());
+    }
+
+    if (m_writevalueini) {
+
+        mw_one->write_value_ini(mw_one->getLeftTable(m_table), m_table, mw_one->getLeftTable(m_table)->currentRow());
+    }
 }
 
 QString createCommandString(QString cmdStr)

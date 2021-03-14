@@ -27,8 +27,8 @@ VS_VERSION_INFO VERSIONINFO
             BEGIN
                 VALUE "CompanyName", ""
                 VALUE "FileDescription", ""
-                VALUE "FileVersion", "0.6.8 - 20210308\0"
-                VALUE "ProductVersion", "0.6.8 - 20210308\0"
+                VALUE "FileVersion", "0.6.8 - 20210313\0"
+                VALUE "ProductVersion", "0.6.8 - 20210313\0"
                 VALUE "LegalCopyright", "\0"
                 VALUE "LegalTrademarks", ""
                 VALUE "OriginalFilename", "OCAT\0"

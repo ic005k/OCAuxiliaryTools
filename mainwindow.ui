@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1373</width>
-    <height>760</height>
+    <width>1482</width>
+    <height>757</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -82,7 +82,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -500,7 +500,7 @@ macOS Mojave (10.14).</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1059,7 +1059,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2262,7 +2262,7 @@ behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2277,7 +2277,7 @@ behaviour corresponds to -legacy kernel boot argument.
               <x>20</x>
               <y>195</y>
               <width>371</width>
-              <height>321</height>
+              <height>265</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_58">
@@ -2584,7 +2584,7 @@ options. The following values are supported:
               <x>490</x>
               <y>190</y>
               <width>188</width>
-              <height>321</height>
+              <height>261</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_64">
@@ -2672,8 +2672,8 @@ login window can also be done with Command + F5 key combination.</string>
              <rect>
               <x>20</x>
               <y>13</y>
-              <width>721</width>
-              <height>251</height>
+              <width>841</width>
+              <height>231</height>
              </rect>
             </property>
             <property name="statusTip">
@@ -2697,7 +2697,7 @@ login window can also be done with Command + F5 key combination.</string>
               <rect>
                <x>10</x>
                <y>70</y>
-               <width>681</width>
+               <width>821</width>
                <height>148</height>
               </rect>
              </property>
@@ -2893,9 +2893,9 @@ login window can also be done with Command + F5 key combination.</string>
            <widget class="QWidget" name="gridLayoutWidget_20">
             <property name="geometry">
              <rect>
-              <x>20</x>
-              <y>400</y>
-              <width>401</width>
+              <x>580</x>
+              <y>250</y>
+              <width>351</width>
               <height>111</height>
              </rect>
             </property>
@@ -2985,9 +2985,9 @@ this option.</string>
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>290</y>
+              <y>259</y>
               <width>481</width>
-              <height>80</height>
+              <height>101</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_49">
@@ -4412,185 +4412,13 @@ A continuously updated variable list can be found in a corresponding document: N
         <string>PlatformInfo</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_54">
-        <item row="1" column="0">
-         <widget class="QGroupBox" name="groupBox_12">
-          <property name="title">
-           <string/>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_66">
-           <item row="0" column="0">
-            <layout class="QGridLayout" name="gridLayout_27">
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="chkUpdateNVRAM">
-               <property name="toolTip">
-                <string>These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. All the other
-fields are to be specified with NVRAM section.
-If UpdateNVRAM is set to false the aforementioned variables can be updated with NVRAM section. If UpdateNVRAM
-is set to true the behaviour is undefined when any of the fields are present in NVRAM section.</string>
-               </property>
-               <property name="statusTip">
-                <string> Update NVRAM fields related to platform information.</string>
-               </property>
-               <property name="text">
-                <string>UpdateNVRAM</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkAutomatic">
-               <property name="toolTip">
-                <string>Enabling this option is useful when Generic section is flexible enough:
-• When enabled SMBIOS, DataHub, and PlatformNVRAM data is unused.
-• When disabled Generic section is unused.
-Warning: It is strongly discouraged set this option to false when intending to update platform information.
-The only reason to do that is when doing minor correction of the SMBIOS present and alike. In all other cases
-not using Automatic may lead to hard to debug errors.</string>
-               </property>
-               <property name="statusTip">
-                <string>Generate PlatformInfo based on Generic section instead of using values from DataHub, NVRAM,
- and SMBIOS sections.</string>
-               </property>
-               <property name="text">
-                <string>Automatic</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="chkUpdateDataHub">
-               <property name="toolTip">
-                <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
-Automatic value.</string>
-               </property>
-               <property name="statusTip">
-                <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
-\nAutomatic value.</string>
-               </property>
-               <property name="text">
-                <string>UpdateDataHub</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="chkCustomMemory">
-               <property name="toolTip">
-                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
-existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
-               </property>
-               <property name="statusTip">
-                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
- existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
-               </property>
-               <property name="text">
-                <string>CustomMemory</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkSaveDataHub">
-               <property name="toolTip">
-                <string>Whether to keep data such as Datahub when selecting Automatic</string>
-               </property>
-               <property name="statusTip">
-                <string>Whether to keep data such as Datahub when selecting Automatic</string>
-               </property>
-               <property name="text">
-                <string>Keep data such as Datahub</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="chkUpdateSMBIOS">
-               <property name="toolTip">
-                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
-Automatic value.</string>
-               </property>
-               <property name="statusTip">
-                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
- Automatic value.</string>
-               </property>
-               <property name="text">
-                <string>UpdateSMBIOS</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="chkUseRawUuidEncoding">
-               <property name="toolTip">
-                <string>Each UUID AABBCCDD-EEFF-GGHH-IIJJ-KKLLMMNNOOPP is essentially a hexadecimal 16-byte number. It can be
-encoded in two ways:
-
-• Big Endian — by writing all the bytes as they are without making any order changes ({AA BB CC DD EE FF
-GG HH II JJ KK LL MM NN OO PP}). This method is also known as RFC 4122 encoding or Raw encoding.
-• Little Endian — by interpreting the bytes as numbers and using Little Endian byte representation ({DD
-CC BB AA FF EE HH GG II JJ KK LL MM NN OO PP}).
-
-SMBIOS specification did not explicitly specify the encoding format for the UUID up to SMBIOS 2.6, where it
-stated that Little Endian encoding shall be used. This led to the confusion in both firmware implementations
-and system software as different vendors used different encodings prior to that.
-
-• Apple uses Big Endian format everywhere but it ignores SMBIOS UUID within macOS.
-• dmidecode uses Big Endian format for SMBIOS 2.5.x or lower and Little Endian for 2.6 and newer.
-Acidanthera dmidecode prints all the three.
-• Windows uses Little Endian format everywhere, but it only affects the visual representation of the values.
-
-OpenCore always sets a recent SMBIOS version (currently 3.2) when generating the modified DMI tables. If
-UseRawUuidEncoding is enabled, then Big Endian format is used to store the SystemUUID data. Otherwise
-Little Endian is used.
-
-Note: Since UUIDs used in DataHub and NVRAM are not standardised and are added by Apple, this preference
-does not affect them. Unlike SMBIOS they are always stored in the Big Endian format.</string>
-               </property>
-               <property name="statusTip">
-                <string>Use raw encoding for SMBIOS UUIDs.</string>
-               </property>
-               <property name="text">
-                <string>UseRawUuidEncoding</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="4">
-              <widget class="QLabel" name="label_22">
-               <property name="toolTip">
-                <string>• TryOverwrite — Overwrite if new size is &lt;= than the page-aligned original and there are no issues with
-legacy region unlock. Create otherwise. Has issues with some firmwares.
-• Create — Replace the tables with newly allocated EfiReservedMemoryType at AllocateMaxAddress without
-any fallbacks.
-• Overwrite — Overwrite existing gEfiSmbiosTableGuid and gEfiSmbiosTable3Guid data if it fits new size.
-Abort with unspecified state otherwise.
-• Custom — Write SMBIOS tables (gEfiSmbios(3)TableGuid) to gOcCustomSmbios(3)TableGuid to workaround
-firmwares overwriting SMBIOS contents at ExitBootServices. Otherwise equivalent to Create. Requires
-patching AppleSmbios.kext and AppleACPIPlatform.kext to read from another GUID: &quot;EB9D2D31&quot; -
-&quot;EB9D2D35&quot; (in ASCII), done automatically by CustomSMBIOSGuid quirk.
-Note: A side effect of using Custom approach is making SMBIOS updates exclusive to macOS, avoiding a collission
-with existing Windows activation and custom OEM software but potentially breaking Apple-specific tools.</string>
-               </property>
-               <property name="statusTip">
-                <string> Update SMBIOS fields approach.</string>
-               </property>
-               <property name="text">
-                <string>UpdateSMBIOSMode</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="4">
-              <widget class="QComboBox" name="cboxUpdateSMBIOSMode">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabPlatformInfo">
           <property name="tabShape">
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -4602,10 +4430,10 @@ with existing Windows activation and custom OEM software but potentially breakin
            <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
-              <x>20</x>
+              <x>8</x>
               <y>20</y>
-              <width>789</width>
-              <height>361</height>
+              <width>871</width>
+              <height>351</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="_2">
@@ -4818,269 +4646,275 @@ However, certain firmwares may not provide valid values otherwise, which could b
            <attribute name="title">
             <string>DataHub</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_68">
-            <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_39">
-              <item row="0" column="2">
-               <widget class="QLabel" name="label_47">
-                <property name="toolTip">
-                 <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>12</y>
+              <width>1121</width>
+              <height>351</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_39">
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_47">
+               <property name="toolTip">
+                <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct
 in ASCII.</string>
-                </property>
-                <property name="statusTip">
-                 <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct
+               </property>
+               <property name="statusTip">
+                <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct
  in ASCII.</string>
-                </property>
-                <property name="text">
-                 <string>BoardProduct</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QLineEdit" name="editBoardRevision"/>
-              </item>
-              <item row="4" column="1">
-               <widget class="QLineEdit" name="editSmcPlatform"/>
-              </item>
-              <item row="2" column="3">
-               <widget class="QLineEdit" name="editInitialTSC"/>
-              </item>
-              <item row="5" column="3">
-               <widget class="QLineEdit" name="editSystemProductName"/>
-              </item>
-              <item row="2" column="2">
-               <widget class="QLabel" name="label_51">
-                <property name="toolTip">
-                 <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
-                </property>
-                <property name="statusTip">
-                 <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
-                </property>
-                <property name="text">
-                 <string>InitialTSC</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="2">
-               <widget class="QLabel" name="label_55">
-                <property name="toolTip">
-                 <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
+               </property>
+               <property name="text">
+                <string>BoardProduct</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="editBoardRevision"/>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="editSmcPlatform"/>
+             </item>
+             <item row="2" column="3">
+              <widget class="QLineEdit" name="editInitialTSC"/>
+             </item>
+             <item row="5" column="3">
+              <widget class="QLineEdit" name="editSystemProductName"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLabel" name="label_51">
+               <property name="toolTip">
+                <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
+               </property>
+               <property name="statusTip">
+                <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
+               </property>
+               <property name="text">
+                <string>InitialTSC</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QLabel" name="label_55">
+               <property name="toolTip">
+                <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
 SMC REV key.</string>
-                </property>
-                <property name="statusTip">
-                 <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
+               </property>
+               <property name="statusTip">
+                <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
  SMC REV key.</string>
-                </property>
-                <property name="text">
-                 <string>SmcRevision</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="3">
-               <widget class="QLineEdit" name="editDevicePathsSupported"/>
-              </item>
-              <item row="3" column="1">
-               <widget class="QLineEdit" name="editPlatformName"/>
-              </item>
-              <item row="2" column="1">
-               <widget class="QLineEdit" name="editFSBFrequency"/>
-              </item>
-              <item row="0" column="3">
-               <widget class="QLineEdit" name="editBoardProduct"/>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="editARTFrequency">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>0</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="3">
-               <widget class="QLineEdit" name="editSmcBranch"/>
-              </item>
-              <item row="1" column="2">
-               <widget class="QLabel" name="label_49">
-                <property name="toolTip">
-                 <string> Sets DevicePathsSupported in gEfiMiscSubClassGuid. Must be set to 1 for AppleACPIPlatform.kext to append SATA device paths to Boot#### and efi-boot-device-data variables. Set to 1 on all
+               </property>
+               <property name="text">
+                <string>SmcRevision</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QLineEdit" name="editDevicePathsSupported"/>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="editPlatformName"/>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="editFSBFrequency"/>
+             </item>
+             <item row="0" column="3">
+              <widget class="QLineEdit" name="editBoardProduct"/>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="editARTFrequency">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="3">
+              <widget class="QLineEdit" name="editSmcBranch"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="label_49">
+               <property name="toolTip">
+                <string> Sets DevicePathsSupported in gEfiMiscSubClassGuid. Must be set to 1 for AppleACPIPlatform.kext to append SATA device paths to Boot#### and efi-boot-device-data variables. Set to 1 on all
 modern Macs.</string>
-                </property>
-                <property name="statusTip">
-                 <string>Type: plist integer, 32-bit</string>
-                </property>
-                <property name="text">
-                 <string>DevicePathsSupported</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_50">
-                <property name="toolTip">
-                 <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
-                </property>
-                <property name="statusTip">
-                 <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
-                </property>
-                <property name="text">
-                 <string>FSBFrequency</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label_54">
-                <property name="toolTip">
-                 <string> Sets RPlt in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to
+               </property>
+               <property name="statusTip">
+                <string>Type: plist integer, 32-bit</string>
+               </property>
+               <property name="text">
+                <string>DevicePathsSupported</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_50">
+               <property name="toolTip">
+                <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
+               </property>
+               <property name="statusTip">
+                <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
+               </property>
+               <property name="text">
+                <string>FSBFrequency</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_54">
+               <property name="toolTip">
+                <string> Sets RPlt in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to
 generate SMC RPlt key.</string>
-                </property>
-                <property name="statusTip">
-                 <string>Type: plist data, 8 bytes</string>
-                </property>
-                <property name="text">
-                 <string>SmcPlatform</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="0">
-               <widget class="QLabel" name="label_56">
-                <property name="toolTip">
-                 <string>Known bits read by X86PlatformPlugin.kext: • 0x00000001 — Shutdown cause was a PWROK event (Same as GEN_PMCON_2 bit 0)
+               </property>
+               <property name="statusTip">
+                <string>Type: plist data, 8 bytes</string>
+               </property>
+               <property name="text">
+                <string>SmcPlatform</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_56">
+               <property name="toolTip">
+                <string>Known bits read by X86PlatformPlugin.kext: • 0x00000001 — Shutdown cause was a PWROK event (Same as GEN_PMCON_2 bit 0)
 • 0x00000002 — Shutdown cause was a SYS_PWROK event (Same as GEN_PMCON_2 bit 1)
 • 0x00000004 — Shutdown cause was a THRMTRIP# event (Same as GEN_PMCON_2 bit 3)
 • 0x00000008 — Rebooted due to a SYS_RESET# event (Same as GEN_PMCON_2 bit 4)
 • 0x00000010 — Power Failure (Same as GEN_PMCON_3 bit 1 PWR_FLR) • 0x00000020 — Loss of RTC Well Power (Same as GEN_PMCON_3 bit 2 RTC_PWR_STS) • 0x00000040 — General Reset Status (Same as GEN_PMCON_3 bit 9 GEN_RST_STS) • 0xffffff80 — SUS Well Power Loss (Same as GEN_PMCON_3 bit 14)
 • 0x00010000 — Wake cause was a ME Wake event (Same as PRSTS bit 0, ME_WAKE_STS) • 0x00020000 — Cold Reboot was ME Induced event (Same as PRSTS bit 1 ME_HRST_COLD_STS) • 0x00040000 — Warm Reboot was ME Induced event (Same as PRSTS bit 2 ME_HRST_WARM_STS) • 0x00080000 — Shutdown was ME Induced event (Same as PRSTS bit 3 ME_HOST_PWRDN) • 0x00100000 — Global reset ME Wachdog Timer event (Same as PRSTS bit 6)
 • 0x00200000 — Global reset PowerManagment Wachdog Timer event (Same as PRSTS bit 15)</string>
-                </property>
-                <property name="statusTip">
-                 <string> Sets StartupPowerEvents in gEfiMiscSubClassGuid. Value found on Macs is power management
+               </property>
+               <property name="statusTip">
+                <string> Sets StartupPowerEvents in gEfiMiscSubClassGuid. Value found on Macs is power management
  state bitmask, normally 0.</string>
-                </property>
-                <property name="text">
-                 <string>StartupPowerEvents</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="3">
-               <widget class="QLineEdit" name="editSmcRevision"/>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_48">
-                <property name="toolTip">
-                 <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal
+               </property>
+               <property name="text">
+                <string>StartupPowerEvents</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="3">
+              <widget class="QLineEdit" name="editSmcRevision"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_48">
+               <property name="toolTip">
+                <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal
 board revision (e.g. 01).</string>
-                </property>
-                <property name="statusTip">
-                 <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal
+               </property>
+               <property name="statusTip">
+                <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal
  board revision (e.g. 01).</string>
-                </property>
-                <property name="text">
-                 <string>BoardRevision</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QLineEdit" name="editStartupPowerEvents"/>
-              </item>
-              <item row="3" column="2">
-               <widget class="QLabel" name="label_53">
-                <property name="toolTip">
-                 <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
+               </property>
+               <property name="text">
+                <string>BoardRevision</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="editStartupPowerEvents"/>
+             </item>
+             <item row="3" column="2">
+              <widget class="QLabel" name="label_53">
+               <property name="toolTip">
+                <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
 SMC RBr key.</string>
-                </property>
-                <property name="statusTip">
-                 <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
+               </property>
+               <property name="statusTip">
+                <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
  SMC RBr key.</string>
-                </property>
-                <property name="text">
-                 <string>SmcBranch</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_46">
-                <property name="toolTip">
-                 <string>This value contains CPU ART frequency, also known as crystal clock frequency. Its existence is exclusive to
+               </property>
+               <property name="text">
+                <string>SmcBranch</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_46">
+               <property name="toolTip">
+                <string>This value contains CPU ART frequency, also known as crystal clock frequency. Its existence is exclusive to
 Skylake generation and newer. The value is specified in Hz, and is normally 24 MHz for client Intel segment, 25
 MHz for server Intel segment, and 19.2 MHz for Intel Atom CPUs. macOS till 10.15 inclusive assumes 24 MHz
 by default.
 Note: On Intel Skylake X ART frequency may be a little less (approx. 0.25%) than 24 or 25 MHz due to special
 EMI-reduction circuit as described in Acidanthera Bugtracker.</string>
-                </property>
-                <property name="statusTip">
-                 <string>Sets ARTFrequency in gEfiProcessorSubClassGuid.</string>
-                </property>
-                <property name="text">
-                 <string>ARTFrequency</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_52">
-                <property name="toolTip">
-                 <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
-                </property>
-                <property name="statusTip">
-                 <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
-                </property>
-                <property name="text">
-                 <string>PlatformName</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="2">
-               <widget class="QLabel" name="label_57">
-                <property name="toolTip">
-                 <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName
+               </property>
+               <property name="statusTip">
+                <string>Sets ARTFrequency in gEfiProcessorSubClassGuid.</string>
+               </property>
+               <property name="text">
+                <string>ARTFrequency</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_52">
+               <property name="toolTip">
+                <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
+               </property>
+               <property name="statusTip">
+                <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
+               </property>
+               <property name="text">
+                <string>PlatformName</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="2">
+              <widget class="QLabel" name="label_57">
+               <property name="toolTip">
+                <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName
 in Unicode.</string>
-                </property>
-                <property name="statusTip">
-                 <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName
+               </property>
+               <property name="statusTip">
+                <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName
  in Unicode.</string>
-                </property>
-                <property name="text">
-                 <string>SystemProductName</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="label_58">
-                <property name="toolTip">
-                 <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS
+               </property>
+               <property name="text">
+                <string>SystemProductName</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_58">
+               <property name="toolTip">
+                <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS
 SystemSerialNumber in Unicode.</string>
-                </property>
-                <property name="statusTip">
-                 <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS
+               </property>
+               <property name="statusTip">
+                <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS
  SystemSerialNumber in Unicode.</string>
-                </property>
-                <property name="text">
-                 <string>SystemSerialNumber</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="1">
-               <widget class="QLineEdit" name="editSystemSerialNumber_data"/>
-              </item>
-              <item row="6" column="2">
-               <widget class="QLabel" name="label_59">
-                <property name="toolTip">
-                 <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.</string>
-                </property>
-                <property name="statusTip">
-                 <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.</string>
-                </property>
-                <property name="text">
-                 <string>SystemUUID</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="3">
-               <widget class="QLineEdit" name="editSystemUUID_data"/>
-              </item>
-             </layout>
-            </item>
-           </layout>
+               </property>
+               <property name="text">
+                <string>SystemSerialNumber</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QLineEdit" name="editSystemSerialNumber_data"/>
+             </item>
+             <item row="6" column="2">
+              <widget class="QLabel" name="label_59">
+               <property name="toolTip">
+                <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.</string>
+               </property>
+               <property name="statusTip">
+                <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.</string>
+               </property>
+               <property name="text">
+                <string>SystemUUID</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="3">
+              <widget class="QLineEdit" name="editSystemUUID_data"/>
+             </item>
+            </layout>
+           </widget>
           </widget>
           <widget class="QWidget" name="tabPlatformInfo3">
            <attribute name="title">
@@ -5933,6 +5767,178 @@ central registration process.</string>
             </item>
            </layout>
           </widget>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QGroupBox" name="groupBox_12">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_66">
+           <item row="0" column="0">
+            <layout class="QGridLayout" name="gridLayout_27">
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkUpdateNVRAM">
+               <property name="toolTip">
+                <string>These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. All the other
+fields are to be specified with NVRAM section.
+If UpdateNVRAM is set to false the aforementioned variables can be updated with NVRAM section. If UpdateNVRAM
+is set to true the behaviour is undefined when any of the fields are present in NVRAM section.</string>
+               </property>
+               <property name="statusTip">
+                <string> Update NVRAM fields related to platform information.</string>
+               </property>
+               <property name="text">
+                <string>UpdateNVRAM</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkAutomatic">
+               <property name="toolTip">
+                <string>Enabling this option is useful when Generic section is flexible enough:
+• When enabled SMBIOS, DataHub, and PlatformNVRAM data is unused.
+• When disabled Generic section is unused.
+Warning: It is strongly discouraged set this option to false when intending to update platform information.
+The only reason to do that is when doing minor correction of the SMBIOS present and alike. In all other cases
+not using Automatic may lead to hard to debug errors.</string>
+               </property>
+               <property name="statusTip">
+                <string>Generate PlatformInfo based on Generic section instead of using values from DataHub, NVRAM,
+ and SMBIOS sections.</string>
+               </property>
+               <property name="text">
+                <string>Automatic</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="chkUpdateDataHub">
+               <property name="toolTip">
+                <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
+Automatic value.</string>
+               </property>
+               <property name="statusTip">
+                <string>Update Data Hub fields. These fields are read from Generic or DataHub sections depending on
+\nAutomatic value.</string>
+               </property>
+               <property name="text">
+                <string>UpdateDataHub</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="chkCustomMemory">
+               <property name="toolTip">
+                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
+existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
+               </property>
+               <property name="statusTip">
+                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
+ existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
+               </property>
+               <property name="text">
+                <string>CustomMemory</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkSaveDataHub">
+               <property name="toolTip">
+                <string>Whether to keep data such as Datahub when selecting Automatic</string>
+               </property>
+               <property name="statusTip">
+                <string>Whether to keep data such as Datahub when selecting Automatic</string>
+               </property>
+               <property name="text">
+                <string>Keep data such as Datahub</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="chkUpdateSMBIOS">
+               <property name="toolTip">
+                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
+Automatic value.</string>
+               </property>
+               <property name="statusTip">
+                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
+ Automatic value.</string>
+               </property>
+               <property name="text">
+                <string>UpdateSMBIOS</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="chkUseRawUuidEncoding">
+               <property name="toolTip">
+                <string>Each UUID AABBCCDD-EEFF-GGHH-IIJJ-KKLLMMNNOOPP is essentially a hexadecimal 16-byte number. It can be
+encoded in two ways:
+
+• Big Endian — by writing all the bytes as they are without making any order changes ({AA BB CC DD EE FF
+GG HH II JJ KK LL MM NN OO PP}). This method is also known as RFC 4122 encoding or Raw encoding.
+• Little Endian — by interpreting the bytes as numbers and using Little Endian byte representation ({DD
+CC BB AA FF EE HH GG II JJ KK LL MM NN OO PP}).
+
+SMBIOS specification did not explicitly specify the encoding format for the UUID up to SMBIOS 2.6, where it
+stated that Little Endian encoding shall be used. This led to the confusion in both firmware implementations
+and system software as different vendors used different encodings prior to that.
+
+• Apple uses Big Endian format everywhere but it ignores SMBIOS UUID within macOS.
+• dmidecode uses Big Endian format for SMBIOS 2.5.x or lower and Little Endian for 2.6 and newer.
+Acidanthera dmidecode prints all the three.
+• Windows uses Little Endian format everywhere, but it only affects the visual representation of the values.
+
+OpenCore always sets a recent SMBIOS version (currently 3.2) when generating the modified DMI tables. If
+UseRawUuidEncoding is enabled, then Big Endian format is used to store the SystemUUID data. Otherwise
+Little Endian is used.
+
+Note: Since UUIDs used in DataHub and NVRAM are not standardised and are added by Apple, this preference
+does not affect them. Unlike SMBIOS they are always stored in the Big Endian format.</string>
+               </property>
+               <property name="statusTip">
+                <string>Use raw encoding for SMBIOS UUIDs.</string>
+               </property>
+               <property name="text">
+                <string>UseRawUuidEncoding</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QLabel" name="label_22">
+               <property name="toolTip">
+                <string>• TryOverwrite — Overwrite if new size is &lt;= than the page-aligned original and there are no issues with
+legacy region unlock. Create otherwise. Has issues with some firmwares.
+• Create — Replace the tables with newly allocated EfiReservedMemoryType at AllocateMaxAddress without
+any fallbacks.
+• Overwrite — Overwrite existing gEfiSmbiosTableGuid and gEfiSmbiosTable3Guid data if it fits new size.
+Abort with unspecified state otherwise.
+• Custom — Write SMBIOS tables (gEfiSmbios(3)TableGuid) to gOcCustomSmbios(3)TableGuid to workaround
+firmwares overwriting SMBIOS contents at ExitBootServices. Otherwise equivalent to Create. Requires
+patching AppleSmbios.kext and AppleACPIPlatform.kext to read from another GUID: &quot;EB9D2D31&quot; -
+&quot;EB9D2D35&quot; (in ASCII), done automatically by CustomSMBIOSGuid quirk.
+Note: A side effect of using Custom approach is making SMBIOS updates exclusive to macOS, avoiding a collission
+with existing Windows activation and custom OEM software but potentially breaking Apple-specific tools.</string>
+               </property>
+               <property name="statusTip">
+                <string> Update SMBIOS fields approach.</string>
+               </property>
+               <property name="text">
+                <string>UpdateSMBIOSMode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QComboBox" name="cboxUpdateSMBIOSMode">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
@@ -7372,7 +7378,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1373</width>
+     <width>1482</width>
      <height>24</height>
     </rect>
    </property>
@@ -7563,6 +7569,9 @@ Enable this option to be able to see all the boot options when having multiple d
    <property name="text">
     <string>Generate EFI on the desktop</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
   </action>
   <action name="actionShareConfig">
    <property name="text">
@@ -7572,6 +7581,9 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionOpen_database_directory">
    <property name="text">
     <string>Open database directory</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+5</string>
    </property>
   </action>
   <action name="actionNewWindow">
