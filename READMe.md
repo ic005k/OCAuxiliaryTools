@@ -35,7 +35,23 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 
 ......
 
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat1.png)
+
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat2.png)
+
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat3.png)
+
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat4.png)
+
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat5.png)
+
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat6.png)
+
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat7.png)
+
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat8.png)
+
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat9.png)
 
 ### Thanks for the support of the following open source software!
 
