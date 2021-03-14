@@ -7359,6 +7359,11 @@ void MainWindow::init_menu()
     orgLabelStyle = ui->label->styleSheet();
     orgCheckBoxStyle = ui->chk1->styleSheet();
 
+    QString listStyle;
+    listStyle = "QListWidget::item:selected{background:lightgreen; border:0px blue; color:black}";
+    ui->listMain->setStyleSheet(listStyle);
+    ui->listSub->setStyleSheet(listStyle);
+
     ui->listMain->setIconSize(QSize(35, 35));
     if (win) {
         ui->listMain->setMaximumHeight(75);
@@ -7370,11 +7375,14 @@ void MainWindow::init_menu()
         ui->listSub->setMaximumHeight(28);
     }
 
+    ui->listMain->setResizeMode(QListWidget::Adjust);
     //ui->listMain->setViewMode(QListView::IconMode);
     ui->listMain->setViewMode(QListWidget::IconMode);
     //ui->listMain->setViewMode(QListView::ListMode);
-    ui->listMain->setMovement(QListView::Static); //静止拖动
+    ui->listMain->setMovement(QListView::Static); //禁止拖动
     ui->listSub->setMovement(QListView::Static);
+    ui->listMain->setFocusPolicy(Qt::NoFocus); // 去掉选中时的虚线
+    ui->listSub->setFocusPolicy(Qt::NoFocus);
 
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m1.png"), tr("ACPI")));
     ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m2.png"), tr("Booter")));
