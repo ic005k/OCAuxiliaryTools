@@ -3173,7 +3173,7 @@ for boot services only. Value found on Macs is equal to SMBIOS SystemUUID.</sour
         <location filename="mainwindow.ui" line="5455"/>
         <location filename="mainwindow.cpp" line="8576"/>
         <source>SMBIOS</source>
-        <translation></translation>
+        <translation>SMBIOS（系统管理BIOS）</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="5858"/>
