@@ -7360,7 +7360,7 @@ void MainWindow::init_menu()
     orgCheckBoxStyle = ui->chk1->styleSheet();
 
     QString listStyle;
-    listStyle = "QListWidget::item:selected{background:lightgreen; border:0px blue; color:black}";
+    listStyle = "QListWidget::item:selected{background:lightgreen; border:10px blue; color:black}";
     ui->listMain->setStyleSheet(listStyle);
     ui->listSub->setStyleSheet(listStyle);
 
@@ -7375,10 +7375,8 @@ void MainWindow::init_menu()
         ui->listSub->setMaximumHeight(28);
     }
 
-    ui->listMain->setResizeMode(QListWidget::Adjust);
-    //ui->listMain->setViewMode(QListView::IconMode);
-    ui->listMain->setViewMode(QListWidget::IconMode);
-    //ui->listMain->setViewMode(QListView::ListMode);
+    ui->listMain->setViewMode(QListView::ListMode);
+    ui->listSub->setViewMode(QListView::ListMode);
     ui->listMain->setMovement(QListView::Static); //禁止拖动
     ui->listSub->setMovement(QListView::Static);
     ui->listMain->setFocusPolicy(Qt::NoFocus); // 去掉选中时的虚线
