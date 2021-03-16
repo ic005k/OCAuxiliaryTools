@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210315";
+    CurVerison = "20210317";
     title = "OC Auxiliary Tools   V0.6.8    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -2036,6 +2036,7 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item)
 
 void MainWindow::initui_PlatformInfo()
 {
+
     QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
     QFileInfo fi(qfile);
     if (fi.exists()) {
@@ -10152,10 +10153,10 @@ void MainWindow::goResults(int index)
 
                         orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
 
-                        QString style = "QComboBox{border:none;background:rgb(255,0,0);color:rgb(255,255,255);}";
+                        QString style = "QLineEdit{border:none;background:rgb(255,0,0);color:rgb(255,255,255);}";
                         QComboBox* w = (QComboBox*)listOfComboBox.at(k);
 
-                        w->setStyleSheet(style);
+                        w->lineEdit()->setStyleSheet(style);
                         end = true;
                         break;
                     }
@@ -10177,9 +10178,9 @@ void MainWindow::goResults(int index)
 
                     if (listOfComboBox.at(k)->objectName() == name) {
                         orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
-                        QString style = "QComboBox{background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
+                        QString style = "QLineEdit{background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
                         QComboBox* w = (QComboBox*)listOfComboBox.at(k);
-                        w->setStyleSheet(style);
+                        w->lineEdit()->setStyleSheet(style);
                         end = true;
                         break;
                     }
@@ -10261,7 +10262,7 @@ void MainWindow::clearComboBoxMarker()
 
         QComboBox* w = (QComboBox*)listOfComboBoxResults.at(i);
 
-        w->setStyleSheet(orgComboBoxStyle);
+        w->lineEdit()->setStyleSheet(orgLineEditStyle);
     }
 }
 
@@ -11117,6 +11118,8 @@ QTableWidget* MainWindow::getLeftTable(QTableWidget* table)
 
     if (table == ui->table_nv_ls)
         return ui->table_nv_ls0;
+
+    return NULL;
 }
 
 int MainWindow::getLetfTableCurrentRow(QTableWidget* table)
@@ -11135,6 +11138,8 @@ int MainWindow::getLetfTableCurrentRow(QTableWidget* table)
 
     if (table == ui->table_nv_ls)
         return ui->table_nv_ls0->currentRow();
+
+    return 0;
 }
 
 void MainWindow::clearAllTableSelection()

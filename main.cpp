@@ -10,18 +10,23 @@ MainWindow* mw_one;
 int main(int argc, char* argv[])
 {
 
+    // QApplication a(argc, argv);
+    MyApplication* a = new MyApplication(argc, argv);
+
 #ifdef Q_OS_LINUX
     qputenv("QT_ENABLE_HIGHDPI_SCALING", "1");
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 
 #endif
 
-    // QApplication a(argc, argv);
-    MyApplication* a = new MyApplication(argc, argv);
 
 #ifdef Q_OS_WIN32
 
     PlistFileName = QString::fromLocal8Bit(argv[1]); //解决乱码
+
+    QFont f;
+    f.setFamily("Microsoft YaHei UI");
+    a->setFont(f);
 #endif
 
 #ifdef Q_OS_MAC

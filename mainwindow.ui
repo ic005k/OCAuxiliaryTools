@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1482</width>
-    <height>757</height>
+    <height>793</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -345,8 +345,8 @@
              <rect>
               <x>30</x>
               <y>30</y>
-              <width>361</width>
-              <height>191</height>
+              <width>401</width>
+              <height>331</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_28">
@@ -439,8 +439,8 @@ macOS Mojave (10.14).</string>
            <widget class="QPushButton" name="pushButton">
             <property name="geometry">
              <rect>
-              <x>30</x>
-              <y>240</y>
+              <x>650</x>
+              <y>60</y>
               <width>113</width>
               <height>32</height>
              </rect>
@@ -452,15 +452,15 @@ macOS Mojave (10.14).</string>
            <widget class="QComboBox" name="cboxFind">
             <property name="geometry">
              <rect>
-              <x>40</x>
-              <y>290</y>
-              <width>300</width>
+              <x>660</x>
+              <y>110</y>
+              <width>320</width>
               <height>32</height>
              </rect>
             </property>
             <property name="minimumSize">
              <size>
-              <width>300</width>
+              <width>320</width>
               <height>0</height>
              </size>
             </property>
@@ -471,8 +471,8 @@ macOS Mojave (10.14).</string>
            <widget class="QLabel" name="lblCount">
             <property name="geometry">
              <rect>
-              <x>80</x>
-              <y>340</y>
+              <x>700</x>
+              <y>160</y>
               <width>60</width>
               <height>16</height>
              </rect>
@@ -675,98 +675,11 @@ macOS Mojave (10.14).</string>
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>1231</width>
-              <height>231</height>
+              <width>1241</width>
+              <height>351</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_6">
-             <item row="0" column="4">
-              <widget class="QCheckBox" name="chkDisableVariableWrite">
-               <property name="toolTip">
-                <string>This is a security option allowing one to restrict NVRAM access in macOS. This quirk requires OC_FIRMWARE_RUNTIME
-protocol implemented in OpenRuntime.efi.
-Note: This quirk can also be used as an ugly workaround to buggy UEFI runtime services implementations that
-fail to write variables to NVRAM and break the rest of the operating system.</string>
-               </property>
-               <property name="statusTip">
-                <string>Protect from macOS NVRAM write access.</string>
-               </property>
-               <property name="text">
-                <string>DisableVariableWrite</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="chkProtectUefiServices">
-               <property name="toolTip">
-                <string>Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to
-UEFI services during driver loading and related actions. Consequentially this directly breaks other quirks that
-affect memory management, like DevirtualiseMmio, ProtectMemoryRegions, or RebuildAppleMemoryMap, and
-may also break other quirks depending on the effects of these.
-Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest might run unreliably with
-more than one virtual core.” message.</string>
-               </property>
-               <property name="statusTip">
-                <string>Protect UEFI services from being overridden by the firmware.</string>
-               </property>
-               <property name="text">
-                <string>ProtectUefiServices</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="chkEnableSafeModeSlide">
-               <property name="toolTip">
-                <string>This option is relevant to the users that have issues booting to safe mode (e.g. by holding shift or using -x boot
-argument). By default safe mode forces 0 slide as if the system was launched with slide=0 boot argument. This
-quirk tries to patch boot.efi to lift that limitation and let some other value (from 1 to 255) be used. This quirk
-requires ProvideCustomSlide to be enabled.
-Note: The necessity of this quirk is determined by safe mode availability. If booting to safe mode fails, this option
-can be tried to be enabled.</string>
-               </property>
-               <property name="statusTip">
-                <string> Patch bootloader to have KASLR enabled in safe mode.</string>
-               </property>
-               <property name="text">
-                <string>EnableSafeModeSlide</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkDiscardHibernateMap">
-               <property name="toolTip">
-                <string>This option forces XNU kernel to ignore newly supplied memory map and assume that it did not change after
-waking from hibernation. This behaviour is required to work by Windows, which mandates to preserve runtime
-memory size and location after S4 wake.
-Note: This may be used to workaround buggy memory maps on older hardware, and is now considered rare legacy.
-Examples of such hardware are Ivy Bridge laptops with Insyde firmware, like Acer V3-571G. Do not use this
-unless you fully understand the consequences.</string>
-               </property>
-               <property name="statusTip">
-                <string>Reuse original hibernate memory map.</string>
-               </property>
-               <property name="text">
-                <string>DiscardHibernateMap</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="4">
-              <widget class="QCheckBox" name="chkSetupVirtualMap">
-               <property name="toolTip">
-                <string>Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot
-crashes. This quirk workarounds the problem by performing early boot identity mapping of assigned virtual
-addresses to physical memory.
-Note: The necessity of this quirk is determined by early boot failures. Currently new firmwares with memory
-protection support (like OVMF) do not support this quirk due to acidanthera/bugtracker#719.</string>
-               </property>
-               <property name="statusTip">
-                <string> Setup virtual memory at SetVirtualAddresses.</string>
-               </property>
-               <property name="text">
-                <string>SetupVirtualMap</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="1">
               <widget class="QCheckBox" name="chkAvoidRuntimeDefrag">
                <property name="toolTip">
@@ -807,44 +720,6 @@ compatible with some hardware and macOS 11. In this case you may try to use Enab
                </property>
               </widget>
              </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="chkEnableWriteUnprotector">
-               <property name="toolTip">
-                <string>This option bypasses RˆX permissions in code pages of UEFI runtime services by removing write protection (WP)
-bit from CR0 register during their execution. This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in
-OpenRuntime.efi.
-Note: This quirk may potentially weaken firmware security, please use RebuildAppleMemoryMap if your firmware
-supports memory attributes table (MAT). Refer to OCABC: MAT support is 1/0 log entry to determine whether
-MAT is supported.</string>
-               </property>
-               <property name="statusTip">
-                <string> Permit write access to UEFI runtime services code.</string>
-               </property>
-               <property name="text">
-                <string>EnableWriteUnprotector</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="chkSyncRuntimePermissions">
-               <property name="toolTip">
-                <string>Some firmwares either fail to properly handle runtime permissions:
-• They incorrectly mark OpenRuntime as not executable in the memory map.
-• They incorrectly mark OpenRuntime as not executable in the memory attributes table.
-• They lose entries from the memory attributes table after OpenRuntime is loaded.
-• They mark items in the memory attributes table as read-write-execute.
-This quirk tries to update memory map and memory attributes table to correct this.
-Note: The necessity of this quirk is determined by early boot failures either in macOS or in Linux/Windows. In
-general only firmwares released in 2018 or later are affected.</string>
-               </property>
-               <property name="statusTip">
-                <string>Update memory permissions for runtime environment.</string>
-               </property>
-               <property name="text">
-                <string>SyncRuntimePermissions</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="2">
               <widget class="QCheckBox" name="chkDevirtualiseMmio">
                <property name="toolTip">
@@ -865,7 +740,36 @@ hibernation functioning. Use MmioWhitelist section to do this.</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="3">
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkDisableSingleUser">
+               <property name="toolTip">
+                <string>This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot
+argument. The behaviour with this quirk enabled is supposed to match T2-based model behaviour. Read this
+archived article to understand how to use single user mode with this quirk enabled.</string>
+               </property>
+               <property name="statusTip">
+                <string>Disable single user mode.</string>
+               </property>
+               <property name="text">
+                <string>DisableSingleUser</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="3">
+              <widget class="QCheckBox" name="chkSignalAppleOS">
+               <property name="toolTip">
+                <string>This quirk is useful on Mac firmwares, which behave differently in different OS. For example, it is supposed to
+enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.</string>
+               </property>
+               <property name="statusTip">
+                <string> Report macOS being loaded through OS Info for any OS.</string>
+               </property>
+               <property name="text">
+                <string>SignalAppleOS</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
               <widget class="QCheckBox" name="chkRebuildAppleMemoryMap">
                <property name="toolTip">
                 <string>Apple kernel has several limitations in parsing UEFI memory map:
@@ -892,71 +796,24 @@ OpenDuetPkg, but may be required to boot macOS 10.6 and earlier for unclear reas
                </property>
               </widget>
              </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="chkSetupVirtualMap">
+               <property name="toolTip">
+                <string>Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot
+crashes. This quirk workarounds the problem by performing early boot identity mapping of assigned virtual
+addresses to physical memory.
+Note: The necessity of this quirk is determined by early boot failures. Currently new firmwares with memory
+protection support (like OVMF) do not support this quirk due to acidanthera/bugtracker#719.</string>
+               </property>
+               <property name="statusTip">
+                <string> Setup virtual memory at SetVirtualAddresses.</string>
+               </property>
+               <property name="text">
+                <string>SetupVirtualMap</string>
+               </property>
+              </widget>
+             </item>
              <item row="3" column="0">
-              <widget class="QCheckBox" name="chkSignalAppleOS">
-               <property name="toolTip">
-                <string>This quirk is useful on Mac firmwares, which behave differently in different OS. For example, it is supposed to
-enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.</string>
-               </property>
-               <property name="statusTip">
-                <string> Report macOS being loaded through OS Info for any OS.</string>
-               </property>
-               <property name="text">
-                <string>SignalAppleOS</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="chkDisableSingleUser">
-               <property name="toolTip">
-                <string>This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot
-argument. The behaviour with this quirk enabled is supposed to match T2-based model behaviour. Read this
-archived article to understand how to use single user mode with this quirk enabled.</string>
-               </property>
-               <property name="statusTip">
-                <string>Disable single user mode.</string>
-               </property>
-               <property name="text">
-                <string>DisableSingleUser</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QCheckBox" name="chkForceExitBootServices">
-               <property name="toolTip">
-                <string>Try to ensure that ExitBootServices call succeeds even with outdated MemoryMap key argument by obtaining
-current memory map and retrying ExitBootServices call.
-Note: The necessity of this quirk is determined by early boot crashes of the firmware. Do not use this unless you
-fully understand the consequences.</string>
-               </property>
-               <property name="statusTip">
-                <string>Retry ExitBootServices with new memory map on failure.</string>
-               </property>
-               <property name="text">
-                <string>ForceExitBootServices</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <widget class="QCheckBox" name="chkProvideCustomSlide">
-               <property name="toolTip">
-                <string>This option performs memory map analysis of your firmware and checks whether all slides (from 1 to 255) can be
-used. As boot.efi generates this value randomly with rdrand or pseudo randomly rdtsc, there is a chance of
-boot failure when it chooses a conflicting slide. In case potential conflicts exist, this option forces macOS to use a
-pseudo random value among the available ones. This also ensures that slide= argument is never passed to the
-operating system for security reasons.
-Note: The necessity of this quirk is determined by OCABC: Only N/256 slide values are usable! message
-in the debug log. If the message is present, this option is to be enabled.</string>
-               </property>
-               <property name="statusTip">
-                <string>Provide custom KASLR slide on low memory.</string>
-               </property>
-               <property name="text">
-                <string>ProvideCustomSlide</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="4">
               <widget class="QCheckBox" name="chkProtectMemoryRegions">
                <property name="toolTip">
                 <string>Some firmwares incorrectly map select memory regions:
@@ -975,7 +832,44 @@ very old firmwares need this quirk.</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item row="2" column="3">
+              <widget class="QCheckBox" name="chkProvideCustomSlide">
+               <property name="toolTip">
+                <string>This option performs memory map analysis of your firmware and checks whether all slides (from 1 to 255) can be
+used. As boot.efi generates this value randomly with rdrand or pseudo randomly rdtsc, there is a chance of
+boot failure when it chooses a conflicting slide. In case potential conflicts exist, this option forces macOS to use a
+pseudo random value among the available ones. This also ensures that slide= argument is never passed to the
+operating system for security reasons.
+Note: The necessity of this quirk is determined by OCABC: Only N/256 slide values are usable! message
+in the debug log. If the message is present, this option is to be enabled.</string>
+               </property>
+               <property name="statusTip">
+                <string>Provide custom KASLR slide on low memory.</string>
+               </property>
+               <property name="text">
+                <string>ProvideCustomSlide</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QCheckBox" name="chkProtectUefiServices">
+               <property name="toolTip">
+                <string>Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to
+UEFI services during driver loading and related actions. Consequentially this directly breaks other quirks that
+affect memory management, like DevirtualiseMmio, ProtectMemoryRegions, or RebuildAppleMemoryMap, and
+may also break other quirks depending on the effects of these.
+Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest might run unreliably with
+more than one virtual core.” message.</string>
+               </property>
+               <property name="statusTip">
+                <string>Protect UEFI services from being overridden by the firmware.</string>
+               </property>
+               <property name="text">
+                <string>ProtectUefiServices</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
               <widget class="QCheckBox" name="chkProtectSecureBoot">
                <property name="toolTip">
                 <string>Reports security violation during attempts to write to db, dbx, PK, and KEK variables from the operating system.
@@ -990,7 +884,113 @@ such as select Insyde or MacPro5,1.</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="2">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="chkForceExitBootServices">
+               <property name="toolTip">
+                <string>Try to ensure that ExitBootServices call succeeds even with outdated MemoryMap key argument by obtaining
+current memory map and retrying ExitBootServices call.
+Note: The necessity of this quirk is determined by early boot crashes of the firmware. Do not use this unless you
+fully understand the consequences.</string>
+               </property>
+               <property name="statusTip">
+                <string>Retry ExitBootServices with new memory map on failure.</string>
+               </property>
+               <property name="text">
+                <string>ForceExitBootServices</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QCheckBox" name="chkEnableWriteUnprotector">
+               <property name="toolTip">
+                <string>This option bypasses RˆX permissions in code pages of UEFI runtime services by removing write protection (WP)
+bit from CR0 register during their execution. This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in
+OpenRuntime.efi.
+Note: This quirk may potentially weaken firmware security, please use RebuildAppleMemoryMap if your firmware
+supports memory attributes table (MAT). Refer to OCABC: MAT support is 1/0 log entry to determine whether
+MAT is supported.</string>
+               </property>
+               <property name="statusTip">
+                <string> Permit write access to UEFI runtime services code.</string>
+               </property>
+               <property name="text">
+                <string>EnableWriteUnprotector</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="chkEnableSafeModeSlide">
+               <property name="toolTip">
+                <string>This option is relevant to the users that have issues booting to safe mode (e.g. by holding shift or using -x boot
+argument). By default safe mode forces 0 slide as if the system was launched with slide=0 boot argument. This
+quirk tries to patch boot.efi to lift that limitation and let some other value (from 1 to 255) be used. This quirk
+requires ProvideCustomSlide to be enabled.
+Note: The necessity of this quirk is determined by safe mode availability. If booting to safe mode fails, this option
+can be tried to be enabled.</string>
+               </property>
+               <property name="statusTip">
+                <string> Patch bootloader to have KASLR enabled in safe mode.</string>
+               </property>
+               <property name="text">
+                <string>EnableSafeModeSlide</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="chkDiscardHibernateMap">
+               <property name="toolTip">
+                <string>This option forces XNU kernel to ignore newly supplied memory map and assume that it did not change after
+waking from hibernation. This behaviour is required to work by Windows, which mandates to preserve runtime
+memory size and location after S4 wake.
+Note: This may be used to workaround buggy memory maps on older hardware, and is now considered rare legacy.
+Examples of such hardware are Ivy Bridge laptops with Insyde firmware, like Acer V3-571G. Do not use this
+unless you fully understand the consequences.</string>
+               </property>
+               <property name="statusTip">
+                <string>Reuse original hibernate memory map.</string>
+               </property>
+               <property name="text">
+                <string>DiscardHibernateMap</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkDisableVariableWrite">
+               <property name="toolTip">
+                <string>This is a security option allowing one to restrict NVRAM access in macOS. This quirk requires OC_FIRMWARE_RUNTIME
+protocol implemented in OpenRuntime.efi.
+Note: This quirk can also be used as an ugly workaround to buggy UEFI runtime services implementations that
+fail to write variables to NVRAM and break the rest of the operating system.</string>
+               </property>
+               <property name="statusTip">
+                <string>Protect from macOS NVRAM write access.</string>
+               </property>
+               <property name="text">
+                <string>DisableVariableWrite</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="chkSyncRuntimePermissions">
+               <property name="toolTip">
+                <string>Some firmwares either fail to properly handle runtime permissions:
+• They incorrectly mark OpenRuntime as not executable in the memory map.
+• They incorrectly mark OpenRuntime as not executable in the memory attributes table.
+• They lose entries from the memory attributes table after OpenRuntime is loaded.
+• They mark items in the memory attributes table as read-write-execute.
+This quirk tries to update memory map and memory attributes table to correct this.
+Note: The necessity of this quirk is determined by early boot failures either in macOS or in Linux/Windows. In
+general only firmwares released in 2018 or later are affected.</string>
+               </property>
+               <property name="statusTip">
+                <string>Update memory permissions for runtime environment.</string>
+               </property>
+               <property name="text">
+                <string>SyncRuntimePermissions</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
               <widget class="QCheckBox" name="chkForceBooterSignature">
                <property name="toolTip">
                 <string>Booter signature, essentially a SHA-1 hash of the loaded image, is used by Mac EFI to verify the authenticity of
@@ -1012,7 +1012,7 @@ Note: OpenCore launcher path is determined from LauncherPath property.</string>
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>280</y>
+              <y>410</y>
               <width>371</width>
               <height>80</height>
              </rect>
@@ -1332,7 +1332,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1720,7 +1720,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
               <x>20</x>
               <y>20</y>
               <width>571</width>
-              <height>291</height>
+              <height>341</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_36">
@@ -2172,8 +2172,8 @@ trim.</string>
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>351</width>
-              <height>211</height>
+              <width>401</width>
+              <height>261</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_60">
@@ -2275,8 +2275,8 @@ behaviour corresponds to -legacy kernel boot argument.
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>195</y>
-              <width>371</width>
+              <y>200</y>
+              <width>441</width>
               <height>265</height>
              </rect>
             </property>
@@ -2501,7 +2501,7 @@ options. The following values are supported:
              <rect>
               <x>20</x>
               <y>60</y>
-              <width>641</width>
+              <width>971</width>
               <height>111</height>
              </rect>
             </property>
@@ -2581,9 +2581,9 @@ options. The following values are supported:
            <widget class="QWidget" name="gridLayoutWidget_24">
             <property name="geometry">
              <rect>
-              <x>490</x>
-              <y>190</y>
-              <width>188</width>
+              <x>510</x>
+              <y>200</y>
+              <width>481</width>
               <height>261</height>
              </rect>
             </property>
@@ -2672,8 +2672,8 @@ login window can also be done with Command + F5 key combination.</string>
              <rect>
               <x>20</x>
               <y>13</y>
-              <width>841</width>
-              <height>231</height>
+              <width>1031</width>
+              <height>281</height>
              </rect>
             </property>
             <property name="statusTip">
@@ -2688,7 +2688,7 @@ login window can also be done with Command + F5 key combination.</string>
                <x>10</x>
                <y>30</y>
                <width>281</width>
-               <height>21</height>
+               <height>25</height>
               </rect>
              </property>
             </widget>
@@ -2697,8 +2697,8 @@ login window can also be done with Command + F5 key combination.</string>
               <rect>
                <x>10</x>
                <y>70</y>
-               <width>821</width>
-               <height>148</height>
+               <width>1011</width>
+               <height>201</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_51">
@@ -2840,10 +2840,10 @@ login window can also be done with Command + F5 key combination.</string>
             <widget class="QToolButton" name="btnDLSetAll">
              <property name="geometry">
               <rect>
-               <x>530</x>
+               <x>470</x>
                <y>30</y>
-               <width>81</width>
-               <height>22</height>
+               <width>141</width>
+               <height>25</height>
               </rect>
              </property>
              <property name="text">
@@ -2855,8 +2855,8 @@ login window can also be done with Command + F5 key combination.</string>
               <rect>
                <x>620</x>
                <y>30</y>
-               <width>81</width>
-               <height>22</height>
+               <width>131</width>
+               <height>25</height>
               </rect>
              </property>
              <property name="text">
@@ -2893,8 +2893,8 @@ login window can also be done with Command + F5 key combination.</string>
            <widget class="QWidget" name="gridLayoutWidget_20">
             <property name="geometry">
              <rect>
-              <x>580</x>
-              <y>250</y>
+              <x>690</x>
+              <y>320</y>
               <width>351</width>
               <height>111</height>
              </rect>
@@ -2985,8 +2985,8 @@ this option.</string>
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>259</y>
-              <width>481</width>
+              <y>320</y>
+              <width>521</width>
               <height>101</height>
              </rect>
             </property>
@@ -4418,7 +4418,7 @@ A continuously updated variable list can be found in a corresponding document: N
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -4433,142 +4433,12 @@ A continuously updated variable list can be found in a corresponding document: N
               <x>8</x>
               <y>20</y>
               <width>871</width>
-              <height>351</height>
+              <height>381</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="_2">
-             <item row="0" column="2">
-              <widget class="QToolButton" name="btnGenerate">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="1">
               <widget class="QLineEdit" name="editMLB"/>
-             </item>
-             <item row="6" column="1">
-              <widget class="QComboBox" name="cboxSystemMemoryStatus">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_20">
-               <property name="toolTip">
-                <string>Refer to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
-               </property>
-               <property name="statusTip">
-                <string>Refer to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
-               </property>
-               <property name="text">
-                <string>ROM</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="editSystemSerialNumber"/>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_95">
-               <property name="toolTip">
-                <string> Combined of Processor Major and Minor types.</string>
-               </property>
-               <property name="statusTip">
-                <string> Combined of Processor Major and Minor types.</string>
-               </property>
-               <property name="text">
-                <string>ProcessorType</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_17">
-               <property name="toolTip">
-                <string>Refer to SMBIOS BoardSerialNumber.</string>
-               </property>
-               <property name="statusTip">
-                <string>Refer to SMBIOS BoardSerialNumber.</string>
-               </property>
-               <property name="text">
-                <string>MLB</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_18">
-               <property name="toolTip">
-                <string>Refer to SMBIOS SystemProductName.</string>
-               </property>
-               <property name="statusTip">
-                <string>Refer to SMBIOS SystemProductName.</string>
-               </property>
-               <property name="text">
-                <string>SystemProductName</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_19">
-               <property name="toolTip">
-                <string> Refer to SMBIOS SystemSerialNumber.</string>
-               </property>
-               <property name="statusTip">
-                <string> Refer to SMBIOS SystemSerialNumber.</string>
-               </property>
-               <property name="text">
-                <string>SystemSerialNumber</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_21">
-               <property name="toolTip">
-                <string>Refer to SMBIOS SystemUUID.</string>
-               </property>
-               <property name="statusTip">
-                <string>Refer to SMBIOS SystemUUID.</string>
-               </property>
-               <property name="text">
-                <string>SystemUUID</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="editROM"/>
-             </item>
-             <item row="3" column="2">
-              <widget class="QToolButton" name="btnSystemUUID">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="chkMaxBIOSVersion">
-               <property name="toolTip">
-                <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic
-PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic
- PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</string>
-               </property>
-               <property name="text">
-                <string>MaxBIOSVersion</string>
-               </property>
-              </widget>
              </item>
              <item row="6" column="0">
               <widget class="QLabel" name="label_96">
@@ -4590,6 +4460,144 @@ will ignore PT_FEATURE_HAS_SOLDERED_SYSTEM_MEMORY and assume that system memory 
                </property>
               </widget>
              </item>
+             <item row="0" column="2">
+              <widget class="QToolButton" name="btnGenerate">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Generate</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_19">
+               <property name="toolTip">
+                <string> Refer to SMBIOS SystemSerialNumber.</string>
+               </property>
+               <property name="statusTip">
+                <string> Refer to SMBIOS SystemSerialNumber.</string>
+               </property>
+               <property name="text">
+                <string>SystemSerialNumber</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_18">
+               <property name="toolTip">
+                <string>Refer to SMBIOS SystemProductName.</string>
+               </property>
+               <property name="statusTip">
+                <string>Refer to SMBIOS SystemProductName.</string>
+               </property>
+               <property name="text">
+                <string>SystemProductName</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QCheckBox" name="chkSpoofVendor">
+               <property name="toolTip">
+                <string>It is dangerous to use Apple in SMBIOS vendor fields for reasons given in SystemManufacturer description.
+However, certain firmwares may not provide valid values otherwise, which could break some software.</string>
+               </property>
+               <property name="statusTip">
+                <string>Sets SMBIOS vendor fields to Acidanthera.</string>
+               </property>
+               <property name="text">
+                <string>SpoofVendor</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QCheckBox" name="chkMaxBIOSVersion">
+               <property name="toolTip">
+                <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic
+PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</string>
+               </property>
+               <property name="statusTip">
+                <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic
+ PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</string>
+               </property>
+               <property name="text">
+                <string>MaxBIOSVersion</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_95">
+               <property name="toolTip">
+                <string> Combined of Processor Major and Minor types.</string>
+               </property>
+               <property name="statusTip">
+                <string> Combined of Processor Major and Minor types.</string>
+               </property>
+               <property name="text">
+                <string>ProcessorType</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_21">
+               <property name="toolTip">
+                <string>Refer to SMBIOS SystemUUID.</string>
+               </property>
+               <property name="statusTip">
+                <string>Refer to SMBIOS SystemUUID.</string>
+               </property>
+               <property name="text">
+                <string>SystemUUID</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_17">
+               <property name="toolTip">
+                <string>Refer to SMBIOS BoardSerialNumber.</string>
+               </property>
+               <property name="statusTip">
+                <string>Refer to SMBIOS BoardSerialNumber.</string>
+               </property>
+               <property name="text">
+                <string>MLB</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QComboBox" name="cboxSystemMemoryStatus">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="editProcessorTypeGeneric"/>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="editSystemUUID"/>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="editSystemSerialNumber"/>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="editROM"/>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_20">
+               <property name="toolTip">
+                <string>Refer to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
+               </property>
+               <property name="statusTip">
+                <string>Refer to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
+               </property>
+               <property name="text">
+                <string>ROM</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="1">
               <widget class="QComboBox" name="cboxSystemProductName">
                <property name="minimumSize">
@@ -4603,10 +4611,19 @@ will ignore PT_FEATURE_HAS_SOLDERED_SYSTEM_MEMORY and assume that system memory 
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="editProcessorTypeGeneric"/>
+             <item row="3" column="2">
+              <widget class="QToolButton" name="btnSystemUUID">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Generate</string>
+               </property>
+              </widget>
              </item>
-             <item row="7" column="0">
+             <item row="8" column="0">
               <widget class="QCheckBox" name="chkAdviseWindows">
                <property name="toolTip">
                 <string>Added bits to FirmwareFeatures: • FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - Without this bit it is not possible to reboot to Windows
@@ -4619,23 +4636,6 @@ Windows installed on a drive with EFI partition being the first partition on the
                </property>
                <property name="text">
                 <string>AdviseWindows</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="editSystemUUID"/>
-             </item>
-             <item row="9" column="0">
-              <widget class="QCheckBox" name="chkSpoofVendor">
-               <property name="toolTip">
-                <string>It is dangerous to use Apple in SMBIOS vendor fields for reasons given in SystemManufacturer description.
-However, certain firmwares may not provide valid values otherwise, which could break some software.</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets SMBIOS vendor fields to Acidanthera.</string>
-               </property>
-               <property name="text">
-                <string>SpoofVendor</string>
                </property>
               </widget>
              </item>
@@ -4652,7 +4652,7 @@ However, certain firmwares may not provide valid values otherwise, which could b
               <x>20</x>
               <y>12</y>
               <width>1121</width>
-              <height>351</height>
+              <height>391</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_39">
@@ -5142,8 +5142,8 @@ there are no error-correction bits, this value should be equal to DataWidth.</st
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>691</width>
-              <height>231</height>
+              <width>721</width>
+              <height>321</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_40">
@@ -5968,8 +5968,8 @@ with existing Windows activation and custom OEM software but potentially breakin
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>341</width>
-              <height>351</height>
+              <width>481</width>
+              <height>381</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_55">
@@ -6088,8 +6088,8 @@ USB hot plug. Disable if not required.</string>
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>521</width>
-              <height>311</height>
+              <width>621</width>
+              <height>401</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_61">
@@ -6356,8 +6356,8 @@ alctsel property instead.</string>
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>391</width>
-              <height>331</height>
+              <width>511</width>
+              <height>381</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_33">
@@ -6515,8 +6515,8 @@ boards. More details can be found in LongSoft/UefiTool#116.</string>
              <rect>
               <x>20</x>
               <y>300</y>
-              <width>831</width>
-              <height>104</height>
+              <width>861</width>
+              <height>131</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_62">
@@ -6619,8 +6619,8 @@ BuiltinGraphics may work for them.</string>
              <rect>
               <x>20</x>
               <y>29</y>
-              <width>881</width>
-              <height>191</height>
+              <width>1011</width>
+              <height>231</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_34">
@@ -6786,7 +6786,7 @@ This option requires ProvideConsoleGop to be enabled.</string>
               <x>20</x>
               <y>20</y>
               <width>1211</width>
-              <height>301</height>
+              <height>391</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_35">
@@ -7066,8 +7066,8 @@ im4m manifest files used by Apple Secure Boot.</string>
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>392</width>
-              <height>301</height>
+              <width>631</width>
+              <height>401</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_31">
