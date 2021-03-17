@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -82,7 +82,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -353,19 +353,16 @@
              <item row="2" column="0">
               <widget class="QCheckBox" name="chkRebaseRegions">
                <property name="toolTip">
-                <string>ACPI tables are often generated dynamically by underlying firmware implementation. 
-Among the position-independent code, 
-ACPI tables may contain physical addresses of MMIO areas used for device configuration,
-usually grouped in regions (e.g. OperationRegion). Changing firmware settings or hardware configuration,
-upgrading or patching the firmware inevitably leads to changes in dynamically generated ACPI code, which
-sometimes lead to the shift of the addresses in aforementioned OperationRegion constructions.
-For this reason it is very dangerous to apply any kind of modifications to ACPI tables. The most reasonable
-approach is to make as few as possible changes to ACPI and try to not replace any tables, especially DSDT.
-When this is not possible, then at least attempt to ensure that custom DSDT is based on the most recent DSDT
-or remove writes and reads for the affected areas.
-When nothing else helps this option could be tried to avoid stalls at PCI Configuration Begin phase of macOS
-booting by attempting to fix the ACPI addresses. It does not do magic, and only works with most common cases.
-Do not use unless absolutely required.</string>
+                <string>RebaseRegions
+Type: plist boolean
+Failsafe: false
+Description: Attempt to heuristically relocate ACPI memory regions. Not recommended.
+
+ACPI tables are often generated dynamically by the underlying firmware implementation. Among the positionindependent code, ACPI tables may contain the physical addresses of MMIO areas used for device configuration,typically grouped by region (e.g. OperationRegion). Changing firmware settings or hardware configuration,upgrading or patching the firmware inevitably leads to changes in dynamically generated ACPI code, which sometimes results in the shift of the addresses in the aforementioned OperationRegion constructions.
+
+For this reason, the application of modifications to ACPI tables is extremely risky. The best approach is to make as few changes as possible to ACPI tables and to avoid replacing any tables, particularly DSDT tables. When this cannot be avoided, ensure that any custom DSDT tables are based on the most recent DSDT tables or attempt to remove reads and writes for the affected areas.
+
+When nothing else helps, this option could be tried to avoid stalls at PCI Configuration Begin phase of macOS booting by attempting to fix the ACPI addresses. It is not a magic bullet however, and only works with the most typical cases. Do not use unless absolutely required as it can have the opposite effect on certain platforms and result in boot failures.</string>
                </property>
                <property name="statusTip">
                 <string>Attempt to heuristically relocate ACPI memory regions. Not recommended.</string>
@@ -378,8 +375,13 @@ Do not use unless absolutely required.</string>
              <item row="3" column="0">
               <widget class="QCheckBox" name="chkResetHwSig">
                <property name="toolTip">
-                <string>This works around firmwares that fail to maintain hardware signature across the reboots and cause issues with
-waking from hibernation.</string>
+                <string>ResetHwSig
+Type: plist boolean
+Failsafe: false
+
+Description: Reset FACS table HardwareSignature value to 0.
+
+This works around firmware that fail to maintain hardware signature across the reboots and cause issues with waking from hibernation.</string>
                </property>
                <property name="statusTip">
                 <string>Reset FACS table HardwareSignature value to 0.</string>
@@ -392,8 +394,12 @@ waking from hibernation.</string>
              <item row="0" column="0">
               <widget class="QCheckBox" name="chkFadtEnableReset">
                <property name="toolTip">
-                <string>Mainly required on legacy hardware and few laptops. Can also fix power-button shortcuts. Not recommended
-unless required.</string>
+                <string>FadtEnableReset
+Type: plist boolean
+Failsafe: false
+Description: Provide reset register and flag in FADT table to enable reboot and shutdown.
+Mainly required on legacy hardware and a few newer laptops. Can also fix power-button shortcuts. Not
+recommended unless required.</string>
                </property>
                <property name="statusTip">
                 <string>Provide reset register and flag in FADT table to enable reboot and shutdown.</string>
@@ -406,9 +412,15 @@ unless required.</string>
              <item row="1" column="0">
               <widget class="QCheckBox" name="chkNormalizeHeaders">
                <property name="toolTip">
-                <string> Cleanup ACPI header fields to workaround macOS ACPI implementation bug causing boot crashes.
-Reference: Debugging AppleACPIPlatform on 10.13 by Alex James aka theracermaster. The issue is fixed in
-macOS Mojave (10.14).</string>
+                <string>NormalizeHeaders
+Type: plist boolean
+Failsafe: false
+
+Description: Cleanup ACPI header fields to workaround macOS ACPI implementation flaws that result in boot crashes. 
+
+Reference: Debugging AppleACPIPlatform on 10.13 by Alex James (also known as theracermaster). 
+
+The issue was fixed in macOS Mojave (10.14).</string>
                </property>
                <property name="statusTip">
                 <string> Cleanup ACPI header fields to workaround macOS ACPI implementation bug causing boot crashes.</string>
@@ -421,7 +433,13 @@ macOS Mojave (10.14).</string>
              <item row="4" column="0">
               <widget class="QCheckBox" name="chkResetLogoStatus">
                <property name="toolTip">
-                <string>This works around firmwares that provide BGRT table but fail to handle screen updates afterwards.</string>
+                <string>ResetLogoStatus
+Type: plist boolean
+Failsafe: false
+
+Description: Reset BGRT table Displayed status field to false.
+
+This works around firmware that provide a BGRT table but fail to handle screen updates afterwards.</string>
                </property>
                <property name="statusTip">
                 <string>Reset BGRT table Displayed status field to false.</string>
@@ -500,7 +518,7 @@ macOS Mojave (10.14).</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -683,10 +701,16 @@ macOS Mojave (10.14).</string>
              <item row="0" column="1">
               <widget class="QCheckBox" name="chkAvoidRuntimeDefrag">
                <property name="toolTip">
-                <string>This option fixes UEFI runtime services (date, time, NVRAM, power control, etc.) support on many firmwares
-using SMM backing for select services like variable storage. SMM may try to access physical addresses, but they
-get moved by boot.efi.
-Note: Most but Apple and VMware firmwares need this quirk.</string>
+                <string>AvoidRuntimeDefrag
+
+Type: plist boolean
+Failsafe: false
+
+Description: Protect from boot.efi runtime memory defragmentation.
+
+This option fixes UEFI runtime services (date, time, NVRAM, power control, etc.) support on firmware that uses SMM backing for certain services such as variable storage. SMM may try to access memory by physical addresses in non-SMM areas but this may sometimes have been moved by boot.efi. This option prevents boot.efi from moving such data.
+
+Note: Most types of firmware, apart from Apple and VMware, need this quirk.</string>
                </property>
                <property name="statusTip">
                 <string>Protect from boot.efi runtime memory defragmentation.</string>
@@ -699,18 +723,24 @@ Note: Most but Apple and VMware firmwares need this quirk.</string>
              <item row="0" column="0">
               <widget class="QCheckBox" name="chkAllowRelocationBlock">
                <property name="toolTip">
-                <string>Relocation block is a scratch buffer allocated in lower 4 GB to be used for loading the kernel and related structures
-by EfiBoot on firmwares where lower memory is otherwise occupied by the (assumed to be) non-runtime data.
-Right before kernel startup the relocation block is copied back to lower addresses. Similarly all the other addresses
-pointing to relocation block are also carefully adjusted. Relocation block can be used when:
+                <string>AllowRelocationBlock
+
+Type: plist boolean
+Failsafe: false
+
+Description: Allows booting macOS through a relocation block.
+
+The relocation block is a scratch buffer allocated in the lower 4 GB used for loading the kernel and related structures by EfiBoot on firmware where the lower memory region is otherwise occupied by (assumed) non-runtime data. Right before kernel startup, the relocation block is copied back to lower addresses. Similarly, all the other addresses pointing to the relocation block are also carefully adjusted. The relocation block can be used when:
+
 • No better slide exists (all the memory is used)
+
 • slide=0 is forced (by an argument or safe mode)
+
 • KASLR (slide) is unsupported (this is macOS 10.7 or older)
-This quirk requires ProvideCustomSlide to also be enabled and generally needs AvoidRuntimeDefrag to work
-correctly. Hibernation is not supported when booting with a relocation block (but relocation block is not always
-used when the quirk is enabled).
-Note: While this quirk is required to run older macOS versions on platforms with used lower memory it is not
-compatible with some hardware and macOS 11. In this case you may try to use EnableSafeModeSlide instead.</string>
+
+This quirk requires ProvideCustomSlide to be enabled and typically also requires enabling AvoidRuntimeDefrag to function correctly. Hibernation is not supported when booting with a relocation block, which will only be used if required when the quirk is enabled.
+
+Note: While this quirk is required to run older macOS versions on platforms with used lower memory, it is not compatible with some hardware and macOS 11. In such cases, consider using EnableSafeModeSlide instead.</string>
                </property>
                <property name="statusTip">
                 <string>Allows booting macOS through a relocation block.</string>
@@ -723,14 +753,16 @@ compatible with some hardware and macOS 11. In this case you may try to use Enab
              <item row="0" column="2">
               <widget class="QCheckBox" name="chkDevirtualiseMmio">
                <property name="toolTip">
-                <string>This option reduces stolen memory footprint from the memory map by removing runtime bit for known memory
-regions. This quirk may result in the increase of KASLR slides available, but is not necessarily compatible with
-the target board without additional measures. In general this frees from 64 to 256 megabytes of memory (present
-in the debug log), and on some platforms it is the only way to boot macOS, which otherwise fails with allocation
-error at bootloader stage.
-This option is generally useful on all firmwares except some very old ones, like Sandy Bridge. On select firmwares
-it may require a list of exceptional addresses that still need to get their virtual addresses for proper NVRAM and
-hibernation functioning. Use MmioWhitelist section to do this.</string>
+                <string>DevirtualiseMmio
+
+Type: plist boolean
+Failsafe: false
+
+Description: Remove runtime attribute from certain MMIO regions.
+
+This quirk reduces the stolen memory footprint in the memory map by removing the runtime bit for known memory regions. This quirk may result in an increase of KASLR slides available but without additional measures,it is not necessarily compatible with the target board. This quirk typically frees between 64 and 256 megabytes of memory, present in the debug log, and on some platforms, is the only way to boot macOS, which otherwise fails with allocation errors at the bootloader stage.
+
+This option is useful on all types of firmware, except for some very old ones such as Sandy Bridge. On certain firmware, a list of addresses that need virtual addresses for proper NVRAM and hibernation functionality may be required. Use the MmioWhitelist section for this.</string>
                </property>
                <property name="statusTip">
                 <string>Remove runtime attribute from select MMIO regions.</string>
@@ -1332,7 +1364,7 @@ to boot-args and log the largest one that won’t cause boot failure.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1834,66 +1866,22 @@ it can also be used to disable this kext in other situations (e.g. with Cpuid1Da
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>1221</width>
+              <width>1041</width>
               <height>331</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_44">
-             <item row="2" column="3">
-              <widget class="QCheckBox" name="chkIncreasePciBarSize">
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="chkAppleXcpmCfgLock">
                <property name="toolTip">
-                <string>Note: This option should be avoided whenever possible. In general the necessity of this option means misconfigured
-or broken firmware.</string>
+                <string>Note: This option should be avoided whenever possible. See AppleCpuPmCfgLock description for more details.</string>
                </property>
                <property name="statusTip">
-                <string> Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GBs.</string>
+                <string>Disables PKG_CST_CONFIG_CONTROL (0xE2) MSR modification in XNU kernel, commonly causing
+ early kernel panic, when it is locked from writing (XCPM power management).</string>
                </property>
                <property name="text">
-                <string>IncreasePciBarSize</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkAppleCpuPmCfgLock">
-               <property name="toolTip">
-                <string>Certain firmwares lock PKG_CST_CONFIG_CONTROL MSR register. To check its state one can use bundled
-VerifyMsrE2 tool. Select firmwares have this register locked on some cores only.
-As modern firmwares provide CFG Lock setting, which allows configuring PKG_CST_CONFIG_CONTROL MSR register
-lock, this option should be avoided whenever possible. For several APTIO firmwares not displaying CFG Lock
-setting in the GUI it is possible to access the option directly:
-(a) Download UEFITool and IFR-Extractor.
-(b) Open your firmware image in UEFITool and find CFG Lock unicode string. If it is not present, your firmware
-may not have this option and you should stop.
-(c) Extract the Setup.bin PE32 Image Section (the one UEFITool found) through Extract Body menu option.
-(d) Run IFR-Extractor on the extracted file (e.g. ./ifrextract Setup.bin Setup.txt).
-(e) Find CFG Lock, VarStoreInfo (VarOffset/VarName): in Setup.txt and remember the offset right after
-it (e.g. 0x123).
-(f) Download and run Modified GRUB Shell compiled by brainsucker or use a newer version by datasone.
-(g) Enter setup_var 0x123 0x00 command, where 0x123 should be replaced by your actual offset, and reboot.
-Warning: Variable offsets are unique not only to each motherboard but even to its firmware version. Never ever
-try to use an offset without checking.</string>
-               </property>
-               <property name="statusTip">
-                <string>Disables PKG_CST_CONFIG_CONTROL (0xE2) MSR modification in AppleIntelCPUPowerManagement.kext, commonly causing early kernel panic, when it is locked from writing.</string>
-               </property>
-               <property name="text">
-                <string>AppleCpuPmCfgLock</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="3">
-              <widget class="QCheckBox" name="chkPowerTimeoutKernelPanic">
-               <property name="toolTip">
-                <string>An additional security measure was added to macOS Catalina (10.15) causing kernel panic on power change
-timeout for Apple drivers. Sometimes it may cause issues on misconfigured hardware, notably digital audio, which
-sometimes fails to wake up. For debug kernels setpowerstate_panic=0 boot argument should be used, which is
-otherwise equivalent to this quirk.</string>
-               </property>
-               <property name="statusTip">
-                <string> Disables kernel panic on setPowerState timeout.</string>
-               </property>
-               <property name="text">
-                <string>PowerTimeoutKernelPanic</string>
+                <string>AppleXcpmCfgLock</string>
                </property>
               </widget>
              </item>
@@ -1907,6 +1895,22 @@ otherwise equivalent to this quirk.</string>
                </property>
                <property name="text">
                 <string>CustomSMBIOSGuid</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="chkXhciPortLimit">
+               <property name="toolTip">
+                <string>Note: This option should be avoided whenever possible. USB port limit is imposed by the amount of used bits in
+locationID format and there is no possible way to workaround this without heavy OS modification. The only valid
+solution is to limit the amount of used ports to 15 (discarding some). More details can be found on AppleLife.ru.</string>
+               </property>
+               <property name="statusTip">
+                <string>Patch various kexts (AppleUSBXHCI.kext, AppleUSBXHCIPCI.kext, IOUSBHostFamily.kext) to
+ remove USB port count limit of 15 ports.</string>
+               </property>
+               <property name="text">
+                <string>XhciPortLimit</string>
                </property>
               </widget>
              </item>
@@ -1937,6 +1941,22 @@ otherwise equivalent to this quirk.</string>
                </property>
               </widget>
              </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="chkThirdPartyDrives">
+               <property name="toolTip">
+                <string>Note: This option may be avoided on user preference. NVMe SSDs are compatible without the change. For AHCI
+SSDs on modern macOS version there is a dedicated built-in utility called trimforce. Starting from 10.15 this
+utility creates EnableTRIM variable in APPLE_BOOT_VARIABLE_GUID namespace with 01 00 00 00 value.</string>
+               </property>
+               <property name="statusTip">
+                <string> Apply vendor patches to IOAHCIBlockStorage.kext to enable native features for third-party drives,
+ such as TRIM on SSDs or hibernation support on 10.15 and newer.</string>
+               </property>
+               <property name="text">
+                <string>ThirdPartyDrives</string>
+               </property>
+              </widget>
+             </item>
              <item row="3" column="1">
               <widget class="QCheckBox" name="chkLegacyCommpage">
                <property name="toolTip">
@@ -1963,33 +1983,6 @@ which does not break VT-d support in other systems in case they need it.</string
                </property>
                <property name="text">
                 <string>DisableIoMapper</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <widget class="QCheckBox" name="chkForceSecureBootScheme">
-               <property name="toolTip">
-                <string>Note: This option is required on virtual machines when using SecureBootModel different from x86legacy.</string>
-               </property>
-               <property name="statusTip">
-                <string>Force x86 scheme for IMG4 verification.</string>
-               </property>
-               <property name="text">
-                <string>ForceSecureBootScheme</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="chkAppleXcpmCfgLock">
-               <property name="toolTip">
-                <string>Note: This option should be avoided whenever possible. See AppleCpuPmCfgLock description for more details.</string>
-               </property>
-               <property name="statusTip">
-                <string>Disables PKG_CST_CONFIG_CONTROL (0xE2) MSR modification in XNU kernel, commonly causing
- early kernel panic, when it is locked from writing (XCPM power management).</string>
-               </property>
-               <property name="text">
-                <string>AppleXcpmCfgLock</string>
                </property>
               </widget>
              </item>
@@ -2026,6 +2019,34 @@ use AppleIntelCpuPowerManagement.kext for the former.</string>
                </property>
               </widget>
              </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkAppleCpuPmCfgLock">
+               <property name="toolTip">
+                <string>Certain firmwares lock PKG_CST_CONFIG_CONTROL MSR register. To check its state one can use bundled
+VerifyMsrE2 tool. Select firmwares have this register locked on some cores only.
+As modern firmwares provide CFG Lock setting, which allows configuring PKG_CST_CONFIG_CONTROL MSR register
+lock, this option should be avoided whenever possible. For several APTIO firmwares not displaying CFG Lock
+setting in the GUI it is possible to access the option directly:
+(a) Download UEFITool and IFR-Extractor.
+(b) Open your firmware image in UEFITool and find CFG Lock unicode string. If it is not present, your firmware
+may not have this option and you should stop.
+(c) Extract the Setup.bin PE32 Image Section (the one UEFITool found) through Extract Body menu option.
+(d) Run IFR-Extractor on the extracted file (e.g. ./ifrextract Setup.bin Setup.txt).
+(e) Find CFG Lock, VarStoreInfo (VarOffset/VarName): in Setup.txt and remember the offset right after
+it (e.g. 0x123).
+(f) Download and run Modified GRUB Shell compiled by brainsucker or use a newer version by datasone.
+(g) Enter setup_var 0x123 0x00 command, where 0x123 should be replaced by your actual offset, and reboot.
+Warning: Variable offsets are unique not only to each motherboard but even to its firmware version. Never ever
+try to use an offset without checking.</string>
+               </property>
+               <property name="statusTip">
+                <string>Disables PKG_CST_CONFIG_CONTROL (0xE2) MSR modification in AppleIntelCPUPowerManagement.kext, commonly causing early kernel panic, when it is locked from writing.</string>
+               </property>
+               <property name="text">
+                <string>AppleCpuPmCfgLock</string>
+               </property>
+              </widget>
+             </item>
              <item row="1" column="3">
               <widget class="QCheckBox" name="chkDisableRtcChecksum">
                <property name="toolTip">
@@ -2056,6 +2077,20 @@ keepsyms=1 boot argument.</string>
                </property>
               </widget>
              </item>
+             <item row="2" column="3">
+              <widget class="QCheckBox" name="chkIncreasePciBarSize">
+               <property name="toolTip">
+                <string>Note: This option should be avoided whenever possible. In general the necessity of this option means misconfigured
+or broken firmware.</string>
+               </property>
+               <property name="statusTip">
+                <string> Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GBs.</string>
+               </property>
+               <property name="text">
+                <string>IncreasePciBarSize</string>
+               </property>
+              </widget>
+             </item>
              <item row="2" column="1">
               <widget class="QCheckBox" name="chkExternalDiskIcons">
                <property name="toolTip">
@@ -2067,6 +2102,19 @@ controllers.</string>
                </property>
                <property name="text">
                 <string>ExternalDiskIcons</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QCheckBox" name="chkForceSecureBootScheme">
+               <property name="toolTip">
+                <string>Note: This option is required on virtual machines when using SecureBootModel different from x86legacy.</string>
+               </property>
+               <property name="statusTip">
+                <string>Force x86 scheme for IMG4 verification.</string>
+               </property>
+               <property name="text">
+                <string>ForceSecureBootScheme</string>
                </property>
               </widget>
              </item>
@@ -2084,35 +2132,19 @@ patching progress.</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="chkThirdPartyDrives">
+             <item row="3" column="3">
+              <widget class="QCheckBox" name="chkPowerTimeoutKernelPanic">
                <property name="toolTip">
-                <string>Note: This option may be avoided on user preference. NVMe SSDs are compatible without the change. For AHCI
-SSDs on modern macOS version there is a dedicated built-in utility called trimforce. Starting from 10.15 this
-utility creates EnableTRIM variable in APPLE_BOOT_VARIABLE_GUID namespace with 01 00 00 00 value.</string>
+                <string>An additional security measure was added to macOS Catalina (10.15) causing kernel panic on power change
+timeout for Apple drivers. Sometimes it may cause issues on misconfigured hardware, notably digital audio, which
+sometimes fails to wake up. For debug kernels setpowerstate_panic=0 boot argument should be used, which is
+otherwise equivalent to this quirk.</string>
                </property>
                <property name="statusTip">
-                <string> Apply vendor patches to IOAHCIBlockStorage.kext to enable native features for third-party drives,
- such as TRIM on SSDs or hibernation support on 10.15 and newer.</string>
+                <string> Disables kernel panic on setPowerState timeout.</string>
                </property>
                <property name="text">
-                <string>ThirdPartyDrives</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="chkXhciPortLimit">
-               <property name="toolTip">
-                <string>Note: This option should be avoided whenever possible. USB port limit is imposed by the amount of used bits in
-locationID format and there is no possible way to workaround this without heavy OS modification. The only valid
-solution is to limit the amount of used ports to 15 (discarding some). More details can be found on AppleLife.ru.</string>
-               </property>
-               <property name="statusTip">
-                <string>Patch various kexts (AppleUSBXHCI.kext, AppleUSBXHCIPCI.kext, IOUSBHostFamily.kext) to
- remove USB port count limit of 15 ports.</string>
-               </property>
-               <property name="text">
-                <string>XhciPortLimit</string>
+                <string>PowerTimeoutKernelPanic</string>
                </property>
               </widget>
              </item>
@@ -3959,7 +3991,7 @@ checking but also attempts to build a trusted bootchain.</string>
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -4501,8 +4533,7 @@ will ignore PT_FEATURE_HAS_SOLDERED_SYSTEM_MEMORY and assume that system memory 
              <item row="11" column="0">
               <widget class="QCheckBox" name="chkSpoofVendor">
                <property name="toolTip">
-                <string>It is dangerous to use Apple in SMBIOS vendor fields for reasons given in SystemManufacturer description.
-However, certain firmwares may not provide valid values otherwise, which could break some software.</string>
+                <string>Sets SMBIOS vendor fields to Acidanthera.</string>
                </property>
                <property name="statusTip">
                 <string>Sets SMBIOS vendor fields to Acidanthera.</string>
@@ -4626,10 +4657,17 @@ PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</st
              <item row="8" column="0">
               <widget class="QCheckBox" name="chkAdviseWindows">
                <property name="toolTip">
-                <string>Added bits to FirmwareFeatures: • FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - Without this bit it is not possible to reboot to Windows
-installed on a drive with EFI partition being not the first partition on the disk.
-• FW_FEATURE_SUPPORTS_UEFI_WINDOWS_BOOT (0x20000000) - Without this bit it is not possible to reboot to
-Windows installed on a drive with EFI partition being the first partition on the disk.</string>
+                <string>AdviseWindows
+Type: plist boolean
+Failsafe: false
+
+Description: Forces Windows support in FirmwareFeatures.
+
+Added bits to FirmwareFeatures: 
+
+• FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - Without this bit, it is not possible to reboot to Windows installed on a drive with an EFI partition that is not the first partition on the disk.
+
+• FW_FEATURE_SUPPORTS_UEFI_WINDOWS_BOOT (0x20000000) - Without this bit, it is not possible to reboot to Windows installed on a drive with an EFI partition that is the first partition on the disk.</string>
                </property>
                <property name="statusTip">
                 <string>Forces Windows support in FirmwareFeatures.</string>
@@ -5796,16 +5834,10 @@ is set to true the behaviour is undefined when any of the fields are present in 
              <item row="0" column="0">
               <widget class="QCheckBox" name="chkAutomatic">
                <property name="toolTip">
-                <string>Enabling this option is useful when Generic section is flexible enough:
-• When enabled SMBIOS, DataHub, and PlatformNVRAM data is unused.
-• When disabled Generic section is unused.
-Warning: It is strongly discouraged set this option to false when intending to update platform information.
-The only reason to do that is when doing minor correction of the SMBIOS present and alike. In all other cases
-not using Automatic may lead to hard to debug errors.</string>
+                <string>Generate PlatformInfo based on the Generic section instead of using values from the DataHub,NVRAM and SMBIOS sections.</string>
                </property>
-               <property name="statusTip">
-                <string>Generate PlatformInfo based on Generic section instead of using values from DataHub, NVRAM,
- and SMBIOS sections.</string>
+               <property name="whatsThis">
+                <string/>
                </property>
                <property name="text">
                 <string>Automatic</string>
@@ -5954,7 +5986,7 @@ with existing Windows activation and custom OEM software but potentially breakin
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>7</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -6356,12 +6388,27 @@ alctsel property instead.</string>
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>511</width>
+              <width>501</width>
               <height>381</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_33">
-             <item row="5" column="1">
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="chkKeySupport">
+               <property name="toolTip">
+                <string>This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),
+to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as
+OpenUsbKbDxe, this option should never be enabled.</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
+               </property>
+               <property name="text">
+                <string>KeySupport</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
               <widget class="QCheckBox" name="chkPointerSupport">
                <property name="toolTip">
                 <string>This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM
@@ -6375,7 +6422,81 @@ protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="editPointerSupportMode"/>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_40">
+               <property name="toolTip">
+                <string>This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
+Setting a lower value generally improves performance and responsiveness of the interface and input handling.
+The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS Z87 boards use 60000 for the
+interface. Apple boards use 100000. You may leave it as 0 in case there are issues.</string>
+               </property>
+               <property name="statusTip">
+                <string>Set architecture timer resolution.</string>
+               </property>
+               <property name="text">
+                <string>TimerResolution</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="chkKeyFiltering">
+               <property name="toolTip">
+                <string>Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
+This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and
+108 in version 2.8).</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable keyboard input sanity checking.</string>
+               </property>
+               <property name="text">
+                <string>KeyFiltering</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="chkKeySwap">
+               <property name="toolTip">
+                <string>This option may be useful for keyboard layouts with Option key situated to the right of Command key.</string>
+               </property>
+               <property name="statusTip">
+                <string>Swap Command and Option keys during submission.</string>
+               </property>
+               <property name="text">
+                <string>KeySwap</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_38">
+               <property name="toolTip">
+                <string>Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS
+boards. More details can be found in LongSoft/UefiTool#116.</string>
+               </property>
+               <property name="statusTip">
+                <string> Set OEM protocol used for internal pointer driver.</string>
+               </property>
+               <property name="text">
+                <string>PointerSupportMode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="editTimerResolution"/>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="editKeyForgetThreshold"/>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="cboxKeySupportMode">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
               <widget class="QLabel" name="label_23">
                <property name="toolTip">
                 <string>• Auto — Performs automatic choice as available with the following preference: AMI, V2, V1. • V1 — Uses UEFI standard legacy input protocol EFI_SIMPLE_TEXT_INPUT_PROTOCOL. • V2 — Uses UEFI standard modern input protocol EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL. • AMI — Uses APTIO input protocol AMI_EFIKEYCODE_PROTOCOL.
@@ -6390,17 +6511,7 @@ change in the future versions.</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="cboxKeySupportMode">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="editPointerSupportMode"/>
-             </item>
-             <item row="0" column="0">
+             <item row="1" column="0">
               <widget class="QLabel" name="label_37">
                <property name="toolTip">
                 <string>AppleKeyMapAggregator protocol is supposed to contain a fixed length buffer of currently pressed keys. However,
@@ -6424,82 +6535,17 @@ every platform is different it may be reasonable to check every value from 1 to 
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="chkKeySupport">
-               <property name="toolTip">
-                <string>This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),
-to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as
-OpenUsbKbDxe, this option should never be enabled.</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
-               </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="lblDownkeysHandler">
                <property name="text">
-                <string>KeySupport</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="editTimerResolution"/>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="chkKeyFiltering">
-               <property name="toolTip">
-                <string>Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
-This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and
-108 in version 2.8).</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable keyboard input sanity checking.</string>
-               </property>
-               <property name="text">
-                <string>KeyFiltering</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_40">
-               <property name="toolTip">
-                <string>This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
-Setting a lower value generally improves performance and responsiveness of the interface and input handling.
-The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS Z87 boards use 60000 for the
-interface. Apple boards use 100000. You may leave it as 0 in case there are issues.</string>
-               </property>
-               <property name="statusTip">
-                <string>Set architecture timer resolution.</string>
-               </property>
-               <property name="text">
-                <string>TimerResolution</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="chkKeySwap">
-               <property name="toolTip">
-                <string>This option may be useful for keyboard layouts with Option key situated to the right of Command key.</string>
-               </property>
-               <property name="statusTip">
-                <string>Swap Command and Option keys during submission.</string>
-               </property>
-               <property name="text">
-                <string>KeySwap</string>
+                <string>DownkeysHandler</string>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="editKeyForgetThreshold"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_38">
-               <property name="toolTip">
-                <string>Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS
-boards. More details can be found in LongSoft/UefiTool#116.</string>
-               </property>
-               <property name="statusTip">
-                <string> Set OEM protocol used for internal pointer driver.</string>
-               </property>
-               <property name="text">
-                <string>PointerSupportMode</string>
+              <widget class="QComboBox" name="cboxDownkeysHandler">
+               <property name="editable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -7066,7 +7112,7 @@ im4m manifest files used by Apple Secure Boot.</string>
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>631</width>
+              <width>501</width>
               <height>401</height>
              </rect>
             </property>
@@ -7160,8 +7206,8 @@ may freeze upon boot. Not recommended unless required.</string>
              <item row="2" column="0">
               <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
                <property name="toolTip">
-                <string>Note: While the option is not supposed to induce harm on unaffected firmwares, its usage is not recommended
-when it is not required.</string>
+                <string>Note: While the option is not expected to harm unaffected firmware, its use is recommended only when specifically
+required.</string>
                </property>
                <property name="statusTip">
                 <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR

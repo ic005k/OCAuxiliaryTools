@@ -37,5 +37,6 @@
         <file>icon/clear.png</file>
         <file>icon/about.png</file>
         <file>icon/rp.png</file>
+        <file>widgets_zh_cn.qm</file>
     </qresource>
 </RCC>

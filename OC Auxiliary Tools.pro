@@ -40,7 +40,8 @@ SOURCES += \
     myapp.cpp \
     plistparser.cpp \
     plistserializer.cpp \
-    recentfiles.cpp
+    recentfiles.cpp \
+    tooltip.cpp
 
 HEADERS += \
     aboutdialog.h \
@@ -50,7 +51,8 @@ HEADERS += \
     myapp.h \
     plistparser.h \
     plistserializer.h \
-    recentfiles.h
+    recentfiles.h \
+    tooltip.h
 
 FORMS += \
     aboutdialog.ui \
@@ -67,3 +69,20 @@ DISTFILES += \
 
 RESOURCES += \
     qtocc.qrc
+
+
+HEADERS += \
+    aboutdialog.h \
+    commands.h \
+    dlgdatabase.h \
+    mainwindow.h \
+    myapp.h \
+    plistparser.h \
+    plistserializer.h \
+    recentfiles.h
+
+FORMS += \
+    aboutdialog.ui \
+    dlgdatabase.ui \
+    mainwindow.ui
+

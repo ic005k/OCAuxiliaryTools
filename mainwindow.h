@@ -38,6 +38,7 @@
 #include "aboutdialog.h"
 #include "dlgdatabase.h"
 #include "recentfiles.h"
+#include "tooltip.h"
 
 #ifdef Q_OS_WIN32
 #include <stdio.h>
@@ -57,6 +58,10 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
+
+    Tooltip* myToolTip = new Tooltip;
+    int getMainHeight();
+    int getMainWidth();
 
     void clearAllTableSelection();
 
@@ -215,6 +220,8 @@ protected:
     virtual void resizeEvent(QResizeEvent* event) override;
     void keyPressEvent(QKeyEvent* event) override; //键盘按下事件
     void keyReleaseEvent(QKeyEvent* event) override; //键盘松开事件
+    void paintEvent(QPaintEvent* event) override;
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
 #ifndef QT_NO_CONTEXTMENU
     void contextMenuEvent(QContextMenuEvent* event) override;
@@ -754,8 +761,6 @@ private slots:
 
     void on_listFind_itemClicked(QListWidgetItem* item);
 
-    void on_table_acpi_add_cellPressed(int row, int column);
-
     void setWM();
 
 private:
@@ -844,7 +849,7 @@ private:
     void PickerAttributes();
     bool pickerAttributes = false;
 
-    void init_menu();
+    void init_Menu();
 
     void init_setWindowModified();
 

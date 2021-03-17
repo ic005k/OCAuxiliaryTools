@@ -2,6 +2,7 @@
 #include "commands.h"
 #include "plistparser.h"
 #include "plistserializer.h"
+
 #include "ui_mainwindow.h"
 
 #include <QBuffer>
@@ -27,7 +28,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210317";
+    CurVerison = "20210319";
     title = "OC Auxiliary Tools   V0.6.8    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -61,7 +62,7 @@ MainWindow::MainWindow(QWidget* parent)
 
 #endif
 
-    init_menu();
+    init_Menu();
 
     init_setWindowModified();
 
@@ -184,6 +185,7 @@ MainWindow::MainWindow(QWidget* parent)
     //设置ToolTip背景色
     /*palette.setColor(QPalette::Inactive, QPalette::ToolTipText, QColor(50, 50, 255, 255));
     QToolTip::setFont(font);*/
+    //this->setStyleSheet("QToolTip{border:1px solid rgb(118, 118, 118); background-color: white; color:black; font-size:13px;}");
 
     //最近打开的文件
     QCoreApplication::setOrganizationName("ic005k");
@@ -458,9 +460,7 @@ void MainWindow::ParserACPI(QVariantMap map)
         newItem1 = new QTableWidgetItem(map3["TableLength"].toString());
         ui->table_acpi_patch->setItem(i, 2, newItem1);
 
-        // newItem1 = new QTableWidgetItem(map3["Find"].toString());
-        ui->table_acpi_patch->setItem(
-            i, 3, new QTableWidgetItem(ByteToHexStr(map3["Find"].toByteArray())));
+        ui->table_acpi_patch->setItem(i, 3, new QTableWidgetItem(ByteToHexStr(map3["Find"].toByteArray())));
 
         newItem1 = new QTableWidgetItem(ByteToHexStr(map3["Replace"].toByteArray()));
         ui->table_acpi_patch->setItem(i, 4, newItem1);
@@ -487,6 +487,12 @@ void MainWindow::ParserACPI(QVariantMap map)
         ui->table_acpi_patch->setItem(i, 10, newItem1);
 
         init_enabled_data(ui->table_acpi_patch, i, 11, map3["Enabled"].toString());
+
+        ui->table_acpi_patch->setItem(i, 12, new QTableWidgetItem(map3["Base"].toString()));
+
+        newItem1 = new QTableWidgetItem(map3["BaseSkip"].toString());
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        ui->table_acpi_patch->setItem(i, 13, newItem1);
     }
 
     //分析Quirks
@@ -546,6 +552,8 @@ void MainWindow::initui_acpi()
     //ui->table_acpi_del->horizontalHeader()->setStretchLastSection(true);
 
     // ACPI-Patch
+    ui->table_acpi_patch->setColumnCount(14);
+
     ui->table_acpi_patch->setColumnWidth(0, 150);
     id0 = new QTableWidgetItem(tr("TableSignature"));
     ui->table_acpi_patch->setHorizontalHeaderItem(0, id0);
@@ -585,6 +593,13 @@ void MainWindow::initui_acpi()
 
     id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_acpi_patch->setHorizontalHeaderItem(11, id0);
+
+    id0 = new QTableWidgetItem(tr("Base"));
+    ui->table_acpi_patch->setHorizontalHeaderItem(12, id0);
+    ui->table_acpi_patch->setColumnWidth(12, 220);
+
+    id0 = new QTableWidgetItem(tr("BaseSkip"));
+    ui->table_acpi_patch->setHorizontalHeaderItem(13, id0);
 
     ui->table_acpi_patch->setAlternatingRowColors(true);
     ui->table_acpi_patch->horizontalHeader()->setStretchLastSection(true);
@@ -2501,11 +2516,16 @@ void MainWindow::initui_UEFI()
     ui->table_uefi_drivers->setAlternatingRowColors(true);
     ui->table_uefi_drivers->horizontalHeader()->setStretchLastSection(true);
 
-    // KeySupportMode
+    // Input
     ui->cboxKeySupportMode->addItem("Auto");
     ui->cboxKeySupportMode->addItem("V1");
     ui->cboxKeySupportMode->addItem("V2");
     ui->cboxKeySupportMode->addItem("AMI");
+
+    ui->lblDownkeysHandler->setHidden(true);
+    ui->cboxDownkeysHandler->setHidden(true);
+    ui->cboxDownkeysHandler->addItem("Enabled");
+    ui->cboxDownkeysHandler->addItem("Disabled");
 
     // Output
     ui->cboxConsoleMode->setEditable(true);
@@ -2597,17 +2617,19 @@ void MainWindow::ParserUEFI(QVariantMap map)
     ui->chkKeySwap->setChecked(map_input["KeySwap"].toBool());
     ui->chkPointerSupport->setChecked(map_input["PointerSupport"].toBool());
 
-    ui->editKeyForgetThreshold->setText(
-        map_input["KeyForgetThreshold"].toString());
+    ui->editKeyForgetThreshold->setText(map_input["KeyForgetThreshold"].toString());
 
-    //ui->editKeyMergeThreshold->setText(map_input["KeyMergeThreshold"].toString());
-
-    ui->editPointerSupportMode->setText(
-        map_input["PointerSupportMode"].toString());
+    ui->editPointerSupportMode->setText(map_input["PointerSupportMode"].toString());
     ui->editTimerResolution->setText(map_input["TimerResolution"].toString());
 
     QString ksm = map_input["KeySupportMode"].toString();
     ui->cboxKeySupportMode->setCurrentText(ksm.trimmed());
+
+    /*ksm = map_input["DownkeysHandler"].toString().trimmed();
+    if (ksm != "")
+        ui->cboxDownkeysHandler->setCurrentText(ksm);
+    else
+        ui->cboxDownkeysHandler->setCurrentText("Disabled");*/
 
     // Output
     QVariantMap map_output = map["Output"].toMap();
@@ -2633,23 +2655,19 @@ void MainWindow::ParserUEFI(QVariantMap map)
     ui->chkAppleBootPolicy->setChecked(map_po["AppleBootPolicy"].toBool());
     ui->chkAppleDebugLog->setChecked(map_po["AppleDebugLog"].toBool());
     ui->chkAppleEvent->setChecked(map_po["AppleEvent"].toBool());
-    ui->chkAppleFramebufferInfo->setChecked(
-        map_po["AppleFramebufferInfo"].toBool());
-    ui->chkAppleImageConversion->setChecked(
-        map_po["AppleImageConversion"].toBool());
+    ui->chkAppleFramebufferInfo->setChecked(map_po["AppleFramebufferInfo"].toBool());
+    ui->chkAppleImageConversion->setChecked(map_po["AppleImageConversion"].toBool());
     ui->chkAppleKeyMap->setChecked(map_po["AppleKeyMap"].toBool());
     ui->chkAppleRtcRam->setChecked(map_po["AppleRtcRam"].toBool());
     ui->chkAppleSmcIo->setChecked(map_po["AppleSmcIo"].toBool());
-    ui->chkAppleUserInterfaceTheme->setChecked(
-        map_po["AppleUserInterfaceTheme"].toBool());
+    ui->chkAppleUserInterfaceTheme->setChecked(map_po["AppleUserInterfaceTheme"].toBool());
     ui->chkDataHub->setChecked(map_po["DataHub"].toBool());
     ui->chkDeviceProperties->setChecked(map_po["DeviceProperties"].toBool());
     ui->chkFirmwareVolume->setChecked(map_po["FirmwareVolume"].toBool());
     ui->chkHashServices->setChecked(map_po["HashServices"].toBool());
     ui->chkOSInfo->setChecked(map_po["OSInfo"].toBool());
     ui->chkUnicodeCollation->setChecked(map_po["UnicodeCollation"].toBool());
-    ui->chkAppleImg4Verification->setChecked(
-        map_po["AppleImg4Verification"].toBool());
+    ui->chkAppleImg4Verification->setChecked(map_po["AppleImg4Verification"].toBool());
     ui->chkAppleSecureBoot->setChecked(map_po["AppleSecureBoot"].toBool());
 
     // Quirks
@@ -2805,6 +2823,9 @@ QVariantMap MainWindow::SaveACPI()
         acpiPatchSub["Limit"] = ui->table_acpi_patch->item(i, 9)->text().toLongLong();
         acpiPatchSub["Skip"] = ui->table_acpi_patch->item(i, 10)->text().toLongLong();
         acpiPatchSub["Enabled"] = getBool(ui->table_acpi_patch, i, 11);
+
+        acpiPatchSub["Base"] = ui->table_acpi_patch->item(i, 12)->text();
+        acpiPatchSub["BaseSkip"] = ui->table_acpi_patch->item(i, 13)->text().toLongLong();
 
         acpiPatch.append(acpiPatchSub); //最后一层
     }
@@ -3467,12 +3488,12 @@ QVariantMap MainWindow::SaveUEFI()
 
     dictList["KeyForgetThreshold"] = ui->editKeyForgetThreshold->text().toLongLong();
 
-    //dictList["KeyMergeThreshold"] = ui->editKeyMergeThreshold->text().toLongLong();
-
     dictList["PointerSupportMode"] = ui->editPointerSupportMode->text();
     dictList["TimerResolution"] = ui->editTimerResolution->text().toLongLong();
 
     dictList["KeySupportMode"] = ui->cboxKeySupportMode->currentText();
+
+    //dictList["DownkeysHandler"] = ui->cboxDownkeysHandler->currentText();
 
     subMap["Input"] = dictList;
 
@@ -4110,9 +4131,8 @@ void MainWindow::on_btnACPIDel_Del_clicked()
 
 void MainWindow::on_btnACPIPatch_Add_clicked()
 {
-    add_item(ui->table_acpi_patch, 11);
-    init_enabled_data(ui->table_acpi_patch, ui->table_acpi_patch->rowCount() - 1,
-        11, "true");
+    add_item(ui->table_acpi_patch, 14);
+    init_enabled_data(ui->table_acpi_patch, ui->table_acpi_patch->rowCount() - 1, 11, "true");
 
     this->setWindowModified(true);
 }
@@ -5684,6 +5704,8 @@ void MainWindow::loadLocal()
 
     static QTranslator translator; //该对象要一直存在，注意用static
     static QTranslator translator1;
+    static QTranslator translator2;
+
     QLocale locale;
     if (locale.language() == QLocale::English) //获取系统语言环境
     {
@@ -5703,6 +5725,13 @@ void MainWindow::loadLocal()
         tr1 = translator1.load(":/qt_zh_CN.qm");
         if (tr1) {
             qApp->installTranslator(&translator1);
+            zh_cn = true;
+        }
+
+        bool tr2 = false;
+        tr2 = translator2.load(":/widgets_zh_cn.qm");
+        if (tr2) {
+            qApp->installTranslator(&translator2);
             zh_cn = true;
         }
 
@@ -7352,7 +7381,7 @@ void MainWindow::init_hardware_info()
     }
 }
 
-void MainWindow::init_menu()
+void MainWindow::init_Menu()
 {
 
     orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
@@ -7627,15 +7656,25 @@ void MainWindow::init_menu()
 
         w->setContextMenuPolicy(Qt::CustomContextMenu);
 
+        w->installEventFilter(this);
+
         QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
+        QAction* showTipsAction = new QAction(tr("Show Tips"));
+
         QMenu* copyMenu = new QMenu(this);
         copyMenu->addAction(copyAction);
+        copyMenu->addAction(showTipsAction);
+
         connect(copyAction, &QAction::triggered, [=]() {
             QString str = copyAction->text().trimmed();
             QString str1 = str.replace(tr("CopyText"), "");
 
             QClipboard* clipboard = QApplication::clipboard();
             clipboard->setText(str1.trimmed());
+        });
+
+        connect(showTipsAction, &QAction::triggered, [=]() {
+            myToolTip->popup(QCursor::pos(), w->toolTip());
         });
 
         connect(w, &QLabel::customContextMenuRequested, [=](const QPoint& pos) {
@@ -7652,9 +7691,15 @@ void MainWindow::init_menu()
 
         w->setContextMenuPolicy(Qt::CustomContextMenu);
 
+        w->installEventFilter(this);
+
         QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
+        QAction* showTipsAction = new QAction(tr("Show Tips"));
+
         QMenu* copyMenu = new QMenu(this);
         copyMenu->addAction(copyAction);
+        copyMenu->addAction(showTipsAction);
+
         connect(copyAction, &QAction::triggered, [=]() {
             //qDebug() << QObject::sender()->objectName();
             QString str = copyAction->text().trimmed();
@@ -7662,6 +7707,10 @@ void MainWindow::init_menu()
 
             QClipboard* clipboard = QApplication::clipboard();
             clipboard->setText(str1.trimmed());
+        });
+
+        connect(showTipsAction, &QAction::triggered, [=]() {
+            myToolTip->popup(QCursor::pos(), w->toolTip());
         });
 
         connect(w, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
@@ -7678,6 +7727,16 @@ void MainWindow::init_menu()
     //lineEdit
     pTrailingAction = new QAction(this);
     pTrailingAction->setIcon(QIcon(":/icon/ok.png"));
+}
+
+int MainWindow::getMainHeight()
+{
+    return this->height();
+}
+
+int MainWindow::getMainWidth()
+{
+    return this->width();
 }
 
 void MainWindow::copyText(QListWidget* listW)
@@ -7989,11 +8048,11 @@ void MainWindow::readResultCheckData()
 
     switch (btn) {
     case QMessageBox::Ok:
-        ui->listMain->setFocus();
+        ui->cboxFind->setFocus();
         break;
 
     default:
-        ui->listMain->setFocus();
+        ui->cboxFind->setFocus();
         break;
     }
 }
@@ -8127,7 +8186,7 @@ int MainWindow::parse_UpdateJSON(QString str)
             }
         } else
             QMessageBox::information(this, "", tr("It is currently the latest version!"));
-        ui->listMain->setFocus();
+        ui->cboxFind->setFocus();
     }
     return 0;
 }
@@ -8238,7 +8297,7 @@ void MainWindow::on_GenerateEFI()
 
     this->setFocus();
     box.exec();
-    ui->listMain->setFocus();
+    ui->cboxFind->setFocus();
 }
 
 int MainWindow::deleteDirfile(QString dirName)
@@ -10472,12 +10531,6 @@ QWidget* MainWindow::getSubTabWidget(int m, int s)
     return NULL;
 }
 
-void MainWindow::on_table_acpi_add_cellPressed(int row, int column)
-{
-    Q_UNUSED(row);
-    Q_UNUSED(column);
-}
-
 //键盘按下事件
 void MainWindow::keyPressEvent(QKeyEvent* event)
 {
@@ -10805,11 +10858,48 @@ void MainWindow::initCopyPasteLine()
 
         w->setContextMenuPolicy(Qt::CustomContextMenu);
 
+        QAction* cutAction = new QAction(tr("Cut Line"));
         QAction* copyAction = new QAction(tr("Copy Line"));
         QAction* pasteAction = new QAction(tr("Paste Line"));
         QMenu* popMenu = new QMenu(this);
+
+        popMenu->addAction(cutAction);
         popMenu->addAction(copyAction);
         popMenu->addAction(pasteAction);
+
+        // 剪切行
+        connect(cutAction, &QAction::triggered, [=]() {
+            QItemSelectionModel* selections = w->selectionModel();
+            QModelIndexList selectedsList = selections->selectedIndexes();
+
+            copyAction->triggered(true);
+
+            w->clearSelection();
+            w->setSelectionMode(QAbstractItemView::MultiSelection);
+            for (int z = 0; z < selectedsList.count(); z++) {
+                w->selectRow(selectedsList.at(z).row());
+            }
+
+            if (w == ui->table_dp_add)
+                on_btnDPAdd_Del_clicked();
+
+            else if (w == ui->table_dp_del)
+                on_btnDPDel_Del_clicked();
+
+            else if (w == ui->table_nv_add)
+                on_btnNVRAMAdd_Del_clicked();
+
+            else if (w == ui->table_nv_del)
+                on_btnNVRAMDel_Del_clicked();
+
+            else if (w == ui->table_nv_ls)
+                on_btnNVRAMLS_Del_clicked();
+
+            else
+                del_item(w);
+
+            w->setSelectionMode(QAbstractItemView::ExtendedSelection);
+        });
 
         // 复制行
         connect(copyAction, &QAction::triggered, [=]() {
@@ -10949,6 +11039,7 @@ void MainWindow::initCopyPasteLine()
                     else {
 
                         copyAction->setEnabled(true);
+                        cutAction->setEnabled(true);
                     }
                 }
 
@@ -10990,10 +11081,13 @@ void MainWindow::initCopyPasteLine()
             } else
                 pasteAction->setEnabled(false);
 
-            if (w->rowCount() == 0)
+            if (w->rowCount() == 0) {
                 copyAction->setEnabled(false);
-            else
+                cutAction->setEnabled(false);
+            } else {
                 copyAction->setEnabled(true);
+                cutAction->setEnabled(true);
+            }
 
             popMenu->exec(QCursor::pos());
         });
@@ -11152,4 +11246,59 @@ void MainWindow::clearAllTableSelection()
 
         w->clearSelection();
     }
+}
+
+void MainWindow::paintEvent(QPaintEvent* event)
+{
+    Q_UNUSED(event);
+
+    //获取背景色
+    QPalette pal = this->palette();
+    QBrush brush = pal.window();
+    int c_red = brush.color().red();
+
+    if (c_red != red) {
+        red = c_red;
+
+        if (red < 55) {
+
+            QPalette palette;
+            palette = ui->cboxFind->palette();
+            palette.setColor(QPalette::Base, QColor(50, 50, 50));
+            palette.setColor(QPalette::Text, Qt::white); //字色
+            ui->cboxFind->setPalette(palette);
+
+        } else {
+
+            QPalette palette;
+            palette = ui->cboxFind->palette();
+            palette.setColor(QPalette::Base, Qt::white);
+            palette.setColor(QPalette::Text, Qt::black); //字色
+            ui->cboxFind->setPalette(palette);
+        }
+    }
+}
+
+bool MainWindow::eventFilter(QObject* obj, QEvent* event)
+
+{
+
+    if (obj->metaObject()->className() == QStringLiteral("QLabel") || obj->metaObject()->className() == QStringLiteral("QCheckBox"))
+
+    {
+        if (event->type() == QEvent::ToolTip) {
+            QToolTip::hideText();
+
+            event->ignore();
+
+            return true; //不让事件继续传播
+
+        } else
+
+        {
+            return false;
+        }
+    }
+
+    return MainWindow::eventFilter(obj, event);
 }
