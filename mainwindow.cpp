@@ -23,12 +23,14 @@ MainWindow::MainWindow(QWidget* parent)
 
     ui->setupUi(this);
 
+    loading = true;
+
     //osx1012 = true;
 
     loadLocal();
 
     test(false);
-    CurVerison = "20210320";
+    CurVerison = "20210322";
     title = "OC Auxiliary Tools   V0.6.8    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -204,6 +206,11 @@ MainWindow::MainWindow(QWidget* parent)
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
 
     this->setWindowModified(false);
+
+    autoCheckUpdate = true;
+    on_btnCheckUpdate();
+
+    loading = false;
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -8168,7 +8175,13 @@ int MainWindow::parse_UpdateJSON(QString str)
     QJsonDocument root_Doc = QJsonDocument::fromJson(str.toUtf8(), &err_rpt);
 
     if (err_rpt.error != QJsonParseError::NoError) {
-        QMessageBox::critical(this, "", tr("Network error!"));
+
+        if (!autoCheckUpdate) {
+            QMessageBox::critical(this, "", tr("Network error!"));
+        }
+
+        autoCheckUpdate = false;
+
         return -1;
     }
     if (root_Doc.isObject()) {
@@ -8204,13 +8217,30 @@ int MainWindow::parse_UpdateJSON(QString str)
 
         this->setFocus();
         if (Verison > CurVerison) {
-            QString warningStr = tr("New version detected!") + "\n" + tr("Version: ") + "V" + Verison + "\n" + tr("Published at: ") + UpdateTime + "\n" + tr("Release Notes: ") + "\n" + ReleaseNote;
-            int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
-            if (ret == 0) {
-                QDesktopServices::openUrl(QUrl(Url));
+
+            ui->btnCheckUpdate->setIcon(QIcon(":/icon/newver.png"));
+            ui->btnCheckUpdate->setToolTip(tr("There is a new version"));
+
+            if (!autoCheckUpdate) {
+
+                QString warningStr = tr("New version detected!") + "\n" + tr("Version: ") + "V" + Verison + "\n" + tr("Published at: ") + UpdateTime + "\n" + tr("Release Notes: ") + "\n" + ReleaseNote;
+                int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
+                if (ret == 0) {
+                    QDesktopServices::openUrl(QUrl(Url));
+                }
             }
-        } else
-            QMessageBox::information(this, "", tr("It is currently the latest version!"));
+
+            autoCheckUpdate = false;
+
+        } else {
+
+            if (!autoCheckUpdate) {
+                QMessageBox::information(this, "", tr("It is currently the latest version!"));
+            }
+
+            autoCheckUpdate = false;
+        }
+
         ui->cboxFind->setFocus();
     }
     return 0;
@@ -9648,7 +9678,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_actionFind_triggered()
 {
-    QString findText = ui->cboxFind->currentText().trimmed();
+    QString findText = ui->cboxFind->currentText().trimmed().toLower();
 
     if (findText == "")
         return;
@@ -9688,8 +9718,6 @@ void MainWindow::on_actionFind_triggered()
             listOfCheckBoxResults.append(chkbox);
             listNameResults.append("1" + chkbox->objectName());
             ui->listFind->addItem(chkbox->text());
-
-            //qDebug() << chkbox->objectName() << chkbox->text();
         }
     }
 
@@ -9748,7 +9776,6 @@ void MainWindow::on_actionFind_triggered()
             }
         }
 
-        //qDebug() << t->rowCount() << t->objectName();
         if (t != ui->table_dp_add && t != ui->table_dp_del && t != ui->table_nv_add && t != ui->table_nv_del && t != ui->table_nv_ls)
             findTable(t, findText);
     }
@@ -9766,8 +9793,6 @@ void MainWindow::on_actionFind_triggered()
             listNameResults.append("3" + lbl->objectName());
 
             ui->listFind->addItem(lbl->text());
-
-            //qDebug() << lbl->objectName() << lbl->text();
         }
     }
 
@@ -9800,8 +9825,6 @@ void MainWindow::on_actionFind_triggered()
                 listNameResults.append("4" + edit->objectName());
 
                 ui->listFind->addItem(edit->text());
-
-                //qDebug() << edit << edit->objectName() << edit->text();
             }
         }
     }
@@ -9820,8 +9843,26 @@ void MainWindow::on_actionFind_triggered()
                 listNameResults.append("5" + cbox->objectName());
 
                 ui->listFind->addItem(cbox->currentText());
+            }
+        }
+    }
 
-                //qDebug() << cbox->objectName() << cbox->currentText();
+    //TableHeader 6
+
+    listOfTableWidget.clear();
+    listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
+    listOfTableWidgetHeaderResults.clear();
+    for (int i = 0; i < listOfTableWidget.count(); i++) {
+        QTableWidget* t;
+        t = (QTableWidget*)listOfTableWidget.at(i);
+
+        for (int j = 0; j < t->columnCount(); j++) {
+            QString strColumn = t->horizontalHeaderItem(j)->text();
+            if (strColumn.toLower().contains(findText)) {
+                findCount++;
+                listOfTableWidgetHeaderResults.append(t);
+                listNameResults.append("6" + t->objectName());
+                ui->listFind->addItem(strColumn);
             }
         }
     }
@@ -9964,11 +10005,12 @@ void MainWindow::goResults(int index)
     QBrush brush = pal.window();
     red = brush.color().red();
 
-    //清理chkbox标记
+    //清理之前的标记
     clearCheckBoxMarker();
     clearLabelMarker();
     clearLineEditMarker();
     clearComboBoxMarker();
+    clearTableHeaderMarker();
 
     //chkbox 1
     if (objName.mid(0, 1) == "1") {
@@ -10087,8 +10129,6 @@ void MainWindow::goResults(int index)
                         }
 
                         end = true;
-
-                        //qDebug() << name << plistPath << index << nameINI;
 
                         break;
                     }
@@ -10273,6 +10313,74 @@ void MainWindow::goResults(int index)
         }
     }
 
+    //table header 6
+    if (objName.mid(0, 1) == "6") {
+
+        for (int i = 0; i < ui->listMain->count(); i++) {
+
+            if (end)
+                break;
+
+            ui->listMain->setCurrentRow(i);
+            for (int j = 0; j < ui->listSub->count(); j++) {
+
+                if (end)
+                    break;
+
+                ui->listSub->setCurrentRow(j);
+                currentTabWidget = getSubTabWidget(i, j);
+                listOfTableWidget.clear();
+                listOfTableWidget = getAllTableWidget(getAllUIControls(currentTabWidget));
+                for (int k = 0; k < listOfTableWidget.count(); k++) {
+
+                    if (listOfTableWidget.at(k)->objectName() == name) {
+
+                        QTableWidget* w = (QTableWidget*)listOfTableWidget.at(k);
+
+                        for (int x = 0; x < w->columnCount(); x++) {
+                            QString strColumn = w->horizontalHeaderItem(x)->text();
+                            if (strColumn == ui->listFind->currentItem()->text()) {
+                                w->setFocus();
+                                w->clearSelection();
+
+                                brushTableHeaderBackground = w->horizontalHeaderItem(x)->background();
+                                brushTableHeaderForeground = w->horizontalHeaderItem(x)->foreground();
+
+                                if (!win) {
+                                    w->horizontalHeaderItem(x)->setBackground(QColor(255, 0, 0));
+                                    w->horizontalHeaderItem(x)->setForeground(QColor(255, 255, 255));
+                                } else {
+
+                                    QBrush myBrush;
+                                    myBrush.setStyle(Qt::SolidPattern);
+                                    myBrush.setColor(Qt::blue);
+                                    //w->horizontalHeaderItem(x)->setBackground(myBrush);
+
+                                    w->horizontalHeaderItem(x)->setForeground(QColor(255, 0, 0));
+                                }
+
+                                if (w->rowCount() == 0) {
+
+                                    w->insertRow(0);
+                                    w->setCurrentCell(0, x);
+                                    w->removeRow(0);
+                                } else
+                                    w->setCurrentCell(0, x);
+
+                                if (!win)
+                                    w->clearSelection();
+
+                                end = true;
+                            }
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     ui->lblCount->setText(QString::number(findCount) + " ( " + QString::number(ui->listFind->currentRow() + 1) + " ) ");
 }
 
@@ -10295,6 +10403,7 @@ void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1)
         clearComboBoxMarker();
         clearLabelMarker();
         clearLineEditMarker();
+        clearTableHeaderMarker();
 
         //获取背景色
         QPalette pal = this->palette();
@@ -10359,6 +10468,19 @@ void MainWindow::clearLineEditMarker()
     }
 }
 
+void MainWindow::clearTableHeaderMarker()
+{
+    for (int i = 0; i < listOfTableWidgetHeaderResults.count(); i++) {
+
+        QTableWidget* w = (QTableWidget*)listOfTableWidgetHeaderResults.at(i);
+
+        for (int j = 0; j < w->columnCount(); j++) {
+            w->horizontalHeaderItem(j)->setBackground(brushTableHeaderBackground);
+            w->horizontalHeaderItem(j)->setForeground(brushTableHeaderForeground);
+        }
+    }
+}
+
 void MainWindow::on_listFind_currentRowChanged(int currentRow)
 {
     Q_UNUSED(currentRow);
@@ -10370,7 +10492,8 @@ void MainWindow::on_listFind_currentRowChanged(int currentRow)
 void MainWindow::on_cboxFind_currentIndexChanged(const QString& arg1)
 {
     Q_UNUSED(arg1);
-    on_actionFind_triggered();
+    if (!loading)
+        on_actionFind_triggered();
 }
 
 void MainWindow::on_listFind_itemClicked(QListWidgetItem* item)

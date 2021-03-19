@@ -93,6 +93,9 @@ public:
     int findCount = 0;
     QObjectList listOfCheckBoxResults;
     QObjectList listOfTableWidgetResults;
+    QObjectList listOfTableWidgetHeaderResults;
+    QBrush brushTableHeaderBackground;
+    QBrush brushTableHeaderForeground;
     QObjectList listOfLabelResults;
     QObjectList listOfLineEditResults;
     QObjectList listOfComboBoxResults;
@@ -107,6 +110,7 @@ public:
     void clearLabelMarker();
     void clearComboBoxMarker();
     void clearLineEditMarker();
+    void clearTableHeaderMarker();
 
     RecentFiles* m_recentFiles;
     QLineEdit* lineEdit;
@@ -769,6 +773,8 @@ private slots:
 
 private:
     Ui::MainWindow* ui;
+
+    bool autoCheckUpdate = false;
 
     QString orgComboBoxStyle;
     QString orgLineEditStyle;

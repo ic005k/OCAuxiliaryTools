@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -6279,7 +6279,11 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               <item row="3" column="4">
                <widget class="QLabel" name="label_87">
                 <property name="toolTip">
-                 <string>Board manufacturer. All rules of SystemManufacturer do apply.</string>
+                 <string>SMBIOS: System Enclosure or Chassis (Type 3) — Manufacturer
+Description: Board manufacturer. All rules of SystemManufacturer do apply.
+----
+SMBIOS：系统外壳或机箱(类型3)-制造商
+说明：板制造商。所有SystemManufacturer的规则都适用。</string>
                 </property>
                 <property name="statusTip">
                  <string>Board manufacturer. All rules of SystemManufacturer do apply.</string>
@@ -6292,7 +6296,9 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               <item row="3" column="2">
                <widget class="QLabel" name="label_85">
                 <property name="toolTip">
-                 <string>Chassis type name. Varies, could be empty or MacBook-Aluminum.</string>
+                 <string>Chassis type name. Varies, could be empty or MacBook-Aluminum.
+----
+机箱类型名称。可能是空的，也可能是 MacBook-Aluminum。</string>
                 </property>
                 <property name="statusTip">
                  <string>Chassis type name. Varies, could be empty or MacBook-Aluminum.</string>
@@ -6311,8 +6317,9 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               <item row="5" column="0">
                <widget class="QLabel" name="label_68">
                 <property name="toolTip">
-                 <string> 64-bit firmware features bitmask. Refer to AppleFeatures.h for more details. Lower 32 bits match
-FirmwareFeatures. Upper 64 bits match ExtendedFirmwareFeatures.</string>
+                 <string> 64-bit firmware features bitmask. Refer to AppleFeatures.h for more details. Lower 32 bits match FirmwareFeatures. Upper 64 bits match ExtendedFirmwareFeatures.
+----
+ 64位固件具有位掩码功能。更多细节请参考AppleFeatures.h。低32位匹配FirmwareFeatures。高64位匹配ExtendedFirmwareFeatures。</string>
                 </property>
                 <property name="statusTip">
                  <string> 64-bit firmware features bitmask. Refer to AppleFeatures.h for more details. Lower 32 bits match
@@ -6326,8 +6333,9 @@ FirmwareFeatures. Upper 64 bits match ExtendedFirmwareFeatures.</string>
               <item row="6" column="2">
                <widget class="QLabel" name="label_76">
                 <property name="toolTip">
-                 <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when
-zero.</string>
+                 <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when zero.
+----
+包含大写的SMC版本的ASCII字符串。在基于T2的Mac上缺失。为零时忽略。</string>
                 </property>
                 <property name="statusTip">
                  <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when
@@ -6344,8 +6352,9 @@ zero.</string>
               <item row="5" column="4">
                <widget class="QLabel" name="label_72">
                 <property name="toolTip">
-                 <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to
-not provide this table.</string>
+                 <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to not provide this table.
+----
+ 平台功能位掩码。更多细节请参考AppleFeatures.h。使用0xFFFFFFFF值不提供此表。</string>
                 </property>
                 <property name="statusTip">
                  <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to
@@ -6362,12 +6371,15 @@ not provide this table.</string>
               <item row="7" column="2">
                <widget class="QLabel" name="label_82">
                 <property name="toolTip">
-                 <string> Preferred Mac model used to mark the device as supported by the operating system. This value
-must be specified by any configuration for later automatic generation of the related values in this and other
-SMBIOS tables and related configuration parameters. If SystemProductName is not compatible with the target
-operating system, -no_compat_check boot argument may be used as an override.
-Note: If SystemProductName is unknown, and related fields are unspecified, default values should be assumed as
-being set to MacPro6,1 data. The list of known products can be found in AppleModels.</string>
+                 <string> Preferred Mac model used to mark the device as supported by the operating system. 
+This value must be specified by any configuration for later automatic generation of the related values in this and other SMBIOS tables and related configuration parameters. If SystemProductName is not compatible with the target operating system, -no_compat_check boot argument may be used as an override.
+
+Note: If SystemProductName is unknown, and related fields are unspecified, default values should be assumed as being set to MacPro6,1 data. The list of known products can be found in AppleModels.
+----
+ 首选Mac型号，用于标记设备受操作系统支持。
+任何配置都必须指定此值，以便以后自动生成此表和其他 SMBIOS 表及相关配置参数中的相关值。如果SystemProductName与目标操作系统不兼容，可以使用-no_compat_check引导参数作为覆盖。
+
+注意：如果SystemProductName未知，且相关字段未指定，则应假定默认值设置为MacPro6,1数据。已知产品的列表可以在AppleModels中找到。</string>
                 </property>
                 <property name="statusTip">
                  <string>SMBIOS: System Information (Type 1), Product Name</string>
@@ -6386,7 +6398,13 @@ being set to MacPro6,1 data. The list of known products can be found in AppleMod
               <item row="4" column="0">
                <widget class="QLabel" name="label_89">
                 <property name="toolTip">
-                 <string> Should match SystemSerialNumber.</string>
+                 <string>SMBIOS: System Enclosure or Chassis (Type 3) — Version
+
+Description: Should match SystemSerialNumber.
+----
+SMBIOS：系统外壳或机箱(类型3)----版本。
+
+描述：应与SystemSerialNumber匹配。</string>
                 </property>
                 <property name="statusTip">
                  <string> Should match SystemSerialNumber.</string>
@@ -6405,7 +6423,11 @@ being set to MacPro6,1 data. The list of known products can be found in AppleMod
               <item row="1" column="4">
                <widget class="QLabel" name="label_75">
                 <property name="toolTip">
-                 <string> Board manufacturer. All rules of SystemManufacturer do apply.</string>
+                 <string> Board manufacturer. All rules of SystemManufacturer do apply.
+
+----
+
+ 板制造商。SystemManufacturer的所有规则都适用。</string>
                 </property>
                 <property name="statusTip">
                  <string> Board manufacturer. All rules of SystemManufacturer do apply.</string>
@@ -6418,11 +6440,15 @@ being set to MacPro6,1 data. The list of known products can be found in AppleMod
               <item row="0" column="4">
                <widget class="QLabel" name="label_69">
                 <property name="toolTip">
-                 <string> Firmware version. This value gets updated and takes part in update delivery configuration and
-macOS version compatibility. This value could look like MM71.88Z.0234.B00.1809171422 in older firmwares,
-and is described in BiosId.h. In newer firmwares it should look like 236.0.0.0.0 or 220.230.16.0.0 (iBridge:
-16.16.2542.0.0,0). iBridge version is read from BridgeOSVersion variable, and is only present on macs with
-T2.</string>
+                 <string> Firmware version. 
+
+This value gets updated and takes part in update delivery configuration and macOS version compatibility. This value could look like MM71.88Z.0234.B00.1809171422 in older firmwares,and is described in BiosId.h. In newer firmwares it should look like 236.0.0.0.0 or 220.230.16.0.0 (iBridge: 16.16.2542.0.0,0). iBridge version is read from BridgeOSVersion variable, and is only present on macs with T2.
+
+----
+
+ 固件版本。
+
+这个值会被更新，并参与更新交付配置和macOS版本的兼容性。在旧的固件中，这个值看起来像MM71.88Z.0234.B00.1809171422，并在BiosId.h中描述。在新的固件中，它应该看起来像236.0.0.0或220.230.16.0.0 (iBridge: 16.16.2542.0.0,0)。</string>
                 </property>
                 <property name="statusTip">
                  <string>BIOS Information (Type 0) — BIOS Version</string>
@@ -6438,7 +6464,9 @@ T2.</string>
               <item row="0" column="2">
                <widget class="QLabel" name="label_67">
                 <property name="toolTip">
-                 <string> BIOS Vendor. All rules of SystemManufacturer do apply.</string>
+                 <string> BIOS Vendor. All rules of SystemManufacturer do apply.
+----
+ BIOS供应商。所有SystemManufacturer的规则都适用。</string>
                 </property>
                 <property name="statusTip">
                  <string> BIOS Vendor. All rules of SystemManufacturer do apply.</string>
@@ -6457,7 +6485,9 @@ T2.</string>
               <item row="6" column="0">
                <widget class="QLabel" name="label_74">
                 <property name="toolTip">
-                 <string> Combined of Processor Major and Minor types.</string>
+                 <string> Combined of Processor Major and Minor types.
+----
+ 处理器主类型和次类型的组合。</string>
                 </property>
                 <property name="statusTip">
                  <string> Combined of Processor Major and Minor types.</string>
@@ -6482,7 +6512,15 @@ T2.</string>
               <item row="1" column="2">
                <widget class="QLabel" name="label_73">
                 <property name="toolTip">
-                 <string>Varies, may be empty or Part Component.</string>
+                 <string>SMBIOS: Baseboard (or Module) Information (Type 2) — Location in Chassis
+
+Description: Varies, may be empty or Part Component.
+----
+SMBIOS：底板（或模块）信息（类型2）--在机箱中的位置。
+
+说明：变量，可能是空的，也可能是部分组件。
+
+</string>
                 </property>
                 <property name="statusTip">
                  <string>Varies, may be empty or Part Component.</string>
@@ -6501,7 +6539,9 @@ T2.</string>
               <item row="1" column="0">
                <widget class="QLabel" name="label_71">
                 <property name="toolTip">
-                 <string>Asset tag number. Varies, may be empty or Type2 - Board Asset Tag.</string>
+                 <string>Asset tag number. Varies, may be empty or Type2 - Board Asset Tag.
+----
+资产标签号。可能为空或2类板资产标签。</string>
                 </property>
                 <property name="statusTip">
                  <string>Asset tag number. Varies, may be empty or Type2 - Board Asset Tag.</string>
@@ -6515,7 +6555,12 @@ T2.</string>
                <widget class="QLabel" name="label_92">
                 <property name="toolTip">
                  <string> Supported bits of extended firmware features bitmask. Refer to AppleFeatures.h for more details.
-Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFeaturesMask.</string>
+
+Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFeaturesMask.
+----
+ 支持的扩展固件功能位掩码。更多细节请参考AppleFeatures.h。
+
+低32位匹配FirmwareFeaturesMask。高64位匹配ExtendedFirmwareFeaturesMask。</string>
                 </property>
                 <property name="statusTip">
                  <string> Supported bits of extended firmware features bitmask. Refer to AppleFeatures.h for more details.
@@ -6529,8 +6574,9 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
               <item row="2" column="4">
                <widget class="QLabel" name="label_81">
                 <property name="toolTip">
-                 <string> Either 0xA (Motherboard (includes processor, memory, and I/O) or 0xB (Processor/Memory
-Module), refer to Table 15 – Baseboard: Board Type for more details.</string>
+                 <string> Either 0xA (Motherboard (includes processor, memory, and I/O) or 0xB (Processor/Memory Module), refer to Table 15 – Baseboard: Board Type for more details.
+----
+ 0xA(主板(包括处理器、内存和I/O)或0xB(处理器/内存模块)，请参阅表15 - 基板。更多详情请参考表15 - 基板：板型。</string>
                 </property>
                 <property name="statusTip">
                  <string> Either 0xA (Motherboard (includes processor, memory, and I/O) or 0xB (Processor/Memory
@@ -6544,10 +6590,19 @@ Module), refer to Table 15 – Baseboard: Board Type for more details.</string>
               <item row="7" column="0">
                <widget class="QLabel" name="label_80">
                 <property name="toolTip">
-                 <string> OEM manufacturer of the particular board. Shall not be specified unless strictly required. Should
-not contain Apple Inc., as this confuses numerous services present in the operating system, such as firmware
-updates, eficheck, as well as kernel extensions developed in Acidanthera, such as Lilu and its plugins. In addition
-it will also make some operating systems like Linux unbootable.</string>
+                 <string> OEM manufacturer of the particular board. Shall not be specified unless strictly required. 
+
+Should not contain Apple Inc., as this confuses numerous services present in the operating system, such as firmware updates, eficheck, as well as kernel extensions developed in Acidanthera, such as Lilu and its plugins. 
+
+In addition it will also make some operating systems like Linux unbootable.
+
+----
+
+ 特定电路板的OEM制造商。除非有严格要求，否则不应指定。
+
+不应包含Apple Inc.，因为这将混淆操作系统中存在的众多服务，如固件更新、eficheck，以及Acidanthera开发的内核扩展，如Lilu及其插件。
+
+此外它还会使一些操作系统如Linux无法启动。</string>
                 </property>
                 <property name="statusTip">
                  <string>SMBIOS: System Information (Type 1) — Manufacturer</string>
@@ -6560,8 +6615,9 @@ it will also make some operating systems like Linux unbootable.</string>
               <item row="2" column="0">
                <widget class="QLabel" name="label_77">
                 <property name="toolTip">
-                 <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older
-models.</string>
+                 <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models.
+----
+Mac板ID（board-id）。可能看起来像Mac-7BA5B2D9E42DDD94或旧型号的Mac-F221BEC8。</string>
                 </property>
                 <property name="statusTip">
                  <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older
@@ -6575,7 +6631,9 @@ models.</string>
               <item row="7" column="4">
                <widget class="QLabel" name="label_84">
                 <property name="toolTip">
-                 <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.</string>
+                 <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.
+----
+Mac板ID（board-id）。可能看起来像 Mac-7BA5B2D9E42DDD94 或旧型号的 Mac-F221BEC8。有时它可能是空的。</string>
                 </property>
                 <property name="statusTip">
                  <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.</string>
@@ -6591,7 +6649,9 @@ models.</string>
               <item row="2" column="2">
                <widget class="QLabel" name="label_79">
                 <property name="toolTip">
-                 <string>Board serial number in defined format. Known formats are described in macserial.</string>
+                 <string>Board serial number in defined format. Known formats are described in macserial.
+----
+板上的序列号以定义的格式表示。已知的格式在macserial中描述。</string>
                 </property>
                 <property name="statusTip">
                  <string>Board serial number in defined format. Known formats are described in macserial.</string>
@@ -6604,7 +6664,9 @@ models.</string>
               <item row="6" column="4">
                <widget class="QLabel" name="label_78">
                 <property name="toolTip">
-                 <string>Family name. May look like iMac Pro.</string>
+                 <string>Family name. May look like iMac Pro.
+----
+家族名。可能看起来像iMac Pro。</string>
                 </property>
                 <property name="statusTip">
                  <string>Family name. May look like iMac Pro.</string>
@@ -6617,7 +6679,9 @@ models.</string>
               <item row="3" column="0">
                <widget class="QLabel" name="label_83">
                 <property name="toolTip">
-                 <string>Board version number. Varies, may match SystemProductName or SystemProductVersion.</string>
+                 <string>Board version number. Varies, may match SystemProductName or SystemProductVersion.
+----
+板的版本号。可能与SystemProductName或SystemProductVersion匹配。</string>
                 </property>
                 <property name="statusTip">
                  <string>Board version number. Varies, may match SystemProductName or SystemProductVersion.</string>
@@ -6630,7 +6694,9 @@ models.</string>
               <item row="4" column="2">
                <widget class="QLabel" name="label_91">
                 <property name="toolTip">
-                 <string> Chassis type, refer to Table 17 — System Enclosure or Chassis Types for more details.</string>
+                 <string> Chassis type, refer to Table 17 — System Enclosure or Chassis Types for more details.
+----
+ 机箱类型，详见表17-系统机箱或机箱类型。</string>
                 </property>
                 <property name="statusTip">
                  <string> Chassis type, refer to Table 17 — System Enclosure or Chassis Types for more details.</string>
@@ -6649,7 +6715,9 @@ models.</string>
               <item row="4" column="4">
                <widget class="QLabel" name="label_66">
                 <property name="toolTip">
-                 <string> Should match BoardProduct.</string>
+                 <string> Should match BoardProduct.
+----
+ 应与BoardProduct匹配。</string>
                 </property>
                 <property name="statusTip">
                  <string> Should match BoardProduct.</string>
@@ -6686,7 +6754,9 @@ models.</string>
               <item row="8" column="0">
                <widget class="QLabel" name="label_86">
                 <property name="toolTip">
-                 <string> Product serial number in defined format. Known formats are described in macserial.</string>
+                 <string> Product serial number in defined format. Known formats are described in macserial.
+----
+ 以某种定义的格式表示产品序列号。已知的格式在macserial中描述。</string>
                 </property>
                 <property name="statusTip">
                  <string> Product serial number in defined format. Known formats are described in macserial.</string>
@@ -6702,8 +6772,9 @@ models.</string>
               <item row="8" column="2">
                <widget class="QLabel" name="label_88">
                 <property name="toolTip">
-                 <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no
-central registration process.</string>
+                 <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no central registration process.
+----
+UUID是一种标识符，设计为在时间和空间上都是唯一的。它不需要中心注册过程。</string>
                 </property>
                 <property name="statusTip">
                  <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no
@@ -6720,7 +6791,9 @@ central registration process.</string>
               <item row="8" column="4">
                <widget class="QLabel" name="label_90">
                 <property name="toolTip">
-                 <string> Product iteration version number. May look like 1.1.</string>
+                 <string> Product iteration version number. May look like 1.1.
+----
+ 产品迭代版本号。可能看起来像1.1。</string>
                 </property>
                 <property name="statusTip">
                  <string> Product iteration version number. May look like 1.1.</string>
