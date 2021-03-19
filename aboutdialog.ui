@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>627</width>
-    <height>232</height>
+    <width>540</width>
+    <height>277</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>About</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
+  <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="lblIcon">
      <property name="maximumSize">
@@ -28,56 +28,7 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="5" column="0">
-      <widget class="QLabel" name="lblLastModi">
-       <property name="text">
-        <string>lastModi</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="linkLabel1">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>link1</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label1">
-       <property name="text">
-        <string>Contributor: eSaF (England, UK)    [file structure]</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="linkLabel2">
-       <property name="text">
-        <string>link2</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label2">
-       <property name="text">
-        <string>Icon Designer: Mirone (Brazil) </string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Contributor: Sherlocks (Seoul, Korea)    [file structure]</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QTextBrowser" name="textBrowser"/>
    </item>
   </layout>
  </widget>

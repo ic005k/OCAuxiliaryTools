@@ -59,6 +59,10 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    bool mac = false;
+    bool win = false;
+    bool linuxOS = false;
+
     Tooltip* myToolTip = new Tooltip;
     int getMainHeight();
     int getMainWidth();
@@ -782,9 +786,6 @@ private:
 
     QNetworkAccessManager* manager;
     int parse_UpdateJSON(QString str);
-    bool mac = false;
-    bool win = false;
-    bool linuxOS = false;
 
     QString CurVerison = "V1.0";
 

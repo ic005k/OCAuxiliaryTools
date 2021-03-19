@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210319";
+    CurVerison = "20210320";
     title = "OC Auxiliary Tools   V0.6.8    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -7674,11 +7674,24 @@ void MainWindow::init_Menu()
         });
 
         connect(showTipsAction, &QAction::triggered, [=]() {
-            myToolTip->popup(QCursor::pos(), w->toolTip());
+            QString str = copyAction->text().trimmed();
+            QString str1 = str.replace(tr("CopyText"), "").trimmed();
+            QString str2;
+            for (int x = 0; x < str1.count(); x++) {
+                str2 = str2 + "=";
+            }
+
+            myToolTip->popup(QCursor::pos(), str1 + "\n" + str2 + "\n\n", w->toolTip());
         });
 
         connect(w, &QLabel::customContextMenuRequested, [=](const QPoint& pos) {
             Q_UNUSED(pos);
+
+            if (w->toolTip().trimmed() == "")
+                showTipsAction->setVisible(false);
+            else
+                showTipsAction->setVisible(true);
+
             copyMenu->exec(QCursor::pos());
         });
     }
@@ -7701,7 +7714,6 @@ void MainWindow::init_Menu()
         copyMenu->addAction(showTipsAction);
 
         connect(copyAction, &QAction::triggered, [=]() {
-            //qDebug() << QObject::sender()->objectName();
             QString str = copyAction->text().trimmed();
             QString str1 = str.replace(tr("CopyText"), "");
 
@@ -7710,11 +7722,24 @@ void MainWindow::init_Menu()
         });
 
         connect(showTipsAction, &QAction::triggered, [=]() {
-            myToolTip->popup(QCursor::pos(), w->toolTip());
+            QString str = copyAction->text().trimmed();
+            QString str1 = str.replace(tr("CopyText"), "").trimmed();
+            QString str2;
+            for (int x = 0; x < str1.count(); x++) {
+                str2 = str2 + "=";
+            }
+
+            myToolTip->popup(QCursor::pos(), str1 + "\n" + str2 + "\n\n", w->toolTip());
         });
 
         connect(w, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
             Q_UNUSED(pos);
+
+            if (w->toolTip().trimmed() == "")
+                showTipsAction->setVisible(false);
+            else
+                showTipsAction->setVisible(true);
+
             copyMenu->exec(QCursor::pos());
         });
     }

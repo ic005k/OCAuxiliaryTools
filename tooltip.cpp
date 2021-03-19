@@ -1,5 +1,6 @@
 #include "tooltip.h"
 #include "mainwindow.h"
+#include <QAbstractTextDocumentLayout>
 #include <QDebug>
 #include <QEvent>
 #include <QHBoxLayout>
@@ -32,7 +33,13 @@ Tooltip::Tooltip(QWidget* parent)
     //this->setStyleSheet("QWidget { background: rgba(255 ,248 ,220 ,160); color: black}");
 
     thisWidth = 450;
-    thisHeight = 260;
+    thisHeight = 250;
+
+#ifdef Q_OS_WIN32
+    thisWidth = 600;
+    thisHeight = 300;
+#endif
+
     this->resize(thisWidth, thisHeight);
 }
 
@@ -40,9 +47,40 @@ Tooltip::~Tooltip()
 {
 }
 
-void Tooltip::setText(const QString& text)
+void Tooltip::setMyText(QString strHead, const QString& text)
 {
-    edit->setText(text);
+    QString str;
+    QStringList strList;
+
+    if (text.contains("----")) {
+        strList = text.split("----");
+        if (mw_one->zh_cn) {
+            str = strList.at(1);
+        } else
+            str = strList.at(0);
+    } else
+        str = text;
+
+    edit->setText(strHead + str.trimmed());
+
+    // 文本高度
+    QTextDocument* document = edit->document(); //new QTextDocument(edit);
+    document->setTextWidth(thisWidth);
+    QTextOption op;
+    op.setWrapMode(QTextOption::WrapAnywhere);
+    document->setDefaultTextOption(op);
+    document->adjustSize();
+    QAbstractTextDocumentLayout* layout = document->documentLayout();
+
+    int newHeight = layout->documentSize().height();
+
+    if (newHeight < thisHeight)
+        currentHeight = newHeight;
+    else
+        currentHeight = thisHeight;
+
+    edit->setFixedHeight(currentHeight * 1.05);
+    this->setFixedHeight(currentHeight * 1.05);
 }
 
 bool Tooltip::eventFilter(QObject* obj, QEvent* e)
@@ -57,10 +95,10 @@ bool Tooltip::eventFilter(QObject* obj, QEvent* e)
     return QWidget::eventFilter(obj, e);
 }
 
-void Tooltip::popup(QPoint pos, const QString& text)
+void Tooltip::popup(QPoint pos, QString strHead, const QString& text)
 {
     Tooltip* t = new Tooltip();
-    t->setText(text);
+    t->setMyText(strHead, text);
 
     int newX;
     if (pos.x() + thisWidth > mw_one->getMainWidth())
@@ -68,10 +106,9 @@ void Tooltip::popup(QPoint pos, const QString& text)
     else
         newX = pos.x();
 
-    pos.setY(pos.y() - thisHeight);
+    pos.setY(pos.y() - t->height());
     pos.setX(newX);
 
-    t->resize(thisWidth, thisHeight);
     t->move(pos);
     t->show();
 }
