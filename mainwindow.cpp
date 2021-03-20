@@ -25,8 +25,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     loading = true;
 
-    //osx1012 = true;
-
     loadLocal();
 
     test(false);
@@ -35,33 +33,32 @@ MainWindow::MainWindow(QWidget* parent)
     setWindowTitle(title);
 
     QFont font;
+
+#ifdef Q_OS_MAC
+    font.setPixelSize(12);
+
+    //osx1012 = true;
+
+    if (osx1012)
+        mac = false;
+    else
+        mac = true;
+
+    this->resize(1300, 700);
+#endif
+
 #ifdef Q_OS_WIN32
     reg_win();
     font.setPixelSize(18);
-    ui->tabTotal->setDocumentMode(false);
-    ui->btnOcvalidate->setEnabled(true);
 
     win = true;
-
 #endif
 
 #ifdef Q_OS_LINUX
     ui->btnMountEsp->setEnabled(false);
     font.setPixelSize(12);
-    ui->btnOcvalidate->setEnabled(true);
 
     linuxOS = true;
-#endif
-
-#ifdef Q_OS_MAC
-    font.setPixelSize(12);
-    mac = true;
-
-    if (osx1012)
-        ui->btnCheckUpdate->setVisible(false);
-
-    this->resize(1300, 700);
-
 #endif
 
     init_Menu();
@@ -2529,10 +2526,10 @@ void MainWindow::initui_UEFI()
     ui->cboxKeySupportMode->addItem("V2");
     ui->cboxKeySupportMode->addItem("AMI");
 
-    ui->lblDownkeysHandler->setHidden(true);
-    ui->cboxDownkeysHandler->setHidden(true);
-    ui->cboxDownkeysHandler->addItem("Enabled");
-    ui->cboxDownkeysHandler->addItem("Disabled");
+    //ui->lblDownkeysHandler->setHidden(true);
+    //ui->cboxDownkeysHandler->setHidden(true);
+    //ui->cboxDownkeysHandler->addItem("Enabled");
+    //ui->cboxDownkeysHandler->addItem("Disabled");
 
     // Output
     ui->cboxConsoleMode->setEditable(true);
@@ -8187,7 +8184,7 @@ int MainWindow::parse_UpdateJSON(QString str)
     if (root_Doc.isObject()) {
         QJsonObject root_Obj = root_Doc.object();
 
-        QString macUrl, winUrl, linuxUrl;
+        QString macUrl, winUrl, linuxUrl, osx1012Url;
         QVariantList list = root_Obj.value("assets").toArray().toVariantList();
         for (int i = 0; i < list.count(); i++) {
             QVariantMap map = list[i].toMap();
@@ -8200,6 +8197,9 @@ int MainWindow::parse_UpdateJSON(QString str)
 
             if (file.suffix() == "AppImage")
                 linuxUrl = map["browser_download_url"].toString();
+
+            if (file.suffix() == "dmg")
+                osx1012Url = map["browser_download_url"].toString();
         }
 
         QJsonObject PulseValue = root_Obj.value("assets").toObject();
@@ -8211,6 +8211,8 @@ int MainWindow::parse_UpdateJSON(QString str)
             Url = winUrl;
         if (linuxOS)
             Url = linuxUrl;
+        if (osx1012)
+            Url = osx1012Url;
 
         QString UpdateTime = root_Obj.value("published_at").toString();
         QString ReleaseNote = root_Obj.value("body").toString();
@@ -9698,12 +9700,14 @@ void MainWindow::on_actionFind_triggered()
     clearComboBoxMarker();
     clearLabelMarker();
     clearLineEditMarker();
+    clearTableHeaderMarker();
 
     listOfCheckBoxResults.clear();
     listOfLabelResults.clear();
     listOfLineEditResults.clear();
     listOfComboBoxResults.clear();
     listOfTableWidgetResults.clear();
+    listOfTableWidgetHeaderResults.clear();
 
     //CheckBox  1
     listOfCheckBox.clear();
@@ -10346,7 +10350,7 @@ void MainWindow::goResults(int index)
                                 brushTableHeaderBackground = w->horizontalHeaderItem(x)->background();
                                 brushTableHeaderForeground = w->horizontalHeaderItem(x)->foreground();
 
-                                if (!win) {
+                                if (!win && !osx1012) {
                                     w->horizontalHeaderItem(x)->setBackground(QColor(255, 0, 0));
                                     w->horizontalHeaderItem(x)->setForeground(QColor(255, 255, 255));
                                 } else {
@@ -10475,8 +10479,12 @@ void MainWindow::clearTableHeaderMarker()
         QTableWidget* w = (QTableWidget*)listOfTableWidgetHeaderResults.at(i);
 
         for (int j = 0; j < w->columnCount(); j++) {
-            w->horizontalHeaderItem(j)->setBackground(brushTableHeaderBackground);
-            w->horizontalHeaderItem(j)->setForeground(brushTableHeaderForeground);
+            if (!osx1012) {
+                w->horizontalHeaderItem(j)->setBackground(brushTableHeaderBackground);
+                w->horizontalHeaderItem(j)->setForeground(brushTableHeaderForeground);
+            } else {
+                w->horizontalHeaderItem(j)->setForeground(QColor(0, 0, 0));
+            }
         }
     }
 }
@@ -11005,6 +11013,25 @@ void MainWindow::initCopyPasteLine()
         QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
 
         w->setContextMenuPolicy(Qt::CustomContextMenu);
+        w->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
+
+        // 拷贝当前列表头文本
+        QAction* copyTableHeaderTextAction = new QAction(tr("CopyText"));
+        QMenu* popTableHeaderMenu = new QMenu(this);
+        popTableHeaderMenu->addAction(copyTableHeaderTextAction);
+        connect(copyTableHeaderTextAction, &QAction::triggered, [=]() {
+            if (w->rowCount() > 0) {
+                QString str1 = w->horizontalHeaderItem(w->currentColumn())->text();
+
+                QClipboard* clipboard = QApplication::clipboard();
+                clipboard->setText(str1.trimmed());
+            }
+        });
+        connect(w->horizontalHeader(), &QTableWidget::customContextMenuRequested, [=](const QPoint& pos) {
+            Q_UNUSED(pos);
+            if (w->rowCount() > 0)
+                popTableHeaderMenu->exec(QCursor::pos());
+        });
 
         QAction* cutAction = new QAction(tr("Cut Line"));
         QAction* copyAction = new QAction(tr("Copy Line"));

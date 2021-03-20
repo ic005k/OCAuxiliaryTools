@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7085,7 +7085,7 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -7604,90 +7604,7 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_33">
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="chkKeySupport">
-               <property name="toolTip">
-                <string>This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as OpenUsbKbDxe, this option should never be enabled.
-
-----
-
-这个选项可以激活基于AppleGenericInput又名(AptioInputFix)的内部键盘拦截器驱动，以填充AppleKeyMapAggregator数据库的输入功能。如果使用了单独的驱动程序，比如OpenUsbKbDxe，这个选项绝对不能启用。</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
-               </property>
-               <property name="text">
-                <string>KeySupport</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="chkPointerSupport">
-               <property name="toolTip">
-                <string>This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER_PROTOCOL is broken.
-
-----
-
-这个选项通过选定的OEM协议实现了标准的UEFI指针协议(EFI_SIMPLE_POINTER_PROTOCOL)。该选项可能对Z87华硕板卡有用，因为在这些板卡上EFI_SIMPLE_POINTER_PROTOCOL被破坏了。</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable internal pointer driver.</string>
-               </property>
-               <property name="text">
-                <string>PointerSupport</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="editPointerSupportMode"/>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_40">
-               <property name="toolTip">
-                <string>This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
-
-Setting a lower value generally improves performance and responsiveness of the interface and input handling.
-
-The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS Z87 boards use 60000 for the interface. Apple boards use 100000. You may leave it as 0 in case there are issues.
-
-----
-
-该选项允许以100纳秒为单位，用指定的值更新固件架构的定时器周期。
-
-设置一个较低的值通常可以提高接口和输入处理的性能和响应速度。
-
-推荐值为50000（5毫秒）或稍高。选择华硕Z87板使用60000作为接口。苹果板使用100000。您可以将其设为0，以防出现问题。</string>
-               </property>
-               <property name="statusTip">
-                <string>Set architecture timer resolution.</string>
-               </property>
-               <property name="text">
-                <string>TimerResolution</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="chkKeyFiltering">
-               <property name="toolTip">
-                <string>Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
-
-This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and 108 in version 2.8).
-
-----
-
-显然，有些板子，如GA Z77P-D3，可能会在EFI_INPUT_KEY中返回所有输入协议的未初始化数据。
-
-这个选项会丢弃那些既不是ASCII码，也不是在UEFI规范中定义的键(见2.8版本的表107和108)。</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable keyboard input sanity checking.</string>
-               </property>
-               <property name="text">
-                <string>KeyFiltering</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
+             <item row="4" column="1">
               <widget class="QCheckBox" name="chkKeySwap">
                <property name="toolTip">
                 <string>This option may be useful for keyboard layouts with Option key situated to the right of Command key.
@@ -7704,37 +7621,7 @@ This option discards keys that are neither ASCII, nor are defined in the UEFI sp
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_38">
-               <property name="toolTip">
-                <string>Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS boards. More details can be found in LongSoft/UefiTool#116.
-
-----
-
-目前唯一支持的版本是华硕，使用华硕Z87和Z97板卡上的专用协议。更多细节可以在LongSoft/UefiTool#116中找到。</string>
-               </property>
-               <property name="statusTip">
-                <string> Set OEM protocol used for internal pointer driver.</string>
-               </property>
-               <property name="text">
-                <string>PointerSupportMode</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="editTimerResolution"/>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="editKeyForgetThreshold"/>
-             </item>
-             <item row="2" column="1">
-              <widget class="QComboBox" name="cboxKeySupportMode">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
+             <item row="1" column="0">
               <widget class="QLabel" name="label_23">
                <property name="toolTip">
                 <string>• Auto — Performs automatic choice as available with the following preference: AMI, V2, V1. 
@@ -7763,7 +7650,41 @@ Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular 
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="chkPointerSupport">
+               <property name="toolTip">
+                <string>This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER_PROTOCOL is broken.
+
+----
+
+这个选项通过选定的OEM协议实现了标准的UEFI指针协议(EFI_SIMPLE_POINTER_PROTOCOL)。该选项可能对Z87华硕板卡有用，因为在这些板卡上EFI_SIMPLE_POINTER_PROTOCOL被破坏了。</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable internal pointer driver.</string>
+               </property>
+               <property name="text">
+                <string>PointerSupport</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_38">
+               <property name="toolTip">
+                <string>Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS boards. More details can be found in LongSoft/UefiTool#116.
+
+----
+
+目前唯一支持的版本是华硕，使用华硕Z87和Z97板卡上的专用协议。更多细节可以在LongSoft/UefiTool#116中找到。</string>
+               </property>
+               <property name="statusTip">
+                <string> Set OEM protocol used for internal pointer driver.</string>
+               </property>
+               <property name="text">
+                <string>PointerSupportMode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
               <widget class="QLabel" name="label_37">
                <property name="toolTip">
                 <string>AppleKeyMapAggregator protocol is supposed to contain a fixed length buffer of currently pressed keys. 
@@ -7792,17 +7713,82 @@ AppleKeyMapAggregator协议应该包含一个固定长度的当前按键缓冲�
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="lblDownkeysHandler">
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="editTimerResolution"/>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="editPointerSupportMode"/>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="chkKeyFiltering">
+               <property name="toolTip">
+                <string>Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
+
+This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and 108 in version 2.8).
+
+----
+
+显然，有些板子，如GA Z77P-D3，可能会在EFI_INPUT_KEY中返回所有输入协议的未初始化数据。
+
+这个选项会丢弃那些既不是ASCII码，也不是在UEFI规范中定义的键(见2.8版本的表107和108)。</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable keyboard input sanity checking.</string>
+               </property>
                <property name="text">
-                <string>DownkeysHandler</string>
+                <string>KeyFiltering</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cboxKeySupportMode">
+               <property name="editable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QComboBox" name="cboxDownkeysHandler">
-               <property name="editable">
-                <bool>true</bool>
+              <widget class="QLineEdit" name="editKeyForgetThreshold"/>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="chkKeySupport">
+               <property name="toolTip">
+                <string>This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as OpenUsbKbDxe, this option should never be enabled.
+
+----
+
+这个选项可以激活基于AppleGenericInput又名(AptioInputFix)的内部键盘拦截器驱动，以填充AppleKeyMapAggregator数据库的输入功能。如果使用了单独的驱动程序，比如OpenUsbKbDxe，这个选项绝对不能启用。</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
+               </property>
+               <property name="text">
+                <string>KeySupport</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_40">
+               <property name="toolTip">
+                <string>This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
+
+Setting a lower value generally improves performance and responsiveness of the interface and input handling.
+
+The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS Z87 boards use 60000 for the interface. Apple boards use 100000. You may leave it as 0 in case there are issues.
+
+----
+
+该选项允许以100纳秒为单位，用指定的值更新固件架构的定时器周期。
+
+设置一个较低的值通常可以提高接口和输入处理的性能和响应速度。
+
+推荐值为50000（5毫秒）或稍高。选择华硕Z87板使用60000作为接口。苹果板使用100000。您可以将其设为0，以防出现问题。</string>
+               </property>
+               <property name="statusTip">
+                <string>Set architecture timer resolution.</string>
+               </property>
+               <property name="text">
+                <string>TimerResolution</string>
                </property>
               </widget>
              </item>
