@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -94,6 +94,40 @@
            <layout class="QGridLayout" name="gridLayout_3">
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="table_acpi_add">
+              <property name="toolTip">
+               <string notr="true">ACPI (Advanced Configuration and Power Interface) is an open standard to discover and configure computer hardware.
+
+The ACPI specification defines standard tables (e.g. DSDT, SSDT, FACS, DMAR) and various methods (e.g. _DSM, _PRW) for implementation. Modern hardware needs few changes to maintain ACPI compatibility and some options for such changes are provided as part of OpenCore.
+
+***
+
+Path
+
+Description: File paths meant to be loaded as ACPI tables. Example values include DSDT.aml, SubDir/SSDT-8.aml,SSDT-USBX.aml, etc.
+
+The ACPI table load order follows the item order in the array. ACPI tables are loaded from the OC/ACPI directory.
+
+Note: All tables apart from tables with a DSDT table identifier (determined by parsing data, not by filename)insert new tables into the ACPI stack. DSDT tables perform a replacement of DSDT tables instead.
+
+
+----
+
+ACPI(Advanced Configuration and Power Interface，高级配置和电源接口)是一个探索和配置计算机硬件的开放标准。
+
+ACPI规范定义了标准表（如DSDT、SSDT、FACS、DMAR）和各种实现方法（如_DSM、_PRW）。现代硬件只需要很少的改变就可以保持ACPI的兼容性，作为OpenCore的一部分，提供了这种改变的一些选择。
+
+***
+
+Path(路径)
+
+说明：作为ACPI表加载的文件路径。示例值包括DSDT.aml、SubDir/SDT-8.aml、SSDT-USBX.aml等。
+
+ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录中加载。
+
+注意：除了具有 DSDT 表标识符（由解析数据确定，而不是由文件名确定）的表之外，所有表都会将新表插入到 ACPI 堆栈中。DSDT表代替DSDT表进行替换。
+
+</string>
+              </property>
               <property name="statusTip">
                <string/>
               </property>
@@ -177,6 +211,73 @@
            <layout class="QGridLayout" name="gridLayout_4">
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="table_acpi_del">
+              <property name="toolTip">
+               <string notr="true">1. All
+Type: plist boolean
+Failsafe: false (Only delete the first matched table)
+Description: Set to true to delete all ACPI tables matching the condition.
+
+2. Comment
+Type: plist string
+Failsafe: Empty
+Description: Arbitrary ASCII string used to provide human readable reference for the entry. Whether this
+value is used is implementation defined.
+
+3. Enabled
+Type: plist boolean
+Failsafe: false
+Description: Set to true to remove this ACPI table.
+
+4. OemTableId
+Type: plist data, 8 bytes
+Failsafe: All zero (Match any table OEM ID)
+Description: Match table OEM ID equal to this value.
+
+5. TableLength
+Type: plist integer
+Failsafe: 0 (Match any table size)
+Description: Match table size equal to this value.
+
+6. TableSignature
+Type: plist data, 4 bytes
+Failsafe: All zero (Match any table signature)
+Description: Match table signature equal to this value.
+Note: Do not use table signatures when the sequence must be replaced in multiple places. This is particularly
+relevant when performing different types of renames.
+
+----
+
+1.All-所有
+类型：plist布尔值
+失败保护：假(仅删除第一个匹配的表)
+描述：设置为真将删除所有符合条件的ACPI表。
+
+2.Comment-注解
+类型：plist字符串
+失败保护：空
+描述：注解，用来说明该条目起什么作用，可不填。
+
+3.Enabled-使能
+类型：plist布尔值
+失败保护：假
+描述：设置为真以删除此ACPI表。
+
+4.OemTableId-Oem表
+类型：plist数据，8字节
+失败保护：全零(匹配任何表原始设备制造商标识)
+描述：匹配表原始设备制造商标识等于此值。
+
+5.TableLength-表长度
+类型：plist整数
+失败保护：0(匹配任何表大小)
+描述：匹配等于该值的表大小。
+
+6.TableSignature-表签名
+类型：plist数据，4字节
+失败保护：全零(匹配任何表签名)
+描述：匹配等于该值的表签名。
+注意：当序列必须在多个地方被替换时，不要使用表签名。这尤其是在执行不同类型的重命名时有关。</string>
+              </property>
               <property name="rowCount">
                <number>0</number>
               </property>
@@ -257,12 +358,203 @@
            <layout class="QGridLayout" name="gridLayout_5">
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="table_acpi_patch">
+              <property name="toolTip">
+               <string notr="true">1. Base
+Type: plist string
+Failsafe: Empty (Ignored)
+Description: Selects ACPI path base for patch lookup (or immediate replacement) by obtaining the offset to the provided path.
+Only fully-qualified absolute paths are supported (e.g. \_SB.PCI0.LPCB.HPET). Currently supported object types are: Device, Field, Method.
+Note: Use with care, not all OEM tables can be parsed. Use ACPIe utility to debug. ACPIe compiled with DEBUG=1 make command produces helpful ACPI lookup tracing.
+
+2. BaseSkip
+Type: plist integer
+Failsafe: 0 (Do not skip any occurrences)
+Description: Number of found Base occurrences to skip before finds and replacements are applied.
+
+3. Comment
+Type: plist string
+Failsafe: Empty
+Description: Arbitrary ASCII string used to provide human readable reference for the entry. Whether this value is used is implementation defined.
+
+4. Count
+Type: plist integer
+Failsafe: 0 (Apply patch to all occurrences found)
+Description: Number of occurrences to patch.
+
+5. Enabled
+Type: plist boolean
+Failsafe: false
+Description: Set to true to apply this ACPI patch.
+
+6. Find
+Type: plist data
+Failsafe: Empty
+Description: Data to find. Must be equal to Replace in size if set.
+Note: Can be empty, when Base is specified, immediate replacement after Base lookup happens in this case.
+
+7. Limit
+Type: plist integer
+Failsafe: 0 (Search entire ACPI table)
+Description: Maximum number of bytes to search for.
+
+8. Mask
+Type: plist data
+Failsafe: Empty (Ignored)
+Description: Data bitwise mask used during find comparison. Allows fuzzy search by ignoring not masked (set to zero) bits. Must be equal to Replace in size if set.
+
+9. OemTableId
+Type: plist data, 8 bytes
+Failsafe: All zero (Match any table OEM ID)
+Description: Match table OEM ID equal to this value.
+
+10. Replace
+Type: plist data
+Failsafe: Empty
+Description: Replacement data of one or more bytes.
+
+11. ReplaceMask
+Type: plist data
+Failsafe: Empty (Ignored)
+Description: Data bitwise mask used during replacement. Allows fuzzy replacement by updating masked (set to non-zero) bits. Must be equal to Replace in size if set.
+
+12. Skip
+Type: plist integer
+Failsafe: 0 (Do not skip any occurrences)
+Description: Number of found occurrences to skip before replacements are applied.
+
+13. TableLength
+Type: plist integer
+Failsafe: 0 (Match any table size)
+Description: Match table size equal to this value.
+
+14. TableSignature
+Type: plist data, 4 bytes
+Failsafe: All zero (Match any table signature)
+Description: Match table signature equal to this value.
+
+In most cases, ACPI patches are not useful and are harmful:
+• Avoid renaming devices with ACPI patches. This may fail or perform improper renaming of unrelated devices (e.g. EC and EC0), be unnecessary, or even fail to rename devices in certain tables. For ACPI consistency it is much safer to rename devices at the I/O Registry level, as done by WhateverGreen.
+
+• Avoid patching _OSI to support a higher feature set level whenever possible. While this enables a number of workarounds on APTIO firmware, it typically results in a need for additional patches. These are not usually needed on modern firmware and smaller patches work well on firmware that does. However, laptop vendors often rely on this method to determine the availability of functions such as modern I2C input support, thermal adjustment and custom feature additions.
+
+• Avoid patching embedded controller event _Qxx just to enable brightness keys. The conventional process to find these keys typically involves significant modifications to DSDT and SSDT files and in addition, the debug kext is not stable on newer systems. Please use the built-in brightness key discovery in BrightnessKeys instead.
+
+• Avoid making ad hoc changes such as renaming _PRW or _DSM whenever possible.
+
+Some cases where patching is actually useful include:
+• Refreshing HPET (or another device) method header to avoid compatibility checks by _OSI on legacy hardware.
+
+_STA method with if ((OSFL () == Zero)) { If (HPTE) ... Return (Zero) content may be forced to always return 0xF by replacing A0 10 93 4F 53 46 4C 00 with A4 0A 0F A3 A3 A3 A3 A3. 
+
+• To provide a custom method implementation within an SSDT, to inject shutdown fixes on certain computers for instance, the original method can be replaced with a dummy name by patching _PTS with ZPTS and adding a callback to the original method.
+
+The Tianocore AcpiAml.h source file may help with better understanding ACPI opcodes.
+
+Note: Patches of different Find and Replace lengths are unsupported as they may corrupt ACPI tables and make the system unstable due to area relocation. If such changes are needed, the utilisation of “proxy” patching or the padding of NOP to the remaining area could be considered.
+
+----
+
+1. Base
+类型：plist字符串
+失败保护：空(忽略)
+描述：通过获取所提供的路径的偏移量，选择ACPI路径基来进行补丁查找(或立即替换)。
+只支持完全限定的绝对路径(例如：\_SB.PCI0.LPCB.HPET)。目前支持的对象类型有 设备、字段、方法。
+注意：请谨慎使用，并非所有的OEM表都能被解析。使用ACPIe工具进行调试。ACPIe编译时使用DEBUG=1 make命令，可以产生有用的ACPI查找跟踪。
+
+2. BaseSkip
+类型：plist整数
+失败保护：0 (不跳过任何事件)
+说明：在进行查找和替换之前，要跳过的基数。
+
+3. Comment
+类型：plist字符串
+失败保护：空的
+说明：任意的ASCII字符串，用于为条目提供可供人类阅读的参考。
+
+4. Count
+类型：plist整数
+失败保护：0 (对发现的所有情况打上补丁)
+描述：补丁的出现次数。
+
+5. Enabled
+类型：plist boolean
+失败保护：假
+描述：设置为true，以应用此ACPI补丁。
+
+6. Find
+类型：plist数据
+失败保护：空的
+说明：要查找的数据。如果设置的话，大小必须与Replace相等。
+注意：可以为空，当指定Base时，在这种情况下，Base查找后会发生立即替换。
+
+7. Limit
+类型：plist整数
+失败保护：0 (搜索整个ACPI表)
+说明：搜索的最大字节数。
+
+8. Mask
+类型：plist数据
+失败保护：空(忽略)
+说明：在查找比较时使用的数据位面掩码。允许通过忽略未屏蔽（设置为零）的位来进行模糊搜索。如果设置的话，必须与Replace的大小相等。
+
+9. OemTableId
+类型：plist数据，8字节
+失败保护：全部为零(匹配任何表OEM ID)
+描述。匹配表OEM ID等于该值。
+
+10. Replace
+类型：plist数据
+失败保护：空的
+说明：一个或多个字节的替换数据。
+
+11. ReplaceMask
+类型：plist数据
+失败保护：空(忽略)
+说明：替换时使用的数据位面掩码。允许通过更新掩码（设置为非零）位进行模糊替换。如果设置，必须与替换大小相等。
+
+12. Skip
+类型：plist整数
+失败保护：0 (不跳过任何事件)
+描述：替换前要跳过的出现次数。
+
+13. TableLength
+类型：plist整数
+失败保护：0 (匹配任何表格尺寸)
+说明。匹配与此值相同的表格大小。
+
+14. TableSignature
+类型：plist数据，4字节
+失败保护：全部为零(与任何表格签名匹配)
+说明： 匹配等于该值的表签名。
+
+在大多数情况下，ACPI补丁是没有用的，是有害的。
+- 避免用ACPI补丁重命名设备。这可能会失败或对不相关的设备（如EC和EC0）进行不正确的重命名，是不必要的，甚至无法重命名某些表中的设备。为了ACPI的一致性，在I/O注册表级别重命名设备要安全得多，就像WhateverGreen所做的那样。
+
+- 尽可能避免给_OSI打补丁以支持更高的功能集级别。虽然这可以在APTIO固件上实现一些变通方法，但通常会导致需要额外的补丁。在现代固件上通常不需要这些补丁，较小的补丁在有的固件上也能很好地工作。然而，笔记本电脑供应商经常依靠这种方法来确定功能的可用性，如现代I2C输入支持，热调整和自定义功能添加。
+
+- 避免仅仅为了启用亮度键而给嵌入式控制器事件_Qxx打补丁。发现这些键的传统过程通常涉及对DSDT和SSDT文件的重大修改，此外，调试kext在新系统上并不稳定。请使用BrightnessKeys中内置的亮度键发现代替。
+
+- 尽可能避免进行临时修改，如重命名_PRW或_DSM。
+
+有些情况下，打补丁实际上是有用的，包括。
+- 刷新HPET(或其他设备)方法头，以避免_OSI对传统硬件进行兼容性检查。
+
+_STA方法与if((OSFL()==Zero)){如果(HPTE)......。返回(Zero)内容，可以通过将A0 10 93 4F 53 46 4C 00替换为A4 0A 0F A3 A3 A3 A3强制总是返回0xF。
+
+- 为了在 SSDT 中提供自定义的方法实现，例如在某些计算机上注入关机修复，可以通过将 _PTS 替换为 ZPTS，并为原方法添加回调，将原方法替换为虚名。
+
+Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
+
+注意：不支持不同查找和替换长度的补丁，因为它们可能会破坏ACPI表，并使系统因区域重新定位而不稳定。如果需要这样的改变，可以考虑利用 &quot;代理 &quot;补丁或将NOP填充到剩余区域。</string>
+              </property>
               <property name="rowCount">
                <number>0</number>
               </property>
               <property name="columnCount">
-               <number>12</number>
+               <number>14</number>
               </property>
+              <column/>
+              <column/>
               <column/>
               <column/>
               <column/>
@@ -353,7 +645,7 @@
              <item row="2" column="0">
               <widget class="QCheckBox" name="chkRebaseRegions">
                <property name="toolTip">
-                <string>Description: Attempt to heuristically relocate ACPI memory regions. Not recommended.
+                <string notr="true">Description: Attempt to heuristically relocate ACPI memory regions. Not recommended.
 
 ACPI tables are often generated dynamically by the underlying firmware implementation. Among the positionindependent code, ACPI tables may contain the physical addresses of MMIO areas used for device configuration,typically grouped by region (e.g. OperationRegion). Changing firmware settings or hardware configuration,upgrading or patching the firmware inevitably leads to changes in dynamically generated ACPI code, which sometimes results in the shift of the addresses in the aforementioned OperationRegion constructions.
 
@@ -382,7 +674,7 @@ ACPI表通常由底层固件实现动态生成。在与位置无关的代码中�
              <item row="3" column="0">
               <widget class="QCheckBox" name="chkResetHwSig">
                <property name="toolTip">
-                <string>Description: Reset FACS table HardwareSignature value to 0.
+                <string notr="true">Description: Reset FACS table HardwareSignature value to 0.
 
 This works around firmware that fail to maintain hardware signature across the reboots and cause issues with waking from hibernation.
 
@@ -403,7 +695,7 @@ This works around firmware that fail to maintain hardware signature across the r
              <item row="0" column="0">
               <widget class="QCheckBox" name="chkFadtEnableReset">
                <property name="toolTip">
-                <string>Description: Provide reset register and flag in FADT table to enable reboot and shutdown.
+                <string notr="true">Description: Provide reset register and flag in FADT table to enable reboot and shutdown.
 
 Mainly required on legacy hardware and a few newer laptops. Can also fix power-button shortcuts. 
 
@@ -428,7 +720,7 @@ Not recommended unless required.
              <item row="1" column="0">
               <widget class="QCheckBox" name="chkNormalizeHeaders">
                <property name="toolTip">
-                <string>Description: Cleanup ACPI header fields to workaround macOS ACPI implementation flaws that result in boot crashes. 
+                <string notr="true">Description: Cleanup ACPI header fields to workaround macOS ACPI implementation flaws that result in boot crashes. 
 
 Reference: Debugging AppleACPIPlatform on 10.13 by Alex James (also known as theracermaster). 
 
@@ -453,7 +745,7 @@ The issue was fixed in macOS Mojave (10.14).
              <item row="4" column="0">
               <widget class="QCheckBox" name="chkResetLogoStatus">
                <property name="toolTip">
-                <string>Description: Reset BGRT table Displayed status field to false.
+                <string notr="true">Description: Reset BGRT table Displayed status field to false.
 
 This works around firmware that provide a BGRT table but fail to handle screen updates afterwards.
 
@@ -479,8 +771,8 @@ This works around firmware that provide a BGRT table but fail to handle screen u
            <widget class="QPushButton" name="pushButton">
             <property name="geometry">
              <rect>
-              <x>650</x>
-              <y>60</y>
+              <x>490</x>
+              <y>30</y>
               <width>113</width>
               <height>32</height>
              </rect>
@@ -492,8 +784,8 @@ This works around firmware that provide a BGRT table but fail to handle screen u
            <widget class="QComboBox" name="cboxFind">
             <property name="geometry">
              <rect>
-              <x>660</x>
-              <y>110</y>
+              <x>720</x>
+              <y>30</y>
               <width>320</width>
               <height>32</height>
              </rect>
@@ -511,14 +803,24 @@ This works around firmware that provide a BGRT table but fail to handle screen u
            <widget class="QLabel" name="lblCount">
             <property name="geometry">
              <rect>
-              <x>700</x>
-              <y>160</y>
+              <x>630</x>
+              <y>40</y>
               <width>60</width>
               <height>16</height>
              </rect>
             </property>
             <property name="text">
              <string>0</string>
+            </property>
+           </widget>
+           <widget class="QTextEdit" name="textDiskInfo">
+            <property name="geometry">
+             <rect>
+              <x>540</x>
+              <y>90</y>
+              <width>581</width>
+              <height>151</height>
+             </rect>
             </property>
            </widget>
           </widget>
@@ -552,6 +854,41 @@ This works around firmware that provide a BGRT table but fail to handle screen u
            <layout class="QGridLayout" name="gridLayout_7">
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="table_booter">
+              <property name="toolTip">
+               <string notr="true">1. Address
+Type: plist integer
+Failsafe: 0
+Description: Exceptional MMIO address, which memory descriptor should be left virtualised (unchanged) by DevirtualiseMmio. This means that the firmware will be able to directly communicate with this memory region during operating system functioning, because the region this value is in will be assigned a virtual address.
+The addresses written here must be part of the memory map, have EfiMemoryMappedIO type and EFI_MEMORY_RUNTIME attribute (highest bit) set. The debug log can be used to find the list of the candidates.
+
+2. Comment
+Type: plist string
+Failsafe: Empty
+Description: Arbitrary ASCII string used to provide human readable reference for the entry. Whether this value is used is implementation defined.
+
+3. Enabled
+Type: plist boolean
+Failsafe: false
+Description: Exclude MMIO address from the devirtualisation procedure.
+
+----
+
+1.Address-地址
+类型：plist整数
+失败保护：0
+说明：特殊的MMIO地址，该内存描述符应被DevirtualiseMmio虚拟化（不变）。这意味着在操作系统运行过程中，固件将能够直接与这个内存区域进行通信，因为这个值所在的区域将被分配一个虚拟地址。
+这里写入的地址必须是内存映射的一部分，具有EfiMemoryMappedIO类型和EFI_MEMORY_RUNTIME属性（最高位）设置。调试日志可以用来查找候选列表。
+
+2. Comment-注释
+类型：plist字符串
+失败保护：空的
+说明：任意的ASCII字符串，用于为条目提供可供人类阅读的参考。
+
+3. Enabled-启用
+类型：plist布尔
+失败保护：假
+说明：将MMIO地址从虚拟程序中排除。</string>
+              </property>
               <property name="columnCount">
                <number>3</number>
               </property>
@@ -626,6 +963,9 @@ This works around firmware that provide a BGRT table but fail to handle screen u
            <layout class="QGridLayout" name="gridLayout_38">
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="table_Booter_patch">
+              <property name="toolTip">
+               <string/>
+              </property>
               <property name="rowCount">
                <number>0</number>
               </property>
@@ -723,7 +1063,7 @@ This works around firmware that provide a BGRT table but fail to handle screen u
              <item row="0" column="1">
               <widget class="QCheckBox" name="chkAvoidRuntimeDefrag">
                <property name="toolTip">
-                <string>Description: Protect from boot.efi runtime memory defragmentation.
+                <string notr="true">Description: Protect from boot.efi runtime memory defragmentation.
 
 This option fixes UEFI runtime services (date, time, NVRAM, power control, etc.) support on firmware that uses SMM backing for certain services such as variable storage. SMM may try to access memory by physical addresses in non-SMM areas but this may sometimes have been moved by boot.efi. This option prevents boot.efi from moving such data.
 
@@ -751,7 +1091,7 @@ SMM可能会尝试通过非SMM区域的物理地址访问内存，但这有时�
              <item row="0" column="0">
               <widget class="QCheckBox" name="chkAllowRelocationBlock">
                <property name="toolTip">
-                <string>Description: Allows booting macOS through a relocation block.
+                <string notr="true">Description: Allows booting macOS through a relocation block.
 
 The relocation block is a scratch buffer allocated in the lower 4 GB used for loading the kernel and related structures by EfiBoot on firmware where the lower memory region is otherwise occupied by (assumed) non-runtime data. Right before kernel startup, the relocation block is copied back to lower addresses. Similarly, all the other addresses pointing to the relocation block are also carefully adjusted. The relocation block can be used when:
 
@@ -792,7 +1132,7 @@ Note: While this quirk is required to run older macOS versions on platforms with
              <item row="0" column="2">
               <widget class="QCheckBox" name="chkDevirtualiseMmio">
                <property name="toolTip">
-                <string>
+                <string notr="true">
 Description: Remove runtime attribute from certain MMIO regions.
 
 This quirk reduces the stolen memory footprint in the memory map by removing the runtime bit for known memory regions. This quirk may result in an increase of KASLR slides available but without additional measures,it is not necessarily compatible with the target board. This quirk typically frees between 64 and 256 megabytes of memory, present in the debug log, and on some platforms, is the only way to boot macOS, which otherwise fails with allocation errors at the bootloader stage.
@@ -829,7 +1169,7 @@ This option is useful on all types of firmware, except for some very old ones su
              <item row="0" column="3">
               <widget class="QCheckBox" name="chkDisableSingleUser">
                <property name="toolTip">
-                <string>This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot argument. 
+                <string notr="true">This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot argument. 
 
 The behaviour with this quirk enabled is supposed to match T2-based model behaviour. 
 
@@ -854,7 +1194,7 @@ Read this archived article to understand how to use single user mode with this q
              <item row="3" column="3">
               <widget class="QCheckBox" name="chkSignalAppleOS">
                <property name="toolTip">
-                <string>This quirk is useful on Mac firmwares, which behave differently in different OS. 
+                <string notr="true">This quirk is useful on Mac firmwares, which behave differently in different OS. 
 
 For example, it is supposed to enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.
 
@@ -875,7 +1215,7 @@ For example, it is supposed to enable Intel GPU in Windows and Linux in some dua
              <item row="3" column="2">
               <widget class="QCheckBox" name="chkRebuildAppleMemoryMap">
                <property name="toolTip">
-                <string>Apple kernel has several limitations in parsing UEFI memory map:
+                <string notr="true">Apple kernel has several limitations in parsing UEFI memory map:
 
 • Memory map size must not exceed 4096 bytes as Apple kernel maps it as a single 4K page. Since some firmwares have very large memory maps (approximately over 100 entries) Apple kernel will crash at boot.
 
@@ -912,7 +1252,7 @@ Note 2 : The necessity of this quirk is determined by early boot failures. This 
              <item row="3" column="1">
               <widget class="QCheckBox" name="chkSetupVirtualMap">
                <property name="toolTip">
-                <string>Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot crashes. This quirk workarounds the problem by performing early boot identity mapping of assigned virtual addresses to physical memory.
+                <string notr="true">Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot crashes. This quirk workarounds the problem by performing early boot identity mapping of assigned virtual addresses to physical memory.
 
 Note: The necessity of this quirk is determined by early boot failures. Currently new firmwares with memory protection support (like OVMF) do not support this quirk due to acidanthera/bugtracker#719.
 
@@ -933,7 +1273,7 @@ Note: The necessity of this quirk is determined by early boot failures. Currentl
              <item row="3" column="0">
               <widget class="QCheckBox" name="chkProtectMemoryRegions">
                <property name="toolTip">
-                <string>Some firmwares incorrectly map select memory regions:
+                <string notr="true">Some firmwares incorrectly map select memory regions:
 
 • CSM region can be marked as boot services code or data, which leaves it as free memory for XNU kernel.
 
@@ -966,7 +1306,7 @@ Note: The necessity of this quirk is determined by artifacts, sleep wake issues,
              <item row="2" column="3">
               <widget class="QCheckBox" name="chkProvideCustomSlide">
                <property name="toolTip">
-                <string>This option performs memory map analysis of your firmware and checks whether all slides (from 1 to 255) can be used. 
+                <string notr="true">This option performs memory map analysis of your firmware and checks whether all slides (from 1 to 255) can be used. 
 
 As boot.efi generates this value randomly with rdrand or pseudo randomly rdtsc, there is a chance of boot failure when it chooses a conflicting slide. In case potential conflicts exist, this option forces macOS to use a pseudo random value among the available ones. 
 
@@ -995,7 +1335,7 @@ Note: The necessity of this quirk is determined by OCABC: Only N/256 slide value
              <item row="2" column="2">
               <widget class="QCheckBox" name="chkProtectUefiServices">
                <property name="toolTip">
-                <string>Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to UEFI services during driver loading and related actions. 
+                <string notr="true">Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to UEFI services during driver loading and related actions. 
 
 Consequentially this directly breaks other quirks that affect memory management, like DevirtualiseMmio, ProtectMemoryRegions, or RebuildAppleMemoryMap, and may also break other quirks depending on the effects of these.
 
@@ -1020,7 +1360,7 @@ Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest
              <item row="2" column="1">
               <widget class="QCheckBox" name="chkProtectSecureBoot">
                <property name="toolTip">
-                <string>Reports security violation during attempts to write to db, dbx, PK, and KEK variables from the operating system.
+                <string notr="true">Reports security violation during attempts to write to db, dbx, PK, and KEK variables from the operating system.
 
 Note: This quirk mainly attempts to avoid issues with NVRAM implementations with problematic defragmentation,such as select Insyde or MacPro5,1.
 
@@ -1041,7 +1381,7 @@ Note: This quirk mainly attempts to avoid issues with NVRAM implementations with
              <item row="2" column="0">
               <widget class="QCheckBox" name="chkForceExitBootServices">
                <property name="toolTip">
-                <string>Try to ensure that ExitBootServices call succeeds even with outdated MemoryMap key argument by obtaining current memory map and retrying ExitBootServices call.
+                <string notr="true">Try to ensure that ExitBootServices call succeeds even with outdated MemoryMap key argument by obtaining current memory map and retrying ExitBootServices call.
 
 Note: The necessity of this quirk is determined by early boot crashes of the firmware. Do not use this unless you fully understand the consequences.
 
@@ -1062,7 +1402,7 @@ Note: The necessity of this quirk is determined by early boot crashes of the fir
              <item row="1" column="3">
               <widget class="QCheckBox" name="chkEnableWriteUnprotector">
                <property name="toolTip">
-                <string>This option bypasses RˆX permissions in code pages of UEFI runtime services by removing write protection (WP) bit from CR0 register during their execution. This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi.
+                <string notr="true">This option bypasses RˆX permissions in code pages of UEFI runtime services by removing write protection (WP) bit from CR0 register during their execution. This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi.
 
 Note: This quirk may potentially weaken firmware security, please use RebuildAppleMemoryMap if your firmware supports memory attributes table (MAT). 
 
@@ -1085,7 +1425,7 @@ Note: This quirk may potentially weaken firmware security, please use RebuildApp
              <item row="1" column="2">
               <widget class="QCheckBox" name="chkEnableSafeModeSlide">
                <property name="toolTip">
-                <string>This option is relevant to the users that have issues booting to safe mode (e.g. by holding shift or using -x boot argument). 
+                <string notr="true">This option is relevant to the users that have issues booting to safe mode (e.g. by holding shift or using -x boot argument). 
 
 By default safe mode forces 0 slide as if the system was launched with slide=0 boot argument. 
 
@@ -1118,7 +1458,7 @@ Note: The necessity of this quirk is determined by safe mode availability. If bo
              <item row="1" column="1">
               <widget class="QCheckBox" name="chkDiscardHibernateMap">
                <property name="toolTip">
-                <string>This option forces XNU kernel to ignore newly supplied memory map and assume that it did not change after waking from hibernation. 
+                <string notr="true">This option forces XNU kernel to ignore newly supplied memory map and assume that it did not change after waking from hibernation. 
 
 This behaviour is required to work by Windows, which mandates to preserve runtime memory size and location after S4 wake.
 
@@ -1153,7 +1493,7 @@ Do not use this unless you fully understand the consequences.
              <item row="1" column="0">
               <widget class="QCheckBox" name="chkDisableVariableWrite">
                <property name="toolTip">
-                <string>This is a security option allowing one to restrict NVRAM access in macOS. 
+                <string notr="true">This is a security option allowing one to restrict NVRAM access in macOS. 
 
 This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in  OpenRuntime.efi.
 
@@ -1179,7 +1519,7 @@ Note: This quirk can also be used as an ugly workaround to buggy UEFI runtime se
              <item row="4" column="0">
               <widget class="QCheckBox" name="chkSyncRuntimePermissions">
                <property name="toolTip">
-                <string>Some firmwares either fail to properly handle runtime permissions:
+                <string notr="true">Some firmwares either fail to properly handle runtime permissions:
 
 • They incorrectly mark OpenRuntime as not executable in the memory map.
 
@@ -1220,7 +1560,7 @@ Note: The necessity of this quirk is determined by early boot failures either in
              <item row="4" column="1">
               <widget class="QCheckBox" name="chkForceBooterSignature">
                <property name="toolTip">
-                <string>Booter signature, essentially a SHA-1 hash of the loaded image, is used by Mac EFI to verify the authenticity of the bootloader when waking from hibernation. 
+                <string notr="true">Booter signature, essentially a SHA-1 hash of the loaded image, is used by Mac EFI to verify the authenticity of the bootloader when waking from hibernation. 
 
 This option forces macOS to use OpenCore launcher SHA-1 hash as a booter signature to let OpenCore shim hibernation wake on Mac EFI firmware.
 
@@ -1257,7 +1597,7 @@ Booter签名，本质上是加载的映像的SHA-1哈希值，Mac EFI在从休�
              <item row="0" column="0">
               <widget class="QLabel" name="label_41">
                <property name="toolTip">
-                <string>This option overrides the maximum slide of 255 by a user specified value between 1 and 254 inclusive when ProvideCustomSlide is enabled. 
+                <string notr="true">This option overrides the maximum slide of 255 by a user specified value between 1 and 254 inclusive when ProvideCustomSlide is enabled. 
 
 It is believed that modern firmwares allocate pool memory from top to bottom,effectively resulting in free memory at the time of slide scanning being later used as temporary memory during kernel loading. In case those memory are unavailable, this option can stop evaluating higher slides.
 
@@ -1575,7 +1915,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1591,8 +1931,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                <number>0</number>
               </property>
               <property name="columnCount">
-               <number>7</number>
+               <number>8</number>
               </property>
+              <column/>
               <column/>
               <column/>
               <column/>
@@ -1716,8 +2057,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                <number>0</number>
               </property>
               <property name="columnCount">
-               <number>5</number>
+               <number>6</number>
               </property>
+              <column/>
               <column/>
               <column/>
               <column/>
@@ -1795,8 +2137,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                <number>0</number>
               </property>
               <property name="columnCount">
-               <number>8</number>
+               <number>9</number>
               </property>
+              <column/>
               <column/>
               <column/>
               <column/>
@@ -1877,8 +2220,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                <number>0</number>
               </property>
               <property name="columnCount">
-               <number>13</number>
+               <number>14</number>
               </property>
+              <column/>
               <column/>
               <column/>
               <column/>
@@ -4513,8 +4857,9 @@ Valid values:
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="tableEntries">
               <property name="columnCount">
-               <number>6</number>
+               <number>7</number>
               </property>
+              <column/>
               <column/>
               <column/>
               <column/>
@@ -4590,8 +4935,10 @@ Valid values:
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="tableTools">
               <property name="columnCount">
-               <number>6</number>
+               <number>8</number>
               </property>
+              <column/>
+              <column/>
               <column/>
               <column/>
               <column/>
@@ -7085,7 +7432,7 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -8221,7 +8568,7 @@ This option requires ProvideConsoleGop to be enabled.
 
 However, in case FakeSMC kernel extension is used, manual NVRAM key variable addition may be needed.
 ----
-这个协议取代了传统的VirtualSmc UEFI驱动，并且与任何SMC内核扩展兼容，但是如果使用FakeSMC内核扩展，可能需要手动添加NVRAM密钥变量。
+这个协议取代了传统的VirtualSmc UEFI驱动，并且与任何SMC内核扩展兼容，但是如果使用FakeSMC内核扩展，可能需要手动添加NVRAM变量。
 </string>
                </property>
                <property name="statusTip">
@@ -8785,16 +9132,6 @@ Enable this option to be able to see all the boot options when having multiple d
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_36">
-       <attribute name="title">
-        <string>DiskInfo</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_43">
-        <item row="0" column="0">
-         <widget class="QTextEdit" name="textDiskInfo"/>
-        </item>
-       </layout>
-      </widget>
      </widget>
     </item>
    </layout>
@@ -8852,6 +9189,9 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionSimplified_Chinese_Manual"/>
     <addaction name="btnCheckUpdate"/>
     <addaction name="actionAbout_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionBug_Report"/>
+    <addaction name="actionDiscussion_Forum"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTools"/>
@@ -9033,6 +9373,16 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionGo_to_the_next">
    <property name="text">
     <string>Go to the next</string>
+   </property>
+  </action>
+  <action name="actionBug_Report">
+   <property name="text">
+    <string>Bug Report</string>
+   </property>
+  </action>
+  <action name="actionDiscussion_Forum">
+   <property name="text">
+    <string>Discussion Forum</string>
    </property>
   </action>
  </widget>

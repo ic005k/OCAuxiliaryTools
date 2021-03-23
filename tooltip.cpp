@@ -23,6 +23,7 @@ Tooltip::Tooltip(QWidget* parent)
     setAttribute(Qt::WA_DeleteOnClose);
 
     edit = new QTextEdit(this);
+    edit->setWordWrapMode(QTextOption::WordWrap);
     edit->setReadOnly(true);
 
     QHBoxLayout* mLayout = new QHBoxLayout(this);
@@ -32,7 +33,7 @@ Tooltip::Tooltip(QWidget* parent)
     this->installEventFilter(this);
     //this->setStyleSheet("QWidget { background: rgba(255 ,248 ,220 ,160); color: black}");
 
-    thisWidth = 450;
+    thisWidth = 500;
     thisHeight = 250;
 
 #ifdef Q_OS_WIN32
@@ -67,7 +68,7 @@ void Tooltip::setMyText(QString strHead, const QString& text)
     QTextDocument* document = edit->document(); //new QTextDocument(edit);
     document->setTextWidth(thisWidth);
     QTextOption op;
-    op.setWrapMode(QTextOption::WrapAnywhere);
+    op.setWrapMode(QTextOption::WordWrap);
     document->setDefaultTextOption(op);
     document->adjustSize();
     QAbstractTextDocumentLayout* layout = document->documentLayout();

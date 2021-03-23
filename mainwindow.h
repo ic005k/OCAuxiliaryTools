@@ -59,9 +59,13 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    bool lineEditEnter = false;
+
     bool mac = false;
     bool win = false;
     bool linuxOS = false;
+
+    QString strTableHeaderToolTip;
 
     Tooltip* myToolTip = new Tooltip;
     int getMainHeight();
@@ -71,7 +75,7 @@ public:
 
     QTableWidget* getLeftTable(QTableWidget* table);
     int getLetfTableCurrentRow(QTableWidget* table);
-    void initCopyPasteLine();
+    void init_CopyPasteLine();
     void loadReghtTable(QTableWidget* t0, QTableWidget* t);
     void endPasteLine(QTableWidget* w, int row, QString colText0);
     void endDelLeftTable(QTableWidget* t0);
@@ -771,6 +775,10 @@ private slots:
 
     void setWM();
 
+    void on_actionBug_Report_triggered();
+
+    void on_actionDiscussion_Forum_triggered();
+
 private:
     Ui::MainWindow* ui;
 
@@ -884,328 +892,6 @@ private:
     QAction* redoAction = nullptr;
 
     void setComboBoxStyle(QComboBox* w);
-};
-
-class CustomTabStyle1 : public QProxyStyle {
-public:
-    QSize sizeFromContents(ContentsType type, const QStyleOption* option,
-        const QSize& size, const QWidget* widget) const
-    {
-        QSize tabsize = QProxyStyle::sizeFromContents(type, option, size, widget);
-        if (type == QStyle::CT_TabBarTab) {
-            tabsize.transpose();
-            tabsize.rwidth() = 105;
-            tabsize.rheight() = 75;
-        }
-
-        return tabsize;
-    }
-
-    void drawControl(ControlElement element, const QStyleOption* option,
-        QPainter* painter, const QWidget* widget) const
-    {
-        if (element == CE_TabBarTabLabel) {
-            if (const QStyleOptionTab* tab = qstyleoption_cast<const QStyleOptionTab*>(option)) {
-                QRect allRect = tab->rect;
-                painter->setFont(QFont("微软雅黑", 18, QFont::Bold));
-                if (tab->state & QStyle::State_Selected) {
-                    painter->save();
-                    painter->setPen(0x3399FF);
-                    painter->setBrush(QBrush(0x3399FF));
-                    painter->drawRect(allRect.adjusted(2, 2, -2, -2));
-                    painter->restore();
-                }
-
-                QTextOption option;
-                option.setAlignment(Qt::AlignCenter);
-                if (tab->state & QStyle::State_Selected) {
-                    painter->setPen(0xf8fcff);
-                } else {
-                    painter->setPen(0x5d5d5d);
-                }
-
-                painter->drawText(allRect, tab->text, option);
-                return;
-            }
-        }
-        if (element == CE_TabBarTab) {
-            QProxyStyle::drawControl(element, option, painter, widget);
-        }
-    }
-};
-
-class CustomTabStyle2 : public QProxyStyle {
-public:
-    QSize sizeFromContents(ContentsType type, const QStyleOption* option,
-        const QSize& size, const QWidget* widget) const
-    {
-        QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
-        if (type == QStyle::CT_TabBarTab) {
-            s.transpose();
-            s.rwidth() = 110;
-            s.rheight() = 75;
-        }
-        return s;
-    }
-
-    void drawControl(ControlElement element, const QStyleOption* option,
-        QPainter* painter, const QWidget* widget) const
-    {
-        if (element == CE_TabBarTabLabel) {
-            if (const QStyleOptionTab* tab = qstyleoption_cast<const QStyleOptionTab*>(option)) {
-                // QRect allRect = tab->rect;
-
-                QTextOption option;
-                option.setAlignment(Qt::AlignCenter);
-
-                QStyleOptionTab opt(*tab);
-                opt.shape = QTabBar::RoundedNorth;
-
-                // QIcon icon(":/acpi.png");
-                // opt.icon = icon;
-
-#ifdef Q_OS_WIN32
-                opt.palette.setCurrentColorGroup(QPalette::Disabled);
-                opt.state |= QStyle::State_Sunken;
-                painter->setFont(QFont("微软雅黑", 9, QFont::Bold));
-#endif
-
-#ifdef Q_OS_LINUX
-                painter->setFont(QFont("微软雅黑", 11, QFont::Bold));
-#endif
-
-#ifdef Q_OS_MAC
-                opt.palette.setCurrentColorGroup(QPalette::Disabled);
-                opt.state |= QStyle::State_Sunken;
-                painter->setFont(QFont("", 15, QFont::Bold));
-#endif
-
-                QProxyStyle::drawControl(element, &opt, painter, widget);
-
-                return;
-            }
-        }
-
-        QProxyStyle::drawControl(element, option, painter, widget);
-    }
-};
-
-class CustomTabStyle3 : public QProxyStyle {
-public:
-    QSize sizeFromContents(ContentsType type, const QStyleOption* option,
-        const QSize& size, const QWidget* widget) const
-    {
-        QSize tabsize = QProxyStyle::sizeFromContents(type, option, size, widget);
-        if (type == QStyle::CT_TabBarTab) {
-            tabsize.transpose();
-            tabsize.rwidth() = 105;
-            tabsize.rheight() = 75;
-        }
-        return tabsize;
-    }
-
-    void drawControl(ControlElement element, const QStyleOption* option,
-        QPainter* painter, const QWidget* widget) const
-    {
-        if (element == CE_TabBarTabLabel) {
-            if (const QStyleOptionTab* tab = qstyleoption_cast<const QStyleOptionTab*>(option)) {
-                QRect allRect = tab->rect;
-                if (tab->state & QStyle::State_Selected) {
-                    painter->save();
-                    painter->setPen(0x89cfff);
-                    painter->setBrush(QBrush(0x89cfff));
-                    painter->drawRect(allRect.adjusted(0, 0, -0, -0));
-                    painter->restore();
-                }
-
-                QTextOption option;
-                option.setAlignment(Qt::AlignCenter);
-
-                if (tab->state & QStyle::State_Selected) {
-                    painter->setPen(0xf8fcff);
-                } else {
-                    painter->setPen(0x5d5d5d);
-                }
-#ifdef Q_OS_WIN32
-                painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
-#endif
-
-#ifdef Q_OS_LINUX
-                painter->setFont(QFont("微软雅黑", 12, QFont::Bold));
-#endif
-
-#ifdef Q_OS_MAC
-                painter->setFont(QFont("微软雅黑", 16, QFont::Bold));
-#endif
-                painter->drawText(allRect, tab->text, option);
-                return;
-            }
-        }
-        if (element == CE_TabBarTab) {
-            QProxyStyle::drawControl(element, option, painter, widget);
-        }
-    }
-};
-
-class CustomTabStyle4 : public QProxyStyle {
-public:
-    QSize sizeFromContents(ContentsType type, const QStyleOption* option,
-        const QSize& size, const QWidget* widget) const
-    {
-        QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
-        if (type == QStyle::CT_TabBarTab) {
-            s.transpose();
-            s.rwidth() = 105;
-            s.rheight() = 75;
-        }
-        return s;
-    }
-    void drawControl(ControlElement element, const QStyleOption* option,
-        QPainter* painter, const QWidget* widget) const
-    {
-        if (element == CE_TabBarTabLabel) {
-            if (const QStyleOptionTab* tab = qstyleoption_cast<const QStyleOptionTab*>(option)) {
-                QRect allRect = tab->rect;
-                allRect.setWidth(allRect.width() + 0);
-                allRect.setHeight(allRect.height() + 0);
-
-                if (tab->state & QStyle::State_Selected) {
-
-                    painter->save();
-                    painter->setBrush(QBrush(0x004ea1));
-
-                    painter->drawRect(allRect.adjusted(0, 0, 0, 0));
-
-                    // painter->drawRoundedRect(tab->rect, 5, 5);
-                    painter->restore();
-                }
-
-                else if (tab->state & QStyle::State_MouseOver) {
-                    painter->save();
-                    // painter->setBrush(QBrush(0x004ea1));
-                    painter->setBrush(QBrush(0x7B68EE));
-
-                    painter->drawRect(allRect.adjusted(0, 0, 0, 0));
-                    // painter->drawRoundedRect(allRect, 5, 5);
-
-                    painter->restore();
-                } else {
-                    painter->save();
-                    painter->setBrush(QBrush(0x78aadc));
-
-                    painter->drawRect(allRect.adjusted(0, 0, 0, 0));
-                    // painter->drawRoundedRect(allRect, 5, 5);
-
-                    painter->restore();
-                }
-
-                QTextOption option;
-                option.setAlignment(Qt::AlignCenter);
-
-#ifdef Q_OS_WIN32
-                painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
-#endif
-
-#ifdef Q_OS_LINUX
-                painter->setFont(QFont("微软雅黑", 12, QFont::Bold));
-#endif
-
-#ifdef Q_OS_MAC
-                painter->setFont(QFont("微软雅黑", 16, QFont::Bold));
-#endif
-
-                painter->setPen(0xffffff);
-                painter->drawText(allRect, tab->text, option);
-                return;
-            }
-        }
-        if (element == CE_TabBarTab) {
-            QProxyStyle::drawControl(element, option, painter, widget);
-        }
-    }
-};
-
-class CustomTabStyle5 : public QProxyStyle {
-public:
-    QSize sizeFromContents(ContentsType type, const QStyleOption* option,
-        const QSize& size, const QWidget* widget) const
-    {
-        QSize s = QProxyStyle::sizeFromContents(type, option, size, widget);
-        if (type == QStyle::CT_TabBarTab) {
-            s.transpose();
-
-#ifdef Q_OS_WIN32
-            s.rwidth() = 105;
-            s.rheight() = 75;
-#endif
-
-#ifdef Q_OS_LINUX
-            s.rwidth() = 105;
-            s.rheight() = 75;
-#endif
-
-#ifdef Q_OS_MAC
-            s.rwidth() = 105;
-            s.rheight() = 75;
-#endif
-        }
-        return s;
-    }
-    void drawControl(ControlElement element, const QStyleOption* option,
-        QPainter* painter, const QWidget* widget) const
-    {
-        if (element == CE_TabBarTabLabel) {
-            if (const QStyleOptionTab* tab = qstyleoption_cast<const QStyleOptionTab*>(option)) {
-                QRect allRect = tab->rect;
-                allRect.setWidth(allRect.width() - 2);
-                allRect.setHeight(allRect.height() - 2);
-
-                if (tab->state & QStyle::State_Selected) {
-
-                    painter->save();
-                    painter->setBrush(QBrush(0x004ea1));
-
-                    //painter->drawRect(allRect.adjusted(0, 0, 0, 0));
-
-                    painter->drawRoundedRect(tab->rect, 5, 5);
-                    painter->restore();
-                }
-
-                else if (tab->state & QStyle::State_MouseOver) {
-                    painter->save();
-                    // painter->setBrush(QBrush(0x004ea1));
-                    painter->setBrush(QBrush(0x7B68EE));
-                    painter->drawRoundedRect(allRect, 8, 8);
-                    painter->restore();
-                } else {
-                    painter->save();
-                    painter->setBrush(QBrush(0x78aadc));
-                    painter->drawRoundedRect(allRect, 8, 8);
-                    painter->restore();
-                }
-                QTextOption option;
-                option.setAlignment(Qt::AlignCenter);
-
-#ifdef Q_OS_WIN32
-                painter->setFont(QFont("微软雅黑", 9, QFont::Bold));
-#endif
-
-#ifdef Q_OS_LINUX
-                painter->setFont(QFont("微软雅黑", 10, QFont::Bold));
-#endif
-
-#ifdef Q_OS_MAC
-                painter->setFont(QFont("微软雅黑", 13, QFont::Bold));
-#endif
-                painter->setPen(0xffffff);
-                painter->drawText(allRect, tab->text, option);
-                return;
-            }
-        }
-        if (element == CE_TabBarTab) {
-            QProxyStyle::drawControl(element, option, painter, widget);
-        }
-    }
 };
 
 #endif // MAINWINDOW_H

@@ -106,7 +106,7 @@ void AddCommand::redo()
 }
 
 // Edit
-EditCommand::EditCommand(QString oldText, QTableWidget* table, int row, int col, QString text, QUndoCommand* parent)
+EditCommand::EditCommand(bool textAlignCenter, QString oldText, QTableWidget* table, int row, int col, QString text, QUndoCommand* parent)
 {
     Q_UNUSED(parent);
     m_table = table;
@@ -114,6 +114,7 @@ EditCommand::EditCommand(QString oldText, QTableWidget* table, int row, int col,
     m_col = col;
     m_text = text;
     m_oldText = oldText;
+    m_textAlignCenter = textAlignCenter;
 
     setText(QObject::tr("Edit") + "  " + oldText);
 }
@@ -130,9 +131,13 @@ void EditCommand::undo()
 
     mw_one->loading = true;
     mw_one->writeINI = true;
-    m_table->setItem(m_row, m_col, new QTableWidgetItem(m_oldText));
 
+    QTableWidgetItem* item = new QTableWidgetItem(m_oldText);
+    if (m_textAlignCenter)
+        item->setTextAlignment(Qt::AlignCenter);
+    m_table->setItem(m_row, m_col, item);
     m_table->setCurrentCell(m_row, m_col);
+
     m_table->setCellWidget(m_row, m_col, mw_one->lineEdit);
     mw_one->lineEdit->setText(m_oldText);
 
@@ -151,12 +156,18 @@ void EditCommand::redo()
 
     mw_one->loading = true;
     mw_one->writeINI = true;
-    m_table->setItem(m_row, m_col, new QTableWidgetItem(m_text));
+
+    QTableWidgetItem* item = new QTableWidgetItem(m_text);
+    if (m_textAlignCenter)
+        item->setTextAlignment(Qt::AlignCenter);
+    m_table->setItem(m_row, m_col, item);
 
     if (mw_one->lineEdit != NULL) {
 
         m_table->setCurrentCell(m_row, m_col);
+
         m_table->setCellWidget(m_row, m_col, mw_one->lineEdit);
+
         mw_one->lineEdit->setText(m_text);
     }
 

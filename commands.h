@@ -93,7 +93,7 @@ private:
 
 class EditCommand : public QUndoCommand {
 public:
-    EditCommand(QString oldText, QTableWidget* table, int row, int col, QString text, QUndoCommand* parent = nullptr);
+    EditCommand(bool textAlignCenter, QString oldText, QTableWidget* table, int row, int col, QString text, QUndoCommand* parent = nullptr);
     ~EditCommand();
 
     void undo() override;
@@ -105,6 +105,7 @@ private:
     int m_col;
     QString m_text;
     QString m_oldText;
+    bool m_textAlignCenter;
 };
 
 class CopyPasteLineCommand : public QUndoCommand {

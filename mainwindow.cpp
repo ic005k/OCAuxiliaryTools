@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210322";
+    CurVerison = "20210325";
     title = "OC Auxiliary Tools   V0.6.8    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -65,8 +65,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     init_setWindowModified();
 
-    initCopyPasteLine();
-
     init_hardware_info();
 
     aboutDlg = new aboutDialog(this);
@@ -84,35 +82,9 @@ MainWindow::MainWindow(QWidget* parent)
     ui->tabNVRAM->setCurrentIndex(0);
     ui->tabPlatformInfo->setCurrentIndex(0);
     ui->tabUEFI->setCurrentIndex(0);
+    ui->textDiskInfo->setVisible(false);
 
     ui->listMain->setCurrentRow(0);
-
-    QString tabBarStyle0 = "QTabBar::tab {min-width:100px;border: 1px solid;border-top-left-radius: 5px;border-top-right-radius: 5px;padding:2px;}\
-            QTabBar::tab:!selected {margin-top: 2px;}\
-            QTabWidget::pane{border:none;}\
-            QTabBar::tab{background:transparent;color:black;}\
-            QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
-            QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
-
-    QString tabBarStyle1 = "QTabBar::tab {min-width:100px;color: rgba(120,120,120);border: 1px solid;border-top-left-radius: 6px;border-top-right-radius: 6px;padding:1px;}\
-            QTabBar::tab:!selected {margin-top: 2px;} \
-            QTabBar::tab:selected {color: rgba(0,0,255);}";
-
-    QString tabBarStyle2 = "QTabBar::tab {min-width:100px;color: black;background-color:qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #eeeeee, stop: 1 gray);border: 0px solid;border-top-left-radius: 10px;border-top-right-radius: 10px;padding:5px;}\
-            QTabBar::tab:!selected {margin-top: 5px;} \
-            QTabBar::tab:selected {color: blue;}";
-
-    QString tabBarStyle3 = "QTabWidget::pane{border:none;}\
-            QTabWidget::tab-bar{alignment:left;}\
-            QTabBar::tab{background:transparent;color:black;}\
-            QTabBar::tab:hover{background:rgba(0, 0, 255, 80);}\
-            QTabBar::tab:selected{border-color: white;background:rgba(0, 0, 255, 255);color:white;}";
-
-    QString tabBarStyle4 = "QTabBar::tab:selected{background:rgba(30, 160, 255, 255);}";
-
-    if (osx1012)
-        ui->tabTotal->setStyleSheet(tabBarStyle4);
-    //ui->tabTotal->tabBar()->setStyle(new CustomTabStyle2);
 
     ui->gridLayout->setMargin(5);
     ui->centralwidget->layout()->setMargin(5);
@@ -158,7 +130,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui->gridLayout_30->setMargin(0);
     ui->gridLayout_59->setMargin(0);
 
-    ui->gridLayout_43->setMargin(0);
+    //ui->gridLayout_43->setMargin(0);
 
     ui->gridLayout_69->setMargin(0);
 
@@ -173,18 +145,12 @@ MainWindow::MainWindow(QWidget* parent)
     initui_UEFI();
     initui_acpi();
 
+    init_CopyPasteLine();
+
     setTableEdit();
 
     //接受文件拖放打开
     this->setAcceptDrops(true);
-
-    //设置QToolTip颜色
-    /*QPalette palette = QToolTip::palette();
-    palette.setColor(QPalette::Inactive, QPalette::ToolTipBase, Qt::white);*/
-    //设置ToolTip背景色
-    /*palette.setColor(QPalette::Inactive, QPalette::ToolTipText, QColor(50, 50, 255, 255));
-    QToolTip::setFont(font);*/
-    //this->setStyleSheet("QToolTip{border:1px solid rgb(118, 118, 118); background-color: white; color:black; font-size:13px;}");
 
     //最近打开的文件
     QCoreApplication::setOrganizationName("ic005k");
@@ -411,15 +377,17 @@ void MainWindow::ParserACPI(QVariantMap map)
     // qDebug() << map_add;
     ui->table_acpi_add->setRowCount(map_add.count());
     for (int i = 0; i < map_add.count(); i++) {
+
         QVariantMap map3 = map_add.at(i).toMap();
 
         QTableWidgetItem* newItem1;
         newItem1 = new QTableWidgetItem(map3["Path"].toString());
         ui->table_acpi_add->setItem(i, 0, newItem1);
-        newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-        ui->table_acpi_add->setItem(i, 1, newItem1);
 
-        init_enabled_data(ui->table_acpi_add, i, 2, map3["Enabled"].toString());
+        init_enabled_data(ui->table_acpi_add, i, 1, map3["Enabled"].toString());
+
+        newItem1 = new QTableWidgetItem(map3["Comment"].toString());
+        ui->table_acpi_add->setItem(i, 2, newItem1);
     }
 
     //分析Delete
@@ -440,12 +408,12 @@ void MainWindow::ParserACPI(QVariantMap map)
         newItem1 = new QTableWidgetItem(map3["TableLength"].toString());
         ui->table_acpi_del->setItem(i, 2, newItem1);
 
+        init_enabled_data(ui->table_acpi_del, i, 3, map3["All"].toString());
+
+        init_enabled_data(ui->table_acpi_del, i, 4, map3["Enabled"].toString());
+
         newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-        ui->table_acpi_del->setItem(i, 3, newItem1);
-
-        init_enabled_data(ui->table_acpi_del, i, 4, map3["All"].toString());
-
-        init_enabled_data(ui->table_acpi_del, i, 5, map3["Enabled"].toString());
+        ui->table_acpi_del->setItem(i, 5, newItem1);
     }
 
     //分析Patch
@@ -516,49 +484,45 @@ void MainWindow::initui_acpi()
     ui->btnImportMaster->setText(tr("Import") + "  ACPI");
 
     QTableWidgetItem* id0;
+    QStringList fieldList;
+
     // ACPI-Add
-    ui->table_acpi_add->setColumnWidth(0, 550);
-    id0 = new QTableWidgetItem(tr("Path"));
-    ui->table_acpi_add->setHorizontalHeaderItem(0, id0);
+    ui->table_acpi_add->setColumnCount(3);
 
-    ui->table_acpi_add->setColumnWidth(1, 350);
-    id0 = new QTableWidgetItem(tr("Comment"));
-    ui->table_acpi_add->setHorizontalHeaderItem(1, id0);
-
-    id0 = new QTableWidgetItem(tr("Enabled"));
-    ui->table_acpi_add->setHorizontalHeaderItem(2, id0);
+    fieldList.clear();
+    fieldList.append(tr("Path"));
+    fieldList.append(tr("Enabled"));
+    fieldList.append(tr("Comment"));
+    ui->table_acpi_add->setHorizontalHeaderLabels(fieldList);
 
     ui->table_acpi_add->setAlternatingRowColors(true); //底色交替显示
-    //ui->table_acpi_add->horizontalHeader()->setStretchLastSection(true); //设置充满表宽度
 
     // ACPI-Delete
     id0 = new QTableWidgetItem(tr("TableSignature"));
     ui->table_acpi_del->setHorizontalHeaderItem(0, id0);
 
-    ui->table_acpi_del->setColumnWidth(1, 350);
+    //ui->table_acpi_del->setColumnWidth(1, 350);
     id0 = new QTableWidgetItem(tr("OemTableId"));
     ui->table_acpi_del->setHorizontalHeaderItem(1, id0);
 
     id0 = new QTableWidgetItem(tr("TableLength"));
     ui->table_acpi_del->setHorizontalHeaderItem(2, id0);
 
-    ui->table_acpi_del->setColumnWidth(3, 250);
-    id0 = new QTableWidgetItem(tr("Comment"));
+    id0 = new QTableWidgetItem(tr("All"));
     ui->table_acpi_del->setHorizontalHeaderItem(3, id0);
 
-    id0 = new QTableWidgetItem(tr("All"));
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_acpi_del->setHorizontalHeaderItem(4, id0);
 
-    id0 = new QTableWidgetItem(tr("Enabled"));
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_acpi_del->setHorizontalHeaderItem(5, id0);
 
     ui->table_acpi_del->setAlternatingRowColors(true);
-    //ui->table_acpi_del->horizontalHeader()->setStretchLastSection(true);
 
     // ACPI-Patch
     ui->table_acpi_patch->setColumnCount(14);
 
-    ui->table_acpi_patch->setColumnWidth(0, 150);
+    //ui->table_acpi_patch->setColumnWidth(0, 150);
     id0 = new QTableWidgetItem(tr("TableSignature"));
     ui->table_acpi_patch->setHorizontalHeaderItem(0, id0);
 
@@ -568,15 +532,15 @@ void MainWindow::initui_acpi()
     id0 = new QTableWidgetItem(tr("TableLength"));
     ui->table_acpi_patch->setHorizontalHeaderItem(2, id0);
 
-    ui->table_acpi_patch->setColumnWidth(3, 200);
+    //ui->table_acpi_patch->setColumnWidth(3, 200);
     id0 = new QTableWidgetItem(tr("Find"));
     ui->table_acpi_patch->setHorizontalHeaderItem(3, id0);
 
-    ui->table_acpi_patch->setColumnWidth(4, 200);
+    //ui->table_acpi_patch->setColumnWidth(4, 200);
     id0 = new QTableWidgetItem(tr("Replace"));
     ui->table_acpi_patch->setHorizontalHeaderItem(4, id0);
 
-    ui->table_acpi_patch->setColumnWidth(5, 300);
+    //ui->table_acpi_patch->setColumnWidth(5, 300);
     id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_acpi_patch->setHorizontalHeaderItem(5, id0);
 
@@ -600,38 +564,13 @@ void MainWindow::initui_acpi()
 
     id0 = new QTableWidgetItem(tr("Base"));
     ui->table_acpi_patch->setHorizontalHeaderItem(12, id0);
-    ui->table_acpi_patch->setColumnWidth(12, 220);
+    //ui->table_acpi_patch->setColumnWidth(12, 220);
 
     id0 = new QTableWidgetItem(tr("BaseSkip"));
     ui->table_acpi_patch->setHorizontalHeaderItem(13, id0);
 
     ui->table_acpi_patch->setAlternatingRowColors(true);
-    ui->table_acpi_patch->horizontalHeader()->setStretchLastSection(true);
-
-    if (zh_cn) {
-        ui->table_acpi_patch->horizontalHeaderItem(0)->setToolTip(
-            "匹配表签名等于该值，除非全为零。");
-        ui->table_acpi_patch->horizontalHeaderItem(1)->setToolTip(
-            "匹配表OEM ID等于此值，除非全为零。");
-        ui->table_acpi_patch->horizontalHeaderItem(2)->setToolTip(
-            "匹配表大小等于此值，除非为0。");
-        ui->table_acpi_patch->horizontalHeaderItem(3)->setToolTip("查找");
-        ui->table_acpi_patch->horizontalHeaderItem(4)->setToolTip("替换");
-        ui->table_acpi_patch->horizontalHeaderItem(5)->setToolTip("注释");
-        ui->table_acpi_patch->horizontalHeaderItem(6)->setToolTip(
-            "查找比较期间使用的数据按位掩码。 通过忽略未屏蔽（设置到零）位。 "
-            "可以设置为空数据以忽略。 否则必须等于“替换大小”。");
-        ui->table_acpi_patch->horizontalHeaderItem(7)->setToolTip(
-            "替换期间使用的数据按位掩码。 通过更新遮罩（设置到非零）位。 "
-            "可以设置为空数据以忽略。 否则必须等于“替换大小”。");
-        ui->table_acpi_patch->horizontalHeaderItem(8)->setToolTip(
-            "要应用的补丁出现次数。 0将补丁应用于所有发现的事件。");
-        ui->table_acpi_patch->horizontalHeaderItem(9)->setToolTip(
-            "要搜索的最大字节数。 可以设置为0以浏览整个ACPI表。");
-        ui->table_acpi_patch->horizontalHeaderItem(10)->setToolTip(
-            "完成替换之前要跳过的发现事件数。");
-        ui->table_acpi_patch->horizontalHeaderItem(11)->setToolTip("是否启用");
-    }
+    //ui->table_acpi_patch->horizontalHeader()->setStretchLastSection(true);
 }
 
 void MainWindow::initui_booter()
@@ -686,7 +625,7 @@ void MainWindow::initui_booter()
     ui->table_Booter_patch->setHorizontalHeaderItem(10, id0);
 
     ui->table_Booter_patch->setAlternatingRowColors(true);
-    ui->table_Booter_patch->horizontalHeader()->setStretchLastSection(true);
+    //ui->table_Booter_patch->horizontalHeader()->setStretchLastSection(true);
 
     //MmioWhitelist
 
@@ -694,21 +633,14 @@ void MainWindow::initui_booter()
     id0 = new QTableWidgetItem(tr("Address"));
     ui->table_booter->setHorizontalHeaderItem(0, id0);
 
-    ui->table_booter->setColumnWidth(1, 400);
-    id0 = new QTableWidgetItem(tr("Comment"));
+    id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_booter->setHorizontalHeaderItem(1, id0);
 
-    id0 = new QTableWidgetItem(tr("Enabled"));
+    id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_booter->setHorizontalHeaderItem(2, id0);
 
     ui->table_booter->setAlternatingRowColors(true);
     //ui->table_booter->horizontalHeader()->setStretchLastSection(true);
-
-    if (zh_cn) {
-        ui->table_booter->horizontalHeaderItem(0)->setToolTip("地址");
-        ui->table_booter->horizontalHeaderItem(1)->setToolTip("注释");
-        ui->table_booter->horizontalHeaderItem(2)->setToolTip("是否启用");
-    }
 }
 
 void MainWindow::ParserBooter(QVariantMap map)
@@ -786,10 +718,10 @@ void MainWindow::ParserBooter(QVariantMap map)
         newItem1 = new QTableWidgetItem(map3["Address"].toString());
         ui->table_booter->setItem(i, 0, newItem1);
 
-        newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-        ui->table_booter->setItem(i, 1, newItem1);
+        init_enabled_data(ui->table_booter, i, 1, map3["Enabled"].toString());
 
-        init_enabled_data(ui->table_booter, i, 2, map3["Enabled"].toString());
+        newItem1 = new QTableWidgetItem(map3["Comment"].toString());
+        ui->table_booter->setItem(i, 2, newItem1);
     }
 
     // Quirks
@@ -977,6 +909,7 @@ void MainWindow::initui_kernel()
     ui->table_kernel_add->horizontalHeaderItem(7)->setToolTip(strArch);
 
     ui->table_kernel_add->setAlternatingRowColors(true);
+    //ui->table_kernel_add->horizontalHeader()->setStretchLastSection(true);
 
     // Block
     ui->table_kernel_block->setColumnCount(6);
@@ -2076,24 +2009,26 @@ void MainWindow::initui_PlatformInfo()
 
     // Memory-Devices
     QTableWidgetItem* id0;
-    ui->tableDevices->setColumnWidth(0, 150);
+    ui->tableDevices->setColumnWidth(0, 160);
     id0 = new QTableWidgetItem(tr("AssetTag"));
     ui->tableDevices->setHorizontalHeaderItem(0, id0);
 
     id0 = new QTableWidgetItem(tr("BankLocator"));
     ui->tableDevices->setHorizontalHeaderItem(1, id0);
 
-    ui->tableDevices->setColumnWidth(2, 200);
+    ui->tableDevices->setColumnWidth(2, 220);
     id0 = new QTableWidgetItem(tr("DeviceLocator"));
     ui->tableDevices->setHorizontalHeaderItem(2, id0);
 
     id0 = new QTableWidgetItem(tr("Manufacturer"));
     ui->tableDevices->setHorizontalHeaderItem(3, id0);
+    ui->tableDevices->setColumnWidth(3, 160);
 
     id0 = new QTableWidgetItem(tr("PartNumber"));
     ui->tableDevices->setHorizontalHeaderItem(4, id0);
+    ui->tableDevices->setColumnWidth(4, 160);
 
-    ui->tableDevices->setColumnWidth(5, 200);
+    ui->tableDevices->setColumnWidth(5, 220);
     id0 = new QTableWidgetItem(tr("SerialNumber"));
     ui->tableDevices->setHorizontalHeaderItem(5, id0);
 
@@ -2106,7 +2041,6 @@ void MainWindow::initui_PlatformInfo()
     ui->tableDevices->setAlternatingRowColors(true); //底色交替显示
     //ui->tableDevices->horizontalHeader()->setStretchLastSection(true);
 
-    // ui->cboxSystemProductName->setEditable(true);
     QStringList pi;
     pi.push_back("");
     pi.push_back("MacPro1,1    Intel Core Xeon 5130 x2 @ 2.00 GHz");
@@ -2557,7 +2491,7 @@ void MainWindow::initui_UEFI()
     id0 = new QTableWidgetItem(tr("Size"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(2, id0);
 
-    ui->table_uefi_ReservedMemory->setColumnWidth(3, 210);
+    ui->table_uefi_ReservedMemory->setColumnWidth(3, 300);
     id0 = new QTableWidgetItem(tr("Type"));
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(3, id0);
 
@@ -2772,8 +2706,10 @@ QVariantMap MainWindow::SaveACPI()
 
     for (int i = 0; i < ui->table_acpi_add->rowCount(); i++) {
         acpiAddSub["Path"] = ui->table_acpi_add->item(i, 0)->text();
-        acpiAddSub["Comment"] = ui->table_acpi_add->item(i, 1)->text();
-        acpiAddSub["Enabled"] = getBool(ui->table_acpi_add, i, 2);
+
+        acpiAddSub["Enabled"] = getBool(ui->table_acpi_add, i, 1);
+
+        acpiAddSub["Comment"] = ui->table_acpi_add->item(i, 2)->text();
 
         acpiAdd.append(acpiAddSub); //最后一层
     }
@@ -2795,9 +2731,10 @@ QVariantMap MainWindow::SaveACPI()
         acpiDelSub["OemTableId"] = HexStrToByte(str);
 
         acpiDelSub["TableLength"] = ui->table_acpi_del->item(i, 2)->text().toLongLong();
-        acpiDelSub["Comment"] = ui->table_acpi_del->item(i, 3)->text();
-        acpiDelSub["All"] = getBool(ui->table_acpi_del, i, 4);
-        acpiDelSub["Enabled"] = getBool(ui->table_acpi_del, i, 5);
+
+        acpiDelSub["All"] = getBool(ui->table_acpi_del, i, 3);
+        acpiDelSub["Enabled"] = getBool(ui->table_acpi_del, i, 4);
+        acpiDelSub["Comment"] = ui->table_acpi_del->item(i, 5)->text();
 
         acpiDel.append(acpiDelSub); //最后一层
     }
@@ -2889,9 +2826,9 @@ QVariantMap MainWindow::SaveBooter()
         QString str = ui->table_booter->item(i, 0)->text().trimmed();
         valueList["Address"] = str.toLongLong();
 
-        valueList["Comment"] = ui->table_booter->item(i, 1)->text();
+        valueList["Enabled"] = getBool(ui->table_booter, i, 1);
 
-        valueList["Enabled"] = getBool(ui->table_booter, i, 2);
+        valueList["Comment"] = ui->table_booter->item(i, 2)->text();
 
         arrayList.append(valueList); //最后一层
     }
@@ -3652,7 +3589,7 @@ void MainWindow::on_table_acpi_add_cellClicked(int row, int column)
     if (!ui->table_acpi_add->currentIndex().isValid())
         return;
 
-    enabled_change(ui->table_acpi_add, row, column, 2);
+    enabled_change(ui->table_acpi_add, row, column, 1);
 
     ui->statusbar->showMessage(ui->table_acpi_add->currentItem()->text());
 }
@@ -3700,8 +3637,8 @@ void MainWindow::on_table_acpi_del_cellClicked(int row, int column)
     if (!ui->table_acpi_del->currentIndex().isValid())
         return;
 
+    enabled_change(ui->table_acpi_del, row, column, 3);
     enabled_change(ui->table_acpi_del, row, column, 4);
-    enabled_change(ui->table_acpi_del, row, column, 5);
 
     ui->statusbar->showMessage(ui->table_acpi_del->currentItem()->text());
 }
@@ -3721,7 +3658,7 @@ void MainWindow::on_table_booter_cellClicked(int row, int column)
     if (!ui->table_booter->currentIndex().isValid())
         return;
 
-    enabled_change(ui->table_booter, row, column, 2);
+    enabled_change(ui->table_booter, row, column, 1);
 
     ui->statusbar->showMessage(ui->table_booter->currentItem()->text());
 }
@@ -4118,12 +4055,10 @@ void MainWindow::on_btnACPIAdd_Del_clicked()
 
 void MainWindow::on_btnACPIDel_Add_clicked()
 {
-    add_item(ui->table_acpi_del, 5);
+    add_item(ui->table_acpi_del, 6);
 
-    init_enabled_data(ui->table_acpi_del, ui->table_acpi_del->rowCount() - 1, 4,
-        "false");
-    init_enabled_data(ui->table_acpi_del, ui->table_acpi_del->rowCount() - 1, 5,
-        "true");
+    init_enabled_data(ui->table_acpi_del, ui->table_acpi_del->rowCount() - 1, 3, "false");
+    init_enabled_data(ui->table_acpi_del, ui->table_acpi_del->rowCount() - 1, 4, "true");
 
     this->setWindowModified(true);
 }
@@ -4148,9 +4083,8 @@ void MainWindow::on_btnACPIPatch_Del_clicked()
 
 void MainWindow::on_btnBooter_Add_clicked()
 {
-    add_item(ui->table_booter, 2);
-    init_enabled_data(ui->table_booter, ui->table_booter->rowCount() - 1, 2,
-        "true");
+    add_item(ui->table_booter, 3);
+    init_enabled_data(ui->table_booter, ui->table_booter->rowCount() - 1, 1, "true");
 
     this->setWindowModified(true);
 }
@@ -4248,12 +4182,11 @@ void MainWindow::addACPIItem(QStringList FileName)
 
         ui->table_acpi_add->setRowCount(row);
 
-        QUndoCommand* addCommand = new AddCommand(ui->table_acpi_add, row - 1, 0, QFileInfo(FileName.at(i)).fileName());
-        undoStack->push(addCommand);
-        //ui->table_acpi_add->setItem(row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
-
-        ui->table_acpi_add->setItem(row - 1, 1, new QTableWidgetItem(""));
-        init_enabled_data(ui->table_acpi_add, row - 1, 2, "true");
+        //QUndoCommand* addCommand = new AddCommand(ui->table_acpi_add, row - 1, 0, QFileInfo(FileName.at(i)).fileName());
+        //undoStack->push(addCommand);
+        ui->table_acpi_add->setItem(row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+        init_enabled_data(ui->table_acpi_add, row - 1, 1, "true");
+        ui->table_acpi_add->setItem(row - 1, 2, new QTableWidgetItem(""));
 
         ui->table_acpi_add->setFocus();
         ui->table_acpi_add->setCurrentCell(row - 1, 0);
@@ -4549,12 +4482,13 @@ void MainWindow::addEFITools(QStringList FileName)
         return;
 
     for (int i = 0; i < FileName.count(); i++) {
-        add_item(ui->tableTools, 7);
+        add_item(ui->tableTools, 8);
 
         int row = ui->tableTools->rowCount();
 
-        ui->tableTools->setItem(
-            row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+        ui->tableTools->setItem(row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+
+        ui->tableTools->setItem(row - 1, 2, new QTableWidgetItem(QFileInfo(FileName.at(i)).baseName()));
 
         ui->tableTools->setFocus();
         ui->tableTools->setCurrentCell(row - 1, 0);
@@ -5147,7 +5081,7 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         loading = false;
 
         lineEdit->setFocus();
-        lineEdit->setClearButtonEnabled(true);
+        lineEdit->setClearButtonEnabled(false);
 
         connect(lineEdit, &QLineEdit::returnPressed, this, &MainWindow::setEditText);
         connect(lineEdit, &QLineEdit::textChanged, this, &MainWindow::lineEdit_textChanged);
@@ -5631,7 +5565,6 @@ void MainWindow::closeEvent(QCloseEvent* event)
 
     QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
     QFile file(qfile);
-    // QSettings Reg(qfile, QSettings::NativeFormat);
     QSettings Reg(qfile, QSettings::IniFormat);
     Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
 
@@ -5649,6 +5582,8 @@ void MainWindow::closeEvent(QCloseEvent* event)
         this->setFocus();
 
         int choice;
+
+        this->setFocus();
 
         QMessageBox message(QMessageBox::Warning, tr("Application"),
             tr("The document has been modified.") + "\n" + tr("Do you want to save your changes?") + "\n\n"
@@ -5679,6 +5614,8 @@ void MainWindow::closeEvent(QCloseEvent* event)
         case QMessageBox::Cancel:
             ui->listMain->setFocus();
             event->ignore();
+
+            ui->cboxFind->setFocus();
             break;
         }
     } else {
@@ -7536,15 +7473,15 @@ void MainWindow::init_Menu()
     if (!zh_cn)
         ui->actionSimplified_Chinese_Manual->setVisible(false);
 
-    connect(ui->actionOpenCanopyIcons, &QAction::triggered, this,
-        &MainWindow::on_line5);
+    connect(ui->actionOpenCanopyIcons, &QAction::triggered, this, &MainWindow::on_line5);
 
-    connect(ui->actionPlist_editor, &QAction::triggered, this,
-        &MainWindow::on_line20);
-    connect(ui->actionDSDT_SSDT_editor, &QAction::triggered, this,
-        &MainWindow::on_line21);
+    connect(ui->actionPlist_editor, &QAction::triggered, this, &MainWindow::on_line20);
+    connect(ui->actionDSDT_SSDT_editor, &QAction::triggered, this, &MainWindow::on_line21);
 
     ui->actionSave->setEnabled(false);
+
+    // Bug Report
+    ui->actionBug_Report->setIcon(QIcon(":/icon/about.png"));
 
     //Undo/Redo
     undoStack = new QUndoStack(this);
@@ -7648,8 +7585,7 @@ void MainWindow::init_Menu()
     ui->toolBar->addSeparator();
 
     // About
-    ui->actionAbout_2->setIcon(QIcon(":/icon/about.png"));
-    ui->toolBar->addAction(ui->actionAbout_2);
+    ui->toolBar->addAction(ui->actionBug_Report);
 
     //Copy Label
     listOfLabel.clear();
@@ -8829,21 +8765,48 @@ void MainWindow::setEditText()
 {
     if (!loading) {
 
-        if (!lineEdit->isWindowModified())
-            return;
+        lineEditEnter = true;
 
         int row;
         int col;
         QString oldText;
         row = myTable->currentRow();
         col = myTable->currentColumn();
+
+        if (!lineEdit->isWindowModified()) {
+            myTable->removeCellWidget(row, col);
+            myTable->setCurrentCell(row, col);
+            myTable->setFocus();
+
+            return;
+        }
+
         oldText = myTable->item(row, col)->text();
-        QUndoCommand* editCommand = new EditCommand(oldText, myTable, myTable->currentRow(), myTable->currentColumn(), lineEdit->text());
+
+        bool textAlignCenter = false;
+        QString colTextList = "CountLimitSkipBaseSkipMaxKernelMinKernelAssetTagBankLocatorDeviceLocatorManufacturerPartNumberSerialNumberSizeSpeed";
+        QString strItem = myTable->horizontalHeaderItem(col)->text();
+        QStringList strEn = strItem.split("\n");
+        if (strEn.count() == 2) {
+            if (colTextList.contains(strEn.at(1))) {
+                textAlignCenter = true;
+            }
+        } else {
+            if (colTextList.contains(strItem)) {
+                textAlignCenter = true;
+            }
+        }
+
+        QUndoCommand* editCommand = new EditCommand(textAlignCenter, oldText, myTable, myTable->currentRow(), myTable->currentColumn(), lineEdit->text());
         undoStack->push(editCommand);
 
         lineEdit->addAction(pTrailingAction, QLineEdit::TrailingPosition);
 
         this->setWindowModified(true);
+
+        myTable->removeCellWidget(row, col);
+        myTable->setCurrentCell(row, col);
+        myTable->setFocus();
     }
 }
 
@@ -9324,7 +9287,7 @@ void MainWindow::on_table_dp_del0_cellDoubleClicked(int row, int column)
 
 void MainWindow::on_table_acpi_add_cellDoubleClicked(int row, int column)
 {
-    if (column != 2) {
+    if (column != 1) {
 
         myTable = new QTableWidget;
         myTable = ui->table_acpi_add;
@@ -9382,7 +9345,7 @@ void MainWindow::on_table_acpi_del_cellDoubleClicked(int row, int column)
     myTable = new QTableWidget;
     myTable = ui->table_acpi_del;
 
-    if (column != 4 && column != 5)
+    if (column != 3 && column != 4)
         initLineEdit(myTable, row, column, row, column);
 }
 
@@ -9400,7 +9363,7 @@ void MainWindow::on_table_booter_cellDoubleClicked(int row, int column)
     myTable = new QTableWidget;
     myTable = ui->table_booter;
 
-    if (column != 2)
+    if (column != 1)
         initLineEdit(myTable, row, column, row, column);
 }
 
@@ -10353,6 +10316,7 @@ void MainWindow::goResults(int index)
                                 if (!win && !osx1012) {
                                     w->horizontalHeaderItem(x)->setBackground(QColor(255, 0, 0));
                                     w->horizontalHeaderItem(x)->setForeground(QColor(255, 255, 255));
+
                                 } else {
 
                                     QBrush myBrush;
@@ -10693,219 +10657,226 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
     switch (event->key()) {
     //ESC键
     case Qt::Key_Escape:
-        //qDebug() << "ESC";
+
+        myTable->removeCellWidget(myTable->currentRow(), myTable->currentColumn());
+        myTable->setFocus();
+
         break;
     //回车键
     case Qt::Key_Return:
         QTableWidget* t;
 
-        // ACPI
-        t = ui->table_acpi_add;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_acpi_add_cellDoubleClicked(row, col);
+        if (!lineEditEnter) {
+            // ACPI
+            t = ui->table_acpi_add;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_acpi_add_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_acpi_del;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_acpi_del_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_acpi_patch;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_acpi_patch_cellDoubleClicked(row, col);
+            }
+
+            // Booter
+            t = ui->table_booter;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_booter_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_Booter_patch;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_Booter_patch_cellDoubleClicked(row, col);
+            }
+
+            // DP
+            t = ui->table_dp_add0;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_dp_add0_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_dp_add;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_dp_add_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_dp_del0;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_dp_del0_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_dp_del;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_dp_del_cellDoubleClicked(row, col);
+            }
+
+            // Kernel
+            t = ui->table_kernel_add;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_kernel_add_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_kernel_block;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_kernel_block_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_kernel_Force;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_kernel_Force_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_kernel_patch;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_kernel_patch_cellDoubleClicked(row, col);
+            }
+
+            // Misc
+            t = ui->tableBlessOverride;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_tableBlessOverride_cellDoubleClicked(row, col);
+            }
+
+            t = ui->tableEntries;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_tableEntries_cellDoubleClicked(row, col);
+            }
+
+            t = ui->tableTools;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_tableTools_cellDoubleClicked(row, col);
+            }
+
+            // NVRAM
+            t = ui->table_nv_add0;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_nv_add0_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_nv_add;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_nv_add_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_nv_del0;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_nv_del0_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_nv_del;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_nv_del_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_nv_ls0;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_nv_ls0_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_nv_ls;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_nv_ls_cellDoubleClicked(row, col);
+            }
+
+            // PI
+            t = ui->tableDevices;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_tableDevices_cellDoubleClicked(row, col);
+            }
+
+            // UEFI
+            t = ui->table_uefi_drivers;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_uefi_drivers_cellDoubleClicked(row, col);
+            }
+
+            t = ui->table_uefi_ReservedMemory;
+            if (t->hasFocus()) {
+                int row, col;
+                row = t->currentRow();
+                col = t->currentColumn();
+                on_table_uefi_ReservedMemory_cellDoubleClicked(row, col);
+            }
         }
 
-        t = ui->table_acpi_del;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_acpi_del_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_acpi_patch;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_acpi_patch_cellDoubleClicked(row, col);
-        }
-
-        // Booter
-        t = ui->table_booter;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_booter_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_Booter_patch;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_Booter_patch_cellDoubleClicked(row, col);
-        }
-
-        // DP
-        t = ui->table_dp_add0;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_dp_add0_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_dp_add;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_dp_add_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_dp_del0;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_dp_del0_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_dp_del;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_dp_del_cellDoubleClicked(row, col);
-        }
-
-        // Kernel
-        t = ui->table_kernel_add;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_kernel_add_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_kernel_block;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_kernel_block_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_kernel_Force;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_kernel_Force_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_kernel_patch;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_kernel_patch_cellDoubleClicked(row, col);
-        }
-
-        // Misc
-        t = ui->tableBlessOverride;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_tableBlessOverride_cellDoubleClicked(row, col);
-        }
-
-        t = ui->tableEntries;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_tableEntries_cellDoubleClicked(row, col);
-        }
-
-        t = ui->tableTools;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_tableTools_cellDoubleClicked(row, col);
-        }
-
-        // NVRAM
-        t = ui->table_nv_add0;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_nv_add0_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_nv_add;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_nv_add_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_nv_del0;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_nv_del0_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_nv_del;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_nv_del_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_nv_ls0;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_nv_ls0_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_nv_ls;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_nv_ls_cellDoubleClicked(row, col);
-        }
-
-        // PI
-        t = ui->tableDevices;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_tableDevices_cellDoubleClicked(row, col);
-        }
-
-        // UEFI
-        t = ui->table_uefi_drivers;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_uefi_drivers_cellDoubleClicked(row, col);
-        }
-
-        t = ui->table_uefi_ReservedMemory;
-        if (t->hasFocus()) {
-            int row, col;
-            row = t->currentRow();
-            col = t->currentColumn();
-            on_table_uefi_ReservedMemory_cellDoubleClicked(row, col);
-        }
+        lineEditEnter = false;
 
         break;
     //退格键
@@ -11005,15 +10976,23 @@ void MainWindow::setWM()
     this->setWindowModified(true);
 }
 
-void MainWindow::initCopyPasteLine()
+void MainWindow::init_CopyPasteLine()
 {
     listOfTableWidget.clear();
     listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
     for (int i = 0; i < listOfTableWidget.count(); i++) {
         QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
 
+        //w->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); //自适应宽度
+        for (int y = 0; y < w->columnCount(); y++) {
+            QString item = w->horizontalHeaderItem(y)->text();
+            if (item != tr("Enabled") && item != tr("Arch") && item != tr("All") && item != tr("Type") && item != tr("TextMode") && item != tr("Auxiliary") && item != tr("RealPath") && item != tr("Class"))
+                w->horizontalHeader()->setSectionResizeMode(y, QHeaderView::ResizeToContents);
+        }
+
         w->setContextMenuPolicy(Qt::CustomContextMenu);
         w->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
+        w->installEventFilter(this);
 
         // 拷贝当前列表头文本
         QAction* copyTableHeaderTextAction = new QAction(tr("CopyText"));
@@ -11036,11 +11015,19 @@ void MainWindow::initCopyPasteLine()
         QAction* cutAction = new QAction(tr("Cut Line"));
         QAction* copyAction = new QAction(tr("Copy Line"));
         QAction* pasteAction = new QAction(tr("Paste Line"));
+        QAction* showtipAction = new QAction(tr("Show Tips"));
         QMenu* popMenu = new QMenu(this);
 
         popMenu->addAction(cutAction);
         popMenu->addAction(copyAction);
         popMenu->addAction(pasteAction);
+        popMenu->addSeparator();
+        popMenu->addAction(showtipAction);
+
+        // 显示提示
+        connect(showtipAction, &QAction::triggered, [=]() {
+            myToolTip->popup(QCursor::pos(), "", w->toolTip());
+        });
 
         // 剪切行
         connect(cutAction, &QAction::triggered, [=]() {
@@ -11115,7 +11102,7 @@ void MainWindow::initCopyPasteLine()
             if (file.exists()) {
 
                 int rowCount = Reg.value("rowCount").toInt();
-                for (int i = 0; i < rowCount; i++) {
+                for (int i = rowCount - 1; i > -1; i--) {
 
                     loading = true;
 
@@ -11191,6 +11178,7 @@ void MainWindow::initCopyPasteLine()
             Q_UNUSED(pos);
 
             QString name = w->objectName();
+
             QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
             QFile file(qfile);
             if (file.exists()) {
@@ -11208,7 +11196,7 @@ void MainWindow::initCopyPasteLine()
                     text = text.replace("/", "-");
                     QString oldRightTable = Reg.value("CurrentDateTime").toString() + w->objectName() + text + ".ini";
                     QFileInfo fi(dirpath + oldRightTable);
-                    //qDebug() << dirpath + oldRightTable << text;
+
                     if (!fi.exists())
                         pasteAction->setEnabled(false);
                     else {
@@ -11263,6 +11251,11 @@ void MainWindow::initCopyPasteLine()
                 copyAction->setEnabled(true);
                 cutAction->setEnabled(true);
             }
+
+            if (w->toolTip() == "")
+                showtipAction->setVisible(false);
+            else
+                showtipAction->setVisible(true);
 
             popMenu->exec(QCursor::pos());
         });
@@ -11455,25 +11448,35 @@ void MainWindow::paintEvent(QPaintEvent* event)
 }
 
 bool MainWindow::eventFilter(QObject* obj, QEvent* event)
-
 {
+    //qDebug() << obj->metaObject()->className();
 
-    if (obj->metaObject()->className() == QStringLiteral("QLabel") || obj->metaObject()->className() == QStringLiteral("QCheckBox"))
+    if (obj->metaObject()->className() == QStringLiteral("QLabel") || obj->metaObject()->className() == QStringLiteral("QCheckBox") || obj->metaObject()->className() == QStringLiteral("QTableWidget"))
 
     {
+
         if (event->type() == QEvent::ToolTip) {
             QToolTip::hideText();
 
             event->ignore();
 
             return true; //不让事件继续传播
-
-        } else
-
-        {
-            return false;
         }
+
+        return false;
     }
 
     return MainWindow::eventFilter(obj, event);
+}
+
+void MainWindow::on_actionBug_Report_triggered()
+{
+    QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfig/issues"));
+    QDesktopServices::openUrl(url);
+}
+
+void MainWindow::on_actionDiscussion_Forum_triggered()
+{
+    QUrl url(QString("https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-auxiliary-tools/"));
+    QDesktopServices::openUrl(url);
 }
