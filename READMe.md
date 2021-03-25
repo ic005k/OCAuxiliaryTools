@@ -55,7 +55,11 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 
 ### Thanks for the support of the following open source software!
 
-[reillywatson](https://github.com/reillywatson/qtplist)&nbsp; &nbsp; &nbsp; &nbsp; [bluer007](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp; [microsoft](https://github.com/microsoft/winfile)
+[qtplist](https://github.com/reillywatson/qtplist)&nbsp; &nbsp; &nbsp; &nbsp;
+[FindESP](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp;
+[winfile](https://github.com/microsoft/winfile)&nbsp; &nbsp; &nbsp; &nbsp;
+[PlistCpp](https://github.com/animetrics/PlistCpp)&nbsp; &nbsp; &nbsp; &nbsp;
+[pugixml](https://github.com/zeux/pugixml)&nbsp; &nbsp; &nbsp; &nbsp;
 
 ## Discussion area:
 
