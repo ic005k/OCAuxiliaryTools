@@ -59,7 +59,7 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 [FindESP](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp;
 [winfile](https://github.com/microsoft/winfile)&nbsp; &nbsp; &nbsp; &nbsp;
 [PlistCpp](https://github.com/animetrics/PlistCpp)&nbsp; &nbsp; &nbsp; &nbsp;
-[pugixml](https://github.com/zeux/pugixml)&nbsp; &nbsp; &nbsp; &nbsp;
+[pugixml](https://github.com/zeux/pugixml)&nbsp;
 
 ## Discussion area:
 
