@@ -60,10 +60,10 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 
 ### 感谢以下开源软件的支持！
 
-[qtplist](https://github.com/reillywatson/qtplist)
-[FindESP](https://github.com/bluer007/FindESP)
-[winfile](https://github.com/microsoft/winfile)
-[PlistCpp](https://github.com/animetrics/PlistCpp)
+[qtplist](https://github.com/reillywatson/qtplist)&nbsp; &nbsp; &nbsp; &nbsp;
+[FindESP](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp;
+[winfile](https://github.com/microsoft/winfile)&nbsp; &nbsp; &nbsp; &nbsp;
+[PlistCpp](https://github.com/animetrics/PlistCpp)&nbsp; &nbsp; &nbsp; &nbsp;
 [pugixml](https://github.com/zeux/pugixml)
 
 ## 讨论区：
