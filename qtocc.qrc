@@ -39,5 +39,6 @@
         <file>icon/rp.png</file>
         <file>widgets_zh_cn.qm</file>
         <file>icon/newver.png</file>
+        <file>icon/overror.png</file>
     </qresource>
 </RCC>

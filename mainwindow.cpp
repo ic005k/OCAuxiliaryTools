@@ -33,7 +33,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    test(false);
     CurVerison = "20210327";
     title = "OC Auxiliary Tools   V0.6.8    " + CurVerison + "        [*] ";
     setWindowTitle(title);
@@ -135,8 +134,6 @@ MainWindow::MainWindow(QWidget* parent)
     ui->gridLayout_29->setMargin(0);
     ui->gridLayout_30->setMargin(0);
     ui->gridLayout_59->setMargin(0);
-
-    //ui->gridLayout_43->setMargin(0);
 
     ui->gridLayout_69->setMargin(0);
 
@@ -279,6 +276,11 @@ void MainWindow::openFile(QString PlistFileName)
     this->setWindowModified(false);
 
     undoStack->clear();
+
+    if (!RefreshAllDatabase) {
+        OpenFileValidate = true;
+        on_btnOcvalidate();
+    }
 }
 
 void MainWindow::on_btnOpen()
@@ -289,87 +291,6 @@ void MainWindow::on_btnOpen()
         "Config file(*.plist);;All files(*.*)");
 
     openFile(PlistFileName);
-}
-
-void MainWindow::on_btnTestWrite_clicked()
-{
-    QString plistPath = QDir::homePath() + "/xx.plist";
-    qDebug() << plistPath;
-
-    // QString  plistPath = "E:/xxx.plist";
-
-    QSettings Reg(plistPath, QSettings::NativeFormat);
-
-    Reg.setValue("ACPI", true);
-    qDebug() << Reg.value("ACPI");
-
-    int i = 1;
-    QString str_key = "/key";
-    QString str_class = "/class";
-    QString str_value = "/value";
-
-    Reg.setValue(QString::number(i) + str_key, "key1");
-    Reg.setValue("1/class", "class1");
-    Reg.setValue("1/value", "value1");
-
-    qDebug() << Reg.value("1/key").toString();
-    qDebug() << Reg.value("1/class").toString();
-    qDebug() << Reg.value("1/value").toString();
-}
-
-void MainWindow::on_btnParse_clicked()
-{
-    QByteArray sample = "\
-            <?xml version=\"1.0\" encoding=\"UTF-8\"?>\
-            <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\
-            <plist version=\"1.0\">\
-            <dict>\
-            <key>SomeKey</key>\
-            <string>Value1</string>\
-            <key>MyOtherKey</key>\
-            <string>Value2</string>\
-            </dict>\
-            </plist>";
-    QBuffer buffer(&sample);
-    // QVariantMap map = PListParser::parsePList(&buffer).toMap();
-    QFile file(QDir::homePath() + "/com.xx.plist");
-    QVariantMap map = PListParser::parsePList(&file).toMap();
-    // QString val = map["test"].toString();
-    qDebug() << map.firstKey();
-    qDebug() << map.lastKey();
-    qDebug() << map.keys();
-    qDebug() << map.count();
-
-    map = map["ACPI"].toMap();
-    QVariantList map2 = map["Add"].toList();
-    qDebug() << map2.at(0) << map2.count();
-    QVariantMap map3 = map2.at(0).toMap();
-    qDebug() << map3["Comment"].toString();
-    qDebug() << map3["Enabled"].toBool();
-    qDebug() << map3["Path"].toString();
-}
-
-void MainWindow::on_btnSerialize_clicked()
-{
-    QFile file(QDir::homePath() + "/com.xx.plist");
-    QVariantMap map = PListParser::parsePList(&file).toMap();
-
-    QVariantMap foo;
-    QVariantMap sub;
-    // sub = foo["SomeKey"].toMap();
-    QString data = "2147483648";
-    sub["test"] = 12345;
-    qDebug() << data.toLongLong();
-    sub["A"] = 1;
-
-    foo["SomeOtherKey"] = sub;
-
-    foo["test2"] = true;
-    foo["test3"] = data.toLongLong();
-
-    // qDebug() << "PList:\n" << PListSerializer::toPList(foo).toNSString();
-
-    PListSerializer::toPList(foo, QDir::homePath() + "/test.plist");
 }
 
 void MainWindow::ParserACPI(QVariantMap map)
@@ -2698,6 +2619,11 @@ void MainWindow::SavePlist(QString FileName)
     if (closeSave) {
         clear_temp_data();
     }
+
+    if (!RefreshAllDatabase) {
+        ui->btnOcvalidate->setIcon(QIcon(":/icon/ov.png"));
+        ui->btnOcvalidate->setToolTip(ui->btnOcvalidate->text());
+    }
 }
 
 QVariantMap MainWindow::SaveACPI()
@@ -3842,49 +3768,6 @@ void MainWindow::on_btnKernelPatchDel_clicked()
     del_item(ui->table_kernel_patch);
 }
 
-void MainWindow::on_btnQuickOpen1_clicked()
-{
-
-    QString FileName = QDir::homePath() + "/Sample.plist";
-
-    QFile file(FileName);
-    QVariantMap map = PListParser::parsePList(&file).toMap();
-
-    loading = true;
-
-    ParserACPI(map);
-    ParserBooter(map);
-    ParserDP(map);
-    ParserKernel(map);
-    ParserMisc(map);
-    ParserNvram(map);
-    ParserPlatformInfo(map);
-    ParserUEFI(map);
-
-    loading = false;
-}
-
-void MainWindow::on_btnQuickOpen2_clicked()
-{
-    QString FileName = QDir::homePath() + "/SampleFull.plist";
-
-    QFile file(FileName);
-    QVariantMap map = PListParser::parsePList(&file).toMap();
-
-    loading = true;
-
-    ParserACPI(map);
-    ParserBooter(map);
-    ParserDP(map);
-    ParserKernel(map);
-    ParserMisc(map);
-    ParserNvram(map);
-    ParserPlatformInfo(map);
-    ParserUEFI(map);
-
-    loading = false;
-}
-
 void MainWindow::add_item(QTableWidget* table, int total_column)
 {
     int t = table->rowCount();
@@ -4880,14 +4763,6 @@ void MainWindow::on_btnKernelAdd_Down_clicked()
     t->setCurrentCell(cr + 1, t->currentColumn());
 
     this->setWindowModified(true);
-}
-
-void MainWindow::test(bool test)
-{
-    if (test) {
-
-    } else {
-    }
 }
 
 void MainWindow::on_btnSaveAs()
@@ -7342,6 +7217,10 @@ void MainWindow::init_Menu()
     ui->listSub->setStyleSheet(listStyle);
 
     ui->listMain->setIconSize(QSize(35, 35));
+    if (win)
+        ui->toolBar->setIconSize(QSize(36, 36));
+    if (linuxOS)
+        ui->toolBar->setIconSize(QSize(32, 32));
     if (win) {
         ui->listMain->setMaximumHeight(75);
         ui->listSub->setMaximumHeight(30);
@@ -7976,6 +7855,7 @@ void MainWindow::on_table_uefi_drivers_cellClicked(int row, int column)
 
 void MainWindow::on_btnOcvalidate()
 {
+
     QFileInfo appInfo(qApp->applicationDirPath());
     chkdata = new QProcess;
 #ifdef Q_OS_WIN32
@@ -8004,17 +7884,32 @@ void MainWindow::readResultCheckData()
     if (result.trimmed() == "Failed to read")
         return;
 
-    QMessageBox box;
-
-    if (result.contains("No issues found")) {
+    if (result.contains("No issues found") || result.contains("No is")) {
         str = tr("OK !");
         strMsg = result + "\n\n" + str;
 
-    } else
+        ui->btnOcvalidate->setIcon(QIcon(":/icon/ov.png"));
+        ui->btnOcvalidate->setToolTip(ui->btnOcvalidate->text());
+
+    } else {
+
         strMsg = result;
+
+        if (OpenFileValidate) {
+
+            ui->btnOcvalidate->setIcon(QIcon(":/icon/overror.png"));
+            ui->btnOcvalidate->setToolTip(tr("The configuration file is not compatible with the current OC version."));
+        }
+    }
+
+    if (OpenFileValidate) {
+        OpenFileValidate = false;
+        return;
+    }
 
     this->setFocus();
 
+    QMessageBox box;
     QMessageBox::StandardButton btn = box.information(NULL, NULL, strMsg, QMessageBox::Ok);
 
     switch (btn) {
@@ -11242,7 +11137,7 @@ void MainWindow::init_CopyPasteLine()
                 cutAction->setEnabled(true);
             }
 
-            if (w->toolTip() == "")
+            if (w->toolTip().trimmed() == "")
                 showtipAction->setVisible(false);
             else
                 showtipAction->setVisible(true);

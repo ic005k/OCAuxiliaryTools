@@ -60,6 +60,7 @@ public:
     ~MainWindow();
 
     bool lineEditEnter = false;
+    bool RefreshAllDatabase = false;
 
     bool mac = false;
     bool win = false;
@@ -175,8 +176,6 @@ public:
 
     QString title;
     bool loading = false;
-
-    void test(bool test);
 
     void about();
 
@@ -783,6 +782,7 @@ private:
     Ui::MainWindow* ui;
 
     bool autoCheckUpdate = false;
+    bool OpenFileValidate = false;
 
     QString orgComboBoxStyle;
     QString orgLineEditStyle;
@@ -875,16 +875,6 @@ private:
     bool osx1012 = false;
 
     void clear_temp_data();
-
-    void on_btnParse_clicked();
-
-    void on_btnSerialize_clicked();
-
-    void on_btnQuickOpen1_clicked();
-
-    void on_btnQuickOpen2_clicked();
-
-    void on_btnTestWrite_clicked();
 
     QUndoStack* undoStack = nullptr;
     QUndoView* undoView = nullptr;

@@ -124,6 +124,11 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column)
 
 void dlgDatabase::on_btnRefreshAll_clicked()
 {
+    ui->btnRefreshAll->setEnabled(false);
+    this->repaint();
+
+    mw_one->RefreshAllDatabase = true;
+
     QString bakFile;
     if (!SaveFileName.isEmpty()) {
         bakFile = SaveFileName;
@@ -143,4 +148,9 @@ void dlgDatabase::on_btnRefreshAll_clicked()
 
     if (!bakFile.isEmpty())
         mw_one->openFile(bakFile);
+
+    mw_one->RefreshAllDatabase = false;
+
+    ui->btnRefreshAll->setEnabled(true);
+    this->repaint();
 }

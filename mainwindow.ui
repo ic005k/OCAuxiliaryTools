@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -842,7 +842,7 @@ This works around firmware that provide a BGRT table but fail to handle screen u
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -963,9 +963,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
            <layout class="QGridLayout" name="gridLayout_38">
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="table_Booter_patch">
-              <property name="toolTip">
-               <string/>
-              </property>
               <property name="rowCount">
                <number>0</number>
               </property>
