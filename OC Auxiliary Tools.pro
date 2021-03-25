@@ -32,6 +32,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Plist.cpp \
+    PlistDate.cpp \
     aboutdialog.cpp \
     commands.cpp \
     dlgdatabase.cpp \
@@ -40,17 +42,23 @@ SOURCES += \
     myapp.cpp \
     plistparser.cpp \
     plistserializer.cpp \
+    pugixml.cpp \
     recentfiles.cpp \
     tooltip.cpp
 
 HEADERS += \
+    Plist.hpp \
+    PlistDate.hpp \
     aboutdialog.h \
+    base64.hpp \
     commands.h \
     dlgdatabase.h \
     mainwindow.h \
     myapp.h \
     plistparser.h \
     plistserializer.h \
+    pugiconfig.hpp \
+    pugixml.hpp \
     recentfiles.h \
     tooltip.h
 

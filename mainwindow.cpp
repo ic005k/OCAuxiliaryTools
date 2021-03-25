@@ -5,6 +5,12 @@
 
 #include "ui_mainwindow.h"
 
+#include "Plist.hpp"
+#include <fstream>
+#include <iostream>
+#include <iterator>
+using namespace std;
+
 #include <QBuffer>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -28,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     test(false);
-    CurVerison = "20210325";
+    CurVerison = "20210327";
     title = "OC Auxiliary Tools   V0.6.8    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -9623,22 +9629,6 @@ QObjectList MainWindow::getAllComboBox(QObjectList lstUIControls)
 
 void MainWindow::on_pushButton_clicked()
 {
-    listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabACPI));
-    for (int i = 0; i < listOfCheckBox.size(); i++) {
-        QString name = listOfCheckBox.at(i)->objectName();
-        //qDebug() << listOfCheckBox.at(i)->objectName();
-        QCheckBox* chkBox = (QCheckBox*)listOfCheckBox.at(i);
-        qDebug() << chkBox->text();
-        if (name.contains("Status")) {
-
-            QString style = "QCheckBox{background-color:rgb(255,0,0,255);color:rgb(255,255,255);}";
-
-            chkBox->setStyleSheet(style);
-
-            chkBox->setText(chkBox->text() + "99999");
-        }
-    }
-    qDebug() << listOfCheckBox.count();
 }
 
 void MainWindow::on_actionFind_triggered()
