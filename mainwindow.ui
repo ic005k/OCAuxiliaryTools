@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -75,14 +75,14 @@
        <attribute name="title">
         <string>ACPI</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_52">
+       <layout class="QGridLayout" name="gridLayout_43">
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabACPI">
           <property name="tabShape">
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -92,6 +92,18 @@
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item row="0" column="0" colspan="3">
              <widget class="QTableWidget" name="table_acpi_add">
               <property name="toolTip">
@@ -842,7 +854,7 @@ This works around firmware that provide a BGRT table but fail to handle screen u
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1912,7 +1924,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2311,7 +2323,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
              <item row="1" column="0">
               <widget class="QLabel" name="label">
                <property name="toolTip">
-                <string>This property serves for two needs:
+                <string notr="true">This property serves for two needs:
 
 • Enabling support of an unsupported CPU model.
 
@@ -2424,7 +2436,7 @@ Cpuid1Mask: FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
              <item row="6" column="0">
               <widget class="QCheckBox" name="chkDummyPowerManagement">
                <property name="toolTip">
-                <string>Note 1 : This option is a preferred alternative to NullCpuPowerManagement.kext for CPUs without native power management driver in macOS.
+                <string notr="true">Note 1 : This option is a preferred alternative to NullCpuPowerManagement.kext for CPUs without native power management driver in macOS.
 
 Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManagement on unsupported platforms,it can also be used to disable this kext in other situations (e.g. with Cpuid1Data left blank).
 
@@ -2462,7 +2474,7 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
              <item row="0" column="1">
               <widget class="QCheckBox" name="chkAppleXcpmCfgLock">
                <property name="toolTip">
-                <string>Note: This option should be avoided whenever possible. See AppleCpuPmCfgLock description for more details.
+                <string notr="true">Note: This option should be avoided whenever possible. See AppleCpuPmCfgLock description for more details.
 
 ----
 
@@ -2480,7 +2492,7 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
              <item row="1" column="0">
               <widget class="QCheckBox" name="chkCustomSMBIOSGuid">
                <property name="toolTip">
-                <string> Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops.
+                <string notr="true"> Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops.
 
 ----
 
@@ -2497,7 +2509,7 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
              <item row="4" column="1">
               <widget class="QCheckBox" name="chkXhciPortLimit">
                <property name="toolTip">
-                <string>Note: This option should be avoided whenever possible. USB port limit is imposed by the amount of used bits in locationID format and there is no possible way to workaround this without heavy OS modification. 
+                <string notr="true">Note: This option should be avoided whenever possible. USB port limit is imposed by the amount of used bits in locationID format and there is no possible way to workaround this without heavy OS modification. 
 
 The only valid solution is to limit the amount of used ports to 15 (discarding some). More details can be found on AppleLife.ru.
 
@@ -2519,7 +2531,7 @@ The only valid solution is to limit the amount of used ports to 15 (discarding s
              <item row="3" column="2">
               <widget class="QCheckBox" name="chkPanicNoKextDump">
                <property name="toolTip">
-                <string>Requirement: 10.13 (not required for older)
+                <string notr="true">Requirement: 10.13 (not required for older)
 
 Description: Prevent kernel from printing kext dump in the panic log preventing from observing panic details.
 
@@ -2545,7 +2557,7 @@ Affects 10.13 and above.
              <item row="3" column="0">
               <widget class="QCheckBox" name="chkLapicKernelPanic">
                <property name="toolTip">
-                <string>Disables kernel panic on LAPIC interrupts.
+                <string notr="true">Disables kernel panic on LAPIC interrupts.
 
 ----
 
@@ -2562,7 +2574,7 @@ Affects 10.13 and above.
              <item row="4" column="0">
               <widget class="QCheckBox" name="chkThirdPartyDrives">
                <property name="toolTip">
-                <string>Note: This option may be avoided on user preference. NVMe SSDs are compatible without the change. 
+                <string notr="true">Note: This option may be avoided on user preference. NVMe SSDs are compatible without the change. 
 
 For AHCI SSDs on modern macOS version there is a dedicated built-in utility called trimforce. Starting from 10.15 this utility creates EnableTRIM variable in APPLE_BOOT_VARIABLE_GUID namespace with 01 00 00 00 value.
 
@@ -2585,7 +2597,7 @@ For AHCI SSDs on modern macOS version there is a dedicated built-in utility call
              <item row="3" column="1">
               <widget class="QCheckBox" name="chkLegacyCommpage">
                <property name="toolTip">
-                <string>Replaces the default 64-bit commpage bcopy implementation with one that does not require SSSE3, useful for legacy platforms. This prevents a commpage no match for last panic due to no available 64-bit bcopy functions that do not require SSSE3.
+                <string notr="true">Replaces the default 64-bit commpage bcopy implementation with one that does not require SSSE3, useful for legacy platforms. This prevents a commpage no match for last panic due to no available 64-bit bcopy functions that do not require SSSE3.
 
 ----
 
@@ -2602,7 +2614,7 @@ For AHCI SSDs on modern macOS version there is a dedicated built-in utility call
              <item row="1" column="1">
               <widget class="QCheckBox" name="chkDisableIoMapper">
                <property name="toolTip">
-                <string>Note: This option is a preferred alternative to deleting DMAR ACPI table and disabling VT-d in firmware preferences,which does not break VT-d support in other systems in case they need it.
+                <string notr="true">Note: This option is a preferred alternative to deleting DMAR ACPI table and disabling VT-d in firmware preferences,which does not break VT-d support in other systems in case they need it.
 
 ----
 
@@ -2619,7 +2631,7 @@ For AHCI SSDs on modern macOS version there is a dedicated built-in utility call
              <item row="0" column="3">
               <widget class="QCheckBox" name="chkAppleXcpmForceBoost">
                <property name="toolTip">
-                <string>This patch writes 0xFF00 to MSR_IA32_PERF_CONTROL (0x199), effectively setting maximum multiplier for all the time.
+                <string notr="true">This patch writes 0xFF00 to MSR_IA32_PERF_CONTROL (0x199), effectively setting maximum multiplier for all the time.
 
 Note: While this may increase the performance, this patch is strongly discouraged on all systems but those explicitly dedicated to scientific or media calculations. In general only certain Xeon models benefit from the patch.
 
@@ -2640,7 +2652,7 @@ Note: While this may increase the performance, this patch is strongly discourage
              <item row="0" column="2">
               <widget class="QCheckBox" name="chkAppleXcpmExtraMsrs">
                <property name="toolTip">
-                <string>This is normally used in conjunction with Emulate section on Haswell-E, Broadwell-E, Skylake-SP, and similar CPUs. More details on the XCPM patches are outlined in acidanthera bugtracker#365.
+                <string notr="true">This is normally used in conjunction with Emulate section on Haswell-E, Broadwell-E, Skylake-SP, and similar CPUs. More details on the XCPM patches are outlined in acidanthera bugtracker#365.
 
 Note: Additional not provided patches will be required for Ivy Bridge or Pentium CPUs. It is recommended to use AppleIntelCpuPowerManagement.kext for the former.
 
@@ -2661,7 +2673,7 @@ Note: Additional not provided patches will be required for Ivy Bridge or Pentium
              <item row="0" column="0">
               <widget class="QCheckBox" name="chkAppleCpuPmCfgLock">
                <property name="toolTip">
-                <string>Certain firmwares lock PKG_CST_CONFIG_CONTROL MSR register. 
+                <string notr="true">Certain firmwares lock PKG_CST_CONFIG_CONTROL MSR register. 
 
 To check its state one can use bundled VerifyMsrE2 tool. Select firmwares have this register locked on some cores only.
 
@@ -2707,7 +2719,7 @@ Warning: Variable offsets are unique not only to each motherboard but even to it
              <item row="1" column="3">
               <widget class="QCheckBox" name="chkDisableRtcChecksum">
                <property name="toolTip">
-                <string>Note 1 : This option will not protect other areas from being overwritten, see RTCMemoryFixup kernel extension if this is desired.
+                <string notr="true">Note 1 : This option will not protect other areas from being overwritten, see RTCMemoryFixup kernel extension if this is desired.
 
 Note 2 : This option will not protect areas from being overwritten at firmware stage (e.g. macOS bootloader), see AppleRtcRam protocol description if this is desired.
 
@@ -2728,7 +2740,7 @@ Note 2 : This option will not protect areas from being overwritten at firmware s
              <item row="1" column="2">
               <widget class="QCheckBox" name="chkDisableLinkeditJettison">
                <property name="toolTip">
-                <string>This option lets Lilu.kext and possibly some others function in macOS Big Sur with best performance without keepsyms=1 boot argument.
+                <string notr="true">This option lets Lilu.kext and possibly some others function in macOS Big Sur with best performance without keepsyms=1 boot argument.
 
 ----
 
@@ -2745,7 +2757,7 @@ Note 2 : This option will not protect areas from being overwritten at firmware s
              <item row="2" column="3">
               <widget class="QCheckBox" name="chkIncreasePciBarSize">
                <property name="toolTip">
-                <string>Note: This option should be avoided whenever possible. In general the necessity of this option means misconfigured or broken firmware.
+                <string notr="true">Note: This option should be avoided whenever possible. In general the necessity of this option means misconfigured or broken firmware.
 
 ----
 
@@ -2762,7 +2774,7 @@ Note 2 : This option will not protect areas from being overwritten at firmware s
              <item row="2" column="1">
               <widget class="QCheckBox" name="chkExternalDiskIcons">
                <property name="toolTip">
-                <string>Note: This option should be avoided whenever possible. Modern firmwares usually have compatible AHCI controllers.
+                <string notr="true">Note: This option should be avoided whenever possible. Modern firmwares usually have compatible AHCI controllers.
 
 ----
 
@@ -2779,7 +2791,7 @@ Note 2 : This option will not protect areas from being overwritten at firmware s
              <item row="2" column="2">
               <widget class="QCheckBox" name="chkForceSecureBootScheme">
                <property name="toolTip">
-                <string>Note: This option is required on virtual machines when using SecureBootModel different from x86legacy.
+                <string notr="true">Note: This option is required on virtual machines when using SecureBootModel different from x86legacy.
 
 ----
 
@@ -2796,7 +2808,7 @@ Note 2 : This option will not protect areas from being overwritten at firmware s
              <item row="2" column="0">
               <widget class="QCheckBox" name="chkExtendBTFeatureFlags">
                <property name="toolTip">
-                <string>Note: This option is a substitution for BT4LEContinuityFixup.kext, which does not function properly due to late patching progress.
+                <string notr="true">Note: This option is a substitution for BT4LEContinuityFixup.kext, which does not function properly due to late patching progress.
 
 ----
 
@@ -2814,7 +2826,7 @@ Note 2 : This option will not protect areas from being overwritten at firmware s
              <item row="3" column="3">
               <widget class="QCheckBox" name="chkPowerTimeoutKernelPanic">
                <property name="toolTip">
-                <string>An additional security measure was added to macOS Catalina (10.15) causing kernel panic on power change timeout for Apple drivers. 
+                <string notr="true">An additional security measure was added to macOS Catalina (10.15) causing kernel panic on power change timeout for Apple drivers. 
 
 Sometimes it may cause issues on misconfigured hardware, notably digital audio, which sometimes fails to wake up. 
 
@@ -2900,7 +2912,7 @@ trim.</string>
              <item row="0" column="0">
               <widget class="QCheckBox" name="chkFuzzyMatch">
                <property name="toolTip">
-                <string>On macOS 10.6 and earlier kernelcache filename has a checksum, which essentially is adler32 from SMBIOS product name and EfiBoot device path. 
+                <string notr="true">On macOS 10.6 and earlier kernelcache filename has a checksum, which essentially is adler32 from SMBIOS product name and EfiBoot device path. 
 
 On certain firmwares EfiBoot device path differs between UEFI and macOS due to ACPI or hardware specifics, rendering kernelcache checksum as always different.
 
@@ -2925,7 +2937,7 @@ This setting allows matching the latest kernelcache with a suitable architecture
              <item row="5" column="0">
               <widget class="QLabel" name="label_42">
                <property name="toolTip">
-                <string>Different variants of macOS support different kernel caching variants designed to improve boot performance. 
+                <string notr="true">Different variants of macOS support different kernel caching variants designed to improve boot performance. 
 
 This setting allows to prevent using faster kernel caching variants if slower variants are available for debugging and stability reasons. I.e. by specifying Mkext one will disable Prelinked for e.g. 10.6 but not 10.7.
 
@@ -2946,7 +2958,7 @@ This setting allows to prevent using faster kernel caching variants if slower va
              <item row="4" column="0">
               <widget class="QLabel" name="label_43">
                <property name="toolTip">
-                <string>On macOS 10.7 and earlier XNU kernel can boot with architectures different from the usual x86_64. 
+                <string notr="true">On macOS 10.7 and earlier XNU kernel can boot with architectures different from the usual x86_64. 
 
 This setting will use the specified architecture to boot macOS when it is supported by the macOS and the configuration:
 
@@ -5018,7 +5030,7 @@ Valid values:
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -6623,7 +6635,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               <item row="3" column="4">
                <widget class="QLabel" name="label_87">
                 <property name="toolTip">
-                 <string>SMBIOS: System Enclosure or Chassis (Type 3) — Manufacturer
+                 <string notr="true">SMBIOS: System Enclosure or Chassis (Type 3) — Manufacturer
 Description: Board manufacturer. All rules of SystemManufacturer do apply.
 ----
 SMBIOS：系统外壳或机箱(类型3)-制造商
@@ -6640,7 +6652,7 @@ SMBIOS：系统外壳或机箱(类型3)-制造商
               <item row="3" column="2">
                <widget class="QLabel" name="label_85">
                 <property name="toolTip">
-                 <string>Chassis type name. Varies, could be empty or MacBook-Aluminum.
+                 <string notr="true">Chassis type name. Varies, could be empty or MacBook-Aluminum.
 ----
 机箱类型名称。可能是空的，也可能是 MacBook-Aluminum。</string>
                 </property>
@@ -6661,7 +6673,7 @@ SMBIOS：系统外壳或机箱(类型3)-制造商
               <item row="5" column="0">
                <widget class="QLabel" name="label_68">
                 <property name="toolTip">
-                 <string> 64-bit firmware features bitmask. Refer to AppleFeatures.h for more details. Lower 32 bits match FirmwareFeatures. Upper 64 bits match ExtendedFirmwareFeatures.
+                 <string notr="true"> 64-bit firmware features bitmask. Refer to AppleFeatures.h for more details. Lower 32 bits match FirmwareFeatures. Upper 64 bits match ExtendedFirmwareFeatures.
 ----
  64位固件具有位掩码功能。更多细节请参考AppleFeatures.h。低32位匹配FirmwareFeatures。高64位匹配ExtendedFirmwareFeatures。</string>
                 </property>
@@ -6677,7 +6689,7 @@ SMBIOS：系统外壳或机箱(类型3)-制造商
               <item row="6" column="2">
                <widget class="QLabel" name="label_76">
                 <property name="toolTip">
-                 <string>ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when zero.
+                 <string notr="true">ASCII string containing SMC version in upper case. Missing on T2 based Macs. Ignored when zero.
 ----
 包含大写的SMC版本的ASCII字符串。在基于T2的Mac上缺失。为零时忽略。</string>
                 </property>
@@ -6696,7 +6708,7 @@ SMBIOS：系统外壳或机箱(类型3)-制造商
               <item row="5" column="4">
                <widget class="QLabel" name="label_72">
                 <property name="toolTip">
-                 <string> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to not provide this table.
+                 <string notr="true"> Platform features bitmask. Refer to AppleFeatures.h for more details. Use 0xFFFFFFFF value to not provide this table.
 ----
  平台功能位掩码。更多细节请参考AppleFeatures.h。使用0xFFFFFFFF值不提供此表。</string>
                 </property>
@@ -6715,7 +6727,7 @@ SMBIOS：系统外壳或机箱(类型3)-制造商
               <item row="7" column="2">
                <widget class="QLabel" name="label_82">
                 <property name="toolTip">
-                 <string> Preferred Mac model used to mark the device as supported by the operating system. 
+                 <string notr="true"> Preferred Mac model used to mark the device as supported by the operating system. 
 This value must be specified by any configuration for later automatic generation of the related values in this and other SMBIOS tables and related configuration parameters. If SystemProductName is not compatible with the target operating system, -no_compat_check boot argument may be used as an override.
 
 Note: If SystemProductName is unknown, and related fields are unspecified, default values should be assumed as being set to MacPro6,1 data. The list of known products can be found in AppleModels.
@@ -6742,7 +6754,7 @@ Note: If SystemProductName is unknown, and related fields are unspecified, defau
               <item row="4" column="0">
                <widget class="QLabel" name="label_89">
                 <property name="toolTip">
-                 <string>SMBIOS: System Enclosure or Chassis (Type 3) — Version
+                 <string notr="true">SMBIOS: System Enclosure or Chassis (Type 3) — Version
 
 Description: Should match SystemSerialNumber.
 ----
@@ -6767,7 +6779,7 @@ SMBIOS：系统外壳或机箱(类型3)----版本。
               <item row="1" column="4">
                <widget class="QLabel" name="label_75">
                 <property name="toolTip">
-                 <string> Board manufacturer. All rules of SystemManufacturer do apply.
+                 <string notr="true"> Board manufacturer. All rules of SystemManufacturer do apply.
 
 ----
 
@@ -6784,7 +6796,7 @@ SMBIOS：系统外壳或机箱(类型3)----版本。
               <item row="0" column="4">
                <widget class="QLabel" name="label_69">
                 <property name="toolTip">
-                 <string> Firmware version. 
+                 <string notr="true"> Firmware version. 
 
 This value gets updated and takes part in update delivery configuration and macOS version compatibility. This value could look like MM71.88Z.0234.B00.1809171422 in older firmwares,and is described in BiosId.h. In newer firmwares it should look like 236.0.0.0.0 or 220.230.16.0.0 (iBridge: 16.16.2542.0.0,0). iBridge version is read from BridgeOSVersion variable, and is only present on macs with T2.
 
@@ -6808,7 +6820,7 @@ This value gets updated and takes part in update delivery configuration and macO
               <item row="0" column="2">
                <widget class="QLabel" name="label_67">
                 <property name="toolTip">
-                 <string> BIOS Vendor. All rules of SystemManufacturer do apply.
+                 <string notr="true"> BIOS Vendor. All rules of SystemManufacturer do apply.
 ----
  BIOS供应商。所有SystemManufacturer的规则都适用。</string>
                 </property>
@@ -6829,7 +6841,7 @@ This value gets updated and takes part in update delivery configuration and macO
               <item row="6" column="0">
                <widget class="QLabel" name="label_74">
                 <property name="toolTip">
-                 <string> Combined of Processor Major and Minor types.
+                 <string notr="true"> Combined of Processor Major and Minor types.
 ----
  处理器主类型和次类型的组合。</string>
                 </property>
@@ -6856,7 +6868,7 @@ This value gets updated and takes part in update delivery configuration and macO
               <item row="1" column="2">
                <widget class="QLabel" name="label_73">
                 <property name="toolTip">
-                 <string>SMBIOS: Baseboard (or Module) Information (Type 2) — Location in Chassis
+                 <string notr="true">SMBIOS: Baseboard (or Module) Information (Type 2) — Location in Chassis
 
 Description: Varies, may be empty or Part Component.
 ----
@@ -6883,7 +6895,7 @@ SMBIOS：底板（或模块）信息（类型2）--在机箱中的位置。
               <item row="1" column="0">
                <widget class="QLabel" name="label_71">
                 <property name="toolTip">
-                 <string>Asset tag number. Varies, may be empty or Type2 - Board Asset Tag.
+                 <string notr="true">Asset tag number. Varies, may be empty or Type2 - Board Asset Tag.
 ----
 资产标签号。可能为空或2类板资产标签。</string>
                 </property>
@@ -6898,7 +6910,7 @@ SMBIOS：底板（或模块）信息（类型2）--在机箱中的位置。
               <item row="5" column="2">
                <widget class="QLabel" name="label_92">
                 <property name="toolTip">
-                 <string> Supported bits of extended firmware features bitmask. Refer to AppleFeatures.h for more details.
+                 <string notr="true"> Supported bits of extended firmware features bitmask. Refer to AppleFeatures.h for more details.
 
 Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFeaturesMask.
 ----
@@ -6918,7 +6930,7 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
               <item row="2" column="4">
                <widget class="QLabel" name="label_81">
                 <property name="toolTip">
-                 <string> Either 0xA (Motherboard (includes processor, memory, and I/O) or 0xB (Processor/Memory Module), refer to Table 15 – Baseboard: Board Type for more details.
+                 <string notr="true"> Either 0xA (Motherboard (includes processor, memory, and I/O) or 0xB (Processor/Memory Module), refer to Table 15 – Baseboard: Board Type for more details.
 ----
  0xA(主板(包括处理器、内存和I/O)或0xB(处理器/内存模块)，请参阅表15 - 基板。更多详情请参考表15 - 基板：板型。</string>
                 </property>
@@ -6934,7 +6946,7 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
               <item row="7" column="0">
                <widget class="QLabel" name="label_80">
                 <property name="toolTip">
-                 <string> OEM manufacturer of the particular board. Shall not be specified unless strictly required. 
+                 <string notr="true"> OEM manufacturer of the particular board. Shall not be specified unless strictly required. 
 
 Should not contain Apple Inc., as this confuses numerous services present in the operating system, such as firmware updates, eficheck, as well as kernel extensions developed in Acidanthera, such as Lilu and its plugins. 
 
@@ -6959,7 +6971,7 @@ In addition it will also make some operating systems like Linux unbootable.
               <item row="2" column="0">
                <widget class="QLabel" name="label_77">
                 <property name="toolTip">
-                 <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models.
+                 <string notr="true">Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models.
 ----
 Mac板ID（board-id）。可能看起来像Mac-7BA5B2D9E42DDD94或旧型号的Mac-F221BEC8。</string>
                 </property>
@@ -6975,7 +6987,7 @@ Mac板ID（board-id）。可能看起来像Mac-7BA5B2D9E42DDD94或旧型号的Ma
               <item row="7" column="4">
                <widget class="QLabel" name="label_84">
                 <property name="toolTip">
-                 <string>Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.
+                 <string notr="true">Mac Board ID (board-id). May look like Mac-7BA5B2D9E42DDD94 or Mac-F221BEC8 in older models. Sometimes it can be just empty.
 ----
 Mac板ID（board-id）。可能看起来像 Mac-7BA5B2D9E42DDD94 或旧型号的 Mac-F221BEC8。有时它可能是空的。</string>
                 </property>
@@ -6993,7 +7005,7 @@ Mac板ID（board-id）。可能看起来像 Mac-7BA5B2D9E42DDD94 或旧型号的
               <item row="2" column="2">
                <widget class="QLabel" name="label_79">
                 <property name="toolTip">
-                 <string>Board serial number in defined format. Known formats are described in macserial.
+                 <string notr="true">Board serial number in defined format. Known formats are described in macserial.
 ----
 板上的序列号以定义的格式表示。已知的格式在macserial中描述。</string>
                 </property>
@@ -7008,7 +7020,7 @@ Mac板ID（board-id）。可能看起来像 Mac-7BA5B2D9E42DDD94 或旧型号的
               <item row="6" column="4">
                <widget class="QLabel" name="label_78">
                 <property name="toolTip">
-                 <string>Family name. May look like iMac Pro.
+                 <string notr="true">Family name. May look like iMac Pro.
 ----
 家族名。可能看起来像iMac Pro。</string>
                 </property>
@@ -7023,7 +7035,7 @@ Mac板ID（board-id）。可能看起来像 Mac-7BA5B2D9E42DDD94 或旧型号的
               <item row="3" column="0">
                <widget class="QLabel" name="label_83">
                 <property name="toolTip">
-                 <string>Board version number. Varies, may match SystemProductName or SystemProductVersion.
+                 <string notr="true">Board version number. Varies, may match SystemProductName or SystemProductVersion.
 ----
 板的版本号。可能与SystemProductName或SystemProductVersion匹配。</string>
                 </property>
@@ -7038,7 +7050,7 @@ Mac板ID（board-id）。可能看起来像 Mac-7BA5B2D9E42DDD94 或旧型号的
               <item row="4" column="2">
                <widget class="QLabel" name="label_91">
                 <property name="toolTip">
-                 <string> Chassis type, refer to Table 17 — System Enclosure or Chassis Types for more details.
+                 <string notr="true"> Chassis type, refer to Table 17 — System Enclosure or Chassis Types for more details.
 ----
  机箱类型，详见表17-系统机箱或机箱类型。</string>
                 </property>
@@ -7059,7 +7071,7 @@ Mac板ID（board-id）。可能看起来像 Mac-7BA5B2D9E42DDD94 或旧型号的
               <item row="4" column="4">
                <widget class="QLabel" name="label_66">
                 <property name="toolTip">
-                 <string> Should match BoardProduct.
+                 <string notr="true"> Should match BoardProduct.
 ----
  应与BoardProduct匹配。</string>
                 </property>
@@ -7083,7 +7095,7 @@ Mac板ID（board-id）。可能看起来像 Mac-7BA5B2D9E42DDD94 或旧型号的
               <item row="0" column="0">
                <widget class="QLabel" name="label_65">
                 <property name="toolTip">
-                 <string> Firmware release date. Similar to BIOSVersion. May look like 12/08/2017.
+                 <string notr="true"> Firmware release date. Similar to BIOSVersion. May look like 12/08/2017.
 ----
  固件发布日期。类似于BIOSVersion。可能看起来像12/08/2017。</string>
                 </property>
@@ -7098,7 +7110,7 @@ Mac板ID（board-id）。可能看起来像 Mac-7BA5B2D9E42DDD94 或旧型号的
               <item row="8" column="0">
                <widget class="QLabel" name="label_86">
                 <property name="toolTip">
-                 <string> Product serial number in defined format. Known formats are described in macserial.
+                 <string notr="true"> Product serial number in defined format. Known formats are described in macserial.
 ----
  以某种定义的格式表示产品序列号。已知的格式在macserial中描述。</string>
                 </property>
@@ -7116,7 +7128,7 @@ Mac板ID（board-id）。可能看起来像 Mac-7BA5B2D9E42DDD94 或旧型号的
               <item row="8" column="2">
                <widget class="QLabel" name="label_88">
                 <property name="toolTip">
-                 <string> A UUID is an identifier that is designed to be unique across both time and space. It requires no central registration process.
+                 <string notr="true"> A UUID is an identifier that is designed to be unique across both time and space. It requires no central registration process.
 ----
 UUID是一种标识符，设计为在时间和空间上都是唯一的。它不需要中心注册过程。</string>
                 </property>
@@ -7135,7 +7147,7 @@ UUID是一种标识符，设计为在时间和空间上都是唯一的。它不�
               <item row="8" column="4">
                <widget class="QLabel" name="label_90">
                 <property name="toolTip">
-                 <string> Product iteration version number. May look like 1.1.
+                 <string notr="true"> Product iteration version number. May look like 1.1.
 ----
  产品迭代版本号。可能看起来像1.1。</string>
                 </property>
@@ -7181,7 +7193,7 @@ UUID是一种标识符，设计为在时间和空间上都是唯一的。它不�
              <item row="0" column="3">
               <widget class="QCheckBox" name="chkUpdateNVRAM">
                <property name="toolTip">
-                <string>These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. 
+                <string notr="true">These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. 
 
 All the other fields are to be specified with NVRAM section.
 
@@ -7211,7 +7223,7 @@ If UpdateNVRAM is set to true the behaviour is undefined when any of the fields 
              <item row="0" column="0">
               <widget class="QCheckBox" name="chkAutomatic">
                <property name="toolTip">
-                <string>Generate PlatformInfo based on the Generic section instead of using values from the DataHub,NVRAM and SMBIOS sections.
+                <string notr="true">Generate PlatformInfo based on the Generic section instead of using values from the DataHub,NVRAM and SMBIOS sections.
 
 ----
 
@@ -7229,7 +7241,7 @@ If UpdateNVRAM is set to true the behaviour is undefined when any of the fields 
              <item row="0" column="2">
               <widget class="QCheckBox" name="chkUpdateDataHub">
                <property name="toolTip">
-                <string>Description: Update Data Hub fields. 
+                <string notr="true">Description: Update Data Hub fields. 
 
 These fields are read from the Generic or DataHub sections depending on the setting of the Automatic property.
 
@@ -7255,7 +7267,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
              <item row="0" column="1">
               <widget class="QCheckBox" name="chkCustomMemory">
                <property name="toolTip">
-                <string>Use custom memory configuration defined in the Memory section. 
+                <string notr="true">Use custom memory configuration defined in the Memory section. 
 
 This completely replaces any existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.
 
@@ -7278,7 +7290,11 @@ This completely replaces any existing memory configuration in SMBIOS, and is onl
              <item row="1" column="0">
               <widget class="QCheckBox" name="chkSaveDataHub">
                <property name="toolTip">
-                <string>Whether to keep data such as Datahub when selecting Automatic</string>
+                <string notr="true">Whether to keep data such as Datahub when selecting Automatic.
+
+----
+
+选择自动时，是否要保留Datahub等数据。</string>
                </property>
                <property name="statusTip">
                 <string>Whether to keep data such as Datahub when selecting Automatic</string>
@@ -7291,7 +7307,7 @@ This completely replaces any existing memory configuration in SMBIOS, and is onl
              <item row="1" column="1">
               <widget class="QCheckBox" name="chkUpdateSMBIOS">
                <property name="toolTip">
-                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on Automatic value.
+                <string notr="true">Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on Automatic value.
 
 ----
 
@@ -7311,7 +7327,7 @@ This completely replaces any existing memory configuration in SMBIOS, and is onl
              <item row="1" column="2">
               <widget class="QCheckBox" name="chkUseRawUuidEncoding">
                <property name="toolTip">
-                <string>Each UUID AABBCCDD-EEFF-GGHH-IIJJ-KKLLMMNNOOPP is essentially a hexadecimal 16-byte number. 
+                <string notr="true">Each UUID AABBCCDD-EEFF-GGHH-IIJJ-KKLLMMNNOOPP is essentially a hexadecimal 16-byte number. 
 
 It can be encoded in two ways:
 
@@ -7369,7 +7385,7 @@ OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本
              <item row="0" column="4">
               <widget class="QLabel" name="label_22">
                <property name="toolTip">
-                <string>• TryOverwrite — Overwrite if new size is &lt;= than the page-aligned  original and there are no issues with legacy region unlock. Create otherwise. Has issues with some firmwares.
+                <string notr="true">• TryOverwrite — Overwrite if new size is &lt;= than the page-aligned  original and there are no issues with legacy region unlock. Create otherwise. Has issues with some firmwares.
 
 • Create — Replace the tables with newly allocated EfiReservedMemoryType at AllocateMaxAddress without any fallbacks.
 

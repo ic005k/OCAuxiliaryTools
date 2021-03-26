@@ -36,6 +36,7 @@
 #include <QJsonObject>
 
 #include "aboutdialog.h"
+#include "dlgOCValidate.h"
 #include "dlgdatabase.h"
 #include "recentfiles.h"
 #include "tooltip.h"
@@ -58,6 +59,8 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
+
+    void startSearch(QString str);
 
     bool lineEditEnter = false;
     bool RefreshAllDatabase = false;

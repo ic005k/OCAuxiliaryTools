@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210327";
+    CurVerison = "20210328";
     title = "OC Auxiliary Tools   V0.6.8    " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -95,7 +95,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui->centralwidget->layout()->setMargin(5);
     ui->centralwidget->layout()->setSpacing(0);
 
-    ui->gridLayout_52->setMargin(0);
+    ui->gridLayout_43->setMargin(0);
     ui->gridLayout_3->setMargin(0);
     ui->gridLayout_4->setMargin(0);
     ui->gridLayout_5->setMargin(0);
@@ -208,15 +208,6 @@ void MainWindow::openFile(QString PlistFileName)
     } else
         return;
 
-    QSettings settings;
-    QFileInfo fInfo(PlistFileName);
-
-    settings.setValue("currentDirectory", fInfo.absolutePath());
-    // qDebug() << settings.fileName(); //最近打开的文件所保存的位置
-    m_recentFiles->setMostRecentFile(PlistFileName);
-
-    initRecentFilesForToolBar();
-
     loading = true;
 
     //初始化
@@ -273,13 +264,19 @@ void MainWindow::openFile(QString PlistFileName)
 
     ui->actionSave->setEnabled(true);
 
-    this->setWindowModified(false);
-
     undoStack->clear();
+    this->setWindowModified(false);
 
     if (!RefreshAllDatabase) {
         OpenFileValidate = true;
         on_btnOcvalidate();
+
+        QSettings settings;
+        QFileInfo fInfo(PlistFileName);
+        settings.setValue("currentDirectory", fInfo.absolutePath());
+        // qDebug() << settings.fileName(); //最近打开的文件所保存的位置
+        m_recentFiles->setMostRecentFile(PlistFileName);
+        initRecentFilesForToolBar();
     }
 }
 
@@ -7880,6 +7877,7 @@ void MainWindow::readResultCheckData()
     QString result = chkdata->readAll();
     QString str;
     QString strMsg;
+    dlgOCValidate* dlgOCV = new dlgOCValidate(this);
 
     if (result.trimmed() == "Failed to read")
         return;
@@ -7891,14 +7889,17 @@ void MainWindow::readResultCheckData()
         ui->btnOcvalidate->setIcon(QIcon(":/icon/ov.png"));
         ui->btnOcvalidate->setToolTip(ui->btnOcvalidate->text());
 
+        dlgOCV->setGoEnabled(false);
+
     } else {
 
         strMsg = result;
+        dlgOCV->setGoEnabled(true);
 
         if (OpenFileValidate) {
 
             ui->btnOcvalidate->setIcon(QIcon(":/icon/overror.png"));
-            ui->btnOcvalidate->setToolTip(tr("The configuration file is not compatible with the current OC version."));
+            ui->btnOcvalidate->setToolTip(tr("There is a issue with the configuration file."));
         }
     }
 
@@ -7907,20 +7908,9 @@ void MainWindow::readResultCheckData()
         return;
     }
 
-    this->setFocus();
-
-    QMessageBox box;
-    QMessageBox::StandardButton btn = box.information(NULL, NULL, strMsg, QMessageBox::Ok);
-
-    switch (btn) {
-    case QMessageBox::Ok:
-        ui->cboxFind->setFocus();
-        break;
-
-    default:
-        ui->cboxFind->setFocus();
-        break;
-    }
+    dlgOCV->setTextOCV(strMsg);
+    dlgOCV->setWindowFlags(dlgOCV->windowFlags() | Qt::WindowStaysOnTopHint);
+    dlgOCV->show();
 }
 
 void MainWindow::on_btnBooterPatchAdd_clicked()
@@ -9524,6 +9514,13 @@ QObjectList MainWindow::getAllComboBox(QObjectList lstUIControls)
 
 void MainWindow::on_pushButton_clicked()
 {
+}
+
+void MainWindow::startSearch(QString str)
+{
+    ui->cboxFind->setCurrentText(str);
+
+    on_actionFind_triggered();
 }
 
 void MainWindow::on_actionFind_triggered()

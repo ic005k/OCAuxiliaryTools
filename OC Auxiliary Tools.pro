@@ -36,6 +36,7 @@ SOURCES += \
     PlistDate.cpp \
     aboutdialog.cpp \
     commands.cpp \
+    dlgOCValidate.cpp \
     dlgdatabase.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
     aboutdialog.h \
     base64.hpp \
     commands.h \
+    dlgOCValidate.h \
     dlgdatabase.h \
     mainwindow.h \
     myapp.h \
@@ -64,6 +66,7 @@ HEADERS += \
 
 FORMS += \
     aboutdialog.ui \
+    dlgOCValidate.ui \
     dlgdatabase.ui \
     mainwindow.ui
 
