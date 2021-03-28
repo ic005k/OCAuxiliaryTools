@@ -110,33 +110,32 @@ QString PListSerializer::toPList(const QVariant& variant, QString FileName)
     QFile file(FileName);
     if (file.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)) {
 
-        //   return false;
         QTextStream out(&file);
         out.setCodec("UTF-8");
         //document.save(out, 4, QDomNode::EncodingFromTextStream);
         //document.save(out, 4, QDomNode::EncodingFromDocument);
-
-        QFileInfo fi(FileName);
-        if (fi.exists()) {
-            map<string, boost::any> dict;
-
-            QString path = fi.path();
-            QDir dir;
-            if (dir.exists(path))
-                dir.setCurrent(path);
-
-            QString baseName = fi.fileName();
-
-            QString strData = document.toString();
-            std::string mystring = strData.toStdString();
-            std::istringstream is(mystring);
-
-            Plist::readPlist(is, dict);
-            //Plist::readPlist(baseName.toStdString().c_str(), dict);
-            Plist::writePlistXML(baseName.toStdString().c_str(), dict);
-        }
-
         file.close();
+    }
+
+    QFileInfo fi(FileName);
+    if (fi.exists()) {
+        map<string, boost::any> dict;
+
+        QString path = fi.path();
+        QDir dir;
+        if (dir.exists(path))
+            dir.setCurrent(path);
+
+        QString str = fi.fileName();
+        string baseName = string(str.toLocal8Bit());
+
+        QString strData = document.toString();
+        std::string mystring = strData.toStdString();
+        std::istringstream is(mystring);
+
+        Plist::readPlist(is, dict);
+        //Plist::readPlist(baseName.c_str(), dict);
+        Plist::writePlistXML(baseName.c_str(), dict);
     }
 
     return document.toString();

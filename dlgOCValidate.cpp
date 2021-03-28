@@ -16,7 +16,7 @@ dlgOCValidate::dlgOCValidate(QWidget* parent)
 
     ui->textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
     QAction* copyAction = new QAction(tr("Copy"));
-    QAction* searchAction = new QAction(tr("Search in the configuration file"));
+    QAction* searchAction = new QAction(tr("Search..."));
 
     QMenu* copyMenu = new QMenu(this);
     //copyMenu->addAction(copyAction);

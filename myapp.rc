@@ -8,38 +8,21 @@ IDI_ICON1 ICON DISCARDABLE "my.ico"
 #include <winver.h>
 #endif
 
-VS_VERSION_INFO VERSIONINFO
-    FILEVERSION 0,6,8
-    PRODUCTVERSION 1,0,0,10
-    FILEFLAGSMASK 0x3fL
+    VS_VERSION_INFO VERSIONINFO FILEVERSION 0,
+    6, 8 PRODUCTVERSION 1, 0, 0,
+    10 FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
     FILEFLAGS VS_FF_DEBUG
 #else
     FILEFLAGS 0x0L
 #endif
-    FILEOS VOS__WINDOWS32
-    FILETYPE VFT_DLL
-    FILESUBTYPE 0x0L
-    BEGIN
-        BLOCK "StringFileInfo"
-        BEGIN
-            BLOCK "080404b0"
-            BEGIN
-                VALUE "CompanyName", ""
-                VALUE "FileDescription", ""
-                VALUE "FileVersion", "0.6.8 - 20210328\0"
-                VALUE "ProductVersion", "0.6.8 - 20210328\0"
-                VALUE "LegalCopyright", "\0"
-                VALUE "LegalTrademarks", ""
-                VALUE "OriginalFilename", "OCAT\0"
-                VALUE "ProductName", "OCAT"
-                VALUE "InternalName", "OCAT\0"
-           END
-        END
+        FILEOS VOS__WINDOWS32 FILETYPE VFT_DLL FILESUBTYPE 0x0L BEGIN BLOCK
+    "StringFileInfo" BEGIN BLOCK "080404b0" BEGIN VALUE "CompanyName",
+    "" VALUE "FileDescription", "" VALUE "FileVersion", "0.6.8 - 20210329\0" VALUE "ProductVersion",
+    "0.6.8 - 20210329\0" VALUE "LegalCopyright", "\0" VALUE "LegalTrademarks",
+    "" VALUE "OriginalFilename", "OCAT\0" VALUE "ProductName", "OCAT" VALUE "InternalName",
+    "OCAT\0" END END
 
-        BLOCK "VarFileInfo"
-        BEGIN
-            VALUE "Translation", 0x804, 1200
-        END
-    END
+        BLOCK "VarFileInfo" BEGIN VALUE "Translation",
+    0x804, 1200 END END
 

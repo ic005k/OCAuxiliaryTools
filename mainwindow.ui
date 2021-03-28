@@ -9172,6 +9172,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <property name="title">
      <string>Edit</string>
     </property>
+    <addaction name="separator"/>
     <addaction name="btnMountEsp"/>
     <addaction name="btnOcvalidate"/>
     <addaction name="separator"/>

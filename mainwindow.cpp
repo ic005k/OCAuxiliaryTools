@@ -33,8 +33,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210328";
-    title = "OC Auxiliary Tools   V0.6.8    " + CurVerison + "        [*] ";
+    CurVerison = "20210329";
+    title = "OC Auxiliary Tools   V0.6.8 - " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
     QFont font;
@@ -74,6 +74,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     aboutDlg = new aboutDialog(this);
     myDatabase = new dlgDatabase(this);
+    dlgOCV = new dlgOCValidate(this);
 
     QDir dir;
     if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) { }
@@ -2618,8 +2619,8 @@ void MainWindow::SavePlist(QString FileName)
     }
 
     if (!RefreshAllDatabase) {
-        ui->btnOcvalidate->setIcon(QIcon(":/icon/ov.png"));
-        ui->btnOcvalidate->setToolTip(ui->btnOcvalidate->text());
+        OpenFileValidate = true;
+        on_btnOcvalidate();
     }
 }
 
@@ -7213,11 +7214,10 @@ void MainWindow::init_Menu()
     ui->listMain->setStyleSheet(listStyle);
     ui->listSub->setStyleSheet(listStyle);
 
-    ui->listMain->setIconSize(QSize(35, 35));
-    if (win)
-        ui->toolBar->setIconSize(QSize(36, 36));
-    if (linuxOS)
-        ui->toolBar->setIconSize(QSize(32, 32));
+    int iSize = 32;
+    ui->listMain->setIconSize(QSize(iSize, iSize));
+    ui->toolBar->setIconSize(QSize(iSize, iSize));
+
     if (win) {
         ui->listMain->setMaximumHeight(75);
         ui->listSub->setMaximumHeight(30);
@@ -7299,19 +7299,22 @@ void MainWindow::init_Menu()
     ui->actionSave_As->setIcon(QIcon(":/icon/saveas.png"));
     ui->toolBar->addAction(ui->actionSave_As);
 
-    //Tools
-    //MountESP
-    connect(ui->btnMountEsp, &QAction::triggered, this, &MainWindow::on_btnMountEsp);
-    ui->btnMountEsp->setShortcut(tr("ctrl+m"));
-    ui->btnMountEsp->setIcon(QIcon(":/icon/esp.png"));
     ui->toolBar->addSeparator();
-    ui->toolBar->addAction(ui->btnMountEsp);
 
+    //Tools
     //OC Validate
     connect(ui->btnOcvalidate, &QAction::triggered, this, &MainWindow::on_btnOcvalidate);
     ui->btnOcvalidate->setShortcut(tr("ctrl+l"));
     ui->btnOcvalidate->setIcon(QIcon(":/icon/ov.png"));
     ui->toolBar->addAction(ui->btnOcvalidate);
+
+    ui->toolBar->addSeparator();
+
+    //MountESP
+    connect(ui->btnMountEsp, &QAction::triggered, this, &MainWindow::on_btnMountEsp);
+    ui->btnMountEsp->setShortcut(tr("ctrl+m"));
+    ui->btnMountEsp->setIcon(QIcon(":/icon/esp.png"));
+    ui->toolBar->addAction(ui->btnMountEsp);
 
     //GenerateEFI
     connect(ui->actionGenerateEFI, &QAction::triggered, this, &MainWindow::on_GenerateEFI);
@@ -7874,10 +7877,9 @@ void MainWindow::on_btnOcvalidate()
 
 void MainWindow::readResultCheckData()
 {
-    QString result = chkdata->readAll();
+    QString result = QString::fromLocal8Bit(chkdata->readAll()); //与保存文件的格式一致
     QString str;
     QString strMsg;
-    dlgOCValidate* dlgOCV = new dlgOCValidate(this);
 
     if (result.trimmed() == "Failed to read")
         return;
@@ -7896,11 +7898,8 @@ void MainWindow::readResultCheckData()
         strMsg = result;
         dlgOCV->setGoEnabled(true);
 
-        if (OpenFileValidate) {
-
-            ui->btnOcvalidate->setIcon(QIcon(":/icon/overror.png"));
-            ui->btnOcvalidate->setToolTip(tr("There is a issue with the configuration file."));
-        }
+        ui->btnOcvalidate->setIcon(QIcon(":/icon/overror.png"));
+        ui->btnOcvalidate->setToolTip(tr("There is a issue with the configuration file."));
     }
 
     if (OpenFileValidate) {
@@ -9525,6 +9524,8 @@ void MainWindow::startSearch(QString str)
 
 void MainWindow::on_actionFind_triggered()
 {
+    bool curWinModi = this->isWindowModified();
+
     QString findText = ui->cboxFind->currentText().trimmed().toLower();
 
     if (findText == "")
@@ -9752,6 +9753,8 @@ void MainWindow::on_actionFind_triggered()
         palette.setColor(QPalette::Base, QColor(255, 70, 70));
         ui->cboxFind->setPalette(palette);
     }
+
+    this->setWindowModified(curWinModi);
 }
 
 void MainWindow::findTable(QTableWidget* t, QString text)

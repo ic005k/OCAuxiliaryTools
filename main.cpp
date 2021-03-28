@@ -9,7 +9,6 @@ MainWindow* mw_one;
 
 int main(int argc, char* argv[])
 {
-
 #ifdef Q_OS_LINUX
     qputenv("QT_ENABLE_HIGHDPI_SCALING", "1");
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);

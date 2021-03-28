@@ -60,6 +60,8 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    dlgOCValidate* dlgOCV;
+
     void startSearch(QString str);
 
     bool lineEditEnter = false;
