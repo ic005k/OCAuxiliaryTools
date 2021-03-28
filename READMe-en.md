@@ -37,6 +37,8 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 
 ......
 
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat0.png)
+
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat1.png)
 
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat2.png)
@@ -54,6 +56,8 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat8.png)
 
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat9.png)
+
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat10.png)
 
 
 ### [国内github下载文件推荐](https://toolwa.com/github/)
