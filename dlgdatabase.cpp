@@ -44,12 +44,16 @@ void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
+    mw_one->RefreshAllDatabase = true;
+
     QFileInfo appInfo(qApp->applicationDirPath());
 
     QString dirpath = appInfo.filePath() + "/Database/";
     QString file = tableDatabase->currentItem()->text();
     mw_one->openFile(dirpath + file);
     mw_one->on_GenerateEFI();
+
+    mw_one->RefreshAllDatabase = false;
 }
 
 void dlgDatabase::on_btnFind_clicked()
@@ -113,6 +117,8 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
+    mw_one->RefreshAllDatabase = true;
+
     QFileInfo appInfo(qApp->applicationDirPath());
 
     QString dirpath = appInfo.filePath() + "/Database/";
@@ -120,6 +126,8 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column)
     mw_one->openFile(dirpath + file);
 
     mw_one->on_GenerateEFI();
+
+    mw_one->RefreshAllDatabase = false;
 }
 
 void dlgDatabase::on_btnRefreshAll_clicked()

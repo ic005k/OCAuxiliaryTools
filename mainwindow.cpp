@@ -7903,6 +7903,7 @@ void MainWindow::readResultCheckData()
     }
 
     if (OpenFileValidate) {
+
         OpenFileValidate = false;
         return;
     }
