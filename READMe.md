@@ -7,6 +7,8 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 
 ## Features include but are not limited to:
 
+* Write plist files with spaces for indentation to fit all editors or editing environments, such as the Shell editing environment
+
 * Powerful keyword search function, including retrieval of unseen data tables
 
 * All tabs and checkbox text are supported for copying (right-click menu)
