@@ -19,7 +19,7 @@ dlgOCValidate::dlgOCValidate(QWidget* parent)
     QAction* searchAction = new QAction(tr("Search..."));
 
     QMenu* copyMenu = new QMenu(this);
-    //copyMenu->addAction(copyAction);
+    copyMenu->addAction(copyAction);
     copyMenu->addAction(searchAction);
 
     connect(copyAction, &QAction::triggered, [=]() {

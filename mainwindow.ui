@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7445,7 +7445,7 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -7981,6 +7981,27 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
                </property>
               </widget>
              </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="chkKeyFiltering">
+               <property name="toolTip">
+                <string>Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
+
+This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and 108 in version 2.8).
+
+----
+
+显然，有些板子，如GA Z77P-D3，可能会在EFI_INPUT_KEY中返回所有输入协议的未初始化数据。
+
+这个选项会丢弃那些既不是ASCII码，也不是在UEFI规范中定义的键(见2.8版本的表107和108)。</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable keyboard input sanity checking.</string>
+               </property>
+               <property name="text">
+                <string>KeyFiltering</string>
+               </property>
+              </widget>
+             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_23">
                <property name="toolTip">
@@ -8007,6 +8028,16 @@ Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular 
                </property>
                <property name="text">
                 <string>KeySupportMode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="editPointerSupportMode"/>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cboxKeySupportMode">
+               <property name="editable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -8044,6 +8075,9 @@ Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular 
                </property>
               </widget>
              </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="editKeyForgetThreshold"/>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_37">
                <property name="toolTip">
@@ -8072,43 +8106,6 @@ AppleKeyMapAggregator协议应该包含一个固定长度的当前按键缓冲�
                 <string>KeyForgetThreshold</string>
                </property>
               </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="editTimerResolution"/>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="editPointerSupportMode"/>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="chkKeyFiltering">
-               <property name="toolTip">
-                <string>Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
-
-This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and 108 in version 2.8).
-
-----
-
-显然，有些板子，如GA Z77P-D3，可能会在EFI_INPUT_KEY中返回所有输入协议的未初始化数据。
-
-这个选项会丢弃那些既不是ASCII码，也不是在UEFI规范中定义的键(见2.8版本的表107和108)。</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable keyboard input sanity checking.</string>
-               </property>
-               <property name="text">
-                <string>KeyFiltering</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="cboxKeySupportMode">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editKeyForgetThreshold"/>
              </item>
              <item row="5" column="0">
               <widget class="QCheckBox" name="chkKeySupport">
@@ -8149,6 +8146,27 @@ The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS 
                </property>
                <property name="text">
                 <string>TimerResolution</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="editTimerResolution"/>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="chkKeySkipFirstDelay">
+               <property name="toolTip">
+                <string notr="true">Description: Suppress initial delay before key repeat in OpenCore implementation of Apple Event protocol.
+
+When combining OpenCore KeySupport with the Apple Event protocol, key repeat behaviour may show one additional slow key repeat before normal key repeat starts. Enabling this option works around this problem by suppressing the initial repeat delay in the OpenCore Apple Event implementation. This option is recommended to be set when using KeySupport mode, in most cases, and is not recommended to be set on any systems which are not using KeySupport mode.
+
+----
+
+说明：在OpenCore实现Apple Event协议时，抑制按键重复前的初始延迟。
+
+当将 OpenCore KeySupport 与 Apple Event 协议相结合时，按键重复行为可能会在正常按键重复开始前显示一个额外的缓慢按键重复。启用此选项可以通过抑制 OpenCore Apple Event 实现中的初始重复延迟来解决这个问题。在大多数情况下，建议在使用KeySupport模式时设置此选项，不建议在任何不使用KeySupport模式的系统上设置。</string>
+               </property>
+               <property name="text">
+                <string>KeySkipFirstDelay</string>
                </property>
               </widget>
              </item>

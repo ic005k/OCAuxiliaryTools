@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210329";
+    CurVerison = "20210330";
     title = "OC Auxiliary Tools   V0.6.8 - " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -2479,9 +2479,9 @@ void MainWindow::ParserUEFI(QVariantMap map)
     ui->chkKeySupport->setChecked(map_input["KeySupport"].toBool());
     ui->chkKeySwap->setChecked(map_input["KeySwap"].toBool());
     ui->chkPointerSupport->setChecked(map_input["PointerSupport"].toBool());
+    ui->chkKeySkipFirstDelay->setChecked(map_input["KeySkipFirstDelay"].toBool());
 
     ui->editKeyForgetThreshold->setText(map_input["KeyForgetThreshold"].toString());
-
     ui->editPointerSupportMode->setText(map_input["PointerSupportMode"].toString());
     ui->editTimerResolution->setText(map_input["TimerResolution"].toString());
 
@@ -3356,15 +3356,12 @@ QVariantMap MainWindow::SaveUEFI()
     dictList["KeySupport"] = getChkBool(ui->chkKeySupport);
     dictList["KeySwap"] = getChkBool(ui->chkKeySwap);
     dictList["PointerSupport"] = getChkBool(ui->chkPointerSupport);
+    dictList["KeySkipFirstDelay"] = getChkBool(ui->chkKeySkipFirstDelay);
 
     dictList["KeyForgetThreshold"] = ui->editKeyForgetThreshold->text().toLongLong();
-
     dictList["PointerSupportMode"] = ui->editPointerSupportMode->text();
     dictList["TimerResolution"] = ui->editTimerResolution->text().toLongLong();
-
     dictList["KeySupportMode"] = ui->cboxKeySupportMode->currentText();
-
-    //dictList["DownkeysHandler"] = ui->cboxDownkeysHandler->currentText();
 
     subMap["Input"] = dictList;
 
