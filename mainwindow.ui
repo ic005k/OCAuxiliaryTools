@@ -82,7 +82,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1631,7 +1631,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="editProvideMaxSlide"/>
+              <widget class="QLineEdit" name="editIntProvideMaxSlide"/>
              </item>
             </layout>
            </widget>
@@ -2394,7 +2394,7 @@ Cpuid1Mask: FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
                 <string>Emulates CPUID and applies DummyPowerManagement on specified macOS version or newer.</string>
                </property>
                <property name="text">
-                <string>MinKernel</string>
+                <string notr="true">MinKernel</string>
                </property>
               </widget>
              </item>
@@ -2407,7 +2407,7 @@ Cpuid1Mask: FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
                 <string> Emulates CPUID and applies DummyPowerManagement on specified macOS version or older.</string>
                </property>
                <property name="text">
-                <string>MaxKernel</string>
+                <string notr="true">MaxKernel</string>
                </property>
               </widget>
              </item>
@@ -2425,13 +2425,13 @@ Cpuid1Mask: FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="editCpuid1Data"/>
+              <widget class="QLineEdit" name="editDatCpuid1Data"/>
              </item>
              <item row="5" column="1">
               <widget class="QLineEdit" name="editMinKernel"/>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="editCpuid1Mask"/>
+              <widget class="QLineEdit" name="editDatCpuid1Mask"/>
              </item>
              <item row="6" column="0">
               <widget class="QCheckBox" name="chkDummyPowerManagement">
@@ -2880,7 +2880,7 @@ trim.</string>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="editSetApfsTrimTimeout">
+              <widget class="QLineEdit" name="editIntSetApfsTrimTimeout">
                <property name="toolTip">
                 <string>Depending on the SSD controller trim procedure may take considerable amount of time, causing noticeable boot
 slowdown as this is when the APFS driver executes the trim operation. If the SSD supports over-provisioning or
@@ -3033,7 +3033,7 @@ The behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3192,7 +3192,7 @@ Note: This option may not work well with System text renderer. Setting a backgro
               </widget>
              </item>
              <item row="0" column="2">
-              <widget class="QLineEdit" name="editConsoleAttributes"/>
+              <widget class="QLineEdit" name="editIntConsoleAttributes"/>
              </item>
              <item row="12" column="0">
               <widget class="QLabel" name="label_8">
@@ -3325,7 +3325,7 @@ Picker描述了底层的引导管理，有一个可选的用户界面负责处�
               </widget>
              </item>
              <item row="12" column="2">
-              <widget class="QLineEdit" name="editTakeoffDelay"/>
+              <widget class="QLineEdit" name="editIntTakeoffDelay"/>
              </item>
              <item row="3" column="2">
               <widget class="QComboBox" name="cboxLauncherPath">
@@ -3353,7 +3353,7 @@ Picker描述了底层的引导管理，有一个可选的用户界面负责处�
               </widget>
              </item>
              <item row="13" column="2">
-              <widget class="QLineEdit" name="editTimeout"/>
+              <widget class="QLineEdit" name="editIntTimeout"/>
              </item>
             </layout>
            </widget>
@@ -3438,7 +3438,7 @@ Different OpenCore pickers may be configured through the attribute mask containi
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="editPickerAttributes"/>
+              <widget class="QLineEdit" name="editIntPickerAttributes"/>
              </item>
              <item row="0" column="2">
               <widget class="QLabel" name="lblPickerAttributes">
@@ -3601,7 +3601,7 @@ Note: The screen reader requires working audio support. Refer to the UEFI Audio 
             <property name="title">
              <string/>
             </property>
-            <widget class="QLineEdit" name="editDisplayLevel">
+            <widget class="QLineEdit" name="editIntDisplayLevel">
              <property name="geometry">
               <rect>
                <x>10</x>
@@ -4001,10 +4001,10 @@ Console logging prints less than all the other variants. Depending on the build 
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="editDisplayDelay"/>
+              <widget class="QLineEdit" name="editIntDisplayDelay"/>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="editTarget">
+              <widget class="QLineEdit" name="editIntTarget">
                <property name="clearButtonEnabled">
                 <bool>false</bool>
                </property>
@@ -4070,7 +4070,7 @@ Console logging prints less than all the other variants. Depending on the build 
                 </widget>
                </item>
                <item row="1" column="0">
-                <widget class="QLineEdit" name="editExposeSensitiveData"/>
+                <widget class="QLineEdit" name="editIntExposeSensitiveData"/>
                </item>
                <item row="1" column="2">
                 <spacer name="horizontalSpacer_24">
@@ -4227,7 +4227,7 @@ Console logging prints less than all the other variants. Depending on the build 
                 </spacer>
                </item>
                <item row="1" column="0">
-                <widget class="QLineEdit" name="editScanPolicy">
+                <widget class="QLineEdit" name="editIntScanPolicy">
                  <property name="maximumSize">
                   <size>
                    <width>187</width>
@@ -4596,10 +4596,10 @@ Until your operating system is personalised you will only be able to load macOS 
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QLineEdit" name="editApECID"/>
+                  <widget class="QLineEdit" name="editIntApECID"/>
                  </item>
                  <item row="2" column="1">
-                  <widget class="QLineEdit" name="editHaltLevel"/>
+                  <widget class="QLineEdit" name="editIntHaltLevel"/>
                  </item>
                  <item row="3" column="0">
                   <widget class="QLabel" name="label_93">
@@ -4619,7 +4619,7 @@ Until your operating system is personalised you will only be able to load macOS 
                   </widget>
                  </item>
                  <item row="3" column="1">
-                  <widget class="QLineEdit" name="editPasswordHash"/>
+                  <widget class="QLineEdit" name="editDatPasswordHash"/>
                  </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_27">
@@ -4734,7 +4734,7 @@ Valid values:
                   </widget>
                  </item>
                  <item row="0" column="3">
-                  <widget class="QLineEdit" name="editPasswordSalt"/>
+                  <widget class="QLineEdit" name="editDatPasswordSalt"/>
                  </item>
                  <item row="3" column="2">
                   <widget class="QLabel" name="label_16">
@@ -5512,7 +5512,7 @@ A continuously updated variable list can be found in a corresponding document: N
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5700,7 +5700,7 @@ Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemory
               <widget class="QLineEdit" name="editSystemSerialNumber"/>
              </item>
              <item row="5" column="1">
-              <widget class="QLineEdit" name="editROM"/>
+              <widget class="QLineEdit" name="editDatROM"/>
              </item>
              <item row="5" column="0">
               <widget class="QLabel" name="label_20">
@@ -5805,13 +5805,13 @@ Added bits to FirmwareFeatures:
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="editBoardRevision"/>
+              <widget class="QLineEdit" name="editDatBoardRevision"/>
              </item>
              <item row="4" column="1">
-              <widget class="QLineEdit" name="editSmcPlatform"/>
+              <widget class="QLineEdit" name="editDatSmcPlatform"/>
              </item>
              <item row="2" column="3">
-              <widget class="QLineEdit" name="editInitialTSC"/>
+              <widget class="QLineEdit" name="editIntInitialTSC"/>
              </item>
              <item row="5" column="3">
               <widget class="QLineEdit" name="editSystemProductName"/>
@@ -5848,19 +5848,19 @@ Added bits to FirmwareFeatures:
               </widget>
              </item>
              <item row="1" column="3">
-              <widget class="QLineEdit" name="editDevicePathsSupported"/>
+              <widget class="QLineEdit" name="editIntDevicePathsSupported"/>
              </item>
              <item row="3" column="1">
               <widget class="QLineEdit" name="editPlatformName"/>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="editFSBFrequency"/>
+              <widget class="QLineEdit" name="editIntFSBFrequency"/>
              </item>
              <item row="0" column="3">
               <widget class="QLineEdit" name="editBoardProduct"/>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="editARTFrequency">
+              <widget class="QLineEdit" name="editIntARTFrequency">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -5870,7 +5870,7 @@ Added bits to FirmwareFeatures:
               </widget>
              </item>
              <item row="3" column="3">
-              <widget class="QLineEdit" name="editSmcBranch"/>
+              <widget class="QLineEdit" name="editDatSmcBranch"/>
              </item>
              <item row="1" column="2">
               <widget class="QLabel" name="label_49">
@@ -5999,7 +5999,7 @@ X86PlatformPlugin.kext读取的已知位：
               </widget>
              </item>
              <item row="4" column="3">
-              <widget class="QLineEdit" name="editSmcRevision"/>
+              <widget class="QLineEdit" name="editDatSmcRevision"/>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_48">
@@ -6020,7 +6020,7 @@ X86PlatformPlugin.kext读取的已知位：
               </widget>
              </item>
              <item row="5" column="1">
-              <widget class="QLineEdit" name="editStartupPowerEvents"/>
+              <widget class="QLineEdit" name="editIntStartupPowerEvents"/>
              </item>
              <item row="3" column="2">
               <widget class="QLabel" name="label_53">
@@ -6466,7 +6466,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
             </property>
             <layout class="QGridLayout" name="gridLayout_40">
              <item row="4" column="1">
-              <widget class="QLineEdit" name="editROM_2"/>
+              <widget class="QLineEdit" name="editROM_PNVRAM"/>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_61">
@@ -6519,7 +6519,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="editFirmwareFeatures"/>
+              <widget class="QLineEdit" name="editDatFirmwareFeatures"/>
              </item>
              <item row="3" column="0">
               <widget class="QLabel" name="label_63">
@@ -6538,7 +6538,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QLineEdit" name="editMLB_2"/>
+              <widget class="QLineEdit" name="editMLB_PNVRAM"/>
              </item>
              <item row="6" column="1">
               <widget class="QLineEdit" name="editSystemUUID_PNVRAM"/>
@@ -6570,7 +6570,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="editFirmwareFeaturesMask"/>
+              <widget class="QLineEdit" name="editDatFirmwareFeaturesMask"/>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_62">
@@ -6610,7 +6610,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               </widget>
              </item>
              <item row="5" column="1">
-              <widget class="QLineEdit" name="editSystemSerialNumber_PlatformNVRAM">
+              <widget class="QLineEdit" name="editSystemSerialNumber_PNVRAM">
                <property name="toolTip">
                 <string/>
                </property>
@@ -6630,7 +6630,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
             <item row="0" column="0">
              <layout class="QGridLayout" name="gridLayout_41">
               <item row="5" column="1">
-               <widget class="QLineEdit" name="editFirmwareFeatures_2"/>
+               <widget class="QLineEdit" name="editFirmwareFeatures_SMBIOS"/>
               </item>
               <item row="3" column="4">
                <widget class="QLabel" name="label_87">
@@ -6703,7 +6703,7 @@ SMBIOS：系统外壳或机箱(类型3)-制造商
                </widget>
               </item>
               <item row="6" column="1">
-               <widget class="QLineEdit" name="editProcessorType"/>
+               <widget class="QLineEdit" name="editIntProcessorType"/>
               </item>
               <item row="5" column="4">
                <widget class="QLabel" name="label_72">
@@ -6749,7 +6749,7 @@ Note: If SystemProductName is unknown, and related fields are unspecified, defau
                <widget class="QLineEdit" name="editBoardAssetTag"/>
               </item>
               <item row="5" column="5">
-               <widget class="QLineEdit" name="editPlatformFeature"/>
+               <widget class="QLineEdit" name="editIntPlatformFeature"/>
               </item>
               <item row="4" column="0">
                <widget class="QLabel" name="label_89">
@@ -6774,7 +6774,7 @@ SMBIOS：系统外壳或机箱(类型3)----版本。
                <widget class="QLineEdit" name="editBoardManufacturer"/>
               </item>
               <item row="2" column="5">
-               <widget class="QLineEdit" name="editBoardType"/>
+               <widget class="QLineEdit" name="editIntBoardType"/>
               </item>
               <item row="1" column="4">
                <widget class="QLabel" name="label_75">
@@ -6833,7 +6833,7 @@ This value gets updated and takes part in update delivery configuration and macO
                </widget>
               </item>
               <item row="6" column="3">
-               <widget class="QLineEdit" name="editSmcVersion"/>
+               <widget class="QLineEdit" name="editDatSmcVersion"/>
               </item>
               <item row="3" column="5">
                <widget class="QLineEdit" name="editChassisManufacturer"/>
@@ -6854,7 +6854,7 @@ This value gets updated and takes part in update delivery configuration and macO
                </widget>
               </item>
               <item row="5" column="3">
-               <widget class="QLineEdit" name="editFirmwareFeaturesMask_2"/>
+               <widget class="QLineEdit" name="editFirmwareFeaturesMask_SMBIOS"/>
               </item>
               <item row="7" column="1">
                <widget class="QLineEdit" name="editSystemManufacturer"/>
@@ -6863,7 +6863,7 @@ This value gets updated and takes part in update delivery configuration and macO
                <widget class="QLineEdit" name="editSystemSKUNumber"/>
               </item>
               <item row="4" column="3">
-               <widget class="QLineEdit" name="editChassisType"/>
+               <widget class="QLineEdit" name="editIntChassisType"/>
               </item>
               <item row="1" column="2">
                <widget class="QLabel" name="label_73">
@@ -7482,7 +7482,7 @@ An APFS EFI driver is bundled in all bootable APFS containers. This option perfo
                 <string> Load embedded APFS drivers from APFS containers.</string>
                </property>
                <property name="text">
-                <string>EnableJumpstart</string>
+                <string notr="true">EnableJumpstart</string>
                </property>
               </widget>
              </item>
@@ -7511,7 +7511,7 @@ APFS驱动版本连接APFS驱动与macOS版本。旧版macOS的APFS驱动程序�
                 <string>Minimal allowed APFS driver version.</string>
                </property>
                <property name="text">
-                <string>MinVersion</string>
+                <string notr="true">MinVersion</string>
                </property>
               </widget>
              </item>
@@ -7541,7 +7541,7 @@ APFS驱动日期将APFS驱动与发布日期连接起来。旧版本的APFS驱�
                 <string>Minimal allowed APFS driver date.</string>
                </property>
                <property name="text">
-                <string>MinDate</string>
+                <string notr="true">MinDate</string>
                </property>
               </widget>
              </item>
@@ -7562,7 +7562,7 @@ This may take more time than usual but can be the only way to access APFS partit
                 <string> Perform full device connection during APFS loading.</string>
                </property>
                <property name="text">
-                <string>GlobalConnect</string>
+                <string notr="true">GlobalConnect</string>
                </property>
               </widget>
              </item>
@@ -7579,7 +7579,7 @@ APFS verbose输出对调试很有用。</string>
                 <string>Hide verbose output from APFS driver.</string>
                </property>
                <property name="text">
-                <string>HideVerbose</string>
+                <string notr="true">HideVerbose</string>
                </property>
               </widget>
              </item>
@@ -7596,15 +7596,15 @@ APFS verbose输出对调试很有用。</string>
                 <string> Load APFS drivers for newly connected devices.</string>
                </property>
                <property name="text">
-                <string>JumpstartHotPlug</string>
+                <string notr="true">JumpstartHotPlug</string>
                </property>
               </widget>
              </item>
              <item row="8" column="1">
-              <widget class="QLineEdit" name="editMinDate"/>
+              <widget class="QLineEdit" name="editIntMinDate"/>
              </item>
              <item row="13" column="1">
-              <widget class="QLineEdit" name="editMinVersion"/>
+              <widget class="QLineEdit" name="editIntMinVersion"/>
              </item>
             </layout>
            </widget>
@@ -7712,13 +7712,13 @@ The screen reader will use this volume level when the calculated volume level is
               </widget>
              </item>
              <item row="8" column="1">
-              <widget class="QLineEdit" name="editVolumeAmplifier"/>
+              <widget class="QLineEdit" name="editIntVolumeAmplifier"/>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="editAudioOut"/>
+              <widget class="QLineEdit" name="editIntAudioOut"/>
              </item>
              <item row="7" column="1">
-              <widget class="QLineEdit" name="editSetupDelay"/>
+              <widget class="QLineEdit" name="editIntSetupDelay"/>
              </item>
              <item row="8" column="0">
               <widget class="QLabel" name="label_36">
@@ -7803,7 +7803,7 @@ OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出
               </widget>
              </item>
              <item row="4" column="1">
-              <widget class="QLineEdit" name="editMinimumVolume"/>
+              <widget class="QLineEdit" name="editIntMinimumVolume"/>
              </item>
              <item row="5" column="0">
               <widget class="QLabel" name="label_70">
@@ -7835,7 +7835,7 @@ Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid c
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="editAudioCodec"/>
+              <widget class="QLineEdit" name="editIntAudioCodec"/>
              </item>
              <item row="7" column="0">
               <widget class="QLabel" name="label_107">
@@ -7965,118 +7965,29 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
             </property>
             <layout class="QGridLayout" name="gridLayout_33">
              <item row="4" column="1">
-              <widget class="QCheckBox" name="chkKeySwap">
-               <property name="toolTip">
-                <string>This option may be useful for keyboard layouts with Option key situated to the right of Command key.
-
-----
-
-这个选项可能对命令键右边的选项键的键盘布局有用。</string>
-               </property>
-               <property name="statusTip">
-                <string>Swap Command and Option keys during submission.</string>
-               </property>
-               <property name="text">
-                <string>KeySwap</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="chkKeyFiltering">
-               <property name="toolTip">
-                <string>Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
-
-This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and 108 in version 2.8).
-
-----
-
-显然，有些板子，如GA Z77P-D3，可能会在EFI_INPUT_KEY中返回所有输入协议的未初始化数据。
-
-这个选项会丢弃那些既不是ASCII码，也不是在UEFI规范中定义的键(见2.8版本的表107和108)。</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable keyboard input sanity checking.</string>
-               </property>
-               <property name="text">
-                <string>KeyFiltering</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_23">
-               <property name="toolTip">
-                <string>• Auto — Performs automatic choice as available with the following preference: AMI, V2, V1. 
-
-• V1 — Uses UEFI standard legacy input protocol EFI_SIMPLE_TEXT_INPUT_PROTOCOL. 
-
-• V2 — Uses UEFI standard modern input protocol EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL. • AMI — Uses APTIO input protocol AMI_EFIKEYCODE_PROTOCOL.
-
-Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular specified protocol. This may change in the future versions.
-
-----
-
-- Auto - 根据以下偏好执行自动选择。AMI, V2, V1. 
-
-- V1 - 使用 UEFI 标准的传统输入协议 EFI_SIMPLE_TEXT_INPUT_PROTOCOL。
-
-- V2 - 使用 UEFI 标准的现代输入协议 EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL。- AMI - 使用 APTIO 输入协议 AMI_EFIKEYCODE_PROTOCOL。
-
-注意：目前 V1、V2 和 AMI 与 Auto 不同，只对特定的协议进行过滤。这在未来的版本中可能会改变。</string>
-               </property>
-               <property name="statusTip">
-                <string> Set internal keyboard input translation to AppleKeyMapAggregator protocol mode.</string>
-               </property>
-               <property name="text">
-                <string>KeySupportMode</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
               <widget class="QLineEdit" name="editPointerSupportMode"/>
              </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="cboxKeySupportMode">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="chkPointerSupport">
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_112">
                <property name="toolTip">
-                <string>This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER_PROTOCOL is broken.
+                <string notr="true">Type: plist integer
+
+Description: Configure initial keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
+
+In order to fine tune keyboard behaviour three values are relavent: KeyForgetThreshold, KeyInitialDelay and KeySubsequentDelay.
 
 ----
 
-这个选项通过选定的OEM协议实现了标准的UEFI指针协议(EFI_SIMPLE_POINTER_PROTOCOL)。该选项可能对Z87华硕板卡有用，因为在这些板卡上EFI_SIMPLE_POINTER_PROTOCOL被破坏了。</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable internal pointer driver.</string>
+类型：plist整数
+
+说明：在OpenCore实现Apple Event协议中配置初始键盘重复延迟，单位为10ms。
+
+为了对键盘行为进行微调，有三个值是相关的，分别是：KeyForgetThreshold、KeyInitialDelay和KeySubsequentDelay。</string>
                </property>
                <property name="text">
-                <string>PointerSupport</string>
+                <string>KeyInitialDelay</string>
                </property>
               </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_38">
-               <property name="toolTip">
-                <string>Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS boards. More details can be found in LongSoft/UefiTool#116.
-
-----
-
-目前唯一支持的版本是华硕，使用华硕Z87和Z97板卡上的专用协议。更多细节可以在LongSoft/UefiTool#116中找到。</string>
-               </property>
-               <property name="statusTip">
-                <string> Set OEM protocol used for internal pointer driver.</string>
-               </property>
-               <property name="text">
-                <string>PointerSupportMode</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editKeyForgetThreshold"/>
              </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_37">
@@ -8107,27 +8018,86 @@ AppleKeyMapAggregator协议应该包含一个固定长度的当前按键缓冲�
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="chkKeySupport">
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="editIntKeyForgetThreshold"/>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="editIntKeyInitialDelay"/>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_23">
                <property name="toolTip">
-                <string>This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as OpenUsbKbDxe, this option should never be enabled.
+                <string notr="true">• Auto — Performs automatic choice as available with the following preference: AMI, V2, V1. 
+
+• V1 — Uses UEFI standard legacy input protocol EFI_SIMPLE_TEXT_INPUT_PROTOCOL. 
+
+• V2 — Uses UEFI standard modern input protocol EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL. • AMI — Uses APTIO input protocol AMI_EFIKEYCODE_PROTOCOL.
+
+Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular specified protocol. This may change in the future versions.
 
 ----
 
-这个选项可以激活基于AppleGenericInput又名(AptioInputFix)的内部键盘拦截器驱动，以填充AppleKeyMapAggregator数据库的输入功能。如果使用了单独的驱动程序，比如OpenUsbKbDxe，这个选项绝对不能启用。</string>
+- Auto - 根据以下偏好执行自动选择。AMI, V2, V1. 
+
+- V1 - 使用 UEFI 标准的传统输入协议 EFI_SIMPLE_TEXT_INPUT_PROTOCOL。
+
+- V2 - 使用 UEFI 标准的现代输入协议 EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL。- AMI - 使用 APTIO 输入协议 AMI_EFIKEYCODE_PROTOCOL。
+
+注意：目前 V1、V2 和 AMI 与 Auto 不同，只对特定的协议进行过滤。这在未来的版本中可能会改变。</string>
                </property>
                <property name="statusTip">
-                <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
+                <string> Set internal keyboard input translation to AppleKeyMapAggregator protocol mode.</string>
                </property>
                <property name="text">
-                <string>KeySupport</string>
+                <string>KeySupportMode</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="chkKeyFiltering">
+               <property name="toolTip">
+                <string notr="true">Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
+
+This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and 108 in version 2.8).
+
+----
+
+显然，有些板子，如GA Z77P-D3，可能会在EFI_INPUT_KEY中返回所有输入协议的未初始化数据。
+
+这个选项会丢弃那些既不是ASCII码，也不是在UEFI规范中定义的键(见2.8版本的表107和108)。</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable keyboard input sanity checking.</string>
+               </property>
+               <property name="text">
+                <string>KeyFiltering</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_38">
+               <property name="toolTip">
+                <string notr="true">Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS boards. More details can be found in LongSoft/UefiTool#116.
+
+----
+
+目前唯一支持的版本是华硕，使用华硕Z87和Z97板卡上的专用协议。更多细节可以在LongSoft/UefiTool#116中找到。</string>
+               </property>
+               <property name="statusTip">
+                <string> Set OEM protocol used for internal pointer driver.</string>
+               </property>
+               <property name="text">
+                <string>PointerSupportMode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="editIntTimerResolution"/>
+             </item>
+             <item row="5" column="0">
               <widget class="QLabel" name="label_40">
                <property name="toolTip">
-                <string>This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
+                <string notr="true">This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
 
 Setting a lower value generally improves performance and responsiveness of the interface and input handling.
 
@@ -8149,26 +8119,92 @@ The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS 
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="editTimerResolution"/>
-             </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="chkKeySkipFirstDelay">
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="chkPointerSupport">
                <property name="toolTip">
-                <string notr="true">Description: Suppress initial delay before key repeat in OpenCore implementation of Apple Event protocol.
-
-When combining OpenCore KeySupport with the Apple Event protocol, key repeat behaviour may show one additional slow key repeat before normal key repeat starts. Enabling this option works around this problem by suppressing the initial repeat delay in the OpenCore Apple Event implementation. This option is recommended to be set when using KeySupport mode, in most cases, and is not recommended to be set on any systems which are not using KeySupport mode.
+                <string notr="true">This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER_PROTOCOL is broken.
 
 ----
 
-说明：在OpenCore实现Apple Event协议时，抑制按键重复前的初始延迟。
-
-当将 OpenCore KeySupport 与 Apple Event 协议相结合时，按键重复行为可能会在正常按键重复开始前显示一个额外的缓慢按键重复。启用此选项可以通过抑制 OpenCore Apple Event 实现中的初始重复延迟来解决这个问题。在大多数情况下，建议在使用KeySupport模式时设置此选项，不建议在任何不使用KeySupport模式的系统上设置。</string>
+这个选项通过选定的OEM协议实现了标准的UEFI指针协议(EFI_SIMPLE_POINTER_PROTOCOL)。该选项可能对Z87华硕板卡有用，因为在这些板卡上EFI_SIMPLE_POINTER_PROTOCOL被破坏了。</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable internal pointer driver.</string>
                </property>
                <property name="text">
-                <string>KeySkipFirstDelay</string>
+                <string>PointerSupport</string>
                </property>
               </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="chkKeySupport">
+               <property name="toolTip">
+                <string notr="true">This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as OpenUsbKbDxe, this option should never be enabled.
+
+----
+
+这个选项可以激活基于AppleGenericInput又名(AptioInputFix)的内部键盘拦截器驱动，以填充AppleKeyMapAggregator数据库的输入功能。如果使用了单独的驱动程序，比如OpenUsbKbDxe，这个选项绝对不能启用。</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
+               </property>
+               <property name="text">
+                <string>KeySupport</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="chkKeySwap">
+               <property name="toolTip">
+                <string notr="true">This option may be useful for keyboard layouts with Option key situated to the right of Command key.
+
+----
+
+这个选项可能对命令键右边的选项键的键盘布局有用。</string>
+               </property>
+               <property name="statusTip">
+                <string>Swap Command and Option keys during submission.</string>
+               </property>
+               <property name="text">
+                <string>KeySwap</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QComboBox" name="cboxKeySupportMode">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_113">
+               <property name="toolTip">
+                <string notr="true">Type: plist integer
+
+Description: Configure subsequent keyboard repeat delay in OpenCore implementation of Apple Event protocol,in units of 10ms.
+
+See documentation of KeyInitialDelay for fine tuning. Even if not fine tuning, this value should ideally not be set to less than the value of KeyForgetThreshold in order to avoid excess key repeats; however, in practice, the difference may not be noticeable, and you probably do not need to change this value except as part of key repeat fine tuning.
+
+Note: No changes to this value are ever required on systems which are not using KeySupport.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现的Apple Event协议中配置后续键盘重复延迟，单位为10ms。
+
+请参阅KeyInitialDelay的文档进行微调。即使不进行微调，这个值最好也不要小于KeyForgetThreshold的值，以避免过多的按键重复；但是，在实际操作中，两者的差别可能并不明显，你可能不需要改变这个值，除非作为按键重复微调的一部分。
+
+注意：在不使用KeySupport的系统上，永远不需要改变这个值。</string>
+               </property>
+               <property name="text">
+                <string>KeySubsequentDelay</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="editIntKeySubsequentDelay"/>
              </item>
             </layout>
            </widget>
@@ -8638,7 +8674,7 @@ However, in case FakeSMC kernel extension is used, manual NVRAM key variable add
  if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.</string>
                </property>
                <property name="text">
-                <string>DeviceProperties</string>
+                <string notr="true">DeviceProperties</string>
                </property>
               </widget>
              </item>
@@ -8722,7 +8758,7 @@ However, in case FakeSMC kernel extension is used, manual NVRAM key variable add
  protocol was already installed.</string>
                </property>
                <property name="text">
-                <string>DataHub</string>
+                <string notr="true">DataHub</string>
                </property>
               </widget>
              </item>
@@ -8869,7 +8905,7 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
               </widget>
              </item>
              <item row="8" column="1">
-              <widget class="QLineEdit" name="editTscSyncTimeout">
+              <widget class="QLineEdit" name="editIntTscSyncTimeout">
                <property name="minimumSize">
                 <size>
                  <width>150</width>
@@ -8964,7 +9000,7 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
               </widget>
              </item>
              <item row="6" column="1">
-              <widget class="QLineEdit" name="editExitBootServicesDelay">
+              <widget class="QLineEdit" name="editIntExitBootServicesDelay">
                <property name="minimumSize">
                 <size>
                  <width>150</width>
@@ -9185,6 +9221,8 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
     <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -9415,6 +9453,11 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionDiscussion_Forum">
    <property name="text">
     <string>Discussion Forum</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
    </property>
   </action>
  </widget>

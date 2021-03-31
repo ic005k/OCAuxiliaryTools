@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210330";
+    CurVerison = "20210402";
     title = "OC Auxiliary Tools   V0.6.8 - " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -50,6 +50,7 @@ MainWindow::MainWindow(QWidget* parent)
         mac = true;
 
     this->resize(1300, 700);
+    ui->actionQuit->setVisible(false);
 #endif
 
 #ifdef Q_OS_WIN32
@@ -394,12 +395,7 @@ void MainWindow::ParserACPI(QVariantMap map)
 
     //分析Quirks
     QVariantMap map_quirks = map["Quirks"].toMap();
-
-    ui->chkFadtEnableReset->setChecked(map_quirks["FadtEnableReset"].toBool());
-    ui->chkNormalizeHeaders->setChecked(map_quirks["NormalizeHeaders"].toBool());
-    ui->chkRebaseRegions->setChecked(map_quirks["RebaseRegions"].toBool());
-    ui->chkResetHwSig->setChecked(map_quirks["ResetHwSig"].toBool());
-    ui->chkResetLogoStatus->setChecked(map_quirks["ResetLogoStatus"].toBool());
+    getValue(map_quirks, ui->tabACPI4);
 }
 
 void MainWindow::initui_acpi()
@@ -651,28 +647,7 @@ void MainWindow::ParserBooter(QVariantMap map)
 
     // Quirks
     QVariantMap map_quirks = map["Quirks"].toMap();
-
-    ui->chkAvoidRuntimeDefrag->setChecked(map_quirks["AvoidRuntimeDefrag"].toBool());
-    ui->chkDevirtualiseMmio->setChecked(map_quirks["DevirtualiseMmio"].toBool());
-    ui->chkDisableSingleUser->setChecked(map_quirks["DisableSingleUser"].toBool());
-    ui->chkDisableVariableWrite->setChecked(map_quirks["DisableVariableWrite"].toBool());
-    ui->chkDiscardHibernateMap->setChecked(map_quirks["DiscardHibernateMap"].toBool());
-    ui->chkEnableSafeModeSlide->setChecked(map_quirks["EnableSafeModeSlide"].toBool());
-    ui->chkEnableWriteUnprotector->setChecked(map_quirks["EnableWriteUnprotector"].toBool());
-    ui->chkForceExitBootServices->setChecked(map_quirks["ForceExitBootServices"].toBool());
-    ui->chkProtectMemoryRegions->setChecked(map_quirks["ProtectMemoryRegions"].toBool());
-    ui->chkProtectSecureBoot->setChecked(map_quirks["ProtectSecureBoot"].toBool());
-    ui->chkProtectUefiServices->setChecked(map_quirks["ProtectUefiServices"].toBool());
-    ui->chkProvideCustomSlide->setChecked(map_quirks["ProvideCustomSlide"].toBool());
-    ui->editProvideMaxSlide->setText(map_quirks["ProvideMaxSlide"].toString());
-    ui->chkRebuildAppleMemoryMap->setChecked(map_quirks["RebuildAppleMemoryMap"].toBool());
-    ui->chkSetupVirtualMap->setChecked(map_quirks["SetupVirtualMap"].toBool());
-    ui->chkSignalAppleOS->setChecked(map_quirks["SignalAppleOS"].toBool());
-    ui->chkSyncRuntimePermissions->setChecked(map_quirks["SyncRuntimePermissions"].toBool());
-
-    ui->chkAllowRelocationBlock->setChecked(map_quirks["AllowRelocationBlock"].toBool());
-
-    ui->chkForceBooterSignature->setChecked(map_quirks["ForceBooterSignature"].toBool());
+    getValue(map_quirks, ui->tabBooter3);
 }
 
 void MainWindow::initui_dp()
@@ -1157,56 +1132,15 @@ void MainWindow::ParserKernel(QVariantMap map)
 
     // Emulate
     QVariantMap map_Emulate = map["Emulate"].toMap();
-    ui->editCpuid1Data->setText(
-        ByteToHexStr(map_Emulate["Cpuid1Data"].toByteArray()));
-    ui->editCpuid1Mask->setText(
-        ByteToHexStr(map_Emulate["Cpuid1Mask"].toByteArray()));
-    ui->chkDummyPowerManagement->setChecked(
-        map_Emulate["DummyPowerManagement"].toBool());
-    ui->editMaxKernel->setText(map_Emulate["MaxKernel"].toString());
-    ui->editMinKernel->setText(map_Emulate["MinKernel"].toString());
+    getValue(map_Emulate, ui->tabKernel5);
 
     // Quirks
     QVariantMap map_quirks = map["Quirks"].toMap();
-
-    ui->chkAppleCpuPmCfgLock->setChecked(map_quirks["AppleCpuPmCfgLock"].toBool());
-    ui->chkAppleXcpmCfgLock->setChecked(map_quirks["AppleXcpmCfgLock"].toBool());
-    ui->chkAppleXcpmExtraMsrs->setChecked(map_quirks["AppleXcpmExtraMsrs"].toBool());
-    ui->chkAppleXcpmForceBoost->setChecked(map_quirks["AppleXcpmForceBoost"].toBool());
-
-    ui->chkCustomSMBIOSGuid->setChecked(map_quirks["CustomSMBIOSGuid"].toBool());
-
-    ui->chkDisableIoMapper->setChecked(map_quirks["DisableIoMapper"].toBool());
-    ui->chkDisableRtcChecksum->setChecked(map_quirks["DisableRtcChecksum"].toBool());
-    ui->chkExternalDiskIcons->setChecked(map_quirks["ExternalDiskIcons"].toBool());
-    ui->chkIncreasePciBarSize->setChecked(map_quirks["IncreasePciBarSize"].toBool());
-    ui->chkLapicKernelPanic->setChecked(map_quirks["LapicKernelPanic"].toBool());
-    ui->chkPanicNoKextDump->setChecked(map_quirks["PanicNoKextDump"].toBool());
-    ui->chkPowerTimeoutKernelPanic->setChecked(map_quirks["PowerTimeoutKernelPanic"].toBool());
-
-    ui->editSetApfsTrimTimeout->setText(map_quirks["SetApfsTrimTimeout"].toString());
-
-    ui->chkThirdPartyDrives->setChecked(map_quirks["ThirdPartyDrives"].toBool());
-
-    ui->chkXhciPortLimit->setChecked(map_quirks["XhciPortLimit"].toBool());
-    ui->chkDisableLinkeditJettison->setChecked(map_quirks["DisableLinkeditJettison"].toBool());
-
-    ui->chkExtendBTFeatureFlags->setChecked(
-        map_quirks["ExtendBTFeatureFlags"].toBool());
-    ui->chkLegacyCommpage->setChecked(map_quirks["LegacyCommpage"].toBool());
-
-    ui->chkForceSecureBootScheme->setChecked(
-        map_quirks["ForceSecureBootScheme"].toBool());
+    getValue(map_quirks, ui->tabKernel6);
 
     // Scheme
     QVariantMap map_Scheme = map["Scheme"].toMap();
-    ui->chkFuzzyMatch->setChecked(map_Scheme["FuzzyMatch"].toBool());
-
-    QString hm = map_Scheme["KernelArch"].toString();
-    ui->cboxKernelArch->setCurrentText(hm.trimmed());
-
-    hm = map_Scheme["KernelCache"].toString();
-    ui->cboxKernelCache->setCurrentText(hm.trimmed());
+    getValue(map_Scheme, ui->tabKernel7);
 }
 
 void MainWindow::initui_misc()
@@ -1241,13 +1175,11 @@ void MainWindow::initui_misc()
     ui->editTargetHex->setPlaceholderText("00");
 
     QRegExp regx1("[0-9]{3}");
-    QValidator* validator1 = new QRegExpValidator(regx1, ui->editTarget);
-    ui->editTarget->setValidator(validator1);
-    ui->editTarget->setPlaceholderText("000");
+    QValidator* validator1 = new QRegExpValidator(regx1, ui->editIntTarget);
+    ui->editIntTarget->setValidator(validator1);
+    ui->editIntTarget->setPlaceholderText("000");
 
     // Security
-    //ui->cboxBootProtect->addItem("None");
-    //ui->cboxBootProtect->addItem("Bootstrap");
 
     ui->cboxDmgLoading->addItem("Disabled");
     ui->cboxDmgLoading->addItem("Signed");
@@ -1338,89 +1270,24 @@ void MainWindow::ParserMisc(QVariantMap map)
 
     //分析"Boot"
     QVariantMap map_boot = map["Boot"].toMap();
+    getValue(map_boot, ui->tabMisc1);
 
-    ui->editConsoleAttributes->setText(map_boot["ConsoleAttributes"].toString());
+    ui->editIntConsoleAttributes->setText(map_boot["ConsoleAttributes"].toString());
 
     QString hm = map_boot["HibernateMode"].toString();
-    ui->cboxHibernateMode->setCurrentText(hm.trimmed());
-
-    hm = map_boot["LauncherOption"].toString();
-    if (hm == "")
-        hm = "Disabled";
-    ui->cboxLauncherOption->setCurrentText(hm.trimmed());
-
-    hm = map_boot["LauncherPath"].toString();
-    if (hm == "")
-        hm = "Default";
-    ui->cboxLauncherPath->setCurrentText(hm.trimmed());
-
-    ui->chkHideAuxiliary->setChecked(map_boot["HideAuxiliary"].toBool());
-    ui->editPickerAttributes->setText(map_boot["PickerAttributes"].toString());
-    ui->chkPickerAudioAssist->setChecked(map_boot["PickerAudioAssist"].toBool());
-
-    hm = map_boot["PickerMode"].toString();
-    ui->cboxPickerMode->setCurrentText(hm.trimmed());
-
-    hm = map_boot["PickerVariant"].toString();
-    if (hm == "")
-        hm = "Auto";
-    ui->cboxPickerVariant->setCurrentText(hm.trimmed());
-
-    ui->chkPollAppleHotKeys->setChecked(map_boot["PollAppleHotKeys"].toBool());
-    ui->chkShowPicker->setChecked(map_boot["ShowPicker"].toBool());
-    ui->editTakeoffDelay->setText(map_boot["TakeoffDelay"].toString());
-    ui->editTimeout->setText(map_boot["Timeout"].toString());
 
     // Debug
     QVariantMap map_debug = map["Debug"].toMap();
-    ui->chkAppleDebug->setChecked(map_debug["AppleDebug"].toBool());
-    ui->chkApplePanic->setChecked(map_debug["ApplePanic"].toBool());
-    ui->chkDisableWatchDog->setChecked(map_debug["DisableWatchDog"].toBool());
-
-    ui->editDisplayDelay->setText(map_debug["DisplayDelay"].toString());
-
-    ui->editDisplayLevel->setText(map_debug["DisplayLevel"].toString());
-
-    ui->chkSerialInit->setChecked(map_debug["SerialInit"].toBool());
-    ui->chkSysReport->setChecked(map_debug["SysReport"].toBool());
-
-    ui->editTarget->setText(map_debug["Target"].toString());
+    getValue(map_debug, ui->tabMisc2);
 
     // Security
     QVariantMap map_security = map["Security"].toMap();
-    ui->chkAllowNvramReset->setChecked(map_security["AllowNvramReset"].toBool());
-    ui->chkAllowSetDefault->setChecked(map_security["AllowSetDefault"].toBool());
-    ui->chkAuthRestart->setChecked(map_security["AuthRestart"].toBool());
-    ui->chkBlacklistAppleUpdate->setChecked(
-        map_security["BlacklistAppleUpdate"].toBool());
-
-    //hm = map_security["BootProtect"].toString();
-    //ui->cboxBootProtect->setCurrentText(hm.trimmed());
-
-    ui->editExposeSensitiveData->setText(
-        map_security["ExposeSensitiveData"].toString());
-
-    ui->editHaltLevel->setText(map_security["HaltLevel"].toString());
-    ui->editScanPolicy->setText(map_security["ScanPolicy"].toString());
-
-    hm = map_security["Vault"].toString();
-    ui->cboxVault->setCurrentText(hm.trimmed());
-
-    hm = map_security["DmgLoading"].toString();
-    ui->cboxDmgLoading->setCurrentText(hm.trimmed());
-
-    ui->editApECID->setText(map_security["ApECID"].toString());
+    getValue(map_security, ui->tabMisc3);
 
     hm = map_security["SecureBootModel"].toString().trimmed();
     if (hm == "")
         hm = "Disabled";
     ui->cboxSecureBootModel->setCurrentText(hm.trimmed());
-
-    ui->chkEnablePassword->setChecked(map_security["EnablePassword"].toBool());
-    ui->editPasswordHash->setText(
-        ByteToHexStr(map_security["PasswordHash"].toByteArray()));
-    ui->editPasswordSalt->setText(
-        ByteToHexStr(map_security["PasswordSalt"].toByteArray()));
 
     // BlessOverride(数组)
     QVariantList map_BlessOverride = map["BlessOverride"].toList();
@@ -2151,25 +2018,16 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
 
     // Generic
     QVariantMap mapGeneric = map["Generic"].toMap();
-    ui->chkAdviseWindows->setChecked(mapGeneric["AdviseWindows"].toBool());
-    ui->chkMaxBIOSVersion->setChecked(mapGeneric["MaxBIOSVersion"].toBool());
+    getValue(mapGeneric, ui->tabPlatformInfo1);
 
-    ui->editMLB->setText(mapGeneric["MLB"].toString());
-    if (ui->editMLB_2->text().trimmed() == "")
-        ui->editMLB_2->setText(mapGeneric["MLB"].toString());
+    if (ui->editMLB_PNVRAM->text().trimmed() == "")
+        ui->editMLB_PNVRAM->setText(mapGeneric["MLB"].toString());
 
     QByteArray ba = mapGeneric["ROM"].toByteArray();
     QString va = ba.toHex().toUpper();
-    ui->editROM->setText(va);
-    if (ui->editROM_2->text().trimmed() == "")
-        ui->editROM_2->setText(va);
 
-    ui->chkSpoofVendor->setChecked(mapGeneric["SpoofVendor"].toBool());
-
-    ui->editProcessorTypeGeneric->setText(mapGeneric["ProcessorType"].toString());
-
-    ui->cboxSystemMemoryStatus->setCurrentText(
-        mapGeneric["SystemMemoryStatus"].toString().trimmed());
+    if (ui->editROM_PNVRAM->text().trimmed() == "")
+        ui->editROM_PNVRAM->setText(va);
 
     //机型
     QString spn = mapGeneric["SystemProductName"].toString();
@@ -2182,50 +2040,10 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
         }
     }
 
-    if (ui->editSystemProductName->text().trimmed() == "")
-        ui->editSystemProductName->setText(
-            mapGeneric["SystemProductName"].toString());
-    if (ui->editSystemProductName_2->text().trimmed() == "")
-        ui->editSystemProductName_2->setText(
-            mapGeneric["SystemProductName"].toString());
-
-    ui->editSystemSerialNumber->setText(
-        mapGeneric["SystemSerialNumber"].toString());
-    if (ui->editSystemSerialNumber_data->text().trimmed() == "")
-        ui->editSystemSerialNumber_data->setText(
-            mapGeneric["SystemSerialNumber"].toString());
-    if (ui->editSystemSerialNumber_2->text().trimmed() == "")
-        ui->editSystemSerialNumber_2->setText(
-            mapGeneric["SystemSerialNumber"].toString());
-
-    ui->editSystemUUID->setText(mapGeneric["SystemUUID"].toString());
-    if (ui->editSystemUUID_data->text().trimmed() == "")
-        ui->editSystemUUID_data->setText(mapGeneric["SystemUUID"].toString());
-    if (ui->editSystemUUID_2->text().trimmed() == "")
-        ui->editSystemUUID_2->setText(mapGeneric["SystemUUID"].toString());
-
     // DataHub
     QVariantMap mapDataHub = map["DataHub"].toMap();
-    ui->editARTFrequency->setText(mapDataHub["ARTFrequency"].toString());
-    ui->editBoardProduct->setText(mapDataHub["BoardProduct"].toString());
-    ui->editBoardRevision->setText(
-        ByteToHexStr(mapDataHub["BoardRevision"].toByteArray()));
-    ui->editDevicePathsSupported->setText(
-        mapDataHub["DevicePathsSupported"].toString());
-    ui->editFSBFrequency->setText(mapDataHub["FSBFrequency"].toString());
-    ui->editInitialTSC->setText(mapDataHub["InitialTSC"].toString());
-    ui->editPlatformName->setText(mapDataHub["PlatformName"].toString());
-    ui->editSmcBranch->setText(
-        ByteToHexStr(mapDataHub["SmcBranch"].toByteArray()));
-    ui->editSmcPlatform->setText(
-        ByteToHexStr(mapDataHub["SmcPlatform"].toByteArray()));
-    ui->editSmcRevision->setText(
-        ByteToHexStr(mapDataHub["SmcRevision"].toByteArray()));
-    ui->editStartupPowerEvents->setText(
-        mapDataHub["StartupPowerEvents"].toString());
+    getValue(mapDataHub, ui->tabPlatformInfo2);
 
-    ui->editSystemProductName->setText(
-        mapDataHub["SystemProductName"].toString());
     if (ui->cboxSystemProductName->currentText() == "") {
         for (int i = 0; i < ui->cboxSystemProductName->count(); i++) {
             if (getSystemProductName(ui->cboxSystemProductName->itemText(i)) == mapDataHub["SystemProductName"].toString()) {
@@ -2235,13 +2053,9 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
         }
     }
 
-    ui->editSystemSerialNumber_data->setText(
-        mapDataHub["SystemSerialNumber"].toString());
     if (ui->editSystemSerialNumber->text().trimmed() == "")
-        ui->editSystemSerialNumber->setText(
-            mapDataHub["SystemSerialNumber"].toString());
+        ui->editSystemSerialNumber->setText(mapDataHub["SystemSerialNumber"].toString());
 
-    ui->editSystemUUID_data->setText(mapDataHub["SystemUUID"].toString());
     if (ui->editSystemUUID->text().trimmed() == "")
         ui->editSystemUUID->setText(mapDataHub["SystemUUID"].toString());
 
@@ -2299,66 +2113,17 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
 
     // PlatformNVRAM
     QVariantMap mapPlatformNVRAM = map["PlatformNVRAM"].toMap();
+    getValue(mapPlatformNVRAM, ui->tabPlatformInfo4);
 
-    ui->editBID->setText(mapPlatformNVRAM["BID"].toString());
-
-    ui->editMLB_2->setText(mapPlatformNVRAM["MLB"].toString());
     if (ui->editMLB->text().trimmed() == "")
         ui->editMLB->setText(mapPlatformNVRAM["MLB"].toString());
 
-    ui->editFirmwareFeatures->setText(
-        ByteToHexStr(mapPlatformNVRAM["FirmwareFeatures"].toByteArray()));
-    ui->editFirmwareFeaturesMask->setText(
-        ByteToHexStr(mapPlatformNVRAM["FirmwareFeaturesMask"].toByteArray()));
-
-    ui->editROM_2->setText(ByteToHexStr(mapPlatformNVRAM["ROM"].toByteArray()));
-    if (ui->editROM->text().trimmed() == "")
-        ui->editROM->setText(ByteToHexStr(mapPlatformNVRAM["ROM"].toByteArray()));
-
-    ui->editSystemSerialNumber_PlatformNVRAM->setText(mapPlatformNVRAM["SystemSerialNumber"].toString());
-
-    ui->editSystemUUID_PNVRAM->setText(mapPlatformNVRAM["SystemUUID"].toString());
+    if (ui->editDatROM->text().trimmed() == "")
+        ui->editDatROM->setText(ByteToHexStr(mapPlatformNVRAM["ROM"].toByteArray()));
 
     // SMBIOS
     QVariantMap mapSMBIOS = map["SMBIOS"].toMap();
-
-    ui->editBIOSReleaseDate->setText(mapSMBIOS["BIOSReleaseDate"].toString());
-    ui->editBIOSVendor->setText(mapSMBIOS["BIOSVendor"].toString());
-    ui->editBIOSVersion->setText(mapSMBIOS["BIOSVersion"].toString());
-    ui->editBoardAssetTag->setText(mapSMBIOS["BoardAssetTag"].toString());
-    ui->editBoardLocationInChassis->setText(
-        mapSMBIOS["BoardLocationInChassis"].toString());
-    ui->editBoardManufacturer->setText(mapSMBIOS["BoardManufacturer"].toString());
-    ui->editBoardProduct_2->setText(mapSMBIOS["BoardProduct"].toString());
-    ui->editBoardSerialNumber->setText(mapSMBIOS["BoardSerialNumber"].toString());
-    ui->editBoardType->setText(mapSMBIOS["BoardType"].toString());
-    ui->editBoardVersion->setText(mapSMBIOS["BoardVersion"].toString());
-    ui->editChassisAssetTag->setText(mapSMBIOS["ChassisAssetTag"].toString());
-    ui->editChassisManufacturer->setText(
-        mapSMBIOS["ChassisManufacturer"].toString());
-    ui->editChassisSerialNumber->setText(
-        mapSMBIOS["ChassisSerialNumber"].toString());
-    ui->editChassisType->setText(mapSMBIOS["ChassisType"].toString());
-    ui->editChassisVersion->setText(mapSMBIOS["ChassisVersion"].toString());
-    ui->editFirmwareFeatures_2->setText(
-        ByteToHexStr(mapSMBIOS["FirmwareFeatures"].toByteArray()));
-    ui->editFirmwareFeaturesMask_2->setText(
-        ByteToHexStr(mapSMBIOS["FirmwareFeaturesMask"].toByteArray()));
-    // ui->editMemoryFormFactor->setText(mapSMBIOS["MemoryFormFactor"].toString());
-    ui->editPlatformFeature->setText(mapSMBIOS["PlatformFeature"].toString());
-    ui->editProcessorType->setText(mapSMBIOS["ProcessorType"].toString());
-    ui->editSmcVersion->setText(
-        ByteToHexStr(mapSMBIOS["SmcVersion"].toByteArray()));
-    ui->editSystemFamily->setText(mapSMBIOS["SystemFamily"].toString());
-    ui->editSystemManufacturer->setText(
-        mapSMBIOS["SystemManufacturer"].toString());
-    ui->editSystemProductName_2->setText(
-        mapSMBIOS["SystemProductName"].toString());
-    ui->editSystemSKUNumber->setText(mapSMBIOS["SystemSKUNumber"].toString());
-    ui->editSystemSerialNumber_2->setText(
-        mapSMBIOS["SystemSerialNumber"].toString());
-    ui->editSystemUUID_2->setText(mapSMBIOS["SystemUUID"].toString());
-    ui->editSystemVersion->setText(mapSMBIOS["SystemVersion"].toString());
+    getValue(mapSMBIOS, ui->tabPlatformInfo5);
 }
 
 void MainWindow::initui_UEFI()
@@ -2384,11 +2149,6 @@ void MainWindow::initui_UEFI()
     ui->cboxKeySupportMode->addItem("V1");
     ui->cboxKeySupportMode->addItem("V2");
     ui->cboxKeySupportMode->addItem("AMI");
-
-    //ui->lblDownkeysHandler->setHidden(true);
-    //ui->cboxDownkeysHandler->setHidden(true);
-    //ui->cboxDownkeysHandler->addItem("Enabled");
-    //ui->cboxDownkeysHandler->addItem("Disabled");
 
     // Output
     ui->cboxConsoleMode->setEditable(true);
@@ -2435,31 +2195,11 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
     //APFS
     QVariantMap map_apfs = map["APFS"].toMap();
-    ui->chkEnableJumpstart->setChecked(map_apfs["EnableJumpstart"].toBool());
-    ui->chkGlobalConnect->setChecked(map_apfs["GlobalConnect"].toBool());
-    ui->chkHideVerbose->setChecked(map_apfs["HideVerbose"].toBool());
-    ui->chkJumpstartHotPlug->setChecked(map_apfs["JumpstartHotPlug"].toBool());
-    ui->editMinDate->setText(map_apfs["MinDate"].toString());
-    ui->editMinVersion->setText(map_apfs["MinVersion"].toString());
+    getValue(map_apfs, ui->tabUEFI1);
 
     //Audio
     QVariantMap map_audio = map["Audio"].toMap();
-    ui->chkAudioSupport->setChecked(map_audio["AudioSupport"].toBool());
-
-    ui->chkResetTrafficClass->setChecked(map_audio["ResetTrafficClass"].toBool());
-
-    QString strPlayChime = map_audio["PlayChime"].toString();
-    if (strPlayChime == "true" || strPlayChime == "false")
-        ui->cboxPlayChime->setCurrentText("Auto");
-    else
-        ui->cboxPlayChime->setCurrentText(map_audio["PlayChime"].toString());
-
-    ui->editAudioCodec->setText(map_audio["AudioCodec"].toString());
-    ui->editAudioDevice->setText(map_audio["AudioDevice"].toString());
-    ui->editAudioOut->setText(map_audio["AudioOut"].toString());
-    ui->editMinimumVolume->setText(map_audio["MinimumVolume"].toString());
-    ui->editSetupDelay->setText(map_audio["SetupDelay"].toString());
-    ui->editVolumeAmplifier->setText(map_audio["VolumeAmplifier"].toString());
+    getValue(map_audio, ui->tabUEFI2);
 
     // Drivers
     QTableWidgetItem* id0;
@@ -2475,83 +2215,19 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
     //Input
     QVariantMap map_input = map["Input"].toMap();
-    ui->chkKeyFiltering->setChecked(map_input["KeyFiltering"].toBool());
-    ui->chkKeySupport->setChecked(map_input["KeySupport"].toBool());
-    ui->chkKeySwap->setChecked(map_input["KeySwap"].toBool());
-    ui->chkPointerSupport->setChecked(map_input["PointerSupport"].toBool());
-    ui->chkKeySkipFirstDelay->setChecked(map_input["KeySkipFirstDelay"].toBool());
-
-    ui->editKeyForgetThreshold->setText(map_input["KeyForgetThreshold"].toString());
-    ui->editPointerSupportMode->setText(map_input["PointerSupportMode"].toString());
-    ui->editTimerResolution->setText(map_input["TimerResolution"].toString());
-
-    QString ksm = map_input["KeySupportMode"].toString();
-    ui->cboxKeySupportMode->setCurrentText(ksm.trimmed());
-
-    /*ksm = map_input["DownkeysHandler"].toString().trimmed();
-    if (ksm != "")
-        ui->cboxDownkeysHandler->setCurrentText(ksm);
-    else
-        ui->cboxDownkeysHandler->setCurrentText("Disabled");*/
+    getValue(map_input, ui->tabUEFI4);
 
     // Output
     QVariantMap map_output = map["Output"].toMap();
-    ui->chkClearScreenOnModeSwitch->setChecked(map_output["ClearScreenOnModeSwitch"].toBool());
-    ui->chkDirectGopRendering->setChecked(map_output["DirectGopRendering"].toBool());
-    ui->chkIgnoreTextInGraphics->setChecked(map_output["IgnoreTextInGraphics"].toBool());
-    ui->chkProvideConsoleGop->setChecked(map_output["ProvideConsoleGop"].toBool());
-    ui->chkReconnectOnResChange->setChecked(map_output["ReconnectOnResChange"].toBool());
-    ui->chkReplaceTabWithSpace->setChecked(map_output["ReplaceTabWithSpace"].toBool());
-    ui->chkSanitiseClearScreen->setChecked(map_output["SanitiseClearScreen"].toBool());
-    ui->chkUgaPassThrough->setChecked(map_output["UgaPassThrough"].toBool());
-    ui->chkForceResolution->setChecked(map_output["ForceResolution"].toBool());
-
-    ui->chkGopPassThrough->setChecked(map_output["GopPassThrough"].toBool());
-
-    ui->cboxConsoleMode->setCurrentText(map_output["ConsoleMode"].toString());
-    ui->cboxResolution->setCurrentText(map_output["Resolution"].toString());
-    ui->cboxTextRenderer->setCurrentText(map_output["TextRenderer"].toString());
+    getValue(map_output, ui->tabUEFI5);
 
     // ProtocolOverrides
     QVariantMap map_po = map["ProtocolOverrides"].toMap();
-    ui->chkAppleAudio->setChecked(map_po["AppleAudio"].toBool());
-    ui->chkAppleBootPolicy->setChecked(map_po["AppleBootPolicy"].toBool());
-    ui->chkAppleDebugLog->setChecked(map_po["AppleDebugLog"].toBool());
-    ui->chkAppleEvent->setChecked(map_po["AppleEvent"].toBool());
-    ui->chkAppleFramebufferInfo->setChecked(map_po["AppleFramebufferInfo"].toBool());
-    ui->chkAppleImageConversion->setChecked(map_po["AppleImageConversion"].toBool());
-    ui->chkAppleKeyMap->setChecked(map_po["AppleKeyMap"].toBool());
-    ui->chkAppleRtcRam->setChecked(map_po["AppleRtcRam"].toBool());
-    ui->chkAppleSmcIo->setChecked(map_po["AppleSmcIo"].toBool());
-    ui->chkAppleUserInterfaceTheme->setChecked(map_po["AppleUserInterfaceTheme"].toBool());
-    ui->chkDataHub->setChecked(map_po["DataHub"].toBool());
-    ui->chkDeviceProperties->setChecked(map_po["DeviceProperties"].toBool());
-    ui->chkFirmwareVolume->setChecked(map_po["FirmwareVolume"].toBool());
-    ui->chkHashServices->setChecked(map_po["HashServices"].toBool());
-    ui->chkOSInfo->setChecked(map_po["OSInfo"].toBool());
-    ui->chkUnicodeCollation->setChecked(map_po["UnicodeCollation"].toBool());
-    ui->chkAppleImg4Verification->setChecked(map_po["AppleImg4Verification"].toBool());
-    ui->chkAppleSecureBoot->setChecked(map_po["AppleSecureBoot"].toBool());
+    getValue(map_po, ui->tabUEFI6);
 
     // Quirks
     QVariantMap map_uefi_Quirks = map["Quirks"].toMap();
-
-    ui->chkActivateHpetSupport->setChecked(map_uefi_Quirks["ActivateHpetSupport"].toBool());
-
-    ui->chkDisableSecurityPolicy->setChecked(map_uefi_Quirks["DisableSecurityPolicy"].toBool());
-
-    ui->chkIgnoreInvalidFlexRatio->setChecked(
-        map_uefi_Quirks["IgnoreInvalidFlexRatio"].toBool());
-    ui->chkReleaseUsbOwnership->setChecked(
-        map_uefi_Quirks["ReleaseUsbOwnership"].toBool());
-    ui->chkRequestBootVarRouting->setChecked(
-        map_uefi_Quirks["RequestBootVarRouting"].toBool());
-    ui->chkUnblockFsConnect->setChecked(
-        map_uefi_Quirks["UnblockFsConnect"].toBool());
-
-    ui->editExitBootServicesDelay->setText(
-        map_uefi_Quirks["ExitBootServicesDelay"].toString());
-    ui->editTscSyncTimeout->setText(map_uefi_Quirks["TscSyncTimeout"].toString());
+    getValue(map_uefi_Quirks, ui->tabUEFI7);
 
     // ReservedMemory
     QTableWidgetItem* newItem1;
@@ -2705,14 +2381,7 @@ QVariantMap MainWindow::SaveACPI()
 
     // Quirks
     QVariantMap acpiQuirks;
-
-    acpiQuirks["FadtEnableReset"] = getChkBool(ui->chkFadtEnableReset);
-    acpiQuirks["NormalizeHeaders"] = getChkBool(ui->chkNormalizeHeaders);
-    acpiQuirks["RebaseRegions"] = getChkBool(ui->chkRebaseRegions);
-    acpiQuirks["ResetHwSig"] = getChkBool(ui->chkResetHwSig);
-    acpiQuirks["ResetLogoStatus"] = getChkBool(ui->chkResetLogoStatus);
-
-    acpiMap["Quirks"] = acpiQuirks;
+    acpiMap["Quirks"] = setValue(acpiQuirks, ui->tabACPI4);
 
     return acpiMap;
 }
@@ -2767,29 +2436,7 @@ QVariantMap MainWindow::SaveBooter()
 
     // Quirks
     QVariantMap mapQuirks;
-    mapQuirks["AvoidRuntimeDefrag"] = getChkBool(ui->chkAvoidRuntimeDefrag);
-    mapQuirks["AllowRelocationBlock"] = getChkBool(ui->chkAllowRelocationBlock);
-    mapQuirks["DevirtualiseMmio"] = getChkBool(ui->chkDevirtualiseMmio);
-    mapQuirks["DisableSingleUser"] = getChkBool(ui->chkDisableSingleUser);
-    mapQuirks["DisableVariableWrite"] = getChkBool(ui->chkDisableVariableWrite);
-    mapQuirks["DiscardHibernateMap"] = getChkBool(ui->chkDiscardHibernateMap);
-    mapQuirks["EnableSafeModeSlide"] = getChkBool(ui->chkEnableSafeModeSlide);
-    mapQuirks["EnableWriteUnprotector"] = getChkBool(ui->chkEnableWriteUnprotector);
-    mapQuirks["ForceExitBootServices"] = getChkBool(ui->chkForceExitBootServices);
-
-    mapQuirks["ForceBooterSignature"] = getChkBool(ui->chkForceBooterSignature);
-
-    mapQuirks["ProtectMemoryRegions"] = getChkBool(ui->chkProtectMemoryRegions);
-    mapQuirks["ProtectSecureBoot"] = getChkBool(ui->chkProtectSecureBoot);
-    mapQuirks["ProtectUefiServices"] = getChkBool(ui->chkProtectUefiServices);
-    mapQuirks["ProvideCustomSlide"] = getChkBool(ui->chkProvideCustomSlide);
-    mapQuirks["ProvideMaxSlide"] = ui->editProvideMaxSlide->text().toLongLong();
-    mapQuirks["RebuildAppleMemoryMap"] = getChkBool(ui->chkRebuildAppleMemoryMap);
-    mapQuirks["SetupVirtualMap"] = getChkBool(ui->chkSetupVirtualMap);
-    mapQuirks["SignalAppleOS"] = getChkBool(ui->chkSignalAppleOS);
-    mapQuirks["SyncRuntimePermissions"] = getChkBool(ui->chkSyncRuntimePermissions);
-
-    subMap["Quirks"] = mapQuirks;
+    subMap["Quirks"] = setValue(mapQuirks, ui->tabBooter3);
 
     return subMap;
 }
@@ -2928,49 +2575,15 @@ QVariantMap MainWindow::SaveKernel()
 
     // Emulate
     QVariantMap mapValue;
-    mapValue["Cpuid1Data"] = HexStrToByte(ui->editCpuid1Data->text());
-    mapValue["Cpuid1Mask"] = HexStrToByte(ui->editCpuid1Mask->text());
-    mapValue["DummyPowerManagement"] = getChkBool(ui->chkDummyPowerManagement);
-    mapValue["MaxKernel"] = ui->editMaxKernel->text().trimmed();
-    mapValue["MinKernel"] = ui->editMinKernel->text().trimmed();
-
-    subMap["Emulate"] = mapValue;
+    subMap["Emulate"] = setValue(mapValue, ui->tabKernel5);
 
     // Quirks
     QVariantMap mapQuirks;
-    mapQuirks["AppleCpuPmCfgLock"] = getChkBool(ui->chkAppleCpuPmCfgLock);
-    mapQuirks["AppleXcpmCfgLock"] = getChkBool(ui->chkAppleXcpmCfgLock);
-    mapQuirks["AppleXcpmExtraMsrs"] = getChkBool(ui->chkAppleXcpmExtraMsrs);
-    mapQuirks["AppleXcpmForceBoost"] = getChkBool(ui->chkAppleXcpmForceBoost);
-    mapQuirks["CustomSMBIOSGuid"] = getChkBool(ui->chkCustomSMBIOSGuid);
-    mapQuirks["DisableIoMapper"] = getChkBool(ui->chkDisableIoMapper);
-    mapQuirks["DisableRtcChecksum"] = getChkBool(ui->chkDisableRtcChecksum);
-    mapQuirks["ExternalDiskIcons"] = getChkBool(ui->chkExternalDiskIcons);
-    mapQuirks["IncreasePciBarSize"] = getChkBool(ui->chkIncreasePciBarSize);
-    mapQuirks["LapicKernelPanic"] = getChkBool(ui->chkLapicKernelPanic);
-    mapQuirks["PanicNoKextDump"] = getChkBool(ui->chkPanicNoKextDump);
-    mapQuirks["PowerTimeoutKernelPanic"] = getChkBool(ui->chkPowerTimeoutKernelPanic);
-
-    mapQuirks["SetApfsTrimTimeout"] = ui->editSetApfsTrimTimeout->text().toLongLong();
-
-    mapQuirks["ThirdPartyDrives"] = getChkBool(ui->chkThirdPartyDrives);
-
-    mapQuirks["XhciPortLimit"] = getChkBool(ui->chkXhciPortLimit);
-    mapQuirks["DisableLinkeditJettison"] = getChkBool(ui->chkDisableLinkeditJettison);
-
-    mapQuirks["LegacyCommpage"] = getChkBool(ui->chkLegacyCommpage);
-    mapQuirks["ExtendBTFeatureFlags"] = getChkBool(ui->chkExtendBTFeatureFlags);
-
-    mapQuirks["ForceSecureBootScheme"] = getChkBool(ui->chkForceSecureBootScheme);
-
-    subMap["Quirks"] = mapQuirks;
+    subMap["Quirks"] = setValue(mapQuirks, ui->tabKernel6);
 
     // Scheme
     QVariantMap mapScheme;
-    mapScheme["FuzzyMatch"] = getChkBool(ui->chkFuzzyMatch);
-    mapScheme["KernelArch"] = ui->cboxKernelArch->currentText();
-    mapScheme["KernelCache"] = ui->cboxKernelCache->currentText();
-    subMap["Scheme"] = mapScheme;
+    subMap["Scheme"] = setValue(mapScheme, ui->tabKernel7);
 
     return subMap;
 }
@@ -2981,44 +2594,27 @@ QVariantMap MainWindow::SaveMisc()
     QVariantList dictList;
     QVariantMap valueList;
 
+    // Boot
+    subMap["Boot"] = setValue(valueList, ui->tabMisc1);
+
+    // Debug
+    valueList.clear();
+    subMap["Debug"] = setValue(valueList, ui->tabMisc2);
+
+    // Security
+    valueList.clear();
+    subMap["Security"] = setValue(valueList, ui->tabMisc3);
+
+    QString hm = ui->cboxSecureBootModel->currentText().trimmed();
+    if (hm == "")
+        hm = "Disabled";
+    valueList["SecureBootModel"] = hm;
+
     // BlessOverride
     for (int i = 0; i < ui->tableBlessOverride->rowCount(); i++) {
         dictList.append(ui->tableBlessOverride->item(i, 0)->text());
     }
     subMap["BlessOverride"] = dictList;
-
-    // Boot
-    valueList["ConsoleAttributes"] = ui->editConsoleAttributes->text().toLongLong();
-    valueList["HibernateMode"] = ui->cboxHibernateMode->currentText();
-    valueList["HideAuxiliary"] = getChkBool(ui->chkHideAuxiliary);
-
-    valueList["LauncherOption"] = ui->cboxLauncherOption->currentText();
-    valueList["LauncherPath"] = ui->cboxLauncherPath->currentText();
-
-    valueList["PickerAttributes"] = ui->editPickerAttributes->text().toLongLong();
-    valueList["PickerAudioAssist"] = getChkBool(ui->chkPickerAudioAssist);
-    valueList["PickerMode"] = ui->cboxPickerMode->currentText();
-    valueList["PickerVariant"] = ui->cboxPickerVariant->currentText();
-    valueList["PollAppleHotKeys"] = getChkBool(ui->chkPollAppleHotKeys);
-    valueList["ShowPicker"] = getChkBool(ui->chkShowPicker);
-    valueList["TakeoffDelay"] = ui->editTakeoffDelay->text().toLongLong();
-    valueList["Timeout"] = ui->editTimeout->text().toLongLong();
-
-    subMap["Boot"] = valueList;
-
-    // Debug
-    valueList.clear();
-
-    valueList["AppleDebug"] = getChkBool(ui->chkAppleDebug);
-    valueList["ApplePanic"] = getChkBool(ui->chkApplePanic);
-    valueList["DisableWatchDog"] = getChkBool(ui->chkDisableWatchDog);
-    valueList["DisplayDelay"] = ui->editDisplayDelay->text().toLongLong();
-    valueList["DisplayLevel"] = ui->editDisplayLevel->text().toLongLong();
-    valueList["SerialInit"] = getChkBool(ui->chkSerialInit);
-    valueList["SysReport"] = getChkBool(ui->chkSysReport);
-    valueList["Target"] = ui->editTarget->text().toLongLong();
-
-    subMap["Debug"] = valueList;
 
     // Entries
     valueList.clear();
@@ -3035,37 +2631,6 @@ QVariantMap MainWindow::SaveMisc()
         dictList.append(valueList);
     }
     subMap["Entries"] = dictList;
-
-    // Security
-    valueList.clear();
-
-    valueList["AllowNvramReset"] = getChkBool(ui->chkAllowNvramReset);
-    valueList["AllowSetDefault"] = getChkBool(ui->chkAllowSetDefault);
-    valueList["AuthRestart"] = getChkBool(ui->chkAuthRestart);
-    valueList["BlacklistAppleUpdate"] = getChkBool(ui->chkBlacklistAppleUpdate);
-    valueList["EnablePassword"] = getChkBool(ui->chkEnablePassword);
-
-    //valueList["BootProtect"] = ui->cboxBootProtect->currentText();
-    valueList["DmgLoading"] = ui->cboxDmgLoading->currentText();
-    valueList["Vault"] = ui->cboxVault->currentText();
-    valueList["PasswordHash"] = HexStrToByte(ui->editPasswordHash->text());
-    valueList["PasswordSalt"] = HexStrToByte(ui->editPasswordSalt->text());
-
-    valueList["ExposeSensitiveData"] = ui->editExposeSensitiveData->text().toLongLong();
-
-    valueList["HaltLevel"] = ui->editHaltLevel->text().toLongLong(nullptr, 10);
-    //qDebug() << ui->editHaltLevel->text().toLongLong(nullptr, 16);
-
-    valueList["ScanPolicy"] = ui->editScanPolicy->text().toLongLong();
-
-    valueList["ApECID"] = ui->editApECID->text().toLongLong();
-
-    QString hm = ui->cboxSecureBootModel->currentText().trimmed();
-    if (hm == "")
-        hm = "Disabled";
-    valueList["SecureBootModel"] = hm;
-
-    subMap["Security"] = valueList;
 
     // Tools
     valueList.clear();
@@ -3167,25 +2732,20 @@ QVariantMap MainWindow::SavePlatformInfo()
     QVariantMap subMap;
     QVariantMap valueList;
 
+    // Generic
+    valueList.clear();
+    subMap["Generic"] = setValue(valueList, ui->tabPlatformInfo1);
+
+    if (getSystemProductName(ui->cboxSystemProductName->currentText()) != "")
+        valueList["SystemProductName"] = getSystemProductName(ui->cboxSystemProductName->currentText());
+    else
+        valueList["SystemProductName"] = ui->cboxSystemProductName->currentText();
+
     // DataHub
     valueList.clear();
-    valueList["ARTFrequency"] = ui->editARTFrequency->text().toLongLong();
-    valueList["BoardProduct"] = ui->editBoardProduct->text();
-    valueList["BoardRevision"] = HexStrToByte(ui->editBoardRevision->text());
-    valueList["DevicePathsSupported"] = ui->editDevicePathsSupported->text().toLongLong();
-    valueList["FSBFrequency"] = ui->editFSBFrequency->text().toLongLong();
-    valueList["InitialTSC"] = ui->editInitialTSC->text().toLongLong();
-    valueList["PlatformName"] = ui->editPlatformName->text();
-    valueList["SmcBranch"] = HexStrToByte(ui->editSmcBranch->text());
-    valueList["SmcPlatform"] = HexStrToByte(ui->editSmcPlatform->text());
-    valueList["SmcRevision"] = HexStrToByte(ui->editSmcRevision->text());
-    valueList["StartupPowerEvents"] = ui->editStartupPowerEvents->text().toLongLong();
-    valueList["SystemProductName"] = ui->editSystemProductName->text();
-    valueList["SystemSerialNumber"] = ui->editSystemSerialNumber_data->text();
-    valueList["SystemUUID"] = ui->editSystemUUID_data->text();
 
     if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
-        subMap["DataHub"] = valueList;
+        subMap["DataHub"] = setValue(valueList, ui->tabPlatformInfo2);
 
     // Memory
     valueList.clear();
@@ -3217,86 +2777,24 @@ QVariantMap MainWindow::SavePlatformInfo()
 
     Map["Devices"] = Array; //第二层
 
-    // if(ui->tableDevices->rowCount() > 0) //里面有数据才进行保存的动作
-    //{
     valueList["Devices"] = Map["Devices"];
-    //}
 
     if (ui->chkCustomMemory->isChecked()) {
         if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
             subMap["Memory"] = valueList;
     }
 
-    // Generic
-    valueList.clear();
-    valueList["AdviseWindows"] = getChkBool(ui->chkAdviseWindows);
-    valueList["MaxBIOSVersion"] = getChkBool(ui->chkMaxBIOSVersion);
-    valueList["MLB"] = ui->editMLB->text();
-    valueList["SystemMemoryStatus"] = ui->cboxSystemMemoryStatus->currentText().trimmed();
-    valueList["ProcessorType"] = ui->editProcessorTypeGeneric->text().toLongLong();
-    valueList["ROM"] = HexStrToByte(ui->editROM->text());
-    valueList["SpoofVendor"] = getChkBool(ui->chkSpoofVendor);
-
-    if (getSystemProductName(ui->cboxSystemProductName->currentText()) != "")
-        valueList["SystemProductName"] = getSystemProductName(ui->cboxSystemProductName->currentText());
-    else
-        valueList["SystemProductName"] = ui->cboxSystemProductName->currentText();
-
-    valueList["SystemSerialNumber"] = ui->editSystemSerialNumber->text();
-    valueList["SystemUUID"] = ui->editSystemUUID->text();
-
-    subMap["Generic"] = valueList;
-
     // PlatformNVRAM
     valueList.clear();
-    valueList["BID"] = ui->editBID->text();
-    valueList["MLB"] = ui->editMLB_2->text();
-
-    valueList["FirmwareFeatures"] = HexStrToByte(ui->editFirmwareFeatures->text());
-    valueList["FirmwareFeaturesMask"] = HexStrToByte(ui->editFirmwareFeaturesMask->text());
-    valueList["ROM"] = HexStrToByte(ui->editROM_2->text());
-
-    valueList["SystemSerialNumber"] = ui->editSystemSerialNumber_PlatformNVRAM->text();
-
-    valueList["SystemUUID"] = ui->editSystemUUID_PNVRAM->text();
 
     if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
-        subMap["PlatformNVRAM"] = valueList;
+        subMap["PlatformNVRAM"] = setValue(valueList, ui->tabPlatformInfo4);
 
     // SMBIOS
     valueList.clear();
-    valueList["BIOSReleaseDate"] = ui->editBIOSReleaseDate->text();
-    valueList["BIOSVendor"] = ui->editBIOSVendor->text();
-    valueList["BIOSVersion"] = ui->editBIOSVersion->text();
-    valueList["BoardAssetTag"] = ui->editBoardAssetTag->text();
-    valueList["BoardLocationInChassis"] = ui->editBoardLocationInChassis->text();
-    valueList["BoardManufacturer"] = ui->editBoardManufacturer->text();
-    valueList["BoardProduct"] = ui->editBoardProduct_2->text();
-    valueList["BoardSerialNumber"] = ui->editBoardSerialNumber->text();
-    valueList["BoardType"] = ui->editBoardType->text().toLongLong();
-    valueList["BoardVersion"] = ui->editBoardVersion->text();
-    valueList["ChassisAssetTag"] = ui->editChassisAssetTag->text();
-    valueList["ChassisManufacturer"] = ui->editChassisManufacturer->text();
-    valueList["ChassisSerialNumber"] = ui->editChassisSerialNumber->text();
-    valueList["ChassisType"] = ui->editChassisType->text().toLongLong();
-    valueList["ChassisVersion"] = ui->editChassisVersion->text();
-    valueList["FirmwareFeatures"] = HexStrToByte(ui->editFirmwareFeatures_2->text());
-    valueList["FirmwareFeaturesMask"] = HexStrToByte(ui->editFirmwareFeaturesMask_2->text());
-    // valueList["MemoryFormFactor"] =
-    // ui->editMemoryFormFactor->text().toLongLong();
-    valueList["PlatformFeature"] = ui->editPlatformFeature->text().toLongLong();
-    valueList["ProcessorType"] = ui->editProcessorType->text().toLongLong();
-    valueList["SmcVersion"] = HexStrToByte(ui->editSmcVersion->text());
-    valueList["SystemFamily"] = ui->editSystemFamily->text();
-    valueList["SystemManufacturer"] = ui->editSystemManufacturer->text();
-    valueList["SystemProductName"] = ui->editSystemProductName_2->text();
-    valueList["SystemSKUNumber"] = ui->editSystemSKUNumber->text();
-    valueList["SystemSerialNumber"] = ui->editSystemSerialNumber_2->text();
-    valueList["SystemUUID"] = ui->editSystemUUID_2->text();
-    valueList["SystemVersion"] = ui->editSystemVersion->text();
 
     if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
-        subMap["SMBIOS"] = valueList;
+        subMap["SMBIOS"] = setValue(valueList, ui->tabPlatformInfo5);
 
     subMap["Automatic"] = getChkBool(ui->chkAutomatic);
     subMap["CustomMemory"] = getChkBool(ui->chkCustomMemory);
@@ -3319,28 +2817,11 @@ QVariantMap MainWindow::SaveUEFI()
     QVariantMap valueList;
 
     // APFS
-    dictList["EnableJumpstart"] = getChkBool(ui->chkEnableJumpstart);
-    dictList["GlobalConnect"] = getChkBool(ui->chkGlobalConnect);
-    dictList["HideVerbose"] = getChkBool(ui->chkHideVerbose);
-    dictList["JumpstartHotPlug"] = getChkBool(ui->chkJumpstartHotPlug);
-    dictList["MinDate"] = ui->editMinDate->text().toLongLong();
-    dictList["MinVersion"] = ui->editMinVersion->text().toLongLong();
-    subMap["APFS"] = dictList;
+    subMap["APFS"] = setValue(dictList, ui->tabUEFI1);
 
     // Audio
     dictList.clear();
-    dictList["AudioCodec"] = ui->editAudioCodec->text().toLongLong();
-    dictList["AudioDevice"] = ui->editAudioDevice->text();
-    dictList["AudioOut"] = ui->editAudioOut->text().toLongLong();
-    dictList["AudioSupport"] = getChkBool(ui->chkAudioSupport);
-    dictList["MinimumVolume"] = ui->editMinimumVolume->text().toLongLong();
-    dictList["SetupDelay"] = ui->editSetupDelay->text().toLongLong();
-    dictList["PlayChime"] = ui->cboxPlayChime->currentText();
-
-    dictList["ResetTrafficClass"] = getChkBool(ui->chkResetTrafficClass);
-
-    dictList["VolumeAmplifier"] = ui->editVolumeAmplifier->text().toLongLong();
-    subMap["Audio"] = dictList;
+    subMap["Audio"] = setValue(dictList, ui->tabUEFI2);
 
     // Drivers
     arrayList.clear();
@@ -3352,78 +2833,19 @@ QVariantMap MainWindow::SaveUEFI()
 
     // Input
     dictList.clear();
-    dictList["KeyFiltering"] = getChkBool(ui->chkKeyFiltering);
-    dictList["KeySupport"] = getChkBool(ui->chkKeySupport);
-    dictList["KeySwap"] = getChkBool(ui->chkKeySwap);
-    dictList["PointerSupport"] = getChkBool(ui->chkPointerSupport);
-    dictList["KeySkipFirstDelay"] = getChkBool(ui->chkKeySkipFirstDelay);
-
-    dictList["KeyForgetThreshold"] = ui->editKeyForgetThreshold->text().toLongLong();
-    dictList["PointerSupportMode"] = ui->editPointerSupportMode->text();
-    dictList["TimerResolution"] = ui->editTimerResolution->text().toLongLong();
-    dictList["KeySupportMode"] = ui->cboxKeySupportMode->currentText();
-
-    subMap["Input"] = dictList;
+    subMap["Input"] = setValue(dictList, ui->tabUEFI4);
 
     // Output
     dictList.clear();
-    dictList["ClearScreenOnModeSwitch"] = getChkBool(ui->chkClearScreenOnModeSwitch);
-    dictList["DirectGopRendering"] = getChkBool(ui->chkDirectGopRendering);
-    dictList["IgnoreTextInGraphics"] = getChkBool(ui->chkIgnoreTextInGraphics);
-    dictList["ProvideConsoleGop"] = getChkBool(ui->chkProvideConsoleGop);
-    dictList["ReconnectOnResChange"] = getChkBool(ui->chkReconnectOnResChange);
-    dictList["ReplaceTabWithSpace"] = getChkBool(ui->chkReplaceTabWithSpace);
-    dictList["SanitiseClearScreen"] = getChkBool(ui->chkSanitiseClearScreen);
-    dictList["UgaPassThrough"] = getChkBool(ui->chkUgaPassThrough);
-    dictList["ForceResolution"] = getChkBool(ui->chkForceResolution);
-
-    dictList["GopPassThrough"] = getChkBool(ui->chkGopPassThrough);
-
-    dictList["ConsoleMode"] = ui->cboxConsoleMode->currentText();
-    dictList["Resolution"] = ui->cboxResolution->currentText();
-    dictList["TextRenderer"] = ui->cboxTextRenderer->currentText();
-
-    subMap["Output"] = dictList;
+    subMap["Output"] = setValue(dictList, ui->tabUEFI5);
 
     // ProtocolOverrides
     dictList.clear();
-    dictList["AppleAudio"] = getChkBool(ui->chkAppleAudio);
-    dictList["AppleBootPolicy"] = getChkBool(ui->chkAppleBootPolicy);
-    dictList["AppleDebugLog"] = getChkBool(ui->chkAppleDebugLog);
-    dictList["AppleEvent"] = getChkBool(ui->chkAppleEvent);
-    dictList["AppleFramebufferInfo"] = getChkBool(ui->chkAppleFramebufferInfo);
-    dictList["AppleImageConversion"] = getChkBool(ui->chkAppleImageConversion);
-    dictList["AppleKeyMap"] = getChkBool(ui->chkAppleKeyMap);
-    dictList["AppleRtcRam"] = getChkBool(ui->chkAppleRtcRam);
-    dictList["AppleSmcIo"] = getChkBool(ui->chkAppleSmcIo);
-    dictList["AppleUserInterfaceTheme"] = getChkBool(ui->chkAppleUserInterfaceTheme);
-    dictList["DataHub"] = getChkBool(ui->chkDataHub);
-    dictList["DeviceProperties"] = getChkBool(ui->chkDeviceProperties);
-    dictList["FirmwareVolume"] = getChkBool(ui->chkFirmwareVolume);
-    dictList["HashServices"] = getChkBool(ui->chkHashServices);
-    dictList["OSInfo"] = getChkBool(ui->chkOSInfo);
-    dictList["UnicodeCollation"] = getChkBool(ui->chkUnicodeCollation);
-    dictList["AppleImg4Verification"] = getChkBool(ui->chkAppleImg4Verification);
-    dictList["AppleSecureBoot"] = getChkBool(ui->chkAppleSecureBoot);
-
-    subMap["ProtocolOverrides"] = dictList;
+    subMap["ProtocolOverrides"] = setValue(dictList, ui->tabUEFI6);
 
     // Quirks
     dictList.clear();
-
-    dictList["ActivateHpetSupport"] = getChkBool(ui->chkActivateHpetSupport);
-
-    dictList["DisableSecurityPolicy"] = getChkBool(ui->chkDisableSecurityPolicy);
-
-    dictList["IgnoreInvalidFlexRatio"] = getChkBool(ui->chkIgnoreInvalidFlexRatio);
-    dictList["ReleaseUsbOwnership"] = getChkBool(ui->chkReleaseUsbOwnership);
-    dictList["RequestBootVarRouting"] = getChkBool(ui->chkRequestBootVarRouting);
-    dictList["UnblockFsConnect"] = getChkBool(ui->chkUnblockFsConnect);
-
-    dictList["ExitBootServicesDelay"] = ui->editExitBootServicesDelay->text().toLongLong();
-    dictList["TscSyncTimeout"] = ui->editTscSyncTimeout->text().toLongLong();
-
-    subMap["Quirks"] = dictList;
+    subMap["Quirks"] = setValue(dictList, ui->tabUEFI7);
 
     // ReservedMemory
     arrayList.clear();
@@ -5126,7 +4548,7 @@ void MainWindow::readResult()
     ui->editSystemSerialNumber_2->setText(str1);
 
     ui->editMLB->setText(str2);
-    ui->editMLB_2->setText(str2);
+    ui->editMLB_PNVRAM->setText(str2);
 
     on_btnSystemUUID_clicked();
 }
@@ -5865,7 +5287,7 @@ int MainWindow::ExposeSensitiveData()
     else
         d = 0;
 
-    ui->editExposeSensitiveData->setText(QString::number(a + b + c + d));
+    ui->editIntExposeSensitiveData->setText(QString::number(a + b + c + d));
 
     return a + b + c + d;
 }
@@ -5878,7 +5300,7 @@ void MainWindow::on_chk04_clicked() { ExposeSensitiveData(); }
 
 void MainWindow::on_chk08_clicked() { ExposeSensitiveData(); }
 
-void MainWindow::on_editExposeSensitiveData_textChanged(const QString& arg1)
+void MainWindow::on_editIntExposeSensitiveData_textChanged(const QString& arg1)
 {
     int val = arg1.toInt();
     if (val == 0) {
@@ -6071,7 +5493,7 @@ void MainWindow::ScanPolicy()
 
     int total = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11 + v12 + v13 + v14 + v15 + v16;
 
-    ui->editScanPolicy->setText(QString::number(total));
+    ui->editIntScanPolicy->setText(QString::number(total));
 }
 
 void MainWindow::on_chk1_clicked() { ScanPolicy(); }
@@ -6106,7 +5528,7 @@ void MainWindow::on_chk15_clicked() { ScanPolicy(); }
 
 void MainWindow::on_chk16_clicked() { ScanPolicy(); }
 
-void MainWindow::on_editScanPolicy_textChanged(const QString& arg1)
+void MainWindow::on_editIntScanPolicy_textChanged(const QString& arg1)
 {
 
     int total = arg1.toInt();
@@ -6330,7 +5752,7 @@ void MainWindow::DisplayLevel()
         total = total + vDisplayLevel.at(i);
     }
 
-    ui->editDisplayLevel->setText(QString::number(total));
+    ui->editIntDisplayLevel->setText(QString::number(total));
 
     click = false;
 }
@@ -6373,7 +5795,7 @@ void MainWindow::on_chkD18_clicked() { DisplayLevel(); }
 
 void MainWindow::on_chkD19_clicked() { DisplayLevel(); }
 
-void MainWindow::on_editDisplayLevel_textChanged(const QString& arg1)
+void MainWindow::on_editIntDisplayLevel_textChanged(const QString& arg1)
 {
 
     //10 to 16
@@ -6552,7 +5974,7 @@ void MainWindow::PickerAttributes()
         total = total + v_pa.at(i);
     }
 
-    ui->editPickerAttributes->setText(QString::number(total));
+    ui->editIntPickerAttributes->setText(QString::number(total));
 }
 
 void MainWindow::on_chkPA1_clicked() { PickerAttributes(); }
@@ -6568,7 +5990,7 @@ void MainWindow::on_chkPA5_clicked()
     PickerAttributes();
 }
 
-void MainWindow::on_editPickerAttributes_textChanged(const QString& arg1)
+void MainWindow::on_editIntPickerAttributes_textChanged(const QString& arg1)
 {
     int total = arg1.toInt();
 
@@ -7764,7 +7186,7 @@ void MainWindow::on_table_nv_ls0_itemChanged(QTableWidgetItem* item)
     }
 }
 
-void MainWindow::on_editTarget_textChanged(const QString& arg1)
+void MainWindow::on_editIntTarget_textChanged(const QString& arg1)
 {
     //10转16
     int dec = arg1.toInt();
@@ -9416,7 +8838,7 @@ void MainWindow::on_editTargetHex_textChanged(const QString& arg1)
 
     int dec = hex.toInt(&ok, 16);
 
-    ui->editTarget->setText(QString::number(dec));
+    ui->editIntTarget->setText(QString::number(dec));
 }
 
 void MainWindow::on_actionNewWindow_triggered()
@@ -10851,7 +10273,7 @@ void MainWindow::setComboBoxStyle(QComboBox* w)
     QStyledItemDelegate* styledItemDelegate = new QStyledItemDelegate();
     w->setItemDelegate(styledItemDelegate);
     //w->setStyleSheet(strComboBoxStyle);
-    w->setMinimumHeight(ui->editProvideMaxSlide->height());
+    w->setMinimumHeight(ui->editIntProvideMaxSlide->height());
 }
 
 void MainWindow::setWM()
@@ -11362,4 +10784,174 @@ void MainWindow::on_actionDiscussion_Forum_triggered()
 {
     QUrl url(QString("https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-auxiliary-tools/"));
     QDesktopServices::openUrl(url);
+}
+
+void MainWindow::getValue(QVariantMap map, QWidget* tab)
+{
+
+    QObjectList listCheckBox;
+    listCheckBox = getAllCheckBox(getAllUIControls(tab));
+    for (int i = 0; i < listCheckBox.count(); i++) {
+        QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
+        QString strObjName = chkbox->objectName();
+        QString name = strObjName.mid(3, strObjName.count() - 2);
+
+        if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG" && chkbox != ui->chk01 && chkbox != ui->chk02 && chkbox != ui->chk04 && chkbox != ui->chk08)
+            chkbox->setChecked(map[name].toBool());
+    }
+
+    QObjectList listLineEdit;
+    listLineEdit = getAllLineEdit(getAllUIControls(tab));
+    for (int i = 0; i < listLineEdit.count(); i++) {
+        QLineEdit* w = (QLineEdit*)listLineEdit.at(i);
+
+        QString str0, name;
+        str0 = w->objectName().mid(4, w->objectName().count() - 3); // 去edit
+
+        if (str0.mid(0, 3) == "Dat" || str0.mid(0, 3) == "Int" || str0.mid(0, 3) == "Str")
+            name = str0.mid(3, str0.count() - 2);
+        else
+            name = str0;
+
+        if (w != ui->editTargetHex && name != "") { // 16进制转换为整数的除外Misc里面
+            if (str0.mid(0, 3) == "Dat")
+                w->setText(ByteToHexStr(map[name].toByteArray())); // 为data类型
+            else
+                w->setText(map[name].toString());
+
+            // 有重名，单独处理
+            if (name == "ProcessorTypeGeneric")
+                w->setText(map["ProcessorType"].toString());
+
+            if (name == "MLB_PNVRAM")
+                w->setText(map["MLB"].toString());
+
+            if (name == "ROM_PNVRAM")
+                w->setText(ByteToHexStr(map["ROM"].toByteArray())); // 为data类型
+
+            if (name == "SystemSerialNumber_PNVRAM" || name == "SystemSerialNumber_2" || name == "SystemSerialNumber_data")
+                w->setText(map["SystemSerialNumber"].toString());
+
+            if (name == "SystemUUID_PNVRAM" || name == "SystemUUID_2" || name == "SystemUUID_data")
+                w->setText(map["SystemUUID"].toString());
+
+            if (name == "BoardProduct_2")
+                w->setText(map["BoardProduct"].toString());
+
+            if (name == "SystemProductName_2")
+                w->setText(map["SystemProductName"].toString());
+
+            if (name == "FirmwareFeatures_SMBIOS")
+                w->setText(ByteToHexStr(map["FirmwareFeatures"].toByteArray())); // 为data类型
+
+            if (name == "FirmwareFeaturesMask_SMBIOS")
+                w->setText(ByteToHexStr(map["FirmwareFeaturesMask"].toByteArray())); // 为data类型
+        }
+    }
+
+    QObjectList listComboBox;
+    listComboBox = getAllComboBox(getAllUIControls(tab));
+    for (int i = 0; i < listComboBox.count(); i++) {
+        QComboBox* w = (QComboBox*)listComboBox.at(i);
+        QString name = w->objectName().mid(4, w->objectName().count() - 3);
+
+        QString cu_text = map[name].toString();
+        if (w != ui->cboxFind)
+            w->setCurrentText(cu_text.trimmed());
+    }
+}
+
+QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab)
+{
+    // chk
+    QObjectList listCheckBox;
+    listCheckBox = getAllCheckBox(getAllUIControls(tab));
+    for (int i = 0; i < listCheckBox.count(); i++) {
+        QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
+        QString strObjName = chkbox->objectName();
+        QString name = strObjName.mid(3, strObjName.count() - 2);
+
+        if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG" && chkbox != ui->chk01 && chkbox != ui->chk02 && chkbox != ui->chk04 && chkbox != ui->chk08) {
+
+            map.insert(name, getChkBool(chkbox));
+        }
+    }
+
+    // edit
+    QObjectList listLineEdit;
+    listLineEdit = getAllLineEdit(getAllUIControls(tab));
+    for (int i = 0; i < listLineEdit.count(); i++) {
+        QLineEdit* w = (QLineEdit*)listLineEdit.at(i);
+
+        QString str0, name;
+        str0 = w->objectName().mid(4, w->objectName().count() - 3); // 去edit
+
+        if (str0.mid(0, 3) == "Dat" || str0.mid(0, 3) == "Int" || str0.mid(0, 3) == "Str")
+            name = str0.mid(3, str0.count() - 2);
+        else
+            name = str0;
+
+        // 用name ！= “”过滤掉获取的ComBox里面的edit
+        if (w != ui->editTargetHex && name != "") { // 16进制转换为整数的除外Misc里面
+
+            if (str0.mid(0, 3) == "Dat")
+                map.insert(name, HexStrToByte(w->text().trimmed()));
+
+            else if (str0.mid(0, 3) == "Int")
+                map.insert(name, w->text().trimmed().toLongLong());
+
+            // 有重名，单独处理
+            else if (name == "ProcessorTypeGeneric")
+                map.insert("ProcessorType", w->text().trimmed().toLongLong());
+
+            else if (name == "MLB_PNVRAM")
+                map.insert("MLB", w->text().trimmed());
+
+            else if (name == "ROM_PNVRAM")
+                map.insert("ROM", HexStrToByte(w->text().trimmed())); // 为data类型
+
+            else if (name == "SystemSerialNumber_PNVRAM" || name == "SystemSerialNumber_2" || name == "SystemSerialNumber_data")
+                map.insert("SystemSerialNumber", w->text().trimmed());
+
+            else if (name == "SystemUUID_PNVRAM" || name == "SystemUUID_2" || name == "SystemUUID_data")
+                map.insert("SystemUUID", w->text().trimmed());
+
+            else if (name == "BoardProduct_2")
+                map.insert("BoardProduct", w->text().trimmed());
+
+            else if (name == "SystemProductName_2")
+                map.insert("SystemProductName", w->text().trimmed());
+
+            else if (name == "FirmwareFeatures_SMBIOS")
+                map.insert("FirmwareFeatures", HexStrToByte(w->text().trimmed())); // 为data类型
+
+            else if (name == "FirmwareFeaturesMask_SMBIOS")
+                map.insert("FirmwareFeaturesMask", HexStrToByte(w->text().trimmed())); // 为data类型
+
+            else
+                map.insert(name, w->text().trimmed());
+        }
+    }
+
+    QObjectList listComboBox;
+    listComboBox = getAllComboBox(getAllUIControls(tab));
+    for (int i = 0; i < listComboBox.count(); i++) {
+        QComboBox* w = (QComboBox*)listComboBox.at(i);
+        QString name = w->objectName().mid(4, w->objectName().count() - 3);
+
+        if (w != ui->cboxFind) {
+            if (name != "SystemProductName") {
+                map.insert(name, w->currentText().trimmed());
+
+            } else
+                map.insert(name, getSystemProductName(w->currentText().trimmed()));
+        }
+    }
+
+    return map;
+}
+
+void MainWindow::on_actionQuit_triggered()
+{
+    this->close();
 }

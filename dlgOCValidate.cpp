@@ -19,8 +19,9 @@ dlgOCValidate::dlgOCValidate(QWidget* parent)
     QAction* searchAction = new QAction(tr("Search..."));
 
     QMenu* copyMenu = new QMenu(this);
-    copyMenu->addAction(copyAction);
+
     copyMenu->addAction(searchAction);
+    copyMenu->addAction(copyAction);
 
     connect(copyAction, &QAction::triggered, [=]() {
         QString str = ui->textEdit->textCursor().selectedText();

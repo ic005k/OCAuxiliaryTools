@@ -60,6 +60,8 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    void getValue(QVariantMap map, QWidget* tab);
+    QVariantMap setValue(QVariantMap map, QWidget* tab);
     dlgOCValidate* dlgOCV;
 
     void startSearch(QString str);
@@ -456,10 +458,10 @@ private slots:
         int previousColumn);
 
     void on_cboxSystemProductName_currentIndexChanged(const QString& arg1);
-    void on_editExposeSensitiveData_textChanged(const QString& arg1);
-    void on_editScanPolicy_textChanged(const QString& arg1);
-    void on_editDisplayLevel_textChanged(const QString& arg1);
-    void on_editPickerAttributes_textChanged(const QString& arg1);
+    void on_editIntExposeSensitiveData_textChanged(const QString& arg1);
+    void on_editIntScanPolicy_textChanged(const QString& arg1);
+    void on_editIntDisplayLevel_textChanged(const QString& arg1);
+    void on_editIntPickerAttributes_textChanged(const QString& arg1);
 
     void on_btnGenerate_clicked();
 
@@ -628,7 +630,7 @@ private slots:
     void replyFinished(QNetworkReply* reply);
 
     void on_chkPA5_clicked();
-    void on_editTarget_textChanged(const QString& arg1);
+    void on_editIntTarget_textChanged(const QString& arg1);
     void on_editHaltLevel_textChanged(const QString& arg1);
 
     void on_tabACPI_currentChanged(int index);
@@ -780,6 +782,8 @@ private slots:
     void setWM();
 
     void on_actionBug_Report_triggered();
+
+    void on_actionQuit_triggered();
 
     void on_actionDiscussion_Forum_triggered();
 
