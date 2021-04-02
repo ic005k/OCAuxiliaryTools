@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -82,7 +82,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1924,7 +1924,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3033,7 +3033,7 @@ The behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5030,7 +5030,7 @@ Valid values:
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5512,7 +5512,7 @@ A continuously updated variable list can be found in a corresponding document: N
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -6163,12 +6163,12 @@ DataWidth为0，TotalWidth为8，表示该器件仅用于提供8个纠错位。<
  indicates that the device is being used solely to provide 8 error-correction bits.</string>
               </property>
               <property name="text">
-               <string>DataWidth</string>
+               <string notr="true">DataWidth</string>
               </property>
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QLineEdit" name="editDataWidth"/>
+             <widget class="QLineEdit" name="editIntDataWidth"/>
             </item>
             <item row="0" column="3">
              <widget class="QLabel" name="label_102">
@@ -6211,12 +6211,12 @@ DataWidth为0，TotalWidth为8，表示该器件仅用于提供8个纠错位。<
                <string>Physical Memory Array (Type 16) — Memory Error Correction</string>
               </property>
               <property name="text">
-               <string>ErrorCorrection</string>
+               <string notr="true">ErrorCorrection</string>
               </property>
              </widget>
             </item>
             <item row="0" column="4">
-             <widget class="QLineEdit" name="editErrorCorrection"/>
+             <widget class="QLineEdit" name="editIntErrorCorrection"/>
             </item>
             <item row="0" column="5">
              <widget class="QLabel" name="label_100">
@@ -6252,12 +6252,12 @@ When CustomMemory is false, this value is automatically set based on Mac product
                <string>Memory Device (Type 17) — Form Factor</string>
               </property>
               <property name="text">
-               <string>FormFactor</string>
+               <string notr="true">FormFactor</string>
               </property>
              </widget>
             </item>
             <item row="0" column="6">
-             <widget class="QLineEdit" name="editFormFactor"/>
+             <widget class="QLineEdit" name="editIntFormFactor"/>
             </item>
             <item row="0" column="7">
              <widget class="QLabel" name="label_99">
@@ -6273,12 +6273,12 @@ When CustomMemory is false, this value is automatically set based on Mac product
                <string> Physical Memory Array (Type 16) — Maximum Capacity</string>
               </property>
               <property name="text">
-               <string>MaxCapacity</string>
+               <string notr="true">MaxCapacity</string>
               </property>
              </widget>
             </item>
             <item row="0" column="8">
-             <widget class="QLineEdit" name="editMaxCapacity"/>
+             <widget class="QLineEdit" name="editIntMaxCapacity"/>
             </item>
             <item row="1" column="0" colspan="2">
              <widget class="QLabel" name="label_101">
@@ -6294,12 +6294,12 @@ If there are no error-correction bits, this value should be equal to DataWidth.
 如果没有纠错位，这个值应该等于DataWidth。</string>
               </property>
               <property name="text">
-               <string>TotalWidth</string>
+               <string notr="true">TotalWidth</string>
               </property>
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QLineEdit" name="editTotalWidth"/>
+             <widget class="QLineEdit" name="editIntTotalWidth"/>
             </item>
             <item row="1" column="3">
              <widget class="QLabel" name="label_103">
@@ -6338,12 +6338,12 @@ If there are no error-correction bits, this value should be equal to DataWidth.
 </string>
               </property>
               <property name="text">
-               <string>Type</string>
+               <string notr="true">Type</string>
               </property>
              </widget>
             </item>
             <item row="1" column="4">
-             <widget class="QLineEdit" name="editType"/>
+             <widget class="QLineEdit" name="editIntType"/>
             </item>
             <item row="1" column="5">
              <widget class="QLabel" name="label_104">
@@ -6370,12 +6370,12 @@ If there are no error-correction bits, this value should be equal to DataWidth.
 </string>
               </property>
               <property name="text">
-               <string>TypeDetail</string>
+               <string notr="true">TypeDetail</string>
               </property>
              </widget>
             </item>
             <item row="1" column="6">
-             <widget class="QLineEdit" name="editTypeDetail"/>
+             <widget class="QLineEdit" name="editIntTypeDetail"/>
             </item>
             <item row="2" column="0" colspan="9">
              <widget class="QTableWidget" name="tableDevices">
@@ -6485,7 +6485,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                 <string> This variable comes in pair with FirmwareFeaturesMask.</string>
                </property>
                <property name="text">
-                <string>FirmwareFeatures</string>
+                <string notr="true">FirmwareFeatures</string>
                </property>
               </widget>
              </item>
@@ -6502,7 +6502,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                 <string>Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_BID.</string>
                </property>
                <property name="text">
-                <string>BID</string>
+                <string notr="true">BID</string>
                </property>
               </widget>
              </item>
@@ -6514,7 +6514,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
 指定 NVRAM 变量 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id 的值，仅用于启动服务。在Mac上找到的值等于SMBIOS SystemUUID。</string>
                </property>
                <property name="text">
-                <string>SystemUUID</string>
+                <string notr="true">SystemUUID</string>
                </property>
               </widget>
              </item>
@@ -6533,7 +6533,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
  4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:MLB.</string>
                </property>
                <property name="text">
-                <string>MLB</string>
+                <string notr="true">MLB</string>
                </property>
               </widget>
              </item>
@@ -6555,7 +6555,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
  4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
                </property>
                <property name="text">
-                <string>ROM</string>
+                <string notr="true">ROM</string>
                </property>
               </widget>
              </item>
@@ -6589,7 +6589,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                 <string> This variable comes in pair with FirmwareFeatures.</string>
                </property>
                <property name="text">
-                <string>FirmwareFeaturesMask</string>
+                <string notr="true">FirmwareFeaturesMask</string>
                </property>
               </widget>
              </item>
@@ -6605,7 +6605,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
  4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:SSN.</string>
                </property>
                <property name="text">
-                <string>SystemSerialNumber</string>
+                <string notr="true">SystemSerialNumber</string>
                </property>
               </widget>
              </item>
@@ -7445,7 +7445,7 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -9209,7 +9209,7 @@ Enable this option to be able to see all the boot options when having multiple d
      <x>0</x>
      <y>0</y>
      <width>1482</width>
-     <height>24</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -9232,6 +9232,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="btnMountEsp"/>
     <addaction name="btnOcvalidate"/>
     <addaction name="separator"/>
+    <addaction name="actionUpgrade_OC"/>
     <addaction name="actionGenerateEFI"/>
     <addaction name="actionDatabase"/>
     <addaction name="actionOpen_database_directory"/>
@@ -9458,6 +9459,11 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionUpgrade_OC">
+   <property name="text">
+    <string>Upgrade OC main program</string>
    </property>
   </action>
  </widget>

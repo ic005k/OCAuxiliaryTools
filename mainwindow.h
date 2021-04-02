@@ -14,6 +14,7 @@
 #include <QPainter>
 #include <QProcess>
 #include <QProxyStyle>
+#include <QRegExp>
 #include <QSaveFile>
 #include <QSplitter>
 #include <QStyledItemDelegate>
@@ -59,6 +60,13 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
+
+    QString getDatabaseVer();
+    QIntValidator* IntValidator = new QIntValidator;
+    QString getTableFieldDataType(QTableWidget* table);
+    void setStatusBarText(QTableWidget* table);
+    QString stringInt = "TableLengthBaseSkipCountLimitSkipTableLengthAddressSizeSpeed";
+    QString stringData = "OemTableIdTableSignatureFindMaskReplaceReplaceMaskMask";
 
     void getValue(QVariantMap map, QWidget* tab);
     QVariantMap setValue(QVariantMap map, QWidget* tab);
@@ -784,6 +792,8 @@ private slots:
     void on_actionBug_Report_triggered();
 
     void on_actionQuit_triggered();
+
+    void on_actionUpgrade_OC_triggered();
 
     void on_actionDiscussion_Forum_triggered();
 

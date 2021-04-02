@@ -40,5 +40,6 @@
         <file>widgets_zh_cn.qm</file>
         <file>icon/newver.png</file>
         <file>icon/overror.png</file>
+        <file>icon/um.png</file>
     </qresource>
 </RCC>

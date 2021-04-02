@@ -21,6 +21,7 @@ QString SaveFileName;
 QVector<QString> filelist;
 QWidgetList wdlist;
 QTableWidget* tableDatabase;
+QRegExp regx("[A-Fa-f0-9]{2,1024}");
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -33,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210402";
+    CurVerison = "20210404";
     title = "OC Auxiliary Tools   V0.6.8 - " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -279,6 +280,16 @@ void MainWindow::openFile(QString PlistFileName)
         // qDebug() << settings.fileName(); //最近打开的文件所保存的位置
         m_recentFiles->setMostRecentFile(PlistFileName);
         initRecentFilesForToolBar();
+
+        QFileInfo fi(SaveFileName);
+        QString strEFI = fi.path().mid(0, fi.path().count() - 3);
+        QFileInfo f1(strEFI + "/OC");
+        QFileInfo f2(strEFI + "/BOOT");
+        QFileInfo f3(strEFI + "/OC/Drivers");
+        if (f1.isDir() && f2.isDir() && f3.isDir())
+            ui->actionUpgrade_OC->setEnabled(true);
+        else
+            ui->actionUpgrade_OC->setEnabled(false);
     }
 }
 
@@ -1610,7 +1621,7 @@ void MainWindow::on_table_dp_add0_cellClicked(int row, int column)
 
     loadReghtTable(ui->table_dp_add0, ui->table_dp_add);
 
-    ui->statusbar->showMessage(ui->table_dp_add0->currentItem()->text());
+    setStatusBarText(ui->table_dp_add0);
 }
 
 void MainWindow::on_table_dp_add_itemChanged(QTableWidgetItem* item)
@@ -1764,6 +1775,8 @@ void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
     removeWidget(ui->table_dp_del);
 
     loadReghtTable(ui->table_dp_del0, ui->table_dp_del);
+
+    setStatusBarText(ui->table_dp_del0);
 }
 
 void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item)
@@ -2061,13 +2074,7 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
 
     // Memory
     QVariantMap mapMemory = map["Memory"].toMap();
-    ui->editDataWidth->setText(mapMemory["DataWidth"].toString());
-    ui->editErrorCorrection->setText(mapMemory["ErrorCorrection"].toString());
-    ui->editFormFactor->setText(mapMemory["FormFactor"].toString());
-    ui->editMaxCapacity->setText(mapMemory["MaxCapacity"].toString());
-    ui->editTotalWidth->setText(mapMemory["TotalWidth"].toString());
-    ui->editType->setText(mapMemory["Type"].toString());
-    ui->editTypeDetail->setText(mapMemory["TypeDetail"].toString());
+    getValue(mapMemory, ui->tabPlatformInfo3);
 
     // Memory-Devices
     QVariantList mapMemoryDevices = mapMemory["Devices"].toList();
@@ -2749,13 +2756,13 @@ QVariantMap MainWindow::SavePlatformInfo()
 
     // Memory
     valueList.clear();
-    valueList["DataWidth"] = ui->editDataWidth->text().toLongLong();
-    valueList["ErrorCorrection"] = ui->editErrorCorrection->text().toLongLong();
-    valueList["FormFactor"] = ui->editFormFactor->text().toLongLong();
-    valueList["MaxCapacity"] = ui->editMaxCapacity->text().toLongLong();
-    valueList["TotalWidth"] = ui->editTotalWidth->text().toLongLong();
-    valueList["Type"] = ui->editType->text().toLongLong();
-    valueList["TypeDetail"] = ui->editTypeDetail->text().toLongLong();
+    valueList["DataWidth"] = ui->editIntDataWidth->text().toLongLong();
+    valueList["ErrorCorrection"] = ui->editIntErrorCorrection->text().toLongLong();
+    valueList["FormFactor"] = ui->editIntFormFactor->text().toLongLong();
+    valueList["MaxCapacity"] = ui->editIntMaxCapacity->text().toLongLong();
+    valueList["TotalWidth"] = ui->editIntTotalWidth->text().toLongLong();
+    valueList["Type"] = ui->editIntType->text().toLongLong();
+    valueList["TypeDetail"] = ui->editIntTypeDetail->text().toLongLong();
 
     // Memory-Devices
     QVariantMap Map;
@@ -2940,7 +2947,7 @@ void MainWindow::on_table_acpi_add_cellClicked(int row, int column)
 
     enabled_change(ui->table_acpi_add, row, column, 1);
 
-    ui->statusbar->showMessage(ui->table_acpi_add->currentItem()->text());
+    setStatusBarText(ui->table_acpi_add);
 }
 
 void MainWindow::init_enabled_data(QTableWidget* table, int row, int column,
@@ -2989,7 +2996,20 @@ void MainWindow::on_table_acpi_del_cellClicked(int row, int column)
     enabled_change(ui->table_acpi_del, row, column, 3);
     enabled_change(ui->table_acpi_del, row, column, 4);
 
-    ui->statusbar->showMessage(ui->table_acpi_del->currentItem()->text());
+    setStatusBarText(ui->table_acpi_del);
+}
+
+void MainWindow::setStatusBarText(QTableWidget* table)
+{
+
+    QString text = table->currentItem()->text();
+    QString str;
+    if (getTableFieldDataType(table) == "Data")
+        str = QString::number(text.count() / 2) + " Bytes  " + text;
+    else
+        str = text;
+
+    ui->statusbar->showMessage(str);
 }
 
 void MainWindow::on_table_acpi_patch_cellClicked(int row, int column)
@@ -2999,7 +3019,7 @@ void MainWindow::on_table_acpi_patch_cellClicked(int row, int column)
 
     enabled_change(ui->table_acpi_patch, row, column, 11);
 
-    ui->statusbar->showMessage(ui->table_acpi_patch->currentItem()->text());
+    setStatusBarText(ui->table_acpi_patch);
 }
 
 void MainWindow::on_table_booter_cellClicked(int row, int column)
@@ -3009,7 +3029,7 @@ void MainWindow::on_table_booter_cellClicked(int row, int column)
 
     enabled_change(ui->table_booter, row, column, 1);
 
-    ui->statusbar->showMessage(ui->table_booter->currentItem()->text());
+    setStatusBarText(ui->table_booter);
 }
 
 void MainWindow::on_table_kernel_add_cellClicked(int row, int column)
@@ -3036,7 +3056,7 @@ void MainWindow::on_table_kernel_add_cellClicked(int row, int column)
         cboxArch->setCurrentText(ui->table_kernel_add->item(row, 7)->text());
     }
 
-    ui->statusbar->showMessage(ui->table_kernel_add->currentItem()->text());
+    setStatusBarText(ui->table_kernel_add);
 }
 
 void MainWindow::on_table_kernel_block_cellClicked(int row, int column)
@@ -3062,7 +3082,7 @@ void MainWindow::on_table_kernel_block_cellClicked(int row, int column)
         cboxArch->setCurrentText(ui->table_kernel_block->item(row, 5)->text());
     }
 
-    ui->statusbar->showMessage(ui->table_kernel_block->currentItem()->text());
+    setStatusBarText(ui->table_kernel_block);
 }
 
 void MainWindow::on_table_kernel_patch_cellClicked(int row, int column)
@@ -3089,7 +3109,7 @@ void MainWindow::on_table_kernel_patch_cellClicked(int row, int column)
         cboxArch->setCurrentText(ui->table_kernel_patch->item(row, 13)->text());
     }
 
-    ui->statusbar->showMessage(ui->table_kernel_patch->currentItem()->text());
+    setStatusBarText(ui->table_kernel_patch);
 }
 
 void MainWindow::on_tableEntries_cellClicked(int row, int column)
@@ -3103,7 +3123,7 @@ void MainWindow::on_tableEntries_cellClicked(int row, int column)
 
     enabled_change(ui->tableEntries, row, column, 6);
 
-    ui->statusbar->showMessage(ui->tableEntries->currentItem()->text());
+    setStatusBarText(ui->tableEntries);
 }
 
 void MainWindow::on_tableTools_cellClicked(int row, int column)
@@ -3119,7 +3139,7 @@ void MainWindow::on_tableTools_cellClicked(int row, int column)
 
     enabled_change(ui->tableTools, row, column, 7);
 
-    ui->statusbar->showMessage(ui->tableTools->currentItem()->text());
+    setStatusBarText(ui->tableTools);
 }
 
 void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
@@ -3562,7 +3582,7 @@ void MainWindow::on_btnKernelAdd_Add_clicked()
 #ifdef Q_OS_WIN32
 
     FileName.append(fd.getExistingDirectory());
-    // qDebug() << FileName[0];
+
 #endif
 
 #ifdef Q_OS_LINUX
@@ -3575,7 +3595,7 @@ void MainWindow::on_btnKernelAdd_Add_clicked()
     FileName = fd.getOpenFileNames(this, "kext", "",
         "kext(*.kext);;all(*.*)");
 #endif
-    //qDebug() << FileName[0];
+
     addKexts(FileName);
 }
 
@@ -4236,12 +4256,9 @@ void MainWindow::on_table_dp_add_cellClicked(int row, int column)
 
         ui->table_dp_add->setCellWidget(row, column, cboxDataClass);
         cboxDataClass->setCurrentText(ui->table_dp_add->item(row, 1)->text());
+    }
 
-    } //else
-
-    //  on_table_dp_add_currentCellChanged(row, column, row, column);
-
-    ui->statusbar->showMessage(ui->table_dp_add->currentItem()->text());
+    setStatusBarText(ui->table_dp_add);
 }
 
 void MainWindow::on_table_dp_add_currentCellChanged(int currentRow,
@@ -4260,11 +4277,6 @@ void MainWindow::on_table_dp_add_currentCellChanged(int currentRow,
 
         myTable = new QTableWidget;
         myTable = ui->table_dp_add;
-
-        //initLineEdit(myTable, previousRow, previousColumn, currentRow, currentColumn);
-    } else {
-        //myTable->removeCellWidget(previousRow, previousColumn);
-        //lineEdit = NULL;
     }
 }
 
@@ -4334,7 +4346,7 @@ void MainWindow::on_table_nv_add_cellClicked(int row, int column)
         cboxDataClass->setCurrentText(ui->table_nv_add->item(row, 1)->text());
     }
 
-    ui->statusbar->showMessage(ui->table_nv_add->currentItem()->text());
+    setStatusBarText(ui->table_nv_add);
 }
 
 void MainWindow::on_table_nv_add_currentCellChanged(int currentRow,
@@ -4367,10 +4379,23 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
 
         lineEdit = new QLineEdit(this);
 
-        //lineEdit->setContextMenuPolicy(Qt::NoContextMenu); //屏蔽自身下拉菜单
-
         Table->setCurrentCell(currentRow, currentColumn);
         Table->setCellWidget(currentRow, currentColumn, lineEdit);
+
+        lineEdit->setToolTip("");
+        if (getTableFieldDataType(myTable) == "Int") {
+            lineEdit->setValidator(IntValidator);
+            lineEdit->setPlaceholderText(tr("Integer"));
+            lineEdit->setToolTip(tr("Integer"));
+        }
+
+        if (getTableFieldDataType(myTable) == "Data") {
+
+            QValidator* validator = new QRegExpValidator(regx, lineEdit);
+            lineEdit->setValidator(validator);
+            lineEdit->setPlaceholderText(tr("Hexadecimal"));
+            lineEdit->setToolTip(tr("Hexadecimal"));
+        }
 
         loading = true;
         if (Table->currentIndex().isValid())
@@ -4384,6 +4409,49 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         connect(lineEdit, &QLineEdit::returnPressed, this, &MainWindow::setEditText);
         connect(lineEdit, &QLineEdit::textChanged, this, &MainWindow::lineEdit_textChanged);
     }
+}
+
+QString MainWindow::getTableFieldDataType(QTableWidget* table)
+{
+    int col = table->currentColumn();
+    QString strHeader = table->horizontalHeaderItem(col)->text();
+    QStringList strHeaderList = strHeader.split("\n");
+
+    if (strHeaderList.count() == 2) {
+        if (stringInt.contains(strHeaderList.at(1))) {
+
+            return "Int";
+        }
+
+        if (stringData.contains(strHeaderList.at(1))) {
+
+            return "Data";
+        }
+    }
+
+    if (strHeaderList.count() == 1) {
+        if (stringInt.contains(strHeaderList.at(0))) {
+
+            return "Int";
+        }
+
+        if (stringData.contains(strHeaderList.at(0))) {
+
+            return "Data";
+        }
+    }
+
+    if (table == ui->table_dp_add || table == ui->table_nv_add) {
+        int row, col;
+        row = table->currentRow();
+        col = 1;
+        if (table->item(row, col)->text() == "Number")
+            return "Int";
+        if (table->item(row, col)->text() == "Data")
+            return "Data";
+    }
+
+    return "";
 }
 
 void MainWindow::reg_win()
@@ -4603,7 +4671,7 @@ void MainWindow::on_table_kernel_Force_cellClicked(int row, int column)
         cboxArch->setCurrentText(ui->table_kernel_Force->item(row, 8)->text());
     }
 
-    ui->statusbar->showMessage(ui->table_kernel_Force->currentItem()->text());
+    setStatusBarText(ui->table_kernel_Force);
 }
 
 void MainWindow::on_table_kernel_Force_currentCellChanged(int currentRow,
@@ -6741,6 +6809,11 @@ void MainWindow::init_Menu()
     ui->actionGenerateEFI->setIcon(QIcon(":/icon/efi.png"));
     ui->toolBar->addAction(ui->actionGenerateEFI);
 
+    //Update OC Main Program
+    ui->actionUpgrade_OC->setIcon(QIcon(":/icon/um.png"));
+    ui->actionUpgrade_OC->setEnabled(false);
+    ui->toolBar->addAction(ui->actionUpgrade_OC);
+
     //Open DataBase
     connect(ui->actionDatabase, &QAction::triggered, this, &MainWindow::on_Database);
     ui->actionDatabase->setShortcut(tr("ctrl+d"));
@@ -6783,9 +6856,6 @@ void MainWindow::init_Menu()
     connect(ui->actionDSDT_SSDT_editor, &QAction::triggered, this, &MainWindow::on_line21);
 
     ui->actionSave->setEnabled(false);
-
-    // Bug Report
-    ui->actionBug_Report->setIcon(QIcon(":/icon/about.png"));
 
     //Undo/Redo
     undoStack = new QUndoStack(this);
@@ -6886,10 +6956,29 @@ void MainWindow::init_Menu()
     ui->actionGo_to_the_next->setIcon(QIcon(":/icon/2.png"));
     ui->toolBar->addAction(ui->actionGo_to_the_next);
 
-    ui->toolBar->addSeparator();
+    //ui->toolBar->addSeparator();
 
-    // About
-    ui->toolBar->addAction(ui->actionBug_Report);
+    // Bug Report
+    ui->actionBug_Report->setIcon(QIcon(":/icon/about.png"));
+    //ui->toolBar->addAction(ui->actionBug_Report);
+
+    // LineEdit data check
+    listOfLineEdit.clear();
+    listOfLineEdit = getAllLineEdit(getAllUIControls(ui->tabTotal));
+    for (int i = 0; i < listOfLineEdit.count(); i++) {
+        QLineEdit* w = (QLineEdit*)listOfLineEdit.at(i);
+
+        if (w->objectName().mid(0, 7) == "editInt") {
+            w->setValidator(IntValidator);
+            w->setPlaceholderText(tr("Integer"));
+        }
+
+        if (w->objectName().mid(0, 7) == "editDat" || w->objectName() == "editFirmwareFeatures_SMBIOS" || w->objectName() == "editFirmwareFeaturesMask_SMBIOS") {
+            QValidator* validator = new QRegExpValidator(regx, w);
+            w->setValidator(validator);
+            w->setPlaceholderText(tr("Hexadecimal"));
+        }
+    }
 
     //Copy Label
     listOfLabel.clear();
@@ -7064,7 +7153,14 @@ void MainWindow::on_Database()
         tableDatabase->setItem(i, 0, newItem1);
     }
 
+    myDatabase->setWindowTitle(tr("Configuration file database") + " : " + getDatabaseVer());
+}
+
+QString MainWindow::getDatabaseVer()
+{
+
     //Read database version information
+    QFileInfo appInfo(qApp->applicationDirPath());
     QString strLastModify = QFileInfo(appInfo.filePath() + "/Database/EFI/OC/OpenCore.efi").lastModified().toString();
 
     QString DatabaseVer;
@@ -7084,9 +7180,9 @@ void MainWindow::on_Database()
             QString text = in.readAll();
             DatabaseVer = text + "    " + strLastModify;
         }
-
-        myDatabase->setWindowTitle(tr("Configuration file database") + " : " + DatabaseVer);
     }
+
+    return DatabaseVer;
 }
 
 void MainWindow::on_line1()
@@ -7226,7 +7322,7 @@ void MainWindow::on_table_dp_del_cellClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
-    ui->statusbar->showMessage(ui->table_dp_del->currentItem()->text());
+    setStatusBarText(ui->table_dp_del);
 }
 
 void MainWindow::on_tableBlessOverride_cellClicked(int row, int column)
@@ -7234,7 +7330,7 @@ void MainWindow::on_tableBlessOverride_cellClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
-    ui->statusbar->showMessage(ui->tableBlessOverride->currentItem()->text());
+    setStatusBarText(ui->tableBlessOverride);
 }
 
 void MainWindow::on_table_nv_del_cellClicked(int row, int column)
@@ -7321,7 +7417,7 @@ void MainWindow::readResultCheckData()
         ui->btnOcvalidate->setToolTip(tr("There is a issue with the configuration file."));
     }
 
-    if (OpenFileValidate) {
+    if (OpenFileValidate && !dlgOCV->isVisible()) {
 
         OpenFileValidate = false;
         return;
@@ -7374,7 +7470,7 @@ void MainWindow::on_table_Booter_patch_cellClicked(int row, int column)
         cboxArch->setCurrentText(ui->table_Booter_patch->item(row, 10)->text());
     }
 
-    ui->statusbar->showMessage(ui->table_Booter_patch->currentItem()->text());
+    setStatusBarText(ui->table_Booter_patch);
 }
 
 void MainWindow::on_table_Booter_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
@@ -8089,6 +8185,16 @@ void MainWindow::setEditText()
             myTable->setFocus();
 
             return;
+        }
+
+        if (getTableFieldDataType(myTable) == "Data") {
+            int count = lineEdit->text().trimmed().count();
+
+            if (count % 2 != 0)
+                return;
+
+            QString text = lineEdit->text().trimmed();
+            lineEdit->setText(text.toUpper());
         }
 
         oldText = myTable->item(row, col)->text();
@@ -10855,9 +10961,13 @@ void MainWindow::getValue(QVariantMap map, QWidget* tab)
         QComboBox* w = (QComboBox*)listComboBox.at(i);
         QString name = w->objectName().mid(4, w->objectName().count() - 3);
 
-        QString cu_text = map[name].toString();
-        if (w != ui->cboxFind)
-            w->setCurrentText(cu_text.trimmed());
+        QString cu_text = map[name].toString().trimmed();
+        if (w != ui->cboxFind) {
+            if (cu_text != "")
+                w->setCurrentText(cu_text);
+            else
+                w->setCurrentIndex(0);
+        }
     }
 }
 
@@ -10954,4 +11064,105 @@ QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab)
 void MainWindow::on_actionQuit_triggered()
 {
     this->close();
+}
+
+void MainWindow::on_actionUpgrade_OC_triggered()
+{
+
+    QString DirName;
+    QMessageBox box;
+    bool ok1 = false;
+    bool ok2 = false;
+    bool ok3 = false;
+
+    QFileInfo fi(SaveFileName);
+    DirName = fi.path().mid(0, fi.path().count() - 3);
+
+    if (DirName.isEmpty())
+        return;
+
+    QFileInfo appInfo(qApp->applicationDirPath());
+    QString pathSource = appInfo.filePath() + "/Database/";
+
+    QString file1, file2, file3, file4;
+    QString targetFile1, targetFile2, targetFile3, targetFile4;
+    file1 = pathSource + "EFI/OC/OpenCore.efi";
+    file2 = pathSource + "EFI/BOOT/BOOTx64.efi";
+    file3 = pathSource + "EFI/OC/Drivers/OpenRuntime.efi";
+    file4 = pathSource + "EFI/OC/Drivers/OpenCanopy.efi";
+
+    targetFile1 = DirName + "/OC/OpenCore.efi";
+    targetFile2 = DirName + "/BOOT/BOOTx64.efi";
+    targetFile3 = DirName + "/OC/Drivers/OpenRuntime.efi";
+    targetFile4 = DirName + "/OC/Drivers/OpenCanopy.efi";
+
+    QFileInfo f1(file1);
+    QFileInfo f2(file2);
+    QFileInfo f3(file3);
+    QFileInfo f4(file4);
+
+    this->setFocus();
+    if (!f1.exists() || !f2.exists() || !f3.exists() || !f4.exists()) {
+        box.setText(tr("The database file is incomplete and the upgrade cannot be completed."));
+        box.exec();
+        ui->cboxFind->setFocus();
+        return;
+    }
+
+    QFileInfo fiTarget(targetFile1);
+    QFileInfo fiSource(file1);
+    this->setFocus();
+    if (fiTarget.lastModified() > fiSource.lastModified()) {
+        box.setText(tr("The current file is newer than the one inside the database, please go to the official OC website to download the latest release or development version to upgrade."));
+        box.exec();
+        ui->cboxFind->setFocus();
+        return;
+    }
+
+    QString strFiles = tr("The following files will be upgraded: ") + "\n " + targetFile1 + "\n "
+        + targetFile2 + "\n " + targetFile3 + "\n " + targetFile4;
+    this->setFocus();
+    QMessageBox msg;
+    msg.setText(strFiles);
+    msg.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msg.setButtonText(QMessageBox::Ok, QString(tr("Ok")));
+    msg.setButtonText(QMessageBox::Cancel, QString(tr("Cancel")));
+    msg.setStyleSheet("QLabel{min-width:500 px;}");
+    int result = msg.exec();
+    switch (result) {
+    case QMessageBox::Ok:
+        ui->cboxFind->setFocus();
+        break;
+    case QMessageBox::Cancel:
+        ui->cboxFind->setFocus();
+        return;
+        break;
+    default:
+        break;
+    }
+
+    QFile::remove(targetFile1);
+    ok1 = QFile::copy(file1, targetFile1);
+
+    if (ok1) {
+        QFile::remove(targetFile2);
+        ok2 = QFile::copy(file2, targetFile2);
+    }
+
+    if (ok2) {
+        QFile::remove(targetFile3);
+        ok3 = QFile::copy(file3, targetFile3);
+    }
+
+    QFile::remove(targetFile4);
+    QFile::copy(file4, targetFile4);
+
+    this->setFocus();
+    box.setStyleSheet("QLabel{min-width:500 px;}");
+    if (ok1 && ok2 && ok3) {
+        box.setText(tr("Successfully upgraded to OpenCore: ") + getDatabaseVer());
+        box.exec();
+    }
+
+    ui->cboxFind->setFocus();
 }
