@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -82,7 +82,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -647,10 +647,10 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
            <widget class="QWidget" name="gridLayoutWidget">
             <property name="geometry">
              <rect>
-              <x>30</x>
+              <x>0</x>
               <y>30</y>
-              <width>401</width>
-              <height>331</height>
+              <width>271</width>
+              <height>311</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_28">
@@ -1062,145 +1062,35 @@ Description: Exclude MMIO address from the devirtualisation procedure.
            <widget class="QWidget" name="gridLayoutWidget_14">
             <property name="geometry">
              <rect>
-              <x>20</x>
+              <x>40</x>
               <y>20</y>
-              <width>1241</width>
-              <height>351</height>
+              <width>1061</width>
+              <height>321</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_6">
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="chkAvoidRuntimeDefrag">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="chkForceExitBootServices">
                <property name="toolTip">
-                <string notr="true">Description: Protect from boot.efi runtime memory defragmentation.
+                <string notr="true">Try to ensure that ExitBootServices call succeeds even with outdated MemoryMap key argument by obtaining current memory map and retrying ExitBootServices call.
 
-This option fixes UEFI runtime services (date, time, NVRAM, power control, etc.) support on firmware that uses SMM backing for certain services such as variable storage. SMM may try to access memory by physical addresses in non-SMM areas but this may sometimes have been moved by boot.efi. This option prevents boot.efi from moving such data.
-
-Note: Most types of firmware, apart from Apple and VMware, need this quirk.
+Note: The necessity of this quirk is determined by early boot crashes of the firmware. Do not use this unless you fully understand the consequences.
 
 ----
 
-描述: 防止 boot.efi 运行时内存碎片整理。
+尝试通过获取当前的内存映射并重试ExitBootServices调用来确保ExitBootServices调用成功，即使是过时的MemoryMap键参数。
 
-它可以修复UEFI运行时服务（日期、时间、NVRAM、电源控制等）对使用SMM支持某些服务（如可变存储）的固件的支持。
-
-SMM可能会尝试通过非SMM区域的物理地址访问内存，但这有时可能已经被boot.efi移动了。这个选项可以防止boot.efi移动这些数据。
-
-注意：除了苹果和VMware之外，大多数类型的固件都需要这个选项。
-</string>
+注意：该选项的必要性是由固件的早期启动崩溃决定的。除非你完全明白后果，否则不要使用这个。</string>
                </property>
                <property name="statusTip">
-                <string>Protect from boot.efi runtime memory defragmentation.</string>
+                <string>Retry ExitBootServices with new memory map on failure.</string>
                </property>
                <property name="text">
-                <string>AvoidRuntimeDefrag</string>
+                <string>ForceExitBootServices</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkAllowRelocationBlock">
-               <property name="toolTip">
-                <string notr="true">Description: Allows booting macOS through a relocation block.
-
-The relocation block is a scratch buffer allocated in the lower 4 GB used for loading the kernel and related structures by EfiBoot on firmware where the lower memory region is otherwise occupied by (assumed) non-runtime data. Right before kernel startup, the relocation block is copied back to lower addresses. Similarly, all the other addresses pointing to the relocation block are also carefully adjusted. The relocation block can be used when:
-
-• No better slide exists (all the memory is used)
-
-• slide=0 is forced (by an argument or safe mode)
-
-• KASLR (slide) is unsupported (this is macOS 10.7 or older)
-
-This quirk requires ProvideCustomSlide to be enabled and typically also requires enabling AvoidRuntimeDefrag to function correctly. Hibernation is not supported when booting with a relocation block, which will only be used if required when the quirk is enabled.
-
-Note: While this quirk is required to run older macOS versions on platforms with used lower memory, it is not compatible with some hardware and macOS 11. In such cases, consider using EnableSafeModeSlide instead.
-
-----
-
-说明：允许通过重新定位块启动macOS。
-
-重置块是一个分配在下4GB的缓冲区，用于EfiBoot在固件上加载内核和相关结构，否则下层内存区域就会被（假设的）非运行时数据占用。就在内核启动前，重新定位块被复制到较低的地址。同样的，所有其他指向重定位块的地址也会被仔细调整。重置块可以在以下情况下使用。
-
-- 没有更好的幻灯片存在(所有的内存都被使用了)
-
-- slide=0被强制（通过参数或安全模式）。
-
-- 不支持KASLR(幻灯片)(这是macOS 10.7或更高版本)
-
-此选项需要启用ProvideCustomSlide，通常还需要启用AvoidRuntimeDefrag才能正常工作。当使用重新定位块启动时，不支持休眠，只有在启用此选项时才会使用。
-
-注意：虽然在使用了较低内存的平台上运行旧版macOS需要这个选项，但它与某些硬件和macOS 11不兼容。在这种情况下，请考虑使用EnableSafeModeSlide代替。</string>
-               </property>
-               <property name="statusTip">
-                <string>Allows booting macOS through a relocation block.</string>
-               </property>
-               <property name="text">
-                <string>AllowRelocationBlock</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="chkDevirtualiseMmio">
-               <property name="toolTip">
-                <string notr="true">
-Description: Remove runtime attribute from certain MMIO regions.
-
-This quirk reduces the stolen memory footprint in the memory map by removing the runtime bit for known memory regions. This quirk may result in an increase of KASLR slides available but without additional measures,it is not necessarily compatible with the target board. This quirk typically frees between 64 and 256 megabytes of memory, present in the debug log, and on some platforms, is the only way to boot macOS, which otherwise fails with allocation errors at the bootloader stage.
-
-This option is useful on all types of firmware, except for some very old ones such as Sandy Bridge. On certain firmware, a list of addresses that need virtual addresses for proper NVRAM and hibernation functionality may be required. Use the MmioWhitelist section for this.
-
-
-----
-
-
-
-说明：删除某些MMIO区域的运行时属性。
-
-该选项通过删除已知内存区域的运行时间位来减少内存映射中被盗的内存足迹。
-
-它可能会导致KASLR幻灯片的可用性增加，但如果没有额外的措施，它不一定与目标板兼容。
-
-它通常会释放64到256兆的内存，存在于调试日志中，在某些平台上，是启动macOS的唯一方法，否则会在bootloader阶段因分配错误而失败。
-
-这个选项在所有类型的固件上都很有用，除了一些很老的固件，比如Sandy Bridge。
-
-在某些固件上，可能需要一个虚拟地址的地址列表来实现正确的NVRAM和休眠功能。请使用 MmioWhitelist 部分来解决这个问题。
-
-</string>
-               </property>
-               <property name="statusTip">
-                <string>Remove runtime attribute from select MMIO regions.</string>
-               </property>
-               <property name="text">
-                <string>DevirtualiseMmio</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="chkDisableSingleUser">
-               <property name="toolTip">
-                <string notr="true">This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot argument. 
-
-The behaviour with this quirk enabled is supposed to match T2-based model behaviour. 
-
-Read this archived article to understand how to use single user mode with this quirk enabled.
-
-----
-
-这是一个安全选项，允许人们通过忽略CMD+S热键和-s启动参数来限制单用户模式的使用。
-
-启用此选项后的行为应该与基于T2的模式行为一致。
-
-</string>
-               </property>
-               <property name="statusTip">
-                <string>Disable single user mode.</string>
-               </property>
-               <property name="text">
-                <string>DisableSingleUser</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="3">
+             <item row="3" column="4">
               <widget class="QCheckBox" name="chkSignalAppleOS">
                <property name="toolTip">
                 <string notr="true">This quirk is useful on Mac firmwares, which behave differently in different OS. 
@@ -1221,7 +1111,7 @@ For example, it is supposed to enable Intel GPU in Windows and Linux in some dua
                </property>
               </widget>
              </item>
-             <item row="3" column="2">
+             <item row="3" column="3">
               <widget class="QCheckBox" name="chkRebuildAppleMemoryMap">
                <property name="toolTip">
                 <string notr="true">Apple kernel has several limitations in parsing UEFI memory map:
@@ -1258,7 +1148,7 @@ Note 2 : The necessity of this quirk is determined by early boot failures. This 
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
+             <item row="3" column="2">
               <widget class="QCheckBox" name="chkSetupVirtualMap">
                <property name="toolTip">
                 <string notr="true">Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot crashes. This quirk workarounds the problem by performing early boot identity mapping of assigned virtual addresses to physical memory.
@@ -1276,6 +1166,59 @@ Note: The necessity of this quirk is determined by early boot failures. Currentl
                </property>
                <property name="text">
                 <string>SetupVirtualMap</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="chkAvoidRuntimeDefrag">
+               <property name="toolTip">
+                <string notr="true">Description: Protect from boot.efi runtime memory defragmentation.
+
+This option fixes UEFI runtime services (date, time, NVRAM, power control, etc.) support on firmware that uses SMM backing for certain services such as variable storage. SMM may try to access memory by physical addresses in non-SMM areas but this may sometimes have been moved by boot.efi. This option prevents boot.efi from moving such data.
+
+Note: Most types of firmware, apart from Apple and VMware, need this quirk.
+
+----
+
+描述: 防止 boot.efi 运行时内存碎片整理。
+
+它可以修复UEFI运行时服务（日期、时间、NVRAM、电源控制等）对使用SMM支持某些服务（如可变存储）的固件的支持。
+
+SMM可能会尝试通过非SMM区域的物理地址访问内存，但这有时可能已经被boot.efi移动了。这个选项可以防止boot.efi移动这些数据。
+
+注意：除了苹果和VMware之外，大多数类型的固件都需要这个选项。
+</string>
+               </property>
+               <property name="statusTip">
+                <string>Protect from boot.efi runtime memory defragmentation.</string>
+               </property>
+               <property name="text">
+                <string>AvoidRuntimeDefrag</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QCheckBox" name="chkForceBooterSignature">
+               <property name="toolTip">
+                <string notr="true">Booter signature, essentially a SHA-1 hash of the loaded image, is used by Mac EFI to verify the authenticity of the bootloader when waking from hibernation. 
+
+This option forces macOS to use OpenCore launcher SHA-1 hash as a booter signature to let OpenCore shim hibernation wake on Mac EFI firmware.
+
+Note: OpenCore launcher path is determined from LauncherPath property.
+
+----
+
+Booter签名，本质上是加载的映像的SHA-1哈希值，Mac EFI在从休眠中唤醒时使用它来验证引导加载器的真实性。
+
+这个选项强制macOS使用OpenCore启动器SHA-1哈希值作为启动器签名，让OpenCore shim休眠唤醒在Mac EFI固件上。
+
+注意：OpenCore启动器路径由LauncherPath属性决定。</string>
+               </property>
+               <property name="statusTip">
+                <string>Set macOS boot-signature to OpenCore launcher.</string>
+               </property>
+               <property name="text">
+                <string>ForceBooterSignature</string>
                </property>
               </widget>
              </item>
@@ -1312,7 +1255,58 @@ Note: The necessity of this quirk is determined by artifacts, sleep wake issues,
                </property>
               </widget>
              </item>
-             <item row="2" column="3">
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkDisableVariableWrite">
+               <property name="toolTip">
+                <string notr="true">This is a security option allowing one to restrict NVRAM access in macOS. 
+
+This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in  OpenRuntime.efi.
+
+Note: This quirk can also be used as an ugly workaround to buggy UEFI runtime services implementations that fail to write variables to NVRAM and break the rest of the operating system.
+
+----
+
+这是一个安全选项，允许人们在macOS中限制NVRAM的访问。
+
+它需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。
+
+注意：它也可以作为一个简陋的变通方法，来解决UEFI运行时服务实现的bug，因为这些服务无法将变量写入NVRAM并破坏操作系统的其他部分。
+</string>
+               </property>
+               <property name="statusTip">
+                <string>Protect from macOS NVRAM write access.</string>
+               </property>
+               <property name="text">
+                <string>DisableVariableWrite</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QCheckBox" name="chkDisableSingleUser">
+               <property name="toolTip">
+                <string notr="true">This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot argument. 
+
+The behaviour with this quirk enabled is supposed to match T2-based model behaviour. 
+
+Read this archived article to understand how to use single user mode with this quirk enabled.
+
+----
+
+这是一个安全选项，允许人们通过忽略CMD+S热键和-s启动参数来限制单用户模式的使用。
+
+启用此选项后的行为应该与基于T2的模式行为一致。
+
+</string>
+               </property>
+               <property name="statusTip">
+                <string>Disable single user mode.</string>
+               </property>
+               <property name="text">
+                <string>DisableSingleUser</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="4">
               <widget class="QCheckBox" name="chkProvideCustomSlide">
                <property name="toolTip">
                 <string notr="true">This option performs memory map analysis of your firmware and checks whether all slides (from 1 to 255) can be used. 
@@ -1341,32 +1335,44 @@ Note: The necessity of this quirk is determined by OCABC: Only N/256 slide value
                </property>
               </widget>
              </item>
-             <item row="2" column="2">
-              <widget class="QCheckBox" name="chkProtectUefiServices">
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkDevirtualiseMmio">
                <property name="toolTip">
-                <string notr="true">Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to UEFI services during driver loading and related actions. 
+                <string notr="true">
+Description: Remove runtime attribute from certain MMIO regions.
 
-Consequentially this directly breaks other quirks that affect memory management, like DevirtualiseMmio, ProtectMemoryRegions, or RebuildAppleMemoryMap, and may also break other quirks depending on the effects of these.
+This quirk reduces the stolen memory footprint in the memory map by removing the runtime bit for known memory regions. This quirk may result in an increase of KASLR slides available but without additional measures,it is not necessarily compatible with the target board. This quirk typically frees between 64 and 256 megabytes of memory, present in the debug log, and on some platforms, is the only way to boot macOS, which otherwise fails with allocation errors at the bootloader stage.
 
-Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest might run unreliably with more than one virtual core.” message.
+This option is useful on all types of firmware, except for some very old ones such as Sandy Bridge. On certain firmware, a list of addresses that need virtual addresses for proper NVRAM and hibernation functionality may be required. Use the MmioWhitelist section for this.
+
 
 ----
 
-一些现代的固件，包括硬件和虚拟机，如VMware，可能会在驱动程序加载和相关操作期间更新指向UEFI服务的指针。
 
-相应地，这直接破坏了其他影响内存管理的选项，如DevirtualiseMmio、ProtectMemoryRegions或RebuildAppleMemoryMap，也可能破坏其他选项，这取决于这些选项的影响。
 
-注意：在VMware上，该选项的必要性可能会被 &quot;你的Mac OS guest可能会在多个虚拟核心的情况下不可靠地运行。&quot;消息诊断出来。</string>
+说明：删除某些MMIO区域的运行时属性。
+
+该选项通过删除已知内存区域的运行时间位来减少内存映射中被盗的内存足迹。
+
+它可能会导致KASLR幻灯片的可用性增加，但如果没有额外的措施，它不一定与目标板兼容。
+
+它通常会释放64到256兆的内存，存在于调试日志中，在某些平台上，是启动macOS的唯一方法，否则会在bootloader阶段因分配错误而失败。
+
+这个选项在所有类型的固件上都很有用，除了一些很老的固件，比如Sandy Bridge。
+
+在某些固件上，可能需要一个虚拟地址的地址列表来实现正确的NVRAM和休眠功能。请使用 MmioWhitelist 部分来解决这个问题。
+
+</string>
                </property>
                <property name="statusTip">
-                <string>Protect UEFI services from being overridden by the firmware.</string>
+                <string>Remove runtime attribute from select MMIO regions.</string>
                </property>
                <property name="text">
-                <string>ProtectUefiServices</string>
+                <string>DevirtualiseMmio</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="2" column="2">
               <widget class="QCheckBox" name="chkProtectSecureBoot">
                <property name="toolTip">
                 <string notr="true">Reports security violation during attempts to write to db, dbx, PK, and KEK variables from the operating system.
@@ -1384,144 +1390,6 @@ Note: This quirk mainly attempts to avoid issues with NVRAM implementations with
                </property>
                <property name="text">
                 <string>ProtectSecureBoot</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="chkForceExitBootServices">
-               <property name="toolTip">
-                <string notr="true">Try to ensure that ExitBootServices call succeeds even with outdated MemoryMap key argument by obtaining current memory map and retrying ExitBootServices call.
-
-Note: The necessity of this quirk is determined by early boot crashes of the firmware. Do not use this unless you fully understand the consequences.
-
-----
-
-尝试通过获取当前的内存映射并重试ExitBootServices调用来确保ExitBootServices调用成功，即使是过时的MemoryMap键参数。
-
-注意：该选项的必要性是由固件的早期启动崩溃决定的。除非你完全明白后果，否则不要使用这个。</string>
-               </property>
-               <property name="statusTip">
-                <string>Retry ExitBootServices with new memory map on failure.</string>
-               </property>
-               <property name="text">
-                <string>ForceExitBootServices</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QCheckBox" name="chkEnableWriteUnprotector">
-               <property name="toolTip">
-                <string notr="true">This option bypasses RˆX permissions in code pages of UEFI runtime services by removing write protection (WP) bit from CR0 register during their execution. This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi.
-
-Note: This quirk may potentially weaken firmware security, please use RebuildAppleMemoryMap if your firmware supports memory attributes table (MAT). 
-
-----
-
-这个选项在UEFI运行时服务的代码页中，通过删除CR0寄存器中的写保护（WP）位，绕过了RˆX权限。该选项需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。
-
-注意：该选项可能会削弱固件的安全性，如果你的固件支持内存属性表（MAT），请使用RebuildAppleMemoryMap。
-
-</string>
-               </property>
-               <property name="statusTip">
-                <string> Permit write access to UEFI runtime services code.</string>
-               </property>
-               <property name="text">
-                <string>EnableWriteUnprotector</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="chkEnableSafeModeSlide">
-               <property name="toolTip">
-                <string notr="true">This option is relevant to the users that have issues booting to safe mode (e.g. by holding shift or using -x boot argument). 
-
-By default safe mode forces 0 slide as if the system was launched with slide=0 boot argument. 
-
-This quirk tries to patch boot.efi to lift that limitation and let some other value (from 1 to 255) be used. 
-
-This quirk requires ProvideCustomSlide to be enabled.
-
-Note: The necessity of this quirk is determined by safe mode availability. If booting to safe mode fails, this option can be tried to be enabled.
-
-----
-
-这个选项适用于有问题的用户（例如按住shift或使用-x启动参数）。
-
-默认情况下，安全模式会强制0幻灯片，就像系统在启动时使用slide=0启动参数一样。
-
-该选项试图给boot.efi打上补丁，以解除这个限制，并让一些其他的值（从1到255）被使用。
-
-该选项需要启用 ProvideCustomSlide。
-
-注意: 该选项的必要性是由安全模式的可用性决定的。如果启动到安全模式失败，可以尝试启用这个选项。</string>
-               </property>
-               <property name="statusTip">
-                <string> Patch bootloader to have KASLR enabled in safe mode.</string>
-               </property>
-               <property name="text">
-                <string>EnableSafeModeSlide</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="chkDiscardHibernateMap">
-               <property name="toolTip">
-                <string notr="true">This option forces XNU kernel to ignore newly supplied memory map and assume that it did not change after waking from hibernation. 
-
-This behaviour is required to work by Windows, which mandates to preserve runtime memory size and location after S4 wake.
-
-Note: This may be used to workaround buggy memory maps on older hardware, and is now considered rare legacy.
-
-Examples of such hardware are Ivy Bridge laptops with Insyde firmware, like Acer V3-571G. 
-
-Do not use this unless you fully understand the consequences.
-
-----
-
-这个选项强制XNU内核忽略新提供的内存映射，并假设它在休眠后没有改变。
-
-这个行为是Windows所要求的，因为Windows要求在S4唤醒后保留运行时的内存大小和位置。
-
-注意：这可能被用来解决旧硬件上的错误内存映射，现在被认为是罕见的遗留问题。
-
-这类硬件的例子是使用Ivy Bridge固件的Ivy Bridge笔记本电脑，如Acer V3-571G。
-
-除非您完全了解其后果，否则请勿使用此功能。
-
-</string>
-               </property>
-               <property name="statusTip">
-                <string>Reuse original hibernate memory map.</string>
-               </property>
-               <property name="text">
-                <string>DiscardHibernateMap</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkDisableVariableWrite">
-               <property name="toolTip">
-                <string notr="true">This is a security option allowing one to restrict NVRAM access in macOS. 
-
-This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in  OpenRuntime.efi.
-
-Note: This quirk can also be used as an ugly workaround to buggy UEFI runtime services implementations that fail to write variables to NVRAM and break the rest of the operating system.
-
-----
-
-这是一个安全选项，允许人们在macOS中限制NVRAM的访问。
-
-它需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。
-
-注意：它也可以作为一个简陋的变通方法，来解决UEFI运行时服务实现的bug，因为这些服务无法将变量写入NVRAM并破坏操作系统的其他部分。
-</string>
-               </property>
-               <property name="statusTip">
-                <string>Protect from macOS NVRAM write access.</string>
-               </property>
-               <property name="text">
-                <string>DisableVariableWrite</string>
                </property>
               </widget>
              </item>
@@ -1566,45 +1434,171 @@ Note: The necessity of this quirk is determined by early boot failures either in
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="chkForceBooterSignature">
+             <item row="1" column="3">
+              <widget class="QCheckBox" name="chkEnableSafeModeSlide">
                <property name="toolTip">
-                <string notr="true">Booter signature, essentially a SHA-1 hash of the loaded image, is used by Mac EFI to verify the authenticity of the bootloader when waking from hibernation. 
+                <string notr="true">This option is relevant to the users that have issues booting to safe mode (e.g. by holding shift or using -x boot argument). 
 
-This option forces macOS to use OpenCore launcher SHA-1 hash as a booter signature to let OpenCore shim hibernation wake on Mac EFI firmware.
+By default safe mode forces 0 slide as if the system was launched with slide=0 boot argument. 
 
-Note: OpenCore launcher path is determined from LauncherPath property.
+This quirk tries to patch boot.efi to lift that limitation and let some other value (from 1 to 255) be used. 
+
+This quirk requires ProvideCustomSlide to be enabled.
+
+Note: The necessity of this quirk is determined by safe mode availability. If booting to safe mode fails, this option can be tried to be enabled.
 
 ----
 
-Booter签名，本质上是加载的映像的SHA-1哈希值，Mac EFI在从休眠中唤醒时使用它来验证引导加载器的真实性。
+这个选项适用于有问题的用户（例如按住shift或使用-x启动参数）。
 
-这个选项强制macOS使用OpenCore启动器SHA-1哈希值作为启动器签名，让OpenCore shim休眠唤醒在Mac EFI固件上。
+默认情况下，安全模式会强制0幻灯片，就像系统在启动时使用slide=0启动参数一样。
 
-注意：OpenCore启动器路径由LauncherPath属性决定。</string>
+该选项试图给boot.efi打上补丁，以解除这个限制，并让一些其他的值（从1到255）被使用。
+
+该选项需要启用 ProvideCustomSlide。
+
+注意: 该选项的必要性是由安全模式的可用性决定的。如果启动到安全模式失败，可以尝试启用这个选项。</string>
                </property>
                <property name="statusTip">
-                <string>Set macOS boot-signature to OpenCore launcher.</string>
+                <string> Patch bootloader to have KASLR enabled in safe mode.</string>
                </property>
                <property name="text">
-                <string>ForceBooterSignature</string>
+                <string>EnableSafeModeSlide</string>
                </property>
               </widget>
              </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="gridLayoutWidget_15">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>410</y>
-              <width>371</width>
-              <height>80</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_63">
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="chkDiscardHibernateMap">
+               <property name="toolTip">
+                <string notr="true">This option forces XNU kernel to ignore newly supplied memory map and assume that it did not change after waking from hibernation. 
+
+This behaviour is required to work by Windows, which mandates to preserve runtime memory size and location after S4 wake.
+
+Note: This may be used to workaround buggy memory maps on older hardware, and is now considered rare legacy.
+
+Examples of such hardware are Ivy Bridge laptops with Insyde firmware, like Acer V3-571G. 
+
+Do not use this unless you fully understand the consequences.
+
+----
+
+这个选项强制XNU内核忽略新提供的内存映射，并假设它在休眠后没有改变。
+
+这个行为是Windows所要求的，因为Windows要求在S4唤醒后保留运行时的内存大小和位置。
+
+注意：这可能被用来解决旧硬件上的错误内存映射，现在被认为是罕见的遗留问题。
+
+这类硬件的例子是使用Ivy Bridge固件的Ivy Bridge笔记本电脑，如Acer V3-571G。
+
+除非您完全了解其后果，否则请勿使用此功能。
+
+</string>
+               </property>
+               <property name="statusTip">
+                <string>Reuse original hibernate memory map.</string>
+               </property>
+               <property name="text">
+                <string>DiscardHibernateMap</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
+              <widget class="QCheckBox" name="chkAllowRelocationBlock">
+               <property name="toolTip">
+                <string notr="true">Description: Allows booting macOS through a relocation block.
+
+The relocation block is a scratch buffer allocated in the lower 4 GB used for loading the kernel and related structures by EfiBoot on firmware where the lower memory region is otherwise occupied by (assumed) non-runtime data. Right before kernel startup, the relocation block is copied back to lower addresses. Similarly, all the other addresses pointing to the relocation block are also carefully adjusted. The relocation block can be used when:
+
+• No better slide exists (all the memory is used)
+
+• slide=0 is forced (by an argument or safe mode)
+
+• KASLR (slide) is unsupported (this is macOS 10.7 or older)
+
+This quirk requires ProvideCustomSlide to be enabled and typically also requires enabling AvoidRuntimeDefrag to function correctly. Hibernation is not supported when booting with a relocation block, which will only be used if required when the quirk is enabled.
+
+Note: While this quirk is required to run older macOS versions on platforms with used lower memory, it is not compatible with some hardware and macOS 11. In such cases, consider using EnableSafeModeSlide instead.
+
+----
+
+说明：允许通过重新定位块启动macOS。
+
+重置块是一个分配在下4GB的缓冲区，用于EfiBoot在固件上加载内核和相关结构，否则下层内存区域就会被（假设的）非运行时数据占用。就在内核启动前，重新定位块被复制到较低的地址。同样的，所有其他指向重定位块的地址也会被仔细调整。重置块可以在以下情况下使用。
+
+- 没有更好的幻灯片存在(所有的内存都被使用了)
+
+- slide=0被强制（通过参数或安全模式）。
+
+- 不支持KASLR(幻灯片)(这是macOS 10.7或更高版本)
+
+此选项需要启用ProvideCustomSlide，通常还需要启用AvoidRuntimeDefrag才能正常工作。当使用重新定位块启动时，不支持休眠，只有在启用此选项时才会使用。
+
+注意：虽然在使用了较低内存的平台上运行旧版macOS需要这个选项，但它与某些硬件和macOS 11不兼容。在这种情况下，请考虑使用EnableSafeModeSlide代替。</string>
+               </property>
+               <property name="statusTip">
+                <string>Allows booting macOS through a relocation block.</string>
+               </property>
+               <property name="text">
+                <string>AllowRelocationBlock</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="3">
+              <widget class="QCheckBox" name="chkProtectUefiServices">
+               <property name="toolTip">
+                <string notr="true">Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to UEFI services during driver loading and related actions. 
+
+Consequentially this directly breaks other quirks that affect memory management, like DevirtualiseMmio, ProtectMemoryRegions, or RebuildAppleMemoryMap, and may also break other quirks depending on the effects of these.
+
+Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest might run unreliably with more than one virtual core.” message.
+
+----
+
+一些现代的固件，包括硬件和虚拟机，如VMware，可能会在驱动程序加载和相关操作期间更新指向UEFI服务的指针。
+
+相应地，这直接破坏了其他影响内存管理的选项，如DevirtualiseMmio、ProtectMemoryRegions或RebuildAppleMemoryMap，也可能破坏其他选项，这取决于这些选项的影响。
+
+注意：在VMware上，该选项的必要性可能会被 &quot;你的Mac OS guest可能会在多个虚拟核心的情况下不可靠地运行。&quot;消息诊断出来。</string>
+               </property>
+               <property name="statusTip">
+                <string>Protect UEFI services from being overridden by the firmware.</string>
+               </property>
+               <property name="text">
+                <string>ProtectUefiServices</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QCheckBox" name="chkEnableWriteUnprotector">
+               <property name="toolTip">
+                <string notr="true">This option bypasses RˆX permissions in code pages of UEFI runtime services by removing write protection (WP) bit from CR0 register during their execution. This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi.
+
+Note: This quirk may potentially weaken firmware security, please use RebuildAppleMemoryMap if your firmware supports memory attributes table (MAT). 
+
+----
+
+这个选项在UEFI运行时服务的代码页中，通过删除CR0寄存器中的写保护（WP）位，绕过了RˆX权限。该选项需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。
+
+注意：该选项可能会削弱固件的安全性，如果你的固件支持内存属性表（MAT），请使用RebuildAppleMemoryMap。
+
+</string>
+               </property>
+               <property name="statusTip">
+                <string> Permit write access to UEFI runtime services code.</string>
+               </property>
+               <property name="text">
+                <string>EnableWriteUnprotector</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
               <widget class="QLabel" name="label_41">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="toolTip">
                 <string notr="true">This option overrides the maximum slide of 255 by a user specified value between 1 and 254 inclusive when ProvideCustomSlide is enabled. 
 
@@ -1630,8 +1624,15 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editIntProvideMaxSlide"/>
+             <item row="5" column="2">
+              <widget class="QLineEdit" name="editIntProvideMaxSlide">
+               <property name="maximumSize">
+                <size>
+                 <width>180</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -1924,7 +1925,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2315,7 +2316,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>571</width>
+              <width>621</width>
               <height>341</height>
              </rect>
             </property>
@@ -2466,65 +2467,63 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>1041</width>
-              <height>331</height>
+              <width>991</width>
+              <height>301</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_44">
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="chkAppleXcpmCfgLock">
+             <item row="2" column="2">
+              <widget class="QCheckBox" name="chkForceSecureBootScheme">
                <property name="toolTip">
-                <string notr="true">Note: This option should be avoided whenever possible. See AppleCpuPmCfgLock description for more details.
+                <string notr="true">Note: This option is required on virtual machines when using SecureBootModel different from x86legacy.
 
 ----
 
-注意：应尽可能避免使用该选项。更多细节请参见AppleCpuPmCfgLock描述。</string>
+注意：当使用不同于x86legacy的SecureBootModel时，虚拟机需要这个选项。</string>
                </property>
                <property name="statusTip">
-                <string>Disables PKG_CST_CONFIG_CONTROL (0xE2) MSR modification in XNU kernel, commonly causing
- early kernel panic, when it is locked from writing (XCPM power management).</string>
+                <string>Force x86 scheme for IMG4 verification.</string>
                </property>
                <property name="text">
-                <string>AppleXcpmCfgLock</string>
+                <string>ForceSecureBootScheme</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkCustomSMBIOSGuid">
+             <item row="1" column="3">
+              <widget class="QCheckBox" name="chkDisableRtcChecksum">
                <property name="toolTip">
-                <string notr="true"> Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops.
+                <string notr="true">Note 1 : This option will not protect other areas from being overwritten, see RTCMemoryFixup kernel extension if this is desired.
+
+Note 2 : This option will not protect areas from being overwritten at firmware stage (e.g. macOS bootloader), see AppleRtcRam protocol description if this is desired.
 
 ----
 
- 为UpdateSMBIOSMode自定义模式执行GUID补丁。通常与戴尔笔记本电脑相关。</string>
+注1：这个选项不会保护其他区域不被覆盖，如果需要，请参考RTCMemoryFixup内核扩展。
+
+注2 : 这个选项不会保护固件阶段的区域不被覆盖(例如macOS bootloader)，如果需要的话，请看AppleRtcRam协议描述。</string>
                </property>
                <property name="statusTip">
-                <string>Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops.</string>
+                <string>Disables primary checksum (0x58-0x59) writing in AppleRTC.</string>
                </property>
                <property name="text">
-                <string>CustomSMBIOSGuid</string>
+                <string>DisableRtcChecksum</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="chkXhciPortLimit">
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="chkDisableIoMapper">
                <property name="toolTip">
-                <string notr="true">Note: This option should be avoided whenever possible. USB port limit is imposed by the amount of used bits in locationID format and there is no possible way to workaround this without heavy OS modification. 
-
-The only valid solution is to limit the amount of used ports to 15 (discarding some). More details can be found on AppleLife.ru.
+                <string notr="true">Note: This option is a preferred alternative to deleting DMAR ACPI table and disabling VT-d in firmware preferences,which does not break VT-d support in other systems in case they need it.
 
 ----
 
-注意：应尽可能避免使用该选项。USB端口限制是由locationID格式中使用的位数决定的，如果不对操作系统进行大量修改，就没有办法解决这个问题。
-
-唯一有效的解决方案是将使用的端口数量限制为15个（丢弃一些）。更多细节可以在AppleLife.ru上找到。</string>
+注：该选项是删除DMAR ACPI表和在固件首选项中禁用VT-d的首选方案，在其他系统需要VT-d支持的情况下，该选项不会破坏它。</string>
                </property>
                <property name="statusTip">
-                <string>Patch various kexts (AppleUSBXHCI.kext, AppleUSBXHCIPCI.kext, IOUSBHostFamily.kext) to
- remove USB port count limit of 15 ports.</string>
+                <string>Disables IOMapper support in XNU (VT-d), which may conflict with the firmware implementation.</string>
                </property>
                <property name="text">
-                <string>XhciPortLimit</string>
+                <string>DisableIoMapper</string>
                </property>
               </widget>
              </item>
@@ -2554,119 +2553,20 @@ Affects 10.13 and above.
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="chkLapicKernelPanic">
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="chkExternalDiskIcons">
                <property name="toolTip">
-                <string notr="true">Disables kernel panic on LAPIC interrupts.
+                <string notr="true">Note: This option should be avoided whenever possible. Modern firmwares usually have compatible AHCI controllers.
 
 ----
 
-禁用LAPIC中断的内核恐慌。</string>
+注意：应尽可能避免使用该选项。现代固件通常有兼容的AHCI控制器。</string>
                </property>
                <property name="statusTip">
-                <string>Disables kernel panic on LAPIC interrupts.</string>
+                <string> Apply icon type patches to AppleAHCIPort.kext to force internal disk icons for all AHCI disks.</string>
                </property>
                <property name="text">
-                <string>LapicKernelPanic</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="chkThirdPartyDrives">
-               <property name="toolTip">
-                <string notr="true">Note: This option may be avoided on user preference. NVMe SSDs are compatible without the change. 
-
-For AHCI SSDs on modern macOS version there is a dedicated built-in utility called trimforce. Starting from 10.15 this utility creates EnableTRIM variable in APPLE_BOOT_VARIABLE_GUID namespace with 01 00 00 00 value.
-
-----
-
-注意：根据用户的喜好，这个选项可以避免。NVMe固态硬盘无需更改即可兼容。
-
-对于现代macOS版本的AHCI固态硬盘，有一个专门的内置工具叫做trimforce。从10.15开始，这个工具会在APPLE_BOOT_VARIABLE_GUID命名空间中创建EnableTRIM变量，值为01 00 00 00。
-</string>
-               </property>
-               <property name="statusTip">
-                <string> Apply vendor patches to IOAHCIBlockStorage.kext to enable native features for third-party drives,
- such as TRIM on SSDs or hibernation support on 10.15 and newer.</string>
-               </property>
-               <property name="text">
-                <string>ThirdPartyDrives</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="chkLegacyCommpage">
-               <property name="toolTip">
-                <string notr="true">Replaces the default 64-bit commpage bcopy implementation with one that does not require SSSE3, useful for legacy platforms. This prevents a commpage no match for last panic due to no available 64-bit bcopy functions that do not require SSSE3.
-
-----
-
-用一个不需要SSSE3的64位commpage bcopy实现代替默认的64位commpage bcopy实现，这对传统平台很有用。这可以防止由于没有不需要SSSE3的64位bcopy函数而导致commpage不匹配最后的恐慌。</string>
-               </property>
-               <property name="statusTip">
-                <string>Requirement: 10.4 - 10.6</string>
-               </property>
-               <property name="text">
-                <string>LegacyCommpage</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="chkDisableIoMapper">
-               <property name="toolTip">
-                <string notr="true">Note: This option is a preferred alternative to deleting DMAR ACPI table and disabling VT-d in firmware preferences,which does not break VT-d support in other systems in case they need it.
-
-----
-
-注：该选项是删除DMAR ACPI表和在固件首选项中禁用VT-d的首选方案，在其他系统需要VT-d支持的情况下，该选项不会破坏它。</string>
-               </property>
-               <property name="statusTip">
-                <string>Disables IOMapper support in XNU (VT-d), which may conflict with the firmware implementation.</string>
-               </property>
-               <property name="text">
-                <string>DisableIoMapper</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="chkAppleXcpmForceBoost">
-               <property name="toolTip">
-                <string notr="true">This patch writes 0xFF00 to MSR_IA32_PERF_CONTROL (0x199), effectively setting maximum multiplier for all the time.
-
-Note: While this may increase the performance, this patch is strongly discouraged on all systems but those explicitly dedicated to scientific or media calculations. In general only certain Xeon models benefit from the patch.
-
-----
-
-这个补丁将0xFF00写入MSR_IA32_PERF_CONTROL (0x199)，有效地设置所有时间的最大乘数。
-
-注意：虽然这可能会提高性能，但强烈不建议在所有系统上使用该补丁，但明确专用于科学或媒体计算的系统除外。一般情况下，只有某些Xeon型号能从该补丁中受益。</string>
-               </property>
-               <property name="statusTip">
-                <string> Forces maximum performance in XCPM mode.</string>
-               </property>
-               <property name="text">
-                <string>AppleXcpmForceBoost</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="chkAppleXcpmExtraMsrs">
-               <property name="toolTip">
-                <string notr="true">This is normally used in conjunction with Emulate section on Haswell-E, Broadwell-E, Skylake-SP, and similar CPUs. More details on the XCPM patches are outlined in acidanthera bugtracker#365.
-
-Note: Additional not provided patches will be required for Ivy Bridge or Pentium CPUs. It is recommended to use AppleIntelCpuPowerManagement.kext for the former.
-
-----
-
-这通常与Haswell-E、Broadwell-E、Skylake-SP和类似CPU的Emulate部分一起使用。更多关于XCPM补丁的细节，请参考 acidanthera bugtracker#365。
-
-注意：对于Ivy Bridge或Pentium CPU，将需要额外的未提供的补丁。建议前者使用AppleIntelCpuPowerManagement.kext。</string>
-               </property>
-               <property name="statusTip">
-                <string>Disables multiple MSR access critical for select CPUs, which have no native XCPM support.</string>
-               </property>
-               <property name="text">
-                <string>AppleXcpmExtraMsrs</string>
+                <string>ExternalDiskIcons</string>
                </property>
               </widget>
              </item>
@@ -2716,24 +2616,60 @@ Warning: Variable offsets are unique not only to each motherboard but even to it
                </property>
               </widget>
              </item>
-             <item row="1" column="3">
-              <widget class="QCheckBox" name="chkDisableRtcChecksum">
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="chkLegacyCommpage">
                <property name="toolTip">
-                <string notr="true">Note 1 : This option will not protect other areas from being overwritten, see RTCMemoryFixup kernel extension if this is desired.
-
-Note 2 : This option will not protect areas from being overwritten at firmware stage (e.g. macOS bootloader), see AppleRtcRam protocol description if this is desired.
+                <string notr="true">Replaces the default 64-bit commpage bcopy implementation with one that does not require SSSE3, useful for legacy platforms. This prevents a commpage no match for last panic due to no available 64-bit bcopy functions that do not require SSSE3.
 
 ----
 
-注1：这个选项不会保护其他区域不被覆盖，如果需要，请参考RTCMemoryFixup内核扩展。
-
-注2 : 这个选项不会保护固件阶段的区域不被覆盖(例如macOS bootloader)，如果需要的话，请看AppleRtcRam协议描述。</string>
+用一个不需要SSSE3的64位commpage bcopy实现代替默认的64位commpage bcopy实现，这对传统平台很有用。这可以防止由于没有不需要SSSE3的64位bcopy函数而导致commpage不匹配最后的恐慌。</string>
                </property>
                <property name="statusTip">
-                <string>Disables primary checksum (0x58-0x59) writing in AppleRTC.</string>
+                <string>Requirement: 10.4 - 10.6</string>
                </property>
                <property name="text">
-                <string>DisableRtcChecksum</string>
+                <string>LegacyCommpage</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="chkXhciPortLimit">
+               <property name="toolTip">
+                <string notr="true">Note: This option should be avoided whenever possible. USB port limit is imposed by the amount of used bits in locationID format and there is no possible way to workaround this without heavy OS modification. 
+
+The only valid solution is to limit the amount of used ports to 15 (discarding some). More details can be found on AppleLife.ru.
+
+----
+
+注意：应尽可能避免使用该选项。USB端口限制是由locationID格式中使用的位数决定的，如果不对操作系统进行大量修改，就没有办法解决这个问题。
+
+唯一有效的解决方案是将使用的端口数量限制为15个（丢弃一些）。更多细节可以在AppleLife.ru上找到。</string>
+               </property>
+               <property name="statusTip">
+                <string>Patch various kexts (AppleUSBXHCI.kext, AppleUSBXHCIPCI.kext, IOUSBHostFamily.kext) to
+ remove USB port count limit of 15 ports.</string>
+               </property>
+               <property name="text">
+                <string>XhciPortLimit</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="chkExtendBTFeatureFlags">
+               <property name="toolTip">
+                <string notr="true">Note: This option is a substitution for BT4LEContinuityFixup.kext, which does not function properly due to late patching progress.
+
+----
+
+注意：这个选项是BT4LEContinuityFixup.kext的替代品，由于补丁进度较晚，BT4LEContinuityFixup.kext无法正常运行。
+</string>
+               </property>
+               <property name="statusTip">
+                <string>Set FeatureFlags to 0x0F for full functionality of Bluetooth, including Continuity.</string>
+               </property>
+               <property name="text">
+                <string>ExtendBTFeatureFlags</string>
                </property>
               </widget>
              </item>
@@ -2754,72 +2690,59 @@ Note 2 : This option will not protect areas from being overwritten at firmware s
                </property>
               </widget>
              </item>
-             <item row="2" column="3">
-              <widget class="QCheckBox" name="chkIncreasePciBarSize">
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkAppleXcpmForceBoost">
                <property name="toolTip">
-                <string notr="true">Note: This option should be avoided whenever possible. In general the necessity of this option means misconfigured or broken firmware.
+                <string notr="true">This patch writes 0xFF00 to MSR_IA32_PERF_CONTROL (0x199), effectively setting maximum multiplier for all the time.
+
+Note: While this may increase the performance, this patch is strongly discouraged on all systems but those explicitly dedicated to scientific or media calculations. In general only certain Xeon models benefit from the patch.
 
 ----
 
-注意：应尽可能避免使用此选项。一般来说，如果需要这个选项，意味着固件配置错误或损坏。</string>
+这个补丁将0xFF00写入MSR_IA32_PERF_CONTROL (0x199)，有效地设置所有时间的最大乘数。
+
+注意：虽然这可能会提高性能，但强烈不建议在所有系统上使用该补丁，但明确专用于科学或媒体计算的系统除外。一般情况下，只有某些Xeon型号能从该补丁中受益。</string>
                </property>
                <property name="statusTip">
-                <string> Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GBs.</string>
+                <string> Forces maximum performance in XCPM mode.</string>
                </property>
                <property name="text">
-                <string>IncreasePciBarSize</string>
+                <string>AppleXcpmForceBoost</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="chkExternalDiskIcons">
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="chkLapicKernelPanic">
                <property name="toolTip">
-                <string notr="true">Note: This option should be avoided whenever possible. Modern firmwares usually have compatible AHCI controllers.
+                <string notr="true">Disables kernel panic on LAPIC interrupts.
 
 ----
 
-注意：应尽可能避免使用该选项。现代固件通常有兼容的AHCI控制器。</string>
+禁用LAPIC中断的内核恐慌。</string>
                </property>
                <property name="statusTip">
-                <string> Apply icon type patches to AppleAHCIPort.kext to force internal disk icons for all AHCI disks.</string>
+                <string>Disables kernel panic on LAPIC interrupts.</string>
                </property>
                <property name="text">
-                <string>ExternalDiskIcons</string>
+                <string>LapicKernelPanic</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="2">
-              <widget class="QCheckBox" name="chkForceSecureBootScheme">
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="chkAppleXcpmCfgLock">
                <property name="toolTip">
-                <string notr="true">Note: This option is required on virtual machines when using SecureBootModel different from x86legacy.
+                <string notr="true">Note: This option should be avoided whenever possible. See AppleCpuPmCfgLock description for more details.
 
 ----
 
-注意：当使用不同于x86legacy的SecureBootModel时，虚拟机需要这个选项。</string>
+注意：应尽可能避免使用该选项。更多细节请参见AppleCpuPmCfgLock描述。</string>
                </property>
                <property name="statusTip">
-                <string>Force x86 scheme for IMG4 verification.</string>
+                <string>Disables PKG_CST_CONFIG_CONTROL (0xE2) MSR modification in XNU kernel, commonly causing
+ early kernel panic, when it is locked from writing (XCPM power management).</string>
                </property>
                <property name="text">
-                <string>ForceSecureBootScheme</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="chkExtendBTFeatureFlags">
-               <property name="toolTip">
-                <string notr="true">Note: This option is a substitution for BT4LEContinuityFixup.kext, which does not function properly due to late patching progress.
-
-----
-
-注意：这个选项是BT4LEContinuityFixup.kext的替代品，由于补丁进度较晚，BT4LEContinuityFixup.kext无法正常运行。
-</string>
-               </property>
-               <property name="statusTip">
-                <string>Set FeatureFlags to 0x0F for full functionality of Bluetooth, including Continuity.</string>
-               </property>
-               <property name="text">
-                <string>ExtendBTFeatureFlags</string>
+                <string>AppleXcpmCfgLock</string>
                </property>
               </widget>
              </item>
@@ -2848,19 +2771,85 @@ macOS Catalina(10.15)中增加了一项安全措施，导致苹果驱动在充�
                </property>
               </widget>
              </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="gridLayoutWidget_23">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>370</y>
-              <width>331</width>
-              <height>71</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_57">
-             <item row="0" column="0">
+             <item row="2" column="3">
+              <widget class="QCheckBox" name="chkIncreasePciBarSize">
+               <property name="toolTip">
+                <string notr="true">Note: This option should be avoided whenever possible. In general the necessity of this option means misconfigured or broken firmware.
+
+----
+
+注意：应尽可能避免使用此选项。一般来说，如果需要这个选项，意味着固件配置错误或损坏。</string>
+               </property>
+               <property name="statusTip">
+                <string> Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GBs.</string>
+               </property>
+               <property name="text">
+                <string>IncreasePciBarSize</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="chkAppleXcpmExtraMsrs">
+               <property name="toolTip">
+                <string notr="true">This is normally used in conjunction with Emulate section on Haswell-E, Broadwell-E, Skylake-SP, and similar CPUs. More details on the XCPM patches are outlined in acidanthera bugtracker#365.
+
+Note: Additional not provided patches will be required for Ivy Bridge or Pentium CPUs. It is recommended to use AppleIntelCpuPowerManagement.kext for the former.
+
+----
+
+这通常与Haswell-E、Broadwell-E、Skylake-SP和类似CPU的Emulate部分一起使用。更多关于XCPM补丁的细节，请参考 acidanthera bugtracker#365。
+
+注意：对于Ivy Bridge或Pentium CPU，将需要额外的未提供的补丁。建议前者使用AppleIntelCpuPowerManagement.kext。</string>
+               </property>
+               <property name="statusTip">
+                <string>Disables multiple MSR access critical for select CPUs, which have no native XCPM support.</string>
+               </property>
+               <property name="text">
+                <string>AppleXcpmExtraMsrs</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="chkThirdPartyDrives">
+               <property name="toolTip">
+                <string notr="true">Note: This option may be avoided on user preference. NVMe SSDs are compatible without the change. 
+
+For AHCI SSDs on modern macOS version there is a dedicated built-in utility called trimforce. Starting from 10.15 this utility creates EnableTRIM variable in APPLE_BOOT_VARIABLE_GUID namespace with 01 00 00 00 value.
+
+----
+
+注意：根据用户的喜好，这个选项可以避免。NVMe固态硬盘无需更改即可兼容。
+
+对于现代macOS版本的AHCI固态硬盘，有一个专门的内置工具叫做trimforce。从10.15开始，这个工具会在APPLE_BOOT_VARIABLE_GUID命名空间中创建EnableTRIM变量，值为01 00 00 00。
+</string>
+               </property>
+               <property name="statusTip">
+                <string> Apply vendor patches to IOAHCIBlockStorage.kext to enable native features for third-party drives,
+ such as TRIM on SSDs or hibernation support on 10.15 and newer.</string>
+               </property>
+               <property name="text">
+                <string>ThirdPartyDrives</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkCustomSMBIOSGuid">
+               <property name="toolTip">
+                <string notr="true"> Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops.
+
+----
+
+ 为UpdateSMBIOSMode自定义模式执行GUID补丁。通常与戴尔笔记本电脑相关。</string>
+               </property>
+               <property name="statusTip">
+                <string>Performs GUID patching for UpdateSMBIOSMode Custom mode. Usually relevant for Dell laptops.</string>
+               </property>
+               <property name="text">
+                <string>CustomSMBIOSGuid</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
               <widget class="QLabel" name="label_13">
                <property name="toolTip">
                 <string>Depending on the SSD controller trim procedure may take considerable amount of time, causing noticeable boot
@@ -2879,8 +2868,14 @@ trim.</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
+             <item row="5" column="1">
               <widget class="QLineEdit" name="editIntSetApfsTrimTimeout">
+               <property name="maximumSize">
+                <size>
+                 <width>180</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="toolTip">
                 <string>Depending on the SSD controller trim procedure may take considerable amount of time, causing noticeable boot
 slowdown as this is when the APFS driver executes the trim operation. If the SSD supports over-provisioning or
@@ -3046,8 +3041,8 @@ The behaviour corresponds to -legacy kernel boot argument.
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>200</y>
-              <width>441</width>
+              <y>170</y>
+              <width>381</width>
               <height>265</height>
              </rect>
             </property>
@@ -3361,30 +3356,33 @@ Picker描述了底层的引导管理，有一个可选的用户界面负责处�
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>60</y>
-              <width>971</width>
-              <height>111</height>
+              <y>20</y>
+              <width>841</width>
+              <height>131</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_56">
-             <item row="3" column="2">
-              <widget class="QCheckBox" name="chkPA2">
+             <item row="4" column="2">
+              <widget class="QCheckBox" name="chkPA4">
                <property name="text">
-                <string>OC_ATTR_USE_DISK_LABEL_FILE</string>
+                <string>OC_ATTR_USE_ALTERNATE_ICONS</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="chkPA5">
+             <item row="5" column="2">
+              <widget class="QCheckBox" name="chkPA6">
                <property name="text">
-                <string>OC_ATTR_USE_POINTER_CONTROL</string>
+                <string>OC_ATTR_DEBUG_DISPLAY</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="chkPA1">
-               <property name="text">
-                <string>OC_ATTR_USE_VOLUME_ICON</string>
+             <item row="0" column="2">
+              <widget class="QLineEdit" name="editIntPickerAttributes">
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
+                </size>
                </property>
               </widget>
              </item>
@@ -3395,25 +3393,13 @@ Picker描述了底层的引导管理，有一个可选的用户界面负责处�
                </property>
               </widget>
              </item>
-             <item row="4" column="2">
-              <widget class="QCheckBox" name="chkPA4">
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="chkPA1">
                <property name="text">
-                <string>OC_ATTR_USE_ALTERNATE_ICONS</string>
+                <string>OC_ATTR_USE_VOLUME_ICON</string>
                </property>
               </widget>
              </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="gridLayoutWidget_22">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>20</y>
-              <width>258</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_50">
              <item row="0" column="0">
               <widget class="QLabel" name="label_5">
                <property name="toolTip">
@@ -3437,10 +3423,21 @@ Different OpenCore pickers may be configured through the attribute mask containi
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editIntPickerAttributes"/>
+             <item row="3" column="2">
+              <widget class="QCheckBox" name="chkPA2">
+               <property name="text">
+                <string>OC_ATTR_USE_DISK_LABEL_FILE</string>
+               </property>
+              </widget>
              </item>
-             <item row="0" column="2">
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="chkPA5">
+               <property name="text">
+                <string>OC_ATTR_USE_POINTER_CONTROL</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
               <widget class="QLabel" name="lblPickerAttributes">
                <property name="text">
                 <string>0x00</string>
@@ -3452,9 +3449,9 @@ Different OpenCore pickers may be configured through the attribute mask containi
            <widget class="QWidget" name="gridLayoutWidget_24">
             <property name="geometry">
              <rect>
-              <x>510</x>
-              <y>200</y>
-              <width>481</width>
+              <x>430</x>
+              <y>170</y>
+              <width>251</width>
               <height>261</height>
              </rect>
             </property>
@@ -3586,279 +3583,95 @@ Note: The screen reader requires working audio support. Refer to the UEFI Audio 
            <attribute name="title">
             <string>Debug</string>
            </attribute>
-           <widget class="QGroupBox" name="groupBox_5">
+           <widget class="QWidget" name="gridLayoutWidget_21">
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>13</y>
-              <width>1031</width>
-              <height>281</height>
+              <y>20</y>
+              <width>821</width>
+              <height>351</height>
              </rect>
             </property>
-            <property name="statusTip">
-             <string>EDK II debug level bitmask (sum) showed onscreen. Unless Target enables console (onscreen)  printing, onscreen debug output will not be visible.</string>
-            </property>
-            <property name="title">
-             <string/>
-            </property>
-            <widget class="QLineEdit" name="editIntDisplayLevel">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>30</y>
-               <width>281</width>
-               <height>25</height>
-              </rect>
-             </property>
-            </widget>
-            <widget class="QWidget" name="gridLayoutWidget_21">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>70</y>
-               <width>1011</width>
-               <height>201</height>
-              </rect>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_51">
-              <item row="0" column="3">
-               <widget class="QCheckBox" name="chkD16">
-                <property name="text">
-                 <string>DEBUG_GCD</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="chkD1">
-                <property name="text">
-                 <string>DEBUG_INIT</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QCheckBox" name="chkD8">
-                <property name="text">
-                 <string>DEBUG_DISPATCH</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="3">
-               <widget class="QCheckBox" name="chkD19">
-                <property name="text">
-                 <string>DEBUG_ERROR</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="3">
-               <widget class="QCheckBox" name="chkD18">
-                <property name="text">
-                 <string>DEBUG_VERBOSE</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QCheckBox" name="chkD9">
-                <property name="text">
-                 <string>DEBUG_VARIABLE</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QCheckBox" name="chkD2">
-                <property name="text">
-                 <string>DEBUG_WARN</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QCheckBox" name="chkD7">
-                <property name="text">
-                 <string>DEBUG_INFO</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QCheckBox" name="chkD12">
-                <property name="text">
-                 <string>DEBUG_NET</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="3">
-               <widget class="QCheckBox" name="chkD17">
-                <property name="text">
-                 <string>DEBUG_CACHE</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="2">
-               <widget class="QCheckBox" name="chkD13">
-                <property name="text">
-                 <string>DEBUG_UNDI</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="chkD3">
-                <property name="text">
-                 <string>DEBUG_LOAD</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QCheckBox" name="chkD4">
-                <property name="text">
-                 <string>DEBUG_FS</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QCheckBox" name="chkD6">
-                <property name="text">
-                 <string>DEBUG_PAGE</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QCheckBox" name="chkD11">
-                <property name="text">
-                 <string>DEBUG_BLKIO</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="2">
-               <widget class="QCheckBox" name="chkD14">
-                <property name="text">
-                 <string>DEBUG_LOADFILE</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QCheckBox" name="chkD5">
-                <property name="text">
-                 <string>DEBUG_POOL</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QCheckBox" name="chkD10">
-                <property name="text">
-                 <string>DEBUG_BM</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="2">
-               <widget class="QCheckBox" name="chkD15">
-                <property name="text">
-                 <string>DEBUG_EVENT</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QToolButton" name="btnDLSetAll">
-             <property name="geometry">
-              <rect>
-               <x>470</x>
-               <y>30</y>
-               <width>141</width>
-               <height>25</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>Select all</string>
-             </property>
-            </widget>
-            <widget class="QToolButton" name="btnDLClear">
-             <property name="geometry">
-              <rect>
-               <x>620</x>
-               <y>30</y>
-               <width>131</width>
-               <height>25</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>Clear</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="lblDisplayLevel">
-             <property name="geometry">
-              <rect>
-               <x>310</x>
-               <y>30</y>
-               <width>181</width>
-               <height>20</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>0x00000000</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="label_39">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>10</y>
-               <width>151</width>
-               <height>16</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>DisplayLevel</string>
-             </property>
-            </widget>
-           </widget>
-           <widget class="QWidget" name="gridLayoutWidget_20">
-            <property name="geometry">
-             <rect>
-              <x>690</x>
-              <y>320</y>
-              <width>351</width>
-              <height>111</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_24">
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkDisableWatchDog">
-               <property name="toolTip">
-                <string>Select firmwares may not succeed in quickly booting the operating system, especially in debug  mode, which results in watch dog timer aborting the process. 
-
-This option turns off watch dog timer.
-----
-某些固件可能无法成功快速启动操作系统，特别是在调试模式下，导致看门狗定时器中止进程。
-
-此选项可关闭看门狗定时器。</string>
-               </property>
-               <property name="statusTip">
-                <string> Select firmwares may not succeed in quickly booting the operating system, especially in debug
- mode, which results in watch dog timer aborting the process. This option turns off watch dog timer.</string>
-               </property>
+            <layout class="QGridLayout" name="gridLayout_51">
+             <item row="0" column="2">
+              <widget class="QLabel" name="lblDisplayLevel">
                <property name="text">
-                <string>DisableWatchDog</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkAppleDebug">
-               <property name="toolTip">
-                <string>Description: Enable writing the boot.efi debug log to the OpenCore log.
-
-Note: This option only applies to 10.15.4 and newer.
-----
-说明：启用将 boot.efi 调试日志写入 OpenCore 日志。
-
-注：此选项仅适用于10.15.4及更新版本。</string>
-               </property>
-               <property name="statusTip">
-                <string>Enable boot.efi debug log saving to OpenCore log.</string>
-               </property>
-               <property name="text">
-                <string>AppleDebug</string>
+                <string>0x00000000</string>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
+              <widget class="QLineEdit" name="editIntDisplayLevel">
+               <property name="maximumSize">
+                <size>
+                 <width>160</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="3">
+              <widget class="QCheckBox" name="chkD18">
+               <property name="text">
+                <string>DEBUG_VERBOSE</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="chkD5">
+               <property name="text">
+                <string>DEBUG_POOL</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QCheckBox" name="chkD14">
+               <property name="text">
+                <string>DEBUG_LOADFILE</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="3">
+              <widget class="QLineEdit" name="editTargetHex">
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="clearButtonEnabled">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QCheckBox" name="chkD16">
+               <property name="text">
+                <string>DEBUG_GCD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QLineEdit" name="editIntTarget">
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="clearButtonEnabled">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QCheckBox" name="chkD13">
+               <property name="text">
+                <string>DEBUG_UNDI</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
               <widget class="QCheckBox" name="chkApplePanic">
                <property name="toolTip">
                 <string>The file is saved as panic-YYYY-MM-DD-HHMMSS.txt. It is strongly recommended to have keepsyms=1 boot argument to see debug symbols in the panic log. In case it was not present kpdescribe.sh utility (bundled with OpenCore) may be used to partially recover the stacktrace.
@@ -3879,42 +3692,119 @@ Development and debug kernels produce more helpful kernel panics. Consider downl
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="chkSerialInit">
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="chkD7">
+               <property name="text">
+                <string>DEBUG_INFO</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="chkAppleDebug">
                <property name="toolTip">
-                <string>This option will perform serial port initialisation within OpenCore prior to enabling (any) debug logging. 
+                <string>Description: Enable writing the boot.efi debug log to the OpenCore log.
 
-Serial port configuration is defined via PCDs at compile time in gEfiMdeModulePkgTokenSpaceGuid GUID. 
-
-Default values as found in MdeModulePkg.dec are as follows:
-
-• PcdSerialBaudRate — Baud rate: 115200. 
-• PcdSerialLineControl — Line control: no parity, 8 data bits, 1 stop bit.
-
-See more details in Debugging section.
-
+Note: This option only applies to 10.15.4 and newer.
 ----
+说明：启用将 boot.efi 调试日志写入 OpenCore 日志。
 
-该选项将在启用（任何）调试日志之前，在 OpenCore 中执行串行端口初始化。
-
-串行端口配置在编译时通过 PCDs 在 gEfiMdeModulePkgTokenSpaceGuid GUID 中定义。
-
-在MdeModulePkg.dec中找到的默认值如下：
-
-- PcdSerialBaudRate - 波特率：115200. 
-- PcdSerialLineControl - 线路控制：无奇偶校验，8个数据位，1个停止位。
-
-详见调试部分。</string>
+注：此选项仅适用于10.15.4及更新版本。</string>
                </property>
                <property name="statusTip">
-                <string>Perform serial port initialisation.</string>
+                <string>Enable boot.efi debug log saving to OpenCore log.</string>
                </property>
                <property name="text">
-                <string>SerialInit</string>
+                <string>AppleDebug</string>
                </property>
               </widget>
              </item>
              <item row="2" column="0">
+              <widget class="QCheckBox" name="chkD2">
+               <property name="text">
+                <string>DEBUG_WARN</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="chkD6">
+               <property name="text">
+                <string>DEBUG_PAGE</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QToolButton" name="btnDLSetAll">
+               <property name="text">
+                <string>Select all</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="2">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>&lt;== HEX  0x</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QLineEdit" name="editIntDisplayDelay">
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="2">
+              <widget class="QCheckBox" name="chkD15">
+               <property name="text">
+                <string>DEBUG_EVENT</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkD1">
+               <property name="text">
+                <string>DEBUG_INIT</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="3">
+              <widget class="QCheckBox" name="chkD17">
+               <property name="text">
+                <string>DEBUG_CACHE</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="2">
+              <widget class="QCheckBox" name="chkDisableWatchDog">
+               <property name="toolTip">
+                <string>Select firmwares may not succeed in quickly booting the operating system, especially in debug  mode, which results in watch dog timer aborting the process. 
+
+This option turns off watch dog timer.
+----
+某些固件可能无法成功快速启动操作系统，特别是在调试模式下，导致看门狗定时器中止进程。
+
+此选项可关闭看门狗定时器。</string>
+               </property>
+               <property name="statusTip">
+                <string> Select firmwares may not succeed in quickly booting the operating system, especially in debug
+ mode, which results in watch dog timer aborting the process. This option turns off watch dog timer.</string>
+               </property>
+               <property name="text">
+                <string>DisableWatchDog</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="chkD4">
+               <property name="text">
+                <string>DEBUG_FS</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
               <widget class="QCheckBox" name="chkSysReport">
                <property name="toolTip">
                 <string>This option will create a SysReport directory on ESP partition unless it is already present. The directory will contain ACPI and SMBIOS dumps.
@@ -3935,19 +3825,49 @@ Note: For security reasons SysReport option is not available in RELEASE builds. 
                </property>
               </widget>
              </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="gridLayoutWidget_19">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>320</y>
-              <width>521</width>
-              <height>101</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_49">
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="chkD11">
+               <property name="text">
+                <string>DEBUG_BLKIO</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
+              <widget class="QLabel" name="label_39">
+               <property name="text">
+                <string>DisplayLevel</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="chkD9">
+               <property name="text">
+                <string>DEBUG_VARIABLE</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="chkD3">
+               <property name="text">
+                <string>DEBUG_LOAD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QCheckBox" name="chkD12">
+               <property name="text">
+                <string>DEBUG_NET</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="chkD10">
+               <property name="text">
+                <string>DEBUG_BM</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
               <widget class="QLabel" name="label_9">
                <property name="toolTip">
                 <string>Delay in microseconds performed after every printed line visible onscreen (i.e. console).
@@ -3964,7 +3884,14 @@ Note: For security reasons SysReport option is not available in RELEASE builds. 
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="chkD8">
+               <property name="text">
+                <string>DEBUG_DISPATCH</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
               <widget class="QLabel" name="label_11">
                <property name="toolTip">
                 <string>The following logging targets are supported:
@@ -4000,27 +3927,55 @@ Console logging prints less than all the other variants. Depending on the build 
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editIntDisplayDelay"/>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="editIntTarget">
-               <property name="clearButtonEnabled">
-                <bool>false</bool>
+             <item row="0" column="4">
+              <widget class="QToolButton" name="btnDLClear">
+               <property name="toolTip">
+                <string/>
                </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QLabel" name="label_12">
                <property name="text">
-                <string>&lt;== HEX  0x</string>
+                <string>Clear</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="3">
-              <widget class="QLineEdit" name="editTargetHex">
-               <property name="clearButtonEnabled">
-                <bool>false</bool>
+             <item row="4" column="3">
+              <widget class="QCheckBox" name="chkD19">
+               <property name="text">
+                <string>DEBUG_ERROR</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QCheckBox" name="chkSerialInit">
+               <property name="toolTip">
+                <string>This option will perform serial port initialisation within OpenCore prior to enabling (any) debug logging. 
+
+Serial port configuration is defined via PCDs at compile time in gEfiMdeModulePkgTokenSpaceGuid GUID. 
+
+Default values as found in MdeModulePkg.dec are as follows:
+
+• PcdSerialBaudRate — Baud rate: 115200. 
+• PcdSerialLineControl — Line control: no parity, 8 data bits, 1 stop bit.
+
+See more details in Debugging section.
+
+----
+
+该选项将在启用（任何）调试日志之前，在 OpenCore 中执行串行端口初始化。
+
+串行端口配置在编译时通过 PCDs 在 gEfiMdeModulePkgTokenSpaceGuid GUID 中定义。
+
+在MdeModulePkg.dec中找到的默认值如下：
+
+- PcdSerialBaudRate - 波特率：115200. 
+- PcdSerialLineControl - 线路控制：无奇偶校验，8个数据位，1个停止位。
+
+详见调试部分。</string>
+               </property>
+               <property name="statusTip">
+                <string>Perform serial port initialisation.</string>
+               </property>
+               <property name="text">
+                <string>SerialInit</string>
                </property>
               </widget>
              </item>
@@ -5512,7 +5467,7 @@ A continuously updated variable list can be found in a corresponding document: N
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5524,7 +5479,7 @@ A continuously updated variable list can be found in a corresponding document: N
            <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
-              <x>8</x>
+              <x>10</x>
               <y>20</y>
               <width>871</width>
               <height>381</height>
@@ -5779,9 +5734,9 @@ Added bits to FirmwareFeatures:
            <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
-              <x>20</x>
+              <x>10</x>
               <y>12</y>
-              <width>1121</width>
+              <width>1201</width>
               <height>391</height>
              </rect>
             </property>
@@ -7190,103 +7145,6 @@ UUID是一种标识符，设计为在时间和空间上都是唯一的。它不�
           <layout class="QGridLayout" name="gridLayout_66">
            <item row="0" column="0">
             <layout class="QGridLayout" name="gridLayout_27">
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="chkUpdateNVRAM">
-               <property name="toolTip">
-                <string notr="true">These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. 
-
-All the other fields are to be specified with NVRAM section.
-
-If UpdateNVRAM is set to false the aforementioned variables can be updated with NVRAM section. 
-
-If UpdateNVRAM is set to true the behaviour is undefined when any of the fields are present in NVRAM section.
-
-----
-
-这些字段根据 Automatic（自动）值从Generic（通用）或PlatformNVRAM（平台NVRAM）部分读取。
-
-所有其他的字段都要通过NVRAM部分来指定。
-
-如果UpdateNVRAM被设置为false，则上述变量可以通过NVRAM部分进行更新。
-
-如果UpdateNVRAM被设置为true，则当NVRAM部分中存在任何字段时，行为是未定义的。
-</string>
-               </property>
-               <property name="statusTip">
-                <string> Update NVRAM fields related to platform information.</string>
-               </property>
-               <property name="text">
-                <string>UpdateNVRAM</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkAutomatic">
-               <property name="toolTip">
-                <string notr="true">Generate PlatformInfo based on the Generic section instead of using values from the DataHub,NVRAM and SMBIOS sections.
-
-----
-
-基于Generic部分生成PlatformInfo，而不是使用DataHub、NVRAM和SMBIOS部分的值。
-</string>
-               </property>
-               <property name="whatsThis">
-                <string/>
-               </property>
-               <property name="text">
-                <string>Automatic</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="chkUpdateDataHub">
-               <property name="toolTip">
-                <string notr="true">Description: Update Data Hub fields. 
-
-These fields are read from the Generic or DataHub sections depending on the setting of the Automatic property.
-
-Note: The implementation of the Data Hub protocol in EFI firmware on virtually all systems, including Apple hardware, means that existing Data Hub entries cannot be overridden. 
-
-New entries are added to the end of the Data Hub instead, with macOS ignoring old entries. This can be worked around by replacing the Data Hub protocol using the ProtocolOverrides section. Refer to the DataHub protocol override description for details.
-----
-说明：更新数据枢纽(Data Hub)字段。
-
-根据自动属性的设置，这些字段从 Generic 或 DataHub 部分读取。
-
-注意：几乎所有系统（包括 Apple 硬件）在 EFI 固件中实施 Data Hub 协议，意味着现有的 Data Hub 条目不能被覆盖。
-
-新条目会被添加到Data Hub的末尾，而macOS会忽略旧条目。可以通过使用 ProtocolOverrides 部分替换 Data Hub 协议来解决这个问题。详情请参考 DataHub 协议覆盖说明。
-
-</string>
-               </property>
-               <property name="text">
-                <string>UpdateDataHub</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="chkCustomMemory">
-               <property name="toolTip">
-                <string notr="true">Use custom memory configuration defined in the Memory section. 
-
-This completely replaces any existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.
-
-----
-
-使用在 &quot;内存 &quot;部分定义的自定义内存配置。
-
-这将完全取代SMBIOS中任何现有的内存配置，并且只有当UpdateSMBIOS被设置为true时才会激活。
-</string>
-               </property>
-               <property name="statusTip">
-                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
- existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
-               </property>
-               <property name="text">
-                <string>CustomMemory</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="chkSaveDataHub">
                <property name="toolTip">
@@ -7301,26 +7159,6 @@ This completely replaces any existing memory configuration in SMBIOS, and is onl
                </property>
                <property name="text">
                 <string>Keep data such as Datahub</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="chkUpdateSMBIOS">
-               <property name="toolTip">
-                <string notr="true">Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on Automatic value.
-
-----
-
-更新SMBIOS字段。这些字段根据Automatic值从通用或SMBIOS部分读取。
-
-</string>
-               </property>
-               <property name="statusTip">
-                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
- Automatic value.</string>
-               </property>
-               <property name="text">
-                <string>UpdateSMBIOS</string>
                </property>
               </widget>
              </item>
@@ -7382,7 +7220,105 @@ OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本
                </property>
               </widget>
              </item>
-             <item row="0" column="4">
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="chkUpdateSMBIOS">
+               <property name="toolTip">
+                <string notr="true">Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on Automatic value.
+
+----
+
+更新SMBIOS字段。这些字段根据Automatic值从通用或SMBIOS部分读取。
+
+</string>
+               </property>
+               <property name="statusTip">
+                <string>Update SMBIOS fields. These fields are read from Generic or SMBIOS sections depending on
+ Automatic value.</string>
+               </property>
+               <property name="text">
+                <string>UpdateSMBIOS</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkAutomatic">
+               <property name="toolTip">
+                <string notr="true">Generate PlatformInfo based on the Generic section instead of using values from the DataHub,NVRAM and SMBIOS sections.
+
+----
+
+基于Generic部分生成PlatformInfo，而不是使用DataHub、NVRAM和SMBIOS部分的值。
+</string>
+               </property>
+               <property name="whatsThis">
+                <string/>
+               </property>
+               <property name="text">
+                <string>Automatic</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkUpdateNVRAM">
+               <property name="toolTip">
+                <string notr="true">These fields are read from Generic or PlatformNVRAM sections depending on Automatic value. 
+
+All the other fields are to be specified with NVRAM section.
+
+If UpdateNVRAM is set to false the aforementioned variables can be updated with NVRAM section. 
+
+If UpdateNVRAM is set to true the behaviour is undefined when any of the fields are present in NVRAM section.
+
+----
+
+这些字段根据 Automatic（自动）值从Generic（通用）或PlatformNVRAM（平台NVRAM）部分读取。
+
+所有其他的字段都要通过NVRAM部分来指定。
+
+如果UpdateNVRAM被设置为false，则上述变量可以通过NVRAM部分进行更新。
+
+如果UpdateNVRAM被设置为true，则当NVRAM部分中存在任何字段时，行为是未定义的。
+</string>
+               </property>
+               <property name="statusTip">
+                <string> Update NVRAM fields related to platform information.</string>
+               </property>
+               <property name="text">
+                <string>UpdateNVRAM</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="chkCustomMemory">
+               <property name="toolTip">
+                <string notr="true">Use custom memory configuration defined in the Memory section. 
+
+This completely replaces any existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.
+
+----
+
+使用在 &quot;内存 &quot;部分定义的自定义内存配置。
+
+这将完全取代SMBIOS中任何现有的内存配置，并且只有当UpdateSMBIOS被设置为true时才会激活。
+</string>
+               </property>
+               <property name="statusTip">
+                <string>Use custom memory configuration defined in the Memory section. This completely replaces any
+ existing memory configuration in SMBIOS, and is only active when UpdateSMBIOS is set to true.</string>
+               </property>
+               <property name="text">
+                <string>CustomMemory</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="5">
+              <widget class="QComboBox" name="cboxUpdateSMBIOSMode">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="5">
               <widget class="QLabel" name="label_22">
                <property name="toolTip">
                 <string notr="true">• TryOverwrite — Overwrite if new size is &lt;= than the page-aligned  original and there are no issues with legacy region unlock. Create otherwise. Has issues with some firmwares.
@@ -7420,12 +7356,57 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
                </property>
               </widget>
              </item>
-             <item row="1" column="4">
-              <widget class="QComboBox" name="cboxUpdateSMBIOSMode">
-               <property name="editable">
-                <bool>true</bool>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="chkUpdateDataHub">
+               <property name="toolTip">
+                <string notr="true">Description: Update Data Hub fields. 
+
+These fields are read from the Generic or DataHub sections depending on the setting of the Automatic property.
+
+Note: The implementation of the Data Hub protocol in EFI firmware on virtually all systems, including Apple hardware, means that existing Data Hub entries cannot be overridden. 
+
+New entries are added to the end of the Data Hub instead, with macOS ignoring old entries. This can be worked around by replacing the Data Hub protocol using the ProtocolOverrides section. Refer to the DataHub protocol override description for details.
+----
+说明：更新数据枢纽(Data Hub)字段。
+
+根据自动属性的设置，这些字段从 Generic 或 DataHub 部分读取。
+
+注意：几乎所有系统（包括 Apple 硬件）在 EFI 固件中实施 Data Hub 协议，意味着现有的 Data Hub 条目不能被覆盖。
+
+新条目会被添加到Data Hub的末尾，而macOS会忽略旧条目。可以通过使用 ProtocolOverrides 部分替换 Data Hub 协议来解决这个问题。详情请参考 DataHub 协议覆盖说明。
+
+</string>
+               </property>
+               <property name="text">
+                <string>UpdateDataHub</string>
                </property>
               </widget>
+             </item>
+             <item row="0" column="4">
+              <spacer name="horizontalSpacer_18">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="1" column="4">
+              <spacer name="horizontalSpacer_19">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </item>
@@ -7445,7 +7426,7 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -7459,7 +7440,7 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>481</width>
+              <width>531</width>
               <height>381</height>
              </rect>
             </property>
@@ -7611,6 +7592,257 @@ APFS verbose输出对调试很有用。</string>
           </widget>
           <widget class="QWidget" name="tabUEFI2">
            <attribute name="title">
+            <string>AppleInput</string>
+           </attribute>
+           <widget class="QWidget" name="gridLayoutWidget_7">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>20</y>
+              <width>561</width>
+              <height>261</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_24">
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="editIntKeySubsequentDelay">
+               <property name="text">
+                <string>5</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="editIntKeyInitialDelay">
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="cboxAppleEvent">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+               <property name="currentText">
+                <string notr="true">Auto</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string notr="true">Auto</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string notr="true">Builtin</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string notr="true">OEM</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cboxCustomDelays">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+               <property name="currentText">
+                <string notr="true">Auto</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string notr="true">Auto</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string notr="true">Enabled</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string notr="true">Disabled</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_113">
+               <property name="toolTip">
+                <string notr="true">Type: plist integer
+
+Description: Configure subsequent keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
+
+Configures the gap between key repeats. The Apple OEM default value is 5 (50ms). 0 is an invalid value for this option.
+When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, set KeyInitialDelay to 0 and set this option to at least the value of your KeyForgetThreshold setting. (In the unlikely event that you still get frequent, or occasional, double key responses after doing this,proceed to set this value to one or two greater than KeyForgetThreshold - use the lowest value which works.)
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现Apple Event协议中配置后续键盘重复延迟，单位为10ms。
+
+配置按键重复之间的间隙。Apple OEM的默认值是5（50ms）。0是该选项的无效值。
+使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，请将KeyInitialDelay设置为0，并将此选项设置为至少与您的KeyForgetThreshold设置值相同。(如果在这样做之后，你仍然得到频繁的或偶尔的双键响应，则继续将此值设置为比KeyForgetThreshold大一到两个的值--使用有效的最低值。)</string>
+               </property>
+               <property name="text">
+                <string notr="true">KeySubsequentDelay</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_116">
+               <property name="toolTip">
+                <string>Type: plist integer
+
+Description: Configure initial keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
+
+When not using KeySupport, this option will configure the initial delay before key repeat as expected. The Apple OEM default value is 50 (500ms).
+When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, your initial key repeat delay is being driven by your BIOS firmware and cannot be overriden by OC. To avoid this minor undesired effect, set KeyInitialDelay to 0. If doing this, to avoid multiple reponses to single key presses, you should set KeySubsequentDelay to at least the value of your KeyForgetThreshold setting.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现Apple Event协议中配置初始键盘重复延迟，单位为10ms。
+
+当不使用 KeySupport 时，该选项将按预期配置按键重复前的初始延迟。Apple OEM默认值为50（500ms）。
+使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，您的初始按键重复延迟是由BIOS固件驱动的，不能由OC覆盖。如果这样做，为了避免单一按键的多次响应，您应该将KeySubsequentDelay至少设置为KeyForgetThreshold设置的值。</string>
+               </property>
+               <property name="text">
+                <string notr="true">KeyInitialDelay</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_114">
+               <property name="toolTip">
+                <string>Type: plist string
+
+Description: Determine whether OC builtin or OEM Apple Event protocol is used.
+
+This option determines whether Apple’s OEM Apple Event protocol is used (where available), or whether OpenCore’s reversed engineered and updated re-implementation is used. In general OpenCore’s re-implementation should be preferred, since it contains updates such as noticeably improved fine mouse cursor movement and configurable key repeat delays.
+
+• Auto — Performs automatic choice of implementation. Because of optimisations used to achieve fast boot times, this actually means that the OpenCore re-implementation will be found and used except in the case that OpenCore was been explicitly selected and started (not just auto-booted) from Apple’s boot picker (where present).
+
+• Builtin — Use OpenCore’s updated re-implementation of the Apple Event protocol. Recommended.
+
+• OEM — Assume Apple’s protocol will be available at driver connection. This results in Apple’s implementation being reliably used on Apple systems. It results in no keyboard or mouse support otherwise.
+
+----
+
+类型：plist字符串
+
+说明：确定是使用 OC 内置还是 OEM Apple Event 协议。
+
+此选项决定是使用 Apple 的 OEM Apple Event 协议（如果有的话），还是使用 OpenCore 的反向工程和更新的重新实现。一般来说，OpenCore的重新实现应该是首选，因为它包含了更新，例如明显改进的鼠标光标移动和可配置的键重复延迟。
+
+- Auto - 执行自动选择实现。由于用于实现快速启动时间的优化，这实际上意味着将找到并使用 OpenCore 的重新实现，除非从 Apple 的启动选择器（如果存在）中明确选择并启动 OpenCore（而不仅仅是自动启动）。
+
+- Builtin - 使用 OpenCore 更新的 Apple Event 协议的重新实现。推荐使用。
+
+- OEM - 假设苹果的协议在驱动程序连接时可用。这将导致Apple的实现在Apple系统上被可靠地使用。否则会导致不支持键盘或鼠标。</string>
+               </property>
+               <property name="text">
+                <string notr="true">AppleEvent</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_115">
+               <property name="toolTip">
+                <string>Type: plist string
+
+Description: Enable custom key repeat delays.
+
+• If Auto is treated as Enabled when KeySupport is true and Disabled otherwise.
+
+• If Enabled the values KeyInitialDelay and KeySubsequentDelay are used.
+
+• If Disabled Apple default values of 500ms (50) and 50ms (5) are used.
+
+----
+
+类型：plist字符串
+
+说明：启用自定义按键重复延迟。
+
+- 如果Auto，在KeySupport为true时视为Enabled，否则视为Disabled。
+
+- 如果Enabled，则使用KeyInitialDelay和KeySubsequentDelay的值。
+
+- 如果Disabled，则使用Apple默认值500ms (50)和50ms (5)。</string>
+               </property>
+               <property name="text">
+                <string notr="true">CustomDelays</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_112">
+               <property name="toolTip">
+                <string>Type: plist integer
+
+Description: Configure pointer speed divisor in OpenCore implementation of Apple Event protocol.
+
+Configures the divisor for pointer movements. The Apple OEM default value is 1. 0 is an invalid value for this option.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现的Apple Event协议中配置指针速度分位器。
+
+配置指针移动的分度。Apple OEM的默认值是1，0是这个选项的无效值。</string>
+               </property>
+               <property name="text">
+                <string notr="true">PointerSpeedDiv</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_117">
+               <property name="toolTip">
+                <string>Type: plist integer
+
+Description: Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol.
+
+Configures the multiplier for pointer movements. The Apple OEM default value is 1.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现的Apple Event协议中配置指针速度乘数。
+
+配置指针移动的乘数。Apple OEM的默认值是1。</string>
+               </property>
+               <property name="text">
+                <string notr="true">PointerSpeedMul</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="editIntPointerSpeedDiv">
+               <property name="text">
+                <string>1</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="editIntPointerSpeedMul">
+               <property name="text">
+                <string>1</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="tabUEFI3">
+           <attribute name="title">
             <string>Audio</string>
            </attribute>
            <widget class="QWidget" name="gridLayoutWidget_9">
@@ -7618,7 +7850,7 @@ APFS verbose输出对调试很有用。</string>
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>621</width>
+              <width>571</width>
               <height>401</height>
              </rect>
             </property>
@@ -7878,7 +8110,7 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
             </layout>
            </widget>
           </widget>
-          <widget class="QWidget" name="tabUEFI3">
+          <widget class="QWidget" name="tabUEFI4">
            <attribute name="title">
             <string>Drivers</string>
            </attribute>
@@ -7950,7 +8182,7 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tabUEFI4">
+          <widget class="QWidget" name="tabUEFI5">
            <attribute name="title">
             <string>Input</string>
            </attribute>
@@ -7959,33 +8191,122 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>501</width>
+              <width>541</width>
               <height>381</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_33">
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="editPointerSupportMode"/>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_112">
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="chkKeyFiltering">
                <property name="toolTip">
-                <string notr="true">Type: plist integer
+                <string notr="true">Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
 
-Description: Configure initial keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
-
-In order to fine tune keyboard behaviour three values are relavent: KeyForgetThreshold, KeyInitialDelay and KeySubsequentDelay.
+This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and 108 in version 2.8).
 
 ----
 
-类型：plist整数
+显然，有些板子，如GA Z77P-D3，可能会在EFI_INPUT_KEY中返回所有输入协议的未初始化数据。
 
-说明：在OpenCore实现Apple Event协议中配置初始键盘重复延迟，单位为10ms。
-
-为了对键盘行为进行微调，有三个值是相关的，分别是：KeyForgetThreshold、KeyInitialDelay和KeySubsequentDelay。</string>
+这个选项会丢弃那些既不是ASCII码，也不是在UEFI规范中定义的键(见2.8版本的表107和108)。</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable keyboard input sanity checking.</string>
                </property>
                <property name="text">
-                <string>KeyInitialDelay</string>
+                <string>KeyFiltering</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cboxKeySupportMode">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="editPointerSupportMode"/>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="chkPointerSupport">
+               <property name="toolTip">
+                <string notr="true">This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER_PROTOCOL is broken.
+
+----
+
+这个选项通过选定的OEM协议实现了标准的UEFI指针协议(EFI_SIMPLE_POINTER_PROTOCOL)。该选项可能对Z87华硕板卡有用，因为在这些板卡上EFI_SIMPLE_POINTER_PROTOCOL被破坏了。</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable internal pointer driver.</string>
+               </property>
+               <property name="text">
+                <string>PointerSupport</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_38">
+               <property name="toolTip">
+                <string notr="true">Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS boards. More details can be found in LongSoft/UefiTool#116.
+
+----
+
+目前唯一支持的版本是华硕，使用华硕Z87和Z97板卡上的专用协议。更多细节可以在LongSoft/UefiTool#116中找到。</string>
+               </property>
+               <property name="statusTip">
+                <string> Set OEM protocol used for internal pointer driver.</string>
+               </property>
+               <property name="text">
+                <string>PointerSupportMode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="editIntKeyForgetThreshold"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_23">
+               <property name="toolTip">
+                <string notr="true">• Auto — Performs automatic choice as available with the following preference: AMI, V2, V1. 
+
+• V1 — Uses UEFI standard legacy input protocol EFI_SIMPLE_TEXT_INPUT_PROTOCOL. 
+
+• V2 — Uses UEFI standard modern input protocol EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL. • AMI — Uses APTIO input protocol AMI_EFIKEYCODE_PROTOCOL.
+
+Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular specified protocol. This may change in the future versions.
+
+----
+
+- Auto - 根据以下偏好执行自动选择。AMI, V2, V1. 
+
+- V1 - 使用 UEFI 标准的传统输入协议 EFI_SIMPLE_TEXT_INPUT_PROTOCOL。
+
+- V2 - 使用 UEFI 标准的现代输入协议 EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL。- AMI - 使用 APTIO 输入协议 AMI_EFIKEYCODE_PROTOCOL。
+
+注意：目前 V1、V2 和 AMI 与 Auto 不同，只对特定的协议进行过滤。这在未来的版本中可能会改变。</string>
+               </property>
+               <property name="statusTip">
+                <string> Set internal keyboard input translation to AppleKeyMapAggregator protocol mode.</string>
+               </property>
+               <property name="text">
+                <string>KeySupportMode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="chkKeySupport">
+               <property name="toolTip">
+                <string notr="true">This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as OpenUsbKbDxe, this option should never be enabled.
+
+----
+
+这个选项可以激活基于AppleGenericInput又名(AptioInputFix)的内部键盘拦截器驱动，以填充AppleKeyMapAggregator数据库的输入功能。如果使用了单独的驱动程序，比如OpenUsbKbDxe，这个选项绝对不能启用。</string>
+               </property>
+               <property name="statusTip">
+                <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
+               </property>
+               <property name="text">
+                <string>KeySupport</string>
                </property>
               </widget>
              </item>
@@ -8018,83 +8339,24 @@ AppleKeyMapAggregator协议应该包含一个固定长度的当前按键缓冲�
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editIntKeyForgetThreshold"/>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="editIntKeyInitialDelay"/>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="chkKeySwap">
+               <property name="toolTip">
+                <string notr="true">This option may be useful for keyboard layouts with Option key situated to the right of Command key.
+
+----
+
+这个选项可能对命令键右边的选项键的键盘布局有用。</string>
+               </property>
+               <property name="statusTip">
+                <string>Swap Command and Option keys during submission.</string>
+               </property>
+               <property name="text">
+                <string>KeySwap</string>
+               </property>
+              </widget>
              </item>
              <item row="3" column="0">
-              <widget class="QLabel" name="label_23">
-               <property name="toolTip">
-                <string notr="true">• Auto — Performs automatic choice as available with the following preference: AMI, V2, V1. 
-
-• V1 — Uses UEFI standard legacy input protocol EFI_SIMPLE_TEXT_INPUT_PROTOCOL. 
-
-• V2 — Uses UEFI standard modern input protocol EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL. • AMI — Uses APTIO input protocol AMI_EFIKEYCODE_PROTOCOL.
-
-Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular specified protocol. This may change in the future versions.
-
-----
-
-- Auto - 根据以下偏好执行自动选择。AMI, V2, V1. 
-
-- V1 - 使用 UEFI 标准的传统输入协议 EFI_SIMPLE_TEXT_INPUT_PROTOCOL。
-
-- V2 - 使用 UEFI 标准的现代输入协议 EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL。- AMI - 使用 APTIO 输入协议 AMI_EFIKEYCODE_PROTOCOL。
-
-注意：目前 V1、V2 和 AMI 与 Auto 不同，只对特定的协议进行过滤。这在未来的版本中可能会改变。</string>
-               </property>
-               <property name="statusTip">
-                <string> Set internal keyboard input translation to AppleKeyMapAggregator protocol mode.</string>
-               </property>
-               <property name="text">
-                <string>KeySupportMode</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="chkKeyFiltering">
-               <property name="toolTip">
-                <string notr="true">Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
-
-This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and 108 in version 2.8).
-
-----
-
-显然，有些板子，如GA Z77P-D3，可能会在EFI_INPUT_KEY中返回所有输入协议的未初始化数据。
-
-这个选项会丢弃那些既不是ASCII码，也不是在UEFI规范中定义的键(见2.8版本的表107和108)。</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable keyboard input sanity checking.</string>
-               </property>
-               <property name="text">
-                <string>KeyFiltering</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_38">
-               <property name="toolTip">
-                <string notr="true">Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS boards. More details can be found in LongSoft/UefiTool#116.
-
-----
-
-目前唯一支持的版本是华硕，使用华硕Z87和Z97板卡上的专用协议。更多细节可以在LongSoft/UefiTool#116中找到。</string>
-               </property>
-               <property name="statusTip">
-                <string> Set OEM protocol used for internal pointer driver.</string>
-               </property>
-               <property name="text">
-                <string>PointerSupportMode</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="editIntTimerResolution"/>
-             </item>
-             <item row="5" column="0">
               <widget class="QLabel" name="label_40">
                <property name="toolTip">
                 <string notr="true">This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
@@ -8119,137 +8381,215 @@ The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS 
                </property>
               </widget>
              </item>
-             <item row="7" column="1">
-              <widget class="QCheckBox" name="chkPointerSupport">
-               <property name="toolTip">
-                <string notr="true">This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER_PROTOCOL is broken.
-
-----
-
-这个选项通过选定的OEM协议实现了标准的UEFI指针协议(EFI_SIMPLE_POINTER_PROTOCOL)。该选项可能对Z87华硕板卡有用，因为在这些板卡上EFI_SIMPLE_POINTER_PROTOCOL被破坏了。</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable internal pointer driver.</string>
-               </property>
-               <property name="text">
-                <string>PointerSupport</string>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="chkKeySupport">
-               <property name="toolTip">
-                <string notr="true">This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as OpenUsbKbDxe, this option should never be enabled.
-
-----
-
-这个选项可以激活基于AppleGenericInput又名(AptioInputFix)的内部键盘拦截器驱动，以填充AppleKeyMapAggregator数据库的输入功能。如果使用了单独的驱动程序，比如OpenUsbKbDxe，这个选项绝对不能启用。</string>
-               </property>
-               <property name="statusTip">
-                <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
-               </property>
-               <property name="text">
-                <string>KeySupport</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="chkKeySwap">
-               <property name="toolTip">
-                <string notr="true">This option may be useful for keyboard layouts with Option key situated to the right of Command key.
-
-----
-
-这个选项可能对命令键右边的选项键的键盘布局有用。</string>
-               </property>
-               <property name="statusTip">
-                <string>Swap Command and Option keys during submission.</string>
-               </property>
-               <property name="text">
-                <string>KeySwap</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="1">
-              <widget class="QComboBox" name="cboxKeySupportMode">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_113">
-               <property name="toolTip">
-                <string notr="true">Type: plist integer
-
-Description: Configure subsequent keyboard repeat delay in OpenCore implementation of Apple Event protocol,in units of 10ms.
-
-See documentation of KeyInitialDelay for fine tuning. Even if not fine tuning, this value should ideally not be set to less than the value of KeyForgetThreshold in order to avoid excess key repeats; however, in practice, the difference may not be noticeable, and you probably do not need to change this value except as part of key repeat fine tuning.
-
-Note: No changes to this value are ever required on systems which are not using KeySupport.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现的Apple Event协议中配置后续键盘重复延迟，单位为10ms。
-
-请参阅KeyInitialDelay的文档进行微调。即使不进行微调，这个值最好也不要小于KeyForgetThreshold的值，以避免过多的按键重复；但是，在实际操作中，两者的差别可能并不明显，你可能不需要改变这个值，除非作为按键重复微调的一部分。
-
-注意：在不使用KeySupport的系统上，永远不需要改变这个值。</string>
-               </property>
-               <property name="text">
-                <string>KeySubsequentDelay</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="editIntKeySubsequentDelay"/>
+              <widget class="QLineEdit" name="editIntTimerResolution"/>
              </item>
             </layout>
            </widget>
           </widget>
-          <widget class="QWidget" name="tabUEFI5">
+          <widget class="QWidget" name="tabUEFI6">
            <attribute name="title">
             <string>Output</string>
            </attribute>
-           <widget class="QWidget" name="gridLayoutWidget_12">
+           <widget class="QWidget" name="gridLayoutWidget_6">
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>300</y>
-              <width>861</width>
-              <height>131</height>
+              <y>29</y>
+              <width>1001</width>
+              <height>261</height>
              </rect>
             </property>
-            <layout class="QGridLayout" name="gridLayout_62">
-             <item row="0" column="1">
-              <widget class="QComboBox" name="cboxConsoleMode">
+            <layout class="QGridLayout" name="gridLayout_34">
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="chkReconnectOnResChange">
+               <property name="toolTip">
+                <string>On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
+
+Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless required.
+----
+在某些固件上，当通过GOP改变屏幕分辨率时，需要重新连接产生控制台协议（简单文本输出）的控制器。否则它们将不会根据新的分辨率产生文本。
+
+注意：在一些板卡上，当从Shell启动OpenCore时，这个逻辑可能会导致黑屏，因此它是可选的。在 0.5.2 之前的版本中，该选项是强制性的，不可配置。除非需要，否则请不要使用该选项。</string>
+               </property>
+               <property name="statusTip">
+                <string>Reconnect console controllers after changing screen resolution.</string>
+               </property>
+               <property name="text">
+                <string>ReconnectOnResChange</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
+               <property name="toolTip">
+                <string> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,because random text may appear over graphical images and cause UI corruption. Setting this option to true will discard all text output when console control is in mode different from Text.
+
+Note: This option only applies to System renderer.
+
+----
+
+ 选择固件在图形和文本模式下在屏幕上输出文本。这通常是出乎意料的，因为随机的文本可能会出现在图形图像上，并导致用户界面损坏。将此选项设置为 &quot;true&quot;，当控制台控制模式与文本模式不同时，将丢弃所有文本输出。
+
+注意：这个选项只适用于系统渲染器。</string>
+               </property>
+               <property name="text">
+                <string>IgnoreTextInGraphics</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QComboBox" name="cboxResolution">
                <property name="editable">
                 <bool>true</bool>
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_24">
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="chkDirectGopRendering">
                <property name="toolTip">
-                <string>Set to empty string not to change console mode. Set to Max to try to use largest available console mode. Currently Builtin text renderer supports only one console mode, so this option is ignored.
-
-Note: This field is best to be left empty on most firmwares.
+                <string>On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.
 ----
-设置为空字符串，不改变控制台模式。设置为最大，尝试使用最大的可用的控制台模式，目前Builtin文本渲染器只支持一种控制台模式，所以这个选项会被忽略。
-
-注意：在大多数固件上，这个字段最好留空。</string>
+在某些固件上，这可能会提供更好的性能，甚至修复渲染问题，比如在MacPro5,1上。然而，建议不要使用这个选项，除非有明显的好处，因为它甚至可能导致滚动速度变慢。</string>
                </property>
                <property name="statusTip">
-                <string>Sets console output mode as specified with the WxH (e.g. 80x24) formatted string.</string>
+                <string> Use builtin graphics output protocol renderer for console.</string>
                </property>
                <property name="text">
-                <string>ConsoleMode(e.g. 80x24)</string>
+                <string>DirectGopRendering</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="chkSanitiseClearScreen">
+               <property name="toolTip">
+                <string> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
+
+Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to empty string for this to work.
+----
+ 当使用大屏幕（如2K或4K）时，一些固件在尝试清除屏幕内容时，会将屏幕分辨率重置为故障安全值（如1024x768）。这个选项试图应用一个变通方法。
+
+注意：这个选项只适用于系统渲染器。在所有已知受影响的系统中，ConsoleMode必须设置为空字符串才行。</string>
+               </property>
+               <property name="text">
+                <string>SanitiseClearScreen</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkGopPassThrough">
+               <property name="toolTip">
+                <string>Some types of firmware do not implement the GOP protocol, this option provides it via a UGA-based proxy.
+
+This option requires ProvideConsoleGop to be enabled.
+----
+有些类型的固件没有实现GOP协议，这个选项通过基于UGA的代理来提供。
+
+这个选项需要启用 ProvideConsoleGop。</string>
+               </property>
+               <property name="statusTip">
+                <string>Provide GOP protocol instances on top of UGA protocol instances.</string>
+               </property>
+               <property name="text">
+                <string>GopPassThrough</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="chkForceResolution">
+               <property name="toolTip">
+                <string>Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max will try to pull the largest available resolution from the connected display’s EDID.
+
+Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel iGPUs.
+----
+说明：在默认情况下无法获得所需分辨率的情况下，强制设置分辨率，例如在传统的英特尔GMA和第一代英特尔高清图形(Ironlake/Arrandale)上。将 &quot;分辨率 &quot;设置为 &quot;最大 &quot;将尝试从所连接的显示器的EDID中提取最大的可用分辨率。
+
+注意：这个选项取决于OC_FORCE_RESOLUTION_PROTOCOL协议是否存在。这个协议目前只被OpenDuetPkg支持。OpenDuetPkg的实现目前只支持Intel iGPU。</string>
+               </property>
+               <property name="text">
+                <string>ForceResolution</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QCheckBox" name="chkReplaceTabWithSpace">
+               <property name="toolTip">
+                <string>Some firmwares do not print tab characters or even everything that follows them, causing difficulties or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. 
+
+This option makes the console output spaces instead of tabs.
+
+Note: This option only applies to System renderer.
+----
+有些固件不打印制表符，甚至不打印制表符后面的所有内容，导致难以或无法使用UEFI Shell内置的文本编辑器来编辑属性列表和其他文档。
+
+这个选项使控制台输出的是空格而不是制表符。
+
+注意：该选项只适用于系统渲染器。</string>
+               </property>
+               <property name="text">
+                <string>ReplaceTabWithSpace</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="chkUgaPassThrough">
+               <property name="toolTip">
+                <string>Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI applications like EfiBoot from 10.4.
+----
+有些固件没有实现传统旧式的UGA协议，但旧的EFI应用程序（如10.4的EfiBoot）可能需要它来进行屏幕输出。</string>
+               </property>
+               <property name="statusTip">
+                <string> Provide UGA protocol instances on top of GOP protocol.</string>
+               </property>
+               <property name="text">
+                <string>UgaPassThrough</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
+               <property name="toolTip">
+                <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before switching to text mode.
+
+Note: This option only applies to System renderer.
+
+----
+
+有些固件在从图形模式切换到文本模式时，只清除了屏幕的一部分，留下了之前绘制的图像的一部分。这个选项可以在切换到文本模式前用黑色填充整个图形屏幕。
+
+注：该选项仅适用于系统渲染器。</string>
+               </property>
+               <property name="statusTip">
+                <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
+ fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
+ switching to text mode.
+ Note: This option only applies to System renderer.</string>
+               </property>
+               <property name="text">
+                <string>ClearScreenOnModeSwitch</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="chkProvideConsoleGop">
+               <property name="toolTip">
+                <string>macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and UGA, if present, are available on the console handle.
+
+Note: This option will also replace broken GOP protocol on console handle, which may be the case on MacPro5,1 with newer GPUs.
+----
+macOS bootloader 要求控制台手柄上必须有 GOP 或 UGA（适用于 10.4 EfiBoot），但 UEFI 规范并未涵盖图形协议的确切位置。这个选项将确保GOP和UGA（如果存在）在控制台手柄上可用。
+
+注意：这个选项还将替换控制台手柄上已损坏的GOP协议，在使用较新GPU的MacPro5,1上可能会出现这种情况。</string>
+               </property>
+               <property name="statusTip">
+                <string>Ensure GOP (Graphics Output Protocol) on console handle.</string>
+               </property>
+               <property name="text">
+                <string>ProvideConsoleGop</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
               <widget class="QLabel" name="label_25">
                <property name="toolTip">
                 <string>• Set to WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080) formatted string to request custom resolution from GOP if available.
@@ -8276,18 +8616,37 @@ Note: This will fail when console handle has no GOP protocol. When the firmware 
                 <string> Sets console output screen resolution.</string>
                </property>
                <property name="text">
-                <string>Resolution(e.g. 1920x1080@32) or (e.g. 1920x1080)</string>
+                <string>Resolution</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="cboxResolution">
+             <item row="3" column="1">
+              <widget class="QComboBox" name="cboxConsoleMode">
                <property name="editable">
                 <bool>true</bool>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_24">
+               <property name="toolTip">
+                <string>Set to empty string not to change console mode. Set to Max to try to use largest available console mode. Currently Builtin text renderer supports only one console mode, so this option is ignored.
+
+Note: This field is best to be left empty on most firmwares.
+----
+设置为空字符串，不改变控制台模式。设置为最大，尝试使用最大的可用的控制台模式，目前Builtin文本渲染器只支持一种控制台模式，所以这个选项会被忽略。
+
+注意：在大多数固件上，这个字段最好留空。</string>
+               </property>
+               <property name="statusTip">
+                <string>Sets console output mode as specified with the WxH (e.g. 80x24) formatted string.</string>
+               </property>
+               <property name="text">
+                <string>ConsoleMode(e.g. 80x24)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
               <widget class="QLabel" name="label_26">
                <property name="toolTip">
                 <string>Currently two renderers are supported: Builtin and System. System renderer uses firmware services for text rendering. 
@@ -8350,7 +8709,7 @@ BuiltinGraphics的使用一般都很简单。对于大多数平台来说，有�
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="5" column="1">
               <widget class="QComboBox" name="cboxTextRenderer">
                <property name="editable">
                 <bool>true</bool>
@@ -8359,245 +8718,21 @@ BuiltinGraphics的使用一般都很简单。对于大多数平台来说，有�
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="gridLayoutWidget_6">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>29</y>
-              <width>1011</width>
-              <height>231</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_34">
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="chkDirectGopRendering">
-               <property name="toolTip">
-                <string>On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.
-----
-在某些固件上，这可能会提供更好的性能，甚至修复渲染问题，比如在MacPro5,1上。然而，建议不要使用这个选项，除非有明显的好处，因为它甚至可能导致滚动速度变慢。</string>
-               </property>
-               <property name="statusTip">
-                <string> Use builtin graphics output protocol renderer for console.</string>
-               </property>
-               <property name="text">
-                <string>DirectGopRendering</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="chkForceResolution">
-               <property name="toolTip">
-                <string>Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max will try to pull the largest available resolution from the connected display’s EDID.
-
-Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel iGPUs.
-----
-说明：在默认情况下无法获得所需分辨率的情况下，强制设置分辨率，例如在传统的英特尔GMA和第一代英特尔高清图形(Ironlake/Arrandale)上。将 &quot;分辨率 &quot;设置为 &quot;最大 &quot;将尝试从所连接的显示器的EDID中提取最大的可用分辨率。
-
-注意：这个选项取决于OC_FORCE_RESOLUTION_PROTOCOL协议是否存在。这个协议目前只被OpenDuetPkg支持。OpenDuetPkg的实现目前只支持Intel iGPU。</string>
-               </property>
-               <property name="text">
-                <string>ForceResolution</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
-               <property name="toolTip">
-                <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before switching to text mode.
-
-Note: This option only applies to System renderer.
-
-----
-
-有些固件在从图形模式切换到文本模式时，只清除了屏幕的一部分，留下了之前绘制的图像的一部分。这个选项可以在切换到文本模式前用黑色填充整个图形屏幕。
-
-注：该选项仅适用于系统渲染器。</string>
-               </property>
-               <property name="statusTip">
-                <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
- fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
- switching to text mode.
- Note: This option only applies to System renderer.</string>
-               </property>
-               <property name="text">
-                <string>ClearScreenOnModeSwitch</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="chkUgaPassThrough">
-               <property name="toolTip">
-                <string>Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI applications like EfiBoot from 10.4.
-----
-有些固件没有实现传统旧式的UGA协议，但旧的EFI应用程序（如10.4的EfiBoot）可能需要它来进行屏幕输出。</string>
-               </property>
-               <property name="statusTip">
-                <string> Provide UGA protocol instances on top of GOP protocol.</string>
-               </property>
-               <property name="text">
-                <string>UgaPassThrough</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="chkSanitiseClearScreen">
-               <property name="toolTip">
-                <string> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
-
-Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to empty string for this to work.
-----
- 当使用大屏幕（如2K或4K）时，一些固件在尝试清除屏幕内容时，会将屏幕分辨率重置为故障安全值（如1024x768）。这个选项试图应用一个变通方法。
-
-注意：这个选项只适用于系统渲染器。在所有已知受影响的系统中，ConsoleMode必须设置为空字符串才行。</string>
-               </property>
-               <property name="text">
-                <string>SanitiseClearScreen</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QCheckBox" name="chkReplaceTabWithSpace">
-               <property name="toolTip">
-                <string>Some firmwares do not print tab characters or even everything that follows them, causing difficulties or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. 
-
-This option makes the console output spaces instead of tabs.
-
-Note: This option only applies to System renderer.
-----
-有些固件不打印制表符，甚至不打印制表符后面的所有内容，导致难以或无法使用UEFI Shell内置的文本编辑器来编辑属性列表和其他文档。
-
-这个选项使控制台输出的是空格而不是制表符。
-
-注意：该选项只适用于系统渲染器。</string>
-               </property>
-               <property name="text">
-                <string>ReplaceTabWithSpace</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="chkReconnectOnResChange">
-               <property name="toolTip">
-                <string>On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
-
-Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless required.
-----
-在某些固件上，当通过GOP改变屏幕分辨率时，需要重新连接产生控制台协议（简单文本输出）的控制器。否则它们将不会根据新的分辨率产生文本。
-
-注意：在一些板卡上，当从Shell启动OpenCore时，这个逻辑可能会导致黑屏，因此它是可选的。在 0.5.2 之前的版本中，该选项是强制性的，不可配置。除非需要，否则请不要使用该选项。</string>
-               </property>
-               <property name="statusTip">
-                <string>Reconnect console controllers after changing screen resolution.</string>
-               </property>
-               <property name="text">
-                <string>ReconnectOnResChange</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="chkProvideConsoleGop">
-               <property name="toolTip">
-                <string>macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and UGA, if present, are available on the console handle.
-
-Note: This option will also replace broken GOP protocol on console handle, which may be the case on MacPro5,1 with newer GPUs.
-----
-macOS bootloader 要求控制台手柄上必须有 GOP 或 UGA（适用于 10.4 EfiBoot），但 UEFI 规范并未涵盖图形协议的确切位置。这个选项将确保GOP和UGA（如果存在）在控制台手柄上可用。
-
-注意：这个选项还将替换控制台手柄上已损坏的GOP协议，在使用较新GPU的MacPro5,1上可能会出现这种情况。</string>
-               </property>
-               <property name="statusTip">
-                <string>Ensure GOP (Graphics Output Protocol) on console handle.</string>
-               </property>
-               <property name="text">
-                <string>ProvideConsoleGop</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
-               <property name="toolTip">
-                <string> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,because random text may appear over graphical images and cause UI corruption. Setting this option to true will discard all text output when console control is in mode different from Text.
-
-Note: This option only applies to System renderer.
-
-----
-
- 选择固件在图形和文本模式下在屏幕上输出文本。这通常是出乎意料的，因为随机的文本可能会出现在图形图像上，并导致用户界面损坏。将此选项设置为 &quot;true&quot;，当控制台控制模式与文本模式不同时，将丢弃所有文本输出。
-
-注意：这个选项只适用于系统渲染器。</string>
-               </property>
-               <property name="text">
-                <string>IgnoreTextInGraphics</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="chkGopPassThrough">
-               <property name="toolTip">
-                <string>Some types of firmware do not implement the GOP protocol, this option provides it via a UGA-based proxy.
-
-This option requires ProvideConsoleGop to be enabled.
-----
-有些类型的固件没有实现GOP协议，这个选项通过基于UGA的代理来提供。
-
-这个选项需要启用 ProvideConsoleGop。</string>
-               </property>
-               <property name="statusTip">
-                <string>Provide GOP protocol instances on top of UGA protocol instances.</string>
-               </property>
-               <property name="text">
-                <string>GopPassThrough</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
           </widget>
-          <widget class="QWidget" name="tabUEFI6">
+          <widget class="QWidget" name="tabUEFI7">
            <attribute name="title">
             <string>ProtocolOverrides</string>
            </attribute>
            <widget class="QWidget" name="gridLayoutWidget_13">
             <property name="geometry">
              <rect>
-              <x>20</x>
+              <x>10</x>
               <y>20</y>
-              <width>1211</width>
-              <height>391</height>
+              <width>991</width>
+              <height>271</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_35">
-             <item row="3" column="3">
-              <widget class="QCheckBox" name="chkAppleUserInterfaceTheme">
-               <property name="toolTip">
-                <string>Reinstalls Apple User Interface Theme protocol with a builtin version.
-----
-重新安装内置版本的苹果用户界面主题协议。</string>
-               </property>
-               <property name="statusTip">
-                <string>Reinstalls Apple User Interface Theme protocol with a builtin version.</string>
-               </property>
-               <property name="text">
-                <string>AppleUserInterfaceTheme</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="chkOSInfo">
-               <property name="toolTip">
-                <string>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive notifications from macOS bootloader, by the firmware or by other applications.
-----
-强制重新安装内置版本的OS Info协议。该协议通常用于接收来自macOS引导程序、固件或其他应用程序的通知。</string>
-               </property>
-               <property name="statusTip">
-                <string>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive
- notifications from macOS bootloader, by the firmware or by other applications.</string>
-               </property>
-               <property name="text">
-                <string>OSInfo</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="2">
               <widget class="QCheckBox" name="chkAppleDebugLog">
                <property name="toolTip">
@@ -8610,121 +8745,6 @@ This option requires ProvideConsoleGop to be enabled.
                </property>
                <property name="text">
                 <string>AppleDebugLog</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="chkAppleSecureBoot">
-               <property name="toolTip">
-                <string> Reinstalls Apple Secure Boot protocol with a builtin version.
-----
- 重新安装内置版本的Apple Secure Boot协议。</string>
-               </property>
-               <property name="statusTip">
-                <string> Reinstalls Apple Secure Boot protocol with a builtin version.</string>
-               </property>
-               <property name="text">
-                <string>AppleSecureBoot</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="2">
-              <widget class="QCheckBox" name="chkAppleSmcIo">
-               <property name="toolTip">
-                <string>This protocol replaces legacy VirtualSmc UEFI driver, and is compatible with any SMC kernel extension.
-
-However, in case FakeSMC kernel extension is used, manual NVRAM key variable addition may be needed.
-----
-这个协议取代了传统的VirtualSmc UEFI驱动，并且与任何SMC内核扩展兼容，但是如果使用FakeSMC内核扩展，可能需要手动添加NVRAM变量。
-</string>
-               </property>
-               <property name="statusTip">
-                <string>Reinstalls Apple SMC I/O protocol with a builtin version.</string>
-               </property>
-               <property name="text">
-                <string>AppleSmcIo</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="chkAppleEvent">
-               <property name="toolTip">
-                <string>Reinstalls Apple Event protocol with a builtin version. This may be used to ensure File Vault 2 compatibility on VMs or legacy Macs.
-----
-使用内置版本重新安装 Apple Event 协议。这可能用于确保虚拟机或旧版 Mac 上的 File Vault 2 兼容性。</string>
-               </property>
-               <property name="statusTip">
-                <string>Reinstalls Apple Event protocol with a builtin version. This may be used to ensure File Vault 2
- compatibility on VMs or legacy Macs.</string>
-               </property>
-               <property name="text">
-                <string>AppleEvent</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="chkDeviceProperties">
-               <property name="toolTip">
-                <string> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.
-----
- 使用内置版本重新安装设备属性协议。如果已经安装，这将删除所有以前的属性。这可用于确保在虚拟机或旧版 Mac 上完全兼容。</string>
-               </property>
-               <property name="statusTip">
-                <string> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties
- if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.</string>
-               </property>
-               <property name="text">
-                <string notr="true">DeviceProperties</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="2">
-              <widget class="QCheckBox" name="chkFirmwareVolume">
-               <property name="toolTip">
-                <string>Note: Several virtual machines including VMware may have corrupted cursor image in HiDPI mode and thus may also require this setting to be enabled.
-----
-注意：包括VMware在内的一些虚拟机在HiDPI模式下可能会损坏光标图像，因此也需要启用此设置。</string>
-               </property>
-               <property name="statusTip">
-                <string> Forcibly wraps Firmware Volume protocols or installs new to support custom cursor images for
- File Vault 2. Should be set to true to ensure File Vault 2 compatibility on everything but VMs and legacy Macs.</string>
-               </property>
-               <property name="text">
-                <string>FirmwareVolume</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="chkUnicodeCollation">
-               <property name="toolTip">
-                <string> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.
-
-----
-
- 强制重新安装内置版本的unicode整理服务。应设为true，以确保UEFI Shell在提供破损的unicode collation平台上的相容性。一般而言，Ivy Bridge或更早版本的Insyde和APTIO平台会受到影响。</string>
-               </property>
-               <property name="statusTip">
-                <string> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.</string>
-               </property>
-               <property name="text">
-                <string>UnicodeCollation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="chkAppleRtcRam">
-               <property name="toolTip">
-                <string>Reinstalls Apple RTC RAM protocol with builtin version.
-
-----
-
-重新安装内置版本的苹果RTC RAM协议。</string>
-               </property>
-               <property name="statusTip">
-                <string>Reinstalls Apple RTC RAM protocol with builtin version.</string>
-               </property>
-               <property name="text">
-                <string>AppleRtcRam</string>
                </property>
               </widget>
              </item>
@@ -8741,41 +8761,6 @@ However, in case FakeSMC kernel extension is used, manual NVRAM key variable add
                </property>
                <property name="text">
                 <string>AppleBootPolicy</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="chkDataHub">
-               <property name="toolTip">
-                <string> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the protocol was already installed.
-
-----
-
- 使用内置版本重新安装Data Hub协议。如果协议已经安装，这将删除所有以前的属性。</string>
-               </property>
-               <property name="statusTip">
-                <string> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the
- protocol was already installed.</string>
-               </property>
-               <property name="text">
-                <string notr="true">DataHub</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="3">
-              <widget class="QCheckBox" name="chkHashServices">
-               <property name="toolTip">
-                <string>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.
-----
-强制重新安装内置版本的哈希服务协议。应该设置为 &quot;true&quot;，以确保File Vault 2在提供破损的SHA-1哈希的平台上的兼容性。在UIScale设置为02的情况下，可以通过无效的光标大小进行诊断，一般APTIO V之前的平台（Haswell及以上）都会受到影响。</string>
-               </property>
-               <property name="statusTip">
-                <string>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure
- File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size
- with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.</string>
-               </property>
-               <property name="text">
-                <string>HashServices</string>
                </property>
               </widget>
              </item>
@@ -8806,7 +8791,7 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
+             <item row="0" column="3">
               <widget class="QCheckBox" name="chkAppleFramebufferInfo">
                <property name="toolTip">
                 <string> Reinstalls Apple Framebuffer Info protocol with a builtin version. This may be used to override framebuffer information on VMs or legacy Macs to improve compatibility with legacy EfiBoot like the one in macOS 10.4.
@@ -8823,7 +8808,7 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
+             <item row="1" column="0">
               <widget class="QCheckBox" name="chkAppleImageConversion">
                <property name="toolTip">
                 <string>Reinstalls Apple Image Conversion protocol with a builtin version.
@@ -8840,7 +8825,7 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                </property>
               </widget>
              </item>
-             <item row="1" column="2">
+             <item row="1" column="1">
               <widget class="QCheckBox" name="chkAppleImg4Verification">
                <property name="toolTip">
                 <string> Reinstalls Apple IMG4 Verification protocol with a builtin version. This protocol is used to verify im4m manifest files used by Apple Secure Boot.
@@ -8856,7 +8841,7 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                </property>
               </widget>
              </item>
-             <item row="1" column="3">
+             <item row="1" column="2">
               <widget class="QCheckBox" name="chkAppleKeyMap">
                <property name="toolTip">
                 <string> Reinstalls Apple Key Map protocols with builtin versions.
@@ -8871,10 +8856,175 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                </property>
               </widget>
              </item>
+             <item row="1" column="3">
+              <widget class="QCheckBox" name="chkAppleRtcRam">
+               <property name="toolTip">
+                <string>Reinstalls Apple RTC RAM protocol with builtin version.
+
+----
+
+重新安装内置版本的苹果RTC RAM协议。</string>
+               </property>
+               <property name="statusTip">
+                <string>Reinstalls Apple RTC RAM protocol with builtin version.</string>
+               </property>
+               <property name="text">
+                <string>AppleRtcRam</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="chkAppleSecureBoot">
+               <property name="toolTip">
+                <string> Reinstalls Apple Secure Boot protocol with a builtin version.
+----
+ 重新安装内置版本的Apple Secure Boot协议。</string>
+               </property>
+               <property name="statusTip">
+                <string> Reinstalls Apple Secure Boot protocol with a builtin version.</string>
+               </property>
+               <property name="text">
+                <string>AppleSecureBoot</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="chkAppleSmcIo">
+               <property name="toolTip">
+                <string>This protocol replaces legacy VirtualSmc UEFI driver, and is compatible with any SMC kernel extension.
+
+However, in case FakeSMC kernel extension is used, manual NVRAM key variable addition may be needed.
+----
+这个协议取代了传统的VirtualSmc UEFI驱动，并且与任何SMC内核扩展兼容，但是如果使用FakeSMC内核扩展，可能需要手动添加NVRAM变量。
+</string>
+               </property>
+               <property name="statusTip">
+                <string>Reinstalls Apple SMC I/O protocol with a builtin version.</string>
+               </property>
+               <property name="text">
+                <string>AppleSmcIo</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QCheckBox" name="chkAppleUserInterfaceTheme">
+               <property name="toolTip">
+                <string>Reinstalls Apple User Interface Theme protocol with a builtin version.
+----
+重新安装内置版本的苹果用户界面主题协议。</string>
+               </property>
+               <property name="statusTip">
+                <string>Reinstalls Apple User Interface Theme protocol with a builtin version.</string>
+               </property>
+               <property name="text">
+                <string>AppleUserInterfaceTheme</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="3">
+              <widget class="QCheckBox" name="chkDataHub">
+               <property name="toolTip">
+                <string> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the protocol was already installed.
+
+----
+
+ 使用内置版本重新安装Data Hub协议。如果协议已经安装，这将删除所有以前的属性。</string>
+               </property>
+               <property name="statusTip">
+                <string> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the
+ protocol was already installed.</string>
+               </property>
+               <property name="text">
+                <string notr="true">DataHub</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="chkDeviceProperties">
+               <property name="toolTip">
+                <string> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.
+----
+ 使用内置版本重新安装设备属性协议。如果已经安装，这将删除所有以前的属性。这可用于确保在虚拟机或旧版 Mac 上完全兼容。</string>
+               </property>
+               <property name="statusTip">
+                <string> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties
+ if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.</string>
+               </property>
+               <property name="text">
+                <string notr="true">DeviceProperties</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="chkFirmwareVolume">
+               <property name="toolTip">
+                <string>Note: Several virtual machines including VMware may have corrupted cursor image in HiDPI mode and thus may also require this setting to be enabled.
+----
+注意：包括VMware在内的一些虚拟机在HiDPI模式下可能会损坏光标图像，因此也需要启用此设置。</string>
+               </property>
+               <property name="statusTip">
+                <string> Forcibly wraps Firmware Volume protocols or installs new to support custom cursor images for
+ File Vault 2. Should be set to true to ensure File Vault 2 compatibility on everything but VMs and legacy Macs.</string>
+               </property>
+               <property name="text">
+                <string>FirmwareVolume</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QCheckBox" name="chkHashServices">
+               <property name="toolTip">
+                <string>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.
+----
+强制重新安装内置版本的哈希服务协议。应该设置为 &quot;true&quot;，以确保File Vault 2在提供破损的SHA-1哈希的平台上的兼容性。在UIScale设置为02的情况下，可以通过无效的光标大小进行诊断，一般APTIO V之前的平台（Haswell及以上）都会受到影响。</string>
+               </property>
+               <property name="statusTip">
+                <string>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure
+ File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size
+ with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.</string>
+               </property>
+               <property name="text">
+                <string>HashServices</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="3">
+              <widget class="QCheckBox" name="chkOSInfo">
+               <property name="toolTip">
+                <string>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive notifications from macOS bootloader, by the firmware or by other applications.
+----
+强制重新安装内置版本的OS Info协议。该协议通常用于接收来自macOS引导程序、固件或其他应用程序的通知。</string>
+               </property>
+               <property name="statusTip">
+                <string>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive
+ notifications from macOS bootloader, by the firmware or by other applications.</string>
+               </property>
+               <property name="text">
+                <string>OSInfo</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="chkUnicodeCollation">
+               <property name="toolTip">
+                <string> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.
+
+----
+
+ 强制重新安装内置版本的unicode整理服务。应设为true，以确保UEFI Shell在提供破损的unicode collation平台上的相容性。一般而言，Ivy Bridge或更早版本的Insyde和APTIO平台会受到影响。</string>
+               </property>
+               <property name="statusTip">
+                <string> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.</string>
+               </property>
+               <property name="text">
+                <string>UnicodeCollation</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </widget>
-          <widget class="QWidget" name="tabUEFI7">
+          <widget class="QWidget" name="tabUEFI8">
            <attribute name="title">
             <string>Quirks</string>
            </attribute>
@@ -8883,8 +9033,8 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
              <rect>
               <x>20</x>
               <y>20</y>
-              <width>501</width>
-              <height>401</height>
+              <width>511</width>
+              <height>361</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_31">
@@ -8908,7 +9058,7 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
               <widget class="QLineEdit" name="editIntTscSyncTimeout">
                <property name="minimumSize">
                 <size>
-                 <width>150</width>
+                 <width>200</width>
                  <height>0</height>
                 </size>
                </property>
@@ -9003,7 +9153,7 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
               <widget class="QLineEdit" name="editIntExitBootServicesDelay">
                <property name="minimumSize">
                 <size>
-                 <width>150</width>
+                 <width>200</width>
                  <height>0</height>
                 </size>
                </property>
@@ -9064,7 +9214,7 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
             </layout>
            </widget>
           </widget>
-          <widget class="QWidget" name="tabUEFI8">
+          <widget class="QWidget" name="tabUEFI9">
            <attribute name="title">
             <string>ReservedMemory</string>
            </attribute>
@@ -9177,6 +9327,19 @@ Enable this option to be able to see all the boot options when having multiple d
              </property>
             </widget>
            </item>
+           <item row="0" column="1">
+            <spacer name="horizontalSpacer_21">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>1070</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
           </layout>
          </widget>
         </item>
@@ -9259,10 +9422,10 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionOpenCanopyIcons"/>
     <addaction name="actionSimplified_Chinese_Manual"/>
     <addaction name="btnCheckUpdate"/>
-    <addaction name="actionAbout_2"/>
     <addaction name="separator"/>
     <addaction name="actionBug_Report"/>
     <addaction name="actionDiscussion_Forum"/>
+    <addaction name="actionAbout_2"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTools"/>
@@ -9286,7 +9449,7 @@ Enable this option to be able to see all the boot options when having multiple d
   <widget class="QDockWidget" name="dockFind">
    <property name="minimumSize">
     <size>
-     <width>160</width>
+     <width>200</width>
      <height>166</height>
     </size>
    </property>
@@ -9459,6 +9622,9 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="actionUpgrade_OC">

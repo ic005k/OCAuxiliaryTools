@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210404";
+    CurVerison = "20210406";
     title = "OC Auxiliary Tools   V0.6.8 - " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget* parent)
         mac = true;
 
     this->resize(1300, 700);
-    ui->actionQuit->setVisible(false);
+
 #endif
 
 #ifdef Q_OS_WIN32
@@ -2200,15 +2200,31 @@ void MainWindow::ParserUEFI(QVariantMap map)
     if (map.isEmpty())
         return;
 
-    //APFS
+    //1. APFS
     QVariantMap map_apfs = map["APFS"].toMap();
     getValue(map_apfs, ui->tabUEFI1);
 
-    //Audio
-    QVariantMap map_audio = map["Audio"].toMap();
-    getValue(map_audio, ui->tabUEFI2);
+    //2. AppleInput
+    QVariantMap map_AppleInput = map["AppleInput"].toMap();
+    getValue(map_AppleInput, ui->tabUEFI2);
 
-    // Drivers
+    if (ui->editIntKeyInitialDelay->text() == "")
+        ui->editIntKeyInitialDelay->setText("0");
+
+    if (ui->editIntKeySubsequentDelay->text() == "")
+        ui->editIntKeySubsequentDelay->setText("5");
+
+    if (ui->editIntPointerSpeedDiv->text() == "")
+        ui->editIntPointerSpeedDiv->setText("1");
+
+    if (ui->editIntPointerSpeedMul->text() == "")
+        ui->editIntPointerSpeedMul->setText("1");
+
+    //3. Audio
+    QVariantMap map_audio = map["Audio"].toMap();
+    getValue(map_audio, ui->tabUEFI3);
+
+    //4. Drivers
     QTableWidgetItem* id0;
     QVariantList map_Drivers = map["Drivers"].toList(); //数组
     ui->table_uefi_drivers->setRowCount(map_Drivers.count());
@@ -2220,23 +2236,23 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
     ui->chkConnectDrivers->setChecked(map["ConnectDrivers"].toBool());
 
-    //Input
+    //5. Input
     QVariantMap map_input = map["Input"].toMap();
-    getValue(map_input, ui->tabUEFI4);
+    getValue(map_input, ui->tabUEFI5);
 
-    // Output
+    //6. Output
     QVariantMap map_output = map["Output"].toMap();
-    getValue(map_output, ui->tabUEFI5);
+    getValue(map_output, ui->tabUEFI6);
 
-    // ProtocolOverrides
+    //7. ProtocolOverrides
     QVariantMap map_po = map["ProtocolOverrides"].toMap();
-    getValue(map_po, ui->tabUEFI6);
+    getValue(map_po, ui->tabUEFI7);
 
-    // Quirks
+    //8. Quirks
     QVariantMap map_uefi_Quirks = map["Quirks"].toMap();
-    getValue(map_uefi_Quirks, ui->tabUEFI7);
+    getValue(map_uefi_Quirks, ui->tabUEFI8);
 
-    // ReservedMemory
+    //9. ReservedMemory
     QTableWidgetItem* newItem1;
     QVariantList map3 = map["ReservedMemory"].toList();
     ui->table_uefi_ReservedMemory->setRowCount(map3.count());
@@ -2823,14 +2839,17 @@ QVariantMap MainWindow::SaveUEFI()
     QVariantList arrayList;
     QVariantMap valueList;
 
-    // APFS
+    //1. APFS
     subMap["APFS"] = setValue(dictList, ui->tabUEFI1);
 
-    // Audio
-    dictList.clear();
-    subMap["Audio"] = setValue(dictList, ui->tabUEFI2);
+    //2. AppleInput
+    subMap["AppleInput"] = setValue(dictList, ui->tabUEFI2);
 
-    // Drivers
+    //3. Audio
+    dictList.clear();
+    subMap["Audio"] = setValue(dictList, ui->tabUEFI3);
+
+    //4. Drivers
     arrayList.clear();
     for (int i = 0; i < ui->table_uefi_drivers->rowCount(); i++) {
         arrayList.append(ui->table_uefi_drivers->item(i, 0)->text());
@@ -2838,23 +2857,23 @@ QVariantMap MainWindow::SaveUEFI()
     subMap["Drivers"] = arrayList;
     subMap["ConnectDrivers"] = getChkBool(ui->chkConnectDrivers);
 
-    // Input
+    //5. Input
     dictList.clear();
-    subMap["Input"] = setValue(dictList, ui->tabUEFI4);
+    subMap["Input"] = setValue(dictList, ui->tabUEFI5);
 
-    // Output
+    //6. Output
     dictList.clear();
-    subMap["Output"] = setValue(dictList, ui->tabUEFI5);
+    subMap["Output"] = setValue(dictList, ui->tabUEFI6);
 
-    // ProtocolOverrides
+    //7. ProtocolOverrides
     dictList.clear();
-    subMap["ProtocolOverrides"] = setValue(dictList, ui->tabUEFI6);
+    subMap["ProtocolOverrides"] = setValue(dictList, ui->tabUEFI7);
 
-    // Quirks
+    //8. Quirks
     dictList.clear();
-    subMap["Quirks"] = setValue(dictList, ui->tabUEFI7);
+    subMap["Quirks"] = setValue(dictList, ui->tabUEFI8);
 
-    // ReservedMemory
+    //9. ReservedMemory
     arrayList.clear();
     valueList.clear();
     for (int i = 0; i < ui->table_uefi_ReservedMemory->rowCount(); i++) {
@@ -4221,6 +4240,13 @@ void MainWindow::on_btnSaveAs()
     SavePlist(PlistFileName);
 
     ui->actionSave->setEnabled(true);
+
+    QSettings settings;
+    QFileInfo fInfo(PlistFileName);
+    settings.setValue("currentDirectory", fInfo.absolutePath());
+    // qDebug() << settings.fileName(); //最近打开的文件所保存的位置
+    m_recentFiles->setMostRecentFile(PlistFileName);
+    initRecentFilesForToolBar();
 }
 
 void MainWindow::about()
@@ -4876,20 +4902,26 @@ void MainWindow::readResultDiskInfo()
     QString result = gbkCodec->toUnicode(di->readAll());
     ui->textDiskInfo->append(result);
 
-    QString str0, str1, strEfiDisk;
+    dlgMountESP* dlgMESP = new dlgMountESP(this);
+
+    QString str0;
     int count = ui->textDiskInfo->document()->lineCount();
     for (int i = 0; i < count; i++) {
         str0 = ui->textDiskInfo->document()->findBlockByNumber(i).text().trimmed();
-        str1 = str0.mid(3, str0.count() - 3).trimmed();
 
-        if (str1.mid(0, 3).toUpper() == "EFI") {
-
-            strEfiDisk = str1.mid(str1.count() - 7, 7);
-            mount_esp_mac(strEfiDisk);
+        QStringList strList = str0.simplified().split(" ");
+        if (strList.count() == 6) {
+            if (strList.at(1).toUpper() == "EFI") {
+                dlgMESP->ui->listWidget->setIconSize(QSize(32, 32));
+                dlgMESP->ui->listWidget->addItem(new QListWidgetItem(QIcon(":/icon/esp.png"), str0));
+            }
         }
-
-        // qDebug() << strEfiDisk << str1;
     }
+
+    dlgMESP->setModal(true);
+    if (dlgMESP->ui->listWidget->count() > 0)
+        dlgMESP->ui->listWidget->setCurrentRow(0);
+    dlgMESP->show();
 }
 
 void MainWindow::mount_esp_mac(QString strEfiDisk)
@@ -6015,6 +6047,7 @@ void MainWindow::PickerAttributes()
     pav3 = 4;
     pav4 = 8;
     pav5 = 16;
+    pav6 = 32;
 
     chk_pa.clear();
     chk_pa.append(ui->chkPA1);
@@ -6022,6 +6055,7 @@ void MainWindow::PickerAttributes()
     chk_pa.append(ui->chkPA3);
     chk_pa.append(ui->chkPA4);
     chk_pa.append(ui->chkPA5);
+    chk_pa.append(ui->chkPA6);
 
     v_pa.clear();
     v_pa.append(pav1);
@@ -6029,6 +6063,7 @@ void MainWindow::PickerAttributes()
     v_pa.append(pav3);
     v_pa.append(pav4);
     v_pa.append(pav5);
+    v_pa.append(pav6);
 
     for (int i = 0; i < v_pa.count(); i++) {
         if (!chk_pa.at(i)->isChecked()) {
@@ -6053,10 +6088,9 @@ void MainWindow::on_chkPA3_clicked() { PickerAttributes(); }
 
 void MainWindow::on_chkPA4_clicked() { PickerAttributes(); }
 
-void MainWindow::on_chkPA5_clicked()
-{
-    PickerAttributes();
-}
+void MainWindow::on_chkPA5_clicked() { PickerAttributes(); }
+
+void MainWindow::on_chkPA6_clicked() { PickerAttributes(); }
 
 void MainWindow::on_editIntPickerAttributes_textChanged(const QString& arg1)
 {
@@ -6067,6 +6101,7 @@ void MainWindow::on_editIntPickerAttributes_textChanged(const QString& arg1)
     pav3 = 4;
     pav4 = 8;
     pav5 = 16;
+    pav6 = 32;
 
     chk_pa.clear();
     chk_pa.append(ui->chkPA1);
@@ -6074,6 +6109,7 @@ void MainWindow::on_editIntPickerAttributes_textChanged(const QString& arg1)
     chk_pa.append(ui->chkPA3);
     chk_pa.append(ui->chkPA4);
     chk_pa.append(ui->chkPA5);
+    chk_pa.append(ui->chkPA6);
 
     v_pa.clear();
     v_pa.append(pav1);
@@ -6081,6 +6117,7 @@ void MainWindow::on_editIntPickerAttributes_textChanged(const QString& arg1)
     v_pa.append(pav3);
     v_pa.append(pav4);
     v_pa.append(pav5);
+    v_pa.append(pav6);
 
     scanPolicy = false;
     pickerAttributes = true;
@@ -6786,6 +6823,9 @@ void MainWindow::init_Menu()
     ui->actionSave_As->setIcon(QIcon(":/icon/saveas.png"));
     ui->toolBar->addAction(ui->actionSave_As);
 
+    //Quit
+    ui->actionQuit->setMenuRole(QAction::QuitRole);
+
     ui->toolBar->addSeparator();
 
     //Tools
@@ -6973,7 +7013,10 @@ void MainWindow::init_Menu()
             w->setPlaceholderText(tr("Integer"));
         }
 
-        if (w->objectName().mid(0, 7) == "editDat" || w->objectName() == "editFirmwareFeatures_SMBIOS" || w->objectName() == "editFirmwareFeaturesMask_SMBIOS") {
+        if (w->objectName().mid(0, 7) == "editDat"
+            || w->objectName() == "editFirmwareFeatures_SMBIOS"
+            || w->objectName() == "editFirmwareFeaturesMask_SMBIOS"
+            || w->objectName() == "editROM_PNVRAM") {
             QValidator* validator = new QRegExpValidator(regx, w);
             w->setValidator(validator);
             w->setPlaceholderText(tr("Hexadecimal"));
@@ -7034,7 +7077,7 @@ void MainWindow::init_Menu()
     listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabTotal));
     for (int i = 0; i < listOfCheckBox.count(); i++) {
         QCheckBox* w = (QCheckBox*)listOfCheckBox.at(i);
-
+        setCheckBoxWidth(w);
         w->setContextMenuPolicy(Qt::CustomContextMenu);
 
         w->installEventFilter(this);
@@ -7085,6 +7128,15 @@ void MainWindow::init_Menu()
     //lineEdit
     pTrailingAction = new QAction(this);
     pTrailingAction->setIcon(QIcon(":/icon/ok.png"));
+}
+
+void MainWindow::setCheckBoxWidth(QCheckBox* cbox)
+{
+    QFont myFont(cbox->font().family(), cbox->font().pointSize());
+    QString str = cbox->text() + "      ";
+    QFontMetrics fm(myFont);
+    int w = fm.width(str);
+    cbox->setMaximumWidth(w);
 }
 
 int MainWindow::getMainHeight()
@@ -7956,6 +8008,7 @@ void MainWindow::on_listMain_itemSelectionChanged()
         ui->listSub->setViewMode(QListWidget::IconMode);
 
         ui->listSub->addItem(tr("APFS"));
+        ui->listSub->addItem(tr("AppleInput"));
         ui->listSub->addItem(tr("Audio"));
         ui->listSub->addItem(tr("Drivers"));
         ui->listSub->addItem(tr("Input"));
@@ -9243,6 +9296,26 @@ void MainWindow::on_actionFind_triggered()
         }
     }
 
+    //TabText 7
+    for (int i = 0; i < ui->listMain->count(); i++) {
+        QString strMain = ui->listMain->item(i)->text();
+        if (strMain.toLower().contains(findText)) {
+            findCount++;
+            listNameResults.append("7-" + QString::number(i) + "-0");
+            ui->listFind->addItem(strMain);
+        }
+
+        ui->listMain->setCurrentRow(i);
+        for (int j = 0; j < ui->listSub->count(); j++) {
+            QString strSub = ui->listSub->item(j)->text();
+            if (strSub.toLower().contains(findText)) {
+                findCount++;
+                listNameResults.append("7-" + QString::number(i) + "-" + QString::number(j));
+                ui->listFind->addItem(strSub);
+            }
+        }
+    }
+
     ui->lblCount->setText(QString::number(findCount));
 
     if (listNameResults.count() > 0) {
@@ -9374,7 +9447,6 @@ void MainWindow::on_actionGo_to_the_next_triggered()
 void MainWindow::goResults(int index)
 {
     QString objName = listNameResults.at(index);
-    //qDebug() << objName;
     QString name = objName.mid(1, objName.length() - 1);
     bool end = false;
 
@@ -9760,6 +9832,17 @@ void MainWindow::goResults(int index)
         }
     }
 
+    //listMain and listSub 7
+    if (objName.mid(0, 1) == "7") {
+        QStringList strList = objName.split("-");
+        if (strList.count() == 3) {
+            int m = strList.at(1).toInt();
+            int s = strList.at(2).toInt();
+            ui->listMain->setCurrentRow(m);
+            ui->listSub->setCurrentRow(s);
+        }
+    }
+
     ui->lblCount->setText(QString::number(findCount) + " ( " + QString::number(ui->listFind->currentRow() + 1) + " ) ");
 }
 
@@ -10052,6 +10135,9 @@ QWidget* MainWindow::getSubTabWidget(int m, int s)
             break;
         case 7:
             return ui->tabUEFI8;
+            break;
+        case 8:
+            return ui->tabUEFI9;
             break;
 
         default:

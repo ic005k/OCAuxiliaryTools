@@ -37,10 +37,12 @@
 #include <QJsonObject>
 
 #include "aboutdialog.h"
+#include "dlgMountESP.h"
 #include "dlgOCValidate.h"
 #include "dlgdatabase.h"
 #include "recentfiles.h"
 #include "tooltip.h"
+#include "ui_dlgMountESP.h"
 
 #ifdef Q_OS_WIN32
 #include <stdio.h>
@@ -61,6 +63,8 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    void setCheckBoxWidth(QCheckBox* cbox);
+    void mount_esp_mac(QString strEfiDisk);
     QString getDatabaseVer();
     QIntValidator* IntValidator = new QIntValidator;
     QString getTableFieldDataType(QTableWidget* table);
@@ -599,6 +603,8 @@ private slots:
 
     void on_chkPA4_clicked();
 
+    void on_chkPA6_clicked();
+
     void on_table_dp_add0_itemChanged(QTableWidgetItem* item);
 
     void on_table_dp_del0_itemChanged(QTableWidgetItem* item);
@@ -828,8 +834,6 @@ private:
 
     void mount_esp();
 
-    void mount_esp_mac(QString strEfiDisk);
-
     void runAdmin(QString file, QString arg);
 
     QString getSystemProductName(QString arg1);
@@ -877,7 +881,7 @@ private:
 
     bool click = false;
 
-    int pav1, pav2, pav3, pav4, pav5;
+    int pav1, pav2, pav3, pav4, pav5, pav6;
     QVector<QCheckBox*> chk_pa;
     QVector<int> v_pa;
     void PickerAttributes();

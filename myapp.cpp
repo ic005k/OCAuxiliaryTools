@@ -13,9 +13,7 @@ bool MyApplication::event(QEvent* event)
         PlistFileName = openEvent->file();
 
         if (mw_one->isActiveWindow())
-            mw_one->close();
-
-        new_win();
+            mw_one->openFile(PlistFileName);
     }
 
     return QApplication::event(event);
