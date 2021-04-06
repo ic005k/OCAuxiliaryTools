@@ -8,7 +8,7 @@ RC_FILE += myapp.rc
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
-TARGET= OCAT
+TARGET= OCAuxiliaryTools
 
 unix:!macx:{
 
@@ -84,12 +84,11 @@ DISTFILES += \
 
 RESOURCES += \
     qtocc.qrc
-    
+
 CONFIG(debug,debug|release) {
     DESTDIR = $$absolute_path($${_PRO_FILE_PWD_}/bin/debug)
 } else {
     DESTDIR = $$absolute_path($${_PRO_FILE_PWD_}/bin/release)
 }
-
 
 
