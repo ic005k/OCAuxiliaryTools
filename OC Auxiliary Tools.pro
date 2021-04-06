@@ -86,18 +86,4 @@ RESOURCES += \
     qtocc.qrc
 
 
-HEADERS += \
-    aboutdialog.h \
-    commands.h \
-    dlgdatabase.h \
-    mainwindow.h \
-    myapp.h \
-    plistparser.h \
-    plistserializer.h \
-    recentfiles.h
-
-FORMS += \
-    aboutdialog.ui \
-    dlgdatabase.ui \
-    mainwindow.ui
 
