@@ -63,7 +63,7 @@ jobs:
           qmake
           mingw32-make
           
-          # tag 打包
+        
            
       #- name: package
       #  id: package      
