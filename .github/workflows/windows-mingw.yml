@@ -17,15 +17,15 @@ jobs:
     strategy:
       matrix:
         include:
-                            
+          - qt_arch: win32_mingw81
+            qt_ver: 5.15.2
+            qt_tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win32_mingw810"
+            qt_tools_mingw_install: mingw810_32                  
           - qt_arch: win64_mingw81
             qt_ver: 5.15.2
             qt_tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win64_mingw810"
             qt_tools_mingw_install: mingw810_64
-          - qt_arch: win64_mingw81
-            qt_ver: 6.0.0
-            qt_tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win64_mingw810"
-            qt_tools_mingw_install: mingw810_64
+          
     env:
       targetName: HelloActions-Qt.exe
     steps:
