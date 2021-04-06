@@ -62,6 +62,30 @@ jobs:
         run: |
           qmake
           mingw32-make
+          
+          # tag 打包
+  - name: package
+  if: startsWith(github.event.ref, 'refs/tags/')
+  env:
+    VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
+    archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
+    targetName: HelloActions-Qt.exe
+  shell: pwsh
+  run: |
+    # 创建文件夹
+    New-Item -ItemType Directory ${env:archiveName}
+    # 拷贝exe
+    Copy-Item bin\${env:targetName} ${env:archiveName}\
+    # 拷贝依赖
+    windeployqt --qmldir . ${env:archiveName}\${env:targetName}
+    # 打包zip
+    Compress-Archive -Path ${env:archiveName} ${env:archiveName}'.zip'
+    # 记录环境变量packageName给后续step
+    $name = ${env:archiveName}
+    echo "::set-env name=packageName::$name"
+    # 打印环境变量packageName
+    Write-Host 'packageName:'${env:packageName}
+          
       #- name: package
       #  id: package      
       #  env:
