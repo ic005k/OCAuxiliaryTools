@@ -39,9 +39,9 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat0.png)
 
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat1.png)
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/Screenshots/blob/master/ocat1.png)
 
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat2.png)
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/Screenshots/blob/master/ocat2.png)
 
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/ocat3.png)
 
