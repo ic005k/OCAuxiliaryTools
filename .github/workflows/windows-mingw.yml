@@ -1,0 +1,125 @@
+name: Windows MinGW
+on: 
+  push:
+    paths:
+      - '*.pro'
+      - 'src/**'
+      - '.github/workflows/windows-mingw.yml'
+  pull_request:
+    paths:
+      - '*.pro'
+      - 'src/**'
+      - '.github/workflows/windows-mingw.yml' 
+jobs:
+  build:
+    name: Build
+    runs-on: windows-2019
+    strategy:
+      matrix:
+        include:
+          - qt_arch: win32_mingw53
+            qt_ver: 5.9.9
+            qt_tools: "tools_mingw,5.3.0-2,qt.tools.win32_mingw530"
+            qt_tools_mingw_install: mingw530_32
+          - qt_arch: win32_mingw53
+            qt_ver: 5.10.1
+            qt_tools: "tools_mingw,5.3.0-2,qt.tools.win32_mingw530"
+            qt_tools_mingw_install: mingw530_32
+          - qt_arch: win32_mingw53
+            qt_ver: 5.11.3
+            qt_tools: "tools_mingw,5.3.0-2,qt.tools.win32_mingw530"
+            qt_tools_mingw_install: mingw530_32
+          - qt_arch: win32_mingw73
+            qt_ver: 5.12.10
+            qt_tools: "tools_mingw,7.3.0-1-202004170606,qt.tools.win32_mingw730"
+            qt_tools_mingw_install: mingw730_32
+          - qt_arch: win32_mingw73
+            qt_ver: 5.13.2
+            qt_tools: "tools_mingw,7.3.0-1-202004170606,qt.tools.win32_mingw730"
+            qt_tools_mingw_install: mingw730_32
+          - qt_arch: win32_mingw73
+            qt_ver: 5.14.2
+            qt_tools: "tools_mingw,7.3.0-1-202004170606,qt.tools.win32_mingw730"
+            qt_tools_mingw_install: mingw730_32
+          - qt_arch: win64_mingw73
+            qt_ver: 5.12.10
+            qt_tools: "tools_mingw,7.3.0-1-202004170606,qt.tools.win64_mingw730"
+            qt_tools_mingw_install: mingw730_64
+          - qt_arch: win64_mingw73
+            qt_ver: 5.13.2
+            qt_tools: "tools_mingw,7.3.0-1-202004170606,qt.tools.win64_mingw730"
+            qt_tools_mingw_install: mingw730_64
+          - qt_arch: win64_mingw73
+            qt_ver: 5.14.2
+            qt_tools: "tools_mingw,7.3.0-1-202004170606,qt.tools.win64_mingw730"
+            qt_tools_mingw_install: mingw730_64
+          - qt_arch: win32_mingw81
+            qt_ver: 5.15.2
+            qt_tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win32_mingw810"
+            qt_tools_mingw_install: mingw810_32
+          - qt_arch: win64_mingw81
+            qt_ver: 5.15.2
+            qt_tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win64_mingw810"
+            qt_tools_mingw_install: mingw810_64
+          - qt_arch: win64_mingw81
+            qt_ver: 6.0.0
+            qt_tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win64_mingw810"
+            qt_tools_mingw_install: mingw810_64
+    env:
+      targetName: HelloActions-Qt.exe
+    steps:
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2.13.0
+        with:
+          version: ${{ matrix.qt_ver }}
+          arch: ${{ matrix.qt_arch }}
+          tools: ${{ matrix.qt_tools }}
+          cached: 'false'
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Qt 5 environment configuration
+        if: ${{ startsWith( matrix.qt_ver, 5 ) }}
+        shell: pwsh
+        run: |
+          Write-Output "${{ env.Qt5_DIR }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          Write-Output "${{ env.Qt5_DIR }}/../../Tools/${{ matrix.qt_tools_mingw_install }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      - name: Qt 6 environment configuration
+        if: ${{ startsWith( matrix.qt_ver, 6 ) }}
+        shell: pwsh
+        run: |
+          Write-Output "${{ env.Qt6_DIR }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          Write-Output "${{ env.Qt6_DIR }}/../../Tools/${{ matrix.qt_tools_mingw_install }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      - name: where is qmake & where is mingw32-make
+        shell: pwsh
+        run: |
+          Get-Command -Name 'qmake' | Format-List
+          Get-Command -Name 'mingw32-make' | Format-List
+      - name: mingw-build
+        id: build
+        shell: cmd
+        run: |
+          qmake
+          mingw32-make
+      - name: package
+        id: package      
+        env:
+          archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
+        shell: pwsh
+        run: |
+          & scripts\windows-mingw-publish.ps1 ${env:archiveName} ${env:targetName}
+           $name = ${env:archiveName}
+           echo "::set-output name=packageName::$name"       
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.package.outputs.packageName }}
+          path: ${{ steps.package.outputs.packageName }}.zip
+      - name: uploadRelease
+        if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ steps.package.outputs.packageName }}.zip
+          asset_name: ${{ steps.package.outputs.packageName }}.zip
+          tag: ${{ github.ref }}
+          overwrite: true 
