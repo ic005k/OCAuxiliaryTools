@@ -2,10 +2,6 @@
     <qresource prefix="/">
         <file>icon.png</file>
         <file>cn.qm</file>
-        <file>add.png</file>
-        <file>del.png</file>
-        <file>down.png</file>
-        <file>up.png</file>
         <file>icon/m1.png</file>
         <file>icon/m2.png</file>
         <file>icon/m3.png</file>
@@ -41,5 +37,9 @@
         <file>icon/newver.png</file>
         <file>icon/overror.png</file>
         <file>icon/um.png</file>
+        <file>icon/add.png</file>
+        <file>icon/del.png</file>
+        <file>icon/down.png</file>
+        <file>icon/up.png</file>
     </qresource>
 </RCC>

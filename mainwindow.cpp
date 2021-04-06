@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210406";
+    CurVerison = "20210407";
     title = "OC Auxiliary Tools   V0.6.8 - " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -3377,7 +3377,6 @@ void MainWindow::del_item(QTableWidget* table)
         selectedsList = selections->selectedIndexes();
 
         i = -1;
-        //qDebug() << t;
     }
 
     if (row > table->rowCount()) {
@@ -8657,19 +8656,19 @@ void MainWindow::goTable(QTableWidget* table)
     if (table == ui->table_uefi_drivers) {
 
         ui->listMain->setCurrentRow(7);
-        ui->listSub->setCurrentRow(2);
+        ui->listSub->setCurrentRow(3);
 
         //ui->tabTotal->setCurrentIndex(7);
-        //ui->tabUEFI->setCurrentIndex(2);
+        //ui->tabUEFI->setCurrentIndex(3);
     }
 
     if (table == ui->table_uefi_ReservedMemory) {
 
         ui->listMain->setCurrentRow(7);
-        ui->listSub->setCurrentRow(7);
+        ui->listSub->setCurrentRow(8);
 
         //ui->tabTotal->setCurrentIndex(7);
-        //ui->tabUEFI->setCurrentIndex(7);
+        //ui->tabUEFI->setCurrentIndex(8);
     }
 }
 

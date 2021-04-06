@@ -169,7 +169,7 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -191,7 +191,7 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -316,7 +316,7 @@ relevant when performing different types of renames.
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -338,7 +338,7 @@ relevant when performing different types of renames.
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -593,7 +593,7 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -615,7 +615,7 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -921,7 +921,7 @@ Description: Exclude MMIO address from the devirtualisation procedure.
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -943,7 +943,7 @@ Description: Exclude MMIO address from the devirtualisation procedure.
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1008,7 +1008,7 @@ Description: Exclude MMIO address from the devirtualisation procedure.
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1030,7 +1030,7 @@ Description: Exclude MMIO address from the devirtualisation procedure.
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1692,7 +1692,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1714,7 +1714,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1752,7 +1752,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1774,7 +1774,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1819,7 +1819,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1841,7 +1841,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1876,7 +1876,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1898,7 +1898,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1965,7 +1965,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1987,7 +1987,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2009,7 +2009,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/up.png</normaloff>:/up.png</iconset>
+                <normaloff>:/icon/up.png</normaloff>:/icon/up.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2031,7 +2031,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/down.png</normaloff>:/down.png</iconset>
+                <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2089,7 +2089,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2111,7 +2111,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2172,7 +2172,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2194,7 +2194,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2260,7 +2260,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2282,7 +2282,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -4766,7 +4766,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -4788,7 +4788,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -4844,7 +4844,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -4866,7 +4866,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -4923,7 +4923,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -4945,7 +4945,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -4985,7 +4985,7 @@ Valid values:
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5007,7 +5007,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5029,7 +5029,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5064,7 +5064,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5086,7 +5086,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5153,7 +5153,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5175,7 +5175,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5210,7 +5210,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5232,7 +5232,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5277,7 +5277,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5299,7 +5299,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5334,7 +5334,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5356,7 +5356,7 @@ Valid values:
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -6359,7 +6359,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -6381,7 +6381,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -7426,7 +7426,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>8</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -8135,7 +8135,7 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -8157,7 +8157,7 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -9243,7 +9243,7 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/add.png</normaloff>:/add.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -9265,7 +9265,7 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/del.png</normaloff>:/del.png</iconset>
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -9372,7 +9372,7 @@ Enable this option to be able to see all the boot options when having multiple d
      <x>0</x>
      <y>0</y>
      <width>1482</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
