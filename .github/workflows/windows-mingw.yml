@@ -27,7 +27,7 @@ jobs:
             qt_tools_mingw_install: mingw810_64
           
     env:
-      targetName: HelloActions-Qt.exe
+      targetName: OCAuxiliaryTools.exe
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2.13.0
