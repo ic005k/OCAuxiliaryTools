@@ -45,7 +45,6 @@ MainWindow::MainWindow(QWidget* parent)
 
 #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
     osx1012 = true;
-
 #endif
 
     if (osx1012)
