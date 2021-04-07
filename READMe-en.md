@@ -1,6 +1,21 @@
 [English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-en.md)
 # 开源跨平台的OpenCore辅助工具
 
+| [发行][release-link]|[下载][download-link]|[反馈问题][issues-link]|
+|-----------------|-----------------|-----------------|
+|[![release-badge](https://img.shields.io/github/release/ic005k/QtOpenCoreConfig.svg?style=flat-square "Release status")](https://github.com/ic005k/QtOpenCoreConfig/releases "Release status") | [![download-badge](https://img.shields.io/github/downloads/ic005k/QtOpenCoreConfig/total.svg?style=flat-square "Download status")](https://github.com/ic005k/QtOpenCoreConfig/releases/latest "Download status")|[![issues-badge](https://img.shields.io/badge/github-issues-red.svg?maxAge=60 "Issues")](https://github.com/ic005k/QtOpenCoreConfig/issues "Issues")|
+
+[download-link]: https://github.com/ic005k/QtOpenCoreConfig/releases/latest "Download status"
+[download-badge]: https://img.shields.io/github/downloads/ic005k/QtOpenCoreConfig/total.svg?style=flat-square "Download status"
+
+[release-link]: https://github.com/ic005k/QtOpenCoreConfig/releases "Release status"
+[release-badge]: https://img.shields.io/github/release/ic005k/QtOpenCoreConfig.svg?style=flat-square "Release status"
+
+[issues-link]: https://github.com/ic005k/QtOpenCoreConfig/issues "Issues"
+[issues-badge]: https://img.shields.io/badge/github-issues-red.svg?maxAge=60 "Issues"
+
+
+
 OC辅助工具（简称OCAT或ocat） = Config.plist编辑器 + Config.plist数据库 + ...
 
 OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actions
