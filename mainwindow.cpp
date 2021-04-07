@@ -43,7 +43,10 @@ MainWindow::MainWindow(QWidget* parent)
 #ifdef Q_OS_MAC
     font.setPixelSize(12);
 
-    //osx1012 = true;
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+    osx1012 = true;
+
+#endif
 
     if (osx1012)
         mac = false;
