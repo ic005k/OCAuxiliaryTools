@@ -4,12 +4,12 @@ on:
   push:
     paths:
       - '*.pro'
-      - 'src/**'
+      - '**'
       - '.github/workflows/ubuntu.yml'
   pull_request:
     paths:
       - '*.pro'
-      - 'src/**'
+      - '**'
       - '.github/workflows/ubuntu.yml' 
 jobs:
   build:
