@@ -4870,12 +4870,12 @@ void MainWindow::mount_esp()
     // di = new QProcess;
     // di->execute("mountvol.exe", QStringList() << "x:" << "/s");//阻塞
 
-    QString exec = QCoreApplication::applicationDirPath() + "/FindESP.exe";
+    QString exec = QCoreApplication::applicationDirPath() + "/Database/win/FindESP.exe";
 
     // runAdmin(exec, "-unmount:*");
     runAdmin(exec, "-mount:*"); //可选参数-Updater
 
-    QString exec2 = QCoreApplication::applicationDirPath() + "/winfile.exe";
+    QString exec2 = QCoreApplication::applicationDirPath() + "/Database/win/winfile.exe";
 
     runAdmin(exec2, NULL); //此时参数为空
 
