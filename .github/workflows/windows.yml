@@ -1,0 +1,111 @@
+name: Windows
+on: 
+  # push代码时触发workflow
+  push:
+    # 忽略README.md
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+  # pull_request时触发workflow
+  pull_request:
+    # 忽略README.md
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+jobs:
+  build:
+    name: Build
+    # 运行平台， windows-latest目前是windows server 2019 
+    # 参考文档 https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
+    runs-on: windows-2019
+    strategy:
+      # 矩阵配置
+      matrix:
+        include:
+          # 5.9.9 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_599/
+          - qt_ver: 5.9.9
+            qt_arch: win32_msvc2015
+            msvc_arch: x86
+            qt_arch_install: msvc2015
+          - qt_ver: 5.9.9
+            qt_arch: win64_msvc2017_64
+            msvc_arch: x64
+            qt_arch_install: msvc2017_64
+          # 5.12.10 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_51210/            
+          - qt_ver: 5.12.10
+            qt_arch: win32_msvc2017
+            msvc_arch: x86
+            qt_arch_install: msvc2017
+          - qt_ver: 5.12.10            
+            qt_arch: win64_msvc2017_64
+            msvc_arch: x64
+            qt_arch_install: msvc2017_64
+          # 5.15.2 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
+          - qt_ver: 5.15.2
+            qt_arch: win32_msvc2019
+            msvc_arch: x86
+            qt_arch_install: msvc2019
+          - qt_ver: 5.15.2          
+            qt_arch: win64_msvc2019_64
+            msvc_arch: x64
+            qt_arch_install: msvc2019_64          
+    env:
+      targetName: HelloActions-Qt.exe
+    # 步骤
+    steps:
+      # 安装Qt
+      - name: Install Qt
+        # 使用外部action。这个action专门用来安装Qt
+        uses: jurplel/install-qt-action@v2.10.0
+        with:
+          # Version of Qt to install
+          version: ${{ matrix.qt_ver }}
+          # Target platform for build
+          # target: ${{ matrix.qt_target }}
+          arch: ${{ matrix.qt_arch }}
+          aqtversion: '==0.10.0'
+          cached: 'false'
+      # 拉取代码
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      # msvc编译
+      - name: msvc-build
+        id: build
+        shell: cmd
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+          qmake
+          nmake
+          echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
+          echo winSdkVer=%WindowsSdkVersion% >> %GITHUB_ENV%
+          echo vcToolsInstallDir=%VCToolsInstallDir% >> %GITHUB_ENV%
+          echo vcToolsRedistDir=%VCToolsRedistDir% >> %GITHUB_ENV%
+      # 打包 
+      - name: package
+        id: package      
+        env:
+          archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
+          msvcArch: ${{ matrix.msvc_arch }}          
+        shell: pwsh
+        run: |
+          & scripts\windows-publish.ps1 ${env:archiveName} ${env:targetName}
+          # 记录packageName给后续step
+           $name = ${env:archiveName}
+           echo "::set-output name=packageName::$name"       
+      # tag 查询github-Release
+      # 上传artifacts          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.package.outputs.packageName }}
+          path: ${{ steps.package.outputs.packageName }}.zip
+      # tag 上传Release
+      - name: uploadRelease
+        if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ steps.package.outputs.packageName }}.zip
+          asset_name: ${{ steps.package.outputs.packageName }}.zip
+          tag: ${{ github.ref }}
+          overwrite: true 
