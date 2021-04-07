@@ -77,7 +77,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ steps.package.outputs.packageName }}
-          path: ${{ steps.package.outputs.packageName }}.7z  #.zip
+          path: ${{ steps.package.outputs.packageName }}-win  #.zip
           
       - name: uploadRelease
         if: startsWith(github.event.ref, 'refs/tags/')
