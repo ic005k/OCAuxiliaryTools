@@ -3,12 +3,12 @@ on:
   push:
     paths:
       - '*.pro'
-      - 'src/**'
+      - '**'
       - '.github/workflows/windows-mingw.yml'
   pull_request:
     paths:
       - '*.pro'
-      - 'src/**'
+      - '**'
       - '.github/workflows/windows-mingw.yml' 
 jobs:
   build:
