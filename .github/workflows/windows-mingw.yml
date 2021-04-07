@@ -72,7 +72,7 @@ jobs:
           msvcArch: ${{ matrix.msvc_arch }}          
         shell: pwsh
         run: |
-          & scripts\windows-publish.ps1 ${env:archiveName} ${env:targetName}
+          & scripts\windows-mingw-publish.ps1 ${env:archiveName} ${env:targetName}
           # 记录packageName给后续step
            $name = ${env:archiveName}
            echo "::set-output name=packageName::$name"            
