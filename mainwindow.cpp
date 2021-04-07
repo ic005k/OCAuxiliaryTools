@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210407";
+    CurVerison = "20210410";
     title = "OC Auxiliary Tools   V0.6.8 - " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -7996,7 +7996,7 @@ void MainWindow::on_listMain_itemSelectionChanged()
         ui->listSub->addItem(tr("Memory"));
         ui->listSub->addItem(tr("PlatformNVRAM"));
         ui->listSub->addItem(tr("SMBIOS"));
-        if (mac)
+        if (mac || osx1012)
             ui->listSub->addItem(tr("SystemInfo"));
 
         ui->listSub->setCurrentRow(index);
