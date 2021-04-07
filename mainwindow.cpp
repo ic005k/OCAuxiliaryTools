@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210406";
+    CurVerison = "20210407";
     title = "OC Auxiliary Tools   V0.6.8 - " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget* parent)
 
 #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
     osx1012 = true;
+
 #endif
 
     if (osx1012)
