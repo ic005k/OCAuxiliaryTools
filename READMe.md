@@ -1,6 +1,21 @@
 [English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-en.md)
 # Open source cross-platform OpenCore auxiliary tools
 
+
+| [Release][release-link]|[Download][download-link]|[Issues][issues-link]|
+|-----------------|-----------------|-----------------|
+|[![release-badge](https://img.shields.io/github/release/ic005k/QtOpenCoreConfig.svg?style=flat-square "Release status")](https://github.com/ic005k/QtOpenCoreConfig/releases "Release status") | [![download-badge](https://img.shields.io/github/downloads/ic005k/QtOpenCoreConfig/total.svg?style=flat-square "Download status")](https://github.com/ic005k/QtOpenCoreConfig/releases/latest "Download status")|[![issues-badge](https://img.shields.io/badge/github-issues-red.svg?maxAge=60 "Issues")](https://github.com/ic005k/QtOpenCoreConfig/issues "Issues")|
+
+[download-link]: https://github.com/ic005k/QtOpenCoreConfig/releases/latest "Download status"
+[download-badge]: https://img.shields.io/github/downloads/ic005k/QtOpenCoreConfig/total.svg?style=flat-square "Download status"
+
+[release-link]: https://github.com/ic005k/QtOpenCoreConfig/releases "Release status"
+[release-badge]: https://img.shields.io/github/release/ic005k/QtOpenCoreConfig.svg?style=flat-square "Release status"
+
+[issues-link]: https://github.com/ic005k/QtOpenCoreConfig/issues "Issues"
+[issues-badge]: https://img.shields.io/badge/github-issues-red.svg?maxAge=60 "Issues"
+
+
 OC auxiliary tools（OCAT or ocat for short） = Config.plist editor + Config.plist database + ...
 
 OC development version can be downloaded [here](https://github.com/acidanthera/OpenCorePkg/actions).
