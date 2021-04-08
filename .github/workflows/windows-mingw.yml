@@ -79,12 +79,12 @@ jobs:
           name: ${{ steps.package.outputs.packageName }}
           path: ${{ steps.package.outputs.packageName }}.zip
           
-      - name: uploadRelease
-        if: startsWith(github.event.ref, 'refs/tags/')
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ steps.package.outputs.packageName }}.zip
-          asset_name: ${{ steps.package.outputs.packageName }}.zip
-          tag: ${{ github.ref }}
-          overwrite: true 
+      #- name: uploadRelease
+      #  if: startsWith(github.event.ref, 'refs/tags/')
+      #  uses: svenstaro/upload-release-action@v2
+      #  with:
+      #    repo_token: ${{ secrets.GITHUB_TOKEN }}
+      #    file: ${{ steps.package.outputs.packageName }}.zip
+      #    asset_name: ${{ steps.package.outputs.packageName }}.zip
+      #    tag: ${{ github.ref }}
+      #    overwrite: true 
