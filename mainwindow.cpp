@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210410";
+    CurVerison = "20210412";
     title = "OC Auxiliary Tools   V0.6.8 - " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -7584,18 +7584,27 @@ int MainWindow::parse_UpdateJSON(QString str)
         QVariantList list = root_Obj.value("assets").toArray().toVariantList();
         for (int i = 0; i < list.count(); i++) {
             QVariantMap map = list[i].toMap();
-            QFileInfo file(map["name"].toString());
-            if (file.suffix().toLower() == "zip")
+            QString fName = map["name"].toString();
+
+            if (fName.contains("5.15.2"))
                 macUrl = map["browser_download_url"].toString();
+            else
+                macUrl = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
 
-            if (file.suffix().toLower() == "7z")
+            if (fName.contains("Win"))
                 winUrl = map["browser_download_url"].toString();
+            else
+                macUrl = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
 
-            if (file.suffix() == "AppImage")
+            if (fName.contains("Linux"))
                 linuxUrl = map["browser_download_url"].toString();
+            else
+                macUrl = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
 
-            if (file.suffix() == "dmg")
+            if (fName.contains("5.9.9"))
                 osx1012Url = map["browser_download_url"].toString();
+            else
+                macUrl = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
         }
 
         QJsonObject PulseValue = root_Obj.value("assets").toObject();
