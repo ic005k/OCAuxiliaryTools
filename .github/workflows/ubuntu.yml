@@ -74,5 +74,16 @@ jobs:
           #path: bin/release/${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
           path: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
           
+     # tag 上传Release
+      - name: uploadRelease
+        if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: bin/release/${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
+          asset_name: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
+          tag: ${{ github.ref }}
+          overwrite: true     
+          
           
     
