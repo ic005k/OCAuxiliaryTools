@@ -58,6 +58,7 @@ jobs:
         run: |
          cp icon.png bin/release/icon.png
          cp default.desktop bin/release/default.desktop
+         cp -r Database bin/release/Database
          export VERSION # linuxdeployqt uses this for naming the file
          ./linuxdeployqt-continuous-x86_64.AppImage bin/release/${targetName} -unsupported-allow-new-glibc -appimage
           
