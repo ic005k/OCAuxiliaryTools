@@ -28,11 +28,6 @@ aboutDialog::aboutDialog(QWidget* parent)
 
     ui->textBrowser->append(strUrl2);
 
-    QImage* img = new QImage();
-
-    img->load(":/icon.png");
-    ui->lblIcon->setPixmap(QPixmap::fromImage(*img));
-
     QFileInfo appInfo(qApp->applicationFilePath());
     QString strLastModified = tr("Last modified: ") + appInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
 
@@ -45,6 +40,9 @@ aboutDialog::aboutDialog(QWidget* parent)
 
     ui->textBrowser->append("");
     ui->textBrowser->append(strLastModified);
+
+    ui->textBrowser->append("");
+    ui->textBrowser->append(tr("(This App is built automatically by Github Actions.)"));
 }
 
 aboutDialog::~aboutDialog()
