@@ -63,6 +63,7 @@ jobs:
          chmod +x bin/release/Database/mac/ocvalidate
          export VERSION # linuxdeployqt uses this for naming the file
          ./linuxdeployqt-continuous-x86_64.AppImage bin/release/${targetName} -unsupported-allow-new-glibc -appimage
+         chmod +x ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
           
       # 上传artifacts          
       - uses: actions/upload-artifact@v2
