@@ -41,6 +41,8 @@ jobs:
         run: |
           # 拷贝依赖
           cp -r Database bin/release/${targetName}.app/Contents/MacOS/Database
+          chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/macserial
+          chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/ocvalidate
           macdeployqt bin/release/${targetName}.app -qmldir=. -verbose=1 -dmg
           
       # 上传artifacts          
