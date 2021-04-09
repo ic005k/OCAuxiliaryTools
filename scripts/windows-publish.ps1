@@ -36,7 +36,7 @@ function Main() {
     # cp ExtBin/msvcr100.dll msvcr100.dll  win7 64位使用
     
     #$Database=Database -f
-    Copy-Item Database\*.* $archiveName\Database
+    Copy-Item Database\*.* $archiveName\Database\
     
     # 拷贝依赖
     windeployqt --qmldir . --plugindir $archiveName\plugins --no-translations --compiler-runtime $archiveName\$targetName
