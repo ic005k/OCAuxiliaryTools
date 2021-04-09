@@ -17,21 +17,29 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04,ubuntu-20.04]
-        # os: [ubuntu-20.04]
-        
+        #os: [ubuntu-18.04,ubuntu-20.04]
         # qt_ver: [5.9.9,5.12.10,5.15.2]
-        qt_ver: [5.9.9,5.15.2]
+        
+        os: [ubuntu-20.04]
+        qt_ver: [5.15.2]
         
         qt_arch: [gcc_64]
+        
+    env:
+        targetName: OCAuxiliaryTools
+        VERSION: Linux
+      
     steps:
+      
       - name: Install Qt
         uses: jurplel/install-qt-action@v2.13.0
         with:
           version: ${{ matrix.qt_ver }}
           cached: 'false'
+      
       - name: ubuntu install GL library
-        run: sudo apt-get install -y libglew-dev libglfw3-dev
+        run: sudo apt-get install -y libglew-dev libglfw3-dev libxcb*
+                   
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
@@ -39,3 +47,28 @@ jobs:
         run: |
           qmake
           make
+          
+      - name: install linuxdeployqt 
+        run: |
+          wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+          chmod a+x linuxdeployqt-continuous-x86_64.AppImage            
+          
+      # 打包
+      - name: package
+        run: |
+         cp icon.png bin/release/icon.png
+         cp default.desktop bin/release/default.desktop
+         export VERSION # linuxdeployqt uses this for naming the file
+         ./linuxdeployqt-continuous-x86_64.AppImage bin/release/${targetName} -unsupported-allow-new-glibc -appimage
+          
+      # 上传artifacts          
+      - uses: actions/upload-artifact@v2
+        with:
+          #name: ${{ env.targetName }} # .zip
+          #path: bin/release/${{ env.targetName }}.Appimage
+          name: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
+          #path: bin/release/${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
+          path: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
+          
+          
+    
