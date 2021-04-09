@@ -28,6 +28,13 @@ function Main() {
     New-Item -ItemType Directory $archiveName
     # 拷贝exe
     Copy-Item bin\release\$targetName $archiveName\
+    
+    # 拷贝额外的文件：主要用于网络访问
+    Copy-Item ExtBin/*.dll $archiveName\
+    # libcrypto-1_1-x64.dll
+    # cp ExtBin/libssl-1_1-x64.dll libssl-1_1-x64.dll
+    # cp ExtBin/msvcr100.dll msvcr100.dll  win7 64位使用
+    
     # 拷贝依赖
     windeployqt --qmldir . --plugindir $archiveName\plugins --no-translations --compiler-runtime $archiveName\$targetName
     # 删除不必要的文件
