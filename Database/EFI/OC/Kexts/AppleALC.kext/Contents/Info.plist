@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>19H512</string>
+	<string>19H524</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5.8</string>
+	<string>1.5.9</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,7 +25,7 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.5.8</string>
+	<string>1.5.9</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -1503,6 +1503,32 @@
 					<key>WakeConfigData</key>
 					<data>
 					AUcMAgIXDAIBlwwAAacMAA==
+					</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>
+					AwAAAA==
+					</data>
+					<key>Codec</key>
+					<string>ALC235 for Asrock_bb_310 by_vio</string>
+					<key>CodecID</key>
+					<integer>283902517</integer>
+					<key>ConfigData</key>
+					<data>
+					AZccUAGXHQABlx6gAZcfkAGnHEABpx0QAace
+					gAGnHwIBtxyAAbcdEAG3HhEBtx8BAbcMAgIX
+					HFACFx0QAhceIQIXHwICFwwC
+					</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>18</integer>
+					<key>WakeConfigData</key>
+					<data>
+					AZcHJQGnByUBtwwCAhcMAg==
 					</data>
 					<key>WakeVerbReinit</key>
 					<true/>
@@ -6078,6 +6104,32 @@
 					AwAAAA==
 					</data>
 					<key>Codec</key>
+					<string>MacPeet - ALC289 for Dell 7730 Precision CM240 </string>
+					<key>CodecID</key>
+					<integer>283902601</integer>
+					<key>ConfigData</key>
+					<data>
+					ASccEAEnHQABJx6mAScfkAFHHCABRx0AAUce
+					FwFHH5ABRwwCAZccMAGXHRABlx6BAZcfAAIX
+					HEACFx0QAhceIQIXHwACFwwC
+					</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>15</integer>
+					<key>WakeConfigData</key>
+					<data>
+					AUcMAgIXDAI=
+					</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>
+					AwAAAA==
+					</data>
+					<key>Codec</key>
 					<string>Realtek ALC289 for Acer PT515-51 By Bugprogrammer and Rover</string>
 					<key>CodecID</key>
 					<integer>283902601</integer>
@@ -6120,6 +6172,32 @@
 					<key>WakeConfigData</key>
 					<data>
 					AUcMAgG3DAICFwwC
+					</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>
+					AwAAAA==
+					</data>
+					<key>Codec</key>
+					<string>naufalkharits - Realtek ALC289 for Alienware m15</string>
+					<key>CodecID</key>
+					<integer>283902601</integer>
+					<key>ConfigData</key>
+					<data>
+					AUccEAFHHQEBRx4XAUcfkAFHDAICFxwwAhcd
+					EAIXHiECFx8EAhcMAgGXHEABlx0RAZceoQGX
+					H5E=
+					</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>87</integer>
+					<key>WakeConfigData</key>
+					<data>
+					AUcMAgIXDAIBlwcl
 					</data>
 					<key>WakeVerbReinit</key>
 					<true/>
@@ -12937,6 +13015,59 @@
 					<key>WakeConfigData</key>
 					<data>
 					AUcMAg==
+					</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>
+					AwAAAA==
+					</data>
+					<key>Codec</key>
+					<string>Custom IDT92HD95 - LenovoG710 by Svilen Ivanov layout14</string>
+					<key>CodecID</key>
+					<integer>287143573</integer>
+					<key>ConfigData</key>
+					<data>
+					AKccEACnHRAApx4hAKcfAQCnDAIAtxwgALcd
+					EAC3HoEAtx8BALcMAgDHHDAAxx0BAMceoADH
+					H5AAxwwCANccQADXHQEA1x4QANcfkADXDAIA
+					5xzwAOcdAADnHgAA5x9AAPcc8AD3HQAA9x4A
+					APcfQAGHHPABhx0AAYceAAGHH0A=
+					</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>14</integer>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>
+					AwAAAA==
+					</data>
+					<key>Codec</key>
+					<string>ALC297 for MSI Z490-A Pro by MathCampbell</string>
+					<key>CodecID</key>
+					<integer>283904151</integer>
+					<key>ConfigData</key>
+					<data>
+					AUccEAFHHUABRx4RAUcfAQFHDAIBZxwRAWcd
+					YAFnHhEBZx8BAVccEgFXHRABVx4RAVcfAQF3
+					HBQBdx0gAXceEQF3HwEBtxwgAbcdQAG3HiEB
+					tx8CAbcMAgGHHDABhx2QAYceoAGHH5EBpxw/
+					AacdMAGnHoEBpx8BARccQAEXHdUBFx43ARcf
+					QAGXHEABlx2QAZcegAGXHwIB1xxrAdcd9gHX
+					HioB1x9A
+					</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>69</integer>
+					<key>WakeConfigData</key>
+					<data>
+					AUcMAgFnDAABVwwAAXcMAAG3DAIBhwwAAacM
+					AAEXDAABlwwAAdcMAA==
 					</data>
 					<key>WakeVerbReinit</key>
 					<true/>
