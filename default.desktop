@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=OC Auxiliary Tools
-Exec=OC Auxiliary Tools
+Name=OCAuxiliaryTools
+Exec=OCAuxiliaryTools
 Icon=icon
-Comment=OC Auxiliary Tools
+Comment=OCAuxiliaryTools
 Categories=Application;
 Terminal=true
