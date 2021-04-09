@@ -32,6 +32,8 @@ jobs:
           
     env:
       targetName: OCAuxiliaryTools.exe
+      orgName: OCAuxiliaryTools
+      
     # 步骤
     steps:
       # 安装Qt
@@ -65,7 +67,8 @@ jobs:
       - name: package
         id: package      
         env:
-          archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
+          #archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
+          archiveName: ${{ env.orgName }}
           msvcArch: ${{ matrix.msvc_arch }}          
         shell: pwsh
         run: |
