@@ -1,4 +1,4 @@
-name: MacOS
+name: MacOS 10.12
 on: 
   push:
     paths:
@@ -18,10 +18,13 @@ jobs:
       matrix:
         os: [macos-10.15]
         # qt_ver: [5.9.9,5.12.10,5.15.2]
-        qt_ver: [5.9.9,5.15.2]
+        qt_ver: [5.9.9]
         qt_arch: [clang_64]
+        
     env:
       targetName: OCAuxiliaryTools
+      VERSION: Mac10.12 and below
+      
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2.13.0
@@ -48,7 +51,9 @@ jobs:
       # 上传artifacts          
       - uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.targetName }}_${{ matrix.os }}_${{matrix.qt_ver}} # .zip
+          #name: ${{ env.targetName }}_${{ matrix.os }}_${{matrix.qt_ver}} # .zip
+          name: ${{ env.targetName }}_${{ env.VERSION }}
+          
           path: bin/release/${{ env.targetName }}.dmg
           
       # tag 上传Release
@@ -58,6 +63,9 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: bin/release/${{ env.targetName }}.dmg
-          asset_name: ${{ env.targetName }}_${{ matrix.os }}_${{ matrix.qt_ver }}.dmg
+          
+          #asset_name: ${{ env.targetName }}_${{ matrix.os }}_${{ matrix.qt_ver }}.dmg
+          asset_name: ${{ env.targetName }}_${{ env.VERSION }}.dmg
+          
           tag: ${{ github.ref }}
           overwrite: true
