@@ -1,4 +1,5 @@
-name: Ubuntu
+name: Linux
+
 # Qt官方没有linux平台的x86包
 on: 
   push:
