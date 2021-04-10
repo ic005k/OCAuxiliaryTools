@@ -66,7 +66,7 @@ jobs:
          #./linuxdeployqt-continuous-x86_64.AppImage bin/release/${targetName} -unsupported-allow-new-glibc -appimage
          #chmod +x ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
          
-         ./linuxdeployqt-continuous-x86_64.AppImage bin/release/${targetName}-${matrix.os}-${matrix.qt_ver} -unsupported-allow-new-glibc -appimage
+         ./linuxdeployqt-continuous-x86_64.AppImage bin/release/${{ env.targetName }}-${{ matrix.os }}-${{ matrix.qt_ver }} -unsupported-allow-new-glibc -appimage
                  
         
       # 上传artifacts          
