@@ -1,15 +1,15 @@
-name: MacOS 10.12
+name: MacOS Classical
 on: 
   push:
     paths:
       - '*.pro'
       - '**'
-      - '.github/workflows/macos.yml'
+      - '.github/workflows/macos1012.yml'
   pull_request:
     paths:
       - '*.pro'
       - '**'
-      - '.github/workflows/macos.yml' 
+      - '.github/workflows/macos1012.yml' 
 jobs:
   build:
     name: Build
