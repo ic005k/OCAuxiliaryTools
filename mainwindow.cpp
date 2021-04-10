@@ -7588,23 +7588,15 @@ int MainWindow::parse_UpdateJSON(QString str)
 
             if (fName.contains("5.15.2"))
                 macUrl = map["browser_download_url"].toString();
-            else
-                macUrl = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
 
             if (fName.contains("Win"))
                 winUrl = map["browser_download_url"].toString();
-            else
-                macUrl = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
 
             if (fName.contains("Linux"))
                 linuxUrl = map["browser_download_url"].toString();
-            else
-                macUrl = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
 
             if (fName.contains("5.9.9"))
                 osx1012Url = map["browser_download_url"].toString();
-            else
-                macUrl = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
         }
 
         QJsonObject PulseValue = root_Obj.value("assets").toObject();
@@ -7618,6 +7610,8 @@ int MainWindow::parse_UpdateJSON(QString str)
             Url = linuxUrl;
         if (osx1012)
             Url = osx1012Url;
+        if (Url == "")
+            Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
 
         QString UpdateTime = root_Obj.value("published_at").toString();
         QString ReleaseNote = root_Obj.value("body").toString();
@@ -7633,6 +7627,7 @@ int MainWindow::parse_UpdateJSON(QString str)
                 QString warningStr = tr("New version detected!") + "\n" + tr("Version: ") + "V" + Verison + "\n" + tr("Published at: ") + UpdateTime + "\n" + tr("Release Notes: ") + "\n" + ReleaseNote;
                 int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
                 if (ret == 0) {
+                    Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
                     QDesktopServices::openUrl(QUrl(Url));
                 }
             }
@@ -9014,7 +9009,7 @@ void MainWindow::on_editTargetHex_textChanged(const QString& arg1)
 void MainWindow::on_actionNewWindow_triggered()
 {
     QFileInfo appInfo(qApp->applicationDirPath());
-    QString pathSource = appInfo.filePath() + "/OC Auxiliary Tools";
+    QString pathSource = appInfo.filePath() + "/OCAuxiliaryTools";
     QStringList arguments;
     QString fn = "";
     arguments << fn;
