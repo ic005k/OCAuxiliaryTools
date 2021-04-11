@@ -6756,7 +6756,7 @@ void MainWindow::init_Menu()
 #if (QT_VERSION <= QT_VERSION_CHECK(5, 9, 9))
 
         ui->listMain->setMaximumHeight(75);
-        ui->listSub->setMaximumHeight(35);
+        ui->listSub->setMaximumHeight(38);
 
 #endif
     }
