@@ -21,7 +21,7 @@ jobs:
         #os: [ubuntu-18.04,ubuntu-20.04]
         # qt_ver: [5.9.9,5.12.10,5.15.2]
         
-        os: [ubuntu-18.04]
+        os: [ubuntu-20.04]
         qt_ver: [5.9.9,5.15.2]
         
         qt_arch: [gcc_64]
@@ -29,6 +29,7 @@ jobs:
     env:
         targetName: OCAuxiliaryTools
         VERSION: Linux
+        orgName: OCAT
       
     steps:
       
@@ -75,7 +76,7 @@ jobs:
           #name: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
           #path: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
           
-          name: ${{ env.targetName }}-${{ matrix.os }}-${{ matrix.qt_ver }}-${{ env.VERSION }}-x86_64.AppImage
+          name: ${{ env.orgName }}-${{ matrix.os }}-${{ matrix.qt_ver }}-${{ env.VERSION }}-x86_64.AppImage
           path: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
           
      # tag 上传Release
@@ -89,7 +90,7 @@ jobs:
           #asset_name: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
           
           file: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
-          asset_name: ${{ env.targetName }}-${{ matrix.os }}-${{ matrix.qt_ver }}-${{ env.VERSION }}-x86_64.AppImage
+          asset_name: ${{ env.orgName }}-${{ matrix.os }}-${{ matrix.qt_ver }}-${{ env.VERSION }}-x86_64.AppImage
           
           tag: ${{ github.ref }}
           overwrite: true     
