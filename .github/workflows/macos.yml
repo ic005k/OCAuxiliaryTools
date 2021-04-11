@@ -24,6 +24,7 @@ jobs:
     env:
       targetName: OCAuxiliaryTools
       VERSION: Mac
+      orgName: OCAT
       
     steps:
       - name: Install Qt
@@ -52,7 +53,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           #name: ${{ env.targetName }}_${{ matrix.os }}_${{matrix.qt_ver}} # .zip
-          name: ${{ env.targetName }}_${{ env.VERSION }}
+          name: ${{ env.orgName }}_${{ env.VERSION }}
           path: bin/release/${{ env.targetName }}.dmg
           
       # tag 上传Release
@@ -64,7 +65,7 @@ jobs:
           file: bin/release/${{ env.targetName }}.dmg
           
           #asset_name: ${{ env.targetName }}_${{ matrix.os }}_${{ matrix.qt_ver }}.dmg
-          asset_name: ${{ env.targetName }}_${{ env.VERSION }}.dmg
+          asset_name: ${{ env.orgName }}_${{ env.VERSION }}.dmg
           
           tag: ${{ github.ref }}
           overwrite: true
