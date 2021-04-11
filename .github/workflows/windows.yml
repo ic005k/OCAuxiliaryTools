@@ -33,7 +33,7 @@ jobs:
     env:
       targetName: OCAuxiliaryTools.exe
       VERSION: Win64
-      orgName: OCAuxiliaryTools
+      orgName: OCAT
       
     # 步骤
     steps:
