@@ -28,6 +28,8 @@ jobs:
           
     env:
       targetName: OCAuxiliaryTools.exe
+      orgName: OCAT
+      
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2.13.0
@@ -67,7 +69,9 @@ jobs:
       - name: package
         id: package      
         env:
-          archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
+          #archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
+          archiveName: ${{ env.orgName }}-${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
+          
         shell: pwsh
         run: |
           & scripts\windows-mingw-publish.ps1 ${env:archiveName} ${env:targetName}
