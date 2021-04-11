@@ -6750,8 +6750,8 @@ void MainWindow::init_Menu()
     }
 
     if (linuxOS) {
-        ui->listMain->setMaximumHeight(70);
-        ui->listSub->setMaximumHeight(28);
+        ui->listMain->setMaximumHeight(75);
+        ui->listSub->setMaximumHeight(32);
     }
 
     ui->listMain->setViewMode(QListView::ListMode);
