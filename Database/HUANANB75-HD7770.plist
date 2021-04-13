@@ -1205,7 +1205,7 @@ bGVyICMy</data>
                 <key>AppleEvent</key>
                 <string>Auto</string>
                 <key>CustomDelays</key>
-                <string>Auto</string>
+                <true />
                 <key>KeyInitialDelay</key>
                 <integer>0</integer>
                 <key>KeySubsequentDelay</key>
@@ -1337,9 +1337,13 @@ bGVyICMy</data>
                 <false />
                 <key>ExitBootServicesDelay</key>
                 <integer>0</integer>
+                <key>ForgeUefiSupport</key>
+                <false />
                 <key>IgnoreInvalidFlexRatio</key>
                 <true />
                 <key>ReleaseUsbOwnership</key>
+                <false />
+                <key>ReloadOptionRoms</key>
                 <false />
                 <key>RequestBootVarRouting</key>
                 <true />
