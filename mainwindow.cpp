@@ -11371,6 +11371,8 @@ void MainWindow::on_actionUpgrade_OC_triggered()
 void MainWindow::on_cboxTextColor_currentIndexChanged(int index)
 {
 
+    Q_UNUSED(index);
+
     QStringList textColor;
     textColor.append("#000000");
     textColor.append("#000098");
@@ -11433,15 +11435,17 @@ void MainWindow::on_cboxTextColor_currentIndexChanged(int index)
 
     ui->editIntConsoleAttributes->setText(QString::number(total));
 
-    QPalette pe;
-    pe = ui->lblColorEffect->palette();
-    pe.setColor(QPalette::Background, QColor(backColor.at(bcIndex)));
-    ui->lblColorEffect->setAutoFillBackground(true);
-    if (total != 0)
-        pe.setColor(QPalette::WindowText, QColor(textColor.at(tcIndex)));
-    else
-        pe.setColor(QPalette::WindowText, Qt::white);
-    ui->lblColorEffect->setPalette(pe);
+    if (bcIndex >= 0 && tcIndex >= 0) {
+        QPalette pe;
+        pe = ui->lblColorEffect->palette();
+        pe.setColor(QPalette::Background, QColor(backColor.at(bcIndex)));
+        ui->lblColorEffect->setAutoFillBackground(true);
+        if (total != 0)
+            pe.setColor(QPalette::WindowText, QColor(textColor.at(tcIndex)));
+        else
+            pe.setColor(QPalette::WindowText, Qt::white);
+        ui->lblColorEffect->setPalette(pe);
+    }
 }
 
 void MainWindow::on_cboxBackColor_currentIndexChanged(int index)
