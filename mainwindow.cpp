@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget* parent)
 {
 
     ui->setupUi(this);
-
+    Initialization = true;
     loading = true;
 
     loadLocal();
@@ -184,6 +184,7 @@ MainWindow::MainWindow(QWidget* parent)
     on_btnCheckUpdate();
 
     loading = false;
+    Initialization = false;
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -11447,7 +11448,7 @@ void MainWindow::on_cboxTextColor_currentIndexChanged(int index)
 
     ui->editIntConsoleAttributes->setText(QString::number(total));
 
-    if (bcIndex >= 0 && tcIndex >= 0) {
+    if (bcIndex >= 0 && tcIndex >= 0 && !Initialization) {
         QPalette pe;
         pe = ui->lblColorEffect->palette();
         pe.setColor(QPalette::Background, QColor(backColor.at(bcIndex)));

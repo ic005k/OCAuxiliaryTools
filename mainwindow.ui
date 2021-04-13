@@ -8017,22 +8017,28 @@ An APFS EFI driver is bundled in all bootable APFS containers. This option perfo
                 </item>
                </layout>
               </widget>
-              <widget class="QCalendarWidget" name="calendarWidget">
+              <widget class="QWidget" name="gridLayoutWidget_8">
                <property name="geometry">
                 <rect>
-                 <x>510</x>
+                 <x>500</x>
                  <y>20</y>
-                 <width>304</width>
-                 <height>284</height>
+                 <width>531</width>
+                 <height>281</height>
                 </rect>
                </property>
-               <property name="selectedDate">
-                <date>
-                 <year>2018</year>
-                 <month>6</month>
-                 <day>21</day>
-                </date>
-               </property>
+               <layout class="QGridLayout" name="gridLayout_74">
+                <item row="0" column="0">
+                 <widget class="QCalendarWidget" name="calendarWidget">
+                  <property name="selectedDate">
+                   <date>
+                    <year>2018</year>
+                    <month>6</month>
+                    <day>21</day>
+                   </date>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </widget>
              </widget>
              <widget class="QWidget" name="tabUEFI2">

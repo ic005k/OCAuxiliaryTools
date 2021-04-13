@@ -63,6 +63,7 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    bool Initialization = false;
     void setCheckBoxWidth(QCheckBox* cbox);
     void mount_esp_mac(QString strEfiDisk);
     QString getDatabaseVer();
