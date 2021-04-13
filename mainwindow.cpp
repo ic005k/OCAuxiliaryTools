@@ -1190,6 +1190,62 @@ void MainWindow::initui_misc()
     pe.setColor(QPalette::WindowText, Qt::white);
     ui->lblColorEffect->setPalette(pe);
 
+    textColor.append("#000000");
+    textColor.append("#000098");
+    textColor.append("#009800");
+    textColor.append("#009898");
+    textColor.append("#980000");
+    textColor.append("#980098");
+    textColor.append("#989800");
+    textColor.append("#bfbfbf");
+    textColor.append("#303030");
+    textColor.append("#0000ff");
+    textColor.append("#00ff00");
+    textColor.append("#00ffff");
+    textColor.append("#ff0000");
+    textColor.append("#ff00ff");
+    textColor.append("#ffff00");
+    textColor.append("#ffffff");
+
+    backColor.append("#000000");
+    backColor.append("#000098");
+    backColor.append("#009800");
+    backColor.append("#009898");
+    backColor.append("#980000");
+    backColor.append("#980098");
+    backColor.append("#989800");
+    backColor.append("#bfbfbf");
+
+    //添加颜色下拉框,字色
+    QStringList itemList;
+    for (int i = 0; i < ui->cboxTextColor->count(); i++) {
+        itemList.append(ui->cboxTextColor->itemText(i));
+    }
+    ui->cboxTextColor->clear();
+
+    for (int i = 0; i < textColor.count(); i++) {
+        QPixmap pix(QSize(100, 20));
+        pix.fill(QColor(textColor.at(i)));
+        ui->cboxTextColor->addItem(QIcon(pix), itemList.at(i));
+        ui->cboxTextColor->setIconSize(QSize(70, 20));
+        ui->cboxTextColor->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    }
+
+    // 背景色
+    itemList.clear();
+    for (int i = 0; i < ui->cboxBackColor->count(); i++) {
+        itemList.append(ui->cboxBackColor->itemText(i));
+    }
+    ui->cboxBackColor->clear();
+
+    for (int i = 0; i < backColor.count(); i++) {
+        QPixmap pix(QSize(100, 20));
+        pix.fill(QColor(backColor.at(i)));
+        ui->cboxBackColor->addItem(QIcon(pix), itemList.at(i));
+        ui->cboxBackColor->setIconSize(QSize(70, 20));
+        ui->cboxBackColor->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    }
+
     //Debug
     QRegExp regx("[A-Fa-f0-9]{2}"); //两位16进制
     QValidator* validator = new QRegExpValidator(regx, ui->editTargetHex);
@@ -11357,34 +11413,6 @@ void MainWindow::on_cboxTextColor_currentIndexChanged(int index)
 
     Q_UNUSED(index);
 
-    QStringList textColor;
-    textColor.append("#000000");
-    textColor.append("#000098");
-    textColor.append("#009800");
-    textColor.append("#009898");
-    textColor.append("#980000");
-    textColor.append("#980098");
-    textColor.append("#989800");
-    textColor.append("#bfbfbf");
-    textColor.append("#303030");
-    textColor.append("#0000ff");
-    textColor.append("#00ff00");
-    textColor.append("#00ffff");
-    textColor.append("#ff0000");
-    textColor.append("#ff00ff");
-    textColor.append("#ffff00");
-    textColor.append("#ffffff");
-
-    QStringList backColor;
-    backColor.append("#000000");
-    backColor.append("#000098");
-    backColor.append("#009800");
-    backColor.append("#009898");
-    backColor.append("#980000");
-    backColor.append("#980098");
-    backColor.append("#989800");
-    backColor.append("#bfbfbf");
-
     textColorInt.clear();
     textColorInt.append(0);
     textColorInt.append(1);
@@ -11584,7 +11612,13 @@ void MainWindow::readResultPassHash()
 
 void MainWindow::on_toolButton_clicked()
 {
-    ui->calendarWidget->setVisible(true);
+    if (ui->toolButton->text() == tr("Select date")) {
+        ui->calendarWidget->setVisible(true);
+        ui->toolButton->setText(tr("Hide"));
+    } else if (ui->toolButton->text() == tr("Hide")) {
+        ui->calendarWidget->setVisible(false);
+        ui->toolButton->setText(tr("Select date"));
+    }
 }
 
 void MainWindow::on_calendarWidget_selectionChanged()

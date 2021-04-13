@@ -858,6 +858,9 @@ private:
     QString CurVerison = "V1.0";
     QString ocVer;
 
+    QStringList backColor;
+    QStringList textColor;
+
     QString CurrentDateTime;
 
     void reg_win();
