@@ -258,6 +258,7 @@ protected:
 #endif // QT_NO_CONTEXTMENU
 
 private slots:
+    void readResultPassHash();
     void clearFindTexts();
     void copyText(QListWidget* listW);
     void OpenDir_clicked();
@@ -645,7 +646,7 @@ private slots:
 
     void on_chkPA5_clicked();
     void on_editIntTarget_textChanged(const QString& arg1);
-    void on_editHaltLevel_textChanged(const QString& arg1);
+    void on_editIntHaltLevel_textChanged(const QString& arg1);
 
     void on_tabACPI_currentChanged(int index);
 
@@ -803,6 +804,32 @@ private slots:
 
     void on_actionDiscussion_Forum_triggered();
 
+    void on_cboxTextColor_currentIndexChanged(int index);
+
+    void on_cboxBackColor_currentIndexChanged(int index);
+
+    void on_editIntConsoleAttributes_textChanged(const QString& arg1);
+
+    void on_chkT1_clicked();
+
+    void on_chkT2_clicked();
+
+    void on_chkT3_clicked();
+
+    void on_chkT4_clicked();
+
+    void on_chkT5_clicked();
+
+    void on_chkT6_clicked();
+
+    void on_chkT7_clicked();
+
+    void on_btnGetPassHash_clicked();
+
+    void on_toolButton_clicked();
+
+    void on_calendarWidget_selectionChanged();
+
 private:
     Ui::MainWindow* ui;
 
@@ -861,6 +888,10 @@ private:
     QString strMinKernel;
     QString strPlistPath;
 
+    QVector<int> textColorInt;
+    QVector<int> backColorInt;
+    void Target();
+
     int v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16;
     void method(QVector<int> nums, int sum);
     void method(QVector<int> nums, int sum, QVector<int> list, int index);
@@ -882,6 +913,7 @@ private:
     bool click = false;
 
     int pav1, pav2, pav3, pav4, pav5, pav6;
+    QVector<int> value;
     QVector<QCheckBox*> chk_pa;
     QVector<int> v_pa;
     void PickerAttributes();

@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210412";
+    CurVerison = "20210415";
     title = "OC Auxiliary Tools   V0.6.8 - " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
@@ -1182,6 +1182,13 @@ void MainWindow::initui_misc()
     ui->cboxPickerVariant->addItem("Modern");
     ui->cboxPickerVariant->addItem("Other value");
 
+    QPalette pe;
+    pe = ui->lblColorEffect->palette();
+    pe.setColor(QPalette::Background, Qt::black);
+    ui->lblColorEffect->setAutoFillBackground(true);
+    pe.setColor(QPalette::WindowText, Qt::white);
+    ui->lblColorEffect->setPalette(pe);
+
     //Debug
     QRegExp regx("[A-Fa-f0-9]{2}"); //两位16进制
     QValidator* validator = new QRegExpValidator(regx, ui->editTargetHex);
@@ -1194,6 +1201,7 @@ void MainWindow::initui_misc()
     ui->editIntTarget->setPlaceholderText("000");
 
     // Security
+    ui->btnGetPassHash->setEnabled(false);
 
     ui->cboxDmgLoading->addItem("Disabled");
     ui->cboxDmgLoading->addItem("Signed");
@@ -1204,8 +1212,6 @@ void MainWindow::initui_misc()
     ui->cboxVault->addItem("Secure");
 
     ui->cboxSecureBootModel->setEditable(true);
-    ui->cboxSecureBootModel->addItem("Disabled");
-    ui->cboxSecureBootModel->addItem("Default");
 
     // BlessOverride
     QTableWidgetItem* id0;
@@ -1301,7 +1307,13 @@ void MainWindow::ParserMisc(QVariantMap map)
     hm = map_security["SecureBootModel"].toString().trimmed();
     if (hm == "")
         hm = "Disabled";
-    ui->cboxSecureBootModel->setCurrentText(hm.trimmed());
+    //ui->cboxSecureBootModel->setCurrentText(hm.trimmed());
+
+    for (int i = 0; i < ui->cboxSecureBootModel->count(); i++) {
+        QString str = ui->cboxSecureBootModel->itemText(i);
+        if (str.contains(hm))
+            ui->cboxSecureBootModel->setCurrentIndex(i);
+    }
 
     // BlessOverride(数组)
     QVariantList map_BlessOverride = map["BlessOverride"].toList();
@@ -2138,6 +2150,9 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
 
 void MainWindow::initui_UEFI()
 {
+    // APFS
+    ui->calendarWidget->setVisible(false);
+
     //Audio
     QStringList list;
     list.append("Auto");
@@ -6802,10 +6817,14 @@ void MainWindow::init_Menu()
     ui->listSub->setCurrentRow(index);
 
     //New
+    if (mac || osx1012)
+        ui->actionNewWindow->setIconVisibleInMenu(false);
     ui->actionNewWindow->setIcon(QIcon(":/icon/new.png"));
     ui->toolBar->addAction(ui->actionNewWindow);
 
     //Open
+    if (mac || osx1012)
+        ui->actionOpen->setIconVisibleInMenu(false);
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen);
     ui->actionOpen->setShortcut(tr("ctrl+o"));
     ui->actionOpen->setIcon(QIcon(":/icon/open.png"));
@@ -6821,12 +6840,16 @@ void MainWindow::init_Menu()
     btn0->setMenu(reFileMenu);
 
     //Save
+    if (mac || osx1012)
+        ui->actionSave->setIconVisibleInMenu(false);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::on_btnSave);
     ui->actionSave->setShortcut(tr("ctrl+s"));
     ui->actionSave->setIcon(QIcon(":/icon/save.png"));
     ui->toolBar->addAction(ui->actionSave);
 
     //SaveAs
+    if (mac || osx1012)
+        ui->actionSave_As->setIconVisibleInMenu(false);
     connect(ui->actionSave_As, &QAction::triggered, this, &MainWindow::on_btnSaveAs);
     ui->actionSave_As->setShortcut(tr("ctrl+shift+s"));
     ui->actionSave_As->setIcon(QIcon(":/icon/saveas.png"));
@@ -6839,6 +6862,9 @@ void MainWindow::init_Menu()
 
     //Tools
     //OC Validate
+    if (mac || osx1012)
+        ui->btnOcvalidate->setIconVisibleInMenu(false);
+
     connect(ui->btnOcvalidate, &QAction::triggered, this, &MainWindow::on_btnOcvalidate);
     ui->btnOcvalidate->setShortcut(tr("ctrl+l"));
     ui->btnOcvalidate->setIcon(QIcon(":/icon/ov.png"));
@@ -6847,28 +6873,43 @@ void MainWindow::init_Menu()
     ui->toolBar->addSeparator();
 
     //MountESP
+    if (mac || osx1012)
+        ui->btnMountEsp->setIconVisibleInMenu(false);
+
     connect(ui->btnMountEsp, &QAction::triggered, this, &MainWindow::on_btnMountEsp);
     ui->btnMountEsp->setShortcut(tr("ctrl+m"));
     ui->btnMountEsp->setIcon(QIcon(":/icon/esp.png"));
     ui->toolBar->addAction(ui->btnMountEsp);
 
     //GenerateEFI
+    if (mac || osx1012)
+        ui->actionGenerateEFI->setIconVisibleInMenu(false);
+
     connect(ui->actionGenerateEFI, &QAction::triggered, this, &MainWindow::on_GenerateEFI);
     //ui->actionGenerateEFI->setShortcut(tr("ctrl+e"));
     ui->actionGenerateEFI->setIcon(QIcon(":/icon/efi.png"));
     ui->toolBar->addAction(ui->actionGenerateEFI);
 
     //Update OC Main Program
+    if (mac || osx1012)
+        ui->actionUpgrade_OC->setIconVisibleInMenu(false);
+
     ui->actionUpgrade_OC->setIcon(QIcon(":/icon/um.png"));
     ui->actionUpgrade_OC->setEnabled(false);
     ui->toolBar->addAction(ui->actionUpgrade_OC);
 
     //Open DataBase
+    if (mac || osx1012)
+        ui->actionDatabase->setIconVisibleInMenu(false);
+
     connect(ui->actionDatabase, &QAction::triggered, this, &MainWindow::on_Database);
     ui->actionDatabase->setShortcut(tr("ctrl+d"));
     ui->actionDatabase->setIcon(QIcon(":/icon/db.png"));
     ui->toolBar->addAction(ui->actionDatabase);
 
+    // Open DataBase Dir
+    if (mac || osx1012)
+        ui->actionOpen_database_directory->setIconVisibleInMenu(false);
     ui->actionOpen_database_directory->setIcon(QIcon(":/icon/opendb.png"));
     ui->toolBar->addAction(ui->actionOpen_database_directory);
 
@@ -6906,7 +6947,7 @@ void MainWindow::init_Menu()
 
     ui->actionSave->setEnabled(false);
 
-    //Undo/Redo
+    // Undo/Redo
     undoStack = new QUndoStack(this);
 
     undoView = new QUndoView(undoStack);
@@ -6916,9 +6957,14 @@ void MainWindow::init_Menu()
 
     undoAction = undoStack->createUndoAction(this, tr("Undo"));
     //undoAction->setShortcuts(QKeySequence::Undo);
+    if (mac || osx1012)
+        undoAction->setIconVisibleInMenu(false);
 
     redoAction = undoStack->createRedoAction(this, tr("Redo"));
     //redoAction->setShortcuts(QKeySequence::Redo);
+    if (mac || osx1012)
+        redoAction->setIconVisibleInMenu(false);
+
     ui->menuTools->addSeparator();
     ui->menuTools->addAction(undoAction);
     ui->menuTools->addAction(redoAction);
@@ -6937,16 +6983,22 @@ void MainWindow::init_Menu()
 
     //OC工厂
     ui->toolBar->addSeparator();
+    if (mac || osx1012)
+        ui->actionOpenCore_Factory->setIconVisibleInMenu(false);
     ui->actionOpenCore_Factory->setIcon(QIcon(":/icon/ocf.png"));
     ui->toolBar->addAction(ui->actionOpenCore_Factory);
 
     //检查更新
+    if (mac || osx1012)
+        ui->btnCheckUpdate->setIconVisibleInMenu(false);
     ui->btnCheckUpdate->setIcon(QIcon(":/icon/cu.png"));
     ui->toolBar->addAction(ui->btnCheckUpdate);
 
     ui->toolBar->addSeparator();
 
     //文档
+    if (mac || osx1012)
+        ui->btnHelp->setIconVisibleInMenu(false);
     ui->btnHelp->setIcon(QIcon(":/icon/doc.png"));
     ui->toolBar->addAction(ui->btnHelp);
 
@@ -6991,16 +7043,22 @@ void MainWindow::init_Menu()
     ui->pushButton->setVisible(false);
 
     //查找
+    if (mac || osx1012)
+        ui->actionFind->setIconVisibleInMenu(false);
     ui->actionFind->setShortcut(tr("ctrl+f"));
     ui->actionFind->setIcon(QIcon(":/icon/find.png"));
     ui->toolBar->addAction(ui->actionFind);
 
     //转到上一个
+    if (mac || osx1012)
+        ui->actionGo_to_the_previous->setIconVisibleInMenu(false);
     ui->actionGo_to_the_previous->setShortcut(tr("ctrl+3"));
     ui->actionGo_to_the_previous->setIcon(QIcon(":/icon/1.png"));
     ui->toolBar->addAction(ui->actionGo_to_the_previous);
 
     //转到下一个
+    if (mac || osx1012)
+        ui->actionGo_to_the_next->setIconVisibleInMenu(false);
     ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
     ui->actionGo_to_the_next->setIcon(QIcon(":/icon/2.png"));
     ui->toolBar->addAction(ui->actionGo_to_the_next);
@@ -7008,6 +7066,8 @@ void MainWindow::init_Menu()
     //ui->toolBar->addSeparator();
 
     // Bug Report
+    if (mac || osx1012)
+        ui->actionBug_Report->setIconVisibleInMenu(false);
     ui->actionBug_Report->setIcon(QIcon(":/icon/about.png"));
     //ui->toolBar->addAction(ui->actionBug_Report);
 
@@ -7353,10 +7413,38 @@ void MainWindow::on_editIntTarget_textChanged(const QString& arg1)
 
     ui->editTargetHex->setText(hex.toUpper());
 
+    int total = arg1.toInt();
+
+    chk_pa.clear();
+    chk_pa.append(ui->chkT1);
+    chk_pa.append(ui->chkT2);
+    chk_pa.append(ui->chkT3);
+    chk_pa.append(ui->chkT4);
+    chk_pa.append(ui->chkT5);
+    chk_pa.append(ui->chkT6);
+    chk_pa.append(ui->chkT7);
+
+    v_pa.clear();
+    v_pa.append(1);
+    v_pa.append(2);
+    v_pa.append(4);
+    v_pa.append(8);
+    v_pa.append(16);
+    v_pa.append(32);
+    v_pa.append(64);
+
+    scanPolicy = false;
+    pickerAttributes = true;
+
+    for (int i = 0; i < v_pa.count(); i++)
+        chk_pa.at(i)->setChecked(false);
+
+    method(v_pa, total);
+
     this->setWindowModified(true);
 }
 
-void MainWindow::on_editHaltLevel_textChanged(const QString& arg1)
+void MainWindow::on_editIntHaltLevel_textChanged(const QString& arg1)
 {
     //10 to 16
     unsigned int dec = arg1.toULongLong();
@@ -11080,7 +11168,10 @@ QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab)
         QString strObjName = chkbox->objectName();
         QString name = strObjName.mid(3, strObjName.count() - 2);
 
-        if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG" && chkbox != ui->chk01 && chkbox != ui->chk02 && chkbox != ui->chk04 && chkbox != ui->chk08) {
+        if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG" && chkbox != ui->chk01 && chkbox != ui->chk02 && chkbox != ui->chk04 && chkbox != ui->chk08
+            && chkbox != ui->chkT1 && chkbox != ui->chkT2 && chkbox != ui->chkT3 && chkbox != ui->chkT4 && chkbox != ui->chkT5 && chkbox != ui->chkT6 && chkbox != ui->chkT7)
+
+        {
 
             map.insert(name, getChkBool(chkbox));
         }
@@ -11101,7 +11192,7 @@ QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab)
             name = str0;
 
         // 用name ！= “”过滤掉获取的ComBox里面的edit
-        if (w != ui->editTargetHex && name != "") { // 16进制转换为整数的除外Misc里面
+        if (w != ui->editTargetHex && name != "" && w != ui->editPassInput && name != "pinbox_lineedit") { // 16进制转换为整数的除外Misc里面
 
             if (str0.mid(0, 3) == "Dat")
                 map.insert(name, HexStrToByte(w->text().trimmed()));
@@ -11148,12 +11239,23 @@ QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab)
         QComboBox* w = (QComboBox*)listComboBox.at(i);
         QString name = w->objectName().mid(4, w->objectName().count() - 3);
 
-        if (w != ui->cboxFind) {
+        if (w != ui->cboxFind && w != ui->cboxTextColor && w != ui->cboxBackColor) {
             if (name != "SystemProductName") {
                 map.insert(name, w->currentText().trimmed());
 
             } else
                 map.insert(name, getSystemProductName(w->currentText().trimmed()));
+
+            if (name == "SecureBootModel") {
+                QString cStr = w->currentText().trimmed();
+
+                if (cStr.contains("-")) {
+                    QStringList cList = cStr.split("-");
+                    cStr = cList.at(0);
+                }
+
+                map.insert(name, cStr);
+            }
         }
     }
 
@@ -11264,4 +11366,252 @@ void MainWindow::on_actionUpgrade_OC_triggered()
     }
 
     ui->cboxFind->setFocus();
+}
+
+void MainWindow::on_cboxTextColor_currentIndexChanged(int index)
+{
+
+    QStringList textColor;
+    textColor.append("#000000");
+    textColor.append("#000098");
+    textColor.append("#009800");
+    textColor.append("#009898");
+    textColor.append("#980000");
+    textColor.append("#980098");
+    textColor.append("#989800");
+    textColor.append("#bfbfbf");
+    textColor.append("#303030");
+    textColor.append("#0000ff");
+    textColor.append("#00ff00");
+    textColor.append("#00ffff");
+    textColor.append("#ff0000");
+    textColor.append("#ff00ff");
+    textColor.append("#ffff00");
+    textColor.append("#ffffff");
+
+    QStringList backColor;
+    backColor.append("#000000");
+    backColor.append("#000098");
+    backColor.append("#009800");
+    backColor.append("#009898");
+    backColor.append("#980000");
+    backColor.append("#980098");
+    backColor.append("#989800");
+    backColor.append("#bfbfbf");
+
+    textColorInt.clear();
+    textColorInt.append(0);
+    textColorInt.append(1);
+    textColorInt.append(2);
+    textColorInt.append(3);
+    textColorInt.append(4);
+    textColorInt.append(5);
+    textColorInt.append(6);
+    textColorInt.append(7);
+    textColorInt.append(8);
+    textColorInt.append(9);
+    textColorInt.append(10);
+    textColorInt.append(11);
+    textColorInt.append(12);
+    textColorInt.append(13);
+    textColorInt.append(14);
+    textColorInt.append(15);
+
+    backColorInt.clear();
+    backColorInt.append(0);
+    backColorInt.append(16);
+    backColorInt.append(32);
+    backColorInt.append(48);
+    backColorInt.append(64);
+    backColorInt.append(80);
+    backColorInt.append(96);
+    backColorInt.append(112);
+
+    int bcIndex = ui->cboxBackColor->currentIndex();
+    int tcIndex = ui->cboxTextColor->currentIndex();
+    int total = backColorInt.at(bcIndex) + textColorInt.at(tcIndex);
+
+    ui->editIntConsoleAttributes->setText(QString::number(total));
+
+    QPalette pe;
+    pe = ui->lblColorEffect->palette();
+    pe.setColor(QPalette::Background, QColor(backColor.at(bcIndex)));
+    ui->lblColorEffect->setAutoFillBackground(true);
+    if (total != 0)
+        pe.setColor(QPalette::WindowText, QColor(textColor.at(tcIndex)));
+    else
+        pe.setColor(QPalette::WindowText, Qt::white);
+    ui->lblColorEffect->setPalette(pe);
+}
+
+void MainWindow::on_cboxBackColor_currentIndexChanged(int index)
+{
+    on_cboxTextColor_currentIndexChanged(index);
+}
+
+void MainWindow::on_editIntConsoleAttributes_textChanged(const QString& arg1)
+{
+    int total = arg1.toInt();
+
+    textColorInt.clear();
+    textColorInt.append(0);
+    textColorInt.append(1);
+    textColorInt.append(2);
+    textColorInt.append(3);
+    textColorInt.append(4);
+    textColorInt.append(5);
+    textColorInt.append(6);
+    textColorInt.append(7);
+    textColorInt.append(8);
+    textColorInt.append(9);
+    textColorInt.append(10);
+    textColorInt.append(11);
+    textColorInt.append(12);
+    textColorInt.append(13);
+    textColorInt.append(14);
+    textColorInt.append(15);
+
+    backColorInt.clear();
+    backColorInt.append(0);
+    backColorInt.append(16);
+    backColorInt.append(32);
+    backColorInt.append(48);
+    backColorInt.append(64);
+    backColorInt.append(80);
+    backColorInt.append(96);
+    backColorInt.append(112);
+
+    for (int i = 0; i < textColorInt.count(); i++) {
+
+        for (int j = 0; j < backColorInt.count(); j++) {
+
+            if (total == textColorInt.at(i) + backColorInt.at(j)) {
+                ui->cboxTextColor->setCurrentIndex(i);
+                ui->cboxBackColor->setCurrentIndex(j);
+                break;
+            }
+        }
+    }
+}
+
+void MainWindow::Target()
+{
+    chk_pa.clear();
+    chk_pa.append(ui->chkT1);
+    chk_pa.append(ui->chkT2);
+    chk_pa.append(ui->chkT3);
+    chk_pa.append(ui->chkT4);
+    chk_pa.append(ui->chkT5);
+    chk_pa.append(ui->chkT6);
+    chk_pa.append(ui->chkT7);
+
+    v_pa.clear();
+    v_pa.append(1);
+    v_pa.append(2);
+    v_pa.append(4);
+    v_pa.append(8);
+    v_pa.append(16);
+    v_pa.append(32);
+    v_pa.append(64);
+
+    for (int i = 0; i < v_pa.count(); i++) {
+        if (!chk_pa.at(i)->isChecked()) {
+            v_pa.remove(i);
+            v_pa.insert(i, 0);
+        }
+    }
+
+    int total = 0;
+    for (int i = 0; i < v_pa.count(); i++) {
+        total = total + v_pa.at(i);
+    }
+
+    ui->editIntTarget->setText(QString::number(total));
+}
+
+void MainWindow::on_chkT1_clicked()
+{
+    Target();
+}
+
+void MainWindow::on_chkT2_clicked()
+{
+    Target();
+}
+
+void MainWindow::on_chkT3_clicked()
+{
+    Target();
+}
+
+void MainWindow::on_chkT4_clicked()
+{
+    Target();
+}
+
+void MainWindow::on_chkT5_clicked()
+{
+    Target();
+}
+
+void MainWindow::on_chkT6_clicked()
+{
+    Target();
+}
+
+void MainWindow::on_chkT7_clicked()
+{
+    Target();
+}
+
+void MainWindow::on_btnGetPassHash_clicked()
+{
+    QFileInfo appInfo(qApp->applicationDirPath());
+    QString strPass = ui->editPassInput->text().trimmed();
+    chkdata = new QProcess;
+
+#ifdef Q_OS_WIN32
+    chkdata->start(appInfo.filePath() + "/Database/win/ocpasswordgen.exe", QStringList() << strPass);
+
+#endif
+
+#ifdef Q_OS_LINUX
+    chkdata->start(appInfo.filePath() + "/Database/linux/ocpasswordgen", QStringList() << strPass);
+
+#endif
+
+#ifdef Q_OS_MAC
+
+    chkdata->start(appInfo.filePath() + "/Database/mac/ocpasswordgen", QStringList() << strPass);
+#endif
+
+    connect(chkdata, SIGNAL(finished(int)), this, SLOT(readResultPassHash()));
+}
+
+void MainWindow::readResultPassHash()
+{
+    QString result = chkdata->readAll();
+    qDebug() << result;
+}
+
+void MainWindow::on_toolButton_clicked()
+{
+    ui->calendarWidget->setVisible(true);
+}
+
+void MainWindow::on_calendarWidget_selectionChanged()
+{
+    QString y, m, d;
+    y = QString::number(ui->calendarWidget->selectedDate().year());
+    m = QString::number(ui->calendarWidget->selectedDate().month());
+    d = QString::number(ui->calendarWidget->selectedDate().day());
+
+    if (m.count() == 1)
+        m = "0" + m;
+
+    if (d.count() == 1)
+        d = "0" + d;
+
+    QString str = y + m + d;
+    ui->editIntMinDate->setText(str);
 }
