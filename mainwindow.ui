@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7855,7 +7855,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>7</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -8065,10 +8065,32 @@ An APFS EFI driver is bundled in all bootable APFS containers. This option perfo
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_24">
-                <item row="3" column="1">
-                 <widget class="QLineEdit" name="editIntKeySubsequentDelay">
+                <item row="5" column="1">
+                 <widget class="QLineEdit" name="editIntPointerSpeedMul">
                   <property name="text">
-                   <string>5</string>
+                   <string>1</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0">
+                 <widget class="QLabel" name="label_117">
+                  <property name="toolTip">
+                   <string>Type: plist integer
+
+Description: Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol.
+
+Configures the multiplier for pointer movements. The Apple OEM default value is 1.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现的Apple Event协议中配置指针速度乘数。
+
+配置指针移动的乘数。Apple OEM的默认值是1。</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true">PointerSpeedMul</string>
                   </property>
                  </widget>
                 </item>
@@ -8076,6 +8098,28 @@ An APFS EFI driver is bundled in all bootable APFS containers. This option perfo
                  <widget class="QLineEdit" name="editIntKeyInitialDelay">
                   <property name="text">
                    <string>0</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QLabel" name="label_112">
+                  <property name="toolTip">
+                   <string>Type: plist integer
+
+Description: Configure pointer speed divisor in OpenCore implementation of Apple Event protocol.
+
+Configures the divisor for pointer movements. The Apple OEM default value is 1. 0 is an invalid value for this option.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现的Apple Event协议中配置指针速度分位器。
+
+配置指针移动的分度。Apple OEM的默认值是1，0是这个选项的无效值。</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true">PointerSpeedDiv</string>
                   </property>
                  </widget>
                 </item>
@@ -8104,29 +8148,11 @@ An APFS EFI driver is bundled in all bootable APFS containers. This option perfo
                   </item>
                  </widget>
                 </item>
-                <item row="1" column="1">
-                 <widget class="QComboBox" name="cboxCustomDelays">
-                  <property name="editable">
-                   <bool>true</bool>
+                <item row="4" column="1">
+                 <widget class="QLineEdit" name="editIntPointerSpeedDiv">
+                  <property name="text">
+                   <string>1</string>
                   </property>
-                  <property name="currentText">
-                   <string notr="true">Auto</string>
-                  </property>
-                  <item>
-                   <property name="text">
-                    <string notr="true">Auto</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string notr="true">Enabled</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string notr="true">Disabled</string>
-                   </property>
-                  </item>
                  </widget>
                 </item>
                 <item row="3" column="0">
@@ -8150,30 +8176,6 @@ When using KeySupport, you may find that you get one additional slow key repeat 
                   </property>
                   <property name="text">
                    <string notr="true">KeySubsequentDelay</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label_116">
-                  <property name="toolTip">
-                   <string>Type: plist integer
-
-Description: Configure initial keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
-
-When not using KeySupport, this option will configure the initial delay before key repeat as expected. The Apple OEM default value is 50 (500ms).
-When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, your initial key repeat delay is being driven by your BIOS firmware and cannot be overriden by OC. To avoid this minor undesired effect, set KeyInitialDelay to 0. If doing this, to avoid multiple reponses to single key presses, you should set KeySubsequentDelay to at least the value of your KeyForgetThreshold setting.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现Apple Event协议中配置初始键盘重复延迟，单位为10ms。
-
-当不使用 KeySupport 时，该选项将按预期配置按键重复前的初始延迟。Apple OEM默认值为50（500ms）。
-使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，您的初始按键重复延迟是由BIOS固件驱动的，不能由OC覆盖。如果这样做，为了避免单一按键的多次响应，您应该将KeySubsequentDelay至少设置为KeyForgetThreshold设置的值。</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">KeyInitialDelay</string>
                   </property>
                  </widget>
                 </item>
@@ -8211,91 +8213,58 @@ This option determines whether Apple’s OEM Apple Event protocol is used (where
                   </property>
                  </widget>
                 </item>
+                <item row="3" column="1">
+                 <widget class="QLineEdit" name="editIntKeySubsequentDelay">
+                  <property name="text">
+                   <string>5</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_116">
+                  <property name="toolTip">
+                   <string>Type: plist integer
+
+Description: Configure initial keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
+
+When not using KeySupport, this option will configure the initial delay before key repeat as expected. The Apple OEM default value is 50 (500ms).
+When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, your initial key repeat delay is being driven by your BIOS firmware and cannot be overriden by OC. To avoid this minor undesired effect, set KeyInitialDelay to 0. If doing this, to avoid multiple reponses to single key presses, you should set KeySubsequentDelay to at least the value of your KeyForgetThreshold setting.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现Apple Event协议中配置初始键盘重复延迟，单位为10ms。
+
+当不使用 KeySupport 时，该选项将按预期配置按键重复前的初始延迟。Apple OEM默认值为50（500ms）。
+使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，您的初始按键重复延迟是由BIOS固件驱动的，不能由OC覆盖。如果这样做，为了避免单一按键的多次响应，您应该将KeySubsequentDelay至少设置为KeyForgetThreshold设置的值。</string>
+                  </property>
+                  <property name="text">
+                   <string notr="true">KeyInitialDelay</string>
+                  </property>
+                 </widget>
+                </item>
                 <item row="1" column="0">
-                 <widget class="QLabel" name="label_115">
+                 <widget class="QCheckBox" name="chkCustomDelays">
                   <property name="toolTip">
-                   <string>Type: plist string
+                   <string>Type: plist boolean
 
-Description: Enable custom key repeat delays.
+Description: Enable custom key repeat delays when using the OpenCore implementation of the Apple Event protocol. Has no effect when using the OEM Apple implementation (see AppleEvent setting).
 
-• If Auto is treated as Enabled when KeySupport is true and Disabled otherwise.
-
-• If Enabled the values KeyInitialDelay and KeySubsequentDelay are used.
-
-• If Disabled Apple default values of 500ms (50) and 50ms (5) are used.
+• true — The values of KeyInitialDelay and KeySubsequentDelay are used.
+• false — Apple default values of 500ms (50) and 50ms (5) are used.
 
 ----
 
-类型：plist字符串
+类型：plist boolean
 
-说明：启用自定义按键重复延迟。
+说明：当使用 Apple Event 协议的 OpenCore 实现时，启用自定义键重复延迟。使用 OEM Apple 实现时没有影响（请参见 AppleEvent 设置）。
 
-- 如果Auto，在KeySupport为true时视为Enabled，否则视为Disabled。
-
-- 如果Enabled，则使用KeyInitialDelay和KeySubsequentDelay的值。
-
-- 如果Disabled，则使用Apple默认值500ms (50)和50ms (5)。</string>
+- true - 使用 KeyInitialDelay 和 KeySubsequentDelay 的值。
+- false - 使用 500ms (50) 和 50ms (5) 的 Apple 默认值。</string>
                   </property>
                   <property name="text">
-                   <string notr="true">CustomDelays</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QLabel" name="label_112">
-                  <property name="toolTip">
-                   <string>Type: plist integer
-
-Description: Configure pointer speed divisor in OpenCore implementation of Apple Event protocol.
-
-Configures the divisor for pointer movements. The Apple OEM default value is 1. 0 is an invalid value for this option.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现的Apple Event协议中配置指针速度分位器。
-
-配置指针移动的分度。Apple OEM的默认值是1，0是这个选项的无效值。</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">PointerSpeedDiv</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="0">
-                 <widget class="QLabel" name="label_117">
-                  <property name="toolTip">
-                   <string>Type: plist integer
-
-Description: Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol.
-
-Configures the multiplier for pointer movements. The Apple OEM default value is 1.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现的Apple Event协议中配置指针速度乘数。
-
-配置指针移动的乘数。Apple OEM的默认值是1。</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">PointerSpeedMul</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="1">
-                 <widget class="QLineEdit" name="editIntPointerSpeedDiv">
-                  <property name="text">
-                   <string>1</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="1">
-                 <widget class="QLineEdit" name="editIntPointerSpeedMul">
-                  <property name="text">
-                   <string>1</string>
+                   <string>CustomDelays</string>
                   </property>
                  </widget>
                 </item>
@@ -9499,6 +9468,132 @@ However, in case FakeSMC kernel extension is used, manual NVRAM key variable add
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_31">
+                <item row="2" column="0">
+                 <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
+                  <property name="toolTip">
+                   <string>Note: While the option is not expected to harm unaffected firmware, its use is recommended only when specifically required.
+----
+注意：虽然预计该选项不会损害未受影响的固件，但只建议在特别需要时使用。</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
+ register. These values may cause macOS boot failure on Intel platforms.</string>
+                  </property>
+                  <property name="text">
+                   <string>IgnoreInvalidFlexRatio</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QCheckBox" name="chkRequestBootVarRouting">
+                  <property name="toolTip">
+                   <string>This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible with macOS boot entries by design.
+----
+该选项需要OC_FIRMWARE_RUNTIME协议在OpenRuntime.efi中实现。当固件删除不兼容的启动项时，该选项可以让默认的启动项保存。简单的说，你需要启用这个选项，才能在设计上与macOS启动项不兼容的固件中可靠的使用启动盘偏好面板。</string>
+                  </property>
+                  <property name="statusTip">
+                   <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
+ OC_VENDOR_VARIABLE_GUID.</string>
+                  </property>
+                  <property name="text">
+                   <string>RequestBootVarRouting</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QCheckBox" name="chkReleaseUsbOwnership">
+                  <property name="toolTip">
+                   <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system may freeze upon boot. Not recommended unless required.
+----
+尝试将USB控制器的所有权从固件驱动程序中分离出来。虽然大多数固件都能正确地做到这一点，或者至少有一个选项，但有些固件却做不到。因此，操作系统可能在启动时冻结。除非需要，否则不建议使用。</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
+ manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
+ may freeze upon boot. Not recommended unless required.</string>
+                  </property>
+                  <property name="text">
+                   <string>ReleaseUsbOwnership</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="1">
+                 <widget class="QLineEdit" name="editIntExitBootServicesDelay">
+                  <property name="minimumSize">
+                   <size>
+                    <width>200</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>150</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="0">
+                 <widget class="QLabel" name="label_28">
+                  <property name="toolTip">
+                   <string>This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,namely ASUS Z87-Pro, when using FileVault 2 in particular. 
+
+It seems that for some reason they execute code in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. 
+
+A better approach should be found in some future. Expect 3-5 seconds to be enough in case the quirk is needed.
+----
+这是一个非常简陋的选项，以避免在选择APTIO 4固件，即华硕Z87-Pro上出现“仍在等待根设备”的消息，特别是在使用FileVault 2时。
+
+似乎出于某种原因，它们并行执行退出_启动_服务的代码，这导致SATA控制器无法从macOS访问。
+
+将来应该会找到更好的方法，目前采用它以防不时之需。</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</string>
+                  </property>
+                  <property name="text">
+                   <string>ExitBootServicesDelay</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="0">
+                 <widget class="QLabel" name="label_29">
+                  <property name="toolTip">
+                   <string>The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds and depends on the amount of cores present on the platform, the recommended starting value is 500000.
+
+This is an experimental quirk, which should only be used for the aforementioned problem. In all other cases the quirk may render the operating system unstable and is not recommended. The recommended solution in the other cases is to install a kernel driver like VoodooTSCSync, TSCAdjustReset, or CpuTscSync (a more specialised variant of VoodooTSCSync for newer laptops).
+
+Note: The reason this quirk cannot replace the kernel driver is because it cannot operate in ACPI S3 mode (sleep wake) and because the UEFI firmwares provide very limited multicore support preventing the precise update of the MSR registers.
+----
+该选项的主要目的是在运行调试XNU内核时，在一些服务器和笔记本型号上实现早期的引导TSC同步。对于调试内核，在任何kext启动之前，TSC需要在各个内核之间保持同步，从而使所有其他解决方案出现问题。超时时间以微秒为单位，取决于平台上的核心数量，推荐的起始值是500000。
+
+这是一个实验性的选项，只能用于上述问题。在所有其他情况下，该选项可能会使操作系统不稳定，不建议使用。在其他情况下，推荐的解决方案是安装一个内核驱动，比如VoodooTSCSync、TSCAdjustReset或CpuTscSync（VoodooTSCSync的一个更专业的变种，适用于较新的笔记本电脑）。
+
+注意：该选项不能取代内核驱动的原因是它不能在ACPI S3模式下运行（睡眠唤醒），而且UEFI固件提供的多核支持非常有限，无法精确更新MSR寄存器。</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Attempts to perform TSC synchronisation with a specified timeout.</string>
+                  </property>
+                  <property name="text">
+                   <string>TscSyncTimeout</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chkActivateHpetSupport">
+                  <property name="toolTip">
+                   <string>Older boards like ICH6 may not always have HPET setting in the firmware preferences, this option tries to force enable it.
+----
+旧的板子，如ICH6，可能并不总是有HPET设置在固件首选项中，这个选项试图强制启用它。</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Activates HPET support.</string>
+                  </property>
+                  <property name="text">
+                   <string>ActivateHpetSupport</string>
+                  </property>
+                 </widget>
+                </item>
                 <item row="5" column="0">
                  <widget class="QCheckBox" name="chkUnblockFsConnect">
                   <property name="toolTip">
@@ -9531,117 +9626,6 @@ However, in case FakeSMC kernel extension is used, manual NVRAM key variable add
                   </property>
                  </widget>
                 </item>
-                <item row="8" column="0">
-                 <widget class="QLabel" name="label_29">
-                  <property name="toolTip">
-                   <string>The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds and depends on the amount of cores present on the platform, the recommended starting value is 500000.
-
-This is an experimental quirk, which should only be used for the aforementioned problem. In all other cases the quirk may render the operating system unstable and is not recommended. The recommended solution in the other cases is to install a kernel driver like VoodooTSCSync, TSCAdjustReset, or CpuTscSync (a more specialised variant of VoodooTSCSync for newer laptops).
-
-Note: The reason this quirk cannot replace the kernel driver is because it cannot operate in ACPI S3 mode (sleep wake) and because the UEFI firmwares provide very limited multicore support preventing the precise update of the MSR registers.
-----
-该选项的主要目的是在运行调试XNU内核时，在一些服务器和笔记本型号上实现早期的引导TSC同步。对于调试内核，在任何kext启动之前，TSC需要在各个内核之间保持同步，从而使所有其他解决方案出现问题。超时时间以微秒为单位，取决于平台上的核心数量，推荐的起始值是500000。
-
-这是一个实验性的选项，只能用于上述问题。在所有其他情况下，该选项可能会使操作系统不稳定，不建议使用。在其他情况下，推荐的解决方案是安装一个内核驱动，比如VoodooTSCSync、TSCAdjustReset或CpuTscSync（VoodooTSCSync的一个更专业的变种，适用于较新的笔记本电脑）。
-
-注意：该选项不能取代内核驱动的原因是它不能在ACPI S3模式下运行（睡眠唤醒），而且UEFI固件提供的多核支持非常有限，无法精确更新MSR寄存器。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Attempts to perform TSC synchronisation with a specified timeout.</string>
-                  </property>
-                  <property name="text">
-                   <string>TscSyncTimeout</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="6" column="0">
-                 <widget class="QLabel" name="label_28">
-                  <property name="toolTip">
-                   <string>This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,namely ASUS Z87-Pro, when using FileVault 2 in particular. 
-
-It seems that for some reason they execute code in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. 
-
-A better approach should be found in some future. Expect 3-5 seconds to be enough in case the quirk is needed.
-----
-这是一个非常简陋的选项，以避免在选择APTIO 4固件，即华硕Z87-Pro上出现“仍在等待根设备”的消息，特别是在使用FileVault 2时。
-
-似乎出于某种原因，它们并行执行退出_启动_服务的代码，这导致SATA控制器无法从macOS访问。
-
-将来应该会找到更好的方法，目前采用它以防不时之需。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</string>
-                  </property>
-                  <property name="text">
-                   <string>ExitBootServicesDelay</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QCheckBox" name="chkReleaseUsbOwnership">
-                  <property name="toolTip">
-                   <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system may freeze upon boot. Not recommended unless required.
-----
-尝试将USB控制器的所有权从固件驱动程序中分离出来。虽然大多数固件都能正确地做到这一点，或者至少有一个选项，但有些固件却做不到。因此，操作系统可能在启动时冻结。除非需要，否则不建议使用。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
- manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
- may freeze upon boot. Not recommended unless required.</string>
-                  </property>
-                  <property name="text">
-                   <string>ReleaseUsbOwnership</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
-                  <property name="toolTip">
-                   <string>Note: While the option is not expected to harm unaffected firmware, its use is recommended only when specifically required.
-----
-注意：虽然预计该选项不会损害未受影响的固件，但只建议在特别需要时使用。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
- register. These values may cause macOS boot failure on Intel platforms.</string>
-                  </property>
-                  <property name="text">
-                   <string>IgnoreInvalidFlexRatio</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="6" column="1">
-                 <widget class="QLineEdit" name="editIntExitBootServicesDelay">
-                  <property name="minimumSize">
-                   <size>
-                    <width>200</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>150</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QCheckBox" name="chkRequestBootVarRouting">
-                  <property name="toolTip">
-                   <string>This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible with macOS boot entries by design.
-----
-该选项需要OC_FIRMWARE_RUNTIME协议在OpenRuntime.efi中实现。当固件删除不兼容的启动项时，该选项可以让默认的启动项保存。简单的说，你需要启用这个选项，才能在设计上与macOS启动项不兼容的固件中可靠的使用启动盘偏好面板。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
- OC_VENDOR_VARIABLE_GUID.</string>
-                  </property>
-                  <property name="text">
-                   <string>RequestBootVarRouting</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="1" column="0">
                  <widget class="QCheckBox" name="chkDisableSecurityPolicy">
                   <property name="toolTip">
@@ -9657,18 +9641,47 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="0">
-                 <widget class="QCheckBox" name="chkActivateHpetSupport">
+                <item row="9" column="0">
+                 <widget class="QCheckBox" name="chkForgeUefiSupport">
                   <property name="toolTip">
-                   <string>Older boards like ICH6 may not always have HPET setting in the firmware preferences, this option tries to force enable it.
+                   <string>Type: plist boolean
+
+Description: Implement partial UEFI 2.x support on EFI 1.x firmware.
+
+This setting allows running some software written for UEFI 2.x firmware like NVIDIA GOP Option ROMs on hardware with older EFI 1.x firmware like MacPro5,1.
+
 ----
-旧的板子，如ICH6，可能并不总是有HPET设置在固件首选项中，这个选项试图强制启用它。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Activates HPET support.</string>
+
+类型：plist boolean
+
+描述：在EFI 1.x固件上实现部分UEFI 2.x支持。
+
+此项设置允许在MacPro5,1等旧的EFI 1.x固件上运行一些为UEFI 2.x固件编写的软件，如NVIDIA GOP Option ROM。</string>
                   </property>
                   <property name="text">
-                   <string>ActivateHpetSupport</string>
+                   <string>ForgeUefiSupport</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="1">
+                 <widget class="QCheckBox" name="chkReloadOptionRoms">
+                  <property name="toolTip">
+                   <string>Type: plist boolean
+
+Description: Query PCI devices and reload their Option ROMs if available.
+
+For example, this option allows reloading NVIDIA GOP Option ROM on older Macs after the firmware version is upgraded via ForgeUefiSupport.
+
+----
+
+类型：plist boolean
+
+描述：查询PCI设备并重新加载其可用的Option ROM。
+
+例如，在通过ForgeUefiSupport升级固件版本后，该选项允许在旧的Mac上重新加载NVIDIA GOP Option ROM。</string>
+                  </property>
+                  <property name="text">
+                   <string>ReloadOptionRoms</string>
                   </property>
                  </widget>
                 </item>

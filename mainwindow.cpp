@@ -34,8 +34,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210415";
-    title = "OC Auxiliary Tools   V0.6.8 - " + CurVerison + "        [*] ";
+    CurVerison = "20210416";
+    title = "OC Auxiliary Tools   V0.6.9 - " + CurVerison + "        [*] ";
     setWindowTitle(title);
 
     QFont font;
