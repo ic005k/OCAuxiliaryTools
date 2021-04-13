@@ -830,6 +830,8 @@ private slots:
 
     void on_calendarWidget_selectionChanged();
 
+    void on_btnROM_clicked();
+
 private:
     Ui::MainWindow* ui;
 

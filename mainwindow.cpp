@@ -11615,3 +11615,15 @@ void MainWindow::on_calendarWidget_selectionChanged()
     QString str = y + m + d;
     ui->editIntMinDate->setText(str);
 }
+
+void MainWindow::on_btnROM_clicked()
+{
+
+    QUuid id = QUuid::createUuid();
+    QString strTemp = id.toString();
+    QString strId = strTemp.mid(1, strTemp.count() - 2).toUpper();
+    QStringList strList = strId.split("-");
+    ui->editDatROM->setText(strList.at(4));
+
+    ui->editROM_PNVRAM->setText(ui->editDatROM->text());
+}
