@@ -35,7 +35,8 @@ MainWindow::MainWindow(QWidget* parent)
     loadLocal();
 
     CurVerison = "20210416";
-    title = "OC Auxiliary Tools   V0.6.9 - " + CurVerison + "        [*] ";
+    ocVer = "0.6.9";
+    title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
 
     QFont font;
@@ -7284,24 +7285,7 @@ QString MainWindow::getDatabaseVer()
     QFileInfo appInfo(qApp->applicationDirPath());
     QString strLastModify = QFileInfo(appInfo.filePath() + "/Database/EFI/OC/OpenCore.efi").lastModified().toString();
 
-    QString DatabaseVer;
-    QString fileVer = appInfo.filePath() + "/Database/EFI/ver.txt";
-
-    if (QFileInfo(fileVer).exists()) {
-        QFile file(fileVer);
-        if (!file.open(QFile::ReadOnly | QFile::Text)) {
-            QMessageBox::warning(this, tr("Application"),
-                tr("Cannot read file %1:\n%2.")
-                    .arg(QDir::toNativeSeparators(fileVer), file.errorString()));
-
-        } else {
-
-            QTextStream in(&file);
-            in.setCodec("UTF-8");
-            QString text = in.readAll();
-            DatabaseVer = text + "    " + strLastModify;
-        }
-    }
+    QString DatabaseVer = ocVer + "    " + strLastModify;
 
     return DatabaseVer;
 }

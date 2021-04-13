@@ -856,6 +856,7 @@ private:
     int parse_UpdateJSON(QString str);
 
     QString CurVerison = "V1.0";
+    QString ocVer;
 
     QString CurrentDateTime;
 
