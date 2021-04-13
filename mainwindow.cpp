@@ -144,6 +144,9 @@ MainWindow::MainWindow(QWidget* parent)
 
     ui->gridLayout_69->setMargin(0);
 
+    ui->gridLayout_41->setMargin(0);
+    ui->gridLayout_41->setSpacing(0);
+
     init_tr_str();
 
     initui_booter();
