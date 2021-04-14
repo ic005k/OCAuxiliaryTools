@@ -63,6 +63,7 @@ jobs:
          cp -r Database bin/release/Database
          chmod +x bin/release/Database/linux/macserial
          chmod +x bin/release/Database/linux/ocvalidate
+         chmod +x bin/release/Database/linux/ocpasswordgen
          export VERSION # linuxdeployqt uses this for naming the file
          ./linuxdeployqt-continuous-x86_64.AppImage bin/release/${targetName} -unsupported-allow-new-glibc -appimage
          #chmod +x ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
