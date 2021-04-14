@@ -833,6 +833,8 @@ private slots:
 
     void on_btnROM_clicked();
 
+    void on_editPassInput_textChanged(const QString& arg1);
+
 private:
     Ui::MainWindow* ui;
 

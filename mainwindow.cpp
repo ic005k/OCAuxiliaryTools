@@ -1262,6 +1262,7 @@ void MainWindow::initui_misc()
     ui->editIntTarget->setPlaceholderText("000");
 
     // Security
+
     ui->btnGetPassHash->setEnabled(false);
 
     ui->cboxDmgLoading->addItem("Disabled");
@@ -11586,6 +11587,10 @@ void MainWindow::on_chkT7_clicked()
 
 void MainWindow::on_btnGetPassHash_clicked()
 {
+
+    ui->btnGetPassHash->setEnabled(false);
+    this->repaint();
+
     QFileInfo appInfo(qApp->applicationDirPath());
     QString strPass = ui->editPassInput->text().trimmed();
     chkdata = new QProcess;
@@ -11605,13 +11610,37 @@ void MainWindow::on_btnGetPassHash_clicked()
     chkdata->start(appInfo.filePath() + "/Database/mac/ocpasswordgen", QStringList() << strPass);
 #endif
 
+    chkdata->waitForStarted(); //等待启动完成
+    QString strData = ui->editPassInput->text().trimmed() + "\n";
+    chkdata->write(strData.toStdString().c_str());
+
     connect(chkdata, SIGNAL(finished(int)), this, SLOT(readResultPassHash()));
 }
 
 void MainWindow::readResultPassHash()
 {
     QString result = chkdata->readAll();
-    qDebug() << result;
+    //qDebug() << result;
+    QStringList strList = result.split("\n");
+
+    QStringList strHashList, strSaltList;
+    strHashList = strList.at(1).split(":");
+    strSaltList = strList.at(2).split(":");
+
+    QString strHash, strSalt;
+    strHash = strHashList.at(1);
+    strHash = strHash.replace("<", "");
+    strHash = strHash.replace(">", "").trimmed();
+
+    strSalt = strSaltList.at(1);
+    strSalt = strSalt.replace("<", "");
+    strSalt = strSalt.replace(">", "").trimmed();
+
+    ui->editDatPasswordHash->setText(strHash);
+    ui->editDatPasswordSalt->setText(strSalt);
+
+    ui->btnGetPassHash->setEnabled(true);
+    this->repaint();
 }
 
 void MainWindow::on_toolButton_clicked()
@@ -11652,4 +11681,15 @@ void MainWindow::on_btnROM_clicked()
     ui->editDatROM->setText(strList.at(4));
 
     ui->editROM_PNVRAM->setText(ui->editDatROM->text());
+}
+
+void MainWindow::on_editPassInput_textChanged(const QString& arg1)
+{
+    if (arg1.trimmed().count() > 0) {
+        ui->btnGetPassHash->setEnabled(true);
+        this->repaint();
+    } else {
+        ui->btnGetPassHash->setEnabled(false);
+        this->repaint();
+    }
 }
