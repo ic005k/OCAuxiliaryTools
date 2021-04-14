@@ -6213,106 +6213,99 @@ Added bits to FirmwareFeatures:
            <attribute name="title">
             <string>DataHub</string>
            </attribute>
-           <widget class="QWidget" name="layoutWidget">
-            <property name="geometry">
-             <rect>
-              <x>10</x>
-              <y>12</y>
-              <width>1201</width>
-              <height>391</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_39">
-             <item row="0" column="2">
-              <widget class="QLabel" name="label_47">
-               <property name="toolTip">
-                <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct in ASCII.
+           <layout class="QGridLayout" name="gridLayout_79">
+            <item row="0" column="0">
+             <layout class="QGridLayout" name="gridLayout_39">
+              <item row="0" column="2">
+               <widget class="QLabel" name="label_47">
+                <property name="toolTip">
+                 <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct in ASCII.
 
 ----
 
  设置 gEfiMiscSubClassGuid 中的 board-id。在Mac上找到的值等于SMBIOS BoardProduct的ASCII码。</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct
+                </property>
+                <property name="statusTip">
+                 <string> Sets board-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS BoardProduct
  in ASCII.</string>
-               </property>
-               <property name="text">
-                <string>BoardProduct</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="editDatBoardRevision"/>
-             </item>
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="editDatSmcPlatform"/>
-             </item>
-             <item row="2" column="3">
-              <widget class="QLineEdit" name="editIntInitialTSC"/>
-             </item>
-             <item row="5" column="3">
-              <widget class="QLineEdit" name="editSystemProductName"/>
-             </item>
-             <item row="2" column="2">
-              <widget class="QLabel" name="label_51">
-               <property name="toolTip">
-                <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
-               </property>
-               <property name="text">
-                <string>InitialTSC</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="2">
-              <widget class="QLabel" name="label_55">
-               <property name="toolTip">
-                <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate SMC REV key.
+                </property>
+                <property name="text">
+                 <string>BoardProduct</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="editDatBoardRevision"/>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="editDatSmcPlatform"/>
+              </item>
+              <item row="2" column="3">
+               <widget class="QLineEdit" name="editIntInitialTSC"/>
+              </item>
+              <item row="5" column="3">
+               <widget class="QLineEdit" name="editSystemProductName"/>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="label_51">
+                <property name="toolTip">
+                 <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Sets InitialTSC in gEfiProcessorSubClassGuid. Sets initial TSC value, normally 0.</string>
+                </property>
+                <property name="text">
+                 <string>InitialTSC</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QLabel" name="label_55">
+                <property name="toolTip">
+                 <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate SMC REV key.
 
 ----
 
  设置 gEfiMiscSubClassGuid 中的 REV。自定义属性，由VirtualSMC或FakeSMC读取以生成SMC REV键。</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
+                </property>
+                <property name="statusTip">
+                 <string> Sets REV in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
  SMC REV key.</string>
-               </property>
-               <property name="text">
-                <string>SmcRevision</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QLineEdit" name="editIntDevicePathsSupported"/>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="editPlatformName"/>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="editIntFSBFrequency"/>
-             </item>
-             <item row="0" column="3">
-              <widget class="QLineEdit" name="editBoardProduct"/>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="editIntARTFrequency">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="3">
-              <widget class="QLineEdit" name="editDatSmcBranch"/>
-             </item>
-             <item row="1" column="2">
-              <widget class="QLabel" name="label_49">
-               <property name="toolTip">
-                <string>Sets DevicePathsSupported in gEfiMiscSubClassGuid. 
+                </property>
+                <property name="text">
+                 <string>SmcRevision</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QLineEdit" name="editIntDevicePathsSupported"/>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="editPlatformName"/>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="editIntFSBFrequency"/>
+              </item>
+              <item row="0" column="3">
+               <widget class="QLineEdit" name="editBoardProduct"/>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="editIntARTFrequency">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="3">
+               <widget class="QLineEdit" name="editDatSmcBranch"/>
+              </item>
+              <item row="1" column="2">
+               <widget class="QLabel" name="label_49">
+                <property name="toolTip">
+                 <string>Sets DevicePathsSupported in gEfiMiscSubClassGuid. 
 
 Must be set to 1 for AppleACPIPlatform.kext to append SATA device paths to Boot#### and efi-boot-device-data variables. Set to 1 on all modern Macs.
 
@@ -6321,50 +6314,50 @@ Must be set to 1 for AppleACPIPlatform.kext to append SATA device paths to Boot#
  设置 gEfiMiscSubClassGuid 中的 DevicePathsSupported。
 
 AppleACPIPlatform.kext 必须设置为 1，以便将 SATA 设备路径附加到 Boot#### 和 efi-boot-device-data 变量。在所有现代Mac上都设置为1。</string>
-               </property>
-               <property name="statusTip">
-                <string>Type: plist integer, 32-bit</string>
-               </property>
-               <property name="text">
-                <string>DevicePathsSupported</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_50">
-               <property name="toolTip">
-                <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
-               </property>
-               <property name="text">
-                <string>FSBFrequency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_54">
-               <property name="toolTip">
-                <string> Sets RPlt in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate SMC RPlt key.
+                </property>
+                <property name="statusTip">
+                 <string>Type: plist integer, 32-bit</string>
+                </property>
+                <property name="text">
+                 <string>DevicePathsSupported</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_50">
+                <property name="toolTip">
+                 <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Sets FSBFrequency in gEfiProcessorSubClassGuid.</string>
+                </property>
+                <property name="text">
+                 <string>FSBFrequency</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_54">
+                <property name="toolTip">
+                 <string> Sets RPlt in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate SMC RPlt key.
 
 ----
 
  设置 gEfiMiscSubClassGuid 中的 RPlt。自定义属性，由VirtualSMC或FakeSMC读取以生成SMC RPlt键。
 </string>
-               </property>
-               <property name="statusTip">
-                <string>Type: plist data, 8 bytes</string>
-               </property>
-               <property name="text">
-                <string>SmcPlatform</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_56">
-               <property name="toolTip">
-                <string>Known bits read by X86PlatformPlugin.kext: 
+                </property>
+                <property name="statusTip">
+                 <string>Type: plist data, 8 bytes</string>
+                </property>
+                <property name="text">
+                 <string>SmcPlatform</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_56">
+                <property name="toolTip">
+                 <string>Known bits read by X86PlatformPlugin.kext: 
 
 • 0x00000001 — Shutdown cause was a PWROK event (Same as GEN_PMCON_2 bit 0)
 
@@ -6425,62 +6418,62 @@ X86PlatformPlugin.kext读取的已知位：
 
 - 0x00200000 - 全局复位 PowerManagment Wachdog Timer 事件 (与 PRSTS 位 15 相同)。
 </string>
-               </property>
-               <property name="statusTip">
-                <string> Sets StartupPowerEvents in gEfiMiscSubClassGuid. Value found on Macs is power management
+                </property>
+                <property name="statusTip">
+                 <string> Sets StartupPowerEvents in gEfiMiscSubClassGuid. Value found on Macs is power management
  state bitmask, normally 0.</string>
-               </property>
-               <property name="text">
-                <string>StartupPowerEvents</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="3">
-              <widget class="QLineEdit" name="editDatSmcRevision"/>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_48">
-               <property name="toolTip">
-                <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal board revision (e.g. 01).
+                </property>
+                <property name="text">
+                 <string>StartupPowerEvents</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="3">
+               <widget class="QLineEdit" name="editDatSmcRevision"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_48">
+                <property name="toolTip">
+                 <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal board revision (e.g. 01).
 
 ----
 
  设置 gEfiMiscSubClassGuid 中的 board-rev。在Mac上找到的值似乎对应于内部板的修订版（例如01）。</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal
+                </property>
+                <property name="statusTip">
+                 <string> Sets board-rev in gEfiMiscSubClassGuid. Value found on Macs seems to correspond to internal
  board revision (e.g. 01).</string>
-               </property>
-               <property name="text">
-                <string>BoardRevision</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="editIntStartupPowerEvents"/>
-             </item>
-             <item row="3" column="2">
-              <widget class="QLabel" name="label_53">
-               <property name="toolTip">
-                <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate SMC RBr key.
+                </property>
+                <property name="text">
+                 <string>BoardRevision</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="editIntStartupPowerEvents"/>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLabel" name="label_53">
+                <property name="toolTip">
+                 <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate SMC RBr key.
 
 ----
 
  设置 gEfiMiscSubClassGuid 中的 RBr。自定义属性，由VirtualSMC或FakeSMC读取以生成SMC RBr密钥。</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
+                </property>
+                <property name="statusTip">
+                 <string> Sets RBr in gEfiMiscSubClassGuid. Custom property read by VirtualSMC or FakeSMC to generate
  SMC RBr key.</string>
-               </property>
-               <property name="text">
-                <string>SmcBranch</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_46">
-               <property name="toolTip">
-                <string>This value contains CPU ART frequency, also known as crystal clock frequency. Its existence is exclusive to Skylake generation and newer. 
+                </property>
+                <property name="text">
+                 <string>SmcBranch</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_46">
+                <property name="toolTip">
+                 <string>This value contains CPU ART frequency, also known as crystal clock frequency. Its existence is exclusive to Skylake generation and newer. 
 
 The value is specified in Hz, and is normally 24 MHz for client Intel segment, 25MHz for server Intel segment, and 19.2 MHz for Intel Atom CPUs. macOS till 10.15 inclusive assumes 24 MHz by default.
 
@@ -6493,89 +6486,90 @@ Note: On Intel Skylake X ART frequency may be a little less (approx. 0.25%) than
 该值以Hz为单位，通常客户端英特尔为24MHz，服务器英特尔为25MHz，英特尔Atom CPU为19.2MHz。macOS直到10.15（含），默认为24MHz。
 
 注意：在Intel Skylake X上，由于特殊的EMI-reduction电路，ART频率可能会比24或25MHz少一点（大约0.25%），这在Acidanthera Bugtracker中有描述。</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets ARTFrequency in gEfiProcessorSubClassGuid.</string>
-               </property>
-               <property name="text">
-                <string>ARTFrequency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_52">
-               <property name="toolTip">
-                <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
-               </property>
-               <property name="text">
-                <string>PlatformName</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="2">
-              <widget class="QLabel" name="label_57">
-               <property name="toolTip">
-                <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName in Unicode.
+                </property>
+                <property name="statusTip">
+                 <string>Sets ARTFrequency in gEfiProcessorSubClassGuid.</string>
+                </property>
+                <property name="text">
+                 <string>ARTFrequency</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_52">
+                <property name="toolTip">
+                 <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Sets name in gEfiMiscSubClassGuid. Value found on Macs is platform in ASCII.</string>
+                </property>
+                <property name="text">
+                 <string>PlatformName</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="2">
+               <widget class="QLabel" name="label_57">
+                <property name="toolTip">
+                 <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName in Unicode.
 
 ----
 
  在gEfiMiscSubClassGuid中设置模型。Mac上的值等于Unicode中的SMBIOS SystemProductName。</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName
+                </property>
+                <property name="statusTip">
+                 <string> Sets Model in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemProductName
  in Unicode.</string>
-               </property>
-               <property name="text">
-                <string>SystemProductName</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_58">
-               <property name="toolTip">
-                <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemSerialNumber in Unicode.
+                </property>
+                <property name="text">
+                 <string>SystemProductName</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_58">
+                <property name="toolTip">
+                 <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemSerialNumber in Unicode.
 
 ----
 
 设置gEfiMiscSubClassGuid中的SystemSerialNumber。在Mac上找到的值等于Unicode的SMBIOS SystemSerialNumber。</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS
+                </property>
+                <property name="statusTip">
+                 <string>Sets SystemSerialNumber in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS
  SystemSerialNumber in Unicode.</string>
-               </property>
-               <property name="text">
-                <string>SystemSerialNumber</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QLineEdit" name="editSystemSerialNumber_data"/>
-             </item>
-             <item row="6" column="2">
-              <widget class="QLabel" name="label_59">
-               <property name="toolTip">
-                <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.
+                </property>
+                <property name="text">
+                 <string>SystemSerialNumber</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QLineEdit" name="editSystemSerialNumber_data"/>
+              </item>
+              <item row="6" column="2">
+               <widget class="QLabel" name="label_59">
+                <property name="toolTip">
+                 <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.
 
 ----
 
 设置gEfiMiscSubClassGuid中的系统ID。在Mac上找到的值等于SMBIOS SystemUUID。</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.</string>
-               </property>
-               <property name="text">
-                <string>SystemUUID</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="3">
-              <widget class="QLineEdit" name="editSystemUUID_data"/>
-             </item>
-            </layout>
-           </widget>
+                </property>
+                <property name="statusTip">
+                 <string>Sets system-id in gEfiMiscSubClassGuid. Value found on Macs is equal to SMBIOS SystemUUID.</string>
+                </property>
+                <property name="text">
+                 <string>SystemUUID</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="3">
+               <widget class="QLineEdit" name="editSystemUUID_data"/>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tabPlatformInfo3">
            <attribute name="title">

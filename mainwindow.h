@@ -835,6 +835,8 @@ private slots:
 
     void on_editPassInput_textChanged(const QString& arg1);
 
+    void on_editPassInput_returnPressed();
+
 private:
     Ui::MainWindow* ui;
 
