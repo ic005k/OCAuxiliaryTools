@@ -80,6 +80,8 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat10.png)
 
+![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat11.png)
+
 ### [国内github下载文件推荐](https://toolwa.com/github/)
 
 ### 感谢以下开源软件的支持！
