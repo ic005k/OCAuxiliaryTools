@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1522</width>
-    <height>782</height>
+    <width>1693</width>
+    <height>801</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5023,7 +5023,7 @@ Valid values:
                   <widget class="QLineEdit" name="editPassInput">
                    <property name="maximumSize">
                     <size>
-                     <width>220</width>
+                     <width>280</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -5078,12 +5078,15 @@ Valid values:
                   <widget class="QProgressBar" name="progressBar">
                    <property name="maximumSize">
                     <size>
-                     <width>220</width>
+                     <width>280</width>
                      <height>16777215</height>
                     </size>
                    </property>
                    <property name="value">
                     <number>0</number>
+                   </property>
+                   <property name="textVisible">
+                    <bool>false</bool>
                    </property>
                   </widget>
                  </item>
@@ -10002,8 +10005,8 @@ Enable this option to be able to see all the boot options when having multiple d
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1522</width>
-     <height>24</height>
+     <width>1693</width>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
