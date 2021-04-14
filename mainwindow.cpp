@@ -11592,7 +11592,7 @@ void MainWindow::on_btnGetPassHash_clicked()
     this->repaint();
 
     QFileInfo appInfo(qApp->applicationDirPath());
-    QString strPass = ui->editPassInput->text().trimmed();
+    QString strPass = "";
     chkdata = new QProcess;
 
 #ifdef Q_OS_WIN32
@@ -11612,7 +11612,9 @@ void MainWindow::on_btnGetPassHash_clicked()
 
     chkdata->waitForStarted(); //等待启动完成
     QString strData = ui->editPassInput->text().trimmed() + "\n";
-    chkdata->write(strData.toStdString().c_str());
+    const char* cstr = strData.toLocal8Bit().constData();
+
+    chkdata->write(cstr);
 
     connect(chkdata, SIGNAL(finished(int)), this, SLOT(readResultPassHash()));
 }
