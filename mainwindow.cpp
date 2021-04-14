@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210417";
+    CurVerison = "20210418";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -145,7 +145,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui->gridLayout_69->setMargin(0);
 
     ui->gridLayout_41->setMargin(0);
-    ui->gridLayout_41->setSpacing(0);
+    ui->gridLayout_41->setSpacing(5);
 
     init_tr_str();
 
@@ -11589,6 +11589,7 @@ void MainWindow::on_btnGetPassHash_clicked()
 {
 
     ui->btnGetPassHash->setEnabled(false);
+    ui->progressBar->setMaximum(0);
     this->repaint();
 
     QFileInfo appInfo(qApp->applicationDirPath());
@@ -11641,6 +11642,7 @@ void MainWindow::readResultPassHash()
     ui->editDatPasswordHash->setText(strHash);
     ui->editDatPasswordSalt->setText(strSalt);
 
+    ui->progressBar->setMaximum(100);
     ui->btnGetPassHash->setEnabled(true);
     this->repaint();
 }
@@ -11694,4 +11696,10 @@ void MainWindow::on_editPassInput_textChanged(const QString& arg1)
         ui->btnGetPassHash->setEnabled(false);
         this->repaint();
     }
+}
+
+void MainWindow::on_editPassInput_returnPressed()
+{
+    if (ui->btnGetPassHash->isEnabled())
+        on_btnGetPassHash_clicked();
 }

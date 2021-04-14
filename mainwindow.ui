@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1522</width>
-    <height>799</height>
+    <height>782</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -3022,7 +3022,7 @@ The behaviour corresponds to -legacy kernel boot argument.
         <string>Misc</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_16">
-        <item row="0" column="0">
+        <item row="1" column="0">
          <widget class="QTabWidget" name="tabMisc">
           <property name="tabShape">
            <enum>QTabWidget::Rounded</enum>
@@ -3037,28 +3037,15 @@ The behaviour corresponds to -legacy kernel boot argument.
            <attribute name="title">
             <string>Boot</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_64">
-            <item row="0" column="0" colspan="2">
+           <layout class="QGridLayout" name="gridLayout_71">
+            <item row="0" column="0">
              <widget class="QGroupBox" name="groupBox_9">
               <property name="title">
                <string/>
               </property>
-              <layout class="QGridLayout" name="gridLayout_71">
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
+              <layout class="QGridLayout" name="gridLayout_56">
                <item row="0" column="0">
-                <layout class="QGridLayout" name="gridLayout_56">
-                 <item row="3" column="1">
-                  <widget class="QCheckBox" name="chkPA2">
-                   <property name="text">
-                    <string>OC_ATTR_USE_DISK_LABEL_FILE</string>
-                   </property>
-                  </widget>
-                 </item>
+                <layout class="QGridLayout" name="gridLayout_76">
                  <item row="0" column="2">
                   <widget class="QLabel" name="lblPickerAttributes">
                    <property name="text">
@@ -3066,10 +3053,24 @@ The behaviour corresponds to -legacy kernel boot argument.
                    </property>
                   </widget>
                  </item>
-                 <item row="5" column="0">
+                 <item row="2" column="0">
                   <widget class="QCheckBox" name="chkPA5">
                    <property name="text">
                     <string>OC_ATTR_USE_POINTER_CONTROL</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QCheckBox" name="chkPA2">
+                   <property name="text">
+                    <string>OC_ATTR_USE_DISK_LABEL_FILE</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QCheckBox" name="chkPA1">
+                   <property name="text">
+                    <string>OC_ATTR_USE_VOLUME_ICON</string>
                    </property>
                   </widget>
                  </item>
@@ -3077,37 +3078,9 @@ The behaviour corresponds to -legacy kernel boot argument.
                   <widget class="QLineEdit" name="editIntPickerAttributes">
                    <property name="maximumSize">
                     <size>
-                     <width>300</width>
+                     <width>200</width>
                      <height>16777215</height>
                     </size>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="1">
-                  <widget class="QCheckBox" name="chkPA4">
-                   <property name="text">
-                    <string>OC_ATTR_USE_ALTERNATE_ICONS</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0">
-                  <widget class="QCheckBox" name="chkPA1">
-                   <property name="text">
-                    <string>OC_ATTR_USE_VOLUME_ICON</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="0">
-                  <widget class="QCheckBox" name="chkPA3">
-                   <property name="text">
-                    <string>OC_ATTR_USE_GENERIC_LABEL_IMAGE</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="1">
-                  <widget class="QCheckBox" name="chkPA6">
-                   <property name="text">
-                    <string>OC_ATTR_DEBUG_DISPLAY</string>
                    </property>
                   </widget>
                  </item>
@@ -3134,371 +3107,24 @@ Different OpenCore pickers may be configured through the attribute mask containi
                    </property>
                   </widget>
                  </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QGroupBox" name="groupBox_10">
-              <property name="title">
-               <string/>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_73">
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item row="0" column="0">
-                <layout class="QGridLayout" name="gridLayout_58">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_4">
-                   <property name="toolTip">
-                    <string>Description: Hibernation detection mode. The following modes are supported:
-
-• None — Avoid hibernation for your own good.
-• Auto — Use RTC and NVRAM detection.
-• RTC — Use RTC detection.
-• NVRAM — Use NVRAM detection.
-
-----
-
-休眠检测模式，支持以下模式：
-
-- None - 为了自己的便利避免休眠。
-- Auto - 使用 RTC 和 NVRAM 检测。
-- RTC - 使用 RTC 检测。
-- NVRAM - 使用 NVRAM 检测。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Hibernation detection mode. </string>
-                   </property>
-                   <property name="text">
-                    <string>HibernateMode</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="label_15">
-                   <property name="toolTip">
-                    <string>Default stays for launched OpenCore.efi, any other path, e.g. EFILauncher.efi, can be used to provide custom loaders, which are supposed to load OpenCore.efi themselves.
-
-----
-
-默认停留在启动的OpenCore.efi上，任何其他路径，例如EFILauncher.efi，都可以用来提供自定义的加载器，这些加载器应该自己加载OpenCore.efi。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Launch path for LauncherOption.</string>
-                   </property>
-                   <property name="text">
-                    <string>LauncherPath</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="12" column="2">
-                  <widget class="QLineEdit" name="editIntTimeout"/>
-                 </item>
-                 <item row="13" column="0">
-                  <widget class="QCheckBox" name="chkHideAuxiliary">
-                   <property name="toolTip">
-                    <string>An entry is considered auxiliary when at least one of the following applies:
-
-• Entry is macOS recovery.
-• Entry is macOS Time Machine.
-• Entry is explicitly marked as Auxiliary. 
-• Entry is system (e.g. Reset NVRAM).
-
-To see all entries picker menu needs to be reloaded in extended mode by pressing Spacebar key. Hiding auxiliary entries may increase boot performance for multidisk systems.
-
-----
-
-当至少有一项适用于以下情况时，一个条目被认为是辅助性的：
-
-- 条目是macOS恢复。
-- 条目是 macOS Time Machine。
-- 条目被明确标记为辅助。
-- 条目是系统（如重置NVRAM）。
-
-要查看所有条目，需要在扩展模式下按空格键重新加载选择器菜单。隐藏辅助项可能会提高多盘系统的启动性能。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Hides auxiliary entries from picker menu by default.</string>
-                   </property>
-                   <property name="text">
-                    <string>HideAuxiliary</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="2">
-                  <widget class="QComboBox" name="cboxHibernateMode">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="9" column="0">
-                  <widget class="QLabel" name="label_6">
-                   <property name="toolTip">
-                    <string>Picker describes underlying boot management with an optional user interface responsible for handling boot options. The following values are supported:
-
-• Builtin — boot management is handled by OpenCore, a simple text only user interface is used.
-• External — an external boot management protocol is used if available. Otherwise Builtin mode is used.
-• Apple — Apple boot management is used if available. Otherwise Builtin mode is used.
-
-----
-
-Picker描述了底层的引导管理，有一个可选的用户界面负责处理引导选项。支持以下值：
-
-- Builtin - 引导管理由 OpenCore 处理，使用简单的文本用户界面。
-- External - 如果可用，则使用外部引导管理协议。否则将使用 Builtin 模式。
-- Apple - 如果可用，则使用 Apple 的启动管理。否则使用Builtin模式。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Choose boot picker used for boot management.</string>
-                   </property>
-                   <property name="text">
-                    <string>PickerMode</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="10" column="2">
-                  <widget class="QComboBox" name="cboxPickerVariant">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="2">
-                  <widget class="QComboBox" name="cboxLauncherPath">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="13" column="2">
-                  <widget class="QCheckBox" name="chkPickerAudioAssist">
-                   <property name="toolTip">
-                    <string>Description: Enable screen reader by default in the OpenCore picker.
-
-For the macOS bootloader, screen reader preference is set in the preferences.efires archive in the isVOEnabled.int32 file and is controlled by the operating system. 
-
-For OpenCore screen reader support, this option is an independent equivalent. Toggling screen reader support in both the OpenCore picker and the macOS bootloader FileVault 2 login window can also be done by using the Command + F5 key combination.
-
-Note: The screen reader requires working audio support. Refer to the UEFI Audio Properties section for more details.
-
-----
-
-说明：在OpenCore选择器中默认启用屏幕阅读器。
-
-对于 macOS 引导加载器，屏幕阅读器偏好设置在 isVOEnabled.int32 文件中的 preferences.efires 档案中，并由操作系统控制。
-
-对于OpenCore屏幕阅读器支持，该选项是一个独立的等价物。在OpenCore选取器和macOS bootloader FileVault 2登录窗口中切换屏幕阅读器支持也可以通过使用Command + F5组合键来完成。
-
-注意：屏幕阅读器需要有效的音频支持。请参阅UEFI音频属性部分了解更多细节。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Enable screen reader by default in boot picker.</string>
-                   </property>
-                   <property name="text">
-                    <string>PickerAudioAssist</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="2">
-                  <widget class="QComboBox" name="cboxLauncherOption">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="1" column="0">
-                  <widget class="QLabel" name="label_108">
-                   <property name="toolTip">
-                    <string>Description: Register the launcher option in the firmware preferences for persistence.
-
-Valid values:
-• Disabled — do nothing.
-
-• Full — create or update the top priority boot option in UEFI variable storage at bootloader startup.
-– For this option to work, RequestBootVarRouting is required to be enabled.
-
-• Short — create a short boot option instead of a complete one.
-– This variant is useful for some older types of firmware, typically from Insyde, that are unable to manage full device paths.
-
-• System — create no boot option but assume specified custom option is blessed.
-– This variant is useful when relying on ForceBooterSignature quirk and OpenCore launcher path management happens through bless utilities without involving OpenCore.
-
-This option allows integration with third-party operating system installation and upgrades (which may overwrite the \EFI\BOOT\BOOTx64.efi file). The BOOTx64.efi file is no longer used for bootstrapping OpenCore if a custom option is created. The custom path used for bootstrapping can be specified by using the LauncherPath option.
-
-Note 1 : Some types of firmware may have NVRAM implementation flaws, no boot option support, or other incompatibilities. While unlikely, the use of this option may result in boot failures and should only be used exclusively on boards known to be compatible. Refer to acidanthera/bugtracker#1222 for some known issues affecting Haswell and other boards.
-
-Note 2 : While NVRAM resets executed from OpenCore would not typically erase the boot option created in Bootstrap, executing NVRAM resets prior to loading OpenCore will erase the boot option. Therefore, for significant implementation updates, such as was the case with OpenCore 0.6.4, an NVRAM reset should be executed with Bootstrap disabled, after which it can be re-enabled.
-
-----
-
-说明：在固件偏好设置中注册启动器选项，以实现持久化。
-
-有效值：
-
-- Disabled - 不做任何事情。
-
-- Full - 在启动器启动时在 UEFI 变量存储中创建或更新最高优先级的启动选项。为了使这个选项发挥作用，需要启用 RequestBootVarRouting。
-
-- Short - 创建一个短的启动选项，而不是一个完整的启动选项。这个变量对一些旧固件很有用，尤其是Insyde，但也可能对其他无法处理完整设备路径的固件有用。
-
--System-不创建引导选项，但假设指定的自定义选项是受保护的。
-
-该选项提供了与第三方操作系统的集成，并在第三方操作系统覆盖EFIBOOTBOOTx64.efi文件时进行安装和升级。通过在这个文件中创建一个自定义选项，路径变得不再用于引导OpenCore。用于启动的路径在LauncherPath选项中指定。
-
- 注1：某些类型的固件可能有错误的NVRAM，不支持启动选项，或其他不兼容的情况。虽然不太可能，但使用这个选项可能会导致启动失败。这个选项应该在没有任何保证的情况下，只在已知兼容的板子上使用。查看 acidanthera/bugtracker#1222，了解一些已知的Haswell和其他板卡的问题。
-
-注2：请注意，虽然从OpenCore执行的NVRAM重置不应清除在Bootstrap中创建的启动选项，但在加载OpenCore之前执行NVRAM重置将删除它。对于重要的实现更新（例如在OpenCore 0.6.4中），确保在重新启用之前，在禁用Bootstrap的情况下执行NVRAM重置。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Register the launcher option in the firmware preferences for persistence.</string>
-                   </property>
+                  <widget class="QCheckBox" name="chkPA4">
                    <property name="text">
-                    <string>LauncherOption</string>
+                    <string>OC_ATTR_USE_ALTERNATE_ICONS</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="9" column="2">
-                  <widget class="QComboBox" name="cboxPickerMode">
-                   <property name="editable">
-                    <bool>true</bool>
+                 <item row="3" column="0">
+                  <widget class="QCheckBox" name="chkPA3">
+                   <property name="text">
+                    <string>OC_ATTR_USE_GENERIC_LABEL_IMAGE</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="10" column="0">
-                  <widget class="QLabel" name="label_10">
-                   <property name="toolTip">
-                    <string>The following values are supported:
-
-• Auto — Automatically select one set of icons based on DefaultBackground colour.
-• Default — Normal icon set (without prefix).
-• Old — Vintage icon set (Old filename prefix).
-• Modern — Nouveau icon set (Modern filename prefix).
-• Other value — Custom icon set if supported by the resources.
-
-----
-
-支持以下值：
-
-- Auto - 根据DefaultBackground颜色自动选择一组图标。
-- Default - 普通图标集（无前缀）。
-- Old - 复古图标集（旧文件名前缀）。
-- Modern - Nouveau图标集（现代文件名前缀）。
-- 其他值 - 自定义图标集（如果资源支持）。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Choose specific icon set used for boot management.</string>
-                   </property>
+                 <item row="3" column="1">
+                  <widget class="QCheckBox" name="chkPA6">
                    <property name="text">
-                    <string>PickerVariant</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="11" column="2">
-                  <widget class="QLineEdit" name="editIntTakeoffDelay"/>
-                 </item>
-                 <item row="12" column="0">
-                  <widget class="QLabel" name="label_7">
-                   <property name="toolTip">
-                    <string> Timeout in seconds in boot picker before automatic booting of the default boot entry. Use 0 to  disable timer.
-
-----
-
- 在引导选择器中，默认引导条目自动启动前的超时时间，以秒为单位。使用0来禁用定时器。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Timeout in seconds in boot picker before automatic booting of the default boot entry. Use 0 to
- disable timer.</string>
-                   </property>
-                   <property name="text">
-                    <string>Timeout</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="11" column="0">
-                  <widget class="QLabel" name="label_8">
-                   <property name="toolTip">
-                    <string>Introducing a delay may give extra time to hold the right action hotkey sequence to e.g. boot to recovery mode.
-
-On some platforms setting this option to at least 5000-10000 microseconds may be necessary to access action hotkeys at all due to the nature of the keyboard driver.
-
-----
-
-引入延迟可能会提供额外的时间来保持正确的动作热键序列，例如启动到恢复模式。
-
-在某些平台上，由于键盘驱动程序的特性，将该选项设置为至少5000-10000微秒可能是访问操作热键所必需的。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Delay in microseconds performed before handling picker startup and action hotkeys.</string>
-                   </property>
-                   <property name="text">
-                    <string>TakeoffDelay</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="14" column="0">
-                  <widget class="QCheckBox" name="chkPollAppleHotKeys">
-                   <property name="toolTip">
-                    <string>In addition to action hotkeys, which are partially described in PickerMode section and are normally handled by Apple BDS, there exist modifier keys, which are handled by operating system bootloader, namely boot.efi.
-
-These keys allow to change operating system behaviour by providing different boot modes.
-
-On some firmwares it may be problematic to use modifier keys due to driver incompatibilities. To workaround this problem this option allows registering select hotkeys in a more permissive manner from within boot picker.
-
-Such extensions include the support of tapping on keys in addition to holding and pressing Shift along with other keys instead of just Shift alone, which is not detectible on many PS/2 keyboards. This list of known modifier hotkeys includes:
-
-• CMD+C+MINUS — disable board compatibility checking.
-• CMD+K — boot release kernel, similar to kcsuffix=release. 
-• CMD+S — single user mode.
-• CMD+S+MINUS — disable KASLR slide, requires disabled SIP.
-• CMD+V — verbose mode.
-• Shift — safe mode.
-
-----
-
-除了在 PickerMode 部分描述的、通常由 Apple BDS 处理的动作热键之外，还存在由操作系统 bootloader 处理的修饰键，即 boot.efi。
-
-这些键允许通过提供不同的启动模式来改变操作系统的行为。
-
-在某些固件上，由于驱动程序不兼容，使用修改键可能会有问题。为了解决这个问题，这个选项允许在 Boot picker 中以一种更允许的方式注册选定的热键。
-
-这样的扩展包括支持除了按住Shift键之外，还可以和其他键一起按住Shift键，而不是只按Shift键，这在许多PS/2键盘上是不可检测的。这个已知的修饰热键列表包括：
-
-- CMD+C+MINUS--禁用电路板兼容性检查。
-- CMD+K--启动释放内核，类似于kcsuffix=release。
-- CMD+S - 单用户模式。
-- CMD+S+MINUS - 禁用KASLR幻灯片，需要禁用SIP。
-- CMD+V - verbose模式。
-- Shift - 安全模式。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Enable modifier hotkey handling in boot picker.</string>
-                   </property>
-                   <property name="text">
-                    <string>PollAppleHotKeys</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="14" column="2">
-                  <widget class="QCheckBox" name="chkShowPicker">
-                   <property name="toolTip">
-                    <string>Show simple boot picker to allow boot entry selection.
-
-----
-
-显示简单的引导选择器，以允许选择进入引导。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Show simple boot picker to allow boot entry selection.</string>
-                   </property>
-                   <property name="text">
-                    <string>ShowPicker</string>
+                    <string>OC_ATTR_DEBUG_DISPLAY</string>
                    </property>
                   </widget>
                  </item>
@@ -3507,7 +3133,7 @@ Such extensions include the support of tapping on keys in addition to holding an
               </layout>
              </widget>
             </item>
-            <item row="1" column="1">
+            <item row="0" column="1">
              <widget class="QGroupBox" name="groupBox_5">
               <property name="title">
                <string/>
@@ -3749,6 +3375,389 @@ Note: This option may not work well with System text renderer. Setting a backgro
                   </widget>
                  </item>
                 </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QGroupBox" name="groupBox_10">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_73">
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item row="0" column="0">
+                <layout class="QGridLayout" name="gridLayout_58">
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_15">
+                   <property name="toolTip">
+                    <string>Default stays for launched OpenCore.efi, any other path, e.g. EFILauncher.efi, can be used to provide custom loaders, which are supposed to load OpenCore.efi themselves.
+
+----
+
+默认停留在启动的OpenCore.efi上，任何其他路径，例如EFILauncher.efi，都可以用来提供自定义的加载器，这些加载器应该自己加载OpenCore.efi。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Launch path for LauncherOption.</string>
+                   </property>
+                   <property name="text">
+                    <string>LauncherPath</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="2">
+                  <widget class="QComboBox" name="cboxLauncherPath">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QComboBox" name="cboxLauncherOption">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QComboBox" name="cboxHibernateMode">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="2">
+                  <widget class="QComboBox" name="cboxPickerMode">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="2">
+                  <widget class="QComboBox" name="cboxPickerVariant">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="0">
+                  <widget class="QLabel" name="label_10">
+                   <property name="toolTip">
+                    <string>The following values are supported:
+
+• Auto — Automatically select one set of icons based on DefaultBackground colour.
+• Default — Normal icon set (without prefix).
+• Old — Vintage icon set (Old filename prefix).
+• Modern — Nouveau icon set (Modern filename prefix).
+• Other value — Custom icon set if supported by the resources.
+
+----
+
+支持以下值：
+
+- Auto - 根据DefaultBackground颜色自动选择一组图标。
+- Default - 普通图标集（无前缀）。
+- Old - 复古图标集（旧文件名前缀）。
+- Modern - Nouveau图标集（现代文件名前缀）。
+- 其他值 - 自定义图标集（如果资源支持）。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string> Choose specific icon set used for boot management.</string>
+                   </property>
+                   <property name="text">
+                    <string>PickerVariant</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_108">
+                   <property name="toolTip">
+                    <string>Description: Register the launcher option in the firmware preferences for persistence.
+
+Valid values:
+• Disabled — do nothing.
+
+• Full — create or update the top priority boot option in UEFI variable storage at bootloader startup.
+– For this option to work, RequestBootVarRouting is required to be enabled.
+
+• Short — create a short boot option instead of a complete one.
+– This variant is useful for some older types of firmware, typically from Insyde, that are unable to manage full device paths.
+
+• System — create no boot option but assume specified custom option is blessed.
+– This variant is useful when relying on ForceBooterSignature quirk and OpenCore launcher path management happens through bless utilities without involving OpenCore.
+
+This option allows integration with third-party operating system installation and upgrades (which may overwrite the \EFI\BOOT\BOOTx64.efi file). The BOOTx64.efi file is no longer used for bootstrapping OpenCore if a custom option is created. The custom path used for bootstrapping can be specified by using the LauncherPath option.
+
+Note 1 : Some types of firmware may have NVRAM implementation flaws, no boot option support, or other incompatibilities. While unlikely, the use of this option may result in boot failures and should only be used exclusively on boards known to be compatible. Refer to acidanthera/bugtracker#1222 for some known issues affecting Haswell and other boards.
+
+Note 2 : While NVRAM resets executed from OpenCore would not typically erase the boot option created in Bootstrap, executing NVRAM resets prior to loading OpenCore will erase the boot option. Therefore, for significant implementation updates, such as was the case with OpenCore 0.6.4, an NVRAM reset should be executed with Bootstrap disabled, after which it can be re-enabled.
+
+----
+
+说明：在固件偏好设置中注册启动器选项，以实现持久化。
+
+有效值：
+
+- Disabled - 不做任何事情。
+
+- Full - 在启动器启动时在 UEFI 变量存储中创建或更新最高优先级的启动选项。为了使这个选项发挥作用，需要启用 RequestBootVarRouting。
+
+- Short - 创建一个短的启动选项，而不是一个完整的启动选项。这个变量对一些旧固件很有用，尤其是Insyde，但也可能对其他无法处理完整设备路径的固件有用。
+
+-System-不创建引导选项，但假设指定的自定义选项是受保护的。
+
+该选项提供了与第三方操作系统的集成，并在第三方操作系统覆盖EFIBOOTBOOTx64.efi文件时进行安装和升级。通过在这个文件中创建一个自定义选项，路径变得不再用于引导OpenCore。用于启动的路径在LauncherPath选项中指定。
+
+ 注1：某些类型的固件可能有错误的NVRAM，不支持启动选项，或其他不兼容的情况。虽然不太可能，但使用这个选项可能会导致启动失败。这个选项应该在没有任何保证的情况下，只在已知兼容的板子上使用。查看 acidanthera/bugtracker#1222，了解一些已知的Haswell和其他板卡的问题。
+
+注2：请注意，虽然从OpenCore执行的NVRAM重置不应清除在Bootstrap中创建的启动选项，但在加载OpenCore之前执行NVRAM重置将删除它。对于重要的实现更新（例如在OpenCore 0.6.4中），确保在重新启用之前，在禁用Bootstrap的情况下执行NVRAM重置。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string> Register the launcher option in the firmware preferences for persistence.</string>
+                   </property>
+                   <property name="text">
+                    <string>LauncherOption</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="0">
+                  <widget class="QLabel" name="label_6">
+                   <property name="toolTip">
+                    <string>Picker describes underlying boot management with an optional user interface responsible for handling boot options. The following values are supported:
+
+• Builtin — boot management is handled by OpenCore, a simple text only user interface is used.
+• External — an external boot management protocol is used if available. Otherwise Builtin mode is used.
+• Apple — Apple boot management is used if available. Otherwise Builtin mode is used.
+
+----
+
+Picker描述了底层的引导管理，有一个可选的用户界面负责处理引导选项。支持以下值：
+
+- Builtin - 引导管理由 OpenCore 处理，使用简单的文本用户界面。
+- External - 如果可用，则使用外部引导管理协议。否则将使用 Builtin 模式。
+- Apple - 如果可用，则使用 Apple 的启动管理。否则使用Builtin模式。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string> Choose boot picker used for boot management.</string>
+                   </property>
+                   <property name="text">
+                    <string>PickerMode</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_4">
+                   <property name="toolTip">
+                    <string>Description: Hibernation detection mode. The following modes are supported:
+
+• None — Avoid hibernation for your own good.
+• Auto — Use RTC and NVRAM detection.
+• RTC — Use RTC detection.
+• NVRAM — Use NVRAM detection.
+
+----
+
+休眠检测模式，支持以下模式：
+
+- None - 为了自己的便利避免休眠。
+- Auto - 使用 RTC 和 NVRAM 检测。
+- RTC - 使用 RTC 检测。
+- NVRAM - 使用 NVRAM 检测。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Hibernation detection mode. </string>
+                   </property>
+                   <property name="text">
+                    <string>HibernateMode</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QGroupBox" name="groupBox_15">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_64">
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="chkPickerAudioAssist">
+                 <property name="toolTip">
+                  <string>Description: Enable screen reader by default in the OpenCore picker.
+
+For the macOS bootloader, screen reader preference is set in the preferences.efires archive in the isVOEnabled.int32 file and is controlled by the operating system. 
+
+For OpenCore screen reader support, this option is an independent equivalent. Toggling screen reader support in both the OpenCore picker and the macOS bootloader FileVault 2 login window can also be done by using the Command + F5 key combination.
+
+Note: The screen reader requires working audio support. Refer to the UEFI Audio Properties section for more details.
+
+----
+
+说明：在OpenCore选择器中默认启用屏幕阅读器。
+
+对于 macOS 引导加载器，屏幕阅读器偏好设置在 isVOEnabled.int32 文件中的 preferences.efires 档案中，并由操作系统控制。
+
+对于OpenCore屏幕阅读器支持，该选项是一个独立的等价物。在OpenCore选取器和macOS bootloader FileVault 2登录窗口中切换屏幕阅读器支持也可以通过使用Command + F5组合键来完成。
+
+注意：屏幕阅读器需要有效的音频支持。请参阅UEFI音频属性部分了解更多细节。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Enable screen reader by default in boot picker.</string>
+                 </property>
+                 <property name="text">
+                  <string>PickerAudioAssist</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QCheckBox" name="chkShowPicker">
+                 <property name="toolTip">
+                  <string>Show simple boot picker to allow boot entry selection.
+
+----
+
+显示简单的引导选择器，以允许选择进入引导。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Show simple boot picker to allow boot entry selection.</string>
+                 </property>
+                 <property name="text">
+                  <string>ShowPicker</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QLineEdit" name="editIntTakeoffDelay"/>
+               </item>
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="chkHideAuxiliary">
+                 <property name="toolTip">
+                  <string>An entry is considered auxiliary when at least one of the following applies:
+
+• Entry is macOS recovery.
+• Entry is macOS Time Machine.
+• Entry is explicitly marked as Auxiliary. 
+• Entry is system (e.g. Reset NVRAM).
+
+To see all entries picker menu needs to be reloaded in extended mode by pressing Spacebar key. Hiding auxiliary entries may increase boot performance for multidisk systems.
+
+----
+
+当至少有一项适用于以下情况时，一个条目被认为是辅助性的：
+
+- 条目是macOS恢复。
+- 条目是 macOS Time Machine。
+- 条目被明确标记为辅助。
+- 条目是系统（如重置NVRAM）。
+
+要查看所有条目，需要在扩展模式下按空格键重新加载选择器菜单。隐藏辅助项可能会提高多盘系统的启动性能。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Hides auxiliary entries from picker menu by default.</string>
+                 </property>
+                 <property name="text">
+                  <string>HideAuxiliary</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_8">
+                 <property name="toolTip">
+                  <string>Introducing a delay may give extra time to hold the right action hotkey sequence to e.g. boot to recovery mode.
+
+On some platforms setting this option to at least 5000-10000 microseconds may be necessary to access action hotkeys at all due to the nature of the keyboard driver.
+
+----
+
+引入延迟可能会提供额外的时间来保持正确的动作热键序列，例如启动到恢复模式。
+
+在某些平台上，由于键盘驱动程序的特性，将该选项设置为至少5000-10000微秒可能是访问操作热键所必需的。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Delay in microseconds performed before handling picker startup and action hotkeys.</string>
+                 </property>
+                 <property name="text">
+                  <string>TakeoffDelay</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QCheckBox" name="chkPollAppleHotKeys">
+                 <property name="toolTip">
+                  <string>In addition to action hotkeys, which are partially described in PickerMode section and are normally handled by Apple BDS, there exist modifier keys, which are handled by operating system bootloader, namely boot.efi.
+
+These keys allow to change operating system behaviour by providing different boot modes.
+
+On some firmwares it may be problematic to use modifier keys due to driver incompatibilities. To workaround this problem this option allows registering select hotkeys in a more permissive manner from within boot picker.
+
+Such extensions include the support of tapping on keys in addition to holding and pressing Shift along with other keys instead of just Shift alone, which is not detectible on many PS/2 keyboards. This list of known modifier hotkeys includes:
+
+• CMD+C+MINUS — disable board compatibility checking.
+• CMD+K — boot release kernel, similar to kcsuffix=release. 
+• CMD+S — single user mode.
+• CMD+S+MINUS — disable KASLR slide, requires disabled SIP.
+• CMD+V — verbose mode.
+• Shift — safe mode.
+
+----
+
+除了在 PickerMode 部分描述的、通常由 Apple BDS 处理的动作热键之外，还存在由操作系统 bootloader 处理的修饰键，即 boot.efi。
+
+这些键允许通过提供不同的启动模式来改变操作系统的行为。
+
+在某些固件上，由于驱动程序不兼容，使用修改键可能会有问题。为了解决这个问题，这个选项允许在 Boot picker 中以一种更允许的方式注册选定的热键。
+
+这样的扩展包括支持除了按住Shift键之外，还可以和其他键一起按住Shift键，而不是只按Shift键，这在许多PS/2键盘上是不可检测的。这个已知的修饰热键列表包括：
+
+- CMD+C+MINUS--禁用电路板兼容性检查。
+- CMD+K--启动释放内核，类似于kcsuffix=release。
+- CMD+S - 单用户模式。
+- CMD+S+MINUS - 禁用KASLR幻灯片，需要禁用SIP。
+- CMD+V - verbose模式。
+- Shift - 安全模式。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Enable modifier hotkey handling in boot picker.</string>
+                 </property>
+                 <property name="text">
+                  <string>PollAppleHotKeys</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLabel" name="label_7">
+                 <property name="toolTip">
+                  <string> Timeout in seconds in boot picker before automatic booting of the default boot entry. Use 0 to  disable timer.
+
+----
+
+ 在引导选择器中，默认引导条目自动启动前的超时时间，以秒为单位。使用0来禁用定时器。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Timeout in seconds in boot picker before automatic booting of the default boot entry. Use 0 to
+ disable timer.</string>
+                 </property>
+                 <property name="text">
+                  <string>Timeout</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QLineEdit" name="editIntTimeout"/>
                </item>
               </layout>
              </widget>
@@ -4301,47 +4310,24 @@ Console logging prints less than all the other variants. Depending on the build 
                <string/>
               </property>
               <layout class="QGridLayout" name="gridLayout_45">
-               <property name="leftMargin">
-                <number>12</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item row="2" column="0" colspan="3">
-                <widget class="QCheckBox" name="chk01">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_110">
                  <property name="text">
-                  <string>Expose printable booter path as an UEFI variable</string>
+                  <string>ExposeSensitiveData</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0" colspan="3">
-                <widget class="QCheckBox" name="chk02">
-                 <property name="text">
-                  <string>Expose OpenCore version as an UEFI variable</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0" colspan="3">
-                <widget class="QCheckBox" name="chk04">
-                 <property name="text">
-                  <string>Expose OpenCore version in boot picker menu title</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="0" colspan="3">
-                <widget class="QCheckBox" name="chk08">
-                 <property name="text">
-                  <string>Expose OEM information as a set of UEFI variables</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
+               <item row="0" column="1">
                 <widget class="QLineEdit" name="editIntExposeSensitiveData"/>
                </item>
-               <item row="1" column="2">
+               <item row="0" column="2">
+                <widget class="QLabel" name="lblExposeSensitiveData">
+                 <property name="text">
+                  <string>0x00</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
                 <spacer name="horizontalSpacer_24">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4354,24 +4340,38 @@ Console logging prints less than all the other variants. Depending on the build 
                  </property>
                 </spacer>
                </item>
-               <item row="1" column="1">
-                <widget class="QLabel" name="lblExposeSensitiveData">
+               <item row="1" column="0" colspan="3">
+                <widget class="QCheckBox" name="chk01">
                  <property name="text">
-                  <string>0x00</string>
+                  <string>Expose printable booter path as an UEFI variable</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_110">
+               <item row="2" column="0" colspan="3">
+                <widget class="QCheckBox" name="chk02">
                  <property name="text">
-                  <string>ExposeSensitiveData</string>
+                  <string>Expose OpenCore version as an UEFI variable</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" colspan="3">
+                <widget class="QCheckBox" name="chk04">
+                 <property name="text">
+                  <string>Expose OpenCore version in boot picker menu title</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" colspan="3">
+                <widget class="QCheckBox" name="chk08">
+                 <property name="text">
+                  <string>Expose OEM information as a set of UEFI variables</string>
                  </property>
                 </widget>
                </item>
               </layout>
              </widget>
             </item>
-            <item row="0" column="1">
+            <item row="0" column="1" colspan="2">
              <widget class="QGroupBox" name="groupBox_3">
               <property name="title">
                <string/>
@@ -4685,7 +4685,7 @@ Valid values:
               </layout>
              </widget>
             </item>
-            <item row="1" column="0" colspan="2">
+            <item row="1" column="0" colspan="3">
              <widget class="QGroupBox" name="groupBox_2">
               <property name="statusTip">
                <string> Define operating system detection policy.</string>
@@ -4694,128 +4694,14 @@ Valid values:
                <string/>
               </property>
               <layout class="QGridLayout" name="gridLayout_25">
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>10</number>
-               </property>
-               <item row="3" column="0">
-                <widget class="QCheckBox" name="chk2">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_111">
                  <property name="text">
-                  <string>OC_SCAN_DEVICE_LOCK</string>
+                  <string>ScanPolicy</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="4">
-                <widget class="QCheckBox" name="chk8">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_SATA</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="3">
-                <spacer name="horizontalSpacer_31">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>70</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="2" column="8">
-                <widget class="QCheckBox" name="chk13">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_USB</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="8">
-                <widget class="QCheckBox" name="chk14">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_FIREWIRE</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="7">
-                <spacer name="horizontalSpacer_34">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>70</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="1">
-                <widget class="QLabel" name="lblScanPolicy">
-                 <property name="text">
-                  <string>0x00000000</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="0">
-                <widget class="QCheckBox" name="chk4">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_HFS</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="6">
-                <widget class="QCheckBox" name="chk10">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_SCSI</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="8">
-                <widget class="QCheckBox" name="chk15">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_SDCARD</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QCheckBox" name="chk3">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_APFS</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="5">
-                <spacer name="horizontalSpacer_28">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>71</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="3" column="7">
-                <spacer name="horizontalSpacer_36">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>70</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="0">
+               <item row="0" column="1">
                 <widget class="QLineEdit" name="editIntScanPolicy">
                  <property name="maximumSize">
                   <size>
@@ -4825,20 +4711,14 @@ Valid values:
                  </property>
                 </widget>
                </item>
-               <item row="5" column="5">
-                <spacer name="horizontalSpacer_27">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+               <item row="0" column="2" colspan="2">
+                <widget class="QLabel" name="lblScanPolicy">
+                 <property name="text">
+                  <string>0x00000000</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>71</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
+                </widget>
                </item>
-               <item row="1" column="2" colspan="7">
+               <item row="0" column="4" colspan="5">
                 <spacer name="horizontalSpacer_66">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4851,47 +4731,14 @@ Valid values:
                  </property>
                 </spacer>
                </item>
-               <item row="4" column="4">
-                <widget class="QCheckBox" name="chk7">
+               <item row="1" column="0" colspan="2">
+                <widget class="QCheckBox" name="chk1">
                  <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_EXT</string>
+                  <string>OC_SCAN_FILE_SYSTEM_LOCK</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="6">
-                <widget class="QCheckBox" name="chk12">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_ATAPI</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="7">
-                <spacer name="horizontalSpacer_33">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>70</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="4" column="5">
-                <spacer name="horizontalSpacer_26">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>71</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="2" column="3">
+               <item row="1" column="2">
                 <spacer name="horizontalSpacer_30">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4904,48 +4751,14 @@ Valid values:
                  </property>
                 </spacer>
                </item>
-               <item row="2" column="0" colspan="3">
-                <widget class="QCheckBox" name="chk1">
-                 <property name="text">
-                  <string>OC_SCAN_FILE_SYSTEM_LOCK</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="7">
-                <spacer name="horizontalSpacer_35">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>70</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="4" column="6">
-                <widget class="QCheckBox" name="chk11">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_NVME</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="4">
+               <item row="1" column="3" colspan="2">
                 <widget class="QCheckBox" name="chk5">
                  <property name="text">
                   <string>OC_SCAN_ALLOW_FS_ESP</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="8">
-                <widget class="QCheckBox" name="chk16">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_PCI</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="5">
+               <item row="1" column="5">
                 <spacer name="horizontalSpacer_25">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4958,22 +4771,15 @@ Valid values:
                  </property>
                 </spacer>
                </item>
-               <item row="3" column="4">
-                <widget class="QCheckBox" name="chk6">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_NTFS</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="6">
+               <item row="1" column="6">
                 <widget class="QCheckBox" name="chk9">
                  <property name="text">
                   <string>OC_SCAN_ALLOW_DEVICE_SASEX</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="3">
-                <spacer name="horizontalSpacer_29">
+               <item row="1" column="7">
+                <spacer name="horizontalSpacer_34">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -4985,7 +4791,21 @@ Valid values:
                  </property>
                 </spacer>
                </item>
-               <item row="3" column="3">
+               <item row="1" column="8">
+                <widget class="QCheckBox" name="chk13">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_USB</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QCheckBox" name="chk2">
+                 <property name="text">
+                  <string>OC_SCAN_DEVICE_LOCK</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
                 <spacer name="horizontalSpacer_32">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -4998,10 +4818,184 @@ Valid values:
                  </property>
                 </spacer>
                </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_111">
+               <item row="2" column="3" colspan="2">
+                <widget class="QCheckBox" name="chk6">
                  <property name="text">
-                  <string>ScanPolicy</string>
+                  <string>OC_SCAN_ALLOW_FS_NTFS</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="5">
+                <spacer name="horizontalSpacer_28">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>71</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="6">
+                <widget class="QCheckBox" name="chk10">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_SCSI</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="7">
+                <spacer name="horizontalSpacer_36">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>70</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="2" column="8">
+                <widget class="QCheckBox" name="chk14">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_FIREWIRE</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" colspan="2">
+                <widget class="QCheckBox" name="chk3">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_FS_APFS</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="2">
+                <spacer name="horizontalSpacer_31">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>70</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="3" colspan="2">
+                <widget class="QCheckBox" name="chk7">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_FS_EXT</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="5">
+                <spacer name="horizontalSpacer_26">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>71</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="6">
+                <widget class="QCheckBox" name="chk11">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_NVME</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="7">
+                <spacer name="horizontalSpacer_35">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>70</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="8">
+                <widget class="QCheckBox" name="chk15">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_SDCARD</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" colspan="2">
+                <widget class="QCheckBox" name="chk4">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_FS_HFS</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="2">
+                <spacer name="horizontalSpacer_29">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>70</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="4" column="3" colspan="2">
+                <widget class="QCheckBox" name="chk8">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_SATA</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="5">
+                <spacer name="horizontalSpacer_27">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>71</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="4" column="6">
+                <widget class="QCheckBox" name="chk12">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_ATAPI</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="7">
+                <spacer name="horizontalSpacer_33">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>70</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="4" column="8">
+                <widget class="QCheckBox" name="chk16">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_PCI</string>
                  </property>
                 </widget>
                </item>
@@ -5009,11 +5003,122 @@ Valid values:
              </widget>
             </item>
             <item row="2" column="0" colspan="2">
-             <layout class="QGridLayout" name="gridLayout_48">
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="chkAllowNvramReset">
-                <property name="toolTip">
-                 <string>Description: Allow CMD+OPT+P+R handling and enable showing NVRAM Reset entry in OpenCore picker.
+             <widget class="QGroupBox" name="groupBox_14">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_67">
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item row="0" column="0">
+                <layout class="QGridLayout" name="gridLayout_47">
+                 <item row="2" column="2">
+                  <widget class="QLineEdit" name="editDatPasswordSalt"/>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLineEdit" name="editPassInput">
+                   <property name="maximumSize">
+                    <size>
+                     <width>220</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="placeholderText">
+                    <string>Please enter a password value</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLabel" name="label_94">
+                   <property name="toolTip">
+                    <string> Password salt used when EnabledPassword is set.
+----
+ 设置EnabledPassword时使用的密码盐。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string> Password salt used when EnabledPassword is set.</string>
+                   </property>
+                   <property name="text">
+                    <string>PasswordSalt</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLabel" name="label_93">
+                   <property name="toolTip">
+                    <string>Password hash used when EnabledPassword is set.
+
+----
+
+设置EnabledPassword时使用的密码哈希值。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Password hash used when EnabledPassword is set.</string>
+                   </property>
+                   <property name="text">
+                    <string>PasswordHash</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QToolButton" name="btnGetPassHash">
+                   <property name="text">
+                    <string>Generate password hash and password salt</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QLineEdit" name="editDatPasswordHash"/>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QProgressBar" name="progressBar">
+                   <property name="maximumSize">
+                    <size>
+                     <width>220</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="value">
+                    <number>0</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QGroupBox" name="groupBox_13">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_48">
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="chkBlacklistAppleUpdate">
+                 <property name="toolTip">
+                  <string>Note: This option exists due to some operating systems, namely macOS Big Sur, being incapable of disabling firmware updates with the NVRAM variable (run-efi-updater).
+
+----
+
+注意：这个选项的存在是由于某些操作系统，即macOS Big Sur，无法使用NVRAM变量（run-efi-updater）禁用固件更新。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Ignore boot options trying to update Apple peripheral firmware (e.g. MultiUpdater.efi).</string>
+                 </property>
+                 <property name="text">
+                  <string>BlacklistAppleUpdate</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="chkAllowNvramReset">
+                 <property name="toolTip">
+                  <string>Description: Allow CMD+OPT+P+R handling and enable showing NVRAM Reset entry in OpenCore picker.
 
 Note 1 : It is known that some Lenovo laptops have a firmware bug, which makes them unbootable after performing NVRAM reset. See acidanthera/bugtracker#995 for more details.
 
@@ -5026,19 +5131,57 @@ Note 2 : Resetting NVRAM will also erase any boot options not backed up using th
 注1：已知部分联想笔记本存在固件bug，在执行NVRAM重置后无法启动。更多细节请参见 acidanthera/bugtracker#995。
 
 注2：重置NVRAM也会清除任何没有使用bless命令备份的启动选项。例如，Linux安装到未在BlessOverride中指定的自定义位置。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Allow CMD+OPT+P+R handling and enable showing NVRAM Reset entry in boot picker.</string>
-                </property>
-                <property name="text">
-                 <string>AllowNvramReset</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QCheckBox" name="chkAuthRestart">
-                <property name="toolTip">
-                 <string>Authenticated restart is a way to reboot FileVault 2 enabled macOS without entering the password. 
+                 </property>
+                 <property name="statusTip">
+                  <string> Allow CMD+OPT+P+R handling and enable showing NVRAM Reset entry in boot picker.</string>
+                 </property>
+                 <property name="text">
+                  <string>AllowNvramReset</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QCheckBox" name="chkAllowSetDefault">
+                 <property name="toolTip">
+                  <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.
+
+----
+
+ 允许CTRL+Enter和CTRL+Index操作，在引导选择器中设置默认引导选项。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.</string>
+                 </property>
+                 <property name="text">
+                  <string>AllowSetDefault</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QCheckBox" name="chkEnablePassword">
+                 <property name="toolTip">
+                  <string>Password protection ensures that sensitive operations like booting a non-default operating system (e.g. macOS recovery or a tool), resetting NVRAM storage, trying to boot into a non-default mode (e.g. verbose mode or safe mode) are not allowed without explicit user authentication by a custom password. Currently password and salt are hashed with 5000000 iterations of SHA-512.
+
+Note: This functionality is currently in development and is not ready for daily usage.
+
+----
+
+密码保护可以确保敏感操作，如启动非默认操作系统（如macOS恢复或工具），重置NVRAM存储，试图启动到非默认模式（如verbose模式或安全模式），如果没有明确的用户认证的自定义密码，是不允许的。目前，密码和盐是用5000000次SHA-512的迭代进行哈希。
+
+注意：该功能目前还在开发中，还不能用于日常使用。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Enable password protection to allow sensitive operations.</string>
+                 </property>
+                 <property name="text">
+                  <string>EnablePassword</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QCheckBox" name="chkAuthRestart">
+                 <property name="toolTip">
+                  <string>Authenticated restart is a way to reboot FileVault 2 enabled macOS without entering the password. 
 
 To perform authenticated restart one can use a dedicated terminal command: sudo fdesetup authrestart. It is also used when installing operating system updates.
 
@@ -5051,133 +5194,17 @@ VirtualSMC performs authenticated restart by saving disk encryption key split in
 要执行验证重启，可以使用专用的终端命令：sudo fdesetup authrestart。在安装操作系统更新时也会用到。
 
 VirtualSMC通过在NVRAM和RTC中保存磁盘加密密钥分割来执行验证重启，尽管OpenCore启动后就会被删除，但这可能被认为是一种安全风险，因此是可选的。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Enable VirtualSMC-compatible authenticated restart.</string>
-                </property>
-                <property name="text">
-                 <string>AuthRestart</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QCheckBox" name="chkAllowSetDefault">
-                <property name="toolTip">
-                 <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.
-
-----
-
- 允许CTRL+Enter和CTRL+Index操作，在引导选择器中设置默认引导选项。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.</string>
-                </property>
-                <property name="text">
-                 <string>AllowSetDefault</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <widget class="QCheckBox" name="chkBlacklistAppleUpdate">
-                <property name="toolTip">
-                 <string>Note: This option exists due to some operating systems, namely macOS Big Sur, being incapable of disabling firmware updates with the NVRAM variable (run-efi-updater).
-
-----
-
-注意：这个选项的存在是由于某些操作系统，即macOS Big Sur，无法使用NVRAM变量（run-efi-updater）禁用固件更新。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Ignore boot options trying to update Apple peripheral firmware (e.g. MultiUpdater.efi).</string>
-                </property>
-                <property name="text">
-                 <string>BlacklistAppleUpdate</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="4">
-               <widget class="QCheckBox" name="chkEnablePassword">
-                <property name="toolTip">
-                 <string>Password protection ensures that sensitive operations like booting a non-default operating system (e.g. macOS recovery or a tool), resetting NVRAM storage, trying to boot into a non-default mode (e.g. verbose mode or safe mode) are not allowed without explicit user authentication by a custom password. Currently password and salt are hashed with 5000000 iterations of SHA-512.
-
-Note: This functionality is currently in development and is not ready for daily usage.
-
-----
-
-密码保护可以确保敏感操作，如启动非默认操作系统（如macOS恢复或工具），重置NVRAM存储，试图启动到非默认模式（如verbose模式或安全模式），如果没有明确的用户认证的自定义密码，是不允许的。目前，密码和盐是用5000000次SHA-512的迭代进行哈希。
-
-注意：该功能目前还在开发中，还不能用于日常使用。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Enable password protection to allow sensitive operations.</string>
-                </property>
-                <property name="text">
-                 <string>EnablePassword</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="3" column="0" colspan="2">
-             <layout class="QGridLayout" name="gridLayout_47">
-              <item row="0" column="2">
-               <widget class="QLineEdit" name="editDatPasswordHash"/>
-              </item>
-              <item row="1" column="1">
-               <widget class="QLabel" name="label_94">
-                <property name="toolTip">
-                 <string> Password salt used when EnabledPassword is set.
-----
- 设置EnabledPassword时使用的密码盐。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Password salt used when EnabledPassword is set.</string>
-                </property>
-                <property name="text">
-                 <string>PasswordSalt</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QLineEdit" name="editDatPasswordSalt"/>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="label_93">
-                <property name="toolTip">
-                 <string>Password hash used when EnabledPassword is set.
-
-----
-
-设置EnabledPassword时使用的密码哈希值。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Password hash used when EnabledPassword is set.</string>
-                </property>
-                <property name="text">
-                 <string>PasswordHash</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QToolButton" name="btnGetPassHash">
-                <property name="text">
-                 <string>Generate password hash and password salt</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLineEdit" name="editPassInput">
-                <property name="maximumSize">
-                 <size>
-                  <width>220</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="placeholderText">
-                 <string>Please enter a password value</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+                 </property>
+                 <property name="statusTip">
+                  <string>Enable VirtualSMC-compatible authenticated restart.</string>
+                 </property>
+                 <property name="text">
+                  <string>AuthRestart</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -5907,7 +5934,7 @@ A continuously updated variable list can be found in a corresponding document: N
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5916,23 +5943,133 @@ A continuously updated variable list can be found in a corresponding document: N
            <attribute name="title">
             <string>Generic</string>
            </attribute>
-           <widget class="QWidget" name="layoutWidget">
-            <property name="geometry">
-             <rect>
-              <x>10</x>
-              <y>20</y>
-              <width>871</width>
-              <height>381</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="_2">
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="editMLB"/>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="label_96">
-               <property name="toolTip">
-                <string>Valid values:
+           <layout class="QGridLayout" name="gridLayout_78">
+            <item row="0" column="0">
+             <layout class="QGridLayout" name="_2">
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_95">
+                <property name="toolTip">
+                 <string> Combined of Processor Major and Minor types.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Combined of Processor Major and Minor types.</string>
+                </property>
+                <property name="text">
+                 <string>ProcessorType</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_17">
+                <property name="toolTip">
+                 <string>Refer to SMBIOS BoardSerialNumber.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Refer to SMBIOS BoardSerialNumber.</string>
+                </property>
+                <property name="text">
+                 <string>MLB</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QToolButton" name="btnGenerate">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Generate</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="editSystemSerialNumber"/>
+              </item>
+              <item row="6" column="1">
+               <widget class="QComboBox" name="cboxSystemMemoryStatus">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_20">
+                <property name="toolTip">
+                 <string>Refer to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Refer to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
+                </property>
+                <property name="text">
+                 <string>ROM</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="cboxSystemProductName">
+                <property name="minimumSize">
+                 <size>
+                  <width>500</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="editProcessorTypeGeneric"/>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="editDatROM"/>
+              </item>
+              <item row="3" column="2">
+               <widget class="QToolButton" name="btnSystemUUID">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Generate</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="editSystemUUID"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_18">
+                <property name="toolTip">
+                 <string>Refer to SMBIOS SystemProductName.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Refer to SMBIOS SystemProductName.</string>
+                </property>
+                <property name="text">
+                 <string>SystemProductName</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="2">
+               <widget class="QToolButton" name="btnROM">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Generate</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_96">
+                <property name="toolTip">
+                 <string>Valid values:
 
 • Auto — use the original PlatformFeature value.
 
@@ -5954,191 +6091,57 @@ Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemory
 
 注意：在某些 Mac 机型上（即 MacBookPro10,x 和任何 MacBookAir），SPMemoryReporter.spreporter 将忽略 PT_FEATURE_HAS_SOLDERED_SYSTEM_MEMORY，并假设系统内存不可升级。
 </string>
-               </property>
-               <property name="statusTip">
-                <string> Indicates whether system memory is upgradable in PlatformFeature. This controls the visibility
+                </property>
+                <property name="statusTip">
+                 <string> Indicates whether system memory is upgradable in PlatformFeature. This controls the visibility
  of the Memory tab in About This Mac.</string>
-               </property>
-               <property name="text">
-                <string>SystemMemoryStatus</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QToolButton" name="btnGenerate">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_19">
-               <property name="toolTip">
-                <string> Refer to SMBIOS SystemSerialNumber.</string>
-               </property>
-               <property name="statusTip">
-                <string> Refer to SMBIOS SystemSerialNumber.</string>
-               </property>
-               <property name="text">
-                <string>SystemSerialNumber</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_18">
-               <property name="toolTip">
-                <string>Refer to SMBIOS SystemProductName.</string>
-               </property>
-               <property name="statusTip">
-                <string>Refer to SMBIOS SystemProductName.</string>
-               </property>
-               <property name="text">
-                <string>SystemProductName</string>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <widget class="QCheckBox" name="chkSpoofVendor">
-               <property name="toolTip">
-                <string>Sets SMBIOS vendor fields to Acidanthera.
-
-----
-
-将SMBIOS供应商字段设置为Acidanthera。</string>
-               </property>
-               <property name="statusTip">
-                <string>Sets SMBIOS vendor fields to Acidanthera.</string>
-               </property>
-               <property name="text">
-                <string>SpoofVendor</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QCheckBox" name="chkMaxBIOSVersion">
-               <property name="toolTip">
-                <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.
-
-----
-
- 将 BIOSVersion 设置为 9999.999.999.999.999，建议老旧硬件的机器选择 Automatic平台信息时使用，以避免在非官方支持的 macOS 版本中进行 BIOS 更新。
-
-</string>
-               </property>
-               <property name="statusTip">
-                <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic
- PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</string>
-               </property>
-               <property name="text">
-                <string>MaxBIOSVersion</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_95">
-               <property name="toolTip">
-                <string> Combined of Processor Major and Minor types.</string>
-               </property>
-               <property name="statusTip">
-                <string> Combined of Processor Major and Minor types.</string>
-               </property>
-               <property name="text">
-                <string>ProcessorType</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_21">
-               <property name="toolTip">
-                <string>Refer to SMBIOS SystemUUID.</string>
-               </property>
-               <property name="statusTip">
-                <string>Refer to SMBIOS SystemUUID.</string>
-               </property>
-               <property name="text">
-                <string>SystemUUID</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_17">
-               <property name="toolTip">
-                <string>Refer to SMBIOS BoardSerialNumber.</string>
-               </property>
-               <property name="statusTip">
-                <string>Refer to SMBIOS BoardSerialNumber.</string>
-               </property>
-               <property name="text">
-                <string>MLB</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QComboBox" name="cboxSystemMemoryStatus">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="editProcessorTypeGeneric"/>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="editSystemUUID"/>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="editSystemSerialNumber"/>
-             </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="editDatROM"/>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_20">
-               <property name="toolTip">
-                <string>Refer to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
-               </property>
-               <property name="statusTip">
-                <string>Refer to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
-               </property>
-               <property name="text">
-                <string>ROM</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QComboBox" name="cboxSystemProductName">
-               <property name="minimumSize">
-                <size>
-                 <width>500</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="2">
-              <widget class="QToolButton" name="btnSystemUUID">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="chkAdviseWindows">
-               <property name="toolTip">
-                <string>Description: Forces Windows support in FirmwareFeatures.
+                </property>
+                <property name="text">
+                 <string>SystemMemoryStatus</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_19">
+                <property name="toolTip">
+                 <string> Refer to SMBIOS SystemSerialNumber.</string>
+                </property>
+                <property name="statusTip">
+                 <string> Refer to SMBIOS SystemSerialNumber.</string>
+                </property>
+                <property name="text">
+                 <string>SystemSerialNumber</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="editMLB"/>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_21">
+                <property name="toolTip">
+                 <string>Refer to SMBIOS SystemUUID.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Refer to SMBIOS SystemUUID.</string>
+                </property>
+                <property name="text">
+                 <string>SystemUUID</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="1">
+             <widget class="QGroupBox" name="groupBox_16">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_77">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="chkAdviseWindows">
+                 <property name="toolTip">
+                  <string>Description: Forces Windows support in FirmwareFeatures.
 
 Added bits to FirmwareFeatures: 
 
@@ -6155,29 +6158,56 @@ Added bits to FirmwareFeatures:
 - FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - 如果没有这个位，就不可能重新启动到安装有EFI分区的驱动器上的Windows，该分区不是磁盘上的第一个分区。
 
 - FW_FEATURE_SUPPORTS_UEFI_WINDOWS_BOOT (0x20000000) - 如果没有该位，则无法重新启动到安装在带有 EFI 分区的驱动器上的 Windows，而 EFI 分区是磁盘上的第一个分区。</string>
-               </property>
-               <property name="statusTip">
-                <string>Forces Windows support in FirmwareFeatures.</string>
-               </property>
-               <property name="text">
-                <string>AdviseWindows</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="2">
-              <widget class="QToolButton" name="btnROM">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Generate</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
+                 </property>
+                 <property name="statusTip">
+                  <string>Forces Windows support in FirmwareFeatures.</string>
+                 </property>
+                 <property name="text">
+                  <string>AdviseWindows</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="chkMaxBIOSVersion">
+                 <property name="toolTip">
+                  <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.
+
+----
+
+ 将 BIOSVersion 设置为 9999.999.999.999.999，建议老旧硬件的机器选择 Automatic平台信息时使用，以避免在非官方支持的 macOS 版本中进行 BIOS 更新。
+
+</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic
+ PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</string>
+                 </property>
+                 <property name="text">
+                  <string>MaxBIOSVersion</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QCheckBox" name="chkSpoofVendor">
+                 <property name="toolTip">
+                  <string>Sets SMBIOS vendor fields to Acidanthera.
+
+----
+
+将SMBIOS供应商字段设置为Acidanthera。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Sets SMBIOS vendor fields to Acidanthera.</string>
+                 </property>
+                 <property name="text">
+                  <string>SpoofVendor</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tabPlatformInfo2">
            <attribute name="title">
