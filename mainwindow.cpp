@@ -11613,7 +11613,8 @@ void MainWindow::on_btnGetPassHash_clicked()
 
     chkdata->waitForStarted(); //等待启动完成
     QString strData = ui->editPassInput->text().trimmed() + "\n";
-    const char* cstr = strData.toLocal8Bit().constData();
+    const char* cstr; // = strData.toLocal8Bit().constData();
+    cstr = strData.toStdString().c_str();
 
     chkdata->write(cstr);
 
