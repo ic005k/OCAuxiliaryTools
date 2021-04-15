@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210418";
+    CurVerison = "20210419";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -54,7 +54,7 @@ MainWindow::MainWindow(QWidget* parent)
     else
         mac = true;
 
-    this->resize(1300, 700);
+    this->resize(1280, 680);
 
 #endif
 
@@ -11645,6 +11645,9 @@ void MainWindow::readResultPassHash()
     ui->editDatPasswordHash->setText(strHash);
     ui->editDatPasswordSalt->setText(strSalt);
 
+    ui->editDatPasswordHash->setToolTip(QString::number(strHash.count() / 2) + " Bytes");
+    ui->editDatPasswordSalt->setToolTip(QString::number(strSalt.count() / 2) + " Bytes");
+
     ui->progressBar->setMaximum(100);
     ui->btnGetPassHash->setEnabled(true);
     this->repaint();
@@ -11692,6 +11695,10 @@ void MainWindow::on_btnROM_clicked()
 
 void MainWindow::on_editPassInput_textChanged(const QString& arg1)
 {
+
+    if (ui->progressBar->maximum() == 0)
+        return;
+
     if (arg1.trimmed().count() > 0) {
         ui->btnGetPassHash->setEnabled(true);
         this->repaint();
@@ -11703,6 +11710,7 @@ void MainWindow::on_editPassInput_textChanged(const QString& arg1)
 
 void MainWindow::on_editPassInput_returnPressed()
 {
+
     if (ui->btnGetPassHash->isEnabled())
         on_btnGetPassHash_clicked();
 }

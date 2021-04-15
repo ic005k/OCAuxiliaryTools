@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1693</width>
+    <width>1397</width>
     <height>801</height>
    </rect>
   </property>
@@ -10005,8 +10005,8 @@ Enable this option to be able to see all the boot options when having multiple d
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1693</width>
-     <height>30</height>
+     <width>1397</width>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
