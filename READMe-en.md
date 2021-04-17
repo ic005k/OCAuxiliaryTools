@@ -82,7 +82,6 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat11.png)
 
-### [国内github下载文件推荐](https://toolwa.com/github/)
 
 ### 感谢以下开源软件的支持！
 
@@ -91,10 +90,6 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 [winfile](https://github.com/microsoft/winfile)&nbsp; &nbsp; &nbsp; &nbsp;
 [PlistCpp](https://github.com/animetrics/PlistCpp)&nbsp; &nbsp; &nbsp; &nbsp;
 [pugixml](https://github.com/zeux/pugixml)
-
-## 讨论区：
-
-[insanelymac](https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/)
 
 
 ### 备注：此项目开始于2020年8月
