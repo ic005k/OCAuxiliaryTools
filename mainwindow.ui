@@ -3028,7 +3028,7 @@ The behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3045,49 +3045,9 @@ The behaviour corresponds to -legacy kernel boot argument.
               </property>
               <layout class="QGridLayout" name="gridLayout_56">
                <item row="0" column="0">
-                <layout class="QGridLayout" name="gridLayout_76">
-                 <item row="0" column="2">
-                  <widget class="QLabel" name="lblPickerAttributes">
-                   <property name="text">
-                    <string>0x00</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QCheckBox" name="chkPA5">
-                   <property name="text">
-                    <string>OC_ATTR_USE_POINTER_CONTROL</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QCheckBox" name="chkPA2">
-                   <property name="text">
-                    <string>OC_ATTR_USE_DISK_LABEL_FILE</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="QCheckBox" name="chkPA1">
-                   <property name="text">
-                    <string>OC_ATTR_USE_VOLUME_ICON</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QLineEdit" name="editIntPickerAttributes">
-                   <property name="maximumSize">
-                    <size>
-                     <width>200</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_5">
-                   <property name="toolTip">
-                    <string>Description: Sets specific attributes for the OpenCore picker.
+                <widget class="QLabel" name="label_5">
+                 <property name="toolTip">
+                  <string>Description: Sets specific attributes for the OpenCore picker.
 
 Different OpenCore pickers may be configured through the attribute mask containing OpenCore-reserved (BIT0~BIT15) and OEM-specific (BIT16~BIT31) values.
 
@@ -3098,37 +3058,86 @@ Different OpenCore pickers may be configured through the attribute mask containi
 可以通过包含 OpenCore 保留值 (BIT0~BIT15) 和 OEM 特定值 (BIT16~BIT31) 的属性掩码来配置不同的 OpenCore pickers。
 
 </string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Sets specific attributes for picker.</string>
-                   </property>
-                   <property name="text">
-                    <string>PickerAttributes</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QCheckBox" name="chkPA4">
-                   <property name="text">
-                    <string>OC_ATTR_USE_ALTERNATE_ICONS</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0">
-                  <widget class="QCheckBox" name="chkPA3">
-                   <property name="text">
-                    <string>OC_ATTR_USE_GENERIC_LABEL_IMAGE</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <widget class="QCheckBox" name="chkPA6">
-                   <property name="text">
-                    <string>OC_ATTR_DEBUG_DISPLAY</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
+                 </property>
+                 <property name="statusTip">
+                  <string>Sets specific attributes for picker.</string>
+                 </property>
+                 <property name="text">
+                  <string>PickerAttributes</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="editIntPickerAttributes">
+                 <property name="maximumSize">
+                  <size>
+                   <width>200</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="lblPickerAttributes">
+                 <property name="text">
+                  <string>0x00</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <spacer name="horizontalSpacer_39">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>181</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkPA4">
+                 <property name="text">
+                  <string>OC_ATTR_USE_ALTERNATE_ICONS</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2" colspan="2">
+                <widget class="QCheckBox" name="chkPA2">
+                 <property name="text">
+                  <string>OC_ATTR_USE_DISK_LABEL_FILE</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkPA5">
+                 <property name="text">
+                  <string>OC_ATTR_USE_POINTER_CONTROL</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2" colspan="2">
+                <widget class="QCheckBox" name="chkPA1">
+                 <property name="text">
+                  <string>OC_ATTR_USE_VOLUME_ICON</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkPA3">
+                 <property name="text">
+                  <string>OC_ATTR_USE_GENERIC_LABEL_IMAGE</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="2" colspan="2">
+                <widget class="QCheckBox" name="chkPA6">
+                 <property name="text">
+                  <string>OC_ATTR_DEBUG_DISPLAY</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -3410,41 +3419,6 @@ Note: This option may not work well with System text renderer. Setting a backgro
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="2">
-                  <widget class="QComboBox" name="cboxLauncherPath">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="2">
-                  <widget class="QComboBox" name="cboxLauncherOption">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="2">
-                  <widget class="QComboBox" name="cboxHibernateMode">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="9" column="2">
-                  <widget class="QComboBox" name="cboxPickerMode">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="10" column="2">
-                  <widget class="QComboBox" name="cboxPickerVariant">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="10" column="0">
                   <widget class="QLabel" name="label_10">
                    <property name="toolTip">
@@ -3574,6 +3548,41 @@ Picker描述了底层的引导管理，有一个可选的用户界面负责处�
                    </property>
                    <property name="text">
                     <string>HibernateMode</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1" colspan="2">
+                  <widget class="QComboBox" name="cboxLauncherOption">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1" colspan="2">
+                  <widget class="QComboBox" name="cboxHibernateMode">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1" colspan="2">
+                  <widget class="QComboBox" name="cboxLauncherPath">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1" colspan="2">
+                  <widget class="QComboBox" name="cboxPickerMode">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="1" colspan="2">
+                  <widget class="QComboBox" name="cboxPickerVariant">
+                   <property name="editable">
+                    <bool>true</bool>
                    </property>
                   </widget>
                  </item>
@@ -4318,7 +4327,20 @@ Console logging prints less than all the other variants. Depending on the build 
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QLineEdit" name="editIntExposeSensitiveData"/>
+                <widget class="QLineEdit" name="editIntExposeSensitiveData">
+                 <property name="minimumSize">
+                  <size>
+                   <width>150</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
                </item>
                <item row="0" column="2">
                 <widget class="QLabel" name="lblExposeSensitiveData">
@@ -4340,28 +4362,28 @@ Console logging prints less than all the other variants. Depending on the build 
                  </property>
                 </spacer>
                </item>
-               <item row="1" column="0" colspan="3">
+               <item row="1" column="0" colspan="4">
                 <widget class="QCheckBox" name="chk01">
                  <property name="text">
                   <string>Expose printable booter path as an UEFI variable</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0" colspan="3">
+               <item row="2" column="0" colspan="4">
                 <widget class="QCheckBox" name="chk02">
                  <property name="text">
                   <string>Expose OpenCore version as an UEFI variable</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0" colspan="3">
+               <item row="3" column="0" colspan="4">
                 <widget class="QCheckBox" name="chk04">
                  <property name="text">
                   <string>Expose OpenCore version in boot picker menu title</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0" colspan="3">
+               <item row="4" column="0" colspan="4">
                 <widget class="QCheckBox" name="chk08">
                  <property name="text">
                   <string>Expose OEM information as a set of UEFI variables</string>
