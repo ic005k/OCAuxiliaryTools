@@ -86,8 +86,5 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 [PlistCpp](https://github.com/animetrics/PlistCpp)&nbsp; &nbsp; &nbsp; &nbsp;
 [pugixml](https://github.com/zeux/pugixml)&nbsp;
 
-## Discussion area:
-
-[insanelymac](https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-configuration-file-editor/)
 
 ### Note: This project started in August 2020
