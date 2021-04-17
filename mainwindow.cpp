@@ -9584,7 +9584,7 @@ void MainWindow::on_actionGo_to_the_next_triggered()
     int row = ui->listFind->currentRow();
     row = row + 1;
     if (row == ui->listFind->count())
-        row = ui->listFind->count() - 1;
+        row = 0;
 
     ui->listFind->setCurrentRow(row);
     goResults(row);
@@ -9592,6 +9592,7 @@ void MainWindow::on_actionGo_to_the_next_triggered()
 
 void MainWindow::goResults(int index)
 {
+
     QString objName = listNameResults.at(index);
     QString name = objName.mid(1, objName.length() - 1);
     bool end = false;
@@ -9873,10 +9874,10 @@ void MainWindow::goResults(int index)
 
                         orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
 
-                        QString style = "QLineEdit{border:none;background:rgb(255,0,0);color:rgb(255,255,255);}";
+                        QString style = "QComboBox{border:none;background:rgb(255,0,0);color:rgb(255,255,255);}";
                         QComboBox* w = (QComboBox*)listOfComboBox.at(k);
 
-                        w->lineEdit()->setStyleSheet(style);
+                        w->setStyleSheet(style);
                         end = true;
                         break;
                     }
@@ -9898,9 +9899,9 @@ void MainWindow::goResults(int index)
 
                     if (listOfComboBox.at(k)->objectName() == name) {
                         orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
-                        QString style = "QLineEdit{background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
+                        QString style = "QComboBox{border:none;background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
                         QComboBox* w = (QComboBox*)listOfComboBox.at(k);
-                        w->lineEdit()->setStyleSheet(style);
+                        w->setStyleSheet(style);
                         end = true;
                         break;
                     }
@@ -10036,7 +10037,8 @@ void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1)
         }
     }
 
-    //on_actionFind_triggered();
+    //if (!Initialization)
+    //    on_actionFind_triggered();
 }
 
 void MainWindow::clearCheckBoxMarker()
@@ -10059,11 +10061,12 @@ void MainWindow::clearLabelMarker()
 
 void MainWindow::clearComboBoxMarker()
 {
+
     for (int i = 0; i < listOfComboBoxResults.count(); i++) {
 
         QComboBox* w = (QComboBox*)listOfComboBoxResults.at(i);
 
-        w->lineEdit()->setStyleSheet(orgLineEditStyle);
+        w->setStyleSheet(orgComboBoxStyle);
     }
 }
 
@@ -10078,6 +10081,7 @@ void MainWindow::clearLineEditMarker()
 
 void MainWindow::clearTableHeaderMarker()
 {
+
     for (int i = 0; i < listOfTableWidgetHeaderResults.count(); i++) {
 
         QTableWidget* w = (QTableWidget*)listOfTableWidgetHeaderResults.at(i);
@@ -10097,8 +10101,9 @@ void MainWindow::on_listFind_currentRowChanged(int currentRow)
 {
     Q_UNUSED(currentRow);
 
-    //if (!loading)
-    //    goResults(currentRow);
+    if (!loading) {
+        goResults(currentRow);
+    }
 }
 
 void MainWindow::on_cboxFind_currentIndexChanged(const QString& arg1)
@@ -10111,7 +10116,8 @@ void MainWindow::on_cboxFind_currentIndexChanged(const QString& arg1)
 void MainWindow::on_listFind_itemClicked(QListWidgetItem* item)
 {
     Q_UNUSED(item);
-    goResults(ui->listFind->currentRow());
+    if (ui->listFind->currentRow() >= 0)
+        goResults(ui->listFind->currentRow());
 }
 
 QWidget* MainWindow::getSubTabWidget(int m, int s)
