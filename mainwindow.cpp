@@ -7264,7 +7264,7 @@ void MainWindow::init_Menu()
 void MainWindow::setCheckBoxWidth(QCheckBox* cbox)
 {
     QFont myFont(cbox->font().family(), cbox->font().pointSize());
-    QString str = cbox->text() + "      ";
+    QString str = cbox->text() + "        ";
     QFontMetrics fm(myFont);
     int w = fm.width(str);
     cbox->setMaximumWidth(w);

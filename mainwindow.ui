@@ -3084,19 +3084,6 @@ Different OpenCore pickers may be configured through the attribute mask containi
                  </property>
                 </widget>
                </item>
-               <item row="0" column="3">
-                <spacer name="horizontalSpacer_39">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>181</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
                <item row="1" column="0" colspan="2">
                 <widget class="QCheckBox" name="chkPA4">
                  <property name="text">
@@ -3104,7 +3091,7 @@ Different OpenCore pickers may be configured through the attribute mask containi
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2" colspan="2">
+               <item row="1" column="2">
                 <widget class="QCheckBox" name="chkPA2">
                  <property name="text">
                   <string>OC_ATTR_USE_DISK_LABEL_FILE</string>
@@ -3118,7 +3105,7 @@ Different OpenCore pickers may be configured through the attribute mask containi
                  </property>
                 </widget>
                </item>
-               <item row="2" column="2" colspan="2">
+               <item row="2" column="2">
                 <widget class="QCheckBox" name="chkPA1">
                  <property name="text">
                   <string>OC_ATTR_USE_VOLUME_ICON</string>
@@ -3132,7 +3119,7 @@ Different OpenCore pickers may be configured through the attribute mask containi
                  </property>
                 </widget>
                </item>
-               <item row="3" column="2" colspan="2">
+               <item row="3" column="2">
                 <widget class="QCheckBox" name="chkPA6">
                  <property name="text">
                   <string>OC_ATTR_DEBUG_DISPLAY</string>
