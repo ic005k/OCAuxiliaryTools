@@ -85,6 +85,7 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 
 ### 感谢以下开源软件的支持！
 
+[OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
 [qtplist](https://github.com/reillywatson/qtplist)&nbsp; &nbsp; &nbsp; &nbsp;
 [FindESP](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp;
 [winfile](https://github.com/microsoft/winfile)&nbsp; &nbsp; &nbsp; &nbsp;
