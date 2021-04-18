@@ -28,37 +28,7 @@ OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actio
 
 非官方简体中文参考手册：https://github.com/SukkaW/OpenCore-Document-zh_Hans  感谢@SukkaW！
 
-以上链接已放入软件的“帮助”菜单。
-
-关于软件各功能的解读（翻译）: 由于时间关系，没有细致地去润色及排版，在此表示歉意，同时建议大家研读原版OC说明书。
-
-## 特点包括但不限于：
-
-* 写入plist文件采用空格进行缩进，以适应所有的编辑器或编辑环境，比如Shell编辑环境
-
-* 强大的关键词搜索功能，包括检索不可视的数据表
-
-* 所有的标签和检查框文本均支持复制（右键菜单）
-
-* 无限级别的撤消和重做（打开新文件时自动清除）
-
-* 多进程和单进程之间复制行和粘贴行
-
-* 内置良好的数据结构，以适应OpenCore的迅速迭代
-
-* 内置配置文件数据库（[分享配置文件](https://github.com/ic005k/QtOpenCoreConfigDatabase/issues))
-
-* 根据配置文件在桌面上生成EFI文件夹
-
-* 各功能选项采用右键菜单“显示提示”
-
-* 双击打开文件、拖拽文件到软件界面打开文件，打开文件的历史记录显示
-
-* 软件UI自适应各种分辨率，包括winpe和linux livecd等等
-
-* 内置更新检查
-
-......
+## 话不多说，直接上图
 
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat1.png)
 
