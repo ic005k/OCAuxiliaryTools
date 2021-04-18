@@ -24,37 +24,7 @@ OC auxiliary tools（OCAT or ocat for short） = Config.plist editor + Config.pl
 
 OC development version can be downloaded [here](https://github.com/acidanthera/OpenCorePkg/actions).
 
-## Features include but are not limited to:
-
-* Write plist files with spaces for indentation to fit all editors or editing environments, such as the Shell editing environment
-
-* Powerful keyword search function, including retrieval of unseen data tables
-
-* All tabs and checkbox text are supported for copying (right-click menu)
-
-* Unlimited levels of undo and redo (automatically cleared when opening a new file)
-
-* Copy and paste rows between multiple processes and single processes
-
-* Well-built data structures to accommodate rapid iterations of OpenCore
-
-* Built-in configuration file database ([Share configuration file](https://github.com/ic005k/QtOpenCoreConfigDatabase/issues))
-
-* Generate EFI folders on the desktop based on configuration files
-
-* Each function option adopts suspension prompt and status bar prompt
-
-* Keep up with the latest development version of OpenCore and keep pace with it completely
-
-* Double-click to open the file, drag and drop the file to the software interface to open the file, and open the file history display
-
-* All three platforms use OC's official macserial to generate serial numbers
-
-* Software UI adapts to various resolutions, including winpe and linux livecd, etc.
-
-* Built-in update check
-
-......
+## Without further ado, directly on the picture
 
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat1.png)
 
