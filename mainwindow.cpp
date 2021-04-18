@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210420";
+    CurVerison = "20210421";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -9240,6 +9240,7 @@ void MainWindow::on_pushButton_clicked()
 {
 }
 
+// OC验证里面使用
 void MainWindow::startSearch(QString str)
 {
     ui->cboxFind->setCurrentText(str);
@@ -9473,33 +9474,28 @@ void MainWindow::on_actionFind_triggered()
 
         if (red < 55) {
 
-            QPalette palette;
-            palette = ui->cboxFind->palette();
-            palette.setColor(QPalette::Base, QColor(50, 50, 50));
-            palette.setColor(QPalette::Text, Qt::white); //字色
-            ui->cboxFind->setPalette(palette);
+            setPalette(ui->cboxFind, QColor(50, 50, 50), Qt::white);
 
         } else {
 
-            QPalette palette;
-            palette = ui->cboxFind->palette();
-            palette.setColor(QPalette::Base, Qt::white);
-            palette.setColor(QPalette::Text, Qt::black); //字色
-            ui->cboxFind->setPalette(palette);
+            setPalette(ui->cboxFind, Qt::white, Qt::black);
         }
 
     } else {
-        //字色
-        QPalette palette;
-        palette.setColor(QPalette::Text, Qt::white);
-        ui->cboxFind->setPalette(palette);
 
-        palette = ui->cboxFind->palette();
-        palette.setColor(QPalette::Base, QColor(255, 70, 70));
-        ui->cboxFind->setPalette(palette);
+        setPalette(ui->cboxFind, QColor(255, 70, 70), Qt::white);
     }
 
     this->setWindowModified(curWinModi);
+}
+
+void MainWindow::setPalette(QWidget* w, QColor backColor, QColor textColor)
+{
+    QPalette palette;
+    palette = w->palette();
+    palette.setColor(QPalette::Base, backColor);
+    palette.setColor(QPalette::Text, textColor); //字色
+    w->setPalette(palette);
 }
 
 void MainWindow::findTable(QTableWidget* t, QString text)
@@ -9874,10 +9870,12 @@ void MainWindow::goResults(int index)
 
                         orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
 
-                        QString style = "QComboBox{border:none;background:rgb(255,0,0);color:rgb(255,255,255);}";
                         QComboBox* w = (QComboBox*)listOfComboBox.at(k);
 
-                        w->setStyleSheet(style);
+                        //QString style = "QComboBox{border:none;background:rgb(255,0,0);color:rgb(255,255,255);}";
+                        //w->setStyleSheet(style);
+
+                        setPalette(w, QColor(255, 0, 0), Qt::white);
                         end = true;
                         break;
                     }
@@ -9899,9 +9897,13 @@ void MainWindow::goResults(int index)
 
                     if (listOfComboBox.at(k)->objectName() == name) {
                         orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
-                        QString style = "QComboBox{border:none;background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
                         QComboBox* w = (QComboBox*)listOfComboBox.at(k);
-                        w->setStyleSheet(style);
+
+                        //w->setStyleSheet(style);
+                        //QString style = "QComboBox{border:none;background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
+
+                        setPalette(w, QColor(255, 0, 0), Qt::white);
+
                         end = true;
                         break;
                     }
@@ -10021,19 +10023,11 @@ void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1)
 
         if (red < 55) {
 
-            QPalette palette;
-            palette = ui->cboxFind->palette();
-            palette.setColor(QPalette::Base, QColor(50, 50, 50));
-            palette.setColor(QPalette::Text, Qt::white); //字色
-            ui->cboxFind->setPalette(palette);
+            setPalette(ui->cboxFind, QColor(50, 50, 50), Qt::white);
 
         } else {
 
-            QPalette palette;
-            palette = ui->cboxFind->palette();
-            palette.setColor(QPalette::Base, Qt::white);
-            palette.setColor(QPalette::Text, Qt::black); //字色
-            ui->cboxFind->setPalette(palette);
+            setPalette(ui->cboxFind, Qt::white, Qt::black);
         }
     }
 
@@ -10066,7 +10060,16 @@ void MainWindow::clearComboBoxMarker()
 
         QComboBox* w = (QComboBox*)listOfComboBoxResults.at(i);
 
-        w->setStyleSheet(orgComboBoxStyle);
+        //w->setStyleSheet(orgComboBoxStyle);
+
+        if (red < 55) {
+
+            setPalette(w, QColor(50, 50, 50), Qt::white);
+
+        } else {
+
+            setPalette(w, Qt::white, Qt::black);
+        }
     }
 }
 
@@ -11079,19 +11082,11 @@ void MainWindow::paintEvent(QPaintEvent* event)
 
         if (red < 55) {
 
-            QPalette palette;
-            palette = ui->cboxFind->palette();
-            palette.setColor(QPalette::Base, QColor(50, 50, 50));
-            palette.setColor(QPalette::Text, Qt::white); //字色
-            ui->cboxFind->setPalette(palette);
+            setPalette(ui->cboxFind, QColor(50, 50, 50), Qt::white);
 
         } else {
 
-            QPalette palette;
-            palette = ui->cboxFind->palette();
-            palette.setColor(QPalette::Base, Qt::white);
-            palette.setColor(QPalette::Text, Qt::black); //字色
-            ui->cboxFind->setPalette(palette);
+            setPalette(ui->cboxFind, Qt::white, Qt::black);
         }
     }
 }
