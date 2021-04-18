@@ -80,6 +80,7 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 
 ### Thanks for the support of the following open source software!
 
+[OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
 [qtplist](https://github.com/reillywatson/qtplist)&nbsp; &nbsp; &nbsp; &nbsp;
 [FindESP](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp;
 [winfile](https://github.com/microsoft/winfile)&nbsp; &nbsp; &nbsp; &nbsp;
