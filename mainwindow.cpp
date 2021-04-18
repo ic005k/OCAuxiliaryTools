@@ -4919,7 +4919,7 @@ void MainWindow::dropEvent(QDropEvent* e)
 
     //efi drivers
     if (fi.suffix().toLower() == "efi") {
-        if (ui->tabTotal->currentIndex() == 7 && ui->tabUEFI->currentIndex() == 2) {
+        if (ui->tabTotal->currentIndex() == 7 && ui->tabUEFI->currentIndex() == 3) {
             addEFIDrivers(fileList);
         }
     }
@@ -7102,8 +7102,6 @@ void MainWindow::init_Menu()
     ui->dockWidgetContents->layout()->setMargin(1);
     ui->dockFind->close();
 
-    ui->pushButton->setVisible(false);
-
     //查找
     if (mac || osx1012)
         ui->actionFind->setIconVisibleInMenu(false);
@@ -9234,18 +9232,6 @@ QObjectList MainWindow::getAllComboBox(QObjectList lstUIControls)
         }
     }
     return lstOfComboBox;
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-}
-
-// OC验证里面使用
-void MainWindow::startSearch(QString str)
-{
-    ui->cboxFind->setCurrentText(str);
-
-    on_actionFind_triggered();
 }
 
 void MainWindow::on_actionFind_triggered()

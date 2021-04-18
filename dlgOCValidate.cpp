@@ -1,6 +1,7 @@
 #include "dlgOCValidate.h"
 #include "mainwindow.h"
 #include "ui_dlgOCValidate.h"
+#include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
 
@@ -32,7 +33,9 @@ dlgOCValidate::dlgOCValidate(QWidget* parent)
 
     connect(searchAction, &QAction::triggered, [=]() {
         QString str = ui->textEdit->textCursor().selectedText().trimmed();
-        mw_one->startSearch(str);
+
+        mw_one->ui->cboxFind->setCurrentText(str);
+        mw_one->on_actionFind_triggered();
     });
 
     connect(ui->textEdit, &QTextEdit::customContextMenuRequested, [=](const QPoint& pos) {

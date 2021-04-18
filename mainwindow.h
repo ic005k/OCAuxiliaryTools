@@ -62,6 +62,7 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
+    Ui::MainWindow* ui;
 
     void setPalette(QWidget* w, QColor backColor, QColor textColor);
     bool Initialization = false;
@@ -77,8 +78,6 @@ public:
     void getValue(QVariantMap map, QWidget* tab);
     QVariantMap setValue(QVariantMap map, QWidget* tab);
     dlgOCValidate* dlgOCV;
-
-    void startSearch(QString str);
 
     bool lineEditEnter = false;
     bool RefreshAllDatabase = false;
@@ -244,6 +243,7 @@ public:
 
 public slots:
     void on_GenerateEFI();
+    void on_actionFind_triggered();
 
 protected:
     void dragEnterEvent(QDragEnterEvent* e) override;
@@ -778,10 +778,6 @@ private slots:
 
     void on_actionNewWindow_triggered();
 
-    void on_pushButton_clicked();
-
-    void on_actionFind_triggered();
-
     void on_actionGo_to_the_previous_triggered();
 
     void on_actionGo_to_the_next_triggered();
@@ -839,8 +835,6 @@ private slots:
     void on_editPassInput_returnPressed();
 
 private:
-    Ui::MainWindow* ui;
-
     bool autoCheckUpdate = false;
     bool OpenFileValidate = false;
 
