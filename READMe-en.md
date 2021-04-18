@@ -26,8 +26,6 @@ OC辅助工具（简称OCAT或ocat） = Config.plist编辑器 + Config.plist数�
 
 OC开发版可以在此下载：https://github.com/acidanthera/OpenCorePkg/actions
 
-非官方简体中文参考手册：https://github.com/SukkaW/OpenCore-Document-zh_Hans  感谢@SukkaW！
-
 ## 话不多说，直接上图
 
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat1.png)
