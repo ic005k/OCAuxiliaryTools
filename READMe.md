@@ -19,10 +19,6 @@
 
 [discourse-link]: https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-auxiliary-tools/
 
-<a href="https://scan.coverity.com/projects/ocauxiliarytools">
-  <img alt="Coverity Scan Build Status"
-       src="https://scan.coverity.com/projects/22982/badge.svg"/>
-</a>
 
 
 OC auxiliary tools（OCAT or ocat for short） = Config.plist editor + Config.plist database + ...
