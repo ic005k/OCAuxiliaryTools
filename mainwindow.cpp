@@ -9397,7 +9397,7 @@ void MainWindow::on_actionFind_triggered()
     listOfComboBoxResults.clear();
     for (int i = 0; i < listOfComboBox.count(); i++) {
         QComboBox* cbox = (QComboBox*)listOfComboBox.at(i);
-        if (cbox != ui->cboxFind) {
+        if (cbox != ui->cboxFind && cbox != ui->cboxTextColor && cbox != ui->cboxBackColor) {
             if (cbox->currentText().toLower().contains(findText.trimmed().toLower())) {
 
                 findCount++;
