@@ -10628,6 +10628,246 @@ void MainWindow::setWM()
     this->setWindowModified(true);
 }
 
+void MainWindow::pasteLine(QTableWidget* w, QAction* pasteAction)
+{
+    connect(pasteAction, &QAction::triggered, [=]() {
+        QString name = w->objectName();
+        QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
+        QSettings Reg(qfile, QSettings::IniFormat);
+
+        QFile file(qfile);
+
+        if (file.exists()) {
+
+            int rowCount = Reg.value("rowCount").toInt();
+            for (int i = rowCount - 1; i > -1; i--) {
+
+                loading = true;
+
+                QString text = Reg.value(QString::number(i) + "/col" + QString::number(0)).toString().trimmed();
+                QString oldColText0 = text;
+                int row = 0;
+                if (w->rowCount() > 0)
+                    row = w->currentRow();
+
+                bool re = false;
+                int reCount = 0;
+                if (w->rowCount() > 0) {
+                    if (w == ui->table_dp_add0 || w == ui->table_dp_del0 || w == ui->table_nv_add0 || w == ui->table_nv_del0 || w == ui->table_nv_ls0) {
+
+                        for (int k = 0; k < w->rowCount(); k++) {
+
+                            if (w->item(k, 0)->text().trimmed().contains(text)) {
+                                re = true;
+                                reCount++;
+                            }
+                        }
+                    }
+                }
+
+                if (w->rowCount() > 0)
+                    w->setCurrentCell(row, 0);
+
+                QStringList colTextList;
+                for (int j = 0; j < w->columnCount(); j++) {
+
+                    text = Reg.value(QString::number(i) + "/col" + QString::number(j)).toString().trimmed();
+
+                    if (re) {
+
+                        text = text + "-" + QString::number(reCount);
+                    }
+
+                    colTextList.append(text);
+                }
+
+                bool writeini = false;
+                bool writevalueini = false;
+                int leftTableCurrentRow = 0;
+                if (w == ui->table_dp_add || w == ui->table_nv_add) {
+
+                    writeini = true;
+                    leftTableCurrentRow = getLetfTableCurrentRow(w);
+                }
+
+                if (w == ui->table_dp_del || w == ui->table_nv_del || w == ui->table_nv_ls) {
+
+                    writevalueini = true;
+                    leftTableCurrentRow = getLetfTableCurrentRow(w);
+                }
+
+                // Undo / Redo
+                QString infoStr;
+                for (int x = 0; x < colTextList.count(); x++) {
+                    infoStr = infoStr + "  [" + colTextList.at(x) + "]";
+                }
+
+                QString infoText = QString::number(row + 1) + "  " + infoStr;
+                QUndoCommand* pastelineCommand = new CopyPasteLineCommand(w, row, 0, infoText, colTextList, oldColText0, writeini, writevalueini, leftTableCurrentRow);
+                undoStack->push(pastelineCommand);
+
+                loading = false;
+            }
+        }
+        file.close();
+    });
+}
+
+void MainWindow::copyLine(QTableWidget* w, QAction* copyAction)
+{
+    connect(copyAction, &QAction::triggered, [=]() {
+        if (w->rowCount() == 0)
+            return;
+
+        QString name = w->objectName();
+        QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
+        QFile file(qfile);
+
+        QItemSelectionModel* selections = w->selectionModel(); //返回当前的选择模式
+        QModelIndexList selectedsList = selections->selectedIndexes(); //返回所有选定的模型项目索引列表
+
+        QSettings Reg(qfile, QSettings::IniFormat);
+        Reg.setValue("rowCount", selectedsList.count());
+        Reg.setValue("CurrentDateTime", CurrentDateTime);
+
+        for (int i = 0; i < selectedsList.count(); i++) {
+
+            int curRow = selectedsList.at(i).row();
+            w->setCurrentCell(curRow, 0);
+
+            for (int j = 0; j < w->columnCount(); j++) {
+                Reg.setValue(QString::number(i) + "/col" + QString::number(j), w->item(w->currentRow(), j)->text());
+            }
+        }
+        file.close();
+    });
+}
+
+void MainWindow::cutLine(QTableWidget* w, QAction* cutAction, QAction* copyAction)
+{
+    connect(cutAction, &QAction::triggered, [=]() {
+        QItemSelectionModel* selections = w->selectionModel();
+        QModelIndexList selectedsList = selections->selectedIndexes();
+
+        copyAction->triggered(true);
+
+        w->clearSelection();
+        w->setSelectionMode(QAbstractItemView::MultiSelection);
+        for (int z = 0; z < selectedsList.count(); z++) {
+            w->selectRow(selectedsList.at(z).row());
+        }
+
+        if (w == ui->table_dp_add)
+            on_btnDPAdd_Del_clicked();
+
+        else if (w == ui->table_dp_del)
+            on_btnDPDel_Del_clicked();
+
+        else if (w == ui->table_nv_add)
+            on_btnNVRAMAdd_Del_clicked();
+
+        else if (w == ui->table_nv_del)
+            on_btnNVRAMDel_Del_clicked();
+
+        else if (w == ui->table_nv_ls)
+            on_btnNVRAMLS_Del_clicked();
+
+        else
+            del_item(w);
+
+        w->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    });
+}
+
+void MainWindow::tablePopMenu(QTableWidget* w, QAction* cutAction, QAction* copyAction, QAction* pasteAction, QAction* showtipAction, QMenu* popMenu)
+{
+    connect(w, &QTableWidget::customContextMenuRequested, [=](const QPoint& pos) {
+        Q_UNUSED(pos);
+
+        QString name = w->objectName();
+
+        QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
+        QFile file(qfile);
+        if (file.exists()) {
+
+            QSettings Reg(qfile, QSettings::IniFormat);
+
+            pasteAction->setEnabled(true);
+
+            if (w == ui->table_dp_add0 || w == ui->table_dp_del0 || w == ui->table_nv_add0 || w == ui->table_nv_del0 || w == ui->table_nv_ls0) {
+
+                QString dirpath = QDir::homePath() + "/.config/QtOCC/";
+
+                QString text = Reg.value("0/col" + QString::number(0)).toString().trimmed();
+
+                text = text.replace("/", "-");
+                QString oldRightTable = Reg.value("CurrentDateTime").toString() + w->objectName() + text + ".ini";
+                QFileInfo fi(dirpath + oldRightTable);
+
+                if (!fi.exists())
+                    pasteAction->setEnabled(false);
+                else {
+
+                    copyAction->setEnabled(true);
+                    cutAction->setEnabled(true);
+                }
+            }
+
+            if (w == ui->table_dp_add) {
+                if (ui->table_dp_add0->rowCount() > 0)
+                    pasteAction->setEnabled(true);
+                else
+                    pasteAction->setEnabled(false);
+            }
+
+            if (w == ui->table_dp_del) {
+                if (ui->table_dp_del0->rowCount() > 0)
+                    pasteAction->setEnabled(true);
+                else
+                    pasteAction->setEnabled(false);
+            }
+
+            if (w == ui->table_nv_add) {
+                if (ui->table_nv_add0->rowCount() > 0)
+                    pasteAction->setEnabled(true);
+                else
+                    pasteAction->setEnabled(false);
+            }
+
+            if (w == ui->table_nv_del) {
+                if (ui->table_nv_del0->rowCount() > 0)
+                    pasteAction->setEnabled(true);
+                else
+                    pasteAction->setEnabled(false);
+            }
+
+            if (w == ui->table_nv_ls) {
+                if (ui->table_nv_ls0->rowCount() > 0)
+                    pasteAction->setEnabled(true);
+                else
+                    pasteAction->setEnabled(false);
+            }
+
+        } else
+            pasteAction->setEnabled(false);
+
+        if (w->rowCount() == 0) {
+            copyAction->setEnabled(false);
+            cutAction->setEnabled(false);
+        } else {
+            copyAction->setEnabled(true);
+            cutAction->setEnabled(true);
+        }
+
+        if (w->toolTip().trimmed() == "")
+            showtipAction->setVisible(false);
+        else
+            showtipAction->setVisible(true);
+
+        popMenu->exec(QCursor::pos());
+    });
+}
+
 void MainWindow::init_CopyPasteLine()
 {
     listOfTableWidget.clear();
@@ -10682,235 +10922,15 @@ void MainWindow::init_CopyPasteLine()
         });
 
         // 剪切行
-        connect(cutAction, &QAction::triggered, [=]() {
-            QItemSelectionModel* selections = w->selectionModel();
-            QModelIndexList selectedsList = selections->selectedIndexes();
-
-            copyAction->triggered(true);
-
-            w->clearSelection();
-            w->setSelectionMode(QAbstractItemView::MultiSelection);
-            for (int z = 0; z < selectedsList.count(); z++) {
-                w->selectRow(selectedsList.at(z).row());
-            }
-
-            if (w == ui->table_dp_add)
-                on_btnDPAdd_Del_clicked();
-
-            else if (w == ui->table_dp_del)
-                on_btnDPDel_Del_clicked();
-
-            else if (w == ui->table_nv_add)
-                on_btnNVRAMAdd_Del_clicked();
-
-            else if (w == ui->table_nv_del)
-                on_btnNVRAMDel_Del_clicked();
-
-            else if (w == ui->table_nv_ls)
-                on_btnNVRAMLS_Del_clicked();
-
-            else
-                del_item(w);
-
-            w->setSelectionMode(QAbstractItemView::ExtendedSelection);
-        });
+        cutLine(w, cutAction, copyAction);
 
         // 复制行
-        connect(copyAction, &QAction::triggered, [=]() {
-            if (w->rowCount() == 0)
-                return;
-
-            QString name = w->objectName();
-            QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
-            QFile file(qfile);
-
-            QItemSelectionModel* selections = w->selectionModel(); //返回当前的选择模式
-            QModelIndexList selectedsList = selections->selectedIndexes(); //返回所有选定的模型项目索引列表
-
-            QSettings Reg(qfile, QSettings::IniFormat);
-            Reg.setValue("rowCount", selectedsList.count());
-            Reg.setValue("CurrentDateTime", CurrentDateTime);
-
-            for (int i = 0; i < selectedsList.count(); i++) {
-
-                int curRow = selectedsList.at(i).row();
-                w->setCurrentCell(curRow, 0);
-
-                for (int j = 0; j < w->columnCount(); j++) {
-                    Reg.setValue(QString::number(i) + "/col" + QString::number(j), w->item(w->currentRow(), j)->text());
-                }
-            }
-            file.close();
-        });
+        copyLine(w, copyAction);
 
         // 粘贴行
-        connect(pasteAction, &QAction::triggered, [=]() {
-            QString name = w->objectName();
-            QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
-            QSettings Reg(qfile, QSettings::IniFormat);
+        pasteLine(w, pasteAction);
 
-            QFile file(qfile);
-
-            if (file.exists()) {
-
-                int rowCount = Reg.value("rowCount").toInt();
-                for (int i = rowCount - 1; i > -1; i--) {
-
-                    loading = true;
-
-                    QString text = Reg.value(QString::number(i) + "/col" + QString::number(0)).toString().trimmed();
-                    QString oldColText0 = text;
-                    int row = 0;
-                    if (w->rowCount() > 0)
-                        row = w->currentRow();
-
-                    bool re = false;
-                    int reCount = 0;
-                    if (w->rowCount() > 0) {
-                        if (w == ui->table_dp_add0 || w == ui->table_dp_del0 || w == ui->table_nv_add0 || w == ui->table_nv_del0 || w == ui->table_nv_ls0) {
-
-                            for (int k = 0; k < w->rowCount(); k++) {
-
-                                if (w->item(k, 0)->text().trimmed().contains(text)) {
-                                    re = true;
-                                    reCount++;
-                                }
-                            }
-                        }
-                    }
-
-                    if (w->rowCount() > 0)
-                        w->setCurrentCell(row, 0);
-
-                    QStringList colTextList;
-                    for (int j = 0; j < w->columnCount(); j++) {
-
-                        text = Reg.value(QString::number(i) + "/col" + QString::number(j)).toString().trimmed();
-
-                        if (re) {
-
-                            text = text + "-" + QString::number(reCount);
-                        }
-
-                        colTextList.append(text);
-                    }
-
-                    bool writeini = false;
-                    bool writevalueini = false;
-                    int leftTableCurrentRow = 0;
-                    if (w == ui->table_dp_add || w == ui->table_nv_add) {
-
-                        writeini = true;
-                        leftTableCurrentRow = getLetfTableCurrentRow(w);
-                    }
-
-                    if (w == ui->table_dp_del || w == ui->table_nv_del || w == ui->table_nv_ls) {
-
-                        writevalueini = true;
-                        leftTableCurrentRow = getLetfTableCurrentRow(w);
-                    }
-
-                    // Undo / Redo
-                    QString infoStr;
-                    for (int x = 0; x < colTextList.count(); x++) {
-                        infoStr = infoStr + "  [" + colTextList.at(x) + "]";
-                    }
-
-                    QString infoText = QString::number(row + 1) + "  " + infoStr;
-                    QUndoCommand* pastelineCommand = new CopyPasteLineCommand(w, row, 0, infoText, colTextList, oldColText0, writeini, writevalueini, leftTableCurrentRow);
-                    undoStack->push(pastelineCommand);
-
-                    loading = false;
-                }
-            }
-            file.close();
-        });
-
-        connect(w, &QTableWidget::customContextMenuRequested, [=](const QPoint& pos) {
-            Q_UNUSED(pos);
-
-            QString name = w->objectName();
-
-            QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
-            QFile file(qfile);
-            if (file.exists()) {
-
-                QSettings Reg(qfile, QSettings::IniFormat);
-
-                pasteAction->setEnabled(true);
-
-                if (w == ui->table_dp_add0 || w == ui->table_dp_del0 || w == ui->table_nv_add0 || w == ui->table_nv_del0 || w == ui->table_nv_ls0) {
-
-                    QString dirpath = QDir::homePath() + "/.config/QtOCC/";
-
-                    QString text = Reg.value("0/col" + QString::number(0)).toString().trimmed();
-
-                    text = text.replace("/", "-");
-                    QString oldRightTable = Reg.value("CurrentDateTime").toString() + w->objectName() + text + ".ini";
-                    QFileInfo fi(dirpath + oldRightTable);
-
-                    if (!fi.exists())
-                        pasteAction->setEnabled(false);
-                    else {
-
-                        copyAction->setEnabled(true);
-                        cutAction->setEnabled(true);
-                    }
-                }
-
-                if (w == ui->table_dp_add) {
-                    if (ui->table_dp_add0->rowCount() > 0)
-                        pasteAction->setEnabled(true);
-                    else
-                        pasteAction->setEnabled(false);
-                }
-
-                if (w == ui->table_dp_del) {
-                    if (ui->table_dp_del0->rowCount() > 0)
-                        pasteAction->setEnabled(true);
-                    else
-                        pasteAction->setEnabled(false);
-                }
-
-                if (w == ui->table_nv_add) {
-                    if (ui->table_nv_add0->rowCount() > 0)
-                        pasteAction->setEnabled(true);
-                    else
-                        pasteAction->setEnabled(false);
-                }
-
-                if (w == ui->table_nv_del) {
-                    if (ui->table_nv_del0->rowCount() > 0)
-                        pasteAction->setEnabled(true);
-                    else
-                        pasteAction->setEnabled(false);
-                }
-
-                if (w == ui->table_nv_ls) {
-                    if (ui->table_nv_ls0->rowCount() > 0)
-                        pasteAction->setEnabled(true);
-                    else
-                        pasteAction->setEnabled(false);
-                }
-
-            } else
-                pasteAction->setEnabled(false);
-
-            if (w->rowCount() == 0) {
-                copyAction->setEnabled(false);
-                cutAction->setEnabled(false);
-            } else {
-                copyAction->setEnabled(true);
-                cutAction->setEnabled(true);
-            }
-
-            if (w->toolTip().trimmed() == "")
-                showtipAction->setVisible(false);
-            else
-                showtipAction->setVisible(true);
-
-            popMenu->exec(QCursor::pos());
-        });
+        tablePopMenu(w, cutAction, copyAction, pasteAction, showtipAction, popMenu);
     }
 }
 

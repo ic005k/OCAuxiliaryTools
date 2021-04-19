@@ -97,6 +97,10 @@ public:
     QTableWidget* getLeftTable(QTableWidget* table);
     int getLetfTableCurrentRow(QTableWidget* table);
     void init_CopyPasteLine();
+    void pasteLine(QTableWidget* w, QAction* pasteAction);
+    void copyLine(QTableWidget* w, QAction* copyAction);
+    void cutLine(QTableWidget* w, QAction* cutAction, QAction* copyAction);
+    void tablePopMenu(QTableWidget* w, QAction* cutAction, QAction* copyAction, QAction* pasteAction, QAction* showtipAction, QMenu* popMenu);
     void loadReghtTable(QTableWidget* t0, QTableWidget* t);
     void endPasteLine(QTableWidget* w, int row, QString colText0);
     void endDelLeftTable(QTableWidget* t0);
