@@ -7002,59 +7002,6 @@ void MainWindow::init_HelpMenu()
 
     connect(ui->actionPlist_editor, &QAction::triggered, this, &MainWindow::on_line20);
     connect(ui->actionDSDT_SSDT_editor, &QAction::triggered, this, &MainWindow::on_line21);
-}
-
-void MainWindow::init_MainUI()
-{
-    orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
-    orgLineEditStyle = ui->editBID->styleSheet();
-    orgLabelStyle = ui->label->styleSheet();
-    orgCheckBoxStyle = ui->chk1->styleSheet();
-
-    int iSize = 32;
-    ui->toolBar->setIconSize(QSize(iSize, iSize));
-
-    init_listMainSub();
-
-    init_FileMenu();
-
-    init_EditMenu();
-
-    init_HelpMenu();
-
-    // Undo/Redo
-    undoStack = new QUndoStack(this);
-
-    undoView = new QUndoView(undoStack);
-    undoView->setWindowTitle(tr("Command List"));
-    //undoView->show();
-    undoView->setAttribute(Qt::WA_QuitOnClose, false);
-
-    undoAction = undoStack->createUndoAction(this, tr("Undo"));
-    //undoAction->setShortcuts(QKeySequence::Undo);
-    if (mac || osx1012)
-        undoAction->setIconVisibleInMenu(false);
-
-    redoAction = undoStack->createRedoAction(this, tr("Redo"));
-    //redoAction->setShortcuts(QKeySequence::Redo);
-    if (mac || osx1012)
-        redoAction->setIconVisibleInMenu(false);
-
-    ui->menuTools->addSeparator();
-    ui->menuTools->addAction(undoAction);
-    ui->menuTools->addAction(redoAction);
-
-    ui->toolBar->addSeparator();
-
-    //Undo
-    undoAction->setShortcut(tr("ctrl+1"));
-    undoAction->setIcon(QIcon(":/icon/undo.png"));
-    ui->toolBar->addAction(undoAction);
-
-    //Redo
-    redoAction->setShortcut(tr("ctrl+2"));
-    redoAction->setIcon(QIcon(":/icon/redo.png"));
-    ui->toolBar->addAction(redoAction);
 
     //OC工厂
     ui->toolBar->addSeparator();
@@ -7077,7 +7024,70 @@ void MainWindow::init_MainUI()
     ui->btnHelp->setIcon(QIcon(":/icon/doc.png"));
     ui->toolBar->addAction(ui->btnHelp);
 
+    // Bug Report
+    if (mac || osx1012)
+        ui->actionBug_Report->setIconVisibleInMenu(false);
+    ui->actionBug_Report->setIcon(QIcon(":/icon/about.png"));
+
     ui->toolBar->addSeparator();
+}
+
+void MainWindow::init_UndoRedo()
+{
+    // Undo/Redo
+    undoStack = new QUndoStack(this);
+
+    undoView = new QUndoView(undoStack);
+    undoView->setWindowTitle(tr("Command List"));
+    //undoView->show();
+    undoView->setAttribute(Qt::WA_QuitOnClose, false);
+
+    undoAction = undoStack->createUndoAction(this, tr("Undo"));
+    //undoAction->setShortcuts(QKeySequence::Undo);
+    if (mac || osx1012)
+        undoAction->setIconVisibleInMenu(false);
+
+    redoAction = undoStack->createRedoAction(this, tr("Redo"));
+    //redoAction->setShortcuts(QKeySequence::Redo);
+    if (mac || osx1012)
+        redoAction->setIconVisibleInMenu(false);
+
+    ui->menuTools->addSeparator();
+    ui->menuTools->addAction(undoAction);
+    ui->menuTools->addAction(redoAction);
+
+    //Undo
+    undoAction->setShortcut(tr("ctrl+1"));
+    undoAction->setIcon(QIcon(":/icon/undo.png"));
+    ui->toolBar->addAction(undoAction);
+
+    //Redo
+    redoAction->setShortcut(tr("ctrl+2"));
+    redoAction->setIcon(QIcon(":/icon/redo.png"));
+    ui->toolBar->addAction(redoAction);
+
+    ui->toolBar->addSeparator();
+}
+
+void MainWindow::init_MainUI()
+{
+    orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
+    orgLineEditStyle = ui->editBID->styleSheet();
+    orgLabelStyle = ui->label->styleSheet();
+    orgCheckBoxStyle = ui->chk1->styleSheet();
+
+    int iSize = 32;
+    ui->toolBar->setIconSize(QSize(iSize, iSize));
+
+    init_listMainSub();
+
+    init_FileMenu();
+
+    init_EditMenu();
+
+    init_HelpMenu();
+
+    init_UndoRedo();
 
     //搜索框
     ui->toolBar->addWidget(ui->lblCount);
@@ -7135,11 +7145,6 @@ void MainWindow::init_MainUI()
     ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
     ui->actionGo_to_the_next->setIcon(QIcon(":/icon/2.png"));
     ui->toolBar->addAction(ui->actionGo_to_the_next);
-
-    // Bug Report
-    if (mac || osx1012)
-        ui->actionBug_Report->setIconVisibleInMenu(false);
-    ui->actionBug_Report->setIcon(QIcon(":/icon/about.png"));
 
     CopyLabel();
 

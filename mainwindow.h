@@ -844,6 +844,7 @@ private:
     void init_FileMenu();
     void init_EditMenu();
     void init_HelpMenu();
+    void init_UndoRedo();
     bool autoCheckUpdate = false;
     bool OpenFileValidate = false;
 
