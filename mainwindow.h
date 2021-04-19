@@ -265,7 +265,7 @@ private slots:
     void copyText(QListWidget* listW);
     void OpenDir_clicked();
     void on_ShareConfig();
-    void on_Database();
+
     void on_line1();
     void on_line2();
     void on_line3();
@@ -493,8 +493,6 @@ private slots:
 
     void on_btnKernelForce_Del_clicked();
 
-    void on_btnMountEsp();
-
     void on_table_uefi_ReservedMemory_currentCellChanged(int currentRow,
         int currentColumn,
         int previousRow,
@@ -629,8 +627,6 @@ private slots:
     void on_tableDevices_cellClicked(int row, int column);
 
     void on_table_uefi_drivers_cellClicked(int row, int column);
-
-    void on_btnOcvalidate();
 
     void readResultCheckData();
 
@@ -834,11 +830,20 @@ private slots:
 
     void on_editPassInput_returnPressed();
 
+    void on_actionDatabase_triggered();
+
+    void on_actionOcvalidate_triggered();
+
+    void on_actionMountEsp_triggered();
+
 private:
     void init_listMainSub();
     void CopyCheckbox();
     void CopyLabel();
     void LineEditDataCheck();
+    void init_FileMenu();
+    void init_EditMenu();
+    void init_HelpMenu();
     bool autoCheckUpdate = false;
     bool OpenFileValidate = false;
 
@@ -929,7 +934,7 @@ private:
     void PickerAttributes();
     bool pickerAttributes = false;
 
-    void init_Menu();
+    void init_MainUI();
 
     void init_setWindowModified();
 

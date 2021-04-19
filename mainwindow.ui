@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -3015,7 +3015,7 @@ The behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -4458,7 +4458,7 @@ Until your operating system is personalised you will only be able to load macOS 
 
 - Disabled - 加载DMG镜像会失败。在大多数情况下，禁用策略仍会让 macOS Recovery 加载，因为通常有与 Apple Secure Boot 兼容的 boot.efi 文件。然而，存储在 com.apple.recovery.boot 目录中的手动下载的 DMG 映像将无法加载。
 
-- Signed - 仅加载苹果签名的DMG图像。由于苹果安全引导设计，签名策略将允许任何苹果签名的macOS恢复加载，而不管苹果安全引导状态如何，这可能并不总是理想的。
+- Signed - 仅加载苹果签名的DMG映像。由于苹果安全引导设计，签名策略将允许任何苹果签名的macOS恢复加载，而不管苹果安全引导状态如何，这可能并不总是理想的。
 
 - Any - 任何DMG映像都将作为普通文件系统加载。强烈不建议使用“Any”策略，并且在激活Apple Secure Boot时将导致启动失败。</string>
                    </property>
@@ -10022,8 +10022,8 @@ Enable this option to be able to see all the boot options when having multiple d
      <string>Edit</string>
     </property>
     <addaction name="separator"/>
-    <addaction name="btnMountEsp"/>
-    <addaction name="btnOcvalidate"/>
+    <addaction name="actionMountEsp"/>
+    <addaction name="actionOcvalidate"/>
     <addaction name="separator"/>
     <addaction name="actionUpgrade_OC"/>
     <addaction name="actionGenerateEFI"/>
@@ -10160,12 +10160,12 @@ Enable this option to be able to see all the boot options when having multiple d
     <string>OpenCanopyIcons</string>
    </property>
   </action>
-  <action name="btnMountEsp">
+  <action name="actionMountEsp">
    <property name="text">
     <string>MountESP</string>
    </property>
   </action>
-  <action name="btnOcvalidate">
+  <action name="actionOcvalidate">
    <property name="text">
     <string>OC Validate</string>
    </property>

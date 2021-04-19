@@ -72,7 +72,7 @@ MainWindow::MainWindow(QWidget* parent)
     linuxOS = true;
 #endif
 
-    init_Menu();
+    init_MainUI();
 
     init_setWindowModified();
 
@@ -280,7 +280,7 @@ void MainWindow::openFile(QString PlistFileName)
 
     if (!RefreshAllDatabase) {
         OpenFileValidate = true;
-        on_btnOcvalidate();
+        on_actionOcvalidate_triggered();
 
         QSettings settings;
         QFileInfo fInfo(PlistFileName);
@@ -2399,7 +2399,7 @@ void MainWindow::SavePlist(QString FileName)
 
     if (!RefreshAllDatabase) {
         OpenFileValidate = true;
-        on_btnOcvalidate();
+        on_actionOcvalidate_triggered();
     }
 }
 
@@ -5032,11 +5032,6 @@ void MainWindow::mount_esp_mac(QString strEfiDisk)
     dm->execute("osascript", QStringList() << fileName);
 }
 
-void MainWindow::on_btnMountEsp()
-{
-    mount_esp();
-}
-
 void MainWindow::closeEvent(QCloseEvent* event)
 {
 
@@ -6873,19 +6868,8 @@ void MainWindow::init_listMainSub()
     ui->listSub->setCurrentRow(index);
 }
 
-void MainWindow::init_Menu()
+void MainWindow::init_FileMenu()
 {
-
-    orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
-    orgLineEditStyle = ui->editBID->styleSheet();
-    orgLabelStyle = ui->label->styleSheet();
-    orgCheckBoxStyle = ui->chk1->styleSheet();
-
-    init_listMainSub();
-
-    int iSize = 32;
-    ui->toolBar->setIconSize(QSize(iSize, iSize));
-
     //New
     if (mac || osx1012)
         ui->actionNewWindow->setIconVisibleInMenu(false);
@@ -6916,6 +6900,7 @@ void MainWindow::init_Menu()
     ui->actionSave->setShortcut(tr("ctrl+s"));
     ui->actionSave->setIcon(QIcon(":/icon/save.png"));
     ui->toolBar->addAction(ui->actionSave);
+    ui->actionSave->setEnabled(false);
 
     //SaveAs
     if (mac || osx1012)
@@ -6929,27 +6914,28 @@ void MainWindow::init_Menu()
     ui->actionQuit->setMenuRole(QAction::QuitRole);
 
     ui->toolBar->addSeparator();
+}
 
-    //Tools
+void MainWindow::init_EditMenu()
+{
+    //Edit
     //OC Validate
     if (mac || osx1012)
-        ui->btnOcvalidate->setIconVisibleInMenu(false);
+        ui->actionOcvalidate->setIconVisibleInMenu(false);
 
-    connect(ui->btnOcvalidate, &QAction::triggered, this, &MainWindow::on_btnOcvalidate);
-    ui->btnOcvalidate->setShortcut(tr("ctrl+l"));
-    ui->btnOcvalidate->setIcon(QIcon(":/icon/ov.png"));
-    ui->toolBar->addAction(ui->btnOcvalidate);
+    ui->actionOcvalidate->setShortcut(tr("ctrl+l"));
+    ui->actionOcvalidate->setIcon(QIcon(":/icon/ov.png"));
+    ui->toolBar->addAction(ui->actionOcvalidate);
 
     ui->toolBar->addSeparator();
 
     //MountESP
     if (mac || osx1012)
-        ui->btnMountEsp->setIconVisibleInMenu(false);
+        ui->actionMountEsp->setIconVisibleInMenu(false);
 
-    connect(ui->btnMountEsp, &QAction::triggered, this, &MainWindow::on_btnMountEsp);
-    ui->btnMountEsp->setShortcut(tr("ctrl+m"));
-    ui->btnMountEsp->setIcon(QIcon(":/icon/esp.png"));
-    ui->toolBar->addAction(ui->btnMountEsp);
+    ui->actionMountEsp->setShortcut(tr("ctrl+m"));
+    ui->actionMountEsp->setIcon(QIcon(":/icon/esp.png"));
+    ui->toolBar->addAction(ui->actionMountEsp);
 
     //GenerateEFI
     if (mac || osx1012)
@@ -6972,7 +6958,6 @@ void MainWindow::init_Menu()
     if (mac || osx1012)
         ui->actionDatabase->setIconVisibleInMenu(false);
 
-    connect(ui->actionDatabase, &QAction::triggered, this, &MainWindow::on_Database);
     ui->actionDatabase->setShortcut(tr("ctrl+d"));
     ui->actionDatabase->setIcon(QIcon(":/icon/db.png"));
     ui->toolBar->addAction(ui->actionDatabase);
@@ -6982,16 +6967,19 @@ void MainWindow::init_Menu()
         ui->actionOpen_database_directory->setIconVisibleInMenu(false);
     ui->actionOpen_database_directory->setIcon(QIcon(":/icon/opendb.png"));
     ui->toolBar->addAction(ui->actionOpen_database_directory);
-
     connect(ui->actionOpen_database_directory, &QAction::triggered, this, &MainWindow::OpenDir_clicked);
 
+    // 分享配置文件
     connect(ui->actionShareConfig, &QAction::triggered, this, &MainWindow::on_ShareConfig);
     ui->actionShareConfig->setShortcut(tr("ctrl+r"));
 
     connect(ui->btnExportMaster, &QAction::triggered, this, &MainWindow::on_btnExportMaster);
 
     connect(ui->btnImportMaster, &QAction::triggered, this, &MainWindow::on_btnImportMaster);
+}
 
+void MainWindow::init_HelpMenu()
+{
     //Help
     connect(ui->btnHelp, &QAction::triggered, this, &MainWindow::on_btnHelp);
     ui->btnHelp->setShortcut(tr("ctrl+p"));
@@ -7014,8 +7002,25 @@ void MainWindow::init_Menu()
 
     connect(ui->actionPlist_editor, &QAction::triggered, this, &MainWindow::on_line20);
     connect(ui->actionDSDT_SSDT_editor, &QAction::triggered, this, &MainWindow::on_line21);
+}
 
-    ui->actionSave->setEnabled(false);
+void MainWindow::init_MainUI()
+{
+    orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
+    orgLineEditStyle = ui->editBID->styleSheet();
+    orgLabelStyle = ui->label->styleSheet();
+    orgCheckBoxStyle = ui->chk1->styleSheet();
+
+    int iSize = 32;
+    ui->toolBar->setIconSize(QSize(iSize, iSize));
+
+    init_listMainSub();
+
+    init_FileMenu();
+
+    init_EditMenu();
+
+    init_HelpMenu();
 
     // Undo/Redo
     undoStack = new QUndoStack(this);
@@ -7324,39 +7329,6 @@ void MainWindow::clearFindTexts()
     clearTextsAction->setEnabled(false);
 }
 
-void MainWindow::on_Database()
-{
-    myDatabase->setModal(true);
-    myDatabase->show();
-
-    QFileInfo appInfo(qApp->applicationDirPath());
-
-    QString dirpath = appInfo.filePath() + "/Database/";
-    //设置要遍历的目录
-    QDir dir(dirpath);
-    //设置文件过滤器
-    QStringList nameFilters;
-    //设置文件过滤格式
-    nameFilters << "*.plist";
-    //将过滤后的文件名称存入到files列表中
-    QStringList filesTemp = dir.entryList(nameFilters, QDir::Files | QDir::Readable, QDir::Name);
-    QStringList files;
-    for (int j = 0; j < filesTemp.count(); j++) {
-        if (filesTemp.at(j).mid(0, 1) != ".")
-            files.append(filesTemp.at(j));
-    }
-
-    tableDatabase->setRowCount(0);
-    tableDatabase->setRowCount(files.count());
-    for (int i = 0; i < files.count(); i++) {
-        QTableWidgetItem* newItem1;
-        newItem1 = new QTableWidgetItem(files.at(i));
-        tableDatabase->setItem(i, 0, newItem1);
-    }
-
-    myDatabase->setWindowTitle(tr("Configuration file database") + " : " + getDatabaseVer());
-}
-
 QString MainWindow::getDatabaseVer()
 {
 
@@ -7580,28 +7552,6 @@ void MainWindow::on_table_uefi_drivers_cellClicked(int row, int column)
     ui->statusbar->showMessage(ui->table_uefi_drivers->currentItem()->text());
 }
 
-void MainWindow::on_btnOcvalidate()
-{
-
-    QFileInfo appInfo(qApp->applicationDirPath());
-    chkdata = new QProcess;
-#ifdef Q_OS_WIN32
-    chkdata->start(appInfo.filePath() + "/Database/win/ocvalidate.exe", QStringList() << SaveFileName);
-
-#endif
-
-#ifdef Q_OS_LINUX
-    chkdata->start(appInfo.filePath() + "/Database/linux/ocvalidate", QStringList() << SaveFileName);
-
-#endif
-
-#ifdef Q_OS_MAC
-
-    chkdata->start(appInfo.filePath() + "/Database/mac/ocvalidate", QStringList() << SaveFileName);
-#endif
-    connect(chkdata, SIGNAL(finished(int)), this, SLOT(readResultCheckData()));
-}
-
 void MainWindow::readResultCheckData()
 {
     QString result = QString::fromLocal8Bit(chkdata->readAll()); //与保存文件的格式一致
@@ -7615,8 +7565,8 @@ void MainWindow::readResultCheckData()
         str = tr("OK !");
         strMsg = result + "\n\n" + str;
 
-        ui->btnOcvalidate->setIcon(QIcon(":/icon/ov.png"));
-        ui->btnOcvalidate->setToolTip(ui->btnOcvalidate->text());
+        ui->actionOcvalidate->setIcon(QIcon(":/icon/ov.png"));
+        ui->actionOcvalidate->setToolTip(ui->actionOcvalidate->text());
 
         dlgOCV->setGoEnabled(false);
 
@@ -7625,8 +7575,8 @@ void MainWindow::readResultCheckData()
         strMsg = result;
         dlgOCV->setGoEnabled(true);
 
-        ui->btnOcvalidate->setIcon(QIcon(":/icon/overror.png"));
-        ui->btnOcvalidate->setToolTip(tr("There is a issue with the configuration file."));
+        ui->actionOcvalidate->setIcon(QIcon(":/icon/overror.png"));
+        ui->actionOcvalidate->setToolTip(tr("There is a issue with the configuration file."));
     }
 
     if (OpenFileValidate && !dlgOCV->isVisible()) {
@@ -11720,4 +11670,63 @@ void MainWindow::on_editPassInput_returnPressed()
 
     if (ui->btnGetPassHash->isEnabled())
         on_btnGetPassHash_clicked();
+}
+
+void MainWindow::on_actionDatabase_triggered()
+{
+    myDatabase->setModal(true);
+    myDatabase->show();
+
+    QFileInfo appInfo(qApp->applicationDirPath());
+
+    QString dirpath = appInfo.filePath() + "/Database/";
+    //设置要遍历的目录
+    QDir dir(dirpath);
+    //设置文件过滤器
+    QStringList nameFilters;
+    //设置文件过滤格式
+    nameFilters << "*.plist";
+    //将过滤后的文件名称存入到files列表中
+    QStringList filesTemp = dir.entryList(nameFilters, QDir::Files | QDir::Readable, QDir::Name);
+    QStringList files;
+    for (int j = 0; j < filesTemp.count(); j++) {
+        if (filesTemp.at(j).mid(0, 1) != ".")
+            files.append(filesTemp.at(j));
+    }
+
+    tableDatabase->setRowCount(0);
+    tableDatabase->setRowCount(files.count());
+    for (int i = 0; i < files.count(); i++) {
+        QTableWidgetItem* newItem1;
+        newItem1 = new QTableWidgetItem(files.at(i));
+        tableDatabase->setItem(i, 0, newItem1);
+    }
+
+    myDatabase->setWindowTitle(tr("Configuration file database") + " : " + getDatabaseVer());
+}
+
+void MainWindow::on_actionOcvalidate_triggered()
+{
+    QFileInfo appInfo(qApp->applicationDirPath());
+    chkdata = new QProcess;
+#ifdef Q_OS_WIN32
+    chkdata->start(appInfo.filePath() + "/Database/win/ocvalidate.exe", QStringList() << SaveFileName);
+
+#endif
+
+#ifdef Q_OS_LINUX
+    chkdata->start(appInfo.filePath() + "/Database/linux/ocvalidate", QStringList() << SaveFileName);
+
+#endif
+
+#ifdef Q_OS_MAC
+
+    chkdata->start(appInfo.filePath() + "/Database/mac/ocvalidate", QStringList() << SaveFileName);
+#endif
+    connect(chkdata, SIGNAL(finished(int)), this, SLOT(readResultCheckData()));
+}
+
+void MainWindow::on_actionMountEsp_triggered()
+{
+    mount_esp();
 }
