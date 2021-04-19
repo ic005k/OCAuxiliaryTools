@@ -8214,7 +8214,7 @@ QString MainWindow::getWMIC(const QString& cmd)
     QStringList sl;
     QString str = "";
     sl << str;
-    p.start(cmd);
+    p.start(cmd, sl);
     p.waitForFinished();
     QString result = QString::fromLocal8Bit(p.readAllStandardOutput());
     QStringList list = cmd.split(" ");
@@ -8283,11 +8283,7 @@ QString MainWindow::getMacInfo(const QString& cmd)
     p.start(cmd, sl);
     p.waitForFinished();
     QString result = QString::fromLocal8Bit(p.readAllStandardOutput());
-    //QStringList list = cmd.split(" ");
-    //result = result.remove(list.last(), Qt::CaseInsensitive);
-    //result = result.replace("\r", "");
-    //result = result.replace("\n", "");
-    //result = result.simplified();
+
     result = result.replace("machdep.cpu.", "");
     return result;
 }
@@ -9799,7 +9795,7 @@ void MainWindow::goResultsLineEdit(QString objName)
                 for (int k = 0; k < listOfLineEdit.count(); k++) {
 
                     if (listOfLineEdit.at(k)->objectName() == name) {
-                        //qDebug() << name;
+
                         QString style = "QLineEdit{background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
                         QLineEdit* w = (QLineEdit*)listOfLineEdit.at(k);
                         w->setStyleSheet(style);
@@ -9954,7 +9950,6 @@ void MainWindow::goResults(int index)
                                     QBrush myBrush;
                                     myBrush.setStyle(Qt::SolidPattern);
                                     myBrush.setColor(Qt::blue);
-                                    //w->horizontalHeaderItem(x)->setBackground(myBrush);
 
                                     w->horizontalHeaderItem(x)->setForeground(QColor(255, 0, 0));
                                 }
@@ -10059,8 +10054,6 @@ void MainWindow::clearComboBoxMarker()
     for (int i = 0; i < listOfComboBoxResults.count(); i++) {
 
         QComboBox* w = (QComboBox*)listOfComboBoxResults.at(i);
-
-        //w->setStyleSheet(orgComboBoxStyle);
 
         if (red < 55) {
 
@@ -10303,18 +10296,17 @@ QWidget* MainWindow::getSubTabWidget(int m, int s)
     return NULL;
 }
 
-//键盘按下事件
 void MainWindow::keyPressEvent(QKeyEvent* event)
 {
     switch (event->key()) {
-    //ESC键
+
     case Qt::Key_Escape:
 
         myTable->removeCellWidget(myTable->currentRow(), myTable->currentColumn());
         myTable->setFocus();
 
         break;
-    //回车键
+
     case Qt::Key_Return:
         QTableWidget* t;
 
@@ -10531,37 +10523,33 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
         lineEditEnter = false;
 
         break;
-    //退格键
+
     case Qt::Key_Backspace:
-        //qDebug() << "Back";
+
         break;
-    //空格键
+
     case Qt::Key_Space:
-        //qDebug() << "Space";
+
         break;
-    //F1键
+
     case Qt::Key_F1:
-        //qDebug() << "F1";
+
         break;
     }
 
-    //先检测Ctrl键是否按下
     if (event->modifiers() == Qt::ControlModifier) {
-        //如果是，那么再检测M键是否按下
+
         if (event->key() == Qt::Key_M) {
-            //按下则使窗口最大化
+
             this->setWindowState(Qt::WindowMaximized);
         }
     }
 }
 
-//键盘释放事件
 void MainWindow::keyReleaseEvent(QKeyEvent* event)
 {
-    //方向UP键
+
     if (event->key() == Qt::Key_Up) {
-        //qDebug() << "release: "
-        //         << "up";
     }
 }
 
@@ -10967,9 +10955,6 @@ void MainWindow::endPasteLine(QTableWidget* w, int row, QString colText0)
         QString newText = w->item(row, 0)->text().trimmed();
         newText = newText.replace("/", "-");
         QString newReghtTable = CurrentDateTime + w->objectName() + newText + ".ini";
-
-        //qDebug() << oldRightTable;
-        //qDebug() << newReghtTable;
 
         QFileInfo fi(dirpath + oldRightTable);
         if (fi.exists()) {
