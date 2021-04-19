@@ -11335,7 +11335,6 @@ void MainWindow::on_actionQuit_triggered()
 
 void MainWindow::on_actionUpgrade_OC_triggered()
 {
-
     QString DirName;
     QMessageBox box;
     bool ok1 = false;
@@ -11608,7 +11607,6 @@ void MainWindow::on_chkT7_clicked()
 
 void MainWindow::on_btnGetPassHash_clicked()
 {
-
     ui->btnGetPassHash->setEnabled(false);
     ui->progressBar->setMaximum(0);
     this->repaint();
@@ -11647,7 +11645,7 @@ void MainWindow::on_btnGetPassHash_clicked()
 void MainWindow::readResultPassHash()
 {
     QString result = chkdata->readAll();
-    //qDebug() << result;
+
     QStringList strList = result.split("\n");
 
     QStringList strHashList, strSaltList;
@@ -11704,7 +11702,6 @@ void MainWindow::on_calendarWidget_selectionChanged()
 
 void MainWindow::on_btnROM_clicked()
 {
-
     QUuid id = QUuid::createUuid();
     QString strTemp = id.toString();
     QString strId = strTemp.mid(1, strTemp.count() - 2).toUpper();
@@ -11716,7 +11713,6 @@ void MainWindow::on_btnROM_clicked()
 
 void MainWindow::on_editPassInput_textChanged(const QString& arg1)
 {
-
     if (ui->progressBar->maximum() == 0)
         return;
 
@@ -11773,20 +11769,19 @@ void MainWindow::on_actionOcvalidate_triggered()
 {
     QFileInfo appInfo(qApp->applicationDirPath());
     chkdata = new QProcess;
+
 #ifdef Q_OS_WIN32
     chkdata->start(appInfo.filePath() + "/Database/win/ocvalidate.exe", QStringList() << SaveFileName);
-
 #endif
 
 #ifdef Q_OS_LINUX
     chkdata->start(appInfo.filePath() + "/Database/linux/ocvalidate", QStringList() << SaveFileName);
-
 #endif
 
 #ifdef Q_OS_MAC
-
     chkdata->start(appInfo.filePath() + "/Database/mac/ocvalidate", QStringList() << SaveFileName);
 #endif
+
     connect(chkdata, SIGNAL(finished(int)), this, SLOT(readResultCheckData()));
 }
 
