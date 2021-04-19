@@ -835,6 +835,10 @@ private slots:
     void on_editPassInput_returnPressed();
 
 private:
+    void init_listMainSub();
+    void CopyCheckbox();
+    void CopyLabel();
+    void LineEditDataCheck();
     bool autoCheckUpdate = false;
     bool OpenFileValidate = false;
 

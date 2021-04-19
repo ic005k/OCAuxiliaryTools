@@ -5835,7 +5835,7 @@ void MainWindow::methodDisplayLevel(QVector<unsigned int> nums,
 {
     if (sum == 0) {
         for (unsigned int val : list) {
-            //qDebug() << val;
+
             for (int i = 0; i < 19; i++) {
 
                 if (val == vDisplayLevel.at(i)) {
@@ -6804,13 +6804,8 @@ void MainWindow::init_hardware_info()
     }
 }
 
-void MainWindow::init_Menu()
+void MainWindow::init_listMainSub()
 {
-
-    orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
-    orgLineEditStyle = ui->editBID->styleSheet();
-    orgLabelStyle = ui->label->styleSheet();
-    orgCheckBoxStyle = ui->chk1->styleSheet();
 
     QString listStyle;
     listStyle = "QListWidget::item:selected{background:lightgreen; border:10px blue; color:black}";
@@ -6819,7 +6814,6 @@ void MainWindow::init_Menu()
 
     int iSize = 32;
     ui->listMain->setIconSize(QSize(iSize, iSize));
-    ui->toolBar->setIconSize(QSize(iSize, iSize));
 
     if (win) {
         ui->listMain->setMaximumHeight(75);
@@ -6877,6 +6871,20 @@ void MainWindow::init_Menu()
     ui->listSub->addItem(tr("Patch"));
     ui->listSub->addItem(tr("Quirks"));
     ui->listSub->setCurrentRow(index);
+}
+
+void MainWindow::init_Menu()
+{
+
+    orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
+    orgLineEditStyle = ui->editBID->styleSheet();
+    orgLabelStyle = ui->label->styleSheet();
+    orgCheckBoxStyle = ui->chk1->styleSheet();
+
+    init_listMainSub();
+
+    int iSize = 32;
+    ui->toolBar->setIconSize(QSize(iSize, iSize));
 
     //New
     if (mac || osx1012)
@@ -7123,14 +7131,29 @@ void MainWindow::init_Menu()
     ui->actionGo_to_the_next->setIcon(QIcon(":/icon/2.png"));
     ui->toolBar->addAction(ui->actionGo_to_the_next);
 
-    //ui->toolBar->addSeparator();
-
     // Bug Report
     if (mac || osx1012)
         ui->actionBug_Report->setIconVisibleInMenu(false);
     ui->actionBug_Report->setIcon(QIcon(":/icon/about.png"));
-    //ui->toolBar->addAction(ui->actionBug_Report);
 
+    CopyLabel();
+
+    CopyCheckbox();
+
+    LineEditDataCheck();
+
+    // Copy list
+    copyText(ui->listFind);
+    copyText(ui->listMain);
+    copyText(ui->listSub);
+
+    //lineEdit
+    pTrailingAction = new QAction(this);
+    pTrailingAction->setIcon(QIcon(":/icon/ok.png"));
+}
+
+void MainWindow::LineEditDataCheck()
+{
     // LineEdit data check
     listOfLineEdit.clear();
     listOfLineEdit = getAllLineEdit(getAllUIControls(ui->tabTotal));
@@ -7151,7 +7174,61 @@ void MainWindow::init_Menu()
             w->setPlaceholderText(tr("Hexadecimal"));
         }
     }
+}
 
+void MainWindow::CopyCheckbox()
+{
+    //Copy CheckBox
+    listOfCheckBox.clear();
+    listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabTotal));
+    for (int i = 0; i < listOfCheckBox.count(); i++) {
+        QCheckBox* w = (QCheckBox*)listOfCheckBox.at(i);
+        setCheckBoxWidth(w);
+        w->setContextMenuPolicy(Qt::CustomContextMenu);
+
+        w->installEventFilter(this);
+
+        QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
+        QAction* showTipsAction = new QAction(tr("Show Tips"));
+
+        QMenu* copyMenu = new QMenu(this);
+        copyMenu->addAction(copyAction);
+        copyMenu->addAction(showTipsAction);
+
+        connect(copyAction, &QAction::triggered, [=]() {
+            QString str = copyAction->text().trimmed();
+            QString str1 = str.replace(tr("CopyText"), "");
+
+            QClipboard* clipboard = QApplication::clipboard();
+            clipboard->setText(str1.trimmed());
+        });
+
+        connect(showTipsAction, &QAction::triggered, [=]() {
+            QString str = copyAction->text().trimmed();
+            QString str1 = str.replace(tr("CopyText"), "").trimmed();
+            QString str2;
+            for (int x = 0; x < str1.count(); x++) {
+                str2 = str2 + "=";
+            }
+
+            myToolTip->popup(QCursor::pos(), str1 + "\n" + str2 + "\n\n", w->toolTip());
+        });
+
+        connect(w, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
+            Q_UNUSED(pos);
+
+            if (w->toolTip().trimmed() == "")
+                showTipsAction->setVisible(false);
+            else
+                showTipsAction->setVisible(true);
+
+            copyMenu->exec(QCursor::pos());
+        });
+    }
+}
+
+void MainWindow::CopyLabel()
+{
     //Copy Label
     listOfLabel.clear();
     listOfLabel = getAllLabel(getAllUIControls(ui->tabTotal));
@@ -7200,63 +7277,6 @@ void MainWindow::init_Menu()
             copyMenu->exec(QCursor::pos());
         });
     }
-
-    //Copy CheckBox
-    listOfCheckBox.clear();
-    listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabTotal));
-    for (int i = 0; i < listOfCheckBox.count(); i++) {
-        QCheckBox* w = (QCheckBox*)listOfCheckBox.at(i);
-        setCheckBoxWidth(w);
-        w->setContextMenuPolicy(Qt::CustomContextMenu);
-
-        w->installEventFilter(this);
-
-        QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
-        QAction* showTipsAction = new QAction(tr("Show Tips"));
-
-        QMenu* copyMenu = new QMenu(this);
-        copyMenu->addAction(copyAction);
-        copyMenu->addAction(showTipsAction);
-
-        connect(copyAction, &QAction::triggered, [=]() {
-            QString str = copyAction->text().trimmed();
-            QString str1 = str.replace(tr("CopyText"), "");
-
-            QClipboard* clipboard = QApplication::clipboard();
-            clipboard->setText(str1.trimmed());
-        });
-
-        connect(showTipsAction, &QAction::triggered, [=]() {
-            QString str = copyAction->text().trimmed();
-            QString str1 = str.replace(tr("CopyText"), "").trimmed();
-            QString str2;
-            for (int x = 0; x < str1.count(); x++) {
-                str2 = str2 + "=";
-            }
-
-            myToolTip->popup(QCursor::pos(), str1 + "\n" + str2 + "\n\n", w->toolTip());
-        });
-
-        connect(w, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
-            Q_UNUSED(pos);
-
-            if (w->toolTip().trimmed() == "")
-                showTipsAction->setVisible(false);
-            else
-                showTipsAction->setVisible(true);
-
-            copyMenu->exec(QCursor::pos());
-        });
-    }
-
-    // Copy list
-    copyText(ui->listFind);
-    copyText(ui->listMain);
-    copyText(ui->listSub);
-
-    //lineEdit
-    pTrailingAction = new QAction(this);
-    pTrailingAction->setIcon(QIcon(":/icon/ok.png"));
 }
 
 void MainWindow::setCheckBoxWidth(QCheckBox* cbox)
