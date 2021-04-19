@@ -845,6 +845,11 @@ private:
     void init_EditMenu();
     void init_HelpMenu();
     void init_UndoRedo();
+    void goResultsCheckbox(QString objName);
+    void goResultsTable(QString objName, int index);
+    void goResultsLabel(QString objName);
+    void goResultsLineEdit(QString objName);
+    void goResultsComboBox(QString objName);
     bool autoCheckUpdate = false;
     bool OpenFileValidate = false;
 

@@ -9547,26 +9547,12 @@ void MainWindow::on_actionGo_to_the_next_triggered()
     goResults(row);
 }
 
-void MainWindow::goResults(int index)
+void MainWindow::goResultsCheckbox(QString objName)
 {
-
-    QString objName = listNameResults.at(index);
-    QString name = objName.mid(1, objName.length() - 1);
-    bool end = false;
-
-    //获取背景色
-    QPalette pal = this->palette();
-    QBrush brush = pal.window();
-    red = brush.color().red();
-
-    //清理之前的标记
-    clearCheckBoxMarker();
-    clearLabelMarker();
-    clearLineEditMarker();
-    clearComboBoxMarker();
-    clearTableHeaderMarker();
-
     //chkbox 1
+    bool end = false;
+    QString name = objName.mid(1, objName.length() - 1);
+
     if (objName.mid(0, 1) == "1") {
 
         for (int i = 0; i < ui->listMain->count(); i++) {
@@ -9623,8 +9609,14 @@ void MainWindow::goResults(int index)
             }
         }
     }
+}
 
+void MainWindow::goResultsTable(QString objName, int index)
+{
     //table 2
+    bool end = false;
+    QString name = objName.mid(1, objName.length() - 1);
+
     if (objName.mid(0, 1) == "2") {
 
         for (int i = 0; i < ui->listMain->count(); i++) {
@@ -9690,8 +9682,14 @@ void MainWindow::goResults(int index)
             }
         }
     }
+}
 
+void MainWindow::goResultsLabel(QString objName)
+{
     //label  3
+    bool end = false;
+    QString name = objName.mid(1, objName.length() - 1);
+
     if (objName.mid(0, 1) == "3") {
 
         for (int i = 0; i < ui->listMain->count(); i++) {
@@ -9747,8 +9745,14 @@ void MainWindow::goResults(int index)
             }
         }
     }
+}
 
+void MainWindow::goResultsLineEdit(QString objName)
+{
     //lineedit  4
+    bool end = false;
+    QString name = objName.mid(1, objName.length() - 1);
+
     if (objName.mid(0, 1) == "4") {
 
         for (int i = 0; i < ui->listMain->count(); i++) {
@@ -9806,8 +9810,14 @@ void MainWindow::goResults(int index)
             }
         }
     }
+}
 
+void MainWindow::goResultsComboBox(QString objName)
+{
     //combobox  5
+    bool end = false;
+    QString name = objName.mid(1, objName.length() - 1);
+
     if (objName.mid(0, 1) == "5") {
 
         for (int i = 0; i < ui->listMain->count(); i++) {
@@ -9872,6 +9882,35 @@ void MainWindow::goResults(int index)
             }
         }
     }
+}
+void MainWindow::goResults(int index)
+{
+
+    QString objName = listNameResults.at(index);
+    QString name = objName.mid(1, objName.length() - 1);
+    bool end = false;
+
+    //获取背景色
+    QPalette pal = this->palette();
+    QBrush brush = pal.window();
+    red = brush.color().red();
+
+    //清理之前的标记
+    clearCheckBoxMarker();
+    clearLabelMarker();
+    clearLineEditMarker();
+    clearComboBoxMarker();
+    clearTableHeaderMarker();
+
+    goResultsCheckbox(objName);
+
+    goResultsTable(objName, index);
+
+    goResultsLabel(objName);
+
+    goResultsLineEdit(objName);
+
+    goResultsComboBox(objName);
 
     //table header 6
     if (objName.mid(0, 1) == "6") {
