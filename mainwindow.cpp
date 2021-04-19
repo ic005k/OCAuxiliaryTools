@@ -10128,177 +10128,66 @@ void MainWindow::on_listFind_itemClicked(QListWidgetItem* item)
 QWidget* MainWindow::getSubTabWidget(int m, int s)
 {
     if (m == 0) {
-        if (s == 0)
-            return ui->tabACPI1;
-        if (s == 1)
-            return ui->tabACPI2;
-        if (s == 2)
-            return ui->tabACPI3;
-        if (s == 3)
-            return ui->tabACPI4;
+
+        for (int i = 0; i < ui->tabACPI->tabBar()->count(); i++) {
+            if (i == s)
+                return ui->tabACPI->widget(i);
+        }
     }
 
     if (m == 1) {
-        switch (s) {
-        case 0:
-            return ui->tabBooter1;
-            break;
-        case 1:
-            return ui->tabBooter2;
-            break;
-        case 2:
-            return ui->tabBooter3;
-            break;
 
-        default:
-            break;
+        for (int i = 0; i < ui->tabBooter->tabBar()->count(); i++) {
+            if (i == s)
+                return ui->tabBooter->widget(i);
         }
     }
 
     if (m == 2) {
-        switch (s) {
-        case 0:
-            return ui->tabDP1;
-            break;
-        case 1:
-            return ui->tabDP2;
-            break;
 
-        default:
-            break;
+        for (int i = 0; i < ui->tabDP->tabBar()->count(); i++) {
+            if (i == s)
+                return ui->tabDP->widget(i);
         }
     }
 
     if (m == 3) {
-        switch (s) {
-        case 0:
-            return ui->tabKernel1;
-            break;
-        case 1:
-            return ui->tabKernel2;
-            break;
-        case 2:
-            return ui->tabKernel3;
-            break;
-        case 3:
-            return ui->tabKernel4;
-            break;
-        case 4:
-            return ui->tabKernel5;
-            break;
-        case 5:
-            return ui->tabKernel6;
-            break;
-        case 6:
-            return ui->tabKernel7;
-            break;
 
-        default:
-            break;
+        for (int i = 0; i < ui->tabKernel->tabBar()->count(); i++) {
+            if (i == s)
+                return ui->tabKernel->widget(i);
         }
     }
 
     if (m == 4) {
-        switch (s) {
-        case 0:
-            return ui->tabMisc1;
-            break;
-        case 1:
-            return ui->tabMisc2;
-            break;
-        case 2:
-            return ui->tabMisc3;
-            break;
-        case 3:
-            return ui->tabMisc4;
-            break;
-        case 4:
-            return ui->tabMisc5;
-            break;
-        case 5:
-            return ui->tabMisc6;
-            break;
 
-        default:
-            break;
+        for (int i = 0; i < ui->tabMisc->tabBar()->count(); i++) {
+            if (i == s)
+                return ui->tabMisc->widget(i);
         }
     }
 
     if (m == 5) {
-        switch (s) {
-        case 0:
-            return ui->tabNVRAM1;
-            break;
-        case 1:
-            return ui->tabNVRAM2;
-            break;
-        case 2:
-            return ui->tabNVRAM3;
-            break;
 
-        default:
-            break;
+        for (int i = 0; i < ui->tabNVRAM->tabBar()->count(); i++) {
+            if (i == s)
+                return ui->tabNVRAM->widget(i);
         }
     }
 
     if (m == 6) {
-        switch (s) {
-        case 0:
-            return ui->tabPlatformInfo1;
-            break;
-        case 1:
-            return ui->tabPlatformInfo2;
-            break;
-        case 2:
-            return ui->tabPlatformInfo3;
-            break;
-        case 3:
-            return ui->tabPlatformInfo4;
-            break;
-        case 4:
-            return ui->tabPlatformInfo5;
-            break;
-        case 5:
-            return ui->tabPlatformInfo6;
-            break;
 
-        default:
-            break;
+        for (int i = 0; i < ui->tabPlatformInfo->tabBar()->count(); i++) {
+            if (i == s)
+                return ui->tabPlatformInfo->widget(i);
         }
     }
 
     if (m == 7) {
-        switch (s) {
-        case 0:
-            return ui->tabUEFI1;
-            break;
-        case 1:
-            return ui->tabUEFI2;
-            break;
-        case 2:
-            return ui->tabUEFI3;
-            break;
-        case 3:
-            return ui->tabUEFI4;
-            break;
-        case 4:
-            return ui->tabUEFI5;
-            break;
-        case 5:
-            return ui->tabUEFI6;
-            break;
-        case 6:
-            return ui->tabUEFI7;
-            break;
-        case 7:
-            return ui->tabUEFI8;
-            break;
-        case 8:
-            return ui->tabUEFI9;
-            break;
 
-        default:
-            break;
+        for (int i = 0; i < ui->tabUEFI->tabBar()->count(); i++) {
+            if (i == s)
+                return ui->tabUEFI->widget(i);
         }
     }
 
