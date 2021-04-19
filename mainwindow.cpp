@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget* parent)
 #endif
 
 #ifdef Q_OS_LINUX
-    ui->btnMountEsp->setEnabled(false);
+    ui->actionMountEsp->setEnabled(false);
     font.setPixelSize(12);
 
     linuxOS = true;
@@ -8211,10 +8211,10 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 QString MainWindow::getWMIC(const QString& cmd)
 {
     QProcess p;
-    QStringList sl;
+
     QString str = "";
-    sl << str;
-    p.start(cmd, sl);
+
+    p.start(cmd, QStringList() << str);
     p.waitForFinished();
     QString result = QString::fromLocal8Bit(p.readAllStandardOutput());
     QStringList list = cmd.split(" ");
