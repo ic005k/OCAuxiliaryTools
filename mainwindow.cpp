@@ -224,42 +224,7 @@ void MainWindow::openFile(QString PlistFileName)
     loading = true;
 
     //初始化
-    // ACPI
-    ui->table_acpi_add->setRowCount(0);
-    ui->table_acpi_del->setRowCount(0);
-    ui->table_acpi_patch->setRowCount(0);
-
-    // Booter
-    ui->table_booter->setRowCount(0);
-
-    // DP
-    ui->table_dp_add0->setRowCount(0);
-    ui->table_dp_add->setRowCount(0);
-    ui->table_dp_del0->setRowCount(0);
-    ui->table_dp_del->setRowCount(0);
-
-    // Kernel
-    ui->table_kernel_add->setRowCount(0);
-    ui->table_kernel_block->setRowCount(0);
-    ui->table_kernel_Force->setRowCount(0);
-    ui->table_kernel_patch->setRowCount(0);
-
-    // Misc
-    ui->tableBlessOverride->setRowCount(0);
-    ui->tableEntries->setRowCount(0);
-    ui->tableTools->setRowCount(0);
-
-    // UEFI
-    ui->table_uefi_drivers->setRowCount(0);
-    ui->table_uefi_ReservedMemory->setRowCount(0);
-
-    // NVRAM
-    ui->table_nv_add0->setRowCount(0);
-    ui->table_nv_add->setRowCount(0);
-    ui->table_nv_del0->setRowCount(0);
-    ui->table_nv_del->setRowCount(0);
-    ui->table_nv_ls0->setRowCount(0);
-    ui->table_nv_ls->setRowCount(0);
+    mymethod->init_Table(-1);
 
     QFile file(PlistFileName);
     QVariantMap map = PListParser::parsePList(&file).toMap();
@@ -5416,6 +5381,12 @@ void MainWindow::on_editIntExposeSensitiveData_textChanged(const QString& arg1)
 void MainWindow::ScanPolicy()
 {
     int total = 0;
+
+    initScanPolicyValue();
+
+    scanPolicy = true;
+    pickerAttributes = false;
+
     for (int i = 0; i < chk.count(); i++) {
         if (chk.at(i)->isChecked())
             total = total + v.at(i);
@@ -5456,11 +5427,8 @@ void MainWindow::on_chk15_clicked() { ScanPolicy(); }
 
 void MainWindow::on_chk16_clicked() { ScanPolicy(); }
 
-void MainWindow::on_editIntScanPolicy_textChanged(const QString& arg1)
+void MainWindow::initScanPolicyValue()
 {
-
-    int total = arg1.toInt();
-
     chk.clear();
     chk.append(ui->chk1);
     chk.append(ui->chk2);
@@ -5513,6 +5481,13 @@ void MainWindow::on_editIntScanPolicy_textChanged(const QString& arg1)
     v.append(v14);
     v.append(v15);
     v.append(v16);
+}
+void MainWindow::on_editIntScanPolicy_textChanged(const QString& arg1)
+{
+
+    int total = arg1.toInt();
+
+    initScanPolicyValue();
 
     scanPolicy = true;
     pickerAttributes = false;

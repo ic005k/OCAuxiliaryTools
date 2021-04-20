@@ -398,31 +398,7 @@ void Method::on_btnExportMaster()
     QString defname;
     int index = mw_one->ui->tabTotal->currentIndex();
 
-    switch (index) {
-    case 0:
-        defname = "ACPI";
-        break;
-    case 1:
-        defname = "Booter";
-        break;
-    case 2:
-        defname = "DeviceProperties";
-        break;
-    case 3:
-        defname = "Kernel";
-        break;
-    case 4:
-        defname = "Misc";
-        break;
-    case 5:
-        defname = "NVRAM";
-        break;
-    case 6:
-        defname = "PlatformInfo";
-        break;
-    case 7:
-        defname = "UEFI";
-    }
+    defname = getTabTextName(index);
 
     QString FileName = fd.getSaveFileName(this, tr("Save File"), defname,
         tr("Config file(*.plist);;All files(*.*)"));
@@ -469,37 +445,24 @@ void Method::on_btnExportMaster()
     PListSerializer::toPList(OpenCore, FileName);
 }
 
+QString Method::getTabTextName(int index)
+{
+    for (int i = 0; i < mw_one->ui->tabTotal->tabBar()->count(); i++) {
+        if (i == index) {
+            return mw_one->ui->tabTotal->tabText(index) + ".plist";
+            break;
+        }
+    }
+
+    return "";
+}
+
 void Method::on_btnImportMaster()
 {
     QFileDialog fd;
     QString defname;
     int index = mw_one->ui->tabTotal->currentIndex();
-
-    switch (index) {
-    case 0:
-        defname = "ACPI.plist";
-        break;
-    case 1:
-        defname = "Booter.plist";
-        break;
-    case 2:
-        defname = "DeviceProperties.plist";
-        break;
-    case 3:
-        defname = "Kernel.plist";
-        break;
-    case 4:
-        defname = "Misc.plist";
-        break;
-    case 5:
-        defname = "NVRAM.plist";
-        break;
-    case 6:
-        defname = "PlatformInfo.plist";
-        break;
-    case 7:
-        defname = "UEFI.plist";
-    }
+    defname = getTabTextName(index);
 
     QString FileName = fd.getOpenFileName(this, tr("Open File"), defname,
         tr("Config file(*.plist);;All files(*.*)"));
@@ -514,69 +477,90 @@ void Method::on_btnImportMaster()
     switch (index) {
     case 0:
         // ACPI
-        mw_one->ui->table_acpi_add->setRowCount(0);
-        mw_one->ui->table_acpi_del->setRowCount(0);
-        mw_one->ui->table_acpi_patch->setRowCount(0);
+        init_Table(0);
+
         mw_one->ParserACPI(map);
 
         break;
 
     case 1:
         // Booter
-        mw_one->ui->table_booter->setRowCount(0);
+        init_Table(1);
+
         mw_one->ParserBooter(map);
         break;
 
     case 2:
         // DP
-        mw_one->ui->table_dp_add0->setRowCount(0);
-        mw_one->ui->table_dp_add->setRowCount(0);
-        mw_one->ui->table_dp_del0->setRowCount(0);
-        mw_one->ui->table_dp_del->setRowCount(0);
+        init_Table(2);
+
         mw_one->ParserDP(map);
         break;
 
     case 3:
         // Kernel
-        mw_one->ui->table_kernel_add->setRowCount(0);
-        mw_one->ui->table_kernel_block->setRowCount(0);
-        mw_one->ui->table_kernel_Force->setRowCount(0);
-        mw_one->ui->table_kernel_patch->setRowCount(0);
+        init_Table(3);
+
         mw_one->ParserKernel(map);
         break;
 
     case 4:
         // Misc
-        mw_one->ui->tableBlessOverride->setRowCount(0);
-        mw_one->ui->tableEntries->setRowCount(0);
-        mw_one->ui->tableTools->setRowCount(0);
+        init_Table(4);
+
         mw_one->ParserMisc(map);
         break;
 
     case 5:
         // NVRAM
-        mw_one->ui->table_nv_add0->setRowCount(0);
-        mw_one->ui->table_nv_add->setRowCount(0);
-        mw_one->ui->table_nv_del0->setRowCount(0);
-        mw_one->ui->table_nv_del->setRowCount(0);
-        mw_one->ui->table_nv_ls0->setRowCount(0);
-        mw_one->ui->table_nv_ls->setRowCount(0);
+        init_Table(5);
+
         mw_one->ParserNvram(map);
         break;
 
     case 6:
+        // PI
+        init_Table(6);
+
         mw_one->ParserPlatformInfo(map);
         break;
 
     case 7:
         // UEFI
-        mw_one->ui->table_uefi_drivers->setRowCount(0);
-        mw_one->ui->table_uefi_ReservedMemory->setRowCount(0);
+        init_Table(7);
+
         mw_one->ParserUEFI(map);
         break;
     }
 
     mw_one->loading = false;
+}
+
+void Method::init_Table(int index)
+{
+
+    if (index == -1) {
+        mw_one->listOfTableWidget.clear();
+        mw_one->listOfTableWidget = mw_one->getAllTableWidget(mw_one->getAllUIControls(mw_one->ui->tabTotal));
+        for (int i = 0; i < mw_one->listOfTableWidget.count(); i++) {
+            QTableWidget* w = (QTableWidget*)mw_one->listOfTableWidget.at(i);
+
+            w->setRowCount(0);
+        }
+    } else {
+
+        for (int i = 0; i < mw_one->ui->tabTotal->tabBar()->count(); i++) {
+            if (index == i) {
+                mw_one->listOfTableWidget.clear();
+                mw_one->listOfTableWidget = mw_one->getAllTableWidget(mw_one->getAllUIControls(mw_one->ui->tabTotal->widget(i)));
+                for (int j = 0; j < mw_one->listOfTableWidget.count(); j++) {
+                    QTableWidget* w = (QTableWidget*)mw_one->listOfTableWidget.at(j);
+
+                    w->setRowCount(0);
+                }
+            }
+        }
+    }
 }
 
 void Method::findTable(QString findText)

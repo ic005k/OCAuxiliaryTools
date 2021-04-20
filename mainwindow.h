@@ -64,6 +64,7 @@ public:
     ~MainWindow();
     Ui::MainWindow* ui;
 
+    void initScanPolicyValue();
     void findCheckBox(QString findText);
 
     void findLabel(QString findText);

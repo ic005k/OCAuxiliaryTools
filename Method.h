@@ -25,6 +25,8 @@ public:
     QWidget* getSubTab1(int m, int s);
     QWidget* getSubTab2(int m, int s);
     void findTable(QString findText);
+    void init_Table(int index);
+    QString getTabTextName(int index);
 
 public slots:
     void on_GenerateEFI();
