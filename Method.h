@@ -13,6 +13,12 @@ public:
 
     void goTable(QTableWidget* table);
     QWidget* getSubTabWidget(int m, int s);
+    void goACPITable(QTableWidget* table);
+    void goBooterTable(QTableWidget* table);
+    void goDPTable(QTableWidget* table);
+    void goKernelTable(QTableWidget* table);
+    void goMiscTable(QTableWidget* table);
+    void goNVRAMTable(QTableWidget* table);
 
 signals:
 };

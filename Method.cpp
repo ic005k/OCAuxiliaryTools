@@ -80,7 +80,7 @@ QWidget* Method::getSubTabWidget(int m, int s)
     return NULL;
 }
 
-void Method::goTable(QTableWidget* table)
+void Method::goACPITable(QTableWidget* table)
 {
     //ACPI
     if (table == mw_one->ui->table_acpi_add) {
@@ -99,7 +99,10 @@ void Method::goTable(QTableWidget* table)
         mw_one->ui->listMain->setCurrentRow(0);
         mw_one->ui->listSub->setCurrentRow(2);
     }
+}
 
+void Method::goBooterTable(QTableWidget* table)
+{
     //Booter
     if (table == mw_one->ui->table_booter) {
 
@@ -111,7 +114,10 @@ void Method::goTable(QTableWidget* table)
         mw_one->ui->listMain->setCurrentRow(1);
         mw_one->ui->listSub->setCurrentRow(1);
     }
+}
 
+void Method::goDPTable(QTableWidget* table)
+{
     //DP
     if (table == mw_one->ui->table_dp_add0) {
 
@@ -133,7 +139,10 @@ void Method::goTable(QTableWidget* table)
         mw_one->ui->listMain->setCurrentRow(2);
         mw_one->ui->listSub->setCurrentRow(1);
     }
+}
 
+void Method::goKernelTable(QTableWidget* table)
+{
     //Kernel
     if (table == mw_one->ui->table_kernel_Force) {
 
@@ -158,7 +167,10 @@ void Method::goTable(QTableWidget* table)
         mw_one->ui->listMain->setCurrentRow(3);
         mw_one->ui->listSub->setCurrentRow(3);
     }
+}
 
+void Method::goMiscTable(QTableWidget* table)
+{
     //Misc
     if (table == mw_one->ui->tableBlessOverride) {
 
@@ -177,7 +189,10 @@ void Method::goTable(QTableWidget* table)
         mw_one->ui->listMain->setCurrentRow(4);
         mw_one->ui->listSub->setCurrentRow(5);
     }
+}
 
+void Method::goNVRAMTable(QTableWidget* table)
+{
     //NVRAM
     if (table == mw_one->ui->table_nv_add0) {
 
@@ -214,6 +229,21 @@ void Method::goTable(QTableWidget* table)
         mw_one->ui->listMain->setCurrentRow(5);
         mw_one->ui->listSub->setCurrentRow(2);
     }
+}
+
+void Method::goTable(QTableWidget* table)
+{
+    goACPITable(table);
+
+    goBooterTable(table);
+
+    goDPTable(table);
+
+    goKernelTable(table);
+
+    goMiscTable(table);
+
+    goNVRAMTable(table);
 
     //PI
     if (table == mw_one->ui->tableDevices) {
