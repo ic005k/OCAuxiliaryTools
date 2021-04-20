@@ -8222,9 +8222,7 @@ QString MainWindow::getWMIC(const QString& cmd)
 {
     QProcess p;
 
-    QString str = "";
-
-    p.start(cmd, QStringList() << str);
+    p.start(cmd);
     p.waitForFinished();
     QString result = QString::fromLocal8Bit(p.readAllStandardOutput());
     QStringList list = cmd.split(" ");
