@@ -5600,73 +5600,11 @@ void MainWindow::on_editIntExposeSensitiveData_textChanged(const QString& arg1)
 
 void MainWindow::ScanPolicy()
 {
-
-    if (ui->chk1->isChecked())
-        v1 = 1;
-    else
-        v1 = 0;
-    if (ui->chk2->isChecked())
-        v2 = 2;
-    else
-        v2 = 0;
-    if (ui->chk3->isChecked())
-        v3 = 256;
-    else
-        v3 = 0;
-    if (ui->chk4->isChecked())
-        v4 = 512;
-    else
-        v4 = 0;
-    if (ui->chk5->isChecked())
-        v5 = 1024;
-    else
-        v5 = 0;
-    if (ui->chk6->isChecked())
-        v6 = 2048;
-    else
-        v6 = 0;
-    if (ui->chk7->isChecked())
-        v7 = 4096;
-    else
-        v7 = 0;
-    if (ui->chk8->isChecked())
-        v8 = 65536;
-    else
-        v8 = 0;
-    if (ui->chk9->isChecked())
-        v9 = 131072;
-    else
-        v9 = 0;
-    if (ui->chk10->isChecked())
-        v10 = 262144;
-    else
-        v10 = 0;
-    if (ui->chk11->isChecked())
-        v11 = 524288;
-    else
-        v11 = 0;
-    if (ui->chk12->isChecked())
-        v12 = 1048576;
-    else
-        v12 = 0;
-    if (ui->chk13->isChecked())
-        v13 = 2097152;
-    else
-        v13 = 0;
-    if (ui->chk14->isChecked())
-        v14 = 4194304;
-    else
-        v14 = 0;
-    if (ui->chk15->isChecked())
-        v15 = 8388608;
-    else
-        v15 = 0;
-    if (ui->chk16->isChecked())
-        v16 = 16777216;
-    else
-        v16 = 0;
-
-    int total = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11 + v12 + v13 + v14 + v15 + v16;
+    int total = 0;
+    for (int i = 0; i < chk.count(); i++) {
+        if (chk.at(i)->isChecked())
+            total = total + v.at(i);
+    }
 
     ui->editIntScanPolicy->setText(QString::number(total));
 }
