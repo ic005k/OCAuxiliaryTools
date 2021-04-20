@@ -9213,39 +9213,8 @@ QObjectList MainWindow::getAllComboBox(QObjectList lstUIControls)
     return lstOfComboBox;
 }
 
-void MainWindow::on_actionFind_triggered()
+void MainWindow::findCheckBox(QString findText)
 {
-    bool curWinModi = this->isWindowModified();
-
-    QString findText = ui->cboxFind->currentText().trimmed().toLower();
-
-    if (findText == "")
-        return;
-
-    if (ui->cboxFind->count() > 0)
-        clearTextsAction->setEnabled(true);
-
-    findCount = 0;
-    listNameResults.clear();
-    loading = true;
-    ui->listFind->clear();
-    loading = false;
-    indexOfResults = -1;
-
-    //清理标记
-    clearCheckBoxMarker();
-    clearComboBoxMarker();
-    clearLabelMarker();
-    clearLineEditMarker();
-    clearTableHeaderMarker();
-
-    listOfCheckBoxResults.clear();
-    listOfLabelResults.clear();
-    listOfLineEditResults.clear();
-    listOfComboBoxResults.clear();
-    listOfTableWidgetResults.clear();
-    listOfTableWidgetHeaderResults.clear();
-
     //CheckBox  1
     listOfCheckBox.clear();
     listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabTotal));
@@ -9261,7 +9230,10 @@ void MainWindow::on_actionFind_triggered()
             ui->listFind->addItem(chkbox->text());
         }
     }
+}
 
+void MainWindow::findTable(QString findText)
+{
     //Table  2
     listOfTableWidget.clear();
     listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
@@ -9320,7 +9292,10 @@ void MainWindow::on_actionFind_triggered()
         if (t != ui->table_dp_add && t != ui->table_dp_del && t != ui->table_nv_add && t != ui->table_nv_del && t != ui->table_nv_ls)
             findTable(t, findText);
     }
+}
 
+void MainWindow::findLabel(QString findText)
+{
     //Label  3
     listOfLabel.clear();
     listOfLabel = getAllLabel(getAllUIControls(ui->tabTotal));
@@ -9336,7 +9311,10 @@ void MainWindow::on_actionFind_triggered()
             ui->listFind->addItem(lbl->text());
         }
     }
+}
 
+void MainWindow::findLineEdit(QString findText)
+{
     //LineEdit  4
     listOfLineEdit.clear();
     listOfLineEdit = getAllLineEdit(getAllUIControls(ui->tabTotal));
@@ -9369,7 +9347,10 @@ void MainWindow::on_actionFind_triggered()
             }
         }
     }
+}
 
+void MainWindow::findComboBox(QString findText)
+{
     //ComboBox  5
     listOfComboBox.clear();
     listOfComboBox = getAllComboBox(getAllUIControls(ui->tabTotal));
@@ -9387,7 +9368,10 @@ void MainWindow::on_actionFind_triggered()
             }
         }
     }
+}
 
+void MainWindow::findTableHeader(QString findText)
+{
     //TableHeader 6
 
     listOfTableWidget.clear();
@@ -9407,7 +9391,10 @@ void MainWindow::on_actionFind_triggered()
             }
         }
     }
+}
 
+void MainWindow::findTabText(QString findText)
+{
     //TabText 7
     for (int i = 0; i < ui->listMain->count(); i++) {
         QString strMain = ui->listMain->item(i)->text();
@@ -9427,6 +9414,52 @@ void MainWindow::on_actionFind_triggered()
             }
         }
     }
+}
+
+void MainWindow::on_actionFind_triggered()
+{
+    bool curWinModi = this->isWindowModified();
+
+    QString findText = ui->cboxFind->currentText().trimmed().toLower();
+
+    if (findText == "")
+        return;
+
+    if (ui->cboxFind->count() > 0)
+        clearTextsAction->setEnabled(true);
+
+    findCount = 0;
+    listNameResults.clear();
+    loading = true;
+    ui->listFind->clear();
+    loading = false;
+    indexOfResults = -1;
+
+    //清理标记
+    clearCheckBoxMarker();
+    clearComboBoxMarker();
+    clearLabelMarker();
+    clearLineEditMarker();
+    clearTableHeaderMarker();
+
+    listOfCheckBoxResults.clear();
+    listOfLabelResults.clear();
+    listOfLineEditResults.clear();
+    listOfComboBoxResults.clear();
+    listOfTableWidgetResults.clear();
+    listOfTableWidgetHeaderResults.clear();
+
+    findCheckBox(findText);
+
+    findTable(findText);
+
+    findLabel(findText);
+
+    findLineEdit(findText);
+
+    findComboBox(findText);
+
+    findTabText(findText);
 
     ui->lblCount->setText(QString::number(findCount));
 

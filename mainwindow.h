@@ -64,6 +64,13 @@ public:
     ~MainWindow();
     Ui::MainWindow* ui;
 
+    void findCheckBox(QString findText);
+    void findTable(QString findText);
+    void findLabel(QString findText);
+    void findLineEdit(QString findText);
+    void findComboBox(QString findText);
+    void findTableHeader(QString findText);
+    void findTabText(QString findText);
     void setPalette(QWidget* w, QColor backColor, QColor textColor);
     bool Initialization = false;
     void setCheckBoxWidth(QCheckBox* cbox);
