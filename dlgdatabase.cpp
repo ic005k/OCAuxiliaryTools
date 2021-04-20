@@ -1,9 +1,11 @@
 #include "dlgdatabase.h"
+#include "Method.h"
 #include "mainwindow.h"
 #include "ui_dlgdatabase.h"
 
 extern QTableWidget* tableDatabase;
 extern MainWindow* mw_one;
+extern Method* mymethod;
 extern QString SaveFileName;
 
 dlgDatabase::dlgDatabase(QWidget* parent)
@@ -51,7 +53,7 @@ void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column)
     QString dirpath = appInfo.filePath() + "/Database/";
     QString file = tableDatabase->currentItem()->text();
     mw_one->openFile(dirpath + file);
-    mw_one->on_GenerateEFI();
+    mymethod->on_GenerateEFI();
 
     mw_one->RefreshAllDatabase = false;
 }
@@ -125,7 +127,7 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column)
     QString file = ui->tableDatabaseFind->currentItem()->text();
     mw_one->openFile(dirpath + file);
 
-    mw_one->on_GenerateEFI();
+    mymethod->on_GenerateEFI();
 
     mw_one->RefreshAllDatabase = false;
 }

@@ -1,7 +1,9 @@
 #ifndef METHOD_H
 #define METHOD_H
 
+#include <QDir>
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QObject>
 #include <QTableWidget>
 #include <QWidget>
@@ -19,6 +21,9 @@ public:
     void goKernelTable(QTableWidget* table);
     void goMiscTable(QTableWidget* table);
     void goNVRAMTable(QTableWidget* table);
+
+public slots:
+    void on_GenerateEFI();
 
 signals:
 };

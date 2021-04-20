@@ -265,3 +265,112 @@ void Method::goTable(QTableWidget* table)
         mw_one->ui->listSub->setCurrentRow(8);
     }
 }
+
+void Method::on_GenerateEFI()
+{
+
+    QDir dir;
+    QString strDatabase;
+
+    QFileInfo appInfo(qApp->applicationDirPath());
+    QString pathSource = appInfo.filePath() + "/Database/";
+
+    QString pathTarget = QDir::homePath() + "/Desktop/EFI/";
+
+    mw_one->deleteDirfile(pathTarget);
+
+    if (dir.mkpath(pathTarget)) { }
+
+    //BOOT
+    QString pathBoot = pathTarget + "BOOT/";
+    if (dir.mkpath(pathBoot)) { }
+    QFile::copy(pathSource + "EFI/BOOT/BOOTx64.efi", pathBoot + "BOOTx64.efi");
+
+    //OC/ACPI
+    QString pathOCACPI = pathTarget + "OC/ACPI/";
+    if (dir.mkpath(pathOCACPI)) { }
+    for (int i = 0; i < mw_one->ui->table_acpi_add->rowCount(); i++) {
+
+        QString file = mw_one->ui->table_acpi_add->item(i, 0)->text();
+        QFileInfo fi(pathSource + "EFI/OC/ACPI/" + file);
+        if (fi.exists())
+            QFile::copy(pathSource + "EFI/OC/ACPI/" + file, pathOCACPI + file);
+        else
+            strDatabase = strDatabase + "EFI/OC/ACPI/" + file + "\n";
+    }
+
+    //OC/Bootstrap（在新版OC中已弃用）
+    //QString pathOCBootstrap = pathTarget + "OC/Bootstrap/";
+    //if (dir.mkpath(pathOCBootstrap)) { }
+    //QFile::copy(pathSource + "EFI/OC/Bootstrap/Bootstrap.efi", pathOCBootstrap + "Bootstrap.efi");
+
+    //OC/Drivers
+    QString pathOCDrivers = pathTarget + "OC/Drivers/";
+    if (dir.mkpath(pathOCDrivers)) { }
+    for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
+
+        QString file = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
+        QString str0 = pathSource + "EFI/OC/Drivers/" + file;
+        if (!str0.contains("#")) {
+            QFileInfo fi(str0);
+            if (fi.exists())
+                QFile::copy(str0, pathOCDrivers + file);
+            else
+                strDatabase = strDatabase + "EFI/OC/Drivers/" + file + "\n";
+        }
+    }
+
+    //OC/Kexts
+    QString pathOCKexts = pathTarget + "OC/Kexts/";
+    if (dir.mkpath(pathOCKexts)) { }
+    for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
+
+        QString file = mw_one->ui->table_kernel_add->item(i, 0)->text();
+        QString str0 = pathSource + "EFI/OC/Kexts/" + file;
+        QDir kextDir(str0);
+
+        if (!str0.contains("#")) {
+
+            if (kextDir.exists())
+                mw_one->copyDirectoryFiles(str0, pathOCKexts + file, true);
+            else
+                strDatabase = strDatabase + "EFI/OC/Kexts/" + file + "\n";
+        }
+    }
+
+    //OC/Resources
+    QString pathOCResources = pathTarget + "OC/Resources/";
+    mw_one->copyDirectoryFiles(pathSource + "EFI/OC/Resources/", pathOCResources, true);
+
+    //OC/Tools
+    QString pathOCTools = pathTarget + "OC/Tools/";
+    if (dir.mkpath(pathOCTools)) { }
+    for (int i = 0; i < mw_one->ui->tableTools->rowCount(); i++) {
+
+        QString file = mw_one->ui->tableTools->item(i, 0)->text();
+        QString str0 = pathSource + "EFI/OC/Tools/" + file;
+        if (!str0.contains("#")) {
+            QFileInfo fi(str0);
+            if (fi.exists())
+                QFile::copy(str0, pathOCTools + file);
+            else
+                strDatabase = strDatabase + "EFI/OC/Tools/" + file + "\n";
+        }
+    }
+
+    //OC/OpenCore.efi
+    QFile::copy(pathSource + "EFI/OC/OpenCore.efi", pathTarget + "OC/OpenCore.efi");
+
+    //OC/Config.plist
+    mw_one->SavePlist(pathTarget + "OC/Config.plist");
+
+    QMessageBox box;
+    if (strDatabase != "")
+        box.setText(tr("Finished generating the EFI folder on the desktop.") + "\n" + tr("The following files do not exist in the database at the moment, please add them yourself:") + "\n" + strDatabase);
+    else
+        box.setText(tr("Finished generating the EFI folder on the desktop."));
+
+    mw_one->setFocus();
+    box.exec();
+    mw_one->ui->cboxFind->setFocus();
+}

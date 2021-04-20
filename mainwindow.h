@@ -258,7 +258,7 @@ public:
     QString getMacInfo(const QString& cmd);
 
 public slots:
-    void on_GenerateEFI();
+
     void on_actionFind_triggered();
 
 protected:
@@ -851,6 +851,8 @@ private slots:
     void on_actionOcvalidate_triggered();
 
     void on_actionMountEsp_triggered();
+
+    void on_actionGenerateEFI_triggered();
 
 private:
     void acpi_cellDoubleClicked();
