@@ -74,6 +74,9 @@ public:
     QVariantMap setEditValue(QVariantMap map, QWidget* tab);
     QVariantMap setCheckBoxValue(QVariantMap map, QWidget* tab);
     QVariantMap setComboBoxValue(QVariantMap map, QWidget* tab);
+    void getCheckBoxValue(QVariantMap map, QWidget* tab);
+    void getEditValue(QVariantMap map, QWidget* tab);
+    void getComboBoxValue(QVariantMap map, QWidget* tab);
     void setPalette(QWidget* w, QColor backColor, QColor textColor);
     bool Initialization = false;
     void setCheckBoxWidth(QCheckBox* cbox);

@@ -11124,9 +11124,8 @@ void MainWindow::on_actionDiscussion_Forum_triggered()
     QDesktopServices::openUrl(url);
 }
 
-void MainWindow::getValue(QVariantMap map, QWidget* tab)
+void MainWindow::getCheckBoxValue(QVariantMap map, QWidget* tab)
 {
-
     QObjectList listCheckBox;
     listCheckBox = getAllCheckBox(getAllUIControls(tab));
     for (int i = 0; i < listCheckBox.count(); i++) {
@@ -11137,7 +11136,28 @@ void MainWindow::getValue(QVariantMap map, QWidget* tab)
         if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG" && chkbox != ui->chk01 && chkbox != ui->chk02 && chkbox != ui->chk04 && chkbox != ui->chk08)
             chkbox->setChecked(map[name].toBool());
     }
+}
 
+void MainWindow::getComboBoxValue(QVariantMap map, QWidget* tab)
+{
+    QObjectList listComboBox;
+    listComboBox = getAllComboBox(getAllUIControls(tab));
+    for (int i = 0; i < listComboBox.count(); i++) {
+        QComboBox* w = (QComboBox*)listComboBox.at(i);
+        QString name = w->objectName().mid(4, w->objectName().count() - 3);
+
+        QString cu_text = map[name].toString().trimmed();
+        if (w != ui->cboxFind) {
+            if (cu_text != "")
+                w->setCurrentText(cu_text);
+            else
+                w->setCurrentIndex(0);
+        }
+    }
+}
+
+void MainWindow::getEditValue(QVariantMap map, QWidget* tab)
+{
     QObjectList listLineEdit;
     listLineEdit = getAllLineEdit(getAllUIControls(tab));
     for (int i = 0; i < listLineEdit.count(); i++) {
@@ -11186,21 +11206,16 @@ void MainWindow::getValue(QVariantMap map, QWidget* tab)
                 w->setText(ByteToHexStr(map["FirmwareFeaturesMask"].toByteArray())); // 为data类型
         }
     }
+}
 
-    QObjectList listComboBox;
-    listComboBox = getAllComboBox(getAllUIControls(tab));
-    for (int i = 0; i < listComboBox.count(); i++) {
-        QComboBox* w = (QComboBox*)listComboBox.at(i);
-        QString name = w->objectName().mid(4, w->objectName().count() - 3);
+void MainWindow::getValue(QVariantMap map, QWidget* tab)
+{
 
-        QString cu_text = map[name].toString().trimmed();
-        if (w != ui->cboxFind) {
-            if (cu_text != "")
-                w->setCurrentText(cu_text);
-            else
-                w->setCurrentIndex(0);
-        }
-    }
+    getCheckBoxValue(map, tab);
+
+    getEditValue(map, tab);
+
+    getComboBoxValue(map, tab);
 }
 
 QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab)
