@@ -2,6 +2,7 @@
 #define METHOD_H
 
 #include <QDir>
+#include <QFileDialog>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QObject>
@@ -24,6 +25,7 @@ public:
 
 public slots:
     void on_GenerateEFI();
+    void on_btnExportMaster();
 
 signals:
 };

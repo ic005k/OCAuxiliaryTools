@@ -516,10 +516,7 @@ private slots:
 
     void on_btnHelp();
 
-    void on_btnExportMaster();
-
     void on_btnImportMaster();
-
     void on_tabTotal_tabBarClicked(int index);
 
     void on_tabTotal_currentChanged(int index);
@@ -853,6 +850,8 @@ private slots:
     void on_actionMountEsp_triggered();
 
     void on_actionGenerateEFI_triggered();
+
+    void on_btnExportMaster_triggered();
 
 private:
     void acpi_cellDoubleClicked();

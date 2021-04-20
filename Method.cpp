@@ -1,5 +1,6 @@
 #include "Method.h"
 #include "mainwindow.h"
+#include "plistserializer.h"
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
@@ -373,4 +374,81 @@ void Method::on_GenerateEFI()
     mw_one->setFocus();
     box.exec();
     mw_one->ui->cboxFind->setFocus();
+}
+
+void Method::on_btnExportMaster()
+{
+    QFileDialog fd;
+    QString defname;
+    int index = mw_one->ui->tabTotal->currentIndex();
+
+    switch (index) {
+    case 0:
+        defname = "ACPI";
+        break;
+    case 1:
+        defname = "Booter";
+        break;
+    case 2:
+        defname = "DeviceProperties";
+        break;
+    case 3:
+        defname = "Kernel";
+        break;
+    case 4:
+        defname = "Misc";
+        break;
+    case 5:
+        defname = "NVRAM";
+        break;
+    case 6:
+        defname = "PlatformInfo";
+        break;
+    case 7:
+        defname = "UEFI";
+    }
+
+    QString FileName = fd.getSaveFileName(this, tr("Save File"), defname,
+        tr("Config file(*.plist);;All files(*.*)"));
+    if (FileName.isEmpty())
+        return;
+
+    QVariantMap OpenCore;
+
+    switch (index) {
+    case 0:
+        OpenCore["ACPI"] = mw_one->SaveACPI();
+
+        break;
+
+    case 1:
+        OpenCore["Booter"] = mw_one->SaveBooter();
+        break;
+
+    case 2:
+        OpenCore["DeviceProperties"] = mw_one->SaveDeviceProperties();
+        break;
+
+    case 3:
+        OpenCore["Kernel"] = mw_one->SaveKernel();
+        break;
+
+    case 4:
+        OpenCore["Misc"] = mw_one->SaveMisc();
+        break;
+
+    case 5:
+        OpenCore["NVRAM"] = mw_one->SaveNVRAM();
+        break;
+
+    case 6:
+        OpenCore["PlatformInfo"] = mw_one->SavePlatformInfo();
+        break;
+
+    case 7:
+        OpenCore["UEFI"] = mw_one->SaveUEFI();
+        break;
+    }
+
+    PListSerializer::toPList(OpenCore, FileName);
 }

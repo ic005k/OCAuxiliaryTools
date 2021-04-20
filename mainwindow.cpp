@@ -5178,83 +5178,6 @@ void MainWindow::init_tr_str()
         " Kext Info.plist path relative to bundle (e.g. Contents/Info.plist).");
 }
 
-void MainWindow::on_btnExportMaster()
-{
-    QFileDialog fd;
-    QString defname;
-    int index = ui->tabTotal->currentIndex();
-
-    switch (index) {
-    case 0:
-        defname = "ACPI";
-        break;
-    case 1:
-        defname = "Booter";
-        break;
-    case 2:
-        defname = "DeviceProperties";
-        break;
-    case 3:
-        defname = "Kernel";
-        break;
-    case 4:
-        defname = "Misc";
-        break;
-    case 5:
-        defname = "NVRAM";
-        break;
-    case 6:
-        defname = "PlatformInfo";
-        break;
-    case 7:
-        defname = "UEFI";
-    }
-
-    QString FileName = fd.getSaveFileName(this, tr("Save File"), defname,
-        tr("Config file(*.plist);;All files(*.*)"));
-    if (FileName.isEmpty())
-        return;
-
-    QVariantMap OpenCore;
-
-    switch (index) {
-    case 0:
-        OpenCore["ACPI"] = SaveACPI();
-
-        break;
-
-    case 1:
-        OpenCore["Booter"] = SaveBooter();
-        break;
-
-    case 2:
-        OpenCore["DeviceProperties"] = SaveDeviceProperties();
-        break;
-
-    case 3:
-        OpenCore["Kernel"] = SaveKernel();
-        break;
-
-    case 4:
-        OpenCore["Misc"] = SaveMisc();
-        break;
-
-    case 5:
-        OpenCore["NVRAM"] = SaveNVRAM();
-        break;
-
-    case 6:
-        OpenCore["PlatformInfo"] = SavePlatformInfo();
-        break;
-
-    case 7:
-        OpenCore["UEFI"] = SaveUEFI();
-        break;
-    }
-
-    PListSerializer::toPList(OpenCore, FileName);
-}
-
 void MainWindow::on_btnImportMaster()
 {
     QFileDialog fd;
@@ -6911,8 +6834,6 @@ void MainWindow::init_EditMenu()
     // 分享配置文件
     connect(ui->actionShareConfig, &QAction::triggered, this, &MainWindow::on_ShareConfig);
     ui->actionShareConfig->setShortcut(tr("ctrl+r"));
-
-    connect(ui->btnExportMaster, &QAction::triggered, this, &MainWindow::on_btnExportMaster);
 
     connect(ui->btnImportMaster, &QAction::triggered, this, &MainWindow::on_btnImportMaster);
 }
@@ -11338,4 +11259,9 @@ void MainWindow::on_actionMountEsp_triggered()
 void MainWindow::on_actionGenerateEFI_triggered()
 {
     mymethod->on_GenerateEFI();
+}
+
+void MainWindow::on_btnExportMaster_triggered()
+{
+    mymethod->on_btnExportMaster();
 }
