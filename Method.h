@@ -12,6 +12,7 @@ public:
     explicit Method(QWidget* parent = nullptr);
 
     void goTable(QTableWidget* table);
+    QWidget* getSubTabWidget(int m, int s);
 
 signals:
 };

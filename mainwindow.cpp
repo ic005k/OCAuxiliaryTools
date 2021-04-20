@@ -23,6 +23,7 @@ QVector<QString> filelist;
 QWidgetList wdlist;
 QTableWidget* tableDatabase;
 QRegExp regx("[A-Fa-f0-9]{2,1024}");
+extern Method* mymethod;
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -9312,7 +9313,7 @@ void MainWindow::goResultsCheckbox(QString objName)
                     break;
 
                 ui->listSub->setCurrentRow(j);
-                currentTabWidget = getSubTabWidget(i, j);
+                currentTabWidget = mymethod->getSubTabWidget(i, j);
                 listOfCheckBox.clear();
                 listOfCheckBox = getAllCheckBox(getAllUIControls(currentTabWidget));
                 for (int k = 0; k < listOfCheckBox.count(); k++) {
@@ -9376,7 +9377,7 @@ void MainWindow::goResultsTable(QString objName, int index)
                     break;
 
                 ui->listSub->setCurrentRow(j);
-                currentTabWidget = getSubTabWidget(i, j);
+                currentTabWidget = mymethod->getSubTabWidget(i, j);
                 listOfTableWidget.clear();
                 listOfTableWidget = getAllTableWidget(getAllUIControls(currentTabWidget));
                 for (int k = 0; k < listOfTableWidget.count(); k++) {
@@ -9449,7 +9450,7 @@ void MainWindow::goResultsLabel(QString objName)
                     break;
 
                 ui->listSub->setCurrentRow(j);
-                currentTabWidget = getSubTabWidget(i, j);
+                currentTabWidget = mymethod->getSubTabWidget(i, j);
                 listOfLabel.clear();
                 listOfLabel = getAllLabel(getAllUIControls(currentTabWidget));
                 for (int k = 0; k < listOfLabel.count(); k++) {
@@ -9512,7 +9513,7 @@ void MainWindow::goResultsLineEdit(QString objName)
                     break;
 
                 ui->listSub->setCurrentRow(j);
-                currentTabWidget = getSubTabWidget(i, j);
+                currentTabWidget = mymethod->getSubTabWidget(i, j);
                 listOfLineEdit.clear();
                 listOfLineEdit = getAllLineEdit(getAllUIControls(currentTabWidget));
                 for (int k = 0; k < listOfLineEdit.count(); k++) {
@@ -9577,7 +9578,7 @@ void MainWindow::goResultsComboBox(QString objName)
                     break;
 
                 ui->listSub->setCurrentRow(j);
-                currentTabWidget = getSubTabWidget(i, j);
+                currentTabWidget = mymethod->getSubTabWidget(i, j);
                 listOfComboBox.clear();
                 listOfComboBox = getAllComboBox(getAllUIControls(currentTabWidget));
                 for (int k = 0; k < listOfComboBox.count(); k++) {
@@ -9672,7 +9673,7 @@ void MainWindow::goResults(int index)
                     break;
 
                 ui->listSub->setCurrentRow(j);
-                currentTabWidget = getSubTabWidget(i, j);
+                currentTabWidget = mymethod->getSubTabWidget(i, j);
                 listOfTableWidget.clear();
                 listOfTableWidget = getAllTableWidget(getAllUIControls(currentTabWidget));
                 for (int k = 0; k < listOfTableWidget.count(); k++) {
@@ -9863,75 +9864,6 @@ void MainWindow::on_listFind_itemClicked(QListWidgetItem* item)
     Q_UNUSED(item);
     if (ui->listFind->currentRow() >= 0)
         goResults(ui->listFind->currentRow());
-}
-
-QWidget* MainWindow::getSubTabWidget(int m, int s)
-{
-    if (m == 0) {
-
-        for (int i = 0; i < ui->tabACPI->tabBar()->count(); i++) {
-            if (i == s)
-                return ui->tabACPI->widget(i);
-        }
-    }
-
-    if (m == 1) {
-
-        for (int i = 0; i < ui->tabBooter->tabBar()->count(); i++) {
-            if (i == s)
-                return ui->tabBooter->widget(i);
-        }
-    }
-
-    if (m == 2) {
-
-        for (int i = 0; i < ui->tabDP->tabBar()->count(); i++) {
-            if (i == s)
-                return ui->tabDP->widget(i);
-        }
-    }
-
-    if (m == 3) {
-
-        for (int i = 0; i < ui->tabKernel->tabBar()->count(); i++) {
-            if (i == s)
-                return ui->tabKernel->widget(i);
-        }
-    }
-
-    if (m == 4) {
-
-        for (int i = 0; i < ui->tabMisc->tabBar()->count(); i++) {
-            if (i == s)
-                return ui->tabMisc->widget(i);
-        }
-    }
-
-    if (m == 5) {
-
-        for (int i = 0; i < ui->tabNVRAM->tabBar()->count(); i++) {
-            if (i == s)
-                return ui->tabNVRAM->widget(i);
-        }
-    }
-
-    if (m == 6) {
-
-        for (int i = 0; i < ui->tabPlatformInfo->tabBar()->count(); i++) {
-            if (i == s)
-                return ui->tabPlatformInfo->widget(i);
-        }
-    }
-
-    if (m == 7) {
-
-        for (int i = 0; i < ui->tabUEFI->tabBar()->count(); i++) {
-            if (i == s)
-                return ui->tabUEFI->widget(i);
-        }
-    }
-
-    return NULL;
 }
 
 void MainWindow::acpi_cellDoubleClicked()

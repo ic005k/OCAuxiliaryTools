@@ -3,7 +3,7 @@
 #include "Method.h"
 
 extern MainWindow* mw_one;
-extern Method* method;
+extern Method* mymethod;
 
 DeleteCommand::DeleteCommand(bool writeINI, bool loadINI, QTableWidget* table0, int table0CurrentRow, QTableWidget* table, int row, QString text, QStringList fieldList, QUndoCommand* parent)
 {
@@ -25,7 +25,7 @@ void DeleteCommand::undo()
 {
     mw_one->clearAllTableSelection();
 
-    method->goTable(m_table);
+    mymethod->goTable(m_table);
 
     if (m_table0 != NULL && !m_loadINI) {
         m_table0->setCurrentCell(m_table0CurrentRow, 0);
@@ -70,7 +70,7 @@ void DeleteCommand::redo()
 
     mw_one->loading = true;
 
-    method->goTable(m_table);
+    mymethod->goTable(m_table);
 
     m_table->removeRow(m_row);
 
@@ -127,7 +127,7 @@ EditCommand::~EditCommand()
 
 void EditCommand::undo()
 {
-    method->goTable(m_table);
+    mymethod->goTable(m_table);
 
     mw_one->initLineEdit(m_table, m_row, m_col, m_row, m_col);
 
@@ -152,7 +152,7 @@ void EditCommand::undo()
 void EditCommand::redo()
 {
 
-    method->goTable(m_table);
+    mymethod->goTable(m_table);
 
     mw_one->initLineEdit(m_table, m_row, m_col, m_row, m_col);
 
@@ -210,7 +210,7 @@ void CopyPasteLineCommand::undo()
 
     mw_one->endDelLeftTable(m_table);
 
-    method->goTable(m_table);
+    mymethod->goTable(m_table);
 
     if (m_writeini) {
 
@@ -245,7 +245,7 @@ void CopyPasteLineCommand::redo()
 
     mw_one->endPasteLine(m_table, m_row, m_oldColText0);
 
-    method->goTable(m_table);
+    mymethod->goTable(m_table);
 
     if (m_writeini) {
 

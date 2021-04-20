@@ -145,7 +145,7 @@ public:
     int indexOfResults = 0;
     void goResults(int index);
     QWidget* currentTabWidget;
-    QWidget* getSubTabWidget(int m, int s);
+
     QWidget* currentMainTabWidget;
     int red = 0;
     void clearCheckBoxMarker();
