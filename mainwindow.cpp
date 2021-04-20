@@ -11203,25 +11203,8 @@ void MainWindow::getValue(QVariantMap map, QWidget* tab)
     }
 }
 
-QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab)
+QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab)
 {
-    // chk
-    QObjectList listCheckBox;
-    listCheckBox = getAllCheckBox(getAllUIControls(tab));
-    for (int i = 0; i < listCheckBox.count(); i++) {
-        QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
-        QString strObjName = chkbox->objectName();
-        QString name = strObjName.mid(3, strObjName.count() - 2);
-
-        if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG" && chkbox != ui->chk01 && chkbox != ui->chk02 && chkbox != ui->chk04 && chkbox != ui->chk08
-            && chkbox != ui->chkT1 && chkbox != ui->chkT2 && chkbox != ui->chkT3 && chkbox != ui->chkT4 && chkbox != ui->chkT5 && chkbox != ui->chkT6 && chkbox != ui->chkT7)
-
-        {
-
-            map.insert(name, getChkBool(chkbox));
-        }
-    }
-
     // edit
     QObjectList listLineEdit;
     listLineEdit = getAllLineEdit(getAllUIControls(tab));
@@ -11278,6 +11261,34 @@ QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab)
         }
     }
 
+    return map;
+}
+
+QVariantMap MainWindow::setCheckBoxValue(QVariantMap map, QWidget* tab)
+{
+    // chk
+    QObjectList listCheckBox;
+    listCheckBox = getAllCheckBox(getAllUIControls(tab));
+    for (int i = 0; i < listCheckBox.count(); i++) {
+        QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
+        QString strObjName = chkbox->objectName();
+        QString name = strObjName.mid(3, strObjName.count() - 2);
+
+        if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG" && chkbox != ui->chk01 && chkbox != ui->chk02 && chkbox != ui->chk04 && chkbox != ui->chk08
+            && chkbox != ui->chkT1 && chkbox != ui->chkT2 && chkbox != ui->chkT3 && chkbox != ui->chkT4 && chkbox != ui->chkT5 && chkbox != ui->chkT6 && chkbox != ui->chkT7)
+
+        {
+
+            map.insert(name, getChkBool(chkbox));
+        }
+    }
+
+    return map;
+}
+
+QVariantMap MainWindow::setComboBoxValue(QVariantMap map, QWidget* tab)
+{
+    // combobox
     QObjectList listComboBox;
     listComboBox = getAllComboBox(getAllUIControls(tab));
     for (int i = 0; i < listComboBox.count(); i++) {
@@ -11303,6 +11314,17 @@ QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab)
             }
         }
     }
+
+    return map;
+}
+
+QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab)
+{
+    map = setCheckBoxValue(map, tab);
+
+    map = setEditValue(map, tab);
+
+    map = setComboBoxValue(map, tab);
 
     return map;
 }

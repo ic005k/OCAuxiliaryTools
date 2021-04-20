@@ -71,6 +71,9 @@ public:
     void findComboBox(QString findText);
     void findTableHeader(QString findText);
     void findTabText(QString findText);
+    QVariantMap setEditValue(QVariantMap map, QWidget* tab);
+    QVariantMap setCheckBoxValue(QVariantMap map, QWidget* tab);
+    QVariantMap setComboBoxValue(QVariantMap map, QWidget* tab);
     void setPalette(QWidget* w, QColor backColor, QColor textColor);
     bool Initialization = false;
     void setCheckBoxWidth(QCheckBox* cbox);
