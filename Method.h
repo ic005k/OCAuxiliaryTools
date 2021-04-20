@@ -22,6 +22,8 @@ public:
     void goKernelTable(QTableWidget* table);
     void goMiscTable(QTableWidget* table);
     void goNVRAMTable(QTableWidget* table);
+    QWidget* getSubTab1(int m, int s);
+    QWidget* getSubTab2(int m, int s);
 
 public slots:
     void on_GenerateEFI();

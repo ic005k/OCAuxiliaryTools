@@ -12,7 +12,7 @@ Method::Method(QWidget* parent)
     mymethod = new Method;
 }
 
-QWidget* Method::getSubTabWidget(int m, int s)
+QWidget* Method::getSubTab1(int m, int s)
 {
     if (m == 0) {
 
@@ -46,6 +46,11 @@ QWidget* Method::getSubTabWidget(int m, int s)
         }
     }
 
+    return NULL;
+}
+
+QWidget* Method::getSubTab2(int m, int s)
+{
     if (m == 4) {
 
         for (int i = 0; i < mw_one->ui->tabMisc->tabBar()->count(); i++) {
@@ -79,6 +84,15 @@ QWidget* Method::getSubTabWidget(int m, int s)
     }
 
     return NULL;
+}
+
+QWidget* Method::getSubTabWidget(int m, int s)
+{
+    QWidget* w;
+    w = getSubTab1(m, s);
+    w = getSubTab2(m, s);
+
+    return w;
 }
 
 void Method::goACPITable(QTableWidget* table)
