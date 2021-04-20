@@ -161,7 +161,6 @@ public:
     void removeWidget(QTableWidget* table);
     void removeAllLineEdit();
     bool writeINI = false;
-    void goTable(QTableWidget* table);
 
     void ParserACPI(QVariantMap map);
     void ParserBooter(QVariantMap map);

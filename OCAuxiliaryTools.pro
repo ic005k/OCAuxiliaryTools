@@ -33,6 +33,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Method.cpp \
     Plist.cpp \
     PlistDate.cpp \
     aboutdialog.cpp \
@@ -50,6 +51,7 @@ SOURCES += \
     tooltip.cpp
 
 HEADERS += \
+    Method.h \
     Plist.hpp \
     PlistDate.hpp \
     aboutdialog.h \
