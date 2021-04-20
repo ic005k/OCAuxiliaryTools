@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210421";
+    CurVerison = "20210422";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -4522,7 +4522,7 @@ QString MainWindow::getTableFieldDataType(QTableWidget* table)
     QString strHeader = table->horizontalHeaderItem(col)->text();
     QStringList strHeaderList = strHeader.split("\n");
 
-    if (strHeaderList.count() == 2) {
+    if (strHeaderList.count() == 2 && strHeaderList.at(1) != "Base") {
         if (stringInt.contains(strHeaderList.at(1))) {
 
             return "Int";
@@ -4534,7 +4534,7 @@ QString MainWindow::getTableFieldDataType(QTableWidget* table)
         }
     }
 
-    if (strHeaderList.count() == 1) {
+    if (strHeaderList.count() == 1 && strHeaderList.at(0) != "Base") {
         if (stringInt.contains(strHeaderList.at(0))) {
 
             return "Int";
@@ -4549,10 +4549,11 @@ QString MainWindow::getTableFieldDataType(QTableWidget* table)
     if (table == ui->table_dp_add || table == ui->table_nv_add) {
         int row, col;
         row = table->currentRow();
-        col = 1;
-        if (table->item(row, col)->text() == "Number")
+        col = table->currentColumn();
+
+        if (table->item(row, 1)->text() == "Number" && col == 2)
             return "Int";
-        if (table->item(row, col)->text() == "Data")
+        if (table->item(row, 1)->text() == "Data" && col == 2)
             return "Data";
     }
 
@@ -10194,6 +10195,262 @@ QWidget* MainWindow::getSubTabWidget(int m, int s)
     return NULL;
 }
 
+void MainWindow::acpi_cellDoubleClicked()
+{
+    QTableWidget* t;
+    int row, col;
+
+    // ACPI
+    t = ui->table_acpi_add;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_acpi_add_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_acpi_del;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_acpi_del_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_acpi_patch;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_acpi_patch_cellDoubleClicked(row, col);
+    }
+}
+
+void MainWindow::booter_cellDoubleClicked()
+{
+    QTableWidget* t;
+    int row, col;
+
+    // Booter
+    t = ui->table_booter;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_booter_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_Booter_patch;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_Booter_patch_cellDoubleClicked(row, col);
+    }
+}
+
+void MainWindow::dp_cellDoubleClicked()
+{
+    QTableWidget* t;
+    int row, col;
+
+    // DP
+    t = ui->table_dp_add0;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_dp_add0_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_dp_add;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_dp_add_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_dp_del0;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_dp_del0_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_dp_del;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_dp_del_cellDoubleClicked(row, col);
+    }
+}
+
+void MainWindow::kernel_cellDoubleClicked()
+{
+    QTableWidget* t;
+    int row, col;
+
+    // Kernel
+    t = ui->table_kernel_add;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_kernel_add_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_kernel_block;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_kernel_block_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_kernel_Force;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_kernel_Force_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_kernel_patch;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_kernel_patch_cellDoubleClicked(row, col);
+    }
+}
+
+void MainWindow::misc_cellDoubleClicked()
+{
+    QTableWidget* t;
+    int row, col;
+
+    // Misc
+    t = ui->tableBlessOverride;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_tableBlessOverride_cellDoubleClicked(row, col);
+    }
+
+    t = ui->tableEntries;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_tableEntries_cellDoubleClicked(row, col);
+    }
+
+    t = ui->tableTools;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_tableTools_cellDoubleClicked(row, col);
+    }
+}
+
+void MainWindow::nvram_cellDoubleClicked()
+{
+    QTableWidget* t;
+    int row, col;
+
+    // NVRAM
+    t = ui->table_nv_add0;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_nv_add0_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_nv_add;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_nv_add_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_nv_del0;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_nv_del0_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_nv_del;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_nv_del_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_nv_ls0;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_nv_ls0_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_nv_ls;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_nv_ls_cellDoubleClicked(row, col);
+    }
+}
+
+void MainWindow::pi_cellDoubleClicked()
+{
+    QTableWidget* t;
+    int row, col;
+
+    // PI
+    t = ui->tableDevices;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_tableDevices_cellDoubleClicked(row, col);
+    }
+}
+
+void MainWindow::uefi_cellDoubleClicked()
+{
+    QTableWidget* t;
+    int row, col;
+
+    // UEFI
+    t = ui->table_uefi_drivers;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_uefi_drivers_cellDoubleClicked(row, col);
+    }
+
+    t = ui->table_uefi_ReservedMemory;
+    if (t->hasFocus()) {
+
+        row = t->currentRow();
+        col = t->currentColumn();
+        on_table_uefi_ReservedMemory_cellDoubleClicked(row, col);
+    }
+}
+
 void MainWindow::keyPressEvent(QKeyEvent* event)
 {
     switch (event->key()) {
@@ -10206,216 +10463,24 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
         break;
 
     case Qt::Key_Return:
-        QTableWidget* t;
 
         if (!lineEditEnter) {
-            // ACPI
-            t = ui->table_acpi_add;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_acpi_add_cellDoubleClicked(row, col);
-            }
 
-            t = ui->table_acpi_del;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_acpi_del_cellDoubleClicked(row, col);
-            }
+            acpi_cellDoubleClicked();
 
-            t = ui->table_acpi_patch;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_acpi_patch_cellDoubleClicked(row, col);
-            }
+            booter_cellDoubleClicked();
 
-            // Booter
-            t = ui->table_booter;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_booter_cellDoubleClicked(row, col);
-            }
+            dp_cellDoubleClicked();
 
-            t = ui->table_Booter_patch;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_Booter_patch_cellDoubleClicked(row, col);
-            }
+            kernel_cellDoubleClicked();
 
-            // DP
-            t = ui->table_dp_add0;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_dp_add0_cellDoubleClicked(row, col);
-            }
+            misc_cellDoubleClicked();
 
-            t = ui->table_dp_add;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_dp_add_cellDoubleClicked(row, col);
-            }
+            nvram_cellDoubleClicked();
 
-            t = ui->table_dp_del0;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_dp_del0_cellDoubleClicked(row, col);
-            }
+            pi_cellDoubleClicked();
 
-            t = ui->table_dp_del;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_dp_del_cellDoubleClicked(row, col);
-            }
-
-            // Kernel
-            t = ui->table_kernel_add;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_kernel_add_cellDoubleClicked(row, col);
-            }
-
-            t = ui->table_kernel_block;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_kernel_block_cellDoubleClicked(row, col);
-            }
-
-            t = ui->table_kernel_Force;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_kernel_Force_cellDoubleClicked(row, col);
-            }
-
-            t = ui->table_kernel_patch;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_kernel_patch_cellDoubleClicked(row, col);
-            }
-
-            // Misc
-            t = ui->tableBlessOverride;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_tableBlessOverride_cellDoubleClicked(row, col);
-            }
-
-            t = ui->tableEntries;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_tableEntries_cellDoubleClicked(row, col);
-            }
-
-            t = ui->tableTools;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_tableTools_cellDoubleClicked(row, col);
-            }
-
-            // NVRAM
-            t = ui->table_nv_add0;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_nv_add0_cellDoubleClicked(row, col);
-            }
-
-            t = ui->table_nv_add;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_nv_add_cellDoubleClicked(row, col);
-            }
-
-            t = ui->table_nv_del0;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_nv_del0_cellDoubleClicked(row, col);
-            }
-
-            t = ui->table_nv_del;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_nv_del_cellDoubleClicked(row, col);
-            }
-
-            t = ui->table_nv_ls0;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_nv_ls0_cellDoubleClicked(row, col);
-            }
-
-            t = ui->table_nv_ls;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_nv_ls_cellDoubleClicked(row, col);
-            }
-
-            // PI
-            t = ui->tableDevices;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_tableDevices_cellDoubleClicked(row, col);
-            }
-
-            // UEFI
-            t = ui->table_uefi_drivers;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_uefi_drivers_cellDoubleClicked(row, col);
-            }
-
-            t = ui->table_uefi_ReservedMemory;
-            if (t->hasFocus()) {
-                int row, col;
-                row = t->currentRow();
-                col = t->currentColumn();
-                on_table_uefi_ReservedMemory_cellDoubleClicked(row, col);
-            }
+            uefi_cellDoubleClicked();
         }
 
         lineEditEnter = false;

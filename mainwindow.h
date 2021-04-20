@@ -841,6 +841,14 @@ private slots:
     void on_actionMountEsp_triggered();
 
 private:
+    void acpi_cellDoubleClicked();
+    void booter_cellDoubleClicked();
+    void dp_cellDoubleClicked();
+    void kernel_cellDoubleClicked();
+    void misc_cellDoubleClicked();
+    void nvram_cellDoubleClicked();
+    void pi_cellDoubleClicked();
+    void uefi_cellDoubleClicked();
     void init_listMainSub();
     void CopyCheckbox();
     void CopyLabel();
