@@ -65,8 +65,10 @@ public:
     Ui::MainWindow* ui;
 
     void initScanPolicyValue();
+    void initDisplayLevelValue();
+    void initPickerAttributesValue();
+    void initTargetValue();
     void findCheckBox(QString findText);
-
     void findLabel(QString findText);
     void findLineEdit(QString findText);
     void findComboBox(QString findText);
@@ -853,7 +855,11 @@ private slots:
 
     void on_btnExportMaster_triggered();
 
+    void on_editDatPasswordHash_textChanged(const QString &arg1);
+
     void on_btnImportMaster_triggered();
+
+    void on_editDatPasswordSalt_textChanged(const QString &arg1);
 
 private:
     void acpi_cellDoubleClicked();

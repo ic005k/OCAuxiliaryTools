@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210422";
+    CurVerison = "20210423";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -1573,14 +1573,12 @@ void MainWindow::write_ini(QTableWidget* table, QTableWidget* mytable, int i)
     name = name.replace("/", "-");
 
     QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
-    // qDebug() << plistPath;
 
     QFile file(plistPath);
     if (file.exists()) //如果文件存在，则先删除它
         file.remove();
 
-    // QSettings Reg(plistPath, QSettings::NativeFormat);
-    QSettings Reg(plistPath, QSettings::IniFormat); //全平台都采用ini格式
+    QSettings Reg(plistPath, QSettings::IniFormat);
 
     for (int k = 0; k < mytable->rowCount(); k++) {
         Reg.setValue(QString::number(k + 1) + "/key", mytable->item(k, 0)->text());
@@ -1603,7 +1601,6 @@ void MainWindow::read_ini(QTableWidget* table, QTableWidget* mytable, int i)
     name = name.replace("/", "-");
 
     QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
-    // qDebug() << plistPath;
 
     QFile file(plistPath);
     if (file.exists()) {
@@ -1638,7 +1635,6 @@ void MainWindow::read_value_ini(QTableWidget* table, QTableWidget* mytable, int 
     name = name.replace("/", "-");
 
     QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
-    // qDebug() << plistPath;
 
     QFile file(plistPath);
     if (file.exists()) {
@@ -1670,12 +1666,9 @@ void MainWindow::on_table_dp_add0_cellClicked(int row, int column)
 
 void MainWindow::on_table_dp_add_itemChanged(QTableWidgetItem* item)
 {
-    if (item->text().isEmpty()) {
-    }
+    Q_UNUSED(item);
 
-    //当条目有修改时，重新写入数据
-    if (writeINI) //数据已经加载完成后
-    {
+    if (writeINI) {
         write_ini(ui->table_dp_add0, ui->table_dp_add, ui->table_dp_add0->currentRow());
 
         this->setWindowModified(true);
@@ -1695,24 +1688,19 @@ void MainWindow::on_table_nv_add0_cellClicked(int row, int column)
 
 void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item)
 {
-    if (item->text().isEmpty()) {
-    }
+    Q_UNUSED(item);
 
-    //当条目有修改时，重新写入数据
-    if (writeINI) //数据已经加载完成后
+    if (writeINI)
         write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
 
     if (!loading)
         this->setWindowModified(true);
 }
 
-void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
-    QTableWidget* subtable)
+void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,    QTableWidget* subtable)
 {
-    // QVariantMap map_del = map["Delete"].toMap();
-
     table->setRowCount(map_fun.count());
-    subtable->setRowCount(0); //归零，清除之前的残留
+    subtable->setRowCount(0);
     QTableWidgetItem* newItem1;
     for (int i = 0; i < map_fun.count(); i++) {
         newItem1 = new QTableWidgetItem(map_fun.keys().at(i));
@@ -1721,11 +1709,8 @@ void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
         //加载子条目
         QVariantList map_sub_list = map_fun[map_fun.keys().at(i)].toList(); //是个数组
         subtable->setRowCount(map_sub_list.count()); //子键的个数
-        // qDebug() << map_sub_list.count();
 
         for (int j = 0; j < map_sub_list.count(); j++) {
-
-            // qDebug() << map_sub_list.at(j).toString();
             newItem1 = new QTableWidgetItem(map_sub_list.at(j).toString()); //键
             subtable->setItem(j, 0, newItem1);
         }
@@ -1747,19 +1732,17 @@ void MainWindow::write_value_ini(QTableWidget* table, QTableWidget* subtable, in
     name = name.replace("/", "-");
 
     QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
-    // qDebug() << plistPath;
 
     QFile file(plistPath);
     if (file.exists())
         file.remove();
-    // QSettings Reg(plistPath, QSettings::NativeFormat);
+
     QSettings Reg(plistPath, QSettings::IniFormat);
 
     for (int k = 0; k < subtable->rowCount(); k++) {
         Reg.setValue(QString::number(k + 1) + "/key", subtable->item(k, 0)->text());
     }
 
-    //记录总数
     Reg.setValue("total", subtable->rowCount());
 
     IniFile.push_back(plistPath);
@@ -5576,11 +5559,8 @@ void MainWindow::methodDisplayLevel(QVector<unsigned int> nums,
     }
 }
 
-void MainWindow::DisplayLevel()
+void MainWindow::initDisplayLevelValue()
 {
-
-    click = true;
-
     vd1 = 1;
     vd2 = 2;
     vd3 = 4;
@@ -5642,6 +5622,13 @@ void MainWindow::DisplayLevel()
     chkDisplayLevel.append(ui->chkD17);
     chkDisplayLevel.append(ui->chkD18);
     chkDisplayLevel.append(ui->chkD19);
+}
+
+void MainWindow::DisplayLevel()
+{
+    click = true;
+
+    initDisplayLevelValue();
 
     unsigned int total = 0;
     for (int i = 0; i < 19; i++) {
@@ -5711,67 +5698,7 @@ void MainWindow::on_editIntDisplayLevel_textChanged(const QString& arg1)
 
     unsigned int total = arg1.toULongLong();
 
-    vd1 = 1;
-    vd2 = 2;
-    vd3 = 4;
-    vd4 = 8;
-    vd5 = 16;
-    vd6 = 32;
-    vd7 = 64;
-    vd8 = 128;
-    vd9 = 256;
-    vd10 = 1024;
-    vd11 = 4096;
-    vd12 = 16384;
-    vd13 = 65536;
-    vd14 = 131072;
-    vd15 = 524288;
-    vd16 = 1048576;
-    vd17 = 2097152;
-    vd18 = 4194304;
-    vd19 = 2147483648;
-
-    vDisplayLevel.clear();
-    vDisplayLevel.append(vd1);
-    vDisplayLevel.append(vd2);
-    vDisplayLevel.append(vd3);
-    vDisplayLevel.append(vd4);
-    vDisplayLevel.append(vd5);
-    vDisplayLevel.append(vd6);
-    vDisplayLevel.append(vd7);
-    vDisplayLevel.append(vd8);
-    vDisplayLevel.append(vd9);
-    vDisplayLevel.append(vd10);
-    vDisplayLevel.append(vd11);
-    vDisplayLevel.append(vd12);
-    vDisplayLevel.append(vd13);
-    vDisplayLevel.append(vd14);
-    vDisplayLevel.append(vd15);
-    vDisplayLevel.append(vd16);
-    vDisplayLevel.append(vd17);
-    vDisplayLevel.append(vd18);
-    vDisplayLevel.append(vd19);
-
-    chkDisplayLevel.clear();
-    chkDisplayLevel.append(ui->chkD1);
-    chkDisplayLevel.append(ui->chkD2);
-    chkDisplayLevel.append(ui->chkD3);
-    chkDisplayLevel.append(ui->chkD4);
-    chkDisplayLevel.append(ui->chkD5);
-    chkDisplayLevel.append(ui->chkD6);
-    chkDisplayLevel.append(ui->chkD7);
-    chkDisplayLevel.append(ui->chkD8);
-    chkDisplayLevel.append(ui->chkD9);
-    chkDisplayLevel.append(ui->chkD10);
-    chkDisplayLevel.append(ui->chkD11);
-    chkDisplayLevel.append(ui->chkD12);
-    chkDisplayLevel.append(ui->chkD13);
-    chkDisplayLevel.append(ui->chkD14);
-    chkDisplayLevel.append(ui->chkD15);
-    chkDisplayLevel.append(ui->chkD16);
-    chkDisplayLevel.append(ui->chkD17);
-    chkDisplayLevel.append(ui->chkD18);
-    chkDisplayLevel.append(ui->chkD19);
+    initDisplayLevelValue();
 
     for (int i = 0; i < 19; i++) {
         chkDisplayLevel.at(i)->setChecked(false);
@@ -5784,26 +5711,7 @@ void MainWindow::on_editIntDisplayLevel_textChanged(const QString& arg1)
 
 void MainWindow::on_btnDLSetAll_clicked()
 {
-    chkDisplayLevel.clear();
-    chkDisplayLevel.append(ui->chkD1);
-    chkDisplayLevel.append(ui->chkD2);
-    chkDisplayLevel.append(ui->chkD3);
-    chkDisplayLevel.append(ui->chkD4);
-    chkDisplayLevel.append(ui->chkD5);
-    chkDisplayLevel.append(ui->chkD6);
-    chkDisplayLevel.append(ui->chkD7);
-    chkDisplayLevel.append(ui->chkD8);
-    chkDisplayLevel.append(ui->chkD9);
-    chkDisplayLevel.append(ui->chkD10);
-    chkDisplayLevel.append(ui->chkD11);
-    chkDisplayLevel.append(ui->chkD12);
-    chkDisplayLevel.append(ui->chkD13);
-    chkDisplayLevel.append(ui->chkD14);
-    chkDisplayLevel.append(ui->chkD15);
-    chkDisplayLevel.append(ui->chkD16);
-    chkDisplayLevel.append(ui->chkD17);
-    chkDisplayLevel.append(ui->chkD18);
-    chkDisplayLevel.append(ui->chkD19);
+    initDisplayLevelValue();
 
     for (int i = 0; i < 19; i++) {
         chkDisplayLevel.at(i)->setChecked(true);
@@ -5814,27 +5722,7 @@ void MainWindow::on_btnDLSetAll_clicked()
 
 void MainWindow::on_btnDLClear_clicked()
 {
-
-    chkDisplayLevel.clear();
-    chkDisplayLevel.append(ui->chkD1);
-    chkDisplayLevel.append(ui->chkD2);
-    chkDisplayLevel.append(ui->chkD3);
-    chkDisplayLevel.append(ui->chkD4);
-    chkDisplayLevel.append(ui->chkD5);
-    chkDisplayLevel.append(ui->chkD6);
-    chkDisplayLevel.append(ui->chkD7);
-    chkDisplayLevel.append(ui->chkD8);
-    chkDisplayLevel.append(ui->chkD9);
-    chkDisplayLevel.append(ui->chkD10);
-    chkDisplayLevel.append(ui->chkD11);
-    chkDisplayLevel.append(ui->chkD12);
-    chkDisplayLevel.append(ui->chkD13);
-    chkDisplayLevel.append(ui->chkD14);
-    chkDisplayLevel.append(ui->chkD15);
-    chkDisplayLevel.append(ui->chkD16);
-    chkDisplayLevel.append(ui->chkD17);
-    chkDisplayLevel.append(ui->chkD18);
-    chkDisplayLevel.append(ui->chkD19);
+    initDisplayLevelValue();
 
     for (int i = 0; i < 19; i++) {
         chkDisplayLevel.at(i)->setChecked(false);
@@ -5843,7 +5731,7 @@ void MainWindow::on_btnDLClear_clicked()
     DisplayLevel();
 }
 
-void MainWindow::PickerAttributes()
+void MainWindow::initPickerAttributesValue()
 {
     pav1 = 1;
     pav2 = 2;
@@ -5867,6 +5755,11 @@ void MainWindow::PickerAttributes()
     v_pa.append(pav4);
     v_pa.append(pav5);
     v_pa.append(pav6);
+}
+
+void MainWindow::PickerAttributes()
+{
+    initPickerAttributesValue();
 
     for (int i = 0; i < v_pa.count(); i++) {
         if (!chk_pa.at(i)->isChecked()) {
@@ -5899,28 +5792,7 @@ void MainWindow::on_editIntPickerAttributes_textChanged(const QString& arg1)
 {
     int total = arg1.toInt();
 
-    pav1 = 1;
-    pav2 = 2;
-    pav3 = 4;
-    pav4 = 8;
-    pav5 = 16;
-    pav6 = 32;
-
-    chk_pa.clear();
-    chk_pa.append(ui->chkPA1);
-    chk_pa.append(ui->chkPA2);
-    chk_pa.append(ui->chkPA3);
-    chk_pa.append(ui->chkPA4);
-    chk_pa.append(ui->chkPA5);
-    chk_pa.append(ui->chkPA6);
-
-    v_pa.clear();
-    v_pa.append(pav1);
-    v_pa.append(pav2);
-    v_pa.append(pav3);
-    v_pa.append(pav4);
-    v_pa.append(pav5);
-    v_pa.append(pav6);
+    initPickerAttributesValue();
 
     scanPolicy = false;
     pickerAttributes = true;
@@ -7187,23 +7059,7 @@ void MainWindow::on_editIntTarget_textChanged(const QString& arg1)
 
     int total = arg1.toInt();
 
-    chk_pa.clear();
-    chk_pa.append(ui->chkT1);
-    chk_pa.append(ui->chkT2);
-    chk_pa.append(ui->chkT3);
-    chk_pa.append(ui->chkT4);
-    chk_pa.append(ui->chkT5);
-    chk_pa.append(ui->chkT6);
-    chk_pa.append(ui->chkT7);
-
-    v_pa.clear();
-    v_pa.append(1);
-    v_pa.append(2);
-    v_pa.append(4);
-    v_pa.append(8);
-    v_pa.append(16);
-    v_pa.append(32);
-    v_pa.append(64);
+    initTargetValue();
 
     scanPolicy = false;
     pickerAttributes = true;
@@ -10802,7 +10658,7 @@ void MainWindow::on_editIntConsoleAttributes_textChanged(const QString& arg1)
     }
 }
 
-void MainWindow::Target()
+void MainWindow::initTargetValue()
 {
     chk_pa.clear();
     chk_pa.append(ui->chkT1);
@@ -10821,6 +10677,11 @@ void MainWindow::Target()
     v_pa.append(16);
     v_pa.append(32);
     v_pa.append(64);
+}
+
+void MainWindow::Target()
+{
+    initTargetValue();
 
     for (int i = 0; i < v_pa.count(); i++) {
         if (!chk_pa.at(i)->isChecked()) {
@@ -10930,9 +10791,6 @@ void MainWindow::readResultPassHash()
 
     ui->editDatPasswordHash->setText(strHash);
     ui->editDatPasswordSalt->setText(strSalt);
-
-    ui->editDatPasswordHash->setToolTip(QString::number(strHash.count() / 2) + " Bytes");
-    ui->editDatPasswordSalt->setToolTip(QString::number(strSalt.count() / 2) + " Bytes");
 
     ui->progressBar->setMaximum(100);
     ui->btnGetPassHash->setEnabled(true);
@@ -11070,4 +10928,14 @@ void MainWindow::on_btnExportMaster_triggered()
 void MainWindow::on_btnImportMaster_triggered()
 {
     mymethod->on_btnImportMaster();
+}
+
+void MainWindow::on_editDatPasswordHash_textChanged(const QString &arg1)
+{
+    ui->editDatPasswordHash->setToolTip(QString::number(arg1.count() / 2) + " Bytes");
+}
+
+void MainWindow::on_editDatPasswordSalt_textChanged(const QString &arg1)
+{
+    ui->editDatPasswordSalt->setToolTip(QString::number(arg1.count() / 2) + " Bytes");
 }
