@@ -1572,10 +1572,11 @@ void MainWindow::write_ini(QTableWidget* table, QTableWidget* mytable, int i)
 
     name = name.replace("/", "-");
 
-    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName()
+        + name + ".ini";
 
     QFile file(plistPath);
-    if (file.exists()) //如果文件存在，则先删除它
+    if (file.exists())
         file.remove();
 
     QSettings Reg(plistPath, QSettings::IniFormat);
@@ -1586,7 +1587,6 @@ void MainWindow::write_ini(QTableWidget* table, QTableWidget* mytable, int i)
         Reg.setValue(QString::number(k + 1) + "/value", mytable->item(k, 2)->text());
     }
 
-    //记录总数
     Reg.setValue("total", mytable->rowCount());
 
     IniFile.push_back(plistPath);
@@ -1600,7 +1600,8 @@ void MainWindow::read_ini(QTableWidget* table, QTableWidget* mytable, int i)
 
     name = name.replace("/", "-");
 
-    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName()
+        + name + ".ini";
 
     QFile file(plistPath);
     if (file.exists()) {
@@ -1634,7 +1635,8 @@ void MainWindow::read_value_ini(QTableWidget* table, QTableWidget* mytable, int 
 
     name = name.replace("/", "-");
 
-    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName()
+        + name + ".ini";
 
     QFile file(plistPath);
     if (file.exists()) {
@@ -1697,7 +1699,7 @@ void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item)
         this->setWindowModified(true);
 }
 
-void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,    QTableWidget* subtable)
+void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table, QTableWidget* subtable)
 {
     table->setRowCount(map_fun.count());
     subtable->setRowCount(0);
@@ -1731,7 +1733,8 @@ void MainWindow::write_value_ini(QTableWidget* table, QTableWidget* subtable, in
         name = "Item" + QString::number(i + 1);
     name = name.replace("/", "-");
 
-    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName() + name + ".ini";
+    QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime + table->objectName()
+        + name + ".ini";
 
     QFile file(plistPath);
     if (file.exists())
@@ -10556,11 +10559,8 @@ void MainWindow::on_actionUpgrade_OC_triggered()
     ui->cboxFind->setFocus();
 }
 
-void MainWindow::on_cboxTextColor_currentIndexChanged(int index)
+void MainWindow::initColorValue()
 {
-
-    Q_UNUSED(index);
-
     textColorInt.clear();
     textColorInt.append(0);
     textColorInt.append(1);
@@ -10588,6 +10588,14 @@ void MainWindow::on_cboxTextColor_currentIndexChanged(int index)
     backColorInt.append(80);
     backColorInt.append(96);
     backColorInt.append(112);
+}
+
+void MainWindow::on_cboxTextColor_currentIndexChanged(int index)
+{
+
+    Q_UNUSED(index);
+
+    initColorValue();
 
     int bcIndex = ui->cboxBackColor->currentIndex();
     int tcIndex = ui->cboxTextColor->currentIndex();
@@ -10617,33 +10625,7 @@ void MainWindow::on_editIntConsoleAttributes_textChanged(const QString& arg1)
 {
     int total = arg1.toInt();
 
-    textColorInt.clear();
-    textColorInt.append(0);
-    textColorInt.append(1);
-    textColorInt.append(2);
-    textColorInt.append(3);
-    textColorInt.append(4);
-    textColorInt.append(5);
-    textColorInt.append(6);
-    textColorInt.append(7);
-    textColorInt.append(8);
-    textColorInt.append(9);
-    textColorInt.append(10);
-    textColorInt.append(11);
-    textColorInt.append(12);
-    textColorInt.append(13);
-    textColorInt.append(14);
-    textColorInt.append(15);
-
-    backColorInt.clear();
-    backColorInt.append(0);
-    backColorInt.append(16);
-    backColorInt.append(32);
-    backColorInt.append(48);
-    backColorInt.append(64);
-    backColorInt.append(80);
-    backColorInt.append(96);
-    backColorInt.append(112);
+    initColorValue();
 
     for (int i = 0; i < textColorInt.count(); i++) {
 
@@ -10930,12 +10912,12 @@ void MainWindow::on_btnImportMaster_triggered()
     mymethod->on_btnImportMaster();
 }
 
-void MainWindow::on_editDatPasswordHash_textChanged(const QString &arg1)
+void MainWindow::on_editDatPasswordHash_textChanged(const QString& arg1)
 {
     ui->editDatPasswordHash->setToolTip(QString::number(arg1.count() / 2) + " Bytes");
 }
 
-void MainWindow::on_editDatPasswordSalt_textChanged(const QString &arg1)
+void MainWindow::on_editDatPasswordSalt_textChanged(const QString& arg1)
 {
     ui->editDatPasswordSalt->setToolTip(QString::number(arg1.count() / 2) + " Bytes");
 }

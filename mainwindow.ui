@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7849,13 +7849,55 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="chkConnectDrivers">
+             <property name="toolTip">
+              <string>This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
+
+Examples of such drivers are filesystem or audio drivers. While effective, this option may not be necessary for drivers performing automatic connection, and may slightly  slowdown the boot.
+
+Note: Some firmwares, made by Apple in particular, only connect the boot drive to speedup the boot process.
+
+Enable this option to be able to see all the boot options when having multiple drives.
+
+----
+
+这个选项对于加载遵循UEFI驱动模式的驱动很有用，因为它们可能无法自行启动。
+
+这类驱动程序的例子是文件系统或音频驱动程序。虽然这个选项很有效，但对于执行自动连接的驱动程序来说，这个选项可能不是必需的，而且可能会稍微减慢启动速度。
+
+注意：一些固件，特别是苹果公司制造的固件，只连接启动驱动器以加快启动过程。
+
+启用此选项，以便在有多个驱动器时能够看到所有的启动选项。</string>
+             </property>
+             <property name="statusTip">
+              <string> Perform UEFI controller connection after driver loading.</string>
+             </property>
+             <property name="text">
+              <string>ConnectDrivers</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <spacer name="horizontalSpacer_21">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>1070</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
            <item row="0" column="0" colspan="2">
             <widget class="QTabWidget" name="tabUEFI">
              <property name="tabShape">
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>7</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -9474,39 +9516,7 @@ However, in case FakeSMC kernel extension is used, manual NVRAM key variable add
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_31">
-                <item row="2" column="0">
-                 <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
-                  <property name="toolTip">
-                   <string>Note: While the option is not expected to harm unaffected firmware, its use is recommended only when specifically required.
-----
-注意：虽然预计该选项不会损害未受影响的固件，但只建议在特别需要时使用。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
- register. These values may cause macOS boot failure on Intel platforms.</string>
-                  </property>
-                  <property name="text">
-                   <string>IgnoreInvalidFlexRatio</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QCheckBox" name="chkRequestBootVarRouting">
-                  <property name="toolTip">
-                   <string>This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible with macOS boot entries by design.
-----
-该选项需要OC_FIRMWARE_RUNTIME协议在OpenRuntime.efi中实现。当固件删除不兼容的启动项时，该选项可以让默认的启动项保存。简单的说，你需要启用这个选项，才能在设计上与macOS启动项不兼容的固件中可靠的使用启动盘偏好面板。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
- OC_VENDOR_VARIABLE_GUID.</string>
-                  </property>
-                  <property name="text">
-                   <string>RequestBootVarRouting</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0">
+                <item row="2" column="1">
                  <widget class="QCheckBox" name="chkReleaseUsbOwnership">
                   <property name="toolTip">
                    <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system may freeze upon boot. Not recommended unless required.
@@ -9562,26 +9572,40 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
                   </property>
                  </widget>
                 </item>
-                <item row="8" column="0">
-                 <widget class="QLabel" name="label_29">
+                <item row="9" column="1">
+                 <widget class="QCheckBox" name="chkReloadOptionRoms">
                   <property name="toolTip">
-                   <string>The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds and depends on the amount of cores present on the platform, the recommended starting value is 500000.
+                   <string>Type: plist boolean
 
-This is an experimental quirk, which should only be used for the aforementioned problem. In all other cases the quirk may render the operating system unstable and is not recommended. The recommended solution in the other cases is to install a kernel driver like VoodooTSCSync, TSCAdjustReset, or CpuTscSync (a more specialised variant of VoodooTSCSync for newer laptops).
+Description: Query PCI devices and reload their Option ROMs if available.
 
-Note: The reason this quirk cannot replace the kernel driver is because it cannot operate in ACPI S3 mode (sleep wake) and because the UEFI firmwares provide very limited multicore support preventing the precise update of the MSR registers.
+For example, this option allows reloading NVIDIA GOP Option ROM on older Macs after the firmware version is upgraded via ForgeUefiSupport.
+
 ----
-该选项的主要目的是在运行调试XNU内核时，在一些服务器和笔记本型号上实现早期的引导TSC同步。对于调试内核，在任何kext启动之前，TSC需要在各个内核之间保持同步，从而使所有其他解决方案出现问题。超时时间以微秒为单位，取决于平台上的核心数量，推荐的起始值是500000。
 
-这是一个实验性的选项，只能用于上述问题。在所有其他情况下，该选项可能会使操作系统不稳定，不建议使用。在其他情况下，推荐的解决方案是安装一个内核驱动，比如VoodooTSCSync、TSCAdjustReset或CpuTscSync（VoodooTSCSync的一个更专业的变种，适用于较新的笔记本电脑）。
+类型：plist boolean
 
-注意：该选项不能取代内核驱动的原因是它不能在ACPI S3模式下运行（睡眠唤醒），而且UEFI固件提供的多核支持非常有限，无法精确更新MSR寄存器。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Attempts to perform TSC synchronisation with a specified timeout.</string>
+描述：查询PCI设备并重新加载其可用的Option ROM。
+
+例如，在通过ForgeUefiSupport升级固件版本后，该选项允许在旧的Mac上重新加载NVIDIA GOP Option ROM。</string>
                   </property>
                   <property name="text">
-                   <string>TscSyncTimeout</string>
+                   <string>ReloadOptionRoms</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chkDisableSecurityPolicy">
+                  <property name="toolTip">
+                   <string>Note: This setting disables various security features of the firmware, defeating the purpose of any kind of Secure Boot. Do NOT enable if you use UEFI Secure Boot.
+----
+注意：此设置会禁用固件的各种安全功能，从而失去任何一种安全启动的目的。如果您使用UEFI安全启动，请勿启用。</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Disable platform security policy.</string>
+                  </property>
+                  <property name="text">
+                   <string>DisableSecurityPolicy</string>
                   </property>
                  </widget>
                 </item>
@@ -9600,50 +9624,19 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                   </property>
                  </widget>
                 </item>
-                <item row="5" column="0">
-                 <widget class="QCheckBox" name="chkUnblockFsConnect">
+                <item row="4" column="0">
+                 <widget class="QCheckBox" name="chkRequestBootVarRouting">
                   <property name="toolTip">
-                   <string>Note: The quirk is mostly relevant for select HP laptops with no drives listed.
+                   <string>This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible with macOS boot entries by design.
 ----
-注意:该选项主要与未列出驱动器的部分惠普笔记本电脑有关。</string>
+该选项需要OC_FIRMWARE_RUNTIME协议在OpenRuntime.efi中实现。当固件删除不兼容的启动项时，该选项可以让默认的启动项保存。简单的说，你需要启用这个选项，才能在设计上与macOS启动项不兼容的固件中可靠的使用启动盘偏好面板。</string>
                   </property>
                   <property name="statusTip">
-                   <string>Some firmwares block partition handles by opening them in By Driver mode, which results in File
- System protocols being unable to install.</string>
+                   <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
+ OC_VENDOR_VARIABLE_GUID.</string>
                   </property>
                   <property name="text">
-                   <string>UnblockFsConnect</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="8" column="1">
-                 <widget class="QLineEdit" name="editIntTscSyncTimeout">
-                  <property name="minimumSize">
-                   <size>
-                    <width>200</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>150</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QCheckBox" name="chkDisableSecurityPolicy">
-                  <property name="toolTip">
-                   <string>Note: This setting disables various security features of the firmware, defeating the purpose of any kind of Secure Boot. Do NOT enable if you use UEFI Secure Boot.
-----
-注意：此设置会禁用固件的各种安全功能，从而失去任何一种安全启动的目的。如果您使用UEFI安全启动，请勿启用。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Disable platform security policy.</string>
-                  </property>
-                  <property name="text">
-                   <string>DisableSecurityPolicy</string>
+                   <string>RequestBootVarRouting</string>
                   </property>
                  </widget>
                 </item>
@@ -9669,25 +9662,81 @@ This setting allows running some software written for UEFI 2.x firmware like NVI
                   </property>
                  </widget>
                 </item>
-                <item row="9" column="1">
-                 <widget class="QCheckBox" name="chkReloadOptionRoms">
+                <item row="4" column="1">
+                 <widget class="QCheckBox" name="chkUnblockFsConnect">
                   <property name="toolTip">
-                   <string>Type: plist boolean
-
-Description: Query PCI devices and reload their Option ROMs if available.
-
-For example, this option allows reloading NVIDIA GOP Option ROM on older Macs after the firmware version is upgraded via ForgeUefiSupport.
-
+                   <string>Note: The quirk is mostly relevant for select HP laptops with no drives listed.
 ----
-
-类型：plist boolean
-
-描述：查询PCI设备并重新加载其可用的Option ROM。
-
-例如，在通过ForgeUefiSupport升级固件版本后，该选项允许在旧的Mac上重新加载NVIDIA GOP Option ROM。</string>
+注意:该选项主要与未列出驱动器的部分惠普笔记本电脑有关。</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Some firmwares block partition handles by opening them in By Driver mode, which results in File
+ System protocols being unable to install.</string>
                   </property>
                   <property name="text">
-                   <string>ReloadOptionRoms</string>
+                   <string>UnblockFsConnect</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
+                  <property name="toolTip">
+                   <string>Note: While the option is not expected to harm unaffected firmware, its use is recommended only when specifically required.
+----
+注意：虽然预计该选项不会损害未受影响的固件，但只建议在特别需要时使用。</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
+ register. These values may cause macOS boot failure on Intel platforms.</string>
+                  </property>
+                  <property name="text">
+                   <string>IgnoreInvalidFlexRatio</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="0">
+                 <widget class="QLabel" name="label_29">
+                  <property name="toolTip">
+                   <string>The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds and depends on the amount of cores present on the platform, the recommended starting value is 500000.
+
+This is an experimental quirk, which should only be used for the aforementioned problem. In all other cases the quirk may render the operating system unstable and is not recommended. The recommended solution in the other cases is to install a kernel driver like VoodooTSCSync, TSCAdjustReset, or CpuTscSync (a more specialised variant of VoodooTSCSync for newer laptops).
+
+Note: The reason this quirk cannot replace the kernel driver is because it cannot operate in ACPI S3 mode (sleep wake) and because the UEFI firmwares provide very limited multicore support preventing the precise update of the MSR registers.
+----
+该选项的主要目的是在运行调试XNU内核时，在一些服务器和笔记本型号上实现早期的引导TSC同步。对于调试内核，在任何kext启动之前，TSC需要在各个内核之间保持同步，从而使所有其他解决方案出现问题。超时时间以微秒为单位，取决于平台上的核心数量，推荐的起始值是500000。
+
+这是一个实验性的选项，只能用于上述问题。在所有其他情况下，该选项可能会使操作系统不稳定，不建议使用。在其他情况下，推荐的解决方案是安装一个内核驱动，比如VoodooTSCSync、TSCAdjustReset或CpuTscSync（VoodooTSCSync的一个更专业的变种，适用于较新的笔记本电脑）。
+
+注意：该选项不能取代内核驱动的原因是它不能在ACPI S3模式下运行（睡眠唤醒），而且UEFI固件提供的多核支持非常有限，无法精确更新MSR寄存器。</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Attempts to perform TSC synchronisation with a specified timeout.</string>
+                  </property>
+                  <property name="text">
+                   <string>TscSyncTimeout</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="1">
+                 <widget class="QLineEdit" name="editIntTscSyncTimeout">
+                  <property name="minimumSize">
+                   <size>
+                    <width>200</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>150</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="10" column="0">
+                 <widget class="QCheckBox" name="chkEnableVectorAcceleration">
+                  <property name="text">
+                   <string>EnableVectorAcceleration</string>
                   </property>
                  </widget>
                 </item>
@@ -9771,48 +9820,6 @@ For example, this option allows reloading NVIDIA GOP Option ROM on older Macs af
               </layout>
              </widget>
             </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QCheckBox" name="chkConnectDrivers">
-             <property name="toolTip">
-              <string>This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
-
-Examples of such drivers are filesystem or audio drivers. While effective, this option may not be necessary for drivers performing automatic connection, and may slightly  slowdown the boot.
-
-Note: Some firmwares, made by Apple in particular, only connect the boot drive to speedup the boot process.
-
-Enable this option to be able to see all the boot options when having multiple drives.
-
-----
-
-这个选项对于加载遵循UEFI驱动模式的驱动很有用，因为它们可能无法自行启动。
-
-这类驱动程序的例子是文件系统或音频驱动程序。虽然这个选项很有效，但对于执行自动连接的驱动程序来说，这个选项可能不是必需的，而且可能会稍微减慢启动速度。
-
-注意：一些固件，特别是苹果公司制造的固件，只连接启动驱动器以加快启动过程。
-
-启用此选项，以便在有多个驱动器时能够看到所有的启动选项。</string>
-             </property>
-             <property name="statusTip">
-              <string> Perform UEFI controller connection after driver loading.</string>
-             </property>
-             <property name="text">
-              <string>ConnectDrivers</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <spacer name="horizontalSpacer_21">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>1070</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
            </item>
           </layout>
          </widget>
