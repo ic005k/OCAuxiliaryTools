@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -4690,142 +4690,10 @@ Valid values:
                <string/>
               </property>
               <layout class="QGridLayout" name="gridLayout_25">
-               <item row="1" column="6">
-                <widget class="QCheckBox" name="chk13">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_USB</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="6">
-                <widget class="QCheckBox" name="chk16">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_PCI</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0" colspan="2">
-                <widget class="QCheckBox" name="chk1">
-                 <property name="text">
-                  <string>OC_SCAN_FILE_SYSTEM_LOCK</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3" colspan="2">
-                <widget class="QCheckBox" name="chk6">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_NTFS</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="5">
-                <widget class="QCheckBox" name="chk12">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_ATAPI</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="5">
-                <widget class="QCheckBox" name="chk9">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_SASEX</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="4" colspan="3">
-                <spacer name="horizontalSpacer_66">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>994</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="2" column="6">
-                <widget class="QCheckBox" name="chk14">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_FIREWIRE</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="5">
-                <widget class="QCheckBox" name="chk11">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_NVME</string>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="0">
                 <widget class="QLabel" name="label_111">
                  <property name="text">
                   <string>ScanPolicy</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3" colspan="2">
-                <widget class="QCheckBox" name="chk5">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_ESP</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0" colspan="2">
-                <widget class="QCheckBox" name="chk2">
-                 <property name="text">
-                  <string>OC_SCAN_DEVICE_LOCK</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="3" colspan="2">
-                <widget class="QCheckBox" name="chk7">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_EXT</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="5">
-                <widget class="QCheckBox" name="chk10">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_SCSI</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0" colspan="2">
-                <widget class="QCheckBox" name="chk4">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_HFS</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="6">
-                <widget class="QCheckBox" name="chk15">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_SDCARD</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0" colspan="2">
-                <widget class="QCheckBox" name="chk3">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_FS_APFS</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="2" colspan="2">
-                <widget class="QLabel" name="lblScanPolicy">
-                 <property name="text">
-                  <string>0x00000000</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="3" colspan="2">
-                <widget class="QCheckBox" name="chk8">
-                 <property name="text">
-                  <string>OC_SCAN_ALLOW_DEVICE_SATA</string>
                  </property>
                 </widget>
                </item>
@@ -4838,6 +4706,138 @@ Valid values:
                   </size>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="lblScanPolicy">
+                 <property name="text">
+                  <string>0x00000000</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QCheckBox" name="chk1">
+                 <property name="text">
+                  <string>OC_SCAN_FILE_SYSTEM_LOCK</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QCheckBox" name="chk5">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_FS_ESP</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QCheckBox" name="chk9">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_SASEX</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="4">
+                <widget class="QCheckBox" name="chk13">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_USB</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QCheckBox" name="chk2">
+                 <property name="text">
+                  <string>OC_SCAN_DEVICE_LOCK</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="QCheckBox" name="chk6">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_FS_NTFS</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QCheckBox" name="chk10">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_SCSI</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="4">
+                <widget class="QCheckBox" name="chk14">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_FIREWIRE</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" colspan="2">
+                <widget class="QCheckBox" name="chk3">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_FS_APFS</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="2">
+                <widget class="QCheckBox" name="chk7">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_FS_EXT</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="3">
+                <widget class="QCheckBox" name="chk11">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_NVME</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="4">
+                <widget class="QCheckBox" name="chk15">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_SDCARD</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" colspan="2">
+                <widget class="QCheckBox" name="chk4">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_FS_HFS</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="2">
+                <widget class="QCheckBox" name="chk8">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_SATA</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="3">
+                <widget class="QCheckBox" name="chk12">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_ATAPI</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="4">
+                <widget class="QCheckBox" name="chk16">
+                 <property name="text">
+                  <string>OC_SCAN_ALLOW_DEVICE_PCI</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="4">
+                <spacer name="horizontalSpacer_25">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </widget>

@@ -24,10 +24,12 @@ public:
     void goNVRAMTable(QTableWidget* table);
     QWidget* getSubTab1(int m, int s);
     QWidget* getSubTab2(int m, int s);
+    void findTable(QString findText);
 
 public slots:
     void on_GenerateEFI();
     void on_btnExportMaster();
+    void on_btnImportMaster();
 
 signals:
 };

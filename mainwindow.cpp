@@ -5178,116 +5178,6 @@ void MainWindow::init_tr_str()
         " Kext Info.plist path relative to bundle (e.g. Contents/Info.plist).");
 }
 
-void MainWindow::on_btnImportMaster()
-{
-    QFileDialog fd;
-    QString defname;
-    int index = ui->tabTotal->currentIndex();
-
-    switch (index) {
-    case 0:
-        defname = "ACPI.plist";
-        break;
-    case 1:
-        defname = "Booter.plist";
-        break;
-    case 2:
-        defname = "DeviceProperties.plist";
-        break;
-    case 3:
-        defname = "Kernel.plist";
-        break;
-    case 4:
-        defname = "Misc.plist";
-        break;
-    case 5:
-        defname = "NVRAM.plist";
-        break;
-    case 6:
-        defname = "PlatformInfo.plist";
-        break;
-    case 7:
-        defname = "UEFI.plist";
-    }
-
-    QString FileName = fd.getOpenFileName(this, tr("Open File"), defname,
-        tr("Config file(*.plist);;All files(*.*)"));
-    if (FileName.isEmpty())
-        return;
-
-    loading = true;
-
-    QFile file(FileName);
-    QVariantMap map = PListParser::parsePList(&file).toMap();
-
-    switch (index) {
-    case 0:
-        // ACPI
-        ui->table_acpi_add->setRowCount(0);
-        ui->table_acpi_del->setRowCount(0);
-        ui->table_acpi_patch->setRowCount(0);
-        ParserACPI(map);
-
-        break;
-
-    case 1:
-        // Booter
-        ui->table_booter->setRowCount(0);
-        ParserBooter(map);
-        break;
-
-    case 2:
-        // DP
-        ui->table_dp_add0->setRowCount(0);
-        ui->table_dp_add->setRowCount(0);
-        ui->table_dp_del0->setRowCount(0);
-        ui->table_dp_del->setRowCount(0);
-        ParserDP(map);
-        break;
-
-    case 3:
-        // Kernel
-        ui->table_kernel_add->setRowCount(0);
-        ui->table_kernel_block->setRowCount(0);
-        ui->table_kernel_Force->setRowCount(0);
-        ui->table_kernel_patch->setRowCount(0);
-        ParserKernel(map);
-        break;
-
-    case 4:
-        // Misc
-        ui->tableBlessOverride->setRowCount(0);
-        ui->tableEntries->setRowCount(0);
-        ui->tableTools->setRowCount(0);
-        ParserMisc(map);
-        break;
-
-    case 5:
-        // NVRAM
-        ui->table_nv_add0->setRowCount(0);
-        ui->table_nv_add->setRowCount(0);
-        ui->table_nv_del0->setRowCount(0);
-        ui->table_nv_del->setRowCount(0);
-        ui->table_nv_ls0->setRowCount(0);
-        ui->table_nv_ls->setRowCount(0);
-        ParserNvram(map);
-        break;
-
-    case 6:
-        ParserPlatformInfo(map);
-        break;
-
-    case 7:
-        // UEFI
-        ui->table_uefi_drivers->setRowCount(0);
-        ui->table_uefi_ReservedMemory->setRowCount(0);
-        ParserUEFI(map);
-        break;
-    }
-
-    loading = false;
-}
-
 void MainWindow::on_tabTotal_tabBarClicked(int index)
 {
 
@@ -6834,8 +6724,6 @@ void MainWindow::init_EditMenu()
     // 分享配置文件
     connect(ui->actionShareConfig, &QAction::triggered, this, &MainWindow::on_ShareConfig);
     ui->actionShareConfig->setShortcut(tr("ctrl+r"));
-
-    connect(ui->btnImportMaster, &QAction::triggered, this, &MainWindow::on_btnImportMaster);
 }
 
 void MainWindow::init_HelpMenu()
@@ -8751,68 +8639,6 @@ void MainWindow::findCheckBox(QString findText)
     }
 }
 
-void MainWindow::findTable(QString findText)
-{
-    //Table  2
-    listOfTableWidget.clear();
-    listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
-    listOfTableWidgetResults.clear();
-    for (int i = 0; i < listOfTableWidget.count(); i++) {
-        QTableWidget* t;
-        t = (QTableWidget*)listOfTableWidget.at(i);
-
-        // DP
-        if (t == ui->table_dp_add0) {
-            if (t->rowCount() > 0) {
-                for (int j = 0; j < t->rowCount(); j++) {
-                    t->setCurrentCell(j, 0);
-                    findTable(ui->table_dp_add, findText);
-                }
-            }
-        }
-
-        if (t == ui->table_dp_del0) {
-            if (t->rowCount() > 0) {
-                for (int j = 0; j < t->rowCount(); j++) {
-                    t->setCurrentCell(j, 0);
-                    findTable(ui->table_dp_del, findText);
-                }
-            }
-        }
-
-        // NVRAM
-        if (t == ui->table_nv_add0) {
-            if (t->rowCount() > 0) {
-                for (int j = 0; j < t->rowCount(); j++) {
-                    t->setCurrentCell(j, 0);
-                    findTable(ui->table_nv_add, findText);
-                }
-            }
-        }
-
-        if (t == ui->table_nv_del0) {
-            if (t->rowCount() > 0) {
-                for (int j = 0; j < t->rowCount(); j++) {
-                    t->setCurrentCell(j, 0);
-                    findTable(ui->table_nv_del, findText);
-                }
-            }
-        }
-
-        if (t == ui->table_nv_ls0) {
-            if (t->rowCount() > 0) {
-                for (int j = 0; j < t->rowCount(); j++) {
-                    t->setCurrentCell(j, 0);
-                    findTable(ui->table_nv_ls, findText);
-                }
-            }
-        }
-
-        if (t != ui->table_dp_add && t != ui->table_dp_del && t != ui->table_nv_add && t != ui->table_nv_del && t != ui->table_nv_ls)
-            findTable(t, findText);
-    }
-}
-
 void MainWindow::findLabel(QString findText)
 {
     //Label  3
@@ -8970,7 +8796,7 @@ void MainWindow::on_actionFind_triggered()
 
     findCheckBox(findText);
 
-    findTable(findText);
+    mymethod->findTable(findText);
 
     findLabel(findText);
 
@@ -9068,8 +8894,6 @@ void MainWindow::findTable(QTableWidget* t, QString text)
                 }
 
                 IniFile.push_back(plistPath);
-
-                //qDebug() << t << t->objectName() << i << j;
             }
         }
     }
@@ -11264,4 +11088,9 @@ void MainWindow::on_actionGenerateEFI_triggered()
 void MainWindow::on_btnExportMaster_triggered()
 {
     mymethod->on_btnExportMaster();
+}
+
+void MainWindow::on_btnImportMaster_triggered()
+{
+    mymethod->on_btnImportMaster();
 }

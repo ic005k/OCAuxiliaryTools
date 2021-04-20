@@ -1,5 +1,6 @@
 #include "Method.h"
 #include "mainwindow.h"
+#include "plistparser.h"
 #include "plistserializer.h"
 #include "ui_mainwindow.h"
 
@@ -88,11 +89,12 @@ QWidget* Method::getSubTab2(int m, int s)
 
 QWidget* Method::getSubTabWidget(int m, int s)
 {
-    QWidget* w;
-    w = getSubTab1(m, s);
-    w = getSubTab2(m, s);
+    QWidget* pWidget;
+    pWidget = getSubTab1(m, s);
+    if (pWidget == NULL)
+        pWidget = getSubTab2(m, s);
 
-    return w;
+    return pWidget;
 }
 
 void Method::goACPITable(QTableWidget* table)
@@ -465,4 +467,176 @@ void Method::on_btnExportMaster()
     }
 
     PListSerializer::toPList(OpenCore, FileName);
+}
+
+void Method::on_btnImportMaster()
+{
+    QFileDialog fd;
+    QString defname;
+    int index = mw_one->ui->tabTotal->currentIndex();
+
+    switch (index) {
+    case 0:
+        defname = "ACPI.plist";
+        break;
+    case 1:
+        defname = "Booter.plist";
+        break;
+    case 2:
+        defname = "DeviceProperties.plist";
+        break;
+    case 3:
+        defname = "Kernel.plist";
+        break;
+    case 4:
+        defname = "Misc.plist";
+        break;
+    case 5:
+        defname = "NVRAM.plist";
+        break;
+    case 6:
+        defname = "PlatformInfo.plist";
+        break;
+    case 7:
+        defname = "UEFI.plist";
+    }
+
+    QString FileName = fd.getOpenFileName(this, tr("Open File"), defname,
+        tr("Config file(*.plist);;All files(*.*)"));
+    if (FileName.isEmpty())
+        return;
+
+    mw_one->loading = true;
+
+    QFile file(FileName);
+    QVariantMap map = PListParser::parsePList(&file).toMap();
+
+    switch (index) {
+    case 0:
+        // ACPI
+        mw_one->ui->table_acpi_add->setRowCount(0);
+        mw_one->ui->table_acpi_del->setRowCount(0);
+        mw_one->ui->table_acpi_patch->setRowCount(0);
+        mw_one->ParserACPI(map);
+
+        break;
+
+    case 1:
+        // Booter
+        mw_one->ui->table_booter->setRowCount(0);
+        mw_one->ParserBooter(map);
+        break;
+
+    case 2:
+        // DP
+        mw_one->ui->table_dp_add0->setRowCount(0);
+        mw_one->ui->table_dp_add->setRowCount(0);
+        mw_one->ui->table_dp_del0->setRowCount(0);
+        mw_one->ui->table_dp_del->setRowCount(0);
+        mw_one->ParserDP(map);
+        break;
+
+    case 3:
+        // Kernel
+        mw_one->ui->table_kernel_add->setRowCount(0);
+        mw_one->ui->table_kernel_block->setRowCount(0);
+        mw_one->ui->table_kernel_Force->setRowCount(0);
+        mw_one->ui->table_kernel_patch->setRowCount(0);
+        mw_one->ParserKernel(map);
+        break;
+
+    case 4:
+        // Misc
+        mw_one->ui->tableBlessOverride->setRowCount(0);
+        mw_one->ui->tableEntries->setRowCount(0);
+        mw_one->ui->tableTools->setRowCount(0);
+        mw_one->ParserMisc(map);
+        break;
+
+    case 5:
+        // NVRAM
+        mw_one->ui->table_nv_add0->setRowCount(0);
+        mw_one->ui->table_nv_add->setRowCount(0);
+        mw_one->ui->table_nv_del0->setRowCount(0);
+        mw_one->ui->table_nv_del->setRowCount(0);
+        mw_one->ui->table_nv_ls0->setRowCount(0);
+        mw_one->ui->table_nv_ls->setRowCount(0);
+        mw_one->ParserNvram(map);
+        break;
+
+    case 6:
+        mw_one->ParserPlatformInfo(map);
+        break;
+
+    case 7:
+        // UEFI
+        mw_one->ui->table_uefi_drivers->setRowCount(0);
+        mw_one->ui->table_uefi_ReservedMemory->setRowCount(0);
+        mw_one->ParserUEFI(map);
+        break;
+    }
+
+    mw_one->loading = false;
+}
+
+void Method::findTable(QString findText)
+{
+    //Table  2
+    mw_one->listOfTableWidget.clear();
+    mw_one->listOfTableWidget = mw_one->getAllTableWidget(mw_one->getAllUIControls(mw_one->ui->tabTotal));
+    mw_one->listOfTableWidgetResults.clear();
+    for (int i = 0; i < mw_one->listOfTableWidget.count(); i++) {
+        QTableWidget* t;
+        t = (QTableWidget*)mw_one->listOfTableWidget.at(i);
+
+        // DP
+        if (t == mw_one->ui->table_dp_add0) {
+            if (t->rowCount() > 0) {
+                for (int j = 0; j < t->rowCount(); j++) {
+                    t->setCurrentCell(j, 0);
+                    mw_one->findTable(mw_one->ui->table_dp_add, findText);
+                }
+            }
+        }
+
+        if (t == mw_one->ui->table_dp_del0) {
+            if (t->rowCount() > 0) {
+                for (int j = 0; j < t->rowCount(); j++) {
+                    t->setCurrentCell(j, 0);
+                    mw_one->findTable(mw_one->ui->table_dp_del, findText);
+                }
+            }
+        }
+
+        // NVRAM
+        if (t == mw_one->ui->table_nv_add0) {
+            if (t->rowCount() > 0) {
+                for (int j = 0; j < t->rowCount(); j++) {
+                    t->setCurrentCell(j, 0);
+                    mw_one->findTable(mw_one->ui->table_nv_add, findText);
+                }
+            }
+        }
+
+        if (t == mw_one->ui->table_nv_del0) {
+            if (t->rowCount() > 0) {
+                for (int j = 0; j < t->rowCount(); j++) {
+                    t->setCurrentCell(j, 0);
+                    mw_one->findTable(mw_one->ui->table_nv_del, findText);
+                }
+            }
+        }
+
+        if (t == mw_one->ui->table_nv_ls0) {
+            if (t->rowCount() > 0) {
+                for (int j = 0; j < t->rowCount(); j++) {
+                    t->setCurrentCell(j, 0);
+                    mw_one->findTable(mw_one->ui->table_nv_ls, findText);
+                }
+            }
+        }
+
+        if (t != mw_one->ui->table_dp_add && t != mw_one->ui->table_dp_del && t != mw_one->ui->table_nv_add && t != mw_one->ui->table_nv_del && t != mw_one->ui->table_nv_ls)
+            mw_one->findTable(t, findText);
+    }
 }

@@ -65,7 +65,7 @@ public:
     Ui::MainWindow* ui;
 
     void findCheckBox(QString findText);
-    void findTable(QString findText);
+
     void findLabel(QString findText);
     void findLineEdit(QString findText);
     void findComboBox(QString findText);
@@ -516,7 +516,6 @@ private slots:
 
     void on_btnHelp();
 
-    void on_btnImportMaster();
     void on_tabTotal_tabBarClicked(int index);
 
     void on_tabTotal_currentChanged(int index);
@@ -852,6 +851,8 @@ private slots:
     void on_actionGenerateEFI_triggered();
 
     void on_btnExportMaster_triggered();
+
+    void on_btnImportMaster_triggered();
 
 private:
     void acpi_cellDoubleClicked();
