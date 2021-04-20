@@ -8779,6 +8779,8 @@ void MainWindow::on_actionFind_triggered()
 
     findComboBox(findText);
 
+    findTableHeader(findText);
+
     findTabText(findText);
 
     ui->lblCount->setText(QString::number(findCount));
