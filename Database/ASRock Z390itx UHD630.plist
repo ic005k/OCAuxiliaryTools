@@ -948,7 +948,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                 <key>KeyForgetThreshold</key>
                 <integer>5</integer>
                 <key>KeySupport</key>
-                <true />
+                <false />
                 <key>KeySupportMode</key>
                 <string>Auto</string>
                 <key>KeySwap</key>
@@ -1031,6 +1031,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                 <key>ActivateHpetSupport</key>
                 <false />
                 <key>DisableSecurityPolicy</key>
+                <false />
+                <key>EnableVectorAcceleration</key>
                 <false />
                 <key>ExitBootServicesDelay</key>
                 <integer>0</integer>

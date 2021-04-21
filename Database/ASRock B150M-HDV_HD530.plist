@@ -1141,6 +1141,8 @@
                 <false />
                 <key>DisableSecurityPolicy</key>
                 <false />
+                <key>EnableVectorAcceleration</key>
+                <false />
                 <key>ExitBootServicesDelay</key>
                 <integer>0</integer>
                 <key>ForgeUefiSupport</key>
