@@ -3270,6 +3270,54 @@ void MainWindow::add_item(QTableWidget* table, int total_column)
     table->setCurrentCell(t, 0);
 }
 
+QString MainWindow::getSubTabStr(int tabIndex)
+{
+    int subtabIndex;
+    QString subtabStr;
+
+    if (tabIndex == 0) {
+        subtabIndex = ui->tabACPI->currentIndex();
+        subtabStr = ui->tabACPI->tabText(subtabIndex);
+    }
+
+    if (tabIndex == 1) {
+        subtabIndex = ui->tabBooter->currentIndex();
+        subtabStr = ui->tabBooter->tabText(subtabIndex);
+    }
+
+    if (tabIndex == 2) {
+        subtabIndex = ui->tabDP->currentIndex();
+        subtabStr = ui->tabDP->tabText(subtabIndex);
+    }
+
+    if (tabIndex == 3) {
+        subtabIndex = ui->tabKernel->currentIndex();
+        subtabStr = ui->tabKernel->tabText(subtabIndex);
+    }
+
+    if (tabIndex == 4) {
+        subtabIndex = ui->tabMisc->currentIndex();
+        subtabStr = ui->tabMisc->tabText(subtabIndex);
+    }
+
+    if (tabIndex == 5) {
+        subtabIndex = ui->tabNVRAM->currentIndex();
+        subtabStr = ui->tabNVRAM->tabText(subtabIndex);
+    }
+
+    if (tabIndex == 6) {
+        subtabIndex = ui->tabPlatformInfo->currentIndex();
+        subtabStr = ui->tabPlatformInfo->tabText(subtabIndex);
+    }
+
+    if (tabIndex == 7) {
+        subtabIndex = ui->tabUEFI->currentIndex();
+        subtabStr = ui->tabUEFI->tabText(subtabIndex);
+    }
+
+    return subtabStr;
+}
+
 void MainWindow::del_item(QTableWidget* table)
 {
 
@@ -3292,48 +3340,11 @@ void MainWindow::del_item(QTableWidget* table)
         for (int j = 0; j < table->columnCount(); j++) {
             fieldList.append(table->item(t, j)->text());
         }
+
         int tabIndex = ui->tabTotal->currentIndex();
-        int subtabIndex;
         QString subtabStr;
-        if (tabIndex == 0) {
-            subtabIndex = ui->tabACPI->currentIndex();
-            subtabStr = ui->tabACPI->tabText(subtabIndex);
-        }
+        subtabStr = getSubTabStr(tabIndex);
 
-        if (tabIndex == 1) {
-            subtabIndex = ui->tabBooter->currentIndex();
-            subtabStr = ui->tabBooter->tabText(subtabIndex);
-        }
-
-        if (tabIndex == 2) {
-            subtabIndex = ui->tabDP->currentIndex();
-            subtabStr = ui->tabDP->tabText(subtabIndex);
-        }
-
-        if (tabIndex == 3) {
-            subtabIndex = ui->tabKernel->currentIndex();
-            subtabStr = ui->tabKernel->tabText(subtabIndex);
-        }
-
-        if (tabIndex == 4) {
-            subtabIndex = ui->tabMisc->currentIndex();
-            subtabStr = ui->tabMisc->tabText(subtabIndex);
-        }
-
-        if (tabIndex == 5) {
-            subtabIndex = ui->tabNVRAM->currentIndex();
-            subtabStr = ui->tabNVRAM->tabText(subtabIndex);
-        }
-
-        if (tabIndex == 6) {
-            subtabIndex = ui->tabPlatformInfo->currentIndex();
-            subtabStr = ui->tabPlatformInfo->tabText(subtabIndex);
-        }
-
-        if (tabIndex == 7) {
-            subtabIndex = ui->tabUEFI->currentIndex();
-            subtabStr = ui->tabUEFI->tabText(subtabIndex);
-        }
         QString text = ui->tabTotal->tabText(tabIndex) + " -> " + subtabStr + " -> " + fieldList.at(0);
 
         QTableWidget* table0 = NULL;
@@ -3403,8 +3414,6 @@ void MainWindow::del_item(QTableWidget* table)
 
         QUndoCommand* deleteCommand = new DeleteCommand(writeINI, loadINI, table0, table0CurrentRow, table, t, text, fieldList);
         undoStack->push(deleteCommand);
-
-        //table->removeRow(t);
 
         selections = table->selectionModel();
         selectedsList = selections->selectedIndexes();
@@ -6403,6 +6412,25 @@ void MainWindow::init_hardware_info()
     }
 }
 
+void MainWindow::setListMainIcon()
+{
+    ui->listMain->setViewMode(QListWidget::IconMode);
+
+    ui->listMain->clear();
+
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m1.png"), tr("ACPI")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m2.png"), tr("Booter")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m3.png"), tr("DeviceProperties")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m4.png"), tr("Kernel")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m5.png"), tr("Misc")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m6.png"), tr("NVRAM")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m7.png"), tr("PlatformInfo")));
+    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m8.png"), tr("UEFI")));
+
+    if (win)
+        ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
+}
+
 void MainWindow::init_listMainSub()
 {
 
@@ -6438,17 +6466,7 @@ void MainWindow::init_listMainSub()
     ui->listMain->setFocusPolicy(Qt::NoFocus); // 去掉选中时的虚线
     ui->listSub->setFocusPolicy(Qt::NoFocus);
 
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m1.png"), tr("ACPI")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m2.png"), tr("Booter")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m3.png"), tr("DeviceProperties")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m4.png"), tr("Kernel")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m5.png"), tr("Misc")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m6.png"), tr("NVRAM")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m7.png"), tr("PlatformInfo")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m8.png"), tr("UEFI")));
-
-    if (win)
-        ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
+    setListMainIcon();
 
     ui->tabTotal->tabBar()->setHidden(true);
 
@@ -7668,24 +7686,10 @@ void MainWindow::on_listSub_itemSelectionChanged()
 
 void MainWindow::resizeEvent(QResizeEvent* event)
 {
-
     Q_UNUSED(event);
     int index = ui->listMain->currentRow();
 
-    ui->listMain->setViewMode(QListWidget::IconMode);
-
-    ui->listMain->clear();
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m1.png"), tr("ACPI")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m2.png"), tr("Booter")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m3.png"), tr("DeviceProperties")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m4.png"), tr("Kernel")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m5.png"), tr("Misc")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m6.png"), tr("NVRAM")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m7.png"), tr("PlatformInfo")));
-    ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m8.png"), tr("UEFI")));
-
-    if (win)
-        ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
+    setListMainIcon();
 
     ui->listMain->setCurrentRow(index);
 }
@@ -10328,6 +10332,15 @@ void MainWindow::getValue(QVariantMap map, QWidget* tab)
     getComboBoxValue(map, tab);
 }
 
+bool MainWindow::editExclusion(QLineEdit* w, QString name)
+{
+    // 用name ！= “”过滤掉获取的ComBox里面的edit
+    if (w != ui->editTargetHex && name != "" && w != ui->editPassInput && name != "pinbox_lineedit")
+        return true;
+
+    return false;
+}
+
 QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab)
 {
     // edit
@@ -10344,8 +10357,7 @@ QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab)
         else
             name = str0;
 
-        // 用name ！= “”过滤掉获取的ComBox里面的edit
-        if (w != ui->editTargetHex && name != "" && w != ui->editPassInput && name != "pinbox_lineedit") { // 16进制转换为整数的除外Misc里面
+        if (editExclusion(w, name)) {
 
             if (str0.mid(0, 3) == "Dat")
                 map.insert(name, HexStrToByte(w->text().trimmed()));

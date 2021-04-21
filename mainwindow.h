@@ -993,6 +993,9 @@ private:
     QAction* redoAction = nullptr;
 
     void setComboBoxStyle(QComboBox* w);
+    void setListMainIcon();
+    bool editExclusion(QLineEdit* w, QString name);
+    QString getSubTabStr(int tabIndex);
 };
 
 #endif // MAINWINDOW_H
