@@ -2069,8 +2069,8 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     QByteArray ba = mapGeneric["ROM"].toByteArray();
     QString va = ba.toHex().toUpper();
 
-    if (ui->editROM_PNVRAM->text().trimmed() == "")
-        ui->editROM_PNVRAM->setText(va);
+    if (ui->editDatROM_PNVRAM->text().trimmed() == "")
+        ui->editDatROM_PNVRAM->setText(va);
 
     //机型
     QString spn = mapGeneric["SystemProductName"].toString();
@@ -6692,10 +6692,7 @@ void MainWindow::LineEditDataCheck()
             w->setPlaceholderText(tr("Integer"));
         }
 
-        if (w->objectName().mid(0, 7) == "editDat"
-            || w->objectName() == "editFirmwareFeatures_SMBIOS"
-            || w->objectName() == "editFirmwareFeaturesMask_SMBIOS"
-            || w->objectName() == "editROM_PNVRAM") {
+        if (w->objectName().mid(0, 7) == "editDat") {
             QValidator* validator = new QRegExpValidator(regx, w);
             w->setValidator(validator);
             w->setPlaceholderText(tr("Hexadecimal"));
@@ -10199,44 +10196,26 @@ void MainWindow::getEditValue(QVariantMap map, QWidget* tab)
         QString str0, name;
         str0 = w->objectName().mid(4, w->objectName().count() - 3); // 去edit
 
-        if (str0.mid(0, 3) == "Dat" || str0.mid(0, 3) == "Int" || str0.mid(0, 3) == "Str")
+        if (str0.mid(0, 3) == "Dat" || str0.mid(0, 3) == "Int")
             name = str0.mid(3, str0.count() - 2);
         else
             name = str0;
 
         if (w != ui->editTargetHex && name != "") { // 16进制转换为整数的除外Misc里面
-            if (str0.mid(0, 3) == "Dat")
-                w->setText(ByteToHexStr(map[name].toByteArray())); // 为data类型
-            else
-                w->setText(map[name].toString());
 
-            // 有重名，单独处理
-            if (name == "ProcessorTypeGeneric")
-                w->setText(map["ProcessorType"].toString());
+            QStringList strList = name.split("_");
 
-            if (name == "MLB_PNVRAM")
-                w->setText(map["MLB"].toString());
-
-            if (name == "ROM_PNVRAM")
-                w->setText(ByteToHexStr(map["ROM"].toByteArray())); // 为data类型
-
-            if (name == "SystemSerialNumber_PNVRAM" || name == "SystemSerialNumber_2" || name == "SystemSerialNumber_data")
-                w->setText(map["SystemSerialNumber"].toString());
-
-            if (name == "SystemUUID_PNVRAM" || name == "SystemUUID_2" || name == "SystemUUID_data")
-                w->setText(map["SystemUUID"].toString());
-
-            if (name == "BoardProduct_2")
-                w->setText(map["BoardProduct"].toString());
-
-            if (name == "SystemProductName_2")
-                w->setText(map["SystemProductName"].toString());
-
-            if (name == "FirmwareFeatures_SMBIOS")
-                w->setText(ByteToHexStr(map["FirmwareFeatures"].toByteArray())); // 为data类型
-
-            if (name == "FirmwareFeaturesMask_SMBIOS")
-                w->setText(ByteToHexStr(map["FirmwareFeaturesMask"].toByteArray())); // 为data类型
+            if (str0.mid(0, 3) == "Dat") {
+                if (strList.count() > 0)
+                    w->setText(ByteToHexStr(map[strList.at(0)].toByteArray()));
+                else
+                    w->setText(ByteToHexStr(map[name].toByteArray())); // 为data类型
+            } else {
+                if (strList.count() > 0)
+                    w->setText(map[strList.at(0)].toString());
+                else
+                    w->setText(map[name].toString());
+            }
         }
     }
 }
@@ -10270,49 +10249,35 @@ QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab)
         QString str0, name;
         str0 = w->objectName().mid(4, w->objectName().count() - 3); // 去edit
 
-        if (str0.mid(0, 3) == "Dat" || str0.mid(0, 3) == "Int" || str0.mid(0, 3) == "Str")
+        if (str0.mid(0, 3) == "Dat" || str0.mid(0, 3) == "Int")
             name = str0.mid(3, str0.count() - 2);
         else
             name = str0;
 
         if (editExclusion(w, name)) {
 
-            if (str0.mid(0, 3) == "Dat")
-                map.insert(name, HexStrToByte(w->text().trimmed()));
+            QStringList strList = name.split("_");
 
-            else if (str0.mid(0, 3) == "Int")
-                map.insert(name, w->text().trimmed().toLongLong());
+            if (str0.mid(0, 3) == "Dat") {
+                if (strList.count() > 0)
+                    map.insert(strList.at(0), HexStrToByte(w->text().trimmed()));
+                else
+                    map.insert(name, HexStrToByte(w->text().trimmed()));
+            }
 
-            // 有重名，单独处理
-            else if (name == "ProcessorTypeGeneric")
-                map.insert("ProcessorType", w->text().trimmed().toLongLong());
+            else if (str0.mid(0, 3) == "Int") {
+                if (strList.count() > 0)
+                    map.insert(strList.at(0), w->text().trimmed().toLongLong());
+                else
+                    map.insert(name, w->text().trimmed().toLongLong());
+            }
 
-            else if (name == "MLB_PNVRAM")
-                map.insert("MLB", w->text().trimmed());
-
-            else if (name == "ROM_PNVRAM")
-                map.insert("ROM", HexStrToByte(w->text().trimmed())); // 为data类型
-
-            else if (name == "SystemSerialNumber_PNVRAM" || name == "SystemSerialNumber_2" || name == "SystemSerialNumber_data")
-                map.insert("SystemSerialNumber", w->text().trimmed());
-
-            else if (name == "SystemUUID_PNVRAM" || name == "SystemUUID_2" || name == "SystemUUID_data")
-                map.insert("SystemUUID", w->text().trimmed());
-
-            else if (name == "BoardProduct_2")
-                map.insert("BoardProduct", w->text().trimmed());
-
-            else if (name == "SystemProductName_2")
-                map.insert("SystemProductName", w->text().trimmed());
-
-            else if (name == "FirmwareFeatures_SMBIOS")
-                map.insert("FirmwareFeatures", HexStrToByte(w->text().trimmed())); // 为data类型
-
-            else if (name == "FirmwareFeaturesMask_SMBIOS")
-                map.insert("FirmwareFeaturesMask", HexStrToByte(w->text().trimmed())); // 为data类型
-
-            else
-                map.insert(name, w->text().trimmed());
+            else {
+                if (strList.count() > 0)
+                    map.insert(strList.at(0), w->text().trimmed());
+                else
+                    map.insert(name, w->text().trimmed());
+            }
         }
     }
 
@@ -10739,7 +10704,7 @@ void MainWindow::on_btnROM_clicked()
     QStringList strList = strId.split("-");
     ui->editDatROM->setText(strList.at(4));
 
-    ui->editROM_PNVRAM->setText(ui->editDatROM->text());
+    ui->editDatROM_PNVRAM->setText(ui->editDatROM->text());
 }
 
 void MainWindow::on_editPassInput_textChanged(const QString& arg1)
