@@ -283,6 +283,101 @@ void Method::goTable(QTableWidget* table)
     }
 }
 
+QString Method::copyDrivers(QString pathSource, QString pathTarget)
+{
+    //OC/Drivers
+
+    QDir dir;
+    QString strDatabase;
+    QString pathOCDrivers = pathTarget + "OC/Drivers/";
+    if (dir.mkpath(pathOCDrivers)) { }
+    for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
+
+        QString file = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
+        QString str0 = pathSource + "EFI/OC/Drivers/" + file;
+        if (!str0.contains("#")) {
+            QFileInfo fi(str0);
+            if (fi.exists())
+                QFile::copy(str0, pathOCDrivers + file);
+            else
+                strDatabase = strDatabase + "EFI/OC/Drivers/" + file + "\n";
+        }
+    }
+
+    return strDatabase;
+}
+
+QString Method::copyKexts(QString pathSource, QString pathTarget)
+{
+    //OC/Kexts
+
+    QDir dir;
+    QString strDatabase;
+    QString pathOCKexts = pathTarget + "OC/Kexts/";
+    if (dir.mkpath(pathOCKexts)) { }
+    for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
+
+        QString file = mw_one->ui->table_kernel_add->item(i, 0)->text();
+        QString str0 = pathSource + "EFI/OC/Kexts/" + file;
+        QDir kextDir(str0);
+
+        if (!str0.contains("#")) {
+
+            if (kextDir.exists())
+                mw_one->copyDirectoryFiles(str0, pathOCKexts + file, true);
+            else
+                strDatabase = strDatabase + "EFI/OC/Kexts/" + file + "\n";
+        }
+    }
+
+    return strDatabase;
+}
+
+QString Method::copyACPI(QString pathSource, QString pathTarget)
+{
+    //OC/ACPI
+
+    QDir dir;
+    QString strDatabase;
+    QString pathOCACPI = pathTarget + "OC/ACPI/";
+    if (dir.mkpath(pathOCACPI)) { }
+    for (int i = 0; i < mw_one->ui->table_acpi_add->rowCount(); i++) {
+
+        QString file = mw_one->ui->table_acpi_add->item(i, 0)->text();
+        QFileInfo fi(pathSource + "EFI/OC/ACPI/" + file);
+        if (fi.exists())
+            QFile::copy(pathSource + "EFI/OC/ACPI/" + file, pathOCACPI + file);
+        else
+            strDatabase = strDatabase + "EFI/OC/ACPI/" + file + "\n";
+    }
+
+    return strDatabase;
+}
+
+QString Method::copyTools(QString pathSource, QString pathTarget)
+{
+    //OC/Tools
+
+    QDir dir;
+    QString strDatabase;
+    QString pathOCTools = pathTarget + "OC/Tools/";
+    if (dir.mkpath(pathOCTools)) { }
+    for (int i = 0; i < mw_one->ui->tableTools->rowCount(); i++) {
+
+        QString file = mw_one->ui->tableTools->item(i, 0)->text();
+        QString str0 = pathSource + "EFI/OC/Tools/" + file;
+        if (!str0.contains("#")) {
+            QFileInfo fi(str0);
+            if (fi.exists())
+                QFile::copy(str0, pathOCTools + file);
+            else
+                strDatabase = strDatabase + "EFI/OC/Tools/" + file + "\n";
+        }
+    }
+
+    return strDatabase;
+}
+
 void Method::on_GenerateEFI()
 {
 
@@ -303,77 +398,26 @@ void Method::on_GenerateEFI()
     if (dir.mkpath(pathBoot)) { }
     QFile::copy(pathSource + "EFI/BOOT/BOOTx64.efi", pathBoot + "BOOTx64.efi");
 
-    //OC/ACPI
-    QString pathOCACPI = pathTarget + "OC/ACPI/";
-    if (dir.mkpath(pathOCACPI)) { }
-    for (int i = 0; i < mw_one->ui->table_acpi_add->rowCount(); i++) {
-
-        QString file = mw_one->ui->table_acpi_add->item(i, 0)->text();
-        QFileInfo fi(pathSource + "EFI/OC/ACPI/" + file);
-        if (fi.exists())
-            QFile::copy(pathSource + "EFI/OC/ACPI/" + file, pathOCACPI + file);
-        else
-            strDatabase = strDatabase + "EFI/OC/ACPI/" + file + "\n";
-    }
+    // ACPI
+    strDatabase = copyACPI(pathSource, pathTarget) + strDatabase;
 
     //OC/Bootstrap（在新版OC中已弃用）
     //QString pathOCBootstrap = pathTarget + "OC/Bootstrap/";
     //if (dir.mkpath(pathOCBootstrap)) { }
     //QFile::copy(pathSource + "EFI/OC/Bootstrap/Bootstrap.efi", pathOCBootstrap + "Bootstrap.efi");
 
-    //OC/Drivers
-    QString pathOCDrivers = pathTarget + "OC/Drivers/";
-    if (dir.mkpath(pathOCDrivers)) { }
-    for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
+    // Drivers
+    strDatabase = copyDrivers(pathSource, pathTarget) + strDatabase;
 
-        QString file = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
-        QString str0 = pathSource + "EFI/OC/Drivers/" + file;
-        if (!str0.contains("#")) {
-            QFileInfo fi(str0);
-            if (fi.exists())
-                QFile::copy(str0, pathOCDrivers + file);
-            else
-                strDatabase = strDatabase + "EFI/OC/Drivers/" + file + "\n";
-        }
-    }
-
-    //OC/Kexts
-    QString pathOCKexts = pathTarget + "OC/Kexts/";
-    if (dir.mkpath(pathOCKexts)) { }
-    for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
-
-        QString file = mw_one->ui->table_kernel_add->item(i, 0)->text();
-        QString str0 = pathSource + "EFI/OC/Kexts/" + file;
-        QDir kextDir(str0);
-
-        if (!str0.contains("#")) {
-
-            if (kextDir.exists())
-                mw_one->copyDirectoryFiles(str0, pathOCKexts + file, true);
-            else
-                strDatabase = strDatabase + "EFI/OC/Kexts/" + file + "\n";
-        }
-    }
+    // Kexts
+    strDatabase = copyKexts(pathSource, pathTarget) + strDatabase;
 
     //OC/Resources
     QString pathOCResources = pathTarget + "OC/Resources/";
     mw_one->copyDirectoryFiles(pathSource + "EFI/OC/Resources/", pathOCResources, true);
 
-    //OC/Tools
-    QString pathOCTools = pathTarget + "OC/Tools/";
-    if (dir.mkpath(pathOCTools)) { }
-    for (int i = 0; i < mw_one->ui->tableTools->rowCount(); i++) {
-
-        QString file = mw_one->ui->tableTools->item(i, 0)->text();
-        QString str0 = pathSource + "EFI/OC/Tools/" + file;
-        if (!str0.contains("#")) {
-            QFileInfo fi(str0);
-            if (fi.exists())
-                QFile::copy(str0, pathOCTools + file);
-            else
-                strDatabase = strDatabase + "EFI/OC/Tools/" + file + "\n";
-        }
-    }
+    // Tools
+    strDatabase = copyTools(pathSource, pathTarget) + strDatabase;
 
     //OC/OpenCore.efi
     QFile::copy(pathSource + "EFI/OC/OpenCore.efi", pathTarget + "OC/OpenCore.efi");
@@ -563,6 +607,59 @@ void Method::init_Table(int index)
     }
 }
 
+void Method::findDP(QTableWidget* t, QString findText)
+{
+    // DP
+    if (t == mw_one->ui->table_dp_add0) {
+        if (t->rowCount() > 0) {
+            for (int j = 0; j < t->rowCount(); j++) {
+                t->setCurrentCell(j, 0);
+                mw_one->findTable(mw_one->ui->table_dp_add, findText);
+            }
+        }
+    }
+
+    if (t == mw_one->ui->table_dp_del0) {
+        if (t->rowCount() > 0) {
+            for (int j = 0; j < t->rowCount(); j++) {
+                t->setCurrentCell(j, 0);
+                mw_one->findTable(mw_one->ui->table_dp_del, findText);
+            }
+        }
+    }
+}
+
+void Method::findNVRAM(QTableWidget* t, QString findText)
+{
+    // NVRAM
+    if (t == mw_one->ui->table_nv_add0) {
+        if (t->rowCount() > 0) {
+            for (int j = 0; j < t->rowCount(); j++) {
+                t->setCurrentCell(j, 0);
+                mw_one->findTable(mw_one->ui->table_nv_add, findText);
+            }
+        }
+    }
+
+    if (t == mw_one->ui->table_nv_del0) {
+        if (t->rowCount() > 0) {
+            for (int j = 0; j < t->rowCount(); j++) {
+                t->setCurrentCell(j, 0);
+                mw_one->findTable(mw_one->ui->table_nv_del, findText);
+            }
+        }
+    }
+
+    if (t == mw_one->ui->table_nv_ls0) {
+        if (t->rowCount() > 0) {
+            for (int j = 0; j < t->rowCount(); j++) {
+                t->setCurrentCell(j, 0);
+                mw_one->findTable(mw_one->ui->table_nv_ls, findText);
+            }
+        }
+    }
+}
+
 void Method::findTable(QString findText)
 {
     //Table  2
@@ -574,51 +671,10 @@ void Method::findTable(QString findText)
         t = (QTableWidget*)mw_one->listOfTableWidget.at(i);
 
         // DP
-        if (t == mw_one->ui->table_dp_add0) {
-            if (t->rowCount() > 0) {
-                for (int j = 0; j < t->rowCount(); j++) {
-                    t->setCurrentCell(j, 0);
-                    mw_one->findTable(mw_one->ui->table_dp_add, findText);
-                }
-            }
-        }
-
-        if (t == mw_one->ui->table_dp_del0) {
-            if (t->rowCount() > 0) {
-                for (int j = 0; j < t->rowCount(); j++) {
-                    t->setCurrentCell(j, 0);
-                    mw_one->findTable(mw_one->ui->table_dp_del, findText);
-                }
-            }
-        }
+        findDP(t, findText);
 
         // NVRAM
-        if (t == mw_one->ui->table_nv_add0) {
-            if (t->rowCount() > 0) {
-                for (int j = 0; j < t->rowCount(); j++) {
-                    t->setCurrentCell(j, 0);
-                    mw_one->findTable(mw_one->ui->table_nv_add, findText);
-                }
-            }
-        }
-
-        if (t == mw_one->ui->table_nv_del0) {
-            if (t->rowCount() > 0) {
-                for (int j = 0; j < t->rowCount(); j++) {
-                    t->setCurrentCell(j, 0);
-                    mw_one->findTable(mw_one->ui->table_nv_del, findText);
-                }
-            }
-        }
-
-        if (t == mw_one->ui->table_nv_ls0) {
-            if (t->rowCount() > 0) {
-                for (int j = 0; j < t->rowCount(); j++) {
-                    t->setCurrentCell(j, 0);
-                    mw_one->findTable(mw_one->ui->table_nv_ls, findText);
-                }
-            }
-        }
+        findNVRAM(t, findText);
 
         if (t != mw_one->ui->table_dp_add && t != mw_one->ui->table_dp_del && t != mw_one->ui->table_nv_add && t != mw_one->ui->table_nv_del && t != mw_one->ui->table_nv_ls)
             mw_one->findTable(t, findText);

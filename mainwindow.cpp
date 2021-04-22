@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210423";
+    CurVerison = "20210425";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -9875,12 +9875,12 @@ void MainWindow::cutLine(QTableWidget* w, QAction* cutAction, QAction* copyActio
     });
 }
 
-void MainWindow::tablePopMenu(QTableWidget *w,
-                              QAction *cutAction,
-                              QAction *copyAction,
-                              QAction *pasteAction,
-                              QAction *showtipAction,
-                              QMenu *popMenu)
+void MainWindow::tablePopMenu(QTableWidget* w,
+    QAction* cutAction,
+    QAction* copyAction,
+    QAction* pasteAction,
+    QAction* showtipAction,
+    QMenu* popMenu)
 {
     connect(w, &QTableWidget::customContextMenuRequested, [=](const QPoint& pos) {
         Q_UNUSED(pos);

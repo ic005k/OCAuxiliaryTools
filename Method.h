@@ -28,6 +28,12 @@ public:
     void init_Table(int index);
     QString getTabTextName(int index);
 
+    QString copyTools(QString pathSource, QString pathTarget);
+    QString copyACPI(QString pathSource, QString pathTarget);
+    QString copyKexts(QString pathSource, QString pathTarget);
+    QString copyDrivers(QString pathSource, QString pathTarget);
+    void findDP(QTableWidget* t, QString findText);
+    void findNVRAM(QTableWidget* t, QString findText);
 public slots:
     void on_GenerateEFI();
     void on_btnExportMaster();
