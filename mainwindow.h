@@ -1003,6 +1003,7 @@ private:
     void goResultsTableHeader(QString objName);
     QVector<QTableWidget*> tableList0;
     QVector<QTableWidget*> tableList;
+    QString getReReCount(QTableWidget* w, QString text);
 };
 
 #endif // MAINWINDOW_H

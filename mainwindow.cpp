@@ -9641,6 +9641,29 @@ void MainWindow::setWM()
     this->setWindowModified(true);
 }
 
+QString MainWindow::getReReCount(QTableWidget* w, QString text)
+{
+    bool re = false;
+    int reCount = 0;
+
+    if (w->rowCount() > 0) {
+        for (int m = 0; m < tableList0.count(); m++) {
+            if (w == tableList0.at(m)) {
+                for (int k = 0; k < w->rowCount(); k++) {
+                    if (w->item(k, 0)->text().trimmed().contains(text)) {
+                        re = true;
+                        reCount++;
+                    }
+                }
+
+                break;
+            }
+        }
+    }
+
+    return QString::number(re) + "-" + QString::number(reCount);
+}
+
 void MainWindow::pasteLine(QTableWidget* w, QAction* pasteAction)
 {
     connect(pasteAction, &QAction::triggered, [=]() {
@@ -9663,22 +9686,9 @@ void MainWindow::pasteLine(QTableWidget* w, QAction* pasteAction)
                 if (w->rowCount() > 0)
                     row = w->currentRow();
 
-                bool re = false;
-                int reCount = 0;
-                if (w->rowCount() > 0) {
-                    for (int m = 0; m < tableList0.count(); m++) {
-                        if (w == tableList0.at(m)) {
-                            for (int k = 0; k < w->rowCount(); k++) {
-                                if (w->item(k, 0)->text().trimmed().contains(text)) {
-                                    re = true;
-                                    reCount++;
-                                }
-                            }
-
-                            break;
-                        }
-                    }
-                }
+                QStringList strList = getReReCount(w, text).split("-");
+                bool re = strList.at(0).toInt();
+                int reCount = strList.at(1).toInt();
 
                 if (w->rowCount() > 0)
                     w->setCurrentCell(row, 0);
