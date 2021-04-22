@@ -996,6 +996,7 @@ private:
     void setListMainIcon();
     bool editExclusion(QLineEdit* w, QString name);
     QString getSubTabStr(int tabIndex);
+    void initExposeSensitiveDataValue();
 };
 
 #endif // MAINWINDOW_H

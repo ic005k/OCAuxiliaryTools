@@ -5216,30 +5216,17 @@ void MainWindow::on_cboxUpdateSMBIOSMode_currentIndexChanged(
 
 int MainWindow::ExposeSensitiveData()
 {
-    int a, b, c, d;
-    if (ui->chk01->isChecked())
-        a = 1;
-    else
-        a = 0;
+    initExposeSensitiveDataValue();
 
-    if (ui->chk02->isChecked())
-        b = 2;
-    else
-        b = 0;
+    int total = 0;
+    for (int i = 0; i < chk_pa.count(); i++) {
+        if (chk_pa.at(i)->isChecked())
+            total = total + v_pa.at(i);
+    }
 
-    if (ui->chk04->isChecked())
-        c = 4;
-    else
-        c = 0;
+    ui->editIntExposeSensitiveData->setText(QString::number(total));
 
-    if (ui->chk08->isChecked())
-        d = 8;
-    else
-        d = 0;
-
-    ui->editIntExposeSensitiveData->setText(QString::number(a + b + c + d));
-
-    return a + b + c + d;
+    return total;
 }
 
 void MainWindow::on_chk01_clicked() { ExposeSensitiveData(); }
@@ -5250,120 +5237,34 @@ void MainWindow::on_chk04_clicked() { ExposeSensitiveData(); }
 
 void MainWindow::on_chk08_clicked() { ExposeSensitiveData(); }
 
+void MainWindow::initExposeSensitiveDataValue()
+{
+    chk_pa.clear();
+    chk_pa.append(ui->chk01);
+    chk_pa.append(ui->chk02);
+    chk_pa.append(ui->chk04);
+    chk_pa.append(ui->chk08);
+
+    v_pa.clear();
+    v_pa.append(1);
+    v_pa.append(2);
+    v_pa.append(4);
+    v_pa.append(8);
+}
+
 void MainWindow::on_editIntExposeSensitiveData_textChanged(const QString& arg1)
 {
-    int val = arg1.toInt();
-    if (val == 0) {
-        ui->chk01->setChecked(false);
-        ui->chk02->setChecked(false);
-        ui->chk04->setChecked(false);
-        ui->chk08->setChecked(false);
-    }
+    int total = arg1.toInt();
 
-    if (val == 1) {
-        ui->chk01->setChecked(true);
-        ui->chk02->setChecked(false);
-        ui->chk04->setChecked(false);
-        ui->chk08->setChecked(false);
-    }
+    initExposeSensitiveDataValue();
 
-    if (val == 2) {
-        ui->chk01->setChecked(false);
-        ui->chk02->setChecked(true);
-        ui->chk04->setChecked(false);
-        ui->chk08->setChecked(false);
-    }
+    scanPolicy = false;
+    pickerAttributes = true;
 
-    if (val == 3) {
-        ui->chk01->setChecked(1);
-        ui->chk02->setChecked(1);
-        ui->chk04->setChecked(0);
-        ui->chk08->setChecked(0);
-    }
+    for (int i = 0; i < v_pa.count(); i++)
+        chk_pa.at(i)->setChecked(false);
 
-    if (val == 4) {
-        ui->chk01->setChecked(0);
-        ui->chk02->setChecked(0);
-        ui->chk04->setChecked(1);
-        ui->chk08->setChecked(0);
-    }
-
-    if (val == 5) {
-        ui->chk01->setChecked(1);
-        ui->chk02->setChecked(0);
-        ui->chk04->setChecked(1);
-        ui->chk08->setChecked(0);
-    }
-
-    if (val == 6) {
-        ui->chk01->setChecked(0);
-        ui->chk02->setChecked(1);
-        ui->chk04->setChecked(1);
-        ui->chk08->setChecked(0);
-    }
-
-    if (val == 7) {
-        ui->chk01->setChecked(1);
-        ui->chk02->setChecked(1);
-        ui->chk04->setChecked(1);
-        ui->chk08->setChecked(0);
-    }
-
-    if (val == 8) {
-        ui->chk01->setChecked(0);
-        ui->chk02->setChecked(0);
-        ui->chk04->setChecked(0);
-        ui->chk08->setChecked(1);
-    }
-
-    if (val == 9) {
-        ui->chk01->setChecked(1);
-        ui->chk02->setChecked(0);
-        ui->chk04->setChecked(0);
-        ui->chk08->setChecked(1);
-    }
-
-    if (val == 10) {
-        ui->chk01->setChecked(0);
-        ui->chk02->setChecked(1);
-        ui->chk04->setChecked(0);
-        ui->chk08->setChecked(1);
-    }
-
-    if (val == 11) {
-        ui->chk01->setChecked(1);
-        ui->chk02->setChecked(1);
-        ui->chk04->setChecked(0);
-        ui->chk08->setChecked(1);
-    }
-
-    if (val == 12) {
-        ui->chk01->setChecked(0);
-        ui->chk02->setChecked(0);
-        ui->chk04->setChecked(1);
-        ui->chk08->setChecked(1);
-    }
-
-    if (val == 13) {
-        ui->chk01->setChecked(1);
-        ui->chk02->setChecked(0);
-        ui->chk04->setChecked(1);
-        ui->chk08->setChecked(1);
-    }
-
-    if (val == 14) {
-        ui->chk01->setChecked(0);
-        ui->chk02->setChecked(1);
-        ui->chk04->setChecked(1);
-        ui->chk08->setChecked(1);
-    }
-
-    if (val == 15) {
-        ui->chk01->setChecked(1);
-        ui->chk02->setChecked(1);
-        ui->chk04->setChecked(1);
-        ui->chk08->setChecked(1);
-    }
+    method(v_pa, total);
 
     //10 to 16
     unsigned int dec = arg1.toULongLong();
@@ -10681,17 +10582,12 @@ void MainWindow::initTargetValue()
 void MainWindow::Target()
 {
     initTargetValue();
-
-    for (int i = 0; i < v_pa.count(); i++) {
-        if (!chk_pa.at(i)->isChecked()) {
-            v_pa.remove(i);
-            v_pa.insert(i, 0);
-        }
-    }
-
     int total = 0;
+
     for (int i = 0; i < v_pa.count(); i++) {
-        total = total + v_pa.at(i);
+        if (chk_pa.at(i)->isChecked()) {
+            total = total + v_pa.at(i);
+        }
     }
 
     ui->editIntTarget->setText(QString::number(total));
