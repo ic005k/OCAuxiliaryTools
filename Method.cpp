@@ -13,88 +13,18 @@ Method::Method(QWidget* parent)
     mymethod = new Method;
 }
 
-QWidget* Method::getSubTab1(int m, int s)
+QWidget *Method::getSubTabWidget(int m, int s)
 {
-    if (m == 0) {
-
-        for (int i = 0; i < mw_one->ui->tabACPI->tabBar()->count(); i++) {
-            if (i == s)
-                return mw_one->ui->tabACPI->widget(i);
-        }
-    }
-
-    if (m == 1) {
-
-        for (int i = 0; i < mw_one->ui->tabBooter->tabBar()->count(); i++) {
-            if (i == s)
-                return mw_one->ui->tabBooter->widget(i);
-        }
-    }
-
-    if (m == 2) {
-
-        for (int i = 0; i < mw_one->ui->tabDP->tabBar()->count(); i++) {
-            if (i == s)
-                return mw_one->ui->tabDP->widget(i);
-        }
-    }
-
-    if (m == 3) {
-
-        for (int i = 0; i < mw_one->ui->tabKernel->tabBar()->count(); i++) {
-            if (i == s)
-                return mw_one->ui->tabKernel->widget(i);
+    for (int j = 0; j < mw_one->mainTabList.count(); j++) {
+        if (j == m) {
+            for (int i = 0; i < mw_one->mainTabList.at(j)->tabBar()->count(); i++) {
+                if (i == s)
+                    return mw_one->mainTabList.at(j)->widget(i);
+            }
         }
     }
 
     return NULL;
-}
-
-QWidget* Method::getSubTab2(int m, int s)
-{
-    if (m == 4) {
-
-        for (int i = 0; i < mw_one->ui->tabMisc->tabBar()->count(); i++) {
-            if (i == s)
-                return mw_one->ui->tabMisc->widget(i);
-        }
-    }
-
-    if (m == 5) {
-
-        for (int i = 0; i < mw_one->ui->tabNVRAM->tabBar()->count(); i++) {
-            if (i == s)
-                return mw_one->ui->tabNVRAM->widget(i);
-        }
-    }
-
-    if (m == 6) {
-
-        for (int i = 0; i < mw_one->ui->tabPlatformInfo->tabBar()->count(); i++) {
-            if (i == s)
-                return mw_one->ui->tabPlatformInfo->widget(i);
-        }
-    }
-
-    if (m == 7) {
-
-        for (int i = 0; i < mw_one->ui->tabUEFI->tabBar()->count(); i++) {
-            if (i == s)
-                return mw_one->ui->tabUEFI->widget(i);
-        }
-    }
-
-    return NULL;
-}
-
-QWidget* Method::getSubTabWidget(int m, int s)
-{
-    QWidget* pWidget;
-    pWidget = getSubTab1(m, s);
-    if (pWidget == NULL)
-        pWidget = getSubTab2(m, s);
-
-    return pWidget;
 }
 
 void Method::goACPITable(QTableWidget* table)

@@ -6157,7 +6157,6 @@ void MainWindow::show_menu0(const QPoint pos)
 
 void MainWindow::on_nv01()
 {
-
     bool re = false;
 
     for (int i = 0; i < ui->table_nv_add0->rowCount(); i++) {
@@ -6181,7 +6180,6 @@ void MainWindow::on_nv01()
 
 void MainWindow::on_nv02()
 {
-
     bool re = false;
 
     for (int i = 0; i < ui->table_nv_add0->rowCount(); i++) {
@@ -6205,7 +6203,6 @@ void MainWindow::on_nv02()
 
 void MainWindow::on_nv03()
 {
-
     bool re = false;
 
     for (int i = 0; i < ui->table_nv_add0->rowCount(); i++) {
@@ -6229,7 +6226,6 @@ void MainWindow::on_nv03()
 
 void MainWindow::on_nv04()
 {
-
     bool re = false;
 
     for (int i = 0; i < ui->table_nv_add0->rowCount(); i++) {
@@ -6689,6 +6685,16 @@ void MainWindow::init_MainUI()
     tableList.append(ui->table_nv_add);
     tableList.append(ui->table_nv_del);
     tableList.append(ui->table_nv_ls);
+
+    mainTabList.clear();
+    mainTabList.append(ui->tabACPI);
+    mainTabList.append(ui->tabBooter);
+    mainTabList.append(ui->tabDP);
+    mainTabList.append(ui->tabKernel);
+    mainTabList.append(ui->tabMisc);
+    mainTabList.append(ui->tabNVRAM);
+    mainTabList.append(ui->tabPlatformInfo);
+    mainTabList.append(ui->tabUEFI);
 }
 
 void MainWindow::LineEditDataCheck()

@@ -64,6 +64,7 @@ public:
     ~MainWindow();
     Ui::MainWindow* ui;
 
+    QVector<QTabWidget *> mainTabList;
     void initScanPolicyValue();
     void initDisplayLevelValue();
     void initPickerAttributesValue();

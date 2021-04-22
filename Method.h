@@ -21,9 +21,8 @@ public:
     void goDPTable(QTableWidget* table);
     void goKernelTable(QTableWidget* table);
     void goMiscTable(QTableWidget* table);
-    void goNVRAMTable(QTableWidget* table);
-    QWidget* getSubTab1(int m, int s);
-    QWidget* getSubTab2(int m, int s);
+    void goNVRAMTable(QTableWidget *table);
+
     void findTable(QString findText);
     void init_Table(int index);
     QString getTabTextName(int index);
@@ -33,7 +32,7 @@ public:
     QString copyKexts(QString pathSource, QString pathTarget);
     QString copyDrivers(QString pathSource, QString pathTarget);
     void findDP(QTableWidget* t, QString findText);
-    void findNVRAM(QTableWidget* t, QString findText);
+    void findNVRAM(QTableWidget *t, QString findText);
 
 public slots:
     void on_GenerateEFI();
