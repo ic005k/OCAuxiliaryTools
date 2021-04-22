@@ -9776,6 +9776,75 @@ void MainWindow::cutLine(QTableWidget* w, QAction* cutAction, QAction* copyActio
     });
 }
 
+void MainWindow::setPopMenuEnabled(QString qfile,
+    QTableWidget* w,
+    QAction* cutAction,
+    QAction* pasteAction,
+    QAction* copyAction)
+{
+    if (w == ui->table_dp_add0
+        || w == ui->table_dp_del0
+        || w == ui->table_nv_add0
+        || w == ui->table_nv_del0
+        || w == ui->table_nv_ls0) {
+
+        QString dirpath = QDir::homePath() + "/.config/QtOCC/";
+
+        QSettings Reg(qfile, QSettings::IniFormat);
+        QString text = Reg.value("0/col" + QString::number(0)).toString().trimmed();
+
+        text = text.replace("/", "-");
+        QString oldRightTable = Reg.value("CurrentDateTime").toString() + w->objectName() + text + ".ini";
+        QFileInfo fi(dirpath + oldRightTable);
+
+        if (!fi.exists())
+            pasteAction->setEnabled(false);
+        else {
+
+            copyAction->setEnabled(true);
+            cutAction->setEnabled(true);
+        }
+    }
+}
+
+void MainWindow::setPopMenuEnabled(QTableWidget* w, QAction* pasteAction)
+{
+    if (w == ui->table_dp_add) {
+        if (ui->table_dp_add0->rowCount() > 0)
+            pasteAction->setEnabled(true);
+        else
+            pasteAction->setEnabled(false);
+    }
+
+    if (w == ui->table_dp_del) {
+        if (ui->table_dp_del0->rowCount() > 0)
+            pasteAction->setEnabled(true);
+        else
+            pasteAction->setEnabled(false);
+    }
+
+    if (w == ui->table_nv_add) {
+        if (ui->table_nv_add0->rowCount() > 0)
+            pasteAction->setEnabled(true);
+        else
+            pasteAction->setEnabled(false);
+    }
+
+    if (w == ui->table_nv_del) {
+        if (ui->table_nv_del0->rowCount() > 0)
+            pasteAction->setEnabled(true);
+        else
+            pasteAction->setEnabled(false);
+    }
+
+    if (w == ui->table_nv_ls) {
+        if (ui->table_nv_ls0->rowCount() > 0)
+            pasteAction->setEnabled(true);
+        else
+            pasteAction->setEnabled(false);
+    }
+}
+
 void MainWindow::tablePopMenu(QTableWidget* w,
     QAction* cutAction,
     QAction* copyAction,
@@ -9796,59 +9865,9 @@ void MainWindow::tablePopMenu(QTableWidget* w,
 
             pasteAction->setEnabled(true);
 
-            if (w == ui->table_dp_add0 || w == ui->table_dp_del0 || w == ui->table_nv_add0 || w == ui->table_nv_del0 || w == ui->table_nv_ls0) {
+            setPopMenuEnabled(qfile, w, cutAction, pasteAction, copyAction);
 
-                QString dirpath = QDir::homePath() + "/.config/QtOCC/";
-
-                QString text = Reg.value("0/col" + QString::number(0)).toString().trimmed();
-
-                text = text.replace("/", "-");
-                QString oldRightTable = Reg.value("CurrentDateTime").toString() + w->objectName() + text + ".ini";
-                QFileInfo fi(dirpath + oldRightTable);
-
-                if (!fi.exists())
-                    pasteAction->setEnabled(false);
-                else {
-
-                    copyAction->setEnabled(true);
-                    cutAction->setEnabled(true);
-                }
-            }
-
-            if (w == ui->table_dp_add) {
-                if (ui->table_dp_add0->rowCount() > 0)
-                    pasteAction->setEnabled(true);
-                else
-                    pasteAction->setEnabled(false);
-            }
-
-            if (w == ui->table_dp_del) {
-                if (ui->table_dp_del0->rowCount() > 0)
-                    pasteAction->setEnabled(true);
-                else
-                    pasteAction->setEnabled(false);
-            }
-
-            if (w == ui->table_nv_add) {
-                if (ui->table_nv_add0->rowCount() > 0)
-                    pasteAction->setEnabled(true);
-                else
-                    pasteAction->setEnabled(false);
-            }
-
-            if (w == ui->table_nv_del) {
-                if (ui->table_nv_del0->rowCount() > 0)
-                    pasteAction->setEnabled(true);
-                else
-                    pasteAction->setEnabled(false);
-            }
-
-            if (w == ui->table_nv_ls) {
-                if (ui->table_nv_ls0->rowCount() > 0)
-                    pasteAction->setEnabled(true);
-                else
-                    pasteAction->setEnabled(false);
-            }
+            setPopMenuEnabled(w, pasteAction);
 
         } else
             pasteAction->setEnabled(false);
@@ -9938,7 +9957,6 @@ void MainWindow::init_CopyPasteLine()
 
 void MainWindow::loadReghtTable(QTableWidget* t0, QTableWidget* t)
 {
-
     if (!t0->currentIndex().isValid())
         return;
 
@@ -10230,7 +10248,6 @@ void MainWindow::getEditValue(QVariantMap map, QWidget* tab)
 
 void MainWindow::getValue(QVariantMap map, QWidget* tab)
 {
-
     getCheckBoxValue(map, tab);
 
     getEditValue(map, tab);
@@ -10510,7 +10527,6 @@ void MainWindow::initColorValue()
 
 void MainWindow::on_cboxTextColor_currentIndexChanged(int index)
 {
-
     Q_UNUSED(index);
 
     initColorValue();
@@ -10747,7 +10763,6 @@ void MainWindow::on_editPassInput_textChanged(const QString& arg1)
 
 void MainWindow::on_editPassInput_returnPressed()
 {
-
     if (ui->btnGetPassHash->isEnabled())
         on_btnGetPassHash_clicked();
 }

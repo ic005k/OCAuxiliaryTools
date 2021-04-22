@@ -997,6 +997,9 @@ private:
     bool editExclusion(QLineEdit* w, QString name);
     QString getSubTabStr(int tabIndex);
     void initExposeSensitiveDataValue();
+
+    void setPopMenuEnabled(QString qfile, QTableWidget* w, QAction* cutAction, QAction* pasteAction, QAction* copyAction);
+    void setPopMenuEnabled(QTableWidget* w, QAction* pasteAction);
 };
 
 #endif // MAINWINDOW_H
