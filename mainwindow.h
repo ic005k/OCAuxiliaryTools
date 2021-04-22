@@ -1001,6 +1001,8 @@ private:
     void setPopMenuEnabled(QString qfile, QTableWidget* w, QAction* cutAction, QAction* pasteAction, QAction* copyAction);
     void setPopMenuEnabled(QTableWidget* w, QAction* pasteAction);
     void goResultsTableHeader(QString objName);
+    QVector<QTableWidget*> tableList0;
+    QVector<QTableWidget*> tableList;
 };
 
 #endif // MAINWINDOW_H

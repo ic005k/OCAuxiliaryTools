@@ -34,6 +34,7 @@ public:
     QString copyDrivers(QString pathSource, QString pathTarget);
     void findDP(QTableWidget* t, QString findText);
     void findNVRAM(QTableWidget* t, QString findText);
+
 public slots:
     void on_GenerateEFI();
     void on_btnExportMaster();

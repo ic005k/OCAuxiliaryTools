@@ -6677,6 +6677,18 @@ void MainWindow::init_MainUI()
     //lineEdit
     pTrailingAction = new QAction(this);
     pTrailingAction->setIcon(QIcon(":/icon/ok.png"));
+
+    tableList0.append(ui->table_dp_add0);
+    tableList0.append(ui->table_dp_del0);
+    tableList0.append(ui->table_nv_add0);
+    tableList0.append(ui->table_nv_del0);
+    tableList0.append(ui->table_nv_ls0);
+
+    tableList.append(ui->table_dp_add);
+    tableList.append(ui->table_dp_del);
+    tableList.append(ui->table_nv_add);
+    tableList.append(ui->table_nv_del);
+    tableList.append(ui->table_nv_ls);
 }
 
 void MainWindow::LineEditDataCheck()
@@ -9654,14 +9666,16 @@ void MainWindow::pasteLine(QTableWidget* w, QAction* pasteAction)
                 bool re = false;
                 int reCount = 0;
                 if (w->rowCount() > 0) {
-                    if (w == ui->table_dp_add0 || w == ui->table_dp_del0 || w == ui->table_nv_add0 || w == ui->table_nv_del0 || w == ui->table_nv_ls0) {
-
-                        for (int k = 0; k < w->rowCount(); k++) {
-
-                            if (w->item(k, 0)->text().trimmed().contains(text)) {
-                                re = true;
-                                reCount++;
+                    for (int m = 0; m < tableList0.count(); m++) {
+                        if (w == tableList0.at(m)) {
+                            for (int k = 0; k < w->rowCount(); k++) {
+                                if (w->item(k, 0)->text().trimmed().contains(text)) {
+                                    re = true;
+                                    reCount++;
+                                }
                             }
+
+                            break;
                         }
                     }
                 }
@@ -9685,16 +9699,15 @@ void MainWindow::pasteLine(QTableWidget* w, QAction* pasteAction)
                 bool writeini = false;
                 bool writevalueini = false;
                 int leftTableCurrentRow = 0;
-                if (w == ui->table_dp_add || w == ui->table_nv_add) {
-
-                    writeini = true;
-                    leftTableCurrentRow = getLetfTableCurrentRow(w);
-                }
-
-                if (w == ui->table_dp_del || w == ui->table_nv_del || w == ui->table_nv_ls) {
-
-                    writevalueini = true;
-                    leftTableCurrentRow = getLetfTableCurrentRow(w);
+                for (int m = 0; m < tableList.count(); m++) {
+                    if (w == tableList.at(m)) {
+                        if (m == 0 || m == 2)
+                            writeini = true;
+                        else
+                            writevalueini = true;
+                        leftTableCurrentRow = getLetfTableCurrentRow(w);
+                        break;
+                    }
                 }
 
                 // Undo / Redo
@@ -9813,20 +9826,6 @@ void MainWindow::setPopMenuEnabled(QString qfile,
 
 void MainWindow::setPopMenuEnabled(QTableWidget* w, QAction* pasteAction)
 {
-    QVector<QTableWidget*> tableList0;
-    tableList0.append(ui->table_dp_add0);
-    tableList0.append(ui->table_dp_del0);
-    tableList0.append(ui->table_nv_add0);
-    tableList0.append(ui->table_nv_del0);
-    tableList0.append(ui->table_nv_ls0);
-
-    QVector<QTableWidget*> tableList;
-    tableList.append(ui->table_dp_add);
-    tableList.append(ui->table_dp_del);
-    tableList.append(ui->table_nv_add);
-    tableList.append(ui->table_nv_del);
-    tableList.append(ui->table_nv_ls);
-
     for (int i = 0; i < tableList.count(); i++) {
         if (w == tableList.at(i)) {
             if (tableList0.at(i)->rowCount() > 0)
@@ -10047,40 +10046,22 @@ void MainWindow::endDelLeftTable(QTableWidget* t0)
 
 QTableWidget* MainWindow::getLeftTable(QTableWidget* table)
 {
-    if (table == ui->table_dp_add)
-        return ui->table_dp_add0;
-
-    if (table == ui->table_dp_del)
-        return ui->table_dp_del0;
-
-    if (table == ui->table_nv_add)
-        return ui->table_nv_add0;
-
-    if (table == ui->table_nv_del)
-        return ui->table_nv_del0;
-
-    if (table == ui->table_nv_ls)
-        return ui->table_nv_ls0;
+    for (int i = 0; i < tableList.count(); i++) {
+        if (table == tableList.at(i)) {
+            return tableList0.at(i);
+        }
+    }
 
     return NULL;
 }
 
 int MainWindow::getLetfTableCurrentRow(QTableWidget* table)
 {
-    if (table == ui->table_dp_add)
-        return ui->table_dp_add0->currentRow();
-
-    if (table == ui->table_dp_del)
-        return ui->table_dp_del0->currentRow();
-
-    if (table == ui->table_nv_add)
-        return ui->table_nv_add0->currentRow();
-
-    if (table == ui->table_nv_del)
-        return ui->table_nv_del0->currentRow();
-
-    if (table == ui->table_nv_ls)
-        return ui->table_nv_ls0->currentRow();
+    for (int i = 0; i < tableList.count(); i++) {
+        if (table == tableList.at(i)) {
+            return tableList0.at(i)->currentRow();
+        }
+    }
 
     return 0;
 }
