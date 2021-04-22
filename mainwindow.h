@@ -1004,6 +1004,7 @@ private:
     QVector<QTableWidget*> tableList0;
     QVector<QTableWidget*> tableList;
     QString getReReCount(QTableWidget* w, QString text);
+    QString getUrl(QVariantList list);
 };
 
 #endif // MAINWINDOW_H

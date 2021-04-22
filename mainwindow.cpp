@@ -7193,6 +7193,41 @@ void MainWindow::replyFinished(QNetworkReply* reply)
     reply->deleteLater();
 }
 
+QString MainWindow::getUrl(QVariantList list)
+{
+    QString macUrl, winUrl, linuxUrl, osx1012Url;
+    for (int i = 0; i < list.count(); i++) {
+        QVariantMap map = list[i].toMap();
+        QString fName = map["name"].toString();
+
+        if (fName.contains("5.15.2"))
+            macUrl = map["browser_download_url"].toString();
+
+        if (fName.contains("Win"))
+            winUrl = map["browser_download_url"].toString();
+
+        if (fName.contains("Linux"))
+            linuxUrl = map["browser_download_url"].toString();
+
+        if (fName.contains("5.9.9"))
+            osx1012Url = map["browser_download_url"].toString();
+    }
+
+    QString Url;
+    if (mac)
+        Url = macUrl;
+    if (win)
+        Url = winUrl;
+    if (linuxOS)
+        Url = linuxUrl;
+    if (osx1012)
+        Url = osx1012Url;
+    if (Url == "")
+        Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
+
+    return Url;
+}
+
 int MainWindow::parse_UpdateJSON(QString str)
 {
 
@@ -7212,41 +7247,14 @@ int MainWindow::parse_UpdateJSON(QString str)
     if (root_Doc.isObject()) {
         QJsonObject root_Obj = root_Doc.object();
 
-        QString macUrl, winUrl, linuxUrl, osx1012Url;
         QVariantList list = root_Obj.value("assets").toArray().toVariantList();
-        for (int i = 0; i < list.count(); i++) {
-            QVariantMap map = list[i].toMap();
-            QString fName = map["name"].toString();
 
-            if (fName.contains("5.15.2"))
-                macUrl = map["browser_download_url"].toString();
-
-            if (fName.contains("Win"))
-                winUrl = map["browser_download_url"].toString();
-
-            if (fName.contains("Linux"))
-                linuxUrl = map["browser_download_url"].toString();
-
-            if (fName.contains("5.9.9"))
-                osx1012Url = map["browser_download_url"].toString();
-        }
-
-        QJsonObject PulseValue = root_Obj.value("assets").toObject();
-        QString Verison = root_Obj.value("tag_name").toString();
-        QString Url;
-        if (mac)
-            Url = macUrl;
-        if (win)
-            Url = winUrl;
-        if (linuxOS)
-            Url = linuxUrl;
-        if (osx1012)
-            Url = osx1012Url;
-        if (Url == "")
-            Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
+        QString Url = getUrl(list);
 
         QString UpdateTime = root_Obj.value("published_at").toString();
         QString ReleaseNote = root_Obj.value("body").toString();
+        //QJsonObject PulseValue = root_Obj.value("assets").toObject();
+        QString Verison = root_Obj.value("tag_name").toString();
 
         this->setFocus();
         if (Verison > CurVerison) {
