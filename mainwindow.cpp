@@ -9004,36 +9004,13 @@ void MainWindow::goResultsComboBox(QString objName)
         }
     }
 }
-void MainWindow::goResults(int index)
+
+void MainWindow::goResultsTableHeader(QString objName)
 {
-
-    QString objName = listNameResults.at(index);
-    QString name = objName.mid(1, objName.length() - 1);
-    bool end = false;
-
-    //获取背景色
-    QPalette pal = this->palette();
-    QBrush brush = pal.window();
-    red = brush.color().red();
-
-    //清理之前的标记
-    clearCheckBoxMarker();
-    clearLabelMarker();
-    clearLineEditMarker();
-    clearComboBoxMarker();
-    clearTableHeaderMarker();
-
-    goResultsCheckbox(objName);
-
-    goResultsTable(objName, index);
-
-    goResultsLabel(objName);
-
-    goResultsLineEdit(objName);
-
-    goResultsComboBox(objName);
-
     //table header 6
+    bool end = false;
+    QString name = objName.mid(1, objName.length() - 1);
+
     if (objName.mid(0, 1) == "6") {
 
         for (int i = 0; i < ui->listMain->count(); i++) {
@@ -9100,6 +9077,38 @@ void MainWindow::goResults(int index)
             }
         }
     }
+}
+
+void MainWindow::goResults(int index)
+{
+
+    QString objName = listNameResults.at(index);
+    QString name = objName.mid(1, objName.length() - 1);
+    bool end = false;
+
+    //获取背景色
+    QPalette pal = this->palette();
+    QBrush brush = pal.window();
+    red = brush.color().red();
+
+    //清理之前的标记
+    clearCheckBoxMarker();
+    clearLabelMarker();
+    clearLineEditMarker();
+    clearComboBoxMarker();
+    clearTableHeaderMarker();
+
+    goResultsCheckbox(objName);
+
+    goResultsTable(objName, index);
+
+    goResultsLabel(objName);
+
+    goResultsLineEdit(objName);
+
+    goResultsComboBox(objName);
+
+    goResultsTableHeader(objName);
 
     //listMain and listSub 7
     if (objName.mid(0, 1) == "7") {
@@ -9809,6 +9818,7 @@ void MainWindow::setPopMenuEnabled(QString qfile,
 
 void MainWindow::setPopMenuEnabled(QTableWidget* w, QAction* pasteAction)
 {
+
     if (w == ui->table_dp_add) {
         if (ui->table_dp_add0->rowCount() > 0)
             pasteAction->setEnabled(true);

@@ -1000,6 +1000,7 @@ private:
 
     void setPopMenuEnabled(QString qfile, QTableWidget* w, QAction* cutAction, QAction* pasteAction, QAction* copyAction);
     void setPopMenuEnabled(QTableWidget* w, QAction* pasteAction);
+    void goResultsTableHeader(QString objName);
 };
 
 #endif // MAINWINDOW_H
