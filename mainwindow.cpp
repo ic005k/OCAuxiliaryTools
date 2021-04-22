@@ -9083,8 +9083,6 @@ void MainWindow::goResults(int index)
 {
 
     QString objName = listNameResults.at(index);
-    QString name = objName.mid(1, objName.length() - 1);
-    bool end = false;
 
     //获取背景色
     QPalette pal = this->palette();
@@ -9818,40 +9816,27 @@ void MainWindow::setPopMenuEnabled(QString qfile,
 
 void MainWindow::setPopMenuEnabled(QTableWidget* w, QAction* pasteAction)
 {
+    QVector<QTableWidget*> tableList0;
+    tableList0.append(ui->table_dp_add0);
+    tableList0.append(ui->table_dp_del0);
+    tableList0.append(ui->table_nv_add0);
+    tableList0.append(ui->table_nv_del0);
+    tableList0.append(ui->table_nv_ls0);
 
-    if (w == ui->table_dp_add) {
-        if (ui->table_dp_add0->rowCount() > 0)
-            pasteAction->setEnabled(true);
-        else
-            pasteAction->setEnabled(false);
-    }
+    QVector<QTableWidget*> tableList;
+    tableList.append(ui->table_dp_add);
+    tableList.append(ui->table_dp_del);
+    tableList.append(ui->table_nv_add);
+    tableList.append(ui->table_nv_del);
+    tableList.append(ui->table_nv_ls);
 
-    if (w == ui->table_dp_del) {
-        if (ui->table_dp_del0->rowCount() > 0)
-            pasteAction->setEnabled(true);
-        else
-            pasteAction->setEnabled(false);
-    }
-
-    if (w == ui->table_nv_add) {
-        if (ui->table_nv_add0->rowCount() > 0)
-            pasteAction->setEnabled(true);
-        else
-            pasteAction->setEnabled(false);
-    }
-
-    if (w == ui->table_nv_del) {
-        if (ui->table_nv_del0->rowCount() > 0)
-            pasteAction->setEnabled(true);
-        else
-            pasteAction->setEnabled(false);
-    }
-
-    if (w == ui->table_nv_ls) {
-        if (ui->table_nv_ls0->rowCount() > 0)
-            pasteAction->setEnabled(true);
-        else
-            pasteAction->setEnabled(false);
+    for (int i = 0; i < tableList.count(); i++) {
+        if (w == tableList.at(i)) {
+            if (tableList0.at(i)->rowCount() > 0)
+                pasteAction->setEnabled(true);
+            else
+                pasteAction->setEnabled(false);
+        }
     }
 }
 
