@@ -1218,10 +1218,6 @@ void MainWindow::initui_misc()
     }
 
     //Debug
-    /*QRegExp regx1("[0-9]{3}");
-    QValidator* validator1 = new QRegExpValidator(regx1, ui->editIntTarget);
-    ui->editIntTarget->setValidator(validator1);
-    ui->editIntTarget->setPlaceholderText("000");*/
 
     // Security
 
@@ -5242,17 +5238,14 @@ void MainWindow::on_editIntExposeSensitiveData_textChanged(const QString& arg1)
 
     initExposeSensitiveDataValue();
 
-    for (int i = 0; i < v.count(); i++)
+    for (int i = 0; i < chk.count(); i++)
         chk.at(i)->setChecked(false);
 
     method(v, total);
 
     //10 to 16
-    unsigned int dec = arg1.toULongLong();
-    QString hex = QString("%1").arg(dec, 2, 16, QLatin1Char('0')); // 保留2位，不足补零
+    QString hex = QString("%1").arg(total, 2, 16, QLatin1Char('0')); // 保留2位，不足补零
     ui->lblExposeSensitiveData->setText("0x" + hex.toUpper());
-
-    this->setWindowModified(true);
 }
 
 void MainWindow::ScanPolicy()
@@ -5313,22 +5306,18 @@ void MainWindow::initScanPolicyValue()
 }
 void MainWindow::on_editIntScanPolicy_textChanged(const QString& arg1)
 {
-
     int total = arg1.toInt();
 
     initScanPolicyValue();
 
-    for (int i = 0; i < 16; i++)
+    for (int i = 0; i < chk.count(); i++)
         chk.at(i)->setChecked(false);
 
     method(v, total);
 
     //10 to 16
-    unsigned int dec = arg1.toULongLong();
-    QString hex = QString("%1").arg(dec, 8, 16, QLatin1Char('0')); // 保留8位，不足补零
+    QString hex = QString("%1").arg(total, 8, 16, QLatin1Char('0')); // 保留8位，不足补零
     ui->lblScanPolicy->setText("0x" + hex.toUpper());
-
-    this->setWindowModified(true);
 }
 
 void MainWindow::method(QVector<unsigned int> nums, unsigned int sum)
@@ -5424,13 +5413,10 @@ void MainWindow::DisplayLevel()
 
 void MainWindow::on_editIntDisplayLevel_textChanged(const QString& arg1)
 {
-
     //10 to 16
-    unsigned int dec = arg1.toULongLong();
-    QString hex = QString("%1").arg(dec, 8, 16, QLatin1Char('0')); // 保留8位，不足补零
-    ui->lblDisplayLevel->setText("0x" + hex.toUpper());
-
     unsigned int total = arg1.toULongLong();
+    QString hex = QString("%1").arg(total, 8, 16, QLatin1Char('0')); // 保留8位，不足补零
+    ui->lblDisplayLevel->setText("0x" + hex.toUpper());
 
     initDisplayLevelValue();
 
@@ -5511,11 +5497,8 @@ void MainWindow::on_editIntPickerAttributes_textChanged(const QString& arg1)
     method(v, total);
 
     //10 to 16
-    unsigned int dec = arg1.toULongLong();
-    QString hex = QString("%1").arg(dec, 2, 16, QLatin1Char('0')); // 保留2位，不足补零
+    QString hex = QString("%1").arg(total, 2, 16, QLatin1Char('0')); // 保留2位，不足补零
     ui->lblPickerAttributes->setText("0x" + hex.toUpper());
-
-    this->setWindowModified(true);
 }
 
 void MainWindow::contextMenuEvent(QContextMenuEvent* event)
@@ -6868,8 +6851,7 @@ void MainWindow::on_editIntTarget_textChanged(const QString& arg1)
     method(v, total);
 
     //10转16
-    //QString hex = QString("%1").arg(dec, 2, 16, QLatin1Char('0')); // 保留2位，不足补零
-    QString hex = QString("%1").arg(total, 0, 16, QLatin1Char('0'));
+    QString hex = QString("%1").arg(total, 2, 16, QLatin1Char('0'));
     ui->lblTargetHex->setText("0x" + hex.toUpper());
 }
 
@@ -7276,12 +7258,6 @@ void MainWindow::on_ShareConfig()
 {
     QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfigDatabase/issues"));
     QDesktopServices::openUrl(url);
-}
-
-void MainWindow::on_tabACPI_currentChanged(int index)
-{
-
-    currentTabWidget = ui->tabACPI->widget(index);
 }
 
 void MainWindow::OpenDir_clicked()
@@ -7805,16 +7781,6 @@ void MainWindow::removeWidget(QTableWidget* table)
     lineEdit = NULL;
 }
 
-void MainWindow::on_tabBooter_currentChanged(int index)
-{
-    currentTabWidget = ui->tabBooter->widget(index);
-}
-
-void MainWindow::on_tabDP_currentChanged(int index)
-{
-    currentTabWidget = ui->tabDP->widget(index);
-}
-
 void MainWindow::removeAllLineEdit()
 {
 
@@ -7825,31 +7791,6 @@ void MainWindow::removeAllLineEdit()
 
         removeWidget(w);
     }
-}
-
-void MainWindow::on_tabKernel_currentChanged(int index)
-{
-    currentTabWidget = ui->tabKernel->widget(index);
-}
-
-void MainWindow::on_tabMisc_currentChanged(int index)
-{
-    currentTabWidget = ui->tabMisc->widget(index);
-}
-
-void MainWindow::on_tabNVRAM_currentChanged(int index)
-{
-    currentTabWidget = ui->tabNVRAM->widget(index);
-}
-
-void MainWindow::on_tabPlatformInfo_currentChanged(int index)
-{
-    currentTabWidget = ui->tabPlatformInfo->widget(index);
-}
-
-void MainWindow::on_tabUEFI_currentChanged(int index)
-{
-    currentTabWidget = ui->tabUEFI->widget(index);
 }
 
 void MainWindow::on_table_nv_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
@@ -10069,8 +10010,9 @@ void MainWindow::getEditValue(QVariantMap map, QWidget* tab)
             } else {
                 if (strList.count() > 0)
                     w->setText(map[strList.at(0)].toString());
-                else
+                else {
                     w->setText(map[name].toString());
+                }
             }
         }
     }

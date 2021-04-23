@@ -576,8 +576,6 @@ private slots:
     void on_editIntTarget_textChanged(const QString& arg1);
     void on_editIntHaltLevel_textChanged(const QString& arg1);
 
-    void on_tabACPI_currentChanged(int index);
-
     void on_listMain_itemSelectionChanged();
 
     void on_listSub_itemSelectionChanged();
@@ -629,20 +627,6 @@ private slots:
     void on_table_dp_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
     void on_table_dp_del_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
-
-    void on_tabBooter_currentChanged(int index);
-
-    void on_tabDP_currentChanged(int index);
-
-    void on_tabKernel_currentChanged(int index);
-
-    void on_tabMisc_currentChanged(int index);
-
-    void on_tabNVRAM_currentChanged(int index);
-
-    void on_tabPlatformInfo_currentChanged(int index);
-
-    void on_tabUEFI_currentChanged(int index);
 
     void on_table_nv_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
