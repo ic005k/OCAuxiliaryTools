@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1650</width>
+    <width>1626</width>
     <height>807</height>
    </rect>
   </property>
@@ -9846,7 +9846,7 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1650</width>
+     <width>1626</width>
      <height>30</height>
     </rect>
    </property>

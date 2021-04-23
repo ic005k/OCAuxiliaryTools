@@ -61,7 +61,6 @@ MainWindow::MainWindow(QWidget* parent)
 #ifdef Q_OS_WIN32
     reg_win();
     font.setPixelSize(18);
-
     win = true;
 #endif
 
@@ -6198,6 +6197,7 @@ void MainWindow::init_FileMenu()
     connect(ui->actionSave_As, &QAction::triggered, this, &MainWindow::on_btnSaveAs);
     ui->actionSave_As->setShortcut(tr("ctrl+shift+s"));
     ui->actionSave_As->setIcon(QIcon(":/icon/saveas.png"));
+    ui->toolBar->addAction(ui->actionSave_As);
 
     //Quit
     ui->actionQuit->setMenuRole(QAction::QuitRole);
@@ -6253,7 +6253,11 @@ void MainWindow::init_EditMenu()
     if (mac || osx1012)
         ui->actionOpen_database_directory->setIconVisibleInMenu(false);
     ui->actionOpen_database_directory->setIcon(QIcon(":/icon/opendb.png"));
-    connect(ui->actionOpen_database_directory, &QAction::triggered, this, &MainWindow::OpenDir_clicked);
+    connect(ui->actionOpen_database_directory,
+        &QAction::triggered,
+        this,
+        &MainWindow::OpenDir_clicked);
+    ui->toolBar->addAction(ui->actionOpen_database_directory);
 
     // 分享配置文件
     connect(ui->actionShareConfig, &QAction::triggered, this, &MainWindow::on_ShareConfig);
