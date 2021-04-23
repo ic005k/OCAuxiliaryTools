@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1693</width>
-    <height>807</height>
+    <width>1300</width>
+    <height>782</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -9839,7 +9839,7 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1693</width>
+     <width>1300</width>
      <height>24</height>
     </rect>
    </property>

@@ -48,7 +48,6 @@ MainWindow::MainWindow(QWidget* parent)
 
 #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
     osx1012 = true;
-
 #endif
 
     if (osx1012)
@@ -56,7 +55,7 @@ MainWindow::MainWindow(QWidget* parent)
     else
         mac = true;
 
-    this->resize(1280, 680);
+    this->resize(1200, 650);
 
 #endif
 
@@ -6205,7 +6204,6 @@ void MainWindow::init_FileMenu()
     connect(ui->actionSave_As, &QAction::triggered, this, &MainWindow::on_btnSaveAs);
     ui->actionSave_As->setShortcut(tr("ctrl+shift+s"));
     ui->actionSave_As->setIcon(QIcon(":/icon/saveas.png"));
-    ui->toolBar->addAction(ui->actionSave_As);
 
     //Quit
     ui->actionQuit->setMenuRole(QAction::QuitRole);
@@ -6261,7 +6259,6 @@ void MainWindow::init_EditMenu()
     if (mac || osx1012)
         ui->actionOpen_database_directory->setIconVisibleInMenu(false);
     ui->actionOpen_database_directory->setIcon(QIcon(":/icon/opendb.png"));
-    ui->toolBar->addAction(ui->actionOpen_database_directory);
     connect(ui->actionOpen_database_directory, &QAction::triggered, this, &MainWindow::OpenDir_clicked);
 
     // 分享配置文件
@@ -7012,11 +7009,11 @@ void MainWindow::on_table_Booter_patch_cellClicked(int row, int column)
 void MainWindow::on_table_Booter_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
 
-    ui->table_Booter_patch->removeCellWidget(previousRow, 10);
-
     //Undo Redo
     Q_UNUSED(currentRow);
     Q_UNUSED(currentColumn);
+
+    ui->table_Booter_patch->removeCellWidget(previousRow, 10);
 
     ui->table_Booter_patch->removeCellWidget(previousRow, previousColumn);
 }
