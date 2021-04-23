@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1300</width>
-    <height>782</height>
+    <width>1650</width>
+    <height>807</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -4426,7 +4426,14 @@ Until your operating system is personalised you will only be able to load macOS 
                   <widget class="QLineEdit" name="editIntApECID"/>
                  </item>
                  <item row="2" column="1">
-                  <widget class="QLineEdit" name="editIntHaltLevel"/>
+                  <widget class="QLineEdit" name="editIntHaltLevel">
+                   <property name="minimumSize">
+                    <size>
+                     <width>150</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </widget>
                  </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_27">
@@ -9839,8 +9846,8 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1300</width>
-     <height>24</height>
+     <width>1650</width>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

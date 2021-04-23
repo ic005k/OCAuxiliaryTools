@@ -29,7 +29,6 @@ MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-
     ui->setupUi(this);
     Initialization = true;
     loading = true;
@@ -237,11 +236,13 @@ void MainWindow::openFile(QString PlistFileName)
     ParserPlatformInfo(map);
     ParserUEFI(map);
 
+    file.close();
     loading = false;
 
     ui->actionSave->setEnabled(true);
 
     undoStack->clear();
+
     this->setWindowModified(false);
 
     if (!RefreshAllDatabase) {
@@ -249,13 +250,11 @@ void MainWindow::openFile(QString PlistFileName)
         on_actionOcvalidate_triggered();
 
         QSettings settings;
-        QFileInfo fInfo(PlistFileName);
-        settings.setValue("currentDirectory", fInfo.absolutePath());
-        // qDebug() << settings.fileName(); //最近打开的文件所保存的位置
+        QFileInfo fi(PlistFileName);
+        settings.setValue("currentDirectory", fi.absolutePath());
         m_recentFiles->setMostRecentFile(PlistFileName);
         initRecentFilesForToolBar();
 
-        QFileInfo fi(SaveFileName);
         QString strEFI = fi.path().mid(0, fi.path().count() - 3);
         QFileInfo f1(strEFI + "/OC");
         QFileInfo f2(strEFI + "/BOOT");
@@ -303,7 +302,7 @@ void MainWindow::ParserACPI(QVariantMap map)
 
     //分析Delete
     QVariantList map_del = map["Delete"].toList();
-    // qDebug() << map_del;
+
     ui->table_acpi_del->setRowCount(map_del.count());
     for (int i = 0; i < map_del.count(); i++) {
         QVariantMap map3 = map_del.at(i).toMap();
@@ -476,7 +475,6 @@ void MainWindow::initui_acpi()
     ui->table_acpi_patch->setHorizontalHeaderItem(13, id0);
 
     ui->table_acpi_patch->setAlternatingRowColors(true);
-    //ui->table_acpi_patch->horizontalHeader()->setStretchLastSection(true);
 }
 
 void MainWindow::initui_booter()
@@ -531,7 +529,6 @@ void MainWindow::initui_booter()
     ui->table_Booter_patch->setHorizontalHeaderItem(10, id0);
 
     ui->table_Booter_patch->setAlternatingRowColors(true);
-    //ui->table_Booter_patch->horizontalHeader()->setStretchLastSection(true);
 
     //MmioWhitelist
 
@@ -546,7 +543,6 @@ void MainWindow::initui_booter()
     ui->table_booter->setHorizontalHeaderItem(2, id0);
 
     ui->table_booter->setAlternatingRowColors(true);
-    //ui->table_booter->horizontalHeader()->setStretchLastSection(true);
 }
 
 void MainWindow::ParserBooter(QVariantMap map)
@@ -735,7 +731,6 @@ void MainWindow::ParserDP(QVariantMap map)
         }
 
         //保存子条目里面的数据，以便以后加载
-
         write_ini(ui->table_dp_add0, ui->table_dp_add, i);
     }
 
@@ -6107,7 +6102,6 @@ void MainWindow::setListMainIcon()
 
 void MainWindow::init_listMainSub()
 {
-
     QString listStyle;
     listStyle = "QListWidget::item:selected{background:lightgreen; border:10px blue; color:black}";
     ui->listMain->setStyleSheet(listStyle);
@@ -9957,7 +9951,15 @@ void MainWindow::getCheckBoxValue(QVariantMap map, QWidget* tab)
         QString strObjName = chkbox->objectName();
         QString name = strObjName.mid(3, strObjName.count() - 2);
 
-        if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG" && chkbox != ui->chk01 && chkbox != ui->chk02 && chkbox != ui->chk04 && chkbox != ui->chk08)
+        bool t = false;
+        for (int j = 0; j < chk_Target.count(); j++) {
+            if (chkbox == chk_Target.at(j))
+                t = true;
+        }
+        if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG"
+            && chkbox != ui->chk01 && chkbox != ui->chk02 && chkbox != ui->chk04
+            && chkbox != ui->chk08 && !t)
+
             chkbox->setChecked(map[name].toBool());
     }
 }
