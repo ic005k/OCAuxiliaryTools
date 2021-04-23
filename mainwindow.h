@@ -64,7 +64,7 @@ public:
     ~MainWindow();
     Ui::MainWindow* ui;
 
-    QVector<QTabWidget *> mainTabList;
+    QVector<QTabWidget*> mainTabList;
     void initScanPolicyValue();
     void initDisplayLevelValue();
     void initPickerAttributesValue();
@@ -281,6 +281,8 @@ protected:
 #endif // QT_NO_CONTEXTMENU
 
 private slots:
+    void Target();
+    void DisplayLevel();
     void readResultPassHash();
     void clearFindTexts();
     void copyText(QListWidget* listW);
@@ -531,97 +533,9 @@ private slots:
 
     void on_cboxUpdateSMBIOSMode_currentIndexChanged(const QString& arg1);
 
-    void on_chk01_clicked();
-
-    void on_chk02_clicked();
-
-    void on_chk04_clicked();
-
-    void on_chk08_clicked();
-
-    void on_chk1_clicked();
-
-    void on_chk2_clicked();
-
-    void on_chk3_clicked();
-
-    void on_chk4_clicked();
-
-    void on_chk5_clicked();
-
-    void on_chk6_clicked();
-
-    void on_chk7_clicked();
-
-    void on_chk8_clicked();
-
-    void on_chk9_clicked();
-
-    void on_chk10_clicked();
-
-    void on_chk11_clicked();
-
-    void on_chk12_clicked();
-
-    void on_chk13_clicked();
-
-    void on_chk14_clicked();
-
-    void on_chk15_clicked();
-
-    void on_chk16_clicked();
-
-    void on_chkD1_clicked();
-
-    void on_chkD2_clicked();
-
-    void on_chkD3_clicked();
-
-    void on_chkD4_clicked();
-
-    void on_chkD5_clicked();
-
-    void on_chkD6_clicked();
-
-    void on_chkD7_clicked();
-
-    void on_chkD8_clicked();
-
-    void on_chkD9_clicked();
-
-    void on_chkD10_clicked();
-
-    void on_chkD11_clicked();
-
-    void on_chkD12_clicked();
-
-    void on_chkD13_clicked();
-
-    void on_chkD14_clicked();
-
-    void on_chkD15_clicked();
-
-    void on_chkD16_clicked();
-
-    void on_chkD17_clicked();
-
-    void on_chkD18_clicked();
-
-    void on_chkD19_clicked();
-
     void on_btnDLSetAll_clicked();
 
     void on_btnDLClear_clicked();
-
-    void on_chkPA1_clicked();
-
-    void on_chkPA2_clicked();
-
-    void on_chkPA3_clicked();
-
-    void on_chkPA4_clicked();
-
-    void on_chkPA6_clicked();
 
     void on_table_dp_add0_itemChanged(QTableWidgetItem* item);
 
@@ -659,7 +573,6 @@ private slots:
 
     void replyFinished(QNetworkReply* reply);
 
-    void on_chkPA5_clicked();
     void on_editIntTarget_textChanged(const QString& arg1);
     void on_editIntHaltLevel_textChanged(const QString& arg1);
 
@@ -787,8 +700,6 @@ private slots:
 
     void on_table_dp_del_cellDoubleClicked(int row, int column);
 
-    void on_editTargetHex_textChanged(const QString& arg1);
-
     void on_actionNewWindow_triggered();
 
     void on_actionGo_to_the_previous_triggered();
@@ -821,20 +732,6 @@ private slots:
 
     void on_editIntConsoleAttributes_textChanged(const QString& arg1);
 
-    void on_chkT1_clicked();
-
-    void on_chkT2_clicked();
-
-    void on_chkT3_clicked();
-
-    void on_chkT4_clicked();
-
-    void on_chkT5_clicked();
-
-    void on_chkT6_clicked();
-
-    void on_chkT7_clicked();
-
     void on_btnGetPassHash_clicked();
 
     void on_toolButton_clicked();
@@ -862,6 +759,9 @@ private slots:
     void on_btnImportMaster_triggered();
 
     void on_editDatPasswordSalt_textChanged(const QString& arg1);
+    void PickerAttributes();
+    void ExposeSensitiveData();
+    void ScanPolicy();
 
 private:
     void acpi_cellDoubleClicked();
@@ -933,8 +833,6 @@ private:
 
     void init_tr_str();
 
-    int ExposeSensitiveData();
-
     QString strArch;
     QString strBundlePath;
     QString strComment;
@@ -946,35 +844,25 @@ private:
 
     QVector<int> textColorInt;
     QVector<int> backColorInt;
-    void Target();
 
     int v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16;
 
-    void method(QVector<int> nums, int sum);
-    void method(QVector<int> nums, int sum, QVector<int> list, int index);
-    void ScanPolicy();
-    bool scanPolicy = false;
+    void method(QVector<unsigned int> nums, unsigned int sum);
+    void method(QVector<unsigned int> nums, unsigned int sum, QVector<unsigned int> list, int index);
+
     QVector<QCheckBox*> chk;
-    QVector<int> v;
+    QVector<QCheckBox*> chk_ExposeSensitiveData;
+    QVector<QCheckBox*> chk_ScanPolicy;
+    QVector<QCheckBox*> chk_PickerAttributes;
+    QVector<QCheckBox*> chk_Target;
+    QVector<QCheckBox*> chkDisplayLevel;
+    QVector<unsigned int> v;
 
     unsigned int vd1, vd2, vd3, vd4, vd5, vd6, vd7, vd8, vd9, vd10, vd11, vd12,
         vd13, vd14, vd15, vd16, vd17, vd18, vd19;
-    void DisplayLevel();
-
-    void methodDisplayLevel(QVector<unsigned int> nums, unsigned int sum);
-    void methodDisplayLevel(QVector<unsigned int> nums, unsigned int sum,
-        QVector<unsigned int> list, int index);
-    QVector<QCheckBox*> chkDisplayLevel;
-    QVector<unsigned int> vDisplayLevel;
-
-    bool click = false;
 
     int pav1, pav2, pav3, pav4, pav5, pav6;
     QVector<int> value;
-    QVector<QCheckBox*> chk_pa;
-    QVector<int> v_pa;
-    void PickerAttributes();
-    bool pickerAttributes = false;
 
     void init_MainUI();
 

@@ -1218,15 +1218,10 @@ void MainWindow::initui_misc()
     }
 
     //Debug
-    QRegExp regx("[A-Fa-f0-9]{2}"); //两位16进制
-    QValidator* validator = new QRegExpValidator(regx, ui->editTargetHex);
-    ui->editTargetHex->setValidator(validator);
-    ui->editTargetHex->setPlaceholderText("00");
-
-    QRegExp regx1("[0-9]{3}");
+    /*QRegExp regx1("[0-9]{3}");
     QValidator* validator1 = new QRegExpValidator(regx1, ui->editIntTarget);
     ui->editIntTarget->setValidator(validator1);
-    ui->editIntTarget->setPlaceholderText("000");
+    ui->editIntTarget->setPlaceholderText("000");*/
 
     // Security
 
@@ -5214,42 +5209,31 @@ void MainWindow::on_cboxUpdateSMBIOSMode_currentIndexChanged(
         ui->chkCustomSMBIOSGuid->setChecked(false);
 }
 
-int MainWindow::ExposeSensitiveData()
+void MainWindow::ExposeSensitiveData()
 {
     initExposeSensitiveDataValue();
 
     int total = 0;
-    for (int i = 0; i < chk_pa.count(); i++) {
-        if (chk_pa.at(i)->isChecked())
-            total = total + v_pa.at(i);
+    for (int i = 0; i < chk.count(); i++) {
+        if (chk.at(i)->isChecked())
+            total = total + v.at(i);
     }
 
     ui->editIntExposeSensitiveData->setText(QString::number(total));
-
-    return total;
 }
-
-void MainWindow::on_chk01_clicked() { ExposeSensitiveData(); }
-
-void MainWindow::on_chk02_clicked() { ExposeSensitiveData(); }
-
-void MainWindow::on_chk04_clicked() { ExposeSensitiveData(); }
-
-void MainWindow::on_chk08_clicked() { ExposeSensitiveData(); }
 
 void MainWindow::initExposeSensitiveDataValue()
 {
-    chk_pa.clear();
-    chk_pa.append(ui->chk01);
-    chk_pa.append(ui->chk02);
-    chk_pa.append(ui->chk04);
-    chk_pa.append(ui->chk08);
+    chk.clear();
+    for (int i = 0; i < chk_ExposeSensitiveData.count(); i++) {
+        chk.append(chk_ExposeSensitiveData.at(i));
+    }
 
-    v_pa.clear();
-    v_pa.append(1);
-    v_pa.append(2);
-    v_pa.append(4);
-    v_pa.append(8);
+    v.clear();
+    v.append(1);
+    v.append(2);
+    v.append(4);
+    v.append(8);
 }
 
 void MainWindow::on_editIntExposeSensitiveData_textChanged(const QString& arg1)
@@ -5258,13 +5242,10 @@ void MainWindow::on_editIntExposeSensitiveData_textChanged(const QString& arg1)
 
     initExposeSensitiveDataValue();
 
-    scanPolicy = false;
-    pickerAttributes = true;
+    for (int i = 0; i < v.count(); i++)
+        chk.at(i)->setChecked(false);
 
-    for (int i = 0; i < v_pa.count(); i++)
-        chk_pa.at(i)->setChecked(false);
-
-    method(v_pa, total);
+    method(v, total);
 
     //10 to 16
     unsigned int dec = arg1.toULongLong();
@@ -5280,9 +5261,6 @@ void MainWindow::ScanPolicy()
 
     initScanPolicyValue();
 
-    scanPolicy = true;
-    pickerAttributes = false;
-
     for (int i = 0; i < chk.count(); i++) {
         if (chk.at(i)->isChecked())
             total = total + v.at(i);
@@ -5291,57 +5269,12 @@ void MainWindow::ScanPolicy()
     ui->editIntScanPolicy->setText(QString::number(total));
 }
 
-void MainWindow::on_chk1_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk2_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk3_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk4_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk5_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk6_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk7_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk8_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk9_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk10_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk11_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk12_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk13_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk14_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk15_clicked() { ScanPolicy(); }
-
-void MainWindow::on_chk16_clicked() { ScanPolicy(); }
-
 void MainWindow::initScanPolicyValue()
 {
     chk.clear();
-    chk.append(ui->chk1);
-    chk.append(ui->chk2);
-    chk.append(ui->chk3);
-    chk.append(ui->chk4);
-    chk.append(ui->chk5);
-    chk.append(ui->chk6);
-    chk.append(ui->chk7);
-    chk.append(ui->chk8);
-    chk.append(ui->chk9);
-    chk.append(ui->chk10);
-    chk.append(ui->chk11);
-    chk.append(ui->chk12);
-    chk.append(ui->chk13);
-    chk.append(ui->chk14);
-    chk.append(ui->chk15);
-    chk.append(ui->chk16);
+    for (int i = 0; i < chk_ScanPolicy.count(); i++) {
+        chk.append(chk_ScanPolicy.at(i));
+    }
 
     v1 = 1;
     v2 = 2;
@@ -5385,9 +5318,6 @@ void MainWindow::on_editIntScanPolicy_textChanged(const QString& arg1)
 
     initScanPolicyValue();
 
-    scanPolicy = true;
-    pickerAttributes = false;
-
     for (int i = 0; i < 16; i++)
         chk.at(i)->setChecked(false);
 
@@ -5401,33 +5331,22 @@ void MainWindow::on_editIntScanPolicy_textChanged(const QString& arg1)
     this->setWindowModified(true);
 }
 
-void MainWindow::method(QVector<int> nums, int sum)
+void MainWindow::method(QVector<unsigned int> nums, unsigned int sum)
 {
 
-    QVector<int> list;
+    QVector<unsigned int> list;
 
     method(nums, sum, list, -1);
 }
 
-void MainWindow::method(QVector<int> nums, int sum, QVector<int> list,
+void MainWindow::method(QVector<unsigned int> nums, unsigned int sum, QVector<unsigned int> list,
     int index)
 {
     if (sum == 0) {
         for (int val : list) {
-            // qDebug() << val;
             for (int i = 0; i < nums.count(); i++) {
-
-                if (scanPolicy) {
-                    if (val == v.at(i)) {
-
-                        chk.at(i)->setChecked(true);
-                    }
-                }
-
-                if (pickerAttributes) {
-                    if (val == v_pa.at(i)) {
-                        chk_pa.at(i)->setChecked(true);
-                    }
+                if (val == v.at(i)) {
+                    chk.at(i)->setChecked(true);
                 }
             }
         }
@@ -5435,38 +5354,6 @@ void MainWindow::method(QVector<int> nums, int sum, QVector<int> list,
         for (int i = index + 1; i < nums.count(); i++) {
             list.append(nums.at(i));
             method(nums, sum - nums.at(i), list, i);
-            list.remove(list.size() - 1);
-        }
-    }
-}
-
-void MainWindow::methodDisplayLevel(QVector<unsigned int> nums,
-    unsigned int sum)
-{
-
-    QVector<unsigned int> list;
-
-    methodDisplayLevel(nums, sum, list, -1);
-}
-
-void MainWindow::methodDisplayLevel(QVector<unsigned int> nums,
-    unsigned int sum,
-    QVector<unsigned int> list, int index)
-{
-    if (sum == 0) {
-        for (unsigned int val : list) {
-
-            for (int i = 0; i < 19; i++) {
-
-                if (val == vDisplayLevel.at(i)) {
-                    chkDisplayLevel.at(i)->setChecked(true);
-                }
-            }
-        }
-    } else if (sum > 0) {
-        for (int i = index + 1; i < nums.count(); i++) {
-            list.append(nums.at(i));
-            methodDisplayLevel(nums, sum - nums.at(i), list, i);
             list.remove(list.size() - 1);
         }
     }
@@ -5494,109 +5381,46 @@ void MainWindow::initDisplayLevelValue()
     vd18 = 4194304;
     vd19 = 2147483648;
 
-    vDisplayLevel.clear();
-    vDisplayLevel.append(vd1);
-    vDisplayLevel.append(vd2);
-    vDisplayLevel.append(vd3);
-    vDisplayLevel.append(vd4);
-    vDisplayLevel.append(vd5);
-    vDisplayLevel.append(vd6);
-    vDisplayLevel.append(vd7);
-    vDisplayLevel.append(vd8);
-    vDisplayLevel.append(vd9);
-    vDisplayLevel.append(vd10);
-    vDisplayLevel.append(vd11);
-    vDisplayLevel.append(vd12);
-    vDisplayLevel.append(vd13);
-    vDisplayLevel.append(vd14);
-    vDisplayLevel.append(vd15);
-    vDisplayLevel.append(vd16);
-    vDisplayLevel.append(vd17);
-    vDisplayLevel.append(vd18);
-    vDisplayLevel.append(vd19);
+    v.clear();
+    v.append(vd1);
+    v.append(vd2);
+    v.append(vd3);
+    v.append(vd4);
+    v.append(vd5);
+    v.append(vd6);
+    v.append(vd7);
+    v.append(vd8);
+    v.append(vd9);
+    v.append(vd10);
+    v.append(vd11);
+    v.append(vd12);
+    v.append(vd13);
+    v.append(vd14);
+    v.append(vd15);
+    v.append(vd16);
+    v.append(vd17);
+    v.append(vd18);
+    v.append(vd19);
 
-    chkDisplayLevel.clear();
-    chkDisplayLevel.append(ui->chkD1);
-    chkDisplayLevel.append(ui->chkD2);
-    chkDisplayLevel.append(ui->chkD3);
-    chkDisplayLevel.append(ui->chkD4);
-    chkDisplayLevel.append(ui->chkD5);
-    chkDisplayLevel.append(ui->chkD6);
-    chkDisplayLevel.append(ui->chkD7);
-    chkDisplayLevel.append(ui->chkD8);
-    chkDisplayLevel.append(ui->chkD9);
-    chkDisplayLevel.append(ui->chkD10);
-    chkDisplayLevel.append(ui->chkD11);
-    chkDisplayLevel.append(ui->chkD12);
-    chkDisplayLevel.append(ui->chkD13);
-    chkDisplayLevel.append(ui->chkD14);
-    chkDisplayLevel.append(ui->chkD15);
-    chkDisplayLevel.append(ui->chkD16);
-    chkDisplayLevel.append(ui->chkD17);
-    chkDisplayLevel.append(ui->chkD18);
-    chkDisplayLevel.append(ui->chkD19);
+    chk.clear();
+    for (int i = 0; i < chkDisplayLevel.count(); i++)
+        chk.append(chkDisplayLevel.at(i));
 }
 
 void MainWindow::DisplayLevel()
 {
-    click = true;
 
     initDisplayLevelValue();
 
     unsigned int total = 0;
-    for (int i = 0; i < 19; i++) {
-        if (!chkDisplayLevel.at(i)->isChecked()) {
-            vDisplayLevel.remove(i);
-            vDisplayLevel.insert(i, 0);
-        }
-    }
 
-    for (int i = 0; i < 19; i++) {
-        total = total + vDisplayLevel.at(i);
+    for (int i = 0; i < chk.count(); i++) {
+        if (chk.at(i)->isChecked())
+            total = total + v.at(i);
     }
 
     ui->editIntDisplayLevel->setText(QString::number(total));
-
-    click = false;
 }
-
-void MainWindow::on_chkD1_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD2_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD3_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD4_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD5_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD6_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD7_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD8_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD9_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD10_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD11_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD12_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD13_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD14_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD15_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD16_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD17_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD18_clicked() { DisplayLevel(); }
-
-void MainWindow::on_chkD19_clicked() { DisplayLevel(); }
 
 void MainWindow::on_editIntDisplayLevel_textChanged(const QString& arg1)
 {
@@ -5606,28 +5430,23 @@ void MainWindow::on_editIntDisplayLevel_textChanged(const QString& arg1)
     QString hex = QString("%1").arg(dec, 8, 16, QLatin1Char('0')); // 保留8位，不足补零
     ui->lblDisplayLevel->setText("0x" + hex.toUpper());
 
-    if (click)
-        return;
-
     unsigned int total = arg1.toULongLong();
 
     initDisplayLevelValue();
 
-    for (int i = 0; i < 19; i++) {
-        chkDisplayLevel.at(i)->setChecked(false);
+    for (int i = 0; i < chk.count(); i++) {
+        chk.at(i)->setChecked(false);
     }
 
-    methodDisplayLevel(vDisplayLevel, total);
-
-    this->setWindowModified(true);
+    method(v, total);
 }
 
 void MainWindow::on_btnDLSetAll_clicked()
 {
     initDisplayLevelValue();
 
-    for (int i = 0; i < 19; i++) {
-        chkDisplayLevel.at(i)->setChecked(true);
+    for (int i = 0; i < chk.count(); i++) {
+        chk.at(i)->setChecked(true);
     }
 
     DisplayLevel();
@@ -5637,8 +5456,8 @@ void MainWindow::on_btnDLClear_clicked()
 {
     initDisplayLevelValue();
 
-    for (int i = 0; i < 19; i++) {
-        chkDisplayLevel.at(i)->setChecked(false);
+    for (int i = 0; i < chk.count(); i++) {
+        chk.at(i)->setChecked(false);
     }
 
     DisplayLevel();
@@ -5653,53 +5472,32 @@ void MainWindow::initPickerAttributesValue()
     pav5 = 16;
     pav6 = 32;
 
-    chk_pa.clear();
-    chk_pa.append(ui->chkPA1);
-    chk_pa.append(ui->chkPA2);
-    chk_pa.append(ui->chkPA3);
-    chk_pa.append(ui->chkPA4);
-    chk_pa.append(ui->chkPA5);
-    chk_pa.append(ui->chkPA6);
+    chk.clear();
+    for (int i = 0; i < chk_PickerAttributes.count(); i++) {
+        chk.append(chk_PickerAttributes.at(i));
+    }
 
-    v_pa.clear();
-    v_pa.append(pav1);
-    v_pa.append(pav2);
-    v_pa.append(pav3);
-    v_pa.append(pav4);
-    v_pa.append(pav5);
-    v_pa.append(pav6);
+    v.clear();
+    v.append(pav1);
+    v.append(pav2);
+    v.append(pav3);
+    v.append(pav4);
+    v.append(pav5);
+    v.append(pav6);
 }
 
 void MainWindow::PickerAttributes()
 {
     initPickerAttributesValue();
 
-    for (int i = 0; i < v_pa.count(); i++) {
-        if (!chk_pa.at(i)->isChecked()) {
-            v_pa.remove(i);
-            v_pa.insert(i, 0);
-        }
-    }
-
     int total = 0;
-    for (int i = 0; i < v_pa.count(); i++) {
-        total = total + v_pa.at(i);
+    for (int i = 0; i < v.count(); i++) {
+        if (chk.at(i)->isChecked())
+            total = total + v.at(i);
     }
 
     ui->editIntPickerAttributes->setText(QString::number(total));
 }
-
-void MainWindow::on_chkPA1_clicked() { PickerAttributes(); }
-
-void MainWindow::on_chkPA2_clicked() { PickerAttributes(); }
-
-void MainWindow::on_chkPA3_clicked() { PickerAttributes(); }
-
-void MainWindow::on_chkPA4_clicked() { PickerAttributes(); }
-
-void MainWindow::on_chkPA5_clicked() { PickerAttributes(); }
-
-void MainWindow::on_chkPA6_clicked() { PickerAttributes(); }
 
 void MainWindow::on_editIntPickerAttributes_textChanged(const QString& arg1)
 {
@@ -5707,13 +5505,10 @@ void MainWindow::on_editIntPickerAttributes_textChanged(const QString& arg1)
 
     initPickerAttributesValue();
 
-    scanPolicy = false;
-    pickerAttributes = true;
+    for (int i = 0; i < v.count(); i++)
+        chk.at(i)->setChecked(false);
 
-    for (int i = 0; i < v_pa.count(); i++)
-        chk_pa.at(i)->setChecked(false);
-
-    method(v_pa, total);
+    method(v, total);
 
     //10 to 16
     unsigned int dec = arg1.toULongLong();
@@ -6695,6 +6490,83 @@ void MainWindow::init_MainUI()
     mainTabList.append(ui->tabNVRAM);
     mainTabList.append(ui->tabPlatformInfo);
     mainTabList.append(ui->tabUEFI);
+
+    chk_Target.clear();
+    chk_Target.append(ui->chkT1);
+    chk_Target.append(ui->chkT2);
+    chk_Target.append(ui->chkT3);
+    chk_Target.append(ui->chkT4);
+    chk_Target.append(ui->chkT5);
+    chk_Target.append(ui->chkT6);
+    chk_Target.append(ui->chkT7);
+    for (int i = 0; i < chk_Target.count(); i++) {
+        connect(chk_Target.at(i), &QCheckBox::clicked, this, &MainWindow::Target);
+    }
+
+    chkDisplayLevel.clear();
+    chkDisplayLevel.append(ui->chkD1);
+    chkDisplayLevel.append(ui->chkD2);
+    chkDisplayLevel.append(ui->chkD3);
+    chkDisplayLevel.append(ui->chkD4);
+    chkDisplayLevel.append(ui->chkD5);
+    chkDisplayLevel.append(ui->chkD6);
+    chkDisplayLevel.append(ui->chkD7);
+    chkDisplayLevel.append(ui->chkD8);
+    chkDisplayLevel.append(ui->chkD9);
+    chkDisplayLevel.append(ui->chkD10);
+    chkDisplayLevel.append(ui->chkD11);
+    chkDisplayLevel.append(ui->chkD12);
+    chkDisplayLevel.append(ui->chkD13);
+    chkDisplayLevel.append(ui->chkD14);
+    chkDisplayLevel.append(ui->chkD15);
+    chkDisplayLevel.append(ui->chkD16);
+    chkDisplayLevel.append(ui->chkD17);
+    chkDisplayLevel.append(ui->chkD18);
+    chkDisplayLevel.append(ui->chkD19);
+    for (int i = 0; i < chkDisplayLevel.count(); i++) {
+        connect(chkDisplayLevel.at(i), &QCheckBox::clicked, this, &MainWindow::DisplayLevel);
+    }
+
+    chk_PickerAttributes.clear();
+    chk_PickerAttributes.append(ui->chkPA1);
+    chk_PickerAttributes.append(ui->chkPA2);
+    chk_PickerAttributes.append(ui->chkPA3);
+    chk_PickerAttributes.append(ui->chkPA4);
+    chk_PickerAttributes.append(ui->chkPA5);
+    chk_PickerAttributes.append(ui->chkPA6);
+    for (int i = 0; i < chk_PickerAttributes.count(); i++) {
+        connect(chk_PickerAttributes.at(i), &QCheckBox::clicked, this, &MainWindow::PickerAttributes);
+    }
+
+    chk_ExposeSensitiveData.clear();
+    chk_ExposeSensitiveData.append(ui->chk01);
+    chk_ExposeSensitiveData.append(ui->chk02);
+    chk_ExposeSensitiveData.append(ui->chk04);
+    chk_ExposeSensitiveData.append(ui->chk08);
+    for (int i = 0; i < chk_ExposeSensitiveData.count(); i++) {
+        connect(chk_ExposeSensitiveData.at(i), &QCheckBox::clicked, this, &MainWindow::ExposeSensitiveData);
+    }
+
+    chk_ScanPolicy.clear();
+    chk_ScanPolicy.append(ui->chk1);
+    chk_ScanPolicy.append(ui->chk2);
+    chk_ScanPolicy.append(ui->chk3);
+    chk_ScanPolicy.append(ui->chk4);
+    chk_ScanPolicy.append(ui->chk5);
+    chk_ScanPolicy.append(ui->chk6);
+    chk_ScanPolicy.append(ui->chk7);
+    chk_ScanPolicy.append(ui->chk8);
+    chk_ScanPolicy.append(ui->chk9);
+    chk_ScanPolicy.append(ui->chk10);
+    chk_ScanPolicy.append(ui->chk11);
+    chk_ScanPolicy.append(ui->chk12);
+    chk_ScanPolicy.append(ui->chk13);
+    chk_ScanPolicy.append(ui->chk14);
+    chk_ScanPolicy.append(ui->chk15);
+    chk_ScanPolicy.append(ui->chk16);
+    for (int i = 0; i < chk_ScanPolicy.count(); i++) {
+        connect(chk_ScanPolicy.at(i), &QCheckBox::clicked, this, &MainWindow::ScanPolicy);
+    }
 }
 
 void MainWindow::LineEditDataCheck()
@@ -6986,27 +6858,19 @@ void MainWindow::on_table_nv_ls0_itemChanged(QTableWidgetItem* item)
 
 void MainWindow::on_editIntTarget_textChanged(const QString& arg1)
 {
-    //10转16
-    int dec = arg1.toInt();
-
-    //QString hex = QString("%1").arg(dec, 2, 16, QLatin1Char('0')); // 保留2位，不足补零
-    QString hex = QString("%1").arg(dec, 0, 16, QLatin1Char('0'));
-
-    ui->editTargetHex->setText(hex.toUpper());
-
     int total = arg1.toInt();
 
     initTargetValue();
 
-    scanPolicy = false;
-    pickerAttributes = true;
+    for (int i = 0; i < chk.count(); i++)
+        chk.at(i)->setChecked(false);
 
-    for (int i = 0; i < v_pa.count(); i++)
-        chk_pa.at(i)->setChecked(false);
+    method(v, total);
 
-    method(v_pa, total);
-
-    this->setWindowModified(true);
+    //10转16
+    //QString hex = QString("%1").arg(dec, 2, 16, QLatin1Char('0')); // 保留2位，不足补零
+    QString hex = QString("%1").arg(total, 0, 16, QLatin1Char('0'));
+    ui->lblTargetHex->setText("0x" + hex.toUpper());
 }
 
 void MainWindow::on_editIntHaltLevel_textChanged(const QString& arg1)
@@ -7015,8 +6879,6 @@ void MainWindow::on_editIntHaltLevel_textChanged(const QString& arg1)
     unsigned int dec = arg1.toULongLong();
     QString hex = QString("%1").arg(dec, 8, 16, QLatin1Char('0')); // 保留8位，不足补零
     ui->lblHaltLevel->setText("0x" + hex.toUpper());
-
-    this->setWindowModified(true);
 }
 
 void MainWindow::clear_temp_data()
@@ -8279,17 +8141,6 @@ void MainWindow::on_table_dp_del_cellDoubleClicked(int row, int column)
     myTable = ui->table_dp_del;
 
     initLineEdit(myTable, row, column, row, column);
-}
-
-void MainWindow::on_editTargetHex_textChanged(const QString& arg1)
-{
-    bool ok;
-
-    QString hex = arg1;
-
-    int dec = hex.toInt(&ok, 16);
-
-    ui->editIntTarget->setText(QString::number(dec));
 }
 
 void MainWindow::on_actionNewWindow_triggered()
@@ -10206,7 +10057,7 @@ void MainWindow::getEditValue(QVariantMap map, QWidget* tab)
         else
             name = str0;
 
-        if (w != ui->editTargetHex && name != "") { // 16进制转换为整数的除外Misc里面
+        if (name != "") {
 
             QStringList strList = name.split("_");
 
@@ -10237,7 +10088,7 @@ void MainWindow::getValue(QVariantMap map, QWidget* tab)
 bool MainWindow::editExclusion(QLineEdit* w, QString name)
 {
     // 用name ！= “”过滤掉获取的ComBox里面的edit
-    if (w != ui->editTargetHex && name != "" && w != ui->editPassInput && name != "pinbox_lineedit")
+    if (name != "" && w != ui->editPassInput && name != "pinbox_lineedit")
         return true;
 
     return false;
@@ -10541,23 +10392,19 @@ void MainWindow::on_editIntConsoleAttributes_textChanged(const QString& arg1)
 
 void MainWindow::initTargetValue()
 {
-    chk_pa.clear();
-    chk_pa.append(ui->chkT1);
-    chk_pa.append(ui->chkT2);
-    chk_pa.append(ui->chkT3);
-    chk_pa.append(ui->chkT4);
-    chk_pa.append(ui->chkT5);
-    chk_pa.append(ui->chkT6);
-    chk_pa.append(ui->chkT7);
+    chk.clear();
+    for (int i = 0; i < chk_Target.count(); i++) {
+        chk.append(chk_Target.at(i));
+    }
 
-    v_pa.clear();
-    v_pa.append(1);
-    v_pa.append(2);
-    v_pa.append(4);
-    v_pa.append(8);
-    v_pa.append(16);
-    v_pa.append(32);
-    v_pa.append(64);
+    v.clear();
+    v.append(1);
+    v.append(2);
+    v.append(4);
+    v.append(8);
+    v.append(16);
+    v.append(32);
+    v.append(64);
 }
 
 void MainWindow::Target()
@@ -10565,48 +10412,13 @@ void MainWindow::Target()
     initTargetValue();
     int total = 0;
 
-    for (int i = 0; i < v_pa.count(); i++) {
-        if (chk_pa.at(i)->isChecked()) {
-            total = total + v_pa.at(i);
+    for (int i = 0; i < chk.count(); i++) {
+        if (chk.at(i)->isChecked()) {
+            total = total + v.at(i);
         }
     }
 
     ui->editIntTarget->setText(QString::number(total));
-}
-
-void MainWindow::on_chkT1_clicked()
-{
-    Target();
-}
-
-void MainWindow::on_chkT2_clicked()
-{
-    Target();
-}
-
-void MainWindow::on_chkT3_clicked()
-{
-    Target();
-}
-
-void MainWindow::on_chkT4_clicked()
-{
-    Target();
-}
-
-void MainWindow::on_chkT5_clicked()
-{
-    Target();
-}
-
-void MainWindow::on_chkT6_clicked()
-{
-    Target();
-}
-
-void MainWindow::on_chkT7_clicked()
-{
-    Target();
 }
 
 void MainWindow::on_btnGetPassHash_clicked()
