@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210425";
+    CurVerison = "20210427";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -2311,7 +2311,6 @@ bool MainWindow::getBool(QTableWidget* table, int row, int column)
 
 void MainWindow::SavePlist(QString FileName)
 {
-
     removeAllLineEdit();
 
     QVariantMap OpenCore;
@@ -8596,7 +8595,7 @@ void MainWindow::goResultsTableHeader(QString objName)
                 listOfTableWidget = getAllTableWidget(getAllUIControls(currentTabWidget));
                 for (int k = 0; k < listOfTableWidget.count(); k++) {
                     if (listOfTableWidget.at(k)->objectName() == name) {
-                        QTableWidget *w = (QTableWidget *) listOfTableWidget.at(k);
+                        QTableWidget* w = (QTableWidget*)listOfTableWidget.at(k);
 
                         for (int x = 0; x < w->columnCount(); x++) {
                             QString strColumn = w->horizontalHeaderItem(x)->text();
