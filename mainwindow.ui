@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1626</width>
+    <width>1646</width>
     <height>807</height>
    </rect>
   </property>
@@ -9846,8 +9846,8 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1626</width>
-     <height>30</height>
+     <width>1646</width>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -9926,6 +9926,12 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
     <size>
      <width>200</width>
      <height>166</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>200</width>
+     <height>524287</height>
     </size>
    </property>
    <property name="allowedAreas">
