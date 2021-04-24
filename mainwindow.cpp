@@ -1422,8 +1422,8 @@ void MainWindow::initui_nvram()
     ui->table_nv_add0->setAlternatingRowColors(true);
     ui->table_nv_add0->horizontalHeader()->setStretchLastSection(true);
 
-    ui->table_nv_add0->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->table_nv_add0, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_menu0(QPoint)));
+    ui->btnNVRAMAdd_Add0->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->btnNVRAMAdd_Add0, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_menu0(QPoint)));
 
     ui->table_nv_add->setColumnWidth(0, 200);
     id0 = new QTableWidgetItem(tr("Key"));
@@ -1439,8 +1439,8 @@ void MainWindow::initui_nvram()
     ui->table_nv_add->setAlternatingRowColors(true);
     ui->table_nv_add->horizontalHeader()->setStretchLastSection(true);
 
-    ui->table_nv_add->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->table_nv_add, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_menu(QPoint)));
+    ui->btnNVRAMAdd_Add->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->btnNVRAMAdd_Add, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_menu(QPoint)));
 
     // 分割窗口
     QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
@@ -5567,7 +5567,7 @@ void MainWindow::show_menu(const QPoint pos)
 
         menu->move(cursor().pos());
 
-        //menu->show();
+        menu->show();
 
         //获得鼠标点击的x，y坐标点
         int x = pos.x();
@@ -5603,6 +5603,11 @@ void MainWindow::on_nv1()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("String");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5629,6 +5634,11 @@ void MainWindow::on_nv2()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5655,6 +5665,11 @@ void MainWindow::on_nv3()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5681,6 +5696,11 @@ void MainWindow::on_nv4()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5707,6 +5727,11 @@ void MainWindow::on_nv5()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("String");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5733,6 +5758,11 @@ void MainWindow::on_nv6()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("String");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5759,6 +5789,11 @@ void MainWindow::on_nv7()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("String");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5785,6 +5820,11 @@ void MainWindow::on_nv8()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5811,6 +5851,11 @@ void MainWindow::on_nv9()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5837,6 +5882,11 @@ void MainWindow::on_nv10()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5863,6 +5913,11 @@ void MainWindow::on_nv11()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5889,6 +5944,11 @@ void MainWindow::on_nv12()
         QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
+
+        this->setWindowModified(true);
     }
 }
 
@@ -5915,7 +5975,7 @@ void MainWindow::show_menu0(const QPoint pos)
     menu->addAction(act4);
 
     menu->move(cursor().pos());
-    //menu->show();
+    menu->show();
     //获得鼠标点击的x，y坐标点
     int x = pos.x();
     int y = pos.y();
@@ -6447,6 +6507,11 @@ void MainWindow::init_MainUI()
     pTrailingAction = new QAction(this);
     pTrailingAction->setIcon(QIcon(":/icon/ok.png"));
 
+    init_InitialValue();
+}
+
+void MainWindow::init_InitialValue()
+{
     tableList0.append(ui->table_dp_add0);
     tableList0.append(ui->table_dp_del0);
     tableList0.append(ui->table_nv_add0);
