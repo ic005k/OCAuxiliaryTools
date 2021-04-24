@@ -14,7 +14,8 @@ int main(int argc, char* argv[])
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
 
     qputenv("QT_ENABLE_HIGHDPI_SCALING", "1");
-    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
+        Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 
 #endif
 

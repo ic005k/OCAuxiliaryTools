@@ -8595,10 +8595,8 @@ void MainWindow::goResultsTableHeader(QString objName)
                 listOfTableWidget.clear();
                 listOfTableWidget = getAllTableWidget(getAllUIControls(currentTabWidget));
                 for (int k = 0; k < listOfTableWidget.count(); k++) {
-
                     if (listOfTableWidget.at(k)->objectName() == name) {
-
-                        QTableWidget* w = (QTableWidget*)listOfTableWidget.at(k);
+                        QTableWidget *w = (QTableWidget *) listOfTableWidget.at(k);
 
                         for (int x = 0; x < w->columnCount(); x++) {
                             QString strColumn = w->horizontalHeaderItem(x)->text();
@@ -8614,19 +8612,10 @@ void MainWindow::goResultsTableHeader(QString objName)
                                     w->horizontalHeaderItem(x)->setForeground(QColor(255, 255, 255));
 
                                 } else {
-
-                                    QBrush myBrush;
-                                    myBrush.setStyle(Qt::SolidPattern);
-                                    myBrush.setColor(Qt::blue);
-
                                     w->horizontalHeaderItem(x)->setForeground(QColor(255, 0, 0));
                                 }
 
                                 if (w->rowCount() == 0) {
-
-                                    w->insertRow(0);
-                                    w->setCurrentCell(0, x);
-                                    w->removeRow(0);
                                 } else
                                     w->setCurrentCell(0, x);
 
