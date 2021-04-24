@@ -5565,11 +5565,14 @@ void MainWindow::show_menu(const QPoint pos)
         menu->addAction(act11);
         menu->addAction(act12);
 
-        menu->move(cursor().pos());
+        int x0, y0;
+        x0 = QCursor::pos().x();
+        y0 = QCursor::pos().y();
+
+        menu->move(x0 - 200, y0 - 200);
 
         menu->show();
 
-        //获得鼠标点击的x，y坐标点
         int x = pos.x();
         int y = pos.y();
         QModelIndex index = ui->table_nv_add->indexAt(QPoint(x, y));
