@@ -265,6 +265,7 @@ public:
 public slots:
 
     void on_actionFind_triggered();
+    void on_btnNVRAMAdd_Add_clicked();
 
 protected:
     void dragEnterEvent(QDragEnterEvent* e) override;
@@ -432,8 +433,6 @@ private slots:
     void on_btnMiscTools_Del_clicked();
 
     void on_btnNVRAMAdd_Add0_clicked();
-
-    void on_btnNVRAMAdd_Add_clicked();
 
     void on_btnNVRAMAdd_Del0_clicked();
 

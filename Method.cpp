@@ -13,7 +13,36 @@ Method::Method(QWidget* parent)
     mymethod = new Method;
 }
 
-QWidget *Method::getSubTabWidget(int m, int s)
+void Method::set_nv_key(QString key, QString dataType)
+{
+
+    bool re = false;
+
+    for (int i = 0; i < mw_one->ui->table_nv_add->rowCount(); i++) {
+        QString str;
+        str = mw_one->ui->table_nv_add->item(i, 0)->text();
+        if (str == key) {
+            mw_one->ui->table_nv_add->setCurrentCell(i, 0);
+            re = true;
+        }
+    }
+
+    if (!re) {
+        mw_one->on_btnNVRAMAdd_Add_clicked();
+
+        mw_one->ui->table_nv_add->setItem(mw_one->ui->table_nv_add->rowCount() - 1, 0,
+            new QTableWidgetItem(key));
+
+        QTableWidgetItem* newItem1 = new QTableWidgetItem(dataType);
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        mw_one->ui->table_nv_add->setItem(mw_one->ui->table_nv_add->rowCount() - 1, 1, newItem1);
+
+        //保存数据
+        mw_one->write_ini(mw_one->ui->table_nv_add0, mw_one->ui->table_nv_add, mw_one->ui->table_nv_add0->currentRow());
+    }
+}
+
+QWidget* Method::getSubTabWidget(int m, int s)
 {
     for (int j = 0; j < mw_one->mainTabList.count(); j++) {
         if (j == m) {

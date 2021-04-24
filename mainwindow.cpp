@@ -5582,374 +5582,62 @@ void MainWindow::show_menu(const QPoint pos)
 
 void MainWindow::on_nv1()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "boot-args") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("boot-args"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("String");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("boot-args", "String");
 }
 
 void MainWindow::on_nv2()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "bootercfg") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("bootercfg"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("bootercfg", "Data");
 }
 
 void MainWindow::on_nv3()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "bootercfg-once") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("bootercfg-once"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("bootercfg-once", "Data");
 }
 
 void MainWindow::on_nv4()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "efiboot-perf-record") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("efiboot-perf-record"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("efiboot-perf-record", "Data");
 }
 
 void MainWindow::on_nv5()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "fmm-computer-name") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("fmm-computer-name"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("String");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("fmm-computer-name", "String");
 }
 
 void MainWindow::on_nv6()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "nvda_drv") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("nvda_drv"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("String");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("nvda_drv", "String");
 }
 
 void MainWindow::on_nv7()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "run-efi-updater") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("run-efi-updater"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("String");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("run-efi-updater", "String");
 }
 
 void MainWindow::on_nv8()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "StartupMute") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("StartupMute"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("StartupMute", "Data");
 }
 
 void MainWindow::on_nv9()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "SystemAudioVolume") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("SystemAudioVolume"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("SystemAudioVolume", "Data");
 }
 
 void MainWindow::on_nv10()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "csr-active-config") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("csr-active-config"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("csr-active-config", "Data");
 }
 
 void MainWindow::on_nv11()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "prev-lang:kbd") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("prev-lang:kbd"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("prev-lang:kbd", "Data");
 }
 
 void MainWindow::on_nv12()
 {
-
-    bool re = false;
-
-    for (int i = 0; i < ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = ui->table_nv_add->item(i, 0)->text();
-        if (str == "security-mode") {
-            ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
-    }
-
-    if (!re) {
-        on_btnNVRAMAdd_Add_clicked();
-
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem("security-mode"));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem("Data");
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        ui->table_nv_add->setItem(ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        write_ini(ui->table_nv_add0, ui->table_nv_add, ui->table_nv_add0->currentRow());
-
-        this->setWindowModified(true);
-    }
+    mymethod->set_nv_key("security-mode", "Data");
 }
 
 void MainWindow::show_menu0(const QPoint pos)
