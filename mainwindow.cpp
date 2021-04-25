@@ -418,7 +418,6 @@ void MainWindow::initui_acpi()
     // ACPI-Patch
     ui->table_acpi_patch->setColumnCount(14);
 
-    //ui->table_acpi_patch->setColumnWidth(0, 150);
     id0 = new QTableWidgetItem(tr("TableSignature"));
     ui->table_acpi_patch->setHorizontalHeaderItem(0, id0);
 
@@ -428,15 +427,12 @@ void MainWindow::initui_acpi()
     id0 = new QTableWidgetItem(tr("TableLength"));
     ui->table_acpi_patch->setHorizontalHeaderItem(2, id0);
 
-    //ui->table_acpi_patch->setColumnWidth(3, 200);
     id0 = new QTableWidgetItem(tr("Find"));
     ui->table_acpi_patch->setHorizontalHeaderItem(3, id0);
 
-    //ui->table_acpi_patch->setColumnWidth(4, 200);
     id0 = new QTableWidgetItem(tr("Replace"));
     ui->table_acpi_patch->setHorizontalHeaderItem(4, id0);
 
-    //ui->table_acpi_patch->setColumnWidth(5, 300);
     id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_acpi_patch->setHorizontalHeaderItem(5, id0);
 
@@ -460,7 +456,6 @@ void MainWindow::initui_acpi()
 
     id0 = new QTableWidgetItem(tr("Base"));
     ui->table_acpi_patch->setHorizontalHeaderItem(12, id0);
-    //ui->table_acpi_patch->setColumnWidth(12, 220);
 
     id0 = new QTableWidgetItem(tr("BaseSkip"));
     ui->table_acpi_patch->setHorizontalHeaderItem(13, id0);
@@ -1312,7 +1307,6 @@ void MainWindow::ParserMisc(QVariantMap map)
     hm = map_security["SecureBootModel"].toString().trimmed();
     if (hm == "")
         hm = "Disabled";
-    //ui->cboxSecureBootModel->setCurrentText(hm.trimmed());
 
     for (int i = 0; i < ui->cboxSecureBootModel->count(); i++) {
         QString str = ui->cboxSecureBootModel->itemText(i);
@@ -1398,8 +1392,6 @@ void MainWindow::initui_nvram()
     QString s = QString::number(QTime::currentTime().second());
 
     CurrentDateTime = y + m + d + h + mm + s;
-
-    // qDebug() << CurrentDateTime;
 
     QTableWidgetItem* id0;
 
@@ -1494,7 +1486,6 @@ void MainWindow::ParserNvram(QVariantMap map)
 
         for (int j = 0; j < map_sub.keys().count(); j++) {
 
-            // QTableWidgetItem *newItem1;
             newItem1 = new QTableWidgetItem(map_sub.keys().at(j)); //键
             ui->table_nv_add->setItem(j, 0, newItem1);
 
@@ -1850,7 +1841,6 @@ void MainWindow::initui_PlatformInfo()
     ui->tableDevices->setHorizontalHeaderItem(7, id0);
 
     ui->tableDevices->setAlternatingRowColors(true); //底色交替显示
-    //ui->tableDevices->horizontalHeader()->setStretchLastSection(true);
 
     QStringList pi;
     pi.push_back("");
@@ -2200,7 +2190,6 @@ void MainWindow::initui_UEFI()
     ui->table_uefi_ReservedMemory->setHorizontalHeaderItem(4, id0);
 
     ui->table_uefi_ReservedMemory->setAlternatingRowColors(true);
-    //ui->table_uefi_ReservedMemory->horizontalHeader()->setStretchLastSection(true);
 }
 
 void MainWindow::ParserUEFI(QVariantMap map)
@@ -2928,18 +2917,6 @@ QByteArray MainWindow::HexStrToByte(QString value)
         k = k + 2;
     }
 
-    /*QString c1, c2, c3, c4;
-    c1 = value.mid(0, 2);
-    c2 = value.mid(2, 2);
-    c3 = value.mid(4, 2);
-    c4 = value.mid(6, 2);
-
-    ba.resize(4);
-    ba[0] = c1.toUInt(nullptr, 16);
-    ba[1] = c2.toUInt(nullptr, 16);
-    ba[2] = c3.toUInt(nullptr, 16);
-    ba[3] = c4.toUInt(nullptr, 16);*/
-
     return ba;
 }
 
@@ -3250,44 +3227,11 @@ QString MainWindow::getSubTabStr(int tabIndex)
     int subtabIndex;
     QString subtabStr;
 
-    if (tabIndex == 0) {
-        subtabIndex = ui->tabACPI->currentIndex();
-        subtabStr = ui->tabACPI->tabText(subtabIndex);
-    }
-
-    if (tabIndex == 1) {
-        subtabIndex = ui->tabBooter->currentIndex();
-        subtabStr = ui->tabBooter->tabText(subtabIndex);
-    }
-
-    if (tabIndex == 2) {
-        subtabIndex = ui->tabDP->currentIndex();
-        subtabStr = ui->tabDP->tabText(subtabIndex);
-    }
-
-    if (tabIndex == 3) {
-        subtabIndex = ui->tabKernel->currentIndex();
-        subtabStr = ui->tabKernel->tabText(subtabIndex);
-    }
-
-    if (tabIndex == 4) {
-        subtabIndex = ui->tabMisc->currentIndex();
-        subtabStr = ui->tabMisc->tabText(subtabIndex);
-    }
-
-    if (tabIndex == 5) {
-        subtabIndex = ui->tabNVRAM->currentIndex();
-        subtabStr = ui->tabNVRAM->tabText(subtabIndex);
-    }
-
-    if (tabIndex == 6) {
-        subtabIndex = ui->tabPlatformInfo->currentIndex();
-        subtabStr = ui->tabPlatformInfo->tabText(subtabIndex);
-    }
-
-    if (tabIndex == 7) {
-        subtabIndex = ui->tabUEFI->currentIndex();
-        subtabStr = ui->tabUEFI->tabText(subtabIndex);
+    for (int i = 0; i < mainTabList.count(); i++) {
+        if (i == tabIndex) {
+            subtabIndex = mainTabList.at(i)->currentIndex();
+            subtabStr = mainTabList.at(i)->tabText(subtabIndex);
+        }
     }
 
     return subtabStr;
@@ -3661,9 +3605,9 @@ void MainWindow::addKexts(QStringList FileName)
 
         QFileInfo fileInfoList;
         QString filePath = fileInfo.absolutePath();
-        // qDebug() << filePath;
+
         QDir fileDir(filePath + "/" + fileInfo.fileName() + "/Contents/MacOS/");
-        // qDebug() << fileDir;
+
         if (fileDir.exists()) //如果目录存在，则遍历里面的文件
         {
             fileDir.setFilter(QDir::Files); //只遍历本目录
@@ -3700,18 +3644,17 @@ void MainWindow::addKexts(QStringList FileName)
 
         //如果里面还有PlugIns目录，则需要继续遍历插件目录
         QDir piDir(filePath + "/" + fileInfo.fileName() + "/Contents/PlugIns/");
-        // qDebug() << piDir;
+
         if (piDir.exists()) {
 
             piDir.setFilter(QDir::Dirs); //过滤器：只遍历里面的目录
             QFileInfoList fileList = piDir.entryInfoList();
             int fileCount = fileList.count();
             QVector<QString> kext_file;
-            //qDebug() << fileCount;
+
             for (int i = 0; i < fileCount; i++) //找出里面的kext文件(目录）
             {
                 kext_file.push_back(fileList[i].fileName());
-                //qDebug() << kext_file.at(i);
             }
 
             if (fileCount >= 3) //里面有目录
@@ -3719,7 +3662,7 @@ void MainWindow::addKexts(QStringList FileName)
                 for (int i = 0; i < fileCount - 2; i++) {
                     QDir fileDir(filePath + "/" + fileInfo.fileName() + "/Contents/PlugIns/" + kext_file[i + 2] + "/Contents/MacOS/");
                     if (fileDir.exists()) {
-                        // qDebug() << fileDir;
+
                         fileDir.setFilter(QDir::Files); //只遍历本目录里面的文件
                         QFileInfoList fileList = fileDir.entryInfoList();
                         int fileCount = fileList.count();
@@ -4267,12 +4210,6 @@ void MainWindow::on_btnSaveAs()
 
 void MainWindow::about()
 {
-    //QString strIcon = tr("Icon designer:  Mirone(Brazil)");
-    //QString strUrl = "<a style='color: blue;' href = "
-    //                 "https://github.com/ic005k/QtOpenCoreConfig>QtOpenCoreConfigurator</"
-    //                 "a><br><a style='color: blue;'<\n><br>";
-
-    //QMessageBox::about(this, tr("About"), strUrl + "\n" + strIcon);
 
     aboutDlg->setModal(true);
     aboutDlg->show();
@@ -4413,8 +4350,6 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
 
         if (Table->rowCount() == 0)
             return;
-
-        //Table->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
         Table->removeCellWidget(previousRow, previousColumn);
         removeAllLineEdit();
@@ -4606,8 +4541,6 @@ void MainWindow::on_cboxSystemProductName_currentIndexChanged(
         ui->editSystemProductName_2->setText(str);
 
 #ifdef Q_OS_WIN32
-        // win
-        // QFile file(appInfo.filePath() + "/macserial.exe");
 
         gs->start(appInfo.filePath() + "/Database/win/macserial.exe",
             QStringList() << "-m" << str); //阻塞为execute
@@ -4615,13 +4548,13 @@ void MainWindow::on_cboxSystemProductName_currentIndexChanged(
 #endif
 
 #ifdef Q_OS_LINUX
-        // linux
+
         gs->start(appInfo.filePath() + "/Database/linux/macserial", QStringList() << "-m" << str);
 
 #endif
 
 #ifdef Q_OS_MAC
-        // mac
+
         gs->start(appInfo.filePath() + "/Database/mac/macserial", QStringList() << "-m" << str);
 
 #endif
@@ -4643,8 +4576,6 @@ void MainWindow::readResult()
     textMacInfo->append(result);
     //取第三行的数据，第一行留给提示用
     QString str = textMacInfo->document()->findBlockByNumber(2).text().trimmed();
-
-    // qDebug() << result;
 
     QString str1, str2;
     for (int i = 0; i < str.count(); i++) {
@@ -4670,7 +4601,6 @@ void MainWindow::readResultSystemInfo()
     QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
     QString result = gbkCodec->toUnicode(si->readAll());
     ui->textMacInfo->append(result);
-    // qDebug() << result;
 }
 
 void MainWindow::on_btnGenerate_clicked()
@@ -4821,7 +4751,6 @@ void MainWindow::dropEvent(QDropEvent* e)
     fileSuffix = str2.toLower();
 #endif
 
-    //qDebug() << fi.suffix().toLower() << fileList.at(0) << fileSuffix;
     if (fileSuffix == "kext") {
         if (ui->tabTotal->currentIndex() == 3 && ui->tabKernel->currentIndex() == 0) {
             QStringList kextList;
@@ -4841,7 +4770,6 @@ void MainWindow::dropEvent(QDropEvent* e)
 #endif
 
                 kextList.append(str4);
-                //qDebug() << str4;
             }
 
             addKexts(kextList);
@@ -4866,7 +4794,6 @@ void MainWindow::dropEvent(QDropEvent* e)
 #ifdef Q_OS_WIN32
 void MainWindow::runAdmin(QString file, QString arg)
 {
-
     QString exePath = file;
     WCHAR exePathArray[1024] = { 0 };
     exePath.toWCharArray(exePathArray);
@@ -4885,8 +4812,6 @@ void MainWindow::mount_esp()
 {
 
 #ifdef Q_OS_WIN32
-    // di = new QProcess;
-    // di->execute("mountvol.exe", QStringList() << "x:" << "/s");//阻塞
 
     QString exec = QCoreApplication::applicationDirPath() + "/Database/win/FindESP.exe";
 
@@ -5041,7 +4966,6 @@ void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(
 
     ui->table_uefi_ReservedMemory->removeCellWidget(previousRow, 3);
 
-    //Undo Redo
     Q_UNUSED(currentRow);
     Q_UNUSED(currentColumn);
 
@@ -8120,7 +8044,7 @@ void MainWindow::setPalette(QWidget* w, QColor backColor, QColor textColor)
     QPalette palette;
     palette = w->palette();
     palette.setColor(QPalette::Base, backColor);
-    palette.setColor(QPalette::Text, textColor); //字色
+    palette.setColor(QPalette::Text, textColor);
     w->setPalette(palette);
 }
 
@@ -8261,7 +8185,7 @@ void MainWindow::goResultsCheckbox(QString objName)
                 for (int k = 0; k < listOfCheckBox.count(); k++) {
 
                     if (listOfCheckBox.at(k)->objectName() == name) {
-                        //qDebug() << name;
+
                         QString style = "QCheckBox{background-color:rgb(255,0,0);color:rgb(255,255,255);}";
                         QCheckBox* w = (QCheckBox*)listOfCheckBox.at(k);
                         w->setStyleSheet(style);
@@ -8397,7 +8321,7 @@ void MainWindow::goResultsLabel(QString objName)
                 for (int k = 0; k < listOfLabel.count(); k++) {
 
                     if (listOfLabel.at(k)->objectName() == name) {
-                        //qDebug() << name;
+
                         QString style = "QLabel{background-color:rgba(255,0,0,255);color:rgb(255,255,255);}";
                         QLabel* w = (QLabel*)listOfLabel.at(k);
                         w->setStyleSheet(style);
