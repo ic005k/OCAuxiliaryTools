@@ -84,19 +84,55 @@ MainWindow::MainWindow(QWidget* parent)
     QDir dir;
     if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) { }
 
-    ui->tabTotal->setCurrentIndex(0);
-    ui->tabACPI->setCurrentIndex(0);
-    ui->tabBooter->setCurrentIndex(0);
-    ui->tabDP->setCurrentIndex(0);
-    ui->tabKernel->setCurrentIndex(0);
-    ui->tabMisc->setCurrentIndex(0);
-    ui->tabNVRAM->setCurrentIndex(0);
-    ui->tabPlatformInfo->setCurrentIndex(0);
-    ui->tabUEFI->setCurrentIndex(0);
-    ui->textDiskInfo->setVisible(false);
+    setUIMargin();
 
-    ui->listMain->setCurrentRow(0);
+    init_tr_str();
 
+    initui_booter();
+    initui_dp();
+    initui_kernel();
+    initui_misc();
+    initui_nvram();
+    initui_PlatformInfo();
+    initui_UEFI();
+    initui_acpi();
+
+    init_CopyPasteLine();
+
+    setTableEditTriggers();
+
+    //接受文件拖放打开
+    this->setAcceptDrops(true);
+
+    //最近打开的文件
+    QCoreApplication::setOrganizationName("ic005k");
+    QCoreApplication::setOrganizationDomain("github.com/ic005k");
+    QCoreApplication::setApplicationName("OC Auxiliary Tools");
+
+    m_recentFiles = new RecentFiles(this);
+    //m_recentFiles->attachToMenuAfterItem(ui->menuFile, tr("Save As..."), SLOT(recentOpen(QString)));
+    m_recentFiles->setNumOfRecentFiles(10);
+
+    // 最近打开的文件快捷通道
+    initRecentFilesForToolBar();
+
+    // 检查更新
+    manager = new QNetworkAccessManager(this);
+    connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+
+    autoCheckUpdate = true;
+    on_btnCheckUpdate();
+
+    this->setWindowModified(false);
+
+    loading = false;
+    Initialization = false;
+}
+
+MainWindow::~MainWindow() { delete ui; }
+
+void MainWindow::setUIMargin()
+{
     ui->gridLayout->setMargin(5);
     ui->centralwidget->layout()->setMargin(5);
     ui->centralwidget->layout()->setSpacing(0);
@@ -145,51 +181,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     ui->gridLayout_41->setMargin(0);
     ui->gridLayout_41->setSpacing(5);
-
-    init_tr_str();
-
-    initui_booter();
-    initui_dp();
-    initui_kernel();
-    initui_misc();
-    initui_nvram();
-    initui_PlatformInfo();
-    initui_UEFI();
-    initui_acpi();
-
-    init_CopyPasteLine();
-
-    setTableEdit();
-
-    //接受文件拖放打开
-    this->setAcceptDrops(true);
-
-    //最近打开的文件
-    QCoreApplication::setOrganizationName("ic005k");
-    QCoreApplication::setOrganizationDomain("github.com/ic005k");
-    QCoreApplication::setApplicationName("OC Auxiliary Tools");
-
-    m_recentFiles = new RecentFiles(this);
-    //m_recentFiles->attachToMenuAfterItem(ui->menuFile, tr("Save As..."), SLOT(recentOpen(QString)));
-    m_recentFiles->setNumOfRecentFiles(10);
-
-    // 最近打开的文件快捷通道
-    initRecentFilesForToolBar();
-
-    // 检查更新
-    manager = new QNetworkAccessManager(this);
-    connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
-
-    this->setWindowModified(false);
-
-    autoCheckUpdate = true;
-    on_btnCheckUpdate();
-
-    loading = false;
-    Initialization = false;
 }
-
-MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::recentOpen(QString filename)
 {
@@ -5868,11 +5860,11 @@ void MainWindow::init_listMainSub()
     }
 
     if (linuxOS) {
-        ui->listMain->setMaximumHeight(70);
+        ui->listMain->setMaximumHeight(68);
         if (zh_cn)
-            ui->listSub->setMaximumHeight(60);
+            ui->listSub->setMaximumHeight(50);
         else
-            ui->listSub->setMaximumHeight(30);
+            ui->listSub->setMaximumHeight(25);
     }
 
     if (mac || osx1012) {
@@ -5911,6 +5903,19 @@ void MainWindow::init_listMainSub()
     ui->listSub->addItem(tr("Patch"));
     ui->listSub->addItem(tr("Quirks"));
     ui->listSub->setCurrentRow(index);
+
+    ui->tabTotal->setCurrentIndex(0);
+    ui->tabACPI->setCurrentIndex(0);
+    ui->tabBooter->setCurrentIndex(0);
+    ui->tabDP->setCurrentIndex(0);
+    ui->tabKernel->setCurrentIndex(0);
+    ui->tabMisc->setCurrentIndex(0);
+    ui->tabNVRAM->setCurrentIndex(0);
+    ui->tabPlatformInfo->setCurrentIndex(0);
+    ui->tabUEFI->setCurrentIndex(0);
+    ui->textDiskInfo->setVisible(false);
+
+    ui->listMain->setCurrentRow(0);
 }
 
 void MainWindow::init_FileMenu()
@@ -7616,48 +7621,14 @@ void MainWindow::on_table_acpi_add_cellDoubleClicked(int row, int column)
     }
 }
 
-void MainWindow::setTableEdit()
+void MainWindow::setTableEditTriggers()
 {
-    //ACPI
-    ui->table_acpi_add->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_acpi_del->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_acpi_patch->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    //Booter
-    ui->table_booter->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_Booter_patch->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    //DP
-    ui->table_dp_add0->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_dp_add->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_dp_del0->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_dp_del->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    //Kernel
-    ui->table_kernel_Force->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_kernel_add->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_kernel_block->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_kernel_patch->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    //Misc
-    ui->tableBlessOverride->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tableEntries->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tableTools->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    //NVRAM
-    ui->table_nv_add0->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_nv_add->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_nv_del0->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_nv_del->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_nv_ls0->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_nv_ls->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    //PI
-    ui->tableDevices->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    //UEFI
-    ui->table_uefi_drivers->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->table_uefi_ReservedMemory->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    listOfTableWidget.clear();
+    listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
+    for (int i = 0; i < listOfTableWidget.count(); i++) {
+        QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
+        w->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    }
 }
 
 void MainWindow::on_table_acpi_del_cellDoubleClicked(int row, int column)

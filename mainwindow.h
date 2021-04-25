@@ -783,7 +783,7 @@ private:
 
     QMenu* reFileMenu;
 
-    void setTableEdit();
+    void setTableEditTriggers();
 
     QNetworkAccessManager* manager;
     int parse_UpdateJSON(QString str);
@@ -878,6 +878,7 @@ private:
     QString getReReCount(QTableWidget* w, QString text);
     QString getUrl(QVariantList list);
     void init_InitialValue();
+    void setUIMargin();
 };
 
 #endif // MAINWINDOW_H
