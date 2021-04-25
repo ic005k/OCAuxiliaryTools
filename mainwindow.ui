@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1629</width>
+    <width>1298</width>
     <height>807</height>
    </rect>
   </property>
@@ -30,7 +30,7 @@
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>64</height>
+        <height>62</height>
        </size>
       </property>
       <property name="movement">
@@ -43,7 +43,7 @@
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>24</height>
+        <height>38</height>
        </size>
       </property>
      </widget>
@@ -9846,8 +9846,8 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1629</width>
-     <height>30</height>
+     <width>1298</width>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

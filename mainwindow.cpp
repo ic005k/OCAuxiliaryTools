@@ -5861,19 +5861,25 @@ void MainWindow::init_listMainSub()
 
     if (win) {
         ui->listMain->setMaximumHeight(75);
-        ui->listSub->setMaximumHeight(30);
+        if (zh_cn)
+            ui->listSub->setMaximumHeight(60);
+        else
+            ui->listSub->setMaximumHeight(30);
     }
 
     if (linuxOS) {
         ui->listMain->setMaximumHeight(70);
-        ui->listSub->setMaximumHeight(28);
+        if (zh_cn)
+            ui->listSub->setMaximumHeight(60);
+        else
+            ui->listSub->setMaximumHeight(30);
+    }
 
-#if (QT_VERSION <= QT_VERSION_CHECK(5, 9, 9))
-
-        ui->listMain->setMaximumHeight(75);
-        ui->listSub->setMaximumHeight(38);
-
-#endif
+    if (mac || osx1012) {
+        if (zh_cn)
+            ui->listSub->setMaximumHeight(40);
+        else
+            ui->listSub->setMaximumHeight(24);
     }
 
     ui->listMain->setViewMode(QListView::ListMode);

@@ -88,7 +88,8 @@
         <location filename="mainwindow.cpp" line="7937"/>
         <source>Delete</source>
         <oldsource>删除条目-Delete</oldsource>
-        <translation>Delete（删除）</translation>
+        <translation type="unfinished">Delete
+删除</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="92"/>
@@ -101,7 +102,8 @@
         <location filename="mainwindow.cpp" line="7901"/>
         <location filename="mainwindow.cpp" line="7936"/>
         <source>Add</source>
-        <translation>Add（增加）</translation>
+        <translation type="unfinished">Add
+增加</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="368"/>
@@ -113,7 +115,8 @@
         <location filename="mainwindow.cpp" line="7904"/>
         <source>Patch</source>
         <oldsource>补丁-Patch</oldsource>
-        <translation>Patch（补丁）</translation>
+        <translation type="unfinished">Patch
+补丁</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="832"/>
@@ -121,14 +124,14 @@
         <location filename="mainwindow.cpp" line="8036"/>
         <source>Booter</source>
         <oldsource>启动设置-Booter</oldsource>
-        <translation>Booter（引导器）</translation>
+        <translation type="unfinished">Booter 引导器</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="76"/>
         <location filename="mainwindow.cpp" line="6778"/>
         <location filename="mainwindow.cpp" line="8035"/>
         <source>ACPI</source>
-        <translation>ACPI（电源管理）</translation>
+        <translation type="unfinished">ACPI 电源管理</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9890"/>
@@ -198,7 +201,8 @@
         <location filename="mainwindow.cpp" line="7874"/>
         <source>MmioWhitelist</source>
         <oldsource>内存映射白名单-MmioWhitelist</oldsource>
-        <translation>MmioWhitelist（Mmio白名单）</translation>
+        <translation type="unfinished">MmioWhitelist
+Mmio白名单</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1180"/>
@@ -381,7 +385,7 @@
         <location filename="mainwindow.cpp" line="8037"/>
         <source>DeviceProperties</source>
         <oldsource>设备属性配置-DeviceProperties</oldsource>
-        <translation>DeviceProperties（设备属性）</translation>
+        <translation type="unfinished">DeviceProperties 设备属性</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1906"/>
@@ -389,7 +393,7 @@
         <location filename="mainwindow.cpp" line="8038"/>
         <source>Kernel</source>
         <oldsource>内核设置-Kernel</oldsource>
-        <translation>Kernel（内核）</translation>
+        <translation type="unfinished">Kernel 内核</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1995"/>
@@ -406,21 +410,24 @@
         <location filename="mainwindow.cpp" line="7902"/>
         <source>Block</source>
         <oldsource>阻止-Block</oldsource>
-        <translation>Block（阻止）</translation>
+        <translation type="unfinished">Block
+阻止</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2128"/>
         <location filename="mainwindow.cpp" line="7903"/>
         <source>Force</source>
         <oldsource>强制-Force</oldsource>
-        <translation>Force（强制）</translation>
+        <translation type="unfinished">Force
+强制</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2299"/>
         <location filename="mainwindow.cpp" line="7905"/>
         <source>Emulate</source>
         <oldsource>Quirks + Emulate</oldsource>
-        <translation>Emulate（仿冒CPU）</translation>
+        <translation type="unfinished">Emulate
+仿冒CPU</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2366"/>
@@ -474,7 +481,8 @@
         <location filename="mainwindow.cpp" line="7906"/>
         <location filename="mainwindow.cpp" line="7975"/>
         <source>Quirks</source>
-        <translation>Quirks（选项）</translation>
+        <translation type="unfinished">Quirks
+选项</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2599"/>
@@ -644,7 +652,8 @@
         <location filename="mainwindow.ui" line="2882"/>
         <location filename="mainwindow.cpp" line="7907"/>
         <source>Scheme</source>
-        <translation>Scheme（老旧系统方案）</translation>
+        <translation type="unfinished">Scheme
+老旧系统方案</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2912"/>
@@ -681,7 +690,8 @@
         <location filename="mainwindow.cpp" line="7919"/>
         <source>Boot</source>
         <oldsource>Boot-引导</oldsource>
-        <translation>Boot（引导）</translation>
+        <translation type="unfinished">Boot
+引导</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="3197"/>
@@ -789,7 +799,8 @@
         <location filename="mainwindow.cpp" line="7920"/>
         <source>Debug</source>
         <oldsource>Debug-调试</oldsource>
-        <translation>Debug（调试）</translation>
+        <translation type="unfinished">Debug
+调试</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="3824"/>
@@ -875,7 +886,8 @@
         <location filename="mainwindow.cpp" line="7921"/>
         <source>Security</source>
         <oldsource>Security-安全</oldsource>
-        <translation>Security（安全）</translation>
+        <translation type="unfinished">Security
+安全</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="4290"/>
@@ -993,27 +1005,30 @@
         <location filename="mainwindow.cpp" line="1283"/>
         <location filename="mainwindow.cpp" line="7922"/>
         <source>BlessOverride</source>
-        <translation>BlessOverride（定制引导加载程序）</translation>
+        <translation type="unfinished">BlessOverride
+定制引导加载程序</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="5128"/>
         <location filename="mainwindow.cpp" line="7923"/>
         <source>Entries</source>
-        <translation>Entries（添加启动项）</translation>
+        <translation type="unfinished">Entries
+添加启动项</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="5206"/>
         <location filename="mainwindow.cpp" line="7924"/>
         <source>Tools</source>
         <oldsource>Tools-工具</oldsource>
-        <translation>Tools（工具）</translation>
+        <translation type="unfinished">Tools
+工具</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="5289"/>
         <location filename="mainwindow.cpp" line="6783"/>
         <location filename="mainwindow.cpp" line="8040"/>
         <source>NVRAM</source>
-        <translation>NVRAM（变量）</translation>
+        <translation type="unfinished">NVRAM 变量</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="5715"/>
@@ -1050,7 +1065,8 @@
         <location filename="mainwindow.cpp" line="7938"/>
         <source>LegacySchema</source>
         <oldsource>LegacySchema-传统BIOS</oldsource>
-        <translation>LegacySchema（传统BIOS）</translation>
+        <translation type="unfinished">LegacySchema
+传统BIOS</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="5771"/>
@@ -1058,7 +1074,7 @@
         <location filename="mainwindow.cpp" line="8041"/>
         <source>PlatformInfo</source>
         <oldsource>机型配置-PlatformInfo</oldsource>
-        <translation>PlatformInfo（机型）</translation>
+        <translation type="unfinished">PlatformInfo 机型</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="7707"/>
@@ -1749,7 +1765,8 @@ Console logging prints less than all the other variants. Depending on the build 
         <location filename="mainwindow.ui" line="5787"/>
         <location filename="mainwindow.cpp" line="7950"/>
         <source>Generic</source>
-        <translation>Generic（通用）</translation>
+        <translation type="unfinished">Generic
+通用</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9911"/>
@@ -1928,7 +1945,8 @@ Console logging prints less than all the other variants. Depending on the build 
         <location filename="mainwindow.ui" line="6057"/>
         <location filename="mainwindow.cpp" line="7951"/>
         <source>DataHub</source>
-        <translation>DataHub（数据Hub）</translation>
+        <translation type="unfinished">DataHub
+数据Hub</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="6334"/>
@@ -2127,7 +2145,8 @@ Note 2 : Resetting NVRAM will also erase any boot options not backed up using th
         <location filename="mainwindow.ui" line="6419"/>
         <location filename="mainwindow.cpp" line="7952"/>
         <source>Memory</source>
-        <translation>Memory（自定义内存）</translation>
+        <translation type="unfinished">Memory
+自定义内存</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="6436"/>
@@ -2165,7 +2184,8 @@ there are no error-correction bits, this value should be equal to DataWidth.</ol
         <location filename="mainwindow.ui" line="6730"/>
         <location filename="mainwindow.cpp" line="7953"/>
         <source>PlatformNVRAM</source>
-        <translation>PlatformNVRAM（平台NVRAM）</translation>
+        <translation type="unfinished">PlatformNVRAM
+平台NVRAM</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="6776"/>
@@ -2292,7 +2312,8 @@ trim.</source>
         <location filename="mainwindow.ui" line="6901"/>
         <location filename="mainwindow.cpp" line="7954"/>
         <source>SMBIOS</source>
-        <translation>SMBIOS（系统管理BIOS）</translation>
+        <translation type="unfinished">SMBIOS
+系统管理BIOS</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="7028"/>
@@ -3148,7 +3169,8 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
         <location filename="mainwindow.ui" line="8062"/>
         <location filename="mainwindow.cpp" line="7969"/>
         <source>AppleInput</source>
-        <translation>AppleInput（Apple输入）</translation>
+        <translation type="unfinished">AppleInput
+Apple输入</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8232"/>
@@ -3623,7 +3645,8 @@ Enable this option to be able to see all the boot options when having multiple d
         <location filename="mainwindow.cpp" line="7956"/>
         <source>SystemInfo</source>
         <oldsource>系统信息-SystemInfo</oldsource>
-        <translation>SystemInfo（系统信息）</translation>
+        <translation type="unfinished">SystemInfo
+系统信息</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8010"/>
@@ -3660,7 +3683,8 @@ Enable this option to be able to see all the boot options when having multiple d
         <location filename="mainwindow.cpp" line="7970"/>
         <source>Audio</source>
         <oldsource>Audio设置-Audio</oldsource>
-        <translation>Audio（音频）</translation>
+        <translation type="unfinished">Audio
+音频</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8449"/>
@@ -3733,7 +3757,8 @@ Enable this option to be able to see all the boot options when having multiple d
         <location filename="mainwindow.cpp" line="7971"/>
         <source>Drivers</source>
         <oldsource>UEFI驱动-Drivers</oldsource>
-        <translation>Drivers（驱动）</translation>
+        <translation type="unfinished">Drivers
+驱动</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9653"/>
@@ -3795,7 +3820,8 @@ For example, this option allows reloading NVIDIA GOP Option ROM on older Macs af
         <location filename="mainwindow.cpp" line="7972"/>
         <source>Input</source>
         <oldsource>键盘设置-Input</oldsource>
-        <translation>Input（输入）</translation>
+        <translation type="unfinished">Input
+输入</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8771"/>
@@ -4165,7 +4191,8 @@ X86PlatformPlugin.kext读取的已知位：
         <location filename="mainwindow.cpp" line="7974"/>
         <source>ProtocolOverrides</source>
         <oldsource>协议覆盖-ProtocolOverrides</oldsource>
-        <translation>ProtocolOverrides（协议覆盖）</translation>
+        <translation type="unfinished">ProtocolOverrides
+协议覆盖</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9223"/>
@@ -4313,7 +4340,7 @@ X86PlatformPlugin.kext读取的已知位：
         <location filename="mainwindow.cpp" line="6782"/>
         <location filename="mainwindow.cpp" line="8039"/>
         <source>Misc</source>
-        <translation>Misc（杂项）</translation>
+        <translation type="unfinished">Misc 杂项</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="3112"/>
@@ -5052,13 +5079,14 @@ If there are no error-correction bits, this value should be equal to DataWidth.
         <location filename="mainwindow.cpp" line="6785"/>
         <location filename="mainwindow.cpp" line="8042"/>
         <source>UEFI</source>
-        <translation>UEFI（固件接口）</translation>
+        <translation type="unfinished">UEFI 固件接口</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="7865"/>
         <location filename="mainwindow.cpp" line="7968"/>
         <source>APFS</source>
-        <translation>APFS（文件系统）</translation>
+        <translation type="unfinished">APFS
+文件系统</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8225"/>
@@ -5105,7 +5133,8 @@ However, in case FakeSMC kernel extension is used, manual NVRAM key variable add
         <location filename="mainwindow.ui" line="8828"/>
         <location filename="mainwindow.cpp" line="7973"/>
         <source>Output</source>
-        <translation>Output（输出）</translation>
+        <translation type="unfinished">Output
+输出</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8927"/>
@@ -5169,7 +5198,8 @@ However, in case FakeSMC kernel extension is used, manual NVRAM key variable add
         <location filename="mainwindow.cpp" line="7976"/>
         <source>ReservedMemory</source>
         <oldsource>保留内存-ReservedMemory</oldsource>
-        <translation>ReservedMemory（预留内存）</translation>
+        <translation type="unfinished">ReservedMemory
+预留内存</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9517"/>
