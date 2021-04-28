@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -9729,6 +9729,15 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                 </item>
                 <item row="10" column="0">
                  <widget class="QCheckBox" name="chkEnableVectorAcceleration">
+                  <property name="toolTip">
+                   <string>Type: plist boolean
+
+Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algorithms.
+----
+类型：plist布尔值
+
+说明：启用SHA-512和SHA-384哈希算法的AVX矢量加速。</string>
+                  </property>
                   <property name="text">
                    <string>EnableVectorAcceleration</string>
                   </property>
