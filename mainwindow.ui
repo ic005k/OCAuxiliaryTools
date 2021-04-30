@@ -3093,7 +3093,7 @@ Different OpenCore pickers may be configured through the attribute mask containi
 0x0008 - OC_ATTR_HIDE_THEMED_ICONS, 偏向于某些图标类别的内置图标，以配合主题风格。例如，这可以强制显示内置的时间机器图标。需要OC_ATTR_USE_VOLUME_ICON。</string>
                  </property>
                  <property name="text">
-                  <string> OC_ATTR_HIDE_THEMED_ICONS</string>
+                  <string>OC_ATTR_HIDE_THEMED_ICONS</string>
                  </property>
                 </widget>
                </item>

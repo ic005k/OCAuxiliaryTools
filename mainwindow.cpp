@@ -9725,6 +9725,27 @@ QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab)
     return map;
 }
 
+bool MainWindow::ExclusionCheckBox(QCheckBox* chkbox)
+{
+    if (chkbox->text().trimmed().mid(0, 3) != "OC_"
+        && chkbox->text().trimmed().mid(0, 5) != "DEBUG"
+        && chkbox != ui->chk01
+        && chkbox != ui->chk02
+        && chkbox != ui->chk04
+        && chkbox != ui->chk08
+        && chkbox != ui->chkT1
+        && chkbox != ui->chkT2
+        && chkbox != ui->chkT3
+        && chkbox != ui->chkT4
+        && chkbox != ui->chkT5
+        && chkbox != ui->chkT6
+        && chkbox != ui->chkT7)
+
+        return true;
+
+    return false;
+}
+
 QVariantMap MainWindow::setCheckBoxValue(QVariantMap map, QWidget* tab)
 {
     // chk
@@ -9735,11 +9756,7 @@ QVariantMap MainWindow::setCheckBoxValue(QVariantMap map, QWidget* tab)
         QString strObjName = chkbox->objectName();
         QString name = strObjName.mid(3, strObjName.count() - 2);
 
-        if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG" && chkbox != ui->chk01 && chkbox != ui->chk02 && chkbox != ui->chk04 && chkbox != ui->chk08
-            && chkbox != ui->chkT1 && chkbox != ui->chkT2 && chkbox != ui->chkT3 && chkbox != ui->chkT4 && chkbox != ui->chkT5 && chkbox != ui->chkT6 && chkbox != ui->chkT7)
-
-        {
-
+        if (ExclusionCheckBox(chkbox)) {
             map.insert(name, getChkBool(chkbox));
         }
     }

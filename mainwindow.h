@@ -878,6 +878,7 @@ private:
     QString getUrl(QVariantList list);
     void init_InitialValue();
     void setUIMargin();
+    bool ExclusionCheckBox(QCheckBox* chkbox);
 };
 
 #endif // MAINWINDOW_H
