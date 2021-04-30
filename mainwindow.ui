@@ -3054,13 +3054,6 @@ Different OpenCore pickers may be configured through the attribute mask containi
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0" colspan="2">
-                <widget class="QCheckBox" name="chkPA3">
-                 <property name="text">
-                  <string>OC_ATTR_USE_GENERIC_LABEL_IMAGE</string>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="2">
                 <widget class="QLabel" name="lblPickerAttributes">
                  <property name="text">
@@ -3068,36 +3061,87 @@ Different OpenCore pickers may be configured through the attribute mask containi
                  </property>
                 </widget>
                </item>
-               <item row="3" column="2">
-                <widget class="QCheckBox" name="chkPA6">
+               <item row="8" column="0">
+                <widget class="QCheckBox" name="chkPA7">
+                 <property name="toolTip">
+                  <string>0x0040 — OC_ATTR_USE_MINIMAL_UI, use minimal UI display, no Shutdown or Restart buttons, affects OpenCanopy and builtin picker.
+----
+0x0040 - OC_ATTR_USE_MINIMAL_UI, 使用最小的UI显示，没有关机或重启按钮，影响OpenCanopy和内置选取器。</string>
+                 </property>
                  <property name="text">
-                  <string>OC_ATTR_DEBUG_DISPLAY</string>
+                  <string>OC_ATTR_USE_MINIMAL_UI</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0" colspan="2">
+               <item row="5" column="0">
+                <widget class="QCheckBox" name="chkPA3">
+                 <property name="toolTip">
+                  <string>0x0004 — OC_ATTR_USE_GENERIC_LABEL_IMAGE, provides predefined label images for boot entries without custom entries. This may however give less detail for the actual boot entry.
+----
+0x0004 - OC_ATTR_USE_GENERIC_LABEL_IMAGE, 提供预定义的标签图像给没有自定义条目的启动条目。然而，这可能会给实际的启动项带来较少的细节。</string>
+                 </property>
+                 <property name="text">
+                  <string>OC_ATTR_USE_GENERIC_LABEL_IMAGE</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="2">
+                <widget class="QCheckBox" name="chkPA4">
+                 <property name="toolTip">
+                  <string>0x0008 — OC_ATTR_HIDE_THEMED_ICONS, prefers builtin icons for certain icon categories to match the theme style. For example, this could force displaying the builtin Time Machine icon. Requires OC_ATTR_USE_VOLUME_ICON.
+----
+0x0008 - OC_ATTR_HIDE_THEMED_ICONS, 偏向于某些图标类别的内置图标，以配合主题风格。例如，这可以强制显示内置的时间机器图标。需要OC_ATTR_USE_VOLUME_ICON。</string>
+                 </property>
+                 <property name="text">
+                  <string> OC_ATTR_HIDE_THEMED_ICONS</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0" colspan="2">
                 <widget class="QCheckBox" name="chkPA5">
+                 <property name="toolTip">
+                  <string>0x0010 — OC_ATTR_USE_POINTER_CONTROL, enables pointer control in the OpenCore picker when available.
+For example, this could make use of mouse or trackpad to control UI elements.
+----
+0x0010 - OC_ATTR_USE_POINTER_CONTROL，在OpenCore选取器中可用时启用指针控制。
+例如，这可以利用鼠标或触控板来控制用户界面元素。</string>
+                 </property>
                  <property name="text">
                   <string>OC_ATTR_USE_POINTER_CONTROL</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0" colspan="2">
-                <widget class="QCheckBox" name="chkPA4">
-                 <property name="text">
-                  <string>OC_ATTR_USE_ALTERNATE_ICONS</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
+               <item row="4" column="2">
                 <widget class="QCheckBox" name="chkPA2">
+                 <property name="toolTip">
+                  <string> 0x0002 — OC_ATTR_USE_DISK_LABEL_FILE, provides custom rendered titles for boot entries.
+----
+ 0x0002 - OC_ATTR_USE_DISK_LABEL_FILE，为启动项提供自定义渲染的标题。</string>
+                 </property>
                  <property name="text">
                   <string>OC_ATTR_USE_DISK_LABEL_FILE</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="2">
+               <item row="6" column="2">
+                <widget class="QCheckBox" name="chkPA6">
+                 <property name="toolTip">
+                  <string>0x0020 — OC_ATTR_SHOW_DEBUG_DISPLAY, enable display of additional timing and debug information, in Builtin picker in DEBUG and NOOPT builds only.
+----
+0x0020 - OC_ATTR_SHOW_DEBUG_DISPLAY, 启用显示额外的计时和调试信息，仅在DEBUG和NOOPT构建的内置选取器中。</string>
+                 </property>
+                 <property name="text">
+                  <string>OC_ATTR_DEBUG_DISPLAY</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
                 <widget class="QCheckBox" name="chkPA1">
+                 <property name="toolTip">
+                  <string>0x0001 — OC_ATTR_USE_VOLUME_ICON, provides custom icons for boot entries.
+----
+0x0001 - OC_ATTR_USE_VOLUME_ICON, 为启动项提供自定义图标。</string>
+                 </property>
                  <property name="text">
                   <string>OC_ATTR_USE_VOLUME_ICON</string>
                  </property>
@@ -3110,13 +3154,6 @@ Different OpenCore pickers may be configured through the attribute mask containi
                    <width>200</width>
                    <height>16777215</height>
                   </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QCheckBox" name="chkPA7">
-                 <property name="text">
-                  <string>OC_ATTR_USE_MINIMAL_UI</string>
                  </property>
                 </widget>
                </item>
