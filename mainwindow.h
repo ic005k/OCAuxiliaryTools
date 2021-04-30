@@ -844,7 +844,6 @@ private:
     unsigned int vd1, vd2, vd3, vd4, vd5, vd6, vd7, vd8, vd9, vd10, vd11, vd12,
         vd13, vd14, vd15, vd16, vd17, vd18, vd19;
 
-    int pav1, pav2, pav3, pav4, pav5, pav6;
     QVector<int> value;
 
     void init_MainUI();

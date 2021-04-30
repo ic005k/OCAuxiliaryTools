@@ -5359,25 +5359,19 @@ void MainWindow::on_btnDLClear_clicked()
 
 void MainWindow::initPickerAttributesValue()
 {
-    pav1 = 1;
-    pav2 = 2;
-    pav3 = 4;
-    pav4 = 8;
-    pav5 = 16;
-    pav6 = 32;
-
     chk.clear();
     for (int i = 0; i < chk_PickerAttributes.count(); i++) {
         chk.append(chk_PickerAttributes.at(i));
     }
 
     v.clear();
-    v.append(pav1);
-    v.append(pav2);
-    v.append(pav3);
-    v.append(pav4);
-    v.append(pav5);
-    v.append(pav6);
+    v.append(1);
+    v.append(2);
+    v.append(4);
+    v.append(8);
+    v.append(16);
+    v.append(32);
+    v.append(64);
 }
 
 void MainWindow::PickerAttributes()
@@ -6202,6 +6196,7 @@ void MainWindow::init_InitialValue()
     chk_PickerAttributes.append(ui->chkPA4);
     chk_PickerAttributes.append(ui->chkPA5);
     chk_PickerAttributes.append(ui->chkPA6);
+    chk_PickerAttributes.append(ui->chkPA7);
     for (int i = 0; i < chk_PickerAttributes.count(); i++) {
         connect(chk_PickerAttributes.at(i), &QCheckBox::clicked, this, &MainWindow::PickerAttributes);
     }

@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -3015,7 +3015,7 @@ The behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3054,13 +3054,10 @@ Different OpenCore pickers may be configured through the attribute mask containi
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLineEdit" name="editIntPickerAttributes">
-                 <property name="maximumSize">
-                  <size>
-                   <width>200</width>
-                   <height>16777215</height>
-                  </size>
+               <item row="3" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkPA3">
+                 <property name="text">
+                  <string>OC_ATTR_USE_GENERIC_LABEL_IMAGE</string>
                  </property>
                 </widget>
                </item>
@@ -3068,6 +3065,20 @@ Different OpenCore pickers may be configured through the attribute mask containi
                 <widget class="QLabel" name="lblPickerAttributes">
                  <property name="text">
                   <string>0x00</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="2">
+                <widget class="QCheckBox" name="chkPA6">
+                 <property name="text">
+                  <string>OC_ATTR_DEBUG_DISPLAY</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkPA5">
+                 <property name="text">
+                  <string>OC_ATTR_USE_POINTER_CONTROL</string>
                  </property>
                 </widget>
                </item>
@@ -3085,13 +3096,6 @@ Different OpenCore pickers may be configured through the attribute mask containi
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0" colspan="2">
-                <widget class="QCheckBox" name="chkPA5">
-                 <property name="text">
-                  <string>OC_ATTR_USE_POINTER_CONTROL</string>
-                 </property>
-                </widget>
-               </item>
                <item row="2" column="2">
                 <widget class="QCheckBox" name="chkPA1">
                  <property name="text">
@@ -3099,17 +3103,20 @@ Different OpenCore pickers may be configured through the attribute mask containi
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0" colspan="2">
-                <widget class="QCheckBox" name="chkPA3">
-                 <property name="text">
-                  <string>OC_ATTR_USE_GENERIC_LABEL_IMAGE</string>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="editIntPickerAttributes">
+                 <property name="maximumSize">
+                  <size>
+                   <width>200</width>
+                   <height>16777215</height>
+                  </size>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="2">
-                <widget class="QCheckBox" name="chkPA6">
+               <item row="4" column="0">
+                <widget class="QCheckBox" name="chkPA7">
                  <property name="text">
-                  <string>OC_ATTR_DEBUG_DISPLAY</string>
+                  <string>OC_ATTR_USE_MINIMAL_UI</string>
                  </property>
                 </widget>
                </item>
