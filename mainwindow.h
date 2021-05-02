@@ -262,6 +262,7 @@ public:
 
     QString getMacInfo(const QString& cmd);
 
+    int getTextWidth(QString str, QWidget* w);
 public slots:
 
     void on_actionFind_triggered();
@@ -879,6 +880,7 @@ private:
     void init_InitialValue();
     void setUIMargin();
     bool ExclusionCheckBox(QCheckBox* chkbox);
+    bool One = false;
 };
 
 #endif // MAINWINDOW_H
