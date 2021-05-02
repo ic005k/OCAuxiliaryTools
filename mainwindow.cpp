@@ -7018,9 +7018,20 @@ void MainWindow::on_listMain_itemSelectionChanged()
         strList << tr("Hardware Information");
     }
 
+    QStringList str;
+    int w1, w2;
     for (int i = 0; i < strList.count(); i++) {
         ui->listSub->addItem(strList.at(i));
-        ui->listSub->item(i)->setSizeHint(QSize(getTextWidth(ui->listSub->item(i)->text(), ui->listSub), ui->listSub->height() - 4));
+        str = strList.at(i).split("\n");
+        if (str.count() == 1)
+            w1 = getTextWidth(ui->listSub->item(i)->text(), ui->listSub);
+        if (str.count() == 2) {
+            w1 = getTextWidth(str.at(0), ui->listSub);
+            w2 = getTextWidth(str.at(1), ui->listSub);
+            if (w1 < w2)
+                w1 = w2;
+        }
+        ui->listSub->item(i)->setSizeHint(QSize(w1, ui->listSub->height() - 4));
     }
 
     ui->listSub->setCurrentRow(index);
@@ -7028,8 +7039,7 @@ void MainWindow::on_listMain_itemSelectionChanged()
 
 int MainWindow::getTextWidth(QString str, QWidget* w)
 {
-    if (mac || osx1012)
-        str = str + "    ";
+    str = str + "    ";
     QFont myFont(w->font().family(), w->font().pointSize());
 
     QFontMetrics fm(myFont);
