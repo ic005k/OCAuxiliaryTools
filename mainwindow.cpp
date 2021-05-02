@@ -6951,7 +6951,9 @@ void MainWindow::on_listMain_itemSelectionChanged()
 {
     int cu = ui->listMain->currentRow();
     ui->tabTotal->setCurrentIndex(cu);
-    int index = mainTabList.at(cu)->currentIndex();
+    int index;
+    if (ui->listMain->currentRow() != 8)
+        index = mainTabList.at(cu)->currentIndex();
 
     ui->listSub->clear();
     ui->listSub->setViewMode(QListWidget::IconMode);
@@ -7026,7 +7028,8 @@ void MainWindow::on_listMain_itemSelectionChanged()
 
 int MainWindow::getTextWidth(QString str, QWidget* w)
 {
-    str = str + "      ";
+    if (mac || osx1012)
+        str = str + "    ";
     QFont myFont(w->font().family(), w->font().pointSize());
 
     QFontMetrics fm(myFont);
