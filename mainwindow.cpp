@@ -23,6 +23,7 @@ QVector<QString> filelist;
 QWidgetList wdlist;
 QTableWidget* tableDatabase;
 QRegExp regx("[A-Fa-f0-9]{2,1024}");
+QRegExp regxNumber("^-?\[0-9]*[1-9][0-9]*$");
 extern Method* mymethod;
 
 MainWindow::MainWindow(QWidget* parent)
@@ -4377,7 +4378,9 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
 
         lineEdit->setToolTip("");
         if (getTableFieldDataType(myTable) == "Int") {
-            lineEdit->setValidator(IntValidator);
+
+            QValidator* validator = new QRegExpValidator(regxNumber, lineEdit);
+            lineEdit->setValidator(validator);
             lineEdit->setPlaceholderText(tr("Integer"));
             lineEdit->setToolTip(tr("Integer"));
         }
@@ -6256,7 +6259,8 @@ void MainWindow::LineEditDataCheck()
         QLineEdit* w = (QLineEdit*)listOfLineEdit.at(i);
 
         if (w->objectName().mid(0, 7) == "editInt") {
-            w->setValidator(IntValidator);
+            QValidator* validator = new QRegExpValidator(regxNumber, w);
+            w->setValidator(validator);
             w->setPlaceholderText(tr("Integer"));
         }
 
