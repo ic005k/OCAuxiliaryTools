@@ -255,6 +255,22 @@ void MainWindow::openFile(QString PlistFileName)
         else
             ui->actionUpgrade_OC->setEnabled(false);
     }
+
+    openFileAfter();
+}
+
+void MainWindow::openFileAfter()
+{
+    listOfTableWidget.clear();
+    listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
+    for (int i = 0; i < listOfTableWidget.count(); i++) {
+        QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
+
+        if (w->rowCount() > 0) {
+            w->setCurrentCell(0, 0);
+            w->setFocus();
+        }
+    }
 }
 
 void MainWindow::on_btnOpen()

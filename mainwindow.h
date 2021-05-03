@@ -881,6 +881,7 @@ private:
     void setUIMargin();
     bool ExclusionCheckBox(QCheckBox* chkbox);
     bool One = false;
+    void openFileAfter();
 };
 
 #endif // MAINWINDOW_H
