@@ -23,7 +23,7 @@ QVector<QString> filelist;
 QWidgetList wdlist;
 QTableWidget* tableDatabase;
 QRegExp regx("[A-Fa-f0-9]{2,1024}");
-QRegExp regxNumber("^-?\[0-9]*[1-9][0-9]*$");
+QRegExp regxNumber("^-?\[0-9]*$");
 extern Method* mymethod;
 
 MainWindow::MainWindow(QWidget* parent)
