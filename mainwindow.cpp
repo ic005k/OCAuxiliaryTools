@@ -22,7 +22,7 @@ QString SaveFileName;
 QVector<QString> filelist;
 QWidgetList wdlist;
 QTableWidget* tableDatabase;
-QRegExp regx("[A-Fa-f0-9]{2,1024}");
+QRegExp regx("[A-Fa-f0-9]{0,1024}");
 QRegExp regxNumber("^-?\[0-9]*$");
 extern Method* mymethod;
 
@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210506";
+    CurVerison = "20210507";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
