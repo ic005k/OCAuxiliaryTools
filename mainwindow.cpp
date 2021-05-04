@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210507";
+    CurVerison = "20210508";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -235,8 +235,6 @@ void MainWindow::openFile(QString PlistFileName)
 
     undoStack->clear();
 
-    this->setWindowModified(false);
-
     if (!RefreshAllDatabase) {
         OpenFileValidate = true;
         on_actionOcvalidate_triggered();
@@ -258,6 +256,8 @@ void MainWindow::openFile(QString PlistFileName)
     }
 
     openFileAfter();
+
+    this->setWindowModified(false);
 }
 
 void MainWindow::openFileAfter()
