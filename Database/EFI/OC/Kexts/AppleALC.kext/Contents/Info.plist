@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5.9</string>
+	<string>1.6.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,7 +25,7 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.5.9</string>
+	<string>1.6.0</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -6188,8 +6188,8 @@
 					<key>ConfigData</key>
 					<data>
 					AUccEAFHHQEBRx4XAUcfkAFHDAICFxwwAhcd
-					EAIXHiECFx8EAhcMAgGXHEABlx0RAZceoQGX
-					H5E=
+					EAIXHiECFx8EAhcMAgEnHEABJx0BAScepgEn
+					H7cBlxxQAZcdEQGXHoEBlx+R
 					</data>
 					<key>FuncGroup</key>
 					<integer>1</integer>
@@ -6197,7 +6197,7 @@
 					<integer>87</integer>
 					<key>WakeConfigData</key>
 					<data>
-					AUcMAgIXDAIBlwcl
+					AUcMAgIXDAIBlwck
 					</data>
 					<key>WakeVerbReinit</key>
 					<true/>
@@ -10688,6 +10688,32 @@
 					<key>CodecID</key>
 					<integer>283906592</integer>
 					<key>CodecName</key>
+					<string>Custom ALC1220 for Mi Gaming Notebook Creator by Xsixu</string>
+					<key>ConfigData</key>
+					<data>
+					AaccEAGnHQEBpx4XAacfkAFHHCABRx0QAUce
+					IQFHHwABRwwCASccMAEnHREBJx6mAScfkAGX
+					HGABlx0AAZcegQGXHwABlwwC
+					</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>98</integer>
+					<key>WakeConfigData</key>
+					<data>
+					AUcMAgGXDAI=
+					</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>
+					AwAAAA==
+					</data>
+					<key>CodecID</key>
+					<integer>283906592</integer>
+					<key>CodecName</key>
 					<string>MiBook 2019 by Dynamix1997</string>
 					<key>ConfigData</key>
 					<data>
@@ -10702,6 +10728,33 @@
 					<key>WakeConfigData</key>
 					<data>
 					AUcMAg==
+					</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>
+					AwAAAA==
+					</data>
+					<key>CodecID</key>
+					<integer>283906592</integer>
+					<key>CodecName</key>
+					<string>Hasee_G8-CU7PK</string>
+					<key>ConfigData</key>
+					<data>
+					AbccEAG3HQEBtx4XAbcfkAG3DAIBRxwfAUcd
+					EAFHHiEBRx8EAUcMAgEnHDABJx0BAScepgEn
+					H5ABhxxAAYcdEAGHHoEBhx8EAeccUAHnHREB
+					5x5FAecfBA==
+					</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>100</integer>
+					<key>WakeConfigData</key>
+					<data>
+					AUcMAgG3DAI=
 					</data>
 					<key>WakeVerbReinit</key>
 					<true/>
