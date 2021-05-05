@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210508";
+    CurVerison = "20210509";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -3069,8 +3069,7 @@ void MainWindow::on_table_kernel_add_cellClicked(int row, int column)
         cboxArch->addItem("x86_64");
         cboxArch->addItem("");
 
-        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this,
-            SLOT(arch_addChange()));
+        connect(cboxArch, SIGNAL(currentTextChanged(QString)), this, SLOT(arch_addChange()));
         c_row = row;
 
         ui->table_kernel_add->setCellWidget(row, column, cboxArch);
@@ -3096,7 +3095,7 @@ void MainWindow::on_table_kernel_block_cellClicked(int row, int column)
         cboxArch->addItem("x86_64");
         cboxArch->addItem("");
 
-        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this, SLOT(arch_blockChange()));
+        connect(cboxArch, SIGNAL(currentTextChanged(QString)), this, SLOT(arch_blockChange()));
         c_row = row;
 
         ui->table_kernel_block->setCellWidget(row, column, cboxArch);
@@ -3122,8 +3121,7 @@ void MainWindow::on_table_kernel_patch_cellClicked(int row, int column)
         cboxArch->addItem("x86_64");
         cboxArch->addItem("");
 
-        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this,
-            SLOT(arch_patchChange()));
+        connect(cboxArch, SIGNAL(currentTextChanged(QString)), this, SLOT(arch_patchChange()));
         c_row = row;
 
         ui->table_kernel_patch->setCellWidget(row, column, cboxArch);
@@ -4655,8 +4653,7 @@ void MainWindow::on_table_kernel_Force_cellClicked(int row, int column)
         cboxArch->addItem("x86_64");
         cboxArch->addItem("");
 
-        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this,
-            SLOT(arch_ForceChange()));
+        connect(cboxArch, SIGNAL(currentTextChanged(QString)), this, SLOT(arch_ForceChange()));
         c_row = row;
 
         ui->table_kernel_Force->setCellWidget(row, column, cboxArch);
@@ -6698,7 +6695,10 @@ void MainWindow::on_table_Booter_patch_cellClicked(int row, int column)
         cboxArch->addItem("x86_64");
         cboxArch->addItem("");
 
-        connect(cboxArch, SIGNAL(currentIndexChanged(QString)), this, SLOT(arch_Booter_patchChange()));
+        connect(cboxArch,
+                SIGNAL(currentTextChanged(QString)),
+                this,
+                SLOT(arch_Booter_patchChange()));
         c_row = row;
 
         ui->table_Booter_patch->setCellWidget(row, column, cboxArch);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1298</width>
-    <height>807</height>
+    <width>1626</width>
+    <height>813</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -841,7 +841,7 @@ This works around firmware that provide a BGRT table but fail to handle screen u
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1912,7 +1912,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -9905,8 +9905,8 @@ Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algor
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1298</width>
-     <height>24</height>
+     <width>1626</width>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
