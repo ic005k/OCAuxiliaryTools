@@ -1912,7 +1912,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1924,6 +1924,14 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <layout class="QGridLayout" name="gridLayout_12">
             <item row="0" column="0" colspan="5">
              <widget class="QTableWidget" name="table_kernel_add">
+              <property name="styleSheet">
+               <string notr="true">QTableWidget::item::selected     
+{
+    color:white;                       
+    background:rgb(0, 124, 221);               
+}
+</string>
+              </property>
               <property name="rowCount">
                <number>0</number>
               </property>
@@ -9906,7 +9914,7 @@ Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algor
      <x>0</x>
      <y>0</y>
      <width>1626</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

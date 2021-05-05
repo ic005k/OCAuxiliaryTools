@@ -6164,6 +6164,20 @@ void MainWindow::init_MainUI()
     pTrailingAction->setIcon(QIcon(":/icon/ok.png"));
 
     init_InitialValue();
+    init_TableStyle();
+}
+
+void MainWindow::init_TableStyle()
+{
+    listOfTableWidget.clear();
+    listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
+    for (int i = 0; i < listOfTableWidget.count(); i++) {
+        QTableWidget* t;
+        t = (QTableWidget*)listOfTableWidget.at(i);
+        QString strStyle = "QTableWidget::item::selected{color : white;background : rgb(0, 124, 221);}";
+
+        t->setStyleSheet(strStyle);
+    }
 }
 
 void MainWindow::init_InitialValue()
@@ -8257,7 +8271,7 @@ void MainWindow::goResultsTable(QString objName, int index)
                             }
 
                             QTableWidget* w = (QTableWidget*)listOfTableWidget.at(k);
-                            w->setFocus();
+
                             w->clearSelection();
                             w->setCurrentCell(row, col);
                         }
@@ -8551,6 +8565,8 @@ void MainWindow::goResults(int index)
     clearLineEditMarker();
     clearComboBoxMarker();
     clearTableHeaderMarker();
+
+    removeAllLineEdit();
 
     goResultsCheckbox(objName);
 

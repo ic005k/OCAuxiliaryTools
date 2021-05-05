@@ -35,6 +35,7 @@ public:
     void findNVRAM(QTableWidget* t, QString findText);
 
     void set_nv_key(QString key, QString dataType);
+
 public slots:
     void on_GenerateEFI();
     void on_btnExportMaster();

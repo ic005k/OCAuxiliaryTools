@@ -263,6 +263,7 @@ public:
     QString getMacInfo(const QString& cmd);
 
     int getTextWidth(QString str, QWidget* w);
+    void init_TableStyle();
 public slots:
 
     void on_actionFind_triggered();
