@@ -4926,6 +4926,12 @@ void MainWindow::closeEvent(QCloseEvent* event)
         Reg.setValue(QString::number(i), ui->cboxFind->itemText(i));
     }
 
+    // 窗口位置和大小
+    Reg.setValue("x", this->x());
+    Reg.setValue("y", this->y());
+    Reg.setValue("width", this->width());
+    Reg.setValue("height", this->height());
+
     file.close();
 
     if (this->isWindowModified()) {
@@ -6083,7 +6089,6 @@ void MainWindow::init_MainUI()
     clearTextsAction = new QAction(this);
     clearTextsAction->setToolTip(tr("Clear search history"));
     clearTextsAction->setIcon(QIcon(":/icon/clear.png"));
-    //ui->cboxFind->lineEdit()->addAction(clearTextsAction, QLineEdit::TrailingPosition);
     ui->cboxFind->lineEdit()->addAction(clearTextsAction, QLineEdit::LeadingPosition);
     connect(clearTextsAction, SIGNAL(triggered()), this, SLOT(clearFindTexts()));
 
@@ -6095,6 +6100,25 @@ void MainWindow::init_MainUI()
     for (int i = 0; i < textTotal; i++) {
         ui->cboxFind->addItem(Reg.value(QString::number(i)).toString());
     }
+
+    // 读取窗口的位置和大小
+    int x, y, w, h;
+    x = Reg.value("x", "0").toInt();
+    y = Reg.value("y", "0").toInt();
+    w = Reg.value("width", "1366").toInt();
+    h = Reg.value("height", "768").toInt();
+    if (x < 0) {
+        w = w + x;
+        x = 0;
+    }
+    if (y < 0) {
+        h = h + y;
+        y = 0;
+    }
+    QRect rect(x, y, w, h);
+    move(rect.topLeft());
+    resize(rect.size());
+
     file.close();
     ui->cboxFind->setCurrentText("");
     if (textTotal > 0)
