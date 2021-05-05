@@ -55,8 +55,6 @@ MainWindow::MainWindow(QWidget* parent)
     else
         mac = true;
 
-    this->resize(1200, 650);
-
 #endif
 
 #ifdef Q_OS_WIN32
@@ -6105,8 +6103,8 @@ void MainWindow::init_MainUI()
     int x, y, w, h;
     x = Reg.value("x", "0").toInt();
     y = Reg.value("y", "0").toInt();
-    w = Reg.value("width", "1366").toInt();
-    h = Reg.value("height", "768").toInt();
+    w = Reg.value("width", "1200").toInt();
+    h = Reg.value("height", "650").toInt();
     if (x < 0) {
         w = w + x;
         x = 0;
@@ -6720,9 +6718,9 @@ void MainWindow::on_table_Booter_patch_cellClicked(int row, int column)
         cboxArch->addItem("");
 
         connect(cboxArch,
-                SIGNAL(currentTextChanged(QString)),
-                this,
-                SLOT(arch_Booter_patchChange()));
+            SIGNAL(currentTextChanged(QString)),
+            this,
+            SLOT(arch_Booter_patchChange()));
         c_row = row;
 
         ui->table_Booter_patch->setCellWidget(row, column, cboxArch);
