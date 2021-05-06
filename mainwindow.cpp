@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210509";
+    CurVerison = "20210510";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -6078,7 +6078,7 @@ void MainWindow::init_MainUI()
     ui->toolBar->addWidget(ui->cboxFind);
     ui->cboxFind->lineEdit()->setClearButtonEnabled(true);
     ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
-    connect(ui->cboxFind->lineEdit(), &QLineEdit::returnPressed, this, &MainWindow::on_actionFind_triggered);
+    connect(ui->cboxFind->lineEdit(), &QLineEdit::returnPressed, this, &MainWindow::on_actionGo_to_the_next_triggered);
 
     if (win)
         setComboBoxStyle(ui->cboxFind);
@@ -8516,7 +8516,7 @@ void MainWindow::goResultsTableHeader(QString objName)
                         for (int x = 0; x < w->columnCount(); x++) {
                             QString strColumn = w->horizontalHeaderItem(x)->text();
                             if (strColumn == ui->listFind->currentItem()->text()) {
-                                w->setFocus();
+
                                 w->clearSelection();
 
                                 brushTableHeaderBackground = w->horizontalHeaderItem(x)->background();
@@ -8630,8 +8630,8 @@ void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1)
         }
     }
 
-    //if (!Initialization)
-    //    on_actionFind_triggered();
+    if (!Initialization)
+        on_actionFind_triggered();
 }
 
 void MainWindow::clearCheckBoxMarker()
