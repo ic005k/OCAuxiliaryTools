@@ -6080,9 +6080,9 @@ void MainWindow::init_MainUI()
     ui->cboxFind->lineEdit()->setClearButtonEnabled(true);
     ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
     connect(ui->cboxFind->lineEdit(),
-            &QLineEdit::returnPressed,
-            this,
-            &MainWindow::on_actionFind_triggered);
+        &QLineEdit::returnPressed,
+        this,
+        &MainWindow::on_actionFind_triggered);
 
     if (win)
         setComboBoxStyle(ui->cboxFind);
@@ -8041,10 +8041,8 @@ void MainWindow::on_actionFind_triggered()
 
     if (listNameResults.count() > 0) {
         ui->dockFind->show();
-
+        FindTextChange = false;
         ui->listFind->setCurrentRow(0);
-
-        goResults(0);
 
         if (red < 55) {
 
@@ -8061,8 +8059,6 @@ void MainWindow::on_actionFind_triggered()
     }
 
     this->setWindowModified(curWinModi);
-
-    FindTextChange = false;
 }
 
 void MainWindow::setPalette(QWidget* w, QColor backColor, QColor textColor)
@@ -8612,6 +8608,8 @@ void MainWindow::on_cboxFind_currentIndexChanged(int index)
 
 void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1)
 {
+    FindTextChange = true;
+
     if (arg1.trimmed() == "") {
         ui->lblCount->setText("0");
         listNameResults.clear();
@@ -8640,11 +8638,6 @@ void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1)
             setPalette(ui->cboxFind, Qt::white, Qt::black);
         }
     }
-
-    FindTextChange = true;
-
-    //if (!Initialization)
-    //    on_actionFind_triggered();
 }
 
 void MainWindow::clearCheckBoxMarker()
