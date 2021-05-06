@@ -256,6 +256,7 @@ void MainWindow::openFile(QString PlistFileName)
     openFileAfter();
 
     this->setWindowModified(false);
+    FindTextChange = true;
 }
 
 void MainWindow::openFileAfter()
@@ -6078,7 +6079,10 @@ void MainWindow::init_MainUI()
     ui->toolBar->addWidget(ui->cboxFind);
     ui->cboxFind->lineEdit()->setClearButtonEnabled(true);
     ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
-    connect(ui->cboxFind->lineEdit(), &QLineEdit::returnPressed, this, &MainWindow::on_actionGo_to_the_next_triggered);
+    connect(ui->cboxFind->lineEdit(),
+            &QLineEdit::returnPressed,
+            this,
+            &MainWindow::on_actionFind_triggered);
 
     if (win)
         setComboBoxStyle(ui->cboxFind);
@@ -7983,6 +7987,11 @@ void MainWindow::findTabText(QString findText)
 
 void MainWindow::on_actionFind_triggered()
 {
+    if (!FindTextChange) {
+        on_actionGo_to_the_next_triggered();
+        return;
+    }
+
     bool curWinModi = this->isWindowModified();
 
     QString findText = ui->cboxFind->currentText().trimmed().toLower();
@@ -8052,6 +8061,8 @@ void MainWindow::on_actionFind_triggered()
     }
 
     this->setWindowModified(curWinModi);
+
+    FindTextChange = false;
 }
 
 void MainWindow::setPalette(QWidget* w, QColor backColor, QColor textColor)
@@ -8630,8 +8641,10 @@ void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1)
         }
     }
 
-    if (!Initialization)
-        on_actionFind_triggered();
+    FindTextChange = true;
+
+    //if (!Initialization)
+    //    on_actionFind_triggered();
 }
 
 void MainWindow::clearCheckBoxMarker()
