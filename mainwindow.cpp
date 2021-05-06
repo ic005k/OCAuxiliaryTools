@@ -6008,13 +6008,12 @@ void MainWindow::init_HelpMenu()
         ui->btnHelp->setIconVisibleInMenu(false);
     ui->btnHelp->setIcon(QIcon(":/icon/doc.png"));
     ui->toolBar->addAction(ui->btnHelp);
+    ui->toolBar->addSeparator();
 
     // Bug Report
     if (mac || osx1012)
         ui->actionBug_Report->setIconVisibleInMenu(false);
     ui->actionBug_Report->setIcon(QIcon(":/icon/about.png"));
-
-    ui->toolBar->addSeparator();
 }
 
 void MainWindow::init_UndoRedo()
@@ -10261,4 +10260,31 @@ void MainWindow::on_editDatPasswordHash_textChanged(const QString& arg1)
 void MainWindow::on_editDatPasswordSalt_textChanged(const QString& arg1)
 {
     ui->editDatPasswordSalt->setToolTip(QString::number(arg1.count() / 2) + " Bytes");
+}
+
+void MainWindow::openDir(QString strDir)
+{
+    QFileInfo appInfo(qApp->applicationDirPath());
+    QString dirpath = appInfo.filePath() + strDir;
+    QString dir = "file:" + dirpath;
+    QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
+}
+void MainWindow::on_btnOpenACPIDir_clicked()
+{
+    openDir("/Database/EFI/OC/ACPI");
+}
+
+void MainWindow::on_btnOpenDriversDir_clicked()
+{
+    openDir("/Database/EFI/OC/Drivers");
+}
+
+void MainWindow::on_btnOpenToolsDir_clicked()
+{
+    openDir("/Database/EFI/OC/Tools");
+}
+
+void MainWindow::on_btnOpenKextDir_clicked()
+{
+    openDir("/Database/EFI/OC/Kexts");
 }

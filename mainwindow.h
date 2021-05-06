@@ -264,6 +264,7 @@ public:
 
     int getTextWidth(QString str, QWidget* w);
     void init_TableStyle();
+    void openDir(QString strDir);
 public slots:
 
     void on_actionFind_triggered();
@@ -747,6 +748,14 @@ private slots:
     void PickerAttributes();
     void ExposeSensitiveData();
     void ScanPolicy();
+
+    void on_btnOpenACPIDir_clicked();
+
+    void on_btnOpenDriversDir_clicked();
+
+    void on_btnOpenToolsDir_clicked();
+
+    void on_btnOpenKextDir_clicked();
 
 private:
     void acpi_cellDoubleClicked();

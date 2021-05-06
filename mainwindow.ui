@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1626</width>
-    <height>813</height>
+    <width>1298</width>
+    <height>794</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -104,7 +104,29 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="0" column="0" colspan="3">
+            <item row="1" column="1">
+             <widget class="QToolButton" name="btnACPIAdd_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" colspan="4">
              <widget class="QTableWidget" name="table_acpi_add">
               <property name="toolTip">
                <string notr="true">ACPI (Advanced Configuration and Power Interface) is an open standard to discover and configure computer hardware.
@@ -179,29 +201,7 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="QToolButton" name="btnACPIAdd_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
+            <item row="1" column="3">
              <spacer name="horizontalSpacer">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -213,6 +213,28 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="1" column="2">
+             <widget class="QToolButton" name="btnOpenACPIDir">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/opendb.png</normaloff>:/icon/opendb.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -1912,7 +1934,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1922,7 +1944,64 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_12">
-            <item row="0" column="0" colspan="5">
+            <item row="1" column="0">
+             <widget class="QToolButton" name="btnKernelAdd_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>660</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="1">
+             <widget class="QToolButton" name="btnKernelAdd_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" colspan="6">
              <widget class="QTableWidget" name="table_kernel_add">
               <property name="styleSheet">
                <string notr="true">QTableWidget::item::selected     
@@ -1946,50 +2025,6 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               <column/>
               <column/>
               <column/>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QToolButton" name="btnKernelAdd_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QToolButton" name="btnKernelAdd_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
              </widget>
             </item>
             <item row="1" column="2">
@@ -2037,17 +2072,26 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
              </widget>
             </item>
             <item row="1" column="4">
-             <spacer name="horizontalSpacer_7">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+             <widget class="QToolButton" name="btnOpenKextDir">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
               </property>
-              <property name="sizeHint" stdset="0">
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/opendb.png</normaloff>:/icon/opendb.png</iconset>
+              </property>
+              <property name="iconSize">
                <size>
-                <width>660</width>
+                <width>20</width>
                 <height>20</height>
                </size>
               </property>
-             </spacer>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -3016,14 +3060,14 @@ The behaviour corresponds to -legacy kernel boot argument.
        <attribute name="title">
         <string>Misc</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_16">
-        <item row="1" column="0">
+       <layout class="QGridLayout" name="gridLayout_22">
+        <item row="0" column="0">
          <widget class="QTabWidget" name="tabMisc">
           <property name="tabShape">
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5257,8 +5301,8 @@ VirtualSMC通过在NVRAM和RTC中保存磁盘加密密钥分割来执行验证�
            <attribute name="title">
             <string>Tools</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_22">
-            <item row="0" column="0" colspan="3">
+           <layout class="QGridLayout" name="gridLayout_16">
+            <item row="0" column="0" colspan="4">
              <widget class="QTableWidget" name="tableTools">
               <property name="columnCount">
                <number>8</number>
@@ -5318,6 +5362,28 @@ VirtualSMC通过在NVRAM和RTC中保存磁盘加密密钥分割来执行验证�
              </widget>
             </item>
             <item row="1" column="2">
+             <widget class="QToolButton" name="btnOpenToolsDir">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/opendb.png</normaloff>:/icon/opendb.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
              <spacer name="horizontalSpacer_12">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -5829,7 +5895,7 @@ A continuously updated variable list can be found in a corresponding document: N
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -7949,7 +8015,7 @@ Enable this option to be able to see all the boot options when having multiple d
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>7</number>
+              <number>3</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -8698,6 +8764,28 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
                 </widget>
                </item>
                <item row="1" column="2">
+                <widget class="QToolButton" name="btnOpenDriversDir">
+                 <property name="font">
+                  <font>
+                   <pointsize>13</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>AddItem</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="qtocc.qrc">
+                   <normaloff>:/icon/opendb.png</normaloff>:/icon/opendb.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
                 <spacer name="horizontalSpacer_17">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -9913,7 +10001,7 @@ Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algor
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1626</width>
+     <width>1298</width>
      <height>24</height>
     </rect>
    </property>
