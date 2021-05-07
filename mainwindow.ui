@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -3067,7 +3067,7 @@ The behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -4563,7 +4563,14 @@ Third party drivers may introduce additional security (and performance) consider
                     </property>
                    </widget>
                   </item>
-                  <item row="4" column="1">
+                  <item row="2" column="0">
+                   <widget class="QToolButton" name="btnGetPassHash">
+                    <property name="text">
+                     <string>Generate password hash and password salt</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
                    <widget class="QLineEdit" name="editPassInput">
                     <property name="maximumSize">
                      <size>
@@ -4576,14 +4583,7 @@ Third party drivers may introduce additional security (and performance) consider
                     </property>
                    </widget>
                   </item>
-                  <item row="4" column="0">
-                   <widget class="QToolButton" name="btnGetPassHash">
-                    <property name="text">
-                     <string>Generate password hash and password salt</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="2">
+                  <item row="2" column="2">
                    <widget class="QProgressBar" name="progressBar">
                     <property name="maximumSize">
                      <size>
@@ -5487,7 +5487,7 @@ A continuously updated variable list can be found in a corresponding document: N
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>2</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>

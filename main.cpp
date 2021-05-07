@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
 
     QFont f;
     f.setFamily("Microsoft YaHei UI");
+    f.setPixelSize(12);
     a->setFont(f);
 #endif
 

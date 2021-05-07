@@ -46,10 +46,7 @@ MainWindow::MainWindow(QWidget* parent)
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
 
-    QFont font;
-
 #ifdef Q_OS_MAC
-    font.setPixelSize(12);
 
 #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
     osx1012 = true;
@@ -64,13 +61,12 @@ MainWindow::MainWindow(QWidget* parent)
 
 #ifdef Q_OS_WIN32
     reg_win();
-    font.setPixelSize(18);
+
     win = true;
 #endif
 
 #ifdef Q_OS_LINUX
     ui->actionMountEsp->setEnabled(false);
-    font.setPixelSize(12);
 
     linuxOS = true;
 #endif
@@ -5801,7 +5797,7 @@ void MainWindow::init_listMainSub()
     ui->listMain->setStyleSheet(listStyle);
     ui->listSub->setStyleSheet(listStyle);
 
-    int iSize = 32;
+    int iSize = 25;
     ui->listMain->setIconSize(QSize(iSize, iSize));
 
     if (win) {
@@ -6063,7 +6059,7 @@ void MainWindow::init_MainUI()
     orgLabelStyle = ui->label->styleSheet();
     orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
 
-    int iSize = 32;
+    int iSize = 25;
     ui->toolBar->setIconSize(QSize(iSize, iSize));
 
     init_listMainSub();
