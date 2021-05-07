@@ -173,9 +173,9 @@ void MainWindow::setUIMargin()
     ui->gridLayout_18->setMargin(0);
     ui->gridLayout_19->setMargin(0);
 
-    ui->gridLayout_54->setMargin(0);
+    //ui->gridLayout_54->setMargin(0);
     ui->gridLayout_32->setMargin(0);
-    ui->gridLayout_41->setMargin(0);
+    //ui->gridLayout_41->setMargin(0);
     ui->gridLayout_37->setMargin(0);
 
     ui->gridLayout_29->setMargin(0);
@@ -184,8 +184,8 @@ void MainWindow::setUIMargin()
 
     ui->gridLayout_69->setMargin(0);
 
-    ui->gridLayout_41->setMargin(0);
-    ui->gridLayout_41->setSpacing(5);
+    //ui->gridLayout_41->setMargin(0);
+    //ui->gridLayout_41->setSpacing(5);
 }
 
 void MainWindow::recentOpen(QString filename)
