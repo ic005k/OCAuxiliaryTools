@@ -40,6 +40,7 @@ SOURCES += \
     commands.cpp \
     dlgMountESP.cpp \
     dlgOCValidate.cpp \
+    dlgParameters.cpp \
     dlgdatabase.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -59,6 +60,7 @@ HEADERS += \
     commands.h \
     dlgMountESP.h \
     dlgOCValidate.h \
+    dlgParameters.h \
     dlgdatabase.h \
     mainwindow.h \
     myapp.h \
@@ -73,6 +75,7 @@ FORMS += \
     aboutdialog.ui \
     dlgMountESP.ui \
     dlgOCValidate.ui \
+    dlgParameters.ui \
     dlgdatabase.ui \
     mainwindow.ui
 

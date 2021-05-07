@@ -39,10 +39,12 @@
 #include "aboutdialog.h"
 #include "dlgMountESP.h"
 #include "dlgOCValidate.h"
+#include "dlgParameters.h"
 #include "dlgdatabase.h"
 #include "recentfiles.h"
 #include "tooltip.h"
 #include "ui_dlgMountESP.h"
+#include "ui_dlgParameters.h"
 
 #ifdef Q_OS_WIN32
 #include <stdio.h>
@@ -63,6 +65,11 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
     Ui::MainWindow* ui;
+
+    QVector<QCheckBox*> chk_ExposeSensitiveData;
+
+    QVector<QCheckBox*> chk_PickerAttributes;
+    QVector<QCheckBox*> chk_Target;
 
     QVector<QTabWidget*> mainTabList;
     void initScanPolicyValue();
@@ -96,6 +103,7 @@ public:
     void getValue(QVariantMap map, QWidget* tab);
     QVariantMap setValue(QVariantMap map, QWidget* tab);
     dlgOCValidate* dlgOCV;
+    dlgParameters* dlgPar;
 
     bool lineEditEnter = false;
     bool RefreshAllDatabase = false;
@@ -266,7 +274,8 @@ public:
     void init_TableStyle();
     void openDir(QString strDir);
 public slots:
-
+    void DisplayLevel();
+    void ScanPolicy();
     void on_actionFind_triggered();
     void on_btnNVRAMAdd_Add_clicked();
 
@@ -284,9 +293,11 @@ protected:
     void contextMenuEvent(QContextMenuEvent* event) override;
 #endif // QT_NO_CONTEXTMENU
 
+protected slots:
+
 private slots:
     void Target();
-    void DisplayLevel();
+
     void readResultPassHash();
     void clearFindTexts();
     void copyText(QListWidget* listW);
@@ -747,7 +758,6 @@ private slots:
     void on_editDatPasswordSalt_textChanged(const QString& arg1);
     void PickerAttributes();
     void ExposeSensitiveData();
-    void ScanPolicy();
 
     void on_btnOpenACPIDir_clicked();
 
@@ -756,6 +766,10 @@ private slots:
     void on_btnOpenToolsDir_clicked();
 
     void on_btnOpenKextDir_clicked();
+
+    void on_btnDisplayLevel_clicked();
+
+    void on_btnScanPolicy_clicked();
 
 private:
     void acpi_cellDoubleClicked();
@@ -845,11 +859,7 @@ private:
     void method(QVector<unsigned int> nums, unsigned int sum, QVector<unsigned int> list, int index);
 
     QVector<QCheckBox*> chk;
-    QVector<QCheckBox*> chk_ExposeSensitiveData;
-    QVector<QCheckBox*> chk_ScanPolicy;
-    QVector<QCheckBox*> chk_PickerAttributes;
-    QVector<QCheckBox*> chk_Target;
-    QVector<QCheckBox*> chkDisplayLevel;
+
     QVector<unsigned int> v;
 
     unsigned int vd1, vd2, vd3, vd4, vd5, vd6, vd7, vd8, vd9, vd10, vd11, vd12,

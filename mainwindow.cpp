@@ -25,6 +25,8 @@ QTableWidget* tableDatabase;
 QRegExp regx("[A-Fa-f0-9]{0,1024}");
 QRegExp regxNumber("^-?\[0-9]*$");
 extern Method* mymethod;
+QVector<QCheckBox*> chkDisplayLevel;
+QVector<QCheckBox*> chk_ScanPolicy;
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -36,7 +38,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210510";
+    CurVerison = "20210511";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -79,6 +81,7 @@ MainWindow::MainWindow(QWidget* parent)
     aboutDlg = new aboutDialog(this);
     myDatabase = new dlgDatabase(this);
     dlgOCV = new dlgOCValidate(this);
+    dlgPar = new dlgParameters(this);
 
     QDir dir;
     if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) { }
@@ -639,7 +642,6 @@ void MainWindow::initui_dp()
 
     // Add
     ui->table_dp_add0->setColumnWidth(0, 475);
-    ui->table_dp_add0->setMinimumWidth(500);
 
     id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
@@ -648,7 +650,6 @@ void MainWindow::initui_dp()
     ui->table_dp_add0->horizontalHeader()->setStretchLastSection(true);
 
     ui->table_dp_add->setColumnWidth(0, 300);
-    ui->table_dp_add->setMinimumWidth(700);
 
     id0 = new QTableWidgetItem(tr("Key"));
     ui->table_dp_add->setHorizontalHeaderItem(0, id0);
@@ -664,9 +665,8 @@ void MainWindow::initui_dp()
     ui->table_dp_add->horizontalHeader()->setStretchLastSection(true);
 
     // Delete
-
     ui->table_dp_del0->setColumnWidth(0, 500);
-    ui->table_dp_del0->setMinimumWidth(400);
+
     id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_del0->setHorizontalHeaderItem(0, id0);
 
@@ -6058,7 +6058,7 @@ void MainWindow::init_MainUI()
     orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
     orgLineEditStyle = ui->editBID->styleSheet();
     orgLabelStyle = ui->label->styleSheet();
-    orgCheckBoxStyle = ui->chk1->styleSheet();
+    orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
 
     int iSize = 32;
     ui->toolBar->setIconSize(QSize(iSize, iSize));
@@ -6219,30 +6219,6 @@ void MainWindow::init_InitialValue()
         connect(chk_Target.at(i), &QCheckBox::clicked, this, &MainWindow::Target);
     }
 
-    chkDisplayLevel.clear();
-    chkDisplayLevel.append(ui->chkD1);
-    chkDisplayLevel.append(ui->chkD2);
-    chkDisplayLevel.append(ui->chkD3);
-    chkDisplayLevel.append(ui->chkD4);
-    chkDisplayLevel.append(ui->chkD5);
-    chkDisplayLevel.append(ui->chkD6);
-    chkDisplayLevel.append(ui->chkD7);
-    chkDisplayLevel.append(ui->chkD8);
-    chkDisplayLevel.append(ui->chkD9);
-    chkDisplayLevel.append(ui->chkD10);
-    chkDisplayLevel.append(ui->chkD11);
-    chkDisplayLevel.append(ui->chkD12);
-    chkDisplayLevel.append(ui->chkD13);
-    chkDisplayLevel.append(ui->chkD14);
-    chkDisplayLevel.append(ui->chkD15);
-    chkDisplayLevel.append(ui->chkD16);
-    chkDisplayLevel.append(ui->chkD17);
-    chkDisplayLevel.append(ui->chkD18);
-    chkDisplayLevel.append(ui->chkD19);
-    for (int i = 0; i < chkDisplayLevel.count(); i++) {
-        connect(chkDisplayLevel.at(i), &QCheckBox::clicked, this, &MainWindow::DisplayLevel);
-    }
-
     chk_PickerAttributes.clear();
     chk_PickerAttributes.append(ui->chkPA1);
     chk_PickerAttributes.append(ui->chkPA2);
@@ -6262,27 +6238,6 @@ void MainWindow::init_InitialValue()
     chk_ExposeSensitiveData.append(ui->chk08);
     for (int i = 0; i < chk_ExposeSensitiveData.count(); i++) {
         connect(chk_ExposeSensitiveData.at(i), &QCheckBox::clicked, this, &MainWindow::ExposeSensitiveData);
-    }
-
-    chk_ScanPolicy.clear();
-    chk_ScanPolicy.append(ui->chk1);
-    chk_ScanPolicy.append(ui->chk2);
-    chk_ScanPolicy.append(ui->chk3);
-    chk_ScanPolicy.append(ui->chk4);
-    chk_ScanPolicy.append(ui->chk5);
-    chk_ScanPolicy.append(ui->chk6);
-    chk_ScanPolicy.append(ui->chk7);
-    chk_ScanPolicy.append(ui->chk8);
-    chk_ScanPolicy.append(ui->chk9);
-    chk_ScanPolicy.append(ui->chk10);
-    chk_ScanPolicy.append(ui->chk11);
-    chk_ScanPolicy.append(ui->chk12);
-    chk_ScanPolicy.append(ui->chk13);
-    chk_ScanPolicy.append(ui->chk14);
-    chk_ScanPolicy.append(ui->chk15);
-    chk_ScanPolicy.append(ui->chk16);
-    for (int i = 0; i < chk_ScanPolicy.count(); i++) {
-        connect(chk_ScanPolicy.at(i), &QCheckBox::clicked, this, &MainWindow::ScanPolicy);
     }
 }
 
@@ -8181,7 +8136,7 @@ void MainWindow::goResultsCheckbox(QString objName)
                 for (int k = 0; k < listOfCheckBox.count(); k++) {
 
                     if (listOfCheckBox.at(k)->objectName() == name) {
-                        orgCheckBoxStyle = ui->chk1->styleSheet();
+                        orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
                         QString style = "QCheckBox{background-color:rgb(255,0,0);color:rgb(255,255,255);}";
                         QCheckBox* w = (QCheckBox*)listOfCheckBox.at(k);
                         w->setStyleSheet(style);
@@ -10287,4 +10242,20 @@ void MainWindow::on_btnOpenToolsDir_clicked()
 void MainWindow::on_btnOpenKextDir_clicked()
 {
     openDir("/Database/EFI/OC/Kexts");
+}
+
+void MainWindow::on_btnDisplayLevel_clicked()
+{
+    dlgPar->setModal(true);
+    dlgPar->ui->gScanPolicy->setVisible(false);
+    dlgPar->ui->gDisplayLevel->setVisible(true);
+    dlgPar->show();
+}
+
+void MainWindow::on_btnScanPolicy_clicked()
+{
+    dlgPar->setModal(true);
+    dlgPar->ui->gScanPolicy->setVisible(true);
+    dlgPar->ui->gDisplayLevel->setVisible(false);
+    dlgPar->show();
 }
