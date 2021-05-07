@@ -5,6 +5,9 @@
 extern MainWindow* mw_one;
 extern QVector<QCheckBox*> chkDisplayLevel;
 extern QVector<QCheckBox*> chk_ScanPolicy;
+extern QVector<QCheckBox*> chk_PickerAttributes;
+extern QVector<QCheckBox*> chk_ExposeSensitiveData;
+extern QVector<QCheckBox*> chk_Target;
 
 dlgParameters::dlgParameters(QWidget* parent)
     : QDialog(parent)
@@ -58,6 +61,27 @@ dlgParameters::dlgParameters(QWidget* parent)
     for (int i = 0; i < chk_ScanPolicy.count(); i++) {
         connect(chk_ScanPolicy.at(i), &QCheckBox::clicked, this, &dlgParameters::slotScanPolicy);
     }
+
+    chk_PickerAttributes.clear();
+    chk_PickerAttributes.append(ui->chkPA1);
+    chk_PickerAttributes.append(ui->chkPA2);
+    chk_PickerAttributes.append(ui->chkPA3);
+    chk_PickerAttributes.append(ui->chkPA4);
+    chk_PickerAttributes.append(ui->chkPA5);
+    chk_PickerAttributes.append(ui->chkPA6);
+    chk_PickerAttributes.append(ui->chkPA7);
+    for (int i = 0; i < chk_PickerAttributes.count(); i++) {
+        connect(chk_PickerAttributes.at(i), &QCheckBox::clicked, this, &dlgParameters::slotPickerAttributes);
+    }
+
+    chk_ExposeSensitiveData.clear();
+    chk_ExposeSensitiveData.append(ui->chk01);
+    chk_ExposeSensitiveData.append(ui->chk02);
+    chk_ExposeSensitiveData.append(ui->chk04);
+    chk_ExposeSensitiveData.append(ui->chk08);
+    for (int i = 0; i < chk_ExposeSensitiveData.count(); i++) {
+        connect(chk_ExposeSensitiveData.at(i), &QCheckBox::clicked, this, &dlgParameters::slotExposeSensitiveData);
+    }
 }
 
 dlgParameters::~dlgParameters()
@@ -73,4 +97,14 @@ void dlgParameters::slotDisplayLevel()
 void dlgParameters::slotScanPolicy()
 {
     mw_one->ScanPolicy();
+}
+
+void dlgParameters::slotPickerAttributes()
+{
+    mw_one->PickerAttributes();
+}
+
+void dlgParameters::slotExposeSensitiveData()
+{
+    mw_one->ExposeSensitiveData();
 }

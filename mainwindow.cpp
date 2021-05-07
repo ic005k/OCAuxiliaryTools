@@ -27,6 +27,9 @@ QRegExp regxNumber("^-?\[0-9]*$");
 extern Method* mymethod;
 QVector<QCheckBox*> chkDisplayLevel;
 QVector<QCheckBox*> chk_ScanPolicy;
+QVector<QCheckBox*> chk_PickerAttributes;
+QVector<QCheckBox*> chk_ExposeSensitiveData;
+QVector<QCheckBox*> chk_Target;
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -160,7 +163,7 @@ void MainWindow::setUIMargin()
     ui->gridLayout_14->setMargin(0);
 
     ui->gridLayout_16->setMargin(0);
-    ui->gridLayout_48->setMargin(0);
+    //ui->gridLayout_48->setMargin(0);
     ui->gridLayout_20->setMargin(0);
     ui->gridLayout_21->setMargin(0);
     ui->gridLayout_22->setMargin(0);
@@ -5763,6 +5766,8 @@ void MainWindow::init_hardware_info()
 
 void MainWindow::setListMainIcon()
 {
+    this->repaint();
+
     ui->listMain->setViewMode(QListWidget::IconMode);
 
     ui->listMain->clear();
@@ -5789,6 +5794,8 @@ void MainWindow::setListMainIcon()
         ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
         ui->listMain->item(8)->setSizeHint(QSize(getTextWidth(ui->listMain->item(8)->text(), ui->listMain), ui->listMain->maximumHeight() - 6));
     }
+
+    this->repaint();
 }
 
 void MainWindow::init_listMainSub()
@@ -6060,6 +6067,9 @@ void MainWindow::init_MainUI()
     orgLabelStyle = ui->label->styleSheet();
     orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
 
+    //ui->tabPlatformInfo->setHidden(true);
+    //ui->tabMisc->setHidden(true);
+
     int iSize = 32;
     ui->toolBar->setIconSize(QSize(iSize, iSize));
 
@@ -6217,27 +6227,6 @@ void MainWindow::init_InitialValue()
     chk_Target.append(ui->chkT7);
     for (int i = 0; i < chk_Target.count(); i++) {
         connect(chk_Target.at(i), &QCheckBox::clicked, this, &MainWindow::Target);
-    }
-
-    chk_PickerAttributes.clear();
-    chk_PickerAttributes.append(ui->chkPA1);
-    chk_PickerAttributes.append(ui->chkPA2);
-    chk_PickerAttributes.append(ui->chkPA3);
-    chk_PickerAttributes.append(ui->chkPA4);
-    chk_PickerAttributes.append(ui->chkPA5);
-    chk_PickerAttributes.append(ui->chkPA6);
-    chk_PickerAttributes.append(ui->chkPA7);
-    for (int i = 0; i < chk_PickerAttributes.count(); i++) {
-        connect(chk_PickerAttributes.at(i), &QCheckBox::clicked, this, &MainWindow::PickerAttributes);
-    }
-
-    chk_ExposeSensitiveData.clear();
-    chk_ExposeSensitiveData.append(ui->chk01);
-    chk_ExposeSensitiveData.append(ui->chk02);
-    chk_ExposeSensitiveData.append(ui->chk04);
-    chk_ExposeSensitiveData.append(ui->chk08);
-    for (int i = 0; i < chk_ExposeSensitiveData.count(); i++) {
-        connect(chk_ExposeSensitiveData.at(i), &QCheckBox::clicked, this, &MainWindow::ExposeSensitiveData);
     }
 }
 
@@ -9589,8 +9578,8 @@ void MainWindow::getCheckBoxValue(QVariantMap map, QWidget* tab)
                 t = true;
         }
         if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG"
-            && chkbox != ui->chk01 && chkbox != ui->chk02 && chkbox != ui->chk04
-            && chkbox != ui->chk08 && !t)
+
+            && !t)
 
             chkbox->setChecked(map[name].toBool());
     }
@@ -9717,10 +9706,7 @@ bool MainWindow::ExclusionCheckBox(QCheckBox* chkbox)
 {
     if (chkbox->text().trimmed().mid(0, 3) != "OC_"
         && chkbox->text().trimmed().mid(0, 5) != "DEBUG"
-        && chkbox != ui->chk01
-        && chkbox != ui->chk02
-        && chkbox != ui->chk04
-        && chkbox != ui->chk08
+
         && chkbox != ui->chkT1
         && chkbox != ui->chkT2
         && chkbox != ui->chkT3
@@ -10246,16 +10232,46 @@ void MainWindow::on_btnOpenKextDir_clicked()
 
 void MainWindow::on_btnDisplayLevel_clicked()
 {
-    dlgPar->setModal(true);
+
     dlgPar->ui->gScanPolicy->setVisible(false);
+    dlgPar->ui->gPickerAttributes->setVisible(false);
+    dlgPar->ui->gExposeSensitiveData->setVisible(false);
     dlgPar->ui->gDisplayLevel->setVisible(true);
+    dlgPar->resize(QSize(1, 1));
+    dlgPar->setModal(true);
     dlgPar->show();
 }
 
 void MainWindow::on_btnScanPolicy_clicked()
 {
-    dlgPar->setModal(true);
     dlgPar->ui->gScanPolicy->setVisible(true);
     dlgPar->ui->gDisplayLevel->setVisible(false);
+    dlgPar->ui->gPickerAttributes->setVisible(false);
+    dlgPar->ui->gExposeSensitiveData->setVisible(false);
+    dlgPar->resize(QSize(1, 1));
+    dlgPar->setModal(true);
+    dlgPar->show();
+}
+
+void MainWindow::on_btnPickerAttributes_clicked()
+{
+    dlgPar->ui->gScanPolicy->setVisible(false);
+    dlgPar->ui->gDisplayLevel->setVisible(false);
+    dlgPar->ui->gExposeSensitiveData->setVisible(false);
+    dlgPar->ui->gPickerAttributes->setVisible(true);
+    dlgPar->resize(QSize(1, 1));
+    dlgPar->setModal(true);
+    dlgPar->show();
+}
+
+void MainWindow::on_btnExposeSensitiveData_clicked()
+{
+    dlgPar->setModal(true);
+    dlgPar->ui->gScanPolicy->setVisible(false);
+    dlgPar->ui->gDisplayLevel->setVisible(false);
+    dlgPar->ui->gPickerAttributes->setVisible(false);
+    dlgPar->ui->gExposeSensitiveData->setVisible(true);
+    dlgPar->resize(QSize(1, 1));
+    dlgPar->setModal(true);
     dlgPar->show();
 }

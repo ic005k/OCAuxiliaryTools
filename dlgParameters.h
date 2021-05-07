@@ -19,6 +19,10 @@ private slots:
     void slotDisplayLevel();
     void slotScanPolicy();
 
+    void slotPickerAttributes();
+
+    void slotExposeSensitiveData();
+
 private:
 };
 

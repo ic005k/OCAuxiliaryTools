@@ -66,11 +66,6 @@ public:
     ~MainWindow();
     Ui::MainWindow* ui;
 
-    QVector<QCheckBox*> chk_ExposeSensitiveData;
-
-    QVector<QCheckBox*> chk_PickerAttributes;
-    QVector<QCheckBox*> chk_Target;
-
     QVector<QTabWidget*> mainTabList;
     void initScanPolicyValue();
     void initDisplayLevelValue();
@@ -276,6 +271,8 @@ public:
 public slots:
     void DisplayLevel();
     void ScanPolicy();
+    void PickerAttributes();
+    void ExposeSensitiveData();
     void on_actionFind_triggered();
     void on_btnNVRAMAdd_Add_clicked();
 
@@ -756,8 +753,6 @@ private slots:
     void on_btnImportMaster_triggered();
 
     void on_editDatPasswordSalt_textChanged(const QString& arg1);
-    void PickerAttributes();
-    void ExposeSensitiveData();
 
     void on_btnOpenACPIDir_clicked();
 
@@ -770,6 +765,10 @@ private slots:
     void on_btnDisplayLevel_clicked();
 
     void on_btnScanPolicy_clicked();
+
+    void on_btnPickerAttributes_clicked();
+
+    void on_btnExposeSensitiveData_clicked();
 
 private:
     void acpi_cellDoubleClicked();
