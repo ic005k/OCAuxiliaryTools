@@ -7037,7 +7037,7 @@ void MainWindow::on_listMain_itemSelectionChanged()
 
 int MainWindow::getTextWidth(QString str, QWidget* w)
 {
-    if (mac || osx1012)
+    if (!win)
         str = str + "    ";
 
     QFont myFont(w->font().family(), w->font().pointSize());
