@@ -5801,11 +5801,11 @@ void MainWindow::init_listMainSub()
     ui->listMain->setIconSize(QSize(iSize, iSize));
 
     if (win) {
-        ui->listMain->setMaximumHeight(75);
+        ui->listMain->setMaximumHeight(60);
         if (zh_cn)
-            ui->listSub->setMaximumHeight(60);
+            ui->listSub->setMaximumHeight(46);
         else
-            ui->listSub->setMaximumHeight(30);
+            ui->listSub->setMaximumHeight(23);
     }
 
     if (linuxOS) {
@@ -5822,6 +5822,12 @@ void MainWindow::init_listMainSub()
         else
             ui->listSub->setMaximumHeight(24);
     }
+
+    ui->listMain->setMaximumHeight(55);
+    if (zh_cn)
+        ui->listSub->setMaximumHeight(46);
+    else
+        ui->listSub->setMaximumHeight(23);
 
     ui->listMain->setViewMode(QListView::ListMode);
     ui->listSub->setViewMode(QListView::ListMode);
@@ -7031,7 +7037,7 @@ void MainWindow::on_listMain_itemSelectionChanged()
 
 int MainWindow::getTextWidth(QString str, QWidget* w)
 {
-    str = str + "    ";
+    str = str + "";
     QFont myFont(w->font().family(), w->font().pointSize());
 
     QFontMetrics fm(myFont);

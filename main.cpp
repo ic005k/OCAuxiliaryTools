@@ -9,7 +9,7 @@ MainWindow* mw_one;
 
 int main(int argc, char* argv[])
 {
-#ifdef Q_OS_LINUX
+    //#ifdef Q_OS_LINUX
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
 
@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 
 #endif
 
-#endif
+    //#endif
 
     // QApplication a(argc, argv);
     MyApplication* a = new MyApplication(argc, argv);
