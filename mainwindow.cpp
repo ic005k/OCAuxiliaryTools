@@ -163,7 +163,7 @@ void MainWindow::setUIMargin()
     ui->gridLayout_14->setMargin(0);
 
     ui->gridLayout_16->setMargin(0);
-    //ui->gridLayout_48->setMargin(0);
+
     ui->gridLayout_20->setMargin(0);
     ui->gridLayout_21->setMargin(0);
     ui->gridLayout_22->setMargin(0);
@@ -173,9 +173,8 @@ void MainWindow::setUIMargin()
     ui->gridLayout_18->setMargin(0);
     ui->gridLayout_19->setMargin(0);
 
-    //ui->gridLayout_54->setMargin(0);
     ui->gridLayout_32->setMargin(0);
-    //ui->gridLayout_41->setMargin(0);
+
     ui->gridLayout_37->setMargin(0);
 
     ui->gridLayout_29->setMargin(0);
@@ -183,9 +182,6 @@ void MainWindow::setUIMargin()
     ui->gridLayout_59->setMargin(0);
 
     ui->gridLayout_69->setMargin(0);
-
-    //ui->gridLayout_41->setMargin(0);
-    //ui->gridLayout_41->setSpacing(5);
 }
 
 void MainWindow::recentOpen(QString filename)
@@ -6066,9 +6062,6 @@ void MainWindow::init_MainUI()
     orgLineEditStyle = ui->editBID->styleSheet();
     orgLabelStyle = ui->label->styleSheet();
     orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
-
-    //ui->tabPlatformInfo->setHidden(true);
-    //ui->tabMisc->setHidden(true);
 
     int iSize = 32;
     ui->toolBar->setIconSize(QSize(iSize, iSize));

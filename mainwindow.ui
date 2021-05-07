@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1431</width>
-    <height>794</height>
+    <height>709</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -82,7 +82,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3328,14 +3328,8 @@ Note: This option may not work well with System text renderer. Setting a backgro
               <property name="title">
                <string/>
               </property>
-              <layout class="QGridLayout" name="gridLayout_73">
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_10">
+               <item>
                 <layout class="QGridLayout" name="gridLayout_58">
                  <item row="2" column="1" colspan="2">
                   <widget class="QComboBox" name="cboxLauncherOption">
@@ -3619,7 +3613,7 @@ Note 2 : While NVRAM resets executed from OpenCore would not typically erase the
                    </property>
                   </widget>
                  </item>
-                 <item row="14" column="0">
+                 <item row="12" column="2">
                   <widget class="QCheckBox" name="chkHideAuxiliary">
                    <property name="toolTip">
                     <string>An entry is considered auxiliary when at least one of the following applies:
@@ -3650,7 +3644,7 @@ To see all entries picker menu needs to be reloaded in extended mode by pressing
                    </property>
                   </widget>
                  </item>
-                 <item row="14" column="1">
+                 <item row="12" column="3">
                   <widget class="QCheckBox" name="chkPollAppleHotKeys">
                    <property name="toolTip">
                     <string>In addition to action hotkeys, which are partially described in PickerMode section and are normally handled by Apple BDS, there exist modifier keys, which are handled by operating system bootloader, namely boot.efi.
@@ -3693,7 +3687,7 @@ Such extensions include the support of tapping on keys in addition to holding an
                    </property>
                   </widget>
                  </item>
-                 <item row="14" column="2">
+                 <item row="13" column="2">
                   <widget class="QCheckBox" name="chkPickerAudioAssist">
                    <property name="toolTip">
                     <string>Description: Enable screen reader by default in the OpenCore picker.
@@ -3722,7 +3716,7 @@ Note: The screen reader requires working audio support. Refer to the UEFI Audio 
                    </property>
                   </widget>
                  </item>
-                 <item row="14" column="3">
+                 <item row="13" column="3">
                   <widget class="QCheckBox" name="chkShowPicker">
                    <property name="toolTip">
                     <string>Show simple boot picker to allow boot entry selection.
@@ -3750,86 +3744,49 @@ Note: The screen reader requires working audio support. Refer to the UEFI Audio 
            <attribute name="title">
             <string>Debug</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_45">
-            <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_25">
-              <item row="7" column="2">
-               <widget class="QCheckBox" name="chkT3">
-                <property name="text">
-                 <string>Enable logging to Data Hub</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="2">
-               <widget class="QCheckBox" name="chkDisableWatchDog">
-                <property name="toolTip">
-                 <string>Select firmwares may not succeed in quickly booting the operating system, especially in debug  mode, which results in watch dog timer aborting the process. 
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QGroupBox" name="groupBox_2">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <item>
+                <layout class="QGridLayout" name="gridLayout_25">
+                 <item row="2" column="2">
+                  <widget class="QCheckBox" name="chkDisableWatchDog">
+                   <property name="toolTip">
+                    <string>Select firmwares may not succeed in quickly booting the operating system, especially in debug  mode, which results in watch dog timer aborting the process. 
 
 This option turns off watch dog timer.
 ----
 某些固件可能无法成功快速启动操作系统，特别是在调试模式下，导致看门狗定时器中止进程。
 
 此选项可关闭看门狗定时器。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Select firmwares may not succeed in quickly booting the operating system, especially in debug
+                   </property>
+                   <property name="statusTip">
+                    <string> Select firmwares may not succeed in quickly booting the operating system, especially in debug
  mode, which results in watch dog timer aborting the process. This option turns off watch dog timer.</string>
-                </property>
-                <property name="text">
-                 <string>DisableWatchDog</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QLineEdit" name="editIntDisplayDelay">
-                <property name="maximumSize">
-                 <size>
-                  <width>120</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label_11">
-                <property name="toolTip">
-                 <string>The following logging targets are supported:
-
-• 0x01 (bit 0) — Enable logging, otherwise all log is discarded.
-• 0x02 (bit 1) — Enable basic console (onscreen) logging.
-• 0x04 (bit 2) — Enable logging to Data Hub.
-• 0x08 (bit 3) — Enable serial port logging.
-• 0x10 (bit 4) — Enable UEFI variable logging.
-• 0x20 (bit 5) — Enable non-volatile UEFI variable logging.
-• 0x40 (bit 6) — Enable logging to file.
-
-Console logging prints less than all the other variants. Depending on the build type (RELEASE, DEBUG, or NOOPT) different amount of logging may be read (from least to most).
-----
-支持以下日志记录目标：
-
-- 0x01 (bit 0) - 启用日志记录，否则所有日志将被丢弃。
-- 0x02 (bit 1) - 启用基本控制台(屏幕)日志记录。
-- 0x04(位2)  - 启用到数据中心的日志记录。
-- 0x08(位3)  - 启用串行端口记录。
-- 0x10 (位 4) - 启用 UEFI 变量记录。
-- 0x20 (位元 5) - 启用非易失性 UEFI 变量记录。
-- 0x40 (位 6) - 启用日志记录至文件。
-
-控制台日志记录的打印量比所有其他变量少。根据构建类型(RELEASE, DEBUG, 或 NOOPT)，可能会读取不同数量的日志记录(从最少到最多)。</string>
-                </property>
-                <property name="statusTip">
-                 <string>A bitmask (sum) of enabled logging targets. By default all the logging output is hidden, so this
- option is required to be set when debugging is necessary.</string>
-                </property>
-                <property name="text">
-                 <string>Target</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QCheckBox" name="chkSerialInit">
-                <property name="toolTip">
-                 <string>This option will perform serial port initialisation within OpenCore prior to enabling (any) debug logging. 
+                   </property>
+                   <property name="text">
+                    <string>DisableWatchDog</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLineEdit" name="editIntDisplayDelay">
+                   <property name="maximumSize">
+                    <size>
+                     <width>120</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QCheckBox" name="chkSerialInit">
+                   <property name="toolTip">
+                    <string>This option will perform serial port initialisation within OpenCore prior to enabling (any) debug logging. 
 
 Serial port configuration is defined via PCDs at compile time in gEfiMdeModulePkgTokenSpaceGuid GUID. 
 
@@ -3852,56 +3809,29 @@ See more details in Debugging section.
 - PcdSerialLineControl - 线路控制：无奇偶校验，8个数据位，1个停止位。
 
 详见调试部分。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Perform serial port initialisation.</string>
-                </property>
-                <property name="text">
-                 <string>SerialInit</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="0">
-               <widget class="QCheckBox" name="chkT4">
-                <property name="text">
-                 <string>Enable serial port logging</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QLineEdit" name="editIntTarget">
-                <property name="maximumSize">
-                 <size>
-                  <width>150</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="clearButtonEnabled">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="2">
-               <widget class="QLabel" name="lblTargetHex">
-                <property name="text">
-                 <string>0x00</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="editIntDisplayLevel">
-                <property name="maximumSize">
-                 <size>
-                  <width>160</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QCheckBox" name="chkApplePanic">
-                <property name="toolTip">
-                 <string>The file is saved as panic-YYYY-MM-DD-HHMMSS.txt. It is strongly recommended to have keepsyms=1 boot argument to see debug symbols in the panic log. In case it was not present kpdescribe.sh utility (bundled with OpenCore) may be used to partially recover the stacktrace.
+                   </property>
+                   <property name="statusTip">
+                    <string>Perform serial port initialisation.</string>
+                   </property>
+                   <property name="text">
+                    <string>SerialInit</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="editIntDisplayLevel">
+                   <property name="maximumSize">
+                    <size>
+                     <width>160</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QCheckBox" name="chkApplePanic">
+                   <property name="toolTip">
+                    <string>The file is saved as panic-YYYY-MM-DD-HHMMSS.txt. It is strongly recommended to have keepsyms=1 boot argument to see debug symbols in the panic log. In case it was not present kpdescribe.sh utility (bundled with OpenCore) may be used to partially recover the stacktrace.
 
 Development and debug kernels produce more helpful kernel panics. Consider downloading and installing KernelDebugKit from developer.apple.com when debugging a problem. To activate a development kernel you will need to add a kcsuffix=development boot argument. Use uname -a command to ensure that your current loaded kernel is a development (or a debug) kernel.
 
@@ -3910,113 +3840,85 @@ Development and debug kernels produce more helpful kernel panics. Consider downl
 文件保存为panic-YYYY-MM-DD-HHMMSS.txt。强烈建议使用 keepsyms=1 的启动参数来查看恐慌日志中的调试符号。如果它不存在，可以使用kpdescribe.sh工具（与OpenCore捆绑在一起）来部分恢复堆栈跟踪。
 
 开发和调试内核会产生更有用的内核恐慌。调试问题时，可以考虑从 developer.apple.com 下载并安装 KernelDebugKit。要激活开发内核，你需要添加kcsuffix=development引导参数。使用uname -a命令来确保你当前加载的内核是一个开发（或调试）内核。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Save macOS kernel panic to OpenCore root partition.</string>
-                </property>
-                <property name="text">
-                 <string>ApplePanic</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="0">
-               <widget class="QCheckBox" name="chkT1">
-                <property name="text">
-                 <string>Enable logging, otherwise all log is discarded</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="2">
-               <widget class="QCheckBox" name="chkT2">
-                <property name="text">
-                 <string>Enable basic console (onscreen) logging</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <widget class="QToolButton" name="btnDisplayLevel">
-                <property name="text">
-                 <string>Select</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="chkAppleDebug">
-                <property name="toolTip">
-                 <string>Description: Enable writing the boot.efi debug log to the OpenCore log.
+                   </property>
+                   <property name="statusTip">
+                    <string> Save macOS kernel panic to OpenCore root partition.</string>
+                   </property>
+                   <property name="text">
+                    <string>ApplePanic</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="3">
+                  <widget class="QToolButton" name="btnDisplayLevel">
+                   <property name="text">
+                    <string>Select</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QCheckBox" name="chkAppleDebug">
+                   <property name="toolTip">
+                    <string>Description: Enable writing the boot.efi debug log to the OpenCore log.
 
 Note: This option only applies to 10.15.4 and newer.
 ----
 说明：启用将 boot.efi 调试日志写入 OpenCore 日志。
 
 注：此选项仅适用于10.15.4及更新版本。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Enable boot.efi debug log saving to OpenCore log.</string>
-                </property>
-                <property name="text">
-                 <string>AppleDebug</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="0">
-               <widget class="QCheckBox" name="chkT5">
-                <property name="text">
-                 <string>Enable UEFI variable logging</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="2">
-               <widget class="QCheckBox" name="chkT6">
-                <property name="text">
-                 <string>Enable non-volatile UEFI variable logging</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QLabel" name="lblDisplayLevel">
-                <property name="text">
-                 <string>0x00000000</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_39">
-                <property name="toolTip">
-                 <string>Type: plist integer, 64 bit
+                   </property>
+                   <property name="statusTip">
+                    <string>Enable boot.efi debug log saving to OpenCore log.</string>
+                   </property>
+                   <property name="text">
+                    <string>AppleDebug</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QLabel" name="lblDisplayLevel">
+                   <property name="text">
+                    <string>0x00000000</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_39">
+                   <property name="toolTip">
+                    <string>Type: plist integer, 64 bit
 
 Description: EDK II debug level bitmask (sum) showed onscreen. Unless Target enables console (onscreen) printing, onscreen debug output will not be visible.
 ----
 类型：plist整数，64位
 
 描述：显示在屏幕上的EDK II调试级别的比特掩码之和。除非Target启用控制台（屏幕上）打印，否则屏幕上的调试输出将不可见。</string>
-                </property>
-                <property name="text">
-                 <string>DisplayLevel</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_9">
-                <property name="toolTip">
-                 <string>Delay in microseconds performed after every printed line visible onscreen (i.e. console).
+                   </property>
+                   <property name="text">
+                    <string>DisplayLevel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_9">
+                   <property name="toolTip">
+                    <string>Delay in microseconds performed after every printed line visible onscreen (i.e. console).
 
 ----
 
 在屏幕（即控制台）上可见的每一行打印后执行的延迟，单位为微秒。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Delay in microseconds performed after every printed line visible onscreen (i.e. console).</string>
-                </property>
-                <property name="text">
-                 <string>DisplayDelay</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QCheckBox" name="chkSysReport">
-                <property name="toolTip">
-                 <string>This option will create a SysReport directory on ESP partition unless it is already present. The directory will contain ACPI and SMBIOS dumps.
+                   </property>
+                   <property name="statusTip">
+                    <string>Delay in microseconds performed after every printed line visible onscreen (i.e. console).</string>
+                   </property>
+                   <property name="text">
+                    <string>DisplayDelay</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QCheckBox" name="chkSysReport">
+                   <property name="toolTip">
+                    <string>This option will create a SysReport directory on ESP partition unless it is already present. The directory will contain ACPI and SMBIOS dumps.
 
 Note: For security reasons SysReport option is not available in RELEASE builds. Use a DEBUG build if you need this option.
 
@@ -4025,23 +3927,133 @@ Note: For security reasons SysReport option is not available in RELEASE builds. 
 这个选项将在ESP分区上创建一个SysReport目录，除非它已经存在。该目录将包含ACPI和SMBIOS转储。
 
 注意：出于安全考虑，SysReport选项在RELEASE版本中是不可用的，如果您需要这个选项，请使用DEBUG版本。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Produce system report on ESP folder.</string>
-                </property>
-                <property name="text">
-                 <string>SysReport</string>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="0">
-               <widget class="QCheckBox" name="chkT7">
-                <property name="text">
-                 <string>Enable logging to file</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+                   </property>
+                   <property name="statusTip">
+                    <string>Produce system report on ESP folder.</string>
+                   </property>
+                   <property name="text">
+                    <string>SysReport</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_45">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_11">
+                 <property name="toolTip">
+                  <string>The following logging targets are supported:
+
+• 0x01 (bit 0) — Enable logging, otherwise all log is discarded.
+• 0x02 (bit 1) — Enable basic console (onscreen) logging.
+• 0x04 (bit 2) — Enable logging to Data Hub.
+• 0x08 (bit 3) — Enable serial port logging.
+• 0x10 (bit 4) — Enable UEFI variable logging.
+• 0x20 (bit 5) — Enable non-volatile UEFI variable logging.
+• 0x40 (bit 6) — Enable logging to file.
+
+Console logging prints less than all the other variants. Depending on the build type (RELEASE, DEBUG, or NOOPT) different amount of logging may be read (from least to most).
+----
+支持以下日志记录目标：
+
+- 0x01 (bit 0) - 启用日志记录，否则所有日志将被丢弃。
+- 0x02 (bit 1) - 启用基本控制台(屏幕)日志记录。
+- 0x04(位2)  - 启用到数据中心的日志记录。
+- 0x08(位3)  - 启用串行端口记录。
+- 0x10 (位 4) - 启用 UEFI 变量记录。
+- 0x20 (位元 5) - 启用非易失性 UEFI 变量记录。
+- 0x40 (位 6) - 启用日志记录至文件。
+
+控制台日志记录的打印量比所有其他变量少。根据构建类型(RELEASE, DEBUG, 或 NOOPT)，可能会读取不同数量的日志记录(从最少到最多)。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>A bitmask (sum) of enabled logging targets. By default all the logging output is hidden, so this
+ option is required to be set when debugging is necessary.</string>
+                 </property>
+                 <property name="text">
+                  <string>Target</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="editIntTarget">
+                 <property name="maximumSize">
+                  <size>
+                   <width>150</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="lblTargetHex">
+                 <property name="text">
+                  <string>0x00</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QCheckBox" name="chkT1">
+                 <property name="text">
+                  <string>Enable logging, otherwise all log is discarded</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QCheckBox" name="chkT2">
+                 <property name="text">
+                  <string>Enable basic console (onscreen) logging</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QCheckBox" name="chkT5">
+                 <property name="text">
+                  <string>Enable UEFI variable logging</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QCheckBox" name="chkT6">
+                 <property name="text">
+                  <string>Enable non-volatile UEFI variable logging</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QCheckBox" name="chkT4">
+                 <property name="text">
+                  <string>Enable serial port logging</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QCheckBox" name="chkT3">
+                 <property name="text">
+                  <string>Enable logging to Data Hub</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="0">
+                <widget class="QCheckBox" name="chkT7">
+                 <property name="text">
+                  <string>Enable logging to file</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -4049,7 +4061,7 @@ Note: For security reasons SysReport option is not available in RELEASE builds. 
            <attribute name="title">
             <string>Security</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_48">
+           <layout class="QGridLayout" name="gridLayout_47">
             <item row="0" column="0">
              <widget class="QGroupBox" name="groupBox_3">
               <property name="maximumSize">
@@ -4061,51 +4073,95 @@ Note: For security reasons SysReport option is not available in RELEASE builds. 
               <property name="title">
                <string/>
               </property>
-              <layout class="QGridLayout" name="gridLayout_65">
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
+              <layout class="QGridLayout" name="gridLayout_62">
                <item row="0" column="0">
-                <layout class="QGridLayout" name="gridLayout_46">
-                 <item row="5" column="0">
-                  <widget class="QCheckBox" name="chkAllowNvramReset">
-                   <property name="toolTip">
-                    <string>Description: Allow CMD+OPT+P+R handling and enable showing NVRAM Reset entry in OpenCore picker.
+                <widget class="QGroupBox" name="groupBox_4">
+                 <property name="title">
+                  <string/>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_48">
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_16">
+                    <property name="toolTip">
+                     <string>Valid values:
 
-Note 1 : It is known that some Lenovo laptops have a firmware bug, which makes them unbootable after performing NVRAM reset. See acidanthera/bugtracker#995 for more details.
+• Optional — require nothing, no vault is enforced, insecure.
 
-Note 2 : Resetting NVRAM will also erase any boot options not backed up using the bless command. For example,  Linux installations to custom locations not specified in BlessOverride.
+• Basic — require vault.plist file present in OC directory. This provides basic filesystem integrity verification and may protect from unintentional filesystem corruption.
+
+• Secure — require vault.sig signature file for vault.plist in OC directory. This includes Basic integrity checking but also attempts to build a trusted bootchain.
 
 ----
 
-描述：允许CMD+OPT+P+R处理，并启用在 OpenCore 引导选择器中显示NVRAM Reset条目。
+有效值：
 
-注1：已知部分联想笔记本存在固件bug，在执行NVRAM重置后无法启动。更多细节请参见 acidanthera/bugtracker#995。
+- Optional--不需要任何东西，不强制执行vault，不安全。
 
-注2：重置NVRAM也会清除任何没有使用bless命令备份的启动选项。例如，Linux安装到未在BlessOverride中指定的自定义位置。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Allow CMD+OPT+P+R handling and enable showing NVRAM Reset entry in boot picker.</string>
-                   </property>
-                   <property name="text">
-                    <string>AllowNvramReset</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0">
-                  <widget class="QLabel" name="label_110">
-                   <property name="text">
-                    <string>ExposeSensitiveData</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="2">
-                  <widget class="QLabel" name="label_45">
-                   <property name="toolTip">
-                    <string>Sets Apple Secure Boot hardware model and policy. 
+- Basic -- 要求在OC目录中存在vault.plist文件。这提供了基本的文件系统完整性验证，可以防止无意中的文件系统损坏。
+
+- Secure--需要OC目录下vault.sig签名文件。这包括基本的完整性检查，但也试图建立一个可信的引导链。</string>
+                    </property>
+                    <property name="statusTip">
+                     <string> Enables vaulting mechanism in OpenCore.</string>
+                    </property>
+                    <property name="text">
+                     <string>Vault</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QComboBox" name="cboxDmgLoading">
+                    <property name="editable">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_27">
+                    <property name="toolTip">
+                     <string>Valid values:
+
+• Disabled — loading DMG images will fail. Disabled policy will still let macOS Recovery to load in most cases as there usually are boot.efi files compatible with Apple Secure Boot. Manually downloaded DMG images stored in com.apple.recovery.boot directories will not load, however.
+
+• Signed — only Apple-signed DMG images will load. Due to Apple Secure Boot design Signed policy will let any Apple-signed macOS Recovery to load regardless of Apple Secure Boot state, which may not always be desired.
+
+• Any — any DMG images will mount as normal filesystems. Any policy is strongly not recommended and will cause a boot failure when Apple Secure Boot is activated.
+
+----
+
+有效值：
+
+- Disabled - 加载DMG镜像会失败。在大多数情况下，禁用策略仍会让 macOS Recovery 加载，因为通常有与 Apple Secure Boot 兼容的 boot.efi 文件。然而，存储在 com.apple.recovery.boot 目录中的手动下载的 DMG 映像将无法加载。
+
+- Signed - 仅加载苹果签名的DMG映像。由于苹果安全引导设计，签名策略将允许任何苹果签名的macOS恢复加载，而不管苹果安全引导状态如何，这可能并不总是理想的。
+
+- Any - 任何DMG映像都将作为普通文件系统加载。强烈不建议使用“Any”策略，并且在激活Apple Secure Boot时将导致启动失败。</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Define Disk Image (DMG) loading policy used for macOS Recovery.</string>
+                    </property>
+                    <property name="text">
+                     <string>DmgLoading</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="cboxVault">
+                    <property name="editable">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_45">
+                    <property name="toolTip">
+                     <string>Sets Apple Secure Boot hardware model and policy. 
 
 Specifying this value defines which operating systems will be bootable. Operating systems shipped before the specified model was released will not boot. 
 
@@ -4154,19 +4210,166 @@ Valid values:
 - j215 - MacBookPro16.4 (2020年6月)最低macOS 10.15.5 (19F96)
 - j185 - iMac20.1(2020年8月)最低macOS 10.15.6(19G2005)
 - j185f - iMac20.2(2020年8月)最低macOS 10.15.6(19G2005)</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Apple Secure Boot hardware model.</string>
-                   </property>
-                   <property name="text">
-                    <string>SecureBootModel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_44">
-                   <property name="toolTip">
-                    <string>Setting this value to any non-zero 64-bit integer will allow using personalised Apple Secure Boot identifiers. 
+                    </property>
+                    <property name="statusTip">
+                     <string> Apple Secure Boot hardware model.</string>
+                    </property>
+                    <property name="text">
+                     <string>SecureBootModel</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="cboxSecureBootModel">
+                    <property name="editable">
+                     <bool>true</bool>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>Disabled</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Default</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j137-10.13.2 (17C2111)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j680-10.13.6 (17G2112)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j132-10.13.6 (17G2112)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j174-10.14 (18A2063)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j140k-10.14.1 (18B2084)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j780-10.14.5 (18F132)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j213-10.14.5 (18F2058)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j140a-10.14.5 (18F2058)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j152f-10.15.1 (19B2093)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j160- 10.15.1 (19B88)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j230k-10.15.3 (19D2064)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j214k-10.15.4 (19E2269)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j223-10.15.4 (19E2265)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j215-10.15.5 (19F96)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j185-10.15.6 (19G2005)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>j185f- 10.15.6 (19G2005)</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>x86legacy-11.0.1 (20B29)</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QGroupBox" name="groupBox_7">
+                 <property name="title">
+                  <string/>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_51">
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item row="2" column="1">
+                   <widget class="QLineEdit" name="editIntExposeSensitiveData">
+                    <property name="minimumSize">
+                     <size>
+                      <width>150</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="3">
+                   <widget class="QToolButton" name="btnExposeSensitiveData">
+                    <property name="text">
+                     <string>Select</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QLabel" name="lblExposeSensitiveData">
+                    <property name="text">
+                     <string>0x00</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_44">
+                    <property name="toolTip">
+                     <string>Setting this value to any non-zero 64-bit integer will allow using personalised Apple Secure Boot identifiers. 
 
 If you want to use this setting, make sure to generate a random 64-bit number with a cryptographically secure random number generator. With this value set and SecureBootModel valid and not Disabled it is possible to achieve Full Security of Apple Secure Boot.
 
@@ -4183,26 +4386,88 @@ Until your operating system is personalised you will only be able to load macOS 
 要开始使用个性化的Apple Secure Boot，您必须重新安装操作系统或对其进行个性化设置。
 
 在您的操作系统被个性化之前，您只能加载macOS DMG恢复。如果你没有DMG恢复，你可以随时用macrecovery工具下载它，然后放到com.apple.recovery.boot，如提示和技巧部分所述。请记住，DMG加载需要设置为签名，以使用任何DMG与苹果安全启动。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Apple Enclave Identifier.</string>
-                   </property>
-                   <property name="text">
-                    <string>ApECID</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="3">
-                  <widget class="QToolButton" name="btnExposeSensitiveData">
-                   <property name="text">
-                    <string>Select</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="0">
-                  <widget class="QLabel" name="label_111">
-                   <property name="toolTip">
-                    <string>Type: plist integer, 32 bit
+                    </property>
+                    <property name="statusTip">
+                     <string>Apple Enclave Identifier.</string>
+                    </property>
+                    <property name="text">
+                     <string>ApECID</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_110">
+                    <property name="toolTip">
+                     <string>Type: plist integer
+
+Description: Sensitive data exposure bitmask (sum) to operating system.
+• 0x01 — Expose the printable booter path as an UEFI variable.
+• 0x02 — Expose the OpenCore version as an UEFI variable.
+• 0x04 — Expose the OpenCore version in the OpenCore picker menu title.
+• 0x08 — Expose OEM information as a set of UEFI variables.
+----
+类型：plist整数
+
+描述：敏感数据暴露给操作系统的位掩码（总和）。
+- 0x01 - 将可打印的启动器路径作为UEFI变量公开。
+- 0x02 - 将OpenCore版本作为一个UEFI变量公开。
+- 0x04 - 在OpenCore选取器菜单标题中显示OpenCore版本。
+- 0x08 - 将OEM信息显示为一组UEFI变量。</string>
+                    </property>
+                    <property name="text">
+                     <string>ExposeSensitiveData</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLineEdit" name="editIntApECID">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QLineEdit" name="editIntHaltLevel">
+                    <property name="minimumSize">
+                     <size>
+                      <width>150</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_14">
+                    <property name="toolTip">
+                     <string> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message of HaltLevel. Possible values match DisplayLevel values.
+
+----
+
+ EDK II调试级别位掩码(sum)，使CPU在获得HaltLevel的消息后停止（停止执行）。可能的值与DisplayLevel值相匹配。</string>
+                    </property>
+                    <property name="statusTip">
+                     <string> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message
+ of HaltLevel. Possible values match DisplayLevel values.</string>
+                    </property>
+                    <property name="text">
+                     <string>HaltLevel</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QLabel" name="lblHaltLevel">
+                    <property name="text">
+                     <string>0x00000000</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_111">
+                    <property name="toolTip">
+                     <string>Type: plist integer, 32 bit
 
 Description: Define operating system detection policy.
 
@@ -4221,16 +4486,186 @@ Third party drivers may introduce additional security (and performance) consider
 由于不可能可靠地检测每个文件系统或设备类型，在开放的环境中不能完全依赖这个功能，要采用额外的措施。
 
 第三方驱动可能会在提供的扫描策略之后引入额外的安全（和性能）考虑。活动的扫描策略在4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102 GUID的scan-policy变量中暴露，仅用于UEFI启动服务。</string>
-                   </property>
-                   <property name="text">
-                    <string>ScanPolicy</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="2">
-                  <widget class="QCheckBox" name="chkAuthRestart">
-                   <property name="toolTip">
-                    <string>Authenticated restart is a way to reboot FileVault 2 enabled macOS without entering the password. 
+                    </property>
+                    <property name="text">
+                     <string>ScanPolicy</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QLineEdit" name="editIntScanPolicy">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QLabel" name="lblScanPolicy">
+                    <property name="text">
+                     <string>0x00000000</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="3">
+                   <widget class="QToolButton" name="btnScanPolicy">
+                    <property name="text">
+                     <string>Select</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QGroupBox" name="groupBox_9">
+                 <property name="title">
+                  <string/>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_46">
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_93">
+                    <property name="toolTip">
+                     <string>Password hash used when EnabledPassword is set.
+
+----
+
+设置EnabledPassword时使用的密码哈希值。</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Password hash used when EnabledPassword is set.</string>
+                    </property>
+                    <property name="text">
+                     <string>PasswordHash</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_94">
+                    <property name="toolTip">
+                     <string> Password salt used when EnabledPassword is set.
+----
+ 设置EnabledPassword时使用的密码盐。</string>
+                    </property>
+                    <property name="statusTip">
+                     <string> Password salt used when EnabledPassword is set.</string>
+                    </property>
+                    <property name="text">
+                     <string>PasswordSalt</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QLineEdit" name="editPassInput">
+                    <property name="maximumSize">
+                     <size>
+                      <width>280</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="placeholderText">
+                     <string>Please enter a password value</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QToolButton" name="btnGetPassHash">
+                    <property name="text">
+                     <string>Generate password hash and password salt</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="2">
+                   <widget class="QProgressBar" name="progressBar">
+                    <property name="maximumSize">
+                     <size>
+                      <width>280</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="value">
+                     <number>0</number>
+                    </property>
+                    <property name="textVisible">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1" colspan="2">
+                   <widget class="QLineEdit" name="editDatPasswordHash"/>
+                  </item>
+                  <item row="1" column="1" colspan="2">
+                   <widget class="QLineEdit" name="editDatPasswordSalt"/>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QGroupBox" name="groupBox_8">
+                 <property name="title">
+                  <string/>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_9">
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="QCheckBox" name="chkAllowNvramReset">
+                    <property name="toolTip">
+                     <string>Description: Allow CMD+OPT+P+R handling and enable showing NVRAM Reset entry in OpenCore picker.
+
+Note 1 : It is known that some Lenovo laptops have a firmware bug, which makes them unbootable after performing NVRAM reset. See acidanthera/bugtracker#995 for more details.
+
+Note 2 : Resetting NVRAM will also erase any boot options not backed up using the bless command. For example,  Linux installations to custom locations not specified in BlessOverride.
+
+----
+
+描述：允许CMD+OPT+P+R处理，并启用在 OpenCore 引导选择器中显示NVRAM Reset条目。
+
+注1：已知部分联想笔记本存在固件bug，在执行NVRAM重置后无法启动。更多细节请参见 acidanthera/bugtracker#995。
+
+注2：重置NVRAM也会清除任何没有使用bless命令备份的启动选项。例如，Linux安装到未在BlessOverride中指定的自定义位置。</string>
+                    </property>
+                    <property name="statusTip">
+                     <string> Allow CMD+OPT+P+R handling and enable showing NVRAM Reset entry in boot picker.</string>
+                    </property>
+                    <property name="text">
+                     <string>AllowNvramReset</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="chkAllowSetDefault">
+                    <property name="toolTip">
+                     <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.
+
+----
+
+ 允许CTRL+Enter和CTRL+Index操作，在引导选择器中设置默认引导选项。</string>
+                    </property>
+                    <property name="statusTip">
+                     <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.</string>
+                    </property>
+                    <property name="text">
+                     <string>AllowSetDefault</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="chkAuthRestart">
+                    <property name="toolTip">
+                     <string>Authenticated restart is a way to reboot FileVault 2 enabled macOS without entering the password. 
 
 To perform authenticated restart one can use a dedicated terminal command: sudo fdesetup authrestart. It is also used when installing operating system updates.
 
@@ -4243,319 +4678,36 @@ VirtualSMC performs authenticated restart by saving disk encryption key split in
 要执行验证重启，可以使用专用的终端命令：sudo fdesetup authrestart。在安装操作系统更新时也会用到。
 
 VirtualSMC通过在NVRAM和RTC中保存磁盘加密密钥分割来执行验证重启，尽管OpenCore启动后就会被删除，但这可能被认为是一种安全风险，因此是可选的。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Enable VirtualSMC-compatible authenticated restart.</string>
-                   </property>
-                   <property name="text">
-                    <string>AuthRestart</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="3">
-                  <widget class="QComboBox" name="cboxSecureBootModel">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>Disabled</string>
                     </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Default</string>
+                    <property name="statusTip">
+                     <string>Enable VirtualSMC-compatible authenticated restart.</string>
                     </property>
-                   </item>
-                   <item>
                     <property name="text">
-                     <string>j137-10.13.2 (17C2111)</string>
+                     <string>AuthRestart</string>
                     </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j680-10.13.6 (17G2112)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j132-10.13.6 (17G2112)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j174-10.14 (18A2063)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j140k-10.14.1 (18B2084)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j780-10.14.5 (18F132)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j213-10.14.5 (18F2058)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j140a-10.14.5 (18F2058)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j152f-10.15.1 (19B2093)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j160- 10.15.1 (19B88)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j230k-10.15.3 (19D2064)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j214k-10.15.4 (19E2269)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j223-10.15.4 (19E2265)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j215-10.15.5 (19F96)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j185-10.15.6 (19G2005)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>j185f- 10.15.6 (19G2005)</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>x86legacy-11.0.1 (20B29)</string>
-                    </property>
-                   </item>
-                  </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <widget class="QLineEdit" name="editIntExposeSensitiveData">
-                   <property name="minimumSize">
-                    <size>
-                     <width>150</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="3">
-                  <widget class="QComboBox" name="cboxVault">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="2">
-                  <widget class="QLabel" name="lblScanPolicy">
-                   <property name="text">
-                    <string>0x00000000</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_27">
-                   <property name="toolTip">
-                    <string>Valid values:
-
-• Disabled — loading DMG images will fail. Disabled policy will still let macOS Recovery to load in most cases as there usually are boot.efi files compatible with Apple Secure Boot. Manually downloaded DMG images stored in com.apple.recovery.boot directories will not load, however.
-
-• Signed — only Apple-signed DMG images will load. Due to Apple Secure Boot design Signed policy will let any Apple-signed macOS Recovery to load regardless of Apple Secure Boot state, which may not always be desired.
-
-• Any — any DMG images will mount as normal filesystems. Any policy is strongly not recommended and will cause a boot failure when Apple Secure Boot is activated.
-
-----
-
-有效值：
-
-- Disabled - 加载DMG镜像会失败。在大多数情况下，禁用策略仍会让 macOS Recovery 加载，因为通常有与 Apple Secure Boot 兼容的 boot.efi 文件。然而，存储在 com.apple.recovery.boot 目录中的手动下载的 DMG 映像将无法加载。
-
-- Signed - 仅加载苹果签名的DMG映像。由于苹果安全引导设计，签名策略将允许任何苹果签名的macOS恢复加载，而不管苹果安全引导状态如何，这可能并不总是理想的。
-
-- Any - 任何DMG映像都将作为普通文件系统加载。强烈不建议使用“Any”策略，并且在激活Apple Secure Boot时将导致启动失败。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Define Disk Image (DMG) loading policy used for macOS Recovery.</string>
-                   </property>
-                   <property name="text">
-                    <string>DmgLoading</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="label_14">
-                   <property name="toolTip">
-                    <string> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message of HaltLevel. Possible values match DisplayLevel values.
-
-----
-
- EDK II调试级别位掩码(sum)，使CPU在获得HaltLevel的消息后停止（停止执行）。可能的值与DisplayLevel值相匹配。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message
- of HaltLevel. Possible values match DisplayLevel values.</string>
-                   </property>
-                   <property name="text">
-                    <string>HaltLevel</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="1">
-                  <widget class="QLineEdit" name="editIntScanPolicy">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QLineEdit" name="editIntApECID">
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="2">
-                  <widget class="QLabel" name="lblExposeSensitiveData">
-                   <property name="text">
-                    <string>0x00</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="1">
-                  <widget class="QCheckBox" name="chkAllowSetDefault">
-                   <property name="toolTip">
-                    <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.
-
-----
-
- 允许CTRL+Enter和CTRL+Index操作，在引导选择器中设置默认引导选项。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.</string>
-                   </property>
-                   <property name="text">
-                    <string>AllowSetDefault</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="2">
-                  <widget class="QLabel" name="label_16">
-                   <property name="toolTip">
-                    <string>Valid values:
-
-• Optional — require nothing, no vault is enforced, insecure.
-
-• Basic — require vault.plist file present in OC directory. This provides basic filesystem integrity verification and may protect from unintentional filesystem corruption.
-
-• Secure — require vault.sig signature file for vault.plist in OC directory. This includes Basic integrity checking but also attempts to build a trusted bootchain.
-
-----
-
-有效值：
-
-- Optional--不需要任何东西，不强制执行vault，不安全。
-
-- Basic -- 要求在OC目录中存在vault.plist文件。这提供了基本的文件系统完整性验证，可以防止无意中的文件系统损坏。
-
-- Secure--需要OC目录下vault.sig签名文件。这包括基本的完整性检查，但也试图建立一个可信的引导链。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Enables vaulting mechanism in OpenCore.</string>
-                   </property>
-                   <property name="text">
-                    <string>Vault</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="QLineEdit" name="editIntHaltLevel">
-                   <property name="minimumSize">
-                    <size>
-                     <width>150</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="2">
-                  <widget class="QLabel" name="lblHaltLevel">
-                   <property name="text">
-                    <string>0x00000000</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="3">
-                  <widget class="QToolButton" name="btnScanPolicy">
-                   <property name="text">
-                    <string>Select</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QComboBox" name="cboxDmgLoading">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="0">
-                  <widget class="QCheckBox" name="chkBlacklistAppleUpdate">
-                   <property name="toolTip">
-                    <string>Note: This option exists due to some operating systems, namely macOS Big Sur, being incapable of disabling firmware updates with the NVRAM variable (run-efi-updater).
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="chkBlacklistAppleUpdate">
+                    <property name="toolTip">
+                     <string>Note: This option exists due to some operating systems, namely macOS Big Sur, being incapable of disabling firmware updates with the NVRAM variable (run-efi-updater).
 
 ----
 
 注意：这个选项的存在是由于某些操作系统，即macOS Big Sur，无法使用NVRAM变量（run-efi-updater）禁用固件更新。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Ignore boot options trying to update Apple peripheral firmware (e.g. MultiUpdater.efi).</string>
-                   </property>
-                   <property name="text">
-                    <string>BlacklistAppleUpdate</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="1">
-                  <widget class="QCheckBox" name="chkEnablePassword">
-                   <property name="toolTip">
-                    <string>Password protection ensures that sensitive operations like booting a non-default operating system (e.g. macOS recovery or a tool), resetting NVRAM storage, trying to boot into a non-default mode (e.g. verbose mode or safe mode) are not allowed without explicit user authentication by a custom password. Currently password and salt are hashed with 5000000 iterations of SHA-512.
+                    </property>
+                    <property name="statusTip">
+                     <string>Ignore boot options trying to update Apple peripheral firmware (e.g. MultiUpdater.efi).</string>
+                    </property>
+                    <property name="text">
+                     <string>BlacklistAppleUpdate</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="chkEnablePassword">
+                    <property name="toolTip">
+                     <string>Password protection ensures that sensitive operations like booting a non-default operating system (e.g. macOS recovery or a tool), resetting NVRAM storage, trying to boot into a non-default mode (e.g. verbose mode or safe mode) are not allowed without explicit user authentication by a custom password. Currently password and salt are hashed with 5000000 iterations of SHA-512.
 
 Note: This functionality is currently in development and is not ready for daily usage.
 
@@ -4564,115 +4716,17 @@ Note: This functionality is currently in development and is not ready for daily 
 密码保护可以确保敏感操作，如启动非默认操作系统（如macOS恢复或工具），重置NVRAM存储，试图启动到非默认模式（如verbose模式或安全模式），如果没有明确的用户认证的自定义密码，是不允许的。目前，密码和盐是用5000000次SHA-512的迭代进行哈希。
 
 注意：该功能目前还在开发中，还不能用于日常使用。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Enable password protection to allow sensitive operations.</string>
-                   </property>
-                   <property name="text">
-                    <string>EnablePassword</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QGroupBox" name="groupBox_14">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="title">
-               <string/>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_67">
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item row="0" column="0">
-                <layout class="QGridLayout" name="gridLayout_47">
-                 <item row="2" column="2">
-                  <widget class="QLineEdit" name="editDatPasswordSalt"/>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QLineEdit" name="editPassInput">
-                   <property name="maximumSize">
-                    <size>
-                     <width>280</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="placeholderText">
-                    <string>Please enter a password value</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="QLabel" name="label_94">
-                   <property name="toolTip">
-                    <string> Password salt used when EnabledPassword is set.
-----
- 设置EnabledPassword时使用的密码盐。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Password salt used when EnabledPassword is set.</string>
-                   </property>
-                   <property name="text">
-                    <string>PasswordSalt</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QLabel" name="label_93">
-                   <property name="toolTip">
-                    <string>Password hash used when EnabledPassword is set.
-
-----
-
-设置EnabledPassword时使用的密码哈希值。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Password hash used when EnabledPassword is set.</string>
-                   </property>
-                   <property name="text">
-                    <string>PasswordHash</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QToolButton" name="btnGetPassHash">
-                   <property name="text">
-                    <string>Generate password hash and password salt</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="2">
-                  <widget class="QLineEdit" name="editDatPasswordHash"/>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QProgressBar" name="progressBar">
-                   <property name="maximumSize">
-                    <size>
-                     <width>280</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="value">
-                    <number>0</number>
-                   </property>
-                   <property name="textVisible">
-                    <bool>false</bool>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
+                    </property>
+                    <property name="statusTip">
+                     <string> Enable password protection to allow sensitive operations.</string>
+                    </property>
+                    <property name="text">
+                     <string>EnablePassword</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -5709,8 +5763,8 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
               <attribute name="title">
                <string>Generic</string>
               </attribute>
-              <layout class="QGridLayout" name="gridLayout_78">
-               <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
                 <layout class="QGridLayout" name="_2">
                  <item row="4" column="0">
                   <widget class="QLabel" name="label_95">
@@ -5898,7 +5952,7 @@ Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemory
                  </item>
                 </layout>
                </item>
-               <item row="0" column="1">
+               <item>
                 <widget class="QGroupBox" name="groupBox_16">
                  <property name="title">
                   <string/>
@@ -5979,8 +6033,8 @@ Added bits to FirmwareFeatures:
               <attribute name="title">
                <string>DataHub</string>
               </attribute>
-              <layout class="QGridLayout" name="gridLayout_79">
-               <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
                 <layout class="QGridLayout" name="gridLayout_39">
                  <item row="0" column="2">
                   <widget class="QLabel" name="label_47">
@@ -6656,9 +6710,9 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                <property name="geometry">
                 <rect>
                  <x>20</x>
-                 <y>20</y>
-                 <width>721</width>
-                 <height>321</height>
+                 <y>12</y>
+                 <width>649</width>
+                 <height>209</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_40">
@@ -6827,14 +6881,14 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                <item row="0" column="0">
                 <widget class="QTabWidget" name="tabWidget">
                  <property name="currentIndex">
-                  <number>4</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="tab_9">
                   <attribute name="title">
                    <string>BIOS</string>
                   </attribute>
-                  <layout class="QGridLayout" name="gridLayout_51">
-                   <item row="0" column="0">
+                  <layout class="QHBoxLayout" name="horizontalLayout_8">
+                   <item>
                     <layout class="QGridLayout" name="gridLayout_41">
                      <item row="1" column="0">
                       <widget class="QLabel" name="label_67">
@@ -6904,8 +6958,8 @@ This value gets updated and takes part in update delivery configuration and macO
                   <attribute name="title">
                    <string>Board</string>
                   </attribute>
-                  <layout class="QGridLayout" name="gridLayout_56">
-                   <item row="0" column="0">
+                  <layout class="QHBoxLayout" name="horizontalLayout_7">
+                   <item>
                     <layout class="QGridLayout" name="gridLayout_54">
                      <item row="0" column="1">
                       <widget class="QLineEdit" name="editBoardAssetTag"/>
@@ -7051,8 +7105,8 @@ SMBIOS：底板（或模块）信息（类型2）--在机箱中的位置。
                   <attribute name="title">
                    <string>Chassis</string>
                   </attribute>
-                  <layout class="QGridLayout" name="gridLayout_62">
-                   <item row="0" column="0">
+                  <layout class="QHBoxLayout" name="horizontalLayout_6">
+                   <item>
                     <layout class="QGridLayout" name="gridLayout_57">
                      <item row="2" column="1">
                       <widget class="QLineEdit" name="editChassisSerialNumber"/>
@@ -7158,8 +7212,8 @@ SMBIOS：系统外壳或机箱(类型3)-制造商
                   <attribute name="title">
                    <string>Firmware</string>
                   </attribute>
-                  <layout class="QGridLayout" name="gridLayout_64">
-                   <item row="0" column="0">
+                  <layout class="QHBoxLayout" name="horizontalLayout_5">
+                   <item>
                     <layout class="QGridLayout" name="gridLayout_63">
                      <item row="2" column="1">
                       <widget class="QLineEdit" name="editIntPlatformFeature"/>
@@ -7267,8 +7321,8 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
                   <attribute name="title">
                    <string>System</string>
                   </attribute>
-                  <layout class="QGridLayout" name="gridLayout_70">
-                   <item row="0" column="0">
+                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                   <item>
                     <layout class="QGridLayout" name="gridLayout_68">
                      <item row="1" column="1">
                       <widget class="QLineEdit" name="editSystemManufacturer"/>
