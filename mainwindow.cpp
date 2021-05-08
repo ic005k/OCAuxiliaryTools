@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210511";
+    CurVerison = "20210512";
     ocVer = "0.6.9";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -1222,7 +1222,7 @@ void MainWindow::initui_misc()
     ui->cboxSecureBootModel->setEditable(true);
 
     // BlessOverride
-    QTableWidgetItem *id0;
+    QTableWidgetItem* id0;
     id0 = new QTableWidgetItem(tr("BlessOverride"));
     ui->tableBlessOverride->setHorizontalHeaderItem(0, id0);
 

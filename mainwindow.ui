@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1392</width>
-    <height>686</height>
+    <height>663</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -666,20 +666,84 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
            <attribute name="title">
             <string>Quirks</string>
            </attribute>
-           <widget class="QWidget" name="gridLayoutWidget">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>30</y>
-              <width>271</width>
-              <height>311</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_28">
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="chkRebaseRegions">
-               <property name="toolTip">
-                <string notr="true">Description: Attempt to heuristically relocate ACPI memory regions. Not recommended.
+           <layout class="QHBoxLayout" name="horizontalLayout_17">
+            <item>
+             <layout class="QGridLayout" name="gridLayout_28">
+              <item row="5" column="0">
+               <widget class="QCheckBox" name="chkResetHwSig">
+                <property name="toolTip">
+                 <string notr="true">Description: Reset FACS table HardwareSignature value to 0.
+
+This works around firmware that fail to maintain hardware signature across the reboots and cause issues with waking from hibernation.
+
+----
+
+描述：将FACS表HardwareSignature值重置为0。
+
+这可以解决固件在重启过程中无法保持硬件签名而导致休眠唤醒的问题。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Reset FACS table HardwareSignature value to 0.</string>
+                </property>
+                <property name="text">
+                 <string>ResetHwSig</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="chkNormalizeHeaders">
+                <property name="toolTip">
+                 <string notr="true">Description: Cleanup ACPI header fields to workaround macOS ACPI implementation flaws that result in boot crashes. 
+
+Reference: Debugging AppleACPIPlatform on 10.13 by Alex James (also known as theracermaster). 
+
+The issue was fixed in macOS Mojave (10.14).
+
+----
+
+描述：清理 ACPI 头部字段，以解决 macOS ACPI 实施缺陷导致的启动崩溃问题。
+
+参考文献: Debugging AppleACPIPlatform on 10.13 by Alex James (other known as theracermaster). 
+
+这个问题在macOS Mojave (10.14)中得到了修复。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Cleanup ACPI header fields to workaround macOS ACPI implementation bug causing boot crashes.</string>
+                </property>
+                <property name="text">
+                 <string>NormalizeHeaders</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="chkFadtEnableReset">
+                <property name="toolTip">
+                 <string notr="true">Description: Provide reset register and flag in FADT table to enable reboot and shutdown.
+
+Mainly required on legacy hardware and a few newer laptops. Can also fix power-button shortcuts. 
+
+Not recommended unless required.
+
+----
+
+说明：在FADT表中提供复位寄存器和标志，以实现重启和关机。
+
+主要用于传统硬件和一些新的笔记本电脑。也可以修复电源按钮的快捷方式。
+
+除非需要，否则不建议使用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Provide reset register and flag in FADT table to enable reboot and shutdown.</string>
+                </property>
+                <property name="text">
+                 <string>FadtEnableReset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QCheckBox" name="chkRebaseRegions">
+                <property name="toolTip">
+                 <string notr="true">Description: Attempt to heuristically relocate ACPI memory regions. Not recommended.
 
 ACPI tables are often generated dynamically by the underlying firmware implementation. Among the positionindependent code, ACPI tables may contain the physical addresses of MMIO areas used for device configuration,typically grouped by region (e.g. OperationRegion). Changing firmware settings or hardware configuration,upgrading or patching the firmware inevitably leads to changes in dynamically generated ACPI code, which sometimes results in the shift of the addresses in the aforementioned OperationRegion constructions.
 
@@ -696,90 +760,19 @@ ACPI表通常由底层固件实现动态生成。在与位置无关的代码中�
 由于这个原因，应用修改ACPI表是非常危险的。最好的方法是尽可能少地对ACPI表进行修改，避免替换任何表，特别是DSDT表。当无法避免时，确保任何自定义的DSDT表都是基于最新的DSDT表，或者尝试删除受影响区域的读写。
 
 当没有其他帮助时，可以尝试这个选项，通过尝试修复ACPI地址来避免在macOS启动的PCI配置开始阶段的停顿。然而，这并不是灵丹妙药，只对最典型的情况有效。除非绝对需要，否则不要使用，因为它在某些平台上可能会产生相反的效果，导致启动失败。</string>
-               </property>
-               <property name="statusTip">
-                <string>Attempt to heuristically relocate ACPI memory regions. Not recommended.</string>
-               </property>
-               <property name="text">
-                <string>RebaseRegions</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="chkResetHwSig">
-               <property name="toolTip">
-                <string notr="true">Description: Reset FACS table HardwareSignature value to 0.
-
-This works around firmware that fail to maintain hardware signature across the reboots and cause issues with waking from hibernation.
-
-----
-
-描述：将FACS表HardwareSignature值重置为0。
-
-这可以解决固件在重启过程中无法保持硬件签名而导致休眠唤醒的问题。</string>
-               </property>
-               <property name="statusTip">
-                <string>Reset FACS table HardwareSignature value to 0.</string>
-               </property>
-               <property name="text">
-                <string>ResetHwSig</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkFadtEnableReset">
-               <property name="toolTip">
-                <string notr="true">Description: Provide reset register and flag in FADT table to enable reboot and shutdown.
-
-Mainly required on legacy hardware and a few newer laptops. Can also fix power-button shortcuts. 
-
-Not recommended unless required.
-
-----
-
-说明：在FADT表中提供复位寄存器和标志，以实现重启和关机。
-
-主要用于传统硬件和一些新的笔记本电脑。也可以修复电源按钮的快捷方式。
-
-除非需要，否则不建议使用。</string>
-               </property>
-               <property name="statusTip">
-                <string>Provide reset register and flag in FADT table to enable reboot and shutdown.</string>
-               </property>
-               <property name="text">
-                <string>FadtEnableReset</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="chkNormalizeHeaders">
-               <property name="toolTip">
-                <string notr="true">Description: Cleanup ACPI header fields to workaround macOS ACPI implementation flaws that result in boot crashes. 
-
-Reference: Debugging AppleACPIPlatform on 10.13 by Alex James (also known as theracermaster). 
-
-The issue was fixed in macOS Mojave (10.14).
-
-----
-
-描述：清理 ACPI 头部字段，以解决 macOS ACPI 实施缺陷导致的启动崩溃问题。
-
-参考文献: Debugging AppleACPIPlatform on 10.13 by Alex James (other known as theracermaster). 
-
-这个问题在macOS Mojave (10.14)中得到了修复。</string>
-               </property>
-               <property name="statusTip">
-                <string> Cleanup ACPI header fields to workaround macOS ACPI implementation bug causing boot crashes.</string>
-               </property>
-               <property name="text">
-                <string>NormalizeHeaders</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="chkResetLogoStatus">
-               <property name="toolTip">
-                <string notr="true">Description: Reset BGRT table Displayed status field to false.
+                </property>
+                <property name="statusTip">
+                 <string>Attempt to heuristically relocate ACPI memory regions. Not recommended.</string>
+                </property>
+                <property name="text">
+                 <string>RebaseRegions</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="chkResetLogoStatus">
+                <property name="toolTip">
+                 <string notr="true">Description: Reset BGRT table Displayed status field to false.
 
 This works around firmware that provide a BGRT table but fail to handle screen updates afterwards.
 
@@ -788,62 +781,44 @@ This works around firmware that provide a BGRT table but fail to handle screen u
 说明：将BGRT表显示状态字段重置为false。
 
 这可以解决提供BGRT表的固件，但之后无法处理屏幕更新的问题。</string>
-               </property>
-               <property name="statusTip">
-                <string>Reset BGRT table Displayed status field to false.</string>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-               <property name="text">
-                <string>ResetLogoStatus</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QComboBox" name="cboxFind">
-            <property name="geometry">
-             <rect>
-              <x>720</x>
-              <y>30</y>
-              <width>320</width>
-              <height>32</height>
-             </rect>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>320</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="editable">
-             <bool>true</bool>
-            </property>
-           </widget>
-           <widget class="QLabel" name="lblCount">
-            <property name="geometry">
-             <rect>
-              <x>630</x>
-              <y>40</y>
-              <width>60</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>0</string>
-            </property>
-           </widget>
-           <widget class="QTextEdit" name="textDiskInfo">
-            <property name="geometry">
-             <rect>
-              <x>540</x>
-              <y>90</y>
-              <width>581</width>
-              <height>151</height>
-             </rect>
-            </property>
-           </widget>
+                </property>
+                <property name="statusTip">
+                 <string>Reset BGRT table Displayed status field to false.</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>ResetLogoStatus</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="textDiskInfo"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblCount">
+              <property name="text">
+               <string>0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cboxFind">
+              <property name="minimumSize">
+               <size>
+                <width>320</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
@@ -9450,7 +9425,7 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
      <x>0</x>
      <y>0</y>
      <width>1392</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
