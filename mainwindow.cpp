@@ -6035,14 +6035,19 @@ void MainWindow::init_MainUI()
     init_FileMenu();
 
     init_EditMenu();
+    ui->toolBar->addSeparator();
+    init_UndoRedo();
+
+    ui->toolBar->addWidget(ui->lblCount);
+    ui->toolBar->addWidget(ui->cboxFind);
+    ui->toolBar->addAction(ui->actionFind);
+    ui->toolBar->addAction(ui->actionGo_to_the_previous);
+    ui->toolBar->addAction(ui->actionGo_to_the_next);
 
     init_HelpMenu();
 
-    init_UndoRedo();
-
     //搜索框
-    ui->toolBar->addWidget(ui->lblCount);
-    ui->toolBar->addWidget(ui->cboxFind);
+
     ui->cboxFind->lineEdit()->setClearButtonEnabled(true);
     ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
     connect(ui->cboxFind->lineEdit(),
@@ -6102,21 +6107,18 @@ void MainWindow::init_MainUI()
         ui->actionFind->setIconVisibleInMenu(false);
     ui->actionFind->setShortcut(tr("ctrl+f"));
     ui->actionFind->setIcon(QIcon(":/icon/find.png"));
-    ui->toolBar->addAction(ui->actionFind);
 
     //转到上一个
     if (mac || osx1012)
         ui->actionGo_to_the_previous->setIconVisibleInMenu(false);
     ui->actionGo_to_the_previous->setShortcut(tr("ctrl+3"));
     ui->actionGo_to_the_previous->setIcon(QIcon(":/icon/1.png"));
-    ui->toolBar->addAction(ui->actionGo_to_the_previous);
 
     //转到下一个
     if (mac || osx1012)
         ui->actionGo_to_the_next->setIconVisibleInMenu(false);
     ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
     ui->actionGo_to_the_next->setIcon(QIcon(":/icon/2.png"));
-    ui->toolBar->addAction(ui->actionGo_to_the_next);
 
     CopyLabel();
 
