@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -6396,7 +6396,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
 
 ----
 
-说明：指定内存类型。指定内存类型。常用的类型如下：
+说明：指定内存类型，常用的类型如下：
 
 - 0x01 - 其他
 - 0x02 - 未知
@@ -6449,8 +6449,8 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                 <rect>
                  <x>20</x>
                  <y>12</y>
-                 <width>649</width>
-                 <height>209</height>
+                 <width>691</width>
+                 <height>231</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_40">
@@ -7531,7 +7531,7 @@ Enable this option to be able to see all the boot options when having multiple d
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>3</number>
+              <number>0</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -7540,20 +7540,13 @@ Enable this option to be able to see all the boot options when having multiple d
               <attribute name="title">
                <string>APFS</string>
               </attribute>
-              <widget class="QWidget" name="gridLayoutWidget_3">
-               <property name="geometry">
-                <rect>
-                 <x>20</x>
-                 <y>20</y>
-                 <width>501</width>
-                 <height>331</height>
-                </rect>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_55">
-                <item row="1" column="0">
-                 <widget class="QCheckBox" name="chkGlobalConnect">
-                  <property name="toolTip">
-                   <string>Instead of partition handle connection normally used for APFS driver loading every handle is connected recursively.
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <layout class="QGridLayout" name="gridLayout_55">
+                 <item row="1" column="0">
+                  <widget class="QCheckBox" name="chkGlobalConnect">
+                   <property name="toolTip">
+                    <string>Instead of partition handle connection normally used for APFS driver loading every handle is connected recursively.
 
 This may take more time than usual but can be the only way to access APFS partitions on some firmwares like those found on older HP laptops.
 
@@ -7562,36 +7555,36 @@ This may take more time than usual but can be the only way to access APFS partit
 在 APFS 加载期间执行完整的设备连接。
 
 代替通常情况下用于 APFS 驱动程序加载的分区句柄连接，每一个句柄都是递归连接的。这可能会比平时花费更多的时间，但是是某些固件访问 APFS 分区的唯一方法，比如在旧的惠普笔记本电脑上发现的那样。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Perform full device connection during APFS loading.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">GlobalConnect</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QCheckBox" name="chkHideVerbose">
-                  <property name="toolTip">
-                   <string>APFS verbose output can be useful for debugging.
+                   </property>
+                   <property name="statusTip">
+                    <string> Perform full device connection during APFS loading.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">GlobalConnect</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QCheckBox" name="chkHideVerbose">
+                   <property name="toolTip">
+                    <string>APFS verbose output can be useful for debugging.
 
 ----
 
 APFS verbose输出对调试很有用。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Hide verbose output from APFS driver.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">HideVerbose</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="8" column="0">
-                 <widget class="QLabel" name="label_31">
-                  <property name="toolTip">
-                   <string>APFS driver date connects APFS driver with the calendar release date. Older versions of APFS drivers may contain unpatched vulnerabilities, which can be used to inflict harm on your computer. This option permits restricting APFS drivers to only recent releases.
+                   </property>
+                   <property name="statusTip">
+                    <string>Hide verbose output from APFS driver.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">HideVerbose</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="8" column="0">
+                  <widget class="QLabel" name="label_31">
+                   <property name="toolTip">
+                    <string>APFS driver date connects APFS driver with the calendar release date. Older versions of APFS drivers may contain unpatched vulnerabilities, which can be used to inflict harm on your computer. This option permits restricting APFS drivers to only recent releases.
 
 • 0 — require the default supported release date of APFS in OpenCore. The default release date will increase with time and thus this setting is recommended. Currently set to 2018/06/21.
 
@@ -7609,40 +7602,46 @@ APFS驱动日期将APFS驱动与发布日期连接起来。旧版本的APFS驱�
 
 - Other - 使用自定义的最小APFS发布日期，例如20200401为2020/04/01。APFS发布日期可以在OpenCore引导日志和OcApfsLib中找到。
 </string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Minimal allowed APFS driver date.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">MinDate</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="13" column="1">
-                 <widget class="QLineEdit" name="editIntMinVersion">
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-                <item row="8" column="1">
-                 <widget class="QLineEdit" name="editIntMinDate">
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-                <item row="8" column="2">
-                 <widget class="QToolButton" name="toolButton">
-                  <property name="text">
-                   <string>Select date</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="13" column="0">
-                 <widget class="QLabel" name="label_30">
-                  <property name="toolTip">
-                   <string>APFS driver version connects APFS driver with the macOS release. APFS drivers from older macOS releases will become unsupported and thus may contain unpatched vulnerabilities, which can be used to inflict harm on your computer. This option permits restricting APFS drivers to only modern macOS versions.
+                   </property>
+                   <property name="statusTip">
+                    <string>Minimal allowed APFS driver date.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">MinDate</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="13" column="1">
+                  <widget class="QLineEdit" name="editIntMinVersion">
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="8" column="1">
+                  <widget class="QLineEdit" name="editIntMinDate">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="8" column="2">
+                  <widget class="QToolButton" name="toolButton">
+                   <property name="text">
+                    <string>Select date</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="13" column="0">
+                  <widget class="QLabel" name="label_30">
+                   <property name="toolTip">
+                    <string>APFS driver version connects APFS driver with the macOS release. APFS drivers from older macOS releases will become unsupported and thus may contain unpatched vulnerabilities, which can be used to inflict harm on your computer. This option permits restricting APFS drivers to only modern macOS versions.
 
 • 0 — require the default supported version of APFS in OpenCore. The default version will increase with time and thus this setting is recommended. Currently set to the latest point release from High Sierra from App Store (748077008000000).
 
@@ -7659,19 +7658,19 @@ APFS驱动版本连接APFS驱动与macOS版本。旧版macOS的APFS驱动程序�
 -1 - 允许加载任何版本（强烈不鼓励）。
 
 - Other - 使用自定义的最小APFS版本，例如来自macOS Catalina 10.15.4的1412101001000000。APFS版本可以在OpenCore引导日志和OcApfsLib中找到。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Minimal allowed APFS driver version.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">MinVersion</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="0">
-                 <widget class="QCheckBox" name="chkEnableJumpstart">
-                  <property name="toolTip">
-                   <string>Description: Load embedded APFS drivers from APFS containers.
+                   </property>
+                   <property name="statusTip">
+                    <string>Minimal allowed APFS driver version.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">MinVersion</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QCheckBox" name="chkEnableJumpstart">
+                   <property name="toolTip">
+                    <string>Description: Load embedded APFS drivers from APFS containers.
 
 An APFS EFI driver is bundled in all bootable APFS containers. This option performs the loading of signed APFS drivers (consistent with the ScanPolicy). Refer to the “EFI Jumpstart” section of the Apple File System Reference for more details.
 
@@ -7681,57 +7680,50 @@ An APFS EFI driver is bundled in all bootable APFS containers. This option perfo
 
 所有可启动的 APFS 容器中都捆绑了一个 APFS EFI 驱动程序。此选项将执行加载已签名的 APFS 驱动程序（与 ScanPolicy 一致）。有关详细信息，请参考 Apple File System Reference 的 &quot;EFI Jumpstart&quot; 部分。
 </string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Load embedded APFS drivers from APFS containers.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">EnableJumpstart</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QCheckBox" name="chkJumpstartHotPlug">
-                  <property name="toolTip">
-                   <string>Performs APFS driver loading not only at OpenCore startup but also during boot picker. This permits APFS USB hot plug. Disable if not required.
+                   </property>
+                   <property name="statusTip">
+                    <string> Load embedded APFS drivers from APFS containers.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">EnableJumpstart</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QCheckBox" name="chkJumpstartHotPlug">
+                   <property name="toolTip">
+                    <string>Performs APFS driver loading not only at OpenCore startup but also during boot picker. This permits APFS USB hot plug. Disable if not required.
 
 ----
 
 不仅在OpenCore启动时执行APFS驱动加载，而且在boot picker期间也执行。这允许APFS USB热插拔。如果不需要，请禁用。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Load APFS drivers for newly connected devices.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">JumpstartHotPlug</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-              <widget class="QWidget" name="gridLayoutWidget_8">
-               <property name="geometry">
-                <rect>
-                 <x>560</x>
-                 <y>20</y>
-                 <width>481</width>
-                 <height>331</height>
-                </rect>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_74">
-                <item row="0" column="0">
-                 <widget class="QCalendarWidget" name="calendarWidget">
-                  <property name="selectedDate">
-                   <date>
-                    <year>2018</year>
-                    <month>6</month>
-                    <day>21</day>
-                   </date>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
+                   </property>
+                   <property name="statusTip">
+                    <string> Load APFS drivers for newly connected devices.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">JumpstartHotPlug</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout_74">
+                 <item row="0" column="0">
+                  <widget class="QCalendarWidget" name="calendarWidget">
+                   <property name="selectedDate">
+                    <date>
+                     <year>2018</year>
+                     <month>6</month>
+                     <day>21</day>
+                    </date>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </widget>
              <widget class="QWidget" name="tabUEFI2">
               <attribute name="title">
@@ -7957,20 +7949,13 @@ Description: Enable custom key repeat delays when using the OpenCore implementat
               <attribute name="title">
                <string>Audio</string>
               </attribute>
-              <widget class="QWidget" name="gridLayoutWidget_9">
-               <property name="geometry">
-                <rect>
-                 <x>20</x>
-                 <y>20</y>
-                 <width>571</width>
-                 <height>401</height>
-                </rect>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_61">
-                <item row="1" column="0">
-                 <widget class="QLabel" name="label_33">
-                  <property name="toolTip">
-                   <string>Normally this contains builtin analog audio controller (HDEF) device path, e.g. PciRoot(0x0)/Pci(0x1b,0x0).
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <layout class="QGridLayout" name="gridLayout_61">
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_33">
+                   <property name="toolTip">
+                    <string>Normally this contains builtin analog audio controller (HDEF) device path, e.g. PciRoot(0x0)/Pci(0x1b,0x0).
 
 The list of recognised audio controllers can be found in the debug log (marked in bold-italic):
 
@@ -7991,19 +7976,19 @@ OCAU：2/3 PciRoot(0x0)/Pci(0x3,0x0)/VenMsg(&lt;redacted&gt;,00000000)(1个输�
 OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出)
 
 在macOS中可以使用gfxutil -f HDEF命令作为替代。指定空的设备路径将导致第一个可用的音频控制器被使用。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Device path of the specified audio controller for audio support.</string>
-                  </property>
-                  <property name="text">
-                   <string>AudioDevice</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label_34">
-                  <property name="toolTip">
-                   <string>Normally this contains the index of the green out of the builtin analog audio controller (HDEF). 
+                   </property>
+                   <property name="statusTip">
+                    <string>Device path of the specified audio controller for audio support.</string>
+                   </property>
+                   <property name="text">
+                    <string>AudioDevice</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_34">
+                   <property name="toolTip">
+                    <string>Normally this contains the index of the green out of the builtin analog audio controller (HDEF). 
 The number of output nodes (N) in the debug log (marked in bold-italic):
 
 OCAU: 1/3 PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x1)/VenMsg(&lt;redacted&gt;,00000000) (4 outputs)
@@ -8022,22 +8007,22 @@ OCAU：2/3 PciRoot(0x0)/Pci(0x3,0x0)/VenMsg(&lt;redacted&gt;,00000000)(1个输�
 OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出)
 
 找到正确端口的最快捷的方法是将数值从 0 轮询到 N - 1。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Index of the output port of the specified codec starting from 0.</string>
-                  </property>
-                  <property name="text">
-                   <string>AudioOut</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QLineEdit" name="editAudioDevice"/>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QLabel" name="label_35">
-                  <property name="toolTip">
-                   <string>Description: Minimal heard volume level from 0 to 100.
+                   </property>
+                   <property name="statusTip">
+                    <string> Index of the output port of the specified codec starting from 0.</string>
+                   </property>
+                   <property name="text">
+                    <string>AudioOut</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLineEdit" name="editAudioDevice"/>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_35">
+                   <property name="toolTip">
+                    <string>Description: Minimal heard volume level from 0 to 100.
 
 The screen reader will use this volume level when the calculated volume level is lower than MinimumVolume and the boot chime will not play if the calculated volume level is lower than MinimumVolume.
 
@@ -8046,28 +8031,28 @@ The screen reader will use this volume level when the calculated volume level is
 说明： 最小听到的音量值，从0到100。
 
 当计算出的音量低于MinimumVolume时，屏幕阅读器将使用这个音量，如果计算出的音量低于MinimumVolume，则不会播放开机声。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Minimal heard volume level from 0 to 100.</string>
-                  </property>
-                  <property name="text">
-                   <string>MinimumVolume</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="8" column="1">
-                 <widget class="QLineEdit" name="editIntVolumeAmplifier"/>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QLineEdit" name="editIntAudioOut"/>
-                </item>
-                <item row="7" column="1">
-                 <widget class="QLineEdit" name="editIntSetupDelay"/>
-                </item>
-                <item row="8" column="0">
-                 <widget class="QLabel" name="label_36">
-                  <property name="toolTip">
-                   <string>Volume level range read from SystemAudioVolume varies depending on the codec. To transform read value in [0, 127] range into raw volume range [0, 100] the read value is scaled to VolumeAmplifier percents:
+                   </property>
+                   <property name="statusTip">
+                    <string>Minimal heard volume level from 0 to 100.</string>
+                   </property>
+                   <property name="text">
+                    <string>MinimumVolume</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="8" column="1">
+                  <widget class="QLineEdit" name="editIntVolumeAmplifier"/>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLineEdit" name="editIntAudioOut"/>
+                 </item>
+                 <item row="7" column="1">
+                  <widget class="QLineEdit" name="editIntSetupDelay"/>
+                 </item>
+                 <item row="8" column="0">
+                  <widget class="QLabel" name="label_36">
+                   <property name="toolTip">
+                    <string>Volume level range read from SystemAudioVolume varies depending on the codec. To transform read value in [0, 127] range into raw volume range [0, 100] the read value is scaled to VolumeAmplifier percents:
 
 RawV olume = MIN(SystemAudioV olume ∗ V olumeAmplifier 100 , 100)
 
@@ -8080,26 +8065,26 @@ Note: the transformation used in macOS is not linear, but it is very close and t
 RawV olume = MIN(SystemAudioV olume ∗ V olumeAmplifier 100 , 100)
 
 注意：macOS中使用的变换不是线性的，但非常接近，因此忽略了这种细微差别。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Multiplication coefficient for system volume to raw volume linear translation from 0 to 1000.</string>
-                  </property>
-                  <property name="text">
-                   <string>VolumeAmplifier</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="1">
-                 <widget class="QComboBox" name="cboxPlayChime">
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_32">
-                  <property name="toolTip">
-                   <string>Normally this contains first audio codec address on the builtin analog audio controller (HDEF). 
+                   </property>
+                   <property name="statusTip">
+                    <string>Multiplication coefficient for system volume to raw volume linear translation from 0 to 1000.</string>
+                   </property>
+                   <property name="text">
+                    <string>VolumeAmplifier</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1">
+                  <widget class="QComboBox" name="cboxPlayChime">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_32">
+                   <property name="toolTip">
+                    <string>Normally this contains first audio codec address on the builtin analog audio controller (HDEF). 
 
 Audio codec addresses, e.g. 2, can be found in the debug log (marked in bold-italic):
 
@@ -8120,39 +8105,39 @@ OCAU：2/3 PciRoot(0x0)/Pci(0x3,0x0)/VenMsg(&lt;redacted&gt;,00000000)(1个输�
 OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出)
 
 作为一个替代方案，这个值可以从I/O注册表中的IOHDACodecDevice类获得，在IOHDACodecAddress字段中包含它。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Codec address on the specified audio controller for audio support.</string>
-                  </property>
-                  <property name="text">
-                   <string>AudioCodec</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="9" column="0">
-                 <widget class="QCheckBox" name="chkAudioSupport">
-                  <property name="toolTip">
-                   <string>Enabling this setting routes audio playback from builtin protocols to a dedicated audio port (AudioOut) of the specified codec (AudioCodec) located on the audio controller (AudioDevice).
+                   </property>
+                   <property name="statusTip">
+                    <string>Codec address on the specified audio controller for audio support.</string>
+                   </property>
+                   <property name="text">
+                    <string>AudioCodec</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="0">
+                  <widget class="QCheckBox" name="chkAudioSupport">
+                   <property name="toolTip">
+                    <string>Enabling this setting routes audio playback from builtin protocols to a dedicated audio port (AudioOut) of the specified codec (AudioCodec) located on the audio controller (AudioDevice).
 
 ----
 
 启用此设置可将内置协议的音频播放路由到位于音频控制器（AudioDevice）上的指定编解码器（AudioCodec）的专用音频端口（AudioOut）。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Activate audio support by connecting to a backend driver.</string>
-                  </property>
-                  <property name="text">
-                   <string>AudioSupport</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="1">
-                 <widget class="QLineEdit" name="editIntMinimumVolume"/>
-                </item>
-                <item row="5" column="0">
-                 <widget class="QLabel" name="label_70">
-                  <property name="toolTip">
-                   <string>Enabling this setting plays boot chime through builtin audio support. Volume level is determined by MinimumVolume and VolumeAmplifier settings and SystemAudioVolume NVRAM variable. Possible values include:
+                   </property>
+                   <property name="statusTip">
+                    <string>Activate audio support by connecting to a backend driver.</string>
+                   </property>
+                   <property name="text">
+                    <string>AudioSupport</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QLineEdit" name="editIntMinimumVolume"/>
+                 </item>
+                 <item row="5" column="0">
+                  <widget class="QLabel" name="label_70">
+                   <property name="toolTip">
+                    <string>Enabling this setting plays boot chime through builtin audio support. Volume level is determined by MinimumVolume and VolumeAmplifier settings and SystemAudioVolume NVRAM variable. Possible values include:
 
 • Auto — Enables chime when StartupMute NVRAM variable is not present or set to 00. 
 • Enabled — Enables chime unconditionally.
@@ -8169,39 +8154,39 @@ Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid c
 - Disabled - 无条件地禁用报时。
 
 注意：Enabled可以与StartupMute NVRAM变量分开使用，以避免固件能够播放开机声时的冲突。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Play chime sound at startup.</string>
-                  </property>
-                  <property name="text">
-                   <string>PlayChime</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLineEdit" name="editIntAudioCodec"/>
-                </item>
-                <item row="7" column="0">
-                 <widget class="QLabel" name="label_107">
-                  <property name="toolTip">
-                   <string>Some codecs require a vendor-specific delay after the reconfiguration (e.g. volume setting). This option makes it  configurable. In general the necessary delay may be as long as 0.5 seconds.
+                   </property>
+                   <property name="statusTip">
+                    <string>Play chime sound at startup.</string>
+                   </property>
+                   <property name="text">
+                    <string>PlayChime</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="editIntAudioCodec"/>
+                 </item>
+                 <item row="7" column="0">
+                  <widget class="QLabel" name="label_107">
+                   <property name="toolTip">
+                    <string>Some codecs require a vendor-specific delay after the reconfiguration (e.g. volume setting). This option makes it  configurable. In general the necessary delay may be as long as 0.5 seconds.
 
 ----
 
 某些编解码器在重新配置后需要特定于供应商的延迟（例如音量设置）。此选项可对其进行配置。一般来说，必要的延迟时间可能长达 0.5 秒。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Audio codec reconfiguration delay in microseconds.</string>
-                  </property>
-                  <property name="text">
-                   <string>SetupDelay</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="10" column="0">
-                 <widget class="QCheckBox" name="chkResetTrafficClass">
-                  <property name="toolTip">
-                   <string>AppleHDA kext will function correctly only if TCSEL register is configured to use TC0 traffic class. Refer to Intel I/O Controller Hub 9 (ICH9) Family Datasheet (or any other ICH datasheet) for more details about this register.
+                   </property>
+                   <property name="statusTip">
+                    <string> Audio codec reconfiguration delay in microseconds.</string>
+                   </property>
+                   <property name="text">
+                    <string>SetupDelay</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="0">
+                  <widget class="QCheckBox" name="chkResetTrafficClass">
+                   <property name="toolTip">
+                    <string>AppleHDA kext will function correctly only if TCSEL register is configured to use TC0 traffic class. Refer to Intel I/O Controller Hub 9 (ICH9) Family Datasheet (or any other ICH datasheet) for more details about this register.
 
 Note: This option is independent from AudioSupport. If AppleALC is used it is preferred to use AppleALC alctsel property instead.
 
@@ -8210,17 +8195,18 @@ Note: This option is independent from AudioSupport. If AppleALC is used it is pr
 AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能正常工作。请参阅Intel I/O控制器集线器9（ICH9）系列数据表（或任何其他ICH数据表），了解该寄存器的更多细节。
 
 注意：该选项与AudioSupport无关。如果使用AppleALC，最好使用AppleALC alctsel属性代替。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Set HDA Traffic Class Select Register to TC0.</string>
-                  </property>
-                  <property name="text">
-                   <string>ResetTrafficClass</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
+                   </property>
+                   <property name="statusTip">
+                    <string> Set HDA Traffic Class Select Register to TC0.</string>
+                   </property>
+                   <property name="text">
+                    <string>ResetTrafficClass</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </widget>
              <widget class="QWidget" name="tabUEFI4">
               <attribute name="title">
@@ -8525,39 +8511,32 @@ The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS 
               <attribute name="title">
                <string>Output</string>
               </attribute>
-              <widget class="QWidget" name="gridLayoutWidget_6">
-               <property name="geometry">
-                <rect>
-                 <x>20</x>
-                 <y>29</y>
-                 <width>1001</width>
-                 <height>261</height>
-                </rect>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_34">
-                <item row="1" column="2">
-                 <widget class="QCheckBox" name="chkReconnectOnResChange">
-                  <property name="toolTip">
-                   <string>On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <layout class="QGridLayout" name="gridLayout_34">
+                 <item row="1" column="2">
+                  <widget class="QCheckBox" name="chkReconnectOnResChange">
+                   <property name="toolTip">
+                    <string>On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
 
 Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless required.
 ----
 在某些固件上，当通过GOP改变屏幕分辨率时，需要重新连接产生控制台协议（简单文本输出）的控制器。否则它们将不会根据新的分辨率产生文本。
 
 注意：在一些板卡上，当从Shell启动OpenCore时，这个逻辑可能会导致黑屏，因此它是可选的。在 0.5.2 之前的版本中，该选项是强制性的，不可配置。除非需要，否则请不要使用该选项。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Reconnect console controllers after changing screen resolution.</string>
-                  </property>
-                  <property name="text">
-                   <string>ReconnectOnResChange</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
-                  <property name="toolTip">
-                   <string> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,because random text may appear over graphical images and cause UI corruption. Setting this option to true will discard all text output when console control is in mode different from Text.
+                   </property>
+                   <property name="statusTip">
+                    <string>Reconnect console controllers after changing screen resolution.</string>
+                   </property>
+                   <property name="text">
+                    <string>ReconnectOnResChange</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
+                   <property name="toolTip">
+                    <string> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,because random text may appear over graphical images and cause UI corruption. Setting this option to true will discard all text output when console control is in mode different from Text.
 
 Note: This option only applies to System renderer.
 
@@ -8566,89 +8545,89 @@ Note: This option only applies to System renderer.
  选择固件在图形和文本模式下在屏幕上输出文本。这通常是出乎意料的，因为随机的文本可能会出现在图形图像上，并导致用户界面损坏。将此选项设置为 &quot;true&quot;，当控制台控制模式与文本模式不同时，将丢弃所有文本输出。
 
 注意：这个选项只适用于系统渲染器。</string>
-                  </property>
-                  <property name="text">
-                   <string>IgnoreTextInGraphics</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="1">
-                 <widget class="QComboBox" name="cboxResolution">
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QCheckBox" name="chkDirectGopRendering">
-                  <property name="toolTip">
-                   <string>On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.
+                   </property>
+                   <property name="text">
+                    <string>IgnoreTextInGraphics</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QComboBox" name="cboxResolution">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QCheckBox" name="chkDirectGopRendering">
+                   <property name="toolTip">
+                    <string>On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.
 ----
 在某些固件上，这可能会提供更好的性能，甚至修复渲染问题，比如在MacPro5,1上。然而，建议不要使用这个选项，除非有明显的好处，因为它甚至可能导致滚动速度变慢。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Use builtin graphics output protocol renderer for console.</string>
-                  </property>
-                  <property name="text">
-                   <string>DirectGopRendering</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QCheckBox" name="chkSanitiseClearScreen">
-                  <property name="toolTip">
-                   <string> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
+                   </property>
+                   <property name="statusTip">
+                    <string> Use builtin graphics output protocol renderer for console.</string>
+                   </property>
+                   <property name="text">
+                    <string>DirectGopRendering</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QCheckBox" name="chkSanitiseClearScreen">
+                   <property name="toolTip">
+                    <string> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
 
 Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to empty string for this to work.
 ----
  当使用大屏幕（如2K或4K）时，一些固件在尝试清除屏幕内容时，会将屏幕分辨率重置为故障安全值（如1024x768）。这个选项试图应用一个变通方法。
 
 注意：这个选项只适用于系统渲染器。在所有已知受影响的系统中，ConsoleMode必须设置为空字符串才行。</string>
-                  </property>
-                  <property name="text">
-                   <string>SanitiseClearScreen</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="3">
-                 <widget class="QCheckBox" name="chkGopPassThrough">
-                  <property name="toolTip">
-                   <string>Some types of firmware do not implement the GOP protocol, this option provides it via a UGA-based proxy.
+                   </property>
+                   <property name="text">
+                    <string>SanitiseClearScreen</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="3">
+                  <widget class="QCheckBox" name="chkGopPassThrough">
+                   <property name="toolTip">
+                    <string>Some types of firmware do not implement the GOP protocol, this option provides it via a UGA-based proxy.
 
 This option requires ProvideConsoleGop to be enabled.
 ----
 有些类型的固件没有实现GOP协议，这个选项通过基于UGA的代理来提供。
 
 这个选项需要启用 ProvideConsoleGop。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Provide GOP protocol instances on top of UGA protocol instances.</string>
-                  </property>
-                  <property name="text">
-                   <string>GopPassThrough</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="2">
-                 <widget class="QCheckBox" name="chkForceResolution">
-                  <property name="toolTip">
-                   <string>Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max will try to pull the largest available resolution from the connected display’s EDID.
+                   </property>
+                   <property name="statusTip">
+                    <string>Provide GOP protocol instances on top of UGA protocol instances.</string>
+                   </property>
+                   <property name="text">
+                    <string>GopPassThrough</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QCheckBox" name="chkForceResolution">
+                   <property name="toolTip">
+                    <string>Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max will try to pull the largest available resolution from the connected display’s EDID.
 
 Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel iGPUs.
 ----
 说明：在默认情况下无法获得所需分辨率的情况下，强制设置分辨率，例如在传统的英特尔GMA和第一代英特尔高清图形(Ironlake/Arrandale)上。将 &quot;分辨率 &quot;设置为 &quot;最大 &quot;将尝试从所连接的显示器的EDID中提取最大的可用分辨率。
 
 注意：这个选项取决于OC_FORCE_RESOLUTION_PROTOCOL协议是否存在。这个协议目前只被OpenDuetPkg支持。OpenDuetPkg的实现目前只支持Intel iGPU。</string>
-                  </property>
-                  <property name="text">
-                   <string>ForceResolution</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="3">
-                 <widget class="QCheckBox" name="chkReplaceTabWithSpace">
-                  <property name="toolTip">
-                   <string>Some firmwares do not print tab characters or even everything that follows them, causing difficulties or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. 
+                   </property>
+                   <property name="text">
+                    <string>ForceResolution</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="3">
+                  <widget class="QCheckBox" name="chkReplaceTabWithSpace">
+                   <property name="toolTip">
+                    <string>Some firmwares do not print tab characters or even everything that follows them, causing difficulties or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. 
 
 This option makes the console output spaces instead of tabs.
 
@@ -8659,31 +8638,31 @@ Note: This option only applies to System renderer.
 这个选项使控制台输出的是空格而不是制表符。
 
 注意：该选项只适用于系统渲染器。</string>
-                  </property>
-                  <property name="text">
-                   <string>ReplaceTabWithSpace</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QCheckBox" name="chkUgaPassThrough">
-                  <property name="toolTip">
-                   <string>Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI applications like EfiBoot from 10.4.
+                   </property>
+                   <property name="text">
+                    <string>ReplaceTabWithSpace</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QCheckBox" name="chkUgaPassThrough">
+                   <property name="toolTip">
+                    <string>Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI applications like EfiBoot from 10.4.
 ----
 有些固件没有实现传统旧式的UGA协议，但旧的EFI应用程序（如10.4的EfiBoot）可能需要它来进行屏幕输出。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Provide UGA protocol instances on top of GOP protocol.</string>
-                  </property>
-                  <property name="text">
-                   <string>UgaPassThrough</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="0">
-                 <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
-                  <property name="toolTip">
-                   <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before switching to text mode.
+                   </property>
+                   <property name="statusTip">
+                    <string> Provide UGA protocol instances on top of GOP protocol.</string>
+                   </property>
+                   <property name="text">
+                    <string>UgaPassThrough</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
+                   <property name="toolTip">
+                    <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before switching to text mode.
 
 Note: This option only applies to System renderer.
 
@@ -8692,41 +8671,41 @@ Note: This option only applies to System renderer.
 有些固件在从图形模式切换到文本模式时，只清除了屏幕的一部分，留下了之前绘制的图像的一部分。这个选项可以在切换到文本模式前用黑色填充整个图形屏幕。
 
 注：该选项仅适用于系统渲染器。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
+                   </property>
+                   <property name="statusTip">
+                    <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
  fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
  switching to text mode.
  Note: This option only applies to System renderer.</string>
-                  </property>
-                  <property name="text">
-                   <string>ClearScreenOnModeSwitch</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QCheckBox" name="chkProvideConsoleGop">
-                  <property name="toolTip">
-                   <string>macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and UGA, if present, are available on the console handle.
+                   </property>
+                   <property name="text">
+                    <string>ClearScreenOnModeSwitch</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QCheckBox" name="chkProvideConsoleGop">
+                   <property name="toolTip">
+                    <string>macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and UGA, if present, are available on the console handle.
 
 Note: This option will also replace broken GOP protocol on console handle, which may be the case on MacPro5,1 with newer GPUs.
 ----
 macOS bootloader 要求控制台手柄上必须有 GOP 或 UGA（适用于 10.4 EfiBoot），但 UEFI 规范并未涵盖图形协议的确切位置。这个选项将确保GOP和UGA（如果存在）在控制台手柄上可用。
 
 注意：这个选项还将替换控制台手柄上已损坏的GOP协议，在使用较新GPU的MacPro5,1上可能会出现这种情况。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Ensure GOP (Graphics Output Protocol) on console handle.</string>
-                  </property>
-                  <property name="text">
-                   <string>ProvideConsoleGop</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QLabel" name="label_25">
-                  <property name="toolTip">
-                   <string>• Set to WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080) formatted string to request custom resolution from GOP if available.
+                   </property>
+                   <property name="statusTip">
+                    <string>Ensure GOP (Graphics Output Protocol) on console handle.</string>
+                   </property>
+                   <property name="text">
+                    <string>ProvideConsoleGop</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_25">
+                   <property name="toolTip">
+                    <string>• Set to WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080) formatted string to request custom resolution from GOP if available.
 
 • Set to empty string not to change screen resolution.
 
@@ -8745,45 +8724,45 @@ Note: This will fail when console handle has no GOP protocol. When the firmware 
 在HiDPI屏幕上，APPLE_VENDOR_VARIABLE_GUID UIScale NVRAM变量可能需要设置为02，以便在Builtin文本渲染器、FileVault 2 UEFI密码界面和开机屏幕徽标中启用HiDPI缩放。更多细节请参考推荐变量部分。
 
 注意：当控制台手柄没有GOP协议时，这将失败。当固件不提供时，可以通过将ProvideConsoleGop设置为true来添加。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Sets console output screen resolution.</string>
-                  </property>
-                  <property name="text">
-                   <string>Resolution</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QComboBox" name="cboxConsoleMode">
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="label_24">
-                  <property name="toolTip">
-                   <string>Set to empty string not to change console mode. Set to Max to try to use largest available console mode. Currently Builtin text renderer supports only one console mode, so this option is ignored.
+                   </property>
+                   <property name="statusTip">
+                    <string> Sets console output screen resolution.</string>
+                   </property>
+                   <property name="text">
+                    <string>Resolution</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QComboBox" name="cboxConsoleMode">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_24">
+                   <property name="toolTip">
+                    <string>Set to empty string not to change console mode. Set to Max to try to use largest available console mode. Currently Builtin text renderer supports only one console mode, so this option is ignored.
 
 Note: This field is best to be left empty on most firmwares.
 ----
 设置为空字符串，不改变控制台模式。设置为最大，尝试使用最大的可用的控制台模式，目前Builtin文本渲染器只支持一种控制台模式，所以这个选项会被忽略。
 
 注意：在大多数固件上，这个字段最好留空。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Sets console output mode as specified with the WxH (e.g. 80x24) formatted string.</string>
-                  </property>
-                  <property name="text">
-                   <string>ConsoleMode(e.g. 80x24)</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="0">
-                 <widget class="QLabel" name="label_26">
-                  <property name="toolTip">
-                   <string>Currently two renderers are supported: Builtin and System. System renderer uses firmware services for text rendering. 
+                   </property>
+                   <property name="statusTip">
+                    <string>Sets console output mode as specified with the WxH (e.g. 80x24) formatted string.</string>
+                   </property>
+                   <property name="text">
+                    <string>ConsoleMode(e.g. 80x24)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="0">
+                  <widget class="QLabel" name="label_26">
+                   <property name="toolTip">
+                    <string>Currently two renderers are supported: Builtin and System. System renderer uses firmware services for text rendering. 
 
 Builtin bypassing firmware services and performs text rendering on its own. Different renderers support a different set of options. It is recommended to use Builtin renderer, as it supports HiDPI mode and uses full screen resolution.
 
@@ -8834,74 +8813,68 @@ BuiltinGraphics的使用一般都很简单。对于大多数平台来说，有�
 系统协议的使用比较复杂。一般来说，首选设置是SystemGraphics或SystemText。启用ProvideConsoleGop，将分辨率设置为最大，启用ReplaceTabWithSpace几乎在所有平台上都很有用。SanitiseClearScreen、IgnoreTextInGraphics和ClearScreenOnModeSwitch比较特殊，其用途取决于固件。
 
 注意：一些Mac，即MacPro5,1，在使用较新的GPU时可能会破坏控制台的输出，因此只有BuiltinGraphics可能对它们有用。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Chooses renderer for text going through standard console output.</string>
-                  </property>
-                  <property name="text">
-                   <string>TextRenderer</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="1">
-                 <widget class="QComboBox" name="cboxTextRenderer">
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
+                   </property>
+                   <property name="statusTip">
+                    <string> Chooses renderer for text going through standard console output.</string>
+                   </property>
+                   <property name="text">
+                    <string>TextRenderer</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1">
+                  <widget class="QComboBox" name="cboxTextRenderer">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </widget>
              <widget class="QWidget" name="tabUEFI7">
               <attribute name="title">
                <string>ProtocolOverrides</string>
               </attribute>
-              <widget class="QWidget" name="gridLayoutWidget_13">
-               <property name="geometry">
-                <rect>
-                 <x>10</x>
-                 <y>20</y>
-                 <width>991</width>
-                 <height>271</height>
-                </rect>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_35">
-                <item row="0" column="2">
-                 <widget class="QCheckBox" name="chkAppleDebugLog">
-                  <property name="toolTip">
-                   <string>Reinstalls Apple Debug Log protocol with a builtin version.
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <layout class="QGridLayout" name="gridLayout_35">
+                 <item row="0" column="2">
+                  <widget class="QCheckBox" name="chkAppleDebugLog">
+                   <property name="toolTip">
+                    <string>Reinstalls Apple Debug Log protocol with a builtin version.
 ----
 重新安装内置版本的 Apple Debug Log 协议。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Reinstalls Apple Debug Log protocol with a builtin version.</string>
-                  </property>
-                  <property name="text">
-                   <string>AppleDebugLog</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QCheckBox" name="chkAppleBootPolicy">
-                  <property name="toolTip">
-                   <string>Note: Some Macs, namely MacPro5,1, do have APFS compatibility, but their Apple Boot Policy protocol contains recovery detection issues, thus using this option is advised on them as well.
+                   </property>
+                   <property name="statusTip">
+                    <string>Reinstalls Apple Debug Log protocol with a builtin version.</string>
+                   </property>
+                   <property name="text">
+                    <string>AppleDebugLog</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QCheckBox" name="chkAppleBootPolicy">
+                   <property name="toolTip">
+                    <string>Note: Some Macs, namely MacPro5,1, do have APFS compatibility, but their Apple Boot Policy protocol contains recovery detection issues, thus using this option is advised on them as well.
 ----
 注：有些Mac，即MacPro5,1，虽然兼容APFS，但其Apple Boot Policy协议包含恢复检测问题，因此建议在它们身上也使用这个选项。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Reinstalls Apple Boot Policy protocol with a builtin version. This may be used to ensure APFS
+                   </property>
+                   <property name="statusTip">
+                    <string> Reinstalls Apple Boot Policy protocol with a builtin version. This may be used to ensure APFS
  compatibility on VMs or legacy Macs.</string>
-                  </property>
-                  <property name="text">
-                   <string>AppleBootPolicy</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="0">
-                 <widget class="QCheckBox" name="chkAppleAudio">
-                  <property name="toolTip">
-                   <string>Apple audio protocols allow macOS bootloader and OpenCore to play sounds and signals for screen reading or audible error reporting. Supported protocols are beep generation and VoiceOver. 
+                   </property>
+                   <property name="text">
+                    <string>AppleBootPolicy</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QCheckBox" name="chkAppleAudio">
+                   <property name="toolTip">
+                    <string>Apple audio protocols allow macOS bootloader and OpenCore to play sounds and signals for screen reading or audible error reporting. Supported protocols are beep generation and VoiceOver. 
 
 VoiceOver protocol is specific to Gibraltar machines (T2) and is not supported before macOS High Sierra (10.13). Instead older macOS versions use AppleHDA protocol, which is currently not implemented.
 
@@ -8916,247 +8889,248 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
 一次只能有一组音频协议，所以为了在实现其中一些协议的Mac系统上的OpenCore用户界面中获得音频播放，应启用此设置。
 
 注意：需要在UEFI音频部分配置后端音频驱动程序，以便这些协议能够进行音频流。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Reinstalls Apple audio protocols with builtin versions.</string>
-                  </property>
-                  <property name="text">
-                   <string>AppleAudio</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="3">
-                 <widget class="QCheckBox" name="chkAppleFramebufferInfo">
-                  <property name="toolTip">
-                   <string> Reinstalls Apple Framebuffer Info protocol with a builtin version. This may be used to override framebuffer information on VMs or legacy Macs to improve compatibility with legacy EfiBoot like the one in macOS 10.4.
+                   </property>
+                   <property name="statusTip">
+                    <string>Reinstalls Apple audio protocols with builtin versions.</string>
+                   </property>
+                   <property name="text">
+                    <string>AppleAudio</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="3">
+                  <widget class="QCheckBox" name="chkAppleFramebufferInfo">
+                   <property name="toolTip">
+                    <string> Reinstalls Apple Framebuffer Info protocol with a builtin version. This may be used to override framebuffer information on VMs or legacy Macs to improve compatibility with legacy EfiBoot like the one in macOS 10.4.
 ----
  重新安装内置版本的 Apple Framebuffer Info 协议。这可以用来覆盖虚拟机或旧版 Mac 上的帧缓冲信息，以提高与旧版 EfiBoot（如 macOS 10.4 中的 EfiBoot）的兼容性。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Reinstalls Apple Framebuffer Info protocol with a builtin version. This may be used to override
+                   </property>
+                   <property name="statusTip">
+                    <string> Reinstalls Apple Framebuffer Info protocol with a builtin version. This may be used to override
  framebuffer information on VMs or legacy Macs to improve compatibility with legacy EfiBoot like the one in
  macOS 10.4.</string>
-                  </property>
-                  <property name="text">
-                   <string>AppleFramebufferInfo</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QCheckBox" name="chkAppleImageConversion">
-                  <property name="toolTip">
-                   <string>Reinstalls Apple Image Conversion protocol with a builtin version.
+                   </property>
+                   <property name="text">
+                    <string>AppleFramebufferInfo</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QCheckBox" name="chkAppleImageConversion">
+                   <property name="toolTip">
+                    <string>Reinstalls Apple Image Conversion protocol with a builtin version.
 
 ----
 
 重新安装内置版本的苹果图像转换协议。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Reinstalls Apple Image Conversion protocol with a builtin version.</string>
-                  </property>
-                  <property name="text">
-                   <string>AppleImageConversion</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QCheckBox" name="chkAppleImg4Verification">
-                  <property name="toolTip">
-                   <string> Reinstalls Apple IMG4 Verification protocol with a builtin version. This protocol is used to verify im4m manifest files used by Apple Secure Boot.
+                   </property>
+                   <property name="statusTip">
+                    <string>Reinstalls Apple Image Conversion protocol with a builtin version.</string>
+                   </property>
+                   <property name="text">
+                    <string>AppleImageConversion</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QCheckBox" name="chkAppleImg4Verification">
+                   <property name="toolTip">
+                    <string> Reinstalls Apple IMG4 Verification protocol with a builtin version. This protocol is used to verify im4m manifest files used by Apple Secure Boot.
 ----
  重新安装内置版本的 Apple IMG4 验证协议。该协议用于验证 Apple Secure Boot 使用的 im4m 清单文件。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Reinstalls Apple IMG4 Verification protocol with a builtin version. This protocol is used to verify
+                   </property>
+                   <property name="statusTip">
+                    <string> Reinstalls Apple IMG4 Verification protocol with a builtin version. This protocol is used to verify
  im4m manifest files used by Apple Secure Boot.</string>
-                  </property>
-                  <property name="text">
-                   <string>AppleImg4Verification</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="2">
-                 <widget class="QCheckBox" name="chkAppleKeyMap">
-                  <property name="toolTip">
-                   <string> Reinstalls Apple Key Map protocols with builtin versions.
+                   </property>
+                   <property name="text">
+                    <string>AppleImg4Verification</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QCheckBox" name="chkAppleKeyMap">
+                   <property name="toolTip">
+                    <string> Reinstalls Apple Key Map protocols with builtin versions.
 ----
  重新安装内置版本的 Apple Key Map 协议。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Reinstalls Apple Key Map protocols with builtin versions.</string>
-                  </property>
-                  <property name="text">
-                   <string>AppleKeyMap</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="3">
-                 <widget class="QCheckBox" name="chkAppleRtcRam">
-                  <property name="toolTip">
-                   <string>Reinstalls Apple RTC RAM protocol with builtin version.
+                   </property>
+                   <property name="statusTip">
+                    <string> Reinstalls Apple Key Map protocols with builtin versions.</string>
+                   </property>
+                   <property name="text">
+                    <string>AppleKeyMap</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="3">
+                  <widget class="QCheckBox" name="chkAppleRtcRam">
+                   <property name="toolTip">
+                    <string>Reinstalls Apple RTC RAM protocol with builtin version.
 
 ----
 
 重新安装内置版本的苹果RTC RAM协议。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Reinstalls Apple RTC RAM protocol with builtin version.</string>
-                  </property>
-                  <property name="text">
-                   <string>AppleRtcRam</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QCheckBox" name="chkAppleSecureBoot">
-                  <property name="toolTip">
-                   <string> Reinstalls Apple Secure Boot protocol with a builtin version.
+                   </property>
+                   <property name="statusTip">
+                    <string>Reinstalls Apple RTC RAM protocol with builtin version.</string>
+                   </property>
+                   <property name="text">
+                    <string>AppleRtcRam</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QCheckBox" name="chkAppleSecureBoot">
+                   <property name="toolTip">
+                    <string> Reinstalls Apple Secure Boot protocol with a builtin version.
 ----
  重新安装内置版本的Apple Secure Boot协议。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Reinstalls Apple Secure Boot protocol with a builtin version.</string>
-                  </property>
-                  <property name="text">
-                   <string>AppleSecureBoot</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QCheckBox" name="chkAppleSmcIo">
-                  <property name="toolTip">
-                   <string>This protocol replaces legacy VirtualSmc UEFI driver, and is compatible with any SMC kernel extension.
+                   </property>
+                   <property name="statusTip">
+                    <string> Reinstalls Apple Secure Boot protocol with a builtin version.</string>
+                   </property>
+                   <property name="text">
+                    <string>AppleSecureBoot</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QCheckBox" name="chkAppleSmcIo">
+                   <property name="toolTip">
+                    <string>This protocol replaces legacy VirtualSmc UEFI driver, and is compatible with any SMC kernel extension.
 
 However, in case FakeSMC kernel extension is used, manual NVRAM key variable addition may be needed.
 ----
 这个协议取代了传统的VirtualSmc UEFI驱动，并且与任何SMC内核扩展兼容，但是如果使用FakeSMC内核扩展，可能需要手动添加NVRAM变量。
 </string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Reinstalls Apple SMC I/O protocol with a builtin version.</string>
-                  </property>
-                  <property name="text">
-                   <string>AppleSmcIo</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="2">
-                 <widget class="QCheckBox" name="chkAppleUserInterfaceTheme">
-                  <property name="toolTip">
-                   <string>Reinstalls Apple User Interface Theme protocol with a builtin version.
+                   </property>
+                   <property name="statusTip">
+                    <string>Reinstalls Apple SMC I/O protocol with a builtin version.</string>
+                   </property>
+                   <property name="text">
+                    <string>AppleSmcIo</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="2">
+                  <widget class="QCheckBox" name="chkAppleUserInterfaceTheme">
+                   <property name="toolTip">
+                    <string>Reinstalls Apple User Interface Theme protocol with a builtin version.
 ----
 重新安装内置版本的苹果用户界面主题协议。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Reinstalls Apple User Interface Theme protocol with a builtin version.</string>
-                  </property>
-                  <property name="text">
-                   <string>AppleUserInterfaceTheme</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="3">
-                 <widget class="QCheckBox" name="chkDataHub">
-                  <property name="toolTip">
-                   <string> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the protocol was already installed.
+                   </property>
+                   <property name="statusTip">
+                    <string>Reinstalls Apple User Interface Theme protocol with a builtin version.</string>
+                   </property>
+                   <property name="text">
+                    <string>AppleUserInterfaceTheme</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="3">
+                  <widget class="QCheckBox" name="chkDataHub">
+                   <property name="toolTip">
+                    <string> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the protocol was already installed.
 
 ----
 
  使用内置版本重新安装Data Hub协议。如果协议已经安装，这将删除所有以前的属性。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the
+                   </property>
+                   <property name="statusTip">
+                    <string> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the
  protocol was already installed.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">DataHub</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QCheckBox" name="chkDeviceProperties">
-                  <property name="toolTip">
-                   <string> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.
+                   </property>
+                   <property name="text">
+                    <string notr="true">DataHub</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QCheckBox" name="chkDeviceProperties">
+                   <property name="toolTip">
+                    <string> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.
 ----
  使用内置版本重新安装设备属性协议。如果已经安装，这将删除所有以前的属性。这可用于确保在虚拟机或旧版 Mac 上完全兼容。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties
+                   </property>
+                   <property name="statusTip">
+                    <string> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties
  if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">DeviceProperties</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="1">
-                 <widget class="QCheckBox" name="chkFirmwareVolume">
-                  <property name="toolTip">
-                   <string>Note: Several virtual machines including VMware may have corrupted cursor image in HiDPI mode and thus may also require this setting to be enabled.
+                   </property>
+                   <property name="text">
+                    <string notr="true">DeviceProperties</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QCheckBox" name="chkFirmwareVolume">
+                   <property name="toolTip">
+                    <string>Note: Several virtual machines including VMware may have corrupted cursor image in HiDPI mode and thus may also require this setting to be enabled.
 ----
 注意：包括VMware在内的一些虚拟机在HiDPI模式下可能会损坏光标图像，因此也需要启用此设置。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Forcibly wraps Firmware Volume protocols or installs new to support custom cursor images for
+                   </property>
+                   <property name="statusTip">
+                    <string> Forcibly wraps Firmware Volume protocols or installs new to support custom cursor images for
  File Vault 2. Should be set to true to ensure File Vault 2 compatibility on everything but VMs and legacy Macs.</string>
-                  </property>
-                  <property name="text">
-                   <string>FirmwareVolume</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="2">
-                 <widget class="QCheckBox" name="chkHashServices">
-                  <property name="toolTip">
-                   <string>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.
+                   </property>
+                   <property name="text">
+                    <string>FirmwareVolume</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="2">
+                  <widget class="QCheckBox" name="chkHashServices">
+                   <property name="toolTip">
+                    <string>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.
 ----
 强制重新安装内置版本的哈希服务协议。应该设置为 &quot;true&quot;，以确保File Vault 2在提供破损的SHA-1哈希的平台上的兼容性。在UIScale设置为02的情况下，可以通过无效的光标大小进行诊断，一般APTIO V之前的平台（Haswell及以上）都会受到影响。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure
+                   </property>
+                   <property name="statusTip">
+                    <string>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure
  File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size
  with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.</string>
-                  </property>
-                  <property name="text">
-                   <string>HashServices</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="3">
-                 <widget class="QCheckBox" name="chkOSInfo">
-                  <property name="toolTip">
-                   <string>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive notifications from macOS bootloader, by the firmware or by other applications.
+                   </property>
+                   <property name="text">
+                    <string>HashServices</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="3">
+                  <widget class="QCheckBox" name="chkOSInfo">
+                   <property name="toolTip">
+                    <string>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive notifications from macOS bootloader, by the firmware or by other applications.
 ----
 强制重新安装内置版本的OS Info协议。该协议通常用于接收来自macOS引导程序、固件或其他应用程序的通知。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive
+                   </property>
+                   <property name="statusTip">
+                    <string>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive
  notifications from macOS bootloader, by the firmware or by other applications.</string>
-                  </property>
-                  <property name="text">
-                   <string>OSInfo</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="0">
-                 <widget class="QCheckBox" name="chkUnicodeCollation">
-                  <property name="toolTip">
-                   <string> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.
+                   </property>
+                   <property name="text">
+                    <string>OSInfo</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="0">
+                  <widget class="QCheckBox" name="chkUnicodeCollation">
+                   <property name="toolTip">
+                    <string> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.
 
 ----
 
  强制重新安装内置版本的unicode整理服务。应设为true，以确保UEFI Shell在提供破损的unicode collation平台上的相容性。一般而言，Ivy Bridge或更早版本的Insyde和APTIO平台会受到影响。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.</string>
-                  </property>
-                  <property name="text">
-                   <string>UnicodeCollation</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
+                   </property>
+                   <property name="statusTip">
+                    <string> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.</string>
+                   </property>
+                   <property name="text">
+                    <string>UnicodeCollation</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </widget>
              <widget class="QWidget" name="tabUEFI8">
               <attribute name="title">
@@ -9518,7 +9492,7 @@ Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algor
      <x>0</x>
      <y>0</y>
      <width>1431</width>
-     <height>24</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

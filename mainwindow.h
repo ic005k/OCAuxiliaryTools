@@ -543,10 +543,6 @@ private slots:
 
     void on_cboxUpdateSMBIOSMode_currentIndexChanged(const QString& arg1);
 
-    void on_btnDLSetAll_clicked();
-
-    void on_btnDLClear_clicked();
-
     void on_table_dp_add0_itemChanged(QTableWidgetItem* item);
 
     void on_table_dp_del0_itemChanged(QTableWidgetItem* item);

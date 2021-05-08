@@ -5351,28 +5351,6 @@ void MainWindow::on_editIntDisplayLevel_textChanged(const QString& arg1)
     method(v, total);
 }
 
-void MainWindow::on_btnDLSetAll_clicked()
-{
-    initDisplayLevelValue();
-
-    for (int i = 0; i < chk.count(); i++) {
-        chk.at(i)->setChecked(true);
-    }
-
-    DisplayLevel();
-}
-
-void MainWindow::on_btnDLClear_clicked()
-{
-    initDisplayLevelValue();
-
-    for (int i = 0; i < chk.count(); i++) {
-        chk.at(i)->setChecked(false);
-    }
-
-    DisplayLevel();
-}
-
 void MainWindow::initPickerAttributesValue()
 {
     chk.clear();
@@ -5758,8 +5736,6 @@ void MainWindow::init_hardware_info()
 
 void MainWindow::setListMainIcon()
 {
-    this->repaint();
-
     ui->listMain->setViewMode(QListWidget::IconMode);
 
     ui->listMain->clear();
@@ -5786,8 +5762,6 @@ void MainWindow::setListMainIcon()
         ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
         ui->listMain->item(8)->setSizeHint(QSize(getTextWidth(ui->listMain->item(8)->text(), ui->listMain), ui->listMain->maximumHeight() - 6));
     }
-
-    this->repaint();
 }
 
 void MainWindow::init_listMainSub()
@@ -7037,6 +7011,7 @@ void MainWindow::on_listMain_itemSelectionChanged()
 
 int MainWindow::getTextWidth(QString str, QWidget* w)
 {
+    str = str.trimmed();
     if (!win)
         str = str + "    ";
 
