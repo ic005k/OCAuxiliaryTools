@@ -636,7 +636,6 @@ void MainWindow::initui_dp()
     QTableWidgetItem* id0;
 
     // Add
-    ui->table_dp_add0->setColumnWidth(0, 475);
 
     id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
@@ -660,7 +659,6 @@ void MainWindow::initui_dp()
     ui->table_dp_add->horizontalHeader()->setStretchLastSection(true);
 
     // Delete
-    ui->table_dp_del0->setColumnWidth(0, 500);
 
     id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_del0->setHorizontalHeaderItem(0, id0);
@@ -668,7 +666,6 @@ void MainWindow::initui_dp()
     ui->table_dp_del0->setAlternatingRowColors(true);
     ui->table_dp_del0->horizontalHeader()->setStretchLastSection(true);
 
-    ui->table_dp_del->setColumnWidth(0, 500);
     id0 = new QTableWidgetItem(tr("Value"));
     ui->table_dp_del->setHorizontalHeaderItem(0, id0);
 
@@ -1225,8 +1222,7 @@ void MainWindow::initui_misc()
     ui->cboxSecureBootModel->setEditable(true);
 
     // BlessOverride
-    QTableWidgetItem* id0;
-    ui->tableBlessOverride->setColumnWidth(0, 1150);
+    QTableWidgetItem *id0;
     id0 = new QTableWidgetItem(tr("BlessOverride"));
     ui->tableBlessOverride->setHorizontalHeaderItem(0, id0);
 
@@ -1407,8 +1403,6 @@ void MainWindow::initui_nvram()
     QTableWidgetItem* id0;
 
     // Add
-    ui->table_nv_add0->setColumnWidth(0, 450);
-
     ui->table_nv_add0->setMinimumWidth(300);
     ui->table_nv_add0->setMaximumWidth(525);
 
@@ -1444,15 +1438,12 @@ void MainWindow::initui_nvram()
     ui->gridLayout_nv_add->addWidget(splitterMain);
 
     // Delete
-
-    ui->table_nv_del0->setColumnWidth(0, 500);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_del0->setHorizontalHeaderItem(0, id0);
 
     ui->table_nv_del0->setAlternatingRowColors(true);
     ui->table_nv_del0->horizontalHeader()->setStretchLastSection(true);
 
-    ui->table_nv_del->setColumnWidth(0, 500);
     id0 = new QTableWidgetItem(tr("Value"));
     ui->table_nv_del->setHorizontalHeaderItem(0, id0);
 
@@ -1460,14 +1451,11 @@ void MainWindow::initui_nvram()
     ui->table_nv_del->horizontalHeader()->setStretchLastSection(true);
 
     // LegacySchema
-
-    ui->table_nv_ls0->setColumnWidth(0, 500);
     id0 = new QTableWidgetItem(tr("UUID"));
     ui->table_nv_ls0->setHorizontalHeaderItem(0, id0);
     ui->table_nv_ls0->setAlternatingRowColors(true);
     ui->table_nv_ls0->horizontalHeader()->setStretchLastSection(true);
 
-    ui->table_nv_ls->setColumnWidth(0, 500);
     id0 = new QTableWidgetItem(tr("Value"));
     ui->table_nv_ls->setHorizontalHeaderItem(0, id0);
     ui->table_nv_ls->setAlternatingRowColors(true);
