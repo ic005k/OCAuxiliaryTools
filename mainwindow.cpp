@@ -656,7 +656,6 @@ void MainWindow::initui_dp()
     ui->table_dp_add->setHorizontalHeaderItem(2, id0);
 
     ui->table_dp_add->setAlternatingRowColors(true);
-    ui->table_dp_add->horizontalHeader()->setStretchLastSection(true);
 
     // Delete
 
@@ -1426,7 +1425,6 @@ void MainWindow::initui_nvram()
     ui->table_nv_add->setHorizontalHeaderItem(1, id0);
 
     ui->table_nv_add->setAlternatingRowColors(true);
-    ui->table_nv_add->horizontalHeader()->setStretchLastSection(true);
 
     ui->btnNVRAMAdd_Add->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->btnNVRAMAdd_Add, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(show_menu(QPoint)));
@@ -5913,7 +5911,6 @@ void MainWindow::init_EditMenu()
 
     ui->actionDatabase->setShortcut(tr("ctrl+d"));
     ui->actionDatabase->setIcon(QIcon(":/icon/db.png"));
-    ui->toolBar->addAction(ui->actionDatabase);
 
     // Open DataBase Dir
     if (mac || osx1012)
@@ -5923,7 +5920,6 @@ void MainWindow::init_EditMenu()
         &QAction::triggered,
         this,
         &MainWindow::OpenDir_clicked);
-    ui->toolBar->addAction(ui->actionOpen_database_directory);
 
     // 分享配置文件
     connect(ui->actionShareConfig, &QAction::triggered, this, &MainWindow::on_ShareConfig);
@@ -5975,7 +5971,6 @@ void MainWindow::init_HelpMenu()
         ui->btnHelp->setIconVisibleInMenu(false);
     ui->btnHelp->setIcon(QIcon(":/icon/doc.png"));
     ui->toolBar->addAction(ui->btnHelp);
-    ui->toolBar->addSeparator();
 
     // Bug Report
     if (mac || osx1012)
@@ -6043,6 +6038,10 @@ void MainWindow::init_MainUI()
     ui->toolBar->addAction(ui->actionFind);
     ui->toolBar->addAction(ui->actionGo_to_the_previous);
     ui->toolBar->addAction(ui->actionGo_to_the_next);
+
+    ui->toolBar->addSeparator();
+    ui->toolBar->addAction(ui->actionDatabase);
+    ui->toolBar->addAction(ui->actionOpen_database_directory);
 
     init_HelpMenu();
 
