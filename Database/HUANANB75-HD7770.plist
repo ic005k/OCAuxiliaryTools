@@ -10,7 +10,7 @@
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>Path</key>
                     <string>huananb75dsdt.aml</string>
                 </dict>
@@ -18,7 +18,7 @@
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>Path</key>
                     <string>e31220v2-ssdt.aml</string>
                 </dict>
@@ -27,11 +27,11 @@
             <array>
                 <dict>
                     <key>All</key>
-                    <false />
+                    <false/>
                     <key>Comment</key>
                     <string>Drop CpuPm</string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>OemTableId</key>
                     <data>Q3B1UG0=</data>
                     <key>TableLength</key>
@@ -41,11 +41,11 @@
                 </dict>
                 <dict>
                     <key>All</key>
-                    <false />
+                    <false/>
                     <key>Comment</key>
                     <string>Drop Cpu0Ist</string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>OemTableId</key>
                     <data>Q3B1MElzdA==</data>
                     <key>TableLength</key>
@@ -66,7 +66,7 @@
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Find</key>
                     <data>R1BSVwI=</data>
                     <key>Limit</key>
@@ -96,7 +96,7 @@
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Find</key>
                     <data>X1BSVw==</data>
                     <key>Limit</key>
@@ -126,7 +126,7 @@
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Find</key>
                     <data>X1BSVw==</data>
                     <key>Limit</key>
@@ -152,11 +152,11 @@
                     <key>BaseSkip</key>
                     <integer>0</integer>
                     <key>Comment</key>
-                    <string>EHC1-&gt;EH01</string>
+                    <string>EHC1->EH01</string>
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Find</key>
                     <data>RUhDMQ==</data>
                     <key>Limit</key>
@@ -182,11 +182,11 @@
                     <key>BaseSkip</key>
                     <integer>0</integer>
                     <key>Comment</key>
-                    <string>EHC2-&gt;EH02</string>
+                    <string>EHC2->EH02</string>
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Find</key>
                     <data>RUhDMg==</data>
                     <key>Limit</key>
@@ -210,15 +210,15 @@
             <key>Quirks</key>
             <dict>
                 <key>FadtEnableReset</key>
-                <false />
+                <false/>
                 <key>NormalizeHeaders</key>
-                <false />
+                <false/>
                 <key>RebaseRegions</key>
-                <true />
+                <true/>
                 <key>ResetHwSig</key>
-                <false />
+                <false/>
                 <key>ResetLogoStatus</key>
-                <false />
+                <false/>
             </dict>
         </dict>
         <key>Booter</key>
@@ -231,7 +231,7 @@
                     <key>Comment</key>
                     <string>Haswell: SB_RCBA is a 0x4 page memory region, containing SPI_BASE at 0x3800 (SPI_BASE_ADDRESS)</string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                 </dict>
                 <dict>
                     <key>Address</key>
@@ -239,51 +239,51 @@
                     <key>Comment</key>
                     <string>Generic: PCI root is a 0x1000 page memory region used by some firmwares</string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                 </dict>
             </array>
             <key>Patch</key>
-            <array />
+            <array/>
             <key>Quirks</key>
             <dict>
                 <key>AllowRelocationBlock</key>
-                <false />
+                <false/>
                 <key>AvoidRuntimeDefrag</key>
-                <true />
+                <true/>
                 <key>DevirtualiseMmio</key>
-                <false />
+                <false/>
                 <key>DisableSingleUser</key>
-                <false />
+                <false/>
                 <key>DisableVariableWrite</key>
-                <false />
+                <false/>
                 <key>DiscardHibernateMap</key>
-                <false />
+                <false/>
                 <key>EnableSafeModeSlide</key>
-                <true />
+                <true/>
                 <key>EnableWriteUnprotector</key>
-                <true />
+                <true/>
                 <key>ForceBooterSignature</key>
-                <false />
+                <false/>
                 <key>ForceExitBootServices</key>
-                <false />
+                <false/>
                 <key>ProtectMemoryRegions</key>
-                <false />
+                <false/>
                 <key>ProtectSecureBoot</key>
-                <false />
+                <false/>
                 <key>ProtectUefiServices</key>
-                <false />
+                <false/>
                 <key>ProvideCustomSlide</key>
-                <true />
+                <true/>
                 <key>ProvideMaxSlide</key>
                 <integer>0</integer>
                 <key>RebuildAppleMemoryMap</key>
-                <false />
+                <false/>
                 <key>SetupVirtualMap</key>
-                <true />
+                <true/>
                 <key>SignalAppleOS</key>
-                <false />
+                <false/>
                 <key>SyncRuntimePermissions</key>
-                <true />
+                <true/>
             </dict>
         </dict>
         <key>DeviceProperties</key>
@@ -297,8 +297,7 @@
                     <key>device_type</key>
                     <data>VVNCIGNvbnRyb2xsZXI=</data>
                     <key>model</key>
-                    <data>NyBTZXJpZXMvQzIxNiBDaGlwc2V0IEZhbWlseSBVU0IgRW5oYW5jZWQgSG9zdCBDb250cm9s
-bGVyICMy</data>
+                    <data>NyBTZXJpZXMvQzIxNiBDaGlwc2V0IEZhbWlseSBVU0IgRW5oYW5jZWQgSG9zdCBDb250cm9sbGVyICMy</data>
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x1b,0x0)</key>
                 <dict>
@@ -307,7 +306,7 @@ bGVyICMy</data>
                 </dict>
             </dict>
             <key>Delete</key>
-            <dict />
+            <dict/>
         </dict>
         <key>Kernel</key>
         <dict>
@@ -321,7 +320,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/Lilu</string>
                     <key>MaxKernel</key>
@@ -339,7 +338,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/VirtualSMC</string>
                     <key>MaxKernel</key>
@@ -357,7 +356,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/FakeSMC</string>
                     <key>MaxKernel</key>
@@ -375,7 +374,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/GPUSensors</string>
                     <key>MaxKernel</key>
@@ -393,7 +392,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/LPCSensors</string>
                     <key>MaxKernel</key>
@@ -411,7 +410,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/ACPISensors</string>
                     <key>MaxKernel</key>
@@ -429,7 +428,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/CPUSensors</string>
                     <key>MaxKernel</key>
@@ -447,7 +446,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/SMMSensors</string>
                     <key>MaxKernel</key>
@@ -465,7 +464,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/AppleALC</string>
                     <key>MaxKernel</key>
@@ -483,7 +482,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/WhateverGreen</string>
                     <key>MaxKernel</key>
@@ -501,7 +500,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/USBInjectAll</string>
                     <key>MaxKernel</key>
@@ -519,7 +518,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/HoRNDIS</string>
                     <key>MaxKernel</key>
@@ -537,7 +536,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/VoodooPS2Controller</string>
                     <key>MaxKernel</key>
@@ -555,7 +554,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/VoodooPS2Keyboard</string>
                     <key>MaxKernel</key>
@@ -573,7 +572,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/VoodooPS2Mouse</string>
                     <key>MaxKernel</key>
@@ -591,7 +590,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/VoodooPS2Trackpad</string>
                     <key>MaxKernel</key>
@@ -609,7 +608,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/SMCDellSensors</string>
                     <key>MaxKernel</key>
@@ -627,7 +626,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/SMCLightSensor</string>
                     <key>MaxKernel</key>
@@ -645,7 +644,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/SMCProcessor</string>
                     <key>MaxKernel</key>
@@ -663,7 +662,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/SMCSuperIO</string>
                     <key>MaxKernel</key>
@@ -681,7 +680,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/RealtekRTL8111</string>
                     <key>MaxKernel</key>
@@ -700,7 +699,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string>Prevent Apple I2C kexts from attaching to I2C controllers</string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Identifier</key>
                     <string>com.apple.driver.AppleIntelLpssI2CController</string>
                     <key>MaxKernel</key>
@@ -714,7 +713,7 @@ bGVyICMy</data>
                     <key>Comment</key>
                     <string>Prevent Apple I2C kexts from attaching to I2C controllers</string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Identifier</key>
                     <string>com.apple.driver.AppleIntelLpssI2C</string>
                     <key>MaxKernel</key>
@@ -730,14 +729,14 @@ bGVyICMy</data>
                 <key>Cpuid1Mask</key>
                 <data></data>
                 <key>DummyPowerManagement</key>
-                <false />
+                <false/>
                 <key>MaxKernel</key>
                 <string></string>
                 <key>MinKernel</key>
                 <string></string>
             </dict>
             <key>Force</key>
-            <array />
+            <array/>
             <key>Patch</key>
             <array>
                 <dict>
@@ -750,7 +749,7 @@ bGVyICMy</data>
                     <key>Count</key>
                     <integer>1</integer>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Find</key>
                     <data>dS4Ptg==</data>
                     <key>Identifier</key>
@@ -780,7 +779,7 @@ bGVyICMy</data>
                     <key>Count</key>
                     <integer>1</integer>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Find</key>
                     <data>dTMPtw==</data>
                     <key>Identifier</key>
@@ -810,7 +809,7 @@ bGVyICMy</data>
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>Find</key>
                     <data>AEFQUExFIFNTRAA=</data>
                     <key>Identifier</key>
@@ -840,7 +839,7 @@ bGVyICMy</data>
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Find</key>
                     <data>g/sPDw==</data>
                     <key>Identifier</key>
@@ -870,7 +869,7 @@ bGVyICMy</data>
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Find</key>
                     <data>g/kPDw==</data>
                     <key>Identifier</key>
@@ -894,48 +893,48 @@ bGVyICMy</data>
             <key>Quirks</key>
             <dict>
                 <key>AppleCpuPmCfgLock</key>
-                <true />
+                <true/>
                 <key>AppleXcpmCfgLock</key>
-                <false />
+                <false/>
                 <key>AppleXcpmExtraMsrs</key>
-                <false />
+                <false/>
                 <key>AppleXcpmForceBoost</key>
-                <false />
+                <false/>
                 <key>CustomSMBIOSGuid</key>
-                <false />
+                <false/>
                 <key>DisableIoMapper</key>
-                <false />
+                <false/>
                 <key>DisableLinkeditJettison</key>
-                <true />
+                <true/>
                 <key>DisableRtcChecksum</key>
-                <false />
+                <false/>
                 <key>ExtendBTFeatureFlags</key>
-                <false />
+                <false/>
                 <key>ExternalDiskIcons</key>
-                <false />
+                <false/>
                 <key>ForceSecureBootScheme</key>
-                <false />
+                <false/>
                 <key>IncreasePciBarSize</key>
-                <false />
+                <false/>
                 <key>LapicKernelPanic</key>
-                <false />
+                <false/>
                 <key>LegacyCommpage</key>
-                <false />
+                <false/>
                 <key>PanicNoKextDump</key>
-                <false />
+                <false/>
                 <key>PowerTimeoutKernelPanic</key>
-                <false />
+                <false/>
                 <key>SetApfsTrimTimeout</key>
                 <integer>0</integer>
                 <key>ThirdPartyDrives</key>
-                <false />
+                <false/>
                 <key>XhciPortLimit</key>
-                <false />
+                <false/>
             </dict>
             <key>Scheme</key>
             <dict>
                 <key>FuzzyMatch</key>
-                <false />
+                <false/>
                 <key>KernelArch</key>
                 <string>Auto</string>
                 <key>KernelCache</key>
@@ -945,7 +944,7 @@ bGVyICMy</data>
         <key>Misc</key>
         <dict>
             <key>BlessOverride</key>
-            <array />
+            <array/>
             <key>Boot</key>
             <dict>
                 <key>ConsoleAttributes</key>
@@ -953,7 +952,7 @@ bGVyICMy</data>
                 <key>HibernateMode</key>
                 <string>None</string>
                 <key>HideAuxiliary</key>
-                <true />
+                <true/>
                 <key>LauncherOption</key>
                 <string>Short</string>
                 <key>LauncherPath</key>
@@ -961,15 +960,15 @@ bGVyICMy</data>
                 <key>PickerAttributes</key>
                 <integer>17</integer>
                 <key>PickerAudioAssist</key>
-                <false />
+                <false/>
                 <key>PickerMode</key>
                 <string>External</string>
                 <key>PickerVariant</key>
                 <string>Modern</string>
                 <key>PollAppleHotKeys</key>
-                <true />
+                <true/>
                 <key>ShowPicker</key>
-                <true />
+                <true/>
                 <key>TakeoffDelay</key>
                 <integer>0</integer>
                 <key>Timeout</key>
@@ -978,19 +977,19 @@ bGVyICMy</data>
             <key>Debug</key>
             <dict>
                 <key>AppleDebug</key>
-                <false />
+                <false/>
                 <key>ApplePanic</key>
-                <false />
+                <false/>
                 <key>DisableWatchDog</key>
-                <false />
+                <false/>
                 <key>DisplayDelay</key>
                 <integer>0</integer>
                 <key>DisplayLevel</key>
                 <integer>2147483650</integer>
                 <key>SerialInit</key>
-                <false />
+                <false/>
                 <key>SysReport</key>
-                <false />
+                <false/>
                 <key>Target</key>
                 <integer>0</integer>
             </dict>
@@ -1000,35 +999,35 @@ bGVyICMy</data>
                     <key>Arguments</key>
                     <string></string>
                     <key>Auxiliary</key>
-                    <false />
+                    <false/>
                     <key>Comment</key>
                     <string>Not signed for security reasons</string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Name</key>
                     <string>CustomOS</string>
                     <key>Path</key>
                     <string>PciRoot(0x0)/Pci(0x1,0x1)/Pci(0x0,0x0)/NVMe(0x1,11-22-33-44-55-66-77-88)/HD(1,GPT,00000000-0000-0000-0000-000000000000,0x800,0x64000)/\EFI\BOOT\BOOTX64.EFI</string>
                     <key>TextMode</key>
-                    <false />
+                    <false/>
                 </dict>
             </array>
             <key>Security</key>
             <dict>
                 <key>AllowNvramReset</key>
-                <true />
+                <true/>
                 <key>AllowSetDefault</key>
-                <true />
+                <true/>
                 <key>ApECID</key>
                 <integer>0</integer>
                 <key>AuthRestart</key>
-                <false />
+                <false/>
                 <key>BlacklistAppleUpdate</key>
-                <false />
+                <false/>
                 <key>DmgLoading</key>
                 <string>Disabled</string>
                 <key>EnablePassword</key>
-                <false />
+                <false/>
                 <key>ExposeSensitiveData</key>
                 <integer>4</integer>
                 <key>HaltLevel</key>
@@ -1050,37 +1049,37 @@ bGVyICMy</data>
                     <key>Arguments</key>
                     <string></string>
                     <key>Auxiliary</key>
-                    <false />
+                    <false/>
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true />
+                    <true/>
                     <key>Name</key>
                     <string>OpenShell</string>
                     <key>Path</key>
                     <string>OpenShell.efi</string>
                     <key>RealPath</key>
-                    <false />
+                    <false/>
                     <key>TextMode</key>
-                    <false />
+                    <false/>
                 </dict>
                 <dict>
                     <key>Arguments</key>
                     <string></string>
                     <key>Auxiliary</key>
-                    <false />
+                    <false/>
                     <key>Comment</key>
                     <string>Verify MsrE2</string>
                     <key>Enabled</key>
-                    <false />
+                    <false/>
                     <key>Name</key>
                     <string>Verify MsrE2</string>
                     <key>Path</key>
                     <string>VerifyMsrE2.efi</string>
                     <key>RealPath</key>
-                    <false />
+                    <false/>
                     <key>TextMode</key>
-                    <false />
+                    <false/>
                 </dict>
             </array>
         </dict>
@@ -1106,11 +1105,11 @@ bGVyICMy</data>
                 </dict>
             </dict>
             <key>Delete</key>
-            <dict />
+            <dict/>
             <key>LegacyEnable</key>
-            <false />
+            <false/>
             <key>LegacyOverwrite</key>
-            <false />
+            <false/>
             <key>LegacySchema</key>
             <dict>
                 <key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
@@ -1141,28 +1140,28 @@ bGVyICMy</data>
                 </array>
             </dict>
             <key>WriteFlash</key>
-            <false />
+            <false/>
         </dict>
         <key>PlatformInfo</key>
         <dict>
             <key>Automatic</key>
-            <true />
+            <true/>
             <key>CustomMemory</key>
-            <false />
+            <false/>
             <key>Generic</key>
             <dict>
                 <key>AdviseWindows</key>
-                <false />
+                <false/>
                 <key>MLB</key>
                 <string>C02353102J9F2FR1F</string>
                 <key>MaxBIOSVersion</key>
-                <false />
+                <false/>
                 <key>ProcessorType</key>
                 <integer>0</integer>
                 <key>ROM</key>
                 <data>ESIzAAAA</data>
                 <key>SpoofVendor</key>
-                <true />
+                <true/>
                 <key>SystemMemoryStatus</key>
                 <string>Auto</string>
                 <key>SystemProductName</key>
@@ -1173,28 +1172,28 @@ bGVyICMy</data>
                 <string>278A17A9-FCBD-403F-9441-5A4B153ACD19</string>
             </dict>
             <key>UpdateDataHub</key>
-            <true />
+            <true/>
             <key>UpdateNVRAM</key>
-            <true />
+            <true/>
             <key>UpdateSMBIOS</key>
-            <true />
+            <true/>
             <key>UpdateSMBIOSMode</key>
             <string>Create</string>
             <key>UseRawUuidEncoding</key>
-            <false />
+            <false/>
         </dict>
         <key>UEFI</key>
         <dict>
             <key>APFS</key>
             <dict>
                 <key>EnableJumpstart</key>
-                <true />
+                <true/>
                 <key>GlobalConnect</key>
-                <false />
+                <false/>
                 <key>HideVerbose</key>
-                <true />
+                <true/>
                 <key>JumpstartHotPlug</key>
-                <true />
+                <true/>
                 <key>MinDate</key>
                 <integer>0</integer>
                 <key>MinVersion</key>
@@ -1205,7 +1204,7 @@ bGVyICMy</data>
                 <key>AppleEvent</key>
                 <string>Auto</string>
                 <key>CustomDelays</key>
-                <true />
+                <true/>
                 <key>KeyInitialDelay</key>
                 <integer>0</integer>
                 <key>KeySubsequentDelay</key>
@@ -1224,20 +1223,20 @@ bGVyICMy</data>
                 <key>AudioOut</key>
                 <integer>0</integer>
                 <key>AudioSupport</key>
-                <false />
+                <false/>
                 <key>MinimumVolume</key>
                 <integer>0</integer>
                 <key>PlayChime</key>
                 <string>Auto</string>
                 <key>ResetTrafficClass</key>
-                <false />
+                <false/>
                 <key>SetupDelay</key>
                 <integer>0</integer>
                 <key>VolumeAmplifier</key>
                 <integer>0</integer>
             </dict>
             <key>ConnectDrivers</key>
-            <true />
+            <true/>
             <key>Drivers</key>
             <array>
                 <string>OpenRuntime.efi</string>
@@ -1247,17 +1246,17 @@ bGVyICMy</data>
             <key>Input</key>
             <dict>
                 <key>KeyFiltering</key>
-                <false />
+                <false/>
                 <key>KeyForgetThreshold</key>
                 <integer>5</integer>
                 <key>KeySupport</key>
-                <true />
+                <true/>
                 <key>KeySupportMode</key>
                 <string>Auto</string>
                 <key>KeySwap</key>
-                <false />
+                <false/>
                 <key>PointerSupport</key>
-                <false />
+                <false/>
                 <key>PointerSupportMode</key>
                 <string>ASUS</string>
                 <key>TimerResolution</key>
@@ -1266,96 +1265,98 @@ bGVyICMy</data>
             <key>Output</key>
             <dict>
                 <key>ClearScreenOnModeSwitch</key>
-                <false />
+                <false/>
                 <key>ConsoleMode</key>
                 <string>Max</string>
                 <key>DirectGopRendering</key>
-                <false />
+                <false/>
                 <key>ForceResolution</key>
-                <false />
+                <false/>
                 <key>GopPassThrough</key>
-                <false />
+                <false/>
                 <key>IgnoreTextInGraphics</key>
-                <false />
+                <false/>
                 <key>ProvideConsoleGop</key>
-                <true />
+                <true/>
                 <key>ReconnectOnResChange</key>
-                <false />
+                <false/>
                 <key>ReplaceTabWithSpace</key>
-                <false />
+                <false/>
                 <key>Resolution</key>
                 <string>1440x900</string>
                 <key>SanitiseClearScreen</key>
-                <false />
+                <false/>
                 <key>TextRenderer</key>
                 <string>BuiltinGraphics</string>
                 <key>UgaPassThrough</key>
-                <false />
+                <false/>
             </dict>
             <key>ProtocolOverrides</key>
             <dict>
                 <key>AppleAudio</key>
-                <false />
+                <false/>
                 <key>AppleBootPolicy</key>
-                <false />
+                <false/>
                 <key>AppleDebugLog</key>
-                <false />
+                <false/>
+                <key>AppleEg2Info</key>
+                <false/>
                 <key>AppleFramebufferInfo</key>
-                <false />
+                <false/>
                 <key>AppleImageConversion</key>
-                <false />
+                <false/>
                 <key>AppleImg4Verification</key>
-                <false />
+                <false/>
                 <key>AppleKeyMap</key>
-                <false />
+                <false/>
                 <key>AppleRtcRam</key>
-                <false />
+                <false/>
                 <key>AppleSecureBoot</key>
-                <false />
+                <false/>
                 <key>AppleSmcIo</key>
-                <true />
+                <true/>
                 <key>AppleUserInterfaceTheme</key>
-                <false />
+                <false/>
                 <key>DataHub</key>
-                <false />
+                <false/>
                 <key>DeviceProperties</key>
-                <false />
+                <false/>
                 <key>FirmwareVolume</key>
-                <false />
+                <false/>
                 <key>HashServices</key>
-                <false />
+                <false/>
                 <key>OSInfo</key>
-                <false />
+                <false/>
                 <key>UnicodeCollation</key>
-                <false />
+                <false/>
             </dict>
             <key>Quirks</key>
             <dict>
                 <key>ActivateHpetSupport</key>
-                <false />
+                <false/>
                 <key>DisableSecurityPolicy</key>
-                <false />
+                <false/>
                 <key>EnableVectorAcceleration</key>
-                <false />
+                <false/>
                 <key>ExitBootServicesDelay</key>
                 <integer>0</integer>
                 <key>ForgeUefiSupport</key>
-                <false />
+                <false/>
                 <key>IgnoreInvalidFlexRatio</key>
-                <true />
+                <true/>
                 <key>ReleaseUsbOwnership</key>
-                <false />
+                <false/>
                 <key>ReloadOptionRoms</key>
-                <false />
+                <false/>
                 <key>RequestBootVarRouting</key>
-                <true />
+                <true/>
                 <key>TscSyncTimeout</key>
                 <integer>0</integer>
                 <key>UnblockFsConnect</key>
-                <false />
+                <false/>
             </dict>
             <key>ReservedMemory</key>
-            <array />
+            <array/>
         </dict>
     </dict>
 </plist>
