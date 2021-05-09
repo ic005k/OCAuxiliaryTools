@@ -41,8 +41,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210512";
-    ocVer = "0.6.9";
+    CurVerison = "20210513";
+    ocVer = "0.7.0";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
 
@@ -6050,9 +6050,9 @@ void MainWindow::init_MainUI()
     ui->cboxFind->lineEdit()->setClearButtonEnabled(true);
     ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
     connect(ui->cboxFind->lineEdit(),
-            &QLineEdit::returnPressed,
-            this,
-            &MainWindow::on_actionFind_triggered);
+        &QLineEdit::returnPressed,
+        this,
+        &MainWindow::on_actionFind_triggered);
 
     // 清除搜索历史
     clearTextsAction = new QAction(this);

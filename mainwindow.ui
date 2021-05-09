@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7530,7 +7530,7 @@ Enable this option to be able to see all the boot options when having multiple d
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>7</number>
+              <number>6</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -9112,6 +9112,26 @@ However, in case FakeSMC kernel extension is used, manual NVRAM key variable add
                    </property>
                    <property name="text">
                     <string>UnicodeCollation</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1">
+                  <widget class="QCheckBox" name="chkAppleEg2Info">
+                   <property name="toolTip">
+                    <string>Type: plist boolean
+
+Description: Replaces the Apple EFI Graphics 2 protocol with a builtin version.
+
+Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose screen rotation to macOS. Refer to ForceDisplayRotationInEFI variable description on how to set screen rotation angle.
+----
+类型：plist布尔值
+
+描述：用一个内置的版本取代苹果EFI图形2协议。
+
+注意: 这个协议允许较新的EfiBoot版本（至少10.15）向macOS暴露屏幕旋转。请参考ForceDisplayRotationInEFI变量描述如何设置屏幕旋转角度。</string>
+                   </property>
+                   <property name="text">
+                    <string>AppleEg2Info</string>
                    </property>
                   </widget>
                  </item>
