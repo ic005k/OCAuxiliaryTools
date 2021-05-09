@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5426,19 +5426,43 @@ A continuously updated variable list can be found in a corresponding document: N
         <string notr="true">PlatformInfo</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_75">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item row="1" column="0">
          <widget class="QGroupBox" name="groupBox_12">
           <property name="title">
            <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_56">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item row="0" column="0">
             <widget class="QTabWidget" name="tabPlatformInfo">
              <property name="tabShape">
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>5</number>
+              <number>1</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -6085,6 +6109,18 @@ Note: On Intel Skylake X ART frequency may be a little less (approx. 0.25%) than
                <string>Memory</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_32">
+               <property name="leftMargin">
+                <number>5</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>5</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
                <item row="0" column="6">
                 <widget class="QLineEdit" name="editIntFormFactor"/>
                </item>
@@ -7119,6 +7155,18 @@ In addition it will also make some operating systems like Linux unbootable.
                <string>SystemInfo</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_37">
+               <property name="leftMargin">
+                <number>5</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>5</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
                <item row="0" column="0">
                 <widget class="QTextEdit" name="textMacInfo">
                  <property name="readOnly">
