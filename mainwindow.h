@@ -879,7 +879,6 @@ private:
     QAction* undoAction = nullptr;
     QAction* redoAction = nullptr;
 
-    void setComboBoxStyle(QComboBox* w);
     void setListMainIcon();
     bool editExclusion(QLineEdit* w, QString name);
     QString getSubTabStr(int tabIndex);

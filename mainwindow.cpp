@@ -6050,12 +6050,9 @@ void MainWindow::init_MainUI()
     ui->cboxFind->lineEdit()->setClearButtonEnabled(true);
     ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
     connect(ui->cboxFind->lineEdit(),
-        &QLineEdit::returnPressed,
-        this,
-        &MainWindow::on_actionFind_triggered);
-
-    if (win)
-        setComboBoxStyle(ui->cboxFind);
+            &QLineEdit::returnPressed,
+            this,
+            &MainWindow::on_actionFind_triggered);
 
     // 清除搜索历史
     clearTextsAction = new QAction(this);
@@ -7058,9 +7055,7 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 {
     Q_UNUSED(event);
     int index = ui->listMain->currentRow();
-
     setListMainIcon();
-
     ui->listMain->setCurrentRow(index);
 }
 
@@ -7947,6 +7942,10 @@ void MainWindow::on_actionFind_triggered()
         ui->dockFind->show();
         FindTextChange = false;
         ui->listFind->setCurrentRow(0);
+
+        int index = ui->listMain->currentRow();
+        setListMainIcon();
+        ui->listMain->setCurrentRow(index);
 
         if (red < 55) {
 
@@ -8978,9 +8977,6 @@ void MainWindow::init_setWindowModified()
         QComboBox* w = (QComboBox*)listOfComboBox.at(i);
 
         connect(w, &QComboBox::currentTextChanged, this, &MainWindow::setWM);
-
-        if (win)
-            setComboBoxStyle(w);
     }
 
     // Table
@@ -8991,22 +8987,6 @@ void MainWindow::init_setWindowModified()
 
         connect(w, &QTableWidget::itemChanged, this, &MainWindow::setWM);
     }
-}
-
-void MainWindow::setComboBoxStyle(QComboBox* w)
-{
-    QString strComboBoxStyle = "QComboBox QAbstractItemView:item\
-    \n{\
-        font-family: PingFangSC-Regular;\n\
-        font-size:12px;\n\
-        min-height:30px;\n\
-        min-width:20px;\n\
-    }\n";
-
-    QStyledItemDelegate* styledItemDelegate = new QStyledItemDelegate();
-    w->setItemDelegate(styledItemDelegate);
-    //w->setStyleSheet(strComboBoxStyle);
-    w->setMinimumHeight(ui->editIntProvideMaxSlide->height());
 }
 
 void MainWindow::setWM()
