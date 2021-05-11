@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210513";
+    CurVerison = "20210515";
     ocVer = "0.7.0";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -5753,7 +5753,7 @@ void MainWindow::setListMainIcon()
 void MainWindow::init_listMainSub()
 {
     QString listStyle;
-    listStyle = "QListWidget::item:selected{background:lightgreen; border:10px blue; color:black}";
+    listStyle = "QListWidget::item:selected{background:lightblue; border:10px blue; color:black}";
     ui->listMain->setStyleSheet(listStyle);
     ui->listSub->setStyleSheet(listStyle);
 
