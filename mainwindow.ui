@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5462,7 +5462,7 @@ A continuously updated variable list can be found in a corresponding document: N
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>2</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -6109,21 +6109,6 @@ Note: On Intel Skylake X ART frequency may be a little less (approx. 0.25%) than
                <string>Memory</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_32">
-               <property name="leftMargin">
-                <number>5</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>5</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item row="0" column="6">
-                <widget class="QLineEdit" name="editIntFormFactor"/>
-               </item>
                <item row="0" column="0" colspan="2">
                 <widget class="QLabel" name="label_105">
                  <property name="toolTip">
@@ -6146,92 +6131,8 @@ DataWidth为0，TotalWidth为8，表示该器件仅用于提供8个纠错位。<
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
-                <widget class="QLineEdit" name="editIntTotalWidth"/>
-               </item>
-               <item row="0" column="5">
-                <widget class="QLabel" name="label_100">
-                 <property name="toolTip">
-                  <string> Specifies the form factor of the memory. On Macs this should usually be DIMM or SODIMM.
-
-Commonly used form factors are listed below.
-
-When CustomMemory is false, this value is automatically set based on Mac product name.
-
-• 0x01 — Other
-• 0x02 — Unknown
-• 0x09 — DIMM
-• 0x0D — SODIMM
-• 0x0F — FB-DIMM
-
-----
-
- 指定内存的外形尺寸。在 Mac 上，这通常应该是 DIMM 或 SODIMM。
-
-常用的形式因素列在下面。
-
-当CustomMemory为false时，此值会根据Mac产品名称自动设置。
-
-- 0x01 - 其他
-- 0x02 - 未知
-- 0x09 - DIMM
-- 0x0D - SODIMM
-- 0x0F - FB-DIMM
-</string>
-                 </property>
-                 <property name="statusTip">
-                  <string>Memory Device (Type 17) — Form Factor</string>
-                 </property>
-                 <property name="text">
-                  <string notr="true">FormFactor</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="4">
-                <widget class="QLineEdit" name="editIntErrorCorrection"/>
-               </item>
-               <item row="1" column="0" colspan="2">
-                <widget class="QLabel" name="label_101">
-                 <property name="toolTip">
-                  <string> Specifies the total width, in bits, of the memory, including any check or error-correction bits. 
-
-If there are no error-correction bits, this value should be equal to DataWidth.
-
-----
-
- 指定内存的总宽度，以位为单位，包括任何检查或纠错位。
-
-如果没有纠错位，这个值应该等于DataWidth。</string>
-                 </property>
-                 <property name="text">
-                  <string notr="true">TotalWidth</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="6">
-                <widget class="QLineEdit" name="editIntTypeDetail"/>
-               </item>
-               <item row="4" column="1">
-                <widget class="QToolButton" name="btnDevices_del">
-                 <property name="font">
-                  <font>
-                   <pointsize>13</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>DeleteItem</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="qtocc.qrc">
-                   <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>20</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </widget>
+               <item row="0" column="2">
+                <widget class="QLineEdit" name="editIntDataWidth"/>
                </item>
                <item row="0" column="3">
                 <widget class="QLabel" name="label_102">
@@ -6278,90 +6179,70 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0">
-                <widget class="QToolButton" name="btnDevices_add">
-                 <property name="font">
-                  <font>
-                   <pointsize>13</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>AddItem</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="qtocc.qrc">
-                   <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>20</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </widget>
+               <item row="0" column="4">
+                <widget class="QLineEdit" name="editIntErrorCorrection"/>
                </item>
-               <item row="1" column="5">
-                <widget class="QLabel" name="label_104">
+               <item row="0" column="5">
+                <widget class="QLabel" name="label_100">
                  <property name="toolTip">
-                  <string> Specifies additional memory type information.
+                  <string> Specifies the form factor of the memory. On Macs this should usually be DIMM or SODIMM.
 
-• Bit 0 — Reserved, set to 0
-• Bit 1 — Other
-• Bit 2 — Unknown
-• Bit 7 — Synchronous
-• Bit 13 — Registered (buffered)
-• Bit 14 — Unbuffered (unregistered)
+Commonly used form factors are listed below.
+
+When CustomMemory is false, this value is automatically set based on Mac product name.
+
+• 0x01 — Other
+• 0x02 — Unknown
+• 0x09 — DIMM
+• 0x0D — SODIMM
+• 0x0F — FB-DIMM
 
 ----
 
- 指定附加的存储器类型信息。
+ 指定内存的外形尺寸。在 Mac 上，这通常应该是 DIMM 或 SODIMM。
 
-- 位0 - 保留，设置为0
-- 位1 - 其他
-- 位2--未知
-- 位7 - 同步
-- 位13 -注册（缓冲）
-- 位14 - 未缓冲（未注册）
+常用的形式因素列在下面。
+
+当CustomMemory为false时，此值会根据Mac产品名称自动设置。
+
+- 0x01 - 其他
+- 0x02 - 未知
+- 0x09 - DIMM
+- 0x0D - SODIMM
+- 0x0F - FB-DIMM
 </string>
                  </property>
+                 <property name="statusTip">
+                  <string>Memory Device (Type 17) — Form Factor</string>
+                 </property>
                  <property name="text">
-                  <string notr="true">TypeDetail</string>
+                  <string notr="true">FormFactor</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="2" colspan="7">
-                <spacer name="horizontalSpacer_23">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>1015</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
+               <item row="0" column="6">
+                <widget class="QLineEdit" name="editIntFormFactor"/>
                </item>
-               <item row="3" column="0" colspan="9">
-                <widget class="QTableWidget" name="tableDevices">
-                 <property name="columnCount">
-                  <number>8</number>
+               <item row="1" column="0" colspan="2">
+                <widget class="QLabel" name="label_101">
+                 <property name="toolTip">
+                  <string> Specifies the total width, in bits, of the memory, including any check or error-correction bits. 
+
+If there are no error-correction bits, this value should be equal to DataWidth.
+
+----
+
+ 指定内存的总宽度，以位为单位，包括任何检查或纠错位。
+
+如果没有纠错位，这个值应该等于DataWidth。</string>
                  </property>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
+                 <property name="text">
+                  <string notr="true">TotalWidth</string>
+                 </property>
                 </widget>
                </item>
-               <item row="0" column="2">
-                <widget class="QLineEdit" name="editIntDataWidth"/>
-               </item>
-               <item row="1" column="4">
-                <widget class="QLineEdit" name="editIntType"/>
+               <item row="1" column="2">
+                <widget class="QLineEdit" name="editIntTotalWidth"/>
                </item>
                <item row="1" column="3">
                 <widget class="QLabel" name="label_103">
@@ -6404,7 +6285,42 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
+               <item row="1" column="4">
+                <widget class="QLineEdit" name="editIntType"/>
+               </item>
+               <item row="1" column="5">
+                <widget class="QLabel" name="label_104">
+                 <property name="toolTip">
+                  <string> Specifies additional memory type information.
+
+• Bit 0 — Reserved, set to 0
+• Bit 1 — Other
+• Bit 2 — Unknown
+• Bit 7 — Synchronous
+• Bit 13 — Registered (buffered)
+• Bit 14 — Unbuffered (unregistered)
+
+----
+
+ 指定附加的存储器类型信息。
+
+- 位0 - 保留，设置为0
+- 位1 - 其他
+- 位2--未知
+- 位7 - 同步
+- 位13 -注册（缓冲）
+- 位14 - 未缓冲（未注册）
+</string>
+                 </property>
+                 <property name="text">
+                  <string notr="true">TypeDetail</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="6">
+                <widget class="QLineEdit" name="editIntTypeDetail"/>
+               </item>
+               <item row="2" column="0" colspan="2">
                 <widget class="QLabel" name="label_99">
                  <property name="toolTip">
                   <string>Specifies the maximum amount of memory, in bytes, supported by the system.
@@ -6424,6 +6340,78 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                </item>
                <item row="2" column="2">
                 <widget class="QLineEdit" name="editIntMaxCapacity"/>
+               </item>
+               <item row="3" column="0" colspan="7">
+                <widget class="QTableWidget" name="tableDevices">
+                 <property name="columnCount">
+                  <number>8</number>
+                 </property>
+                 <column/>
+                 <column/>
+                 <column/>
+                 <column/>
+                 <column/>
+                 <column/>
+                 <column/>
+                 <column/>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QToolButton" name="btnDevices_add">
+                 <property name="font">
+                  <font>
+                   <pointsize>13</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>AddItem</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="qtocc.qrc">
+                   <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QToolButton" name="btnDevices_del">
+                 <property name="font">
+                  <font>
+                   <pointsize>13</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>DeleteItem</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="qtocc.qrc">
+                   <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="2" colspan="5">
+                <spacer name="horizontalSpacer_23">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>1015</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </widget>
