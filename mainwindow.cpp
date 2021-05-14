@@ -5783,15 +5783,15 @@ void MainWindow::init_listMainSub()
             ui->listSub->setMaximumHeight(24);
     }
 
-    QFont myFont(ui->listMain->font().family(), ui->listMain->font().pointSize());
+    QFont myFont(ui->listSub->font().family(), ui->listSub->font().pointSize());
     QFontMetrics fm(myFont);
-    int fontHeight = fm.height() + 10;
+    int fontHeight = fm.height();
 
-    ui->listMain->setMaximumHeight(iSize + fontHeight);
+    ui->listMain->setMaximumHeight(iSize + fontHeight + 10);
     if (zh_cn)
-        ui->listSub->setMaximumHeight(fontHeight * 2);
+        ui->listSub->setMaximumHeight(fontHeight * 2 + 10);
     else
-        ui->listSub->setMaximumHeight(fontHeight);
+        ui->listSub->setMaximumHeight(fontHeight + 10);
 
     ui->listMain->setViewMode(QListView::ListMode);
     ui->listSub->setViewMode(QListView::ListMode);
