@@ -5757,7 +5757,7 @@ void MainWindow::init_listMainSub()
     ui->listMain->setStyleSheet(listStyle);
     ui->listSub->setStyleSheet(listStyle);
 
-    int iSize = 25;
+    int iSize = ui->toolBar->iconSize().width();
     ui->listMain->setIconSize(QSize(iSize, iSize));
 
     if (win) {
@@ -5783,11 +5783,15 @@ void MainWindow::init_listMainSub()
             ui->listSub->setMaximumHeight(24);
     }
 
-    ui->listMain->setMaximumHeight(55);
+    QFont myFont(ui->listMain->font().family(), ui->listMain->font().pixelSize());
+    QFontMetrics fm(myFont);
+    int fontHeight = fm.height() + 0;
+
+    ui->listMain->setMaximumHeight(iSize + fontHeight);
     if (zh_cn)
-        ui->listSub->setMaximumHeight(46);
+        ui->listSub->setMaximumHeight(fontHeight * 2);
     else
-        ui->listSub->setMaximumHeight(23);
+        ui->listSub->setMaximumHeight(fontHeight);
 
     ui->listMain->setViewMode(QListView::ListMode);
     ui->listSub->setViewMode(QListView::ListMode);
@@ -6022,8 +6026,8 @@ void MainWindow::init_MainUI()
     orgLabelStyle = ui->label->styleSheet();
     orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
 
-    int iSize = 25;
-    ui->toolBar->setIconSize(QSize(iSize, iSize));
+    //int iSize = 25;
+    //ui->toolBar->setIconSize(QSize(iSize, iSize));
 
     init_listMainSub();
 
@@ -6998,21 +7002,23 @@ void MainWindow::on_listMain_itemSelectionChanged()
 int MainWindow::getTextWidth(QString str, QWidget* w)
 {
     str = str.trimmed();
-    if (!win)
-        str = str + "    ";
+    str = str + "";
 
-    QFont myFont(w->font().family(), w->font().pointSize());
+    QFont myFont(w->font().family(), w->font().pixelSize());
 
     QFontMetrics fm(myFont);
     int mw;
 
 #if (QT_VERSION <= QT_VERSION_CHECK(5, 9, 9))
     mw = fm.width(str);
+
 #endif
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
     mw = fm.horizontalAdvance(str);
+
 #endif
+
     return mw;
 }
 
