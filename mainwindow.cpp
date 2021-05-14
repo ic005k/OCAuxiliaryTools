@@ -7002,9 +7002,9 @@ void MainWindow::on_listMain_itemSelectionChanged()
 int MainWindow::getTextWidth(QString str, QWidget* w)
 {
     str = str.trimmed();
-    str = str + "";
+    str = str + "    ";
 
-    QFont myFont(w->font().family(), w->font().pixelSize());
+    QFont myFont(w->font().family(), w->font().pointSize());
 
     QFontMetrics fm(myFont);
     int mw;
