@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1392</width>
-    <height>663</height>
+    <width>1484</width>
+    <height>755</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -3018,7 +3018,7 @@ The behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -4476,12 +4476,6 @@ Third party drivers may introduce additional security (and performance) consider
                   <string/>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_46">
-                  <property name="topMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>0</number>
-                  </property>
                   <item row="0" column="0">
                    <widget class="QLabel" name="label_93">
                     <property name="toolTip">
@@ -4499,6 +4493,9 @@ Third party drivers may introduce additional security (and performance) consider
                     </property>
                    </widget>
                   </item>
+                  <item row="0" column="1" colspan="3">
+                   <widget class="QLineEdit" name="editDatPasswordHash"/>
+                  </item>
                   <item row="1" column="0">
                    <widget class="QLabel" name="label_94">
                     <property name="toolTip">
@@ -4514,14 +4511,17 @@ Third party drivers may introduce additional security (and performance) consider
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="0">
+                  <item row="1" column="1" colspan="3">
+                   <widget class="QLineEdit" name="editDatPasswordSalt"/>
+                  </item>
+                  <item row="2" column="0" colspan="2">
                    <widget class="QToolButton" name="btnGetPassHash">
                     <property name="text">
                      <string>Generate password hash and password salt</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="1">
+                  <item row="2" column="2">
                    <widget class="QLineEdit" name="editPassInput">
                     <property name="maximumSize">
                      <size>
@@ -4534,7 +4534,7 @@ Third party drivers may introduce additional security (and performance) consider
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="2">
+                  <item row="2" column="3">
                    <widget class="QProgressBar" name="progressBar">
                     <property name="maximumSize">
                      <size>
@@ -4549,12 +4549,6 @@ Third party drivers may introduce additional security (and performance) consider
                      <bool>false</bool>
                     </property>
                    </widget>
-                  </item>
-                  <item row="0" column="1" colspan="2">
-                   <widget class="QLineEdit" name="editDatPasswordHash"/>
-                  </item>
-                  <item row="1" column="1" colspan="2">
-                   <widget class="QLineEdit" name="editDatPasswordSalt"/>
                   </item>
                  </layout>
                 </widget>
@@ -5462,7 +5456,7 @@ A continuously updated variable list can be found in a corresponding document: N
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>2</number>
+              <number>0</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -5537,11 +5531,6 @@ A continuously updated variable list can be found in a corresponding document: N
                </item>
                <item row="1" column="2">
                 <widget class="QToolButton" name="btnSystemUUID">
-                 <property name="font">
-                  <font>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
                  <property name="text">
                   <string>Generate</string>
                  </property>
@@ -5549,11 +5538,6 @@ A continuously updated variable list can be found in a corresponding document: N
                </item>
                <item row="0" column="2">
                 <widget class="QToolButton" name="btnGenerate">
-                 <property name="font">
-                  <font>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
                  <property name="text">
                   <string>Generate</string>
                  </property>
@@ -5606,11 +5590,6 @@ A continuously updated variable list can be found in a corresponding document: N
                </item>
                <item row="2" column="2">
                 <widget class="QToolButton" name="btnROM">
-                 <property name="font">
-                  <font>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
                  <property name="text">
                   <string>Generate</string>
                  </property>
@@ -6424,8 +6403,8 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                 <rect>
                  <x>20</x>
                  <y>12</y>
-                 <width>691</width>
-                 <height>231</height>
+                 <width>732</width>
+                 <height>258</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_40">
@@ -9480,8 +9459,8 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1392</width>
-     <height>24</height>
+     <width>1484</width>
+     <height>34</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -9559,7 +9538,7 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
    <property name="minimumSize">
     <size>
      <width>200</width>
-     <height>166</height>
+     <height>178</height>
     </size>
    </property>
    <property name="maximumSize">
