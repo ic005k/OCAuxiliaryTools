@@ -809,7 +809,7 @@ This works around firmware that provide a BGRT table but fail to handle screen u
              <widget class="QComboBox" name="cboxFind">
               <property name="minimumSize">
                <size>
-                <width>320</width>
+                <width>260</width>
                 <height>0</height>
                </size>
               </property>
@@ -4944,7 +4944,7 @@ Note: This functionality is currently in development and is not ready for daily 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
