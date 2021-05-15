@@ -6026,8 +6026,8 @@ void MainWindow::init_MainUI()
     orgLabelStyle = ui->label->styleSheet();
     orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
 
-    //int iSize = 25;
-    //ui->toolBar->setIconSize(QSize(iSize, iSize));
+    int iSize = 25;
+    ui->toolBar->setIconSize(QSize(iSize, iSize));
 
     init_listMainSub();
 
