@@ -9460,7 +9460,7 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
      <x>0</x>
      <y>0</y>
      <width>1484</width>
-     <height>34</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -9508,7 +9508,6 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
     <addaction name="actionOpenCore_Factory"/>
     <addaction name="actionOpenCore_Forum"/>
     <addaction name="actionOpenCanopyIcons"/>
-    <addaction name="actionSimplified_Chinese_Manual"/>
     <addaction name="btnCheckUpdate"/>
     <addaction name="separator"/>
     <addaction name="actionBug_Report"/>
@@ -9598,15 +9597,16 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
    <property name="text">
     <string>OpenCore Factory</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
   </action>
   <action name="actionOpenCore">
    <property name="text">
     <string>OpenCore</string>
    </property>
-  </action>
-  <action name="actionSimplified_Chinese_Manual">
-   <property name="text">
-    <string>Simplified Chinese Manual</string>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
   <action name="actionPlist_editor">

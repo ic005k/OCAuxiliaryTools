@@ -304,7 +304,7 @@ private slots:
     void on_line1();
     void on_line2();
     void on_line3();
-    void on_line4();
+
     void on_line5();
 
     void on_line20();

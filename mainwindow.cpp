@@ -2141,7 +2141,7 @@ void MainWindow::initui_UEFI()
     // Drivers
     QTableWidgetItem* id0;
 
-    ui->table_uefi_drivers->setColumnWidth(0, 1000);
+    //ui->table_uefi_drivers->setColumnWidth(0, 1000);
     id0 = new QTableWidgetItem(tr("Drivers"));
     ui->table_uefi_drivers->setHorizontalHeaderItem(0, id0);
     ui->table_uefi_drivers->setAlternatingRowColors(true);
@@ -5946,10 +5946,6 @@ void MainWindow::init_HelpMenu()
     connect(ui->actionOpenCore_Factory, &QAction::triggered, this, &MainWindow::on_line2);
     connect(ui->actionOpenCore_Forum, &QAction::triggered, this, &MainWindow::on_line3);
 
-    connect(ui->actionSimplified_Chinese_Manual, &QAction::triggered, this, &MainWindow::on_line4);
-    if (!zh_cn)
-        ui->actionSimplified_Chinese_Manual->setVisible(false);
-
     connect(ui->actionOpenCanopyIcons, &QAction::triggered, this, &MainWindow::on_line5);
 
     connect(ui->actionPlist_editor, &QAction::triggered, this, &MainWindow::on_line20);
@@ -5960,7 +5956,7 @@ void MainWindow::init_HelpMenu()
     if (mac || osx1012)
         ui->actionOpenCore_Factory->setIconVisibleInMenu(false);
     ui->actionOpenCore_Factory->setIcon(QIcon(":/icon/ocf.png"));
-    ui->toolBar->addAction(ui->actionOpenCore_Factory);
+    //ui->toolBar->addAction(ui->actionOpenCore_Factory);
 
     //检查更新
     if (mac || osx1012)
@@ -5968,13 +5964,13 @@ void MainWindow::init_HelpMenu()
     ui->btnCheckUpdate->setIcon(QIcon(":/icon/cu.png"));
     ui->toolBar->addAction(ui->btnCheckUpdate);
 
-    ui->toolBar->addSeparator();
+    //ui->toolBar->addSeparator();
 
     //文档
     if (mac || osx1012)
         ui->btnHelp->setIconVisibleInMenu(false);
     ui->btnHelp->setIcon(QIcon(":/icon/doc.png"));
-    ui->toolBar->addAction(ui->btnHelp);
+    //ui->toolBar->addAction(ui->btnHelp);
 
     // Bug Report
     if (mac || osx1012)
@@ -6040,12 +6036,12 @@ void MainWindow::init_MainUI()
     ui->toolBar->addWidget(ui->lblCount);
     ui->toolBar->addWidget(ui->cboxFind);
     ui->toolBar->addAction(ui->actionFind);
-    ui->toolBar->addAction(ui->actionGo_to_the_previous);
-    ui->toolBar->addAction(ui->actionGo_to_the_next);
+    //ui->toolBar->addAction(ui->actionGo_to_the_previous);
+    //ui->toolBar->addAction(ui->actionGo_to_the_next);
 
-    ui->toolBar->addSeparator();
-    ui->toolBar->addAction(ui->actionDatabase);
-    ui->toolBar->addAction(ui->actionOpen_database_directory);
+    //ui->toolBar->addSeparator();
+    //ui->toolBar->addAction(ui->actionDatabase);
+    //ui->toolBar->addAction(ui->actionOpen_database_directory);
 
     init_HelpMenu();
 
@@ -6396,12 +6392,6 @@ void MainWindow::on_line3()
 {
     QUrl url(QString(
         "https://www.insanelymac.com/forum/topic/338516-opencore-discussion/"));
-    QDesktopServices::openUrl(url);
-}
-
-void MainWindow::on_line4()
-{
-    QUrl url(QString("https://oc.skk.moe/"));
     QDesktopServices::openUrl(url);
 }
 
