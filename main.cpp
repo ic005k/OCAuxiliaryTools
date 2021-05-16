@@ -21,13 +21,13 @@ int main(int argc, char* argv[])
     // QApplication a(argc, argv);
     MyApplication* a = new MyApplication(argc, argv);
 
+    QFont f;
 #ifdef Q_OS_WIN32
 
     PlistFileName = QString::fromLocal8Bit(argv[1]); //解决乱码
 
-    QFont f;
     f.setFamily("Microsoft YaHei UI");
-    a->setFont(f);
+
 #endif
 
 #ifdef Q_OS_MAC
@@ -45,5 +45,6 @@ int main(int argc, char* argv[])
     }
 
     f.setPixelSize(12);
+    a->setFont(f);
     return a->exec();
 }
