@@ -339,7 +339,6 @@ QString Method::copyTools(QString pathSource, QString pathTarget)
 
 void Method::on_GenerateEFI()
 {
-
     QDir dir;
     QString strDatabase;
 
