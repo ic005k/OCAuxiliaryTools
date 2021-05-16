@@ -10177,48 +10177,33 @@ void MainWindow::on_btnOpenKextDir_clicked()
     openDir("/Database/EFI/OC/Kexts");
 }
 
-void MainWindow::on_btnDisplayLevel_clicked()
+void MainWindow::showDlgPar(bool b1, bool b2, bool b3, bool b4)
 {
-
-    dlgPar->ui->gScanPolicy->setVisible(false);
-    dlgPar->ui->gPickerAttributes->setVisible(false);
-    dlgPar->ui->gExposeSensitiveData->setVisible(false);
-    dlgPar->ui->gDisplayLevel->setVisible(true);
+    dlgPar->ui->gScanPolicy->setVisible(b1);
+    dlgPar->ui->gPickerAttributes->setVisible(b2);
+    dlgPar->ui->gExposeSensitiveData->setVisible(b3);
+    dlgPar->ui->gDisplayLevel->setVisible(b4);
     dlgPar->resize(QSize(1, 1));
     dlgPar->setModal(true);
     dlgPar->show();
+}
+
+void MainWindow::on_btnDisplayLevel_clicked()
+{
+    showDlgPar(false, false, false, true);
 }
 
 void MainWindow::on_btnScanPolicy_clicked()
 {
-    dlgPar->ui->gScanPolicy->setVisible(true);
-    dlgPar->ui->gDisplayLevel->setVisible(false);
-    dlgPar->ui->gPickerAttributes->setVisible(false);
-    dlgPar->ui->gExposeSensitiveData->setVisible(false);
-    dlgPar->resize(QSize(1, 1));
-    dlgPar->setModal(true);
-    dlgPar->show();
+    showDlgPar(true, false, false, false);
 }
 
 void MainWindow::on_btnPickerAttributes_clicked()
 {
-    dlgPar->ui->gScanPolicy->setVisible(false);
-    dlgPar->ui->gDisplayLevel->setVisible(false);
-    dlgPar->ui->gExposeSensitiveData->setVisible(false);
-    dlgPar->ui->gPickerAttributes->setVisible(true);
-    dlgPar->resize(QSize(1, 1));
-    dlgPar->setModal(true);
-    dlgPar->show();
+    showDlgPar(false, true, false, false);
 }
 
 void MainWindow::on_btnExposeSensitiveData_clicked()
 {
-    dlgPar->setModal(true);
-    dlgPar->ui->gScanPolicy->setVisible(false);
-    dlgPar->ui->gDisplayLevel->setVisible(false);
-    dlgPar->ui->gPickerAttributes->setVisible(false);
-    dlgPar->ui->gExposeSensitiveData->setVisible(true);
-    dlgPar->resize(QSize(1, 1));
-    dlgPar->setModal(true);
-    dlgPar->show();
+    showDlgPar(false, false, true, false);
 }

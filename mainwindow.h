@@ -897,6 +897,7 @@ private:
     bool One = false;
     void openFileAfter();
     bool FindTextChange = false;
+    void showDlgPar(bool b1, bool b2, bool b3, bool b4);
 };
 
 #endif // MAINWINDOW_H
