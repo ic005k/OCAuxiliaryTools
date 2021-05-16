@@ -5760,38 +5760,15 @@ void MainWindow::init_listMainSub()
     int iSize = ui->toolBar->iconSize().width();
     ui->listMain->setIconSize(QSize(iSize, iSize));
 
-    if (win) {
-        ui->listMain->setMaximumHeight(60);
-        if (zh_cn)
-            ui->listSub->setMaximumHeight(46);
-        else
-            ui->listSub->setMaximumHeight(23);
-    }
-
-    if (linuxOS) {
-        ui->listMain->setMaximumHeight(68);
-        if (zh_cn)
-            ui->listSub->setMaximumHeight(50);
-        else
-            ui->listSub->setMaximumHeight(25);
-    }
-
-    if (mac || osx1012) {
-        if (zh_cn)
-            ui->listSub->setMaximumHeight(40);
-        else
-            ui->listSub->setMaximumHeight(24);
-    }
-
-    QFont myFont(ui->listSub->font().family(), ui->listSub->font().pointSize());
+    QFont myFont(ui->listMain->font().family(), ui->listMain->font().pointSize());
     QFontMetrics fm(myFont);
     int fontHeight = fm.height();
 
-    ui->listMain->setMaximumHeight(iSize + fontHeight + 10);
+    ui->listMain->setMaximumHeight(iSize + fontHeight + 12);
     if (zh_cn)
-        ui->listSub->setMaximumHeight(fontHeight * 2 + 10);
+        ui->listSub->setMaximumHeight(fontHeight * 2 + 12);
     else
-        ui->listSub->setMaximumHeight(fontHeight + 10);
+        ui->listSub->setMaximumHeight(fontHeight + 12);
 
     ui->listMain->setViewMode(QListView::ListMode);
     ui->listSub->setViewMode(QListView::ListMode);
