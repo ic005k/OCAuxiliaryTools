@@ -5739,14 +5739,18 @@ void MainWindow::setListMainIcon()
 
     for (int i = 0; i < strItemList.count(); i++) {
         ui->listMain->addItem(new QListWidgetItem(QIcon(strIconList.at(i)), strItemList.at(i)));
-        ui->listMain->item(i)->setSizeHint(QSize(getTextWidth(ui->listMain->item(i)->text(), ui->listMain), ui->listMain->maximumHeight() - 6));
+        ui->listMain->item(i)->setSizeHint(
+            QSize(getTextWidth(ui->listMain->item(i)->text(), ui->listMain),
+                  ui->listMain->maximumHeight() - 0));
     }
 
     if (win) {
         strIconList.append(":/icon/m9.png");
         strItemList.append(tr("Hardware Information"));
         ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
-        ui->listMain->item(8)->setSizeHint(QSize(getTextWidth(ui->listMain->item(8)->text(), ui->listMain), ui->listMain->maximumHeight() - 6));
+        ui->listMain->item(8)->setSizeHint(
+            QSize(getTextWidth(ui->listMain->item(8)->text(), ui->listMain),
+                  ui->listMain->maximumHeight() - 0));
     }
 }
 
