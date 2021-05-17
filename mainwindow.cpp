@@ -5926,9 +5926,7 @@ void MainWindow::init_HelpMenu()
     connect(ui->actionOpenCore, &QAction::triggered, this, &MainWindow::on_line1);
     connect(ui->actionOpenCore_Factory, &QAction::triggered, this, &MainWindow::on_line2);
     connect(ui->actionOpenCore_Forum, &QAction::triggered, this, &MainWindow::on_line3);
-
     connect(ui->actionOpenCanopyIcons, &QAction::triggered, this, &MainWindow::on_line5);
-
     connect(ui->actionPlist_editor, &QAction::triggered, this, &MainWindow::on_line20);
     connect(ui->actionDSDT_SSDT_editor, &QAction::triggered, this, &MainWindow::on_line21);
 
@@ -5937,7 +5935,7 @@ void MainWindow::init_HelpMenu()
     if (mac || osx1012)
         ui->actionOpenCore_Factory->setIconVisibleInMenu(false);
     ui->actionOpenCore_Factory->setIcon(QIcon(":/icon/ocf.png"));
-    //ui->toolBar->addAction(ui->actionOpenCore_Factory);
+    ui->toolBar->addAction(ui->actionOpenCore_Factory);
 
     //检查更新
     if (mac || osx1012)
@@ -5951,7 +5949,7 @@ void MainWindow::init_HelpMenu()
     if (mac || osx1012)
         ui->btnHelp->setIconVisibleInMenu(false);
     ui->btnHelp->setIcon(QIcon(":/icon/doc.png"));
-    //ui->toolBar->addAction(ui->btnHelp);
+    ui->toolBar->addAction(ui->btnHelp);
 
     // Bug Report
     if (mac || osx1012)
@@ -6020,9 +6018,9 @@ void MainWindow::init_MainUI()
     //ui->toolBar->addAction(ui->actionGo_to_the_previous);
     //ui->toolBar->addAction(ui->actionGo_to_the_next);
 
-    //ui->toolBar->addSeparator();
-    //ui->toolBar->addAction(ui->actionDatabase);
-    //ui->toolBar->addAction(ui->actionOpen_database_directory);
+    ui->toolBar->addSeparator();
+    ui->toolBar->addAction(ui->actionDatabase);
+    ui->toolBar->addAction(ui->actionOpen_database_directory);
 
     init_HelpMenu();
 
