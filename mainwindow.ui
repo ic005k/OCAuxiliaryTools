@@ -3018,7 +3018,7 @@ The behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3368,23 +3368,33 @@ On some platforms setting this option to at least 5000-10000 microseconds may be
                  <item row="11" column="0">
                   <widget class="QLabel" name="label_10">
                    <property name="toolTip">
-                    <string>The following values are supported:
+                    <string>Type: plist string
 
-• Auto — Automatically select one set of icons based on DefaultBackground colour.
-• Default — Normal icon set (without prefix).
-• Old — Vintage icon set (Old filename prefix).
-• Modern — Nouveau icon set (Modern filename prefix).
-• Other value — Custom icon set if supported by the resources.
-
+Description: Choose specific icon set to be used for boot management.
+An icon set is a directory path relative to Resources\Image, where the icons and an optional manifest are located. It is recommended for the artists to use provide their sets in the Vendor\Set format, e.g.
+Acidanthera\GoldenGate.
+Sample resources provided as a part of OcBinaryData repository provide the following icon set:
+• Acidanthera\GoldenGate — macOS 11 styled icon set.
+• Acidanthera\Syrah — macOS 10.10 styled icon set.
+• Acidanthera\Chardonnay — macOS 10.4 styled icon set.
+For convenience purposes there also are predefined aliases:
+• Auto — Automatically select one set of icons based on the DefaultBackground colour: Acidanthera\GoldenGate
+for Syrah Black and Acidanthera\Chardonnay for Light Gray.
+• Default — Acidanthera\GoldenGate.
 ----
+类型：plist字符串
 
-支持以下值：
-
-- Auto - 根据DefaultBackground颜色自动选择一组图标。
-- Default - 普通图标集（无前缀）。
-- Old - 复古图标集（旧文件名前缀）。
-- Modern - Nouveau图标集（现代文件名前缀）。
-- 其他值 - 自定义图标集（如果资源支持）。</string>
+描述：选择特定的图标集，用于启动管理。
+图标集是一个相对于Resources/Image的目录路径，其中的图标和一个可选的清单位于其中。我们建议艺术家使用Vendor/Set格式提供他们的图标集，例如
+Acidanthera\GoldenGate。
+作为OcBinaryData资源库的一部分提供的样本资源提供了以下图标集。
+- Acidanthera\GoldenGate - macOS 11风格的图标集。
+- Acidanthera\Syrah - macOS 10.10风格的图标集。
+- Acidanthera\Chardonnay - macOS 10.4风格的图标集。
+为了方便起见，还有一些预定义的别名。
+- Auto - 根据DefaultBackground颜色自动选择一组图标。Acidanthera/GoldenGate
+用于Syrah黑色，Acidanthera\Chardonnay用于浅灰色。
+- Default - Acidanthera\GoldenGate。</string>
                    </property>
                    <property name="statusTip">
                     <string> Choose specific icon set used for boot management.</string>
@@ -3423,6 +3433,31 @@ On some platforms setting this option to at least 5000-10000 microseconds may be
                    <property name="editable">
                     <bool>true</bool>
                    </property>
+                   <item>
+                    <property name="text">
+                     <string>Auto</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Default</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Acidanthera\GoldenGate</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Acidanthera\Syrah</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Acidanthera\Chardonnay</string>
+                    </property>
+                   </item>
                   </widget>
                  </item>
                  <item row="0" column="1">

@@ -1135,12 +1135,6 @@ void MainWindow::initui_misc()
     ui->cboxPickerMode->addItem("External");
     ui->cboxPickerMode->addItem("Apple");
 
-    ui->cboxPickerVariant->addItem("Auto");
-    ui->cboxPickerVariant->addItem("Default");
-    ui->cboxPickerVariant->addItem("Old");
-    ui->cboxPickerVariant->addItem("Modern");
-    ui->cboxPickerVariant->addItem("Other value");
-
     QPalette pe;
     pe = ui->lblColorEffect->palette();
     pe.setColor(QPalette::Background, Qt::black);
