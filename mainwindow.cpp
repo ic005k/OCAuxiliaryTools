@@ -5741,7 +5741,7 @@ void MainWindow::setListMainIcon()
         ui->listMain->addItem(new QListWidgetItem(QIcon(strIconList.at(i)), strItemList.at(i)));
         ui->listMain->item(i)->setSizeHint(
             QSize(getTextWidth(ui->listMain->item(i)->text(), ui->listMain),
-                  ui->listMain->maximumHeight() - 0));
+                ui->listMain->maximumHeight() - 4));
     }
 
     if (win) {
@@ -5750,14 +5750,14 @@ void MainWindow::setListMainIcon()
         ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
         ui->listMain->item(8)->setSizeHint(
             QSize(getTextWidth(ui->listMain->item(8)->text(), ui->listMain),
-                  ui->listMain->maximumHeight() - 0));
+                ui->listMain->maximumHeight() - 4));
     }
 }
 
 void MainWindow::init_listMainSub()
 {
     QString listStyle;
-    listStyle = "QListWidget::item:selected{background:lightblue; border:10px blue; color:black}";
+    listStyle = "QListWidget::item:selected{background:lightblue; border:0px blue; color:black}";
     ui->listMain->setStyleSheet(listStyle);
     ui->listSub->setStyleSheet(listStyle);
 
@@ -6973,7 +6973,7 @@ void MainWindow::on_listMain_itemSelectionChanged()
 int MainWindow::getTextWidth(QString str, QWidget* w)
 {
     str = str.trimmed();
-    str = str + "";
+    str = str + "    ";
 
     QFont myFont(w->font().family(), w->font().pixelSize());
 
