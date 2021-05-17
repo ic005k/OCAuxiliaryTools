@@ -5757,18 +5757,18 @@ void MainWindow::init_listMainSub()
     ui->listMain->setStyleSheet(listStyle);
     ui->listSub->setStyleSheet(listStyle);
 
-    int iSize = ui->toolBar->iconSize().width();
+    int iSize = ui->toolBar->iconSize().height();
     ui->listMain->setIconSize(QSize(iSize, iSize));
 
-    QFont myFont(ui->listMain->font().family(), ui->listMain->font().pointSize());
+    QFont myFont(this->font().family(), this->font().pixelSize());
     QFontMetrics fm(myFont);
     int fontHeight = fm.height();
 
-    ui->listMain->setMaximumHeight(iSize + fontHeight + 12);
+    ui->listMain->setMaximumHeight(iSize + fontHeight * 1.5);
     if (zh_cn)
-        ui->listSub->setMaximumHeight(fontHeight * 2 + 12);
+        ui->listSub->setMaximumHeight(fontHeight * 2.5);
     else
-        ui->listSub->setMaximumHeight(fontHeight + 12);
+        ui->listSub->setMaximumHeight(fontHeight * 1.5);
 
     ui->listMain->setViewMode(QListView::ListMode);
     ui->listSub->setViewMode(QListView::ListMode);
@@ -6969,9 +6969,9 @@ void MainWindow::on_listMain_itemSelectionChanged()
 int MainWindow::getTextWidth(QString str, QWidget* w)
 {
     str = str.trimmed();
-    str = str + "    ";
+    str = str + "";
 
-    QFont myFont(w->font().family(), w->font().pointSize());
+    QFont myFont(w->font().family(), w->font().pixelSize());
 
     QFontMetrics fm(myFont);
     int mw;
