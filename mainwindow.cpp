@@ -5764,15 +5764,15 @@ void MainWindow::init_listMainSub()
     int iSize = ui->toolBar->iconSize().height();
     ui->listMain->setIconSize(QSize(iSize, iSize));
 
-    QFont myFont(this->font().family(), this->font().pixelSize());
+    QFont myFont(this->font().family(), this->font().pointSize());
     QFontMetrics fm(myFont);
     int fontHeight = fm.height();
-
-    ui->listMain->setMaximumHeight(iSize + fontHeight * 1.5);
+    int bc = 12;
+    ui->listMain->setMaximumHeight(iSize + fontHeight + bc);
     if (zh_cn)
-        ui->listSub->setMaximumHeight(fontHeight * 2.5);
+        ui->listSub->setMaximumHeight(fontHeight * 2 + bc);
     else
-        ui->listSub->setMaximumHeight(fontHeight * 1.5);
+        ui->listSub->setMaximumHeight(fontHeight + bc);
 
     ui->listMain->setViewMode(QListView::ListMode);
     ui->listSub->setViewMode(QListView::ListMode);
