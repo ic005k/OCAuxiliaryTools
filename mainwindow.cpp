@@ -5731,20 +5731,27 @@ void MainWindow::setListMainIcon()
     strItemList << tr("ACPI") << tr("Booter") << tr("DeviceProperties") << tr("Kernel")
                 << tr("Misc") << tr("NVRAM") << tr("PlatformInfo") << tr("UEFI");
 
+    QSize size(32, 32);
     for (int i = 0; i < strItemList.count(); i++) {
-        ui->listMain->addItem(new QListWidgetItem(QIcon(strIconList.at(i)), strItemList.at(i)));
-        ui->listMain->item(i)->setSizeHint(
-            QSize(getTextWidth(ui->listMain->item(i)->text(), ui->listMain),
-                ui->listMain->maximumHeight() - 4));
+        ui->listMain->addItem(new QListWidgetItem(QIcon(strIconList.at(i)), ""));
+        //ui->listMain->item(i)->setSizeHint(
+        //    QSize(getTextWidth(ui->listMain->item(i)->text(), ui->listMain),
+        //        ui->listMain->maximumHeight() - 4));
+
+        ui->listMain->item(i)->setSizeHint(size);
+
+        ui->listMain->item(i)->setToolTip(strItemList.at(i));
     }
 
     if (win) {
         strIconList.append(":/icon/m9.png");
         strItemList.append(tr("Hardware Information"));
-        ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), tr("Hardware Information")));
-        ui->listMain->item(8)->setSizeHint(
-            QSize(getTextWidth(ui->listMain->item(8)->text(), ui->listMain),
-                ui->listMain->maximumHeight() - 4));
+        ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), ""));
+        //ui->listMain->item(8)->setSizeHint(
+        //    QSize(getTextWidth(ui->listMain->item(8)->text(), ui->listMain),
+        //        ui->listMain->maximumHeight() - 4));
+        ui->listMain->item(8)->setSizeHint(size);
+        ui->listMain->item(8)->setToolTip(tr("Hardware Information"));
     }
 }
 
@@ -5760,13 +5767,15 @@ void MainWindow::init_listMainSub()
 
     QFont myFont(this->font().family(), this->font().pixelSize());
     QFontMetrics fm(myFont);
-    int fontHeight = fm.height() + 10;
+    int fontHeight = fm.height() + 4;
 
-    ui->listMain->setMaximumHeight(iSize + fontHeight);
+    //ui->listMain->setFixedHeight(iSize + fontHeight);
     if (zh_cn)
-        ui->listSub->setMaximumHeight(fontHeight * 2);
+        ui->listSub->setFixedHeight(fontHeight * 2);
     else
-        ui->listSub->setMaximumHeight(fontHeight);
+        ui->listSub->setFixedHeight(fontHeight);
+
+    ui->listMain->setFixedWidth(36);
 
     ui->listMain->setViewMode(QListView::ListMode);
     ui->listSub->setViewMode(QListView::ListMode);
@@ -5998,8 +6007,6 @@ void MainWindow::init_MainUI()
     int iSize = 25;
     ui->toolBar->setIconSize(QSize(iSize, iSize));
 
-    init_listMainSub();
-
     init_FileMenu();
 
     init_EditMenu();
@@ -6036,7 +6043,6 @@ void MainWindow::init_MainUI()
 
     // 读取搜索历史
     QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-    QFile file(qfile);
     QSettings Reg(qfile, QSettings::IniFormat);
     int textTotal = Reg.value("textTotal").toInt();
     for (int i = 0; i < textTotal; i++) {
@@ -6047,8 +6053,8 @@ void MainWindow::init_MainUI()
     int x, y, w, h;
     x = Reg.value("x", "0").toInt();
     y = Reg.value("y", "0").toInt();
-    w = Reg.value("width", "1200").toInt();
-    h = Reg.value("height", "650").toInt();
+    w = Reg.value("width", "900").toInt();
+    h = Reg.value("height", "500").toInt();
     if (x < 0) {
         w = w + x;
         x = 0;
@@ -6061,7 +6067,6 @@ void MainWindow::init_MainUI()
     move(rect.topLeft());
     resize(rect.size());
 
-    file.close();
     ui->cboxFind->setCurrentText("");
     if (textTotal > 0)
         clearTextsAction->setEnabled(true);
@@ -6956,7 +6961,7 @@ void MainWindow::on_listMain_itemSelectionChanged()
             if (w1 < w2)
                 w1 = w2;
         }
-        ui->listSub->item(i)->setSizeHint(QSize(w1, ui->listSub->height() - 4));
+        ui->listSub->item(i)->setSizeHint(QSize(w1, ui->listSub->maximumHeight() - 4));
     }
 
     ui->listSub->setCurrentRow(index);
@@ -6967,7 +6972,7 @@ int MainWindow::getTextWidth(QString str, QWidget* w)
     str = str.trimmed();
     str = str + "    ";
 
-    QFont myFont(w->font().family(), w->font().pixelSize());
+    QFont myFont(w->font().family(), w->font().pointSize());
 
     QFontMetrics fm(myFont);
     int mw;
@@ -7023,9 +7028,11 @@ void MainWindow::on_listSub_itemSelectionChanged()
 void MainWindow::resizeEvent(QResizeEvent* event)
 {
     Q_UNUSED(event);
-    int index = ui->listMain->currentRow();
-    setListMainIcon();
-    ui->listMain->setCurrentRow(index);
+    int index0 = ui->listMain->currentRow();
+    int index1 = ui->listSub->currentRow();
+    init_listMainSub();
+    ui->listMain->setCurrentRow(index0);
+    ui->listSub->setCurrentRow(index1);
 }
 
 QString MainWindow::getWMIC(const QString& cmd)

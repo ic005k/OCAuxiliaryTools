@@ -25,12 +25,12 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="0" column="0" rowspan="2">
      <widget class="QListWidget" name="listMain">
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>62</height>
+        <height>16777215</height>
        </size>
       </property>
       <property name="movement">
@@ -38,7 +38,7 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
+    <item row="0" column="1">
      <widget class="QListWidget" name="listSub">
       <property name="maximumSize">
        <size>
@@ -48,7 +48,7 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
+    <item row="1" column="1">
      <widget class="QTabWidget" name="tabTotal">
       <property name="toolTip">
        <string/>
@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -9495,7 +9495,7 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
      <x>0</x>
      <y>0</y>
      <width>1484</width>
-     <height>24</height>
+     <height>34</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -9572,7 +9572,7 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
    <property name="minimumSize">
     <size>
      <width>200</width>
-     <height>178</height>
+     <height>189</height>
     </size>
    </property>
    <property name="maximumSize">
