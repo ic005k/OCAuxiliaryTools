@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5776,6 +5776,21 @@ Added bits to FirmwareFeatures:
                <string>DataHub</string>
               </attribute>
               <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <property name="spacing">
+                <number>-1</number>
+               </property>
+               <property name="leftMargin">
+                <number>5</number>
+               </property>
+               <property name="topMargin">
+                <number>5</number>
+               </property>
+               <property name="rightMargin">
+                <number>5</number>
+               </property>
+               <property name="bottomMargin">
+                <number>5</number>
+               </property>
                <item>
                 <layout class="QGridLayout" name="gridLayout_39">
                  <item row="0" column="2">
@@ -6138,6 +6153,18 @@ Note: On Intel Skylake X ART frequency may be a little less (approx. 0.25%) than
                <string>Memory</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_32">
+               <property name="leftMargin">
+                <number>5</number>
+               </property>
+               <property name="topMargin">
+                <number>5</number>
+               </property>
+               <property name="rightMargin">
+                <number>5</number>
+               </property>
+               <property name="bottomMargin">
+                <number>5</number>
+               </property>
                <item row="0" column="0" colspan="2">
                 <widget class="QLabel" name="label_105">
                  <property name="toolTip">
@@ -6467,6 +6494,18 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_40">
+                <property name="leftMargin">
+                 <number>5</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>5</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>5</number>
+                </property>
                 <item row="4" column="1">
                  <widget class="QLineEdit" name="editDatROM_PNVRAM"/>
                 </item>
@@ -9441,6 +9480,18 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                <string>ReservedMemory</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_30">
+               <property name="leftMargin">
+                <number>5</number>
+               </property>
+               <property name="topMargin">
+                <number>5</number>
+               </property>
+               <property name="rightMargin">
+                <number>5</number>
+               </property>
+               <property name="bottomMargin">
+                <number>5</number>
+               </property>
                <item row="0" column="0" colspan="3">
                 <widget class="QTableWidget" name="table_uefi_ReservedMemory">
                  <property name="columnCount">
