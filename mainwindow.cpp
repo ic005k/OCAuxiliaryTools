@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210520";
+    CurVerison = "20210525";
     ocVer = "0.7.0";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -5734,9 +5734,6 @@ void MainWindow::setListMainIcon()
     QSize size(32, 32);
     for (int i = 0; i < strItemList.count(); i++) {
         ui->listMain->addItem(new QListWidgetItem(QIcon(strIconList.at(i)), ""));
-        //ui->listMain->item(i)->setSizeHint(
-        //    QSize(getTextWidth(ui->listMain->item(i)->text(), ui->listMain),
-        //        ui->listMain->maximumHeight() - 4));
 
         ui->listMain->item(i)->setSizeHint(size);
 
@@ -5747,9 +5744,6 @@ void MainWindow::setListMainIcon()
         strIconList.append(":/icon/m9.png");
         strItemList.append(tr("Hardware Information"));
         ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), ""));
-        //ui->listMain->item(8)->setSizeHint(
-        //    QSize(getTextWidth(ui->listMain->item(8)->text(), ui->listMain),
-        //        ui->listMain->maximumHeight() - 4));
         ui->listMain->item(8)->setSizeHint(size);
         ui->listMain->item(8)->setToolTip(tr("Hardware Information"));
     }
@@ -5769,7 +5763,6 @@ void MainWindow::init_listMainSub()
     QFontMetrics fm(myFont);
     int fontHeight = fm.height() + 4;
 
-    //ui->listMain->setFixedHeight(iSize + fontHeight);
     if (zh_cn)
         ui->listSub->setFixedHeight(fontHeight * 2);
     else
