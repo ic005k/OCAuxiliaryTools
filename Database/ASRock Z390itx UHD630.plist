@@ -662,6 +662,8 @@
                     <string></string>
                     <key>Enabled</key>
                     <true/>
+                    <key>Flavour</key>
+                    <string>Auto</string>
                     <key>Name</key>
                     <string>UEFI Shell</string>
                     <key>Path</key>
@@ -680,6 +682,8 @@
                     <string></string>
                     <key>Enabled</key>
                     <true/>
+                    <key>Flavour</key>
+                    <string>Auto</string>
                     <key>Name</key>
                     <string>Shutdown</string>
                     <key>Path</key>
@@ -698,6 +702,8 @@
                     <string></string>
                     <key>Enabled</key>
                     <true/>
+                    <key>Flavour</key>
+                    <string>Auto</string>
                     <key>Name</key>
                     <string>Reset</string>
                     <key>Path</key>
@@ -716,6 +722,8 @@
                     <string></string>
                     <key>Enabled</key>
                     <true/>
+                    <key>Flavour</key>
+                    <string>Auto</string>
                     <key>Name</key>
                     <string>ResetNVRAM</string>
                     <key>Path</key>

@@ -1004,6 +1004,8 @@
                     <string>Not signed for security reasons</string>
                     <key>Enabled</key>
                     <false/>
+                    <key>Flavour</key>
+                    <string>Auto</string>
                     <key>Name</key>
                     <string>CustomOS</string>
                     <key>Path</key>
@@ -1054,6 +1056,8 @@
                     <string></string>
                     <key>Enabled</key>
                     <true/>
+                    <key>Flavour</key>
+                    <string>Auto</string>
                     <key>Name</key>
                     <string>OpenShell</string>
                     <key>Path</key>
@@ -1072,6 +1076,8 @@
                     <string>Verify MsrE2</string>
                     <key>Enabled</key>
                     <false/>
+                    <key>Flavour</key>
+                    <string>Auto</string>
                     <key>Name</key>
                     <string>Verify MsrE2</string>
                     <key>Path</key>

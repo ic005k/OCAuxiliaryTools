@@ -744,6 +744,8 @@
                     <string>Not signed for security reasons</string>
                     <key>Enabled</key>
                     <false/>
+                    <key>Flavour</key>
+                    <string>Auto</string>
                     <key>Name</key>
                     <string>CustomOS</string>
                     <key>Path</key>
@@ -794,6 +796,8 @@
                     <string>Not signed for security reasons</string>
                     <key>Enabled</key>
                     <false/>
+                    <key>Flavour</key>
+                    <string>Auto</string>
                     <key>Name</key>
                     <string>UEFI Shell</string>
                     <key>Path</key>
@@ -812,6 +816,8 @@
                     <string>Perform shutdown</string>
                     <key>Enabled</key>
                     <true/>
+                    <key>Flavour</key>
+                    <string>Auto</string>
                     <key>Name</key>
                     <string>Shutdown</string>
                     <key>Path</key>
