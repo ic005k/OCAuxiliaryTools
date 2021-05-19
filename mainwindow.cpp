@@ -5348,6 +5348,7 @@ void MainWindow::initPickerAttributesValue()
     v.append(16);
     v.append(32);
     v.append(64);
+    v.append(128);
 }
 
 void MainWindow::PickerAttributes()

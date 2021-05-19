@@ -70,6 +70,7 @@ dlgParameters::dlgParameters(QWidget* parent)
     chk_PickerAttributes.append(ui->chkPA5);
     chk_PickerAttributes.append(ui->chkPA6);
     chk_PickerAttributes.append(ui->chkPA7);
+    chk_PickerAttributes.append(ui->chkPA8);
     for (int i = 0; i < chk_PickerAttributes.count(); i++) {
         connect(chk_PickerAttributes.at(i), &QCheckBox::clicked, this, &dlgParameters::slotPickerAttributes);
     }
