@@ -1225,7 +1225,7 @@ void MainWindow::initui_misc()
     ui->tableBlessOverride->horizontalHeader()->setStretchLastSection(true);
 
     // Entries
-    ui->tableEntries->setColumnCount(7);
+    ui->tableEntries->setColumnCount(8);
 
     ui->tableEntries->setColumnWidth(0, 550);
     id0 = new QTableWidgetItem(tr("Path"));
@@ -1250,10 +1250,13 @@ void MainWindow::initui_misc()
     id0 = new QTableWidgetItem(tr("TextMode"));
     ui->tableEntries->setHorizontalHeaderItem(6, id0);
 
+    id0 = new QTableWidgetItem(tr("Flavour"));
+    ui->tableEntries->setHorizontalHeaderItem(7, id0);
+
     ui->tableEntries->setAlternatingRowColors(true);
 
     // Tools
-    ui->tableTools->setColumnCount(8);
+    ui->tableTools->setColumnCount(9);
 
     ui->tableTools->setColumnWidth(0, 450);
     id0 = new QTableWidgetItem(tr("Path"));
@@ -1280,6 +1283,9 @@ void MainWindow::initui_misc()
 
     id0 = new QTableWidgetItem(tr("TextMode"));
     ui->tableTools->setHorizontalHeaderItem(7, id0);
+
+    id0 = new QTableWidgetItem(tr("Flavour"));
+    ui->tableTools->setHorizontalHeaderItem(8, id0);
 
     ui->tableTools->setAlternatingRowColors(true);
 }
@@ -1349,6 +1355,11 @@ void MainWindow::ParserMisc(QVariantMap map)
         init_enabled_data(ui->tableEntries, i, 4, map3["Auxiliary"].toString());
         init_enabled_data(ui->tableEntries, i, 5, map3["Enabled"].toString());
         init_enabled_data(ui->tableEntries, i, 6, map3["TextMode"].toString());
+
+        newItem1 = new QTableWidgetItem(map3["Flavour"].toString());
+        if (map3["Flavour"].toString().trimmed() == "")
+            newItem1 = new QTableWidgetItem("Auto");
+        ui->tableEntries->setItem(i, 7, newItem1);
     }
 
     // Tools
@@ -1379,6 +1390,11 @@ void MainWindow::ParserMisc(QVariantMap map)
         init_enabled_data(ui->tableTools, i, 6, map3["RealPath"].toString());
 
         init_enabled_data(ui->tableTools, i, 7, map3["TextMode"].toString());
+
+        newItem1 = new QTableWidgetItem(map3["Flavour"].toString());
+        if (map3["Flavour"].toString().trimmed() == "")
+            newItem1 = new QTableWidgetItem("Auto");
+        ui->tableTools->setItem(i, 8, newItem1);
     }
 }
 
@@ -2640,6 +2656,7 @@ QVariantMap MainWindow::SaveMisc()
         valueList["Auxiliary"] = getBool(ui->tableEntries, i, 4);
         valueList["Enabled"] = getBool(ui->tableEntries, i, 5);
         valueList["TextMode"] = getBool(ui->tableEntries, i, 6);
+        valueList["Flavour"] = ui->tableEntries->item(i, 7)->text();
 
         dictList.append(valueList);
     }
@@ -2657,6 +2674,7 @@ QVariantMap MainWindow::SaveMisc()
         valueList["Enabled"] = getBool(ui->tableTools, i, 5);
         valueList["RealPath"] = getBool(ui->tableTools, i, 6);
         valueList["TextMode"] = getBool(ui->tableTools, i, 7);
+        valueList["Flavour"] = ui->tableTools->item(i, 8)->text();
 
         dictList.append(valueList);
     }
@@ -3747,14 +3765,18 @@ void MainWindow::on_btnMiscBO_Del_clicked()
 
 void MainWindow::on_btnMiscEntries_Add_clicked()
 {
-    add_item(ui->tableEntries, 6);
+    add_item(ui->tableEntries, 7);
 
-    init_enabled_data(ui->tableEntries, ui->tableEntries->rowCount() - 1, 4,
+    int row = ui->tableEntries->rowCount() - 1;
+
+    init_enabled_data(ui->tableEntries, row, 4,
         "false");
-    init_enabled_data(ui->tableEntries, ui->tableEntries->rowCount() - 1, 5,
+    init_enabled_data(ui->tableEntries, row, 5,
         "true");
-    init_enabled_data(ui->tableEntries, ui->tableEntries->rowCount() - 1, 6,
+    init_enabled_data(ui->tableEntries, row, 6,
         "false");
+
+    ui->tableEntries->setItem(row, 7, new QTableWidgetItem("Auto"));
 
     this->setWindowModified(true);
 }
@@ -3777,25 +3799,27 @@ void MainWindow::addEFITools(QStringList FileName)
         return;
 
     for (int i = 0; i < FileName.count(); i++) {
-        add_item(ui->tableTools, 8);
+        add_item(ui->tableTools, 9);
 
-        int row = ui->tableTools->rowCount();
+        int row = ui->tableTools->rowCount() - 1;
 
-        ui->tableTools->setItem(row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+        ui->tableTools->setItem(row, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
 
-        ui->tableTools->setItem(row - 1, 2, new QTableWidgetItem(QFileInfo(FileName.at(i)).baseName()));
+        ui->tableTools->setItem(row, 2, new QTableWidgetItem(QFileInfo(FileName.at(i)).baseName()));
 
         ui->tableTools->setFocus();
-        ui->tableTools->setCurrentCell(row - 1, 0);
+        ui->tableTools->setCurrentCell(row, 0);
 
-        init_enabled_data(ui->tableTools, ui->tableTools->rowCount() - 1, 4,
+        init_enabled_data(ui->tableTools, row, 4,
             "false");
-        init_enabled_data(ui->tableTools, ui->tableTools->rowCount() - 1, 5,
+        init_enabled_data(ui->tableTools, row, 5,
             "true");
-        init_enabled_data(ui->tableTools, ui->tableTools->rowCount() - 1, 6,
+        init_enabled_data(ui->tableTools, row, 6,
             "false");
-        init_enabled_data(ui->tableTools, ui->tableTools->rowCount() - 1, 7,
+        init_enabled_data(ui->tableTools, row, 7,
             "false");
+
+        ui->tableTools->setItem(row, 8, new QTableWidgetItem("Auto"));
     }
 
     this->setWindowModified(true);

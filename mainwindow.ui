@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -3024,7 +3024,7 @@ The behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3823,7 +3823,8 @@ Description: EDK II debug level bitmask (sum) showed onscreen. Unless Target ena
 描述：显示在屏幕上的EDK II调试级别的比特掩码之和。除非Target启用控制台（屏幕上）打印，否则屏幕上的调试输出将不可见。</string>
                    </property>
                    <property name="statusTip">
-                    <string> EDK II debug level bitmask (sum) showed onscreen. Unless Target enables console (onscreen) printing, onscreen debug output will not be visible.</string>
+                    <string> EDK II debug level bitmask (sum) showed onscreen. Unless Target enables console (onscreen)
+ printing, onscreen debug output will not be visible.</string>
                    </property>
                    <property name="text">
                     <string>DisplayLevel</string>
@@ -6293,7 +6294,8 @@ If there are no error-correction bits, this value should be equal to DataWidth.
 如果没有纠错位，这个值应该等于DataWidth。</string>
                  </property>
                  <property name="statusTip">
-                  <string>Specifies the total width, in bits, of the memory, including any check or error-correction bits. If there are no error-correction bits, this value should be equal to DataWidth.</string>
+                  <string>Specifies the total width, in bits, of the memory, including any check or error-correction bits. If
+ there are no error-correction bits, this value should be equal to DataWidth.</string>
                  </property>
                  <property name="text">
                   <string notr="true">TotalWidth</string>
@@ -6555,7 +6557,8 @@ If there are no error-correction bits, this value should be equal to DataWidth.
 指定 NVRAM 变量 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id 的值，仅用于启动服务。在Mac上找到的值等于SMBIOS SystemUUID。</string>
                   </property>
                   <property name="statusTip">
-                   <string>Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id for boot services only. The value found on Macs is equal to SMBIOS SystemUUID.</string>
+                   <string>Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id
+ for boot services only. The value found on Macs is equal to SMBIOS SystemUUID.</string>
                   </property>
                   <property name="text">
                    <string notr="true">SystemUUID</string>
@@ -7372,7 +7375,8 @@ OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本
 </string>
                   </property>
                   <property name="statusTip">
-                   <string>Generate PlatformInfo based on the Generic section instead of using values from the DataHub, NVRAM, and SMBIOS sections.</string>
+                   <string>Generate PlatformInfo based on the Generic section instead of using values from the DataHub,
+ NVRAM, and SMBIOS sections.</string>
                   </property>
                   <property name="whatsThis">
                    <string/>
@@ -7502,7 +7506,8 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
 </string>
                   </property>
                   <property name="statusTip">
-                   <string>Update Data Hub fields. These fields are read from the Generic or DataHub sections depending on the setting of the Automatic property.</string>
+                   <string>Update Data Hub fields. These fields are read from the Generic or DataHub sections depending
+ on the setting of the Automatic property.</string>
                   </property>
                   <property name="text">
                    <string>UpdateDataHub</string>
@@ -7830,7 +7835,8 @@ Configures the multiplier for pointer movements. The Apple OEM default value is 
 配置指针移动的乘数。Apple OEM的默认值是1。</string>
                    </property>
                    <property name="statusTip">
-                    <string> Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol. Has no effect when using the OEM Apple implementation (see AppleEvent setting).</string>
+                    <string> Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol. Has no
+ effect when using the OEM Apple implementation (see AppleEvent setting).</string>
                    </property>
                    <property name="text">
                     <string notr="true">PointerSpeedMul</string>
@@ -7862,7 +7868,8 @@ Configures the divisor for pointer movements. The Apple OEM default value is 1. 
 配置指针移动的分度。Apple OEM的默认值是1，0是这个选项的无效值。</string>
                    </property>
                    <property name="statusTip">
-                    <string>Configure pointer speed divisor in OpenCore implementation of Apple Event protocol. Has no effect when using the OEM Apple implementation (see AppleEvent setting).</string>
+                    <string>Configure pointer speed divisor in OpenCore implementation of Apple Event protocol. Has no
+ effect when using the OEM Apple implementation (see AppleEvent setting).</string>
                    </property>
                    <property name="text">
                     <string notr="true">PointerSpeedDiv</string>
@@ -7921,7 +7928,8 @@ When using KeySupport, you may find that you get one additional slow key repeat 
 使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，请将KeyInitialDelay设置为0，并将此选项设置为至少与您的KeyForgetThreshold设置值相同。(如果在这样做之后，你仍然得到频繁的或偶尔的双键响应，则继续将此值设置为比KeyForgetThreshold大一到两个的值--使用有效的最低值。)</string>
                    </property>
                    <property name="statusTip">
-                    <string>Configures the gap between keyboard key repeats in OpenCore implementation of Apple Event protocol, in units of 10ms.</string>
+                    <string>Configures the gap between keyboard key repeats in OpenCore implementation of Apple Event
+ protocol, in units of 10ms.</string>
                    </property>
                    <property name="text">
                     <string notr="true">KeySubsequentDelay</string>
@@ -7992,7 +8000,8 @@ When using KeySupport, you may find that you get one additional slow key repeat 
 使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，您的初始按键重复延迟是由BIOS固件驱动的，不能由OC覆盖。如果这样做，为了避免单一按键的多次响应，您应该将KeySubsequentDelay至少设置为KeyForgetThreshold设置的值。</string>
                    </property>
                    <property name="statusTip">
-                    <string>Configures the initial delay before keyboard key repeats in OpenCore implementation of Apple Event protocol, in units of 10ms.</string>
+                    <string>Configures the initial delay before keyboard key repeats in OpenCore implementation of Apple
+ Event protocol, in units of 10ms.</string>
                    </property>
                    <property name="text">
                     <string notr="true">KeyInitialDelay</string>
@@ -8019,7 +8028,8 @@ Description: Enable custom key repeat delays when using the OpenCore implementat
 - false - 使用 500ms (50) 和 50ms (5) 的 Apple 默认值。</string>
                    </property>
                    <property name="statusTip">
-                    <string>Enable custom key repeat delays when using the OpenCore implementation of the Apple Event protocol. Has no effect when using the OEM Apple implementation (see AppleEvent setting).</string>
+                    <string>Enable custom key repeat delays when using the OpenCore implementation of the Apple Event
+ protocol. Has no effect when using the OEM Apple implementation (see AppleEvent setting).</string>
                    </property>
                    <property name="text">
                     <string>CustomDelays</string>
