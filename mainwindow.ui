@@ -3024,7 +3024,7 @@ The behaviour corresponds to -legacy kernel boot argument.
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -4576,7 +4576,7 @@ Third party drivers may introduce additional security (and performance) consider
                    <widget class="QLineEdit" name="editPassInput">
                     <property name="maximumSize">
                      <size>
-                      <width>280</width>
+                      <width>16777215</width>
                       <height>16777215</height>
                      </size>
                     </property>
