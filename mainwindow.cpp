@@ -963,6 +963,8 @@ void MainWindow::ParserKernel(QVariantMap map)
         init_enabled_data(ui->table_kernel_add, i, 6, map3["Enabled"].toString());
 
         newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+        if (map3["Arch"].toString().trimmed() == "")
+            newItem1 = new QTableWidgetItem("Any");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_kernel_add->setItem(i, 7, newItem1);
     }
@@ -993,6 +995,8 @@ void MainWindow::ParserKernel(QVariantMap map)
         init_enabled_data(ui->table_kernel_block, i, 4, map3["Enabled"].toString());
 
         newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+        if (map3["Arch"].toString().trimmed() == "")
+            newItem1 = new QTableWidgetItem("Any");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_kernel_block->setItem(i, 5, newItem1);
     }
@@ -1032,6 +1036,8 @@ void MainWindow::ParserKernel(QVariantMap map)
         init_enabled_data(ui->table_kernel_Force, i, 7, map3["Enabled"].toString());
 
         newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+        if (map3["Arch"].toString().trimmed() == "")
+            newItem1 = new QTableWidgetItem("Any");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_kernel_Force->setItem(i, 8, newItem1);
     }
@@ -1101,6 +1107,8 @@ void MainWindow::ParserKernel(QVariantMap map)
             map3["Enabled"].toString());
 
         newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+        if (map3["Arch"].toString().trimmed() == "")
+            newItem1 = new QTableWidgetItem("Any");
         newItem1->setTextAlignment(Qt::AlignCenter);
         ui->table_kernel_patch->setItem(i, 13, newItem1);
     }
