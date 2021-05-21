@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -2885,6 +2885,28 @@ On the other side if the SSD is slow, the default timeout (equals to 9.999999 se
 more details in this article.
 Set this value to 4294967295 for the maximum timeout to guarantee trim success or to 999 to essentially disable
 trim.</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QCheckBox" name="chkProvideCurrentCpuInfo">
+                <property name="toolTip">
+                 <string>Type: plist boolean
+
+Requirement: 10.8
+Description: Provides current CPU info to the kernel.
+This quirk currently provides the correct TSC and FSB values to the kernel, as well as disables CPU topology validation.
+Note: These patches currently target Microsoft Hyper-V and may need to be extended for other purposes.
+----
+类型：plist布尔值
+
+要求：10.8
+描述：向内核提供当前的CPU信息。
+这个选项目前提供正确的TSC和FSB值给内核，以及禁用CPU拓扑验证。
+注意：这些补丁目前针对微软Hyper-V，可能需要扩展到其他用途。</string>
+                </property>
+                <property name="text">
+                 <string>ProvideCurrentCpuInfo</string>
                 </property>
                </widget>
               </item>
