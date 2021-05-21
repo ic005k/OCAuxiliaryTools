@@ -886,7 +886,25 @@
                     <key>Flavour</key>
                     <string>Auto</string>
                     <key>Name</key>
-                    <string>Linux</string>
+                    <string>ManjaroArchLinux</string>
+                    <key>Path</key>
+                    <string>PciRoot(0x0)/Pci(0x17,0x0)/Sata(0x2,0xFFFF,0x0)/HD(2,GPT,AB1F796E-5FB4-48C4-853D-8F154E41DE31,0x40000,0x202000)/\EFI\Manjaro\grubx64.efi</string>
+                    <key>TextMode</key>
+                    <false/>
+                </dict>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Auxiliary</key>
+                    <false/>
+                    <key>Comment</key>
+                    <string></string>
+                    <key>Enabled</key>
+                    <false/>
+                    <key>Flavour</key>
+                    <string>Auto</string>
+                    <key>Name</key>
+                    <string>Ubuntu</string>
                     <key>Path</key>
                     <string>PciRoot(0x0)/Pci(0x17,0x0)/Sata(0x2,0xFFFF,0x0)/HD(2,GPT,AB1F796E-5FB4-48C4-853D-8F154E41DE31,0x40000,0x202000)/\EFI\ubuntu\grubx64.efi</string>
                     <key>TextMode</key>
