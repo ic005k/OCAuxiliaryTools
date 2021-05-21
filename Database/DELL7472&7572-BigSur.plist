@@ -803,6 +803,8 @@
                 <false/>
                 <key>PowerTimeoutKernelPanic</key>
                 <false/>
+                <key>ProvideCurrentCpuInfo</key>
+                <false/>
                 <key>SetApfsTrimTimeout</key>
                 <integer>0</integer>
                 <key>ThirdPartyDrives</key>
