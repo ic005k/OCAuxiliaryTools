@@ -696,13 +696,9 @@ private slots:
 
     void on_actionGo_to_the_next_triggered();
 
-    void on_cboxFind_currentIndexChanged(int index);
-
     void on_cboxFind_currentTextChanged(const QString& arg1);
 
     void on_listFind_currentRowChanged(int currentRow);
-
-    void on_cboxFind_currentIndexChanged(const QString& arg1);
 
     void on_listFind_itemClicked(QListWidgetItem* item);
 

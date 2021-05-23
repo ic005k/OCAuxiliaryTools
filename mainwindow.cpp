@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210526";
+    CurVerison = "20210528";
     ocVer = "0.7.0";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -8508,11 +8508,6 @@ void MainWindow::goResults(int index)
     ui->lblCount->setText(QString::number(findCount) + " ( " + QString::number(ui->listFind->currentRow() + 1) + " ) ");
 }
 
-void MainWindow::on_cboxFind_currentIndexChanged(int index)
-{
-    Q_UNUSED(index);
-}
-
 void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1)
 {
     FindTextChange = true;
@@ -8617,13 +8612,6 @@ void MainWindow::on_listFind_currentRowChanged(int currentRow)
     if (!loading) {
         goResults(currentRow);
     }
-}
-
-void MainWindow::on_cboxFind_currentIndexChanged(const QString& arg1)
-{
-    Q_UNUSED(arg1);
-    if (!loading)
-        on_actionFind_triggered();
 }
 
 void MainWindow::on_listFind_itemClicked(QListWidgetItem* item)
