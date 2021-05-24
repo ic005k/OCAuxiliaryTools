@@ -2258,6 +2258,9 @@ void MainWindow::ParserUEFI(QVariantMap map)
     //6. Output
     QVariantMap map_output = map["Output"].toMap();
     getValue(map_output, ui->tabUEFI6);
+    QString strGop = ui->cboxGopPassThrough->currentText();
+    if (strGop == "true" || strGop == "false")
+        ui->cboxGopPassThrough->setCurrentIndex(0);
 
     //7. ProtocolOverrides
     QVariantMap map_po = map["ProtocolOverrides"].toMap();
