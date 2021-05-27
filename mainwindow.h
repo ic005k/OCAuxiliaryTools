@@ -307,9 +307,6 @@ private slots:
 
     void on_line5();
 
-    void on_line20();
-    void on_line21();
-
     void recentOpen(QString filename);
 
     void on_nv1();
@@ -761,6 +758,10 @@ private slots:
     void on_btnPickerAttributes_clicked();
 
     void on_btnExposeSensitiveData_clicked();
+
+    void on_actionPlist_editor_triggered();
+
+    void on_actionDSDT_SSDT_editor_triggered();
 
 private:
     void acpi_cellDoubleClicked();

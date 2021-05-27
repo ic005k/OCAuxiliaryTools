@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210528";
+    CurVerison = "20210601";
     ocVer = "0.7.0";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -5961,8 +5961,6 @@ void MainWindow::init_HelpMenu()
     connect(ui->actionOpenCore_Factory, &QAction::triggered, this, &MainWindow::on_line2);
     connect(ui->actionOpenCore_Forum, &QAction::triggered, this, &MainWindow::on_line3);
     connect(ui->actionOpenCanopyIcons, &QAction::triggered, this, &MainWindow::on_line5);
-    connect(ui->actionPlist_editor, &QAction::triggered, this, &MainWindow::on_line20);
-    connect(ui->actionDSDT_SSDT_editor, &QAction::triggered, this, &MainWindow::on_line21);
 
     //OC工厂
     ui->toolBar->addSeparator();
@@ -6407,22 +6405,6 @@ void MainWindow::on_line3()
 void MainWindow::on_line5()
 {
     QUrl url(QString("https://github.com/blackosx/OpenCanopyIcons"));
-    QDesktopServices::openUrl(url);
-}
-
-void MainWindow::on_line20()
-{
-    QUrl url(QString(
-        "https://www.insanelymac.com/forum/topic/"
-        "345512-open-source-cross-platform-plist-file-editor-plistedplus/"));
-    QDesktopServices::openUrl(url);
-}
-
-void MainWindow::on_line21()
-{
-    QUrl url(
-        QString("https://www.insanelymac.com/forum/topic/"
-                "344860-open-source-cross-platform-dsdtssdt-analysis-editor/"));
     QDesktopServices::openUrl(url);
 }
 
@@ -10195,4 +10177,16 @@ void MainWindow::on_btnPickerAttributes_clicked()
 void MainWindow::on_btnExposeSensitiveData_clicked()
 {
     showDlgPar(false, false, true, false);
+}
+
+void MainWindow::on_actionPlist_editor_triggered()
+{
+    QUrl url(QString("https://github.com/ic005k/PlistEDPlus"));
+    QDesktopServices::openUrl(url);
+}
+
+void MainWindow::on_actionDSDT_SSDT_editor_triggered()
+{
+    QUrl url(QString("https://github.com/ic005k/QtiASL"));
+    QDesktopServices::openUrl(url);
 }
