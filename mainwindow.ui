@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -4631,14 +4631,25 @@ Third party drivers may introduce additional security (and performance) consider
                  <property name="title">
                   <string/>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_9">
-                  <property name="topMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>0</number>
-                  </property>
-                  <item>
+                 <layout class="QGridLayout" name="gridLayout_63">
+                  <item row="0" column="3">
+                   <widget class="QCheckBox" name="chkAllowSetDefault">
+                    <property name="toolTip">
+                     <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.
+
+----
+
+ 允许CTRL+Enter和CTRL+Index操作，在引导选择器中设置默认引导选项。</string>
+                    </property>
+                    <property name="statusTip">
+                     <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.</string>
+                    </property>
+                    <property name="text">
+                     <string>AllowSetDefault</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
                    <widget class="QCheckBox" name="chkAllowNvramReset">
                     <property name="toolTip">
                      <string>Description: Allow CMD+OPT+P+R handling and enable showing NVRAM Reset entry in OpenCore picker.
@@ -4663,24 +4674,54 @@ Note 2 : Resetting NVRAM will also erase any boot options not backed up using th
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <widget class="QCheckBox" name="chkAllowSetDefault">
+                  <item row="0" column="1">
+                   <widget class="QCheckBox" name="chkAllowToggleSip">
                     <property name="toolTip">
-                     <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.
+                     <string>Type: plist boolean
+
+Description: Enable entry for disabling and enabling System Integrity Protection in OpenCore picker.
+
+This will toggle Apple NVRAM variable csr-active-config between 0 for SIP Enabled and the current macOS default for SIP Disabled (currently 0x6F for Big Sur).
+
+Note1 : Using the SIP Disabled value from a newer version of macOS on an older version (e.g. Catalina and below) will report an unknown setting if queried using csrutil status, but will still run correctly and be secure,because new bits are added but old bits are not removed between versions of macOS. (It is possible to configure CsrUtil.efi as a TextMode Tools entry to configure a different value, e.g. use toggle 0x67 in Arguments to toggle the default SIP Disabled value for macOS Catalina.)
+
+Note2 : It is strongly recommended not to make a habit of running macOS with SIP disabled. Use of this boot option may make it easier to quickly disable SIP protection when genuinely needed - it should be re-enabled again afterwards.
 
 ----
 
- 允许CTRL+Enter和CTRL+Index操作，在引导选择器中设置默认引导选项。</string>
-                    </property>
-                    <property name="statusTip">
-                     <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.</string>
+类型：plist布尔值
+
+描述：用于在OpenCore选取器中禁用和启用系统完整性保护。
+
+这将使苹果NVRAM变量csr-active-config在SIP Enabled的0和SIP Disabled的当前macOS默认值（Big Sur目前为0x6F）之间切换。
+
+注意1：在旧版本的macOS（例如Catalina和以下的版本）上使用较新版本的SIP Disabled值，如果使用csrutil status查询，将报告一个未知的设置，但仍将正确运行，并且是安全的，因为新的位被添加，但旧的位在macOS版本之间没有被删除。(可以将CsrUtil.efi配置为TextMode Tools条目，以配置不同的值，例如，使用Arguments中的toggle 0x67来切换macOS Catalina的默认SIP Disabled值。)
+
+注意2：强烈建议不要养成在禁用SIP的情况下运行macOS的习惯。使用这个启动选项可以在真正需要的时候更容易快速地禁用SIP保护，之后应该再重新启用。</string>
                     </property>
                     <property name="text">
-                     <string>AllowSetDefault</string>
+                     <string>AllowToggleSip</string>
                     </property>
                    </widget>
                   </item>
-                  <item>
+                  <item row="1" column="0">
+                   <widget class="QCheckBox" name="chkBlacklistAppleUpdate">
+                    <property name="toolTip">
+                     <string>Note: This option exists due to some operating systems, namely macOS Big Sur, being incapable of disabling firmware updates with the NVRAM variable (run-efi-updater).
+
+----
+
+注意：这个选项的存在是由于某些操作系统，即macOS Big Sur，无法使用NVRAM变量（run-efi-updater）禁用固件更新。</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Ignore boot options trying to update Apple peripheral firmware (e.g. MultiUpdater.efi).</string>
+                    </property>
+                    <property name="text">
+                     <string>BlacklistAppleUpdate</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
                    <widget class="QCheckBox" name="chkAuthRestart">
                     <property name="toolTip">
                      <string>Authenticated restart is a way to reboot FileVault 2 enabled macOS without entering the password. 
@@ -4705,24 +4746,7 @@ VirtualSMC通过在NVRAM和RTC中保存磁盘加密密钥分割来执行验证�
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <widget class="QCheckBox" name="chkBlacklistAppleUpdate">
-                    <property name="toolTip">
-                     <string>Note: This option exists due to some operating systems, namely macOS Big Sur, being incapable of disabling firmware updates with the NVRAM variable (run-efi-updater).
-
-----
-
-注意：这个选项的存在是由于某些操作系统，即macOS Big Sur，无法使用NVRAM变量（run-efi-updater）禁用固件更新。</string>
-                    </property>
-                    <property name="statusTip">
-                     <string>Ignore boot options trying to update Apple peripheral firmware (e.g. MultiUpdater.efi).</string>
-                    </property>
-                    <property name="text">
-                     <string>BlacklistAppleUpdate</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
+                  <item row="1" column="1">
                    <widget class="QCheckBox" name="chkEnablePassword">
                     <property name="toolTip">
                      <string>Password protection ensures that sensitive operations like booting a non-default operating system (e.g. macOS recovery or a tool), resetting NVRAM storage, trying to boot into a non-default mode (e.g. verbose mode or safe mode) are not allowed without explicit user authentication by a custom password. Currently password and salt are hashed with 5000000 iterations of SHA-512.
