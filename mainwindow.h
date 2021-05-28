@@ -831,17 +831,6 @@ private:
 
     QVector<QString> IniFile;
 
-    void init_tr_str();
-
-    QString strArch;
-    QString strBundlePath;
-    QString strComment;
-    QString strEnabled;
-    QString strExecutablePath;
-    QString strMaxKernel;
-    QString strMinKernel;
-    QString strPlistPath;
-
     QVector<int> textColorInt;
     QVector<int> backColorInt;
 

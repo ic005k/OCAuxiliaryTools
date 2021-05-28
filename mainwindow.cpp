@@ -87,8 +87,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     setUIMargin();
 
-    init_tr_str();
-
     initui_booter();
     initui_dp();
     initui_kernel();
@@ -746,42 +744,34 @@ void MainWindow::initui_kernel()
     ui->table_kernel_add->setColumnWidth(0, 250);
     id0 = new QTableWidgetItem(tr("BundlePath"));
     ui->table_kernel_add->setHorizontalHeaderItem(0, id0);
-    ui->table_kernel_add->horizontalHeaderItem(0)->setToolTip(strBundlePath);
 
     ui->table_kernel_add->setColumnWidth(1, 250);
     id0 = new QTableWidgetItem(tr("Comment"));
     ui->table_kernel_add->setHorizontalHeaderItem(1, id0);
-    ui->table_kernel_add->horizontalHeaderItem(1)->setToolTip(strComment);
 
     ui->table_kernel_add->setColumnWidth(2, 250);
     id0 = new QTableWidgetItem(tr("ExecutablePath"));
     ui->table_kernel_add->setHorizontalHeaderItem(2, id0);
-    ui->table_kernel_add->horizontalHeaderItem(2)->setToolTip(strExecutablePath);
 
     ui->table_kernel_add->setColumnWidth(0, 250);
     id0 = new QTableWidgetItem(tr("PlistPath"));
     ui->table_kernel_add->setHorizontalHeaderItem(3, id0);
-    ui->table_kernel_add->horizontalHeaderItem(3)->setToolTip(strPlistPath);
 
     ui->table_kernel_add->setColumnWidth(0, 250);
     id0 = new QTableWidgetItem(tr("MinKernel"));
     ui->table_kernel_add->setHorizontalHeaderItem(4, id0);
-    ui->table_kernel_add->horizontalHeaderItem(4)->setToolTip(strMinKernel);
 
     ui->table_kernel_add->setColumnWidth(0, 250);
     id0 = new QTableWidgetItem(tr("MaxKernel"));
     ui->table_kernel_add->setHorizontalHeaderItem(5, id0);
-    ui->table_kernel_add->horizontalHeaderItem(5)->setToolTip(strMaxKernel);
 
     ui->table_kernel_add->setColumnWidth(0, 250);
     id0 = new QTableWidgetItem(tr("Enabled"));
     ui->table_kernel_add->setHorizontalHeaderItem(6, id0);
-    ui->table_kernel_add->horizontalHeaderItem(6)->setToolTip(strEnabled);
 
     ui->table_kernel_add->setColumnWidth(0, 250);
     id0 = new QTableWidgetItem(tr("Arch"));
     ui->table_kernel_add->setHorizontalHeaderItem(7, id0);
-    ui->table_kernel_add->horizontalHeaderItem(7)->setToolTip(strArch);
 
     ui->table_kernel_add->setAlternatingRowColors(true);
     //ui->table_kernel_add->horizontalHeader()->setStretchLastSection(true);
@@ -5054,20 +5044,6 @@ void MainWindow::on_btnHelp()
     QString qtManulFile = appInfo.filePath() + "/Database/doc/Configuration.pdf";
 
     QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
-}
-
-void MainWindow::init_tr_str()
-{
-    strArch = tr("Kext architecture (Any, i386, x86_64).");
-    strBundlePath = tr("Kext bundle path (e.g. Lilu.kext or "
-                       "MyKext.kext/Contents/PlugIns/MySubKext.kext).");
-    strComment = tr("Comment.");
-    strEnabled = tr("This kernel driver will not be added unless set to true.");
-    strExecutablePath = tr("Kext executable path relative to bundle (e.g. Contents/MacOS/Lilu).");
-    strMaxKernel = tr("Adds kernel driver on specified macOS version or older.");
-    strMinKernel = tr("Adds kernel driver on specified macOS version or newer.");
-    strPlistPath = tr(
-        " Kext Info.plist path relative to bundle (e.g. Contents/Info.plist).");
 }
 
 void MainWindow::on_tabTotal_tabBarClicked(int index)
