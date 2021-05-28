@@ -18,8 +18,8 @@ IDI_ICON1 ICON DISCARDABLE "my.ico"
 #endif
         FILEOS VOS__WINDOWS32 FILETYPE VFT_DLL FILESUBTYPE 0x0L BEGIN BLOCK
     "StringFileInfo" BEGIN BLOCK "080404b0" BEGIN VALUE "CompanyName",
-    "" VALUE "FileDescription", "" VALUE "FileVersion", "0.7.0 - 20210601\0" VALUE "ProductVersion",
-    "0.7.0 - 20210601\0" VALUE "LegalCopyright", "\0" VALUE "LegalTrademarks",
+    "" VALUE "FileDescription", "" VALUE "FileVersion", "0.7.0 - 20210603\0" VALUE "ProductVersion",
+    "0.7.0 - 20210603\0" VALUE "LegalCopyright", "\0" VALUE "LegalTrademarks",
     "" VALUE "OriginalFilename", "OCAT\0" VALUE "ProductName", "OCAT" VALUE "InternalName",
     "OCAT\0" END END
 
