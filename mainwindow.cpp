@@ -7868,12 +7868,30 @@ void MainWindow::on_actionFind_triggered()
 
     if (listNameResults.count() > 0) {
         ui->dockFind->show();
-        FindTextChange = false;
+
         ui->listFind->setCurrentRow(0);
 
         int index = ui->listMain->currentRow();
         setListMainIcon();
         ui->listMain->setCurrentRow(index);
+
+        // 刷新搜索历史
+        QStringList strList;
+        for (int i = 0; i < ui->cboxFind->count(); i++) {
+            strList.append(ui->cboxFind->itemText(i));
+        }
+
+        for (int i = 0; i < strList.count(); i++) {
+            if (findText == strList.at(i)) {
+                strList.removeAt(i);
+            }
+        }
+
+        strList.insert(0, findText);
+        AddCboxFindItem = true;
+        ui->cboxFind->clear();
+        ui->cboxFind->addItems(strList);
+        AddCboxFindItem = false;
 
         if (red < 55) {
 
@@ -7883,6 +7901,8 @@ void MainWindow::on_actionFind_triggered()
 
             setPalette(ui->cboxFind, Qt::white, Qt::black);
         }
+
+        FindTextChange = false;
 
     } else {
 
@@ -8434,6 +8454,11 @@ void MainWindow::goResults(int index)
 
 void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1)
 {
+    if (AddCboxFindItem) {
+
+        return;
+    }
+
     FindTextChange = true;
 
     if (arg1.trimmed() == "") {

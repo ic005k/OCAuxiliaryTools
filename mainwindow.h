@@ -764,6 +764,7 @@ private slots:
     void on_actionDSDT_SSDT_editor_triggered();
 
 private:
+    bool AddCboxFindItem = false;
     void acpi_cellDoubleClicked();
     void booter_cellDoubleClicked();
     void dp_cellDoubleClicked();
