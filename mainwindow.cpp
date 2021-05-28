@@ -5210,40 +5210,23 @@ void MainWindow::initScanPolicyValue()
         chk.append(chk_ScanPolicy.at(i));
     }
 
-    v1 = 1;
-    v2 = 2;
-    v3 = 256;
-    v4 = 512;
-    v5 = 1024;
-    v6 = 2048;
-    v7 = 4096;
-    v8 = 65536;
-    v9 = 131072;
-    v10 = 262144;
-    v11 = 524288;
-    v12 = 1048576;
-    v13 = 2097152;
-    v14 = 4194304;
-    v15 = 8388608;
-    v16 = 16777216;
-
     v.clear();
-    v.append(v1);
-    v.append(v2);
-    v.append(v3);
-    v.append(v4);
-    v.append(v5);
-    v.append(v6);
-    v.append(v7);
-    v.append(v8);
-    v.append(v9);
-    v.append(v10);
-    v.append(v11);
-    v.append(v12);
-    v.append(v13);
-    v.append(v14);
-    v.append(v15);
-    v.append(v16);
+    v.append(1);
+    v.append(2);
+    v.append(256);
+    v.append(512);
+    v.append(1024);
+    v.append(2048);
+    v.append(4096);
+    v.append(65536);
+    v.append(131072);
+    v.append(262144);
+    v.append(524288);
+    v.append(1048576);
+    v.append(2097152);
+    v.append(4194304);
+    v.append(8388608);
+    v.append(16777216);
 }
 void MainWindow::on_editIntScanPolicy_textChanged(const QString& arg1)
 {
@@ -5291,46 +5274,26 @@ void MainWindow::method(QVector<unsigned int> nums, unsigned int sum, QVector<un
 
 void MainWindow::initDisplayLevelValue()
 {
-    vd1 = 1;
-    vd2 = 2;
-    vd3 = 4;
-    vd4 = 8;
-    vd5 = 16;
-    vd6 = 32;
-    vd7 = 64;
-    vd8 = 128;
-    vd9 = 256;
-    vd10 = 1024;
-    vd11 = 4096;
-    vd12 = 16384;
-    vd13 = 65536;
-    vd14 = 131072;
-    vd15 = 524288;
-    vd16 = 1048576;
-    vd17 = 2097152;
-    vd18 = 4194304;
-    vd19 = 2147483648;
-
     v.clear();
-    v.append(vd1);
-    v.append(vd2);
-    v.append(vd3);
-    v.append(vd4);
-    v.append(vd5);
-    v.append(vd6);
-    v.append(vd7);
-    v.append(vd8);
-    v.append(vd9);
-    v.append(vd10);
-    v.append(vd11);
-    v.append(vd12);
-    v.append(vd13);
-    v.append(vd14);
-    v.append(vd15);
-    v.append(vd16);
-    v.append(vd17);
-    v.append(vd18);
-    v.append(vd19);
+    v.append(1);
+    v.append(2);
+    v.append(4);
+    v.append(8);
+    v.append(16);
+    v.append(32);
+    v.append(64);
+    v.append(128);
+    v.append(256);
+    v.append(1024);
+    v.append(4096);
+    v.append(16384);
+    v.append(65536);
+    v.append(131072);
+    v.append(524288);
+    v.append(1048576);
+    v.append(2097152);
+    v.append(4194304);
+    v.append(2147483648);
 
     chk.clear();
     for (int i = 0; i < chkDisplayLevel.count(); i++)

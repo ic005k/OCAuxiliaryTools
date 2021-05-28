@@ -845,17 +845,12 @@ private:
     QVector<int> textColorInt;
     QVector<int> backColorInt;
 
-    int v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16;
-
     void method(QVector<unsigned int> nums, unsigned int sum);
     void method(QVector<unsigned int> nums, unsigned int sum, QVector<unsigned int> list, int index);
 
     QVector<QCheckBox*> chk;
 
     QVector<unsigned int> v;
-
-    unsigned int vd1, vd2, vd3, vd4, vd5, vd6, vd7, vd8, vd9, vd10, vd11, vd12,
-        vd13, vd14, vd15, vd16, vd17, vd18, vd19;
 
     QVector<int> value;
 
