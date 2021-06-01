@@ -24,4 +24,11 @@ void dlgMountESP::on_btnMount_clicked()
     QString str = ui->listWidget->currentItem()->text().trimmed();
     QStringList strList = str.simplified().split(" ");
     mw_one->mount_esp_mac(strList.at(5));
+
+    QString str0 = strList.at(2);
+    QString str1 = str0.toLatin1();
+    QString str2 = str1.replace("?", "");
+    QString dirpath = "/Volumes/" + str2 + "/EFI/";
+    QString dir = "file:" + dirpath;
+    QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
 }
