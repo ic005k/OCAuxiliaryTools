@@ -829,7 +829,7 @@
             <false/>
             <key>Generic</key>
             <dict>
-                <key>AdviseWindows</key>
+                <key>AdviseFeatures</key>
                 <false/>
                 <key>MLB</key>
                 <string>C02937902CDKGQG1H</string>

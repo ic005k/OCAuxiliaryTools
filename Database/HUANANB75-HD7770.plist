@@ -1160,7 +1160,7 @@
             <false/>
             <key>Generic</key>
             <dict>
-                <key>AdviseWindows</key>
+                <key>AdviseFeatures</key>
                 <false/>
                 <key>MLB</key>
                 <string>C02353102J9F2FR1F</string>
