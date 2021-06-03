@@ -5806,7 +5806,8 @@ Note: On most newer firmwares these bits are already set, the option may be nece
 
 描述：用支持的位更新FirmwareFeatures。
 
-添加到FirmwareFeatures的位：FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - 没有这个位，不可能重新启动安装在EFI分区不是磁盘上第一个分区的驱动器上的Windows。
+添加到FirmwareFeatures的位：
+- FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - 没有这个位，不可能重新启动安装在EFI分区不是磁盘上第一个分区的驱动器上的Windows。
 
 - FW_FEATURE_SUPPORTS_UEFI_WINDOWS_BOOT (0x20000000) - 没有这个位，不可能重新启动安装在EFI分区是磁盘上第一个分区的驱动器上的Windows。
 
