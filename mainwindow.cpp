@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210603";
+    CurVerison = "20210606";
     ocVer = "0.7.0";
     title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
     setWindowTitle(title);
@@ -1629,7 +1629,6 @@ void MainWindow::read_value_ini(QTableWidget* table, QTableWidget* mytable, int 
 
 void MainWindow::on_table_dp_add0_cellClicked(int row, int column)
 {
-
     Q_UNUSED(row);
     Q_UNUSED(column);
 
@@ -1653,7 +1652,6 @@ void MainWindow::on_table_dp_add_itemChanged(QTableWidgetItem* item)
 
 void MainWindow::on_table_nv_add0_cellClicked(int row, int column)
 {
-
     Q_UNUSED(row);
     Q_UNUSED(column);
 
@@ -1701,7 +1699,6 @@ void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table, QTableWidg
 
 void MainWindow::write_value_ini(QTableWidget* table, QTableWidget* subtable, int i)
 {
-
     QString name = table->item(i, 0)->text().trimmed();
     if (name == "")
         name = "Item" + QString::number(i + 1);
@@ -1727,7 +1724,6 @@ void MainWindow::write_value_ini(QTableWidget* table, QTableWidget* subtable, in
 
 void MainWindow::on_table_nv_del0_cellClicked(int row, int column)
 {
-
     Q_UNUSED(row);
     Q_UNUSED(column);
 
@@ -1772,7 +1768,6 @@ void MainWindow::on_table_nv_ls_itemChanged(QTableWidgetItem* item)
 
 void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
 {
-
     Q_UNUSED(row);
     Q_UNUSED(column);
 
@@ -1797,7 +1792,6 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item)
 
 void MainWindow::initui_PlatformInfo()
 {
-
     QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
     QFileInfo fi(qfile);
     if (fi.exists()) {
@@ -1811,7 +1805,6 @@ void MainWindow::initui_PlatformInfo()
     ui->cboxUpdateSMBIOSMode->addItem("Overwrite");
     ui->cboxUpdateSMBIOSMode->addItem("Custom");
 
-    ui->cboxSystemMemoryStatus->addItem("");
     ui->cboxSystemMemoryStatus->addItem("Auto");
     ui->cboxSystemMemoryStatus->addItem("Upgradable");
     ui->cboxSystemMemoryStatus->addItem("Soldered");
@@ -2035,6 +2028,9 @@ void MainWindow::ParserPlatformInfo(QVariantMap map)
     // Generic
     QVariantMap mapGeneric = map["Generic"].toMap();
     getValue(mapGeneric, ui->tabPlatformInfo1);
+
+    if (ui->cboxSystemMemoryStatus->currentText() == "")
+        ui->cboxSystemMemoryStatus->setCurrentIndex(0);
 
     if (ui->editMLB_PNVRAM->text().trimmed() == "")
         ui->editMLB_PNVRAM->setText(mapGeneric["MLB"].toString());
@@ -2276,7 +2272,11 @@ void MainWindow::ParserUEFI(QVariantMap map)
         newItem1 = new QTableWidgetItem(map_sub["Size"].toString());
         ui->table_uefi_ReservedMemory->setItem(i, 2, newItem1);
 
-        newItem1 = new QTableWidgetItem(map_sub["Type"].toString());
+        QString strType = map_sub["Type"].toString();
+        if (strType != "")
+            newItem1 = new QTableWidgetItem(strType);
+        else
+            newItem1 = new QTableWidgetItem("Reserved");
         ui->table_uefi_ReservedMemory->setItem(i, 3, newItem1);
 
         init_enabled_data(ui->table_uefi_ReservedMemory, i, 4,
@@ -2418,7 +2418,6 @@ QVariantMap MainWindow::SaveACPI()
 
 QVariantMap MainWindow::SaveBooter()
 {
-
     QVariantMap subMap;
     QVariantList arrayList;
     QVariantMap valueList;
@@ -2969,7 +2968,6 @@ void MainWindow::on_table_acpi_add_cellClicked(int row, int column)
 void MainWindow::init_enabled_data(QTableWidget* table, int row, int column,
     QString str)
 {
-
     QTableWidgetItem* chkbox = new QTableWidgetItem(str);
 
     table->setItem(row, column, chkbox);
@@ -2984,7 +2982,6 @@ void MainWindow::init_enabled_data(QTableWidget* table, int row, int column,
 
 void MainWindow::enabled_change(QTableWidget* table, int row, int column, int cc)
 {
-
     if (table->currentIndex().isValid()) {
 
         if (column == cc) {
@@ -3017,7 +3014,6 @@ void MainWindow::on_table_acpi_del_cellClicked(int row, int column)
 
 void MainWindow::setStatusBarText(QTableWidget* table)
 {
-
     QString text = table->currentItem()->text();
     QString str;
     if (getTableFieldDataType(table) == "Data")
@@ -3158,7 +3154,6 @@ void MainWindow::on_tableTools_cellClicked(int row, int column)
 
 void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
 {
-
     if (!ui->table_uefi_ReservedMemory->currentIndex().isValid())
         return;
 
@@ -3169,7 +3164,7 @@ void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
         cboxReservedMemoryType = new QComboBox(this);
         cboxReservedMemoryType->setEditable(true);
         QStringList sl_type;
-        sl_type.append("");
+
         sl_type.append("Reserved");
         sl_type.append("LoaderCode");
         sl_type.append("LoaderData");
@@ -3187,7 +3182,7 @@ void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
         sl_type.append("PalCode");
         cboxReservedMemoryType->addItems(sl_type);
 
-        connect(cboxReservedMemoryType, SIGNAL(currentIndexChanged(QString)), this,
+        connect(cboxReservedMemoryType, SIGNAL(currentTextChanged(QString)), this,
             SLOT(ReservedMemoryTypeChange()));
         c_row = row;
 
@@ -3249,7 +3244,6 @@ QString MainWindow::getSubTabStr(int tabIndex)
 
 void MainWindow::del_item(QTableWidget* table)
 {
-
     if (table->rowCount() == 0)
         return;
 
@@ -3526,7 +3520,6 @@ void MainWindow::on_btnDPAdd_Add0_clicked()
 
 void MainWindow::on_btnDPAdd_Del0_clicked()
 {
-
     if (ui->table_dp_add0->rowCount() == 0)
         return;
 
@@ -3784,7 +3777,6 @@ void MainWindow::on_btnMiscEntries_Add_clicked()
 
 void MainWindow::on_btnMiscTools_Add_clicked()
 {
-
     QFileDialog fd;
 
     QStringList FileName = fd.getOpenFileNames(this, "tools efi file", "",
@@ -4226,7 +4218,6 @@ void MainWindow::on_btnSaveAs()
 
 void MainWindow::about()
 {
-
     aboutDlg->setModal(true);
     aboutDlg->show();
 }
@@ -4238,7 +4229,6 @@ void MainWindow::on_btnKernelAdd_Del_clicked()
 
 void MainWindow::on_table_dp_add_cellClicked(int row, int column)
 {
-
     if (column == 1) {
 
         cboxDataClass = new QComboBox;
@@ -4349,7 +4339,6 @@ void MainWindow::on_table_nv_add_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
-
     ui->table_nv_add->removeCellWidget(previousRow, 1);
 
     //Undo Redo
@@ -4361,7 +4350,6 @@ void MainWindow::on_table_nv_add_currentCellChanged(int currentRow,
 
 void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previousColumn, int currentRow, int currentColumn)
 {
-
     if (!loading) {
 
         if (Table->rowCount() == 0)
@@ -4493,7 +4481,6 @@ void MainWindow::on_table_kernel_add_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
-
     ui->table_kernel_add->removeCellWidget(previousRow, 7);
 
     //Undo Redo
@@ -4508,7 +4495,6 @@ void MainWindow::on_table_kernel_block_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
-
     ui->table_kernel_block->removeCellWidget(previousRow, 5);
 
     //Undo Redo
@@ -4523,7 +4509,6 @@ void MainWindow::on_table_kernel_patch_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
-
     ui->table_kernel_patch->removeCellWidget(previousRow, 13);
 
     //Undo Redo
@@ -4669,7 +4654,6 @@ void MainWindow::on_table_kernel_Force_currentCellChanged(int currentRow,
     int previousRow,
     int previousColumn)
 {
-
     ui->table_kernel_Force->removeCellWidget(previousRow, 8);
 
     //Undo Redo
@@ -4712,7 +4696,6 @@ void MainWindow::on_btnKernelForce_Del_clicked()
 
 void MainWindow::dragEnterEvent(QDragEnterEvent* e)
 {
-
     if (e->mimeData()->hasFormat("text/uri-list")) {
         e->acceptProposedAction();
     }
@@ -4827,7 +4810,6 @@ void MainWindow::runAdmin(QString file, QString arg)
 
 void MainWindow::mount_esp()
 {
-
 #ifdef Q_OS_WIN32
 
     QString exec = QCoreApplication::applicationDirPath() + "/Database/win/FindESP.exe";
@@ -4914,7 +4896,6 @@ void MainWindow::mount_esp_mac(QString strEfiDisk)
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
-
     QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
     QFile file(qfile);
     QSettings Reg(qfile, QSettings::IniFormat);
@@ -4986,7 +4967,6 @@ void MainWindow::closeEvent(QCloseEvent* event)
 void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(
     int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-
     ui->table_uefi_ReservedMemory->removeCellWidget(previousRow, 3);
 
     Q_UNUSED(currentRow);
@@ -5039,7 +5019,6 @@ void MainWindow::loadLocal()
 
 void MainWindow::on_btnHelp()
 {
-
     QFileInfo appInfo(qApp->applicationDirPath());
     QString qtManulFile = appInfo.filePath() + "/Database/doc/Configuration.pdf";
 
@@ -5048,7 +5027,6 @@ void MainWindow::on_btnHelp()
 
 void MainWindow::on_tabTotal_tabBarClicked(int index)
 {
-
     switch (index) {
 
     case 0:
@@ -5222,7 +5200,6 @@ void MainWindow::on_editIntScanPolicy_textChanged(const QString& arg1)
 
 void MainWindow::method(QVector<unsigned int> nums, unsigned int sum)
 {
-
     QVector<unsigned int> list;
 
     method(nums, sum, list, -1);
@@ -5278,7 +5255,6 @@ void MainWindow::initDisplayLevelValue()
 
 void MainWindow::DisplayLevel()
 {
-
     initDisplayLevelValue();
 
     unsigned int total = 0;
@@ -5356,7 +5332,6 @@ void MainWindow::on_editIntPickerAttributes_textChanged(const QString& arg1)
 
 void MainWindow::contextMenuEvent(QContextMenuEvent* event)
 {
-
     Q_UNUSED(event);
 
     QMenu menu(ui->table_nv_add);
@@ -5370,7 +5345,6 @@ void MainWindow::contextMenuEvent(QContextMenuEvent* event)
 
 void MainWindow::show_menu(const QPoint pos)
 {
-
     if (ui->table_nv_add0->currentIndex().data().toString() == "7C436110-AB2A-4BBB-A880-FE41995C9F82") {
 
         //设置菜单选项
