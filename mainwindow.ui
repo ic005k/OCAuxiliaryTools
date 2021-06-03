@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5553,7 +5553,7 @@ A continuously updated variable list can be found in a corresponding document: N
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>5</number>
+              <number>0</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -5788,31 +5788,37 @@ Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemory
                 </widget>
                </item>
                <item row="0" column="3">
-                <widget class="QCheckBox" name="chkAdviseWindows">
+                <widget class="QCheckBox" name="chkAdviseFeatures">
                  <property name="toolTip">
-                  <string notr="true">Description: Forces Windows support in FirmwareFeatures.
+                  <string notr="true">Type: plist boolean
 
-Added bits to FirmwareFeatures: 
+Description: Updates FirmwareFeatures with supported bits.
 
-• FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - Without this bit, it is not possible to reboot to Windows installed on a drive with an EFI partition that is not the first partition on the disk.
+Added bits to FirmwareFeatures: • FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - Without this bit, it is not possible to reboot to Windows installed on a drive with an EFI partition that is not the first partition on the disk.
 
 • FW_FEATURE_SUPPORTS_UEFI_WINDOWS_BOOT (0x20000000) - Without this bit, it is not possible to reboot to Windows installed on a drive with an EFI partition that is the first partition on the disk.
 
+• FW_FEATURE_SUPPORTS_APFS (0x00080000) - Without this bit, it is not possible to install macOS on an APFS disk.
+
+Note: On most newer firmwares these bits are already set, the option may be necessary when &quot;upgrading&quot; the firmware with new features.
 ----
+类型：plist布尔值
 
-说明：在FirmwareFeatures中强制支持Windows。
+描述：用支持的位更新FirmwareFeatures。
 
-添加位到FirmwareFeatures：
+添加到FirmwareFeatures的位：FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - 没有这个位，不可能重新启动安装在EFI分区不是磁盘上第一个分区的驱动器上的Windows。
 
-- FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - 如果没有这个位，就不可能重新启动到安装有EFI分区的驱动器上的Windows，该分区不是磁盘上的第一个分区。
+- FW_FEATURE_SUPPORTS_UEFI_WINDOWS_BOOT (0x20000000) - 没有这个位，不可能重新启动安装在EFI分区是磁盘上第一个分区的驱动器上的Windows。
 
-- FW_FEATURE_SUPPORTS_UEFI_WINDOWS_BOOT (0x20000000) - 如果没有该位，则无法重新启动到安装在带有 EFI 分区的驱动器上的 Windows，而 EFI 分区是磁盘上的第一个分区。</string>
+- FW_FEATURE_SUPPORTS_APFS (0x00080000) - 没有这个位，不可能在APFS磁盘上安装macOS。
+
+注意：在大多数较新的固件上，这些位已经被设置了，当用新功能 &quot;升级 &quot;固件时，这个选项可能是必要的。</string>
                  </property>
                  <property name="statusTip">
                   <string>Forces Windows support in FirmwareFeatures.</string>
                  </property>
                  <property name="text">
-                  <string>AdviseWindows</string>
+                  <string>AdviseFeatures</string>
                  </property>
                 </widget>
                </item>
