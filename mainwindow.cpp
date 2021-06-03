@@ -4031,7 +4031,10 @@ void MainWindow::on_btnNVRAMLS_Del_clicked()
 
 void MainWindow::on_btnUEFIRM_Add_clicked()
 {
-    add_item(ui->table_uefi_ReservedMemory, 4);
+    add_item(ui->table_uefi_ReservedMemory, 5);
+
+    int row = ui->table_uefi_ReservedMemory->currentRow();
+    ui->table_uefi_ReservedMemory->item(row, 3)->setText("Reserved");
     init_enabled_data(ui->table_uefi_ReservedMemory,
         ui->table_uefi_ReservedMemory->rowCount() - 1, 4, "true");
 
