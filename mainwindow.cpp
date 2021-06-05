@@ -10131,3 +10131,11 @@ void MainWindow::on_actionDSDT_SSDT_editor_triggered()
     QUrl url(QString("https://github.com/ic005k/QtiASL"));
     QDesktopServices::openUrl(url);
 }
+
+void MainWindow::on_actionDifferences_triggered()
+{
+    QFileInfo appInfo(qApp->applicationDirPath());
+    QString qtManulFile = appInfo.filePath() + "/Database/doc/Differences.pdf";
+
+    QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
+}

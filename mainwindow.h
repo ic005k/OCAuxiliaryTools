@@ -763,6 +763,8 @@ private slots:
 
     void on_actionDSDT_SSDT_editor_triggered();
 
+    void on_actionDifferences_triggered();
+
 private:
     bool AddCboxFindItem = false;
     void acpi_cellDoubleClicked();

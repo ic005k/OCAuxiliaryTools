@@ -9737,12 +9737,14 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
      <string>Help</string>
     </property>
     <addaction name="btnHelp"/>
+    <addaction name="actionDifferences"/>
+    <addaction name="separator"/>
     <addaction name="actionOpenCore"/>
     <addaction name="actionOpenCore_Factory"/>
     <addaction name="actionOpenCore_Forum"/>
     <addaction name="actionOpenCanopyIcons"/>
-    <addaction name="btnCheckUpdate"/>
     <addaction name="separator"/>
+    <addaction name="btnCheckUpdate"/>
     <addaction name="actionBug_Report"/>
     <addaction name="actionDiscussion_Forum"/>
     <addaction name="actionAbout_2"/>
@@ -9957,6 +9959,11 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
   <action name="actionUpgrade_OC">
    <property name="text">
     <string>Upgrade OC main program</string>
+   </property>
+  </action>
+  <action name="actionDifferences">
+   <property name="text">
+    <string>Differences</string>
    </property>
   </action>
  </widget>
