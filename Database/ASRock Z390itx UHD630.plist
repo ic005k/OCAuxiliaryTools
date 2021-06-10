@@ -170,6 +170,8 @@
                 <false/>
                 <key>ResetLogoStatus</key>
                 <false/>
+                <key>SyncTableIds</key>
+                <false/>
             </dict>
         </dict>
         <key>Booter</key>
