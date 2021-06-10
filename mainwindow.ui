@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -669,24 +669,32 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
            <layout class="QHBoxLayout" name="horizontalLayout_17">
             <item>
              <layout class="QGridLayout" name="gridLayout_28">
-              <item row="5" column="0">
-               <widget class="QCheckBox" name="chkResetHwSig">
+              <item row="3" column="0">
+               <widget class="QCheckBox" name="chkRebaseRegions">
                 <property name="toolTip">
-                 <string notr="true">Description: Reset FACS table HardwareSignature value to 0.
+                 <string notr="true">Description: Attempt to heuristically relocate ACPI memory regions. Not recommended.
 
-This works around firmware that fail to maintain hardware signature across the reboots and cause issues with waking from hibernation.
+ACPI tables are often generated dynamically by the underlying firmware implementation. Among the positionindependent code, ACPI tables may contain the physical addresses of MMIO areas used for device configuration,typically grouped by region (e.g. OperationRegion). Changing firmware settings or hardware configuration,upgrading or patching the firmware inevitably leads to changes in dynamically generated ACPI code, which sometimes results in the shift of the addresses in the aforementioned OperationRegion constructions.
+
+For this reason, the application of modifications to ACPI tables is extremely risky. The best approach is to make as few changes as possible to ACPI tables and to avoid replacing any tables, particularly DSDT tables. When this cannot be avoided, ensure that any custom DSDT tables are based on the most recent DSDT tables or attempt to remove reads and writes for the affected areas.
+
+When nothing else helps, this option could be tried to avoid stalls at PCI Configuration Begin phase of macOS booting by attempting to fix the ACPI addresses. It is not a magic bullet however, and only works with the most typical cases. Do not use unless absolutely required as it can have the opposite effect on certain platforms and result in boot failures.
 
 ----
 
-描述：将FACS表HardwareSignature值重置为0。
+描述：尝试启发式地重新定位ACPI内存区域。不推荐使用。
 
-这可以解决固件在重启过程中无法保持硬件签名而导致休眠唤醒的问题。</string>
+ACPI表通常由底层固件实现动态生成。在与位置无关的代码中，ACPI表可能包含用于设备配置的MMIO区域的物理地址，通常是按区域（如OperationRegion）分组的。改变固件设置或硬件配置、升级或打补丁不可避免地会导致动态生成的ACPI代码发生变化，这有时会导致上述OperationRegion结构中的地址发生变化。
+
+由于这个原因，应用修改ACPI表是非常危险的。最好的方法是尽可能少地对ACPI表进行修改，避免替换任何表，特别是DSDT表。当无法避免时，确保任何自定义的DSDT表都是基于最新的DSDT表，或者尝试删除受影响区域的读写。
+
+当没有其他帮助时，可以尝试这个选项，通过尝试修复ACPI地址来避免在macOS启动的PCI配置开始阶段的停顿。然而，这并不是灵丹妙药，只对最典型的情况有效。除非绝对需要，否则不要使用，因为它在某些平台上可能会产生相反的效果，导致启动失败。</string>
                 </property>
                 <property name="statusTip">
-                 <string>Reset FACS table HardwareSignature value to 0.</string>
+                 <string>Attempt to heuristically relocate ACPI memory regions. Not recommended.</string>
                 </property>
                 <property name="text">
-                 <string>ResetHwSig</string>
+                 <string>RebaseRegions</string>
                 </property>
                </widget>
               </item>
@@ -740,35 +748,6 @@ Not recommended unless required.
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
-               <widget class="QCheckBox" name="chkRebaseRegions">
-                <property name="toolTip">
-                 <string notr="true">Description: Attempt to heuristically relocate ACPI memory regions. Not recommended.
-
-ACPI tables are often generated dynamically by the underlying firmware implementation. Among the positionindependent code, ACPI tables may contain the physical addresses of MMIO areas used for device configuration,typically grouped by region (e.g. OperationRegion). Changing firmware settings or hardware configuration,upgrading or patching the firmware inevitably leads to changes in dynamically generated ACPI code, which sometimes results in the shift of the addresses in the aforementioned OperationRegion constructions.
-
-For this reason, the application of modifications to ACPI tables is extremely risky. The best approach is to make as few changes as possible to ACPI tables and to avoid replacing any tables, particularly DSDT tables. When this cannot be avoided, ensure that any custom DSDT tables are based on the most recent DSDT tables or attempt to remove reads and writes for the affected areas.
-
-When nothing else helps, this option could be tried to avoid stalls at PCI Configuration Begin phase of macOS booting by attempting to fix the ACPI addresses. It is not a magic bullet however, and only works with the most typical cases. Do not use unless absolutely required as it can have the opposite effect on certain platforms and result in boot failures.
-
-----
-
-描述：尝试启发式地重新定位ACPI内存区域。不推荐使用。
-
-ACPI表通常由底层固件实现动态生成。在与位置无关的代码中，ACPI表可能包含用于设备配置的MMIO区域的物理地址，通常是按区域（如OperationRegion）分组的。改变固件设置或硬件配置、升级或打补丁不可避免地会导致动态生成的ACPI代码发生变化，这有时会导致上述OperationRegion结构中的地址发生变化。
-
-由于这个原因，应用修改ACPI表是非常危险的。最好的方法是尽可能少地对ACPI表进行修改，避免替换任何表，特别是DSDT表。当无法避免时，确保任何自定义的DSDT表都是基于最新的DSDT表，或者尝试删除受影响区域的读写。
-
-当没有其他帮助时，可以尝试这个选项，通过尝试修复ACPI地址来避免在macOS启动的PCI配置开始阶段的停顿。然而，这并不是灵丹妙药，只对最典型的情况有效。除非绝对需要，否则不要使用，因为它在某些平台上可能会产生相反的效果，导致启动失败。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Attempt to heuristically relocate ACPI memory regions. Not recommended.</string>
-                </property>
-                <property name="text">
-                 <string>RebaseRegions</string>
-                </property>
-               </widget>
-              </item>
               <item row="2" column="0">
                <widget class="QCheckBox" name="chkResetLogoStatus">
                 <property name="toolTip">
@@ -790,6 +769,47 @@ This works around firmware that provide a BGRT table but fail to handle screen u
                 </property>
                 <property name="text">
                  <string>ResetLogoStatus</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QCheckBox" name="chkResetHwSig">
+                <property name="toolTip">
+                 <string notr="true">Description: Reset FACS table HardwareSignature value to 0.
+
+This works around firmware that fail to maintain hardware signature across the reboots and cause issues with waking from hibernation.
+
+----
+
+描述：将FACS表HardwareSignature值重置为0。
+
+这可以解决固件在重启过程中无法保持硬件签名而导致休眠唤醒的问题。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Reset FACS table HardwareSignature value to 0.</string>
+                </property>
+                <property name="text">
+                 <string>ResetHwSig</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QCheckBox" name="chkSyncTableIds">
+                <property name="toolTip">
+                 <string>Type: plist boolean
+
+Description: Sync table identifiers with the SLIC table.
+
+This works around patched tables becoming incompatible with the SLIC table causing licensing issues in older åWindows operating systems.
+----
+类型：plist布尔值
+
+描述：将表的标识符与SLIC表同步。
+
+这可以解决打了补丁的表与SLIC表不兼容，在老的Windows操作系统中造成许可问题。</string>
+                </property>
+                <property name="text">
+                 <string>SyncTableIds</string>
                 </property>
                </widget>
               </item>
