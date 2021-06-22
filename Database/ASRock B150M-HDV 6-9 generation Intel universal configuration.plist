@@ -677,6 +677,8 @@
             </dict>
             <key>Scheme</key>
             <dict>
+                <key>CustomKernel</key>
+                <false/>
                 <key>FuzzyMatch</key>
                 <true/>
                 <key>KernelArch</key>
