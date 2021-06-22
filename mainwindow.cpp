@@ -41,9 +41,9 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210610";
+    CurVerison = "20210623";
     ocVer = "0.7.1";
-    title = "OC Auxiliary Tools   " + ocVer + " - " + CurVerison + "[*] ";
+    title = "OC Auxiliary Tools   V" + CurVerison + " for OpenCore " + ocVer + " [*]  ";
     setWindowTitle(title);
 
 #ifdef Q_OS_MAC

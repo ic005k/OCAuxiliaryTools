@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1923,7 +1923,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2941,53 +2941,7 @@ Note: These patches currently target Microsoft Hyper-V and may need to be extend
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
              <layout class="QGridLayout" name="gridLayout_60">
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="chkFuzzyMatch">
-                <property name="toolTip">
-                 <string notr="true">On macOS 10.6 and earlier kernelcache filename has a checksum, which essentially is adler32 from SMBIOS product name and EfiBoot device path. 
-
-On certain firmwares EfiBoot device path differs between UEFI and macOS due to ACPI or hardware specifics, rendering kernelcache checksum as always different.
-
-This setting allows matching the latest kernelcache with a suitable architecture when the kernelcache without suffix is unavailable, improving macOS 10.6 boot performance on several platforms.
-
-----
-
-在macOS 10.6和更早的版本中，kernelcache文件名有一个校验和，本质上是SMBIOS产品名称和EfiBoot设备路径的adler32。
-
-在某些固件上，由于ACPI或硬件的特殊性，EfiBoot设备路径在UEFI和macOS之间有所不同，使得内核缓存的校验和总是不同的。
-
-这个设置允许在没有后缀的内核缓存不可用时，用合适的架构匹配最新的内核缓存，提高macOS 10.6在多个平台上的启动性能。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Use kernelcache with different checksums when available.</string>
-                </property>
-                <property name="text">
-                 <string>FuzzyMatch</string>
-                </property>
-               </widget>
-              </item>
               <item row="5" column="0">
-               <widget class="QLabel" name="label_42">
-                <property name="toolTip">
-                 <string notr="true">Different variants of macOS support different kernel caching variants designed to improve boot performance. 
-
-This setting allows to prevent using faster kernel caching variants if slower variants are available for debugging and stability reasons. I.e. by specifying Mkext one will disable Prelinked for e.g. 10.6 but not 10.7.
-
-----
-
-不同版本的macOS支持不同的内核缓存变体，旨在提高启动性能。
-
-如果出于调试和稳定性的原因，这个设置可以防止使用较快的内核缓存变体。例如，通过指定Mkext，将禁用Prelinked，例如10.6，而不是10.7。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Prefer specified kernel cache type (Auto, Cacheless, Mkext, Prelinked) when available.</string>
-                </property>
-                <property name="text">
-                 <string>KernelCache</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
                <widget class="QLabel" name="label_43">
                 <property name="toolTip">
                  <string notr="true">On macOS 10.7 and earlier XNU kernel can boot with architectures different from the usual x86_64. 
@@ -3033,17 +2987,70 @@ The behaviour corresponds to -legacy kernel boot argument.
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
+              <item row="5" column="1">
                <widget class="QComboBox" name="cboxKernelArch">
                 <property name="editable">
                  <bool>true</bool>
                 </property>
                </widget>
               </item>
-              <item row="5" column="1">
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="chkFuzzyMatch">
+                <property name="toolTip">
+                 <string notr="true">On macOS 10.6 and earlier kernelcache filename has a checksum, which essentially is adler32 from SMBIOS product name and EfiBoot device path. 
+
+On certain firmwares EfiBoot device path differs between UEFI and macOS due to ACPI or hardware specifics, rendering kernelcache checksum as always different.
+
+This setting allows matching the latest kernelcache with a suitable architecture when the kernelcache without suffix is unavailable, improving macOS 10.6 boot performance on several platforms.
+
+----
+
+在macOS 10.6和更早的版本中，kernelcache文件名有一个校验和，本质上是SMBIOS产品名称和EfiBoot设备路径的adler32。
+
+在某些固件上，由于ACPI或硬件的特殊性，EfiBoot设备路径在UEFI和macOS之间有所不同，使得内核缓存的校验和总是不同的。
+
+这个设置允许在没有后缀的内核缓存不可用时，用合适的架构匹配最新的内核缓存，提高macOS 10.6在多个平台上的启动性能。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Use kernelcache with different checksums when available.</string>
+                </property>
+                <property name="text">
+                 <string>FuzzyMatch</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_42">
+                <property name="toolTip">
+                 <string notr="true">Different variants of macOS support different kernel caching variants designed to improve boot performance. 
+
+This setting allows to prevent using faster kernel caching variants if slower variants are available for debugging and stability reasons. I.e. by specifying Mkext one will disable Prelinked for e.g. 10.6 but not 10.7.
+
+----
+
+不同版本的macOS支持不同的内核缓存变体，旨在提高启动性能。
+
+如果出于调试和稳定性的原因，这个设置可以防止使用较快的内核缓存变体。例如，通过指定Mkext，将禁用Prelinked，例如10.6，而不是10.7。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Prefer specified kernel cache type (Auto, Cacheless, Mkext, Prelinked) when available.</string>
+                </property>
+                <property name="text">
+                 <string>KernelCache</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
                <widget class="QComboBox" name="cboxKernelCache">
                 <property name="editable">
                  <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="chkCustomKernel">
+                <property name="text">
+                 <string>CustomKernel</string>
                 </property>
                </widget>
               </item>
