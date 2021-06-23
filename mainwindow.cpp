@@ -5687,7 +5687,7 @@ void MainWindow::setListMainIcon()
 
     int iSize = 38;
     ui->listMain->setIconSize(QSize(iSize, iSize));
-    ui->listMain->setFixedWidth(46);
+    ui->listMain->setFixedWidth(50);
     QSize size(44, 44);
     for (int i = 0; i < strItemList.count(); i++) {
         ui->listMain->addItem(new QListWidgetItem(QIcon(strIconList.at(i)), ""));
