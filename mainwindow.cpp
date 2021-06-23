@@ -5685,7 +5685,10 @@ void MainWindow::setListMainIcon()
     strItemList << tr("ACPI") << tr("Booter") << tr("DeviceProperties") << tr("Kernel")
                 << tr("Misc") << tr("NVRAM") << tr("PlatformInfo") << tr("UEFI");
 
-    QSize size(32, 32);
+    int iSize = 38;
+    ui->listMain->setIconSize(QSize(iSize, iSize));
+    ui->listMain->setFixedWidth(46);
+    QSize size(44, 44);
     for (int i = 0; i < strItemList.count(); i++) {
         ui->listMain->addItem(new QListWidgetItem(QIcon(strIconList.at(i)), ""));
 
@@ -5710,9 +5713,6 @@ void MainWindow::init_listMainSub()
     ui->listMain->setStyleSheet(listStyle);
     ui->listSub->setStyleSheet(listStyle);
 
-    int iSize = ui->toolBar->iconSize().height();
-    ui->listMain->setIconSize(QSize(iSize, iSize));
-
     QFont myFont(this->font().family(), this->font().pixelSize());
     QFontMetrics fm(myFont);
     int fontHeight = fm.height() + 4;
@@ -5721,8 +5721,6 @@ void MainWindow::init_listMainSub()
         ui->listSub->setFixedHeight(fontHeight * 2);
     else
         ui->listSub->setFixedHeight(fontHeight);
-
-    ui->listMain->setFixedWidth(36);
 
     ui->listMain->setViewMode(QListView::ListMode);
     ui->listSub->setViewMode(QListView::ListMode);
