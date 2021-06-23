@@ -3049,6 +3049,21 @@ This setting allows to prevent using faster kernel caching variants if slower va
               </item>
               <item row="0" column="0">
                <widget class="QCheckBox" name="chkCustomKernel">
+                <property name="toolTip">
+                 <string>Type: plist boolean
+
+Description: Use customised kernel cache from the Kernels directory located at the root of the ESP partition.
+
+Unsupported platforms including Atom and AMD require modified versions of XNU kernel in order to boot. This option provides the possibility to using a customised kernel cache which contains such modifications from ESP partition.
+
+----
+
+类型：plist布尔值
+
+描述：使用位于ESP分区根部的Kernels目录下的定制内核缓存。
+
+不支持的平台包括Atom和AMD需要修改过的XNU内核才能启动。这个选项提供了使用定制的内核缓存的可能性，其中包含了ESP分区的修改内容。</string>
+                </property>
                 <property name="text">
                  <string>CustomKernel</string>
                 </property>
