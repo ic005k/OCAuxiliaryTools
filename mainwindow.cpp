@@ -636,10 +636,11 @@ void MainWindow::initui_dp()
     QTableWidgetItem* id0;
 
     // Add
+    ui->table_dp_add0->setMinimumWidth(200);
+    ui->table_dp_add0->setMaximumWidth(350);
 
     id0 = new QTableWidgetItem(tr("PCILists"));
     ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
-
     ui->table_dp_add0->setAlternatingRowColors(true);
     ui->table_dp_add0->horizontalHeader()->setStretchLastSection(true);
 
@@ -656,6 +657,12 @@ void MainWindow::initui_dp()
     ui->table_dp_add->setHorizontalHeaderItem(2, id0);
 
     ui->table_dp_add->setAlternatingRowColors(true);
+
+    // 分割窗口
+    QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
+    splitterMain->addWidget(ui->table_dp_add0);
+    splitterMain->addWidget(ui->table_dp_add);
+    ui->gridLayout_dp_add->addWidget(splitterMain);
 
     // Delete
 

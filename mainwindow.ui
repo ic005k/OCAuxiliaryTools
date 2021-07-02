@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1650,7 +1650,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1660,23 +1660,27 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_9">
-            <item row="0" column="0" colspan="3">
-             <widget class="QTableWidget" name="table_dp_add0">
-              <property name="columnCount">
-               <number>1</number>
-              </property>
-              <column/>
-             </widget>
-            </item>
-            <item row="0" column="3" colspan="3">
-             <widget class="QTableWidget" name="table_dp_add">
-              <property name="columnCount">
-               <number>3</number>
-              </property>
-              <column/>
-              <column/>
-              <column/>
-             </widget>
+            <item row="0" column="0" colspan="5">
+             <layout class="QGridLayout" name="gridLayout_dp_add">
+              <item row="0" column="0">
+               <widget class="QTableWidget" name="table_dp_add0">
+                <property name="columnCount">
+                 <number>1</number>
+                </property>
+                <column/>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QTableWidget" name="table_dp_add">
+                <property name="columnCount">
+                 <number>3</number>
+                </property>
+                <column/>
+                <column/>
+                <column/>
+               </widget>
+              </item>
+             </layout>
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnDPAdd_Add0">
@@ -1722,7 +1726,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
              </widget>
             </item>
-            <item row="1" column="2" colspan="2">
+            <item row="1" column="2">
              <spacer name="horizontalSpacer_5">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -1735,7 +1739,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
              </spacer>
             </item>
-            <item row="1" column="4">
+            <item row="1" column="3">
              <widget class="QToolButton" name="btnDPAdd_Add">
               <property name="font">
                <font>
@@ -1760,7 +1764,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
              </widget>
             </item>
-            <item row="1" column="5">
+            <item row="1" column="4">
              <widget class="QToolButton" name="btnDPAdd_Del">
               <property name="font">
                <font>
@@ -5083,7 +5087,7 @@ Note: This functionality is currently in development and is not ready for daily 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
