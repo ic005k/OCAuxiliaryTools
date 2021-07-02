@@ -4370,6 +4370,60 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
 
         lineEdit = new QLineEdit(this);
 
+        lineEdit->setContextMenuPolicy(Qt::CustomContextMenu);
+
+        QAction* undoAction = new QAction(tr("Undo"));
+        QAction* redoAction = new QAction(tr("Redo"));
+        QAction* copyAction = new QAction(tr("Copy"));
+        copyAction->setShortcuts(QKeySequence::Copy);
+        QAction* cutAction = new QAction(tr("Cut"));
+        cutAction->setShortcuts(QKeySequence::Cut);
+        QAction* pasteAction = new QAction(tr("Paste"));
+        pasteAction->setShortcuts(QKeySequence::Paste);
+        QAction* setallAction = new QAction(tr("Select All"));
+
+        QMenu* popMenu = new QMenu(this);
+        popMenu->addAction(undoAction);
+        popMenu->addAction(redoAction);
+        popMenu->addSeparator();
+        popMenu->addAction(copyAction);
+        popMenu->addAction(cutAction);
+        popMenu->addAction(pasteAction);
+        popMenu->addSeparator();
+        popMenu->addAction(setallAction);
+
+        connect(undoAction, &QAction::triggered, [=]() {
+            lineEdit->undo();
+        });
+        connect(redoAction, &QAction::triggered, [=]() {
+            lineEdit->redo();
+        });
+        connect(copyAction, &QAction::triggered, [=]() {
+            lineEdit->copy();
+        });
+        connect(cutAction, &QAction::triggered, [=]() {
+            lineEdit->cut();
+        });
+        connect(pasteAction, &QAction::triggered, [=]() {
+            lineEdit->paste();
+            setEditText();
+        });
+        connect(setallAction, &QAction::triggered, [=]() {
+            lineEdit->selectAll();
+        });
+        connect(lineEdit, &QLineEdit::customContextMenuRequested, [=](const QPoint& pos) {
+            Q_UNUSED(pos);
+            QString str = lineEdit->selectedText();
+            if (str.length() == 0) {
+                copyAction->setEnabled(false);
+                cutAction->setEnabled(false);
+            } else {
+                copyAction->setEnabled(true);
+                cutAction->setEnabled(true);
+            }
+            popMenu->exec(QCursor::pos());
+        });
+
         Table->setCurrentCell(currentRow, currentColumn);
         Table->setCellWidget(currentRow, currentColumn, lineEdit);
 
