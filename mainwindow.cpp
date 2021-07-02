@@ -4375,11 +4375,11 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         QAction* undoAction = new QAction(tr("Undo"));
         QAction* redoAction = new QAction(tr("Redo"));
         QAction* copyAction = new QAction(tr("Copy"));
-        copyAction->setShortcuts(QKeySequence::Copy);
+        //copyAction->setShortcuts(QKeySequence::Copy);
         QAction* cutAction = new QAction(tr("Cut"));
-        cutAction->setShortcuts(QKeySequence::Cut);
+        //cutAction->setShortcuts(QKeySequence::Cut);
         QAction* pasteAction = new QAction(tr("Paste"));
-        pasteAction->setShortcuts(QKeySequence::Paste);
+        //pasteAction->setShortcuts(QKeySequence::Paste);
         QAction* setallAction = new QAction(tr("Select All"));
 
         QMenu* popMenu = new QMenu(this);
@@ -4391,6 +4391,9 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         popMenu->addAction(pasteAction);
         popMenu->addSeparator();
         popMenu->addAction(setallAction);
+
+        undoAction->setEnabled(false);
+        redoAction->setEnabled(false);
 
         connect(undoAction, &QAction::triggered, [=]() {
             lineEdit->undo();
@@ -4421,6 +4424,25 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
                 copyAction->setEnabled(true);
                 cutAction->setEnabled(true);
             }
+
+            QClipboard* clipboard = QApplication::clipboard();
+            QString str1 = clipboard->text();
+            if (str1.length() > 0)
+                pasteAction->setEnabled(true);
+            else
+                pasteAction->setEnabled(false);
+
+            if (lineEdit->isModified()) {
+                undoAction->setEnabled(true);
+                redoAction->setEnabled(true);
+            } else {
+            }
+
+            if (lineEdit->text().length() > 0)
+                setallAction->setEnabled(true);
+            else
+                setallAction->setEnabled(false);
+
             popMenu->exec(QCursor::pos());
         });
 
