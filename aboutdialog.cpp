@@ -1,5 +1,10 @@
 #include "aboutdialog.h"
+#include "mainwindow.h"
 #include "ui_aboutdialog.h"
+
+extern MainWindow* mw_one;
+extern QString CurVerison;
+extern QString ocVer;
 
 aboutDialog::aboutDialog(QWidget* parent)
     : QDialog(parent)
@@ -12,7 +17,20 @@ aboutDialog::aboutDialog(QWidget* parent)
     setMinimumWidth(this->width());
     setMinimumHeight(this->height());
 
+    initInfoStr();
+}
+
+aboutDialog::~aboutDialog()
+{
+    delete ui;
+}
+
+void aboutDialog::initInfoStr()
+{
     ui->textBrowser->setOpenExternalLinks(true);
+
+    ui->textBrowser->append("OC Auxiliary Tools   V" + CurVerison + " for OpenCore " + ocVer);
+    ui->textBrowser->append("");
 
     QString strUrl1 = "<a style='color: blue;' href = "
                       "https://github.com/ic005k/QtOpenCoreConfig>OC Auxiliary Tools</"
@@ -43,9 +61,4 @@ aboutDialog::aboutDialog(QWidget* parent)
 
     ui->textBrowser->append("");
     ui->textBrowser->append(tr("(This App is built automatically by Github Actions.)"));
-}
-
-aboutDialog::~aboutDialog()
-{
-    delete ui;
 }

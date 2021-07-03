@@ -4,6 +4,7 @@
 #include "plistparser.h"
 #include "plistserializer.h"
 
+#include "ui_aboutdialog.h"
 #include "ui_mainwindow.h"
 
 #include "Plist.hpp"
@@ -31,6 +32,9 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
+QString CurVerison = "20210703";
+QString ocVer = "0.7.1";
+
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -41,8 +45,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadLocal();
 
-    CurVerison = "20210623";
-    ocVer = "0.7.1";
     title = "OC Auxiliary Tools   V" + CurVerison + " for OpenCore " + ocVer + " [*]  ";
     setWindowTitle(title);
 

@@ -808,9 +808,6 @@ private:
     QNetworkAccessManager* manager;
     int parse_UpdateJSON(QString str);
 
-    QString CurVerison = "V1.0";
-    QString ocVer;
-
     QStringList backColor;
     QStringList textColor;
 
