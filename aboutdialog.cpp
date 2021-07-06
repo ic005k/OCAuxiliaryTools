@@ -56,8 +56,12 @@ void aboutDialog::initInfoStr()
     ui->textBrowser->append(strC2);
     ui->textBrowser->append(strC3);
 
+    QString strDetails = "<a style='color: blue;' href = "
+                         "https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/latest>Details</"
+                         "a><br><a style='color: blue;'<\n>";
+
     ui->textBrowser->append("");
-    ui->textBrowser->append(strLastModified);
+    ui->textBrowser->append(strLastModified + "    " + strDetails);
 
     ui->textBrowser->append("");
     ui->textBrowser->append(tr("(This App is built automatically by Github Actions.)"));
