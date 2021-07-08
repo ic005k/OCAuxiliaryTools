@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>19H524</string>
+	<string>19H1217</string>
 	<key>CFBundleExecutable</key>
 	<string>VoodooPS2Mouse</string>
 	<key>CFBundleGetInfoString</key>
-	<string>2.2.3, Copyright Apple Computer, Inc. 2000-2004, Slice 2010, RehabMan 2012-2013</string>
+	<string>2.2.4, Copyright Apple Computer, Inc. 2000-2004, Slice 2010, RehabMan 2012-2013</string>
 	<key>CFBundleIdentifier</key>
 	<string>as.acidanthera.voodoo.driver.PS2Mouse</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.2.3</string>
+	<string>2.2.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,7 +25,7 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.2.3</string>
+	<string>2.2.4</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -182,7 +182,7 @@
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>as.acidanthera.voodoo.driver.PS2Controller</key>
-		<string>2.2.3</string>
+		<string>2.2.4</string>
 		<key>com.apple.iokit.IOHIDFamily</key>
 		<string>1.0.0b1</string>
 		<key>com.apple.kpi.iokit</key>
