@@ -6133,10 +6133,6 @@ void MainWindow::init_MainUI()
     copyText(ui->listMain);
     copyText(ui->listSub);
 
-    //lineEdit
-    //pTrailingAction = new QAction(this);
-    //pTrailingAction->setIcon(QIcon(":/icon/ok.png"));
-
     init_InitialValue();
     init_TableStyle();
 }
@@ -7165,10 +7161,7 @@ void MainWindow::on_table_acpi_add_cellEntered(int row, int column)
 
 void MainWindow::lineEdit_textChanged(const QString& arg1)
 {
-
     Q_UNUSED(arg1);
-
-    //lineEdit->removeAction(pTrailingAction);
     lineEdit->setWindowModified(true);
 }
 
@@ -7235,8 +7228,6 @@ void MainWindow::setEditText()
 
         QUndoCommand* editCommand = new EditCommand(textAlignCenter, oldText, myTable, myTable->currentRow(), myTable->currentColumn(), lineEdit->text());
         undoStack->push(editCommand);
-
-        //lineEdit->addAction(pTrailingAction, QLineEdit::TrailingPosition);
 
         this->setWindowModified(true);
 

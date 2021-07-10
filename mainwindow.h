@@ -799,8 +799,6 @@ private:
 
     dlgDatabase* myDatabase;
 
-    QAction* pTrailingAction;
-
     QMenu* reFileMenu;
 
     void setTableEditTriggers();
