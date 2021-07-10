@@ -7218,6 +7218,21 @@ void MainWindow::setEditText()
             }
         }
 
+        QString cuText = lineEdit->text();
+        int reCount = 0;
+        if (myTable == ui->table_dp_add0 || myTable == ui->table_dp_del0
+            || myTable == ui->table_nv_add0 || myTable == ui->table_nv_del0 || myTable == ui->table_nv_ls0) {
+            if (myTable->rowCount() > 1) {
+                for (int i = 0; i < myTable->rowCount(); i++) {
+                    if (myTable->item(i, 0)->text().contains(cuText))
+                        reCount++;
+                }
+
+                if (reCount > 0)
+                    lineEdit->setText(cuText + "-" + QString::number(reCount));
+            }
+        }
+
         QUndoCommand* editCommand = new EditCommand(textAlignCenter, oldText, myTable, myTable->currentRow(), myTable->currentColumn(), lineEdit->text());
         undoStack->push(editCommand);
 
