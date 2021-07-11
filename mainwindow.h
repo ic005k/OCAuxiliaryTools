@@ -66,6 +66,7 @@ public:
     ~MainWindow();
     Ui::MainWindow* ui;
 
+    bool lineEditModifyed = false;
     QVector<QTabWidget*> mainTabList;
     void initScanPolicyValue();
     void initDisplayLevelValue();
@@ -599,7 +600,7 @@ private slots:
 
     void lineEdit_textChanged(const QString& arg1);
 
-    void setEditText();
+    void lineEditSetText();
 
     void lineEdit_textEdited(const QString& arg1);
 

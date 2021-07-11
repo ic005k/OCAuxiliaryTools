@@ -146,7 +146,7 @@ void EditCommand::undo()
     mw_one->loading = false;
     mw_one->writeINI = false;
 
-    mw_one->lineEdit->setWindowModified(false);
+    mw_one->lineEditModifyed = false;
 }
 
 void EditCommand::redo()
@@ -176,7 +176,7 @@ void EditCommand::redo()
     mw_one->loading = false;
     mw_one->writeINI = false;
 
-    mw_one->lineEdit->setWindowModified(false);
+    mw_one->lineEditModifyed = false;
 }
 
 // CopyPasteLine

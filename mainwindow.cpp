@@ -1641,8 +1641,6 @@ void MainWindow::on_table_dp_add0_cellClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
-    removeWidget(ui->table_dp_add);
-
     loadReghtTable(ui->table_dp_add0, ui->table_dp_add);
 
     setStatusBarText(ui->table_dp_add0);
@@ -1663,8 +1661,6 @@ void MainWindow::on_table_nv_add0_cellClicked(int row, int column)
 {
     Q_UNUSED(row);
     Q_UNUSED(column);
-
-    removeWidget(ui->table_nv_add);
 
     loadReghtTable(ui->table_nv_add0, ui->table_nv_add);
 }
@@ -1736,8 +1732,6 @@ void MainWindow::on_table_nv_del0_cellClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
-    removeWidget(ui->table_nv_del);
-
     loadReghtTable(ui->table_nv_del0, ui->table_nv_del);
 }
 
@@ -1745,8 +1739,6 @@ void MainWindow::on_table_nv_ls0_cellClicked(int row, int column)
 {
     Q_UNUSED(row);
     Q_UNUSED(column);
-
-    removeWidget(ui->table_nv_ls);
 
     loadReghtTable(ui->table_nv_ls0, ui->table_nv_ls);
 }
@@ -1779,8 +1771,6 @@ void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
 {
     Q_UNUSED(row);
     Q_UNUSED(column);
-
-    removeWidget(ui->table_dp_del);
 
     loadReghtTable(ui->table_dp_del0, ui->table_dp_del);
 
@@ -4371,6 +4361,7 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         removeAllLineEdit();
 
         lineEdit = new QLineEdit(this);
+        lineEditModifyed = false;
 
         lineEdit->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -4394,9 +4385,6 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         popMenu->addSeparator();
         popMenu->addAction(setallAction);
 
-        undoAction->setEnabled(false);
-        redoAction->setEnabled(false);
-
         connect(undoAction, &QAction::triggered, [=]() {
             lineEdit->undo();
         });
@@ -4411,41 +4399,10 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         });
         connect(pasteAction, &QAction::triggered, [=]() {
             lineEdit->paste();
-            setEditText();
+            lineEditSetText();
         });
         connect(setallAction, &QAction::triggered, [=]() {
             lineEdit->selectAll();
-        });
-        connect(lineEdit, &QLineEdit::customContextMenuRequested, [=](const QPoint& pos) {
-            Q_UNUSED(pos);
-            QString str = lineEdit->selectedText();
-            if (str.length() == 0) {
-                copyAction->setEnabled(false);
-                cutAction->setEnabled(false);
-            } else {
-                copyAction->setEnabled(true);
-                cutAction->setEnabled(true);
-            }
-
-            QClipboard* clipboard = QApplication::clipboard();
-            QString str1 = clipboard->text();
-            if (str1.length() > 0)
-                pasteAction->setEnabled(true);
-            else
-                pasteAction->setEnabled(false);
-
-            if (lineEdit->isModified()) {
-                undoAction->setEnabled(true);
-                redoAction->setEnabled(true);
-            } else {
-            }
-
-            if (lineEdit->text().length() > 0)
-                setallAction->setEnabled(true);
-            else
-                setallAction->setEnabled(false);
-
-            popMenu->exec(QCursor::pos());
         });
 
         Table->setCurrentCell(currentRow, currentColumn);
@@ -4471,14 +4428,48 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         loading = true;
         if (Table->currentIndex().isValid())
             lineEdit->setText(Table->item(currentRow, currentColumn)->text());
-
         loading = false;
 
         lineEdit->setFocus();
         lineEdit->setClearButtonEnabled(false);
 
-        connect(lineEdit, &QLineEdit::returnPressed, this, &MainWindow::setEditText);
+        connect(lineEdit, &QLineEdit::returnPressed, this, &MainWindow::lineEditSetText);
         connect(lineEdit, &QLineEdit::textChanged, this, &MainWindow::lineEdit_textChanged);
+        connect(lineEdit, &QLineEdit::customContextMenuRequested, [=](const QPoint& pos) {
+            Q_UNUSED(pos);
+
+            QString str = lineEdit->selectedText();
+
+            if (str.length() == 0) {
+                copyAction->setEnabled(false);
+                cutAction->setEnabled(false);
+            } else {
+                copyAction->setEnabled(true);
+                cutAction->setEnabled(true);
+            }
+
+            QClipboard* clipboard = QApplication::clipboard();
+            QString str1 = clipboard->text();
+            if (str1.length() > 0)
+                pasteAction->setEnabled(true);
+            else
+                pasteAction->setEnabled(false);
+
+            if (lineEditModifyed) {
+                undoAction->setEnabled(true);
+                redoAction->setEnabled(true);
+            } else {
+                undoAction->setEnabled(false);
+                redoAction->setEnabled(false);
+            }
+
+            if (lineEdit->text().length() > 0)
+                setallAction->setEnabled(true);
+            else
+                setallAction->setEnabled(false);
+
+            popMenu->exec(QCursor::pos());
+        });
     }
 }
 
@@ -7162,10 +7153,10 @@ void MainWindow::on_table_acpi_add_cellEntered(int row, int column)
 void MainWindow::lineEdit_textChanged(const QString& arg1)
 {
     Q_UNUSED(arg1);
-    lineEdit->setWindowModified(true);
+    lineEditModifyed = true;
 }
 
-void MainWindow::setEditText()
+void MainWindow::lineEditSetText()
 {
     if (!loading) {
 
@@ -7177,7 +7168,7 @@ void MainWindow::setEditText()
         row = myTable->currentRow();
         col = myTable->currentColumn();
 
-        if (!lineEdit->isWindowModified()) {
+        if (!lineEditModifyed) {
             myTable->removeCellWidget(row, col);
             myTable->setCurrentCell(row, col);
             myTable->setFocus();
@@ -7414,7 +7405,6 @@ void MainWindow::on_table_nv_ls0_currentCellChanged(int currentRow, int currentC
 
 void MainWindow::on_table_nv_del_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-
     Q_UNUSED(currentRow);
     Q_UNUSED(currentColumn);
 
@@ -7423,7 +7413,6 @@ void MainWindow::on_table_nv_del_currentCellChanged(int currentRow, int currentC
 
 void MainWindow::on_table_dp_add0_cellDoubleClicked(int row, int column)
 {
-
     myTable = new QTableWidget;
     myTable = ui->table_dp_add0;
 
