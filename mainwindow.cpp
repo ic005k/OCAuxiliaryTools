@@ -4234,6 +4234,7 @@ void MainWindow::on_table_dp_add_cellClicked(int row, int column)
     if (column == 1) {
 
         cboxDataClass = new QComboBox;
+        cboxDataClass->setEditable(true);
         cboxDataClass->addItem("Data");
         cboxDataClass->addItem("String");
         cboxDataClass->addItem("Number");
@@ -4318,9 +4319,9 @@ void MainWindow::dataClassChange_nv()
 
 void MainWindow::on_table_nv_add_cellClicked(int row, int column)
 {
-
     if (column == 1) {
         cboxDataClass = new QComboBox;
+        cboxDataClass->setEditable(true);
         cboxDataClass->addItem("Data");
         cboxDataClass->addItem("String");
         cboxDataClass->addItem("Number");
