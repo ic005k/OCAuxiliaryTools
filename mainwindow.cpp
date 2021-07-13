@@ -4239,7 +4239,7 @@ void MainWindow::on_table_dp_add_cellClicked(int row, int column)
         cboxDataClass->addItem("String");
         cboxDataClass->addItem("Number");
         cboxDataClass->addItem("");
-        connect(cboxDataClass, SIGNAL(currentIndexChanged(QString)), this, SLOT(dataClassChange_dp()));
+        connect(cboxDataClass, SIGNAL(currentTextChanged(QString)), this, SLOT(dataClassChange_dp()));
         c_row = row;
 
         ui->table_dp_add->setCellWidget(row, column, cboxDataClass);
@@ -4326,7 +4326,7 @@ void MainWindow::on_table_nv_add_cellClicked(int row, int column)
         cboxDataClass->addItem("String");
         cboxDataClass->addItem("Number");
         cboxDataClass->addItem("");
-        connect(cboxDataClass, SIGNAL(currentIndexChanged(QString)), this,
+        connect(cboxDataClass, SIGNAL(currentTextChanged(QString)), this,
             SLOT(dataClassChange_nv()));
         c_row = row;
 
