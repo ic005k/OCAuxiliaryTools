@@ -1641,7 +1641,7 @@ void MainWindow::on_table_dp_add0_cellClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
-    loadReghtTable(ui->table_dp_add0, ui->table_dp_add);
+    loadRightTable(ui->table_dp_add0, ui->table_dp_add);
 
     setStatusBarText(ui->table_dp_add0);
 }
@@ -1662,7 +1662,7 @@ void MainWindow::on_table_nv_add0_cellClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
-    loadReghtTable(ui->table_nv_add0, ui->table_nv_add);
+    loadRightTable(ui->table_nv_add0, ui->table_nv_add);
 }
 
 void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item)
@@ -1732,7 +1732,7 @@ void MainWindow::on_table_nv_del0_cellClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
-    loadReghtTable(ui->table_nv_del0, ui->table_nv_del);
+    loadRightTable(ui->table_nv_del0, ui->table_nv_del);
 }
 
 void MainWindow::on_table_nv_ls0_cellClicked(int row, int column)
@@ -1740,7 +1740,7 @@ void MainWindow::on_table_nv_ls0_cellClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
-    loadReghtTable(ui->table_nv_ls0, ui->table_nv_ls);
+    loadRightTable(ui->table_nv_ls0, ui->table_nv_ls);
 }
 
 void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem* item)
@@ -1772,7 +1772,7 @@ void MainWindow::on_table_dp_del0_cellClicked(int row, int column)
     Q_UNUSED(row);
     Q_UNUSED(column);
 
-    loadReghtTable(ui->table_dp_del0, ui->table_dp_del);
+    loadRightTable(ui->table_dp_del0, ui->table_dp_del);
 
     setStatusBarText(ui->table_dp_del0);
 }
@@ -7126,27 +7126,27 @@ void MainWindow::on_table_dp_add0_itemSelectionChanged()
 {
     //读取ini数据并加载到table_dp_add中
 
-    loadReghtTable(ui->table_dp_add0, ui->table_dp_add);
+    loadRightTable(ui->table_dp_add0, ui->table_dp_add);
 }
 
 void MainWindow::on_table_dp_del0_itemSelectionChanged()
 {
-    loadReghtTable(ui->table_dp_del0, ui->table_dp_del);
+    loadRightTable(ui->table_dp_del0, ui->table_dp_del);
 }
 
 void MainWindow::on_table_nv_add0_itemSelectionChanged()
 {
-    loadReghtTable(ui->table_nv_add0, ui->table_nv_add);
+    loadRightTable(ui->table_nv_add0, ui->table_nv_add);
 }
 
 void MainWindow::on_table_nv_del0_itemSelectionChanged()
 {
-    loadReghtTable(ui->table_nv_del0, ui->table_nv_del);
+    loadRightTable(ui->table_nv_del0, ui->table_nv_del);
 }
 
 void MainWindow::on_table_nv_ls0_itemSelectionChanged()
 {
-    loadReghtTable(ui->table_nv_ls0, ui->table_nv_ls);
+    loadRightTable(ui->table_nv_ls0, ui->table_nv_ls);
 }
 
 void MainWindow::on_table_acpi_add_itemEntered(QTableWidgetItem* item)
@@ -8992,8 +8992,14 @@ void MainWindow::init_setWindowModified()
     for (int i = 0; i < listOfTableWidget.count(); i++) {
         QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
 
-        connect(w, &QTableWidget::itemChanged, this, &MainWindow::setWM);
+        connect(w, &QTableWidget::itemChanged, this, &MainWindow::setWM_RightTable);
     }
+}
+
+void MainWindow::setWM_RightTable()
+{
+    if (!LoadRightTable)
+        this->setWindowModified(true);
 }
 
 void MainWindow::setWM()
@@ -9316,15 +9322,16 @@ void MainWindow::init_CopyPasteLine()
     }
 }
 
-void MainWindow::loadReghtTable(QTableWidget* t0, QTableWidget* t)
+void MainWindow::loadRightTable(QTableWidget* t0, QTableWidget* t)
 {
     if (!t0->currentIndex().isValid())
         return;
 
     if (!loading) {
-
         loading = true;
+        LoadRightTable = true;
         read_ini(t0, t, t0->currentRow());
+        LoadRightTable = false;
         loading = false;
         ui->statusbar->showMessage(t0->currentItem()->text());
     }
@@ -9357,27 +9364,27 @@ void MainWindow::endPasteLine(QTableWidget* w, int row, QString colText0)
 
         if (w == ui->table_dp_add0) {
             loading = false;
-            loadReghtTable(w, ui->table_dp_add);
+            loadRightTable(w, ui->table_dp_add);
         }
 
         if (w == ui->table_dp_del0) {
             loading = false;
-            loadReghtTable(w, ui->table_dp_del);
+            loadRightTable(w, ui->table_dp_del);
         }
 
         if (w == ui->table_nv_add0) {
             loading = false;
-            loadReghtTable(w, ui->table_nv_add);
+            loadRightTable(w, ui->table_nv_add);
         }
 
         if (w == ui->table_nv_del0) {
             loading = false;
-            loadReghtTable(w, ui->table_nv_del);
+            loadRightTable(w, ui->table_nv_del);
         }
 
         if (w == ui->table_nv_ls0) {
             loading = false;
-            loadReghtTable(w, ui->table_nv_ls);
+            loadRightTable(w, ui->table_nv_ls);
         }
     }
 }
@@ -9409,7 +9416,7 @@ void MainWindow::endDelLeftTable(QTableWidget* t0)
 
         if (t0->rowCount() > 0) {
 
-            loadReghtTable(t0, t);
+            loadRightTable(t0, t);
         }
     }
 }

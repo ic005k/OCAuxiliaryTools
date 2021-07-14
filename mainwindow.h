@@ -123,7 +123,7 @@ public:
     void copyLine(QTableWidget* w, QAction* copyAction);
     void cutLine(QTableWidget* w, QAction* cutAction, QAction* copyAction);
     void tablePopMenu(QTableWidget* w, QAction* cutAction, QAction* copyAction, QAction* pasteAction, QAction* showtipAction, QMenu* popMenu);
-    void loadReghtTable(QTableWidget* t0, QTableWidget* t);
+    void loadRightTable(QTableWidget* t0, QTableWidget* t);
     void endPasteLine(QTableWidget* w, int row, QString colText0);
     void endDelLeftTable(QTableWidget* t0);
 
@@ -766,7 +766,10 @@ private slots:
 
     void on_actionDifferences_triggered();
 
+    void setWM_RightTable();
+
 private:
+    bool LoadRightTable = false;
     bool AddCboxFindItem = false;
     void acpi_cellDoubleClicked();
     void booter_cellDoubleClicked();
