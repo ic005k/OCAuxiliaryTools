@@ -5750,7 +5750,7 @@ void MainWindow::setListMainIcon()
     ui->listMain->setViewMode(QListWidget::IconMode);
 
     ui->listMain->clear();
-    QStringList strIconList, strItemList;
+    QStringList strIconList, strItemList, strItemList1;
     strIconList << ":/icon/m1.png"
                 << ":/icon/m2.png"
                 << ":/icon/m3.png"
@@ -5762,12 +5762,21 @@ void MainWindow::setListMainIcon()
     strItemList << tr("ACPI") << tr("Booter") << tr("DeviceProperties") << tr("Kernel")
                 << tr("Misc") << tr("NVRAM") << tr("PlatformInfo") << tr("UEFI");
 
-    int iSize = 38;
+    strItemList1 << "ACPI"
+                 << "Booter"
+                 << "DP"
+                 << "Kernel"
+                 << "Misc"
+                 << "NVRAM"
+                 << "PI"
+                 << "UEFI";
+
+    int iSize = 35;
     ui->listMain->setIconSize(QSize(iSize, iSize));
-    ui->listMain->setFixedWidth(50);
-    QSize size(44, 44);
+    ui->listMain->setFixedWidth(68);
+    QSize size(64, 55);
     for (int i = 0; i < strItemList.count(); i++) {
-        ui->listMain->addItem(new QListWidgetItem(QIcon(strIconList.at(i)), ""));
+        ui->listMain->addItem(new QListWidgetItem(QIcon(strIconList.at(i)), strItemList1.at(i)));
 
         ui->listMain->item(i)->setSizeHint(size);
 
@@ -5777,7 +5786,7 @@ void MainWindow::setListMainIcon()
     if (win) {
         strIconList.append(":/icon/m9.png");
         strItemList.append(tr("Hardware Information"));
-        ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), ""));
+        ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), "Info"));
         ui->listMain->item(8)->setSizeHint(size);
         ui->listMain->item(8)->setToolTip(tr("Hardware Information"));
     }
@@ -7209,7 +7218,8 @@ void MainWindow::lineEditSetText()
             || myTable == ui->table_nv_add0 || myTable == ui->table_nv_del0 || myTable == ui->table_nv_ls0) {
             if (myTable->rowCount() > 1) {
                 for (int i = 0; i < myTable->rowCount(); i++) {
-                    if (myTable->item(i, 0)->text().contains(cuText))
+                    QString str = myTable->item(i, 0)->text();
+                    if (str == cuText)
                         reCount++;
                 }
 

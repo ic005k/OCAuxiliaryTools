@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -123,6 +123,9 @@
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
               </property>
              </widget>
             </item>
@@ -367,6 +370,9 @@ relevant when performing different types of renames.
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
               </property>
              </widget>
             </item>
@@ -644,6 +650,9 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
               </property>
              </widget>
             </item>
@@ -955,6 +964,9 @@ Description: Exclude MMIO address from the devirtualisation procedure.
                 <height>20</height>
                </size>
               </property>
+              <property name="shortcut">
+               <string>Del</string>
+              </property>
              </widget>
             </item>
             <item row="1" column="2">
@@ -1041,6 +1053,9 @@ Description: Exclude MMIO address from the devirtualisation procedure.
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
               </property>
              </widget>
             </item>
@@ -1724,6 +1739,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                 <height>20</height>
                </size>
               </property>
+              <property name="shortcut">
+               <string>Del</string>
+              </property>
              </widget>
             </item>
             <item row="1" column="2">
@@ -1783,6 +1801,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Ctrl+Del</string>
               </property>
              </widget>
             </item>
@@ -1851,6 +1872,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                 <height>20</height>
                </size>
               </property>
+              <property name="shortcut">
+               <string>Del</string>
+              </property>
              </widget>
             </item>
             <item row="1" column="2" colspan="2">
@@ -1908,6 +1932,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                 <height>20</height>
                </size>
               </property>
+              <property name="shortcut">
+               <string>Ctrl+Del</string>
+              </property>
              </widget>
             </item>
            </layout>
@@ -1927,7 +1954,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1991,6 +2018,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
               </property>
              </widget>
             </item>
@@ -2151,6 +2181,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                 <height>20</height>
                </size>
               </property>
+              <property name="shortcut">
+               <string>Del</string>
+              </property>
              </widget>
             </item>
             <item row="1" column="2">
@@ -2233,6 +2266,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
               </property>
              </widget>
             </item>
@@ -2321,6 +2357,9 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
               </property>
              </widget>
             </item>
@@ -3092,7 +3131,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -4876,6 +4915,9 @@ Note: This functionality is currently in development and is not ready for daily 
                 <height>20</height>
                </size>
               </property>
+              <property name="shortcut">
+               <string>Del</string>
+              </property>
              </widget>
             </item>
             <item row="1" column="2">
@@ -4953,6 +4995,9 @@ Note: This functionality is currently in development and is not ready for daily 
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
               </property>
              </widget>
             </item>
@@ -5032,6 +5077,9 @@ Note: This functionality is currently in development and is not ready for daily 
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
               </property>
              </widget>
             </item>
@@ -5139,6 +5187,9 @@ Note: This functionality is currently in development and is not ready for daily 
                 <height>20</height>
                </size>
               </property>
+              <property name="shortcut">
+               <string>Del</string>
+              </property>
              </widget>
             </item>
             <item row="1" column="2">
@@ -5195,6 +5246,9 @@ Note: This functionality is currently in development and is not ready for daily 
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Ctrl+Del</string>
               </property>
              </widget>
             </item>
@@ -5285,6 +5339,9 @@ Note: This functionality is currently in development and is not ready for daily 
                 <height>20</height>
                </size>
               </property>
+              <property name="shortcut">
+               <string>Del</string>
+              </property>
              </widget>
             </item>
             <item row="1" column="2" colspan="2">
@@ -5341,6 +5398,9 @@ Note: This functionality is currently in development and is not ready for daily 
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Ctrl+Del</string>
               </property>
              </widget>
             </item>
@@ -5409,6 +5469,9 @@ Note: This functionality is currently in development and is not ready for daily 
                 <height>20</height>
                </size>
               </property>
+              <property name="shortcut">
+               <string>Del</string>
+              </property>
              </widget>
             </item>
             <item row="1" column="2" colspan="2">
@@ -5465,6 +5528,9 @@ Note: This functionality is currently in development and is not ready for daily 
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Ctrl+Del</string>
               </property>
              </widget>
             </item>
@@ -5599,7 +5665,7 @@ A continuously updated variable list can be found in a corresponding document: N
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>5</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -6563,6 +6629,9 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                    <width>20</width>
                    <height>20</height>
                   </size>
+                 </property>
+                 <property name="shortcut">
+                  <string>Del</string>
                  </property>
                 </widget>
                </item>
@@ -8457,6 +8526,9 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
                    <height>20</height>
                   </size>
                  </property>
+                 <property name="shortcut">
+                  <string>Del</string>
+                 </property>
                 </widget>
                </item>
                <item row="1" column="2">
@@ -9687,6 +9759,9 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                    <width>20</width>
                    <height>20</height>
                   </size>
+                 </property>
+                 <property name="shortcut">
+                  <string>Del</string>
                  </property>
                 </widget>
                </item>
