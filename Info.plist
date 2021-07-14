@@ -34,11 +34,11 @@
         <key>CFBundlePackageType</key>
         <string>APPL</string>
         <key>CFBundleShortVersionString</key>
-        <string>0.7.1 - 20210711</string>
+        <string>0.7.1 - 20210715</string>
         <key>CFBundleSignature</key>
         <string>????</string>
         <key>CFBundleVersion</key>
-        <string>0.7.1 - 20210711</string>
+        <string>0.7.1 - 20210715</string>
         <key>LSMinimumSystemVersion</key>
         <string>10.13</string>
         <key>NOTE</key>
