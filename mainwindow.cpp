@@ -5771,10 +5771,10 @@ void MainWindow::setListMainIcon()
                  << "PI"
                  << "UEFI";
 
-    int iSize = 35;
+    int iSize = 25;
     ui->listMain->setIconSize(QSize(iSize, iSize));
     ui->listMain->setFixedWidth(68);
-    QSize size(64, 55);
+    QSize size(64, 45);
     for (int i = 0; i < strItemList.count(); i++) {
         ui->listMain->addItem(new QListWidgetItem(QIcon(strIconList.at(i)), strItemList1.at(i)));
 
