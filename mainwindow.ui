@@ -8204,7 +8204,7 @@ Description: Enable custom key repeat delays when using the OpenCore implementat
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
+                 <item row="7" column="0">
                   <widget class="QCheckBox" name="chkGraphicsInputMirroring">
                    <property name="text">
                     <string>GraphicsInputMirroring</string>
