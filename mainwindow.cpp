@@ -4194,7 +4194,7 @@ void MainWindow::on_btnSaveAs()
 {
     QFileDialog fd;
 
-    PlistFileName = fd.getSaveFileName(this, "plist", "",
+    PlistFileName = fd.getSaveFileName(this, "plist", QDir::homePath() + "/Desktop/",
         "plist(*.plist);;all(*.*)");
     if (!PlistFileName.isEmpty()) {
         setWindowTitle(title + "      [*]" + PlistFileName);
