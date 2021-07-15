@@ -1141,6 +1141,8 @@
                 <string>Auto</string>
                 <key>CustomDelays</key>
                 <true/>
+                <key>GraphicsInputMirroring</key>
+                <false/>
                 <key>KeyInitialDelay</key>
                 <integer>0</integer>
                 <key>KeySubsequentDelay</key>
