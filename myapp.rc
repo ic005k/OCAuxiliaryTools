@@ -9,7 +9,7 @@ IDI_ICON1 ICON DISCARDABLE "my.ico"
 #endif
 
     VS_VERSION_INFO VERSIONINFO FILEVERSION 0,
-    7, 1 PRODUCTVERSION 1, 0, 0,
+    7, 2 PRODUCTVERSION 1, 0, 0,
     10 FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
     FILEFLAGS VS_FF_DEBUG
@@ -18,8 +18,8 @@ IDI_ICON1 ICON DISCARDABLE "my.ico"
 #endif
         FILEOS VOS__WINDOWS32 FILETYPE VFT_DLL FILESUBTYPE 0x0L BEGIN BLOCK
     "StringFileInfo" BEGIN BLOCK "080404b0" BEGIN VALUE "CompanyName",
-    "" VALUE "FileDescription", "" VALUE "FileVersion", "0.7.1 - 20210715\0" VALUE "ProductVersion",
-    "0.7.1 - 20210715\0" VALUE "LegalCopyright", "\0" VALUE "LegalTrademarks",
+    "" VALUE "FileDescription", "" VALUE "FileVersion", "0.7.2 - 20210717\0" VALUE "ProductVersion",
+    "0.7.2 - 20210717\0" VALUE "LegalCopyright", "\0" VALUE "LegalTrademarks",
     "" VALUE "OriginalFilename", "OCAT\0" VALUE "ProductName", "OCAT" VALUE "InternalName",
     "OCAT\0" END END
 

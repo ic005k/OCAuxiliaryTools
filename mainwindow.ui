@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7777,7 +7777,7 @@ Enable this option to be able to see all the boot options when having multiple d
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>8</number>
+              <number>1</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -7979,46 +7979,13 @@ An APFS EFI driver is bundled in all bootable APFS containers. This option perfo
                <item>
                 <layout class="QGridLayout" name="gridLayout_24">
                  <item row="5" column="1">
-                  <widget class="QLineEdit" name="editIntPointerSpeedMul">
+                  <widget class="QLineEdit" name="editIntPointerSpeedDiv">
                    <property name="text">
                     <string>1</string>
                    </property>
                   </widget>
                  </item>
                  <item row="5" column="0">
-                  <widget class="QLabel" name="label_117">
-                   <property name="toolTip">
-                    <string notr="true">Type: plist integer
-
-Description: Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol.
-
-Configures the multiplier for pointer movements. The Apple OEM default value is 1.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现的Apple Event协议中配置指针速度乘数。
-
-配置指针移动的乘数。Apple OEM的默认值是1。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol. Has no
- effect when using the OEM Apple implementation (see AppleEvent setting).</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true">PointerSpeedMul</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="QLineEdit" name="editIntKeyInitialDelay">
-                   <property name="text">
-                    <string>0</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="0">
                   <widget class="QLabel" name="label_112">
                    <property name="toolTip">
                     <string notr="true">Type: plist integer
@@ -8041,66 +8008,6 @@ Configures the divisor for pointer movements. The Apple OEM default value is 1. 
                    </property>
                    <property name="text">
                     <string notr="true">PointerSpeedDiv</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QComboBox" name="cboxAppleEvent">
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                   <property name="currentText">
-                    <string notr="true">Auto</string>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string notr="true">Auto</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string notr="true">Builtin</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string notr="true">OEM</string>
-                    </property>
-                   </item>
-                  </widget>
-                 </item>
-                 <item row="4" column="1">
-                  <widget class="QLineEdit" name="editIntPointerSpeedDiv">
-                   <property name="text">
-                    <string>1</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0">
-                  <widget class="QLabel" name="label_113">
-                   <property name="toolTip">
-                    <string notr="true">Type: plist integer
-
-Description: Configure subsequent keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
-
-Configures the gap between key repeats. The Apple OEM default value is 5 (50ms). 0 is an invalid value for this option.
-When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, set KeyInitialDelay to 0 and set this option to at least the value of your KeyForgetThreshold setting. (In the unlikely event that you still get frequent, or occasional, double key responses after doing this,proceed to set this value to one or two greater than KeyForgetThreshold - use the lowest value which works.)
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现Apple Event协议中配置后续键盘重复延迟，单位为10ms。
-
-配置按键重复之间的间隙。Apple OEM的默认值是5（50ms）。0是该选项的无效值。
-使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，请将KeyInitialDelay设置为0，并将此选项设置为至少与您的KeyForgetThreshold设置值相同。(如果在这样做之后，你仍然得到频繁的或偶尔的双键响应，则继续将此值设置为比KeyForgetThreshold大一到两个的值--使用有效的最低值。)</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Configures the gap between keyboard key repeats in OpenCore implementation of Apple Event
- protocol, in units of 10ms.</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true">KeySubsequentDelay</string>
                    </property>
                   </widget>
                  </item>
@@ -8142,13 +8049,41 @@ This option determines whether Apple’s OEM Apple Event protocol is used (where
                   </widget>
                  </item>
                  <item row="3" column="1">
-                  <widget class="QLineEdit" name="editIntKeySubsequentDelay">
+                  <widget class="QLineEdit" name="editIntKeyInitialDelay">
                    <property name="text">
-                    <string>5</string>
+                    <string>0</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_113">
+                   <property name="toolTip">
+                    <string notr="true">Type: plist integer
+
+Description: Configure subsequent keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
+
+Configures the gap between key repeats. The Apple OEM default value is 5 (50ms). 0 is an invalid value for this option.
+When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, set KeyInitialDelay to 0 and set this option to at least the value of your KeyForgetThreshold setting. (In the unlikely event that you still get frequent, or occasional, double key responses after doing this,proceed to set this value to one or two greater than KeyForgetThreshold - use the lowest value which works.)
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现Apple Event协议中配置后续键盘重复延迟，单位为10ms。
+
+配置按键重复之间的间隙。Apple OEM的默认值是5（50ms）。0是该选项的无效值。
+使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，请将KeyInitialDelay设置为0，并将此选项设置为至少与您的KeyForgetThreshold设置值相同。(如果在这样做之后，你仍然得到频繁的或偶尔的双键响应，则继续将此值设置为比KeyForgetThreshold大一到两个的值--使用有效的最低值。)</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Configures the gap between keyboard key repeats in OpenCore implementation of Apple Event
+ protocol, in units of 10ms.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">KeySubsequentDelay</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
                   <widget class="QLabel" name="label_116">
                    <property name="toolTip">
                     <string notr="true">Type: plist integer
@@ -8176,6 +8111,71 @@ When using KeySupport, you may find that you get one additional slow key repeat 
                    </property>
                   </widget>
                  </item>
+                 <item row="6" column="0">
+                  <widget class="QLabel" name="label_117">
+                   <property name="toolTip">
+                    <string notr="true">Type: plist integer
+
+Description: Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol.
+
+Configures the multiplier for pointer movements. The Apple OEM default value is 1.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现的Apple Event协议中配置指针速度乘数。
+
+配置指针移动的乘数。Apple OEM的默认值是1。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string> Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol. Has no
+ effect when using the OEM Apple implementation (see AppleEvent setting).</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">PointerSpeedMul</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QLineEdit" name="editIntKeySubsequentDelay">
+                   <property name="text">
+                    <string>5</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="1">
+                  <widget class="QLineEdit" name="editIntPointerSpeedMul">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QComboBox" name="cboxAppleEvent">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="currentText">
+                    <string notr="true">Auto</string>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string notr="true">Auto</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">Builtin</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">OEM</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
                  <item row="1" column="0">
                   <widget class="QCheckBox" name="chkCustomDelays">
                    <property name="toolTip">
@@ -8201,6 +8201,13 @@ Description: Enable custom key repeat delays when using the OpenCore implementat
                    </property>
                    <property name="text">
                     <string>CustomDelays</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QCheckBox" name="chkGraphicsInputMirroring">
+                   <property name="text">
+                    <string>GraphicsInputMirroring</string>
                    </property>
                   </widget>
                  </item>
