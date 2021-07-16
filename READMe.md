@@ -25,6 +25,7 @@ OC auxiliary tools（OCAT or ocat for short） = Config.plist editor + Config.pl
 
 OC development version can be downloaded [here](https://github.com/acidanthera/OpenCorePkg/actions).
 
+0.7.1 https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210715
 0.7.0  https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210608
 
 ## The feature is shown in the screenshot below above
