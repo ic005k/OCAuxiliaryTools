@@ -7729,49 +7729,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="1" column="0">
-            <widget class="QCheckBox" name="chkConnectDrivers">
-             <property name="toolTip">
-              <string notr="true">This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
-
-Examples of such drivers are filesystem or audio drivers. While effective, this option may not be necessary for drivers performing automatic connection, and may slightly  slowdown the boot.
-
-Note: Some firmwares, made by Apple in particular, only connect the boot drive to speedup the boot process.
-
-Enable this option to be able to see all the boot options when having multiple drives.
-
-----
-
-这个选项对于加载遵循UEFI驱动模式的驱动很有用，因为它们可能无法自行启动。
-
-这类驱动程序的例子是文件系统或音频驱动程序。虽然这个选项很有效，但对于执行自动连接的驱动程序来说，这个选项可能不是必需的，而且可能会稍微减慢启动速度。
-
-注意：一些固件，特别是苹果公司制造的固件，只连接启动驱动器以加快启动过程。
-
-启用此选项，以便在有多个驱动器时能够看到所有的启动选项。</string>
-             </property>
-             <property name="statusTip">
-              <string> Perform UEFI controller connection after driver loading.</string>
-             </property>
-             <property name="text">
-              <string>ConnectDrivers</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <spacer name="horizontalSpacer_21">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>1070</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="0" colspan="2">
+           <item row="0" column="0">
             <widget class="QTabWidget" name="tabUEFI">
              <property name="tabShape">
               <enum>QTabWidget::Rounded</enum>
@@ -9814,6 +9772,57 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                </item>
               </layout>
              </widget>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QGroupBox" name="groupBox_14">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_64">
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="chkConnectDrivers">
+                <property name="toolTip">
+                 <string notr="true">This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
+
+Examples of such drivers are filesystem or audio drivers. While effective, this option may not be necessary for drivers performing automatic connection, and may slightly  slowdown the boot.
+
+Note: Some firmwares, made by Apple in particular, only connect the boot drive to speedup the boot process.
+
+Enable this option to be able to see all the boot options when having multiple drives.
+
+----
+
+这个选项对于加载遵循UEFI驱动模式的驱动很有用，因为它们可能无法自行启动。
+
+这类驱动程序的例子是文件系统或音频驱动程序。虽然这个选项很有效，但对于执行自动连接的驱动程序来说，这个选项可能不是必需的，而且可能会稍微减慢启动速度。
+
+注意：一些固件，特别是苹果公司制造的固件，只连接启动驱动器以加快启动过程。
+
+启用此选项，以便在有多个驱动器时能够看到所有的启动选项。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Perform UEFI controller connection after driver loading.</string>
+                </property>
+                <property name="text">
+                 <string>ConnectDrivers</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <spacer name="horizontalSpacer_21">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>921</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>
