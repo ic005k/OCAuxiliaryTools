@@ -10113,7 +10113,7 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
   </action>
   <action name="actionUpgrade_OC">
    <property name="text">
-    <string>Upgrade OC main program</string>
+    <string>Synchronize OC main program</string>
    </property>
   </action>
   <action name="actionDifferences">

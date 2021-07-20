@@ -9788,12 +9788,12 @@ void MainWindow::on_actionUpgrade_OC_triggered()
     this->setFocus();
     if (fiTarget.lastModified() > fiSource.lastModified()) {
         box.setText(tr("The current file is newer than the one inside the database, please go to the official OC website to download the latest release or development version to upgrade."));
-        box.exec();
+        //box.exec();
         ui->cboxFind->setFocus();
-        return;
+        //return;
     }
 
-    QString strFiles = tr("The following files will be upgraded: ") + "\n " + targetFile1 + "\n "
+    QString strFiles = tr("The following files will be overwritten: ") + "\n " + targetFile1 + "\n "
         + targetFile2 + "\n " + targetFile3 + "\n " + targetFile4;
     this->setFocus();
     QMessageBox msg;
@@ -9834,7 +9834,7 @@ void MainWindow::on_actionUpgrade_OC_triggered()
     this->setFocus();
     box.setStyleSheet("QLabel{min-width:500 px;}");
     if (ok1 && ok2 && ok3) {
-        box.setText(tr("Successfully upgraded to OpenCore: ") + getDatabaseVer());
+        box.setText(tr("Successfully synced to OpenCore: ") + getDatabaseVer());
         box.exec();
     }
 
