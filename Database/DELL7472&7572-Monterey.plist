@@ -510,7 +510,7 @@
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <true/>
+                    <false/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/VerbStub</string>
                     <key>MaxKernel</key>
@@ -806,7 +806,7 @@
                 <key>AppleCpuPmCfgLock</key>
                 <false/>
                 <key>AppleXcpmCfgLock</key>
-                <false/>
+                <true/>
                 <key>AppleXcpmExtraMsrs</key>
                 <false/>
                 <key>AppleXcpmForceBoost</key>
@@ -877,7 +877,7 @@
                 <key>PickerAudioAssist</key>
                 <false/>
                 <key>PickerMode</key>
-                <string>Builtin</string>
+                <string>External</string>
                 <key>PickerVariant</key>
                 <string>Default</string>
                 <key>PollAppleHotKeys</key>
@@ -906,7 +906,7 @@
                 <key>SysReport</key>
                 <false/>
                 <key>Target</key>
-                <integer>0</integer>
+                <integer>67</integer>
             </dict>
             <key>Entries</key>
             <array>
@@ -936,7 +936,7 @@
                     <key>Comment</key>
                     <string></string>
                     <key>Enabled</key>
-                    <false/>
+                    <true/>
                     <key>Flavour</key>
                     <string>Auto</string>
                     <key>Name</key>
@@ -970,9 +970,9 @@
                 <key>HaltLevel</key>
                 <integer>2147483648</integer>
                 <key>PasswordHash</key>
-                <data></data>
+                <data>/57vvnvdGw2eLc0CVuqFqIox/esIkJU4J+bRIiHUUOe8gNuYRVWCuLxlL/KCTVu6pVzs00JjPY2acqrgmRSu6g==</data>
                 <key>PasswordSalt</key>
-                <data></data>
+                <data>8i6k4ZV7IFeWzOqtahopSw==</data>
                 <key>ScanPolicy</key>
                 <integer>0</integer>
                 <key>SecureBootModel</key>
@@ -1062,7 +1062,7 @@
                     <key>#prev-lang:kbd</key>
                     <data>emgtSGFuczoyNTI=</data>
                     <key>boot-args</key>
-                    <string>lilucpu=8 -lilubetaall -v</string>
+                    <string>lilucpu=8 -v</string>
                     <key>csr-active-config</key>
                     <data>ZwAAAA==</data>
                 </dict>
@@ -1142,7 +1142,7 @@
                 <key>CustomDelays</key>
                 <true/>
                 <key>GraphicsInputMirroring</key>
-                <false/>
+                <true/>
                 <key>KeyInitialDelay</key>
                 <integer>0</integer>
                 <key>KeySubsequentDelay</key>
@@ -1178,7 +1178,7 @@
             <key>Drivers</key>
             <array>
                 <string>OpenRuntime.efi</string>
-                <string>#OpenCanopy.efi</string>
+                <string>OpenCanopy.efi</string>
                 <string>HfsPlus.efi</string>
                 <string>AudioDxe.efi</string>
                 <string>#CrScreenshotDxe.efi</string>
