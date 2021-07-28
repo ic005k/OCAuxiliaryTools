@@ -5943,7 +5943,7 @@ Note: On most newer firmwares these bits are already set, the option may be nece
               </attribute>
               <layout class="QHBoxLayout" name="horizontalLayout_2">
                <property name="spacing">
-                <number>-1</number>
+                <number>9</number>
                </property>
                <property name="leftMargin">
                 <number>5</number>
@@ -9857,7 +9857,7 @@ Enable this option to be able to see all the boot options when having multiple d
      <x>0</x>
      <y>0</y>
      <width>1484</width>
-     <height>24</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -9884,7 +9884,6 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionGenerateEFI"/>
     <addaction name="actionDatabase"/>
     <addaction name="actionOpen_database_directory"/>
-    <addaction name="actionShareConfig"/>
     <addaction name="separator"/>
     <addaction name="btnExportMaster"/>
     <addaction name="btnImportMaster"/>

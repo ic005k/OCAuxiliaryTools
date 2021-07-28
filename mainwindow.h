@@ -300,7 +300,6 @@ private slots:
     void clearFindTexts();
     void copyText(QListWidget* listW);
     void OpenDir_clicked();
-    void on_ShareConfig();
 
     void on_line1();
     void on_line2();

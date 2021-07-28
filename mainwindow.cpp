@@ -5939,10 +5939,6 @@ void MainWindow::init_EditMenu()
         &QAction::triggered,
         this,
         &MainWindow::OpenDir_clicked);
-
-    // 分享配置文件
-    connect(ui->actionShareConfig, &QAction::triggered, this, &MainWindow::on_ShareConfig);
-    ui->actionShareConfig->setShortcut(tr("ctrl+r"));
 }
 
 void MainWindow::init_HelpMenu()
@@ -6870,12 +6866,6 @@ bool MainWindow::copyDirectoryFiles(const QString& fromDir, const QString& toDir
         }
     }
     return true;
-}
-
-void MainWindow::on_ShareConfig()
-{
-    QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfigDatabase/issues"));
-    QDesktopServices::openUrl(url);
 }
 
 void MainWindow::OpenDir_clicked()
