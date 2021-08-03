@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.6.2</string>
+	<string>1.6.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,7 +25,7 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.6.2</string>
+	<string>1.6.3</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -1518,9 +1518,9 @@
 					<integer>283902517</integer>
 					<key>ConfigData</key>
 					<data>
-					AZccUAGXHQABlx6gAZcfkAGnHEABpx0QAace
-					gAGnHwIBtxyAAbcdEAG3HhEBtx8BAbcMAgIX
-					HFACFx0QAhceIQIXHwICFwwC
+					AZccMAGXHQEBlx6gAZcfkAGnHEABpx0QAace
+					gQGnHwIBtxwgAbcdQAG3HgEBtx8BAbcMAgIX
+					HBACFx0QAhceIQIXHwICFwwC
 					</data>
 					<key>FuncGroup</key>
 					<integer>1</integer>
@@ -1528,7 +1528,7 @@
 					<integer>18</integer>
 					<key>WakeConfigData</key>
 					<data>
-					AZcHJQGnByUBtwwCAhcMAg==
+					AZcHIAGnByQBtwwCAhcMAg==
 					</data>
 					<key>WakeVerbReinit</key>
 					<true/>

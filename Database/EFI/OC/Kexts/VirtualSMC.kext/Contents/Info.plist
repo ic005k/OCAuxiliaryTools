@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.5</string>
+	<string>1.2.6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,7 +25,7 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.2.5</string>
+	<string>1.2.6</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -395,9 +395,26 @@
 		<string>1.2.0</string>
 		<key>com.apple.iokit.IOACPIFamily</key>
 		<string>1.0.0d1</string>
+		<key>com.apple.kernel.6.0</key>
+		<string>7.9.9</string>
 		<key>com.apple.kpi.bsd</key>
-		<string>10.0.0</string>
-		<key>com.apple.kpi.dsep</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.iokit</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.libkern</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.mach</key>
+		<string>8.0.0</string>
+		<key>com.apple.kpi.unsupported</key>
+		<string>8.0.0</string>
+	</dict>
+	<key>OSBundleLibraries_x86_64</key>
+	<dict>
+		<key>as.vit9696.Lilu</key>
+		<string>1.2.0</string>
+		<key>com.apple.iokit.IOACPIFamily</key>
+		<string>1.0.0d1</string>
+		<key>com.apple.kpi.bsd</key>
 		<string>10.0.0</string>
 		<key>com.apple.kpi.iokit</key>
 		<string>10.0.0</string>

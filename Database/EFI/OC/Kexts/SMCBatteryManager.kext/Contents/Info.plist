@@ -17,13 +17,13 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.5</string>
+	<string>1.2.6</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.2.5</string>
+	<string>1.2.6</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -86,17 +86,15 @@
 		<key>com.apple.iokit.IOSMBusFamily</key>
 		<string>1.0.0</string>
 		<key>com.apple.kpi.bsd</key>
-		<string>10.0.0</string>
-		<key>com.apple.kpi.dsep</key>
-		<string>10.0.0</string>
+		<string>8.0.0</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>10.0.0</string>
+		<string>8.0.0</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>10.0.0</string>
+		<string>8.0.0</string>
 		<key>com.apple.kpi.mach</key>
-		<string>10.0.0</string>
+		<string>8.0.0</string>
 		<key>com.apple.kpi.unsupported</key>
-		<string>10.0.0</string>
+		<string>8.0.0</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>
