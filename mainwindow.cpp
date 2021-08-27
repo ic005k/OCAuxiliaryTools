@@ -5783,13 +5783,13 @@ void MainWindow::setListMainIcon()
         ui->listMain->item(i)->setToolTip(strItemList.at(i));
     }
 
-    if (win) {
+    /*if (win) {
         strIconList.append(":/icon/m9.png");
         strItemList.append(tr("Hardware Information"));
         ui->listMain->addItem(new QListWidgetItem(QIcon(":/icon/m9.png"), "Info"));
         ui->listMain->item(8)->setSizeHint(size);
         ui->listMain->item(8)->setToolTip(tr("Hardware Information"));
-    }
+    }*/
 }
 
 void MainWindow::init_listMainSub()
