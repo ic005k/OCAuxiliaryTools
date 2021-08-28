@@ -79,6 +79,14 @@ void DeleteCommand::redo()
         mw_one->endDelLeftTable(m_table);
     }
 
+    if (m_table0 != NULL && !m_loadINI) {
+
+        if (m_writeINI)
+            mw_one->write_ini(m_table0, m_table, m_table0CurrentRow);
+        else
+            mw_one->write_value_ini(m_table0, m_table, m_table0CurrentRow);
+    }
+
     mw_one->loading = false;
 }
 
