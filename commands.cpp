@@ -67,10 +67,16 @@ void DeleteCommand::undo()
 
 void DeleteCommand::redo()
 {
+    mymethod->goTable(m_table);
+
+    if (m_table0 != NULL && !m_loadINI) {
+        m_table0->setCurrentCell(m_table0CurrentRow, 0);
+    }
+
+    if (m_loadINI)
+        mw_one->read_ini(m_table, m_table0, m_table0CurrentRow);
 
     mw_one->loading = true;
-
-    mymethod->goTable(m_table);
 
     m_table->removeRow(m_row);
 
