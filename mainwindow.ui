@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1954,7 +1954,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2598,7 +2598,7 @@ Affects 10.13 and above.
 
 要求： 10.13 (10.13以下不需要)
 
-描述：防止内核在恐慌日志中打印kext dump，防止观察恐慌细节。
+描述：防止内核在崩溃日志中打印kext dump，防止观察崩溃细节。
 
 影响10.13及以上版本。</string>
                 </property>
@@ -2782,7 +2782,7 @@ Note: While this may increase the performance, this patch is strongly discourage
 
 ----
 
-禁用LAPIC中断的内核恐慌。</string>
+禁用LAPIC中断的内核崩溃。</string>
                 </property>
                 <property name="statusTip">
                  <string>Disables kernel panic on LAPIC interrupts.</string>
@@ -2821,7 +2821,7 @@ For debug kernels setpowerstate_panic=0 boot argument should be used, which is o
 
 ----
 
-macOS Catalina(10.15)中增加了一项安全措施，导致苹果驱动在充电超时后出现内核恐慌。
+macOS Catalina(10.15)中增加了一项安全措施，导致苹果驱动在充电超时后出现内核崩溃。
 
 有时可能会在配置错误的硬件上造成问题，尤其是数字音频，有时会无法唤醒。
 
@@ -3131,7 +3131,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3906,9 +3906,9 @@ Development and debug kernels produce more helpful kernel panics. Consider downl
 
 ----
 
-文件保存为panic-YYYY-MM-DD-HHMMSS.txt。强烈建议使用 keepsyms=1 的启动参数来查看恐慌日志中的调试符号。如果它不存在，可以使用kpdescribe.sh工具（与OpenCore捆绑在一起）来部分恢复堆栈跟踪。
+文件保存为panic-YYYY-MM-DD-HHMMSS.txt。强烈建议使用 keepsyms=1 的启动参数来查看崩溃日志中的调试符号。如果它不存在，可以使用kpdescribe.sh工具（与OpenCore捆绑在一起）来部分恢复堆栈跟踪。
 
-开发和调试内核会产生更有用的内核恐慌。调试问题时，可以考虑从 developer.apple.com 下载并安装 KernelDebugKit。要激活开发内核，你需要添加kcsuffix=development引导参数。使用uname -a命令来确保你当前加载的内核是一个开发（或调试）内核。</string>
+开发和调试内核会产生更有用的内核崩溃信息 。调试问题时，可以考虑从 developer.apple.com 下载并安装 KernelDebugKit。要激活开发内核，你需要添加kcsuffix=development引导参数。使用uname -a命令来确保你当前加载的内核是一个开发（或调试）内核。</string>
                    </property>
                    <property name="statusTip">
                     <string> Save macOS kernel panic to OpenCore root partition.</string>
