@@ -2344,7 +2344,9 @@ void MainWindow::SavePlist(QString FileName)
     OpenCore["ACPI"] = SaveACPI();
 
     OpenCore["Booter"] = SaveBooter();
+
     OpenCore["DeviceProperties"] = SaveDeviceProperties();
+
     OpenCore["Kernel"] = SaveKernel();
     OpenCore["Misc"] = SaveMisc();
     OpenCore["NVRAM"] = SaveNVRAM();
@@ -2512,6 +2514,8 @@ QVariantMap MainWindow::SaveDeviceProperties()
     QVariantMap dictList;
     QVariantMap valueList;
     QVariantList arrayList;
+
+    int currentRow = ui->table_dp_add0->currentRow();
     for (int i = 0; i < ui->table_dp_add0->rowCount(); i++) {
 
         valueList.clear(); //先必须清理下列表，很重要
@@ -2534,6 +2538,10 @@ QVariantMap MainWindow::SaveDeviceProperties()
         }
         dictList[ui->table_dp_add0->item(i, 0)->text()] = valueList;
     }
+
+    ui->table_dp_add0->clearSelection();
+    ui->table_dp_add0->setCurrentCell(currentRow, 0);
+
     subMap["Add"] = dictList;
 
     // Delete
@@ -2726,6 +2734,7 @@ QVariantMap MainWindow::SaveNVRAM()
     QVariantList arrayList;
     QVariantMap valueList;
 
+    int currentRow = ui->table_nv_add0->currentRow();
     for (int i = 0; i < ui->table_nv_add0->rowCount(); i++) {
 
         valueList.clear(); //先必须清理下列表，很重要
@@ -2748,6 +2757,8 @@ QVariantMap MainWindow::SaveNVRAM()
         }
         dictList[ui->table_nv_add0->item(i, 0)->text()] = valueList;
     }
+    ui->table_nv_add0->clearSelection();
+    ui->table_nv_add0->setCurrentCell(currentRow, 0);
     subMap["Add"] = dictList;
 
     // Delete
