@@ -2545,10 +2545,11 @@ QVariantMap MainWindow::SaveDeviceProperties()
     subMap["Add"] = dictList;
 
     // Delete
-    dictList.clear(); //先清理之前的数据
+    dictList.clear();
+    currentRow = ui->table_dp_del0->currentRow();
     for (int i = 0; i < ui->table_dp_del0->rowCount(); i++) {
 
-        valueList.clear(); //先必须清理下列表，很重要
+        valueList.clear();
         arrayList.clear();
 
         //先加载表中的数据
@@ -2560,6 +2561,8 @@ QVariantMap MainWindow::SaveDeviceProperties()
         }
         dictList[ui->table_dp_del0->item(i, 0)->text()] = arrayList;
     }
+    ui->table_dp_del0->clearSelection();
+    ui->table_dp_del0->setCurrentCell(currentRow, 0);
     subMap["Delete"] = dictList;
 
     return subMap;
@@ -2763,6 +2766,7 @@ QVariantMap MainWindow::SaveNVRAM()
 
     // Delete
     dictList.clear(); //先清理之前的数据
+    currentRow = ui->table_nv_del0->currentRow();
     for (int i = 0; i < ui->table_nv_del0->rowCount(); i++) {
 
         valueList.clear(); //先必须清理下列表，很重要
@@ -2777,10 +2781,13 @@ QVariantMap MainWindow::SaveNVRAM()
         }
         dictList[ui->table_nv_del0->item(i, 0)->text()] = arrayList;
     }
+    ui->table_nv_del0->clearSelection();
+    ui->table_nv_del0->setCurrentCell(currentRow, 0);
     subMap["Delete"] = dictList;
 
     // LegacySchema
     dictList.clear(); //先清理之前的数据
+    currentRow = ui->table_nv_ls0->currentRow();
     for (int i = 0; i < ui->table_nv_ls0->rowCount(); i++) {
 
         valueList.clear(); //先必须清理下列表，很重要
@@ -2795,6 +2802,8 @@ QVariantMap MainWindow::SaveNVRAM()
         }
         dictList[ui->table_nv_ls0->item(i, 0)->text()] = arrayList;
     }
+    ui->table_nv_ls0->clearSelection();
+    ui->table_nv_ls0->setCurrentCell(currentRow, 0);
     subMap["LegacySchema"] = dictList;
 
     subMap["LegacyEnable"] = getChkBool(ui->chkLegacyEnable);
