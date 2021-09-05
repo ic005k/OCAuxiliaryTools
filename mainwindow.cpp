@@ -32,8 +32,8 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210828";
-QString ocVer = "0.7.2";
+QString CurVerison = "20210906";
+QString ocVer = "0.7.3";
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -2147,10 +2147,17 @@ void MainWindow::initui_UEFI()
     QTableWidgetItem* id0;
 
     //ui->table_uefi_drivers->setColumnWidth(0, 1000);
-    id0 = new QTableWidgetItem(tr("Drivers"));
+    id0 = new QTableWidgetItem(tr("Path"));
     ui->table_uefi_drivers->setHorizontalHeaderItem(0, id0);
+
+    id0 = new QTableWidgetItem(tr("Enabled"));
+    ui->table_uefi_drivers->setHorizontalHeaderItem(1, id0);
+
+    id0 = new QTableWidgetItem(tr("Arguments"));
+    ui->table_uefi_drivers->setHorizontalHeaderItem(2, id0);
+
     ui->table_uefi_drivers->setAlternatingRowColors(true);
-    ui->table_uefi_drivers->horizontalHeader()->setStretchLastSection(true);
+    //ui->table_uefi_drivers->horizontalHeader()->setStretchLastSection(true);
 
     // Input
     ui->cboxKeySupportMode->addItem("Auto");
@@ -2225,13 +2232,42 @@ void MainWindow::ParserUEFI(QVariantMap map)
     getValue(map_audio, ui->tabUEFI3);
 
     //4. Drivers
-    QTableWidgetItem* id0;
     QVariantList map_Drivers = map["Drivers"].toList(); //数组
     ui->table_uefi_drivers->setRowCount(map_Drivers.count());
     for (int i = 0; i < map_Drivers.count(); i++) {
 
-        id0 = new QTableWidgetItem(map_Drivers.at(i).toString());
-        ui->table_uefi_drivers->setItem(i, 0, id0);
+        //QTableWidgetItem* id0;
+        //id0 = new QTableWidgetItem(map_Drivers.at(i).toString()); //老版本OC（0.7.3之前）只有一列记录的情况
+        //ui->table_uefi_drivers->setItem(i, 0, id0);
+
+        QVariantMap map3 = map_Drivers.at(i).toMap();
+
+        if (map3.count() > 1) {
+
+            QTableWidgetItem* newItem1;
+            newItem1 = new QTableWidgetItem(map3["Path"].toString());
+            ui->table_uefi_drivers->setItem(i, 0, newItem1);
+
+            init_enabled_data(ui->table_uefi_drivers, i, 1, map3["Enabled"].toString());
+
+            newItem1 = new QTableWidgetItem(map3["Arguments"].toString());
+            ui->table_uefi_drivers->setItem(i, 2, newItem1);
+        } else {
+            QString strEnabled = "true";
+            QTableWidgetItem* newItem1;
+            QString strPath = map_Drivers.at(i).toString();
+            if (strPath.mid(0, 1) == "#") {
+                strEnabled = "false";
+                strPath = strPath.replace("#", "");
+            }
+            newItem1 = new QTableWidgetItem(strPath);
+            ui->table_uefi_drivers->setItem(i, 0, newItem1);
+
+            init_enabled_data(ui->table_uefi_drivers, i, 1, strEnabled);
+
+            newItem1 = new QTableWidgetItem("");
+            ui->table_uefi_drivers->setItem(i, 2, newItem1);
+        }
     }
 
     ui->chkConnectDrivers->setChecked(map["ConnectDrivers"].toBool());
@@ -2858,8 +2894,17 @@ QVariantMap MainWindow::SaveUEFI()
 
     //4. Drivers
     arrayList.clear();
+    QVariantMap uefiAddSub;
     for (int i = 0; i < ui->table_uefi_drivers->rowCount(); i++) {
-        arrayList.append(ui->table_uefi_drivers->item(i, 0)->text());
+        //arrayList.append(ui->table_uefi_drivers->item(i, 0)->text()); //之前只有一条记录的情况
+
+        uefiAddSub["Path"] = ui->table_uefi_drivers->item(i, 0)->text();
+
+        uefiAddSub["Enabled"] = getBool(ui->table_uefi_drivers, i, 1);
+
+        uefiAddSub["Arguments"] = ui->table_uefi_drivers->item(i, 2)->text();
+
+        arrayList.append(uefiAddSub); //最后一层
     }
     subMap["Drivers"] = arrayList;
     subMap["ConnectDrivers"] = getChkBool(ui->chkConnectDrivers);
@@ -4064,8 +4109,9 @@ void MainWindow::addEFIDrivers(QStringList FileName)
         int row = ui->table_uefi_drivers->rowCount() + 1;
 
         ui->table_uefi_drivers->setRowCount(row);
-        ui->table_uefi_drivers->setItem(
-            row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+        ui->table_uefi_drivers->setItem(row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+        init_enabled_data(ui->table_uefi_drivers, row - 1, 1, "true");
+        ui->table_uefi_drivers->setItem(row - 1, 2, new QTableWidgetItem(""));
 
         ui->table_uefi_drivers->setFocus();
         ui->table_uefi_drivers->setCurrentCell(row - 1, 0);
@@ -6531,10 +6577,17 @@ void MainWindow::on_tableDevices_cellClicked(int row, int column)
 void MainWindow::on_table_uefi_drivers_cellClicked(int row, int column)
 {
 
-    Q_UNUSED(row);
-    Q_UNUSED(column);
+    // Q_UNUSED(row);
+    // Q_UNUSED(column);
 
-    ui->statusbar->showMessage(ui->table_uefi_drivers->currentItem()->text());
+    // ui->statusbar->showMessage(ui->table_uefi_drivers->currentItem()->text());
+
+    if (!ui->table_uefi_drivers->currentIndex().isValid())
+        return;
+
+    enabled_change(ui->table_uefi_drivers, row, column, 1);
+
+    setStatusBarText(ui->table_uefi_drivers);
 }
 
 void MainWindow::readResultCheckData()

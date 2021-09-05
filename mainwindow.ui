@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -82,7 +82,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -7735,7 +7735,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>3</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -8471,8 +8471,10 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
                <item row="0" column="0" colspan="4">
                 <widget class="QTableWidget" name="table_uefi_drivers">
                  <property name="columnCount">
-                  <number>1</number>
+                  <number>3</number>
                  </property>
+                 <column/>
+                 <column/>
                  <column/>
                 </widget>
                </item>
