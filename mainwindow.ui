@@ -7735,7 +7735,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>3</number>
+              <number>7</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -9676,6 +9676,26 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                      <width>150</width>
                      <height>16777215</height>
                     </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="1">
+                  <widget class="QCheckBox" name="chkForceOcWriteFlash">
+                   <property name="toolTip">
+                    <string>Type: plist boolean
+
+Description: Enables writing to flash memory for all OpenCore system variables.
+
+Note: This value should be disabled on most types of firmware but is left configurable to account for firmware that may have issues with volatile variable storage overflows or similar. Boot issues across multiple OSes can be observed on e.g. Lenovo Thinkpad T430 and T530 without this quirk. Apple variables related to Secure Boot and hibernation are exempt from this for security reasons. Furthermore, some OpenCore variables are exempt for different reasons, such as the boot log due to an available user option, and the TSC frequency due to timing issues. When toggling this option, a NVRAM reset may be required to ensure full functionality.
+----
+类型：plist布尔值
+
+描述：启用所有OpenCore系统变量对闪存的写入。
+
+注意：这个值在大多数类型的固件上应该是禁用的，但为了考虑到可能有易失性变量存储溢出或类似问题的固件，这个值是可配置的。在例如联想Thinkpad T430和T530上可以观察到跨多个操作系统的启动问题，没有这个选项。出于安全原因，与安全启动和休眠有关的苹果变量不在此列。此外，一些OpenCore变量由于不同的原因被豁免，例如由于一个可用的用户选项，启动日志，以及由于时间问题，TSC频率。在切换该选项时，可能需要对NVRAM进行重置，以确保完整的功能。</string>
+                   </property>
+                   <property name="text">
+                    <string>ForceOcWriteFlash</string>
                    </property>
                   </widget>
                  </item>
