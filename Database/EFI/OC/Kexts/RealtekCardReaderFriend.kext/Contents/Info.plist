@@ -3,72 +3,53 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>19H1323</string>
+	<string>20F71</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
-	<string>WhateverGreen</string>
+	<string>RealtekCardReaderFriend</string>
 	<key>CFBundleIdentifier</key>
-	<string>as.vit9696.WhateverGreen</string>
+	<string>science.firewolf.rtsf</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>WhateverGreen</string>
+	<string>RealtekCardReaderFriend</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5.3</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>1.0.0</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.5.3</string>
+	<string>1.0.0</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>12B45b</string>
+	<string>12E507</string>
 	<key>DTPlatformName</key>
 	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>11.0</string>
+	<string>11.3</string>
 	<key>DTSDKBuild</key>
-	<string>20A2408</string>
+	<string>20E214</string>
 	<key>DTSDKName</key>
-	<string>macosx11.0</string>
+	<string>macosx11.3</string>
 	<key>DTXcode</key>
-	<string>1220</string>
+	<string>1251</string>
 	<key>DTXcodeBuild</key>
-	<string>12B45b</string>
+	<string>12E507</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>NVHDAEnabler</key>
+		<key>RealtekCardReaderFriend</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
-			<string>as.vit9696.WhateverGreen</string>
+			<string>science.firewolf.rtsf</string>
 			<key>IOClass</key>
-			<string>NVHDAEnabler</string>
+			<string>RealtekCardReaderFriend</string>
 			<key>IOMatchCategory</key>
-			<string>IOFramebuffer</string>
-			<key>IOPCIClassMatch</key>
-			<string>0x03000000&amp;0xff000000</string>
-			<key>IOPCIMatch</key>
-			<string>0x000010de&amp;0x0000ffff</string>
-			<key>IOProbeScore</key>
-			<integer>300000</integer>
-			<key>IOProviderClass</key>
-			<string>IOPCIDevice</string>
-		</dict>
-		<key>as.vit9696.WhateverGreen</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>as.vit9696.WhateverGreen</string>
-			<key>IOClass</key>
-			<string>WhateverGreen</string>
-			<key>IOMatchCategory</key>
-			<string>WhateverGreen</string>
+			<string>RealtekCardReaderFriend</string>
 			<key>IOProviderClass</key>
 			<string>IOResources</string>
 			<key>IOResourceMatch</key>
@@ -76,29 +57,23 @@
 		</dict>
 	</dict>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.6</string>
-	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2018 vit9696. All rights reserved.</string>
-	<key>OSBundleCompatibleVersion</key>
-	<string>1.0</string>
+	<string>10.14</string>
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>as.vit9696.Lilu</key>
-		<string>1.2.0</string>
-		<key>com.apple.iokit.IOPCIFamily</key>
-		<string>1.0.0b1</string>
+		<string>1.4.7</string>
 		<key>com.apple.kpi.bsd</key>
-		<string>10.0.0</string>
+		<string>12.0.0</string>
 		<key>com.apple.kpi.dsep</key>
-		<string>10.0.0</string>
+		<string>12.0.0</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>10.0.0</string>
+		<string>12.0.0</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>10.0.0</string>
+		<string>12.0.0</string>
 		<key>com.apple.kpi.mach</key>
-		<string>10.0.0</string>
+		<string>12.0.0</string>
 		<key>com.apple.kpi.unsupported</key>
-		<string>10.0.0</string>
+		<string>12.0.0</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>
