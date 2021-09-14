@@ -57,6 +57,8 @@ dlgParameters::dlgParameters(QWidget* parent)
     chk_ScanPolicy.append(ui->chk14);
     chk_ScanPolicy.append(ui->chk15);
     chk_ScanPolicy.append(ui->chk16);
+    chk_ScanPolicy.append(ui->chk17);
+    chk_ScanPolicy.append(ui->chk18);
 
     for (int i = 0; i < chk_ScanPolicy.count(); i++) {
         connect(chk_ScanPolicy.at(i), &QCheckBox::clicked, this, &dlgParameters::slotScanPolicy);

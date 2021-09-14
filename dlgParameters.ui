@@ -177,7 +177,7 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QCheckBox" name="chk9">
+       <widget class="QCheckBox" name="chk11">
         <property name="text">
          <string>OC_SCAN_ALLOW_DEVICE_SASEX</string>
         </property>
@@ -198,7 +198,7 @@
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QCheckBox" name="chk10">
+       <widget class="QCheckBox" name="chk12">
         <property name="text">
          <string>OC_SCAN_ALLOW_DEVICE_SCSI</string>
         </property>
@@ -212,14 +212,14 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QCheckBox" name="chk7">
+       <widget class="QCheckBox" name="chk9">
         <property name="text">
-         <string>OC_SCAN_ALLOW_FS_EXT</string>
+         <string>OC_SCAN_ALLOW_FS_XBOOTLDR</string>
         </property>
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QCheckBox" name="chk11">
+       <widget class="QCheckBox" name="chk13">
         <property name="text">
          <string>OC_SCAN_ALLOW_DEVICE_NVME</string>
         </property>
@@ -233,44 +233,58 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QCheckBox" name="chk8">
+       <widget class="QCheckBox" name="chk10">
         <property name="text">
          <string>OC_SCAN_ALLOW_DEVICE_SATA</string>
         </property>
        </widget>
       </item>
       <item row="3" column="2">
-       <widget class="QCheckBox" name="chk12">
+       <widget class="QCheckBox" name="chk14">
         <property name="text">
          <string>OC_SCAN_ALLOW_DEVICE_ATAPI</string>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QCheckBox" name="chk16">
+       <widget class="QCheckBox" name="chk18">
         <property name="text">
          <string>OC_SCAN_ALLOW_DEVICE_PCI</string>
         </property>
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QCheckBox" name="chk15">
+       <widget class="QCheckBox" name="chk17">
         <property name="text">
          <string>OC_SCAN_ALLOW_DEVICE_SDCARD</string>
         </property>
        </widget>
       </item>
       <item row="4" column="2">
-       <widget class="QCheckBox" name="chk14">
+       <widget class="QCheckBox" name="chk16">
         <property name="text">
          <string>OC_SCAN_ALLOW_DEVICE_FIREWIRE</string>
         </property>
        </widget>
       </item>
       <item row="5" column="0">
-       <widget class="QCheckBox" name="chk13">
+       <widget class="QCheckBox" name="chk15">
         <property name="text">
          <string>OC_SCAN_ALLOW_DEVICE_USB</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="chk7">
+        <property name="text">
+         <string> OC_SCAN_ALLOW_FS_LINUX_ROOT</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QCheckBox" name="chk8">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_FS_LINUX_DATA</string>
         </property>
        </widget>
       </item>
