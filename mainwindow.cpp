@@ -32,7 +32,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210907";
+QString CurVerison = "20210914";
 QString ocVer = "0.7.3";
 
 MainWindow::MainWindow(QWidget* parent)
@@ -2865,10 +2865,10 @@ QVariantMap MainWindow::SavePlatformInfo()
 
     valueList["Devices"] = Map["Devices"];
 
-    if (ui->chkCustomMemory->isChecked()) {
-        if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
-            subMap["Memory"] = valueList;
-    }
+    //if (ui->chkCustomMemory->isChecked()) {
+    if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+        subMap["Memory"] = valueList;
+    //}
 
     // PlatformNVRAM
     valueList.clear();
@@ -4737,6 +4737,7 @@ void MainWindow::readResult()
     ui->editSystemSerialNumber->setText(str1);
     ui->editSystemSerialNumber_data->setText(str1);
     ui->editSystemSerialNumber_2->setText(str1);
+    ui->editSystemSerialNumber_PNVRAM->setText(str1);
 
     ui->editMLB->setText(str2);
     ui->editMLB_PNVRAM->setText(str2);
@@ -4767,6 +4768,7 @@ void MainWindow::on_btnSystemUUID_clicked()
     ui->editSystemUUID->setText(strId);
     ui->editSystemUUID_data->setText(strId);
     ui->editSystemUUID_2->setText(strId);
+    ui->editSystemUUID_PNVRAM->setText(strId);
 }
 
 void MainWindow::on_table_kernel_Force_cellClicked(int row, int column)

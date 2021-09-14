@@ -77,3 +77,7 @@ void dlgOCValidate::setGoEnabled(bool enabled)
     else
         ui->btnGo->setEnabled(false);
 }
+
+void dlgOCValidate::on_btnGo_clicked()
+{
+}

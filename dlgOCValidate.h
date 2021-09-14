@@ -3,8 +3,11 @@
 
 #include <QAction>
 #include <QClipboard>
+#include <QDebug>
 #include <QDialog>
 #include <QMenu>
+#include <QMessageBox>
+#include <QTimer>
 
 namespace Ui {
 class dlgOCValidate;
@@ -21,6 +24,8 @@ public:
 
 private slots:
     void on_btnClose_clicked();
+
+    void on_btnGo_clicked();
 
 private:
     Ui::dlgOCValidate* ui;
