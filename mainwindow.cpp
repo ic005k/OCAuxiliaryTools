@@ -6336,48 +6336,52 @@ void MainWindow::CopyLabel()
     listOfLabel = getAllLabel(getAllUIControls(ui->tabTotal));
     for (int i = 0; i < listOfLabel.count(); i++) {
         QLabel* w = (QLabel*)listOfLabel.at(i);
-        //lbl->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        if (w == ui->lblPickerAttributes || w == ui->lblDisplayLevel || w == ui->lblExposeSensitiveData || w == ui->lblHaltLevel || w == ui->lblScanPolicy || w == ui->lblTargetHex) {
+            w->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
-        w->setContextMenuPolicy(Qt::CustomContextMenu);
+        } else {
 
-        w->installEventFilter(this);
+            w->setContextMenuPolicy(Qt::CustomContextMenu);
 
-        QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
-        QAction* showTipsAction = new QAction(tr("Show Tips"));
+            w->installEventFilter(this);
 
-        QMenu* copyMenu = new QMenu(this);
-        copyMenu->addAction(copyAction);
-        copyMenu->addAction(showTipsAction);
+            QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
+            QAction* showTipsAction = new QAction(tr("Show Tips"));
 
-        connect(copyAction, &QAction::triggered, [=]() {
-            QString str = copyAction->text().trimmed();
-            QString str1 = str.replace(tr("CopyText"), "");
+            QMenu* copyMenu = new QMenu(this);
+            copyMenu->addAction(copyAction);
+            copyMenu->addAction(showTipsAction);
 
-            QClipboard* clipboard = QApplication::clipboard();
-            clipboard->setText(str1.trimmed());
-        });
+            connect(copyAction, &QAction::triggered, [=]() {
+                QString str = copyAction->text().trimmed();
+                QString str1 = str.replace(tr("CopyText"), "");
 
-        connect(showTipsAction, &QAction::triggered, [=]() {
-            QString str = copyAction->text().trimmed();
-            QString str1 = str.replace(tr("CopyText"), "").trimmed();
-            QString str2;
-            for (int x = 0; x < str1.count(); x++) {
-                str2 = str2 + "=";
-            }
+                QClipboard* clipboard = QApplication::clipboard();
+                clipboard->setText(str1.trimmed());
+            });
 
-            myToolTip->popup(QCursor::pos(), str1 + "\n" + str2 + "\n\n", w->toolTip());
-        });
+            connect(showTipsAction, &QAction::triggered, [=]() {
+                QString str = copyAction->text().trimmed();
+                QString str1 = str.replace(tr("CopyText"), "").trimmed();
+                QString str2;
+                for (int x = 0; x < str1.count(); x++) {
+                    str2 = str2 + "=";
+                }
 
-        connect(w, &QLabel::customContextMenuRequested, [=](const QPoint& pos) {
-            Q_UNUSED(pos);
+                myToolTip->popup(QCursor::pos(), str1 + "\n" + str2 + "\n\n", w->toolTip());
+            });
 
-            if (w->toolTip().trimmed() == "")
-                showTipsAction->setVisible(false);
-            else
-                showTipsAction->setVisible(true);
+            connect(w, &QLabel::customContextMenuRequested, [=](const QPoint& pos) {
+                Q_UNUSED(pos);
 
-            copyMenu->exec(QCursor::pos());
-        });
+                if (w->toolTip().trimmed() == "")
+                    showTipsAction->setVisible(false);
+                else
+                    showTipsAction->setVisible(true);
+
+                copyMenu->exec(QCursor::pos());
+            });
+        }
     }
 }
 
