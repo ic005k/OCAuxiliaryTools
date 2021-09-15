@@ -66,6 +66,9 @@ public:
     ~MainWindow();
     Ui::MainWindow* ui;
 
+    QList<QVariant> NoteValues;
+    QList<QString> NoteKeys;
+
     bool lineEditModifyed = false;
     QVector<QTabWidget*> mainTabList;
     void initScanPolicyValue();

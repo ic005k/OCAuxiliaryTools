@@ -32,7 +32,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210915";
+QString CurVerison = "20210916";
 QString ocVer = "0.7.3";
 
 MainWindow::MainWindow(QWidget* parent)
@@ -216,6 +216,16 @@ void MainWindow::openFile(QString PlistFileName)
 
     QFile file(PlistFileName);
     QVariantMap map = PListParser::parsePList(&file).toMap();
+
+    NoteValues.clear();
+    NoteKeys.clear();
+    for (int i = 0; i < map.count(); i++) {
+        QString key = map.keys().at(i);
+        if (key.trimmed().mid(0, 1) == "#") {
+            NoteKeys.append(key);
+            NoteValues.append(map.values().at(i));
+        }
+    }
 
     ParserACPI(map);
     ParserBooter(map);
@@ -2340,6 +2350,10 @@ void MainWindow::SavePlist(QString FileName)
     removeAllLineEdit();
 
     QVariantMap OpenCore;
+
+    for (int i = 0; i < NoteKeys.count(); i++) {
+        OpenCore[NoteKeys.at(i)] = NoteValues.at(i);
+    }
 
     OpenCore["ACPI"] = SaveACPI();
 
