@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7440,17 +7440,17 @@ In addition it will also make some operating systems like Linux unbootable.
                 <item row="1" column="0">
                  <widget class="QCheckBox" name="chkSaveDataHub">
                   <property name="toolTip">
-                   <string notr="true">Whether to keep data such as Datahub when selecting Automatic.
+                   <string notr="true">When &quot;Automatic&quot; is selected, does it retain data such as &quot;DataHub&quot;, &quot;Memory&quot;, &quot;PlatformNVRAM&quot;, and “SMBIOS”.
 
 ----
 
-选择自动时，是否要保留Datahub等数据。</string>
+选择“Automatic“时，是否保留“DataHub”、“Memory”、“PlatformNVRAM”、“SMBIOS”之类的数据。</string>
                   </property>
                   <property name="statusTip">
-                   <string>Whether to keep data such as Datahub when selecting Automatic</string>
+                   <string>When &quot;Automatic&quot; is selected, does it retain data such as &quot;DataHub&quot;, &quot;Memory&quot;, &quot;PlatformNVRAM&quot;, and “SMBIOS”.</string>
                   </property>
                   <property name="text">
-                   <string>Keep data such as Datahub</string>
+                   <string>Keep data such as &quot;Datahub&quot;</string>
                   </property>
                  </widget>
                 </item>
