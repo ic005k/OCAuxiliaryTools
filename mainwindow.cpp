@@ -4329,17 +4329,11 @@ void MainWindow::on_table_dp_add_cellClicked(int row, int column)
     setStatusBarText(ui->table_dp_add);
 }
 
-void MainWindow::on_table_dp_add_currentCellChanged(int currentRow,
-    int currentColumn,
-    int previousRow,
-    int previousColumn)
+void MainWindow::on_table_dp_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    Q_UNUSED(currentRow);
-
     ui->table_dp_add->removeCellWidget(previousRow, 1);
 
-    //Undo Redo
-    ui->table_dp_add->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_dp_add, previousRow, previousColumn, currentRow, currentColumn);
 
     if (currentColumn != 1) {
 
@@ -4417,18 +4411,11 @@ void MainWindow::on_table_nv_add_cellClicked(int row, int column)
     setStatusBarText(ui->table_nv_add);
 }
 
-void MainWindow::on_table_nv_add_currentCellChanged(int currentRow,
-    int currentColumn,
-    int previousRow,
-    int previousColumn)
+void MainWindow::on_table_nv_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
     ui->table_nv_add->removeCellWidget(previousRow, 1);
 
-    //Undo Redo
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_nv_add->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_nv_add, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previousColumn, int currentRow, int currentColumn)
@@ -4507,8 +4494,11 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
         }
 
         loading = true;
-        if (Table->currentIndex().isValid())
+        if (Table->currentIndex().isValid()) {
             lineEdit->setText(Table->item(currentRow, currentColumn)->text());
+            lineEdit->selectAll();
+        }
+
         loading = false;
 
         lineEdit->setFocus();
@@ -4551,6 +4541,8 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow, int previous
 
             popMenu->exec(QCursor::pos());
         });
+
+        InitEdit = true;
     }
 }
 
@@ -4643,11 +4635,7 @@ void MainWindow::on_table_kernel_add_currentCellChanged(int currentRow,
 {
     ui->table_kernel_add->removeCellWidget(previousRow, 7);
 
-    //Undo Redo
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_kernel_add->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_kernel_add, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_table_kernel_block_currentCellChanged(int currentRow,
@@ -4657,11 +4645,7 @@ void MainWindow::on_table_kernel_block_currentCellChanged(int currentRow,
 {
     ui->table_kernel_block->removeCellWidget(previousRow, 5);
 
-    //Undo Redo
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_kernel_block->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_kernel_block, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_table_kernel_patch_currentCellChanged(int currentRow,
@@ -4671,11 +4655,7 @@ void MainWindow::on_table_kernel_patch_currentCellChanged(int currentRow,
 {
     ui->table_kernel_patch->removeCellWidget(previousRow, 13);
 
-    //Undo Redo
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_kernel_patch->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_kernel_patch, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 QString MainWindow::getSystemProductName(QString arg1)
@@ -4818,11 +4798,7 @@ void MainWindow::on_table_kernel_Force_currentCellChanged(int currentRow,
 {
     ui->table_kernel_Force->removeCellWidget(previousRow, 8);
 
-    //Undo Redo
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_kernel_Force->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_kernel_Force, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_btnKernelForce_Add_clicked()
@@ -6722,14 +6698,9 @@ void MainWindow::on_table_Booter_patch_cellClicked(int row, int column)
 
 void MainWindow::on_table_Booter_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-
-    //Undo Redo
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
     ui->table_Booter_patch->removeCellWidget(previousRow, 10);
 
-    ui->table_Booter_patch->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_Booter_patch, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_btnCheckUpdate()
@@ -7258,6 +7229,7 @@ void MainWindow::lineEditSetText()
     if (!loading) {
 
         lineEditEnter = true;
+        InitEdit = false;
 
         int row;
         int col;
@@ -7332,129 +7304,92 @@ void MainWindow::lineEdit_textEdited(const QString& arg1)
     Q_UNUSED(arg1);
 }
 
+void MainWindow::currentCellChanged(QTableWidget* t, int previousRow, int previousColumn, int currentRow, int currentColumn)
+{
+    if (InitEdit) {
+        InitEdit = false;
+        t->setCurrentCell(previousRow, previousColumn);
+        lineEditSetText();
+        t->setCurrentCell(currentRow, currentColumn);
+    }
+
+    t->removeCellWidget(previousRow, previousColumn);
+}
+
 void MainWindow::on_table_nv_ls_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_nv_ls->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_nv_ls, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_table_acpi_add_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_acpi_add->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_acpi_add, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_table_nv_add0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    //Undo Redo
     if (!loading) {
-
-        Q_UNUSED(currentRow);
-        Q_UNUSED(currentColumn);
-
-        ui->table_nv_add0->removeCellWidget(previousRow, previousColumn);
+        currentCellChanged(ui->table_nv_add0, previousRow, previousColumn, currentRow, currentColumn);
     }
 }
 
 void MainWindow::on_table_acpi_del_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    //Undo Redo
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_acpi_del->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_acpi_del, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_table_acpi_patch_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_acpi_patch->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_acpi_patch, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_table_booter_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_booter->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_booter, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_tableBlessOverride_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->tableBlessOverride->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->tableBlessOverride, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_tableEntries_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->tableEntries->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->tableEntries, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_tableTools_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->tableTools->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->tableTools, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_tableDevices_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->tableDevices->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->tableDevices, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_table_uefi_drivers_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_uefi_drivers->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_uefi_drivers, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_table_dp_add0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    //Undo Redo
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
     if (!loading) {
-
-        ui->table_dp_add0->removeCellWidget(previousRow, previousColumn);
+        currentCellChanged(ui->table_dp_add0, previousRow, previousColumn, currentRow, currentColumn);
     }
 }
 
 void MainWindow::on_table_dp_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
     if (!loading) {
-
-        ui->table_dp_del0->removeCellWidget(previousRow, previousColumn);
+        currentCellChanged(ui->table_dp_del0, previousRow, previousColumn, currentRow, currentColumn);
     }
 }
 
 void MainWindow::on_table_dp_del_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_dp_del->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_dp_del, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::removeWidget(QTableWidget* table)
@@ -7482,31 +7417,20 @@ void MainWindow::removeAllLineEdit()
 void MainWindow::on_table_nv_del0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
     if (!loading) {
-
-        Q_UNUSED(currentRow);
-        Q_UNUSED(currentColumn);
-
-        ui->table_nv_del0->removeCellWidget(previousRow, previousColumn);
+        currentCellChanged(ui->table_nv_del0, previousRow, previousColumn, currentRow, currentColumn);
     }
 }
 
 void MainWindow::on_table_nv_ls0_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
     if (!loading) {
-
-        Q_UNUSED(currentRow);
-        Q_UNUSED(currentColumn);
-
-        ui->table_nv_ls0->removeCellWidget(previousRow, previousColumn);
+        currentCellChanged(ui->table_nv_ls0, previousRow, previousColumn, currentRow, currentColumn);
     }
 }
 
 void MainWindow::on_table_nv_del_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_nv_del->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_nv_del, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::on_table_dp_add0_cellDoubleClicked(int row, int column)

@@ -69,6 +69,7 @@ public:
     QList<QVariant> NoteValues;
     QList<QString> NoteKeys;
 
+    bool InitEdit = false;
     bool lineEditModifyed = false;
     QVector<QTabWidget*> mainTabList;
     void initScanPolicyValue();
@@ -272,6 +273,7 @@ public:
     int getTextWidth(QString str, QWidget* w);
     void init_TableStyle();
     void openDir(QString strDir);
+    void currentCellChanged(QTableWidget* t, int previousRow, int previousColumn, int currentRow, int currentColumn);
 public slots:
     void DisplayLevel();
     void ScanPolicy();
