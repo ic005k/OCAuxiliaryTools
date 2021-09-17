@@ -4334,12 +4334,6 @@ void MainWindow::on_table_dp_add_currentCellChanged(int currentRow, int currentC
     ui->table_dp_add->removeCellWidget(previousRow, 1);
 
     currentCellChanged(ui->table_dp_add, previousRow, previousColumn, currentRow, currentColumn);
-
-    if (currentColumn != 1) {
-
-        myTable = new QTableWidget;
-        myTable = ui->table_dp_add;
-    }
 }
 
 void MainWindow::arch_addChange()
