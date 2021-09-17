@@ -7314,6 +7314,7 @@ void MainWindow::currentCellChanged(QTableWidget* t, int previousRow, int previo
     }
 
     t->removeCellWidget(previousRow, previousColumn);
+    lineEditEnter = false;
 }
 
 void MainWindow::on_table_nv_ls_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
