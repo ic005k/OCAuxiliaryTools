@@ -274,6 +274,7 @@ public:
     void init_TableStyle();
     void openDir(QString strDir);
     void currentCellChanged(QTableWidget* t, int previousRow, int previousColumn, int currentRow, int currentColumn);
+    void MoveItem(QTableWidget* t, bool up);
 public slots:
     void DisplayLevel();
     void ScanPolicy();
@@ -771,6 +772,10 @@ private slots:
     void on_actionDifferences_triggered();
 
     void setWM_RightTable();
+
+    void on_btnUp_clicked();
+
+    void on_btnDown_clicked();
 
 private:
     bool LoadRightTable = false;

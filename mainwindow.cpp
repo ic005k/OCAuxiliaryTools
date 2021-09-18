@@ -4159,115 +4159,103 @@ void MainWindow::on_btnUEFIDrivers_Del_clicked()
     del_item(ui->table_uefi_drivers);
 }
 
-void MainWindow::on_btnKernelAdd_Up_clicked()
+void MainWindow::MoveItem(QTableWidget* t, bool up)
 {
-
-    QTableWidget* t = new QTableWidget;
-    t = ui->table_kernel_add;
-
     t->setFocus();
 
-    if (t->rowCount() == 0 || t->currentRow() == 0 || t->currentRow() < 0)
-        return;
+    if (up) {
+        if (t->rowCount() == 0 || t->currentRow() == 0 || t->currentRow() < 0)
+            return;
+    } else {
+        if (t->currentRow() == t->rowCount() - 1 || t->currentRow() < 0)
+            return;
+    }
 
+    QStringList items;
     int cr = t->currentRow();
-    //先将上面的内容进行备份
-    QString item[8];
-    item[0] = t->item(cr - 1, 0)->text();
-    item[1] = t->item(cr - 1, 1)->text();
-    item[2] = t->item(cr - 1, 2)->text();
-    item[3] = t->item(cr - 1, 3)->text();
-    item[4] = t->item(cr - 1, 4)->text();
-    item[5] = t->item(cr - 1, 5)->text();
-    item[6] = t->item(cr - 1, 6)->text();
-    item[7] = t->item(cr - 1, 7)->text();
-    //将下面的内容移到上面
-    t->item(cr - 1, 0)->setText(t->item(cr, 0)->text());
-    t->item(cr - 1, 1)->setText(t->item(cr, 1)->text());
-    t->item(cr - 1, 2)->setText(t->item(cr, 2)->text());
-    t->item(cr - 1, 3)->setText(t->item(cr, 3)->text());
-    t->item(cr - 1, 4)->setText(t->item(cr, 4)->text());
-    t->item(cr - 1, 5)->setText(t->item(cr, 5)->text());
-    t->item(cr - 1, 6)->setText(t->item(cr, 6)->text());
-    if (t->item(cr, 6)->text() == "true")
-        t->item(cr - 1, 6)->setCheckState(Qt::Checked);
-    else
-        t->item(cr - 1, 6)->setCheckState(Qt::Unchecked);
+    int cols = t->columnCount();
+    QList<int> enabledList;
+    for (int i = 0; i < cols; i++) {
+        if (t->horizontalHeaderItem(i)->text() == tr("Enabled"))
+            enabledList.append(i);
+    }
 
-    t->item(cr - 1, 7)->setText(t->item(cr, 7)->text());
+    if (up) {
+        //先将上面的内容进行备份
+        for (int i = 0; i < cols; i++) {
+            items.append(t->item(cr - 1, i)->text());
+        }
 
-    //最后将之前的备份恢复到下面
-    t->item(cr, 0)->setText(item[0]);
-    t->item(cr, 1)->setText(item[1]);
-    t->item(cr, 2)->setText(item[2]);
-    t->item(cr, 3)->setText(item[3]);
-    t->item(cr, 4)->setText(item[4]);
-    t->item(cr, 5)->setText(item[5]);
-    t->item(cr, 6)->setText(item[6]);
-    if (item[6] == "true")
-        t->item(cr, 6)->setCheckState(Qt::Checked);
-    else
-        t->item(cr, 6)->setCheckState(Qt::Unchecked);
+        //将下面的内容移到上面
+        for (int i = 0; i < cols; i++) {
+            t->item(cr - 1, i)->setText(t->item(cr, i)->text());
+        }
 
-    t->item(cr, 7)->setText(item[7]);
+        for (int i = 0; i < enabledList.count(); i++) {
+            if (t->item(cr, enabledList.at(i))->text() == "true")
+                t->item(cr - 1, enabledList.at(i))->setCheckState(Qt::Checked);
+            else
+                t->item(cr - 1, enabledList.at(i))->setCheckState(Qt::Unchecked);
+        }
 
-    t->setCurrentCell(cr - 1, t->currentColumn());
+        //最后将之前的备份恢复到下面
+        for (int i = 0; i < cols; i++) {
+            t->item(cr, i)->setText(items.at(i));
+        }
+
+        for (int i = 0; i < enabledList.count(); i++) {
+            if (items.at(enabledList.at(i)) == "true")
+                t->item(cr, enabledList.at(i))->setCheckState(Qt::Checked);
+            else
+                t->item(cr, enabledList.at(i))->setCheckState(Qt::Unchecked);
+        }
+
+        t->setCurrentCell(cr - 1, t->currentColumn());
+
+    } else {
+        //先将下面的内容进行备份
+        for (int i = 0; i < cols; i++) {
+            items.append(t->item(cr + 1, i)->text());
+        }
+
+        //将上面的内容移到下面
+        for (int i = 0; i < cols; i++) {
+            t->item(cr + 1, i)->setText(t->item(cr, i)->text());
+        }
+
+        for (int i = 0; i < enabledList.count(); i++) {
+            if (t->item(cr, enabledList.at(i))->text() == "true")
+                t->item(cr + 1, enabledList.at(i))->setCheckState(Qt::Checked);
+            else
+                t->item(cr + 1, enabledList.at(i))->setCheckState(Qt::Unchecked);
+        }
+
+        //最后将之前的备份恢复到上面
+        for (int i = 0; i < cols; i++) {
+            t->item(cr, i)->setText(items.at(i));
+        }
+
+        for (int i = 0; i < enabledList.count(); i++) {
+            if (items.at(enabledList.at(i)) == "true")
+                t->item(cr, enabledList.at(i))->setCheckState(Qt::Checked);
+            else
+                t->item(cr, enabledList.at(i))->setCheckState(Qt::Unchecked);
+        }
+
+        t->setCurrentCell(cr + 1, t->currentColumn());
+    }
 
     this->setWindowModified(true);
 }
 
+void MainWindow::on_btnKernelAdd_Up_clicked()
+{
+    MoveItem(ui->table_kernel_add, true);
+}
+
 void MainWindow::on_btnKernelAdd_Down_clicked()
 {
-    QTableWidget* t = new QTableWidget;
-    t = ui->table_kernel_add;
-
-    if (t->currentRow() == t->rowCount() - 1 || t->currentRow() < 0)
-        return;
-
-    int cr = t->currentRow();
-    //先将下面的内容进行备份
-    QString item[8];
-    item[0] = t->item(cr + 1, 0)->text();
-    item[1] = t->item(cr + 1, 1)->text();
-    item[2] = t->item(cr + 1, 2)->text();
-    item[3] = t->item(cr + 1, 3)->text();
-    item[4] = t->item(cr + 1, 4)->text();
-    item[5] = t->item(cr + 1, 5)->text();
-    item[6] = t->item(cr + 1, 6)->text();
-    item[7] = t->item(cr + 1, 7)->text();
-    //将上面的内容移到下面
-    t->item(cr + 1, 0)->setText(t->item(cr, 0)->text());
-    t->item(cr + 1, 1)->setText(t->item(cr, 1)->text());
-    t->item(cr + 1, 2)->setText(t->item(cr, 2)->text());
-    t->item(cr + 1, 3)->setText(t->item(cr, 3)->text());
-    t->item(cr + 1, 4)->setText(t->item(cr, 4)->text());
-    t->item(cr + 1, 5)->setText(t->item(cr, 5)->text());
-    t->item(cr + 1, 6)->setText(t->item(cr, 6)->text());
-    if (t->item(cr, 6)->text() == "true")
-        t->item(cr + 1, 6)->setCheckState(Qt::Checked);
-    else
-        t->item(cr + 1, 6)->setCheckState(Qt::Unchecked);
-
-    t->item(cr + 1, 7)->setText(t->item(cr, 7)->text());
-
-    //最后将之前的备份恢复到上面
-    t->item(cr, 0)->setText(item[0]);
-    t->item(cr, 1)->setText(item[1]);
-    t->item(cr, 2)->setText(item[2]);
-    t->item(cr, 3)->setText(item[3]);
-    t->item(cr, 4)->setText(item[4]);
-    t->item(cr, 5)->setText(item[5]);
-    t->item(cr, 6)->setText(item[6]);
-    if (item[6] == "true")
-        t->item(cr, 6)->setCheckState(Qt::Checked);
-    else
-        t->item(cr, 6)->setCheckState(Qt::Unchecked);
-
-    t->item(cr, 7)->setText(item[7]);
-
-    t->setCurrentCell(cr + 1, t->currentColumn());
-
-    this->setWindowModified(true);
+    MoveItem(ui->table_kernel_add, false);
 }
 
 void MainWindow::on_btnSaveAs()
@@ -9492,11 +9480,7 @@ void MainWindow::paintEvent(QPaintEvent* event)
 
 bool MainWindow::eventFilter(QObject* obj, QEvent* event)
 {
-    //qDebug() << obj->metaObject()->className();
-
-    if (obj->metaObject()->className() == QStringLiteral("QLabel") || obj->metaObject()->className() == QStringLiteral("QCheckBox") || obj->metaObject()->className() == QStringLiteral("QTableWidget"))
-
-    {
+    if (obj->metaObject()->className() == QStringLiteral("QLabel") || obj->metaObject()->className() == QStringLiteral("QCheckBox") || obj->metaObject()->className() == QStringLiteral("QTableWidget")) {
 
         if (event->type() == QEvent::ToolTip) {
             QToolTip::hideText();
@@ -10240,4 +10224,14 @@ void MainWindow::on_actionDifferences_triggered()
     QString qtManulFile = appInfo.filePath() + "/Database/doc/Differences.pdf";
 
     QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
+}
+
+void MainWindow::on_btnUp_clicked()
+{
+    MoveItem(ui->table_acpi_add, true);
+}
+
+void MainWindow::on_btnDown_clicked()
+{
+    MoveItem(ui->table_acpi_add, false);
 }

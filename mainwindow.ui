@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -104,32 +104,20 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="1" column="1">
-             <widget class="QToolButton" name="btnACPIAdd_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
+            <item row="1" column="6">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
               </property>
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
-              </property>
-              <property name="iconSize">
+              <property name="sizeHint" stdset="0">
                <size>
-                <width>20</width>
+                <width>789</width>
                 <height>20</height>
                </size>
               </property>
-              <property name="shortcut">
-               <string>Del</string>
-              </property>
-             </widget>
+             </spacer>
             </item>
-            <item row="0" column="0" colspan="4">
+            <item row="0" column="0" colspan="7">
              <widget class="QTableWidget" name="table_acpi_add">
               <property name="toolTip">
                <string notr="true">ACPI (Advanced Configuration and Power Interface) is an open standard to discover and configure computer hardware.
@@ -182,6 +170,53 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               <column/>
              </widget>
             </item>
+            <item row="1" column="3">
+             <widget class="QToolButton" name="btnDown">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Down</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QToolButton" name="btnACPIAdd_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
+              </property>
+             </widget>
+            </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnACPIAdd_Add">
               <property name="font">
@@ -204,20 +239,7 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>789</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="2">
+            <item row="1" column="5">
              <widget class="QToolButton" name="btnOpenACPIDir">
               <property name="font">
                <font>
@@ -230,6 +252,28 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               <property name="icon">
                <iconset resource="qtocc.qrc">
                 <normaloff>:/icon/opendb.png</normaloff>:/icon/opendb.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QToolButton" name="btnUp">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Up</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/up.png</normaloff>:/icon/up.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1954,7 +1998,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
