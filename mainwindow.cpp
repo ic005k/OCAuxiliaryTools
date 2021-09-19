@@ -32,7 +32,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210917";
+QString CurVerison = "20210919";
 QString ocVer = "0.7.3";
 
 MainWindow::MainWindow(QWidget* parent)
