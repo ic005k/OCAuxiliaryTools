@@ -416,8 +416,9 @@ void MainWindow::initui_acpi()
     fieldList.append(tr("Enabled"));
     fieldList.append(tr("Comment"));
     ui->table_acpi_add->setHorizontalHeaderLabels(fieldList);
-
     ui->table_acpi_add->setAlternatingRowColors(true); //底色交替显示
+    ui->btnUp->setVisible(false);
+    ui->btnDown->setVisible(false);
 
     // ACPI-Delete
     id0 = new QTableWidgetItem(tr("TableSignature"));
@@ -10234,4 +10235,72 @@ void MainWindow::on_btnUp_clicked()
 void MainWindow::on_btnDown_clicked()
 {
     MoveItem(ui->table_acpi_add, false);
+}
+
+void MainWindow::CellEnter(int row, QTableWidget* tw)
+{
+    tw->clearSelection();
+
+    int colCount = tw->columnCount();
+
+    int rowsel;
+
+    if (tw->currentIndex().row() < row)
+        rowsel = row - 1; //down
+
+    else if (tw->currentIndex().row() > row)
+        rowsel = row + 1; //up
+
+    else
+        return;
+
+    QList<QTableWidgetItem*> rowItems, rowItems1;
+    for (int col = 0; col < colCount; ++col) {
+        rowItems << tw->takeItem(row, col);
+        rowItems1 << tw->takeItem(rowsel, col);
+    }
+
+    for (int cola = 0; cola < colCount; ++cola) {
+        tw->setItem(rowsel, cola, rowItems.at(cola));
+        tw->setItem(row, cola, rowItems1.at(cola));
+    }
+}
+
+void MainWindow::cellEnteredSlot(int row, int column)
+{
+    Q_UNUSED(column);
+
+    if (ui->listMain->currentRow() == 0 && ui->listSub->currentRow() == 0)
+        CellEnter(row, ui->table_acpi_add);
+    if (ui->listMain->currentRow() == 3 && ui->listSub->currentRow() == 0)
+        CellEnter(row, ui->table_kernel_add);
+}
+
+void MainWindow::CheckChange(QTableWidget* tw, int arg1, QToolButton* btnDel)
+{
+    if (arg1 == 0) {
+        btnDel->setEnabled(true);
+        tw->setSelectionMode(QAbstractItemView::ExtendedSelection);
+        tw->setSelectionBehavior(QAbstractItemView::SelectItems);
+        disconnect(tw, SIGNAL(cellEntered(int, int)), this, SLOT(cellEnteredSlot(int, int)));
+        tw->setCurrentCell(tw->currentRow(), tw->currentColumn());
+    } else if (arg1 == 2) {
+        btnDel->setEnabled(false);
+        tw->setSelectionMode(QAbstractItemView::SingleSelection);
+        tw->setSelectionBehavior(QAbstractItemView::SelectRows);
+        connect(tw, SIGNAL(cellEntered(int, int)), this, SLOT(cellEnteredSlot(int, int)));
+        tw->setCurrentCell(tw->currentRow(), tw->currentColumn());
+    }
+
+    this->repaint();
+}
+
+void MainWindow::on_checkACPIAdd_stateChanged(int arg1)
+{
+    CheckChange(ui->table_acpi_add, arg1, ui->btnACPIAdd_Del);
+}
+
+void MainWindow::on_checkKernelAdd_stateChanged(int arg1)
+{
+    CheckChange(ui->table_kernel_add, arg1, ui->btnKernelAdd_Del);
 }

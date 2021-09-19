@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -104,20 +104,7 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="1" column="6">
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>789</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="0" colspan="7">
+            <item row="0" column="0" colspan="8">
              <widget class="QTableWidget" name="table_acpi_add">
               <property name="toolTip">
                <string notr="true">ACPI (Advanced Configuration and Power Interface) is an open standard to discover and configure computer hardware.
@@ -170,19 +157,19 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               <column/>
              </widget>
             </item>
-            <item row="1" column="3">
-             <widget class="QToolButton" name="btnDown">
+            <item row="1" column="0">
+             <widget class="QToolButton" name="btnACPIAdd_Add">
               <property name="font">
                <font>
                 <pointsize>13</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>Down</string>
+               <string>AddItem</string>
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -214,28 +201,6 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               </property>
               <property name="shortcut">
                <string>Del</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QToolButton" name="btnACPIAdd_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
               </property>
              </widget>
             </item>
@@ -280,6 +245,48 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="7">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>789</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="3">
+             <widget class="QToolButton" name="btnDown">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Down</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="6">
+             <widget class="QCheckBox" name="checkACPIAdd">
+              <property name="text">
+               <string>Move item</string>
               </property>
              </widget>
             </item>
@@ -2008,29 +2015,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_12">
-            <item row="1" column="0">
-             <widget class="QToolButton" name="btnKernelAdd_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
+            <item row="1" column="6">
              <spacer name="horizontalSpacer_7">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -2042,6 +2027,54 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="0" column="0" colspan="7">
+             <widget class="QTableWidget" name="table_kernel_add">
+              <property name="styleSheet">
+               <string notr="true">QTableWidget::item::selected     
+{
+    color:white;                       
+    background:rgb(0, 124, 221);               
+}
+</string>
+              </property>
+              <property name="rowCount">
+               <number>0</number>
+              </property>
+              <property name="columnCount">
+               <number>8</number>
+              </property>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QToolButton" name="btnKernelAdd_Down">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Down</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnKernelAdd_Del">
@@ -2068,30 +2101,26 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
              </widget>
             </item>
-            <item row="0" column="0" colspan="6">
-             <widget class="QTableWidget" name="table_kernel_add">
-              <property name="styleSheet">
-               <string notr="true">QTableWidget::item::selected     
-{
-    color:white;                       
-    background:rgb(0, 124, 221);               
-}
-</string>
+            <item row="1" column="0">
+             <widget class="QToolButton" name="btnKernelAdd_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
               </property>
-              <property name="rowCount">
-               <number>0</number>
+              <property name="text">
+               <string>AddItem</string>
               </property>
-              <property name="columnCount">
-               <number>8</number>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
              </widget>
             </item>
             <item row="1" column="2">
@@ -2107,28 +2136,6 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               <property name="icon">
                <iconset resource="qtocc.qrc">
                 <normaloff>:/icon/up.png</normaloff>:/icon/up.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="QToolButton" name="btnKernelAdd_Down">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Down</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2157,6 +2164,13 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                 <width>20</width>
                 <height>20</height>
                </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QCheckBox" name="checkKernelAdd">
+              <property name="text">
+               <string>Move item</string>
               </property>
              </widget>
             </item>

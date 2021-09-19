@@ -21,6 +21,7 @@
 #include <QTableWidget>
 #include <QTextBlock>
 #include <QTextCodec>
+#include <QToolButton>
 #include <QToolTip>
 #include <QTranslator>
 #include <QUndoStack>
@@ -275,6 +276,8 @@ public:
     void openDir(QString strDir);
     void currentCellChanged(QTableWidget* t, int previousRow, int previousColumn, int currentRow, int currentColumn);
     void MoveItem(QTableWidget* t, bool up);
+    void CheckChange(QTableWidget* tw, int arg1, QToolButton* btnDel);
+    void CellEnter(int row, QTableWidget* tw);
 public slots:
     void DisplayLevel();
     void ScanPolicy();
@@ -282,6 +285,8 @@ public slots:
     void ExposeSensitiveData();
     void on_actionFind_triggered();
     void on_btnNVRAMAdd_Add_clicked();
+
+    void cellEnteredSlot(int row, int column);
 
 protected:
     void dragEnterEvent(QDragEnterEvent* e) override;
@@ -776,6 +781,10 @@ private slots:
     void on_btnUp_clicked();
 
     void on_btnDown_clicked();
+
+    void on_checkACPIAdd_stateChanged(int arg1);
+
+    void on_checkKernelAdd_stateChanged(int arg1);
 
 private:
     bool LoadRightTable = false;
