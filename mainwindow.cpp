@@ -419,7 +419,7 @@ void MainWindow::initui_acpi()
     ui->table_acpi_add->setAlternatingRowColors(true); //底色交替显示
     ui->btnUp->setVisible(true);
     ui->btnDown->setVisible(true);
-    ui->checkACPIAdd->setVisible(false);
+    //ui->checkACPIAdd->setVisible(false);
 
     // ACPI-Delete
     id0 = new QTableWidgetItem(tr("TableSignature"));
@@ -796,7 +796,7 @@ void MainWindow::initui_kernel()
 
     ui->table_kernel_add->setAlternatingRowColors(true);
     //ui->table_kernel_add->horizontalHeader()->setStretchLastSection(true);
-    ui->checkKernelAdd->setVisible(false);
+    //ui->checkKernelAdd->setVisible(false);
 
     // Block
     ui->table_kernel_block->setColumnCount(6);
@@ -9216,7 +9216,7 @@ void MainWindow::tablePopMenu(QTableWidget* w,
     QAction* showtipAction,
     QMenu* popMenu)
 {
-    connect(w, &QTableWidget::customContextMenuRequested, [=](const QPoint& pos) {
+    connect(w, &QTableWidget::customContextMenuRequested, [=](const QPoint &pos) {
         Q_UNUSED(pos);
 
         QString name = w->objectName();
@@ -9248,6 +9248,20 @@ void MainWindow::tablePopMenu(QTableWidget* w,
             showtipAction->setVisible(false);
         else
             showtipAction->setVisible(true);
+
+        if (ui->listMain->currentRow() == 0 && ui->listSub->currentRow() == 0
+            && ui->checkACPIAdd->isChecked()) {
+            copyAction->setEnabled(false);
+            cutAction->setEnabled(false);
+            pasteAction->setEnabled(false);
+        }
+
+        if (ui->listMain->currentRow() == 3 && ui->listSub->currentRow() == 0
+            && ui->checkKernelAdd->isChecked()) {
+            copyAction->setEnabled(false);
+            cutAction->setEnabled(false);
+            pasteAction->setEnabled(false);
+        }
 
         popMenu->exec(QCursor::pos());
     });
