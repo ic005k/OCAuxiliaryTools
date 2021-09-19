@@ -786,6 +786,10 @@ private slots:
 
     void on_checkKernelAdd_stateChanged(int arg1);
 
+    void on_btnUp_UEFI_Drivers_clicked();
+
+    void on_btnDown_UEFI_Drivers_clicked();
+
 private:
     bool LoadRightTable = false;
     bool AddCboxFindItem = false;

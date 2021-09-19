@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7793,7 +7793,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>7</number>
+              <number>3</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -8526,7 +8526,7 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
                <string>Drivers</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_29">
-               <item row="0" column="0" colspan="4">
+               <item row="0" column="0" colspan="6">
                 <widget class="QTableWidget" name="table_uefi_drivers">
                  <property name="columnCount">
                   <number>3</number>
@@ -8584,6 +8584,50 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
                 </widget>
                </item>
                <item row="1" column="2">
+                <widget class="QToolButton" name="btnUp_UEFI_Drivers">
+                 <property name="font">
+                  <font>
+                   <pointsize>13</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Up</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="qtocc.qrc">
+                   <normaloff>:/icon/up.png</normaloff>:/icon/up.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3">
+                <widget class="QToolButton" name="btnDown_UEFI_Drivers">
+                 <property name="font">
+                  <font>
+                   <pointsize>13</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Down</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="qtocc.qrc">
+                   <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="4">
                 <widget class="QToolButton" name="btnOpenDriversDir">
                  <property name="font">
                   <font>
@@ -8605,7 +8649,7 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
                  </property>
                 </widget>
                </item>
-               <item row="1" column="3">
+               <item row="1" column="5">
                 <spacer name="horizontalSpacer_17">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>

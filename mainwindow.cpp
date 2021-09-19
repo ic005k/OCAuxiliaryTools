@@ -417,8 +417,9 @@ void MainWindow::initui_acpi()
     fieldList.append(tr("Comment"));
     ui->table_acpi_add->setHorizontalHeaderLabels(fieldList);
     ui->table_acpi_add->setAlternatingRowColors(true); //底色交替显示
-    ui->btnUp->setVisible(false);
-    ui->btnDown->setVisible(false);
+    ui->btnUp->setVisible(true);
+    ui->btnDown->setVisible(true);
+    ui->checkACPIAdd->setVisible(false);
 
     // ACPI-Delete
     id0 = new QTableWidgetItem(tr("TableSignature"));
@@ -795,6 +796,7 @@ void MainWindow::initui_kernel()
 
     ui->table_kernel_add->setAlternatingRowColors(true);
     //ui->table_kernel_add->horizontalHeader()->setStretchLastSection(true);
+    ui->checkKernelAdd->setVisible(false);
 
     // Block
     ui->table_kernel_block->setColumnCount(6);
@@ -10303,4 +10305,14 @@ void MainWindow::on_checkACPIAdd_stateChanged(int arg1)
 void MainWindow::on_checkKernelAdd_stateChanged(int arg1)
 {
     CheckChange(ui->table_kernel_add, arg1, ui->btnKernelAdd_Del);
+}
+
+void MainWindow::on_btnUp_UEFI_Drivers_clicked()
+{
+    MoveItem(ui->table_uefi_drivers, true);
+}
+
+void MainWindow::on_btnDown_UEFI_Drivers_clicked()
+{
+    MoveItem(ui->table_uefi_drivers, false);
 }
