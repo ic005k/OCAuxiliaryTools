@@ -6726,7 +6726,7 @@ QString MainWindow::getUrl(QVariantList list)
         if (fName.contains("Linux"))
             linuxUrl = map["browser_download_url"].toString();
 
-        if (fName.contains("10.12"))
+        if (fName.contains("below"))
             osx1012Url = map["browser_download_url"].toString();
     }
 
