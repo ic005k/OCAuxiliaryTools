@@ -790,6 +790,8 @@ private slots:
 
     void on_btnDown_UEFI_Drivers_clicked();
 
+    void on_actionLatest_Release_triggered();
+
 private:
     bool LoadRightTable = false;
     bool AddCboxFindItem = false;

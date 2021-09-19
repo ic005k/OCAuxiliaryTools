@@ -32,7 +32,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210919";
+QString CurVerison = "20210918";
 QString ocVer = "0.7.3";
 
 MainWindow::MainWindow(QWidget* parent)
@@ -419,7 +419,7 @@ void MainWindow::initui_acpi()
     ui->table_acpi_add->setAlternatingRowColors(true); //底色交替显示
     ui->btnUp->setVisible(true);
     ui->btnDown->setVisible(true);
-    //ui->checkACPIAdd->setVisible(false);
+    ui->checkACPIAdd->setVisible(false);
 
     // ACPI-Delete
     id0 = new QTableWidgetItem(tr("TableSignature"));
@@ -796,7 +796,7 @@ void MainWindow::initui_kernel()
 
     ui->table_kernel_add->setAlternatingRowColors(true);
     //ui->table_kernel_add->horizontalHeader()->setStretchLastSection(true);
-    //ui->checkKernelAdd->setVisible(false);
+    ui->checkKernelAdd->setVisible(false);
 
     // Block
     ui->table_kernel_block->setColumnCount(6);
@@ -6716,8 +6716,8 @@ QString MainWindow::getUrl(QVariantList list)
     for (int i = 0; i < list.count(); i++) {
         QVariantMap map = list[i].toMap();
         QString fName = map["name"].toString();
-
-        if (fName.contains("5.15.2"))
+        qDebug() << fName;
+        if (fName.contains("OCAT_Mac.dmg"))
             macUrl = map["browser_download_url"].toString();
 
         if (fName.contains("Win"))
@@ -6726,7 +6726,7 @@ QString MainWindow::getUrl(QVariantList list)
         if (fName.contains("Linux"))
             linuxUrl = map["browser_download_url"].toString();
 
-        if (fName.contains("5.9.9"))
+        if (fName.contains("10.12"))
             osx1012Url = map["browser_download_url"].toString();
     }
 
@@ -6784,7 +6784,7 @@ int MainWindow::parse_UpdateJSON(QString str)
                 QString warningStr = tr("New version detected!") + "\n" + tr("Version: ") + "V" + Verison + "\n" + tr("Published at: ") + UpdateTime + "\n" + tr("Release Notes: ") + "\n" + ReleaseNote;
                 int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
                 if (ret == 0) {
-                    Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
+                    //Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
                     QDesktopServices::openUrl(QUrl(Url));
                 }
             }
@@ -9216,7 +9216,7 @@ void MainWindow::tablePopMenu(QTableWidget* w,
     QAction* showtipAction,
     QMenu* popMenu)
 {
-    connect(w, &QTableWidget::customContextMenuRequested, [=](const QPoint &pos) {
+    connect(w, &QTableWidget::customContextMenuRequested, [=](const QPoint& pos) {
         Q_UNUSED(pos);
 
         QString name = w->objectName();
@@ -10329,4 +10329,10 @@ void MainWindow::on_btnUp_UEFI_Drivers_clicked()
 void MainWindow::on_btnDown_UEFI_Drivers_clicked()
 {
     MoveItem(ui->table_uefi_drivers, false);
+}
+
+void MainWindow::on_actionLatest_Release_triggered()
+{
+    QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfig/releases/latest"));
+    QDesktopServices::openUrl(url);
 }

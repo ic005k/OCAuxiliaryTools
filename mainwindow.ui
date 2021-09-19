@@ -9981,7 +9981,7 @@ Enable this option to be able to see all the boot options when having multiple d
      <x>0</x>
      <y>0</y>
      <width>1484</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -10032,6 +10032,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionOpenCanopyIcons"/>
     <addaction name="separator"/>
     <addaction name="btnCheckUpdate"/>
+    <addaction name="actionLatest_Release"/>
     <addaction name="actionBug_Report"/>
     <addaction name="actionDiscussion_Forum"/>
     <addaction name="actionAbout_2"/>
@@ -10251,6 +10252,11 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionDifferences">
    <property name="text">
     <string>Differences</string>
+   </property>
+  </action>
+  <action name="actionLatest_Release">
+   <property name="text">
+    <string>Latest Release</string>
    </property>
   </action>
  </widget>
