@@ -32,8 +32,8 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210918";
-QString ocVer = "0.7.3";
+QString CurVerison = "20210920";
+QString ocVer = "0.7.4";
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -2159,7 +2159,8 @@ void MainWindow::initui_UEFI()
     // Drivers
     QTableWidgetItem* id0;
 
-    //ui->table_uefi_drivers->setColumnWidth(0, 1000);
+    ui->table_uefi_drivers->setColumnCount(4);
+
     id0 = new QTableWidgetItem(tr("Path"));
     ui->table_uefi_drivers->setHorizontalHeaderItem(0, id0);
 
@@ -2168,6 +2169,9 @@ void MainWindow::initui_UEFI()
 
     id0 = new QTableWidgetItem(tr("Arguments"));
     ui->table_uefi_drivers->setHorizontalHeaderItem(2, id0);
+
+    id0 = new QTableWidgetItem(tr("Comment"));
+    ui->table_uefi_drivers->setHorizontalHeaderItem(3, id0);
 
     ui->table_uefi_drivers->setAlternatingRowColors(true);
     //ui->table_uefi_drivers->horizontalHeader()->setStretchLastSection(true);
@@ -2265,6 +2269,10 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
             newItem1 = new QTableWidgetItem(map3["Arguments"].toString());
             ui->table_uefi_drivers->setItem(i, 2, newItem1);
+
+            newItem1 = new QTableWidgetItem(map3["Comment"].toString());
+            ui->table_uefi_drivers->setItem(i, 3, newItem1);
+
         } else {
             QString strEnabled = "true";
             QTableWidgetItem* newItem1;
@@ -2280,6 +2288,9 @@ void MainWindow::ParserUEFI(QVariantMap map)
 
             newItem1 = new QTableWidgetItem("");
             ui->table_uefi_drivers->setItem(i, 2, newItem1);
+
+            newItem1 = new QTableWidgetItem("");
+            ui->table_uefi_drivers->setItem(i, 3, newItem1);
         }
     }
 
@@ -2940,6 +2951,8 @@ QVariantMap MainWindow::SaveUEFI()
         uefiAddSub["Enabled"] = getBool(ui->table_uefi_drivers, i, 1);
 
         uefiAddSub["Arguments"] = ui->table_uefi_drivers->item(i, 2)->text();
+
+        uefiAddSub["Comment"] = ui->table_uefi_drivers->item(i, 3)->text();
 
         arrayList.append(uefiAddSub); //最后一层
     }
@@ -6716,7 +6729,7 @@ QString MainWindow::getUrl(QVariantList list)
     for (int i = 0; i < list.count(); i++) {
         QVariantMap map = list[i].toMap();
         QString fName = map["name"].toString();
-        qDebug() << fName;
+        //qDebug() << map["browser_download_url"].toString();
         if (fName.contains("OCAT_Mac.dmg"))
             macUrl = map["browser_download_url"].toString();
 
