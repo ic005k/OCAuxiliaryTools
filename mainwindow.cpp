@@ -4964,11 +4964,46 @@ void MainWindow::mount_esp()
 #endif
 
 #ifdef Q_OS_MAC
+
     di = new QProcess;
     di->start("diskutil", QStringList() << "list");
     connect(di, SIGNAL(finished(int)), this, SLOT(readResultDiskInfo()));
 
 #endif
+}
+
+QString MainWindow::getDriverInfo(QString strDisk)
+{
+    processDriverInfo = new QProcess;
+    processDriverInfo->start("diskutil", QStringList() << "info" << strDisk);
+    processDriverInfo->waitForFinished();
+
+    QTextEdit* textEdit = new QTextEdit;
+    QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
+    QString result = gbkCodec->toUnicode(processDriverInfo->readAll());
+    textEdit->append(result);
+
+    QString str0, str1;
+    QStringList strList;
+    int count = textEdit->document()->lineCount();
+    for (int i = 0; i < count; i++) {
+        str0 = textEdit->document()->findBlockByNumber(i).text().trimmed();
+
+        if (str0.contains("Media Name")) {
+            strList = str0.split(":");
+
+            break;
+        }
+    }
+
+    if (strList.count() > 0)
+        str1 = strList.at(1);
+    else
+        str1 = "";
+
+    str1 = str1.trimmed();
+
+    return str1;
 }
 
 void MainWindow::readResultDiskInfo()
@@ -4989,6 +5024,9 @@ void MainWindow::readResultDiskInfo()
         QStringList strList = str0.simplified().split(" ");
         if (strList.count() == 6) {
             if (strList.at(1).toUpper() == "EFI") {
+                QString strDisk = strList.at(5).mid(0, 5);
+                str0 = str0 + "    " + getDriverInfo(strDisk);
+
                 dlgMESP->ui->listWidget->setIconSize(QSize(32, 32));
                 dlgMESP->ui->listWidget->addItem(new QListWidgetItem(QIcon(":/icon/esp.png"), str0));
             }

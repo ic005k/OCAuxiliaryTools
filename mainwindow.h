@@ -278,6 +278,8 @@ public:
     void MoveItem(QTableWidget* t, bool up);
     void CheckChange(QTableWidget* tw, int arg1, QToolButton* btnDel);
     void CellEnter(int row, QTableWidget* tw);
+    QString getDriverInfo(QString strDisk);
+
 public slots:
     void DisplayLevel();
     void ScanPolicy();
@@ -852,6 +854,7 @@ private:
     QProcess* si;
 
     QProcess* di;
+    QProcess* processDriverInfo;
 
     QProcess* chkdata;
 
