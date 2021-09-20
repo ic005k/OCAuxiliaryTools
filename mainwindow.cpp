@@ -3108,14 +3108,17 @@ void MainWindow::on_table_acpi_del_cellClicked(int row, int column)
 
 void MainWindow::setStatusBarText(QTableWidget* table)
 {
+    QString text0 = table->item(table->currentRow(), 0)->text();
     QString text = table->currentItem()->text();
     QString str;
     if (getTableFieldDataType(table) == "Data")
         str = QString::number(text.count() / 2) + " Bytes  " + text;
     else
         str = text;
-
-    ui->statusbar->showMessage(str);
+    if (table->currentColumn() != 0)
+        ui->statusbar->showMessage(text0 + " -> " + str);
+    else
+        ui->statusbar->showMessage(str);
 }
 
 void MainWindow::on_table_acpi_patch_cellClicked(int row, int column)
@@ -9324,13 +9327,12 @@ void MainWindow::init_CopyPasteLine()
     listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
     for (int i = 0; i < listOfTableWidget.count(); i++) {
         QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
-
-        //w->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); //自适应宽度
         for (int y = 0; y < w->columnCount(); y++) {
             QString item = w->horizontalHeaderItem(y)->text();
             if (item != tr("Enabled") && item != tr("Arch") && item != tr("All") && item != tr("Type") && item != tr("TextMode") && item != tr("Auxiliary") && item != tr("RealPath") && item != tr("Class"))
                 w->horizontalHeader()->setSectionResizeMode(y, QHeaderView::ResizeToContents);
         }
+        //w->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
 
         w->setContextMenuPolicy(Qt::CustomContextMenu);
         w->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
