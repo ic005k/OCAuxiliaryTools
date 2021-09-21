@@ -13,6 +13,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
     Init();
     tempDir = QDir::homePath() + "/tempocat/";
     mw_one->deleteDirfile(tempDir);
+    ui->label->setVisible(false);
 }
 
 AutoUpdateDialog::~AutoUpdateDialog()
@@ -77,20 +78,20 @@ void AutoUpdateDialog::startUpdate()
 
     qApp->exit();
 
-    QProcess* p = new QProcess;
+    QProcess *p = new QProcess;
     QString strPath;
     if (mw_one->mac) {
         strPath = appInfo.path().replace("OCAuxiliaryTools.app/Contents", "");
         p->start("unzip", QStringList() << "-o" << str << "-d" << strPath);
+        p->waitForFinished();
     }
     if (mw_one->win) {
         strPath = appInfo.filePath().replace("OCAT-Win64", "");
 
-        p->start(strPath + "/unzip", QStringList() << "-o" << str << "-d" << strPath);
+        p->start(appInfo.filePath() + "/unzip.exe", QStringList() << "-o" << str << "-d" << strPath);
     }
-    p->waitForFinished();
 
-    QProcess* p1 = new QProcess;
+    QProcess *p1 = new QProcess;
     QStringList arguments;
     QString fn = "";
     arguments << fn;
@@ -98,7 +99,7 @@ void AutoUpdateDialog::startUpdate()
         p1->start(strPath + "/OCAuxiliaryTools.app", arguments);
     }
     if (mw_one->win) {
-        p1->start(appInfo.filePath() + "/OCAuxiliaryTools.exe", arguments);
+        //p1->start(appInfo.filePath() + "/OCAuxiliaryTools.exe", arguments);
     }
     p1->waitForStarted();
 }

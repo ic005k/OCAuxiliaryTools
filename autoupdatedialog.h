@@ -22,6 +22,7 @@ class AutoUpdateDialog : public QDialog {
 public:
     explicit AutoUpdateDialog(QWidget* parent = nullptr);
     ~AutoUpdateDialog();
+    Ui::AutoUpdateDialog *ui;
 
     QString tempDir;
     QString filename;
@@ -47,7 +48,6 @@ private slots:
     void on_btnStartUpdate_clicked();
 
 private:
-    Ui::AutoUpdateDialog* ui;
 };
 
 #endif // AUTOUPDATEDIALOG_H

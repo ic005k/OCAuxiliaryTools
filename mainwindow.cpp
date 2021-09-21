@@ -5,6 +5,7 @@
 #include "plistserializer.h"
 
 #include "ui_aboutdialog.h"
+#include "ui_autoupdatedialog.h"
 #include "ui_mainwindow.h"
 
 #include "Plist.hpp"
@@ -6852,7 +6853,9 @@ int MainWindow::parse_UpdateJSON(QString str)
                     } else if (win) {
                         dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags()
                                                       | Qt::WindowStaysOnTopHint);
+
                         dlgAutoUpdate->show();
+                        dlgAutoUpdate->ui->label->setVisible(true);
                         dlgAutoUpdate->strUrl = "https://raw.fastgit.org/ic005k/"
                                                 "QtOpenCoreConfigDatabase/main/OCAT-Win64.zip";
                         dlgAutoUpdate->startDownload();
