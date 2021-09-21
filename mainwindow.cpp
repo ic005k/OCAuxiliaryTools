@@ -6855,7 +6855,7 @@ int MainWindow::parse_UpdateJSON(QString str)
                                                       | Qt::WindowStaysOnTopHint);
 
                         dlgAutoUpdate->show();
-                        dlgAutoUpdate->ui->label->setVisible(true);
+
                         dlgAutoUpdate->strUrl = "https://raw.fastgit.org/ic005k/"
                                                 "QtOpenCoreConfigDatabase/main/OCAT-Win64.zip";
                         dlgAutoUpdate->startDownload();

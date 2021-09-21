@@ -45,6 +45,8 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total, qint64 all_t
     if (recv_total == all_total) {
         ui->btnStartUpdate->setEnabled(true);
         this->repaint();
+        if (mw_one->win)
+            ui->label->setVisible(true);
     }
 
     setWindowTitle(GetFileSize(recv_total) + " -> " + GetFileSize(all_total));
