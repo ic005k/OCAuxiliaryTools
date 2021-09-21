@@ -142,7 +142,7 @@ QString AutoUpdateDialog::GetFileSize(qint64 size)
                   << " YB";
     }
     int i = qFloor(qLn(size) / qLn(1024));
-    return QString::number(size * 1.0 / qPow(1024, qFloor(i)),
+    return QString::number(size * 1.0 / qPow(1000, qFloor(i)),
                'f', (i > 1) ? 2 : 0)
         + SizeNames.at(i);
 }
