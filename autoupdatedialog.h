@@ -10,6 +10,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QProcess>
+#include <QtMath>
 
 namespace Ui {
 class AutoUpdateDialog;
@@ -36,6 +37,8 @@ public:
     void startUpdate();
     void startDownload();
     QString strUrl;
+
+    QString GetFileSize(qint64 size);
 
 protected:
     void closeEvent(QCloseEvent* event);

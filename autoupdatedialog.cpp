@@ -46,7 +46,7 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total, qint64 all_t
         this->repaint();
     }
 
-    setWindowTitle(QString::number(recv_total) + "->" + QString::number(all_total));
+    setWindowTitle(GetFileSize(recv_total) + " -> " + GetFileSize(all_total));
 }
 void AutoUpdateDialog::doProcessError(QNetworkReply::NetworkError code)
 {
@@ -122,4 +122,27 @@ void AutoUpdateDialog::closeEvent(QCloseEvent* event)
 {
     Q_UNUSED(event);
     reply->close();
+}
+
+QString AutoUpdateDialog::GetFileSize(qint64 size)
+{
+    if (!size) {
+        return "0 Bytes";
+    }
+    static QStringList SizeNames;
+    if (SizeNames.empty()) {
+        SizeNames << " Bytes"
+                  << " KB"
+                  << " MB"
+                  << " GB"
+                  << " TB"
+                  << " PB"
+                  << " EB"
+                  << " ZB"
+                  << " YB";
+    }
+    int i = qFloor(qLn(size) / qLn(1024));
+    return QString::number(size * 1.0 / qPow(1024, qFloor(i)),
+               'f', (i > 1) ? 2 : 0)
+        + SizeNames.at(i);
 }
