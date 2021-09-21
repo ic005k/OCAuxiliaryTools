@@ -88,7 +88,7 @@ void AutoUpdateDialog::startUpdate()
         p->waitForFinished();
     }
     if (mw_one->win) {
-        strPath = appInfo.filePath().replace("OCAT-Win64", "");
+        strPath = appInfo.filePath(); //.replace("OCAT-Win64", "");
 
         p->start(appInfo.filePath() + "/unzip.exe", QStringList() << "-o" << str << "-d" << strPath);
     }
