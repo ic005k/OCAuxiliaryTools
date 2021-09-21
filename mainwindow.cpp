@@ -10395,9 +10395,5 @@ void MainWindow::on_btnDown_UEFI_Drivers_clicked()
 void MainWindow::on_actionLatest_Release_triggered()
 {
     QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfig/releases/latest"));
-    //QDesktopServices::openUrl(url);
-
-    dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
-    dlgAutoUpdate->show();
-    dlgAutoUpdate->startDownload();
+    QDesktopServices::openUrl(url);
 }

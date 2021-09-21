@@ -41,13 +41,9 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total, qint64 all_t
 {
     ui->progressBar->setMaximum(all_total);
     ui->progressBar->setValue(recv_total);
-    QStringList list = strUrl.split("/");
-    QString filename = list.at(list.length() - 1);
     if (recv_total == all_total) {
-        //QString data = "Download successful--" + filename;
-        ui->pushButton_2->setEnabled(true);
+        ui->btnStartUpdate->setEnabled(true);
         this->repaint();
-        //startUpdate();
     }
 
     setWindowTitle(QString::number(recv_total) + "->" + QString::number(all_total));
@@ -57,32 +53,15 @@ void AutoUpdateDialog::doProcessError(QNetworkReply::NetworkError code)
     qDebug() << code;
 }
 
-void AutoUpdateDialog::on_pushButton_clicked()
+void AutoUpdateDialog::on_btnStartUpdate_clicked()
 {
-    startDownload();
-}
-
-void AutoUpdateDialog::on_pushButton_2_clicked()
-{
-    ui->pushButton_2->setVisible(false);
+    ui->btnStartUpdate->setEnabled(false);
     startUpdate();
-}
-
-void AutoUpdateDialog::readResult()
-{
-    QFileInfo appInfo(qApp->applicationDirPath());
-    QProcess* p1 = new QProcess;
-    p1->setEnvironment(p1->environment());
-    p1->start(appInfo.path() + "/OCAuxiliaryTools.app");
-}
-
-void AutoUpdateDialog::on_pushButton_3_clicked()
-{
 }
 
 void AutoUpdateDialog::startUpdate()
 {
-    ui->pushButton_2->setEnabled(false);
+    ui->btnStartUpdate->setEnabled(false);
     this->repaint();
 
     QFileInfo appInfo(qApp->applicationDirPath());
@@ -96,17 +75,20 @@ void AutoUpdateDialog::startUpdate()
     QProcess* p = new QProcess;
     QString strPath = appInfo.path().replace("OCAuxiliaryTools.app/Contents", "");
     p->start("unzip", QStringList() << "-o" << str << "-d" << strPath);
-    //connect(p, SIGNAL(finished(int)), this, SLOT(readResult()));
     p->waitForFinished();
 
     QProcess* p1 = new QProcess;
-    p1->start(strPath + "/OCAuxiliaryTools.app");
+    QStringList arguments;
+    QString fn = "";
+    arguments << fn;
+    p1->start(strPath + "/OCAuxiliaryTools.app", arguments);
     p1->waitForStarted();
 }
 void AutoUpdateDialog::startDownload()
 {
-    ui->pushButton_2->setEnabled(false);
+    ui->btnStartUpdate->setEnabled(false);
     this->repaint();
+
     //中国香港：https://raw.fastgit.org/ic005k/QtOpenCoreConfigDatabase/main/OCAuxiliaryTools.app.zip
     //韩国首尔：https://ghproxy.com/https://raw.githubusercontent.com/ic005k/QtOpenCoreConfigDatabase/main/OCAuxiliaryTools.app.zip
 

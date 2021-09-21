@@ -40,13 +40,8 @@ public:
 protected:
     void closeEvent(QCloseEvent* event);
 private slots:
-    void on_pushButton_clicked();
 
-    void on_pushButton_2_clicked();
-
-    void on_pushButton_3_clicked();
-
-    void readResult();
+    void on_btnStartUpdate_clicked();
 
 private:
     Ui::AutoUpdateDialog* ui;
