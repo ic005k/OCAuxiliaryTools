@@ -33,7 +33,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210920";
+QString CurVerison = "20210922";
 QString ocVer = "0.7.4";
 
 MainWindow::MainWindow(QWidget* parent)
@@ -6852,7 +6852,7 @@ int MainWindow::parse_UpdateJSON(QString str)
                         dlgAutoUpdate->startDownload();
                     } else if (win) {
                         dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags()
-                                                      | Qt::WindowStaysOnTopHint);
+                            | Qt::WindowStaysOnTopHint);
 
                         dlgAutoUpdate->show();
 
