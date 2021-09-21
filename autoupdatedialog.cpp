@@ -65,23 +65,41 @@ void AutoUpdateDialog::startUpdate()
     this->repaint();
 
     QFileInfo appInfo(qApp->applicationDirPath());
-
-    QString str = tempDir + "OCAuxiliaryTools.app.zip";
+    QString str;
+    if (mw_one->mac) {
+        str = tempDir + "OCAuxiliaryTools.app.zip";
+    }
+    if (mw_one->win) {
+        str = tempDir + "OCAT-Win64.zip";
+    }
     QDir dir;
     dir.setCurrent(tempDir);
 
     qApp->exit();
 
     QProcess* p = new QProcess;
-    QString strPath = appInfo.path().replace("OCAuxiliaryTools.app/Contents", "");
-    p->start("unzip", QStringList() << "-o" << str << "-d" << strPath);
+    QString strPath;
+    if (mw_one->mac) {
+        strPath = appInfo.path().replace("OCAuxiliaryTools.app/Contents", "");
+        p->start("unzip", QStringList() << "-o" << str << "-d" << strPath);
+    }
+    if (mw_one->win) {
+        strPath = appInfo.filePath().replace("OCAT-Win64", "");
+
+        p->start(strPath + "/unzip", QStringList() << "-o" << str << "-d" << strPath);
+    }
     p->waitForFinished();
 
     QProcess* p1 = new QProcess;
     QStringList arguments;
     QString fn = "";
     arguments << fn;
-    p1->start(strPath + "/OCAuxiliaryTools.app", arguments);
+    if (mw_one->mac) {
+        p1->start(strPath + "/OCAuxiliaryTools.app", arguments);
+    }
+    if (mw_one->win) {
+        p1->start(appInfo.filePath() + "/OCAuxiliaryTools.exe", arguments);
+    }
     p1->waitForStarted();
 }
 void AutoUpdateDialog::startDownload()
@@ -89,11 +107,6 @@ void AutoUpdateDialog::startDownload()
     ui->btnStartUpdate->setEnabled(false);
     this->repaint();
 
-    //中国香港：https://raw.fastgit.org/ic005k/QtOpenCoreConfigDatabase/main/OCAuxiliaryTools.app.zip
-    //韩国首尔：https://ghproxy.com/https://raw.githubusercontent.com/ic005k/QtOpenCoreConfigDatabase/main/OCAuxiliaryTools.app.zip
-
-    if (mw_one->mac)
-        strUrl = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/QtOpenCoreConfigDatabase/main/OCAuxiliaryTools.app.zip";
     QNetworkRequest request;
     request.setUrl(QUrl(strUrl));
 

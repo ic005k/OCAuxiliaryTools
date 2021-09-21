@@ -6845,6 +6845,16 @@ int MainWindow::parse_UpdateJSON(QString str)
                     if (mac) {
                         dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
                         dlgAutoUpdate->show();
+                        dlgAutoUpdate->strUrl
+                            = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
+                              "QtOpenCoreConfigDatabase/main/OCAuxiliaryTools.app.zip";
+                        dlgAutoUpdate->startDownload();
+                    } else if (win) {
+                        dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags()
+                                                      | Qt::WindowStaysOnTopHint);
+                        dlgAutoUpdate->show();
+                        dlgAutoUpdate->strUrl = "https://raw.fastgit.org/ic005k/"
+                                                "QtOpenCoreConfigDatabase/main/OCAT-Win64.zip";
                         dlgAutoUpdate->startDownload();
                     } else
                         QDesktopServices::openUrl(QUrl(Url));
