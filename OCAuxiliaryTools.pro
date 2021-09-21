@@ -37,6 +37,7 @@ SOURCES += \
     Plist.cpp \
     PlistDate.cpp \
     aboutdialog.cpp \
+    autoupdatedialog.cpp \
     commands.cpp \
     dlgMountESP.cpp \
     dlgOCValidate.cpp \
@@ -56,6 +57,7 @@ HEADERS += \
     Plist.hpp \
     PlistDate.hpp \
     aboutdialog.h \
+    autoupdatedialog.h \
     base64.hpp \
     commands.h \
     dlgMountESP.h \
@@ -73,6 +75,7 @@ HEADERS += \
 
 FORMS += \
     aboutdialog.ui \
+    autoupdatedialog.ui \
     dlgMountESP.ui \
     dlgOCValidate.ui \
     dlgParameters.ui \

@@ -32,7 +32,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210921";
+QString CurVerison = "20210920";
 QString ocVer = "0.7.4";
 
 MainWindow::MainWindow(QWidget* parent)
@@ -83,6 +83,7 @@ MainWindow::MainWindow(QWidget* parent)
     myDatabase = new dlgDatabase(this);
     dlgOCV = new dlgOCValidate(this);
     dlgPar = new dlgParameters(this);
+    dlgAutoUpdate = new AutoUpdateDialog(this);
 
     QDir dir;
     if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) { }
@@ -6828,6 +6829,7 @@ int MainWindow::parse_UpdateJSON(QString str)
         QString Verison = root_Obj.value("tag_name").toString();
 
         this->setFocus();
+
         if (Verison > CurVerison) {
 
             ui->btnCheckUpdate->setIcon(QIcon(":/icon/newver.png"));
@@ -6839,7 +6841,13 @@ int MainWindow::parse_UpdateJSON(QString str)
                 int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
                 if (ret == 0) {
                     //Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
-                    QDesktopServices::openUrl(QUrl(Url));
+
+                    if (mac) {
+                        dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
+                        dlgAutoUpdate->show();
+                        dlgAutoUpdate->startDownload();
+                    } else
+                        QDesktopServices::openUrl(QUrl(Url));
                 }
             }
 
@@ -10387,5 +10395,9 @@ void MainWindow::on_btnDown_UEFI_Drivers_clicked()
 void MainWindow::on_actionLatest_Release_triggered()
 {
     QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfig/releases/latest"));
-    QDesktopServices::openUrl(url);
+    //QDesktopServices::openUrl(url);
+
+    dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
+    dlgAutoUpdate->show();
+    dlgAutoUpdate->startDownload();
 }

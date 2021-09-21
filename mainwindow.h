@@ -38,6 +38,7 @@
 #include <QJsonObject>
 
 #include "aboutdialog.h"
+#include "autoupdatedialog.h"
 #include "dlgMountESP.h"
 #include "dlgOCValidate.h"
 #include "dlgParameters.h"
@@ -105,6 +106,7 @@ public:
     QVariantMap setValue(QVariantMap map, QWidget* tab);
     dlgOCValidate* dlgOCV;
     dlgParameters* dlgPar;
+    AutoUpdateDialog* dlgAutoUpdate;
 
     bool lineEditEnter = false;
     bool RefreshAllDatabase = false;
