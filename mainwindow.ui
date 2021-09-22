@@ -10033,6 +10033,8 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="separator"/>
     <addaction name="btnCheckUpdate"/>
     <addaction name="actionLatest_Release"/>
+    <addaction name="actionOnline_Download_Updates"/>
+    <addaction name="separator"/>
     <addaction name="actionBug_Report"/>
     <addaction name="actionDiscussion_Forum"/>
     <addaction name="actionAbout_2"/>
@@ -10257,6 +10259,11 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionLatest_Release">
    <property name="text">
     <string>Latest Release</string>
+   </property>
+  </action>
+  <action name="actionOnline_Download_Updates">
+   <property name="text">
+    <string>Online Download Updates</string>
    </property>
   </action>
  </widget>

@@ -796,6 +796,8 @@ private slots:
 
     void on_actionLatest_Release_triggered();
 
+    void on_actionOnline_Download_Updates_triggered();
+
 private:
     bool LoadRightTable = false;
     bool AddCboxFindItem = false;

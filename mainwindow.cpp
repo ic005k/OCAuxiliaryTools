@@ -6074,7 +6074,10 @@ void MainWindow::init_HelpMenu()
     ui->btnCheckUpdate->setIcon(QIcon(":/icon/cu.png"));
     ui->toolBar->addAction(ui->btnCheckUpdate);
 
-    //ui->toolBar->addSeparator();
+    if (mac || win)
+        ui->actionOnline_Download_Updates->setEnabled(true);
+    else
+        ui->actionOnline_Download_Updates->setEnabled(false);
 
     //文档
     if (mac || osx1012)
@@ -10409,4 +10412,25 @@ void MainWindow::on_actionLatest_Release_triggered()
 {
     QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfig/releases/latest"));
     QDesktopServices::openUrl(url);
+}
+
+void MainWindow::on_actionOnline_Download_Updates_triggered()
+{
+    if (mac) {
+        dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
+        dlgAutoUpdate->show();
+        dlgAutoUpdate->strUrl
+            = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
+              "QtOpenCoreConfigDatabase/main/OCAuxiliaryTools.app.zip";
+        dlgAutoUpdate->startDownload();
+    } else if (win) {
+        dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags()
+            | Qt::WindowStaysOnTopHint);
+
+        dlgAutoUpdate->show();
+
+        dlgAutoUpdate->strUrl = "https://raw.fastgit.org/ic005k/"
+                                "QtOpenCoreConfigDatabase/main/OCAT-Win64.zip";
+        dlgAutoUpdate->startDownload();
+    }
 }
