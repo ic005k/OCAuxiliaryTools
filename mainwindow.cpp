@@ -33,7 +33,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210922";
+QString CurVerison = "20210923";
 QString ocVer = "0.7.4";
 
 MainWindow::MainWindow(QWidget* parent)
@@ -4167,6 +4167,8 @@ void MainWindow::addEFIDrivers(QStringList FileName)
         ui->table_uefi_drivers->setItem(row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
         init_enabled_data(ui->table_uefi_drivers, row - 1, 1, "true");
         ui->table_uefi_drivers->setItem(row - 1, 2, new QTableWidgetItem(""));
+
+        ui->table_uefi_drivers->setItem(row - 1, 3, new QTableWidgetItem(""));
 
         ui->table_uefi_drivers->setFocus();
         ui->table_uefi_drivers->setCurrentCell(row - 1, 0);
