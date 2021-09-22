@@ -29,9 +29,9 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 
 * [0.7.2](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210828)
 
-* [0.7.1] {https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210715)
+* [0.7.1](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210715)
 
-* [0.7.0]  (https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210608)
+* [0.7.0](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210608)
 
 ## The feature is shown in the screenshot below above
 
