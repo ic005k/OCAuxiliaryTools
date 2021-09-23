@@ -70,6 +70,7 @@ MainWindow::MainWindow(QWidget* parent)
 #ifdef Q_OS_LINUX
     ui->actionMountEsp->setEnabled(false);
     ui->actionUpgrade_Database->setEnabled(false);
+    ui->actionOnline_Download_Updates->setEnabled(false);
     linuxOS = true;
 #endif
 
