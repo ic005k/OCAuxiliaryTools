@@ -6,22 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>510</width>
-    <height>161</height>
+    <width>508</width>
+    <height>150</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="2" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>The upgrade will start automatically after closing, 
- please turn it on again later.</string>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="0">
     <widget class="QProgressBar" name="progressBar">
      <property name="value">
@@ -29,10 +21,25 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>The upgrade will start automatically after closing, 
+ please turn it on again later.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
     <widget class="QPushButton" name="btnStartUpdate">
      <property name="text">
       <string>Close and start upgrade</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="btnUpdateDatabase">
+     <property name="text">
+      <string>Complete the database update</string>
      </property>
     </widget>
    </item>

@@ -5,7 +5,6 @@
 #include "plistserializer.h"
 
 #include "ui_aboutdialog.h"
-#include "ui_autoupdatedialog.h"
 #include "ui_mainwindow.h"
 
 #include "Plist.hpp"
@@ -70,7 +69,7 @@ MainWindow::MainWindow(QWidget* parent)
 
 #ifdef Q_OS_LINUX
     ui->actionMountEsp->setEnabled(false);
-
+    ui->actionUpgrade_Database->setEnabled(false);
     linuxOS = true;
 #endif
 
@@ -6851,7 +6850,7 @@ int MainWindow::parse_UpdateJSON(QString str)
                     if (mac || win) {
                         dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
                         dlgAutoUpdate->show();
-                        dlgAutoUpdate->startDownload();
+                        dlgAutoUpdate->startDownload(false);
                     } else
                         QDesktopServices::openUrl(QUrl(Url));
                 }
@@ -10406,14 +10405,21 @@ void MainWindow::on_actionLatest_Release_triggered()
 
 void MainWindow::on_actionOnline_Download_Updates_triggered()
 {
-    if (mac) {
+    if (mac || win) {
         dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
         dlgAutoUpdate->show();
-        dlgAutoUpdate->startDownload();
-    } else if (win) {
-        dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags()
-            | Qt::WindowStaysOnTopHint);
+        dlgAutoUpdate->startDownload(false);
+    }
+}
+
+void MainWindow::on_actionUpgrade_Database_triggered()
+{
+    if (dlgAutoUpdate->isVisible())
+        return;
+
+    if (mac || win || osx1012) {
+        dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
         dlgAutoUpdate->show();
-        dlgAutoUpdate->startDownload();
+        dlgAutoUpdate->startDownload(true);
     }
 }

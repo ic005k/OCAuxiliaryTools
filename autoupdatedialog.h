@@ -36,10 +36,11 @@ public:
     void doProcessError(QNetworkReply::NetworkError code);
 
     void startUpdate();
-    void startDownload();
+    void startDownload(bool Database);
     QString strUrl;
     QString strWinUrl;
     QString strMacUrl;
+    QString strDatabaseUrl;
 
     QString GetFileSize(qint64 size);
 
@@ -48,6 +49,8 @@ protected:
 private slots:
 
     void on_btnStartUpdate_clicked();
+
+    void on_btnUpdateDatabase_clicked();
 
 private:
 };

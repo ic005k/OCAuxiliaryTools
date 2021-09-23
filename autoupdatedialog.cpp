@@ -1,6 +1,7 @@
 #include "autoupdatedialog.h"
 #include "mainwindow.h"
 #include "ui_autoupdatedialog.h"
+
 extern MainWindow* mw_one;
 
 AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
@@ -29,6 +30,9 @@ void AutoUpdateDialog::Init()
     strMacUrl = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
                 "QtOpenCoreConfigDatabase/main/Contents.zip";
 
+    strDatabaseUrl = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
+                     "QtOpenCoreConfigDatabase/main/Database.zip";
+
     manager = new QNetworkAccessManager(this);
     myfile = new QFile(this);
 }
@@ -50,12 +54,13 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total, qint64 all_t
     ui->progressBar->setValue(recv_total);
     if (recv_total == all_total) {
         ui->btnStartUpdate->setEnabled(true);
+        ui->btnUpdateDatabase->setEnabled(true);
         this->repaint();
         if (mw_one->win)
             ui->label->setVisible(true);
     }
 
-    setWindowTitle(GetFileSize(recv_total) + " -> " + GetFileSize(all_total));
+    setWindowTitle(tr("Download Progress") + " : " + GetFileSize(recv_total) + " -> " + GetFileSize(all_total));
 }
 void AutoUpdateDialog::doProcessError(QNetworkReply::NetworkError code)
 {
@@ -95,7 +100,6 @@ void AutoUpdateDialog::startUpdate()
     }
     if (mw_one->win) {
         strPath = appInfo.filePath();
-
         p->start(appInfo.filePath() + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
     }
 
@@ -112,15 +116,24 @@ void AutoUpdateDialog::startUpdate()
     p1->waitForStarted();
 }
 
-void AutoUpdateDialog::startDownload()
+void AutoUpdateDialog::startDownload(bool Database)
 {
     ui->btnStartUpdate->setEnabled(false);
+    ui->btnUpdateDatabase->setEnabled(false);
     this->repaint();
 
-    if (mw_one->mac)
-        strUrl = strMacUrl;
-    if (mw_one->win)
-        strUrl = strWinUrl;
+    if (!Database) {
+        if (mw_one->mac)
+            strUrl = strMacUrl;
+        if (mw_one->win)
+            strUrl = strWinUrl;
+        ui->btnStartUpdate->setVisible(true);
+        ui->btnUpdateDatabase->setVisible(false);
+    } else {
+        strUrl = strDatabaseUrl;
+        ui->btnStartUpdate->setVisible(false);
+        ui->btnUpdateDatabase->setVisible(true);
+    }
 
     QNetworkRequest request;
     request.setUrl(QUrl(strUrl));
@@ -173,4 +186,27 @@ QString AutoUpdateDialog::GetFileSize(qint64 size)
     return QString::number(size * 1.0 / qPow(1000, qFloor(i)),
                'f', (i > 1) ? 2 : 0)
         + SizeNames.at(i);
+}
+
+void AutoUpdateDialog::on_btnUpdateDatabase_clicked()
+{
+    QFileInfo appInfo(qApp->applicationDirPath());
+    QString strZip;
+    strZip = tempDir + "Database.zip";
+
+    QDir dir;
+    dir.setCurrent(tempDir);
+
+    QProcess* p = new QProcess;
+    QString strPath;
+    strPath = appInfo.filePath();
+    if (mw_one->mac || mw_one->osx1012) {
+        p->start("unzip", QStringList() << "-o" << strZip << "-d" << strPath);
+        //p->waitForFinished();
+    }
+    if (mw_one->win) {
+        p->start(strPath + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
+    }
+
+    close();
 }

@@ -45,6 +45,7 @@
 #include "dlgdatabase.h"
 #include "recentfiles.h"
 #include "tooltip.h"
+#include "ui_autoupdatedialog.h"
 #include "ui_dlgMountESP.h"
 #include "ui_dlgParameters.h"
 
@@ -112,6 +113,7 @@ public:
     bool RefreshAllDatabase = false;
 
     bool mac = false;
+    bool osx1012 = false;
     bool win = false;
     bool linuxOS = false;
 
@@ -798,6 +800,8 @@ private slots:
 
     void on_actionOnline_Download_Updates_triggered();
 
+    void on_actionUpgrade_Database_triggered();
+
 private:
     bool LoadRightTable = false;
     bool AddCboxFindItem = false;
@@ -883,8 +887,6 @@ private:
     void init_hardware_info();
 
     bool closeSave = false;
-
-    bool osx1012 = false;
 
     void clear_temp_data();
 

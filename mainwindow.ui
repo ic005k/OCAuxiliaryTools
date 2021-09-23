@@ -10006,8 +10006,10 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="separator"/>
     <addaction name="actionUpgrade_OC"/>
     <addaction name="actionGenerateEFI"/>
+    <addaction name="separator"/>
     <addaction name="actionDatabase"/>
     <addaction name="actionOpen_database_directory"/>
+    <addaction name="actionUpgrade_Database"/>
     <addaction name="separator"/>
     <addaction name="btnExportMaster"/>
     <addaction name="btnImportMaster"/>
@@ -10263,7 +10265,12 @@ Enable this option to be able to see all the boot options when having multiple d
   </action>
   <action name="actionOnline_Download_Updates">
    <property name="text">
-    <string>Online Download Updates</string>
+    <string>Download Upgrade Packages</string>
+   </property>
+  </action>
+  <action name="actionUpgrade_Database">
+   <property name="text">
+    <string>Upgrade Database</string>
    </property>
   </action>
  </widget>
