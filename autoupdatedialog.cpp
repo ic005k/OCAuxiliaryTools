@@ -23,6 +23,12 @@ AutoUpdateDialog::~AutoUpdateDialog()
 
 void AutoUpdateDialog::Init()
 {
+    strWinUrl = "https://raw.fastgit.org/ic005k/"
+                "QtOpenCoreConfigDatabase/main/win.zip";
+
+    strMacUrl = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
+                "QtOpenCoreConfigDatabase/main/Contents.zip";
+
     manager = new QNetworkAccessManager(this);
     myfile = new QFile(this);
 }
@@ -68,37 +74,37 @@ void AutoUpdateDialog::startUpdate()
     this->repaint();
 
     QFileInfo appInfo(qApp->applicationDirPath());
-    QString str;
+    QString strZip;
     if (mw_one->mac) {
-        str = tempDir + "OCAuxiliaryTools.app.zip";
+        strZip = tempDir + "Contents.zip";
     }
     if (mw_one->win) {
-        str = tempDir + "OCAT-Win64.zip";
+        strZip = tempDir + "OCAT-Win64.zip";
     }
     QDir dir;
     dir.setCurrent(tempDir);
 
     qApp->exit();
 
-    QProcess *p = new QProcess;
+    QProcess* p = new QProcess;
     QString strPath;
     if (mw_one->mac) {
-        strPath = appInfo.path().replace("OCAuxiliaryTools.app/Contents", "");
-        p->start("unzip", QStringList() << "-o" << str << "-d" << strPath);
+        strPath = appInfo.path().replace("Contents", "");
+        p->start("unzip", QStringList() << "-o" << strZip << "-d" << strPath);
         p->waitForFinished();
     }
     if (mw_one->win) {
-        strPath = appInfo.filePath(); //.replace("OCAT-Win64", "");
+        strPath = appInfo.filePath();
 
-        p->start(appInfo.filePath() + "/unzip.exe", QStringList() << "-o" << str << "-d" << strPath);
+        p->start(appInfo.filePath() + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
     }
 
-    QProcess *p1 = new QProcess;
+    QProcess* p1 = new QProcess;
     QStringList arguments;
     QString fn = "";
     arguments << fn;
     if (mw_one->mac) {
-        p1->start(strPath + "/OCAuxiliaryTools.app", arguments);
+        p1->start(strPath.mid(0, strPath.length() - 1), arguments);
     }
     if (mw_one->win) {
         //p1->start(appInfo.filePath() + "/OCAuxiliaryTools.exe", arguments);
@@ -109,6 +115,11 @@ void AutoUpdateDialog::startDownload()
 {
     ui->btnStartUpdate->setEnabled(false);
     this->repaint();
+
+    if (mw_one->mac)
+        strUrl = strMacUrl;
+    if (mw_one->win)
+        strUrl = strWinUrl;
 
     QNetworkRequest request;
     request.setUrl(QUrl(strUrl));

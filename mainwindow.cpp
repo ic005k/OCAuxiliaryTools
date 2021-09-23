@@ -33,7 +33,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210923";
+QString CurVerison = "20210924";
 QString ocVer = "0.7.4";
 
 MainWindow::MainWindow(QWidget* parent)
@@ -6851,18 +6851,11 @@ int MainWindow::parse_UpdateJSON(QString str)
                     if (mac) {
                         dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
                         dlgAutoUpdate->show();
-                        dlgAutoUpdate->strUrl
-                            = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
-                              "QtOpenCoreConfigDatabase/main/OCAuxiliaryTools.app.zip";
                         dlgAutoUpdate->startDownload();
                     } else if (win) {
                         dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags()
                             | Qt::WindowStaysOnTopHint);
-
                         dlgAutoUpdate->show();
-
-                        dlgAutoUpdate->strUrl = "https://raw.fastgit.org/ic005k/"
-                                                "QtOpenCoreConfigDatabase/main/OCAT-Win64.zip";
                         dlgAutoUpdate->startDownload();
                     } else
                         QDesktopServices::openUrl(QUrl(Url));
@@ -10421,18 +10414,11 @@ void MainWindow::on_actionOnline_Download_Updates_triggered()
     if (mac) {
         dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
         dlgAutoUpdate->show();
-        dlgAutoUpdate->strUrl
-            = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
-              "QtOpenCoreConfigDatabase/main/OCAuxiliaryTools.app.zip";
         dlgAutoUpdate->startDownload();
     } else if (win) {
         dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags()
             | Qt::WindowStaysOnTopHint);
-
         dlgAutoUpdate->show();
-
-        dlgAutoUpdate->strUrl = "https://raw.fastgit.org/ic005k/"
-                                "QtOpenCoreConfigDatabase/main/OCAT-Win64.zip";
         dlgAutoUpdate->startDownload();
     }
 }

@@ -22,7 +22,7 @@ class AutoUpdateDialog : public QDialog {
 public:
     explicit AutoUpdateDialog(QWidget* parent = nullptr);
     ~AutoUpdateDialog();
-    Ui::AutoUpdateDialog *ui;
+    Ui::AutoUpdateDialog* ui;
 
     QString tempDir;
     QString filename;
@@ -38,6 +38,8 @@ public:
     void startUpdate();
     void startDownload();
     QString strUrl;
+    QString strWinUrl;
+    QString strMacUrl;
 
     QString GetFileSize(qint64 size);
 
