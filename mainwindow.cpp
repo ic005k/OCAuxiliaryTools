@@ -6849,9 +6849,7 @@ int MainWindow::parse_UpdateJSON(QString str)
                     //Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
 
                     if (mac || win) {
-                        dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
-                        dlgAutoUpdate->show();
-                        dlgAutoUpdate->startDownload(false);
+                        ShowAutoUpdateDlg(false);
                     } else
                         QDesktopServices::openUrl(QUrl(Url));
                 }
@@ -10407,20 +10405,23 @@ void MainWindow::on_actionLatest_Release_triggered()
 void MainWindow::on_actionOnline_Download_Updates_triggered()
 {
     if (mac || win) {
-        dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
-        dlgAutoUpdate->show();
-        dlgAutoUpdate->startDownload(false);
+        ShowAutoUpdateDlg(false);
     }
 }
 
 void MainWindow::on_actionUpgrade_Database_triggered()
 {
+    if (mac || win || osx1012) {
+        ShowAutoUpdateDlg(true);
+    }
+}
+
+void MainWindow::ShowAutoUpdateDlg(bool Database)
+{
     if (dlgAutoUpdate->isVisible())
         return;
 
-    if (mac || win || osx1012) {
-        dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
-        dlgAutoUpdate->show();
-        dlgAutoUpdate->startDownload(true);
-    }
+    dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
+    dlgAutoUpdate->show();
+    dlgAutoUpdate->startDownload(Database);
 }

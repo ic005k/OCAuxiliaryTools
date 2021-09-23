@@ -284,6 +284,7 @@ public:
     void CellEnter(int row, QTableWidget* tw);
     QString getDriverInfo(QString strDisk);
 
+    void ShowAutoUpdateDlg(bool Database);
 public slots:
     void DisplayLevel();
     void ScanPolicy();
