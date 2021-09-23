@@ -6848,13 +6848,8 @@ int MainWindow::parse_UpdateJSON(QString str)
                 if (ret == 0) {
                     //Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
 
-                    if (mac) {
+                    if (mac || win) {
                         dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() | Qt::WindowStaysOnTopHint);
-                        dlgAutoUpdate->show();
-                        dlgAutoUpdate->startDownload();
-                    } else if (win) {
-                        dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags()
-                            | Qt::WindowStaysOnTopHint);
                         dlgAutoUpdate->show();
                         dlgAutoUpdate->startDownload();
                     } else
