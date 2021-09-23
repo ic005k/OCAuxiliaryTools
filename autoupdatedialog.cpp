@@ -120,6 +120,7 @@ void AutoUpdateDialog::startUpdate()
 void AutoUpdateDialog::startDownload(bool Database)
 {
     setWindowTitle("");
+    ui->label->setVisible(false);
     ui->btnStartUpdate->setEnabled(false);
     ui->btnUpdateDatabase->setEnabled(false);
     this->repaint();
