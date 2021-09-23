@@ -111,6 +111,7 @@ void AutoUpdateDialog::startUpdate()
     }
     p1->waitForStarted();
 }
+
 void AutoUpdateDialog::startDownload()
 {
     ui->btnStartUpdate->setEnabled(false);
