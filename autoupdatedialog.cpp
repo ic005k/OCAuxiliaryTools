@@ -79,7 +79,7 @@ void AutoUpdateDialog::startUpdate()
         strZip = tempDir + "Contents.zip";
     }
     if (mw_one->win) {
-        strZip = tempDir + "OCAT-Win64.zip";
+        strZip = tempDir + "win.zip";
     }
     QDir dir;
     dir.setCurrent(tempDir);
