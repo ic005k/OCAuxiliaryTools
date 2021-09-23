@@ -21,16 +21,12 @@
     </message>
     <message>
         <location filename="autoupdatedialog.ui" line="42"/>
-        <source>Complete the database update</source>
-        <translation>完成数据库更新</translation>
+        <source>Upgrade Database</source>
+        <oldsource>Complete the database update</oldsource>
+        <translation>更新数据库</translation>
     </message>
     <message>
-        <location filename="autoupdatedialog.cpp" line="12"/>
-        <source>Automatic updates</source>
-        <translation>自动更新</translation>
-    </message>
-    <message>
-        <location filename="autoupdatedialog.cpp" line="63"/>
+        <location filename="autoupdatedialog.cpp" line="64"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
     </message>
@@ -1822,8 +1818,9 @@ Note2 : It is strongly recommended not to make a habit of running macOS with SIP
     </message>
     <message>
         <location filename="mainwindow.ui" line="10273"/>
-        <source>Upgrade Database</source>
-        <translation>更新数据库</translation>
+        <source>Download Database</source>
+        <oldsource>Upgrade Database</oldsource>
+        <translation>下载数据库</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8022"/>

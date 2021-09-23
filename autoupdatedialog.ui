@@ -39,7 +39,7 @@
    <item row="3" column="0">
     <widget class="QPushButton" name="btnUpdateDatabase">
      <property name="text">
-      <string>Complete the database update</string>
+      <string>Upgrade Database</string>
      </property>
     </widget>
    </item>

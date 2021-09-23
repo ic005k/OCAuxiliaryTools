@@ -9,7 +9,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
     , ui(new Ui::AutoUpdateDialog)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("Automatic updates"));
+    setWindowTitle("");
     ui->progressBar->setTextVisible(false);
     Init();
     tempDir = QDir::homePath() + "/tempocat/";
@@ -119,6 +119,7 @@ void AutoUpdateDialog::startUpdate()
 
 void AutoUpdateDialog::startDownload(bool Database)
 {
+    setWindowTitle("");
     ui->btnStartUpdate->setEnabled(false);
     ui->btnUpdateDatabase->setEnabled(false);
     this->repaint();
