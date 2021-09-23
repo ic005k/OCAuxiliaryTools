@@ -44,10 +44,12 @@ void AutoUpdateDialog::doProcessReadyRead() //读取并写入
         myfile->write(ba);
     }
 }
+
 void AutoUpdateDialog::doProcessFinished()
 {
     myfile->close();
 }
+
 void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total, qint64 all_total) //显示
 {
     ui->progressBar->setMaximum(all_total);
@@ -63,6 +65,7 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total, qint64 all_t
 
     setWindowTitle(tr("Download Progress") + " : " + GetFileSize(recv_total) + " -> " + GetFileSize(all_total));
 }
+
 void AutoUpdateDialog::doProcessError(QNetworkReply::NetworkError code)
 {
     qDebug() << code;
