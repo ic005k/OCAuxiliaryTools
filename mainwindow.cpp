@@ -2004,7 +2004,7 @@ void MainWindow::initui_PlatformInfo()
 #endif
 
 #ifdef Q_OS_LINUX
-    gs->execute(appInfo.filePath() + "/Database/linux/macserial", QStringList() << "-s");
+    //gs->execute(appInfo.filePath() + "/Database/linux/macserial", QStringList() << "-s");
 
     ui->tabPlatformInfo->removeTab(5);
 

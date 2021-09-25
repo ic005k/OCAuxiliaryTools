@@ -11,7 +11,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
     ui->setupUi(this);
 
     QFileInfo fi(qAppName());
-    QString strLinuxTargetFile = fi.absoluteFilePath();
+    strLinuxTargetFile = fi.absoluteFilePath();
 
     QFileInfo appInfo(qAppName());
     qDebug() << appInfo.absoluteFilePath();
