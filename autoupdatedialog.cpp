@@ -9,9 +9,10 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
     , ui(new Ui::AutoUpdateDialog)
 {
     ui->setupUi(this);
-
-    qDebug() << qApp->applicationFilePath() << qApp->applicationName();
-    qDebug()<<QCoreApplication::libraryPaths();
+    QDir::setCurrent(qAppName());
+    qDebug() << qAppName();
+    qDebug()<<QFileInfo(qAppName()).path();
+    qDebug() << QDir::currentPath();
 
     setWindowTitle("");
     ui->progressBar->setTextVisible(false);
@@ -98,6 +99,7 @@ void AutoUpdateDialog::startUpdate()
     ui->btnStartUpdate->setEnabled(false);
     this->repaint();
 
+    QString strLinuxTargetFile =QDir::homePath() + "/Desktop/";
     QFileInfo appInfo(qApp->applicationDirPath());
     QString strZip;
     if (mw_one->mac || mw_one->osx1012) {
@@ -127,10 +129,8 @@ void AutoUpdateDialog::startUpdate()
         p->start(appInfo.filePath() + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
     }
     if (mw_one->linuxOS) {
-        p->start("cp", QStringList() << "-f" << strZip << qApp->applicationFilePath());
+        p->start("cp", QStringList() << "-f" << strZip << strLinuxTargetFile + qAppName());
 
-
-        qDebug() << strZip << "    " << qApp->applicationDirPath();
     }
 
     QProcess* p1 = new QProcess;
@@ -145,7 +145,7 @@ void AutoUpdateDialog::startUpdate()
     }
     if(mw_one->linuxOS)
     {
-        p1->start(qApp->applicationFilePath(),arguments);
+        p1->start(strLinuxTargetFile + qAppName(),arguments);
     }
     p1->waitForStarted();
 }
