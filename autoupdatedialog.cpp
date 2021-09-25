@@ -62,8 +62,14 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total, qint64 all_t
         ui->btnStartUpdate->setEnabled(true);
         ui->btnUpdateDatabase->setEnabled(true);
         this->repaint();
-        if (mw_one->win && ui->btnStartUpdate->isVisible()) {
+        if ((mw_one->win || mw_one->linuxOS)&& ui->btnStartUpdate->isVisible()) {
             ui->label->setVisible(true);
+        }
+
+        if(mw_one->linuxOS)
+        {
+            QProcess *p = new QProcess;
+            p->start("chmod", QStringList() << "+x" << tempDir + filename);
         }
     }
 
@@ -116,7 +122,9 @@ void AutoUpdateDialog::startUpdate()
     }
     if (mw_one->linuxOS) {
         p->start("cp", QStringList() << "-f" << strZip << qApp->applicationFilePath());
-        p->start("chmod", QStringList() << "+x" << qApp->applicationFilePath());
+
+
+        qDebug() << strZip << "    " << qApp->applicationFilePath();
     }
 
     QProcess* p1 = new QProcess;
@@ -128,6 +136,10 @@ void AutoUpdateDialog::startUpdate()
     }
     if (mw_one->win) {
         //p1->start(appInfo.filePath() + "/OCAuxiliaryTools.exe", arguments);
+    }
+    if(mw_one->linuxOS)
+    {
+        p1->start(qApp->applicationFilePath(),arguments);
     }
     p1->waitForStarted();
 }
