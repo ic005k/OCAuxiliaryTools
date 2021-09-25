@@ -145,7 +145,7 @@ void AutoUpdateDialog::startUpdate()
     {
        p1->start(strLinuxTargetFile , arguments);
     }
-    p1->waitForReadyRead();
+    p1->waitForStarted();
 }
 
 void AutoUpdateDialog::startDownload(bool Database)
