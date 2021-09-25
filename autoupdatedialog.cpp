@@ -9,6 +9,9 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
     , ui(new Ui::AutoUpdateDialog)
 {
     ui->setupUi(this);
+
+    qDebug() << qApp->applicationDirPath() << qApp->applicationName();
+
     setWindowTitle("");
     ui->progressBar->setTextVisible(false);
     Init();
