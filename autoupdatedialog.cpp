@@ -10,6 +10,9 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
 {
     ui->setupUi(this);
 
+    QFileInfo fi(qAppName());
+    QString strLinuxTargetFile = fi.absoluteFilePath();
+
     QFileInfo appInfo(qAppName());
     qDebug() << appInfo.absoluteFilePath();
     qDebug() << appInfo.path();
@@ -104,9 +107,6 @@ void AutoUpdateDialog::startUpdate()
     ui->btnStartUpdate->setEnabled(false);
     this->repaint();
 
-    QFileInfo fi(qAppName());
-    QString strLinuxTargetFile = fi.absoluteFilePath();
-
     QFileInfo appInfo(qApp->applicationDirPath());
     QString strZip;
     if (mw_one->mac || mw_one->osx1012) {
@@ -151,8 +151,7 @@ void AutoUpdateDialog::startUpdate()
         //p1->start(appInfo.filePath() + "/OCAuxiliaryTools.exe", arguments);
     }
     if(mw_one->linuxOS)
-    {
-        qDebug() << strLinuxTargetFile;
+    {        
         p1->start(strLinuxTargetFile,arguments);
     }
     p1->waitForStarted();
