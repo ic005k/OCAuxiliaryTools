@@ -127,7 +127,6 @@ void AutoUpdateDialog::startUpdate()
         p->start(appInfo.filePath() + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
     }
     if (mw_one->linuxOS) {
-        qDebug() << strLinuxTargetFile;
         p->start("cp", QStringList() << "-f" << strZip << strLinuxTargetFile);
         p->waitForFinished();
     }
@@ -144,10 +143,9 @@ void AutoUpdateDialog::startUpdate()
     }
     if(mw_one->linuxOS)
     {
-        qDebug() << strLinuxTargetFile;
-        p1->start(strLinuxTargetFile,arguments);
+       p1->start(strLinuxTargetFile , arguments);
     }
-    p1->waitForStarted();
+    p1->waitForReadyRead();
 }
 
 void AutoUpdateDialog::startDownload(bool Database)
