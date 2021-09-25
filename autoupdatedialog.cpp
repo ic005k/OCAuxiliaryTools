@@ -30,6 +30,10 @@ void AutoUpdateDialog::Init()
     strMacUrl = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
                 "QtOpenCoreConfigDatabase/main/Contents.zip";
 
+    strMacClassicalUrl = "https://ghproxy.com/https://github.com/ic005k/QtOpenCoreConfigDatabase/releases/download/1.0.0/Contents.zip";
+
+    strLinuxUrl = "https://ghproxy.com/https://github.com/ic005k/QtOpenCoreConfigDatabase/releases/download/1.0.0/OCAuxiliaryTools-Linux-x86_64.AppImage";
+
     strDatabaseUrl = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
                      "QtOpenCoreConfigDatabase/main/Database.zip";
 
@@ -84,7 +88,7 @@ void AutoUpdateDialog::startUpdate()
 
     QFileInfo appInfo(qApp->applicationDirPath());
     QString strZip;
-    if (mw_one->mac) {
+    if (mw_one->mac || mw_one->osx1012) {
         strZip = tempDir + "Contents.zip";
     }
     if (mw_one->win) {
@@ -97,7 +101,7 @@ void AutoUpdateDialog::startUpdate()
 
     QProcess* p = new QProcess;
     QString strPath;
-    if (mw_one->mac) {
+    if (mw_one->mac || mw_one->osx1012) {
         strPath = appInfo.path().replace("Contents", "");
         p->start("unzip", QStringList() << "-o" << strZip << "-d" << strPath);
         p->waitForFinished();
@@ -111,7 +115,7 @@ void AutoUpdateDialog::startUpdate()
     QStringList arguments;
     QString fn = "";
     arguments << fn;
-    if (mw_one->mac) {
+    if (mw_one->mac || mw_one->osx1012) {
         p1->start(strPath.mid(0, strPath.length() - 1), arguments);
     }
     if (mw_one->win) {
@@ -131,6 +135,10 @@ void AutoUpdateDialog::startDownload(bool Database)
     if (!Database) {
         if (mw_one->mac)
             strUrl = strMacUrl;
+        if (mw_one->osx1012)
+            strUrl = strMacClassicalUrl;
+        if (mw_one->linuxOS)
+            strUrl = strLinuxUrl;
         if (mw_one->win)
             strUrl = strWinUrl;
         ui->btnStartUpdate->setVisible(true);

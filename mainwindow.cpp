@@ -70,7 +70,6 @@ MainWindow::MainWindow(QWidget* parent)
 #ifdef Q_OS_LINUX
     ui->actionMountEsp->setEnabled(false);
     ui->actionUpgrade_Database->setEnabled(false);
-    ui->actionOnline_Download_Updates->setEnabled(false);
     linuxOS = true;
 #endif
 
@@ -6075,11 +6074,6 @@ void MainWindow::init_HelpMenu()
         ui->btnCheckUpdate->setIconVisibleInMenu(false);
     ui->btnCheckUpdate->setIcon(QIcon(":/icon/cu.png"));
     ui->toolBar->addAction(ui->btnCheckUpdate);
-
-    if (mac || win)
-        ui->actionOnline_Download_Updates->setEnabled(true);
-    else
-        ui->actionOnline_Download_Updates->setEnabled(false);
 
     //文档
     if (mac || osx1012)

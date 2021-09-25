@@ -41,6 +41,8 @@ public:
     QString strWinUrl;
     QString strMacUrl;
     QString strDatabaseUrl;
+    QString strMacClassicalUrl;
+    QString strLinuxUrl;
 
     QString GetFileSize(qint64 size);
 
