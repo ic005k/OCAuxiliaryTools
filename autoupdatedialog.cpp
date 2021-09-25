@@ -152,6 +152,7 @@ void AutoUpdateDialog::startUpdate()
     }
     if(mw_one->linuxOS)
     {
+        qDebug() << strLinuxTargetFile;
         p1->start(strLinuxTargetFile,arguments);
     }
     p1->waitForStarted();
