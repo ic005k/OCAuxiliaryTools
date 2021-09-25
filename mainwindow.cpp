@@ -40,6 +40,9 @@ MainWindow::MainWindow(QWidget* parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    qDebug() <<QDir::current()<<"===="<<QDir::currentPath();
+
     Initialization = true;
     loading = true;
 

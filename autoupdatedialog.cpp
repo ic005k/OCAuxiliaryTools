@@ -16,7 +16,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
     mw_one->deleteDirfile(tempDir);
     ui->label->setVisible(false);
 
-    qDebug() <<QDir::current()<<"===="<<QDir::currentPath();
+
 }
 
 AutoUpdateDialog::~AutoUpdateDialog()
