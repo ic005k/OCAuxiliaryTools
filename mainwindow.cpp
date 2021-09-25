@@ -10398,9 +10398,9 @@ void MainWindow::on_actionLatest_Release_triggered()
 
 void MainWindow::on_actionOnline_Download_Updates_triggered()
 {
-    if (mac || win) {
-        ShowAutoUpdateDlg(false);
-    }
+    //if (mac || win) {
+    ShowAutoUpdateDlg(false);
+    //}
 }
 
 void MainWindow::on_actionUpgrade_Database_triggered()
