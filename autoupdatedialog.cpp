@@ -65,7 +65,7 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total, qint64 all_t
         ui->btnStartUpdate->setEnabled(true);
         ui->btnUpdateDatabase->setEnabled(true);
         this->repaint();
-        if ((mw_one->win || mw_one->linuxOS)&& ui->btnStartUpdate->isVisible()) {
+        if ((mw_one->win)&& ui->btnStartUpdate->isVisible()) {
             ui->label->setVisible(true);
         }
 
