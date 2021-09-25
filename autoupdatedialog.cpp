@@ -121,7 +121,8 @@ void AutoUpdateDialog::startUpdate()
     }
     if (mw_one->win) {
         strPath = appInfo.filePath();
-        p->start(appInfo.filePath() + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
+        p->start(appInfo.filePath() + "/unzip.exe",
+                 QStringList() << "-o" << strZip << "-d" << strPath);
     }
     if (mw_one->linuxOS) {
         p->start("cp", QStringList() << "-f" << strZip << strLinuxTargetFile);
@@ -136,7 +137,7 @@ void AutoUpdateDialog::startUpdate()
         p1->start(strPath.mid(0, strPath.length() - 1), arguments);
     }
     if (mw_one->win) {
-        p1->start(qApp->applicationFilePath(), arguments);
+        //p1->start(qApp->applicationFilePath(), arguments);
     }
     if (mw_one->linuxOS) {
         p1->start(strLinuxTargetFile, arguments);
