@@ -15,6 +15,8 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
     tempDir = QDir::homePath() + "/tempocat/";
     mw_one->deleteDirfile(tempDir);
     ui->label->setVisible(false);
+
+    qDebug() <<QDir::current()<<"===="<<QDir::currentPath();
 }
 
 AutoUpdateDialog::~AutoUpdateDialog()
@@ -124,7 +126,7 @@ void AutoUpdateDialog::startUpdate()
         p->start("cp", QStringList() << "-f" << strZip << qApp->applicationFilePath());
 
 
-        qDebug() << strZip << "    " << qApp->applicationFilePath();
+        qDebug() << strZip << "    " << qApp->applicationDirPath();
     }
 
     QProcess* p1 = new QProcess;
