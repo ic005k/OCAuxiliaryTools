@@ -40,7 +40,6 @@ MainWindow::MainWindow(QWidget* parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
     Initialization = true;
     loading = true;
 
@@ -2004,7 +2003,7 @@ void MainWindow::initui_PlatformInfo()
 #endif
 
 #ifdef Q_OS_LINUX
-    //gs->execute(appInfo.filePath() + "/Database/linux/macserial", QStringList() << "-s");
+    gs->execute(appInfo.filePath() + "/Database/linux/macserial", QStringList() << "-s");
 
     ui->tabPlatformInfo->removeTab(5);
 
@@ -6842,11 +6841,9 @@ int MainWindow::parse_UpdateJSON(QString str)
                 int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
                 if (ret == 0) {
                     //Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
+                    //QDesktopServices::openUrl(QUrl(Url));
 
-                    //if (mac || win) {
                     ShowAutoUpdateDlg(false);
-                    //} else
-                    //    QDesktopServices::openUrl(QUrl(Url));
                 }
             }
 
@@ -10399,16 +10396,14 @@ void MainWindow::on_actionLatest_Release_triggered()
 
 void MainWindow::on_actionOnline_Download_Updates_triggered()
 {
-    //if (mac || win) {
     ShowAutoUpdateDlg(false);
-    //}
 }
 
 void MainWindow::on_actionUpgrade_Database_triggered()
 {
-    //if (mac || win || osx1012) {
-    ShowAutoUpdateDlg(true);
-    //}
+    if (mac || win || osx1012) {
+        ShowAutoUpdateDlg(true);
+    }
 }
 
 void MainWindow::ShowAutoUpdateDlg(bool Database)

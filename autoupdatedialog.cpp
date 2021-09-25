@@ -19,8 +19,6 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
     tempDir = QDir::homePath() + "/tempocat/";
     mw_one->deleteDirfile(tempDir);
     ui->label->setVisible(false);
-
-
 }
 
 AutoUpdateDialog::~AutoUpdateDialog()
@@ -68,13 +66,12 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total, qint64 all_t
         ui->btnStartUpdate->setEnabled(true);
         ui->btnUpdateDatabase->setEnabled(true);
         this->repaint();
-        if ((mw_one->win)&& ui->btnStartUpdate->isVisible()) {
+        if ((mw_one->win) && ui->btnStartUpdate->isVisible()) {
             ui->label->setVisible(true);
         }
 
-        if(mw_one->linuxOS)
-        {
-            QProcess *p = new QProcess;
+        if (mw_one->linuxOS) {
+            QProcess* p = new QProcess;
             p->start("chmod", QStringList() << "+x" << tempDir + filename);
         }
     }
@@ -131,6 +128,8 @@ void AutoUpdateDialog::startUpdate()
         p->waitForFinished();
     }
 
+    delete p;
+
     QProcess* p1 = new QProcess;
     QStringList arguments;
     QString fn = "";
@@ -141,9 +140,8 @@ void AutoUpdateDialog::startUpdate()
     if (mw_one->win) {
         //p1->start(appInfo.filePath() + "/OCAuxiliaryTools.exe", arguments);
     }
-    if(mw_one->linuxOS)
-    {
-       p1->start(strLinuxTargetFile , arguments);
+    if (mw_one->linuxOS) {
+        p1->start(strLinuxTargetFile, arguments);
     }
     p1->waitForStarted();
 }
