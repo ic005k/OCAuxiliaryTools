@@ -128,9 +128,7 @@ void AutoUpdateDialog::startUpdate()
         p->waitForFinished();
     }
 
-    delete p;
-
-    QProcess* p1 = new QProcess;
+    QProcess *p1 = new QProcess;
     QStringList arguments;
     QString fn = "";
     arguments << fn;
@@ -138,7 +136,7 @@ void AutoUpdateDialog::startUpdate()
         p1->start(strPath.mid(0, strPath.length() - 1), arguments);
     }
     if (mw_one->win) {
-        //p1->start(appInfo.filePath() + "/OCAuxiliaryTools.exe", arguments);
+        p1->start(qApp->applicationFilePath(), arguments);
     }
     if (mw_one->linuxOS) {
         p1->start(strLinuxTargetFile, arguments);
