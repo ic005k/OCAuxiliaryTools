@@ -10,6 +10,15 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
 {
     ui->setupUi(this);
 
+    QFileInfo appInfo(qAppName());
+    qDebug() << appInfo.absoluteFilePath();
+    qDebug() << appInfo.path();
+    qDebug() << appInfo.absolutePath();
+    qDebug() << appInfo.canonicalFilePath();
+    qDebug() << appInfo.canonicalPath();
+    qDebug() << appInfo.filePath();
+
+
     setWindowTitle("");
     ui->progressBar->setTextVisible(false);
     Init();
