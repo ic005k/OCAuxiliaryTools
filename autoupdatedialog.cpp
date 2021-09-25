@@ -94,6 +94,10 @@ void AutoUpdateDialog::startUpdate()
     if (mw_one->win) {
         strZip = tempDir + "win.zip";
     }
+    if (mw_one->linuxOS) {
+        strZip = tempDir + filename;
+    }
+
     QDir dir;
     dir.setCurrent(tempDir);
 
@@ -109,6 +113,10 @@ void AutoUpdateDialog::startUpdate()
     if (mw_one->win) {
         strPath = appInfo.filePath();
         p->start(appInfo.filePath() + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
+    }
+    if (mw_one->linuxOS) {
+        p->start("cp", QStringList() << "-f" << strZip << qApp->applicationFilePath());
+        p->start("chmod", QStringList() << "+x" << qApp->applicationFilePath());
     }
 
     QProcess* p1 = new QProcess;

@@ -32,7 +32,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210925";
+QString CurVerison = "20210926";
 QString ocVer = "0.7.4";
 
 MainWindow::MainWindow(QWidget* parent)
@@ -6842,10 +6842,10 @@ int MainWindow::parse_UpdateJSON(QString str)
                 if (ret == 0) {
                     //Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
 
-                    if (mac || win) {
-                        ShowAutoUpdateDlg(false);
-                    } else
-                        QDesktopServices::openUrl(QUrl(Url));
+                    //if (mac || win) {
+                    ShowAutoUpdateDlg(false);
+                    //} else
+                    //    QDesktopServices::openUrl(QUrl(Url));
                 }
             }
 
@@ -10405,9 +10405,9 @@ void MainWindow::on_actionOnline_Download_Updates_triggered()
 
 void MainWindow::on_actionUpgrade_Database_triggered()
 {
-    if (mac || win || osx1012) {
-        ShowAutoUpdateDlg(true);
-    }
+    //if (mac || win || osx1012) {
+    ShowAutoUpdateDlg(true);
+    //}
 }
 
 void MainWindow::ShowAutoUpdateDlg(bool Database)
