@@ -104,7 +104,9 @@ void AutoUpdateDialog::startUpdate()
     ui->btnStartUpdate->setEnabled(false);
     this->repaint();
 
-    QString strLinuxTargetFile =QDir::homePath() + "/Desktop/" + qAppName();
+    QFileInfo fi(qAppName());
+    QString strLinuxTargetFile = fi.absoluteFilePath();
+
     QFileInfo appInfo(qApp->applicationDirPath());
     QString strZip;
     if (mw_one->mac || mw_one->osx1012) {
