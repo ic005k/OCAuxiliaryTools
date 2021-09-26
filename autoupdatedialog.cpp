@@ -123,13 +123,15 @@ void AutoUpdateDialog::startUpdate()
         p->start("unzip", QStringList() << "-o" << strZip << "-d" << strPath);
         p->waitForFinished();
     }
+
     if (mw_one->win) {
         strPath = appInfo.filePath();
-        //p->start(appInfo.filePath() + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
+        p->startDetached(appInfo.filePath() + "/unzip.exe",
+                         QStringList() << "-o" << strZip << "-d" << strPath);
 
         QTextEdit *txtEdit = new QTextEdit();
         txtEdit->append(strPath + "/unzip.exe -o " + strZip + " -d " + strPath);
-        txtEdit->append(qApp->applicationFilePath());
+        txtEdit->append("start " + qApp->applicationFilePath());
 
         QString fileName = tempDir + "upocat.bat";
         QFile *file;
@@ -143,7 +145,7 @@ void AutoUpdateDialog::startUpdate()
             delete file;
         }
 
-        p->start(fileName, arguments);
+        //p->startDetached("cmd.exe", QStringList() << "/c" << fileName);
     }
     if (mw_one->linuxOS) {
         //p->execute("cp", QStringList() << "-f" << strZip << strLinuxTargetFile);
@@ -154,7 +156,7 @@ void AutoUpdateDialog::startUpdate()
         txtEdit->append("cp -f " + strZip + " " + strLinuxTargetFile);
         txtEdit->append(strLinuxTargetFile);
 
-        QString fileName=tempDir + "upocat.sh";
+        QString fileName = tempDir + "upocat.sh";
 
         QFile *file;
         file = new QFile;
@@ -168,13 +170,11 @@ void AutoUpdateDialog::startUpdate()
             delete file;
         }
 
-        p->execute("chmod", QStringList() << "+x"<<fileName);
-        p->start("bash",QStringList() << fileName);
-
+        p->execute("chmod", QStringList() << "+x" << fileName);
+        p->start("bash", QStringList() << fileName);
     }
 
     QProcess *p1 = new QProcess;
-
     if (mw_one->mac || mw_one->osx1012) {
         p1->start(strPath.mid(0, strPath.length() - 1), arguments);
         p1->waitForStarted();
@@ -273,7 +273,6 @@ void AutoUpdateDialog::on_btnUpdateDatabase_clicked()
     strPath = appInfo.filePath();
     if (mw_one->mac || mw_one->osx1012) {
         p->start("unzip", QStringList() << "-o" << strZip << "-d" << strPath);
-        //p->waitForFinished();
     }
     if (mw_one->win) {
         p->start(strPath + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
