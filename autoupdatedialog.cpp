@@ -126,12 +126,13 @@ void AutoUpdateDialog::startUpdate()
 
     if (mw_one->win) {
         strPath = appInfo.filePath();
-        p->startDetached(appInfo.filePath() + "/unzip.exe",
-                         QStringList() << "-o" << strZip << "-d" << strPath);
+        //p->startDetached(appInfo.filePath() + "/unzip.exe",
+        //                 QStringList() << "-o" << strZip << "-d" << strPath);
 
         QTextEdit *txtEdit = new QTextEdit();
-        txtEdit->append(strPath + "/unzip.exe -o " + strZip + " -d " + strPath);
-        txtEdit->append("start " + qApp->applicationFilePath());
+        txtEdit->append(strPath + "/unzip.exe -o " + strZip + " -d " + strPath + " && start "
+                        + qApp->applicationFilePath());
+        //txtEdit->append("start " + qApp->applicationFilePath());
 
         QString fileName = tempDir + "upocat.bat";
         QFile *file;
@@ -145,7 +146,8 @@ void AutoUpdateDialog::startUpdate()
             delete file;
         }
 
-        //p->startDetached("cmd.exe", QStringList() << "/c" << fileName);
+        p->start("cmd.exe", QStringList() << "/c" << fileName);
+        p->waitForReadyRead();
     }
     if (mw_one->linuxOS) {
         //p->execute("cp", QStringList() << "-f" << strZip << strLinuxTargetFile);
