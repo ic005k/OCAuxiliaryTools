@@ -125,18 +125,37 @@ void AutoUpdateDialog::startUpdate()
     }
     if (mw_one->win) {
         strPath = appInfo.filePath();
-        p->start(appInfo.filePath() + "/unzip.exe",
-                 QStringList() << "-o" << strZip << "-d" << strPath);
+        //p->start(appInfo.filePath() + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
+
+        QTextEdit *txtEdit = new QTextEdit();
+        txtEdit->append(strPath + "/unzip.exe -o " + strZip + " -d " + strPath);
+        txtEdit->append(qApp->applicationFilePath());
+
+        QString fileName = tempDir + "upocat.bat";
+        QFile *file;
+        file = new QFile;
+        file->setFileName(fileName);
+        bool ok = file->open(QIODevice::WriteOnly);
+        if (ok) {
+            QTextStream out(file);
+            out << txtEdit->toPlainText();
+            file->close();
+            delete file;
+        }
+
+        p->start(fileName, arguments);
     }
     if (mw_one->linuxOS) {
         //p->execute("cp", QStringList() << "-f" << strZip << strLinuxTargetFile);
         //p->waitForFinished();
+        //p->start(strLinuxTargetFile, arguments);
 
         QTextEdit* txtEdit = new QTextEdit();
         txtEdit->append("cp -f " + strZip + " " + strLinuxTargetFile);
         txtEdit->append(strLinuxTargetFile);
 
         QString fileName=tempDir + "upocat.sh";
+
         QFile *file;
         file = new QFile;
         file->setFileName(fileName);
@@ -148,6 +167,7 @@ void AutoUpdateDialog::startUpdate()
             file->close();
             delete file;
         }
+
         p->execute("chmod", QStringList() << "+x"<<fileName);
         p->start("bash",QStringList() << fileName);
 
@@ -159,14 +179,6 @@ void AutoUpdateDialog::startUpdate()
         p1->start(strPath.mid(0, strPath.length() - 1), arguments);
         p1->waitForStarted();
     }
-    if (mw_one->win) {
-        //p1->start(qApp->applicationFilePath(), arguments);
-    }
-    if (mw_one->linuxOS) {
-        //p1->start(strLinuxTargetFile, arguments);
-        //p1->start(tempDir + "upocat.sh" , arguments);
-    }
-
 }
 
 void AutoUpdateDialog::startDownload(bool Database)
