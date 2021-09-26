@@ -92,6 +92,10 @@ void AutoUpdateDialog::on_btnStartUpdate_clicked()
 
 void AutoUpdateDialog::startUpdate()
 {
+    QStringList arguments;
+    QString fn = "";
+    arguments << fn;
+
     ui->btnStartUpdate->setEnabled(false);
     this->repaint();
 
@@ -125,24 +129,44 @@ void AutoUpdateDialog::startUpdate()
                  QStringList() << "-o" << strZip << "-d" << strPath);
     }
     if (mw_one->linuxOS) {
-        p->execute("cp", QStringList() << "-f" << strZip << strLinuxTargetFile);
-        p->waitForFinished();
+        //p->execute("cp", QStringList() << "-f" << strZip << strLinuxTargetFile);
+        //p->waitForFinished();
+
+        QTextEdit* txtEdit = new QTextEdit();
+        txtEdit->append("cp -f " + strZip + " " + strLinuxTargetFile);
+        txtEdit->append(strLinuxTargetFile);
+
+        QString fileName=tempDir + "upocat.sh";
+        QFile *file;
+        file = new QFile;
+        file->setFileName(fileName);
+        bool ok=file->open(QIODevice::WriteOnly);
+        if(ok)
+        {
+            QTextStream out(file);
+            out<< txtEdit->toPlainText();
+            file->close();
+            delete file;
+        }
+        p->execute("chmod", QStringList() << "+x"<<fileName);
+        p->start("bash",QStringList() << fileName);
+
     }
 
     QProcess *p1 = new QProcess;
-    QStringList arguments;
-    QString fn = "";
-    arguments << fn;
+
     if (mw_one->mac || mw_one->osx1012) {
         p1->start(strPath.mid(0, strPath.length() - 1), arguments);
+        p1->waitForStarted();
     }
     if (mw_one->win) {
         //p1->start(qApp->applicationFilePath(), arguments);
     }
     if (mw_one->linuxOS) {
-        p1->start(strLinuxTargetFile, arguments);
+        //p1->start(strLinuxTargetFile, arguments);
+        //p1->start(tempDir + "upocat.sh" , arguments);
     }
-    p1->waitForStarted();
+
 }
 
 void AutoUpdateDialog::startDownload(bool Database)

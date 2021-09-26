@@ -11,6 +11,8 @@
 #include <QNetworkRequest>
 #include <QProcess>
 #include <QtMath>
+#include <QFile>
+#include <QTextStream>
 
 namespace Ui {
 class AutoUpdateDialog;
