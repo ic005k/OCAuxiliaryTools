@@ -125,7 +125,7 @@ void AutoUpdateDialog::startUpdate()
                  QStringList() << "-o" << strZip << "-d" << strPath);
     }
     if (mw_one->linuxOS) {
-        p->start("cp", QStringList() << "-f" << strZip << strLinuxTargetFile);
+        p->execute("cp", QStringList() << "-f" << strZip << strLinuxTargetFile);
         p->waitForFinished();
     }
 
