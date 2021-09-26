@@ -10,9 +10,9 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QProcess>
-#include <QtMath>
-#include <QFile>
+#include <QTextEdit>
 #include <QTextStream>
+#include <QtMath>
 
 namespace Ui {
 class AutoUpdateDialog;
@@ -48,6 +48,8 @@ public:
     QString strLinuxTargetFile;
 
     QString GetFileSize(qint64 size);
+
+    void TextEditToFile(QTextEdit *txtEdit, QString fileName);
 
 protected:
     void closeEvent(QCloseEvent* event);

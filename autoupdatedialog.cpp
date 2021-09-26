@@ -132,22 +132,10 @@ void AutoUpdateDialog::startUpdate()
         QTextEdit *txtEdit = new QTextEdit();
         txtEdit->append(strPath + "/unzip.exe -o " + strZip + " -d " + strPath + " && start "
                         + qApp->applicationFilePath());
-        //txtEdit->append("start " + qApp->applicationFilePath());
 
         QString fileName = tempDir + "upocat.bat";
-        QFile *file;
-        file = new QFile;
-        file->setFileName(fileName);
-        bool ok = file->open(QIODevice::WriteOnly);
-        if (ok) {
-            QTextStream out(file);
-            out << txtEdit->toPlainText();
-            file->close();
-            delete file;
-        }
-
-        p->start("cmd.exe", QStringList() << "/c" << fileName);
-        p->waitForReadyRead();
+        TextEditToFile(txtEdit, fileName);
+        p->startDetached("cmd.exe", QStringList() << "/c" << fileName);
     }
     if (mw_one->linuxOS) {
         //p->execute("cp", QStringList() << "-f" << strZip << strLinuxTargetFile);
@@ -159,21 +147,10 @@ void AutoUpdateDialog::startUpdate()
         txtEdit->append(strLinuxTargetFile);
 
         QString fileName = tempDir + "upocat.sh";
-
-        QFile *file;
-        file = new QFile;
-        file->setFileName(fileName);
-        bool ok=file->open(QIODevice::WriteOnly);
-        if(ok)
-        {
-            QTextStream out(file);
-            out<< txtEdit->toPlainText();
-            file->close();
-            delete file;
-        }
+        TextEditToFile(txtEdit, fileName);
 
         p->execute("chmod", QStringList() << "+x" << fileName);
-        p->start("bash", QStringList() << fileName);
+        p->startDetached("bash", QStringList() << fileName);
     }
 
     QProcess *p1 = new QProcess;
@@ -281,4 +258,18 @@ void AutoUpdateDialog::on_btnUpdateDatabase_clicked()
     }
 
     close();
+}
+
+void AutoUpdateDialog::TextEditToFile(QTextEdit *txtEdit, QString fileName)
+{
+    QFile *file;
+    file = new QFile;
+    file->setFileName(fileName);
+    bool ok = file->open(QIODevice::WriteOnly);
+    if (ok) {
+        QTextStream out(file);
+        out << txtEdit->toPlainText();
+        file->close();
+        delete file;
+    }
 }
