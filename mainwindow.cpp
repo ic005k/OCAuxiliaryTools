@@ -3290,7 +3290,7 @@ void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column)
             ui->table_uefi_ReservedMemory->item(row, 3)->text());
     }
 
-    ui->statusbar->showMessage(ui->table_uefi_ReservedMemory->currentItem()->text());
+    setStatusBarText(ui->table_uefi_ReservedMemory);
 }
 
 void MainWindow::on_btnKernelPatchAdd_clicked()
@@ -5147,12 +5147,7 @@ void MainWindow::closeEvent(QCloseEvent* event)
 void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(
     int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    ui->table_uefi_ReservedMemory->removeCellWidget(previousRow, 3);
-
-    Q_UNUSED(currentRow);
-    Q_UNUSED(currentColumn);
-
-    ui->table_uefi_ReservedMemory->removeCellWidget(previousRow, previousColumn);
+    currentCellChanged(ui->table_uefi_ReservedMemory, previousRow, previousColumn, currentRow, currentColumn);
 }
 
 void MainWindow::loadLocal()
@@ -7358,6 +7353,8 @@ void MainWindow::currentCellChanged(QTableWidget* t, int previousRow, int previo
 
     t->removeCellWidget(previousRow, previousColumn);
     lineEditEnter = false;
+
+    setStatusBarText(t);
 }
 
 void MainWindow::on_table_nv_ls_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
