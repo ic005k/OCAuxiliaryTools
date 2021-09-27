@@ -32,7 +32,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210928";
+QString CurVerison = "20210929";
 QString ocVer = "0.7.4";
 
 MainWindow::MainWindow(QWidget* parent)
@@ -3071,13 +3071,9 @@ void MainWindow::setStatusBarText(QTableWidget* table) {
   if (getTableFieldDataType(table) == "Data") {
     ui->txtEditHex->setText(table->currentItem()->text());
 
-    ui->txtEditHex->setVisible(true);
-    ui->txtEditASCII->setVisible(true);
-    labelConversion->setVisible(true);
+    setConversionWidgetVisible(true);
   } else {
-    ui->txtEditHex->setVisible(false);
-    ui->txtEditASCII->setVisible(false);
-    labelConversion->setVisible(false);
+    setConversionWidgetVisible(false);
   }
 }
 
@@ -6012,9 +6008,7 @@ void MainWindow::init_MainUI() {
   ui->txtEditASCII->setPlaceholderText(tr("ASCII"));
   ui->statusbar->addPermanentWidget(ui->txtEditASCII, 0);
 
-  ui->txtEditHex->setVisible(false);
-  labelConversion->setVisible(false);
-  ui->txtEditASCII->setVisible(false);
+  setConversionWidgetVisible(false);
 
   CopyLabel();
 
@@ -9958,7 +9952,10 @@ void MainWindow::on_txtEditHex_textChanged(const QString& arg1) {
   str0 = arg1;
   str = str0.remove(QRegExp("\\s"));  // 16进制去除所有空格
 
-  ui->txtEditASCII->setText(HexStrToByte(str));
+  if (str.length() % 2 == 0)
+    ui->txtEditASCII->setText(HexStrToByte(str));
+  else
+    ui->txtEditASCII->setText("");
 }
 
 void MainWindow::on_txtEditASCII_textChanged(const QString& arg1) {
@@ -9970,4 +9967,26 @@ void MainWindow::on_txtEditASCII_textChanged(const QString& arg1) {
   txtEditASCIITextChanged = true;
   QString str = arg1;
   ui->txtEditHex->setText(str.toUtf8().toHex().toUpper());
+}
+
+void MainWindow::on_listSub_currentRowChanged(int currentRow) {
+  Q_UNUSED(currentRow);
+  setConversionWidgetVisible(false);
+}
+
+void MainWindow::on_listMain_currentRowChanged(int currentRow) {
+  Q_UNUSED(currentRow);
+  setConversionWidgetVisible(false);
+}
+
+void MainWindow::setConversionWidgetVisible(bool v) {
+  if (!v) {
+    ui->txtEditHex->setVisible(false);
+    labelConversion->setVisible(false);
+    ui->txtEditASCII->setVisible(false);
+  } else {
+    ui->txtEditHex->setVisible(true);
+    labelConversion->setVisible(true);
+    ui->txtEditASCII->setVisible(true);
+  }
 }

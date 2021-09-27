@@ -295,6 +295,7 @@ class MainWindow : public QMainWindow {
   QString getDriverInfo(QString strDisk);
 
   void ShowAutoUpdateDlg(bool Database);
+  void setConversionWidgetVisible(bool v);
  public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -843,6 +844,10 @@ class MainWindow : public QMainWindow {
   void on_txtEditHex_textChanged(const QString& arg1);
 
   void on_txtEditASCII_textChanged(const QString& arg1);
+
+  void on_listSub_currentRowChanged(int currentRow);
+
+  void on_listMain_currentRowChanged(int currentRow);
 
  private:
   bool LoadRightTable = false;
