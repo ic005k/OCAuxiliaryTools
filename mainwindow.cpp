@@ -3056,13 +3056,17 @@ void MainWindow::on_table_acpi_del_cellClicked(int row, int column) {
 void MainWindow::setStatusBarText(QTableWidget* table) {
   if (loading) return;
 
+  if (!table->currentIndex().isValid()) return;
+
   QString text0 = table->item(table->currentRow(), 0)->text();
   QString text = table->currentItem()->text();
   QString str;
+
   if (getTableFieldDataType(table) == "Data")
     str = QString::number(text.count() / 2) + " Bytes  " + text;
   else
     str = text;
+
   if (table->currentColumn() != 0)
     ui->statusbar->showMessage(text0 + " -> " + str);
   else
@@ -5998,6 +6002,8 @@ void MainWindow::init_MainUI() {
   ui->actionGo_to_the_next->setIcon(QIcon(":/icon/2.png"));
 
   // StatusBar
+  ui->statusbar->addPermanentWidget(ui->btnUpdateHex, 0);
+
   ui->txtEditHex->setPlaceholderText(tr("Hexadecimal"));
   ui->statusbar->addPermanentWidget(ui->txtEditHex, 0);
 
@@ -8570,6 +8576,28 @@ void MainWindow::uefi_cellDoubleClicked() {
   }
 }
 
+void MainWindow::EnterPress() {
+  if (!lineEditEnter) {
+    acpi_cellDoubleClicked();
+
+    booter_cellDoubleClicked();
+
+    dp_cellDoubleClicked();
+
+    kernel_cellDoubleClicked();
+
+    misc_cellDoubleClicked();
+
+    nvram_cellDoubleClicked();
+
+    pi_cellDoubleClicked();
+
+    uefi_cellDoubleClicked();
+  }
+
+  lineEditEnter = false;
+}
+
 void MainWindow::keyPressEvent(QKeyEvent* event) {
   switch (event->key()) {
     case Qt::Key_Escape:
@@ -8583,25 +8611,7 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
 
     case Qt::Key_Return:
 
-      if (!lineEditEnter) {
-        acpi_cellDoubleClicked();
-
-        booter_cellDoubleClicked();
-
-        dp_cellDoubleClicked();
-
-        kernel_cellDoubleClicked();
-
-        misc_cellDoubleClicked();
-
-        nvram_cellDoubleClicked();
-
-        pi_cellDoubleClicked();
-
-        uefi_cellDoubleClicked();
-      }
-
-      lineEditEnter = false;
+      EnterPress();
 
       break;
 
@@ -9984,9 +9994,46 @@ void MainWindow::setConversionWidgetVisible(bool v) {
     ui->txtEditHex->setVisible(false);
     labelConversion->setVisible(false);
     ui->txtEditASCII->setVisible(false);
+    ui->btnUpdateHex->setVisible(false);
   } else {
     ui->txtEditHex->setVisible(true);
     labelConversion->setVisible(true);
     ui->txtEditASCII->setVisible(true);
+    ui->btnUpdateHex->setVisible(true);
   }
+}
+
+void MainWindow::on_btnUpdateHex_triggered(QAction* arg1) { Q_UNUSED(arg1); }
+
+void MainWindow::on_btnUpdateHex_clicked() {
+  QObjectList listTable;
+  QTableWidget* t;
+  bool txtHexFocus = ui->txtEditHex->hasFocus();
+  bool txtASCIIFocus = ui->txtEditASCII->hasFocus();
+
+  QWidget* w = mymethod->getSubTabWidget(ui->listMain->currentRow(),
+                                         ui->listSub->currentRow());
+  listTable = getAllTableWidget(getAllUIControls(w));
+
+  if (listTable.count() > 1) {
+    for (int i = 0; i < listTable.count(); i++) {
+      t = (QTableWidget*)listTable.at(i);
+      if (t == ui->table_dp_add || t == ui->table_nv_add) t->setFocus();
+    }
+  } else if (listTable.count() == 1) {
+    t = (QTableWidget*)listTable.at(0);
+    t->setFocus();
+  }
+
+  QKeyEvent* tabKey =
+      new QKeyEvent(QEvent::KeyPress, Qt::Key_Return, Qt::NoModifier);
+  QCoreApplication::sendEvent(this, tabKey);
+
+  lineEdit->setText(
+      ui->txtEditHex->text().remove(QRegExp("\\s")));  // 16进制去除所有空格);
+
+  QCoreApplication::sendEvent(lineEdit, tabKey);
+
+  if (txtHexFocus) ui->txtEditHex->setFocus();
+  if (txtASCIIFocus) ui->txtEditASCII->setFocus();
 }

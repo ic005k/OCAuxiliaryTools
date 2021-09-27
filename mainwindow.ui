@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -882,6 +882,16 @@ This works around patched tables becoming incompatible with the SLIC table causi
              <widget class="QLabel" name="lblCount">
               <property name="text">
                <string>0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="btnUpdateHex">
+              <property name="toolTip">
+               <string>Update</string>
+              </property>
+              <property name="text">
+               <string>^</string>
               </property>
              </widget>
             </item>
@@ -1722,7 +1732,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>

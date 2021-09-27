@@ -296,6 +296,7 @@ class MainWindow : public QMainWindow {
 
   void ShowAutoUpdateDlg(bool Database);
   void setConversionWidgetVisible(bool v);
+  void EnterPress();
  public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -848,6 +849,10 @@ class MainWindow : public QMainWindow {
   void on_listSub_currentRowChanged(int currentRow);
 
   void on_listMain_currentRowChanged(int currentRow);
+
+  void on_btnUpdateHex_triggered(QAction* arg1);
+
+  void on_btnUpdateHex_clicked();
 
  private:
   bool LoadRightTable = false;
