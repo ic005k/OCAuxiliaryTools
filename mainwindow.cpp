@@ -32,7 +32,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210926";
+QString CurVerison = "20210928";
 QString ocVer = "0.7.4";
 
 MainWindow::MainWindow(QWidget* parent)
@@ -3109,6 +3109,9 @@ void MainWindow::on_table_acpi_del_cellClicked(int row, int column)
 
 void MainWindow::setStatusBarText(QTableWidget* table)
 {
+    if (loading)
+        return;
+
     QString text0 = table->item(table->currentRow(), 0)->text();
     QString text = table->currentItem()->text();
     QString str;
@@ -8952,6 +8955,7 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
 
         myTable->removeCellWidget(myTable->currentRow(), myTable->currentColumn());
         myTable->setFocus();
+        InitEdit = false;
 
         break;
 
