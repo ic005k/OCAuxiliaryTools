@@ -1,4 +1,5 @@
 #include "Method.h"
+
 #include "mainwindow.h"
 #include "plistparser.h"
 #include "plistserializer.h"
@@ -7,634 +8,615 @@
 extern MainWindow* mw_one;
 Method* mymethod;
 
-Method::Method(QWidget* parent)
-    : QMainWindow(parent)
-{
-    mymethod = new Method;
+Method::Method(QWidget* parent) : QMainWindow(parent) { mymethod = new Method; }
+
+void Method::set_nv_key(QString key, QString dataType) {
+  bool re = false;
+
+  for (int i = 0; i < mw_one->ui->table_nv_add->rowCount(); i++) {
+    QString str;
+    str = mw_one->ui->table_nv_add->item(i, 0)->text();
+    if (str == key) {
+      mw_one->ui->table_nv_add->setCurrentCell(i, 0);
+      re = true;
+    }
+  }
+
+  if (!re) {
+    mw_one->on_btnNVRAMAdd_Add_clicked();
+
+    mw_one->ui->table_nv_add->setItem(mw_one->ui->table_nv_add->rowCount() - 1,
+                                      0, new QTableWidgetItem(key));
+
+    QTableWidgetItem* newItem1 = new QTableWidgetItem(dataType);
+    newItem1->setTextAlignment(Qt::AlignCenter);
+    mw_one->ui->table_nv_add->setItem(mw_one->ui->table_nv_add->rowCount() - 1,
+                                      1, newItem1);
+
+    //保存数据
+    mw_one->write_ini(mw_one->ui->table_nv_add0, mw_one->ui->table_nv_add,
+                      mw_one->ui->table_nv_add0->currentRow());
+  }
 }
 
-void Method::set_nv_key(QString key, QString dataType)
-{
-
-    bool re = false;
-
-    for (int i = 0; i < mw_one->ui->table_nv_add->rowCount(); i++) {
-        QString str;
-        str = mw_one->ui->table_nv_add->item(i, 0)->text();
-        if (str == key) {
-            mw_one->ui->table_nv_add->setCurrentCell(i, 0);
-            re = true;
-        }
+QWidget* Method::getSubTabWidget(int m, int s) {
+  for (int j = 0; j < mw_one->mainTabList.count(); j++) {
+    if (j == m) {
+      for (int i = 0; i < mw_one->mainTabList.at(j)->tabBar()->count(); i++) {
+        if (i == s) return mw_one->mainTabList.at(j)->widget(i);
+      }
     }
+  }
 
-    if (!re) {
-        mw_one->on_btnNVRAMAdd_Add_clicked();
-
-        mw_one->ui->table_nv_add->setItem(mw_one->ui->table_nv_add->rowCount() - 1, 0,
-            new QTableWidgetItem(key));
-
-        QTableWidgetItem* newItem1 = new QTableWidgetItem(dataType);
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        mw_one->ui->table_nv_add->setItem(mw_one->ui->table_nv_add->rowCount() - 1, 1, newItem1);
-
-        //保存数据
-        mw_one->write_ini(mw_one->ui->table_nv_add0, mw_one->ui->table_nv_add, mw_one->ui->table_nv_add0->currentRow());
-    }
+  return NULL;
 }
 
-QWidget* Method::getSubTabWidget(int m, int s)
-{
-    for (int j = 0; j < mw_one->mainTabList.count(); j++) {
-        if (j == m) {
-            for (int i = 0; i < mw_one->mainTabList.at(j)->tabBar()->count(); i++) {
-                if (i == s)
-                    return mw_one->mainTabList.at(j)->widget(i);
-            }
-        }
-    }
+void Method::goACPITable(QTableWidget* table) {
+  // ACPI
+  if (table == mw_one->ui->table_acpi_add) {
+    mw_one->ui->listMain->setCurrentRow(0);
+    mw_one->ui->listSub->setCurrentRow(0);
+  }
 
-    return NULL;
+  if (table == mw_one->ui->table_acpi_del) {
+    mw_one->ui->listMain->setCurrentRow(0);
+    mw_one->ui->listSub->setCurrentRow(1);
+  }
+
+  if (table == mw_one->ui->table_acpi_patch) {
+    mw_one->ui->listMain->setCurrentRow(0);
+    mw_one->ui->listSub->setCurrentRow(2);
+  }
 }
 
-void Method::goACPITable(QTableWidget* table)
-{
-    //ACPI
-    if (table == mw_one->ui->table_acpi_add) {
-        mw_one->ui->listMain->setCurrentRow(0);
-        mw_one->ui->listSub->setCurrentRow(0);
-    }
-
-    if (table == mw_one->ui->table_acpi_del) {
-
-        mw_one->ui->listMain->setCurrentRow(0);
-        mw_one->ui->listSub->setCurrentRow(1);
-    }
-
-    if (table == mw_one->ui->table_acpi_patch) {
-
-        mw_one->ui->listMain->setCurrentRow(0);
-        mw_one->ui->listSub->setCurrentRow(2);
-    }
+void Method::goBooterTable(QTableWidget* table) {
+  // Booter
+  if (table == mw_one->ui->table_booter) {
+    mw_one->ui->listMain->setCurrentRow(1);
+    mw_one->ui->listSub->setCurrentRow(0);
+  }
+  if (table == mw_one->ui->table_Booter_patch) {
+    mw_one->ui->listMain->setCurrentRow(1);
+    mw_one->ui->listSub->setCurrentRow(1);
+  }
 }
 
-void Method::goBooterTable(QTableWidget* table)
-{
-    //Booter
-    if (table == mw_one->ui->table_booter) {
-
-        mw_one->ui->listMain->setCurrentRow(1);
-        mw_one->ui->listSub->setCurrentRow(0);
-    }
-    if (table == mw_one->ui->table_Booter_patch) {
-
-        mw_one->ui->listMain->setCurrentRow(1);
-        mw_one->ui->listSub->setCurrentRow(1);
-    }
+void Method::goDPTable(QTableWidget* table) {
+  // DP
+  if (table == mw_one->ui->table_dp_add0) {
+    mw_one->ui->listMain->setCurrentRow(2);
+    mw_one->ui->listSub->setCurrentRow(0);
+  }
+  if (table == mw_one->ui->table_dp_add) {
+    mw_one->ui->listMain->setCurrentRow(2);
+    mw_one->ui->listSub->setCurrentRow(0);
+  }
+  if (table == mw_one->ui->table_dp_del0) {
+    mw_one->ui->listMain->setCurrentRow(2);
+    mw_one->ui->listSub->setCurrentRow(1);
+  }
+  if (table == mw_one->ui->table_dp_del) {
+    mw_one->ui->listMain->setCurrentRow(2);
+    mw_one->ui->listSub->setCurrentRow(1);
+  }
 }
 
-void Method::goDPTable(QTableWidget* table)
-{
-    //DP
-    if (table == mw_one->ui->table_dp_add0) {
+void Method::goKernelTable(QTableWidget* table) {
+  // Kernel
+  if (table == mw_one->ui->table_kernel_Force) {
+    mw_one->ui->listMain->setCurrentRow(3);
+    mw_one->ui->listSub->setCurrentRow(2);
+  }
 
-        mw_one->ui->listMain->setCurrentRow(2);
-        mw_one->ui->listSub->setCurrentRow(0);
-    }
-    if (table == mw_one->ui->table_dp_add) {
+  if (table == mw_one->ui->table_kernel_add) {
+    mw_one->ui->listMain->setCurrentRow(3);
+    mw_one->ui->listSub->setCurrentRow(0);
+  }
 
-        mw_one->ui->listMain->setCurrentRow(2);
-        mw_one->ui->listSub->setCurrentRow(0);
-    }
-    if (table == mw_one->ui->table_dp_del0) {
+  if (table == mw_one->ui->table_kernel_block) {
+    mw_one->ui->listMain->setCurrentRow(3);
+    mw_one->ui->listSub->setCurrentRow(1);
+  }
 
-        mw_one->ui->listMain->setCurrentRow(2);
-        mw_one->ui->listSub->setCurrentRow(1);
-    }
-    if (table == mw_one->ui->table_dp_del) {
-
-        mw_one->ui->listMain->setCurrentRow(2);
-        mw_one->ui->listSub->setCurrentRow(1);
-    }
+  if (table == mw_one->ui->table_kernel_patch) {
+    mw_one->ui->listMain->setCurrentRow(3);
+    mw_one->ui->listSub->setCurrentRow(3);
+  }
 }
 
-void Method::goKernelTable(QTableWidget* table)
-{
-    //Kernel
-    if (table == mw_one->ui->table_kernel_Force) {
+void Method::goMiscTable(QTableWidget* table) {
+  // Misc
+  if (table == mw_one->ui->tableBlessOverride) {
+    mw_one->ui->listMain->setCurrentRow(4);
+    mw_one->ui->listSub->setCurrentRow(3);
+  }
 
-        mw_one->ui->listMain->setCurrentRow(3);
-        mw_one->ui->listSub->setCurrentRow(2);
-    }
+  if (table == mw_one->ui->tableEntries) {
+    mw_one->ui->listMain->setCurrentRow(4);
+    mw_one->ui->listSub->setCurrentRow(4);
+  }
 
-    if (table == mw_one->ui->table_kernel_add) {
-
-        mw_one->ui->listMain->setCurrentRow(3);
-        mw_one->ui->listSub->setCurrentRow(0);
-    }
-
-    if (table == mw_one->ui->table_kernel_block) {
-
-        mw_one->ui->listMain->setCurrentRow(3);
-        mw_one->ui->listSub->setCurrentRow(1);
-    }
-
-    if (table == mw_one->ui->table_kernel_patch) {
-
-        mw_one->ui->listMain->setCurrentRow(3);
-        mw_one->ui->listSub->setCurrentRow(3);
-    }
+  if (table == mw_one->ui->tableTools) {
+    mw_one->ui->listMain->setCurrentRow(4);
+    mw_one->ui->listSub->setCurrentRow(5);
+  }
 }
 
-void Method::goMiscTable(QTableWidget* table)
-{
-    //Misc
-    if (table == mw_one->ui->tableBlessOverride) {
+void Method::goNVRAMTable(QTableWidget* table) {
+  // NVRAM
+  if (table == mw_one->ui->table_nv_add0) {
+    mw_one->ui->listMain->setCurrentRow(5);
+    mw_one->ui->listSub->setCurrentRow(0);
+  }
 
-        mw_one->ui->listMain->setCurrentRow(4);
-        mw_one->ui->listSub->setCurrentRow(3);
-    }
+  if (table == mw_one->ui->table_nv_add) {
+    mw_one->ui->listMain->setCurrentRow(5);
+    mw_one->ui->listSub->setCurrentRow(0);
+  }
 
-    if (table == mw_one->ui->tableEntries) {
+  if (table == mw_one->ui->table_nv_del0) {
+    mw_one->ui->listMain->setCurrentRow(5);
+    mw_one->ui->listSub->setCurrentRow(1);
+  }
 
-        mw_one->ui->listMain->setCurrentRow(4);
-        mw_one->ui->listSub->setCurrentRow(4);
-    }
+  if (table == mw_one->ui->table_nv_del) {
+    mw_one->ui->listMain->setCurrentRow(5);
+    mw_one->ui->listSub->setCurrentRow(1);
+  }
 
-    if (table == mw_one->ui->tableTools) {
+  if (table == mw_one->ui->table_nv_ls0) {
+    mw_one->ui->listMain->setCurrentRow(5);
+    mw_one->ui->listSub->setCurrentRow(2);
+  }
 
-        mw_one->ui->listMain->setCurrentRow(4);
-        mw_one->ui->listSub->setCurrentRow(5);
-    }
+  if (table == mw_one->ui->table_nv_ls) {
+    mw_one->ui->listMain->setCurrentRow(5);
+    mw_one->ui->listSub->setCurrentRow(2);
+  }
 }
 
-void Method::goNVRAMTable(QTableWidget* table)
-{
-    //NVRAM
-    if (table == mw_one->ui->table_nv_add0) {
+void Method::goTable(QTableWidget* table) {
+  goACPITable(table);
 
-        mw_one->ui->listMain->setCurrentRow(5);
-        mw_one->ui->listSub->setCurrentRow(0);
-    }
+  goBooterTable(table);
 
-    if (table == mw_one->ui->table_nv_add) {
+  goDPTable(table);
 
-        mw_one->ui->listMain->setCurrentRow(5);
-        mw_one->ui->listSub->setCurrentRow(0);
-    }
+  goKernelTable(table);
 
-    if (table == mw_one->ui->table_nv_del0) {
+  goMiscTable(table);
 
-        mw_one->ui->listMain->setCurrentRow(5);
-        mw_one->ui->listSub->setCurrentRow(1);
-    }
+  goNVRAMTable(table);
 
-    if (table == mw_one->ui->table_nv_del) {
+  // PI
+  if (table == mw_one->ui->tableDevices) {
+    mw_one->ui->listMain->setCurrentRow(6);
+    mw_one->ui->listSub->setCurrentRow(2);
+  }
 
-        mw_one->ui->listMain->setCurrentRow(5);
-        mw_one->ui->listSub->setCurrentRow(1);
-    }
+  // UEFI
+  if (table == mw_one->ui->table_uefi_drivers) {
+    mw_one->ui->listMain->setCurrentRow(7);
+    mw_one->ui->listSub->setCurrentRow(3);
+  }
 
-    if (table == mw_one->ui->table_nv_ls0) {
-
-        mw_one->ui->listMain->setCurrentRow(5);
-        mw_one->ui->listSub->setCurrentRow(2);
-    }
-
-    if (table == mw_one->ui->table_nv_ls) {
-
-        mw_one->ui->listMain->setCurrentRow(5);
-        mw_one->ui->listSub->setCurrentRow(2);
-    }
+  if (table == mw_one->ui->table_uefi_ReservedMemory) {
+    mw_one->ui->listMain->setCurrentRow(7);
+    mw_one->ui->listSub->setCurrentRow(8);
+  }
 }
 
-void Method::goTable(QTableWidget* table)
-{
-    goACPITable(table);
+QString Method::copyDrivers(QString pathSource, QString pathTarget) {
+  // OC/Drivers
 
-    goBooterTable(table);
-
-    goDPTable(table);
-
-    goKernelTable(table);
-
-    goMiscTable(table);
-
-    goNVRAMTable(table);
-
-    //PI
-    if (table == mw_one->ui->tableDevices) {
-
-        mw_one->ui->listMain->setCurrentRow(6);
-        mw_one->ui->listSub->setCurrentRow(2);
+  QDir dir;
+  QString strDatabase;
+  QString pathOCDrivers = pathTarget + "OC/Drivers/";
+  if (dir.mkpath(pathOCDrivers)) {
+  }
+  for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
+    QString file = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
+    QString str0 = pathSource + "EFI/OC/Drivers/" + file;
+    if (!str0.contains("#")) {
+      QFileInfo fi(str0);
+      if (fi.exists())
+        QFile::copy(str0, pathOCDrivers + file);
+      else
+        strDatabase = strDatabase + "EFI/OC/Drivers/" + file + "\n";
     }
+  }
 
-    //UEFI
-    if (table == mw_one->ui->table_uefi_drivers) {
-
-        mw_one->ui->listMain->setCurrentRow(7);
-        mw_one->ui->listSub->setCurrentRow(3);
-    }
-
-    if (table == mw_one->ui->table_uefi_ReservedMemory) {
-
-        mw_one->ui->listMain->setCurrentRow(7);
-        mw_one->ui->listSub->setCurrentRow(8);
-    }
+  return strDatabase;
 }
 
-QString Method::copyDrivers(QString pathSource, QString pathTarget)
-{
-    //OC/Drivers
+QString Method::copyKexts(QString pathSource, QString pathTarget) {
+  // OC/Kexts
 
-    QDir dir;
-    QString strDatabase;
-    QString pathOCDrivers = pathTarget + "OC/Drivers/";
-    if (dir.mkpath(pathOCDrivers)) { }
-    for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
+  QDir dir;
+  QString strDatabase;
+  QString pathOCKexts = pathTarget + "OC/Kexts/";
+  if (dir.mkpath(pathOCKexts)) {
+  }
+  for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
+    QString file = mw_one->ui->table_kernel_add->item(i, 0)->text();
+    QString str0 = pathSource + "EFI/OC/Kexts/" + file;
+    QDir kextDir(str0);
 
-        QString file = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
-        QString str0 = pathSource + "EFI/OC/Drivers/" + file;
-        if (!str0.contains("#")) {
-            QFileInfo fi(str0);
-            if (fi.exists())
-                QFile::copy(str0, pathOCDrivers + file);
-            else
-                strDatabase = strDatabase + "EFI/OC/Drivers/" + file + "\n";
-        }
+    if (!str0.contains("#")) {
+      if (kextDir.exists())
+        mw_one->copyDirectoryFiles(str0, pathOCKexts + file, true);
+      else
+        strDatabase = strDatabase + "EFI/OC/Kexts/" + file + "\n";
     }
+  }
 
-    return strDatabase;
+  return strDatabase;
 }
 
-QString Method::copyKexts(QString pathSource, QString pathTarget)
-{
-    //OC/Kexts
+QString Method::copyACPI(QString pathSource, QString pathTarget) {
+  // OC/ACPI
 
-    QDir dir;
-    QString strDatabase;
-    QString pathOCKexts = pathTarget + "OC/Kexts/";
-    if (dir.mkpath(pathOCKexts)) { }
-    for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
-
-        QString file = mw_one->ui->table_kernel_add->item(i, 0)->text();
-        QString str0 = pathSource + "EFI/OC/Kexts/" + file;
-        QDir kextDir(str0);
-
-        if (!str0.contains("#")) {
-
-            if (kextDir.exists())
-                mw_one->copyDirectoryFiles(str0, pathOCKexts + file, true);
-            else
-                strDatabase = strDatabase + "EFI/OC/Kexts/" + file + "\n";
-        }
-    }
-
-    return strDatabase;
-}
-
-QString Method::copyACPI(QString pathSource, QString pathTarget)
-{
-    //OC/ACPI
-
-    QDir dir;
-    QString strDatabase;
-    QString pathOCACPI = pathTarget + "OC/ACPI/";
-    if (dir.mkpath(pathOCACPI)) { }
-    for (int i = 0; i < mw_one->ui->table_acpi_add->rowCount(); i++) {
-
-        QString file = mw_one->ui->table_acpi_add->item(i, 0)->text();
-        QFileInfo fi(pathSource + "EFI/OC/ACPI/" + file);
-        if (fi.exists())
-            QFile::copy(pathSource + "EFI/OC/ACPI/" + file, pathOCACPI + file);
-        else
-            strDatabase = strDatabase + "EFI/OC/ACPI/" + file + "\n";
-    }
-
-    return strDatabase;
-}
-
-QString Method::copyTools(QString pathSource, QString pathTarget)
-{
-    //OC/Tools
-
-    QDir dir;
-    QString strDatabase;
-    QString pathOCTools = pathTarget + "OC/Tools/";
-    if (dir.mkpath(pathOCTools)) { }
-    for (int i = 0; i < mw_one->ui->tableTools->rowCount(); i++) {
-
-        QString file = mw_one->ui->tableTools->item(i, 0)->text();
-        QString str0 = pathSource + "EFI/OC/Tools/" + file;
-        if (!str0.contains("#")) {
-            QFileInfo fi(str0);
-            if (fi.exists())
-                QFile::copy(str0, pathOCTools + file);
-            else
-                strDatabase = strDatabase + "EFI/OC/Tools/" + file + "\n";
-        }
-    }
-
-    return strDatabase;
-}
-
-void Method::on_GenerateEFI()
-{
-    QDir dir;
-    QString strDatabase;
-
-    QFileInfo appInfo(qApp->applicationDirPath());
-    QString pathSource = appInfo.filePath() + "/Database/";
-
-    QString pathTarget = QDir::homePath() + "/Desktop/EFI/";
-
-    mw_one->deleteDirfile(pathTarget);
-
-    if (dir.mkpath(pathTarget)) { }
-
-    //BOOT
-    QString pathBoot = pathTarget + "BOOT/";
-    if (dir.mkpath(pathBoot)) { }
-    QFile::copy(pathSource + "EFI/BOOT/BOOTx64.efi", pathBoot + "BOOTx64.efi");
-
-    // ACPI
-    strDatabase = copyACPI(pathSource, pathTarget) + strDatabase;
-
-    //OC/Bootstrap（在新版OC中已弃用）
-    //QString pathOCBootstrap = pathTarget + "OC/Bootstrap/";
-    //if (dir.mkpath(pathOCBootstrap)) { }
-    //QFile::copy(pathSource + "EFI/OC/Bootstrap/Bootstrap.efi", pathOCBootstrap + "Bootstrap.efi");
-
-    // Drivers
-    strDatabase = copyDrivers(pathSource, pathTarget) + strDatabase;
-
-    // Kexts
-    strDatabase = copyKexts(pathSource, pathTarget) + strDatabase;
-
-    //OC/Resources
-    QString pathOCResources = pathTarget + "OC/Resources/";
-    mw_one->copyDirectoryFiles(pathSource + "EFI/OC/Resources/", pathOCResources, true);
-
-    // Tools
-    strDatabase = copyTools(pathSource, pathTarget) + strDatabase;
-
-    //OC/OpenCore.efi
-    QFile::copy(pathSource + "EFI/OC/OpenCore.efi", pathTarget + "OC/OpenCore.efi");
-
-    //OC/Config.plist
-    mw_one->SavePlist(pathTarget + "OC/Config.plist");
-
-    QMessageBox box;
-    if (strDatabase != "")
-        box.setText(tr("Finished generating the EFI folder on the desktop.") + "\n" + tr("The following files do not exist in the database at the moment, please add them yourself:") + "\n" + strDatabase);
+  QDir dir;
+  QString strDatabase;
+  QString pathOCACPI = pathTarget + "OC/ACPI/";
+  if (dir.mkpath(pathOCACPI)) {
+  }
+  for (int i = 0; i < mw_one->ui->table_acpi_add->rowCount(); i++) {
+    QString file = mw_one->ui->table_acpi_add->item(i, 0)->text();
+    QFileInfo fi(pathSource + "EFI/OC/ACPI/" + file);
+    if (fi.exists())
+      QFile::copy(pathSource + "EFI/OC/ACPI/" + file, pathOCACPI + file);
     else
-        box.setText(tr("Finished generating the EFI folder on the desktop."));
+      strDatabase = strDatabase + "EFI/OC/ACPI/" + file + "\n";
+  }
 
-    mw_one->setFocus();
-    box.exec();
-    mw_one->ui->cboxFind->setFocus();
+  return strDatabase;
 }
 
-void Method::on_btnExportMaster()
-{
-    QFileDialog fd;
-    QString defname;
-    int index = mw_one->ui->tabTotal->currentIndex();
+QString Method::copyTools(QString pathSource, QString pathTarget) {
+  // OC/Tools
 
-    defname = getTabTextName(index);
+  QDir dir;
+  QString strDatabase;
+  QString pathOCTools = pathTarget + "OC/Tools/";
+  if (dir.mkpath(pathOCTools)) {
+  }
+  for (int i = 0; i < mw_one->ui->tableTools->rowCount(); i++) {
+    QString file = mw_one->ui->tableTools->item(i, 0)->text();
+    QString str0 = pathSource + "EFI/OC/Tools/" + file;
+    if (!str0.contains("#")) {
+      QFileInfo fi(str0);
+      if (fi.exists())
+        QFile::copy(str0, pathOCTools + file);
+      else
+        strDatabase = strDatabase + "EFI/OC/Tools/" + file + "\n";
+    }
+  }
 
-    QString FileName = fd.getSaveFileName(this, tr("Save File"), defname,
-        tr("Config file(*.plist);;All files(*.*)"));
-    if (FileName.isEmpty())
-        return;
+  return strDatabase;
+}
 
-    QVariantMap OpenCore;
+void Method::on_GenerateEFI() {
+  QDir dir;
+  QString strDatabase;
 
-    switch (index) {
+  QFileInfo appInfo(qApp->applicationDirPath());
+  QString pathSource = appInfo.filePath() + "/Database/";
+
+  QString pathTarget = QDir::homePath() + "/Desktop/EFI/";
+
+  mw_one->deleteDirfile(pathTarget);
+
+  if (dir.mkpath(pathTarget)) {
+  }
+
+  // BOOT
+  QString pathBoot = pathTarget + "BOOT/";
+  if (dir.mkpath(pathBoot)) {
+  }
+  QFile::copy(pathSource + "EFI/BOOT/BOOTx64.efi", pathBoot + "BOOTx64.efi");
+
+  // ACPI
+  strDatabase = copyACPI(pathSource, pathTarget) + strDatabase;
+
+  // OC/Bootstrap（在新版OC中已弃用）
+  // QString pathOCBootstrap = pathTarget + "OC/Bootstrap/";
+  // if (dir.mkpath(pathOCBootstrap)) { }
+  // QFile::copy(pathSource + "EFI/OC/Bootstrap/Bootstrap.efi", pathOCBootstrap
+  // + "Bootstrap.efi");
+
+  // Drivers
+  strDatabase = copyDrivers(pathSource, pathTarget) + strDatabase;
+
+  // Kexts
+  strDatabase = copyKexts(pathSource, pathTarget) + strDatabase;
+
+  // OC/Resources
+  QString pathOCResources = pathTarget + "OC/Resources/";
+  mw_one->copyDirectoryFiles(pathSource + "EFI/OC/Resources/", pathOCResources,
+                             true);
+
+  // Tools
+  strDatabase = copyTools(pathSource, pathTarget) + strDatabase;
+
+  // OC/OpenCore.efi
+  QFile::copy(pathSource + "EFI/OC/OpenCore.efi",
+              pathTarget + "OC/OpenCore.efi");
+
+  // OC/Config.plist
+  mw_one->SavePlist(pathTarget + "OC/Config.plist");
+
+  QMessageBox box;
+  if (strDatabase != "")
+    box.setText(tr("Finished generating the EFI folder on the desktop.") +
+                "\n" +
+                tr("The following files do not exist in the database at the "
+                   "moment, please add them yourself:") +
+                "\n" + strDatabase);
+  else
+    box.setText(tr("Finished generating the EFI folder on the desktop."));
+
+  mw_one->setFocus();
+  box.exec();
+  mw_one->ui->cboxFind->setFocus();
+}
+
+void Method::on_btnExportMaster() {
+  QFileDialog fd;
+  QString defname;
+  int index = mw_one->ui->tabTotal->currentIndex();
+
+  defname = getTabTextName(index);
+
+  QString FileName =
+      fd.getSaveFileName(this, tr("Save File"), defname,
+                         tr("Config file(*.plist);;All files(*.*)"));
+  if (FileName.isEmpty()) return;
+
+  QVariantMap OpenCore;
+
+  switch (index) {
     case 0:
-        OpenCore["ACPI"] = mw_one->SaveACPI();
+      OpenCore["ACPI"] = mw_one->SaveACPI();
 
-        break;
+      break;
 
     case 1:
-        OpenCore["Booter"] = mw_one->SaveBooter();
-        break;
+      OpenCore["Booter"] = mw_one->SaveBooter();
+      break;
 
     case 2:
-        OpenCore["DeviceProperties"] = mw_one->SaveDeviceProperties();
-        break;
+      OpenCore["DeviceProperties"] = mw_one->SaveDeviceProperties();
+      break;
 
     case 3:
-        OpenCore["Kernel"] = mw_one->SaveKernel();
-        break;
+      OpenCore["Kernel"] = mw_one->SaveKernel();
+      break;
 
     case 4:
-        OpenCore["Misc"] = mw_one->SaveMisc();
-        break;
+      OpenCore["Misc"] = mw_one->SaveMisc();
+      break;
 
     case 5:
-        OpenCore["NVRAM"] = mw_one->SaveNVRAM();
-        break;
+      OpenCore["NVRAM"] = mw_one->SaveNVRAM();
+      break;
 
     case 6:
-        OpenCore["PlatformInfo"] = mw_one->SavePlatformInfo();
-        break;
+      OpenCore["PlatformInfo"] = mw_one->SavePlatformInfo();
+      break;
 
     case 7:
-        OpenCore["UEFI"] = mw_one->SaveUEFI();
-        break;
-    }
+      OpenCore["UEFI"] = mw_one->SaveUEFI();
+      break;
+  }
 
-    PListSerializer::toPList(OpenCore, FileName);
+  PListSerializer::toPList(OpenCore, FileName);
 }
 
-QString Method::getTabTextName(int index)
-{
-    for (int i = 0; i < mw_one->ui->tabTotal->tabBar()->count(); i++) {
-        if (i == index) {
-            return mw_one->ui->tabTotal->tabText(index) + ".plist";
-            break;
-        }
+QString Method::getTabTextName(int index) {
+  for (int i = 0; i < mw_one->ui->tabTotal->tabBar()->count(); i++) {
+    if (i == index) {
+      return mw_one->ui->tabTotal->tabText(index) + ".plist";
+      break;
     }
+  }
 
-    return "";
+  return "";
 }
 
-void Method::on_btnImportMaster()
-{
-    QFileDialog fd;
-    QString defname;
-    int index = mw_one->ui->tabTotal->currentIndex();
-    defname = getTabTextName(index);
+void Method::on_btnImportMaster() {
+  QFileDialog fd;
+  QString defname;
+  int index = mw_one->ui->tabTotal->currentIndex();
+  defname = getTabTextName(index);
 
-    QString FileName = fd.getOpenFileName(this, tr("Open File"), defname,
-        tr("Config file(*.plist);;All files(*.*)"));
-    if (FileName.isEmpty())
-        return;
+  QString FileName =
+      fd.getOpenFileName(this, tr("Open File"), defname,
+                         tr("Config file(*.plist);;All files(*.*)"));
+  if (FileName.isEmpty()) return;
 
-    mw_one->loading = true;
+  mw_one->loading = true;
 
-    QFile file(FileName);
-    QVariantMap map = PListParser::parsePList(&file).toMap();
+  QFile file(FileName);
+  QVariantMap map = PListParser::parsePList(&file).toMap();
 
-    switch (index) {
+  switch (index) {
     case 0:
-        // ACPI
-        init_Table(0);
+      // ACPI
+      init_Table(0);
 
-        mw_one->ParserACPI(map);
+      mw_one->ParserACPI(map);
 
-        break;
+      break;
 
     case 1:
-        // Booter
-        init_Table(1);
+      // Booter
+      init_Table(1);
 
-        mw_one->ParserBooter(map);
-        break;
+      mw_one->ParserBooter(map);
+      break;
 
     case 2:
-        // DP
-        init_Table(2);
+      // DP
+      init_Table(2);
 
-        mw_one->ParserDP(map);
-        break;
+      mw_one->ParserDP(map);
+      break;
 
     case 3:
-        // Kernel
-        init_Table(3);
+      // Kernel
+      init_Table(3);
 
-        mw_one->ParserKernel(map);
-        break;
+      mw_one->ParserKernel(map);
+      break;
 
     case 4:
-        // Misc
-        init_Table(4);
+      // Misc
+      init_Table(4);
 
-        mw_one->ParserMisc(map);
-        break;
+      mw_one->ParserMisc(map);
+      break;
 
     case 5:
-        // NVRAM
-        init_Table(5);
+      // NVRAM
+      init_Table(5);
 
-        mw_one->ParserNvram(map);
-        break;
+      mw_one->ParserNvram(map);
+      break;
 
     case 6:
-        // PI
-        init_Table(6);
+      // PI
+      init_Table(6);
 
-        mw_one->ParserPlatformInfo(map);
-        break;
+      mw_one->ParserPlatformInfo(map);
+      break;
 
     case 7:
-        // UEFI
-        init_Table(7);
+      // UEFI
+      init_Table(7);
 
-        mw_one->ParserUEFI(map);
-        break;
-    }
+      mw_one->ParserUEFI(map);
+      break;
+  }
 
-    mw_one->loading = false;
+  mw_one->loading = false;
 }
 
-void Method::init_Table(int index)
-{
-
-    if (index == -1) {
-        mw_one->listOfTableWidget.clear();
-        mw_one->listOfTableWidget = mw_one->getAllTableWidget(mw_one->getAllUIControls(mw_one->ui->tabTotal));
-        for (int i = 0; i < mw_one->listOfTableWidget.count(); i++) {
-            QTableWidget* w = (QTableWidget*)mw_one->listOfTableWidget.at(i);
-
-            w->setRowCount(0);
-        }
-    } else {
-
-        for (int i = 0; i < mw_one->ui->tabTotal->tabBar()->count(); i++) {
-            if (index == i) {
-                mw_one->listOfTableWidget.clear();
-                mw_one->listOfTableWidget = mw_one->getAllTableWidget(mw_one->getAllUIControls(mw_one->ui->tabTotal->widget(i)));
-                for (int j = 0; j < mw_one->listOfTableWidget.count(); j++) {
-                    QTableWidget* w = (QTableWidget*)mw_one->listOfTableWidget.at(j);
-
-                    w->setRowCount(0);
-                }
-            }
-        }
-    }
-}
-
-void Method::findDP(QTableWidget* t, QString findText)
-{
-    // DP
-    if (t == mw_one->ui->table_dp_add0) {
-        if (t->rowCount() > 0) {
-            for (int j = 0; j < t->rowCount(); j++) {
-                t->setCurrentCell(j, 0);
-                mw_one->findTable(mw_one->ui->table_dp_add, findText);
-            }
-        }
-    }
-
-    if (t == mw_one->ui->table_dp_del0) {
-        if (t->rowCount() > 0) {
-            for (int j = 0; j < t->rowCount(); j++) {
-                t->setCurrentCell(j, 0);
-                mw_one->findTable(mw_one->ui->table_dp_del, findText);
-            }
-        }
-    }
-}
-
-void Method::findNVRAM(QTableWidget* t, QString findText)
-{
-    // NVRAM
-    if (t == mw_one->ui->table_nv_add0) {
-        if (t->rowCount() > 0) {
-            for (int j = 0; j < t->rowCount(); j++) {
-                t->setCurrentCell(j, 0);
-                mw_one->findTable(mw_one->ui->table_nv_add, findText);
-            }
-        }
-    }
-
-    if (t == mw_one->ui->table_nv_del0) {
-        if (t->rowCount() > 0) {
-            for (int j = 0; j < t->rowCount(); j++) {
-                t->setCurrentCell(j, 0);
-                mw_one->findTable(mw_one->ui->table_nv_del, findText);
-            }
-        }
-    }
-
-    if (t == mw_one->ui->table_nv_ls0) {
-        if (t->rowCount() > 0) {
-            for (int j = 0; j < t->rowCount(); j++) {
-                t->setCurrentCell(j, 0);
-                mw_one->findTable(mw_one->ui->table_nv_ls, findText);
-            }
-        }
-    }
-}
-
-void Method::findTable(QString findText)
-{
-    //Table  2
+void Method::init_Table(int index) {
+  if (index == -1) {
     mw_one->listOfTableWidget.clear();
-    mw_one->listOfTableWidget = mw_one->getAllTableWidget(mw_one->getAllUIControls(mw_one->ui->tabTotal));
-    mw_one->listOfTableWidgetResults.clear();
+    mw_one->listOfTableWidget = mw_one->getAllTableWidget(
+        mw_one->getAllUIControls(mw_one->ui->tabTotal));
     for (int i = 0; i < mw_one->listOfTableWidget.count(); i++) {
-        QTableWidget* t;
-        t = (QTableWidget*)mw_one->listOfTableWidget.at(i);
+      QTableWidget* w = (QTableWidget*)mw_one->listOfTableWidget.at(i);
 
-        // DP
-        findDP(t, findText);
-
-        // NVRAM
-        findNVRAM(t, findText);
-
-        if (t != mw_one->ui->table_dp_add && t != mw_one->ui->table_dp_del && t != mw_one->ui->table_nv_add && t != mw_one->ui->table_nv_del && t != mw_one->ui->table_nv_ls)
-            mw_one->findTable(t, findText);
+      w->setRowCount(0);
     }
+  } else {
+    for (int i = 0; i < mw_one->ui->tabTotal->tabBar()->count(); i++) {
+      if (index == i) {
+        mw_one->listOfTableWidget.clear();
+        mw_one->listOfTableWidget = mw_one->getAllTableWidget(
+            mw_one->getAllUIControls(mw_one->ui->tabTotal->widget(i)));
+        for (int j = 0; j < mw_one->listOfTableWidget.count(); j++) {
+          QTableWidget* w = (QTableWidget*)mw_one->listOfTableWidget.at(j);
+
+          w->setRowCount(0);
+        }
+      }
+    }
+  }
+}
+
+void Method::findDP(QTableWidget* t, QString findText) {
+  // DP
+  if (t == mw_one->ui->table_dp_add0) {
+    if (t->rowCount() > 0) {
+      for (int j = 0; j < t->rowCount(); j++) {
+        t->setCurrentCell(j, 0);
+        mw_one->findTable(mw_one->ui->table_dp_add, findText);
+      }
+    }
+  }
+
+  if (t == mw_one->ui->table_dp_del0) {
+    if (t->rowCount() > 0) {
+      for (int j = 0; j < t->rowCount(); j++) {
+        t->setCurrentCell(j, 0);
+        mw_one->findTable(mw_one->ui->table_dp_del, findText);
+      }
+    }
+  }
+}
+
+void Method::findNVRAM(QTableWidget* t, QString findText) {
+  // NVRAM
+  if (t == mw_one->ui->table_nv_add0) {
+    if (t->rowCount() > 0) {
+      for (int j = 0; j < t->rowCount(); j++) {
+        t->setCurrentCell(j, 0);
+        mw_one->findTable(mw_one->ui->table_nv_add, findText);
+      }
+    }
+  }
+
+  if (t == mw_one->ui->table_nv_del0) {
+    if (t->rowCount() > 0) {
+      for (int j = 0; j < t->rowCount(); j++) {
+        t->setCurrentCell(j, 0);
+        mw_one->findTable(mw_one->ui->table_nv_del, findText);
+      }
+    }
+  }
+
+  if (t == mw_one->ui->table_nv_ls0) {
+    if (t->rowCount() > 0) {
+      for (int j = 0; j < t->rowCount(); j++) {
+        t->setCurrentCell(j, 0);
+        mw_one->findTable(mw_one->ui->table_nv_ls, findText);
+      }
+    }
+  }
+}
+
+void Method::findTable(QString findText) {
+  // Table  2
+  mw_one->listOfTableWidget.clear();
+  mw_one->listOfTableWidget =
+      mw_one->getAllTableWidget(mw_one->getAllUIControls(mw_one->ui->tabTotal));
+  mw_one->listOfTableWidgetResults.clear();
+  for (int i = 0; i < mw_one->listOfTableWidget.count(); i++) {
+    QTableWidget* t;
+    t = (QTableWidget*)mw_one->listOfTableWidget.at(i);
+
+    // DP
+    findDP(t, findText);
+
+    // NVRAM
+    findNVRAM(t, findText);
+
+    if (t != mw_one->ui->table_dp_add && t != mw_one->ui->table_dp_del &&
+        t != mw_one->ui->table_nv_add && t != mw_one->ui->table_nv_del &&
+        t != mw_one->ui->table_nv_ls)
+      mw_one->findTable(t, findText);
+  }
+}
+
+void Method::UpdateStatusBarInfo() {
+  QObjectList listTable;
+  QTableWidget* t;
+
+  QWidget* w = getSubTabWidget(mw_one->ui->listMain->currentRow(),
+                               mw_one->ui->listSub->currentRow());
+  listTable = mw_one->getAllTableWidget(mw_one->getAllUIControls(w));
+
+  if (listTable.count() > 1) {
+    for (int i = 0; i < listTable.count(); i++) {
+      t = (QTableWidget*)listTable.at(i);
+      if (t->hasFocus()) t->cellClicked(t->currentRow(), t->currentColumn());
+    }
+  } else if (listTable.count() == 1) {
+    t = (QTableWidget*)listTable.at(0);
+    t->cellClicked(t->currentRow(), t->currentColumn());
+  }
 }

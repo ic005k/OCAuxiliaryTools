@@ -9982,11 +9982,13 @@ void MainWindow::on_txtEditASCII_textChanged(const QString& arg1) {
 void MainWindow::on_listSub_currentRowChanged(int currentRow) {
   Q_UNUSED(currentRow);
   setConversionWidgetVisible(false);
+  mymethod->UpdateStatusBarInfo();
 }
 
 void MainWindow::on_listMain_currentRowChanged(int currentRow) {
   Q_UNUSED(currentRow);
   setConversionWidgetVisible(false);
+  mymethod->UpdateStatusBarInfo();
 }
 
 void MainWindow::setConversionWidgetVisible(bool v) {
@@ -10006,6 +10008,8 @@ void MainWindow::setConversionWidgetVisible(bool v) {
 void MainWindow::on_btnUpdateHex_triggered(QAction* arg1) { Q_UNUSED(arg1); }
 
 void MainWindow::on_btnUpdateHex_clicked() {
+  if (ui->txtEditHex->text().length() % 2 != 0) return;
+
   QObjectList listTable;
   QTableWidget* t;
   bool txtHexFocus = ui->txtEditHex->hasFocus();
