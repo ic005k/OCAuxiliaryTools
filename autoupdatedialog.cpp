@@ -277,3 +277,34 @@ void AutoUpdateDialog::TextEditToFile(QTextEdit* txtEdit, QString fileName) {
     delete file;
   }
 }
+
+void AutoUpdateDialog::keyPressEvent(QKeyEvent* event) {
+  switch (event->key()) {
+    case Qt::Key_Escape:
+      // reply->close();
+      // close();
+      break;
+
+    case Qt::Key_Return:
+
+      break;
+
+    case Qt::Key_Backspace:
+
+      break;
+
+    case Qt::Key_Space:
+
+      break;
+
+    case Qt::Key_F1:
+
+      break;
+  }
+
+  if (event->modifiers() == Qt::ControlModifier) {
+    if (event->key() == Qt::Key_M) {
+      this->setWindowState(Qt::WindowMaximized);
+    }
+  }
+}

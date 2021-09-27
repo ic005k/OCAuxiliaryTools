@@ -24,6 +24,13 @@
      </property>
     </widget>
    </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="btnMountOpenConfig">
+     <property name="text">
+      <string>Mount and open Config.plist</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>

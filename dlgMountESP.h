@@ -8,17 +8,20 @@ class dlgMountESP;
 }
 
 class dlgMountESP : public QDialog {
-    Q_OBJECT
+  Q_OBJECT
 
-public:
-    explicit dlgMountESP(QWidget* parent = nullptr);
-    ~dlgMountESP();
-    Ui::dlgMountESP* ui;
+ public:
+  explicit dlgMountESP(QWidget* parent = nullptr);
+  ~dlgMountESP();
+  Ui::dlgMountESP* ui;
 
-private slots:
-    void on_btnMount_clicked();
+  void mountESP(bool openConfig);
+ private slots:
+  void on_btnMount_clicked();
 
-private:
+  void on_btnMountOpenConfig_clicked();
+
+ private:
 };
 
-#endif // DLGMOUNTESP_H
+#endif  // DLGMOUNTESP_H

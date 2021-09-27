@@ -4406,29 +4406,29 @@ Type</translation>
 <context>
     <name>Method</name>
     <message>
-        <location filename="Method.cpp" line="388"/>
-        <location filename="Method.cpp" line="390"/>
+        <location filename="Method.cpp" line="351"/>
+        <location filename="Method.cpp" line="357"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="388"/>
+        <location filename="Method.cpp" line="353"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="405"/>
+        <location filename="Method.cpp" line="372"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="406"/>
-        <location filename="Method.cpp" line="470"/>
+        <location filename="Method.cpp" line="373"/>
+        <location filename="Method.cpp" line="435"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="469"/>
+        <location filename="Method.cpp" line="434"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
@@ -4561,6 +4561,11 @@ Type</translation>
         <location filename="dlgMountESP.ui" line="23"/>
         <source>Mount</source>
         <translation>挂载</translation>
+    </message>
+    <message>
+        <location filename="dlgMountESP.ui" line="30"/>
+        <source>Mount and open Config.plist</source>
+        <translation>挂载并打开Config.plist配置文件</translation>
     </message>
 </context>
 <context>

@@ -19,47 +19,48 @@ class AutoUpdateDialog;
 }
 
 class AutoUpdateDialog : public QDialog {
-    Q_OBJECT
+  Q_OBJECT
 
-public:
-    explicit AutoUpdateDialog(QWidget* parent = nullptr);
-    ~AutoUpdateDialog();
-    Ui::AutoUpdateDialog* ui;
+ public:
+  explicit AutoUpdateDialog(QWidget* parent = nullptr);
+  ~AutoUpdateDialog();
+  Ui::AutoUpdateDialog* ui;
 
-    QString tempDir;
-    QString filename;
-    QNetworkAccessManager* manager;
-    QNetworkReply* reply;
-    QFile* myfile;
-    void Init();
-    void doProcessReadyRead();
-    void doProcessFinished();
-    void doProcessDownloadProgress(qint64, qint64);
-    void doProcessError(QNetworkReply::NetworkError code);
+  QString tempDir;
+  QString filename;
+  QNetworkAccessManager* manager;
+  QNetworkReply* reply;
+  QFile* myfile;
+  void Init();
+  void doProcessReadyRead();
+  void doProcessFinished();
+  void doProcessDownloadProgress(qint64, qint64);
+  void doProcessError(QNetworkReply::NetworkError code);
 
-    void startUpdate();
-    void startDownload(bool Database);
-    QString strUrl;
-    QString strWinUrl;
-    QString strMacUrl;
-    QString strDatabaseUrl;
-    QString strMacClassicalUrl;
-    QString strLinuxUrl;
-    QString strLinuxTargetFile;
+  void startUpdate();
+  void startDownload(bool Database);
+  QString strUrl;
+  QString strWinUrl;
+  QString strMacUrl;
+  QString strDatabaseUrl;
+  QString strMacClassicalUrl;
+  QString strLinuxUrl;
+  QString strLinuxTargetFile;
 
-    QString GetFileSize(qint64 size);
+  QString GetFileSize(qint64 size);
 
-    void TextEditToFile(QTextEdit *txtEdit, QString fileName);
+  void TextEditToFile(QTextEdit* txtEdit, QString fileName);
 
-protected:
-    void closeEvent(QCloseEvent* event);
-private slots:
+ protected:
+  void closeEvent(QCloseEvent* event);
+  void keyPressEvent(QKeyEvent* event);
+ private slots:
 
-    void on_btnStartUpdate_clicked();
+  void on_btnStartUpdate_clicked();
 
-    void on_btnUpdateDatabase_clicked();
+  void on_btnUpdateDatabase_clicked();
 
-private:
+ private:
 };
 
-#endif // AUTOUPDATEDIALOG_H
+#endif  // AUTOUPDATEDIALOG_H
