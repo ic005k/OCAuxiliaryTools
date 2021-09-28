@@ -44,10 +44,12 @@
 #include "dlgParameters.h"
 #include "dlgdatabase.h"
 #include "recentfiles.h"
+#include "syncocdialog.h"
 #include "tooltip.h"
 #include "ui_autoupdatedialog.h"
 #include "ui_dlgMountESP.h"
 #include "ui_dlgParameters.h"
+#include "ui_syncocdialog.h"
 
 #ifdef Q_OS_WIN32
 #include <stdio.h>
@@ -112,6 +114,7 @@ class MainWindow : public QMainWindow {
   dlgOCValidate* dlgOCV;
   dlgParameters* dlgPar;
   AutoUpdateDialog* dlgAutoUpdate;
+  SyncOCDialog* dlgSyncOC;
 
   bool lineEditEnter = false;
   bool RefreshAllDatabase = false;

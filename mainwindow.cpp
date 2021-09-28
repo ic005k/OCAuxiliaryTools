@@ -11,6 +11,7 @@
 #include "plistserializer.h"
 #include "ui_aboutdialog.h"
 #include "ui_mainwindow.h"
+
 using namespace std;
 
 #include <QBuffer>
@@ -83,6 +84,7 @@ MainWindow::MainWindow(QWidget* parent)
   dlgOCV = new dlgOCValidate(this);
   dlgPar = new dlgParameters(this);
   dlgAutoUpdate = new AutoUpdateDialog(this);
+  dlgSyncOC = new SyncOCDialog(this);
 
   QDir dir;
   if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) {
@@ -9384,6 +9386,8 @@ QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab) {
 void MainWindow::on_actionQuit_triggered() { this->close(); }
 
 void MainWindow::on_actionUpgrade_OC_triggered() {
+  QStringList sourceFiles, targetFiles;
+
   QString DirName;
   QMessageBox box;
   bool ok1 = false;
@@ -9404,11 +9408,33 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   file2 = pathSource + "EFI/BOOT/BOOTx64.efi";
   file3 = pathSource + "EFI/OC/Drivers/OpenRuntime.efi";
   file4 = pathSource + "EFI/OC/Drivers/OpenCanopy.efi";
+  sourceFiles.append(file1);
+  sourceFiles.append(file2);
+  sourceFiles.append(file3);
+  sourceFiles.append(file4);
 
   targetFile1 = DirName + "/OC/OpenCore.efi";
   targetFile2 = DirName + "/BOOT/BOOTx64.efi";
   targetFile3 = DirName + "/OC/Drivers/OpenRuntime.efi";
   targetFile4 = DirName + "/OC/Drivers/OpenCanopy.efi";
+  targetFiles.append(targetFile1);
+  targetFiles.append(targetFile2);
+  targetFiles.append(targetFile3);
+  targetFiles.append(targetFile4);
+
+  // Drivers
+  for (int i = 0; i < ui->table_uefi_drivers->rowCount(); i++) {
+    QString str1 = ui->table_uefi_drivers->item(i, 0)->text();
+    QString str2 = pathSource + "EFI/OC/Drivers/" + str1;
+    bool re = false;
+    for (int j = 0; j < sourceFiles.count(); j++) {
+      if (sourceFiles.at(j) == str2) re = true;
+    }
+    if (!re) {
+      sourceFiles.append(str2);
+      targetFiles.append(DirName + "/OC/Drivers/" + str1);
+    }
+  }
 
   QFileInfo f1(file1);
   QFileInfo f2(file2);
@@ -9448,7 +9474,8 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   msg.setButtonText(QMessageBox::Ok, QString(tr("Ok")));
   msg.setButtonText(QMessageBox::Cancel, QString(tr("Cancel")));
   msg.setStyleSheet("QLabel{min-width:500 px;}");
-  int result = msg.exec();
+  int result;
+  // result= msg.exec();
   switch (result) {
     case QMessageBox::Ok:
       ui->cboxFind->setFocus();
@@ -9460,6 +9487,21 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     default:
       break;
   }
+
+  dlgSyncOC->ui->listSource->clear();
+  dlgSyncOC->ui->listTarget->clear();
+  dlgSyncOC->ui->listSource->addItems(sourceFiles);
+  dlgSyncOC->ui->listTarget->addItems(targetFiles);
+  dlgSyncOC->setModal(true);
+  dlgSyncOC->show();
+  for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
+    dlgSyncOC->ui->listSource->setCurrentRow(i);
+  }
+  dlgSyncOC->ui->listSource->setCurrentRow(0);
+  // Resources
+  dlgSyncOC->sourceResourcesDir = pathSource + "EFI/OC/Resources/";
+  dlgSyncOC->targetResourcesDir = DirName + "/OC/Resources/";
+  return;
 
   QFile::remove(targetFile1);
   ok1 = QFile::copy(file1, targetFile1);

@@ -613,10 +613,12 @@ void Method::UpdateStatusBarInfo() {
   if (listTable.count() > 1) {
     for (int i = 0; i < listTable.count(); i++) {
       t = (QTableWidget*)listTable.at(i);
+      if (!t->currentIndex().isValid()) return;
       if (t->hasFocus()) t->cellClicked(t->currentRow(), t->currentColumn());
     }
   } else if (listTable.count() == 1) {
     t = (QTableWidget*)listTable.at(0);
+    if (!t->currentIndex().isValid()) return;
     t->cellClicked(t->currentRow(), t->currentColumn());
   }
 }

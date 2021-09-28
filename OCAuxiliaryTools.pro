@@ -50,6 +50,7 @@ SOURCES += \
     plistserializer.cpp \
     pugixml.cpp \
     recentfiles.cpp \
+    syncocdialog.cpp \
     tooltip.cpp
 
 HEADERS += \
@@ -71,6 +72,7 @@ HEADERS += \
     pugiconfig.hpp \
     pugixml.hpp \
     recentfiles.h \
+    syncocdialog.h \
     tooltip.h
 
 FORMS += \
@@ -80,7 +82,8 @@ FORMS += \
     dlgOCValidate.ui \
     dlgParameters.ui \
     dlgdatabase.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    syncocdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
