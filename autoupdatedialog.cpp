@@ -16,7 +16,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   ui->progressBar->setTextVisible(false);
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
-  mw_one->deleteDirfile(tempDir);
+  // mw_one->deleteDirfile(tempDir);
   ui->label->setVisible(false);
 }
 
@@ -90,42 +90,28 @@ void AutoUpdateDialog::on_btnStartUpdate_clicked() {
 }
 
 void AutoUpdateDialog::startUpdate() {
-  QStringList arguments;
-  QString fn = "";
-  arguments << fn;
-
   ui->btnStartUpdate->setEnabled(false);
   this->repaint();
 
+  QString strZip, strPath, strExec;
   QFileInfo appInfo(qApp->applicationDirPath());
-  QString strZip;
-  if (mw_one->mac || mw_one->osx1012) {
-    strZip = tempDir + "Contents.zip";
-  }
-  if (mw_one->win) {
-    strZip = tempDir + "win.zip";
-  }
-  if (mw_one->linuxOS) {
-    strZip = tempDir + filename;
-  }
+  strZip = tempDir + filename;
 
   QDir dir;
   dir.setCurrent(tempDir);
 
   qApp->exit();
 
-  // QProcess* p = new QProcess;
-  QString strPath;
   if (mw_one->mac || mw_one->osx1012) {
     strPath = appInfo.path().replace("Contents", "");
-    // p->start("unzip", QStringList() << "-o" << strZip << "-d" << strPath);
-    // p->waitForFinished();
-    // p->start(strPath.mid(0, strPath.length() - 1), arguments);
-    // p->waitForStarted();
 
     QTextEdit* txtEdit = new QTextEdit();
+    strExec = strPath.mid(0, strPath.length() - 1);
+    strExec = "\"" + strExec + "\"";
+    strZip = "\"" + strZip + "\"";
+    strPath = "\"" + strPath + "\"";
     txtEdit->append("unzip -o " + strZip + " -d " + strPath);
-    txtEdit->append("open " + strPath.mid(0, strPath.length() - 1));
+    txtEdit->append("open " + strExec);
 
     QString fileName = tempDir + "upocat.sh";
     TextEditToFile(txtEdit, fileName);
@@ -136,30 +122,29 @@ void AutoUpdateDialog::startUpdate() {
 
   if (mw_one->win) {
     strPath = appInfo.filePath();
-    // p->startDetached(appInfo.filePath() + "/unzip.exe",
-    //                 QStringList() << "-o" << strZip << "-d" << strPath);
 
     QTextEdit* txtEdit = new QTextEdit();
+    strZip = "\"" + strZip + "\"";
+    strPath = "\"" + strPath + "\"";
     txtEdit->append(strPath + "/unzip.exe -o " + strZip + " -d " + strPath +
                     " && start " + qApp->applicationFilePath());
 
     QString fileName = tempDir + "upocat.bat";
     TextEditToFile(txtEdit, fileName);
+    fileName = "\"" + fileName + "\"";
     QProcess::startDetached("cmd.exe", QStringList() << "/c" << fileName);
   }
 
   if (mw_one->linuxOS) {
-    // p->execute("cp", QStringList() << "-f" << strZip << strLinuxTargetFile);
-    // p->waitForFinished();
-    // p->start(strLinuxTargetFile, arguments);
-
     QTextEdit* txtEdit = new QTextEdit();
+    strZip = "\"" + strZip + "\"";
+    strLinuxTargetFile = "\"" + strLinuxTargetFile + "\"";
     txtEdit->append("cp -f " + strZip + " " + strLinuxTargetFile);
     txtEdit->append(strLinuxTargetFile);
 
     QString fileName = tempDir + "upocat.sh";
     TextEditToFile(txtEdit, fileName);
-
+    fileName = "\"" + fileName + "\"";
     QProcess::execute("chmod", QStringList() << "+x" << fileName);
     QProcess::startDetached("bash", QStringList() << fileName);
   }

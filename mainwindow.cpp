@@ -9979,8 +9979,6 @@ void MainWindow::on_listMain_currentRowChanged(int currentRow) {
 }
 
 void MainWindow::setConversionWidgetVisible(bool v) {
-  if (find) return;
-
   if (!v) {
     ui->txtEditHex->setVisible(false);
     labelConversion->setVisible(false);
