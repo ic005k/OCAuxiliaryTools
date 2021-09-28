@@ -603,8 +603,6 @@ void Method::findTable(QString findText) {
 }
 
 void Method::UpdateStatusBarInfo() {
-  if (mw_one->find) return;
-
   QObjectList listTable;
   QTableWidget* t;
 

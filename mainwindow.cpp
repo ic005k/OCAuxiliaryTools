@@ -33,7 +33,7 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20210930";
+QString CurVerison = "20211001";
 QString ocVer = "0.7.4";
 
 MainWindow::MainWindow(QWidget* parent)
@@ -9965,12 +9965,14 @@ void MainWindow::on_txtEditASCII_textChanged(const QString& arg1) {
 }
 
 void MainWindow::on_listSub_currentRowChanged(int currentRow) {
+  if (find) return;
   Q_UNUSED(currentRow);
   setConversionWidgetVisible(false);
   mymethod->UpdateStatusBarInfo();
 }
 
 void MainWindow::on_listMain_currentRowChanged(int currentRow) {
+  if (find) return;
   Q_UNUSED(currentRow);
   setConversionWidgetVisible(false);
   mymethod->UpdateStatusBarInfo();
