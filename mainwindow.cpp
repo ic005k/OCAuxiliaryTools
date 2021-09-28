@@ -7671,7 +7671,7 @@ void MainWindow::on_actionFind_triggered() {
 
   if (!FindTextChange) {
     on_actionGo_to_the_next_triggered();
-    find = false;
+
     return;
   }
 
@@ -8219,6 +8219,8 @@ void MainWindow::goResultsTableHeader(QString objName) {
 }
 
 void MainWindow::goResults(int index) {
+  find = true;
+
   QString objName = listNameResults.at(index);
 
   //获取背景色
@@ -8261,6 +8263,8 @@ void MainWindow::goResults(int index) {
   ui->lblCount->setText(QString::number(findCount) + " ( " +
                         QString::number(ui->listFind->currentRow() + 1) +
                         " ) ");
+
+  find = false;
 }
 
 void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1) {
