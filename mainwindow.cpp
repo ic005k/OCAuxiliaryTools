@@ -9395,9 +9395,6 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
 
   QString DirName;
   QMessageBox box;
-  bool ok1 = false;
-  bool ok2 = false;
-  bool ok3 = false;
 
   QFileInfo fi(SaveFileName);
   DirName = fi.path().mid(0, fi.path().count() - 3);
@@ -9456,43 +9453,6 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     return;
   }
 
-  QFileInfo fiTarget(targetFile1);
-  QFileInfo fiSource(file1);
-  this->setFocus();
-  if (fiTarget.lastModified() > fiSource.lastModified()) {
-    box.setText(
-        tr("The current file is newer than the one inside the database, please "
-           "go to the official OC website to download the latest release or "
-           "development version to upgrade."));
-    // box.exec();
-    ui->cboxFind->setFocus();
-    // return;
-  }
-
-  QString strFiles = tr("The following files will be overwritten: ") + "\n " +
-                     targetFile1 + "\n " + targetFile2 + "\n " + targetFile3 +
-                     "\n " + targetFile4;
-  this->setFocus();
-  QMessageBox msg;
-  msg.setText(strFiles);
-  msg.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-  msg.setButtonText(QMessageBox::Ok, QString(tr("Ok")));
-  msg.setButtonText(QMessageBox::Cancel, QString(tr("Cancel")));
-  msg.setStyleSheet("QLabel{min-width:500 px;}");
-  int result;
-  // result= msg.exec();
-  switch (result) {
-    case QMessageBox::Ok:
-      ui->cboxFind->setFocus();
-      break;
-    case QMessageBox::Cancel:
-      ui->cboxFind->setFocus();
-      return;
-      break;
-    default:
-      break;
-  }
-
   dlgSyncOC->ui->listSource->clear();
   dlgSyncOC->ui->listTarget->clear();
   dlgSyncOC->ui->listSource->addItems(sourceFiles);
@@ -9506,32 +9466,6 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   // Resources
   dlgSyncOC->sourceResourcesDir = pathSource + "EFI/OC/Resources/";
   dlgSyncOC->targetResourcesDir = DirName + "/OC/Resources/";
-  return;
-
-  QFile::remove(targetFile1);
-  ok1 = QFile::copy(file1, targetFile1);
-
-  if (ok1) {
-    QFile::remove(targetFile2);
-    ok2 = QFile::copy(file2, targetFile2);
-  }
-
-  if (ok2) {
-    QFile::remove(targetFile3);
-    ok3 = QFile::copy(file3, targetFile3);
-  }
-
-  QFile::remove(targetFile4);
-  QFile::copy(file4, targetFile4);
-
-  this->setFocus();
-  box.setStyleSheet("QLabel{min-width:500 px;}");
-  if (ok1 && ok2 && ok3) {
-    box.setText(tr("Successfully synced to OpenCore: ") + getDatabaseVer());
-    box.exec();
-  }
-
-  ui->cboxFind->setFocus();
 }
 
 void MainWindow::initColorValue() {
