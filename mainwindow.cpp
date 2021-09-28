@@ -7667,8 +7667,11 @@ void MainWindow::findTabText(QString findText) {
 }
 
 void MainWindow::on_actionFind_triggered() {
+  find = true;
+
   if (!FindTextChange) {
     on_actionGo_to_the_next_triggered();
+    find = false;
     return;
   }
 
@@ -7758,6 +7761,8 @@ void MainWindow::on_actionFind_triggered() {
   }
 
   this->setWindowModified(curWinModi);
+
+  find = false;
 }
 
 void MainWindow::setPalette(QWidget* w, QColor backColor, QColor textColor) {

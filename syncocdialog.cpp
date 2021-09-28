@@ -53,7 +53,7 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   ui->lblTargetLastModi->setText(tr("Target file last modified") + " : " +
                                  targetModi);
 
-  if (sourceModi != targetModi && !mw_one->osx1012) {
+  if (sourceModi != targetModi) {
     ui->listTarget->item(currentRow)->setBackgroundColor(QColor(Qt::red));
     ui->listTarget->item(currentRow)->setForeground(QBrush(Qt::white));
   } else if (mw_one->red > 55)

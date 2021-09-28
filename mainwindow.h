@@ -73,7 +73,7 @@ class MainWindow : public QMainWindow {
 
   QList<QVariant> NoteValues;
   QList<QString> NoteKeys;
-
+  bool find = false;
   bool txtEditASCIITextChanged = false;
   bool txtEditHexTextChanged = false;
   QLabel* labelConversion;
