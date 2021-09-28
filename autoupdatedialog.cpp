@@ -126,7 +126,6 @@ void AutoUpdateDialog::startUpdate() {
     strZip = "\"" + strZip + "\"";
     strPath = "\"" + strPath + "\"";
     strExec = qApp->applicationFilePath();
-    strExec = "\"" + strExec + "\"";
     txtEdit->append(strUnzip + " -o " + strZip + " -d " + strPath + " && start " + strExec);
 
     QString fileName = tempDir + "upocat.bat";
