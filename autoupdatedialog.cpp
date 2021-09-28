@@ -131,7 +131,7 @@ void AutoUpdateDialog::startUpdate() {
 
     QString fileName = tempDir + "upocat.bat";
     TextEditToFile(txtEdit, fileName);
-    fileName = "\"" + fileName + "\"";
+
     QProcess::startDetached("cmd.exe", QStringList() << "/c" << fileName);
   }
 
@@ -144,7 +144,7 @@ void AutoUpdateDialog::startUpdate() {
 
     QString fileName = tempDir + "upocat.sh";
     TextEditToFile(txtEdit, fileName);
-    fileName = "\"" + fileName + "\"";
+
     QProcess::execute("chmod", QStringList() << "+x" << fileName);
     QProcess::startDetached("bash", QStringList() << fileName);
   }
