@@ -9966,7 +9966,7 @@ void MainWindow::on_listSub_currentRowChanged(int currentRow) {
   }
   Q_UNUSED(currentRow);
   setConversionWidgetVisible(false);
-  mymethod->UpdateStatusBarInfo();
+  // mymethod->UpdateStatusBarInfo();
 }
 
 void MainWindow::on_listMain_currentRowChanged(int currentRow) {
@@ -9976,7 +9976,7 @@ void MainWindow::on_listMain_currentRowChanged(int currentRow) {
   }
   Q_UNUSED(currentRow);
   setConversionWidgetVisible(false);
-  mymethod->UpdateStatusBarInfo();
+  // mymethod->UpdateStatusBarInfo();
 }
 
 void MainWindow::setConversionWidgetVisible(bool v) {
