@@ -22,26 +22,30 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
 
-void AutoUpdateDialog::Init()
-{
-    //"https://raw.fastgit.org/ic005k/"  //HK
-    strWinUrl = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
-                "QtOpenCoreConfigDatabase/main/win.zip";
+void AutoUpdateDialog::Init() {
+  //"https://raw.fastgit.org/ic005k/"  //HK
+  strWinUrl =
+      "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
+      "QtOpenCoreConfigDatabase/main/win.zip";
 
-    strMacUrl = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
-                "QtOpenCoreConfigDatabase/main/Contents.zip";
+  strMacUrl =
+      "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
+      "QtOpenCoreConfigDatabase/main/Contents.zip";
 
-    strMacClassicalUrl = "https://ghproxy.com/https://github.com/ic005k/QtOpenCoreConfigDatabase/"
-                         "releases/download/1.0.0/Contents.zip";
+  strMacClassicalUrl =
+      "https://ghproxy.com/https://github.com/ic005k/QtOpenCoreConfigDatabase/"
+      "releases/download/1.0.0/Contents.zip";
 
-    strLinuxUrl = "https://ghproxy.com/https://github.com/ic005k/QtOpenCoreConfigDatabase/"
-                  "releases/download/1.0.0/OCAuxiliaryTools-Linux-x86_64.AppImage";
+  strLinuxUrl =
+      "https://ghproxy.com/https://github.com/ic005k/QtOpenCoreConfigDatabase/"
+      "releases/download/1.0.0/OCAuxiliaryTools-Linux-x86_64.AppImage";
 
-    strDatabaseUrl = "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
-                     "QtOpenCoreConfigDatabase/main/Database.zip";
+  strDatabaseUrl =
+      "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
+      "QtOpenCoreConfigDatabase/main/Database.zip";
 
-    manager = new QNetworkAccessManager(this);
-    myfile = new QFile(this);
+  manager = new QNetworkAccessManager(this);
+  myfile = new QFile(this);
 }
 
 void AutoUpdateDialog::doProcessReadyRead()  //读取并写入
@@ -127,7 +131,8 @@ void AutoUpdateDialog::startUpdate() {
     strPath = "\"" + strPath + "\"";
     strExec = qApp->applicationFilePath();
     strExec = "\"" + strExec + "\"";
-    txtEdit->append(strUnzip + " -o " + strZip + " -d " + strPath + " && " + strExec);
+    txtEdit->append(strUnzip + " -o " + strZip + " -d " + strPath + " && " +
+                    strExec);
 
     QString fileName = tempDir + "upocat.bat";
     TextEditToFile(txtEdit, fileName);

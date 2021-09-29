@@ -9,7 +9,6 @@
 #include "commands.h"
 #include "plistparser.h"
 #include "plistserializer.h"
-#include "ui_aboutdialog.h"
 #include "ui_mainwindow.h"
 
 using namespace std;
@@ -33,8 +32,8 @@ QVector<QCheckBox*> chk_PickerAttributes;
 QVector<QCheckBox*> chk_ExposeSensitiveData;
 QVector<QCheckBox*> chk_Target;
 
-QString CurVerison = "20211001";
-QString ocVer = "0.7.4";
+extern QString CurVerison;
+extern QString ocVer;
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
