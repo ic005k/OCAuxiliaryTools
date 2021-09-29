@@ -10006,6 +10006,7 @@ Enable this option to be able to see all the boot options when having multiple d
     </property>
     <addaction name="actionNewWindow"/>
     <addaction name="actionOpen"/>
+    <addaction name="actionOpen_Directory"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
     <addaction name="separator"/>
@@ -10287,6 +10288,11 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionUpgrade_Database">
    <property name="text">
     <string>Download Database</string>
+   </property>
+  </action>
+  <action name="actionOpen_Directory">
+   <property name="text">
+    <string>Open Directory</string>
    </property>
   </action>
  </widget>

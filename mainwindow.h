@@ -333,16 +333,11 @@ class MainWindow : public QMainWindow {
   void readResultPassHash();
   void clearFindTexts();
   void copyText(QListWidget* listW);
-  void OpenDir_clicked();
-
   void on_line1();
   void on_line2();
   void on_line3();
-
   void on_line5();
-
   void recentOpen(QString filename);
-
   void on_nv1();
   void on_nv2();
   void on_nv3();
@@ -857,6 +852,10 @@ class MainWindow : public QMainWindow {
   void on_btnUpdateHex_triggered(QAction* arg1);
 
   void on_btnUpdateHex_clicked();
+
+  void on_actionOpen_Directory_triggered();
+
+  void on_actionOpen_database_directory_triggered();
 
  private:
   bool LoadRightTable = false;

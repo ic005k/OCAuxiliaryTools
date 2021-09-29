@@ -5768,6 +5768,11 @@ void MainWindow::init_FileMenu() {
   reFileMenu = new QMenu(this);
   btn0->setMenu(reFileMenu);
 
+  // Open Dir
+  if (mac || osx1012) ui->actionOpen_Directory->setIconVisibleInMenu(false);
+  ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
+  ui->toolBar->addAction(ui->actionOpen_Directory);
+
   // Save
   if (mac || osx1012) ui->actionSave->setIconVisibleInMenu(false);
   connect(ui->actionSave, &QAction::triggered, this, &MainWindow::on_btnSave);
@@ -5831,8 +5836,6 @@ void MainWindow::init_EditMenu() {
   if (mac || osx1012)
     ui->actionOpen_database_directory->setIconVisibleInMenu(false);
   ui->actionOpen_database_directory->setIcon(QIcon(":/icon/opendb.png"));
-  connect(ui->actionOpen_database_directory, &QAction::triggered, this,
-          &MainWindow::OpenDir_clicked);
 }
 
 void MainWindow::init_HelpMenu() {
@@ -6727,13 +6730,6 @@ bool MainWindow::copyDirectoryFiles(const QString& fromDir,
     }
   }
   return true;
-}
-
-void MainWindow::OpenDir_clicked() {
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString dirpath = appInfo.filePath() + "/Database/";
-  QString dir = "file:" + dirpath;
-  QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
 }
 
 void MainWindow::on_listMain_itemSelectionChanged() {
@@ -7760,6 +7756,8 @@ void MainWindow::on_actionFind_triggered() {
   }
 
   this->setWindowModified(curWinModi);
+
+  find = false;
 }
 
 void MainWindow::setPalette(QWidget* w, QColor backColor, QColor textColor) {
@@ -8260,6 +8258,8 @@ void MainWindow::goResults(int index) {
   ui->lblCount->setText(QString::number(findCount) + " ( " +
                         QString::number(ui->listFind->currentRow() + 1) +
                         " ) ");
+
+  find = false;
 }
 
 void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1) {
@@ -9961,22 +9961,20 @@ void MainWindow::on_txtEditASCII_textChanged(const QString& arg1) {
 
 void MainWindow::on_listSub_currentRowChanged(int currentRow) {
   if (find) {
-    find = false;
     return;
   }
   Q_UNUSED(currentRow);
   setConversionWidgetVisible(false);
-  // mymethod->UpdateStatusBarInfo();
+  mymethod->UpdateStatusBarInfo();
 }
 
 void MainWindow::on_listMain_currentRowChanged(int currentRow) {
   if (find) {
-    find = false;
     return;
   }
   Q_UNUSED(currentRow);
   setConversionWidgetVisible(false);
-  // mymethod->UpdateStatusBarInfo();
+  mymethod->UpdateStatusBarInfo();
 }
 
 void MainWindow::setConversionWidgetVisible(bool v) {
@@ -10028,4 +10026,17 @@ void MainWindow::on_btnUpdateHex_clicked() {
 
   if (txtHexFocus) ui->txtEditHex->setFocus();
   if (txtASCIIFocus) ui->txtEditASCII->setFocus();
+}
+
+void MainWindow::on_actionOpen_Directory_triggered() {
+  QFileInfo fi(SaveFileName);
+  QString dir = "file:" + fi.filePath().replace(fi.fileName(), "");
+  QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
+}
+
+void MainWindow::on_actionOpen_database_directory_triggered() {
+  QFileInfo appInfo(qApp->applicationDirPath());
+  QString dirpath = appInfo.filePath() + "/Database/";
+  QString dir = "file:" + dirpath;
+  QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
 }

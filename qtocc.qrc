@@ -41,5 +41,6 @@
         <file>icon/del.png</file>
         <file>icon/down.png</file>
         <file>icon/up.png</file>
+        <file>icon/opendir.png</file>
     </qresource>
 </RCC>
