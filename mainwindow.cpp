@@ -7760,8 +7760,6 @@ void MainWindow::on_actionFind_triggered() {
   }
 
   this->setWindowModified(curWinModi);
-
-  find = false;
 }
 
 void MainWindow::setPalette(QWidget* w, QColor backColor, QColor textColor) {
@@ -8262,8 +8260,6 @@ void MainWindow::goResults(int index) {
   ui->lblCount->setText(QString::number(findCount) + " ( " +
                         QString::number(ui->listFind->currentRow() + 1) +
                         " ) ");
-
-  find = false;
 }
 
 void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1) {
@@ -9964,14 +9960,20 @@ void MainWindow::on_txtEditASCII_textChanged(const QString& arg1) {
 }
 
 void MainWindow::on_listSub_currentRowChanged(int currentRow) {
-  if (find) return;
+  if (find) {
+    find = false;
+    return;
+  }
   Q_UNUSED(currentRow);
   setConversionWidgetVisible(false);
   mymethod->UpdateStatusBarInfo();
 }
 
 void MainWindow::on_listMain_currentRowChanged(int currentRow) {
-  if (find) return;
+  if (find) {
+    find = false;
+    return;
+  }
   Q_UNUSED(currentRow);
   setConversionWidgetVisible(false);
   mymethod->UpdateStatusBarInfo();
