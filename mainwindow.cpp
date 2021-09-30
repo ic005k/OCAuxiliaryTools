@@ -339,56 +339,7 @@ void MainWindow::ParserACPI(QVariantMap map) {
   QVariantList map_patch = map["Patch"].toList();
   ui->table_acpi_patch->setRowCount(map_patch.count());
   for (int i = 0; i < map_patch.count(); i++) {
-    QVariantMap map3 = map_patch.at(i).toMap();
-
-    QTableWidgetItem* newItem1;
-    newItem1 = new QTableWidgetItem(
-        ByteToHexStr(map3["TableSignature"].toByteArray()));
-    ui->table_acpi_patch->setItem(i, 0, newItem1);
-
-    newItem1 =
-        new QTableWidgetItem(ByteToHexStr(map3["OemTableId"].toByteArray()));
-    ui->table_acpi_patch->setItem(i, 1, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["TableLength"].toString());
-    ui->table_acpi_patch->setItem(i, 2, newItem1);
-
-    ui->table_acpi_patch->setItem(
-        i, 3, new QTableWidgetItem(ByteToHexStr(map3["Find"].toByteArray())));
-
-    newItem1 =
-        new QTableWidgetItem(ByteToHexStr(map3["Replace"].toByteArray()));
-    ui->table_acpi_patch->setItem(i, 4, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-    ui->table_acpi_patch->setItem(i, 5, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Mask"].toString());
-    ui->table_acpi_patch->setItem(i, 6, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["ReplaceMask"].toString());
-    ui->table_acpi_patch->setItem(i, 7, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Count"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_acpi_patch->setItem(i, 8, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Limit"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_acpi_patch->setItem(i, 9, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Skip"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_acpi_patch->setItem(i, 10, newItem1);
-
-    init_enabled_data(ui->table_acpi_patch, i, 11, map3["Enabled"].toString());
-
-    ui->table_acpi_patch->setItem(
-        i, 12, new QTableWidgetItem(map3["Base"].toString()));
-
-    newItem1 = new QTableWidgetItem(map3["BaseSkip"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_acpi_patch->setItem(i, 13, newItem1);
+    AddACPIPatch(map_patch, i, i);
   }
 
   //分析Quirks
@@ -1038,73 +989,9 @@ void MainWindow::ParserKernel(QVariantMap map) {
 
   // Patch
   QVariantList map_patch = map["Patch"].toList();
-
   ui->table_kernel_patch->setRowCount(map_patch.count());
   for (int i = 0; i < map_patch.count(); i++) {
-    QVariantMap map3 = map_patch.at(i).toMap();
-
-    QByteArray ba = map3["Find"].toByteArray();
-
-    QTableWidgetItem* newItem1;
-
-    newItem1 = new QTableWidgetItem(map3["Identifier"].toString());
-    ui->table_kernel_patch->setItem(i, 0, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Base"].toString());
-    ui->table_kernel_patch->setItem(i, 1, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-    ui->table_kernel_patch->setItem(i, 2, newItem1);
-
-    //此时需要将ASCII转换成HEX
-    QByteArray tohex = map3["Find"].toByteArray();
-    QString va = tohex.toHex().toUpper();
-    newItem1 = new QTableWidgetItem(va);
-    ui->table_kernel_patch->setItem(i, 3, newItem1);
-
-    tohex = map3["Replace"].toByteArray();
-    va = tohex.toHex().toUpper();
-    newItem1 = new QTableWidgetItem(va);
-    ui->table_kernel_patch->setItem(i, 4, newItem1);
-
-    tohex = map3["Mask"].toByteArray();
-    va = tohex.toHex().toUpper();
-    newItem1 = new QTableWidgetItem(va);
-    ui->table_kernel_patch->setItem(i, 5, newItem1);
-
-    tohex = map3["ReplaceMask"].toByteArray();
-    va = tohex.toHex().toUpper();
-    newItem1 = new QTableWidgetItem(va);
-    ui->table_kernel_patch->setItem(i, 6, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_patch->setItem(i, 7, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_patch->setItem(i, 8, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Count"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_patch->setItem(i, 9, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Limit"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_patch->setItem(i, 10, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Skip"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_patch->setItem(i, 11, newItem1);
-
-    init_enabled_data(ui->table_kernel_patch, i, 12,
-                      map3["Enabled"].toString());
-
-    newItem1 = new QTableWidgetItem(map3["Arch"].toString());
-    if (map3["Arch"].toString().trimmed() == "")
-      newItem1 = new QTableWidgetItem("Any");
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_patch->setItem(i, 13, newItem1);
+    AddKernelPatch(map_patch, i, i);
   }
 
   // Emulate
@@ -10059,6 +9946,15 @@ void MainWindow::on_btnACPIPatch_clicked() {
   dlgPresetValues->show();
 }
 
+void MainWindow::on_btnPresetKernelPatch_clicked() {
+  dlgPresetValues->ui->listACPIPatch->setVisible(false);
+  dlgPresetValues->ui->listKernelPatch->setVisible(true);
+  dlgPresetValues->ui->listDPAdd->setVisible(false);
+  dlgPresetValues->setModal(true);
+  dlgPresetValues->loadKernelPatch();
+  dlgPresetValues->show();
+}
+
 void MainWindow::AddACPIPatch(QVariantList map_patch, int mapIndex,
                               int tableIndex) {
   QVariantMap map3 = map_patch.at(mapIndex).toMap();
@@ -10177,13 +10073,4 @@ void MainWindow::AddKernelPatch(QVariantList map_patch, int mapIndex,
     newItem1 = new QTableWidgetItem("Any");
   newItem1->setTextAlignment(Qt::AlignCenter);
   ui->table_kernel_patch->setItem(i, 13, newItem1);
-}
-
-void MainWindow::on_btnPresetKernelPatch_clicked() {
-  dlgPresetValues->ui->listACPIPatch->setVisible(false);
-  dlgPresetValues->ui->listKernelPatch->setVisible(true);
-  dlgPresetValues->ui->listDPAdd->setVisible(false);
-  dlgPresetValues->setModal(true);
-  dlgPresetValues->loadKernelPatch();
-  dlgPresetValues->show();
 }
