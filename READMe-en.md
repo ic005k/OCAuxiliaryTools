@@ -31,6 +31,11 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 [0.7.1](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210715) |
 [0.7.0](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210608) 
 
+## 配置一个全新的EFI的方法：
+* 这个过程非常简单，只需点击工具栏上的“数据库”，在数据库列表里面双击“Sample.plist”（这个文件是OC官方提供的配置文件示例），此时会自动在桌面产生一个EFI文件夹，过程完成。
+* 编辑修改这个“Sample.plist”之后（主要是要和自己的机器硬件相匹配，这是一个不断调试和测试的过程），可以随时点击工具栏上的“在桌面上生成EFI文件夹“，以刷新之前生成的EFI目录。
+* 之后就可以将桌面上的EFI文件夹拷贝到ESP等引导分区进行引导测试。
+
 ## 部分功能请看下面的截图：
 
 ![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat1.png)
