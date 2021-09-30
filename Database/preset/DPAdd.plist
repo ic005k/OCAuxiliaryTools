@@ -6,7 +6,7 @@
         <dict>
             <key>Add</key>
             <dict>
-                <key>PciRoot(0x0)/Pci(0x1f,0x3)  |  ALC256声卡</key>
+                <key>PciRoot(0x0)/Pci(0x1f,0x3)  |  ALC256</key>
                 <dict>
                     <key>#AAPL,slot-name</key>
                     <string>Internal@0,31,3</string>
