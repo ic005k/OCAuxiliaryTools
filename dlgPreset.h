@@ -2,7 +2,9 @@
 #define DLGPRESET_H
 
 #include <QDialog>
+#include <QListWidgetItem>
 #include <QVariantMap>
+
 namespace Ui {
 class dlgPreset;
 }
@@ -26,6 +28,12 @@ class dlgPreset : public QDialog {
   void loadKernelPatch();
  private slots:
   void on_btnAdd_clicked();
+
+  void on_listDPAdd_itemDoubleClicked(QListWidgetItem *item);
+
+  void on_listACPIPatch_itemDoubleClicked(QListWidgetItem *item);
+
+  void on_listKernelPatch_itemDoubleClicked(QListWidgetItem *item);
 
  private:
 };

@@ -92,7 +92,10 @@ void dlgPreset::on_btnAdd_clicked() {
     QString strItem;
     QStringList strItemList;
     strItemList = strCurrentItem.split("|");
-    if (strItemList.count() > 1) strItem = strItemList.at(0);
+    if (strItemList.count() > 1)
+      strItem = strItemList.at(0);
+    else
+      strItem = strCurrentItem;
 
     bool re = false;
 
@@ -197,4 +200,19 @@ void dlgPreset::on_btnAdd_clicked() {
                              mw_one->ui->table_kernel_patch->rowCount() - 1);
     }
   }
+}
+
+void dlgPreset::on_listDPAdd_itemDoubleClicked(QListWidgetItem* item) {
+  Q_UNUSED(item);
+  ui->btnAdd->clicked();
+}
+
+void dlgPreset::on_listACPIPatch_itemDoubleClicked(QListWidgetItem* item) {
+  Q_UNUSED(item);
+  ui->btnAdd->clicked();
+}
+
+void dlgPreset::on_listKernelPatch_itemDoubleClicked(QListWidgetItem* item) {
+  Q_UNUSED(item);
+  ui->btnAdd->clicked();
 }
