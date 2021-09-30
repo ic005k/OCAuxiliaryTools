@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -82,7 +82,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -447,7 +447,7 @@ relevant when performing different types of renames.
             <string>Patch</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_5">
-            <item row="0" column="0" colspan="3">
+            <item row="0" column="0" colspan="4">
              <widget class="QTableWidget" name="table_acpi_patch">
               <property name="toolTip">
                <string notr="true">1. Base
@@ -682,6 +682,19 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
               </property>
              </widget>
             </item>
+            <item row="1" column="3">
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>919</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnACPIPatch_Del">
               <property name="font">
@@ -708,17 +721,11 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
              </widget>
             </item>
             <item row="1" column="2">
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+             <widget class="QToolButton" name="btnACPIPatch">
+              <property name="text">
+               <string>Preset</string>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>919</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
+             </widget>
             </item>
            </layout>
           </widget>

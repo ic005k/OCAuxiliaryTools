@@ -20,7 +20,9 @@ class dlgPreset : public QDialog {
   QVariantMap map_sub;
   QVariantMap map_add;
   QVariantMap map;
+  QVariantList map_patch;
 
+  void loadACPIPatch();
  private slots:
   void on_btnAdd_clicked();
 

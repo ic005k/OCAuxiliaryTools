@@ -10048,3 +10048,66 @@ void MainWindow::on_btnDPAddPreset_clicked() {
   dlgPresetValues->loadDPAdd();
   dlgPresetValues->show();
 }
+
+void MainWindow::on_btnACPIPatch_clicked() {
+  dlgPresetValues->ui->listACPIPatch->setVisible(true);
+  dlgPresetValues->ui->listKernelPatch->setVisible(false);
+  dlgPresetValues->ui->listDPAdd->setVisible(false);
+  dlgPresetValues->setModal(true);
+  dlgPresetValues->loadACPIPatch();
+  dlgPresetValues->show();
+}
+
+void MainWindow::AddACPIPatch(QVariantList map_patch, int mapIndex,
+                              int tableIndex) {
+  QVariantMap map3 = map_patch.at(mapIndex).toMap();
+
+  int i = tableIndex;
+  QTableWidgetItem* newItem1;
+  newItem1 =
+      new QTableWidgetItem(ByteToHexStr(map3["TableSignature"].toByteArray()));
+  ui->table_acpi_patch->setItem(i, 0, newItem1);
+
+  newItem1 =
+      new QTableWidgetItem(ByteToHexStr(map3["OemTableId"].toByteArray()));
+  ui->table_acpi_patch->setItem(i, 1, newItem1);
+
+  newItem1 = new QTableWidgetItem(map3["TableLength"].toString());
+  ui->table_acpi_patch->setItem(i, 2, newItem1);
+
+  ui->table_acpi_patch->setItem(
+      i, 3, new QTableWidgetItem(ByteToHexStr(map3["Find"].toByteArray())));
+
+  newItem1 = new QTableWidgetItem(ByteToHexStr(map3["Replace"].toByteArray()));
+  ui->table_acpi_patch->setItem(i, 4, newItem1);
+
+  newItem1 = new QTableWidgetItem(map3["Comment"].toString());
+  ui->table_acpi_patch->setItem(i, 5, newItem1);
+
+  newItem1 = new QTableWidgetItem(map3["Mask"].toString());
+  ui->table_acpi_patch->setItem(i, 6, newItem1);
+
+  newItem1 = new QTableWidgetItem(map3["ReplaceMask"].toString());
+  ui->table_acpi_patch->setItem(i, 7, newItem1);
+
+  newItem1 = new QTableWidgetItem(map3["Count"].toString());
+  newItem1->setTextAlignment(Qt::AlignCenter);
+  ui->table_acpi_patch->setItem(i, 8, newItem1);
+
+  newItem1 = new QTableWidgetItem(map3["Limit"].toString());
+  newItem1->setTextAlignment(Qt::AlignCenter);
+  ui->table_acpi_patch->setItem(i, 9, newItem1);
+
+  newItem1 = new QTableWidgetItem(map3["Skip"].toString());
+  newItem1->setTextAlignment(Qt::AlignCenter);
+  ui->table_acpi_patch->setItem(i, 10, newItem1);
+
+  init_enabled_data(ui->table_acpi_patch, i, 11, map3["Enabled"].toString());
+
+  ui->table_acpi_patch->setItem(i, 12,
+                                new QTableWidgetItem(map3["Base"].toString()));
+
+  newItem1 = new QTableWidgetItem(map3["BaseSkip"].toString());
+  newItem1->setTextAlignment(Qt::AlignCenter);
+  ui->table_acpi_patch->setItem(i, 13, newItem1);
+}

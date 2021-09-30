@@ -14,19 +14,50 @@ dlgPreset::dlgPreset(QWidget* parent) : QDialog(parent), ui(new Ui::dlgPreset) {
 dlgPreset::~dlgPreset() { delete ui; }
 
 void dlgPreset::loadDPAdd() {
+  ui->listDPAdd->clear();
   QString strPlistFile = strPresetPath + "DPAdd.plist";
   QFile file(strPlistFile);
 
+  map.clear();
   map = PListParser::parsePList(&file).toMap();
   map = map["DeviceProperties"].toMap();
   if (map.isEmpty()) return;
 
   // Add
+  map_add.clear();
   map_add = map["Add"].toMap();
   ui->listDPAdd->clear();
   for (int i = 0; i < map_add.count(); i++) {
     ui->listDPAdd->addItem(map_add.keys().at(i));
   }
+
+  if (ui->listDPAdd->count() > 0) ui->listDPAdd->setCurrentRow(0);
+
+  file.close();
+}
+
+void dlgPreset::loadACPIPatch() {
+  ui->listACPIPatch->clear();
+  QString strPlistFile = strPresetPath + "ACPIPatch.plist";
+  QFile file(strPlistFile);
+
+  map.clear();
+  map = PListParser::parsePList(&file).toMap();
+  map = map["ACPI"].toMap();
+  if (map.isEmpty()) return;
+
+  //分析Patch
+  map_patch.clear();
+  map_patch = map["Patch"].toList();
+  for (int i = 0; i < map_patch.count(); i++) {
+    QVariantMap map3 = map_patch.at(i).toMap();
+    QString strItem = map3["Comment"].toString();
+    ui->listACPIPatch->addItem(strItem);
+  }
+
+  if (ui->listACPIPatch->count() > 0) ui->listACPIPatch->setCurrentRow(0);
+
+  file.close();
 }
 
 void dlgPreset::on_btnAdd_clicked() {
@@ -39,10 +70,13 @@ void dlgPreset::on_btnAdd_clicked() {
     if (strItemList.count() > 1) strItem = strItemList.at(0);
 
     bool re = false;
+
     for (int i = 0; i < mw_one->ui->table_dp_add0->rowCount(); i++) {
       if (mw_one->ui->table_dp_add0->item(i, 0)->text().trimmed() ==
           strItem.trimmed())
         re = true;
+      mw_one->ui->table_dp_add0->setCurrentCell(
+          i, mw_one->ui->table_dp_add0->currentColumn());
     }
 
     if (!re) {
@@ -52,6 +86,7 @@ void dlgPreset::on_btnAdd_clicked() {
       mw_one->ui->table_dp_add0->setItem(table_row, 0, newItem1);
 
       //加载子条目
+      map_sub.clear();
       map_sub = map_add[map_add.keys().at(row)].toMap();
       mw_one->ui->table_dp_add->setRowCount(
           map_sub.keys().count());  //子键的个数
@@ -86,6 +121,28 @@ void dlgPreset::on_btnAdd_clicked() {
       //保存子条目里面的数据，以便以后加载
       mw_one->write_ini(mw_one->ui->table_dp_add0, mw_one->ui->table_dp_add,
                         table_row);
+    }
+  }
+
+  if (ui->listACPIPatch->isVisible()) {
+    bool re = false;
+    for (int i = 0; i < mw_one->ui->table_acpi_patch->rowCount(); i++) {
+      QVariantMap map3 = map_patch.at(ui->listACPIPatch->currentRow()).toMap();
+      QString strFind = mw_one->ByteToHexStr(map3["Find"].toByteArray());
+      QString strReplace = mw_one->ByteToHexStr(map3["Replace"].toByteArray());
+
+      if (strFind == mw_one->ui->table_acpi_patch->item(i, 3)->text() &&
+          strReplace == mw_one->ui->table_acpi_patch->item(i, 4)->text()) {
+        re = true;
+        mw_one->ui->table_acpi_patch->setCurrentCell(
+            i, mw_one->ui->table_acpi_patch->currentColumn());
+      }
+    }
+    if (!re) {
+      mw_one->on_btnACPIPatch_Add_clicked();
+
+      mw_one->AddACPIPatch(map_patch, ui->listACPIPatch->currentRow(),
+                           mw_one->ui->table_acpi_patch->rowCount() - 1);
     }
   }
 }

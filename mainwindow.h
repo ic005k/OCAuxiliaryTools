@@ -307,6 +307,7 @@ class MainWindow : public QMainWindow {
   void setConversionWidgetVisible(bool v);
   void EnterPress();
 
+  void AddACPIPatch(QVariantList map_patch, int mapIndex, int tableIndex);
  public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -315,7 +316,7 @@ class MainWindow : public QMainWindow {
   void on_actionFind_triggered();
   void on_btnNVRAMAdd_Add_clicked();
   void on_btnDPAdd_Add0_clicked();
-
+  void on_btnACPIPatch_Add_clicked();
   void cellEnteredSlot(int row, int column);
 
  protected:
@@ -431,8 +432,6 @@ class MainWindow : public QMainWindow {
   void on_btnACPIDel_Add_clicked();
 
   void on_btnACPIDel_Del_clicked();
-
-  void on_btnACPIPatch_Add_clicked();
 
   void on_btnACPIPatch_Del_clicked();
 
@@ -863,6 +862,8 @@ class MainWindow : public QMainWindow {
   void on_actionOpen_database_directory_triggered();
 
   void on_btnDPAddPreset_clicked();
+
+  void on_btnACPIPatch_clicked();
 
  private:
   bool LoadRightTable = false;
