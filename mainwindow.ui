@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1732,7 +1732,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1742,7 +1742,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_9">
-            <item row="0" column="0" colspan="5">
+            <item row="0" column="0" colspan="6">
              <layout class="QGridLayout" name="gridLayout_dp_add">
               <item row="0" column="0">
                <widget class="QTableWidget" name="table_dp_add0">
@@ -1786,6 +1786,19 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
              </widget>
             </item>
+            <item row="1" column="3">
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>648</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnDPAdd_Del0">
               <property name="font">
@@ -1811,20 +1824,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
-             <spacer name="horizontalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>648</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="3">
+            <item row="1" column="4">
              <widget class="QToolButton" name="btnDPAdd_Add">
               <property name="font">
                <font>
@@ -1849,7 +1849,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
+            <item row="1" column="5">
              <widget class="QToolButton" name="btnDPAdd_Del">
               <property name="font">
                <font>
@@ -1871,6 +1871,13 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
               <property name="shortcut">
                <string>Ctrl+Del</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QToolButton" name="btnDPAddPreset">
+              <property name="text">
+               <string>Preset</string>
               </property>
              </widget>
             </item>

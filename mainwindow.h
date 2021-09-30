@@ -42,7 +42,10 @@
 #include "dlgMountESP.h"
 #include "dlgOCValidate.h"
 #include "dlgParameters.h"
+#include "dlgPreset.h"
 #include "dlgdatabase.h"
+#include "plistparser.h"
+#include "plistserializer.h"
 #include "recentfiles.h"
 #include "syncocdialog.h"
 #include "tooltip.h"
@@ -50,6 +53,7 @@
 #include "ui_autoupdatedialog.h"
 #include "ui_dlgMountESP.h"
 #include "ui_dlgParameters.h"
+#include "ui_dlgPreset.h"
 #include "ui_syncocdialog.h"
 
 #ifdef Q_OS_WIN32
@@ -116,6 +120,7 @@ class MainWindow : public QMainWindow {
   dlgParameters* dlgPar;
   AutoUpdateDialog* dlgAutoUpdate;
   SyncOCDialog* dlgSyncOC;
+  dlgPreset* dlgPresetValues;
 
   bool lineEditEnter = false;
   bool RefreshAllDatabase = false;
@@ -301,6 +306,7 @@ class MainWindow : public QMainWindow {
   void ShowAutoUpdateDlg(bool Database);
   void setConversionWidgetVisible(bool v);
   void EnterPress();
+
  public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -308,6 +314,7 @@ class MainWindow : public QMainWindow {
   void ExposeSensitiveData();
   void on_actionFind_triggered();
   void on_btnNVRAMAdd_Add_clicked();
+  void on_btnDPAdd_Add0_clicked();
 
   void cellEnteredSlot(int row, int column);
 
@@ -442,8 +449,6 @@ class MainWindow : public QMainWindow {
   void on_btnDPDel_Del_clicked();
 
   void on_btnACPIAdd_Add_clicked();
-
-  void on_btnDPAdd_Add0_clicked();
 
   void on_btnDPAdd_Del0_clicked();
 
@@ -856,6 +861,8 @@ class MainWindow : public QMainWindow {
   void on_actionOpen_Directory_triggered();
 
   void on_actionOpen_database_directory_triggered();
+
+  void on_btnDPAddPreset_clicked();
 
  private:
   bool LoadRightTable = false;

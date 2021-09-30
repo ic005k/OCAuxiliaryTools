@@ -7,8 +7,6 @@
 #include "Method.h"
 #include "Plist.hpp"
 #include "commands.h"
-#include "plistparser.h"
-#include "plistserializer.h"
 #include "ui_mainwindow.h"
 
 using namespace std;
@@ -84,6 +82,7 @@ MainWindow::MainWindow(QWidget* parent)
   dlgPar = new dlgParameters(this);
   dlgAutoUpdate = new AutoUpdateDialog(this);
   dlgSyncOC = new SyncOCDialog(this);
+  dlgPresetValues = new dlgPreset(this);
 
   QDir dir;
   if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) {
@@ -10039,4 +10038,13 @@ void MainWindow::on_actionOpen_database_directory_triggered() {
   QString dirpath = appInfo.filePath() + "/Database/";
   QString dir = "file:" + dirpath;
   QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
+}
+
+void MainWindow::on_btnDPAddPreset_clicked() {
+  dlgPresetValues->ui->listACPIPatch->setVisible(false);
+  dlgPresetValues->ui->listKernelPatch->setVisible(false);
+  dlgPresetValues->ui->listDPAdd->setVisible(true);
+  dlgPresetValues->setModal(true);
+  dlgPresetValues->loadDPAdd();
+  dlgPresetValues->show();
 }

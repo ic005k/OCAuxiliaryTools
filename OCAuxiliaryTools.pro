@@ -42,6 +42,7 @@ SOURCES += \
     dlgMountESP.cpp \
     dlgOCValidate.cpp \
     dlgParameters.cpp \
+    dlgPreset.cpp \
     dlgdatabase.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -64,6 +65,7 @@ HEADERS += \
     dlgMountESP.h \
     dlgOCValidate.h \
     dlgParameters.h \
+    dlgPreset.h \
     dlgdatabase.h \
     mainwindow.h \
     myapp.h \
@@ -81,6 +83,7 @@ FORMS += \
     dlgMountESP.ui \
     dlgOCValidate.ui \
     dlgParameters.ui \
+    dlgPreset.ui \
     dlgdatabase.ui \
     mainwindow.ui \
     syncocdialog.ui
