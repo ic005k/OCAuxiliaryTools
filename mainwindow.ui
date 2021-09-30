@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -2035,7 +2035,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2380,30 +2380,6 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
             <string>Patch</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_14">
-            <item row="0" column="0" colspan="3">
-             <widget class="QTableWidget" name="table_kernel_patch">
-              <property name="rowCount">
-               <number>0</number>
-              </property>
-              <property name="columnCount">
-               <number>14</number>
-              </property>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnKernelPatchAdd">
               <property name="font">
@@ -2451,7 +2427,31 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
+            <item row="0" column="0" colspan="4">
+             <widget class="QTableWidget" name="table_kernel_patch">
+              <property name="rowCount">
+               <number>0</number>
+              </property>
+              <property name="columnCount">
+               <number>14</number>
+              </property>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+             </widget>
+            </item>
+            <item row="1" column="3">
              <spacer name="horizontalSpacer_9">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -2463,6 +2463,13 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="1" column="2">
+             <widget class="QToolButton" name="btnPresetKernelPatch">
+              <property name="text">
+               <string>Preset</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>

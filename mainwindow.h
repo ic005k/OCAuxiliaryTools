@@ -308,6 +308,7 @@ class MainWindow : public QMainWindow {
   void EnterPress();
 
   void AddACPIPatch(QVariantList map_patch, int mapIndex, int tableIndex);
+  void AddKernelPatch(QVariantList map_patch, int mapIndex, int tableIndex);
  public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -317,6 +318,7 @@ class MainWindow : public QMainWindow {
   void on_btnNVRAMAdd_Add_clicked();
   void on_btnDPAdd_Add0_clicked();
   void on_btnACPIPatch_Add_clicked();
+  void on_btnKernelPatchAdd_clicked();
   void cellEnteredSlot(int row, int column);
 
  protected:
@@ -422,8 +424,6 @@ class MainWindow : public QMainWindow {
   void on_tableTools_cellClicked(int row, int column);
 
   void on_table_uefi_ReservedMemory_cellClicked(int row, int column);
-
-  void on_btnKernelPatchAdd_clicked();
 
   void on_btnKernelPatchDel_clicked();
 
@@ -864,6 +864,8 @@ class MainWindow : public QMainWindow {
   void on_btnDPAddPreset_clicked();
 
   void on_btnACPIPatch_clicked();
+
+  void on_btnPresetKernelPatch_clicked();
 
  private:
   bool LoadRightTable = false;

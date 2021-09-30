@@ -60,7 +60,32 @@ void dlgPreset::loadACPIPatch() {
   file.close();
 }
 
+void dlgPreset::loadKernelPatch() {
+  ui->listKernelPatch->clear();
+  QString strPlistFile = strPresetPath + "KernelPatch.plist";
+  QFile file(strPlistFile);
+
+  map.clear();
+  map = PListParser::parsePList(&file).toMap();
+  map = map["Kernel"].toMap();
+  if (map.isEmpty()) return;
+
+  //分析Patch
+  map_patch.clear();
+  map_patch = map["Patch"].toList();
+  for (int i = 0; i < map_patch.count(); i++) {
+    QVariantMap map3 = map_patch.at(i).toMap();
+    QString strItem = map3["Comment"].toString();
+    ui->listKernelPatch->addItem(strItem);
+  }
+
+  if (ui->listKernelPatch->count() > 0) ui->listKernelPatch->setCurrentRow(0);
+
+  file.close();
+}
+
 void dlgPreset::on_btnAdd_clicked() {
+  // DPAdd
   if (ui->listDPAdd->isVisible()) {
     int row = ui->listDPAdd->currentRow();
     QString strCurrentItem = ui->listDPAdd->item(row)->text();
@@ -73,10 +98,10 @@ void dlgPreset::on_btnAdd_clicked() {
 
     for (int i = 0; i < mw_one->ui->table_dp_add0->rowCount(); i++) {
       if (mw_one->ui->table_dp_add0->item(i, 0)->text().trimmed() ==
-          strItem.trimmed())
+          strItem.trimmed()) {
         re = true;
-      mw_one->ui->table_dp_add0->setCurrentCell(
-          i, mw_one->ui->table_dp_add0->currentColumn());
+        mw_one->ui->table_dp_add0->setCurrentCell(i, 0);
+      }
     }
 
     if (!re) {
@@ -124,6 +149,7 @@ void dlgPreset::on_btnAdd_clicked() {
     }
   }
 
+  // ACPIPatch
   if (ui->listACPIPatch->isVisible()) {
     bool re = false;
     for (int i = 0; i < mw_one->ui->table_acpi_patch->rowCount(); i++) {
@@ -143,6 +169,32 @@ void dlgPreset::on_btnAdd_clicked() {
 
       mw_one->AddACPIPatch(map_patch, ui->listACPIPatch->currentRow(),
                            mw_one->ui->table_acpi_patch->rowCount() - 1);
+    }
+  }
+
+  // KernalPatch
+  if (ui->listKernelPatch->isVisible()) {
+    bool re = false;
+    for (int i = 0; i < mw_one->ui->table_kernel_patch->rowCount(); i++) {
+      QVariantMap map3 =
+          map_patch.at(ui->listKernelPatch->currentRow()).toMap();
+      QString strBase = map3["Base"].toString();
+      QString strFind = mw_one->ByteToHexStr(map3["Find"].toByteArray());
+      QString strReplace = mw_one->ByteToHexStr(map3["Replace"].toByteArray());
+
+      if (strBase == mw_one->ui->table_kernel_patch->item(i, 1)->text() &&
+          strFind == mw_one->ui->table_kernel_patch->item(i, 3)->text() &&
+          strReplace == mw_one->ui->table_kernel_patch->item(i, 4)->text()) {
+        re = true;
+        mw_one->ui->table_kernel_patch->setCurrentCell(
+            i, mw_one->ui->table_kernel_patch->currentColumn());
+      }
+    }
+    if (!re) {
+      mw_one->on_btnKernelPatchAdd_clicked();
+
+      mw_one->AddKernelPatch(map_patch, ui->listKernelPatch->currentRow(),
+                             mw_one->ui->table_kernel_patch->rowCount() - 1);
     }
   }
 }
