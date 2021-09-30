@@ -2145,6 +2145,7 @@ void MainWindow::initui_UEFI() {
 
   // Output
   ui->cboxConsoleMode->setEditable(true);
+  ui->cboxConsoleMode->addItem("");
   ui->cboxConsoleMode->addItem("Max");
 
   ui->cboxResolution->setEditable(true);
