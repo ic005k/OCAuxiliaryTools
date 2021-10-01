@@ -6295,7 +6295,7 @@ void MainWindow::on_tableDevices_cellClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
 
-  ui->statusbar->showMessage(ui->tableDevices->currentItem()->text());
+  setStatusBarText(ui->tableDevices);
 }
 
 void MainWindow::on_table_uefi_drivers_cellClicked(int row, int column) {
