@@ -6,7 +6,7 @@
         <dict>
             <key>Add</key>
             <dict>
-                <key>PciRoot(0x0)/Pci(0x1f,0x3)  |  ALC256</key>
+                <key>PciRoot(0x0)/Pci(0x1f,0x3)  |  DELL ALC256</key>
                 <dict>
                     <key>#AAPL,slot-name</key>
                     <string>Internal@0,31,3</string>
@@ -17,7 +17,7 @@
                     <key>layout-id</key>
                     <integer>69</integer>
                 </dict>
-                <key>PciRoot(0x0)/Pci(0x2,0x0)  |  UHD620</key>
+                <key>PciRoot(0x0)/Pci(0x2,0x0)  |  UHD620 (i5-8250U)</key>
                 <dict>
                     <key>AAPL,ig-platform-id</key>
                     <data>AAAWWQ==</data>
