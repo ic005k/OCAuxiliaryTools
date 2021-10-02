@@ -13,70 +13,36 @@ dlgPreset::dlgPreset(QWidget* parent) : QDialog(parent), ui(new Ui::dlgPreset) {
 
 dlgPreset::~dlgPreset() { delete ui; }
 
-void dlgPreset::loadDPAdd() {
-  ui->listDPAdd->clear();
+void dlgPreset::loadPreset(QString strMain, QString strSub, QString strComment,
+                           QListWidget* list) {
+  list->clear();
+
   QFile file(strPresetFile);
 
   map.clear();
   map = PListParser::parsePList(&file).toMap();
-  map = map["DeviceProperties"].toMap();
-  if (map.isEmpty()) return;
-
-  // Add
-  map_add.clear();
-  map_add = map["Add"].toMap();
-  ui->listDPAdd->clear();
-  for (int i = 0; i < map_add.count(); i++) {
-    ui->listDPAdd->addItem(map_add.keys().at(i));
-  }
-
-  if (ui->listDPAdd->count() > 0) ui->listDPAdd->setCurrentRow(0);
-
-  file.close();
-}
-
-void dlgPreset::loadACPIPatch() {
-  ui->listACPIPatch->clear();
-  QFile file(strPresetFile);
-
-  map.clear();
-  map = PListParser::parsePList(&file).toMap();
-  map = map["ACPI"].toMap();
+  map = map[strMain].toMap();
   if (map.isEmpty()) return;
 
   //分析Patch
-  map_patch.clear();
-  map_patch = map["Patch"].toList();
-  for (int i = 0; i < map_patch.count(); i++) {
-    QVariantMap map3 = map_patch.at(i).toMap();
-    QString strItem = map3["Comment"].toString();
-    ui->listACPIPatch->addItem(strItem);
+  if (strComment.length() > 0) {
+    map_patch.clear();
+    map_patch = map[strSub].toList();
+    for (int i = 0; i < map_patch.count(); i++) {
+      QVariantMap map3 = map_patch.at(i).toMap();
+      QString strItem = map3[strComment].toString();
+      list->addItem(strItem);
+    }
+  } else {
+    // DP->Add
+    map_add.clear();
+    map_add = map["Add"].toMap();
+    for (int i = 0; i < map_add.count(); i++) {
+      list->addItem(map_add.keys().at(i));
+    }
   }
 
-  if (ui->listACPIPatch->count() > 0) ui->listACPIPatch->setCurrentRow(0);
-
-  file.close();
-}
-
-void dlgPreset::loadKernelPatch() {
-  ui->listKernelPatch->clear();
-  QFile file(strPresetFile);
-
-  map.clear();
-  map = PListParser::parsePList(&file).toMap();
-  map = map["Kernel"].toMap();
-  if (map.isEmpty()) return;
-
-  //分析Patch
-  map_patch.clear();
-  map_patch = map["Patch"].toList();
-  for (int i = 0; i < map_patch.count(); i++) {
-    QVariantMap map3 = map_patch.at(i).toMap();
-    QString strItem = map3["Comment"].toString();
-    ui->listKernelPatch->addItem(strItem);
-  }
-
-  if (ui->listKernelPatch->count() > 0) ui->listKernelPatch->setCurrentRow(0);
+  if (list->count() > 0) list->setCurrentRow(0);
 
   file.close();
 }

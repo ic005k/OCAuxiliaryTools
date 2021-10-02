@@ -18,14 +18,13 @@ class dlgPreset : public QDialog {
   Ui::dlgPreset *ui;
 
   QString strPresetFile;
-  void loadDPAdd();
   QVariantMap map_sub;
   QVariantMap map_add;
   QVariantMap map;
   QVariantList map_patch;
 
-  void loadACPIPatch();
-  void loadKernelPatch();
+  void loadPreset(QString strMain, QString strSub, QString strComment,
+                  QListWidget *list);
  private slots:
   void on_btnAdd_clicked();
 
