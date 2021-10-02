@@ -49,9 +49,9 @@ void dlgPreset::loadPreset(QString strMain, QString strSub, QString strComment,
 
 void dlgPreset::on_btnAdd_clicked() {
   // DPAdd
-  if (ui->listDPAdd->isVisible()) {
-    int row = ui->listDPAdd->currentRow();
-    QString strCurrentItem = ui->listDPAdd->item(row)->text();
+  if (blDPAdd) {
+    int row = ui->listPreset->currentRow();
+    QString strCurrentItem = ui->listPreset->item(row)->text();
     QString strItem;
     QStringList strItemList;
     strItemList = strCurrentItem.split("|");
@@ -116,10 +116,10 @@ void dlgPreset::on_btnAdd_clicked() {
   }
 
   // ACPIPatch
-  if (ui->listACPIPatch->isVisible()) {
+  if (blACPIPatch) {
     bool re = false;
     for (int i = 0; i < mw_one->ui->table_acpi_patch->rowCount(); i++) {
-      QVariantMap map3 = map_patch.at(ui->listACPIPatch->currentRow()).toMap();
+      QVariantMap map3 = map_patch.at(ui->listPreset->currentRow()).toMap();
       QString strFind = mw_one->ByteToHexStr(map3["Find"].toByteArray());
       QString strReplace = mw_one->ByteToHexStr(map3["Replace"].toByteArray());
 
@@ -133,17 +133,16 @@ void dlgPreset::on_btnAdd_clicked() {
     if (!re) {
       mw_one->on_btnACPIPatch_Add_clicked();
 
-      mw_one->AddACPIPatch(map_patch, ui->listACPIPatch->currentRow(),
+      mw_one->AddACPIPatch(map_patch, ui->listPreset->currentRow(),
                            mw_one->ui->table_acpi_patch->rowCount() - 1);
     }
   }
 
   // KernalPatch
-  if (ui->listKernelPatch->isVisible()) {
+  if (blKernelPatch) {
     bool re = false;
     for (int i = 0; i < mw_one->ui->table_kernel_patch->rowCount(); i++) {
-      QVariantMap map3 =
-          map_patch.at(ui->listKernelPatch->currentRow()).toMap();
+      QVariantMap map3 = map_patch.at(ui->listPreset->currentRow()).toMap();
       QString strBase = map3["Base"].toString();
       QString strFind = mw_one->ByteToHexStr(map3["Find"].toByteArray());
       QString strReplace = mw_one->ByteToHexStr(map3["Replace"].toByteArray());
@@ -159,23 +158,13 @@ void dlgPreset::on_btnAdd_clicked() {
     if (!re) {
       mw_one->on_btnKernelPatchAdd_clicked();
 
-      mw_one->AddKernelPatch(map_patch, ui->listKernelPatch->currentRow(),
+      mw_one->AddKernelPatch(map_patch, ui->listPreset->currentRow(),
                              mw_one->ui->table_kernel_patch->rowCount() - 1);
     }
   }
 }
 
-void dlgPreset::on_listDPAdd_itemDoubleClicked(QListWidgetItem* item) {
-  Q_UNUSED(item);
-  ui->btnAdd->clicked();
-}
-
-void dlgPreset::on_listACPIPatch_itemDoubleClicked(QListWidgetItem* item) {
-  Q_UNUSED(item);
-  ui->btnAdd->clicked();
-}
-
-void dlgPreset::on_listKernelPatch_itemDoubleClicked(QListWidgetItem* item) {
+void dlgPreset::on_listPreset_itemDoubleClicked(QListWidgetItem* item) {
   Q_UNUSED(item);
   ui->btnAdd->clicked();
 }

@@ -14,26 +14,20 @@
    <string>Preset</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QPushButton" name="btnAdd">
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
-    <widget class="QListWidget" name="listDPAdd">
+    <widget class="QListWidget" name="listPreset">
      <item>
       <property name="text">
        <string>PciRoot(0x0)/Pci(0x1b,0x0)  ｜  HDA</string>
       </property>
      </item>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QListWidget" name="listACPIPatch"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QListWidget" name="listKernelPatch"/>
-   </item>
-   <item row="3" column="0">
-    <widget class="QPushButton" name="btnAdd">
-     <property name="text">
-      <string>Add</string>
-     </property>
     </widget>
    </item>
   </layout>

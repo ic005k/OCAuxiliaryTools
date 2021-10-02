@@ -9929,35 +9929,35 @@ void MainWindow::on_actionOpen_database_directory_triggered() {
 }
 
 void MainWindow::on_btnDPAddPreset_clicked() {
-  dlgPresetValues->ui->listACPIPatch->setVisible(false);
-  dlgPresetValues->ui->listKernelPatch->setVisible(false);
-  dlgPresetValues->ui->listDPAdd->setVisible(true);
+  dlgPresetValues->blACPIPatch = false;
+  dlgPresetValues->blDPAdd = true;
+  dlgPresetValues->blKernelPatch = false;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("DeviceProperties", "Add", "",
-                              dlgPresetValues->ui->listDPAdd);
+                              dlgPresetValues->ui->listPreset);
   dlgPresetValues->show();
 }
 
 void MainWindow::on_btnACPIPatch_clicked() {
-  dlgPresetValues->ui->listACPIPatch->setVisible(true);
-  dlgPresetValues->ui->listKernelPatch->setVisible(false);
-  dlgPresetValues->ui->listDPAdd->setVisible(false);
+  dlgPresetValues->blACPIPatch = true;
+  dlgPresetValues->blDPAdd = false;
+  dlgPresetValues->blKernelPatch = false;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("ACPI", "Patch", "Comment",
-                              dlgPresetValues->ui->listACPIPatch);
+                              dlgPresetValues->ui->listPreset);
   dlgPresetValues->show();
 }
 
 void MainWindow::on_btnPresetKernelPatch_clicked() {
-  dlgPresetValues->ui->listACPIPatch->setVisible(false);
-  dlgPresetValues->ui->listKernelPatch->setVisible(true);
-  dlgPresetValues->ui->listDPAdd->setVisible(false);
+  dlgPresetValues->blACPIPatch = false;
+  dlgPresetValues->blDPAdd = false;
+  dlgPresetValues->blKernelPatch = true;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("Kernel", "Patch", "Comment",
-                              dlgPresetValues->ui->listKernelPatch);
+                              dlgPresetValues->ui->listPreset);
   dlgPresetValues->show();
 }
 

@@ -22,17 +22,16 @@ class dlgPreset : public QDialog {
   QVariantMap map_add;
   QVariantMap map;
   QVariantList map_patch;
+  bool blDPAdd = false;
+  bool blACPIPatch = false;
+  bool blKernelPatch = false;
 
   void loadPreset(QString strMain, QString strSub, QString strComment,
                   QListWidget *list);
  private slots:
   void on_btnAdd_clicked();
 
-  void on_listDPAdd_itemDoubleClicked(QListWidgetItem *item);
-
-  void on_listACPIPatch_itemDoubleClicked(QListWidgetItem *item);
-
-  void on_listKernelPatch_itemDoubleClicked(QListWidgetItem *item);
+  void on_listPreset_itemDoubleClicked(QListWidgetItem *item);
 
  private:
 };
