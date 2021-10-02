@@ -17,7 +17,7 @@ class dlgPreset : public QDialog {
   ~dlgPreset();
   Ui::dlgPreset *ui;
 
-  QString strPresetPath;
+  QString strPresetFile;
   void loadDPAdd();
   QVariantMap map_sub;
   QVariantMap map_add;

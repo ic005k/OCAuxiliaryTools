@@ -8,15 +8,14 @@ dlgPreset::dlgPreset(QWidget* parent) : QDialog(parent), ui(new Ui::dlgPreset) {
   ui->setupUi(this);
 
   QFileInfo appInfo(qApp->applicationDirPath());
-  strPresetPath = appInfo.filePath() + "/Database/preset/";
+  strPresetFile = appInfo.filePath() + "/Database/preset/PreSet.plist";
 }
 
 dlgPreset::~dlgPreset() { delete ui; }
 
 void dlgPreset::loadDPAdd() {
   ui->listDPAdd->clear();
-  QString strPlistFile = strPresetPath + "DPAdd.plist";
-  QFile file(strPlistFile);
+  QFile file(strPresetFile);
 
   map.clear();
   map = PListParser::parsePList(&file).toMap();
@@ -38,8 +37,7 @@ void dlgPreset::loadDPAdd() {
 
 void dlgPreset::loadACPIPatch() {
   ui->listACPIPatch->clear();
-  QString strPlistFile = strPresetPath + "ACPIPatch.plist";
-  QFile file(strPlistFile);
+  QFile file(strPresetFile);
 
   map.clear();
   map = PListParser::parsePList(&file).toMap();
@@ -62,8 +60,7 @@ void dlgPreset::loadACPIPatch() {
 
 void dlgPreset::loadKernelPatch() {
   ui->listKernelPatch->clear();
-  QString strPlistFile = strPresetPath + "KernelPatch.plist";
-  QFile file(strPlistFile);
+  QFile file(strPresetFile);
 
   map.clear();
   map = PListParser::parsePList(&file).toMap();
