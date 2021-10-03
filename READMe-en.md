@@ -51,7 +51,7 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 * ...
 
 ## 关于“预置”功能
-* 这是一个开放性的接口，预置文件位于数据库目录下preset里面的PreSet.plist，您可以随时采用各种Plist编辑器来编辑它，就像编辑Config.plist一样。很简单，它其实就是从Config.plist里面剥离出来的。
+* 这是一个开放性的接口，预置文件位于数据库目录下preset里面的PreSet.plist（通过工具栏上的“打开数据库目录”），您可以随时采用各种Plist编辑器来编辑它，就像编辑Config.plist一样。很简单，它其实就是从Config.plist里面剥离出来的。
 
 ## 部分功能请看下面的截图：
 
