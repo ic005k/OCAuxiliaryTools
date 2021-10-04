@@ -16,17 +16,18 @@ dlgPreset::~dlgPreset() { delete ui; }
 void dlgPreset::loadPreset(QString strMain, QString strSub, QString strComment,
                            QListWidget* list) {
   list->clear();
+  map.clear();
+  map_patch.clear();
+  map_add.clear();
 
   QFile file(strPresetFile);
 
-  map.clear();
   map = PListParser::parsePList(&file).toMap();
   map = map[strMain].toMap();
   if (map.isEmpty()) return;
 
   //分析Patch
   if (strComment.length() > 0) {
-    map_patch.clear();
     map_patch = map[strSub].toList();
     for (int i = 0; i < map_patch.count(); i++) {
       QVariantMap map3 = map_patch.at(i).toMap();
@@ -35,8 +36,8 @@ void dlgPreset::loadPreset(QString strMain, QString strSub, QString strComment,
     }
   } else {
     // DP->Add
-    map_add.clear();
-    map_add = map["Add"].toMap();
+
+    map_add = map[strSub].toMap();
     for (int i = 0; i < map_add.count(); i++) {
       list->addItem(map_add.keys().at(i));
     }
@@ -160,6 +161,63 @@ void dlgPreset::on_btnAdd_clicked() {
 
       mw_one->AddKernelPatch(map_patch, ui->listPreset->currentRow(),
                              mw_one->ui->table_kernel_patch->rowCount() - 1);
+    }
+  }
+
+  // NVRAM Add
+  if (blNVAdd) {
+    bool re = false;
+    for (int i = 0; i < mw_one->ui->table_nv_add0->rowCount(); i++) {
+      QString str0 = mw_one->ui->table_nv_add0->item(i, 0)->text();
+      QString str1 = ui->listPreset->item(ui->listPreset->currentRow())->text();
+      if (str0 == str1) {
+        re = true;
+        mw_one->ui->table_nv_add0->setCurrentCell(i, 0);
+      }
+    }
+
+    if (!re) {
+      mw_one->on_btnNVRAMAdd_Add0_clicked();
+      mw_one->AddNvramAdd(map_add, ui->listPreset->currentRow(), true);
+    }
+  }
+
+  // NVRAM Delete
+  if (blNVDelete) {
+    bool re = false;
+    for (int i = 0; i < mw_one->ui->table_nv_del0->rowCount(); i++) {
+      QString str0 = mw_one->ui->table_nv_del0->item(i, 0)->text();
+      QString str1 = ui->listPreset->item(ui->listPreset->currentRow())->text();
+      if (str0 == str1) {
+        re = true;
+        mw_one->ui->table_nv_del0->setCurrentCell(i, 0);
+      }
+    }
+
+    if (!re) {
+      mw_one->on_btnNVRAMDel_Add0_clicked();
+      mw_one->init_value(map_add, mw_one->ui->table_nv_del0,
+                         mw_one->ui->table_nv_del,
+                         ui->listPreset->currentRow());
+    }
+  }
+
+  // NVRAM Legacy
+  if (blNVLegacy) {
+    bool re = false;
+    for (int i = 0; i < mw_one->ui->table_nv_ls0->rowCount(); i++) {
+      QString str0 = mw_one->ui->table_nv_ls0->item(i, 0)->text();
+      QString str1 = ui->listPreset->item(ui->listPreset->currentRow())->text();
+      if (str0 == str1) {
+        re = true;
+        mw_one->ui->table_nv_ls0->setCurrentCell(i, 0);
+      }
+    }
+
+    if (!re) {
+      mw_one->on_btnNVRAMLS_Add0_clicked();
+      mw_one->init_value(map_add, mw_one->ui->table_nv_ls0,
+                         mw_one->ui->table_nv_ls, ui->listPreset->currentRow());
     }
   }
 }

@@ -236,8 +236,7 @@ class MainWindow : public QMainWindow {
   void read_ini(QTableWidget* table, QTableWidget* mytable, int i);
 
   void init_key_class_value(QTableWidget* table, QTableWidget* subtable);
-  void init_value(QVariantMap map_fun, QTableWidget* table,
-                  QTableWidget* subtable);
+
   void write_value_ini(QTableWidget* table, QTableWidget* subtable, int i);
   void read_value_ini(QTableWidget* table, QTableWidget* mytable, int i);
 
@@ -309,6 +308,10 @@ class MainWindow : public QMainWindow {
 
   void AddACPIPatch(QVariantList map_patch, int mapIndex, int tableIndex);
   void AddKernelPatch(QVariantList map_patch, int mapIndex, int tableIndex);
+
+  void init_value(QVariantMap map_fun, QTableWidget* table,
+                  QTableWidget* subtable, int currentRow);
+  void AddNvramAdd(QVariantMap map_add, int currentRow, bool blPreset);
  public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -319,6 +322,10 @@ class MainWindow : public QMainWindow {
   void on_btnDPAdd_Add0_clicked();
   void on_btnACPIPatch_Add_clicked();
   void on_btnKernelPatchAdd_clicked();
+  void on_btnNVRAMAdd_Add0_clicked();
+  void on_btnNVRAMAdd_Del0_clicked();
+  void on_btnNVRAMLS_Add0_clicked();
+  void on_btnNVRAMDel_Add0_clicked();
   void cellEnteredSlot(int row, int column);
 
  protected:
@@ -473,17 +480,9 @@ class MainWindow : public QMainWindow {
 
   void on_btnMiscTools_Del_clicked();
 
-  void on_btnNVRAMAdd_Add0_clicked();
-
-  void on_btnNVRAMAdd_Del0_clicked();
-
   void on_btnNVRAMAdd_Del_clicked();
 
-  void on_btnNVRAMDel_Add0_clicked();
-
   void on_btnNVRAMDel_Add_clicked();
-
-  void on_btnNVRAMLS_Add0_clicked();
 
   void on_btnNVRAMLS_Add_clicked();
 
@@ -866,6 +865,12 @@ class MainWindow : public QMainWindow {
   void on_btnACPIPatch_clicked();
 
   void on_btnPresetKernelPatch_clicked();
+
+  void on_btnPresetNVAdd_clicked();
+
+  void on_btnPresetNVDelete_clicked();
+
+  void on_btnPresetNVLegacy_clicked();
 
  private:
   bool LoadRightTable = false;

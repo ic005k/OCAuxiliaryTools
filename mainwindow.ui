@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -2023,7 +2023,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5218,7 +5218,7 @@ Note: This functionality is currently in development and is not ready for daily 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5228,6 +5228,28 @@ Note: This functionality is currently in development and is not ready for daily 
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_17">
+            <item row="0" column="0" colspan="6">
+             <layout class="QGridLayout" name="gridLayout_nv_add">
+              <item row="0" column="0">
+               <widget class="QTableWidget" name="table_nv_add0">
+                <property name="columnCount">
+                 <number>1</number>
+                </property>
+                <column/>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QTableWidget" name="table_nv_add">
+                <property name="columnCount">
+                 <number>3</number>
+                </property>
+                <column/>
+                <column/>
+                <column/>
+               </widget>
+              </item>
+             </layout>
+            </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnNVRAMAdd_Add0">
               <property name="font">
@@ -5276,6 +5298,13 @@ Note: This functionality is currently in development and is not ready for daily 
              </widget>
             </item>
             <item row="1" column="2">
+             <widget class="QToolButton" name="btnPresetNVAdd">
+              <property name="text">
+               <string>Preset</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
              <spacer name="horizontalSpacer_13">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -5288,7 +5317,7 @@ Note: This functionality is currently in development and is not ready for daily 
               </property>
              </spacer>
             </item>
-            <item row="1" column="3">
+            <item row="1" column="4">
              <widget class="QToolButton" name="btnNVRAMAdd_Add">
               <property name="font">
                <font>
@@ -5310,7 +5339,7 @@ Note: This functionality is currently in development and is not ready for daily 
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
+            <item row="1" column="5">
              <widget class="QToolButton" name="btnNVRAMAdd_Del">
               <property name="font">
                <font>
@@ -5335,28 +5364,6 @@ Note: This functionality is currently in development and is not ready for daily 
               </property>
              </widget>
             </item>
-            <item row="0" column="0" colspan="5">
-             <layout class="QGridLayout" name="gridLayout_nv_add">
-              <item row="0" column="0">
-               <widget class="QTableWidget" name="table_nv_add0">
-                <property name="columnCount">
-                 <number>1</number>
-                </property>
-                <column/>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QTableWidget" name="table_nv_add">
-                <property name="columnCount">
-                 <number>3</number>
-                </property>
-                <column/>
-                <column/>
-                <column/>
-               </widget>
-              </item>
-             </layout>
-            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="tabNVRAM2">
@@ -5364,15 +5371,21 @@ Note: This functionality is currently in development and is not ready for daily 
             <string>Delete</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_18">
-            <item row="0" column="0" colspan="3">
+            <item row="0" column="0" colspan="4">
              <widget class="QTableWidget" name="table_nv_del0">
+              <property name="minimumSize">
+               <size>
+                <width>350</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="columnCount">
                <number>1</number>
               </property>
               <column/>
              </widget>
             </item>
-            <item row="0" column="3" colspan="3">
+            <item row="0" column="4" colspan="3">
              <widget class="QTableWidget" name="table_nv_del">
               <property name="columnCount">
                <number>1</number>
@@ -5427,7 +5440,14 @@ Note: This functionality is currently in development and is not ready for daily 
               </property>
              </widget>
             </item>
-            <item row="1" column="2" colspan="2">
+            <item row="1" column="2">
+             <widget class="QToolButton" name="btnPresetNVDelete">
+              <property name="text">
+               <string>Preset</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3" colspan="2">
              <spacer name="horizontalSpacer_14">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -5440,7 +5460,7 @@ Note: This functionality is currently in development and is not ready for daily 
               </property>
              </spacer>
             </item>
-            <item row="1" column="4">
+            <item row="1" column="5">
              <widget class="QToolButton" name="btnNVRAMDel_Add">
               <property name="font">
                <font>
@@ -5462,7 +5482,7 @@ Note: This functionality is currently in development and is not ready for daily 
               </property>
              </widget>
             </item>
-            <item row="1" column="5">
+            <item row="1" column="6">
              <widget class="QToolButton" name="btnNVRAMDel_Del">
               <property name="font">
                <font>
@@ -5494,15 +5514,21 @@ Note: This functionality is currently in development and is not ready for daily 
             <string>LegacySchema</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_19">
-            <item row="0" column="0" colspan="3">
+            <item row="0" column="0" colspan="4">
              <widget class="QTableWidget" name="table_nv_ls0">
+              <property name="minimumSize">
+               <size>
+                <width>350</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="columnCount">
                <number>1</number>
               </property>
               <column/>
              </widget>
             </item>
-            <item row="0" column="3" colspan="3">
+            <item row="0" column="4" colspan="3">
              <widget class="QTableWidget" name="table_nv_ls">
               <property name="columnCount">
                <number>1</number>
@@ -5557,7 +5583,14 @@ Note: This functionality is currently in development and is not ready for daily 
               </property>
              </widget>
             </item>
-            <item row="1" column="2" colspan="2">
+            <item row="1" column="2">
+             <widget class="QToolButton" name="btnPresetNVLegacy">
+              <property name="text">
+               <string>Preset</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3" colspan="2">
              <spacer name="horizontalSpacer_15">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -5570,7 +5603,7 @@ Note: This functionality is currently in development and is not ready for daily 
               </property>
              </spacer>
             </item>
-            <item row="1" column="4">
+            <item row="1" column="5">
              <widget class="QToolButton" name="btnNVRAMLS_Add">
               <property name="font">
                <font>
@@ -5592,7 +5625,7 @@ Note: This functionality is currently in development and is not ready for daily 
               </property>
              </widget>
             </item>
-            <item row="1" column="5">
+            <item row="1" column="6">
              <widget class="QToolButton" name="btnNVRAMLS_Del">
               <property name="font">
                <font>

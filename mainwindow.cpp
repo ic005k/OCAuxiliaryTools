@@ -689,7 +689,7 @@ void MainWindow::ParserDP(QVariantMap map) {
   ui->table_dp_add0->setCurrentCell(last - 1, 0);
 
   // Delete
-  init_value(map["Delete"].toMap(), ui->table_dp_del0, ui->table_dp_del);
+  init_value(map["Delete"].toMap(), ui->table_dp_del0, ui->table_dp_del, -1);
 }
 
 void MainWindow::initui_kernel() {
@@ -1357,62 +1357,72 @@ void MainWindow::initui_nvram() {
   ui->table_nv_ls->horizontalHeader()->setStretchLastSection(true);
 }
 
+void MainWindow::AddNvramAdd(QVariantMap map_add, int currentRow,
+                             bool blPreset) {
+  int i = 0;
+  if (blPreset)
+    i = ui->table_nv_add0->rowCount() - 1;
+  else
+    i = currentRow;
+
+  QTableWidgetItem* newItem1;
+  newItem1 = new QTableWidgetItem(map_add.keys().at(currentRow));
+  ui->table_nv_add0->setItem(i, 0, newItem1);
+
+  //加载子条目
+  QVariantMap map_sub;
+  map_sub = map_add[map_add.keys().at(currentRow)].toMap();
+  ui->table_nv_add->setRowCount(map_sub.keys().count());  //子键的个数
+
+  for (int j = 0; j < map_sub.keys().count(); j++) {
+    newItem1 = new QTableWidgetItem(map_sub.keys().at(j));  //键
+    ui->table_nv_add->setItem(j, 0, newItem1);
+
+    QString dtype = map_sub[map_sub.keys().at(j)].typeName();
+    QString ztype;
+    if (dtype == "QByteArray") ztype = "Data";
+    if (dtype == "QString") ztype = "String";
+    if (dtype == "qlonglong") ztype = "Number";
+    newItem1 = new QTableWidgetItem(ztype);  //数据类型
+    newItem1->setTextAlignment(Qt::AlignCenter);
+    ui->table_nv_add->setItem(j, 1, newItem1);
+
+    QString type_name = map_sub[map_sub.keys().at(j)].typeName();
+    if (type_name == "QByteArray") {
+      QByteArray tohex = map_sub[map_sub.keys().at(j)].toByteArray();
+      QString va = tohex.toHex().toUpper();
+      newItem1 = new QTableWidgetItem(va);
+    } else
+      newItem1 = new QTableWidgetItem(map_sub[map_sub.keys().at(j)].toString());
+    ui->table_nv_add->setItem(j, 2, newItem1);
+  }
+
+  //保存子条目里面的数据，以便以后加载
+
+  write_ini(ui->table_nv_add0, ui->table_nv_add, i);
+}
+
 void MainWindow::ParserNvram(QVariantMap map) {
   map = map["NVRAM"].toMap();
   if (map.isEmpty()) return;
 
   // Add
-  QVariantMap map_add = map["Add"].toMap();
-
-  QVariantMap map_sub;
-
+  QVariantMap map_add;
+  map_add = map["Add"].toMap();
   ui->table_nv_add0->setRowCount(map_add.count());
-  QTableWidgetItem* newItem1;
   for (int i = 0; i < map_add.count(); i++) {
-    newItem1 = new QTableWidgetItem(map_add.keys().at(i));
-    ui->table_nv_add0->setItem(i, 0, newItem1);
-
-    //加载子条目
-    map_sub = map_add[map_add.keys().at(i)].toMap();
-    ui->table_nv_add->setRowCount(map_sub.keys().count());  //子键的个数
-
-    for (int j = 0; j < map_sub.keys().count(); j++) {
-      newItem1 = new QTableWidgetItem(map_sub.keys().at(j));  //键
-      ui->table_nv_add->setItem(j, 0, newItem1);
-
-      QString dtype = map_sub[map_sub.keys().at(j)].typeName();
-      QString ztype;
-      if (dtype == "QByteArray") ztype = "Data";
-      if (dtype == "QString") ztype = "String";
-      if (dtype == "qlonglong") ztype = "Number";
-      newItem1 = new QTableWidgetItem(ztype);  //数据类型
-      newItem1->setTextAlignment(Qt::AlignCenter);
-      ui->table_nv_add->setItem(j, 1, newItem1);
-
-      QString type_name = map_sub[map_sub.keys().at(j)].typeName();
-      if (type_name == "QByteArray") {
-        QByteArray tohex = map_sub[map_sub.keys().at(j)].toByteArray();
-        QString va = tohex.toHex().toUpper();
-        newItem1 = new QTableWidgetItem(va);
-      } else
-        newItem1 =
-            new QTableWidgetItem(map_sub[map_sub.keys().at(j)].toString());
-      ui->table_nv_add->setItem(j, 2, newItem1);
-    }
-
-    //保存子条目里面的数据，以便以后加载
-
-    write_ini(ui->table_nv_add0, ui->table_nv_add, i);
+    AddNvramAdd(map_add, i, false);
   }
 
   int last = ui->table_nv_add0->rowCount();
   ui->table_nv_add0->setCurrentCell(last - 1, 0);
 
   // Delete
-  init_value(map["Delete"].toMap(), ui->table_nv_del0, ui->table_nv_del);
+  init_value(map["Delete"].toMap(), ui->table_nv_del0, ui->table_nv_del, -1);
 
   // LegacySchema
-  init_value(map["LegacySchema"].toMap(), ui->table_nv_ls0, ui->table_nv_ls);
+  init_value(map["LegacySchema"].toMap(), ui->table_nv_ls0, ui->table_nv_ls,
+             -1);
 
   //分析Quirks
   ui->chkLegacyEnable->setChecked(map["LegacyEnable"].toBool());
@@ -1541,26 +1551,44 @@ void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item) {
 }
 
 void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
-                            QTableWidget* subtable) {
-  table->setRowCount(map_fun.count());
-  subtable->setRowCount(0);
+                            QTableWidget* subtable, int currentRow) {
   QTableWidgetItem* newItem1;
-  for (int i = 0; i < map_fun.count(); i++) {
-    newItem1 = new QTableWidgetItem(map_fun.keys().at(i));
-    table->setItem(i, 0, newItem1);
+
+  if (currentRow == -1) {
+    table->setRowCount(map_fun.count());
+    subtable->setRowCount(0);
+
+    for (int i = 0; i < map_fun.count(); i++) {
+      newItem1 = new QTableWidgetItem(map_fun.keys().at(i));
+      table->setItem(i, 0, newItem1);
+
+      //加载子条目
+      QVariantList map_sub_list =
+          map_fun[map_fun.keys().at(i)].toList();   //是个数组
+      subtable->setRowCount(map_sub_list.count());  //子键的个数
+      for (int j = 0; j < map_sub_list.count(); j++) {
+        newItem1 = new QTableWidgetItem(map_sub_list.at(j).toString());  //键
+        subtable->setItem(j, 0, newItem1);
+      }
+
+      //保存子条目里面的数据，以便以后加载
+      write_value_ini(table, subtable, i);
+    }
+  } else {
+    newItem1 = new QTableWidgetItem(map_fun.keys().at(currentRow));
+    table->setItem(table->rowCount() - 1, 0, newItem1);
 
     //加载子条目
     QVariantList map_sub_list =
-        map_fun[map_fun.keys().at(i)].toList();   //是个数组
-    subtable->setRowCount(map_sub_list.count());  //子键的个数
-
+        map_fun[map_fun.keys().at(currentRow)].toList();  //是个数组
+    subtable->setRowCount(map_sub_list.count());          //子键的个数
     for (int j = 0; j < map_sub_list.count(); j++) {
       newItem1 = new QTableWidgetItem(map_sub_list.at(j).toString());  //键
       subtable->setItem(j, 0, newItem1);
     }
 
     //保存子条目里面的数据，以便以后加载
-    write_value_ini(table, subtable, i);
+    write_value_ini(table, subtable, table->rowCount() - 1);
   }
 
   int last = table->rowCount();
@@ -9932,6 +9960,9 @@ void MainWindow::on_btnDPAddPreset_clicked() {
   dlgPresetValues->blACPIPatch = false;
   dlgPresetValues->blDPAdd = true;
   dlgPresetValues->blKernelPatch = false;
+  dlgPresetValues->blNVDelete = false;
+  dlgPresetValues->blNVLegacy = false;
+  dlgPresetValues->blNVAdd = false;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("DeviceProperties", "Add", "",
@@ -9943,6 +9974,9 @@ void MainWindow::on_btnACPIPatch_clicked() {
   dlgPresetValues->blACPIPatch = true;
   dlgPresetValues->blDPAdd = false;
   dlgPresetValues->blKernelPatch = false;
+  dlgPresetValues->blNVDelete = false;
+  dlgPresetValues->blNVLegacy = false;
+  dlgPresetValues->blNVAdd = false;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("ACPI", "Patch", "Comment",
@@ -9954,6 +9988,9 @@ void MainWindow::on_btnPresetKernelPatch_clicked() {
   dlgPresetValues->blACPIPatch = false;
   dlgPresetValues->blDPAdd = false;
   dlgPresetValues->blKernelPatch = true;
+  dlgPresetValues->blNVDelete = false;
+  dlgPresetValues->blNVLegacy = false;
+  dlgPresetValues->blNVAdd = false;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("Kernel", "Patch", "Comment",
@@ -10079,4 +10116,46 @@ void MainWindow::AddKernelPatch(QVariantList map_patch, int mapIndex,
     newItem1 = new QTableWidgetItem("Any");
   newItem1->setTextAlignment(Qt::AlignCenter);
   ui->table_kernel_patch->setItem(i, 13, newItem1);
+}
+
+void MainWindow::on_btnPresetNVAdd_clicked() {
+  dlgPresetValues->blACPIPatch = false;
+  dlgPresetValues->blDPAdd = false;
+  dlgPresetValues->blKernelPatch = false;
+  dlgPresetValues->blNVDelete = false;
+  dlgPresetValues->blNVLegacy = false;
+  dlgPresetValues->blNVAdd = true;
+
+  dlgPresetValues->setModal(true);
+  dlgPresetValues->loadPreset("NVRAM", "Add", "",
+                              dlgPresetValues->ui->listPreset);
+  dlgPresetValues->show();
+}
+
+void MainWindow::on_btnPresetNVDelete_clicked() {
+  dlgPresetValues->blACPIPatch = false;
+  dlgPresetValues->blDPAdd = false;
+  dlgPresetValues->blKernelPatch = false;
+  dlgPresetValues->blNVDelete = true;
+  dlgPresetValues->blNVLegacy = false;
+  dlgPresetValues->blNVAdd = false;
+
+  dlgPresetValues->setModal(true);
+  dlgPresetValues->loadPreset("NVRAM", "Delete", "",
+                              dlgPresetValues->ui->listPreset);
+  dlgPresetValues->show();
+}
+
+void MainWindow::on_btnPresetNVLegacy_clicked() {
+  dlgPresetValues->blACPIPatch = false;
+  dlgPresetValues->blDPAdd = false;
+  dlgPresetValues->blKernelPatch = false;
+  dlgPresetValues->blNVDelete = false;
+  dlgPresetValues->blNVLegacy = true;
+  dlgPresetValues->blNVAdd = false;
+
+  dlgPresetValues->setModal(true);
+  dlgPresetValues->loadPreset("NVRAM", "LegacySchema", "",
+                              dlgPresetValues->ui->listPreset);
+  dlgPresetValues->show();
 }

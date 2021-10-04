@@ -25,6 +25,9 @@ class dlgPreset : public QDialog {
   bool blDPAdd = false;
   bool blACPIPatch = false;
   bool blKernelPatch = false;
+  bool blNVAdd = false;
+  bool blNVDelete = false;
+  bool blNVLegacy = false;
 
   void loadPreset(QString strMain, QString strSub, QString strComment,
                   QListWidget *list);
