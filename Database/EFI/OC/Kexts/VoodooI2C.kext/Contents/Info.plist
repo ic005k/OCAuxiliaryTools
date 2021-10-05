@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>19E266</string>
+	<string>19F101</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -17,27 +17,27 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.4.3</string>
+	<string>2.6.5</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.4.3</string>
+	<string>2.6.5</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>11E146</string>
+	<string>11E801a</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>16E185</string>
+	<string>19G68</string>
 	<key>DTSDKName</key>
-	<string>macosx10.12</string>
+	<string>macosx10.15</string>
 	<key>DTXcode</key>
-	<string>1140</string>
+	<string>1170</string>
 	<key>DTXcodeBuild</key>
-	<string>11E146</string>
+	<string>11E801a</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>Custom MT2 Personality</key>
@@ -528,29 +528,25 @@
 			<string>com.alexandred.VoodooI2C</string>
 			<key>IOClass</key>
 			<string>VoodooI2CPCIController</string>
-			<key>IONameMatch</key>
-			<array>
-				<string>pci8086,34e8</string>
-				<string>pci8086,2e8</string>
-				<string>pci8086,2e9</string>
-				<string>pci8086,9d60</string>
-				<string>pci8086,9d61</string>
-				<string>pci8086,9d62</string>
-				<string>pci8086,9d63</string>
-				<string>pci8086,9de8</string>
-				<string>pci8086,9de9</string>
-				<string>pci8086,a160</string>
-				<string>pci8086,a161</string>
-				<string>pci8086,a162</string>
-				<string>pci8086,a368</string>
-				<string>pci8086,a369</string>
-				<string>pci8086,a36a</string>
-				<string>pci8086,a36b</string>
-			</array>
+			<key>IOPCIMatch</key>
+			<string>0x9d608086&amp;0xFFFCFFFF 0xa1608086&amp;0xFFFCFFFF 0x9de88086&amp;0xFFFCFFFF 0xa3688086&amp;0xFFFCFFFF</string>
 			<key>IOProbeScore</key>
 			<integer>9999</integer>
 			<key>IOProviderClass</key>
-			<string>IOService</string>
+			<string>IOPCIDevice</string>
+		</dict>
+		<key>VoodooI2CPCILakeController</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.alexandred.VoodooI2C</string>
+			<key>IOClass</key>
+			<string>VoodooI2CPCILakeController</string>
+			<key>IOPCIMatch</key>
+			<string>0x06e88086&amp;0xFFFCFFFF 0x02e88086&amp;0xFFFCFFFF 0x34e88086&amp;0xFFFCFFFF</string>
+			<key>IOProbeScore</key>
+			<integer>9999</integer>
+			<key>IOProviderClass</key>
+			<string>IOPCIDevice</string>
 		</dict>
 	</dict>
 	<key>LSMinimumSystemVersion</key>
