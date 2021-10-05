@@ -1,6 +1,7 @@
 #ifndef SYNCOCDIALOG_H
 #define SYNCOCDIALOG_H
 
+#include <QCryptographicHash>
 #include <QDialog>
 #include <QListWidgetItem>
 #include <QMessageBox>

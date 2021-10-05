@@ -41,19 +41,38 @@ void SyncOCDialog::on_btnStartSync_clicked() {
 void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   if (currentRow < 0) return;
 
-  QString sourceModi, targetModi;
+  QString sourceModi, targetModi, sourceFile, targetFile, sourceHash,
+      targetHash;
   ui->listTarget->setCurrentRow(currentRow);
 
-  QFileInfo fiSource(ui->listSource->item(currentRow)->text());
-  QFileInfo fiTarget(ui->listTarget->item(currentRow)->text());
+  sourceFile = ui->listSource->item(currentRow)->text();
+  targetFile = ui->listTarget->item(currentRow)->text();
+
+  QCryptographicHash hashTest(QCryptographicHash::Md5);
+
+  QFile f1(sourceFile);
+  f1.open(QFile::ReadOnly);
+  hashTest.addData(&f1);                   //添加数据
+  sourceHash = hashTest.result().toHex();  //获得结果并转换为16进制输出
+  f1.close();
+
+  QFile f2(targetFile);
+  f2.open(QFile::ReadOnly);
+  hashTest.reset();  // 重置（很重要）
+  hashTest.addData(&f2);
+  targetHash = hashTest.result().toHex();
+  f2.close();
+
+  QFileInfo fiSource(sourceFile);
+  QFileInfo fiTarget(targetFile);
   sourceModi = fiSource.lastModified().toString();
   targetModi = fiTarget.lastModified().toString();
   ui->lblSourceLastModi->setText(tr("Source file last modified") + " : " +
-                                 sourceModi);
+                                 sourceModi + "\nmd5    " + sourceHash);
   ui->lblTargetLastModi->setText(tr("Target file last modified") + " : " +
-                                 targetModi);
+                                 targetModi + "\nmd5    " + targetHash);
 
-  if (sourceModi != targetModi) {
+  if (sourceHash != targetHash) {
     ui->listTarget->item(currentRow)->setBackgroundColor(QColor(Qt::red));
     ui->listTarget->item(currentRow)->setForeground(QBrush(Qt::white));
   } else if (mw_one->red > 55)
