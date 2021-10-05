@@ -935,6 +935,7 @@ class MainWindow : public QMainWindow {
   QProcess* processDriverInfo;
 
   QProcess* chkdata;
+  QProcess* chkdataPassHash;
 
   QVector<QString> IniFile;
 

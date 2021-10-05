@@ -9492,40 +9492,41 @@ void MainWindow::on_btnGetPassHash_clicked() {
 
   QFileInfo appInfo(qApp->applicationDirPath());
   QString strPass = "";
-  chkdata = new QProcess;
+  chkdataPassHash = new QProcess;
 
 #ifdef Q_OS_WIN32
-  chkdata->start(appInfo.filePath() + "/Database/win/ocpasswordgen.exe",
-                 QStringList() << strPass);
+  chkdataPassHash->start(appInfo.filePath() + "/Database/win/ocpasswordgen.exe",
+                         QStringList() << strPass);
 
 #endif
 
 #ifdef Q_OS_LINUX
-  chkdata->start(appInfo.filePath() + "/Database/linux/ocpasswordgen",
-                 QStringList() << strPass);
+  chkdataPassHash->start(appInfo.filePath() + "/Database/linux/ocpasswordgen",
+                         QStringList() << strPass);
 
 #endif
 
 #ifdef Q_OS_MAC
 
-  chkdata->start(appInfo.filePath() + "/Database/mac/ocpasswordgen",
-                 QStringList() << strPass);
+  chkdataPassHash->start(appInfo.filePath() + "/Database/mac/ocpasswordgen",
+                         QStringList() << strPass);
 #endif
 
-  chkdata->waitForStarted();  //等待启动完成
+  chkdataPassHash->waitForStarted();  //等待启动完成
   QString strData = ui->editPassInput->text().trimmed() + "\n";
   const char* cstr;  // = strData.toLocal8Bit().constData();
   strData = strData.toLocal8Bit();
   string strStd = strData.toStdString();
   cstr = strStd.c_str();
 
-  chkdata->write(cstr);
+  chkdataPassHash->write(cstr);
 
-  connect(chkdata, SIGNAL(finished(int)), this, SLOT(readResultPassHash()));
+  connect(chkdataPassHash, SIGNAL(finished(int)), this,
+          SLOT(readResultPassHash()));
 }
 
 void MainWindow::readResultPassHash() {
-  QString result = chkdata->readAll();
+  QString result = chkdataPassHash->readAll();
 
   QStringList strList = result.split("\n");
 
