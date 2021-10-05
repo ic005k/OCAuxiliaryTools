@@ -75,6 +75,7 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   if (sourceHash != targetHash) {
     ui->listTarget->item(currentRow)->setBackgroundColor(QColor(Qt::red));
     ui->listTarget->item(currentRow)->setForeground(QBrush(Qt::white));
+    blSame = false;
   } else if (mw_one->red > 55)
     ui->listTarget->item(currentRow)->setBackgroundColor(Qt::white);
 }

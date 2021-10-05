@@ -9373,9 +9373,16 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   dlgSyncOC->ui->listTarget->addItems(targetFiles);
   dlgSyncOC->setModal(true);
   dlgSyncOC->show();
+  dlgSyncOC->blSame = true;
   for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
     dlgSyncOC->ui->listSource->setCurrentRow(i);
   }
+  dlgSyncOC->repaint();
+  if (!dlgSyncOC->blSame)
+    dlgSyncOC->ui->btnStartSync->setEnabled(true);
+  else
+    dlgSyncOC->ui->btnStartSync->setEnabled(true);  // test
+  dlgSyncOC->repaint();
   dlgSyncOC->ui->listSource->setCurrentRow(0);
   // Resources
   dlgSyncOC->sourceResourcesDir = pathSource + "EFI/OC/Resources/";

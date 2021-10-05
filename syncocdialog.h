@@ -19,6 +19,7 @@ class SyncOCDialog : public QDialog {
   Ui::SyncOCDialog *ui;
   QString sourceResourcesDir;
   QString targetResourcesDir;
+  bool blSame;
 
  private slots:
   void on_btnStartSync_clicked();
