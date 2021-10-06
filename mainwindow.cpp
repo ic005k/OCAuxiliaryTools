@@ -1298,7 +1298,7 @@ void MainWindow::initui_nvram() {
 
   // Add
   ui->table_nv_add0->setMinimumWidth(300);
-  ui->table_nv_add0->setMaximumWidth(525);
+  ui->table_nv_add0->setMaximumWidth(400);
 
   id0 = new QTableWidgetItem(tr("UUID"));
   ui->table_nv_add0->setHorizontalHeaderItem(0, id0);
@@ -2578,6 +2578,30 @@ QVariantMap MainWindow::SaveMisc() {
 
   // Boot
   subMap["Boot"] = setValue(valueList, ui->tabMisc1);
+
+  if (ui->cboxPickerMode->currentText().trimmed() == "External") {
+    for (int i = 0; i < ui->table_uefi_drivers->rowCount(); i++) {
+      if (ui->table_uefi_drivers->item(i, 0)->text().trimmed() ==
+          "OpenCanopy.efi") {
+        if (ui->table_uefi_drivers->item(i, 1)->checkState() == Qt::Unchecked) {
+          ui->table_uefi_drivers->item(i, 1)->setTextAlignment(Qt::AlignCenter);
+          ui->table_uefi_drivers->item(i, 1)->setText("true");
+          ui->table_uefi_drivers->item(i, 1)->setCheckState(Qt::Checked);
+        }
+      }
+    }
+  } else {
+    for (int i = 0; i < ui->table_uefi_drivers->rowCount(); i++) {
+      if (ui->table_uefi_drivers->item(i, 0)->text().trimmed() ==
+          "OpenCanopy.efi") {
+        if (ui->table_uefi_drivers->item(i, 1)->checkState() == Qt::Checked) {
+          ui->table_uefi_drivers->item(i, 1)->setTextAlignment(Qt::AlignCenter);
+          ui->table_uefi_drivers->item(i, 1)->setText("false");
+          ui->table_uefi_drivers->item(i, 1)->setCheckState(Qt::Unchecked);
+        }
+      }
+    }
+  }
 
   // Debug
   valueList.clear();
