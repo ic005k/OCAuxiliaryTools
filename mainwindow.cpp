@@ -2229,6 +2229,7 @@ bool MainWindow::getBool(QTableWidget* table, int row, int column) {
 }
 
 void MainWindow::SavePlist(QString FileName) {
+  lineEditSetText();  // 回车确认
   removeAllLineEdit();
 
   QVariantMap OpenCore;
