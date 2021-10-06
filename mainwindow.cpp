@@ -2273,7 +2273,20 @@ QVariantMap MainWindow::SaveACPI() {
   QVariantMap acpiAddSub;
 
   for (int i = 0; i < ui->table_acpi_add->rowCount(); i++) {
-    acpiAddSub["Path"] = ui->table_acpi_add->item(i, 0)->text();
+    QFileInfo fi(SaveFileName);
+    QString str0, oldFile, newFile;
+    str0 = ui->table_acpi_add->item(i, 0)->text();
+    oldFile = fi.path() + "/ACPI/" + str0;
+    if (str0.contains(" ")) {
+      str0 = str0.replace(" ", "");
+      ui->table_acpi_add->setItem(i, 0, new QTableWidgetItem(str0));
+
+      newFile = fi.path() + "/ACPI/" + str0;
+      QFileInfo fiReName(oldFile);
+      if (fiReName.exists()) QFile::rename(oldFile, newFile);
+    }
+
+    acpiAddSub["Path"] = str0;
 
     acpiAddSub["Enabled"] = getBool(ui->table_acpi_add, i, 1);
 
@@ -2476,7 +2489,22 @@ QVariantMap MainWindow::SaveKernel() {
   QVariantList dictList;
   QVariantMap valueList;
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
-    valueList["BundlePath"] = ui->table_kernel_add->item(i, 0)->text();
+    QFileInfo fi(SaveFileName);
+    QString str0, oldFile, newFile;
+    str0 = ui->table_kernel_add->item(i, 0)->text();
+    oldFile = fi.path() + "/Kexts/" + str0;
+    if (str0.contains(" ")) {
+      str0 = str0.replace(" ", "");
+      ui->table_kernel_add->setItem(i, 0, new QTableWidgetItem(str0));
+
+      newFile = fi.path() + "/Kexts/" + str0;
+      QDir fiReName(oldFile);
+      if (fiReName.exists()) {
+        fiReName.rename(oldFile, newFile);
+      }
+    }
+
+    valueList["BundlePath"] = str0;
     valueList["Comment"] = ui->table_kernel_add->item(i, 1)->text();
     valueList["ExecutablePath"] = ui->table_kernel_add->item(i, 2)->text();
     valueList["PlistPath"] = ui->table_kernel_add->item(i, 3)->text();
@@ -2748,6 +2776,8 @@ QVariantMap MainWindow::SavePlatformInfo() {
 
   // Generic
   valueList.clear();
+  if (ui->editDatROM->text().count() > 12) ui->btnROM->clicked();
+
   subMap["Generic"] = setValue(valueList, ui->tabPlatformInfo1);
 
   if (getSystemProductName(ui->cboxSystemProductName->currentText()) != "")
@@ -3453,17 +3483,23 @@ void MainWindow::addACPIItem(QStringList FileName) {
   for (int i = 0; i < FileName.count(); i++) {
     int row = ui->table_acpi_add->rowCount() + 1;
 
-    ui->table_acpi_add->setRowCount(row);
+    bool re = false;
+    for (int j = 0; j < ui->table_acpi_add->rowCount(); j++) {
+      QFileInfo fi(FileName.at(i));
+      if (ui->table_acpi_add->item(j, 0)->text() == fi.fileName()) re = true;
+    }
 
-    // QUndoCommand* addCommand = new AddCommand(ui->table_acpi_add, row - 1, 0,
-    // QFileInfo(FileName.at(i)).fileName()); undoStack->push(addCommand);
-    ui->table_acpi_add->setItem(
-        row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
-    init_enabled_data(ui->table_acpi_add, row - 1, 1, "true");
-    ui->table_acpi_add->setItem(row - 1, 2, new QTableWidgetItem(""));
+    if (!re) {
+      ui->table_acpi_add->setRowCount(row);
+      ui->table_acpi_add->setItem(
+          row - 1, 0,
+          new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+      init_enabled_data(ui->table_acpi_add, row - 1, 1, "true");
+      ui->table_acpi_add->setItem(row - 1, 2, new QTableWidgetItem(""));
 
-    ui->table_acpi_add->setFocus();
-    ui->table_acpi_add->setCurrentCell(row - 1, 0);
+      ui->table_acpi_add->setFocus();
+      ui->table_acpi_add->setCurrentCell(row - 1, 0);
+    }
   }
 
   this->setWindowModified(true);
@@ -3523,18 +3559,14 @@ void MainWindow::on_btnKernelAdd_Add_clicked() {
   QStringList FileName;
 
 #ifdef Q_OS_WIN32
-
   FileName.append(fd.getExistingDirectory());
-
 #endif
 
 #ifdef Q_OS_LINUX
-
   FileName.append(fd.getExistingDirectory());
 #endif
 
 #ifdef Q_OS_MAC
-
   FileName = fd.getOpenFileNames(this, "kext", "", "kext(*.kext);;all(*.*)");
 #endif
 
@@ -3547,148 +3579,170 @@ void MainWindow::addKexts(QStringList FileName) {
   if (file_count == 0 || FileName[0] == "") return;
 
   for (int k = 0; k < FileName.count(); k++) {
-    QString file = FileName.at(k);
-    QFileInfo fi(file);
-    if (fi.baseName().toLower() == "lilu") {
-      FileName.removeAt(k);
-      FileName.insert(0, file);
-    }
-
-    if (fi.baseName().toLower() == "virtualsmc") {
-      FileName.removeAt(k);
-      FileName.insert(1, file);
-    }
-  }
-
-  for (int j = 0; j < file_count; j++) {
-    QFileInfo fileInfo(FileName[j]);
-
-    QFileInfo fileInfoList;
-    QString filePath = fileInfo.absolutePath();
-
-    QDir fileDir(filePath + "/" + fileInfo.fileName() + "/Contents/MacOS/");
-
-    if (fileDir.exists())  //如果目录存在，则遍历里面的文件
-    {
-      fileDir.setFilter(QDir::Files);  //只遍历本目录
-      QFileInfoList fileList = fileDir.entryInfoList();
-      int fileCount = fileList.count();
-      for (int i = 0; i < fileCount; i++)  //一般只有一个二进制文件
-      {
-        fileInfoList = fileList[i];
+    bool re = false;
+    for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
+      for (int j = 0; j < FileName.count(); j++) {
+        QFileInfo fi(FileName.at(j));
+        if (ui->table_kernel_add->item(i, 0)->text() == fi.fileName())
+          re = true;
       }
     }
-
-    QTableWidget* t = new QTableWidget;
-    t = ui->table_kernel_add;
-    int row = t->rowCount() + 1;
-
-    t->setRowCount(row);
-    t->setItem(row - 1, 0,
-               new QTableWidgetItem(QFileInfo(FileName[j]).fileName()));
-    t->setItem(row - 1, 1, new QTableWidgetItem(""));
-
-    if (fileInfoList.fileName() != "")
-      t->setItem(
-          row - 1, 2,
-          new QTableWidgetItem("Contents/MacOS/" + fileInfoList.fileName()));
-    else
-      t->setItem(row - 1, 2, new QTableWidgetItem(""));
-
-    t->setItem(row - 1, 3, new QTableWidgetItem("Contents/Info.plist"));
-    t->setItem(row - 1, 4, new QTableWidgetItem(""));
-    t->setItem(row - 1, 5, new QTableWidgetItem(""));
-    init_enabled_data(t, row - 1, 6, "true");
-
-    QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    t->setItem(row - 1, 7, newItem1);
-
-    //如果里面还有PlugIns目录，则需要继续遍历插件目录
-    QDir piDir(filePath + "/" + fileInfo.fileName() + "/Contents/PlugIns/");
-
-    if (piDir.exists()) {
-      piDir.setFilter(QDir::Dirs);  //过滤器：只遍历里面的目录
-      QFileInfoList fileList = piDir.entryInfoList();
-      int fileCount = fileList.count();
-      QVector<QString> kext_file;
-
-      for (int i = 0; i < fileCount; i++)  //找出里面的kext文件(目录）
-      {
-        kext_file.push_back(fileList[i].fileName());
+    if (!re) {
+      QString file = FileName.at(k);
+      QFileInfo fi(file);
+      if (fi.baseName().toLower() == "lilu") {
+        FileName.removeAt(k);
+        FileName.insert(0, file);
       }
 
-      if (fileCount >= 3)  //里面有目录
-      {
-        for (int i = 0; i < fileCount - 2; i++) {
-          QDir fileDir(filePath + "/" + fileInfo.fileName() +
-                       "/Contents/PlugIns/" + kext_file[i + 2] +
-                       "/Contents/MacOS/");
-          if (fileDir.exists()) {
-            fileDir.setFilter(QDir::Files);  //只遍历本目录里面的文件
-            QFileInfoList fileList = fileDir.entryInfoList();
-            int fileCount = fileList.count();
-            for (int i = 0; i < fileCount; i++)  //一般只有一个二进制文件
-            {
-              fileInfoList = fileList[i];
+      if (fi.baseName().toLower() == "virtualsmc") {
+        FileName.removeAt(k);
+        FileName.insert(1, file);
+      }
+
+      for (int j = 0; j < file_count; j++) {
+        QFileInfo fileInfo(FileName[j]);
+
+        QFileInfo fileInfoList;
+        QString filePath = fileInfo.absolutePath();
+
+        QDir fileDir(filePath + "/" + fileInfo.fileName() + "/Contents/MacOS/");
+
+        if (fileDir.exists())  //如果目录存在，则遍历里面的文件
+        {
+          fileDir.setFilter(QDir::Files);  //只遍历本目录
+          QFileInfoList fileList = fileDir.entryInfoList();
+          int fileCount = fileList.count();
+          for (int i = 0; i < fileCount; i++)  //一般只有一个二进制文件
+          {
+            fileInfoList = fileList[i];
+          }
+        }
+
+        QTableWidget* t = new QTableWidget;
+        t = ui->table_kernel_add;
+        int row = t->rowCount() + 1;
+
+        t->setRowCount(row);
+        t->setItem(row - 1, 0,
+                   new QTableWidgetItem(QFileInfo(FileName[j]).fileName()));
+        t->setItem(row - 1, 1, new QTableWidgetItem(""));
+
+        if (fileInfoList.fileName() != "")
+          t->setItem(row - 1, 2,
+                     new QTableWidgetItem("Contents/MacOS/" +
+                                          fileInfoList.fileName()));
+        else
+          t->setItem(row - 1, 2, new QTableWidgetItem(""));
+
+        t->setItem(row - 1, 3, new QTableWidgetItem("Contents/Info.plist"));
+        t->setItem(row - 1, 4, new QTableWidgetItem(""));
+        t->setItem(row - 1, 5, new QTableWidgetItem(""));
+        init_enabled_data(t, row - 1, 6, "true");
+
+        QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        t->setItem(row - 1, 7, newItem1);
+
+        //如果里面还有PlugIns目录，则需要继续遍历插件目录
+        QDir piDir(filePath + "/" + fileInfo.fileName() + "/Contents/PlugIns/");
+
+        if (piDir.exists()) {
+          piDir.setFilter(QDir::Dirs);  //过滤器：只遍历里面的目录
+
+          QFileInfoList fileList;
+          QFileInfoList List = piDir.entryInfoList();
+          for (int z = 0; z < List.count(); z++) {
+            QString str = List.at(z).fileName();
+
+            if (str.mid(str.count() - 4, 4) == "kext") {
+              fileList.push_back(List.at(z));
             }
+          }
 
-            //写入到表里
-            int row = t->rowCount() + 1;
+          int fileCount = fileList.count();
+          QVector<QString> kext_file;
 
-            t->setRowCount(row);
-            t->setItem(
-                row - 1, 0,
-                new QTableWidgetItem(QFileInfo(FileName[j]).fileName() +
-                                     "/Contents/PlugIns/" + kext_file[i + 2]));
-            t->setItem(row - 1, 1, new QTableWidgetItem(""));
+          for (int i = 0; i < fileCount; i++)  //找出里面的kext文件(目录）
+          {
+            QString strKext = fileList[i].fileName();
+            kext_file.push_back(strKext);
+          }
 
-            t->setItem(row - 1, 2,
-                       new QTableWidgetItem("Contents/MacOS/" +
-                                            fileInfoList.fileName()));
+          if (fileCount > 0)  //里面有目录
+          {
+            for (int i = 0; i < fileCount; i++) {
+              QDir fileDir(filePath + "/" + fileInfo.fileName() +
+                           "/Contents/PlugIns/" + kext_file[i] +
+                           "/Contents/MacOS/");
+              if (fileDir.exists()) {
+                fileDir.setFilter(QDir::Files);  //只遍历本目录里面的文件
+                QFileInfoList fileList = fileDir.entryInfoList();
+                int fileCount = fileList.count();
+                for (int i = 0; i < fileCount; i++)  //一般只有一个二进制文件
+                {
+                  fileInfoList = fileList[i];
+                }
 
-            t->setItem(row - 1, 3, new QTableWidgetItem("Contents/Info.plist"));
-            t->setItem(row - 1, 4, new QTableWidgetItem(""));
-            t->setItem(row - 1, 5, new QTableWidgetItem(""));
-            init_enabled_data(t, row - 1, 6, "true");
+                //写入到表里
+                int row = t->rowCount() + 1;
 
-            QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
-            newItem1->setTextAlignment(Qt::AlignCenter);
-            t->setItem(row - 1, 7, newItem1);
+                t->setRowCount(row);
+                t->setItem(
+                    row - 1, 0,
+                    new QTableWidgetItem(QFileInfo(FileName[j]).fileName() +
+                                         "/Contents/PlugIns/" + kext_file[i]));
+                t->setItem(row - 1, 1, new QTableWidgetItem(""));
 
-          } else {  //不存在二进制文件，只存在一个Info.plist文件的情况
+                t->setItem(row - 1, 2,
+                           new QTableWidgetItem("Contents/MacOS/" +
+                                                fileInfoList.fileName()));
 
-            QDir fileDir(filePath + "/" + fileInfo.fileName() +
-                         "/Contents/PlugIns/" + kext_file[i + 2] +
-                         "/Contents/");
-            if (fileDir.exists()) {
-              //写入到表里
-              int row = t->rowCount() + 1;
+                t->setItem(row - 1, 3,
+                           new QTableWidgetItem("Contents/Info.plist"));
+                t->setItem(row - 1, 4, new QTableWidgetItem(""));
+                t->setItem(row - 1, 5, new QTableWidgetItem(""));
+                init_enabled_data(t, row - 1, 6, "true");
 
-              t->setRowCount(row);
-              t->setItem(row - 1, 0,
-                         new QTableWidgetItem(
-                             QFileInfo(FileName[j]).fileName() +
-                             "/Contents/PlugIns/" + kext_file[i + 2]));
-              t->setItem(row - 1, 1, new QTableWidgetItem(""));
-              t->setItem(row - 1, 2, new QTableWidgetItem(""));
-              t->setItem(row - 1, 3,
-                         new QTableWidgetItem("Contents/Info.plist"));
-              t->setItem(row - 1, 4, new QTableWidgetItem(""));
-              t->setItem(row - 1, 5, new QTableWidgetItem(""));
-              init_enabled_data(t, row - 1, 6, "true");
+                QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
+                newItem1->setTextAlignment(Qt::AlignCenter);
+                t->setItem(row - 1, 7, newItem1);
 
-              QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
-              newItem1->setTextAlignment(Qt::AlignCenter);
-              t->setItem(row - 1, 7, newItem1);
+              } else {  //不存在二进制文件，只存在一个Info.plist文件的情况
+
+                QDir fileDir(filePath + "/" + fileInfo.fileName() +
+                             "/Contents/PlugIns/" + kext_file[i] +
+                             "/Contents/");
+                if (fileDir.exists()) {
+                  //写入到表里
+                  int row = t->rowCount() + 1;
+
+                  t->setRowCount(row);
+                  t->setItem(row - 1, 0,
+                             new QTableWidgetItem(
+                                 QFileInfo(FileName[j]).fileName() +
+                                 "/Contents/PlugIns/" + kext_file[i]));
+                  t->setItem(row - 1, 1, new QTableWidgetItem(""));
+                  t->setItem(row - 1, 2, new QTableWidgetItem(""));
+                  t->setItem(row - 1, 3,
+                             new QTableWidgetItem("Contents/Info.plist"));
+                  t->setItem(row - 1, 4, new QTableWidgetItem(""));
+                  t->setItem(row - 1, 5, new QTableWidgetItem(""));
+                  init_enabled_data(t, row - 1, 6, "true");
+
+                  QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
+                  newItem1->setTextAlignment(Qt::AlignCenter);
+                  t->setItem(row - 1, 7, newItem1);
+                }
+              }
             }
           }
         }
+
+        t->setFocus();
+        t->setCurrentCell(row - 1, 0);
       }
     }
-
-    t->setFocus();
-    t->setCurrentCell(row - 1, 0);
   }
 
   this->setWindowModified(true);
@@ -6462,8 +6516,9 @@ void MainWindow::on_table_Booter_patch_currentCellChanged(int currentRow,
 
 void MainWindow::on_btnCheckUpdate() {
   QNetworkRequest quest;
-  quest.setUrl(QUrl(
-      "https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/latest"));
+  quest.setUrl(
+      QUrl("https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/"
+           "latest"));
   quest.setHeader(QNetworkRequest::UserAgentHeader, "RT-Thread ART");
   manager->get(quest);
 }
@@ -6550,7 +6605,8 @@ int MainWindow::parse_UpdateJSON(QString str) {
         int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
                                        tr("Cancel"));
         if (ret == 0) {
-          // Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
+          // Url =
+          // "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
           // QDesktopServices::openUrl(QUrl(Url));
 
           ShowAutoUpdateDlg(false);
@@ -6872,8 +6928,8 @@ QString MainWindow::getDiskNum()  //查看硬盘：wmic diskdrive get serialnumb
   return getWMIC("wmic diskdrive where index=0 get serialnumber");
 }
 
-QString
-MainWindow::getBaseBordNum()  //查询主板序列号：wmic baseboard get serialnumber
+QString MainWindow::getBaseBordNum()  //查询主板序列号：wmic baseboard get
+                                      // serialnumber
 {
   return getWMIC("wmic baseboard get serialnumber");
 }
@@ -6975,7 +7031,8 @@ void MainWindow::lineEditSetText() {
 
     bool textAlignCenter = false;
     QString colTextList =
-        "CountLimitSkipBaseSkipMaxKernelMinKernelAssetTagBankLocatorDeviceLocat"
+        "CountLimitSkipBaseSkipMaxKernelMinKernelAssetTagBankLocatorDeviceLoc"
+        "at"
         "orManufacturerPartNumberSerialNumberSizeSpeed";
     QString strItem = myTable->horizontalHeaderItem(col)->text();
     QStringList strEn = strItem.split("\n");
@@ -7824,7 +7881,8 @@ void MainWindow::goResultsCheckbox(QString objName) {
           if (listOfCheckBox.at(k)->objectName() == name) {
             orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
             QString style =
-                "QCheckBox{background-color:rgb(255,0,0);color:rgb(255,255,255)"
+                "QCheckBox{background-color:rgb(255,0,0);color:rgb(255,255,"
+                "255)"
                 ";}";
             QCheckBox* w = (QCheckBox*)listOfCheckBox.at(k);
             w->setStyleSheet(style);
@@ -7846,7 +7904,8 @@ void MainWindow::goResultsCheckbox(QString objName) {
         for (int k = 0; k < listOfCheckBox.count(); k++) {
           if (listOfCheckBox.at(k)->objectName() == name) {
             QString style =
-                "QCheckBox{background-color:rgb(255,0,0);color:rgb(255,255,255)"
+                "QCheckBox{background-color:rgb(255,0,0);color:rgb(255,255,"
+                "255)"
                 ";}";
             QCheckBox* w = (QCheckBox*)listOfCheckBox.at(k);
             w->setStyleSheet(style);
@@ -7957,7 +8016,8 @@ void MainWindow::goResultsLabel(QString objName) {
           if (listOfLabel.at(k)->objectName() == name) {
             orgLabelStyle = ui->label->styleSheet();
             QString style =
-                "QLabel{background-color:rgb(255,0,0);color:rgb(255,255,255);}";
+                "QLabel{background-color:rgb(255,0,0);color:rgb(255,255,255);"
+                "}";
             QLabel* w = (QLabel*)listOfLabel.at(k);
             w->setStyleSheet(style);
             end = true;
