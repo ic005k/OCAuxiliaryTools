@@ -14,21 +14,22 @@ class dlgOCValidate;
 }
 
 class dlgOCValidate : public QDialog {
-    Q_OBJECT
+  Q_OBJECT
 
-public:
-    explicit dlgOCValidate(QWidget* parent = nullptr);
-    ~dlgOCValidate();
-    void setTextOCV(QString str);
-    void setGoEnabled(bool enabled);
+ public:
+  explicit dlgOCValidate(QWidget* parent = nullptr);
+  ~dlgOCValidate();
+  void setTextOCV(QString str);
+  void setGoEnabled(bool enabled);
 
-private slots:
-    void on_btnClose_clicked();
+  void goMainList(QString value, QString subValue);
+ private slots:
+  void on_btnClose_clicked();
 
-    void on_btnGo_clicked();
+  void on_btnGo_clicked();
 
-private:
-    Ui::dlgOCValidate* ui;
+ private:
+  Ui::dlgOCValidate* ui;
 };
 
-#endif // DLGOCVALIDATE_H
+#endif  // DLGOCVALIDATE_H
