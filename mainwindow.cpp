@@ -1383,6 +1383,7 @@ void MainWindow::AddNvramAdd(QVariantMap map_add, int currentRow,
     if (dtype == "QByteArray") ztype = "Data";
     if (dtype == "QString") ztype = "String";
     if (dtype == "qlonglong") ztype = "Number";
+    if (dtype == "bool") ztype = "Boolean";
     newItem1 = new QTableWidgetItem(ztype);  //数据类型
     newItem1->setTextAlignment(Qt::AlignCenter);
     ui->table_nv_add->setItem(j, 1, newItem1);
@@ -2221,8 +2222,8 @@ void MainWindow::on_btnSave() { SavePlist(SaveFileName); }
 
 bool MainWindow::getBool(QTableWidget* table, int row, int column) {
   QString be = table->item(row, column)->text();
-  if (be.trimmed() == "true") return true;
-  if (be.trimmed() == "false") return false;
+  if (be.trimmed() == "true" || be.trimmed().toLower() == "yes") return true;
+  if (be.trimmed() == "false" || be.trimmed().toLower() == "no") return false;
 
   return false;
 }
@@ -2643,7 +2644,7 @@ QVariantMap MainWindow::SaveNVRAM() {
 
   int currentRow = ui->table_nv_add0->currentRow();
   for (int i = 0; i < ui->table_nv_add0->rowCount(); i++) {
-    valueList.clear();  //先必须清理下列表，很重要
+    valueList.clear();
     //先加载表中的数据
     ui->table_nv_add0->setCurrentCell(i, 0);
     on_table_nv_add0_cellClicked(i, 0);
@@ -2659,6 +2660,10 @@ QVariantMap MainWindow::SaveNVRAM() {
       }
       if (dataType == "Number")
         valueList[ui->table_nv_add->item(k, 0)->text()] = value.toLongLong();
+      if (dataType == "Boolean") {
+        valueList[ui->table_nv_add->item(k, 0)->text()] =
+            getBool(ui->table_nv_add, k, 2);
+      }
     }
     dictList[ui->table_nv_add0->item(i, 0)->text()] = valueList;
   }
@@ -4199,6 +4204,7 @@ void MainWindow::on_table_nv_add_cellClicked(int row, int column) {
     cboxDataClass->addItem("Data");
     cboxDataClass->addItem("String");
     cboxDataClass->addItem("Number");
+    cboxDataClass->addItem("Boolean");
     cboxDataClass->addItem("");
     connect(cboxDataClass, SIGNAL(currentTextChanged(QString)), this,
             SLOT(dataClassChange_nv()));
@@ -4282,6 +4288,15 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow,
       lineEdit->setValidator(validator);
       lineEdit->setPlaceholderText(tr("Hexadecimal"));
       lineEdit->setToolTip(tr("Hexadecimal"));
+    }
+
+    if (Table == ui->table_nv_add) {
+      if (currentColumn == 2) {
+        if (Table->item(currentRow, 1)->text() == "Boolean") {
+          lineEdit->setPlaceholderText(tr("true or false"));
+          lineEdit->setToolTip(tr("true or false"));
+        }
+      }
     }
 
     loading = true;
