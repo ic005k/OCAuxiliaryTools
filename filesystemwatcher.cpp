@@ -104,8 +104,34 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
              i--) {
           QString str0 = mw_one->ui->table_kernel_add->item(i, 0)->text();
           for (int j = 0; j < deleteFile.count(); j++) {
+            if (str0.contains(deleteFile.at(j))) {
+              QString str = str0.replace(deleteFile.at(j), newFile.first());
+              mw_one->ui->table_kernel_add->setItem(i, 0,
+                                                    new QTableWidgetItem(str));
+            }
+          }
+        }
+      }
+
+      if (path == strDrivers) {
+        for (int i = mw_one->ui->table_uefi_drivers->rowCount() - 1; i > -1;
+             i--) {
+          QString str0 = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
+          for (int j = 0; j < deleteFile.count(); j++) {
             if (str0 == deleteFile.at(j)) {
-              mw_one->ui->table_kernel_add->setItem(
+              mw_one->ui->table_uefi_drivers->setItem(
+                  i, 0, new QTableWidgetItem(newFile.first()));
+            }
+          }
+        }
+      }
+
+      if (path == strTools) {
+        for (int i = mw_one->ui->tableTools->rowCount() - 1; i > -1; i--) {
+          QString str0 = mw_one->ui->tableTools->item(i, 0)->text();
+          for (int j = 0; j < deleteFile.count(); j++) {
+            if (str0 == deleteFile.at(j)) {
+              mw_one->ui->tableTools->setItem(
                   i, 0, new QTableWidgetItem(newFile.first()));
             }
           }
@@ -118,15 +144,63 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
       qDebug() << "New Files/Dirs added: " << newFile;
 
       if (path == strACPI) {
-        mw_one->addACPIItem(newFile);
+        QStringList tempList;
+        for (int i = 0; i < newFile.count(); i++) {
+          QFileInfo fi(strACPI + newFile.at(i));
+          if (fi.suffix().toLower() == "aml") {
+            tempList.append(strACPI + newFile.at(i));
+          }
+        }
+
+        mw_one->addACPIItem(tempList);
       }
 
       if (path == strKexts) {
         QStringList tempList;
         for (int i = 0; i < newFile.count(); i++) {
-          tempList.append(strKexts + newFile.at(i));
+          QFileInfo fi(strKexts + newFile.at(i));
+          QString fileSuffix;
+#ifdef Q_OS_WIN32
+          fileSuffix = fi.suffix().toLower();
+#endif
+
+#ifdef Q_OS_LINUX
+          fileSuffix = fi.suffix().toLower();
+#endif
+
+#ifdef Q_OS_MAC
+          QString str1 = newFile.at(i);
+          QString str2 = str1.mid(str1.length() - 4, 4);
+          fileSuffix = str2.toLower();
+#endif
+          qDebug() << fileSuffix;
+          if (fileSuffix == "kext") {
+            tempList.append(strKexts + newFile.at(i));
+          }
         }
         mw_one->addKexts(tempList);
+      }
+
+      if (path == strDrivers) {
+        QStringList tempList;
+        for (int i = 0; i < newFile.count(); i++) {
+          QFileInfo fi(strDrivers + newFile.at(i));
+          if (fi.suffix().toLower() == "efi") {
+            tempList.append(strDrivers + newFile.at(i));
+          }
+        }
+        mw_one->addEFIDrivers(tempList);
+      }
+
+      if (path == strTools) {
+        QStringList tempList;
+        for (int i = 0; i < newFile.count(); i++) {
+          QFileInfo fi(strTools + newFile.at(i));
+          if (fi.suffix().toLower() == "efi") {
+            tempList.append(strTools + newFile.at(i));
+          }
+        }
+        mw_one->addEFITools(tempList);
       }
 
       foreach (QString file, newFile) {
@@ -156,6 +230,29 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
           for (int j = 0; j < deleteFile.count(); j++) {
             if (str0.contains(deleteFile.at(j))) {
               mw_one->ui->table_kernel_add->removeRow(i);
+            }
+          }
+        }
+      }
+
+      if (path == strDrivers) {
+        for (int i = mw_one->ui->table_uefi_drivers->rowCount() - 1; i > -1;
+             i--) {
+          QString str0 = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
+          for (int j = 0; j < deleteFile.count(); j++) {
+            if (str0.contains(deleteFile.at(j))) {
+              mw_one->ui->table_uefi_drivers->removeRow(i);
+            }
+          }
+        }
+      }
+
+      if (path == strTools) {
+        for (int i = mw_one->ui->tableTools->rowCount() - 1; i > -1; i--) {
+          QString str0 = mw_one->ui->tableTools->item(i, 0)->text();
+          for (int j = 0; j < deleteFile.count(); j++) {
+            if (str0.contains(deleteFile.at(j))) {
+              mw_one->ui->tableTools->removeRow(i);
             }
           }
         }
