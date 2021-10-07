@@ -94,6 +94,8 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
             if (str0 == deleteFile.at(j)) {
               mw_one->ui->table_acpi_add->setItem(
                   i, 0, new QTableWidgetItem(newFile.first()));
+
+              mw_one->setWindowModified(true);
             }
           }
         }
@@ -108,6 +110,8 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
               QString str = str0.replace(deleteFile.at(j), newFile.first());
               mw_one->ui->table_kernel_add->setItem(i, 0,
                                                     new QTableWidgetItem(str));
+
+              mw_one->setWindowModified(true);
             }
           }
         }
@@ -121,6 +125,8 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
             if (str0 == deleteFile.at(j)) {
               mw_one->ui->table_uefi_drivers->setItem(
                   i, 0, new QTableWidgetItem(newFile.first()));
+
+              mw_one->setWindowModified(true);
             }
           }
         }
@@ -133,6 +139,8 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
             if (str0 == deleteFile.at(j)) {
               mw_one->ui->tableTools->setItem(
                   i, 0, new QTableWidgetItem(newFile.first()));
+
+              mw_one->setWindowModified(true);
             }
           }
         }
@@ -218,6 +226,8 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
           for (int j = 0; j < deleteFile.count(); j++) {
             if (str0 == deleteFile.at(j)) {
               mw_one->ui->table_acpi_add->removeRow(i);
+
+              mw_one->setWindowModified(true);
             }
           }
         }
@@ -230,6 +240,8 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
           for (int j = 0; j < deleteFile.count(); j++) {
             if (str0.contains(deleteFile.at(j))) {
               mw_one->ui->table_kernel_add->removeRow(i);
+
+              mw_one->setWindowModified(true);
             }
           }
         }
@@ -242,6 +254,8 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
           for (int j = 0; j < deleteFile.count(); j++) {
             if (str0.contains(deleteFile.at(j))) {
               mw_one->ui->table_uefi_drivers->removeRow(i);
+
+              mw_one->setWindowModified(true);
             }
           }
         }
@@ -253,6 +267,8 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
           for (int j = 0; j < deleteFile.count(); j++) {
             if (str0.contains(deleteFile.at(j))) {
               mw_one->ui->tableTools->removeRow(i);
+
+              mw_one->setWindowModified(true);
             }
           }
         }

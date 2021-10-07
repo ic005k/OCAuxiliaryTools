@@ -39,6 +39,7 @@ class Method : public QMainWindow {
   void UpdateStatusBarInfo();
   void addFileSystemWatch(QString strOpenFile);
 
+  void removeFileSystemWatch(QString strOpenFile);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();

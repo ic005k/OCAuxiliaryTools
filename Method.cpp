@@ -645,3 +645,21 @@ void Method::addFileSystemWatch(QString strOpenFile) {
   FileSystemWatcher::addWatchPath(strDrivers);
   FileSystemWatcher::addWatchPath(strTools);
 }
+
+void Method::removeFileSystemWatch(QString strOpenFile) {
+  QString strPath;
+
+  QFileInfo fi(strOpenFile);
+  if (!fi.exists()) return;
+
+  strPath = fi.path();
+  strACPI = strPath + "/ACPI/";
+  strKexts = strPath + "/Kexts/";
+  strDrivers = strPath + "/Drivers/";
+  strTools = strPath + "/Tools/";
+
+  FileSystemWatcher::removeWatchPath(strACPI);
+  FileSystemWatcher::removeWatchPath(strKexts);
+  FileSystemWatcher::removeWatchPath(strDrivers);
+  FileSystemWatcher::removeWatchPath(strTools);
+}

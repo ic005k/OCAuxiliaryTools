@@ -4208,7 +4208,11 @@ void MainWindow::on_btnSaveAs() {
                          "plist(*.plist);;all(*.*)");
   if (!PlistFileName.isEmpty()) {
     setWindowTitle(title + "      [*]" + PlistFileName);
+
+    mymethod->removeFileSystemWatch(SaveFileName);
     SaveFileName = PlistFileName;
+    mymethod->addFileSystemWatch(SaveFileName);
+
   } else {
     if (closeSave) clear_temp_data();
 
