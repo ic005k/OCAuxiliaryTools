@@ -5,6 +5,7 @@
 #include <QDialog>
 #include <QListWidgetItem>
 #include <QMessageBox>
+#include <QScrollBar>
 
 namespace Ui {
 class SyncOCDialog;
@@ -25,6 +26,8 @@ class SyncOCDialog : public QDialog {
   void on_btnStartSync_clicked();
 
   void on_listSource_currentRowChanged(int currentRow);
+
+  void on_listSource_itemClicked(QListWidgetItem *item);
 
  private:
 };

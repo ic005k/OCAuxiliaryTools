@@ -90,4 +90,12 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   }
 
   ui->listSource->setFocus();
+  QScrollBar* scrollBar;
+  scrollBar = ui->listTarget->verticalScrollBar();
+  scrollBar->setValue(ui->listSource->verticalScrollBar()->value());
+}
+
+void SyncOCDialog::on_listSource_itemClicked(QListWidgetItem* item) {
+  Q_UNUSED(item);
+  on_listSource_currentRowChanged(ui->listSource->currentRow());
 }
