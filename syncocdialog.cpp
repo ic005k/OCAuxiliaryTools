@@ -72,10 +72,22 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   ui->lblTargetLastModi->setText(tr("Target file last modified") + " : " +
                                  targetModi + "\nmd5    " + targetHash);
 
+  int size = 9;
+  ui->listTarget->setIconSize(QSize(size, size));
+  ui->listSource->setIconSize(QSize(size, size));
   if (sourceHash != targetHash) {
-    ui->listTarget->item(currentRow)->setBackgroundColor(QColor(Qt::red));
-    ui->listTarget->item(currentRow)->setForeground(QBrush(Qt::white));
+    // ui->listTarget->item(currentRow)->setBackgroundColor(QColor(Qt::red));
+    // ui->listTarget->item(currentRow)->setForeground(QBrush(Qt::white));
+    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/red.svg"));
+    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/red.svg"));
+
     blSame = false;
-  } else if (mw_one->red > 55)
-    ui->listTarget->item(currentRow)->setBackgroundColor(Qt::white);
+  } else {
+    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/green.svg"));
+    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/green.svg"));
+    // if (mw_one->red > 55)
+    //  ui->listTarget->item(currentRow)->setBackgroundColor(Qt::white);
+  }
+
+  ui->listSource->setFocus();
 }

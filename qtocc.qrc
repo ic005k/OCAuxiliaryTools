@@ -42,5 +42,7 @@
         <file>icon/down.png</file>
         <file>icon/up.png</file>
         <file>icon/opendir.png</file>
+        <file>icon/green.svg</file>
+        <file>icon/red.svg</file>
     </qresource>
 </RCC>
