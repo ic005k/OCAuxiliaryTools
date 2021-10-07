@@ -76,6 +76,10 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  QAction* cutAction;
+  QAction* copyAction;
+  QAction* pasteAction;
+
   QList<QVariant> NoteValues;
   QList<QString> NoteKeys;
   bool find = false;
