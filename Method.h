@@ -37,6 +37,8 @@ class Method : public QMainWindow {
   void set_nv_key(QString key, QString dataType);
 
   void UpdateStatusBarInfo();
+  void addFileSystemWatch(QString strOpenFile);
+
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();

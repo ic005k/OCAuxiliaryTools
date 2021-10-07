@@ -263,6 +263,8 @@ void MainWindow::openFile(QString PlistFileName) {
 
   this->setWindowModified(false);
   FindTextChange = true;
+
+  mymethod->addFileSystemWatch(SaveFileName);
 }
 
 void MainWindow::openFileAfter() {

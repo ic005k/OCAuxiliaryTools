@@ -67,7 +67,9 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   QFileInfo fiTarget(targetFile);
   sourceModi = fiSource.lastModified().toString();
   targetModi = fiTarget.lastModified().toString();
-  ui->lblSourceLastModi->setText(tr("Source file last modified") + " : " +
+
+  ui->lblSourceLastModi->setText(fiSource.fileName() + "\n\n" +
+                                 tr("Source file last modified") + " : " +
                                  sourceModi + "\nmd5    " + sourceHash);
   ui->lblTargetLastModi->setText(tr("Target file last modified") + " : " +
                                  targetModi + "\nmd5    " + targetHash);

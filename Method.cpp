@@ -1,5 +1,6 @@
 #include "Method.h"
 
+#include "filesystemwatcher.h"
 #include "mainwindow.h"
 #include "plistparser.h"
 #include "plistserializer.h"
@@ -7,6 +8,11 @@
 
 extern MainWindow* mw_one;
 Method* mymethod;
+
+QString strACPI;
+QString strKexts;
+QString strDrivers;
+QString strTools;
 
 Method::Method(QWidget* parent) : QMainWindow(parent) { mymethod = new Method; }
 
@@ -621,4 +627,21 @@ void Method::UpdateStatusBarInfo() {
     if (!t->currentIndex().isValid()) return;
     t->cellClicked(t->currentRow(), t->currentColumn());
   }
+}
+
+void Method::addFileSystemWatch(QString strOpenFile) {
+  QString strPath;
+
+  QFileInfo fi(strOpenFile);
+
+  strPath = fi.path();
+  strACPI = strPath + "/ACPI/";
+  strKexts = strPath + "/Kexts/";
+  strDrivers = strPath + "/Drivers/";
+  strTools = strPath + "/Tools/";
+
+  FileSystemWatcher::addWatchPath(strACPI);
+  FileSystemWatcher::addWatchPath(strKexts);
+  FileSystemWatcher::addWatchPath(strDrivers);
+  FileSystemWatcher::addWatchPath(strTools);
 }

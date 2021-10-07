@@ -44,6 +44,7 @@
 #include "dlgParameters.h"
 #include "dlgPreset.h"
 #include "dlgdatabase.h"
+#include "filesystemwatcher.h"
 #include "plistparser.h"
 #include "plistserializer.h"
 #include "recentfiles.h"

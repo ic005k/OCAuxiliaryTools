@@ -44,6 +44,7 @@ SOURCES += \
     dlgParameters.cpp \
     dlgPreset.cpp \
     dlgdatabase.cpp \
+    filesystemwatcher.cpp \
     main.cpp \
     mainwindow.cpp \
     myapp.cpp \
@@ -67,6 +68,7 @@ HEADERS += \
     dlgParameters.h \
     dlgPreset.h \
     dlgdatabase.h \
+    filesystemwatcher.h \
     mainwindow.h \
     myapp.h \
     plistparser.h \
