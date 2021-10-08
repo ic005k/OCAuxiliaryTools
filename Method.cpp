@@ -691,12 +691,11 @@ void Method::markColor(QTableWidget* table, QString path, int col) {
       //使行头标号变红
       if (mw_one->osx1012) {
         id1->setForeground(QColor(255, 0, 0, 255));
-
       } else {
         id1->setForeground(QColor(255, 255, 255, 255));
         id1->setBackgroundColor(QColor(255, 0, 0, 255));
-        table->setVerticalHeaderItem(i, id1);
       }
+      table->setVerticalHeaderItem(i, id1);
     }
   }
 }
