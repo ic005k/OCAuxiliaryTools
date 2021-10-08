@@ -10,6 +10,8 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
+extern QString SaveFileName;
+extern Method* mymethod;
 extern QString strACPI;
 extern QString strKexts;
 extern QString strDrivers;
@@ -181,11 +183,21 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
           QString str2 = str1.mid(str1.length() - 4, 4);
           fileSuffix = str2.toLower();
 #endif
-          qDebug() << fileSuffix;
+
           if (fileSuffix == "kext") {
             tempList.append(strKexts + newFile.at(i));
           }
         }
+
+        QTime t;
+        t.start();
+        int a;
+        if (tempList.count() < 10) a = 3000;
+        if (tempList.count() > 10) a = 5000;
+        while (t.elapsed() < a) {
+          QCoreApplication::processEvents();
+        }
+
         mw_one->addKexts(tempList);
       }
 

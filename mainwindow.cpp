@@ -201,7 +201,10 @@ void MainWindow::initRecentFilesForToolBar() {
 void MainWindow::openFile(QString PlistFileName) {
   if (!PlistFileName.isEmpty()) {
     setWindowTitle(title + PlistFileName);
+
+    mymethod->removeFileSystemWatch(SaveFileName);
     SaveFileName = PlistFileName;
+    mymethod->addFileSystemWatch(SaveFileName);
   } else
     return;
 
@@ -263,8 +266,6 @@ void MainWindow::openFile(QString PlistFileName) {
 
   this->setWindowModified(false);
   FindTextChange = true;
-
-  mymethod->addFileSystemWatch(SaveFileName);
 }
 
 void MainWindow::openFileAfter() {
