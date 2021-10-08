@@ -3484,26 +3484,22 @@ void MainWindow::on_btnACPIAdd_Add_clicked() {
 void MainWindow::addACPIItem(QStringList FileName) {
   if (FileName.isEmpty()) return;
 
+  QStringList tempList =
+      mymethod->deDuplication(FileName, ui->table_acpi_add, 0);
+  FileName.clear();
+  FileName = tempList;
+
   for (int i = 0; i < FileName.count(); i++) {
-    int row = ui->table_acpi_add->rowCount() + 1;
+    int row = ui->table_acpi_add->rowCount();
 
-    bool re = false;
-    for (int j = 0; j < ui->table_acpi_add->rowCount(); j++) {
-      QFileInfo fi(FileName.at(i));
-      if (ui->table_acpi_add->item(j, 0)->text() == fi.fileName()) re = true;
-    }
+    ui->table_acpi_add->setRowCount(row + 1);
+    ui->table_acpi_add->setItem(
+        row, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+    init_enabled_data(ui->table_acpi_add, row, 1, "true");
+    ui->table_acpi_add->setItem(row, 2, new QTableWidgetItem(""));
 
-    if (!re) {
-      ui->table_acpi_add->setRowCount(row);
-      ui->table_acpi_add->setItem(
-          row - 1, 0,
-          new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
-      init_enabled_data(ui->table_acpi_add, row - 1, 1, "true");
-      ui->table_acpi_add->setItem(row - 1, 2, new QTableWidgetItem(""));
-
-      ui->table_acpi_add->setFocus();
-      ui->table_acpi_add->setCurrentCell(row - 1, 0);
-    }
+    ui->table_acpi_add->setFocus();
+    ui->table_acpi_add->setCurrentCell(row, 0);
   }
 
   this->setWindowModified(true);
@@ -3579,18 +3575,10 @@ void MainWindow::on_btnKernelAdd_Add_clicked() {
 
 void MainWindow::addKexts(QStringList FileName) {
   // 去重
-  if (ui->table_kernel_add->rowCount() > 0) {
-    QString str0;
-    for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
-      str0 = ui->table_kernel_add->item(i, 0)->text().trimmed();
-      for (int j = 0; j < FileName.count(); j++) {
-        QFileInfo fi(FileName.at(j));
-        if (str0 == fi.fileName()) {
-          FileName.removeAt(j);
-        }
-      }
-    }
-  }
+  QStringList tempList =
+      mymethod->deDuplication(FileName, ui->table_kernel_add, 0);
+  FileName.clear();
+  FileName = tempList;
 
   int file_count = FileName.count();
 
@@ -3836,6 +3824,10 @@ void MainWindow::on_btnMiscTools_Add_clicked() {
 
 void MainWindow::addEFITools(QStringList FileName) {
   if (FileName.isEmpty()) return;
+
+  QStringList tempList = mymethod->deDuplication(FileName, ui->tableTools, 0);
+  FileName.clear();
+  FileName = tempList;
 
   for (int i = 0; i < FileName.count(); i++) {
     add_item(ui->tableTools, 9);
@@ -4083,6 +4075,11 @@ void MainWindow::on_btnUEFIDrivers_Add_clicked() {
 
 void MainWindow::addEFIDrivers(QStringList FileName) {
   if (FileName.isEmpty()) return;
+
+  QStringList tempList =
+      mymethod->deDuplication(FileName, ui->table_uefi_drivers, 0);
+  FileName.clear();
+  FileName = tempList;
 
   for (int i = 0; i < FileName.count(); i++) {
     int row = ui->table_uefi_drivers->rowCount() + 1;

@@ -40,6 +40,7 @@ class Method : public QMainWindow {
   void addFileSystemWatch(QString strOpenFile);
 
   void removeFileSystemWatch(QString strOpenFile);
+  QStringList deDuplication(QStringList FileName, QTableWidget* table, int col);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();

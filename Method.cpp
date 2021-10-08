@@ -663,3 +663,17 @@ void Method::removeFileSystemWatch(QString strOpenFile) {
   FileSystemWatcher::removeWatchPath(strDrivers);
   FileSystemWatcher::removeWatchPath(strTools);
 }
+
+QStringList Method::deDuplication(QStringList FileName, QTableWidget* table,
+                                  int col) {
+  for (int i = 0; i < table->rowCount(); i++) {
+    QString str0 = table->item(i, col)->text().trimmed();
+    for (int j = 0; j < FileName.count(); j++) {
+      QFileInfo fi(FileName.at(j));
+      if (str0 == fi.fileName()) {
+        FileName.removeAt(j);
+      }
+    }
+  }
+  return FileName;
+}
