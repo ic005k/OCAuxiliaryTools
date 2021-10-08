@@ -679,23 +679,22 @@ QStringList Method::deDuplication(QStringList FileName, QTableWidget* table,
 }
 
 void Method::markColor(QTableWidget* table, QString path, int col) {
+  QIcon icon;
+  QTableWidgetItem* id1;
   for (int i = 0; i < table->rowCount(); i++) {
     QString strFile = path + table->item(i, col)->text().trimmed();
-    QTableWidgetItem* id1;
     QFileInfo fi(strFile);
     if (fi.exists()) {
       // id1->setForeground(QColor(55, 55, 55, 255));
       // id1->setBackground(QBrush(QColor(33, 255, 153, 255)));
 
-      QIcon icon;
       icon.addFile(":/icon/green.svg", QSize(10, 10));
-      id1 = new QTableWidgetItem(icon, QString::number(i));
+      id1 = new QTableWidgetItem(icon, QString::number(i + 1));
       table->setVerticalHeaderItem(i, id1);
 
     } else {
-      QIcon icon;
       icon.addFile(":/icon/red.svg", QSize(10, 10));
-      id1 = new QTableWidgetItem(icon, QString::number(i));
+      id1 = new QTableWidgetItem(icon, QString::number(i + 1));
       table->setVerticalHeaderItem(i, id1);
     }
   }
