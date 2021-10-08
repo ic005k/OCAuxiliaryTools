@@ -32,6 +32,10 @@ QVector<QCheckBox*> chk_Target;
 
 extern QString CurVerison;
 extern QString ocVer;
+extern QString strACPI;
+extern QString strKexts;
+extern QString strDrivers;
+extern QString strTools;
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -264,6 +268,8 @@ void MainWindow::openFile(QString PlistFileName) {
 
   openFileAfter();
 
+  checkFiles();
+
   this->setWindowModified(false);
   FindTextChange = true;
 }
@@ -279,6 +285,13 @@ void MainWindow::openFileAfter() {
       w->setFocus();
     }
   }
+}
+
+void MainWindow::checkFiles() {
+  mymethod->markColor(ui->table_acpi_add, strACPI, 0);
+  mymethod->markColor(ui->table_kernel_add, strKexts, 0);
+  mymethod->markColor(ui->table_uefi_drivers, strDrivers, 0);
+  mymethod->markColor(ui->tableTools, strTools, 0);
 }
 
 void MainWindow::on_btnOpen() {
@@ -2265,6 +2278,8 @@ void MainWindow::SavePlist(QString FileName) {
     OpenFileValidate = true;
     on_actionOcvalidate_triggered();
   }
+
+  checkFiles();
 }
 
 QVariantMap MainWindow::SaveACPI() {
@@ -3503,6 +3518,7 @@ void MainWindow::addACPIItem(QStringList FileName) {
   }
 
   this->setWindowModified(true);
+  checkFiles();
 }
 
 void MainWindow::on_btnDPAdd_Add0_clicked() {
@@ -3768,6 +3784,7 @@ void MainWindow::addKexts(QStringList FileName) {
   }
 
   this->setWindowModified(true);
+  checkFiles();
 }
 
 void MainWindow::on_btnKernelBlock_Add_clicked() {
@@ -3852,6 +3869,7 @@ void MainWindow::addEFITools(QStringList FileName) {
   }
 
   this->setWindowModified(true);
+  checkFiles();
 }
 
 void MainWindow::on_btnMiscEntries_Del_clicked() { del_item(ui->tableEntries); }
@@ -4097,6 +4115,7 @@ void MainWindow::addEFIDrivers(QStringList FileName) {
   }
 
   this->setWindowModified(true);
+  checkFiles();
 }
 
 void MainWindow::on_btnUEFIDrivers_Del_clicked() {

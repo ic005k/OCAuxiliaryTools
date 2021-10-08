@@ -317,6 +317,7 @@ class MainWindow : public QMainWindow {
   void init_value(QVariantMap map_fun, QTableWidget* table,
                   QTableWidget* subtable, int currentRow);
   void AddNvramAdd(QVariantMap map_add, int currentRow, bool blPreset);
+  void checkFiles();
  public slots:
   void DisplayLevel();
   void ScanPolicy();
