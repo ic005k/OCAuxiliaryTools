@@ -74,9 +74,6 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   ui->lblTargetLastModi->setText(tr("Target file last modified") + " : " +
                                  targetModi + "\nmd5    " + targetHash);
 
-  int size = 9;
-  ui->listTarget->setIconSize(QSize(size, size));
-  ui->listSource->setIconSize(QSize(size, size));
   if (sourceHash != targetHash) {
     // ui->listTarget->item(currentRow)->setBackgroundColor(QColor(Qt::red));
     // ui->listTarget->item(currentRow)->setForeground(QBrush(Qt::white));

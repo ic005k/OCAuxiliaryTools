@@ -681,20 +681,21 @@ QStringList Method::deDuplication(QStringList FileName, QTableWidget* table,
 void Method::markColor(QTableWidget* table, QString path, int col) {
   for (int i = 0; i < table->rowCount(); i++) {
     QString strFile = path + table->item(i, col)->text();
-    QTableWidgetItem* id1 = new QTableWidgetItem(QString::number(i));
+    QTableWidgetItem* id1;
     QFileInfo fi(strFile);
     if (fi.exists()) {
-      id1->setForeground(QColor(55, 55, 55, 255));  //设置字体的颜色
-      id1->setBackgroundColor(QColor(33, 255, 153, 255));  //背景色
+      // id1->setForeground(QColor(55, 55, 55, 255));
+      // id1->setBackground(QBrush(QColor(33, 255, 153, 255)));
+
+      QIcon icon;
+      icon.addFile(":/icon/green.svg", QSize(10, 10));
+      id1 = new QTableWidgetItem(icon, QString::number(i));
       table->setVerticalHeaderItem(i, id1);
+
     } else {
-      //使行头标号变红
-      if (mw_one->osx1012) {
-        id1->setForeground(QColor(255, 0, 0, 255));
-      } else {
-        id1->setForeground(QColor(255, 255, 255, 255));
-        id1->setBackgroundColor(QColor(255, 0, 0, 255));
-      }
+      QIcon icon;
+      icon.addFile(":/icon/red.svg", QSize(10, 10));
+      id1 = new QTableWidgetItem(icon, QString::number(i));
       table->setVerticalHeaderItem(i, id1);
     }
   }
