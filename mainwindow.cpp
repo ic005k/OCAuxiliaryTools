@@ -3384,6 +3384,7 @@ void MainWindow::del_item(QTableWidget* table) {
   if (row == 0) table->setCurrentCell(0, 0);
 
   this->setWindowModified(true);
+  checkFiles();
 }
 
 void MainWindow::on_btnACPIAdd_Del_clicked() { del_item(ui->table_acpi_add); }
@@ -3397,6 +3398,7 @@ void MainWindow::on_btnACPIDel_Add_clicked() {
                     "true");
 
   this->setWindowModified(true);
+  checkFiles();
 }
 
 void MainWindow::on_btnACPIDel_Del_clicked() { del_item(ui->table_acpi_del); }
@@ -4207,6 +4209,7 @@ void MainWindow::MoveItem(QTableWidget* t, bool up) {
   }
 
   this->setWindowModified(true);
+  checkFiles();
 }
 
 void MainWindow::on_btnKernelAdd_Up_clicked() {

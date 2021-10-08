@@ -680,7 +680,7 @@ QStringList Method::deDuplication(QStringList FileName, QTableWidget* table,
 
 void Method::markColor(QTableWidget* table, QString path, int col) {
   for (int i = 0; i < table->rowCount(); i++) {
-    QString strFile = path + table->item(i, col)->text();
+    QString strFile = path + table->item(i, col)->text().trimmed();
     QTableWidgetItem* id1;
     QFileInfo fi(strFile);
     if (fi.exists()) {
