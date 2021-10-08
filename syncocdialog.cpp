@@ -18,10 +18,13 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     ui->listSource->setCurrentRow(i);
     ui->listTarget->setCurrentRow(i);
 
-    QFile::remove(ui->listTarget->item(i)->text());
+    // 数据库里面必须要有这个文件（源文件必须存在）
+    if (QFileInfo(ui->listSource->item(i)->text()).exists()) {
+      QFile::remove(ui->listTarget->item(i)->text());
 
-    ok = QFile::copy(ui->listSource->item(i)->text(),
-                     ui->listTarget->item(i)->text());
+      ok = QFile::copy(ui->listSource->item(i)->text(),
+                       ui->listTarget->item(i)->text());
+    }
   }
 
   if (ui->chkIncludeResource->isChecked())
