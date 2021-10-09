@@ -6631,16 +6631,14 @@ int MainWindow::parse_UpdateJSON(QString str) {
     if (!autoCheckUpdate) {
       QMessageBox::critical(this, "", tr("Network error!"));
     }
-
     autoCheckUpdate = false;
-
     return -1;
   }
+
   if (root_Doc.isObject()) {
     QJsonObject root_Obj = root_Doc.object();
 
     QVariantList list = root_Obj.value("assets").toArray().toVariantList();
-
     QString Url = getUrl(list);
 
     QString UpdateTime = root_Obj.value("published_at").toString();
@@ -6654,20 +6652,18 @@ int MainWindow::parse_UpdateJSON(QString str) {
       ui->btnCheckUpdate->setIcon(QIcon(":/icon/newver.png"));
       ui->btnCheckUpdate->setToolTip(tr("There is a new version"));
 
-      if (!autoCheckUpdate) {
-        QString warningStr = tr("New version detected!") + "\n" +
-                             tr("Version: ") + "V" + Verison + "\n" +
-                             tr("Published at: ") + UpdateTime + "\n" +
-                             tr("Release Notes: ") + "\n" + ReleaseNote;
-        int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
-                                       tr("Cancel"));
-        if (ret == 0) {
-          // Url =
-          // "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
-          // QDesktopServices::openUrl(QUrl(Url));
+      QString warningStr = tr("New version detected!") + "\n" +
+                           tr("Version: ") + "V" + Verison + "\n" +
+                           tr("Published at: ") + UpdateTime + "\n" +
+                           tr("Release Notes: ") + "\n" + ReleaseNote;
+      int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
+                                     tr("Cancel"));
+      if (ret == 0) {
+        // Url =
+        // "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
+        // QDesktopServices::openUrl(QUrl(Url));
 
-          ShowAutoUpdateDlg(false);
-        }
+        ShowAutoUpdateDlg(false);
       }
 
       autoCheckUpdate = false;
@@ -6677,7 +6673,6 @@ int MainWindow::parse_UpdateJSON(QString str) {
         QMessageBox::information(this, "",
                                  tr("It is currently the latest version!"));
       }
-
       autoCheckUpdate = false;
     }
 
