@@ -10110,6 +10110,16 @@ void MainWindow::on_btnUpdateHex_clicked() {
 void MainWindow::on_actionOpen_Directory_triggered() {
   QFileInfo fi(SaveFileName);
   QString dir = "file:" + fi.filePath().replace(fi.fileName(), "");
+
+  if (ui->listMain->currentRow() == 0 && ui->listSub->currentRow() == 0)
+    dir = "file:" + strACPI;
+  if (ui->listMain->currentRow() == 3 && ui->listSub->currentRow() == 0)
+    dir = "file:" + strKexts;
+  if (ui->listMain->currentRow() == 4 && ui->listSub->currentRow() == 5)
+    dir = "file:" + strTools;
+  if (ui->listMain->currentRow() == 7 && ui->listSub->currentRow() == 3)
+    dir = "file:" + strDrivers;
+
   QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
 }
 
