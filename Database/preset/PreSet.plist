@@ -60,32 +60,6 @@
                 </dict>
                 <dict>
                     <key>Comment</key>
-                    <string>Rename BRT6 to BRTX, use with SSDT-BRT6.aml, SSDT-PNLF.aml, AppleBacklightInjector.kext, and VoodooPS2Controller.kext to fix brightness keys</string>
-                    <key>Count</key>
-                    <integer>0</integer>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Find</key>
-                    <data>FCBCUlQ2Ag==</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>FCBCUlRYAg==</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data></data>
-                </dict>
-                <dict>
-                    <key>Comment</key>
                     <string>change SAT0 to SATA, optionally pair with SSDT-SATA.aml</string>
                     <key>Count</key>
                     <integer>0</integer>
