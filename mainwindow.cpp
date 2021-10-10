@@ -4601,49 +4601,18 @@ QString MainWindow::getSystemProductName(QString arg1) {
   for (int i = 0; i < arg1.count(); i++) {
     if (arg1.mid(i, 1) == " ") {
       str = arg1.mid(0, i).trimmed();
-
+      return str;
       break;
     }
   }
-
-  return str;
+  return arg1;
 }
 
 void MainWindow::on_cboxSystemProductName_currentIndexChanged(
     const QString& arg1) {
-  if (!loading && arg1 != "") {
-    QFileInfo appInfo(qApp->applicationDirPath());
-    gs = new QProcess;
-
-    QString str = getSystemProductName(arg1);
-    ui->editSystemProductName->setText(str);
-    ui->editSystemProductName_2->setText(str);
-
-#ifdef Q_OS_WIN32
-
-    gs->start(appInfo.filePath() + "/Database/win/macserial.exe",
-              QStringList() << "-m" << str);  //阻塞为execute
-
-#endif
-
-#ifdef Q_OS_LINUX
-
-    gs->start(appInfo.filePath() + "/Database/linux/macserial",
-              QStringList() << "-m" << str);
-
-#endif
-
-#ifdef Q_OS_MAC
-
-    gs->start(appInfo.filePath() + "/Database/mac/macserial",
-              QStringList() << "-m" << str);
-
-#endif
-
-    connect(gs, SIGNAL(finished(int)), this, SLOT(readResult()));
-    // connect(gs , SIGNAL(readyRead()) , this , SLOT(readResult()));
-  }
-
+  QString str = getSystemProductName(arg1);
+  ui->editSystemProductName->setText(str);
+  ui->editSystemProductName_2->setText(str);
   this->setWindowModified(true);
 }
 
@@ -4683,8 +4652,39 @@ void MainWindow::readResultSystemInfo() {
 }
 
 void MainWindow::on_btnGenerate_clicked() {
-  on_cboxSystemProductName_currentIndexChanged(
-      ui->cboxSystemProductName->currentText());
+  QString arg1 = ui->cboxSystemProductName->currentText();
+  if (!loading && arg1 != "") {
+    QFileInfo appInfo(qApp->applicationDirPath());
+    gs = new QProcess;
+
+    QString str = getSystemProductName(arg1);
+    ui->editSystemProductName->setText(str);
+    ui->editSystemProductName_2->setText(str);
+
+#ifdef Q_OS_WIN32
+
+    gs->start(appInfo.filePath() + "/Database/win/macserial.exe",
+              QStringList() << "-m" << str);  //阻塞为execute
+
+#endif
+
+#ifdef Q_OS_LINUX
+
+    gs->start(appInfo.filePath() + "/Database/linux/macserial",
+              QStringList() << "-m" << str);
+
+#endif
+
+#ifdef Q_OS_MAC
+
+    gs->start(appInfo.filePath() + "/Database/mac/macserial",
+              QStringList() << "-m" << str);
+
+#endif
+
+    connect(gs, SIGNAL(finished(int)), this, SLOT(readResult()));
+    // connect(gs , SIGNAL(readyRead()) , this , SLOT(readResult()));
+  }
 }
 
 void MainWindow::on_btnSystemUUID_clicked() {
