@@ -6666,18 +6666,16 @@ int MainWindow::parse_UpdateJSON(QString str) {
         ShowAutoUpdateDlg(false);
       }
 
-      autoCheckUpdate = false;
-
     } else {
       if (!autoCheckUpdate) {
         QMessageBox::information(this, "",
                                  tr("It is currently the latest version!"));
       }
-      autoCheckUpdate = false;
     }
 
     ui->cboxFind->setFocus();
   }
+  autoCheckUpdate = false;
   return 0;
 }
 
