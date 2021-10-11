@@ -3753,17 +3753,13 @@ void MainWindow::addKexts(QStringList FileName) {
 }
 
 void MainWindow::sortForKexts() {
-  ui->table_kernel_add->setFocus();  // 很重要，否则该表的下拉菜单会不起作用！
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QString str0 = ui->table_kernel_add->item(i, 0)->text();
 
     if (str0.toLower().trimmed() == "lilu.kext") {
       if (i != 0) {
         ui->table_kernel_add->setCurrentCell(i, 0);
-        cutAction->triggered(true);
-        ui->table_kernel_add->setCurrentCell(0, 0);
-        pasteAction->triggered(true);
-
+        for (int j = 0; j < i; j++) MoveItem(ui->table_kernel_add, true);
         ui->chkDisableLinkeditJettison->setChecked(true);
         break;
       }
@@ -3776,22 +3772,9 @@ void MainWindow::sortForKexts() {
     if (str0.toLower().trimmed() == "virtualsmc.kext") {
       if (i != 1) {
         ui->table_kernel_add->setCurrentCell(i, 0);
-        cutAction->triggered(true);
-        ui->table_kernel_add->setCurrentCell(1, 0);
-        pasteAction->triggered(true);
+        for (int j = 0; j < i - 1; j++) MoveItem(ui->table_kernel_add, true);
         break;
       }
-    }
-  }
-
-  for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
-    QString str0 = ui->table_kernel_add->item(i, 0)->text();
-
-    if (str0.toLower().trimmed().mid(0, 3) == "smc") {
-      ui->table_kernel_add->setCurrentCell(i, 0);
-      cutAction->triggered(true);
-      ui->table_kernel_add->setCurrentCell(2, 0);
-      pasteAction->triggered(true);
     }
   }
 }
