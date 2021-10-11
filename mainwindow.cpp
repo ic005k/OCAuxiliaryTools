@@ -5908,6 +5908,8 @@ void MainWindow::init_EditMenu() {
   if (mac || osx1012)
     ui->actionOpen_database_directory->setIconVisibleInMenu(false);
   ui->actionOpen_database_directory->setIcon(QIcon(":/icon/opendb.png"));
+
+  ui->actionUpgrade_Database->setVisible(false);
 }
 
 void MainWindow::init_HelpMenu() {
