@@ -4,10 +4,12 @@
 #include "ui_syncocdialog.h"
 
 extern MainWindow* mw_one;
+extern QString ocVer;
 
 SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {
   ui->setupUi(this);
+  setWindowTitle(tr("Sync OC") + " -> " + ocVer);
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
