@@ -318,6 +318,7 @@ class MainWindow : public QMainWindow {
                   QTableWidget* subtable, int currentRow);
   void AddNvramAdd(QVariantMap map_add, int currentRow, bool blPreset);
   void checkFiles();
+  void sortForKexts();
  public slots:
   void DisplayLevel();
   void ScanPolicy();

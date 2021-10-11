@@ -3744,6 +3744,14 @@ void MainWindow::addKexts(QStringList FileName) {
   }  // for (int j = 0; j < file_count; j++)
 
   // Sort
+  sortForKexts();
+
+  this->setWindowModified(true);
+  checkFiles();
+}
+
+void MainWindow::sortForKexts() {
+  ui->table_kernel_add->setFocus();  // 很重要，否则该表的下拉菜单会不起作用！
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QString str0 = ui->table_kernel_add->item(i, 0)->text();
 
@@ -3784,9 +3792,6 @@ void MainWindow::addKexts(QStringList FileName) {
       pasteAction->triggered(true);
     }
   }
-
-  this->setWindowModified(true);
-  checkFiles();
 }
 
 void MainWindow::on_btnKernelBlock_Add_clicked() {
@@ -8880,38 +8885,41 @@ void MainWindow::copyLine(QTableWidget* w, QAction* copyAction) {
 
 void MainWindow::cutLine(QTableWidget* w, QAction* cutAction,
                          QAction* copyAction) {
-  connect(cutAction, &QAction::triggered, [=]() {
-    QItemSelectionModel* selections = w->selectionModel();
-    QModelIndexList selectedsList = selections->selectedIndexes();
+  connect(cutAction, &QAction::triggered,
+          [=]() {
+            QItemSelectionModel* selections = w->selectionModel();
+            QModelIndexList selectedsList = selections->selectedIndexes();
 
-    copyAction->triggered(true);
+            copyAction->triggered(true);
 
-    w->clearSelection();
-    w->setSelectionMode(QAbstractItemView::MultiSelection);
-    for (int z = 0; z < selectedsList.count(); z++) {
-      w->selectRow(selectedsList.at(z).row());
-    }
+            w->clearSelection();
+            w->setSelectionMode(QAbstractItemView::MultiSelection);
+            for (int z = 0; z < selectedsList.count(); z++) {
+              w->selectRow(selectedsList.at(z).row());
+            }
 
-    if (w == ui->table_dp_add)
-      on_btnDPAdd_Del_clicked();
+            if (w == ui->table_dp_add)
+              on_btnDPAdd_Del_clicked();
 
-    else if (w == ui->table_dp_del)
-      on_btnDPDel_Del_clicked();
+            else if (w == ui->table_dp_del)
+              on_btnDPDel_Del_clicked();
 
-    else if (w == ui->table_nv_add)
-      on_btnNVRAMAdd_Del_clicked();
+            else if (w == ui->table_nv_add)
+              on_btnNVRAMAdd_Del_clicked();
 
-    else if (w == ui->table_nv_del)
-      on_btnNVRAMDel_Del_clicked();
+            else if (w == ui->table_nv_del)
+              on_btnNVRAMDel_Del_clicked();
 
-    else if (w == ui->table_nv_ls)
-      on_btnNVRAMLS_Del_clicked();
+            else if (w == ui->table_nv_ls)
+              on_btnNVRAMLS_Del_clicked();
 
-    else
-      del_item(w);
+            else
+              del_item(w);
 
-    w->setSelectionMode(QAbstractItemView::ExtendedSelection);
-  });
+            w->setSelectionMode(QAbstractItemView::ExtendedSelection);
+          }
+
+  );
 }
 
 void MainWindow::setPopMenuEnabled(QString qfile, QTableWidget* w,
