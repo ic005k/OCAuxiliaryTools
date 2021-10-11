@@ -42,6 +42,7 @@ class Method : public QMainWindow {
   void removeFileSystemWatch(QString strOpenFile);
   QStringList deDuplication(QStringList FileName, QTableWidget* table, int col);
   void markColor(QTableWidget* table, QString path, int col);
+  void OCValidationProcessing();
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();

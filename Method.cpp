@@ -699,3 +699,15 @@ void Method::markColor(QTableWidget* table, QString path, int col) {
     }
   }
 }
+
+void Method::OCValidationProcessing() {
+  if (mw_one->ui->chkPickerAudioAssist->isChecked())
+    mw_one->ui->chkAudioSupport->setChecked(true);
+
+  //
+  for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
+    QString str = mw_one->ui->table_uefi_drivers->item(i, 0)->text().trimmed();
+    if (str == "Ps2KeyboardDxe.efi")
+      mw_one->ui->chkKeySupport->setChecked(true);
+  }
+}

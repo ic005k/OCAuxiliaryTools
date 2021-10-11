@@ -602,6 +602,8 @@ void MainWindow::ParserBooter(QVariantMap map) {
   // Quirks
   QVariantMap map_quirks = map["Quirks"].toMap();
   getValue(map_quirks, ui->tabBooter3);
+  if (map_quirks["ResizeAppleGpuBars"].toString() == "")
+    ui->editIntResizeAppleGpuBars->setText("-1");
 }
 
 void MainWindow::initui_dp() {
@@ -2206,6 +2208,8 @@ void MainWindow::ParserUEFI(QVariantMap map) {
   // 8. Quirks
   QVariantMap map_uefi_Quirks = map["Quirks"].toMap();
   getValue(map_uefi_Quirks, ui->tabUEFI8);
+  if (map_uefi_Quirks["ResizeGpuBars"].toString() == "")
+    ui->editIntResizeGpuBars->setText("-1");
 
   // 9. ReservedMemory
   QTableWidgetItem* newItem1;
@@ -2247,6 +2251,7 @@ bool MainWindow::getBool(QTableWidget* table, int row, int column) {
 void MainWindow::SavePlist(QString FileName) {
   lineEditSetText();  // 回车确认
   removeAllLineEdit();
+  mymethod->OCValidationProcessing();
 
   QVariantMap OpenCore;
 
@@ -2255,11 +2260,8 @@ void MainWindow::SavePlist(QString FileName) {
   }
 
   OpenCore["ACPI"] = SaveACPI();
-
   OpenCore["Booter"] = SaveBooter();
-
   OpenCore["DeviceProperties"] = SaveDeviceProperties();
-
   OpenCore["Kernel"] = SaveKernel();
   OpenCore["Misc"] = SaveMisc();
   OpenCore["NVRAM"] = SaveNVRAM();

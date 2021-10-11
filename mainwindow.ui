@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -929,7 +929,7 @@ This works around patched tables becoming incompatible with the SLIC table causi
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1143,269 +1143,36 @@ Description: Exclude MMIO address from the devirtualisation procedure.
            <layout class="QHBoxLayout" name="horizontalLayout_13">
             <item>
              <layout class="QGridLayout" name="gridLayout_6">
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="chkForceExitBootServices">
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_41">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
                 <property name="toolTip">
-                 <string notr="true">Try to ensure that ExitBootServices call succeeds even with outdated MemoryMap key argument by obtaining current memory map and retrying ExitBootServices call.
+                 <string notr="true">This option overrides the maximum slide of 255 by a user specified value between 1 and 254 inclusive when ProvideCustomSlide is enabled. 
 
-Note: The necessity of this quirk is determined by early boot crashes of the firmware. Do not use this unless you fully understand the consequences.
+It is believed that modern firmwares allocate pool memory from top to bottom,effectively resulting in free memory at the time of slide scanning being later used as temporary memory during kernel loading. In case those memory are unavailable, this option can stop evaluating higher slides.
+
+Note: The necessity of this quirk is determined by random boot failure when ProvideCustomSlide is enabled and the randomized slide fall into the unavailable range. When AppleDebug is enabled, usually the debug log may contain messages like AAPL: [EB|‘LD:LKC] } Err(0x9). To find the optimal value, manually append slide=X to boot-args and log the largest one that won’t cause boot failure.
 
 ----
 
-尝试通过获取当前的内存映射并重试ExitBootServices调用来确保ExitBootServices调用成功，即使是过时的MemoryMap键参数。
+当ProvideCustomSlide被启用时，这个选项可以通过用户指定的1到254之间的值来覆盖255的最大幻灯片。
 
-注意：该选项的必要性是由固件的早期启动崩溃决定的。除非你完全明白后果，否则不要使用这个。</string>
+人们认为现代固件会从上到下分配池内存，有效地导致在扫描幻灯片时的空闲内存被用作内核加载时的临时内存。如果这些内存不可用，这个选项可以停止评估较高的幻灯片。
+
+注意：当ProvideCustomSlide被启用时，该选项的必要性是由随机启动失败决定的，并且随机的幻灯片落入不可用的范围。
+
+当启用AppleDebug时，通常调试日志可能会包含AAPL：[EB|'LD:LKC]}Err(0x9)这样的消息。要找到最佳值，请手动将 slide=X 追加到 boot-args 中，并记录不会导致启动失败的最大值。</string>
                 </property>
                 <property name="statusTip">
-                 <string>Retry ExitBootServices with new memory map on failure.</string>
+                 <string>Provide maximum KASLR slide when higher ones are unavailable.</string>
                 </property>
                 <property name="text">
-                 <string>ForceExitBootServices</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="4">
-               <widget class="QCheckBox" name="chkSignalAppleOS">
-                <property name="toolTip">
-                 <string notr="true">This quirk is useful on Mac firmwares, which behave differently in different OS. 
-
-For example, it is supposed to enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.
-
-----
-
-该选项在Mac固件上很有用，在不同的操作系统中表现不同。
-
-例如，在某些双GPU的MacBook机型中，它应该可以在Windows和Linux中启用Intel GPU。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Report macOS being loaded through OS Info for any OS.</string>
-                </property>
-                <property name="text">
-                 <string>SignalAppleOS</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="3">
-               <widget class="QCheckBox" name="chkRebuildAppleMemoryMap">
-                <property name="toolTip">
-                 <string notr="true">Apple kernel has several limitations in parsing UEFI memory map:
-
-• Memory map size must not exceed 4096 bytes as Apple kernel maps it as a single 4K page. Since some firmwares have very large memory maps (approximately over 100 entries) Apple kernel will crash at boot.
-
-• Memory attributes table is ignored. EfiRuntimeServicesCode memory statically gets RX permissions, and all other memory types get RW permissions. Since some firmware drivers may write to global variables at runtime, Apple kernel will crash at calling UEFI runtime services, unless driver .data section has EfiRuntimeServicesData type.
-
-To workaround these limitations this quirk applies memory attributes table permissions to memory map passed to Apple kernel and optionally attempts to unify contiguous slots of similar types if the resulting memory map exceeds 4 KB.
-
-Note 1 : Since many firmwares come with incorrect memory protection table this quirk often comes in pair with SyncRuntimePermissions.
-
-Note 2 : The necessity of this quirk is determined by early boot failures. This quirk replaces EnableWriteUnprotector on firmwares supporting memory attributes table (MAT). This quirk is generally unnecessary when using OpenDuetPkg, but may be required to boot macOS 10.6 and earlier for unclear reasons.
-
-----
-
-苹果内核在解析UEFI内存映射时有一些限制：
-
-- 内存映射大小不能超过4096字节，因为苹果内核将其映射为一个4K页面。由于一些固件的内存映射非常大（大约超过100个条目），苹果内核会在启动时崩溃。
-
-- 内存属性表被忽略。EfiRuntimeServicesCode内存静态地获得RX权限，其他所有内存类型获得RW权限。由于一些固件驱动可能会在运行时写入全局变量，苹果内核在调用UEFI运行时服务时将会崩溃，除非驱动.data部分具有EfiRuntimeServicesData类型。
-
-为了解决这些限制，该选项将内存属性表的权限应用到传递给苹果内核的内存映射中，并且如果产生的内存映射超过4KB，则会尝试统一类似类型的连续插槽。
-
-注1：由于许多固件带有不正确的内存保护表，该选项经常与SyncRuntimePermissions配对使用。
-
-注2：该选项的必要性是由早期启动失败决定的。在支持内存属性表（MAT）的固件上，该选项取代了EnableWriteUnprotector。当使用OpenDuetPkg时，该选项一般是不需要的，但在启动macOS 10.6和更早的版本时，由于不清楚的原因，可能需要这个选项。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Generate Memory Map compatible with macOS.</string>
-                </property>
-                <property name="text">
-                 <string>RebuildAppleMemoryMap</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="2">
-               <widget class="QCheckBox" name="chkSetupVirtualMap">
-                <property name="toolTip">
-                 <string notr="true">Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot crashes. This quirk workarounds the problem by performing early boot identity mapping of assigned virtual addresses to physical memory.
-
-Note: The necessity of this quirk is determined by early boot failures. Currently new firmwares with memory protection support (like OVMF) do not support this quirk due to acidanthera/bugtracker#719.
-
-----
-
-选择固件在调用SetVirtualAddresses后按虚拟地址访问内存，导致早期启动崩溃。该选项通过对分配的虚拟地址和物理内存进行早期启动身份映射来解决这个问题。
-
-注意：该选项的必要性是由早期启动失败决定的。目前，由于 acidanthera/bugtracker#719，支持内存保护的新固件（如 OVMF）不支持该选项。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Setup virtual memory at SetVirtualAddresses.</string>
-                </property>
-                <property name="text">
-                 <string>SetupVirtualMap</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QCheckBox" name="chkAvoidRuntimeDefrag">
-                <property name="toolTip">
-                 <string notr="true">Description: Protect from boot.efi runtime memory defragmentation.
-
-This option fixes UEFI runtime services (date, time, NVRAM, power control, etc.) support on firmware that uses SMM backing for certain services such as variable storage. SMM may try to access memory by physical addresses in non-SMM areas but this may sometimes have been moved by boot.efi. This option prevents boot.efi from moving such data.
-
-Note: Most types of firmware, apart from Apple and VMware, need this quirk.
-
-----
-
-描述: 防止 boot.efi 运行时内存碎片整理。
-
-它可以修复UEFI运行时服务（日期、时间、NVRAM、电源控制等）对使用SMM支持某些服务（如可变存储）的固件的支持。
-
-SMM可能会尝试通过非SMM区域的物理地址访问内存，但这有时可能已经被boot.efi移动了。这个选项可以防止boot.efi移动这些数据。
-
-注意：除了苹果和VMware之外，大多数类型的固件都需要这个选项。
-</string>
-                </property>
-                <property name="statusTip">
-                 <string>Protect from boot.efi runtime memory defragmentation.</string>
-                </property>
-                <property name="text">
-                 <string>AvoidRuntimeDefrag</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="2">
-               <widget class="QCheckBox" name="chkForceBooterSignature">
-                <property name="toolTip">
-                 <string notr="true">Booter signature, essentially a SHA-1 hash of the loaded image, is used by Mac EFI to verify the authenticity of the bootloader when waking from hibernation. 
-
-This option forces macOS to use OpenCore launcher SHA-1 hash as a booter signature to let OpenCore shim hibernation wake on Mac EFI firmware.
-
-Note: OpenCore launcher path is determined from LauncherPath property.
-
-----
-
-Booter签名，本质上是加载的映像的SHA-1哈希值，Mac EFI在从休眠中唤醒时使用它来验证引导加载器的真实性。
-
-这个选项强制macOS使用OpenCore启动器SHA-1哈希值作为启动器签名，让OpenCore shim休眠唤醒在Mac EFI固件上。
-
-注意：OpenCore启动器路径由LauncherPath属性决定。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Set macOS boot-signature to OpenCore launcher.</string>
-                </property>
-                <property name="text">
-                 <string>ForceBooterSignature</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QCheckBox" name="chkProtectMemoryRegions">
-                <property name="toolTip">
-                 <string notr="true">Some firmwares incorrectly map select memory regions:
-
-• CSM region can be marked as boot services code or data, which leaves it as free memory for XNU kernel.
-
-• MMIO regions can be marked as reserved memory and stay unmapped, but may be required to be accessible at runtime for NVRAM support.
-
-This quirk attempts to fix types of these regions, e.g. ACPI NVS for CSM or MMIO for MMIO.
-
-Note: The necessity of this quirk is determined by artifacts, sleep wake issues, and boot failures. In general only very old firmwares need this quirk.
-
-----
-
-一些固件错误地映射了选择的内存区域：
-
-- CSM区域可以被标记为引导服务代码或数据，这使得它成为XNU内核的自由内存。
-
-- MMIO区域可以被标记为保留内存，并保持不映射，但可能需要在运行时访问NVRAM支持。
-
-该选项试图固定这些区域的类型，例如：ACPI NVS代表CSM或MMIO代表MMIO。
-
-注意：该选项的必要性是由工件、睡眠唤醒问题和启动失败决定的。一般来说，只有很老的固件才需要这个选项。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Protect memory regions from incorrect access.</string>
-                </property>
-                <property name="text">
-                 <string>ProtectMemoryRegions</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QCheckBox" name="chkDisableVariableWrite">
-                <property name="toolTip">
-                 <string notr="true">This is a security option allowing one to restrict NVRAM access in macOS. 
-
-This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in  OpenRuntime.efi.
-
-Note: This quirk can also be used as an ugly workaround to buggy UEFI runtime services implementations that fail to write variables to NVRAM and break the rest of the operating system.
-
-----
-
-这是一个安全选项，允许人们在macOS中限制NVRAM的访问。
-
-它需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。
-
-注意：它也可以作为一个简陋的变通方法，来解决UEFI运行时服务实现的bug，因为这些服务无法将变量写入NVRAM并破坏操作系统的其他部分。
-</string>
-                </property>
-                <property name="statusTip">
-                 <string>Protect from macOS NVRAM write access.</string>
-                </property>
-                <property name="text">
-                 <string>DisableVariableWrite</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="4">
-               <widget class="QCheckBox" name="chkDisableSingleUser">
-                <property name="toolTip">
-                 <string notr="true">This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot argument. 
-
-The behaviour with this quirk enabled is supposed to match T2-based model behaviour. 
-
-Read this archived article to understand how to use single user mode with this quirk enabled.
-
-----
-
-这是一个安全选项，允许人们通过忽略CMD+S热键和-s启动参数来限制单用户模式的使用。
-
-启用此选项后的行为应该与基于T2的模式行为一致。
-
-</string>
-                </property>
-                <property name="statusTip">
-                 <string>Disable single user mode.</string>
-                </property>
-                <property name="text">
-                 <string>DisableSingleUser</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="4">
-               <widget class="QCheckBox" name="chkProvideCustomSlide">
-                <property name="toolTip">
-                 <string notr="true">This option performs memory map analysis of your firmware and checks whether all slides (from 1 to 255) can be used. 
-
-As boot.efi generates this value randomly with rdrand or pseudo randomly rdtsc, there is a chance of boot failure when it chooses a conflicting slide. In case potential conflicts exist, this option forces macOS to use a pseudo random value among the available ones. 
-
-This also ensures that slide= argument is never passed to the operating system for security reasons.
-
-Note: The necessity of this quirk is determined by OCABC: Only N/256 slide values are usable! message in the debug log. If the message is present, this option is to be enabled.
-
-----
-
-这个选项对你的固件进行内存映射分析，并检查所有的幻灯片（从1到255）是否可以使用。
-
-由于boot.efi用rdrand或伪随机rdtsc随机生成这个值，所以当它选择一个冲突的幻灯片时，有可能会导致启动失败。在潜在冲突存在的情况下，这个选项会强制 macOS 在可用的值中使用一个伪随机的值。
-
-这也保证了出于安全考虑，slide=参数，永远不会传递给操作系统。
-
-注意：该选项的必要性是由OCABC决定的。只有N/256个幻灯片值是可用的！在调试日志中，如果存在该消息，则要启用该选项。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Provide custom KASLR slide on low memory.</string>
-                </property>
-                <property name="text">
-                 <string>ProvideCustomSlide</string>
+                 <string>ProvideMaxSlide</string>
                 </property>
                </widget>
               </item>
@@ -1446,65 +1213,36 @@ This option is useful on all types of firmware, except for some very old ones su
                 </property>
                </widget>
               </item>
-              <item row="2" column="2">
-               <widget class="QCheckBox" name="chkProtectSecureBoot">
+              <item row="3" column="0">
+               <widget class="QCheckBox" name="chkProtectMemoryRegions">
                 <property name="toolTip">
-                 <string notr="true">Reports security violation during attempts to write to db, dbx, PK, and KEK variables from the operating system.
+                 <string notr="true">Some firmwares incorrectly map select memory regions:
 
-Note: This quirk mainly attempts to avoid issues with NVRAM implementations with problematic defragmentation,such as select Insyde or MacPro5,1.
+• CSM region can be marked as boot services code or data, which leaves it as free memory for XNU kernel.
+
+• MMIO regions can be marked as reserved memory and stay unmapped, but may be required to be accessible at runtime for NVRAM support.
+
+This quirk attempts to fix types of these regions, e.g. ACPI NVS for CSM or MMIO for MMIO.
+
+Note: The necessity of this quirk is determined by artifacts, sleep wake issues, and boot failures. In general only very old firmwares need this quirk.
 
 ----
 
-在尝试从操作系统写入db、dbx、pk和kek变量时，报告安全违规。
+一些固件错误地映射了选择的内存区域：
 
-注意：该选项主要是为了避免NVRAM实现中存在的碎片整理问题，比如选择Insyde或MacPro5，1。</string>
+- CSM区域可以被标记为引导服务代码或数据，这使得它成为XNU内核的自由内存。
+
+- MMIO区域可以被标记为保留内存，并保持不映射，但可能需要在运行时访问NVRAM支持。
+
+该选项试图固定这些区域的类型，例如：ACPI NVS代表CSM或MMIO代表MMIO。
+
+注意：该选项的必要性是由工件、睡眠唤醒问题和启动失败决定的。一般来说，只有很老的固件才需要这个选项。</string>
                 </property>
                 <property name="statusTip">
-                 <string>Protect UEFI Secure Boot variables from being written.</string>
+                 <string>Protect memory regions from incorrect access.</string>
                 </property>
                 <property name="text">
-                 <string>ProtectSecureBoot</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QCheckBox" name="chkSyncRuntimePermissions">
-                <property name="toolTip">
-                 <string notr="true">Some firmwares either fail to properly handle runtime permissions:
-
-• They incorrectly mark OpenRuntime as not executable in the memory map.
-
-• They incorrectly mark OpenRuntime as not executable in the memory attributes table.
-
-• They lose entries from the memory attributes table after OpenRuntime is loaded.
-
-• They mark items in the memory attributes table as read-write-execute.
-
-This quirk tries to update memory map and memory attributes table to correct this.
-
-Note: The necessity of this quirk is determined by early boot failures either in macOS or in Linux/Windows. In general only firmwares released in 2018 or later are affected.
-
-----
-
-有些固件不能正确处理运行时的权限：
-
-- 它们在内存映射中错误地将OpenRuntime标记为不可执行。
-
-- 它们在内存属性表中错误地将OpenRuntime标记为不可执行。
-
-- 它们在加载 OpenRuntime 后，丢失了内存属性表中的条目。
-
-- 它们将内存属性表中的项目标记为读-写-执行。
-
-这个选项试图更新内存映射和内存属性表来纠正这个问题。
-
-注意：该选项的必要性是由macOS或Linux/Windows中的早期启动失败决定的。一般来说，只有2018年或以后发布的固件才会受到影响。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Update memory permissions for runtime environment.</string>
-                </property>
-                <property name="text">
-                 <string>SyncRuntimePermissions</string>
+                 <string>ProtectMemoryRegions</string>
                 </property>
                </widget>
               </item>
@@ -1541,38 +1279,31 @@ Note: The necessity of this quirk is determined by safe mode availability. If bo
                 </property>
                </widget>
               </item>
-              <item row="1" column="2">
-               <widget class="QCheckBox" name="chkDiscardHibernateMap">
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="chkAvoidRuntimeDefrag">
                 <property name="toolTip">
-                 <string notr="true">This option forces XNU kernel to ignore newly supplied memory map and assume that it did not change after waking from hibernation. 
+                 <string notr="true">Description: Protect from boot.efi runtime memory defragmentation.
 
-This behaviour is required to work by Windows, which mandates to preserve runtime memory size and location after S4 wake.
+This option fixes UEFI runtime services (date, time, NVRAM, power control, etc.) support on firmware that uses SMM backing for certain services such as variable storage. SMM may try to access memory by physical addresses in non-SMM areas but this may sometimes have been moved by boot.efi. This option prevents boot.efi from moving such data.
 
-Note: This may be used to workaround buggy memory maps on older hardware, and is now considered rare legacy.
-
-Examples of such hardware are Ivy Bridge laptops with Insyde firmware, like Acer V3-571G. 
-
-Do not use this unless you fully understand the consequences.
+Note: Most types of firmware, apart from Apple and VMware, need this quirk.
 
 ----
 
-这个选项强制XNU内核忽略新提供的内存映射，并假设它在休眠后没有改变。
+描述: 防止 boot.efi 运行时内存碎片整理。
 
-这个行为是Windows所要求的，因为Windows要求在S4唤醒后保留运行时的内存大小和位置。
+它可以修复UEFI运行时服务（日期、时间、NVRAM、电源控制等）对使用SMM支持某些服务（如可变存储）的固件的支持。
 
-注意：这可能被用来解决旧硬件上的错误内存映射，现在被认为是罕见的遗留问题。
+SMM可能会尝试通过非SMM区域的物理地址访问内存，但这有时可能已经被boot.efi移动了。这个选项可以防止boot.efi移动这些数据。
 
-这类硬件的例子是使用Ivy Bridge固件的Ivy Bridge笔记本电脑，如Acer V3-571G。
-
-除非您完全了解其后果，否则请勿使用此功能。
-
+注意：除了苹果和VMware之外，大多数类型的固件都需要这个选项。
 </string>
                 </property>
                 <property name="statusTip">
-                 <string>Reuse original hibernate memory map.</string>
+                 <string>Protect from boot.efi runtime memory defragmentation.</string>
                 </property>
                 <property name="text">
-                 <string>DiscardHibernateMap</string>
+                 <string>AvoidRuntimeDefrag</string>
                 </property>
                </widget>
               </item>
@@ -1617,28 +1348,236 @@ Note: While this quirk is required to run older macOS versions on platforms with
                 </property>
                </widget>
               </item>
-              <item row="2" column="3">
-               <widget class="QCheckBox" name="chkProtectUefiServices">
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="chkDisableVariableWrite">
                 <property name="toolTip">
-                 <string notr="true">Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to UEFI services during driver loading and related actions. 
+                 <string notr="true">This is a security option allowing one to restrict NVRAM access in macOS. 
 
-Consequentially this directly breaks other quirks that affect memory management, like DevirtualiseMmio, ProtectMemoryRegions, or RebuildAppleMemoryMap, and may also break other quirks depending on the effects of these.
+This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in  OpenRuntime.efi.
 
-Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest might run unreliably with more than one virtual core.” message.
+Note: This quirk can also be used as an ugly workaround to buggy UEFI runtime services implementations that fail to write variables to NVRAM and break the rest of the operating system.
 
 ----
 
-一些现代的固件，包括硬件和虚拟机，如VMware，可能会在驱动程序加载和相关操作期间更新指向UEFI服务的指针。
+这是一个安全选项，允许人们在macOS中限制NVRAM的访问。
 
-相应地，这直接破坏了其他影响内存管理的选项，如DevirtualiseMmio、ProtectMemoryRegions或RebuildAppleMemoryMap，也可能破坏其他选项，这取决于这些选项的影响。
+它需要在OpenRuntime.efi中实现OC_FIRMWARE_RUNTIME协议。
 
-注意：在VMware上，该选项的必要性可能会被 &quot;你的Mac OS guest可能会在多个虚拟核心的情况下不可靠地运行。&quot;消息诊断出来。</string>
+注意：它也可以作为一个简陋的变通方法，来解决UEFI运行时服务实现的bug，因为这些服务无法将变量写入NVRAM并破坏操作系统的其他部分。
+</string>
                 </property>
                 <property name="statusTip">
-                 <string>Protect UEFI services from being overridden by the firmware.</string>
+                 <string>Protect from macOS NVRAM write access.</string>
                 </property>
                 <property name="text">
-                 <string>ProtectUefiServices</string>
+                 <string>DisableVariableWrite</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QCheckBox" name="chkSetupVirtualMap">
+                <property name="toolTip">
+                 <string notr="true">Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot crashes. This quirk workarounds the problem by performing early boot identity mapping of assigned virtual addresses to physical memory.
+
+Note: The necessity of this quirk is determined by early boot failures. Currently new firmwares with memory protection support (like OVMF) do not support this quirk due to acidanthera/bugtracker#719.
+
+----
+
+选择固件在调用SetVirtualAddresses后按虚拟地址访问内存，导致早期启动崩溃。该选项通过对分配的虚拟地址和物理内存进行早期启动身份映射来解决这个问题。
+
+注意：该选项的必要性是由早期启动失败决定的。目前，由于 acidanthera/bugtracker#719，支持内存保护的新固件（如 OVMF）不支持该选项。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Setup virtual memory at SetVirtualAddresses.</string>
+                </property>
+                <property name="text">
+                 <string>SetupVirtualMap</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QCheckBox" name="chkDiscardHibernateMap">
+                <property name="toolTip">
+                 <string notr="true">This option forces XNU kernel to ignore newly supplied memory map and assume that it did not change after waking from hibernation. 
+
+This behaviour is required to work by Windows, which mandates to preserve runtime memory size and location after S4 wake.
+
+Note: This may be used to workaround buggy memory maps on older hardware, and is now considered rare legacy.
+
+Examples of such hardware are Ivy Bridge laptops with Insyde firmware, like Acer V3-571G. 
+
+Do not use this unless you fully understand the consequences.
+
+----
+
+这个选项强制XNU内核忽略新提供的内存映射，并假设它在休眠后没有改变。
+
+这个行为是Windows所要求的，因为Windows要求在S4唤醒后保留运行时的内存大小和位置。
+
+注意：这可能被用来解决旧硬件上的错误内存映射，现在被认为是罕见的遗留问题。
+
+这类硬件的例子是使用Ivy Bridge固件的Ivy Bridge笔记本电脑，如Acer V3-571G。
+
+除非您完全了解其后果，否则请勿使用此功能。
+
+</string>
+                </property>
+                <property name="statusTip">
+                 <string>Reuse original hibernate memory map.</string>
+                </property>
+                <property name="text">
+                 <string>DiscardHibernateMap</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="2">
+               <widget class="QLineEdit" name="editIntProvideMaxSlide">
+                <property name="maximumSize">
+                 <size>
+                  <width>180</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="4">
+               <widget class="QCheckBox" name="chkSignalAppleOS">
+                <property name="toolTip">
+                 <string notr="true">This quirk is useful on Mac firmwares, which behave differently in different OS. 
+
+For example, it is supposed to enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.
+
+----
+
+该选项在Mac固件上很有用，在不同的操作系统中表现不同。
+
+例如，在某些双GPU的MacBook机型中，它应该可以在Windows和Linux中启用Intel GPU。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Report macOS being loaded through OS Info for any OS.</string>
+                </property>
+                <property name="text">
+                 <string>SignalAppleOS</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QCheckBox" name="chkSyncRuntimePermissions">
+                <property name="toolTip">
+                 <string notr="true">Some firmwares either fail to properly handle runtime permissions:
+
+• They incorrectly mark OpenRuntime as not executable in the memory map.
+
+• They incorrectly mark OpenRuntime as not executable in the memory attributes table.
+
+• They lose entries from the memory attributes table after OpenRuntime is loaded.
+
+• They mark items in the memory attributes table as read-write-execute.
+
+This quirk tries to update memory map and memory attributes table to correct this.
+
+Note: The necessity of this quirk is determined by early boot failures either in macOS or in Linux/Windows. In general only firmwares released in 2018 or later are affected.
+
+----
+
+有些固件不能正确处理运行时的权限：
+
+- 它们在内存映射中错误地将OpenRuntime标记为不可执行。
+
+- 它们在内存属性表中错误地将OpenRuntime标记为不可执行。
+
+- 它们在加载 OpenRuntime 后，丢失了内存属性表中的条目。
+
+- 它们将内存属性表中的项目标记为读-写-执行。
+
+这个选项试图更新内存映射和内存属性表来纠正这个问题。
+
+注意：该选项的必要性是由macOS或Linux/Windows中的早期启动失败决定的。一般来说，只有2018年或以后发布的固件才会受到影响。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Update memory permissions for runtime environment.</string>
+                </property>
+                <property name="text">
+                 <string>SyncRuntimePermissions</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="chkForceExitBootServices">
+                <property name="toolTip">
+                 <string notr="true">Try to ensure that ExitBootServices call succeeds even with outdated MemoryMap key argument by obtaining current memory map and retrying ExitBootServices call.
+
+Note: The necessity of this quirk is determined by early boot crashes of the firmware. Do not use this unless you fully understand the consequences.
+
+----
+
+尝试通过获取当前的内存映射并重试ExitBootServices调用来确保ExitBootServices调用成功，即使是过时的MemoryMap键参数。
+
+注意：该选项的必要性是由固件的早期启动崩溃决定的。除非你完全明白后果，否则不要使用这个。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Retry ExitBootServices with new memory map on failure.</string>
+                </property>
+                <property name="text">
+                 <string>ForceExitBootServices</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QCheckBox" name="chkProtectSecureBoot">
+                <property name="toolTip">
+                 <string notr="true">Reports security violation during attempts to write to db, dbx, PK, and KEK variables from the operating system.
+
+Note: This quirk mainly attempts to avoid issues with NVRAM implementations with problematic defragmentation,such as select Insyde or MacPro5,1.
+
+----
+
+在尝试从操作系统写入db、dbx、pk和kek变量时，报告安全违规。
+
+注意：该选项主要是为了避免NVRAM实现中存在的碎片整理问题，比如选择Insyde或MacPro5，1。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Protect UEFI Secure Boot variables from being written.</string>
+                </property>
+                <property name="text">
+                 <string>ProtectSecureBoot</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="3">
+               <widget class="QCheckBox" name="chkRebuildAppleMemoryMap">
+                <property name="toolTip">
+                 <string notr="true">Apple kernel has several limitations in parsing UEFI memory map:
+
+• Memory map size must not exceed 4096 bytes as Apple kernel maps it as a single 4K page. Since some firmwares have very large memory maps (approximately over 100 entries) Apple kernel will crash at boot.
+
+• Memory attributes table is ignored. EfiRuntimeServicesCode memory statically gets RX permissions, and all other memory types get RW permissions. Since some firmware drivers may write to global variables at runtime, Apple kernel will crash at calling UEFI runtime services, unless driver .data section has EfiRuntimeServicesData type.
+
+To workaround these limitations this quirk applies memory attributes table permissions to memory map passed to Apple kernel and optionally attempts to unify contiguous slots of similar types if the resulting memory map exceeds 4 KB.
+
+Note 1 : Since many firmwares come with incorrect memory protection table this quirk often comes in pair with SyncRuntimePermissions.
+
+Note 2 : The necessity of this quirk is determined by early boot failures. This quirk replaces EnableWriteUnprotector on firmwares supporting memory attributes table (MAT). This quirk is generally unnecessary when using OpenDuetPkg, but may be required to boot macOS 10.6 and earlier for unclear reasons.
+
+----
+
+苹果内核在解析UEFI内存映射时有一些限制：
+
+- 内存映射大小不能超过4096字节，因为苹果内核将其映射为一个4K页面。由于一些固件的内存映射非常大（大约超过100个条目），苹果内核会在启动时崩溃。
+
+- 内存属性表被忽略。EfiRuntimeServicesCode内存静态地获得RX权限，其他所有内存类型获得RW权限。由于一些固件驱动可能会在运行时写入全局变量，苹果内核在调用UEFI运行时服务时将会崩溃，除非驱动.data部分具有EfiRuntimeServicesData类型。
+
+为了解决这些限制，该选项将内存属性表的权限应用到传递给苹果内核的内存映射中，并且如果产生的内存映射超过4KB，则会尝试统一类似类型的连续插槽。
+
+注1：由于许多固件带有不正确的内存保护表，该选项经常与SyncRuntimePermissions配对使用。
+
+注2：该选项的必要性是由早期启动失败决定的。在支持内存属性表（MAT）的固件上，该选项取代了EnableWriteUnprotector。当使用OpenDuetPkg时，该选项一般是不需要的，但在启动macOS 10.6和更早的版本时，由于不清楚的原因，可能需要这个选项。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Generate Memory Map compatible with macOS.</string>
+                </property>
+                <property name="text">
+                 <string>RebuildAppleMemoryMap</string>
                 </property>
                </widget>
               </item>
@@ -1665,46 +1604,148 @@ Note: This quirk may potentially weaken firmware security, please use RebuildApp
                 </property>
                </widget>
               </item>
-              <item row="5" column="0">
-               <widget class="QLabel" name="label_41">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
+              <item row="2" column="4">
+               <widget class="QCheckBox" name="chkProvideCustomSlide">
                 <property name="toolTip">
-                 <string notr="true">This option overrides the maximum slide of 255 by a user specified value between 1 and 254 inclusive when ProvideCustomSlide is enabled. 
+                 <string notr="true">This option performs memory map analysis of your firmware and checks whether all slides (from 1 to 255) can be used. 
 
-It is believed that modern firmwares allocate pool memory from top to bottom,effectively resulting in free memory at the time of slide scanning being later used as temporary memory during kernel loading. In case those memory are unavailable, this option can stop evaluating higher slides.
+As boot.efi generates this value randomly with rdrand or pseudo randomly rdtsc, there is a chance of boot failure when it chooses a conflicting slide. In case potential conflicts exist, this option forces macOS to use a pseudo random value among the available ones. 
 
-Note: The necessity of this quirk is determined by random boot failure when ProvideCustomSlide is enabled and the randomized slide fall into the unavailable range. When AppleDebug is enabled, usually the debug log may contain messages like AAPL: [EB|‘LD:LKC] } Err(0x9). To find the optimal value, manually append slide=X to boot-args and log the largest one that won’t cause boot failure.
+This also ensures that slide= argument is never passed to the operating system for security reasons.
+
+Note: The necessity of this quirk is determined by OCABC: Only N/256 slide values are usable! message in the debug log. If the message is present, this option is to be enabled.
 
 ----
 
-当ProvideCustomSlide被启用时，这个选项可以通过用户指定的1到254之间的值来覆盖255的最大幻灯片。
+这个选项对你的固件进行内存映射分析，并检查所有的幻灯片（从1到255）是否可以使用。
 
-人们认为现代固件会从上到下分配池内存，有效地导致在扫描幻灯片时的空闲内存被用作内核加载时的临时内存。如果这些内存不可用，这个选项可以停止评估较高的幻灯片。
+由于boot.efi用rdrand或伪随机rdtsc随机生成这个值，所以当它选择一个冲突的幻灯片时，有可能会导致启动失败。在潜在冲突存在的情况下，这个选项会强制 macOS 在可用的值中使用一个伪随机的值。
 
-注意：当ProvideCustomSlide被启用时，该选项的必要性是由随机启动失败决定的，并且随机的幻灯片落入不可用的范围。
+这也保证了出于安全考虑，slide=参数，永远不会传递给操作系统。
 
-当启用AppleDebug时，通常调试日志可能会包含AAPL：[EB|'LD:LKC]}Err(0x9)这样的消息。要找到最佳值，请手动将 slide=X 追加到 boot-args 中，并记录不会导致启动失败的最大值。</string>
+注意：该选项的必要性是由OCABC决定的。只有N/256个幻灯片值是可用的！在调试日志中，如果存在该消息，则要启用该选项。</string>
                 </property>
                 <property name="statusTip">
-                 <string>Provide maximum KASLR slide when higher ones are unavailable.</string>
+                 <string>Provide custom KASLR slide on low memory.</string>
                 </property>
                 <property name="text">
-                 <string>ProvideMaxSlide</string>
+                 <string>ProvideCustomSlide</string>
                 </property>
                </widget>
               </item>
-              <item row="5" column="2">
-               <widget class="QLineEdit" name="editIntProvideMaxSlide">
+              <item row="4" column="2">
+               <widget class="QCheckBox" name="chkForceBooterSignature">
+                <property name="toolTip">
+                 <string notr="true">Booter signature, essentially a SHA-1 hash of the loaded image, is used by Mac EFI to verify the authenticity of the bootloader when waking from hibernation. 
+
+This option forces macOS to use OpenCore launcher SHA-1 hash as a booter signature to let OpenCore shim hibernation wake on Mac EFI firmware.
+
+Note: OpenCore launcher path is determined from LauncherPath property.
+
+----
+
+Booter签名，本质上是加载的映像的SHA-1哈希值，Mac EFI在从休眠中唤醒时使用它来验证引导加载器的真实性。
+
+这个选项强制macOS使用OpenCore启动器SHA-1哈希值作为启动器签名，让OpenCore shim休眠唤醒在Mac EFI固件上。
+
+注意：OpenCore启动器路径由LauncherPath属性决定。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Set macOS boot-signature to OpenCore launcher.</string>
+                </property>
+                <property name="text">
+                 <string>ForceBooterSignature</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="3">
+               <widget class="QCheckBox" name="chkProtectUefiServices">
+                <property name="toolTip">
+                 <string notr="true">Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to UEFI services during driver loading and related actions. 
+
+Consequentially this directly breaks other quirks that affect memory management, like DevirtualiseMmio, ProtectMemoryRegions, or RebuildAppleMemoryMap, and may also break other quirks depending on the effects of these.
+
+Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest might run unreliably with more than one virtual core.” message.
+
+----
+
+一些现代的固件，包括硬件和虚拟机，如VMware，可能会在驱动程序加载和相关操作期间更新指向UEFI服务的指针。
+
+相应地，这直接破坏了其他影响内存管理的选项，如DevirtualiseMmio、ProtectMemoryRegions或RebuildAppleMemoryMap，也可能破坏其他选项，这取决于这些选项的影响。
+
+注意：在VMware上，该选项的必要性可能会被 &quot;你的Mac OS guest可能会在多个虚拟核心的情况下不可靠地运行。&quot;消息诊断出来。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Protect UEFI services from being overridden by the firmware.</string>
+                </property>
+                <property name="text">
+                 <string>ProtectUefiServices</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <widget class="QCheckBox" name="chkDisableSingleUser">
+                <property name="toolTip">
+                 <string notr="true">This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot argument. 
+
+The behaviour with this quirk enabled is supposed to match T2-based model behaviour. 
+
+Read this archived article to understand how to use single user mode with this quirk enabled.
+
+----
+
+这是一个安全选项，允许人们通过忽略CMD+S热键和-s启动参数来限制单用户模式的使用。
+
+启用此选项后的行为应该与基于T2的模式行为一致。
+
+</string>
+                </property>
+                <property name="statusTip">
+                 <string>Disable single user mode.</string>
+                </property>
+                <property name="text">
+                 <string>DisableSingleUser</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_120">
+                <property name="toolTip">
+                 <string>Type: plist integer
+
+Description: Reduce GPU PCI BAR sizes for compatibility with macOS.
+
+This quirk reduces GPU PCI BAR sizes for Apple macOS up to the specified value or lower if it is unsupported.
+
+The specified value follows PCI Resizable BAR spec. Use 0 for 1 MB, 1 for 2 MB, 2 for 4 MB, and so on up to 19 for 512 GB. Apple macOS supports 1 GB maximum, which is 10. Use -1 to disable this quirk.
+
+Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and more details about the technology.
+----
+类型：plist整数
+
+描述：减少GPU PCI BAR的大小，以便与macOS兼容。
+
+如果不支持，此选项将 Apple macOS 的 GPU PCI BAR 大小减少到指定值或更低。
+
+指定的值遵循PCI可调整的BAR规格。使用0代表1MB，1代表2MB，2代表4MB，以此类推，直到19代表512GB。苹果macOS最大支持1GB，也就是10。使用-1来禁用这个选项。
+
+注意：请参阅ResizeGpuBars，了解一般的GPU PCI BAR大小配置和关于该技术的更多细节。</string>
+                </property>
+                <property name="text">
+                 <string>ResizeAppleGpuBars</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="2">
+               <widget class="QLineEdit" name="editIntResizeAppleGpuBars">
                 <property name="maximumSize">
                  <size>
                   <width>180</width>
                   <height>16777215</height>
                  </size>
+                </property>
+                <property name="text">
+                 <string>-1</string>
                 </property>
                </widget>
               </item>
@@ -7845,7 +7886,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>7</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -9600,35 +9641,40 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
            <layout class="QHBoxLayout" name="horizontalLayout_16">
             <item>
              <layout class="QGridLayout" name="gridLayout_31">
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="chkActivateHpetSupport">
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="chkDisableSecurityPolicy">
                 <property name="toolTip">
-                 <string notr="true">Older boards like ICH6 may not always have HPET setting in the firmware preferences, this option tries to force enable it.
+                 <string notr="true">Note: This setting disables various security features of the firmware, defeating the purpose of any kind of Secure Boot. Do NOT enable if you use UEFI Secure Boot.
 ----
-旧的板子，如ICH6，可能并不总是有HPET设置在固件首选项中，这个选项试图强制启用它。</string>
+注意：此设置会禁用固件的各种安全功能，从而失去任何一种安全启动的目的。如果您使用UEFI安全启动，请勿启用。</string>
                 </property>
                 <property name="statusTip">
-                 <string>Activates HPET support.</string>
+                 <string>Disable platform security policy.</string>
                 </property>
                 <property name="text">
-                 <string>ActivateHpetSupport</string>
+                 <string>DisableSecurityPolicy</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
-               <widget class="QCheckBox" name="chkReleaseUsbOwnership">
+              <item row="9" column="1">
+               <widget class="QCheckBox" name="chkReloadOptionRoms">
                 <property name="toolTip">
-                 <string notr="true">Attempt to detach USB controller ownership from the firmware driver. While most firmwares manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system may freeze upon boot. Not recommended unless required.
+                 <string notr="true">Type: plist boolean
+
+Description: Query PCI devices and reload their Option ROMs if available.
+
+For example, this option allows reloading NVIDIA GOP Option ROM on older Macs after the firmware version is upgraded via ForgeUefiSupport.
+
 ----
-尝试将USB控制器的所有权从固件驱动程序中分离出来。虽然大多数固件都能正确地做到这一点，或者至少有一个选项，但有些固件却做不到。因此，操作系统可能在启动时冻结。除非需要，否则不建议使用。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
- manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
- may freeze upon boot. Not recommended unless required.</string>
+
+类型：plist boolean
+
+描述：查询PCI设备并重新加载其可用的Option ROM。
+
+例如，在通过ForgeUefiSupport升级固件版本后，该选项允许在旧的Mac上重新加载NVIDIA GOP Option ROM。</string>
                 </property>
                 <property name="text">
-                 <string>ReleaseUsbOwnership</string>
+                 <string>ReloadOptionRoms</string>
                 </property>
                </widget>
               </item>
@@ -9655,18 +9701,35 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
-               <widget class="QCheckBox" name="chkDisableSecurityPolicy">
-                <property name="toolTip">
-                 <string notr="true">Note: This setting disables various security features of the firmware, defeating the purpose of any kind of Secure Boot. Do NOT enable if you use UEFI Secure Boot.
-----
-注意：此设置会禁用固件的各种安全功能，从而失去任何一种安全启动的目的。如果您使用UEFI安全启动，请勿启用。</string>
+              <item row="13" column="1">
+               <widget class="QLineEdit" name="editIntTscSyncTimeout">
+                <property name="minimumSize">
+                 <size>
+                  <width>200</width>
+                  <height>0</height>
+                 </size>
                 </property>
-                <property name="statusTip">
-                 <string>Disable platform security policy.</string>
+                <property name="maximumSize">
+                 <size>
+                  <width>150</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="0">
+               <widget class="QCheckBox" name="chkEnableVectorAcceleration">
+                <property name="toolTip">
+                 <string notr="true">Type: plist boolean
+
+Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algorithms.
+----
+类型：plist布尔值
+
+说明：启用SHA-512和SHA-384哈希算法的AVX矢量加速。</string>
                 </property>
                 <property name="text">
-                 <string>DisableSecurityPolicy</string>
+                 <string>EnableVectorAcceleration</string>
                 </property>
                </widget>
               </item>
@@ -9702,44 +9765,6 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
-                <property name="toolTip">
-                 <string notr="true">Note: While the option is not expected to harm unaffected firmware, its use is recommended only when specifically required.
-----
-注意：虽然预计该选项不会损害未受影响的固件，但只建议在特别需要时使用。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
- register. These values may cause macOS boot failure on Intel platforms.</string>
-                </property>
-                <property name="text">
-                 <string>IgnoreInvalidFlexRatio</string>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="1">
-               <widget class="QCheckBox" name="chkReloadOptionRoms">
-                <property name="toolTip">
-                 <string notr="true">Type: plist boolean
-
-Description: Query PCI devices and reload their Option ROMs if available.
-
-For example, this option allows reloading NVIDIA GOP Option ROM on older Macs after the firmware version is upgraded via ForgeUefiSupport.
-
-----
-
-类型：plist boolean
-
-描述：查询PCI设备并重新加载其可用的Option ROM。
-
-例如，在通过ForgeUefiSupport升级固件版本后，该选项允许在旧的Mac上重新加载NVIDIA GOP Option ROM。</string>
-                </property>
-                <property name="text">
-                 <string>ReloadOptionRoms</string>
-                </property>
-               </widget>
-              </item>
               <item row="9" column="0">
                <widget class="QCheckBox" name="chkForgeUefiSupport">
                 <property name="toolTip">
@@ -9762,19 +9787,38 @@ This setting allows running some software written for UEFI 2.x firmware like NVI
                 </property>
                </widget>
               </item>
-              <item row="10" column="0">
-               <widget class="QCheckBox" name="chkEnableVectorAcceleration">
+              <item row="10" column="1">
+               <widget class="QCheckBox" name="chkForceOcWriteFlash">
                 <property name="toolTip">
-                 <string notr="true">Type: plist boolean
+                 <string>Type: plist boolean
 
-Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algorithms.
+Description: Enables writing to flash memory for all OpenCore system variables.
+
+Note: This value should be disabled on most types of firmware but is left configurable to account for firmware that may have issues with volatile variable storage overflows or similar. Boot issues across multiple OSes can be observed on e.g. Lenovo Thinkpad T430 and T530 without this quirk. Apple variables related to Secure Boot and hibernation are exempt from this for security reasons. Furthermore, some OpenCore variables are exempt for different reasons, such as the boot log due to an available user option, and the TSC frequency due to timing issues. When toggling this option, a NVRAM reset may be required to ensure full functionality.
 ----
 类型：plist布尔值
 
-说明：启用SHA-512和SHA-384哈希算法的AVX矢量加速。</string>
+描述：启用所有OpenCore系统变量对闪存的写入。
+
+注意：这个值在大多数类型的固件上应该是禁用的，但为了考虑到可能有易失性变量存储溢出或类似问题的固件，这个值是可配置的。在例如联想Thinkpad T430和T530上可以观察到跨多个操作系统的启动问题，没有这个选项。出于安全原因，与安全启动和休眠有关的苹果变量不在此列。此外，一些OpenCore变量由于不同的原因被豁免，例如由于一个可用的用户选项，启动日志，以及由于时间问题，TSC频率。在切换该选项时，可能需要对NVRAM进行重置，以确保完整的功能。</string>
                 </property>
                 <property name="text">
-                 <string>EnableVectorAcceleration</string>
+                 <string>ForceOcWriteFlash</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="chkActivateHpetSupport">
+                <property name="toolTip">
+                 <string notr="true">Older boards like ICH6 may not always have HPET setting in the firmware preferences, this option tries to force enable it.
+----
+旧的板子，如ICH6，可能并不总是有HPET设置在固件首选项中，这个选项试图强制启用它。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Activates HPET support.</string>
+                </property>
+                <property name="text">
+                 <string>ActivateHpetSupport</string>
                 </property>
                </widget>
               </item>
@@ -9794,7 +9838,40 @@ Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algor
                 </property>
                </widget>
               </item>
-              <item row="12" column="0">
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
+                <property name="toolTip">
+                 <string notr="true">Note: While the option is not expected to harm unaffected firmware, its use is recommended only when specifically required.
+----
+注意：虽然预计该选项不会损害未受影响的固件，但只建议在特别需要时使用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
+ register. These values may cause macOS boot failure on Intel platforms.</string>
+                </property>
+                <property name="text">
+                 <string>IgnoreInvalidFlexRatio</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QCheckBox" name="chkReleaseUsbOwnership">
+                <property name="toolTip">
+                 <string notr="true">Attempt to detach USB controller ownership from the firmware driver. While most firmwares manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system may freeze upon boot. Not recommended unless required.
+----
+尝试将USB控制器的所有权从固件驱动程序中分离出来。虽然大多数固件都能正确地做到这一点，或者至少有一个选项，但有些固件却做不到。因此，操作系统可能在启动时冻结。除非需要，否则不建议使用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
+ manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
+ may freeze upon boot. Not recommended unless required.</string>
+                </property>
+                <property name="text">
+                 <string>ReleaseUsbOwnership</string>
+                </property>
+               </widget>
+              </item>
+              <item row="13" column="0">
                <widget class="QLabel" name="label_29">
                 <property name="toolTip">
                  <string notr="true">The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds and depends on the amount of cores present on the platform, the recommended starting value is 500000.
@@ -9817,8 +9894,41 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                 </property>
                </widget>
               </item>
+              <item row="12" column="0">
+               <widget class="QLabel" name="label_115">
+                <property name="toolTip">
+                 <string>Type: plist integer
+Description: Configure GPU PCI BAR sizes.
+
+This quirk sets GPU PCI BAR sizes as specified or chooses the largest available below the ResizeGpuBars value.
+The specified value follows PCI Resizable BAR spec. Use 0 for 1 MB, 1 for 2 MB, 2 for 4 MB, and so on up to 19 for 512 GB.
+Resizable BAR technology allows to ease PCI device programming by mapping a configurable memory region,BAR, into CPU address space (e.g. VRAM to RAM) as opposed to a fixed memory region. This technology is necessary, because one cannot map the largest memory region by default, for the reasons of backwards compatibility with older hardware not supporting 64-bit BARs. Consequentially devices of the last decade use BARs up to 256 MB by default (4 remaining bits are used by other data) but generally allow resizing them to both smaller and larger powers of two (e.g. from 1 MB up to VRAM size).
+Operating systems targeting x86 platforms generally do not control PCI address space, letting UEFI firmware decide on the BAR addresses and sizes. This illicit practice resulted in Resizable BAR technology being unused up until 2020 despite being standardised in 2008 and becoming widely available in the hardware soon after.
+Modern UEFI firmware allow the use of Resizable BAR technology but generally restrict the configurable options to failsafe default (OFF) and maximum available (ON). This quirk allows to fine-tune this value for testing and development purposes.
+Note 1 : This quirk shall not be used to workaround macOS limitation to address BARs over 1 GB. ResizeAppleGpuBars should be used instead.
+Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on most firmware as is, because the quirk does not relocate BARs in memory, and they will likely overlap. Contributions to improve this feature are welcome.
+----
+类型：plist整数
+描述：配置GPU PCI BAR的大小。
+
+这个选项设置GPU PCI BAR尺寸为指定的，或者选择低于ResizeGpuBars值的最大可用值。
+指定的值遵循PCI可调整的BAR规格。使用0代表1MB，1代表2MB，2代表4MB，以此类推，直到19代表512GB。
+可调整的BAR技术允许通过将可配置的内存区域、BAR，映射到CPU地址空间（例如，VRAM到RAM），而不是固定的内存区域，来简化PCI设备编程。这项技术是必要的，因为人们不能在默认情况下映射最大的内存区域，原因是要向后兼容不支持64位BAR的旧硬件。因此，过去十年的设备默认使用256MB的BAR（剩下的4位被其他数据使用），但通常允许将它们的大小调整为更小和更大的2次方（例如，从1MB到VRAM大小）。
+
+针对x86平台的操作系统通常不控制PCI地址空间，让UEFI固件决定BAR地址和大小。这种非法的做法导致可重置的BAR技术直到2020年都没有被使用，尽管它在2008年被标准化，并很快在硬件中广泛使用。
+
+现代UEFI固件允许使用可调整的BAR技术，但通常将可配置的选项限制为故障安全默认值（OFF）和最大可用值（ON）。这个选项允许为测试和开发目的对这个值进行微调。
+
+注1：这个选项不能用于解决macOS对超过1GB的BAR的限制。应该使用ResizeAppleGpuBars来代替。
+注2：虽然这个选项可以增加GPU PCI BAR的大小，但这在大多数固件上是行不通的，因为该选项并没有重新定位内存中的BAR，而且它们很可能会发生重叠。欢迎大家为改善这一功能做出贡献。</string>
+                </property>
+                <property name="text">
+                 <string>ResizeGpuBars</string>
+                </property>
+               </widget>
+              </item>
               <item row="12" column="1">
-               <widget class="QLineEdit" name="editIntTscSyncTimeout">
+               <widget class="QLineEdit" name="editIntResizeGpuBars">
                 <property name="minimumSize">
                  <size>
                   <width>200</width>
@@ -9831,25 +9941,8 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                   <height>16777215</height>
                  </size>
                 </property>
-               </widget>
-              </item>
-              <item row="10" column="1">
-               <widget class="QCheckBox" name="chkForceOcWriteFlash">
-                <property name="toolTip">
-                 <string>Type: plist boolean
-
-Description: Enables writing to flash memory for all OpenCore system variables.
-
-Note: This value should be disabled on most types of firmware but is left configurable to account for firmware that may have issues with volatile variable storage overflows or similar. Boot issues across multiple OSes can be observed on e.g. Lenovo Thinkpad T430 and T530 without this quirk. Apple variables related to Secure Boot and hibernation are exempt from this for security reasons. Furthermore, some OpenCore variables are exempt for different reasons, such as the boot log due to an available user option, and the TSC frequency due to timing issues. When toggling this option, a NVRAM reset may be required to ensure full functionality.
-----
-类型：plist布尔值
-
-描述：启用所有OpenCore系统变量对闪存的写入。
-
-注意：这个值在大多数类型的固件上应该是禁用的，但为了考虑到可能有易失性变量存储溢出或类似问题的固件，这个值是可配置的。在例如联想Thinkpad T430和T530上可以观察到跨多个操作系统的启动问题，没有这个选项。出于安全原因，与安全启动和休眠有关的苹果变量不在此列。此外，一些OpenCore变量由于不同的原因被豁免，例如由于一个可用的用户选项，启动日志，以及由于时间问题，TSC频率。在切换该选项时，可能需要对NVRAM进行重置，以确保完整的功能。</string>
-                </property>
                 <property name="text">
-                 <string>ForceOcWriteFlash</string>
+                 <string>-1</string>
                 </property>
                </widget>
               </item>
