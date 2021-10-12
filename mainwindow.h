@@ -879,6 +879,8 @@ class MainWindow : public QMainWindow {
 
   void on_btnPresetNVLegacy_clicked();
 
+  void on_actionAutoChkUpdate_triggered();
+
  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;

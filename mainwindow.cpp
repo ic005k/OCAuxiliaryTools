@@ -128,8 +128,10 @@ MainWindow::MainWindow(QWidget* parent)
   connect(manager, SIGNAL(finished(QNetworkReply*)), this,
           SLOT(replyFinished(QNetworkReply*)));
 
-  autoCheckUpdate = true;
-  on_btnCheckUpdate();
+  if (ui->actionAutoChkUpdate->isChecked()) {
+    autoCheckUpdate = true;
+    on_btnCheckUpdate();
+  }
 
   this->setWindowModified(false);
 
@@ -1703,6 +1705,8 @@ void MainWindow::initui_PlatformInfo() {
     QSettings Reg(qfile, QSettings::IniFormat);
 
     ui->chkSaveDataHub->setChecked(Reg.value("SaveDataHub").toBool());
+    ui->actionAutoChkUpdate->setChecked(
+        Reg.value("AutoChkUpdate", true).toBool());
   }
 
   ui->cboxUpdateSMBIOSMode->addItem("TryOverwrite");
@@ -4991,6 +4995,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   QFile file(qfile);
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
+  Reg.setValue("AutoChkUpdate", ui->actionAutoChkUpdate->isChecked());
 
   //搜索历史记录保存
   int textTotal = ui->cboxFind->count();
@@ -6641,7 +6646,7 @@ int MainWindow::parse_UpdateJSON(QString str) {
 
     this->setFocus();
 
-    if (Verison > CurVerison) {
+    if (Verison > CurVerison && Url != "") {
       ui->btnCheckUpdate->setIcon(QIcon(":/icon/newver.png"));
       ui->btnCheckUpdate->setToolTip(tr("There is a new version"));
 
@@ -10330,3 +10335,5 @@ void MainWindow::on_btnPresetNVLegacy_clicked() {
                               dlgPresetValues->ui->listPreset);
   dlgPresetValues->show();
 }
+
+void MainWindow::on_actionAutoChkUpdate_triggered() {}

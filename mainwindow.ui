@@ -10176,6 +10176,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionOpenCore_Forum"/>
     <addaction name="actionOpenCanopyIcons"/>
     <addaction name="separator"/>
+    <addaction name="actionAutoChkUpdate"/>
     <addaction name="btnCheckUpdate"/>
     <addaction name="actionLatest_Release"/>
     <addaction name="actionOnline_Download_Updates"/>
@@ -10419,6 +10420,17 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionOpen_Directory">
    <property name="text">
     <string>Open Directory</string>
+   </property>
+  </action>
+  <action name="actionAutoChkUpdate">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Automatically check for updates</string>
    </property>
   </action>
  </widget>

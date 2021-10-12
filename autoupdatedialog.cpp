@@ -63,7 +63,13 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total,
 {
   ui->progressBar->setMaximum(all_total);
   ui->progressBar->setValue(recv_total);
+  setWindowTitle(tr("Download Progress") + " : " + GetFileSize(recv_total) +
+                 " -> " + GetFileSize(all_total));
+
   if (recv_total == all_total) {
+    if (recv_total < 10000) {
+      return;
+    }
     ui->btnStartUpdate->setEnabled(true);
     ui->btnUpdateDatabase->setEnabled(true);
     this->repaint();
@@ -76,9 +82,6 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total,
       p->start("chmod", QStringList() << "+x" << tempDir + filename);
     }
   }
-
-  setWindowTitle(tr("Download Progress") + " : " + GetFileSize(recv_total) +
-                 " -> " + GetFileSize(all_total));
 }
 
 void AutoUpdateDialog::doProcessError(QNetworkReply::NetworkError code) {
@@ -104,22 +107,6 @@ void AutoUpdateDialog::startUpdate() {
   qApp->exit();
 
   if (mw_one->mac || mw_one->osx1012) {
-    /*strPath = appInfo.path().replace("Contents", "");
-
-    QTextEdit* txtEdit = new QTextEdit();
-    strExec = strPath.mid(0, strPath.length() - 1);
-    strExec = "\"" + strExec + "\"";
-    strZip = "\"" + strZip + "\"";
-    strPath = "\"" + strPath + "\"";
-    txtEdit->append("unzip -o " + strZip + " -d " + strPath);
-    txtEdit->append("open " + strExec);
-
-    QString fileName = tempDir + "upocat.sh";
-    TextEditToFile(txtEdit, fileName);
-
-    QProcess::execute("chmod", QStringList() << "+x" << fileName);
-    QProcess::startDetached("bash", QStringList() << fileName);*/
-
     QTextEdit* txtEdit = new QTextEdit();
     QString strTarget = appInfo.path().replace("Contents", "");
     strTarget = strTarget + ".";
@@ -190,30 +177,31 @@ void AutoUpdateDialog::startDownload(bool Database) {
   ui->btnUpdateDatabase->setEnabled(false);
   this->repaint();
 
-  /*if (!Database) {
-    if (mw_one->mac) strUrl = strMacUrl;
-    if (mw_one->osx1012) strUrl = strMacClassicalUrl;
-    if (mw_one->linuxOS) strUrl = strLinuxUrl;
-    if (mw_one->win) strUrl = strWinUrl;
+  if (!Database) {
+    // if (mw_one->mac) strUrl = strMacUrl;
+    // if (mw_one->osx1012) strUrl = strMacClassicalUrl;
+    // if (mw_one->linuxOS) strUrl = strLinuxUrl;
+    // if (mw_one->win) strUrl = strWinUrl;
     ui->btnStartUpdate->setVisible(true);
     ui->btnUpdateDatabase->setVisible(false);
   } else {
     strUrl = strDatabaseUrl;
     ui->btnStartUpdate->setVisible(false);
     ui->btnUpdateDatabase->setVisible(true);
-  }*/
+  }
 
-  QString str1, str2;
+  QString str0, str1, str2;
 
-  QStringList strList;
-  strList = strUrl.split("ic005k");
-  str1 = "https://ghproxy.com/https://github.com/";
-  str2 = strUrl.replace("https://github.com/", str1);
+  // QStringList strList;
+  // strList = strUrl.split("ic005k");
+  str0 = "https://download.fastgit.org/";            // 日本东京
+  str1 = "https://ghproxy.com/https://github.com/";  // 韩国首尔
+  str2 = strUrl.replace("https://github.com/", str0);
   strUrl = str2;
+  // strUrl = strMacUrl;
 
   QNetworkRequest request;
   request.setUrl(QUrl(strUrl));
-  qDebug() << strUrl;
 
   reply = manager->get(request);  //发送请求
   connect(reply, &QNetworkReply::readyRead, this,
@@ -236,105 +224,102 @@ void AutoUpdateDialog::startDownload(bool Database) {
   bool ret =
       myfile->open(QIODevice::WriteOnly | QIODevice::Truncate);  //创建文件
   if (!ret) {
-      QMessageBox::warning(this, "warning", "Failed to open.");
-      return;
+    QMessageBox::warning(this, "warning", "Failed to open.");
+    return;
   }
   ui->progressBar->setValue(0);
   ui->progressBar->setMinimum(0);
 }
 
-void AutoUpdateDialog::closeEvent(QCloseEvent *event)
-{
-    Q_UNUSED(event);
-    reply->close();
+void AutoUpdateDialog::closeEvent(QCloseEvent* event) {
+  Q_UNUSED(event);
+  reply->close();
 }
 
-QString AutoUpdateDialog::GetFileSize(qint64 size)
-{
-    if (!size) {
-        return "0 Bytes";
-    }
-    static QStringList SizeNames;
-    if (SizeNames.empty()) {
-        SizeNames << " Bytes"
-                  << " KB"
-                  << " MB"
-                  << " GB"
-                  << " TB"
-                  << " PB"
-                  << " EB"
-                  << " ZB"
-                  << " YB";
-    }
-    int i = qFloor(qLn(size) / qLn(1024));
-    return QString::number(size * 1.0 / qPow(1000, qFloor(i)), 'f', (i > 1) ? 2 : 0)
-           + SizeNames.at(i);
+QString AutoUpdateDialog::GetFileSize(qint64 size) {
+  if (!size) {
+    return "0 Bytes";
+  }
+  static QStringList SizeNames;
+  if (SizeNames.empty()) {
+    SizeNames << " Bytes"
+              << " KB"
+              << " MB"
+              << " GB"
+              << " TB"
+              << " PB"
+              << " EB"
+              << " ZB"
+              << " YB";
+  }
+  int i = qFloor(qLn(size) / qLn(1024));
+  return QString::number(size * 1.0 / qPow(1000, qFloor(i)), 'f',
+                         (i > 1) ? 2 : 0) +
+         SizeNames.at(i);
 }
 
-void AutoUpdateDialog::on_btnUpdateDatabase_clicked()
-{
-    QFileInfo appInfo(qApp->applicationDirPath());
-    QString strZip;
-    strZip = tempDir + "Database.zip";
+void AutoUpdateDialog::on_btnUpdateDatabase_clicked() {
+  QFileInfo appInfo(qApp->applicationDirPath());
+  QString strZip;
+  strZip = tempDir + "Database.zip";
 
-    QDir dir;
-    dir.setCurrent(tempDir);
+  QDir dir;
+  dir.setCurrent(tempDir);
 
-    QProcess *p = new QProcess;
-    QString strPath;
-    strPath = appInfo.filePath();
-    if (mw_one->mac || mw_one->osx1012) {
-        p->start("unzip", QStringList() << "-o" << strZip << "-d" << strPath);
-    }
-    if (mw_one->win) {
-        p->start(strPath + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
-    }
+  QProcess* p = new QProcess;
+  QString strPath;
+  strPath = appInfo.filePath();
+  if (mw_one->mac || mw_one->osx1012) {
+    p->start("unzip", QStringList() << "-o" << strZip << "-d" << strPath);
+  }
+  if (mw_one->win) {
+    p->start(strPath + "/unzip.exe", QStringList()
+                                         << "-o" << strZip << "-d" << strPath);
+  }
 
-    close();
+  close();
 }
 
-void AutoUpdateDialog::TextEditToFile(QTextEdit *txtEdit, QString fileName)
-{
-    QFile *file;
-    file = new QFile;
-    file->setFileName(fileName);
-    bool ok = file->open(QIODevice::WriteOnly);
-    if (ok) {
-        QTextStream out(file);
-        out << txtEdit->toPlainText();
-        file->close();
-        delete file;
-    }
+void AutoUpdateDialog::TextEditToFile(QTextEdit* txtEdit, QString fileName) {
+  QFile* file;
+  file = new QFile;
+  file->setFileName(fileName);
+  bool ok = file->open(QIODevice::WriteOnly);
+  if (ok) {
+    QTextStream out(file);
+    out << txtEdit->toPlainText();
+    file->close();
+    delete file;
+  }
 }
 
-void AutoUpdateDialog::keyPressEvent(QKeyEvent *event)
-{
-    switch (event->key()) {
+void AutoUpdateDialog::keyPressEvent(QKeyEvent* event) {
+  switch (event->key()) {
     case Qt::Key_Escape:
-        // reply->close();
-        // close();
-        break;
+      // reply->close();
+      // close();
+      break;
 
     case Qt::Key_Return:
 
-        break;
+      break;
 
     case Qt::Key_Backspace:
 
-        break;
+      break;
 
     case Qt::Key_Space:
 
-        break;
+      break;
 
     case Qt::Key_F1:
 
-        break;
-    }
+      break;
+  }
 
-    if (event->modifiers() == Qt::ControlModifier) {
-        if (event->key() == Qt::Key_M) {
-            this->setWindowState(Qt::WindowMaximized);
-        }
+  if (event->modifiers() == Qt::ControlModifier) {
+    if (event->key() == Qt::Key_M) {
+      this->setWindowState(Qt::WindowMaximized);
     }
+  }
 }
