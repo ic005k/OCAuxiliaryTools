@@ -111,13 +111,24 @@ void AutoUpdateDialog::startUpdate() {
     QString strTarget = appInfo.path().replace("Contents", "");
     strTarget = strTarget + ".";
     strTarget = "\"" + strTarget + "\"";
-    txtEdit->append("hdiutil attach " + strZip);
-    txtEdit->append(
-        "cp -R -p -f "
-        "/Volumes/bin:release:OCAuxiliaryTools/OCAuxiliaryTools.app/. " +
-        strTarget);
+    if (mw_one->mac) {
+      txtEdit->append("hdiutil mount -mountpoint /Volumes/ocat " + strZip);
+      txtEdit->append(
+          "cp -R -p -f "
+          "/Volumes/ocat/OCAuxiliaryTools.app/. " +
+          strTarget);
 
-    txtEdit->append("hdiutil unmount /Volumes/bin:release:OCAuxiliaryTools");
+      txtEdit->append("hdiutil eject /Volumes/ocat");
+    }
+    if (mw_one->osx1012) {
+      txtEdit->append("hdiutil mount -mountpoint /Volumes/ocat1012 " + strZip);
+      txtEdit->append(
+          "cp -R -p -f "
+          "/Volumes/ocat1012/OCAuxiliaryTools.app/. " +
+          strTarget);
+
+      txtEdit->append("hdiutil eject /Volumes/ocat1012");
+    }
 
     strPath = appInfo.path().replace("Contents", "");
     strExec = strPath.mid(0, strPath.length() - 1);
