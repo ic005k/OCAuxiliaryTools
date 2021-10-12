@@ -611,7 +611,7 @@ void MainWindow::initui_dp() {
 
   // Add
   ui->table_dp_add0->setMinimumWidth(200);
-  ui->table_dp_add0->setMaximumWidth(350);
+  ui->table_dp_add0->setMaximumWidth(550);
 
   id0 = new QTableWidgetItem(tr("PCILists"));
   ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
@@ -1706,6 +1706,8 @@ void MainWindow::initui_PlatformInfo() {
     ui->actionAutoChkUpdate->setChecked(
         Reg.value("AutoChkUpdate", true).toBool());
   }
+  ui->chkSaveDataHub->setStyleSheet(
+      "QCheckBox { background-color : yellow; color : black; }");
 
   ui->cboxUpdateSMBIOSMode->addItem("TryOverwrite");
   ui->cboxUpdateSMBIOSMode->addItem("Create");
@@ -6637,31 +6639,35 @@ int MainWindow::parse_UpdateJSON(QString str) {
     this->setFocus();
 
     if (Verison > CurVerison && Url != "") {
-        QString warningStr = tr("New version detected!") + "\n" + tr("Version: ") + "V" + Verison
-                             + "\n" + tr("Published at: ") + UpdateTime + "\n"
-                             + tr("Release Notes: ") + "\n" + ReleaseNote;
+      QString warningStr = tr("New version detected!") + "\n" +
+                           tr("Version: ") + "V" + Verison + "\n" +
+                           tr("Published at: ") + UpdateTime + "\n" +
+                           tr("Release Notes: ") + "\n" + ReleaseNote;
 
-        if (ui->actionAutoChkUpdate->isChecked()) {
-            ui->btnCheckUpdate->setIcon(QIcon(":/icon/newver.png"));
-            ui->btnCheckUpdate->setToolTip(tr("There is a new version"));
+      if (ui->actionAutoChkUpdate->isChecked()) {
+        ui->btnCheckUpdate->setIcon(QIcon(":/icon/newver.png"));
+        ui->btnCheckUpdate->setToolTip(tr("There is a new version"));
 
-            int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
-            if (ret == 0) {
-                ShowAutoUpdateDlg(false);
-            }
-        } else {
-            if (!autoCheckUpdate) {
-                int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
-                if (ret == 0) {
-                    ShowAutoUpdateDlg(false);
-                }
-            }
+        int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
+                                       tr("Cancel"));
+        if (ret == 0) {
+          ShowAutoUpdateDlg(false);
         }
+      } else {
+        if (!autoCheckUpdate) {
+          int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
+                                         tr("Cancel"));
+          if (ret == 0) {
+            ShowAutoUpdateDlg(false);
+          }
+        }
+      }
 
     } else {
-        if (!autoCheckUpdate) {
-            QMessageBox::information(this, "", tr("It is currently the latest version!"));
-        }
+      if (!autoCheckUpdate) {
+        QMessageBox::information(this, "",
+                                 tr("It is currently the latest version!"));
+      }
     }
 
     ui->cboxFind->setFocus();
@@ -9007,9 +9013,10 @@ void MainWindow::init_CopyPasteLine() {
       if (item != tr("Enabled") && item != tr("Arch") && item != tr("All") &&
           item != tr("Type") && item != tr("TextMode") &&
           item != tr("Auxiliary") && item != tr("RealPath") &&
-          item != tr("Class"))
+          item != tr("Class")) {
         w->horizontalHeader()->setSectionResizeMode(
             y, QHeaderView::ResizeToContents);
+      }
     }
     // w->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
 
