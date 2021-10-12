@@ -16,7 +16,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   ui->progressBar->setTextVisible(false);
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
-  mw_one->deleteDirfile(tempDir);
+  // mw_one->deleteDirfile(tempDir);
   ui->label->setVisible(false);
 }
 
@@ -104,7 +104,7 @@ void AutoUpdateDialog::startUpdate() {
   qApp->exit();
 
   if (mw_one->mac || mw_one->osx1012) {
-    strPath = appInfo.path().replace("Contents", "");
+    /*strPath = appInfo.path().replace("Contents", "");
 
     QTextEdit* txtEdit = new QTextEdit();
     strExec = strPath.mid(0, strPath.length() - 1);
@@ -118,6 +118,29 @@ void AutoUpdateDialog::startUpdate() {
     TextEditToFile(txtEdit, fileName);
 
     QProcess::execute("chmod", QStringList() << "+x" << fileName);
+    QProcess::startDetached("bash", QStringList() << fileName);*/
+
+    QTextEdit* txtEdit = new QTextEdit();
+    QString strTarget = appInfo.path().replace("Contents", "");
+    strTarget = strTarget + ".";
+    strTarget = "\"" + strTarget + "\"";
+    txtEdit->append("hdiutil attach " + strZip);
+    txtEdit->append(
+        "cp -R -p -f "
+        "/Volumes/bin:release:OCAuxiliaryTools/OCAuxiliaryTools.app/. " +
+        strTarget);
+
+    strPath = appInfo.path().replace("Contents", "");
+    strExec = strPath.mid(0, strPath.length() - 1);
+    strExec = "\"" + strExec + "\"";
+    txtEdit->append("open " + strExec);
+
+    txtEdit->append("hdiutil unmount /Volumes/bin:release:OCAuxiliaryTools");
+
+    QString fileName = tempDir + "upocat.sh";
+    // fileName = QDir::homePath() + "/.config/QtOCC/upocat.sh";
+    TextEditToFile(txtEdit, fileName);
+
     QProcess::startDetached("bash", QStringList() << fileName);
   }
 
@@ -162,7 +185,7 @@ void AutoUpdateDialog::startDownload(bool Database) {
   ui->btnUpdateDatabase->setEnabled(false);
   this->repaint();
 
-  if (!Database) {
+  /*if (!Database) {
     if (mw_one->mac) strUrl = strMacUrl;
     if (mw_one->osx1012) strUrl = strMacClassicalUrl;
     if (mw_one->linuxOS) strUrl = strLinuxUrl;
@@ -173,10 +196,19 @@ void AutoUpdateDialog::startDownload(bool Database) {
     strUrl = strDatabaseUrl;
     ui->btnStartUpdate->setVisible(false);
     ui->btnUpdateDatabase->setVisible(true);
-  }
+  }*/
+
+  QString str1, str2;
+
+  QStringList strList;
+  strList = strUrl.split("ic005k");
+  str1 = "https://ghproxy.com/https://github.com/";
+  str2 = strUrl.replace("https://github.com/", str1);
+  strUrl = str2;
 
   QNetworkRequest request;
   request.setUrl(QUrl(strUrl));
+  qDebug() << strUrl;
 
   reply = manager->get(request);  //发送请求
   connect(reply, &QNetworkReply::readyRead, this,

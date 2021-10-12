@@ -6632,6 +6632,7 @@ int MainWindow::parse_UpdateJSON(QString str) {
 
     QVariantList list = root_Obj.value("assets").toArray().toVariantList();
     QString Url = getUrl(list);
+    dlgAutoUpdate->strUrl = Url;
 
     QString UpdateTime = root_Obj.value("published_at").toString();
     QString ReleaseNote = root_Obj.value("body").toString();
