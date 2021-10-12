@@ -155,9 +155,11 @@ void AutoUpdateDialog::startUpdate() {
     strExec = qApp->applicationFilePath();
     strExec = "\"" + strExec + "\"";
     QString strCommand1, strCommand2;
-    strCommand1 = strUnzip + " -o " + strZip + " -d " + tempDir;
     QString strx = "\"" + tempDir + "\"";
-    strCommand2 = "xcopy " + strx + QFileInfo(filename).baseName() + " " + strPath + " /s/y";
+    strCommand1 = strUnzip + " -o " + strZip + " -d " + strx;
+    QString stry = tempDir + QFileInfo(filename).baseName();
+    stry = "\"" + stry + "\"";
+    strCommand2 = "xcopy " + stry + " " + strPath + " /s/y";
     txtEdit->append(strCommand1 + " && " + strCommand2 + " && " + strExec);
 
     QString fileName = tempDir + "upocat.bat";
