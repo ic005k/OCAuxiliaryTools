@@ -130,12 +130,12 @@ void AutoUpdateDialog::startUpdate() {
         "/Volumes/bin:release:OCAuxiliaryTools/OCAuxiliaryTools.app/. " +
         strTarget);
 
+    txtEdit->append("hdiutil unmount /Volumes/bin:release:OCAuxiliaryTools");
+
     strPath = appInfo.path().replace("Contents", "");
     strExec = strPath.mid(0, strPath.length() - 1);
     strExec = "\"" + strExec + "\"";
     txtEdit->append("open " + strExec);
-
-    txtEdit->append("hdiutil unmount /Volumes/bin:release:OCAuxiliaryTools");
 
     QString fileName = tempDir + "upocat.sh";
     // fileName = QDir::homePath() + "/.config/QtOCC/upocat.sh";
@@ -154,8 +154,11 @@ void AutoUpdateDialog::startUpdate() {
     strPath = "\"" + strPath + "\"";
     strExec = qApp->applicationFilePath();
     strExec = "\"" + strExec + "\"";
-    txtEdit->append(strUnzip + " -o " + strZip + " -d " + strPath + " && " +
-                    strExec);
+    QString strCommand1, strCommand2;
+    strCommand1 = strUnzip + " -o " + strZip + " -d " + tempDir;
+    QString strx = "\"" + tempDir + "\"";
+    strCommand2 = "xcopy " + strx + QFileInfo(filename).baseName() + " " + strPath + " /s/y";
+    txtEdit->append(strCommand1 + " && " + strCommand2 + " && " + strExec);
 
     QString fileName = tempDir + "upocat.bat";
     TextEditToFile(txtEdit, fileName);
@@ -231,102 +234,105 @@ void AutoUpdateDialog::startDownload(bool Database) {
   bool ret =
       myfile->open(QIODevice::WriteOnly | QIODevice::Truncate);  //创建文件
   if (!ret) {
-    QMessageBox::warning(this, "warning", "Failed to open.");
-    return;
+      QMessageBox::warning(this, "warning", "Failed to open.");
+      return;
   }
   ui->progressBar->setValue(0);
   ui->progressBar->setMinimum(0);
 }
 
-void AutoUpdateDialog::closeEvent(QCloseEvent* event) {
-  Q_UNUSED(event);
-  reply->close();
+void AutoUpdateDialog::closeEvent(QCloseEvent *event)
+{
+    Q_UNUSED(event);
+    reply->close();
 }
 
-QString AutoUpdateDialog::GetFileSize(qint64 size) {
-  if (!size) {
-    return "0 Bytes";
-  }
-  static QStringList SizeNames;
-  if (SizeNames.empty()) {
-    SizeNames << " Bytes"
-              << " KB"
-              << " MB"
-              << " GB"
-              << " TB"
-              << " PB"
-              << " EB"
-              << " ZB"
-              << " YB";
-  }
-  int i = qFloor(qLn(size) / qLn(1024));
-  return QString::number(size * 1.0 / qPow(1000, qFloor(i)), 'f',
-                         (i > 1) ? 2 : 0) +
-         SizeNames.at(i);
+QString AutoUpdateDialog::GetFileSize(qint64 size)
+{
+    if (!size) {
+        return "0 Bytes";
+    }
+    static QStringList SizeNames;
+    if (SizeNames.empty()) {
+        SizeNames << " Bytes"
+                  << " KB"
+                  << " MB"
+                  << " GB"
+                  << " TB"
+                  << " PB"
+                  << " EB"
+                  << " ZB"
+                  << " YB";
+    }
+    int i = qFloor(qLn(size) / qLn(1024));
+    return QString::number(size * 1.0 / qPow(1000, qFloor(i)), 'f', (i > 1) ? 2 : 0)
+           + SizeNames.at(i);
 }
 
-void AutoUpdateDialog::on_btnUpdateDatabase_clicked() {
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString strZip;
-  strZip = tempDir + "Database.zip";
+void AutoUpdateDialog::on_btnUpdateDatabase_clicked()
+{
+    QFileInfo appInfo(qApp->applicationDirPath());
+    QString strZip;
+    strZip = tempDir + "Database.zip";
 
-  QDir dir;
-  dir.setCurrent(tempDir);
+    QDir dir;
+    dir.setCurrent(tempDir);
 
-  QProcess* p = new QProcess;
-  QString strPath;
-  strPath = appInfo.filePath();
-  if (mw_one->mac || mw_one->osx1012) {
-    p->start("unzip", QStringList() << "-o" << strZip << "-d" << strPath);
-  }
-  if (mw_one->win) {
-    p->start(strPath + "/unzip.exe", QStringList()
-                                         << "-o" << strZip << "-d" << strPath);
-  }
+    QProcess *p = new QProcess;
+    QString strPath;
+    strPath = appInfo.filePath();
+    if (mw_one->mac || mw_one->osx1012) {
+        p->start("unzip", QStringList() << "-o" << strZip << "-d" << strPath);
+    }
+    if (mw_one->win) {
+        p->start(strPath + "/unzip.exe", QStringList() << "-o" << strZip << "-d" << strPath);
+    }
 
-  close();
+    close();
 }
 
-void AutoUpdateDialog::TextEditToFile(QTextEdit* txtEdit, QString fileName) {
-  QFile* file;
-  file = new QFile;
-  file->setFileName(fileName);
-  bool ok = file->open(QIODevice::WriteOnly);
-  if (ok) {
-    QTextStream out(file);
-    out << txtEdit->toPlainText();
-    file->close();
-    delete file;
-  }
+void AutoUpdateDialog::TextEditToFile(QTextEdit *txtEdit, QString fileName)
+{
+    QFile *file;
+    file = new QFile;
+    file->setFileName(fileName);
+    bool ok = file->open(QIODevice::WriteOnly);
+    if (ok) {
+        QTextStream out(file);
+        out << txtEdit->toPlainText();
+        file->close();
+        delete file;
+    }
 }
 
-void AutoUpdateDialog::keyPressEvent(QKeyEvent* event) {
-  switch (event->key()) {
+void AutoUpdateDialog::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
     case Qt::Key_Escape:
-      // reply->close();
-      // close();
-      break;
+        // reply->close();
+        // close();
+        break;
 
     case Qt::Key_Return:
 
-      break;
+        break;
 
     case Qt::Key_Backspace:
 
-      break;
+        break;
 
     case Qt::Key_Space:
 
-      break;
+        break;
 
     case Qt::Key_F1:
 
-      break;
-  }
-
-  if (event->modifiers() == Qt::ControlModifier) {
-    if (event->key() == Qt::Key_M) {
-      this->setWindowState(Qt::WindowMaximized);
+        break;
     }
-  }
+
+    if (event->modifiers() == Qt::ControlModifier) {
+        if (event->key() == Qt::Key_M) {
+            this->setWindowState(Qt::WindowMaximized);
+        }
+    }
 }
