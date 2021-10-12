@@ -128,10 +128,8 @@ MainWindow::MainWindow(QWidget* parent)
   connect(manager, SIGNAL(finished(QNetworkReply*)), this,
           SLOT(replyFinished(QNetworkReply*)));
 
-  if (ui->actionAutoChkUpdate->isChecked()) {
-    autoCheckUpdate = true;
-    on_btnCheckUpdate();
-  }
+  autoCheckUpdate = true;
+  on_btnCheckUpdate();
 
   this->setWindowModified(false);
 
@@ -6579,15 +6577,7 @@ void MainWindow::on_btnCheckUpdate() {
 
 void MainWindow::replyFinished(QNetworkReply* reply) {
   QString str = reply->readAll();
-  QMessageBox box;
-  box.setText(str);
-  // box.exec();
-  // qDebug() << QSslSocket::supportsSsl() <<
-  // QSslSocket::sslLibraryBuildVersionString() <<
-  // QSslSocket::sslLibraryVersionString();
-
   parse_UpdateJSON(str);
-
   reply->deleteLater();
 }
 
@@ -6596,7 +6586,7 @@ QString MainWindow::getUrl(QVariantList list) {
   for (int i = 0; i < list.count(); i++) {
     QVariantMap map = list[i].toMap();
     QString fName = map["name"].toString();
-    // qDebug() << map["browser_download_url"].toString();
+
     if (fName.contains("OCAT_Mac.dmg"))
       macUrl = map["browser_download_url"].toString();
 
@@ -6647,28 +6637,31 @@ int MainWindow::parse_UpdateJSON(QString str) {
     this->setFocus();
 
     if (Verison > CurVerison && Url != "") {
-      ui->btnCheckUpdate->setIcon(QIcon(":/icon/newver.png"));
-      ui->btnCheckUpdate->setToolTip(tr("There is a new version"));
+        QString warningStr = tr("New version detected!") + "\n" + tr("Version: ") + "V" + Verison
+                             + "\n" + tr("Published at: ") + UpdateTime + "\n"
+                             + tr("Release Notes: ") + "\n" + ReleaseNote;
 
-      QString warningStr = tr("New version detected!") + "\n" +
-                           tr("Version: ") + "V" + Verison + "\n" +
-                           tr("Published at: ") + UpdateTime + "\n" +
-                           tr("Release Notes: ") + "\n" + ReleaseNote;
-      int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
-                                     tr("Cancel"));
-      if (ret == 0) {
-        // Url =
-        // "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
-        // QDesktopServices::openUrl(QUrl(Url));
+        if (ui->actionAutoChkUpdate->isChecked()) {
+            ui->btnCheckUpdate->setIcon(QIcon(":/icon/newver.png"));
+            ui->btnCheckUpdate->setToolTip(tr("There is a new version"));
 
-        ShowAutoUpdateDlg(false);
-      }
+            int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
+            if (ret == 0) {
+                ShowAutoUpdateDlg(false);
+            }
+        } else {
+            if (!autoCheckUpdate) {
+                int ret = QMessageBox::warning(this, "", warningStr, tr("Download"), tr("Cancel"));
+                if (ret == 0) {
+                    ShowAutoUpdateDlg(false);
+                }
+            }
+        }
 
     } else {
-      if (!autoCheckUpdate) {
-        QMessageBox::information(this, "",
-                                 tr("It is currently the latest version!"));
-      }
+        if (!autoCheckUpdate) {
+            QMessageBox::information(this, "", tr("It is currently the latest version!"));
+        }
     }
 
     ui->cboxFind->setFocus();

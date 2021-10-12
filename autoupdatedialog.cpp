@@ -16,7 +16,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   ui->progressBar->setTextVisible(false);
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
-  // mw_one->deleteDirfile(tempDir);
+  mw_one->deleteDirfile(tempDir);
   ui->label->setVisible(false);
 }
 
@@ -189,27 +189,20 @@ void AutoUpdateDialog::startDownload(bool Database) {
   this->repaint();
 
   if (!Database) {
-    // if (mw_one->mac) strUrl = strMacUrl;
-    // if (mw_one->osx1012) strUrl = strMacClassicalUrl;
-    // if (mw_one->linuxOS) strUrl = strLinuxUrl;
-    // if (mw_one->win) strUrl = strWinUrl;
-    ui->btnStartUpdate->setVisible(true);
-    ui->btnUpdateDatabase->setVisible(false);
+      ui->btnStartUpdate->setVisible(true);
+      ui->btnUpdateDatabase->setVisible(false);
   } else {
-    strUrl = strDatabaseUrl;
-    ui->btnStartUpdate->setVisible(false);
-    ui->btnUpdateDatabase->setVisible(true);
+      strUrl = strDatabaseUrl;
+      ui->btnStartUpdate->setVisible(false);
+      ui->btnUpdateDatabase->setVisible(true);
   }
 
   QString str0, str1, str2;
 
-  // QStringList strList;
-  // strList = strUrl.split("ic005k");
   str0 = "https://download.fastgit.org/";            // 日本东京
   str1 = "https://ghproxy.com/https://github.com/";  // 韩国首尔
   str2 = strUrl.replace("https://github.com/", str0);
   strUrl = str2;
-  // strUrl = strMacUrl;
 
   QNetworkRequest request;
   request.setUrl(QUrl(strUrl));

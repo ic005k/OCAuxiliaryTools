@@ -319,7 +319,7 @@ class MainWindow : public QMainWindow {
   void AddNvramAdd(QVariantMap map_add, int currentRow, bool blPreset);
   void checkFiles();
   void sortForKexts();
- public slots:
+  public slots:
   void DisplayLevel();
   void ScanPolicy();
   void PickerAttributes();
