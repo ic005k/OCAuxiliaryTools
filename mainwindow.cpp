@@ -195,7 +195,7 @@ void MainWindow::initRecentFilesForToolBar() {
   reFileMenu->clear();
   for (int i = 0; i < rfList.count(); i++) {
     QFileInfo fi(rfList.at(i));
-    QAction* act = new QAction(QString::number(i + 1) + " . " + fi.baseName());
+    QAction *act = new QAction(QString::number(i + 1) + " . " + fi.filePath());
     reFileMenu->addAction(act);
     connect(act, &QAction::triggered,
             [=]() { openFile(m_recentFiles->getRecentFiles().at(i)); });
