@@ -80,6 +80,7 @@ class MainWindow : public QMainWindow {
   QAction* cutAction;
   QAction* copyAction;
   QAction* pasteAction;
+  QNetworkAccessManager* manager;
 
   QList<QVariant> NoteValues;
   QList<QString> NoteKeys;
@@ -319,7 +320,7 @@ class MainWindow : public QMainWindow {
   void AddNvramAdd(QVariantMap map_add, int currentRow, bool blPreset);
   void checkFiles();
   void sortForKexts();
-  public slots:
+ public slots:
   void DisplayLevel();
   void ScanPolicy();
   void PickerAttributes();
@@ -920,7 +921,6 @@ class MainWindow : public QMainWindow {
 
   void setTableEditTriggers();
 
-  QNetworkAccessManager* manager;
   int parse_UpdateJSON(QString str);
 
   QStringList backColor;

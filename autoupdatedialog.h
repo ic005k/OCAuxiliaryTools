@@ -28,7 +28,7 @@ class AutoUpdateDialog : public QDialog {
 
   QString tempDir;
   QString filename;
-  QNetworkAccessManager* manager;
+  QNetworkAccessManager* managerDownLoad;
   QNetworkReply* reply;
   QFile* myfile;
   void Init();

@@ -44,7 +44,7 @@ void AutoUpdateDialog::Init() {
       "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
       "QtOpenCoreConfigDatabase/main/Database.zip";
 
-  manager = new QNetworkAccessManager(this);
+  managerDownLoad = new QNetworkAccessManager(this);
   myfile = new QFile(this);
 }
 
@@ -189,12 +189,12 @@ void AutoUpdateDialog::startDownload(bool Database) {
   this->repaint();
 
   if (!Database) {
-      ui->btnStartUpdate->setVisible(true);
-      ui->btnUpdateDatabase->setVisible(false);
+    ui->btnStartUpdate->setVisible(true);
+    ui->btnUpdateDatabase->setVisible(false);
   } else {
-      strUrl = strDatabaseUrl;
-      ui->btnStartUpdate->setVisible(false);
-      ui->btnUpdateDatabase->setVisible(true);
+    strUrl = strDatabaseUrl;
+    ui->btnStartUpdate->setVisible(false);
+    ui->btnUpdateDatabase->setVisible(true);
   }
 
   QString str0, str1, str2;
@@ -207,7 +207,7 @@ void AutoUpdateDialog::startDownload(bool Database) {
   QNetworkRequest request;
   request.setUrl(QUrl(strUrl));
 
-  reply = manager->get(request);  //发送请求
+  reply = managerDownLoad->get(request);  //发送请求
   connect(reply, &QNetworkReply::readyRead, this,
           &AutoUpdateDialog::doProcessReadyRead);  //可读
   connect(reply, &QNetworkReply::finished, this,
@@ -300,8 +300,7 @@ void AutoUpdateDialog::TextEditToFile(QTextEdit* txtEdit, QString fileName) {
 void AutoUpdateDialog::keyPressEvent(QKeyEvent* event) {
   switch (event->key()) {
     case Qt::Key_Escape:
-      // reply->close();
-      // close();
+
       break;
 
     case Qt::Key_Return:
