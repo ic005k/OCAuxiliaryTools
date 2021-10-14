@@ -339,3 +339,26 @@ QString AutoUpdateDialog::getFormatBybytes(qint64 size) {
     ;
   return QString::number(size, 'f', 1) + units[unit];
 }
+
+QString AutoUpdateDialog::GetFileSize(qint64 size) {
+  if (size < 0) return "0";
+  if (!size) {
+    return "0 Bytes";
+  }
+  static QStringList SizeNames;
+  if (SizeNames.empty()) {
+    SizeNames << " Bytes"
+              << " KB"
+              << " MB"
+              << " GB"
+              << " TB"
+              << " PB"
+              << " EB"
+              << " ZB"
+              << " YB";
+  }
+  int i = qFloor(qLn(size) / qLn(1024));
+  return QString::number(size * 1.0 / qPow(1000, qFloor(i)), 'f',
+                         (i > 1) ? 2 : 0) +
+         SizeNames.at(i);
+}
