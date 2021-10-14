@@ -195,7 +195,7 @@ void MainWindow::initRecentFilesForToolBar() {
   reFileMenu->clear();
   for (int i = 0; i < rfList.count(); i++) {
     QFileInfo fi(rfList.at(i));
-    QAction *act = new QAction(QString::number(i + 1) + " . " + fi.filePath());
+    QAction* act = new QAction(QString::number(i + 1) + " . " + fi.filePath());
     reFileMenu->addAction(act);
     connect(act, &QAction::triggered,
             [=]() { openFile(m_recentFiles->getRecentFiles().at(i)); });
@@ -6606,8 +6606,6 @@ QString MainWindow::getUrl(QVariantList list) {
   if (win) Url = winUrl;
   if (linuxOS) Url = linuxUrl;
   if (osx1012) Url = osx1012Url;
-  // if (Url == "")
-  // Url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
 
   return Url;
 }
@@ -6637,6 +6635,13 @@ int MainWindow::parse_UpdateJSON(QString str) {
     QString Verison = root_Obj.value("tag_name").toString();
 
     this->setFocus();
+    QStringList noteList = ReleaseNote.split("---");
+    if (noteList.count() == 3) {
+      if (zh_cn)
+        ReleaseNote = noteList.at(0) + noteList.at(1);
+      else
+        ReleaseNote = noteList.at(0) + noteList.at(2);
+    }
 
     if (Verison > CurVerison && Url != "") {
       QString warningStr = tr("New version detected!") + "\n" +

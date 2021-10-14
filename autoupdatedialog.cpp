@@ -63,8 +63,10 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total,
 {
   ui->progressBar->setMaximum(all_total);
   ui->progressBar->setValue(recv_total);
-  setWindowTitle(tr("Download Progress") + " : " + GetFileSize(recv_total) +
-                 " -> " + GetFileSize(all_total));
+  // setWindowTitle(tr("Download Progress") + " : " + GetFileSize(recv_total) +
+  //               " -> " + GetFileSize(all_total));
+  setWindowTitle(tr("Download Progress") + " : " + QString::number(recv_total) +
+                 " -> " + QString::number(all_total));
 
   if (recv_total == all_total) {
     if (recv_total < 10000) {
