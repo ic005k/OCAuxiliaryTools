@@ -51,7 +51,7 @@ class AutoUpdateDialog : public QDialog {
 
   QString getFormatBybytes(qint64 size);
 
-  QString humanReadableSize(const qint64& size, int precision);
+  QString GetFileSize(const qint64& size, int precision);
 
  protected:
   void closeEvent(QCloseEvent* event);

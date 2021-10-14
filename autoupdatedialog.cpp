@@ -58,23 +58,14 @@ void AutoUpdateDialog::doProcessReadyRead()  //读取并写入
 
 void AutoUpdateDialog::doProcessFinished() { myfile->close(); }
 
-QString AutoUpdateDialog::getFormatBybytes(qint64 size) {
-  char unit;
-  const char* units[] = {" Bytes", " kB", " MB", " GB"};
-  for (unit = -1; (++unit < 3) && (size > 1023); size /= 1024)
-    ;
-  return QString::number(size, 'f', 1) + units[unit];
-}
-
 void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total,
                                                  qint64 all_total)  //显示
 {
   ui->progressBar->setMaximum(all_total);
   ui->progressBar->setValue(recv_total);
-  QLocale locale = this->locale();
-  QString strRecv = locale.formattedDataSize(recv_total);
-  QString strTotal = locale.formattedDataSize(all_total);
-  setWindowTitle(tr("Download Progress") + " : " + strRecv + " -> " + strTotal);
+
+  setWindowTitle(tr("Download Progress") + " : " + GetFileSize(recv_total, 2) +
+                 " -> " + GetFileSize(all_total, 2));
   // setWindowTitle(tr("Download Progress") + " : " +
   // QString::number(recv_total) +
   //               " -> " + QString::number(all_total));
@@ -318,7 +309,7 @@ void AutoUpdateDialog::keyPressEvent(QKeyEvent* event) {
   }
 }
 
-QString AutoUpdateDialog::humanReadableSize(const qint64& size, int precision) {
+QString AutoUpdateDialog::GetFileSize(const qint64& size, int precision) {
   double sizeAsDouble = size;
   static QStringList measures;
   if (measures.isEmpty())
@@ -340,4 +331,12 @@ QString AutoUpdateDialog::humanReadableSize(const qint64& size, int precision) {
   return QString::fromLatin1("%1 %2")
       .arg(sizeAsDouble, 0, 'f', precision)
       .arg(measure);
+}
+
+QString AutoUpdateDialog::getFormatBybytes(qint64 size) {
+  char unit;
+  const char* units[] = {" Bytes", " kB", " MB", " GB"};
+  for (unit = -1; (++unit < 3) && (size > 1023); size /= 1024)
+    ;
+  return QString::number(size, 'f', 1) + units[unit];
 }
