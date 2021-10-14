@@ -47,9 +47,11 @@ class AutoUpdateDialog : public QDialog {
   QString strLinuxUrl;
   QString strLinuxTargetFile;
 
-  QString GetFileSize(qint64 size);
-
   void TextEditToFile(QTextEdit* txtEdit, QString fileName);
+
+  QString getFormatBybytes(qint64 size);
+
+  QString humanReadableSize(const qint64& size, int precision);
 
  protected:
   void closeEvent(QCloseEvent* event);
