@@ -213,13 +213,14 @@ void AutoUpdateDialog::startDownload(bool Database) {
     ui->btnUpdateDatabase->setVisible(true);
   }
 
-  QString str0, str1, str2;
+  QString strTokyo, strSeoul, strOriginal;
 
-  str0 = "https://download.fastgit.org/";            // 日本东京
-  str1 = "https://ghproxy.com/https://github.com/";  // 韩国首尔
-  str2 = strUrl.replace("https://github.com/", str0);
-  strUrl = str2;
-  // strUrl = "xxx";
+  strOriginal = "https://github.com/";
+  strTokyo = "https://download.fastgit.org/";
+  strSeoul = "https://ghproxy.com/https://github.com/";
+  if (mw_one->zh_cn) {
+    strUrl.replace("https://github.com/", strTokyo);
+  }
 
   QNetworkRequest request;
   request.setUrl(QUrl(strUrl));
