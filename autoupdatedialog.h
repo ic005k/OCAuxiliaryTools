@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QDialog>
 #include <QDir>
+#include <QElapsedTimer>
 #include <QFile>
 #include <QMessageBox>
 #include <QNetworkAccessManager>
@@ -65,6 +66,7 @@ class AutoUpdateDialog : public QDialog {
   void on_btnUpdateDatabase_clicked();
 
  private:
+  QElapsedTimer downloadTimer;
 };
 
 #endif  // AUTOUPDATEDIALOG_H

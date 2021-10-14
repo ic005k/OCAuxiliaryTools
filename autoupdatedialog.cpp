@@ -17,7 +17,6 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
-  ui->label->setVisible(false);
 }
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
@@ -64,22 +63,35 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total,
   ui->progressBar->setMaximum(all_total);
   ui->progressBar->setValue(recv_total);
 
+  // calculate the download speed
+  double speed = recv_total * 1000.0 / downloadTimer.elapsed();
+  QString unit;
+  if (speed < 1024) {
+    unit = "bytes/sec";
+  } else if (speed < 1024 * 1024) {
+    speed /= 1024;
+    unit = "kB/s";
+  } else {
+    speed /= 1024 * 1024;
+    unit = "MB/s";
+  }
+
+  QString strSpeed =
+      QString::fromLatin1("%1 %2").arg(speed, 3, 'f', 1).arg(unit);
+
   setWindowTitle(tr("Download Progress") + " : " + GetFileSize(recv_total, 2) +
-                 " -> " + GetFileSize(all_total, 2));
+                 " -> " + GetFileSize(all_total, 2) + "    " + strSpeed);
   // setWindowTitle(tr("Download Progress") + " : " +
   // QString::number(recv_total) +
   //               " -> " + QString::number(all_total));
 
   if (recv_total == all_total) {
-    if (recv_total < 10000) {
+    if (recv_total < 100000) {
       return;
     }
     ui->btnStartUpdate->setEnabled(true);
     ui->btnUpdateDatabase->setEnabled(true);
     this->repaint();
-    if ((mw_one->win) && ui->btnStartUpdate->isVisible()) {
-      ui->label->setVisible(false);
-    }
 
     if (mw_one->linuxOS) {
       QProcess* p = new QProcess;
@@ -186,7 +198,6 @@ void AutoUpdateDialog::startUpdate() {
 
 void AutoUpdateDialog::startDownload(bool Database) {
   setWindowTitle("");
-  ui->label->setVisible(false);
   ui->btnStartUpdate->setEnabled(false);
   ui->btnUpdateDatabase->setEnabled(false);
   this->repaint();
@@ -217,9 +228,10 @@ void AutoUpdateDialog::startDownload(bool Database) {
           &AutoUpdateDialog::doProcessFinished);  //结束
   connect(reply, &QNetworkReply::downloadProgress, this,
           &AutoUpdateDialog::doProcessDownloadProgress);  //大小
-  connect(reply,
-          QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-          this, &AutoUpdateDialog::doProcessError);  //异常
+  // connect(reply,
+  //        QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
+  //        this, &AutoUpdateDialog::doProcessError);  //异常
+
   QStringList list = strUrl.split("/");
   filename = list.at(list.length() - 1);
   QDir dir;
@@ -236,6 +248,8 @@ void AutoUpdateDialog::startDownload(bool Database) {
   }
   ui->progressBar->setValue(0);
   ui->progressBar->setMinimum(0);
+
+  downloadTimer.start();
 }
 
 void AutoUpdateDialog::closeEvent(QCloseEvent* event) {
