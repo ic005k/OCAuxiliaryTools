@@ -67,6 +67,7 @@ class AutoUpdateDialog : public QDialog {
 
  private:
   QElapsedTimer downloadTimer;
+  bool blCanBeUpdate = false;
 };
 
 #endif  // AUTOUPDATEDIALOG_H

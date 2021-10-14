@@ -55,7 +55,19 @@ void AutoUpdateDialog::doProcessReadyRead()  //读取并写入
   }
 }
 
-void AutoUpdateDialog::doProcessFinished() { myfile->close(); }
+void AutoUpdateDialog::doProcessFinished() {
+  if (!blCanBeUpdate) return;
+  ui->btnStartUpdate->setEnabled(true);
+  ui->btnUpdateDatabase->setEnabled(true);
+  this->repaint();
+
+  if (mw_one->linuxOS) {
+    QProcess* p = new QProcess;
+    p->start("chmod", QStringList() << "+x" << tempDir + filename);
+  }
+
+  myfile->close();
+}
 
 void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total,
                                                  qint64 all_total)  //显示
@@ -81,22 +93,12 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total,
 
   setWindowTitle(tr("Download Progress") + " : " + GetFileSize(recv_total, 2) +
                  " -> " + GetFileSize(all_total, 2) + "    " + strSpeed);
-  // setWindowTitle(tr("Download Progress") + " : " +
-  // QString::number(recv_total) +
-  //               " -> " + QString::number(all_total));
 
   if (recv_total == all_total) {
     if (recv_total < 100000) {
-      return;
-    }
-    ui->btnStartUpdate->setEnabled(true);
-    ui->btnUpdateDatabase->setEnabled(true);
-    this->repaint();
-
-    if (mw_one->linuxOS) {
-      QProcess* p = new QProcess;
-      p->start("chmod", QStringList() << "+x" << tempDir + filename);
-    }
+      blCanBeUpdate = false;
+    } else
+      blCanBeUpdate = true;
   }
 }
 
@@ -217,6 +219,7 @@ void AutoUpdateDialog::startDownload(bool Database) {
   str1 = "https://ghproxy.com/https://github.com/";  // 韩国首尔
   str2 = strUrl.replace("https://github.com/", str0);
   strUrl = str2;
+  // strUrl = "xxx";
 
   QNetworkRequest request;
   request.setUrl(QUrl(strUrl));
