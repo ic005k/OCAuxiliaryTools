@@ -140,7 +140,6 @@ void AutoUpdateDialog::startUpdate() {
     txtEdit->append("open " + strExec);
 
     QString fileName = tempDir + "upocat.sh";
-    // fileName = QDir::homePath() + "/.config/QtOCC/upocat.sh";
     TextEditToFile(txtEdit, fileName);
 
     QProcess::startDetached("bash", QStringList() << fileName);
