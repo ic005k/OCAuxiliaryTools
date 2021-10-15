@@ -398,6 +398,7 @@ QString AutoUpdateDialog::GetFileSize(qint64 size) {
 
 void AutoUpdateDialog::startWgetDownload() {
   ui->btnStartUpdate->setEnabled(false);
+  ui->btnStartUpdate->setDefault(true);
   ui->btnUpdateDatabase->setEnabled(false);
   ui->btnUpdateDatabase->setVisible(false);
   ui->textEdit->clear();
@@ -415,7 +416,7 @@ void AutoUpdateDialog::startWgetDownload() {
   strOriginal = "https://github.com/";
   strTokyo = "https://download.fastgit.org/";
   strSeoul = "https://ghproxy.com/https://github.com/";
-  // strUrl.replace("https://github.com/", strTokyo);
+  strUrl.replace("https://github.com/", strTokyo);
 
   processWget = new QProcess(this);
 
