@@ -47,6 +47,7 @@ jobs:
           # 拷贝依赖
           cp -r Database bin/release/${targetName}.app/Contents/MacOS/Database
           cp -f Database/mac/wget bin/release/${targetName}.app/Contents/MacOS/wget
+          chmod +x bin/release/${targetName}.app/Contents/MacOS/wget
           chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/macserial
           chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/ocvalidate
           chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/ocpasswordgen
