@@ -20,6 +20,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
+  ui->progressBar->setVisible(false);
 }
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
@@ -437,7 +438,9 @@ void AutoUpdateDialog::startWgetDownload() {
     processWget->start(strExec, QStringList() << "--allow-overwrite=true"
                                               << "--file-allocation=none"
                                               << "-l"
-                                              << "" << strUrl);
+                                              << "-"
+                                              << "--log-level=warn"
+                                              << "--log-level=info" << strUrl);
     // processWget->start(strExec, QStringList()
     //                                 << "-v"
     //                                 << "-o" << tempDir + filename << strUrl);
@@ -472,13 +475,9 @@ void AutoUpdateDialog::readResult(int exitCode) {
 }
 
 void AutoUpdateDialog::onReadData() {
-  QTime time = QTime::currentTime();
-
-  if (time.second() % 1 == 0) {
-    QString result = processWget->readAllStandardOutput();
-    ui->textEdit->append(result);
-    ui->textEdit->moveCursor(QTextCursor::End);
-  }
+  QString result = processWget->readAllStandardOutput();
+  ui->textEdit->append(result);
+  ui->textEdit->moveCursor(QTextCursor::End);
 }
 
 void AutoUpdateDialog::UpdateTextShow() {
