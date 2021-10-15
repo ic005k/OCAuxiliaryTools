@@ -9,6 +9,9 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::AutoUpdateDialog) {
   ui->setupUi(this);
 
+  tmrUpdateShow = new QTimer(this);
+  connect(tmrUpdateShow, SIGNAL(timeout()), this, SLOT(UpdateTextShow()));
+
   QFileInfo fi(qAppName());
   strLinuxTargetFile = fi.absoluteFilePath();
 
@@ -17,6 +20,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
+  // ui->btnTest->setVisible(false);
 }
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
@@ -56,17 +60,22 @@ void AutoUpdateDialog::doProcessReadyRead()  //读取并写入
 }
 
 void AutoUpdateDialog::doProcessFinished() {
-  if (!blCanBeUpdate) return;
-  ui->btnStartUpdate->setEnabled(true);
-  ui->btnUpdateDatabase->setEnabled(true);
-  this->repaint();
+  if (reply->error() == QNetworkReply::NoError) {
+    myfile->flush();
+    myfile->close();
+    if (!blCanBeUpdate) return;
+    ui->btnStartUpdate->setEnabled(true);
+    ui->btnUpdateDatabase->setEnabled(true);
+    this->repaint();
 
-  if (mw_one->linuxOS) {
-    QProcess* p = new QProcess;
-    p->start("chmod", QStringList() << "+x" << tempDir + filename);
+    if (mw_one->linuxOS) {
+      QProcess* p = new QProcess;
+      p->start("chmod", QStringList() << "+x" << tempDir + filename);
+    }
+
+  } else {
+    // QMessageBox::critical(NULL, tr("Error"), "Failed!!!");
   }
-
-  myfile->close();
 }
 
 void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total,
@@ -103,7 +112,7 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total,
 }
 
 void AutoUpdateDialog::doProcessError(QNetworkReply::NetworkError code) {
-  qDebug() << code;
+  qDebug() << "Error : " << reply->error();
 }
 
 void AutoUpdateDialog::on_btnStartUpdate_clicked() {
@@ -218,23 +227,24 @@ void AutoUpdateDialog::startDownload(bool Database) {
   strOriginal = "https://github.com/";
   strTokyo = "https://download.fastgit.org/";
   strSeoul = "https://ghproxy.com/https://github.com/";
-  if (mw_one->zh_cn) {
-    strUrl.replace("https://github.com/", strTokyo);
-  }
+  // strUrl.replace("https://github.com/", strTokyo);
 
   QNetworkRequest request;
   request.setUrl(QUrl(strUrl));
+  request.setHeader(QNetworkRequest::ContentTypeHeader,
+                    "application/octet-stream");
 
   reply = managerDownLoad->get(request);  //发送请求
+
   connect(reply, &QNetworkReply::readyRead, this,
           &AutoUpdateDialog::doProcessReadyRead);  //可读
   connect(reply, &QNetworkReply::finished, this,
           &AutoUpdateDialog::doProcessFinished);  //结束
   connect(reply, &QNetworkReply::downloadProgress, this,
           &AutoUpdateDialog::doProcessDownloadProgress);  //大小
-  // connect(reply,
-  //        QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-  //        this, &AutoUpdateDialog::doProcessError);  //异常
+  connect(reply,
+          QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
+          this, &AutoUpdateDialog::doProcessError);  //异常
 
   QStringList list = strUrl.split("/");
   filename = list.at(list.length() - 1);
@@ -258,7 +268,11 @@ void AutoUpdateDialog::startDownload(bool Database) {
 
 void AutoUpdateDialog::closeEvent(QCloseEvent* event) {
   Q_UNUSED(event);
-  reply->close();
+  // myfile->close();
+  // reply->close();
+  // reply->deleteLater();
+  processWget->kill();
+  tmrUpdateShow->stop();
 }
 
 void AutoUpdateDialog::on_btnUpdateDatabase_clicked() {
@@ -379,4 +393,90 @@ QString AutoUpdateDialog::GetFileSize(qint64 size) {
   return QString::number(size * 1.0 / qPow(1000, qFloor(i)), 'f',
                          (i > 1) ? 2 : 0) +
          SizeNames.at(i);
+}
+
+void AutoUpdateDialog::startWgetDownload() {
+  ui->btnStartUpdate->setEnabled(false);
+  ui->btnUpdateDatabase->setEnabled(false);
+  ui->textEdit->clear();
+  ui->textEdit->setReadOnly(true);
+
+  QStringList list = strUrl.split("/");
+  filename = list.at(list.length() - 1);
+  QDir dir;
+  if (dir.mkpath(tempDir)) {
+  }
+  QString file = tempDir + filename;
+
+  QString strTokyo, strSeoul, strOriginal;
+
+  strOriginal = "https://github.com/";
+  strTokyo = "https://download.fastgit.org/";
+  strSeoul = "https://ghproxy.com/https://github.com/";
+  // strUrl.replace("https://github.com/", strTokyo);
+
+  processWget = new QProcess(this);
+  QFileInfo appInfo(qApp->applicationDirPath());
+
+  // connect(processWget, SIGNAL(readyReadStandardOutput()), this,
+  //        SLOT(onReadData()));
+
+  // processWget->setReadChannel(QProcess::StandardOutput);
+
+  connect(processWget, SIGNAL(finished(int)), this, SLOT(readResult(int)));
+
+  processWget->start(appInfo.filePath() + "/wget", QStringList()
+                                                       << "-v"
+                                                       << "-O" << file << "-o"
+                                                       << "info.txt" << strUrl);
+  // processWget->start("curl", QStringList() << "-O" << strUrl);
+
+  // processWget->start("ping", QStringList() << "www.qq.com");
+  processWget->waitForStarted();
+  tmrUpdateShow->start(100);
+}
+
+void AutoUpdateDialog::readResult(int exitCode) {
+  if (exitCode == 0) {
+    qDebug() << "End";
+    tmrUpdateShow->stop();
+    ui->btnStartUpdate->setEnabled(true);
+    ui->btnUpdateDatabase->setEnabled(true);
+    UpdateTextShow();
+  }
+}
+
+void AutoUpdateDialog::on_btnTest_clicked() {}
+
+void AutoUpdateDialog::onReadData() {
+  QTextCodec* gbkCodec = QTextCodec::codecForName("GBK");
+  QString result = gbkCodec->toUnicode(processWget->readAll());
+  qDebug() << result;
+  ui->textEdit->append(result);
+}
+
+void AutoUpdateDialog::UpdateTextShow() {
+  QFile* file = new QFile;
+  file->setFileName("info.txt");
+  bool ok = file->open(QIODevice::ReadOnly);
+  if (ok) {
+    QTextStream in(file);
+    // QTextEdit* tempEdit = new QTextEdit;
+    QString strOrg = in.readAll();
+    QString strCur = ui->textEdit->toPlainText();
+    if (strCur != strOrg) {
+      ui->textEdit->setText(strOrg);
+      ui->textEdit->moveCursor(QTextCursor::End);
+    }
+    // int lineCount = tempEdit->document()->lineCount();
+    // ui->textEdit->append(QString::number(lineCount));
+    // ui->textEdit->append(in.readLine(lineCount + 1));
+    file->close();
+    delete file;
+
+  } else {
+    QMessageBox::information(this, "Error Message",
+                             "Open File:" + file->errorString());
+    return;
+  }
 }

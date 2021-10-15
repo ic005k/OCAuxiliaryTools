@@ -11,6 +11,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QProcess>
+#include <QTextCursor>
 #include <QTextEdit>
 #include <QTextStream>
 #include <QtMath>
@@ -56,6 +57,8 @@ class AutoUpdateDialog : public QDialog {
 
   QString GetFileSize(qint64 size);
 
+  void startWgetDownload();
+
  protected:
   void closeEvent(QCloseEvent* event);
   void keyPressEvent(QKeyEvent* event);
@@ -65,9 +68,19 @@ class AutoUpdateDialog : public QDialog {
 
   void on_btnUpdateDatabase_clicked();
 
+  void readResult(int exitCode);
+
+  void on_btnTest_clicked();
+
+  void onReadData();
+
+  void UpdateTextShow();
+
  private:
   QElapsedTimer downloadTimer;
   bool blCanBeUpdate = false;
+  QProcess* processWget;
+  QTimer* tmrUpdateShow;
 };
 
 #endif  // AUTOUPDATEDIALOG_H
