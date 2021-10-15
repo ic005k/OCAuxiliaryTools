@@ -406,6 +406,7 @@ void AutoUpdateDialog::startWgetDownload() {
   ui->textEdit->setReadOnly(true);
   ui->progressBar->setMinimum(0);
   ui->progressBar->setMaximum(0);
+  setWindowTitle("");
 
   QStringList list = strUrl.split("/");
   filename = list.at(list.length() - 1);
@@ -465,6 +466,7 @@ void AutoUpdateDialog::readResult(int exitCode) {
     ui->progressBar->setMaximum(100);
     ui->btnStartUpdate->setEnabled(true);
     ui->btnUpdateDatabase->setEnabled(true);
+    setWindowTitle("");
     if (mw_one->win || mw_one->linuxOS) UpdateTextShow();
 
     if (mw_one->linuxOS) {
@@ -478,6 +480,19 @@ void AutoUpdateDialog::onReadData() {
   QString result = processWget->readAllStandardOutput();
   ui->textEdit->append(result);
   ui->textEdit->moveCursor(QTextCursor::End);
+
+  QTextEdit* editTemp = new QTextEdit;
+  editTemp->setText(ui->textEdit->toPlainText());
+  for (int i = editTemp->document()->lineCount() - 1; i > 0; i--) {
+    QTextBlock block = editTemp->document()->findBlockByNumber(i);
+    editTemp->setTextCursor(QTextCursor(block));
+    QString lineText =
+        editTemp->document()->findBlockByNumber(i).text().trimmed();
+    if (lineText.mid(0, 2) == "[#") {
+      setWindowTitle(lineText);
+      break;
+    }
+  }
 }
 
 void AutoUpdateDialog::UpdateTextShow() {
