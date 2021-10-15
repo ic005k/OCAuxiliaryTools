@@ -21,7 +21,6 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
   ui->btnTest->setVisible(false);
-  ui->progressBar->setVisible(false);
 }
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
@@ -403,6 +402,8 @@ void AutoUpdateDialog::startWgetDownload() {
   ui->btnUpdateDatabase->setVisible(false);
   ui->textEdit->clear();
   ui->textEdit->setReadOnly(true);
+  ui->progressBar->setMinimum(0);
+  ui->progressBar->setMaximum(0);
 
   QStringList list = strUrl.split("/");
   filename = list.at(list.length() - 1);
@@ -420,33 +421,45 @@ void AutoUpdateDialog::startWgetDownload() {
 
   processWget = new QProcess(this);
 
-  // connect(processWget, SIGNAL(readyReadStandardOutput()), this,
-  //        SLOT(onReadData()));
-  // processWget->setReadChannel(QProcess::StandardOutput);
-
   connect(processWget, SIGNAL(finished(int)), this, SLOT(readResult(int)));
 
   QString strExec;
-  if (mw_one->mac || mw_one->osx1012)
-    strExec = qApp->applicationDirPath() + "/wget";
-  if (mw_one->win) strExec = qApp->applicationDirPath() + "/wget.exe";
-  if (mw_one->linuxOS) strExec = "wget";
+  if (mw_one->mac || mw_one->osx1012) {
+    // strExec = qApp->applicationDirPath() + "/wget";
+    strExec = qApp->applicationDirPath() + "/aria2c";
+    connect(processWget, SIGNAL(readyReadStandardOutput()), this,
+            SLOT(onReadData()));
+    processWget->setReadChannel(QProcess::StandardOutput);
 
-  processWget->start(strExec, QStringList() << "-v"
-                                            << "-O" << file << "-o"
-                                            << tempDir + "info.txt" << strUrl);
+    QDir::setCurrent(tempDir);
+    processWget->start(strExec, QStringList() << "--allow-overwrite=true"
+                                              << "--file-allocation=none"
+                                              << "-o" << filename << strUrl);
+    // processWget->start(strExec, QStringList()
+    //                                 << "-v"
+    //                                 << "-o" << tempDir + filename << strUrl);
+  } else {
+    if (mw_one->win) strExec = qApp->applicationDirPath() + "/wget.exe";
+    if (mw_one->linuxOS) strExec = "wget";
+
+    processWget->start(strExec, QStringList()
+                                    << "-v"
+                                    << "-O" << file << "-o"
+                                    << tempDir + "info.txt" << strUrl);
+    tmrUpdateShow->start(100);
+  }
   // processWget->start("curl", QStringList() << "-O" << strUrl);
   // processWget->start("ping", QStringList() << "www.qq.com");
   processWget->waitForStarted();
-  tmrUpdateShow->start(100);
 }
 
 void AutoUpdateDialog::readResult(int exitCode) {
   if (exitCode == 0) {
     tmrUpdateShow->stop();
+    ui->progressBar->setMaximum(100);
     ui->btnStartUpdate->setEnabled(true);
     ui->btnUpdateDatabase->setEnabled(true);
-    UpdateTextShow();
+    if (mw_one->win || mw_one->linuxOS) UpdateTextShow();
 
     if (mw_one->linuxOS) {
       QProcess* p = new QProcess;
@@ -455,13 +468,12 @@ void AutoUpdateDialog::readResult(int exitCode) {
   }
 }
 
-void AutoUpdateDialog::on_btnTest_clicked() {}
+void AutoUpdateDialog::on_btnTest_clicked() { onReadData(); }
 
 void AutoUpdateDialog::onReadData() {
-  QTextCodec* gbkCodec = QTextCodec::codecForName("GBK");
-  QString result = gbkCodec->toUnicode(processWget->readAll());
-  qDebug() << result;
+  QString result = processWget->readAllStandardOutput();
   ui->textEdit->append(result);
+  ui->textEdit->moveCursor(QTextCursor::End);
 }
 
 void AutoUpdateDialog::UpdateTextShow() {
