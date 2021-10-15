@@ -6656,14 +6656,14 @@ int MainWindow::parse_UpdateJSON(QString str) {
         int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
                                        tr("Cancel"));
         if (ret == 0) {
-          ShowAutoUpdateDlg(false);
+            on_actionOnline_Download_Updates_triggered();
         }
       } else {
         if (!autoCheckUpdate) {
           int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
                                          tr("Cancel"));
           if (ret == 0) {
-            ShowAutoUpdateDlg(false);
+              on_actionOnline_Download_Updates_triggered();
           }
         }
       }
@@ -10007,7 +10007,8 @@ void MainWindow::ShowAutoUpdateDlg(bool Database) {
   dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() |
                                 Qt::WindowStaysOnTopHint);
   dlgAutoUpdate->show();
-  dlgAutoUpdate->startDownload(Database);
+  // dlgAutoUpdate->startDownload(Database);
+  dlgAutoUpdate->startWgetDownload();
 }
 
 void MainWindow::on_txtEditHex_textChanged(const QString& arg1) {

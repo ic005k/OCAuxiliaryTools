@@ -20,7 +20,8 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
-  // ui->btnTest->setVisible(false);
+  ui->btnTest->setVisible(false);
+  ui->progressBar->setVisible(false);
 }
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
@@ -398,6 +399,7 @@ QString AutoUpdateDialog::GetFileSize(qint64 size) {
 void AutoUpdateDialog::startWgetDownload() {
   ui->btnStartUpdate->setEnabled(false);
   ui->btnUpdateDatabase->setEnabled(false);
+  ui->btnUpdateDatabase->setVisible(false);
   ui->textEdit->clear();
   ui->textEdit->setReadOnly(true);
 
@@ -420,17 +422,22 @@ void AutoUpdateDialog::startWgetDownload() {
 
   // connect(processWget, SIGNAL(readyReadStandardOutput()), this,
   //        SLOT(onReadData()));
-
   // processWget->setReadChannel(QProcess::StandardOutput);
 
   connect(processWget, SIGNAL(finished(int)), this, SLOT(readResult(int)));
 
-  processWget->start(appInfo.filePath() + "/wget", QStringList()
-                                                       << "-v"
-                                                       << "-O" << file << "-o"
-                                                       << "info.txt" << strUrl);
-  // processWget->start("curl", QStringList() << "-O" << strUrl);
+  QString strExec;
+  if (mw_one->mac || mw_one->osx1012)
+      strExec = appInfo.filePath() + "/wget";
+  if (mw_one->win)
+      strExec = appInfo.filePath() + "/wget.exe";
+  if (mw_one->linuxOS)
+      strExec = "wget";
 
+  processWget->start(strExec,
+                     QStringList() << "-v"
+                                   << "-O" << file << "-o" << tempDir + "info.txt" << strUrl);
+  // processWget->start("curl", QStringList() << "-O" << strUrl);
   // processWget->start("ping", QStringList() << "www.qq.com");
   processWget->waitForStarted();
   tmrUpdateShow->start(100);
@@ -438,7 +445,6 @@ void AutoUpdateDialog::startWgetDownload() {
 
 void AutoUpdateDialog::readResult(int exitCode) {
   if (exitCode == 0) {
-    qDebug() << "End";
     tmrUpdateShow->stop();
     ui->btnStartUpdate->setEnabled(true);
     ui->btnUpdateDatabase->setEnabled(true);
@@ -457,24 +463,22 @@ void AutoUpdateDialog::onReadData() {
 
 void AutoUpdateDialog::UpdateTextShow() {
   QFile* file = new QFile;
-  file->setFileName("info.txt");
+  file->setFileName(tempDir + "info.txt");
   bool ok = file->open(QIODevice::ReadOnly);
   if (ok) {
     QTextStream in(file);
-    // QTextEdit* tempEdit = new QTextEdit;
-    QString strOrg = in.readAll();
-    QString strCur = ui->textEdit->toPlainText();
+    QString strOrg = in.readAll().trimmed();
+    QString strCur = ui->textEdit->toPlainText().trimmed();
     if (strCur != strOrg) {
-      ui->textEdit->setText(strOrg);
-      ui->textEdit->moveCursor(QTextCursor::End);
+        ui->textEdit->setText(strOrg);
+        ui->textEdit->moveCursor(QTextCursor::End);
     }
-    // int lineCount = tempEdit->document()->lineCount();
-    // ui->textEdit->append(QString::number(lineCount));
-    // ui->textEdit->append(in.readLine(lineCount + 1));
+
     file->close();
     delete file;
 
   } else {
+    tmrUpdateShow->stop();
     QMessageBox::information(this, "Error Message",
                              "Open File:" + file->errorString());
     return;
