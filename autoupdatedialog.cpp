@@ -75,7 +75,7 @@ void AutoUpdateDialog::doProcessFinished() {
     }
 
   } else {
-    // QMessageBox::critical(NULL, tr("Error"), "Failed!!!");
+    QMessageBox::critical(NULL, tr("Error"), "Failed!!!");
   }
 }
 
@@ -418,7 +418,6 @@ void AutoUpdateDialog::startWgetDownload() {
   // strUrl.replace("https://github.com/", strTokyo);
 
   processWget = new QProcess(this);
-  QFileInfo appInfo(qApp->applicationDirPath());
 
   // connect(processWget, SIGNAL(readyReadStandardOutput()), this,
   //        SLOT(onReadData()));
@@ -428,15 +427,13 @@ void AutoUpdateDialog::startWgetDownload() {
 
   QString strExec;
   if (mw_one->mac || mw_one->osx1012)
-      strExec = appInfo.filePath() + "/wget";
-  if (mw_one->win)
-      strExec = appInfo.filePath() + "/wget.exe";
-  if (mw_one->linuxOS)
-      strExec = "wget";
+    strExec = qApp->applicationDirPath() + "/wget";
+  if (mw_one->win) strExec = qApp->applicationDirPath() + "/wget.exe";
+  if (mw_one->linuxOS) strExec = "wget";
 
-  processWget->start(strExec,
-                     QStringList() << "-v"
-                                   << "-O" << file << "-o" << tempDir + "info.txt" << strUrl);
+  processWget->start(strExec, QStringList() << "-v"
+                                            << "-O" << file << "-o"
+                                            << tempDir + "info.txt" << strUrl);
   // processWget->start("curl", QStringList() << "-O" << strUrl);
   // processWget->start("ping", QStringList() << "www.qq.com");
   processWget->waitForStarted();
@@ -449,6 +446,11 @@ void AutoUpdateDialog::readResult(int exitCode) {
     ui->btnStartUpdate->setEnabled(true);
     ui->btnUpdateDatabase->setEnabled(true);
     UpdateTextShow();
+
+    if (mw_one->linuxOS) {
+      QProcess* p = new QProcess;
+      p->start("chmod", QStringList() << "+x" << tempDir + filename);
+    }
   }
 }
 
@@ -470,8 +472,8 @@ void AutoUpdateDialog::UpdateTextShow() {
     QString strOrg = in.readAll().trimmed();
     QString strCur = ui->textEdit->toPlainText().trimmed();
     if (strCur != strOrg) {
-        ui->textEdit->setText(strOrg);
-        ui->textEdit->moveCursor(QTextCursor::End);
+      ui->textEdit->setText(strOrg);
+      ui->textEdit->moveCursor(QTextCursor::End);
     }
 
     file->close();
