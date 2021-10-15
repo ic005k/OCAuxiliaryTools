@@ -20,7 +20,6 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
-  ui->btnTest->setVisible(false);
 }
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
@@ -271,7 +270,9 @@ void AutoUpdateDialog::closeEvent(QCloseEvent* event) {
   // myfile->close();
   // reply->close();
   // reply->deleteLater();
+  processWget->close();
   processWget->kill();
+  delete processWget;
   tmrUpdateShow->stop();
 }
 
@@ -412,11 +413,12 @@ void AutoUpdateDialog::startWgetDownload() {
   }
   QString file = tempDir + filename;
 
-  QString strTokyo, strSeoul, strOriginal;
+  QString strTokyo, strSeoul, strOriginal, strTest;
 
   strOriginal = "https://github.com/";
   strTokyo = "https://download.fastgit.org/";
   strSeoul = "https://ghproxy.com/https://github.com/";
+  strTest = "https://gh.api.99988866.xyz/https://github.com/";
   strUrl.replace("https://github.com/", strTokyo);
 
   processWget = new QProcess(this);
@@ -434,7 +436,8 @@ void AutoUpdateDialog::startWgetDownload() {
     QDir::setCurrent(tempDir);
     processWget->start(strExec, QStringList() << "--allow-overwrite=true"
                                               << "--file-allocation=none"
-                                              << "-o" << filename << strUrl);
+                                              << "-l"
+                                              << "" << strUrl);
     // processWget->start(strExec, QStringList()
     //                                 << "-v"
     //                                 << "-o" << tempDir + filename << strUrl);
@@ -468,12 +471,14 @@ void AutoUpdateDialog::readResult(int exitCode) {
   }
 }
 
-void AutoUpdateDialog::on_btnTest_clicked() { onReadData(); }
-
 void AutoUpdateDialog::onReadData() {
-  QString result = processWget->readAllStandardOutput();
-  ui->textEdit->append(result);
-  ui->textEdit->moveCursor(QTextCursor::End);
+  QTime time = QTime::currentTime();
+
+  if (time.second() % 1 == 0) {
+    QString result = processWget->readAllStandardOutput();
+    ui->textEdit->append(result);
+    ui->textEdit->moveCursor(QTextCursor::End);
+  }
 }
 
 void AutoUpdateDialog::UpdateTextShow() {

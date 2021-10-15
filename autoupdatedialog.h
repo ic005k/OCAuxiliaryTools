@@ -70,8 +70,6 @@ class AutoUpdateDialog : public QDialog {
 
   void readResult(int exitCode);
 
-  void on_btnTest_clicked();
-
   void onReadData();
 
   void UpdateTextShow();

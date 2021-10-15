@@ -7,20 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>598</width>
-    <height>340</height>
+    <height>189</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="4" column="0">
-    <widget class="QPushButton" name="btnTest">
-     <property name="text">
-      <string>test</string>
-     </property>
-    </widget>
-   </item>
    <item row="3" column="0">
     <widget class="QPushButton" name="btnUpdateDatabase">
      <property name="text">
@@ -28,10 +21,13 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QPushButton" name="btnStartUpdate">
-     <property name="text">
-      <string>Close and start upgrade</string>
+   <item row="0" column="0">
+    <widget class="QTextEdit" name="textEdit">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>60</height>
+      </size>
      </property>
     </widget>
    </item>
@@ -48,8 +44,12 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0">
-    <widget class="QTextEdit" name="textEdit"/>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="btnStartUpdate">
+     <property name="text">
+      <string>Close and start upgrade</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
