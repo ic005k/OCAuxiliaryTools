@@ -51,6 +51,7 @@ jobs:
           
           cp -f Info.plist bin/release/${targetName}.app/Contents/Info.plist
           cp -f Database/mac/wget bin/release/${targetName}.app/Contents/MacOS/wget
+          chmod +x bin/release/${targetName}.app/Contents/MacOS/wget
           
           macdeployqt bin/release/${targetName}.app -qmldir=. -verbose=1 -dmg
           
