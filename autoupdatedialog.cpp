@@ -434,6 +434,8 @@ void AutoUpdateDialog::startWgetDownload() {
     connect(processWget, SIGNAL(readyReadStandardOutput()), this,
             SLOT(onReadData()));
     processWget->setReadChannel(QProcess::StandardOutput);
+    ui->textEdit->append("Source: " + strUrl);
+    ui->textEdit->append("Target: " + tempDir + filename);
 
     QDir::setCurrent(tempDir);
     processWget->start(strExec, QStringList() << "--allow-overwrite=true"
