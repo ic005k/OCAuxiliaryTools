@@ -21,7 +21,6 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
   ui->progressBar->setVisible(false);
-  ui->textEdit->setFont(QFont("Menlo", 12));
 }
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
@@ -408,6 +407,8 @@ void AutoUpdateDialog::startWgetDownload() {
   ui->progressBar->setMinimum(0);
   ui->progressBar->setMaximum(0);
   setWindowTitle("");
+  if (mw_one->mac || mw_one->osx1012)
+      ui->textEdit->setFont(QFont("Menlo", 12));
 
   QStringList list = strUrl.split("/");
   filename = list.at(list.length() - 1);
@@ -498,26 +499,30 @@ void AutoUpdateDialog::onReadData() {
   }
 }
 
-void AutoUpdateDialog::UpdateTextShow() {
-  QFile* file = new QFile;
-  file->setFileName(tempDir + "info.txt");
-  bool ok = file->open(QIODevice::ReadOnly);
-  if (ok) {
-    QTextStream in(file);
-    QString strOrg = in.readAll().trimmed();
-    QString strCur = ui->textEdit->toPlainText().trimmed();
-    if (strCur != strOrg) {
-      ui->textEdit->setText(strOrg);
-      ui->textEdit->moveCursor(QTextCursor::End);
+void AutoUpdateDialog::UpdateTextShow()
+{
+    QString strInfoFile = tempDir + "info.txt";
+    if (!QFileInfo(strInfoFile).exists())
+        return;
+
+    QFile *file = new QFile;
+    file->setFileName(strInfoFile);
+    bool ok = file->open(QIODevice::ReadOnly);
+    if (ok) {
+        QTextStream in(file);
+        QString strOrg = in.readAll().trimmed();
+        QString strCur = ui->textEdit->toPlainText().trimmed();
+        if (strCur != strOrg) {
+            ui->textEdit->setText(strOrg);
+            ui->textEdit->moveCursor(QTextCursor::End);
+        }
+
+        file->close();
+        delete file;
+
+    } else {
+        tmrUpdateShow->stop();
+        QMessageBox::information(this, "Error Message", "Open File:" + file->errorString());
+        return;
     }
-
-    file->close();
-    delete file;
-
-  } else {
-    tmrUpdateShow->stop();
-    QMessageBox::information(this, "Error Message",
-                             "Open File:" + file->errorString());
-    return;
-  }
 }
