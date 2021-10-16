@@ -430,8 +430,8 @@ void AutoUpdateDialog::startWgetDownload() {
 
   QString strExec;
   if (mw_one->mac || mw_one->osx1012) {
-    // strExec = qApp->applicationDirPath() + "/wget";
-    strExec = qApp->applicationDirPath() + "/aria2c";
+    // strExec = mw_one->strAppExePath + "/wget";
+    strExec = mw_one->strAppExePath + "/aria2c";
     connect(processWget, SIGNAL(readyReadStandardOutput()), this,
             SLOT(onReadData()));
     processWget->setReadChannel(QProcess::StandardOutput);
@@ -449,7 +449,7 @@ void AutoUpdateDialog::startWgetDownload() {
     //                                 << "-v"
     //                                 << "-o" << tempDir + filename << strUrl);
   } else {
-    if (mw_one->win) strExec = qApp->applicationDirPath() + "/wget.exe";
+    if (mw_one->win) strExec = mw_one->strAppExePath + "/wget.exe";
     if (mw_one->linuxOS) strExec = "wget";
 
     processWget->start(strExec, QStringList()

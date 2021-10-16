@@ -87,6 +87,7 @@ MainWindow::MainWindow(QWidget* parent)
   dlgAutoUpdate = new AutoUpdateDialog(this);
   dlgSyncOC = new SyncOCDialog(this);
   dlgPresetValues = new dlgPreset(this);
+  strAppExePath = qApp->applicationDirPath();
 
   QDir dir;
   if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) {
@@ -6656,14 +6657,14 @@ int MainWindow::parse_UpdateJSON(QString str) {
         int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
                                        tr("Cancel"));
         if (ret == 0) {
-            on_actionOnline_Download_Updates_triggered();
+          on_actionOnline_Download_Updates_triggered();
         }
       } else {
         if (!autoCheckUpdate) {
           int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
                                          tr("Cancel"));
           if (ret == 0) {
-              on_actionOnline_Download_Updates_triggered();
+            on_actionOnline_Download_Updates_triggered();
           }
         }
       }

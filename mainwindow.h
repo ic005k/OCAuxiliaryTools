@@ -77,6 +77,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  QString strAppExePath;
   QAction* cutAction;
   QAction* copyAction;
   QAction* pasteAction;
