@@ -407,8 +407,7 @@ void AutoUpdateDialog::startWgetDownload() {
   ui->progressBar->setMinimum(0);
   ui->progressBar->setMaximum(0);
   setWindowTitle("");
-  if (mw_one->mac || mw_one->osx1012)
-      ui->textEdit->setFont(QFont("Menlo", 12));
+  if (mw_one->mac || mw_one->osx1012) ui->textEdit->setFont(QFont("Menlo", 12));
 
   QStringList list = strUrl.split("/");
   filename = list.at(list.length() - 1);
@@ -423,7 +422,7 @@ void AutoUpdateDialog::startWgetDownload() {
   strTokyo = "https://download.fastgit.org/";
   strSeoul = "https://ghproxy.com/https://github.com/";
   strTest = "https://gh.api.99988866.xyz/https://github.com/";
-  strUrl.replace("https://github.com/", strTokyo);
+  if (mw_one->zh_cn) strUrl.replace("https://github.com/", strTokyo);
 
   processWget = new QProcess(this);
 
@@ -499,30 +498,29 @@ void AutoUpdateDialog::onReadData() {
   }
 }
 
-void AutoUpdateDialog::UpdateTextShow()
-{
-    QString strInfoFile = tempDir + "info.txt";
-    if (!QFileInfo(strInfoFile).exists())
-        return;
+void AutoUpdateDialog::UpdateTextShow() {
+  QString strInfoFile = tempDir + "info.txt";
+  if (!QFileInfo(strInfoFile).exists()) return;
 
-    QFile *file = new QFile;
-    file->setFileName(strInfoFile);
-    bool ok = file->open(QIODevice::ReadOnly);
-    if (ok) {
-        QTextStream in(file);
-        QString strOrg = in.readAll().trimmed();
-        QString strCur = ui->textEdit->toPlainText().trimmed();
-        if (strCur != strOrg) {
-            ui->textEdit->setText(strOrg);
-            ui->textEdit->moveCursor(QTextCursor::End);
-        }
-
-        file->close();
-        delete file;
-
-    } else {
-        tmrUpdateShow->stop();
-        QMessageBox::information(this, "Error Message", "Open File:" + file->errorString());
-        return;
+  QFile* file = new QFile;
+  file->setFileName(strInfoFile);
+  bool ok = file->open(QIODevice::ReadOnly);
+  if (ok) {
+    QTextStream in(file);
+    QString strOrg = in.readAll().trimmed();
+    QString strCur = ui->textEdit->toPlainText().trimmed();
+    if (strCur != strOrg) {
+      ui->textEdit->setText(strOrg);
+      ui->textEdit->moveCursor(QTextCursor::End);
     }
+
+    file->close();
+    delete file;
+
+  } else {
+    tmrUpdateShow->stop();
+    QMessageBox::information(this, "Error Message",
+                             "Open File:" + file->errorString());
+    return;
+  }
 }
