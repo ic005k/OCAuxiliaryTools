@@ -49,7 +49,7 @@ jobs:
           
           cp -f Database/mac/aria2c bin/release/${targetName}.app/Contents/MacOS/aria2c
           chmod +x bin/release/${targetName}.app/Contents/MacOS/aria2c
-          rm Database/mac/aria2c
+          rm bin/release/${targetName}.app/Contents/MacOS/Database/mac/aria2c
           
           chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/macserial
           chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/ocvalidate
