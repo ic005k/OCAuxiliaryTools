@@ -21,6 +21,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
   ui->progressBar->setVisible(false);
+  ui->textEdit->setFont(QFont("Menlo", 12));
 }
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
