@@ -19,17 +19,9 @@
 
 [discourse-link]: https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-auxiliary-tools/
 
-
-
-
 OC辅助工具（简称OCAT或ocat） = Config.plist编辑器 + Config.plist数据库 + ...
 
 OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下载
-
-[0.7.3](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210919) |
-[0.7.2](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210828) |
-[0.7.1](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210715) |
-[0.7.0](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210608) 
 
 ## 如何配置一个全新的EFI？
 * 这个过程非常简单，只需点击工具栏上的“数据库”，在数据库列表里面双击“Sample.plist”（这个文件是OC官方提供的配置文件示例），此时会自动在桌面产生一个EFI文件夹，过程完成。
@@ -52,31 +44,6 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 
 ## 关于“预置”功能
 * 这是一个开放性的接口，预置文件位于数据库目录下preset里面的PreSet.plist（通过工具栏上的“打开数据库目录”），您可以随时采用各种Plist编辑器来编辑它，就像编辑Config.plist一样。很简单，它其实就是从Config.plist里面剥离出来的。
-
-## 部分功能请看下面的截图：
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat1.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat2.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat3.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat4.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat5.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat6.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat7.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat8.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat9.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat10.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat11.png)
-
 
 ### 感谢以下开源软件的支持！
 
