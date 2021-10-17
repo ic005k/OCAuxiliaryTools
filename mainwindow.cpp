@@ -10349,3 +10349,9 @@ void MainWindow::on_btnPresetNVLegacy_clicked() {
 }
 
 void MainWindow::on_actionAutoChkUpdate_triggered() {}
+
+void MainWindow::on_actionEdit_Presets_triggered() {
+  QString dirpath = strAppExePath + "/Database/preset/PreSet.plist";
+  QString dir = "file:" + dirpath;
+  QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
+}

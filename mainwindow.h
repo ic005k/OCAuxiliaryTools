@@ -884,6 +884,8 @@ class MainWindow : public QMainWindow {
 
   void on_actionAutoChkUpdate_triggered();
 
+  void on_actionEdit_Presets_triggered();
+
  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;

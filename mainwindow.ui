@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -4861,11 +4861,11 @@ Third party drivers may introduce additional security (and performance) consider
                   <item row="0" column="3">
                    <widget class="QCheckBox" name="chkAllowSetDefault">
                     <property name="toolTip">
-                     <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.
+                     <string notr="true">Description: Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.
 
 ----
 
- 允许CTRL+Enter和CTRL+Index操作，在引导选择器中设置默认引导选项。</string>
+ 描述：允许CTRL+Enter和CTRL+Index操作，在引导选择器中设置默认引导选项。</string>
                     </property>
                     <property name="statusTip">
                      <string> Allow CTRL+Enter and CTRL+Index handling to set the default boot option in boot picker.</string>
@@ -4878,7 +4878,7 @@ Third party drivers may introduce additional security (and performance) consider
                   <item row="0" column="2">
                    <widget class="QCheckBox" name="chkAllowNvramReset">
                     <property name="toolTip">
-                     <string>Description: Allow CMD+OPT+P+R handling and enable showing NVRAM Reset entry in OpenCore picker.
+                     <string notr="true">Description: Allow CMD+OPT+P+R handling and enable showing NVRAM Reset entry in OpenCore picker.
 
 Note 1 : It is known that some Lenovo laptops have a firmware bug, which makes them unbootable after performing NVRAM reset. See acidanthera/bugtracker#995 for more details.
 
@@ -4903,7 +4903,7 @@ Note 2 : Resetting NVRAM will also erase any boot options not backed up using th
                   <item row="0" column="1">
                    <widget class="QCheckBox" name="chkAllowToggleSip">
                     <property name="toolTip">
-                     <string>Type: plist boolean
+                     <string notr="true">Type: plist boolean
 
 Description: Enable entry for disabling and enabling System Integrity Protection in OpenCore picker.
 
@@ -4933,11 +4933,11 @@ Note2 : It is strongly recommended not to make a habit of running macOS with SIP
                   <item row="1" column="0">
                    <widget class="QCheckBox" name="chkBlacklistAppleUpdate">
                     <property name="toolTip">
-                     <string>Note: This option exists due to some operating systems, namely macOS Big Sur, being incapable of disabling firmware updates with the NVRAM variable (run-efi-updater).
+                     <string notr="true">Description: This option exists due to some operating systems, namely macOS Big Sur, being incapable of disabling firmware updates with the NVRAM variable (run-efi-updater).
 
 ----
 
-注意：这个选项的存在是由于某些操作系统，即macOS Big Sur，无法使用NVRAM变量（run-efi-updater）禁用固件更新。</string>
+描述：这个选项的存在是由于某些操作系统，即macOS Big Sur，无法使用NVRAM变量（run-efi-updater）禁用固件更新。</string>
                     </property>
                     <property name="statusTip">
                      <string>Ignore boot options trying to update Apple peripheral firmware (e.g. MultiUpdater.efi).</string>
@@ -4950,7 +4950,7 @@ Note2 : It is strongly recommended not to make a habit of running macOS with SIP
                   <item row="0" column="0">
                    <widget class="QCheckBox" name="chkAuthRestart">
                     <property name="toolTip">
-                     <string>Authenticated restart is a way to reboot FileVault 2 enabled macOS without entering the password. 
+                     <string notr="true">Description: Authenticated restart is a way to reboot FileVault 2 enabled macOS without entering the password. 
 
 To perform authenticated restart one can use a dedicated terminal command: sudo fdesetup authrestart. It is also used when installing operating system updates.
 
@@ -4958,7 +4958,7 @@ VirtualSMC performs authenticated restart by saving disk encryption key split in
 
 ----
 
-认证重启是一种无需输入密码即可重启启用FileVault 2的macOS的方法。
+描述：认证重启是一种无需输入密码即可重启启用FileVault 2的macOS的方法。
 
 要执行验证重启，可以使用专用的终端命令：sudo fdesetup authrestart。在安装操作系统更新时也会用到。
 
@@ -4975,15 +4975,23 @@ VirtualSMC通过在NVRAM和RTC中保存磁盘加密密钥分割来执行验证�
                   <item row="1" column="1">
                    <widget class="QCheckBox" name="chkEnablePassword">
                     <property name="toolTip">
-                     <string>Password protection ensures that sensitive operations like booting a non-default operating system (e.g. macOS recovery or a tool), resetting NVRAM storage, trying to boot into a non-default mode (e.g. verbose mode or safe mode) are not allowed without explicit user authentication by a custom password. Currently password and salt are hashed with 5000000 iterations of SHA-512.
+                     <string notr="true">Type: plist boolean
 
-Note: This functionality is currently in development and is not ready for daily usage.
+Description: Enable password protection to facilitate sensitive operations.
+
+Password protection ensures that sensitive operations such as booting a non-default operating system (e.g. macOS recovery or a tool), resetting NVRAM storage, trying to boot into a non-default mode (e.g. verbose mode or safe mode) are not allowed without explicit user authentication by a custom password. Currently, password and salt are hashed with 5000000 iterations of SHA-512.
+
+Note: This functionality is still under development and is not ready for production environments.
 
 ----
 
-密码保护可以确保敏感操作，如启动非默认操作系统（如macOS恢复或工具），重置NVRAM存储，试图启动到非默认模式（如verbose模式或安全模式），如果没有明确的用户认证的自定义密码，是不允许的。目前，密码和盐是用5000000次SHA-512的迭代进行哈希。
+类型：plist布尔值
 
-注意：该功能目前还在开发中，还不能用于日常使用。</string>
+描述：启用密码保护以促进敏感操作。
+
+密码保护确保敏感操作，如启动非默认操作系统（如macOS恢复或工具）、重置NVRAM存储、尝试启动到非默认模式（如verbose模式或安全模式），在没有明确的用户认证的情况下，不允许使用自定义密码。目前，密码和盐是用SHA-512的5000000次迭代进行散列的。
+
+注意：该功能仍在开发中，尚未准备好用于生产环境。</string>
                     </property>
                     <property name="statusTip">
                      <string> Enable password protection to allow sensitive operations.</string>
@@ -5839,7 +5847,7 @@ A continuously updated variable list can be found in a corresponding document: N
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>4</number>
+              <number>0</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -7614,11 +7622,11 @@ In addition it will also make some operating systems like Linux unbootable.
                 <item row="1" column="0">
                  <widget class="QCheckBox" name="chkSaveDataHub">
                   <property name="toolTip">
-                   <string notr="true">When &quot;Automatic&quot; is selected, does it retain data such as &quot;DataHub&quot;, &quot;Memory&quot;, &quot;PlatformNVRAM&quot;, and “SMBIOS”.
+                   <string notr="true">Description: When &quot;Automatic&quot; is selected, does it retain data such as &quot;DataHub&quot;, &quot;Memory&quot;, &quot;PlatformNVRAM&quot;, and “SMBIOS”.
 
 ----
 
-选择“Automatic“时，是否保留“DataHub”、“Memory”、“PlatformNVRAM”、“SMBIOS”之类的数据。</string>
+描述：选择“Automatic“时，是否保留“DataHub”、“Memory”、“PlatformNVRAM”、“SMBIOS”之类的数据。</string>
                   </property>
                   <property name="statusTip">
                    <string>When &quot;Automatic&quot; is selected, does it retain data such as &quot;DataHub&quot;, &quot;Memory&quot;, &quot;PlatformNVRAM&quot;, and “SMBIOS”.</string>
@@ -10170,6 +10178,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionDatabase"/>
     <addaction name="actionOpen_database_directory"/>
     <addaction name="actionUpgrade_Database"/>
+    <addaction name="actionEdit_Presets"/>
     <addaction name="separator"/>
     <addaction name="btnExportMaster"/>
     <addaction name="btnImportMaster"/>
@@ -10448,6 +10457,11 @@ Enable this option to be able to see all the boot options when having multiple d
    </property>
    <property name="text">
     <string>Automatically check for updates</string>
+   </property>
+  </action>
+  <action name="actionEdit_Presets">
+   <property name="text">
+    <string>Edit Preset</string>
    </property>
   </action>
  </widget>
