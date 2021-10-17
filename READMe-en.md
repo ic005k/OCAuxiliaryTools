@@ -52,7 +52,9 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 [FindESP](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp;
 [winfile](https://github.com/microsoft/winfile)&nbsp; &nbsp; &nbsp; &nbsp;
 [PlistCpp](https://github.com/animetrics/PlistCpp)&nbsp; &nbsp; &nbsp; &nbsp;
-[pugixml](https://github.com/zeux/pugixml)
+[pugixml](https://github.com/zeux/pugixml)&nbsp; &nbsp; &nbsp; &nbsp;
+[aria2](https://github.com/aria2/aria2)&nbsp; &nbsp; &nbsp;&nbsp;
+[wget](http://wget.addictivecode.org/)&nbsp; &nbsp; &nbsp;&nbsp;
 
 
 ### 备注：此项目开始于2020年8月
