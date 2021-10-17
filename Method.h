@@ -43,6 +43,7 @@ class Method : public QMainWindow {
   QStringList deDuplication(QStringList FileName, QTableWidget* table, int col);
   void markColor(QTableWidget* table, QString path, int col);
   void OCValidationProcessing();
+  void setStatusBarTip(QWidget* w);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();

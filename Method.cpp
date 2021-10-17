@@ -16,6 +16,44 @@ QString strTools;
 
 Method::Method(QWidget* parent) : QMainWindow(parent) { mymethod = new Method; }
 
+void Method::setStatusBarTip(QWidget* w) {
+  QString strStatus0 = w->toolTip();
+  QString strStatus1;
+  QStringList strList = strStatus0.split("----");
+  if (strList.count() == 2) {
+    QTextEdit* tempEdit = new QTextEdit;
+    QLocale locale;
+    if (locale.language() == QLocale::Chinese) {
+      tempEdit->setText(strList.at(1));
+      for (int m = 0; m < tempEdit->document()->lineCount(); m++) {
+        QTextBlock block = tempEdit->document()->findBlockByNumber(m);
+        tempEdit->setTextCursor(QTextCursor(block));
+        QString lineText =
+            tempEdit->document()->findBlockByNumber(m).text().trimmed();
+        if (lineText.mid(0, 2) == "描述" || lineText.mid(0, 2) == "说明") {
+          strStatus1 = lineText;
+          break;
+        }
+      }
+
+    } else {
+      tempEdit->setText(strList.at(0));
+      for (int m = 0; m < tempEdit->document()->lineCount(); m++) {
+        QTextBlock block = tempEdit->document()->findBlockByNumber(m);
+        tempEdit->setTextCursor(QTextCursor(block));
+        QString lineText =
+            tempEdit->document()->findBlockByNumber(m).text().trimmed();
+        if (lineText.mid(0, 11) == "Description") {
+          strStatus1 = lineText;
+          break;
+        }
+      }
+    }
+  } else
+    strStatus1 = strStatus0;
+  w->setStatusTip(strStatus1);
+}
+
 void Method::set_nv_key(QString key, QString dataType) {
   bool re = false;
 

@@ -6207,6 +6207,8 @@ void MainWindow::CopyCheckbox() {
                        w->toolTip());
     });
 
+    mymethod->setStatusBarTip(w);
+
     connect(w, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
       Q_UNUSED(pos);
 
@@ -6262,6 +6264,8 @@ void MainWindow::CopyLabel() {
         myToolTip->popup(QCursor::pos(), str1 + "\n" + str2 + "\n\n",
                          w->toolTip());
       });
+
+      mymethod->setStatusBarTip(w);
 
       connect(w, &QLabel::customContextMenuRequested, [=](const QPoint& pos) {
         Q_UNUSED(pos);
