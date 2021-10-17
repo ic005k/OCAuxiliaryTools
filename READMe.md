@@ -1,5 +1,5 @@
 [English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-en.md)
-# OC Auxiliary Tools-Open source cross-platform OpenCore auxiliary tools
+## OC Auxiliary Tools-Open source cross-platform OpenCore auxiliary tools
 
 
 | [Release][release-link]|[Download][download-link]|[Issues][issues-link]|[Discourse][discourse-link]|
