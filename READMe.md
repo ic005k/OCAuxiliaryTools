@@ -25,35 +25,6 @@ OC auxiliary tools（OCAT or ocat for short） = Config.plist editor + Config.pl
 
 OC development version can be downloaded [here](https://github.com/acidanthera/OpenCorePkg/actions).
 
-[0.7.3](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210919) |
-[0.7.2](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210828) |
-[0.7.1](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210715) |
-[0.7.0](https://github.com/ic005k/QtOpenCoreConfig/releases/tag/20210608) 
-
-## The feature is shown in the screenshot below above
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat1.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat2.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat3.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat4.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat5.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat6.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat7.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat8.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat9.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat10.png)
-
-![Screenshots](https://github.com/ic005k/QtOpenCoreConfig/blob/master/Screenshots/ocat11.png)
-
 ### Thanks for the support of the following open source software!
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
@@ -64,4 +35,4 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 [pugixml](https://github.com/zeux/pugixml)&nbsp;
 
 
-#### Note: This project started in August 2020
+### Note: This project started in August 2020
