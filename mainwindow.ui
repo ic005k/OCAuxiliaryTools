@@ -60,7 +60,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -2064,7 +2064,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2962,14 +2962,25 @@ macOS Catalina(10.15)中增加了一项安全措施，导致苹果驱动在充�
               <item row="2" column="3">
                <widget class="QCheckBox" name="chkIncreasePciBarSize">
                 <property name="toolTip">
-                 <string notr="true">Note: This option should be avoided whenever possible. In general the necessity of this option means misconfigured or broken firmware.
+                 <string notr="true">Type: plist boolean
+Requirement: 10.10
 
+Description: Allows IOPCIFamily to boot with 2 GB PCI BARs.
+
+Normally macOS restricts PCI BARs to 1 GB. Enabling this option (still) does not let macOS actually use PCI devices with larger BARs.
+Note: This option should be avoided whenever possible. A need for this option indicates misconfigured or defective firmware.
 ----
+类型：plist布尔值
+要求：10.10
 
-注意：应尽可能避免使用此选项。一般来说，如果需要这个选项，意味着固件配置错误或损坏。</string>
+描述：允许IOPCIFamily用2GB的PCI BAR启动。
+
+通常，macOS将PCI BAR限制在1GB。启用这个选项（仍然）不会让macOS实际使用具有更大BAR的PCI设备。
+
+注意：只要有可能，就应该避免使用这个选项。对这个选项的需求是对于那些配置错误或有缺陷的固件。</string>
                 </property>
                 <property name="statusTip">
-                 <string> Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GBs.</string>
+                 <string notr="true"> Increases 32-bit PCI bar size in IOPCIFamily from 1 to 4 GBs.</string>
                 </property>
                 <property name="text">
                  <string>IncreasePciBarSize</string>
@@ -3040,16 +3051,22 @@ For AHCI SSDs on modern macOS version there is a dedicated built-in utility call
               <item row="5" column="0">
                <widget class="QLabel" name="label_13">
                 <property name="toolTip">
-                 <string notr="true">Depending on the SSD controller trim procedure may take considerable amount of time, causing noticeable boot
-slowdown as this is when the APFS driver executes the trim operation. If the SSD supports over-provisioning or
-there exists a dedicated unused partition that can be used to reserve blocks, trim operation may not be necessary.
-On the other side if the SSD is slow, the default timeout (equals to 9.999999 seconds) may not be enough. See
-more details in this article.
-Set this value to 4294967295 for the maximum timeout to guarantee trim success or to 999 to essentially disable
-trim.</string>
+                 <string notr="true">Type: plist integer
+
+Requirement: 10.14 (not required for older)
+
+Description: Set trim timeout in microseconds for APFS filesystems on SSDs.
+----
+类型：plist整数
+
+要求：10.14（旧版不需要）。
+
+描述：为SSD上的APFS文件系统设置修剪超时，单位是微秒。
+
+</string>
                 </property>
                 <property name="statusTip">
-                 <string>Set trim timeout in microseconds for APFS filesystems on SSDs.</string>
+                 <string notr="true">Set trim timeout in microseconds for APFS filesystems on SSDs.</string>
                 </property>
                 <property name="text">
                  <string>SetApfsTrimTimeout</string>
@@ -3255,7 +3272,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
