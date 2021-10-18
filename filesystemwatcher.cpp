@@ -295,17 +295,14 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
 
 // 文件修改时调用
 void FileSystemWatcher::fileUpdated(const QString& path) {
-  QFileInfo file(path);
-  QString strPath = file.absolutePath();
-  QString strName = file.fileName();
-
-  // qDebug() << QString("The file %1 at path %2 is
-  // updated").arg(strName).arg(strPath);
-
+  mw_one->strByModiMd5 = mymethod->getMD5(SaveFileName);
+  if (mw_one->strOrgMd5 != mw_one->strByModiMd5) {
+    mw_one->ui->frameTip->setHidden(false);
+  } else
+    return;
   mw_one->ui->lblFileName->setText(tr("The file has been modified by another "
                                       "program. Do you want to reload?") +
-                                   "\n\n" + QString("%1").arg(path));
-  mw_one->strByModiMd5 = mymethod->getMD5(path);
-  if (mw_one->strOrgMd5 != mw_one->strByModiMd5)
-    mw_one->ui->frameTip->setHidden(false);
+                                   "\n\n" + QString("%1").arg(path) +
+                                   "\n\nMD5: " + mw_one->strOrgMd5 +
+                                   " -> MD5: " + mw_one->strByModiMd5);
 }
