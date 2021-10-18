@@ -10221,14 +10221,14 @@ Enable this option to be able to see all the boot options when having multiple d
     </property>
     <addaction name="separator"/>
     <addaction name="actionMountEsp"/>
-    <addaction name="actionOcvalidate"/>
     <addaction name="separator"/>
+    <addaction name="actionOcvalidate"/>
     <addaction name="actionUpgrade_OC"/>
-    <addaction name="actionGenerateEFI"/>
     <addaction name="separator"/>
     <addaction name="actionDatabase"/>
     <addaction name="actionOpen_database_directory"/>
     <addaction name="actionUpgrade_Database"/>
+    <addaction name="actionGenerateEFI"/>
     <addaction name="actionEdit_Presets"/>
     <addaction name="separator"/>
     <addaction name="btnExportMaster"/>

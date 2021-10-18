@@ -36,17 +36,6 @@ void aboutDialog::initInfoStr() {
 
   ui->textBrowser->append(strUrl1);
 
-  QString str0 = tr("Discussion area");
-  QString strUrl2 =
-      "<a style='color: blue;' href = "
-      "https://www.insanelymac.com/forum/topic/"
-      "344752-open-source-cross-platform-opencore-configuration-file-editor>" +
-      str0 +
-      "</"
-      "a><br><a style='color: blue;'<\n>";
-
-  ui->textBrowser->append(strUrl2);
-
   QFileInfo appInfo(qApp->applicationFilePath());
   QString strLastModified =
       tr("Last modified: ") +
@@ -60,12 +49,12 @@ void aboutDialog::initInfoStr() {
   ui->textBrowser->append(strC2);
   ui->textBrowser->append(strC3);
 
-  QString strTr = tr("Details");
+  QString strTr2 = tr("Details");
   QString strDetails =
       "<a style='color: blue;' href = "
       "https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/"
       "latest>" +
-      strTr +
+      strTr2 +
       "</"
       "a><br><a style='color: blue;'<\n>";
 

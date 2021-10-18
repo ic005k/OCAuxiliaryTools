@@ -4270,7 +4270,7 @@ void MainWindow::on_btnSaveAs() {
 void MainWindow::about() {
   aboutDlg->setModal(true);
   aboutDlg->show();
-  aboutDlg->initInfoStr();
+  // aboutDlg->initInfoStr();
 }
 
 void MainWindow::on_btnKernelAdd_Del_clicked() {
