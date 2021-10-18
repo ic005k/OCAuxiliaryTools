@@ -4270,6 +4270,7 @@ void MainWindow::on_btnSaveAs() {
 void MainWindow::about() {
   aboutDlg->setModal(true);
   aboutDlg->show();
+  aboutDlg->initInfoStr();
 }
 
 void MainWindow::on_btnKernelAdd_Del_clicked() {
@@ -6615,6 +6616,7 @@ void MainWindow::replyFinished(QNetworkReply* reply) {
 }
 
 QString MainWindow::getUrl(QVariantList list) {
+  aboutDlg->listDownCount.clear();
   QString macUrl, winUrl, linuxUrl, osx1012Url;
   for (int i = 0; i < list.count(); i++) {
     QVariantMap map = list[i].toMap();
@@ -6630,6 +6632,8 @@ QString MainWindow::getUrl(QVariantList list) {
 
     if (fName.contains("below"))
       osx1012Url = map["browser_download_url"].toString();
+
+    aboutDlg->listDownCount.append(map["download_count"].toString());
   }
 
   QString Url;

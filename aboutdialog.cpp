@@ -22,6 +22,7 @@ aboutDialog::aboutDialog(QWidget* parent)
 aboutDialog::~aboutDialog() { delete ui; }
 
 void aboutDialog::initInfoStr() {
+  ui->textBrowser->clear();
   ui->textBrowser->setOpenExternalLinks(true);
 
   ui->textBrowser->append("OC Auxiliary Tools   V" + CurVerison +
@@ -59,14 +60,22 @@ void aboutDialog::initInfoStr() {
   ui->textBrowser->append(strC2);
   ui->textBrowser->append(strC3);
 
+  QString strTr = tr("Details");
   QString strDetails =
       "<a style='color: blue;' href = "
       "https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/"
-      "latest>Details</"
+      "latest>" +
+      strTr +
+      "</"
       "a><br><a style='color: blue;'<\n>";
 
   ui->textBrowser->append("");
   ui->textBrowser->append(strLastModified + "    " + strDetails);
+  if (listDownCount.count() == 4)
+    ui->textBrowser->append("Linux: " + listDownCount.at(0) +
+                            "  Win: " + listDownCount.at(1) +
+                            "  Mac: " + listDownCount.at(2) +
+                            "  ClassicalMac: " + listDownCount.at(3));
 
   ui->textBrowser->append("");
   ui->textBrowser->append(

@@ -10,17 +10,18 @@ class aboutDialog;
 }
 
 class aboutDialog : public QDialog {
-    Q_OBJECT
+  Q_OBJECT
 
-public:
-    explicit aboutDialog(QWidget* parent = nullptr);
-    ~aboutDialog();
-    Ui::aboutDialog* ui;
+ public:
+  explicit aboutDialog(QWidget* parent = nullptr);
+  ~aboutDialog();
+  Ui::aboutDialog* ui;
+  QStringList listDownCount;
 
-    void initInfoStr();
-private slots:
+  void initInfoStr();
+ private slots:
 
-private:
+ private:
 };
 
-#endif // ABOUTDIALOG_H
+#endif  // ABOUTDIALOG_H
