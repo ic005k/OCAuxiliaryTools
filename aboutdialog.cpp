@@ -32,7 +32,7 @@ void aboutDialog::initInfoStr() {
   QString strUrl1 =
       "<a style='color: blue;' href = "
       "https://github.com/ic005k/QtOpenCoreConfig>OC Auxiliary Tools</"
-      "a><br><a style='color: blue;'<\n>";
+      "a><br><a style='color: blue;'<br>";
 
   ui->textBrowser->append(strUrl1);
 
@@ -56,8 +56,7 @@ void aboutDialog::initInfoStr() {
       "latest>" +
       strTr2 +
       "</"
-      "a><br><a style='color: blue;'<\n>";
-
+      "a><br><a style='color: blue;'<br>";
   ui->textBrowser->append("");
   ui->textBrowser->append(strLastModified + "    " + strDetails);
   if (listDownCount.count() == 4)
@@ -69,4 +68,12 @@ void aboutDialog::initInfoStr() {
   ui->textBrowser->append("");
   ui->textBrowser->append(
       tr("(This App is built automatically by Github Actions.)"));
+}
+
+void aboutDialog::showDownCount() {
+  if (listDownCount.count() == 4)
+    ui->textBrowser->append("Linux: " + listDownCount.at(0) +
+                            "  Win: " + listDownCount.at(1) +
+                            "  Mac: " + listDownCount.at(2) +
+                            "  ClassicalMac: " + listDownCount.at(3));
 }

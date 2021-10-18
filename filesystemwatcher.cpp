@@ -302,7 +302,7 @@ void FileSystemWatcher::fileUpdated(const QString& path) {
     return;
   mw_one->ui->lblFileName->setText(tr("The file has been modified by another "
                                       "program. Do you want to reload?") +
-                                   "\n\n" + QString("%1").arg(path) +
+                                   "    " + QString("%1").arg(path) +
                                    "\n\nMD5: " + mw_one->strOrgMd5 +
-                                   " -> MD5: " + mw_one->strByModiMd5);
+                                   "  -->  MD5: " + mw_one->strByModiMd5);
 }
