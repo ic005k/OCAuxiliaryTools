@@ -10,12 +10,14 @@
 #include <QVariantMap>
 
 class PListSerializer {
-public:
-    static QString toPList(const QVariant& variant, QString FileName);
+ public:
+  static QString toPList(const QVariant& variant, QString FileName);
 
-private:
-    static QDomElement serializeElement(QDomDocument& doc,
-        const QVariant& variant);
-    static QDomElement serializeMap(QDomDocument& doc, const QVariantMap& map);
-    static QDomElement serializeList(QDomDocument& doc, const QVariantList& list);
+  static bool fileValidation(QString FileName);
+
+ private:
+  static QDomElement serializeElement(QDomDocument& doc,
+                                      const QVariant& variant);
+  static QDomElement serializeMap(QDomDocument& doc, const QVariantMap& map);
+  static QDomElement serializeList(QDomDocument& doc, const QVariantList& list);
 };
