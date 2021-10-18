@@ -210,6 +210,7 @@ void MainWindow::openFile(QString PlistFileName) {
     mymethod->removeFileSystemWatch(SaveFileName);
     SaveFileName = PlistFileName;
     mymethod->addFileSystemWatch(SaveFileName);
+    FileSystemWatcher::addWatchPath(SaveFileName);
   } else
     return;
 
@@ -273,6 +274,7 @@ void MainWindow::openFile(QString PlistFileName) {
 
   this->setWindowModified(false);
   FindTextChange = true;
+  strOrgMd5 = mymethod->getMD5(SaveFileName);
 }
 
 void MainWindow::openFileAfter() {
@@ -2254,6 +2256,7 @@ bool MainWindow::getBool(QTableWidget* table, int row, int column) {
 }
 
 void MainWindow::SavePlist(QString FileName) {
+  FileSystemWatcher::removeWatchPath(SaveFileName);
   lineEditSetText();  // 回车确认
   removeAllLineEdit();
   mymethod->OCValidationProcessing();
@@ -2287,6 +2290,9 @@ void MainWindow::SavePlist(QString FileName) {
   }
 
   checkFiles();
+
+  FileSystemWatcher::addWatchPath(SaveFileName);
+  strOrgMd5 = mymethod->getMD5(SaveFileName);
 }
 
 QVariantMap MainWindow::SaveACPI() {
@@ -5981,6 +5987,11 @@ void MainWindow::init_MainUI() {
   orgLineEditStyle = ui->editBID->styleSheet();
   orgLabelStyle = ui->label->styleSheet();
   orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
+
+  ui->frameTip->setAutoFillBackground(true);
+  ui->frameTip->setPalette(QPalette(QColor(255, 204, 204)));
+  ui->btnNo->setDefault(true);
+  ui->frameTip->setHidden(true);
 
   int iSize = 25;
   ui->toolBar->setIconSize(QSize(iSize, iSize));
@@ -10354,4 +10365,11 @@ void MainWindow::on_actionEdit_Presets_triggered() {
   QString dirpath = strAppExePath + "/Database/preset/PreSet.plist";
   QString dir = "file:" + dirpath;
   QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
+}
+
+void MainWindow::on_btnNo_clicked() { ui->frameTip->setHidden(true); }
+
+void MainWindow::on_btnYes_clicked() {
+  ui->frameTip->setHidden(true);
+  openFile(SaveFileName);
 }

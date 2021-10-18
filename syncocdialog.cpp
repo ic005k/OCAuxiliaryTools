@@ -1,10 +1,12 @@
 #include "syncocdialog.h"
 
+#include "Method.h"
 #include "mainwindow.h"
 #include "ui_syncocdialog.h"
 
 extern MainWindow* mw_one;
 extern QString ocVer;
+extern Method* mymethod;
 
 SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {
@@ -53,20 +55,8 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   sourceFile = ui->listSource->item(currentRow)->text();
   targetFile = ui->listTarget->item(currentRow)->text();
 
-  QCryptographicHash hashTest(QCryptographicHash::Md5);
-
-  QFile f1(sourceFile);
-  f1.open(QFile::ReadOnly);
-  hashTest.addData(&f1);                   //添加数据
-  sourceHash = hashTest.result().toHex();  //获得结果并转换为16进制输出
-  f1.close();
-
-  QFile f2(targetFile);
-  f2.open(QFile::ReadOnly);
-  hashTest.reset();  // 重置（很重要）
-  hashTest.addData(&f2);
-  targetHash = hashTest.result().toHex();
-  f2.close();
+  sourceHash = mymethod->getMD5(sourceFile);
+  targetHash = mymethod->getMD5(targetFile);
 
   QFileInfo fiSource(sourceFile);
   QFileInfo fiTarget(targetFile);

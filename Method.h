@@ -14,6 +14,7 @@ class Method : public QMainWindow {
  public:
   explicit Method(QWidget* parent = nullptr);
 
+  QString getMD5(QString targetFile);
   void goTable(QTableWidget* table);
   QWidget* getSubTabWidget(int m, int s);
   void goACPITable(QTableWidget* table);

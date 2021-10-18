@@ -302,25 +302,10 @@ void FileSystemWatcher::fileUpdated(const QString& path) {
   // qDebug() << QString("The file %1 at path %2 is
   // updated").arg(strName).arg(strPath);
 
-  bool Save = true;
-  if (!Save) {
-    QMessageBox message(QMessageBox::Warning, "",
-                        tr("The file has been modified by another program. Do "
-                           "you want to reload?") +
-                            "\n\n" + QString("%1").arg(strName));
-    message.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    message.setButtonText(QMessageBox::Yes, QString(tr("Yes")));
-    message.setButtonText(QMessageBox::No, QString(tr("No")));
-    message.setDefaultButton(QMessageBox::Yes);
-    int choice = message.exec();
-    switch (choice) {
-      case QMessageBox::Yes:
-        // 重新装入文件
-        msgClose = true;
-        break;
-      case QMessageBox::No:
-        msgClose = true;
-        break;
-    }
-  }
+  mw_one->ui->lblFileName->setText(tr("The file has been modified by another "
+                                      "program. Do you want to reload?") +
+                                   "\n\n" + QString("%1").arg(path));
+  mw_one->strByModiMd5 = mymethod->getMD5(path);
+  if (mw_one->strOrgMd5 != mw_one->strByModiMd5)
+    mw_one->ui->frameTip->setHidden(false);
 }

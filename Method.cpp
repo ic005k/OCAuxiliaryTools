@@ -16,6 +16,17 @@ QString strTools;
 
 Method::Method(QWidget* parent) : QMainWindow(parent) { mymethod = new Method; }
 
+QString Method::getMD5(QString targetFile) {
+  QCryptographicHash hashTest(QCryptographicHash::Md5);
+  QFile f2(targetFile);
+  f2.open(QFile::ReadOnly);
+  hashTest.reset();  // 重置（很重要）
+  hashTest.addData(&f2);
+  QString targetHash = hashTest.result().toHex();
+  f2.close();
+  return targetHash;
+}
+
 void Method::setStatusBarTip(QWidget* w) {
   QString strStatus0 = w->toolTip();
   QString strStatus1;

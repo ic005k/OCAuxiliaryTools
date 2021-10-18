@@ -77,6 +77,8 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  QString strOrgMd5;
+  QString strByModiMd5;
   QString strAppExePath;
   QAction* cutAction;
   QAction* copyAction;
@@ -885,6 +887,10 @@ class MainWindow : public QMainWindow {
   void on_actionAutoChkUpdate_triggered();
 
   void on_actionEdit_Presets_triggered();
+
+  void on_btnNo_clicked();
+
+  void on_btnYes_clicked();
 
  private:
   bool LoadRightTable = false;
