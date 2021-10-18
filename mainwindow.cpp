@@ -205,6 +205,11 @@ void MainWindow::initRecentFilesForToolBar() {
 
 void MainWindow::openFile(QString PlistFileName) {
   if (!PlistFileName.isEmpty()) {
+    if (!PListSerializer::fileValidation(PlistFileName)) {
+      QMessageBox::warning(this, "", tr("Invalid plist file."), tr("OK"));
+      return;
+    }
+
     setWindowTitle(title + PlistFileName);
 
     mymethod->removeFileSystemWatch(SaveFileName);
@@ -213,11 +218,6 @@ void MainWindow::openFile(QString PlistFileName) {
     FileSystemWatcher::addWatchPath(SaveFileName);
   } else
     return;
-
-  if (!PListSerializer::fileValidation(PlistFileName)) {
-    QMessageBox::warning(this, "", tr("Invalid plist file."), tr("OK"));
-    return;
-  }
 
   loading = true;
 
