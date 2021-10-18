@@ -214,6 +214,11 @@ void MainWindow::openFile(QString PlistFileName) {
   } else
     return;
 
+  if (!PListSerializer::fileValidation(PlistFileName)) {
+    QMessageBox::warning(this, "", tr("Invalid plist file."), tr("OK"));
+    return;
+  }
+
   loading = true;
 
   //初始化
