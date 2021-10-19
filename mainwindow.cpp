@@ -4971,7 +4971,7 @@ void MainWindow::readResultDiskInfo() {
 
         dlgMESP->ui->listWidget->setIconSize(QSize(32, 32));
         dlgMESP->ui->listWidget->addItem(
-            new QListWidgetItem(QIcon(":/icon/esp.png"), str0));
+            new QListWidgetItem(QIcon(":/icon/espicon.png"), str0));
       }
     }
   }
@@ -9876,7 +9876,7 @@ void MainWindow::on_actionOcvalidate_triggered() {
 void MainWindow::on_actionMountEsp_triggered() { mount_esp(); }
 
 void MainWindow::on_actionGenerateEFI_triggered() {
-  mymethod->on_GenerateEFI();
+  if (SaveFileName != "") mymethod->on_GenerateEFI();
 }
 
 void MainWindow::on_btnExportMaster_triggered() {

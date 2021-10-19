@@ -52,5 +52,6 @@
         <file>icon/m6sel.png</file>
         <file>icon/m7sel.png</file>
         <file>icon/m8sel.png</file>
+        <file>icon/espicon.png</file>
     </qresource>
 </RCC>
