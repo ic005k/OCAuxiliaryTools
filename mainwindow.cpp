@@ -2261,7 +2261,8 @@ bool MainWindow::getBool(QTableWidget* table, int row, int column) {
 }
 
 void MainWindow::SavePlist(QString FileName) {
-  FileSystemWatcher::removeWatchPath(SaveFileName);
+  if (QFileInfo(SaveFileName).exists())
+    FileSystemWatcher::removeWatchPath(SaveFileName);
   lineEditSetText();  // 回车确认
   removeAllLineEdit();
   mymethod->OCValidationProcessing();
@@ -9899,7 +9900,7 @@ void MainWindow::on_actionOcvalidate_triggered() {
 void MainWindow::on_actionMountEsp_triggered() { mount_esp(); }
 
 void MainWindow::on_actionGenerateEFI_triggered() {
-  if (SaveFileName != "") mymethod->on_GenerateEFI();
+  mymethod->on_GenerateEFI();
 }
 
 void MainWindow::on_btnExportMaster_triggered() {

@@ -316,6 +316,7 @@ QString Method::copyACPI(QString pathSource, QString pathTarget) {
   QString pathOCACPI = pathTarget + "OC/ACPI/";
   if (dir.mkpath(pathOCACPI)) {
   }
+
   for (int i = 0; i < mw_one->ui->table_acpi_add->rowCount(); i++) {
     QString file = mw_one->ui->table_acpi_add->item(i, 0)->text();
     QFileInfo fi(pathSource + "EFI/OC/ACPI/" + file);
@@ -373,12 +374,6 @@ void Method::on_GenerateEFI() {
 
   // ACPI
   strDatabase = copyACPI(pathSource, pathTarget) + strDatabase;
-
-  // OC/Bootstrap（在新版OC中已弃用）
-  // QString pathOCBootstrap = pathTarget + "OC/Bootstrap/";
-  // if (dir.mkpath(pathOCBootstrap)) { }
-  // QFile::copy(pathSource + "EFI/OC/Bootstrap/Bootstrap.efi", pathOCBootstrap
-  // + "Bootstrap.efi");
 
   // Drivers
   strDatabase = copyDrivers(pathSource, pathTarget) + strDatabase;
