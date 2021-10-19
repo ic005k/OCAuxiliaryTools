@@ -5735,7 +5735,9 @@ void MainWindow::setListMainIcon() {
   ui->listMain->setViewMode(QListWidget::IconMode);
 
   ui->listMain->clear();
-  QStringList strIconList, strItemList, strItemList1;
+  QStringList strItemList, strItemList1;
+
+  strItemList.clear();
   strIconList << ":/icon/m1.png"
               << ":/icon/m2.png"
               << ":/icon/m3.png"
@@ -5744,6 +5746,17 @@ void MainWindow::setListMainIcon() {
               << ":/icon/m6.png"
               << ":/icon/m7.png"
               << ":/icon/m8.png";
+
+  strIconListSel.clear();
+  strIconListSel << ":/icon/m1sel.png"
+                 << ":/icon/m2sel.png"
+                 << ":/icon/m3sel.png"
+                 << ":/icon/m4sel.png"
+                 << ":/icon/m5sel.png"
+                 << ":/icon/m6sel.png"
+                 << ":/icon/m7sel.png"
+                 << ":/icon/m8sel.png";
+
   strItemList << tr("ACPI") << tr("Booter") << tr("DeviceProperties")
               << tr("Kernel") << tr("Misc") << tr("NVRAM") << tr("PlatformInfo")
               << tr("UEFI");
@@ -5783,10 +5796,10 @@ void MainWindow::init_listMainSub() {
   QString listStyleMain, listStyle;
   listStyleMain =
       "QListWidget::item:hover{background-color:#e6e6e6;margin:1px,1px,1px,"
-      "1px;"
+      "1px;border-radius:6;"
       "color:black}"
       "QListWidget::item:selected{background:#e6e6e6; border:0px "
-      "blue;margin:1px,1px,1px,1px; "
+      "blue;margin:1px,1px,1px,1px;border-radius:6;"
       "color:blue}";
 
   listStyle =
@@ -10091,6 +10104,13 @@ void MainWindow::on_listSub_currentRowChanged(int currentRow) {
 }
 
 void MainWindow::on_listMain_currentRowChanged(int currentRow) {
+  for (int i = 0; i < 8; i++) {
+    if (ui->listMain->currentRow() == i)
+      ui->listMain->item(i)->setIcon(QIcon(strIconListSel.at(i)));
+    else
+      ui->listMain->item(i)->setIcon(QIcon(strIconList.at(i)));
+  }
+
   if (find) {
     return;
   }

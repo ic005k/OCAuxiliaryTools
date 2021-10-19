@@ -44,5 +44,13 @@
         <file>icon/opendir.png</file>
         <file>icon/green.svg</file>
         <file>icon/red.svg</file>
+        <file>icon/m1sel.png</file>
+        <file>icon/m2sel.png</file>
+        <file>icon/m3sel.png</file>
+        <file>icon/m4sel.png</file>
+        <file>icon/m5sel.png</file>
+        <file>icon/m6sel.png</file>
+        <file>icon/m7sel.png</file>
+        <file>icon/m8sel.png</file>
     </qresource>
 </RCC>

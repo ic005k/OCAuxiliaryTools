@@ -77,6 +77,8 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  QStringList strIconList;
+  QStringList strIconListSel;
   QString strOrgMd5;
   QString strByModiMd5;
   QString strAppExePath;

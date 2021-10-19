@@ -45,6 +45,7 @@ class Method : public QMainWindow {
   void markColor(QTableWidget* table, QString path, int col);
   void OCValidationProcessing();
   void setStatusBarTip(QWidget* w);
+
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
