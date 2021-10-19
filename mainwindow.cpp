@@ -6026,9 +6026,9 @@ void MainWindow::init_MainUI() {
 
   int iSize;
   if (win || linuxOS)
-      iSize = 20;
+    iSize = 20;
   else
-      iSize = 24;
+    iSize = 20;
   ui->toolBar->setIconSize(QSize(iSize, iSize));
   ui->toolBar->setStyleSheet(
       "QToolButton::hover { background:#bfbfbf;"
