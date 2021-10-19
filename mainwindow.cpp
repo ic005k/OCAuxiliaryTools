@@ -6023,6 +6023,13 @@ void MainWindow::init_MainUI() {
   orgLineEditStyle = ui->editBID->styleSheet();
   orgLabelStyle = ui->label->styleSheet();
   orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
+
+  int iSize;
+  if (win || linuxOS)
+      iSize = 20;
+  else
+      iSize = 24;
+  ui->toolBar->setIconSize(QSize(iSize, iSize));
   ui->toolBar->setStyleSheet(
       "QToolButton::hover { background:#bfbfbf;"
       "border-radius:5px;padding:2px 2px;"
@@ -6047,9 +6054,6 @@ void MainWindow::init_MainUI() {
   ui->frameTip->setPalette(QPalette(QColor(255, 204, 204)));
   ui->btnNo->setDefault(true);
   ui->frameTip->setHidden(true);
-
-  int iSize = 25;
-  ui->toolBar->setIconSize(QSize(iSize, iSize));
 
   init_FileMenu();
 
