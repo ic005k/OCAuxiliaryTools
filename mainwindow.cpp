@@ -6023,6 +6023,25 @@ void MainWindow::init_MainUI() {
   orgLineEditStyle = ui->editBID->styleSheet();
   orgLabelStyle = ui->label->styleSheet();
   orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
+  ui->toolBar->setStyleSheet(
+      "QToolButton::hover { background:#bfbfbf;"
+      "border-radius:5px;padding:2px 2px;"
+      "border-style:solid;"
+      "border:1px;}"
+
+      "QToolButton:pressed{ "
+      "color:rgb(255, 255, 255); "
+      "border-style:solid; "
+      "border-top-left-radius:2px;  "
+      "border-top-right-radius:2px; "
+      "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 "
+      "rgb(226,236,241),  "
+      "stop: 0.3 rgb(190,190,190),"
+      "stop: 1 rgb(160,160,160));"
+      "border:1px;"
+      "border-radius:5px;padding:2px 4px; }"
+
+  );
 
   ui->frameTip->setAutoFillBackground(true);
   ui->frameTip->setPalette(QPalette(QColor(255, 204, 204)));
