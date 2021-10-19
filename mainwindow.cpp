@@ -5780,12 +5780,20 @@ void MainWindow::setListMainIcon() {
 }
 
 void MainWindow::init_listMainSub() {
-  QString listStyle;
+  QString listStyleMain, listStyle;
+  listStyleMain =
+      "QListWidget::item:hover{background-color:#e6e6e6;margin:1px,1px,1px,"
+      "1px;"
+      "color:black}"
+      "QListWidget::item:selected{background:#e6e6e6; border:0px "
+      "blue;margin:1px,1px,1px,1px; "
+      "color:blue}";
+
   listStyle =
       "QListWidget::item:selected{background:lightblue; border:0px blue; "
       "color:black}";
-  ui->listMain->setStyleSheet(listStyle);
-  ui->listSub->setStyleSheet(listStyle);
+  ui->listMain->setStyleSheet(listStyleMain);
+  ui->listSub->setStyleSheet(listStyleMain);
 
   QFont myFont(this->font().family(), this->font().pixelSize());
   QFontMetrics fm(myFont);
