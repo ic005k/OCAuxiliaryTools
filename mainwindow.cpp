@@ -6108,12 +6108,12 @@ void MainWindow::init_MainUI() {
   //转到上一个
   if (mac || osx1012) ui->actionGo_to_the_previous->setIconVisibleInMenu(false);
   ui->actionGo_to_the_previous->setShortcut(tr("ctrl+3"));
-  ui->actionGo_to_the_previous->setIcon(QIcon(":/icon/1.png"));
+  // ui->actionGo_to_the_previous->setIcon(QIcon(":/icon/1.png"));
 
   //转到下一个
   if (mac || osx1012) ui->actionGo_to_the_next->setIconVisibleInMenu(false);
   ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
-  ui->actionGo_to_the_next->setIcon(QIcon(":/icon/2.png"));
+  // ui->actionGo_to_the_next->setIcon(QIcon(":/icon/2.png"));
 
   // StatusBar
   ui->statusbar->addPermanentWidget(ui->btnUpdateHex, 0);
