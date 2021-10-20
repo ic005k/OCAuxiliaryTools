@@ -5773,7 +5773,8 @@ void MainWindow::setListMainIcon() {
 
   int iSize = 25;
   ui->listMain->setIconSize(QSize(iSize, iSize));
-  ui->listMain->setFixedWidth(68);
+  ui->listMain->setFixedWidth(74);
+  ui->listMain->setSpacing(4);
   QSize size(64, 45);
   for (int i = 0; i < strItemList.count(); i++) {
     ui->listMain->addItem(
@@ -5813,10 +5814,11 @@ void MainWindow::init_listMainSub() {
   QFontMetrics fm(myFont);
   int fontHeight = fm.height() + 4;
 
+  ui->listSub->setSpacing(4);
   if (zh_cn)
-    ui->listSub->setFixedHeight(fontHeight * 2);
+    ui->listSub->setFixedHeight(fontHeight * 2 + 8);
   else
-    ui->listSub->setFixedHeight(fontHeight);
+    ui->listSub->setFixedHeight(fontHeight + 6);
 
   ui->listMain->setViewMode(QListView::ListMode);
   ui->listSub->setViewMode(QListView::ListMode);
@@ -5855,6 +5857,7 @@ void MainWindow::init_FileMenu() {
   if (mac || osx1012) ui->actionNewWindow->setIconVisibleInMenu(false);
   ui->actionNewWindow->setIcon(QIcon(":/icon/new.png"));
   ui->toolBar->addAction(ui->actionNewWindow);
+  ui->toolBar->addSeparator();
 
   // Open
   if (mac || osx1012) ui->actionOpen->setIconVisibleInMenu(false);
@@ -5876,6 +5879,7 @@ void MainWindow::init_FileMenu() {
   if (mac || osx1012) ui->actionOpen_Directory->setIconVisibleInMenu(false);
   ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
   ui->toolBar->addAction(ui->actionOpen_Directory);
+  ui->toolBar->addSeparator();
 
   // Save
   if (mac || osx1012) ui->actionSave->setIconVisibleInMenu(false);
@@ -5983,6 +5987,7 @@ void MainWindow::init_HelpMenu() {
   // Bug Report
   if (mac || osx1012) ui->actionBug_Report->setIconVisibleInMenu(false);
   ui->actionBug_Report->setIcon(QIcon(":/icon/about.png"));
+  ui->toolBar->addAction(ui->actionBug_Report);
 }
 
 void MainWindow::init_UndoRedo() {
@@ -6032,10 +6037,15 @@ void MainWindow::init_MainUI() {
     iSize = 20;
   ui->toolBar->setIconSize(QSize(iSize, iSize));
   ui->toolBar->setStyleSheet(
-      "QToolButton::hover { background:#bfbfbf;"
-      "border-radius:5px;padding:2px 2px;"
-      "border-style:solid;"
-      "border:1px;}"
+
+      "QToolButton:hover{ "
+      "color:rgb(255, 255, 255); "
+      "border-style:solid; "
+      "border-top-left-radius:2px;  "
+      "border-top-right-radius:2px; "
+      "background:#bfbfbf; "
+      "border:1px;"
+      "border-radius:5px;padding:2px 4px; }"
 
       "QToolButton:pressed{ "
       "color:rgb(255, 255, 255); "
@@ -6043,7 +6053,7 @@ void MainWindow::init_MainUI() {
       "border-top-left-radius:2px;  "
       "border-top-right-radius:2px; "
       "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 "
-      "rgb(226,236,241),  "
+      "rgb(226,236,241),"
       "stop: 0.3 rgb(190,190,190),"
       "stop: 1 rgb(160,160,160));"
       "border:1px;"
@@ -6947,7 +6957,7 @@ void MainWindow::on_listMain_itemSelectionChanged() {
       if (w1 < w2) w1 = w2;
     }
     ui->listSub->item(i)->setSizeHint(
-        QSize(w1, ui->listSub->maximumHeight() - 4));
+        QSize(w1, ui->listSub->maximumHeight() - 10));
   }
 
   ui->listSub->setCurrentRow(index);
