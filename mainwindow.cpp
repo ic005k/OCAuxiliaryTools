@@ -2297,9 +2297,6 @@ void MainWindow::SavePlist(QString FileName) {
 
   PListSerializer::toPList(OpenCore, FileName);
 
-  this->setWindowModified(false);
-  updateIconStatus();
-
   if (closeSave) {
     clear_temp_data();
   }
@@ -2323,6 +2320,9 @@ void MainWindow::SavePlist(QString FileName) {
       SavePlist(FileName);
     }
   }
+
+  this->setWindowModified(false);
+  updateIconStatus();
 }
 
 QVariantMap MainWindow::SaveACPI() {
