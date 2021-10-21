@@ -44,6 +44,7 @@
 #include "dlgParameters.h"
 #include "dlgPreset.h"
 #include "dlgdatabase.h"
+#include "dlgmisc.h"
 #include "filesystemwatcher.h"
 #include "plistparser.h"
 #include "plistserializer.h"
@@ -132,6 +133,7 @@ class MainWindow : public QMainWindow {
   AutoUpdateDialog* dlgAutoUpdate;
   SyncOCDialog* dlgSyncOC;
   dlgPreset* dlgPresetValues;
+  dlgMisc* dlgMiscBootArgs;
 
   bool lineEditEnter = false;
   bool RefreshAllDatabase = false;
@@ -893,6 +895,8 @@ class MainWindow : public QMainWindow {
   void on_btnNo_clicked();
 
   void on_btnYes_clicked();
+
+  void on_btnAddbootArgs_clicked();
 
  private:
   bool LoadRightTable = false;

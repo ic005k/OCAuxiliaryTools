@@ -87,6 +87,7 @@ MainWindow::MainWindow(QWidget* parent)
   dlgAutoUpdate = new AutoUpdateDialog(this);
   dlgSyncOC = new SyncOCDialog(this);
   dlgPresetValues = new dlgPreset(this);
+  dlgMiscBootArgs = new dlgMisc(this);
   strAppExePath = qApp->applicationDirPath();
 
   QDir dir;
@@ -10479,4 +10480,12 @@ void MainWindow::on_btnNo_clicked() { ui->frameTip->setHidden(true); }
 void MainWindow::on_btnYes_clicked() {
   ui->frameTip->setHidden(true);
   openFile(SaveFileName);
+}
+
+void MainWindow::on_btnAddbootArgs_clicked() {
+  int row = ui->table_nv_add->currentRow();
+  if (ui->table_nv_add->item(row, 0)->text().trimmed() == "boot-args") {
+    dlgMiscBootArgs->setModal(true);
+    dlgMiscBootArgs->show();
+  }
 }

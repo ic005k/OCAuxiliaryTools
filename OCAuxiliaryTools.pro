@@ -44,6 +44,7 @@ SOURCES += \
     dlgParameters.cpp \
     dlgPreset.cpp \
     dlgdatabase.cpp \
+    dlgmisc.cpp \
     filesystemwatcher.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -68,6 +69,7 @@ HEADERS += \
     dlgParameters.h \
     dlgPreset.h \
     dlgdatabase.h \
+    dlgmisc.h \
     filesystemwatcher.h \
     mainwindow.h \
     myapp.h \
@@ -87,6 +89,7 @@ FORMS += \
     dlgParameters.ui \
     dlgPreset.ui \
     dlgdatabase.ui \
+    dlgmisc.ui \
     mainwindow.ui \
     syncocdialog.ui
 

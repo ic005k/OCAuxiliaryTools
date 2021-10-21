@@ -111,7 +111,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5345,7 +5345,74 @@ Note: This functionality is still under development and is not ready for product
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_17">
-            <item row="0" column="0" colspan="6">
+            <item row="1" column="3">
+             <spacer name="horizontalSpacer_13">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>648</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="5">
+             <widget class="QToolButton" name="btnNVRAMAdd_Add">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="6">
+             <widget class="QToolButton" name="btnNVRAMAdd_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="shortcut">
+               <string>Ctrl+Del</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QToolButton" name="btnPresetNVAdd">
+              <property name="text">
+               <string>Preset</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" colspan="7">
              <layout class="QGridLayout" name="gridLayout_nv_add">
               <item row="0" column="0">
                <widget class="QTableWidget" name="table_nv_add0">
@@ -5414,70 +5481,13 @@ Note: This functionality is still under development and is not ready for product
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
-             <widget class="QToolButton" name="btnPresetNVAdd">
-              <property name="text">
-               <string>Preset</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <spacer name="horizontalSpacer_13">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>648</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
             <item row="1" column="4">
-             <widget class="QToolButton" name="btnNVRAMAdd_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
+             <widget class="QToolButton" name="btnAddbootArgs">
+              <property name="enabled">
+               <bool>true</bool>
               </property>
               <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
-             <widget class="QToolButton" name="btnNVRAMAdd_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="shortcut">
-               <string>Ctrl+Del</string>
+               <string>Add boot-args</string>
               </property>
              </widget>
             </item>
