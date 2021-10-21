@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QObject>
 #include <QTableWidget>
+#include <QTextEdit>
 #include <QWidget>
 
 class Method : public QMainWindow {
@@ -48,6 +49,9 @@ class Method : public QMainWindow {
 
   bool isKext(QString kextName);
   QString getKextBin(QString kextName);
+  QString loadText(QString textFile);
+  QString getKextVersion(QString kextFile);
+  QString getTextEditLineText(QTextEdit* txtEdit, int i);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();

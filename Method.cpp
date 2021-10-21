@@ -16,6 +16,53 @@ QString strTools;
 
 Method::Method(QWidget* parent) : QMainWindow(parent) { mymethod = new Method; }
 
+QString Method::loadText(QString textFile) {
+  QFileInfo fi(textFile);
+  if (fi.exists()) {
+    QFile file(textFile);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+      QMessageBox::warning(
+          this, tr("Application"),
+          tr("Cannot read file %1:\n%2.")
+              .arg(QDir::toNativeSeparators(textFile), file.errorString()));
+
+    } else {
+      QTextStream in(&file);
+      in.setCodec("UTF-8");
+      QString text = in.readAll();
+      return text;
+    }
+  }
+
+  return "";
+}
+
+QString Method::getKextVersion(QString kextFile) {
+  QString strInfo = kextFile + "/Contents/Info.plist";
+  QTextEdit* txtEdit = new QTextEdit;
+  txtEdit->setPlainText(loadText(strInfo));
+  for (int i = 0; i < txtEdit->document()->lineCount(); i++) {
+    QString str0 = getTextEditLineText(txtEdit, i).trimmed();
+    str0.replace("</key>", "");
+    str0.replace("<key>", "");
+    if (str0 == "CFBundleShortVersionString") {
+      QString str1 = getTextEditLineText(txtEdit, i + 1).trimmed();
+      str1.replace("<string>", "");
+      str1.replace("</string>", "");
+      return str1;
+    }
+  }
+
+  return "";
+}
+
+QString Method::getTextEditLineText(QTextEdit* txtEdit, int i) {
+  QTextBlock block = txtEdit->document()->findBlockByNumber(i);
+  txtEdit->setTextCursor(QTextCursor(block));
+  QString lineText = txtEdit->document()->findBlockByNumber(i).text().trimmed();
+  return lineText;
+}
+
 bool Method::isKext(QString kextName) {
   QString str = kextName.mid(kextName.length() - 4, 4);
   // qDebug() << str;

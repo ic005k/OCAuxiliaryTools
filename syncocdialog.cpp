@@ -23,11 +23,15 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     ui->listTarget->setCurrentRow(i);
 
     // 数据库里面必须要有这个文件（源文件必须存在）
-    if (QFileInfo(ui->listSource->item(i)->text()).exists()) {
-      QFile::remove(ui->listTarget->item(i)->text());
-
-      ok = QFile::copy(ui->listSource->item(i)->text(),
-                       ui->listTarget->item(i)->text());
+    QString strSou = ui->listSource->item(i)->text();
+    QString strTar = ui->listTarget->item(i)->text();
+    if (QFileInfo(strSou).exists()) {
+      if (!mymethod->isKext(strSou)) {
+        QFile::remove(strTar);
+        ok = QFile::copy(strSou, strTar);
+      } else {
+        mw_one->copyDirectoryFiles(strSou, strTar, true);
+      }
     }
   }
 
@@ -69,15 +73,21 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   sourceModi = fiSource.lastModified().toString();
   targetModi = fiTarget.lastModified().toString();
 
-  ui->lblSourceLastModi->setText(fiSource.fileName() + "\n\n" +
+  QString strShowFileName;
+  if (!mymethod->isKext(sourceFile))
+    strShowFileName = fiSource.fileName();
+  else
+    strShowFileName = fiSource.fileName() + "    " +
+                      mymethod->getKextVersion(sourceFile) + "  ->  " +
+                      mymethod->getKextVersion(targetFile);
+
+  ui->lblSourceLastModi->setText(strShowFileName + "\n\n" +
                                  tr("Source file last modified") + " : " +
                                  sourceModi + "\nmd5    " + sourceHash);
   ui->lblTargetLastModi->setText(tr("Target file last modified") + " : " +
                                  targetModi + "\nmd5    " + targetHash);
 
   if (sourceHash != targetHash) {
-    // ui->listTarget->item(currentRow)->setBackgroundColor(QColor(Qt::red));
-    // ui->listTarget->item(currentRow)->setForeground(QBrush(Qt::white));
     ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/red.svg"));
     ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/red.svg"));
 
@@ -85,8 +95,6 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   } else {
     ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/green.svg"));
     ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/green.svg"));
-    // if (mw_one->red > 55)
-    //  ui->listTarget->item(currentRow)->setBackgroundColor(Qt::white);
   }
 
   ui->listSource->setFocus();
