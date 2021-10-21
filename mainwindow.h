@@ -78,6 +78,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  void lineEditSetText();
   QStringList strIconList;
   QStringList strIconListSel;
   QString strOrgMd5;
@@ -649,8 +650,6 @@ class MainWindow : public QMainWindow {
   void on_table_acpi_add_cellEntered(int row, int column);
 
   void lineEdit_textChanged(const QString& arg1);
-
-  void lineEditSetText();
 
   void lineEdit_textEdited(const QString& arg1);
 

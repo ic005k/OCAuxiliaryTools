@@ -22,6 +22,7 @@ class dlgMisc : public QDialog {
 
  private:
   Ui::dlgMisc *ui;
+  void addBootArgs(QString str);
 };
 
 #endif  // DLGMISC_H
