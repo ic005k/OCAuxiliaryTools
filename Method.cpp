@@ -807,7 +807,9 @@ void Method::markColor(QTableWidget* table, QString path, int col) {
             if (strList.count() >= 2) {
               text.replace(strList.at(0), "");
               text = "V" + strVer + " " + text;
-            }
+            } else
+                text = "V" + strVer;
+
           } else
             text = "V" + strVer + " | " + text;
 
