@@ -89,6 +89,9 @@ MainWindow::MainWindow(QWidget* parent)
   dlgPresetValues = new dlgPreset(this);
   dlgMiscBootArgs = new dlgMisc(this);
   strAppExePath = qApp->applicationDirPath();
+  timer = new QTimer(this);
+  connect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
+  // timer->start(1000);
 
   QDir dir;
   if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) {
@@ -134,6 +137,7 @@ MainWindow::MainWindow(QWidget* parent)
   on_btnCheckUpdate();
 
   this->setWindowModified(false);
+  updateIconStatus();
 
   loading = false;
   Initialization = false;
@@ -279,6 +283,7 @@ void MainWindow::openFile(QString PlistFileName) {
   checkFiles();
 
   this->setWindowModified(false);
+  updateIconStatus();
   FindTextChange = true;
   strOrgMd5 = mymethod->getMD5(SaveFileName);
 }
@@ -1558,6 +1563,7 @@ void MainWindow::on_table_dp_add_itemChanged(QTableWidgetItem* item) {
               ui->table_dp_add0->currentRow());
 
     this->setWindowModified(true);
+    updateIconStatus();
   }
 }
 
@@ -1575,7 +1581,10 @@ void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item) {
     write_ini(ui->table_nv_add0, ui->table_nv_add,
               ui->table_nv_add0->currentRow());
 
-  if (!loading) this->setWindowModified(true);
+  if (!loading) {
+    this->setWindowModified(true);
+    updateIconStatus();
+  }
 }
 
 void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
@@ -1669,6 +1678,7 @@ void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem* item) {
                     ui->table_nv_del0->currentRow());
 
     this->setWindowModified(true);
+    updateIconStatus();
   }
 }
 
@@ -1681,6 +1691,7 @@ void MainWindow::on_table_nv_ls_itemChanged(QTableWidgetItem* item) {
                     ui->table_nv_ls0->currentRow());
 
     this->setWindowModified(true);
+    updateIconStatus();
   }
 }
 
@@ -1702,6 +1713,7 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item) {
                     ui->table_dp_del0->currentRow());
 
     this->setWindowModified(true);
+    updateIconStatus();
   }
 }
 
@@ -2286,6 +2298,7 @@ void MainWindow::SavePlist(QString FileName) {
   PListSerializer::toPList(OpenCore, FileName);
 
   this->setWindowModified(false);
+  updateIconStatus();
 
   if (closeSave) {
     clear_temp_data();
@@ -2483,6 +2496,8 @@ QVariantMap MainWindow::SaveDeviceProperties() {
   QVariantList arrayList;
 
   int currentRow = ui->table_dp_add0->currentRow();
+  int cuRowAdd = ui->table_dp_add->currentRow();
+  int cuColAdd = ui->table_dp_add->currentColumn();
   for (int i = 0; i < ui->table_dp_add0->rowCount(); i++) {
     valueList.clear();  //先必须清理下列表，很重要
     //先加载表中的数据
@@ -2503,11 +2518,13 @@ QVariantMap MainWindow::SaveDeviceProperties() {
     }
     dictList[ui->table_dp_add0->item(i, 0)->text()] = valueList;
   }
+  subMap["Add"] = dictList;
 
   ui->table_dp_add0->clearSelection();
   ui->table_dp_add0->setCurrentCell(currentRow, 0);
-
-  subMap["Add"] = dictList;
+  on_table_dp_add0_cellClicked(currentRow, 0);
+  ui->table_dp_add->setCurrentCell(cuRowAdd, cuColAdd);
+  ui->table_dp_add->setFocus();
 
   // Delete
   dictList.clear();
@@ -2744,6 +2761,8 @@ QVariantMap MainWindow::SaveNVRAM() {
   QVariantMap valueList;
 
   int currentRow = ui->table_nv_add0->currentRow();
+  int currentRowAdd = ui->table_nv_add->currentRow();
+  int currentColAdd = ui->table_nv_add->currentColumn();
   for (int i = 0; i < ui->table_nv_add0->rowCount(); i++) {
     valueList.clear();
     //先加载表中的数据
@@ -2768,9 +2787,13 @@ QVariantMap MainWindow::SaveNVRAM() {
     }
     dictList[ui->table_nv_add0->item(i, 0)->text()] = valueList;
   }
+  subMap["Add"] = dictList;
+
   ui->table_nv_add0->clearSelection();
   ui->table_nv_add0->setCurrentCell(currentRow, 0);
-  subMap["Add"] = dictList;
+  on_table_nv_add0_cellClicked(currentRow, 0);
+  ui->table_nv_add->setCurrentCell(currentRowAdd, currentColAdd);
+  ui->table_nv_add->setFocus();
 
   // Delete
   dictList.clear();  //先清理之前的数据
@@ -3270,6 +3293,7 @@ void MainWindow::on_btnKernelPatchAdd_clicked() {
                                   newItem1);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnKernelPatchDel_clicked() {
@@ -3414,6 +3438,7 @@ void MainWindow::del_item(QTableWidget* table) {
   if (row == 0) table->setCurrentCell(0, 0);
 
   this->setWindowModified(true);
+  updateIconStatus();
   checkFiles();
 }
 
@@ -3428,6 +3453,7 @@ void MainWindow::on_btnACPIDel_Add_clicked() {
                     "true");
 
   this->setWindowModified(true);
+  updateIconStatus();
   checkFiles();
 }
 
@@ -3439,6 +3465,7 @@ void MainWindow::on_btnACPIPatch_Add_clicked() {
                     11, "true");
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnACPIPatch_Del_clicked() {
@@ -3451,6 +3478,7 @@ void MainWindow::on_btnBooter_Add_clicked() {
                     "true");
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnBooter_Del_clicked() { del_item(ui->table_booter); }
@@ -3464,6 +3492,7 @@ void MainWindow::on_btnDPDel_Add0_clicked() {
                   ui->table_dp_del0->rowCount() - 1);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnDPDel_Del0_clicked() {
@@ -3495,6 +3524,7 @@ void MainWindow::on_btnDPDel_Del0_clicked() {
     on_table_dp_del0_cellClicked(ui->table_dp_del0->currentRow(), 0);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnDPDel_Add_clicked() {
@@ -3509,6 +3539,7 @@ void MainWindow::on_btnDPDel_Add_clicked() {
                   ui->table_dp_del0->currentRow());
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnDPDel_Del_clicked() {
@@ -3550,6 +3581,7 @@ void MainWindow::addACPIItem(QStringList FileName) {
   }
 
   this->setWindowModified(true);
+  updateIconStatus();
   checkFiles();
 }
 
@@ -3563,6 +3595,7 @@ void MainWindow::on_btnDPAdd_Add0_clicked() {
             ui->table_dp_add0->rowCount() - 1);
 
   this->setWindowModified(true);
+  updateIconStatus();
 
   loading = false;
 }
@@ -3580,6 +3613,7 @@ void MainWindow::on_btnDPAdd_Del0_clicked() {
     on_table_dp_add0_cellClicked(ui->table_dp_add0->currentRow(), 0);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnDPAdd_Add_clicked() {
@@ -3594,6 +3628,7 @@ void MainWindow::on_btnDPAdd_Add_clicked() {
             ui->table_dp_add0->currentRow());
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnDPAdd_Del_clicked() {
@@ -3777,6 +3812,7 @@ void MainWindow::addKexts(QStringList FileName) {
   sortForKexts();
 
   this->setWindowModified(true);
+  updateIconStatus();
   checkFiles();
 }
 
@@ -3818,6 +3854,7 @@ void MainWindow::on_btnKernelBlock_Add_clicked() {
                                   newItem1);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnKernelBlock_Del_clicked() {
@@ -3830,6 +3867,7 @@ void MainWindow::on_btnMiscBO_Add_clicked() {
                                   new QTableWidgetItem(""));
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnMiscBO_Del_clicked() {
@@ -3848,6 +3886,7 @@ void MainWindow::on_btnMiscEntries_Add_clicked() {
   ui->tableEntries->setItem(row, 7, new QTableWidgetItem("Auto"));
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnMiscTools_Add_clicked() {
@@ -3889,6 +3928,7 @@ void MainWindow::addEFITools(QStringList FileName) {
   }
 
   this->setWindowModified(true);
+  updateIconStatus();
   checkFiles();
 }
 
@@ -3905,6 +3945,7 @@ void MainWindow::on_btnNVRAMAdd_Add0_clicked() {
             ui->table_nv_add0->rowCount() - 1);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnNVRAMAdd_Add_clicked() {
@@ -3919,6 +3960,7 @@ void MainWindow::on_btnNVRAMAdd_Add_clicked() {
             ui->table_nv_add0->currentRow());
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnNVRAMAdd_Del0_clicked() {
@@ -3951,6 +3993,7 @@ void MainWindow::on_btnNVRAMAdd_Del0_clicked() {
     on_table_nv_add0_cellClicked(ui->table_nv_add0->currentRow(), 0);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnNVRAMAdd_Del_clicked() {
@@ -3968,6 +4011,7 @@ void MainWindow::on_btnNVRAMDel_Add0_clicked() {
                   ui->table_nv_del0->rowCount() - 1);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnNVRAMDel_Add_clicked() {
@@ -3982,6 +4026,7 @@ void MainWindow::on_btnNVRAMDel_Add_clicked() {
                   ui->table_nv_del0->currentRow());
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnNVRAMLS_Add0_clicked() {
@@ -3993,6 +4038,7 @@ void MainWindow::on_btnNVRAMLS_Add0_clicked() {
                   ui->table_nv_ls0->rowCount() - 1);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnNVRAMLS_Add_clicked() {
@@ -4007,6 +4053,7 @@ void MainWindow::on_btnNVRAMLS_Add_clicked() {
                   ui->table_nv_ls0->currentRow());
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnNVRAMDel_Del0_clicked() {
@@ -4038,6 +4085,7 @@ void MainWindow::on_btnNVRAMDel_Del0_clicked() {
     on_table_nv_del0_cellClicked(ui->table_nv_del0->currentRow(), 0);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnNVRAMLS_Del0_clicked() {
@@ -4069,6 +4117,7 @@ void MainWindow::on_btnNVRAMLS_Del0_clicked() {
     on_table_nv_ls0_cellClicked(ui->table_nv_ls0->currentRow(), 0);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnNVRAMDel_Del_clicked() {
@@ -4096,6 +4145,7 @@ void MainWindow::on_btnUEFIRM_Add_clicked() {
                     ui->table_uefi_ReservedMemory->rowCount() - 1, 4, "true");
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnUEFIRM_Del_clicked() {
@@ -4135,6 +4185,7 @@ void MainWindow::addEFIDrivers(QStringList FileName) {
   }
 
   this->setWindowModified(true);
+  updateIconStatus();
   checkFiles();
 }
 
@@ -4227,6 +4278,7 @@ void MainWindow::MoveItem(QTableWidget* t, bool up) {
   }
 
   this->setWindowModified(true);
+  updateIconStatus();
   checkFiles();
 }
 
@@ -4632,6 +4684,7 @@ void MainWindow::on_cboxSystemProductName_currentIndexChanged(
   ui->editSystemProductName->setText(str);
   ui->editSystemProductName_2->setText(str);
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::readResult() {
@@ -4773,6 +4826,7 @@ void MainWindow::on_btnKernelForce_Add_clicked() {
   t->setCurrentCell(row - 1, 0);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnKernelForce_Del_clicked() {
@@ -5079,7 +5133,6 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     }
   } else {
     clear_temp_data();
-
     event->accept();
   }
 }
@@ -5191,6 +5244,7 @@ void MainWindow::on_btnDevices_add_clicked() {
   add_item(ui->tableDevices, 8);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnDevices_del_clicked() { del_item(ui->tableDevices); }
@@ -6533,6 +6587,7 @@ void MainWindow::on_table_dp_add0_itemChanged(QTableWidgetItem* item) {
     write_ini(ui->table_dp_add0, ui->table_dp_add,
               ui->table_dp_add0->currentRow());
     this->setWindowModified(true);
+    updateIconStatus();
   }
 }
 
@@ -6543,6 +6598,7 @@ void MainWindow::on_table_dp_del0_itemChanged(QTableWidgetItem* item) {
     write_value_ini(ui->table_dp_del0, ui->table_dp_del,
                     ui->table_dp_del0->currentRow());
     this->setWindowModified(true);
+    updateIconStatus();
   }
 }
 
@@ -6553,6 +6609,7 @@ void MainWindow::on_table_nv_add0_itemChanged(QTableWidgetItem* item) {
     write_ini(ui->table_nv_add0, ui->table_nv_add,
               ui->table_nv_add0->currentRow());
     this->setWindowModified(true);
+    updateIconStatus();
   }
 }
 
@@ -6563,6 +6620,7 @@ void MainWindow::on_table_nv_del0_itemChanged(QTableWidgetItem* item) {
     write_value_ini(ui->table_nv_del0, ui->table_nv_del,
                     ui->table_nv_del0->currentRow());
     this->setWindowModified(true);
+    updateIconStatus();
   }
 }
 
@@ -6573,6 +6631,7 @@ void MainWindow::on_table_nv_ls0_itemChanged(QTableWidgetItem* item) {
     write_value_ini(ui->table_nv_ls0, ui->table_nv_ls,
                     ui->table_nv_ls0->currentRow());
     this->setWindowModified(true);
+    updateIconStatus();
   }
 }
 
@@ -6699,6 +6758,7 @@ void MainWindow::on_btnBooterPatchAdd_clicked() {
                                   newItem1);
 
   this->setWindowModified(true);
+  updateIconStatus();
 }
 
 void MainWindow::on_btnBooterPatchDel_clicked() {
@@ -7214,6 +7274,7 @@ void MainWindow::lineEditSetText() {
     undoStack->push(editCommand);
 
     this->setWindowModified(true);
+    updateIconStatus();
 
     myTable->removeCellWidget(row, col);
     myTable->setCurrentCell(row, col);
@@ -7913,6 +7974,7 @@ void MainWindow::on_actionFind_triggered() {
   }
 
   this->setWindowModified(curWinModi);
+  updateIconStatus();
 
   find = false;
 }
@@ -8845,10 +8907,16 @@ void MainWindow::init_setWindowModified() {
 }
 
 void MainWindow::setWM_RightTable() {
-  if (!LoadRightTable) this->setWindowModified(true);
+  if (!LoadRightTable) {
+    this->setWindowModified(true);
+    updateIconStatus();
+  }
 }
 
-void MainWindow::setWM() { this->setWindowModified(true); }
+void MainWindow::setWM() {
+  this->setWindowModified(true);
+  updateIconStatus();
+}
 
 QString MainWindow::getReReCount(QTableWidget* w, QString text) {
   bool re = false;
@@ -9172,7 +9240,7 @@ void MainWindow::init_CopyPasteLine() {
 
 void MainWindow::loadRightTable(QTableWidget* t0, QTableWidget* t) {
   if (!t0->currentIndex().isValid()) return;
-
+  bool md = this->isWindowModified();
   if (!loading) {
     loading = true;
     LoadRightTable = true;
@@ -9181,6 +9249,8 @@ void MainWindow::loadRightTable(QTableWidget* t0, QTableWidget* t) {
     loading = false;
     ui->statusbar->showMessage(t0->currentItem()->text());
   }
+  this->setWindowModified(md);
+  updateIconStatus();
 }
 
 void MainWindow::endPasteLine(QTableWidget* w, int row, QString colText0) {
@@ -10484,8 +10554,18 @@ void MainWindow::on_btnYes_clicked() {
 
 void MainWindow::on_btnAddbootArgs_clicked() {
   int row = ui->table_nv_add->currentRow();
+  if (row < 0) return;
   if (ui->table_nv_add->item(row, 0)->text().trimmed() == "boot-args") {
     dlgMiscBootArgs->setModal(true);
     dlgMiscBootArgs->show();
   }
+}
+
+void MainWindow::updateStatus() { updateIconStatus(); }
+
+void MainWindow::updateIconStatus() {
+  if (isWindowModified())
+    ui->actionSave->setIcon(QIcon(":/icon/savetip.png"));
+  else
+    ui->actionSave->setIcon(QIcon(":/icon/save.png"));
 }

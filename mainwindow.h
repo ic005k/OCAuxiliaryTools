@@ -78,6 +78,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  QTimer* timer;
   void lineEditSetText();
   QStringList strIconList;
   QStringList strIconListSel;
@@ -897,6 +898,8 @@ class MainWindow : public QMainWindow {
 
   void on_btnAddbootArgs_clicked();
 
+  void updateStatus();
+
  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;
@@ -1011,6 +1014,7 @@ class MainWindow : public QMainWindow {
   void openFileAfter();
   bool FindTextChange = false;
   void showDlgPar(bool b1, bool b2, bool b3, bool b4);
+  void updateIconStatus();
 };
 
 #endif  // MAINWINDOW_H

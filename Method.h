@@ -52,6 +52,7 @@ class Method : public QMainWindow {
   QString loadText(QString textFile);
   QString getKextVersion(QString kextFile);
   QString getTextEditLineText(QTextEdit* txtEdit, int i);
+
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
