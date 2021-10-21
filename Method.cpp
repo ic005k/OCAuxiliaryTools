@@ -45,7 +45,7 @@ QString Method::getKextVersion(QString kextFile) {
     QString str0 = getTextEditLineText(txtEdit, i).trimmed();
     str0.replace("</key>", "");
     str0.replace("<key>", "");
-    if (str0 == "CFBundleShortVersionString") {
+    if (str0 == "CFBundleVersion") {
       QString str1 = getTextEditLineText(txtEdit, i + 1).trimmed();
       str1.replace("<string>", "");
       str1.replace("</string>", "");
@@ -794,12 +794,27 @@ void Method::markColor(QTableWidget* table, QString path, int col) {
     QString strFile = path + table->item(i, col)->text().trimmed();
     QFileInfo fi(strFile);
     if (fi.exists()) {
-      // id1->setForeground(QColor(55, 55, 55, 255));
-      // id1->setBackground(QBrush(QColor(33, 255, 153, 255)));
-
       icon.addFile(":/icon/green.svg", QSize(10, 10));
       id1 = new QTableWidgetItem(icon, QString::number(i + 1));
       table->setVerticalHeaderItem(i, id1);
+
+      if (table == mw_one->ui->table_kernel_add) {
+        QString strVer = getKextVersion(strKexts + table->item(i, 0)->text());
+        QString text = table->item(i, 1)->text();
+        if (text.trimmed().length() > 0) {
+          if (text.mid(0, 1) == "V") {
+            QStringList strList = text.split("|");
+            if (strList.count() >= 2) {
+              text.replace(strList.at(0), "");
+              text = "V" + strVer + " " + text;
+            }
+          } else
+            text = "V" + strVer + " | " + text;
+
+        } else
+          text = "V" + strVer;
+        table->setItem(i, 1, new QTableWidgetItem(text));
+      }
 
     } else {
       icon.addFile(":/icon/red.svg", QSize(10, 10));

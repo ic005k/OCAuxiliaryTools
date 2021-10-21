@@ -26,11 +26,13 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     QString strSou = ui->listSource->item(i)->text();
     QString strTar = ui->listTarget->item(i)->text();
     if (QFileInfo(strSou).exists()) {
-      if (!mymethod->isKext(strSou)) {
-        QFile::remove(strTar);
-        ok = QFile::copy(strSou, strTar);
-      } else {
-        mw_one->copyDirectoryFiles(strSou, strTar, true);
+      if (ui->listSource->item(i)->checkState() == Qt::Checked) {
+        if (!mymethod->isKext(strSou)) {
+          QFile::remove(strTar);
+          ok = QFile::copy(strSou, strTar);
+        } else {
+          mw_one->copyDirectoryFiles(strSou, strTar, true);
+        }
       }
     }
   }

@@ -9629,6 +9629,19 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   dlgSyncOC->ui->listTarget->clear();
   dlgSyncOC->ui->listSource->addItems(sourceFiles);
   dlgSyncOC->ui->listTarget->addItems(targetFiles);
+  for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
+    QString strF1 = dlgSyncOC->ui->listSource->item(i)->text();
+    QString strF2 = dlgSyncOC->ui->listTarget->item(i)->text();
+    if (!mymethod->isKext(strF1)) {
+      dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Checked);
+    } else {
+      if (mymethod->getKextVersion(strF1) > mymethod->getKextVersion(strF2))
+        dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Checked);
+      else
+        dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Unchecked);
+    }
+  }
+
   dlgSyncOC->setModal(true);
   dlgSyncOC->show();
   dlgSyncOC->blSame = true;
