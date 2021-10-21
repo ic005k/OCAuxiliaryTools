@@ -46,6 +46,8 @@ class Method : public QMainWindow {
   void OCValidationProcessing();
   void setStatusBarTip(QWidget* w);
 
+  bool isKext(QString kextName);
+  QString getKextBin(QString kextName);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();

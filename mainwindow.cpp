@@ -5794,90 +5794,88 @@ void MainWindow::setListMainIcon() {
   }*/
 }
 
-void MainWindow::on_listMain_itemSelectionChanged()
-{
-    int cu = ui->listMain->currentRow();
-    ui->tabTotal->setCurrentIndex(cu);
-    int index;
-    if (ui->listMain->currentRow() != 8)
-        index = mainTabList.at(cu)->currentIndex();
+void MainWindow::on_listMain_itemSelectionChanged() {
+  int cu = ui->listMain->currentRow();
+  ui->tabTotal->setCurrentIndex(cu);
+  int index;
+  if (ui->listMain->currentRow() != 8)
+    index = mainTabList.at(cu)->currentIndex();
 
-    ui->listSub->clear();
-    ui->listSub->setViewMode(QListWidget::IconMode);
-    QStringList strList;
+  ui->listSub->clear();
+  ui->listSub->setViewMode(QListWidget::IconMode);
+  QStringList strList;
 
-    if (ui->listMain->currentRow() == 0) {
-        strList << tr("Add") << tr("Delete") << tr("Patch") << tr("Quirks");
-        // strList << "Add"
-        //        << "Delete"
-        //        << "Patch"
-        //        << "Quirks"; // test
+  if (ui->listMain->currentRow() == 0) {
+    strList << tr("Add") << tr("Delete") << tr("Patch") << tr("Quirks");
+    // strList << "Add"
+    //        << "Delete"
+    //        << "Patch"
+    //        << "Quirks"; // test
+  }
+
+  if (ui->listMain->currentRow() == 1) {
+    strList << tr("MmioWhitelist") << tr("Patch") << tr("Quirks");
+  }
+
+  if (ui->listMain->currentRow() == 2) {
+    strList << tr("Add") << tr("Delete");
+  }
+
+  if (ui->listMain->currentRow() == 3) {
+    strList << tr("Add") << tr("Block") << tr("Force") << tr("Patch")
+            << tr("Emulate") << tr("Quirks") << tr("Scheme");
+  }
+
+  if (ui->listMain->currentRow() == 4) {
+    strList << tr("Boot") << tr("Debug") << tr("Security")
+            << tr("BlessOverride") << tr("Entries") << tr("Tools");
+  }
+
+  if (ui->listMain->currentRow() == 5) {
+    strList << tr("Add") << tr("Delete") << tr("LegacySchema");
+  }
+
+  if (ui->listMain->currentRow() == 6) {
+    strList << tr("Generic") << tr("DataHub") << tr("Memory")
+            << tr("PlatformNVRAM") << tr("SMBIOS");
+
+    if (mac || osx1012) strList.append(tr("SystemInfo"));
+  }
+
+  if (ui->listMain->currentRow() == 7) {
+    strList.append(tr("APFS"));
+    strList.append(tr("AppleInput"));
+    strList.append(tr("Audio"));
+    strList.append(tr("Drivers"));
+    strList.append(tr("Input"));
+    strList.append(tr("Output"));
+    strList.append(tr("ProtocolOverrides"));
+    strList.append(tr("Quirks"));
+    strList.append(tr("ReservedMemory"));
+  }
+
+  if (ui->listMain->currentRow() == 8) {
+    index = 0;
+    strList << tr("Hardware Information");
+  }
+
+  QStringList str;
+  int w1, w2;
+  for (int i = 0; i < strList.count(); i++) {
+    ui->listSub->addItem(strList.at(i));
+    str = strList.at(i).split("\n");
+    if (str.count() == 1)
+      w1 = getTextWidth(ui->listSub->item(i)->text(), ui->listSub);
+    if (str.count() == 2) {
+      w1 = getTextWidth(str.at(0), ui->listSub);
+      w2 = getTextWidth(str.at(1), ui->listSub);
+      if (w1 < w2) w1 = w2;
     }
+    ui->listSub->item(i)->setSizeHint(
+        QSize(w1, ui->listSub->maximumHeight() - 12));
+  }
 
-    if (ui->listMain->currentRow() == 1) {
-        strList << tr("MmioWhitelist") << tr("Patch") << tr("Quirks");
-    }
-
-    if (ui->listMain->currentRow() == 2) {
-        strList << tr("Add") << tr("Delete");
-    }
-
-    if (ui->listMain->currentRow() == 3) {
-        strList << tr("Add") << tr("Block") << tr("Force") << tr("Patch") << tr("Emulate")
-                << tr("Quirks") << tr("Scheme");
-    }
-
-    if (ui->listMain->currentRow() == 4) {
-        strList << tr("Boot") << tr("Debug") << tr("Security") << tr("BlessOverride")
-                << tr("Entries") << tr("Tools");
-    }
-
-    if (ui->listMain->currentRow() == 5) {
-        strList << tr("Add") << tr("Delete") << tr("LegacySchema");
-    }
-
-    if (ui->listMain->currentRow() == 6) {
-        strList << tr("Generic") << tr("DataHub") << tr("Memory") << tr("PlatformNVRAM")
-                << tr("SMBIOS");
-
-        if (mac || osx1012)
-            strList.append(tr("SystemInfo"));
-    }
-
-    if (ui->listMain->currentRow() == 7) {
-        strList.append(tr("APFS"));
-        strList.append(tr("AppleInput"));
-        strList.append(tr("Audio"));
-        strList.append(tr("Drivers"));
-        strList.append(tr("Input"));
-        strList.append(tr("Output"));
-        strList.append(tr("ProtocolOverrides"));
-        strList.append(tr("Quirks"));
-        strList.append(tr("ReservedMemory"));
-    }
-
-    if (ui->listMain->currentRow() == 8) {
-        index = 0;
-        strList << tr("Hardware Information");
-    }
-
-    QStringList str;
-    int w1, w2;
-    for (int i = 0; i < strList.count(); i++) {
-        ui->listSub->addItem(strList.at(i));
-        str = strList.at(i).split("\n");
-        if (str.count() == 1)
-            w1 = getTextWidth(ui->listSub->item(i)->text(), ui->listSub);
-        if (str.count() == 2) {
-            w1 = getTextWidth(str.at(0), ui->listSub);
-            w2 = getTextWidth(str.at(1), ui->listSub);
-            if (w1 < w2)
-                w1 = w2;
-        }
-        ui->listSub->item(i)->setSizeHint(QSize(w1, ui->listSub->maximumHeight() - 12));
-    }
-
-    ui->listSub->setCurrentRow(index);
+  ui->listSub->setCurrentRow(index);
 }
 
 void MainWindow::init_listMainSub() {
@@ -9599,6 +9597,16 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     if (!re) {
       sourceFiles.append(str2);
       targetFiles.append(DirName + "/OC/Drivers/" + str1);
+    }
+  }
+
+  // Kexts
+  for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
+    QString strKextName = ui->table_kernel_add->item(i, 0)->text().trimmed();
+    if (strKextName == "Lilu.kext" || strKextName == "AppleALC.kext" ||
+        strKextName == "WhateverGreen.kext") {
+      sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
+      targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
     }
   }
 

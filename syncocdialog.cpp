@@ -55,8 +55,14 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   sourceFile = ui->listSource->item(currentRow)->text();
   targetFile = ui->listTarget->item(currentRow)->text();
 
-  sourceHash = mymethod->getMD5(sourceFile);
-  targetHash = mymethod->getMD5(targetFile);
+  if (mymethod->isKext(sourceFile))
+    sourceHash = mymethod->getMD5(mymethod->getKextBin(sourceFile));
+  else
+    sourceHash = mymethod->getMD5(sourceFile);
+  if (mymethod->isKext(targetFile))
+    targetHash = mymethod->getMD5(mymethod->getKextBin(targetFile));
+  else
+    targetHash = mymethod->getMD5(targetFile);
 
   QFileInfo fiSource(sourceFile);
   QFileInfo fiTarget(targetFile);

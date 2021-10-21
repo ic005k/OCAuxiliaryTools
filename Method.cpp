@@ -16,6 +16,24 @@ QString strTools;
 
 Method::Method(QWidget* parent) : QMainWindow(parent) { mymethod = new Method; }
 
+bool Method::isKext(QString kextName) {
+  QString str = kextName.mid(kextName.length() - 4, 4);
+  // qDebug() << str;
+  if (str == "kext")
+    return true;
+  else
+    return false;
+}
+
+QString Method::getKextBin(QString kextName) {
+  QString str0 = kextName.mid(0, kextName.length() - 5);
+  QStringList tempList = str0.split("/");
+  QString str1 = tempList.at(tempList.count() - 1);
+  QString str2 = kextName + "/Contents/MacOS/" + str1;
+  // qDebug() << str0 << str1 << str2;
+  return str2;
+}
+
 QString Method::getMD5(QString targetFile) {
   QCryptographicHash hashTest(QCryptographicHash::Md5);
   QFile f2(targetFile);
