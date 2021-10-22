@@ -5361,7 +5361,7 @@ void MainWindow::method(QVector<unsigned int> nums, unsigned int sum) {
 void MainWindow::method(QVector<unsigned int> nums, unsigned int sum,
                         QVector<unsigned int> list, int index) {
   if (sum == 0) {
-    for (int val : list) {
+    for (unsigned val : list) {
       for (int i = 0; i < nums.count(); i++) {
         if (val == v.at(i)) {
           chk.at(i)->setChecked(true);
@@ -7094,11 +7094,10 @@ void MainWindow::resizeEvent(QResizeEvent* event) {
 }
 
 QString MainWindow::getWMIC(const QString& cmd) {
-  QProcess p;
-
-  p.start(cmd);
-  p.waitForFinished();
-  QString result = QString::fromLocal8Bit(p.readAllStandardOutput());
+  QProcess* p = new QProcess;
+  p->start(cmd, QStringList() << "");
+  p->waitForFinished();
+  QString result = QString::fromLocal8Bit(p->readAllStandardOutput());
   QStringList list = cmd.split(" ");
   result = result.remove(list.last(), Qt::CaseInsensitive);
   result = result.replace("\r", "");
@@ -10188,6 +10187,7 @@ void MainWindow::on_actionUpgrade_Database_triggered() {
 }
 
 void MainWindow::ShowAutoUpdateDlg(bool Database) {
+  Q_UNUSED(Database);
   if (dlgAutoUpdate->strUrl == "") return;
   if (dlgAutoUpdate->isVisible()) return;
 

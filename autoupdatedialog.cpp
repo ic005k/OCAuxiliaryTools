@@ -112,6 +112,7 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total,
 }
 
 void AutoUpdateDialog::doProcessError(QNetworkReply::NetworkError code) {
+  Q_UNUSED(code);
   qDebug() << "Error : " << reply->error();
 }
 
@@ -364,14 +365,6 @@ QString AutoUpdateDialog::GetFileSize(const qint64& size, int precision) {
   return QString::fromLatin1("%1 %2")
       .arg(sizeAsDouble, 0, 'f', precision)
       .arg(measure);
-}
-
-QString AutoUpdateDialog::getFormatBybytes(qint64 size) {
-  char unit;
-  const char* units[] = {" Bytes", " kB", " MB", " GB"};
-  for (unit = -1; (++unit < 3) && (size > 1023); size /= 1024)
-    ;
-  return QString::number(size, 'f', 1) + units[unit];
 }
 
 QString AutoUpdateDialog::GetFileSize(qint64 size) {

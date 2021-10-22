@@ -63,13 +63,31 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
   QStringList newEntryList = dir.entryList(
       QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
 
-  QSet<QString> newDirSet = QSet<QString>::fromList(newEntryList);  //旧
-  // QSet<QString> newDirSet = QSet<QString>(newEntryList.begin(),
-  // newEntryList.end());//新
+  QSet<QString> newDirSet;
+  QSet<QString> currentDirSet;
+#if (QT_VERSION <= QT_VERSION_CHECK(5, 9, 9))
+  {
+    newDirSet = QSet<QString>::fromList(newEntryList);  //旧
+  }
+#endif
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+  {
+    newDirSet = QSet<QString>(newEntryList.begin(),
+                              newEntryList.end());  //新
+  }
+#endif
 
-  QSet<QString> currentDirSet = QSet<QString>::fromList(currEntryList);  //旧
-  // QSet<QString> currentDirSet = QSet<QString>(currEntryList.begin(),
-  // currEntryList.end());//新
+#if (QT_VERSION <= QT_VERSION_CHECK(5, 9, 9))
+  {
+    currentDirSet = QSet<QString>::fromList(currEntryList);  //旧
+  }
+#endif
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+  {
+    currentDirSet = QSet<QString>(currEntryList.begin(),
+                                  currEntryList.end());  //新
+  }
+#endif
 
   // 添加了文件
   QSet<QString> newFiles = newDirSet - currentDirSet;
@@ -189,7 +207,7 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
           }
         }
 
-        QTime t;
+        QElapsedTimer t;
         t.start();
         int a;
         if (tempList.count() < 10) a = 3000;

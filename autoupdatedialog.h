@@ -51,8 +51,6 @@ class AutoUpdateDialog : public QDialog {
 
   void TextEditToFile(QTextEdit* txtEdit, QString fileName);
 
-  QString getFormatBybytes(qint64 size);
-
   QString GetFileSize(const qint64& size, int precision);
 
   QString GetFileSize(qint64 size);
