@@ -1522,6 +1522,29 @@ void MainWindow::read_ini(QTableWidget* table, QTableWidget* mytable, int i) {
   }
 }
 
+void MainWindow::write_value_ini(QTableWidget* table, QTableWidget* subtable,
+                                 int i) {
+  QString name = table->item(i, 0)->text().trimmed();
+  if (name == "") name = "Item" + QString::number(i + 1);
+  name = name.replace("/", "-");
+
+  QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime +
+                      table->objectName() + name + ".ini";
+
+  QFile file(plistPath);
+  if (file.exists()) file.remove();
+
+  QSettings Reg(plistPath, QSettings::IniFormat);
+
+  for (int k = 0; k < subtable->rowCount(); k++) {
+    Reg.setValue(QString::number(k + 1) + "/key", subtable->item(k, 0)->text());
+  }
+
+  Reg.setValue("total", subtable->rowCount());
+
+  IniFile.push_back(plistPath);
+}
+
 void MainWindow::read_value_ini(QTableWidget* table, QTableWidget* mytable,
                                 int i) {
   QString name = table->item(i, 0)->text().trimmed();
@@ -1630,29 +1653,6 @@ void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
 
   int last = table->rowCount();
   table->setCurrentCell(last - 1, 0);
-}
-
-void MainWindow::write_value_ini(QTableWidget* table, QTableWidget* subtable,
-                                 int i) {
-  QString name = table->item(i, 0)->text().trimmed();
-  if (name == "") name = "Item" + QString::number(i + 1);
-  name = name.replace("/", "-");
-
-  QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime +
-                      table->objectName() + name + ".ini";
-
-  QFile file(plistPath);
-  if (file.exists()) file.remove();
-
-  QSettings Reg(plistPath, QSettings::IniFormat);
-
-  for (int k = 0; k < subtable->rowCount(); k++) {
-    Reg.setValue(QString::number(k + 1) + "/key", subtable->item(k, 0)->text());
-  }
-
-  Reg.setValue("total", subtable->rowCount());
-
-  IniFile.push_back(plistPath);
 }
 
 void MainWindow::on_table_nv_del0_cellClicked(int row, int column) {
@@ -3543,9 +3543,8 @@ void MainWindow::on_btnDPDel_Add_clicked() {
 }
 
 void MainWindow::on_btnDPDel_Del_clicked() {
+  if (ui->table_dp_del->rowCount() <= 0) return;
   del_item(ui->table_dp_del);
-
-  //保存数据
   write_value_ini(ui->table_dp_del0, ui->table_dp_del,
                   ui->table_dp_del0->currentRow());
 }
@@ -3632,6 +3631,7 @@ void MainWindow::on_btnDPAdd_Add_clicked() {
 }
 
 void MainWindow::on_btnDPAdd_Del_clicked() {
+  if (ui->table_dp_add->rowCount() <= 0) return;
   del_item(ui->table_dp_add);
   write_ini(ui->table_dp_add0, ui->table_dp_add,
             ui->table_dp_add0->currentRow());
@@ -3997,6 +3997,7 @@ void MainWindow::on_btnNVRAMAdd_Del0_clicked() {
 }
 
 void MainWindow::on_btnNVRAMAdd_Del_clicked() {
+  if (ui->table_nv_add->rowCount() <= 0) return;
   del_item(ui->table_nv_add);
   write_ini(ui->table_nv_add0, ui->table_nv_add,
             ui->table_nv_add0->currentRow());
@@ -4121,17 +4122,15 @@ void MainWindow::on_btnNVRAMLS_Del0_clicked() {
 }
 
 void MainWindow::on_btnNVRAMDel_Del_clicked() {
+  if (ui->table_nv_del->rowCount() <= 0) return;
   del_item(ui->table_nv_del);
-
-  //保存数据
   write_value_ini(ui->table_nv_del0, ui->table_nv_del,
                   ui->table_nv_del0->currentRow());
 }
 
 void MainWindow::on_btnNVRAMLS_Del_clicked() {
+  if (ui->table_nv_ls->rowCount() <= 0) return;
   del_item(ui->table_nv_ls);
-
-  //保存数据
   write_value_ini(ui->table_nv_ls0, ui->table_nv_ls,
                   ui->table_nv_ls0->currentRow());
 }
@@ -6163,6 +6162,38 @@ void MainWindow::init_UndoRedo() {
   ui->toolBar->addSeparator();
 }
 
+void MainWindow::init_ToolButtonStyle() {
+  QObjectList list;
+  list = mymethod->getAllToolButton(getAllUIControls(ui->tabTotal));
+  for (int i = 0; i < list.count(); i++) {
+    QToolButton* w = (QToolButton*)list.at(i);
+    w->setStyleSheet(
+
+        "QToolButton:hover{ "
+        "color:rgb(0, 0, 255); "
+        "border-style:solid; "
+        "border-top-left-radius:2px;  "
+        "border-top-right-radius:2px; "
+        "background:#bfbfbf; "
+        "border:1px;"
+        "border-radius:5px;padding:2px 4px; }"
+
+        "QToolButton:pressed{ "
+        "color:rgb(255, 255, 255); "
+        "border-style:solid; "
+        "border-top-left-radius:2px;  "
+        "border-top-right-radius:2px; "
+        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 "
+        "rgb(226,236,241),"
+        "stop: 0.3 rgb(190,190,190),"
+        "stop: 1 rgb(160,160,160));"
+        "border:1px;"
+        "border-radius:5px;padding:2px 4px; }"
+
+    );
+  }
+}
+
 void MainWindow::init_MainUI() {
   orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
   orgLineEditStyle = ui->editBID->styleSheet();
@@ -6205,8 +6236,8 @@ void MainWindow::init_MainUI() {
   ui->btnNo->setDefault(true);
   ui->frameTip->setHidden(true);
 
+  init_ToolButtonStyle();
   init_FileMenu();
-
   init_EditMenu();
   ui->toolBar->addSeparator();
   init_UndoRedo();
@@ -6214,8 +6245,6 @@ void MainWindow::init_MainUI() {
   ui->toolBar->addWidget(ui->lblCount);
   ui->toolBar->addWidget(ui->cboxFind);
   ui->toolBar->addAction(ui->actionFind);
-  // ui->toolBar->addAction(ui->actionGo_to_the_previous);
-  // ui->toolBar->addAction(ui->actionGo_to_the_next);
 
   ui->toolBar->addSeparator();
   ui->toolBar->addAction(ui->actionDatabase);
@@ -6281,12 +6310,10 @@ void MainWindow::init_MainUI() {
   //转到上一个
   if (mac || osx1012) ui->actionGo_to_the_previous->setIconVisibleInMenu(false);
   ui->actionGo_to_the_previous->setShortcut(tr("ctrl+3"));
-  // ui->actionGo_to_the_previous->setIcon(QIcon(":/icon/1.png"));
 
   //转到下一个
   if (mac || osx1012) ui->actionGo_to_the_next->setIconVisibleInMenu(false);
   ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
-  // ui->actionGo_to_the_next->setIcon(QIcon(":/icon/2.png"));
 
   // StatusBar
   ui->statusbar->addPermanentWidget(ui->btnUpdateHex, 0);

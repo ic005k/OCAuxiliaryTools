@@ -16,6 +16,16 @@ QString strTools;
 
 Method::Method(QWidget* parent) : QMainWindow(parent) { mymethod = new Method; }
 
+QObjectList Method::getAllToolButton(QObjectList lstUIControls) {
+  QObjectList lstOfToolButton;
+  foreach (QObject* obj, lstUIControls) {
+    if (obj->metaObject()->className() == QStringLiteral("QToolButton")) {
+      lstOfToolButton.append(obj);
+    }
+  }
+  return lstOfToolButton;
+}
+
 QString Method::loadText(QString textFile) {
   QFileInfo fi(textFile);
   if (fi.exists()) {

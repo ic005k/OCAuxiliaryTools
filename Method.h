@@ -53,6 +53,7 @@ class Method : public QMainWindow {
   QString getKextVersion(QString kextFile);
   QString getTextEditLineText(QTextEdit* txtEdit, int i);
 
+  QObjectList getAllToolButton(QObjectList lstUIControls);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();

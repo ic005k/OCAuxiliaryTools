@@ -1015,6 +1015,7 @@ class MainWindow : public QMainWindow {
   bool FindTextChange = false;
   void showDlgPar(bool b1, bool b2, bool b3, bool b4);
   void updateIconStatus();
+  void init_ToolButtonStyle();
 };
 
 #endif  // MAINWINDOW_H
