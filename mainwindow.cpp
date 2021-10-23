@@ -6218,9 +6218,9 @@ void MainWindow::init_TableStyle() {
   for (int i = 0; i < listOfTableWidget.count(); i++) {
     QTableWidget* t;
     t = (QTableWidget*)listOfTableWidget.at(i);
-    QString strStyle =
-        "QTableWidget::item::selected{color : white;background : rgb(0, 124, "
-        "221);}";
+    QString strStyle = "QTableWidget{outline:0px;}"
+                       "QTableWidget::item::selected{color : white;background : rgb(0, 124, "
+                       "221);}";
 
     t->setStyleSheet(strStyle);
   }
