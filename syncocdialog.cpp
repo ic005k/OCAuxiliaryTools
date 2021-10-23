@@ -13,9 +13,9 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   ui->setupUi(this);
   setWindowTitle(tr("Sync OC") + " -> " + ocVer);
   QString listStyleMain =
-      "QListWidget::item:selected{background:#e6e6e6; border:0px "
+      "QListWidget::item:selected{background:blue; border:0px "
       "blue;margin:1px,1px,1px,1px;border-radius:6;"
-      "color:blue}";
+      "color:white}";
   ui->listSource->setStyleSheet(listStyleMain);
   ui->listTarget->setStyleSheet(listStyleMain);
 }
@@ -96,13 +96,13 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
                                  targetModi + "\nmd5    " + targetHash);
 
   if (sourceHash != targetHash) {
-    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/red.svg"));
-    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/red.svg"));
+    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
+    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
 
     blSame = false;
   } else {
-    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/green.svg"));
-    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/green.svg"));
+    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
+    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
   }
 
   ui->listSource->setFocus();

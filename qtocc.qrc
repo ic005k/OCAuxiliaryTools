@@ -54,5 +54,6 @@
         <file>icon/m8sel.png</file>
         <file>icon/espicon.png</file>
         <file>icon/savetip.png</file>
+        <file>icon/no.png</file>
     </qresource>
 </RCC>
