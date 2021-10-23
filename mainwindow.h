@@ -78,6 +78,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  void updateIconStatus();
   QTimer* timer;
   void lineEditSetText();
   QStringList strIconList;
@@ -900,6 +901,8 @@ class MainWindow : public QMainWindow {
 
   void updateStatus();
 
+  void on_table_nv_add0_itemClicked(QTableWidgetItem* item);
+
  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;
@@ -1014,7 +1017,7 @@ class MainWindow : public QMainWindow {
   void openFileAfter();
   bool FindTextChange = false;
   void showDlgPar(bool b1, bool b2, bool b3, bool b4);
-  void updateIconStatus();
+
   void init_ToolButtonStyle();
 };
 

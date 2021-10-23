@@ -3496,35 +3496,7 @@ void MainWindow::on_btnDPDel_Add0_clicked() {
 }
 
 void MainWindow::on_btnDPDel_Del0_clicked() {
-  if (ui->table_dp_del0->rowCount() == 0) return;
-
-  //先记住被删的条目位置
-  int delindex = ui->table_dp_del0->currentRow();
-  int count = ui->table_dp_del0->rowCount();
-
-  QString qz = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime +
-               ui->table_dp_del0->objectName();
-  QFile file(qz + QString::number(delindex + 1) + ".ini");
-  del_item(ui->table_dp_del0);
-  if (file.exists()) file.remove();
-
-  //改名，以适应新的索引
-  if (delindex < count) {
-    for (int i = delindex; i < ui->table_dp_del0->rowCount(); i++) {
-      QFile file(qz + QString::number(i + 2) + ".ini");
-      file.rename(qz + QString::number(i + 1) + ".ini");
-    }
-  }
-
-  if (ui->table_dp_del0->rowCount() == 0) {
-    ui->table_dp_del->setRowCount(0);
-  }
-
-  if (ui->table_dp_del0->rowCount() > 0)
-    on_table_dp_del0_cellClicked(ui->table_dp_del0->currentRow(), 0);
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  mymethod->delRightTableItem(ui->table_dp_del0, ui->table_dp_del);
 }
 
 void MainWindow::on_btnDPDel_Add_clicked() {
@@ -3600,19 +3572,7 @@ void MainWindow::on_btnDPAdd_Add0_clicked() {
 }
 
 void MainWindow::on_btnDPAdd_Del0_clicked() {
-  if (ui->table_dp_add0->rowCount() == 0) return;
-
-  del_item(ui->table_dp_add0);
-
-  if (ui->table_dp_add0->rowCount() == 0) {
-    ui->table_dp_add->setRowCount(0);
-  }
-
-  if (ui->table_dp_add0->rowCount() > 0)
-    on_table_dp_add0_cellClicked(ui->table_dp_add0->currentRow(), 0);
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  mymethod->delRightTableItem(ui->table_dp_add0, ui->table_dp_add);
 }
 
 void MainWindow::on_btnDPAdd_Add_clicked() {
@@ -3964,36 +3924,7 @@ void MainWindow::on_btnNVRAMAdd_Add_clicked() {
 }
 
 void MainWindow::on_btnNVRAMAdd_Del0_clicked() {
-  int count = ui->table_nv_add0->rowCount();
-
-  if (count == 0) return;
-
-  //先记住被删的条目位置
-  int delindex = ui->table_nv_add0->currentRow();
-
-  QString qz = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime +
-               ui->table_nv_add0->objectName();
-  QFile file(qz + QString::number(delindex + 1) + ".ini");
-  del_item(ui->table_nv_add0);
-  if (file.exists()) file.remove();
-
-  //改名，以适应新的索引
-  if (delindex < count) {
-    for (int i = delindex; i < ui->table_nv_add0->rowCount(); i++) {
-      QFile file(qz + QString::number(i + 2) + ".ini");
-      file.rename(qz + QString::number(i + 1) + ".ini");
-    }
-  }
-
-  if (ui->table_nv_add0->rowCount() == 0) {
-    ui->table_nv_add->setRowCount(0);
-  }
-
-  if (ui->table_nv_add0->rowCount() > 0)
-    on_table_nv_add0_cellClicked(ui->table_nv_add0->currentRow(), 0);
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  mymethod->delRightTableItem(ui->table_nv_add0, ui->table_nv_add);
 }
 
 void MainWindow::on_btnNVRAMAdd_Del_clicked() {
@@ -4058,67 +3989,11 @@ void MainWindow::on_btnNVRAMLS_Add_clicked() {
 }
 
 void MainWindow::on_btnNVRAMDel_Del0_clicked() {
-  if (ui->table_nv_del0->rowCount() == 0) return;
-
-  //先记住被删的条目位置
-  int delindex = ui->table_nv_del0->currentRow();
-  int count = ui->table_nv_del0->rowCount();
-
-  QString qz = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime +
-               ui->table_nv_del0->objectName();
-  QFile file(qz + QString::number(delindex + 1) + ".ini");
-  del_item(ui->table_nv_del0);
-  if (file.exists()) file.remove();
-
-  //改名，以适应新的索引
-  if (delindex < count) {
-    for (int i = delindex; i < ui->table_nv_del0->rowCount(); i++) {
-      QFile file(qz + QString::number(i + 2) + ".ini");
-      file.rename(qz + QString::number(i + 1) + ".ini");
-    }
-  }
-
-  if (ui->table_nv_del0->rowCount() == 0) {
-    ui->table_nv_del->setRowCount(0);
-  }
-
-  if (ui->table_nv_del0->rowCount() > 0)
-    on_table_nv_del0_cellClicked(ui->table_nv_del0->currentRow(), 0);
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  mymethod->delRightTableItem(ui->table_nv_del0, ui->table_nv_del);
 }
 
 void MainWindow::on_btnNVRAMLS_Del0_clicked() {
-  if (ui->table_nv_ls0->rowCount() == 0) return;
-
-  //先记住被删的条目位置
-  int delindex = ui->table_nv_ls0->currentRow();
-  int count = ui->table_nv_ls0->rowCount();
-
-  QString qz = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime +
-               ui->table_nv_ls0->objectName();
-  QFile file(qz + QString::number(delindex + 1) + ".ini");
-  del_item(ui->table_nv_ls0);
-  if (file.exists()) file.remove();
-
-  //改名，以适应新的索引
-  if (delindex < count) {
-    for (int i = delindex; i < ui->table_nv_ls0->rowCount(); i++) {
-      QFile file(qz + QString::number(i + 2) + ".ini");
-      file.rename(qz + QString::number(i + 1) + ".ini");
-    }
-  }
-
-  if (ui->table_nv_ls0->rowCount() == 0) {
-    ui->table_nv_ls->setRowCount(0);
-  }
-
-  if (ui->table_nv_ls0->rowCount() > 0)
-    on_table_nv_ls0_cellClicked(ui->table_nv_ls0->currentRow(), 0);
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  mymethod->delRightTableItem(ui->table_nv_ls0, ui->table_nv_ls);
 }
 
 void MainWindow::on_btnNVRAMDel_Del_clicked() {
@@ -9273,7 +9148,7 @@ void MainWindow::loadRightTable(QTableWidget* t0, QTableWidget* t) {
     read_ini(t0, t, t0->currentRow());
     LoadRightTable = false;
     loading = false;
-    ui->statusbar->showMessage(t0->currentItem()->text());
+    setStatusBarText(t0);
   }
   this->setWindowModified(md);
   updateIconStatus();
@@ -10595,4 +10470,8 @@ void MainWindow::updateIconStatus() {
     ui->actionSave->setIcon(QIcon(":/icon/savetip.png"));
   else
     ui->actionSave->setIcon(QIcon(":/icon/save.png"));
+}
+
+void MainWindow::on_table_nv_add0_itemClicked(QTableWidgetItem* item) {
+  Q_UNUSED(item);
 }

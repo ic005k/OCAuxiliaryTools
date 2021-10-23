@@ -54,6 +54,7 @@ class Method : public QMainWindow {
   QString getTextEditLineText(QTextEdit* txtEdit, int i);
 
   QObjectList getAllToolButton(QObjectList lstUIControls);
+  void delRightTableItem(QTableWidget* t0, QTableWidget* t);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();

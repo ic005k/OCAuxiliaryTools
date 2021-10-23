@@ -1737,19 +1737,17 @@ Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest
               <item row="0" column="4">
                <widget class="QCheckBox" name="chkDisableSingleUser">
                 <property name="toolTip">
-                 <string notr="true">This is a security option allowing one to restrict single user mode usage by ignoring CMD+S hotkey and -s boot argument. 
+                 <string notr="true">Type: plist boolean
 
-The behaviour with this quirk enabled is supposed to match T2-based model behaviour. 
+Description: Disable single user mode.
 
-Read this archived article to understand how to use single user mode with this quirk enabled.
-
+This is a security option that restricts the activation of single user mode by ignoring the CMD+S hotkey and the -s boot argument. The behaviour with this quirk enabled is supposed to match T2-based model behaviour. Refer to this archived article to understand how to use single user mode with this quirk enabled.
 ----
+类型：plist布尔值
 
-这是一个安全选项，允许人们通过忽略CMD+S热键和-s启动参数来限制单用户模式的使用。
+描述：禁用单用户模式。
 
-启用此选项后的行为应该与基于T2的模式行为一致。
-
-</string>
+这是一个安全选项，通过忽略CMD+S热键和-s启动参数来限制单用户模式的激活。启用这个选项后的行为应该是与基于T2的模式行为相匹配的。</string>
                 </property>
                 <property name="statusTip">
                  <string>Disable single user mode.</string>

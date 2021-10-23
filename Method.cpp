@@ -16,6 +16,17 @@ QString strTools;
 
 Method::Method(QWidget* parent) : QMainWindow(parent) { mymethod = new Method; }
 
+void Method::delRightTableItem(QTableWidget* t0, QTableWidget* t) {
+  if (t0->rowCount() == 0) return;
+  mw_one->del_item(t0);
+  if (t0->rowCount() == 0) {
+    t->setRowCount(0);
+  }
+  if (t0->rowCount() > 0) t0->cellClicked(t0->currentRow(), 0);
+  mw_one->setWindowModified(true);
+  mw_one->updateIconStatus();
+}
+
 QObjectList Method::getAllToolButton(QObjectList lstUIControls) {
   QObjectList lstOfToolButton;
   foreach (QObject* obj, lstUIControls) {
