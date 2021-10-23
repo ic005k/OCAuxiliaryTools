@@ -22,7 +22,11 @@
     </widget>
    </item>
    <item row="1" column="0">
-    <widget class="QListWidget" name="listSource"/>
+    <widget class="QListWidget" name="listSource">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+    </widget>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="lblTarget">
@@ -32,7 +36,11 @@
     </widget>
    </item>
    <item row="3" column="0">
-    <widget class="QListWidget" name="listTarget"/>
+    <widget class="QListWidget" name="listTarget">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+    </widget>
    </item>
    <item row="4" column="0">
     <widget class="QCheckBox" name="chkIncludeResource">

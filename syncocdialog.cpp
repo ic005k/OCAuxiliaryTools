@@ -12,10 +12,10 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {
   ui->setupUi(this);
   setWindowTitle(tr("Sync OC") + " -> " + ocVer);
-  QString listStyleMain =
-      "QListWidget::item:selected{background:blue; border:0px "
-      "blue;margin:1px,1px,1px,1px;border-radius:6;"
-      "color:white}";
+  QString listStyleMain = "QListWidget{outline:0px;}"
+                          "QListWidget::item:selected{background:blue; border:0px "
+                          "blue;margin:1px,1px,1px,1px;border-radius:6;"
+                          "color:white}";
   ui->listSource->setStyleSheet(listStyleMain);
   ui->listTarget->setStyleSheet(listStyleMain);
 }

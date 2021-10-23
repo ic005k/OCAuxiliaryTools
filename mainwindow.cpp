@@ -5717,7 +5717,7 @@ void MainWindow::setListMainIcon() {
 void MainWindow::on_listMain_itemSelectionChanged() {
   int cu = ui->listMain->currentRow();
   ui->tabTotal->setCurrentIndex(cu);
-  int index;
+  int index = 0;
   if (ui->listMain->currentRow() != 8)
     index = mainTabList.at(cu)->currentIndex();
 
@@ -5780,7 +5780,8 @@ void MainWindow::on_listMain_itemSelectionChanged() {
   }
 
   QStringList str;
-  int w1, w2;
+  int w1 = 0;
+  int w2 = 0;
   for (int i = 0; i < strList.count(); i++) {
     ui->listSub->addItem(strList.at(i));
     str = strList.at(i).split("\n");
@@ -9199,30 +9200,35 @@ void MainWindow::endPasteLine(QTableWidget* w, int row, QString colText0) {
   }
 }
 
-void MainWindow::endDelLeftTable(QTableWidget* t0) {
-  QTableWidget* t;
+void MainWindow::endDelLeftTable(QTableWidget *t0)
+{
+    QTableWidget *t = NULL;
 
-  if (t0 == ui->table_dp_add0 || t0 == ui->table_dp_del0 ||
-      t0 == ui->table_nv_add0 || t0 == ui->table_nv_del0 ||
-      t0 == ui->table_nv_ls0) {
-    if (t0 == ui->table_dp_add0) t = ui->table_dp_add;
+    if (t0 == ui->table_dp_add0 || t0 == ui->table_dp_del0 || t0 == ui->table_nv_add0
+        || t0 == ui->table_nv_del0 || t0 == ui->table_nv_ls0) {
+        if (t0 == ui->table_dp_add0)
+            t = ui->table_dp_add;
 
-    if (t0 == ui->table_dp_del0) t = ui->table_dp_del;
+        if (t0 == ui->table_dp_del0)
+            t = ui->table_dp_del;
 
-    if (t0 == ui->table_nv_add0) t = ui->table_nv_add;
+        if (t0 == ui->table_nv_add0)
+            t = ui->table_nv_add;
 
-    if (t0 == ui->table_nv_del0) t = ui->table_nv_del;
+        if (t0 == ui->table_nv_del0)
+            t = ui->table_nv_del;
 
-    if (t0 == ui->table_nv_ls0) t = ui->table_nv_ls;
+        if (t0 == ui->table_nv_ls0)
+            t = ui->table_nv_ls;
 
-    if (t0->rowCount() == 0) {
-      t->setRowCount(0);
+        if (t0->rowCount() == 0) {
+            t->setRowCount(0);
+        }
+
+        if (t0->rowCount() > 0) {
+            loadRightTable(t0, t);
+        }
     }
-
-    if (t0->rowCount() > 0) {
-      loadRightTable(t0, t);
-    }
-  }
 }
 
 QTableWidget* MainWindow::getLeftTable(QTableWidget* table) {
