@@ -9576,7 +9576,14 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QString strKextName = ui->table_kernel_add->item(i, 0)->text().trimmed();
     if (strKextName == "Lilu.kext" || strKextName == "AppleALC.kext" ||
-        strKextName == "WhateverGreen.kext") {
+        strKextName == "WhateverGreen.kext" ||
+        strKextName == "VoodooPS2Controller.kext" ||
+        strKextName == "VirtualSMC.kext" ||
+        strKextName == "SMCBatteryManager.kext" ||
+        strKextName == "SMCDellSensors.kext" ||
+        strKextName == "SMCProcessor.kext" ||
+        strKextName == "SMCSuperIO.kext" ||
+        strKextName == "SMCLightSensor.kext") {
       sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
       targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
     }

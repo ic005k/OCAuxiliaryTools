@@ -29,6 +29,8 @@ class SyncOCDialog : public QDialog {
 
   void on_listSource_itemClicked(QListWidgetItem *item);
 
+  void on_listTarget_itemClicked(QListWidgetItem *item);
+
  private:
 };
 

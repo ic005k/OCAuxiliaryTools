@@ -12,6 +12,12 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {
   ui->setupUi(this);
   setWindowTitle(tr("Sync OC") + " -> " + ocVer);
+  QString listStyleMain =
+      "QListWidget::item:selected{background:#e6e6e6; border:0px "
+      "blue;margin:1px,1px,1px,1px;border-radius:6;"
+      "color:blue}";
+  ui->listSource->setStyleSheet(listStyleMain);
+  ui->listTarget->setStyleSheet(listStyleMain);
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
@@ -108,4 +114,9 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
 void SyncOCDialog::on_listSource_itemClicked(QListWidgetItem* item) {
   Q_UNUSED(item);
   on_listSource_currentRowChanged(ui->listSource->currentRow());
+}
+
+void SyncOCDialog::on_listTarget_itemClicked(QListWidgetItem* item) {
+  Q_UNUSED(item);
+  ui->listSource->setCurrentRow(ui->listTarget->currentRow());
 }
