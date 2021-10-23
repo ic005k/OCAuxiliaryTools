@@ -7,14 +7,13 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-Method* mymethod;
 
 QString strACPI;
 QString strKexts;
 QString strDrivers;
 QString strTools;
 
-Method::Method(QWidget* parent) : QMainWindow(parent) { mymethod = new Method; }
+Method::Method(QWidget* parent) : QMainWindow(parent) {}
 
 void Method::delRightTableItem(QTableWidget* t0, QTableWidget* t) {
   if (t0->rowCount() == 0) return;

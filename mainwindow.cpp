@@ -23,7 +23,7 @@ QWidgetList wdlist;
 QTableWidget* tableDatabase;
 QRegExp regx("[A-Fa-f0-9]{0,1024}");
 QRegExp regxNumber("^-?\[0-9]*$");
-extern Method* mymethod;
+Method* mymethod;
 QVector<QCheckBox*> chkDisplayLevel;
 QVector<QCheckBox*> chk_ScanPolicy;
 QVector<QCheckBox*> chk_PickerAttributes;
@@ -50,21 +50,17 @@ MainWindow::MainWindow(QWidget* parent)
   setWindowTitle(title);
 
 #ifdef Q_OS_MAC
-
 #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
   osx1012 = true;
 #endif
-
   if (osx1012)
     mac = false;
   else
     mac = true;
-
 #endif
 
 #ifdef Q_OS_WIN32
   reg_win();
-
   win = true;
 #endif
 
@@ -74,12 +70,7 @@ MainWindow::MainWindow(QWidget* parent)
   linuxOS = true;
 #endif
 
-  init_MainUI();
-
-  init_setWindowModified();
-
-  init_hardware_info();
-
+  mymethod = new Method(this);
   aboutDlg = new aboutDialog(this);
   myDatabase = new dlgDatabase(this);
   dlgOCV = new dlgOCValidate(this);
@@ -91,14 +82,15 @@ MainWindow::MainWindow(QWidget* parent)
   strAppExePath = qApp->applicationDirPath();
   timer = new QTimer(this);
   connect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
-  // timer->start(1000);
 
   QDir dir;
   if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) {
   }
 
   setUIMargin();
-
+  init_MainUI();
+  init_setWindowModified();
+  init_hardware_info();
   initui_booter();
   initui_dp();
   initui_kernel();
@@ -132,7 +124,6 @@ MainWindow::MainWindow(QWidget* parent)
   manager = new QNetworkAccessManager(this);
   connect(manager, SIGNAL(finished(QNetworkReply*)), this,
           SLOT(replyFinished(QNetworkReply*)));
-
   autoCheckUpdate = true;
   on_btnCheckUpdate();
 
