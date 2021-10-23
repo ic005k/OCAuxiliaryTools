@@ -119,4 +119,5 @@ void SyncOCDialog::on_listSource_itemClicked(QListWidgetItem* item) {
 void SyncOCDialog::on_listTarget_itemClicked(QListWidgetItem* item) {
   Q_UNUSED(item);
   ui->listSource->setCurrentRow(ui->listTarget->currentRow());
+  ui->listTarget->setFocus();
 }
