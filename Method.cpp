@@ -13,7 +13,67 @@ QString strKexts;
 QString strDrivers;
 QString strTools;
 
-Method::Method(QWidget* parent) : QMainWindow(parent) {}
+Method::Method(QWidget* parent) : QMainWindow(parent) {
+  QString test = "https://github.com/acidanthera/Lilu";
+  getLastReleaseFromUrl(test);
+}
+
+void Method::getLastReleaseFromUrl(QString strUrl) {
+  // https://github.com/ic005k/QtOpenCoreConfig
+  // https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/latest
+  QString strAPI =
+      strUrl.replace("https://github.com/", "https://api.github.com/repos/") +
+      "/releases/latest";
+  QNetworkRequest quest;
+  quest.setUrl(QUrl(strAPI));
+  quest.setHeader(QNetworkRequest::UserAgentHeader, "RT-Thread ART");
+  QNetworkAccessManager* manager;
+  manager = new QNetworkAccessManager(this);
+  connect(manager, SIGNAL(finished(QNetworkReply*)), this,
+          SLOT(replyFinished(QNetworkReply*)));
+  manager->get(quest);
+}
+
+void Method::replyFinished(QNetworkReply* reply) {
+  QString str = reply->readAll();
+  parse_UpdateJSON(str);
+  reply->deleteLater();
+}
+
+void Method::parse_UpdateJSON(QString str) {
+  QJsonParseError err_rpt;
+  QJsonDocument root_Doc = QJsonDocument::fromJson(str.toUtf8(), &err_rpt);
+
+  if (err_rpt.error != QJsonParseError::NoError) {
+    QMessageBox::critical(this, "", tr("Network error!"));
+
+    return;
+  }
+
+  QString Verison;
+  QString strDLUrl;
+  if (root_Doc.isObject()) {
+    QJsonObject root_Obj = root_Doc.object();
+    QVariantList list = root_Obj.value("assets").toArray().toVariantList();
+    Verison = root_Obj.value("tag_name").toString();
+    QStringList strDownloadUrlList;
+    for (int i = 0; i < list.count(); i++) {
+      QVariantMap map = list[i].toMap();
+      strDownloadUrlList.append(map["browser_download_url"].toString());
+    }
+
+    for (int i = 0; i < strDownloadUrlList.count(); i++) {
+      if (strDownloadUrlList.count() > 1) {
+        QString str = strDownloadUrlList.at(i);
+        if (str.contains("RELEASE")) strDLUrl = str;
+      } else
+        strDLUrl = strDownloadUrlList.at(0);
+    }
+  }
+  strDLInfoList.clear();
+  strDLInfoList = QStringList() << Verison << strDLUrl;
+  qDebug() << strDLInfoList.at(0) << strDLInfoList.at(1);
+}
 
 void Method::delRightTableItem(QTableWidget* t0, QTableWidget* t) {
   if (t0->rowCount() == 0) return;

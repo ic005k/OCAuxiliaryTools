@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QNetworkReply>
 #include <QObject>
 #include <QTableWidget>
 #include <QTextEdit>
@@ -14,7 +15,7 @@ class Method : public QMainWindow {
   Q_OBJECT
  public:
   explicit Method(QWidget* parent = nullptr);
-
+  QStringList strDLInfoList;
   QString getMD5(QString targetFile);
   void goTable(QTableWidget* table);
   QWidget* getSubTabWidget(int m, int s);
@@ -58,11 +59,14 @@ class Method : public QMainWindow {
   bool isEqualInList(QString str, QStringList list);
   QStringList DirToFileList(QString strDir, QString strFilter);
   bool isWhatFile(QString File, QString filter);
+  void getLastReleaseFromUrl(QString strUrl);
+  void parse_UpdateJSON(QString str);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
   void on_btnImportMaster();
 
+  void replyFinished(QNetworkReply* reply);
  signals:
 };
 
