@@ -20,6 +20,7 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
 
   ui->listSource->setStyleSheet(listStyleMain);
   ui->listTarget->setStyleSheet(listStyleMain);
+
   ui->listSource->setIconSize(QSize(15, 15));
   ui->listTarget->setIconSize(QSize(15, 15));
 }
@@ -63,6 +64,8 @@ void SyncOCDialog::on_btnStartSync_clicked() {
 
 void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   if (currentRow < 0) return;
+
+  setListWidgetStyle();
 
   QString sourceModi, targetModi, sourceFile, targetFile, sourceHash,
       targetHash;
@@ -122,4 +125,29 @@ void SyncOCDialog::on_listSource_itemClicked(QListWidgetItem* item) {
 
 void SyncOCDialog::on_listTarget_itemClicked(QListWidgetItem* item) {
   Q_UNUSED(item);
+}
+
+void SyncOCDialog::setListWidgetStyle() {
+  QString fileName = ui->listSource->item(ui->listSource->currentRow())->text();
+  if (mymethod->isKextFile(fileName)) {
+    QString bk = "#ccffcc";
+    ui->listSource->item(ui->listSource->currentRow())
+        ->setForeground(QBrush(Qt::black));
+    ui->listSource->item(ui->listSource->currentRow())
+        ->setBackground(QBrush(QColor(bk)));
+    ui->listTarget->item(ui->listSource->currentRow())
+        ->setForeground(QBrush(Qt::black));
+    ui->listTarget->item(ui->listSource->currentRow())
+        ->setBackground(QBrush(QColor(bk)));
+  } else {
+    QString bk = "#ffffcc";
+    ui->listSource->item(ui->listSource->currentRow())
+        ->setForeground(QBrush(Qt::black));
+    ui->listSource->item(ui->listSource->currentRow())
+        ->setBackground(QBrush(QColor(bk)));
+    ui->listTarget->item(ui->listSource->currentRow())
+        ->setForeground(QBrush(Qt::black));
+    ui->listTarget->item(ui->listSource->currentRow())
+        ->setBackground(QBrush(QColor(bk)));
+  }
 }

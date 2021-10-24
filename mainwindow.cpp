@@ -6218,9 +6218,10 @@ void MainWindow::init_TableStyle() {
   for (int i = 0; i < listOfTableWidget.count(); i++) {
     QTableWidget* t;
     t = (QTableWidget*)listOfTableWidget.at(i);
-    QString strStyle = "QTableWidget{outline:0px;}"
-                       "QTableWidget::item::selected{color : white;background : rgb(0, 124, "
-                       "221);}";
+    QString strStyle =
+        "QTableWidget{outline:0px;}"
+        "QTableWidget::item::selected{color : white;background : rgb(0, 124, "
+        "221);}";
 
     t->setStyleSheet(strStyle);
   }
@@ -9200,35 +9201,30 @@ void MainWindow::endPasteLine(QTableWidget* w, int row, QString colText0) {
   }
 }
 
-void MainWindow::endDelLeftTable(QTableWidget *t0)
-{
-    QTableWidget *t = NULL;
+void MainWindow::endDelLeftTable(QTableWidget* t0) {
+  QTableWidget* t = NULL;
 
-    if (t0 == ui->table_dp_add0 || t0 == ui->table_dp_del0 || t0 == ui->table_nv_add0
-        || t0 == ui->table_nv_del0 || t0 == ui->table_nv_ls0) {
-        if (t0 == ui->table_dp_add0)
-            t = ui->table_dp_add;
+  if (t0 == ui->table_dp_add0 || t0 == ui->table_dp_del0 ||
+      t0 == ui->table_nv_add0 || t0 == ui->table_nv_del0 ||
+      t0 == ui->table_nv_ls0) {
+    if (t0 == ui->table_dp_add0) t = ui->table_dp_add;
 
-        if (t0 == ui->table_dp_del0)
-            t = ui->table_dp_del;
+    if (t0 == ui->table_dp_del0) t = ui->table_dp_del;
 
-        if (t0 == ui->table_nv_add0)
-            t = ui->table_nv_add;
+    if (t0 == ui->table_nv_add0) t = ui->table_nv_add;
 
-        if (t0 == ui->table_nv_del0)
-            t = ui->table_nv_del;
+    if (t0 == ui->table_nv_del0) t = ui->table_nv_del;
 
-        if (t0 == ui->table_nv_ls0)
-            t = ui->table_nv_ls;
+    if (t0 == ui->table_nv_ls0) t = ui->table_nv_ls;
 
-        if (t0->rowCount() == 0) {
-            t->setRowCount(0);
-        }
-
-        if (t0->rowCount() > 0) {
-            loadRightTable(t0, t);
-        }
+    if (t0->rowCount() == 0) {
+      t->setRowCount(0);
     }
+
+    if (t0->rowCount() > 0) {
+      loadRightTable(t0, t);
+    }
+  }
 }
 
 QTableWidget* MainWindow::getLeftTable(QTableWidget* table) {
@@ -9570,9 +9566,15 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   }
 
   // Kexts
+  QStringList dbkextFileList =
+      mymethod->kextDirToFileList(pathSource + "EFI/OC/Kexts/");
+  // for (int i = 0; i < dbkextFileList.count(); i++)
+  //  qDebug() << dbkextFileList.at(i);
+
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QString strKextName = ui->table_kernel_add->item(i, 0)->text().trimmed();
-    if (strKextName == "Lilu.kext" || strKextName == "AppleALC.kext" ||
+    if (dbkextFileList.contains(strKextName))
+    /*if (strKextName == "Lilu.kext" || strKextName == "AppleALC.kext" ||
         strKextName == "WhateverGreen.kext" ||
         strKextName == "VoodooPS2Controller.kext" ||
         strKextName == "VirtualSMC.kext" ||
@@ -9580,7 +9582,8 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
         strKextName == "SMCDellSensors.kext" ||
         strKextName == "SMCProcessor.kext" ||
         strKextName == "SMCSuperIO.kext" ||
-        strKextName == "SMCLightSensor.kext") {
+        strKextName == "SMCLightSensor.kext")*/
+    {
       sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
       targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
     }

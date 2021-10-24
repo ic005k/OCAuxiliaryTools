@@ -92,6 +92,27 @@ bool Method::isKext(QString kextName) {
     return false;
 }
 
+bool Method::isKextFile(QString kextFile) {
+  QFileInfo fi(kextFile);
+  return isKext(fi.fileName());
+}
+
+QStringList Method::kextDirToFileList(QString kextDir) {
+  QStringList list;
+  QDir dir(kextDir);
+  if (!dir.exists()) {
+    qInfo() << "path is non-existent...";
+    return list;
+  }
+  dir.setFilter(QDir::Dirs | QDir::NoSymLinks);
+  QStringList filters;
+  filters << "*.kext";
+  dir.setNameFilters(filters);
+  list = dir.entryList();
+  // qDebug() << list.count() << kextDir;
+  return list;
+}
+
 QString Method::getKextBin(QString kextName) {
   QString str0 = kextName.mid(0, kextName.length() - 5);
   QStringList tempList = str0.split("/");

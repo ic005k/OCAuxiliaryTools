@@ -55,11 +55,13 @@ class Method : public QMainWindow {
 
   QObjectList getAllToolButton(QObjectList lstUIControls);
   void delRightTableItem(QTableWidget* t0, QTableWidget* t);
+  QStringList kextDirToFileList(QString kextDir);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
   void on_btnImportMaster();
 
+  bool isKextFile(QString kextFile);
  signals:
 };
 

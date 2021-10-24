@@ -32,6 +32,7 @@ class SyncOCDialog : public QDialog {
   void on_listTarget_itemClicked(QListWidgetItem *item);
 
  private:
+  void setListWidgetStyle();
 };
 
 #endif  // SYNCOCDIALOG_H
