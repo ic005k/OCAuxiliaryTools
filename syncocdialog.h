@@ -33,6 +33,7 @@ class SyncOCDialog : public QDialog {
 
  private:
   void setListWidgetStyle();
+  void setListWidgetColor(QString color);
 };
 
 #endif  // SYNCOCDIALOG_H

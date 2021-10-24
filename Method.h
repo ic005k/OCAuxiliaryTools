@@ -55,13 +55,14 @@ class Method : public QMainWindow {
 
   QObjectList getAllToolButton(QObjectList lstUIControls);
   void delRightTableItem(QTableWidget* t0, QTableWidget* t);
-  QStringList kextDirToFileList(QString kextDir);
+  bool isEqualInList(QString str, QStringList list);
+  QStringList DirToFileList(QString strDir, QString strFilter);
+  bool isWhatFile(QString File, QString filter);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
   void on_btnImportMaster();
 
-  bool isKextFile(QString kextFile);
  signals:
 };
 

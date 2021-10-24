@@ -92,25 +92,37 @@ bool Method::isKext(QString kextName) {
     return false;
 }
 
-bool Method::isKextFile(QString kextFile) {
-  QFileInfo fi(kextFile);
-  return isKext(fi.fileName());
+bool Method::isWhatFile(QString File, QString filter) {
+  QFileInfo fi(File);
+  if (fi.suffix() == filter) return true;
+
+  return false;
 }
 
-QStringList Method::kextDirToFileList(QString kextDir) {
+QStringList Method::DirToFileList(QString strDir, QString strFilter) {
   QStringList list;
-  QDir dir(kextDir);
+  QDir dir(strDir);
   if (!dir.exists()) {
     qInfo() << "path is non-existent...";
     return list;
   }
-  dir.setFilter(QDir::Dirs | QDir::NoSymLinks);
+  if (strFilter == "*.kext")
+    dir.setFilter(QDir::Dirs | QDir::NoSymLinks);
+  else
+    dir.setFilter(QDir::Files | QDir::NoSymLinks);
   QStringList filters;
-  filters << "*.kext";
+  filters << strFilter;
   dir.setNameFilters(filters);
   list = dir.entryList();
   // qDebug() << list.count() << kextDir;
   return list;
+}
+
+bool Method::isEqualInList(QString str, QStringList list) {
+  for (int i = 0; i < list.count(); i++) {
+    if (str == list.at(i)) return true;
+  }
+  return false;
 }
 
 QString Method::getKextBin(QString kextName) {

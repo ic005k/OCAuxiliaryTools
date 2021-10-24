@@ -129,25 +129,27 @@ void SyncOCDialog::on_listTarget_itemClicked(QListWidgetItem* item) {
 
 void SyncOCDialog::setListWidgetStyle() {
   QString fileName = ui->listSource->item(ui->listSource->currentRow())->text();
-  if (mymethod->isKextFile(fileName)) {
-    QString bk = "#ccffcc";
-    ui->listSource->item(ui->listSource->currentRow())
-        ->setForeground(QBrush(Qt::black));
-    ui->listSource->item(ui->listSource->currentRow())
-        ->setBackground(QBrush(QColor(bk)));
-    ui->listTarget->item(ui->listSource->currentRow())
-        ->setForeground(QBrush(Qt::black));
-    ui->listTarget->item(ui->listSource->currentRow())
-        ->setBackground(QBrush(QColor(bk)));
-  } else {
-    QString bk = "#ffffcc";
-    ui->listSource->item(ui->listSource->currentRow())
-        ->setForeground(QBrush(Qt::black));
-    ui->listSource->item(ui->listSource->currentRow())
-        ->setBackground(QBrush(QColor(bk)));
-    ui->listTarget->item(ui->listSource->currentRow())
-        ->setForeground(QBrush(Qt::black));
-    ui->listTarget->item(ui->listSource->currentRow())
-        ->setBackground(QBrush(QColor(bk)));
+  if (mymethod->isWhatFile(fileName, "kext")) {
+    setListWidgetColor("#FFD39B");
   }
+  if (mymethod->isWhatFile(fileName, "efi")) {
+    setListWidgetColor("#E0EEEE");
+  }
+  if (mymethod->isWhatFile(fileName, "efi") && fileName.contains("/Tools/")) {
+    setListWidgetColor("#FFEFDB");
+  }
+  if (mymethod->isWhatFile(fileName, "efi") && fileName.contains("/Drivers/")) {
+    setListWidgetColor("#F5F5DC");
+  }
+}
+
+void SyncOCDialog::setListWidgetColor(QString color) {
+  ui->listSource->item(ui->listSource->currentRow())
+      ->setForeground(QBrush(Qt::black));
+  ui->listSource->item(ui->listSource->currentRow())
+      ->setBackground(QBrush(QColor(color)));
+  ui->listTarget->item(ui->listSource->currentRow())
+      ->setForeground(QBrush(Qt::black));
+  ui->listTarget->item(ui->listSource->currentRow())
+      ->setBackground(QBrush(QColor(color)));
 }

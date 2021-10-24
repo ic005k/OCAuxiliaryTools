@@ -9567,25 +9567,23 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
 
   // Kexts
   QStringList dbkextFileList =
-      mymethod->kextDirToFileList(pathSource + "EFI/OC/Kexts/");
-  // for (int i = 0; i < dbkextFileList.count(); i++)
-  //  qDebug() << dbkextFileList.at(i);
-
+      mymethod->DirToFileList(pathSource + "EFI/OC/Kexts/", "*.kext");
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QString strKextName = ui->table_kernel_add->item(i, 0)->text().trimmed();
-    if (dbkextFileList.contains(strKextName))
-    /*if (strKextName == "Lilu.kext" || strKextName == "AppleALC.kext" ||
-        strKextName == "WhateverGreen.kext" ||
-        strKextName == "VoodooPS2Controller.kext" ||
-        strKextName == "VirtualSMC.kext" ||
-        strKextName == "SMCBatteryManager.kext" ||
-        strKextName == "SMCDellSensors.kext" ||
-        strKextName == "SMCProcessor.kext" ||
-        strKextName == "SMCSuperIO.kext" ||
-        strKextName == "SMCLightSensor.kext")*/
-    {
+    if (mymethod->isEqualInList(strKextName, dbkextFileList)) {
       sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
       targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
+    }
+  }
+
+  // Tools
+  QStringList dbToolsFileList =
+      mymethod->DirToFileList(pathSource + "EFI/OC/Tools/", "*.efi");
+  for (int i = 0; i < ui->tableTools->rowCount(); i++) {
+    QString strName = ui->tableTools->item(i, 0)->text().trimmed();
+    if (mymethod->isEqualInList(strName, dbToolsFileList)) {
+      sourceFiles.append(pathSource + "EFI/OC/Tools/" + strName);
+      targetFiles.append(DirName + "/OC/Tools/" + strName);
     }
   }
 
