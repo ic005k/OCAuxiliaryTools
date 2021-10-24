@@ -7,25 +7,25 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
-	<string>VoodooI2CSynaptics</string>
+	<string>ATH9KFixup</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.alexandred.VoodooI2CSynaptics</string>
+	<string>com.chunnann.ATH9KFixup</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>VoodooI2CSynaptics</string>
+	<string>ATH9KFixup</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-	<key>CFBundleSpokenName</key>
-	<string></string>
+	<string>1.3.3</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.3.3</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -44,39 +44,44 @@
 	<string>13A233</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>VoodooI2CHIDDevice</key>
+		<key>ATH9KFixup</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
-			<string>com.alexandred.VoodooI2CSynaptics</string>
+			<string>com.chunnann.ATH9KFixup</string>
 			<key>IOClass</key>
-			<string>VoodooI2CSynapticsDevice</string>
-			<key>IOProbeScore</key>
-			<integer>400</integer>
-			<key>IOPropertyMatch</key>
-			<dict>
-				<key>name</key>
-				<string>SYNA2B33</string>
-			</dict>
+			<string>ATH9KFixup</string>
+			<key>IOMatchCategory</key>
+			<string>ATH9KFixup</string>
 			<key>IOProviderClass</key>
-			<string>VoodooI2CDeviceNub</string>
+			<string>IOResources</string>
+			<key>IOResourceMatch</key>
+			<string>IOKit</string>
 		</dict>
 	</dict>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.11</string>
+	<string>10.9</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2017 Alexandre Daoud. All rights reserved.</string>
+	<string>Copyright © 2017 chunnann. All rights reserved.</string>
+	<key>OSBundleCompatibleVersion</key>
+	<string>1.0</string>
 	<key>OSBundleLibraries</key>
 	<dict>
-		<key>com.alexandred.VoodooI2C</key>
-		<string>2.0</string>
-		<key>com.apple.iokit.IOACPIFamily</key>
-		<string>1.4</string>
+		<key>as.vit9696.Lilu</key>
+		<string>1.2.0</string>
+		<key>com.apple.kpi.bsd</key>
+		<string>12.0.0</string>
+		<key>com.apple.kpi.dsep</key>
+		<string>12.0.0</string>
 		<key>com.apple.kpi.iokit</key>
-		<string>15.6</string>
+		<string>12.0.0</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>15.6</string>
+		<string>12.0.0</string>
 		<key>com.apple.kpi.mach</key>
-		<string>15.6</string>
+		<string>12.0.0</string>
+		<key>com.apple.kpi.unsupported</key>
+		<string>12.0.0</string>
 	</dict>
+	<key>OSBundleRequired</key>
+	<string>Root</string>
 </dict>
 </plist>
