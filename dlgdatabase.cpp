@@ -1,16 +1,15 @@
 #include "dlgdatabase.h"
+
 #include "Method.h"
 #include "mainwindow.h"
 #include "ui_dlgdatabase.h"
 
-extern QTableWidget* tableDatabase;
-extern MainWindow* mw_one;
-extern Method* mymethod;
+extern QTableWidget *tableDatabase;
+extern MainWindow *mw_one;
+extern Method *mymethod;
 extern QString SaveFileName;
 
-dlgDatabase::dlgDatabase(QWidget* parent)
-    : QDialog(parent)
-    , ui(new Ui::dlgDatabase)
+dlgDatabase::dlgDatabase(QWidget *parent) : QDialog(parent), ui(new Ui::dlgDatabase)
 {
     ui->setupUi(this);
 
@@ -20,7 +19,7 @@ dlgDatabase::dlgDatabase(QWidget* parent)
     tableDatabase->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableDatabaseFind->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    QTableWidgetItem* id0;
+    QTableWidgetItem *id0;
 
     ui->tableDatabase->setColumnWidth(0, 520);
     id0 = new QTableWidgetItem(tr("Config Database"));
@@ -75,7 +74,7 @@ void dlgDatabase::on_btnFind_clicked()
         QFileInfo fi(str);
         if (fi.baseName().toLower().contains(text.toLower())) {
             ui->tableDatabaseFind->setRowCount(count + 1);
-            QTableWidgetItem* newItem1;
+            QTableWidgetItem *newItem1;
             newItem1 = new QTableWidgetItem(str);
             ui->tableDatabaseFind->setItem(count, 0, newItem1);
 
@@ -98,7 +97,7 @@ void dlgDatabase::on_btnFind_clicked()
     tableDatabase->setSelectionMode(QAbstractItemView::ExtendedSelection);
 }
 
-void dlgDatabase::on_editFind_textChanged(const QString& arg1)
+void dlgDatabase::on_editFind_textChanged(const QString &arg1)
 {
     if (arg1 == "") {
         ui->lblCount->setText("0");
@@ -163,4 +162,16 @@ void dlgDatabase::on_btnRefreshAll_clicked()
 
     ui->btnRefreshAll->setEnabled(true);
     this->repaint();
+}
+
+void dlgDatabase::on_btnAdd_clicked()
+{
+    int n = ui->tableKextUrl->rowCount();
+    ui->tableKextUrl->setRowCount(n + 1);
+}
+
+void dlgDatabase::on_btnDel_clicked()
+{
+    int n = ui->tableKextUrl->currentRow();
+    ui->tableKextUrl->removeRow(n);
 }

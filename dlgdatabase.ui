@@ -6,79 +6,150 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>756</width>
-    <height>463</height>
+    <width>1001</width>
+    <height>462</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Configuration file database</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
-    <widget class="QLineEdit" name="editFind">
-     <property name="placeholderText">
-      <string>Find</string>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-     <property name="clearButtonEnabled">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLabel" name="lblCount">
-     <property name="text">
-      <string>0</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QToolButton" name="btnFind">
-     <property name="text">
-      <string>...</string>
-     </property>
-     <property name="icon">
-      <iconset resource="qtocc.qrc">
-       <normaloff>:/icon/find.png</normaloff>:/icon/find.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="3">
-    <widget class="QToolButton" name="btnRefreshAll">
-     <property name="toolTip">
-      <string>Save all profiles in the table to the latest version</string>
-     </property>
-     <property name="text">
-      <string>Refresh all</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="4">
-    <widget class="QTableWidget" name="tableDatabase">
-     <property name="columnCount">
-      <number>1</number>
-     </property>
-     <column/>
-    </widget>
-   </item>
-   <item row="1" column="4">
-    <widget class="QTableWidget" name="tableDatabaseFind">
-     <property name="columnCount">
-      <number>1</number>
-     </property>
-     <column/>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="5">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tip: Simply place the configuration file in the Database directory in the root of the app.&lt;/p&gt;&lt;p&gt;Double-click the entry to open it and generate a new EFI folder on the desktop.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Datebase</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLineEdit" name="editFind">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="placeholderText">
+          <string>Find</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="lblCount">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QToolButton" name="btnFind">
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="qtocc.qrc">
+           <normaloff>:/icon/find.png</normaloff>:/icon/find.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QToolButton" name="btnRefreshAll">
+         <property name="toolTip">
+          <string>Save all profiles in the table to the latest version</string>
+         </property>
+         <property name="text">
+          <string>Refresh all</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QTableWidget" name="tableDatabase">
+         <property name="columnCount">
+          <number>1</number>
+         </property>
+         <column/>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="3">
+        <widget class="QTableWidget" name="tableDatabaseFind">
+         <property name="columnCount">
+          <number>1</number>
+         </property>
+         <column/>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="3">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tip: Simply place the configuration file in the Database directory in the root of the app.&lt;/p&gt;&lt;p&gt;Double-click the entry to open it and generate a new EFI folder on the desktop.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Kext Url</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0" colspan="3">
+        <widget class="QTableWidget" name="tableKextUrl">
+         <property name="columnCount">
+          <number>2</number>
+         </property>
+         <column>
+          <property name="text">
+           <string>Kext</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Url</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QToolButton" name="btnAdd">
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QToolButton" name="btnDel">
+         <property name="text">
+          <string>-</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>854</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>

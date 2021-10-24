@@ -51,12 +51,12 @@ void AutoUpdateDialog::Init() {
   myfile = new QFile(this);
 }
 
-void AutoUpdateDialog::doProcessReadyRead()  //读取并写入
+void AutoUpdateDialog::doProcessReadyRead()
 {
-  while (!reply->atEnd()) {
-    QByteArray ba = reply->readAll();
-    myfile->write(ba);
-  }
+    while (!reply->atEnd()) {
+        QByteArray ba = reply->readAll();
+        myfile->write(ba);
+    }
 }
 
 void AutoUpdateDialog::doProcessFinished() {

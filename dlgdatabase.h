@@ -11,7 +11,7 @@ class dlgDatabase : public QDialog {
     Q_OBJECT
 
 public:
-    explicit dlgDatabase(QWidget* parent = nullptr);
+    explicit dlgDatabase(QWidget *parent = nullptr);
     ~dlgDatabase();
 
 public slots:
@@ -21,7 +21,7 @@ private slots:
 
     void on_btnFind_clicked();
 
-    void on_editFind_textChanged(const QString& arg1);
+    void on_editFind_textChanged(const QString &arg1);
 
     void on_editFind_returnPressed();
 
@@ -29,8 +29,12 @@ private slots:
 
     void on_btnRefreshAll_clicked();
 
+    void on_btnAdd_clicked();
+
+    void on_btnDel_clicked();
+
 private:
-    Ui::dlgDatabase* ui;
+    Ui::dlgDatabase *ui;
 };
 
 #endif // DLGDATABASE_H

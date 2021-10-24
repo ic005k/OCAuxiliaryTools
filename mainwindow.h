@@ -901,9 +901,11 @@ class MainWindow : public QMainWindow {
 
   void updateStatus();
 
-  void on_table_nv_add0_itemClicked(QTableWidgetItem* item);
+  void on_btnKextUpdate_clicked();
 
- private:
+  void on_table_nv_add0_itemClicked(QTableWidgetItem *item);
+
+  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;
   void acpi_cellDoubleClicked();

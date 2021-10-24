@@ -10480,3 +10480,8 @@ void MainWindow::updateIconStatus() {
 void MainWindow::on_table_nv_add0_itemClicked(QTableWidgetItem* item) {
   Q_UNUSED(item);
 }
+
+void MainWindow::on_btnKextUpdate_clicked()
+{
+    mymethod->kextUpdate();
+}
