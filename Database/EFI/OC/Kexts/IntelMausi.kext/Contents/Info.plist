@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>19F101</string>
+	<string>20G165</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.4</string>
+	<string>1.0.8</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,21 +25,23 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.4</string>
+	<string>1.0.8</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>11E708</string>
+	<string>13A233</string>
+	<key>DTPlatformName</key>
+	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>GM</string>
+	<string>11.3</string>
 	<key>DTSDKBuild</key>
-	<string>19G68</string>
+	<string>20E214</string>
 	<key>DTSDKName</key>
-	<string>macosx10.15</string>
+	<string>macosx11.3</string>
 	<key>DTXcode</key>
-	<string>1160</string>
+	<string>1300</string>
 	<key>DTXcodeBuild</key>
-	<string>11E708</string>
+	<string>13A233</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>IntelMausi</key>
@@ -50,9 +52,7 @@
 			<dict>
 				<key>enableCSO6</key>
 				<true/>
-				<key>enableTSO4</key>
-				<false/>
-				<key>enableTSO6</key>
+				<key>enableWakeOnAddrMatch</key>
 				<false/>
 				<key>maxIntrRate10</key>
 				<integer>3000</integer>
@@ -74,11 +74,11 @@
 				<integer>0</integer>
 			</dict>
 			<key>Driver_Version</key>
-			<string>1.0.4</string>
+			<string>1.0.8</string>
 			<key>IOClass</key>
 			<string>IntelMausi</string>
 			<key>IOPCIMatch</key>
-			<string>0x10EA8086 0x10EB8086 0x10EF8086 0x10F08086 0x15028086 0x15038086 0x153A8086 0x153B8086 0x155A8086 0x15598086 0x15A08086 0x15A18086 0x15A28086 0x15A38086 0x156F8086 0x15708086 0x15B78086 0x15B88086 0x15D78086 0x15D88086 0x15E38086 0x15D68086 0x15BD8086 0x15BE8086 0x15BB8086 0x15BC8086 0x15DF8086 0x15E08086 0x15E18086 0x15E28086 0x15B98086 0x0D4E8086 0x0D4F8086 0x0D4C8086 0x0D4D8086 0x0D538086 0x0D558086</string>
+			<string>0x10EA8086 0x10EB8086 0x10EF8086 0x10F08086 0x15028086 0x15038086 0x153A8086 0x153B8086 0x155A8086 0x15598086 0x15A08086 0x15A18086 0x15A28086 0x15A38086 0x156F8086 0x15708086 0x15B78086 0x15B88086 0x15D78086 0x15D88086 0x15E38086 0x15D68086 0x15BD8086 0x15BE8086 0x15BB8086 0x15BC8086 0x15DF8086 0x15E08086 0x15E18086 0x15E28086 0x15B98086 0x0D4E8086 0x0D4F8086 0x0D4C8086 0x0D4D8086 0x0D538086 0x0D558086 0x15FB8086 0x15FC8086 0x15F98086 0x15FA8086 0x15F48086 0x15F58086 0x1A1E8086 0x1A1F8086 0x1A1C8086 0x1A1D8086 0x550A8086 0x550B8086 0x550C8086 0x550D8086</string>
 			<key>IOProbeScore</key>
 			<integer>1000</integer>
 			<key>IOProviderClass</key>
