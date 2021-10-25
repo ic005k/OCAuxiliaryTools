@@ -94,32 +94,29 @@ void Method::finishKextUpdate() {
 }
 
 void Method::kextUpdate() {
-  mw_one->deleteDirfile(tempDir);
-  mw_one->ui->btnKextUpdate->setEnabled(false);
-  mw_one->repaint();
-  QString test = "https://github.com/acidanthera/Lilu";
+    mw_one->ui->btnKextUpdate->setEnabled(false);
+    mw_one->repaint();
+    QString test = "https://github.com/acidanthera/Lilu";
 
-  for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
-    QString name = mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
-    kextName = name;
-    for (int j = 0;
-         j < mw_one->myDatabase->ui->textEdit->document()->lineCount(); j++) {
-      QString lineText =
-          getTextEditLineText(mw_one->myDatabase->ui->textEdit, j);
-      QStringList txtList = lineText.split("|");
-      QString txt = txtList.at(0);
-      if (txt.trimmed() == name) {
-        test = txtList.at(1);
-        test = test.trimmed();
-        getLastReleaseFromUrl(test);
-        QElapsedTimer t;
-        t.start();
-        dlEnd = false;
-        while (!dlEnd) {
-          QCoreApplication::processEvents();
+    for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
+        QString name = mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
+        kextName = name;
+        for (int j = 0; j < mw_one->myDatabase->ui->textEdit->document()->lineCount(); j++) {
+            QString lineText = getTextEditLineText(mw_one->myDatabase->ui->textEdit, j);
+            QStringList txtList = lineText.split("|");
+            QString txt = txtList.at(0);
+            if (txt.trimmed() == name) {
+                test = txtList.at(1);
+                test = test.trimmed();
+                getLastReleaseFromUrl(test);
+                QElapsedTimer t;
+                t.start();
+                dlEnd = false;
+                while (!dlEnd) {
+                    QCoreApplication::processEvents();
+                }
+            }
         }
-      }
-    }
   }
 
   finishKextUpdate();
@@ -188,14 +185,14 @@ void Method::doProcessFinished() {
     replyDL->close();
     replyDL->deleteLater();
 
-    if (QFileInfo(tempDir + filename).exists())
-      if (mw_one->win) {
-        QProcess::execute(mw_one->strAppExePath + "/unzip.exe",
-                          QStringList()
-                              << "-o" << tempDir + filename << "-d" << tempDir);
-      } else
-        QProcess::execute("unzip", QStringList() << "-o" << tempDir + filename
-                                                 << "-d" << tempDir);
+    if (QFileInfo(tempDir + filename).exists()) {
+        if (mw_one->win) {
+            QProcess::execute(mw_one->strAppExePath + "/unzip.exe",
+                              QStringList() << "-o" << tempDir + filename << "-d" << tempDir);
+        } else
+            QProcess::execute("unzip",
+                              QStringList() << "-o" << tempDir + filename << "-d" << tempDir);
+    }
     dlEnd = true;
 
   } else {
@@ -299,6 +296,10 @@ void Method::parse_UpdateJSON(QString str) {
   strDLInfoList.clear();
   strDLInfoList = QStringList() << Verison << strDLUrl;
   qDebug() << strDLInfoList.at(0) << strDLInfoList.at(1);
+  if (strDLUrl == "") {
+      mw_one->ui->btnKextUpdate->setEnabled(true);
+      return;
+  }
   startDownload(strDLUrl);
 }
 
