@@ -193,10 +193,6 @@ void dlgDatabase::on_btnRefreshAll_clicked() {
 }
 
 void dlgDatabase::refreshKextUrl() {
-  if (mw_one->win)
-    ui->textEdit->setFontPointSize(9);
-  else
-    ui->textEdit->setFontPointSize(12);
   ui->textEdit->clear();
   ui->textEdit->append("Lilu.kext | https://github.com/acidanthera/Lilu");
   ui->textEdit->append(

@@ -18,10 +18,12 @@ class Method : public QMainWindow {
  public:
   explicit Method(QWidget *parent = nullptr);
 
+  bool blBreak = false;
   QString kextName;
   bool dlEnd = false;
   QString tempDir;
   QString filename;
+  QNetworkAccessManager *manager;
   QNetworkAccessManager *managerDownLoad;
   QNetworkReply *reply, *replyDL;
   QFile *myfile;
@@ -81,10 +83,11 @@ class Method : public QMainWindow {
   void kextUpdate();
   void finishKextUpdate();
   void getAllFolds(const QString &foldPath, QStringList &folds);
-  void getAllFiles(const QString &foldPath, QStringList &folds, const QStringList &formats);
+  void getAllFiles(const QString &foldPath, QStringList &folds,
+                   const QStringList &formats);
   void TextEditToFile(QTextEdit *txtEdit, QString fileName);
   QString getFileName(QString file);
-  public slots:
+ public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
   void on_btnImportMaster();

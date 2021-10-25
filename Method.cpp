@@ -16,6 +16,9 @@ QString strDrivers;
 QString strTools;
 
 Method::Method(QWidget* parent) : QMainWindow(parent) {
+  manager = new QNetworkAccessManager(this);
+  connect(manager, SIGNAL(finished(QNetworkReply*)), this,
+          SLOT(replyFinished(QNetworkReply*)));
   managerDownLoad = new QNetworkAccessManager(this);
   myfile = new QFile(this);
   tempDir = QDir::homePath() + "/tempocat/";
@@ -99,33 +102,34 @@ void Method::finishKextUpdate() {
 
 void Method::kextUpdate() {
   if (mw_one->ui->table_kernel_add->rowCount() == 0) return;
+  mw_one->myDatabase->refreshKextUrl();
+  blBreak = false;
   mw_one->ui->btnKextUpdate->setEnabled(false);
   mw_one->repaint();
   QString test = "https://github.com/acidanthera/Lilu";
 
   for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
+    if (blBreak) break;
     QString name = mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
     kextName = name;
-    for (int j = 0;
-         j < mw_one->myDatabase->ui->textEdit->document()->lineCount(); j++) {
-      QString lineText =
-          getTextEditLineText(mw_one->myDatabase->ui->textEdit, j);
-      QStringList txtList = lineText.split("|");
-      QString txt = txtList.at(0);
-      if (txt.trimmed() == name) {
-        test = txtList.at(1);
-        test = test.trimmed();
+    for (int j = 0; j < mw_one->myDatabase->ui->tableKextUrl->rowCount(); j++) {
+      if (blBreak) break;
+      QString txt =
+          mw_one->myDatabase->ui->tableKextUrl->item(j, 0)->text().trimmed();
+      test = mw_one->myDatabase->ui->tableKextUrl->item(j, 1)->text().trimmed();
+      if (txt == name && test != "") {
         getLastReleaseFromUrl(test);
         QElapsedTimer t;
         t.start();
         dlEnd = false;
-        while (!dlEnd) {
+        while (!dlEnd && !blBreak) {
           QCoreApplication::processEvents();
         }
       }
     }
   }
 
+  if (blBreak) return;
   finishKextUpdate();
 }
 
@@ -164,7 +168,7 @@ void Method::startDownload(QString strUrl) {
   if (!ret) {
     mw_one->ui->btnKextUpdate->setEnabled(true);
     mw_one->repaint();
-    replyDL->close();
+
     QMessageBox::warning(this, "warning", "File creation failed!\n" + file);
     return;
   }
@@ -189,9 +193,6 @@ void Method::doProcessFinished() {
   if (replyDL->error() == QNetworkReply::NoError) {
     myfile->flush();
     myfile->close();
-    replyDL->close();
-    replyDL->deleteLater();
-
     if (QFileInfo(tempDir + filename).exists()) {
       if (mw_one->win) {
         QProcess::execute(mw_one->strAppExePath + "/unzip.exe",
@@ -207,8 +208,6 @@ void Method::doProcessFinished() {
     mw_one->ui->btnKextUpdate->setEnabled(true);
     mw_one->repaint();
     myfile->close();
-    replyDL->close();
-    replyDL->deleteLater();
     QMessageBox::critical(NULL, "replyDL Error",
                           "There is an error in the network answer!");
   }
@@ -258,10 +257,6 @@ void Method::getLastReleaseFromUrl(QString strUrl) {
   QNetworkRequest quest;
   quest.setUrl(QUrl(strAPI));
   quest.setHeader(QNetworkRequest::UserAgentHeader, "RT-Thread ART");
-  QNetworkAccessManager* manager;
-  manager = new QNetworkAccessManager(this);
-  connect(manager, SIGNAL(finished(QNetworkReply*)), this,
-          SLOT(replyFinished(QNetworkReply*)));
   manager->get(quest);
 }
 
@@ -277,7 +272,6 @@ void Method::parse_UpdateJSON(QString str) {
 
   if (err_rpt.error != QJsonParseError::NoError) {
     QMessageBox::critical(this, "", tr("Network error!"));
-
     return;
   }
 
@@ -308,9 +302,8 @@ void Method::parse_UpdateJSON(QString str) {
   strDLInfoList = QStringList() << Verison << strDLUrl;
   qDebug() << strDLInfoList.at(0) << strDLInfoList.at(1);
   if (strDLUrl == "") {
+    blBreak = true;
     mw_one->ui->btnKextUpdate->setEnabled(true);
-    reply->close();
-    replyDL->close();
     return;
   }
   startDownload(strDLUrl);
