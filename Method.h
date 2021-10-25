@@ -23,7 +23,7 @@ class Method : public QMainWindow {
   QString tempDir;
   QString filename;
   QNetworkAccessManager *managerDownLoad;
-  QNetworkReply *reply;
+  QNetworkReply *reply, *replyDL;
   QFile *myfile;
   QTimer *tmrUpdateShow;
   void doProcessReadyRead();

@@ -94,6 +94,7 @@ void Method::finishKextUpdate() {
 }
 
 void Method::kextUpdate() {
+  mw_one->deleteDirfile(tempDir);
   mw_one->ui->btnKextUpdate->setEnabled(false);
   mw_one->repaint();
   QString test = "https://github.com/acidanthera/Lilu";
@@ -137,15 +138,17 @@ void Method::startDownload(QString strUrl) {
   request.setHeader(QNetworkRequest::ContentTypeHeader,
                     "application/octet-stream");
 
-  reply = managerDownLoad->get(request);
+  replyDL = managerDownLoad->get(request);
 
-  connect(reply, &QNetworkReply::readyRead, this, &Method::doProcessReadyRead);
-  connect(reply, &QNetworkReply::finished, this, &Method::doProcessFinished);
-  connect(reply, &QNetworkReply::downloadProgress, this,
+  connect(replyDL, &QNetworkReply::readyRead, this,
+          &Method::doProcessReadyRead);
+  connect(replyDL, &QNetworkReply::finished, this, &Method::doProcessFinished);
+  connect(replyDL, &QNetworkReply::downloadProgress, this,
           &Method::doProcessDownloadProgress);
 
   QStringList list = strUrl.split("/");
   filename = list.at(list.length() - 1);
+
   QDir dir;
   if (dir.mkpath(tempDir)) {
   }
@@ -157,8 +160,8 @@ void Method::startDownload(QString strUrl) {
   if (!ret) {
     mw_one->ui->btnKextUpdate->setEnabled(true);
     mw_one->repaint();
-    reply->close();
-    QMessageBox::warning(this, "warning", "Failed to open.");
+    replyDL->close();
+    QMessageBox::warning(this, "warning", "File creation failed!\n" + file);
     return;
   }
   mw_one->ui->progressBarKext->setValue(0);
@@ -171,28 +174,38 @@ void Method::startDownload(QString strUrl) {
 }
 
 void Method::doProcessReadyRead() {
-  while (!reply->atEnd()) {
-    QByteArray ba = reply->readAll();
+  while (!replyDL->atEnd()) {
+    QByteArray ba = replyDL->readAll();
     myfile->write(ba);
   }
 }
 
 void Method::doProcessFinished() {
-  if (reply->error() == QNetworkReply::NoError) {
+  if (!blCanBeUpdate) return;
+  if (replyDL->error() == QNetworkReply::NoError) {
     myfile->flush();
     myfile->close();
-    reply->close();
+    replyDL->close();
+    replyDL->deleteLater();
 
     if (QFileInfo(tempDir + filename).exists())
-      QProcess::execute("unzip", QStringList() << "-o" << tempDir + filename
-                                               << "-d" << tempDir);
+      if (mw_one->win) {
+        QProcess::execute(mw_one->strAppExePath + "/unzip.exe",
+                          QStringList()
+                              << "-o" << tempDir + filename << "-d" << tempDir);
+      } else
+        QProcess::execute("unzip", QStringList() << "-o" << tempDir + filename
+                                                 << "-d" << tempDir);
     dlEnd = true;
 
   } else {
     mw_one->ui->btnKextUpdate->setEnabled(true);
     mw_one->repaint();
-    reply->close();
-    QMessageBox::critical(NULL, tr("Error"), "Failed!!!");
+    myfile->close();
+    replyDL->close();
+    replyDL->deleteLater();
+    QMessageBox::critical(NULL, "replyDL Error",
+                          "There is an error in the network answer!");
   }
 }
 
@@ -224,7 +237,7 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
       strSpeed);
 
   if (recv_total == all_total) {
-    if (recv_total < 100000) {
+    if (recv_total < 1000) {
       blCanBeUpdate = false;
     } else
       blCanBeUpdate = true;
