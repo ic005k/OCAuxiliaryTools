@@ -81,10 +81,14 @@ void Method::finishKextUpdate() {
   for (int i = 0; i < kextList.count(); i++) {
     QString dirSource, dirTarget;
     dirSource = kextList.at(i);
-    dirTarget =
-        strKexts + dirSource.split("/").at(dirSource.split("/").count() - 1);
-    qDebug() << kextList.at(i) << dirTarget;
-    mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
+    QString Name = getFileName(dirSource);
+    dirTarget = strKexts + Name;
+    for (int j = 0; j < mw_one->ui->table_kernel_add->rowCount(); j++) {
+        if (Name == mw_one->ui->table_kernel_add->item(j, 0)->text().trimmed()) {
+            mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
+            qDebug() << kextList.at(i) << dirTarget;
+        }
+    }
   }
 
   mw_one->ui->btnKextUpdate->setEnabled(true);
@@ -93,7 +97,8 @@ void Method::finishKextUpdate() {
   mw_one->repaint();
 }
 
-void Method::kextUpdate() {
+void Method::kextUpdate()
+{
     mw_one->ui->btnKextUpdate->setEnabled(false);
     mw_one->repaint();
     QString test = "https://github.com/acidanthera/Lilu";
@@ -117,9 +122,9 @@ void Method::kextUpdate() {
                 }
             }
         }
-  }
+    }
 
-  finishKextUpdate();
+    finishKextUpdate();
 }
 
 void Method::startDownload(QString strUrl) {
@@ -288,7 +293,10 @@ void Method::parse_UpdateJSON(QString str) {
     for (int i = 0; i < strDownloadUrlList.count(); i++) {
       if (strDownloadUrlList.count() > 1) {
         QString str = strDownloadUrlList.at(i);
-        if (str.contains("RELEASE")) strDLUrl = str;
+        if (str.contains("RELEASE"))
+            strDLUrl = str;
+        else
+            strDLUrl = strDownloadUrlList.at(0);
       } else
         strDLUrl = strDownloadUrlList.at(0);
     }
@@ -1200,4 +1208,24 @@ QString Method::GetFileSize(const qint64& size, int precision) {
   return QString::fromLatin1("%1 %2")
       .arg(sizeAsDouble, 0, 'f', precision)
       .arg(measure);
+}
+
+void Method::TextEditToFile(QTextEdit *txtEdit, QString fileName)
+{
+    QFile *file;
+    file = new QFile;
+    file->setFileName(fileName);
+    bool ok = file->open(QIODevice::WriteOnly);
+    if (ok) {
+        QTextStream out(file);
+        out << txtEdit->toPlainText();
+        file->close();
+        delete file;
+    }
+}
+
+QString Method::getFileName(QString file)
+{
+    QStringList list = file.split("/");
+    return list.at(list.count() - 1);
 }

@@ -9892,6 +9892,8 @@ void MainWindow::on_actionDatabase_triggered() {
 
   myDatabase->setWindowTitle(tr("Configuration file database") + " : " +
                              getDatabaseVer());
+
+  myDatabase->refreshKextUrl();
 }
 
 void MainWindow::on_actionOcvalidate_triggered() {

@@ -36,9 +36,21 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   tableDatabase->setSelectionBehavior(
       QAbstractItemView::SelectRows);  //设置选择行为时每次选择一行
   ui->tabWidget->setCurrentIndex(0);
+
+  ui->textEdit->append("Lilu.kext | https://github.com/acidanthera/Lilu");
+  ui->textEdit->append("AppleALC.kext | https://github.com/acidanthera/AppleALC");
+  ui->textEdit->append("VoodooPS2Controller.kext | https://github.com/acidanthera/VoodooPS2");
+  ui->textEdit->append("WhateverGreen.kext | https://github.com/acidanthera/WhateverGreen");
+  ui->textEdit->append("VirtualSMC.kext | https://github.com/acidanthera/VirtualSMC");
+  ui->textEdit->append("VoodooI2C.kext | https://github.com/VoodooI2C/VoodooI2C");
 }
 
 dlgDatabase::~dlgDatabase() { delete ui; }
+void dlgDatabase::closeEvent(QCloseEvent *event)
+{
+    Q_UNUSED(event);
+    mymethod->TextEditToFile(ui->textEdit, mw_one->strConfigPath + "KextUrl.txt");
+}
 
 void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
   Q_UNUSED(row);
@@ -152,4 +164,23 @@ void dlgDatabase::on_btnRefreshAll_clicked() {
 
   ui->btnRefreshAll->setEnabled(true);
   this->repaint();
+}
+
+void dlgDatabase::refreshKextUrl()
+{
+    QTextEdit *txtEdit = new QTextEdit;
+    QString txt = mymethod->loadText(mw_one->strConfigPath + "KextUrl.txt");
+    txtEdit->setPlainText(txt);
+    for (int i = 0; i < txtEdit->document()->lineCount(); i++) {
+        QString line = mymethod->getTextEditLineText(txtEdit, i).trimmed();
+        bool re = false;
+        for (int j = 0; j < ui->textEdit->document()->lineCount(); j++) {
+            QString line2 = mymethod->getTextEditLineText(ui->textEdit, j).trimmed();
+            if (line == line2) {
+                re = true;
+            }
+        }
+        if (!re)
+            ui->textEdit->append(line);
+    }
 }

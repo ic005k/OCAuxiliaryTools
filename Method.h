@@ -81,9 +81,10 @@ class Method : public QMainWindow {
   void kextUpdate();
   void finishKextUpdate();
   void getAllFolds(const QString &foldPath, QStringList &folds);
-  void getAllFiles(const QString &foldPath, QStringList &folds,
-                   const QStringList &formats);
- public slots:
+  void getAllFiles(const QString &foldPath, QStringList &folds, const QStringList &formats);
+  void TextEditToFile(QTextEdit *txtEdit, QString fileName);
+  QString getFileName(QString file);
+  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
   void on_btnImportMaster();
