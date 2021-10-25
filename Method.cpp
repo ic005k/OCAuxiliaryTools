@@ -53,7 +53,7 @@ void Method::finishKextUpdate() {
 
   QStringList folds;
   getAllFolds(tempDir, folds);
-  qDebug() << folds;
+  // qDebug() << folds;
   for (int i = 0; i < folds.count(); i++) {
     QString strdir = folds.at(i);
     QStringList list3 = DirToFileList(strdir, "*.kext");
@@ -67,14 +67,35 @@ void Method::finishKextUpdate() {
   // qDebug() << files;
 
   tempList = kextList;
-  for (int i = 0; i < tempList.count(); i++) {
-  }
   for (int i = 0; i < kextList.count(); i++) {
-    qDebug() << kextList.at(i);
+    QString str = kextList.at(i);
+    for (int j = 0; j < tempList.count(); j++) {
+      QString strTemp = tempList.at(j);
+      if (str.length() > strTemp.length() && str.contains(strTemp)) {
+        kextList.removeAt(i);
+        i--;
+      }
+    }
   }
+
+  for (int i = 0; i < kextList.count(); i++) {
+    QString dirSource, dirTarget;
+    dirSource = kextList.at(i);
+    dirTarget =
+        strKexts + dirSource.split("/").at(dirSource.split("/").count() - 1);
+    qDebug() << kextList.at(i) << dirTarget;
+    mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
+  }
+
+  mw_one->ui->btnKextUpdate->setEnabled(true);
+  mw_one->ui->progressBarKext->setHidden(true);
+  mw_one->ui->labelShowDLInfo->setVisible(false);
+  mw_one->repaint();
 }
 
 void Method::kextUpdate() {
+  mw_one->ui->btnKextUpdate->setEnabled(false);
+  mw_one->repaint();
   QString test = "https://github.com/acidanthera/Lilu";
 
   for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {

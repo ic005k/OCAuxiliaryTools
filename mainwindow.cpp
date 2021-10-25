@@ -719,6 +719,7 @@ void MainWindow::ParserDP(QVariantMap map) {
 void MainWindow::initui_kernel() {
   ui->progressBarKext->setVisible(false);
   ui->labelShowDLInfo->setVisible(false);
+  ui->labelShowDLInfo->setText("");
 
   QTableWidgetItem* id0;
   // Add
