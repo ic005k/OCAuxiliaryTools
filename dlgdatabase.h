@@ -17,9 +17,10 @@ class dlgDatabase : public QDialog {
 
   void refreshKextUrl();
 
-  public slots:
+  void saveKextUrl();
+ public slots:
 
-  private slots:
+ private slots:
   void on_tableDatabase_cellDoubleClicked(int row, int column);
 
   void on_btnFind_clicked();
@@ -32,9 +33,14 @@ class dlgDatabase : public QDialog {
 
   void on_btnRefreshAll_clicked();
 
-  private:
-  protected:
+  void on_btnAdd_clicked();
+
+  void on_btnDel_clicked();
+
+ private:
+ protected:
   void closeEvent(QCloseEvent *event);
+  void keyPressEvent(QKeyEvent *event);
 };
 
 #endif  // DLGDATABASE_H

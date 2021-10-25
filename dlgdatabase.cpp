@@ -36,12 +36,46 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   tableDatabase->setSelectionBehavior(
       QAbstractItemView::SelectRows);  //设置选择行为时每次选择一行
   ui->tabWidget->setCurrentIndex(0);
+
+  ui->tableKextUrl->setColumnWidth(0, 150);
+  ui->tableKextUrl->setColumnWidth(1, 350);
+  ui->textEdit->setHidden(true);
 }
 
 dlgDatabase::~dlgDatabase() { delete ui; }
 void dlgDatabase::closeEvent(QCloseEvent *event) {
   Q_UNUSED(event);
-  mymethod->TextEditToFile(ui->textEdit, mw_one->strConfigPath + "KextUrl.txt");
+  saveKextUrl();
+}
+
+void dlgDatabase::keyPressEvent(QKeyEvent *event) {
+  switch (event->key()) {
+    case Qt::Key_Escape:
+      close();
+      break;
+
+    case Qt::Key_Return:
+
+      break;
+
+    case Qt::Key_Backspace:
+
+      break;
+
+    case Qt::Key_Space:
+
+      break;
+
+    case Qt::Key_F1:
+
+      break;
+  }
+
+  if (event->modifiers() == Qt::ControlModifier) {
+    if (event->key() == Qt::Key_M) {
+      this->setWindowState(Qt::WindowMaximized);
+    }
+  }
 }
 
 void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
@@ -175,6 +209,8 @@ void dlgDatabase::refreshKextUrl() {
       "VirtualSMC.kext | https://github.com/acidanthera/VirtualSMC");
   ui->textEdit->append(
       "VoodooI2C.kext | https://github.com/VoodooI2C/VoodooI2C");
+  ui->textEdit->append(
+      "RestrictEvents.kext | https://github.com/acidanthera/RestrictEvents");
 
   QTextEdit *txtEdit = new QTextEdit;
   QString txt = mymethod->loadText(mw_one->strConfigPath + "KextUrl.txt");
@@ -190,4 +226,50 @@ void dlgDatabase::refreshKextUrl() {
     }
     if (!re) ui->textEdit->append(line);
   }
+
+  ui->tableKextUrl->setRowCount(0);
+  for (int i = 0; i < ui->textEdit->document()->lineCount(); i++) {
+    QStringList list =
+        mymethod->getTextEditLineText(ui->textEdit, i).split("|");
+    QString str0, str1;
+    if (list.count() == 2) {
+      str0 = list.at(0);
+      str1 = list.at(1);
+      int n = ui->tableKextUrl->rowCount();
+      ui->tableKextUrl->setRowCount(n + 1);
+      ui->tableKextUrl->setCurrentCell(i, 0);
+      ui->tableKextUrl->setItem(i, 0, new QTableWidgetItem(str0.trimmed()));
+      ui->tableKextUrl->setItem(i, 1, new QTableWidgetItem(str1.trimmed()));
+    }
+  }
+
+  ui->tableKextUrl->setFocus();
+}
+
+void dlgDatabase::on_btnAdd_clicked() {
+  int n = ui->tableKextUrl->rowCount();
+  ui->tableKextUrl->setRowCount(n + 1);
+  ui->tableKextUrl->setCurrentCell(n, 0);
+  ui->tableKextUrl->setItem(n, 0, new QTableWidgetItem(""));
+  ui->tableKextUrl->setItem(n, 1, new QTableWidgetItem(""));
+}
+
+void dlgDatabase::on_btnDel_clicked() {
+  if (ui->tableKextUrl->rowCount() == 0) return;
+  int n = ui->tableKextUrl->currentRow();
+  ui->tableKextUrl->removeRow(n);
+  if (n - 1 == -1) n = 1;
+  ui->tableKextUrl->setCurrentCell(n - 1, 0);
+  ui->tableKextUrl->setFocus();
+}
+
+void dlgDatabase::saveKextUrl() {
+  ui->textEdit->clear();
+  QString str0, str1;
+  for (int i = 0; i < ui->tableKextUrl->rowCount(); i++) {
+    str0 = ui->tableKextUrl->item(i, 0)->text().trimmed();
+    str1 = ui->tableKextUrl->item(i, 1)->text().trimmed();
+    if (str0 != "" || str1 != "") ui->textEdit->append(str0 + " | " + str1);
+  }
+  mymethod->TextEditToFile(ui->textEdit, mw_one->strConfigPath + "KextUrl.txt");
 }
