@@ -84,10 +84,10 @@ void Method::finishKextUpdate() {
     QString Name = getFileName(dirSource);
     dirTarget = strKexts + Name;
     for (int j = 0; j < mw_one->ui->table_kernel_add->rowCount(); j++) {
-        if (Name == mw_one->ui->table_kernel_add->item(j, 0)->text().trimmed()) {
-            mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
-            qDebug() << kextList.at(i) << dirTarget;
-        }
+      if (Name == mw_one->ui->table_kernel_add->item(j, 0)->text().trimmed()) {
+        mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
+        qDebug() << kextList.at(i) << dirTarget;
+      }
     }
   }
 
@@ -97,34 +97,36 @@ void Method::finishKextUpdate() {
   mw_one->repaint();
 }
 
-void Method::kextUpdate()
-{
-    mw_one->ui->btnKextUpdate->setEnabled(false);
-    mw_one->repaint();
-    QString test = "https://github.com/acidanthera/Lilu";
+void Method::kextUpdate() {
+  if (mw_one->ui->table_kernel_add->rowCount() == 0) return;
+  mw_one->ui->btnKextUpdate->setEnabled(false);
+  mw_one->repaint();
+  QString test = "https://github.com/acidanthera/Lilu";
 
-    for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
-        QString name = mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
-        kextName = name;
-        for (int j = 0; j < mw_one->myDatabase->ui->textEdit->document()->lineCount(); j++) {
-            QString lineText = getTextEditLineText(mw_one->myDatabase->ui->textEdit, j);
-            QStringList txtList = lineText.split("|");
-            QString txt = txtList.at(0);
-            if (txt.trimmed() == name) {
-                test = txtList.at(1);
-                test = test.trimmed();
-                getLastReleaseFromUrl(test);
-                QElapsedTimer t;
-                t.start();
-                dlEnd = false;
-                while (!dlEnd) {
-                    QCoreApplication::processEvents();
-                }
-            }
+  for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
+    QString name = mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
+    kextName = name;
+    for (int j = 0;
+         j < mw_one->myDatabase->ui->textEdit->document()->lineCount(); j++) {
+      QString lineText =
+          getTextEditLineText(mw_one->myDatabase->ui->textEdit, j);
+      QStringList txtList = lineText.split("|");
+      QString txt = txtList.at(0);
+      if (txt.trimmed() == name) {
+        test = txtList.at(1);
+        test = test.trimmed();
+        getLastReleaseFromUrl(test);
+        QElapsedTimer t;
+        t.start();
+        dlEnd = false;
+        while (!dlEnd) {
+          QCoreApplication::processEvents();
         }
+      }
     }
+  }
 
-    finishKextUpdate();
+  finishKextUpdate();
 }
 
 void Method::startDownload(QString strUrl) {
@@ -191,12 +193,13 @@ void Method::doProcessFinished() {
     replyDL->deleteLater();
 
     if (QFileInfo(tempDir + filename).exists()) {
-        if (mw_one->win) {
-            QProcess::execute(mw_one->strAppExePath + "/unzip.exe",
-                              QStringList() << "-o" << tempDir + filename << "-d" << tempDir);
-        } else
-            QProcess::execute("unzip",
-                              QStringList() << "-o" << tempDir + filename << "-d" << tempDir);
+      if (mw_one->win) {
+        QProcess::execute(mw_one->strAppExePath + "/unzip.exe",
+                          QStringList()
+                              << "-o" << tempDir + filename << "-d" << tempDir);
+      } else
+        QProcess::execute("unzip", QStringList() << "-o" << tempDir + filename
+                                                 << "-d" << tempDir);
     }
     dlEnd = true;
 
@@ -294,9 +297,9 @@ void Method::parse_UpdateJSON(QString str) {
       if (strDownloadUrlList.count() > 1) {
         QString str = strDownloadUrlList.at(i);
         if (str.contains("RELEASE"))
-            strDLUrl = str;
+          strDLUrl = str;
         else
-            strDLUrl = strDownloadUrlList.at(0);
+          strDLUrl = strDownloadUrlList.at(0);
       } else
         strDLUrl = strDownloadUrlList.at(0);
     }
@@ -305,8 +308,8 @@ void Method::parse_UpdateJSON(QString str) {
   strDLInfoList = QStringList() << Verison << strDLUrl;
   qDebug() << strDLInfoList.at(0) << strDLInfoList.at(1);
   if (strDLUrl == "") {
-      mw_one->ui->btnKextUpdate->setEnabled(true);
-      return;
+    mw_one->ui->btnKextUpdate->setEnabled(true);
+    return;
   }
   startDownload(strDLUrl);
 }
@@ -1210,22 +1213,20 @@ QString Method::GetFileSize(const qint64& size, int precision) {
       .arg(measure);
 }
 
-void Method::TextEditToFile(QTextEdit *txtEdit, QString fileName)
-{
-    QFile *file;
-    file = new QFile;
-    file->setFileName(fileName);
-    bool ok = file->open(QIODevice::WriteOnly);
-    if (ok) {
-        QTextStream out(file);
-        out << txtEdit->toPlainText();
-        file->close();
-        delete file;
-    }
+void Method::TextEditToFile(QTextEdit* txtEdit, QString fileName) {
+  QFile* file;
+  file = new QFile;
+  file->setFileName(fileName);
+  bool ok = file->open(QIODevice::WriteOnly);
+  if (ok) {
+    QTextStream out(file);
+    out << txtEdit->toPlainText();
+    file->close();
+    delete file;
+  }
 }
 
-QString Method::getFileName(QString file)
-{
-    QStringList list = file.split("/");
-    return list.at(list.count() - 1);
+QString Method::getFileName(QString file) {
+  QStringList list = file.split("/");
+  return list.at(list.count() - 1);
 }

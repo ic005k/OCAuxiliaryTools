@@ -4939,6 +4939,8 @@ void MainWindow::mount_esp_mac(QString strEfiDisk) {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
+  mymethod->reply->close();
+  mymethod->replyDL->close();
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QFile file(qfile);
   QSettings Reg(qfile, QSettings::IniFormat);
@@ -9576,10 +9578,10 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QString strKextName = ui->table_kernel_add->item(i, 0)->text().trimmed();
     if (mymethod->isEqualInList(strKextName, dbkextFileList)) {
-        if (ui->table_kernel_add->item(i, 2)->text().trimmed() != "") {
-            sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
-            targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
-        }
+      if (ui->table_kernel_add->item(i, 2)->text().trimmed() != "") {
+        sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
+        targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
+      }
     }
   }
 
@@ -9589,8 +9591,8 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   for (int i = 0; i < ui->tableTools->rowCount(); i++) {
     QString strName = ui->tableTools->item(i, 0)->text().trimmed();
     if (mymethod->isEqualInList(strName, dbToolsFileList)) {
-        sourceFiles.append(pathSource + "EFI/OC/Tools/" + strName);
-        targetFiles.append(DirName + "/OC/Tools/" + strName);
+      sourceFiles.append(pathSource + "EFI/OC/Tools/" + strName);
+      targetFiles.append(DirName + "/OC/Tools/" + strName);
     }
   }
 
