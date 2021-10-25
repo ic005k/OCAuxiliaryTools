@@ -309,6 +309,8 @@ void Method::parse_UpdateJSON(QString str) {
   qDebug() << strDLInfoList.at(0) << strDLInfoList.at(1);
   if (strDLUrl == "") {
     mw_one->ui->btnKextUpdate->setEnabled(true);
+    reply->close();
+    replyDL->close();
     return;
   }
   startDownload(strDLUrl);

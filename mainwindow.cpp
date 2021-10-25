@@ -138,7 +138,7 @@ MainWindow::MainWindow(QWidget* parent)
 MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::setUIMargin() {
-  int m = 5;
+  int m = 1;
 
   ui->gridLayout->setMargin(m);
   ui->centralwidget->layout()->setMargin(m);
@@ -184,6 +184,10 @@ void MainWindow::setUIMargin() {
   ui->gridLayout_59->setMargin(m);
 
   ui->gridLayout_69->setMargin(m);
+  ui->gridLayout_71->setMargin(m);
+  ui->gridLayout_47->setMargin(m);
+  ui->gridLayout_62->setMargin(m);
+  ui->horizontalLayout_3->setMargin(m);
 }
 
 void MainWindow::recentOpen(QString filename) { openFile(filename); }
@@ -4939,9 +4943,7 @@ void MainWindow::mount_esp_mac(QString strEfiDisk) {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-  mymethod->reply->close();
-  mymethod->replyDL->close();
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QString qfile = strConfigPath + "QtOCC.ini";
   QFile file(qfile);
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
