@@ -21,6 +21,59 @@ Method::Method(QWidget* parent) : QMainWindow(parent) {
   tempDir = QDir::homePath() + "/tempocat/";
 }
 
+void Method::getAllFolds(const QString& foldPath, QStringList& folds) {
+  QDirIterator it(foldPath, QDir::Dirs | QDir::NoDotAndDotDot,
+                  QDirIterator::Subdirectories);
+  while (it.hasNext()) {
+    it.next();
+    QFileInfo fileInfo = it.fileInfo();
+    folds << fileInfo.absoluteFilePath();
+  }
+}
+
+void Method::getAllFiles(const QString& foldPath, QStringList& folds,
+                         const QStringList& formats) {
+  QDirIterator it(foldPath, QDir::Files | QDir::NoDotAndDotDot,
+                  QDirIterator::Subdirectories);
+  while (it.hasNext()) {
+    it.next();
+    QFileInfo fileInfo = it.fileInfo();
+    if (formats.contains(fileInfo.suffix())) {  //检测格式，按需保存
+      folds << fileInfo.absoluteFilePath();
+    }
+  }
+}
+
+void Method::finishKextUpdate() {
+  QStringList kextList, tempList;
+  QStringList list0 = DirToFileList(tempDir, "*.kext");
+  for (int i = 0; i < list0.count(); i++) {
+    kextList.append(tempDir + list0.at(i));
+  }
+
+  QStringList folds;
+  getAllFolds(tempDir, folds);
+  qDebug() << folds;
+  for (int i = 0; i < folds.count(); i++) {
+    QString strdir = folds.at(i);
+    QStringList list3 = DirToFileList(strdir, "*.kext");
+    for (int n = 0; n < list3.count(); n++)
+      kextList.append(strdir + "/" + list3.at(n));
+  }
+
+  QStringList files;
+  QStringList fmt = QString("plist;jpg").split(';');
+  getAllFiles(tempDir, files, fmt);
+  // qDebug() << files;
+
+  tempList = kextList;
+  for (int i = 0; i < tempList.count(); i++) {
+  }
+  for (int i = 0; i < kextList.count(); i++) {
+    qDebug() << kextList.at(i);
+  }
+}
+
 void Method::kextUpdate() {
   QString test = "https://github.com/acidanthera/Lilu";
 
@@ -45,6 +98,8 @@ void Method::kextUpdate() {
       }
     }
   }
+
+  finishKextUpdate();
 }
 
 void Method::startDownload(QString strUrl) {
@@ -85,6 +140,9 @@ void Method::startDownload(QString strUrl) {
   mw_one->ui->progressBarKext->setMinimum(0);
 
   downloadTimer.start();
+
+  mw_one->ui->progressBarKext->setVisible(true);
+  mw_one->ui->labelShowDLInfo->setVisible(true);
 }
 
 void Method::doProcessReadyRead() {
@@ -99,11 +157,14 @@ void Method::doProcessFinished() {
     myfile->flush();
     myfile->close();
 
+    if (QFileInfo(tempDir + filename).exists())
+      QProcess::execute("unzip", QStringList() << "-o" << tempDir + filename
+                                               << "-d" << tempDir);
+    dlEnd = true;
+
   } else {
     QMessageBox::critical(NULL, tr("Error"), "Failed!!!");
   }
-
-  dlEnd = true;
 }
 
 void Method::doProcessDownloadProgress(qint64 recv_total,
@@ -268,8 +329,7 @@ QString Method::getTextEditLineText(QTextEdit* txtEdit, int i) {
 
 bool Method::isKext(QString kextName) {
   QString str = kextName.mid(kextName.length() - 4, 4);
-  // qDebug() << str;
-  if (str == "kext")
+  if (str == "kext" || str == "dSYM")
     return true;
   else
     return false;

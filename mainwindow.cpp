@@ -717,6 +717,9 @@ void MainWindow::ParserDP(QVariantMap map) {
 }
 
 void MainWindow::initui_kernel() {
+  ui->progressBarKext->setVisible(false);
+  ui->labelShowDLInfo->setVisible(false);
+
   QTableWidgetItem* id0;
   // Add
   ui->table_kernel_add->setColumnCount(8);

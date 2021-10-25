@@ -2,6 +2,7 @@
 #define METHOD_H
 
 #include <QDir>
+#include <QDirIterator>
 #include <QElapsedTimer>
 #include <QFileDialog>
 #include <QMainWindow>
@@ -77,6 +78,10 @@ class Method : public QMainWindow {
   QString GetFileSize(const qint64 &size, int precision);
   bool blCanBeUpdate = false;
   void kextUpdate();
+  void finishKextUpdate();
+  void getAllFolds(const QString &foldPath, QStringList &folds);
+  void getAllFiles(const QString &foldPath, QStringList &folds,
+                   const QStringList &formats);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
