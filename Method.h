@@ -12,81 +12,81 @@
 #include <QTextEdit>
 #include <QWidget>
 
-class Method : public QMainWindow
-{
-    Q_OBJECT
-public:
-    explicit Method(QWidget *parent = nullptr);
+class Method : public QMainWindow {
+  Q_OBJECT
+ public:
+  explicit Method(QWidget *parent = nullptr);
 
-    QString tempDir;
-    QString filename;
-    QNetworkAccessManager *managerDownLoad;
-    QNetworkReply *reply;
-    QFile *myfile;
-    QTimer *tmrUpdateShow;
-    void doProcessReadyRead();
-    void doProcessFinished();
-    void doProcessDownloadProgress(qint64, qint64);
-    QStringList strDLInfoList;
-    QString getMD5(QString targetFile);
-    void goTable(QTableWidget *table);
-    QWidget *getSubTabWidget(int m, int s);
-    void goACPITable(QTableWidget *table);
-    void goBooterTable(QTableWidget *table);
-    void goDPTable(QTableWidget *table);
-    void goKernelTable(QTableWidget *table);
-    void goMiscTable(QTableWidget *table);
-    void goNVRAMTable(QTableWidget *table);
+  bool dlEnd = false;
+  QString tempDir;
+  QString filename;
+  QNetworkAccessManager *managerDownLoad;
+  QNetworkReply *reply;
+  QFile *myfile;
+  QTimer *tmrUpdateShow;
+  void doProcessReadyRead();
+  void doProcessFinished();
+  void doProcessDownloadProgress(qint64, qint64);
+  QStringList strDLInfoList;
+  QString getMD5(QString targetFile);
+  void goTable(QTableWidget *table);
+  QWidget *getSubTabWidget(int m, int s);
+  void goACPITable(QTableWidget *table);
+  void goBooterTable(QTableWidget *table);
+  void goDPTable(QTableWidget *table);
+  void goKernelTable(QTableWidget *table);
+  void goMiscTable(QTableWidget *table);
+  void goNVRAMTable(QTableWidget *table);
 
-    void findTable(QString findText);
-    void init_Table(int index);
-    QString getTabTextName(int index);
+  void findTable(QString findText);
+  void init_Table(int index);
+  QString getTabTextName(int index);
 
-    QString copyTools(QString pathSource, QString pathTarget);
-    QString copyACPI(QString pathSource, QString pathTarget);
-    QString copyKexts(QString pathSource, QString pathTarget);
-    QString copyDrivers(QString pathSource, QString pathTarget);
-    void findDP(QTableWidget *t, QString findText);
-    void findNVRAM(QTableWidget *t, QString findText);
+  QString copyTools(QString pathSource, QString pathTarget);
+  QString copyACPI(QString pathSource, QString pathTarget);
+  QString copyKexts(QString pathSource, QString pathTarget);
+  QString copyDrivers(QString pathSource, QString pathTarget);
+  void findDP(QTableWidget *t, QString findText);
+  void findNVRAM(QTableWidget *t, QString findText);
 
-    void set_nv_key(QString key, QString dataType);
+  void set_nv_key(QString key, QString dataType);
 
-    void UpdateStatusBarInfo();
-    void addFileSystemWatch(QString strOpenFile);
+  void UpdateStatusBarInfo();
+  void addFileSystemWatch(QString strOpenFile);
 
-    void removeFileSystemWatch(QString strOpenFile);
-    QStringList deDuplication(QStringList FileName, QTableWidget *table, int col);
-    void markColor(QTableWidget *table, QString path, int col);
-    void OCValidationProcessing();
-    void setStatusBarTip(QWidget *w);
+  void removeFileSystemWatch(QString strOpenFile);
+  QStringList deDuplication(QStringList FileName, QTableWidget *table, int col);
+  void markColor(QTableWidget *table, QString path, int col);
+  void OCValidationProcessing();
+  void setStatusBarTip(QWidget *w);
 
-    bool isKext(QString kextName);
-    QString getKextBin(QString kextName);
-    QString loadText(QString textFile);
-    QString getKextVersion(QString kextFile);
-    QString getTextEditLineText(QTextEdit *txtEdit, int i);
+  bool isKext(QString kextName);
+  QString getKextBin(QString kextName);
+  QString loadText(QString textFile);
+  QString getKextVersion(QString kextFile);
+  QString getTextEditLineText(QTextEdit *txtEdit, int i);
 
-    QObjectList getAllToolButton(QObjectList lstUIControls);
-    void delRightTableItem(QTableWidget *t0, QTableWidget *t);
-    bool isEqualInList(QString str, QStringList list);
-    QStringList DirToFileList(QString strDir, QString strFilter);
-    bool isWhatFile(QString File, QString filter);
-    void getLastReleaseFromUrl(QString strUrl);
-    void parse_UpdateJSON(QString str);
-    void startDownload(QString strUrl);
-    QString GetFileSize(const qint64 &size, int precision);
-    bool blCanBeUpdate = false;
-    void kextUpdate();
-public slots:
-    void on_GenerateEFI();
-    void on_btnExportMaster();
-    void on_btnImportMaster();
+  QObjectList getAllToolButton(QObjectList lstUIControls);
+  void delRightTableItem(QTableWidget *t0, QTableWidget *t);
+  bool isEqualInList(QString str, QStringList list);
+  QStringList DirToFileList(QString strDir, QString strFilter);
+  bool isWhatFile(QString File, QString filter);
+  void getLastReleaseFromUrl(QString strUrl);
+  void parse_UpdateJSON(QString str);
+  void startDownload(QString strUrl);
+  QString GetFileSize(const qint64 &size, int precision);
+  bool blCanBeUpdate = false;
+  void kextUpdate();
+ public slots:
+  void on_GenerateEFI();
+  void on_btnExportMaster();
+  void on_btnImportMaster();
 
-    void replyFinished(QNetworkReply *reply);
+  void replyFinished(QNetworkReply *reply);
 
-private:
-    QElapsedTimer downloadTimer;
-signals:
+ private:
+  QElapsedTimer downloadTimer;
+ signals:
 };
 
 #endif  // METHOD_H

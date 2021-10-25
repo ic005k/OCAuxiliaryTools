@@ -1,9 +1,11 @@
 #include "Method.h"
 
+#include "dlgdatabase.h"
 #include "filesystemwatcher.h"
 #include "mainwindow.h"
 #include "plistparser.h"
 #include "plistserializer.h"
+#include "ui_dlgdatabase.h"
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
@@ -13,109 +15,129 @@ QString strKexts;
 QString strDrivers;
 QString strTools;
 
-Method::Method(QWidget *parent) : QMainWindow(parent)
-{
-    managerDownLoad = new QNetworkAccessManager(this);
-    myfile = new QFile(this);
-    tempDir = QDir::homePath() + "/tempocat/";
+Method::Method(QWidget* parent) : QMainWindow(parent) {
+  managerDownLoad = new QNetworkAccessManager(this);
+  myfile = new QFile(this);
+  tempDir = QDir::homePath() + "/tempocat/";
 }
 
-void Method::kextUpdate()
-{
-    QString test = "https://github.com/acidanthera/Lilu";
-    getLastReleaseFromUrl(test);
-    for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
+void Method::kextUpdate() {
+  QString test = "https://github.com/acidanthera/Lilu";
+
+  for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
+    QString name = mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
+    for (int j = 0;
+         j < mw_one->myDatabase->ui->textEdit->document()->lineCount(); j++) {
+      QString lineText =
+          getTextEditLineText(mw_one->myDatabase->ui->textEdit, j);
+      QStringList txtList = lineText.split("|");
+      QString txt = txtList.at(0);
+      if (txt.trimmed() == name) {
+        test = txtList.at(1);
+        test = test.trimmed();
+        getLastReleaseFromUrl(test);
+        QElapsedTimer t;
+        t.start();
+        dlEnd = false;
+        while (!dlEnd) {
+          QCoreApplication::processEvents();
+        }
+      }
     }
+  }
 }
 
-void Method::startDownload(QString strUrl)
-{
-    QString strTokyo, strSeoul, strOriginal;
+void Method::startDownload(QString strUrl) {
+  QString strTokyo, strSeoul, strOriginal;
 
-    strOriginal = "https://github.com/";
-    strTokyo = "https://download.fastgit.org/";
-    strSeoul = "https://ghproxy.com/https://github.com/";
-    if (mw_one->zh_cn)
-        strUrl.replace("https://github.com/", strTokyo);
+  strOriginal = "https://github.com/";
+  strTokyo = "https://download.fastgit.org/";
+  strSeoul = "https://ghproxy.com/https://github.com/";
+  if (mw_one->zh_cn) strUrl.replace("https://github.com/", strTokyo);
 
-    QNetworkRequest request;
-    request.setUrl(QUrl(strUrl));
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
+  QNetworkRequest request;
+  request.setUrl(QUrl(strUrl));
+  request.setHeader(QNetworkRequest::ContentTypeHeader,
+                    "application/octet-stream");
 
-    reply = managerDownLoad->get(request);
+  reply = managerDownLoad->get(request);
 
-    connect(reply, &QNetworkReply::readyRead, this, &Method::doProcessReadyRead);
-    connect(reply, &QNetworkReply::finished, this, &Method::doProcessFinished);
-    connect(reply, &QNetworkReply::downloadProgress, this, &Method::doProcessDownloadProgress);
+  connect(reply, &QNetworkReply::readyRead, this, &Method::doProcessReadyRead);
+  connect(reply, &QNetworkReply::finished, this, &Method::doProcessFinished);
+  connect(reply, &QNetworkReply::downloadProgress, this,
+          &Method::doProcessDownloadProgress);
 
-    QStringList list = strUrl.split("/");
-    filename = list.at(list.length() - 1);
-    QDir dir;
-    if (dir.mkpath(tempDir)) {
-    }
-    QString file = tempDir + filename;
+  QStringList list = strUrl.split("/");
+  filename = list.at(list.length() - 1);
+  QDir dir;
+  if (dir.mkpath(tempDir)) {
+  }
+  QString file = tempDir + filename;
 
-    myfile->setFileName(file);
-    bool ret = myfile->open(QIODevice::WriteOnly | QIODevice::Truncate); //创建文件
-    if (!ret) {
-        QMessageBox::warning(this, "warning", "Failed to open.");
-        return;
-    }
-    mw_one->ui->progressBarKext->setValue(0);
-    mw_one->ui->progressBarKext->setMinimum(0);
+  myfile->setFileName(file);
+  bool ret =
+      myfile->open(QIODevice::WriteOnly | QIODevice::Truncate);  //创建文件
+  if (!ret) {
+    QMessageBox::warning(this, "warning", "Failed to open.");
+    return;
+  }
+  mw_one->ui->progressBarKext->setValue(0);
+  mw_one->ui->progressBarKext->setMinimum(0);
 
-    downloadTimer.start();
+  downloadTimer.start();
 }
 
-void Method::doProcessReadyRead()
-{
-    while (!reply->atEnd()) {
-        QByteArray ba = reply->readAll();
-        myfile->write(ba);
-    }
+void Method::doProcessReadyRead() {
+  while (!reply->atEnd()) {
+    QByteArray ba = reply->readAll();
+    myfile->write(ba);
+  }
 }
 
-void Method::doProcessFinished()
-{
-    if (reply->error() == QNetworkReply::NoError) {
-        myfile->flush();
-        myfile->close();
+void Method::doProcessFinished() {
+  if (reply->error() == QNetworkReply::NoError) {
+    myfile->flush();
+    myfile->close();
 
-    } else {
-        QMessageBox::critical(NULL, tr("Error"), "Failed!!!");
-    }
+  } else {
+    QMessageBox::critical(NULL, tr("Error"), "Failed!!!");
+  }
+
+  dlEnd = true;
 }
 
 void Method::doProcessDownloadProgress(qint64 recv_total,
-                                       qint64 all_total) //显示
+                                       qint64 all_total)  //显示
 {
-    mw_one->ui->progressBarKext->setMaximum(all_total);
-    mw_one->ui->progressBarKext->setValue(recv_total);
+  mw_one->ui->progressBarKext->setMaximum(all_total);
+  mw_one->ui->progressBarKext->setValue(recv_total);
 
-    // calculate the download speed
-    double speed = recv_total * 1000.0 / downloadTimer.elapsed();
-    QString unit;
-    if (speed < 1024) {
-        unit = "bytes/sec";
-    } else if (speed < 1024 * 1024) {
-        speed /= 1024;
-        unit = "kB/s";
-    } else {
-        speed /= 1024 * 1024;
-        unit = "MB/s";
-    }
+  // calculate the download speed
+  double speed = recv_total * 1000.0 / downloadTimer.elapsed();
+  QString unit;
+  if (speed < 1024) {
+    unit = "bytes/sec";
+  } else if (speed < 1024 * 1024) {
+    speed /= 1024;
+    unit = "kB/s";
+  } else {
+    speed /= 1024 * 1024;
+    unit = "MB/s";
+  }
 
-    QString strSpeed = QString::fromLatin1("%1 %2").arg(speed, 3, 'f', 1).arg(unit);
+  QString strSpeed =
+      QString::fromLatin1("%1 %2").arg(speed, 3, 'f', 1).arg(unit);
 
-    mw_one->ui->labelShowDLInfo->setText(tr("Download Progress") + " : " + GetFileSize(recv_total, 2)
-                                         + " -> " + GetFileSize(all_total, 2) + "    " + strSpeed);
+  mw_one->ui->labelShowDLInfo->setText(
+      tr("Download Progress") + " : " + GetFileSize(recv_total, 2) + " -> " +
+      GetFileSize(all_total, 2) + "    " + strSpeed);
 
-    if (recv_total == all_total) {
-        if (recv_total < 100000) {
-            blCanBeUpdate = false;
-        } else
-            blCanBeUpdate = true;
-    }
+  if (recv_total == all_total) {
+    if (recv_total < 100000) {
+      blCanBeUpdate = false;
+    } else
+      blCanBeUpdate = true;
+  }
 }
 
 void Method::getLastReleaseFromUrl(QString strUrl) {
@@ -1052,25 +1074,26 @@ void Method::OCValidationProcessing() {
   }
 }
 
-QString Method::GetFileSize(const qint64 &size, int precision)
-{
-    double sizeAsDouble = size;
-    static QStringList measures;
-    if (measures.isEmpty())
-        measures << QCoreApplication::translate("QInstaller", "bytes")
-                 << QCoreApplication::translate("QInstaller", "KiB")
-                 << QCoreApplication::translate("QInstaller", "MiB")
-                 << QCoreApplication::translate("QInstaller", "GiB")
-                 << QCoreApplication::translate("QInstaller", "TiB")
-                 << QCoreApplication::translate("QInstaller", "PiB")
-                 << QCoreApplication::translate("QInstaller", "EiB")
-                 << QCoreApplication::translate("QInstaller", "ZiB")
-                 << QCoreApplication::translate("QInstaller", "YiB");
-    QStringListIterator it(measures);
-    QString measure(it.next());
-    while (sizeAsDouble >= 1024.0 && it.hasNext()) {
-        measure = it.next();
-        sizeAsDouble /= 1024.0;
-    }
-    return QString::fromLatin1("%1 %2").arg(sizeAsDouble, 0, 'f', precision).arg(measure);
+QString Method::GetFileSize(const qint64& size, int precision) {
+  double sizeAsDouble = size;
+  static QStringList measures;
+  if (measures.isEmpty())
+    measures << QCoreApplication::translate("QInstaller", "bytes")
+             << QCoreApplication::translate("QInstaller", "KiB")
+             << QCoreApplication::translate("QInstaller", "MiB")
+             << QCoreApplication::translate("QInstaller", "GiB")
+             << QCoreApplication::translate("QInstaller", "TiB")
+             << QCoreApplication::translate("QInstaller", "PiB")
+             << QCoreApplication::translate("QInstaller", "EiB")
+             << QCoreApplication::translate("QInstaller", "ZiB")
+             << QCoreApplication::translate("QInstaller", "YiB");
+  QStringListIterator it(measures);
+  QString measure(it.next());
+  while (sizeAsDouble >= 1024.0 && it.hasNext()) {
+    measure = it.next();
+    sizeAsDouble /= 1024.0;
+  }
+  return QString::fromLatin1("%1 %2")
+      .arg(sizeAsDouble, 0, 'f', precision)
+      .arg(measure);
 }

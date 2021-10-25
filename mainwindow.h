@@ -78,6 +78,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  QString strConfigPath;
   void updateIconStatus();
   QTimer* timer;
   void lineEditSetText();
@@ -276,7 +277,7 @@ class MainWindow : public QMainWindow {
   QComboBox* cboxReservedMemoryType;
 
   aboutDialog* aboutDlg;
-
+  dlgDatabase* myDatabase;
   void addACPIItem(QStringList FileName);
 
   void addKexts(QStringList FileName);
@@ -903,9 +904,9 @@ class MainWindow : public QMainWindow {
 
   void on_btnKextUpdate_clicked();
 
-  void on_table_nv_add0_itemClicked(QTableWidgetItem *item);
+  void on_table_nv_add0_itemClicked(QTableWidgetItem* item);
 
-  private:
+ private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;
   void acpi_cellDoubleClicked();
@@ -937,8 +938,6 @@ class MainWindow : public QMainWindow {
   QString orgLabelStyle;
   QString orgCheckBoxStyle;
   void initRecentFilesForToolBar();
-
-  dlgDatabase* myDatabase;
 
   QMenu* reFileMenu;
 

@@ -83,8 +83,9 @@ MainWindow::MainWindow(QWidget* parent)
   timer = new QTimer(this);
   connect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
 
+  strConfigPath = QDir::homePath() + "/.config/QtOCC/";
   QDir dir;
-  if (dir.mkpath(QDir::homePath() + "/.config/QtOCC/")) {
+  if (dir.mkpath(strConfigPath)) {
   }
 
   setUIMargin();
@@ -10481,7 +10482,4 @@ void MainWindow::on_table_nv_add0_itemClicked(QTableWidgetItem* item) {
   Q_UNUSED(item);
 }
 
-void MainWindow::on_btnKextUpdate_clicked()
-{
-    mymethod->kextUpdate();
-}
+void MainWindow::on_btnKextUpdate_clicked() { mymethod->kextUpdate(); }
