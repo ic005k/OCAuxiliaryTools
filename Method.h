@@ -18,6 +18,7 @@ class Method : public QMainWindow {
  public:
   explicit Method(QWidget *parent = nullptr);
 
+  QString kextName;
   bool dlEnd = false;
   QString tempDir;
   QString filename;

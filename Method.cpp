@@ -100,6 +100,7 @@ void Method::kextUpdate() {
 
   for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
     QString name = mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
+    kextName = name;
     for (int j = 0;
          j < mw_one->myDatabase->ui->textEdit->document()->lineCount(); j++) {
       QString lineText =
@@ -154,6 +155,9 @@ void Method::startDownload(QString strUrl) {
   bool ret =
       myfile->open(QIODevice::WriteOnly | QIODevice::Truncate);  //创建文件
   if (!ret) {
+    mw_one->ui->btnKextUpdate->setEnabled(true);
+    mw_one->repaint();
+    reply->close();
     QMessageBox::warning(this, "warning", "Failed to open.");
     return;
   }
@@ -177,6 +181,7 @@ void Method::doProcessFinished() {
   if (reply->error() == QNetworkReply::NoError) {
     myfile->flush();
     myfile->close();
+    reply->close();
 
     if (QFileInfo(tempDir + filename).exists())
       QProcess::execute("unzip", QStringList() << "-o" << tempDir + filename
@@ -184,6 +189,9 @@ void Method::doProcessFinished() {
     dlEnd = true;
 
   } else {
+    mw_one->ui->btnKextUpdate->setEnabled(true);
+    mw_one->repaint();
+    reply->close();
     QMessageBox::critical(NULL, tr("Error"), "Failed!!!");
   }
 }
@@ -211,8 +219,9 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
       QString::fromLatin1("%1 %2").arg(speed, 3, 'f', 1).arg(unit);
 
   mw_one->ui->labelShowDLInfo->setText(
-      tr("Download Progress") + " : " + GetFileSize(recv_total, 2) + " -> " +
-      GetFileSize(all_total, 2) + "    " + strSpeed);
+      kextName + " | " + tr("Download Progress") + " : " +
+      GetFileSize(recv_total, 2) + " -> " + GetFileSize(all_total, 2) + "    " +
+      strSpeed);
 
   if (recv_total == all_total) {
     if (recv_total < 100000) {
