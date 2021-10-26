@@ -21,6 +21,8 @@ class SyncOCDialog : public QDialog {
   QString sourceResourcesDir;
   QString targetResourcesDir;
   bool blSame;
+  QStringList sourceFileList;
+  QStringList targetFileList;
 
  private slots:
   void on_btnStartSync_clicked();
@@ -30,6 +32,8 @@ class SyncOCDialog : public QDialog {
   void on_listSource_itemClicked(QListWidgetItem *item);
 
   void on_listTarget_itemClicked(QListWidgetItem *item);
+
+  void on_listTarget_currentRowChanged(int currentRow);
 
  private:
   void setListWidgetStyle();

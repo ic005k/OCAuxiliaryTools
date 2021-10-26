@@ -20,9 +20,11 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
 
   ui->listSource->setStyleSheet(listStyleMain);
   ui->listTarget->setStyleSheet(listStyleMain);
-
+  int size = 25;
   ui->listSource->setIconSize(QSize(15, 15));
   ui->listTarget->setIconSize(QSize(15, 15));
+  ui->listSource->setGridSize(QSize(size, size));
+  ui->listTarget->setGridSize(QSize(size, size));
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
@@ -34,10 +36,10 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     ui->listTarget->setCurrentRow(i);
 
     // 数据库里面必须要有这个文件（源文件必须存在）
-    QString strSou = ui->listSource->item(i)->text();
-    QString strTar = ui->listTarget->item(i)->text();
+    QString strSou = mw_one->sourceFiles.at(i);
+    QString strTar = mw_one->targetFiles.at(i);
     if (QFileInfo(strSou).exists()) {
-      if (ui->listSource->item(i)->checkState() == Qt::Checked) {
+      if (ui->listTarget->item(i)->checkState() == Qt::Checked) {
         if (!mymethod->isKext(strSou)) {
           QFile::remove(strTar);
           ok = QFile::copy(strSou, strTar);
@@ -71,8 +73,8 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
       targetHash;
   ui->listTarget->setCurrentRow(currentRow);
 
-  sourceFile = ui->listSource->item(currentRow)->text();
-  targetFile = ui->listTarget->item(currentRow)->text();
+  sourceFile = mw_one->sourceFiles.at(currentRow);
+  targetFile = mw_one->targetFiles.at(currentRow);
 
   if (mymethod->isKext(sourceFile))
     sourceHash = mymethod->getMD5(mymethod->getKextBin(sourceFile));
@@ -111,20 +113,27 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
     ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
     ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
   }
+}
 
+void SyncOCDialog::on_listSource_itemClicked(QListWidgetItem* item) {
+  Q_UNUSED(item);
+
+  int n = ui->listSource->currentRow();
+  ui->listTarget->setCurrentRow(n);
   ui->listSource->setFocus();
   QScrollBar* scrollBar;
   scrollBar = ui->listTarget->verticalScrollBar();
   scrollBar->setValue(ui->listSource->verticalScrollBar()->value());
 }
 
-void SyncOCDialog::on_listSource_itemClicked(QListWidgetItem* item) {
-  Q_UNUSED(item);
-  on_listSource_currentRowChanged(ui->listSource->currentRow());
-}
-
 void SyncOCDialog::on_listTarget_itemClicked(QListWidgetItem* item) {
   Q_UNUSED(item);
+  int n = ui->listTarget->currentRow();
+  ui->listSource->setCurrentRow(n);
+  ui->listTarget->setFocus();
+  QScrollBar* scrollBar;
+  scrollBar = ui->listSource->verticalScrollBar();
+  scrollBar->setValue(ui->listTarget->verticalScrollBar()->value());
 }
 
 void SyncOCDialog::setListWidgetStyle() {
@@ -152,4 +161,8 @@ void SyncOCDialog::setListWidgetColor(QString color) {
       ->setForeground(QBrush(Qt::black));
   ui->listTarget->item(ui->listSource->currentRow())
       ->setBackground(QBrush(QColor(color)));
+}
+
+void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
+  Q_UNUSED(currentRow)
 }

@@ -78,6 +78,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  QStringList sourceFiles, targetFiles;
   QString strConfigPath;
   void updateIconStatus();
   QTimer* timer;

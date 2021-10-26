@@ -9529,8 +9529,8 @@ QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab) {
 void MainWindow::on_actionQuit_triggered() { this->close(); }
 
 void MainWindow::on_actionUpgrade_OC_triggered() {
-  QStringList sourceFiles, targetFiles;
-
+  sourceFiles.clear();
+  targetFiles.clear();
   QString DirName;
   QMessageBox box;
 
@@ -9617,18 +9617,24 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
 
   dlgSyncOC->ui->listSource->clear();
   dlgSyncOC->ui->listTarget->clear();
-  dlgSyncOC->ui->listSource->addItems(sourceFiles);
-  dlgSyncOC->ui->listTarget->addItems(targetFiles);
+  for (int i = 0; i < sourceFiles.count(); i++) {
+    dlgSyncOC->ui->listSource->addItem(
+        mymethod->getFileName(sourceFiles.at(i)));
+  }
+  for (int i = 0; i < targetFiles.count(); i++) {
+    dlgSyncOC->ui->listTarget->addItem(
+        mymethod->getFileName(targetFiles.at(i)));
+  }
   for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
-    QString strF1 = dlgSyncOC->ui->listSource->item(i)->text();
-    QString strF2 = dlgSyncOC->ui->listTarget->item(i)->text();
+    QString strF1 = sourceFiles.at(i);
+    QString strF2 = targetFiles.at(i);
     if (!mymethod->isKext(strF1)) {
-      dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Checked);
+      dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
     } else {
       if (mymethod->getKextVersion(strF1) > mymethod->getKextVersion(strF2))
-        dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Checked);
+        dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
       else
-        dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Unchecked);
+        dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Unchecked);
     }
   }
 

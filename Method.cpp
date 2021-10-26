@@ -272,6 +272,8 @@ void Method::parse_UpdateJSON(QString str) {
 
   if (err_rpt.error != QJsonParseError::NoError) {
     QMessageBox::critical(this, "", tr("Network error!"));
+    mw_one->ui->btnKextUpdate->setEnabled(true);
+    blBreak = true;
     return;
   }
 
