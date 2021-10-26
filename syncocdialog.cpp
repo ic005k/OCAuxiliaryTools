@@ -137,7 +137,7 @@ void SyncOCDialog::on_listTarget_itemClicked(QListWidgetItem* item) {
 }
 
 void SyncOCDialog::setListWidgetStyle() {
-  QString fileName = ui->listSource->item(ui->listSource->currentRow())->text();
+  QString fileName = mw_one->sourceFiles.at(ui->listSource->currentRow());
   if (mymethod->isWhatFile(fileName, "kext")) {
     setListWidgetColor("#FFD39B");
   }
