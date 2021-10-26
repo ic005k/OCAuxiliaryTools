@@ -43,15 +43,24 @@ dlgDatabase::dlgDatabase(QWidget *parent)
 
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QFileInfo fi(qfile);
+  QLocale locale;
   if (fi.exists()) {
     QSettings Reg(qfile, QSettings::IniFormat);
-    QLocale locale;
+
     if (locale.language() == QLocale::Chinese) {
       ui->comboBoxNet->setCurrentText(
           Reg.value("Net", "https://download.fastgit.org/").toString());
     } else {
       ui->comboBoxNet->setCurrentText(
           Reg.value("Net", "https://github.com/").toString());
+    }
+
+  } else {
+    if (locale.language() == QLocale::Chinese) {
+      ui->comboBoxNet->setCurrentText("https://download.fastgit.org/");
+
+    } else {
+      ui->comboBoxNet->setCurrentText("https://github.com/");
     }
   }
 }
