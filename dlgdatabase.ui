@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>593</width>
+    <width>710</width>
     <height>462</height>
    </rect>
   </property>
@@ -18,6 +18,9 @@
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
       <number>2</number>
+     </property>
+     <property name="documentMode">
+      <bool>true</bool>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">

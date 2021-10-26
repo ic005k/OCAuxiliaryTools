@@ -401,7 +401,7 @@ void AutoUpdateDialog::startWgetDownload() {
   setWindowTitle("");
   if (mw_one->mac || mw_one->osx1012) ui->textEdit->setFont(QFont("Menlo", 12));
 
-  QStringList list = strUrl.split("/");
+  QStringList list = strUrlOrg.split("/");
   filename = list.at(list.length() - 1);
   QDir dir;
   if (dir.mkpath(tempDir)) {
@@ -418,7 +418,7 @@ void AutoUpdateDialog::startWgetDownload() {
   strSet = mw_one->myDatabase->ui->comboBoxNet->currentText().trimmed();
   strTemp = strUrlOrg;
   strUrl = strTemp.replace("https://github.com/", strSet);
-  qDebug() << strUrl << strSet;
+  // qDebug() << strUrl << strSet;
 
   processWget = new QProcess(this);
 
