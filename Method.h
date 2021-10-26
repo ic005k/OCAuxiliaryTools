@@ -18,6 +18,7 @@ class Method : public QMainWindow {
  public:
   explicit Method(QWidget *parent = nullptr);
 
+  QStringList kextDLUrlList;
   bool blBreak = false;
   QString kextName;
   bool dlEnd = false;
@@ -99,6 +100,7 @@ class Method : public QMainWindow {
   QElapsedTimer downloadTimer;
   void cancelDownload();
  signals:
+ private slots:
 };
 
 #endif  // METHOD_H

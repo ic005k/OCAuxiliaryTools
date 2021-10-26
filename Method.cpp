@@ -118,7 +118,21 @@ void Method::kextUpdate() {
           mw_one->myDatabase->ui->tableKextUrl->item(j, 0)->text().trimmed();
       test = mw_one->myDatabase->ui->tableKextUrl->item(j, 1)->text().trimmed();
       if (txt == name && test != "") {
-        getLastReleaseFromUrl(test);
+        bool reGetUrl = true;
+        QString strUrl;
+        for (int m = 0; m < kextDLUrlList.count(); m++) {
+          QString str_m = kextDLUrlList.at(m);
+          QStringList list_m = str_m.split("|");
+          if (list_m.at(0) == name) {
+            reGetUrl = false;
+            strUrl = list_m.at(1);
+          }
+        }
+        if (reGetUrl) {
+          getLastReleaseFromUrl(test);
+        } else {
+          startDownload(strUrl);
+        }
         QElapsedTimer t;
         t.start();
         dlEnd = false;
@@ -263,7 +277,7 @@ void Method::getLastReleaseFromUrl(QString strUrl) {
 void Method::replyFinished(QNetworkReply* reply) {
   QString str = reply->readAll();
   parse_UpdateJSON(str);
-  reply->deleteLater();
+  if (reply) reply->deleteLater();
 }
 
 void Method::parse_UpdateJSON(QString str) {
@@ -308,6 +322,7 @@ void Method::parse_UpdateJSON(QString str) {
     mw_one->ui->btnKextUpdate->setEnabled(true);
     return;
   }
+  kextDLUrlList.append(kextName + "|" + strDLUrl);
   startDownload(strDLUrl);
 }
 
@@ -1228,11 +1243,4 @@ QString Method::getFileName(QString file) {
   return list.at(list.count() - 1);
 }
 
-void Method::cancelKextUpdate() {
-  if (!mw_one->ui->btnKextUpdate->isEnabled()) {
-    reply->close();
-    reply->deleteLater();
-    replyDL->close();
-    replyDL->deleteLater();
-  }
-}
+void Method::cancelKextUpdate() { blBreak = true; }
