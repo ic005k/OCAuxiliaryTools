@@ -51,12 +51,11 @@ void AutoUpdateDialog::Init() {
   myfile = new QFile(this);
 }
 
-void AutoUpdateDialog::doProcessReadyRead()
-{
-    while (!reply->atEnd()) {
-        QByteArray ba = reply->readAll();
-        myfile->write(ba);
-    }
+void AutoUpdateDialog::doProcessReadyRead() {
+  while (!reply->atEnd()) {
+    QByteArray ba = reply->readAll();
+    myfile->write(ba);
+  }
 }
 
 void AutoUpdateDialog::doProcessFinished() {
@@ -409,13 +408,17 @@ void AutoUpdateDialog::startWgetDownload() {
   }
   QString file = tempDir + filename;
 
-  QString strTokyo, strSeoul, strOriginal, strTest;
+  QString strTokyo, strSeoul, strOriginal, strTest, strSet, strTemp;
 
   strOriginal = "https://github.com/";
   strTokyo = "https://download.fastgit.org/";
   strSeoul = "https://ghproxy.com/https://github.com/";
   strTest = "https://gh.api.99988866.xyz/https://github.com/";
-  if (mw_one->zh_cn) strUrl.replace("https://github.com/", strTokyo);
+  // if (mw_one->zh_cn) strUrl.replace("https://github.com/", strTokyo);
+  strSet = mw_one->myDatabase->ui->comboBoxNet->currentText().trimmed();
+  strTemp = strUrlOrg;
+  strUrl = strTemp.replace("https://github.com/", strSet);
+  qDebug() << strUrl << strSet;
 
   processWget = new QProcess(this);
 

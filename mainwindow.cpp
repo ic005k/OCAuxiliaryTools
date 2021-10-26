@@ -1722,7 +1722,6 @@ void MainWindow::initui_PlatformInfo() {
   QFileInfo fi(qfile);
   if (fi.exists()) {
     QSettings Reg(qfile, QSettings::IniFormat);
-
     ui->chkSaveDataHub->setChecked(Reg.value("SaveDataHub").toBool());
     ui->actionAutoChkUpdate->setChecked(
         Reg.value("AutoChkUpdate", true).toBool());
@@ -4948,6 +4947,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
   Reg.setValue("AutoChkUpdate", ui->actionAutoChkUpdate->isChecked());
+  Reg.setValue("Net", myDatabase->ui->comboBoxNet->currentText());
 
   //搜索历史记录保存
   int textTotal = ui->cboxFind->count();
@@ -6767,7 +6767,7 @@ int MainWindow::parse_UpdateJSON(QString str) {
 
     QVariantList list = root_Obj.value("assets").toArray().toVariantList();
     QString Url = getUrl(list);
-    dlgAutoUpdate->strUrl = Url;
+    dlgAutoUpdate->strUrlOrg = Url;
 
     QString UpdateTime = root_Obj.value("published_at").toString();
     QString ReleaseNote = root_Obj.value("body").toString();
@@ -9876,7 +9876,8 @@ void MainWindow::on_editPassInput_returnPressed() {
 }
 
 void MainWindow::on_actionDatabase_triggered() {
-  myDatabase->setModal(true);
+  myDatabase->setWindowFlags(dlgAutoUpdate->windowFlags() |
+                             Qt::WindowStaysOnTopHint);
   myDatabase->show();
 
   QFileInfo appInfo(qApp->applicationDirPath());
@@ -10116,7 +10117,7 @@ void MainWindow::on_actionUpgrade_Database_triggered() {
 
 void MainWindow::ShowAutoUpdateDlg(bool Database) {
   Q_UNUSED(Database);
-  if (dlgAutoUpdate->strUrl == "") return;
+  if (dlgAutoUpdate->strUrlOrg == "") return;
   if (dlgAutoUpdate->isVisible()) return;
 
   dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() |

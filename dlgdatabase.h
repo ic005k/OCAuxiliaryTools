@@ -37,6 +37,8 @@ class dlgDatabase : public QDialog {
 
   void on_btnDel_clicked();
 
+  void on_btnTest_clicked();
+
  private:
  protected:
   void closeEvent(QCloseEvent *event);

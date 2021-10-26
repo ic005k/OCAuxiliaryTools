@@ -40,6 +40,20 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   ui->tableKextUrl->setColumnWidth(0, 150);
   ui->tableKextUrl->setColumnWidth(1, 350);
   ui->textEdit->setHidden(true);
+
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QFileInfo fi(qfile);
+  if (fi.exists()) {
+    QSettings Reg(qfile, QSettings::IniFormat);
+    QLocale locale;
+    if (locale.language() == QLocale::Chinese) {
+      ui->comboBoxNet->setCurrentText(
+          Reg.value("Net", "https://download.fastgit.org/").toString());
+    } else {
+      ui->comboBoxNet->setCurrentText(
+          Reg.value("Net", "https://github.com/").toString());
+    }
+  }
 }
 
 dlgDatabase::~dlgDatabase() { delete ui; }
@@ -268,4 +282,8 @@ void dlgDatabase::saveKextUrl() {
     if (str0 != "" || str1 != "") ui->textEdit->append(str0 + " | " + str1);
   }
   mymethod->TextEditToFile(ui->textEdit, mw_one->strConfigPath + "KextUrl.txt");
+}
+
+void dlgDatabase::on_btnTest_clicked() {
+  mw_one->on_actionOnline_Download_Updates_triggered();
 }

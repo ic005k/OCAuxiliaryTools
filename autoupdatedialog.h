@@ -28,6 +28,7 @@ class AutoUpdateDialog : public QDialog {
   ~AutoUpdateDialog();
   Ui::AutoUpdateDialog* ui;
 
+  QString strUrlOrg;
   QString tempDir;
   QString filename;
   QNetworkAccessManager* managerDownLoad;

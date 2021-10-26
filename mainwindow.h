@@ -56,6 +56,7 @@
 #include "ui_dlgMountESP.h"
 #include "ui_dlgParameters.h"
 #include "ui_dlgPreset.h"
+#include "ui_dlgdatabase.h"
 #include "ui_syncocdialog.h"
 
 #ifdef Q_OS_WIN32
@@ -348,6 +349,7 @@ class MainWindow : public QMainWindow {
   void on_btnNVRAMLS_Add0_clicked();
   void on_btnNVRAMDel_Add0_clicked();
   void cellEnteredSlot(int row, int column);
+  void on_actionOnline_Download_Updates_triggered();
 
  protected:
   void dragEnterEvent(QDragEnterEvent* e) override;
@@ -858,8 +860,6 @@ class MainWindow : public QMainWindow {
   void on_btnDown_UEFI_Drivers_clicked();
 
   void on_actionLatest_Release_triggered();
-
-  void on_actionOnline_Download_Updates_triggered();
 
   void on_actionUpgrade_Database_triggered();
 

@@ -148,12 +148,14 @@ void Method::kextUpdate() {
 }
 
 void Method::startDownload(QString strUrl) {
-  QString strTokyo, strSeoul, strOriginal;
-
+  QString strTokyo, strSeoul, strOriginal, strSet, strTemp, strUrlOrg;
+  strUrlOrg = strUrl;
   strOriginal = "https://github.com/";
   strTokyo = "https://download.fastgit.org/";
   strSeoul = "https://ghproxy.com/https://github.com/";
-  if (mw_one->zh_cn) strUrl.replace("https://github.com/", strTokyo);
+  strSet = mw_one->myDatabase->ui->comboBoxNet->currentText().trimmed();
+  strTemp = strUrlOrg;
+  strUrl = strTemp.replace("https://github.com/", strSet);
 
   QNetworkRequest request;
   request.setUrl(QUrl(strUrl));
