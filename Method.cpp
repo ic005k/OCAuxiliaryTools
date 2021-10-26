@@ -1225,3 +1225,12 @@ QString Method::getFileName(QString file) {
   QStringList list = file.split("/");
   return list.at(list.count() - 1);
 }
+
+void Method::cancelKextUpdate() {
+  if (!mw_one->ui->btnKextUpdate->isEnabled()) {
+    reply->close();
+    reply->deleteLater();
+    replyDL->close();
+    replyDL->deleteLater();
+  }
+}

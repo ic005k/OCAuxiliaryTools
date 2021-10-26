@@ -5009,6 +5009,8 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     clear_temp_data();
     event->accept();
   }
+
+  mymethod->cancelKextUpdate();
 }
 
 void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(

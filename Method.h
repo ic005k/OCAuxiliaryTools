@@ -87,6 +87,7 @@ class Method : public QMainWindow {
                    const QStringList &formats);
   void TextEditToFile(QTextEdit *txtEdit, QString fileName);
   QString getFileName(QString file);
+  void cancelKextUpdate();
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
@@ -96,6 +97,7 @@ class Method : public QMainWindow {
 
  private:
   QElapsedTimer downloadTimer;
+  void cancelDownload();
  signals:
 };
 
