@@ -43,13 +43,13 @@ dlgDatabase::dlgDatabase(QWidget *parent)
 
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QFileInfo fi(qfile);
+  QString strDef = "https://ghproxy.com/https://github.com/";
   QLocale locale;
   if (fi.exists()) {
     QSettings Reg(qfile, QSettings::IniFormat);
 
     if (locale.language() == QLocale::Chinese) {
-      ui->comboBoxNet->setCurrentText(
-          Reg.value("Net", "https://download.fastgit.org/").toString());
+      ui->comboBoxNet->setCurrentText(Reg.value("Net", strDef).toString());
     } else {
       ui->comboBoxNet->setCurrentText(
           Reg.value("Net", "https://github.com/").toString());
@@ -57,7 +57,7 @@ dlgDatabase::dlgDatabase(QWidget *parent)
 
   } else {
     if (locale.language() == QLocale::Chinese) {
-      ui->comboBoxNet->setCurrentText("https://download.fastgit.org/");
+      ui->comboBoxNet->setCurrentText(strDef);
 
     } else {
       ui->comboBoxNet->setCurrentText("https://github.com/");
