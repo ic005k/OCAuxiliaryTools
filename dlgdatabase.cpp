@@ -248,6 +248,33 @@ void dlgDatabase::refreshKextUrl() {
       "MacHyperVSupport.kext | "
       "https://github.com/acidanthera/MacHyperVSupport");
   ui->textEdit->append("NVMeFix.kext | https://github.com/acidanthera/NVMeFix");
+  ui->textEdit->append(
+      "RealtekCardReader.kext | "
+      "https://github.com/0xFireWolf/RealtekCardReader");
+  ui->textEdit->append(
+      "RealtekCardReaderFriend.kext | "
+      "https://github.com/0xFireWolf/RealtekCardReaderFriend");
+  ui->textEdit->append(
+      "ECEnabler.kext | https://github.com/1Revenger1/ECEnabler");
+  ui->textEdit->append(
+      "RealtekRTL8111.kext | https://github.com/Mieze/RTL8111_driver_for_OS_X");
+  ui->textEdit->append(
+      "CPUFriend.kext | https://github.com/acidanthera/CPUFriend");
+  ui->textEdit->append(
+      "VoodooInput.kext | https://github.com/acidanthera/VoodooInput");
+  ui->textEdit->append(
+      "LucyRTL8125Ethernet.kext | "
+      "https://github.com/Mieze/LucyRTL8125Ethernet");
+  ui->textEdit->append("Innie.kext | https://github.com/cdf/Innie");
+  ui->textEdit->append(
+      "AtherosE2200Ethernet.kext | "
+      "https://github.com/Mieze/AtherosE2200Ethernet");
+  ui->textEdit->append(
+      "DebugEnhancer.kext | https://github.com/acidanthera/DebugEnhancer");
+  ui->textEdit->append(
+      "IntelMausi.kext | https://github.com/acidanthera/IntelMausi");
+  // ui->textEdit->append(" | ");
+  // ui->textEdit->append(" | ");
 
   QTextEdit *txtEdit = new QTextEdit;
   QString txt = mymethod->loadText(mw_one->strConfigPath + "KextUrl.txt");
@@ -319,4 +346,12 @@ void dlgDatabase::on_comboBoxNet_currentTextChanged(const QString &arg1) {
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("Net", arg1);
+}
+
+void dlgDatabase::on_btnOpenUrl_clicked() {
+  if (!ui->tableKextUrl->currentIndex().isValid()) return;
+  int n = ui->tableKextUrl->currentRow();
+  QString strurl = ui->tableKextUrl->item(n, 1)->text().trimmed();
+  QUrl url(strurl);
+  QDesktopServices::openUrl(url);
 }
