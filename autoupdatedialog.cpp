@@ -26,7 +26,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
 
 void AutoUpdateDialog::Init() {
-  //"https://raw.fastgit.org/ic005k/"  //HK
+  //"https://raw.fastgit.org/"  //HK
   strWinUrl =
       "https://ghproxy.com/https://raw.githubusercontent.com/ic005k/"
       "QtOpenCoreConfigDatabase/main/win.zip";

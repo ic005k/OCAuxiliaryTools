@@ -37,7 +37,7 @@ dlgDatabase::dlgDatabase(QWidget *parent)
       QAbstractItemView::SelectRows);  //设置选择行为时每次选择一行
   ui->tabWidget->setCurrentIndex(0);
 
-  ui->tableKextUrl->setColumnWidth(0, 150);
+  ui->tableKextUrl->setColumnWidth(0, 200);
   ui->tableKextUrl->setColumnWidth(1, 350);
   ui->textEdit->setHidden(true);
 
@@ -230,6 +230,24 @@ void dlgDatabase::refreshKextUrl() {
       "VoodooI2C.kext | https://github.com/VoodooI2C/VoodooI2C");
   ui->textEdit->append(
       "RestrictEvents.kext | https://github.com/acidanthera/RestrictEvents");
+  ui->textEdit->append(
+      "HibernationFixup.kext | "
+      "https://github.com/acidanthera/HibernationFixup");
+  ui->textEdit->append(
+      "BrcmPatchRAM.kext | https://github.com/acidanthera/BrcmPatchRAM");
+  ui->textEdit->append(
+      "CpuTscSync.kext | https://github.com/acidanthera/CpuTscSync");
+  ui->textEdit->append(
+      "BrightnessKeys.kext | https://github.com/acidanthera/BrightnessKeys");
+  ui->textEdit->append(
+      "AirportBrcmFixup.kext | "
+      "https://github.com/acidanthera/AirportBrcmFixup");
+  ui->textEdit->append(
+      "RTCMemoryFixup.kext | https://github.com/acidanthera/RTCMemoryFixup");
+  ui->textEdit->append(
+      "MacHyperVSupport.kext | "
+      "https://github.com/acidanthera/MacHyperVSupport");
+  ui->textEdit->append("NVMeFix.kext | https://github.com/acidanthera/NVMeFix");
 
   QTextEdit *txtEdit = new QTextEdit;
   QString txt = mymethod->loadText(mw_one->strConfigPath + "KextUrl.txt");
@@ -295,4 +313,10 @@ void dlgDatabase::saveKextUrl() {
 
 void dlgDatabase::on_btnTest_clicked() {
   mw_one->on_actionOnline_Download_Updates_triggered();
+}
+
+void dlgDatabase::on_comboBoxNet_currentTextChanged(const QString &arg1) {
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  Reg.setValue("Net", arg1);
 }

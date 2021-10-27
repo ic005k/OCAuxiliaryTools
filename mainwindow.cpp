@@ -4943,7 +4943,6 @@ void MainWindow::mount_esp_mac(QString strEfiDisk) {
 
 void MainWindow::closeEvent(QCloseEvent* event) {
   QString qfile = strConfigPath + "QtOCC.ini";
-  QFile file(qfile);
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
   Reg.setValue("AutoChkUpdate", ui->actionAutoChkUpdate->isChecked());
@@ -4961,8 +4960,6 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   Reg.setValue("y", this->y());
   Reg.setValue("width", this->width());
   Reg.setValue("height", this->height());
-
-  file.close();
 
   if (this->isWindowModified()) {
     this->setFocus();

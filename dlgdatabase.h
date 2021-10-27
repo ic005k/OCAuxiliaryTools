@@ -39,6 +39,8 @@ class dlgDatabase : public QDialog {
 
   void on_btnTest_clicked();
 
+  void on_comboBoxNet_currentTextChanged(const QString &arg1);
+
  private:
  protected:
   void closeEvent(QCloseEvent *event);
