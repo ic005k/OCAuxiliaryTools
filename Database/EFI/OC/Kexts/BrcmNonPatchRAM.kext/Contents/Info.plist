@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>19H1217</string>
+	<key>CFBundleIdentifier</key>
+	<string>as.acidanthera.injector.BrcmNonPatchRAM</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>BrcmNonPatchRAM</string>
+	<key>CFBundlePackageType</key>
+	<string>KEXT</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.6.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>2.6.0</string>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>12B45b</string>
+	<key>DTPlatformName</key>
+	<string>macosx</string>
+	<key>DTPlatformVersion</key>
+	<string>11.0</string>
+	<key>DTSDKBuild</key>
+	<string>20A2408</string>
+	<key>DTSDKName</key>
+	<string>macosx11.0</string>
+	<key>DTXcode</key>
+	<string>1220</string>
+	<key>DTXcodeBuild</key>
+	<string>12B45b</string>
+	<key>IOKitPersonalities</key>
+	<dict>
+		<key>03f0_231d no firmware legacy</key>
+		<dict>
+			<key>#FirmwareKey</key>
+			<string>only load and unload native bluetooth</string>
+			<key>CFBundleIdentifier</key>
+			<string>as.acidanthera.BrcmNonPatchRAM</string>
+			<key>DisplayName</key>
+			<string>HP 231d (ProBook BT built-in firmware)</string>
+			<key>IOClass</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOMatchCategory</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>idProduct</key>
+			<integer>8989</integer>
+			<key>idVendor</key>
+			<integer>1008</integer>
+		</dict>
+		<key>0489_e030 no firmware legacy - 2</key>
+		<dict>
+			<key>#FirmwareKey</key>
+			<string>only load and unload native bluetooth</string>
+			<key>CFBundleIdentifier</key>
+			<string>as.acidanthera.BrcmNonPatchRAM</string>
+			<key>DisplayName</key>
+			<string>Foxconn AW-NB290</string>
+			<key>IOClass</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOMatchCategory</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>idProduct</key>
+			<integer>57392</integer>
+			<key>idVendor</key>
+			<integer>1161</integer>
+		</dict>
+		<key>0a5c_219a no firmware legacy</key>
+		<dict>
+			<key>#FirmwareKey</key>
+			<string>only load and unload native bluetooth</string>
+			<key>CFBundleIdentifier</key>
+			<string>as.acidanthera.BrcmNonPatchRAM</string>
+			<key>DisplayName</key>
+			<string>Broadcom BCM2070 0a5c_219a (BT on BCM43225HMB)</string>
+			<key>IOClass</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOMatchCategory</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>idProduct</key>
+			<integer>2652</integer>
+			<key>idVendor</key>
+			<integer>8602</integer>
+		</dict>
+		<key>0b05_1788 no firmware legacy</key>
+		<dict>
+			<key>#FirmwareKey</key>
+			<string>only load and unload native bluetooth</string>
+			<key>CFBundleIdentifier</key>
+			<string>as.acidanthera.BrcmNonPatchRAM</string>
+			<key>DisplayName</key>
+			<string>Asus BT-270(20702A built-in firmware)</string>
+			<key>IOClass</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOMatchCategory</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>idProduct</key>
+			<integer>6024</integer>
+			<key>idVendor</key>
+			<integer>2821</integer>
+		</dict>
+		<key>0b05_178a no firmware legacy</key>
+		<dict>
+			<key>#FirmwareKey</key>
+			<string>only load and unload native bluetooth</string>
+			<key>CFBundleIdentifier</key>
+			<string>as.acidanthera.BrcmNonPatchRAM</string>
+			<key>DisplayName</key>
+			<string>HP EliteBook NB-290 (built-in firmware)</string>
+			<key>IOClass</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOMatchCategory</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>idProduct</key>
+			<integer>6026</integer>
+			<key>idVendor</key>
+			<integer>2821</integer>
+		</dict>
+		<key>13d3_3295 no firmware legacy</key>
+		<dict>
+			<key>#FirmwareKey</key>
+			<string>only load and unload native bluetooth</string>
+			<key>CFBundleIdentifier</key>
+			<string>as.acidanthera.BrcmNonPatchRAM</string>
+			<key>DisplayName</key>
+			<string>Azurewave BCM943225 (20702A built-in firmware)</string>
+			<key>IOClass</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOMatchCategory</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>idProduct</key>
+			<integer>12949</integer>
+			<key>idVendor</key>
+			<integer>5075</integer>
+		</dict>
+	</dict>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.8</string>
+</dict>
+</plist>
