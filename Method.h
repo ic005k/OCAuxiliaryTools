@@ -94,6 +94,9 @@ class Method : public QMainWindow {
   bool isKextWhitelist(QString kextName);
   void writeKextWhitelistINI();
   void readKextWhitelistINI();
+  QString getHTMLSource(QString URLSTR, bool writeFile);
+  QStringList getDLUrlList(QString url);
+  void getLastReleaseFromHtml(QString url);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();

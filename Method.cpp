@@ -25,6 +25,70 @@ Method::Method(QWidget* parent) : QMainWindow(parent) {
   tempDir = QDir::homePath() + "/tempocat/";
 }
 
+QStringList Method::getDLUrlList(QString url) {
+  // url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
+  QString strLast = getHTMLSource(url, false);
+  if (strLast == "") {
+    blBreak = true;
+    return QStringList() << "";
+  }
+  QStringList list0 = strLast.split("\"");
+  QString str_url;
+  if (list0.count() > 2) str_url = list0.at(1);
+
+  QString str_html = getHTMLSource(str_url, false);
+  if (str_html == "") {
+    blBreak = true;
+    return QStringList() << "";
+  }
+  QTextEdit* htmlEdit = new QTextEdit;
+  htmlEdit->setPlainText(str_html);
+  QStringList list1, list2;
+  for (int i = 0; i < htmlEdit->document()->lineCount(); i++) {
+    QString strLine = getTextEditLineText(htmlEdit, i);
+    if (strLine.trimmed().contains("/releases/download/")) {
+      list1 = strLine.split("\"");
+      if (list1.count() > 1) {
+        list2.append("https://github.com" + list1.at(1));
+      }
+    }
+  }
+
+  for (int i = 0; i < list2.count(); i++) qDebug() << list2.at(i);
+
+  return list2;
+}
+
+QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
+  const QString FILE_NAME = QDir::homePath() + "/.config/QtOCC/code.txt";
+  QUrl url(URLSTR);
+  QNetworkAccessManager manager;
+  QEventLoop loop;
+  // qDebug() << "Reading code form " << URLSTR;
+
+  QNetworkReply* reply = manager.get(QNetworkRequest(url));
+  QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+  loop.exec();
+
+  QString code = reply->readAll();
+  if (code == "") {
+    QMessageBox::critical(this, "", tr("Network error!"));
+    mw_one->ui->btnKextUpdate->setEnabled(true);
+    blBreak = true;
+    return "";
+  }
+  if (writeFile) {
+    QFile file(FILE_NAME);
+    file.open(QIODevice::WriteOnly);
+    QTextStream out(&file);
+    out << code;
+    file.close();
+    // qDebug() << "Finished, the code have written to " << FILE_NAME;
+  }
+
+  return code;
+}
+
 void Method::getAllFolds(const QString& foldPath, QStringList& folds) {
   QDirIterator it(foldPath, QDir::Dirs | QDir::NoDotAndDotDot,
                   QDirIterator::Subdirectories);
@@ -119,29 +183,28 @@ void Method::kextUpdate() {
       QString txt =
           mw_one->myDatabase->ui->tableKextUrl->item(j, 0)->text().trimmed();
       test = mw_one->myDatabase->ui->tableKextUrl->item(j, 1)->text().trimmed();
-      if (txt == name && test != "") {
-        if (!isKextWhitelist(kextName)) {
-          bool reGetUrl = true;
-          QString strUrl;
-          for (int m = 0; m < kextDLUrlList.count(); m++) {
-            QString str_m = kextDLUrlList.at(m);
-            QStringList list_m = str_m.split("|");
-            if (list_m.at(0) == name) {
-              reGetUrl = false;
-              strUrl = list_m.at(1);
-            }
+      if (txt == name && test != "" && !isKextWhitelist(kextName)) {
+        bool reGetUrl = true;
+        QString strUrl;
+        for (int m = 0; m < kextDLUrlList.count(); m++) {
+          QString str_m = kextDLUrlList.at(m);
+          QStringList list_m = str_m.split("|");
+          if (list_m.at(0) == name) {
+            reGetUrl = false;
+            strUrl = list_m.at(1);
           }
-          if (reGetUrl) {
-            getLastReleaseFromUrl(test);
-          } else {
-            startDownload(strUrl);
-          }
-          QElapsedTimer t;
-          t.start();
-          dlEnd = false;
-          while (!dlEnd && !blBreak) {
-            QCoreApplication::processEvents();
-          }
+        }
+        if (reGetUrl) {
+          // getLastReleaseFromUrl(test);
+          getLastReleaseFromHtml(test + "/releases/latest");
+        } else {
+          startDownload(strUrl);
+        }
+        QElapsedTimer t;
+        t.start();
+        dlEnd = false;
+        while (!dlEnd && !blBreak) {
+          QCoreApplication::processEvents();
         }
       }
     }
@@ -328,6 +391,28 @@ void Method::parse_UpdateJSON(QString str) {
     mw_one->ui->btnKextUpdate->setEnabled(true);
     return;
   }
+  kextDLUrlList.append(kextName + "|" + strDLUrl);
+  startDownload(strDLUrl);
+}
+
+void Method::getLastReleaseFromHtml(QString url) {
+  QStringList strDownloadUrlList = getDLUrlList(url);
+  if (strDownloadUrlList.at(0) == "") {
+    blBreak = true;
+    return;
+  }
+  QString strDLUrl;
+  for (int i = 0; i < strDownloadUrlList.count(); i++) {
+    if (strDownloadUrlList.count() > 1) {
+      QString str = strDownloadUrlList.at(i);
+      if (str.contains("RELEASE"))
+        strDLUrl = str;
+      else
+        strDLUrl = strDownloadUrlList.at(0);
+    } else
+      strDLUrl = strDownloadUrlList.at(0);
+  }
+
   kextDLUrlList.append(kextName + "|" + strDLUrl);
   startDownload(strDLUrl);
 }
