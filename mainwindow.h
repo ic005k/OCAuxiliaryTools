@@ -907,6 +907,10 @@ class MainWindow : public QMainWindow {
 
   void on_table_nv_add0_itemClicked(QTableWidgetItem* item);
 
+  void on_btnAddWhitelist_clicked();
+
+  void on_btnDelWhitelist_clicked();
+
  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;

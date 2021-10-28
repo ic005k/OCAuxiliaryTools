@@ -9,6 +9,7 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
+extern QString SaveFileName;
 
 QString strACPI;
 QString strKexts;
@@ -87,7 +88,8 @@ void Method::finishKextUpdate() {
     QString Name = getFileName(dirSource);
     dirTarget = strKexts + Name;
     for (int j = 0; j < mw_one->ui->table_kernel_add->rowCount(); j++) {
-      if (Name == mw_one->ui->table_kernel_add->item(j, 0)->text().trimmed()) {
+      if (Name == mw_one->ui->table_kernel_add->item(j, 0)->text().trimmed() &&
+          !isKextWhitelist(Name)) {
         mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
         qDebug() << kextList.at(i) << dirTarget;
       }
@@ -118,26 +120,28 @@ void Method::kextUpdate() {
           mw_one->myDatabase->ui->tableKextUrl->item(j, 0)->text().trimmed();
       test = mw_one->myDatabase->ui->tableKextUrl->item(j, 1)->text().trimmed();
       if (txt == name && test != "") {
-        bool reGetUrl = true;
-        QString strUrl;
-        for (int m = 0; m < kextDLUrlList.count(); m++) {
-          QString str_m = kextDLUrlList.at(m);
-          QStringList list_m = str_m.split("|");
-          if (list_m.at(0) == name) {
-            reGetUrl = false;
-            strUrl = list_m.at(1);
+        if (!isKextWhitelist(kextName)) {
+          bool reGetUrl = true;
+          QString strUrl;
+          for (int m = 0; m < kextDLUrlList.count(); m++) {
+            QString str_m = kextDLUrlList.at(m);
+            QStringList list_m = str_m.split("|");
+            if (list_m.at(0) == name) {
+              reGetUrl = false;
+              strUrl = list_m.at(1);
+            }
           }
-        }
-        if (reGetUrl) {
-          getLastReleaseFromUrl(test);
-        } else {
-          startDownload(strUrl);
-        }
-        QElapsedTimer t;
-        t.start();
-        dlEnd = false;
-        while (!dlEnd && !blBreak) {
-          QCoreApplication::processEvents();
+          if (reGetUrl) {
+            getLastReleaseFromUrl(test);
+          } else {
+            startDownload(strUrl);
+          }
+          QElapsedTimer t;
+          t.start();
+          dlEnd = false;
+          while (!dlEnd && !blBreak) {
+            QCoreApplication::processEvents();
+          }
         }
       }
     }
@@ -1246,3 +1250,57 @@ QString Method::getFileName(QString file) {
 }
 
 void Method::cancelKextUpdate() { blBreak = true; }
+
+void Method::addKextWhitelist() {
+  if (!mw_one->ui->table_kernel_add->currentIndex().isValid()) return;
+  int n = mw_one->ui->table_kernel_add->currentRow();
+  QString str = mw_one->ui->table_kernel_add->item(n, 0)->text().trimmed();
+  bool re = false;
+  for (int i = 0; i < mw_one->ui->listWhite->count(); i++) {
+    if (str == mw_one->ui->listWhite->item(i)->text()) re = true;
+  }
+  if (!re) mw_one->ui->listWhite->addItem(str);
+
+  writeKextWhitelistINI();
+}
+
+void Method::delKextWhitelist() {
+  if (mw_one->ui->listWhite->count() == 0) return;
+  int n = mw_one->ui->listWhite->currentRow();
+  mw_one->ui->listWhite->takeItem(n);
+
+  writeKextWhitelistINI();
+}
+
+bool Method::isKextWhitelist(QString kextName) {
+  for (int i = 0; i < mw_one->ui->listWhite->count(); i++) {
+    if (kextName == mw_one->ui->listWhite->item(i)->text().trimmed())
+      return true;
+  }
+  return false;
+}
+
+void Method::writeKextWhitelistINI() {
+  if (!QFileInfo(SaveFileName).exists()) return;
+  QString qfile = QDir::homePath() + "/.config/QtOCC/kextWhitelist.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  Reg.setValue(SaveFileName, mw_one->ui->listWhite->count());
+  for (int i = 0; i < mw_one->ui->listWhite->count(); i++) {
+    QString str = mw_one->ui->listWhite->item(i)->text().trimmed();
+    Reg.setValue(SaveFileName + QString::number(i), str);
+  }
+}
+
+void Method::readKextWhitelistINI() {
+  if (!QFileInfo(SaveFileName).exists()) return;
+  mw_one->ui->listWhite->clear();
+  QString qfile = QDir::homePath() + "/.config/QtOCC/kextWhitelist.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  if (QFileInfo(qfile).exists()) {
+    int count = Reg.value(SaveFileName).toInt();
+    for (int i = 0; i < count; i++) {
+      QString str = Reg.value(SaveFileName + QString::number(i)).toString();
+      mw_one->ui->listWhite->addItem(str);
+    }
+  }
+}

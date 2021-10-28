@@ -275,13 +275,13 @@ void MainWindow::openFile(QString PlistFileName) {
   }
 
   openFileAfter();
-
   checkFiles();
+  FindTextChange = true;
+  strOrgMd5 = mymethod->getMD5(SaveFileName);
+  mymethod->readKextWhitelistINI();
 
   this->setWindowModified(false);
   updateIconStatus();
-  FindTextChange = true;
-  strOrgMd5 = mymethod->getMD5(SaveFileName);
 }
 
 void MainWindow::openFileAfter() {
@@ -721,9 +721,16 @@ void MainWindow::ParserDP(QVariantMap map) {
 }
 
 void MainWindow::initui_kernel() {
+  ui->progressBarKext->setMaximumWidth(50);
   ui->progressBarKext->setVisible(false);
   ui->labelShowDLInfo->setVisible(false);
   ui->labelShowDLInfo->setText("");
+  ui->statusbar->addPermanentWidget(ui->labelShowDLInfo);
+  ui->statusbar->addPermanentWidget(ui->progressBarKext);
+  ui->listWhite->setMovement(QListView::Static);
+  ui->listWhite->setFocusPolicy(Qt::NoFocus);
+  ui->listWhite->setViewMode(QListWidget::IconMode);
+  ui->listWhite->setSpacing(4);
 
   QTableWidgetItem* id0;
   // Add
@@ -9579,7 +9586,8 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QString strKextName = ui->table_kernel_add->item(i, 0)->text().trimmed();
     if (mymethod->isEqualInList(strKextName, dbkextFileList)) {
-      if (ui->table_kernel_add->item(i, 2)->text().trimmed() != "") {
+      if (ui->table_kernel_add->item(i, 2)->text().trimmed() != "" &&
+          !mymethod->isKextWhitelist(strKextName)) {
         sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
         targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
       }
@@ -10501,3 +10509,7 @@ void MainWindow::on_table_nv_add0_itemClicked(QTableWidgetItem* item) {
 }
 
 void MainWindow::on_btnKextUpdate_clicked() { mymethod->kextUpdate(); }
+
+void MainWindow::on_btnAddWhitelist_clicked() { mymethod->addKextWhitelist(); }
+
+void MainWindow::on_btnDelWhitelist_clicked() { mymethod->delKextWhitelist(); }

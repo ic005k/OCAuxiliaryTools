@@ -111,7 +111,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -2123,19 +2123,45 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_12">
-            <item row="1" column="3">
-             <widget class="QToolButton" name="btnKernelAdd_Add">
+            <item row="0" column="0" colspan="11">
+             <widget class="QTableWidget" name="table_kernel_add">
+              <property name="styleSheet">
+               <string notr="true">QTableWidget::item::selected     
+{
+    color:white;                       
+    background:rgb(0, 124, 221);               
+}
+</string>
+              </property>
+              <property name="rowCount">
+               <number>0</number>
+              </property>
+              <property name="columnCount">
+               <number>8</number>
+              </property>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QToolButton" name="btnKernelAdd_Up">
               <property name="font">
                <font>
                 <pointsize>13</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>AddItem</string>
+               <string>Up</string>
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
+                <normaloff>:/icon/up.png</normaloff>:/icon/up.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2189,46 +2215,25 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               </property>
              </widget>
             </item>
-            <item row="1" column="5">
-             <widget class="QCheckBox" name="checkKernelAdd">
-              <property name="text">
-               <string>Move item</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="7">
-             <widget class="QProgressBar" name="progressBarKext">
-              <property name="value">
-               <number>0</number>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QToolButton" name="btnKernelAdd_Up">
+            <item row="1" column="3">
+             <widget class="QToolButton" name="btnKernelAdd_Add">
               <property name="font">
                <font>
                 <pointsize>13</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>Up</string>
+               <string>AddItem</string>
               </property>
               <property name="icon">
                <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/up.png</normaloff>:/icon/up.png</iconset>
+                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
               </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
                 <height>20</height>
                </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="6">
-             <widget class="QToolButton" name="btnKextUpdate">
-              <property name="text">
-               <string>Update</string>
               </property>
              </widget>
             </item>
@@ -2257,46 +2262,65 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               </property>
              </widget>
             </item>
-            <item row="0" column="0" colspan="10">
-             <widget class="QTableWidget" name="table_kernel_add">
-              <property name="styleSheet">
-               <string notr="true">QTableWidget::item::selected     
-{
-    color:white;                       
-    background:rgb(0, 124, 221);               
-}
-</string>
+            <item row="1" column="5">
+             <widget class="QCheckBox" name="checkKernelAdd">
+              <property name="text">
+               <string>Move item</string>
               </property>
-              <property name="rowCount">
-               <number>0</number>
+             </widget>
+            </item>
+            <item row="1" column="6">
+             <widget class="QToolButton" name="btnKextUpdate">
+              <property name="text">
+               <string>Update</string>
               </property>
-              <property name="columnCount">
-               <number>8</number>
+             </widget>
+            </item>
+            <item row="1" column="7">
+             <widget class="QLabel" name="label_121">
+              <property name="text">
+               <string>Kext Upgrade Whitelist</string>
               </property>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
+             </widget>
+            </item>
+            <item row="1" column="8">
+             <widget class="QListWidget" name="listWhite">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>28</height>
+               </size>
+              </property>
              </widget>
             </item>
             <item row="1" column="9">
-             <spacer name="horizontalSpacer_7">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+             <widget class="QToolButton" name="btnAddWhitelist">
+              <property name="toolTip">
+               <string>Add whitelist</string>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>660</width>
-                <height>20</height>
-               </size>
+              <property name="text">
+               <string>+</string>
               </property>
-             </spacer>
+             </widget>
             </item>
-            <item row="1" column="8">
+            <item row="1" column="10">
+             <widget class="QToolButton" name="btnDelWhitelist">
+              <property name="toolTip">
+               <string>Del whitelist</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" colspan="3">
+             <widget class="QProgressBar" name="progressBarKext">
+              <property name="value">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="6">
              <widget class="QLabel" name="labelShowDLInfo">
               <property name="text">
                <string>DLInfo</string>

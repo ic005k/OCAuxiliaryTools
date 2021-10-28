@@ -89,6 +89,11 @@ class Method : public QMainWindow {
   void TextEditToFile(QTextEdit *txtEdit, QString fileName);
   QString getFileName(QString file);
   void cancelKextUpdate();
+  void addKextWhitelist();
+  void delKextWhitelist();
+  bool isKextWhitelist(QString kextName);
+  void writeKextWhitelistINI();
+  void readKextWhitelistINI();
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
