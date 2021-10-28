@@ -61,6 +61,9 @@ QStringList Method::getDLUrlList(QString url) {
 
 QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
   const QString FILE_NAME = QDir::homePath() + "/.config/QtOCC/code.txt";
+  // QString strProxy =
+  //    mw_one->myDatabase->ui->comboBoxNet->currentText().trimmed();
+  // URLSTR.replace("https://github.com/", strProxy);
   QUrl url(URLSTR);
   QNetworkAccessManager manager;
   QEventLoop loop;
@@ -1334,7 +1337,10 @@ QString Method::getFileName(QString file) {
   return list.at(list.count() - 1);
 }
 
-void Method::cancelKextUpdate() { blBreak = true; }
+void Method::cancelKextUpdate() {
+  blBreak = true;
+  mw_one->ui->btnKextUpdate->setEnabled(true);
+}
 
 void Method::addKextWhitelist() {
   if (!mw_one->ui->table_kernel_add->currentIndex().isValid()) return;

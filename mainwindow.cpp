@@ -10513,3 +10513,7 @@ void MainWindow::on_btnKextUpdate_clicked() { mymethod->kextUpdate(); }
 void MainWindow::on_btnAddWhitelist_clicked() { mymethod->addKextWhitelist(); }
 
 void MainWindow::on_btnDelWhitelist_clicked() { mymethod->delKextWhitelist(); }
+
+void MainWindow::on_btnStopKextUpdate_clicked() {
+  mymethod->cancelKextUpdate();
+}

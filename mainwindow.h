@@ -911,6 +911,8 @@ class MainWindow : public QMainWindow {
 
   void on_btnDelWhitelist_clicked();
 
+  void on_btnStopKextUpdate_clicked();
+
  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;
