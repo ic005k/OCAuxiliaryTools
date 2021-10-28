@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -221,6 +221,26 @@ p, li { white-space: pre-wrap; }
             <item>
              <property name="text">
               <string>https://gh.api.99988866.xyz/https://github.com/</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>https://gh.msx.workers.dev/https://github.com/</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>https://gh.xiu2.xyz/https://github.com/</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>https://git.yumenaka.net/https://github.com/</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>https://pd.zwc365.com/seturl/https://github.com/</string>
              </property>
             </item>
            </widget>

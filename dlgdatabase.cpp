@@ -340,6 +340,7 @@ void dlgDatabase::saveKextUrl() {
 
 void dlgDatabase::on_btnTest_clicked() {
   mw_one->on_actionOnline_Download_Updates_triggered();
+  mw_one->dlgAutoUpdate->ui->btnStartUpdate->setHidden(true);
 }
 
 void dlgDatabase::on_comboBoxNet_currentTextChanged(const QString &arg1) {

@@ -275,6 +275,7 @@ void AutoUpdateDialog::closeEvent(QCloseEvent* event) {
   processWget->kill();
   delete processWget;
   tmrUpdateShow->stop();
+  ui->btnStartUpdate->setHidden(false);
 }
 
 void AutoUpdateDialog::on_btnUpdateDatabase_clicked() {
