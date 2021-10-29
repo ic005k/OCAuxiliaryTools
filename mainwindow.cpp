@@ -6045,34 +6045,38 @@ void MainWindow::init_UndoRedo() {
 }
 
 void MainWindow::init_ToolButtonStyle() {
-  QObjectList list;
+  QObjectList list, list1;
   list = mymethod->getAllToolButton(getAllUIControls(ui->tabTotal));
+  list1 =
+      mymethod->getAllToolButton(getAllUIControls(myDatabase->ui->tabWidget));
+  QString strStyle =
+      "QToolButton:hover{ "
+      "color:rgb(0, 0, 255); "
+      "border-style:solid; "
+      "border-top-left-radius:2px;  "
+      "border-top-right-radius:2px; "
+      "background:#bfbfbf; "
+      "border:1px;"
+      "border-radius:5px;padding:2px 4px; }"
+
+      "QToolButton:pressed{ "
+      "color:rgb(255, 255, 255); "
+      "border-style:solid; "
+      "border-top-left-radius:2px;  "
+      "border-top-right-radius:2px; "
+      "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 "
+      "rgb(226,236,241),"
+      "stop: 0.3 rgb(190,190,190),"
+      "stop: 1 rgb(160,160,160));"
+      "border:1px;"
+      "border-radius:5px;padding:2px 4px; }";
   for (int i = 0; i < list.count(); i++) {
     QToolButton* w = (QToolButton*)list.at(i);
-    w->setStyleSheet(
-
-        "QToolButton:hover{ "
-        "color:rgb(0, 0, 255); "
-        "border-style:solid; "
-        "border-top-left-radius:2px;  "
-        "border-top-right-radius:2px; "
-        "background:#bfbfbf; "
-        "border:1px;"
-        "border-radius:5px;padding:2px 4px; }"
-
-        "QToolButton:pressed{ "
-        "color:rgb(255, 255, 255); "
-        "border-style:solid; "
-        "border-top-left-radius:2px;  "
-        "border-top-right-radius:2px; "
-        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 "
-        "rgb(226,236,241),"
-        "stop: 0.3 rgb(190,190,190),"
-        "stop: 1 rgb(160,160,160));"
-        "border:1px;"
-        "border-radius:5px;padding:2px 4px; }"
-
-    );
+    w->setStyleSheet(strStyle);
+  }
+  for (int i = 0; i < list1.count(); i++) {
+    QToolButton* w = (QToolButton*)list1.at(i);
+    w->setStyleSheet(strStyle);
   }
 }
 

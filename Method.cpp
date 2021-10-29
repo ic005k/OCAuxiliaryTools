@@ -197,8 +197,10 @@ void Method::kextUpdate() {
           }
         }
         if (reGetUrl) {
-          // getLastReleaseFromUrl(test);
-          getLastReleaseFromHtml(test + "/releases/latest");
+          if (mw_one->myDatabase->ui->rbtnAPI->isChecked())
+            getLastReleaseFromUrl(test);
+          if (mw_one->myDatabase->ui->rbtnWeb->isChecked())
+            getLastReleaseFromHtml(test + "/releases/latest");
         } else {
           startDownload(strUrl);
         }

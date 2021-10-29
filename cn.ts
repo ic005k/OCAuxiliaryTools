@@ -4460,51 +4460,51 @@ Type</translation>
 <context>
     <name>Method</name>
     <message>
-        <location filename="Method.cpp" line="325"/>
+        <location filename="Method.cpp" line="326"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="78"/>
-        <location filename="Method.cpp" line="360"/>
+        <location filename="Method.cpp" line="77"/>
+        <location filename="Method.cpp" line="361"/>
         <source>Network error!</source>
         <translation>网络错误！</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="450"/>
+        <location filename="Method.cpp" line="451"/>
         <source>Application</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="451"/>
+        <location filename="Method.cpp" line="452"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="923"/>
-        <location filename="Method.cpp" line="929"/>
+        <location filename="Method.cpp" line="924"/>
+        <location filename="Method.cpp" line="930"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="925"/>
+        <location filename="Method.cpp" line="926"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="944"/>
+        <location filename="Method.cpp" line="945"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="945"/>
-        <location filename="Method.cpp" line="1007"/>
+        <location filename="Method.cpp" line="946"/>
+        <location filename="Method.cpp" line="1008"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1006"/>
+        <location filename="Method.cpp" line="1007"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
@@ -4512,55 +4512,55 @@ Type</translation>
 <context>
     <name>QInstaller</name>
     <message>
-        <location filename="Method.cpp" line="1302"/>
+        <location filename="Method.cpp" line="1303"/>
         <location filename="autoupdatedialog.cpp" line="350"/>
         <source>bytes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1303"/>
+        <location filename="Method.cpp" line="1304"/>
         <location filename="autoupdatedialog.cpp" line="351"/>
         <source>KiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1304"/>
+        <location filename="Method.cpp" line="1305"/>
         <location filename="autoupdatedialog.cpp" line="352"/>
         <source>MiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1305"/>
+        <location filename="Method.cpp" line="1306"/>
         <location filename="autoupdatedialog.cpp" line="353"/>
         <source>GiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1306"/>
+        <location filename="Method.cpp" line="1307"/>
         <location filename="autoupdatedialog.cpp" line="354"/>
         <source>TiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1307"/>
+        <location filename="Method.cpp" line="1308"/>
         <location filename="autoupdatedialog.cpp" line="355"/>
         <source>PiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1308"/>
+        <location filename="Method.cpp" line="1309"/>
         <location filename="autoupdatedialog.cpp" line="356"/>
         <source>EiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1309"/>
+        <location filename="Method.cpp" line="1310"/>
         <location filename="autoupdatedialog.cpp" line="357"/>
         <source>ZiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1310"/>
+        <location filename="Method.cpp" line="1311"/>
         <location filename="autoupdatedialog.cpp" line="358"/>
         <source>YiB</source>
         <translation></translation>
@@ -4834,6 +4834,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="dlgdatabase.ui" line="251"/>
+        <location filename="dlgdatabase.ui" line="282"/>
+        <location filename="dlgdatabase.cpp" line="89"/>
+        <location filename="dlgdatabase.cpp" line="384"/>
+        <location filename="dlgdatabase.cpp" line="387"/>
         <source>Testing</source>
         <translation>测试</translation>
     </message>
@@ -4848,20 +4852,28 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="282"/>
-        <location filename="dlgdatabase.cpp" line="374"/>
-        <location filename="dlgdatabase.cpp" line="377"/>
-        <source>Ping</source>
-        <translation></translation>
+        <location filename="dlgdatabase.ui" line="292"/>
+        <source>The way to get the download link for Kext upgrade</source>
+        <translation>Kext升级获取下载链接的方式</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.cpp" line="35"/>
+        <location filename="dlgdatabase.ui" line="298"/>
+        <source>Accessing the GitHub API</source>
+        <translation>访问GitHub API</translation>
+    </message>
+    <message>
+        <location filename="dlgdatabase.ui" line="308"/>
+        <source>Crawl web source code</source>
+        <translation>抓取网页源代码</translation>
+    </message>
+    <message>
+        <location filename="dlgdatabase.cpp" line="38"/>
         <source>Config Database</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.cpp" line="375"/>
-        <location filename="dlgdatabase.cpp" line="376"/>
+        <location filename="dlgdatabase.cpp" line="385"/>
+        <location filename="dlgdatabase.cpp" line="386"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>

@@ -17,12 +17,12 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
      </property>
-     <widget class="QWidget" name="tab">
+     <widget class="QWidget" name="tab_1">
       <attribute name="title">
        <string>Config File List</string>
       </attribute>
@@ -190,7 +190,7 @@ p, li { white-space: pre-wrap; }
          <property name="title">
           <string>Network</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_5">
+         <layout class="QGridLayout" name="gridLayout_6">
           <item row="0" column="0">
            <widget class="QLabel" name="label_2">
             <property name="text">
@@ -285,6 +285,32 @@ p, li { white-space: pre-wrap; }
           </item>
           <item row="2" column="0" colspan="3">
            <widget class="QTextEdit" name="editPing"/>
+          </item>
+          <item row="3" column="0" colspan="3">
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="title">
+             <string>The way to get the download link for Kext upgrade</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_5">
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="rbtnAPI">
+               <property name="text">
+                <string>Accessing the GitHub API</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="rbtnWeb">
+               <property name="text">
+                <string>Crawl web source code</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </widget>
