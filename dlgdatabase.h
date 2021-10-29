@@ -20,9 +20,10 @@ class dlgDatabase : public QDialog {
   void refreshKextUrl();
 
   void saveKextUrl();
- public slots:
 
- private slots:
+  public slots:
+
+  private slots:
   void on_tableDatabase_cellDoubleClicked(int row, int column);
 
   void on_btnFind_clicked();

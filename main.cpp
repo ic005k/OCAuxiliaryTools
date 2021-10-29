@@ -1,13 +1,14 @@
+#include <QApplication>
+
 #include "mainwindow.h"
 #include "myapp.h"
-#include <QApplication>
 
 extern QVector<QString> filelist;
 extern QWidgetList wdlist;
 extern QString PlistFileName;
-MainWindow* mw_one;
+MainWindow *mw_one;
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
     {
@@ -19,7 +20,7 @@ int main(int argc, char* argv[])
 #endif
 
     // QApplication a(argc, argv);
-    MyApplication* a = new MyApplication(argc, argv);
+    MyApplication *a = new MyApplication(argc, argv);
 
     QFont f;
 #ifdef Q_OS_WIN32
@@ -39,7 +40,6 @@ int main(int argc, char* argv[])
     }
 
     else {
-
         mw_one = new MainWindow();
         mw_one->show();
     }

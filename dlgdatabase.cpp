@@ -83,6 +83,8 @@ dlgDatabase::~dlgDatabase() { delete ui; }
 void dlgDatabase::closeEvent(QCloseEvent *event) {
   Q_UNUSED(event);
   saveKextUrl();
+  processPing->kill();
+  ui->btnPing->setText(tr("Ping"));
 }
 
 void dlgDatabase::keyPressEvent(QKeyEvent *event) {
@@ -381,16 +383,20 @@ void dlgDatabase::on_btnPing_clicked() {
   QString s1;
   if (list.count() == 4) s1 = list.at(2);
   processPing->kill();
-  processPing->start("ping", QStringList() << s1);
+  if (mw_one->win) {
+      processPing->start("ping", QStringList() << "-t" << s1);
+  } else
+      processPing->start("ping", QStringList() << s1);
 }
 
-void dlgDatabase::on_readoutput() {
-  ui->editPing->append(processPing->readAllStandardOutput().data());
+void dlgDatabase::on_readoutput()
+{
+    QString str = processPing->readAllStandardOutput();
+    ui->editPing->append(str);
 }
 
 void dlgDatabase::on_readerror() {
-  QMessageBox::information(0, "Error",
-                           processPing->readAllStandardError().data());
+    QMessageBox::information(0, "Error", processPing->readAllStandardError());
 }
 
 void dlgDatabase::on_comboBoxWeb_currentTextChanged(const QString &arg1) {
