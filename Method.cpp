@@ -126,9 +126,11 @@ void Method::finishKextUpdate() {
   // qDebug() << folds;
   for (int i = 0; i < folds.count(); i++) {
     QString strdir = folds.at(i);
-    QStringList list3 = DirToFileList(strdir, "*.kext");
-    for (int n = 0; n < list3.count(); n++)
-      kextList.append(strdir + "/" + list3.at(n));
+    if (!strdir.contains("Debug")) {
+      QStringList list3 = DirToFileList(strdir, "*.kext");
+      for (int n = 0; n < list3.count(); n++)
+        kextList.append(strdir + "/" + list3.at(n));
+    }
   }
 
   QStringList files;
@@ -165,6 +167,7 @@ void Method::finishKextUpdate() {
   mw_one->ui->btnKextUpdate->setEnabled(true);
   mw_one->ui->progressBarKext->setHidden(true);
   mw_one->ui->labelShowDLInfo->setVisible(false);
+  mw_one->checkFiles();
   mw_one->repaint();
 }
 

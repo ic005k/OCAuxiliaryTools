@@ -21,9 +21,9 @@ class dlgDatabase : public QDialog {
 
   void saveKextUrl();
 
-  public slots:
+ public slots:
 
-  private slots:
+ private slots:
   void on_tableDatabase_cellDoubleClicked(int row, int column);
 
   void on_btnFind_clicked();
@@ -52,6 +52,10 @@ class dlgDatabase : public QDialog {
   void on_readerror();
 
   void on_comboBoxWeb_currentTextChanged(const QString &arg1);
+
+  void on_rbtnAPI_clicked();
+
+  void on_rbtnWeb_clicked();
 
  private:
  protected:

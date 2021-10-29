@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -287,6 +287,13 @@ p, li { white-space: pre-wrap; }
            <widget class="QTextEdit" name="editPing"/>
           </item>
           <item row="3" column="0" colspan="3">
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="3">
            <widget class="QGroupBox" name="groupBox_2">
             <property name="title">
              <string>The way to get the download link for Kext upgrade</string>

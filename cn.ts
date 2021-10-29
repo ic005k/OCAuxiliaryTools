@@ -4864,7 +4864,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="dlgdatabase.ui" line="308"/>
         <source>Crawl web source code</source>
-        <translation>抓取网页源代码</translation>
+        <translation type="unfinished">爬取网页源代码</translation>
     </message>
     <message>
         <location filename="dlgdatabase.cpp" line="38"/>

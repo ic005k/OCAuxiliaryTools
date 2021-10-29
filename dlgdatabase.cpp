@@ -70,6 +70,8 @@ dlgDatabase::dlgDatabase(QWidget *parent)
 
     ui->comboBoxWeb->setCurrentText(
         Reg.value("Web", "https://github.com/").toString());
+    ui->rbtnAPI->setChecked(Reg.value("rbtnAPI").toBool());
+    ui->rbtnWeb->setChecked(Reg.value("rbtnWeb").toBool());
 
   } else {
     if (locale.language() == QLocale::Chinese) {
@@ -410,3 +412,12 @@ void dlgDatabase::on_comboBoxWeb_currentTextChanged(const QString &arg1) {
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("Web", arg1);
 }
+
+void dlgDatabase::on_rbtnAPI_clicked() {
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  Reg.setValue("rbtnAPI", ui->rbtnAPI->isChecked());
+  Reg.setValue("rbtnWeb", ui->rbtnWeb->isChecked());
+}
+
+void dlgDatabase::on_rbtnWeb_clicked() { on_rbtnAPI_clicked(); }

@@ -61,6 +61,7 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     box.exec();
 
     close();
+    mw_one->checkFiles();
   }
 }
 
