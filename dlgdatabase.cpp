@@ -11,63 +11,60 @@ extern QString SaveFileName;
 
 dlgDatabase::dlgDatabase(QWidget *parent)
     : QDialog(parent), ui(new Ui::dlgDatabase) {
-  ui->setupUi(this);
+    ui->setupUi(this);
 
-  processPing = new QProcess;
-  connect(processPing, SIGNAL(readyReadStandardOutput()), this,
-          SLOT(on_readoutput()));
-  connect(processPing, SIGNAL(readyReadStandardError()), this,
-          SLOT(on_readerror()));
-  QPalette pl = ui->editPing->palette();
-  pl.setColor(QPalette::Base, Qt::black);
-  pl.setColor(QPalette::Text, Qt::green);
-  // ui->editPing->setPalette(pl);
-  ui->editPing->setReadOnly(true);
+    ui->editPing->setHidden(true);
+    ui->btnPing->setHidden(true);
 
-  ui->editFind->setClearButtonEnabled(true);
+    processPing = new QProcess;
+    connect(processPing, SIGNAL(readyReadStandardOutput()), this, SLOT(on_readoutput()));
+    connect(processPing, SIGNAL(readyReadStandardError()), this, SLOT(on_readerror()));
+    QPalette pl = ui->editPing->palette();
+    pl.setColor(QPalette::Base, Qt::black);
+    pl.setColor(QPalette::Text, Qt::green);
+    // ui->editPing->setPalette(pl);
+    ui->editPing->setReadOnly(true);
 
-  tableDatabase = ui->tableDatabase;
-  tableDatabase->setEditTriggers(QAbstractItemView::NoEditTriggers);
-  ui->tableDatabaseFind->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->editFind->setClearButtonEnabled(true);
 
-  QTableWidgetItem *id0;
+    tableDatabase = ui->tableDatabase;
+    tableDatabase->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableDatabaseFind->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-  ui->tableDatabase->setColumnWidth(0, 520);
-  id0 = new QTableWidgetItem(tr("Config Database"));
-  ui->tableDatabase->setHorizontalHeaderItem(0, id0);
+    QTableWidgetItem *id0;
 
-  ui->tableDatabase->setAlternatingRowColors(true);
-  tableDatabase->horizontalHeader()->setStretchLastSection(
-      true);  //设置充满表宽度
-  ui->tableDatabaseFind->horizontalHeader()->setStretchLastSection(true);
-  tableDatabase->horizontalHeader()->setHidden(true);
-  ui->tableDatabaseFind->horizontalHeader()->setHidden(true);
-  ui->tableDatabaseFind->setHidden(true);
+    ui->tableDatabase->setColumnWidth(0, 520);
+    id0 = new QTableWidgetItem(tr("Config Database"));
+    ui->tableDatabase->setHorizontalHeaderItem(0, id0);
 
-  tableDatabase->setSelectionBehavior(
-      QAbstractItemView::SelectRows);  //设置选择行为时每次选择一行
-  ui->tabWidget->setCurrentIndex(0);
+    ui->tableDatabase->setAlternatingRowColors(true);
+    tableDatabase->horizontalHeader()->setStretchLastSection(true); //设置充满表宽度
+    ui->tableDatabaseFind->horizontalHeader()->setStretchLastSection(true);
+    tableDatabase->horizontalHeader()->setHidden(true);
+    ui->tableDatabaseFind->horizontalHeader()->setHidden(true);
+    ui->tableDatabaseFind->setHidden(true);
 
-  ui->tableKextUrl->setColumnWidth(0, 200);
-  ui->tableKextUrl->setColumnWidth(1, 350);
-  ui->textEdit->setHidden(true);
+    tableDatabase->setSelectionBehavior(QAbstractItemView::SelectRows); //设置选择行为时每次选择一行
+    ui->tabWidget->setCurrentIndex(0);
 
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QFileInfo fi(qfile);
-  QString strDef = "https://ghproxy.com/https://github.com/";
-  QLocale locale;
-  if (fi.exists()) {
-    QSettings Reg(qfile, QSettings::IniFormat);
+    ui->tableKextUrl->setColumnWidth(0, 200);
+    ui->tableKextUrl->setColumnWidth(1, 350);
+    ui->textEdit->setHidden(true);
 
-    if (locale.language() == QLocale::Chinese) {
-      ui->comboBoxNet->setCurrentText(Reg.value("Net", strDef).toString());
-    } else {
-      ui->comboBoxNet->setCurrentText(
-          Reg.value("Net", "https://github.com/").toString());
-    }
+    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+    QFileInfo fi(qfile);
+    QString strDef = "https://ghproxy.com/https://github.com/";
+    QLocale locale;
+    if (fi.exists()) {
+        QSettings Reg(qfile, QSettings::IniFormat);
 
-    ui->comboBoxWeb->setCurrentText(
-        Reg.value("Web", "https://github.com/").toString());
+        if (locale.language() == QLocale::Chinese) {
+            ui->comboBoxNet->setCurrentText(Reg.value("Net", strDef).toString());
+        } else {
+            ui->comboBoxNet->setCurrentText(Reg.value("Net", "https://github.com/").toString());
+        }
+
+        ui->comboBoxWeb->setCurrentText(Reg.value("Web", "https://github.com/").toString());
 
   } else {
     if (locale.language() == QLocale::Chinese) {
@@ -395,7 +392,8 @@ void dlgDatabase::on_readoutput()
     ui->editPing->append(str);
 }
 
-void dlgDatabase::on_readerror() {
+void dlgDatabase::on_readerror()
+{
     QMessageBox::information(0, "Error", processPing->readAllStandardError());
 }
 
