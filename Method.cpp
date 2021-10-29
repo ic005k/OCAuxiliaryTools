@@ -54,16 +54,16 @@ QStringList Method::getDLUrlList(QString url) {
     }
   }
 
-  for (int i = 0; i < list2.count(); i++) qDebug() << list2.at(i);
+  // for (int i = 0; i < list2.count(); i++) qDebug() << list2.at(i);
 
   return list2;
 }
 
 QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
   const QString FILE_NAME = QDir::homePath() + "/.config/QtOCC/code.txt";
-  // QString strProxy =
-  //    mw_one->myDatabase->ui->comboBoxNet->currentText().trimmed();
-  // URLSTR.replace("https://github.com/", strProxy);
+  QString strProxy =
+      mw_one->myDatabase->ui->comboBoxWeb->currentText().trimmed();
+  URLSTR.replace("https://github.com/", strProxy);
   QUrl url(URLSTR);
   QNetworkAccessManager manager;
   QEventLoop loop;

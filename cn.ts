@@ -4793,6 +4793,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="dlgdatabase.ui" line="208"/>
+        <location filename="dlgdatabase.ui" line="269"/>
         <source>https://github.com/</source>
         <translation></translation>
     </message>
@@ -4837,9 +4838,32 @@ p, li { white-space: pre-wrap; }
         <translation>测试</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.cpp" line="25"/>
+        <location filename="dlgdatabase.ui" line="258"/>
+        <source>Web Access Proxy</source>
+        <translation>网页访问代理</translation>
+    </message>
+    <message>
+        <location filename="dlgdatabase.ui" line="274"/>
+        <source>https://hub.fastgit.org/</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="dlgdatabase.ui" line="282"/>
+        <location filename="dlgdatabase.cpp" line="374"/>
+        <location filename="dlgdatabase.cpp" line="377"/>
+        <source>Ping</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="dlgdatabase.cpp" line="35"/>
         <source>Config Database</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="dlgdatabase.cpp" line="375"/>
+        <location filename="dlgdatabase.cpp" line="376"/>
+        <source>Stop</source>
+        <translation>停止</translation>
     </message>
 </context>
 <context>

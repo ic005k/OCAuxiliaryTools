@@ -2,6 +2,7 @@
 #define DLGDATABASE_H
 
 #include <QDialog>
+#include <QProcess>
 
 namespace Ui {
 class dlgDatabase;
@@ -15,6 +16,7 @@ class dlgDatabase : public QDialog {
   ~dlgDatabase();
   Ui::dlgDatabase *ui;
 
+  QProcess *processPing;
   void refreshKextUrl();
 
   void saveKextUrl();
@@ -42,6 +44,13 @@ class dlgDatabase : public QDialog {
   void on_comboBoxNet_currentTextChanged(const QString &arg1);
 
   void on_btnOpenUrl_clicked();
+
+  void on_btnPing_clicked();
+
+  void on_readoutput();
+  void on_readerror();
+
+  void on_comboBoxWeb_currentTextChanged(const QString &arg1);
 
  private:
  protected:

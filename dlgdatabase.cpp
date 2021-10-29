@@ -13,6 +13,17 @@ dlgDatabase::dlgDatabase(QWidget *parent)
     : QDialog(parent), ui(new Ui::dlgDatabase) {
   ui->setupUi(this);
 
+  processPing = new QProcess;
+  connect(processPing, SIGNAL(readyReadStandardOutput()), this,
+          SLOT(on_readoutput()));
+  connect(processPing, SIGNAL(readyReadStandardError()), this,
+          SLOT(on_readerror()));
+  QPalette pl = ui->editPing->palette();
+  pl.setColor(QPalette::Base, Qt::black);
+  pl.setColor(QPalette::Text, Qt::green);
+  // ui->editPing->setPalette(pl);
+  ui->editPing->setReadOnly(true);
+
   ui->editFind->setClearButtonEnabled(true);
 
   tableDatabase = ui->tableDatabase;
@@ -54,6 +65,9 @@ dlgDatabase::dlgDatabase(QWidget *parent)
       ui->comboBoxNet->setCurrentText(
           Reg.value("Net", "https://github.com/").toString());
     }
+
+    ui->comboBoxWeb->setCurrentText(
+        Reg.value("Web", "https://github.com/").toString());
 
   } else {
     if (locale.language() == QLocale::Chinese) {
@@ -355,4 +369,32 @@ void dlgDatabase::on_btnOpenUrl_clicked() {
   QString strurl = ui->tableKextUrl->item(n, 1)->text().trimmed();
   QUrl url(strurl);
   QDesktopServices::openUrl(url);
+}
+
+void dlgDatabase::on_btnPing_clicked() {
+  if (ui->btnPing->text() == tr("Ping"))
+    ui->btnPing->setText(tr("Stop"));
+  else if (ui->btnPing->text() == tr("Stop"))
+    ui->btnPing->setText(tr("Ping"));
+  QString url = ui->comboBoxWeb->currentText().trimmed();
+  QStringList list = url.split("/");
+  QString s1;
+  if (list.count() == 4) s1 = list.at(2);
+  processPing->kill();
+  processPing->start("ping", QStringList() << s1);
+}
+
+void dlgDatabase::on_readoutput() {
+  ui->editPing->append(processPing->readAllStandardOutput().data());
+}
+
+void dlgDatabase::on_readerror() {
+  QMessageBox::information(0, "Error",
+                           processPing->readAllStandardError().data());
+}
+
+void dlgDatabase::on_comboBoxWeb_currentTextChanged(const QString &arg1) {
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  Reg.setValue("Web", arg1);
 }
