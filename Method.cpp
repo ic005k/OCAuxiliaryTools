@@ -26,7 +26,6 @@ Method::Method(QWidget* parent) : QMainWindow(parent) {
 }
 
 QStringList Method::getDLUrlList(QString url) {
-  // url = "https://github.com/ic005k/QtOpenCoreConfig/releases/latest";
   QString strLast = getHTMLSource(url, false);
   if (strLast == "") {
     blBreak = true;
@@ -54,7 +53,7 @@ QStringList Method::getDLUrlList(QString url) {
     }
   }
 
-  // for (int i = 0; i < list2.count(); i++) qDebug() << list2.at(i);
+  if (list1.isEmpty() || list2.isEmpty()) return QStringList() << "";
 
   return list2;
 }
