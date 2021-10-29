@@ -279,7 +279,7 @@ p, li { white-space: pre-wrap; }
           <item row="1" column="2">
            <widget class="QToolButton" name="btnPing">
             <property name="text">
-             <string>Ping</string>
+             <string>Testing</string>
             </property>
            </widget>
           </item>

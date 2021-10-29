@@ -11,60 +11,65 @@ extern QString SaveFileName;
 
 dlgDatabase::dlgDatabase(QWidget *parent)
     : QDialog(parent), ui(new Ui::dlgDatabase) {
-    ui->setupUi(this);
+  ui->setupUi(this);
 
-    ui->editPing->setHidden(true);
-    ui->btnPing->setHidden(true);
+  ui->editPing->setHidden(true);
 
-    processPing = new QProcess;
-    connect(processPing, SIGNAL(readyReadStandardOutput()), this, SLOT(on_readoutput()));
-    connect(processPing, SIGNAL(readyReadStandardError()), this, SLOT(on_readerror()));
-    QPalette pl = ui->editPing->palette();
-    pl.setColor(QPalette::Base, Qt::black);
-    pl.setColor(QPalette::Text, Qt::green);
-    // ui->editPing->setPalette(pl);
-    ui->editPing->setReadOnly(true);
+  processPing = new QProcess;
+  connect(processPing, SIGNAL(readyReadStandardOutput()), this,
+          SLOT(on_readoutput()));
+  connect(processPing, SIGNAL(readyReadStandardError()), this,
+          SLOT(on_readerror()));
+  QPalette pl = ui->editPing->palette();
+  pl.setColor(QPalette::Base, Qt::black);
+  pl.setColor(QPalette::Text, Qt::green);
+  // ui->editPing->setPalette(pl);
+  ui->editPing->setReadOnly(true);
 
-    ui->editFind->setClearButtonEnabled(true);
+  ui->editFind->setClearButtonEnabled(true);
 
-    tableDatabase = ui->tableDatabase;
-    tableDatabase->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tableDatabaseFind->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  tableDatabase = ui->tableDatabase;
+  tableDatabase->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  ui->tableDatabaseFind->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    QTableWidgetItem *id0;
+  QTableWidgetItem *id0;
 
-    ui->tableDatabase->setColumnWidth(0, 520);
-    id0 = new QTableWidgetItem(tr("Config Database"));
-    ui->tableDatabase->setHorizontalHeaderItem(0, id0);
+  ui->tableDatabase->setColumnWidth(0, 520);
+  id0 = new QTableWidgetItem(tr("Config Database"));
+  ui->tableDatabase->setHorizontalHeaderItem(0, id0);
 
-    ui->tableDatabase->setAlternatingRowColors(true);
-    tableDatabase->horizontalHeader()->setStretchLastSection(true); //设置充满表宽度
-    ui->tableDatabaseFind->horizontalHeader()->setStretchLastSection(true);
-    tableDatabase->horizontalHeader()->setHidden(true);
-    ui->tableDatabaseFind->horizontalHeader()->setHidden(true);
-    ui->tableDatabaseFind->setHidden(true);
+  ui->tableDatabase->setAlternatingRowColors(true);
+  tableDatabase->horizontalHeader()->setStretchLastSection(
+      true);  //设置充满表宽度
+  ui->tableDatabaseFind->horizontalHeader()->setStretchLastSection(true);
+  tableDatabase->horizontalHeader()->setHidden(true);
+  ui->tableDatabaseFind->horizontalHeader()->setHidden(true);
+  ui->tableDatabaseFind->setHidden(true);
 
-    tableDatabase->setSelectionBehavior(QAbstractItemView::SelectRows); //设置选择行为时每次选择一行
-    ui->tabWidget->setCurrentIndex(0);
+  tableDatabase->setSelectionBehavior(
+      QAbstractItemView::SelectRows);  //设置选择行为时每次选择一行
+  ui->tabWidget->setCurrentIndex(0);
 
-    ui->tableKextUrl->setColumnWidth(0, 200);
-    ui->tableKextUrl->setColumnWidth(1, 350);
-    ui->textEdit->setHidden(true);
+  ui->tableKextUrl->setColumnWidth(0, 200);
+  ui->tableKextUrl->setColumnWidth(1, 350);
+  ui->textEdit->setHidden(true);
 
-    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-    QFileInfo fi(qfile);
-    QString strDef = "https://ghproxy.com/https://github.com/";
-    QLocale locale;
-    if (fi.exists()) {
-        QSettings Reg(qfile, QSettings::IniFormat);
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QFileInfo fi(qfile);
+  QString strDef = "https://ghproxy.com/https://github.com/";
+  QLocale locale;
+  if (fi.exists()) {
+    QSettings Reg(qfile, QSettings::IniFormat);
 
-        if (locale.language() == QLocale::Chinese) {
-            ui->comboBoxNet->setCurrentText(Reg.value("Net", strDef).toString());
-        } else {
-            ui->comboBoxNet->setCurrentText(Reg.value("Net", "https://github.com/").toString());
-        }
+    if (locale.language() == QLocale::Chinese) {
+      ui->comboBoxNet->setCurrentText(Reg.value("Net", strDef).toString());
+    } else {
+      ui->comboBoxNet->setCurrentText(
+          Reg.value("Net", "https://github.com/").toString());
+    }
 
-        ui->comboBoxWeb->setCurrentText(Reg.value("Web", "https://github.com/").toString());
+    ui->comboBoxWeb->setCurrentText(
+        Reg.value("Web", "https://github.com/").toString());
 
   } else {
     if (locale.language() == QLocale::Chinese) {
@@ -81,7 +86,7 @@ void dlgDatabase::closeEvent(QCloseEvent *event) {
   Q_UNUSED(event);
   saveKextUrl();
   processPing->kill();
-  ui->btnPing->setText(tr("Ping"));
+  ui->btnPing->setText(tr("Testing"));
 }
 
 void dlgDatabase::keyPressEvent(QKeyEvent *event) {
@@ -371,30 +376,33 @@ void dlgDatabase::on_btnOpenUrl_clicked() {
 }
 
 void dlgDatabase::on_btnPing_clicked() {
-  if (ui->btnPing->text() == tr("Ping"))
+  QString url = ui->comboBoxWeb->currentText().trimmed();
+  QUrl urlTest(url);
+  QDesktopServices::openUrl(urlTest);
+  return;
+
+  if (ui->btnPing->text() == tr("Testing"))
     ui->btnPing->setText(tr("Stop"));
   else if (ui->btnPing->text() == tr("Stop"))
-    ui->btnPing->setText(tr("Ping"));
-  QString url = ui->comboBoxWeb->currentText().trimmed();
+    ui->btnPing->setText(tr("Testing"));
+
   QStringList list = url.split("/");
   QString s1;
   if (list.count() == 4) s1 = list.at(2);
   processPing->kill();
   if (mw_one->win) {
-      processPing->start("ping", QStringList() << "-t" << s1);
+    processPing->start("ping", QStringList() << "-t" << s1);
   } else
-      processPing->start("ping", QStringList() << s1);
+    processPing->start("ping", QStringList() << s1);
 }
 
-void dlgDatabase::on_readoutput()
-{
-    QString str = processPing->readAllStandardOutput();
-    ui->editPing->append(str);
+void dlgDatabase::on_readoutput() {
+  QString str = processPing->readAllStandardOutput();
+  ui->editPing->append(str);
 }
 
-void dlgDatabase::on_readerror()
-{
-    QMessageBox::information(0, "Error", processPing->readAllStandardError());
+void dlgDatabase::on_readerror() {
+  QMessageBox::information(0, "Error", processPing->readAllStandardError());
 }
 
 void dlgDatabase::on_comboBoxWeb_currentTextChanged(const QString &arg1) {
