@@ -10134,6 +10134,7 @@ void MainWindow::ShowAutoUpdateDlg(bool Database) {
   dlgAutoUpdate->show();
   // dlgAutoUpdate->startDownload(Database);
   dlgAutoUpdate->startWgetDownload();
+  if (win || linuxOS) ui->progressBar->setVisible(false);
 }
 
 void MainWindow::on_txtEditHex_textChanged(const QString& arg1) {

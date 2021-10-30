@@ -20,7 +20,6 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
-  ui->progressBar->setVisible(false);
 }
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
@@ -398,7 +397,7 @@ void AutoUpdateDialog::startWgetDownload() {
   ui->textEdit->clear();
   ui->textEdit->setReadOnly(true);
   ui->progressBar->setMinimum(0);
-  ui->progressBar->setMaximum(0);
+  ui->progressBar->setMaximum(100);
   setWindowTitle("");
   if (mw_one->mac || mw_one->osx1012) ui->textEdit->setFont(QFont("Menlo", 12));
 
@@ -467,6 +466,7 @@ void AutoUpdateDialog::readResult(int exitCode) {
     ui->btnStartUpdate->setEnabled(true);
     ui->btnUpdateDatabase->setEnabled(true);
     setWindowTitle("");
+    ui->progressBar->setValue(100);
     if (mw_one->win || mw_one->linuxOS) UpdateTextShow();
 
     if (mw_one->linuxOS) {
@@ -483,16 +483,25 @@ void AutoUpdateDialog::onReadData() {
 
   QTextEdit* editTemp = new QTextEdit;
   editTemp->setText(ui->textEdit->toPlainText());
+  QString lineText;
   for (int i = editTemp->document()->lineCount() - 1; i > 0; i--) {
     QTextBlock block = editTemp->document()->findBlockByNumber(i);
     editTemp->setTextCursor(QTextCursor(block));
-    QString lineText =
-        editTemp->document()->findBlockByNumber(i).text().trimmed();
+    lineText = editTemp->document()->findBlockByNumber(i).text().trimmed();
     if (lineText.mid(0, 2) == "[#") {
       setWindowTitle(lineText);
       break;
     }
   }
+
+  QString str1, str2, str3, str4;
+  str1 = lineText;
+  QStringList list1 = str1.split("(");
+  if (list1.count() > 1) str2 = list1.at(1);
+  list1 = str2.split(")");
+  if (list1.count() > 0) str3 = list1.at(0);
+  str4 = str3.replace("%", "");
+  ui->progressBar->setValue(str4.toInt());
 }
 
 void AutoUpdateDialog::UpdateTextShow() {
