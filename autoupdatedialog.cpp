@@ -400,6 +400,8 @@ void AutoUpdateDialog::startWgetDownload() {
   ui->progressBar->setMaximum(100);
   setWindowTitle("");
   if (mw_one->mac || mw_one->osx1012) ui->textEdit->setFont(QFont("Menlo", 12));
+  if (mw_one->win)
+      ui->textEdit->setFont(QFont("consolas"));
 
   QStringList list = strUrlOrg.split("/");
   filename = list.at(list.length() - 1);
@@ -425,8 +427,7 @@ void AutoUpdateDialog::startWgetDownload() {
   connect(processWget, SIGNAL(finished(int)), this, SLOT(readResult(int)));
 
   QString strExec;
-  if (mw_one->mac || mw_one->osx1012) {
-    // strExec = mw_one->strAppExePath + "/wget";
+  if (mw_one->mac || mw_one->osx1012 || mw_one->win) {
     strExec = mw_one->strAppExePath + "/aria2c";
     connect(processWget, SIGNAL(readyReadStandardOutput()), this,
             SLOT(onReadData()));
@@ -441,11 +442,9 @@ void AutoUpdateDialog::startWgetDownload() {
                                               << "-"
                                               << "--log-level=warn"
                                               << "--log-level=info" << strUrl);
-    // processWget->start(strExec, QStringList()
-    //                                 << "-v"
-    //                                 << "-o" << tempDir + filename << strUrl);
+
   } else {
-    if (mw_one->win) strExec = mw_one->strAppExePath + "/wget.exe";
+    // if (mw_one->win) strExec = mw_one->strAppExePath + "/wget.exe";
     if (mw_one->linuxOS) strExec = "wget";
 
     processWget->start(strExec, QStringList()
@@ -454,8 +453,7 @@ void AutoUpdateDialog::startWgetDownload() {
                                     << tempDir + "info.txt" << strUrl);
     tmrUpdateShow->start(100);
   }
-  // processWget->start("curl", QStringList() << "-O" << strUrl);
-  // processWget->start("ping", QStringList() << "www.qq.com");
+
   processWget->waitForStarted();
 }
 
