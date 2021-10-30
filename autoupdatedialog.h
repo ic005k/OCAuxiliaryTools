@@ -65,8 +65,6 @@ class AutoUpdateDialog : public QDialog {
 
   void on_btnStartUpdate_clicked();
 
-  void on_btnUpdateDatabase_clicked();
-
   void readResult(int exitCode);
 
   void onReadData();
@@ -75,7 +73,7 @@ class AutoUpdateDialog : public QDialog {
 
   void on_btnShowLog_clicked();
 
-  private:
+ private:
   QElapsedTimer downloadTimer;
   bool blCanBeUpdate = false;
   QProcess* processWget;

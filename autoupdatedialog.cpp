@@ -21,7 +21,6 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
   ui->textEdit->setVisible(false);
-  setMaximumHeight(100);
 }
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
@@ -65,7 +64,6 @@ void AutoUpdateDialog::doProcessFinished() {
     myfile->close();
     if (!blCanBeUpdate) return;
     ui->btnStartUpdate->setEnabled(true);
-    ui->btnUpdateDatabase->setEnabled(true);
     this->repaint();
 
     if (mw_one->linuxOS) {
@@ -211,16 +209,13 @@ void AutoUpdateDialog::startUpdate() {
 void AutoUpdateDialog::startDownload(bool Database) {
   setWindowTitle("");
   ui->btnStartUpdate->setEnabled(false);
-  ui->btnUpdateDatabase->setEnabled(false);
   this->repaint();
 
   if (!Database) {
     ui->btnStartUpdate->setVisible(true);
-    ui->btnUpdateDatabase->setVisible(false);
   } else {
     strUrl = strDatabaseUrl;
     ui->btnStartUpdate->setVisible(false);
-    ui->btnUpdateDatabase->setVisible(true);
   }
 
   QString strTokyo, strSeoul, strOriginal;
@@ -279,28 +274,6 @@ void AutoUpdateDialog::closeEvent(QCloseEvent* event) {
   ui->btnStartUpdate->setHidden(false);
   ui->progressBar->setValue(0);
   ui->btnShowLog->setText(tr("Show Log"));
-}
-
-void AutoUpdateDialog::on_btnUpdateDatabase_clicked() {
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString strZip;
-  strZip = tempDir + "Database.zip";
-
-  QDir dir;
-  dir.setCurrent(tempDir);
-
-  QProcess* p = new QProcess;
-  QString strPath;
-  strPath = appInfo.filePath();
-  if (mw_one->mac || mw_one->osx1012) {
-    p->start("unzip", QStringList() << "-o" << strZip << "-d" << strPath);
-  }
-  if (mw_one->win) {
-    p->start(strPath + "/unzip.exe", QStringList()
-                                         << "-o" << strZip << "-d" << strPath);
-  }
-
-  close();
 }
 
 void AutoUpdateDialog::TextEditToFile(QTextEdit* txtEdit, QString fileName) {
@@ -396,16 +369,13 @@ QString AutoUpdateDialog::GetFileSize(qint64 size) {
 void AutoUpdateDialog::startWgetDownload() {
   ui->btnStartUpdate->setEnabled(false);
   ui->btnStartUpdate->setDefault(true);
-  ui->btnUpdateDatabase->setEnabled(false);
-  ui->btnUpdateDatabase->setVisible(false);
   ui->textEdit->clear();
   ui->textEdit->setReadOnly(true);
   ui->progressBar->setMinimum(0);
   ui->progressBar->setMaximum(100);
   setWindowTitle("");
   if (mw_one->mac || mw_one->osx1012) ui->textEdit->setFont(QFont("Menlo", 12));
-  if (mw_one->win)
-      ui->textEdit->setFont(QFont("consolas"));
+  if (mw_one->win) ui->textEdit->setFont(QFont("consolas"));
 
   QStringList list = strUrlOrg.split("/");
   filename = list.at(list.length() - 1);
@@ -466,7 +436,6 @@ void AutoUpdateDialog::readResult(int exitCode) {
     tmrUpdateShow->stop();
     ui->progressBar->setMaximum(100);
     ui->btnStartUpdate->setEnabled(true);
-    ui->btnUpdateDatabase->setEnabled(true);
     setWindowTitle("");
     ui->progressBar->setValue(100);
     if (mw_one->win || mw_one->linuxOS) UpdateTextShow();
@@ -533,13 +502,13 @@ void AutoUpdateDialog::UpdateTextShow() {
   }
 }
 
-void AutoUpdateDialog::on_btnShowLog_clicked()
-{
-    if (ui->btnShowLog->text() == tr("Show Log")) {
-        ui->textEdit->setVisible(true);
-        ui->btnShowLog->setText(tr("Hide Log"));
-    } else if (ui->btnShowLog->text() == tr("Hide Log")) {
-        ui->textEdit->setVisible(false);
-        ui->btnShowLog->setText(tr("Show Log"));
-    }
+void AutoUpdateDialog::on_btnShowLog_clicked() {
+  if (ui->btnShowLog->text() == tr("Show Log")) {
+    ui->textEdit->setVisible(true);
+    ui->btnShowLog->setText(tr("Hide Log"));
+    setMaximumHeight(300);
+  } else if (ui->btnShowLog->text() == tr("Hide Log")) {
+    ui->textEdit->setVisible(false);
+    ui->btnShowLog->setText(tr("Show Log"));
+  }
 }

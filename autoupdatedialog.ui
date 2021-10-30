@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>679</width>
-    <height>254</height>
+    <width>657</width>
+    <height>248</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -21,6 +27,13 @@
        <width>16777215</width>
        <height>16777215</height>
       </size>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QToolButton" name="btnShowLog">
+     <property name="text">
+      <string>Show Log</string>
      </property>
     </widget>
    </item>
@@ -40,24 +53,10 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="QToolButton" name="btnShowLog">
-     <property name="text">
-      <string>Show Log</string>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="0" colspan="2">
     <widget class="QPushButton" name="btnStartUpdate">
      <property name="text">
       <string>Close and start upgrade</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QPushButton" name="btnUpdateDatabase">
-     <property name="text">
-      <string>Upgrade Database</string>
      </property>
     </widget>
    </item>

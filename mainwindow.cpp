@@ -10134,10 +10134,12 @@ void MainWindow::ShowAutoUpdateDlg(bool Database) {
   dlgAutoUpdate->show();
   dlgAutoUpdate->startWgetDownload();
   if (linuxOS) {
-      dlgAutoUpdate->ui->progressBar->setVisible(false);
-      dlgAutoUpdate->ui->textEdit->setVisible(true);
-  } else
-      dlgAutoUpdate->ui->textEdit->setVisible(false);
+    dlgAutoUpdate->ui->progressBar->setVisible(false);
+    dlgAutoUpdate->ui->textEdit->setVisible(true);
+  } else {
+    dlgAutoUpdate->ui->textEdit->setVisible(false);
+    dlgAutoUpdate->setMaximumHeight(100);
+  }
 }
 
 void MainWindow::on_txtEditHex_textChanged(const QString& arg1) {

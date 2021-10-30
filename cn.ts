@@ -4,17 +4,25 @@
 <context>
     <name>AutoUpdateDialog</name>
     <message>
-        <location filename="autoupdatedialog.ui" line="14"/>
+        <location filename="autoupdatedialog.ui" line="20"/>
         <source>Dialog</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="autoupdatedialog.ui" line="50"/>
+        <location filename="autoupdatedialog.ui" line="52"/>
+        <location filename="autoupdatedialog.cpp" line="280"/>
+        <location filename="autoupdatedialog.cpp" line="535"/>
+        <location filename="autoupdatedialog.cpp" line="541"/>
+        <source>Show Log</source>
+        <translation>显示日志</translation>
+    </message>
+    <message>
+        <location filename="autoupdatedialog.ui" line="59"/>
         <source>Close and start upgrade</source>
         <translation>关闭并开始升级</translation>
     </message>
     <message>
-        <location filename="autoupdatedialog.ui" line="20"/>
+        <location filename="autoupdatedialog.ui" line="66"/>
         <source>Upgrade Database</source>
         <oldsource>Complete the database update</oldsource>
         <translation>更新数据库</translation>
@@ -28,6 +36,12 @@
         <location filename="autoupdatedialog.cpp" line="102"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
+    </message>
+    <message>
+        <location filename="autoupdatedialog.cpp" line="537"/>
+        <location filename="autoupdatedialog.cpp" line="539"/>
+        <source>Hide Log</source>
+        <translation>隐藏日志</translation>
     </message>
 </context>
 <context>
@@ -2027,7 +2041,7 @@ Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algor
     </message>
     <message>
         <location filename="mainwindow.ui" line="10498"/>
-        <location filename="mainwindow.cpp" line="6140"/>
+        <location filename="mainwindow.cpp" line="6144"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
@@ -2420,8 +2434,8 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8122"/>
-        <location filename="mainwindow.cpp" line="9834"/>
-        <location filename="mainwindow.cpp" line="9839"/>
+        <location filename="mainwindow.cpp" line="9838"/>
+        <location filename="mainwindow.cpp" line="9843"/>
         <source>Select date</source>
         <translation>选择日期</translation>
     </message>
@@ -3735,7 +3749,7 @@ Mask</translation>
         <location filename="mainwindow.cpp" line="2093"/>
         <location filename="mainwindow.cpp" line="2142"/>
         <location filename="mainwindow.cpp" line="4091"/>
-        <location filename="mainwindow.cpp" line="9089"/>
+        <location filename="mainwindow.cpp" line="9093"/>
         <source>Enabled</source>
         <translation>是否启用
 Enabled</translation>
@@ -3827,7 +3841,7 @@ MaxKernel</translation>
         <location filename="mainwindow.cpp" line="797"/>
         <location filename="mainwindow.cpp" line="838"/>
         <location filename="mainwindow.cpp" line="897"/>
-        <location filename="mainwindow.cpp" line="9089"/>
+        <location filename="mainwindow.cpp" line="9093"/>
         <source>Arch</source>
         <translation>Kext架构
 Arch</translation>
@@ -3914,7 +3928,7 @@ TableLength</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="407"/>
-        <location filename="mainwindow.cpp" line="9089"/>
+        <location filename="mainwindow.cpp" line="9093"/>
         <source>All</source>
         <translation>全部
 All</translation>
@@ -3977,7 +3991,7 @@ Value</translation>
     <message>
         <location filename="mainwindow.cpp" line="636"/>
         <location filename="mainwindow.cpp" line="1359"/>
-        <location filename="mainwindow.cpp" line="9092"/>
+        <location filename="mainwindow.cpp" line="9096"/>
         <source>Class</source>
         <translation>数据类型
 Class</translation>
@@ -4010,7 +4024,7 @@ Name</translation>
     <message>
         <location filename="mainwindow.cpp" line="1171"/>
         <location filename="mainwindow.cpp" line="1202"/>
-        <location filename="mainwindow.cpp" line="9091"/>
+        <location filename="mainwindow.cpp" line="9095"/>
         <source>Auxiliary</source>
         <translation>辅助
 Auxiliary</translation>
@@ -4018,7 +4032,7 @@ Auxiliary</translation>
     <message>
         <location filename="mainwindow.cpp" line="1177"/>
         <location filename="mainwindow.cpp" line="1211"/>
-        <location filename="mainwindow.cpp" line="9090"/>
+        <location filename="mainwindow.cpp" line="9094"/>
         <source>TextMode</source>
         <translation>文本模式
 TextMode</translation>
@@ -4032,7 +4046,7 @@ Flavour</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1208"/>
-        <location filename="mainwindow.cpp" line="9091"/>
+        <location filename="mainwindow.cpp" line="9095"/>
         <source>RealPath</source>
         <translation>实际路径
 RealPath</translation>
@@ -4208,18 +4222,18 @@ Speed</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6210"/>
+        <location filename="mainwindow.cpp" line="6214"/>
         <source>ASCII</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9836"/>
-        <location filename="mainwindow.cpp" line="9837"/>
+        <location filename="mainwindow.cpp" line="9840"/>
+        <location filename="mainwindow.cpp" line="9841"/>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9616"/>
+        <location filename="mainwindow.cpp" line="9620"/>
         <source>The database file is incomplete and the upgrade cannot be completed.</source>
         <translation>数据库文件不完整，无法完成升级。</translation>
     </message>
@@ -4290,120 +4304,120 @@ BaseSkip</translation>
         <translation>恢复</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6146"/>
+        <location filename="mainwindow.cpp" line="6150"/>
         <source>Clear search history</source>
         <translation>清除搜索历史记录</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6189"/>
+        <location filename="mainwindow.cpp" line="6193"/>
         <source>ctrl+f</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6194"/>
+        <location filename="mainwindow.cpp" line="6198"/>
         <source>ctrl+3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6198"/>
+        <location filename="mainwindow.cpp" line="6202"/>
         <source>ctrl+4</source>
         <translation></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="4367"/>
         <location filename="mainwindow.cpp" line="4368"/>
-        <location filename="mainwindow.cpp" line="6291"/>
+        <location filename="mainwindow.cpp" line="6295"/>
         <source>Integer</source>
         <translation>整数</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="4374"/>
         <location filename="mainwindow.cpp" line="4375"/>
-        <location filename="mainwindow.cpp" line="6203"/>
-        <location filename="mainwindow.cpp" line="6297"/>
+        <location filename="mainwindow.cpp" line="6207"/>
+        <location filename="mainwindow.cpp" line="6301"/>
         <source>Hexadecimal</source>
         <translation>十六进制</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6313"/>
-        <location filename="mainwindow.cpp" line="6322"/>
-        <location filename="mainwindow.cpp" line="6330"/>
-        <location filename="mainwindow.cpp" line="6371"/>
-        <location filename="mainwindow.cpp" line="6380"/>
-        <location filename="mainwindow.cpp" line="6388"/>
-        <location filename="mainwindow.cpp" line="6437"/>
-        <location filename="mainwindow.cpp" line="9104"/>
+        <location filename="mainwindow.cpp" line="6317"/>
+        <location filename="mainwindow.cpp" line="6326"/>
+        <location filename="mainwindow.cpp" line="6334"/>
+        <location filename="mainwindow.cpp" line="6375"/>
+        <location filename="mainwindow.cpp" line="6384"/>
+        <location filename="mainwindow.cpp" line="6392"/>
+        <location filename="mainwindow.cpp" line="6441"/>
+        <location filename="mainwindow.cpp" line="9108"/>
         <source>CopyText</source>
         <translation>复制文本</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6314"/>
-        <location filename="mainwindow.cpp" line="6372"/>
-        <location filename="mainwindow.cpp" line="9124"/>
+        <location filename="mainwindow.cpp" line="6318"/>
+        <location filename="mainwindow.cpp" line="6376"/>
+        <location filename="mainwindow.cpp" line="9128"/>
         <source>Show Tips</source>
         <translation>显示提示</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9913"/>
+        <location filename="mainwindow.cpp" line="9917"/>
         <source>Configuration file database</source>
         <translation>配置文件数据库</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6763"/>
+        <location filename="mainwindow.cpp" line="6767"/>
         <source>Network error!</source>
         <translation>网络错误！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6791"/>
+        <location filename="mainwindow.cpp" line="6795"/>
         <source>New version detected!</source>
         <translation>检测到新版本！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6792"/>
+        <location filename="mainwindow.cpp" line="6796"/>
         <source>Version: </source>
         <translation>版本：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6793"/>
+        <location filename="mainwindow.cpp" line="6797"/>
         <source>Published at: </source>
         <translation>更新时间：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6794"/>
+        <location filename="mainwindow.cpp" line="6798"/>
         <source>Release Notes: </source>
         <translation>更新说明：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6800"/>
-        <location filename="mainwindow.cpp" line="6807"/>
+        <location filename="mainwindow.cpp" line="6804"/>
+        <location filename="mainwindow.cpp" line="6811"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6798"/>
+        <location filename="mainwindow.cpp" line="6802"/>
         <source>There is a new version</source>
         <translation>有新版本</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9121"/>
+        <location filename="mainwindow.cpp" line="9125"/>
         <source>Cut Line</source>
         <translation>剪切行</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9122"/>
+        <location filename="mainwindow.cpp" line="9126"/>
         <source>Copy Line</source>
         <translation>复制行</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9123"/>
+        <location filename="mainwindow.cpp" line="9127"/>
         <source>Paste Line</source>
         <translation>粘贴行</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2324"/>
         <location filename="mainwindow.cpp" line="4985"/>
-        <location filename="mainwindow.cpp" line="6801"/>
-        <location filename="mainwindow.cpp" line="6808"/>
+        <location filename="mainwindow.cpp" line="6805"/>
+        <location filename="mainwindow.cpp" line="6812"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -4418,23 +4432,23 @@ BaseSkip</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6633"/>
+        <location filename="mainwindow.cpp" line="6637"/>
         <source>OK !</source>
         <translation>验证通过！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6647"/>
+        <location filename="mainwindow.cpp" line="6651"/>
         <source>There is a issue with the configuration file.</source>
         <translation>配置文件有问题</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6818"/>
+        <location filename="mainwindow.cpp" line="6822"/>
         <source>It is currently the latest version!</source>
         <translation>目前是最新版本！</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2139"/>
-        <location filename="mainwindow.cpp" line="9090"/>
+        <location filename="mainwindow.cpp" line="9094"/>
         <source>Type</source>
         <translation>类型
 Type</translation>
@@ -4460,51 +4474,51 @@ Type</translation>
 <context>
     <name>Method</name>
     <message>
-        <location filename="Method.cpp" line="326"/>
+        <location filename="Method.cpp" line="329"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
     </message>
     <message>
         <location filename="Method.cpp" line="77"/>
-        <location filename="Method.cpp" line="361"/>
+        <location filename="Method.cpp" line="364"/>
         <source>Network error!</source>
         <translation>网络错误！</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="451"/>
+        <location filename="Method.cpp" line="454"/>
         <source>Application</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="452"/>
+        <location filename="Method.cpp" line="455"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="924"/>
-        <location filename="Method.cpp" line="930"/>
+        <location filename="Method.cpp" line="927"/>
+        <location filename="Method.cpp" line="933"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="926"/>
+        <location filename="Method.cpp" line="929"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="945"/>
+        <location filename="Method.cpp" line="948"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="946"/>
-        <location filename="Method.cpp" line="1008"/>
+        <location filename="Method.cpp" line="949"/>
+        <location filename="Method.cpp" line="1011"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1007"/>
+        <location filename="Method.cpp" line="1010"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
@@ -4512,56 +4526,56 @@ Type</translation>
 <context>
     <name>QInstaller</name>
     <message>
-        <location filename="Method.cpp" line="1303"/>
-        <location filename="autoupdatedialog.cpp" line="350"/>
+        <location filename="Method.cpp" line="1306"/>
+        <location filename="autoupdatedialog.cpp" line="352"/>
         <source>bytes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1304"/>
-        <location filename="autoupdatedialog.cpp" line="351"/>
+        <location filename="Method.cpp" line="1307"/>
+        <location filename="autoupdatedialog.cpp" line="353"/>
         <source>KiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1305"/>
-        <location filename="autoupdatedialog.cpp" line="352"/>
+        <location filename="Method.cpp" line="1308"/>
+        <location filename="autoupdatedialog.cpp" line="354"/>
         <source>MiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1306"/>
-        <location filename="autoupdatedialog.cpp" line="353"/>
+        <location filename="Method.cpp" line="1309"/>
+        <location filename="autoupdatedialog.cpp" line="355"/>
         <source>GiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1307"/>
-        <location filename="autoupdatedialog.cpp" line="354"/>
+        <location filename="Method.cpp" line="1310"/>
+        <location filename="autoupdatedialog.cpp" line="356"/>
         <source>TiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1308"/>
-        <location filename="autoupdatedialog.cpp" line="355"/>
+        <location filename="Method.cpp" line="1311"/>
+        <location filename="autoupdatedialog.cpp" line="357"/>
         <source>PiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1309"/>
-        <location filename="autoupdatedialog.cpp" line="356"/>
+        <location filename="Method.cpp" line="1312"/>
+        <location filename="autoupdatedialog.cpp" line="358"/>
         <source>EiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1310"/>
-        <location filename="autoupdatedialog.cpp" line="357"/>
+        <location filename="Method.cpp" line="1313"/>
+        <location filename="autoupdatedialog.cpp" line="359"/>
         <source>ZiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1311"/>
-        <location filename="autoupdatedialog.cpp" line="358"/>
+        <location filename="Method.cpp" line="1314"/>
+        <location filename="autoupdatedialog.cpp" line="360"/>
         <source>YiB</source>
         <translation></translation>
     </message>
@@ -4637,12 +4651,12 @@ Type</translation>
         <translation>成功同步到OpenCore：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="102"/>
+        <location filename="syncocdialog.cpp" line="103"/>
         <source>Source file last modified</source>
         <translation>源文件最后修改</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="104"/>
+        <location filename="syncocdialog.cpp" line="105"/>
         <source>Target file last modified</source>
         <translation>目标文件最后修改</translation>
     </message>
@@ -4835,9 +4849,9 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="dlgdatabase.ui" line="251"/>
         <location filename="dlgdatabase.ui" line="282"/>
-        <location filename="dlgdatabase.cpp" line="89"/>
-        <location filename="dlgdatabase.cpp" line="384"/>
-        <location filename="dlgdatabase.cpp" line="387"/>
+        <location filename="dlgdatabase.cpp" line="91"/>
+        <location filename="dlgdatabase.cpp" line="386"/>
+        <location filename="dlgdatabase.cpp" line="389"/>
         <source>Testing</source>
         <translation>测试</translation>
     </message>
@@ -4852,19 +4866,19 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="292"/>
+        <location filename="dlgdatabase.ui" line="299"/>
         <source>The way to get the download link for Kext upgrade</source>
         <translation>Kext升级获取下载链接的方式</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="298"/>
+        <location filename="dlgdatabase.ui" line="305"/>
         <source>Accessing the GitHub API</source>
         <translation>访问GitHub API</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="308"/>
+        <location filename="dlgdatabase.ui" line="315"/>
         <source>Crawl web source code</source>
-        <translation type="unfinished">爬取网页源代码</translation>
+        <translation>爬取网页源代码</translation>
     </message>
     <message>
         <location filename="dlgdatabase.cpp" line="38"/>
@@ -4872,8 +4886,8 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.cpp" line="385"/>
-        <location filename="dlgdatabase.cpp" line="386"/>
+        <location filename="dlgdatabase.cpp" line="387"/>
+        <location filename="dlgdatabase.cpp" line="388"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
