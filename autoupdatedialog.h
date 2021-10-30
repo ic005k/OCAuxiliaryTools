@@ -73,7 +73,9 @@ class AutoUpdateDialog : public QDialog {
 
   void UpdateTextShow();
 
- private:
+  void on_btnShowLog_clicked();
+
+  private:
   QElapsedTimer downloadTimer;
   bool blCanBeUpdate = false;
   QProcess* processWget;

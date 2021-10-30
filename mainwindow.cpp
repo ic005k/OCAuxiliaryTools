@@ -10133,7 +10133,11 @@ void MainWindow::ShowAutoUpdateDlg(bool Database) {
                                 Qt::WindowStaysOnTopHint);
   dlgAutoUpdate->show();
   dlgAutoUpdate->startWgetDownload();
-  if (linuxOS) ui->progressBar->setVisible(false);
+  if (linuxOS) {
+      dlgAutoUpdate->ui->progressBar->setVisible(false);
+      dlgAutoUpdate->ui->textEdit->setVisible(true);
+  } else
+      dlgAutoUpdate->ui->textEdit->setVisible(false);
 }
 
 void MainWindow::on_txtEditHex_textChanged(const QString& arg1) {

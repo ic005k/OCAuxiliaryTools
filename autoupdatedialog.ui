@@ -7,21 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>679</width>
-    <height>256</height>
+    <height>254</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="3" column="0">
-    <widget class="QPushButton" name="btnUpdateDatabase">
-     <property name="text">
-      <string>Upgrade Database</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
+   <item row="0" column="0" colspan="2">
     <widget class="QTextEdit" name="textEdit">
      <property name="maximumSize">
       <size>
@@ -47,10 +40,24 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
+   <item row="1" column="1">
+    <widget class="QToolButton" name="btnShowLog">
+     <property name="text">
+      <string>Show Log</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
     <widget class="QPushButton" name="btnStartUpdate">
      <property name="text">
       <string>Close and start upgrade</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QPushButton" name="btnUpdateDatabase">
+     <property name="text">
+      <string>Upgrade Database</string>
      </property>
     </widget>
    </item>

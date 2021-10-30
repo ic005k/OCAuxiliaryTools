@@ -20,6 +20,8 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
+  ui->textEdit->setVisible(false);
+  setMaximumHeight(100);
 }
 
 AutoUpdateDialog::~AutoUpdateDialog() { delete ui; }
@@ -275,6 +277,8 @@ void AutoUpdateDialog::closeEvent(QCloseEvent* event) {
   delete processWget;
   tmrUpdateShow->stop();
   ui->btnStartUpdate->setHidden(false);
+  ui->progressBar->setValue(0);
+  ui->btnShowLog->setText(tr("Show Log"));
 }
 
 void AutoUpdateDialog::on_btnUpdateDatabase_clicked() {
@@ -527,4 +531,15 @@ void AutoUpdateDialog::UpdateTextShow() {
                              "Open File:" + file->errorString());
     return;
   }
+}
+
+void AutoUpdateDialog::on_btnShowLog_clicked()
+{
+    if (ui->btnShowLog->text() == tr("Show Log")) {
+        ui->textEdit->setVisible(true);
+        ui->btnShowLog->setText(tr("Hide Log"));
+    } else if (ui->btnShowLog->text() == tr("Hide Log")) {
+        ui->textEdit->setVisible(false);
+        ui->btnShowLog->setText(tr("Show Log"));
+    }
 }
