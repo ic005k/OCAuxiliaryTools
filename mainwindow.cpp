@@ -10135,6 +10135,7 @@ void MainWindow::ShowAutoUpdateDlg(bool Database) {
   dlgAutoUpdate->startWgetDownload();
   if (linuxOS) {
     dlgAutoUpdate->ui->progressBar->setVisible(false);
+    dlgAutoUpdate->ui->btnShowLog->setVisible(false);
     dlgAutoUpdate->ui->textEdit->setVisible(true);
   } else {
     dlgAutoUpdate->ui->textEdit->setVisible(false);

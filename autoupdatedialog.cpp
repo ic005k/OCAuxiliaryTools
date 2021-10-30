@@ -15,7 +15,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   QFileInfo fi(qAppName());
   strLinuxTargetFile = fi.absoluteFilePath();
 
-  setWindowTitle("");
+  setWindowTitle(tr("Download Upgrade Packages"));
   ui->progressBar->setTextVisible(false);
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
@@ -373,7 +373,6 @@ void AutoUpdateDialog::startWgetDownload() {
   ui->textEdit->setReadOnly(true);
   ui->progressBar->setMinimum(0);
   ui->progressBar->setMaximum(100);
-  setWindowTitle("");
   if (mw_one->mac || mw_one->osx1012) ui->textEdit->setFont(QFont("Menlo", 12));
   if (mw_one->win) ui->textEdit->setFont(QFont("consolas"));
 
@@ -436,7 +435,7 @@ void AutoUpdateDialog::readResult(int exitCode) {
     tmrUpdateShow->stop();
     ui->progressBar->setMaximum(100);
     ui->btnStartUpdate->setEnabled(true);
-    setWindowTitle("");
+    setWindowTitle(tr("Download Upgrade Packages"));
     ui->progressBar->setValue(100);
     if (mw_one->win || mw_one->linuxOS) UpdateTextShow();
 
