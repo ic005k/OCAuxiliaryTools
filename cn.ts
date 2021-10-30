@@ -9,10 +9,10 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="autoupdatedialog.ui" line="52"/>
-        <location filename="autoupdatedialog.cpp" line="280"/>
-        <location filename="autoupdatedialog.cpp" line="535"/>
-        <location filename="autoupdatedialog.cpp" line="541"/>
+        <location filename="autoupdatedialog.ui" line="36"/>
+        <location filename="autoupdatedialog.cpp" line="276"/>
+        <location filename="autoupdatedialog.cpp" line="505"/>
+        <location filename="autoupdatedialog.cpp" line="511"/>
         <source>Show Log</source>
         <translation>显示日志</translation>
     </message>
@@ -22,24 +22,24 @@
         <translation>关闭并开始升级</translation>
     </message>
     <message>
-        <location filename="autoupdatedialog.ui" line="66"/>
-        <source>Upgrade Database</source>
-        <oldsource>Complete the database update</oldsource>
-        <translation>更新数据库</translation>
+        <location filename="autoupdatedialog.cpp" line="18"/>
+        <location filename="autoupdatedialog.cpp" line="438"/>
+        <source>Download Upgrade Packages</source>
+        <translation>下载升级包</translation>
     </message>
     <message>
-        <location filename="autoupdatedialog.cpp" line="76"/>
+        <location filename="autoupdatedialog.cpp" line="75"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="autoupdatedialog.cpp" line="102"/>
+        <location filename="autoupdatedialog.cpp" line="101"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
     </message>
     <message>
-        <location filename="autoupdatedialog.cpp" line="537"/>
-        <location filename="autoupdatedialog.cpp" line="539"/>
+        <location filename="autoupdatedialog.cpp" line="507"/>
+        <location filename="autoupdatedialog.cpp" line="509"/>
         <source>Hide Log</source>
         <translation>隐藏日志</translation>
     </message>
@@ -4527,55 +4527,55 @@ Type</translation>
     <name>QInstaller</name>
     <message>
         <location filename="Method.cpp" line="1306"/>
-        <location filename="autoupdatedialog.cpp" line="352"/>
+        <location filename="autoupdatedialog.cpp" line="326"/>
         <source>bytes</source>
         <translation></translation>
     </message>
     <message>
         <location filename="Method.cpp" line="1307"/>
-        <location filename="autoupdatedialog.cpp" line="353"/>
+        <location filename="autoupdatedialog.cpp" line="327"/>
         <source>KiB</source>
         <translation></translation>
     </message>
     <message>
         <location filename="Method.cpp" line="1308"/>
-        <location filename="autoupdatedialog.cpp" line="354"/>
+        <location filename="autoupdatedialog.cpp" line="328"/>
         <source>MiB</source>
         <translation></translation>
     </message>
     <message>
         <location filename="Method.cpp" line="1309"/>
-        <location filename="autoupdatedialog.cpp" line="355"/>
+        <location filename="autoupdatedialog.cpp" line="329"/>
         <source>GiB</source>
         <translation></translation>
     </message>
     <message>
         <location filename="Method.cpp" line="1310"/>
-        <location filename="autoupdatedialog.cpp" line="356"/>
+        <location filename="autoupdatedialog.cpp" line="330"/>
         <source>TiB</source>
         <translation></translation>
     </message>
     <message>
         <location filename="Method.cpp" line="1311"/>
-        <location filename="autoupdatedialog.cpp" line="357"/>
+        <location filename="autoupdatedialog.cpp" line="331"/>
         <source>PiB</source>
         <translation></translation>
     </message>
     <message>
         <location filename="Method.cpp" line="1312"/>
-        <location filename="autoupdatedialog.cpp" line="358"/>
+        <location filename="autoupdatedialog.cpp" line="332"/>
         <source>EiB</source>
         <translation></translation>
     </message>
     <message>
         <location filename="Method.cpp" line="1313"/>
-        <location filename="autoupdatedialog.cpp" line="359"/>
+        <location filename="autoupdatedialog.cpp" line="333"/>
         <source>ZiB</source>
         <translation></translation>
     </message>
     <message>
         <location filename="Method.cpp" line="1314"/>
-        <location filename="autoupdatedialog.cpp" line="360"/>
+        <location filename="autoupdatedialog.cpp" line="334"/>
         <source>YiB</source>
         <translation></translation>
     </message>
