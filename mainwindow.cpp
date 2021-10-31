@@ -9695,6 +9695,7 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     dlgSyncOC->ui->listTarget->addItem(
         mymethod->getFileName(targetFiles.at(i)));
   }
+
   for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
     QString strF1 = sourceFiles.at(i);
     QString strF2 = targetFiles.at(i);
@@ -9710,21 +9711,25 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
 
   // Read check status
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QString strTag = SaveFileName;
+  strTag.replace("/", "-");
   QSettings Reg(qfile, QSettings::IniFormat);
   for (int i = 0; i < dlgSyncOC->ui->listTarget->count(); i++) {
-      QString strValue = SaveFileName + dlgSyncOC->ui->listTarget->item(i)->text().trimmed();
-      bool yes = false;
-      for (int m = 0; m < Reg.allKeys().count(); m++) {
-          if (Reg.allKeys().at(m).contains(strValue))
-              yes = true;
+    QString strValue =
+        strTag + dlgSyncOC->ui->listTarget->item(i)->text().trimmed();
+    bool yes = false;
+    for (int m = 0; m < Reg.allKeys().count(); m++) {
+      if (Reg.allKeys().at(m).contains(strValue)) {
+        yes = true;
       }
-      if (yes) {
-          int strCheck = Reg.value(strValue).toInt();
-          if (strCheck == 2)
-              dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
-          if (strCheck == 0)
-              dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Unchecked);
-      }
+    }
+    if (yes) {
+      int strCheck = Reg.value(strValue).toInt();
+      if (strCheck == 2)
+        dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
+      if (strCheck == 0)
+        dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Unchecked);
+    }
   }
 
   dlgSyncOC->setModal(true);

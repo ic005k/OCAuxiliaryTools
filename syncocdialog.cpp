@@ -169,13 +169,15 @@ void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
   Q_UNUSED(currentRow)
 }
 
-void SyncOCDialog::closeEvent(QCloseEvent *event)
-{
-    Q_UNUSED(event);
-    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-    QSettings Reg(qfile, QSettings::IniFormat);
-    for (int i = 0; i < ui->listTarget->count(); i++) {
-        Reg.setValue(SaveFileName + ui->listTarget->item(i)->text().trimmed(),
-                     ui->listTarget->item(i)->checkState());
-    }
+void SyncOCDialog::closeEvent(QCloseEvent* event) {
+  Q_UNUSED(event);
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  // QString strTag = QDir::fromNativeSeparators(SaveFileName);
+  QString strTag = SaveFileName;
+  strTag.replace("/", "-");
+  QSettings Reg(qfile, QSettings::IniFormat);
+  for (int i = 0; i < ui->listTarget->count(); i++) {
+    Reg.setValue(strTag + ui->listTarget->item(i)->text().trimmed(),
+                 ui->listTarget->item(i)->checkState());
+  }
 }
