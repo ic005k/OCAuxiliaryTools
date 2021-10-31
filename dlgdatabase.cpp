@@ -293,6 +293,15 @@ void dlgDatabase::refreshKextUrl() {
       "DebugEnhancer.kext | https://github.com/acidanthera/DebugEnhancer");
   ui->textEdit->append(
       "IntelMausi.kext | https://github.com/acidanthera/IntelMausi");
+  ui->textEdit->append(
+      "ALC256.kext | "
+      "https://github.com/ic005k/ALC256");
+  ui->textEdit->append(
+      "NightShiftEnabler.kext | https://github.com/cdf/NightShiftEnabler");
+  ui->textEdit->append(
+      "NoTouchID.kext | https://github.com/al3xtjames/NoTouchID");
+  ui->textEdit->append(
+      "USBInjectAll.kext | https://github.com/johnlimabravo/USBInjectAll");
   // ui->textEdit->append(" | ");
   // ui->textEdit->append(" | ");
 

@@ -111,7 +111,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -133,7 +133,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2226,8 +2226,15 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
             </item>
             <item row="1" column="6">
              <widget class="QToolButton" name="btnKextUpdate">
+              <property name="toolTip">
+               <string>Update</string>
+              </property>
               <property name="text">
                <string>Update</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/start.png</normaloff>:/icon/start.png</iconset>
               </property>
              </widget>
             </item>
@@ -2323,8 +2330,15 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
             </item>
             <item row="1" column="7">
              <widget class="QToolButton" name="btnStopKextUpdate">
+              <property name="toolTip">
+               <string>Stop</string>
+              </property>
               <property name="text">
                <string>Stop</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/stop.png</normaloff>:/icon/stop.png</iconset>
               </property>
              </widget>
             </item>

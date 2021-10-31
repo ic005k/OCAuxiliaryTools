@@ -55,5 +55,7 @@
         <file>icon/espicon.png</file>
         <file>icon/savetip.png</file>
         <file>icon/no.png</file>
+        <file>icon/start.png</file>
+        <file>icon/stop.png</file>
     </qresource>
 </RCC>
