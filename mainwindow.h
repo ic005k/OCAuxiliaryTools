@@ -917,10 +917,7 @@ class MainWindow : public QMainWindow {
 
   void on_btnStopKextUpdate_clicked();
 
-  void on_table_nv_add0_currentItemChanged(QTableWidgetItem* current,
-                                           QTableWidgetItem* previous);
-
- private:
+  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;
   void acpi_cellDoubleClicked();

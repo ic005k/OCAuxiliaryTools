@@ -9708,6 +9708,25 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     }
   }
 
+  // Read check status
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  for (int i = 0; i < dlgSyncOC->ui->listTarget->count(); i++) {
+      QString strValue = SaveFileName + dlgSyncOC->ui->listTarget->item(i)->text().trimmed();
+      bool yes = false;
+      for (int m = 0; m < Reg.allKeys().count(); m++) {
+          if (Reg.allKeys().at(m).contains(strValue))
+              yes = true;
+      }
+      if (yes) {
+          int strCheck = Reg.value(strValue).toInt();
+          if (strCheck == 2)
+              dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
+          if (strCheck == 0)
+              dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Unchecked);
+      }
+  }
+
   dlgSyncOC->setModal(true);
   dlgSyncOC->show();
   dlgSyncOC->ui->listTarget->setFocus();
@@ -10590,6 +10609,3 @@ void MainWindow::on_btnDelWhitelist_clicked() { mymethod->delKextWhitelist(); }
 void MainWindow::on_btnStopKextUpdate_clicked() {
   mymethod->cancelKextUpdate();
 }
-
-void MainWindow::on_table_nv_add0_currentItemChanged(
-    QTableWidgetItem* current, QTableWidgetItem* previous) {}

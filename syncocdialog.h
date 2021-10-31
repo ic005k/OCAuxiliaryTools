@@ -38,6 +38,9 @@ class SyncOCDialog : public QDialog {
  private:
   void setListWidgetStyle();
   void setListWidgetColor(QString color);
+
+  protected:
+  void closeEvent(QCloseEvent *event);
 };
 
 #endif  // SYNCOCDIALOG_H
