@@ -9680,6 +9680,7 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
 
   dlgSyncOC->setModal(true);
   dlgSyncOC->show();
+  dlgSyncOC->ui->listTarget->setFocus();
   dlgSyncOC->blSame = true;
   for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
     dlgSyncOC->ui->listSource->setCurrentRow(i);

@@ -8,6 +8,7 @@ extern MainWindow* mw_one;
 dlgMountESP::dlgMountESP(QWidget* parent)
     : QDialog(parent), ui(new Ui::dlgMountESP) {
   ui->setupUi(this);
+  ui->btnMountOpenConfig->setDefault(true);
 }
 
 dlgMountESP::~dlgMountESP() { delete ui; }
