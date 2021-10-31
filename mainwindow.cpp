@@ -673,45 +673,45 @@ void MainWindow::ParserDP(QVariantMap map) {
   QVariantMap map_add = map["Add"].toMap();
   QVariantMap map_sub;
   ui->table_dp_add0->setRowCount(map_add.count());
-  QTableWidgetItem* newItem1;
+
   for (int i = 0; i < map_add.count(); i++) {
-    QString strAdd0 = map_add.keys().at(i);
+    QString strAdd0 = map_add.keys().at(i).trimmed();
     ui->table_dp_add0->setItem(i, 0, new QTableWidgetItem(strAdd0));
 
     map_sub = map_add[map_add.keys().at(i)].toMap();
     ui->table_dp_add->setRowCount(map_sub.keys().count());
 
-    // Add Sub key
+    // Add Sub items
     for (int j = 0; j < map_sub.keys().count(); j++) {
-      // QTableWidgetItem *newItem1;
-      newItem1 = new QTableWidgetItem(map_sub.keys().at(j));
+      // Key
+      QTableWidgetItem* newItem1 = new QTableWidgetItem(map_sub.keys().at(j));
       ui->table_dp_add->setItem(j, 0, newItem1);
 
+      // Data type
       QString dtype = map_sub[map_sub.keys().at(j)].typeName();
       QString ztype;
       if (dtype == "QByteArray") ztype = "Data";
       if (dtype == "QString") ztype = "String";
       if (dtype == "qlonglong") ztype = "Number";
+      QTableWidgetItem* newItem2 = new QTableWidgetItem(ztype);
+      newItem2->setTextAlignment(Qt::AlignCenter);
+      ui->table_dp_add->setItem(j, 1, newItem2);
 
-      newItem1 = new QTableWidgetItem(ztype);
-      newItem1->setTextAlignment(Qt::AlignCenter);
-      ui->table_dp_add->setItem(j, 1, newItem1);
-
+      // Value
+      QTableWidgetItem* newItem3;
       QString type_name = map_sub[map_sub.keys().at(j)].typeName();
       if (type_name == "QByteArray") {
         QByteArray tohex = map_sub[map_sub.keys().at(j)].toByteArray();
         QString va = tohex.toHex().toUpper();
-        newItem1 = new QTableWidgetItem(va);
-
+        newItem3 = new QTableWidgetItem(va);
       } else
-        newItem1 =
+        newItem3 =
             new QTableWidgetItem(map_sub[map_sub.keys().at(j)].toString());
-      ui->table_dp_add->setItem(j, 2, newItem1);
+      ui->table_dp_add->setItem(j, 2, newItem3);
     }
 
     //保存子条目里面的数据，以便以后加载
     // write_ini(ui->table_dp_add0, ui->table_dp_add, i);
-
     for (int n = 0; n < ui->table_dp_add->rowCount(); n++) {
       listDPAdd.append(strAdd0 + "|" +
                        ui->table_dp_add->item(n, 0)->text().trimmed() + "|" +
@@ -9002,6 +9002,11 @@ void MainWindow::copyLine(QTableWidget* w, QAction* copyAction) {
         Reg.setValue(QString::number(i) + "/col" + QString::number(j),
                      w->item(w->currentRow(), j)->text());
       }
+
+      if (w == ui->table_dp_add0)
+        write_ini(ui->table_dp_add0, ui->table_dp_add, curRow);
+      if (w == ui->table_nv_add0)
+        write_ini(ui->table_nv_add0, ui->table_nv_add, curRow);
     }
     file.close();
   });
@@ -9093,8 +9098,6 @@ void MainWindow::tablePopMenu(QTableWidget* w, QAction* cutAction,
     QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
     QFile file(qfile);
     if (file.exists()) {
-      QSettings Reg(qfile, QSettings::IniFormat);
-
       pasteAction->setEnabled(true);
 
       setPopMenuEnabled(qfile, w, cutAction, pasteAction, copyAction);
@@ -9269,6 +9272,12 @@ void MainWindow::endPasteLine(QTableWidget* w, int row, QString colText0) {
       loading = false;
       loadRightTable(w, ui->table_nv_ls);
     }
+
+    if (w == ui->table_dp_add0)
+      mymethod->writeLeftTable(ui->table_dp_add0, ui->table_dp_add);
+
+    if (w == ui->table_nv_add0)
+      mymethod->writeLeftTable(ui->table_nv_add0, ui->table_nv_add);
   }
 }
 

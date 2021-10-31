@@ -1406,9 +1406,9 @@ void Method::readLeftTable(QTableWidget* t0, QTableWidget* t) {
   bool md = mw_one->isWindowModified();
   QString strLeft = t0->currentItem()->text().trimmed();
   QStringList listAdd;
-  if (t0 == mw_one->ui->table_nv_add0) listAdd = mw_one->listNVRAMAdd;
   if (t0 == mw_one->ui->table_dp_add0) listAdd = mw_one->listDPAdd;
-
+  if (t0 == mw_one->ui->table_nv_add0) listAdd = mw_one->listNVRAMAdd;
+  // for (int i = 0; i < listAdd.count(); i++) qDebug() << listAdd.at(i);
   t->setRowCount(0);
   for (int i = 0; i < listAdd.count(); i++) {
     QString str = listAdd.at(i);

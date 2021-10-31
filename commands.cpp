@@ -211,8 +211,9 @@ void CopyPasteLineCommand::undo() {
   mymethod->goTable(m_table);
 
   if (m_writeini) {
-    mw_one->write_ini(mw_one->getLeftTable(m_table), m_table,
-                      mw_one->getLeftTable(m_table)->currentRow());
+    // mw_one->write_ini(mw_one->getLeftTable(m_table), m_table,
+    //                  mw_one->getLeftTable(m_table)->currentRow());
+    mymethod->writeLeftTable(mw_one->getLeftTable(m_table), m_table);
   }
 
   if (m_writevalueini) {
@@ -244,8 +245,9 @@ void CopyPasteLineCommand::redo() {
   mymethod->goTable(m_table);
 
   if (m_writeini) {
-    mw_one->write_ini(mw_one->getLeftTable(m_table), m_table,
-                      mw_one->getLeftTable(m_table)->currentRow());
+    // mw_one->write_ini(mw_one->getLeftTable(m_table), m_table,
+    //                  mw_one->getLeftTable(m_table)->currentRow());
+    mymethod->writeLeftTable(mw_one->getLeftTable(m_table), m_table);
   }
 
   if (m_writevalueini) {
