@@ -224,6 +224,8 @@ void MainWindow::openFile(QString PlistFileName) {
 
   //初始化
   mymethod->init_Table(-1);
+  listDPAdd.clear();
+  listNVRAMAdd.clear();
 
   QFile file(PlistFileName);
   QVariantMap map = PListParser::parsePList(&file).toMap();
@@ -669,22 +671,20 @@ void MainWindow::ParserDP(QVariantMap map) {
 
   // Add
   QVariantMap map_add = map["Add"].toMap();
-
   QVariantMap map_sub;
-
   ui->table_dp_add0->setRowCount(map_add.count());
   QTableWidgetItem* newItem1;
   for (int i = 0; i < map_add.count(); i++) {
-    newItem1 = new QTableWidgetItem(map_add.keys().at(i));
-    ui->table_dp_add0->setItem(i, 0, newItem1);
+    QString strAdd0 = map_add.keys().at(i);
+    ui->table_dp_add0->setItem(i, 0, new QTableWidgetItem(strAdd0));
 
-    //加载子条目
     map_sub = map_add[map_add.keys().at(i)].toMap();
-    ui->table_dp_add->setRowCount(map_sub.keys().count());  //子键的个数
+    ui->table_dp_add->setRowCount(map_sub.keys().count());
 
+    // Add Sub key
     for (int j = 0; j < map_sub.keys().count(); j++) {
       // QTableWidgetItem *newItem1;
-      newItem1 = new QTableWidgetItem(map_sub.keys().at(j));  //键
+      newItem1 = new QTableWidgetItem(map_sub.keys().at(j));
       ui->table_dp_add->setItem(j, 0, newItem1);
 
       QString dtype = map_sub[map_sub.keys().at(j)].typeName();
@@ -693,7 +693,7 @@ void MainWindow::ParserDP(QVariantMap map) {
       if (dtype == "QString") ztype = "String";
       if (dtype == "qlonglong") ztype = "Number";
 
-      newItem1 = new QTableWidgetItem(ztype);  //数据类型
+      newItem1 = new QTableWidgetItem(ztype);
       newItem1->setTextAlignment(Qt::AlignCenter);
       ui->table_dp_add->setItem(j, 1, newItem1);
 
@@ -710,7 +710,14 @@ void MainWindow::ParserDP(QVariantMap map) {
     }
 
     //保存子条目里面的数据，以便以后加载
-    write_ini(ui->table_dp_add0, ui->table_dp_add, i);
+    // write_ini(ui->table_dp_add0, ui->table_dp_add, i);
+
+    for (int n = 0; n < ui->table_dp_add->rowCount(); n++) {
+      listDPAdd.append(strAdd0 + "|" +
+                       ui->table_dp_add->item(n, 0)->text().trimmed() + "|" +
+                       ui->table_dp_add->item(n, 1)->text().trimmed() + "|" +
+                       ui->table_dp_add->item(n, 2)->text().trimmed());
+    }
   }
 
   int last = ui->table_dp_add0->rowCount();
@@ -1404,18 +1411,17 @@ void MainWindow::AddNvramAdd(QVariantMap map_add, int currentRow,
   else
     i = currentRow;
 
-  QTableWidgetItem* newItem1;
-  newItem1 = new QTableWidgetItem(map_add.keys().at(currentRow));
-  ui->table_nv_add0->setItem(i, 0, newItem1);
+  QString strAdd0 = map_add.keys().at(currentRow);
+  ui->table_nv_add0->setItem(i, 0, new QTableWidgetItem(strAdd0));
 
   //加载子条目
   QVariantMap map_sub;
   map_sub = map_add[map_add.keys().at(currentRow)].toMap();
-  ui->table_nv_add->setRowCount(map_sub.keys().count());  //子键的个数
+  ui->table_nv_add->setRowCount(map_sub.keys().count());  // Sub key total
 
   for (int j = 0; j < map_sub.keys().count(); j++) {
-    newItem1 = new QTableWidgetItem(map_sub.keys().at(j));  //键
-    ui->table_nv_add->setItem(j, 0, newItem1);
+    ui->table_nv_add->setItem(
+        j, 0, new QTableWidgetItem(map_sub.keys().at(j)));  // Key
 
     QString dtype = map_sub[map_sub.keys().at(j)].typeName();
     QString ztype;
@@ -1423,23 +1429,30 @@ void MainWindow::AddNvramAdd(QVariantMap map_add, int currentRow,
     if (dtype == "QString") ztype = "String";
     if (dtype == "qlonglong") ztype = "Number";
     if (dtype == "bool") ztype = "Boolean";
-    newItem1 = new QTableWidgetItem(ztype);  //数据类型
+    QTableWidgetItem* newItem1 = new QTableWidgetItem(ztype);  // Data type
     newItem1->setTextAlignment(Qt::AlignCenter);
     ui->table_nv_add->setItem(j, 1, newItem1);
 
     QString type_name = map_sub[map_sub.keys().at(j)].typeName();
+    QTableWidgetItem* newItem2;
     if (type_name == "QByteArray") {
       QByteArray tohex = map_sub[map_sub.keys().at(j)].toByteArray();
       QString va = tohex.toHex().toUpper();
-      newItem1 = new QTableWidgetItem(va);
+      newItem2 = new QTableWidgetItem(va);
     } else
-      newItem1 = new QTableWidgetItem(map_sub[map_sub.keys().at(j)].toString());
-    ui->table_nv_add->setItem(j, 2, newItem1);
+      newItem2 = new QTableWidgetItem(map_sub[map_sub.keys().at(j)].toString());
+    ui->table_nv_add->setItem(j, 2, newItem2);
   }
 
   //保存子条目里面的数据，以便以后加载
+  // write_ini(ui->table_nv_add0, ui->table_nv_add, i);
 
-  write_ini(ui->table_nv_add0, ui->table_nv_add, i);
+  for (int n = 0; n < ui->table_nv_add->rowCount(); n++) {
+    listNVRAMAdd.append(strAdd0 + "|" +
+                        ui->table_nv_add->item(n, 0)->text().trimmed() + "|" +
+                        ui->table_nv_add->item(n, 1)->text().trimmed() + "|" +
+                        ui->table_nv_add->item(n, 2)->text().trimmed());
+  }
 }
 
 void MainWindow::ParserNvram(QVariantMap map) {
@@ -1580,7 +1593,8 @@ void MainWindow::on_table_dp_add0_cellClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
 
-  loadRightTable(ui->table_dp_add0, ui->table_dp_add);
+  // loadRightTable(ui->table_dp_add0, ui->table_dp_add);
+  mymethod->readLeftTable(ui->table_dp_add0, ui->table_dp_add);
 
   setStatusBarText(ui->table_dp_add0);
 }
@@ -1589,8 +1603,9 @@ void MainWindow::on_table_dp_add_itemChanged(QTableWidgetItem* item) {
   Q_UNUSED(item);
 
   if (writeINI) {
-    write_ini(ui->table_dp_add0, ui->table_dp_add,
-              ui->table_dp_add0->currentRow());
+    // write_ini(ui->table_dp_add0, ui->table_dp_add,
+    //          ui->table_dp_add0->currentRow());
+    mymethod->writeLeftTable(ui->table_dp_add0, ui->table_dp_add);
 
     this->setWindowModified(true);
     updateIconStatus();
@@ -1601,15 +1616,17 @@ void MainWindow::on_table_nv_add0_cellClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
 
-  loadRightTable(ui->table_nv_add0, ui->table_nv_add);
+  // loadRightTable(ui->table_nv_add0, ui->table_nv_add);
+  mymethod->readLeftTable(ui->table_nv_add0, ui->table_nv_add);
 }
 
 void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item) {
   Q_UNUSED(item);
 
   if (writeINI)
-    write_ini(ui->table_nv_add0, ui->table_nv_add,
-              ui->table_nv_add0->currentRow());
+    // write_ini(ui->table_nv_add0, ui->table_nv_add,
+    //          ui->table_nv_add0->currentRow());
+    mymethod->writeLeftTable(ui->table_nv_add0, ui->table_nv_add);
 
   if (!loading) {
     this->setWindowModified(true);
@@ -3108,7 +3125,6 @@ void MainWindow::on_table_acpi_del_cellClicked(int row, int column) {
 
 void MainWindow::setStatusBarText(QTableWidget* table) {
   if (loading) return;
-
   if (!table->currentIndex().isValid()) return;
 
   QString text0 = table->item(table->currentRow(), 0)->text();
@@ -3568,8 +3584,9 @@ void MainWindow::on_btnDPAdd_Add0_clicked() {
   add_item(ui->table_dp_add0, 1);
   ui->table_dp_add->setRowCount(0);  //先清除右边表中的所有条目
   on_btnDPAdd_Add_clicked();         //同时右边增加一个新条目
-  write_ini(ui->table_dp_add0, ui->table_dp_add,
-            ui->table_dp_add0->rowCount() - 1);
+  // write_ini(ui->table_dp_add0, ui->table_dp_add,
+  //          ui->table_dp_add0->rowCount() - 1);
+  mymethod->writeLeftTable(ui->table_dp_add0, ui->table_dp_add);
 
   this->setWindowModified(true);
   updateIconStatus();
@@ -3589,8 +3606,9 @@ void MainWindow::on_btnDPAdd_Add_clicked() {
   loading = false;
 
   //保存数据
-  write_ini(ui->table_dp_add0, ui->table_dp_add,
-            ui->table_dp_add0->currentRow());
+  // write_ini(ui->table_dp_add0, ui->table_dp_add,
+  //          ui->table_dp_add0->currentRow());
+  mymethod->writeLeftTable(ui->table_dp_add0, ui->table_dp_add);
 
   this->setWindowModified(true);
   updateIconStatus();
@@ -3907,8 +3925,9 @@ void MainWindow::on_btnNVRAMAdd_Add0_clicked() {
   ui->table_nv_add->setRowCount(0);  //先清除右边表中的所有条目
   on_btnNVRAMAdd_Add_clicked();      //同时右边增加一个新条目
 
-  write_ini(ui->table_nv_add0, ui->table_nv_add,
-            ui->table_nv_add0->rowCount() - 1);
+  // write_ini(ui->table_nv_add0, ui->table_nv_add,
+  //          ui->table_nv_add0->rowCount() - 1);
+  mymethod->writeLeftTable(ui->table_nv_add0, ui->table_nv_add);
 
   this->setWindowModified(true);
   updateIconStatus();
@@ -3936,8 +3955,8 @@ void MainWindow::on_btnNVRAMAdd_Del0_clicked() {
 void MainWindow::on_btnNVRAMAdd_Del_clicked() {
   if (ui->table_nv_add->rowCount() <= 0) return;
   del_item(ui->table_nv_add);
-  write_ini(ui->table_nv_add0, ui->table_nv_add,
-            ui->table_nv_add0->currentRow());
+  // write_ini(ui->table_nv_add0, ui->table_nv_add,
+  //          ui->table_nv_add0->currentRow());
 }
 
 void MainWindow::on_btnNVRAMDel_Add0_clicked() {
@@ -6529,8 +6548,9 @@ void MainWindow::on_table_dp_add0_itemChanged(QTableWidgetItem* item) {
   Q_UNUSED(item);
 
   if (writeINI) {
-    write_ini(ui->table_dp_add0, ui->table_dp_add,
-              ui->table_dp_add0->currentRow());
+    // write_ini(ui->table_dp_add0, ui->table_dp_add,
+    //          ui->table_dp_add0->currentRow());
+    mymethod->writeLeftTable(ui->table_dp_add0, ui->table_dp_add);
     this->setWindowModified(true);
     updateIconStatus();
   }
@@ -6551,8 +6571,9 @@ void MainWindow::on_table_nv_add0_itemChanged(QTableWidgetItem* item) {
   Q_UNUSED(item);
 
   if (writeINI) {
-    write_ini(ui->table_nv_add0, ui->table_nv_add,
-              ui->table_nv_add0->currentRow());
+    // write_ini(ui->table_nv_add0, ui->table_nv_add,
+    //          ui->table_nv_add0->currentRow());
+    mymethod->writeLeftTable(ui->table_nv_add0, ui->table_nv_add);
     this->setWindowModified(true);
     updateIconStatus();
   }
@@ -7114,9 +7135,8 @@ QString MainWindow::getMacInfo(const QString& cmd) {
 }
 
 void MainWindow::on_table_dp_add0_itemSelectionChanged() {
-  //读取ini数据并加载到table_dp_add中
-
-  loadRightTable(ui->table_dp_add0, ui->table_dp_add);
+  // loadRightTable(ui->table_dp_add0, ui->table_dp_add);
+  mymethod->readLeftTable(ui->table_dp_add0, ui->table_dp_add);
 }
 
 void MainWindow::on_table_dp_del0_itemSelectionChanged() {
@@ -7124,7 +7144,8 @@ void MainWindow::on_table_dp_del0_itemSelectionChanged() {
 }
 
 void MainWindow::on_table_nv_add0_itemSelectionChanged() {
-  loadRightTable(ui->table_nv_add0, ui->table_nv_add);
+  // loadRightTable(ui->table_nv_add0, ui->table_nv_add);
+  mymethod->readLeftTable(ui->table_nv_add0, ui->table_nv_add);
 }
 
 void MainWindow::on_table_nv_del0_itemSelectionChanged() {
@@ -10560,3 +10581,6 @@ void MainWindow::on_btnDelWhitelist_clicked() { mymethod->delKextWhitelist(); }
 void MainWindow::on_btnStopKextUpdate_clicked() {
   mymethod->cancelKextUpdate();
 }
+
+void MainWindow::on_table_nv_add0_currentItemChanged(
+    QTableWidgetItem* current, QTableWidgetItem* previous) {}

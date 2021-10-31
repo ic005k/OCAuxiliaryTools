@@ -79,6 +79,10 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  bool blReadLeftTable;
+  bool blWriteLeftTable;
+  QStringList listNVRAMAdd;
+  QStringList listDPAdd;
   QStringList sourceFiles, targetFiles;
   QString strConfigPath;
   void updateIconStatus();
@@ -912,6 +916,9 @@ class MainWindow : public QMainWindow {
   void on_btnDelWhitelist_clicked();
 
   void on_btnStopKextUpdate_clicked();
+
+  void on_table_nv_add0_currentItemChanged(QTableWidgetItem* current,
+                                           QTableWidgetItem* previous);
 
  private:
   bool LoadRightTable = false;

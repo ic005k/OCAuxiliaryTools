@@ -1399,3 +1399,63 @@ void Method::readKextWhitelistINI() {
     }
   }
 }
+
+void Method::readLeftTable(QTableWidget* t0, QTableWidget* t) {
+  if (!t0->currentIndex().isValid()) return;
+  mw_one->blReadLeftTable = true;
+  bool md = mw_one->isWindowModified();
+  QString strLeft = t0->currentItem()->text().trimmed();
+  QStringList listAdd;
+  if (t0 == mw_one->ui->table_nv_add0) listAdd = mw_one->listNVRAMAdd;
+  if (t0 == mw_one->ui->table_dp_add0) listAdd = mw_one->listDPAdd;
+
+  t->setRowCount(0);
+  for (int i = 0; i < listAdd.count(); i++) {
+    QString str = listAdd.at(i);
+    QStringList list = str.split("|");
+    if (list.count() == 4) {
+      if (strLeft == list.at(0)) {
+        int count = t->rowCount();
+        t->setRowCount(count + 1);
+        t->setItem(count, 0, new QTableWidgetItem(list.at(1)));
+        QTableWidgetItem* newItem1 = new QTableWidgetItem(list.at(2));
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        t->setItem(count, 1, newItem1);
+        t->setItem(count, 2, new QTableWidgetItem(list.at(3)));
+      }
+    }
+  }
+  mw_one->blReadLeftTable = false;
+  mw_one->setWindowModified(md);
+  mw_one->updateIconStatus();
+}
+
+void Method::writeLeftTable(QTableWidget* t0, QTableWidget* t) {
+  if (!t0->currentIndex().isValid()) return;
+  if (mw_one->blReadLeftTable) {
+    return;
+  }
+  QStringList listAdd;
+  if (t0 == mw_one->ui->table_nv_add0) listAdd = mw_one->listNVRAMAdd;
+  if (t0 == mw_one->ui->table_dp_add0) listAdd = mw_one->listDPAdd;
+  QString strLeft = t0->currentItem()->text().trimmed();
+  for (int i = 0; i < listAdd.count(); i++) {
+    QString str = listAdd.at(i);
+    QStringList list = str.split("|");
+    if (list.count() == 4) {
+      if (strLeft == list.at(0)) {
+        listAdd.removeAt(i);
+        i--;
+      }
+    }
+  }
+
+  for (int i = 0; i < t->rowCount(); i++) {
+    listAdd.append(strLeft + "|" + t->item(i, 0)->text().trimmed() + "|" +
+                   t->item(i, 1)->text().trimmed() + "|" +
+                   t->item(i, 2)->text().trimmed());
+  }
+
+  if (t0 == mw_one->ui->table_nv_add0) mw_one->listNVRAMAdd = listAdd;
+  if (t0 == mw_one->ui->table_dp_add0) mw_one->listDPAdd = listAdd;
+}

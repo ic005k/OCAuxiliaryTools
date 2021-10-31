@@ -97,6 +97,8 @@ class Method : public QMainWindow {
   QString getHTMLSource(QString URLSTR, bool writeFile);
   QStringList getDLUrlList(QString url);
   void getLastReleaseFromHtml(QString url);
+  void readLeftTable(QTableWidget *t0, QTableWidget *t);
+  void writeLeftTable(QTableWidget *t0, QTableWidget *t);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
