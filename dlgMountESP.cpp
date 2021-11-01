@@ -30,13 +30,12 @@ void dlgMountESP::mountESP(bool openConfig) {
   QString dirpath = "/Volumes/" + str2 + "/EFI/";
   QString dir = "file:" + dirpath;
 
-  if (QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode))) {
-    if (openConfig) {
-      QString strConfig = dirpath + "OC/Config.plist";
-      QFileInfo fi(strConfig.toLower());
-      if (fi.exists()) mw_one->openFile(strConfig);
-    }
-
-    close();
+  if (openConfig) {
+    QString strConfig = dirpath + "OC/Config.plist";
+    QFileInfo fi(strConfig.toLower());
+    if (fi.exists()) mw_one->openFile(strConfig);
+  } else if (QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode))) {
   }
+
+  close();
 }
