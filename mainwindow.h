@@ -82,7 +82,10 @@ class MainWindow : public QMainWindow {
   bool blReadLeftTable;
   bool blWriteLeftTable;
   QStringList listNVRAMAdd;
+  QStringList listNVRAMDel;
+  QStringList listNVRAMLs;
   QStringList listDPAdd;
+  QStringList listDPDel;
   QStringList sourceFiles, targetFiles;
   QString strConfigPath;
   void updateIconStatus();
@@ -917,7 +920,7 @@ class MainWindow : public QMainWindow {
 
   void on_btnStopKextUpdate_clicked();
 
-  private:
+ private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;
   void acpi_cellDoubleClicked();

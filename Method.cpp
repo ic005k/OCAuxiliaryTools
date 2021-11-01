@@ -1460,3 +1460,61 @@ void Method::writeLeftTable(QTableWidget* t0, QTableWidget* t) {
   if (t0 == mw_one->ui->table_nv_add0) mw_one->listNVRAMAdd = listAdd;
   if (t0 == mw_one->ui->table_dp_add0) mw_one->listDPAdd = listAdd;
 }
+
+void Method::readLeftTableOnlyValue(QTableWidget* t0, QTableWidget* t) {
+  if (!t0->currentIndex().isValid()) return;
+  mw_one->blReadLeftTable = true;
+  bool md = mw_one->isWindowModified();
+  QString strLeft = t0->currentItem()->text().trimmed();
+  QStringList listAdd;
+
+  if (t0 == mw_one->ui->table_dp_del0) listAdd = mw_one->listDPDel;
+  if (t0 == mw_one->ui->table_nv_del0) listAdd = mw_one->listNVRAMDel;
+  if (t0 == mw_one->ui->table_nv_ls0) listAdd = mw_one->listNVRAMLs;
+  t->setRowCount(0);
+  for (int i = 0; i < listAdd.count(); i++) {
+    QString str = listAdd.at(i);
+    QStringList list = str.split("|");
+    if (list.count() == 3) {
+      if (strLeft == list.at(1) && t0->objectName() == list.at(0)) {
+        int count = t->rowCount();
+        t->setRowCount(count + 1);
+        t->setItem(count, 0, new QTableWidgetItem(list.at(2)));
+      }
+    }
+  }
+  mw_one->blReadLeftTable = false;
+  mw_one->setWindowModified(md);
+  mw_one->updateIconStatus();
+}
+
+void Method::writeLeftTableOnlyValue(QTableWidget* t0, QTableWidget* t) {
+  if (!t0->currentIndex().isValid()) return;
+  if (mw_one->blReadLeftTable) {
+    return;
+  }
+  QStringList listAdd;
+  if (t0 == mw_one->ui->table_nv_del0) listAdd = mw_one->listNVRAMDel;
+  if (t0 == mw_one->ui->table_nv_ls0) listAdd = mw_one->listNVRAMLs;
+  if (t0 == mw_one->ui->table_dp_del0) listAdd = mw_one->listDPDel;
+  QString strLeft = t0->currentItem()->text().trimmed();
+  for (int i = 0; i < listAdd.count(); i++) {
+    QString str = listAdd.at(i);
+    QStringList list = str.split("|");
+    if (list.count() == 3) {
+      if (strLeft == list.at(1) && t0->objectName() == list.at(0)) {
+        listAdd.removeAt(i);
+        i--;
+      }
+    }
+  }
+
+  for (int i = 0; i < t->rowCount(); i++) {
+    listAdd.append(t0->objectName() + "|" + strLeft + "|" +
+                   t->item(i, 0)->text().trimmed());
+  }
+
+  if (t0 == mw_one->ui->table_nv_del0) mw_one->listNVRAMDel = listAdd;
+  if (t0 == mw_one->ui->table_nv_ls0) mw_one->listNVRAMLs = listAdd;
+  if (t0 == mw_one->ui->table_dp_del0) mw_one->listDPDel = listAdd;
+}

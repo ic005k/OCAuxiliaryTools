@@ -217,8 +217,9 @@ void CopyPasteLineCommand::undo() {
   }
 
   if (m_writevalueini) {
-    mw_one->write_value_ini(mw_one->getLeftTable(m_table), m_table,
-                            mw_one->getLeftTable(m_table)->currentRow());
+    // mw_one->write_value_ini(mw_one->getLeftTable(m_table), m_table,
+    //                        mw_one->getLeftTable(m_table)->currentRow());
+    mymethod->writeLeftTableOnlyValue(mw_one->getLeftTable(m_table), m_table);
   }
 
   mw_one->checkFiles();
@@ -251,8 +252,9 @@ void CopyPasteLineCommand::redo() {
   }
 
   if (m_writevalueini) {
-    mw_one->write_value_ini(mw_one->getLeftTable(m_table), m_table,
-                            mw_one->getLeftTable(m_table)->currentRow());
+    // mw_one->write_value_ini(mw_one->getLeftTable(m_table), m_table,
+    //                       mw_one->getLeftTable(m_table)->currentRow());
+    mymethod->writeLeftTableOnlyValue(mw_one->getLeftTable(m_table), m_table);
   }
 
   mw_one->checkFiles();

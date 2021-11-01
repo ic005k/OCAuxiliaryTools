@@ -225,7 +225,10 @@ void MainWindow::openFile(QString PlistFileName) {
   //初始化
   mymethod->init_Table(-1);
   listDPAdd.clear();
+  listDPDel.clear();
   listNVRAMAdd.clear();
+  listNVRAMDel.clear();
+  listNVRAMLs.clear();
 
   QFile file(PlistFileName);
   QVariantMap map = PListParser::parsePList(&file).toMap();
@@ -1637,13 +1640,14 @@ void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item) {
 void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
                             QTableWidget* subtable, int currentRow) {
   QTableWidgetItem* newItem1;
-
+  QStringList list;
   if (currentRow == -1) {
     table->setRowCount(map_fun.count());
     subtable->setRowCount(0);
 
     for (int i = 0; i < map_fun.count(); i++) {
-      newItem1 = new QTableWidgetItem(map_fun.keys().at(i));
+      QString str0 = map_fun.keys().at(i);
+      newItem1 = new QTableWidgetItem(str0);
       table->setItem(i, 0, newItem1);
 
       //加载子条目
@@ -1653,13 +1657,20 @@ void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
       for (int j = 0; j < map_sub_list.count(); j++) {
         newItem1 = new QTableWidgetItem(map_sub_list.at(j).toString());  //键
         subtable->setItem(j, 0, newItem1);
+        // qDebug() << subtable->item(j, 0)->text();
       }
 
       //保存子条目里面的数据，以便以后加载
-      write_value_ini(table, subtable, i);
+      // write_value_ini(table, subtable, i);
+
+      for (int n = 0; n < subtable->rowCount(); n++) {
+        list.append(table->objectName() + "|" + str0 + "|" +
+                    subtable->item(n, 0)->text().trimmed());
+      }
     }
   } else {
-    newItem1 = new QTableWidgetItem(map_fun.keys().at(currentRow));
+    QString str0 = map_fun.keys().at(currentRow);
+    newItem1 = new QTableWidgetItem(str0);
     table->setItem(table->rowCount() - 1, 0, newItem1);
 
     //加载子条目
@@ -1672,25 +1683,37 @@ void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
     }
 
     //保存子条目里面的数据，以便以后加载
-    write_value_ini(table, subtable, table->rowCount() - 1);
+    // write_value_ini(table, subtable, table->rowCount() - 1);
+
+    for (int n = 0; n < subtable->rowCount(); n++) {
+      list.append(table->objectName() + "|" + str0 + "|" +
+                  subtable->item(n, 0)->text().trimmed());
+    }
   }
 
   int last = table->rowCount();
   table->setCurrentCell(last - 1, 0);
+
+  if (table == ui->table_nv_del0) listNVRAMDel = list;
+  if (table == ui->table_nv_ls0) listNVRAMLs = list;
+  if (table == ui->table_dp_del0) listDPDel = list;
+  for (int m = 0; m < listNVRAMDel.count(); m++) qDebug() << list.at(m);
 }
 
 void MainWindow::on_table_nv_del0_cellClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
 
-  loadRightTable(ui->table_nv_del0, ui->table_nv_del);
+  // loadRightTable(ui->table_nv_del0, ui->table_nv_del);
+  mymethod->readLeftTableOnlyValue(ui->table_nv_del0, ui->table_nv_del);
 }
 
 void MainWindow::on_table_nv_ls0_cellClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
 
-  loadRightTable(ui->table_nv_ls0, ui->table_nv_ls);
+  // loadRightTable(ui->table_nv_ls0, ui->table_nv_ls);
+  mymethod->readLeftTableOnlyValue(ui->table_nv_ls0, ui->table_nv_ls);
 }
 
 void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem* item) {
@@ -1698,8 +1721,9 @@ void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem* item) {
   }
 
   if (writeINI) {
-    write_value_ini(ui->table_nv_del0, ui->table_nv_del,
-                    ui->table_nv_del0->currentRow());
+    // write_value_ini(ui->table_nv_del0, ui->table_nv_del,
+    //                ui->table_nv_del0->currentRow());
+    mymethod->writeLeftTableOnlyValue(ui->table_nv_del0, ui->table_nv_del);
 
     this->setWindowModified(true);
     updateIconStatus();
@@ -1711,8 +1735,9 @@ void MainWindow::on_table_nv_ls_itemChanged(QTableWidgetItem* item) {
   }
 
   if (writeINI) {
-    write_value_ini(ui->table_nv_ls0, ui->table_nv_ls,
-                    ui->table_nv_ls0->currentRow());
+    // write_value_ini(ui->table_nv_ls0, ui->table_nv_ls,
+    //                ui->table_nv_ls0->currentRow());
+    mymethod->writeLeftTableOnlyValue(ui->table_nv_ls0, ui->table_nv_ls);
 
     this->setWindowModified(true);
     updateIconStatus();
@@ -1723,18 +1748,19 @@ void MainWindow::on_table_dp_del0_cellClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
 
-  loadRightTable(ui->table_dp_del0, ui->table_dp_del);
+  // loadRightTable(ui->table_dp_del0, ui->table_dp_del);
+  mymethod->readLeftTableOnlyValue(ui->table_dp_del0, ui->table_dp_del);
 
   setStatusBarText(ui->table_dp_del0);
 }
 
 void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item) {
-  if (item->text().isEmpty()) {
-  }
+  Q_UNUSED(item);
 
   if (writeINI) {
-    write_value_ini(ui->table_dp_del0, ui->table_dp_del,
-                    ui->table_dp_del0->currentRow());
+    // write_value_ini(ui->table_dp_del0, ui->table_dp_del,
+    //               ui->table_dp_del0->currentRow());
+    mymethod->writeLeftTableOnlyValue(ui->table_dp_del0, ui->table_dp_del);
 
     this->setWindowModified(true);
     updateIconStatus();
@@ -7140,7 +7166,8 @@ void MainWindow::on_table_dp_add0_itemSelectionChanged() {
 }
 
 void MainWindow::on_table_dp_del0_itemSelectionChanged() {
-  loadRightTable(ui->table_dp_del0, ui->table_dp_del);
+  // loadRightTable(ui->table_dp_del0, ui->table_dp_del);
+  mymethod->readLeftTableOnlyValue(ui->table_dp_del0, ui->table_dp_del);
 }
 
 void MainWindow::on_table_nv_add0_itemSelectionChanged() {
@@ -7149,11 +7176,13 @@ void MainWindow::on_table_nv_add0_itemSelectionChanged() {
 }
 
 void MainWindow::on_table_nv_del0_itemSelectionChanged() {
-  loadRightTable(ui->table_nv_del0, ui->table_nv_del);
+  // loadRightTable(ui->table_nv_del0, ui->table_nv_del);
+  mymethod->readLeftTableOnlyValue(ui->table_nv_del0, ui->table_nv_del);
 }
 
 void MainWindow::on_table_nv_ls0_itemSelectionChanged() {
-  loadRightTable(ui->table_nv_ls0, ui->table_nv_ls);
+  // loadRightTable(ui->table_nv_ls0, ui->table_nv_ls);
+  mymethod->readLeftTableOnlyValue(ui->table_nv_ls0, ui->table_nv_ls);
 }
 
 void MainWindow::on_table_acpi_add_itemEntered(QTableWidgetItem* item) {
@@ -9007,6 +9036,12 @@ void MainWindow::copyLine(QTableWidget* w, QAction* copyAction) {
         write_ini(ui->table_dp_add0, ui->table_dp_add, curRow);
       if (w == ui->table_nv_add0)
         write_ini(ui->table_nv_add0, ui->table_nv_add, curRow);
+      if (w == ui->table_nv_del0)
+        write_value_ini(ui->table_nv_del0, ui->table_nv_del, curRow);
+      if (w == ui->table_nv_ls0)
+        write_value_ini(ui->table_nv_ls0, ui->table_nv_ls, curRow);
+      if (w == ui->table_dp_del0)
+        write_value_ini(ui->table_dp_del0, ui->table_dp_del, curRow);
     }
     file.close();
   });
@@ -9278,6 +9313,15 @@ void MainWindow::endPasteLine(QTableWidget* w, int row, QString colText0) {
 
     if (w == ui->table_nv_add0)
       mymethod->writeLeftTable(ui->table_nv_add0, ui->table_nv_add);
+
+    if (w == ui->table_nv_del0)
+      mymethod->writeLeftTableOnlyValue(ui->table_nv_del0, ui->table_nv_del);
+
+    if (w == ui->table_nv_ls0)
+      mymethod->writeLeftTableOnlyValue(ui->table_nv_ls0, ui->table_nv_ls);
+
+    if (w == ui->table_dp_del0)
+      mymethod->writeLeftTableOnlyValue(ui->table_dp_del0, ui->table_dp_del);
   }
 }
 

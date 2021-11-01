@@ -99,6 +99,8 @@ class Method : public QMainWindow {
   void getLastReleaseFromHtml(QString url);
   void readLeftTable(QTableWidget *t0, QTableWidget *t);
   void writeLeftTable(QTableWidget *t0, QTableWidget *t);
+  void readLeftTableOnlyValue(QTableWidget *t0, QTableWidget *t);
+  void writeLeftTableOnlyValue(QTableWidget *t0, QTableWidget *t);
  public slots:
   void on_GenerateEFI();
   void on_btnExportMaster();
