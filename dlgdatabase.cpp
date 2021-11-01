@@ -124,14 +124,13 @@ void dlgDatabase::keyPressEvent(QKeyEvent *event) {
 void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
-
   mw_one->RefreshAllDatabase = true;
 
   QFileInfo appInfo(qApp->applicationDirPath());
-
   QString dirpath = appInfo.filePath() + "/Database/";
   QString file = tableDatabase->currentItem()->text();
   mw_one->openFile(dirpath + file);
+  close();
   mymethod->on_GenerateEFI();
 
   mw_one->RefreshAllDatabase = false;

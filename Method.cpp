@@ -935,6 +935,7 @@ void Method::on_GenerateEFI() {
   mw_one->setFocus();
   box.exec();
   mw_one->ui->cboxFind->setFocus();
+  mw_one->openFile(pathTarget + "OC/Config.plist");
 }
 
 void Method::on_btnExportMaster() {
