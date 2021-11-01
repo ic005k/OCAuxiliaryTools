@@ -102,7 +102,7 @@ class Method : public QMainWindow {
   void readLeftTableOnlyValue(QTableWidget *t0, QTableWidget *t);
   void writeLeftTableOnlyValue(QTableWidget *t0, QTableWidget *t);
  public slots:
-  void on_GenerateEFI();
+  void generateEFI();
   void on_btnExportMaster();
   void on_btnImportMaster();
 

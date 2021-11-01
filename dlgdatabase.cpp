@@ -131,7 +131,7 @@ void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
   QString file = tableDatabase->currentItem()->text();
   mw_one->openFile(dirpath + file);
   close();
-  mymethod->on_GenerateEFI();
+  mymethod->generateEFI();
 
   mw_one->RefreshAllDatabase = false;
 }
@@ -197,8 +197,8 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column) {
   QString dirpath = appInfo.filePath() + "/Database/";
   QString file = ui->tableDatabaseFind->currentItem()->text();
   mw_one->openFile(dirpath + file);
-
-  mymethod->on_GenerateEFI();
+  close();
+  mymethod->generateEFI();
 
   mw_one->RefreshAllDatabase = false;
 }

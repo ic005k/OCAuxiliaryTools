@@ -878,7 +878,7 @@ QString Method::copyTools(QString pathSource, QString pathTarget) {
   return strDatabase;
 }
 
-void Method::on_GenerateEFI() {
+void Method::generateEFI() {
   QDir dir;
   QString strDatabase;
 
@@ -936,6 +936,7 @@ void Method::on_GenerateEFI() {
   box.exec();
   mw_one->ui->cboxFind->setFocus();
   mw_one->openFile(pathTarget + "OC/Config.plist");
+  mw_one->ui->actionUpgrade_OC->setEnabled(true);
 }
 
 void Method::on_btnExportMaster() {
