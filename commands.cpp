@@ -50,13 +50,17 @@ void DeleteCommand::undo() {
 
   m_table->setCurrentCell(m_row, 0);
 
-  if (m_loadINI) mw_one->read_ini(m_table, m_table0, m_table0CurrentRow);
+  if (m_loadINI)
+    // mw_one->read_ini(m_table, m_table0, m_table0CurrentRow);
+    mymethod->readLeftTable(m_table, m_table0);
 
   if (m_table0 != NULL && !m_loadINI) {
     if (m_writeINI)
-      mw_one->write_ini(m_table0, m_table, m_table0CurrentRow);
+      // mw_one->write_ini(m_table0, m_table, m_table0CurrentRow);
+      mymethod->writeLeftTable(m_table0, m_table);
     else
-      mw_one->write_value_ini(m_table0, m_table, m_table0CurrentRow);
+      // mw_one->write_value_ini(m_table0, m_table, m_table0CurrentRow);
+      mymethod->writeLeftTableOnlyValue(m_table0, m_table);
   }
 
   mw_one->loading = false;
@@ -71,7 +75,10 @@ void DeleteCommand::redo() {
     m_table0->setCurrentCell(m_table0CurrentRow, 0);
   }
 
-  if (m_loadINI) mw_one->read_ini(m_table, m_table0, m_table0CurrentRow);
+  if (m_loadINI) {
+    // mw_one->read_ini(m_table, m_table0, m_table0CurrentRow);
+    mymethod->readLeftTable(m_table, m_table0);
+  }
 
   mw_one->loading = true;
 
@@ -83,9 +90,11 @@ void DeleteCommand::redo() {
 
   if (m_table0 != NULL && !m_loadINI) {
     if (m_writeINI)
-      mw_one->write_ini(m_table0, m_table, m_table0CurrentRow);
+      // mw_one->write_ini(m_table0, m_table, m_table0CurrentRow);
+      mymethod->writeLeftTable(m_table0, m_table);
     else
-      mw_one->write_value_ini(m_table0, m_table, m_table0CurrentRow);
+      // mw_one->write_value_ini(m_table0, m_table, m_table0CurrentRow);
+      mymethod->writeLeftTableOnlyValue(m_table0, m_table);
   }
 
   mw_one->loading = false;
