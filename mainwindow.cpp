@@ -9697,8 +9697,8 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     if (mymethod->isEqualInList(strKextName, dbkextFileList)) {
       if (ui->table_kernel_add->item(i, 2)->text().trimmed() != "" &&
           !mymethod->isKextWhitelist(strKextName)) {
-        sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
-        targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
+        // sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
+        // targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
       }
     }
   }

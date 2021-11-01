@@ -50,9 +50,17 @@ void DeleteCommand::undo() {
 
   m_table->setCurrentCell(m_row, 0);
 
-  if (m_loadINI)
+  if (m_loadINI) {
     // mw_one->read_ini(m_table, m_table0, m_table0CurrentRow);
-    mymethod->readLeftTable(m_table, m_table0);
+    if (m_table == mw_one->ui->table_dp_add0 ||
+        m_table == mw_one->ui->table_nv_add0)
+      mymethod->readLeftTable(m_table, m_table0);
+
+    if (m_table == mw_one->ui->table_dp_del0 ||
+        m_table == mw_one->ui->table_nv_del0 ||
+        m_table == mw_one->ui->table_nv_ls0)
+      mymethod->readLeftTableOnlyValue(m_table, m_table0);
+  }
 
   if (m_table0 != NULL && !m_loadINI) {
     if (m_writeINI)

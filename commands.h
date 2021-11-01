@@ -55,77 +55,86 @@
 #include <QUndoCommand>
 
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 class DeleteCommand : public QUndoCommand {
-public:
-    explicit DeleteCommand(bool writeINI, bool loadINI, QTableWidget* table0, int table0CurrentRow, QTableWidget* table, int row, QString text, QStringList fieldList, QUndoCommand* parent = nullptr);
+ public:
+  explicit DeleteCommand(bool writeINI, bool loadINI, QTableWidget* table0,
+                         int table0CurrentRow, QTableWidget* table, int row,
+                         QString text, QStringList fieldList,
+                         QUndoCommand* parent = nullptr);
 
-    void undo() override;
-    void redo() override;
+  void undo() override;
+  void redo() override;
 
-private:
-    QTableWidget* m_table;
-    QTableWidget* m_table0;
-    int m_row;
-    int m_table0CurrentRow;
+ private:
+  QTableWidget* m_table;
+  QTableWidget* m_table0;
+  int m_row;
+  int m_table0CurrentRow;
 
-    QString m_text;
-    QStringList m_fieldList;
+  QString m_text;
+  QStringList m_fieldList;
 
-    bool m_loadINI;
-    bool m_writeINI;
+  bool m_loadINI;
+  bool m_writeINI;
 };
 
 class AddCommand : public QUndoCommand {
-public:
-    AddCommand(QTableWidget* table, int row, int col, QString text, QUndoCommand* parent = nullptr);
-    ~AddCommand();
+ public:
+  AddCommand(QTableWidget* table, int row, int col, QString text,
+             QUndoCommand* parent = nullptr);
+  ~AddCommand();
 
-    void undo() override;
-    void redo() override;
+  void undo() override;
+  void redo() override;
 
-private:
-    QTableWidget* m_table;
-    int m_row;
-    int m_col;
-    QString m_text;
+ private:
+  QTableWidget* m_table;
+  int m_row;
+  int m_col;
+  QString m_text;
 };
 
 class EditCommand : public QUndoCommand {
-public:
-    EditCommand(bool textAlignCenter, QString oldText, QTableWidget* table, int row, int col, QString text, QUndoCommand* parent = nullptr);
-    ~EditCommand();
+ public:
+  EditCommand(bool textAlignCenter, QString oldText, QTableWidget* table,
+              int row, int col, QString text, QUndoCommand* parent = nullptr);
+  ~EditCommand();
 
-    void undo() override;
-    void redo() override;
+  void undo() override;
+  void redo() override;
 
-private:
-    QTableWidget* m_table;
-    int m_row;
-    int m_col;
-    QString m_text;
-    QString m_oldText;
-    bool m_textAlignCenter;
+ private:
+  QTableWidget* m_table;
+  int m_row;
+  int m_col;
+  QString m_text;
+  QString m_oldText;
+  bool m_textAlignCenter;
 };
 
 class CopyPasteLineCommand : public QUndoCommand {
-public:
-    CopyPasteLineCommand(QTableWidget* table, int row, int col, QString text, QStringList colTextList, QString oldColText0, bool writeini, bool writevalueini, int leftTableCurrentRow, QUndoCommand* parent = nullptr);
-    ~CopyPasteLineCommand();
+ public:
+  CopyPasteLineCommand(QTableWidget* table, int row, int col, QString text,
+                       QStringList colTextList, QString oldColText0,
+                       bool writeini, bool writevalueini,
+                       int leftTableCurrentRow, QUndoCommand* parent = nullptr);
+  ~CopyPasteLineCommand();
 
-    void undo() override;
-    void redo() override;
+  void undo() override;
+  void redo() override;
 
-private:
-    QTableWidget* m_table;
-    int m_row;
-    int m_col;
-    QString m_text;
-    QStringList m_colTextList;
-    QString m_oldColText0;
-    bool m_writeini;
-    bool m_writevalueini;
-    int m_leftTableCurrentRow;
+ private:
+  QTableWidget* m_table;
+  int m_row;
+  int m_col;
+  QString m_text;
+  QStringList m_colTextList;
+  QString m_oldColText0;
+  bool m_writeini;
+  bool m_writevalueini;
+  int m_leftTableCurrentRow;
 };
 
 QString createCommandString(QString cmdStr);
