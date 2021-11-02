@@ -1697,7 +1697,7 @@ void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
   if (table == ui->table_nv_del0) listNVRAMDel = list;
   if (table == ui->table_nv_ls0) listNVRAMLs = list;
   if (table == ui->table_dp_del0) listDPDel = list;
-  for (int m = 0; m < listNVRAMDel.count(); m++) qDebug() << list.at(m);
+  // for (int m = 0; m < list.count(); m++) qDebug() << list.at(m);
 }
 
 void MainWindow::on_table_nv_del0_cellClicked(int row, int column) {
