@@ -28,9 +28,12 @@ class dlgPreset : public QDialog {
   bool blNVAdd = false;
   bool blNVDelete = false;
   bool blNVLegacy = false;
+  bool blKext = false;
+  QStringList listKextPreset;
 
   void loadPreset(QString strMain, QString strSub, QString strComment,
                   QListWidget *list);
+  void addKextPresets();
  private slots:
   void on_btnAdd_clicked();
 

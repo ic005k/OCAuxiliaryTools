@@ -205,6 +205,9 @@ void dlgPreset::on_btnAdd_clicked() {
       mw_one->init_value(map_add, mw_one->ui->table_nv_del0,
                          mw_one->ui->table_nv_del,
                          ui->listPreset->currentRow());
+
+      mymethod->writeLeftTableOnlyValue(mw_one->ui->table_nv_del0,
+                                        mw_one->ui->table_nv_del);
     }
   }
 
@@ -224,7 +227,25 @@ void dlgPreset::on_btnAdd_clicked() {
       mw_one->on_btnNVRAMLS_Add0_clicked();
       mw_one->init_value(map_add, mw_one->ui->table_nv_ls0,
                          mw_one->ui->table_nv_ls, ui->listPreset->currentRow());
+      mymethod->writeLeftTableOnlyValue(mw_one->ui->table_nv_ls0,
+                                        mw_one->ui->table_nv_ls);
     }
+  }
+
+  addKextPresets();
+}
+
+void dlgPreset::addKextPresets() {
+  if (blKext) {
+    QStringList list;
+    QString strPath = mw_one->strAppExePath + "/Database/EFI/OC/Kexts/";
+    for (int i = 0; i < ui->listPreset->count(); i++) {
+      if (ui->listPreset->item(i)->checkState() == Qt::Checked) {
+        list.append(strPath + ui->listPreset->item(i)->text());
+      }
+    }
+
+    mw_one->addKexts(list);
   }
 }
 

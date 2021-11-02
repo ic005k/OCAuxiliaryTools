@@ -172,6 +172,7 @@ void Method::finishKextUpdate() {
 }
 
 void Method::kextUpdate() {
+  if (!mw_one->ui->actionUpgrade_OC->isEnabled()) return;
   if (mw_one->ui->table_kernel_add->rowCount() == 0) return;
   mw_one->myDatabase->refreshKextUrl();
   blBreak = false;
@@ -1518,4 +1519,35 @@ void Method::writeLeftTableOnlyValue(QTableWidget* t0, QTableWidget* t) {
   if (t0 == mw_one->ui->table_nv_del0) mw_one->listNVRAMDel = listAdd;
   if (t0 == mw_one->ui->table_nv_ls0) mw_one->listNVRAMLs = listAdd;
   if (t0 == mw_one->ui->table_dp_del0) mw_one->listDPDel = listAdd;
+}
+
+void Method::kextPreset() {
+  mw_one->dlgPresetValues->blKext = true;
+
+  mw_one->dlgPresetValues->blACPIPatch = false;
+  mw_one->dlgPresetValues->blDPAdd = false;
+  mw_one->dlgPresetValues->blKernelPatch = false;
+  mw_one->dlgPresetValues->blNVDelete = false;
+  mw_one->dlgPresetValues->blNVLegacy = false;
+  mw_one->dlgPresetValues->blNVAdd = false;
+
+  mw_one->dlgPresetValues->listKextPreset = DirToFileList(
+      mw_one->strAppExePath + "/Database/EFI/OC/Kexts/", "*.kext");
+  mw_one->dlgPresetValues->ui->listPreset->clear();
+  mw_one->dlgPresetValues->ui->listPreset->addItems(
+      mw_one->dlgPresetValues->listKextPreset);
+  for (int i = 0; i < mw_one->dlgPresetValues->ui->listPreset->count(); i++) {
+    mw_one->dlgPresetValues->ui->listPreset->item(i)->setCheckState(
+        Qt::Unchecked);
+    QString str0 =
+        mw_one->dlgPresetValues->ui->listPreset->item(i)->text().trimmed();
+    for (int j = 0; j < mw_one->ui->table_kernel_add->rowCount(); j++) {
+      QString str = mw_one->ui->table_kernel_add->item(j, 0)->text().trimmed();
+      if (str0 == str)
+        mw_one->dlgPresetValues->ui->listPreset->item(i)->setCheckState(
+            Qt::Checked);
+    }
+  }
+  mw_one->dlgPresetValues->setModal(true);
+  mw_one->dlgPresetValues->show();
 }

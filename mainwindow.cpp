@@ -1668,6 +1668,12 @@ void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
                     subtable->item(n, 0)->text().trimmed());
       }
     }
+
+    if (table == ui->table_nv_del0) listNVRAMDel = list;
+    if (table == ui->table_nv_ls0) listNVRAMLs = list;
+    if (table == ui->table_dp_del0) listDPDel = list;
+    // for (int m = 0; m < list.count(); m++) qDebug() << list.at(m);
+
   } else {
     QString str0 = map_fun.keys().at(currentRow);
     newItem1 = new QTableWidgetItem(str0);
@@ -1684,20 +1690,10 @@ void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
 
     //保存子条目里面的数据，以便以后加载
     // write_value_ini(table, subtable, table->rowCount() - 1);
-
-    for (int n = 0; n < subtable->rowCount(); n++) {
-      list.append(table->objectName() + "|" + str0 + "|" +
-                  subtable->item(n, 0)->text().trimmed());
-    }
   }
 
   int last = table->rowCount();
   table->setCurrentCell(last - 1, 0);
-
-  if (table == ui->table_nv_del0) listNVRAMDel = list;
-  if (table == ui->table_nv_ls0) listNVRAMLs = list;
-  if (table == ui->table_dp_del0) listDPDel = list;
-  // for (int m = 0; m < list.count(); m++) qDebug() << list.at(m);
 }
 
 void MainWindow::on_table_nv_del0_cellClicked(int row, int column) {
@@ -10413,6 +10409,7 @@ void MainWindow::on_btnDPAddPreset_clicked() {
   dlgPresetValues->blNVDelete = false;
   dlgPresetValues->blNVLegacy = false;
   dlgPresetValues->blNVAdd = false;
+  dlgPresetValues->blKext = false;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("DeviceProperties", "Add", "",
@@ -10427,6 +10424,7 @@ void MainWindow::on_btnACPIPatch_clicked() {
   dlgPresetValues->blNVDelete = false;
   dlgPresetValues->blNVLegacy = false;
   dlgPresetValues->blNVAdd = false;
+  dlgPresetValues->blKext = false;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("ACPI", "Patch", "Comment",
@@ -10441,6 +10439,7 @@ void MainWindow::on_btnPresetKernelPatch_clicked() {
   dlgPresetValues->blNVDelete = false;
   dlgPresetValues->blNVLegacy = false;
   dlgPresetValues->blNVAdd = false;
+  dlgPresetValues->blKext = false;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("Kernel", "Patch", "Comment",
@@ -10575,6 +10574,7 @@ void MainWindow::on_btnPresetNVAdd_clicked() {
   dlgPresetValues->blNVDelete = false;
   dlgPresetValues->blNVLegacy = false;
   dlgPresetValues->blNVAdd = true;
+  dlgPresetValues->blKext = false;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("NVRAM", "Add", "",
@@ -10589,6 +10589,7 @@ void MainWindow::on_btnPresetNVDelete_clicked() {
   dlgPresetValues->blNVDelete = true;
   dlgPresetValues->blNVLegacy = false;
   dlgPresetValues->blNVAdd = false;
+  dlgPresetValues->blKext = false;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("NVRAM", "Delete", "",
@@ -10603,6 +10604,7 @@ void MainWindow::on_btnPresetNVLegacy_clicked() {
   dlgPresetValues->blNVDelete = false;
   dlgPresetValues->blNVLegacy = true;
   dlgPresetValues->blNVAdd = false;
+  dlgPresetValues->blKext = false;
 
   dlgPresetValues->setModal(true);
   dlgPresetValues->loadPreset("NVRAM", "LegacySchema", "",
@@ -10656,3 +10658,5 @@ void MainWindow::on_btnDelWhitelist_clicked() { mymethod->delKextWhitelist(); }
 void MainWindow::on_btnStopKextUpdate_clicked() {
   mymethod->cancelKextUpdate();
 }
+
+void MainWindow::on_btnKextPreset_clicked() { mymethod->kextPreset(); }

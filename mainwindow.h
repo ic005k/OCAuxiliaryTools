@@ -920,6 +920,8 @@ class MainWindow : public QMainWindow {
 
   void on_btnStopKextUpdate_clicked();
 
+  void on_btnKextPreset_clicked();
+
  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;
