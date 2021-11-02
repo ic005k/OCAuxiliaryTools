@@ -131,6 +131,15 @@ MainWindow::MainWindow(QWidget* parent)
   this->setWindowModified(false);
   updateIconStatus();
 
+  if (myDatabase->ui->chkBoxLastFile->isChecked()) {
+    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+    QSettings Reg(qfile, QSettings::IniFormat);
+    QString file = Reg.value("LastFileName").toString();
+    if (QFile(file).exists()) {
+      openFile(file);
+    }
+  }
+
   loading = false;
   Initialization = false;
 }
@@ -211,8 +220,6 @@ void MainWindow::openFile(QString PlistFileName) {
       return;
     }
 
-    setWindowTitle(title + PlistFileName);
-
     mymethod->removeFileSystemWatch(SaveFileName);
     SaveFileName = PlistFileName;
     mymethod->addFileSystemWatch(SaveFileName);
@@ -220,10 +227,16 @@ void MainWindow::openFile(QString PlistFileName) {
   } else
     return;
 
+  if (myDatabase->ui->chkBoxLastFile->isChecked()) {
+    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+    QSettings Reg(qfile, QSettings::IniFormat);
+    Reg.setValue("LastFileName", SaveFileName);
+  }
+
   loading = true;
 
   //初始化
-  mymethod->init_Table(-1);
+  init_Table(-1);
   listDPAdd.clear();
   listDPDel.clear();
   listNVRAMAdd.clear();
@@ -282,11 +295,75 @@ void MainWindow::openFile(QString PlistFileName) {
   openFileAfter();
   checkFiles();
   FindTextChange = true;
-  strOrgMd5 = mymethod->getMD5(SaveFileName);
-  mymethod->readKextWhitelistINI();
+  strOrgMd5 = getMD5(SaveFileName);
+  readKextWhitelistINI();
 
+  setWindowTitle(title + PlistFileName);
   this->setWindowModified(false);
   updateIconStatus();
+}
+
+bool MainWindow::IsProcessExist(QString processName) {
+  QProcess process;
+  process.start("tasklist", QStringList() << "");
+  process.waitForFinished();
+
+  QByteArray result = process.readAllStandardOutput();
+  QString str = result;
+  if (str.contains(processName))
+    return true;
+  else
+    return false;
+}
+
+void MainWindow::readKextWhitelistINI() {
+  if (!QFileInfo(SaveFileName).exists()) return;
+  ui->listWhite->clear();
+  QString qfile = QDir::homePath() + "/.config/QtOCC/kextWhitelist.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  if (QFileInfo(qfile).exists()) {
+    int count = Reg.value(SaveFileName).toInt();
+    for (int i = 0; i < count; i++) {
+      QString str = Reg.value(SaveFileName + QString::number(i)).toString();
+      ui->listWhite->addItem(str);
+    }
+  }
+}
+
+QString MainWindow::getMD5(QString targetFile) {
+  QCryptographicHash hashTest(QCryptographicHash::Md5);
+  QFile f2(targetFile);
+  f2.open(QFile::ReadOnly);
+  hashTest.reset();  // 重置（很重要）
+  hashTest.addData(&f2);
+  QString targetHash = hashTest.result().toHex();
+  f2.close();
+  return targetHash;
+}
+
+void MainWindow::init_Table(int index) {
+  if (index == -1) {
+    listOfTableWidget.clear();
+    listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
+    for (int i = 0; i < listOfTableWidget.count(); i++) {
+      QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
+
+      w->setRowCount(0);
+    }
+  } else {
+    for (int i = 0; i < ui->tabTotal->tabBar()->count(); i++) {
+      if (index == i) {
+        listOfTableWidget.clear();
+        listOfTableWidget =
+            getAllTableWidget(getAllUIControls(ui->tabTotal->widget(i)));
+        for (int j = 0; j < listOfTableWidget.count(); j++) {
+          QTableWidget* w = (QTableWidget*)listOfTableWidget.at(j);
+
+          w->setRowCount(0);
+        }
+      }
+    }
+  }
 }
 
 void MainWindow::openFileAfter() {
@@ -303,10 +380,96 @@ void MainWindow::openFileAfter() {
 }
 
 void MainWindow::checkFiles() {
-  mymethod->markColor(ui->table_acpi_add, strACPI, 0);
-  mymethod->markColor(ui->table_kernel_add, strKexts, 0);
-  mymethod->markColor(ui->table_uefi_drivers, strDrivers, 0);
-  mymethod->markColor(ui->tableTools, strTools, 0);
+  markColor(ui->table_acpi_add, strACPI, 0);
+  markColor(ui->table_kernel_add, strKexts, 0);
+  markColor(ui->table_uefi_drivers, strDrivers, 0);
+  markColor(ui->tableTools, strTools, 0);
+}
+
+void MainWindow::markColor(QTableWidget* table, QString path, int col) {
+  QIcon icon;
+  QTableWidgetItem* id1;
+  for (int i = 0; i < table->rowCount(); i++) {
+    QString strFile = path + table->item(i, col)->text().trimmed();
+    QFileInfo fi(strFile);
+    if (fi.exists()) {
+      icon.addFile(":/icon/green.svg", QSize(10, 10));
+      id1 = new QTableWidgetItem(icon, QString::number(i + 1));
+      table->setVerticalHeaderItem(i, id1);
+
+      if (table == ui->table_kernel_add) {
+        QString strVer = getKextVersion(strKexts + table->item(i, 0)->text());
+        QString text = table->item(i, 1)->text();
+        if (text.trimmed().length() > 0) {
+          if (text.mid(0, 1) == "V") {
+            QStringList strList = text.split("|");
+            if (strList.count() >= 2) {
+              text.replace(strList.at(0), "");
+              text = "V" + strVer + " " + text;
+            } else
+              text = "V" + strVer;
+
+          } else
+            text = "V" + strVer + " | " + text;
+
+        } else
+          text = "V" + strVer;
+        table->setItem(i, 1, new QTableWidgetItem(text));
+      }
+
+    } else {
+      icon.addFile(":/icon/red.svg", QSize(10, 10));
+      id1 = new QTableWidgetItem(icon, QString::number(i + 1));
+      table->setVerticalHeaderItem(i, id1);
+    }
+  }
+}
+
+QString MainWindow::getKextVersion(QString kextFile) {
+  QString strInfo = kextFile + "/Contents/Info.plist";
+  QTextEdit* txtEdit = new QTextEdit;
+  txtEdit->setPlainText(loadText(strInfo));
+  for (int i = 0; i < txtEdit->document()->lineCount(); i++) {
+    QString str0 = getTextEditLineText(txtEdit, i).trimmed();
+    str0.replace("</key>", "");
+    str0.replace("<key>", "");
+    if (str0 == "CFBundleVersion") {
+      QString str1 = getTextEditLineText(txtEdit, i + 1).trimmed();
+      str1.replace("<string>", "");
+      str1.replace("</string>", "");
+      return str1;
+    }
+  }
+
+  return "";
+}
+
+QString MainWindow::getTextEditLineText(QTextEdit* txtEdit, int i) {
+  QTextBlock block = txtEdit->document()->findBlockByNumber(i);
+  txtEdit->setTextCursor(QTextCursor(block));
+  QString lineText = txtEdit->document()->findBlockByNumber(i).text().trimmed();
+  return lineText;
+}
+
+QString MainWindow::loadText(QString textFile) {
+  QFileInfo fi(textFile);
+  if (fi.exists()) {
+    QFile file(textFile);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+      QMessageBox::warning(
+          this, tr("Application"),
+          tr("Cannot read file %1:\n%2.")
+              .arg(QDir::toNativeSeparators(textFile), file.errorString()));
+
+    } else {
+      QTextStream in(&file);
+      in.setCodec("UTF-8");
+      QString text = in.readAll();
+      return text;
+    }
+  }
+
+  return "";
 }
 
 void MainWindow::on_btnOpen() {
@@ -1597,9 +1760,39 @@ void MainWindow::on_table_dp_add0_cellClicked(int row, int column) {
   Q_UNUSED(column);
 
   // loadRightTable(ui->table_dp_add0, ui->table_dp_add);
-  mymethod->readLeftTable(ui->table_dp_add0, ui->table_dp_add);
+  readLeftTable(ui->table_dp_add0, ui->table_dp_add);
 
   setStatusBarText(ui->table_dp_add0);
+}
+
+void MainWindow::readLeftTable(QTableWidget* t0, QTableWidget* t) {
+  if (!t0->currentIndex().isValid()) return;
+  blReadLeftTable = true;
+  bool md = isWindowModified();
+  QString strLeft = t0->currentItem()->text().trimmed();
+  QStringList listAdd;
+  if (t0 == ui->table_dp_add0) listAdd = listDPAdd;
+  if (t0 == ui->table_nv_add0) listAdd = listNVRAMAdd;
+  // for (int i = 0; i < listAdd.count(); i++) qDebug() << listAdd.at(i);
+  t->setRowCount(0);
+  for (int i = 0; i < listAdd.count(); i++) {
+    QString str = listAdd.at(i);
+    QStringList list = str.split("|");
+    if (list.count() == 4) {
+      if (strLeft == list.at(0)) {
+        int count = t->rowCount();
+        t->setRowCount(count + 1);
+        t->setItem(count, 0, new QTableWidgetItem(list.at(1)));
+        QTableWidgetItem* newItem1 = new QTableWidgetItem(list.at(2));
+        newItem1->setTextAlignment(Qt::AlignCenter);
+        t->setItem(count, 1, newItem1);
+        t->setItem(count, 2, new QTableWidgetItem(list.at(3)));
+      }
+    }
+  }
+  blReadLeftTable = false;
+  setWindowModified(md);
+  updateIconStatus();
 }
 
 void MainWindow::on_table_dp_add_itemChanged(QTableWidgetItem* item) {
@@ -1620,7 +1813,7 @@ void MainWindow::on_table_nv_add0_cellClicked(int row, int column) {
   Q_UNUSED(column);
 
   // loadRightTable(ui->table_nv_add0, ui->table_nv_add);
-  mymethod->readLeftTable(ui->table_nv_add0, ui->table_nv_add);
+  readLeftTable(ui->table_nv_add0, ui->table_nv_add);
 }
 
 void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item) {
@@ -1701,7 +1894,7 @@ void MainWindow::on_table_nv_del0_cellClicked(int row, int column) {
   Q_UNUSED(column);
 
   // loadRightTable(ui->table_nv_del0, ui->table_nv_del);
-  mymethod->readLeftTableOnlyValue(ui->table_nv_del0, ui->table_nv_del);
+  readLeftTableOnlyValue(ui->table_nv_del0, ui->table_nv_del);
 }
 
 void MainWindow::on_table_nv_ls0_cellClicked(int row, int column) {
@@ -1709,7 +1902,7 @@ void MainWindow::on_table_nv_ls0_cellClicked(int row, int column) {
   Q_UNUSED(column);
 
   // loadRightTable(ui->table_nv_ls0, ui->table_nv_ls);
-  mymethod->readLeftTableOnlyValue(ui->table_nv_ls0, ui->table_nv_ls);
+  readLeftTableOnlyValue(ui->table_nv_ls0, ui->table_nv_ls);
 }
 
 void MainWindow::on_table_nv_del_itemChanged(QTableWidgetItem* item) {
@@ -1745,9 +1938,36 @@ void MainWindow::on_table_dp_del0_cellClicked(int row, int column) {
   Q_UNUSED(column);
 
   // loadRightTable(ui->table_dp_del0, ui->table_dp_del);
-  mymethod->readLeftTableOnlyValue(ui->table_dp_del0, ui->table_dp_del);
+  readLeftTableOnlyValue(ui->table_dp_del0, ui->table_dp_del);
 
   setStatusBarText(ui->table_dp_del0);
+}
+
+void MainWindow::readLeftTableOnlyValue(QTableWidget* t0, QTableWidget* t) {
+  if (!t0->currentIndex().isValid()) return;
+  blReadLeftTable = true;
+  bool md = isWindowModified();
+  QString strLeft = t0->currentItem()->text().trimmed();
+  QStringList listAdd;
+
+  if (t0 == ui->table_dp_del0) listAdd = listDPDel;
+  if (t0 == ui->table_nv_del0) listAdd = listNVRAMDel;
+  if (t0 == ui->table_nv_ls0) listAdd = listNVRAMLs;
+  t->setRowCount(0);
+  for (int i = 0; i < listAdd.count(); i++) {
+    QString str = listAdd.at(i);
+    QStringList list = str.split("|");
+    if (list.count() == 3) {
+      if (strLeft == list.at(1) && t0->objectName() == list.at(0)) {
+        int count = t->rowCount();
+        t->setRowCount(count + 1);
+        t->setItem(count, 0, new QTableWidgetItem(list.at(2)));
+      }
+    }
+  }
+  blReadLeftTable = false;
+  setWindowModified(md);
+  updateIconStatus();
 }
 
 void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item) {
@@ -2354,7 +2574,7 @@ void MainWindow::SavePlist(QString FileName) {
   checkFiles();
 
   FileSystemWatcher::addWatchPath(SaveFileName);
-  strOrgMd5 = mymethod->getMD5(SaveFileName);
+  strOrgMd5 = getMD5(SaveFileName);
 
   if (!PListSerializer::fileValidation(FileName)) {
     int war = QMessageBox::warning(
@@ -7158,27 +7378,27 @@ QString MainWindow::getMacInfo(const QString& cmd) {
 
 void MainWindow::on_table_dp_add0_itemSelectionChanged() {
   // loadRightTable(ui->table_dp_add0, ui->table_dp_add);
-  mymethod->readLeftTable(ui->table_dp_add0, ui->table_dp_add);
+  readLeftTable(ui->table_dp_add0, ui->table_dp_add);
 }
 
 void MainWindow::on_table_dp_del0_itemSelectionChanged() {
   // loadRightTable(ui->table_dp_del0, ui->table_dp_del);
-  mymethod->readLeftTableOnlyValue(ui->table_dp_del0, ui->table_dp_del);
+  readLeftTableOnlyValue(ui->table_dp_del0, ui->table_dp_del);
 }
 
 void MainWindow::on_table_nv_add0_itemSelectionChanged() {
   // loadRightTable(ui->table_nv_add0, ui->table_nv_add);
-  mymethod->readLeftTable(ui->table_nv_add0, ui->table_nv_add);
+  readLeftTable(ui->table_nv_add0, ui->table_nv_add);
 }
 
 void MainWindow::on_table_nv_del0_itemSelectionChanged() {
   // loadRightTable(ui->table_nv_del0, ui->table_nv_del);
-  mymethod->readLeftTableOnlyValue(ui->table_nv_del0, ui->table_nv_del);
+  readLeftTableOnlyValue(ui->table_nv_del0, ui->table_nv_del);
 }
 
 void MainWindow::on_table_nv_ls0_itemSelectionChanged() {
   // loadRightTable(ui->table_nv_ls0, ui->table_nv_ls);
-  mymethod->readLeftTableOnlyValue(ui->table_nv_ls0, ui->table_nv_ls);
+  readLeftTableOnlyValue(ui->table_nv_ls0, ui->table_nv_ls);
 }
 
 void MainWindow::on_table_acpi_add_itemEntered(QTableWidgetItem* item) {

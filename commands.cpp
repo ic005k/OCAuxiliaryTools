@@ -54,12 +54,12 @@ void DeleteCommand::undo() {
     // mw_one->read_ini(m_table, m_table0, m_table0CurrentRow);
     if (m_table == mw_one->ui->table_dp_add0 ||
         m_table == mw_one->ui->table_nv_add0)
-      mymethod->readLeftTable(m_table, m_table0);
+      mw_one->readLeftTable(m_table, m_table0);
 
     if (m_table == mw_one->ui->table_dp_del0 ||
         m_table == mw_one->ui->table_nv_del0 ||
         m_table == mw_one->ui->table_nv_ls0)
-      mymethod->readLeftTableOnlyValue(m_table, m_table0);
+      mw_one->readLeftTableOnlyValue(m_table, m_table0);
   }
 
   if (m_table0 != NULL && !m_loadINI) {
@@ -85,7 +85,7 @@ void DeleteCommand::redo() {
 
   if (m_loadINI) {
     // mw_one->read_ini(m_table, m_table0, m_table0CurrentRow);
-    mymethod->readLeftTable(m_table, m_table0);
+    mw_one->readLeftTable(m_table, m_table0);
   }
 
   mw_one->loading = true;

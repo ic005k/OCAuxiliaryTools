@@ -184,7 +184,7 @@ p, li { white-space: pre-wrap; }
       <attribute name="title">
        <string>Misc</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_4">
+      <layout class="QGridLayout" name="gridLayout_7">
        <item row="0" column="0">
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
@@ -317,6 +317,22 @@ p, li { white-space: pre-wrap; }
               </widget>
              </item>
             </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>File Options</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="chkBoxLastFile">
+            <property name="text">
+             <string>Automatically open the last opened file</string>
+            </property>
            </widget>
           </item>
          </layout>

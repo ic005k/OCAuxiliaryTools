@@ -313,7 +313,7 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
 
 // 文件修改时调用
 void FileSystemWatcher::fileUpdated(const QString& path) {
-  mw_one->strByModiMd5 = mymethod->getMD5(SaveFileName);
+  mw_one->strByModiMd5 = mw_one->getMD5(SaveFileName);
   if (mw_one->strOrgMd5 != mw_one->strByModiMd5) {
     mw_one->ui->frameTip->setHidden(false);
   } else

@@ -33,7 +33,7 @@ class Method : public QMainWindow {
   void doProcessFinished();
   void doProcessDownloadProgress(qint64, qint64);
   QStringList strDLInfoList;
-  QString getMD5(QString targetFile);
+
   void goTable(QTableWidget *table);
   QWidget *getSubTabWidget(int m, int s);
   void goACPITable(QTableWidget *table);
@@ -61,7 +61,7 @@ class Method : public QMainWindow {
 
   void removeFileSystemWatch(QString strOpenFile);
   QStringList deDuplication(QStringList FileName, QTableWidget *table, int col);
-  void markColor(QTableWidget *table, QString path, int col);
+
   void OCValidationProcessing();
   void setStatusBarTip(QWidget *w);
 
@@ -93,13 +93,13 @@ class Method : public QMainWindow {
   void delKextWhitelist();
   bool isKextWhitelist(QString kextName);
   void writeKextWhitelistINI();
-  void readKextWhitelistINI();
+
   QString getHTMLSource(QString URLSTR, bool writeFile);
   QStringList getDLUrlList(QString url);
   void getLastReleaseFromHtml(QString url);
-  void readLeftTable(QTableWidget *t0, QTableWidget *t);
+
   void writeLeftTable(QTableWidget *t0, QTableWidget *t);
-  void readLeftTableOnlyValue(QTableWidget *t0, QTableWidget *t);
+
   void writeLeftTableOnlyValue(QTableWidget *t0, QTableWidget *t);
   void kextPreset();
  public slots:

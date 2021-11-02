@@ -341,6 +341,15 @@ class MainWindow : public QMainWindow {
   void checkFiles();
   void sortForKexts();
 
+  void readLeftTable(QTableWidget* t0, QTableWidget* t);
+  void readLeftTableOnlyValue(QTableWidget* t0, QTableWidget* t);
+  QString getMD5(QString targetFile);
+  void readKextWhitelistINI();
+  bool IsProcessExist(QString processName);
+  void markColor(QTableWidget* table, QString path, int col);
+  QString getKextVersion(QString kextFile);
+  QString loadText(QString textFile);
+  QString getTextEditLineText(QTextEdit* txtEdit, int i);
  public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -1036,6 +1045,7 @@ class MainWindow : public QMainWindow {
   void showDlgPar(bool b1, bool b2, bool b3, bool b4);
 
   void init_ToolButtonStyle();
+  void init_Table(int index);
 };
 
 #endif  // MAINWINDOW_H

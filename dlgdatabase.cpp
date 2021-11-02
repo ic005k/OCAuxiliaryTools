@@ -72,6 +72,7 @@ dlgDatabase::dlgDatabase(QWidget *parent)
         Reg.value("Web", "https://github.com/").toString());
     ui->rbtnAPI->setChecked(Reg.value("rbtnAPI").toBool());
     ui->rbtnWeb->setChecked(Reg.value("rbtnWeb").toBool());
+    ui->chkBoxLastFile->setChecked(Reg.value("LastFile").toBool());
 
   } else {
     if (locale.language() == QLocale::Chinese) {
@@ -429,3 +430,9 @@ void dlgDatabase::on_rbtnAPI_clicked() {
 }
 
 void dlgDatabase::on_rbtnWeb_clicked() { on_rbtnAPI_clicked(); }
+
+void dlgDatabase::on_chkBoxLastFile_clicked(bool checked) {
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  Reg.setValue("LastFile", checked);
+}

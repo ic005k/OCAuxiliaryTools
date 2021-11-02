@@ -543,17 +543,6 @@ QString Method::getKextBin(QString kextName) {
   return str2;
 }
 
-QString Method::getMD5(QString targetFile) {
-  QCryptographicHash hashTest(QCryptographicHash::Md5);
-  QFile f2(targetFile);
-  f2.open(QFile::ReadOnly);
-  hashTest.reset();  // 重置（很重要）
-  hashTest.addData(&f2);
-  QString targetHash = hashTest.result().toHex();
-  f2.close();
-  return targetHash;
-}
-
 void Method::setStatusBarTip(QWidget* w) {
   QString strStatus0 = w->toolTip();
   QString strStatus1;
@@ -1251,45 +1240,6 @@ QStringList Method::deDuplication(QStringList FileName, QTableWidget* table,
   return FileName;
 }
 
-void Method::markColor(QTableWidget* table, QString path, int col) {
-  QIcon icon;
-  QTableWidgetItem* id1;
-  for (int i = 0; i < table->rowCount(); i++) {
-    QString strFile = path + table->item(i, col)->text().trimmed();
-    QFileInfo fi(strFile);
-    if (fi.exists()) {
-      icon.addFile(":/icon/green.svg", QSize(10, 10));
-      id1 = new QTableWidgetItem(icon, QString::number(i + 1));
-      table->setVerticalHeaderItem(i, id1);
-
-      if (table == mw_one->ui->table_kernel_add) {
-        QString strVer = getKextVersion(strKexts + table->item(i, 0)->text());
-        QString text = table->item(i, 1)->text();
-        if (text.trimmed().length() > 0) {
-          if (text.mid(0, 1) == "V") {
-            QStringList strList = text.split("|");
-            if (strList.count() >= 2) {
-              text.replace(strList.at(0), "");
-              text = "V" + strVer + " " + text;
-            } else
-              text = "V" + strVer;
-
-          } else
-            text = "V" + strVer + " | " + text;
-
-        } else
-          text = "V" + strVer;
-        table->setItem(i, 1, new QTableWidgetItem(text));
-      }
-
-    } else {
-      icon.addFile(":/icon/red.svg", QSize(10, 10));
-      id1 = new QTableWidgetItem(icon, QString::number(i + 1));
-      table->setVerticalHeaderItem(i, id1);
-    }
-  }
-}
-
 void Method::OCValidationProcessing() {
   if (mw_one->ui->chkPickerAudioAssist->isChecked())
     mw_one->ui->chkAudioSupport->setChecked(true);
@@ -1389,50 +1339,6 @@ void Method::writeKextWhitelistINI() {
   }
 }
 
-void Method::readKextWhitelistINI() {
-  if (!QFileInfo(SaveFileName).exists()) return;
-  mw_one->ui->listWhite->clear();
-  QString qfile = QDir::homePath() + "/.config/QtOCC/kextWhitelist.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
-  if (QFileInfo(qfile).exists()) {
-    int count = Reg.value(SaveFileName).toInt();
-    for (int i = 0; i < count; i++) {
-      QString str = Reg.value(SaveFileName + QString::number(i)).toString();
-      mw_one->ui->listWhite->addItem(str);
-    }
-  }
-}
-
-void Method::readLeftTable(QTableWidget* t0, QTableWidget* t) {
-  if (!t0->currentIndex().isValid()) return;
-  mw_one->blReadLeftTable = true;
-  bool md = mw_one->isWindowModified();
-  QString strLeft = t0->currentItem()->text().trimmed();
-  QStringList listAdd;
-  if (t0 == mw_one->ui->table_dp_add0) listAdd = mw_one->listDPAdd;
-  if (t0 == mw_one->ui->table_nv_add0) listAdd = mw_one->listNVRAMAdd;
-  // for (int i = 0; i < listAdd.count(); i++) qDebug() << listAdd.at(i);
-  t->setRowCount(0);
-  for (int i = 0; i < listAdd.count(); i++) {
-    QString str = listAdd.at(i);
-    QStringList list = str.split("|");
-    if (list.count() == 4) {
-      if (strLeft == list.at(0)) {
-        int count = t->rowCount();
-        t->setRowCount(count + 1);
-        t->setItem(count, 0, new QTableWidgetItem(list.at(1)));
-        QTableWidgetItem* newItem1 = new QTableWidgetItem(list.at(2));
-        newItem1->setTextAlignment(Qt::AlignCenter);
-        t->setItem(count, 1, newItem1);
-        t->setItem(count, 2, new QTableWidgetItem(list.at(3)));
-      }
-    }
-  }
-  mw_one->blReadLeftTable = false;
-  mw_one->setWindowModified(md);
-  mw_one->updateIconStatus();
-}
-
 void Method::writeLeftTable(QTableWidget* t0, QTableWidget* t) {
   if (!t0->currentIndex().isValid()) return;
   if (mw_one->blReadLeftTable) {
@@ -1461,33 +1367,6 @@ void Method::writeLeftTable(QTableWidget* t0, QTableWidget* t) {
 
   if (t0 == mw_one->ui->table_nv_add0) mw_one->listNVRAMAdd = listAdd;
   if (t0 == mw_one->ui->table_dp_add0) mw_one->listDPAdd = listAdd;
-}
-
-void Method::readLeftTableOnlyValue(QTableWidget* t0, QTableWidget* t) {
-  if (!t0->currentIndex().isValid()) return;
-  mw_one->blReadLeftTable = true;
-  bool md = mw_one->isWindowModified();
-  QString strLeft = t0->currentItem()->text().trimmed();
-  QStringList listAdd;
-
-  if (t0 == mw_one->ui->table_dp_del0) listAdd = mw_one->listDPDel;
-  if (t0 == mw_one->ui->table_nv_del0) listAdd = mw_one->listNVRAMDel;
-  if (t0 == mw_one->ui->table_nv_ls0) listAdd = mw_one->listNVRAMLs;
-  t->setRowCount(0);
-  for (int i = 0; i < listAdd.count(); i++) {
-    QString str = listAdd.at(i);
-    QStringList list = str.split("|");
-    if (list.count() == 3) {
-      if (strLeft == list.at(1) && t0->objectName() == list.at(0)) {
-        int count = t->rowCount();
-        t->setRowCount(count + 1);
-        t->setItem(count, 0, new QTableWidgetItem(list.at(2)));
-      }
-    }
-  }
-  mw_one->blReadLeftTable = false;
-  mw_one->setWindowModified(md);
-  mw_one->updateIconStatus();
 }
 
 void Method::writeLeftTableOnlyValue(QTableWidget* t0, QTableWidget* t) {

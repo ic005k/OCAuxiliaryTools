@@ -57,6 +57,8 @@ class dlgDatabase : public QDialog {
 
   void on_rbtnWeb_clicked();
 
+  void on_chkBoxLastFile_clicked(bool checked);
+
  private:
  protected:
   void closeEvent(QCloseEvent *event);

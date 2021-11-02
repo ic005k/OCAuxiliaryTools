@@ -79,13 +79,13 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   targetFile = mw_one->targetFiles.at(currentRow);
 
   if (mymethod->isKext(sourceFile))
-    sourceHash = mymethod->getMD5(mymethod->getKextBin(sourceFile));
+    sourceHash = mw_one->getMD5(mymethod->getKextBin(sourceFile));
   else
-    sourceHash = mymethod->getMD5(sourceFile);
+    sourceHash = mw_one->getMD5(sourceFile);
   if (mymethod->isKext(targetFile))
-    targetHash = mymethod->getMD5(mymethod->getKextBin(targetFile));
+    targetHash = mw_one->getMD5(mymethod->getKextBin(targetFile));
   else
-    targetHash = mymethod->getMD5(targetFile);
+    targetHash = mw_one->getMD5(targetFile);
 
   QFileInfo fiSource(sourceFile);
   QFileInfo fiTarget(targetFile);
