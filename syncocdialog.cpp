@@ -49,13 +49,26 @@ SyncOCDialog::~SyncOCDialog() { delete ui; }
 
 void SyncOCDialog::on_btnStartSync_clicked() {
   bool ok = true;
-  for (int i = 0; i < ui->listSource->count(); i++) {
-    ui->listSource->setCurrentRow(i);
-    ui->listTarget->setCurrentRow(i);
-
+  for (int i = 0; i < mw_one->sourceKexts.count(); i++) {
     // 数据库里面必须要有这个文件（源文件必须存在）
-    QString strSou = mw_one->sourceFiles.at(i);
-    QString strTar = mw_one->targetFiles.at(i);
+    QString strSou = mw_one->sourceKexts.at(i);
+    QString strTar = mw_one->targetKexts.at(i);
+    if (QFileInfo(strSou).exists()) {
+      if (ui->listSource->item(i)->checkState() == Qt::Checked) {
+        if (!mymethod->isKext(strSou)) {
+          QFile::remove(strTar);
+          ok = QFile::copy(strSou, strTar);
+        } else {
+          mw_one->copyDirectoryFiles(strSou, strTar, true);
+        }
+      }
+    }
+  }
+
+  for (int i = 0; i < mw_one->sourceOpenCore.count(); i++) {
+    // 数据库里面必须要有这个文件（源文件必须存在）
+    QString strSou = mw_one->sourceOpenCore.at(i);
+    QString strTar = mw_one->targetOpenCore.at(i);
     if (QFileInfo(strSou).exists()) {
       if (ui->listTarget->item(i)->checkState() == Qt::Checked) {
         if (!mymethod->isKext(strSou)) {
@@ -86,7 +99,10 @@ void SyncOCDialog::on_btnStartSync_clicked() {
 void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   if (currentRow < 0) return;
 
-  // setListWidgetStyle();
+  ui->listSource->item(ui->listSource->currentRow())
+      ->setForeground(QBrush(Qt::black));
+  ui->listSource->item(ui->listSource->currentRow())
+      ->setBackground(QBrush(QColor("#FFD39B")));
 
   QString sourceModi, targetModi, sourceFile, targetFile, sourceHash,
       targetHash;
@@ -118,7 +134,7 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
 
   ui->lblSourceLastModi->setText(strShowFileName + "\n\n" +
                                  tr("Source File: ") + "md5    " + sourceHash);
-  ui->lblTargetLastModi->setText("\n" + tr("Source File: ") + "md5    " +
+  ui->lblTargetLastModi->setText("\n" + tr("Target File: ") + "md5    " +
                                  targetHash);
 
   if (sourceHash != targetHash) {
@@ -141,10 +157,7 @@ void SyncOCDialog::on_listTarget_itemClicked(QListWidgetItem* item) {
 }
 
 void SyncOCDialog::setListWidgetStyle() {
-  QString fileName = mw_one->sourceFiles.at(ui->listSource->currentRow());
-  if (mymethod->isWhatFile(fileName, "kext")) {
-    setListWidgetColor("#FFD39B");
-  }
+  QString fileName = mw_one->sourceOpenCore.at(ui->listTarget->currentRow());
   if (mymethod->isWhatFile(fileName, "efi")) {
     setListWidgetColor("#E0EEEE");
   }
@@ -157,20 +170,16 @@ void SyncOCDialog::setListWidgetStyle() {
 }
 
 void SyncOCDialog::setListWidgetColor(QString color) {
-  ui->listSource->item(ui->listSource->currentRow())
+  ui->listTarget->item(ui->listTarget->currentRow())
       ->setForeground(QBrush(Qt::black));
-  ui->listSource->item(ui->listSource->currentRow())
-      ->setBackground(QBrush(QColor(color)));
-  ui->listTarget->item(ui->listSource->currentRow())
-      ->setForeground(QBrush(Qt::black));
-  ui->listTarget->item(ui->listSource->currentRow())
+  ui->listTarget->item(ui->listTarget->currentRow())
       ->setBackground(QBrush(QColor(color)));
 }
 
 void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
   if (currentRow < 0) return;
 
-  // setListWidgetStyle();
+  setListWidgetStyle();
 
   QString sourceModi, targetModi, sourceFile, targetFile, sourceHash,
       targetHash;
@@ -202,7 +211,7 @@ void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
 
   ui->lblSourceLastModi_2->setText(
       strShowFileName + "\n\n" + tr("Source File: ") + "md5    " + sourceHash);
-  ui->lblTargetLastModi_2->setText("\n" + tr("Targer File: ") + "md5    " +
+  ui->lblTargetLastModi_2->setText("\n" + tr("Target File: ") + "md5    " +
                                    targetHash);
 
   if (sourceHash != targetHash) {

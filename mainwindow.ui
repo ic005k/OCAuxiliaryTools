@@ -10478,6 +10478,9 @@ Enable this option to be able to see all the boot options when having multiple d
    <property name="text">
     <string>Synchronize OC main program</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+6</string>
+   </property>
   </action>
   <action name="actionDifferences">
    <property name="text">

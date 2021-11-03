@@ -9927,7 +9927,6 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   dlgSyncOC->ui->listTarget->clear();
   for (int i = 0; i < sourceFiles.count(); i++) {
     QString strF1 = sourceFiles.at(i);
-    QString strF2 = targetFiles.at(i);
     if (mymethod->isKext(sourceFiles.at(i))) {
       dlgSyncOC->ui->listSource->addItem(
           mymethod->getFileName(sourceFiles.at(i)));

@@ -176,6 +176,10 @@ void Method::finishKextUpdate() {
   mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(false);
   mw_one->checkFiles();
   mw_one->repaint();
+  int n = mw_one->dlgSyncOC->ui->listSource->currentRow();
+  for (int i = 0; i < mw_one->dlgSyncOC->ui->listSource->count(); i++)
+    mw_one->dlgSyncOC->ui->listSource->setCurrentRow(i);
+  mw_one->dlgSyncOC->ui->listSource->setCurrentRow(n);
 }
 
 void Method::kextUpdate() {
@@ -341,7 +345,7 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
       QString::fromLatin1("%1 %2").arg(speed, 3, 'f', 1).arg(unit);
 
   mw_one->dlgSyncOC->ui->labelShowDLInfo->setText(
-      kextName + " | " + tr("Download Progress") + " : " +
+      kextName + "\n" + tr("Download Progress") + " : " +
       GetFileSize(recv_total, 2) + " -> " + GetFileSize(all_total, 2) + "    " +
       strSpeed);
 
