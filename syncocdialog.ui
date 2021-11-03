@@ -6,31 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>665</width>
+    <width>764</width>
     <height>493</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Sync OC</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_6">
+  <layout class="QGridLayout" name="gridLayout_9">
    <item row="0" column="0">
-    <layout class="QGridLayout" name="gridLayout_3">
+    <layout class="QGridLayout" name="gridLayout_7">
      <item row="1" column="0">
-      <widget class="QLabel" name="lblSource">
-       <property name="text">
-        <string>Source files</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="lblTarget">
-       <property name="text">
-        <string>Target files</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
       <widget class="QListWidget" name="listSource">
        <property name="minimumSize">
         <size>
@@ -61,7 +47,25 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblSource">
+       <property name="text">
+        <string>Kexts</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1" rowspan="5">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <layout class="QGridLayout" name="gridLayout_8">
+     <item row="1" column="0">
       <widget class="QListWidget" name="listTarget">
        <property name="minimumSize">
         <size>
@@ -80,9 +84,16 @@
        </property>
       </widget>
      </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblTarget">
+       <property name="text">
+        <string>OpenCore</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
-   <item row="1" column="0">
+   <item row="1" column="2">
     <widget class="QCheckBox" name="chkIncludeResource">
      <property name="text">
       <string>Include Resource Directory</string>
@@ -93,59 +104,42 @@
     </widget>
    </item>
    <item row="2" column="0">
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="1" column="3">
-      <widget class="QLabel" name="label_2">
+    <layout class="QGridLayout" name="gridLayout_4">
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblSourceLastModi">
        <property name="text">
-        <string>Tip: Save the Config.plist to upgrade the configuration file. If the configuration file is not consistent with the current OC version, please save Config.plist.</string>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
+        <string>TextLabel</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="2" column="0">
-        <widget class="QLabel" name="lblTargetLastModi">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="lblSourceLastModi">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="lblTargetLastModi">
        <property name="text">
-        <string>Tip</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="Line" name="line_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <string>TextLabel</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
-   <item row="4" column="0">
+   <item row="2" column="2">
+    <layout class="QGridLayout" name="gridLayout_6">
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblTargetLastModi_2">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblSourceLastModi_2">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0">
     <layout class="QGridLayout" name="gridLayout_5">
      <item row="0" column="0">
       <widget class="QLabel" name="labelShowDLInfo">
@@ -154,7 +148,7 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
+     <item row="1" column="0">
       <widget class="QProgressBar" name="progressBarKext">
        <property name="minimumSize">
         <size>
@@ -175,8 +169,36 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="0">
-    <layout class="QGridLayout" name="gridLayout_4">
+   <item row="3" column="2">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Tip: Save the Config.plist to upgrade the configuration file. If the configuration file is not consistent with the current OC version, please save Config.plist.</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Tip</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="0">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="1">
+      <widget class="QPushButton" name="btnStop">
+       <property name="text">
+        <string>Stop</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="0">
       <widget class="QPushButton" name="btnUpKexts">
        <property name="text">
@@ -184,7 +206,11 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
+    </layout>
+   </item>
+   <item row="4" column="2">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="0">
       <widget class="QPushButton" name="btnStartSync">
        <property name="text">
         <string>Start Sync</string>

@@ -86,7 +86,8 @@ class MainWindow : public QMainWindow {
   QStringList listNVRAMLs;
   QStringList listDPAdd;
   QStringList listDPDel;
-  QStringList sourceFiles, targetFiles;
+  QStringList sourceFiles, targetFiles, sourceKexts, targetKexts,
+      sourceOpenCore, targetOpenCore;
   QString strConfigPath;
   void updateIconStatus();
   QTimer* timer;
@@ -344,7 +345,7 @@ class MainWindow : public QMainWindow {
   void readLeftTable(QTableWidget* t0, QTableWidget* t);
   void readLeftTableOnlyValue(QTableWidget* t0, QTableWidget* t);
   QString getMD5(QString targetFile);
-  void readKextWhitelistINI();
+
   bool IsProcessExist(QString processName);
   void markColor(QTableWidget* table, QString path, int col);
   QString getKextVersion(QString kextFile);
@@ -919,15 +920,7 @@ class MainWindow : public QMainWindow {
 
   void updateStatus();
 
-  void on_btnKextUpdate_clicked();
-
   void on_table_nv_add0_itemClicked(QTableWidgetItem* item);
-
-  void on_btnAddWhitelist_clicked();
-
-  void on_btnDelWhitelist_clicked();
-
-  void on_btnStopKextUpdate_clicked();
 
   void on_btnKextPreset_clicked();
 

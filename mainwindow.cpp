@@ -297,7 +297,6 @@ void MainWindow::openFile(QString PlistFileName) {
   checkFiles();
   FindTextChange = true;
   strOrgMd5 = getMD5(SaveFileName);
-  readKextWhitelistINI();
 
   setWindowTitle(title + PlistFileName);
   this->setWindowModified(false);
@@ -315,20 +314,6 @@ bool MainWindow::IsProcessExist(QString processName) {
     return true;
   else
     return false;
-}
-
-void MainWindow::readKextWhitelistINI() {
-  if (!QFileInfo(SaveFileName).exists()) return;
-  ui->listWhite->clear();
-  QString qfile = QDir::homePath() + "/.config/QtOCC/kextWhitelist.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
-  if (QFileInfo(qfile).exists()) {
-    int count = Reg.value(SaveFileName).toInt();
-    for (int i = 0; i < count; i++) {
-      QString str = Reg.value(SaveFileName + QString::number(i)).toString();
-      ui->listWhite->addItem(str);
-    }
-  }
 }
 
 QString MainWindow::getMD5(QString targetFile) {
@@ -895,17 +880,6 @@ void MainWindow::ParserDP(QVariantMap map) {
 }
 
 void MainWindow::initui_kernel() {
-  ui->progressBarKext->setMaximumWidth(50);
-  ui->progressBarKext->setVisible(false);
-  ui->labelShowDLInfo->setVisible(false);
-  ui->labelShowDLInfo->setText("");
-  ui->statusbar->addPermanentWidget(ui->labelShowDLInfo);
-  ui->statusbar->addPermanentWidget(ui->progressBarKext);
-  ui->listWhite->setMovement(QListView::Static);
-  ui->listWhite->setFocusPolicy(Qt::NoFocus);
-  ui->listWhite->setViewMode(QListWidget::IconMode);
-  ui->listWhite->setSpacing(4);
-
   QTableWidgetItem* id0;
   // Add
   ui->table_kernel_add->setColumnCount(8);
@@ -9912,11 +9886,10 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QString strKextName = ui->table_kernel_add->item(i, 0)->text().trimmed();
     if (mymethod->isEqualInList(strKextName, dbkextFileList)) {
-      if (ui->table_kernel_add->item(i, 2)->text().trimmed() != "" &&
-          !mymethod->isKextWhitelist(strKextName)) {
-        sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
-        targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
-      }
+      // if (ui->table_kernel_add->item(i, 2)->text().trimmed() != "") {
+      sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
+      targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
+      //}
     }
   }
 
@@ -9946,28 +9919,44 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     return;
   }
 
+  sourceKexts.clear();
+  targetKexts.clear();
+  sourceOpenCore.clear();
+  targetOpenCore.clear();
   dlgSyncOC->ui->listSource->clear();
   dlgSyncOC->ui->listTarget->clear();
   for (int i = 0; i < sourceFiles.count(); i++) {
-    dlgSyncOC->ui->listSource->addItem(
-        mymethod->getFileName(sourceFiles.at(i)));
+    QString strF1 = sourceFiles.at(i);
+    QString strF2 = targetFiles.at(i);
+    if (mymethod->isKext(sourceFiles.at(i))) {
+      dlgSyncOC->ui->listSource->addItem(
+          mymethod->getFileName(sourceFiles.at(i)));
+      sourceKexts.append(strF1);
+
+    } else
+      sourceOpenCore.append(strF1);
   }
   for (int i = 0; i < targetFiles.count(); i++) {
-    dlgSyncOC->ui->listTarget->addItem(
-        mymethod->getFileName(targetFiles.at(i)));
+    QString f = targetFiles.at(i);
+    if (!mymethod->isKext(f)) {
+      dlgSyncOC->ui->listTarget->addItem(mymethod->getFileName(f));
+      targetOpenCore.append(f);
+
+    } else
+      targetKexts.append(f);
   }
 
   for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
-    QString strF1 = sourceFiles.at(i);
-    QString strF2 = targetFiles.at(i);
-    if (!mymethod->isKext(strF1)) {
-      dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
-    } else {
-      if (mymethod->getKextVersion(strF1) > mymethod->getKextVersion(strF2))
-        dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
-      else
-        dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Unchecked);
-    }
+    QString strF1 = sourceKexts.at(i);
+    QString strF2 = targetKexts.at(i);
+    if (mymethod->getKextVersion(strF1) > mymethod->getKextVersion(strF2))
+      dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Checked);
+    else
+      dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Unchecked);
+  }
+
+  for (int i = 0; i < dlgSyncOC->ui->listTarget->count(); i++) {
+    dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
   }
 
   // Read check status
@@ -9975,6 +9964,24 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   QString strTag = SaveFileName;
   strTag.replace("/", "-");
   QSettings Reg(qfile, QSettings::IniFormat);
+  for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
+    QString strValue =
+        strTag + dlgSyncOC->ui->listSource->item(i)->text().trimmed();
+    bool yes = false;
+    for (int m = 0; m < Reg.allKeys().count(); m++) {
+      if (Reg.allKeys().at(m).contains(strValue)) {
+        yes = true;
+      }
+    }
+    if (yes) {
+      int strCheck = Reg.value(strValue).toInt();
+      if (strCheck == 2)
+        dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Checked);
+      if (strCheck == 0)
+        dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Unchecked);
+    }
+  }
+
   for (int i = 0; i < dlgSyncOC->ui->listTarget->count(); i++) {
     QString strValue =
         strTag + dlgSyncOC->ui->listTarget->item(i)->text().trimmed();
@@ -9996,17 +10003,17 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   dlgSyncOC->setModal(true);
   dlgSyncOC->show();
   dlgSyncOC->ui->listTarget->setFocus();
-  dlgSyncOC->blSame = true;
+  dlgSyncOC->ui->listTarget->setCurrentRow(0);
+  dlgSyncOC->ui->listSource->setCurrentRow(0);
+
   for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
     dlgSyncOC->ui->listSource->setCurrentRow(i);
   }
+  for (int i = 0; i < dlgSyncOC->ui->listTarget->count(); i++) {
+    dlgSyncOC->ui->listTarget->setCurrentRow(i);
+  }
   dlgSyncOC->repaint();
-  if (!dlgSyncOC->blSame)
-    dlgSyncOC->ui->btnStartSync->setEnabled(true);
-  else
-    dlgSyncOC->ui->btnStartSync->setEnabled(true);  // test
-  dlgSyncOC->repaint();
-  dlgSyncOC->ui->listSource->setCurrentRow(0);
+
   // Resources
   dlgSyncOC->sourceResourcesDir = pathSource + "EFI/OC/Resources/";
   dlgSyncOC->targetResourcesDir = DirName + "/OC/Resources/";
@@ -10868,16 +10875,6 @@ void MainWindow::updateIconStatus() {
 
 void MainWindow::on_table_nv_add0_itemClicked(QTableWidgetItem* item) {
   Q_UNUSED(item);
-}
-
-void MainWindow::on_btnKextUpdate_clicked() { mymethod->kextUpdate(); }
-
-void MainWindow::on_btnAddWhitelist_clicked() { mymethod->addKextWhitelist(); }
-
-void MainWindow::on_btnDelWhitelist_clicked() { mymethod->delKextWhitelist(); }
-
-void MainWindow::on_btnStopKextUpdate_clicked() {
-  mymethod->cancelKextUpdate();
 }
 
 void MainWindow::on_btnKextPreset_clicked() { mymethod->kextPreset(); }

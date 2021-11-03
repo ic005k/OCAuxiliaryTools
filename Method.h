@@ -89,10 +89,6 @@ class Method : public QMainWindow {
   void TextEditToFile(QTextEdit *txtEdit, QString fileName);
   QString getFileName(QString file);
   void cancelKextUpdate();
-  void addKextWhitelist();
-  void delKextWhitelist();
-  bool isKextWhitelist(QString kextName);
-  void writeKextWhitelistINI();
 
   QString getHTMLSource(QString URLSTR, bool writeFile);
   QStringList getDLUrlList(QString url);

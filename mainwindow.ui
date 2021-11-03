@@ -2123,67 +2123,6 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_12">
-            <item row="1" column="9">
-             <widget class="QLabel" name="label_121">
-              <property name="text">
-               <string>Kext upgrade excluded</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="12">
-             <widget class="QToolButton" name="btnDelWhitelist">
-              <property name="text">
-               <string>-</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1" colspan="3">
-             <widget class="QProgressBar" name="progressBarKext">
-              <property name="value">
-               <number>0</number>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0" colspan="13">
-             <widget class="QTableWidget" name="table_kernel_add">
-              <property name="styleSheet">
-               <string notr="true">QTableWidget::item::selected     
-{
-    color:white;                       
-    background:rgb(0, 124, 221);               
-}
-</string>
-              </property>
-              <property name="rowCount">
-               <number>0</number>
-              </property>
-              <property name="columnCount">
-               <number>8</number>
-              </property>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-             </widget>
-            </item>
-            <item row="1" column="7">
-             <widget class="QToolButton" name="btnKextUpdate">
-              <property name="toolTip">
-               <string>Update</string>
-              </property>
-              <property name="text">
-               <string>Update</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/start.png</normaloff>:/icon/start.png</iconset>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="3">
              <widget class="QToolButton" name="btnKernelAdd_Add">
               <property name="font">
@@ -2197,120 +2136,6 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               <property name="icon">
                <iconset resource="qtocc.qrc">
                 <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="7">
-             <widget class="QLabel" name="labelShowDLInfo">
-              <property name="text">
-               <string>DLInfo</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="8">
-             <widget class="QToolButton" name="btnStopKextUpdate">
-              <property name="toolTip">
-               <string>Stop</string>
-              </property>
-              <property name="text">
-               <string>Stop</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/stop.png</normaloff>:/icon/stop.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="10">
-             <widget class="QListWidget" name="listWhite">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>28</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="6">
-             <widget class="QCheckBox" name="checkKernelAdd">
-              <property name="text">
-               <string>Move item</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="11">
-             <widget class="QToolButton" name="btnAddWhitelist">
-              <property name="text">
-               <string>+</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QToolButton" name="btnKernelAdd_Up">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Up</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/up.png</normaloff>:/icon/up.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="4">
-             <widget class="QToolButton" name="btnKernelAdd_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="shortcut">
-               <string>Del</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QToolButton" name="btnKernelAdd_Down">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Down</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2346,6 +2171,108 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
              <widget class="QToolButton" name="btnKextPreset">
               <property name="text">
                <string>Preset</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QToolButton" name="btnKernelAdd_Del">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" colspan="8">
+             <widget class="QTableWidget" name="table_kernel_add">
+              <property name="styleSheet">
+               <string notr="true">QTableWidget::item::selected     
+{
+    color:white;                       
+    background:rgb(0, 124, 221);               
+}
+</string>
+              </property>
+              <property name="rowCount">
+               <number>0</number>
+              </property>
+              <property name="columnCount">
+               <number>8</number>
+              </property>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QToolButton" name="btnKernelAdd_Up">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Up</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/up.png</normaloff>:/icon/up.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QToolButton" name="btnKernelAdd_Down">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Down</string>
+              </property>
+              <property name="icon">
+               <iconset resource="qtocc.qrc">
+                <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="6">
+             <widget class="QCheckBox" name="checkKernelAdd">
+              <property name="text">
+               <string>Move item</string>
               </property>
              </widget>
             </item>

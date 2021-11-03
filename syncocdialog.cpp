@@ -86,14 +86,13 @@ void SyncOCDialog::on_btnStartSync_clicked() {
 void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   if (currentRow < 0) return;
 
-  setListWidgetStyle();
+  // setListWidgetStyle();
 
   QString sourceModi, targetModi, sourceFile, targetFile, sourceHash,
       targetHash;
-  ui->listTarget->setCurrentRow(currentRow);
 
-  sourceFile = mw_one->sourceFiles.at(currentRow);
-  targetFile = mw_one->targetFiles.at(currentRow);
+  sourceFile = mw_one->sourceKexts.at(currentRow);
+  targetFile = mw_one->targetKexts.at(currentRow);
 
   if (mymethod->isKext(sourceFile))
     sourceHash = mw_one->getMD5(mymethod->getKextBin(sourceFile));
@@ -118,41 +117,27 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
                       mymethod->getKextVersion(targetFile);
 
   ui->lblSourceLastModi->setText(strShowFileName + "\n\n" +
-                                 tr("Source file last modified") + " : " +
-                                 sourceModi + "\nmd5    " + sourceHash);
-  ui->lblTargetLastModi->setText(tr("Target file last modified") + " : " +
-                                 targetModi + "\nmd5    " + targetHash);
+                                 tr("Source File: ") + "md5    " + sourceHash);
+  ui->lblTargetLastModi->setText("\n" + tr("Source File: ") + "md5    " +
+                                 targetHash);
 
   if (sourceHash != targetHash) {
-    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
+    // ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
     ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
 
-    blSame = false;
+    // blSame = false;
   } else {
-    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
+    // ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
     ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
   }
 }
 
 void SyncOCDialog::on_listSource_itemClicked(QListWidgetItem* item) {
   Q_UNUSED(item);
-
-  int n = ui->listSource->currentRow();
-  ui->listTarget->setCurrentRow(n);
-  ui->listSource->setFocus();
-  QScrollBar* scrollBar;
-  scrollBar = ui->listTarget->verticalScrollBar();
-  scrollBar->setValue(ui->listSource->verticalScrollBar()->value());
 }
 
 void SyncOCDialog::on_listTarget_itemClicked(QListWidgetItem* item) {
   Q_UNUSED(item);
-  int n = ui->listTarget->currentRow();
-  ui->listSource->setCurrentRow(n);
-  ui->listTarget->setFocus();
-  QScrollBar* scrollBar;
-  scrollBar = ui->listSource->verticalScrollBar();
-  scrollBar->setValue(ui->listTarget->verticalScrollBar()->value());
 }
 
 void SyncOCDialog::setListWidgetStyle() {
@@ -183,7 +168,49 @@ void SyncOCDialog::setListWidgetColor(QString color) {
 }
 
 void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
-  Q_UNUSED(currentRow)
+  if (currentRow < 0) return;
+
+  // setListWidgetStyle();
+
+  QString sourceModi, targetModi, sourceFile, targetFile, sourceHash,
+      targetHash;
+
+  sourceFile = mw_one->sourceOpenCore.at(currentRow);
+  targetFile = mw_one->targetOpenCore.at(currentRow);
+
+  if (mymethod->isKext(sourceFile))
+    sourceHash = mw_one->getMD5(mymethod->getKextBin(sourceFile));
+  else
+    sourceHash = mw_one->getMD5(sourceFile);
+  if (mymethod->isKext(targetFile))
+    targetHash = mw_one->getMD5(mymethod->getKextBin(targetFile));
+  else
+    targetHash = mw_one->getMD5(targetFile);
+
+  QFileInfo fiSource(sourceFile);
+  QFileInfo fiTarget(targetFile);
+  sourceModi = fiSource.lastModified().toString();
+  targetModi = fiTarget.lastModified().toString();
+
+  QString strShowFileName;
+  if (!mymethod->isKext(sourceFile))
+    strShowFileName = fiSource.fileName();
+  else
+    strShowFileName = fiSource.fileName() + "    " +
+                      mymethod->getKextVersion(sourceFile) + "  ->  " +
+                      mymethod->getKextVersion(targetFile);
+
+  ui->lblSourceLastModi_2->setText(
+      strShowFileName + "\n\n" + tr("Source File: ") + "md5    " + sourceHash);
+  ui->lblTargetLastModi_2->setText("\n" + tr("Targer File: ") + "md5    " +
+                                   targetHash);
+
+  if (sourceHash != targetHash) {
+    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
+
+  } else {
+    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
+  }
 }
 
 void SyncOCDialog::closeEvent(QCloseEvent* event) {
@@ -193,13 +220,16 @@ void SyncOCDialog::closeEvent(QCloseEvent* event) {
   QString strTag = SaveFileName;
   strTag.replace("/", "-");
   QSettings Reg(qfile, QSettings::IniFormat);
+  for (int i = 0; i < ui->listSource->count(); i++) {
+    Reg.setValue(strTag + ui->listSource->item(i)->text().trimmed(),
+                 ui->listSource->item(i)->checkState());
+  }
   for (int i = 0; i < ui->listTarget->count(); i++) {
     Reg.setValue(strTag + ui->listTarget->item(i)->text().trimmed(),
                  ui->listTarget->item(i)->checkState());
   }
 }
 
-void SyncOCDialog::on_btnUpKexts_clicked() {
-  if (!mw_one->ui->btnKextUpdate->isEnabled()) return;
-  mw_one->ui->btnKextUpdate->clicked();
-}
+void SyncOCDialog::on_btnUpKexts_clicked() { mymethod->kextUpdate(); }
+
+void SyncOCDialog::on_btnStop_clicked() { mymethod->cancelKextUpdate(); }

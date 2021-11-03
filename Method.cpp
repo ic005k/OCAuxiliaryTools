@@ -75,7 +75,8 @@ QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
   QString code = reply->readAll();
   if (code == "") {
     QMessageBox::critical(this, "", tr("Network error!"));
-    mw_one->ui->btnKextUpdate->setEnabled(true);
+
+    mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
     blBreak = true;
     return "";
   }
@@ -157,9 +158,10 @@ void Method::finishKextUpdate() {
     dirTarget = strKexts + Name;
     dirTargetDatabase =
         mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
-    for (int j = 0; j < mw_one->ui->table_kernel_add->rowCount(); j++) {
-      if (Name == mw_one->ui->table_kernel_add->item(j, 0)->text().trimmed() &&
-          !isKextWhitelist(Name)) {
+    for (int j = 0; j < mw_one->dlgSyncOC->ui->listSource->count(); j++) {
+      if (Name == mw_one->dlgSyncOC->ui->listSource->item(j)->text() &&
+          mw_one->dlgSyncOC->ui->listSource->item(j)->checkState() ==
+              Qt::Checked) {
         mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
         if (!mw_one->linuxOS)
           mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
@@ -168,9 +170,8 @@ void Method::finishKextUpdate() {
     }
   }
 
-  mw_one->ui->btnKextUpdate->setEnabled(true);
-  mw_one->ui->progressBarKext->setHidden(true);
-  mw_one->ui->labelShowDLInfo->setVisible(false);
+  mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
+
   mw_one->dlgSyncOC->ui->progressBarKext->setHidden(true);
   mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(false);
   mw_one->checkFiles();
@@ -182,43 +183,50 @@ void Method::kextUpdate() {
   if (mw_one->ui->table_kernel_add->rowCount() == 0) return;
   mw_one->myDatabase->refreshKextUrl();
   blBreak = false;
-  mw_one->ui->btnKextUpdate->setEnabled(false);
+
+  mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(false);
   mw_one->repaint();
   QString test = "https://github.com/acidanthera/Lilu";
 
-  for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
+  for (int i = 0; i < mw_one->dlgSyncOC->ui->listSource->count(); i++) {
     if (blBreak) break;
-    QString name = mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
-    kextName = name;
-    for (int j = 0; j < mw_one->myDatabase->ui->tableKextUrl->rowCount(); j++) {
-      if (blBreak) break;
-      QString txt =
-          mw_one->myDatabase->ui->tableKextUrl->item(j, 0)->text().trimmed();
-      test = mw_one->myDatabase->ui->tableKextUrl->item(j, 1)->text().trimmed();
-      if (txt == name && test != "" && !isKextWhitelist(kextName)) {
-        bool reGetUrl = true;
-        QString strUrl;
-        for (int m = 0; m < kextDLUrlList.count(); m++) {
-          QString str_m = kextDLUrlList.at(m);
-          QStringList list_m = str_m.split("|");
-          if (list_m.at(0) == name) {
-            reGetUrl = false;
-            strUrl = list_m.at(1);
+    if (mw_one->dlgSyncOC->ui->listSource->item(i)->checkState() ==
+        Qt::Checked) {
+      QString name =
+          mw_one->dlgSyncOC->ui->listSource->item(i)->text().trimmed();
+      kextName = name;
+      for (int j = 0; j < mw_one->myDatabase->ui->tableKextUrl->rowCount();
+           j++) {
+        if (blBreak) break;
+        QString txt =
+            mw_one->myDatabase->ui->tableKextUrl->item(j, 0)->text().trimmed();
+        test =
+            mw_one->myDatabase->ui->tableKextUrl->item(j, 1)->text().trimmed();
+        if (txt == name && test != "") {
+          bool reGetUrl = true;
+          QString strUrl;
+          for (int m = 0; m < kextDLUrlList.count(); m++) {
+            QString str_m = kextDLUrlList.at(m);
+            QStringList list_m = str_m.split("|");
+            if (list_m.at(0) == name) {
+              reGetUrl = false;
+              strUrl = list_m.at(1);
+            }
           }
-        }
-        if (reGetUrl) {
-          if (mw_one->myDatabase->ui->rbtnAPI->isChecked())
-            getLastReleaseFromUrl(test);
-          if (mw_one->myDatabase->ui->rbtnWeb->isChecked())
-            getLastReleaseFromHtml(test + "/releases/latest");
-        } else {
-          startDownload(strUrl);
-        }
-        QElapsedTimer t;
-        t.start();
-        dlEnd = false;
-        while (!dlEnd && !blBreak) {
-          QCoreApplication::processEvents();
+          if (reGetUrl) {
+            if (mw_one->myDatabase->ui->rbtnAPI->isChecked())
+              getLastReleaseFromUrl(test);
+            if (mw_one->myDatabase->ui->rbtnWeb->isChecked())
+              getLastReleaseFromHtml(test + "/releases/latest");
+          } else {
+            startDownload(strUrl);
+          }
+          QElapsedTimer t;
+          t.start();
+          dlEnd = false;
+          while (!dlEnd && !blBreak) {
+            QCoreApplication::processEvents();
+          }
         }
       }
     }
@@ -263,19 +271,17 @@ void Method::startDownload(QString strUrl) {
   bool ret =
       myfile->open(QIODevice::WriteOnly | QIODevice::Truncate);  //创建文件
   if (!ret) {
-    mw_one->ui->btnKextUpdate->setEnabled(true);
+    mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
     mw_one->repaint();
 
     QMessageBox::warning(this, "warning", "File creation failed!\n" + file);
     return;
   }
-  mw_one->ui->progressBarKext->setValue(0);
-  mw_one->ui->progressBarKext->setMinimum(0);
+  mw_one->dlgSyncOC->ui->progressBarKext->setValue(0);
+  mw_one->dlgSyncOC->ui->progressBarKext->setMinimum(0);
 
   downloadTimer.start();
 
-  mw_one->ui->progressBarKext->setVisible(true);
-  mw_one->ui->labelShowDLInfo->setVisible(true);
   mw_one->dlgSyncOC->ui->progressBarKext->setHidden(false);
   mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(true);
 }
@@ -304,7 +310,7 @@ void Method::doProcessFinished() {
     dlEnd = true;
 
   } else {
-    mw_one->ui->btnKextUpdate->setEnabled(true);
+    mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
     mw_one->repaint();
     myfile->close();
     QMessageBox::critical(NULL, "replyDL Error",
@@ -315,8 +321,6 @@ void Method::doProcessFinished() {
 void Method::doProcessDownloadProgress(qint64 recv_total,
                                        qint64 all_total)  //显示
 {
-  mw_one->ui->progressBarKext->setMaximum(all_total);
-  mw_one->ui->progressBarKext->setValue(recv_total);
   mw_one->dlgSyncOC->ui->progressBarKext->setMaximum(all_total);
   mw_one->dlgSyncOC->ui->progressBarKext->setValue(recv_total);
 
@@ -336,12 +340,11 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
   QString strSpeed =
       QString::fromLatin1("%1 %2").arg(speed, 3, 'f', 1).arg(unit);
 
-  mw_one->ui->labelShowDLInfo->setText(
+  mw_one->dlgSyncOC->ui->labelShowDLInfo->setText(
       kextName + " | " + tr("Download Progress") + " : " +
       GetFileSize(recv_total, 2) + " -> " + GetFileSize(all_total, 2) + "    " +
       strSpeed);
-  mw_one->dlgSyncOC->ui->labelShowDLInfo->setText(
-      mw_one->ui->labelShowDLInfo->text());
+
   if (recv_total == all_total) {
     if (recv_total < 1000) {
       blCanBeUpdate = false;
@@ -374,7 +377,8 @@ void Method::parse_UpdateJSON(QString str) {
 
   if (err_rpt.error != QJsonParseError::NoError) {
     QMessageBox::critical(this, "", tr("Network error!"));
-    mw_one->ui->btnKextUpdate->setEnabled(true);
+
+    mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
     blBreak = true;
     return;
   }
@@ -407,7 +411,8 @@ void Method::parse_UpdateJSON(QString str) {
   qDebug() << strDLInfoList.at(0) << strDLInfoList.at(1);
   if (strDLUrl == "") {
     blBreak = true;
-    mw_one->ui->btnKextUpdate->setEnabled(true);
+
+    mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
     return;
   }
   kextDLUrlList.append(kextName + "|" + strDLUrl);
@@ -1307,47 +1312,8 @@ QString Method::getFileName(QString file) {
 
 void Method::cancelKextUpdate() {
   blBreak = true;
-  mw_one->ui->btnKextUpdate->setEnabled(true);
-}
 
-void Method::addKextWhitelist() {
-  if (!mw_one->ui->table_kernel_add->currentIndex().isValid()) return;
-  int n = mw_one->ui->table_kernel_add->currentRow();
-  QString str = mw_one->ui->table_kernel_add->item(n, 0)->text().trimmed();
-  bool re = false;
-  for (int i = 0; i < mw_one->ui->listWhite->count(); i++) {
-    if (str == mw_one->ui->listWhite->item(i)->text()) re = true;
-  }
-  if (!re) mw_one->ui->listWhite->addItem(str);
-
-  writeKextWhitelistINI();
-}
-
-void Method::delKextWhitelist() {
-  if (mw_one->ui->listWhite->count() == 0) return;
-  int n = mw_one->ui->listWhite->currentRow();
-  mw_one->ui->listWhite->takeItem(n);
-
-  writeKextWhitelistINI();
-}
-
-bool Method::isKextWhitelist(QString kextName) {
-  for (int i = 0; i < mw_one->ui->listWhite->count(); i++) {
-    if (kextName == mw_one->ui->listWhite->item(i)->text().trimmed())
-      return true;
-  }
-  return false;
-}
-
-void Method::writeKextWhitelistINI() {
-  if (!QFileInfo(SaveFileName).exists()) return;
-  QString qfile = QDir::homePath() + "/.config/QtOCC/kextWhitelist.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
-  Reg.setValue(SaveFileName, mw_one->ui->listWhite->count());
-  for (int i = 0; i < mw_one->ui->listWhite->count(); i++) {
-    QString str = mw_one->ui->listWhite->item(i)->text().trimmed();
-    Reg.setValue(SaveFileName + QString::number(i), str);
-  }
+  mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
 }
 
 void Method::writeLeftTable(QTableWidget* t0, QTableWidget* t) {
