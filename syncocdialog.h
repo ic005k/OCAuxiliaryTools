@@ -35,11 +35,13 @@ class SyncOCDialog : public QDialog {
 
   void on_listTarget_currentRowChanged(int currentRow);
 
+  void on_btnUpKexts_clicked();
+
  private:
   void setListWidgetStyle();
   void setListWidgetColor(QString color);
 
-  protected:
+ protected:
   void closeEvent(QCloseEvent *event);
 };
 

@@ -151,14 +151,18 @@ void Method::finishKextUpdate() {
   }
 
   for (int i = 0; i < kextList.count(); i++) {
-    QString dirSource, dirTarget;
+    QString dirSource, dirTarget, dirTargetDatabase;
     dirSource = kextList.at(i);
     QString Name = getFileName(dirSource);
     dirTarget = strKexts + Name;
+    dirTargetDatabase =
+        mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
     for (int j = 0; j < mw_one->ui->table_kernel_add->rowCount(); j++) {
       if (Name == mw_one->ui->table_kernel_add->item(j, 0)->text().trimmed() &&
           !isKextWhitelist(Name)) {
         mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
+        if (!mw_one->linuxOS)
+          mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
         qDebug() << kextList.at(i) << dirTarget;
       }
     }
@@ -167,6 +171,8 @@ void Method::finishKextUpdate() {
   mw_one->ui->btnKextUpdate->setEnabled(true);
   mw_one->ui->progressBarKext->setHidden(true);
   mw_one->ui->labelShowDLInfo->setVisible(false);
+  mw_one->dlgSyncOC->ui->progressBarKext->setHidden(true);
+  mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(false);
   mw_one->checkFiles();
   mw_one->repaint();
 }
@@ -270,6 +276,8 @@ void Method::startDownload(QString strUrl) {
 
   mw_one->ui->progressBarKext->setVisible(true);
   mw_one->ui->labelShowDLInfo->setVisible(true);
+  mw_one->dlgSyncOC->ui->progressBarKext->setHidden(false);
+  mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(true);
 }
 
 void Method::doProcessReadyRead() {
@@ -309,6 +317,8 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
 {
   mw_one->ui->progressBarKext->setMaximum(all_total);
   mw_one->ui->progressBarKext->setValue(recv_total);
+  mw_one->dlgSyncOC->ui->progressBarKext->setMaximum(all_total);
+  mw_one->dlgSyncOC->ui->progressBarKext->setValue(recv_total);
 
   // calculate the download speed
   double speed = recv_total * 1000.0 / downloadTimer.elapsed();
@@ -330,7 +340,8 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
       kextName + " | " + tr("Download Progress") + " : " +
       GetFileSize(recv_total, 2) + " -> " + GetFileSize(all_total, 2) + "    " +
       strSpeed);
-
+  mw_one->dlgSyncOC->ui->labelShowDLInfo->setText(
+      mw_one->ui->labelShowDLInfo->text());
   if (recv_total == all_total) {
     if (recv_total < 1000) {
       blCanBeUpdate = false;
