@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>20G165</string>
+	<string>19H1417</string>
 	<key>CFBundleExecutable</key>
 	<string>VoodooPS2Mouse</string>
 	<key>CFBundleGetInfoString</key>
@@ -29,19 +29,19 @@
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>13A233</string>
+	<string>12B45b</string>
 	<key>DTPlatformName</key>
 	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>11.3</string>
+	<string>11.0</string>
 	<key>DTSDKBuild</key>
-	<string>20E214</string>
+	<string>20A2408</string>
 	<key>DTSDKName</key>
-	<string>macosx11.3</string>
+	<string>macosx11.0</string>
 	<key>DTXcode</key>
-	<string>1300</string>
+	<string>1220</string>
 	<key>DTXcodeBuild</key>
-	<string>13A233</string>
+	<string>12B45b</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>ApplePS2Mouse</key>
