@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>20G165</string>
+	<string>19H1217</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.8</string>
+	<string>1.0.7</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,23 +25,23 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.8</string>
+	<string>1.0.7</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>13A233</string>
+	<string>12B45b</string>
 	<key>DTPlatformName</key>
 	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>11.3</string>
+	<string>11.0</string>
 	<key>DTSDKBuild</key>
-	<string>20E214</string>
+	<string>20A2408</string>
 	<key>DTSDKName</key>
-	<string>macosx11.3</string>
+	<string>macosx11.0</string>
 	<key>DTXcode</key>
-	<string>1300</string>
+	<string>1220</string>
 	<key>DTXcodeBuild</key>
-	<string>13A233</string>
+	<string>12B45b</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>IntelMausi</key>
@@ -74,7 +74,7 @@
 				<integer>0</integer>
 			</dict>
 			<key>Driver_Version</key>
-			<string>1.0.8</string>
+			<string>1.0.7</string>
 			<key>IOClass</key>
 			<string>IntelMausi</string>
 			<key>IOPCIMatch</key>

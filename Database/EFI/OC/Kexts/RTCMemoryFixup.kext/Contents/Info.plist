@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>20G165</string>
+	<string>19F101</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -17,29 +17,27 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.8</string>
+	<string>1.0.7</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.8</string>
+	<string>1.0.7</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>13A233</string>
-	<key>DTPlatformName</key>
-	<string>macosx</string>
+	<string>11E708</string>
 	<key>DTPlatformVersion</key>
-	<string>11.3</string>
+	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>20E214</string>
+	<string>19G68</string>
 	<key>DTSDKName</key>
-	<string>macosx11.3</string>
+	<string>macosx10.15</string>
 	<key>DTXcode</key>
-	<string>1300</string>
+	<string>1160</string>
 	<key>DTXcodeBuild</key>
-	<string>13A233</string>
+	<string>11E708</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>as.lvs1974.RTCMemoryFixup</key>

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>19H1217</string>
+	<string>19H1417</string>
 	<key>CFBundleExecutable</key>
 	<string>BrcmPatchRAM3</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.6.0</string>
+	<string>2.6.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -23,7 +23,7 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.6.0</string>
+	<string>2.6.1</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -2117,7 +2117,7 @@
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>as.acidanthera.BrcmFirmwareStore</key>
-		<string>2.6.0</string>
+		<string>2.6.1</string>
 		<key>com.apple.iokit.IOUSBHostFamily</key>
 		<string>1.0.1</string>
 		<key>com.apple.kpi.bsd</key>
