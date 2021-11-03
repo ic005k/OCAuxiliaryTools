@@ -26,6 +26,12 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   ui->listTarget->setIconSize(QSize(15, 15));
   ui->listSource->setGridSize(QSize(size, size));
   ui->listTarget->setGridSize(QSize(size, size));
+
+  ui->label->setFixedHeight(35);
+  ui->label->setFixedWidth(35);
+  QPixmap pixmap(":/icon/tip.png");
+  pixmap = pixmap.scaled(ui->label->size());
+  ui->label->setPixmap(pixmap);
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }

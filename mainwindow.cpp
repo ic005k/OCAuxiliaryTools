@@ -18,7 +18,7 @@ using namespace std;
 
 QString PlistFileName;
 QString SaveFileName;
-QVector<QString> filelist;
+QVector<QString> openFileLists;
 QWidgetList wdlist;
 QTableWidget* tableDatabase;
 QRegExp regx("[A-Fa-f0-9]{0,1024}");
@@ -40,6 +40,7 @@ extern QString strTools;
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
+
   Initialization = true;
   loading = true;
 
