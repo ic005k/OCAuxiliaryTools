@@ -4641,7 +4641,7 @@ Type</translation>
     <message>
         <location filename="syncocdialog.ui" line="90"/>
         <source>OpenCore</source>
-        <translation>OpenCore官方</translation>
+        <translation>OpenCore</translation>
     </message>
     <message>
         <location filename="syncocdialog.ui" line="198"/>

@@ -48,6 +48,7 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
 SyncOCDialog::~SyncOCDialog() { delete ui; }
 
 void SyncOCDialog::on_btnStartSync_clicked() {
+  if (!ui->btnUpKexts->isEnabled()) return;
   bool ok = true;
   for (int i = 0; i < mw_one->sourceKexts.count(); i++) {
     // 数据库里面必须要有这个文件（源文件必须存在）
