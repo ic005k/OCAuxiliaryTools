@@ -20,7 +20,6 @@ class SyncOCDialog : public QDialog {
   Ui::SyncOCDialog *ui;
   QString sourceResourcesDir;
   QString targetResourcesDir;
-  bool blSame;
   QStringList sourceFileList;
   QStringList targetFileList;
 

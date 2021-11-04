@@ -31,9 +31,7 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   ui->label->setFixedHeight(40);
   ui->label->setFixedWidth(40);
   ui->label->setText("");
-  // QPixmap pixmap(":/icon/tip.png");
-  // pixmap = pixmap.scaled(ui->label->size());
-  // ui->label->setPixmap(pixmap);
+
   ui->label->setStyleSheet(
       "QLabel{"
       "border-image:url(:/icon/tip.png) 4 4 4 4 stretch stretch;"
@@ -42,7 +40,6 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   ui->labelShowDLInfo->setVisible(false);
   ui->labelShowDLInfo->setText("");
   ui->progressBarKext->setHidden(true);
-  // ui->progressBarKext->setFixedWidth(100);
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
@@ -141,12 +138,8 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
                                  "  md5    " + targetHash);
 
   if (sourceHash != targetHash) {
-    // ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
     ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
-
-    // blSame = false;
   } else {
-    // ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
     ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
   }
 }
