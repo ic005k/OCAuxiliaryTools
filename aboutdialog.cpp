@@ -44,10 +44,14 @@ void aboutDialog::initInfoStr() {
   QString strC1 = tr("Contributor: eSaF (England, UK)    [file structure]");
   QString strC2 =
       tr("Contributor: Sherlocks (Seoul, Korea)    [file structure]");
-  QString strC3 = tr("Icon Designer: Mirone (Brazil) ");
+  QString strC3 =
+      tr("Contributor: 5T33Z0 (Germany)    [Documentation, user experience and "
+         "UI interaction design]");
+  QString strC4 = tr("Icon Designer: Mirone (Brazil) ");
   ui->textBrowser->append(strC1);
   ui->textBrowser->append(strC2);
   ui->textBrowser->append(strC3);
+  ui->textBrowser->append(strC4);
 
   QString strTr2 = tr("Details");
   QString strDetails =

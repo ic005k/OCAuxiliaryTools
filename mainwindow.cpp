@@ -10873,3 +10873,10 @@ void MainWindow::on_table_nv_add0_itemClicked(QTableWidgetItem* item) {
 }
 
 void MainWindow::on_btnKextPreset_clicked() { mymethod->kextPreset(); }
+
+void MainWindow::on_actionOCAuxiliaryToolsDoc_triggered() {
+  QUrl url(
+      QString("https://github.com/5T33Z0/OC-Little-Translated/blob/main/"
+              "D_Updating_OpenCore/README.md"));
+  QDesktopServices::openUrl(url);
+}

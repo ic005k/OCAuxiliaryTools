@@ -924,6 +924,8 @@ class MainWindow : public QMainWindow {
 
   void on_btnKextPreset_clicked();
 
+  void on_actionOCAuxiliaryToolsDoc_triggered();
+
  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;

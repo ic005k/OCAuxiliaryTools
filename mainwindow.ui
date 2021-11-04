@@ -10247,6 +10247,8 @@ Enable this option to be able to see all the boot options when having multiple d
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionOCAuxiliaryToolsDoc"/>
+    <addaction name="separator"/>
     <addaction name="btnHelp"/>
     <addaction name="actionDifferences"/>
     <addaction name="separator"/>
@@ -10399,7 +10401,7 @@ Enable this option to be able to see all the boot options when having multiple d
   </action>
   <action name="btnHelp">
    <property name="text">
-    <string>Documentation</string>
+    <string>OpenCore Documentation</string>
    </property>
   </action>
   <action name="btnCheckUpdate">
@@ -10484,7 +10486,7 @@ Enable this option to be able to see all the boot options when having multiple d
   </action>
   <action name="actionDifferences">
    <property name="text">
-    <string>Differences</string>
+    <string>OpenCore Differences</string>
    </property>
   </action>
   <action name="actionLatest_Release">
@@ -10521,6 +10523,11 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionEdit_Presets">
    <property name="text">
     <string>Edit Preset</string>
+   </property>
+  </action>
+  <action name="actionOCAuxiliaryToolsDoc">
+   <property name="text">
+    <string>OCAuxiliaryTools  Documentation</string>
    </property>
   </action>
  </widget>
