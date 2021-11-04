@@ -125,18 +125,20 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   sourceModi = fiSource.lastModified().toString();
   targetModi = fiTarget.lastModified().toString();
 
-  QString strShowFileName;
+  QString strShowFileName, strSV, strTV;
   if (!mymethod->isKext(sourceFile))
     strShowFileName = fiSource.fileName();
-  else
-    strShowFileName = fiSource.fileName() + "    " +
-                      mymethod->getKextVersion(sourceFile) + "  ->  " +
-                      mymethod->getKextVersion(targetFile);
+  else {
+    strShowFileName = fiSource.fileName();
+    strSV = "V" + mymethod->getKextVersion(sourceFile);
+    strTV = "V" + mymethod->getKextVersion(targetFile);
+  }
 
   ui->lblSourceLastModi->setText(strShowFileName + "\n\n" +
-                                 tr("Source File: ") + "md5    " + sourceHash);
-  ui->lblTargetLastModi->setText("\n" + tr("Target File: ") + "md5    " +
-                                 targetHash);
+                                 tr("Source File: ") + "\n" + strSV +
+                                 "  md5    " + sourceHash);
+  ui->lblTargetLastModi->setText("\n" + tr("Target File: ") + "\n" + strTV +
+                                 "  md5    " + targetHash);
 
   if (sourceHash != targetHash) {
     // ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
