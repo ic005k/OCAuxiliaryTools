@@ -9881,15 +9881,11 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   }
 
   // Kexts
-  QStringList dbkextFileList =
-      mymethod->DirToFileList(pathSource + "EFI/OC/Kexts/", "*.kext");
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QString strKextName = ui->table_kernel_add->item(i, 0)->text().trimmed();
-    if (mymethod->isEqualInList(strKextName, dbkextFileList)) {
-      // if (ui->table_kernel_add->item(i, 2)->text().trimmed() != "") {
+    if (!strKextName.contains("/Contents/PlugIns/")) {
       sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
       targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
-      //}
     }
   }
 
