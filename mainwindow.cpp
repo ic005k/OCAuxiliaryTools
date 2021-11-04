@@ -9923,11 +9923,8 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   dlgSyncOC->ui->listTarget->clear();
   for (int i = 0; i < sourceFiles.count(); i++) {
     QString strF1 = sourceFiles.at(i);
-    if (mymethod->isKext(sourceFiles.at(i))) {
-      dlgSyncOC->ui->listSource->addItem(
-          mymethod->getFileName(sourceFiles.at(i)));
+    if (mymethod->isKext(strF1)) {
       sourceKexts.append(strF1);
-
     } else
       sourceOpenCore.append(strF1);
   }
@@ -9937,8 +9934,13 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
       dlgSyncOC->ui->listTarget->addItem(mymethod->getFileName(f));
       targetOpenCore.append(f);
 
-    } else
+    } else {
       targetKexts.append(f);
+      QString str_name, str_cv;
+      str_name = mymethod->getFileName(f);
+      str_cv = mymethod->getKextVersion(f);
+      dlgSyncOC->ui->listSource->addItem(str_name + "  |  " + str_cv);
+    }
   }
 
   for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {

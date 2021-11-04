@@ -40,6 +40,14 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   ui->labelShowDLInfo->setVisible(false);
   ui->labelShowDLInfo->setText("");
   ui->progressBarKext->setHidden(true);
+  ui->btnUpdate->setEnabled(false);
+
+  ui->listSource->setViewMode(QListView::ListMode);
+  ui->listSource->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  ui->listSource->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  ui->listTarget->setViewMode(QListView::ListMode);
+  ui->listTarget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  ui->listTarget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
@@ -131,11 +139,10 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
     strTV = "V" + mymethod->getKextVersion(targetFile);
   }
 
-  ui->lblSourceLastModi->setText(strShowFileName + "\n\n" +
-                                 tr("Source File: ") + "\n" + strSV +
+  ui->lblSourceLastModi->setText(tr("Available File: ") + "\n" + strSV +
                                  "  md5    " + sourceHash);
-  ui->lblTargetLastModi->setText("\n" + tr("Target File: ") + "\n" + strTV +
-                                 "  md5    " + targetHash);
+  ui->lblTargetLastModi->setText(strShowFileName + "\n" + tr("Current File: ") +
+                                 "\n" + strTV + "  md5    " + targetHash);
 
   if (sourceHash != targetHash) {
     ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
@@ -205,10 +212,10 @@ void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
                       mymethod->getKextVersion(sourceFile) + "  ->  " +
                       mymethod->getKextVersion(targetFile);
 
-  ui->lblSourceLastModi_2->setText(
-      strShowFileName + "\n\n" + tr("Source File: ") + "md5    " + sourceHash);
-  ui->lblTargetLastModi_2->setText("\n" + tr("Target File: ") + "md5    " +
-                                   targetHash);
+  ui->lblSourceLastModi_2->setText(tr("Available File: ") + "md5    " +
+                                   sourceHash);
+  ui->lblTargetLastModi_2->setText(
+      strShowFileName + "\n\n" + tr("Current File: ") + "md5    " + targetHash);
 
   if (sourceHash != targetHash) {
     ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
@@ -235,6 +242,44 @@ void SyncOCDialog::closeEvent(QCloseEvent* event) {
   }
 }
 
-void SyncOCDialog::on_btnUpKexts_clicked() { mymethod->kextUpdate(); }
+void SyncOCDialog::on_btnUpKexts_clicked() {
+  ui->btnUpdate->setEnabled(false);
+  repaint();
+  mymethod->kextUpdate();
+
+  for (int i = 0; i < ui->listSource->count(); i++) {
+    QString sourceFile = mw_one->sourceKexts.at(i);
+    QString targetFile = mw_one->targetKexts.at(i);
+    QString sourceHash = mw_one->getMD5(mymethod->getKextBin(sourceFile));
+    QString targetHash = mw_one->getMD5(mymethod->getKextBin(targetFile));
+    if (sourceHash != targetHash) {
+      ui->btnUpdate->setEnabled(true);
+      repaint();
+      QString str_av, str_cv, str, name;
+      name = mymethod->getFileName(targetFile);
+      str_cv = mymethod->getKextVersion(targetFile);
+      str_av = mymethod->getKextVersion(sourceFile);
+      str = name + "  |  " + str_cv + "  |  " + str_av;
+      ui->listSource->item(i)->setText(str);
+    }
+  }
+}
 
 void SyncOCDialog::on_btnStop_clicked() { mymethod->cancelKextUpdate(); }
+
+void SyncOCDialog::on_btnUpdate_clicked() {
+  mymethod->finishKextUpdate(false);
+  ui->btnUpdate->setEnabled(false);
+  repaint();
+
+  for (int i = 0; i < ui->listSource->count(); i++) {
+    if (ui->listSource->item(i)->checkState() == Qt::Checked) {
+      QString targetFile = mw_one->targetKexts.at(i);
+      QString str_cv, str, name;
+      name = mymethod->getFileName(targetFile);
+      str_cv = mymethod->getKextVersion(targetFile);
+      str = name + "  |  " + str_cv;
+      ui->listSource->item(i)->setText(str);
+    }
+  }
+}

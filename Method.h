@@ -82,7 +82,7 @@ class Method : public QMainWindow {
   QString GetFileSize(const qint64 &size, int precision);
   bool blCanBeUpdate = false;
   void kextUpdate();
-  void finishKextUpdate();
+  void finishKextUpdate(bool blDatabase);
   void getAllFolds(const QString &foldPath, QStringList &folds);
   void getAllFiles(const QString &foldPath, QStringList &folds,
                    const QStringList &formats);

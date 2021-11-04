@@ -38,6 +38,8 @@ class SyncOCDialog : public QDialog {
 
   void on_btnStop_clicked();
 
+  void on_btnUpdate_clicked();
+
  private:
   void setListWidgetStyle();
   void setListWidgetColor(QString color);

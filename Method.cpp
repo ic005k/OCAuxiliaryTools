@@ -115,7 +115,7 @@ void Method::getAllFiles(const QString& foldPath, QStringList& folds,
   }
 }
 
-void Method::finishKextUpdate() {
+void Method::finishKextUpdate(bool blDatabase) {
   QStringList kextList, tempList;
   QStringList list0 = DirToFileList(tempDir, "*.kext");
   for (int i = 0; i < list0.count(); i++) {
@@ -159,11 +159,15 @@ void Method::finishKextUpdate() {
     dirTargetDatabase =
         mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
     for (int j = 0; j < mw_one->dlgSyncOC->ui->listSource->count(); j++) {
-      if (Name == mw_one->dlgSyncOC->ui->listSource->item(j)->text() &&
+      QString str_1 = mw_one->dlgSyncOC->ui->listSource->item(j)->text();
+      QStringList list_1 = str_1.split(" ");
+      QString Name_1;
+      if (list_1.count() > 0) Name_1 = list_1.at(0);
+      if (Name == Name_1 &&
           mw_one->dlgSyncOC->ui->listSource->item(j)->checkState() ==
               Qt::Checked) {
-        mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
-        if (!mw_one->linuxOS)
+        if (!blDatabase) mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
+        if (!mw_one->linuxOS && blDatabase)
           mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
         qDebug() << kextList.at(i) << dirTarget;
       }
@@ -196,8 +200,11 @@ void Method::kextUpdate() {
     if (blBreak) break;
     if (mw_one->dlgSyncOC->ui->listSource->item(i)->checkState() ==
         Qt::Checked) {
-      QString name =
+      QString name_1 =
           mw_one->dlgSyncOC->ui->listSource->item(i)->text().trimmed();
+      QStringList list_1 = name_1.split(" ");
+      QString name;
+      if (list_1.count() > 0) name = list_1.at(0);
       kextName = name;
       for (int j = 0; j < mw_one->myDatabase->ui->tableKextUrl->rowCount();
            j++) {
@@ -237,7 +244,7 @@ void Method::kextUpdate() {
   }
 
   if (blBreak) return;
-  finishKextUpdate();
+  finishKextUpdate(true);
 }
 
 void Method::startDownload(QString strUrl) {
