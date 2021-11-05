@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>744</width>
+    <width>833</width>
     <height>515</height>
    </rect>
   </property>
@@ -14,6 +14,18 @@
    <string>Sync OC</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_10">
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>1</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_7">
      <item row="1" column="0">

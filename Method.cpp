@@ -152,12 +152,13 @@ void Method::finishKextUpdate(bool blDatabase) {
   }
 
   for (int i = 0; i < kextList.count(); i++) {
-    QString dirSource, dirTarget, dirTargetDatabase;
+    QString dirSource, dirTarget, dirTargetDatabase, dirTargetLinux;
     dirSource = kextList.at(i);
     QString Name = getFileName(dirSource);
     dirTarget = strKexts + Name;
     dirTargetDatabase =
         mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
+    dirTargetLinux = QDir::homePath() + "/Kexts/" + Name;
     for (int j = 0; j < mw_one->dlgSyncOC->ui->listSource->count(); j++) {
       QString str_1 = mw_one->dlgSyncOC->ui->listSource->item(j)->text();
       QStringList list_1 = str_1.split("|");
@@ -170,6 +171,8 @@ void Method::finishKextUpdate(bool blDatabase) {
         if (!blDatabase) mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
         if (!mw_one->linuxOS && blDatabase)
           mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
+        if (mw_one->linuxOS && blDatabase)
+          mw_one->copyDirectoryFiles(dirSource, dirTargetLinux, true);
         qDebug() << kextList.at(i) << dirTarget;
       }
     }
@@ -179,7 +182,7 @@ void Method::finishKextUpdate(bool blDatabase) {
 
   mw_one->dlgSyncOC->ui->progressBarKext->setHidden(true);
   mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(false);
-  mw_one->checkFiles();
+  if (!blDatabase) mw_one->checkFiles();
   mw_one->repaint();
   int n = mw_one->dlgSyncOC->ui->listSource->currentRow();
   for (int i = 0; i < mw_one->dlgSyncOC->ui->listSource->count(); i++)

@@ -9886,10 +9886,17 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   }
 
   // Kexts
+  if (linuxOS) {
+    copyDirectoryFiles(pathSource + "EFI/OC/Kexts/",
+                       QDir::homePath() + "/Kexts/", false);
+  }
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QString strKextName = ui->table_kernel_add->item(i, 0)->text().trimmed();
     if (!strKextName.contains("/Contents/PlugIns/")) {
-      sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
+      if (linuxOS)
+        sourceFiles.append(QDir::homePath() + "/Kexts/" + strKextName);
+      else
+        sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
       targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
     }
   }
