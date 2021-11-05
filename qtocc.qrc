@@ -58,5 +58,6 @@
         <file>icon/start.png</file>
         <file>icon/stop.png</file>
         <file>icon/tip.png</file>
+        <file>icon/nous.png</file>
     </qresource>
 </RCC>

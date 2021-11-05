@@ -6281,10 +6281,11 @@ void MainWindow::init_UndoRedo() {
 }
 
 void MainWindow::init_ToolButtonStyle() {
-  QObjectList list, list1;
+  QObjectList list, list1, list2;
   list = mymethod->getAllToolButton(getAllUIControls(ui->tabTotal));
   list1 =
       mymethod->getAllToolButton(getAllUIControls(myDatabase->ui->tabWidget));
+  list2 = mymethod->getAllToolButton(getAllUIControls(dlgSyncOC));
   QString strStyle =
       "QToolButton:hover{ "
       "color:rgb(0, 0, 255); "
@@ -6312,6 +6313,10 @@ void MainWindow::init_ToolButtonStyle() {
   }
   for (int i = 0; i < list1.count(); i++) {
     QToolButton* w = (QToolButton*)list1.at(i);
+    w->setStyleSheet(strStyle);
+  }
+  for (int i = 0; i < list2.count(); i++) {
+    QToolButton* w = (QToolButton*)list2.at(i);
     w->setStyleSheet(strStyle);
   }
 }

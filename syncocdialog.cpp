@@ -142,26 +142,44 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
                                  "\n" + strTV + "  md5    " + targetHash);
   ui->lblSourceLastModi->setText(tr("Available File: ") + "\n" + strSV +
                                  "  md5    " + sourceHash);
+  bool defUS = false;
+  mw_one->myDatabase->refreshKextUrl();
+  for (int i = 0; i < mw_one->myDatabase->ui->tableKextUrl->rowCount(); i++) {
+    QString str =
+        mw_one->myDatabase->ui->tableKextUrl->item(i, 0)->text().trimmed();
+    QString str1 = QFileInfo(targetFile).fileName();
+    if (str1 == str || str1.mid(0, 3) == "SMC" || str1.contains("AppleALC") ||
+        str1.contains("BlueTool") || str1.contains("VoodooPS2Controller") ||
+        str1.contains("VoodooI2C") || str1.contains("Brcm") ||
+        str1.contains("IntelSnowMausi"))
+      defUS = true;
+  }
 
-  if (!QFile(sourceFile).exists()) {
-    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
+  if (!defUS) {
+    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/nous.png"));
     QString str = strShowFileName + "  |  " + strTV;
     ui->listSource->item(currentRow)->setText(str);
-  }
-  if (!QFile(targetFile).exists()) {
-    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
-    QString str = strShowFileName + "  |  " + strTV;
-    ui->listSource->item(currentRow)->setText(str);
-  }
-  if (QFile(sourceFile).exists() && QFile(targetFile).exists()) {
-    if (strSV > strTV) {
-      ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
-      QString str = strShowFileName + "  |  " + strTV + "  |  " + strSV;
-      ui->listSource->item(currentRow)->setText(str);
-    } else {
+  } else {
+    if (!QFile(sourceFile).exists()) {
       ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
       QString str = strShowFileName + "  |  " + strTV;
       ui->listSource->item(currentRow)->setText(str);
+    }
+    if (!QFile(targetFile).exists()) {
+      ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
+      QString str = strShowFileName + "  |  " + strTV;
+      ui->listSource->item(currentRow)->setText(str);
+    }
+    if (QFile(sourceFile).exists() && QFile(targetFile).exists()) {
+      if (strSV > strTV) {
+        ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
+        QString str = strShowFileName + "  |  " + strTV + "  |  " + strSV;
+        ui->listSource->item(currentRow)->setText(str);
+      } else {
+        ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
+        QString str = strShowFileName + "  |  " + strTV;
+        ui->listSource->item(currentRow)->setText(str);
+      }
     }
   }
 
@@ -279,7 +297,7 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
       QString strSV, strTV;
       strSV = mymethod->getKextVersion(sourceFile);
       strTV = mymethod->getKextVersion(targetFile);
-      if (strSV > strTV) {
+      if (strSV > strTV || strTV == "None") {
         ui->btnUpdate->setEnabled(true);
         repaint();
       }
@@ -300,4 +318,14 @@ void SyncOCDialog::on_btnUpdate_clicked() {
     ui->listSource->setCurrentRow(i);
   }
   ui->listSource->setCurrentRow(n);
+}
+
+void SyncOCDialog::on_btnSelectAll_clicked() {
+  for (int i = 0; i < ui->listSource->count(); i++)
+    ui->listSource->item(i)->setCheckState(Qt::Checked);
+}
+
+void SyncOCDialog::on_btnClearAll_clicked() {
+  for (int i = 0; i < ui->listSource->count(); i++)
+    ui->listSource->item(i)->setCheckState(Qt::Unchecked);
 }
