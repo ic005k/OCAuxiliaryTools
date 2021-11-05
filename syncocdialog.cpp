@@ -44,10 +44,9 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
 
   ui->listSource->setViewMode(QListView::ListMode);
   ui->listSource->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-  ui->listSource->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+
   ui->listTarget->setViewMode(QListView::ListMode);
   ui->listTarget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-  ui->listTarget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
