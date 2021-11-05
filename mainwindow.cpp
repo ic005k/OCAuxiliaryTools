@@ -9936,10 +9936,8 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
 
     } else {
       targetKexts.append(f);
-      QString str_name, str_cv;
-      str_name = mymethod->getFileName(f);
-      str_cv = mymethod->getKextVersion(f);
-      dlgSyncOC->ui->listSource->addItem(str_name + "  |  " + str_cv);
+      QString str_name = mymethod->getFileName(f);
+      dlgSyncOC->ui->listSource->addItem(str_name);
     }
   }
 
@@ -9962,8 +9960,8 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   strTag.replace("/", "-");
   QSettings Reg(qfile, QSettings::IniFormat);
   for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
-    QString strValue =
-        strTag + dlgSyncOC->ui->listSource->item(i)->text().trimmed();
+    QString str_0 = dlgSyncOC->ui->listSource->item(i)->text().trimmed();
+    QString strValue = strTag + str_0;
     bool yes = false;
     for (int m = 0; m < Reg.allKeys().count(); m++) {
       if (Reg.allKeys().at(m).contains(strValue)) {

@@ -160,9 +160,10 @@ void Method::finishKextUpdate(bool blDatabase) {
         mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
     for (int j = 0; j < mw_one->dlgSyncOC->ui->listSource->count(); j++) {
       QString str_1 = mw_one->dlgSyncOC->ui->listSource->item(j)->text();
-      QStringList list_1 = str_1.split(" ");
-      QString Name_1;
-      if (list_1.count() > 0) Name_1 = list_1.at(0);
+      QStringList list_1 = str_1.split("|");
+      QString Name_0, Name_1;
+      if (list_1.count() > 0) Name_0 = list_1.at(0);
+      Name_1 = Name_0.trimmed();
       if (Name == Name_1 &&
           mw_one->dlgSyncOC->ui->listSource->item(j)->checkState() ==
               Qt::Checked) {
@@ -202,9 +203,10 @@ void Method::kextUpdate() {
         Qt::Checked) {
       QString name_1 =
           mw_one->dlgSyncOC->ui->listSource->item(i)->text().trimmed();
-      QStringList list_1 = name_1.split(" ");
-      QString name;
-      if (list_1.count() > 0) name = list_1.at(0);
+      QStringList list_1 = name_1.split("|");
+      QString name_0, name;
+      if (list_1.count() > 0) name_0 = list_1.at(0);
+      name = name_0.trimmed();
       kextName = name;
       for (int j = 0; j < mw_one->myDatabase->ui->tableKextUrl->rowCount();
            j++) {
@@ -495,6 +497,7 @@ QString Method::loadText(QString textFile) {
 }
 
 QString Method::getKextVersion(QString kextFile) {
+  if (!QDir(kextFile).exists()) return tr("None");
   QString strInfo = kextFile + "/Contents/Info.plist";
   QTextEdit* txtEdit = new QTextEdit;
   txtEdit->setPlainText(loadText(strInfo));

@@ -135,19 +135,39 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
     strShowFileName = fiSource.fileName();
   else {
     strShowFileName = fiSource.fileName();
-    strSV = "V" + mymethod->getKextVersion(sourceFile);
-    strTV = "V" + mymethod->getKextVersion(targetFile);
+    strSV = mymethod->getKextVersion(sourceFile);
+    strTV = mymethod->getKextVersion(targetFile);
   }
 
-  ui->lblSourceLastModi->setText(tr("Available File: ") + "\n" + strSV +
-                                 "  md5    " + sourceHash);
   ui->lblTargetLastModi->setText(strShowFileName + "\n" + tr("Current File: ") +
                                  "\n" + strTV + "  md5    " + targetHash);
+  ui->lblSourceLastModi->setText(tr("Available File: ") + "\n" + strSV +
+                                 "  md5    " + sourceHash);
+
+  if (!QFile(sourceFile).exists()) {
+    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
+    QString str = strShowFileName + "  |  " + strTV;
+    ui->listSource->item(currentRow)->setText(str);
+  }
+  if (!QFile(targetFile).exists()) {
+    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
+    QString str = strShowFileName + "  |  " + strTV;
+    ui->listSource->item(currentRow)->setText(str);
+  }
+  if (QFile(sourceFile).exists() && QFile(targetFile).exists()) {
+    if (strSV > strTV) {
+      ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
+      QString str = strShowFileName + "  |  " + strTV + "  |  " + strSV;
+      ui->listSource->item(currentRow)->setText(str);
+    } else {
+      ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
+      QString str = strShowFileName + "  |  " + strTV;
+      ui->listSource->item(currentRow)->setText(str);
+    }
+  }
 
   if (sourceHash != targetHash) {
-    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
   } else {
-    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
   }
 }
 
@@ -231,9 +251,13 @@ void SyncOCDialog::closeEvent(QCloseEvent* event) {
   // QString strTag = QDir::fromNativeSeparators(SaveFileName);
   QString strTag = SaveFileName;
   strTag.replace("/", "-");
+  QString str_0, str_1;
   QSettings Reg(qfile, QSettings::IniFormat);
   for (int i = 0; i < ui->listSource->count(); i++) {
-    Reg.setValue(strTag + ui->listSource->item(i)->text().trimmed(),
+    str_0 = ui->listSource->item(i)->text().trimmed();
+    QStringList list_0 = str_0.split("|");
+    if (list_0.count() > 0) str_1 = list_0.at(0);
+    Reg.setValue(strTag + str_1.trimmed(),
                  ui->listSource->item(i)->checkState());
   }
   for (int i = 0; i < ui->listTarget->count(); i++) {
@@ -247,22 +271,22 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
   repaint();
   mymethod->kextUpdate();
 
+  int n = ui->listSource->currentRow();
   for (int i = 0; i < ui->listSource->count(); i++) {
-    QString sourceFile = mw_one->sourceKexts.at(i);
-    QString targetFile = mw_one->targetKexts.at(i);
-    QString sourceHash = mw_one->getMD5(mymethod->getKextBin(sourceFile));
-    QString targetHash = mw_one->getMD5(mymethod->getKextBin(targetFile));
-    if (sourceHash != targetHash) {
-      ui->btnUpdate->setEnabled(true);
-      repaint();
-      QString str_av, str_cv, str, name;
-      name = mymethod->getFileName(targetFile);
-      str_cv = mymethod->getKextVersion(targetFile);
-      str_av = mymethod->getKextVersion(sourceFile);
-      str = name + "  |  " + str_cv + "  |  " + str_av;
-      ui->listSource->item(i)->setText(str);
+    ui->listSource->setCurrentRow(i);
+    if (ui->listSource->item(i)->checkState() == Qt::Checked) {
+      QString sourceFile = mw_one->sourceKexts.at(i);
+      QString targetFile = mw_one->targetKexts.at(i);
+      QString strSV, strTV;
+      strSV = mymethod->getKextVersion(sourceFile);
+      strTV = mymethod->getKextVersion(targetFile);
+      if (strSV > strTV) {
+        ui->btnUpdate->setEnabled(true);
+        repaint();
+      }
     }
   }
+  ui->listSource->setCurrentRow(n);
 }
 
 void SyncOCDialog::on_btnStop_clicked() { mymethod->cancelKextUpdate(); }
@@ -272,14 +296,9 @@ void SyncOCDialog::on_btnUpdate_clicked() {
   ui->btnUpdate->setEnabled(false);
   repaint();
 
+  int n = ui->listSource->currentRow();
   for (int i = 0; i < ui->listSource->count(); i++) {
-    if (ui->listSource->item(i)->checkState() == Qt::Checked) {
-      QString targetFile = mw_one->targetKexts.at(i);
-      QString str_cv, str, name;
-      name = mymethod->getFileName(targetFile);
-      str_cv = mymethod->getKextVersion(targetFile);
-      str = name + "  |  " + str_cv;
-      ui->listSource->item(i)->setText(str);
-    }
+    ui->listSource->setCurrentRow(i);
   }
+  ui->listSource->setCurrentRow(n);
 }

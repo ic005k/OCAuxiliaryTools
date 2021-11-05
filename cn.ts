@@ -4465,51 +4465,56 @@ Type</translation>
 <context>
     <name>Method</name>
     <message>
-        <location filename="Method.cpp" line="348"/>
+        <location filename="Method.cpp" line="357"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
     </message>
     <message>
         <location filename="Method.cpp" line="77"/>
-        <location filename="Method.cpp" line="383"/>
+        <location filename="Method.cpp" line="392"/>
         <source>Network error!</source>
         <translation>网络错误！</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="475"/>
+        <location filename="Method.cpp" line="484"/>
         <source>Application</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="476"/>
+        <location filename="Method.cpp" line="485"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="937"/>
-        <location filename="Method.cpp" line="943"/>
+        <location filename="Method.cpp" line="500"/>
+        <source>None</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="Method.cpp" line="947"/>
+        <location filename="Method.cpp" line="953"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="939"/>
+        <location filename="Method.cpp" line="949"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="960"/>
+        <location filename="Method.cpp" line="970"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="961"/>
-        <location filename="Method.cpp" line="1023"/>
+        <location filename="Method.cpp" line="971"/>
+        <location filename="Method.cpp" line="1033"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1022"/>
+        <location filename="Method.cpp" line="1032"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
@@ -4517,55 +4522,55 @@ Type</translation>
 <context>
     <name>QInstaller</name>
     <message>
-        <location filename="Method.cpp" line="1279"/>
+        <location filename="Method.cpp" line="1289"/>
         <location filename="autoupdatedialog.cpp" line="326"/>
         <source>bytes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1280"/>
+        <location filename="Method.cpp" line="1290"/>
         <location filename="autoupdatedialog.cpp" line="327"/>
         <source>KiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1281"/>
+        <location filename="Method.cpp" line="1291"/>
         <location filename="autoupdatedialog.cpp" line="328"/>
         <source>MiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1282"/>
+        <location filename="Method.cpp" line="1292"/>
         <location filename="autoupdatedialog.cpp" line="329"/>
         <source>GiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1283"/>
+        <location filename="Method.cpp" line="1293"/>
         <location filename="autoupdatedialog.cpp" line="330"/>
         <source>TiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1284"/>
+        <location filename="Method.cpp" line="1294"/>
         <location filename="autoupdatedialog.cpp" line="331"/>
         <source>PiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1285"/>
+        <location filename="Method.cpp" line="1295"/>
         <location filename="autoupdatedialog.cpp" line="332"/>
         <source>EiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1286"/>
+        <location filename="Method.cpp" line="1296"/>
         <location filename="autoupdatedialog.cpp" line="333"/>
         <source>ZiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1287"/>
+        <location filename="Method.cpp" line="1297"/>
         <location filename="autoupdatedialog.cpp" line="334"/>
         <source>YiB</source>
         <translation></translation>
@@ -4650,35 +4655,40 @@ Type</translation>
     </message>
     <message>
         <location filename="syncocdialog.ui" line="204"/>
+        <source>Check Kexts updates online</source>
+        <translation>在线检查Kexts更新</translation>
+    </message>
+    <message>
+        <location filename="syncocdialog.ui" line="211"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="211"/>
-        <source>Online Upgrade Kexts</source>
-        <translation>在线更新Kexts</translation>
+        <location filename="syncocdialog.ui" line="218"/>
+        <source>Update</source>
+        <translation>更新</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="222"/>
+        <location filename="syncocdialog.ui" line="229"/>
         <source>Start Sync</source>
         <translation>开始同步</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="88"/>
+        <location filename="syncocdialog.cpp" line="96"/>
         <source>Successfully synced to OpenCore: </source>
         <translation>成功同步到OpenCore：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="135"/>
-        <location filename="syncocdialog.cpp" line="209"/>
-        <source>Source File: </source>
-        <translation>源文件：</translation>
+        <location filename="syncocdialog.cpp" line="142"/>
+        <location filename="syncocdialog.cpp" line="238"/>
+        <source>Current File: </source>
+        <translation>当前文件：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="137"/>
-        <location filename="syncocdialog.cpp" line="210"/>
-        <source>Target File: </source>
-        <translation>目标文件：</translation>
+        <location filename="syncocdialog.cpp" line="144"/>
+        <location filename="syncocdialog.cpp" line="235"/>
+        <source>Available File: </source>
+        <translation>可用文件：</translation>
     </message>
 </context>
 <context>
@@ -4715,7 +4725,7 @@ Type</translation>
         <location filename="aboutdialog.cpp" line="48"/>
         <source>Contributor: 5T33Z0 (Germany)    [Documentation, user experience and UI interaction design]</source>
         <oldsource>Contributor: 5T33Z0 (Europe)    [Documentation, user experience and UI interaction design]</oldsource>
-        <translation type="unfinished">贡献者：5T33Z0 (德国)    [文档、用户体验及UI交互设计]</translation>
+        <translation>贡献者：5T33Z0 (德国)    [文档、用户体验及UI交互设计]</translation>
     </message>
     <message>
         <location filename="aboutdialog.cpp" line="56"/>
