@@ -13,19 +13,7 @@
   <property name="windowTitle">
    <string>Sync OC</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_10">
-   <property name="leftMargin">
-    <number>8</number>
-   </property>
-   <property name="topMargin">
-    <number>1</number>
-   </property>
-   <property name="rightMargin">
-    <number>8</number>
-   </property>
-   <property name="bottomMargin">
-    <number>8</number>
-   </property>
+  <layout class="QGridLayout" name="gridLayout_11">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_7">
      <item row="1" column="0">
@@ -55,7 +43,7 @@
         </size>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::StrongFocus</enum>
        </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarAlwaysOn</enum>
@@ -71,14 +59,14 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="1" rowspan="6" colspan="2">
+   <item row="0" column="1" rowspan="5">
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
    </item>
-   <item row="0" column="3">
+   <item row="0" column="2">
     <layout class="QGridLayout" name="gridLayout_8">
      <item row="1" column="0">
       <widget class="QListWidget" name="listTarget">
@@ -95,7 +83,7 @@
         </size>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::StrongFocus</enum>
        </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarAlwaysOn</enum>
@@ -111,7 +99,7 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0" rowspan="2">
+   <item row="1" column="0">
     <layout class="QGridLayout" name="gridLayout_9">
      <item row="0" column="1">
       <widget class="QToolButton" name="btnClearAll">
@@ -142,17 +130,21 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="2" colspan="2">
-    <widget class="QCheckBox" name="chkIncludeResource">
-     <property name="text">
-      <string>Include Resource Directory</string>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
+   <item row="1" column="2">
+    <layout class="QGridLayout" name="gridLayout_10">
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="chkIncludeResource">
+       <property name="text">
+        <string>Include Resource Directory</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="3" column="0">
+   <item row="2" column="0">
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="0" column="0">
       <widget class="QLabel" name="lblTargetLastModi">
@@ -170,7 +162,7 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="3">
+   <item row="2" column="2">
     <layout class="QGridLayout" name="gridLayout_6">
      <item row="1" column="0">
       <widget class="QLabel" name="lblTargetLastModi_2">
@@ -188,7 +180,7 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="0">
+   <item row="3" column="0">
     <layout class="QGridLayout" name="gridLayout_5">
      <item row="0" column="0">
       <widget class="QLabel" name="labelShowDLInfo">
@@ -218,7 +210,7 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="3">
+   <item row="3" column="2">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="1">
       <widget class="QLabel" name="label_2">
@@ -239,7 +231,7 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="0">
+   <item row="4" column="0">
     <layout class="QGridLayout" name="gridLayout_2">
      <item row="0" column="0">
       <widget class="QPushButton" name="btnUpKexts">
@@ -264,7 +256,7 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="3">
+   <item row="4" column="2">
     <layout class="QGridLayout" name="gridLayout_3">
      <item row="0" column="0">
       <widget class="QPushButton" name="btnStartSync">
