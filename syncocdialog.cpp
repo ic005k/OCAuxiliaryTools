@@ -63,7 +63,7 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     strTV = mymethod->getKextVersion(strTar);
     if (QDir(strSou).exists()) {
       if (ui->listSource->item(i)->checkState() == Qt::Checked) {
-        if (strSV >= strTV) {
+        if (strSV >= strTV || strTV == "None") {
           mw_one->copyDirectoryFiles(strSou, strTar, true);
         }
       }
