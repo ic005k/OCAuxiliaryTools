@@ -59,5 +59,15 @@
         <file>icon/stop.png</file>
         <file>icon/tip.png</file>
         <file>icon/nous.png</file>
+        <file>icon/db0.png</file>
+        <file>icon/esp0.png</file>
+        <file>icon/find0.png</file>
+        <file>icon/ov0.png</file>
+        <file>icon/redo0.png</file>
+        <file>icon/save0.png</file>
+        <file>icon/um0.png</file>
+        <file>icon/undo0.png</file>
+        <file>icon/opendir0.png</file>
+        <file>icon/rp0.png</file>
     </qresource>
 </RCC>

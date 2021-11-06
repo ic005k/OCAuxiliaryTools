@@ -116,6 +116,7 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
                   i, 0, new QTableWidgetItem(newFile.first()));
 
               mw_one->setWindowModified(true);
+              mw_one->updateIconStatus();
             }
           }
         }
@@ -132,6 +133,7 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
                                                     new QTableWidgetItem(str));
 
               mw_one->setWindowModified(true);
+              mw_one->updateIconStatus();
             }
           }
         }
@@ -147,6 +149,7 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
                   i, 0, new QTableWidgetItem(newFile.first()));
 
               mw_one->setWindowModified(true);
+              mw_one->updateIconStatus();
             }
           }
         }
@@ -161,6 +164,7 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
                   i, 0, new QTableWidgetItem(newFile.first()));
 
               mw_one->setWindowModified(true);
+              mw_one->updateIconStatus();
             }
           }
         }
@@ -258,6 +262,7 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
               mw_one->ui->table_acpi_add->removeRow(i);
 
               mw_one->setWindowModified(true);
+              mw_one->updateIconStatus();
             }
           }
         }
@@ -272,6 +277,7 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
               mw_one->ui->table_kernel_add->removeRow(i);
 
               mw_one->setWindowModified(true);
+              mw_one->updateIconStatus();
             }
           }
         }
@@ -286,6 +292,7 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
               mw_one->ui->table_uefi_drivers->removeRow(i);
 
               mw_one->setWindowModified(true);
+              mw_one->updateIconStatus();
             }
           }
         }
@@ -299,6 +306,7 @@ void FileSystemWatcher::directoryUpdated(const QString& path) {
               mw_one->ui->tableTools->removeRow(i);
 
               mw_one->setWindowModified(true);
+              mw_one->updateIconStatus();
             }
           }
         }

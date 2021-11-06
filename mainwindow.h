@@ -1041,6 +1041,8 @@ class MainWindow : public QMainWindow {
 
   void init_ToolButtonStyle();
   void init_Table(int index);
+  void init_ToolBarIcon();
+  QToolButton* btn0;
 };
 
 #endif  // MAINWINDOW_H

@@ -6054,13 +6054,22 @@ void MainWindow::on_listMain_itemSelectionChanged() {
 
 void MainWindow::init_listMainSub() {
   QString listStyleMain, listStyle;
-  listStyleMain =
-      "QListWidget::item:hover{background-color:#e6e6e6;margin:1px,1px,1px,"
-      "1px;border-radius:6;"
-      "color:black}"
-      "QListWidget::item:selected{background:#e6e6e6; border:0px "
-      "blue;margin:1px,1px,1px,1px;border-radius:6;"
-      "color:blue}";
+  if (red < 55)
+    listStyleMain =
+        "QListWidget::item:hover{background-color:#e6e6e6;margin:1px,1px,1px,"
+        "1px;border-radius:6;"
+        "color:black}"
+        "QListWidget::item:selected{background:#e6e6e6; border:0px "
+        "blue;margin:1px,1px,1px,1px;border-radius:6;"
+        "color:blue}";
+  else
+    listStyleMain =
+        "QListWidget::item:hover{background-color:#e6e6e6;margin:1px,1px,1px,"
+        "1px;border-radius:6;"
+        "color:black}"
+        "QListWidget::item:selected{background:#e6e6e6; border:0px "
+        "blue;margin:1px,1px,1px,1px;border-radius:6;"
+        "color:blue}";
 
   listStyle =
       "QListWidget::item:selected{background:lightblue; border:0px blue; "
@@ -6110,22 +6119,106 @@ void MainWindow::init_listMainSub() {
   ui->textDiskInfo->setVisible(false);
 }
 
+void MainWindow::init_ToolBarIcon() {
+  QPalette pal = this->palette();
+  QBrush brush = pal.window();
+  red = brush.color().red();
+
+  int iSize;
+  if (win || linuxOS)
+    iSize = 20;
+  else
+    iSize = 23;
+  ui->toolBar->setIconSize(QSize(iSize, iSize));
+  if (red < 55)
+    ui->toolBar->setStyleSheet(
+
+        "QToolButton:hover{ "
+        "color:rgb(255, 255, 255); "
+        "border-style:solid; "
+        "border-top-left-radius:2px;  "
+        "border-top-right-radius:2px; "
+        "background:#707070; "
+        "border:1px;"
+        "border-radius:5px;padding:2px 4px; }"
+
+        "QToolButton:pressed{ "
+        "color:rgb(255, 255, 255); "
+        "border-style:solid; "
+        "border-top-left-radius:2px;  "
+        "border-top-right-radius:2px; "
+        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 "
+        "rgb(226,236,241),"
+        "stop: 0.3 rgb(190,190,190),"
+        "stop: 1 rgb(160,160,160));"
+        "border:1px;"
+        "border-radius:5px;padding:2px 4px; }"
+
+    );
+  else
+    ui->toolBar->setStyleSheet(
+
+        "QToolButton:hover{ "
+        "color:rgb(255, 255, 255); "
+        "border-style:solid; "
+        "border-top-left-radius:2px;  "
+        "border-top-right-radius:2px; "
+        "background:#bfbfbf; "
+        "border:1px;"
+        "border-radius:5px;padding:2px 4px; }"
+
+        "QToolButton:pressed{ "
+        "color:rgb(255, 255, 255); "
+        "border-style:solid; "
+        "border-top-left-radius:2px;  "
+        "border-top-right-radius:2px; "
+        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 "
+        "rgb(226,236,241),"
+        "stop: 0.3 rgb(190,190,190),"
+        "stop: 1 rgb(160,160,160));"
+        "border:1px;"
+        "border-radius:5px;padding:2px 4px; }"
+
+    );
+
+  if (red < 55) {
+    btn0->setIcon(QIcon(":/icon/rp0.png"));
+    ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir0.png"));
+    if (!isWindowModified()) ui->actionSave->setIcon(QIcon(":/icon/save0.png"));
+    ui->actionOcvalidate->setIcon(QIcon(":/icon/ov0.png"));
+    ui->actionMountEsp->setIcon(QIcon(":/icon/esp0.png"));
+    ui->actionUpgrade_OC->setIcon(QIcon(":/icon/um0.png"));
+    ui->actionDatabase->setIcon(QIcon(":/icon/db0.png"));
+    undoAction->setIcon(QIcon(":/icon/undo0.png"));
+    redoAction->setIcon(QIcon(":/icon/redo0.png"));
+    ui->actionFind->setIcon(QIcon(":/icon/find0.png"));
+  } else {
+    btn0->setIcon(QIcon(":/icon/rp.png"));
+    ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
+    if (!isWindowModified()) ui->actionSave->setIcon(QIcon(":/icon/save.png"));
+    ui->actionOcvalidate->setIcon(QIcon(":/icon/ov.png"));
+    ui->actionMountEsp->setIcon(QIcon(":/icon/esp.png"));
+    ui->actionUpgrade_OC->setIcon(QIcon(":/icon/um.png"));
+    ui->actionDatabase->setIcon(QIcon(":/icon/db.png"));
+    undoAction->setIcon(QIcon(":/icon/undo.png"));
+    redoAction->setIcon(QIcon(":/icon/redo.png"));
+    ui->actionFind->setIcon(QIcon(":/icon/find.png"));
+  }
+}
+
 void MainWindow::init_FileMenu() {
   // New
   if (mac || osx1012) ui->actionNewWindow->setIconVisibleInMenu(false);
   ui->actionNewWindow->setIcon(QIcon(":/icon/new.png"));
-  ui->toolBar->addAction(ui->actionNewWindow);
-  ui->toolBar->addSeparator();
 
   // Open
   if (mac || osx1012) ui->actionOpen->setIconVisibleInMenu(false);
   connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen);
   ui->actionOpen->setShortcut(tr("ctrl+o"));
   ui->actionOpen->setIcon(QIcon(":/icon/open.png"));
-  ui->toolBar->addAction(ui->actionOpen);
 
   //最近打开的文件快捷通道
-  QToolButton* btn0 = new QToolButton(this);
+  btn0 = new QToolButton(this);
   btn0->setToolTip(tr("Open Recent..."));
   btn0->setIcon(QIcon(":/icon/rp.png"));
   btn0->setPopupMode(QToolButton::InstantPopup);
@@ -6153,7 +6246,6 @@ void MainWindow::init_FileMenu() {
           &MainWindow::on_btnSaveAs);
   ui->actionSave_As->setShortcut(tr("ctrl+shift+s"));
   ui->actionSave_As->setIcon(QIcon(":/icon/saveas.png"));
-  ui->toolBar->addAction(ui->actionSave_As);
 
   // Quit
   ui->actionQuit->setMenuRole(QAction::QuitRole);
@@ -6181,9 +6273,7 @@ void MainWindow::init_EditMenu() {
 
   // GenerateEFI
   if (mac || osx1012) ui->actionGenerateEFI->setIconVisibleInMenu(false);
-
   ui->actionGenerateEFI->setIcon(QIcon(":/icon/efi.png"));
-  ui->toolBar->addAction(ui->actionGenerateEFI);
 
   // Update OC Main Program
   if (mac || osx1012) ui->actionUpgrade_OC->setIconVisibleInMenu(false);
@@ -6194,7 +6284,6 @@ void MainWindow::init_EditMenu() {
 
   // Open DataBase
   if (mac || osx1012) ui->actionDatabase->setIconVisibleInMenu(false);
-
   ui->actionDatabase->setShortcut(tr("ctrl+d"));
   ui->actionDatabase->setIcon(QIcon(":/icon/db.png"));
 
@@ -6202,7 +6291,6 @@ void MainWindow::init_EditMenu() {
   if (mac || osx1012)
     ui->actionOpen_database_directory->setIconVisibleInMenu(false);
   ui->actionOpen_database_directory->setIcon(QIcon(":/icon/opendb.png"));
-
   ui->actionUpgrade_Database->setVisible(false);
 }
 
@@ -6230,22 +6318,18 @@ void MainWindow::init_HelpMenu() {
   ui->toolBar->addSeparator();
   if (mac || osx1012) ui->actionOpenCore_Factory->setIconVisibleInMenu(false);
   ui->actionOpenCore_Factory->setIcon(QIcon(":/icon/ocf.png"));
-  ui->toolBar->addAction(ui->actionOpenCore_Factory);
 
   //检查更新
   if (mac || osx1012) ui->btnCheckUpdate->setIconVisibleInMenu(false);
   ui->btnCheckUpdate->setIcon(QIcon(":/icon/cu.png"));
-  ui->toolBar->addAction(ui->btnCheckUpdate);
 
   //文档
   if (mac || osx1012) ui->btnHelp->setIconVisibleInMenu(false);
   ui->btnHelp->setIcon(QIcon(":/icon/doc.png"));
-  ui->toolBar->addAction(ui->btnHelp);
 
   // Bug Report
   if (mac || osx1012) ui->actionBug_Report->setIconVisibleInMenu(false);
   ui->actionBug_Report->setIcon(QIcon(":/icon/about.png"));
-  ui->toolBar->addAction(ui->actionBug_Report);
 }
 
 void MainWindow::init_UndoRedo() {
@@ -6329,67 +6413,6 @@ void MainWindow::init_MainUI() {
   orgLabelStyle = ui->label->styleSheet();
   orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
 
-  QPalette pal = this->palette();
-  QBrush brush = pal.window();
-  red = brush.color().red();
-
-  int iSize;
-  if (win || linuxOS)
-    iSize = 20;
-  else
-    iSize = 20;
-  ui->toolBar->setIconSize(QSize(iSize, iSize));
-  if (red < 55)
-    ui->toolBar->setStyleSheet(
-
-        "QToolButton:hover{ "
-        "color:rgb(255, 255, 255); "
-        "border-style:solid; "
-        "border-top-left-radius:2px;  "
-        "border-top-right-radius:2px; "
-        "background:#bfbfbf; "
-        "border:1px;"
-        "border-radius:5px;padding:2px 4px; }"
-
-        "QToolButton:pressed{ "
-        "color:rgb(255, 255, 255); "
-        "border-style:solid; "
-        "border-top-left-radius:2px;  "
-        "border-top-right-radius:2px; "
-        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 "
-        "rgb(226,236,241),"
-        "stop: 0.3 rgb(190,190,190),"
-        "stop: 1 rgb(160,160,160));"
-        "border:1px;"
-        "border-radius:5px;padding:2px 4px; }"
-
-    );
-  else
-    ui->toolBar->setStyleSheet(
-
-        "QToolButton:hover{ "
-        "color:rgb(255, 255, 255); "
-        "border-style:solid; "
-        "border-top-left-radius:2px;  "
-        "border-top-right-radius:2px; "
-        "background:#bfbfbf; "
-        "border:1px;"
-        "border-radius:5px;padding:2px 4px; }"
-
-        "QToolButton:pressed{ "
-        "color:rgb(255, 255, 255); "
-        "border-style:solid; "
-        "border-top-left-radius:2px;  "
-        "border-top-right-radius:2px; "
-        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 "
-        "rgb(226,236,241),"
-        "stop: 0.3 rgb(190,190,190),"
-        "stop: 1 rgb(160,160,160));"
-        "border:1px;"
-        "border-radius:5px;padding:2px 4px; }"
-
-    );
-
   ui->frameTip->setAutoFillBackground(true);
   ui->frameTip->setPalette(QPalette(QColor(255, 204, 204)));
   ui->btnNo->setDefault(true);
@@ -6407,7 +6430,6 @@ void MainWindow::init_MainUI() {
 
   ui->toolBar->addSeparator();
   ui->toolBar->addAction(ui->actionDatabase);
-  ui->toolBar->addAction(ui->actionOpen_database_directory);
 
   init_HelpMenu();
 
@@ -6502,6 +6524,7 @@ void MainWindow::init_MainUI() {
 
   init_InitialValue();
   init_TableStyle();
+  init_ToolBarIcon();
 }
 
 void MainWindow::init_TableStyle() {
@@ -6913,7 +6936,10 @@ void MainWindow::readResultCheckData() {
     str = tr("OK !");
     strMsg = result + "\n\n" + str;
 
-    ui->actionOcvalidate->setIcon(QIcon(":/icon/ov.png"));
+    if (red < 55)
+      ui->actionOcvalidate->setIcon(QIcon(":/icon/ov0.png"));
+    else
+      ui->actionOcvalidate->setIcon(QIcon(":/icon/ov.png"));
     ui->actionOcvalidate->setToolTip(ui->actionOcvalidate->text());
 
     dlgOCV->setGoEnabled(false);
@@ -9597,6 +9623,8 @@ void MainWindow::paintEvent(QPaintEvent* event) {
     } else {
       setPalette(ui->cboxFind, Qt::white, Qt::black);
     }
+
+    init_ToolBarIcon();
   }
 
   if (!One) {
