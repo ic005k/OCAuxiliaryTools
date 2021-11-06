@@ -111,7 +111,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7964,7 +7964,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>7</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -9041,28 +9041,6 @@ The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS 
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <layout class="QGridLayout" name="gridLayout_34">
-              <item row="0" column="1">
-               <widget class="QCheckBox" name="chkDirectGopRendering">
-                <property name="toolTip">
-                 <string notr="true">On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.
-----
-在某些固件上，这可能会提供更好的性能，甚至修复渲染问题，比如在MacPro5,1上。然而，建议不要使用这个选项，除非有明显的好处，因为它甚至可能导致滚动速度变慢。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Use builtin graphics output protocol renderer for console.</string>
-                </property>
-                <property name="text">
-                 <string>DirectGopRendering</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QComboBox" name="cboxResolution">
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="3">
                <widget class="QCheckBox" name="chkReplaceTabWithSpace">
                 <property name="toolTip">
@@ -9083,97 +9061,6 @@ Note: This option only applies to System renderer.
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
-               <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
-                <property name="toolTip">
-                 <string notr="true"> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,because random text may appear over graphical images and cause UI corruption. Setting this option to true will discard all text output when console control is in mode different from Text.
-
-Note: This option only applies to System renderer.
-
-----
-
- 选择固件在图形和文本模式下在屏幕上输出文本。这通常是出乎意料的，因为随机的文本可能会出现在图形图像上，并导致用户界面损坏。将此选项设置为 &quot;true&quot;，当控制台控制模式与文本模式不同时，将丢弃所有文本输出。
-
-注意：这个选项只适用于系统渲染器。</string>
-                </property>
-                <property name="text">
-                 <string>IgnoreTextInGraphics</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label_25">
-                <property name="toolTip">
-                 <string notr="true">• Set to WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080) formatted string to request custom resolution from GOP if available.
-
-• Set to empty string not to change screen resolution.
-
-• Set to Max to try to use largest available screen resolution.
-
-On HiDPI screens APPLE_VENDOR_VARIABLE_GUID UIScale NVRAM variable may need to be set to 02 to enable HiDPI scaling in Builtin text renderer, FileVault 2 UEFI password interface, and boot screen logo. Refer to Recommended Variables section for more details.
-
-Note: This will fail when console handle has no GOP protocol. When the firmware does not provide it, it can be added with ProvideConsoleGop set to true.
-----
-- 设置为WxH@Bpp(如1920x1080@32)或WxH(如1920x1080)格式的字符串，以请求GOP提供自定义分辨率。
-
-- 设置为空字符串不改变屏幕分辨率。
-
-- 设置为最大，尝试使用最大的可用屏幕分辨率。
-
-在HiDPI屏幕上，APPLE_VENDOR_VARIABLE_GUID UIScale NVRAM变量可能需要设置为02，以便在Builtin文本渲染器、FileVault 2 UEFI密码界面和开机屏幕徽标中启用HiDPI缩放。更多细节请参考推荐变量部分。
-
-注意：当控制台手柄没有GOP协议时，这将失败。当固件不提供时，可以通过将ProvideConsoleGop设置为true来添加。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Sets console output screen resolution.</string>
-                </property>
-                <property name="text">
-                 <string>Resolution</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QCheckBox" name="chkReconnectOnResChange">
-                <property name="toolTip">
-                 <string notr="true">On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
-
-Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless required.
-----
-在某些固件上，当通过GOP改变屏幕分辨率时，需要重新连接产生控制台协议（简单文本输出）的控制器。否则它们将不会根据新的分辨率产生文本。
-
-注意：在一些板卡上，当从Shell启动OpenCore时，这个逻辑可能会导致黑屏，因此它是可选的。在 0.5.2 之前的版本中，该选项是强制性的，不可配置。除非需要，否则请不要使用该选项。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Reconnect console controllers after changing screen resolution.</string>
-                </property>
-                <property name="text">
-                 <string>ReconnectOnResChange</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QCheckBox" name="chkForceResolution">
-                <property name="toolTip">
-                 <string notr="true">Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max will try to pull the largest available resolution from the connected display’s EDID.
-
-Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel iGPUs.
-----
-说明：在默认情况下无法获得所需分辨率的情况下，强制设置分辨率，例如在传统的英特尔GMA和第一代英特尔高清图形(Ironlake/Arrandale)上。将 &quot;分辨率 &quot;设置为 &quot;最大 &quot;将尝试从所连接的显示器的EDID中提取最大的可用分辨率。
-
-注意：这个选项取决于OC_FORCE_RESOLUTION_PROTOCOL协议是否存在。这个协议目前只被OpenDuetPkg支持。OpenDuetPkg的实现目前只支持Intel iGPU。</string>
-                </property>
-                <property name="text">
-                 <string>ForceResolution</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QComboBox" name="cboxTextRenderer">
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="1">
                <widget class="QCheckBox" name="chkProvideConsoleGop">
                 <property name="toolTip">
@@ -9190,6 +9077,24 @@ macOS bootloader 要求控制台手柄上必须有 GOP 或 UGA（适用于 10.4 
                 </property>
                 <property name="text">
                  <string>ProvideConsoleGop</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
+                <property name="toolTip">
+                 <string notr="true"> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,because random text may appear over graphical images and cause UI corruption. Setting this option to true will discard all text output when console control is in mode different from Text.
+
+Note: This option only applies to System renderer.
+
+----
+
+ 选择固件在图形和文本模式下在屏幕上输出文本。这通常是出乎意料的，因为随机的文本可能会出现在图形图像上，并导致用户界面损坏。将此选项设置为 &quot;true&quot;，当控制台控制模式与文本模式不同时，将丢弃所有文本输出。
+
+注意：这个选项只适用于系统渲染器。</string>
+                </property>
+                <property name="text">
+                 <string>IgnoreTextInGraphics</string>
                 </property>
                </widget>
               </item>
@@ -9249,26 +9154,44 @@ BuiltinGraphics的使用一般都很简单。对于大多数平台来说，有�
 注意：一些Mac，即MacPro5,1，在使用较新的GPU时可能会破坏控制台的输出，因此只有BuiltinGraphics可能对它们有用。</string>
                 </property>
                 <property name="statusTip">
-                 <string> Chooses renderer for text going through standard console output.</string>
+                 <string notr="true"> Chooses renderer for text going through standard console output.</string>
                 </property>
                 <property name="text">
                  <string>TextRenderer</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="chkSanitiseClearScreen">
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="chkDirectGopRendering">
                 <property name="toolTip">
-                 <string notr="true"> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
-
-Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to empty string for this to work.
+                 <string notr="true">On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.
 ----
- 当使用大屏幕（如2K或4K）时，一些固件在尝试清除屏幕内容时，会将屏幕分辨率重置为故障安全值（如1024x768）。这个选项试图应用一个变通方法。
-
-注意：这个选项只适用于系统渲染器。在所有已知受影响的系统中，ConsoleMode必须设置为空字符串才行。</string>
+在某些固件上，这可能会提供更好的性能，甚至修复渲染问题，比如在MacPro5,1上。然而，建议不要使用这个选项，除非有明显的好处，因为它甚至可能导致滚动速度变慢。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Use builtin graphics output protocol renderer for console.</string>
                 </property>
                 <property name="text">
-                 <string>SanitiseClearScreen</string>
+                 <string>DirectGopRendering</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QCheckBox" name="chkReconnectOnResChange">
+                <property name="toolTip">
+                 <string notr="true">On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
+
+Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless required.
+----
+在某些固件上，当通过GOP改变屏幕分辨率时，需要重新连接产生控制台协议（简单文本输出）的控制器。否则它们将不会根据新的分辨率产生文本。
+
+注意：在一些板卡上，当从Shell启动OpenCore时，这个逻辑可能会导致黑屏，因此它是可选的。在 0.5.2 之前的版本中，该选项是强制性的，不可配置。除非需要，否则请不要使用该选项。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Reconnect console controllers after changing screen resolution.</string>
+                </property>
+                <property name="text">
+                 <string>ReconnectOnResChange</string>
                 </property>
                </widget>
               </item>
@@ -9291,27 +9214,97 @@ Note: This field is best to be left empty on most firmwares.
                 </property>
                </widget>
               </item>
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_12">
                 <property name="toolTip">
-                 <string notr="true">Some firmwares clear only part of screen when switching from graphics to text mode, leaving a fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before switching to text mode.
+                 <string notr="true">Type: plist string
 
-Note: This option only applies to System renderer.
+Description: Provide GOP protocol instances on top of UGA protocol instances.
 
+This option provides the GOP protocol via a UGA-based proxy for firmware that do not implement the protocol.
+The supported values for the option are as follows:
+• Enabled — provide GOP for all UGA protocols.
+• Apple — provide GOP for AppleFramebufferInfo-enabled protocols.
+• Disabled — do not provide GOP.
+Note: This option requires ProvideConsoleGop to be enabled.
 ----
+类型：plist字符串
 
-有些固件在从图形模式切换到文本模式时，只清除了屏幕的一部分，留下了之前绘制的图像的一部分。这个选项可以在切换到文本模式前用黑色填充整个图形屏幕。
+描述：在UGA协议实例的基础上提供GOP协议实例。
 
-注：该选项仅适用于系统渲染器。</string>
+这个选项通过一个基于UGA的代理为没有实现GOP协议的固件提供GOP协议。
+该选项的支持值如下：
+- Enabled - 为所有UGA协议提供GOP。
+- Apple - 为AppleFramebufferInfo启用的协议提供GOP。
+- Disabled - 不提供GOP。
+注意：这个选项需要ProvideConsoleGop被启用。</string>
                 </property>
                 <property name="statusTip">
-                 <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
- fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
- switching to text mode.
- Note: This option only applies to System renderer.</string>
+                 <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>ClearScreenOnModeSwitch</string>
+                 <string>GopPassThrough</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QComboBox" name="cboxResolution">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_25">
+                <property name="toolTip">
+                 <string notr="true">• Set to WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080) formatted string to request custom resolution from GOP if available.
+
+• Set to empty string not to change screen resolution.
+
+• Set to Max to try to use largest available screen resolution.
+
+On HiDPI screens APPLE_VENDOR_VARIABLE_GUID UIScale NVRAM variable may need to be set to 02 to enable HiDPI scaling in Builtin text renderer, FileVault 2 UEFI password interface, and boot screen logo. Refer to Recommended Variables section for more details.
+
+Note: This will fail when console handle has no GOP protocol. When the firmware does not provide it, it can be added with ProvideConsoleGop set to true.
+----
+- 设置为WxH@Bpp(如1920x1080@32)或WxH(如1920x1080)格式的字符串，以请求GOP提供自定义分辨率。
+
+- 设置为空字符串不改变屏幕分辨率。
+
+- 设置为最大，尝试使用最大的可用屏幕分辨率。
+
+在HiDPI屏幕上，APPLE_VENDOR_VARIABLE_GUID UIScale NVRAM变量可能需要设置为02，以便在Builtin文本渲染器、FileVault 2 UEFI密码界面和开机屏幕徽标中启用HiDPI缩放。更多细节请参考推荐变量部分。
+
+注意：当控制台手柄没有GOP协议时，这将失败。当固件不提供时，可以通过将ProvideConsoleGop设置为true来添加。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Sets console output screen resolution.</string>
+                </property>
+                <property name="text">
+                 <string>Resolution</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QComboBox" name="cboxTextRenderer">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="chkSanitiseClearScreen">
+                <property name="toolTip">
+                 <string notr="true"> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
+
+Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to empty string for this to work.
+----
+ 当使用大屏幕（如2K或4K）时，一些固件在尝试清除屏幕内容时，会将屏幕分辨率重置为故障安全值（如1024x768）。这个选项试图应用一个变通方法。
+
+注意：这个选项只适用于系统渲染器。在所有已知受影响的系统中，ConsoleMode必须设置为空字符串才行。</string>
+                </property>
+                <property name="text">
+                 <string>SanitiseClearScreen</string>
                 </property>
                </widget>
               </item>
@@ -9344,33 +9337,43 @@ Note: This option only applies to System renderer.
                 </item>
                </widget>
               </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="label_12">
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="chkForceResolution">
                 <property name="toolTip">
-                 <string>Type: plist string
+                 <string notr="true">Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max will try to pull the largest available resolution from the connected display’s EDID.
 
-Description: Provide GOP protocol instances on top of UGA protocol instances.
-
-This option provides the GOP protocol via a UGA-based proxy for firmware that do not implement the protocol.
-The supported values for the option are as follows:
-• Enabled — provide GOP for all UGA protocols.
-• Apple — provide GOP for AppleFramebufferInfo-enabled protocols.
-• Disabled — do not provide GOP.
-Note: This option requires ProvideConsoleGop to be enabled.
+Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel iGPUs.
 ----
-类型：plist字符串
+说明：在默认情况下无法获得所需分辨率的情况下，强制设置分辨率，例如在传统的英特尔GMA和第一代英特尔高清图形(Ironlake/Arrandale)上。将 &quot;分辨率 &quot;设置为 &quot;最大 &quot;将尝试从所连接的显示器的EDID中提取最大的可用分辨率。
 
-描述：在UGA协议实例的基础上提供GOP协议实例。
-
-这个选项通过一个基于UGA的代理为没有实现GOP协议的固件提供GOP协议。
-该选项的支持值如下：
-- Enabled - 为所有UGA协议提供GOP。
-- Apple - 为AppleFramebufferInfo启用的协议提供GOP。
-- Disabled - 不提供GOP。
-注意：这个选项需要ProvideConsoleGop被启用。</string>
+注意：这个选项取决于OC_FORCE_RESOLUTION_PROTOCOL协议是否存在。这个协议目前只被OpenDuetPkg支持。OpenDuetPkg的实现目前只支持Intel iGPU。</string>
                 </property>
                 <property name="text">
-                 <string>GopPassThrough</string>
+                 <string>ForceResolution</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
+                <property name="toolTip">
+                 <string notr="true">Some firmwares clear only part of screen when switching from graphics to text mode, leaving a fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before switching to text mode.
+
+Note: This option only applies to System renderer.
+
+----
+
+有些固件在从图形模式切换到文本模式时，只清除了屏幕的一部分，留下了之前绘制的图像的一部分。这个选项可以在切换到文本模式前用黑色填充整个图形屏幕。
+
+注：该选项仅适用于系统渲染器。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
+ fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
+ switching to text mode.
+ Note: This option only applies to System renderer.</string>
+                </property>
+                <property name="text">
+                 <string>ClearScreenOnModeSwitch</string>
                 </property>
                </widget>
               </item>
@@ -9388,6 +9391,40 @@ Note: This option requires ProvideConsoleGop to be enabled.
                  <string>UgaPassThrough</string>
                 </property>
                </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="label_121">
+                <property name="toolTip">
+                 <string notr="true">Type: plist integer, 8 bit 
+Description: User interface scaling factor. 
+Corresponds to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:UIScale variable. 
+• 1 — 1x scaling, corresponds to normal displays. 
+• 2 — 2x scaling, corresponds to HiDPI displays. 
+• -1 — leaves the current variable unchanged. 
+• 0 — automatically chooses scaling based on the current resolution. 
+Note 1 : Automatic scale factor detection works on the basis of total pixel area and may fail on small HiDPI displays, in which case the value may be manually managed using the NVRAM section. 
+Note 2 : When switching from manually specifified NVRAM variable to this preference an NVRAM reset may be needed.
+----
+类型：plist整数，8位 
+描述：用户界面的缩放系数。
+对应于4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14：UIScale变量。
+1 -- 1倍缩放，对应于正常显示。
+2 -- 2x缩放，对应于HiDPI显示器。
+-1 -- 保持当前变量不变。
+0 -- 根据当前分辨率自动选择缩放比例。
+注1：自动比例系数检测是在总像素面积的基础上进行的，在小的HiDPI显示器上可能会失败，在这种情况下，可以使用NVRAM部分手动管理该值。
+注2：当从手动指定的NVRAM变量切换到该首选项时，可能需要对NVRAM进行重置。</string>
+                </property>
+                <property name="statusTip">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>UIScale</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QLineEdit" name="editIntUIScale"/>
               </item>
              </layout>
             </item>
