@@ -126,13 +126,9 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   targetModi = fiTarget.lastModified().toString();
 
   QString strShowFileName, strSV, strTV;
-  if (!mymethod->isKext(sourceFile))
-    strShowFileName = fiSource.fileName();
-  else {
-    strShowFileName = fiSource.fileName();
-    strSV = mymethod->getKextVersion(sourceFile);
-    strTV = mymethod->getKextVersion(targetFile);
-  }
+  strShowFileName = fiSource.fileName();
+  strSV = mymethod->getKextVersion(sourceFile);
+  strTV = mymethod->getKextVersion(targetFile);
 
   ui->lblTargetLastModi->setText(strShowFileName + "\n" + tr("Current File: ") +
                                  "\n" + strTV + "  md5    " + targetHash);
@@ -238,17 +234,11 @@ void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
   targetModi = fiTarget.lastModified().toString();
 
   QString strShowFileName;
-  if (!mymethod->isKext(sourceFile))
-    strShowFileName = fiSource.fileName();
-  else
-    strShowFileName = fiSource.fileName() + "    " +
-                      mymethod->getKextVersion(sourceFile) + "  ->  " +
-                      mymethod->getKextVersion(targetFile);
-
+  strShowFileName = fiSource.fileName();
+  ui->lblTargetLastModi_2->setText(
+      strShowFileName + "\n" + tr("Current File: ") + "md5    " + targetHash);
   ui->lblSourceLastModi_2->setText(tr("Available File: ") + "md5    " +
                                    sourceHash);
-  ui->lblTargetLastModi_2->setText(
-      strShowFileName + "\n\n" + tr("Current File: ") + "md5    " + targetHash);
 
   if (sourceHash != targetHash) {
     ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
