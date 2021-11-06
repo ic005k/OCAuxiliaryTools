@@ -6209,13 +6209,11 @@ void MainWindow::init_ToolBarIcon() {
 void MainWindow::init_FileMenu() {
   // New
   if (mac || osx1012) ui->actionNewWindow->setIconVisibleInMenu(false);
-  ui->actionNewWindow->setIcon(QIcon(":/icon/new.png"));
 
   // Open
   if (mac || osx1012) ui->actionOpen->setIconVisibleInMenu(false);
   connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen);
   ui->actionOpen->setShortcut(tr("ctrl+o"));
-  ui->actionOpen->setIcon(QIcon(":/icon/open.png"));
 
   //最近打开的文件快捷通道
   btn0 = new QToolButton(this);
@@ -6245,7 +6243,6 @@ void MainWindow::init_FileMenu() {
   connect(ui->actionSave_As, &QAction::triggered, this,
           &MainWindow::on_btnSaveAs);
   ui->actionSave_As->setShortcut(tr("ctrl+shift+s"));
-  ui->actionSave_As->setIcon(QIcon(":/icon/saveas.png"));
 
   // Quit
   ui->actionQuit->setMenuRole(QAction::QuitRole);
@@ -6273,7 +6270,6 @@ void MainWindow::init_EditMenu() {
 
   // GenerateEFI
   if (mac || osx1012) ui->actionGenerateEFI->setIconVisibleInMenu(false);
-  ui->actionGenerateEFI->setIcon(QIcon(":/icon/efi.png"));
 
   // Update OC Main Program
   if (mac || osx1012) ui->actionUpgrade_OC->setIconVisibleInMenu(false);
@@ -6290,7 +6286,6 @@ void MainWindow::init_EditMenu() {
   // Open DataBase Dir
   if (mac || osx1012)
     ui->actionOpen_database_directory->setIconVisibleInMenu(false);
-  ui->actionOpen_database_directory->setIcon(QIcon(":/icon/opendb.png"));
   ui->actionUpgrade_Database->setVisible(false);
 }
 
@@ -6317,15 +6312,12 @@ void MainWindow::init_HelpMenu() {
   // OC工厂
   ui->toolBar->addSeparator();
   if (mac || osx1012) ui->actionOpenCore_Factory->setIconVisibleInMenu(false);
-  ui->actionOpenCore_Factory->setIcon(QIcon(":/icon/ocf.png"));
 
   //检查更新
   if (mac || osx1012) ui->btnCheckUpdate->setIconVisibleInMenu(false);
-  ui->btnCheckUpdate->setIcon(QIcon(":/icon/cu.png"));
 
   //文档
   if (mac || osx1012) ui->btnHelp->setIconVisibleInMenu(false);
-  ui->btnHelp->setIcon(QIcon(":/icon/doc.png"));
 
   // Bug Report
   if (mac || osx1012) ui->actionBug_Report->setIconVisibleInMenu(false);
