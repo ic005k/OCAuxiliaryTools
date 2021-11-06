@@ -2386,6 +2386,8 @@ void MainWindow::ParserUEFI(QVariantMap map) {
   // 1. APFS
   QVariantMap map_apfs = map["APFS"].toMap();
   getValue(map_apfs, ui->tabUEFI1);
+  if (ui->editIntMinDate->text() == "") ui->editIntMinDate->setText("-1");
+  if (ui->editIntMinVersion->text() == "") ui->editIntMinVersion->setText("-1");
 
   // 2. AppleInput
   QVariantMap map_AppleInput = map["AppleInput"].toMap();
@@ -2465,7 +2467,7 @@ void MainWindow::ParserUEFI(QVariantMap map) {
   QString strGop = ui->cboxGopPassThrough->currentText();
   if (strGop == "true" || strGop == "false")
     ui->cboxGopPassThrough->setCurrentIndex(0);
-
+  if (ui->editIntUIScale->text() == "") ui->editIntUIScale->setText("-1");
   // 7. ProtocolOverrides
   QVariantMap map_po = map["ProtocolOverrides"].toMap();
   getValue(map_po, ui->tabUEFI7);

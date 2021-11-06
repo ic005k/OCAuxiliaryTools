@@ -5,7 +5,7 @@
 
 extern MainWindow* mw_one;
 QString CurVerison = "20211128";
-QString ocVer = "0.7.5";
+QString ocVer = "0.7.6";
 
 aboutDialog::aboutDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::aboutDialog) {
