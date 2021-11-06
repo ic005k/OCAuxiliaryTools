@@ -10278,6 +10278,10 @@ void MainWindow::on_editPassInput_returnPressed() {
 void MainWindow::on_actionDatabase_triggered() {
   myDatabase->setWindowFlags(dlgAutoUpdate->windowFlags() |
                              Qt::WindowStaysOnTopHint);
+  if (osx1012)
+    myDatabase->ui->tabWidget->setDocumentMode(true);
+  else
+    myDatabase->ui->tabWidget->setDocumentMode(false);
   myDatabase->show();
 
   QFileInfo appInfo(qApp->applicationDirPath());
