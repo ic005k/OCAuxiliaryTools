@@ -1164,37 +1164,6 @@
             <true/>
             <key>CustomMemory</key>
             <false/>
-            <key>DataHub</key>
-            <dict>
-                <key>ARTFrequency</key>
-                <integer>0</integer>
-                <key>BoardProduct</key>
-                <string></string>
-                <key>BoardRevision</key>
-                <data></data>
-                <key>DevicePathsSupported</key>
-                <integer>0</integer>
-                <key>FSBFrequency</key>
-                <integer>0</integer>
-                <key>InitialTSC</key>
-                <integer>0</integer>
-                <key>PlatformName</key>
-                <string></string>
-                <key>SmcBranch</key>
-                <data></data>
-                <key>SmcPlatform</key>
-                <data></data>
-                <key>SmcRevision</key>
-                <data></data>
-                <key>StartupPowerEvents</key>
-                <integer>0</integer>
-                <key>SystemProductName</key>
-                <string></string>
-                <key>SystemSerialNumber</key>
-                <string></string>
-                <key>SystemUUID</key>
-                <string></string>
-            </dict>
             <key>Generic</key>
             <dict>
                 <key>AdviseFeatures</key>
@@ -1217,99 +1186,6 @@
                 <string>C02LX0TKDNCW</string>
                 <key>SystemUUID</key>
                 <string>278A17A9-FCBD-403F-9441-5A4B153ACD19</string>
-            </dict>
-            <key>Memory</key>
-            <dict>
-                <key>DataWidth</key>
-                <integer>0</integer>
-                <key>Devices</key>
-                <array/>
-                <key>ErrorCorrection</key>
-                <integer>0</integer>
-                <key>FormFactor</key>
-                <integer>0</integer>
-                <key>MaxCapacity</key>
-                <integer>0</integer>
-                <key>TotalWidth</key>
-                <integer>0</integer>
-                <key>Type</key>
-                <integer>0</integer>
-                <key>TypeDetail</key>
-                <integer>0</integer>
-            </dict>
-            <key>PlatformNVRAM</key>
-            <dict>
-                <key>BID</key>
-                <string></string>
-                <key>FirmwareFeatures</key>
-                <data></data>
-                <key>FirmwareFeaturesMask</key>
-                <data></data>
-                <key>MLB</key>
-                <string></string>
-                <key>ROM</key>
-                <data></data>
-                <key>SystemSerialNumber</key>
-                <string></string>
-                <key>SystemUUID</key>
-                <string></string>
-            </dict>
-            <key>SMBIOS</key>
-            <dict>
-                <key>BIOSReleaseDate</key>
-                <string></string>
-                <key>BIOSVendor</key>
-                <string></string>
-                <key>BIOSVersion</key>
-                <string></string>
-                <key>BoardAssetTag</key>
-                <string></string>
-                <key>BoardLocationInChassis</key>
-                <string></string>
-                <key>BoardManufacturer</key>
-                <string></string>
-                <key>BoardProduct</key>
-                <string></string>
-                <key>BoardSerialNumber</key>
-                <string></string>
-                <key>BoardType</key>
-                <integer>0</integer>
-                <key>BoardVersion</key>
-                <string></string>
-                <key>ChassisAssetTag</key>
-                <string></string>
-                <key>ChassisManufacturer</key>
-                <string></string>
-                <key>ChassisSerialNumber</key>
-                <string></string>
-                <key>ChassisType</key>
-                <integer>0</integer>
-                <key>ChassisVersion</key>
-                <string></string>
-                <key>FirmwareFeatures</key>
-                <data></data>
-                <key>FirmwareFeaturesMask</key>
-                <data></data>
-                <key>PlatformFeature</key>
-                <integer>0</integer>
-                <key>ProcessorType</key>
-                <integer>0</integer>
-                <key>SmcVersion</key>
-                <data></data>
-                <key>SystemFamily</key>
-                <string></string>
-                <key>SystemManufacturer</key>
-                <string></string>
-                <key>SystemProductName</key>
-                <string></string>
-                <key>SystemSKUNumber</key>
-                <string></string>
-                <key>SystemSerialNumber</key>
-                <string></string>
-                <key>SystemUUID</key>
-                <string></string>
-                <key>SystemVersion</key>
-                <string></string>
             </dict>
             <key>UpdateDataHub</key>
             <true/>
