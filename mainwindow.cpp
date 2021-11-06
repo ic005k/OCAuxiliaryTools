@@ -10009,7 +10009,7 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
 
   dlgSyncOC->setModal(true);
   dlgSyncOC->show();
-  dlgSyncOC->ui->listTarget->setFocus();
+  dlgSyncOC->ui->listSource->setFocus();
   dlgSyncOC->ui->listTarget->setCurrentRow(0);
   dlgSyncOC->ui->listSource->setCurrentRow(0);
 

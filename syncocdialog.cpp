@@ -54,34 +54,30 @@ SyncOCDialog::~SyncOCDialog() { delete ui; }
 void SyncOCDialog::on_btnStartSync_clicked() {
   if (!ui->btnUpKexts->isEnabled()) return;
   bool ok = true;
+  // Kexts
   for (int i = 0; i < mw_one->sourceKexts.count(); i++) {
-    // 数据库里面必须要有这个文件（源文件必须存在）
     QString strSou = mw_one->sourceKexts.at(i);
     QString strTar = mw_one->targetKexts.at(i);
-    if (QFileInfo(strSou).exists()) {
+    QString strSV, strTV;
+    strSV = mymethod->getKextVersion(strSou);
+    strTV = mymethod->getKextVersion(strTar);
+    if (QDir(strSou).exists()) {
       if (ui->listSource->item(i)->checkState() == Qt::Checked) {
-        if (!mymethod->isKext(strSou)) {
-          QFile::remove(strTar);
-          ok = QFile::copy(strSou, strTar);
-        } else {
+        if (strSV >= strTV) {
           mw_one->copyDirectoryFiles(strSou, strTar, true);
         }
       }
     }
   }
 
+  // OpenCore
   for (int i = 0; i < mw_one->sourceOpenCore.count(); i++) {
-    // 数据库里面必须要有这个文件（源文件必须存在）
     QString strSou = mw_one->sourceOpenCore.at(i);
     QString strTar = mw_one->targetOpenCore.at(i);
-    if (QFileInfo(strSou).exists()) {
+    if (QFile(strSou).exists()) {
       if (ui->listTarget->item(i)->checkState() == Qt::Checked) {
-        if (!mymethod->isKext(strSou)) {
-          QFile::remove(strTar);
-          ok = QFile::copy(strSou, strTar);
-        } else {
-          mw_one->copyDirectoryFiles(strSou, strTar, true);
-        }
+        QFile::remove(strTar);
+        ok = QFile::copy(strSou, strTar);
       }
     }
   }
