@@ -6182,6 +6182,7 @@ void MainWindow::init_ToolBarIcon() {
   }
 
   QString listStyleMain, listStyle;
+  // #1851e7
   if (red < 55)
     listStyleMain =
 
@@ -6193,7 +6194,7 @@ void MainWindow::init_ToolBarIcon() {
         "QListWidget::item:selected{background:rgba(190,190,190,50); "
         "border:0px "
         "blue;margin:1px,1px,1px,1px;border-radius:6;"
-        "color:#1851e7}"
+        "color:rgb(0,124,221)}"
 
         "QListWidget::item{background-color:none;margin:1px,1px,1px,"
         "1px;"
