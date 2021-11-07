@@ -6053,30 +6053,6 @@ void MainWindow::on_listMain_itemSelectionChanged() {
 }
 
 void MainWindow::init_listMainSub() {
-  QString listStyleMain, listStyle;
-  if (red < 55)
-    listStyleMain =
-        "QListWidget::item:hover{background-color:#e6e6e6;margin:1px,1px,1px,"
-        "1px;border-radius:6;"
-        "color:black}"
-        "QListWidget::item:selected{background:#e6e6e6; border:0px "
-        "blue;margin:1px,1px,1px,1px;border-radius:6;"
-        "color:blue}";
-  else
-    listStyleMain =
-        "QListWidget::item:hover{background-color:#e6e6e6;margin:1px,1px,1px,"
-        "1px;border-radius:6;"
-        "color:black}"
-        "QListWidget::item:selected{background:#e6e6e6; border:0px "
-        "blue;margin:1px,1px,1px,1px;border-radius:6;"
-        "color:blue}";
-
-  listStyle =
-      "QListWidget::item:selected{background:lightblue; border:0px blue; "
-      "color:black}";
-  ui->listMain->setStyleSheet(listStyleMain);
-  ui->listSub->setStyleSheet(listStyleMain);
-
   QFont myFont(this->font().family(), this->font().pixelSize());
   QFontMetrics fm(myFont);
   int fontHeight = fm.height() + 4;
@@ -6204,6 +6180,30 @@ void MainWindow::init_ToolBarIcon() {
     redoAction->setIcon(QIcon(":/icon/redo.png"));
     ui->actionFind->setIcon(QIcon(":/icon/find.png"));
   }
+
+  QString listStyleMain, listStyle;
+  if (red < 55)
+    listStyleMain =
+        "QListWidget::item:hover{background-color:#bfbfbf;margin:1px,1px,1px,"
+        "1px;border-radius:6;"
+        "color:#515151}"
+        "QListWidget::item:selected{background:#bfbfbf; border:0px "
+        "blue;margin:1px,1px,1px,1px;border-radius:6;"
+        "color:blue}";
+  else
+    listStyleMain =
+        "QListWidget::item:hover{background-color:#e6e6e6;margin:1px,1px,1px,"
+        "1px;border-radius:6;"
+        "color:black}"
+        "QListWidget::item:selected{background:#e6e6e6; border:0px "
+        "blue;margin:1px,1px,1px,1px;border-radius:6;"
+        "color:blue}";
+
+  listStyle =
+      "QListWidget::item:selected{background:lightblue; border:0px blue; "
+      "color:black}";
+  ui->listMain->setStyleSheet(listStyleMain);
+  ui->listSub->setStyleSheet(listStyleMain);
 }
 
 void MainWindow::init_FileMenu() {
