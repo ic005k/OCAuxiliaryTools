@@ -50,6 +50,7 @@ class SyncOCDialog : public QDialog {
 
  protected:
   void closeEvent(QCloseEvent *event);
+  void resizeEvent(QResizeEvent *event);
 };
 
 #endif  // SYNCOCDIALOG_H

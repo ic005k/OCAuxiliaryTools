@@ -315,3 +315,9 @@ void SyncOCDialog::on_btnClearAll_clicked() {
   for (int i = 0; i < ui->listSource->count(); i++)
     ui->listSource->item(i)->setCheckState(Qt::Unchecked);
 }
+
+void SyncOCDialog::resizeEvent(QResizeEvent* event) {
+  Q_UNUSED(event);
+  int w = ui->listSource->width();
+  ui->listTarget->setMaximumWidth(w);
+}
