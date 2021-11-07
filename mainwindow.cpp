@@ -6184,12 +6184,20 @@ void MainWindow::init_ToolBarIcon() {
   QString listStyleMain, listStyle;
   if (red < 55)
     listStyleMain =
-        "QListWidget::item:hover{background-color:#bfbfbf;margin:1px,1px,1px,"
+
+        "QListWidget::item:hover{background-color:rgba(190,190,190,50);margin:"
+        "1px,1px,1px,"
         "1px;border-radius:6;"
-        "color:#515151}"
-        "QListWidget::item:selected{background:#bfbfbf; border:0px "
+        "color:#e6e6e6}"
+
+        "QListWidget::item:selected{background:rgba(190,190,190,50); "
+        "border:0px "
         "blue;margin:1px,1px,1px,1px;border-radius:6;"
-        "color:blue}";
+        "color:#1851e7}"
+
+        "QListWidget::item{background-color:none;margin:1px,1px,1px,"
+        "1px;"
+        "color:#bfbfbf}";
   else
     listStyleMain =
         "QListWidget::item:hover{background-color:#e6e6e6;margin:1px,1px,1px,"
