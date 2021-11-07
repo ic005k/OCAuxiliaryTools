@@ -10910,8 +10910,12 @@ void MainWindow::updateStatus() { updateIconStatus(); }
 void MainWindow::updateIconStatus() {
   if (isWindowModified())
     ui->actionSave->setIcon(QIcon(":/icon/savetip.png"));
-  else
-    ui->actionSave->setIcon(QIcon(":/icon/save.png"));
+  else {
+    if (red < 55)
+      ui->actionSave->setIcon(QIcon(":/icon/save0.png"));
+    else
+      ui->actionSave->setIcon(QIcon(":/icon/save.png"));
+  }
 }
 
 void MainWindow::on_table_nv_add0_itemClicked(QTableWidgetItem* item) {
