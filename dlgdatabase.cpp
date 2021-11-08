@@ -302,7 +302,8 @@ void dlgDatabase::refreshKextUrl() {
       "NoTouchID.kext | https://github.com/al3xtjames/NoTouchID");
   ui->textEdit->append(
       "USBInjectAll.kext | https://github.com/johnlimabravo/USBInjectAll");
-  // ui->textEdit->append(" | ");
+  ui->textEdit->append(
+      "RadeonSensor.kext | https://github.com/aluveitie/RadeonSensor");
   // ui->textEdit->append(" | ");
 
   QTextEdit *txtEdit = new QTextEdit;

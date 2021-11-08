@@ -159,7 +159,7 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
     }
     if (!QFile(targetFile).exists()) {
       ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
-      QString str = strShowFileName + "  |  " + strTV;
+      QString str = strShowFileName + "  |  " + strTV + "  |  " + strSV;
       ui->listSource->item(currentRow)->setText(str);
     }
     if (QFile(sourceFile).exists() && QFile(targetFile).exists()) {
