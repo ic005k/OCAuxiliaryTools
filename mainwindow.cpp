@@ -5138,12 +5138,12 @@ void MainWindow::readResultDiskInfo() {
     str0 = ui->textDiskInfo->document()->findBlockByNumber(i).text().trimmed();
 
     QStringList strList = str0.simplified().split(" ");
-    if (strList.count() == 6) {
+    if (strList.count() >= 5) {
       if (strList.at(1).toUpper() == "EFI") {
-        QString strDisk = strList.at(5).mid(0, 5);
+        QString strDisk = strList.at(strList.count() - 1).mid(0, 5);
         str0 = str0 + "    " + getDriverInfo(strDisk);
 
-        dlgMESP->ui->listWidget->setIconSize(QSize(32, 32));
+        dlgMESP->ui->listWidget->setIconSize(QSize(30, 30));
         dlgMESP->ui->listWidget->addItem(
             new QListWidgetItem(QIcon(":/icon/espicon.png"), str0));
       }
