@@ -24,12 +24,19 @@ void dlgMountESP::mountESP(bool openConfig) {
 
   QString str = ui->listWidget->currentItem()->text().trimmed();
   QStringList strList = str.simplified().split(" ");
-  mymethod->mount_esp_mac(strList.at(5));
+  QString strDisk;
+  for (int i = 0; i < strList.count(); i++) {
+    QString str = strList.at(i);
+    if (str.mid(0, 4) == "disk") strDisk = str;
+  }
+  mymethod->mount_esp_mac(strDisk);
 
-  QString str0 = strList.at(2);
+  strList = str.simplified().split("|");
+  QString str0 = strList.at(1);
   QString str1 = str0.toLatin1();
   QString str2 = str1.replace("?", "");
-  QString dirpath = "/Volumes/" + str2 + "/EFI/";
+  QString dirpath = "/Volumes/" + str2.trimmed() + "/EFI/";
+  qDebug() << dirpath;
   QString dir = "file:" + dirpath;
 
   if (openConfig) {

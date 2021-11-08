@@ -1454,3 +1454,53 @@ void Method::mount_esp_mac(QString strEfiDisk) {
   QProcess* dm = new QProcess;
   dm->execute("osascript", QStringList() << fileName);
 }
+
+QString Method::getDriverInfo(QString strDisk, QString strDiskVol) {
+  QProcess* processDriverInfo = new QProcess;
+  processDriverInfo->start("diskutil", QStringList() << "info" << strDisk);
+  processDriverInfo->waitForFinished();
+
+  QTextEdit* textEdit = new QTextEdit;
+  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
+  QString result = gbkCodec->toUnicode(processDriverInfo->readAll());
+  textEdit->append(result);
+
+  QString str0, str1, str2;
+  QStringList strList, strList1;
+  int count = textEdit->document()->lineCount();
+  for (int i = 0; i < count; i++) {
+    str0 = textEdit->document()->findBlockByNumber(i).text().trimmed();
+    if (str0.contains("Media Name:")) {
+      strList = str0.split(":");
+    }
+  }
+
+  if (strList.count() > 0)
+    str1 = strList.at(1);
+  else
+    str1 = "";
+  str1 = str1.trimmed();
+
+  processDriverInfo->start("diskutil", QStringList() << "info" << strDiskVol);
+  processDriverInfo->waitForFinished();
+
+  textEdit = new QTextEdit;
+  gbkCodec = QTextCodec::codecForName("UTF-8");
+  result = gbkCodec->toUnicode(processDriverInfo->readAll());
+  textEdit->append(result);
+  count = textEdit->document()->lineCount();
+  for (int i = 0; i < count; i++) {
+    str0 = textEdit->document()->findBlockByNumber(i).text().trimmed();
+    if (str0.contains("Volume Name:")) {
+      strList1 = str0.split(":");
+    }
+  }
+
+  if (strList1.count() > 0)
+    str2 = strList1.at(1);
+  else
+    str2 = "";
+  str2 = str2.trimmed();
+
+  return str1 + " | " + str2;
+}

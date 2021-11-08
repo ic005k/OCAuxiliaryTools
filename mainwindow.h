@@ -326,7 +326,6 @@ class MainWindow : public QMainWindow {
   void MoveItem(QTableWidget* t, bool up);
   void CheckChange(QTableWidget* tw, int arg1, QToolButton* btnDel);
   void CellEnter(int row, QTableWidget* tw);
-  QString getDriverInfo(QString strDisk);
 
   void ShowAutoUpdateDlg(bool Database);
   void setConversionWidgetVisible(bool v);
@@ -350,6 +349,7 @@ class MainWindow : public QMainWindow {
   QString getKextVersion(QString kextFile);
   QString loadText(QString textFile);
   QString getTextEditLineText(QTextEdit* txtEdit, int i);
+  QString getDriverInfo(QString strDisk);
  public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -982,7 +982,6 @@ class MainWindow : public QMainWindow {
   QProcess* si;
 
   QProcess* di;
-  QProcess* processDriverInfo;
 
   QProcess* chkdata;
   QProcess* chkdataPassHash;

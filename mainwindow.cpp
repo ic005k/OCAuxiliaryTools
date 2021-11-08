@@ -5090,39 +5090,6 @@ void MainWindow::mount_esp() {
 #endif
 }
 
-QString MainWindow::getDriverInfo(QString strDisk) {
-  processDriverInfo = new QProcess;
-  processDriverInfo->start("diskutil", QStringList() << "info" << strDisk);
-  processDriverInfo->waitForFinished();
-
-  QTextEdit* textEdit = new QTextEdit;
-  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
-  QString result = gbkCodec->toUnicode(processDriverInfo->readAll());
-  textEdit->append(result);
-
-  QString str0, str1;
-  QStringList strList;
-  int count = textEdit->document()->lineCount();
-  for (int i = 0; i < count; i++) {
-    str0 = textEdit->document()->findBlockByNumber(i).text().trimmed();
-
-    if (str0.contains("Media Name")) {
-      strList = str0.split(":");
-
-      break;
-    }
-  }
-
-  if (strList.count() > 0)
-    str1 = strList.at(1);
-  else
-    str1 = "";
-
-  str1 = str1.trimmed();
-
-  return str1;
-}
-
 void MainWindow::readResultDiskInfo() {
   ui->textDiskInfo->clear();
   ui->textDiskInfo->setReadOnly(true);
@@ -5141,7 +5108,8 @@ void MainWindow::readResultDiskInfo() {
     if (strList.count() >= 5) {
       if (strList.at(1).toUpper() == "EFI") {
         QString strDisk = strList.at(strList.count() - 1).mid(0, 5);
-        str0 = str0 + "    " + getDriverInfo(strDisk);
+        QString strDiskVol = strList.at(strList.count() - 1);
+        str0 = str0 + "    " + mymethod->getDriverInfo(strDisk, strDiskVol);
 
         dlgMESP->ui->listWidget->setIconSize(QSize(30, 30));
         dlgMESP->ui->listWidget->addItem(
