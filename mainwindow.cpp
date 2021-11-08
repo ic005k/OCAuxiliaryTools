@@ -212,14 +212,16 @@ void MainWindow::initRecentFilesForToolBar() {
     connect(act, &QAction::triggered,
             [=]() { openFile(m_recentFiles->getRecentFiles().at(i)); });
   }
-  reFileMenu->addSeparator();
-  QAction* actClearHistory = new QAction(tr("Clear History"));
-  connect(actClearHistory, &QAction::triggered, [=]() {
-    reFileMenu->clear();
-    m_recentFiles->getRecentFiles().clear();
-    m_recentFiles->clearHistory();
-  });
-  reFileMenu->addAction(actClearHistory);
+  if (rfList.count() > 0) {
+    reFileMenu->addSeparator();
+    QAction* actClearHistory = new QAction(tr("Clear History"));
+    connect(actClearHistory, &QAction::triggered, [=]() {
+      reFileMenu->clear();
+      m_recentFiles->getRecentFiles().clear();
+      m_recentFiles->clearHistory();
+    });
+    reFileMenu->addAction(actClearHistory);
+  }
 }
 
 void MainWindow::openFile(QString PlistFileName) {
@@ -5138,6 +5140,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
   Reg.setValue("AutoChkUpdate", ui->actionAutoChkUpdate->isChecked());
   Reg.setValue("Net", myDatabase->ui->comboBoxNet->currentText());
+  Reg.setValue("LastFileName", SaveFileName);
 
   //搜索历史记录保存
   int textTotal = ui->cboxFind->count();
