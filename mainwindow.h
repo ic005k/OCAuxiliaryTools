@@ -131,7 +131,6 @@ class MainWindow : public QMainWindow {
   void setPalette(QWidget* w, QColor backColor, QColor textColor);
   bool Initialization = false;
   void setCheckBoxWidth(QCheckBox* cbox);
-  void mount_esp_mac(QString strEfiDisk);
   QString getDatabaseVer();
   QIntValidator* IntValidator = new QIntValidator;
   QString getTableFieldDataType(QTableWidget* table);

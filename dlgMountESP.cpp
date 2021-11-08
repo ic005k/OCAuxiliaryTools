@@ -1,9 +1,11 @@
 #include "dlgMountESP.h"
 
+#include "Method.h"
 #include "mainwindow.h"
 #include "ui_dlgMountESP.h"
 
 extern MainWindow* mw_one;
+extern Method* mymethod;
 
 dlgMountESP::dlgMountESP(QWidget* parent)
     : QDialog(parent), ui(new Ui::dlgMountESP) {
@@ -22,7 +24,7 @@ void dlgMountESP::mountESP(bool openConfig) {
 
   QString str = ui->listWidget->currentItem()->text().trimmed();
   QStringList strList = str.simplified().split(" ");
-  mw_one->mount_esp_mac(strList.at(5));
+  mymethod->mount_esp_mac(strList.at(5));
 
   QString str0 = strList.at(2);
   QString str1 = str0.toLatin1();

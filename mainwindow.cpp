@@ -5156,36 +5156,6 @@ void MainWindow::readResultDiskInfo() {
   dlgMESP->show();
 }
 
-void MainWindow::mount_esp_mac(QString strEfiDisk) {
-  QString str5 = "diskutil mount " + strEfiDisk;
-  QString str_ex = "do shell script " +
-                   QString::fromLatin1("\"%1\"").arg(str5) +
-                   " with administrator privileges";
-
-  QString fileName = QDir::homePath() + "/.config/QtOCC/qtocc.applescript";
-  QFile fi(fileName);
-  if (fi.exists()) fi.remove();
-
-  QSaveFile file(fileName);
-  QString errorMessage;
-  if (file.open(QFile::WriteOnly | QFile::Text)) {
-    QTextStream out(&file);
-    out << str_ex;
-    if (!file.commit()) {
-      errorMessage =
-          tr("Cannot write file %1:\n%2.")
-              .arg(QDir::toNativeSeparators(fileName), file.errorString());
-    }
-  } else {
-    errorMessage =
-        tr("Cannot open file %1 for writing:\n%2.")
-            .arg(QDir::toNativeSeparators(fileName), file.errorString());
-  }
-
-  QProcess* dm = new QProcess;
-  dm->execute("osascript", QStringList() << fileName);
-}
-
 void MainWindow::closeEvent(QCloseEvent* event) {
   QString qfile = strConfigPath + "QtOCC.ini";
   QSettings Reg(qfile, QSettings::IniFormat);

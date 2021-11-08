@@ -98,6 +98,7 @@ class Method : public QMainWindow {
 
   void writeLeftTableOnlyValue(QTableWidget *t0, QTableWidget *t);
   void kextPreset();
+  void mount_esp_mac(QString strEfiDisk);
  public slots:
   void generateEFI();
   void on_btnExportMaster();
