@@ -69,5 +69,6 @@
         <file>icon/undo0.png</file>
         <file>icon/opendir0.png</file>
         <file>icon/rp0.png</file>
+        <file>icon/savetip0.png</file>
     </qresource>
 </RCC>

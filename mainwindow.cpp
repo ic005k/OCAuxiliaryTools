@@ -6194,7 +6194,7 @@ void MainWindow::init_ToolBarIcon() {
         "QListWidget::item:selected{background:rgba(190,190,190,50); "
         "border:0px "
         "blue;margin:1px,1px,1px,1px;border-radius:6;"
-        "color:rgb(0,124,221)}"
+        "color:#07a4f6}"
 
         "QListWidget::item{background-color:none;margin:1px,1px,1px,"
         "1px;"
@@ -6213,6 +6213,8 @@ void MainWindow::init_ToolBarIcon() {
       "color:black}";
   ui->listMain->setStyleSheet(listStyleMain);
   ui->listSub->setStyleSheet(listStyleMain);
+
+  updateIconStatus();
 }
 
 void MainWindow::init_FileMenu() {
@@ -10909,9 +10911,12 @@ void MainWindow::on_btnAddbootArgs_clicked() {
 void MainWindow::updateStatus() { updateIconStatus(); }
 
 void MainWindow::updateIconStatus() {
-  if (isWindowModified())
-    ui->actionSave->setIcon(QIcon(":/icon/savetip.png"));
-  else {
+  if (isWindowModified()) {
+    if (red < 55)
+      ui->actionSave->setIcon(QIcon(":/icon/savetip0.png"));
+    else
+      ui->actionSave->setIcon(QIcon(":/icon/savetip.png"));
+  } else {
     if (red < 55)
       ui->actionSave->setIcon(QIcon(":/icon/save0.png"));
     else
