@@ -201,7 +201,6 @@ void Method::finishKextUpdate(bool blDatabase) {
 
   mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
 
-  mw_one->dlgSyncOC->progBar->setHidden(true);
   mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(false);
   if (!blDatabase) mw_one->checkFiles();
   mw_one->repaint();
@@ -322,9 +321,6 @@ void Method::startDownload(QString strUrl) {
   mw_one->dlgSyncOC->progBar->setMinimum(0);
 
   downloadTimer.start();
-
-  mw_one->dlgSyncOC->progBar->setHidden(false);
-  mw_one->dlgSyncOC->progBar->setVisible(true);
 }
 
 void Method::doProcessReadyRead() {
