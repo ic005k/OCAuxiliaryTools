@@ -283,7 +283,7 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
       QString strSV, strTV;
       strSV = mymethod->getKextVersion(sourceFile);
       strTV = mymethod->getKextVersion(targetFile);
-      if (strSV > strTV || strTV == "None") {
+      if (strSV > strTV || (strTV == "None" && QFile(sourceFile).exists())) {
         ui->btnUpdate->setEnabled(true);
         repaint();
       }

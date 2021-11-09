@@ -151,15 +151,37 @@ void Method::finishKextUpdate(bool blDatabase) {
     }
   }
 
-  for (int i = 0; i < kextList.count(); i++) {
-    QString dirSource, dirTarget, dirTargetDatabase, dirTargetLinux;
-    dirSource = kextList.at(i);
-    QString Name = getFileName(dirSource);
-    dirTarget = strKexts + Name;
-    dirTargetDatabase =
-        mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
-    dirTargetLinux = QDir::homePath() + "/Kexts/" + Name;
-    if (!blDatabase) {
+  if (blDatabase) {
+    for (int i = 0; i < kextList.count(); i++) {
+      QString dirSource, dirTargetDatabase, dirTargetLinux;
+      dirSource = kextList.at(i);
+      QString Name = getFileName(dirSource);
+      dirTargetDatabase =
+          mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
+      dirTargetLinux = QDir::homePath() + "/Kexts/" + Name;
+
+      if (!mw_one->linuxOS)
+        mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
+      if (mw_one->linuxOS)
+        mw_one->copyDirectoryFiles(dirSource, dirTargetLinux, true);
+    }
+  } else {
+    QStringList list;
+    if (!mw_one->linuxOS)
+      list = DirToFileList(mw_one->strAppExePath + "/Database/EFI/OC/Kexts/",
+                           "*.kext");
+    else
+      list = DirToFileList(QDir::homePath() + "/Kexts/", "*.kext");
+    for (int i = 0; i < list.count(); i++) {
+      QString dirSource, dirTarget;
+      if (!mw_one->linuxOS)
+        dirSource =
+            mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + list.at(i);
+      else
+        dirSource = QDir::homePath() + "/Kexts/" + list.at(i);
+      QString Name = getFileName(dirSource);
+      dirTarget = strKexts + Name;
+
       for (int j = 0; j < mw_one->dlgSyncOC->ui->listSource->count(); j++) {
         QString str_1 = mw_one->dlgSyncOC->ui->listSource->item(j)->text();
         QStringList list_1 = str_1.split("|");
@@ -169,17 +191,11 @@ void Method::finishKextUpdate(bool blDatabase) {
         if (Name == Name_1 &&
             mw_one->dlgSyncOC->ui->listSource->item(j)->checkState() ==
                 Qt::Checked) {
-          if (!blDatabase)
-            mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
+          mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
 
-          qDebug() << kextList.at(i) << dirTarget;
+          qDebug() << dirSource << dirTarget;
         }
       }
-    } else {
-      if (!mw_one->linuxOS && blDatabase)
-        mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
-      if (mw_one->linuxOS && blDatabase)
-        mw_one->copyDirectoryFiles(dirSource, dirTargetLinux, true);
     }
   }
 
