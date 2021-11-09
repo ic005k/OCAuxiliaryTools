@@ -274,18 +274,17 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
   repaint();
   ui->labelShowDLInfo->setVisible(true);
   progBar = new QProgressBar(this);
-  progBar->setStyleSheet(
-      "QProgressBar{border:1px solid #FFFFFF;"
-      "height:30;"
-      "background:rgba(25,255,25,0);"
-      "text-align:right;"
-      "color:rgb(255,255,255);"
-      "border-radius:0px;}"
+  progBar->setStyleSheet("QProgressBar{border:0px solid #FFFFFF;"
+                         "height:30;"
+                         "background:rgba(25,255,25,0);"
+                         "text-align:right;"
+                         "color:rgb(255,255,255);"
+                         "border-radius:6px;}"
 
-      "QProgressBar:chunk{"
-      "border-radius:0px;"
-      "background-color:rgba(0,255,0,100);"
-      "}");
+                         "QProgressBar:chunk{"
+                         "border-radius:6px;"
+                         "background-color:rgba(0,255,0,100);"
+                         "}");
 
   mymethod->kextUpdate();
 
