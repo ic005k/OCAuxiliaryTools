@@ -304,6 +304,10 @@ void dlgDatabase::refreshKextUrl() {
       "USBInjectAll.kext | https://github.com/johnlimabravo/USBInjectAll");
   ui->textEdit->append(
       "RadeonSensor.kext | https://github.com/aluveitie/RadeonSensor");
+  ui->textEdit->append(
+      "FakeSMC.kext | "
+      "https://github.com/CloverHackyColor/FakeSMC3_with_plugins");
+  // ui->textEdit->append(" | ");
   // ui->textEdit->append(" | ");
 
   QTextEdit *txtEdit = new QTextEdit;

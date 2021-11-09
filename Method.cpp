@@ -159,22 +159,27 @@ void Method::finishKextUpdate(bool blDatabase) {
     dirTargetDatabase =
         mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
     dirTargetLinux = QDir::homePath() + "/Kexts/" + Name;
-    for (int j = 0; j < mw_one->dlgSyncOC->ui->listSource->count(); j++) {
-      QString str_1 = mw_one->dlgSyncOC->ui->listSource->item(j)->text();
-      QStringList list_1 = str_1.split("|");
-      QString Name_0, Name_1;
-      if (list_1.count() > 0) Name_0 = list_1.at(0);
-      Name_1 = Name_0.trimmed();
-      if (Name == Name_1 &&
-          mw_one->dlgSyncOC->ui->listSource->item(j)->checkState() ==
-              Qt::Checked) {
-        if (!blDatabase) mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
-        if (!mw_one->linuxOS && blDatabase)
-          mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
-        if (mw_one->linuxOS && blDatabase)
-          mw_one->copyDirectoryFiles(dirSource, dirTargetLinux, true);
-        qDebug() << kextList.at(i) << dirTarget;
+    if (!blDatabase) {
+      for (int j = 0; j < mw_one->dlgSyncOC->ui->listSource->count(); j++) {
+        QString str_1 = mw_one->dlgSyncOC->ui->listSource->item(j)->text();
+        QStringList list_1 = str_1.split("|");
+        QString Name_0, Name_1;
+        if (list_1.count() > 0) Name_0 = list_1.at(0);
+        Name_1 = Name_0.trimmed();
+        if (Name == Name_1 &&
+            mw_one->dlgSyncOC->ui->listSource->item(j)->checkState() ==
+                Qt::Checked) {
+          if (!blDatabase)
+            mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
+
+          qDebug() << kextList.at(i) << dirTarget;
+        }
       }
+    } else {
+      if (!mw_one->linuxOS && blDatabase)
+        mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
+      if (mw_one->linuxOS && blDatabase)
+        mw_one->copyDirectoryFiles(dirSource, dirTargetLinux, true);
     }
   }
 
