@@ -272,6 +272,21 @@ void SyncOCDialog::closeEvent(QCloseEvent* event) {
 void SyncOCDialog::on_btnUpKexts_clicked() {
   ui->btnUpdate->setEnabled(false);
   repaint();
+  ui->labelShowDLInfo->setVisible(true);
+  progBar = new QProgressBar(this);
+  progBar->setStyleSheet(
+      "QProgressBar{border:1px solid #FFFFFF;"
+      "height:30;"
+      "background:rgba(25,255,25,0);"
+      "text-align:right;"
+      "color:rgb(255,255,255);"
+      "border-radius:0px;}"
+
+      "QProgressBar:chunk{"
+      "border-radius:0px;"
+      "background-color:rgba(0,255,0,100);"
+      "}");
+
   mymethod->kextUpdate();
 
   int n = ui->listSource->currentRow();
@@ -287,6 +302,10 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
         ui->btnUpdate->setEnabled(true);
         repaint();
       }
+    }
+
+    if (ui->listSource->itemWidget(ui->listSource->item(i)) == progBar) {
+      ui->listSource->removeItemWidget(ui->listSource->item(i));
     }
   }
   ui->listSource->setCurrentRow(n);

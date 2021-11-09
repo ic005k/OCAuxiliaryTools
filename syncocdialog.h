@@ -5,6 +5,7 @@
 #include <QDialog>
 #include <QListWidgetItem>
 #include <QMessageBox>
+#include <QProgressBar>
 #include <QScrollBar>
 
 namespace Ui {
@@ -22,6 +23,7 @@ class SyncOCDialog : public QDialog {
   QString targetResourcesDir;
   QStringList sourceFileList;
   QStringList targetFileList;
+  QProgressBar *progBar;
 
  private slots:
   void on_btnStartSync_clicked();

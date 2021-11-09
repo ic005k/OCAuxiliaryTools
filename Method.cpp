@@ -201,7 +201,7 @@ void Method::finishKextUpdate(bool blDatabase) {
 
   mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
 
-  mw_one->dlgSyncOC->ui->progressBarKext->setHidden(true);
+  mw_one->dlgSyncOC->progBar->setHidden(true);
   mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(false);
   if (!blDatabase) mw_one->checkFiles();
   mw_one->repaint();
@@ -258,6 +258,10 @@ void Method::kextUpdate() {
           } else {
             startDownload(strUrl);
           }
+          mw_one->dlgSyncOC->ui->listSource->setItemWidget(
+              mw_one->dlgSyncOC->ui->listSource->item(i),
+              mw_one->dlgSyncOC->progBar);
+          mw_one->dlgSyncOC->ui->listSource->setCurrentRow(i);
           QElapsedTimer t;
           t.start();
           dlEnd = false;
@@ -314,13 +318,13 @@ void Method::startDownload(QString strUrl) {
     QMessageBox::warning(this, "warning", "File creation failed!\n" + file);
     return;
   }
-  mw_one->dlgSyncOC->ui->progressBarKext->setValue(0);
-  mw_one->dlgSyncOC->ui->progressBarKext->setMinimum(0);
+  mw_one->dlgSyncOC->progBar->setValue(0);
+  mw_one->dlgSyncOC->progBar->setMinimum(0);
 
   downloadTimer.start();
 
-  mw_one->dlgSyncOC->ui->progressBarKext->setHidden(false);
-  mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(true);
+  mw_one->dlgSyncOC->progBar->setHidden(false);
+  mw_one->dlgSyncOC->progBar->setVisible(true);
 }
 
 void Method::doProcessReadyRead() {
@@ -358,8 +362,9 @@ void Method::doProcessFinished() {
 void Method::doProcessDownloadProgress(qint64 recv_total,
                                        qint64 all_total)  //显示
 {
-  mw_one->dlgSyncOC->ui->progressBarKext->setMaximum(all_total);
-  mw_one->dlgSyncOC->ui->progressBarKext->setValue(recv_total);
+  if (blBreak) return;
+  mw_one->dlgSyncOC->progBar->setMaximum(all_total);
+  mw_one->dlgSyncOC->progBar->setValue(recv_total);
 
   // calculate the download speed
   double speed = recv_total * 1000.0 / downloadTimer.elapsed();
