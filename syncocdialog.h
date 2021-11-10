@@ -51,8 +51,9 @@ class SyncOCDialog : public QDialog {
   void setListWidgetColor(QString color);
 
  protected:
-  void closeEvent(QCloseEvent *event);
-  void resizeEvent(QResizeEvent *event);
+     void closeEvent(QCloseEvent *event);
+     void resizeEvent(QResizeEvent *event);
+     void keyPressEvent(QKeyEvent *event);
 };
 
 #endif  // SYNCOCDIALOG_H

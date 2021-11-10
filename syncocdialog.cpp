@@ -248,25 +248,55 @@ void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
   }
 }
 
-void SyncOCDialog::closeEvent(QCloseEvent* event) {
-  Q_UNUSED(event);
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  // QString strTag = QDir::fromNativeSeparators(SaveFileName);
-  QString strTag = SaveFileName;
-  strTag.replace("/", "-");
-  QString str_0, str_1;
-  QSettings Reg(qfile, QSettings::IniFormat);
-  for (int i = 0; i < ui->listSource->count(); i++) {
-    str_0 = ui->listSource->item(i)->text().trimmed();
-    QStringList list_0 = str_0.split("|");
-    if (list_0.count() > 0) str_1 = list_0.at(0);
-    Reg.setValue(strTag + str_1.trimmed(),
-                 ui->listSource->item(i)->checkState());
-  }
-  for (int i = 0; i < ui->listTarget->count(); i++) {
-    Reg.setValue(strTag + ui->listTarget->item(i)->text().trimmed(),
-                 ui->listTarget->item(i)->checkState());
-  }
+void SyncOCDialog::closeEvent(QCloseEvent *event)
+{
+    if (!ui->btnUpKexts->isEnabled())
+        event->ignore();
+    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+    // QString strTag = QDir::fromNativeSeparators(SaveFileName);
+    QString strTag = SaveFileName;
+    strTag.replace("/", "-");
+    QString str_0, str_1;
+    QSettings Reg(qfile, QSettings::IniFormat);
+    for (int i = 0; i < ui->listSource->count(); i++) {
+        str_0 = ui->listSource->item(i)->text().trimmed();
+        QStringList list_0 = str_0.split("|");
+        if (list_0.count() > 0)
+            str_1 = list_0.at(0);
+        Reg.setValue(strTag + str_1.trimmed(), ui->listSource->item(i)->checkState());
+    }
+    for (int i = 0; i < ui->listTarget->count(); i++) {
+        Reg.setValue(strTag + ui->listTarget->item(i)->text().trimmed(),
+                     ui->listTarget->item(i)->checkState());
+    }
+}
+
+void SyncOCDialog::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+    case Qt::Key_Escape:
+        if (!ui->btnUpKexts->isEnabled())
+            return;
+        else
+            close();
+        break;
+
+    case Qt::Key_Return:
+
+        break;
+
+    case Qt::Key_Backspace:
+
+        break;
+
+    case Qt::Key_Space:
+
+        break;
+
+    case Qt::Key_F1:
+
+        break;
+    }
 }
 
 void SyncOCDialog::on_btnUpKexts_clicked() {
