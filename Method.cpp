@@ -188,9 +188,7 @@ void Method::finishKextUpdate(bool blDatabase) {
         QString Name_0, Name_1;
         if (list_1.count() > 0) Name_0 = list_1.at(0);
         Name_1 = Name_0.trimmed();
-        if (Name == Name_1 &&
-            mw_one->dlgSyncOC->ui->listSource->item(j)->checkState() ==
-                Qt::Checked) {
+        if (Name == Name_1 && mw_one->dlgSyncOC->chkList.at(j)->isChecked()) {
           mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
 
           qDebug() << dirSource << dirTarget;
@@ -222,8 +220,7 @@ void Method::kextUpdate() {
 
   for (int i = 0; i < mw_one->dlgSyncOC->ui->listSource->count(); i++) {
     if (blBreak) break;
-    if (mw_one->dlgSyncOC->ui->listSource->item(i)->checkState() ==
-        Qt::Checked) {
+    if (mw_one->dlgSyncOC->chkList.at(i)->isChecked()) {
       QString name_1 =
           mw_one->dlgSyncOC->ui->listSource->item(i)->text().trimmed();
       QStringList list_1 = name_1.split("|");

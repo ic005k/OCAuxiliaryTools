@@ -24,7 +24,13 @@ class SyncOCDialog : public QDialog {
   QStringList sourceFileList;
   QStringList targetFileList;
   QProgressBar *progBar;
+  QList<QLabel *> textList;
+  QList<QLabel *> verList;
+  QList<QCheckBox *> chkList;
 
+  bool eventFilter(QObject *o, QEvent *e);
+  void initKextList();
+  void readCheckStateINI();
  private slots:
   void on_btnStartSync_clicked();
 
@@ -50,10 +56,19 @@ class SyncOCDialog : public QDialog {
   void setListWidgetStyle();
   void setListWidgetColor(QString color);
 
+  QLabel *lblVer;
+  QLabel *lblTxt;
+  QCheckBox *checkBox;
+
+  void addVerWidget(int currentRow, QString strTV, QString strSV,
+                    QString strShowFileName);
+
+  void writeCheckStateINI();
+
  protected:
-     void closeEvent(QCloseEvent *event);
-     void resizeEvent(QResizeEvent *event);
-     void keyPressEvent(QKeyEvent *event);
+  void closeEvent(QCloseEvent *event);
+  void resizeEvent(QResizeEvent *event);
+  void keyPressEvent(QKeyEvent *event);
 };
 
 #endif  // SYNCOCDIALOG_H

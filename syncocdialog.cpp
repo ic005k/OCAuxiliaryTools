@@ -62,7 +62,7 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     strSV = mymethod->getKextVersion(strSou);
     strTV = mymethod->getKextVersion(strTar);
     if (QDir(strSou).exists()) {
-      if (ui->listSource->item(i)->checkState() == Qt::Checked) {
+      if (mw_one->dlgSyncOC->chkList.at(i)->isChecked()) {
         if (strSV >= strTV || strTV == "None") {
           mw_one->copyDirectoryFiles(strSou, strTar, true);
         }
@@ -94,6 +94,35 @@ void SyncOCDialog::on_btnStartSync_clicked() {
 
     close();
     mw_one->checkFiles();
+  }
+}
+
+bool SyncOCDialog::eventFilter(QObject* o, QEvent* e) {
+  if (o == lblVer && (e->type() == QEvent::MouseButtonPress ||
+                      e->type() == QEvent::MouseButtonRelease)) {
+    e->accept();
+    return true;
+  }
+
+  return QWidget::eventFilter(o, e);
+}
+
+void SyncOCDialog::addVerWidget(int currentRow, QString strTV, QString strSV,
+                                QString strShowFileName) {
+  if (mw_one->mac || mw_one->osx1012)
+    verList.at(currentRow)->setFont(QFont("Menlo", 12));
+  if (mw_one->win) verList.at(currentRow)->setFont(QFont("consolas"));
+
+  ui->listSource->item(currentRow)->setText("        " + strShowFileName);
+  verList.at(currentRow)->setText(strTV + "  " + strSV + " ");
+
+  QString strStyleSel = "QLabel {color: #e6e6e6;background-color: none;}";
+  QString strStyle = "QLabel {color: #2c2c2c;background-color: none;}";
+  for (int i = 0; i < ui->listSource->count(); i++) {
+    if (i == currentRow)
+      verList.at(currentRow)->setStyleSheet(strStyleSel);
+    else
+      verList.at(i)->setStyleSheet(strStyle);
   }
 }
 
@@ -149,28 +178,24 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
 
   if (!defUS) {
     ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/nous.png"));
-    QString str = strShowFileName + "  |  " + strTV;
-    ui->listSource->item(currentRow)->setText(str);
+    addVerWidget(currentRow, strTV, strSV, strShowFileName);
+
   } else {
     if (!QFile(sourceFile).exists()) {
       ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
-      QString str = strShowFileName + "  |  " + strTV;
-      ui->listSource->item(currentRow)->setText(str);
+      addVerWidget(currentRow, strTV, strSV, strShowFileName);
     }
     if (!QFile(targetFile).exists()) {
       ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
-      QString str = strShowFileName + "  |  " + strTV + "  |  " + strSV;
-      ui->listSource->item(currentRow)->setText(str);
+      addVerWidget(currentRow, strTV, strSV, strShowFileName);
     }
     if (QFile(sourceFile).exists() && QFile(targetFile).exists()) {
       if (strSV > strTV) {
         ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
-        QString str = strShowFileName + "  |  " + strTV + "  |  " + strSV;
-        ui->listSource->item(currentRow)->setText(str);
+        addVerWidget(currentRow, strTV, strSV, strShowFileName);
       } else {
         ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
-        QString str = strShowFileName + "  |  " + strTV;
-        ui->listSource->item(currentRow)->setText(str);
+        addVerWidget(currentRow, strTV, strSV, strShowFileName);
       }
     }
   }
@@ -248,55 +273,56 @@ void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
   }
 }
 
-void SyncOCDialog::closeEvent(QCloseEvent *event)
-{
-    if (!ui->btnUpKexts->isEnabled())
-        event->ignore();
-    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-    // QString strTag = QDir::fromNativeSeparators(SaveFileName);
-    QString strTag = SaveFileName;
-    strTag.replace("/", "-");
-    QString str_0, str_1;
-    QSettings Reg(qfile, QSettings::IniFormat);
-    for (int i = 0; i < ui->listSource->count(); i++) {
-        str_0 = ui->listSource->item(i)->text().trimmed();
-        QStringList list_0 = str_0.split("|");
-        if (list_0.count() > 0)
-            str_1 = list_0.at(0);
-        Reg.setValue(strTag + str_1.trimmed(), ui->listSource->item(i)->checkState());
-    }
-    for (int i = 0; i < ui->listTarget->count(); i++) {
-        Reg.setValue(strTag + ui->listTarget->item(i)->text().trimmed(),
-                     ui->listTarget->item(i)->checkState());
-    }
+void SyncOCDialog::closeEvent(QCloseEvent* event) {
+  if (!ui->btnUpKexts->isEnabled()) event->ignore();
+  writeCheckStateINI();
 }
 
-void SyncOCDialog::keyPressEvent(QKeyEvent *event)
-{
-    switch (event->key()) {
+void SyncOCDialog::writeCheckStateINI() {
+  QString qfile = QDir::homePath() + "/.config/QtOCC/chk.ini";
+  // QString strTag = QDir::fromNativeSeparators(SaveFileName);
+  QString strTag = SaveFileName;
+  strTag.replace("/", "-");
+  QString str_0, str_1;
+  QSettings Reg(qfile, QSettings::IniFormat);
+  for (int i = 0; i < ui->listSource->count(); i++) {
+    str_0 = ui->listSource->item(i)->text().trimmed();
+    QStringList list_0 = str_0.split("|");
+    if (list_0.count() > 0) str_1 = list_0.at(0);
+    Reg.setValue(strTag + str_1.trimmed(), chkList.at(i)->isChecked());
+  }
+
+  for (int i = 0; i < ui->listTarget->count(); i++) {
+    Reg.setValue(strTag + ui->listTarget->item(i)->text().trimmed(),
+                 ui->listTarget->item(i)->checkState());
+  }
+}
+
+void SyncOCDialog::keyPressEvent(QKeyEvent* event) {
+  switch (event->key()) {
     case Qt::Key_Escape:
-        if (!ui->btnUpKexts->isEnabled())
-            return;
-        else
-            close();
-        break;
+      if (!ui->btnUpKexts->isEnabled())
+        return;
+      else
+        close();
+      break;
 
     case Qt::Key_Return:
 
-        break;
+      break;
 
     case Qt::Key_Backspace:
 
-        break;
+      break;
 
     case Qt::Key_Space:
 
-        break;
+      break;
 
     case Qt::Key_F1:
 
-        break;
-    }
+      break;
+  }
 }
 
 void SyncOCDialog::on_btnUpKexts_clicked() {
@@ -306,6 +332,7 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
 
   ui->labelShowDLInfo->setVisible(true);
   progBar = new QProgressBar(this);
+  progBar->setTextVisible(false);
   progBar->setStyleSheet(
       "QProgressBar{border:0px solid #FFFFFF;"
       "height:30;"
@@ -324,7 +351,7 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
   int n = ui->listSource->currentRow();
   for (int i = 0; i < ui->listSource->count(); i++) {
     ui->listSource->setCurrentRow(i);
-    if (ui->listSource->item(i)->checkState() == Qt::Checked) {
+    if (mw_one->dlgSyncOC->chkList.at(i)->isChecked()) {
       QString sourceFile = mw_one->sourceKexts.at(i);
       QString targetFile = mw_one->targetKexts.at(i);
       QString strSV, strTV;
@@ -338,6 +365,9 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
 
     if (ui->listSource->itemWidget(ui->listSource->item(i)) == progBar) {
       ui->listSource->removeItemWidget(ui->listSource->item(i));
+      writeCheckStateINI();
+      initKextList();
+      readCheckStateINI();
     }
   }
   ui->listSource->setCurrentRow(n);
@@ -359,12 +389,84 @@ void SyncOCDialog::on_btnUpdate_clicked() {
 
 void SyncOCDialog::on_btnSelectAll_clicked() {
   for (int i = 0; i < ui->listSource->count(); i++)
-    ui->listSource->item(i)->setCheckState(Qt::Checked);
+    chkList.at(i)->setChecked(true);
 }
 
 void SyncOCDialog::on_btnClearAll_clicked() {
   for (int i = 0; i < ui->listSource->count(); i++)
-    ui->listSource->item(i)->setCheckState(Qt::Unchecked);
+    chkList.at(i)->setChecked(false);
 }
 
 void SyncOCDialog::resizeEvent(QResizeEvent* event) { Q_UNUSED(event); }
+
+void SyncOCDialog::initKextList() {
+  chkList.clear();
+  textList.clear();
+  verList.clear();
+
+  QString strStyle = "QLabel {color: #2c2c2c;background-color: none;}";
+
+  for (int i = 0; i < ui->listSource->count(); i++) {
+    QWidget* w = new QWidget(this);
+    QHBoxLayout* layout = new QHBoxLayout(w);
+    layout->setMargin(0);
+    layout->setDirection(QBoxLayout::LeftToRight);
+
+    checkBox = new QCheckBox(w);
+    chkList.append(checkBox);
+
+    lblTxt = new QLabel(w);
+    lblTxt->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    textList.append(lblTxt);
+
+    lblVer = new QLabel(w);
+    lblVer->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    lblVer->setStyleSheet(strStyle);
+    verList.append(lblVer);
+
+    layout->addSpacing(4);
+    layout->addWidget(checkBox, 0, Qt::AlignLeft | Qt::AlignAbsolute);
+    layout->addSpacing(4);
+    layout->addWidget(lblTxt, 0, Qt::AlignLeft | Qt::AlignAbsolute);
+    layout->addWidget(lblVer, 0, Qt::AlignRight | Qt::AlignAbsolute);
+
+    w->setLayout(layout);
+    ui->listSource->setItemWidget(ui->listSource->item(i), w);
+  }
+}
+
+void SyncOCDialog::readCheckStateINI() {
+  QString qfile = QDir::homePath() + "/.config/QtOCC/chk.ini";
+  QString strTag = SaveFileName;
+  strTag.replace("/", "-");
+  QSettings Reg(qfile, QSettings::IniFormat);
+  for (int i = 0; i < ui->listSource->count(); i++) {
+    QString str_0 = ui->listSource->item(i)->text().trimmed();
+    QString strValue = strTag + str_0;
+    bool yes = false;
+    for (int m = 0; m < Reg.allKeys().count(); m++) {
+      if (Reg.allKeys().at(m).contains(strValue)) {
+        yes = true;
+      }
+    }
+    if (yes) {
+      bool strCheck = Reg.value(strValue).toBool();
+      chkList.at(i)->setChecked(strCheck);
+    }
+  }
+
+  for (int i = 0; i < ui->listTarget->count(); i++) {
+    QString strValue = strTag + ui->listTarget->item(i)->text().trimmed();
+    bool yes = false;
+    for (int m = 0; m < Reg.allKeys().count(); m++) {
+      if (Reg.allKeys().at(m).contains(strValue)) {
+        yes = true;
+      }
+    }
+    if (yes) {
+      int strCheck = Reg.value(strValue).toInt();
+      if (strCheck == 2) ui->listTarget->item(i)->setCheckState(Qt::Checked);
+      if (strCheck == 0) ui->listTarget->item(i)->setCheckState(Qt::Unchecked);
+    }
+  }
+}

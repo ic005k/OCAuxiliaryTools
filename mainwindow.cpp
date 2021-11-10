@@ -9922,6 +9922,7 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     } else
       sourceOpenCore.append(strF1);
   }
+
   for (int i = 0; i < targetFiles.count(); i++) {
     QString f = targetFiles.at(i);
     if (!mymethod->isKext(f)) {
@@ -9935,65 +9936,27 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     }
   }
 
+  dlgSyncOC->initKextList();
+
   for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
     QString strF1 = sourceKexts.at(i);
     QString strF2 = targetKexts.at(i);
-    if (mymethod->getKextVersion(strF1) > mymethod->getKextVersion(strF2))
-      dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Checked);
-    else
-      dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Unchecked);
+    if (strF1 != "None") {
+      if (mymethod->getKextVersion(strF1) > mymethod->getKextVersion(strF2))
+        dlgSyncOC->chkList.at(i)->setChecked(true);
+      else
+        dlgSyncOC->chkList.at(i)->setChecked(false);
+    } else
+      dlgSyncOC->chkList.at(i)->setChecked(false);
   }
 
   for (int i = 0; i < dlgSyncOC->ui->listTarget->count(); i++) {
     dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
   }
 
-  // Read check status
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QString strTag = SaveFileName;
-  strTag.replace("/", "-");
-  QSettings Reg(qfile, QSettings::IniFormat);
-  for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
-    QString str_0 = dlgSyncOC->ui->listSource->item(i)->text().trimmed();
-    QString strValue = strTag + str_0;
-    bool yes = false;
-    for (int m = 0; m < Reg.allKeys().count(); m++) {
-      if (Reg.allKeys().at(m).contains(strValue)) {
-        yes = true;
-      }
-    }
-    if (yes) {
-      int strCheck = Reg.value(strValue).toInt();
-      if (strCheck == 2)
-        dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Checked);
-      if (strCheck == 0)
-        dlgSyncOC->ui->listSource->item(i)->setCheckState(Qt::Unchecked);
-    }
-  }
-
-  for (int i = 0; i < dlgSyncOC->ui->listTarget->count(); i++) {
-    QString strValue =
-        strTag + dlgSyncOC->ui->listTarget->item(i)->text().trimmed();
-    bool yes = false;
-    for (int m = 0; m < Reg.allKeys().count(); m++) {
-      if (Reg.allKeys().at(m).contains(strValue)) {
-        yes = true;
-      }
-    }
-    if (yes) {
-      int strCheck = Reg.value(strValue).toInt();
-      if (strCheck == 2)
-        dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
-      if (strCheck == 0)
-        dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Unchecked);
-    }
-  }
-
   dlgSyncOC->setModal(true);
   dlgSyncOC->show();
   dlgSyncOC->ui->listSource->setFocus();
-  dlgSyncOC->ui->listTarget->setCurrentRow(0);
-  dlgSyncOC->ui->listSource->setCurrentRow(0);
 
   for (int i = 0; i < dlgSyncOC->ui->listSource->count(); i++) {
     dlgSyncOC->ui->listSource->setCurrentRow(i);
@@ -10006,6 +9969,9 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   // Resources
   dlgSyncOC->sourceResourcesDir = pathSource + "EFI/OC/Resources/";
   dlgSyncOC->targetResourcesDir = DirName + "/OC/Resources/";
+
+  // Read check status
+  dlgSyncOC->readCheckStateINI();
 }
 
 void MainWindow::initColorValue() {
