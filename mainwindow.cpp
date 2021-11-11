@@ -6664,11 +6664,16 @@ void MainWindow::CopyLabel() {
   }
 }
 
-void MainWindow::setCheckBoxWidth(QCheckBox* cbox) {
-  QFont myFont(cbox->font().family(), cbox->font().pointSize());
-  QString str = cbox->text() + "        ";
-  QFontMetrics fm(myFont);
-  int w;
+void MainWindow::setCheckBoxWidth(QCheckBox *cbox)
+{
+    QFont myFont(cbox->font().family(), cbox->font().pixelSize());
+    QString str;
+    if (!win)
+        str = cbox->text() + "        ";
+    else
+        str = cbox->text() + "            ";
+    QFontMetrics fm(myFont);
+    int w;
 
 #if (QT_VERSION <= QT_VERSION_CHECK(5, 9, 9))
   w = fm.width(str);
