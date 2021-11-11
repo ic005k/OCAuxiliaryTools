@@ -114,7 +114,7 @@ void SyncOCDialog::addVerWidget(int currentRow, QString strTV, QString strSV,
   if (mw_one->win) verList.at(currentRow)->setFont(QFont("consolas"));
 
   ui->listSource->item(currentRow)->setText("        " + strShowFileName);
-  verList.at(currentRow)->setText(strTV + "  " + strSV + " ");
+  verList.at(currentRow)->setText(strTV + "    " + strSV + " ");
 
   QString strStyleSel = "QLabel {color: #e6e6e6;background-color: none;}";
   QString strStyle = "QLabel {color: #2c2c2c;background-color: none;}";
@@ -140,14 +140,8 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   sourceFile = mw_one->sourceKexts.at(currentRow);
   targetFile = mw_one->targetKexts.at(currentRow);
 
-  if (mymethod->isKext(sourceFile))
-    sourceHash = mw_one->getMD5(mymethod->getKextBin(sourceFile));
-  else
-    sourceHash = mw_one->getMD5(sourceFile);
-  if (mymethod->isKext(targetFile))
-    targetHash = mw_one->getMD5(mymethod->getKextBin(targetFile));
-  else
-    targetHash = mw_one->getMD5(targetFile);
+  sourceHash = mw_one->getMD5(mymethod->getKextBin(sourceFile));
+  targetHash = mw_one->getMD5(mymethod->getKextBin(targetFile));
 
   QFileInfo fiSource(sourceFile);
   QFileInfo fiTarget(targetFile);
@@ -178,27 +172,25 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
 
   if (!defUS) {
     ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/nous.png"));
-    addVerWidget(currentRow, strTV, strSV, strShowFileName);
 
   } else {
     if (!QFile(sourceFile).exists()) {
       ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
-      addVerWidget(currentRow, strTV, strSV, strShowFileName);
     }
     if (!QFile(targetFile).exists()) {
       ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
-      addVerWidget(currentRow, strTV, strSV, strShowFileName);
     }
     if (QFile(sourceFile).exists() && QFile(targetFile).exists()) {
       if (strSV > strTV) {
         ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
-        addVerWidget(currentRow, strTV, strSV, strShowFileName);
+
       } else {
         ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
-        addVerWidget(currentRow, strTV, strSV, strShowFileName);
       }
     }
   }
+
+  addVerWidget(currentRow, strTV, strSV, strShowFileName);
 
   if (sourceHash != targetHash) {
   } else {
@@ -333,6 +325,7 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
   ui->labelShowDLInfo->setVisible(true);
   progBar = new QProgressBar(this);
   progBar->setTextVisible(false);
+  progBar->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
   progBar->setStyleSheet(
       "QProgressBar{border:0px solid #FFFFFF;"
       "height:30;"
@@ -350,8 +343,7 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
 
   int n = ui->listSource->currentRow();
   for (int i = 0; i < ui->listSource->count(); i++) {
-    ui->listSource->setCurrentRow(i);
-    if (mw_one->dlgSyncOC->chkList.at(i)->isChecked()) {
+    if (chkList.at(i)->isChecked()) {
       QString sourceFile = mw_one->sourceKexts.at(i);
       QString targetFile = mw_one->targetKexts.at(i);
       QString strSV, strTV;
@@ -370,6 +362,10 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
       readCheckStateINI();
     }
   }
+
+  for (int i = 0; i < ui->listSource->count(); i++)
+    ui->listSource->setCurrentRow(i);
+
   ui->listSource->setCurrentRow(n);
 }
 

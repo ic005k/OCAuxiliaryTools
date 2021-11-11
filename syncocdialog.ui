@@ -6,24 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
+    <width>879</width>
     <height>545</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Sync OC</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3">
+  <layout class="QGridLayout" name="gridLayout_6">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_11">
      <item row="4" column="0">
-      <widget class="QLabel" name="lblTargetLastModi">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
       <widget class="QLabel" name="lblSourceLastModi">
        <property name="text">
         <string>TextLabel</string>
@@ -31,6 +24,37 @@
       </widget>
      </item>
      <item row="2" column="0">
+      <layout class="QGridLayout" name="gridLayout_9">
+       <item row="0" column="3">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1">
+        <widget class="QToolButton" name="btnClearAll">
+         <property name="text">
+          <string>Clear</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QToolButton" name="btnSelectAll">
+         <property name="text">
+          <string>Select All</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
       <widget class="QListWidget" name="listSource">
        <property name="minimumSize">
         <size>
@@ -64,14 +88,21 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
+     <item row="3" column="0">
+      <widget class="QLabel" name="lblTargetLastModi">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
       <widget class="QLabel" name="labelShowDLInfo">
        <property name="text">
         <string>DLInfo</string>
        </property>
       </widget>
      </item>
-     <item row="7" column="0">
+     <item row="6" column="0">
       <widget class="QProgressBar" name="progressBarKext">
        <property name="minimumSize">
         <size>
@@ -90,14 +121,7 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="lblSource">
-       <property name="text">
-        <string>Kexts</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
+     <item row="7" column="0">
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="2" column="0">
         <layout class="QGridLayout" name="gridLayout_2">
@@ -126,10 +150,17 @@
        </item>
       </layout>
      </item>
-     <item row="3" column="0">
-      <layout class="QGridLayout" name="gridLayout_9">
+     <item row="0" column="0">
+      <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="3">
-        <spacer name="horizontalSpacer">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>    </string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <spacer name="horizontalSpacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -141,17 +172,31 @@
          </property>
         </spacer>
        </item>
-       <item row="0" column="1">
-        <widget class="QToolButton" name="btnClearAll">
+       <item row="0" column="4">
+        <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Clear</string>
+          <string>Available</string>
          </property>
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QToolButton" name="btnSelectAll">
+        <widget class="QLabel" name="lblSource">
          <property name="text">
-          <string>Select All</string>
+          <string>Kexts</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Current</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>    </string>
          </property>
         </widget>
        </item>
