@@ -74,11 +74,11 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           
-          #name: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
-          #path: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
-          
-          name: ${{ env.orgName }}-${{ matrix.os }}-${{ matrix.qt_ver }}-${{ env.VERSION }}-x86_64.AppImage
+          name: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
           path: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
+          
+          #name: ${{ env.orgName }}-${{ matrix.os }}-${{ matrix.qt_ver }}-${{ env.VERSION }}-x86_64.AppImage
+          #path: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
           
      # tag 上传Release
       - name: uploadRelease
@@ -87,11 +87,11 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           
-          #file: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
-          #asset_name: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
-          
           file: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
-          asset_name: ${{ env.orgName }}-${{ matrix.os }}-${{ matrix.qt_ver }}-${{ env.VERSION }}-x86_64.AppImage
+          asset_name: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
+          
+          #file: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
+          #asset_name: ${{ env.orgName }}-${{ matrix.os }}-${{ matrix.qt_ver }}-${{ env.VERSION }}-x86_64.AppImage
           
           tag: ${{ github.ref }}
           overwrite: true     
