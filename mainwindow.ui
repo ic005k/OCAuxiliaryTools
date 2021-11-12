@@ -9249,6 +9249,12 @@ Note: This option requires ProvideConsoleGop to be enabled.
               </item>
               <item row="4" column="1">
                <widget class="QComboBox" name="cboxResolution">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
                 <property name="editable">
                  <bool>true</bool>
                 </property>
@@ -9287,6 +9293,12 @@ Note: This will fail when console handle has no GOP protocol. When the firmware 
               </item>
               <item row="5" column="1">
                <widget class="QComboBox" name="cboxTextRenderer">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
                 <property name="editable">
                  <bool>true</bool>
                 </property>
@@ -9310,6 +9322,12 @@ Note: This option only applies to System renderer. On all known affected systems
               </item>
               <item row="3" column="1">
                <widget class="QComboBox" name="cboxConsoleMode">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
                 <property name="editable">
                  <bool>true</bool>
                 </property>
@@ -9317,6 +9335,12 @@ Note: This option only applies to System renderer. On all known affected systems
               </item>
               <item row="6" column="1">
                <widget class="QComboBox" name="cboxGopPassThrough">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
                 <property name="editable">
                  <bool>true</bool>
                 </property>
@@ -9424,7 +9448,14 @@ Note 2 : When switching from manually specifified NVRAM variable to this prefere
                </widget>
               </item>
               <item row="7" column="1">
-               <widget class="QLineEdit" name="editIntUIScale"/>
+               <widget class="QLineEdit" name="editIntUIScale">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>
