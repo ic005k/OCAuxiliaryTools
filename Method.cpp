@@ -183,12 +183,9 @@ void Method::finishKextUpdate(bool blDatabase) {
       dirTarget = strKexts + Name;
 
       for (int j = 0; j < mw_one->dlgSyncOC->ui->listSource->count(); j++) {
-        QString str_1 = mw_one->dlgSyncOC->ui->listSource->item(j)->text();
-        QStringList list_1 = str_1.split("|");
-        QString Name_0, Name_1;
-        if (list_1.count() > 0) Name_0 = list_1.at(0);
-        Name_1 = Name_0.trimmed();
-        if (Name == Name_1 && mw_one->dlgSyncOC->chkList.at(j)->isChecked()) {
+        QString str_1 =
+            mw_one->dlgSyncOC->ui->listSource->item(j)->text().trimmed();
+        if (Name == str_1 && mw_one->dlgSyncOC->chkList.at(j)->isChecked()) {
           mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
 
           qDebug() << dirSource << dirTarget;
@@ -221,12 +218,8 @@ void Method::kextUpdate() {
   for (int i = 0; i < mw_one->dlgSyncOC->ui->listSource->count(); i++) {
     if (blBreak) break;
     if (mw_one->dlgSyncOC->chkList.at(i)->isChecked()) {
-      QString name_1 =
+      QString name =
           mw_one->dlgSyncOC->ui->listSource->item(i)->text().trimmed();
-      QStringList list_1 = name_1.split("|");
-      QString name_0, name;
-      if (list_1.count() > 0) name_0 = list_1.at(0);
-      name = name_0.trimmed();
       kextName = name;
       for (int j = 0; j < mw_one->myDatabase->ui->tableKextUrl->rowCount();
            j++) {
@@ -332,7 +325,7 @@ void Method::doProcessFinished() {
   if (replyDL->error() == QNetworkReply::NoError) {
     myfile->flush();
     myfile->close();
-    if (QFileInfo(tempDir + filename).exists()) {
+    if (QFile(tempDir + filename).exists()) {
       if (mw_one->win) {
         QProcess::execute(mw_one->strAppExePath + "/unzip.exe",
                           QStringList()

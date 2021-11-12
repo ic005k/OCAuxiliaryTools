@@ -62,7 +62,7 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     strSV = mymethod->getKextVersion(strSou);
     strTV = mymethod->getKextVersion(strTar);
     if (QDir(strSou).exists()) {
-      if (mw_one->dlgSyncOC->chkList.at(i)->isChecked()) {
+      if (chkList.at(i)->isChecked()) {
         if (strSV >= strTV || strTV == "None") {
           mw_one->copyDirectoryFiles(strSou, strTar, true);
         }
@@ -275,13 +275,11 @@ void SyncOCDialog::writeCheckStateINI() {
   // QString strTag = QDir::fromNativeSeparators(SaveFileName);
   QString strTag = SaveFileName;
   strTag.replace("/", "-");
-  QString str_0, str_1;
+  QString str_0;
   QSettings Reg(qfile, QSettings::IniFormat);
   for (int i = 0; i < ui->listSource->count(); i++) {
     str_0 = ui->listSource->item(i)->text().trimmed();
-    QStringList list_0 = str_0.split("|");
-    if (list_0.count() > 0) str_1 = list_0.at(0);
-    Reg.setValue(strTag + str_1.trimmed(), chkList.at(i)->isChecked());
+    Reg.setValue(strTag + str_0, chkList.at(i)->isChecked());
   }
 
   for (int i = 0; i < ui->listTarget->count(); i++) {
@@ -354,7 +352,9 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
         repaint();
       }
     }
+  }
 
+  for (int i = 0; i < ui->listSource->count(); i++) {
     if (ui->listSource->itemWidget(ui->listSource->item(i)) == progBar) {
       ui->listSource->removeItemWidget(ui->listSource->item(i));
       writeCheckStateINI();
