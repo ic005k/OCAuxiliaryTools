@@ -56,7 +56,7 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 [aria2](https://github.com/aria2/aria2)&nbsp; &nbsp; &nbsp;&nbsp;
 [wget](http://wget.addictivecode.org/)&nbsp; &nbsp; &nbsp;&nbsp;
 
-### * 对所有的贡献者一并表示感谢，在此不再一一列出，谢谢你们的参与和支持！
+* ### 对所有的贡献者一并表示感谢，在此不再一一列出，谢谢你们的参与和支持！
 
 ### 备注：此项目开始于2020年8月
 
