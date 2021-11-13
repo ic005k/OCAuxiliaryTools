@@ -6400,12 +6400,14 @@ void MainWindow::init_MainUI() {
   init_HelpMenu();
 
   //搜索框
-
   ui->cboxFind->lineEdit()->setClearButtonEnabled(true);
   ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
   connect(ui->cboxFind->lineEdit(), &QLineEdit::returnPressed, this,
           &MainWindow::on_actionFind_triggered);
 
+  // Count
+  if (mac || osx1012) ui->lblCount->setFont(QFont("Menlo"));
+  if (win) ui->lblCount->setFont(QFont("consolas"));
   // 清除搜索历史
   clearTextsAction = new QAction(this);
   clearTextsAction->setToolTip(tr("Clear search history"));
