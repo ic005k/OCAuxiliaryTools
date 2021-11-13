@@ -1519,7 +1519,7 @@ QString Method::getDriverInfo(QString strDisk, QString strDiskVol) {
 
 void Method::backupEFI() {
   if (!mw_one->ui->actionUpgrade_OC->isEnabled()) return;
-  QString strEFI = SaveFileName;
+  QString strEFI = QDir::fromNativeSeparators(SaveFileName);
   QString strZipName, strBakTargetDir, str;
   strEFI.replace("/OC/" + QFileInfo(SaveFileName).fileName(), "");
   QStringList list = strEFI.split("/");
@@ -1555,11 +1555,12 @@ void Method::backupEFI() {
       TextEditToFile(txtEdit, fileName);
       QProcess::execute("cmd.exe", QStringList() << "/c" << fileName);
   } else {
-    QProcess::execute("zip", QStringList() << "-q"
-                                           << "-r"
-                                           << strBakTargetDir + strDate + "-" +
-                                                  strTime + "-" + strZipName
-                                           << strZipName);
+      QProcess::execute("zip",
+                        QStringList()
+                            << "-q"
+                            << "-r" << strBakTargetDir + strDate + "-" + strTime + "-" + strZipName
+                            << strZipName);
   }
-  // qDebug() << strEFI << strZipName;
+  qDebug() << strEFI << strZipName;
+  qDebug() << SaveFileName;
 }
