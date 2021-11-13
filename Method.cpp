@@ -1547,12 +1547,13 @@ void Method::backupEFI() {
   }
 
   if (mw_one->win) {
-    QTextEdit* txtEdit = new QTextEdit;
-    txtEdit->append(mw_one->strAppExePath + "/zip.exe -q -r " + strTargetName +
-                    " " + strZipName);
-    QString fileName = mw_one->strAppExePath + "/bak.bat";
-    TextEditToFile(txtEdit, fileName);
-    QProcess::execute("cmd.exe", QStringList() << "/c" << fileName);
+      QString strZipExe = mw_one->strAppExePath + "/zip.exe";
+      strZipExe = "\"" + strZipExe + "\"";
+      QTextEdit *txtEdit = new QTextEdit;
+      txtEdit->append(strZipExe + " -q -r " + strTargetName + " " + strZipName);
+      QString fileName = mw_one->strAppExePath + "/bak.bat";
+      TextEditToFile(txtEdit, fileName);
+      QProcess::execute("cmd.exe", QStringList() << "/c" << fileName);
   } else {
     QProcess::execute("zip", QStringList() << "-q"
                                            << "-r"
