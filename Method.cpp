@@ -1535,9 +1535,15 @@ void Method::backupEFI() {
   QTime time = QTime::currentTime();
   strDate = QString::number(date.year()) + "-" + QString::number(date.month()) +
             "-" + QString::number(date.day());
-  strTime = QString::number(time.hour()) + "-" +
-            QString::number(time.minute()) + "-" +
-            QString::number(time.second());
+  QString h, m, s;
+  h = QString::number(time.hour());
+  m = QString::number(time.minute());
+  s = QString::number(time.second());
+  if (h.length() == 1) h = "0" + h;
+  if (m.length() == 1) m = "0" + m;
+  if (s.length() == 1) s = "0" + s;
+
+  strTime = h + "-" + m + "-" + s;
   QString strTargetName =
       strBakTargetDir + strDate + "-" + strTime + "-" + strZipName + ".zip";
   strTargetName = "\"" + strTargetName + "\"";
@@ -1547,19 +1553,19 @@ void Method::backupEFI() {
   }
 
   if (mw_one->win) {
-      QString strZipExe = mw_one->strAppExePath + "/zip.exe";
-      strZipExe = "\"" + strZipExe + "\"";
-      QTextEdit *txtEdit = new QTextEdit;
-      txtEdit->append(strZipExe + " -q -r " + strTargetName + " " + strZipName);
-      QString fileName = mw_one->strAppExePath + "/bak.bat";
-      TextEditToFile(txtEdit, fileName);
-      QProcess::execute("cmd.exe", QStringList() << "/c" << fileName);
+    QString strZipExe = mw_one->strAppExePath + "/zip.exe";
+    strZipExe = "\"" + strZipExe + "\"";
+    QTextEdit* txtEdit = new QTextEdit;
+    txtEdit->append(strZipExe + " -q -r " + strTargetName + " " + strZipName);
+    QString fileName = mw_one->strAppExePath + "/bak.bat";
+    TextEditToFile(txtEdit, fileName);
+    QProcess::execute("cmd.exe", QStringList() << "/c" << fileName);
   } else {
-      QProcess::execute("zip",
-                        QStringList()
-                            << "-q"
-                            << "-r" << strBakTargetDir + strDate + "-" + strTime + "-" + strZipName
-                            << strZipName);
+    QProcess::execute("zip", QStringList() << "-q"
+                                           << "-r"
+                                           << strBakTargetDir + strDate + "-" +
+                                                  strTime + "-" + strZipName
+                                           << strZipName);
   }
   qDebug() << strEFI << strZipName;
   qDebug() << SaveFileName;
