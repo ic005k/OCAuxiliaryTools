@@ -1520,20 +1520,26 @@ QString Method::getDriverInfo(QString strDisk, QString strDiskVol) {
 void Method::backupEFI() {
   if (!mw_one->ui->actionUpgrade_OC->isEnabled()) return;
   QString strEFI = SaveFileName;
-  QString strZipName, strBakTargetDir;
+  QString strZipName, strBakTargetDir, str;
   strEFI.replace("/OC/" + QFileInfo(SaveFileName).fileName(), "");
   QStringList list = strEFI.split("/");
   strZipName = list.at(list.count() - 1);
-  strEFI.replace(strZipName, "");
+  for (int i = 0; i < list.count() - 1; i++) {
+    str = str + list.at(i) + "/";
+  }
+  strEFI = str;
+  // strEFI.replace(strZipName, "");
   strBakTargetDir = QDir::homePath() + "/Desktop/Backup EFI/";
   QString strDate, strTime;
   QDate date = QDate::currentDate();
   QTime time = QTime::currentTime();
-  strDate = QString::number(date.year()) + "-" + QString::number(date.month()) + "-"
-            + QString::number(date.day());
-  strTime = QString::number(time.hour()) + "-" + QString::number(time.minute()) + "-"
-            + QString::number(time.second());
-  QString strTargetName = strBakTargetDir + strDate + "-" + strTime + "-" + strZipName + +".zip";
+  strDate = QString::number(date.year()) + "-" + QString::number(date.month()) +
+            "-" + QString::number(date.day());
+  strTime = QString::number(time.hour()) + "-" +
+            QString::number(time.minute()) + "-" +
+            QString::number(time.second());
+  QString strTargetName =
+      strBakTargetDir + strDate + "-" + strTime + "-" + strZipName + ".zip";
   strTargetName = "\"" + strTargetName + "\"";
   QDir::setCurrent(strEFI);
   QDir dir;
@@ -1541,16 +1547,18 @@ void Method::backupEFI() {
   }
 
   if (mw_one->win) {
-      QTextEdit *txtEdit = new QTextEdit;
-      txtEdit->append(mw_one->strAppExePath + "/zip.exe -q -r " + strTargetName + " " + strZipName);
-      QString fileName = mw_one->strAppExePath + "/bak.bat";
-      TextEditToFile(txtEdit, fileName);
-      QProcess::execute("cmd.exe", QStringList() << "/c" << fileName);
+    QTextEdit* txtEdit = new QTextEdit;
+    txtEdit->append(mw_one->strAppExePath + "/zip.exe -q -r " + strTargetName +
+                    " " + strZipName);
+    QString fileName = mw_one->strAppExePath + "/bak.bat";
+    TextEditToFile(txtEdit, fileName);
+    QProcess::execute("cmd.exe", QStringList() << "/c" << fileName);
   } else {
-      QProcess::execute("zip",
-                        QStringList()
-                            << "-q"
-                            << "-r" << strBakTargetDir + strDate + "-" + strTime + "-" + strZipName
-                            << strZipName);
+    QProcess::execute("zip", QStringList() << "-q"
+                                           << "-r"
+                                           << strBakTargetDir + strDate + "-" +
+                                                  strTime + "-" + strZipName
+                                           << strZipName);
   }
+  // qDebug() << strEFI << strZipName;
 }

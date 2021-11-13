@@ -10416,6 +10416,9 @@ Enable this option to be able to see all the boot options when having multiple d
    <property name="text">
     <string>OpenCore Forum</string>
    </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
   </action>
   <action name="actionOpenCore_Factory">
    <property name="text">
@@ -10432,6 +10435,9 @@ Enable this option to be able to see all the boot options when having multiple d
    <property name="shortcut">
     <string>Ctrl+R</string>
    </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
   </action>
   <action name="actionPlist_editor">
    <property name="text">
@@ -10446,6 +10452,9 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionOpenCanopyIcons">
    <property name="text">
     <string>OpenCanopyIcons</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
   <action name="actionMountEsp">
@@ -10535,6 +10544,9 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionDiscussion_Forum">
    <property name="text">
     <string>Discussion Forum</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
   <action name="actionQuit">

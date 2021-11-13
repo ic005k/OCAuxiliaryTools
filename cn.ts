@@ -55,26 +55,26 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="10360"/>
+        <location filename="mainwindow.ui" line="10392"/>
         <source>Open</source>
         <oldsource>打开-Open</oldsource>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10365"/>
+        <location filename="mainwindow.ui" line="10397"/>
         <location filename="mainwindow.cpp" line="5171"/>
         <source>Save</source>
         <oldsource>保存-Save</oldsource>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10370"/>
+        <location filename="mainwindow.ui" line="10402"/>
         <source>Save As...</source>
         <oldsource>另存-Save As...</oldsource>
         <translation>另存...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10421"/>
+        <location filename="mainwindow.ui" line="10453"/>
         <source>MountESP</source>
         <oldsource>挂载ESP-MountESP</oldsource>
         <translation>挂载ESP分区</translation>
@@ -178,7 +178,7 @@
         <translation>ACPI 电源管理</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10285"/>
+        <location filename="mainwindow.ui" line="10317"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
@@ -211,7 +211,7 @@
         <location filename="mainwindow.ui" line="6834"/>
         <location filename="mainwindow.ui" line="8762"/>
         <location filename="mainwindow.ui" line="8784"/>
-        <location filename="mainwindow.ui" line="10105"/>
+        <location filename="mainwindow.ui" line="10136"/>
         <source>AddItem</source>
         <translation>增加条目</translation>
     </message>
@@ -240,7 +240,7 @@
         <location filename="mainwindow.ui" line="5755"/>
         <location filename="mainwindow.ui" line="6856"/>
         <location filename="mainwindow.ui" line="8806"/>
-        <location filename="mainwindow.ui" line="10127"/>
+        <location filename="mainwindow.ui" line="10158"/>
         <source>DeleteItem</source>
         <translation>删除条目</translation>
     </message>
@@ -423,7 +423,7 @@ Mmio白名单</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9352"/>
+        <location filename="mainwindow.ui" line="9376"/>
         <source>ForceResolution</source>
         <translation></translation>
     </message>
@@ -511,7 +511,7 @@ Mmio白名单</translation>
         <location filename="mainwindow.ui" line="773"/>
         <location filename="mainwindow.ui" line="1192"/>
         <location filename="mainwindow.ui" line="2695"/>
-        <location filename="mainwindow.ui" line="9754"/>
+        <location filename="mainwindow.ui" line="9785"/>
         <location filename="mainwindow.cpp" line="5931"/>
         <location filename="mainwindow.cpp" line="5939"/>
         <location filename="mainwindow.cpp" line="5948"/>
@@ -1263,12 +1263,12 @@ Console logging prints less than all the other variants. Depending on the build 
 通用</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10313"/>
+        <location filename="mainwindow.ui" line="10345"/>
         <source>toolBar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10446"/>
+        <location filename="mainwindow.ui" line="10478"/>
         <source>CheckUpdate</source>
         <translation>检查更新</translation>
     </message>
@@ -1546,7 +1546,7 @@ Console logging prints less than all the other variants. Depending on the build 
         <location filename="mainwindow.ui" line="5701"/>
         <location filename="mainwindow.ui" line="6869"/>
         <location filename="mainwindow.ui" line="8819"/>
-        <location filename="mainwindow.ui" line="10140"/>
+        <location filename="mainwindow.ui" line="10171"/>
         <source>Del</source>
         <translation></translation>
     </message>
@@ -1636,7 +1636,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
     </message>
     <message>
         <location filename="mainwindow.ui" line="1797"/>
-        <location filename="mainwindow.ui" line="10060"/>
+        <location filename="mainwindow.ui" line="10091"/>
         <source>-1</source>
         <translation></translation>
     </message>
@@ -1836,12 +1836,12 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
         <translation>在Apple Event协议的OpenCore实现中配置指针速度倍增器。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9422"/>
+        <location filename="mainwindow.ui" line="9446"/>
         <source>UIScale</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10015"/>
+        <location filename="mainwindow.ui" line="10046"/>
         <source>Type: plist integer
 Description: Configure GPU PCI BAR sizes.
 
@@ -1869,60 +1869,65 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10041"/>
+        <location filename="mainwindow.ui" line="10072"/>
         <source>ResizeGpuBars</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10441"/>
+        <location filename="mainwindow.ui" line="10473"/>
         <source>OpenCore Documentation</source>
         <translation>OpenCore文档</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10521"/>
+        <location filename="mainwindow.ui" line="10553"/>
         <source>Ctrl+6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10526"/>
+        <location filename="mainwindow.ui" line="10558"/>
         <source>OpenCore Differences</source>
         <translation>OpenCore版本差异说明</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10531"/>
+        <location filename="mainwindow.ui" line="10563"/>
         <source>Latest Release</source>
         <translation>最新版本</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10536"/>
+        <location filename="mainwindow.ui" line="10568"/>
         <source>Download Upgrade Packages</source>
         <translation>下载升级包</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10541"/>
+        <location filename="mainwindow.ui" line="10573"/>
         <source>Download Database</source>
         <oldsource>Upgrade Database</oldsource>
         <translation>下载数据库</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10546"/>
+        <location filename="mainwindow.ui" line="10578"/>
         <source>Open Directory</source>
         <translation>打开目录</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10557"/>
+        <location filename="mainwindow.ui" line="10589"/>
         <source>Automatically check for updates</source>
         <translation>自动检查更新</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10562"/>
+        <location filename="mainwindow.ui" line="10594"/>
         <source>Edit Preset</source>
         <translation>编辑预置文件</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10567"/>
+        <location filename="mainwindow.ui" line="10599"/>
         <source>OCAuxiliaryTools  Documentation</source>
         <translation>OCAuxiliaryTools 文档</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="10604"/>
+        <source>Backup EFI to Desktop &quot;Backup EFI&quot;</source>
+        <translation>备份EFI到桌面&quot;Backup EFI&quot;目录</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8193"/>
@@ -1954,7 +1959,7 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
         <translation>在使用苹果事件协议的OpenCore实现时，启用自定义按键重复延迟。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9964"/>
+        <location filename="mainwindow.ui" line="9995"/>
         <source>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
  register. These values may cause macOS boot failure on Intel platforms.</source>
         <oldsource>Type: plist boolean
@@ -1969,63 +1974,63 @@ Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algor
  这些值可能会导致Intel平台上的macOS引导失败。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9847"/>
+        <location filename="mainwindow.ui" line="9878"/>
         <source>EnableVectorAcceleration</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10345"/>
+        <location filename="mainwindow.ui" line="10377"/>
         <source>Search results</source>
         <translation>搜索结果</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10393"/>
+        <location filename="mainwindow.ui" line="10425"/>
         <source>Ctrl+T</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10401"/>
+        <location filename="mainwindow.ui" line="10433"/>
         <source>Ctrl+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10459"/>
+        <location filename="mainwindow.ui" line="10491"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10472"/>
+        <location filename="mainwindow.ui" line="10504"/>
         <source>Ctrl+5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10477"/>
+        <location filename="mainwindow.ui" line="10509"/>
         <source>New Window</source>
         <translation>新建窗口</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10480"/>
+        <location filename="mainwindow.ui" line="10512"/>
         <source>Ctrl+N</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10485"/>
-        <location filename="mainwindow.cpp" line="6391"/>
+        <location filename="mainwindow.ui" line="10517"/>
+        <location filename="mainwindow.cpp" line="6398"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10490"/>
+        <location filename="mainwindow.ui" line="10522"/>
         <source>Go to the previous</source>
         <translation>跳转到上一个</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10495"/>
+        <location filename="mainwindow.ui" line="10527"/>
         <source>Go to the next</source>
         <translation>跳转到下一个</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10518"/>
+        <location filename="mainwindow.ui" line="10550"/>
         <source>Synchronize OC main program</source>
         <translation>同步OC主程序</translation>
     </message>
@@ -2207,52 +2212,52 @@ trim.</source>
         <translation>在启动时播放提示音。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9767"/>
+        <location filename="mainwindow.ui" line="9798"/>
         <source>Disable platform security policy.</source>
         <translation>禁用平台安全策略。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9770"/>
+        <location filename="mainwindow.ui" line="9801"/>
         <source>DisableSecurityPolicy</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10406"/>
+        <location filename="mainwindow.ui" line="10438"/>
         <source>PlistEDPlus</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10411"/>
+        <location filename="mainwindow.ui" line="10443"/>
         <source>QtiASL</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10426"/>
+        <location filename="mainwindow.ui" line="10458"/>
         <source>OC Validate</source>
         <translation>OC验证</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10451"/>
+        <location filename="mainwindow.ui" line="10483"/>
         <source>Database</source>
         <translation>数据库</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10456"/>
+        <location filename="mainwindow.ui" line="10488"/>
         <source>Generate EFI on the desktop</source>
         <translation>在桌面上生成EFI文件夹</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10464"/>
+        <location filename="mainwindow.ui" line="10496"/>
         <source>Share your Config.plist</source>
         <translation>分享您的Config.plist</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10469"/>
+        <location filename="mainwindow.ui" line="10501"/>
         <source>Open database directory</source>
         <translation>打开数据库目录</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10385"/>
+        <location filename="mainwindow.ui" line="10417"/>
         <source>OpenCore Forum</source>
         <translation>OpenCore讨论区（国际）</translation>
     </message>
@@ -2398,8 +2403,8 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8070"/>
-        <location filename="mainwindow.cpp" line="10147"/>
-        <location filename="mainwindow.cpp" line="10152"/>
+        <location filename="mainwindow.cpp" line="10158"/>
+        <location filename="mainwindow.cpp" line="10163"/>
         <source>Select date</source>
         <translation>选择日期</translation>
     </message>
@@ -2445,12 +2450,12 @@ Note: AppleEvent’s default behaviour is intended to prevent unwanted queued ke
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9284"/>
+        <location filename="mainwindow.ui" line="9290"/>
         <source>Resolution</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9463"/>
+        <location filename="mainwindow.ui" line="9494"/>
         <source> Reinstalls Apple Boot Policy protocol with a builtin version. This may be used to ensure APFS
  compatibility on VMs or legacy Macs.</source>
         <oldsource>Reinstalls Apple Image Conversion protocol with a builtin version.
@@ -2461,7 +2466,7 @@ Note: AppleEvent’s default behaviour is intended to prevent unwanted queued ke
         <translation>重新安装具有内置版本的Apple Boot Policy协议。 这可用于确保VM或旧版Mac上的APFS兼容性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9908"/>
+        <location filename="mainwindow.ui" line="9939"/>
         <source>Type: plist boolean
 
 Description: Enables writing to flash memory for all OpenCore system variables.
@@ -2476,37 +2481,37 @@ Note: This value should be disabled on most types of firmware but is left config
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9921"/>
+        <location filename="mainwindow.ui" line="9952"/>
         <source>ForceOcWriteFlash</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10259"/>
+        <location filename="mainwindow.ui" line="10290"/>
         <source>Edit</source>
         <translation>编辑</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10390"/>
+        <location filename="mainwindow.ui" line="10422"/>
         <source>OpenCore Factory</source>
         <translation>OpenCore工厂</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10398"/>
+        <location filename="mainwindow.ui" line="10430"/>
         <source>OpenCore</source>
         <translation>OpenCore官方</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10416"/>
+        <location filename="mainwindow.ui" line="10448"/>
         <source>OpenCanopyIcons</source>
         <translation>OC图标合集</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10510"/>
+        <location filename="mainwindow.ui" line="10542"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10513"/>
+        <location filename="mainwindow.ui" line="10545"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
@@ -2549,12 +2554,12 @@ Note: This value should be disabled on most types of firmware but is left config
         <translation>处理器主要和次要类型的组合。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10431"/>
+        <location filename="mainwindow.ui" line="10463"/>
         <source>ExportMaster</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10436"/>
+        <location filename="mainwindow.ui" line="10468"/>
         <source>ImportMaster</source>
         <translation></translation>
     </message>
@@ -2848,27 +2853,27 @@ Note: This value should be disabled on most types of firmware but is left config
 驱动</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9744"/>
+        <location filename="mainwindow.ui" line="9775"/>
         <source>AppleEg2Info</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9901"/>
+        <location filename="mainwindow.ui" line="9932"/>
         <source>ForgeUefiSupport</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9792"/>
+        <location filename="mainwindow.ui" line="9823"/>
         <source>ReloadOptionRoms</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10189"/>
+        <location filename="mainwindow.ui" line="10220"/>
         <source> Perform UEFI controller connection after driver loading.</source>
         <translation>驱动程序加载后执行UEFI控制器连接。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10192"/>
+        <location filename="mainwindow.ui" line="10223"/>
         <source>ConnectDrivers</source>
         <oldsource>ConnectDrivers-连接驱动</oldsource>
         <translation></translation>
@@ -2962,7 +2967,7 @@ Note: This value should be disabled on most types of firmware but is left config
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9370"/>
+        <location filename="mainwindow.ui" line="9394"/>
         <source>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
  fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
  switching to text mode.
@@ -2972,7 +2977,7 @@ Note: This value should be disabled on most types of firmware but is left config
 注意：此选项仅适用于系统渲染器。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9376"/>
+        <location filename="mainwindow.ui" line="9400"/>
         <source>ClearScreenOnModeSwitch</source>
         <translation></translation>
     </message>
@@ -2992,7 +2997,7 @@ Note: This value should be disabled on most types of firmware but is left config
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9307"/>
+        <location filename="mainwindow.ui" line="9319"/>
         <source>SanitiseClearScreen</source>
         <translation></translation>
     </message>
@@ -3028,12 +3033,12 @@ Note: This value should be disabled on most types of firmware but is left config
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9388"/>
+        <location filename="mainwindow.ui" line="9412"/>
         <source> Provide UGA protocol instances on top of GOP protocol.</source>
         <translation>在GOP协议之上提供UGA协议实例。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9391"/>
+        <location filename="mainwindow.ui" line="9415"/>
         <source>UgaPassThrough</source>
         <translation></translation>
     </message>
@@ -3048,7 +3053,7 @@ Note: This value should be disabled on most types of firmware but is left config
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9281"/>
+        <location filename="mainwindow.ui" line="9287"/>
         <source> Sets console output screen resolution.</source>
         <translation>设置控制台输出屏幕分辨率。</translation>
     </message>
@@ -3058,7 +3063,7 @@ Note: This value should be disabled on most types of firmware but is left config
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9435"/>
+        <location filename="mainwindow.ui" line="9466"/>
         <location filename="mainwindow.cpp" line="5974"/>
         <source>ProtocolOverrides</source>
         <oldsource>协议覆盖-ProtocolOverrides</oldsource>
@@ -3066,17 +3071,17 @@ Note: This value should be disabled on most types of firmware but is left config
 协议覆盖</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9491"/>
+        <location filename="mainwindow.ui" line="9522"/>
         <source>Reinstalls Apple audio protocols with builtin versions.</source>
         <translation>重新安装具有内置版本的Apple音频协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9494"/>
+        <location filename="mainwindow.ui" line="9525"/>
         <source>AppleAudio</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9506"/>
+        <location filename="mainwindow.ui" line="9537"/>
         <source> Reinstalls Apple Framebuffer Info protocol with a builtin version. This may be used to override
  framebuffer information on VMs or legacy Macs to improve compatibility with legacy EfiBoot like the one in
  macOS 10.4.</source>
@@ -3085,22 +3090,22 @@ Note: This value should be disabled on most types of firmware but is left config
 这可用于覆盖VM或旧版Mac上的帧缓冲区信息，以提高与旧版EfiBoot的兼容性，例如macOS 10.4中的版本。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9511"/>
+        <location filename="mainwindow.ui" line="9542"/>
         <source>AppleFramebufferInfo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9606"/>
+        <location filename="mainwindow.ui" line="9637"/>
         <source>Reinstalls Apple SMC I/O protocol with a builtin version.</source>
         <translation>重新安装具有内置版本的Apple SMC I / O协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9609"/>
+        <location filename="mainwindow.ui" line="9640"/>
         <source>AppleSmcIo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9670"/>
+        <location filename="mainwindow.ui" line="9701"/>
         <source> Forcibly wraps Firmware Volume protocols or installs new to support custom cursor images for
  File Vault 2. Should be set to true to ensure File Vault 2 compatibility on everything but VMs and legacy Macs.</source>
         <translation>强制包装固件卷协议或安装新的协议以支持File Vault 2的自定义光标图像。
@@ -3108,37 +3113,37 @@ Note: This value should be disabled on most types of firmware but is left config
 应设置为true以确保File Vault 2在VM和旧版Mac之外的所有兼容性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9674"/>
+        <location filename="mainwindow.ui" line="9705"/>
         <source>FirmwareVolume</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9467"/>
+        <location filename="mainwindow.ui" line="9498"/>
         <source>AppleBootPolicy</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9525"/>
+        <location filename="mainwindow.ui" line="9556"/>
         <source>Reinstalls Apple Image Conversion protocol with a builtin version.</source>
         <translation>重新安装具有内置版本的Apple Image Conversion协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9528"/>
+        <location filename="mainwindow.ui" line="9559"/>
         <source>AppleImageConversion</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9621"/>
+        <location filename="mainwindow.ui" line="9652"/>
         <source>Reinstalls Apple User Interface Theme protocol with a builtin version.</source>
         <translation>重新安装具有内置版本的Apple用户界面主题协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9624"/>
+        <location filename="mainwindow.ui" line="9655"/>
         <source>AppleUserInterfaceTheme</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9686"/>
+        <location filename="mainwindow.ui" line="9717"/>
         <source>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure
  File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size
  with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.</source>
@@ -3149,54 +3154,54 @@ Note: This value should be disabled on most types of firmware but is left config
 可以通过将UIScale设置为02的无效光标大小来诊断，在APTIO V之前的一般平台（Haswell和更早版本）中会受到影响。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9691"/>
+        <location filename="mainwindow.ui" line="9722"/>
         <source>HashServices</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9448"/>
+        <location filename="mainwindow.ui" line="9479"/>
         <source>Reinstalls Apple Debug Log protocol with a builtin version.</source>
         <translation>重新安装具有内置版本的Apple Debug Log协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9451"/>
+        <location filename="mainwindow.ui" line="9482"/>
         <source>AppleDebugLog</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9556"/>
+        <location filename="mainwindow.ui" line="9587"/>
         <source> Reinstalls Apple Key Map protocols with builtin versions.</source>
         <translation>重新安装具有内置版本的Apple Key Map协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9559"/>
+        <location filename="mainwindow.ui" line="9590"/>
         <source>AppleKeyMap</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9638"/>
+        <location filename="mainwindow.ui" line="9669"/>
         <source> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the
  protocol was already installed.</source>
         <translation>重新安装具有内置版本的Data Hub协议。 如果已经安装了协议，这将删除所有以前的属性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9703"/>
+        <location filename="mainwindow.ui" line="9734"/>
         <source>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive
  notifications from macOS bootloader, by the firmware or by other applications.</source>
         <translation>强制使用内置版本重新安装OS Info协议。 该协议通常用于通过固件或其他应用程序从macOS引导加载程序接收通知。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9707"/>
+        <location filename="mainwindow.ui" line="9738"/>
         <source>OSInfo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9573"/>
+        <location filename="mainwindow.ui" line="9604"/>
         <source>Reinstalls Apple RTC RAM protocol with builtin version.</source>
         <translation>重新安装具有内置版本的Apple RTC RAM协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9576"/>
+        <location filename="mainwindow.ui" line="9607"/>
         <source>AppleRtcRam</source>
         <translation></translation>
     </message>
@@ -3500,12 +3505,12 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10500"/>
+        <location filename="mainwindow.ui" line="10532"/>
         <source>Bug Report</source>
         <translation>报告问题</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10505"/>
+        <location filename="mainwindow.ui" line="10537"/>
         <source>Discussion Forum</source>
         <translation>讨论区</translation>
     </message>
@@ -3532,7 +3537,7 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9654"/>
+        <location filename="mainwindow.ui" line="9685"/>
         <source> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties
  if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.</source>
         <translation>重新安装具有内置版本的设备属性协议。 
@@ -3542,7 +3547,7 @@ A continuously updated variable list can be found in a corresponding document: N
 这可用于确保在VM或旧版Mac上具有完全兼容性。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9721"/>
+        <location filename="mainwindow.ui" line="9752"/>
         <source> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.</source>
         <translation>强制使用内置版本重新安装Unicode整理服务。
 
@@ -3551,12 +3556,12 @@ A continuously updated variable list can be found in a corresponding document: N
 通常，Ivy Bridge和更早版本上的旧版Insyde和APTIO平台会受到影响。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9724"/>
+        <location filename="mainwindow.ui" line="9755"/>
         <source>UnicodeCollation</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9540"/>
+        <location filename="mainwindow.ui" line="9571"/>
         <source> Reinstalls Apple IMG4 Verification protocol with a builtin version. This protocol is used to verify
  im4m manifest files used by Apple Secure Boot.</source>
         <translation>重新安装具有内置版本的Apple IMG4 Verification协议。 
@@ -3564,22 +3569,22 @@ A continuously updated variable list can be found in a corresponding document: N
 此协议用于验证Apple Secure Boot使用的im4m清单文件。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9544"/>
+        <location filename="mainwindow.ui" line="9575"/>
         <source>AppleImg4Verification</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9588"/>
+        <location filename="mainwindow.ui" line="9619"/>
         <source> Reinstalls Apple Secure Boot protocol with a builtin version.</source>
         <translation>重新安装具有内置版本的Apple Secure Boot协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9591"/>
+        <location filename="mainwindow.ui" line="9622"/>
         <source>AppleSecureBoot</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10070"/>
+        <location filename="mainwindow.ui" line="10101"/>
         <location filename="mainwindow.cpp" line="5976"/>
         <source>ReservedMemory</source>
         <oldsource>保留内存-ReservedMemory</oldsource>
@@ -3587,7 +3592,7 @@ A continuously updated variable list can be found in a corresponding document: N
 预留内存</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9980"/>
+        <location filename="mainwindow.ui" line="10011"/>
         <source>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
  manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
  may freeze upon boot. Not recommended unless required.</source>
@@ -3598,64 +3603,64 @@ A continuously updated variable list can be found in a corresponding document: N
 除非需要，否则不建议使用。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9985"/>
+        <location filename="mainwindow.ui" line="10016"/>
         <source>ReleaseUsbOwnership</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9948"/>
+        <location filename="mainwindow.ui" line="9979"/>
         <source>Some firmwares block partition handles by opening them in By Driver mode, which results in File
  System protocols being unable to install.</source>
         <translation>某些固件通过在“按驱动程序”模式下打开分区句柄来阻止分区句柄，这导致无法安装文件系统协议。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9952"/>
+        <location filename="mainwindow.ui" line="9983"/>
         <source>UnblockFsConnect</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9812"/>
+        <location filename="mainwindow.ui" line="9843"/>
         <source>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</source>
         <translation>在EXIT_BOOT_SERVICES事件之后增加延迟（以微秒为单位）。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9815"/>
+        <location filename="mainwindow.ui" line="9846"/>
         <source>ExitBootServicesDelay</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10005"/>
+        <location filename="mainwindow.ui" line="10036"/>
         <source>Attempts to perform TSC synchronisation with a specified timeout.</source>
         <translation>尝试执行具有指定超时的TSC同步。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10008"/>
+        <location filename="mainwindow.ui" line="10039"/>
         <source>TscSyncTimeout</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9968"/>
+        <location filename="mainwindow.ui" line="9999"/>
         <source>IgnoreInvalidFlexRatio</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9859"/>
+        <location filename="mainwindow.ui" line="9890"/>
         <source> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
  OC_VENDOR_VARIABLE_GUID.</source>
         <translation>请求将所有Boot前缀变量从EFI_GLOBAL_VARIABLE_GUID重定向到OC_VENDOR_VARIABLE_GUID。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9863"/>
+        <location filename="mainwindow.ui" line="9894"/>
         <source>RequestBootVarRouting</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9933"/>
+        <location filename="mainwindow.ui" line="9964"/>
         <source>Activates HPET support.</source>
         <translation>激活HPET支持。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="9936"/>
+        <location filename="mainwindow.ui" line="9967"/>
         <source>ActivateHpetSupport</source>
         <translation></translation>
     </message>
@@ -3665,23 +3670,23 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>硬件信息</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10225"/>
+        <location filename="mainwindow.ui" line="10256"/>
         <source>Generate EFI folder on the desktop from hardware information (experimental in nature)</source>
         <translation>由硬件信息在桌面上产生EFI文件夹(试验性质）</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10246"/>
+        <location filename="mainwindow.ui" line="10277"/>
         <source>File</source>
         <oldsource>文件-File</oldsource>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10375"/>
+        <location filename="mainwindow.ui" line="10407"/>
         <source>Exit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10380"/>
+        <location filename="mainwindow.ui" line="10412"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -3708,7 +3713,7 @@ Mask</translation>
         <location filename="mainwindow.cpp" line="2337"/>
         <location filename="mainwindow.cpp" line="2386"/>
         <location filename="mainwindow.cpp" line="4339"/>
-        <location filename="mainwindow.cpp" line="9359"/>
+        <location filename="mainwindow.cpp" line="9370"/>
         <source>Enabled</source>
         <translation>是否启用
 Enabled</translation>
@@ -3800,7 +3805,7 @@ MaxKernel</translation>
         <location filename="mainwindow.cpp" line="955"/>
         <location filename="mainwindow.cpp" line="996"/>
         <location filename="mainwindow.cpp" line="1055"/>
-        <location filename="mainwindow.cpp" line="9359"/>
+        <location filename="mainwindow.cpp" line="9370"/>
         <source>Arch</source>
         <translation>Kext架构
 Arch</translation>
@@ -3887,7 +3892,7 @@ TableLength</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="571"/>
-        <location filename="mainwindow.cpp" line="9359"/>
+        <location filename="mainwindow.cpp" line="9370"/>
         <source>All</source>
         <translation>全部
 All</translation>
@@ -3950,7 +3955,7 @@ Value</translation>
     <message>
         <location filename="mainwindow.cpp" line="800"/>
         <location filename="mainwindow.cpp" line="1517"/>
-        <location filename="mainwindow.cpp" line="9362"/>
+        <location filename="mainwindow.cpp" line="9373"/>
         <source>Class</source>
         <translation>数据类型
 Class</translation>
@@ -3994,7 +3999,7 @@ Name</translation>
     <message>
         <location filename="mainwindow.cpp" line="1329"/>
         <location filename="mainwindow.cpp" line="1360"/>
-        <location filename="mainwindow.cpp" line="9361"/>
+        <location filename="mainwindow.cpp" line="9372"/>
         <source>Auxiliary</source>
         <translation>辅助
 Auxiliary</translation>
@@ -4002,7 +4007,7 @@ Auxiliary</translation>
     <message>
         <location filename="mainwindow.cpp" line="1335"/>
         <location filename="mainwindow.cpp" line="1369"/>
-        <location filename="mainwindow.cpp" line="9360"/>
+        <location filename="mainwindow.cpp" line="9371"/>
         <source>TextMode</source>
         <translation>文本模式
 TextMode</translation>
@@ -4016,7 +4021,7 @@ Flavour</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1366"/>
-        <location filename="mainwindow.cpp" line="9361"/>
+        <location filename="mainwindow.cpp" line="9372"/>
         <source>RealPath</source>
         <translation>实际路径
 RealPath</translation>
@@ -4173,59 +4178,59 @@ Speed</translation>
         <translation>CPU</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6176"/>
+        <location filename="mainwindow.cpp" line="6178"/>
         <source>ctrl+o</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6196"/>
+        <location filename="mainwindow.cpp" line="6198"/>
         <source>ctrl+s</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6205"/>
+        <location filename="mainwindow.cpp" line="6207"/>
         <source>ctrl+shift+s</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6227"/>
+        <location filename="mainwindow.cpp" line="6229"/>
         <source>ctrl+m</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6461"/>
+        <location filename="mainwindow.cpp" line="6468"/>
         <source>ASCII</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10149"/>
-        <location filename="mainwindow.cpp" line="10150"/>
+        <location filename="mainwindow.cpp" line="10160"/>
+        <location filename="mainwindow.cpp" line="10161"/>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9905"/>
+        <location filename="mainwindow.cpp" line="9916"/>
         <source>The database file is incomplete and the upgrade cannot be completed.</source>
         <translation>数据库文件不完整，无法完成升级。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6218"/>
+        <location filename="mainwindow.cpp" line="6220"/>
         <source>ctrl+l</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6255"/>
+        <location filename="mainwindow.cpp" line="6262"/>
         <source>ctrl+p</source>
         <oldsource>ctrl+h</oldsource>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6259"/>
+        <location filename="mainwindow.cpp" line="6266"/>
         <source>ctrl+u</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6243"/>
+        <location filename="mainwindow.cpp" line="6245"/>
         <source>ctrl+d</source>
         <translation></translation>
     </message>
@@ -4251,175 +4256,175 @@ BaseSkip</translation>
         <translation>不保存</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6180"/>
+        <location filename="mainwindow.cpp" line="6182"/>
         <source>Open Recent...</source>
         <translation>最近打开...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6292"/>
+        <location filename="mainwindow.cpp" line="6299"/>
         <source>Command List</source>
         <translation>命令列表</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="4577"/>
-        <location filename="mainwindow.cpp" line="6296"/>
+        <location filename="mainwindow.cpp" line="6303"/>
         <source>Undo</source>
         <oldsource>&amp;Undo</oldsource>
         <translation>撤消</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="4578"/>
-        <location filename="mainwindow.cpp" line="6300"/>
+        <location filename="mainwindow.cpp" line="6307"/>
         <source>Redo</source>
         <oldsource>&amp;Redo</oldsource>
         <translation>恢复</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6397"/>
+        <location filename="mainwindow.cpp" line="6404"/>
         <source>Clear search history</source>
         <translation>清除搜索历史记录</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6440"/>
+        <location filename="mainwindow.cpp" line="6447"/>
         <source>ctrl+f</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6445"/>
+        <location filename="mainwindow.cpp" line="6452"/>
         <source>ctrl+3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6449"/>
+        <location filename="mainwindow.cpp" line="6456"/>
         <source>ctrl+4</source>
         <translation></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="4615"/>
         <location filename="mainwindow.cpp" line="4616"/>
-        <location filename="mainwindow.cpp" line="6544"/>
+        <location filename="mainwindow.cpp" line="6551"/>
         <source>Integer</source>
         <translation>整数</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="4622"/>
         <location filename="mainwindow.cpp" line="4623"/>
-        <location filename="mainwindow.cpp" line="6454"/>
-        <location filename="mainwindow.cpp" line="6550"/>
+        <location filename="mainwindow.cpp" line="6461"/>
+        <location filename="mainwindow.cpp" line="6557"/>
         <source>Hexadecimal</source>
         <translation>十六进制</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6566"/>
-        <location filename="mainwindow.cpp" line="6575"/>
-        <location filename="mainwindow.cpp" line="6583"/>
-        <location filename="mainwindow.cpp" line="6624"/>
-        <location filename="mainwindow.cpp" line="6633"/>
-        <location filename="mainwindow.cpp" line="6641"/>
-        <location filename="mainwindow.cpp" line="6690"/>
-        <location filename="mainwindow.cpp" line="9374"/>
+        <location filename="mainwindow.cpp" line="6573"/>
+        <location filename="mainwindow.cpp" line="6582"/>
+        <location filename="mainwindow.cpp" line="6590"/>
+        <location filename="mainwindow.cpp" line="6631"/>
+        <location filename="mainwindow.cpp" line="6640"/>
+        <location filename="mainwindow.cpp" line="6648"/>
+        <location filename="mainwindow.cpp" line="6701"/>
+        <location filename="mainwindow.cpp" line="9385"/>
         <source>CopyText</source>
         <translation>复制文本</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6567"/>
-        <location filename="mainwindow.cpp" line="6625"/>
-        <location filename="mainwindow.cpp" line="9394"/>
+        <location filename="mainwindow.cpp" line="6574"/>
+        <location filename="mainwindow.cpp" line="6632"/>
+        <location filename="mainwindow.cpp" line="9405"/>
         <source>Show Tips</source>
         <translation>显示提示</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10230"/>
+        <location filename="mainwindow.cpp" line="10241"/>
         <source>Configuration file database</source>
         <translation>配置文件数据库</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7021"/>
+        <location filename="mainwindow.cpp" line="7032"/>
         <source>Network error!</source>
         <translation>网络错误！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7049"/>
+        <location filename="mainwindow.cpp" line="7060"/>
         <source>New version detected!</source>
         <translation>检测到新版本！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7050"/>
+        <location filename="mainwindow.cpp" line="7061"/>
         <source>Version: </source>
         <translation>版本：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7051"/>
+        <location filename="mainwindow.cpp" line="7062"/>
         <source>Published at: </source>
         <translation>更新时间：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7052"/>
+        <location filename="mainwindow.cpp" line="7063"/>
         <source>Release Notes: </source>
         <translation>更新说明：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7058"/>
-        <location filename="mainwindow.cpp" line="7065"/>
+        <location filename="mainwindow.cpp" line="7069"/>
+        <location filename="mainwindow.cpp" line="7076"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7056"/>
+        <location filename="mainwindow.cpp" line="7067"/>
         <source>There is a new version</source>
         <translation>有新版本</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9391"/>
+        <location filename="mainwindow.cpp" line="9402"/>
         <source>Cut Line</source>
         <translation>剪切行</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9392"/>
+        <location filename="mainwindow.cpp" line="9403"/>
         <source>Copy Line</source>
         <translation>复制行</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9393"/>
+        <location filename="mainwindow.cpp" line="9404"/>
         <source>Paste Line</source>
         <translation>粘贴行</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2570"/>
         <location filename="mainwindow.cpp" line="5172"/>
-        <location filename="mainwindow.cpp" line="7059"/>
-        <location filename="mainwindow.cpp" line="7066"/>
+        <location filename="mainwindow.cpp" line="7070"/>
+        <location filename="mainwindow.cpp" line="7077"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6309"/>
+        <location filename="mainwindow.cpp" line="6316"/>
         <source>ctrl+1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6314"/>
+        <location filename="mainwindow.cpp" line="6321"/>
         <source>ctrl+2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6888"/>
+        <location filename="mainwindow.cpp" line="6899"/>
         <source>OK !</source>
         <translation>验证通过！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6905"/>
+        <location filename="mainwindow.cpp" line="6916"/>
         <source>There is a issue with the configuration file.</source>
         <translation>配置文件有问题</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7076"/>
+        <location filename="mainwindow.cpp" line="7087"/>
         <source>It is currently the latest version!</source>
         <translation>目前是最新版本！</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2383"/>
-        <location filename="mainwindow.cpp" line="9360"/>
+        <location filename="mainwindow.cpp" line="9371"/>
         <source>Type</source>
         <translation>类型
 Type</translation>
@@ -4433,67 +4438,67 @@ Type</translation>
 <context>
     <name>Method</name>
     <message>
-        <location filename="Method.cpp" line="379"/>
+        <location filename="Method.cpp" line="372"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
     </message>
     <message>
         <location filename="Method.cpp" line="77"/>
-        <location filename="Method.cpp" line="414"/>
+        <location filename="Method.cpp" line="407"/>
         <source>Network error!</source>
         <translation>网络错误！</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="506"/>
+        <location filename="Method.cpp" line="499"/>
         <source>Application</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="507"/>
+        <location filename="Method.cpp" line="500"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="522"/>
+        <location filename="Method.cpp" line="515"/>
         <source>None</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="969"/>
-        <location filename="Method.cpp" line="975"/>
+        <location filename="Method.cpp" line="962"/>
+        <location filename="Method.cpp" line="968"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="971"/>
+        <location filename="Method.cpp" line="964"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="992"/>
+        <location filename="Method.cpp" line="985"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="993"/>
-        <location filename="Method.cpp" line="1055"/>
+        <location filename="Method.cpp" line="986"/>
+        <location filename="Method.cpp" line="1048"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1054"/>
+        <location filename="Method.cpp" line="1047"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1464"/>
+        <location filename="Method.cpp" line="1457"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1469"/>
+        <location filename="Method.cpp" line="1462"/>
         <source>Cannot open file %1 for writing:
 %2.</source>
         <translation></translation>
@@ -4502,55 +4507,55 @@ Type</translation>
 <context>
     <name>QInstaller</name>
     <message>
-        <location filename="Method.cpp" line="1311"/>
+        <location filename="Method.cpp" line="1304"/>
         <location filename="autoupdatedialog.cpp" line="326"/>
         <source>bytes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1312"/>
+        <location filename="Method.cpp" line="1305"/>
         <location filename="autoupdatedialog.cpp" line="327"/>
         <source>KiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1313"/>
+        <location filename="Method.cpp" line="1306"/>
         <location filename="autoupdatedialog.cpp" line="328"/>
         <source>MiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1314"/>
+        <location filename="Method.cpp" line="1307"/>
         <location filename="autoupdatedialog.cpp" line="329"/>
         <source>GiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1315"/>
+        <location filename="Method.cpp" line="1308"/>
         <location filename="autoupdatedialog.cpp" line="330"/>
         <source>TiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1316"/>
+        <location filename="Method.cpp" line="1309"/>
         <location filename="autoupdatedialog.cpp" line="331"/>
         <source>PiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1317"/>
+        <location filename="Method.cpp" line="1310"/>
         <location filename="autoupdatedialog.cpp" line="332"/>
         <source>EiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1318"/>
+        <location filename="Method.cpp" line="1311"/>
         <location filename="autoupdatedialog.cpp" line="333"/>
         <source>ZiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1319"/>
+        <location filename="Method.cpp" line="1312"/>
         <location filename="autoupdatedialog.cpp" line="334"/>
         <source>YiB</source>
         <translation></translation>
