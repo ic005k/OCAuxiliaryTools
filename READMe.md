@@ -36,5 +36,6 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 [aria2](https://github.com/aria2/aria2)&nbsp; &nbsp; &nbsp;&nbsp;
 [wget](http://wget.addictivecode.org/)&nbsp; &nbsp; &nbsp;&nbsp;
 
+### Finally, a big thank you to all the contributors together, not to be listed here, for your participation and support!
 
 ### Note: This project started in August 2020
