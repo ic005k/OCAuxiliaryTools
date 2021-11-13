@@ -100,6 +100,7 @@ class Method : public QMainWindow {
   void kextPreset();
   void mount_esp_mac(QString strEfiDisk);
   QString getDriverInfo(QString strDisk, QString strDiskVol);
+  void backupEFI();
  public slots:
   void generateEFI();
   void on_btnExportMaster();

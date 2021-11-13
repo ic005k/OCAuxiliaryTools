@@ -1516,3 +1516,38 @@ QString Method::getDriverInfo(QString strDisk, QString strDiskVol) {
 
   return str1 + " | " + str2;
 }
+
+void Method::backupEFI() {
+  if (!mw_one->ui->actionUpgrade_OC->isEnabled()) return;
+  QString strEFI = SaveFileName;
+  QString strZipName, strBakTargetDir;
+  strEFI.replace("/OC/" + QFileInfo(SaveFileName).fileName(), "");
+  QStringList list = strEFI.split("/");
+  strZipName = list.at(list.count() - 1);
+  strEFI.replace(strZipName, "");
+  strBakTargetDir = QDir::homePath() + "/Desktop/Backup EFI/";
+  QDir::setCurrent(strEFI);
+  QDir dir;
+  if (dir.mkpath(strBakTargetDir)) {
+  }
+  if (mw_one->win) {
+    QProcess::execute(mw_one->strAppExePath + "zip.exe",
+                      QStringList()
+                          << "-q"
+                          << "-r"
+                          << strBakTargetDir + QDate::currentDate().toString() +
+                                 "-" + QTime::currentTime().toString() + "-" +
+                                 strZipName
+                          << strZipName);
+  } else {
+    QProcess::execute(
+        "zip", QStringList()
+                   << "-q"
+                   << "-r"
+                   << strBakTargetDir + QDate::currentDate().toString() + "-" +
+                          QTime::currentTime().toString() + "-" + strZipName
+                   << strZipName);
+  }
+
+  // qDebug() << strEFI << strZipName << SaveFileName;
+}

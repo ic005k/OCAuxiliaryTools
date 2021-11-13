@@ -10291,6 +10291,7 @@ Enable this option to be able to see all the boot options when having multiple d
     </property>
     <addaction name="separator"/>
     <addaction name="actionMountEsp"/>
+    <addaction name="actionBackup_EFI"/>
     <addaction name="separator"/>
     <addaction name="actionOcvalidate"/>
     <addaction name="actionUpgrade_OC"/>
@@ -10596,6 +10597,11 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionOCAuxiliaryToolsDoc">
    <property name="text">
     <string>OCAuxiliaryTools  Documentation</string>
+   </property>
+  </action>
+  <action name="actionBackup_EFI">
+   <property name="text">
+    <string>Backup EFI to Desktop &quot;Backup EFI&quot;</string>
    </property>
   </action>
  </widget>

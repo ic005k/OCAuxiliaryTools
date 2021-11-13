@@ -70,5 +70,7 @@
         <file>icon/opendir0.png</file>
         <file>icon/rp0.png</file>
         <file>icon/savetip0.png</file>
+        <file>icon/be.png</file>
+        <file>icon/be0.png</file>
     </qresource>
 </RCC>

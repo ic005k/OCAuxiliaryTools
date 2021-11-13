@@ -6117,6 +6117,7 @@ void MainWindow::init_ToolBarIcon() {
     undoAction->setIcon(QIcon(":/icon/undo0.png"));
     redoAction->setIcon(QIcon(":/icon/redo0.png"));
     ui->actionFind->setIcon(QIcon(":/icon/find0.png"));
+    ui->actionBackup_EFI->setIcon(QIcon(":/icon/be0.png"));
   } else {
     btn0->setIcon(QIcon(":/icon/rp.png"));
     ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
@@ -6128,6 +6129,7 @@ void MainWindow::init_ToolBarIcon() {
     undoAction->setIcon(QIcon(":/icon/undo.png"));
     redoAction->setIcon(QIcon(":/icon/redo.png"));
     ui->actionFind->setIcon(QIcon(":/icon/find.png"));
+    ui->actionBackup_EFI->setIcon(QIcon(":/icon/be.png"));
   }
 
   QString listStyleMain, listStyle;
@@ -6247,6 +6249,11 @@ void MainWindow::init_EditMenu() {
   if (mac || osx1012)
     ui->actionOpen_database_directory->setIconVisibleInMenu(false);
   ui->actionUpgrade_Database->setVisible(false);
+
+  // Backup EFI
+  if (mac || osx1012) ui->actionBackup_EFI->setIconVisibleInMenu(false);
+  ui->actionBackup_EFI->setIcon(QIcon(":/icon/be.png"));
+  ui->toolBar->addAction(ui->actionBackup_EFI);
 }
 
 void MainWindow::init_HelpMenu() {
@@ -6664,16 +6671,15 @@ void MainWindow::CopyLabel() {
   }
 }
 
-void MainWindow::setCheckBoxWidth(QCheckBox *cbox)
-{
-    QFont myFont(cbox->font().family(), cbox->font().pixelSize());
-    QString str;
-    if (!win)
-        str = cbox->text() + "        ";
-    else
-        str = cbox->text() + "            ";
-    QFontMetrics fm(myFont);
-    int w;
+void MainWindow::setCheckBoxWidth(QCheckBox* cbox) {
+  QFont myFont(cbox->font().family(), cbox->font().pixelSize());
+  QString str;
+  if (!win)
+    str = cbox->text() + "        ";
+  else
+    str = cbox->text() + "            ";
+  QFontMetrics fm(myFont);
+  int w;
 
 #if (QT_VERSION <= QT_VERSION_CHECK(5, 9, 9))
   w = fm.width(str);
@@ -10856,3 +10862,5 @@ void MainWindow::on_actionOCAuxiliaryToolsDoc_triggered() {
               "D_Updating_OpenCore/README.md"));
   QDesktopServices::openUrl(url);
 }
+
+void MainWindow::on_actionBackup_EFI_triggered() { mymethod->backupEFI(); }

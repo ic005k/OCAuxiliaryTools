@@ -925,6 +925,8 @@ class MainWindow : public QMainWindow {
 
   void on_actionOCAuxiliaryToolsDoc_triggered();
 
+  void on_actionBackup_EFI_triggered();
+
  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;
