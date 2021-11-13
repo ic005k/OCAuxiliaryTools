@@ -4450,8 +4450,15 @@ void MainWindow::on_btnSaveAs() {
 }
 
 void MainWindow::about() {
-  aboutDlg->setModal(true);
-  aboutDlg->show();
+  if (!zh_cn) {
+    QUrl url_en(QString(
+        "https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md"));
+    QDesktopServices::openUrl(url_en);
+  } else {
+    QUrl url_cn(QString(
+        "https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-cn.md"));
+    QDesktopServices::openUrl(url_cn);
+  }
 }
 
 void MainWindow::on_btnKernelAdd_Del_clicked() {
