@@ -49,6 +49,9 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 * OCAT目前只从OC官方获取OpenCore，它来自这里：https://github.com/acidanthera/OpenCorePkg/actions 也就是OCAT“帮助“菜单中的”OpenCore工厂“。除此之外，OCAT不从任何其它途径获取OpenCore的任何文件。
 * 请注意：OCAT使用的所有原材料，均来自OpenCore官方，OCAT不从任何第三方获取任何内容，现在不会，将来也不会。
 
+### 我无法下载Kext的升级或者自动更新OCAT时非常缓慢？
+* 很简单，请在“数据库”界面的“杂项”里面选择合适的网络代理，以提高GitHub的下载速度。
+
 ### 感谢以下开源软件的支持！
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
