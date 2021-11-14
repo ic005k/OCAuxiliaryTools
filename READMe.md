@@ -61,6 +61,9 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 ### Why doesn't OCAT use an online approach to automatically obtain OC?
 * Because OC is only released in stable version almost once a month, and the OC update is inevitably accompanied by an OCAT update, when OCAT has enough time to put the OC into OCAT, there is absolutely no need to use the online fetching method.
 
+### Can OCAT make a switch option for stable and development versions of OC?
+* No. OCAT does not consider this feature at the moment, the goal of OCAT is to be simple, clear and easy to use. If you do not want to use the development version of OC, please download a specific version of OCAT and turn off "Automatic update checking" (in the "Help" menu).
+
 ### Thanks for the support of the following open source software!
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
