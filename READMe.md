@@ -30,7 +30,7 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 * After editing and modifying this "Sample.plist" (mainly to match with your own machine hardware, which is a continuous debugging and testing process), you can always select the "Edit" menu in the "Generate EFI folder on desktop" to refresh the previously generated EFI directory.
 * After that, you can copy the EFI folder on the desktop to a boot partition such as ESP for boot testing.
 
-### How to upgrade OCAT automatically? (Very simple, only two steps)
+### How to upgrade OC automatically? (Very simple, only two steps)
 * Drag and drop the configuration file onto the OCAT interface and click "Save" on the toolbar.
 * Then click "Upgrade OC Main Program" on the toolbar, a "Synchronize OC" interface will appear, Click the "Start Sync" button below to finish the OC upgrade.
 
