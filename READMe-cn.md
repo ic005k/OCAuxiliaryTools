@@ -45,6 +45,10 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 ### 关于“预置”功能
 * 这是一个开放性的接口，预置文件位于数据库目录下preset里面的PreSet.plist（通过“编辑”菜单的“打开数据库目录”），您可以随时采用各种Plist编辑器来编辑它，就像编辑Config.plist一样。很简单，它其实就是从Config.plist里面剥离出来的。
 
+### OCAT获取OpenCore的途径？
+* OCAT目前只从OC官方获取OpenCore，它来自这里：https://github.com/acidanthera/OpenCorePkg/actions 也就是OCAT“帮助“菜单中的”OpenCore工厂“。除此之外，OCAT不从任何其它途径获取OpenCore的任何文件。
+* 请注意：OCAT使用的所有原材料，均来自OpenCore官方，OCAT不从任何第三方获取任何内容，现在不会，将来也不会。
+
 ### 感谢以下开源软件的支持！
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
