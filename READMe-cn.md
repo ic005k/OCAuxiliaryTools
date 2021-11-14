@@ -52,6 +52,13 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 ### 我无法下载Kext的升级或者自动更新OCAT时非常缓慢？
 * 很简单，请在“数据库”界面的“杂项”里面选择合适的网络代理，以提高GitHub的下载速度。
 
+### OCAT为什么要跟进OC的开发版本？它始终和OC的开发版本保持一致吗？
+* 一般情况下，OCAT会维持在OC的稳定版上，一旦OC开发版的配置文件新增了一些内容，这时OCAT就切换到OC的开发版了。这样做的好处是可以提前将这些新增的内容放入OCAT，当OC发布新的稳定版时，OCAT不会显得很滞后。
+* 不，OCAT只是定期更新OC的开发版。如果您需要每天更新OC，请手动进行，OCAT做不到这点。这是需要请大家注意的地方。
+
+### OCAT为什么不自动在线获取OC？
+* 因为OC几乎是每月才发布一次稳定版，而且OC更新的时候必然会伴随着OCAT的更新，此时OCAT有足够的时间将OC放入OCAT中，完全没有必要采用在线获取的方式。
+
 ### 感谢以下开源软件的支持！
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
