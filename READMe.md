@@ -51,6 +51,9 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 * OCAT currently only gets OpenCore officially from OC, it comes from here: https://github.com/acidanthera/OpenCorePkg/actions which is the "OpenCore Factory" in the "Help" menu of OCAT. Other than that, OCAT does not get any files for OpenCore from any other source.
 * Please note: All raw materials used by OCAT come from official OpenCore sources, OCAT does not get any content from any third party, not now, not ever.
 
+### I can't download the Kext update or the automatic OCAT update is very slow?
+* It's simple, please select the appropriate web proxy in the "Misc" section of the "Database" screen to improve the download speed of GitHub.
+
 ### Thanks for the support of the following open source software!
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
