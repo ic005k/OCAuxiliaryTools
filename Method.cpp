@@ -247,10 +247,13 @@ void Method::kextUpdate() {
           } else {
             startDownload(strUrl);
           }
-          mw_one->dlgSyncOC->ui->listSource->setItemWidget(
-              mw_one->dlgSyncOC->ui->listSource->item(i),
-              mw_one->dlgSyncOC->progBar);
           mw_one->dlgSyncOC->ui->listSource->setCurrentRow(i);
+          if (mw_one->dlgSyncOC->ui->listSource->currentIndex().isValid()) {
+            mw_one->dlgSyncOC->ui->listSource->setItemWidget(
+                mw_one->dlgSyncOC->ui->listSource->item(i),
+                mw_one->dlgSyncOC->progBar);
+          }
+
           QElapsedTimer t;
           t.start();
           dlEnd = false;
