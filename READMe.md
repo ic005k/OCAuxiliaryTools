@@ -54,6 +54,13 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 ### I can't download the Kext update or the automatic OCAT update is very slow?
 * It's simple, please select the appropriate web proxy in the "Misc" section of the "Database" screen to improve the download speed of GitHub.
 
+### Why does OCAT follow the development version of OC? Is it always consistent with the development version of OC?
+* Normally, OCAT is maintained on the stable version of OC, and once something is added to the configuration file of the OC development version, that's when OCAT switches to the OC development version. The advantage of this is that you can put these additions into OCAT in advance, and when OC releases a new stable version, OCAT will not seem to be lagging behind.
+* No, OCAT only updates the development version of OC periodically. If you need to update OC daily, please do it manually, OCAT can't do that. This is something you need to please be aware of.
+
+### Why doesn't OCAT automatically get the OC online?
+* Because OC is only released in stable version almost once a month, and the OC update is inevitably accompanied by an OCAT update, when OCAT has enough time to put the OC into OCAT, there is absolutely no need to use the online fetching method.
+
 ### Thanks for the support of the following open source software!
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
