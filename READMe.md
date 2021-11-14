@@ -45,7 +45,7 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 * ...
 
 ### About the "Presets" feature
-* This is an open interface, the pre-set file is located in the database directory in the preset.plist (via "Open Database Directory" on the toolbar), and you can edit it at any time using various Plist editors, just like you can edit Config.plist. It's simple, it's actually stripped from Config.plist.
+* This is an open interface, the pre-set file is located in the database directory in the preset.plist (Open database directory" from the "Edit" menu), and you can edit it at any time using various Plist editors, just like you can edit Config.plist. It's simple, it's actually stripped from Config.plist.
 
 ### Thanks for the support of the following open source software!
 
