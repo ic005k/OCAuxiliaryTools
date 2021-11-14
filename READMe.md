@@ -25,6 +25,28 @@ OC auxiliary tools（OCAT or ocat for short） = Config.plist editor + Config.pl
 
 OC development version can be downloaded [here](https://github.com/acidanthera/OpenCorePkg/actions).
 
+### How to configure a new EFI?
+* Just click "Database" on the toolbar and double click "Sample.plist" in the database list (this file is an example of the official OC configuration file), then a EFI folder on the desktop, the process is complete.
+* After editing and modifying this "Sample.plist" (mainly to match with your own machine hardware, which is a continuous debugging and testing process), you can always select the "Edit" menu in the "Generate EFI folder on desktop" to refresh the previously generated EFI directory.
+* After that, you can copy the EFI folder on the desktop to a boot partition such as ESP for boot testing.
+
+### How to upgrade OCAT automatically? (Very simple, only two steps)
+* Drag and drop the configuration file onto the OCAT interface and click "Save" on the toolbar.
+* Then click "Upgrade OC Main Program" on the toolbar, a "Synchronize OC" interface will appear, Click the "Start Sync" button below to finish the OC upgrade.
+
+### Why does the OC verification icon turn red when I open or save the configuration file?
+* This is because there is a problem with the configuration file, usually it will be normal after saving the configuration file. If there is still a problem prompted after saving the configuration file, it is a very simple process to troubleshoot according to the OC verify prompt. 
+
+### What are the convenient operations of OCAT?
+* All files that need to be opened can be opened by dragging and dropping them to the corresponding interface (single or multiple selection is supported).
+* Search box on the toolbar (it is highly recommended to use the search portal when modifying configuration files instead of clicking on the tabs one by one, it supports fuzzy matching and is very powerful).
+* Left click and drag the mouse inside the data table to make multiple selections.
+* Open two or more different profiles to compare or copy rows or paste rows between data tables (supports single or multiple selection).
+* ...
+
+### About the "Presets" feature
+* This is an open interface, the pre-set file is located in the database directory in the preset.plist (via "Open Database Directory" on the toolbar), and you can edit it at any time using various Plist editors, just like you can edit Config.plist. It's simple, it's actually stripped from Config.plist.
+
 ### Thanks for the support of the following open source software!
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
