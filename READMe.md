@@ -58,7 +58,7 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 * Normally, OCAT is maintained on the stable version of OC, and once something is added to the configuration file of the OC development version, that's when OCAT switches to the OC development version. The advantage of this is that you can put these additions into OCAT in advance, and when OC releases a new stable version, OCAT will not seem to be lagging behind.
 * No, OCAT only updates the development version of OC periodically. If you need to update OC daily, please do it manually, OCAT can't do that. This is something you need to please be aware of.
 
-### Why doesn't OCAT automatically get the OC online?
+### Why doesn't OCAT use an online approach to automatically obtain OC?
 * Because OC is only released in stable version almost once a month, and the OC update is inevitably accompanied by an OCAT update, when OCAT has enough time to put the OC into OCAT, there is absolutely no need to use the online fetching method.
 
 ### Thanks for the support of the following open source software!
