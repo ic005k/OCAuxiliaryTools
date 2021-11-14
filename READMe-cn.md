@@ -59,6 +59,9 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 ### OCAT为什么不自动在线获取OC？
 * 因为OC几乎是每月才发布一次稳定版，而且OC更新的时候必然会伴随着OCAT的更新，此时OCAT有足够的时间将OC放入OCAT中，完全没有必要采用在线获取的方式。
 
+### OCAT可以为OC的稳定版和开发版做一个切换选择吗？
+* OCAT目前不考虑这个功能，OCAT的目标是足够简单、清晰和易于使用。如果您不想使用OC的开发版，请下载某个特定版本的OCAT并关闭“自动更新检查”（“帮助”菜单中）。
+
 ### 感谢以下开源软件的支持！
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
