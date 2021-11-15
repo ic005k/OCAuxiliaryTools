@@ -1531,7 +1531,6 @@ void Method::backupEFI() {
     str = str + list.at(i) + "/";
   }
   strEFI = str;
-  // strEFI.replace(strZipName, "");
   strBakTargetDir = QDir::homePath() + "/Desktop/Backup EFI/";
   QString strDate, strTime;
   QDate date = QDate::currentDate();
@@ -1570,6 +1569,4 @@ void Method::backupEFI() {
                                                   strTime + "-" + strZipName
                                            << strZipName);
   }
-  qDebug() << strEFI << strZipName;
-  qDebug() << SaveFileName;
 }

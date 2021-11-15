@@ -106,10 +106,8 @@ MainWindow::MainWindow(QWidget* parent)
 
   setTableEditTriggers();
 
-  //接受文件拖放打开
   this->setAcceptDrops(true);
 
-  //最近打开的文件
   QCoreApplication::setOrganizationName("ic005k");
   QCoreApplication::setOrganizationDomain("github.com/ic005k");
   QCoreApplication::setApplicationName("OC Auxiliary Tools");
@@ -119,10 +117,8 @@ MainWindow::MainWindow(QWidget* parent)
   // SLOT(recentOpen(QString)));
   m_recentFiles->setNumOfRecentFiles(10);
 
-  // 最近打开的文件快捷通道
   initRecentFilesForToolBar();
 
-  // 检查更新
   manager = new QNetworkAccessManager(this);
   connect(manager, SIGNAL(finished(QNetworkReply*)), this,
           SLOT(replyFinished(QNetworkReply*)));
@@ -309,6 +305,7 @@ void MainWindow::openFile(QString PlistFileName) {
   strOrgMd5 = getMD5(SaveFileName);
 
   setWindowTitle(title + PlistFileName);
+
   this->setWindowModified(false);
   updateIconStatus();
 }
@@ -5149,14 +5146,12 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   Reg.setValue("Net", myDatabase->ui->comboBoxNet->currentText());
   Reg.setValue("LastFileName", SaveFileName);
 
-  //搜索历史记录保存
   int textTotal = ui->cboxFind->count();
   Reg.setValue("textTotal", textTotal);
   for (int i = 0; i < textTotal; i++) {
     Reg.setValue(QString::number(i), ui->cboxFind->itemText(i));
   }
 
-  // 窗口位置和大小
   Reg.setValue("x", this->x());
   Reg.setValue("y", this->y());
   Reg.setValue("width", this->width());
@@ -5226,8 +5221,7 @@ void MainWindow::loadLocal() {
   static QTranslator translator2;
 
   QLocale locale;
-  if (locale.language() == QLocale::English)  //获取系统语言环境
-  {
+  if (locale.language() == QLocale::English) {
     zh_cn = false;
 
   } else if (locale.language() == QLocale::Chinese) {
@@ -5825,35 +5819,8 @@ void MainWindow::init_hardware_info() {
 
   if (mac) {
     ui->tabTotal->removeTab(8);
-
-    // ui->listHardwareInfo->addItem(tr("CPU") + "  :  ");
     ui->listHardwareInfo->addItem(tr("CPU") + "  :  \n" +
                                   getMacInfo("sysctl machdep.cpu"));
-
-    // ui->listHardwareInfo->addItem("");
-
-    // ui->listHardwareInfo->addItem(getMacInfo("system_profiler
-    // SPEthernetDataType"));
-
-    // ui->listHardwareInfo->addItem("");
-
-    // ui->listHardwareInfo->addItem(getMacInfo("system_profiler
-    // SPAudioDataType"));
-
-    // ui->listHardwareInfo->addItem("");
-
-    // ui->listHardwareInfo->addItem(getMacInfo("system_profiler
-    // SPCameraDataType"));
-
-    // ui->listHardwareInfo->addItem("");
-
-    // ui->listHardwareInfo->addItem(getMacInfo("system_profiler
-    // SPSerialATADataType"));
-
-    // ui->listHardwareInfo->addItem("");
-
-    // ui->listHardwareInfo->addItem(getMacInfo("system_profiler
-    // SPUSBDataType"));
   }
 
   if (linuxOS) {
@@ -5936,10 +5903,6 @@ void MainWindow::on_listMain_itemSelectionChanged() {
 
   if (ui->listMain->currentRow() == 0) {
     strList << tr("Add") << tr("Delete") << tr("Patch") << tr("Quirks");
-    // strList << "Add"
-    //        << "Delete"
-    //        << "Patch"
-    //        << "Quirks"; // test
   }
 
   if (ui->listMain->currentRow() == 1) {
@@ -6014,10 +5977,7 @@ void MainWindow::init_listMainSub() {
   int fontHeight = fm.height() + 4;
 
   ui->listSub->setSpacing(4);
-  // if (zh_cn)
   ui->listSub->setFixedHeight(fontHeight * 2 + 8);
-  // else
-  //   ui->listSub->setFixedHeight(fontHeight + 6);
 
   ui->listMain->setViewMode(QListView::ListMode);
   ui->listSub->setViewMode(QListView::ListMode);
@@ -6140,7 +6100,6 @@ void MainWindow::init_ToolBarIcon() {
   }
 
   QString listStyleMain, listStyle;
-  // #1851e7
   if (red < 55)
     listStyleMain =
 
@@ -6283,14 +6242,11 @@ void MainWindow::init_HelpMenu() {
   connect(ui->actionOpenCanopyIcons, &QAction::triggered, this,
           &MainWindow::on_line5);
 
-  // OC工厂
   ui->toolBar->addSeparator();
   if (mac || osx1012) ui->actionOpenCore_Factory->setIconVisibleInMenu(false);
 
-  //检查更新
   if (mac || osx1012) ui->btnCheckUpdate->setIconVisibleInMenu(false);
 
-  //文档
   if (mac || osx1012) ui->btnHelp->setIconVisibleInMenu(false);
 
   // Bug Report
@@ -6399,16 +6355,14 @@ void MainWindow::init_MainUI() {
 
   init_HelpMenu();
 
-  //搜索框
   ui->cboxFind->lineEdit()->setClearButtonEnabled(true);
   ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
   connect(ui->cboxFind->lineEdit(), &QLineEdit::returnPressed, this,
           &MainWindow::on_actionFind_triggered);
 
-  // Count
   if (mac || osx1012) ui->lblCount->setFont(QFont("Menlo"));
   if (win) ui->lblCount->setFont(QFont("consolas"));
-  // 清除搜索历史
+
   clearTextsAction = new QAction(this);
   clearTextsAction->setToolTip(tr("Clear search history"));
   clearTextsAction->setIcon(QIcon(":/icon/clear.png"));
@@ -6416,7 +6370,6 @@ void MainWindow::init_MainUI() {
                                       QLineEdit::LeadingPosition);
   connect(clearTextsAction, SIGNAL(triggered()), this, SLOT(clearFindTexts()));
 
-  // 读取搜索历史
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QSettings Reg(qfile, QSettings::IniFormat);
   int textTotal = Reg.value("textTotal").toInt();
@@ -6424,7 +6377,6 @@ void MainWindow::init_MainUI() {
     ui->cboxFind->addItem(Reg.value(QString::number(i)).toString());
   }
 
-  // 读取窗口的位置和大小
   int x, y, w, h;
   x = Reg.value("x", "0").toInt();
   y = Reg.value("y", "0").toInt();
@@ -6451,16 +6403,13 @@ void MainWindow::init_MainUI() {
   ui->dockWidgetContents->layout()->setMargin(1);
   ui->dockFind->close();
 
-  //查找
   if (mac || osx1012) ui->actionFind->setIconVisibleInMenu(false);
   ui->actionFind->setShortcut(tr("ctrl+f"));
   ui->actionFind->setIcon(QIcon(":/icon/find.png"));
 
-  //转到上一个
   if (mac || osx1012) ui->actionGo_to_the_previous->setIconVisibleInMenu(false);
   ui->actionGo_to_the_previous->setShortcut(tr("ctrl+3"));
 
-  //转到下一个
   if (mac || osx1012) ui->actionGo_to_the_next->setIconVisibleInMenu(false);
   ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
 
@@ -6767,8 +6716,6 @@ void MainWindow::on_table_dp_add0_itemChanged(QTableWidgetItem* item) {
   Q_UNUSED(item);
 
   if (writeINI) {
-    // write_ini(ui->table_dp_add0, ui->table_dp_add,
-    //          ui->table_dp_add0->currentRow());
     mymethod->writeLeftTable(ui->table_dp_add0, ui->table_dp_add);
     this->setWindowModified(true);
     updateIconStatus();
@@ -6790,8 +6737,6 @@ void MainWindow::on_table_nv_add0_itemChanged(QTableWidgetItem* item) {
   Q_UNUSED(item);
 
   if (writeINI) {
-    // write_ini(ui->table_nv_add0, ui->table_nv_add,
-    //          ui->table_nv_add0->currentRow());
     mymethod->writeLeftTable(ui->table_nv_add0, ui->table_nv_add);
     this->setWindowModified(true);
     updateIconStatus();
@@ -7357,27 +7302,22 @@ QString MainWindow::getMacInfo(const QString& cmd) {
 }
 
 void MainWindow::on_table_dp_add0_itemSelectionChanged() {
-  // loadRightTable(ui->table_dp_add0, ui->table_dp_add);
   readLeftTable(ui->table_dp_add0, ui->table_dp_add);
 }
 
 void MainWindow::on_table_dp_del0_itemSelectionChanged() {
-  // loadRightTable(ui->table_dp_del0, ui->table_dp_del);
   readLeftTableOnlyValue(ui->table_dp_del0, ui->table_dp_del);
 }
 
 void MainWindow::on_table_nv_add0_itemSelectionChanged() {
-  // loadRightTable(ui->table_nv_add0, ui->table_nv_add);
   readLeftTable(ui->table_nv_add0, ui->table_nv_add);
 }
 
 void MainWindow::on_table_nv_del0_itemSelectionChanged() {
-  // loadRightTable(ui->table_nv_del0, ui->table_nv_del);
   readLeftTableOnlyValue(ui->table_nv_del0, ui->table_nv_del);
 }
 
 void MainWindow::on_table_nv_ls0_itemSelectionChanged() {
-  // loadRightTable(ui->table_nv_ls0, ui->table_nv_ls);
   readLeftTableOnlyValue(ui->table_nv_ls0, ui->table_nv_ls);
 }
 
@@ -8093,7 +8033,6 @@ void MainWindow::on_actionFind_triggered() {
   loading = false;
   indexOfResults = -1;
 
-  //清理标记
   clearCheckBoxMarker();
   clearComboBoxMarker();
   clearLabelMarker();
@@ -8132,7 +8071,6 @@ void MainWindow::on_actionFind_triggered() {
     setListMainIcon();
     ui->listMain->setCurrentRow(index);
 
-    // 刷新搜索历史
     QStringList strList;
     for (int i = 0; i < ui->cboxFind->count(); i++) {
       strList.append(ui->cboxFind->itemText(i));
@@ -8630,12 +8568,10 @@ void MainWindow::goResults(int index) {
 
   QString objName = listNameResults.at(index);
 
-  //获取背景色
   QPalette pal = this->palette();
   QBrush brush = pal.window();
   red = brush.color().red();
 
-  //清理之前的标记
   clearCheckBoxMarker();
   clearLabelMarker();
   clearLineEditMarker();
@@ -8695,7 +8631,6 @@ void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1) {
     clearLineEditMarker();
     clearTableHeaderMarker();
 
-    //获取背景色
     QPalette pal = this->palette();
     QBrush brush = pal.window();
     red = brush.color().red();
