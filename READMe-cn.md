@@ -23,12 +23,14 @@ OC辅助工具（简称OCAT或ocat） = Config.plist编辑器 + Config.plist数�
 
 OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下载
 
+---
+
 ### 如何配置一个全新的EFI？
 * 这个过程非常简单，只需点击工具栏上的“数据库”，在数据库列表里面双击“Sample.plist”（这个文件是OC官方提供的配置文件示例），此时会自动在桌面产生一个EFI文件夹，过程完成。
 * 编辑修改这个“Sample.plist”之后（主要是要和自己的机器硬件相匹配，这是一个不断调试和测试的过程），可以随时选择“编辑”菜单中的“在桌面上生成EFI文件夹“，以刷新之前生成的EFI目录。
 * 之后就可以将桌面上的EFI文件夹拷贝到ESP等引导分区进行引导测试。
 
-### <font color=#00ffff>如何自动升级OC？（非常简单，只需两步）</font> 
+### 如何自动升级OC？（非常简单，只需两步）
 * 将配置文件拖拽到OCAT的界面上，点击工具栏上的“保存”。
 * 之后再点击工具栏上的“升级OC主程序”，此时会出现一个“同步OC”的界面，点击下面的“开始同步”按钮，OC升级结束。
 
@@ -62,6 +64,8 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 ### OCAT可以为OC的稳定版和开发版做一个切换选择吗？
 * OCAT目前不考虑这个功能，OCAT的目标是足够简单、清晰和易于使用。如果您不想使用OC的开发版，请下载某个特定版本的OCAT并关闭“自动更新检查”（“帮助”菜单中）。
 
+---
+
 ### 感谢以下开源软件的支持！
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
@@ -74,6 +78,8 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 [wget](http://wget.addictivecode.org/)&nbsp; &nbsp; &nbsp;&nbsp;
 
 ### 最后，对所有的贡献者一并表示感谢，在此不再一一列出，谢谢你们的参与和支持！
+
+---
 
 ### 备注：此项目开始于2020年8月
 
