@@ -10317,7 +10317,6 @@ Enable this option to be able to see all the boot options when having multiple d
      <string>Help</string>
     </property>
     <addaction name="actionOCAuxiliaryToolsDoc"/>
-    <addaction name="separator"/>
     <addaction name="btnHelp"/>
     <addaction name="actionDifferences"/>
     <addaction name="separator"/>
@@ -10609,6 +10608,9 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionOCAuxiliaryToolsDoc">
    <property name="text">
     <string>OCAuxiliaryTools  Documentation</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
   <action name="actionBackup_EFI">
