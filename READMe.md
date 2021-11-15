@@ -25,6 +25,8 @@ OC auxiliary tools（OCAT or ocat for short） = Config.plist editor + Config.pl
 
 OC development version can be downloaded [here](https://github.com/acidanthera/OpenCorePkg/actions).
 
+---
+
 ### How to configure a new EFI?
 * Just click "Database" on the toolbar and double click "Sample.plist" in the database list (this file is an example of the official OC configuration file), then a EFI folder on the desktop, the process is complete.
 * After editing and modifying this "Sample.plist" (mainly to match with your own machine hardware, which is a continuous debugging and testing process), you can always select the "Edit" menu in the "Generate EFI folder on desktop" to refresh the previously generated EFI directory.
@@ -64,6 +66,8 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 ### Can OCAT make a switch option for stable and development versions of OC?
 * No. OCAT does not consider this feature at the moment, the goal of OCAT is to be simple, clear and easy to use. If you do not want to use the development version of OC, please download a specific version of OCAT and turn off "Automatic update checking" (in the "Help" menu).
 
+---
+
 ### Thanks for the support of the following open source software!
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
@@ -76,5 +80,7 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 [wget](http://wget.addictivecode.org/)&nbsp; &nbsp; &nbsp;&nbsp;
 
 ### Finally, a big thank you to all the contributors together, not to be listed here, for your participation and support!
+
+---
 
 ### Note: This project started in August 2020
