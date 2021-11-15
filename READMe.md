@@ -66,6 +66,10 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 ### Can OCAT make a switch option for stable and development versions of OC?
 * No. OCAT does not consider this feature at the moment, the goal of OCAT is to be simple, clear and easy to use. If you do not want to use the development version of OC, please download a specific version of OCAT and turn off "Automatic update checking" (in the "Help" menu).
 
+### Why not write a complete documentation for OCAT?
+* Because OCAT was designed to be simple and clear enough that users can use OCAT without almost any documentation.
+* Also, I can answer almost any question from users here at any time: https://github.com/ic005k/QtOpenCoreConfig/issues
+
 ---
 
 ### Thanks for the support of the following open source software!
