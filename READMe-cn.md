@@ -19,7 +19,7 @@
 
 [discourse-link]: https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-auxiliary-tools/
 
-OC辅助工具（简称OCAT或ocat） = Config.plist编辑器 + Config.plist数据库 + ...
+OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用工具，功能丰富、简洁易用。
 
 OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下载
 
