@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>879</width>
+    <width>827</width>
     <height>545</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Sync OC</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_6">
+  <layout class="QGridLayout" name="gridLayout_8">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_11">
      <item row="4" column="0">
@@ -155,7 +155,7 @@
        <item row="0" column="3">
         <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>    </string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -196,7 +196,7 @@
        <item row="0" column="5">
         <widget class="QLabel" name="label_6">
          <property name="text">
-          <string>    </string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -213,10 +213,17 @@
    </item>
    <item row="0" column="2">
     <layout class="QGridLayout" name="gridLayout_4">
-     <item row="0" column="0">
-      <widget class="QLabel" name="lblTarget">
+     <item row="3" column="0">
+      <widget class="QLabel" name="lblTargetLastModi_2">
        <property name="text">
-        <string>OpenCore</string>
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QPushButton" name="btnStartSync">
+       <property name="text">
+        <string>Start Sync</string>
        </property>
       </widget>
      </item>
@@ -248,13 +255,6 @@
        </item>
       </layout>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="lblTargetLastModi_2">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0">
       <widget class="QListWidget" name="listTarget">
        <property name="minimumSize">
@@ -277,22 +277,76 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QCheckBox" name="chkIncludeResource">
-       <property name="text">
-        <string>Include Resource Directory</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
+     <item row="0" column="0">
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="2">
+        <widget class="QLabel" name="lblOCFrom">
+         <property name="text">
+          <string>OpenCore is from</string>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblTarget">
+         <property name="text">
+          <string>OpenCore</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </item>
-     <item row="6" column="0">
-      <widget class="QPushButton" name="btnStartSync">
-       <property name="text">
-        <string>Start Sync</string>
-       </property>
-      </widget>
+     <item row="2" column="0">
+      <layout class="QGridLayout" name="gridLayout_7">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="chkIncludeResource">
+         <property name="text">
+          <string>Include Resource Directory</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="lblResourcesFrom">
+         <property name="text">
+          <string>Resources from</string>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>

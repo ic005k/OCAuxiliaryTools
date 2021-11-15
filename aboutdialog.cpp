@@ -4,7 +4,7 @@
 #include "ui_aboutdialog.h"
 
 extern MainWindow* mw_one;
-QString CurVerison = "20211213";
+QString CurVerison = "20211214";
 QString ocVer = "0.7.6";
 
 aboutDialog::aboutDialog(QWidget* parent)

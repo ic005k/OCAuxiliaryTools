@@ -803,7 +803,6 @@ void MainWindow::initui_dp() {
 
   ui->table_dp_add->setAlternatingRowColors(true);
 
-  // 分割窗口
   QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
   splitterMain->addWidget(ui->table_dp_add0);
   splitterMain->addWidget(ui->table_dp_add);
