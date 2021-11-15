@@ -64,6 +64,10 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 ### OCAT可以为OC的稳定版和开发版做一个切换选择吗？
 * OCAT目前不考虑这个功能，OCAT的目标是足够简单、清晰和易于使用。如果您不想使用OC的开发版，请下载某个特定版本的OCAT并关闭“自动更新检查”（“帮助”菜单中）。
 
+### 为什么不为OCAT编写一个完整的文档？
+* 因为OCAT被设计得足够简单和清晰，用户几乎可以在没有任何文档的情况下使用OCAT。
+* 还有，我几乎可以随时在这里回答用户的任何问题：https://github.com/ic005k/QtOpenCoreConfig/issues
+
 ---
 
 ### 感谢以下开源软件的支持！
