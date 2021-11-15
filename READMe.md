@@ -21,7 +21,7 @@
 
 
 
-OC auxiliary tools（OCAT or ocat for short） = Config.plist editor + Config.plist database + ...
+OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for OC that is feature-rich and easy to use.
 
 OC development version can be downloaded [here](https://github.com/acidanthera/OpenCorePkg/actions).
 
