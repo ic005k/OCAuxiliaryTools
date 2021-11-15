@@ -47,7 +47,7 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 * ...
 
 ### About the "Presets" feature
-* This is an open interface, the pre-set file is located in the database directory in the preset.plist (Open database directory" from the "Edit" menu), and you can edit it at any time using various Plist editors, just like you can edit Config.plist. It's simple, it's actually stripped from Config.plist.
+* This is an open interface, The preset file is located in "Database/preset/PreSet.plist" (Open database directory" from the "Edit" menu), and you can edit it at any time using various Plist editors, just like you can edit Config.plist. It's simple, it's actually stripped from Config.plist.
 
 ### How does OCAT get OpenCore?
 * OCAT currently only gets OpenCore officially from OC, it comes from here: https://github.com/acidanthera/OpenCorePkg/actions which is the "OpenCore Factory" in the "Help" menu of OCAT. Other than that, OCAT does not get any files for OpenCore from any other source.
