@@ -7,17 +7,14 @@
 
 extern MainWindow* mw_one;
 extern QString ocVer;
+extern QString ocFrom;
 extern Method* mymethod;
 extern QString SaveFileName;
 
 SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {
   ui->setupUi(this);
-  QString ocFrom =
-      "<a "
-      "href=\"https://github.com/acidanthera/OpenCorePkg/actions/runs/"
-      "1450503981/\">" +
-      tr("Source");
+
   ui->lblOCFrom->setText(ocFrom);
   ui->lblResourcesFrom->setText(
       "<a href=\"https://github.com/acidanthera/OcBinaryData/\">" +

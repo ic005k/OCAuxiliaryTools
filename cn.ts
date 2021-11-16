@@ -4596,7 +4596,7 @@ Type</translation>
     <name>SyncOCDialog</name>
     <message>
         <location filename="syncocdialog.ui" line="14"/>
-        <location filename="syncocdialog.cpp" line="26"/>
+        <location filename="syncocdialog.cpp" line="23"/>
         <source>Sync OC</source>
         <translation>同步OC</translation>
     </message>
@@ -4689,25 +4689,24 @@ Type</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="20"/>
-        <location filename="syncocdialog.cpp" line="24"/>
+        <location filename="syncocdialog.cpp" line="21"/>
         <source>Source</source>
         <translation>来源</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="101"/>
+        <location filename="syncocdialog.cpp" line="98"/>
         <source>Successfully synced to OpenCore: </source>
         <translation>成功同步到OpenCore：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="166"/>
-        <location filename="syncocdialog.cpp" line="266"/>
+        <location filename="syncocdialog.cpp" line="163"/>
+        <location filename="syncocdialog.cpp" line="263"/>
         <source>Current File: </source>
         <translation>当前文件：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="168"/>
-        <location filename="syncocdialog.cpp" line="267"/>
+        <location filename="syncocdialog.cpp" line="165"/>
+        <location filename="syncocdialog.cpp" line="264"/>
         <source>Available File: </source>
         <translation>可用文件：</translation>
     </message>
@@ -4720,41 +4719,46 @@ Type</translation>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="50"/>
+        <location filename="aboutdialog.cpp" line="61"/>
         <source>Icon Designer: Mirone (Brazil) </source>
         <oldsource>Icon Designer: Mirone (Brazil) [Update Check and Icon Design]</oldsource>
         <translation>图标设计:  Mirone（巴西）</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="44"/>
+        <location filename="aboutdialog.cpp" line="55"/>
         <source>Contributor: eSaF (England, UK)    [file structure]</source>
         <oldsource>Contributor: eSaF (England, UK) [file structure]</oldsource>
         <translation>贡献者:  eSaF (英国英格兰)    [文件结构]</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="46"/>
+        <location filename="aboutdialog.cpp" line="57"/>
         <source>Contributor: Sherlocks (Seoul, Korea)    [file structure]</source>
         <oldsource>Contributor: Sherlocks (Seoul, Korea) [file structure]</oldsource>
         <translation>贡献者:  Sherlocks (韩国首尔)    [文件结构]</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="41"/>
+        <location filename="aboutdialog.cpp" line="52"/>
         <source>Last modified: </source>
         <translation>最后修改：</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="48"/>
+        <location filename="aboutdialog.cpp" line="23"/>
+        <source>Source</source>
+        <translation>来源</translation>
+    </message>
+    <message>
+        <location filename="aboutdialog.cpp" line="59"/>
         <source>Contributor: 5T33Z0 (Germany)    [Documentation, user experience and UI interaction design]</source>
         <oldsource>Contributor: 5T33Z0 (Europe)    [Documentation, user experience and UI interaction design]</oldsource>
         <translation>贡献者：5T33Z0 (德国)    [文档、用户体验及UI交互设计]</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="56"/>
+        <location filename="aboutdialog.cpp" line="67"/>
         <source>Details</source>
         <translation>详细</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="74"/>
+        <location filename="aboutdialog.cpp" line="85"/>
         <source>(This App is built automatically by Github Actions.)</source>
         <oldsource>This App is built automatically by Github Actions.</oldsource>
         <translation>(本程序由Github Actions自动构建)</translation>

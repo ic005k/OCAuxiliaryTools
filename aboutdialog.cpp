@@ -4,12 +4,23 @@
 #include "ui_aboutdialog.h"
 
 extern MainWindow* mw_one;
-QString CurVerison = "20211214";
+QString CurVerison = "20211215";
 QString ocVer = "0.7.6";
+QString ocFrom;
 
 aboutDialog::aboutDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::aboutDialog) {
   ui->setupUi(this);
+
+  /*ocFrom =
+      "<a "
+      "href=\"https://github.com/acidanthera/OpenCorePkg/releases/latest/\">" +
+      tr("Source");*/
+  ocFrom =
+      "<a "
+      "href=\"https://github.com/acidanthera/OpenCorePkg/actions/runs/"
+      "1462380788/\">" +
+      tr("Source");
 
   setMaximumWidth(this->width());
   setMaximumHeight(this->height());
