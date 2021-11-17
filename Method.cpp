@@ -1274,8 +1274,8 @@ void Method::removeFileSystemWatch(QString strOpenFile) {
   FileSystemWatcher::removeWatchPath(strTools);
 }
 
-QStringList Method::deDuplication(QStringList FileName, QTableWidget* table,
-                                  int col) {
+QStringList Method::delDuplication(QStringList FileName, QTableWidget* table,
+                                   int col) {
   for (int i = 0; i < table->rowCount(); i++) {
     QString str0 = table->item(i, col)->text().trimmed();
     for (int j = 0; j < FileName.count(); j++) {

@@ -3782,21 +3782,25 @@ void MainWindow::addACPIItem(QStringList FileName) {
   if (FileName.isEmpty()) return;
 
   QStringList tempList =
-      mymethod->deDuplication(FileName, ui->table_acpi_add, 0);
+      mymethod->delDuplication(FileName, ui->table_acpi_add, 0);
   FileName.clear();
   FileName = tempList;
 
   for (int i = 0; i < FileName.count(); i++) {
     int row = ui->table_acpi_add->rowCount();
-
+    QString strBaseName = QFileInfo(FileName.at(i)).fileName();
     ui->table_acpi_add->setRowCount(row + 1);
-    ui->table_acpi_add->setItem(
-        row, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+    ui->table_acpi_add->setItem(row, 0, new QTableWidgetItem(strBaseName));
     init_enabled_data(ui->table_acpi_add, row, 1, "true");
     ui->table_acpi_add->setItem(row, 2, new QTableWidgetItem(""));
 
     ui->table_acpi_add->setFocus();
     ui->table_acpi_add->setCurrentCell(row, 0);
+
+    QDir dir(strACPI);
+    if (dir.exists()) {
+      QFile::copy(FileName.at(i), strACPI + strBaseName);
+    }
   }
 
   this->setWindowModified(true);
@@ -3869,7 +3873,7 @@ void MainWindow::on_btnKernelAdd_Add_clicked() {
 void MainWindow::addKexts(QStringList FileName) {
   // 去重
   QStringList tempList =
-      mymethod->deDuplication(FileName, ui->table_kernel_add, 0);
+      mymethod->delDuplication(FileName, ui->table_kernel_add, 0);
   FileName.clear();
   FileName = tempList;
 
@@ -3896,13 +3900,12 @@ void MainWindow::addKexts(QStringList FileName) {
       }
     }
 
-    QTableWidget* t = new QTableWidget;
-    t = ui->table_kernel_add;
-    int row = t->rowCount() + 1;
+    QTableWidget* t = ui->table_kernel_add;
 
+    int row = t->rowCount() + 1;
+    QString strBaseName = QFileInfo(FileName[j]).fileName();
     t->setRowCount(row);
-    t->setItem(row - 1, 0,
-               new QTableWidgetItem(QFileInfo(FileName[j]).fileName()));
+    t->setItem(row - 1, 0, new QTableWidgetItem(strBaseName));
     t->setItem(row - 1, 1, new QTableWidgetItem(""));
 
     if (fileInfoList.fileName() != "")
@@ -3920,6 +3923,11 @@ void MainWindow::addKexts(QStringList FileName) {
     QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
     newItem1->setTextAlignment(Qt::AlignCenter);
     t->setItem(row - 1, 7, newItem1);
+
+    QDir dir(strKexts);
+    if (dir.exists()) {
+      copyDirectoryFiles(FileName.at(j), strKexts + strBaseName, false);
+    }
 
     //如果里面还有PlugIns目录，则需要继续遍历插件目录
     QDir piDir(filePath + "/" + fileInfo.fileName() + "/Contents/PlugIns/");
@@ -4111,7 +4119,7 @@ void MainWindow::on_btnMiscTools_Add_clicked() {
 void MainWindow::addEFITools(QStringList FileName) {
   if (FileName.isEmpty()) return;
 
-  QStringList tempList = mymethod->deDuplication(FileName, ui->tableTools, 0);
+  QStringList tempList = mymethod->delDuplication(FileName, ui->tableTools, 0);
   FileName.clear();
   FileName = tempList;
 
@@ -4119,12 +4127,10 @@ void MainWindow::addEFITools(QStringList FileName) {
     add_item(ui->tableTools, 9);
 
     int row = ui->tableTools->rowCount() - 1;
+    QString strBaseName = QFileInfo(FileName.at(i)).fileName();
+    ui->tableTools->setItem(row, 0, new QTableWidgetItem(strBaseName));
 
-    ui->tableTools->setItem(
-        row, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
-
-    ui->tableTools->setItem(
-        row, 2, new QTableWidgetItem(QFileInfo(FileName.at(i)).baseName()));
+    ui->tableTools->setItem(row, 2, new QTableWidgetItem(strBaseName));
 
     ui->tableTools->setFocus();
     ui->tableTools->setCurrentCell(row, 0);
@@ -4135,6 +4141,11 @@ void MainWindow::addEFITools(QStringList FileName) {
     init_enabled_data(ui->tableTools, row, 7, "false");
 
     ui->tableTools->setItem(row, 8, new QTableWidgetItem("Auto"));
+
+    QDir dir(strTools);
+    if (dir.exists()) {
+      QFile::copy(FileName.at(i), strTools + strBaseName);
+    }
   }
 
   this->setWindowModified(true);
@@ -4290,16 +4301,16 @@ void MainWindow::addEFIDrivers(QStringList FileName) {
   if (FileName.isEmpty()) return;
 
   QStringList tempList =
-      mymethod->deDuplication(FileName, ui->table_uefi_drivers, 0);
+      mymethod->delDuplication(FileName, ui->table_uefi_drivers, 0);
   FileName.clear();
   FileName = tempList;
 
   for (int i = 0; i < FileName.count(); i++) {
     int row = ui->table_uefi_drivers->rowCount() + 1;
-
+    QString strBaseName = QFileInfo(FileName.at(i)).fileName();
     ui->table_uefi_drivers->setRowCount(row);
-    ui->table_uefi_drivers->setItem(
-        row - 1, 0, new QTableWidgetItem(QFileInfo(FileName.at(i)).fileName()));
+    ui->table_uefi_drivers->setItem(row - 1, 0,
+                                    new QTableWidgetItem(strBaseName));
     init_enabled_data(ui->table_uefi_drivers, row - 1, 1, "true");
     ui->table_uefi_drivers->setItem(row - 1, 2, new QTableWidgetItem(""));
 
@@ -4307,6 +4318,11 @@ void MainWindow::addEFIDrivers(QStringList FileName) {
 
     ui->table_uefi_drivers->setFocus();
     ui->table_uefi_drivers->setCurrentCell(row - 1, 0);
+
+    QDir dir(strDrivers);
+    if (dir.exists()) {
+      QFile::copy(FileName.at(i), strDrivers + strBaseName);
+    }
   }
 
   this->setWindowModified(true);

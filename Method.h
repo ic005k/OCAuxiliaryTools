@@ -60,7 +60,8 @@ class Method : public QMainWindow {
   void addFileSystemWatch(QString strOpenFile);
 
   void removeFileSystemWatch(QString strOpenFile);
-  QStringList deDuplication(QStringList FileName, QTableWidget *table, int col);
+  QStringList delDuplication(QStringList FileName, QTableWidget *table,
+                             int col);
 
   void OCValidationProcessing();
   void setStatusBarTip(QWidget *w);
