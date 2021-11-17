@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -116,7 +116,7 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Kext Url</string>
+       <string>Kext Upgrade URL</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="2" column="0">

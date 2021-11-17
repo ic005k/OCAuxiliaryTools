@@ -32,6 +32,7 @@ QVector<QCheckBox*> chk_Target;
 
 extern QString CurVerison;
 extern QString ocVer;
+extern QString ocFrom;
 extern QString strACPI;
 extern QString strKexts;
 extern QString strDrivers;

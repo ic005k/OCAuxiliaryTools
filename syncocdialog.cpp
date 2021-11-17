@@ -93,10 +93,9 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     mw_one->copyDirectoryFiles(sourceResourcesDir, targetResourcesDir, true);
 
   QMessageBox box;
-  box.setStyleSheet("QLabel{min-width:500 px;}");
   if (ok) {
-    box.setText(tr("Successfully synced to OpenCore: ") +
-                mw_one->getDatabaseVer());
+    box.setText(tr("Successfully synced to OpenCore: ") + ocVer + "        " +
+                ocFrom);
     box.exec();
 
     close();
