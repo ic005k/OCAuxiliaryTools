@@ -86,4 +86,4 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 ---
 
 ### 备注：此项目开始于2020年8月
-
+API: https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/latest
