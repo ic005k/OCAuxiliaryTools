@@ -88,3 +88,4 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 ---
 
 ### Note: This project started in August 2020
+API: https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/latest
