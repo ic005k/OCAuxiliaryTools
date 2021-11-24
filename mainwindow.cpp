@@ -8026,6 +8026,8 @@ void MainWindow::findTabText(QString findText) {
 }
 
 void MainWindow::on_actionFind_triggered() {
+  ui->cboxFind->lineEdit()->selectAll();
+
   find = true;
 
   if (!FindTextChange) {
@@ -8121,6 +8123,8 @@ void MainWindow::on_actionFind_triggered() {
   updateIconStatus();
 
   find = false;
+
+  ui->cboxFind->lineEdit()->selectAll();
 }
 
 void MainWindow::setPalette(QWidget* w, QColor backColor, QColor textColor) {
