@@ -10487,10 +10487,6 @@ void MainWindow::on_listMain_currentRowChanged(int currentRow) {
     updateIconStatus();
   }
 
-  if (find) {
-    return;
-  }
-
   setConversionWidgetVisible(false);
   mymethod->UpdateStatusBarInfo();
 }
