@@ -10482,7 +10482,7 @@ void MainWindow::on_listMain_currentRowChanged(int currentRow) {
     bool mod = this->isWindowModified();
     QString str = ui->editIntConsoleAttributes->text().trimmed();
     ui->editIntConsoleAttributes->setText("");
-    on_editIntConsoleAttributes_textChanged(str);
+    ui->editIntConsoleAttributes->setText(str);
     this->setWindowModified(mod);
     updateIconStatus();
   }
