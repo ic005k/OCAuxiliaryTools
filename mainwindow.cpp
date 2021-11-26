@@ -9986,7 +9986,10 @@ void MainWindow::on_cboxTextColor_currentIndexChanged(int index) {
 
   int bcIndex = ui->cboxBackColor->currentIndex();
   int tcIndex = ui->cboxTextColor->currentIndex();
-  int total = backColorInt.at(bcIndex) + textColorInt.at(tcIndex);
+
+  int total = 0;
+  if (bcIndex >= 0 && tcIndex >= 0)
+    total = backColorInt.at(bcIndex) + textColorInt.at(tcIndex);
 
   ui->editIntConsoleAttributes->setText(QString::number(total));
 
@@ -10474,10 +10477,20 @@ void MainWindow::on_listMain_currentRowChanged(int currentRow) {
       ui->listMain->item(i)->setIcon(QIcon(strIconList.at(i)));
   }
 
+  // Misc
+  if (currentRow == 4) {
+    bool mod = this->isWindowModified();
+    QString str = ui->editIntConsoleAttributes->text().trimmed();
+    ui->editIntConsoleAttributes->setText("");
+    on_editIntConsoleAttributes_textChanged(str);
+    this->setWindowModified(mod);
+    updateIconStatus();
+  }
+
   if (find) {
     return;
   }
-  Q_UNUSED(currentRow);
+
   setConversionWidgetVisible(false);
   mymethod->UpdateStatusBarInfo();
 }
