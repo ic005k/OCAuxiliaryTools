@@ -20,7 +20,7 @@ aboutDialog::aboutDialog(QWidget* parent)
   ocFrom =
       "<a "
       "href=\"https://github.com/acidanthera/OpenCorePkg/actions/runs/"
-      "1494187007/\">" +
+      "1509412280/\">" +
       tr("Source");
 
   setMaximumWidth(this->width());
