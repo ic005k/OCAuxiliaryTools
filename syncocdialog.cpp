@@ -433,7 +433,12 @@ void SyncOCDialog::initKextList() {
     layout->addWidget(lblVer, 0, Qt::AlignRight | Qt::AlignAbsolute);
 
     w->setLayout(layout);
-    ui->listSource->setItemWidget(ui->listSource->item(i), w);
+    if (ui->listSource->currentIndex().isValid()) {
+      ui->listSource->setItemWidget(ui->listSource->item(i), w);
+      w->setVisible(true);
+    } else {
+      w->setVisible(false);
+    }
   }
 }
 
