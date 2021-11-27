@@ -94,11 +94,11 @@ void SyncOCDialog::on_btnStartSync_clicked() {
 
   QMessageBox box;
   if (ok) {
+    close();
     box.setText(tr("Successfully synced to OpenCore: ") + ocVer + "        " +
                 ocFrom);
     box.exec();
 
-    close();
     mw_one->checkFiles();
   }
 }
