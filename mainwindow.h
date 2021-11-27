@@ -366,6 +366,7 @@ class MainWindow : public QMainWindow {
   void on_btnNVRAMDel_Add0_clicked();
   void cellEnteredSlot(int row, int column);
   void on_actionOnline_Download_Updates_triggered();
+  void on_actionDatabase_triggered();
 
  protected:
   void dragEnterEvent(QDragEnterEvent* e) override;
@@ -822,8 +823,6 @@ class MainWindow : public QMainWindow {
   void on_editPassInput_textChanged(const QString& arg1);
 
   void on_editPassInput_returnPressed();
-
-  void on_actionDatabase_triggered();
 
   void on_actionOcvalidate_triggered();
 

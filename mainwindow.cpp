@@ -9929,7 +9929,8 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
   }
 
-  dlgSyncOC->setModal(true);
+  dlgSyncOC->setWindowFlags(dlgAutoUpdate->windowFlags() |
+                            Qt::WindowStaysOnTopHint);
   dlgSyncOC->show();
   dlgSyncOC->ui->listSource->setFocus();
 
