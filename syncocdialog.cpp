@@ -362,6 +362,8 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
 
   for (int i = 0; i < ui->listSource->count(); i++) {
     if (ui->listSource->itemWidget(ui->listSource->item(i)) == progBar) {
+      if (!ui->listSource->currentIndex().isValid()) return;
+
       ui->listSource->removeItemWidget(ui->listSource->item(i));
       writeCheckStateINI();
       initKextList();
@@ -433,12 +435,7 @@ void SyncOCDialog::initKextList() {
     layout->addWidget(lblVer, 0, Qt::AlignRight | Qt::AlignAbsolute);
 
     w->setLayout(layout);
-    if (ui->listSource->currentIndex().isValid()) {
-      ui->listSource->setItemWidget(ui->listSource->item(i), w);
-      w->setVisible(true);
-    } else {
-      w->setVisible(false);
-    }
+    ui->listSource->setItemWidget(ui->listSource->item(i), w);
   }
 }
 
