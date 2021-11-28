@@ -79,6 +79,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  QToolButton* btnBak;
   bool blReadLeftTable;
   bool blWriteLeftTable;
   QStringList listNVRAMAdd;

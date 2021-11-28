@@ -6101,6 +6101,7 @@ void MainWindow::init_ToolBarIcon() {
     redoAction->setIcon(QIcon(":/icon/redo0.png"));
     ui->actionFind->setIcon(QIcon(":/icon/find0.png"));
     ui->actionBackup_EFI->setIcon(QIcon(":/icon/be0.png"));
+    btnBak->setIcon(QIcon(":/icon/be0.png"));
   } else {
     btn0->setIcon(QIcon(":/icon/rp.png"));
     ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
@@ -6113,6 +6114,7 @@ void MainWindow::init_ToolBarIcon() {
     redoAction->setIcon(QIcon(":/icon/redo.png"));
     ui->actionFind->setIcon(QIcon(":/icon/find.png"));
     ui->actionBackup_EFI->setIcon(QIcon(":/icon/be.png"));
+    btnBak->setIcon(QIcon(":/icon/be.png"));
   }
 
   QString listStyleMain, listStyle;
@@ -6235,7 +6237,26 @@ void MainWindow::init_EditMenu() {
   // Backup EFI
   if (mac || osx1012) ui->actionBackup_EFI->setIconVisibleInMenu(false);
   ui->actionBackup_EFI->setIcon(QIcon(":/icon/be.png"));
-  ui->toolBar->addAction(ui->actionBackup_EFI);
+  btnBak = new QToolButton(this);
+  btnBak->setIcon(QIcon(":/icon/be.png"));
+  ui->toolBar->addWidget(btnBak);
+  QMenu* bakMenu = new QMenu(this);
+  QAction* actOpenBakDir = new QAction(tr("Open backup directory"), this);
+  bakMenu->addAction(actOpenBakDir);
+  btnBak->setContextMenuPolicy(Qt::CustomContextMenu);
+  connect(btnBak, &QPushButton::customContextMenuRequested,
+          [=](const QPoint& pos) {
+            Q_UNUSED(pos);
+            bakMenu->exec(QCursor::pos());
+          });
+
+  connect(actOpenBakDir, &QAction::triggered, [=]() {
+    QString dirpath = QDir::homePath() + "/Desktop/Backup EFI/";
+    QString dir = "file:" + dirpath;
+    QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
+  });
+  connect(btnBak, &QToolButton::clicked,
+          [=]() { on_actionBackup_EFI_triggered(); });
 }
 
 void MainWindow::init_HelpMenu() {
