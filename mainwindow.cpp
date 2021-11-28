@@ -6239,6 +6239,7 @@ void MainWindow::init_EditMenu() {
   ui->actionBackup_EFI->setIcon(QIcon(":/icon/be.png"));
   btnBak = new QToolButton(this);
   btnBak->setIcon(QIcon(":/icon/be.png"));
+  btnBak->setToolTip(ui->actionBackup_EFI->text());
   ui->toolBar->addWidget(btnBak);
   QMenu* bakMenu = new QMenu(this);
   QAction* actOpenBakDir = new QAction(tr("Open backup directory"), this);
