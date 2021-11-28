@@ -111,7 +111,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -9041,26 +9041,6 @@ The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS 
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <layout class="QGridLayout" name="gridLayout_34">
-              <item row="1" column="3">
-               <widget class="QCheckBox" name="chkReplaceTabWithSpace">
-                <property name="toolTip">
-                 <string notr="true">Some firmwares do not print tab characters or even everything that follows them, causing difficulties or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. 
-
-This option makes the console output spaces instead of tabs.
-
-Note: This option only applies to System renderer.
-----
-有些固件不打印制表符，甚至不打印制表符后面的所有内容，导致难以或无法使用UEFI Shell内置的文本编辑器来编辑属性列表和其他文档。
-
-这个选项使控制台输出的是空格而不是制表符。
-
-注意：该选项只适用于系统渲染器。</string>
-                </property>
-                <property name="text">
-                 <string>ReplaceTabWithSpace</string>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="1">
                <widget class="QCheckBox" name="chkProvideConsoleGop">
                 <property name="toolTip">
@@ -9176,25 +9156,6 @@ BuiltinGraphics的使用一般都很简单。对于大多数平台来说，有�
                 </property>
                </widget>
               </item>
-              <item row="1" column="2">
-               <widget class="QCheckBox" name="chkReconnectOnResChange">
-                <property name="toolTip">
-                 <string notr="true">On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
-
-Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless required.
-----
-在某些固件上，当通过GOP改变屏幕分辨率时，需要重新连接产生控制台协议（简单文本输出）的控制器。否则它们将不会根据新的分辨率产生文本。
-
-注意：在一些板卡上，当从Shell启动OpenCore时，这个逻辑可能会导致黑屏，因此它是可选的。在 0.5.2 之前的版本中，该选项是强制性的，不可配置。除非需要，否则请不要使用该选项。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Reconnect console controllers after changing screen resolution.</string>
-                </property>
-                <property name="text">
-                 <string>ReconnectOnResChange</string>
-                </property>
-               </widget>
-              </item>
               <item row="3" column="0">
                <widget class="QLabel" name="label_24">
                 <property name="toolTip">
@@ -9301,22 +9262,6 @@ Note: This will fail when console handle has no GOP protocol. When the firmware 
                 </property>
                 <property name="editable">
                  <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="chkSanitiseClearScreen">
-                <property name="toolTip">
-                 <string notr="true"> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
-
-Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to empty string for this to work.
-----
- 当使用大屏幕（如2K或4K）时，一些固件在尝试清除屏幕内容时，会将屏幕分辨率重置为故障安全值（如1024x768）。这个选项试图应用一个变通方法。
-
-注意：这个选项只适用于系统渲染器。在所有已知受影响的系统中，ConsoleMode必须设置为空字符串才行。</string>
-                </property>
-                <property name="text">
-                 <string>SanitiseClearScreen</string>
                 </property>
                </widget>
               </item>
@@ -9454,6 +9399,68 @@ Note 2 : When switching from manually specifified NVRAM variable to this prefere
                   <width>400</width>
                   <height>16777215</height>
                  </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QCheckBox" name="chkSanitiseClearScreen">
+                <property name="toolTip">
+                 <string notr="true"> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
+
+Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to empty string for this to work.
+----
+ 当使用大屏幕（如2K或4K）时，一些固件在尝试清除屏幕内容时，会将屏幕分辨率重置为故障安全值（如1024x768）。这个选项试图应用一个变通方法。
+
+注意：这个选项只适用于系统渲染器。在所有已知受影响的系统中，ConsoleMode必须设置为空字符串才行。</string>
+                </property>
+                <property name="text">
+                 <string>SanitiseClearScreen</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QCheckBox" name="chkReconnectGraphicsOnConnect">
+                <property name="text">
+                 <string>ReconnectGraphicsOnConnect</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QCheckBox" name="chkReconnectOnResChange">
+                <property name="toolTip">
+                 <string notr="true">On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
+
+Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless required.
+----
+在某些固件上，当通过GOP改变屏幕分辨率时，需要重新连接产生控制台协议（简单文本输出）的控制器。否则它们将不会根据新的分辨率产生文本。
+
+注意：在一些板卡上，当从Shell启动OpenCore时，这个逻辑可能会导致黑屏，因此它是可选的。在 0.5.2 之前的版本中，该选项是强制性的，不可配置。除非需要，否则请不要使用该选项。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Reconnect console controllers after changing screen resolution.</string>
+                </property>
+                <property name="text">
+                 <string>ReconnectOnResChange</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="chkReplaceTabWithSpace">
+                <property name="toolTip">
+                 <string notr="true">Some firmwares do not print tab characters or even everything that follows them, causing difficulties or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. 
+
+This option makes the console output spaces instead of tabs.
+
+Note: This option only applies to System renderer.
+----
+有些固件不打印制表符，甚至不打印制表符后面的所有内容，导致难以或无法使用UEFI Shell内置的文本编辑器来编辑属性列表和其他文档。
+
+这个选项使控制台输出的是空格而不是制表符。
+
+注意：该选项只适用于系统渲染器。</string>
+                </property>
+                <property name="text">
+                 <string>ReplaceTabWithSpace</string>
                 </property>
                </widget>
               </item>
