@@ -7964,7 +7964,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>7</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -9420,6 +9420,25 @@ Note: This option only applies to System renderer. On all known affected systems
               </item>
               <item row="1" column="2">
                <widget class="QCheckBox" name="chkReconnectGraphicsOnConnect">
+                <property name="toolTip">
+                 <string>Type: plist boolean
+
+Description: Reconnect all graphics drivers during driver connection.
+
+On certain firmware, it may be desireable to use an alternative graphics driver, for example BiosVideo.efi,providing better screen resolution options on legacy machines, or a driver supporting ForceResolution. This option attempts to disconnect all currently connected graphics drivers before connecting newly loaded drivers.
+
+Note: This option requires ConnectDrivers to be enabled.
+
+----
+
+类型：plist布尔值
+
+描述：在驱动连接过程中重新连接所有图形驱动。
+
+在某些固件上，可能希望使用另一种图形驱动，例如BiosVideo.efi，以在传统机器上提供更好的屏幕分辨率选项，或者支持ForceResolution的驱动。这个选项试图在连接新加载的驱动程序之前断开所有当前连接的图形驱动程序。
+
+注意：这个选项需要启用ConnectDrivers。</string>
+                </property>
                 <property name="text">
                  <string>ReconnectGraphicsOnConnect</string>
                 </property>
@@ -9809,80 +9828,71 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
                 </property>
                </widget>
               </item>
-              <item row="9" column="1">
-               <widget class="QCheckBox" name="chkReloadOptionRoms">
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="chkActivateHpetSupport">
                 <property name="toolTip">
-                 <string notr="true">Type: plist boolean
-
-Description: Query PCI devices and reload their Option ROMs if available.
-
-For example, this option allows reloading NVIDIA GOP Option ROM on older Macs after the firmware version is upgraded via ForgeUefiSupport.
-
+                 <string notr="true">Older boards like ICH6 may not always have HPET setting in the firmware preferences, this option tries to force enable it.
 ----
-
-类型：plist boolean
-
-描述：查询PCI设备并重新加载其可用的Option ROM。
-
-例如，在通过ForgeUefiSupport升级固件版本后，该选项允许在旧的Mac上重新加载NVIDIA GOP Option ROM。</string>
-                </property>
-                <property name="text">
-                 <string>ReloadOptionRoms</string>
-                </property>
-               </widget>
-              </item>
-              <item row="11" column="0">
-               <widget class="QLabel" name="label_28">
-                <property name="toolTip">
-                 <string notr="true">This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,namely ASUS Z87-Pro, when using FileVault 2 in particular. 
-
-It seems that for some reason they execute code in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. 
-
-A better approach should be found in some future. Expect 3-5 seconds to be enough in case the quirk is needed.
-----
-这是一个非常简陋的选项，以避免在选择APTIO 4固件，即华硕Z87-Pro上出现“仍在等待根设备”的消息，特别是在使用FileVault 2时。
-
-似乎出于某种原因，它们并行执行退出_启动_服务的代码，这导致SATA控制器无法从macOS访问。
-
-将来应该会找到更好的方法，目前采用它以防不时之需。</string>
+旧的板子，如ICH6，可能并不总是有HPET设置在固件首选项中，这个选项试图强制启用它。</string>
                 </property>
                 <property name="statusTip">
-                 <string>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</string>
+                 <string>Activates HPET support.</string>
                 </property>
                 <property name="text">
-                 <string>ExitBootServicesDelay</string>
+                 <string>ActivateHpetSupport</string>
                 </property>
                </widget>
               </item>
-              <item row="13" column="1">
-               <widget class="QLineEdit" name="editIntTscSyncTimeout">
-                <property name="minimumSize">
-                 <size>
-                  <width>200</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>150</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="10" column="0">
-               <widget class="QCheckBox" name="chkEnableVectorAcceleration">
+              <item row="10" column="1">
+               <widget class="QCheckBox" name="chkForceOcWriteFlash">
                 <property name="toolTip">
-                 <string notr="true">Type: plist boolean
+                 <string>Type: plist boolean
 
-Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algorithms.
+Description: Enables writing to flash memory for all OpenCore system variables.
+
+Note: This value should be disabled on most types of firmware but is left configurable to account for firmware that may have issues with volatile variable storage overflows or similar. Boot issues across multiple OSes can be observed on e.g. Lenovo Thinkpad T430 and T530 without this quirk. Apple variables related to Secure Boot and hibernation are exempt from this for security reasons. Furthermore, some OpenCore variables are exempt for different reasons, such as the boot log due to an available user option, and the TSC frequency due to timing issues. When toggling this option, a NVRAM reset may be required to ensure full functionality.
 ----
 类型：plist布尔值
 
-说明：启用SHA-512和SHA-384哈希算法的AVX矢量加速。</string>
+描述：启用所有OpenCore系统变量对闪存的写入。
+
+注意：这个值在大多数类型的固件上应该是禁用的，但为了考虑到可能有易失性变量存储溢出或类似问题的固件，这个值是可配置的。在例如联想Thinkpad T430和T530上可以观察到跨多个操作系统的启动问题，没有这个选项。出于安全原因，与安全启动和休眠有关的苹果变量不在此列。此外，一些OpenCore变量由于不同的原因被豁免，例如由于一个可用的用户选项，启动日志，以及由于时间问题，TSC频率。在切换该选项时，可能需要对NVRAM进行重置，以确保完整的功能。</string>
                 </property>
                 <property name="text">
-                 <string>EnableVectorAcceleration</string>
+                 <string>ForceOcWriteFlash</string>
+                </property>
+               </widget>
+              </item>
+              <item row="13" column="0">
+               <widget class="QLabel" name="label_115">
+                <property name="toolTip">
+                 <string>Type: plist integer
+Description: Configure GPU PCI BAR sizes.
+
+This quirk sets GPU PCI BAR sizes as specified or chooses the largest available below the ResizeGpuBars value.
+The specified value follows PCI Resizable BAR spec. Use 0 for 1 MB, 1 for 2 MB, 2 for 4 MB, and so on up to 19 for 512 GB.
+Resizable BAR technology allows to ease PCI device programming by mapping a configurable memory region,BAR, into CPU address space (e.g. VRAM to RAM) as opposed to a fixed memory region. This technology is necessary, because one cannot map the largest memory region by default, for the reasons of backwards compatibility with older hardware not supporting 64-bit BARs. Consequentially devices of the last decade use BARs up to 256 MB by default (4 remaining bits are used by other data) but generally allow resizing them to both smaller and larger powers of two (e.g. from 1 MB up to VRAM size).
+Operating systems targeting x86 platforms generally do not control PCI address space, letting UEFI firmware decide on the BAR addresses and sizes. This illicit practice resulted in Resizable BAR technology being unused up until 2020 despite being standardised in 2008 and becoming widely available in the hardware soon after.
+Modern UEFI firmware allow the use of Resizable BAR technology but generally restrict the configurable options to failsafe default (OFF) and maximum available (ON). This quirk allows to fine-tune this value for testing and development purposes.
+Note 1 : This quirk shall not be used to workaround macOS limitation to address BARs over 1 GB. ResizeAppleGpuBars should be used instead.
+Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on most firmware as is, because the quirk does not relocate BARs in memory, and they will likely overlap. Contributions to improve this feature are welcome.
+----
+类型：plist整数
+描述：配置GPU PCI BAR的大小。
+
+这个选项设置GPU PCI BAR尺寸为指定的，或者选择低于ResizeGpuBars值的最大可用值。
+指定的值遵循PCI可调整的BAR规格。使用0代表1MB，1代表2MB，2代表4MB，以此类推，直到19代表512GB。
+可调整的BAR技术允许通过将可配置的内存区域、BAR，映射到CPU地址空间（例如，VRAM到RAM），而不是固定的内存区域，来简化PCI设备编程。这项技术是必要的，因为人们不能在默认情况下映射最大的内存区域，原因是要向后兼容不支持64位BAR的旧硬件。因此，过去十年的设备默认使用256MB的BAR（剩下的4位被其他数据使用），但通常允许将它们的大小调整为更小和更大的2次方（例如，从1MB到VRAM大小）。
+
+针对x86平台的操作系统通常不控制PCI地址空间，让UEFI固件决定BAR地址和大小。这种非法的做法导致可重置的BAR技术直到2020年都没有被使用，尽管它在2008年被标准化，并很快在硬件中广泛使用。
+
+现代UEFI固件允许使用可调整的BAR技术，但通常将可配置的选项限制为故障安全默认值（OFF）和最大可用值（ON）。这个选项允许为测试和开发目的对这个值进行微调。
+
+注1：这个选项不能用于解决macOS对超过1GB的BAR的限制。应该使用ResizeAppleGpuBars来代替。
+注2：虽然这个选项可以增加GPU PCI BAR的大小，但这在大多数固件上是行不通的，因为该选项并没有重新定位内存中的BAR，而且它们很可能会发生重叠。欢迎大家为改善这一功能做出贡献。</string>
+                </property>
+                <property name="text">
+                 <string>ResizeGpuBars</string>
                 </property>
                </widget>
               </item>
@@ -9899,22 +9909,6 @@ Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algor
                 </property>
                 <property name="text">
                  <string>RequestBootVarRouting</string>
-                </property>
-               </widget>
-              </item>
-              <item row="11" column="1">
-               <widget class="QLineEdit" name="editIntExitBootServicesDelay">
-                <property name="minimumSize">
-                 <size>
-                  <width>200</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>150</width>
-                  <height>16777215</height>
-                 </size>
                 </property>
                </widget>
               </item>
@@ -9940,38 +9934,155 @@ This setting allows running some software written for UEFI 2.x firmware like NVI
                 </property>
                </widget>
               </item>
-              <item row="10" column="1">
-               <widget class="QCheckBox" name="chkForceOcWriteFlash">
-                <property name="toolTip">
-                 <string>Type: plist boolean
-
-Description: Enables writing to flash memory for all OpenCore system variables.
-
-Note: This value should be disabled on most types of firmware but is left configurable to account for firmware that may have issues with volatile variable storage overflows or similar. Boot issues across multiple OSes can be observed on e.g. Lenovo Thinkpad T430 and T530 without this quirk. Apple variables related to Secure Boot and hibernation are exempt from this for security reasons. Furthermore, some OpenCore variables are exempt for different reasons, such as the boot log due to an available user option, and the TSC frequency due to timing issues. When toggling this option, a NVRAM reset may be required to ensure full functionality.
-----
-类型：plist布尔值
-
-描述：启用所有OpenCore系统变量对闪存的写入。
-
-注意：这个值在大多数类型的固件上应该是禁用的，但为了考虑到可能有易失性变量存储溢出或类似问题的固件，这个值是可配置的。在例如联想Thinkpad T430和T530上可以观察到跨多个操作系统的启动问题，没有这个选项。出于安全原因，与安全启动和休眠有关的苹果变量不在此列。此外，一些OpenCore变量由于不同的原因被豁免，例如由于一个可用的用户选项，启动日志，以及由于时间问题，TSC频率。在切换该选项时，可能需要对NVRAM进行重置，以确保完整的功能。</string>
+              <item row="12" column="1">
+               <widget class="QLineEdit" name="editIntExitBootServicesDelay">
+                <property name="minimumSize">
+                 <size>
+                  <width>200</width>
+                  <height>0</height>
+                 </size>
                 </property>
-                <property name="text">
-                 <string>ForceOcWriteFlash</string>
+                <property name="maximumSize">
+                 <size>
+                  <width>150</width>
+                  <height>16777215</height>
+                 </size>
                 </property>
                </widget>
               </item>
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="chkActivateHpetSupport">
+              <item row="14" column="0">
+               <widget class="QLabel" name="label_29">
                 <property name="toolTip">
-                 <string notr="true">Older boards like ICH6 may not always have HPET setting in the firmware preferences, this option tries to force enable it.
+                 <string notr="true">The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds and depends on the amount of cores present on the platform, the recommended starting value is 500000.
+
+This is an experimental quirk, which should only be used for the aforementioned problem. In all other cases the quirk may render the operating system unstable and is not recommended. The recommended solution in the other cases is to install a kernel driver like VoodooTSCSync, TSCAdjustReset, or CpuTscSync (a more specialised variant of VoodooTSCSync for newer laptops).
+
+Note: The reason this quirk cannot replace the kernel driver is because it cannot operate in ACPI S3 mode (sleep wake) and because the UEFI firmwares provide very limited multicore support preventing the precise update of the MSR registers.
 ----
-旧的板子，如ICH6，可能并不总是有HPET设置在固件首选项中，这个选项试图强制启用它。</string>
+该选项的主要目的是在运行调试XNU内核时，在一些服务器和笔记本型号上实现早期的引导TSC同步。对于调试内核，在任何kext启动之前，TSC需要在各个内核之间保持同步，从而使所有其他解决方案出现问题。超时时间以微秒为单位，取决于平台上的核心数量，推荐的起始值是500000。
+
+这是一个实验性的选项，只能用于上述问题。在所有其他情况下，该选项可能会使操作系统不稳定，不建议使用。在其他情况下，推荐的解决方案是安装一个内核驱动，比如VoodooTSCSync、TSCAdjustReset或CpuTscSync（VoodooTSCSync的一个更专业的变种，适用于较新的笔记本电脑）。
+
+注意：该选项不能取代内核驱动的原因是它不能在ACPI S3模式下运行（睡眠唤醒），而且UEFI固件提供的多核支持非常有限，无法精确更新MSR寄存器。</string>
                 </property>
                 <property name="statusTip">
-                 <string>Activates HPET support.</string>
+                 <string>Attempts to perform TSC synchronisation with a specified timeout.</string>
                 </property>
                 <property name="text">
-                 <string>ActivateHpetSupport</string>
+                 <string>TscSyncTimeout</string>
+                </property>
+               </widget>
+              </item>
+              <item row="12" column="0">
+               <widget class="QLabel" name="label_28">
+                <property name="toolTip">
+                 <string notr="true">This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,namely ASUS Z87-Pro, when using FileVault 2 in particular. 
+
+It seems that for some reason they execute code in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. 
+
+A better approach should be found in some future. Expect 3-5 seconds to be enough in case the quirk is needed.
+----
+这是一个非常简陋的选项，以避免在选择APTIO 4固件，即华硕Z87-Pro上出现“仍在等待根设备”的消息，特别是在使用FileVault 2时。
+
+似乎出于某种原因，它们并行执行退出_启动_服务的代码，这导致SATA控制器无法从macOS访问。
+
+将来应该会找到更好的方法，目前采用它以防不时之需。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</string>
+                </property>
+                <property name="text">
+                 <string>ExitBootServicesDelay</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QCheckBox" name="chkReleaseUsbOwnership">
+                <property name="toolTip">
+                 <string notr="true">Attempt to detach USB controller ownership from the firmware driver. While most firmwares manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system may freeze upon boot. Not recommended unless required.
+----
+尝试将USB控制器的所有权从固件驱动程序中分离出来。虽然大多数固件都能正确地做到这一点，或者至少有一个选项，但有些固件却做不到。因此，操作系统可能在启动时冻结。除非需要，否则不建议使用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
+ manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
+ may freeze upon boot. Not recommended unless required.</string>
+                </property>
+                <property name="text">
+                 <string>ReleaseUsbOwnership</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QCheckBox" name="chkReloadOptionRoms">
+                <property name="toolTip">
+                 <string notr="true">Type: plist boolean
+
+Description: Query PCI devices and reload their Option ROMs if available.
+
+For example, this option allows reloading NVIDIA GOP Option ROM on older Macs after the firmware version is upgraded via ForgeUefiSupport.
+
+----
+
+类型：plist boolean
+
+描述：查询PCI设备并重新加载其可用的Option ROM。
+
+例如，在通过ForgeUefiSupport升级固件版本后，该选项允许在旧的Mac上重新加载NVIDIA GOP Option ROM。</string>
+                </property>
+                <property name="text">
+                 <string>ReloadOptionRoms</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="0">
+               <widget class="QCheckBox" name="chkEnableVectorAcceleration">
+                <property name="toolTip">
+                 <string notr="true">Type: plist boolean
+
+Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algorithms.
+----
+类型：plist布尔值
+
+说明：启用SHA-512和SHA-384哈希算法的AVX矢量加速。</string>
+                </property>
+                <property name="text">
+                 <string>EnableVectorAcceleration</string>
+                </property>
+               </widget>
+              </item>
+              <item row="14" column="1">
+               <widget class="QLineEdit" name="editIntTscSyncTimeout">
+                <property name="minimumSize">
+                 <size>
+                  <width>200</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>150</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="13" column="1">
+               <widget class="QLineEdit" name="editIntResizeGpuBars">
+                <property name="minimumSize">
+                 <size>
+                  <width>200</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>150</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>-1</string>
                 </property>
                </widget>
               </item>
@@ -10007,95 +10118,10 @@ Note: This value should be disabled on most types of firmware but is left config
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
-               <widget class="QCheckBox" name="chkReleaseUsbOwnership">
-                <property name="toolTip">
-                 <string notr="true">Attempt to detach USB controller ownership from the firmware driver. While most firmwares manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system may freeze upon boot. Not recommended unless required.
-----
-尝试将USB控制器的所有权从固件驱动程序中分离出来。虽然大多数固件都能正确地做到这一点，或者至少有一个选项，但有些固件却做不到。因此，操作系统可能在启动时冻结。除非需要，否则不建议使用。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
- manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
- may freeze upon boot. Not recommended unless required.</string>
-                </property>
+              <item row="11" column="0">
+               <widget class="QCheckBox" name="chkEnableVmx">
                 <property name="text">
-                 <string>ReleaseUsbOwnership</string>
-                </property>
-               </widget>
-              </item>
-              <item row="13" column="0">
-               <widget class="QLabel" name="label_29">
-                <property name="toolTip">
-                 <string notr="true">The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds and depends on the amount of cores present on the platform, the recommended starting value is 500000.
-
-This is an experimental quirk, which should only be used for the aforementioned problem. In all other cases the quirk may render the operating system unstable and is not recommended. The recommended solution in the other cases is to install a kernel driver like VoodooTSCSync, TSCAdjustReset, or CpuTscSync (a more specialised variant of VoodooTSCSync for newer laptops).
-
-Note: The reason this quirk cannot replace the kernel driver is because it cannot operate in ACPI S3 mode (sleep wake) and because the UEFI firmwares provide very limited multicore support preventing the precise update of the MSR registers.
-----
-该选项的主要目的是在运行调试XNU内核时，在一些服务器和笔记本型号上实现早期的引导TSC同步。对于调试内核，在任何kext启动之前，TSC需要在各个内核之间保持同步，从而使所有其他解决方案出现问题。超时时间以微秒为单位，取决于平台上的核心数量，推荐的起始值是500000。
-
-这是一个实验性的选项，只能用于上述问题。在所有其他情况下，该选项可能会使操作系统不稳定，不建议使用。在其他情况下，推荐的解决方案是安装一个内核驱动，比如VoodooTSCSync、TSCAdjustReset或CpuTscSync（VoodooTSCSync的一个更专业的变种，适用于较新的笔记本电脑）。
-
-注意：该选项不能取代内核驱动的原因是它不能在ACPI S3模式下运行（睡眠唤醒），而且UEFI固件提供的多核支持非常有限，无法精确更新MSR寄存器。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Attempts to perform TSC synchronisation with a specified timeout.</string>
-                </property>
-                <property name="text">
-                 <string>TscSyncTimeout</string>
-                </property>
-               </widget>
-              </item>
-              <item row="12" column="0">
-               <widget class="QLabel" name="label_115">
-                <property name="toolTip">
-                 <string>Type: plist integer
-Description: Configure GPU PCI BAR sizes.
-
-This quirk sets GPU PCI BAR sizes as specified or chooses the largest available below the ResizeGpuBars value.
-The specified value follows PCI Resizable BAR spec. Use 0 for 1 MB, 1 for 2 MB, 2 for 4 MB, and so on up to 19 for 512 GB.
-Resizable BAR technology allows to ease PCI device programming by mapping a configurable memory region,BAR, into CPU address space (e.g. VRAM to RAM) as opposed to a fixed memory region. This technology is necessary, because one cannot map the largest memory region by default, for the reasons of backwards compatibility with older hardware not supporting 64-bit BARs. Consequentially devices of the last decade use BARs up to 256 MB by default (4 remaining bits are used by other data) but generally allow resizing them to both smaller and larger powers of two (e.g. from 1 MB up to VRAM size).
-Operating systems targeting x86 platforms generally do not control PCI address space, letting UEFI firmware decide on the BAR addresses and sizes. This illicit practice resulted in Resizable BAR technology being unused up until 2020 despite being standardised in 2008 and becoming widely available in the hardware soon after.
-Modern UEFI firmware allow the use of Resizable BAR technology but generally restrict the configurable options to failsafe default (OFF) and maximum available (ON). This quirk allows to fine-tune this value for testing and development purposes.
-Note 1 : This quirk shall not be used to workaround macOS limitation to address BARs over 1 GB. ResizeAppleGpuBars should be used instead.
-Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on most firmware as is, because the quirk does not relocate BARs in memory, and they will likely overlap. Contributions to improve this feature are welcome.
-----
-类型：plist整数
-描述：配置GPU PCI BAR的大小。
-
-这个选项设置GPU PCI BAR尺寸为指定的，或者选择低于ResizeGpuBars值的最大可用值。
-指定的值遵循PCI可调整的BAR规格。使用0代表1MB，1代表2MB，2代表4MB，以此类推，直到19代表512GB。
-可调整的BAR技术允许通过将可配置的内存区域、BAR，映射到CPU地址空间（例如，VRAM到RAM），而不是固定的内存区域，来简化PCI设备编程。这项技术是必要的，因为人们不能在默认情况下映射最大的内存区域，原因是要向后兼容不支持64位BAR的旧硬件。因此，过去十年的设备默认使用256MB的BAR（剩下的4位被其他数据使用），但通常允许将它们的大小调整为更小和更大的2次方（例如，从1MB到VRAM大小）。
-
-针对x86平台的操作系统通常不控制PCI地址空间，让UEFI固件决定BAR地址和大小。这种非法的做法导致可重置的BAR技术直到2020年都没有被使用，尽管它在2008年被标准化，并很快在硬件中广泛使用。
-
-现代UEFI固件允许使用可调整的BAR技术，但通常将可配置的选项限制为故障安全默认值（OFF）和最大可用值（ON）。这个选项允许为测试和开发目的对这个值进行微调。
-
-注1：这个选项不能用于解决macOS对超过1GB的BAR的限制。应该使用ResizeAppleGpuBars来代替。
-注2：虽然这个选项可以增加GPU PCI BAR的大小，但这在大多数固件上是行不通的，因为该选项并没有重新定位内存中的BAR，而且它们很可能会发生重叠。欢迎大家为改善这一功能做出贡献。</string>
-                </property>
-                <property name="text">
-                 <string>ResizeGpuBars</string>
-                </property>
-               </widget>
-              </item>
-              <item row="12" column="1">
-               <widget class="QLineEdit" name="editIntResizeGpuBars">
-                <property name="minimumSize">
-                 <size>
-                  <width>200</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>150</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>-1</string>
+                 <string>EnableVmx</string>
                 </property>
                </widget>
               </item>
