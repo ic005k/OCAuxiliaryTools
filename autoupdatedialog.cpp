@@ -18,10 +18,11 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   setWindowTitle(tr("Download Upgrade Packages"));
   ui->progressBar->setTextVisible(false);
   Init();
+
   tempDir = QDir::homePath() + "/tempocat/";
-  MainWindow *mainWindow = qobject_cast<MainWindow *>(parent);
-  if (mainWindow)
-      mainWindow->deleteDirfile(tempDir);
+  MainWindow* mainWindow = qobject_cast<MainWindow*>(parent);
+  if (mainWindow) mainWindow->deleteDirfile(tempDir);
+
   ui->textEdit->setVisible(false);
 }
 
@@ -109,11 +110,6 @@ void AutoUpdateDialog::doProcessDownloadProgress(qint64 recv_total,
     } else
       blCanBeUpdate = true;
   }
-}
-
-void AutoUpdateDialog::doProcessError(QNetworkReply::NetworkError code) {
-  Q_UNUSED(code);
-  qDebug() << "Error : " << reply->error();
 }
 
 void AutoUpdateDialog::on_btnStartUpdate_clicked() {
@@ -240,9 +236,6 @@ void AutoUpdateDialog::startDownload(bool Database) {
           &AutoUpdateDialog::doProcessFinished);  //结束
   connect(reply, &QNetworkReply::downloadProgress, this,
           &AutoUpdateDialog::doProcessDownloadProgress);  //大小
-  // connect(reply,
-  //        QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-  //        this, &AutoUpdateDialog::doProcessError);  //异常
 
   QStringList list = strUrl.split("/");
   filename = list.at(list.length() - 1);
@@ -478,7 +471,7 @@ void AutoUpdateDialog::onReadData() {
 
 void AutoUpdateDialog::UpdateTextShow() {
   QString strInfoFile = tempDir + "info.txt";
-  if (!QFileInfo(strInfoFile).exists()) return;
+  if (!QFile(strInfoFile).exists()) return;
 
   QFile* file = new QFile;
   file->setFileName(strInfoFile);
