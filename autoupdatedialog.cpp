@@ -19,7 +19,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   ui->progressBar->setTextVisible(false);
   Init();
   tempDir = QDir::homePath() + "/tempocat/";
-  mw_one->deleteDirfile(tempDir);
+  qobject_cast<MainWindow *>(parent)->deleteDirfile(tempDir);
   ui->textEdit->setVisible(false);
 }
 
