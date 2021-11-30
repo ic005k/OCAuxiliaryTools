@@ -10619,7 +10619,7 @@ Enable this option to be able to see all the boot options when having multiple d
   </action>
   <action name="actionOpen_Directory">
    <property name="text">
-    <string>Open Directory</string>
+    <string>Browse Catalog</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+8</string>

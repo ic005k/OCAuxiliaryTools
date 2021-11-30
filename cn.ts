@@ -1937,26 +1937,36 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
     </message>
     <message>
         <location filename="mainwindow.ui" line="10622"/>
-        <source>Open Directory</source>
-        <translation>打开目录</translation>
+        <source>Browse Catalog</source>
+        <translation>浏览目录</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10633"/>
+        <location filename="mainwindow.ui" line="10625"/>
+        <source>Ctrl+8</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="10657"/>
+        <source>Ctrl+7</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="10636"/>
         <source>Automatically check for updates</source>
         <translation>自动检查更新</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10638"/>
+        <location filename="mainwindow.ui" line="10641"/>
         <source>Edit Preset</source>
         <translation>编辑预置文件</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10643"/>
+        <location filename="mainwindow.ui" line="10646"/>
         <source>OCAuxiliaryTools  Documentation</source>
         <translation>OCAuxiliaryTools 文档</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="10651"/>
+        <location filename="mainwindow.ui" line="10654"/>
         <source>Backup EFI to Desktop &quot;Backup EFI&quot;</source>
         <translation>备份EFI到桌面&quot;Backup EFI&quot;目录</translation>
     </message>
