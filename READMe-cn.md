@@ -23,6 +23,12 @@ OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用�
 
 OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下载
 
+一些在线资源，感谢 @5T33Z0
+https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks
+
+https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md
+
+
 ---
 
 ### 如何配置一个全新的EFI？
