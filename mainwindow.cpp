@@ -115,8 +115,8 @@ MainWindow::MainWindow(QWidget* parent)
 
   m_recentFiles = new RecentFiles(this);
   // m_recentFiles->attachToMenuAfterItem(ui->menuFile, tr("Save As..."),
-  // SLOT(recentOpen(QString)));
-  m_recentFiles->setNumOfRecentFiles(10);
+  //                                     SLOT(recentOpen(QString)));
+  // m_recentFiles->setNumOfRecentFiles(10);
 
   initRecentFilesForToolBar();
 
@@ -6166,15 +6166,19 @@ void MainWindow::init_FileMenu() {
   btn0->setToolTip(tr("Open Recent..."));
   btn0->setIcon(QIcon(":/icon/rp.png"));
   btn0->setPopupMode(QToolButton::InstantPopup);
-  ui->toolBar->addWidget(btn0);
+  // ui->toolBar->addWidget(btn0);
+  // btn0->setMenu(reFileMenu);
+  btn0->setVisible(false);
+
   reFileMenu = new QMenu(this);
-  btn0->setMenu(reFileMenu);
+  reFileMenu->setTitle(tr("Recently Open"));
+  ui->menuFile->addMenu(reFileMenu);
 
   // Open Dir
   if (mac || osx1012) ui->actionOpen_Directory->setIconVisibleInMenu(false);
   ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
-  ui->toolBar->addAction(ui->actionOpen_Directory);
-  ui->toolBar->addSeparator();
+  // ui->toolBar->addAction(ui->actionOpen_Directory);
+  // ui->toolBar->addSeparator();
 
   // Save
   if (mac || osx1012) ui->actionSave->setIconVisibleInMenu(false);

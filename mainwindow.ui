@@ -111,7 +111,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -10621,6 +10621,9 @@ Enable this option to be able to see all the boot options when having multiple d
    <property name="text">
     <string>Open Directory</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+8</string>
+   </property>
   </action>
   <action name="actionAutoChkUpdate">
    <property name="checkable">
@@ -10649,6 +10652,9 @@ Enable this option to be able to see all the boot options when having multiple d
   <action name="actionBackup_EFI">
    <property name="text">
     <string>Backup EFI to Desktop &quot;Backup EFI&quot;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+7</string>
    </property>
   </action>
  </widget>
