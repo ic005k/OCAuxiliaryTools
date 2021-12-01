@@ -1,0 +1,31 @@
+CPU:Intel 10th Gen Comet Lake (Dektop/Mobile/Nuc)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
+
+CPU:Intel 8th and 9th Gen Coffee Lake and Cascade Lake X (Desktop/High End Desktop)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
+
+CPU:Intel 9th Gen Coffee Lake (Z390 Chipset)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
+
+CPU:Intel 8th and 9th Gen Coffee Lake (Mobile/Nuc)
+Booter:AvoidRuntimeDefrag EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
+
+CPU:Intel 6th Gen Skylake and 7th Gen Kaby Lake (Desktop/Mobile/NUC)
+Booter:AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide SetupVirtualMap
+
+CPU:Intel 4th Gen Haswell and 5th Gen Broadwell (Desktop/Mobile/NUC)
+Booter:AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide SetupVirtualMap
+
+CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (Desktop/Mobile/NUC)
+Booter:AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide SetupVirtualMap
+
+CPU:AMD Ryzen (17h)
+Booter:AvoidRuntimeDefrag EnableSafeModeSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
+
+CPU:AMD Threadripper TRx 40 (19h)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
+
+CPU:AMD Bulldozer (15h) and Jaguar (16h)
+Booter:AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap
+
+Thanks to @5T33Z0 for providing the above content.

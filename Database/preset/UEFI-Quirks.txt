@@ -1,0 +1,62 @@
+CPU:Intel 10th Gen Comet Lake (Dektop)
+UEFI:EnableVectorAcceleration RequestBootVarRouting
+
+CPU:Intel 10th Gen Comet Lake (Mobile/NUC)
+UEFI:EnableVectorAcceleration ReleaseUsbOwnership RequestBootVarRouting
+
+CPU:Intel 10th Gen Comet Lake (HP Desktop)
+UEFI:EnableVectorAcceleration RequestBootVarRouting UnblockFsConnect
+
+CPU:Intel 10th Gen Comet Lake (HP Mobile/NUC)
+UEFI:EnableVectorAcceleration ReleaseUsbOwnership RequestBootVarRouting UnblockFsConnect
+
+CPU:Intel 8th and 9th Gen Coffee Lake (Desktop)
+UEFI:RequestBootVarRouting
+
+CPU:Intel 8th and 9th Gen Coffee Lake (HP Desktop)
+UEFI: RequestBootVarRouting UnblockFsConnect
+
+CPU:Intel 8th and 9th Gen Coffee Lake (Mobile/NUC)
+UEFI:ReleaseUsbOwnership RequestBootVarRouting
+
+CPU:Intel 8th and 9th Gen Coffee Lake (HP Mobile/NUC)
+UEFI:ReleaseUsbOwnership RequestBootVarRouting UnblockFsConnect
+
+CPU:Intel 6th Gen Skylake and 7th Gen Kaby Lake (Desktop/Mobile/NUC)
+UEFI:RequestBootVarRouting
+
+CPU:Intel 6th Gen Skylake and 7th Gen Kaby Lake (HP Desktop/Mobile/NUC)
+UEFI:RequestBootVarRouting UnblockFsConnect
+
+CPU:Intel 5th Gen Broadwell (Mobile/NUC)
+UEFI:IgnoreInvalidFlexRatio ReleaseUsbOwnership RequestBootVarRouting
+
+CPU:Intel 5th Gen Broadwell (HP Mobile/NUC)
+UEFI:IgnoreInvalidFlexRatio ReleaseUsbOwnership RequestBootVarRouting UnblockFsConnect
+
+CPU:Intel 4th Gen Haswell (Desktop)
+UEFI:IgnoreInvalidFlexRatio
+
+CPU:Intel 4th Gen Haswell (HP Desktop)
+UEFI:IgnoreInvalidFlexRatio UnblockFsConnect
+
+CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (Desktop)
+UEFI:IgnoreInvalidFlexRatio
+
+CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (Mobile/NUC)
+UEFI:IgnoreInvalidFlexRatio ReleaseUsbOwnership
+
+CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (HP Desktop)
+UEFI:IgnoreInvalidFlexRatio UnblockFsConnect
+
+CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (HP Mobile/NUC)
+UEFI:IgnoreInvalidFlexRatio ReleaseUsbOwnership UnblockFsConnect
+
+CPU:AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h)
+UEFI: EnableVectorAcceleration RequestBootVarRouting
+
+
+CPU:AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h) [HP]
+UEFI:EnableVectorAcceleration RequestBootVarRouting UnblockFsConnect
+
+Thanks to @5T33Z0 for providing the above content.

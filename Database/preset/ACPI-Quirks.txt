@@ -1,0 +1,10 @@
+CPU:macOS High Sierra
+ACPI:ResetLogoStatus NormalizeHeaders
+
+CPU:Patched DSDT
+ACPI:ResetLogoStatus NormalizeHeaders RebaseRegions
+
+**NOTES**:
+This Section is more relevant to the used macOS version and ACPI files rather than the CPU itself.
+
+Thanks to @5T33Z0 for providing the above content.

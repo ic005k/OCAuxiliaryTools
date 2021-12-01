@@ -1,0 +1,56 @@
+CPU:Intel 10th Gen Comet Lake (Dektop/Mobile/Nuc)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 10th Gen Comet Lake (Dell/Sony VAIO)
+Kernel:AppleXcpmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 10th Gen Comet Lake (HP)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 8th and 9th Gen Coffee Lake (Desktop/Mobile/NUC)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 8th and 9th Gen Coffee Lake (Dell/Sony VAIO)
+Kernel:AppleXcpmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 8th and 9th Gen Coffee Lake (HP)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 6th Gen Skylake and 7th Gen Kaby Lake (Desktop/Mobile/NUC)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 6th Gen Skylake and 7th Gen Kaby Lake (Dell/SonyVaio)
+Kernel:AppleXcpmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 6th Gen Skylake and 7th Gen Kaby Lake (HP)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 4th Gen Haswell and 5th Gen Broadwell (Desktop/Mobile/NUC)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 4th Gen Haswell and 5th Gen Broadwell (Dell/Sony VAIO)
+Kernel:AppleXcpmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 4th Gen Haswell and 5th Gen Broadwell (HP)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (Desktop/Mobile/NUC)
+Kernel: AppleCpuPmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (Dell/Sony VAIO)
+Kernel:AppleCpuPmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (HP)
+Kernel:AppleCpuPmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h)
+Kernel: PanicNoKextDump PowerTimeoutKernelPanic ProvideCurrentCpuInfo
+
+**NOTES**
+
+- `AppleXcpmCfgLock`: Not needed if you can disable CFGLock in BIOS 
+- `XhciPortLimit`: Disable for macOS 11.3 and newer – create a custom USB Port Map instead!
+- AMD CPUs require `Kernel` > `Emulate`: `DummyPowerManagement`
+- AMD CPUs also require additional [**Kernel patches**](https://github.com/AMD-OSX/AMD_Vanilla/tree/master) to run macOS.
+
+Thanks to @5T33Z0 for providing the above content.
