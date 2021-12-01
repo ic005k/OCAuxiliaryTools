@@ -1639,6 +1639,7 @@ QStringList Method::getMarkerQuirks(QString arg1, QString strItem, QWidget* tab,
   for (int i = 0; i < listChkBox.count(); i++) {
     QCheckBox* w = (QCheckBox*)listChkBox.at(i);
     font.setBold(false);
+    font.setItalic(false);
     w->setFont(font);
   }
   for (int i = 0; i < listChkBox.count(); i++) {
@@ -1647,6 +1648,7 @@ QStringList Method::getMarkerQuirks(QString arg1, QString strItem, QWidget* tab,
     for (int j = 0; j < l2.count(); j++) {
       if (w->text() == l2.at(j)) {
         font.setBold(true);
+        font.setItalic(true);
         w->setFont(font);
       }
     }
@@ -1656,6 +1658,7 @@ QStringList Method::getMarkerQuirks(QString arg1, QString strItem, QWidget* tab,
     for (int i = 0; i < listChkBox.count(); i++) {
       QCheckBox* w = (QCheckBox*)listChkBox.at(i);
       font.setBold(false);
+      font.setItalic(false);
       w->setFont(font);
     }
   }
