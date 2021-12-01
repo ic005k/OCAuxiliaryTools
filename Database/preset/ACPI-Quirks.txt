@@ -1,8 +1,10 @@
 CPU:macOS High Sierra
 ACPI:ResetLogoStatus NormalizeHeaders
+**Description**: Removes illegal characters from ACPI Table Headers (if present). Otherwise they cause a panic during boot in macOS High Sierra
 
 CPU:Patched DSDT
 ACPI:ResetLogoStatus NormalizeHeaders RebaseRegions
+**Description**: Helpful if a patched DSDT is used instead of SSDT Hotfixes.
 
 **NOTES**:
 This Section is more relevant to the used macOS version and ACPI files rather than the CPU itself.
