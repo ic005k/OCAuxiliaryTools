@@ -629,6 +629,8 @@ void MainWindow::initui_acpi() {
 void MainWindow::initui_booter() {
   QTableWidgetItem* id0;
 
+  mymethod->init_PresetQuirks(ui->comboBoxBooter, "Booter-Quirks.txt");
+
   // Patch
 
   ui->table_Booter_patch->setColumnCount(11);
@@ -889,6 +891,9 @@ void MainWindow::ParserDP(QVariantMap map) {
 
 void MainWindow::initui_kernel() {
   QTableWidgetItem* id0;
+
+  mymethod->init_PresetQuirks(ui->comboBoxKernel, "Kernel-Quirks.txt");
+
   // Add
   ui->table_kernel_add->setColumnCount(8);
 
@@ -2314,6 +2319,8 @@ void MainWindow::ParserPlatformInfo(QVariantMap map) {
 }
 
 void MainWindow::initui_UEFI() {
+  mymethod->init_PresetQuirks(ui->comboBoxUEFI, "UEFI-Quirks.txt");
+
   // APFS
   ui->calendarWidget->setVisible(false);
 
@@ -6684,10 +6691,7 @@ void MainWindow::CopyLabel() {
 void MainWindow::setCheckBoxWidth(QCheckBox* cbox) {
   QFont myFont(cbox->font().family(), cbox->font().pixelSize());
   QString str;
-  if (!win)
-    str = cbox->text() + "        ";
-  else
-    str = cbox->text() + "            ";
+  str = cbox->text() + "              ";
   QFontMetrics fm(myFont);
   int w;
 
@@ -9073,8 +9077,9 @@ void MainWindow::init_setWindowModified() {
   listOfComboBox = getAllComboBox(getAllUIControls(ui->tabTotal));
   for (int i = 0; i < listOfComboBox.count(); i++) {
     QComboBox* w = (QComboBox*)listOfComboBox.at(i);
-
-    connect(w, &QComboBox::currentTextChanged, this, &MainWindow::setWM);
+    if (w != ui->comboBoxACPI && w != ui->comboBoxBooter &&
+        w != ui->comboBoxKernel && w != ui->comboBoxUEFI)
+      connect(w, &QComboBox::currentTextChanged, this, &MainWindow::setWM);
   }
 
   // Table
@@ -9796,7 +9801,8 @@ QVariantMap MainWindow::setComboBoxValue(QVariantMap map, QWidget* tab) {
     QString name = w->objectName().mid(4, w->objectName().count() - 3);
 
     if (w != ui->cboxFind && w != ui->cboxTextColor && w != ui->cboxBackColor &&
-        w != ui->comboBoxACPI) {
+        w != ui->comboBoxACPI && w != ui->comboBoxBooter &&
+        w != ui->comboBoxKernel && w != ui->comboBoxUEFI) {
       if (name != "SystemProductName") {
         map.insert(name, w->currentText().trimmed());
 
@@ -10878,8 +10884,22 @@ void MainWindow::on_actionBackup_EFI_triggered() { mymethod->backupEFI(); }
 
 void MainWindow::on_comboBoxACPI_currentTextChanged(const QString& arg1) {
   if (Initialization) return;
-  bool md = this->isWindowModified();
   mymethod->getMarkerQuirks(arg1, "ACPI", ui->tabACPI4, "ACPI-Quirks.txt");
-  this->setWindowModified(md);
-  updateIconStatus();
+}
+
+void MainWindow::on_comboBoxBooter_currentIndexChanged(const QString& arg1) {
+  if (Initialization) return;
+  mymethod->getMarkerQuirks(arg1, "Booter", ui->tabBooter3,
+                            "Booter-Quirks.txt");
+}
+
+void MainWindow::on_comboBoxKernel_currentIndexChanged(const QString& arg1) {
+  if (Initialization) return;
+  mymethod->getMarkerQuirks(arg1, "Kernel", ui->tabKernel6,
+                            "Kernel-Quirks.txt");
+}
+
+void MainWindow::on_comboBoxUEFI_currentIndexChanged(const QString& arg1) {
+  if (Initialization) return;
+  mymethod->getMarkerQuirks(arg1, "UEFI", ui->tabUEFI8, "UEFI-Quirks.txt");
 }

@@ -1611,9 +1611,11 @@ QStringList Method::getMarkerQuirks(QString arg1, QString strItem, QWidget* tab,
             if (strItem == "ACPI")
               strQuriks = getTextEditLineText(txtEdit, i + 1);
             if (strItem == "Booter")
-              strQuriks = getTextEditLineText(txtEdit, i + 2);
+              strQuriks = getTextEditLineText(txtEdit, i + 1);
             if (strItem == "Kernel")
-              strQuriks = getTextEditLineText(txtEdit, i + 3);
+              strQuriks = getTextEditLineText(txtEdit, i + 1);
+            if (strItem == "UEFI")
+              strQuriks = getTextEditLineText(txtEdit, i + 1);
             QStringList l1 = strQuriks.split(":");
             if (l1.count() == 2) {
               QString str = l1.at(1);

@@ -930,6 +930,12 @@ class MainWindow : public QMainWindow {
 
   void on_comboBoxACPI_currentTextChanged(const QString& arg1);
 
+  void on_comboBoxBooter_currentIndexChanged(const QString& arg1);
+
+  void on_comboBoxKernel_currentIndexChanged(const QString& arg1);
+
+  void on_comboBoxUEFI_currentIndexChanged(const QString& arg1);
+
  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;
