@@ -16,6 +16,7 @@
 #include <QProxyStyle>
 #include <QRegExp>
 #include <QSaveFile>
+#include <QSpacerItem>
 #include <QSplitter>
 #include <QStyledItemDelegate>
 #include <QTableWidget>

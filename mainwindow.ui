@@ -832,19 +832,19 @@ The issue was fixed in macOS Mojave (10.14).
               <item row="0" column="0">
                <widget class="QCheckBox" name="chkFadtEnableReset">
                 <property name="toolTip">
-                 <string notr="true">Description: Provide reset register and flag in FADT table to enable reboot and shutdown.
+                 <string notr="true">Type: plist boolean
 
-Mainly required on legacy hardware and a few newer laptops. Can also fix power-button shortcuts. 
+Description: Provide reset register and flag in FADT table to enable reboot and shutdown.
 
-Not recommended unless required.
+Mainly required on legacy hardware and a few newer laptops. Can also fix power-button shortcuts. Not recommended unless required.
 
 ----
 
-说明：在FADT表中提供复位寄存器和标志，以实现重启和关机。
+类型：plist布尔值
 
-主要用于传统硬件和一些新的笔记本电脑。也可以修复电源按钮的快捷方式。
+描述：在FADT表中提供复位寄存器和标志，以实现重启和关机。
 
-除非需要，否则不建议使用。</string>
+主要是在传统硬件和一些较新的笔记本上需要。也可以修复电源按钮的快捷方式。除非需要，否则不建议使用。</string>
                 </property>
                 <property name="statusTip">
                  <string>Provide reset register and flag in FADT table to enable reboot and shutdown.</string>

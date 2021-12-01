@@ -47,8 +47,7 @@ MainWindow::MainWindow(QWidget* parent)
 
   loadLocal();
 
-  title = "OC Auxiliary Tools   V" + CurVerison + " for OpenCore " + ocVer +
-          " [*]  ";
+  title = "OC Auxiliary Tools   V" + CurVerison + " [*]  ";
   setWindowTitle(title);
 
 #ifdef Q_OS_MAC
@@ -6161,6 +6160,17 @@ void MainWindow::init_FileMenu() {
   connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen);
   ui->actionOpen->setShortcut(tr("ctrl+o"));
 
+  QLabel* lblVer = new QLabel(this);
+  QFont font;
+  font.setBold(true);
+  lblVer->setFont(font);
+  lblVer->setText("OpenCore " + ocVer);
+  ui->toolBar->addWidget(lblVer);
+
+  QWidget* spacer = new QWidget(this);
+  spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  ui->toolBar->addWidget(spacer);
+
   //最近打开的文件快捷通道
   btn0 = new QToolButton(this);
   btn0->setToolTip(tr("Open Recent..."));
@@ -6172,7 +6182,7 @@ void MainWindow::init_FileMenu() {
 
   reFileMenu = new QMenu(this);
   reFileMenu->setTitle(tr("Recently Open"));
-  ui->menuFile->addMenu(reFileMenu);
+  ui->menuFile->insertMenu(ui->actionOpen_Directory, reFileMenu);
 
   // Open Dir
   if (mac || osx1012) ui->actionOpen_Directory->setIconVisibleInMenu(false);
@@ -6262,6 +6272,8 @@ void MainWindow::init_EditMenu() {
   });
   connect(btnBak, &QToolButton::clicked,
           [=]() { on_actionBackup_EFI_triggered(); });
+
+  ui->toolBar->addAction(ui->actionDatabase);
 }
 
 void MainWindow::init_HelpMenu() {
@@ -6284,7 +6296,6 @@ void MainWindow::init_HelpMenu() {
   connect(ui->actionOpenCanopyIcons, &QAction::triggered, this,
           &MainWindow::on_line5);
 
-  ui->toolBar->addSeparator();
   if (mac || osx1012) ui->actionOpenCore_Factory->setIconVisibleInMenu(false);
 
   if (mac || osx1012) ui->btnCheckUpdate->setIconVisibleInMenu(false);
@@ -6391,9 +6402,6 @@ void MainWindow::init_MainUI() {
   ui->toolBar->addWidget(ui->lblCount);
   ui->toolBar->addWidget(ui->cboxFind);
   ui->toolBar->addAction(ui->actionFind);
-
-  ui->toolBar->addSeparator();
-  ui->toolBar->addAction(ui->actionDatabase);
 
   init_HelpMenu();
 

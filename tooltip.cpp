@@ -118,7 +118,10 @@ void Tooltip::paintEvent(QPaintEvent* event) {
   // painter.drawRoundedRect(rect, 15, 15);
 
   QPainterPath painterPath;
-  painterPath.addRoundedRect(rect, 10, 10);
+  if (mw_one->mac)
+    painterPath.addRoundedRect(rect, 10, 10);
+  else
+    painterPath.addRoundedRect(rect, 0, 0);
   painter.drawPath(painterPath);
 
   QWidget::paintEvent(event);
