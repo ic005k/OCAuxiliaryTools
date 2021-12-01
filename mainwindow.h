@@ -928,6 +928,8 @@ class MainWindow : public QMainWindow {
 
   void on_actionBackup_EFI_triggered();
 
+  void on_comboBoxACPI_currentTextChanged(const QString& arg1);
+
  private:
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;

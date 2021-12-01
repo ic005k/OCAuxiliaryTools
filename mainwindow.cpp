@@ -538,6 +538,8 @@ void MainWindow::initui_acpi() {
   ui->btnExportMaster->setText(tr("Export") + "  ACPI");
   ui->btnImportMaster->setText(tr("Import") + "  ACPI");
 
+  mymethod->init_PresetQuirks(ui->comboBoxACPI, "ACPI-Quirks.txt");
+
   QTableWidgetItem* id0;
   QStringList fieldList;
 
@@ -5120,18 +5122,19 @@ void MainWindow::mount_esp() {
 }
 
 void MainWindow::readResultDiskInfo() {
-  ui->textDiskInfo->clear();
-  ui->textDiskInfo->setReadOnly(true);
+  QTextEdit* textDiskInfo = new QTextEdit;
+  textDiskInfo->clear();
+  textDiskInfo->setReadOnly(true);
   QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
   QString result = gbkCodec->toUnicode(di->readAll());
-  ui->textDiskInfo->append(result);
+  textDiskInfo->append(result);
 
   dlgMountESP* dlgMESP = new dlgMountESP(this);
 
   QString str0;
-  int count = ui->textDiskInfo->document()->lineCount();
+  int count = textDiskInfo->document()->lineCount();
   for (int i = 0; i < count; i++) {
-    str0 = ui->textDiskInfo->document()->findBlockByNumber(i).text().trimmed();
+    str0 = textDiskInfo->document()->findBlockByNumber(i).text().trimmed();
 
     QStringList strList = str0.simplified().split(" ");
     if (strList.count() >= 5) {
@@ -6023,7 +6026,6 @@ void MainWindow::init_listMainSub() {
   ui->tabNVRAM->setCurrentIndex(0);
   ui->tabPlatformInfo->setCurrentIndex(0);
   ui->tabUEFI->setCurrentIndex(0);
-  ui->textDiskInfo->setVisible(false);
 }
 
 void MainWindow::init_ToolBarIcon() {
@@ -9793,7 +9795,8 @@ QVariantMap MainWindow::setComboBoxValue(QVariantMap map, QWidget* tab) {
     QComboBox* w = (QComboBox*)listComboBox.at(i);
     QString name = w->objectName().mid(4, w->objectName().count() - 3);
 
-    if (w != ui->cboxFind && w != ui->cboxTextColor && w != ui->cboxBackColor) {
+    if (w != ui->cboxFind && w != ui->cboxTextColor && w != ui->cboxBackColor &&
+        w != ui->comboBoxACPI) {
       if (name != "SystemProductName") {
         map.insert(name, w->currentText().trimmed());
 
@@ -10872,3 +10875,11 @@ void MainWindow::on_actionOCAuxiliaryToolsDoc_triggered() {
 }
 
 void MainWindow::on_actionBackup_EFI_triggered() { mymethod->backupEFI(); }
+
+void MainWindow::on_comboBoxACPI_currentTextChanged(const QString& arg1) {
+  if (Initialization) return;
+  bool md = this->isWindowModified();
+  mymethod->getMarkerQuirks(arg1, "ACPI", ui->tabACPI4, "ACPI-Quirks.txt");
+  this->setWindowModified(md);
+  updateIconStatus();
+}

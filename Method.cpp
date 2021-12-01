@@ -1570,3 +1570,93 @@ void Method::backupEFI() {
                                            << strZipName);
   }
 }
+
+void Method::init_PresetQuirks(QComboBox* comboBox, QString quirksFile) {
+  QFileInfo appInfo(qApp->applicationDirPath());
+  QString strPresetQuirks =
+      appInfo.filePath() + "/Database/preset/" + quirksFile;
+  comboBox->addItem("None");
+  if (QFile(strPresetQuirks).exists()) {
+    QTextEdit* txtEdit = new QTextEdit;
+    txtEdit->setPlainText(loadText(strPresetQuirks));
+    for (int i = 0; i < txtEdit->document()->lineCount(); i++) {
+      QString strLine = getTextEditLineText(txtEdit, i).trimmed();
+      if (strLine.mid(0, 3) == "CPU") {
+        QStringList list = strLine.split(":");
+        if (list.count() == 2) {
+          comboBox->addItem(list.at(1));
+        }
+      }
+    }
+  }
+}
+
+QStringList Method::getMarkerQuirks(QString arg1, QString strItem, QWidget* tab,
+                                    QString quirksFile) {
+  QStringList l2 = QStringList() << "";
+
+  QFileInfo appInfo(qApp->applicationDirPath());
+  QString strPresetQuirks =
+      appInfo.filePath() + "/Database/preset/" + quirksFile;
+  if (QFile(strPresetQuirks).exists()) {
+    QTextEdit* txtEdit = new QTextEdit;
+    txtEdit->setPlainText(loadText(strPresetQuirks));
+    for (int i = 0; i < txtEdit->document()->lineCount(); i++) {
+      QString strLine = getTextEditLineText(txtEdit, i).trimmed();
+      if (strLine.mid(0, 3) == "CPU") {
+        QStringList list = strLine.split(":");
+        if (list.count() == 2) {
+          if (list.at(1) == arg1) {
+            QString strQuriks;
+            if (strItem == "ACPI")
+              strQuriks = getTextEditLineText(txtEdit, i + 1);
+            if (strItem == "Booter")
+              strQuriks = getTextEditLineText(txtEdit, i + 2);
+            if (strItem == "Kernel")
+              strQuriks = getTextEditLineText(txtEdit, i + 3);
+            QStringList l1 = strQuriks.split(":");
+            if (l1.count() == 2) {
+              QString str = l1.at(1);
+              l2 = str.split(" ");
+              for (int j = 0; j < l2.count(); j++) {
+                qDebug() << l2.at(j);
+              }
+            }
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  qDebug() << "------";
+
+  QList<QObject*> listChkBox =
+      mw_one->getAllCheckBox(mw_one->getAllUIControls(tab));
+  QFont font;
+  for (int i = 0; i < listChkBox.count(); i++) {
+    QCheckBox* w = (QCheckBox*)listChkBox.at(i);
+    font.setBold(false);
+    w->setFont(font);
+  }
+  for (int i = 0; i < listChkBox.count(); i++) {
+    QCheckBox* w = (QCheckBox*)listChkBox.at(i);
+
+    for (int j = 0; j < l2.count(); j++) {
+      if (w->text() == l2.at(j)) {
+        font.setBold(true);
+        w->setFont(font);
+      }
+    }
+  }
+
+  if (arg1 == "None") {
+    for (int i = 0; i < listChkBox.count(); i++) {
+      QCheckBox* w = (QCheckBox*)listChkBox.at(i);
+      font.setBold(false);
+      w->setFont(font);
+    }
+  }
+
+  return l2;
+}

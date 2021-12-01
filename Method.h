@@ -1,6 +1,7 @@
 #ifndef METHOD_H
 #define METHOD_H
 
+#include <QComboBox>
 #include <QDir>
 #include <QDirIterator>
 #include <QElapsedTimer>
@@ -102,6 +103,9 @@ class Method : public QMainWindow {
   void mount_esp_mac(QString strEfiDisk);
   QString getDriverInfo(QString strDisk, QString strDiskVol);
   void backupEFI();
+  void init_PresetQuirks(QComboBox *comboBox, QString quirksFile);
+  QStringList getMarkerQuirks(QString arg1, QString strItem, QWidget *tab,
+                              QString quirksFile);
  public slots:
   void generateEFI();
   void on_btnExportMaster();
