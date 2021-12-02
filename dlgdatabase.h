@@ -59,7 +59,19 @@ class dlgDatabase : public QDialog {
 
   void on_chkBoxLastFile_clicked(bool checked);
 
+  void on_chkOpenDir_stateChanged(int arg1);
+
+  void on_chkRecentOpen_stateChanged(int arg1);
+
+  void on_chkMountESP_stateChanged(int arg1);
+
+  void on_chkBackupEFI_stateChanged(int arg1);
+
+  void on_chkDatabase_stateChanged(int arg1);
+
  private:
+  void writeIni(QString key, int arg1);
+
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);

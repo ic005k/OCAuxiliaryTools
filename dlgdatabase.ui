@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -184,7 +184,7 @@ p, li { white-space: pre-wrap; }
       <attribute name="title">
        <string>Misc</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_7">
+      <layout class="QGridLayout" name="gridLayout_8">
        <item row="0" column="0">
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
@@ -332,6 +332,59 @@ p, li { white-space: pre-wrap; }
            <widget class="QCheckBox" name="chkBoxLastFile">
             <property name="text">
              <string>Automatically open the last opened file</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>Toolbar button (effective after the next app opening)</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="0" column="3">
+           <widget class="QCheckBox" name="chkMountESP">
+            <property name="text">
+             <string>Mount ESP</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="chkOpenDir">
+            <property name="text">
+             <string>Browse Catalog</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QCheckBox" name="chkBackupEFI">
+            <property name="text">
+             <string>Backup EFI</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QCheckBox" name="chkDatabase">
+            <property name="text">
+             <string>Database</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="chkRecentOpen">
+            <property name="text">
+             <string>Recently Open</string>
             </property>
            </widget>
           </item>

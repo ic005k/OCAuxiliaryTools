@@ -6180,24 +6180,32 @@ void MainWindow::init_FileMenu() {
   spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   ui->toolBar->addWidget(spacer);
 
-  //最近打开的文件快捷通道
-  btn0 = new QToolButton(this);
-  btn0->setToolTip(tr("Open Recent..."));
-  btn0->setIcon(QIcon(":/icon/rp.png"));
-  btn0->setPopupMode(QToolButton::InstantPopup);
-  // ui->toolBar->addWidget(btn0);
-  // btn0->setMenu(reFileMenu);
-  btn0->setVisible(false);
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
 
+  // Recent Open
   reFileMenu = new QMenu(this);
   reFileMenu->setTitle(tr("Recently Open"));
   ui->menuFile->insertMenu(ui->actionOpen_Directory, reFileMenu);
 
+  btn0 = new QToolButton(this);
+  btn0->setToolTip(tr("Open Recent..."));
+  btn0->setIcon(QIcon(":/icon/rp.png"));
+  btn0->setPopupMode(QToolButton::InstantPopup);
+  if (Reg.value("chkRecentOpen", 0).toBool() == true) {
+    ui->toolBar->addWidget(btn0);
+    btn0->setMenu(reFileMenu);
+  } else {
+    btn0->setVisible(false);
+  }
+
   // Open Dir
   if (mac || osx1012) ui->actionOpen_Directory->setIconVisibleInMenu(false);
   ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
-  // ui->toolBar->addAction(ui->actionOpen_Directory);
-  // ui->toolBar->addSeparator();
+  if (Reg.value("chkOpenDir", 0).toBool() == true) {
+    ui->toolBar->addAction(ui->actionOpen_Directory);
+    ui->toolBar->addSeparator();
+  }
 
   // Save
   if (mac || osx1012) ui->actionSave->setIconVisibleInMenu(false);
@@ -6220,6 +6228,9 @@ void MainWindow::init_FileMenu() {
 }
 
 void MainWindow::init_EditMenu() {
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+
   // Edit
   // OC Validate
   if (mac || osx1012) ui->actionOcvalidate->setIconVisibleInMenu(false);
@@ -6235,7 +6246,9 @@ void MainWindow::init_EditMenu() {
 
   ui->actionMountEsp->setShortcut(tr("ctrl+m"));
   ui->actionMountEsp->setIcon(QIcon(":/icon/esp.png"));
-  ui->toolBar->addAction(ui->actionMountEsp);
+  if (Reg.value("chkMountESP", 1).toBool() == true) {
+    ui->toolBar->addAction(ui->actionMountEsp);
+  }
 
   // GenerateEFI
   if (mac || osx1012) ui->actionGenerateEFI->setIconVisibleInMenu(false);
@@ -6260,10 +6273,11 @@ void MainWindow::init_EditMenu() {
   // Backup EFI
   if (mac || osx1012) ui->actionBackup_EFI->setIconVisibleInMenu(false);
   ui->actionBackup_EFI->setIcon(QIcon(":/icon/be.png"));
+
   btnBak = new QToolButton(this);
   btnBak->setIcon(QIcon(":/icon/be.png"));
   btnBak->setToolTip(ui->actionBackup_EFI->text());
-  ui->toolBar->addWidget(btnBak);
+
   QMenu* bakMenu = new QMenu(this);
   QAction* actOpenBakDir = new QAction(tr("Open backup directory"), this);
   bakMenu->addAction(actOpenBakDir);
@@ -6282,7 +6296,15 @@ void MainWindow::init_EditMenu() {
   connect(btnBak, &QToolButton::clicked,
           [=]() { on_actionBackup_EFI_triggered(); });
 
-  ui->toolBar->addAction(ui->actionDatabase);
+  if (Reg.value("chkBackupEFI", 1).toBool() == true) {
+    ui->toolBar->addWidget(btnBak);
+  } else {
+    btnBak->setVisible(false);
+  }
+
+  if (Reg.value("chkDatabase", 1).toBool() == true) {
+    ui->toolBar->addAction(ui->actionDatabase);
+  }
 }
 
 void MainWindow::init_HelpMenu() {

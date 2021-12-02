@@ -55,12 +55,11 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   ui->textEdit->setHidden(true);
 
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
   QFileInfo fi(qfile);
   QString strDef = "https://ghproxy.com/https://github.com/";
   QLocale locale;
   if (fi.exists()) {
-    QSettings Reg(qfile, QSettings::IniFormat);
-
     if (locale.language() == QLocale::Chinese) {
       ui->comboBoxNet->setCurrentText(Reg.value("Net", strDef).toString());
     } else {
@@ -82,6 +81,12 @@ dlgDatabase::dlgDatabase(QWidget *parent)
       ui->comboBoxNet->setCurrentText("https://github.com/");
     }
   }
+
+  ui->chkRecentOpen->setChecked(Reg.value("chkRecentOpen", 0).toBool());
+  ui->chkOpenDir->setChecked(Reg.value("chkOpenDir", 0).toBool());
+  ui->chkMountESP->setChecked(Reg.value("chkMountESP", 1).toBool());
+  ui->chkBackupEFI->setChecked(Reg.value("chkBackupEFI", 1).toBool());
+  ui->chkDatabase->setChecked(Reg.value("chkDatabase", 1).toBool());
 }
 
 dlgDatabase::~dlgDatabase() { delete ui; }
@@ -440,4 +445,30 @@ void dlgDatabase::on_chkBoxLastFile_clicked(bool checked) {
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("LastFile", checked);
+}
+
+void dlgDatabase::writeIni(QString key, int arg1) {
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  Reg.setValue(key, arg1);
+}
+
+void dlgDatabase::on_chkOpenDir_stateChanged(int arg1) {
+  writeIni("chkOpenDir", arg1);
+}
+
+void dlgDatabase::on_chkRecentOpen_stateChanged(int arg1) {
+  writeIni("chkRecentOpen", arg1);
+}
+
+void dlgDatabase::on_chkMountESP_stateChanged(int arg1) {
+  writeIni("chkMountESP", arg1);
+}
+
+void dlgDatabase::on_chkBackupEFI_stateChanged(int arg1) {
+  writeIni("chkBackupEFI", arg1);
+}
+
+void dlgDatabase::on_chkDatabase_stateChanged(int arg1) {
+  writeIni("chkDatabase", arg1);
 }
