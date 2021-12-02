@@ -1568,7 +1568,7 @@ void MainWindow::AddNvramAdd(QVariantMap map_add, int currentRow,
   QString strAdd0 = map_add.keys().at(currentRow);
   ui->table_nv_add0->setItem(i, 0, new QTableWidgetItem(strAdd0));
 
-  //加载子条目
+  // Add Sub
   QVariantMap map_sub;
   map_sub = map_add[map_add.keys().at(currentRow)].toMap();
   ui->table_nv_add->setRowCount(map_sub.keys().count());  // Sub key total
@@ -1597,9 +1597,6 @@ void MainWindow::AddNvramAdd(QVariantMap map_add, int currentRow,
       newItem2 = new QTableWidgetItem(map_sub[map_sub.keys().at(j)].toString());
     ui->table_nv_add->setItem(j, 2, newItem2);
   }
-
-  //保存子条目里面的数据，以便以后加载
-  // write_ini(ui->table_nv_add0, ui->table_nv_add, i);
 
   for (int n = 0; n < ui->table_nv_add->rowCount(); n++) {
     listNVRAMAdd.append(strAdd0 + "|" +
