@@ -5,9 +5,7 @@ Type: plist boolean
 Description: Provide reset register and flag in FADT table to enable reboot and shutdown.
 
 Mainly required on legacy hardware and a few newer laptops. Can also fix power-button shortcuts. Not recommended unless required.
-
 ----
-
 类型：plist布尔值
 
 描述：在FADT表中提供复位寄存器和标志，以实现重启和关机。
@@ -21,9 +19,7 @@ Description: Cleanup ACPI header fields to workaround macOS ACPI implementation 
 Reference: Debugging AppleACPIPlatform on 10.13 by Alex James (also known as theracermaster). 
 
 The issue was fixed in macOS Mojave (10.14).
-
 ----
-
 描述：清理 ACPI 头部字段，以解决 macOS ACPI 实施缺陷导致的启动崩溃问题。
 
 参考文献: Debugging AppleACPIPlatform on 10.13 by Alex James (other known as theracermaster). 
@@ -45,5 +41,23 @@ Description: Refer to SMBIOS SystemProductName.
 失效保护：空(OEM指定或未安装)
 描述：参考SMBIOS SystemProductName。
 
-
+***HibernateMode
+Type: plist string
+Failsafe: None
+Description: Hibernation detection mode. The following modes are supported:
+• None — Ignore hibernation state.
+• Auto — Use RTC and NVRAM detection.
+• RTC — Use RTC detection.
+• NVRAM — Use NVRAM detection.
+Note: If the firmware can handle hibernation itself (valid for Mac EFI firmware), then None should be specified to hand-off hibernation state as is to OpenCore.
+----
+类型：plist字符串
+失效保护：空(OEM指定或未安装)
+描述：休眠检测模式。
+支持以下模式。
+- None - 忽略休眠状态。
+- Auto - 使用RTC和NVRAM检测。
+- RTC - 使用RTC检测。
+- NVRAM - 使用NVRAM检测。
+注意：如果固件可以自己处理休眠（对Mac EFI固件有效），那么应该指定None，以便将休眠状态原封不动地交给OpenCore。
 
