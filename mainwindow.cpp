@@ -1565,8 +1565,6 @@ void MainWindow::AddNvramAdd(QVariantMap map_add, int currentRow,
   else
     i = currentRow;
 
-  if (currentRow < 0 || currentRow > map_add.keys().size() - 1)
-      return;
   QString strAdd0 = map_add.keys().at(currentRow);
   ui->table_nv_add0->setItem(i, 0, new QTableWidgetItem(strAdd0));
 

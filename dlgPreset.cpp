@@ -51,6 +51,7 @@ void dlgPreset::loadPreset(QString strMain, QString strSub, QString strComment,
 }
 
 void dlgPreset::on_btnAdd_clicked() {
+  if (ui->listPreset->currentRow() < 0) return;
   // DPAdd
   if (blDPAdd) {
     int row = ui->listPreset->currentRow();
