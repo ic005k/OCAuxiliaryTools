@@ -111,7 +111,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1306,6 +1306,19 @@ Description: Exclude MMIO address from the devirtualisation procedure.
             <item row="0" column="0">
              <layout class="QGridLayout" name="gridLayout_67">
               <item row="0" column="0">
+               <spacer name="horizontalSpacer_27">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="1">
                <widget class="QLabel" name="label_123">
                 <property name="maximumSize">
                  <size>
@@ -1318,8 +1331,21 @@ Description: Exclude MMIO address from the devirtualisation procedure.
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
+              <item row="0" column="2">
                <widget class="QComboBox" name="comboBoxBooter"/>
+              </item>
+              <item row="0" column="3">
+               <spacer name="horizontalSpacer_28">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
             </item>
@@ -2906,7 +2932,7 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
            <layout class="QGridLayout" name="gridLayout_74">
             <item row="0" column="0">
              <layout class="QGridLayout" name="gridLayout_70">
-              <item row="0" column="0">
+              <item row="0" column="1">
                <widget class="QLabel" name="label_124">
                 <property name="maximumSize">
                  <size>
@@ -2919,8 +2945,34 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
+              <item row="0" column="2">
                <widget class="QComboBox" name="comboBoxKernel"/>
+              </item>
+              <item row="0" column="0">
+               <spacer name="horizontalSpacer_29">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="3">
+               <spacer name="horizontalSpacer_30">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
             </item>
@@ -8271,7 +8323,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>7</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -9348,26 +9400,23 @@ The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS 
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <layout class="QGridLayout" name="gridLayout_34">
-              <item row="1" column="1">
-               <widget class="QCheckBox" name="chkProvideConsoleGop">
+              <item row="2" column="3">
+               <widget class="QCheckBox" name="chkSanitiseClearScreen">
                 <property name="toolTip">
-                 <string notr="true">macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and UGA, if present, are available on the console handle.
+                 <string notr="true"> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
 
-Note: This option will also replace broken GOP protocol on console handle, which may be the case on MacPro5,1 with newer GPUs.
+Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to empty string for this to work.
 ----
-macOS bootloader 要求控制台手柄上必须有 GOP 或 UGA（适用于 10.4 EfiBoot），但 UEFI 规范并未涵盖图形协议的确切位置。这个选项将确保GOP和UGA（如果存在）在控制台手柄上可用。
+ 当使用大屏幕（如2K或4K）时，一些固件在尝试清除屏幕内容时，会将屏幕分辨率重置为故障安全值（如1024x768）。这个选项试图应用一个变通方法。
 
-注意：这个选项还将替换控制台手柄上已损坏的GOP协议，在使用较新GPU的MacPro5,1上可能会出现这种情况。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Ensure GOP (Graphics Output Protocol) on console handle.</string>
+注意：这个选项只适用于系统渲染器。在所有已知受影响的系统中，ConsoleMode必须设置为空字符串才行。</string>
                 </property>
                 <property name="text">
-                 <string>ProvideConsoleGop</string>
+                 <string>SanitiseClearScreen</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
+              <item row="1" column="1">
                <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
                 <property name="toolTip">
                  <string notr="true"> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,because random text may appear over graphical images and cause UI corruption. Setting this option to true will discard all text output when console control is in mode different from Text.
@@ -9385,7 +9434,59 @@ Note: This option only applies to System renderer.
                 </property>
                </widget>
               </item>
-              <item row="5" column="0">
+              <item row="5" column="3">
+               <widget class="QComboBox" name="cboxTextRenderer">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="3">
+               <widget class="QLineEdit" name="editIntUIScale">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="6">
+               <spacer name="horizontalSpacer_32">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="5">
+               <widget class="QCheckBox" name="chkForceResolution">
+                <property name="toolTip">
+                 <string notr="true">Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max will try to pull the largest available resolution from the connected display’s EDID.
+
+Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel iGPUs.
+----
+说明：在默认情况下无法获得所需分辨率的情况下，强制设置分辨率，例如在传统的英特尔GMA和第一代英特尔高清图形(Ironlake/Arrandale)上。将 &quot;分辨率 &quot;设置为 &quot;最大 &quot;将尝试从所连接的显示器的EDID中提取最大的可用分辨率。
+
+注意：这个选项取决于OC_FORCE_RESOLUTION_PROTOCOL协议是否存在。这个协议目前只被OpenDuetPkg支持。OpenDuetPkg的实现目前只支持Intel iGPU。</string>
+                </property>
+                <property name="text">
+                 <string>ForceResolution</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
                <widget class="QLabel" name="label_26">
                 <property name="toolTip">
                  <string notr="true">Currently two renderers are supported: Builtin and System. System renderer uses firmware services for text rendering. 
@@ -9448,7 +9549,57 @@ BuiltinGraphics的使用一般都很简单。对于大多数平台来说，有�
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
+              <item row="7" column="1">
+               <widget class="QLabel" name="label_121">
+                <property name="toolTip">
+                 <string notr="true">Type: plist integer, 8 bit 
+Description: User interface scaling factor. 
+Corresponds to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:UIScale variable. 
+• 1 — 1x scaling, corresponds to normal displays. 
+• 2 — 2x scaling, corresponds to HiDPI displays. 
+• -1 — leaves the current variable unchanged. 
+• 0 — automatically chooses scaling based on the current resolution. 
+Note 1 : Automatic scale factor detection works on the basis of total pixel area and may fail on small HiDPI displays, in which case the value may be manually managed using the NVRAM section. 
+Note 2 : When switching from manually specifified NVRAM variable to this preference an NVRAM reset may be needed.
+----
+类型：plist整数，8位 
+描述：用户界面的缩放系数。
+对应于4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14：UIScale变量。
+1 -- 1倍缩放，对应于正常显示。
+2 -- 2x缩放，对应于HiDPI显示器。
+-1 -- 保持当前变量不变。
+0 -- 根据当前分辨率自动选择缩放比例。
+注1：自动比例系数检测是在总像素面积的基础上进行的，在小的HiDPI显示器上可能会失败，在这种情况下，可以使用NVRAM部分手动管理该值。
+注2：当从手动指定的NVRAM变量切换到该首选项时，可能需要对NVRAM进行重置。</string>
+                </property>
+                <property name="statusTip">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>UIScale</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QCheckBox" name="chkProvideConsoleGop">
+                <property name="toolTip">
+                 <string notr="true">macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and UGA, if present, are available on the console handle.
+
+Note: This option will also replace broken GOP protocol on console handle, which may be the case on MacPro5,1 with newer GPUs.
+----
+macOS bootloader 要求控制台手柄上必须有 GOP 或 UGA（适用于 10.4 EfiBoot），但 UEFI 规范并未涵盖图形协议的确切位置。这个选项将确保GOP和UGA（如果存在）在控制台手柄上可用。
+
+注意：这个选项还将替换控制台手柄上已损坏的GOP协议，在使用较新GPU的MacPro5,1上可能会出现这种情况。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Ensure GOP (Graphics Output Protocol) on console handle.</string>
+                </property>
+                <property name="text">
+                 <string>ProvideConsoleGop</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
                <widget class="QCheckBox" name="chkDirectGopRendering">
                 <property name="toolTip">
                  <string notr="true">On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.
@@ -9463,7 +9614,22 @@ BuiltinGraphics的使用一般都很简单。对于大多数平台来说，有�
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
+              <item row="0" column="7">
+               <widget class="QCheckBox" name="chkUgaPassThrough">
+                <property name="toolTip">
+                 <string notr="true">Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI applications like EfiBoot from 10.4.
+----
+有些固件没有实现传统旧式的UGA协议，但旧的EFI应用程序（如10.4的EfiBoot）可能需要它来进行屏幕输出。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Provide UGA protocol instances on top of GOP protocol.</string>
+                </property>
+                <property name="text">
+                 <string>UgaPassThrough</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
                <widget class="QLabel" name="label_24">
                 <property name="toolTip">
                  <string notr="true">Set to empty string not to change console mode. Set to Max to try to use largest available console mode. Currently Builtin text renderer supports only one console mode, so this option is ignored.
@@ -9482,7 +9648,181 @@ Note: This field is best to be left empty on most firmwares.
                 </property>
                </widget>
               </item>
-              <item row="6" column="0">
+              <item row="0" column="8">
+               <spacer name="horizontalSpacer_34">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="2" column="1">
+               <widget class="QCheckBox" name="chkReplaceTabWithSpace">
+                <property name="toolTip">
+                 <string notr="true">Some firmwares do not print tab characters or even everything that follows them, causing difficulties or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. 
+
+This option makes the console output spaces instead of tabs.
+
+Note: This option only applies to System renderer.
+----
+有些固件不打印制表符，甚至不打印制表符后面的所有内容，导致难以或无法使用UEFI Shell内置的文本编辑器来编辑属性列表和其他文档。
+
+这个选项使控制台输出的是空格而不是制表符。
+
+注意：该选项只适用于系统渲染器。</string>
+                </property>
+                <property name="text">
+                 <string>ReplaceTabWithSpace</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="3">
+               <widget class="QComboBox" name="cboxGopPassThrough">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+                <item>
+                 <property name="text">
+                  <string notr="true">Disabled</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string notr="true">Enabled</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string notr="true">Apple</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="4" column="3">
+               <widget class="QComboBox" name="cboxResolution">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="7">
+               <widget class="QCheckBox" name="chkReconnectOnResChange">
+                <property name="toolTip">
+                 <string notr="true">On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
+
+Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless required.
+----
+在某些固件上，当通过GOP改变屏幕分辨率时，需要重新连接产生控制台协议（简单文本输出）的控制器。否则它们将不会根据新的分辨率产生文本。
+
+注意：在一些板卡上，当从Shell启动OpenCore时，这个逻辑可能会导致黑屏，因此它是可选的。在 0.5.2 之前的版本中，该选项是强制性的，不可配置。除非需要，否则请不要使用该选项。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Reconnect console controllers after changing screen resolution.</string>
+                </property>
+                <property name="text">
+                 <string>ReconnectOnResChange</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <spacer name="horizontalSpacer_33">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
+                <property name="toolTip">
+                 <string notr="true">Some firmwares clear only part of screen when switching from graphics to text mode, leaving a fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before switching to text mode.
+
+Note: This option only applies to System renderer.
+
+----
+
+有些固件在从图形模式切换到文本模式时，只清除了屏幕的一部分，留下了之前绘制的图像的一部分。这个选项可以在切换到文本模式前用黑色填充整个图形屏幕。
+
+注：该选项仅适用于系统渲染器。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
+ fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
+ switching to text mode.
+ Note: This option only applies to System renderer.</string>
+                </property>
+                <property name="text">
+                 <string>ClearScreenOnModeSwitch</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLabel" name="label_25">
+                <property name="toolTip">
+                 <string notr="true">• Set to WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080) formatted string to request custom resolution from GOP if available.
+
+• Set to empty string not to change screen resolution.
+
+• Set to Max to try to use largest available screen resolution.
+
+On HiDPI screens APPLE_VENDOR_VARIABLE_GUID UIScale NVRAM variable may need to be set to 02 to enable HiDPI scaling in Builtin text renderer, FileVault 2 UEFI password interface, and boot screen logo. Refer to Recommended Variables section for more details.
+
+Note: This will fail when console handle has no GOP protocol. When the firmware does not provide it, it can be added with ProvideConsoleGop set to true.
+----
+- 设置为WxH@Bpp(如1920x1080@32)或WxH(如1920x1080)格式的字符串，以请求GOP提供自定义分辨率。
+
+- 设置为空字符串不改变屏幕分辨率。
+
+- 设置为最大，尝试使用最大的可用屏幕分辨率。
+
+在HiDPI屏幕上，APPLE_VENDOR_VARIABLE_GUID UIScale NVRAM变量可能需要设置为02，以便在Builtin文本渲染器、FileVault 2 UEFI密码界面和开机屏幕徽标中启用HiDPI缩放。更多细节请参考推荐变量部分。
+
+注意：当控制台手柄没有GOP协议时，这将失败。当固件不提供时，可以通过将ProvideConsoleGop设置为true来添加。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Sets console output screen resolution.</string>
+                </property>
+                <property name="text">
+                 <string>Resolution</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="3">
+               <widget class="QComboBox" name="cboxConsoleMode">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
                <widget class="QLabel" name="label_12">
                 <property name="toolTip">
                  <string notr="true">Type: plist string
@@ -9515,217 +9855,7 @@ Note: This option requires ProvideConsoleGop to be enabled.
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
-               <widget class="QComboBox" name="cboxResolution">
-                <property name="maximumSize">
-                 <size>
-                  <width>400</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label_25">
-                <property name="toolTip">
-                 <string notr="true">• Set to WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080) formatted string to request custom resolution from GOP if available.
-
-• Set to empty string not to change screen resolution.
-
-• Set to Max to try to use largest available screen resolution.
-
-On HiDPI screens APPLE_VENDOR_VARIABLE_GUID UIScale NVRAM variable may need to be set to 02 to enable HiDPI scaling in Builtin text renderer, FileVault 2 UEFI password interface, and boot screen logo. Refer to Recommended Variables section for more details.
-
-Note: This will fail when console handle has no GOP protocol. When the firmware does not provide it, it can be added with ProvideConsoleGop set to true.
-----
-- 设置为WxH@Bpp(如1920x1080@32)或WxH(如1920x1080)格式的字符串，以请求GOP提供自定义分辨率。
-
-- 设置为空字符串不改变屏幕分辨率。
-
-- 设置为最大，尝试使用最大的可用屏幕分辨率。
-
-在HiDPI屏幕上，APPLE_VENDOR_VARIABLE_GUID UIScale NVRAM变量可能需要设置为02，以便在Builtin文本渲染器、FileVault 2 UEFI密码界面和开机屏幕徽标中启用HiDPI缩放。更多细节请参考推荐变量部分。
-
-注意：当控制台手柄没有GOP协议时，这将失败。当固件不提供时，可以通过将ProvideConsoleGop设置为true来添加。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Sets console output screen resolution.</string>
-                </property>
-                <property name="text">
-                 <string>Resolution</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QComboBox" name="cboxTextRenderer">
-                <property name="maximumSize">
-                 <size>
-                  <width>400</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QComboBox" name="cboxConsoleMode">
-                <property name="maximumSize">
-                 <size>
-                  <width>400</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="1">
-               <widget class="QComboBox" name="cboxGopPassThrough">
-                <property name="maximumSize">
-                 <size>
-                  <width>400</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-                <item>
-                 <property name="text">
-                  <string notr="true">Disabled</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Enabled</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Apple</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QCheckBox" name="chkForceResolution">
-                <property name="toolTip">
-                 <string notr="true">Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max will try to pull the largest available resolution from the connected display’s EDID.
-
-Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel iGPUs.
-----
-说明：在默认情况下无法获得所需分辨率的情况下，强制设置分辨率，例如在传统的英特尔GMA和第一代英特尔高清图形(Ironlake/Arrandale)上。将 &quot;分辨率 &quot;设置为 &quot;最大 &quot;将尝试从所连接的显示器的EDID中提取最大的可用分辨率。
-
-注意：这个选项取决于OC_FORCE_RESOLUTION_PROTOCOL协议是否存在。这个协议目前只被OpenDuetPkg支持。OpenDuetPkg的实现目前只支持Intel iGPU。</string>
-                </property>
-                <property name="text">
-                 <string>ForceResolution</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
-                <property name="toolTip">
-                 <string notr="true">Some firmwares clear only part of screen when switching from graphics to text mode, leaving a fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before switching to text mode.
-
-Note: This option only applies to System renderer.
-
-----
-
-有些固件在从图形模式切换到文本模式时，只清除了屏幕的一部分，留下了之前绘制的图像的一部分。这个选项可以在切换到文本模式前用黑色填充整个图形屏幕。
-
-注：该选项仅适用于系统渲染器。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
- fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
- switching to text mode.
- Note: This option only applies to System renderer.</string>
-                </property>
-                <property name="text">
-                 <string>ClearScreenOnModeSwitch</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <widget class="QCheckBox" name="chkUgaPassThrough">
-                <property name="toolTip">
-                 <string notr="true">Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI applications like EfiBoot from 10.4.
-----
-有些固件没有实现传统旧式的UGA协议，但旧的EFI应用程序（如10.4的EfiBoot）可能需要它来进行屏幕输出。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Provide UGA protocol instances on top of GOP protocol.</string>
-                </property>
-                <property name="text">
-                 <string>UgaPassThrough</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="0">
-               <widget class="QLabel" name="label_121">
-                <property name="toolTip">
-                 <string notr="true">Type: plist integer, 8 bit 
-Description: User interface scaling factor. 
-Corresponds to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:UIScale variable. 
-• 1 — 1x scaling, corresponds to normal displays. 
-• 2 — 2x scaling, corresponds to HiDPI displays. 
-• -1 — leaves the current variable unchanged. 
-• 0 — automatically chooses scaling based on the current resolution. 
-Note 1 : Automatic scale factor detection works on the basis of total pixel area and may fail on small HiDPI displays, in which case the value may be manually managed using the NVRAM section. 
-Note 2 : When switching from manually specifified NVRAM variable to this preference an NVRAM reset may be needed.
-----
-类型：plist整数，8位 
-描述：用户界面的缩放系数。
-对应于4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14：UIScale变量。
-1 -- 1倍缩放，对应于正常显示。
-2 -- 2x缩放，对应于HiDPI显示器。
--1 -- 保持当前变量不变。
-0 -- 根据当前分辨率自动选择缩放比例。
-注1：自动比例系数检测是在总像素面积的基础上进行的，在小的HiDPI显示器上可能会失败，在这种情况下，可以使用NVRAM部分手动管理该值。
-注2：当从手动指定的NVRAM变量切换到该首选项时，可能需要对NVRAM进行重置。</string>
-                </property>
-                <property name="statusTip">
-                 <string notr="true"/>
-                </property>
-                <property name="text">
-                 <string>UIScale</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="1">
-               <widget class="QLineEdit" name="editIntUIScale">
-                <property name="maximumSize">
-                 <size>
-                  <width>400</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QCheckBox" name="chkSanitiseClearScreen">
-                <property name="toolTip">
-                 <string notr="true"> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
-
-Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to empty string for this to work.
-----
- 当使用大屏幕（如2K或4K）时，一些固件在尝试清除屏幕内容时，会将屏幕分辨率重置为故障安全值（如1024x768）。这个选项试图应用一个变通方法。
-
-注意：这个选项只适用于系统渲染器。在所有已知受影响的系统中，ConsoleMode必须设置为空字符串才行。</string>
-                </property>
-                <property name="text">
-                 <string>SanitiseClearScreen</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
+              <item row="1" column="5">
                <widget class="QCheckBox" name="chkReconnectGraphicsOnConnect">
                 <property name="toolTip">
                  <string>Type: plist boolean
@@ -9751,44 +9881,31 @@ Note: This option requires ConnectDrivers to be enabled.
                 </property>
                </widget>
               </item>
-              <item row="1" column="3">
-               <widget class="QCheckBox" name="chkReconnectOnResChange">
-                <property name="toolTip">
-                 <string notr="true">On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
-
-Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless required.
-----
-在某些固件上，当通过GOP改变屏幕分辨率时，需要重新连接产生控制台协议（简单文本输出）的控制器。否则它们将不会根据新的分辨率产生文本。
-
-注意：在一些板卡上，当从Shell启动OpenCore时，这个逻辑可能会导致黑屏，因此它是可选的。在 0.5.2 之前的版本中，该选项是强制性的，不可配置。除非需要，否则请不要使用该选项。</string>
+              <item row="0" column="2">
+               <spacer name="horizontalSpacer_31">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="statusTip">
-                 <string>Reconnect console controllers after changing screen resolution.</string>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
                 </property>
-                <property name="text">
-                 <string>ReconnectOnResChange</string>
-                </property>
-               </widget>
+               </spacer>
               </item>
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="chkReplaceTabWithSpace">
-                <property name="toolTip">
-                 <string notr="true">Some firmwares do not print tab characters or even everything that follows them, causing difficulties or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. 
-
-This option makes the console output spaces instead of tabs.
-
-Note: This option only applies to System renderer.
-----
-有些固件不打印制表符，甚至不打印制表符后面的所有内容，导致难以或无法使用UEFI Shell内置的文本编辑器来编辑属性列表和其他文档。
-
-这个选项使控制台输出的是空格而不是制表符。
-
-注意：该选项只适用于系统渲染器。</string>
+              <item row="0" column="0">
+               <spacer name="horizontalSpacer_35">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="text">
-                 <string>ReplaceTabWithSpace</string>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
                 </property>
-               </widget>
+               </spacer>
               </item>
              </layout>
             </item>
@@ -10121,6 +10238,19 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
             <item row="0" column="0">
              <layout class="QGridLayout" name="gridLayout_72">
               <item row="0" column="0">
+               <spacer name="horizontalSpacer_25">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="1">
                <widget class="QLabel" name="label_125">
                 <property name="maximumSize">
                  <size>
@@ -10133,14 +10263,100 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
+              <item row="0" column="2">
                <widget class="QComboBox" name="comboBoxUEFI"/>
+              </item>
+              <item row="0" column="3">
+               <spacer name="horizontalSpacer_26">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
             </item>
             <item row="1" column="0">
              <layout class="QGridLayout" name="gridLayout_31">
-              <item row="20" column="0">
+              <item row="13" column="1">
+               <spacer name="verticalSpacer_19">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="18" column="3">
+               <widget class="QLineEdit" name="editIntResizeGpuBars">
+                <property name="minimumSize">
+                 <size>
+                  <width>200</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>150</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>-1</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="chkActivateHpetSupport">
+                <property name="toolTip">
+                 <string notr="true">Older boards like ICH6 may not always have HPET setting in the firmware preferences, this option tries to force enable it.
+----
+旧的板子，如ICH6，可能并不总是有HPET设置在固件首选项中，这个选项试图强制启用它。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Activates HPET support.</string>
+                </property>
+                <property name="text">
+                 <string>ActivateHpetSupport</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <spacer name="verticalSpacer_17">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="19" column="1">
+               <spacer name="verticalSpacer_22">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="20" column="1">
                <widget class="QLabel" name="label_29">
                 <property name="toolTip">
                  <string notr="true">The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds and depends on the amount of cores present on the platform, the recommended starting value is 500000.
@@ -10163,20 +10379,43 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                 </property>
                </widget>
               </item>
-              <item row="13" column="0">
-               <spacer name="verticalSpacer_19">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
+              <item row="16" column="3">
+               <widget class="QLineEdit" name="editIntExitBootServicesDelay">
+                <property name="minimumSize">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>200</width>
+                  <height>0</height>
                  </size>
                 </property>
-               </spacer>
+                <property name="maximumSize">
+                 <size>
+                  <width>150</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
               </item>
-              <item row="17" column="0">
+              <item row="12" column="3">
+               <widget class="QCheckBox" name="chkForceOcWriteFlash">
+                <property name="toolTip">
+                 <string>Type: plist boolean
+
+Description: Enables writing to flash memory for all OpenCore system variables.
+
+Note: This value should be disabled on most types of firmware but is left configurable to account for firmware that may have issues with volatile variable storage overflows or similar. Boot issues across multiple OSes can be observed on e.g. Lenovo Thinkpad T430 and T530 without this quirk. Apple variables related to Secure Boot and hibernation are exempt from this for security reasons. Furthermore, some OpenCore variables are exempt for different reasons, such as the boot log due to an available user option, and the TSC frequency due to timing issues. When toggling this option, a NVRAM reset may be required to ensure full functionality.
+----
+类型：plist布尔值
+
+描述：启用所有OpenCore系统变量对闪存的写入。
+
+注意：这个值在大多数类型的固件上应该是禁用的，但为了考虑到可能有易失性变量存储溢出或类似问题的固件，这个值是可配置的。在例如联想Thinkpad T430和T530上可以观察到跨多个操作系统的启动问题，没有这个选项。出于安全原因，与安全启动和休眠有关的苹果变量不在此列。此外，一些OpenCore变量由于不同的原因被豁免，例如由于一个可用的用户选项，启动日志，以及由于时间问题，TSC频率。在切换该选项时，可能需要对NVRAM进行重置，以确保完整的功能。</string>
+                </property>
+                <property name="text">
+                 <string>ForceOcWriteFlash</string>
+                </property>
+               </widget>
+              </item>
+              <item row="17" column="1">
                <spacer name="verticalSpacer_21">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -10189,82 +10428,43 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                 </property>
                </spacer>
               </item>
-              <item row="0" column="0">
-               <widget class="QCheckBox" name="chkActivateHpetSupport">
+              <item row="0" column="4">
+               <spacer name="horizontalSpacer_22">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="16" column="1">
+               <widget class="QLabel" name="label_28">
                 <property name="toolTip">
-                 <string notr="true">Older boards like ICH6 may not always have HPET setting in the firmware preferences, this option tries to force enable it.
+                 <string notr="true">This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,namely ASUS Z87-Pro, when using FileVault 2 in particular. 
+
+It seems that for some reason they execute code in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. 
+
+A better approach should be found in some future. Expect 3-5 seconds to be enough in case the quirk is needed.
 ----
-旧的板子，如ICH6，可能并不总是有HPET设置在固件首选项中，这个选项试图强制启用它。</string>
+这是一个非常简陋的选项，以避免在选择APTIO 4固件，即华硕Z87-Pro上出现“仍在等待根设备”的消息，特别是在使用FileVault 2时。
+
+似乎出于某种原因，它们并行执行退出_启动_服务的代码，这导致SATA控制器无法从macOS访问。
+
+将来应该会找到更好的方法，目前采用它以防不时之需。</string>
                 </property>
                 <property name="statusTip">
-                 <string>Activates HPET support.</string>
+                 <string>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</string>
                 </property>
                 <property name="text">
-                 <string>ActivateHpetSupport</string>
+                 <string>ExitBootServicesDelay</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
-               <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
-                <property name="toolTip">
-                 <string notr="true">Note: While the option is not expected to harm unaffected firmware, its use is recommended only when specifically required.
-----
-注意：虽然预计该选项不会损害未受影响的固件，但只建议在特别需要时使用。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
- register. These values may cause macOS boot failure on Intel platforms.</string>
-                </property>
-                <property name="text">
-                 <string>IgnoreInvalidFlexRatio</string>
-                </property>
-               </widget>
-              </item>
-              <item row="10" column="0">
-               <widget class="QCheckBox" name="chkForgeUefiSupport">
-                <property name="toolTip">
-                 <string notr="true">Type: plist boolean
-
-Description: Implement partial UEFI 2.x support on EFI 1.x firmware.
-
-This setting allows running some software written for UEFI 2.x firmware like NVIDIA GOP Option ROMs on hardware with older EFI 1.x firmware like MacPro5,1.
-
-----
-
-类型：plist boolean
-
-描述：在EFI 1.x固件上实现部分UEFI 2.x支持。
-
-此项设置允许在MacPro5,1等旧的EFI 1.x固件上运行一些为UEFI 2.x固件编写的软件，如NVIDIA GOP Option ROM。</string>
-                </property>
-                <property name="text">
-                 <string>ForgeUefiSupport</string>
-                </property>
-               </widget>
-              </item>
-              <item row="10" column="1">
-               <widget class="QCheckBox" name="chkReloadOptionRoms">
-                <property name="toolTip">
-                 <string notr="true">Type: plist boolean
-
-Description: Query PCI devices and reload their Option ROMs if available.
-
-For example, this option allows reloading NVIDIA GOP Option ROM on older Macs after the firmware version is upgraded via ForgeUefiSupport.
-
-----
-
-类型：plist boolean
-
-描述：查询PCI设备并重新加载其可用的Option ROM。
-
-例如，在通过ForgeUefiSupport升级固件版本后，该选项允许在旧的Mac上重新加载NVIDIA GOP Option ROM。</string>
-                </property>
-                <property name="text">
-                 <string>ReloadOptionRoms</string>
-                </property>
-               </widget>
-              </item>
-              <item row="18" column="0">
+              <item row="18" column="1">
                <widget class="QLabel" name="label_115">
                 <property name="toolTip">
                  <string>Type: plist integer
@@ -10297,7 +10497,14 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
                 </property>
                </widget>
               </item>
-              <item row="11" column="0">
+              <item row="14" column="1">
+               <widget class="QCheckBox" name="chkEnableVmx">
+                <property name="text">
+                 <string>EnableVmx</string>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="1">
                <spacer name="verticalSpacer_18">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -10310,82 +10517,7 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
                 </property>
                </spacer>
               </item>
-              <item row="5" column="0">
-               <widget class="QCheckBox" name="chkRequestBootVarRouting">
-                <property name="toolTip">
-                 <string notr="true">This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible with macOS boot entries by design.
-----
-该选项需要OC_FIRMWARE_RUNTIME协议在OpenRuntime.efi中实现。当固件删除不兼容的启动项时，该选项可以让默认的启动项保存。简单的说，你需要启用这个选项，才能在设计上与macOS启动项不兼容的固件中可靠的使用启动盘偏好面板。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
- OC_VENDOR_VARIABLE_GUID.</string>
-                </property>
-                <property name="text">
-                 <string>RequestBootVarRouting</string>
-                </property>
-               </widget>
-              </item>
-              <item row="14" column="0">
-               <widget class="QCheckBox" name="chkEnableVmx">
-                <property name="text">
-                 <string>EnableVmx</string>
-                </property>
-               </widget>
-              </item>
-              <item row="12" column="1">
-               <widget class="QCheckBox" name="chkForceOcWriteFlash">
-                <property name="toolTip">
-                 <string>Type: plist boolean
-
-Description: Enables writing to flash memory for all OpenCore system variables.
-
-Note: This value should be disabled on most types of firmware but is left configurable to account for firmware that may have issues with volatile variable storage overflows or similar. Boot issues across multiple OSes can be observed on e.g. Lenovo Thinkpad T430 and T530 without this quirk. Apple variables related to Secure Boot and hibernation are exempt from this for security reasons. Furthermore, some OpenCore variables are exempt for different reasons, such as the boot log due to an available user option, and the TSC frequency due to timing issues. When toggling this option, a NVRAM reset may be required to ensure full functionality.
-----
-类型：plist布尔值
-
-描述：启用所有OpenCore系统变量对闪存的写入。
-
-注意：这个值在大多数类型的固件上应该是禁用的，但为了考虑到可能有易失性变量存储溢出或类似问题的固件，这个值是可配置的。在例如联想Thinkpad T430和T530上可以观察到跨多个操作系统的启动问题，没有这个选项。出于安全原因，与安全启动和休眠有关的苹果变量不在此列。此外，一些OpenCore变量由于不同的原因被豁免，例如由于一个可用的用户选项，启动日志，以及由于时间问题，TSC频率。在切换该选项时，可能需要对NVRAM进行重置，以确保完整的功能。</string>
-                </property>
-                <property name="text">
-                 <string>ForceOcWriteFlash</string>
-                </property>
-               </widget>
-              </item>
-              <item row="16" column="1">
-               <widget class="QLineEdit" name="editIntExitBootServicesDelay">
-                <property name="minimumSize">
-                 <size>
-                  <width>200</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>150</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="12" column="0">
-               <widget class="QCheckBox" name="chkEnableVectorAcceleration">
-                <property name="toolTip">
-                 <string notr="true">Type: plist boolean
-
-Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algorithms.
-----
-类型：plist布尔值
-
-说明：启用SHA-512和SHA-384哈希算法的AVX矢量加速。</string>
-                </property>
-                <property name="text">
-                 <string>EnableVectorAcceleration</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
+              <item row="5" column="3">
                <widget class="QCheckBox" name="chkUnblockFsConnect">
                 <property name="toolTip">
                  <string notr="true">Note: The quirk is mostly relevant for select HP laptops with no drives listed.
@@ -10401,113 +10533,23 @@ Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algor
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
-               <spacer name="verticalSpacer_14">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="6" column="0">
-               <spacer name="verticalSpacer_17">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="4" column="0">
-               <spacer name="verticalSpacer_16">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="20" column="1">
-               <widget class="QLineEdit" name="editIntTscSyncTimeout">
-                <property name="minimumSize">
-                 <size>
-                  <width>200</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>150</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QCheckBox" name="chkDisableSecurityPolicy">
-                <property name="toolTip">
-                 <string notr="true">Note: This setting disables various security features of the firmware, defeating the purpose of any kind of Secure Boot. Do NOT enable if you use UEFI Secure Boot.
-----
-注意：此设置会禁用固件的各种安全功能，从而失去任何一种安全启动的目的。如果您使用UEFI安全启动，请勿启用。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Disable platform security policy.</string>
-                </property>
-                <property name="text">
-                 <string>DisableSecurityPolicy</string>
-                </property>
-               </widget>
-              </item>
-              <item row="16" column="0">
-               <widget class="QLabel" name="label_28">
-                <property name="toolTip">
-                 <string notr="true">This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,namely ASUS Z87-Pro, when using FileVault 2 in particular. 
-
-It seems that for some reason they execute code in parallel to EXIT_BOOT_SERVICES, which results in SATA controller being inaccessible from macOS. 
-
-A better approach should be found in some future. Expect 3-5 seconds to be enough in case the quirk is needed.
-----
-这是一个非常简陋的选项，以避免在选择APTIO 4固件，即华硕Z87-Pro上出现“仍在等待根设备”的消息，特别是在使用FileVault 2时。
-
-似乎出于某种原因，它们并行执行退出_启动_服务的代码，这导致SATA控制器无法从macOS访问。
-
-将来应该会找到更好的方法，目前采用它以防不时之需。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Adds delay in microseconds after EXIT_BOOT_SERVICES event.</string>
-                </property>
-                <property name="text">
-                 <string>ExitBootServicesDelay</string>
-                </property>
-               </widget>
-              </item>
-              <item row="15" column="0">
-               <spacer name="verticalSpacer_20">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item row="3" column="1">
+               <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
+                <property name="toolTip">
+                 <string notr="true">Note: While the option is not expected to harm unaffected firmware, its use is recommended only when specifically required.
+----
+注意：虽然预计该选项不会损害未受影响的固件，但只建议在特别需要时使用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
+ register. These values may cause macOS boot failure on Intel platforms.</string>
+                </property>
+                <property name="text">
+                 <string>IgnoreInvalidFlexRatio</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="3">
                <widget class="QCheckBox" name="chkReleaseUsbOwnership">
                 <property name="toolTip">
                  <string notr="true">Attempt to detach USB controller ownership from the firmware driver. While most firmwares manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system may freeze upon boot. Not recommended unless required.
@@ -10524,8 +10566,116 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
                 </property>
                </widget>
               </item>
-              <item row="18" column="1">
-               <widget class="QLineEdit" name="editIntResizeGpuBars">
+              <item row="1" column="1">
+               <spacer name="verticalSpacer_14">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="3">
+               <widget class="QCheckBox" name="chkDisableSecurityPolicy">
+                <property name="toolTip">
+                 <string notr="true">Note: This setting disables various security features of the firmware, defeating the purpose of any kind of Secure Boot. Do NOT enable if you use UEFI Secure Boot.
+----
+注意：此设置会禁用固件的各种安全功能，从而失去任何一种安全启动的目的。如果您使用UEFI安全启动，请勿启用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Disable platform security policy.</string>
+                </property>
+                <property name="text">
+                 <string>DisableSecurityPolicy</string>
+                </property>
+               </widget>
+              </item>
+              <item row="15" column="1">
+               <spacer name="verticalSpacer_20">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="12" column="1">
+               <widget class="QCheckBox" name="chkEnableVectorAcceleration">
+                <property name="toolTip">
+                 <string notr="true">Type: plist boolean
+
+Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algorithms.
+----
+类型：plist布尔值
+
+说明：启用SHA-512和SHA-384哈希算法的AVX矢量加速。</string>
+                </property>
+                <property name="text">
+                 <string>EnableVectorAcceleration</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QCheckBox" name="chkRequestBootVarRouting">
+                <property name="toolTip">
+                 <string notr="true">This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible with macOS boot entries by design.
+----
+该选项需要OC_FIRMWARE_RUNTIME协议在OpenRuntime.efi中实现。当固件删除不兼容的启动项时，该选项可以让默认的启动项保存。简单的说，你需要启用这个选项，才能在设计上与macOS启动项不兼容的固件中可靠的使用启动盘偏好面板。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
+ OC_VENDOR_VARIABLE_GUID.</string>
+                </property>
+                <property name="text">
+                 <string>RequestBootVarRouting</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="3">
+               <widget class="QCheckBox" name="chkReloadOptionRoms">
+                <property name="toolTip">
+                 <string notr="true">Type: plist boolean
+
+Description: Query PCI devices and reload their Option ROMs if available.
+
+For example, this option allows reloading NVIDIA GOP Option ROM on older Macs after the firmware version is upgraded via ForgeUefiSupport.
+
+----
+
+类型：plist boolean
+
+描述：查询PCI设备并重新加载其可用的Option ROM。
+
+例如，在通过ForgeUefiSupport升级固件版本后，该选项允许在旧的Mac上重新加载NVIDIA GOP Option ROM。</string>
+                </property>
+                <property name="text">
+                 <string>ReloadOptionRoms</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <spacer name="verticalSpacer_16">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="20" column="3">
+               <widget class="QLineEdit" name="editIntTscSyncTimeout">
                 <property name="minimumSize">
                  <size>
                   <width>200</width>
@@ -10538,20 +10688,52 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
                   <height>16777215</height>
                  </size>
                 </property>
-                <property name="text">
-                 <string>-1</string>
-                </property>
                </widget>
               </item>
-              <item row="19" column="0">
-               <spacer name="verticalSpacer_22">
+              <item row="0" column="2">
+               <spacer name="horizontalSpacer_7">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="10" column="1">
+               <widget class="QCheckBox" name="chkForgeUefiSupport">
+                <property name="toolTip">
+                 <string notr="true">Type: plist boolean
+
+Description: Implement partial UEFI 2.x support on EFI 1.x firmware.
+
+This setting allows running some software written for UEFI 2.x firmware like NVIDIA GOP Option ROMs on hardware with older EFI 1.x firmware like MacPro5,1.
+
+----
+
+类型：plist boolean
+
+描述：在EFI 1.x固件上实现部分UEFI 2.x支持。
+
+此项设置允许在MacPro5,1等旧的EFI 1.x固件上运行一些为UEFI 2.x固件编写的软件，如NVIDIA GOP Option ROM。</string>
+                </property>
+                <property name="text">
+                 <string>ForgeUefiSupport</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <spacer name="horizontalSpacer_24">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
