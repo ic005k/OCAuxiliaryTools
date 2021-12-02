@@ -11,15 +11,16 @@
 extern MainWindow* mw_one;
 
 Tooltip::Tooltip(QWidget* parent) : QDialog(parent) {
-  this->setAutoFillBackground(true);
-  QPalette palette = this->palette();
-  palette.setColor(QPalette::Base, QColor(255, 255, 205, 0));
-  palette.setColor(QPalette::Window, QColor(255, 255, 205, 0));
-  palette.setColor(QPalette::Text, QColor(0, 0, 0, 255));
-  this->setPalette(palette);
+  // this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+  // setAttribute(Qt::WA_DeleteOnClose);
+  // this->setAttribute(Qt::WA_TranslucentBackground, true);
 
-  setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
-  setAttribute(Qt::WA_DeleteOnClose);
+  // this->setAutoFillBackground(true);
+  // QPalette palette = this->palette();
+  // palette.setColor(QPalette::Base, QColor(0, 0, 0, 0));
+  // palette.setColor(QPalette::Window, QColor(0, 0, 0, 0));
+  // palette.setColor(QPalette::Text, QColor(0, 0, 0, 255));
+  // this->setPalette(palette);
 
   edit = new QTextEdit(this);
   edit->setWordWrapMode(QTextOption::WordWrap);
@@ -57,7 +58,8 @@ void Tooltip::setMyText(QString strHead, const QString& text) {
   } else
     str = text;
 
-  edit->setText(strHead + str.trimmed());
+  this->setWindowTitle(strHead);
+  edit->setText(str.trimmed());
 
   // 文本高度
   QTextDocument* document = edit->document();  // new QTextDocument(edit);
@@ -110,8 +112,9 @@ void Tooltip::popup(QPoint pos, QString strHead, const QString& text) {
 void Tooltip::paintEvent(QPaintEvent* event) {
   QPainter painter(this);
   painter.setRenderHint(QPainter::Antialiasing);
-  painter.setBrush(QBrush(Qt::lightGray));
-  painter.setPen(Qt::transparent);
+  painter.setBrush(QBrush(QColor(0xff, 0xff, 0xe1)));
+  // painter.setBrush(QBrush(Qt::lightGray));
+  painter.setPen(Qt::black);
   QRect rect = this->rect();
   rect.setWidth(rect.width() - 1);
   rect.setHeight(rect.height() - 1);
@@ -121,7 +124,7 @@ void Tooltip::paintEvent(QPaintEvent* event) {
   if (mw_one->mac)
     painterPath.addRoundedRect(rect, 10, 10);
   else
-    painterPath.addRoundedRect(rect, 0, 0);
+    painterPath.addRoundedRect(rect, 10, 10);
   painter.drawPath(painterPath);
 
   QWidget::paintEvent(event);

@@ -6626,13 +6626,8 @@ void MainWindow::CopyCheckbox() {
     connect(showTipsAction, &QAction::triggered, [=]() {
       QString str = copyAction->text().trimmed();
       QString str1 = str.replace(tr("CopyText"), "").trimmed();
-      QString str2;
-      for (int x = 0; x < str1.count(); x++) {
-        str2 = str2 + "=";
-      }
 
-      myToolTip->popup(QCursor::pos(), str1 + "\n" + str2 + "\n\n",
-                       w->toolTip());
+      myToolTip->popup(QCursor::pos(), str1 + "\n\n", w->toolTip());
     });
 
     mymethod->setStatusBarTip(w);
@@ -6686,13 +6681,8 @@ void MainWindow::CopyLabel() {
       connect(showTipsAction, &QAction::triggered, [=]() {
         QString str = copyAction->text().trimmed();
         QString str1 = str.replace(tr("CopyText"), "").trimmed();
-        QString str2;
-        for (int x = 0; x < str1.count(); x++) {
-          str2 = str2 + "=";
-        }
 
-        myToolTip->popup(QCursor::pos(), str1 + "\n" + str2 + "\n\n",
-                         w->toolTip());
+        myToolTip->popup(QCursor::pos(), str1 + "\n\n", w->toolTip());
       });
 
       mymethod->setStatusBarTip(w);
