@@ -111,7 +111,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -862,21 +862,6 @@ Mainly required on legacy hardware and a few newer laptops. Can also fix power-b
               </item>
               <item>
                <widget class="QCheckBox" name="chkNormalizeHeaders">
-                <property name="toolTip">
-                 <string notr="true">Description: Cleanup ACPI header fields to workaround macOS ACPI implementation flaws that result in boot crashes. 
-
-Reference: Debugging AppleACPIPlatform on 10.13 by Alex James (also known as theracermaster). 
-
-The issue was fixed in macOS Mojave (10.14).
-
-----
-
-描述：清理 ACPI 头部字段，以解决 macOS ACPI 实施缺陷导致的启动崩溃问题。
-
-参考文献: Debugging AppleACPIPlatform on 10.13 by Alex James (other known as theracermaster). 
-
-这个问题在macOS Mojave (10.14)中得到了修复。</string>
-                </property>
                 <property name="statusTip">
                  <string> Cleanup ACPI header fields to workaround macOS ACPI implementation bug causing boot crashes.</string>
                 </property>

@@ -6609,6 +6609,8 @@ void MainWindow::CopyCheckbox() {
 
     w->installEventFilter(this);
 
+    mymethod->setToolTip(w, w->text());
+
     QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
     QAction* showTipsAction = new QAction(tr("Show Tips"));
 
@@ -6642,7 +6644,7 @@ void MainWindow::CopyCheckbox() {
       Q_UNUSED(pos);
 
       if (w->toolTip().trimmed() == "")
-        showTipsAction->setVisible(false);
+        showTipsAction->setVisible(true);
       else
         showTipsAction->setVisible(true);
 
@@ -6666,6 +6668,8 @@ void MainWindow::CopyLabel() {
       w->setContextMenuPolicy(Qt::CustomContextMenu);
 
       w->installEventFilter(this);
+
+      mymethod->setToolTip(w, w->text());
 
       QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
       QAction* showTipsAction = new QAction(tr("Show Tips"));

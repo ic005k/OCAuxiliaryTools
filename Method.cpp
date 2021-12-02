@@ -1665,3 +1665,33 @@ QStringList Method::getMarkerQuirks(QString arg1, QString strItem, QWidget* tab,
 
   return l2;
 }
+
+void Method::setToolTip(QWidget* w, QString strTitle) {
+  QFileInfo appInfo(qApp->applicationDirPath());
+  QString strToolTipFile = appInfo.filePath() + "/Database/preset/toolTip.txt";
+  if (QFile(strToolTipFile).exists()) {
+    QTextEdit* txtEdit = new QTextEdit;
+    txtEdit->setPlainText(loadText(strToolTipFile));
+
+    for (int k = 0; k < txtEdit->document()->lineCount(); k++) {
+      QString strLine = getTextEditLineText(txtEdit, k).trimmed();
+      if (strLine.mid(0, 3) == "***") {
+        QString str = strLine.replace("*", "").trimmed();
+        if (str == strTitle) {
+          QTextEdit* tipEdit = new QTextEdit;
+          for (int n = k + 1; n < txtEdit->document()->lineCount(); n++) {
+            QString line = getTextEditLineText(txtEdit, n).trimmed();
+            if (line.mid(0, 3) != "***") {
+              tipEdit->append(line);
+              w->setToolTip(tipEdit->toPlainText());
+            } else {
+              break;
+            }
+          }
+
+          break;
+        }
+      }
+    }
+  }
+}

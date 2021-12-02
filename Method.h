@@ -106,6 +106,7 @@ class Method : public QMainWindow {
   void init_PresetQuirks(QComboBox *comboBox, QString quirksFile);
   QStringList getMarkerQuirks(QString arg1, QString strItem, QWidget *tab,
                               QString quirksFile);
+  void setToolTip(QWidget *w, QString strTitle);
  public slots:
   void generateEFI();
   void on_btnExportMaster();
