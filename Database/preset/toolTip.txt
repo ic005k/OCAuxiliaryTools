@@ -1,0 +1,49 @@
+
+***FadtEnableReset
+Type: plist boolean
+
+Description: Provide reset register and flag in FADT table to enable reboot and shutdown.
+
+Mainly required on legacy hardware and a few newer laptops. Can also fix power-button shortcuts. Not recommended unless required.
+
+----
+
+类型：plist布尔值
+
+描述：在FADT表中提供复位寄存器和标志，以实现重启和关机。
+
+主要是在传统硬件和一些较新的笔记本上需要。也可以修复电源按钮的快捷方式。除非需要，否则不建议使用。
+
+
+***NormalizeHeaders
+Description: Cleanup ACPI header fields to workaround macOS ACPI implementation flaws that result in boot crashes. 
+
+Reference: Debugging AppleACPIPlatform on 10.13 by Alex James (also known as theracermaster). 
+
+The issue was fixed in macOS Mojave (10.14).
+
+----
+
+描述：清理 ACPI 头部字段，以解决 macOS ACPI 实施缺陷导致的启动崩溃问题。
+
+参考文献: Debugging AppleACPIPlatform on 10.13 by Alex James (other known as theracermaster). 
+
+这个问题在macOS Mojave (10.14)中得到了修复。
+
+
+***EnableVmx
+None
+----
+暂无
+
+***SystemProductName
+Type: plist string
+Failsafe: Empty (OEM specified or not installed)
+Description: Refer to SMBIOS SystemProductName.
+----
+类型：plist字符串
+失效保护：空(OEM指定或未安装)
+描述：参考SMBIOS SystemProductName。
+
+
+
