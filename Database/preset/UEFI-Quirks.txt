@@ -1,3 +1,16 @@
+
+CPU:Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop)
+UEFI:EnableVectorAcceleration RequestBootVarRouting
+
+CPU:Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Mobile/NUC)
+UEFI:EnableVectorAcceleration ReleaseUsbOwnership RequestBootVarRouting
+
+CPU:Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (HP Desktop)
+UEFI:EnableVectorAcceleration RequestBootVarRouting UnblockFsConnect
+
+CPU:Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (HP Mobile/NUC)
+UEFI:EnableVectorAcceleration ReleaseUsbOwnership RequestBootVarRouting UnblockFsConnect
+
 CPU:Intel 10th Gen Comet Lake (Dektop)
 UEFI:EnableVectorAcceleration RequestBootVarRouting
 

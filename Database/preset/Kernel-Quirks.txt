@@ -1,3 +1,7 @@
+
+CPU:Intel 11th Gen Rocket Lake (Dektop/Mobile/Nuc)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison DisableRtcChecksum PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
 CPU:Intel 10th Gen Comet Lake (Dektop/Mobile/Nuc)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 

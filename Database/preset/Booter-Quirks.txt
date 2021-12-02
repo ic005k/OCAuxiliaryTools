@@ -1,3 +1,7 @@
+
+CPU:Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop/Mobile/Nuc)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
+
 CPU:Intel 10th Gen Comet Lake (Dektop/Mobile/Nuc)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
 
