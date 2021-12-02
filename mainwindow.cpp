@@ -6659,11 +6659,11 @@ void MainWindow::CopyLabel() {
   listOfLabel = getAllLabel(getAllUIControls(ui->tabTotal));
   for (int i = 0; i < listOfLabel.count(); i++) {
     QLabel* w = (QLabel*)listOfLabel.at(i);
+
     if (w == ui->lblPickerAttributes || w == ui->lblDisplayLevel ||
         w == ui->lblExposeSensitiveData || w == ui->lblHaltLevel ||
         w == ui->lblScanPolicy || w == ui->lblTargetHex) {
       w->setTextInteractionFlags(Qt::TextSelectableByMouse);
-
     } else {
       w->setContextMenuPolicy(Qt::CustomContextMenu);
 
