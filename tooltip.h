@@ -27,6 +27,7 @@ class Tooltip : public QDialog {
   int thisWidth = 0;
   int thisHeight = 0;
   int currentHeight = 0;
+  QLabel* lblTitle;
 
  private slots:
 };

@@ -5,29 +5,47 @@
 #include <QEvent>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QVBoxLayout>
 
 #include "mainwindow.h"
 
 extern MainWindow* mw_one;
 
 Tooltip::Tooltip(QWidget* parent) : QDialog(parent) {
-  setAttribute(Qt::WA_DeleteOnClose);  // tooltip关闭后自动销毁自身对象
+  setAttribute(Qt::WA_DeleteOnClose);
+
+  // setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
   // this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
   // this->setAttribute(Qt::WA_TranslucentBackground, true);
 
-  // this->setAutoFillBackground(true);
-  // QPalette palette = this->palette();
-  // palette.setColor(QPalette::Base, QColor(0, 0, 0, 0));
-  // palette.setColor(QPalette::Window, QColor(0, 0, 0, 0));
-  // palette.setColor(QPalette::Text, QColor(0, 0, 0, 255));
-  // this->setPalette(palette);
+  this->setAutoFillBackground(true);
+  QPalette palette = this->palette();
+  palette.setColor(QPalette::Base, QColor(255, 255, 225, 255));
+  palette.setColor(QPalette::Window, QColor(255, 255, 225, 255));
+  palette.setColor(QPalette::Text, QColor(0, 0, 0, 255));
+  this->setPalette(palette);
 
   edit = new QTextEdit(this);
   edit->setWordWrapMode(QTextOption::WordWrap);
   edit->setReadOnly(true);
+  edit->setFrameStyle(QFrame::NoFrame);
 
   QHBoxLayout* mLayout = new QHBoxLayout(this);
   mLayout->setMargin(0);
+  lblTitle = new QLabel();
+  QFont font;
+  font.setBold(true);
+  lblTitle->setFont(font);
+  lblTitle->setFixedHeight(40);
+  lblTitle->setFixedWidth(40);
+  lblTitle->setText("");
+  lblTitle->setStyleSheet(
+      "QLabel{"
+      "border-image:url(:/icon/tip.png) 4 4 4 4 stretch stretch;"
+      "}");
+
+  mLayout->addWidget(lblTitle);
+
   mLayout->addWidget(edit);
 
   this->installEventFilter(this);
@@ -110,6 +128,8 @@ void Tooltip::popup(QPoint pos, QString strHead, const QString& text) {
 }
 
 void Tooltip::paintEvent(QPaintEvent* event) {
+  return;
+
   QPainter painter(this);
   painter.setRenderHint(QPainter::Antialiasing);
   painter.setBrush(QBrush(QColor(0xff, 0xff, 0xe1)));
