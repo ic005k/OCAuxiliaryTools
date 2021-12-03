@@ -111,7 +111,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1595,6 +1595,9 @@ Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest
                   <width>180</width>
                   <height>16777215</height>
                  </size>
+                </property>
+                <property name="text">
+                 <string>0</string>
                 </property>
                </widget>
               </item>
@@ -3251,6 +3254,9 @@ On the other side if the SSD is slow, the default timeout (equals to 9.999999 se
 more details in this article.
 Set this value to 4294967295 for the maximum timeout to guarantee trim success or to 999 to essentially disable
 trim.</string>
+                </property>
+                <property name="text">
+                 <string>-1</string>
                 </property>
                </widget>
               </item>
@@ -8323,7 +8329,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -8406,7 +8412,7 @@ APFS驱动日期将APFS驱动与发布日期连接起来。旧版本的APFS驱�
               <item row="13" column="1">
                <widget class="QLineEdit" name="editIntMinVersion">
                 <property name="text">
-                 <string/>
+                 <string>-1</string>
                 </property>
                </widget>
               </item>
@@ -8419,7 +8425,7 @@ APFS驱动日期将APFS驱动与发布日期连接起来。旧版本的APFS驱�
                  </size>
                 </property>
                 <property name="text">
-                 <string/>
+                 <string>-1</string>
                 </property>
                </widget>
               </item>

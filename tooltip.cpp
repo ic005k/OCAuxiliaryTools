@@ -11,8 +11,8 @@
 extern MainWindow* mw_one;
 
 Tooltip::Tooltip(QWidget* parent) : QDialog(parent) {
+  setAttribute(Qt::WA_DeleteOnClose);  // tooltip关闭后自动销毁自身对象
   // this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-  // setAttribute(Qt::WA_DeleteOnClose);
   // this->setAttribute(Qt::WA_TranslucentBackground, true);
 
   // this->setAutoFillBackground(true);
