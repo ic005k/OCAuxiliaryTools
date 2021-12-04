@@ -74,6 +74,7 @@ MainWindow::MainWindow(QWidget* parent)
   mymethod = new Method(this);
   aboutDlg = new aboutDialog(this);
   myDatabase = new dlgDatabase(this);
+  myToolTip = new Tooltip(this);
   dlgOCV = new dlgOCValidate(this);
   dlgPar = new dlgParameters(this);
   dlgAutoUpdate = new AutoUpdateDialog(this);
@@ -9626,10 +9627,20 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
       obj->metaObject()->className() == QStringLiteral("QTableWidget")) {
     if (event->type() == QEvent::ToolTip) {
       QToolTip::hideText();
-
       event->ignore();
 
+      if (obj->metaObject()->className() == QStringLiteral("QLabel")) {
+        QLabel* w = (QLabel*)obj;
+        myToolTip->popup(QCursor::pos(), w->text(), w->toolTip());
+      }
+
+      if (obj->metaObject()->className() == QStringLiteral("QCheckBox")) {
+        QCheckBox* w = (QCheckBox*)obj;
+        myToolTip->popup(QCursor::pos(), w->text(), w->toolTip());
+      }
+
       return true;  //不让事件继续传播
+    } else if (event->type() == QEvent::MouseMove) {
     }
 
     return false;

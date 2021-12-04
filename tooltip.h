@@ -4,6 +4,7 @@
 #include <QBitmap>
 #include <QDialog>
 #include <QPainterPath>
+#include <QPropertyAnimation>
 #include <QTextBrowser>
 #include <QTextEdit>
 
@@ -28,6 +29,8 @@ class Tooltip : public QDialog {
   int thisHeight = 0;
   int currentHeight = 0;
   QLabel* lblTitle;
+  QPropertyAnimation* animation;
+  int delay = 650;
 
  private slots:
 };

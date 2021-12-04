@@ -59,6 +59,7 @@
 #include "ui_dlgPreset.h"
 #include "ui_dlgdatabase.h"
 #include "ui_syncocdialog.h"
+#include "ui_tipdialog.h"
 
 #ifdef Q_OS_WIN32
 #include <stdio.h>
@@ -151,6 +152,7 @@ class MainWindow : public QMainWindow {
   SyncOCDialog* dlgSyncOC;
   dlgPreset* dlgPresetValues;
   dlgMisc* dlgMiscBootArgs;
+  Tooltip* myToolTip;
 
   bool lineEditEnter = false;
   bool RefreshAllDatabase = false;
@@ -162,7 +164,6 @@ class MainWindow : public QMainWindow {
 
   QString strTableHeaderToolTip;
 
-  Tooltip* myToolTip = new Tooltip;
   int getMainHeight();
   int getMainWidth();
 

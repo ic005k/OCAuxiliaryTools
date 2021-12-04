@@ -12,11 +12,9 @@
 extern MainWindow* mw_one;
 
 Tooltip::Tooltip(QWidget* parent) : QDialog(parent) {
-  setAttribute(Qt::WA_DeleteOnClose);
-
-  // setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-  // this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-  // this->setAttribute(Qt::WA_TranslucentBackground, true);
+  setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+  animation = new QPropertyAnimation(this, "windowOpacity");
 
   this->setAutoFillBackground(true);
   QPalette palette = this->palette();
@@ -103,7 +101,12 @@ void Tooltip::setMyText(QString strHead, const QString& text) {
 bool Tooltip::eventFilter(QObject* obj, QEvent* e) {
   if (obj == this) {
     if (QEvent::WindowDeactivate == e->type()) {
-      this->close();
+      animation->setDuration(delay);
+      animation->setStartValue(1);
+      animation->setEndValue(0);
+      connect(animation, SIGNAL(finished()), this, SLOT(close()));
+      animation->start();
+
       e->accept();
       return true;
     }
@@ -112,8 +115,10 @@ bool Tooltip::eventFilter(QObject* obj, QEvent* e) {
 }
 
 void Tooltip::popup(QPoint pos, QString strHead, const QString& text) {
-  Tooltip* t = new Tooltip();
-  t->setMyText(strHead, text);
+  if (text.trimmed().length() == 0) return;
+
+  this->installEventFilter(this);
+  this->setMyText(strHead, text);
 
   int newX;
   if (pos.x() + thisWidth > mw_one->getMainWidth())
@@ -121,11 +126,31 @@ void Tooltip::popup(QPoint pos, QString strHead, const QString& text) {
   else
     newX = pos.x();
 
-  pos.setY(pos.y() - t->height());
+  pos.setY(pos.y() - this->height());
   pos.setX(newX - 10);
 
-  t->move(pos);
-  t->show();
+  this->move(pos);
+  this->show();
+  QPropertyAnimation* animation = new QPropertyAnimation(this, "windowOpacity");
+  animation->setDuration(delay);
+  animation->setStartValue(0);
+  animation->setEndValue(1);
+  animation->start();
+
+  int t1 = text.length() * 35;
+  qDebug() << text.length();
+  if (t1 < 5000) t1 = 5000;
+  QElapsedTimer t0;
+  t0.start();
+  while (t0.elapsed() < t1) {
+    QCoreApplication::processEvents();
+  }
+
+  animation->setDuration(delay);
+  animation->setStartValue(1);
+  animation->setEndValue(0);
+  animation->start();
+  connect(animation, SIGNAL(finished()), this, SLOT(close()));
 }
 
 void Tooltip::paintEvent(QPaintEvent* event) {
@@ -139,14 +164,7 @@ void Tooltip::paintEvent(QPaintEvent* event) {
   QRect rect = this->rect();
   rect.setWidth(rect.width() - 1);
   rect.setHeight(rect.height() - 1);
-  // painter.drawRoundedRect(rect, 15, 15);
-
-  QPainterPath painterPath;
-  if (mw_one->mac)
-    painterPath.addRoundedRect(rect, 10, 10);
-  else
-    painterPath.addRoundedRect(rect, 10, 10);
-  painter.drawPath(painterPath);
+  painter.drawRoundedRect(rect, 15, 15);
 
   QWidget::paintEvent(event);
 }
