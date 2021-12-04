@@ -15,6 +15,7 @@ Tooltip::Tooltip(QWidget* parent) : QDialog(parent) {
   setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);
   setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
   animation = new QPropertyAnimation(this, "windowOpacity");
+  delay = 600;
 
   this->setAutoFillBackground(true);
   QPalette palette = this->palette();

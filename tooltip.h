@@ -30,7 +30,7 @@ class Tooltip : public QDialog {
   int currentHeight = 0;
   QLabel* lblTitle;
   QPropertyAnimation* animation;
-  int delay = 650;
+  int delay = 0;
 
  private slots:
 };
