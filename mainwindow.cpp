@@ -6601,6 +6601,7 @@ void MainWindow::CopyCheckbox() {
   listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabTotal));
   for (int i = 0; i < listOfCheckBox.count(); i++) {
     QCheckBox* w = (QCheckBox*)listOfCheckBox.at(i);
+    listUICheckBox.append(w);
     setCheckBoxWidth(w);
     w->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -6651,6 +6652,7 @@ void MainWindow::CopyLabel() {
   listOfLabel = getAllLabel(getAllUIControls(ui->tabTotal));
   for (int i = 0; i < listOfLabel.count(); i++) {
     QLabel* w = (QLabel*)listOfLabel.at(i);
+    listUILabel.append(w);
 
     if (w == ui->lblPickerAttributes || w == ui->lblDisplayLevel ||
         w == ui->lblExposeSensitiveData || w == ui->lblHaltLevel ||
@@ -10239,7 +10241,7 @@ void MainWindow::on_actionDatabase_triggered() {
 
   QFileInfo appInfo(qApp->applicationDirPath());
 
-  QString dirpath = appInfo.filePath() + "/Database/";
+  QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
   //设置要遍历的目录
   QDir dir(dirpath);
   //设置文件过滤器
@@ -10864,7 +10866,7 @@ void MainWindow::on_btnAddbootArgs_clicked() {
   }
 }
 
-void MainWindow::updateStatus() { updateIconStatus(); }
+void MainWindow::updateStatus() { mymethod->autoTip(); }
 
 void MainWindow::updateIconStatus() {
   if (isWindowModified()) {

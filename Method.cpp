@@ -1695,3 +1695,65 @@ void Method::setToolTip(QWidget* w, QString strTitle) {
     }
   }
 }
+
+void Method::autoTip() {
+  int m = mw_one->ui->listMain->currentRow();
+  int s = mw_one->ui->listSub->currentRow();
+  QWidget* tab = getSubTabWidget(m, s);
+  mw_one->listUICheckBox.clear();
+  QObjectList listOfCheckBox =
+      mw_one->getAllCheckBox(mw_one->getAllUIControls(tab));
+  for (int i = 0; i < listOfCheckBox.count(); i++) {
+    QCheckBox* w = (QCheckBox*)listOfCheckBox.at(i);
+    mw_one->listUICheckBox.append(w);
+  }
+
+  for (int i = 0; i < mw_one->listUICheckBox.count(); i++) {
+    QCheckBox* chk = mw_one->listUICheckBox.at(i);
+
+    if (chk->geometry().contains(tab->mapFromGlobal(QCursor::pos()))) {
+      mw_one->timer->stop();
+      QElapsedTimer t;
+      t.start();
+      while (t.elapsed() < 2000) {
+        QCoreApplication::processEvents();
+      }
+
+      if (chk->geometry().contains(tab->mapFromGlobal(QCursor::pos()))) {
+        mw_one->myToolTip->popup(QCursor::pos(), chk->text() + "\n\n",
+                                 chk->toolTip());
+
+      } else
+        mw_one->timer->start(2000);
+      break;
+    }
+  }
+
+  mw_one->listUILabel.clear();
+  QObjectList listOfLabel = mw_one->getAllLabel(mw_one->getAllUIControls(tab));
+  for (int i = 0; i < listOfLabel.count(); i++) {
+    QLabel* w = (QLabel*)listOfLabel.at(i);
+    mw_one->listUILabel.append(w);
+  }
+
+  for (int i = 0; i < mw_one->listUILabel.count(); i++) {
+    QLabel* chk = mw_one->listUILabel.at(i);
+
+    if (chk->geometry().contains(tab->mapFromGlobal(QCursor::pos()))) {
+      mw_one->timer->stop();
+      QElapsedTimer t;
+      t.start();
+      while (t.elapsed() < 2000) {
+        QCoreApplication::processEvents();
+      }
+
+      if (chk->geometry().contains(tab->mapFromGlobal(QCursor::pos()))) {
+        mw_one->myToolTip->popup(QCursor::pos(), chk->text() + "\n\n",
+                                 chk->toolTip());
+
+      } else
+        mw_one->timer->start(2000);
+      break;
+    }
+  }
+}

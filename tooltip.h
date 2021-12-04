@@ -19,7 +19,7 @@ class Tooltip : public QDialog {
 
  protected:
   bool eventFilter(QObject* obj, QEvent* e) override;
-
+  void closeEvent(QCloseEvent* event) override;
   void paintEvent(QPaintEvent* event) override;
 
  private:

@@ -95,6 +95,7 @@ void Tooltip::setMyText(QString strHead, const QString& text) {
   else
     currentHeight = thisHeight;
 
+  if (currentHeight < 40) currentHeight = 40;
   edit->setFixedHeight(currentHeight * 1.05);
   this->setFixedHeight(currentHeight * 1.05);
 }
@@ -121,7 +122,7 @@ void Tooltip::popup(QPoint pos, QString strHead, const QString& text) {
     newX = pos.x();
 
   pos.setY(pos.y() - t->height());
-  pos.setX(newX);
+  pos.setX(newX - 10);
 
   t->move(pos);
   t->show();
@@ -149,3 +150,5 @@ void Tooltip::paintEvent(QPaintEvent* event) {
 
   QWidget::paintEvent(event);
 }
+
+void Tooltip::closeEvent(QCloseEvent* event) { Q_UNUSED(event); }

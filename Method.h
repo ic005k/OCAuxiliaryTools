@@ -107,6 +107,7 @@ class Method : public QMainWindow {
   QStringList getMarkerQuirks(QString arg1, QString strItem, QWidget *tab,
                               QString quirksFile);
   void setToolTip(QWidget *w, QString strTitle);
+  void autoTip();
  public slots:
   void generateEFI();
   void on_btnExportMaster();

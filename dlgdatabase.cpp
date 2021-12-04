@@ -133,7 +133,7 @@ void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
   mw_one->RefreshAllDatabase = true;
 
   QFileInfo appInfo(qApp->applicationDirPath());
-  QString dirpath = appInfo.filePath() + "/Database/";
+  QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
   QString file = tableDatabase->currentItem()->text();
   mw_one->openFile(dirpath + file);
   close();
@@ -200,7 +200,7 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column) {
 
   QFileInfo appInfo(qApp->applicationDirPath());
 
-  QString dirpath = appInfo.filePath() + "/Database/";
+  QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
   QString file = ui->tableDatabaseFind->currentItem()->text();
   mw_one->openFile(dirpath + file);
   close();
@@ -223,7 +223,7 @@ void dlgDatabase::on_btnRefreshAll_clicked() {
   ui->tableDatabase->setCurrentCell(0, 0);
 
   QFileInfo appInfo(qApp->applicationDirPath());
-  QString dirpath = appInfo.filePath() + "/Database/";
+  QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
 
   for (int i = 0; i < ui->tableDatabase->rowCount(); i++) {
     ui->tableDatabase->setCurrentCell(i, 0);

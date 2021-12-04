@@ -93,6 +93,8 @@ class MainWindow : public QMainWindow {
   QString strConfigPath;
   void updateIconStatus();
   QTimer* timer;
+  QList<QCheckBox*> listUICheckBox;
+  QList<QLabel*> listUILabel;
   void lineEditSetText();
   QStringList strIconList;
   QStringList strIconListSel;
