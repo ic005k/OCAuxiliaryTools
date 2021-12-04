@@ -14,6 +14,7 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   ui->setupUi(this);
 
   ui->editPing->setHidden(true);
+  ui->btnRefreshAll->setHidden(true);
 
   processPing = new QProcess;
   connect(processPing, SIGNAL(readyReadStandardOutput()), this,
@@ -51,7 +52,7 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   ui->tabWidget->setCurrentIndex(0);
 
   ui->tableKextUrl->setColumnWidth(0, 200);
-  ui->tableKextUrl->setColumnWidth(1, 350);
+  ui->tableKextUrl->setColumnWidth(1, 400);
   ui->textEdit->setHidden(true);
 
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
@@ -220,6 +221,7 @@ void dlgDatabase::on_btnRefreshAll_clicked() {
     bakFile = SaveFileName;
   }
 
+  ui->tableDatabase->setFocus();
   ui->tableDatabase->setCurrentCell(0, 0);
 
   QFileInfo appInfo(qApp->applicationDirPath());

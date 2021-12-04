@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget* parent)
 
   loadLocal();
 
-  title = "OC Auxiliary Tools   V" + CurVerison + " [*]  ";
+  title = "OC Auxiliary Tools   V" + CurVerison + "      ";
   setWindowTitle(title);
 
 #ifdef Q_OS_MAC
@@ -227,14 +227,16 @@ void MainWindow::openFile(QString PlistFileName) {
       return;
     }
 
-    mymethod->removeFileSystemWatch(SaveFileName);
+    if (!RefreshAllDatabase) mymethod->removeFileSystemWatch(SaveFileName);
     SaveFileName = PlistFileName;
-    mymethod->addFileSystemWatch(SaveFileName);
-    FileSystemWatcher::addWatchPath(SaveFileName);
+    if (!RefreshAllDatabase) {
+      mymethod->addFileSystemWatch(SaveFileName);
+      FileSystemWatcher::addWatchPath(SaveFileName);
+    }
   } else
     return;
 
-  if (myDatabase->ui->chkBoxLastFile->isChecked()) {
+  if (myDatabase->ui->chkBoxLastFile->isChecked() && !RefreshAllDatabase) {
     QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
     QSettings Reg(qfile, QSettings::IniFormat);
     Reg.setValue("LastFileName", SaveFileName);
@@ -2528,8 +2530,9 @@ bool MainWindow::getBool(QTableWidget* table, int row, int column) {
 }
 
 void MainWindow::SavePlist(QString FileName) {
-  if (QFileInfo(SaveFileName).exists())
-    FileSystemWatcher::removeWatchPath(SaveFileName);
+  if (QFileInfo(SaveFileName).exists()) {
+    if (!RefreshAllDatabase) FileSystemWatcher::removeWatchPath(SaveFileName);
+  }
   lineEditSetText();  // 回车确认
   removeAllLineEdit();
   mymethod->OCValidationProcessing();
@@ -2558,12 +2561,12 @@ void MainWindow::SavePlist(QString FileName) {
   if (!RefreshAllDatabase) {
     OpenFileValidate = true;
     on_actionOcvalidate_triggered();
+
+    checkFiles();
+
+    FileSystemWatcher::addWatchPath(SaveFileName);
+    strOrgMd5 = getMD5(SaveFileName);
   }
-
-  checkFiles();
-
-  FileSystemWatcher::addWatchPath(SaveFileName);
-  strOrgMd5 = getMD5(SaveFileName);
 
   if (!PListSerializer::fileValidation(FileName)) {
     int war = QMessageBox::warning(
