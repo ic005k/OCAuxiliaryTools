@@ -138,9 +138,10 @@ void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
   QString file = tableDatabase->currentItem()->text();
   mw_one->openFile(dirpath + file);
   close();
-  mymethod->generateEFI();
 
   mw_one->RefreshAllDatabase = false;
+
+  mymethod->generateEFI();
 }
 
 void dlgDatabase::on_btnFind_clicked() {
@@ -205,9 +206,10 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column) {
   QString file = ui->tableDatabaseFind->currentItem()->text();
   mw_one->openFile(dirpath + file);
   close();
-  mymethod->generateEFI();
 
   mw_one->RefreshAllDatabase = false;
+
+  mymethod->generateEFI();
 }
 
 void dlgDatabase::on_btnRefreshAll_clicked() {

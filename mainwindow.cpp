@@ -2530,7 +2530,7 @@ bool MainWindow::getBool(QTableWidget* table, int row, int column) {
 }
 
 void MainWindow::SavePlist(QString FileName) {
-  if (QFileInfo(SaveFileName).exists()) {
+  if (QFile(SaveFileName).exists()) {
     if (!RefreshAllDatabase) FileSystemWatcher::removeWatchPath(SaveFileName);
   }
   lineEditSetText();  // 回车确认
