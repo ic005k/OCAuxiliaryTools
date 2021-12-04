@@ -25,9 +25,11 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for OC that 
 
 OC development version can be downloaded [here](https://github.com/acidanthera/OpenCorePkg/actions).
 
-* The OCAT pre-set function uses an open interface, so if you are interested in pre-setting entries such as ACPI patches, please help improve the contents of the PreSet.plist file and we look forward to hearing from you!
-
 * Pre-selected plugin content for Quirks is provided and maintained by @5T33Z0.
+
+* The BaseConfigs plugin package is provided and maintained by @5T33Z0. It is located in the BaseConfigs directory of the database and is visible in the profile database interface.
+
+* The OCAT pre-set function uses an open interface, so if you are interested in pre-setting entries such as ACPI patches, please help improve the contents of the PreSet.plist file and we look forward to hearing from you!
 
 Some online resources, thanks @5T33Z0
 
