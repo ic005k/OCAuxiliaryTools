@@ -61,3 +61,84 @@ Note: If the firmware can handle hibernation itself (valid for Mac EFI firmware)
 - NVRAM - 使用NVRAM检测。
 注意：如果固件可以自己处理休眠（对Mac EFI固件有效），那么应该指定None，以便将休眠状态原封不动地交给OpenCore。
 
+// Kernel Quirks
+***DisableRtcChecksum
+Type: plist boolean
+Failsafe: false
+Requirement: 10.4
+
+Description: Disables primary checksum (0x58-0x59) writing in AppleRTC.
+
+Note 1 : This option will not protect other areas from being overwritten, see RTCMemoryFixup kernel extension if this is desired.
+Note 2 : This option will not protect areas from being overwritten at firmware stage (e.g. macOS bootloader), see AppleRtcRam protocol description if this is desired.
+----
+类型：plist布尔值
+失败保护: false
+要求：10.4
+
+描述：禁用AppleRTC中的主校验和（0x58-0x59）写入。
+
+注1：该选项不会保护其他区域被覆盖，如果需要，请看RTCMemoryFixup内核扩展。
+注2 : 该选项不会保护在固件阶段(如macOS bootloader)被覆盖的区域，如果需要，请看AppleRtcRam协议描述。
+
+***ExtendBTFeatureFlags
+Type: plist boolean
+Failsafe: false
+Requirement: 10.8-11
+
+Description: Set FeatureFlags to 0x0F for full functionality of Bluetooth, including Continuity.
+	
+Note: This option is a substitution for BT4LEContinuityFixup.kext, which does not function properly due to late patching progress.
+----
+类型：plist布尔值
+失败保护: false
+要求：10.8-11
+
+描述：设置FeatureFlags为0x0F以获得蓝牙的全部功能，包括Continuity。
+	
+注意: 这个选项是BT4LEContinuityFixup.kext的替代品，由于补丁进度较晚，它不能正常工作。
+
+***ExternalDiskIcons
+Type: plist boolean
+Failsafe: false
+Requirement: 10.4
+
+Description: Apply icon type patches to AppleAHCIPort.kext to force internal disk icons for all AHCI disks.
+
+Note: This option should be avoided whenever possible. Modern firmware typically have compatible AHCI controllers.
+----
+类型：plist布尔值
+失败保护: false
+要求：10.4
+
+描述：对AppleAHCIPort.kext应用图标类型补丁，强制所有AHCI磁盘的内部磁盘图标。
+
+注意：应该尽可能避免使用这个选项。现代固件通常有兼容的AHCI控制器。
+
+***ForceSecureBootScheme
+Type: plist boolean
+Failsafe: false
+Requirement: 11
+Description: Force x86 scheme for IMG4 verification.
+	
+Note: This option is required on virtual machines when using SecureBootModel different from x86legacy.
+----
+类型：plist布尔值
+失败保护: false
+要求：11
+描述：为IMG4验证强制使用x86方案。
+	
+注意: 当使用不同于x86legacy的SecureBootModel时，在虚拟机上需要这个选项。
+
+
+
+
+
+
+
+
+
+
+
+
+
