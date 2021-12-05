@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>#By 5T33Z0</key>
+	<string>https://github.com/5T33Z0</string>
+	<key>#SMBIOS: iMacPro1,1</key>
+	<string>For AMD Ryzen using AMD RX Polaris and newer GPUs.</string>
+	<key>#macOS Compatibility</key>
+	<string>macOS High Sierra and newer</string>
 	<key>ACPI</key>
 	<dict>
 		<key>Add</key>

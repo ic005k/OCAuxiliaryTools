@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>#By 5T33Z0</key>
+	<string>https://github.com/5T33Z0</string>
+	<key>#Notes</key>
+	<string>iMac14,2 is only supported to macOS 10.8-10.15. For macOS 11, Big Sur and newer please use MacPro7,1</string>
+	<key>#SMBIOS: iMac14,2</key>
+	<string>For AMD Ryzen using Nvidia Kepler and newer GPUs.</string>
+	<key>#macOS Compatibility</key>
+	<string>macOS High Sierra to macOS Catalina.</string>
 	<key>ACPI</key>
 	<dict>
 		<key>Add</key>

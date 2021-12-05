@@ -625,36 +625,6 @@
                     <key>Arguments</key>
                     <string></string>
                     <key>Comment</key>
-                    <string>AudioDxe.efi</string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Path</key>
-                    <string>AudioDxe.efi</string>
-                </dict>
-                <dict>
-                    <key>Arguments</key>
-                    <string></string>
-                    <key>Comment</key>
-                    <string>btrfs_x64.efi</string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Path</key>
-                    <string>btrfs_x64.efi</string>
-                </dict>
-                <dict>
-                    <key>Arguments</key>
-                    <string></string>
-                    <key>Comment</key>
-                    <string>ext4_x64.efi</string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Path</key>
-                    <string>ext4_x64.efi</string>
-                </dict>
-                <dict>
-                    <key>Arguments</key>
-                    <string></string>
-                    <key>Comment</key>
                     <string>HfsPlus.efi</string>
                     <key>Enabled</key>
                     <true/>
@@ -670,16 +640,6 @@
                     <true/>
                     <key>Path</key>
                     <string>OpenCanopy.efi</string>
-                </dict>
-                <dict>
-                    <key>Arguments</key>
-                    <string></string>
-                    <key>Comment</key>
-                    <string>OpenLinuxBoot.efi</string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Path</key>
-                    <string>OpenLinuxBoot.efi</string>
                 </dict>
                 <dict>
                     <key>Arguments</key>

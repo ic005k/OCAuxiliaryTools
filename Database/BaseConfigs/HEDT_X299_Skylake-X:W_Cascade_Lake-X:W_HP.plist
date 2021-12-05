@@ -2,25 +2,33 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
     <dict>
-        <key>#By 5T33Z0</key>
-        <string>https://github.com/5T33Z0</string>
-        <key>#Notes</key>
-        <string>Generate a SSDT-PM using ssdtPRGen in Post-Install to enable proper CPU Power Management</string>
-        <key>#SMBIOS:iMac11,2</key>
-        <string>For 1st Gen Intel Core i3/i5 CPUs. dGPU required.</string>
-        <key>#macOS Compatibility</key>
-        <string>macOS Snow Leopard to Catalina</string>
         <key>ACPI</key>
         <dict>
             <key>Add</key>
             <array>
                 <dict>
                     <key>Comment</key>
-                    <string>Fake EC</string>
+                    <string>Enables CPU Power Management</string>
                     <key>Enabled</key>
                     <true/>
                     <key>Path</key>
-                    <string>SSDT-EC.aml</string>
+                    <string>SSDT-PLUG.aml</string>
+                </dict>
+                <dict>
+                    <key>Comment</key>
+                    <string>Fake EC and USB Power</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Path</key>
+                    <string>SSDT-EC-USBX.aml</string>
+                </dict>
+                <dict>
+                    <key>Comment</key>
+                    <string>Enables Legacy RTC in macOS Big Sur+</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Path</key>
+                    <string>SSDT-RTC0-RANGE.aml</string>
                 </dict>
             </array>
             <key>Delete</key>
@@ -54,9 +62,9 @@
                 <key>AllowRelocationBlock</key>
                 <false/>
                 <key>AvoidRuntimeDefrag</key>
-                <false/>
+                <true/>
                 <key>DevirtualiseMmio</key>
-                <false/>
+                <true/>
                 <key>DisableSingleUser</key>
                 <false/>
                 <key>DisableVariableWrite</key>
@@ -64,7 +72,7 @@
                 <key>DiscardHibernateMap</key>
                 <false/>
                 <key>EnableSafeModeSlide</key>
-                <false/>
+                <true/>
                 <key>EnableWriteUnprotector</key>
                 <false/>
                 <key>ForceBooterSignature</key>
@@ -78,7 +86,7 @@
                 <key>ProtectUefiServices</key>
                 <false/>
                 <key>ProvideCustomSlide</key>
-                <false/>
+                <true/>
                 <key>ProvideMaxSlide</key>
                 <integer>0</integer>
                 <key>RebuildAppleMemoryMap</key>
@@ -86,11 +94,11 @@
                 <key>ResizeAppleGpuBars</key>
                 <integer>-1</integer>
                 <key>SetupVirtualMap</key>
-                <false/>
+                <true/>
                 <key>SignalAppleOS</key>
                 <false/>
                 <key>SyncRuntimePermissions</key>
-                <false/>
+                <true/>
             </dict>
         </dict>
         <key>DeviceProperties</key>
@@ -162,6 +170,24 @@
                     <key>Arch</key>
                     <string>Any</string>
                     <key>BundlePath</key>
+                    <string>CpuTscSync.kext</string>
+                    <key>Comment</key>
+                    <string>V1.0.5 | CpuTscSync.kext</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>ExecutablePath</key>
+                    <string>Contents/MacOS/CpuTscSync</string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
                     <string>SMCProcessor.kext</string>
                     <key>Comment</key>
                     <string>V1.2.8 | SMCProcessor.kext</string>
@@ -196,7 +222,7 @@
                 </dict>
                 <dict>
                     <key>Arch</key>
-                    <string>Any</string>
+                    <string>x86_64</string>
                     <key>BundlePath</key>
                     <string>AppleALC.kext</string>
                     <key>Comment</key>
@@ -235,9 +261,9 @@
             <key>Quirks</key>
             <dict>
                 <key>AppleCpuPmCfgLock</key>
-                <true/>
-                <key>AppleXcpmCfgLock</key>
                 <false/>
+                <key>AppleXcpmCfgLock</key>
+                <true/>
                 <key>AppleXcpmExtraMsrs</key>
                 <false/>
                 <key>AppleXcpmForceBoost</key>
@@ -259,7 +285,7 @@
                 <key>IncreasePciBarSize</key>
                 <false/>
                 <key>LapicKernelPanic</key>
-                <false/>
+                <true/>
                 <key>LegacyCommpage</key>
                 <false/>
                 <key>PanicNoKextDump</key>
@@ -273,7 +299,7 @@
                 <key>ThirdPartyDrives</key>
                 <false/>
                 <key>XhciPortLimit</key>
-                <false/>
+                <true/>
             </dict>
             <key>Scheme</key>
             <dict>
@@ -395,16 +421,6 @@
                 </dict>
                 <key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
                 <dict>
-                    <key>#csr-active-config (SIP enabled)</key>
-                    <data>AAAAAA==</data>
-                    <key>#csr-active-config (macOS 10.13)</key>
-                    <data>/wMAAA==</data>
-                    <key>#csr-active-config (macOS 10.14/10.15)</key>
-                    <data>/wcAAA==</data>
-                    <key>#csr-active-config (macOS 11)</key>
-                    <data>ZwgAAA==</data>
-                    <key>#csr-active-config (macOS 12)</key>
-                    <data>7w8AAA==</data>
                     <key>ForceDisplayRotationInEFI</key>
                     <integer>0</integer>
                     <key>SystemAudioVolume</key>
@@ -494,7 +510,7 @@
                 <key>SystemMemoryStatus</key>
                 <string>Auto</string>
                 <key>SystemProductName</key>
-                <string>iMac11,1</string>
+                <string>iMacPro1,1</string>
                 <key>SystemSerialNumber</key>
                 <string></string>
                 <key>SystemUUID</key>
@@ -574,11 +590,11 @@
                     <key>Arguments</key>
                     <string></string>
                     <key>Comment</key>
-                    <string>HfsPlusLegacy.efi</string>
+                    <string>HfsPlus.efi</string>
                     <key>Enabled</key>
                     <true/>
                     <key>Path</key>
-                    <string>HfsPlusLegacy.efi</string>
+                    <string>HfsPlus.efi</string>
                 </dict>
                 <dict>
                     <key>Arguments</key>
@@ -599,16 +615,6 @@
                     <true/>
                     <key>Path</key>
                     <string>OpenRuntime.efi</string>
-                </dict>
-                <dict>
-                    <key>Arguments</key>
-                    <string></string>
-                    <key>Comment</key>
-                    <string>OpenUsbKbDxe.efi</string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Path</key>
-                    <string>OpenUsbKbDxe.efi</string>
                 </dict>
             </array>
             <key>Input</key>
@@ -618,7 +624,7 @@
                 <key>KeyForgetThreshold</key>
                 <integer>5</integer>
                 <key>KeySupport</key>
-                <false/>
+                <true/>
                 <key>KeySupportMode</key>
                 <string>Auto</string>
                 <key>KeySwap</key>
@@ -719,7 +725,7 @@
                 <key>ForgeUefiSupport</key>
                 <false/>
                 <key>IgnoreInvalidFlexRatio</key>
-                <true/>
+                <false/>
                 <key>ReleaseUsbOwnership</key>
                 <false/>
                 <key>ReloadOptionRoms</key>

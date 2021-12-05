@@ -7,7 +7,7 @@
 	<key>#Notes</key>
 	<string>Use CPUFriendFriend to generate a custom CPUFriendDataProvider.kext. Check enabled kexts before deployment!</string>
 	<key>#SMBIOS: iMac20,1</key>
-	<string>For 10the Gen Intel Core i5/i7</string>
+	<string>For 10th Gen Intel Core i5/i7</string>
 	<key>#macOS Compatibility</key>
 	<string>macOS Catalina to macOS Monterey. Adjust csr-config-accordingly!</string>
 	<key>ACPI</key>

@@ -4,10 +4,10 @@
 <dict>
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
-	<key>#SMBIOS: MacPro7,1</key>
-	<string>For AMD Ryzen CPUs using AMD RX Polaris and newer GPUs. </string>
+	<key>#SMBIOS: MacPro6,1</key>
+	<string>For AMD Threadripper using AMD R5/R7/R9 and older GPUs.</string>
 	<key>#macOS Compatibility</key>
-	<string>macOS Catalina and newer</string>
+	<string>macOS High Sierra and newer</string>
 	<key>ACPI</key>
 	<dict>
 		<key>Add</key>
@@ -62,7 +62,7 @@
 			<key>AvoidRuntimeDefrag</key>
 			<true/>
 			<key>DevirtualiseMmio</key>
-			<false/>
+			<true/>
 			<key>DisableSingleUser</key>
 			<false/>
 			<key>DisableVariableWrite</key>
@@ -1094,7 +1094,7 @@
 			<key>SystemMemoryStatus</key>
 			<string>Auto</string>
 			<key>SystemProductName</key>
-			<string>MacPro7,1</string>
+			<string>MacPro6,1</string>
 			<key>SystemSerialNumber</key>
 			<string></string>
 			<key>SystemUUID</key>

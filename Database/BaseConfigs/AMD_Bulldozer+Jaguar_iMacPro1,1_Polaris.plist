@@ -4,25 +4,17 @@
 <dict>
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
-	<key>#SMBIOS: MacPro7,1</key>
-	<string>For AMD Ryzen CPUs using AMD RX Polaris and newer GPUs. </string>
+	<key>#SMBIOS: iMacPro1,1</key>
+	<string>For Bulldozer and Jaguar CPUs using AMD RX Polaris and newer GPUs.</string>
 	<key>#macOS Compatibility</key>
-	<string>macOS Catalina and newer</string>
+	<string>macOS High Sierra and newer</string>
 	<key>ACPI</key>
 	<dict>
 		<key>Add</key>
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>CPU Powermanagement (B550 and A520 Boards only)</string>
-				<key>Enabled</key>
-				<false/>
-				<key>Path</key>
-				<string>SSDT-CPUR.aml</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string></string>
+				<string>Fake EC and USB Power</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Path</key>
@@ -72,7 +64,7 @@
 			<key>EnableSafeModeSlide</key>
 			<true/>
 			<key>EnableWriteUnprotector</key>
-			<false/>
+			<true/>
 			<key>ForceBooterSignature</key>
 			<false/>
 			<key>ForceExitBootServices</key>
@@ -88,7 +80,7 @@
 			<key>ProvideMaxSlide</key>
 			<integer>0</integer>
 			<key>RebuildAppleMemoryMap</key>
-			<true/>
+			<false/>
 			<key>ResizeAppleGpuBars</key>
 			<integer>-1</integer>
 			<key>SetupVirtualMap</key>
@@ -96,7 +88,7 @@
 			<key>SignalAppleOS</key>
 			<false/>
 			<key>SyncRuntimePermissions</key>
-			<true/>
+			<false/>
 		</dict>
 	</dict>
 	<key>DeviceProperties</key>
@@ -175,6 +167,24 @@
 				<true/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/WhateverGreen</string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string></string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>Any</string>
+				<key>BundlePath</key>
+				<string>XLNCUSBFix.kext</string>
+				<key>Comment</key>
+				<string>V1.2 | XLNCUSBFix.kext</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string></string>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
@@ -1000,6 +1010,26 @@
 			</dict>
 			<key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
 			<dict>
+				<key>#csr-active-config (SIP enabled)</key>
+				<data>
+				AAAAAA==
+				</data>
+				<key>#csr-active-config (macOS 10.13)</key>
+				<data>
+				/wMAAA==
+				</data>
+				<key>#csr-active-config (macOS 10.14/10.15)</key>
+				<data>
+				/wcAAA==
+				</data>
+				<key>#csr-active-config (macOS 11)</key>
+				<data>
+				ZwgAAA==
+				</data>
+				<key>#csr-active-config (macOS 12)</key>
+				<data>
+				7w8AAA==
+				</data>
 				<key>ForceDisplayRotationInEFI</key>
 				<integer>0</integer>
 				<key>SystemAudioVolume</key>
@@ -1094,7 +1124,7 @@
 			<key>SystemMemoryStatus</key>
 			<string>Auto</string>
 			<key>SystemProductName</key>
-			<string>MacPro7,1</string>
+			<string>iMacPro1,1</string>
 			<key>SystemSerialNumber</key>
 			<string></string>
 			<key>SystemUUID</key>

@@ -5,7 +5,7 @@
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
 	<key>#SMBIOS: MacPro7,1</key>
-	<string>For AMD Ryzen CPUs using AMD RX Polaris and newer GPUs. </string>
+	<string>For AMD Threadripper usign AMD RX Polaris and newer GPUs.</string>
 	<key>#macOS Compatibility</key>
 	<string>macOS Catalina and newer</string>
 	<key>ACPI</key>
@@ -62,7 +62,7 @@
 			<key>AvoidRuntimeDefrag</key>
 			<true/>
 			<key>DevirtualiseMmio</key>
-			<false/>
+			<true/>
 			<key>DisableSingleUser</key>
 			<false/>
 			<key>DisableVariableWrite</key>
