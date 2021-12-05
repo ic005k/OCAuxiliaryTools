@@ -29,10 +29,13 @@ class Tooltip : public QDialog {
   int thisHeight = 0;
   int currentHeight = 0;
   QLabel* lblTitle;
-  QPropertyAnimation* animation;
   int delay = 0;
+  bool end = false;
+  bool popClose = false;
+  private slots:
 
- private slots:
+  void endClose();
+  void thisShow();
 };
 
 #endif  // TOOLTIP_H
