@@ -228,16 +228,15 @@ void MainWindow::openFile(QString PlistFileName) {
       return;
     }
 
-    if (!RefreshAllDatabase) mymethod->removeFileSystemWatch(SaveFileName);
+    mymethod->removeFileSystemWatch(SaveFileName);
     SaveFileName = PlistFileName;
-    if (!RefreshAllDatabase) {
-      mymethod->addFileSystemWatch(SaveFileName);
-      FileSystemWatcher::addWatchPath(SaveFileName);
-    }
+    mymethod->addFileSystemWatch(SaveFileName);
+    FileSystemWatcher::addWatchPath(SaveFileName);
+
   } else
     return;
 
-  if (myDatabase->ui->chkBoxLastFile->isChecked() && !RefreshAllDatabase) {
+  if (myDatabase->ui->chkBoxLastFile->isChecked()) {
     QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
     QSettings Reg(qfile, QSettings::IniFormat);
     Reg.setValue("LastFileName", SaveFileName);
@@ -2532,7 +2531,7 @@ bool MainWindow::getBool(QTableWidget* table, int row, int column) {
 
 void MainWindow::SavePlist(QString FileName) {
   if (QFile(SaveFileName).exists()) {
-    if (!RefreshAllDatabase) FileSystemWatcher::removeWatchPath(SaveFileName);
+    FileSystemWatcher::removeWatchPath(SaveFileName);
   }
   lineEditSetText();  // 回车确认
   removeAllLineEdit();
@@ -2562,12 +2561,11 @@ void MainWindow::SavePlist(QString FileName) {
   if (!RefreshAllDatabase) {
     OpenFileValidate = true;
     on_actionOcvalidate_triggered();
-
-    checkFiles();
-
-    FileSystemWatcher::addWatchPath(SaveFileName);
-    strOrgMd5 = getMD5(SaveFileName);
   }
+  checkFiles();
+
+  FileSystemWatcher::addWatchPath(SaveFileName);
+  strOrgMd5 = getMD5(SaveFileName);
 
   if (!PListSerializer::fileValidation(FileName)) {
     int war = QMessageBox::warning(
