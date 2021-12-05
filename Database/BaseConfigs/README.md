@@ -1,39 +1,34 @@
 # Preconfigured OpenCore Desktop EFI Folders
-This section includes configs based on the work of Gabriel Luchina who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs but modified them so they work out of the box (hopefully). 
+This section includes configs based on the work of Gabriel Luchina who took a lot of time and effort to create EFI folders with configs for each CPU Family listed in Dortania's OpenCore install Guide. I took his base configs but modified them so they work out of the box (hopefully).
 
 I changed the following:
 
-- Removed Linux support since most users don't use Linux. 
-- Removed Bootchime support. 
-- Added mandatory Kernel Quirks required to boot the system (for those who cannot disable CFGLock in BIOS)
-- Added required SSDT Hotpatches for the selected CPU Family
-- Added a base-set of Kexts (Lilu, VirtualSMC, Whatevergreen and AppleALC) 
-- Added Device Properties containing additional Framebuffer Patches. 
-- Changed `MinDate` and `MinVersion` for the APFS Driver to `-1`, so all macOS versions work. I did this because this is the #1 reason why people request help because they can't see their drives any more in the boot picker if they don't run macOS Big Sur or newer. 
-- Created variations of configs for Dell, Sony, HP and other Board/Chipset variants.
+- Removed Linux support since most users don't use Linux
+- Removed Bootchime support
+- Added mandatory Kernel Quirks required to boot macOS
+- Added required SSDT Hotpatches for each platform (some are disabled – check before deployment)
+- Added a base-set of Kexts (Lilu, VirtualSMC, Whatevergreen and AppleALC)
+- Added Device Properties containing additional Framebuffer Patches
+- Changed `MinDate` and `MinVersion` for the APFS Driver to `-1`, so all macOS versions are supported. This is the #1 reason why users request help because they can't see their drives in the boot picker if they don't run macOS Big Sur or newer
+- Created variations of configs for Dell, Sony, HP and other Board/Chipset variants
 
 ## Generate EFI Folders using OpenCore Auxiliary Tools
-- Download the BaseConfigs.zip File contained in this Repo
-- Extract it
-- Copy the .plists to the root folder of OCATs Database: (no longer necessary since it is icluded in OCAT now)
-	- Righ-click OCAuxiliaryTools App
-	- Select "Show Package Contents"
-	- Browse to Contents > MacOS > Database and paste the files there
-- Restart OCAT
+- Start OCAT
 - Open the Database
-- Double-click on a config of your choise
-- An EFI Folder is Generated and placed on your Desktop
-- Open the config.plist and generate SMBIOS data for the selected model
+- Double-click on a config of your choice
+- An EFI Folder will be generated and placed on your Desktop including SSDTs, Kexts, Drivers, Themes
+- Open the included config.plist and generate SMBIOS data for the selected model
+- Add addtional SSDTs, Kexts or Device Properties for your hardware-setup (if neccessary)
 - Save
 
 Enjoy your base OpenCore EFI Folder
 
 **NOTES**:
 
-- Open the config.plist in a Plist Editor to find additional info.
+- Open the config.plist in a Plist Editor to find additional info
 - View Device Properties to check the included Framebuffer-Patches. Usually, 2 versions are included: one for using the iGPU for driving a Display and a 2nd one for using the iGPU for computational tasks only.
-- Depending on your hardware configuration (CPU, Mainboard, Peripherals) you may have to add more SSDT Hotpatches and/or Kexts.
-- Reference Dortania's OpenCore Install Guide for your CPU family if you are uncertain about certain settings.
+- Depending on your hardware configuration (CPU, Mainboard, Peripherals) you may have to add additional SSDT Hotpatches, DeviceProperties and/or Kexts – check before deployment!
+- Reference Dortania's OpenCore Install Guide for your CPU family if you are uncertain about certain settings
 
 ## Included Configs
 
@@ -111,12 +106,28 @@ Enjoy your base OpenCore EFI Folder
 	- AMD_Threadripper_iMacPro1,1_RX_Polaris
 	- AMD_Threadripper_MacPro6,1_R5/R7/R9_A520+B550
 	- AMD_Threadripper_MacPro6,1_R5/R7/R9
+	- AMD_Threadripper_MacPro7,1_RX_Polaris
+ 	- AMD_Threadripper_MacPro7,1_RX_Polaris_A520+B550
 - **AMD Bulldozer and A-Series**
-	- AMD_Bulldoze+Jaguar_iMacPro1,1_Polaris
-	- AMD_Bulldoze+Jaguar_MacPro6,1_R5R7R9
-	- AMD_Bulldoze+Jaguar_MacPro7,1_Polaris
-	- AMD_Bulldoze+Jaguar_MacPro14,2_Kepler+ 
+	- AMD_Bulldozer+Jaguar_iMacPro1,1_Polaris
+	- AMD_Bulldozer+Jaguar_MacPro6,1_R5R7R9
+	- AMD_Bulldozer+Jaguar_MacPro7,1_Polaris
+	- AMD_Bulldozer+Jaguar_MacPro14,2_Kepler+
+
+## Manual Update
+Althogh these configs are included in OCAT now, they are maintained and updated by me, so the latest versions will always be present in my [**repo**](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs).
+
+To manually update the config plists, do the following:
+
+- Download [**_BaseConfigs.zip**](https://github.com/5T33Z0/OC-Little-Translated/blob/main/F_Desktop_EFIs/_BaseConfigs.zip?raw=true) and extract it
+- Copy the Files to the Database Folder inside of the **OCAuxiliaryTools** App:
+	- right-click the app and select "Show package contents"
+	- browse to `/Contents/MacOS/Database/BaseConfigs/`
+	- paste the files
+	- restart OCAT
 
 ## References
-- **OpenCore Install Guide:** https://dortania.github.io/OpenCore-Install-Guide
+- **OpenCore Auxiliary Tools**: https://github.com/ic005k/QtOpenCoreConfig
 - **Base Configs**: https://github.com/luchina-gabriel?tab=repositories
+- **OpenCore Install Guide**: https://dortania.github.io/OpenCore-Install-Guide
+- **OpenCore Bootloader**: https://github.com/acidanthera/OpenCorePkg

@@ -4,7 +4,9 @@
 <dict>
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
-	<key>#SMBIOS: iMacPro1,1</key>
+	<key>#Notes</key>
+	<string>For the following Chipsets: A520, B450, B550,, X470, X570. Update to the latest BIOS.</string>
+	<key>#SMBIOS: MacPro7,1</key>
 	<string>For AMD Threadripper using AMD RX Polaris and newer GPUs.</string>
 	<key>#macOS Compatibility</key>
 	<string>macOS High Sierra and newer</string>
@@ -92,7 +94,7 @@
 			<key>ResizeAppleGpuBars</key>
 			<integer>-1</integer>
 			<key>SetupVirtualMap</key>
-			<true/>
+			<false/>
 			<key>SignalAppleOS</key>
 			<false/>
 			<key>SyncRuntimePermissions</key>
@@ -1094,7 +1096,7 @@
 			<key>SystemMemoryStatus</key>
 			<string>Auto</string>
 			<key>SystemProductName</key>
-			<string>iMacPro1,1</string>
+			<string>MacPro7,1</string>
 			<key>SystemSerialNumber</key>
 			<string></string>
 			<key>SystemUUID</key>
