@@ -27,7 +27,7 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
  
 * BaseConfigs（基本配置文件）插件包由 @5T33Z0 提供并维护。它位于数据库的BaseConfigs目录，并在配置文件数据库界面可见。
 
-* OCAT的功能提示采用的是开放式接口，如果您对枯燥的翻译有兴趣，请帮助完善toolTip.txt文件（数据库preset目录中）的内容，期待您的加入！
+* OCAT的功能提示采用的是开放式接口，如果您对枯燥的翻译有兴趣，请帮助完善toolTip.txt文件（数据库preset目录中）的内容，期待您的加入！文件地址：https://github.com/ic005k/QtOpenCoreConfig/blob/master/Database/preset/toolTip.txt
 
 * OCAT的预置功能采用的是开放式接口，如果您对ACPI补丁等条目的预置感兴趣，请帮助完善PreSet.plist文件的内容，期待您的加入！
 
