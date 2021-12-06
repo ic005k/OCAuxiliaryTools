@@ -16,7 +16,6 @@ dlgOCValidate::dlgOCValidate(QWidget* parent)
   ui->btnClose->setVisible(false);
   ui->btnGo->setVisible(false);
   ui->btnCreateVault->setDefault(true);
-  process = new QProcess;
 
   ui->textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
   QAction* copyAction = new QAction(tr("Copy"));
@@ -141,6 +140,7 @@ void dlgOCValidate::on_btnCreateVault_clicked() {
     fileName = dirpath + "create_vault.sh";
 
   ui->textEdit->clear();
+  process = new QProcess;
   process->start("bash", QStringList() << fileName << strTar);
   connect(process, SIGNAL(finished(int)), this, SLOT(readResult(int)));
   connect(process, SIGNAL(readyReadStandardOutput()), this, SLOT(readData()));
@@ -155,5 +155,6 @@ void dlgOCValidate::readResult(int exitCode) {
 
 void dlgOCValidate::readData() {
   QString result = process->readAllStandardOutput();
+
   ui->textEdit->append(result);
 }
