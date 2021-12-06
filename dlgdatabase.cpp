@@ -30,25 +30,37 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   ui->editFind->setClearButtonEnabled(true);
 
   tableDatabase = ui->tableDatabase;
-  tableDatabase->setEditTriggers(QAbstractItemView::NoEditTriggers);
-  ui->tableDatabaseFind->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  // tableDatabase->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
   QTableWidgetItem *id0;
-
-  ui->tableDatabase->setColumnWidth(0, 520);
-  id0 = new QTableWidgetItem(tr("Config Database"));
+  ui->tableDatabase->setColumnCount(2);
+  ui->tableDatabase->setColumnWidth(0, 400);
+  id0 = new QTableWidgetItem(tr("Configs"));
   ui->tableDatabase->setHorizontalHeaderItem(0, id0);
+  ui->tableDatabase->setColumnWidth(1, 220);
+  id0 = new QTableWidgetItem(tr("Comment"));
+  ui->tableDatabase->setHorizontalHeaderItem(1, id0);
 
   ui->tableDatabase->setAlternatingRowColors(true);
   tableDatabase->horizontalHeader()->setStretchLastSection(
-      true);  //设置充满表宽度
-  ui->tableDatabaseFind->horizontalHeader()->setStretchLastSection(true);
-  tableDatabase->horizontalHeader()->setHidden(true);
+      false);  //设置充满表宽度
+  tableDatabase->horizontalHeader()->setHidden(false);
+  tableDatabase->setSelectionBehavior(
+      QAbstractItemView::SelectItems);  //设置选择行为时每次选择一行或单个条目
+
+  for (int i = 0; i < tableDatabase->columnCount(); i++) {
+    tableDatabase->horizontalHeader()->setSectionResizeMode(
+        i, QHeaderView::ResizeToContents);
+  }
+
+  // Find Table
   ui->tableDatabaseFind->horizontalHeader()->setHidden(true);
   ui->tableDatabaseFind->setHidden(true);
+  ui->tableDatabaseFind->horizontalHeader()->setStretchLastSection(false);
+  ui->tableDatabaseFind->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  ui->tableDatabaseFind->horizontalHeader()->setSectionResizeMode(
+      0, QHeaderView::ResizeToContents);
 
-  tableDatabase->setSelectionBehavior(
-      QAbstractItemView::SelectRows);  //设置选择行为时每次选择一行
   ui->tabWidget->setCurrentIndex(0);
 
   ui->tableKextUrl->setColumnWidth(0, 200);
@@ -96,6 +108,14 @@ void dlgDatabase::closeEvent(QCloseEvent *event) {
   saveKextUrl();
   processPing->kill();
   ui->btnPing->setText(tr("Testing"));
+
+  QFileInfo appInfo(qApp->applicationDirPath());
+  QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
+  for (int i = 0; i < tableDatabase->rowCount(); i++) {
+    QString plistFile = dirpath + tableDatabase->item(i, 0)->text().trimmed();
+    mymethod->writePlistComment(plistFile,
+                                tableDatabase->item(i, 1)->text().trimmed());
+  }
 }
 
 void dlgDatabase::keyPressEvent(QKeyEvent *event) {
@@ -131,11 +151,12 @@ void dlgDatabase::keyPressEvent(QKeyEvent *event) {
 void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
+  if (column != 0) return;
   mw_one->RefreshAllDatabase = true;
 
   QFileInfo appInfo(qApp->applicationDirPath());
   QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
-  QString file = tableDatabase->currentItem()->text();
+  QString file = tableDatabase->item(row, 0)->text();
   mw_one->openFile(dirpath + file);
   close();
 
@@ -149,13 +170,12 @@ void dlgDatabase::on_btnFind_clicked() {
   if (text == "") return;
 
   tableDatabase->setFocus();
-  tableDatabase->setSelectionMode(QAbstractItemView::MultiSelection);
-  tableDatabase->clearSelection();
+  // tableDatabase->setSelectionMode(QAbstractItemView::MultiSelection);
+  // tableDatabase->clearSelection();
   ui->tableDatabaseFind->setRowCount(0);
   int count = 0;
   for (int i = 0; i < tableDatabase->rowCount(); i++) {
-    tableDatabase->setCurrentCell(i, 0);
-    QString str = tableDatabase->currentItem()->text();
+    QString str = tableDatabase->item(i, 0)->text();
     QFileInfo fi(str);
     if (fi.baseName().toLower().contains(text.toLower())) {
       ui->tableDatabaseFind->setRowCount(count + 1);
@@ -166,7 +186,7 @@ void dlgDatabase::on_btnFind_clicked() {
       count++;
 
     } else {
-      tableDatabase->selectRow(i);
+      // tableDatabase->selectRow(i);
     }
   }
 
@@ -179,7 +199,7 @@ void dlgDatabase::on_btnFind_clicked() {
 
   ui->lblCount->setText(QString::number(count));
 
-  tableDatabase->setSelectionMode(QAbstractItemView::ExtendedSelection);
+  // tableDatabase->setSelectionMode(QAbstractItemView::ExtendedSelection);
 }
 
 void dlgDatabase::on_editFind_textChanged(const QString &arg1) {

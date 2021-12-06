@@ -4,7 +4,7 @@
 #include "ui_aboutdialog.h"
 
 extern MainWindow* mw_one;
-QString CurVerison = "20220008";
+QString CurVerison = "20220009";
 QString ocVer = "0.7.6";
 QString ocFrom;
 
@@ -20,7 +20,7 @@ aboutDialog::aboutDialog(QWidget* parent)
   ocFrom =
       "<a "
       "href=\"https://github.com/acidanthera/OpenCorePkg/actions/runs/"
-      "1534817788/\">" +
+      "1540977614/\">" +
       tr("Source");
 
   setMaximumWidth(this->width());

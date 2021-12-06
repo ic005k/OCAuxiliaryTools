@@ -10274,6 +10274,10 @@ void MainWindow::on_actionDatabase_triggered() {
     QTableWidgetItem* newItem1;
     newItem1 = new QTableWidgetItem(files.at(i));
     tableDatabase->setItem(i, 0, newItem1);
+
+    newItem1 =
+        new QTableWidgetItem(mymethod->readPlistComment(dirpath + files.at(i)));
+    tableDatabase->setItem(i, 1, newItem1);
   }
 
   myDatabase->setWindowTitle(tr("Configuration file database") + " : " +

@@ -1757,3 +1757,70 @@ void Method::autoTip() {
     }
   }
 }
+
+QString Method::readPlistComment(QString plistFile) {
+  QTextEdit* txtEdit = new QTextEdit;
+  QString strComment = "";
+  txtEdit->setPlainText(loadText(plistFile));
+  for (int i = 0; i < txtEdit->document()->lineCount(); i++) {
+    QString lineTxt = getTextEditLineText(txtEdit, i).trimmed();
+    if (lineTxt.mid(0, 6) == "<key>#") {
+      lineTxt.replace("<key>", "");
+      lineTxt.replace("#", "");
+      lineTxt.replace("</key>", "");
+      if (lineTxt.trimmed() == "ConfigComment") {
+        QString strValue = getTextEditLineText(txtEdit, i + 1).trimmed();
+        strValue.replace("<string>", "");
+        strValue.replace("</string>", "");
+        strComment = strValue.trimmed();
+        break;
+      }
+    }
+  }
+
+  return strComment;
+}
+
+void Method::writePlistComment(QString plistFile, QString strComment) {
+  if (strComment.trimmed().length() == 0) return;
+  QTextEdit* txtEdit = new QTextEdit;
+  txtEdit->setPlainText(loadText(plistFile));
+  bool yes = false;
+  QString line1, line2;
+  for (int i = 0; i < txtEdit->document()->lineCount(); i++) {
+    QString lineTxt = getTextEditLineText(txtEdit, i).trimmed();
+    if (lineTxt.mid(0, 6) == "<key>#") {
+      lineTxt.replace("<key>", "");
+      lineTxt.replace("#", "");
+      lineTxt.replace("</key>", "");
+      if (lineTxt.trimmed() == "ConfigComment") {
+        yes = true;
+        QString str = getTextEditLineText(txtEdit, i + 1).trimmed();
+        str.replace(str, "<string>" + strComment + "</string>");
+        QTextBlock block = txtEdit->document()->findBlockByNumber(i + 1);
+
+        QTextCursor cursor(block);
+        block = block.next();
+        cursor.select(QTextCursor::BlockUnderCursor);
+        cursor.removeSelectedText();
+        cursor.insertText("\n" + str);
+
+        break;
+      }
+    }
+  }
+  if (!yes) {
+    line1 = "<key>#ConfigComment</key>";
+    line2 = "<string>" + strComment + "</string>";
+
+    for (int i = 0; i < txtEdit->document()->lineCount(); i++) {
+      QString lineTxt = getTextEditLineText(txtEdit, i).trimmed();
+      if (lineTxt == "<key>ACPI</key>") {
+        txtEdit->insertPlainText(line1 + "\n" + line2 + "\n");
+
+        break;
+      }
+    }
+  }
+  TextEditToFile(txtEdit, plistFile);
+}

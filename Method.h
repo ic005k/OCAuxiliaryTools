@@ -108,6 +108,8 @@ class Method : public QMainWindow {
                               QString quirksFile);
   void setToolTip(QWidget *w, QString strTitle);
   void autoTip();
+  QString readPlistComment(QString plistFile);
+  void writePlistComment(QString plistFile, QString strComment);
  public slots:
   void generateEFI();
   void on_btnExportMaster();
