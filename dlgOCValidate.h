@@ -7,6 +7,7 @@
 #include <QDialog>
 #include <QMenu>
 #include <QMessageBox>
+#include <QProcess>
 #include <QTimer>
 
 namespace Ui {
@@ -21,6 +22,7 @@ class dlgOCValidate : public QDialog {
   ~dlgOCValidate();
   void setTextOCV(QString str);
   void setGoEnabled(bool enabled);
+  Ui::dlgOCValidate* ui;
 
   void goMainList(QString value, QString subValue);
  private slots:
@@ -28,8 +30,14 @@ class dlgOCValidate : public QDialog {
 
   void on_btnGo_clicked();
 
+  void on_btnCreateVault_clicked();
+
+  void readData();
+
+  void readResult(int exitCode);
+
  private:
-  Ui::dlgOCValidate* ui;
+  QProcess* process;
 };
 
 #endif  // DLGOCVALIDATE_H

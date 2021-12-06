@@ -55,6 +55,7 @@
 #include "ui_aboutdialog.h"
 #include "ui_autoupdatedialog.h"
 #include "ui_dlgMountESP.h"
+#include "ui_dlgOCValidate.h"
 #include "ui_dlgParameters.h"
 #include "ui_dlgPreset.h"
 #include "ui_dlgdatabase.h"

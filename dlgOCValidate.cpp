@@ -5,6 +5,7 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
+extern QString SaveFileName;
 
 dlgOCValidate::dlgOCValidate(QWidget* parent)
     : QDialog(parent), ui(new Ui::dlgOCValidate) {
@@ -14,6 +15,8 @@ dlgOCValidate::dlgOCValidate(QWidget* parent)
   ui->listOCValidate->setVisible(false);
   ui->btnClose->setVisible(false);
   ui->btnGo->setVisible(false);
+  ui->btnCreateVault->setDefault(true);
+  process = new QProcess;
 
   ui->textEdit->setContextMenuPolicy(Qt::CustomContextMenu);
   QAction* copyAction = new QAction(tr("Copy"));
@@ -110,4 +113,33 @@ void dlgOCValidate::goMainList(QString value, QString subValue) {
   if (value == "NVRAM") mw_one->ui->listMain->setCurrentRow(5);
   if (value == "PlatformInfo") mw_one->ui->listMain->setCurrentRow(6);
   if (value == "UEFI") mw_one->ui->listMain->setCurrentRow(7);
+}
+
+void dlgOCValidate::on_btnCreateVault_clicked() {
+  QFileInfo fi(SaveFileName);
+  QString DirName = fi.path().mid(0, fi.path().count() - 3);
+  QString strTar = DirName + "/OC";
+  if (!QDir(strTar).exists()) return;
+  ui->btnCreateVault->setEnabled(false);
+  repaint();
+  QFileInfo appInfo(qApp->applicationDirPath());
+  QString dirpath = appInfo.filePath() + "/Database/mac/CreateVault/";
+  QString fileName = dirpath + "create_vault.sh";
+
+  ui->textEdit->clear();
+  process->start("bash", QStringList() << fileName << strTar);
+  connect(process, SIGNAL(finished(int)), this, SLOT(readResult(int)));
+  connect(process, SIGNAL(readyReadStandardOutput()), this, SLOT(readData()));
+}
+
+void dlgOCValidate::readResult(int exitCode) {
+  if (exitCode == 0) {
+    ui->btnCreateVault->setEnabled(true);
+    repaint();
+  }
+}
+
+void dlgOCValidate::readData() {
+  QString result = process->readAllStandardOutput();
+  ui->textEdit->append(result);
 }

@@ -6950,6 +6950,9 @@ void MainWindow::readResultCheckData() {
 
   dlgOCV->setTextOCV(strMsg);
   dlgOCV->setWindowFlags(dlgOCV->windowFlags() | Qt::WindowStaysOnTopHint);
+  if (mac || osx1012) dlgOCV->ui->textEdit->setFont(QFont("Menlo", 12));
+  if (win) dlgOCV->ui->textEdit->setFont(QFont("consolas"));
+  if (win || linuxOS) dlgOCV->ui->btnCreateVault->setVisible(false);
   dlgOCV->show();
 }
 

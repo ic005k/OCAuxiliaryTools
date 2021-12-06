@@ -2456,8 +2456,8 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8435"/>
-        <location filename="mainwindow.cpp" line="10196"/>
-        <location filename="mainwindow.cpp" line="10201"/>
+        <location filename="mainwindow.cpp" line="10199"/>
+        <location filename="mainwindow.cpp" line="10204"/>
         <source>Select date</source>
         <translation>选择日期</translation>
     </message>
@@ -3766,7 +3766,7 @@ Mask</translation>
         <location filename="mainwindow.cpp" line="2341"/>
         <location filename="mainwindow.cpp" line="2390"/>
         <location filename="mainwindow.cpp" line="4359"/>
-        <location filename="mainwindow.cpp" line="9392"/>
+        <location filename="mainwindow.cpp" line="9395"/>
         <source>Enabled</source>
         <translation>是否启用
 Enabled</translation>
@@ -3858,7 +3858,7 @@ MaxKernel</translation>
         <location filename="mainwindow.cpp" line="960"/>
         <location filename="mainwindow.cpp" line="1001"/>
         <location filename="mainwindow.cpp" line="1060"/>
-        <location filename="mainwindow.cpp" line="9392"/>
+        <location filename="mainwindow.cpp" line="9395"/>
         <source>Arch</source>
         <translation>Kext架构
 Arch</translation>
@@ -3945,7 +3945,7 @@ TableLength</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="572"/>
-        <location filename="mainwindow.cpp" line="9392"/>
+        <location filename="mainwindow.cpp" line="9395"/>
         <source>All</source>
         <translation>全部
 All</translation>
@@ -4008,7 +4008,7 @@ Value</translation>
     <message>
         <location filename="mainwindow.cpp" line="803"/>
         <location filename="mainwindow.cpp" line="1522"/>
-        <location filename="mainwindow.cpp" line="9395"/>
+        <location filename="mainwindow.cpp" line="9398"/>
         <source>Class</source>
         <translation>数据类型
 Class</translation>
@@ -4052,7 +4052,7 @@ Name</translation>
     <message>
         <location filename="mainwindow.cpp" line="1334"/>
         <location filename="mainwindow.cpp" line="1365"/>
-        <location filename="mainwindow.cpp" line="9394"/>
+        <location filename="mainwindow.cpp" line="9397"/>
         <source>Auxiliary</source>
         <translation>辅助
 Auxiliary</translation>
@@ -4060,7 +4060,7 @@ Auxiliary</translation>
     <message>
         <location filename="mainwindow.cpp" line="1340"/>
         <location filename="mainwindow.cpp" line="1374"/>
-        <location filename="mainwindow.cpp" line="9393"/>
+        <location filename="mainwindow.cpp" line="9396"/>
         <source>TextMode</source>
         <translation>文本模式
 TextMode</translation>
@@ -4074,7 +4074,7 @@ Flavour</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1371"/>
-        <location filename="mainwindow.cpp" line="9394"/>
+        <location filename="mainwindow.cpp" line="9397"/>
         <source>RealPath</source>
         <translation>实际路径
 RealPath</translation>
@@ -4266,13 +4266,13 @@ Speed</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10198"/>
-        <location filename="mainwindow.cpp" line="10199"/>
+        <location filename="mainwindow.cpp" line="10201"/>
+        <location filename="mainwindow.cpp" line="10202"/>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9950"/>
+        <location filename="mainwindow.cpp" line="9953"/>
         <source>The database file is incomplete and the upgrade cannot be completed.</source>
         <translation>数据库文件不完整，无法完成升级。</translation>
     </message>
@@ -4385,78 +4385,78 @@ BaseSkip</translation>
         <location filename="mainwindow.cpp" line="6679"/>
         <location filename="mainwindow.cpp" line="6687"/>
         <location filename="mainwindow.cpp" line="6732"/>
-        <location filename="mainwindow.cpp" line="9407"/>
+        <location filename="mainwindow.cpp" line="9410"/>
         <source>CopyText</source>
         <translation>复制文本</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="6615"/>
         <location filename="mainwindow.cpp" line="6671"/>
-        <location filename="mainwindow.cpp" line="9427"/>
+        <location filename="mainwindow.cpp" line="9430"/>
         <source>Show Tips</source>
         <translation>显示提示</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10283"/>
+        <location filename="mainwindow.cpp" line="10286"/>
         <source>Configuration file database</source>
         <translation>配置文件数据库</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7059"/>
+        <location filename="mainwindow.cpp" line="7062"/>
         <source>Network error!</source>
         <translation>网络错误！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7087"/>
+        <location filename="mainwindow.cpp" line="7090"/>
         <source>New version detected!</source>
         <translation>检测到新版本！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7088"/>
+        <location filename="mainwindow.cpp" line="7091"/>
         <source>Version: </source>
         <translation>版本：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7089"/>
+        <location filename="mainwindow.cpp" line="7092"/>
         <source>Published at: </source>
         <translation>更新时间：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7090"/>
+        <location filename="mainwindow.cpp" line="7093"/>
         <source>Release Notes: </source>
         <translation>更新说明：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7096"/>
-        <location filename="mainwindow.cpp" line="7103"/>
+        <location filename="mainwindow.cpp" line="7099"/>
+        <location filename="mainwindow.cpp" line="7106"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7094"/>
+        <location filename="mainwindow.cpp" line="7097"/>
         <source>There is a new version</source>
         <translation>有新版本</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9424"/>
+        <location filename="mainwindow.cpp" line="9427"/>
         <source>Cut Line</source>
         <translation>剪切行</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9425"/>
+        <location filename="mainwindow.cpp" line="9428"/>
         <source>Copy Line</source>
         <translation>复制行</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9426"/>
+        <location filename="mainwindow.cpp" line="9429"/>
         <source>Paste Line</source>
         <translation>粘贴行</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2574"/>
         <location filename="mainwindow.cpp" line="5198"/>
-        <location filename="mainwindow.cpp" line="7097"/>
-        <location filename="mainwindow.cpp" line="7104"/>
+        <location filename="mainwindow.cpp" line="7100"/>
+        <location filename="mainwindow.cpp" line="7107"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -4481,13 +4481,13 @@ BaseSkip</translation>
         <translation>配置文件有问题</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="7114"/>
+        <location filename="mainwindow.cpp" line="7117"/>
         <source>It is currently the latest version!</source>
         <translation>目前是最新版本！</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2387"/>
-        <location filename="mainwindow.cpp" line="9393"/>
+        <location filename="mainwindow.cpp" line="9396"/>
         <source>Type</source>
         <translation>类型
 Type</translation>
@@ -5109,6 +5109,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="dlgOCValidate.ui" line="33"/>
+        <source>Create Vault</source>
+        <translation>创建 Vault</translation>
+    </message>
+    <message>
+        <location filename="dlgOCValidate.ui" line="40"/>
         <source>Close</source>
         <translation></translation>
     </message>
@@ -5119,12 +5124,12 @@ p, li { white-space: pre-wrap; }
         <translation>OC验证</translation>
     </message>
     <message>
-        <location filename="dlgOCValidate.cpp" line="19"/>
+        <location filename="dlgOCValidate.cpp" line="22"/>
         <source>Copy</source>
         <translation>拷贝</translation>
     </message>
     <message>
-        <location filename="dlgOCValidate.cpp" line="20"/>
+        <location filename="dlgOCValidate.cpp" line="23"/>
         <source>Search...</source>
         <translation>搜索...</translation>
     </message>
