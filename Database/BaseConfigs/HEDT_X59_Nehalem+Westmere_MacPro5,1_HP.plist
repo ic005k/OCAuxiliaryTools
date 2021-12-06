@@ -4,6 +4,8 @@
 <dict>
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
+	<key>#ConfigComment</key>
+	<string></string>
 	<key>#SMBIOS: MacPro5,1</key>
 	<string>For macOS Mojave and older running on HP Systems</string>
 	<key>ACPI</key>
@@ -210,7 +212,7 @@
 			</dict>
 			<dict>
 				<key>Arch</key>
-				<string>x86_64</string>
+				<string>Any</string>
 				<key>BundlePath</key>
 				<string>AppleALC.kext</string>
 				<key>Comment</key>

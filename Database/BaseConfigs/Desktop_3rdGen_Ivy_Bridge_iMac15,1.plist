@@ -4,6 +4,8 @@
 <dict>
 	<key>#By 5T33Z0</key>
 	<string>https://github.com/5T33Z0</string>
+	<key>#ConfigComment</key>
+	<string></string>
 	<key>#Notes</key>
 	<string>Generate a SSDT-PM using ssdtPRGen in Post-Install to enable proper CPU Power Management</string>
 	<key>#SMBIOS:iMac15,1</key>
