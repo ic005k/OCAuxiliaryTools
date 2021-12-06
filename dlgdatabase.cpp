@@ -15,6 +15,7 @@ dlgDatabase::dlgDatabase(QWidget *parent)
 
   ui->editPing->setHidden(true);
   ui->btnRefreshAll->setHidden(true);
+  ui->btnFind->setHidden(true);
 
   processPing = new QProcess;
   connect(processPing, SIGNAL(readyReadStandardOutput()), this,
