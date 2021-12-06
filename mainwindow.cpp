@@ -6953,6 +6953,10 @@ void MainWindow::readResultCheckData() {
   if (mac || osx1012) dlgOCV->ui->textEdit->setFont(QFont("Menlo"));
   if (win) dlgOCV->ui->textEdit->setFont(QFont("consolas"));
   if (win || linuxOS) dlgOCV->ui->btnCreateVault->setVisible(false);
+  if (ui->cboxVault->currentText().trimmed() == "Optional")
+    dlgOCV->ui->btnCreateVault->setEnabled(false);
+  else
+    dlgOCV->ui->btnCreateVault->setEnabled(true);
   dlgOCV->show();
 }
 
