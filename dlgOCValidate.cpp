@@ -134,7 +134,11 @@ void dlgOCValidate::on_btnCreateVault_clicked() {
   repaint();
   QFileInfo appInfo(qApp->applicationDirPath());
   QString dirpath = appInfo.filePath() + "/Database/mac/CreateVault/";
-  QString fileName = dirpath + "create_vault.sh";
+  QString fileName;
+  if (ui->chkSignature->isChecked())
+    fileName = dirpath + "sign.command";
+  else
+    fileName = dirpath + "create_vault.sh";
 
   ui->textEdit->clear();
   process->start("bash", QStringList() << fileName << strTar);
