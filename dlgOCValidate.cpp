@@ -120,6 +120,16 @@ void dlgOCValidate::on_btnCreateVault_clicked() {
   QString DirName = fi.path().mid(0, fi.path().count() - 3);
   QString strTar = DirName + "/OC";
   if (!QDir(strTar).exists()) return;
+
+  QString warningStr =
+      tr("Please make sure you know the Vault completely and that you have "
+         "backed up the EFI beforehand, otherwise the OC may not boot!");
+  int ret =
+      QMessageBox::warning(this, "", warningStr, tr("Cancel"), tr("Sure"));
+  if (ret != 1) {
+    return;
+  }
+
   ui->btnCreateVault->setEnabled(false);
   repaint();
   QFileInfo appInfo(qApp->applicationDirPath());

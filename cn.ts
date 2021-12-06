@@ -5133,6 +5133,21 @@ p, li { white-space: pre-wrap; }
         <source>Search...</source>
         <translation>搜索...</translation>
     </message>
+    <message>
+        <location filename="dlgOCValidate.cpp" line="125"/>
+        <source>Please make sure you know the Vault completely and that you have backed up the EFI beforehand, otherwise the OC may not boot!</source>
+        <translation>请确认您对Vault完全了解，并事先已经备份了EFI。否则可能会导致OC无法引导！</translation>
+    </message>
+    <message>
+        <location filename="dlgOCValidate.cpp" line="128"/>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <location filename="dlgOCValidate.cpp" line="128"/>
+        <source>Sure</source>
+        <translation>确信</translation>
+    </message>
 </context>
 <context>
     <name>dlgParameters</name>
