@@ -6952,11 +6952,21 @@ void MainWindow::readResultCheckData() {
   dlgOCV->setWindowFlags(dlgOCV->windowFlags() | Qt::WindowStaysOnTopHint);
   if (mac || osx1012) dlgOCV->ui->textEdit->setFont(QFont("Menlo"));
   if (win) dlgOCV->ui->textEdit->setFont(QFont("consolas"));
-  if (win || linuxOS) dlgOCV->ui->btnCreateVault->setVisible(false);
-  if (ui->cboxVault->currentText().trimmed() == "Optional")
+  if (win || linuxOS) {
+    dlgOCV->ui->btnCreateVault->setVisible(false);
+    dlgOCV->ui->chkSignature->setVisible(false);
+  }
+  if (ui->cboxVault->currentText().trimmed() == "Optional") {
     dlgOCV->ui->btnCreateVault->setEnabled(false);
-  else
+    dlgOCV->ui->chkSignature->setEnabled(false);
+  } else {
     dlgOCV->ui->btnCreateVault->setEnabled(true);
+    dlgOCV->ui->chkSignature->setEnabled(true);
+  }
+  if (ui->cboxVault->currentText().trimmed() == "Secure")
+    dlgOCV->ui->chkSignature->setChecked(true);
+  if (ui->cboxVault->currentText().trimmed() == "Basic")
+    dlgOCV->ui->chkSignature->setChecked(false);
   dlgOCV->show();
 }
 
