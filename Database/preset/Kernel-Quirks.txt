@@ -1,51 +1,92 @@
+CPU:Intel Skylake-X/W and Cascade Lake-X/W (High End Desktop)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 11th Gen Rocket Lake (Dektop/Mobile/Nuc)
+CPU:Intel Skylake-X/W and Cascade Lake-X/W (Dell/Sony HEDT)
+Kernel:AppleXcpmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Skylake-X/W and Cascade Lake-X/W (HP HEDT)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Broadwell-E and Haswell-E (High End Desktop)
+Kernel:AppleCpuPmCfgLock AppleXcpmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Broadwell-E and Haswell-E (Dell/Sony HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmCfgLock AppleXcpmExtraMsrs CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Broadwell-E and Haswell-E (HP HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Sandy Bridge-E and IvyBridge-E (High End Desktop)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Sandy Bridge-E and IvyBridge-E (Dell/Sony HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Sandy Bridge-E and IvyBridge-E (HP HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Nehalem and Westmere (High End Desktop)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Nehalem and Westmere (Dell/Sony HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Nehalem and Westmere (HP HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Core 11th Gen Rocket Lake (Dektop/Mobile/Nuc)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison DisableRtcChecksum PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 10th Gen Comet Lake (Dektop/Mobile/Nuc)
+CPU:Intel Core 10th Gen Comet Lake (Dektop/Mobile/Nuc)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 10th Gen Comet Lake (Dell/Sony VAIO)
+CPU:Intel Core 10th Gen Comet Lake (Dell/Sony VAIO)
 Kernel:AppleXcpmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 10th Gen Comet Lake (HP)
+CPU:Intel Core 10th Gen Comet Lake (HP)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 8th and 9th Gen Coffee Lake (Desktop/Mobile/NUC)
+CPU:Intel Core 8th and 9th Gen Coffee Lake (Desktop/Mobile/NUC)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 8th and 9th Gen Coffee Lake (Dell/Sony VAIO)
+CPU:Intel Core 8th and 9th Gen Coffee Lake (Dell/Sony VAIO)
 Kernel:AppleXcpmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 8th and 9th Gen Coffee Lake (HP)
+CPU:Intel Core 8th and 9th Gen Coffee Lake (HP)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 6th Gen Skylake and 7th Gen Kaby Lake (Desktop/Mobile/NUC)
+CPU:Intel Core 6th Gen Skylake and 7th Gen Kaby Lake (Desktop/Mobile/NUC)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 6th Gen Skylake and 7th Gen Kaby Lake (Dell/SonyVaio)
+CPU:Intel Core 6th Gen Skylake and 7th Gen Kaby Lake (Dell/SonyVaio)
 Kernel:AppleXcpmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 6th Gen Skylake and 7th Gen Kaby Lake (HP)
+CPU:Intel Core 6th Gen Skylake and 7th Gen Kaby Lake (HP)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 4th Gen Haswell and 5th Gen Broadwell (Desktop/Mobile/NUC)
+CPU:Intel Core 4th Gen Haswell and 5th Gen Broadwell (Desktop/Mobile/NUC)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 4th Gen Haswell and 5th Gen Broadwell (Dell/Sony VAIO)
+CPU:Intel Core 4th Gen Haswell and 5th Gen Broadwell (Dell/Sony VAIO)
 Kernel:AppleXcpmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 4th Gen Haswell and 5th Gen Broadwell (HP)
+CPU:Intel Core 4th Gen Haswell and 5th Gen Broadwell (HP)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (Desktop/Mobile/NUC)
+CPU:Intel Core 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (Desktop/Mobile/NUC)
 Kernel: AppleCpuPmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (Dell/Sony VAIO)
+CPU:Intel Core 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (Dell/Sony VAIO)
 Kernel:AppleCpuPmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (HP)
+CPU:Intel Core 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (HP)
 Kernel:AppleCpuPmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Core 1st Gen Penryn (Desktop)
+Kernel:DisableIoMapper DisableLinkeditJettison PanicNoKextDump
+
+CPU:Intel Core 1st Gen Penryn (HP Desktop)
+Kernel:DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump
 
 CPU:AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h)
 Kernel: PanicNoKextDump PowerTimeoutKernelPanic ProvideCurrentCpuInfo
