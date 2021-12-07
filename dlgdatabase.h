@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QProcess>
+#include <QTableWidgetItem>
 
 namespace Ui {
 class dlgDatabase;
@@ -16,6 +17,7 @@ class dlgDatabase : public QDialog {
   ~dlgDatabase();
   Ui::dlgDatabase *ui;
 
+  QList<bool> listItemModi;
   QProcess *processPing;
   void refreshKextUrl();
 
@@ -68,6 +70,8 @@ class dlgDatabase : public QDialog {
   void on_chkBackupEFI_stateChanged(int arg1);
 
   void on_chkDatabase_stateChanged(int arg1);
+
+  void on_tableDatabase_itemChanged(QTableWidgetItem *item);
 
  private:
   void writeIni(QString key, int arg1);

@@ -114,8 +114,9 @@ void dlgDatabase::closeEvent(QCloseEvent *event) {
   QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
   for (int i = 0; i < tableDatabase->rowCount(); i++) {
     QString plistFile = dirpath + tableDatabase->item(i, 0)->text().trimmed();
-    mymethod->writePlistComment(plistFile,
-                                tableDatabase->item(i, 1)->text().trimmed());
+    if (listItemModi.at(i))
+      mymethod->writePlistComment(plistFile,
+                                  tableDatabase->item(i, 1)->text().trimmed());
   }
 }
 
@@ -496,4 +497,9 @@ void dlgDatabase::on_chkBackupEFI_stateChanged(int arg1) {
 
 void dlgDatabase::on_chkDatabase_stateChanged(int arg1) {
   writeIni("chkDatabase", arg1);
+}
+
+void dlgDatabase::on_tableDatabase_itemChanged(QTableWidgetItem *item) {
+  listItemModi.removeAt(item->row());
+  listItemModi.insert(item->row(), true);
 }

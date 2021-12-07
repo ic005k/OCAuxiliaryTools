@@ -10297,6 +10297,11 @@ void MainWindow::on_actionDatabase_triggered() {
     tableDatabase->setItem(i, 1, newItem1);
   }
 
+  myDatabase->listItemModi.clear();
+  for (int i = 0; i < files.count(); i++) {
+    myDatabase->listItemModi.append(false);
+  }
+
   myDatabase->setWindowTitle(tr("Configuration file database") + " : " +
                              getDatabaseVer());
 
