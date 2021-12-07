@@ -3154,8 +3154,8 @@ QVariantMap MainWindow::SavePlatformInfo() {
   valueList["Devices"] = Map["Devices"];
 
   // if (ui->chkCustomMemory->isChecked()) {
-  if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
-    subMap["Memory"] = valueList;
+  // if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+  if (ui->tableDevices->rowCount() > 0) subMap["Memory"] = valueList;
   //}
 
   // PlatformNVRAM
