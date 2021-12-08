@@ -4397,7 +4397,7 @@ BaseSkip</translation>
         <translation>显示提示</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10300"/>
+        <location filename="mainwindow.cpp" line="10305"/>
         <source>Configuration file database</source>
         <translation>配置文件数据库</translation>
     </message>
@@ -4787,46 +4787,51 @@ Type</translation>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="62"/>
+        <location filename="aboutdialog.cpp" line="65"/>
         <source>Icon Designer: Mirone (Brazil) </source>
         <oldsource>Icon Designer: Mirone (Brazil) [Update Check and Icon Design]</oldsource>
         <translation>图标设计:  Mirone（巴西）</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="56"/>
+        <location filename="aboutdialog.cpp" line="59"/>
         <source>Contributor: eSaF (England, UK)    [file structure]</source>
         <oldsource>Contributor: eSaF (England, UK) [file structure]</oldsource>
         <translation>贡献者:  eSaF (英国英格兰)    [文件结构]</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="58"/>
+        <location filename="aboutdialog.cpp" line="61"/>
         <source>Contributor: Sherlocks (Seoul, Korea)    [file structure]</source>
         <oldsource>Contributor: Sherlocks (Seoul, Korea) [file structure]</oldsource>
         <translation>贡献者:  Sherlocks (韩国首尔)    [文件结构]</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="53"/>
+        <location filename="aboutdialog.cpp" line="56"/>
         <source>Last modified: </source>
         <translation>最后修改：</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="24"/>
+        <location filename="aboutdialog.cpp" line="16"/>
+        <source>STABLE</source>
+        <translation>稳定版</translation>
+    </message>
+    <message>
+        <location filename="aboutdialog.cpp" line="21"/>
         <source>Source</source>
         <translation>来源</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="60"/>
+        <location filename="aboutdialog.cpp" line="63"/>
         <source>Contributor: 5T33Z0 (Germany)    [Documentation, user experience and UI interaction design]</source>
         <oldsource>Contributor: 5T33Z0 (Europe)    [Documentation, user experience and UI interaction design]</oldsource>
         <translation>贡献者：5T33Z0 (德国)    [文档、用户体验及UI交互设计]</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="68"/>
+        <location filename="aboutdialog.cpp" line="71"/>
         <source>Details</source>
         <translation>详细</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="86"/>
+        <location filename="aboutdialog.cpp" line="89"/>
         <source>(This App is built automatically by Github Actions.)</source>
         <oldsource>This App is built automatically by Github Actions.</oldsource>
         <translation>(本程序由Github Actions自动构建)</translation>
@@ -4980,9 +4985,9 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="dlgdatabase.ui" line="251"/>
         <location filename="dlgdatabase.ui" line="282"/>
-        <location filename="dlgdatabase.cpp" line="110"/>
-        <location filename="dlgdatabase.cpp" line="429"/>
-        <location filename="dlgdatabase.cpp" line="432"/>
+        <location filename="dlgdatabase.cpp" line="111"/>
+        <location filename="dlgdatabase.cpp" line="431"/>
+        <location filename="dlgdatabase.cpp" line="434"/>
         <source>Testing</source>
         <translation>测试</translation>
     </message>
@@ -5052,19 +5057,19 @@ p, li { white-space: pre-wrap; }
         <translation>最近打开</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.cpp" line="38"/>
+        <location filename="dlgdatabase.cpp" line="39"/>
         <source>Configs</source>
         <oldsource>Config Database</oldsource>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.cpp" line="41"/>
+        <location filename="dlgdatabase.cpp" line="42"/>
         <source>Comment</source>
         <translation>说明</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.cpp" line="430"/>
-        <location filename="dlgdatabase.cpp" line="431"/>
+        <location filename="dlgdatabase.cpp" line="432"/>
+        <location filename="dlgdatabase.cpp" line="433"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>

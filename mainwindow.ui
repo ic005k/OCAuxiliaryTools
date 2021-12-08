@@ -111,7 +111,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1036,15 +1036,22 @@ This works around patched tables becoming incompatible with the SLIC table causi
               <item row="2" column="0">
                <widget class="QLineEdit" name="txtEditASCII"/>
               </item>
+              <item row="4" column="0">
+               <widget class="QToolButton" name="btnUpdateHex">
+                <property name="toolTip">
+                 <string>Update</string>
+                </property>
+                <property name="text">
+                 <string>^</string>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="lblCount">
                 <property name="text">
                  <string>0</string>
                 </property>
                </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLineEdit" name="txtEditHex"/>
               </item>
               <item row="1" column="0">
                <widget class="QComboBox" name="cboxFind">
@@ -1059,15 +1066,8 @@ This works around patched tables becoming incompatible with the SLIC table causi
                 </property>
                </widget>
               </item>
-              <item row="4" column="0">
-               <widget class="QToolButton" name="btnUpdateHex">
-                <property name="toolTip">
-                 <string>Update</string>
-                </property>
-                <property name="text">
-                 <string>^</string>
-                </property>
-               </widget>
+              <item row="3" column="0">
+               <widget class="QLineEdit" name="txtEditHex"/>
               </item>
              </layout>
             </item>
@@ -10947,6 +10947,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="separator"/>
     <addaction name="actionOcvalidate"/>
     <addaction name="actionUpgrade_OC"/>
+    <addaction name="actionOpenCore_DEV"/>
     <addaction name="separator"/>
     <addaction name="actionDatabase"/>
     <addaction name="actionOpen_database_directory"/>
@@ -11274,6 +11275,14 @@ Enable this option to be able to see all the boot options when having multiple d
    </property>
    <property name="shortcut">
     <string>Ctrl+7</string>
+   </property>
+  </action>
+  <action name="actionOpenCore_DEV">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>OpenCore DEV</string>
    </property>
   </action>
  </widget>

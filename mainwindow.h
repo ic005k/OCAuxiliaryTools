@@ -81,6 +81,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  QLabel* lblVer;
   QToolButton* btnBak;
   bool blReadLeftTable;
   bool blWriteLeftTable;
@@ -938,6 +939,8 @@ class MainWindow : public QMainWindow {
   void on_comboBoxKernel_currentIndexChanged(const QString& arg1);
 
   void on_comboBoxUEFI_currentIndexChanged(const QString& arg1);
+
+  void on_actionOpenCore_DEV_triggered();
 
  private:
   bool LoadRightTable = false;

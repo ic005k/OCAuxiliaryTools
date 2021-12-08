@@ -8,6 +8,7 @@
 extern MainWindow* mw_one;
 extern QString ocVer;
 extern QString ocFrom;
+extern bool blDEV;
 extern Method* mymethod;
 extern QString SaveFileName;
 

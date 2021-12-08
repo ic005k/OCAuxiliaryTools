@@ -32,7 +32,10 @@ QVector<QCheckBox*> chk_Target;
 
 extern QString CurVerison;
 extern QString ocVer;
+extern QString ocVerDev;
 extern QString ocFrom;
+extern QString ocFromDev;
+extern bool blDEV;
 extern QString strACPI;
 extern QString strKexts;
 extern QString strDrivers;
@@ -6168,11 +6171,14 @@ void MainWindow::init_FileMenu() {
   connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::on_btnOpen);
   ui->actionOpen->setShortcut(tr("ctrl+o"));
 
-  QLabel* lblVer = new QLabel(this);
+  lblVer = new QLabel(this);
   QFont font;
   font.setBold(true);
   lblVer->setFont(font);
-  lblVer->setText("OpenCore " + ocVer);
+  if (!blDEV)
+    lblVer->setText("OpenCore " + ocVer);
+  else
+    lblVer->setText("OpenCore " + ocVerDev);
   ui->toolBar->addWidget(lblVer);
 
   QWidget* spacer = new QWidget(this);
@@ -6456,6 +6462,9 @@ void MainWindow::init_MainUI() {
   for (int i = 0; i < textTotal; i++) {
     ui->cboxFind->addItem(Reg.value(QString::number(i)).toString());
   }
+
+  ui->actionOpenCore_DEV->setChecked(Reg.value("OpenCoreDEV", 0).toBool());
+  on_actionOpenCore_DEV_triggered();
 
   int x, y, w, h;
   x = Reg.value("x", "0").toInt();
@@ -9768,37 +9777,38 @@ QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab) {
   listLineEdit = getAllLineEdit(getAllUIControls(tab));
   for (int i = 0; i < listLineEdit.count(); i++) {
     QLineEdit* w = (QLineEdit*)listLineEdit.at(i);
+    if (!w->isHidden()) {
+      QString str0, name;
+      str0 = w->objectName().mid(4, w->objectName().count() - 3);  // 去edit
 
-    QString str0, name;
-    str0 = w->objectName().mid(4, w->objectName().count() - 3);  // 去edit
+      if (str0.mid(0, 3) == "Dat" || str0.mid(0, 3) == "Int")
+        name = str0.mid(3, str0.count() - 2);
+      else
+        name = str0;
 
-    if (str0.mid(0, 3) == "Dat" || str0.mid(0, 3) == "Int")
-      name = str0.mid(3, str0.count() - 2);
-    else
-      name = str0;
+      if (editExclusion(w, name)) {
+        QStringList strList = name.split("_");
 
-    if (editExclusion(w, name)) {
-      QStringList strList = name.split("_");
+        if (str0.mid(0, 3) == "Dat") {
+          if (strList.count() > 0)
+            map.insert(strList.at(0), HexStrToByte(w->text().trimmed()));
+          else
+            map.insert(name, HexStrToByte(w->text().trimmed()));
+        }
 
-      if (str0.mid(0, 3) == "Dat") {
-        if (strList.count() > 0)
-          map.insert(strList.at(0), HexStrToByte(w->text().trimmed()));
-        else
-          map.insert(name, HexStrToByte(w->text().trimmed()));
-      }
+        else if (str0.mid(0, 3) == "Int") {
+          if (strList.count() > 0)
+            map.insert(strList.at(0), w->text().trimmed().toLongLong());
+          else
+            map.insert(name, w->text().trimmed().toLongLong());
+        }
 
-      else if (str0.mid(0, 3) == "Int") {
-        if (strList.count() > 0)
-          map.insert(strList.at(0), w->text().trimmed().toLongLong());
-        else
-          map.insert(name, w->text().trimmed().toLongLong());
-      }
-
-      else {
-        if (strList.count() > 0)
-          map.insert(strList.at(0), w->text().trimmed());
-        else
-          map.insert(name, w->text().trimmed());
+        else {
+          if (strList.count() > 0)
+            map.insert(strList.at(0), w->text().trimmed());
+          else
+            map.insert(name, w->text().trimmed());
+        }
       }
     }
   }
@@ -9825,11 +9835,13 @@ QVariantMap MainWindow::setCheckBoxValue(QVariantMap map, QWidget* tab) {
   listCheckBox = getAllCheckBox(getAllUIControls(tab));
   for (int i = 0; i < listCheckBox.count(); i++) {
     QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
-    QString strObjName = chkbox->objectName();
-    QString name = strObjName.mid(3, strObjName.count() - 2);
+    if (!chkbox->isHidden()) {
+      QString strObjName = chkbox->objectName();
+      QString name = strObjName.mid(3, strObjName.count() - 2);
 
-    if (ExclusionCheckBox(chkbox)) {
-      map.insert(name, getChkBool(chkbox));
+      if (ExclusionCheckBox(chkbox)) {
+        map.insert(name, getChkBool(chkbox));
+      }
     }
   }
 
@@ -9842,26 +9854,29 @@ QVariantMap MainWindow::setComboBoxValue(QVariantMap map, QWidget* tab) {
   listComboBox = getAllComboBox(getAllUIControls(tab));
   for (int i = 0; i < listComboBox.count(); i++) {
     QComboBox* w = (QComboBox*)listComboBox.at(i);
-    QString name = w->objectName().mid(4, w->objectName().count() - 3);
+    if (!w->isHidden()) {
+      QString name = w->objectName().mid(4, w->objectName().count() - 3);
 
-    if (w != ui->cboxFind && w != ui->cboxTextColor && w != ui->cboxBackColor &&
-        w != ui->comboBoxACPI && w != ui->comboBoxBooter &&
-        w != ui->comboBoxKernel && w != ui->comboBoxUEFI) {
-      if (name != "SystemProductName") {
-        map.insert(name, w->currentText().trimmed());
+      if (w != ui->cboxFind && w != ui->cboxTextColor &&
+          w != ui->cboxBackColor && w != ui->comboBoxACPI &&
+          w != ui->comboBoxBooter && w != ui->comboBoxKernel &&
+          w != ui->comboBoxUEFI) {
+        if (name != "SystemProductName") {
+          map.insert(name, w->currentText().trimmed());
 
-      } else
-        map.insert(name, getSystemProductName(w->currentText().trimmed()));
+        } else
+          map.insert(name, getSystemProductName(w->currentText().trimmed()));
 
-      if (name == "SecureBootModel") {
-        QString cStr = w->currentText().trimmed();
+        if (name == "SecureBootModel") {
+          QString cStr = w->currentText().trimmed();
 
-        if (cStr.contains("-")) {
-          QStringList cList = cStr.split("-");
-          cStr = cList.at(0);
+          if (cStr.contains("-")) {
+            QStringList cList = cStr.split("-");
+            cStr = cList.at(0);
+          }
+
+          map.insert(name, cStr);
         }
-
-        map.insert(name, cStr);
       }
     }
   }
@@ -10955,4 +10970,16 @@ void MainWindow::on_comboBoxKernel_currentIndexChanged(const QString& arg1) {
 void MainWindow::on_comboBoxUEFI_currentIndexChanged(const QString& arg1) {
   if (Initialization) return;
   mymethod->getMarkerQuirks(arg1, "UEFI", ui->tabUEFI8, "UEFI-Quirks.txt");
+}
+
+void MainWindow::on_actionOpenCore_DEV_triggered() {
+  blDEV = ui->actionOpenCore_DEV->isChecked();
+  if (!blDEV)
+    lblVer->setText("OpenCore " + ocVer);
+  else
+    lblVer->setText("OpenCore " + ocVerDev);
+
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  Reg.setValue("OpenCoreDEV", blDEV);
 }
