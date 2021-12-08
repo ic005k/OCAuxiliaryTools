@@ -338,7 +338,8 @@ void dlgDatabase::refreshKextUrl() {
   ui->textEdit->append(
       "FakeSMC.kext | "
       "https://github.com/CloverHackyColor/FakeSMC3_with_plugins");
-  // ui->textEdit->append(" | ");
+  ui->textEdit->append(
+      "FeatureUnlock.kext | https://github.com/acidanthera/FeatureUnlock");
   // ui->textEdit->append(" | ");
 
   QTextEdit *txtEdit = new QTextEdit;
