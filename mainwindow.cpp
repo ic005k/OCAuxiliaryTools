@@ -5275,9 +5275,7 @@ void MainWindow::loadLocal() {
 }
 
 void MainWindow::on_btnHelp() {
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString qtManulFile = appInfo.filePath() + "/Database/doc/Configuration.pdf";
-
+  QString qtManulFile = dataBaseDir + "doc/Configuration.pdf";
   QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
 }
 
@@ -10429,9 +10427,7 @@ void MainWindow::on_actionDSDT_SSDT_editor_triggered() {
 }
 
 void MainWindow::on_actionDifferences_triggered() {
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString qtManulFile = appInfo.filePath() + "/Database/doc/Differences.pdf";
-
+  QString qtManulFile = dataBaseDir + "doc/Differences.pdf";
   QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
 }
 
