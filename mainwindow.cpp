@@ -4883,7 +4883,6 @@ void MainWindow::readResultSystemInfo() {
 void MainWindow::on_btnGenerate_clicked() {
   QString arg1 = ui->cboxSystemProductName->currentText();
   if (!loading && arg1 != "") {
-    QFileInfo appInfo(qApp->applicationDirPath());
     gs = new QProcess;
 
     QString str = getSystemProductName(arg1);
@@ -4892,22 +4891,20 @@ void MainWindow::on_btnGenerate_clicked() {
 
 #ifdef Q_OS_WIN32
 
-    gs->start(appInfo.filePath() + "/Database/win/macserial.exe",
+    gs->start(dataBaseDir + "win/macserial.exe",
               QStringList() << "-m" << str);  //阻塞为execute
 
 #endif
 
 #ifdef Q_OS_LINUX
 
-    gs->start(appInfo.filePath() + "/Database/linux/macserial",
-              QStringList() << "-m" << str);
+    gs->start(dataBaseDir + "linux/macserial", QStringList() << "-m" << str);
 
 #endif
 
 #ifdef Q_OS_MAC
 
-    gs->start(appInfo.filePath() + "/Database/mac/macserial",
-              QStringList() << "-m" << str);
+    gs->start(dataBaseDir + "mac/macserial", QStringList() << "-m" << str);
 
 #endif
 
@@ -6175,10 +6172,6 @@ void MainWindow::init_FileMenu() {
   QFont font;
   font.setBold(true);
   lblVer->setFont(font);
-  if (!blDEV)
-    lblVer->setText("OpenCore " + ocVer);
-  else
-    lblVer->setText("OpenCore " + ocVerDev);
   ui->toolBar->addWidget(lblVer);
 
   QWidget* spacer = new QWidget(this);
@@ -6768,7 +6761,11 @@ QString MainWindow::getDatabaseVer() {
           .lastModified()
           .toString();
 
-  QString DatabaseVer = ocVer + "    " + strLastModify;
+  QString DatabaseVer;
+  if (!blDEV)
+    DatabaseVer = ocVer + "    " + strLastModify;
+  else
+    DatabaseVer = ocVerDev + "    " + strLastModify;
 
   return DatabaseVer;
 }
@@ -9908,7 +9905,7 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
   if (DirName.isEmpty()) return;
 
   QFileInfo appInfo(qApp->applicationDirPath());
-  QString pathSource = appInfo.filePath() + "/Database/";
+  QString pathOldSource = appInfo.filePath() + "/Database/";
 
   QString file1, file2, file3, file4;
   QString targetFile1, targetFile2, targetFile3, targetFile4;
@@ -9946,7 +9943,7 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
 
   // Kexts
   if (linuxOS) {
-    copyDirectoryFiles(pathSource + "EFI/OC/Kexts/",
+    copyDirectoryFiles(pathOldSource + "EFI/OC/Kexts/",
                        QDir::homePath() + "/Kexts/", false);
   }
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
@@ -9955,7 +9952,7 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
       if (linuxOS)
         sourceFiles.append(QDir::homePath() + "/Kexts/" + strKextName);
       else
-        sourceFiles.append(pathSource + "EFI/OC/Kexts/" + strKextName);
+        sourceFiles.append(pathOldSource + "EFI/OC/Kexts/" + strKextName);
       targetFiles.append(DirName + "/OC/Kexts/" + strKextName);
     }
   }
@@ -10033,6 +10030,15 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
 
   dlgSyncOC->setWindowFlags(dlgAutoUpdate->windowFlags() |
                             Qt::WindowStaysOnTopHint);
+
+  if (!blDEV) {
+    dlgSyncOC->ui->lblOCFrom->setText(ocFrom);
+    dlgSyncOC->setWindowTitle(tr("Sync OC") + " -> " + ocVer);
+  } else {
+    dlgSyncOC->ui->lblOCFrom->setText(ocFromDev);
+    dlgSyncOC->setWindowTitle(tr("Sync OC") + " -> " + ocVerDev);
+  }
+
   dlgSyncOC->show();
   dlgSyncOC->ui->listSource->setFocus();
 
@@ -10163,26 +10169,25 @@ void MainWindow::on_btnGetPassHash_clicked() {
   ui->progressBar->setMaximum(0);
   this->repaint();
 
-  QFileInfo appInfo(qApp->applicationDirPath());
   QString strPass = "";
   chkdataPassHash = new QProcess;
 
 #ifdef Q_OS_WIN32
-  chkdataPassHash->start(appInfo.filePath() + "/Database/win/ocpasswordgen.exe",
-                         QStringList() << strPass);
+  chkdataPassHash->start(dataBaseDir + "win/ocpasswordgen.exe", QStringList()
+                                                                    << strPass);
 
 #endif
 
 #ifdef Q_OS_LINUX
-  chkdataPassHash->start(appInfo.filePath() + "/Database/linux/ocpasswordgen",
-                         QStringList() << strPass);
+  chkdataPassHash->start(dataBaseDir + "linux/ocpasswordgen", QStringList()
+                                                                  << strPass);
 
 #endif
 
 #ifdef Q_OS_MAC
 
-  chkdataPassHash->start(appInfo.filePath() + "/Database/mac/ocpasswordgen",
-                         QStringList() << strPass);
+  chkdataPassHash->start(dataBaseDir + "mac/ocpasswordgen", QStringList()
+                                                                << strPass);
 #endif
 
   chkdataPassHash->waitForStarted();  //等待启动完成
@@ -10324,22 +10329,20 @@ void MainWindow::on_actionDatabase_triggered() {
 }
 
 void MainWindow::on_actionOcvalidate_triggered() {
-  QFileInfo appInfo(qApp->applicationDirPath());
   chkdata = new QProcess;
 
 #ifdef Q_OS_WIN32
-  chkdata->start(appInfo.filePath() + "/Database/win/ocvalidate.exe",
-                 QStringList() << SaveFileName);
+  chkdata->start(dataBaseDir + "win/ocvalidate.exe", QStringList()
+                                                         << SaveFileName);
 #endif
 
 #ifdef Q_OS_LINUX
-  chkdata->start(appInfo.filePath() + "/Database/linux/ocvalidate",
-                 QStringList() << SaveFileName);
+  chkdata->start(dataBaseDir + "linux/ocvalidate", QStringList()
+                                                       << SaveFileName);
 #endif
 
 #ifdef Q_OS_MAC
-  chkdata->start(appInfo.filePath() + "/Database/mac/ocvalidate",
-                 QStringList() << SaveFileName);
+  chkdata->start(dataBaseDir + "mac/ocvalidate", QStringList() << SaveFileName);
 #endif
 
   connect(chkdata, SIGNAL(finished(int)), this, SLOT(readResultCheckData()));
@@ -10974,12 +10977,21 @@ void MainWindow::on_comboBoxUEFI_currentIndexChanged(const QString& arg1) {
 
 void MainWindow::on_actionOpenCore_DEV_triggered() {
   blDEV = ui->actionOpenCore_DEV->isChecked();
-  if (!blDEV)
-    lblVer->setText("OpenCore " + ocVer);
-  else
-    lblVer->setText("OpenCore " + ocVerDev);
-
+  changeOpenCore(blDEV);
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("OpenCoreDEV", blDEV);
+}
+
+void MainWindow::changeOpenCore(bool blDEV) {
+  QFileInfo appInfo(qApp->applicationDirPath());
+  if (!blDEV) {
+    dataBaseDir = appInfo.filePath() + "/Database/";
+    pathSource = appInfo.filePath() + "/Database/";
+    lblVer->setText("OpenCore " + ocVer);
+  } else {
+    dataBaseDir = appInfo.filePath() + "/devDatabase/";
+    pathSource = appInfo.filePath() + "/devDatabase/";
+    lblVer->setText("OpenCore " + ocVerDev);
+  }
 }

@@ -81,6 +81,8 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  QString pathSource;
+  QString dataBaseDir;
   QLabel* lblVer;
   QToolButton* btnBak;
   bool blReadLeftTable;
@@ -356,6 +358,7 @@ class MainWindow : public QMainWindow {
   QString loadText(QString textFile);
   QString getTextEditLineText(QTextEdit* txtEdit, int i);
   QString getDriverInfo(QString strDisk);
+  void changeOpenCore(bool blDEV);
  public slots:
   void DisplayLevel();
   void ScanPolicy();

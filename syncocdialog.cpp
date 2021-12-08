@@ -7,7 +7,9 @@
 
 extern MainWindow* mw_one;
 extern QString ocVer;
+extern QString ocVerDev;
 extern QString ocFrom;
+extern QString ocFromDev;
 extern bool blDEV;
 extern Method* mymethod;
 extern QString SaveFileName;
@@ -16,12 +18,10 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {
   ui->setupUi(this);
 
-  ui->lblOCFrom->setText(ocFrom);
   ui->lblResourcesFrom->setText(
       "<a href=\"https://github.com/acidanthera/OcBinaryData/\">" +
       tr("Source"));
 
-  setWindowTitle(tr("Sync OC") + " -> " + ocVer);
   QString listStyleMain =
       "QListWidget{outline:0px;}"
       "QListWidget::item:selected{background:rgb(0,124,221); border:0px "
@@ -96,8 +96,12 @@ void SyncOCDialog::on_btnStartSync_clicked() {
   QMessageBox box;
   if (ok) {
     close();
-    box.setText(tr("Successfully synced to OpenCore: ") + ocVer + "        " +
-                ocFrom);
+    if (!blDEV)
+      box.setText(tr("Successfully synced to OpenCore: ") + ocVer + "        " +
+                  ocFrom);
+    else
+      box.setText(tr("Successfully synced to OpenCore: ") + ocVerDev +
+                  "        " + ocFromDev);
     box.exec();
 
     mw_one->checkFiles();

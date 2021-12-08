@@ -131,8 +131,8 @@ void dlgOCValidate::on_btnCreateVault_clicked() {
 
   ui->btnCreateVault->setEnabled(false);
   repaint();
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString dirpath = appInfo.filePath() + "/Database/mac/CreateVault/";
+
+  QString dirpath = mw_one->dataBaseDir + "mac/CreateVault/";
   QString fileName;
   if (ui->chkSignature->isChecked())
     fileName = dirpath + "sign.command";
