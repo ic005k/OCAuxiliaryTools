@@ -39,6 +39,9 @@ function Main() {
     #$Database=Database -f
     Copy-Item Database $archiveName\Database -recurse
     
+    #$devDatabase=devDatabase -f
+    Copy-Item devDatabase $archiveName\devDatabase -recurse
+    
     # 拷贝依赖
     windeployqt --qmldir . --plugindir $archiveName\plugins --no-translations --compiler-runtime $archiveName\$targetName
     # 删除不必要的文件
