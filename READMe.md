@@ -69,15 +69,8 @@ Some online resources, thanks @5T33Z0
 ### I can't download the Kext update Or is OCAT slow to automatically download updates?
 * It's simple, please select the appropriate web proxy in the "Misc" section of the "Database" screen to improve the download speed of GitHub.
 
-### Why does OCAT follow the development version of OC? Is it always consistent with the development version of OC?
-* Normally, OCAT is maintained on the stable version of OC, and once something is added to the configuration file of the OC development version, that's when OCAT switches to the OC development version. The advantage of this is that you can put these additions into OCAT in advance, and when OC releases a new stable version, OCAT will not seem to be lagging behind.
-* No, OCAT only updates the development version of OC periodically. If you need to update OC daily, please do it manually, OCAT can't do that. This is something you need to please be aware of.
-
 ### Why doesn't OCAT use an online approach to automatically obtain OC?
 * Because OC is only released in stable version almost once a month, and the OC update is inevitably accompanied by an OCAT update, when OCAT has enough time to put the OC into OCAT, there is absolutely no need to use the online fetching method.
-
-### Can OCAT make a switch option for stable and development versions of OC?
-* No. OCAT does not consider this feature at the moment, the goal of OCAT is to be simple, clear and easy to use. If you do not want to use the development version of OC, please download a specific version of OCAT and turn off "Automatic update checking" (in the "Help" menu).
 
 ### Why not write a complete documentation for OCAT?
 * Because OCAT was designed to be simple and clear enough that users can use OCAT without almost any documentation.
