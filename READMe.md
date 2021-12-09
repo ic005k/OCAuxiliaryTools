@@ -29,7 +29,6 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 * Pre-selected plugin content for Quirks is provided and maintained by @5T33Z0.  [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
 
 * The BaseConfigs plugin package is provided and maintained by @5T33Z0. [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs) 
-It is located in the BaseConfigs directory of the database and is visible in the profile database interface.
 
 * The OCAT pre-set function uses an open interface, so if you are interested in pre-setting entries such as ACPI patches, please help improve the contents of the PreSet.plist file and we look forward to hearing from you!
 
