@@ -54,6 +54,11 @@ dlgDatabase::dlgDatabase(QWidget *parent)
         i, QHeaderView::ResizeToContents);
   }
 
+  for (int i = 0; i < ui->tableKextUrl->columnCount(); i++) {
+    ui->tableKextUrl->horizontalHeader()->setSectionResizeMode(
+        i, QHeaderView::ResizeToContents);
+  }
+
   // Find Table
   ui->tableDatabaseFind->horizontalHeader()->setHidden(true);
   ui->tableDatabaseFind->setHidden(true);
@@ -340,6 +345,11 @@ void dlgDatabase::refreshKextUrl() {
       "https://github.com/CloverHackyColor/FakeSMC3_with_plugins");
   ui->textEdit->append(
       "FeatureUnlock.kext | https://github.com/acidanthera/FeatureUnlock");
+  ui->textEdit->append(
+      "AMDRyzenCPUPowerManagement.kext | "
+      "https://github.com/trulyspinach/SMCAMDProcessor");
+  ui->textEdit->append(
+      "SMCAMDProcessor.kext | https://github.com/trulyspinach/SMCAMDProcessor");
   // ui->textEdit->append(" | ");
 
   QTextEdit *txtEdit = new QTextEdit;

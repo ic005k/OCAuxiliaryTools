@@ -431,8 +431,8 @@ void Method::parse_UpdateJSON(QString str) {
         QString str = strDownloadUrlList.at(i);
         if (str.contains("RELEASE"))
           strDLUrl = str;
-        else
-          strDLUrl = strDownloadUrlList.at(0);
+        else if (str.contains(kextName))
+          strDLUrl = str;
       } else
         strDLUrl = strDownloadUrlList.at(0);
     }
@@ -462,8 +462,9 @@ void Method::getLastReleaseFromHtml(QString url) {
       QString str = strDownloadUrlList.at(i);
       if (str.contains("RELEASE"))
         strDLUrl = str;
-      else
-        strDLUrl = strDownloadUrlList.at(0);
+      else {
+        if (str.contains(kextName)) strDLUrl = str;
+      }
     } else
       strDLUrl = strDownloadUrlList.at(0);
   }
