@@ -304,9 +304,7 @@ void Method::startDownload(QString strUrl) {
   bool ret =
       myfile->open(QIODevice::WriteOnly | QIODevice::Truncate);  //创建文件
   if (!ret) {
-    mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
-    mw_one->repaint();
-
+    mw_one->dlgSyncOC->ui->btnStop->click();
     QMessageBox::warning(this, "warning", "File creation failed!\n" + file);
     return;
   }
@@ -431,8 +429,10 @@ void Method::parse_UpdateJSON(QString str) {
         QString str = strDownloadUrlList.at(i);
         if (str.contains("RELEASE"))
           strDLUrl = str;
-        else if (str.contains(kextName))
-          strDLUrl = str;
+        else {
+          QString str_n = kextName;
+          if (str.contains(str_n.replace(".kext", ""))) strDLUrl = str;
+        }
       } else
         strDLUrl = strDownloadUrlList.at(0);
     }
@@ -463,7 +463,8 @@ void Method::getLastReleaseFromHtml(QString url) {
       if (str.contains("RELEASE"))
         strDLUrl = str;
       else {
-        if (str.contains(kextName)) strDLUrl = str;
+        QString str_n = kextName;
+        if (str.contains(str_n.replace(".kext", ""))) strDLUrl = str;
       }
     } else
       strDLUrl = strDownloadUrlList.at(0);

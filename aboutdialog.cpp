@@ -4,7 +4,7 @@
 #include "ui_aboutdialog.h"
 
 extern MainWindow* mw_one;
-QString CurVerison = "20220019";
+QString CurVerison = "20220020";
 QString ocVer = "0.7.6";
 QString ocVerDev = "0.7.7";
 QString ocFrom, ocFromDev;
