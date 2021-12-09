@@ -44,7 +44,7 @@ extern QString strTools;
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-
+  // this->setUnifiedTitleAndToolBarOnMac(true);
   Initialization = true;
   loading = true;
 
@@ -10026,9 +10026,6 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     dlgSyncOC->ui->listTarget->item(i)->setCheckState(Qt::Checked);
   }
 
-  dlgSyncOC->setWindowFlags(dlgAutoUpdate->windowFlags() |
-                            Qt::WindowStaysOnTopHint);
-
   if (!blDEV) {
     dlgSyncOC->ui->lblOCFrom->setText(ocFrom);
     dlgSyncOC->setWindowTitle(tr("Sync OC") + " -> " + ocVer);
@@ -10037,6 +10034,9 @@ void MainWindow::on_actionUpgrade_OC_triggered() {
     dlgSyncOC->setWindowTitle(tr("Sync OC") + " -> " + ocVerDev);
   }
 
+  // dlgSyncOC->setWindowFlags(dlgAutoUpdate->windowFlags() |
+  //                           Qt::WindowStaysOnTopHint);
+  dlgSyncOC->setModal(true);
   dlgSyncOC->show();
   dlgSyncOC->ui->listSource->setFocus();
 
@@ -10278,12 +10278,13 @@ void MainWindow::on_editPassInput_returnPressed() {
 }
 
 void MainWindow::on_actionDatabase_triggered() {
-  myDatabase->setWindowFlags(dlgAutoUpdate->windowFlags() |
-                             Qt::WindowStaysOnTopHint);
+  // myDatabase->setWindowFlags(dlgAutoUpdate->windowFlags() |
+  //                           Qt::WindowStaysOnTopHint);
   if (osx1012)
     myDatabase->ui->tabWidget->setDocumentMode(true);
   else
     myDatabase->ui->tabWidget->setDocumentMode(false);
+  myDatabase->setModal(true);
   myDatabase->show();
 
   QFileInfo appInfo(qApp->applicationDirPath());
@@ -10529,8 +10530,9 @@ void MainWindow::ShowAutoUpdateDlg(bool Database) {
   if (dlgAutoUpdate->strUrlOrg == "") return;
   if (dlgAutoUpdate->isVisible()) return;
 
-  dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() |
-                                Qt::WindowStaysOnTopHint);
+  // dlgAutoUpdate->setWindowFlags(dlgAutoUpdate->windowFlags() |
+  //                              Qt::WindowStaysOnTopHint);
+  dlgAutoUpdate->setModal(true);
   dlgAutoUpdate->show();
   dlgAutoUpdate->startWgetDownload();
   if (linuxOS) {
