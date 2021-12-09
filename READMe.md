@@ -42,9 +42,7 @@ Some online resources, thanks @5T33Z0
 ---
 
 ### How to configure a new EFI?
-* Just click "Database" on the toolbar and double click "Sample.plist" in the database list (this file is an example of the official OC configuration file), then a EFI folder on the desktop, the process is complete.
-* After editing and modifying this "Sample.plist" (mainly to match with your own machine hardware, which is a continuous debugging and testing process), you can always select the "Edit" menu in the "Generate EFI folder on desktop" to refresh the previously generated EFI directory.
-* After that, you can copy the EFI folder on the desktop to a boot partition such as ESP for boot testing.
+* The process is very simple, just click on "Database" on the toolbar, double click on the template file that matches your model in the database list (thanks to @5T33Z0 for providing and maintaining these files), an EFI folder will be automatically created on the desktop and the process is complete.
 
 ### How to upgrade OC automatically? (Very simple, only two steps)
 * Drag and drop the configuration file onto the OCAT interface and click "Save" on the toolbar.
