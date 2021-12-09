@@ -19,7 +19,7 @@
 
 [discourse-link]: https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-auxiliary-tools/
 
-OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用工具，功能丰富、简洁易用。
+OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用工具，功能丰富、简洁易用。OCAT保持对用户层面全透明的结构特性，采用完全开放式的设计，它仍在不断发展，欢迎任何问题或建议。
 
 OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下载
 
