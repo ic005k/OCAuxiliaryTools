@@ -44,7 +44,7 @@ extern QString strTools;
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  // this->setUnifiedTitleAndToolBarOnMac(true);
+
   Initialization = true;
   loading = true;
 
@@ -6043,7 +6043,7 @@ void MainWindow::init_ToolBarIcon() {
   else
     iSize = 23;
   ui->toolBar->setIconSize(QSize(iSize, iSize));
-  if (red < 55)
+  /*if (red < 55)
     ui->toolBar->setStyleSheet(
 
         "QToolButton:hover{ "
@@ -6092,7 +6092,7 @@ void MainWindow::init_ToolBarIcon() {
         "border:1px;"
         "border-radius:5px;padding:2px 4px; }"
 
-    );
+    );*/
 
   if (red < 55) {
     btn0->setIcon(QIcon(":/icon/rp0.png"));
@@ -6155,6 +6155,8 @@ void MainWindow::init_ToolBarIcon() {
   ui->listSub->setStyleSheet(listStyleMain);
 
   updateIconStatus();
+
+  ui->toolBar->setFixedHeight(42);
 }
 
 void MainWindow::init_FileMenu() {
@@ -6234,6 +6236,7 @@ void MainWindow::init_EditMenu() {
   ui->actionOcvalidate->setShortcut(tr("ctrl+l"));
   ui->actionOcvalidate->setIcon(QIcon(":/icon/ov.png"));
   ui->toolBar->addAction(ui->actionOcvalidate);
+  ui->toolBar->addAction(ui->actionUpgrade_OC);
 
   ui->toolBar->addSeparator();
 
@@ -6254,7 +6257,6 @@ void MainWindow::init_EditMenu() {
 
   ui->actionUpgrade_OC->setIcon(QIcon(":/icon/um.png"));
   ui->actionUpgrade_OC->setEnabled(false);
-  ui->toolBar->addAction(ui->actionUpgrade_OC);
 
   // Open DataBase
   if (mac || osx1012) ui->actionDatabase->setIconVisibleInMenu(false);
@@ -6419,6 +6421,10 @@ void MainWindow::init_MainUI() {
   ui->frameTip->setPalette(QPalette(QColor(255, 204, 204)));
   ui->btnNo->setDefault(true);
   ui->frameTip->setHidden(true);
+
+  // this->setUnifiedTitleAndToolBarOnMac(true);
+  ui->frameToolBar->setHidden(true);
+  // setWindowFlags(Qt::FramelessWindowHint);
 
   init_ToolButtonStyle();
   init_FileMenu();

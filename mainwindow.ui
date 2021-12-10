@@ -25,7 +25,100 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_66">
-    <item row="0" column="0" rowspan="3">
+    <item row="0" column="0" colspan="2">
+     <widget class="QFrame" name="frameToolBar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_76">
+       <item row="0" column="2">
+        <widget class="QToolButton" name="btnSave">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>28</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="autoRaise">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QToolButton" name="toolButton_4">
+         <property name="text">
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_126">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QToolButton" name="toolButton_3">
+         <property name="text">
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QToolButton" name="toolButton_5">
+         <property name="text">
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <spacer name="horizontalSpacer_36">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="3">
      <widget class="QListWidget" name="listMain">
       <property name="maximumSize">
        <size>
@@ -38,7 +131,7 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
+    <item row="1" column="1">
      <widget class="QFrame" name="frameTip">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -89,7 +182,7 @@
       </layout>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item row="2" column="1">
      <widget class="QListWidget" name="listSub">
       <property name="maximumSize">
        <size>
@@ -99,7 +192,7 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
+    <item row="3" column="1">
      <widget class="QTabWidget" name="tabTotal">
       <property name="toolTip">
        <string/>
@@ -10993,14 +11086,35 @@ Enable this option to be able to see all the boot options when having multiple d
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/*QToolBar
+{
+    background-color: rgb(245, 240, 248);
+	border: none;
+	padding: 1px;
+}
+QToolBar::separator {
+    width: 0px;
+    background-color: #222222;
+}*/</string>
    </property>
    <property name="allowedAreas">
     <set>Qt::BottomToolBarArea|Qt::TopToolBarArea</set>
    </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonIconOnly</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
