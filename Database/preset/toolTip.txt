@@ -27,11 +27,6 @@ The issue was fixed in macOS Mojave (10.14).
 这个问题在macOS Mojave (10.14)中得到了修复。
 
 
-***EnableVmx
-None
-----
-暂无
-
 ***SystemProductName
 Type: plist string
 Failsafe: Empty (OEM specified or not installed)
@@ -179,6 +174,16 @@ Note: Refer to the Add MaxKernel description for matching logic.
 注意：请参考添加MaxKernel描述的匹配逻辑。
 
 
+***EnableVmx
+Type: plist boolean
+Failsafe: false
+Description: Enable Intel virtual machine extensions.
+Note: Required to allow virtualization in Windows on some Mac hardware. VMX is enabled or disabled and locked by BIOS before OpenCore starts on most firmware. Use BIOS to enable virtualization where possible.
+----
+类型：plist布尔值
+失败保护：false
+描述：启用英特尔虚拟机扩展。
+注意：需要在某些Mac硬件上允许在Windows中进行虚拟化。在大多数固件的OpenCore启动之前，VMX被BIOS启用或禁用并锁定。在可能的情况下使用BIOS来启用虚拟化。
 
 
 
