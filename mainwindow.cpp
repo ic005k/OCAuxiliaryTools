@@ -6202,9 +6202,11 @@ void MainWindow::init_FileMenu() {
     btn0->setVisible(false);
   }
 
-  // extern void qt_mac_set_dock_menu(QMenu*);
-  // qt_mac_set_dock_menu(reFileMenu);
-  if (mac || osx1012) reFileMenu->setAsDockMenu();
+// extern void qt_mac_set_dock_menu(QMenu*);
+// qt_mac_set_dock_menu(reFileMenu);
+#ifdef Q_OS_MAC
+  reFileMenu->setAsDockMenu();
+#endif
 
   // Open Dir
   if (mac || osx1012) ui->actionOpen_Directory->setIconVisibleInMenu(false);
