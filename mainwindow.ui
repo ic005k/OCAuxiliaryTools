@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1484</width>
-    <height>755</height>
+    <height>798</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -24,7 +24,7 @@
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_66">
+   <layout class="QGridLayout" name="gridLayout_77">
     <item row="0" column="0" colspan="2">
      <widget class="QFrame" name="frameToolBar">
       <property name="minimumSize">
@@ -126,6 +126,9 @@
         <height>16777215</height>
        </size>
       </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
       <property name="movement">
        <enum>QListView::Static</enum>
       </property>
@@ -190,6 +193,9 @@
         <height>38</height>
        </size>
       </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
      </widget>
     </item>
     <item row="3" column="1">
@@ -204,7 +210,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -274,6 +280,9 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               </property>
               <property name="statusTip">
                <string/>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -1126,26 +1135,6 @@ This works around patched tables becoming incompatible with the SLIC table causi
             </item>
             <item row="0" column="1">
              <layout class="QGridLayout" name="gridLayout_43">
-              <item row="2" column="0">
-               <widget class="QLineEdit" name="txtEditASCII"/>
-              </item>
-              <item row="4" column="0">
-               <widget class="QToolButton" name="btnUpdateHex">
-                <property name="toolTip">
-                 <string>Update</string>
-                </property>
-                <property name="text">
-                 <string>^</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="lblCount">
-                <property name="text">
-                 <string>0</string>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="0">
                <widget class="QComboBox" name="cboxFind">
                 <property name="minimumSize">
@@ -1159,8 +1148,12 @@ This works around patched tables becoming incompatible with the SLIC table causi
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
-               <widget class="QLineEdit" name="txtEditHex"/>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lblCount">
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>
@@ -3773,7 +3766,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3787,6 +3780,9 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
              <widget class="QGroupBox" name="groupBox_5">
               <property name="title">
                <string/>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
               </property>
               <layout class="QGridLayout" name="gridLayout_52">
                <property name="topMargin">
@@ -4033,6 +4029,9 @@ Note: This option may not work well with System text renderer. Setting a backgro
              <widget class="QGroupBox" name="groupBox_10">
               <property name="title">
                <string/>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_10">
                <item>
@@ -11005,6 +11004,67 @@ Enable this option to be able to see all the boot options when having multiple d
        </layout>
       </widget>
      </widget>
+    </item>
+    <item row="4" column="0" colspan="2">
+     <layout class="QGridLayout" name="gridLayout_66">
+      <item row="0" column="4">
+       <widget class="QLineEdit" name="txtEditHex"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblTemp1">
+        <property name="text">
+         <string>    </string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QLineEdit" name="txtEditASCII"/>
+      </item>
+      <item row="0" column="2">
+       <spacer name="horizontalSpacer_37">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="5">
+       <widget class="QLabel" name="lblHexASCII">
+        <property name="text">
+         <string>Hex &lt;==&gt; ASCII</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="lblStatusShow">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QToolButton" name="btnUpdateHex">
+        <property name="toolTip">
+         <string>Update</string>
+        </property>
+        <property name="text">
+         <string>^</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
+       <widget class="QLabel" name="lblTemp2">
+        <property name="text">
+         <string>    </string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

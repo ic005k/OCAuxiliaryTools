@@ -1982,8 +1982,11 @@ void MainWindow::initui_PlatformInfo() {
     ui->actionAutoChkUpdate->setChecked(
         Reg.value("AutoChkUpdate", true).toBool());
   }
-  ui->chkSaveDataHub->setStyleSheet(
-      "QCheckBox { background-color : yellow; color : black; }");
+  // ui->chkSaveDataHub->setStyleSheet(
+  //    "QCheckBox { background-color : yellow; color : black; }");
+  QFont font;
+  font.setBold(true);
+  ui->chkSaveDataHub->setFont(font);
 
   ui->cboxUpdateSMBIOSMode->addItem("TryOverwrite");
   ui->cboxUpdateSMBIOSMode->addItem("Create");
@@ -3373,9 +3376,11 @@ void MainWindow::setStatusBarText(QTableWidget* table) {
     str = text;
 
   if (table->currentColumn() != 0)
-    ui->statusbar->showMessage(text0 + " -> " + str);
+    // ui->statusbar->showMessage(text0 + " -> " + str);
+    ui->lblStatusShow->setText(text0 + " -> " + str);
   else
-    ui->statusbar->showMessage(str);
+    // ui->statusbar->showMessage(str);
+    ui->lblStatusShow->setText(str);
 
   if (getTableFieldDataType(table) == "Data") {
     ui->txtEditHex->setText(table->currentItem()->text());
@@ -6422,9 +6427,9 @@ void MainWindow::init_MainUI() {
   ui->btnNo->setDefault(true);
   ui->frameTip->setHidden(true);
 
-  // this->setUnifiedTitleAndToolBarOnMac(true);
+  this->setUnifiedTitleAndToolBarOnMac(true);
   ui->frameToolBar->setHidden(true);
-  // setWindowFlags(Qt::FramelessWindowHint);
+  ui->statusbar->setHidden(true);
 
   init_ToolButtonStyle();
   init_FileMenu();
@@ -6500,17 +6505,17 @@ void MainWindow::init_MainUI() {
   ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
 
   // StatusBar
-  ui->statusbar->addPermanentWidget(ui->btnUpdateHex, 0);
+  // ui->statusbar->addPermanentWidget(ui->btnUpdateHex, 0);
 
   ui->txtEditHex->setPlaceholderText(tr("Hexadecimal"));
-  ui->statusbar->addPermanentWidget(ui->txtEditHex, 0);
+  // ui->statusbar->addPermanentWidget(ui->txtEditHex, 0);
 
-  labelConversion = new QLabel(this);
-  labelConversion->setText("Hex <==> ASCII");
-  ui->statusbar->addPermanentWidget(labelConversion, 0);
+  // labelConversion = new QLabel(this);
+  // labelConversion->setText("Hex <==> ASCII");
+  // ui->statusbar->addPermanentWidget(labelConversion, 0);
 
   ui->txtEditASCII->setPlaceholderText(tr("ASCII"));
-  ui->statusbar->addPermanentWidget(ui->txtEditASCII, 0);
+  // ui->statusbar->addPermanentWidget(ui->txtEditASCII, 0);
 
   setConversionWidgetVisible(false);
 
@@ -6543,6 +6548,7 @@ void MainWindow::init_TableStyle() {
 
     t->setStyleSheet(strStyle);
     t->setCornerButtonEnabled(true);
+    t->setFrameShape(QFrame::NoFrame);
   }
 }
 
@@ -10613,12 +10619,12 @@ void MainWindow::on_listMain_currentRowChanged(int currentRow) {
 void MainWindow::setConversionWidgetVisible(bool v) {
   if (!v) {
     ui->txtEditHex->setVisible(false);
-    labelConversion->setVisible(false);
+    ui->lblHexASCII->setVisible(false);
     ui->txtEditASCII->setVisible(false);
     ui->btnUpdateHex->setVisible(false);
   } else {
     ui->txtEditHex->setVisible(true);
-    labelConversion->setVisible(true);
+    ui->lblHexASCII->setVisible(true);
     ui->txtEditASCII->setVisible(true);
     ui->btnUpdateHex->setVisible(true);
   }
@@ -10999,3 +11005,20 @@ void MainWindow::changeOpenCore(bool blDEV) {
     lblVer->setText("OpenCore " + ocVerDev);
   }
 }
+
+void MainWindow::mousePressEvent(QMouseEvent* e) {
+  if (e->button() == Qt::LeftButton) {
+    isDrag = true;
+    m_position = e->globalPos() - this->pos();
+    e->accept();
+  }
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent* e) {
+  if (isDrag && (e->buttons() && Qt::LeftButton)) {
+    move(e->globalPos() - m_position);
+    e->accept();
+  }
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent*) { isDrag = false; }

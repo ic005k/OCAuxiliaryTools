@@ -386,6 +386,9 @@ class MainWindow : public QMainWindow {
   void keyReleaseEvent(QKeyEvent* event) override;  //键盘松开事件
   void paintEvent(QPaintEvent* event) override;
   bool eventFilter(QObject* obj, QEvent* event) override;
+  void mousePressEvent(QMouseEvent*) override;
+  void mouseReleaseEvent(QMouseEvent*) override;
+  void mouseMoveEvent(QMouseEvent*) override;
 
 #ifndef QT_NO_CONTEXTMENU
   void contextMenuEvent(QContextMenuEvent* event) override;
@@ -946,6 +949,8 @@ class MainWindow : public QMainWindow {
   void on_actionOpenCore_DEV_triggered();
 
  private:
+  bool isDrag;
+  QPoint m_position;
   bool LoadRightTable = false;
   bool AddCboxFindItem = false;
   void acpi_cellDoubleClicked();
