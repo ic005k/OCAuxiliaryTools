@@ -6202,6 +6202,10 @@ void MainWindow::init_FileMenu() {
     btn0->setVisible(false);
   }
 
+  // extern void qt_mac_set_dock_menu(QMenu*);
+  // qt_mac_set_dock_menu(reFileMenu);
+  reFileMenu->setAsDockMenu();
+
   // Open Dir
   if (mac || osx1012) ui->actionOpen_Directory->setIconVisibleInMenu(false);
   ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
@@ -6516,6 +6520,8 @@ void MainWindow::init_MainUI() {
 
   ui->txtEditASCII->setPlaceholderText(tr("ASCII"));
   // ui->statusbar->addPermanentWidget(ui->txtEditASCII, 0);
+  ui->btnUpdateHex->setFixedHeight(ui->txtEditHex->height() - 12);
+  ui->btnUpdateHex->setFixedWidth(ui->btnUpdateHex->height());
 
   setConversionWidgetVisible(false);
 
