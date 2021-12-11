@@ -31,13 +31,31 @@ aboutDialog::aboutDialog(QWidget* parent)
   setMinimumWidth(this->width());
   setMinimumHeight(this->height());
 
-  initInfoStr();
+  ui->label->setFixedHeight(65);
+  ui->label->setFixedWidth(65);
+  ui->label->setText("");
+
+  ui->label->setStyleSheet(
+      "QLabel{"
+      "border-image:url(:/icon.png) 4 4 4 4 stretch stretch;"
+      "}");
+
+  if (!blDEV)
+    ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+                            " For OpenCore " + ocVer);
+  else
+    ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+                            " For OpenCore " + ocVerDev);
+  QFont font;
+  font.setBold(true);
+  font.setPixelSize(25);
+  ui->lblOCAT->setFont(font);
 }
 
 aboutDialog::~aboutDialog() { delete ui; }
 
 void aboutDialog::initInfoStr() {
-  ui->textBrowser->clear();
+  /*ui->textBrowser->clear();
   ui->textBrowser->setOpenExternalLinks(true);
 
   ui->textBrowser->append("OC Auxiliary Tools   V" + CurVerison +
@@ -86,13 +104,5 @@ void aboutDialog::initInfoStr() {
 
   ui->textBrowser->append("");
   ui->textBrowser->append(
-      tr("(This App is built automatically by Github Actions.)"));
-}
-
-void aboutDialog::showDownCount() {
-  if (listDownCount.count() == 4)
-    ui->textBrowser->append("Linux: " + listDownCount.at(0) +
-                            "  Win: " + listDownCount.at(1) +
-                            "  Mac: " + listDownCount.at(2) +
-                            "  ClassicalMac: " + listDownCount.at(3));
+      tr("(This App is built automatically by Github Actions.)"));*/
 }

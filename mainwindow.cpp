@@ -50,8 +50,9 @@ MainWindow::MainWindow(QWidget* parent)
 
   loadLocal();
 
-  title = "OC Auxiliary Tools   V" + CurVerison + "      ";
-  setWindowTitle(title);
+  // title = "OC Auxiliary Tools   V" + CurVerison + "      ";
+  // setWindowTitle(title);
+  title = "";
 
 #ifdef Q_OS_MAC
 #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
@@ -4479,15 +4480,8 @@ void MainWindow::on_btnSaveAs() {
 }
 
 void MainWindow::about() {
-  if (!zh_cn) {
-    QUrl url_en(QString(
-        "https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md"));
-    QDesktopServices::openUrl(url_en);
-  } else {
-    QUrl url_cn(QString(
-        "https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-cn.md"));
-    QDesktopServices::openUrl(url_cn);
-  }
+  aboutDlg->setModal(true);
+  aboutDlg->show();
 }
 
 void MainWindow::on_btnKernelAdd_Del_clicked() {
@@ -11003,10 +10997,14 @@ void MainWindow::changeOpenCore(bool blDEV) {
     dataBaseDir = appInfo.filePath() + "/Database/";
     pathSource = appInfo.filePath() + "/Database/";
     lblVer->setText("OpenCore " + ocVer);
+    aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+                                      " For OpenCore " + ocVer);
   } else {
     dataBaseDir = appInfo.filePath() + "/devDatabase/";
     pathSource = appInfo.filePath() + "/devDatabase/";
     lblVer->setText("OpenCore " + ocVerDev);
+    aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+                                      " For OpenCore " + ocVerDev);
   }
 }
 
@@ -11040,4 +11038,16 @@ void MainWindow::on_actionPreferences_triggered() {
   myDatabase->refreshKextUrl();
   myDatabase->setModal(true);
   myDatabase->show();
+}
+
+void MainWindow::on_actionDocumentation_triggered() {
+  if (!zh_cn) {
+    QUrl url_en(QString(
+        "https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md"));
+    QDesktopServices::openUrl(url_en);
+  } else {
+    QUrl url_cn(QString(
+        "https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-cn.md"));
+    QDesktopServices::openUrl(url_cn);
+  }
 }

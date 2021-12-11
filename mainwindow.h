@@ -950,6 +950,8 @@ class MainWindow : public QMainWindow {
 
   void on_actionOpenCore_DEV_triggered();
 
+  void on_actionDocumentation_triggered();
+
  private:
   bool isDrag;
   QPoint m_position;

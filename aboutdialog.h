@@ -19,7 +19,7 @@ class aboutDialog : public QDialog {
   QStringList listDownCount;
 
   void initInfoStr();
-  void showDownCount();
+
  private slots:
 
  private:

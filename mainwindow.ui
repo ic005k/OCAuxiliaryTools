@@ -10884,6 +10884,7 @@ Enable this option to be able to see all the boot options when having multiple d
      <string>Help</string>
     </property>
     <addaction name="actionOCAuxiliaryToolsDoc"/>
+    <addaction name="actionDocumentation"/>
     <addaction name="btnHelp"/>
     <addaction name="actionDifferences"/>
     <addaction name="separator"/>
@@ -11223,6 +11224,11 @@ QToolBar::separator {
   <action name="actionPreferences">
    <property name="text">
     <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionDocumentation">
+   <property name="text">
+    <string>OCAuxiliaryTools Documentation</string>
    </property>
   </action>
  </widget>
