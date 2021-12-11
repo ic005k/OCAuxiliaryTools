@@ -5142,7 +5142,7 @@ void MainWindow::readResultDiskInfo() {
 
   dlgMountESP* dlgMESP = new dlgMountESP(this);
 
-  QString str0;
+  QString str0, str1;
   int count = textDiskInfo->document()->lineCount();
   for (int i = 0; i < count; i++) {
     str0 = textDiskInfo->document()->findBlockByNumber(i).text().trimmed();
@@ -5152,11 +5152,13 @@ void MainWindow::readResultDiskInfo() {
       if (strList.at(1).toUpper() == "EFI") {
         QString strDisk = strList.at(strList.count() - 1).mid(0, 5);
         QString strDiskVol = strList.at(strList.count() - 1);
-        str0 = str0 + "    " + mymethod->getDriverInfo(strDisk, strDiskVol);
+        str1 = strList.at(strList.count() - 1);
+        str1 = str1.trimmed();
+        str1 = str1 + " | " + mymethod->getDriverInfo(strDisk, strDiskVol);
 
         dlgMESP->ui->listWidget->setIconSize(QSize(30, 30));
         dlgMESP->ui->listWidget->addItem(
-            new QListWidgetItem(QIcon(":/icon/espicon.png"), str0));
+            new QListWidgetItem(QIcon(":/icon/espicon.png"), str1));
       }
     }
   }

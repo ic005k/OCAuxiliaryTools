@@ -72,5 +72,6 @@
         <file>icon/savetip0.png</file>
         <file>icon/be.png</file>
         <file>icon/be0.png</file>
+        <file>icon/espicon0.png</file>
     </qresource>
 </RCC>

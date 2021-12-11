@@ -113,6 +113,8 @@ class Method : public QMainWindow {
   QStringList getDiskList();
   QString getDriverName(QString strDisk);
   QStringList getAllVolForDisk(QString strDisk);
+  QStringList getPartitionList(QString strDisk);
+  QStringList getVolListForPartition(QStringList listPartition);
  public slots:
   void generateEFI();
   void on_btnExportMaster();
@@ -123,6 +125,7 @@ class Method : public QMainWindow {
  private:
   QElapsedTimer downloadTimer;
   void cancelDownload();
+  QString getVolForPartition(QString strPartition);
  signals:
  private slots:
 };
