@@ -6217,7 +6217,6 @@ void MainWindow::init_FileMenu() {
   ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
   if (Reg.value("chkOpenDir", 0).toBool() == true) {
     ui->toolBar->addAction(ui->actionOpen_Directory);
-    ui->toolBar->addSeparator();
   }
 
   // Save
@@ -6236,8 +6235,6 @@ void MainWindow::init_FileMenu() {
 
   // Quit
   ui->actionQuit->setMenuRole(QAction::QuitRole);
-
-  ui->toolBar->addSeparator();
 }
 
 void MainWindow::init_EditMenu() {
@@ -6252,8 +6249,6 @@ void MainWindow::init_EditMenu() {
   ui->actionOcvalidate->setIcon(QIcon(":/icon/ov.png"));
   ui->toolBar->addAction(ui->actionOcvalidate);
   ui->toolBar->addAction(ui->actionUpgrade_OC);
-
-  ui->toolBar->addSeparator();
 
   // MountESP
   if (mac || osx1012) ui->actionMountEsp->setIconVisibleInMenu(false);
@@ -6381,8 +6376,6 @@ void MainWindow::init_UndoRedo() {
   redoAction->setShortcut(tr("ctrl+2"));
   redoAction->setIcon(QIcon(":/icon/redo.png"));
   ui->toolBar->addAction(redoAction);
-
-  ui->toolBar->addSeparator();
 }
 
 void MainWindow::init_ToolButtonStyle() {
@@ -6446,7 +6439,6 @@ void MainWindow::init_MainUI() {
   // init_ToolButtonStyle();
   init_FileMenu();
   init_EditMenu();
-  ui->toolBar->addSeparator();
   init_UndoRedo();
 
   ui->toolBar->addWidget(ui->lblCount);
@@ -6454,6 +6446,12 @@ void MainWindow::init_MainUI() {
   ui->toolBar->addAction(ui->actionFind);
 
   init_HelpMenu();
+
+  // Search
+  QWidget* lTitleBar = ui->dockFind->titleBarWidget();
+  QWidget* lEmptyWidget = new QWidget();
+  ui->dockFind->setTitleBarWidget(lEmptyWidget);
+  delete lTitleBar;
 
   ui->cboxFind->lineEdit()->setClearButtonEnabled(true);
   ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
@@ -8733,6 +8731,7 @@ void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1) {
   if (arg1.trimmed() == "") {
     ui->lblCount->setText("0");
     listNameResults.clear();
+    ui->dockFind->setHidden(true);
 
     loading = true;
     ui->listFind->clear();

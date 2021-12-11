@@ -18,8 +18,10 @@ Tooltip::Tooltip(QWidget* parent) : QDialog(parent) {
 
   this->setAutoFillBackground(true);
   QPalette palette = this->palette();
-  palette.setColor(QPalette::Base, QColor(255, 255, 225, 255));
-  palette.setColor(QPalette::Window, QColor(255, 255, 225, 255));
+  // palette.setColor(QPalette::Base, QColor(255, 255, 225, 255));
+  // palette.setColor(QPalette::Window, QColor(255, 255, 225, 255));
+  palette.setColor(QPalette::Base, QColor(236, 236, 236, 255));
+  palette.setColor(QPalette::Window, QColor(236, 236, 236, 255));
   palette.setColor(QPalette::Text, QColor(0, 0, 0, 255));
   this->setPalette(palette);
 
@@ -98,27 +100,26 @@ void Tooltip::setMyText(QString strHead, const QString& text) {
   this->setFixedHeight(currentHeight * 1.05);
 }
 
-bool Tooltip::eventFilter(QObject *obj, QEvent *e)
-{
-    if (obj == this) {
-        if (QEvent::WindowDeactivate == e->type()) {
-            if (popClose)
-                return QWidget::eventFilter(obj, e);
+bool Tooltip::eventFilter(QObject* obj, QEvent* e) {
+  if (obj == this) {
+    if (QEvent::WindowDeactivate == e->type()) {
+      if (popClose) return QWidget::eventFilter(obj, e);
 
-            QPropertyAnimation *animation = new QPropertyAnimation(this, "windowOpacity");
-            animation->setDuration(delay);
-            animation->setStartValue(1);
-            animation->setEndValue(0);
-            animation->start();
-            connect(animation, &QPropertyAnimation::finished, [=]() {
-                end = true;
-                close();
-            });
-            e->accept();
-            return true;
-        }
+      QPropertyAnimation* animation =
+          new QPropertyAnimation(this, "windowOpacity");
+      animation->setDuration(delay);
+      animation->setStartValue(1);
+      animation->setEndValue(0);
+      animation->start();
+      connect(animation, &QPropertyAnimation::finished, [=]() {
+        end = true;
+        close();
+      });
+      e->accept();
+      return true;
     }
-    return QWidget::eventFilter(obj, e);
+  }
+  return QWidget::eventFilter(obj, e);
 }
 
 void Tooltip::popup(QPoint pos, QString strHead, const QString& text) {
@@ -138,7 +139,7 @@ void Tooltip::popup(QPoint pos, QString strHead, const QString& text) {
 
   this->move(pos);
 
-  QPropertyAnimation *animation = new QPropertyAnimation(this, "windowOpacity");
+  QPropertyAnimation* animation = new QPropertyAnimation(this, "windowOpacity");
   animation->setDuration(delay);
   animation->setStartValue(0);
   animation->setEndValue(1);
@@ -148,27 +149,26 @@ void Tooltip::popup(QPoint pos, QString strHead, const QString& text) {
   popClose = false;
 
   int t1 = text.length() * 35;
-  if (t1 < 5000)
-      t1 = 5000;
+  if (t1 < 5000) t1 = 5000;
 
   QElapsedTimer t0;
   t0.start();
   while (t0.elapsed() < t1 && !end) {
-      QCoreApplication::processEvents();
+    QCoreApplication::processEvents();
   }
 
-  if (end)
-      return;
+  if (end) return;
   // QEvent event(QEvent::WindowDeactivate);
   // QApplication::sendEvent(this, &event);
   popClose = true;
-  QPropertyAnimation *animation1 = new QPropertyAnimation(this, "windowOpacity");
+  QPropertyAnimation* animation1 =
+      new QPropertyAnimation(this, "windowOpacity");
   animation1->setDuration(delay);
   animation1->setStartValue(1);
   animation1->setEndValue(0);
   connect(animation1, &QPropertyAnimation::finished, [=]() {
-      end = true;
-      close();
+    end = true;
+    close();
   });
   animation1->start();
 }
@@ -189,19 +189,14 @@ void Tooltip::paintEvent(QPaintEvent* event) {
   QWidget::paintEvent(event);
 }
 
-void Tooltip::closeEvent(QCloseEvent *event)
-{
-    Q_UNUSED(event);
-    end = true;
+void Tooltip::closeEvent(QCloseEvent* event) {
+  Q_UNUSED(event);
+  end = true;
 }
 
-void Tooltip::endClose()
-{
-    end = true;
-    this->close();
+void Tooltip::endClose() {
+  end = true;
+  this->close();
 }
 
-void Tooltip::thisShow()
-{
-    this->show();
-}
+void Tooltip::thisShow() { this->show(); }
