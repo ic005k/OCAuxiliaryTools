@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1484</width>
-    <height>798</height>
+    <height>838</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -210,7 +210,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -232,7 +232,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -308,10 +308,6 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               <property name="text">
                <string>Up</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/up.png</normaloff>:/icon/up.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -330,10 +326,6 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               <property name="text">
                <string>Down</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -350,11 +342,7 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
                </font>
               </property>
               <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/opendb.png</normaloff>:/icon/opendb.png</iconset>
+               <string>Catalogs</string>
               </property>
               <property name="iconSize">
                <size>
@@ -374,10 +362,6 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -395,10 +379,6 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -531,10 +511,6 @@ relevant when performing different types of renames.
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -552,10 +528,6 @@ relevant when performing different types of renames.
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -811,10 +783,6 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -845,10 +813,6 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1242,10 +1206,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -1263,10 +1223,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -1332,10 +1288,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -1353,10 +1305,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2183,10 +2131,6 @@ This is a security option that restricts the activation of single user mode by i
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -2218,10 +2162,6 @@ This is a security option that restricts the activation of single user mode by i
               <property name="text">
                <string>DeleteItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -2246,10 +2186,6 @@ This is a security option that restricts the activation of single user mode by i
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -2267,10 +2203,6 @@ This is a security option that restricts the activation of single user mode by i
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2323,10 +2255,6 @@ This is a security option that restricts the activation of single user mode by i
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -2344,10 +2272,6 @@ This is a security option that restricts the activation of single user mode by i
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2383,10 +2307,6 @@ This is a security option that restricts the activation of single user mode by i
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -2404,10 +2324,6 @@ This is a security option that restricts the activation of single user mode by i
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2437,7 +2353,7 @@ This is a security option that restricts the activation of single user mode by i
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2457,10 +2373,6 @@ This is a security option that restricts the activation of single user mode by i
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -2477,11 +2389,7 @@ This is a security option that restricts the activation of single user mode by i
                </font>
               </property>
               <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/opendb.png</normaloff>:/icon/opendb.png</iconset>
+               <string>Catalogs</string>
               </property>
               <property name="iconSize">
                <size>
@@ -2507,10 +2415,6 @@ This is a security option that restricts the activation of single user mode by i
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2559,10 +2463,6 @@ This is a security option that restricts the activation of single user mode by i
               <property name="text">
                <string>Up</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/up.png</normaloff>:/icon/up.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -2580,10 +2480,6 @@ This is a security option that restricts the activation of single user mode by i
               </property>
               <property name="text">
                <string>Down</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2633,10 +2529,6 @@ This is a security option that restricts the activation of single user mode by i
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -2654,10 +2546,6 @@ This is a security option that restricts the activation of single user mode by i
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2719,10 +2607,6 @@ This is a security option that restricts the activation of single user mode by i
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -2740,10 +2624,6 @@ This is a security option that restricts the activation of single user mode by i
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -2786,10 +2666,6 @@ This is a security option that restricts the activation of single user mode by i
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -2807,10 +2683,6 @@ This is a security option that restricts the activation of single user mode by i
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -3766,7 +3638,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5532,10 +5404,6 @@ Note: This functionality is still under development and is not ready for product
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -5553,10 +5421,6 @@ Note: This functionality is still under development and is not ready for product
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5613,10 +5477,6 @@ Note: This functionality is still under development and is not ready for product
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -5634,10 +5494,6 @@ Note: This functionality is still under development and is not ready for product
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5695,10 +5551,6 @@ Note: This functionality is still under development and is not ready for product
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -5716,10 +5568,6 @@ Note: This functionality is still under development and is not ready for product
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5740,11 +5588,7 @@ Note: This functionality is still under development and is not ready for product
                </font>
               </property>
               <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/opendb.png</normaloff>:/icon/opendb.png</iconset>
+               <string>Catalogs</string>
               </property>
               <property name="iconSize">
                <size>
@@ -5784,7 +5628,7 @@ Note: This functionality is still under development and is not ready for product
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5817,10 +5661,6 @@ Note: This functionality is still under development and is not ready for product
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -5838,10 +5678,6 @@ Note: This functionality is still under development and is not ready for product
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5893,10 +5729,6 @@ Note: This functionality is still under development and is not ready for product
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -5914,10 +5746,6 @@ Note: This functionality is still under development and is not ready for product
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -5979,10 +5807,6 @@ Note: This functionality is still under development and is not ready for product
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -6000,10 +5824,6 @@ Note: This functionality is still under development and is not ready for product
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -6046,10 +5866,6 @@ Note: This functionality is still under development and is not ready for product
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -6067,10 +5883,6 @@ Note: This functionality is still under development and is not ready for product
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -6122,10 +5934,6 @@ Note: This functionality is still under development and is not ready for product
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -6143,10 +5951,6 @@ Note: This functionality is still under development and is not ready for product
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -6189,10 +5993,6 @@ Note: This functionality is still under development and is not ready for product
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -6210,10 +6010,6 @@ Note: This functionality is still under development and is not ready for product
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -6357,7 +6153,7 @@ A continuously updated variable list can be found in a corresponding document: N
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>5</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -7290,10 +7086,6 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                  <property name="text">
                   <string>AddItem</string>
                  </property>
-                 <property name="icon">
-                  <iconset resource="qtocc.qrc">
-                   <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-                 </property>
                  <property name="iconSize">
                   <size>
                    <width>20</width>
@@ -7311,10 +7103,6 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                  </property>
                  <property name="text">
                   <string>DeleteItem</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="qtocc.qrc">
-                   <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
                  </property>
                  <property name="iconSize">
                   <size>
@@ -8421,7 +8209,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>8</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -9174,10 +8962,6 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
               <property name="text">
                <string>Up</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/up.png</normaloff>:/icon/up.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -9196,10 +8980,6 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
               <property name="text">
                <string>Down</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/down.png</normaloff>:/icon/down.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -9216,11 +8996,7 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
                </font>
               </property>
               <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/opendb.png</normaloff>:/icon/opendb.png</iconset>
+               <string>Catalogs</string>
               </property>
               <property name="iconSize">
                <size>
@@ -9240,10 +9016,6 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -9261,10 +9033,6 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -10879,10 +10647,6 @@ This setting allows running some software written for UEFI 2.x firmware like NVI
               <property name="text">
                <string>AddItem</string>
               </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
-              </property>
               <property name="iconSize">
                <size>
                 <width>20</width>
@@ -10900,10 +10664,6 @@ This setting allows running some software written for UEFI 2.x firmware like NVI
               </property>
               <property name="text">
                <string>DeleteItem</string>
-              </property>
-              <property name="icon">
-               <iconset resource="qtocc.qrc">
-                <normaloff>:/icon/del.png</normaloff>:/icon/del.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -11013,7 +10773,7 @@ Enable this option to be able to see all the boot options when having multiple d
       <item row="0" column="0">
        <widget class="QLabel" name="lblTemp1">
         <property name="text">
-         <string>    </string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -11060,7 +10820,7 @@ Enable this option to be able to see all the boot options when having multiple d
       <item row="0" column="7">
        <widget class="QLabel" name="lblTemp2">
         <property name="text">
-         <string>    </string>
+         <string/>
         </property>
        </widget>
       </item>

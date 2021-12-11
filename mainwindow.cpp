@@ -6391,7 +6391,8 @@ void MainWindow::init_ToolButtonStyle() {
   list1 =
       mymethod->getAllToolButton(getAllUIControls(myDatabase->ui->tabWidget));
   list2 = mymethod->getAllToolButton(getAllUIControls(dlgSyncOC));
-  QString strStyle =
+  QString strStyle;
+  strStyle =
       "QToolButton:hover{ "
       "color:rgb(0, 0, 255); "
       "border-style:solid; "
@@ -6412,6 +6413,7 @@ void MainWindow::init_ToolButtonStyle() {
       "stop: 1 rgb(160,160,160));"
       "border:1px;"
       "border-radius:5px;padding:2px 4px; }";
+
   for (int i = 0; i < list.count(); i++) {
     QToolButton* w = (QToolButton*)list.at(i);
     w->setStyleSheet(strStyle);
@@ -6441,7 +6443,7 @@ void MainWindow::init_MainUI() {
   ui->frameToolBar->setHidden(true);
   ui->statusbar->setHidden(true);
 
-  init_ToolButtonStyle();
+  // init_ToolButtonStyle();
   init_FileMenu();
   init_EditMenu();
   ui->toolBar->addSeparator();
@@ -6514,21 +6516,10 @@ void MainWindow::init_MainUI() {
   if (mac || osx1012) ui->actionGo_to_the_next->setIconVisibleInMenu(false);
   ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
 
-  // StatusBar
-  // ui->statusbar->addPermanentWidget(ui->btnUpdateHex, 0);
-
   ui->txtEditHex->setPlaceholderText(tr("Hexadecimal"));
-  // ui->statusbar->addPermanentWidget(ui->txtEditHex, 0);
-
-  // labelConversion = new QLabel(this);
-  // labelConversion->setText("Hex <==> ASCII");
-  // ui->statusbar->addPermanentWidget(labelConversion, 0);
-
   ui->txtEditASCII->setPlaceholderText(tr("ASCII"));
-  // ui->statusbar->addPermanentWidget(ui->txtEditASCII, 0);
   ui->btnUpdateHex->setFixedHeight(ui->txtEditHex->height() - 12);
   ui->btnUpdateHex->setFixedWidth(ui->btnUpdateHex->height());
-
   setConversionWidgetVisible(false);
 
   CopyLabel();
