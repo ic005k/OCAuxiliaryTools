@@ -10847,6 +10847,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
     <addaction name="separator"/>
+    <addaction name="actionPreferences"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -11217,6 +11218,11 @@ QToolBar::separator {
    </property>
    <property name="text">
     <string>OpenCore DEV</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
    </property>
   </action>
  </widget>

@@ -482,6 +482,6 @@ void SyncOCDialog::readCheckStateINI() {
 
 void SyncOCDialog::on_btnSettings_clicked() {
   mw_one->myDatabase->close();
-  mw_one->on_actionDatabase_triggered();
+  mw_one->on_actionPreferences_triggered();
   mw_one->myDatabase->ui->tabWidget->setCurrentIndex(2);
 }

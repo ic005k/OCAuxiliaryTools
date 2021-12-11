@@ -6206,8 +6206,6 @@ void MainWindow::init_FileMenu() {
     btn0->setVisible(false);
   }
 
-// extern void qt_mac_set_dock_menu(QMenu*);
-// qt_mac_set_dock_menu(reFileMenu);
 #ifdef Q_OS_MAC
   reFileMenu->setAsDockMenu();
 #endif
@@ -6232,6 +6230,9 @@ void MainWindow::init_FileMenu() {
   connect(ui->actionSave_As, &QAction::triggered, this,
           &MainWindow::on_btnSaveAs);
   ui->actionSave_As->setShortcut(tr("ctrl+shift+s"));
+
+  // Preferences
+  ui->actionPreferences->setMenuRole(QAction::PreferencesRole);
 
   // Quit
   ui->actionQuit->setMenuRole(QAction::QuitRole);
@@ -10292,12 +10293,13 @@ void MainWindow::on_editPassInput_returnPressed() {
 }
 
 void MainWindow::on_actionDatabase_triggered() {
-  // myDatabase->setWindowFlags(dlgAutoUpdate->windowFlags() |
-  //                           Qt::WindowStaysOnTopHint);
   if (osx1012)
     myDatabase->ui->tabWidget->setDocumentMode(true);
   else
     myDatabase->ui->tabWidget->setDocumentMode(false);
+  myDatabase->ui->tabWidget->setTabVisible(0, true);
+  myDatabase->ui->tabWidget->setTabVisible(1, false);
+  myDatabase->ui->tabWidget->setTabVisible(2, false);
   myDatabase->setModal(true);
   myDatabase->show();
 
@@ -11024,3 +11026,18 @@ void MainWindow::mouseMoveEvent(QMouseEvent* e) {
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent*) { isDrag = false; }
+
+void MainWindow::on_actionPreferences_triggered() {
+  if (osx1012)
+    myDatabase->ui->tabWidget->setDocumentMode(true);
+  else
+    myDatabase->ui->tabWidget->setDocumentMode(false);
+
+  myDatabase->ui->tabWidget->setTabVisible(0, false);
+  myDatabase->ui->tabWidget->setTabVisible(1, true);
+  myDatabase->ui->tabWidget->setTabVisible(2, true);
+  myDatabase->setWindowTitle(tr("Preferences"));
+  myDatabase->refreshKextUrl();
+  myDatabase->setModal(true);
+  myDatabase->show();
+}

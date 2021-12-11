@@ -377,6 +377,7 @@ class MainWindow : public QMainWindow {
   void cellEnteredSlot(int row, int column);
   void on_actionOnline_Download_Updates_triggered();
   void on_actionDatabase_triggered();
+  void on_actionPreferences_triggered();
 
  protected:
   void dragEnterEvent(QDragEnterEvent* e) override;
