@@ -81,6 +81,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  dlgMountESP* dlgMESP;
   QString pathSource;
   QString dataBaseDir;
   QLabel* lblVer;

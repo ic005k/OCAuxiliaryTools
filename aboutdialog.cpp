@@ -15,15 +15,15 @@ aboutDialog::aboutDialog(QWidget* parent)
   ui->setupUi(this);
   ocVerDev = ocVerDev + " [" + tr("DEV") + "]";
 
-  ocFrom =
-      "<a "
-      "href=\"https://github.com/acidanthera/OpenCorePkg/releases/latest/\">" +
-      tr("Source");
-
   ocFromDev =
       "<a "
       "href=\"https://github.com/acidanthera/OpenCorePkg/actions/runs/"
-      "1560483990/\">" +
+      "1563292990/\">" +
+      tr("Source");
+
+  ocFrom =
+      "<a "
+      "href=\"https://github.com/acidanthera/OpenCorePkg/releases/latest/\">" +
       tr("Source");
 
   setMaximumWidth(this->width());

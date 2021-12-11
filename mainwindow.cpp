@@ -78,6 +78,7 @@ MainWindow::MainWindow(QWidget* parent)
   aboutDlg = new aboutDialog(this);
   myDatabase = new dlgDatabase(this);
   myToolTip = new Tooltip(this);
+  dlgMESP = new dlgMountESP(this);
   dlgOCV = new dlgOCValidate(this);
   dlgPar = new dlgParameters(this);
   dlgAutoUpdate = new AutoUpdateDialog(this);
@@ -5133,20 +5134,18 @@ void MainWindow::mount_esp() {
 }
 
 void MainWindow::readResultDiskInfo() {
+  dlgMESP->ui->listWidget->clear();
+
   QTextEdit* textDiskInfo = new QTextEdit;
   textDiskInfo->clear();
-  textDiskInfo->setReadOnly(true);
   QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
   QString result = gbkCodec->toUnicode(di->readAll());
   textDiskInfo->append(result);
-
-  dlgMountESP* dlgMESP = new dlgMountESP(this);
 
   QString str0, str1;
   int count = textDiskInfo->document()->lineCount();
   for (int i = 0; i < count; i++) {
     str0 = textDiskInfo->document()->findBlockByNumber(i).text().trimmed();
-
     QStringList strList = str0.simplified().split(" ");
     if (strList.count() >= 5) {
       if (strList.at(1).toUpper() == "EFI") {
@@ -5154,7 +5153,9 @@ void MainWindow::readResultDiskInfo() {
         QString strDiskVol = strList.at(strList.count() - 1);
         str1 = strList.at(strList.count() - 1);
         str1 = str1.trimmed();
-        str1 = str1 + " | " + mymethod->getDriverInfo(strDisk, strDiskVol);
+        str1 = str1 + " | " + mymethod->getVolForPartition(strDiskVol) + " | " +
+               mymethod->getDriverName(strDisk) + " | " +
+               mymethod->getDriverInfo(strDisk);
 
         dlgMESP->ui->listWidget->setIconSize(QSize(30, 30));
         dlgMESP->ui->listWidget->addItem(
@@ -5163,9 +5164,10 @@ void MainWindow::readResultDiskInfo() {
     }
   }
 
-  dlgMESP->setModal(true);
   if (dlgMESP->ui->listWidget->count() > 0)
     dlgMESP->ui->listWidget->setCurrentRow(0);
+
+  dlgMESP->setModal(true);
   dlgMESP->show();
 }
 

@@ -101,7 +101,7 @@ class Method : public QMainWindow {
   void writeLeftTableOnlyValue(QTableWidget *t0, QTableWidget *t);
   void kextPreset();
   void mount_esp_mac(QString strEfiDisk);
-  QString getDriverInfo(QString strDisk, QString strDiskVol);
+  QString getDriverInfo(QString strDisk);
   void backupEFI();
   void init_PresetQuirks(QComboBox *comboBox, QString quirksFile);
   QStringList getMarkerQuirks(QString arg1, QString strItem, QWidget *tab,
@@ -115,6 +115,7 @@ class Method : public QMainWindow {
   QStringList getAllVolForDisk(QString strDisk);
   QStringList getPartitionList(QString strDisk);
   QStringList getVolListForPartition(QStringList listPartition);
+  QString getVolForPartition(QString strPartition);
  public slots:
   void generateEFI();
   void on_btnExportMaster();
@@ -125,7 +126,7 @@ class Method : public QMainWindow {
  private:
   QElapsedTimer downloadTimer;
   void cancelDownload();
-  QString getVolForPartition(QString strPartition);
+
  signals:
  private slots:
 };
