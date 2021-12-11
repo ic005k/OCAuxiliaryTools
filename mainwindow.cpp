@@ -11023,7 +11023,7 @@ void MainWindow::mousePressEvent(QMouseEvent* e) {
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent* e) {
-  if (isDrag && (e->buttons() && Qt::LeftButton)) {
+  if (isDrag & (e->buttons() & Qt::LeftButton)) {
     move(e->globalPos() - m_position);
     e->accept();
   }

@@ -110,6 +110,9 @@ class Method : public QMainWindow {
   void autoTip();
   QString readPlistComment(QString plistFile);
   void writePlistComment(QString plistFile, QString strComment);
+  QStringList getDiskList();
+  QString getDriverName(QString strDisk);
+  QStringList getAllVolForDisk(QString strDisk);
  public slots:
   void generateEFI();
   void on_btnExportMaster();

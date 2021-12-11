@@ -1475,35 +1475,19 @@ void Method::mount_esp_mac(QString strEfiDisk) {
 
 QString Method::getDriverInfo(QString strDisk, QString strDiskVol) {
   QProcess* processDriverInfo = new QProcess;
-  processDriverInfo->start("diskutil", QStringList() << "info" << strDisk);
-  processDriverInfo->waitForFinished();
-
+  QString str0, str1, str2;
+  QStringList strList1;
   QTextEdit* textEdit = new QTextEdit;
   QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
-  QString result = gbkCodec->toUnicode(processDriverInfo->readAll());
-  textEdit->append(result);
+  QString result;
+  int count = 0;
 
-  QString str0, str1, str2;
-  QStringList strList, strList1;
-  int count = textEdit->document()->lineCount();
-  for (int i = 0; i < count; i++) {
-    str0 = textEdit->document()->findBlockByNumber(i).text().trimmed();
-    if (str0.contains("Media Name:")) {
-      strList = str0.split(":");
-    }
-  }
-
-  if (strList.count() > 0)
-    str1 = strList.at(1);
-  else
-    str1 = "";
-  str1 = str1.trimmed();
+  str1 = getDriverName(strDisk);
 
   processDriverInfo->start("diskutil", QStringList() << "info" << strDiskVol);
   processDriverInfo->waitForFinished();
 
   textEdit = new QTextEdit;
-  gbkCodec = QTextCodec::codecForName("UTF-8");
   result = gbkCodec->toUnicode(processDriverInfo->readAll());
   textEdit->append(result);
   count = textEdit->document()->lineCount();
@@ -1520,7 +1504,115 @@ QString Method::getDriverInfo(QString strDisk, QString strDiskVol) {
     str2 = "";
   str2 = str2.trimmed();
 
-  return str1 + " | " + str2;
+  QStringList listPartitionVol = getAllVolForDisk(strDisk);
+  QString str3 = "";
+  for (int i = 0; i < listPartitionVol.count(); i++) {
+    str3 = str3 + listPartitionVol.at(i) + " , ";
+  }
+  str3 = str3.mid(0, str3.length() - 3);
+  str3 = " [ " + str3 + " ] ";
+
+  return str1 + " | " + str2 + " | " + str3;
+}
+
+QStringList Method::getAllVolForDisk(QString strDisk) {
+  QProcess* processDriverInfo = new QProcess;
+  processDriverInfo->start("diskutil", QStringList() << "list");
+  processDriverInfo->waitForFinished();
+  QTextEdit* textEdit = new QTextEdit;
+  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
+  QString result = gbkCodec->toUnicode(processDriverInfo->readAll());
+  textEdit->append(result);
+  int count = textEdit->document()->lineCount();
+  QStringList listPartition;
+  for (int i = 0; i < count; i++) {
+    QString line = getTextEditLineText(textEdit, i).trimmed();
+    if (line.contains(strDisk)) {
+      QStringList list1 = line.split(" ");
+      QString str_0 = list1.at(list1.count() - 1);
+      if (str_0 != strDisk) {
+        listPartition.append(str_0);
+      }
+    }
+  }
+
+  QStringList listPartitionVol;
+  for (int i = 0; i < listPartition.count(); i++) {
+    processDriverInfo->start("diskutil", QStringList()
+                                             << "info" << listPartition.at(i));
+    processDriverInfo->waitForFinished();
+    textEdit->clear();
+    gbkCodec = QTextCodec::codecForName("UTF-8");
+    result = gbkCodec->toUnicode(processDriverInfo->readAll());
+    textEdit->append(result);
+    count = textEdit->document()->lineCount();
+    for (int j = 0; j < count; j++) {
+      QString line = getTextEditLineText(textEdit, j).trimmed();
+      if (line.contains("Volume Name:")) {
+        QStringList list = line.split(":");
+        if (list.count() == 2) {
+          QString str = list.at(1);
+          if (str.trimmed() != "" && !str.contains("Not applicable")) {
+            listPartitionVol.append(str.trimmed());
+          }
+        }
+      }
+    }
+  }
+
+  return listPartitionVol;
+}
+
+QString Method::getDriverName(QString strDisk) {
+  QProcess* processDriverInfo = new QProcess;
+  processDriverInfo->start("diskutil", QStringList() << "info" << strDisk);
+  processDriverInfo->waitForFinished();
+
+  QTextEdit* textEdit = new QTextEdit;
+  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
+  QString result = gbkCodec->toUnicode(processDriverInfo->readAll());
+  textEdit->append(result);
+
+  QString str0, str1;
+  QStringList strList;
+  int count = textEdit->document()->lineCount();
+  for (int i = 0; i < count; i++) {
+    str0 = textEdit->document()->findBlockByNumber(i).text().trimmed();
+    if (str0.contains("Media Name:")) {
+      strList = str0.split(":");
+      if (strList.count() > 0)
+        str1 = strList.at(1);
+      else
+        str1 = "";
+      str1 = str1.trimmed();
+      break;
+    }
+  }
+
+  return str1;
+}
+
+QStringList Method::getDiskList() {
+  QProcess* processDriverInfo = new QProcess;
+  processDriverInfo->start("diskutil", QStringList() << "list");
+  processDriverInfo->waitForFinished();
+  QTextEdit* textEdit = new QTextEdit;
+  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
+  QString result = gbkCodec->toUnicode(processDriverInfo->readAll());
+  textEdit->append(result);
+  int count = textEdit->document()->lineCount();
+  QStringList listPartition;
+  for (int i = 0; i < count; i++) {
+    QString line = getTextEditLineText(textEdit, i).trimmed();
+    if (line.contains("/dev/disk")) {
+      QStringList list1 = line.split(" ");
+      QString str_0 = list1.at(0);
+      str_0 = str_0.trimmed();
+      str_0.replace("/dev/", "");
+      listPartition.append(str_0.trimmed());
+    }
+  }
+  return listPartition;
 }
 
 void Method::backupEFI() {
