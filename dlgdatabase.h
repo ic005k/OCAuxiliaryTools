@@ -73,6 +73,8 @@ class dlgDatabase : public QDialog {
 
   void on_tableDatabase_itemChanged(QTableWidgetItem *item);
 
+  void on_chkHideToolbar_stateChanged(int arg1);
+
  private:
   void writeIni(QString key, int arg1);
 

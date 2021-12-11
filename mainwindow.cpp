@@ -6417,6 +6417,8 @@ void MainWindow::init_ToolButtonStyle() {
 }
 
 void MainWindow::init_MainUI() {
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
   orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
   orgLineEditStyle = ui->editBID->styleSheet();
   orgLabelStyle = ui->label->styleSheet();
@@ -6427,18 +6429,26 @@ void MainWindow::init_MainUI() {
   ui->btnNo->setDefault(true);
   ui->frameTip->setHidden(true);
 
-  this->setUnifiedTitleAndToolBarOnMac(true);
-  ui->frameToolBar->setHidden(true);
-  ui->statusbar->setHidden(true);
-
   // init_ToolButtonStyle();
   init_FileMenu();
   init_EditMenu();
   init_UndoRedo();
 
-  ui->toolBar->addWidget(ui->lblCount);
-  ui->toolBar->addWidget(ui->cboxFind);
-  ui->toolBar->addAction(ui->actionFind);
+  this->setUnifiedTitleAndToolBarOnMac(true);
+  ui->frameToolBar->setHidden(true);
+  ui->statusbar->setHidden(true);
+  myDatabase->ui->chkHideToolbar->setChecked(
+      Reg.value("chkHideToolbar", 0).toBool());
+  if (myDatabase->ui->chkHideToolbar->isChecked()) {
+    ui->toolBar->setHidden(true);
+    ui->hlayoutFind->addWidget(ui->lblCount);
+    ui->hlayoutFind->addWidget(ui->cboxFind);
+
+  } else {
+    ui->toolBar->addWidget(ui->lblCount);
+    ui->toolBar->addWidget(ui->cboxFind);
+    ui->toolBar->addAction(ui->actionFind);
+  }
 
   init_HelpMenu();
 
@@ -6463,8 +6473,6 @@ void MainWindow::init_MainUI() {
                                       QLineEdit::LeadingPosition);
   connect(clearTextsAction, SIGNAL(triggered()), this, SLOT(clearFindTexts()));
 
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
   int textTotal = Reg.value("textTotal").toInt();
   for (int i = 0; i < textTotal; i++) {
     ui->cboxFind->addItem(Reg.value(QString::number(i)).toString());
@@ -8113,6 +8121,8 @@ void MainWindow::findTabText(QString findText) {
 
 void MainWindow::on_actionFind_triggered() {
   ui->cboxFind->lineEdit()->selectAll();
+  if (myDatabase->ui->chkHideToolbar->isChecked() && ui->toolBar->isHidden())
+    ui->frameToolBar->setHidden(false);
 
   find = true;
 
@@ -10291,9 +10301,23 @@ void MainWindow::on_actionDatabase_triggered() {
     myDatabase->ui->tabWidget->setDocumentMode(true);
   else
     myDatabase->ui->tabWidget->setDocumentMode(false);
-  myDatabase->ui->tabWidget->setTabVisible(0, true);
-  myDatabase->ui->tabWidget->setTabVisible(1, false);
-  myDatabase->ui->tabWidget->setTabVisible(2, false);
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+  {
+    myDatabase->ui->tabWidget->setTabVisible(0, true);
+    myDatabase->ui->tabWidget->setTabVisible(1, false);
+    myDatabase->ui->tabWidget->setTabVisible(2, false);
+  }
+#endif
+
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+  {
+    myDatabase->ui->tabWidget->setTabEnabled(0, true);
+    myDatabase->ui->tabWidget->setTabEnabled(1, false);
+    myDatabase->ui->tabWidget->setTabEnabled(2, false);
+  }
+#endif
+
   myDatabase->setModal(true);
   myDatabase->show();
 
@@ -11031,9 +11055,22 @@ void MainWindow::on_actionPreferences_triggered() {
   else
     myDatabase->ui->tabWidget->setDocumentMode(false);
 
-  myDatabase->ui->tabWidget->setTabVisible(0, false);
-  myDatabase->ui->tabWidget->setTabVisible(1, true);
-  myDatabase->ui->tabWidget->setTabVisible(2, true);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+  {
+    myDatabase->ui->tabWidget->setTabVisible(0, false);
+    myDatabase->ui->tabWidget->setTabVisible(1, true);
+    myDatabase->ui->tabWidget->setTabVisible(2, true);
+  }
+#endif
+
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+  {
+    myDatabase->ui->tabWidget->setTabEnabled(0, false);
+    myDatabase->ui->tabWidget->setTabEnabled(1, true);
+    myDatabase->ui->tabWidget->setTabEnabled(2, true);
+  }
+#endif
+
   myDatabase->setWindowTitle(tr("Preferences"));
   myDatabase->refreshKextUrl();
   myDatabase->setModal(true);

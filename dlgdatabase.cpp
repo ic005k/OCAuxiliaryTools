@@ -13,7 +13,6 @@ dlgDatabase::dlgDatabase(QWidget *parent)
     : QDialog(parent), ui(new Ui::dlgDatabase) {
   ui->setupUi(this);
 
-  ui->editPing->setHidden(true);
   ui->btnRefreshAll->setHidden(true);
   ui->btnFind->setHidden(true);
 
@@ -22,11 +21,6 @@ dlgDatabase::dlgDatabase(QWidget *parent)
           SLOT(on_readoutput()));
   connect(processPing, SIGNAL(readyReadStandardError()), this,
           SLOT(on_readerror()));
-  QPalette pl = ui->editPing->palette();
-  pl.setColor(QPalette::Base, Qt::black);
-  pl.setColor(QPalette::Text, Qt::green);
-  // ui->editPing->setPalette(pl);
-  ui->editPing->setReadOnly(true);
 
   ui->editFind->setClearButtonEnabled(true);
 
@@ -106,6 +100,7 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   ui->chkMountESP->setChecked(Reg.value("chkMountESP", 1).toBool());
   ui->chkBackupEFI->setChecked(Reg.value("chkBackupEFI", 1).toBool());
   ui->chkDatabase->setChecked(Reg.value("chkDatabase", 1).toBool());
+  ui->chkHideToolbar->setChecked(Reg.value("chkHideToolbar", 0).toBool());
 }
 
 dlgDatabase::~dlgDatabase() { delete ui; }
@@ -455,8 +450,7 @@ void dlgDatabase::on_btnPing_clicked() {
 }
 
 void dlgDatabase::on_readoutput() {
-  QString str = processPing->readAllStandardOutput();
-  ui->editPing->append(str);
+  // QString str = processPing->readAllStandardOutput();
 }
 
 void dlgDatabase::on_readerror() {
@@ -513,4 +507,8 @@ void dlgDatabase::on_chkDatabase_stateChanged(int arg1) {
 void dlgDatabase::on_tableDatabase_itemChanged(QTableWidgetItem *item) {
   listItemModi.removeAt(item->row());
   listItemModi.insert(item->row(), true);
+}
+
+void dlgDatabase::on_chkHideToolbar_stateChanged(int arg1) {
+  writeIni("chkHideToolbar", arg1);
 }

@@ -13,11 +13,11 @@
   <property name="windowTitle">
    <string>Configuration file database</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
+  <layout class="QGridLayout" name="gridLayout_9">
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -193,7 +193,7 @@ p, li { white-space: pre-wrap; }
       <attribute name="title">
        <string>Misc</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_8">
+      <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
@@ -204,6 +204,51 @@ p, li { white-space: pre-wrap; }
            <widget class="QLabel" name="label_2">
             <property name="text">
              <string>Upgrade download proxy settings</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Web Access Proxy</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboBoxWeb">
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <item>
+             <property name="text">
+              <string>https://github.com/</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>https://hub.fastgit.org/</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QToolButton" name="btnTest">
+            <property name="text">
+             <string>Testing</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="3">
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QToolButton" name="btnPing">
+            <property name="text">
+             <string>Testing</string>
             </property>
            </widget>
           </item>
@@ -254,55 +299,7 @@ p, li { white-space: pre-wrap; }
             </item>
            </widget>
           </item>
-          <item row="0" column="2">
-           <widget class="QToolButton" name="btnTest">
-            <property name="text">
-             <string>Testing</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Web Access Proxy</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QComboBox" name="comboBoxWeb">
-            <property name="editable">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>https://github.com/</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>https://hub.fastgit.org/</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QToolButton" name="btnPing">
-            <property name="text">
-             <string>Testing</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" colspan="3">
-           <widget class="QTextEdit" name="editPing"/>
-          </item>
           <item row="3" column="0" colspan="3">
-           <widget class="Line" name="line">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0" colspan="3">
            <widget class="QGroupBox" name="groupBox_2">
             <property name="title">
              <string>The way to get the download link for Kext upgrade</string>
@@ -348,53 +345,69 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QGroupBox" name="groupBox_4">
+        <widget class="QGroupBox" name="groupBox_5">
          <property name="title">
-          <string>Toolbar button (effective after the next app opening)</string>
+          <string>UI Appearance (effective after the next app opening)</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_7">
-          <item row="0" column="3">
-           <widget class="QCheckBox" name="chkMountESP">
-            <property name="text">
-             <string>Mount ESP</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="chkOpenDir">
-            <property name="text">
-             <string>Browse Catalog</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="4">
-           <widget class="QCheckBox" name="chkBackupEFI">
-            <property name="text">
-             <string>Backup EFI</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="5">
-           <widget class="QCheckBox" name="chkDatabase">
-            <property name="text">
-             <string>Database</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
+         <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
-           <widget class="QCheckBox" name="chkRecentOpen">
+           <widget class="QCheckBox" name="chkHideToolbar">
             <property name="text">
-             <string>Recently Open</string>
+             <string>Hide Toolbar</string>
             </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QGroupBox" name="groupBox_4">
+            <property name="title">
+             <string>Toolbar button</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_7">
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkMountESP">
+               <property name="text">
+                <string>Mount ESP</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="chkOpenDir">
+               <property name="text">
+                <string>Browse Catalog</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QCheckBox" name="chkBackupEFI">
+               <property name="text">
+                <string>Backup EFI</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="QCheckBox" name="chkDatabase">
+               <property name="text">
+                <string>Database</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkRecentOpen">
+               <property name="text">
+                <string>Recently Open</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
