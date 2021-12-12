@@ -31,8 +31,8 @@ aboutDialog::aboutDialog(QWidget* parent)
   setMinimumWidth(this->width());
   setMinimumHeight(this->height());
 
-  ui->label->setFixedHeight(90);
-  ui->label->setFixedWidth(90);
+  ui->label->setFixedHeight(85);
+  ui->label->setFixedWidth(85);
   ui->label->setText("");
 
   ui->label->setStyleSheet(
