@@ -164,7 +164,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -186,7 +186,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -254,11 +254,6 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnUp">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>Up</string>
               </property>
@@ -272,11 +267,6 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnDown">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>Down</string>
               </property>
@@ -290,11 +280,6 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
             </item>
             <item row="1" column="2">
              <widget class="QToolButton" name="btnOpenACPIDir">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>Catalogs</string>
               </property>
@@ -308,11 +293,6 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
             </item>
             <item row="1" column="3">
              <widget class="QToolButton" name="btnACPIAdd_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -326,11 +306,6 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
             </item>
             <item row="1" column="4">
              <widget class="QToolButton" name="btnACPIAdd_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -457,11 +432,6 @@ relevant when performing different types of renames.
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnACPIDel_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -475,11 +445,6 @@ relevant when performing different types of renames.
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnACPIDel_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -729,11 +694,6 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnACPIPatch_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -760,11 +720,6 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnACPIPatch_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -1152,11 +1107,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnBooter_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -1170,11 +1120,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnBooter_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -1234,11 +1179,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnBooterPatchAdd">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -1252,11 +1192,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnBooterPatchDel">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -2043,7 +1978,7 @@ This is a security option that restricts the activation of single user mode by i
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2077,11 +2012,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnDPAdd_Add0">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -2108,11 +2038,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnDPAdd_Del0">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -2129,11 +2054,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="4">
              <widget class="QToolButton" name="btnDPAdd_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="toolTip">
                <string/>
               </property>
@@ -2150,11 +2070,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="5">
              <widget class="QToolButton" name="btnDPAdd_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -2201,11 +2116,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnDPDel_Add0">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -2219,11 +2129,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnDPDel_Del0">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -2253,11 +2158,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="4">
              <widget class="QToolButton" name="btnDPDel_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -2271,11 +2171,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="5">
              <widget class="QToolButton" name="btnDPDel_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -2319,11 +2214,6 @@ This is a security option that restricts the activation of single user mode by i
            <layout class="QGridLayout" name="gridLayout_12">
             <item row="1" column="3">
              <widget class="QToolButton" name="btnKernelAdd_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -2337,11 +2227,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="2">
              <widget class="QToolButton" name="btnOpenKextDir">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>Catalogs</string>
               </property>
@@ -2362,11 +2247,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="4">
              <widget class="QToolButton" name="btnKernelAdd_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -2409,11 +2289,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnKernelAdd_Up">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>Up</string>
               </property>
@@ -2427,11 +2302,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnKernelAdd_Down">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>Down</string>
               </property>
@@ -2475,11 +2345,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnKernelBlock_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -2493,11 +2358,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnKernelBlock_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -2553,11 +2413,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnKernelForce_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -2571,11 +2426,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnKernelForce_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -2612,11 +2462,6 @@ This is a security option that restricts the activation of single user mode by i
            <layout class="QGridLayout" name="gridLayout_14">
             <item row="1" column="0">
              <widget class="QToolButton" name="btnKernelPatchAdd">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -2630,11 +2475,6 @@ This is a security option that restricts the activation of single user mode by i
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnKernelPatchDel">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -3592,7 +3432,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5350,11 +5190,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnMiscBO_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -5368,11 +5203,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnMiscBO_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -5423,11 +5253,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnMiscEntries_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -5441,11 +5266,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnMiscEntries_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -5497,11 +5317,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnMiscTools_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -5515,11 +5330,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnMiscTools_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -5536,11 +5346,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="2">
              <widget class="QToolButton" name="btnOpenToolsDir">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>Catalogs</string>
               </property>
@@ -5582,7 +5387,7 @@ Note: This functionality is still under development and is not ready for product
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5607,11 +5412,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="5">
              <widget class="QToolButton" name="btnNVRAMAdd_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -5625,11 +5425,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="6">
              <widget class="QToolButton" name="btnNVRAMAdd_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -5675,11 +5470,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnNVRAMAdd_Add0">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -5693,11 +5483,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnNVRAMAdd_Del0">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -5753,11 +5538,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnNVRAMDel_Add0">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -5771,11 +5551,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnNVRAMDel_Del0">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -5812,11 +5587,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="5">
              <widget class="QToolButton" name="btnNVRAMDel_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -5830,11 +5600,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="6">
              <widget class="QToolButton" name="btnNVRAMDel_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -5880,11 +5645,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnNVRAMLS_Add0">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -5898,11 +5658,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnNVRAMLS_Del0">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -5939,11 +5694,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="5">
              <widget class="QToolButton" name="btnNVRAMLS_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -5957,11 +5707,6 @@ Note: This functionality is still under development and is not ready for product
             </item>
             <item row="1" column="6">
              <widget class="QToolButton" name="btnNVRAMLS_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -6107,7 +5852,7 @@ A continuously updated variable list can be found in a corresponding document: N
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>5</number>
+              <number>0</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -7032,11 +6777,6 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                </item>
                <item row="4" column="0">
                 <widget class="QToolButton" name="btnDevices_add">
-                 <property name="font">
-                  <font>
-                   <pointsize>13</pointsize>
-                  </font>
-                 </property>
                  <property name="text">
                   <string>AddItem</string>
                  </property>
@@ -7050,11 +6790,6 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                </item>
                <item row="4" column="1">
                 <widget class="QToolButton" name="btnDevices_del">
-                 <property name="font">
-                  <font>
-                   <pointsize>13</pointsize>
-                  </font>
-                 </property>
                  <property name="text">
                   <string>DeleteItem</string>
                  </property>
@@ -8163,7 +7898,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>8</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -8908,11 +8643,6 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnUp_UEFI_Drivers">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>Up</string>
               </property>
@@ -8926,11 +8656,6 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnDown_UEFI_Drivers">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>Down</string>
               </property>
@@ -8944,11 +8669,6 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
             </item>
             <item row="1" column="2">
              <widget class="QToolButton" name="btnOpenDriversDir">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>Catalogs</string>
               </property>
@@ -8962,11 +8682,6 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
             </item>
             <item row="1" column="3">
              <widget class="QToolButton" name="btnUEFIDrivers_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -8980,11 +8695,6 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
             </item>
             <item row="1" column="4">
              <widget class="QToolButton" name="btnUEFIDrivers_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
@@ -10593,11 +10303,6 @@ This setting allows running some software written for UEFI 2.x firmware like NVI
             </item>
             <item row="1" column="0">
              <widget class="QToolButton" name="btnUEFIRM_Add">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>AddItem</string>
               </property>
@@ -10611,11 +10316,6 @@ This setting allows running some software written for UEFI 2.x firmware like NVI
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnUEFIRM_Del">
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>DeleteItem</string>
               </property>
