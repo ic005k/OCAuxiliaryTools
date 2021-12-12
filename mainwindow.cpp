@@ -6443,6 +6443,7 @@ void MainWindow::init_MainUI() {
     ui->toolBar->setHidden(true);
     ui->hlayoutFind->addWidget(ui->lblCount);
     ui->hlayoutFind->addWidget(ui->cboxFind);
+    ui->frameToolBar->setFixedHeight(ui->cboxFind->height() + 10);
 
   } else {
     ui->toolBar->addWidget(ui->lblCount);
@@ -8121,8 +8122,10 @@ void MainWindow::findTabText(QString findText) {
 
 void MainWindow::on_actionFind_triggered() {
   ui->cboxFind->lineEdit()->selectAll();
-  if (myDatabase->ui->chkHideToolbar->isChecked() && ui->toolBar->isHidden())
+  if (myDatabase->ui->chkHideToolbar->isChecked() && ui->toolBar->isHidden()) {
     ui->frameToolBar->setHidden(false);
+    ui->cboxFind->setFocus();
+  }
 
   find = true;
 
@@ -11055,6 +11058,8 @@ void MainWindow::on_actionPreferences_triggered() {
   else
     myDatabase->ui->tabWidget->setDocumentMode(false);
 
+    // myDatabase->ui->tabWidget->setCurrentIndex(2);
+
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
   {
     myDatabase->ui->tabWidget->setTabVisible(0, false);
@@ -11075,6 +11080,10 @@ void MainWindow::on_actionPreferences_triggered() {
   myDatabase->refreshKextUrl();
   myDatabase->setModal(true);
   myDatabase->show();
+  if (myDatabase->ui->tableKextUrl->rowCount() > 0) {
+    myDatabase->ui->tableKextUrl->clearSelection();
+    // myDatabase->ui->tableKextUrl->setCurrentCell(0, 0);
+  }
 }
 
 void MainWindow::on_actionDocumentation_triggered() {
@@ -11087,4 +11096,9 @@ void MainWindow::on_actionDocumentation_triggered() {
         "https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-cn.md"));
     QDesktopServices::openUrl(url_cn);
   }
+}
+
+void MainWindow::on_btnHide_clicked() {
+  ui->frameToolBar->setHidden(true);
+  ui->cboxFind->lineEdit()->clear();
 }

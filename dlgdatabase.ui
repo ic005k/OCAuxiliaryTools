@@ -350,13 +350,6 @@ p, li { white-space: pre-wrap; }
           <string>UI Appearance (effective after the next app opening)</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_8">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="chkHideToolbar">
-            <property name="text">
-             <string>Hide Toolbar</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QGroupBox" name="groupBox_4">
             <property name="title">
@@ -408,6 +401,13 @@ p, li { white-space: pre-wrap; }
               </widget>
              </item>
             </layout>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="chkHideToolbar">
+            <property name="text">
+             <string>Hide Toolbar</string>
+            </property>
            </widget>
           </item>
          </layout>

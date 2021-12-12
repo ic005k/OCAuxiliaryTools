@@ -952,6 +952,8 @@ class MainWindow : public QMainWindow {
 
   void on_actionDocumentation_triggered();
 
+  void on_btnHide_clicked();
+
  private:
   bool isDrag;
   QPoint m_position;

@@ -46,8 +46,28 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_76">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
        <item row="0" column="0">
-        <layout class="QHBoxLayout" name="hlayoutFind"/>
+        <layout class="QHBoxLayout" name="hlayoutFind">
+         <item>
+          <widget class="QToolButton" name="btnHide">
+           <property name="text">
+            <string>Hide</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
