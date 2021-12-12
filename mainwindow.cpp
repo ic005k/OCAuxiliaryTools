@@ -11024,13 +11024,13 @@ void MainWindow::changeOpenCore(bool blDEV) {
   if (!blDEV) {
     dataBaseDir = appInfo.filePath() + "/Database/";
     pathSource = appInfo.filePath() + "/Database/";
-    lblVer->setText("OpenCore " + ocVer);
+    lblVer->setText("  OpenCore " + ocVer);
     aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                       " For OpenCore " + ocVer);
   } else {
     dataBaseDir = appInfo.filePath() + "/devDatabase/";
     pathSource = appInfo.filePath() + "/devDatabase/";
-    lblVer->setText("OpenCore " + ocVerDev);
+    lblVer->setText("  OpenCore " + ocVerDev);
     aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                       " For OpenCore " + ocVerDev);
   }

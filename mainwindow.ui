@@ -10583,6 +10583,9 @@ QToolBar::separator {
     background-color: #222222;
 }*/</string>
    </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
    <property name="allowedAreas">
     <set>Qt::BottomToolBarArea|Qt::TopToolBarArea</set>
    </property>
