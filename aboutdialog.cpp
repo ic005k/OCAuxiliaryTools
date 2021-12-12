@@ -4,7 +4,7 @@
 #include "ui_aboutdialog.h"
 
 extern MainWindow* mw_one;
-QString CurVerison = "20220029";
+QString CurVerison = "20220030";
 QString ocVer = "0.7.6";
 QString ocVerDev = "0.7.7";
 QString ocFrom, ocFromDev;
@@ -31,8 +31,8 @@ aboutDialog::aboutDialog(QWidget* parent)
   setMinimumWidth(this->width());
   setMinimumHeight(this->height());
 
-  ui->label->setFixedHeight(65);
-  ui->label->setFixedWidth(65);
+  ui->label->setFixedHeight(90);
+  ui->label->setFixedWidth(90);
   ui->label->setText("");
 
   ui->label->setStyleSheet(
@@ -42,10 +42,10 @@ aboutDialog::aboutDialog(QWidget* parent)
 
   if (!blDEV)
     ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
-                            " For OpenCore " + ocVer);
+                            " for OpenCore " + ocVer);
   else
     ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
-                            " For OpenCore " + ocVerDev);
+                            " for OpenCore " + ocVerDev);
   QFont font;
   font.setBold(true);
   font.setPixelSize(25);
