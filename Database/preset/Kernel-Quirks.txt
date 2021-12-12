@@ -1,38 +1,5 @@
-CPU:Intel Skylake-X/W and Cascade Lake-X/W (High End Desktop)
-Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
-
-CPU:Intel Skylake-X/W and Cascade Lake-X/W (Dell/Sony HEDT)
-Kernel:AppleXcpmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
-
-CPU:Intel Skylake-X/W and Cascade Lake-X/W (HP HEDT)
-Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
-
-CPU:Intel Broadwell-E and Haswell-E (High End Desktop)
-Kernel:AppleCpuPmCfgLock AppleXcpmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
-
-CPU:Intel Broadwell-E and Haswell-E (Dell/Sony HEDT)
-Kernel:AppleCpuPmCfgLock AppleXcpmCfgLock AppleXcpmExtraMsrs CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
-
-CPU:Intel Broadwell-E and Haswell-E (HP HEDT)
-Kernel:AppleCpuPmCfgLock AppleXcpmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
-
-CPU:Intel Sandy Bridge-E and IvyBridge-E (High End Desktop)
-Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
-
-CPU:Intel Sandy Bridge-E and IvyBridge-E (Dell/Sony HEDT)
-Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
-
-CPU:Intel Sandy Bridge-E and IvyBridge-E (HP HEDT)
-Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
-
-CPU:Intel Nehalem and Westmere (High End Desktop)
-Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
-
-CPU:Intel Nehalem and Westmere (Dell/Sony HEDT)
-Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
-
-CPU:Intel Nehalem and Westmere (HP HEDT)
-Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+CPU:Intel Core 12th Gen Alder Lake (Requires Fake CPU-ID)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison DisableRtcChecksum PanicNoKextDump PowerTimeoutKernelPanic ProvideCurrentCpuInfo
 
 CPU:Intel Core 11th Gen Rocket Lake (Dektop/Mobile/Nuc)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison DisableRtcChecksum PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
@@ -82,11 +49,50 @@ Kernel:AppleCpuPmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettiso
 CPU:Intel Core 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (HP)
 Kernel:AppleCpuPmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
-CPU:Intel Core 1st Gen Penryn (Desktop)
+CPU:Intel Core 1st Gen Lynnfield/Clarkdale (Desktop/Mobile/NUC)
+Kernel:AppleCpuPmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Core 2 Duo Penryn (Desktop)
 Kernel:DisableIoMapper DisableLinkeditJettison PanicNoKextDump
 
-CPU:Intel Core 1st Gen Penryn (HP Desktop)
+CPU:Intel Core 2 Duo Penryn (HP Desktop)
 Kernel:DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump
+
+CPU:Intel Skylake-X/W and Cascade Lake-X/W (High End Desktop)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Skylake-X/W and Cascade Lake-X/W (Dell/Sony HEDT)
+Kernel:AppleXcpmCfgLock CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Skylake-X/W and Cascade Lake-X/W (HP HEDT)
+Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Broadwell-E and Haswell-E (High End Desktop)
+Kernel:AppleCpuPmCfgLock AppleXcpmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Broadwell-E and Haswell-E (Dell/Sony HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmCfgLock AppleXcpmExtraMsrs CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Broadwell-E and Haswell-E (HP HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Sandy Bridge-E and IvyBridge-E (High End Desktop)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Sandy Bridge-E and IvyBridge-E (Dell/Sony HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Sandy Bridge-E and IvyBridge-E (HP HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Nehalem and Westmere (High End Desktop)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Nehalem and Westmere (Dell/Sony HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs CustomSMBIOSGuid DisableIoMapper DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
+
+CPU:Intel Nehalem and Westmere (HP HEDT)
+Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
 CPU:AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h)
 Kernel: PanicNoKextDump PowerTimeoutKernelPanic ProvideCurrentCpuInfo

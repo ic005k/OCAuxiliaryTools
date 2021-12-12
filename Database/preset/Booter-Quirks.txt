@@ -1,27 +1,35 @@
-
-CPU:Intel 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop/Mobile/Nuc)
+CPU:Intel Core 12th Gen Alder Lake (Requires Fake CPU-ID)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
 
-CPU:Intel 10th Gen Comet Lake (Dektop/Mobile/Nuc)
+CPU:Intel Core 10th Gen Comet Lake and 11th Gen Rocket Lake (Dektop/Mobile/Nuc)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
 
-CPU:Intel 8th and 9th Gen Coffee Lake and Cascade Lake X (Desktop/High End Desktop)
+CPU:Intel Core 10th Gen Comet Lake (Dektop/Mobile/Nuc)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
+
+CPU:Intel Core 8th and 9th Gen Coffee Lake (Desktop)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
 
-CPU:Intel 9th Gen Coffee Lake (Z390 Chipset)
+CPU:Intel Core 9th Gen Coffee Lake (Z390 Chipset)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
 
-CPU:Intel 8th and 9th Gen Coffee Lake (Mobile/Nuc)
+CPU:Intel Core 8th and 9th Gen Coffee Lake (Mobile/Nuc)
 Booter:AvoidRuntimeDefrag EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
 
-CPU:Intel 6th Gen Skylake and 7th Gen Kaby Lake (Desktop/Mobile/NUC)
+CPU:Intel Core 6th Gen Skylake and 7th Gen Kaby Lake (Desktop/Mobile/NUC)
 Booter:AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide SetupVirtualMap
 
-CPU:Intel 4th Gen Haswell and 5th Gen Broadwell (Desktop/Mobile/NUC)
+CPU:Intel Core 4th Gen Haswell and 5th Gen Broadwell (Desktop/Mobile/NUC)
 Booter:AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide SetupVirtualMap
 
-CPU:Intel 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (Desktop/Mobile/NUC)
+CPU:Intel Core 2nd Gen Sandy Bridge and 3rd Gen Ivy Bridge (Desktop/Mobile/NUC)
 Booter:AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide SetupVirtualMap
+
+CPU:Intel Core 1st Gen Lynnfield/Clarkdale (Desktop/Mobile/NUC)
+Booter: AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide SetupVirtualMap
+
+CPU:Intel Skylake-X/W and Cascade Lake-X/W (High End Desktop)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
 
 CPU:AMD Ryzen (17h)
 Booter:AvoidRuntimeDefrag EnableSafeModeSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
