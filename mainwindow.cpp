@@ -3377,6 +3377,7 @@ void MainWindow::setStatusBarText(QTableWidget* table) {
   else
     str = text;
 
+  if (str.length() > 80) str = str.mid(0, 65) + "...";
   if (table->currentColumn() != 0)
     // ui->statusbar->showMessage(text0 + " -> " + str);
     ui->lblStatusShow->setText(text0 + " -> " + str);
