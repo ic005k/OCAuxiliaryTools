@@ -10654,16 +10654,10 @@ QToolBar::separator {
    <property name="text">
     <string>Move Up</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+Up</string>
-   </property>
   </action>
   <action name="actionMove_Down">
    <property name="text">
     <string>Move Down</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Down</string>
    </property>
   </action>
  </widget>
