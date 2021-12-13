@@ -6286,6 +6286,10 @@ void MainWindow::init_EditMenu() {
     ui->actionOpen_database_directory->setIconVisibleInMenu(false);
   ui->actionUpgrade_Database->setVisible(false);
 
+  // Move Up(Down)
+  ui->actionMove_Up->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Up));
+  ui->actionMove_Down->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Down));
+
   // Backup EFI
   if (mac || osx1012) ui->actionBackup_EFI->setIconVisibleInMenu(false);
   ui->actionBackup_EFI->setIcon(QIcon(":/icon/be.png"));
@@ -9510,8 +9514,6 @@ void MainWindow::init_CopyPasteLine() {
     QAction* browdatabase = new QAction(tr("Browse Database"));
     QAction* bootargs = new QAction(tr("Add boot-args"));
     QMenu* popMenu = new QMenu(this);
-
-    up->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_9));
 
     popMenu->addAction(up);
     popMenu->addAction(down);
