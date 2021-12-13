@@ -4354,12 +4354,21 @@ void MainWindow::on_btnUEFIDrivers_Del_clicked() {
 
 void MainWindow::MoveItem(QTableWidget* t, bool up) {
   t->setFocus();
+  t->setSelectionMode(QAbstractItemView::SingleSelection);
+  t->setSelectionBehavior(QAbstractItemView::SelectRows);
 
   if (up) {
-    if (t->rowCount() == 0 || t->currentRow() == 0 || t->currentRow() < 0)
+    if (t->rowCount() == 0 || t->currentRow() == 0 || t->currentRow() < 0) {
+      t->setSelectionMode(QAbstractItemView::ExtendedSelection);
+      t->setSelectionBehavior(QAbstractItemView::SelectItems);
       return;
+    }
   } else {
-    if (t->currentRow() == t->rowCount() - 1 || t->currentRow() < 0) return;
+    if (t->currentRow() == t->rowCount() - 1 || t->currentRow() < 0) {
+      t->setSelectionMode(QAbstractItemView::ExtendedSelection);
+      t->setSelectionBehavior(QAbstractItemView::SelectItems);
+      return;
+    }
   }
 
   QStringList items;
@@ -4435,6 +4444,9 @@ void MainWindow::MoveItem(QTableWidget* t, bool up) {
 
     t->setCurrentCell(cr + 1, t->currentColumn());
   }
+
+  t->setSelectionMode(QAbstractItemView::ExtendedSelection);
+  t->setSelectionBehavior(QAbstractItemView::SelectItems);
 
   this->setWindowModified(true);
   updateIconStatus();
@@ -6444,6 +6456,7 @@ void MainWindow::init_MainUI() {
     ui->toolBar->setHidden(true);
     ui->hlayoutFind->addWidget(ui->lblCount);
     ui->hlayoutFind->addWidget(ui->cboxFind);
+    ui->hlayoutFind->addWidget(ui->btnHide);
     ui->frameToolBar->setFixedHeight(ui->cboxFind->height() + 10);
 
   } else {
@@ -9498,6 +9511,8 @@ void MainWindow::init_CopyPasteLine() {
     QAction* bootargs = new QAction(tr("Add boot-args"));
     QMenu* popMenu = new QMenu(this);
 
+    up->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_9));
+
     popMenu->addAction(up);
     popMenu->addAction(down);
     popMenu->addAction(add);
@@ -9546,7 +9561,9 @@ void MainWindow::init_CopyPasteLine() {
 
     // Up
     connect(up, &QAction::triggered, [=]() {
-      if (w == ui->table_kernel_add) ui->btnKernelAdd_Up->click();
+      if (w == ui->table_kernel_add) {
+        ui->btnKernelAdd_Up->click();
+      }
       if (w == ui->table_acpi_add) ui->btnUp->click();
       if (w == ui->table_uefi_drivers) ui->btnUp_UEFI_Drivers->click();
     });
@@ -11278,4 +11295,16 @@ void MainWindow::on_actionDocumentation_triggered() {
 void MainWindow::on_btnHide_clicked() {
   ui->frameToolBar->setHidden(true);
   ui->cboxFind->lineEdit()->clear();
+}
+
+void MainWindow::on_actionMove_Up_triggered() {
+  if (ui->table_acpi_add->hasFocus()) ui->btnUp->clicked();
+  if (ui->table_kernel_add->hasFocus()) ui->btnKernelAdd_Up->clicked();
+  if (ui->table_uefi_drivers->hasFocus()) ui->btnUp_UEFI_Drivers->clicked();
+}
+
+void MainWindow::on_actionMove_Down_triggered() {
+  if (ui->table_acpi_add->hasFocus()) ui->btnDown->clicked();
+  if (ui->table_kernel_add->hasFocus()) ui->btnKernelAdd_Down->clicked();
+  if (ui->table_uefi_drivers->hasFocus()) ui->btnDown_UEFI_Drivers->clicked();
 }

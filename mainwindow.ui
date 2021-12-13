@@ -164,7 +164,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -10289,6 +10289,9 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionGo_to_the_previous"/>
     <addaction name="actionGo_to_the_next"/>
     <addaction name="separator"/>
+    <addaction name="actionMove_Up"/>
+    <addaction name="actionMove_Down"/>
+    <addaction name="separator"/>
     <addaction name="actionPlist_editor"/>
     <addaction name="actionDSDT_SSDT_editor"/>
    </widget>
@@ -10645,6 +10648,22 @@ QToolBar::separator {
   <action name="actionDocumentation">
    <property name="text">
     <string>OCAuxiliaryTools Documentation</string>
+   </property>
+  </action>
+  <action name="actionMove_Up">
+   <property name="text">
+    <string>Move Up</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Up</string>
+   </property>
+  </action>
+  <action name="actionMove_Down">
+   <property name="text">
+    <string>Move Down</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Down</string>
    </property>
   </action>
  </widget>

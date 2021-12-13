@@ -16,6 +16,7 @@
 #include <QProxyStyle>
 #include <QRegExp>
 #include <QSaveFile>
+#include <QShortcut>
 #include <QSpacerItem>
 #include <QSplitter>
 #include <QStyledItemDelegate>
@@ -954,6 +955,10 @@ class MainWindow : public QMainWindow {
   void on_actionDocumentation_triggered();
 
   void on_btnHide_clicked();
+
+  void on_actionMove_Up_triggered();
+
+  void on_actionMove_Down_triggered();
 
  private:
   bool isDrag;
