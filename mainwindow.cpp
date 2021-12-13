@@ -9440,7 +9440,11 @@ void MainWindow::init_CopyPasteLine() {
   QObjectList listBtn = getAllToolButton(getAllUIControls(ui->tabTotal));
   for (int i = 0; i < listBtn.count(); i++) {
     QToolButton* w = (QToolButton*)listBtn.at(i);
-    w->setHidden(true);
+    if (w != ui->btnGenerate && w != ui->btnSystemUUID && w != ui->btnROM &&
+        w != ui->btnPickerAttributes && w != ui->btnDisplayLevel &&
+        w != ui->btnExposeSensitiveData && w != ui->btnScanPolicy &&
+        w != ui->btnUpdateHex)
+      w->setHidden(true);
   }
 
   listOfTableWidget.clear();
