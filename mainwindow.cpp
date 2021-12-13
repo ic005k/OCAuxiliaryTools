@@ -6962,8 +6962,8 @@ void MainWindow::readResultCheckData() {
       QString::fromLocal8Bit(chkdata->readAll());  //与保存文件的格式一致
   QString str;
   QString strMsg;
-  ui->lblOCVTip->setFixedHeight(12);
-  ui->lblOCVTip->setFixedWidth(12);
+  ui->lblOCVTip->setFixedHeight(16);
+  ui->lblOCVTip->setFixedWidth(16);
   ui->lblOCVTip->setText("");
 
   if (result.trimmed() == "Failed to read") return;
@@ -6983,9 +6983,9 @@ void MainWindow::readResultCheckData() {
     if (myDatabase->ui->chkHideToolbar->isChecked()) {
       ui->lblOCVTip->setStyleSheet(
           "QLabel{"
-          "border-image:url(:/icon/ok.png) 4 4 4 4 stretch stretch;"
+          "border-image:url(:/icon/temp.png) 4 4 4 4 stretch stretch;"
           "}");
-      ui->lblOCVTip->setToolTip(ui->actionOcvalidate->text() + " Ok");
+      ui->lblOCVTip->setToolTip("");
     }
 
   } else {
@@ -6999,7 +6999,7 @@ void MainWindow::readResultCheckData() {
     if (myDatabase->ui->chkHideToolbar->isChecked()) {
       ui->lblOCVTip->setStyleSheet(
           "QLabel{"
-          "border-image:url(:/icon/no.png) 4 4 4 4 stretch stretch;"
+          "border-image:url(:/icon/overror.png) 4 4 4 4 stretch stretch;"
           "}");
       ui->lblOCVTip->setToolTip(ui->actionOcvalidate->toolTip());
     }
@@ -10841,8 +10841,8 @@ void MainWindow::on_listSub_currentRowChanged(int currentRow) {
     QObjectList list = getAllTableWidget(getAllUIControls(
         mymethod->getSubTabWidget(ui->listMain->currentRow(), currentRow)));
     if (list.count() >= 1) {
-      QTableWidget* w = (QTableWidget*)list.at(0);
-      w->setFocus();
+      // QTableWidget* w = (QTableWidget*)list.at(0);
+      // w->setFocus();
     }
   }
 }
