@@ -9490,6 +9490,7 @@ void MainWindow::init_CopyPasteLine() {
     QAction* up = new QAction(tr("Move Up"));
     QAction* down = new QAction(tr("Move Down"));
     QAction* preset = new QAction(tr("Preset"));
+    QAction* browdatabase = new QAction(tr("Browse Database"));
     QAction* bootargs = new QAction(tr("Add boot-args"));
     QMenu* popMenu = new QMenu(this);
 
@@ -9498,6 +9499,7 @@ void MainWindow::init_CopyPasteLine() {
     popMenu->addAction(add);
     popMenu->addAction(del);
     popMenu->addAction(preset);
+    popMenu->addAction(browdatabase);
     popMenu->addAction(bootargs);
     popMenu->addSeparator();
     popMenu->addAction(cutAction);
@@ -9514,11 +9516,24 @@ void MainWindow::init_CopyPasteLine() {
 
     if (w != ui->table_acpi_patch && w != ui->table_kernel_patch &&
         w != ui->table_nv_add0 && w != ui->table_nv_del0 &&
-        w != ui->table_nv_ls0) {
+        w != ui->table_nv_ls0 && w != ui->table_kernel_add) {
       preset->setVisible(false);
     }
 
     if (w != ui->table_nv_add) bootargs->setVisible(false);
+
+    if (w != ui->table_acpi_add && w != ui->table_kernel_add &&
+        w != ui->tableTools && w != ui->table_uefi_drivers) {
+      browdatabase->setVisible(false);
+    }
+
+    // Browse Database
+    connect(browdatabase, &QAction::triggered, [=]() {
+      if (w == ui->table_acpi_add) ui->btnOpenACPIDir->click();
+      if (w == ui->table_kernel_add) ui->btnOpenKextDir->click();
+      if (w == ui->tableTools) ui->btnOpenToolsDir->click();
+      if (w == ui->table_uefi_drivers) ui->btnOpenDriversDir->click();
+    });
 
     // boot-args
     connect(bootargs, &QAction::triggered, [=]() {
@@ -9622,6 +9637,8 @@ void MainWindow::init_CopyPasteLine() {
     // Preset
     connect(preset, &QAction::triggered, [=]() {
       if (w == ui->table_acpi_patch) ui->btnACPIPatch->click();
+
+      if (w == ui->table_kernel_add) ui->btnKextPreset->click();
 
       if (w == ui->table_kernel_patch) ui->btnPresetKernelPatch->click();
 

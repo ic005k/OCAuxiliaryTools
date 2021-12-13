@@ -1725,7 +1725,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
     </message>
     <message>
         <location filename="mainwindow.ui" line="5301"/>
-        <location filename="mainwindow.cpp" line="9493"/>
+        <location filename="mainwindow.cpp" line="9494"/>
         <source>Add boot-args</source>
         <translation>添加引导参数</translation>
     </message>
@@ -1980,7 +1980,7 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
     </message>
     <message>
         <location filename="mainwindow.ui" line="10642"/>
-        <location filename="mainwindow.cpp" line="11235"/>
+        <location filename="mainwindow.cpp" line="11252"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
@@ -2484,8 +2484,8 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="7789"/>
-        <location filename="mainwindow.cpp" line="10409"/>
-        <location filename="mainwindow.cpp" line="10414"/>
+        <location filename="mainwindow.cpp" line="10426"/>
+        <location filename="mainwindow.cpp" line="10431"/>
         <source>Select date</source>
         <translation>选择日期</translation>
     </message>
@@ -4213,8 +4213,13 @@ Speed</translation>
         <translation>下移</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="11183"/>
-        <location filename="mainwindow.cpp" line="11189"/>
+        <location filename="mainwindow.cpp" line="9493"/>
+        <source>Browse Database</source>
+        <translation>浏览数据库</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="11200"/>
+        <location filename="mainwindow.cpp" line="11206"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
@@ -4320,20 +4325,20 @@ Speed</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10209"/>
-        <location filename="mainwindow.cpp" line="10212"/>
+        <location filename="mainwindow.cpp" line="10226"/>
+        <location filename="mainwindow.cpp" line="10229"/>
         <source>Sync OC</source>
         <translation>同步OC</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="66"/>
-        <location filename="mainwindow.cpp" line="10411"/>
-        <location filename="mainwindow.cpp" line="10412"/>
+        <location filename="mainwindow.cpp" line="10428"/>
+        <location filename="mainwindow.cpp" line="10429"/>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10155"/>
+        <location filename="mainwindow.cpp" line="10172"/>
         <source>The database file is incomplete and the upgrade cannot be completed.</source>
         <translation>数据库文件不完整，无法完成升级。</translation>
     </message>
@@ -4458,7 +4463,7 @@ BaseSkip</translation>
         <translation>显示提示</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10517"/>
+        <location filename="mainwindow.cpp" line="10534"/>
         <source>Configuration file database</source>
         <translation>配置文件数据库</translation>
     </message>
