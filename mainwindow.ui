@@ -183,7 +183,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -205,7 +205,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2122,7 +2122,7 @@ This is a security option that restricts the activation of single user mode by i
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -10311,6 +10311,8 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="separator"/>
     <addaction name="actionMove_Up"/>
     <addaction name="actionMove_Down"/>
+    <addaction name="actionAdd"/>
+    <addaction name="actionDelete"/>
     <addaction name="separator"/>
     <addaction name="actionPlist_editor"/>
     <addaction name="actionDSDT_SSDT_editor"/>
@@ -10678,6 +10680,22 @@ QToolBar::separator {
   <action name="actionMove_Down">
    <property name="text">
     <string>Move Down</string>
+   </property>
+  </action>
+  <action name="actionAdd">
+   <property name="text">
+    <string>Add Item</string>
+   </property>
+   <property name="shortcut">
+    <string>+</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="text">
+    <string>Delete Item</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
    </property>
   </action>
  </widget>

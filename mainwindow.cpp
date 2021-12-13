@@ -3567,6 +3567,7 @@ void MainWindow::on_btnKernelPatchDel_clicked() {
 }
 
 void MainWindow::add_item(QTableWidget* table, int total_column) {
+  table->setSelectionMode(QAbstractItemView::SingleSelection);
   int t = table->rowCount();
   table->setRowCount(t + 1);
 
@@ -3576,6 +3577,8 @@ void MainWindow::add_item(QTableWidget* table, int total_column) {
   }
   table->setFocus();
   table->setCurrentCell(t, 0);
+
+  table->setSelectionMode(QAbstractItemView::ExtendedSelection);
 }
 
 QString MainWindow::getSubTabStr(int tabIndex) {
@@ -4974,6 +4977,7 @@ void MainWindow::on_table_kernel_Force_currentCellChanged(int currentRow,
 void MainWindow::on_btnKernelForce_Add_clicked() {
   QTableWidget* t = new QTableWidget;
   t = ui->table_kernel_Force;
+  t->setSelectionMode(QAbstractItemView::SingleSelection);
   int row = t->rowCount() + 1;
 
   t->setRowCount(row);
@@ -4992,7 +4996,7 @@ void MainWindow::on_btnKernelForce_Add_clicked() {
 
   t->setFocus();
   t->setCurrentCell(row - 1, 0);
-
+  t->setSelectionMode(QAbstractItemView::ExtendedSelection);
   this->setWindowModified(true);
   updateIconStatus();
 }
@@ -10832,6 +10836,15 @@ void MainWindow::on_listSub_currentRowChanged(int currentRow) {
   Q_UNUSED(currentRow);
   setConversionWidgetVisible(false);
   mymethod->UpdateStatusBarInfo();
+
+  if (!Initialization) {
+    QObjectList list = getAllTableWidget(getAllUIControls(
+        mymethod->getSubTabWidget(ui->listMain->currentRow(), currentRow)));
+    if (list.count() >= 1) {
+      QTableWidget* w = (QTableWidget*)list.at(0);
+      w->setFocus();
+    }
+  }
 }
 
 void MainWindow::on_listMain_currentRowChanged(int currentRow) {
@@ -11328,4 +11341,82 @@ void MainWindow::on_actionMove_Down_triggered() {
   if (ui->table_acpi_add->hasFocus()) ui->btnDown->clicked();
   if (ui->table_kernel_add->hasFocus()) ui->btnKernelAdd_Down->clicked();
   if (ui->table_uefi_drivers->hasFocus()) ui->btnDown_UEFI_Drivers->clicked();
+}
+
+void MainWindow::on_actionAdd_triggered() {
+  if (ui->table_acpi_add->hasFocus()) ui->btnACPIAdd_Add->click();
+  if (ui->table_acpi_del->hasFocus()) ui->btnACPIDel_Add->click();
+  if (ui->table_acpi_patch->hasFocus()) ui->btnACPIPatch_Add->click();
+
+  if (ui->table_booter->hasFocus()) ui->btnBooter_Add->click();
+  if (ui->table_Booter_patch->hasFocus()) ui->btnBooterPatchAdd->click();
+
+  if (ui->table_dp_add0->hasFocus()) ui->btnDPAdd_Add0->click();
+  if (ui->table_dp_add->hasFocus()) ui->btnDPAdd_Add->click();
+
+  if (ui->table_dp_del0->hasFocus()) ui->btnDPDel_Add0->click();
+  if (ui->table_dp_del->hasFocus()) ui->btnDPDel_Add->click();
+
+  if (ui->table_kernel_add->hasFocus()) ui->btnKernelAdd_Add->click();
+  if (ui->table_kernel_block->hasFocus()) ui->btnKernelBlock_Add->click();
+  if (ui->table_kernel_Force->hasFocus()) ui->btnKernelForce_Add->click();
+  if (ui->table_kernel_patch->hasFocus()) ui->btnKernelPatchAdd->click();
+
+  if (ui->tableBlessOverride->hasFocus()) ui->btnMiscBO_Add->click();
+  if (ui->tableEntries->hasFocus()) ui->btnMiscEntries_Add->click();
+  if (ui->tableTools->hasFocus()) ui->btnMiscTools_Add->click();
+
+  if (ui->table_nv_add0->hasFocus()) ui->btnNVRAMAdd_Add0->click();
+  if (ui->table_nv_add->hasFocus()) ui->btnNVRAMAdd_Add->click();
+
+  if (ui->table_nv_del0->hasFocus()) ui->btnNVRAMDel_Add0->click();
+  if (ui->table_nv_del->hasFocus()) ui->btnNVRAMDel_Add->click();
+
+  if (ui->table_nv_ls0->hasFocus()) ui->btnNVRAMLS_Add0->click();
+  if (ui->table_nv_ls->hasFocus()) ui->btnNVRAMLS_Add->click();
+
+  if (ui->tableDevices->hasFocus()) ui->btnDevices_add->click();
+
+  if (ui->table_uefi_drivers->hasFocus()) ui->btnUEFIDrivers_Add->click();
+
+  if (ui->table_uefi_ReservedMemory->hasFocus()) ui->btnUEFIRM_Add->click();
+}
+
+void MainWindow::on_actionDelete_triggered() {
+  if (ui->table_acpi_add->hasFocus()) ui->btnACPIAdd_Del->click();
+  if (ui->table_acpi_del->hasFocus()) ui->btnACPIDel_Del->click();
+  if (ui->table_acpi_patch->hasFocus()) ui->btnACPIPatch_Del->click();
+
+  if (ui->table_booter->hasFocus()) ui->btnBooter_Del->click();
+  if (ui->table_Booter_patch->hasFocus()) ui->btnBooterPatchDel->click();
+
+  if (ui->table_dp_add0->hasFocus()) ui->btnDPAdd_Del0->click();
+  if (ui->table_dp_add->hasFocus()) ui->btnDPAdd_Del->click();
+
+  if (ui->table_dp_del0->hasFocus()) ui->btnDPDel_Del0->click();
+  if (ui->table_dp_del->hasFocus()) ui->btnDPDel_Del->click();
+
+  if (ui->table_kernel_add->hasFocus()) ui->btnKernelAdd_Del->click();
+  if (ui->table_kernel_block->hasFocus()) ui->btnKernelBlock_Del->click();
+  if (ui->table_kernel_Force->hasFocus()) ui->btnKernelForce_Del->click();
+  if (ui->table_kernel_patch->hasFocus()) ui->btnKernelPatchDel->click();
+
+  if (ui->tableBlessOverride->hasFocus()) ui->btnMiscBO_Del->click();
+  if (ui->tableEntries->hasFocus()) ui->btnMiscEntries_Del->click();
+  if (ui->tableTools->hasFocus()) ui->btnMiscTools_Del->click();
+
+  if (ui->table_nv_add0->hasFocus()) ui->btnNVRAMAdd_Del0->click();
+  if (ui->table_nv_add->hasFocus()) ui->btnNVRAMAdd_Del->click();
+
+  if (ui->table_nv_del0->hasFocus()) ui->btnNVRAMDel_Del0->click();
+  if (ui->table_nv_del->hasFocus()) ui->btnNVRAMDel_Del->click();
+
+  if (ui->table_nv_ls0->hasFocus()) ui->btnNVRAMLS_Del0->click();
+  if (ui->table_nv_ls->hasFocus()) ui->btnNVRAMLS_Del->click();
+
+  if (ui->tableDevices->hasFocus()) ui->btnDevices_del->click();
+
+  if (ui->table_uefi_drivers->hasFocus()) ui->btnUEFIDrivers_Del->click();
+
+  if (ui->table_uefi_ReservedMemory->hasFocus()) ui->btnUEFIRM_Del->click();
 }

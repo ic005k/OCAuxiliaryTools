@@ -960,6 +960,10 @@ class MainWindow : public QMainWindow {
 
   void on_actionMove_Down_triggered();
 
+  void on_actionAdd_triggered();
+
+  void on_actionDelete_triggered();
+
  private:
   bool isDrag;
   QPoint m_position;
