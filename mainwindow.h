@@ -360,6 +360,7 @@ class MainWindow : public QMainWindow {
   QString getTextEditLineText(QTextEdit* txtEdit, int i);
   QString getDriverInfo(QString strDisk);
   void changeOpenCore(bool blDEV);
+  QObjectList getAllToolButton(QObjectList lstUIControls);
  public slots:
   void DisplayLevel();
   void ScanPolicy();

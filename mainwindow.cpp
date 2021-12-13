@@ -7988,6 +7988,16 @@ QObjectList MainWindow::getAllComboBox(QObjectList lstUIControls) {
   return lstOfComboBox;
 }
 
+QObjectList MainWindow::getAllToolButton(QObjectList lstUIControls) {
+  QObjectList lstOfToolbutton;
+  foreach (QObject* obj, lstUIControls) {
+    if (obj->metaObject()->className() == QStringLiteral("QToolButton")) {
+      lstOfToolbutton.append(obj);
+    }
+  }
+  return lstOfToolbutton;
+}
+
 void MainWindow::findCheckBox(QString findText) {
   // CheckBox  1
   listOfCheckBox.clear();
@@ -9427,6 +9437,12 @@ void MainWindow::tablePopMenu(QTableWidget* w, QAction* cutAction,
 }
 
 void MainWindow::init_CopyPasteLine() {
+  QObjectList listBtn = getAllToolButton(getAllUIControls(ui->tabTotal));
+  for (int i = 0; i < listBtn.count(); i++) {
+    QToolButton* w = (QToolButton*)listBtn.at(i);
+    w->setHidden(true);
+  }
+
   listOfTableWidget.clear();
   listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
   for (int i = 0; i < listOfTableWidget.count(); i++) {
@@ -9469,13 +9485,152 @@ void MainWindow::init_CopyPasteLine() {
     copyAction = new QAction(tr("Copy Line"));
     pasteAction = new QAction(tr("Paste Line"));
     QAction* showtipAction = new QAction(tr("Show Tips"));
+    QAction* add = new QAction(tr("AddItem"));
+    QAction* del = new QAction(tr("DeleteItem"));
+    QAction* up = new QAction(tr("Up"));
+    QAction* down = new QAction(tr("Down"));
+    QAction* preset = new QAction(tr("Preset"));
+    QAction* bootargs = new QAction(tr("Add boot-args"));
     QMenu* popMenu = new QMenu(this);
 
+    popMenu->addAction(up);
+    popMenu->addAction(down);
+    popMenu->addAction(add);
+    popMenu->addAction(del);
+    popMenu->addAction(preset);
+    popMenu->addAction(bootargs);
+    popMenu->addSeparator();
     popMenu->addAction(cutAction);
     popMenu->addAction(copyAction);
     popMenu->addAction(pasteAction);
     popMenu->addSeparator();
     popMenu->addAction(showtipAction);
+
+    if (w != ui->table_acpi_add && w != ui->table_kernel_add &&
+        w != ui->table_uefi_drivers) {
+      up->setVisible(false);
+      down->setVisible(false);
+    }
+
+    if (w != ui->table_acpi_patch && w != ui->table_kernel_patch &&
+        w != ui->table_nv_add0 && w != ui->table_nv_del0 &&
+        w != ui->table_nv_ls0) {
+      preset->setVisible(false);
+    }
+
+    if (w != ui->table_nv_add) bootargs->setVisible(false);
+
+    // boot-args
+    connect(bootargs, &QAction::triggered, [=]() {
+      if (w == ui->table_nv_add) ui->btnAddbootArgs->click();
+    });
+
+    // Up
+    connect(up, &QAction::triggered, [=]() {
+      if (w == ui->table_kernel_add) ui->btnKernelAdd_Up->click();
+      if (w == ui->table_acpi_add) ui->btnUp->click();
+      if (w == ui->table_uefi_drivers) ui->btnUp_UEFI_Drivers->click();
+    });
+
+    // Down
+    connect(down, &QAction::triggered, [=]() {
+      if (w == ui->table_kernel_add) ui->btnKernelAdd_Down->click();
+      if (w == ui->table_acpi_add) ui->btnDown->click();
+      if (w == ui->table_uefi_drivers) ui->btnDown_UEFI_Drivers->click();
+    });
+
+    // Add
+    connect(add, &QAction::triggered, [=]() {
+      if (w == ui->table_acpi_add) ui->btnACPIAdd_Add->click();
+      if (w == ui->table_acpi_del) ui->btnACPIDel_Add->click();
+      if (w == ui->table_acpi_patch) ui->btnACPIPatch_Add->click();
+
+      if (w == ui->table_booter) ui->btnBooter_Add->click();
+      if (w == ui->table_Booter_patch) ui->btnBooterPatchAdd->click();
+
+      if (w == ui->table_dp_add0) ui->btnDPAdd_Add0->click();
+      if (w == ui->table_dp_add) ui->btnDPAdd_Add->click();
+
+      if (w == ui->table_dp_del0) ui->btnDPDel_Add0->click();
+      if (w == ui->table_dp_del) ui->btnDPDel_Add->click();
+
+      if (w == ui->table_kernel_add) ui->btnKernelAdd_Add->click();
+      if (w == ui->table_kernel_block) ui->btnKernelBlock_Add->click();
+      if (w == ui->table_kernel_Force) ui->btnKernelForce_Add->click();
+      if (w == ui->table_kernel_patch) ui->btnKernelPatchAdd->click();
+
+      if (w == ui->tableBlessOverride) ui->btnMiscBO_Add->click();
+      if (w == ui->tableEntries) ui->btnMiscEntries_Add->click();
+      if (w == ui->tableTools) ui->btnMiscTools_Add->click();
+
+      if (w == ui->table_nv_add0) ui->btnNVRAMAdd_Add0->click();
+      if (w == ui->table_nv_add) ui->btnNVRAMAdd_Add->click();
+
+      if (w == ui->table_nv_del0) ui->btnNVRAMDel_Add0->click();
+      if (w == ui->table_nv_del) ui->btnNVRAMDel_Add->click();
+
+      if (w == ui->table_nv_ls0) ui->btnNVRAMLS_Add0->click();
+      if (w == ui->table_nv_ls) ui->btnNVRAMLS_Add->click();
+
+      if (w == ui->tableDevices) ui->btnDevices_add->click();
+
+      if (w == ui->table_uefi_drivers) ui->btnUEFIDrivers_Add->click();
+
+      if (w == ui->table_uefi_ReservedMemory) ui->btnUEFIRM_Add->click();
+    });
+
+    // Del
+    connect(del, &QAction::triggered, [=]() {
+      if (w == ui->table_acpi_add) ui->btnACPIAdd_Del->click();
+      if (w == ui->table_acpi_del) ui->btnACPIDel_Del->click();
+      if (w == ui->table_acpi_patch) ui->btnACPIPatch_Del->click();
+
+      if (w == ui->table_booter) ui->btnBooter_Del->click();
+      if (w == ui->table_Booter_patch) ui->btnBooterPatchDel->click();
+
+      if (w == ui->table_dp_add0) ui->btnDPAdd_Del0->click();
+      if (w == ui->table_dp_add) ui->btnDPAdd_Del->click();
+
+      if (w == ui->table_dp_del0) ui->btnDPDel_Del0->click();
+      if (w == ui->table_dp_del) ui->btnDPDel_Del->click();
+
+      if (w == ui->table_kernel_add) ui->btnKernelAdd_Del->click();
+      if (w == ui->table_kernel_block) ui->btnKernelBlock_Del->click();
+      if (w == ui->table_kernel_Force) ui->btnKernelForce_Del->click();
+      if (w == ui->table_kernel_patch) ui->btnKernelPatchDel->click();
+
+      if (w == ui->tableBlessOverride) ui->btnMiscBO_Del->click();
+      if (w == ui->tableEntries) ui->btnMiscEntries_Del->click();
+      if (w == ui->tableTools) ui->btnMiscTools_Del->click();
+
+      if (w == ui->table_nv_add0) ui->btnNVRAMAdd_Del0->click();
+      if (w == ui->table_nv_add) ui->btnNVRAMAdd_Del->click();
+
+      if (w == ui->table_nv_del0) ui->btnNVRAMDel_Del0->click();
+      if (w == ui->table_nv_del) ui->btnNVRAMDel_Del->click();
+
+      if (w == ui->table_nv_ls0) ui->btnNVRAMLS_Del0->click();
+      if (w == ui->table_nv_ls) ui->btnNVRAMLS_Del->click();
+
+      if (w == ui->tableDevices) ui->btnDevices_del->click();
+
+      if (w == ui->table_uefi_drivers) ui->btnUEFIDrivers_Del->click();
+
+      if (w == ui->table_uefi_ReservedMemory) ui->btnUEFIRM_Del->click();
+    });
+
+    // Preset
+    connect(preset, &QAction::triggered, [=]() {
+      if (w == ui->table_acpi_patch) ui->btnACPIPatch->click();
+
+      if (w == ui->table_kernel_patch) ui->btnPresetKernelPatch->click();
+
+      if (w == ui->table_nv_add0) ui->btnPresetNVAdd->click();
+
+      if (w == ui->table_nv_del0) ui->btnPresetNVDelete->click();
+
+      if (w == ui->table_nv_ls0) ui->btnPresetNVLegacy->click();
+    });
 
     // 显示提示
     connect(showtipAction, &QAction::triggered,

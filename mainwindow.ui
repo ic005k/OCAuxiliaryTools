@@ -196,6 +196,12 @@
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
+            <property name="topMargin">
+             <number>1</number>
+            </property>
+            <property name="bottomMargin">
+             <number>1</number>
+            </property>
             <item row="0" column="0" colspan="7">
              <widget class="QTableWidget" name="table_acpi_add">
               <property name="toolTip">
@@ -327,19 +333,6 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               </property>
              </widget>
             </item>
-            <item row="1" column="6">
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>789</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="tabACPI2">
@@ -458,19 +451,6 @@ relevant when performing different types of renames.
                <string>Del</string>
               </property>
              </widget>
-            </item>
-            <item row="1" column="2">
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>789</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -704,19 +684,6 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
                </size>
               </property>
              </widget>
-            </item>
-            <item row="1" column="3">
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>919</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
             <item row="1" column="1">
              <widget class="QToolButton" name="btnACPIPatch_Del">
@@ -1134,19 +1101,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
-             <spacer name="horizontalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>919</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="tabBooter2">
@@ -1205,19 +1159,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
                <string>Del</string>
               </property>
              </widget>
-            </item>
-            <item row="1" column="2">
-             <spacer name="horizontalSpacer_75">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>1131</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -1978,7 +1919,7 @@ This is a security option that restricts the activation of single user mode by i
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1988,7 +1929,46 @@ This is a security option that restricts the activation of single user mode by i
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_9">
-            <item row="0" column="0" colspan="6">
+            <item row="1" column="1">
+             <widget class="QToolButton" name="btnDPAdd_Del0">
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="shortcut">
+               <string>Del</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QToolButton" name="btnDPAdd_Add">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QToolButton" name="btnDPAddPreset">
+              <property name="text">
+               <string>Preset</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" colspan="5">
              <layout class="QGridLayout" name="gridLayout_dp_add">
               <item row="0" column="0">
                <widget class="QTableWidget" name="table_dp_add0">
@@ -2023,52 +2003,7 @@ This is a security option that restricts the activation of single user mode by i
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <spacer name="horizontalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>648</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="1">
-             <widget class="QToolButton" name="btnDPAdd_Del0">
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="shortcut">
-               <string>Del</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="4">
-             <widget class="QToolButton" name="btnDPAdd_Add">
-              <property name="toolTip">
-               <string/>
-              </property>
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
              <widget class="QToolButton" name="btnDPAdd_Del">
               <property name="text">
                <string>DeleteItem</string>
@@ -2081,13 +2016,6 @@ This is a security option that restricts the activation of single user mode by i
               </property>
               <property name="shortcut">
                <string>Ctrl+Del</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QToolButton" name="btnDPAddPreset">
-              <property name="text">
-               <string>Preset</string>
               </property>
              </widget>
             </item>
@@ -2142,19 +2070,6 @@ This is a security option that restricts the activation of single user mode by i
                <string>Del</string>
               </property>
              </widget>
-            </item>
-            <item row="1" column="2" colspan="2">
-             <spacer name="horizontalSpacer_6">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>488</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
             <item row="1" column="4">
              <widget class="QToolButton" name="btnDPDel_Add">
@@ -2372,19 +2287,6 @@ This is a security option that restricts the activation of single user mode by i
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
-             <spacer name="horizontalSpacer_8">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>919</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="tabKernel3">
@@ -2439,19 +2341,6 @@ This is a security option that restricts the activation of single user mode by i
                <string>Del</string>
               </property>
              </widget>
-            </item>
-            <item row="1" column="2">
-             <spacer name="horizontalSpacer_20">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>922</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -2512,19 +2401,6 @@ This is a security option that restricts the activation of single user mode by i
               <column/>
               <column/>
              </widget>
-            </item>
-            <item row="1" column="3">
-             <spacer name="horizontalSpacer_9">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>919</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
             <item row="1" column="2">
              <widget class="QToolButton" name="btnPresetKernelPatch">
@@ -3432,7 +3308,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5217,19 +5093,6 @@ Note: This functionality is still under development and is not ready for product
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
-             <spacer name="horizontalSpacer_10">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>919</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="tabMisc5">
@@ -5279,19 +5142,6 @@ Note: This functionality is still under development and is not ready for product
                <string>Del</string>
               </property>
              </widget>
-            </item>
-            <item row="1" column="2">
-             <spacer name="horizontalSpacer_11">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>919</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -5357,19 +5207,6 @@ Note: This functionality is still under development and is not ready for product
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <spacer name="horizontalSpacer_12">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>919</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
            </layout>
           </widget>
          </widget>
@@ -5387,7 +5224,7 @@ Note: This functionality is still under development and is not ready for product
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5397,48 +5234,6 @@ Note: This functionality is still under development and is not ready for product
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_17">
-            <item row="1" column="3">
-             <spacer name="horizontalSpacer_13">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>648</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="5">
-             <widget class="QToolButton" name="btnNVRAMAdd_Add">
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="6">
-             <widget class="QToolButton" name="btnNVRAMAdd_Del">
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="shortcut">
-               <string>Ctrl+Del</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="2">
              <widget class="QToolButton" name="btnPresetNVAdd">
               <property name="text">
@@ -5446,7 +5241,7 @@ Note: This functionality is still under development and is not ready for product
               </property>
              </widget>
             </item>
-            <item row="0" column="0" colspan="7">
+            <item row="0" column="0" colspan="6">
              <layout class="QGridLayout" name="gridLayout_nv_add">
               <item row="0" column="0">
                <widget class="QTableWidget" name="table_nv_add0">
@@ -5497,13 +5292,42 @@ Note: This functionality is still under development and is not ready for product
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
+            <item row="1" column="3">
              <widget class="QToolButton" name="btnAddbootArgs">
               <property name="enabled">
                <bool>true</bool>
               </property>
               <property name="text">
                <string>Add boot-args</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QToolButton" name="btnNVRAMAdd_Add">
+              <property name="text">
+               <string>AddItem</string>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QToolButton" name="btnNVRAMAdd_Del">
+              <property name="text">
+               <string>DeleteItem</string>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="shortcut">
+               <string>Ctrl+Del</string>
               </property>
              </widget>
             </item>
@@ -5571,19 +5395,6 @@ Note: This functionality is still under development and is not ready for product
                <string>Preset</string>
               </property>
              </widget>
-            </item>
-            <item row="1" column="3" colspan="2">
-             <spacer name="horizontalSpacer_14">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>648</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
             <item row="1" column="5">
              <widget class="QToolButton" name="btnNVRAMDel_Add">
@@ -5678,19 +5489,6 @@ Note: This functionality is still under development and is not ready for product
                <string>Preset</string>
               </property>
              </widget>
-            </item>
-            <item row="1" column="3" colspan="2">
-             <spacer name="horizontalSpacer_15">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>648</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
             <item row="1" column="5">
              <widget class="QToolButton" name="btnNVRAMLS_Add">
@@ -5852,7 +5650,7 @@ A continuously updated variable list can be found in a corresponding document: N
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>5</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -6803,19 +6601,6 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                   <string>Del</string>
                  </property>
                 </widget>
-               </item>
-               <item row="4" column="2" colspan="5">
-                <spacer name="horizontalSpacer_23">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>1015</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
               </layout>
              </widget>
@@ -7898,7 +7683,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>8</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -8708,19 +8493,6 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
                <string>Del</string>
               </property>
              </widget>
-            </item>
-            <item row="1" column="5">
-             <spacer name="horizontalSpacer_17">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>739</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -10329,19 +10101,6 @@ This setting allows running some software written for UEFI 2.x firmware like NVI
                <string>Del</string>
               </property>
              </widget>
-            </item>
-            <item row="1" column="2">
-             <spacer name="horizontalSpacer_16">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>919</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
