@@ -186,7 +186,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -727,6 +727,9 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
                     <height>0</height>
                    </size>
                   </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
                  </widget>
                 </item>
                 <item row="1" column="0">
@@ -1196,7 +1199,11 @@ Description: Exclude MMIO address from the devirtualisation procedure.
                </widget>
               </item>
               <item row="0" column="2">
-               <widget class="QComboBox" name="comboBoxBooter"/>
+               <widget class="QComboBox" name="comboBoxBooter">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+               </widget>
               </item>
               <item row="0" column="3">
                <spacer name="horizontalSpacer_28">
@@ -2117,7 +2124,7 @@ This is a security option that restricts the activation of single user mode by i
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2577,7 +2584,11 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
                </widget>
               </item>
               <item row="0" column="2">
-               <widget class="QComboBox" name="comboBoxKernel"/>
+               <widget class="QComboBox" name="comboBoxKernel">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+               </widget>
               </item>
               <item row="0" column="0">
                <spacer name="horizontalSpacer_29">
@@ -7683,7 +7694,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>7</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -9566,7 +9577,11 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
                </widget>
               </item>
               <item row="0" column="2">
-               <widget class="QComboBox" name="comboBoxUEFI"/>
+               <widget class="QComboBox" name="comboBoxUEFI">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+               </widget>
               </item>
               <item row="0" column="3">
                <spacer name="horizontalSpacer_26">
@@ -10180,7 +10195,7 @@ Enable this option to be able to see all the boot options when having multiple d
     </item>
     <item row="4" column="0" colspan="2">
      <layout class="QGridLayout" name="gridLayout_66">
-      <item row="0" column="4">
+      <item row="0" column="5">
        <widget class="QLineEdit" name="txtEditHex"/>
       </item>
       <item row="0" column="0">
@@ -10190,10 +10205,41 @@ Enable this option to be able to see all the boot options when having multiple d
         </property>
        </widget>
       </item>
-      <item row="0" column="6">
+      <item row="0" column="7">
        <widget class="QLineEdit" name="txtEditASCII"/>
       </item>
       <item row="0" column="2">
+       <widget class="QLabel" name="lblStatusShow">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QToolButton" name="btnUpdateHex">
+        <property name="toolTip">
+         <string>Update</string>
+        </property>
+        <property name="text">
+         <string>^</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="8">
+       <widget class="QLabel" name="lblTemp2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QLabel" name="lblHexASCII">
+        <property name="text">
+         <string>Hex &lt;==&gt; ASCII</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
        <spacer name="horizontalSpacer_37">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -10206,34 +10252,10 @@ Enable this option to be able to see all the boot options when having multiple d
         </property>
        </spacer>
       </item>
-      <item row="0" column="5">
-       <widget class="QLabel" name="lblHexASCII">
-        <property name="text">
-         <string>Hex &lt;==&gt; ASCII</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="1">
-       <widget class="QLabel" name="lblStatusShow">
+       <widget class="QLabel" name="lblOCVTip">
         <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QToolButton" name="btnUpdateHex">
-        <property name="toolTip">
-         <string>Update</string>
-        </property>
-        <property name="text">
-         <string>^</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="7">
-       <widget class="QLabel" name="lblTemp2">
-        <property name="text">
-         <string/>
+         <string>OCVTip</string>
         </property>
        </widget>
       </item>

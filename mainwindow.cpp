@@ -6958,6 +6958,9 @@ void MainWindow::readResultCheckData() {
       QString::fromLocal8Bit(chkdata->readAll());  //与保存文件的格式一致
   QString str;
   QString strMsg;
+  ui->lblOCVTip->setFixedHeight(12);
+  ui->lblOCVTip->setFixedWidth(12);
+  ui->lblOCVTip->setText("");
 
   if (result.trimmed() == "Failed to read") return;
 
@@ -6973,6 +6976,14 @@ void MainWindow::readResultCheckData() {
 
     dlgOCV->setGoEnabled(false);
 
+    if (myDatabase->ui->chkHideToolbar->isChecked()) {
+      ui->lblOCVTip->setStyleSheet(
+          "QLabel{"
+          "border-image:url(:/icon/ok.png) 4 4 4 4 stretch stretch;"
+          "}");
+      ui->lblOCVTip->setToolTip(ui->actionOcvalidate->text() + " Ok");
+    }
+
   } else {
     strMsg = result;
     dlgOCV->setGoEnabled(true);
@@ -6980,6 +6991,14 @@ void MainWindow::readResultCheckData() {
     ui->actionOcvalidate->setIcon(QIcon(":/icon/overror.png"));
     ui->actionOcvalidate->setToolTip(
         tr("There is a issue with the configuration file."));
+
+    if (myDatabase->ui->chkHideToolbar->isChecked()) {
+      ui->lblOCVTip->setStyleSheet(
+          "QLabel{"
+          "border-image:url(:/icon/no.png) 4 4 4 4 stretch stretch;"
+          "}");
+      ui->lblOCVTip->setToolTip(ui->actionOcvalidate->toolTip());
+    }
   }
 
   if (OpenFileValidate && !dlgOCV->isVisible()) {
