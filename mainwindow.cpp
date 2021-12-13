@@ -6458,9 +6458,9 @@ void MainWindow::init_MainUI() {
       Reg.value("chkHideToolbar", 0).toBool());
   if (myDatabase->ui->chkHideToolbar->isChecked()) {
     ui->toolBar->setHidden(true);
-    ui->hlayoutFind->addWidget(ui->lblCount);
-    ui->hlayoutFind->addWidget(ui->cboxFind);
-    ui->hlayoutFind->addWidget(ui->btnHide);
+    // ui->hlayoutFind->addWidget(ui->lblCount);
+    // ui->hlayoutFind->addWidget(ui->cboxFind);
+    // ui->hlayoutFind->addWidget(ui->btnHide);
     ui->frameToolBar->setFixedHeight(ui->cboxFind->height() + 10);
 
   } else {

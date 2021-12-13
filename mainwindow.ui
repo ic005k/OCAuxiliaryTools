@@ -30,7 +30,7 @@
       <property name="minimumSize">
        <size>
         <width>0</width>
-        <height>50</height>
+        <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
@@ -59,15 +59,34 @@
         <number>0</number>
        </property>
        <item row="0" column="0">
-        <layout class="QHBoxLayout" name="hlayoutFind">
-         <item>
-          <widget class="QToolButton" name="btnHide">
-           <property name="text">
-            <string>Hide</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QLabel" name="lblCount">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="cboxFind">
+         <property name="minimumSize">
+          <size>
+           <width>260</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QToolButton" name="btnHide">
+         <property name="text">
+          <string>Hide</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -977,28 +996,7 @@ This works around patched tables becoming incompatible with the SLIC table causi
              </layout>
             </item>
             <item row="0" column="1">
-             <layout class="QGridLayout" name="gridLayout_43">
-              <item row="1" column="0">
-               <widget class="QComboBox" name="cboxFind">
-                <property name="minimumSize">
-                 <size>
-                  <width>260</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="lblCount">
-                <property name="text">
-                 <string>0</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <layout class="QGridLayout" name="gridLayout_43"/>
             </item>
            </layout>
           </widget>
