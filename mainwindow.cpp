@@ -9485,10 +9485,10 @@ void MainWindow::init_CopyPasteLine() {
     copyAction = new QAction(tr("Copy Line"));
     pasteAction = new QAction(tr("Paste Line"));
     QAction* showtipAction = new QAction(tr("Show Tips"));
-    QAction* add = new QAction(tr("AddItem"));
-    QAction* del = new QAction(tr("DeleteItem"));
-    QAction* up = new QAction(tr("Up"));
-    QAction* down = new QAction(tr("Down"));
+    QAction* add = new QAction(tr("Add Item"));
+    QAction* del = new QAction(tr("Delete Item"));
+    QAction* up = new QAction(tr("Move Up"));
+    QAction* down = new QAction(tr("Move Down"));
     QAction* preset = new QAction(tr("Preset"));
     QAction* bootargs = new QAction(tr("Add boot-args"));
     QMenu* popMenu = new QMenu(this);
