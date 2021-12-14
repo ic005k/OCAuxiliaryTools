@@ -9488,7 +9488,7 @@ void MainWindow::init_CopyPasteLine() {
       w->setHidden(true);
       if (w->objectName().toLower().contains("kext")) w->setHidden(false);
       if (w->objectName().toLower().contains("kernel")) w->setHidden(false);
-      if (w->objectName().toLower().contains("acpiadd")) w->setHidden(false);
+      if (w->objectName().toLower().contains("acpi")) w->setHidden(false);
       if (w->objectName().toLower().contains("acpidir")) w->setHidden(false);
     }
   }
