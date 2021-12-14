@@ -6507,6 +6507,10 @@ void MainWindow::init_MainUI() {
   buttonLayout->addWidget(ui->lblCount);
 
   btnClear = new QToolButton(this);
+  int b_w = ui->cboxFind->lineEdit()->height() - 2;
+  btnClear->setMaximumWidth(b_w);
+  btnClear->setMaximumHeight(b_w);
+  btnClear->setStyleSheet("QToolButton{border:none;}");
   btnClear->setIcon(QIcon(":/icon/c.png"));
   btnClear->setCursor(QCursor(Qt::ArrowCursor));
   buttonLayout->addWidget(btnClear);
