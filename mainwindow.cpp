@@ -3378,12 +3378,13 @@ void MainWindow::setStatusBarText(QTableWidget* table) {
   else
     str = text;
 
+  if (text0.length() > 65) text0 = text0.mid(0, 60) + "...";
   if (str.length() > 80) str = str.mid(0, 65) + "...";
   if (table->currentColumn() != 0)
-    // ui->statusbar->showMessage(text0 + " -> " + str);
+
     ui->lblStatusShow->setText(text0 + " -> " + str);
   else
-    // ui->statusbar->showMessage(str);
+
     ui->lblStatusShow->setText(str);
 
   if (getTableFieldDataType(table) == "Data") {
@@ -6127,6 +6128,7 @@ void MainWindow::init_ToolBarIcon() {
     ui->actionFind->setIcon(QIcon(":/icon/find0.png"));
     ui->actionBackup_EFI->setIcon(QIcon(":/icon/be0.png"));
     btnBak->setIcon(QIcon(":/icon/be0.png"));
+    btnClear->setIcon(QIcon(":/icon/c0.png"));
   } else {
     btn0->setIcon(QIcon(":/icon/rp.png"));
     ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
@@ -6140,6 +6142,7 @@ void MainWindow::init_ToolBarIcon() {
     ui->actionFind->setIcon(QIcon(":/icon/find.png"));
     ui->actionBackup_EFI->setIcon(QIcon(":/icon/be.png"));
     btnBak->setIcon(QIcon(":/icon/be.png"));
+    btnClear->setIcon(QIcon(":/icon/c.png"));
   }
 
   QString listStyleMain, listStyle;
@@ -6467,9 +6470,9 @@ void MainWindow::init_MainUI() {
     ui->frameToolBar->setFixedHeight(ui->cboxFind->height() + 4);
 
   } else {
-    ui->toolBar->addWidget(ui->lblCount);
     ui->toolBar->addWidget(ui->cboxFind);
     ui->toolBar->addAction(ui->actionFind);
+    ui->cboxFind->setMaximumWidth(320);
   }
 
   init_HelpMenu();
@@ -6480,13 +6483,13 @@ void MainWindow::init_MainUI() {
   ui->dockFind->setTitleBarWidget(lEmptyWidget);
   delete lTitleBar;
 
-  ui->cboxFind->lineEdit()->setClearButtonEnabled(true);
+  ui->cboxFind->lineEdit()->setClearButtonEnabled(false);
   ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
   connect(ui->cboxFind->lineEdit(), &QLineEdit::returnPressed, this,
           &MainWindow::on_actionFind_triggered);
 
-  if (mac || osx1012) ui->lblCount->setFont(QFont("Menlo"));
-  if (win) ui->lblCount->setFont(QFont("consolas"));
+  // if (mac || osx1012) ui->lblCount->setFont(QFont("Menlo"));
+  // if (win) ui->lblCount->setFont(QFont("consolas"));
 
   clearTextsAction = new QAction(this);
   clearTextsAction->setToolTip(tr("Clear search history"));
@@ -6494,6 +6497,28 @@ void MainWindow::init_MainUI() {
   ui->cboxFind->lineEdit()->addAction(clearTextsAction,
                                       QLineEdit::LeadingPosition);
   connect(clearTextsAction, SIGNAL(triggered()), this, SLOT(clearFindTexts()));
+
+  QSize size = QSize(85, ui->cboxFind->lineEdit()->sizeHint().height());
+  ui->lblCount->setMinimumSize(size);
+  ui->lblCount->setMaximumSize(size);
+  QHBoxLayout* buttonLayout = new QHBoxLayout();
+  buttonLayout->setContentsMargins(0, 0, 0, 0);
+  buttonLayout->addStretch();
+  buttonLayout->addWidget(ui->lblCount);
+
+  btnClear = new QToolButton(this);
+  btnClear->setIcon(QIcon(":/icon/c.png"));
+  btnClear->setCursor(QCursor(Qt::ArrowCursor));
+  buttonLayout->addWidget(btnClear);
+
+  ui->lblCount->setAlignment(Qt::AlignRight);
+  ui->cboxFind->lineEdit()->setLayout(buttonLayout);
+  // 设置输入区，不让输入的文字被隐藏在lblCount下
+  ui->cboxFind->lineEdit()->setTextMargins(0, 1, size.width(), 1);
+  connect(btnClear, &QToolButton::clicked, [=]() {
+    ui->cboxFind->lineEdit()->clear();
+    init_ToolBarIcon();
+  });
 
   int textTotal = Reg.value("textTotal").toInt();
   for (int i = 0; i < textTotal; i++) {
@@ -8263,9 +8288,11 @@ void MainWindow::on_actionFind_triggered() {
     }
 
     FindTextChange = false;
+    init_ToolBarIcon();
 
   } else {
     setPalette(ui->cboxFind, QColor(255, 70, 70), Qt::white);
+    btnClear->setIcon(QIcon(":/icon/c0.png"));
   }
 
   this->setWindowModified(curWinModi);

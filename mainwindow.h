@@ -1083,6 +1083,7 @@ class MainWindow : public QMainWindow {
   void init_Table(int index);
   void init_ToolBarIcon();
   QToolButton* btn0;
+  QToolButton* btnClear;
 };
 
 #endif  // MAINWINDOW_H

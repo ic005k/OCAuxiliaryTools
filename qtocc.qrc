@@ -73,5 +73,7 @@
         <file>icon/be.png</file>
         <file>icon/be0.png</file>
         <file>icon/espicon0.png</file>
+        <file>icon/c.png</file>
+        <file>icon/c0.png</file>
     </qresource>
 </RCC>
