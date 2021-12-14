@@ -814,10 +814,11 @@ void MainWindow::initui_dp() {
 
   ui->table_dp_add->setAlternatingRowColors(true);
 
-  QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
-  splitterMain->addWidget(ui->table_dp_add0);
-  splitterMain->addWidget(ui->table_dp_add);
-  ui->gridLayout_dp_add->addWidget(splitterMain);
+  // QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
+  // splitterMain->addWidget(ui->table_dp_add0);
+  // splitterMain->addWidget(ui->table_dp_add);
+  // ui->gridLayout_dp_add->addWidget(splitterMain);
+  ui->table_dp_add0->setMaximumWidth(450);
 
   // Delete
 
@@ -6463,10 +6464,7 @@ void MainWindow::init_MainUI() {
       Reg.value("chkHideToolbar", 0).toBool());
   if (myDatabase->ui->chkHideToolbar->isChecked()) {
     ui->toolBar->setHidden(true);
-    // ui->hlayoutFind->addWidget(ui->lblCount);
-    // ui->hlayoutFind->addWidget(ui->cboxFind);
-    // ui->hlayoutFind->addWidget(ui->btnHide);
-    ui->frameToolBar->setFixedHeight(ui->cboxFind->height() + 10);
+    ui->frameToolBar->setFixedHeight(ui->cboxFind->height() + 4);
 
   } else {
     ui->toolBar->addWidget(ui->lblCount);
@@ -9485,11 +9483,15 @@ void MainWindow::init_CopyPasteLine() {
         w != ui->btnPickerAttributes && w != ui->btnDisplayLevel &&
         w != ui->btnExposeSensitiveData && w != ui->btnScanPolicy &&
         w != ui->btnUpdateHex && w != ui->btnUp && w != ui->btnDown) {
-      w->setHidden(true);
+      /*w->setHidden(true);
       if (w->objectName().toLower().contains("kext")) w->setHidden(false);
       if (w->objectName().toLower().contains("kernel")) w->setHidden(false);
       if (w->objectName().toLower().contains("acpi")) w->setHidden(false);
-      if (w->objectName().toLower().contains("acpidir")) w->setHidden(false);
+      if (w->objectName().toLower().contains("acpidir")) w->setHidden(false);*/
+      if (w->text().trimmed().length() == 1) {
+        w->setHidden(false);
+      } else
+        w->setHidden(true);
     }
   }
 
