@@ -6251,6 +6251,8 @@ void MainWindow::init_FileMenu() {
 void MainWindow::init_EditMenu() {
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QSettings Reg(qfile, QSettings::IniFormat);
+  ui->actionPlist_editor->setVisible(false);
+  ui->actionDSDT_SSDT_editor->setVisible(false);
 
   // Edit
   // OC Validate
