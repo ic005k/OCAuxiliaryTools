@@ -3756,6 +3756,7 @@ void MainWindow::on_btnDPDel_Add0_clicked() {
   add_item(ui->table_dp_del0, 1);
   ui->table_dp_del->setRowCount(0);  //先清除右边表中的所有条目
   on_btnDPDel_Add_clicked();         //同时右边增加一个新条目
+  ui->table_dp_del0->setFocus();
 
   write_value_ini(ui->table_dp_del0, ui->table_dp_del,
                   ui->table_dp_del0->rowCount() - 1);
@@ -3835,8 +3836,7 @@ void MainWindow::on_btnDPAdd_Add0_clicked() {
   add_item(ui->table_dp_add0, 1);
   ui->table_dp_add->setRowCount(0);  //先清除右边表中的所有条目
   on_btnDPAdd_Add_clicked();         //同时右边增加一个新条目
-  // write_ini(ui->table_dp_add0, ui->table_dp_add,
-  //          ui->table_dp_add0->rowCount() - 1);
+  ui->table_dp_add0->setFocus();
   mymethod->writeLeftTable(ui->table_dp_add0, ui->table_dp_add);
 
   this->setWindowModified(true);
@@ -4182,9 +4182,8 @@ void MainWindow::on_btnNVRAMAdd_Add0_clicked() {
   add_item(ui->table_nv_add0, 1);
   ui->table_nv_add->setRowCount(0);  //先清除右边表中的所有条目
   on_btnNVRAMAdd_Add_clicked();      //同时右边增加一个新条目
+  ui->table_nv_add0->setFocus();
 
-  // write_ini(ui->table_nv_add0, ui->table_nv_add,
-  //          ui->table_nv_add0->rowCount() - 1);
   mymethod->writeLeftTable(ui->table_nv_add0, ui->table_nv_add);
 
   this->setWindowModified(true);
@@ -4213,14 +4212,13 @@ void MainWindow::on_btnNVRAMAdd_Del0_clicked() {
 void MainWindow::on_btnNVRAMAdd_Del_clicked() {
   if (ui->table_nv_add->rowCount() <= 0) return;
   del_item(ui->table_nv_add);
-  // write_ini(ui->table_nv_add0, ui->table_nv_add,
-  //          ui->table_nv_add0->currentRow());
 }
 
 void MainWindow::on_btnNVRAMDel_Add0_clicked() {
   add_item(ui->table_nv_del0, 1);
   ui->table_nv_del->setRowCount(0);  //先清除右边表中的所有条目
   on_btnNVRAMDel_Add_clicked();      //同时右边增加一个新条目
+  ui->table_nv_del0->setFocus();
 
   write_value_ini(ui->table_nv_del0, ui->table_nv_del,
                   ui->table_nv_del0->rowCount() - 1);
@@ -4248,6 +4246,7 @@ void MainWindow::on_btnNVRAMLS_Add0_clicked() {
   add_item(ui->table_nv_ls0, 1);
   ui->table_nv_ls->setRowCount(0);  //先清除右边表中的所有条目
   on_btnNVRAMLS_Add_clicked();      //同时右边增加一个新条目
+  ui->table_nv_ls0->setFocus();
 
   write_value_ini(ui->table_nv_ls0, ui->table_nv_ls,
                   ui->table_nv_ls0->rowCount() - 1);
@@ -9552,8 +9551,11 @@ void MainWindow::init_CopyPasteLine() {
     popMenu->addSeparator();
     popMenu->addAction(showtipAction);
 
-    if (w != ui->table_acpi_add && w != ui->table_kernel_add &&
-        w != ui->table_uefi_drivers) {
+    if (w == ui->table_nv_add0 || w == ui->table_nv_add ||
+        w == ui->table_nv_del0 || w == ui->table_nv_del ||
+        w == ui->table_nv_ls0 || w == ui->table_nv_ls ||
+        w == ui->table_dp_add0 || w == ui->table_dp_add ||
+        w == ui->table_dp_del0 || w == ui->table_dp_del) {
       up->setVisible(false);
       down->setVisible(false);
     }
@@ -9585,100 +9587,17 @@ void MainWindow::init_CopyPasteLine() {
     });
 
     // Up
-    connect(up, &QAction::triggered, [=]() {
-      if (w == ui->table_kernel_add) {
-        ui->btnKernelAdd_Up->click();
-      }
-      if (w == ui->table_acpi_add) ui->btnUp->click();
-      if (w == ui->table_uefi_drivers) ui->btnUp_UEFI_Drivers->click();
-    });
+    connect(up, &QAction::triggered, [=]() { on_actionMove_Up_triggered(); });
 
     // Down
-    connect(down, &QAction::triggered, [=]() {
-      if (w == ui->table_kernel_add) ui->btnKernelAdd_Down->click();
-      if (w == ui->table_acpi_add) ui->btnDown->click();
-      if (w == ui->table_uefi_drivers) ui->btnDown_UEFI_Drivers->click();
-    });
+    connect(down, &QAction::triggered,
+            [=]() { on_actionMove_Down_triggered(); });
 
     // Add
-    connect(add, &QAction::triggered, [=]() {
-      if (w == ui->table_acpi_add) ui->btnACPIAdd_Add->click();
-      if (w == ui->table_acpi_del) ui->btnACPIDel_Add->click();
-      if (w == ui->table_acpi_patch) ui->btnACPIPatch_Add->click();
-
-      if (w == ui->table_booter) ui->btnBooter_Add->click();
-      if (w == ui->table_Booter_patch) ui->btnBooterPatchAdd->click();
-
-      if (w == ui->table_dp_add0) ui->btnDPAdd_Add0->click();
-      if (w == ui->table_dp_add) ui->btnDPAdd_Add->click();
-
-      if (w == ui->table_dp_del0) ui->btnDPDel_Add0->click();
-      if (w == ui->table_dp_del) ui->btnDPDel_Add->click();
-
-      if (w == ui->table_kernel_add) ui->btnKernelAdd_Add->click();
-      if (w == ui->table_kernel_block) ui->btnKernelBlock_Add->click();
-      if (w == ui->table_kernel_Force) ui->btnKernelForce_Add->click();
-      if (w == ui->table_kernel_patch) ui->btnKernelPatchAdd->click();
-
-      if (w == ui->tableBlessOverride) ui->btnMiscBO_Add->click();
-      if (w == ui->tableEntries) ui->btnMiscEntries_Add->click();
-      if (w == ui->tableTools) ui->btnMiscTools_Add->click();
-
-      if (w == ui->table_nv_add0) ui->btnNVRAMAdd_Add0->click();
-      if (w == ui->table_nv_add) ui->btnNVRAMAdd_Add->click();
-
-      if (w == ui->table_nv_del0) ui->btnNVRAMDel_Add0->click();
-      if (w == ui->table_nv_del) ui->btnNVRAMDel_Add->click();
-
-      if (w == ui->table_nv_ls0) ui->btnNVRAMLS_Add0->click();
-      if (w == ui->table_nv_ls) ui->btnNVRAMLS_Add->click();
-
-      if (w == ui->tableDevices) ui->btnDevices_add->click();
-
-      if (w == ui->table_uefi_drivers) ui->btnUEFIDrivers_Add->click();
-
-      if (w == ui->table_uefi_ReservedMemory) ui->btnUEFIRM_Add->click();
-    });
+    connect(add, &QAction::triggered, [=]() { on_actionAdd_triggered(); });
 
     // Del
-    connect(del, &QAction::triggered, [=]() {
-      if (w == ui->table_acpi_add) ui->btnACPIAdd_Del->click();
-      if (w == ui->table_acpi_del) ui->btnACPIDel_Del->click();
-      if (w == ui->table_acpi_patch) ui->btnACPIPatch_Del->click();
-
-      if (w == ui->table_booter) ui->btnBooter_Del->click();
-      if (w == ui->table_Booter_patch) ui->btnBooterPatchDel->click();
-
-      if (w == ui->table_dp_add0) ui->btnDPAdd_Del0->click();
-      if (w == ui->table_dp_add) ui->btnDPAdd_Del->click();
-
-      if (w == ui->table_dp_del0) ui->btnDPDel_Del0->click();
-      if (w == ui->table_dp_del) ui->btnDPDel_Del->click();
-
-      if (w == ui->table_kernel_add) ui->btnKernelAdd_Del->click();
-      if (w == ui->table_kernel_block) ui->btnKernelBlock_Del->click();
-      if (w == ui->table_kernel_Force) ui->btnKernelForce_Del->click();
-      if (w == ui->table_kernel_patch) ui->btnKernelPatchDel->click();
-
-      if (w == ui->tableBlessOverride) ui->btnMiscBO_Del->click();
-      if (w == ui->tableEntries) ui->btnMiscEntries_Del->click();
-      if (w == ui->tableTools) ui->btnMiscTools_Del->click();
-
-      if (w == ui->table_nv_add0) ui->btnNVRAMAdd_Del0->click();
-      if (w == ui->table_nv_add) ui->btnNVRAMAdd_Del->click();
-
-      if (w == ui->table_nv_del0) ui->btnNVRAMDel_Del0->click();
-      if (w == ui->table_nv_del) ui->btnNVRAMDel_Del->click();
-
-      if (w == ui->table_nv_ls0) ui->btnNVRAMLS_Del0->click();
-      if (w == ui->table_nv_ls) ui->btnNVRAMLS_Del->click();
-
-      if (w == ui->tableDevices) ui->btnDevices_del->click();
-
-      if (w == ui->table_uefi_drivers) ui->btnUEFIDrivers_Del->click();
-
-      if (w == ui->table_uefi_ReservedMemory) ui->btnUEFIRM_Del->click();
-    });
+    connect(del, &QAction::triggered, [=]() { on_actionDelete_triggered(); });
 
     // Preset
     connect(preset, &QAction::triggered, [=]() {
@@ -11332,15 +11251,45 @@ void MainWindow::on_btnHide_clicked() {
 }
 
 void MainWindow::on_actionMove_Up_triggered() {
-  if (ui->table_acpi_add->hasFocus()) ui->btnUp->clicked();
-  if (ui->table_kernel_add->hasFocus()) ui->btnKernelAdd_Up->clicked();
-  if (ui->table_uefi_drivers->hasFocus()) ui->btnUp_UEFI_Drivers->clicked();
+  if (!Initialization) {
+    QObjectList list =
+        getAllTableWidget(getAllUIControls(mymethod->getSubTabWidget(
+            ui->listMain->currentRow(), ui->listSub->currentRow())));
+    if (list.count() >= 1) {
+      QTableWidget* w = (QTableWidget*)list.at(0);
+
+      if (w == ui->table_nv_add0 || w == ui->table_nv_add ||
+          w == ui->table_nv_del0 || w == ui->table_nv_del ||
+          w == ui->table_nv_ls0 || w == ui->table_nv_ls ||
+          w == ui->table_dp_add0 || w == ui->table_dp_add ||
+          w == ui->table_dp_del0 || w == ui->table_dp_del) {
+        return;
+      }
+
+      if (w->hasFocus()) MoveItem(w, true);
+    }
+  }
 }
 
 void MainWindow::on_actionMove_Down_triggered() {
-  if (ui->table_acpi_add->hasFocus()) ui->btnDown->clicked();
-  if (ui->table_kernel_add->hasFocus()) ui->btnKernelAdd_Down->clicked();
-  if (ui->table_uefi_drivers->hasFocus()) ui->btnDown_UEFI_Drivers->clicked();
+  if (!Initialization) {
+    QObjectList list =
+        getAllTableWidget(getAllUIControls(mymethod->getSubTabWidget(
+            ui->listMain->currentRow(), ui->listSub->currentRow())));
+    if (list.count() >= 1) {
+      QTableWidget* w = (QTableWidget*)list.at(0);
+
+      if (w == ui->table_nv_add0 || w == ui->table_nv_add ||
+          w == ui->table_nv_del0 || w == ui->table_nv_del ||
+          w == ui->table_nv_ls0 || w == ui->table_nv_ls ||
+          w == ui->table_dp_add0 || w == ui->table_dp_add ||
+          w == ui->table_dp_del0 || w == ui->table_dp_del) {
+        return;
+      }
+
+      if (w->hasFocus()) MoveItem(w, false);
+    }
+  }
 }
 
 void MainWindow::on_actionAdd_triggered() {

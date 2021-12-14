@@ -19,6 +19,7 @@
 #include <QShortcut>
 #include <QSpacerItem>
 #include <QSplitter>
+#include <QStandardItemModel>
 #include <QStyledItemDelegate>
 #include <QTableWidget>
 #include <QTextBlock>
