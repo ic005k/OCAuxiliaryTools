@@ -9484,8 +9484,13 @@ void MainWindow::init_CopyPasteLine() {
     if (w != ui->btnGenerate && w != ui->btnSystemUUID && w != ui->btnROM &&
         w != ui->btnPickerAttributes && w != ui->btnDisplayLevel &&
         w != ui->btnExposeSensitiveData && w != ui->btnScanPolicy &&
-        w != ui->btnUpdateHex)
+        w != ui->btnUpdateHex && w != ui->btnUp && w != ui->btnDown) {
       w->setHidden(true);
+      if (w->objectName().toLower().contains("kext")) w->setHidden(false);
+      if (w->objectName().toLower().contains("kernel")) w->setHidden(false);
+      if (w->objectName().toLower().contains("acpiadd")) w->setHidden(false);
+      if (w->objectName().toLower().contains("acpidir")) w->setHidden(false);
+    }
   }
 
   listOfTableWidget.clear();
