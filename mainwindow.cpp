@@ -2679,9 +2679,10 @@ QVariantMap MainWindow::SaveACPI() {
     acpiPatchSub["Replace"] =
         HexStrToByte(ui->table_acpi_patch->item(i, 4)->text());
     acpiPatchSub["Comment"] = ui->table_acpi_patch->item(i, 5)->text();
-    acpiPatchSub["Mask"] = ui->table_acpi_patch->item(i, 6)->text().toLatin1();
+    acpiPatchSub["Mask"] =
+        HexStrToByte(ui->table_acpi_patch->item(i, 6)->text());
     acpiPatchSub["ReplaceMask"] =
-        ui->table_acpi_patch->item(i, 7)->text().toLatin1();
+        HexStrToByte(ui->table_acpi_patch->item(i, 7)->text());
     acpiPatchSub["Count"] =
         ui->table_acpi_patch->item(i, 8)->text().toLongLong();
     acpiPatchSub["Limit"] =
@@ -11009,10 +11010,11 @@ void MainWindow::AddACPIPatch(QVariantList map_patch, int mapIndex,
   newItem1 = new QTableWidgetItem(map3["Comment"].toString());
   ui->table_acpi_patch->setItem(i, 5, newItem1);
 
-  newItem1 = new QTableWidgetItem(map3["Mask"].toString());
+  newItem1 = new QTableWidgetItem(ByteToHexStr(map3["Mask"].toByteArray()));
   ui->table_acpi_patch->setItem(i, 6, newItem1);
 
-  newItem1 = new QTableWidgetItem(map3["ReplaceMask"].toString());
+  newItem1 =
+      new QTableWidgetItem(ByteToHexStr(map3["ReplaceMask"].toByteArray()));
   ui->table_acpi_patch->setItem(i, 7, newItem1);
 
   newItem1 = new QTableWidgetItem(map3["Count"].toString());
