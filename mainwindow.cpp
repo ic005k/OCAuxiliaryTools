@@ -313,6 +313,7 @@ void MainWindow::openFile(QString PlistFileName) {
   strOrgMd5 = getMD5(SaveFileName);
 
   setWindowTitle(title + PlistFileName);
+  checkSystemAudioVolume();
 
   this->setWindowModified(false);
   updateIconStatus();
@@ -1806,21 +1807,29 @@ void MainWindow::on_table_nv_add0_cellClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
 
-  // loadRightTable(ui->table_nv_add0, ui->table_nv_add);
   readLeftTable(ui->table_nv_add0, ui->table_nv_add);
 }
 
 void MainWindow::on_table_nv_add_itemChanged(QTableWidgetItem* item) {
   Q_UNUSED(item);
 
-  if (writeINI)
-    // write_ini(ui->table_nv_add0, ui->table_nv_add,
-    //          ui->table_nv_add0->currentRow());
-    mymethod->writeLeftTable(ui->table_nv_add0, ui->table_nv_add);
+  if (writeINI) mymethod->writeLeftTable(ui->table_nv_add0, ui->table_nv_add);
 
   if (!loading) {
     this->setWindowModified(true);
     updateIconStatus();
+  }
+
+  if (!Initialization) {
+    if (!ui->table_nv_add->currentIndex().isValid()) return;
+    if (ui->table_nv_add->rowCount() > 0) {
+      int row = ui->table_nv_add->currentRow();
+      if (ui->table_nv_add->item(row, 0)->text() == "SystemAudioVolume") {
+        if (ui->table_nv_add->currentColumn() == 2) {
+          checkSystemAudioVolume();
+        }
+      }
+    }
   }
 }
 
@@ -2339,6 +2348,7 @@ void MainWindow::initui_UEFI() {
   list.append("Enabled");
   list.append("Disabled");
   ui->cboxPlayChime->addItems(list);
+  ui->lblSystemAudioVolume->setText("");
 
   // Drivers
   QTableWidgetItem* id0;
@@ -4593,6 +4603,18 @@ void MainWindow::on_table_nv_add_cellClicked(int row, int column) {
 
     ui->table_nv_add->setCellWidget(row, column, cboxDataClass);
     cboxDataClass->setCurrentText(ui->table_nv_add->item(row, 1)->text());
+  }
+
+  if (ui->table_nv_add0->currentItem()->text().trimmed() ==
+      "7C436110-AB2A-4BBB-A880-FE41995C9F82") {
+    if (ui->table_nv_add->item(row, 0)->text().trimmed() ==
+        "SystemAudioVolume") {
+      if (column == 0 || column == 2) {
+        QToolTip::showText(
+            QCursor::pos(),
+            "MinimumVolume: " + ui->editIntMinimumVolume->text().trimmed());
+      }
+    }
   }
 
   setStatusBarText(ui->table_nv_add);
@@ -11414,4 +11436,32 @@ void MainWindow::on_actionDelete_triggered() {
   if (ui->table_uefi_drivers->hasFocus()) ui->btnUEFIDrivers_Del->click();
 
   if (ui->table_uefi_ReservedMemory->hasFocus()) ui->btnUEFIRM_Del->click();
+}
+
+void MainWindow::checkSystemAudioVolume() {
+  ui->lblSystemAudioVolume->setText("");
+  if (ui->table_nv_add0->rowCount() > 0) {
+    int old = ui->table_nv_add0->currentRow();
+    for (int i = 0; i < ui->table_nv_add0->rowCount(); i++) {
+      QString item = ui->table_nv_add0->item(i, 0)->text().trimmed();
+      if (item == "7C436110-AB2A-4BBB-A880-FE41995C9F82") {
+        ui->table_nv_add0->setCurrentCell(i, 0);
+        if (ui->table_nv_add->rowCount() > 0) {
+          for (int j = 0; j < ui->table_nv_add->rowCount(); j++) {
+            QString str = ui->table_nv_add->item(j, 0)->text();
+            if (str == "SystemAudioVolume") {
+              QString value = ui->table_nv_add->item(j, 2)->text();
+              bool ok = false;
+              ulong dec = value.toLongLong(&ok, 16);
+              ui->lblSystemAudioVolume->setText("SystemAudioVolume: 0x" +
+                                                value + " (" +
+                                                QString::number(dec) + ")");
+              break;
+            }
+          }
+        }
+      }
+    }
+    ui->table_nv_add0->setCurrentCell(old, 0);
+  }
 }

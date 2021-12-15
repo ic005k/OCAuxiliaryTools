@@ -116,6 +116,7 @@ class Method : public QMainWindow {
   QStringList getPartitionList(QString strDisk);
   QStringList getVolListForPartition(QStringList listPartition);
   QString getVolForPartition(QString strPartition);
+
  public slots:
   void generateEFI();
   void on_btnExportMaster();

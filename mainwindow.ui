@@ -186,7 +186,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5615,7 +5615,7 @@ Note: This functionality is still under development and is not ready for product
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -8074,7 +8074,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>7</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -8546,36 +8546,48 @@ Note: AppleEvent’s default behaviour is intended to prevent unwanted queued ke
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
              <layout class="QGridLayout" name="gridLayout_61">
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_33">
+              <item row="7" column="1">
+               <widget class="QLineEdit" name="editIntSetupDelay"/>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="editIntMinimumVolume"/>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_70">
                 <property name="toolTip">
-                 <string notr="true">Normally this contains builtin analog audio controller (HDEF) device path, e.g. PciRoot(0x0)/Pci(0x1b,0x0).
+                 <string notr="true">Enabling this setting plays boot chime through builtin audio support. Volume level is determined by MinimumVolume and VolumeAmplifier settings and SystemAudioVolume NVRAM variable. Possible values include:
 
-The list of recognised audio controllers can be found in the debug log (marked in bold-italic):
+• Auto — Enables chime when StartupMute NVRAM variable is not present or set to 00. 
+• Enabled — Enables chime unconditionally.
+• Disabled — Disables chime unconditionally.
 
-OCAU: 1/3 PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x1)/VenMsg(&lt;redacted&gt;,00000000) (4 outputs)
-OCAU: 2/3 PciRoot(0x0)/Pci(0x3,0x0)/VenMsg(&lt;redacted&gt;,00000000) (1 outputs)
-OCAU: 3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,02000000) (7 outputs)
-
-As an alternative gfxutil -f HDEF command can be used in macOS. Specifying empty device path will result in the first available audio controller to be used.
+Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid conflicts when the firmware is able to play boot chime.
 
 ----
 
-通常这包含内置模拟音频控制器(HDEF)设备路径，例如PciRoot(0x0)/Pci(0x1b,0x0)。
+启用此设置可通过内置的音频支持播放开机声。音量大小由MinimumVolume和VolumeAmplifier设置以及SystemAudioVolume NVRAM变量决定。可能的值包括：
 
-识别的音频控制器列表可以在调试日志中找到（用粗体字标示）：
+- Auto - 当启动静音 NVRAM 变量不存在或设置为 00 时启用报时。
+- Enabled - 无条件地启用报时。
+- Disabled - 无条件地禁用报时。
 
-OCAU: 1/3 PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x1)/VenMsg(&lt;redacted&gt;,00000000)(4个输出)
-OCAU：2/3 PciRoot(0x0)/Pci(0x3,0x0)/VenMsg(&lt;redacted&gt;,00000000)(1个输出)
-OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出)
-
-在macOS中可以使用gfxutil -f HDEF命令作为替代。指定空的设备路径将导致第一个可用的音频控制器被使用。</string>
+注意：Enabled可以与StartupMute NVRAM变量分开使用，以避免固件能够播放开机声时的冲突。</string>
                 </property>
                 <property name="statusTip">
-                 <string>Device path of the specified audio controller for audio support.</string>
+                 <string>Play chime sound at startup.</string>
                 </property>
                 <property name="text">
-                 <string>AudioDevice</string>
+                 <string>PlayChime</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="editIntAudioOut"/>
+              </item>
+              <item row="5" column="1">
+               <widget class="QComboBox" name="cboxPlayChime">
+                <property name="editable">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -8610,70 +8622,11 @@ OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="QLineEdit" name="editAudioDevice"/>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label_35">
-                <property name="toolTip">
-                 <string notr="true">Description: Minimal heard volume level from 0 to 100.
-
-The screen reader will use this volume level when the calculated volume level is lower than MinimumVolume and the boot chime will not play if the calculated volume level is lower than MinimumVolume.
-
-----
-
-说明： 最小听到的音量值，从0到100。
-
-当计算出的音量低于MinimumVolume时，屏幕阅读器将使用这个音量，如果计算出的音量低于MinimumVolume，则不会播放开机声。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Minimal heard volume level from 0 to 100.</string>
-                </property>
-                <property name="text">
-                 <string>MinimumVolume</string>
-                </property>
-               </widget>
-              </item>
               <item row="8" column="1">
                <widget class="QLineEdit" name="editIntVolumeAmplifier"/>
               </item>
-              <item row="2" column="1">
-               <widget class="QLineEdit" name="editIntAudioOut"/>
-              </item>
-              <item row="7" column="1">
-               <widget class="QLineEdit" name="editIntSetupDelay"/>
-              </item>
-              <item row="8" column="0">
-               <widget class="QLabel" name="label_36">
-                <property name="toolTip">
-                 <string notr="true">Volume level range read from SystemAudioVolume varies depending on the codec. To transform read value in [0, 127] range into raw volume range [0, 100] the read value is scaled to VolumeAmplifier percents:
-
-RawV olume = MIN(SystemAudioV olume ∗ V olumeAmplifier 100 , 100)
-
-Note: the transformation used in macOS is not linear, but it is very close and this nuance is thus ignored.
-
-----
-
-从SystemAudioVolume读取的音量范围根据编解码器的不同而不同。为了将[0，127]范围内的读取值转换为原始音量范围[0，100]，读取值将被缩放为音量放大器的百分数。
-
-RawV olume = MIN(SystemAudioV olume ∗ V olumeAmplifier 100 , 100)
-
-注意：macOS中使用的变换不是线性的，但非常接近，因此忽略了这种细微差别。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Multiplication coefficient for system volume to raw volume linear translation from 0 to 1000.</string>
-                </property>
-                <property name="text">
-                 <string>VolumeAmplifier</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QComboBox" name="cboxPlayChime">
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="editIntAudioCodec"/>
               </item>
               <item row="0" column="0">
                <widget class="QLabel" name="label_32">
@@ -8708,57 +8661,38 @@ OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出
                 </property>
                </widget>
               </item>
-              <item row="9" column="0">
-               <widget class="QCheckBox" name="chkAudioSupport">
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_33">
                 <property name="toolTip">
-                 <string notr="true">Enabling this setting routes audio playback from builtin protocols to a dedicated audio port (AudioOut) of the specified codec (AudioCodec) located on the audio controller (AudioDevice).
+                 <string notr="true">Normally this contains builtin analog audio controller (HDEF) device path, e.g. PciRoot(0x0)/Pci(0x1b,0x0).
+
+The list of recognised audio controllers can be found in the debug log (marked in bold-italic):
+
+OCAU: 1/3 PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x1)/VenMsg(&lt;redacted&gt;,00000000) (4 outputs)
+OCAU: 2/3 PciRoot(0x0)/Pci(0x3,0x0)/VenMsg(&lt;redacted&gt;,00000000) (1 outputs)
+OCAU: 3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,02000000) (7 outputs)
+
+As an alternative gfxutil -f HDEF command can be used in macOS. Specifying empty device path will result in the first available audio controller to be used.
 
 ----
 
-启用此设置可将内置协议的音频播放路由到位于音频控制器（AudioDevice）上的指定编解码器（AudioCodec）的专用音频端口（AudioOut）。</string>
+通常这包含内置模拟音频控制器(HDEF)设备路径，例如PciRoot(0x0)/Pci(0x1b,0x0)。
+
+识别的音频控制器列表可以在调试日志中找到（用粗体字标示）：
+
+OCAU: 1/3 PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x1)/VenMsg(&lt;redacted&gt;,00000000)(4个输出)
+OCAU：2/3 PciRoot(0x0)/Pci(0x3,0x0)/VenMsg(&lt;redacted&gt;,00000000)(1个输出)
+OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出)
+
+在macOS中可以使用gfxutil -f HDEF命令作为替代。指定空的设备路径将导致第一个可用的音频控制器被使用。</string>
                 </property>
                 <property name="statusTip">
-                 <string>Activate audio support by connecting to a backend driver.</string>
+                 <string>Device path of the specified audio controller for audio support.</string>
                 </property>
                 <property name="text">
-                 <string>AudioSupport</string>
+                 <string>AudioDevice</string>
                 </property>
                </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QLineEdit" name="editIntMinimumVolume"/>
-              </item>
-              <item row="5" column="0">
-               <widget class="QLabel" name="label_70">
-                <property name="toolTip">
-                 <string notr="true">Enabling this setting plays boot chime through builtin audio support. Volume level is determined by MinimumVolume and VolumeAmplifier settings and SystemAudioVolume NVRAM variable. Possible values include:
-
-• Auto — Enables chime when StartupMute NVRAM variable is not present or set to 00. 
-• Enabled — Enables chime unconditionally.
-• Disabled — Disables chime unconditionally.
-
-Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid conflicts when the firmware is able to play boot chime.
-
-----
-
-启用此设置可通过内置的音频支持播放开机声。音量大小由MinimumVolume和VolumeAmplifier设置以及SystemAudioVolume NVRAM变量决定。可能的值包括：
-
-- Auto - 当启动静音 NVRAM 变量不存在或设置为 00 时启用报时。
-- Enabled - 无条件地启用报时。
-- Disabled - 无条件地禁用报时。
-
-注意：Enabled可以与StartupMute NVRAM变量分开使用，以避免固件能够播放开机声时的冲突。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Play chime sound at startup.</string>
-                </property>
-                <property name="text">
-                 <string>PlayChime</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="editIntAudioCodec"/>
               </item>
               <item row="7" column="0">
                <widget class="QLabel" name="label_107">
@@ -8774,6 +8708,44 @@ Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid c
                 </property>
                 <property name="text">
                  <string>SetupDelay</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_35">
+                <property name="toolTip">
+                 <string notr="true">Description: Minimal heard volume level from 0 to 100.
+
+The screen reader will use this volume level when the calculated volume level is lower than MinimumVolume and the boot chime will not play if the calculated volume level is lower than MinimumVolume.
+
+----
+
+说明： 最小听到的音量值，从0到100。
+
+当计算出的音量低于MinimumVolume时，屏幕阅读器将使用这个音量，如果计算出的音量低于MinimumVolume，则不会播放开机声。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Minimal heard volume level from 0 to 100.</string>
+                </property>
+                <property name="text">
+                 <string>MinimumVolume</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0">
+               <widget class="QCheckBox" name="chkAudioSupport">
+                <property name="toolTip">
+                 <string notr="true">Enabling this setting routes audio playback from builtin protocols to a dedicated audio port (AudioOut) of the specified codec (AudioCodec) located on the audio controller (AudioDevice).
+
+----
+
+启用此设置可将内置协议的音频播放路由到位于音频控制器（AudioDevice）上的指定编解码器（AudioCodec）的专用音频端口（AudioOut）。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Activate audio support by connecting to a backend driver.</string>
+                </property>
+                <property name="text">
+                 <string>AudioSupport</string>
                 </property>
                </widget>
               </item>
@@ -8795,6 +8767,41 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
                 </property>
                 <property name="text">
                  <string>ResetTrafficClass</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="editAudioDevice"/>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="label_36">
+                <property name="toolTip">
+                 <string notr="true">Volume level range read from SystemAudioVolume varies depending on the codec. To transform read value in [0, 127] range into raw volume range [0, 100] the read value is scaled to VolumeAmplifier percents:
+
+RawV olume = MIN(SystemAudioV olume ∗ V olumeAmplifier 100 , 100)
+
+Note: the transformation used in macOS is not linear, but it is very close and this nuance is thus ignored.
+
+----
+
+从SystemAudioVolume读取的音量范围根据编解码器的不同而不同。为了将[0，127]范围内的读取值转换为原始音量范围[0，100]，读取值将被缩放为音量放大器的百分数。
+
+RawV olume = MIN(SystemAudioV olume ∗ V olumeAmplifier 100 , 100)
+
+注意：macOS中使用的变换不是线性的，但非常接近，因此忽略了这种细微差别。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Multiplication coefficient for system volume to raw volume linear translation from 0 to 1000.</string>
+                </property>
+                <property name="text">
+                 <string>VolumeAmplifier</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QLabel" name="lblSystemAudioVolume">
+                <property name="text">
+                 <string>0</string>
                 </property>
                </widget>
               </item>

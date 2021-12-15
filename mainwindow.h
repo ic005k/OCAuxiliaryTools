@@ -1084,6 +1084,7 @@ class MainWindow : public QMainWindow {
   void init_ToolBarIcon();
   QToolButton* btn0;
   QToolButton* btnClear;
+  void checkSystemAudioVolume();
 };
 
 #endif  // MAINWINDOW_H
