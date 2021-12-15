@@ -87,6 +87,7 @@ MainWindow::MainWindow(QWidget* parent)
   dlgPresetValues = new dlgPreset(this);
   dlgMiscBootArgs = new dlgMisc(this);
   strAppExePath = qApp->applicationDirPath();
+
   timer = new QTimer(this);
   connect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
 
@@ -5146,6 +5147,12 @@ void MainWindow::mount_esp() {
 }
 
 void MainWindow::readResultDiskInfo() {
+  dlgMESP->setModal(true);
+  if (!Initialization && dlgMESP->ui->listWidget->count() > 0) {
+    dlgMESP->show();
+    return;
+  }
+
   dlgMESP->ui->listWidget->clear();
 
   QTextEdit* textDiskInfo = new QTextEdit;
@@ -5179,8 +5186,7 @@ void MainWindow::readResultDiskInfo() {
   if (dlgMESP->ui->listWidget->count() > 0)
     dlgMESP->ui->listWidget->setCurrentRow(0);
 
-  dlgMESP->setModal(true);
-  dlgMESP->show();
+  if (!Initialization) dlgMESP->show();
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
