@@ -43,6 +43,12 @@ void MainWindow::changeOpenCore(bool blDEV) {
     aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                       " for OpenCore " + ocVerDev);
   }
+
+  if (myDatabase->ui->chkHideToolbar->isChecked()) {
+    title = lblVer->text() + "      ";
+    setWindowTitle(title + SaveFileName);
+  } else
+    title = "";
 }
 
 MainWindow::MainWindow(QWidget* parent)
@@ -53,10 +59,6 @@ MainWindow::MainWindow(QWidget* parent)
   loading = true;
 
   loadLocal();
-
-  // title = "OC Auxiliary Tools   V" + CurVerison + "      ";
-  // setWindowTitle(title);
-  title = "";
 
 #ifdef Q_OS_MAC
 #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
