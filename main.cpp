@@ -4,7 +4,7 @@
 #include "myapp.h"
 
 extern QVector<QString> filelist;
-extern QWidgetList wdlist;
+QWidgetList wdlist;
 extern QString PlistFileName;
 MainWindow *mw_one;
 

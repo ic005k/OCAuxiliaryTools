@@ -4,7 +4,6 @@
 #include "mainwindow.h"
 #include "ui_dlgdatabase.h"
 
-extern QTableWidget *tableDatabase;
 extern MainWindow *mw_one;
 extern Method *mymethod;
 extern QString SaveFileName;
@@ -25,7 +24,6 @@ dlgDatabase::dlgDatabase(QWidget *parent)
 
   ui->editFind->setClearButtonEnabled(true);
 
-  tableDatabase = ui->tableDatabase;
   // tableDatabase->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
   QTableWidgetItem *id0;
@@ -38,14 +36,14 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   ui->tableDatabase->setHorizontalHeaderItem(1, id0);
 
   ui->tableDatabase->setAlternatingRowColors(true);
-  tableDatabase->horizontalHeader()->setStretchLastSection(
+  ui->tableDatabase->horizontalHeader()->setStretchLastSection(
       false);  //设置充满表宽度
-  tableDatabase->horizontalHeader()->setHidden(false);
-  tableDatabase->setSelectionBehavior(
+  ui->tableDatabase->horizontalHeader()->setHidden(false);
+  ui->tableDatabase->setSelectionBehavior(
       QAbstractItemView::SelectItems);  //设置选择行为时每次选择一行或单个条目
 
-  for (int i = 0; i < tableDatabase->columnCount(); i++) {
-    tableDatabase->horizontalHeader()->setSectionResizeMode(
+  for (int i = 0; i < ui->tableDatabase->columnCount(); i++) {
+    ui->tableDatabase->horizontalHeader()->setSectionResizeMode(
         i, QHeaderView::ResizeToContents);
   }
 
@@ -113,11 +111,12 @@ void dlgDatabase::closeEvent(QCloseEvent *event) {
 
   QFileInfo appInfo(qApp->applicationDirPath());
   QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
-  for (int i = 0; i < tableDatabase->rowCount(); i++) {
-    QString plistFile = dirpath + tableDatabase->item(i, 0)->text().trimmed();
+  for (int i = 0; i < ui->tableDatabase->rowCount(); i++) {
+    QString plistFile =
+        dirpath + ui->tableDatabase->item(i, 0)->text().trimmed();
     if (listItemModi.at(i))
-      mymethod->writePlistComment(plistFile,
-                                  tableDatabase->item(i, 1)->text().trimmed());
+      mymethod->writePlistComment(
+          plistFile, ui->tableDatabase->item(i, 1)->text().trimmed());
   }
 }
 
@@ -159,7 +158,7 @@ void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
 
   QFileInfo appInfo(qApp->applicationDirPath());
   QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
-  QString file = tableDatabase->item(row, 0)->text();
+  QString file = ui->tableDatabase->item(row, 0)->text();
 
   if (blDEV) {
     if (file == "SampleCustom.plist" || file == "Sample.plist") {
@@ -178,13 +177,13 @@ void dlgDatabase::on_btnFind_clicked() {
   QString text = ui->editFind->text().trimmed();
   if (text == "") return;
 
-  tableDatabase->setFocus();
+  ui->tableDatabase->setFocus();
   // tableDatabase->setSelectionMode(QAbstractItemView::MultiSelection);
   // tableDatabase->clearSelection();
   ui->tableDatabaseFind->setRowCount(0);
   int count = 0;
-  for (int i = 0; i < tableDatabase->rowCount(); i++) {
-    QString str = tableDatabase->item(i, 0)->text();
+  for (int i = 0; i < ui->tableDatabase->rowCount(); i++) {
+    QString str = ui->tableDatabase->item(i, 0)->text();
     QFileInfo fi(str);
     if (fi.baseName().toLower().contains(text.toLower())) {
       ui->tableDatabaseFind->setRowCount(count + 1);

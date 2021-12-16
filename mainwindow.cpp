@@ -16,30 +16,34 @@ using namespace std;
 #include <QMessageBox>
 #include <QSettings>
 
-QString PlistFileName;
-QString SaveFileName;
+QString PlistFileName, SaveFileName;
 QVector<QString> openFileLists;
-QWidgetList wdlist;
-QTableWidget* tableDatabase;
 QRegExp regx("[A-Fa-f0-9]{0,1024}");
 QRegExp regxNumber("^-?\[0-9]*$");
 Method* mymethod;
-QVector<QCheckBox*> chkDisplayLevel;
-QVector<QCheckBox*> chk_ScanPolicy;
-QVector<QCheckBox*> chk_PickerAttributes;
-QVector<QCheckBox*> chk_ExposeSensitiveData;
-QVector<QCheckBox*> chk_Target;
+QVector<QCheckBox*> chkDisplayLevel, chk_ScanPolicy, chk_PickerAttributes,
+    chk_ExposeSensitiveData, chk_Target;
 
-extern QString CurVerison;
-extern QString ocVer;
-extern QString ocVerDev;
-extern QString ocFrom;
-extern QString ocFromDev;
+extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev;
 extern bool blDEV;
-extern QString strACPI;
-extern QString strKexts;
-extern QString strDrivers;
-extern QString strTools;
+extern QString strACPI, strKexts, strDrivers, strTools;
+
+void MainWindow::changeOpenCore(bool blDEV) {
+  QFileInfo appInfo(qApp->applicationDirPath());
+  if (!blDEV) {
+    dataBaseDir = appInfo.filePath() + "/Database/";
+    pathSource = dataBaseDir;
+    lblVer->setText("  OpenCore " + ocVer);
+    aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+                                      " for OpenCore " + ocVer);
+  } else {
+    dataBaseDir = appInfo.filePath() + "/devDatabase/";
+    pathSource = dataBaseDir;
+    lblVer->setText("  OpenCore " + ocVerDev);
+    aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+                                      " for OpenCore " + ocVerDev);
+  }
+}
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -6241,7 +6245,7 @@ void MainWindow::init_FileMenu() {
   btn0->setToolTip(tr("Open Recent..."));
   btn0->setIcon(QIcon(":/icon/rp.png"));
   btn0->setPopupMode(QToolButton::InstantPopup);
-  if (Reg.value("chkRecentOpen", 0).toBool() == true) {
+  if (Reg.value("chkRecentOpen", 1).toBool() == true) {
     ui->toolBar->addWidget(btn0);
     btn0->setMenu(reFileMenu);
   } else {
@@ -6255,7 +6259,7 @@ void MainWindow::init_FileMenu() {
   // Open Dir
   if (mac || osx1012) ui->actionOpen_Directory->setIconVisibleInMenu(false);
   ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
-  if (Reg.value("chkOpenDir", 0).toBool() == true) {
+  if (Reg.value("chkOpenDir", 1).toBool() == true) {
     ui->toolBar->addAction(ui->actionOpen_Directory);
   }
 
@@ -6561,6 +6565,7 @@ void MainWindow::init_MainUI() {
   ui->actionOpenCore_DEV->setChecked(Reg.value("OpenCoreDEV", 0).toBool());
   on_actionOpenCore_DEV_triggered();
 
+  // Get windows position
   int x, y, w, h;
   x = Reg.value("x", "0").toInt();
   y = Reg.value("y", "0").toInt();
@@ -10541,16 +10546,16 @@ void MainWindow::on_actionDatabase_triggered() {
     if (filesTemp.at(j).mid(0, 1) != ".") files.append(filesTemp.at(j));
   }
 
-  tableDatabase->setRowCount(0);
-  tableDatabase->setRowCount(files.count());
+  myDatabase->ui->tableDatabase->setRowCount(0);
+  myDatabase->ui->tableDatabase->setRowCount(files.count());
   for (int i = 0; i < files.count(); i++) {
     QTableWidgetItem* newItem1;
     newItem1 = new QTableWidgetItem(files.at(i));
-    tableDatabase->setItem(i, 0, newItem1);
+    myDatabase->ui->tableDatabase->setItem(i, 0, newItem1);
 
     newItem1 =
         new QTableWidgetItem(mymethod->readPlistComment(dirpath + files.at(i)));
-    tableDatabase->setItem(i, 1, newItem1);
+    myDatabase->ui->tableDatabase->setItem(i, 1, newItem1);
   }
 
   myDatabase->listItemModi.clear();
@@ -11218,23 +11223,6 @@ void MainWindow::on_actionOpenCore_DEV_triggered() {
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("OpenCoreDEV", blDEV);
-}
-
-void MainWindow::changeOpenCore(bool blDEV) {
-  QFileInfo appInfo(qApp->applicationDirPath());
-  if (!blDEV) {
-    dataBaseDir = appInfo.filePath() + "/Database/";
-    pathSource = appInfo.filePath() + "/Database/";
-    lblVer->setText("  OpenCore " + ocVer);
-    aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
-                                      " for OpenCore " + ocVer);
-  } else {
-    dataBaseDir = appInfo.filePath() + "/devDatabase/";
-    pathSource = appInfo.filePath() + "/devDatabase/";
-    lblVer->setText("  OpenCore " + ocVerDev);
-    aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
-                                      " for OpenCore " + ocVerDev);
-  }
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* e) {

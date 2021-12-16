@@ -302,6 +302,9 @@
                <property name="text">
                 <string>Browse Catalog</string>
                </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
              <item row="0" column="4">
@@ -328,6 +331,9 @@
               <widget class="QCheckBox" name="chkRecentOpen">
                <property name="text">
                 <string>Recently Open</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
