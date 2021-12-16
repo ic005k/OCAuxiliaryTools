@@ -186,7 +186,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5615,7 +5615,7 @@ Note: This functionality is still under development and is not ready for product
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5625,14 +5625,7 @@ Note: This functionality is still under development and is not ready for product
             <string>Add</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_17">
-            <item row="1" column="2">
-             <widget class="QToolButton" name="btnPresetNVAdd">
-              <property name="text">
-               <string>Preset</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0" colspan="6">
+            <item row="0" column="0">
              <layout class="QGridLayout" name="gridLayout_nv_add">
               <item row="0" column="0">
                <widget class="QTableWidget" name="table_nv_add0">
@@ -5643,6 +5636,77 @@ Note: This functionality is still under development and is not ready for product
                </widget>
               </item>
               <item row="0" column="1">
+               <layout class="QVBoxLayout" name="verticalLayout_9">
+                <item>
+                 <spacer name="verticalSpacer_48">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="btnNVRAMAdd_Add0">
+                  <property name="maximumSize">
+                   <size>
+                    <width>20</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="btnNVRAMAdd_Del0">
+                  <property name="maximumSize">
+                   <size>
+                    <width>20</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="shortcut">
+                   <string>Del</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="btnPresetNVAdd">
+                  <property name="maximumSize">
+                   <size>
+                    <width>20</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>=</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="2">
                <widget class="QTableWidget" name="table_nv_add">
                 <property name="columnCount">
                  <number>3</number>
@@ -5652,75 +5716,81 @@ Note: This functionality is still under development and is not ready for product
                 <column/>
                </widget>
               </item>
+              <item row="0" column="3">
+               <layout class="QVBoxLayout" name="verticalLayout_10">
+                <item>
+                 <spacer name="verticalSpacer_49">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="btnNVRAMAdd_Add">
+                  <property name="maximumSize">
+                   <size>
+                    <width>20</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="btnNVRAMAdd_Del">
+                  <property name="maximumSize">
+                   <size>
+                    <width>20</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="shortcut">
+                   <string>Ctrl+Del</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="btnAddbootArgs">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>20</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>=</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
              </layout>
-            </item>
-            <item row="1" column="0">
-             <widget class="QToolButton" name="btnNVRAMAdd_Add0">
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QToolButton" name="btnNVRAMAdd_Del0">
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="shortcut">
-               <string>Del</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="QToolButton" name="btnAddbootArgs">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="text">
-               <string>Add boot-args</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="4">
-             <widget class="QToolButton" name="btnNVRAMAdd_Add">
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
-             <widget class="QToolButton" name="btnNVRAMAdd_Del">
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="shortcut">
-               <string>Ctrl+Del</string>
-              </property>
-             </widget>
             </item>
            </layout>
           </widget>
@@ -5729,7 +5799,7 @@ Note: This functionality is still under development and is not ready for product
             <string>Delete</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_18">
-            <item row="0" column="0" colspan="4">
+            <item row="0" column="0">
              <widget class="QTableWidget" name="table_nv_del0">
               <property name="minimumSize">
                <size>
@@ -5743,7 +5813,78 @@ Note: This functionality is still under development and is not ready for product
               <column/>
              </widget>
             </item>
-            <item row="0" column="4" colspan="3">
+            <item row="0" column="1">
+             <layout class="QVBoxLayout" name="verticalLayout_13">
+              <item>
+               <spacer name="verticalSpacer_50">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnNVRAMDel_Add0">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>+</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnNVRAMDel_Del0">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>-</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="shortcut">
+                 <string>Del</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnPresetNVDelete">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>=</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="2">
              <widget class="QTableWidget" name="table_nv_del">
               <property name="columnCount">
                <number>1</number>
@@ -5751,70 +5892,63 @@ Note: This functionality is still under development and is not ready for product
               <column/>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QToolButton" name="btnNVRAMDel_Add0">
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QToolButton" name="btnNVRAMDel_Del0">
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="shortcut">
-               <string>Del</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QToolButton" name="btnPresetNVDelete">
-              <property name="text">
-               <string>Preset</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
-             <widget class="QToolButton" name="btnNVRAMDel_Add">
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="6">
-             <widget class="QToolButton" name="btnNVRAMDel_Del">
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="shortcut">
-               <string>Ctrl+Del</string>
-              </property>
-             </widget>
+            <item row="0" column="3">
+             <layout class="QVBoxLayout" name="verticalLayout_14">
+              <item>
+               <spacer name="verticalSpacer_51">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnNVRAMDel_Add">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>+</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnNVRAMDel_Del">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>-</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+Del</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -5823,7 +5957,7 @@ Note: This functionality is still under development and is not ready for product
             <string>LegacySchema</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_19">
-            <item row="0" column="0" colspan="4">
+            <item row="0" column="0">
              <widget class="QTableWidget" name="table_nv_ls0">
               <property name="minimumSize">
                <size>
@@ -5837,7 +5971,78 @@ Note: This functionality is still under development and is not ready for product
               <column/>
              </widget>
             </item>
-            <item row="0" column="4" colspan="3">
+            <item row="0" column="1">
+             <layout class="QVBoxLayout" name="verticalLayout_15">
+              <item>
+               <spacer name="verticalSpacer_52">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnNVRAMLS_Add0">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>+</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnNVRAMLS_Del0">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>-</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="shortcut">
+                 <string>Del</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnPresetNVLegacy">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>=</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="2">
              <widget class="QTableWidget" name="table_nv_ls">
               <property name="columnCount">
                <number>1</number>
@@ -5845,70 +6050,63 @@ Note: This functionality is still under development and is not ready for product
               <column/>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QToolButton" name="btnNVRAMLS_Add0">
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QToolButton" name="btnNVRAMLS_Del0">
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="shortcut">
-               <string>Del</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QToolButton" name="btnPresetNVLegacy">
-              <property name="text">
-               <string>Preset</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
-             <widget class="QToolButton" name="btnNVRAMLS_Add">
-              <property name="text">
-               <string>AddItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="6">
-             <widget class="QToolButton" name="btnNVRAMLS_Del">
-              <property name="text">
-               <string>DeleteItem</string>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-              <property name="shortcut">
-               <string>Ctrl+Del</string>
-              </property>
-             </widget>
+            <item row="0" column="3">
+             <layout class="QVBoxLayout" name="verticalLayout_16">
+              <item>
+               <spacer name="verticalSpacer_53">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnNVRAMLS_Add">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>+</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnNVRAMLS_Del">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>-</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+Del</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -6041,7 +6239,7 @@ A continuously updated variable list can be found in a corresponding document: N
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>5</number>
+              <number>2</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -6695,19 +6893,7 @@ Note: On Intel Skylake X ART frequency may be a little less (approx. 0.25%) than
                <string>Memory</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_32">
-               <property name="leftMargin">
-                <number>5</number>
-               </property>
-               <property name="topMargin">
-                <number>5</number>
-               </property>
-               <property name="rightMargin">
-                <number>5</number>
-               </property>
-               <property name="bottomMargin">
-                <number>5</number>
-               </property>
-               <item row="0" column="0" colspan="2">
+               <item row="0" column="0">
                 <widget class="QLabel" name="label_105">
                  <property name="toolTip">
                   <string notr="true">Specifies the data width, in bits, of the memory. 
@@ -6729,10 +6915,10 @@ DataWidth为0，TotalWidth为8，表示该器件仅用于提供8个纠错位。<
                  </property>
                 </widget>
                </item>
-               <item row="0" column="2">
+               <item row="0" column="1">
                 <widget class="QLineEdit" name="editIntDataWidth"/>
                </item>
-               <item row="0" column="3">
+               <item row="0" column="2">
                 <widget class="QLabel" name="label_102">
                  <property name="toolTip">
                   <string notr="true"> Specifies the primary hardware error correction or detection method supported by the memory.
@@ -6777,10 +6963,10 @@ DataWidth为0，TotalWidth为8，表示该器件仅用于提供8个纠错位。<
                  </property>
                 </widget>
                </item>
-               <item row="0" column="4">
+               <item row="0" column="3">
                 <widget class="QLineEdit" name="editIntErrorCorrection"/>
                </item>
-               <item row="0" column="5">
+               <item row="0" column="4">
                 <widget class="QLabel" name="label_100">
                  <property name="toolTip">
                   <string notr="true"> Specifies the form factor of the memory. On Macs this should usually be DIMM or SODIMM.
@@ -6818,10 +7004,10 @@ When CustomMemory is false, this value is automatically set based on Mac product
                  </property>
                 </widget>
                </item>
-               <item row="0" column="6">
+               <item row="0" column="5">
                 <widget class="QLineEdit" name="editIntFormFactor"/>
                </item>
-               <item row="1" column="0" colspan="2">
+               <item row="1" column="0">
                 <widget class="QLabel" name="label_101">
                  <property name="toolTip">
                   <string notr="true"> Specifies the total width, in bits, of the memory, including any check or error-correction bits. 
@@ -6843,10 +7029,10 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
+               <item row="1" column="1">
                 <widget class="QLineEdit" name="editIntTotalWidth"/>
                </item>
-               <item row="1" column="3">
+               <item row="1" column="2">
                 <widget class="QLabel" name="label_103">
                  <property name="toolTip">
                   <string notr="true">Description: Specifies the memory type. Commonly used types are listed below.
@@ -6890,10 +7076,10 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                  </property>
                 </widget>
                </item>
-               <item row="1" column="4">
+               <item row="1" column="3">
                 <widget class="QLineEdit" name="editIntType"/>
                </item>
-               <item row="1" column="5">
+               <item row="1" column="4">
                 <widget class="QLabel" name="label_104">
                  <property name="toolTip">
                   <string notr="true"> Specifies additional memory type information.
@@ -6925,10 +7111,10 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                  </property>
                 </widget>
                </item>
-               <item row="1" column="6">
+               <item row="1" column="5">
                 <widget class="QLineEdit" name="editIntTypeDetail"/>
                </item>
-               <item row="2" column="0" colspan="2">
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_99">
                  <property name="toolTip">
                   <string notr="true">Specifies the maximum amount of memory, in bytes, supported by the system.
@@ -6946,10 +7132,10 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                  </property>
                 </widget>
                </item>
-               <item row="2" column="2">
+               <item row="2" column="1">
                 <widget class="QLineEdit" name="editIntMaxCapacity"/>
                </item>
-               <item row="3" column="0" colspan="7">
+               <item row="3" column="0" colspan="6">
                 <widget class="QTableWidget" name="tableDevices">
                  <property name="columnCount">
                   <number>8</number>
@@ -6964,34 +7150,63 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                  <column/>
                 </widget>
                </item>
-               <item row="4" column="0">
-                <widget class="QToolButton" name="btnDevices_add">
-                 <property name="text">
-                  <string>AddItem</string>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>20</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QToolButton" name="btnDevices_del">
-                 <property name="text">
-                  <string>DeleteItem</string>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>20</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                 <property name="shortcut">
-                  <string>Del</string>
-                 </property>
-                </widget>
+               <item row="3" column="6">
+                <layout class="QVBoxLayout" name="verticalLayout_17">
+                 <item>
+                  <spacer name="verticalSpacer_54">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="btnDevices_add">
+                   <property name="maximumSize">
+                    <size>
+                     <width>20</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>+</string>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>20</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="btnDevices_del">
+                   <property name="maximumSize">
+                    <size>
+                     <width>20</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>-</string>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>20</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                   <property name="shortcut">
+                    <string>Del</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
               </layout>
              </widget>

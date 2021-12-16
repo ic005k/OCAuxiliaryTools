@@ -1537,10 +1537,11 @@ void MainWindow::initui_nvram() {
           SLOT(show_menu(QPoint)));
 
   // 分割窗口
-  QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
-  splitterMain->addWidget(ui->table_nv_add0);
-  splitterMain->addWidget(ui->table_nv_add);
-  ui->gridLayout_nv_add->addWidget(splitterMain);
+  // QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
+  // splitterMain->addWidget(ui->table_nv_add0);
+  // splitterMain->addWidget(ui->table_nv_add);
+  // ui->gridLayout_nv_add->addWidget(splitterMain);
+  ui->table_nv_add0->setMaximumWidth(400);
 
   // Delete
   id0 = new QTableWidgetItem(tr("UUID"));
