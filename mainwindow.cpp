@@ -6530,7 +6530,8 @@ void MainWindow::init_MainUI() {
   ui->lblCount->setMinimumSize(size);
   ui->lblCount->setMaximumSize(size);
   QHBoxLayout* buttonLayout = new QHBoxLayout();
-  buttonLayout->setContentsMargins(0, 0, 0, 0);
+  QMargins mar(0, 1, 1, 1);
+  buttonLayout->setContentsMargins(mar);
   buttonLayout->addStretch();
   buttonLayout->addWidget(ui->lblCount);
 
