@@ -8,6 +8,7 @@ extern QTableWidget *tableDatabase;
 extern MainWindow *mw_one;
 extern Method *mymethod;
 extern QString SaveFileName;
+extern bool blDEV;
 
 dlgDatabase::dlgDatabase(QWidget *parent)
     : QDialog(parent), ui(new Ui::dlgDatabase) {
@@ -159,6 +160,12 @@ void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
   QFileInfo appInfo(qApp->applicationDirPath());
   QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
   QString file = tableDatabase->item(row, 0)->text();
+
+  if (blDEV) {
+    if (file == "SampleCustom.plist" || file == "Sample.plist") {
+      dirpath = appInfo.filePath() + "/devDatabase/BaseConfigs/";
+    }
+  }
   mw_one->openFile(dirpath + file);
   close();
 
@@ -226,6 +233,13 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column) {
 
   QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
   QString file = ui->tableDatabaseFind->currentItem()->text();
+
+  if (blDEV) {
+    if (file == "SampleCustom.plist" || file == "Sample.plist") {
+      dirpath = appInfo.filePath() + "/devDatabase/BaseConfigs/";
+    }
+  }
+
   mw_one->openFile(dirpath + file);
   close();
 
