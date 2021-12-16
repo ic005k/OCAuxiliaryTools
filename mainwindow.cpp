@@ -5176,8 +5176,16 @@ void MainWindow::mount_esp() {
 
 void MainWindow::readResultDiskInfo() {
   dlgMESP->setModal(true);
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  int row = Reg.value("mesp", 0).toInt();
   if (!Initialization && dlgMESP->ui->listWidget->count() > 0) {
     dlgMESP->show();
+
+    if (row < dlgMESP->ui->listWidget->count())
+      dlgMESP->ui->listWidget->setCurrentRow(row);
+    else
+      dlgMESP->ui->listWidget->setCurrentRow(0);
     return;
   }
 
@@ -5211,8 +5219,12 @@ void MainWindow::readResultDiskInfo() {
     }
   }
 
-  if (dlgMESP->ui->listWidget->count() > 0)
-    dlgMESP->ui->listWidget->setCurrentRow(0);
+  if (dlgMESP->ui->listWidget->count() > 0) {
+    if (row < dlgMESP->ui->listWidget->count())
+      dlgMESP->ui->listWidget->setCurrentRow(row);
+    else
+      dlgMESP->ui->listWidget->setCurrentRow(0);
+  }
 
   if (!Initialization) dlgMESP->show();
 }

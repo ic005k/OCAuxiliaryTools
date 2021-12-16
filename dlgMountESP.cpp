@@ -22,6 +22,10 @@ void dlgMountESP::on_btnMountOpenConfig_clicked() { mountESP(true); }
 void dlgMountESP::mountESP(bool openConfig) {
   if (ui->listWidget->count() == 0) return;
 
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  Reg.setValue("mesp", ui->listWidget->currentRow());
+
   QString str = ui->listWidget->currentItem()->text().trimmed();
   QStringList strList = str.simplified().split("|");
   QString strDisk;
