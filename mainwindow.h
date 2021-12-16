@@ -883,10 +883,6 @@ class MainWindow : public QMainWindow {
 
   void on_btnDown_clicked();
 
-  void on_checkACPIAdd_stateChanged(int arg1);
-
-  void on_checkKernelAdd_stateChanged(int arg1);
-
   void on_btnUp_UEFI_Drivers_clicked();
 
   void on_btnDown_UEFI_Drivers_clicked();

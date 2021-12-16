@@ -563,7 +563,6 @@ void MainWindow::initui_acpi() {
   ui->table_acpi_add->setAlternatingRowColors(true);  //底色交替显示
   ui->btnUp->setVisible(true);
   ui->btnDown->setVisible(true);
-  ui->checkACPIAdd->setVisible(false);
 
   // ACPI-Delete
   id0 = new QTableWidgetItem(tr("TableSignature"));
@@ -941,7 +940,6 @@ void MainWindow::initui_kernel() {
 
   ui->table_kernel_add->setAlternatingRowColors(true);
   // ui->table_kernel_add->horizontalHeader()->setStretchLastSection(true);
-  ui->checkKernelAdd->setVisible(false);
 
   // Block
   ui->table_kernel_block->setColumnCount(6);
@@ -9518,15 +9516,13 @@ void MainWindow::tablePopMenu(QTableWidget* w, QAction* cutAction,
     else
       showtipAction->setVisible(true);
 
-    if (ui->listMain->currentRow() == 0 && ui->listSub->currentRow() == 0 &&
-        ui->checkACPIAdd->isChecked()) {
+    if (ui->listMain->currentRow() == 0 && ui->listSub->currentRow() == 0) {
       copyAction->setEnabled(false);
       cutAction->setEnabled(false);
       pasteAction->setEnabled(false);
     }
 
-    if (ui->listMain->currentRow() == 3 && ui->listSub->currentRow() == 0 &&
-        ui->checkKernelAdd->isChecked()) {
+    if (ui->listMain->currentRow() == 3 && ui->listSub->currentRow() == 0) {
       copyAction->setEnabled(false);
       cutAction->setEnabled(false);
       pasteAction->setEnabled(false);
@@ -9544,12 +9540,7 @@ void MainWindow::init_CopyPasteLine() {
         w != ui->btnPickerAttributes && w != ui->btnDisplayLevel &&
         w != ui->btnExposeSensitiveData && w != ui->btnScanPolicy &&
         w != ui->btnUpdateHex && w != ui->btnUp && w != ui->btnDown) {
-      /*w->setHidden(true);
-      if (w->objectName().toLower().contains("kext")) w->setHidden(false);
-      if (w->objectName().toLower().contains("kernel")) w->setHidden(false);
-      if (w->objectName().toLower().contains("acpi")) w->setHidden(false);
-      if (w->objectName().toLower().contains("acpidir")) w->setHidden(false);*/
-      if (w->text().trimmed().length() == 1) {
+      if (w->text().trimmed().length() == 1 || w->text().trimmed() == "...") {
         w->setHidden(false);
       } else
         w->setHidden(true);
@@ -10736,14 +10727,6 @@ void MainWindow::CheckChange(QTableWidget* tw, int arg1, QToolButton* btnDel) {
   }
 
   this->repaint();
-}
-
-void MainWindow::on_checkACPIAdd_stateChanged(int arg1) {
-  CheckChange(ui->table_acpi_add, arg1, ui->btnACPIAdd_Del);
-}
-
-void MainWindow::on_checkKernelAdd_stateChanged(int arg1) {
-  CheckChange(ui->table_kernel_add, arg1, ui->btnKernelAdd_Del);
 }
 
 void MainWindow::on_btnUp_UEFI_Drivers_clicked() {
