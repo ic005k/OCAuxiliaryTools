@@ -31,11 +31,9 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 
 * OCAT的预置功能采用的是开放式接口，如果您对ACPI补丁等条目的预置感兴趣，请帮助完善PreSet.plist文件的内容，期待您的加入！
 
-一些在线资源，感谢 @5T33Z0
+* [如何使用OCAT升级OpenCore和Kexts(by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
-* [如何使用OCAT升级OpenCore和Kexts](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
-
-* [OpenCore Quirks for Intel and AMD CPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
+* [OpenCore Quirks for Intel and AMD CPUs(by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
 
 
 ---
