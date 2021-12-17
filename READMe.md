@@ -24,8 +24,6 @@
 OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for OC that is feature-rich and easy to use. OCAT maintains its structural nature of being fully transparent to the user level, with a completely open design, it is still evolving and welcomes any questions or suggestions.
 
 * [Updating OpenCore and Kexts with OCAT (by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
- 
-* [OpenCore Quirks for Intel and AMD CPUs (by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
 
 * Pre-selected plugin content for Quirks is provided and maintained by @5T33Z0.  [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
 
