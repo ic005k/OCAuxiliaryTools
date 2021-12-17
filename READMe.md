@@ -34,7 +34,7 @@ OC development version can be downloaded [here](https://github.com/acidanthera/O
 
 Some online resources, thanks @5T33Z0
 
-* https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks
+* [OpenCore Quirks for Intel and AMD CPUs](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
 
 * [Updating OpenCore and Kexts with OCAT](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
