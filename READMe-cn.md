@@ -35,7 +35,7 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 
 * https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks
 
-* https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md
+* [如何使用OCAT升级OpenCore和Kexts](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
 
 ---
