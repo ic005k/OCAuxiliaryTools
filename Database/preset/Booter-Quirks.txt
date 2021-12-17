@@ -31,13 +31,4 @@ Booter: AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCus
 CPU:Intel Skylake-X/W and Cascade Lake-X/W (High End Desktop)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
 
-CPU:AMD Ryzen (17h)
-Booter:AvoidRuntimeDefrag EnableSafeModeSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
-
-CPU:AMD Threadripper TRx 40 (19h)
-Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
-
-CPU:AMD Bulldozer (15h) and Jaguar (16h)
-Booter:AvoidRuntimeDefrag EnableSafeModeSlide EnableWriteUnprotector ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap
-
 Thanks to @5T33Z0 for providing the above content.

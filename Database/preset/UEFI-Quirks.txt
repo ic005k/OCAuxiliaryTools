@@ -73,10 +73,5 @@ UEFI:IgnoreInvalidFlexRatio RequestBootVarRouting
 CPU:Intel Core 1st Gen Lynnfield/Clarkdale (HP Desktop)
 UEFI:IgnoreInvalidFlexRatio RequestBootVarRouting UnblockFsConnect
 
-CPU:AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h)
-UEFI: EnableVectorAcceleration RequestBootVarRouting
-
-CPU:AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h) [HP]
-UEFI:EnableVectorAcceleration RequestBootVarRouting UnblockFsConnect
 
 Thanks to @5T33Z0 for providing the above content.
