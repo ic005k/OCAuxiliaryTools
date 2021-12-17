@@ -23,8 +23,6 @@ OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用�
 
 * [如何使用OCAT升级OpenCore和Kexts(by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
-* [OpenCore Quirks for Intel and AMD CPUs(by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
-
 * Quirks的预选插件内容由 @5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
  
 * BaseConfigs（基本配置文件）插件包由 @5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
