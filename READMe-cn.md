@@ -21,7 +21,9 @@
 
 OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用工具，功能丰富、简洁易用。OCAT保持对用户层面全透明的结构特性，采用完全开放式的设计，它仍在不断发展，欢迎任何问题或建议。
 
-OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下载
+* [如何使用OCAT升级OpenCore和Kexts(by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
+
+* [OpenCore Quirks for Intel and AMD CPUs(by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
 
 * Quirks的预选插件内容由 @5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
  
@@ -30,11 +32,6 @@ OC开发版可以[在此](https://github.com/acidanthera/OpenCorePkg/actions)下
 * OCAT的功能提示采用的是开放式接口，如果您对枯燥的翻译有兴趣，请帮助完善toolTip.txt文件（数据库preset目录中）的内容，期待您的加入！文件地址：https://github.com/ic005k/QtOpenCoreConfig/blob/master/Database/preset/toolTip.txt
 
 * OCAT的预置功能采用的是开放式接口，如果您对ACPI补丁等条目的预置感兴趣，请帮助完善PreSet.plist文件的内容，期待您的加入！
-
-* [如何使用OCAT升级OpenCore和Kexts(by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
-
-* [OpenCore Quirks for Intel and AMD CPUs(by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/tree/main/08_Quirks)
-
 
 ---
 
