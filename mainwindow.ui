@@ -8899,7 +8899,7 @@ Note: AppleEvent’s default behaviour is intended to prevent unwanted queued ke
             <item row="0" column="0">
              <layout class="QGridLayout" name="gridLayout_61">
               <item row="4" column="0">
-               <widget class="QLabel" name="label_34">
+               <widget class="QLabel" name="lblAudioOut">
                 <property name="toolTip">
                  <string notr="true">Normally this contains the index of the green out of the builtin analog audio controller (HDEF). 
 The number of output nodes (N) in the debug log (marked in bold-italic):

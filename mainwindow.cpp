@@ -33,10 +33,17 @@ void MainWindow::changeOpenCore(bool blDEV) {
     ui->chkDisconnectHda->setHidden(false);
     ui->editIntAudioOutMask->setHidden(false);
     ui->lblAudioOutMask->setHidden(false);
+
+    // Delete
+    ui->editIntAudioOut->setHidden(true);
+    ui->lblAudioOut->setHidden(true);
   } else {
     ui->chkDisconnectHda->setHidden(true);
     ui->editIntAudioOutMask->setHidden(true);
     ui->lblAudioOutMask->setHidden(true);
+
+    ui->editIntAudioOut->setHidden(false);
+    ui->lblAudioOut->setHidden(false);
   }
 
   QFileInfo appInfo(qApp->applicationDirPath());
@@ -59,6 +66,11 @@ void MainWindow::changeOpenCore(bool blDEV) {
     setWindowTitle(title + SaveFileName);
   } else
     title = "";
+
+  if (QFile(SaveFileName).exists()) {
+    OpenFileValidate = true;
+    on_actionOcvalidate_triggered();
+  }
 }
 
 MainWindow::MainWindow(QWidget* parent)
