@@ -6187,7 +6187,8 @@ void MainWindow::init_ToolBarIcon() {
     btn0->setIcon(QIcon(":/icon/rp0.png"));
     ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir0.png"));
     if (!isWindowModified()) ui->actionSave->setIcon(QIcon(":/icon/save0.png"));
-    ui->actionOcvalidate->setIcon(QIcon(":/icon/ov0.png"));
+    if (!blOCValidateError)
+      ui->actionOcvalidate->setIcon(QIcon(":/icon/ov0.png"));
     ui->actionMountEsp->setIcon(QIcon(":/icon/esp0.png"));
     ui->actionUpgrade_OC->setIcon(QIcon(":/icon/um0.png"));
     ui->actionDatabase->setIcon(QIcon(":/icon/db0.png"));
@@ -6201,7 +6202,9 @@ void MainWindow::init_ToolBarIcon() {
     btn0->setIcon(QIcon(":/icon/rp.png"));
     ui->actionOpen_Directory->setIcon(QIcon(":/icon/opendir.png"));
     if (!isWindowModified()) ui->actionSave->setIcon(QIcon(":/icon/save.png"));
-    ui->actionOcvalidate->setIcon(QIcon(":/icon/ov.png"));
+    if (!blOCValidateError)
+      ui->actionOcvalidate->setIcon(QIcon(":/icon/ov.png"));
+
     ui->actionMountEsp->setIcon(QIcon(":/icon/esp.png"));
     ui->actionUpgrade_OC->setIcon(QIcon(":/icon/um.png"));
     ui->actionDatabase->setIcon(QIcon(":/icon/db.png"));
@@ -7067,6 +7070,7 @@ void MainWindow::readResultCheckData() {
   if (result.trimmed() == "Failed to read") return;
 
   if (result.contains("No issues found") || result.contains("No is")) {
+    blOCValidateError = false;
     str = tr("OK !");
     strMsg = result + "\n\n" + str;
 
@@ -7087,6 +7091,7 @@ void MainWindow::readResultCheckData() {
     }
 
   } else {
+    blOCValidateError = true;
     strMsg = result;
     dlgOCV->setGoEnabled(true);
 
@@ -8145,7 +8150,8 @@ void MainWindow::findCheckBox(QString findText) {
 
   for (int i = 0; i < listOfCheckBox.count(); i++) {
     QCheckBox* chkbox = (QCheckBox*)listOfCheckBox.at(i);
-    if (chkbox->text().toLower().contains(findText.trimmed().toLower())) {
+    if (chkbox->text().toLower().contains(findText.trimmed().toLower()) &&
+        !chkbox->isHidden()) {
       findCount++;
       listOfCheckBoxResults.append(chkbox);
       listNameResults.append("1" + chkbox->objectName());
@@ -8161,7 +8167,8 @@ void MainWindow::findLabel(QString findText) {
   listOfLabelResults.clear();
   for (int i = 0; i < listOfLabel.count(); i++) {
     QLabel* lbl = (QLabel*)listOfLabel.at(i);
-    if (lbl->text().toLower().contains(findText.trimmed().toLower())) {
+    if (lbl->text().toLower().contains(findText.trimmed().toLower()) &&
+        !lbl->isHidden()) {
       findCount++;
       listOfLabelResults.append(lbl);
       listNameResults.append("3" + lbl->objectName());
@@ -8192,7 +8199,8 @@ void MainWindow::findLineEdit(QString findText) {
     if (edit == lineEdit) add = false;
 
     if (add) {
-      if (edit->text().toLower().contains(findText.trimmed().toLower())) {
+      if (edit->text().toLower().contains(findText.trimmed().toLower()) &&
+          !edit->isHidden()) {
         findCount++;
         listOfLineEditResults.append(edit);
         listNameResults.append("4" + edit->objectName());
@@ -8213,7 +8221,8 @@ void MainWindow::findComboBox(QString findText) {
     if (cbox != ui->cboxFind && cbox != ui->cboxTextColor &&
         cbox != ui->cboxBackColor) {
       if (cbox->currentText().toLower().contains(
-              findText.trimmed().toLower())) {
+              findText.trimmed().toLower()) &&
+          !cbox->isHidden()) {
         findCount++;
         listOfComboBoxResults.append(cbox);
         listNameResults.append("5" + cbox->objectName());

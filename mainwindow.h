@@ -83,6 +83,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  bool blOCValidateError = false;
   dlgMountESP* dlgMESP;
   QString pathSource;
   QString dataBaseDir;
