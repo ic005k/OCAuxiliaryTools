@@ -59,9 +59,8 @@ class dlgDatabase : public QDialog {
 
   void on_rbtnWeb_clicked();
 
-  void on_chkBoxLastFile_clicked(bool checked);
-
   void on_chkOpenDir_stateChanged(int arg1);
+  void on_chkBoxLastFile_clicked(bool checked);
 
   void on_chkRecentOpen_stateChanged(int arg1);
 
@@ -74,6 +73,8 @@ class dlgDatabase : public QDialog {
   void on_tableDatabase_itemChanged(QTableWidgetItem *item);
 
   void on_chkHideToolbar_stateChanged(int arg1);
+
+  void on_chkShowVolName_clicked(bool checked);
 
  private:
   void writeIni(QString key, int arg1);

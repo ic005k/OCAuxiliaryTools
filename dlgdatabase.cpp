@@ -93,6 +93,7 @@ dlgDatabase::dlgDatabase(QWidget *parent)
       ui->comboBoxNet->setCurrentText("https://github.com/");
     }
   }
+  ui->chkShowVolName->setChecked(Reg.value("ShowVolName", 0).toBool());
 
   ui->chkRecentOpen->setChecked(Reg.value("chkRecentOpen", 0).toBool());
   ui->chkOpenDir->setChecked(Reg.value("chkOpenDir", 0).toBool());
@@ -524,4 +525,10 @@ void dlgDatabase::on_tableDatabase_itemChanged(QTableWidgetItem *item) {
 
 void dlgDatabase::on_chkHideToolbar_stateChanged(int arg1) {
   writeIni("chkHideToolbar", arg1);
+}
+
+void dlgDatabase::on_chkShowVolName_clicked(bool checked) {
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  Reg.setValue("ShowVolName", checked);
 }

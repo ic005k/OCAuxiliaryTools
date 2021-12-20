@@ -5218,16 +5218,21 @@ void MainWindow::readResultDiskInfo() {
     if (strList.count() >= 5) {
       if (strList.at(1).toUpper() == "EFI") {
         QString strDisk = strList.at(strList.count() - 1).mid(0, 5);
-        QString strDiskVol = strList.at(strList.count() - 1);
+        QString strIDENTIFIER = strList.at(strList.count() - 1);
         str1 = strList.at(strList.count() - 1);
         str1 = str1.trimmed();
-        str1 = str1 + " | " + mymethod->getVolForPartition(strDiskVol) + " | " +
-               mymethod->getDriverName(strDisk) + " | " +
-               mymethod->getDriverVolInfo(strDisk);
-
-        dlgMESP->ui->listWidget->setIconSize(QSize(30, 30));
-        dlgMESP->ui->listWidget->addItem(
-            new QListWidgetItem(QIcon(":/icon/espicon.png"), str1));
+        if (myDatabase->ui->chkShowVolName->isChecked()) {
+          str1 = str1 + " | " + mymethod->getVolForPartition(strIDENTIFIER) +
+                 " | " + mymethod->getDriverName(strDisk) + " | " +
+                 mymethod->getDriverVolInfo(strDisk);
+        } else {
+          str1 = str1 + " | " + mymethod->getVolForPartition(strIDENTIFIER) +
+                 " | " + mymethod->getDriverName(strDisk);
+        }
+        dlgMESP->ui->listWidget->addItem(new QListWidgetItem(str1));
+        // dlgMESP->ui->listWidget->setIconSize(QSize(30, 30));
+        // dlgMESP->ui->listWidget->addItem(
+        //    new QListWidgetItem(QIcon(":/icon/espicon.png"), str1));
       }
     }
   }

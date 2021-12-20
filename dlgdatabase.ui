@@ -262,13 +262,20 @@
        <item row="1" column="0">
         <widget class="QGroupBox" name="groupBox_3">
          <property name="title">
-          <string>File Options</string>
+          <string>Additional Options</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="0">
            <widget class="QCheckBox" name="chkBoxLastFile">
             <property name="text">
              <string>Automatically open the last opened file</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="chkShowVolName">
+            <property name="text">
+             <string>Show all volume names when mounting ESP</string>
             </property>
            </widget>
           </item>
