@@ -1473,7 +1473,7 @@ void Method::mount_esp_mac(QString strEfiDisk) {
   dm->execute("osascript", QStringList() << fileName);
 }
 
-QString Method::getDriverInfo(QString strDisk) {
+QString Method::getDriverVolInfo(QString strDisk) {
   QStringList listPartitionVol = getAllVolForDisk(strDisk);
   QString str3 = "";
   for (int i = 0; i < listPartitionVol.count(); i++) {

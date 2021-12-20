@@ -101,7 +101,7 @@ class Method : public QMainWindow {
   void writeLeftTableOnlyValue(QTableWidget *t0, QTableWidget *t);
   void kextPreset();
   void mount_esp_mac(QString strEfiDisk);
-  QString getDriverInfo(QString strDisk);
+  QString getDriverVolInfo(QString strDisk);
   void backupEFI();
   void init_PresetQuirks(QComboBox *comboBox, QString quirksFile);
   QStringList getMarkerQuirks(QString arg1, QString strItem, QWidget *tab,

@@ -5201,15 +5201,6 @@ void MainWindow::readResultDiskInfo() {
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QSettings Reg(qfile, QSettings::IniFormat);
   int row = Reg.value("mesp", 0).toInt();
-  if (!Initialization && dlgMESP->ui->listWidget->count() > 0) {
-    dlgMESP->show();
-
-    if (row < dlgMESP->ui->listWidget->count())
-      dlgMESP->ui->listWidget->setCurrentRow(row);
-    else
-      dlgMESP->ui->listWidget->setCurrentRow(0);
-    return;
-  }
 
   dlgMESP->ui->listWidget->clear();
 
@@ -5232,7 +5223,7 @@ void MainWindow::readResultDiskInfo() {
         str1 = str1.trimmed();
         str1 = str1 + " | " + mymethod->getVolForPartition(strDiskVol) + " | " +
                mymethod->getDriverName(strDisk) + " | " +
-               mymethod->getDriverInfo(strDisk);
+               mymethod->getDriverVolInfo(strDisk);
 
         dlgMESP->ui->listWidget->setIconSize(QSize(30, 30));
         dlgMESP->ui->listWidget->addItem(
