@@ -29,6 +29,16 @@ extern bool blDEV;
 extern QString strACPI, strKexts, strDrivers, strTools;
 
 void MainWindow::changeOpenCore(bool blDEV) {
+  if (blDEV) {
+    ui->chkDisconnectHda->setHidden(false);
+    ui->editIntAudioOutMask->setHidden(false);
+    ui->lblAudioOutMask->setHidden(false);
+  } else {
+    ui->chkDisconnectHda->setHidden(true);
+    ui->editIntAudioOutMask->setHidden(true);
+    ui->lblAudioOutMask->setHidden(true);
+  }
+
   QFileInfo appInfo(qApp->applicationDirPath());
   if (!blDEV) {
     dataBaseDir = appInfo.filePath() + "/Database/";
