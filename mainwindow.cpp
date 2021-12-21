@@ -7288,8 +7288,8 @@ int MainWindow::parse_UpdateJSON(QString str) {
 
     } else {
       if (!autoCheckUpdate) {
-        QMessageBox::information(this, "",
-                                 tr("It is currently the latest version!"));
+        QMessageBox::information(
+            this, "", tr("You are currently using the latest version!"));
       }
     }
 

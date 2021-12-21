@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1484</width>
-    <height>838</height>
+    <height>885</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -11473,7 +11473,7 @@ QToolBar::separator {
   </action>
   <action name="btnCheckUpdate">
    <property name="text">
-    <string>CheckUpdate</string>
+    <string>Update Check</string>
    </property>
   </action>
   <action name="actionDatabase">

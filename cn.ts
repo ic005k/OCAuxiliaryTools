@@ -1193,7 +1193,8 @@ Console logging prints less than all the other variants. Depending on the build 
     </message>
     <message>
         <location filename="mainwindow.ui" line="11476"/>
-        <source>CheckUpdate</source>
+        <source>Update Check</source>
+        <oldsource>CheckUpdate</oldsource>
         <translation>检查更新</translation>
     </message>
     <message>
@@ -4573,8 +4574,9 @@ BaseSkip</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="7292"/>
-        <source>It is currently the latest version!</source>
-        <translation>目前是最新版本！</translation>
+        <source>You are currently using the latest version!</source>
+        <oldsource>It is currently the latest version!</oldsource>
+        <translation>您目前使用的是最新版本！</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2434"/>
@@ -5007,8 +5009,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="dlgdatabase.ui" line="137"/>
-        <source>Upgrade download proxy settings</source>
-        <translation>升级下载代理设置</translation>
+        <source>Select the mirror server for upgrade download</source>
+        <oldsource>Upgrade download proxy settings</oldsource>
+        <translation>选择升级下载的镜像服务器</translation>
     </message>
     <message>
         <location filename="dlgdatabase.ui" line="155"/>
@@ -5087,8 +5090,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="dlgdatabase.ui" line="144"/>
-        <source>Web Access Proxy</source>
-        <translation>网页访问代理</translation>
+        <source>Select the mirror server for web access</source>
+        <oldsource>Web page access mirror server</oldsource>
+        <translation>选择网页访问的镜像服务器</translation>
     </message>
     <message>
         <location filename="dlgdatabase.ui" line="160"/>
