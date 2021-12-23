@@ -29,8 +29,6 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for OC that 
 
 * The BaseConfigs plugin package is provided and maintained by @5T33Z0. [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs) 
 
-* The OCAT pre-set function uses an open interface, so if you are interested in pre-setting entries such as ACPI patches, please help improve the contents of the PreSet.plist file and we look forward to hearing from you!
-
 ---
 
 ### How to configure a new EFI?
