@@ -50,22 +50,12 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for OC that 
 * Open two or more different profiles to compare or copy rows or paste rows between data tables (supports single or multiple selection).
 * ...
 
-### About the "Presets" feature
-* This is an open interface, The preset file is located in "Database/preset/PreSet.plist" (Open database directory" from the "Edit" menu), and you can edit it at any time using various Plist editors, just like you can edit Config.plist. It's simple, it's actually stripped from Config.plist.
-
 ### How does OCAT get OpenCore?
 * OCAT currently only gets OpenCore officially from OC, it comes from here: https://github.com/acidanthera/OpenCorePkg/actions which is the "OpenCore Factory" in the "Help" menu of OCAT. Other than that, OCAT does not get any files for OpenCore from any other source.
 * Please note: All raw materials used by OCAT come from official OpenCore sources, OCAT does not get any content from any third party, not now, not ever.
 
-### I can't download the Kext update Or is OCAT slow to automatically download updates?
-* It's simple, please select the appropriate web proxy in the "Misc" section of the "Database" screen to improve the download speed of GitHub.
-
 ### Why doesn't OCAT use an online approach to automatically obtain OC?
 * Because OC is only released in stable version almost once a month, and the OC update is inevitably accompanied by an OCAT update, when OCAT has enough time to put the OC into OCAT, there is absolutely no need to use the online fetching method.
-
-### Why not write a complete documentation for OCAT?
-* Because OCAT was designed to be simple and clear enough that users can use OCAT without almost any documentation.
-* Also, I can answer almost any question from users here at any time: https://github.com/ic005k/QtOpenCoreConfig/issues
 
 ---
 
