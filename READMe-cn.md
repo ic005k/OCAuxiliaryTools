@@ -29,8 +29,6 @@ OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用�
 
 * OCAT的功能提示采用的是开放式接口，如果您对枯燥的翻译有兴趣，请帮助完善toolTip.txt文件（数据库preset目录中）的内容，期待您的加入！文件地址：https://github.com/ic005k/QtOpenCoreConfig/blob/master/Database/preset/toolTip.txt
 
-* OCAT的预置功能采用的是开放式接口，如果您对ACPI补丁等条目的预置感兴趣，请帮助完善PreSet.plist文件的内容，期待您的加入！
-
 ---
 
 ### 如何配置一个全新的EFI？
@@ -50,22 +48,12 @@ OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用�
 * 打开两个或多个不同的配置文件，进行对比或数据表之间的复制行、粘贴行（支持单选或多选）。
 * ...
 
-### 关于“预置”功能
-* 这是一个开放性的接口，预置文件位于数据库目录下preset里面的PreSet.plist（通过“编辑”菜单的“打开数据库目录”），您可以随时采用各种Plist编辑器来编辑它，就像编辑Config.plist一样。很简单，它其实就是从Config.plist里面剥离出来的。
-
 ### OCAT获取OpenCore的途径？
 * OCAT目前只从OC官方获取OpenCore，它来自这里：https://github.com/acidanthera/OpenCorePkg/actions 也就是OCAT“帮助“菜单中的”OpenCore工厂“。除此之外，OCAT不从任何其它途径获取OpenCore的任何文件。
 * 请注意：OCAT使用的所有原材料，均来自OpenCore官方，OCAT不从任何第三方获取任何内容，现在不会，将来也不会。
 
-### 我无法下载Kext的升级或者自动更新OCAT时非常缓慢？
-* 很简单，请在“数据库”界面的“杂项”里面选择合适的网络代理，以提高GitHub的下载速度。
-
 ### OCAT为什么不自动在线获取OC？
 * 因为OC几乎是每月才发布一次稳定版，而且OC更新的时候必然会伴随着OCAT的更新，此时OCAT有足够的时间将OC放入OCAT中，完全没有必要采用在线获取的方式。
-
-### 为什么不为OCAT编写一个完整的文档？
-* 因为OCAT被设计得足够简单和清晰，用户几乎可以在没有任何文档的情况下使用OCAT。
-* 还有，我几乎可以随时在这里回答用户的任何问题：https://github.com/ic005k/QtOpenCoreConfig/issues
 
 ---
 
