@@ -68,7 +68,11 @@ jobs:
           chmod +x bin/release/${targetName}.app/Contents/MacOS/aria2c
           rm bin/release/${targetName}.app/Contents/MacOS/Database/mac/aria2c
           
-          macdeployqt bin/release/${targetName}.app -qmldir=. -verbose=1 -dmg
+          # macdeployqt bin/release/${targetName}.app -qmldir=. -verbose=1 -dmg
+          
+          cp -R -p -f bin/release/${targetName}.app ${targetName}.app
+          macdeployqt ${targetName}.app -qmldir=. -verbose=1 -dmg
+          cp ${targetName}.dmg bin/release/${targetName}.dmg 
           
       # 上传artifacts          
       - uses: actions/upload-artifact@v2
