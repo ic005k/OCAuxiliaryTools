@@ -4553,16 +4553,6 @@ BaseSkip</translation>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="6459"/>
-        <source>ctrl+1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="6464"/>
-        <source>ctrl+2</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="7070"/>
         <source>OK !</source>
         <translation>验证通过！</translation>
@@ -4978,14 +4968,14 @@ p, li { white-space: pre-wrap; }
         <translation>Kext名称</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="410"/>
-        <source>Url</source>
-        <translation>网址</translation>
-    </message>
-    <message>
         <location filename="dlgdatabase.ui" line="370"/>
         <source>+</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="dlgdatabase.ui" line="410"/>
+        <source>Source URL</source>
+        <translation>网址</translation>
     </message>
     <message>
         <location filename="dlgdatabase.ui" line="418"/>
@@ -4994,7 +4984,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="dlgdatabase.ui" line="425"/>
-        <source>Open Url</source>
+        <source>Open URL in browser</source>
+        <oldsource>Open Url</oldsource>
         <translation>打开网址</translation>
     </message>
     <message>

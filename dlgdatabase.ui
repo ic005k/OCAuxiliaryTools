@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
+    <width>791</width>
     <height>463</height>
    </rect>
   </property>
@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -407,7 +407,7 @@ p, li { white-space: pre-wrap; }
          </column>
          <column>
           <property name="text">
-           <string>Url</string>
+           <string>Source URL</string>
           </property>
          </column>
         </widget>
@@ -422,7 +422,7 @@ p, li { white-space: pre-wrap; }
        <item row="2" column="2">
         <widget class="QToolButton" name="btnOpenUrl">
          <property name="text">
-          <string>Open Url</string>
+          <string>Open URL in browser</string>
          </property>
         </widget>
        </item>
