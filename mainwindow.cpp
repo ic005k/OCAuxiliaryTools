@@ -6444,11 +6444,11 @@ void MainWindow::init_UndoRedo() {
   undoView->setAttribute(Qt::WA_QuitOnClose, false);
 
   undoAction = undoStack->createUndoAction(this, tr("Undo"));
-  // undoAction->setShortcuts(QKeySequence::Undo);
+  undoAction->setShortcuts(QKeySequence::Undo);
   if (mac || osx1012) undoAction->setIconVisibleInMenu(false);
 
   redoAction = undoStack->createRedoAction(this, tr("Redo"));
-  // redoAction->setShortcuts(QKeySequence::Redo);
+  redoAction->setShortcuts(QKeySequence::Redo);
   if (mac || osx1012) redoAction->setIconVisibleInMenu(false);
 
   ui->menuTools->addSeparator();
@@ -6456,12 +6456,12 @@ void MainWindow::init_UndoRedo() {
   ui->menuTools->addAction(redoAction);
 
   // Undo
-  undoAction->setShortcut(tr("ctrl+1"));
+  // undoAction->setShortcut(tr("ctrl+1"));
   undoAction->setIcon(QIcon(":/icon/undo.png"));
   ui->toolBar->addAction(undoAction);
 
   // Redo
-  redoAction->setShortcut(tr("ctrl+2"));
+  // redoAction->setShortcut(tr("ctrl+2"));
   redoAction->setIcon(QIcon(":/icon/redo.png"));
   ui->toolBar->addAction(redoAction);
 }
