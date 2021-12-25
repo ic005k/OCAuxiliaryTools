@@ -31,6 +31,13 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for OC that 
 
 ---
 
+### Special thanks to
+* @vit9696 for providing suggestions on OCAT functionality.
+* @5T33Z0 for providing and maintaining the OCAT plugin package.
+* @LucasMucGH for the native UI design based on the Mac version.
+
+---
+
 ### How to configure a new EFI?
 * The process is very simple, just click on "Database" on the toolbar, double click on the template file that matches your model in the database list (thanks to @5T33Z0 for providing and maintaining these files), an EFI folder will be automatically created on the desktop and the process is complete.
 
