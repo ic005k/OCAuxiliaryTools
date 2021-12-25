@@ -32,9 +32,9 @@ OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用�
 ---
 
 ### 特别感谢
-* @vit9696 提供OCAT功能上的建议。
-* @5T33Z0 提供和维护OCAT的插件包。
-* @LucasMucGH 基于Mac版本的原生UI设计。
+* [@vit9696](https://github.com/vit9696) 提供OCAT功能上的建议。
+* [@5T33Z0](https://github.com/5T33Z0) 提供和维护OCAT的插件包。
+* [@LucasMucGH](https://github.com/LucasMucGH) 基于Mac版本的原生UI设计。
 
 ---
 
