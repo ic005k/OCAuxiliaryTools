@@ -32,9 +32,9 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for OC that 
 ---
 
 ### Special thanks to
-* @vit9696 for providing suggestions on OCAT functionality.
-* @5T33Z0 for providing and maintaining the OCAT plugin package.
-* @LucasMucGH for the native UI design based on the Mac version.
+* [@vit9696](https://github.com/vit9696) for providing suggestions on OCAT functionality.
+* [@5T33Z0](https://github.com/5T33Z0) for providing and maintaining the OCAT plugin package.
+* [@LucasMucGH](https://github.com/LucasMucGH) for the native UI design based on the Mac version.
 
 ---
 
