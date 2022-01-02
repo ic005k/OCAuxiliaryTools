@@ -5,7 +5,7 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-QString CurVerison = "20220057";
+QString CurVerison = "20220058";
 QString ocVer = "0.7.6";
 QString ocVerDev = "0.7.7";
 QString ocFrom, ocFromDev;
@@ -19,7 +19,7 @@ aboutDialog::aboutDialog(QWidget* parent)
   ocFromDev =
       "<a "
       "href=\"https://github.com/acidanthera/OpenCorePkg/actions/runs/"
-      "1619237357/\">" +
+      "1645723778/\">" +
       tr("Source");
 
   ocFrom =
