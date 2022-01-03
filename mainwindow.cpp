@@ -6527,7 +6527,6 @@ void MainWindow::init_MainUI() {
   init_EditMenu();
   init_UndoRedo();
 
-  this->setUnifiedTitleAndToolBarOnMac(true);
   ui->frameToolBar->setHidden(true);
   ui->statusbar->setHidden(true);
   myDatabase->ui->chkHideToolbar->setChecked(

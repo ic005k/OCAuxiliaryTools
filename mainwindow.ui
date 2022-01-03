@@ -11243,7 +11243,7 @@ Enable this option to be able to see all the boot options when having multiple d
      <x>0</x>
      <y>0</y>
      <width>1484</width>
-     <height>24</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -11343,7 +11343,9 @@ QToolBar::separator {
     background-color: #222222;
 }*/
 
-/*QToolBar {border:none;background-color: rgb(212, 212, 212);}*/</string>
+/*QToolBar {border:none;background-color: rgb(212, 212, 212);}*/
+
+QToolBar {border:none;}</string>
    </property>
    <property name="movable">
     <bool>false</bool>

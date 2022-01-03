@@ -5,7 +5,7 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-QString CurVerison = "20220059";
+QString CurVerison = "20220060";
 QString ocVer = "0.7.6";
 QString ocVerDev = "0.7.7";
 QString ocFrom, ocFromDev;
