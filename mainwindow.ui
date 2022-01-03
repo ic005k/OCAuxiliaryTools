@@ -24,7 +24,7 @@
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_77">
+   <layout class="QGridLayout" name="gridLayout_26">
     <item row="0" column="0" colspan="2">
      <widget class="QFrame" name="frameToolBar">
       <property name="minimumSize">
@@ -94,6 +94,22 @@
       </layout>
      </widget>
     </item>
+    <item row="0" column="2" rowspan="5">
+     <widget class="QListWidget" name="listFind">
+      <property name="minimumSize">
+       <size>
+        <width>190</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0" rowspan="3">
      <widget class="QListWidget" name="listMain">
       <property name="maximumSize">
@@ -113,10 +129,10 @@
     <item row="1" column="1">
      <widget class="QFrame" name="frameTip">
       <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+       <enum>QFrame::NoFrame</enum>
       </property>
       <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
+       <enum>QFrame::Plain</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_64">
        <property name="topMargin">
@@ -186,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -208,7 +224,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -11152,7 +11168,7 @@ Enable this option to be able to see all the boot options when having multiple d
      </widget>
     </item>
     <item row="4" column="0" colspan="2">
-     <layout class="QGridLayout" name="gridLayout_66">
+     <layout class="QGridLayout" name="gridLayout_StatusBar">
       <item row="0" column="5">
        <widget class="QLineEdit" name="txtEditHex"/>
       </item>
@@ -11325,13 +11341,15 @@ Enable this option to be able to see all the boot options when having multiple d
 QToolBar::separator {
     width: 0px;
     background-color: #222222;
-}*/</string>
+}*/
+
+/*QToolBar {border:none;background-color: rgb(212, 212, 212);}*/</string>
    </property>
    <property name="movable">
     <bool>false</bool>
    </property>
    <property name="allowedAreas">
-    <set>Qt::BottomToolBarArea|Qt::TopToolBarArea</set>
+    <set>Qt::NoToolBarArea</set>
    </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonIconOnly</enum>
@@ -11345,36 +11363,6 @@ QToolBar::separator {
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-  </widget>
-  <widget class="QDockWidget" name="dockFind">
-   <property name="minimumSize">
-    <size>
-     <width>200</width>
-     <height>189</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>200</width>
-     <height>524287</height>
-    </size>
-   </property>
-   <property name="allowedAreas">
-    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
-   </property>
-   <property name="windowTitle">
-    <string>Search results</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>2</number>
-   </attribute>
-   <widget class="QWidget" name="dockWidgetContents">
-    <layout class="QGridLayout" name="gridLayout_26">
-     <item row="0" column="0">
-      <widget class="QListWidget" name="listFind"/>
-     </item>
-    </layout>
-   </widget>
   </widget>
   <action name="actionOpen">
    <property name="text">

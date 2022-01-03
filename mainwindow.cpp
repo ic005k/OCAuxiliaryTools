@@ -6545,11 +6545,6 @@ void MainWindow::init_MainUI() {
   init_HelpMenu();
 
   // Search
-  QWidget* lTitleBar = ui->dockFind->titleBarWidget();
-  QWidget* lEmptyWidget = new QWidget();
-  ui->dockFind->setTitleBarWidget(lEmptyWidget);
-  delete lTitleBar;
-
   ui->cboxFind->lineEdit()->setClearButtonEnabled(false);
   ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
   connect(ui->cboxFind->lineEdit(), &QLineEdit::returnPressed, this,
@@ -6624,8 +6619,7 @@ void MainWindow::init_MainUI() {
   else
     clearTextsAction->setEnabled(false);
 
-  ui->dockWidgetContents->layout()->setMargin(1);
-  ui->dockFind->close();
+  ui->listFind->setHidden(true);
 
   if (mac || osx1012) ui->actionFind->setIconVisibleInMenu(false);
   ui->actionFind->setShortcut(tr("ctrl+f"));
@@ -8334,7 +8328,7 @@ void MainWindow::on_actionFind_triggered() {
   ui->lblCount->setText(QString::number(findCount));
 
   if (listNameResults.count() > 0) {
-    ui->dockFind->show();
+    ui->listFind->setHidden(false);
 
     ui->listFind->setCurrentRow(0);
 
@@ -8895,7 +8889,7 @@ void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1) {
   if (arg1.trimmed() == "") {
     ui->lblCount->setText("0");
     listNameResults.clear();
-    ui->dockFind->setHidden(true);
+    ui->listFind->setHidden(true);
 
     loading = true;
     ui->listFind->clear();
