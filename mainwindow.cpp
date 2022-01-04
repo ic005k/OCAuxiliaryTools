@@ -2483,9 +2483,29 @@ void MainWindow::ParserUEFI(QVariantMap map) {
   if (ui->editIntPointerSpeedMul->text() == "")
     ui->editIntPointerSpeedMul->setText("1");
 
+  if (!ui->editIntPointerPollMax->isHidden()) {
+    if (ui->editIntPointerPollMax->text().trimmed() == "")
+      ui->editIntPointerPollMax->setText("80");
+  }
+
+  if (!ui->editIntPointerPollMin->isHidden()) {
+    if (ui->editIntPointerPollMin->text().trimmed() == "")
+      ui->editIntPointerPollMin->setText("10");
+  }
+
+  if (!ui->editIntPointerPollMask->isHidden()) {
+    if (ui->editIntPointerPollMask->text().trimmed() == "")
+      ui->editIntPointerPollMask->setText("-1");
+  }
+
   // 3. Audio
   QVariantMap map_audio = map["Audio"].toMap();
   getValue(map_audio, ui->tabUEFI3);
+
+  if (!ui->editIntAudioOutMask->isHidden()) {
+    if (ui->editIntAudioOutMask->text().trimmed() == "")
+      ui->editIntAudioOutMask->setText("15");
+  }
 
   // 4. Drivers
   QVariantList map_Drivers = map["Drivers"].toList();  //数组

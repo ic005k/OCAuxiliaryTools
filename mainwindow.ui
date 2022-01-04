@@ -11269,11 +11269,7 @@ Enable this option to be able to see all the boot options when having multiple d
        </spacer>
       </item>
       <item row="0" column="1">
-       <widget class="QLabel" name="lblOCVTip">
-        <property name="text">
-         <string>OCVTip</string>
-        </property>
-       </widget>
+       <widget class="QLabel" name="lblOCVTip"/>
       </item>
      </layout>
     </item>
