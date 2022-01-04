@@ -226,7 +226,52 @@ May be required on some systems (e.g. Apple hardware, VMware Fusion guest) to al
 在某些系统上可能需要这样做（例如苹果硬件、VMware Fusion guest），以允许UEFI声音驱动（例如AudioDxe）控制音频硬件。
 
 
+***PointerPollMin
+Type: plist integer
+Failsafe: 0
+Description: Configure minimal pointer polling period in ms.
+This is the minimal period the OpenCore builtin AppleEvent driver polls pointer devices (e.g. mice, trackpads) for motion events. The current implementation defaults to 10 ms. Setting 0 leaves this default unchanged.
+Note: The OEM Apple implementation uses a polling rate of 2 ms.
+----
+类型：plist整数
+失败保护：0
+描述：配置最小的指针轮询周期（ms）。
+这是OpenCore内置的AppleEvent驱动程序对指针设备（例如鼠标、触控板）进行运动事件轮询的最小周期。目前的实施方法默认为10毫秒。设置为0将使这一默认值保持不变。
+注意：OEM苹果公司的实现使用2毫秒的轮询率。
 
 
+***PointerPollMax
+Type: plist integer
+Failsafe: 0
+Description: Configure maximum pointer polling period in ms.
+This is the maximum period the OpenCore builtin AppleEvent driver polls pointer devices (e.g. mice, trackpads) for motion events. The period is increased up to this value as long as the devices do not respond in time. The current implementation defaults to 80 ms. Setting 0 leaves this default unchanged.
+Certain trackpad drivers often found in Dell laptops can be very slow to respond when no physical movement happens. This can affect OpenCanopy and FileVault 2 user interface responsiveness and loading times. Increasing the polling periods can reduce the impact.
+Note: The OEM Apple implementation uses a polling rate of 2 ms.
+----
+类型：plist整数
+失败保护：0
+描述：配置最大的指针轮询周期，单位是ms。
+这是OpenCore内置的AppleEvent驱动程序对指针设备（如鼠标、触控板）进行运动事件轮询的最长时间。只要设备没有及时响应，该周期就会增加到这个值。目前的实现默认为80ms。设置为0会使这个默认值保持不变。
+戴尔笔记本电脑中经常发现的某些触控板驱动程序在没有物理运动发生时可能反应非常慢。这可能会影响OpenCanopy和FileVault 2用户界面的响应能力和加载时间。增加轮询周期可以减少影响。
+注意：OEM苹果公司的实现使用2毫秒的轮询率。
 
+
+***PointerPollMask
+Type: plist integer, 32 bit
+Failsafe: -1
+Description: Configure indices of polled pointers.
+Selects pointer devices to poll for AppleEvent motion events. -1 implies all devices. A bit sum is used to determine particular devices. E.g. to enable devices 0, 2, 3 the value will be 1+4+8 (corresponding powers of two). A total of 32 configurable devices is supported.
+Certain pointer devices can be present in the firmware even when no corresponding physical devices are available.
+These devices usually are placeholders, aggregate devices, or proxies. Gathering information from these devices may result in inaccurate motion activity in the user interfaces and even cause performance issues. Disabling such pointer devices is recommended for laptop setups having issues of this kind.
+The amount of pointer devices available in the system can be found in the log. Refer to Found N pointer devices message for more details.
+Note: Has no effect when using the OEM Apple implementation (see AppleEvent setting).
+----
+类型：plist整数，32位
+失控保护：-1
+描述：配置被轮询的指针的索引。
+选择要轮询AppleEvent运动事件的指针设备。-1意味着所有设备。用一个比特的总和来确定特定的设备。例如，要启用设备0、2、3，其值将是1+4+8（相应的2的幂）。总共支持32个可配置的设备。
+即使没有相应的物理设备，某些指针设备也可以出现在固件中。
+这些设备通常是占位符、聚合设备或代理。从这些设备中收集信息可能导致用户界面中的运动活动不准确，甚至导致性能问题。对于有这种问题的笔记本设置，建议禁用这种指针设备。
+系统中可用的指针设备的数量可以在日志中找到。更多细节请参考发现N个指针设备信息。
+注意：当使用OEM的苹果实现时没有效果（见AppleEvent设置）。
 
