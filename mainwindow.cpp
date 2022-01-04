@@ -2483,29 +2483,9 @@ void MainWindow::ParserUEFI(QVariantMap map) {
   if (ui->editIntPointerSpeedMul->text() == "")
     ui->editIntPointerSpeedMul->setText("1");
 
-  if (!ui->editIntPointerPollMax->isHidden()) {
-    if (ui->editIntPointerPollMax->text().trimmed() == "")
-      ui->editIntPointerPollMax->setText("80");
-  }
-
-  if (!ui->editIntPointerPollMin->isHidden()) {
-    if (ui->editIntPointerPollMin->text().trimmed() == "")
-      ui->editIntPointerPollMin->setText("10");
-  }
-
-  if (!ui->editIntPointerPollMask->isHidden()) {
-    if (ui->editIntPointerPollMask->text().trimmed() == "")
-      ui->editIntPointerPollMask->setText("-1");
-  }
-
   // 3. Audio
   QVariantMap map_audio = map["Audio"].toMap();
   getValue(map_audio, ui->tabUEFI3);
-
-  if (!ui->editIntAudioOutMask->isHidden()) {
-    if (ui->editIntAudioOutMask->text().trimmed() == "")
-      ui->editIntAudioOutMask->setText("15");
-  }
 
   // 4. Drivers
   QVariantList map_Drivers = map["Drivers"].toList();  //数组
@@ -10037,10 +10017,12 @@ void MainWindow::getEditValue(QVariantMap map, QWidget* tab) {
         else
           w->setText(ByteToHexStr(map[name].toByteArray()));  // 为data类型
       } else {
-        if (strList.count() > 0)
-          w->setText(map[strList.at(0)].toString());
-        else {
-          w->setText(map[name].toString());
+        if (strList.count() > 0) {
+          QString t0 = map[strList.at(0)].toString();
+          if (t0.length() > 0) w->setText(t0);
+        } else {
+          QString t1 = map[name].toString();
+          if (t1.length() > 0) w->setText(t1);
         }
       }
     }
