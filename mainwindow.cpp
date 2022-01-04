@@ -7022,14 +7022,14 @@ void MainWindow::on_table_nv_del_cellClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
 
-  ui->statusbar->showMessage(ui->table_nv_del->currentItem()->text());
+  setStatusBarText(ui->table_nv_del);
 }
 
 void MainWindow::on_table_nv_ls_cellClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
 
-  ui->statusbar->showMessage(ui->table_nv_ls->currentItem()->text());
+  setStatusBarText(ui->table_nv_ls);
 }
 
 void MainWindow::on_tableDevices_cellClicked(int row, int column) {
@@ -10842,6 +10842,8 @@ void MainWindow::on_txtEditASCII_textChanged(const QString& arg1) {
 }
 
 void MainWindow::on_listSub_currentRowChanged(int currentRow) {
+  ui->lblStatusShow->setText("V" + CurVerison);
+
   if (find) {
     return;
   }
