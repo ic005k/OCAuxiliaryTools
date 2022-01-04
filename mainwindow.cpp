@@ -9598,9 +9598,8 @@ void MainWindow::init_CopyPasteLine() {
         w != ui->btnExposeSensitiveData && w != ui->btnScanPolicy &&
         w != ui->btnUpdateHex && w != ui->btnUp && w != ui->btnDown) {
       if (w->text().trimmed().length() == 1 || w->text().trimmed() == "...") {
-        w->setHidden(false);
-      } else
-        w->setHidden(true);
+      } else {
+      }
     }
   }
 
