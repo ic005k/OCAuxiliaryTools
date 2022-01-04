@@ -34,6 +34,14 @@ void MainWindow::changeOpenCore(bool blDEV) {
     ui->editIntAudioOutMask->setHidden(false);
     ui->lblAudioOutMask->setHidden(false);
 
+    // AppleInput
+    ui->lblPointerPollMask->setHidden(false);
+    ui->lblPointerPollMax->setHidden(false);
+    ui->lblPointerPollMin->setHidden(false);
+    ui->editIntPointerPollMask->setHidden(false);
+    ui->editIntPointerPollMax->setHidden(false);
+    ui->editIntPointerPollMin->setHidden(false);
+
     // Delete
     ui->editIntAudioOut->setHidden(true);
     ui->lblAudioOut->setHidden(true);
@@ -41,6 +49,14 @@ void MainWindow::changeOpenCore(bool blDEV) {
     ui->chkDisconnectHda->setHidden(true);
     ui->editIntAudioOutMask->setHidden(true);
     ui->lblAudioOutMask->setHidden(true);
+
+    // AppleInput
+    ui->lblPointerPollMask->setHidden(true);
+    ui->lblPointerPollMax->setHidden(true);
+    ui->lblPointerPollMin->setHidden(true);
+    ui->editIntPointerPollMask->setHidden(true);
+    ui->editIntPointerPollMax->setHidden(true);
+    ui->editIntPointerPollMin->setHidden(true);
 
     ui->editIntAudioOut->setHidden(false);
     ui->lblAudioOut->setHidden(false);

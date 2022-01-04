@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -8442,7 +8442,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -8643,14 +8643,72 @@ An APFS EFI driver is bundled in all bootable APFS containers. This option perfo
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
              <layout class="QGridLayout" name="gridLayout_24">
-              <item row="5" column="1">
+              <item row="8" column="1">
                <widget class="QLineEdit" name="editIntPointerSpeedDiv">
                 <property name="text">
                  <string>1</string>
                 </property>
                </widget>
               </item>
-              <item row="5" column="0">
+              <item row="9" column="0">
+               <widget class="QLabel" name="label_117">
+                <property name="toolTip">
+                 <string notr="true">Type: plist integer
+
+Description: Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol.
+
+Configures the multiplier for pointer movements. The Apple OEM default value is 1.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现的Apple Event协议中配置指针速度乘数。
+
+配置指针移动的乘数。Apple OEM的默认值是1。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol. Has no
+ effect when using the OEM Apple implementation (see AppleEvent setting).</string>
+                </property>
+                <property name="text">
+                 <string notr="true">PointerSpeedMul</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="cboxAppleEvent">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+                <property name="currentText">
+                 <string notr="true">Auto</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string notr="true">Auto</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string notr="true">Builtin</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string notr="true">OEM</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="editIntKeySubsequentDelay">
+                <property name="text">
+                 <string>5</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
                <widget class="QLabel" name="label_112">
                 <property name="toolTip">
                  <string notr="true">Type: plist integer
@@ -8713,10 +8771,51 @@ This option determines whether Apple’s OEM Apple Event protocol is used (where
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
-               <widget class="QLineEdit" name="editIntKeyInitialDelay">
+              <item row="6" column="0">
+               <widget class="QLabel" name="lblPointerPollMax">
                 <property name="text">
-                 <string>0</string>
+                 <string>PointerPollMax</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="0">
+               <widget class="QCheckBox" name="chkGraphicsInputMirroring">
+                <property name="toolTip">
+                 <string>Type: plist boolean
+
+Description: Apple’s own implementation of AppleEvent prevents keyboard input during graphics applications from appearing on the basic console input stream.
+
+With the default setting of false, OC’s builtin implementation of AppleEvent replicates this behaviour.
+On non-Apple hardware this can stop keyboard input working in graphics-based applications such as Windows BitLocker which use non-Apple key input methods.
+The recommended setting on all hardware is true.
+
+Note: AppleEvent’s default behaviour is intended to prevent unwanted queued keystrokes from appearing after exiting graphics-based UEFI applications; this issue is already handled separately within OpenCore.
+
+• true — Allow keyboard input to reach graphics mode apps which are not using Apple input protocols.
+• false — Prevent key input mirroring to non-Apple protocols when in graphics mode.
+----
+类型：plist布尔值
+
+描述：苹果公司自己实现的AppleEvent防止图形应用程序中的键盘输入出现在基本控制台输入流中。
+
+默认设置为false，OC对AppleEvent的内置实现复制了这种行为。
+在非苹果硬件上，这可能会阻止键盘输入在基于图形的应用程序中工作，如使用非苹果按键输入方法的Windows BitLocker。
+在所有硬件上的推荐设置是true。
+
+注意：AppleEvent的默认行为旨在防止退出基于图形的UEFI应用程序后出现不需要的排队按键；这个问题已经在OpenCore中单独处理。
+
+- true - 允许键盘输入到达不使用苹果输入协议的图形模式应用程序。
+- false - 防止在图形模式下将按键输入镜像到非苹果协议。</string>
+                </property>
+                <property name="text">
+                 <string>GraphicsInputMirroring</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="lblPointerPollMask">
+                <property name="text">
+                 <string>PointerPollMask</string>
                 </property>
                </widget>
               </item>
@@ -8748,6 +8847,13 @@ When using KeySupport, you may find that you get one additional slow key repeat 
                 </property>
                </widget>
               </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="editIntKeyInitialDelay">
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
               <item row="3" column="0">
                <widget class="QLabel" name="label_116">
                 <property name="toolTip">
@@ -8776,69 +8882,11 @@ When using KeySupport, you may find that you get one additional slow key repeat 
                 </property>
                </widget>
               </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="label_117">
-                <property name="toolTip">
-                 <string notr="true">Type: plist integer
-
-Description: Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol.
-
-Configures the multiplier for pointer movements. The Apple OEM default value is 1.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现的Apple Event协议中配置指针速度乘数。
-
-配置指针移动的乘数。Apple OEM的默认值是1。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol. Has no
- effect when using the OEM Apple implementation (see AppleEvent setting).</string>
-                </property>
-                <property name="text">
-                 <string notr="true">PointerSpeedMul</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QLineEdit" name="editIntKeySubsequentDelay">
-                <property name="text">
-                 <string>5</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="1">
+              <item row="9" column="1">
                <widget class="QLineEdit" name="editIntPointerSpeedMul">
                 <property name="text">
                  <string>1</string>
                 </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QComboBox" name="cboxAppleEvent">
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-                <property name="currentText">
-                 <string notr="true">Auto</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string notr="true">Auto</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Builtin</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">OEM</string>
-                 </property>
-                </item>
                </widget>
               </item>
               <item row="1" column="0">
@@ -8870,36 +8918,30 @@ Description: Enable custom key repeat delays when using the OpenCore implementat
                </widget>
               </item>
               <item row="7" column="0">
-               <widget class="QCheckBox" name="chkGraphicsInputMirroring">
-                <property name="toolTip">
-                 <string>Type: plist boolean
-
-Description: Apple’s own implementation of AppleEvent prevents keyboard input during graphics applications from appearing on the basic console input stream.
-
-With the default setting of false, OC’s builtin implementation of AppleEvent replicates this behaviour.
-On non-Apple hardware this can stop keyboard input working in graphics-based applications such as Windows BitLocker which use non-Apple key input methods.
-The recommended setting on all hardware is true.
-
-Note: AppleEvent’s default behaviour is intended to prevent unwanted queued keystrokes from appearing after exiting graphics-based UEFI applications; this issue is already handled separately within OpenCore.
-
-• true — Allow keyboard input to reach graphics mode apps which are not using Apple input protocols.
-• false — Prevent key input mirroring to non-Apple protocols when in graphics mode.
-----
-类型：plist布尔值
-
-描述：苹果公司自己实现的AppleEvent防止图形应用程序中的键盘输入出现在基本控制台输入流中。
-
-默认设置为false，OC对AppleEvent的内置实现复制了这种行为。
-在非苹果硬件上，这可能会阻止键盘输入在基于图形的应用程序中工作，如使用非苹果按键输入方法的Windows BitLocker。
-在所有硬件上的推荐设置是true。
-
-注意：AppleEvent的默认行为旨在防止退出基于图形的UEFI应用程序后出现不需要的排队按键；这个问题已经在OpenCore中单独处理。
-
-- true - 允许键盘输入到达不使用苹果输入协议的图形模式应用程序。
-- false - 防止在图形模式下将按键输入镜像到非苹果协议。</string>
-                </property>
+               <widget class="QLabel" name="lblPointerPollMin">
                 <property name="text">
-                 <string>GraphicsInputMirroring</string>
+                 <string>PointerPollMin</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="editIntPointerPollMask">
+                <property name="text">
+                 <string>-1</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QLineEdit" name="editIntPointerPollMax">
+                <property name="text">
+                 <string>80</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QLineEdit" name="editIntPointerPollMin">
+                <property name="text">
+                 <string>10</string>
                 </property>
                </widget>
               </item>
@@ -11243,7 +11285,7 @@ Enable this option to be able to see all the boot options when having multiple d
      <x>0</x>
      <y>0</y>
      <width>1484</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
