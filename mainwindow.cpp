@@ -361,6 +361,7 @@ void MainWindow::openFile(QString PlistFileName) {
 
   this->setWindowModified(false);
   updateIconStatus();
+  ui->lblStatusShow->setText("V" + CurVerison);
 }
 
 bool MainWindow::IsProcessExist(QString processName) {
