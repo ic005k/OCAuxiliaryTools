@@ -24,7 +24,8 @@ Method* mymethod;
 QVector<QCheckBox*> chkDisplayLevel, chk_ScanPolicy, chk_PickerAttributes,
     chk_ExposeSensitiveData, chk_Target;
 
-extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev;
+extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
+    strOCFromDev;
 extern bool blDEV;
 extern QString strACPI, strKexts, strDrivers, strTools;
 
@@ -6276,6 +6277,7 @@ void MainWindow::init_FileMenu() {
   ui->actionOpen->setShortcut(tr("ctrl+o"));
 
   lblVer = new QLabel(this);
+  lblVer->installEventFilter(this);
   QFont font;
   font.setBold(true);
   lblVer->setFont(font);
@@ -6339,8 +6341,8 @@ void MainWindow::init_FileMenu() {
 void MainWindow::init_EditMenu() {
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QSettings Reg(qfile, QSettings::IniFormat);
-  ui->actionPlist_editor->setVisible(false);
-  ui->actionDSDT_SSDT_editor->setVisible(false);
+  ui->actionPlist_editor->setVisible(true);
+  ui->actionDSDT_SSDT_editor->setVisible(true);
 
   // Edit
   // OC Validate
@@ -9938,8 +9940,31 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
       return true;  //不让事件继续传播
     } else if (event->type() == QEvent::MouseMove) {
     }
+  }
 
-    return false;
+  if (obj == lblVer) {
+    if (event->type() == QEvent::MouseButtonPress)  // mouse button pressed
+    {
+      QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+      if (mouseEvent->button() == Qt::LeftButton) {
+        if (blDEV) {
+          QUrl url(strOCFromDev);
+          QDesktopServices::openUrl(url);
+        } else {
+          QUrl url(strOCFrom);
+          QDesktopServices::openUrl(url);
+        }
+
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  } else {
+    // pass the event on to the parent class
+    return QMainWindow::eventFilter(obj, event);
   }
 
   return MainWindow::eventFilter(obj, event);
@@ -10712,12 +10737,13 @@ void MainWindow::on_btnExposeSensitiveData_clicked() {
 }
 
 void MainWindow::on_actionPlist_editor_triggered() {
-  QUrl url(QString("https://github.com/ic005k/PlistEDPlus"));
+  QUrl url(
+      QString("https://github.com/ic005k/PlistEDPlus/blob/main/README.md"));
   QDesktopServices::openUrl(url);
 }
 
 void MainWindow::on_actionDSDT_SSDT_editor_triggered() {
-  QUrl url(QString("https://github.com/ic005k/QtiASL"));
+  QUrl url(QString("https://github.com/ic005k/QtiASL/blob/master/README.md"));
   QDesktopServices::openUrl(url);
 }
 

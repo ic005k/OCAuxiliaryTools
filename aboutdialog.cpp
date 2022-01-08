@@ -5,32 +5,28 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-QString CurVerison = "20220066";
+QString CurVerison = "20220067";
 QString ocVer = "0.7.6";
 QString ocVerDev = "0.7.7";
-QString ocFrom, ocFromDev;
+QString ocFrom, ocFromDev, strOCFrom, strOCFromDev;
 bool blDEV = false;
 
 aboutDialog::aboutDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::aboutDialog) {
   ui->setupUi(this);
-  ocVerDev = ocVerDev + " [" + tr("DEV") + "]";
 
-  ocFromDev =
-      "<a "
-      "href=\"https://github.com/acidanthera/OpenCorePkg/actions/runs/"
-      "1651473118/\">" +
-      tr("Source");
-
-  ocFrom =
-      "<a "
-      "href=\"https://github.com/acidanthera/OpenCorePkg/releases/latest/\">" +
-      tr("Source");
+  strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/tag/0.7.6";
+  strOCFromDev =
+      "https://github.com/acidanthera/OpenCorePkg/actions/runs/1668610115/";
 
   setMaximumWidth(this->width());
   setMaximumHeight(this->height());
   setMinimumWidth(this->width());
   setMinimumHeight(this->height());
+
+  ocVerDev = ocVerDev + " [" + tr("DEV") + "]";
+  ocFromDev = "<a href=\"" + strOCFromDev + "\"" + "> " + tr(" Source ");
+  ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
 
   ui->label->setFixedHeight(85);
   ui->label->setFixedWidth(85);

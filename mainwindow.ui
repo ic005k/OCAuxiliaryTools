@@ -9046,7 +9046,7 @@ OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出
               <item row="14" column="2">
                <widget class="QLineEdit" name="editIntAudioOutMask">
                 <property name="text">
-                 <string>15</string>
+                 <string>1</string>
                 </property>
                </widget>
               </item>
@@ -11463,7 +11463,7 @@ QToolBar {border:none;}</string>
   </action>
   <action name="actionDSDT_SSDT_editor">
    <property name="text">
-    <string>QtiASL</string>
+    <string>Xiasl</string>
    </property>
   </action>
   <action name="actionOpenCanopyIcons">
