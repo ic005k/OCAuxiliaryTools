@@ -31,36 +31,7 @@ extern QString strACPI, strKexts, strDrivers, strTools;
 
 void MainWindow::changeOpenCore(bool blDEV) {
   if (blDEV) {
-    ui->chkDisconnectHda->setHidden(false);
-    ui->editIntAudioOutMask->setHidden(false);
-    ui->lblAudioOutMask->setHidden(false);
-
-    // AppleInput
-    ui->lblPointerPollMask->setHidden(false);
-    ui->lblPointerPollMax->setHidden(false);
-    ui->lblPointerPollMin->setHidden(false);
-    ui->editIntPointerPollMask->setHidden(false);
-    ui->editIntPointerPollMax->setHidden(false);
-    ui->editIntPointerPollMin->setHidden(false);
-
-    // Delete
-    ui->editIntAudioOut->setHidden(true);
-    ui->lblAudioOut->setHidden(true);
   } else {
-    ui->chkDisconnectHda->setHidden(true);
-    ui->editIntAudioOutMask->setHidden(true);
-    ui->lblAudioOutMask->setHidden(true);
-
-    // AppleInput
-    ui->lblPointerPollMask->setHidden(true);
-    ui->lblPointerPollMax->setHidden(true);
-    ui->lblPointerPollMin->setHidden(true);
-    ui->editIntPointerPollMask->setHidden(true);
-    ui->editIntPointerPollMax->setHidden(true);
-    ui->editIntPointerPollMin->setHidden(true);
-
-    ui->editIntAudioOut->setHidden(false);
-    ui->lblAudioOut->setHidden(false);
   }
 
   QFileInfo appInfo(qApp->applicationDirPath());
@@ -4656,9 +4627,9 @@ void MainWindow::on_table_nv_add_cellClicked(int row, int column) {
     if (ui->table_nv_add->item(row, 0)->text().trimmed() ==
         "SystemAudioVolume") {
       if (column == 0 || column == 2) {
-        QToolTip::showText(
-            QCursor::pos(),
-            "MinimumVolume: " + ui->editIntMinimumVolume->text().trimmed());
+        // QToolTip::showText(
+        //    QCursor::pos(),
+        //"MinimumVolume: " + ui->editIntMinimumVolume->text().trimmed());
       }
     }
   }

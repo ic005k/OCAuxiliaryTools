@@ -5,9 +5,9 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-QString CurVerison = "20220067";
-QString ocVer = "0.7.6";
-QString ocVerDev = "0.7.7";
+QString CurVerison = "20220068";
+QString ocVer = "0.7.7";
+QString ocVerDev = "0.7.8";
 QString ocFrom, ocFromDev, strOCFrom, strOCFromDev;
 bool blDEV = false;
 
@@ -15,9 +15,9 @@ aboutDialog::aboutDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::aboutDialog) {
   ui->setupUi(this);
 
-  strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/tag/0.7.6";
+  strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/tag/0.7.7";
   strOCFromDev =
-      "https://github.com/acidanthera/OpenCorePkg/actions/runs/1668610115/";
+      "https://github.com/acidanthera/OpenCorePkg/actions/runs/1680233385/";
 
   setMaximumWidth(this->width());
   setMaximumHeight(this->height());
