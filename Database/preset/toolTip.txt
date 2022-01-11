@@ -267,11 +267,68 @@ The amount of pointer devices available in the system can be found in the log. R
 Note: Has no effect when using the OEM Apple implementation (see AppleEvent setting).
 ----
 类型：plist整数，32位
-失控保护：-1
+失效保护：-1
 描述：配置被轮询的指针的索引。
 选择要轮询AppleEvent运动事件的指针设备。-1意味着所有设备。用一个比特的总和来确定特定的设备。例如，要启用设备0、2、3，其值将是1+4+8（相应的2的幂）。总共支持32个可配置的设备。
 即使没有相应的物理设备，某些指针设备也可以出现在固件中。
 这些设备通常是占位符、聚合设备或代理。从这些设备中收集信息可能导致用户界面中的运动活动不准确，甚至导致性能问题。对于有这种问题的笔记本设置，建议禁用这种指针设备。
 系统中可用的指针设备的数量可以在日志中找到。更多细节请参考发现N个指针设备信息。
 注意：当使用OEM的苹果实现时没有效果（见AppleEvent设置）。
+
+
+***MaximumGain
+Type: plist integer
+Failsafe: -15
+Description: Maximum gain to use for UEFI audio, specified in decibels (dB) with respect to amplifier reference level of 0 dB (see note 1).
+All UEFI audio will use this gain setting when the system amplifier gain read from the SystemAudioVolumeDB NVRAM variable is higher than this. This is to avoid over-loud UEFI audio when the system volume is set very high, or the SystemAudioVolumeDB NVRAM value has been misconfigured.
+Note 1 : Decibels (dB) specify gain (postive values; increase in volume) or attenuation (negative values; decrease in volume) compared to some reference level. When you hear the sound level of a jet plane expressed as 120 decibels, say, the reference level is the sound level just audible to an average human. However generally in acoustic
+science and computer audio any reference level can be specified. Intel HDA and macOS natively use decibels to specify volume level. On most Intel HDA hardware the reference level of 0 dB is the loudest volume of the hardware, and all lower volumes are therefore negative numbers. The quietest volume on typical sound hardware
+is around -55 dB to -60 dB.
+Note 2 : Matching how macOS handles decibel values, this value is converted to a signed byte; therefore values outside e 128 dB to +127 dB (which are well beyond physically plausible volume levels) are not allowed.
+Note 3 : Digital audio output – which does not have a volume slider in-OS – ignores this and all other gain settings, only mute settings are relevant.
+----
+类型：plist整数
+失效保护：-15
+描述：用于UEFI音频的最大增益，以分贝（dB）为单位，相对于放大器的参考电平0dB（见注1）。
+当从SystemAudioVolumeDB NVRAM变量中读取的系统放大器增益高于此值时，所有UEFI音频将使用此增益设置。这是为了避免在系统音量设置得很高，或者SystemAudioVolumeDB NVRAM值被错误配置时，UEFI音频过大。
+注1：分贝（dB）是指与某些参考水平相比的增益（正值；音量增加）或衰减（负值；音量减少）。当你听到喷气式飞机的声级表示为120分贝时，例如，参考水平是普通人可以听到的声级。然而，通常在声学
+科学和计算机音频中，任何参考电平都可以被指定。英特尔HDA和macOS原生使用分贝来指定音量级别。在大多数英特尔HDA硬件上，0分贝的参考电平是硬件的最大声量，因此所有更低的音量是负数。典型的声音硬件上最安静的音量
+是-55dB到-60dB左右。
+注2：与macOS处理分贝值的方式一致，这个值被转换为有符号的字节；因此不允许有128分贝到+127分贝以外的值（这些值远远超出了物理上合理的音量水平）。
+注3：数字音频输出--在操作系统中没有音量滑块--忽略这个和所有其他增益设置，只有静音设置是相关的。
+
+
+
+***MinimumAssistGain
+Type: plist integer
+Failsafe: -30
+Description: Minimum gain in decibels (dB) to use for picker audio assist.
+The screen reader will use this amplifier gain if the system amplifier gain read from the SystemAudioVolumeDB NVRAM variable is lower than this.
+Note 1 : In addition to this setting, because audio assist must be audible to serve its function, audio assist is not muted even if the OS sound is muted or the StartupMute NVRAM variable is set.
+Note 2 : See MaximumGain for an explanation of decibel volume levels.
+----
+类型：plist整数
+失效保护：-30
+描述：用于拾音器音频辅助的最小增益，单位是分贝（dB）。
+如果从SystemAudioVolumeDB NVRAM变量中读取的系统放大器增益低于此值，那么屏幕阅读器将使用此放大器增益。
+注1 : 除了这个设置外，因为音频辅助必须是可听的才能发挥其功能，所以即使操作系统的声音是静音的或StartupMute NVRAM变量被设置，音频辅助也不会被静音。
+注2：关于分贝音量级别的解释，请看MaximumGain。
+
+
+***MinimumAudibleGain
+Type: plist integer
+Failsafe: -128
+Description: Minimum gain in decibels (dB) at which to attempt to play any sound.
+The boot chime will not play if the system amplifier gain level in the SystemAudioVolumeDB NVRAM variable is lower than this.
+Note 1 : This setting is designed to save unecessary pauses due to audio setup at inaudible volume levels, when no sound will be heard anyway. Whether there are inaudible volume levels depends on the hardware. On some hardware (including Apple) the audio values are well enough matched to the hardware that the lowest volume
+levels available are very quiet but audible, whereas on some other hardware combinations, the lowest part of the volume range may not be audible at all.
+Note 2 : See MaximumGain for an explanation of decibel volume levels.
+----
+类型：plist整数
+失效保护：-128
+描述：尝试播放任何声音的最小增益，单位是分贝（dB）。
+如果SystemAudioVolumeDB NVRAM变量中的系统放大器增益水平低于此值，则不会播放开机鸣响。
+注1：这个设置是为了避免在听不见的音量水平上进行音频设置而导致的不必要的停顿，因为无论如何都不会听到声音。是否有听不见的音量水平取决于硬件。在一些硬件上（包括苹果），音频值与硬件匹配得很好，最低的音量
+而在其他一些硬件组合上，音量范围的最低部分可能根本就听不到。
+注2：请看MaximumGain对分贝音量级别的解释。
 
