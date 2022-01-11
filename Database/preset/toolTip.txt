@@ -281,9 +281,7 @@ Type: plist integer
 Failsafe: -15
 Description: Maximum gain to use for UEFI audio, specified in decibels (dB) with respect to amplifier reference level of 0 dB (see note 1).
 All UEFI audio will use this gain setting when the system amplifier gain read from the SystemAudioVolumeDB NVRAM variable is higher than this. This is to avoid over-loud UEFI audio when the system volume is set very high, or the SystemAudioVolumeDB NVRAM value has been misconfigured.
-Note 1 : Decibels (dB) specify gain (postive values; increase in volume) or attenuation (negative values; decrease in volume) compared to some reference level. When you hear the sound level of a jet plane expressed as 120 decibels, say, the reference level is the sound level just audible to an average human. However generally in acoustic
-science and computer audio any reference level can be specified. Intel HDA and macOS natively use decibels to specify volume level. On most Intel HDA hardware the reference level of 0 dB is the loudest volume of the hardware, and all lower volumes are therefore negative numbers. The quietest volume on typical sound hardware
-is around -55 dB to -60 dB.
+Note 1 : Decibels (dB) specify gain (postive values; increase in volume) or attenuation (negative values; decrease in volume) compared to some reference level. When you hear the sound level of a jet plane expressed as 120 decibels, say, the reference level is the sound level just audible to an average human. However generally in acoustic science and computer audio any reference level can be specified. Intel HDA and macOS natively use decibels to specify volume level. On most Intel HDA hardware the reference level of 0 dB is the loudest volume of the hardware, and all lower volumes are therefore negative numbers. The quietest volume on typical sound hardware is around -55 dB to -60 dB.
 Note 2 : Matching how macOS handles decibel values, this value is converted to a signed byte; therefore values outside e 128 dB to +127 dB (which are well beyond physically plausible volume levels) are not allowed.
 Note 3 : Digital audio output – which does not have a volume slider in-OS – ignores this and all other gain settings, only mute settings are relevant.
 ----
@@ -320,8 +318,7 @@ Type: plist integer
 Failsafe: -128
 Description: Minimum gain in decibels (dB) at which to attempt to play any sound.
 The boot chime will not play if the system amplifier gain level in the SystemAudioVolumeDB NVRAM variable is lower than this.
-Note 1 : This setting is designed to save unecessary pauses due to audio setup at inaudible volume levels, when no sound will be heard anyway. Whether there are inaudible volume levels depends on the hardware. On some hardware (including Apple) the audio values are well enough matched to the hardware that the lowest volume
-levels available are very quiet but audible, whereas on some other hardware combinations, the lowest part of the volume range may not be audible at all.
+Note 1 : This setting is designed to save unecessary pauses due to audio setup at inaudible volume levels, when no sound will be heard anyway. Whether there are inaudible volume levels depends on the hardware. On some hardware (including Apple) the audio values are well enough matched to the hardware that the lowest volume levels available are very quiet but audible, whereas on some other hardware combinations, the lowest part of the volume range may not be audible at all.
 Note 2 : See MaximumGain for an explanation of decibel volume levels.
 ----
 类型：plist整数
