@@ -47,6 +47,7 @@
 #include "dlgParameters.h"
 #include "dlgPreset.h"
 #include "dlgdatabase.h"
+#include "dlgkernelpatch.h"
 #include "dlgmisc.h"
 #include "filesystemwatcher.h"
 #include "plistparser.h"
@@ -61,6 +62,7 @@
 #include "ui_dlgParameters.h"
 #include "ui_dlgPreset.h"
 #include "ui_dlgdatabase.h"
+#include "ui_dlgkernelpatch.h"
 #include "ui_syncocdialog.h"
 
 #ifdef Q_OS_WIN32
@@ -83,6 +85,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  dlgKernelPatch* myDlgKernelPatch;
   bool blOCValidateError = false;
   dlgMountESP* dlgMESP;
   QString pathSource;
@@ -237,7 +240,7 @@ class MainWindow : public QMainWindow {
   void ParserACPI(QVariantMap map);
   void ParserBooter(QVariantMap map);
   void ParserDP(QVariantMap map);
-  void ParserKernel(QVariantMap map);
+  void ParserKernel(QVariantMap map, QString subitem, int tableIndex);
   void ParserMisc(QVariantMap map);
   void ParserNvram(QVariantMap map);
   void ParserPlatformInfo(QVariantMap map);

@@ -1086,7 +1086,13 @@ void Method::on_btnImportMaster() {
       // Kernel
       init_Table(3);
 
-      mw_one->ParserKernel(map);
+      mw_one->ParserKernel(map, "Add", 0);
+      mw_one->ParserKernel(map, "Block", 0);
+      mw_one->ParserKernel(map, "Emulate", 0);
+      mw_one->ParserKernel(map, "Force", 0);
+      mw_one->ParserKernel(map, "Patch", 0);
+      mw_one->ParserKernel(map, "Quirks", 0);
+      mw_one->ParserKernel(map, "Scheme", 0);
       break;
 
     case 4:

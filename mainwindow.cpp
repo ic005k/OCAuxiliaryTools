@@ -102,6 +102,7 @@ MainWindow::MainWindow(QWidget* parent)
   dlgSyncOC = new SyncOCDialog(this);
   dlgPresetValues = new dlgPreset(this);
   dlgMiscBootArgs = new dlgMisc(this);
+  myDlgKernelPatch = new dlgKernelPatch(this);
   strAppExePath = qApp->applicationDirPath();
 
   timer = new QTimer(this);
@@ -290,7 +291,15 @@ void MainWindow::openFile(QString PlistFileName) {
   ParserACPI(map);
   ParserBooter(map);
   ParserDP(map);
-  ParserKernel(map);
+
+  ParserKernel(map, "Add", 0);
+  ParserKernel(map, "Block", 0);
+  ParserKernel(map, "Emulate", 0);
+  ParserKernel(map, "Force", 0);
+  ParserKernel(map, "Patch", 0);
+  ParserKernel(map, "Quirks", 0);
+  ParserKernel(map, "Scheme", 0);
+
   ParserMisc(map);
   ParserNvram(map);
   ParserPlatformInfo(map);
@@ -1097,139 +1106,157 @@ void MainWindow::initui_kernel() {
   ui->cboxKernelCache->addItem("Prelinked");
 }
 
-void MainWindow::ParserKernel(QVariantMap map) {
+void MainWindow::ParserKernel(QVariantMap map, QString subitem,
+                              int tableIndex) {
   map = map["Kernel"].toMap();
   if (map.isEmpty()) return;
 
   //分析"Add"
-  QVariantList map_add = map["Add"].toList();
+  if (subitem == "Add") {
+    QVariantList map_add = map["Add"].toList();
 
-  ui->table_kernel_add->setRowCount(map_add.count());
-  for (int i = 0; i < map_add.count(); i++) {
-    QVariantMap map3 = map_add.at(i).toMap();
+    ui->table_kernel_add->setRowCount(map_add.count());
+    for (int i = 0; i < map_add.count(); i++) {
+      QVariantMap map3 = map_add.at(i).toMap();
 
-    QTableWidgetItem* newItem1;
+      QTableWidgetItem* newItem1;
 
-    newItem1 = new QTableWidgetItem(map3["BundlePath"].toString());
-    ui->table_kernel_add->setItem(i, 0, newItem1);
+      newItem1 = new QTableWidgetItem(map3["BundlePath"].toString());
+      ui->table_kernel_add->setItem(i, 0, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-    ui->table_kernel_add->setItem(i, 1, newItem1);
+      newItem1 = new QTableWidgetItem(map3["Comment"].toString());
+      ui->table_kernel_add->setItem(i, 1, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["ExecutablePath"].toString());
-    ui->table_kernel_add->setItem(i, 2, newItem1);
+      newItem1 = new QTableWidgetItem(map3["ExecutablePath"].toString());
+      ui->table_kernel_add->setItem(i, 2, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["PlistPath"].toString());
-    ui->table_kernel_add->setItem(i, 3, newItem1);
+      newItem1 = new QTableWidgetItem(map3["PlistPath"].toString());
+      ui->table_kernel_add->setItem(i, 3, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_add->setItem(i, 4, newItem1);
+      newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
+      newItem1->setTextAlignment(Qt::AlignCenter);
+      ui->table_kernel_add->setItem(i, 4, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_add->setItem(i, 5, newItem1);
+      newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
+      newItem1->setTextAlignment(Qt::AlignCenter);
+      ui->table_kernel_add->setItem(i, 5, newItem1);
 
-    init_enabled_data(ui->table_kernel_add, i, 6, map3["Enabled"].toString());
+      init_enabled_data(ui->table_kernel_add, i, 6, map3["Enabled"].toString());
 
-    newItem1 = new QTableWidgetItem(map3["Arch"].toString());
-    if (map3["Arch"].toString().trimmed() == "")
-      newItem1 = new QTableWidgetItem("Any");
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_add->setItem(i, 7, newItem1);
+      newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+      if (map3["Arch"].toString().trimmed() == "")
+        newItem1 = new QTableWidgetItem("Any");
+      newItem1->setTextAlignment(Qt::AlignCenter);
+      ui->table_kernel_add->setItem(i, 7, newItem1);
+    }
   }
 
   // Block
-  QVariantList map_block = map["Block"].toList();
+  if (subitem == "Block") {
+    QVariantList map_block = map["Block"].toList();
 
-  ui->table_kernel_block->setRowCount(map_block.count());
-  for (int i = 0; i < map_block.count(); i++) {
-    QVariantMap map3 = map_block.at(i).toMap();
+    ui->table_kernel_block->setRowCount(map_block.count());
+    for (int i = 0; i < map_block.count(); i++) {
+      QVariantMap map3 = map_block.at(i).toMap();
 
-    QTableWidgetItem* newItem1;
+      QTableWidgetItem* newItem1;
 
-    newItem1 = new QTableWidgetItem(map3["Identifier"].toString());
-    ui->table_kernel_block->setItem(i, 0, newItem1);
+      newItem1 = new QTableWidgetItem(map3["Identifier"].toString());
+      ui->table_kernel_block->setItem(i, 0, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-    ui->table_kernel_block->setItem(i, 1, newItem1);
+      newItem1 = new QTableWidgetItem(map3["Comment"].toString());
+      ui->table_kernel_block->setItem(i, 1, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_block->setItem(i, 2, newItem1);
+      newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
+      newItem1->setTextAlignment(Qt::AlignCenter);
+      ui->table_kernel_block->setItem(i, 2, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_block->setItem(i, 3, newItem1);
+      newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
+      newItem1->setTextAlignment(Qt::AlignCenter);
+      ui->table_kernel_block->setItem(i, 3, newItem1);
 
-    init_enabled_data(ui->table_kernel_block, i, 4, map3["Enabled"].toString());
+      init_enabled_data(ui->table_kernel_block, i, 4,
+                        map3["Enabled"].toString());
 
-    newItem1 = new QTableWidgetItem(map3["Arch"].toString());
-    if (map3["Arch"].toString().trimmed() == "")
-      newItem1 = new QTableWidgetItem("Any");
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_block->setItem(i, 5, newItem1);
+      newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+      if (map3["Arch"].toString().trimmed() == "")
+        newItem1 = new QTableWidgetItem("Any");
+      newItem1->setTextAlignment(Qt::AlignCenter);
+      ui->table_kernel_block->setItem(i, 5, newItem1);
+    }
   }
 
   //分析"Force"
-  QVariantList map_Force = map["Force"].toList();
+  if (subitem == "Force") {
+    QVariantList map_Force = map["Force"].toList();
 
-  ui->table_kernel_Force->setRowCount(map_Force.count());
-  for (int i = 0; i < map_Force.count(); i++) {
-    QVariantMap map3 = map_Force.at(i).toMap();
+    ui->table_kernel_Force->setRowCount(map_Force.count());
+    for (int i = 0; i < map_Force.count(); i++) {
+      QVariantMap map3 = map_Force.at(i).toMap();
 
-    QTableWidgetItem* newItem1;
+      QTableWidgetItem* newItem1;
 
-    newItem1 = new QTableWidgetItem(map3["BundlePath"].toString());
-    ui->table_kernel_Force->setItem(i, 0, newItem1);
+      newItem1 = new QTableWidgetItem(map3["BundlePath"].toString());
+      ui->table_kernel_Force->setItem(i, 0, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-    ui->table_kernel_Force->setItem(i, 1, newItem1);
+      newItem1 = new QTableWidgetItem(map3["Comment"].toString());
+      ui->table_kernel_Force->setItem(i, 1, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["ExecutablePath"].toString());
-    ui->table_kernel_Force->setItem(i, 2, newItem1);
+      newItem1 = new QTableWidgetItem(map3["ExecutablePath"].toString());
+      ui->table_kernel_Force->setItem(i, 2, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["Identifier"].toString());
-    ui->table_kernel_Force->setItem(i, 3, newItem1);
+      newItem1 = new QTableWidgetItem(map3["Identifier"].toString());
+      ui->table_kernel_Force->setItem(i, 3, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["PlistPath"].toString());
-    ui->table_kernel_Force->setItem(i, 4, newItem1);
+      newItem1 = new QTableWidgetItem(map3["PlistPath"].toString());
+      ui->table_kernel_Force->setItem(i, 4, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_Force->setItem(i, 5, newItem1);
+      newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
+      newItem1->setTextAlignment(Qt::AlignCenter);
+      ui->table_kernel_Force->setItem(i, 5, newItem1);
 
-    newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_Force->setItem(i, 6, newItem1);
+      newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
+      newItem1->setTextAlignment(Qt::AlignCenter);
+      ui->table_kernel_Force->setItem(i, 6, newItem1);
 
-    init_enabled_data(ui->table_kernel_Force, i, 7, map3["Enabled"].toString());
+      init_enabled_data(ui->table_kernel_Force, i, 7,
+                        map3["Enabled"].toString());
 
-    newItem1 = new QTableWidgetItem(map3["Arch"].toString());
-    if (map3["Arch"].toString().trimmed() == "")
-      newItem1 = new QTableWidgetItem("Any");
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_kernel_Force->setItem(i, 8, newItem1);
+      newItem1 = new QTableWidgetItem(map3["Arch"].toString());
+      if (map3["Arch"].toString().trimmed() == "")
+        newItem1 = new QTableWidgetItem("Any");
+      newItem1->setTextAlignment(Qt::AlignCenter);
+      ui->table_kernel_Force->setItem(i, 8, newItem1);
+    }
   }
 
   // Patch
-  QVariantList map_patch = map["Patch"].toList();
-  ui->table_kernel_patch->setRowCount(map_patch.count());
-  for (int i = 0; i < map_patch.count(); i++) {
-    AddKernelPatch(map_patch, i, i);
+  if (subitem == "Patch") {
+    QVariantList map_patch = map["Patch"].toList();
+    for (int i = 0; i < map_patch.count(); i++) {
+      int rowCount = ui->table_kernel_patch->rowCount();
+      ui->table_kernel_patch->setRowCount(rowCount + 1);
+      AddKernelPatch(map_patch, i, i + tableIndex);
+    }
   }
 
   // Emulate
-  QVariantMap map_Emulate = map["Emulate"].toMap();
-  getValue(map_Emulate, ui->tabKernel5);
+  if (subitem == "Emulate") {
+    QVariantMap map_Emulate = map["Emulate"].toMap();
+    getValue(map_Emulate, ui->tabKernel5);
+  }
 
   // Quirks
-  QVariantMap map_quirks = map["Quirks"].toMap();
-  getValue(map_quirks, ui->tabKernel6);
+  if (subitem == "Quirks") {
+    QVariantMap map_quirks = map["Quirks"].toMap();
+    getValue(map_quirks, ui->tabKernel6);
+  }
 
   // Scheme
-  QVariantMap map_Scheme = map["Scheme"].toMap();
-  getValue(map_Scheme, ui->tabKernel7);
+  if (subitem == "Scheme") {
+    QVariantMap map_Scheme = map["Scheme"].toMap();
+    getValue(map_Scheme, ui->tabKernel7);
+  }
 }
 
 void MainWindow::initui_misc() {
@@ -11019,10 +11046,13 @@ void MainWindow::on_btnPresetKernelPatch_clicked() {
   dlgPresetValues->blNVAdd = false;
   dlgPresetValues->blKext = false;
 
-  dlgPresetValues->setModal(true);
-  dlgPresetValues->loadPreset("Kernel", "Patch", "Comment",
-                              dlgPresetValues->ui->listPreset);
-  dlgPresetValues->show();
+  // dlgPresetValues->setModal(true);
+  // dlgPresetValues->loadPreset("Kernel", "Patch", "Comment",
+  //                            dlgPresetValues->ui->listPreset);
+  // dlgPresetValues->show();
+  myDlgKernelPatch->setModal(true);
+  myDlgKernelPatch->loadFiles();
+  myDlgKernelPatch->show();
 }
 
 void MainWindow::AddACPIPatch(QVariantList map_patch, int mapIndex,
