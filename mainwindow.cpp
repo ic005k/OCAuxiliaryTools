@@ -11417,7 +11417,10 @@ void MainWindow::on_actionMove_Down_triggered() {
 }
 
 void MainWindow::on_actionAdd_triggered() {
-  if (ui->table_acpi_add->hasFocus()) ui->btnACPIAdd_Add->click();
+  if (ui->listMain->currentRow() == 0 && ui->listSub->currentRow() == 0) {
+    ui->btnACPIAdd_Add->click();
+  }
+
   if (ui->table_acpi_del->hasFocus()) ui->btnACPIDel_Add->click();
   if (ui->table_acpi_patch->hasFocus()) ui->btnACPIPatch_Add->click();
 
@@ -11430,14 +11433,16 @@ void MainWindow::on_actionAdd_triggered() {
   if (ui->table_dp_del0->hasFocus()) ui->btnDPDel_Add0->click();
   if (ui->table_dp_del->hasFocus()) ui->btnDPDel_Add->click();
 
-  if (ui->table_kernel_add->hasFocus()) ui->btnKernelAdd_Add->click();
+  if (ui->listMain->currentRow() == 3 && ui->listSub->currentRow() == 0)
+    ui->btnKernelAdd_Add->click();
   if (ui->table_kernel_block->hasFocus()) ui->btnKernelBlock_Add->click();
   if (ui->table_kernel_Force->hasFocus()) ui->btnKernelForce_Add->click();
   if (ui->table_kernel_patch->hasFocus()) ui->btnKernelPatchAdd->click();
 
   if (ui->tableBlessOverride->hasFocus()) ui->btnMiscBO_Add->click();
   if (ui->tableEntries->hasFocus()) ui->btnMiscEntries_Add->click();
-  if (ui->tableTools->hasFocus()) ui->btnMiscTools_Add->click();
+  if (ui->listMain->currentRow() == 4 && ui->listSub->currentRow() == 5)
+    ui->btnMiscTools_Add->click();
 
   if (ui->table_nv_add0->hasFocus()) ui->btnNVRAMAdd_Add0->click();
   if (ui->table_nv_add->hasFocus()) ui->btnNVRAMAdd_Add->click();
@@ -11450,7 +11455,8 @@ void MainWindow::on_actionAdd_triggered() {
 
   if (ui->tableDevices->hasFocus()) ui->btnDevices_add->click();
 
-  if (ui->table_uefi_drivers->hasFocus()) ui->btnUEFIDrivers_Add->click();
+  if (ui->listMain->currentRow() == 7 && ui->listSub->currentRow() == 3)
+    ui->btnUEFIDrivers_Add->click();
 
   if (ui->table_uefi_ReservedMemory->hasFocus()) ui->btnUEFIRM_Add->click();
 }
