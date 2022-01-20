@@ -886,7 +886,6 @@ QString Method::copyACPI(QString pathSource, QString pathTarget) {
   for (int i = 0; i < mw_one->ui->table_acpi_add->rowCount(); i++) {
     QString file = mw_one->ui->table_acpi_add->item(i, 0)->text();
     QString file1 = pathSource + "EFI/OC/ACPI/" + file;
-
     if (QFile(file1).exists())
       QFile::copy(pathSource + "EFI/OC/ACPI/" + file, pathOCACPI + file);
     else
