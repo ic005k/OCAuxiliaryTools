@@ -10,3 +10,6 @@ ACPI:ResetLogoStatus NormalizeHeaders RebaseRegions
 This Section is more relevant to the used macOS version and ACPI files rather than the CPU itself.
 
 Thanks to @5T33Z0 for providing the above content.
+
+CPU:AMD ThreadRipper (TRX40)
+ACPI:

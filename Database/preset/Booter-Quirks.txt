@@ -32,3 +32,7 @@ CPU:Intel Skylake-X/W and Cascade Lake-X/W (High End Desktop)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap SetupVirtualMap SyncRuntimePermissions
 
 Thanks to @5T33Z0 for providing the above content.
+
+CPU:AMD ThreadRipper (TRX40)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap ResizeAppleGpuBars SyncRuntimePermissions
+
