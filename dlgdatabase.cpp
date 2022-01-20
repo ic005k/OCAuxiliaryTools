@@ -171,7 +171,7 @@ void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
 
   mw_one->RefreshAllDatabase = false;
 
-  mymethod->generateEFI();
+  mw_one->on_actionGenerateEFI_triggered();
 }
 
 void dlgDatabase::on_btnFind_clicked() {
@@ -532,3 +532,5 @@ void dlgDatabase::on_chkShowVolName_clicked(bool checked) {
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("ShowVolName", checked);
 }
+
+void dlgDatabase::on_tableDatabase_itemDoubleClicked(QTableWidgetItem *item) {}

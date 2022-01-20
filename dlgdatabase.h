@@ -76,6 +76,8 @@ class dlgDatabase : public QDialog {
 
   void on_chkShowVolName_clicked(bool checked);
 
+  void on_tableDatabase_itemDoubleClicked(QTableWidgetItem *item);
+
  private:
   void writeIni(QString key, int arg1);
 
