@@ -75,3 +75,7 @@ UEFI:IgnoreInvalidFlexRatio RequestBootVarRouting UnblockFsConnect
 
 
 Thanks to @5T33Z0 for providing the above content.
+
+CPU:AMD ThreadRipper (TRX40)
+UEFI:EnableVectorAcceleration RequestBootVarRouting ResizeGpuBars
+

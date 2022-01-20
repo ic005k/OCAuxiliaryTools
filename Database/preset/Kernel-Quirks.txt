@@ -101,3 +101,7 @@ Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJetti
 - `XhciPortLimit`: Disable for macOS 11.3 and newer – create a custom USB Port Map instead!
 
 Thanks to @5T33Z0 for providing the above content.
+
+CPU:AMD ThreadRipper (TRX40)
+Kernel:DisableLinkeditJettison ExternalDiskIcons ProvideCurrentCpuInfo
+
