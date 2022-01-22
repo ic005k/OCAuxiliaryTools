@@ -1,4 +1,4 @@
-[English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-cn.md)
+[English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-cn.md) | [Italiano](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-it.md)
 ## OC Auxiliary Tools-开源跨平台的OpenCore辅助工具
 
 | [最新发布][release-link]|[下载][download-link]|[问题反馈][issues-link]|
