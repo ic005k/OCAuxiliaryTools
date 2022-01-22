@@ -22,7 +22,7 @@
 
 
 
-OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per OC, ricca di funzionalita' e facile da usare. OCAT mantiene la sua natura strutturale di essere completamente trasparente al livello dell'utente, con un design completamente aperto, e' ancora in evoluzione e accoglie qualsiasi domanda o suggerimento.
+OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per OC, ricca di funzionalita' e facile da usare. OCAT mantiene la sua natura strutturale di essere completamente trasparente a livello utente, con un design completamente aperto, e' ancora in evoluzione e accoglie qualsiasi domanda o suggerimento.
 
 * [Inglese: Aggiornare OpenCore e i Kexts con OCAT (da @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
@@ -60,11 +60,11 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per OC, r
 * ...
 
 ### Come scarica OCAT OpenCore?
-* OCAT correntemente prende OpenCore da OC, da questo indirizzo: https://github.com/acidanthera/OpenCorePkg/actions che e' "OpenCore Factory" intel menu "Help" di OCAT. Oltre a quello, OCAT non prende nessun files per OpenCore da altre fonti.
-* Nota bene: tutti I materiali raw usati in OCAT provengono da fonti ufficiali di OpenCore, OCAT non prende contenuti da terze parti, ne ora, ne mai!.
+* OCAT correntemente prende OpenCore da OC, da questo indirizzo: https://github.com/acidanthera/OpenCorePkg/actions che e' "OpenCore Factory" nel menu "Help" di OCAT. Oltre a questo, OCAT non prende nessun files per OpenCore da altre fonti.
+* Nota bene: tutti i materiali raw usati in OCAT provengono da fonti ufficiali di OpenCore, OCAT non prende contenuti da terze parti, ne ora, ne mai!.
 
 ### Perche' OCAT non usa un approccio online per ottenere automaticamente OC?
-* Perche' OC e' rilasciato in versione stabile una volta al mese, e, un update di OC e' accompagnato inevitabilmente da un update di OCAT, non e' necessario in quanto c'e' tutto il tempo per aggiornare senza usare il metodo fetch.
+* Perche' OC e' rilasciato in versione stabile una volta al mese, un update di OC e' accompagnato inevitabilmente da un update di OCAT, non e' necessario in quanto c'e' tutto il tempo per aggiornare senza usare il metodo fetch.
 
 ---
 
