@@ -18,7 +18,7 @@
 				<key>Enabled</key>
 				<true/>
 				<key>Path</key>
-				<string>MSI_TRX40_Pro_10G_Bios1.81-AMD 3970x-SSDT-PLUG.aml</string>
+				<string>MSI_TRX40_Pro_10G_Bios1.81-AMD3970x-SSDT-PLUG.aml</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -26,7 +26,7 @@
 				<key>Enabled</key>
 				<true/>
 				<key>Path</key>
-				<string>MSI_TRX40_Pro_10G_Bios1.81-AMD 3970x-SSDT-SBRG-USBX.aml</string>
+				<string>MSI_TRX40_Pro_10G_Bios1.81-AMD3970x-SSDT-SBRG-USBX.aml</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -34,7 +34,7 @@
 				<key>Enabled</key>
 				<true/>
 				<key>Path</key>
-				<string>MSI_TRX40_Pro_10G_Bios1.81-AMD 3970x-SSDT-6900XT.aml</string>
+				<string>MSI_TRX40_Pro_10G_Bios1.81-AMD3970x-SSDT-6900XT.aml</string>
 			</dict>
 		</array>
 		<key>Delete</key>
