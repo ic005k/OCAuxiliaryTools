@@ -4610,67 +4610,67 @@ Type</translation>
 <context>
     <name>Method</name>
     <message>
-        <location filename="Method.cpp" line="373"/>
+        <location filename="Method.cpp" line="377"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
     </message>
     <message>
         <location filename="Method.cpp" line="77"/>
-        <location filename="Method.cpp" line="408"/>
+        <location filename="Method.cpp" line="412"/>
         <source>Network error!</source>
         <translation>网络错误！</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="504"/>
+        <location filename="Method.cpp" line="508"/>
         <source>Application</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="505"/>
+        <location filename="Method.cpp" line="509"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="520"/>
+        <location filename="Method.cpp" line="524"/>
         <source>None</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="968"/>
-        <location filename="Method.cpp" line="974"/>
+        <location filename="Method.cpp" line="972"/>
+        <location filename="Method.cpp" line="978"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="970"/>
+        <location filename="Method.cpp" line="974"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="991"/>
+        <location filename="Method.cpp" line="995"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="992"/>
-        <location filename="Method.cpp" line="1054"/>
+        <location filename="Method.cpp" line="996"/>
+        <location filename="Method.cpp" line="1058"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1053"/>
+        <location filename="Method.cpp" line="1057"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1469"/>
+        <location filename="Method.cpp" line="1473"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1474"/>
+        <location filename="Method.cpp" line="1478"/>
         <source>Cannot open file %1 for writing:
 %2.</source>
         <translation></translation>
@@ -4679,55 +4679,55 @@ Type</translation>
 <context>
     <name>QInstaller</name>
     <message>
-        <location filename="Method.cpp" line="1316"/>
+        <location filename="Method.cpp" line="1320"/>
         <location filename="autoupdatedialog.cpp" line="321"/>
         <source>bytes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1317"/>
+        <location filename="Method.cpp" line="1321"/>
         <location filename="autoupdatedialog.cpp" line="322"/>
         <source>KiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1318"/>
+        <location filename="Method.cpp" line="1322"/>
         <location filename="autoupdatedialog.cpp" line="323"/>
         <source>MiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1319"/>
+        <location filename="Method.cpp" line="1323"/>
         <location filename="autoupdatedialog.cpp" line="324"/>
         <source>GiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1320"/>
+        <location filename="Method.cpp" line="1324"/>
         <location filename="autoupdatedialog.cpp" line="325"/>
         <source>TiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1321"/>
+        <location filename="Method.cpp" line="1325"/>
         <location filename="autoupdatedialog.cpp" line="326"/>
         <source>PiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1322"/>
+        <location filename="Method.cpp" line="1326"/>
         <location filename="autoupdatedialog.cpp" line="327"/>
         <source>EiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1323"/>
+        <location filename="Method.cpp" line="1327"/>
         <location filename="autoupdatedialog.cpp" line="328"/>
         <source>ZiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1324"/>
+        <location filename="Method.cpp" line="1328"/>
         <location filename="autoupdatedialog.cpp" line="329"/>
         <source>YiB</source>
         <translation></translation>
@@ -4934,7 +4934,8 @@ Type</translation>
     </message>
     <message>
         <location filename="dlgdatabase.ui" line="27"/>
-        <source>Config File List</source>
+        <source>Configs Files List</source>
+        <oldsource>Config File List</oldsource>
         <translation>配置文件列表</translation>
     </message>
     <message>
@@ -4978,15 +4979,15 @@ Type</translation>
     <message>
         <location filename="dlgdatabase.ui" line="377"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.AppleSystemUIFont&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;SimSun&apos;; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <oldsource>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.AppleSystemUIFont&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;SimSun&apos;; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation></translation>
     </message>
     <message>
@@ -5101,8 +5102,8 @@ p, li { white-space: pre-wrap; }
         <location filename="dlgdatabase.ui" line="168"/>
         <location filename="dlgdatabase.ui" line="182"/>
         <location filename="dlgdatabase.cpp" line="111"/>
-        <location filename="dlgdatabase.cpp" line="451"/>
-        <location filename="dlgdatabase.cpp" line="454"/>
+        <location filename="dlgdatabase.cpp" line="453"/>
+        <location filename="dlgdatabase.cpp" line="456"/>
         <source>Testing</source>
         <translation>测试</translation>
     </message>
@@ -5174,8 +5175,8 @@ p, li { white-space: pre-wrap; }
         <translation>说明</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.cpp" line="452"/>
-        <location filename="dlgdatabase.cpp" line="453"/>
+        <location filename="dlgdatabase.cpp" line="454"/>
+        <location filename="dlgdatabase.cpp" line="455"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>

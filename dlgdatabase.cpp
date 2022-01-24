@@ -185,8 +185,10 @@ void dlgDatabase::on_btnFind_clicked() {
   int count = 0;
   for (int i = 0; i < ui->tableDatabase->rowCount(); i++) {
     QString str = ui->tableDatabase->item(i, 0)->text();
-    QFileInfo fi(str);
-    if (fi.baseName().toLower().contains(text.toLower())) {
+    QString str1 = str;
+    str1.replace(".plist", "");
+
+    if (str1.toLower().contains(text.toLower())) {
       ui->tableDatabaseFind->setRowCount(count + 1);
       QTableWidgetItem *newItem1;
       newItem1 = new QTableWidgetItem(str);
