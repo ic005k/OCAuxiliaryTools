@@ -25,15 +25,17 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for OC that 
 
 * [Updating OpenCore and Kexts with OCAT (by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
-* Pre-selected plugin content for Quirks is provided and maintained by @5T33Z0.  [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
+* Pre-selected plug-in content for Intel CPU Quirks is provided and maintained by @5T33Z0. [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
+ 
+* Intel CPU BaseConfigs plug-in package provided and maintained by @5T33Z0. [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
 
-* The BaseConfigs plugin package is provided and maintained by @5T33Z0. [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs) 
+* AMD CPU BaseConfigs plug-in package and pre-selected and AMD kernel patch packages for Quirks are provided and maintained by [@fabiosun](https://github.com/fabiosun).
 
 ---
 
 ### Special thanks to
 * [@vit9696](https://github.com/vit9696) Suggestions on OCAT functionality.
-* [@5T33Z0](https://github.com/5T33Z0) OCAT plug-in packages are provided and maintained.
+* [@5T33Z0](https://github.com/5T33Z0) Provide and maintain OCAT's Intel CPU plug-in package, user interaction and feature suggestions.
 * [@LucasMucGH](https://github.com/LucasMucGH) Native UI design suggestions based on the Mac version.
 
 ---
