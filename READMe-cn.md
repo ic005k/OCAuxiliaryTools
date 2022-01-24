@@ -23,9 +23,11 @@ OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用�
 
 * [如何使用OCAT升级OpenCore和Kexts(by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
-* Quirks的预选插件内容由 @5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
+* Intel CPU Quirks的预选插件内容由 @5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
  
-* BaseConfigs（基本配置文件）插件包由 @5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
+* Intel CPU BaseConfigs 插件包由 @5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
+
+* AMD CPU BaseConfigs插件包和Quirks的预选由 [@fabiosun](https://github.com/fabiosun) 提供并维护。
 
 * OCAT的功能提示采用的是开放式接口，如果您对枯燥的翻译有兴趣，请帮助完善toolTip.txt文件（数据库preset目录中）的内容，期待您的加入！文件地址：https://github.com/ic005k/QtOpenCoreConfig/blob/master/Database/preset/toolTip.txt
 
@@ -33,7 +35,7 @@ OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用�
 
 ### 特别感谢
 * [@vit9696](https://github.com/vit9696) 提供OCAT功能上的建议。
-* [@5T33Z0](https://github.com/5T33Z0) 提供和维护OCAT的插件包。
+* [@5T33Z0](https://github.com/5T33Z0) 提供和维护OCAT的Intel CPU插件包，用户交互及功能建议。
 * [@LucasMucGH](https://github.com/LucasMucGH) 基于Mac版本的原生UI设计建议。
 
 ---
