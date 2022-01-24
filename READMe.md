@@ -29,7 +29,7 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for OC that 
  
 * Intel CPU BaseConfigs plug-in package provided and maintained by @5T33Z0. [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
 
-* AMD CPU BaseConfigs plug-in package and pre-selected and AMD kernel patch packages for Quirks are provided and maintained by [@fabiosun](https://github.com/fabiosun).
+* AMD CPU BaseConfigs plug-in package and pre-selected for Quirks and AMD kernel patch packages are provided and maintained by [@fabiosun](https://github.com/fabiosun).
 
 ---
 
