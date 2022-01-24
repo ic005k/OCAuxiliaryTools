@@ -27,7 +27,7 @@ OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用�
  
 * Intel CPU BaseConfigs 插件包由 @5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
 
-* AMD CPU BaseConfigs插件包和Quirks的预选及AMD内核补丁包由 [@fabiosun](https://github.com/fabiosun) 提供并维护。
+* AMD CPU BaseConfigs插件包Quirks的预选，AMD内核补丁包，意大利语说明文档由 [@fabiosun](https://github.com/fabiosun) 提供并维护。
 
 * OCAT的功能提示采用的是开放式接口，如果您对枯燥的翻译有兴趣，请帮助完善toolTip.txt文件（数据库preset目录中）的内容，期待您的加入！文件地址：https://github.com/ic005k/QtOpenCoreConfig/blob/master/Database/preset/toolTip.txt
 
