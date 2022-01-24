@@ -40,23 +40,6 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for OC that 
 
 ---
 
-### How to configure a new EFI?
-* The process is very simple, just click on "Database" on the toolbar, double click on the template file that matches your model in the database list (thanks to @5T33Z0 for providing and maintaining these files), an EFI folder will be automatically created on the desktop and the process is complete.
-
-### How to upgrade OC automatically? (Very simple, only two steps)
-* Drag and drop the configuration file onto the OCAT interface and click "Save" on the toolbar.
-* Then click "Upgrade OC Main Program" on the toolbar, a "Synchronize OC" interface will appear, Click the "Start Sync" button below to finish the OC upgrade.
-
-### Why does the OC verification icon turn red when I open or save the configuration file?
-* This is because there is a problem with the configuration file, usually it will be normal after saving the configuration file. If there is still a problem prompted after saving the configuration file, it is a very simple process to troubleshoot according to the OC verify prompt. 
-
-### What are the convenient operations of OCAT?
-* All files that need to be opened can be opened by dragging and dropping them to the corresponding interface (single or multiple selection is supported).
-* Search box on the toolbar (it is highly recommended to use the search portal when modifying configuration files instead of clicking on the tabs one by one, it supports fuzzy matching and is very powerful).
-* Left click and drag the mouse inside the data table to make multiple selections.
-* Open two or more different profiles to compare or copy rows or paste rows between data tables (supports single or multiple selection).
-* ...
-
 ### How does OCAT get OpenCore?
 * OCAT currently only gets OpenCore officially from OC, it comes from here: https://github.com/acidanthera/OpenCorePkg/actions which is the "OpenCore Factory" in the "Help" menu of OCAT. Other than that, OCAT does not get any files for OpenCore from any other source.
 * Please note: All raw materials used by OCAT come from official OpenCore sources, OCAT does not get any content from any third party, not now, not ever.
