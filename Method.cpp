@@ -284,6 +284,10 @@ void Method::startDownload(QString strUrl) {
   request.setHeader(QNetworkRequest::ContentTypeHeader,
                     "application/octet-stream");
 
+  // github redirects the request, so this attribute must be set to true,
+  // otherwise returns nothing from qt5.6
+  request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+
   replyDL = managerDownLoad->get(request);
 
   connect(replyDL, &QNetworkReply::readyRead, this,
