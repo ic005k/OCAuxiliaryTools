@@ -543,7 +543,6 @@ void dlgDatabase::on_btnIntel_clicked() {
   QString qtManulFile =
       mw_one->strAppExePath + "/Database/BaseConfigs/Instructions.md";
   QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
-  qDebug() << qtManulFile;
 }
 
 void dlgDatabase::on_btnAMD_clicked() {
