@@ -30,8 +30,9 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per OC, r
 
 * I contenuti nei Preset per i Quirks sono forniti e mantenuti by @5T33Z0.  [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
 
-* Il pacchetto plugin BaseConfigs e' fornito e mantenuto da @5T33Z0. [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
+* Il pacchetto plugin Intel BaseConfigs e' fornito e mantenuto da @5T33Z0. [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
 
+* I contenuti dei Preset, quirk, BaseConfigs, AMD kernel patch preset per tutte le CPU AMD e la traduzione in Italiano di questo README sono forniti e mantenuti da [@fabiosun (macOS86.it)](https://github.com/macos86/QtOpenCoreConfig).
 
 ---
 
@@ -39,6 +40,7 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per OC, r
 * [@vit9696](https://github.com/vit9696) Suggerimenti per la funzionalità' di OCAT.
 * [@5T33Z0](https://github.com/5T33Z0) I pacchetti di plug-in OCAT sono forniti e mantenuti.
 * [@LucasMucGH](https://github.com/LucasMucGH) Suggerimenti per la progettazione dell'interfaccia utente nativa basati sulla versione per Mac.
+* [@fabiosun (macOS86.it)](https://github.com/macos86/QtOpenCoreConfig) per i contenuti relativi a CPU AMD.
 
 ---
 
