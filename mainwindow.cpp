@@ -274,6 +274,9 @@ void MainWindow::openFile(QString PlistFileName) {
   listNVRAMAdd.clear();
   listNVRAMDel.clear();
   listNVRAMLs.clear();
+  ui->editSystemUUID->setText("");
+  ui->editMLB->setText("");
+  ui->editSystemSerialNumber->setText("");
 
   QFile file(PlistFileName);
   QVariantMap map = PListParser::parsePList(&file).toMap();
