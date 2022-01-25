@@ -541,7 +541,7 @@ void dlgDatabase::on_tableDatabase_itemDoubleClicked(QTableWidgetItem *item) {
 
 void dlgDatabase::on_btnIntel_clicked() {
   QString qtManulFile =
-      mw_one->strAppExePath + "/Database/BaseConfigs/Instructions.md";
+      mw_one->strAppExePath + "/Database/BaseConfigs/Instructions_Intel.md";
   QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
 }
 
