@@ -82,6 +82,8 @@ class dlgDatabase : public QDialog {
 
   void on_btnAMD_clicked();
 
+  void on_btnOpenDir_clicked();
+
  private:
   void writeIni(QString key, int arg1);
 

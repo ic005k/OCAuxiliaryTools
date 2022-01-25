@@ -551,3 +551,9 @@ void dlgDatabase::on_btnAMD_clicked() {
       mw_one->strAppExePath + "/Database/BaseConfigs/Instructions_AMD_TRX40.md";
   QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
 }
+
+void dlgDatabase::on_btnOpenDir_clicked() {
+  QString dirpath = mw_one->strAppExePath + "/Database/BaseConfigs/";
+  QString dir = "file:" + dirpath;
+  QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
+}

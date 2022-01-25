@@ -120,6 +120,13 @@
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QToolButton" name="btnOpenDir">
+               <property name="text">
+                <string>Open Directory</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
           </layout>

@@ -4964,20 +4964,20 @@ Type</translation>
         <translation>全部刷新</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="143"/>
+        <location filename="dlgdatabase.ui" line="150"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tip: The files are located at  &quot;Database/BaseConfigs&quot;&lt;/p&gt;&lt;p&gt;Double-click the entry to open it and generate a new EFI folder on the desktop.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tip: The files are located at:  Database/BaseConfigs&lt;/p&gt;&lt;p&gt;Double-click the entry to open it and generate a new EFI folder on the desktop.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation>提示：文件位于Database/BaseConfigs目录。
 双击条目打开这个配置文件并在桌面上产生EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="390"/>
+        <location filename="dlgdatabase.ui" line="397"/>
         <source>Kext Upgrade URL</source>
         <oldsource>Kext Url</oldsource>
         <translation>Kext升级网址</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="403"/>
+        <location filename="dlgdatabase.ui" line="410"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -4991,33 +4991,33 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="431"/>
+        <location filename="dlgdatabase.ui" line="438"/>
         <source>Kext Name</source>
         <translation>Kext名称</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="396"/>
+        <location filename="dlgdatabase.ui" line="403"/>
         <source>+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="436"/>
+        <location filename="dlgdatabase.ui" line="443"/>
         <source>Source URL</source>
         <translation>网址</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="444"/>
+        <location filename="dlgdatabase.ui" line="451"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="451"/>
+        <location filename="dlgdatabase.ui" line="458"/>
         <source>Open URL in browser</source>
         <oldsource>Open Url</oldsource>
         <translation>打开网址</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="151"/>
+        <location filename="dlgdatabase.ui" line="158"/>
         <source>Misc</source>
         <translation>杂项</translation>
     </message>
@@ -5032,85 +5032,90 @@ p, li { white-space: pre-wrap; }
         <translation>AMD CPU 配置指南</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="157"/>
+        <location filename="dlgdatabase.ui" line="126"/>
+        <source>Open Directory</source>
+        <translation>打开目录</translation>
+    </message>
+    <message>
+        <location filename="dlgdatabase.ui" line="164"/>
         <source>Network</source>
         <translation>网络</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="163"/>
+        <location filename="dlgdatabase.ui" line="170"/>
         <source>Select the mirror server for upgrade download</source>
         <oldsource>Upgrade download proxy settings</oldsource>
         <translation>选择升级下载的镜像服务器</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="181"/>
-        <location filename="dlgdatabase.ui" line="219"/>
+        <location filename="dlgdatabase.ui" line="188"/>
+        <location filename="dlgdatabase.ui" line="226"/>
         <source>https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="224"/>
+        <location filename="dlgdatabase.ui" line="231"/>
         <source>https://download.fastgit.org/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="229"/>
+        <location filename="dlgdatabase.ui" line="236"/>
         <source>https://ghproxy.com/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="234"/>
+        <location filename="dlgdatabase.ui" line="241"/>
         <source>https://gh.api.99988866.xyz/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="239"/>
+        <location filename="dlgdatabase.ui" line="246"/>
         <source>https://gh.msx.workers.dev/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="244"/>
+        <location filename="dlgdatabase.ui" line="251"/>
         <source>https://gh.xiu2.xyz/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="249"/>
+        <location filename="dlgdatabase.ui" line="256"/>
         <source>https://git.yumenaka.net/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="254"/>
+        <location filename="dlgdatabase.ui" line="261"/>
         <source>https://pd.zwc365.com/seturl/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="291"/>
+        <location filename="dlgdatabase.ui" line="298"/>
         <source>Additional Options</source>
         <translation>附加选项</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="304"/>
+        <location filename="dlgdatabase.ui" line="311"/>
         <source>Show all volume names when mounting ESP</source>
         <translation>挂载ESP时显示所有的卷标名称</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="314"/>
+        <location filename="dlgdatabase.ui" line="321"/>
         <source>UI Appearance (effective after the next app opening)</source>
         <translation>UI外观（下次打开APP时生效）</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="379"/>
+        <location filename="dlgdatabase.ui" line="386"/>
         <source>Hide Toolbar</source>
         <translation>隐藏工具栏</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="320"/>
+        <location filename="dlgdatabase.ui" line="327"/>
         <source>Toolbar button</source>
         <translation>工具栏按钮</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="194"/>
-        <location filename="dlgdatabase.ui" line="208"/>
+        <location filename="dlgdatabase.ui" line="201"/>
+        <location filename="dlgdatabase.ui" line="215"/>
         <location filename="dlgdatabase.cpp" line="111"/>
         <location filename="dlgdatabase.cpp" line="453"/>
         <location filename="dlgdatabase.cpp" line="456"/>
@@ -5118,58 +5123,58 @@ p, li { white-space: pre-wrap; }
         <translation>测试</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="170"/>
+        <location filename="dlgdatabase.ui" line="177"/>
         <source>Select the mirror server for web access</source>
         <oldsource>Web page access mirror server</oldsource>
         <translation>选择网页访问的镜像服务器</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="186"/>
+        <location filename="dlgdatabase.ui" line="193"/>
         <source>https://hub.fastgit.org/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="262"/>
+        <location filename="dlgdatabase.ui" line="269"/>
         <source>The way to get the download link for Kext upgrade</source>
         <translation>Kext升级获取下载链接的方式</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="268"/>
+        <location filename="dlgdatabase.ui" line="275"/>
         <source>Accessing the GitHub API</source>
         <translation>访问GitHub API</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="278"/>
+        <location filename="dlgdatabase.ui" line="285"/>
         <source>Crawl web source code</source>
         <translation>爬取网页源代码</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="297"/>
+        <location filename="dlgdatabase.ui" line="304"/>
         <source>Automatically open the last opened file</source>
         <translation>自动打开上次打开的文件</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="326"/>
+        <location filename="dlgdatabase.ui" line="333"/>
         <source>Mount ESP</source>
         <translation>挂载ESP</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="336"/>
+        <location filename="dlgdatabase.ui" line="343"/>
         <source>Browse Catalog</source>
         <translation>浏览目录</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="346"/>
+        <location filename="dlgdatabase.ui" line="353"/>
         <source>Backup EFI</source>
         <translation>备份EFI</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="356"/>
+        <location filename="dlgdatabase.ui" line="363"/>
         <source>Database</source>
         <translation>数据库</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.ui" line="366"/>
+        <location filename="dlgdatabase.ui" line="373"/>
         <source>Recently Open</source>
         <translation>最近打开</translation>
     </message>
