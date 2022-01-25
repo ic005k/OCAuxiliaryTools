@@ -535,4 +535,19 @@ void dlgDatabase::on_chkShowVolName_clicked(bool checked) {
   Reg.setValue("ShowVolName", checked);
 }
 
-void dlgDatabase::on_tableDatabase_itemDoubleClicked(QTableWidgetItem *item) {}
+void dlgDatabase::on_tableDatabase_itemDoubleClicked(QTableWidgetItem *item) {
+  Q_UNUSED(item);
+}
+
+void dlgDatabase::on_btnIntel_clicked() {
+  QString qtManulFile =
+      mw_one->strAppExePath + "/Database/BaseConfigs/Instructions.md";
+  QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
+  qDebug() << qtManulFile;
+}
+
+void dlgDatabase::on_btnAMD_clicked() {
+  QString qtManulFile =
+      mw_one->strAppExePath + "/Database/BaseConfigs/Instructions_AMD_TRX40.md";
+  QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
+}

@@ -83,35 +83,61 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="4" rowspan="2">
-        <widget class="QTableWidget" name="tableDatabaseFind">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="columnCount">
-          <number>1</number>
-         </property>
-         <column/>
-        </widget>
-       </item>
        <item row="1" column="0" colspan="4">
-        <widget class="QTableWidget" name="tableDatabase">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="columnCount">
-          <number>1</number>
-         </property>
-         <column/>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QTableWidget" name="tableDatabase">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="columnCount">
+              <number>1</number>
+             </property>
+             <column/>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QToolButton" name="btnIntel">
+               <property name="text">
+                <string>Intel CPU Configuration Guide</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="btnAMD">
+               <property name="text">
+                <string>AMD CPU Configuration Guide</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="tableDatabaseFind">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="columnCount">
+            <number>1</number>
+           </property>
+           <column/>
+          </widget>
+         </item>
+        </layout>
        </item>
-       <item row="2" column="0" colspan="5">
+       <item row="2" column="0" colspan="4">
         <widget class="QLabel" name="label">
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tip: The files are located at  &quot;Database/BaseConfigs&quot;&lt;/p&gt;&lt;p&gt;Double-click the entry to open it and generate a new EFI folder on the desktop.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

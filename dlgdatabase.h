@@ -78,6 +78,10 @@ class dlgDatabase : public QDialog {
 
   void on_tableDatabase_itemDoubleClicked(QTableWidgetItem *item);
 
+  void on_btnIntel_clicked();
+
+  void on_btnAMD_clicked();
+
  private:
   void writeIni(QString key, int arg1);
 
