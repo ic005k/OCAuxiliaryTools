@@ -3,7 +3,7 @@
 <plist version="1.0">
     <dict>
         <key>#ConfigComment</key>
-        <string>7472 DELL 笔记本电脑</string>
+        <string>7472 DELL Laptop</string>
         <key>ACPI</key>
         <dict>
             <key>Add</key>
