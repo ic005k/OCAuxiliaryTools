@@ -13,9 +13,6 @@ dlgDatabase::dlgDatabase(QWidget *parent)
     : QDialog(parent), ui(new Ui::dlgDatabase) {
   ui->setupUi(this);
 
-  ui->btnRefreshAll->setHidden(true);
-  ui->btnFind->setHidden(true);
-
   processPing = new QProcess;
   connect(processPing, SIGNAL(readyReadStandardOutput()), this,
           SLOT(on_readoutput()));
@@ -250,38 +247,6 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column) {
   mymethod->generateEFI();
 }
 
-void dlgDatabase::on_btnRefreshAll_clicked() {
-  ui->btnRefreshAll->setEnabled(false);
-  this->repaint();
-
-  mw_one->RefreshAllDatabase = true;
-
-  QString bakFile;
-  if (!SaveFileName.isEmpty()) {
-    bakFile = SaveFileName;
-  }
-
-  ui->tableDatabase->setFocus();
-  ui->tableDatabase->setCurrentCell(0, 0);
-
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
-
-  for (int i = 0; i < ui->tableDatabase->rowCount(); i++) {
-    ui->tableDatabase->setCurrentCell(i, 0);
-    QString file = ui->tableDatabase->currentItem()->text();
-    mw_one->openFile(dirpath + file);
-    mw_one->SavePlist(dirpath + file);
-  }
-
-  if (!bakFile.isEmpty()) mw_one->openFile(bakFile);
-
-  mw_one->RefreshAllDatabase = false;
-
-  ui->btnRefreshAll->setEnabled(true);
-  this->repaint();
-}
-
 void dlgDatabase::refreshKextUrl() {
   QString file = mw_one->strAppExePath + "/Database/preset/KextUrl.txt";
   ui->textEdit->clear();
@@ -479,4 +444,18 @@ void dlgDatabase::on_btnOpenDir_clicked() {
   QString dirpath = mw_one->strAppExePath + "/Database/BaseConfigs/";
   QString dir = "file:" + dirpath;
   QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
+}
+
+void dlgDatabase::on_btnIntelOnline_clicked() {
+  QUrl url(
+      QString("https://github.com/ic005k/QtOpenCoreConfig/blob/master/Database/"
+              "BaseConfigs/Instructions_Intel.md"));
+  QDesktopServices::openUrl(url);
+}
+
+void dlgDatabase::on_btnAMDOnline_clicked() {
+  QUrl url(
+      QString("https://github.com/ic005k/QtOpenCoreConfig/blob/master/Database/"
+              "BaseConfigs/Instructions_AMD_TRX40.md"));
+  QDesktopServices::openUrl(url);
 }

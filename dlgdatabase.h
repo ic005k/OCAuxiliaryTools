@@ -36,8 +36,6 @@ class dlgDatabase : public QDialog {
 
   void on_tableDatabaseFind_cellDoubleClicked(int row, int column);
 
-  void on_btnRefreshAll_clicked();
-
   void on_btnAdd_clicked();
 
   void on_btnDel_clicked();
@@ -83,6 +81,10 @@ class dlgDatabase : public QDialog {
   void on_btnAMD_clicked();
 
   void on_btnOpenDir_clicked();
+
+  void on_btnIntelOnline_clicked();
+
+  void on_btnAMDOnline_clicked();
 
  private:
   void writeIni(QString key, int arg1);
