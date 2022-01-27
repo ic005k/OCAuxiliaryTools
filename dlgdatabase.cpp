@@ -347,8 +347,7 @@ void dlgDatabase::refreshKextUrl() {
       "NightShiftEnabler.kext | https://github.com/cdf/NightShiftEnabler");
   ui->textEdit->append(
       "NoTouchID.kext | https://github.com/al3xtjames/NoTouchID");
-  ui->textEdit->append(
-      "USBInjectAll.kext | https://github.com/johnlimabravo/USBInjectAll");
+
   ui->textEdit->append(
       "RadeonSensor.kext | https://github.com/aluveitie/RadeonSensor");
   ui->textEdit->append(
@@ -361,6 +360,11 @@ void dlgDatabase::refreshKextUrl() {
       "https://github.com/trulyspinach/SMCAMDProcessor");
   ui->textEdit->append(
       "SMCAMDProcessor.kext | https://github.com/trulyspinach/SMCAMDProcessor");
+
+  ui->textEdit->append(
+      "USBInjectAll.kext | https://github.com/daliansky/OS-X-USB-Inject-All");
+
+  // ui->textEdit->append(" | ");
   // ui->textEdit->append(" | ");
 
   QTextEdit *txtEdit = new QTextEdit;
