@@ -102,6 +102,9 @@ Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJetti
 
 Thanks to @5T33Z0 for providing the above content.
 
-CPU:AMD ThreadRipper (TRX40) and AMD Ryzen (AM4)
+CPU:AMD ThreadRipper (TRX40) and AMD Ryzen (X570)
 Kernel:DisableLinkeditJettison ExternalDiskIcons ProvideCurrentCpuInfo
+
+CPU:AMD ThreadRipper (TRX40) and AMD Ryzen (X370)
+Kernel:DisableLinkeditJettison ProvideCurrentCpuInfo XhciPortLimit
 
