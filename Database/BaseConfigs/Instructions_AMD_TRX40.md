@@ -1,6 +1,8 @@
 # Instructions
 **Introduction:**
 
+**macOS Monterey 12.3 new beta may need to install this kext AppleMCEReporterDisabler.kext**
+
 **AMD** platform is not currently supported by Apple, there is no official support not even from the developers of the main bootloader (OpenCore), but despite this it is possible to have a hackintosh based on the **AMD** platform and OSX from **macOS High Sierra till Monterey 12.2.x** thanks to the unofficial support of the developers and to the strong commitment of the **AMD** community.
 
 #### Generate EFI Folder using OpenCore Auxiliary Tools
