@@ -11332,8 +11332,6 @@ void MainWindow::on_actionPreferences_triggered() {
   else
     myDatabase->ui->tabWidget->setDocumentMode(false);
 
-    // myDatabase->ui->tabWidget->setCurrentIndex(2);
-
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
   {
     myDatabase->ui->tabWidget->setTabVisible(0, false);
@@ -11356,7 +11354,6 @@ void MainWindow::on_actionPreferences_triggered() {
   myDatabase->show();
   if (myDatabase->ui->tableKextUrl->rowCount() > 0) {
     myDatabase->ui->tableKextUrl->clearSelection();
-    // myDatabase->ui->tableKextUrl->setCurrentCell(0, 0);
   }
 }
 

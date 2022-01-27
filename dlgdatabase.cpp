@@ -283,89 +283,9 @@ void dlgDatabase::on_btnRefreshAll_clicked() {
 }
 
 void dlgDatabase::refreshKextUrl() {
+  QString file = mw_one->strAppExePath + "/Database/preset/KextUrl.txt";
   ui->textEdit->clear();
-  ui->textEdit->append("Lilu.kext | https://github.com/acidanthera/Lilu");
-  ui->textEdit->append(
-      "AppleALC.kext | https://github.com/acidanthera/AppleALC");
-  ui->textEdit->append(
-      "VoodooPS2Controller.kext | https://github.com/acidanthera/VoodooPS2");
-  ui->textEdit->append(
-      "WhateverGreen.kext | https://github.com/acidanthera/WhateverGreen");
-  ui->textEdit->append(
-      "VirtualSMC.kext | https://github.com/acidanthera/VirtualSMC");
-  ui->textEdit->append(
-      "VoodooI2C.kext | https://github.com/VoodooI2C/VoodooI2C");
-  ui->textEdit->append(
-      "RestrictEvents.kext | https://github.com/acidanthera/RestrictEvents");
-  ui->textEdit->append(
-      "HibernationFixup.kext | "
-      "https://github.com/acidanthera/HibernationFixup");
-  ui->textEdit->append(
-      "BrcmPatchRAM.kext | https://github.com/acidanthera/BrcmPatchRAM");
-  ui->textEdit->append(
-      "CpuTscSync.kext | https://github.com/acidanthera/CpuTscSync");
-  ui->textEdit->append(
-      "BrightnessKeys.kext | https://github.com/acidanthera/BrightnessKeys");
-  ui->textEdit->append(
-      "AirportBrcmFixup.kext | "
-      "https://github.com/acidanthera/AirportBrcmFixup");
-  ui->textEdit->append(
-      "RTCMemoryFixup.kext | https://github.com/acidanthera/RTCMemoryFixup");
-  ui->textEdit->append(
-      "MacHyperVSupport.kext | "
-      "https://github.com/acidanthera/MacHyperVSupport");
-  ui->textEdit->append("NVMeFix.kext | https://github.com/acidanthera/NVMeFix");
-  ui->textEdit->append(
-      "RealtekCardReader.kext | "
-      "https://github.com/0xFireWolf/RealtekCardReader");
-  ui->textEdit->append(
-      "RealtekCardReaderFriend.kext | "
-      "https://github.com/0xFireWolf/RealtekCardReaderFriend");
-  ui->textEdit->append(
-      "ECEnabler.kext | https://github.com/1Revenger1/ECEnabler");
-  ui->textEdit->append(
-      "RealtekRTL8111.kext | https://github.com/Mieze/RTL8111_driver_for_OS_X");
-  ui->textEdit->append(
-      "CPUFriend.kext | https://github.com/acidanthera/CPUFriend");
-  ui->textEdit->append(
-      "VoodooInput.kext | https://github.com/acidanthera/VoodooInput");
-  ui->textEdit->append(
-      "LucyRTL8125Ethernet.kext | "
-      "https://github.com/Mieze/LucyRTL8125Ethernet");
-  ui->textEdit->append("Innie.kext | https://github.com/cdf/Innie");
-  ui->textEdit->append(
-      "AtherosE2200Ethernet.kext | "
-      "https://github.com/Mieze/AtherosE2200Ethernet");
-  ui->textEdit->append(
-      "DebugEnhancer.kext | https://github.com/acidanthera/DebugEnhancer");
-  ui->textEdit->append(
-      "IntelMausi.kext | https://github.com/acidanthera/IntelMausi");
-  ui->textEdit->append(
-      "ALC256.kext | "
-      "https://github.com/ic005k/ALC256");
-  ui->textEdit->append(
-      "NightShiftEnabler.kext | https://github.com/cdf/NightShiftEnabler");
-  ui->textEdit->append(
-      "NoTouchID.kext | https://github.com/al3xtjames/NoTouchID");
-
-  ui->textEdit->append(
-      "RadeonSensor.kext | https://github.com/aluveitie/RadeonSensor");
-  ui->textEdit->append(
-      "FakeSMC.kext | "
-      "https://github.com/CloverHackyColor/FakeSMC3_with_plugins");
-  ui->textEdit->append(
-      "FeatureUnlock.kext | https://github.com/acidanthera/FeatureUnlock");
-  ui->textEdit->append(
-      "AMDRyzenCPUPowerManagement.kext | "
-      "https://github.com/trulyspinach/SMCAMDProcessor");
-  ui->textEdit->append(
-      "SMCAMDProcessor.kext | https://github.com/trulyspinach/SMCAMDProcessor");
-
-  ui->textEdit->append(
-      "USBInjectAll.kext | https://github.com/daliansky/OS-X-USB-Inject-All");
-
-  // ui->textEdit->append(" | ");
-  // ui->textEdit->append(" | ");
+  ui->textEdit->setPlainText(mymethod->loadText(file));
 
   QTextEdit *txtEdit = new QTextEdit;
   QString txt = mymethod->loadText(mw_one->strConfigPath + "KextUrl.txt");
