@@ -76,7 +76,7 @@ QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
   if (code == "") {
     QMessageBox::critical(this, "", tr("Network error!"));
 
-    mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
+    mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
     blBreak = true;
     return "";
   }
@@ -192,7 +192,7 @@ void Method::finishKextUpdate(bool blDatabase) {
     }
   }
 
-  mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
+  mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
 
   mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(false);
   if (!blDatabase) mw_one->checkFiles(mw_one->ui->table_kernel_add);
@@ -205,7 +205,7 @@ void Method::kextUpdate() {
   mw_one->myDatabase->refreshKextUrl();
   blBreak = false;
 
-  mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(false);
+  mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(false);
   mw_one->repaint();
   QString test = "https://github.com/acidanthera/Lilu";
 
@@ -336,7 +336,7 @@ void Method::doProcessFinished() {
     dlEnd = true;
 
   } else {
-    mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
+    mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
     mw_one->repaint();
     myfile->close();
     QMessageBox::critical(NULL, "replyDL Error",
@@ -348,6 +348,7 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
                                        qint64 all_total)  //显示
 {
   if (blBreak) return;
+
   mw_one->dlgSyncOC->progBar->setMaximum(all_total);
   mw_one->dlgSyncOC->progBar->setValue(recv_total);
 
@@ -405,7 +406,7 @@ void Method::parse_UpdateJSON(QString str) {
   if (err_rpt.error != QJsonParseError::NoError) {
     QMessageBox::critical(this, "", tr("Network error!"));
 
-    mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
+    mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
     blBreak = true;
     return;
   }
@@ -441,7 +442,7 @@ void Method::parse_UpdateJSON(QString str) {
   if (strDLUrl == "") {
     blBreak = true;
 
-    mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
+    mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
     return;
   }
   kextDLUrlList.append(kextName + "|" + strDLUrl);
@@ -1354,7 +1355,7 @@ QString Method::getFileName(QString file) {
 void Method::cancelKextUpdate() {
   blBreak = true;
 
-  mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
+  mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
 }
 
 void Method::writeLeftTable(QTableWidget* t0, QTableWidget* t) {

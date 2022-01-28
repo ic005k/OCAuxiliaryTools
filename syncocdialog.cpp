@@ -55,6 +55,7 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   ui->listOpenCore->setViewMode(QListView::ListMode);
   ui->listOpenCore->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
+  ui->tableKexts->setEditTriggers(QAbstractItemView::NoEditTriggers);
   ui->tableKexts->horizontalHeader()->setStretchLastSection(true);
   ui->tableKexts->setAlternatingRowColors(true);
   ui->tableKexts->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -65,7 +66,6 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   }
 
   ui->listKexts->setHidden(true);
-  ui->lblSource->setHidden(true);
   ui->label_3->setHidden(true);
   ui->label_4->setHidden(true);
 }
@@ -73,7 +73,7 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
 SyncOCDialog::~SyncOCDialog() { delete ui; }
 
 void SyncOCDialog::on_btnStartSync_clicked() {
-  if (!ui->btnUpKexts->isEnabled()) return;
+  if (!ui->btnCheckUpdate->isEnabled()) return;
   bool ok = true;
   // Kexts
   for (int i = 0; i < sourceKexts.count(); i++) {
@@ -291,7 +291,7 @@ void SyncOCDialog::on_listOpenCore_currentRowChanged(int currentRow) {
 }
 
 void SyncOCDialog::closeEvent(QCloseEvent* event) {
-  if (!ui->btnUpKexts->isEnabled()) event->ignore();
+  if (!ui->btnCheckUpdate->isEnabled()) event->ignore();
   writeCheckStateINI();
 }
 
@@ -317,7 +317,7 @@ void SyncOCDialog::writeCheckStateINI() {
 void SyncOCDialog::keyPressEvent(QKeyEvent* event) {
   switch (event->key()) {
     case Qt::Key_Escape:
-      if (!ui->btnUpKexts->isEnabled())
+      if (!ui->btnCheckUpdate->isEnabled())
         return;
       else
         close();
@@ -341,12 +341,11 @@ void SyncOCDialog::keyPressEvent(QKeyEvent* event) {
   }
 }
 
-void SyncOCDialog::on_btnUpKexts_clicked() {
+void SyncOCDialog::on_btnCheckUpdate_clicked() {
   if (sourceKexts.count() == 0) return;
   ui->btnUpdate->setEnabled(false);
   repaint();
 
-  ui->labelShowDLInfo->setVisible(true);
   progBar = new QProgressBar(this);
   progBar->setTextVisible(false);
   progBar->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -362,6 +361,8 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
       "border-radius:0px;"
       "background-color:rgba(25,255,0,100);"
       "}");
+
+  ui->labelShowDLInfo->setVisible(true);
 
   mymethod->kextUpdate();
 
@@ -391,12 +392,7 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
   ui->tableKexts->setFocus();
 }
 
-void SyncOCDialog::on_btnStop_clicked() {
-  for (int i = 0; i < ui->tableKexts->rowCount(); i++)
-    ui->tableKexts->removeCellWidget(i, 3);
-
-  mymethod->cancelKextUpdate();
-}
+void SyncOCDialog::on_btnStop_clicked() { mymethod->cancelKextUpdate(); }
 
 void SyncOCDialog::on_btnUpdate_clicked() {
   writeCheckStateINI();

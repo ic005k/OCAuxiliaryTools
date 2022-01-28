@@ -46,7 +46,7 @@ class SyncOCDialog : public QDialog {
 
   void on_listOpenCore_currentRowChanged(int currentRow);
 
-  void on_btnUpKexts_clicked();
+  void on_btnCheckUpdate_clicked();
 
   void on_btnStop_clicked();
 
