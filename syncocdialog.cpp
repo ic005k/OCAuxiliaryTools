@@ -28,13 +28,13 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
       "blue;margin:1px,1px,1px,1px;border-radius:6;"
       "color:white}";
 
-  ui->listSource->setStyleSheet(listStyleMain);
-  ui->listTarget->setStyleSheet(listStyleMain);
+  ui->listKexts->setStyleSheet(listStyleMain);
+  ui->listOpenCore->setStyleSheet(listStyleMain);
   int size = 25;
-  ui->listSource->setIconSize(QSize(15, 15));
-  ui->listTarget->setIconSize(QSize(15, 15));
-  ui->listSource->setGridSize(QSize(size, size));
-  ui->listTarget->setGridSize(QSize(size, size));
+  ui->listKexts->setIconSize(QSize(15, 15));
+  ui->listOpenCore->setIconSize(QSize(15, 15));
+  ui->listKexts->setGridSize(QSize(size, size));
+  ui->listOpenCore->setGridSize(QSize(size, size));
 
   ui->label->setFixedHeight(40);
   ui->label->setFixedWidth(40);
@@ -50,11 +50,11 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   ui->progressBarKext->setHidden(true);
   ui->btnUpdate->setEnabled(false);
 
-  ui->listSource->setViewMode(QListView::ListMode);
-  ui->listSource->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  ui->listKexts->setViewMode(QListView::ListMode);
+  ui->listKexts->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
-  ui->listTarget->setViewMode(QListView::ListMode);
-  ui->listTarget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  ui->listOpenCore->setViewMode(QListView::ListMode);
+  ui->listOpenCore->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
@@ -83,7 +83,7 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     QString strSou = sourceOpenCore.at(i);
     QString strTar = targetOpenCore.at(i);
     if (QFile(strSou).exists()) {
-      if (ui->listTarget->item(i)->checkState() == Qt::Checked) {
+      if (ui->listOpenCore->item(i)->checkState() == Qt::Checked) {
         QFile::remove(strTar);
         ok = QFile::copy(strSou, strTar);
       }
@@ -125,12 +125,12 @@ void SyncOCDialog::addVerWidget(int currentRow, QString strTV, QString strSV,
     verList.at(currentRow)->setFont(QFont("Menlo", 12));
   if (mw_one->win) verList.at(currentRow)->setFont(QFont("consolas"));
 
-  ui->listSource->item(currentRow)->setText("        " + strShowFileName);
+  ui->listKexts->item(currentRow)->setText("        " + strShowFileName);
   verList.at(currentRow)->setText(strTV + "    " + strSV + " ");
 
   QString strStyleSel = "QLabel {color: #e6e6e6;background-color: none;}";
   QString strStyle = "QLabel {color: #2c2c2c;background-color: none;}";
-  for (int i = 0; i < ui->listSource->count(); i++) {
+  for (int i = 0; i < ui->listKexts->count(); i++) {
     if (i == currentRow)
       verList.at(currentRow)->setStyleSheet(strStyleSel);
     else
@@ -138,12 +138,12 @@ void SyncOCDialog::addVerWidget(int currentRow, QString strTV, QString strSV,
   }
 }
 
-void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
+void SyncOCDialog::on_listKexts_currentRowChanged(int currentRow) {
   if (currentRow < 0) return;
 
-  ui->listSource->item(ui->listSource->currentRow())
+  ui->listKexts->item(ui->listKexts->currentRow())
       ->setForeground(QBrush(Qt::black));
-  ui->listSource->item(ui->listSource->currentRow())
+  ui->listKexts->item(ui->listKexts->currentRow())
       ->setBackground(QBrush(QColor("#FFD39B")));
 
   QString sourceModi, targetModi, sourceFile, targetFile, sourceHash,
@@ -183,21 +183,21 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   }
 
   if (!defUS) {
-    ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/nous.png"));
+    ui->listKexts->item(currentRow)->setIcon(QIcon(":/icon/nous.png"));
 
   } else {
     if (!QFile(sourceFile).exists()) {
-      ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
+      ui->listKexts->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
     }
     if (!QFile(targetFile).exists()) {
-      ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
+      ui->listKexts->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
     }
     if (QFile(sourceFile).exists() && QFile(targetFile).exists()) {
       if (strSV > strTV) {
-        ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
+        ui->listKexts->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
 
       } else {
-        ui->listSource->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
+        ui->listKexts->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
       }
     }
   }
@@ -209,16 +209,16 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   }
 }
 
-void SyncOCDialog::on_listSource_itemClicked(QListWidgetItem* item) {
+void SyncOCDialog::on_listKexts_itemClicked(QListWidgetItem* item) {
   Q_UNUSED(item);
 }
 
-void SyncOCDialog::on_listTarget_itemClicked(QListWidgetItem* item) {
+void SyncOCDialog::on_listOpenCore_itemClicked(QListWidgetItem* item) {
   Q_UNUSED(item);
 }
 
 void SyncOCDialog::setListWidgetStyle() {
-  QString fileName = sourceOpenCore.at(ui->listTarget->currentRow());
+  QString fileName = sourceOpenCore.at(ui->listOpenCore->currentRow());
   if (mymethod->isWhatFile(fileName, "efi")) {
     setListWidgetColor("#E0EEEE");
   }
@@ -231,13 +231,13 @@ void SyncOCDialog::setListWidgetStyle() {
 }
 
 void SyncOCDialog::setListWidgetColor(QString color) {
-  ui->listTarget->item(ui->listTarget->currentRow())
+  ui->listOpenCore->item(ui->listOpenCore->currentRow())
       ->setForeground(QBrush(Qt::black));
-  ui->listTarget->item(ui->listTarget->currentRow())
+  ui->listOpenCore->item(ui->listOpenCore->currentRow())
       ->setBackground(QBrush(QColor(color)));
 }
 
-void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
+void SyncOCDialog::on_listOpenCore_currentRowChanged(int currentRow) {
   if (currentRow < 0) return;
 
   setListWidgetStyle();
@@ -270,10 +270,10 @@ void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
                                    sourceHash);
 
   if (sourceHash != targetHash) {
-    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
+    ui->listOpenCore->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
 
   } else {
-    ui->listTarget->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
+    ui->listOpenCore->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
   }
 }
 
@@ -289,14 +289,14 @@ void SyncOCDialog::writeCheckStateINI() {
   strTag.replace("/", "-");
   QString str_0;
   QSettings Reg(qfile, QSettings::IniFormat);
-  for (int i = 0; i < ui->listSource->count(); i++) {
-    str_0 = ui->listSource->item(i)->text().trimmed();
+  for (int i = 0; i < ui->listKexts->count(); i++) {
+    str_0 = ui->listKexts->item(i)->text().trimmed();
     Reg.setValue(strTag + str_0, chkList.at(i)->isChecked());
   }
 
-  for (int i = 0; i < ui->listTarget->count(); i++) {
-    Reg.setValue(strTag + ui->listTarget->item(i)->text().trimmed(),
-                 ui->listTarget->item(i)->checkState());
+  for (int i = 0; i < ui->listOpenCore->count(); i++) {
+    Reg.setValue(strTag + ui->listOpenCore->item(i)->text().trimmed(),
+                 ui->listOpenCore->item(i)->checkState());
   }
 }
 
@@ -328,7 +328,7 @@ void SyncOCDialog::keyPressEvent(QKeyEvent* event) {
 }
 
 void SyncOCDialog::on_btnUpKexts_clicked() {
-  if (ui->listSource->count() == 0) return;
+  if (ui->listKexts->count() == 0) return;
   ui->btnUpdate->setEnabled(false);
   repaint();
 
@@ -351,8 +351,8 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
 
   mymethod->kextUpdate();
 
-  int n = ui->listSource->currentRow();
-  for (int i = 0; i < ui->listSource->count(); i++) {
+  int n = ui->listKexts->currentRow();
+  for (int i = 0; i < ui->listKexts->count(); i++) {
     if (chkList.at(i)->isChecked()) {
       QString sourceFile = sourceKexts.at(i);
       QString targetFile = targetKexts.at(i);
@@ -366,21 +366,21 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
     }
   }
 
-  for (int i = 0; i < ui->listSource->count(); i++) {
-    if (ui->listSource->itemWidget(ui->listSource->item(i)) == progBar) {
-      if (!ui->listSource->currentIndex().isValid()) return;
+  for (int i = 0; i < ui->listKexts->count(); i++) {
+    if (ui->listKexts->itemWidget(ui->listKexts->item(i)) == progBar) {
+      if (!ui->listKexts->currentIndex().isValid()) return;
 
-      ui->listSource->removeItemWidget(ui->listSource->item(i));
+      ui->listKexts->removeItemWidget(ui->listKexts->item(i));
       writeCheckStateINI();
       initKextList();
       readCheckStateINI();
     }
   }
 
-  for (int i = 0; i < ui->listSource->count(); i++)
-    ui->listSource->setCurrentRow(i);
+  for (int i = 0; i < ui->listKexts->count(); i++)
+    ui->listKexts->setCurrentRow(i);
 
-  ui->listSource->setCurrentRow(n);
+  ui->listKexts->setCurrentRow(n);
 }
 
 void SyncOCDialog::on_btnStop_clicked() { mymethod->cancelKextUpdate(); }
@@ -390,20 +390,20 @@ void SyncOCDialog::on_btnUpdate_clicked() {
   ui->btnUpdate->setEnabled(false);
   repaint();
 
-  int n = ui->listSource->currentRow();
-  for (int i = 0; i < ui->listSource->count(); i++) {
-    ui->listSource->setCurrentRow(i);
+  int n = ui->listKexts->currentRow();
+  for (int i = 0; i < ui->listKexts->count(); i++) {
+    ui->listKexts->setCurrentRow(i);
   }
-  ui->listSource->setCurrentRow(n);
+  ui->listKexts->setCurrentRow(n);
 }
 
 void SyncOCDialog::on_btnSelectAll_clicked() {
-  for (int i = 0; i < ui->listSource->count(); i++)
+  for (int i = 0; i < ui->listKexts->count(); i++)
     chkList.at(i)->setChecked(true);
 }
 
 void SyncOCDialog::on_btnClearAll_clicked() {
-  for (int i = 0; i < ui->listSource->count(); i++)
+  for (int i = 0; i < ui->listKexts->count(); i++)
     chkList.at(i)->setChecked(false);
 }
 
@@ -416,7 +416,7 @@ void SyncOCDialog::initKextList() {
 
   QString strStyle = "QLabel {color: #2c2c2c;background-color: none;}";
 
-  for (int i = 0; i < ui->listSource->count(); i++) {
+  for (int i = 0; i < ui->listKexts->count(); i++) {
     QWidget* w = new QWidget(this);
     QHBoxLayout* layout = new QHBoxLayout(w);
     layout->setMargin(0);
@@ -441,7 +441,7 @@ void SyncOCDialog::initKextList() {
     layout->addWidget(lblVer, 0, Qt::AlignRight | Qt::AlignAbsolute);
 
     w->setLayout(layout);
-    ui->listSource->setItemWidget(ui->listSource->item(i), w);
+    ui->listKexts->setItemWidget(ui->listKexts->item(i), w);
   }
 }
 
@@ -450,8 +450,8 @@ void SyncOCDialog::readCheckStateINI() {
   QString strTag = SaveFileName;
   strTag.replace("/", "-");
   QSettings Reg(qfile, QSettings::IniFormat);
-  for (int i = 0; i < ui->listSource->count(); i++) {
-    QString str_0 = ui->listSource->item(i)->text().trimmed();
+  for (int i = 0; i < ui->listKexts->count(); i++) {
+    QString str_0 = ui->listKexts->item(i)->text().trimmed();
     QString strValue = strTag + str_0;
     bool yes = false;
     for (int m = 0; m < Reg.allKeys().count(); m++) {
@@ -465,8 +465,8 @@ void SyncOCDialog::readCheckStateINI() {
     }
   }
 
-  for (int i = 0; i < ui->listTarget->count(); i++) {
-    QString strValue = strTag + ui->listTarget->item(i)->text().trimmed();
+  for (int i = 0; i < ui->listOpenCore->count(); i++) {
+    QString strValue = strTag + ui->listOpenCore->item(i)->text().trimmed();
     bool yes = false;
     for (int m = 0; m < Reg.allKeys().count(); m++) {
       if (Reg.allKeys().at(m).contains(strValue)) {
@@ -475,8 +475,9 @@ void SyncOCDialog::readCheckStateINI() {
     }
     if (yes) {
       int strCheck = Reg.value(strValue).toInt();
-      if (strCheck == 2) ui->listTarget->item(i)->setCheckState(Qt::Checked);
-      if (strCheck == 0) ui->listTarget->item(i)->setCheckState(Qt::Unchecked);
+      if (strCheck == 2) ui->listOpenCore->item(i)->setCheckState(Qt::Checked);
+      if (strCheck == 0)
+        ui->listOpenCore->item(i)->setCheckState(Qt::Unchecked);
     }
   }
 }
@@ -492,8 +493,8 @@ void SyncOCDialog::init_Sync_OC() {
   targetKexts.clear();
   sourceOpenCore.clear();
   targetOpenCore.clear();
-  ui->listSource->clear();
-  ui->listTarget->clear();
+  ui->listKexts->clear();
+  ui->listOpenCore->clear();
 
   QString DirName;
   QMessageBox box;
@@ -585,18 +586,18 @@ void SyncOCDialog::init_Sync_OC() {
   for (int i = 0; i < sourceKexts.count(); i++) {
     QString f = sourceKexts.at(i);
     QString str_name = mymethod->getFileName(f);
-    ui->listSource->addItem(str_name);
+    ui->listKexts->addItem(str_name);
   }
 
   for (int i = 0; i < sourceOpenCore.count(); i++) {
     QString f = sourceOpenCore.at(i);
     QString str_name = mymethod->getFileName(f);
-    ui->listTarget->addItem(str_name);
+    ui->listOpenCore->addItem(str_name);
   }
 
   initKextList();
 
-  for (int i = 0; i < ui->listSource->count(); i++) {
+  for (int i = 0; i < ui->listKexts->count(); i++) {
     QString strF1 = sourceKexts.at(i);
     QString strF2 = targetKexts.at(i);
     if (strF1 != "None") {
@@ -608,8 +609,8 @@ void SyncOCDialog::init_Sync_OC() {
       chkList.at(i)->setChecked(false);
   }
 
-  for (int i = 0; i < ui->listTarget->count(); i++) {
-    ui->listTarget->item(i)->setCheckState(Qt::Checked);
+  for (int i = 0; i < ui->listOpenCore->count(); i++) {
+    ui->listOpenCore->item(i)->setCheckState(Qt::Checked);
   }
 
   if (!blDEV) {
@@ -624,13 +625,13 @@ void SyncOCDialog::init_Sync_OC() {
   //                           Qt::WindowStaysOnTopHint);
   setModal(true);
   show();
-  ui->listSource->setFocus();
+  ui->listKexts->setFocus();
 
-  for (int i = 0; i < ui->listSource->count(); i++) {
-    ui->listSource->setCurrentRow(i);
+  for (int i = 0; i < ui->listKexts->count(); i++) {
+    ui->listKexts->setCurrentRow(i);
   }
-  for (int i = 0; i < ui->listTarget->count(); i++) {
-    ui->listTarget->setCurrentRow(i);
+  for (int i = 0; i < ui->listOpenCore->count(); i++) {
+    ui->listOpenCore->setCurrentRow(i);
   }
   repaint();
 

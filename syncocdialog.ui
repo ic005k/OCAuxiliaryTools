@@ -55,7 +55,7 @@
       </layout>
      </item>
      <item row="1" column="0">
-      <widget class="QListWidget" name="listSource">
+      <widget class="QListWidget" name="listKexts">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -263,7 +263,7 @@
       </layout>
      </item>
      <item row="1" column="0">
-      <widget class="QListWidget" name="listTarget">
+      <widget class="QListWidget" name="listOpenCore">
        <property name="minimumSize">
         <size>
          <width>0</width>

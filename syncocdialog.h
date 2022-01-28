@@ -37,13 +37,13 @@ class SyncOCDialog : public QDialog {
  private slots:
   void on_btnStartSync_clicked();
 
-  void on_listSource_currentRowChanged(int currentRow);
+  void on_listKexts_currentRowChanged(int currentRow);
 
-  void on_listSource_itemClicked(QListWidgetItem *item);
+  void on_listKexts_itemClicked(QListWidgetItem *item);
 
-  void on_listTarget_itemClicked(QListWidgetItem *item);
+  void on_listOpenCore_itemClicked(QListWidgetItem *item);
 
-  void on_listTarget_currentRowChanged(int currentRow);
+  void on_listOpenCore_currentRowChanged(int currentRow);
 
   void on_btnUpKexts_clicked();
 
