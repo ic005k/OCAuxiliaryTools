@@ -63,9 +63,9 @@ void SyncOCDialog::on_btnStartSync_clicked() {
   if (!ui->btnUpKexts->isEnabled()) return;
   bool ok = true;
   // Kexts
-  for (int i = 0; i < mw_one->sourceKexts.count(); i++) {
-    QString strSou = mw_one->sourceKexts.at(i);
-    QString strTar = mw_one->targetKexts.at(i);
+  for (int i = 0; i < sourceKexts.count(); i++) {
+    QString strSou = sourceKexts.at(i);
+    QString strTar = targetKexts.at(i);
     QString strSV, strTV;
     strSV = mymethod->getKextVersion(strSou);
     strTV = mymethod->getKextVersion(strTar);
@@ -79,9 +79,9 @@ void SyncOCDialog::on_btnStartSync_clicked() {
   }
 
   // OpenCore
-  for (int i = 0; i < mw_one->sourceOpenCore.count(); i++) {
-    QString strSou = mw_one->sourceOpenCore.at(i);
-    QString strTar = mw_one->targetOpenCore.at(i);
+  for (int i = 0; i < sourceOpenCore.count(); i++) {
+    QString strSou = sourceOpenCore.at(i);
+    QString strTar = targetOpenCore.at(i);
     if (QFile(strSou).exists()) {
       if (ui->listTarget->item(i)->checkState() == Qt::Checked) {
         QFile::remove(strTar);
@@ -149,8 +149,8 @@ void SyncOCDialog::on_listSource_currentRowChanged(int currentRow) {
   QString sourceModi, targetModi, sourceFile, targetFile, sourceHash,
       targetHash;
 
-  sourceFile = mw_one->sourceKexts.at(currentRow);
-  targetFile = mw_one->targetKexts.at(currentRow);
+  sourceFile = sourceKexts.at(currentRow);
+  targetFile = targetKexts.at(currentRow);
 
   sourceHash = mw_one->getMD5(mymethod->getKextBin(sourceFile));
   targetHash = mw_one->getMD5(mymethod->getKextBin(targetFile));
@@ -218,7 +218,7 @@ void SyncOCDialog::on_listTarget_itemClicked(QListWidgetItem* item) {
 }
 
 void SyncOCDialog::setListWidgetStyle() {
-  QString fileName = mw_one->sourceOpenCore.at(ui->listTarget->currentRow());
+  QString fileName = sourceOpenCore.at(ui->listTarget->currentRow());
   if (mymethod->isWhatFile(fileName, "efi")) {
     setListWidgetColor("#E0EEEE");
   }
@@ -245,8 +245,8 @@ void SyncOCDialog::on_listTarget_currentRowChanged(int currentRow) {
   QString sourceModi, targetModi, sourceFile, targetFile, sourceHash,
       targetHash;
 
-  sourceFile = mw_one->sourceOpenCore.at(currentRow);
-  targetFile = mw_one->targetOpenCore.at(currentRow);
+  sourceFile = sourceOpenCore.at(currentRow);
+  targetFile = targetOpenCore.at(currentRow);
 
   if (mymethod->isKext(sourceFile))
     sourceHash = mw_one->getMD5(mymethod->getKextBin(sourceFile));
@@ -354,8 +354,8 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
   int n = ui->listSource->currentRow();
   for (int i = 0; i < ui->listSource->count(); i++) {
     if (chkList.at(i)->isChecked()) {
-      QString sourceFile = mw_one->sourceKexts.at(i);
-      QString targetFile = mw_one->targetKexts.at(i);
+      QString sourceFile = sourceKexts.at(i);
+      QString targetFile = targetKexts.at(i);
       QString strSV, strTV;
       strSV = mymethod->getKextVersion(sourceFile);
       strTV = mymethod->getKextVersion(targetFile);
@@ -485,4 +485,159 @@ void SyncOCDialog::on_btnSettings_clicked() {
   mw_one->myDatabase->close();
   mw_one->on_actionPreferences_triggered();
   mw_one->myDatabase->ui->tabWidget->setCurrentIndex(1);
+}
+
+void SyncOCDialog::init_Sync_OC() {
+  sourceKexts.clear();
+  targetKexts.clear();
+  sourceOpenCore.clear();
+  targetOpenCore.clear();
+  ui->listSource->clear();
+  ui->listTarget->clear();
+
+  QString DirName;
+  QMessageBox box;
+
+  QFileInfo fi(SaveFileName);
+  DirName = fi.path().mid(0, fi.path().count() - 3);
+
+  if (DirName.isEmpty()) return;
+
+  QString pathOldSource = mw_one->strAppExePath + "/Database/";
+
+  QString file1, file2, file3, file4;
+  QString targetFile1, targetFile2, targetFile3, targetFile4;
+  file1 = mw_one->pathSource + "EFI/OC/OpenCore.efi";
+  file2 = mw_one->pathSource + "EFI/BOOT/BOOTx64.efi";
+  file3 = mw_one->pathSource + "EFI/OC/Drivers/OpenRuntime.efi";
+  file4 = mw_one->pathSource + "EFI/OC/Drivers/OpenCanopy.efi";
+  sourceOpenCore.append(file1);
+  sourceOpenCore.append(file2);
+  sourceOpenCore.append(file3);
+  sourceOpenCore.append(file4);
+
+  targetFile1 = DirName + "/OC/OpenCore.efi";
+  targetFile2 = DirName + "/BOOT/BOOTx64.efi";
+  targetFile3 = DirName + "/OC/Drivers/OpenRuntime.efi";
+  targetFile4 = DirName + "/OC/Drivers/OpenCanopy.efi";
+  targetOpenCore.append(targetFile1);
+  targetOpenCore.append(targetFile2);
+  targetOpenCore.append(targetFile3);
+  targetOpenCore.append(targetFile4);
+
+  // Drivers
+  for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
+    QString str1 = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
+    QString str2 = mw_one->pathSource + "EFI/OC/Drivers/" + str1;
+    bool re = false;
+    for (int j = 0; j < sourceOpenCore.count(); j++) {
+      if (sourceOpenCore.at(j) == str2) re = true;
+    }
+    if (!re) {
+      sourceOpenCore.append(str2);
+      targetOpenCore.append(DirName + "/OC/Drivers/" + str1);
+    }
+  }
+
+  // Kexts
+  if (mw_one->linuxOS) {
+    mw_one->copyDirectoryFiles(pathOldSource + "EFI/OC/Kexts/",
+                               QDir::homePath() + "/Kexts/", false);
+  }
+  for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
+    QString strKextName =
+        mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
+    if (!strKextName.contains("/Contents/PlugIns/")) {
+      if (mw_one->linuxOS)
+        sourceKexts.append(QDir::homePath() + "/Kexts/" + strKextName);
+      else
+        sourceKexts.append(pathOldSource + "EFI/OC/Kexts/" + strKextName);
+      targetKexts.append(DirName + "/OC/Kexts/" + strKextName);
+    }
+  }
+
+  // Tools
+  QStringList dbToolsFileList =
+      mymethod->DirToFileList(mw_one->pathSource + "EFI/OC/Tools/", "*.efi");
+  for (int i = 0; i < mw_one->ui->tableTools->rowCount(); i++) {
+    QString strName = mw_one->ui->tableTools->item(i, 0)->text().trimmed();
+    if (mymethod->isEqualInList(strName, dbToolsFileList)) {
+      sourceOpenCore.append(mw_one->pathSource + "EFI/OC/Tools/" + strName);
+      targetOpenCore.append(DirName + "/OC/Tools/" + strName);
+    }
+  }
+
+  QFileInfo f1(file1);
+  QFileInfo f2(file2);
+  QFileInfo f3(file3);
+  QFileInfo f4(file4);
+
+  this->setFocus();
+  if (!f1.exists() || !f2.exists() || !f3.exists() || !f4.exists()) {
+    box.setText(
+        tr("The database file is incomplete and the upgrade cannot be "
+           "completed."));
+    box.exec();
+    mw_one->ui->cboxFind->setFocus();
+    return;
+  }
+
+  for (int i = 0; i < sourceKexts.count(); i++) {
+    QString f = sourceKexts.at(i);
+    QString str_name = mymethod->getFileName(f);
+    ui->listSource->addItem(str_name);
+  }
+
+  for (int i = 0; i < sourceOpenCore.count(); i++) {
+    QString f = sourceOpenCore.at(i);
+    QString str_name = mymethod->getFileName(f);
+    ui->listTarget->addItem(str_name);
+  }
+
+  initKextList();
+
+  for (int i = 0; i < ui->listSource->count(); i++) {
+    QString strF1 = sourceKexts.at(i);
+    QString strF2 = targetKexts.at(i);
+    if (strF1 != "None") {
+      if (mymethod->getKextVersion(strF1) > mymethod->getKextVersion(strF2))
+        chkList.at(i)->setChecked(true);
+      else
+        chkList.at(i)->setChecked(false);
+    } else
+      chkList.at(i)->setChecked(false);
+  }
+
+  for (int i = 0; i < ui->listTarget->count(); i++) {
+    ui->listTarget->item(i)->setCheckState(Qt::Checked);
+  }
+
+  if (!blDEV) {
+    ui->lblOCFrom->setText(ocFrom);
+    setWindowTitle(tr("Sync OC") + " -> " + ocVer);
+  } else {
+    ui->lblOCFrom->setText(ocFromDev);
+    setWindowTitle(tr("Sync OC") + " -> " + ocVerDev);
+  }
+
+  // dlgSyncOC->setWindowFlags(dlgAutoUpdate->windowFlags() |
+  //                           Qt::WindowStaysOnTopHint);
+  setModal(true);
+  show();
+  ui->listSource->setFocus();
+
+  for (int i = 0; i < ui->listSource->count(); i++) {
+    ui->listSource->setCurrentRow(i);
+  }
+  for (int i = 0; i < ui->listTarget->count(); i++) {
+    ui->listTarget->setCurrentRow(i);
+  }
+  repaint();
+
+  // Resources
+  sourceResourcesDir = mw_one->pathSource + "EFI/OC/Resources/";
+  targetResourcesDir = DirName + "/OC/Resources/";
+
+  // Read check status
+  readCheckStateINI();
 }

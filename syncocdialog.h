@@ -19,6 +19,8 @@ class SyncOCDialog : public QDialog {
   explicit SyncOCDialog(QWidget *parent = nullptr);
   ~SyncOCDialog();
   Ui::SyncOCDialog *ui;
+
+  QStringList sourceKexts, targetKexts, sourceOpenCore, targetOpenCore;
   QString sourceResourcesDir;
   QString targetResourcesDir;
   QStringList sourceFileList;
@@ -31,6 +33,7 @@ class SyncOCDialog : public QDialog {
   bool eventFilter(QObject *o, QEvent *e);
   void initKextList();
   void readCheckStateINI();
+  void init_Sync_OC();
  private slots:
   void on_btnStartSync_clicked();
 

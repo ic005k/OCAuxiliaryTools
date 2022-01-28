@@ -99,8 +99,7 @@ class MainWindow : public QMainWindow {
   QStringList listNVRAMLs;
   QStringList listDPAdd;
   QStringList listDPDel;
-  QStringList sourceFiles, targetFiles, sourceKexts, targetKexts,
-      sourceOpenCore, targetOpenCore;
+
   QString strConfigPath;
   void updateIconStatus();
   QTimer* timer;
