@@ -664,6 +664,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
 
   QString DirName;
   QMessageBox box;
+  QIcon icon;
 
   QFileInfo fi(SaveFileName);
   DirName = fi.path().mid(0, fi.path().count() - 3);
@@ -773,7 +774,6 @@ void SyncOCDialog::init_Sync_OC_Table() {
     item = new QTableWidgetItem(Available);
     ui->tableKexts->setItem(i, 2, item);
 
-    QIcon icon;
     if (Available != "None") {
       if (Available > Current) {
         chk->setChecked(true);
@@ -794,6 +794,28 @@ void SyncOCDialog::init_Sync_OC_Table() {
       icon.addFile(":/icon/ok.png", QSize(10, 10));
       QTableWidgetItem* id1 = new QTableWidgetItem(icon, "");
       ui->tableKexts->setVerticalHeaderItem(i, id1);
+    }
+  }
+
+  mw_one->myDatabase->refreshKextUrl();
+  for (int j = 0; j < sourceKexts.count(); j++) {
+    QString str1 = QFileInfo(sourceKexts.at(j)).fileName();
+    bool defUS = false;
+    for (int i = 0; i < mw_one->myDatabase->ui->tableKextUrl->rowCount(); i++) {
+      QString str =
+          mw_one->myDatabase->ui->tableKextUrl->item(i, 0)->text().trimmed();
+
+      if (str1 == str || str1.mid(0, 3) == "SMC" || str1.contains("AppleALC") ||
+          str1.contains("BlueTool") || str1.contains("VoodooPS2Controller") ||
+          str1.contains("VoodooI2C") || str1.contains("Brcm") ||
+          str1.contains("IntelSnowMausi"))
+        defUS = true;
+    }
+
+    if (!defUS) {
+      icon.addFile(":/icon/nous.png", QSize(10, 10));
+      QTableWidgetItem* id1 = new QTableWidgetItem(icon, "");
+      ui->tableKexts->setVerticalHeaderItem(j, id1);
     }
   }
 
