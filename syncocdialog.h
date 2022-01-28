@@ -34,6 +34,7 @@ class SyncOCDialog : public QDialog {
   void initKextList();
   void readCheckStateINI();
   void init_Sync_OC();
+  void init_Sync_OC_Table();
  private slots:
   void on_btnStartSync_clicked();
 
@@ -56,6 +57,8 @@ class SyncOCDialog : public QDialog {
   void on_btnClearAll_clicked();
 
   void on_btnSettings_clicked();
+
+  void on_tableKexts_itemSelectionChanged();
 
  private:
   void setListWidgetStyle();

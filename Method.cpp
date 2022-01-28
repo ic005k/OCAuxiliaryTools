@@ -182,14 +182,12 @@ void Method::finishKextUpdate(bool blDatabase) {
       QString Name = getFileName(dirSource);
       dirTarget = strKexts + Name;
 
-      for (int j = 0; j < mw_one->dlgSyncOC->ui->listKexts->count(); j++) {
-        QString str_1 =
-            mw_one->dlgSyncOC->ui->listKexts->item(j)->text().trimmed();
-        if (Name == str_1 && mw_one->dlgSyncOC->chkList.at(j)->isChecked()) {
+      for (int j = 0; j < mw_one->dlgSyncOC->sourceKexts.count(); j++) {
+        QString str_1 = mw_one->dlgSyncOC->ui->tableKexts->item(j, 3)->text();
+        if (Name == str_1 && mw_one->dlgSyncOC->chkList.at(j)->isChecked())
           mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
 
-          qDebug() << dirSource << dirTarget;
-        }
+        qDebug() << dirSource << dirTarget;
       }
     }
   }
@@ -199,10 +197,6 @@ void Method::finishKextUpdate(bool blDatabase) {
   mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(false);
   if (!blDatabase) mw_one->checkFiles(mw_one->ui->table_kernel_add);
   mw_one->repaint();
-  int n = mw_one->dlgSyncOC->ui->listKexts->currentRow();
-  for (int i = 0; i < mw_one->dlgSyncOC->ui->listKexts->count(); i++)
-    mw_one->dlgSyncOC->ui->listKexts->setCurrentRow(i);
-  mw_one->dlgSyncOC->ui->listKexts->setCurrentRow(n);
 }
 
 void Method::kextUpdate() {
@@ -215,11 +209,17 @@ void Method::kextUpdate() {
   mw_one->repaint();
   QString test = "https://github.com/acidanthera/Lilu";
 
-  for (int i = 0; i < mw_one->dlgSyncOC->ui->listKexts->count(); i++) {
+  for (int i = 0; i < mw_one->dlgSyncOC->sourceKexts.count(); i++) {
     if (blBreak) break;
     if (mw_one->dlgSyncOC->chkList.at(i)->isChecked()) {
       QString name =
-          mw_one->dlgSyncOC->ui->listKexts->item(i)->text().trimmed();
+          // mw_one->dlgSyncOC->ui->listKexts->item(i)->text().trimmed();
+          mw_one->dlgSyncOC->ui->tableKexts->item(i, 3)->text().trimmed();
+      mw_one->dlgSyncOC->ui->tableKexts->setCurrentCell(i, 0);
+      mw_one->dlgSyncOC->ui->tableKexts->setFocus();
+      mw_one->dlgSyncOC->ui->tableKexts->setCellWidget(
+          i, 3, mw_one->dlgSyncOC->progBar);
+
       kextName = name;
       for (int j = 0; j < mw_one->myDatabase->ui->tableKextUrl->rowCount();
            j++) {
@@ -246,12 +246,6 @@ void Method::kextUpdate() {
               getLastReleaseFromHtml(test + "/releases/latest");
           } else {
             startDownload(strUrl);
-          }
-          mw_one->dlgSyncOC->ui->listKexts->setCurrentRow(i);
-          if (mw_one->dlgSyncOC->ui->listKexts->currentIndex().isValid()) {
-            mw_one->dlgSyncOC->ui->listKexts->setItemWidget(
-                mw_one->dlgSyncOC->ui->listKexts->item(i),
-                mw_one->dlgSyncOC->progBar);
           }
 
           QElapsedTimer t;

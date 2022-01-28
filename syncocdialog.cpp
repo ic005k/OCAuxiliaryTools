@@ -47,7 +47,6 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   ui->btnStartSync->setDefault(true);
   ui->labelShowDLInfo->setVisible(false);
   ui->labelShowDLInfo->setText("");
-  ui->progressBarKext->setHidden(true);
   ui->btnUpdate->setEnabled(false);
 
   ui->listKexts->setViewMode(QListView::ListMode);
@@ -55,6 +54,20 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
 
   ui->listOpenCore->setViewMode(QListView::ListMode);
   ui->listOpenCore->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+
+  ui->tableKexts->horizontalHeader()->setStretchLastSection(true);
+  ui->tableKexts->setAlternatingRowColors(true);
+  ui->tableKexts->setSelectionMode(QAbstractItemView::SingleSelection);
+  ui->tableKexts->setSelectionBehavior(QAbstractItemView::SelectRows);
+  for (int i = 0; i < ui->tableKexts->columnCount(); i++) {
+    ui->tableKexts->horizontalHeader()->setSectionResizeMode(
+        i, QHeaderView::ResizeToContents);
+  }
+
+  ui->listKexts->setHidden(true);
+  ui->lblSource->setHidden(true);
+  ui->label_3->setHidden(true);
+  ui->label_4->setHidden(true);
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
@@ -289,11 +302,12 @@ void SyncOCDialog::writeCheckStateINI() {
   strTag.replace("/", "-");
   QString str_0;
   QSettings Reg(qfile, QSettings::IniFormat);
-  for (int i = 0; i < ui->listKexts->count(); i++) {
-    str_0 = ui->listKexts->item(i)->text().trimmed();
+  for (int i = 0; i < sourceKexts.count(); i++) {
+    str_0 = ui->tableKexts->item(i, 3)->text().trimmed();
     Reg.setValue(strTag + str_0, chkList.at(i)->isChecked());
   }
 
+  // OpenCore
   for (int i = 0; i < ui->listOpenCore->count(); i++) {
     Reg.setValue(strTag + ui->listOpenCore->item(i)->text().trimmed(),
                  ui->listOpenCore->item(i)->checkState());
@@ -328,7 +342,7 @@ void SyncOCDialog::keyPressEvent(QKeyEvent* event) {
 }
 
 void SyncOCDialog::on_btnUpKexts_clicked() {
-  if (ui->listKexts->count() == 0) return;
+  if (sourceKexts.count() == 0) return;
   ui->btnUpdate->setEnabled(false);
   repaint();
 
@@ -342,68 +356,63 @@ void SyncOCDialog::on_btnUpKexts_clicked() {
       "background:rgba(25,255,25,0);"
       "text-align:right;"
       "color:rgb(255,255,255);"
-      "border-radius:6px;}"
+      "border-radius:0px;}"
 
       "QProgressBar:chunk{"
-      "border-radius:6px;"
-      "background-color:rgba(0,255,0,100);"
+      "border-radius:0px;"
+      "background-color:rgba(25,255,0,100);"
       "}");
 
   mymethod->kextUpdate();
 
-  int n = ui->listKexts->currentRow();
-  for (int i = 0; i < ui->listKexts->count(); i++) {
+  QString Current, Available;
+
+  for (int i = 0; i < sourceKexts.count(); i++) {
+    QString sourceFile = sourceKexts.at(i);
+    QString targetFile = targetKexts.at(i);
+
     if (chkList.at(i)->isChecked()) {
-      QString sourceFile = sourceKexts.at(i);
-      QString targetFile = targetKexts.at(i);
-      QString strSV, strTV;
-      strSV = mymethod->getKextVersion(sourceFile);
-      strTV = mymethod->getKextVersion(targetFile);
-      if ((strSV > strTV || strTV == "None") && QDir(sourceFile).exists()) {
+      Available = mymethod->getKextVersion(sourceFile);
+      Current = mymethod->getKextVersion(targetFile);
+      if ((Available > Current || Current == "None") &&
+          QDir(sourceFile).exists()) {
         ui->btnUpdate->setEnabled(true);
         repaint();
       }
     }
   }
 
-  for (int i = 0; i < ui->listKexts->count(); i++) {
-    if (ui->listKexts->itemWidget(ui->listKexts->item(i)) == progBar) {
-      if (!ui->listKexts->currentIndex().isValid()) return;
+  writeCheckStateINI();
+  init_Sync_OC_Table();
 
-      ui->listKexts->removeItemWidget(ui->listKexts->item(i));
-      writeCheckStateINI();
-      initKextList();
-      readCheckStateINI();
-    }
-  }
+  for (int i = 0; i < ui->tableKexts->rowCount(); i++)
+    ui->tableKexts->removeCellWidget(i, 3);
 
-  for (int i = 0; i < ui->listKexts->count(); i++)
-    ui->listKexts->setCurrentRow(i);
-
-  ui->listKexts->setCurrentRow(n);
+  ui->tableKexts->setFocus();
 }
 
-void SyncOCDialog::on_btnStop_clicked() { mymethod->cancelKextUpdate(); }
+void SyncOCDialog::on_btnStop_clicked() {
+  for (int i = 0; i < ui->tableKexts->rowCount(); i++)
+    ui->tableKexts->removeCellWidget(i, 3);
+
+  mymethod->cancelKextUpdate();
+}
 
 void SyncOCDialog::on_btnUpdate_clicked() {
+  writeCheckStateINI();
   mymethod->finishKextUpdate(false);
   ui->btnUpdate->setEnabled(false);
   repaint();
 
-  int n = ui->listKexts->currentRow();
-  for (int i = 0; i < ui->listKexts->count(); i++) {
-    ui->listKexts->setCurrentRow(i);
-  }
-  ui->listKexts->setCurrentRow(n);
+  init_Sync_OC_Table();
 }
 
 void SyncOCDialog::on_btnSelectAll_clicked() {
-  for (int i = 0; i < ui->listKexts->count(); i++)
-    chkList.at(i)->setChecked(true);
+  for (int i = 0; i < sourceKexts.count(); i++) chkList.at(i)->setChecked(true);
 }
 
 void SyncOCDialog::on_btnClearAll_clicked() {
-  for (int i = 0; i < ui->listKexts->count(); i++)
+  for (int i = 0; i < sourceKexts.count(); i++)
     chkList.at(i)->setChecked(false);
 }
 
@@ -450,21 +459,22 @@ void SyncOCDialog::readCheckStateINI() {
   QString strTag = SaveFileName;
   strTag.replace("/", "-");
   QSettings Reg(qfile, QSettings::IniFormat);
-  for (int i = 0; i < ui->listKexts->count(); i++) {
-    QString str_0 = ui->listKexts->item(i)->text().trimmed();
+  for (int i = 0; i < sourceKexts.count(); i++) {
+    QString str_0 = ui->tableKexts->item(i, 3)->text();
     QString strValue = strTag + str_0;
-    bool yes = false;
+
+    /*bool yes = false;
     for (int m = 0; m < Reg.allKeys().count(); m++) {
       if (Reg.allKeys().at(m).contains(strValue)) {
         yes = true;
       }
-    }
-    if (yes) {
-      bool strCheck = Reg.value(strValue).toBool();
-      chkList.at(i)->setChecked(strCheck);
-    }
+    }*/
+
+    bool strCheck = Reg.value(strValue).toBool();
+    chkList.at(i)->setChecked(strCheck);
   }
 
+  // OpenCore
   for (int i = 0; i < ui->listOpenCore->count(); i++) {
     QString strValue = strTag + ui->listOpenCore->item(i)->text().trimmed();
     bool yes = false;
@@ -641,4 +651,207 @@ void SyncOCDialog::init_Sync_OC() {
 
   // Read check status
   readCheckStateINI();
+}
+
+void SyncOCDialog::init_Sync_OC_Table() {
+  sourceKexts.clear();
+  targetKexts.clear();
+  sourceOpenCore.clear();
+  targetOpenCore.clear();
+  ui->listKexts->clear();
+  ui->listOpenCore->clear();
+  chkList.clear();
+
+  QString DirName;
+  QMessageBox box;
+
+  QFileInfo fi(SaveFileName);
+  DirName = fi.path().mid(0, fi.path().count() - 3);
+
+  if (DirName.isEmpty()) return;
+
+  QString pathOldSource = mw_one->strAppExePath + "/Database/";
+
+  QString file1, file2, file3, file4;
+  QString targetFile1, targetFile2, targetFile3, targetFile4;
+  file1 = mw_one->pathSource + "EFI/OC/OpenCore.efi";
+  file2 = mw_one->pathSource + "EFI/BOOT/BOOTx64.efi";
+  file3 = mw_one->pathSource + "EFI/OC/Drivers/OpenRuntime.efi";
+  file4 = mw_one->pathSource + "EFI/OC/Drivers/OpenCanopy.efi";
+  sourceOpenCore.append(file1);
+  sourceOpenCore.append(file2);
+  sourceOpenCore.append(file3);
+  sourceOpenCore.append(file4);
+
+  targetFile1 = DirName + "/OC/OpenCore.efi";
+  targetFile2 = DirName + "/BOOT/BOOTx64.efi";
+  targetFile3 = DirName + "/OC/Drivers/OpenRuntime.efi";
+  targetFile4 = DirName + "/OC/Drivers/OpenCanopy.efi";
+  targetOpenCore.append(targetFile1);
+  targetOpenCore.append(targetFile2);
+  targetOpenCore.append(targetFile3);
+  targetOpenCore.append(targetFile4);
+
+  // Drivers
+  for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
+    QString str1 = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
+    QString str2 = mw_one->pathSource + "EFI/OC/Drivers/" + str1;
+    bool re = false;
+    for (int j = 0; j < sourceOpenCore.count(); j++) {
+      if (sourceOpenCore.at(j) == str2) re = true;
+    }
+    if (!re) {
+      sourceOpenCore.append(str2);
+      targetOpenCore.append(DirName + "/OC/Drivers/" + str1);
+    }
+  }
+
+  // Kexts
+  if (mw_one->linuxOS) {
+    mw_one->copyDirectoryFiles(pathOldSource + "EFI/OC/Kexts/",
+                               QDir::homePath() + "/Kexts/", false);
+  }
+  for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
+    QString strKextName =
+        mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
+    if (!strKextName.contains("/Contents/PlugIns/")) {
+      if (mw_one->linuxOS)
+        sourceKexts.append(QDir::homePath() + "/Kexts/" + strKextName);
+      else
+        sourceKexts.append(pathOldSource + "EFI/OC/Kexts/" + strKextName);
+      targetKexts.append(DirName + "/OC/Kexts/" + strKextName);
+    }
+  }
+
+  // Tools
+  QStringList dbToolsFileList =
+      mymethod->DirToFileList(mw_one->pathSource + "EFI/OC/Tools/", "*.efi");
+  for (int i = 0; i < mw_one->ui->tableTools->rowCount(); i++) {
+    QString strName = mw_one->ui->tableTools->item(i, 0)->text().trimmed();
+    if (mymethod->isEqualInList(strName, dbToolsFileList)) {
+      sourceOpenCore.append(mw_one->pathSource + "EFI/OC/Tools/" + strName);
+      targetOpenCore.append(DirName + "/OC/Tools/" + strName);
+    }
+  }
+
+  QFileInfo f1(file1);
+  QFileInfo f2(file2);
+  QFileInfo f3(file3);
+  QFileInfo f4(file4);
+
+  this->setFocus();
+  if (!f1.exists() || !f2.exists() || !f3.exists() || !f4.exists()) {
+    box.setText(
+        tr("The database file is incomplete and the upgrade cannot be "
+           "completed."));
+    box.exec();
+    mw_one->ui->cboxFind->setFocus();
+    return;
+  }
+
+  // Init Kexts
+  ui->tableKexts->setRowCount(0);
+  for (int i = 0; i < sourceKexts.count(); i++) {
+    QString f = sourceKexts.at(i);
+    QString str_name = mymethod->getFileName(f);
+    // ui->listKexts->addItem(str_name);
+    ui->tableKexts->setRowCount(ui->tableKexts->rowCount() + 1);
+    QTableWidgetItem* item = new QTableWidgetItem(str_name);
+    ui->tableKexts->setItem(i, 3, item);
+
+    QCheckBox* chk = new QCheckBox(this);
+    chkList.append(chk);
+    ui->tableKexts->setCellWidget(i, 0, chk);
+    QString strF1 = sourceKexts.at(i);
+    QString strF2 = targetKexts.at(i);
+    QString Current = mymethod->getKextVersion(strF2);
+    QString Available = mymethod->getKextVersion(strF1);
+
+    item = new QTableWidgetItem(Current);
+    ui->tableKexts->setItem(i, 1, item);
+
+    item = new QTableWidgetItem(Available);
+    ui->tableKexts->setItem(i, 2, item);
+
+    QIcon icon;
+    if (Available != "None") {
+      if (Available > Current) {
+        chk->setChecked(true);
+
+        icon.addFile(":/icon/no.png", QSize(10, 10));
+        QTableWidgetItem* id1 = new QTableWidgetItem(icon, "");
+        ui->tableKexts->setVerticalHeaderItem(i, id1);
+      } else {
+        chk->setChecked(false);
+
+        icon.addFile(":/icon/ok.png", QSize(10, 10));
+        QTableWidgetItem* id1 = new QTableWidgetItem(icon, "");
+        ui->tableKexts->setVerticalHeaderItem(i, id1);
+      }
+    } else {
+      chk->setChecked(false);
+
+      icon.addFile(":/icon/ok.png", QSize(10, 10));
+      QTableWidgetItem* id1 = new QTableWidgetItem(icon, "");
+      ui->tableKexts->setVerticalHeaderItem(i, id1);
+    }
+  }
+
+  // OpenCore
+  for (int i = 0; i < sourceOpenCore.count(); i++) {
+    QString f = sourceOpenCore.at(i);
+    QString str_name = mymethod->getFileName(f);
+    ui->listOpenCore->addItem(str_name);
+  }
+
+  for (int i = 0; i < ui->listOpenCore->count(); i++) {
+    ui->listOpenCore->item(i)->setCheckState(Qt::Checked);
+  }
+
+  if (!blDEV) {
+    ui->lblOCFrom->setText(ocFrom);
+    setWindowTitle(tr("Sync OC") + " -> " + ocVer);
+  } else {
+    ui->lblOCFrom->setText(ocFromDev);
+    setWindowTitle(tr("Sync OC") + " -> " + ocVerDev);
+  }
+
+  // dlgSyncOC->setWindowFlags(dlgAutoUpdate->windowFlags() |
+  //                           Qt::WindowStaysOnTopHint);
+  setModal(true);
+  show();
+  ui->listKexts->setFocus();
+
+  for (int i = 0; i < ui->listOpenCore->count(); i++) {
+    ui->listOpenCore->setCurrentRow(i);
+  }
+  repaint();
+
+  // Resources
+  sourceResourcesDir = mw_one->pathSource + "EFI/OC/Resources/";
+  targetResourcesDir = DirName + "/OC/Resources/";
+
+  // Read check status
+  readCheckStateINI();
+}
+
+void SyncOCDialog::on_tableKexts_itemSelectionChanged() {
+  int row = ui->tableKexts->currentRow();
+
+  if (row < 0) return;
+
+  QString strShowFileName, strSV, strTV;
+  strShowFileName = ui->tableKexts->item(row, 3)->text();
+  strSV = "";  // mymethod->getKextVersion(sourceKexts.at(row));
+  strTV = "";  // mymethod->getKextVersion(targetKexts.at(row));
+
+  QString sourceHash =
+      mw_one->getMD5(mymethod->getKextBin(sourceKexts.at(row)));
+  QString targetHash =
+      mw_one->getMD5(mymethod->getKextBin(targetKexts.at(row)));
+
+  ui->lblTargetLastModi->setText(strShowFileName + "\n" + tr("Current File: ") +
+                                 strTV + "  md5    " + targetHash);
+  ui->lblSourceLastModi->setText(tr("Available File: ") + strSV + "  md5    " +
+                                 sourceHash);
 }

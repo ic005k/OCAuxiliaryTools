@@ -10206,7 +10206,9 @@ QVariantMap MainWindow::setValue(QVariantMap map, QWidget* tab) {
 
 void MainWindow::on_actionQuit_triggered() { this->close(); }
 
-void MainWindow::on_actionUpgrade_OC_triggered() { dlgSyncOC->init_Sync_OC(); }
+void MainWindow::on_actionUpgrade_OC_triggered() {
+  dlgSyncOC->init_Sync_OC_Table();
+}
 
 void MainWindow::initColorValue() {
   textColorInt.clear();
