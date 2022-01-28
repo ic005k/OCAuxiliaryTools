@@ -5,7 +5,7 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-QString CurVerison = "20220089";
+QString CurVerison = "20220090";
 QString ocVer = "0.7.7";
 QString ocVerDev = "0.7.8";
 QString ocFrom, ocFromDev, strOCFrom, strOCFromDev;
@@ -17,7 +17,7 @@ aboutDialog::aboutDialog(QWidget* parent)
 
   strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/tag/0.7.7";
   strOCFromDev =
-      "https://github.com/acidanthera/OpenCorePkg/actions/runs/1733733684/";
+      "https://github.com/acidanthera/OpenCorePkg/actions/runs/1753209747/";
 
   setMaximumWidth(this->width());
   setMaximumHeight(this->height());
