@@ -336,7 +336,12 @@ void MainWindow::openFile(QString PlistFileName) {
   }
 
   openFileAfter();
-  checkFiles();
+
+  checkFiles(ui->table_acpi_add);
+  checkFiles(ui->table_kernel_add);
+  checkFiles(ui->tableTools);
+  checkFiles(ui->table_uefi_drivers);
+
   FindTextChange = true;
   strOrgMd5 = getMD5(SaveFileName);
 
@@ -410,11 +415,14 @@ void MainWindow::openFileAfter() {
   }
 }
 
-void MainWindow::checkFiles() {
-  markColor(ui->table_acpi_add, strACPI, 0);
-  markColor(ui->table_kernel_add, strKexts, 0);
-  markColor(ui->table_uefi_drivers, strDrivers, 0);
-  markColor(ui->tableTools, strTools, 0);
+void MainWindow::checkFiles(QTableWidget* table) {
+  if (table == ui->table_acpi_add) markColor(table, strACPI, 0);
+
+  if (table == ui->table_kernel_add) markColor(table, strKexts, 0);
+
+  if (table == ui->table_uefi_drivers) markColor(table, strDrivers, 0);
+
+  if (table == ui->tableTools) markColor(table, strTools, 0);
 }
 
 void MainWindow::markColor(QTableWidget* table, QString path, int col) {
@@ -2629,7 +2637,10 @@ void MainWindow::SavePlist(QString FileName) {
     on_actionOcvalidate_triggered();
   }
 
-  checkFiles();
+  checkFiles(ui->table_acpi_add);
+  checkFiles(ui->table_kernel_add);
+  checkFiles(ui->tableTools);
+  checkFiles(ui->table_uefi_drivers);
 
   FileSystemWatcher::addWatchPath(SaveFileName);
   strOrgMd5 = getMD5(SaveFileName);
@@ -3769,7 +3780,6 @@ void MainWindow::del_item(QTableWidget* table) {
 
   this->setWindowModified(true);
   updateIconStatus();
-  checkFiles();
 }
 
 void MainWindow::on_btnACPIAdd_Del_clicked() { del_item(ui->table_acpi_add); }
@@ -3784,7 +3794,6 @@ void MainWindow::on_btnACPIDel_Add_clicked() {
 
   this->setWindowModified(true);
   updateIconStatus();
-  checkFiles();
 }
 
 void MainWindow::on_btnACPIDel_Del_clicked() { del_item(ui->table_acpi_del); }
@@ -3888,7 +3897,7 @@ void MainWindow::addACPIItem(QStringList FileName) {
 
   this->setWindowModified(true);
   updateIconStatus();
-  checkFiles();
+  checkFiles(ui->table_acpi_add);
 }
 
 void MainWindow::on_btnDPAdd_Add0_clicked() {
@@ -3963,6 +3972,8 @@ void MainWindow::addKexts(QStringList FileName) {
 
   if (file_count == 0 || FileName[0] == "") return;
 
+  QTableWidget* t = ui->table_kernel_add;
+
   for (int j = 0; j < file_count; j++) {
     QFileInfo fileInfo(FileName[j]);
 
@@ -3981,8 +3992,6 @@ void MainWindow::addKexts(QStringList FileName) {
         fileInfoList = fileList[i];
       }
     }
-
-    QTableWidget* t = ui->table_kernel_add;
 
     int row = t->rowCount() + 1;
     QString strBaseName = QFileInfo(FileName[j]).fileName();
@@ -4113,7 +4122,7 @@ void MainWindow::addKexts(QStringList FileName) {
 
   this->setWindowModified(true);
   updateIconStatus();
-  checkFiles();
+  checkFiles(t);
 }
 
 void MainWindow::sortForKexts() {
@@ -4232,7 +4241,7 @@ void MainWindow::addEFITools(QStringList FileName) {
 
   this->setWindowModified(true);
   updateIconStatus();
-  checkFiles();
+  checkFiles(ui->tableTools);
 }
 
 void MainWindow::on_btnMiscEntries_Del_clicked() { del_item(ui->tableEntries); }
@@ -4408,7 +4417,7 @@ void MainWindow::addEFIDrivers(QStringList FileName) {
 
   this->setWindowModified(true);
   updateIconStatus();
-  checkFiles();
+  checkFiles(ui->table_uefi_drivers);
 }
 
 void MainWindow::on_btnUEFIDrivers_Del_clicked() {
@@ -4513,7 +4522,7 @@ void MainWindow::MoveItem(QTableWidget* t, bool up) {
 
   this->setWindowModified(true);
   updateIconStatus();
-  checkFiles();
+  checkFiles(t);
 }
 
 void MainWindow::on_btnKernelAdd_Up_clicked() {

@@ -197,7 +197,7 @@ void Method::finishKextUpdate(bool blDatabase) {
   mw_one->dlgSyncOC->ui->btnUpKexts->setEnabled(true);
 
   mw_one->dlgSyncOC->ui->labelShowDLInfo->setVisible(false);
-  if (!blDatabase) mw_one->checkFiles();
+  if (!blDatabase) mw_one->checkFiles(mw_one->ui->table_kernel_add);
   mw_one->repaint();
   int n = mw_one->dlgSyncOC->ui->listSource->currentRow();
   for (int i = 0; i < mw_one->dlgSyncOC->ui->listSource->count(); i++)

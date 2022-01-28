@@ -73,7 +73,7 @@ void DeleteCommand::undo() {
 
   mw_one->loading = false;
 
-  mw_one->checkFiles();
+  mw_one->checkFiles(m_table);
 }
 
 void DeleteCommand::redo() {
@@ -84,7 +84,6 @@ void DeleteCommand::redo() {
   }
 
   if (m_loadINI) {
-    // mw_one->read_ini(m_table, m_table0, m_table0CurrentRow);
     mw_one->readLeftTable(m_table, m_table0);
   }
 
@@ -98,16 +97,15 @@ void DeleteCommand::redo() {
 
   if (m_table0 != NULL && !m_loadINI) {
     if (m_writeINI)
-      // mw_one->write_ini(m_table0, m_table, m_table0CurrentRow);
+
       mymethod->writeLeftTable(m_table0, m_table);
     else
-      // mw_one->write_value_ini(m_table0, m_table, m_table0CurrentRow);
       mymethod->writeLeftTableOnlyValue(m_table0, m_table);
   }
 
   mw_one->loading = false;
 
-  mw_one->checkFiles();
+  mw_one->checkFiles(m_table);
 }
 
 AddCommand::AddCommand(QTableWidget* table, int row, int col, QString text,
@@ -228,18 +226,14 @@ void CopyPasteLineCommand::undo() {
   mymethod->goTable(m_table);
 
   if (m_writeini) {
-    // mw_one->write_ini(mw_one->getLeftTable(m_table), m_table,
-    //                  mw_one->getLeftTable(m_table)->currentRow());
     mymethod->writeLeftTable(mw_one->getLeftTable(m_table), m_table);
   }
 
   if (m_writevalueini) {
-    // mw_one->write_value_ini(mw_one->getLeftTable(m_table), m_table,
-    //                        mw_one->getLeftTable(m_table)->currentRow());
     mymethod->writeLeftTableOnlyValue(mw_one->getLeftTable(m_table), m_table);
   }
 
-  mw_one->checkFiles();
+  mw_one->checkFiles(m_table);
 }
 
 void CopyPasteLineCommand::redo() {
@@ -263,18 +257,14 @@ void CopyPasteLineCommand::redo() {
   mymethod->goTable(m_table);
 
   if (m_writeini) {
-    // mw_one->write_ini(mw_one->getLeftTable(m_table), m_table,
-    //                  mw_one->getLeftTable(m_table)->currentRow());
     mymethod->writeLeftTable(mw_one->getLeftTable(m_table), m_table);
   }
 
   if (m_writevalueini) {
-    // mw_one->write_value_ini(mw_one->getLeftTable(m_table), m_table,
-    //                       mw_one->getLeftTable(m_table)->currentRow());
     mymethod->writeLeftTableOnlyValue(mw_one->getLeftTable(m_table), m_table);
   }
 
-  mw_one->checkFiles();
+  mw_one->checkFiles(m_table);
 }
 
 QString createCommandString(QString cmdStr) { return cmdStr; }

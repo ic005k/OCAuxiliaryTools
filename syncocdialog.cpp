@@ -104,7 +104,8 @@ void SyncOCDialog::on_btnStartSync_clicked() {
                   "        " + ocFromDev);
     box.exec();
 
-    mw_one->checkFiles();
+    mw_one->checkFiles(mw_one->ui->table_kernel_add);
+    mw_one->checkFiles(mw_one->ui->table_uefi_drivers);
   }
 }
 
