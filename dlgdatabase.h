@@ -23,7 +23,8 @@ class dlgDatabase : public QDialog {
 
   void saveKextUrl();
 
- public slots:
+  void get_EFI(int row, int column, QTableWidget *table);
+public slots:
 
  private slots:
   void on_tableDatabase_cellDoubleClicked(int row, int column);
@@ -85,6 +86,8 @@ class dlgDatabase : public QDialog {
   void on_btnIntelOnline_clicked();
 
   void on_btnAMDOnline_clicked();
+
+  void on_btnGenerateEFI_clicked();
 
  private:
   void writeIni(QString key, int arg1);

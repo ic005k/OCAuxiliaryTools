@@ -165,8 +165,7 @@ class MainWindow : public QMainWindow {
   Tooltip* myToolTip;
 
   bool lineEditEnter = false;
-  bool RefreshAllDatabase = false;
-
+  bool isGetEFI = false;
   bool mac = false;
   bool osx1012 = false;
   bool win = false;

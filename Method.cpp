@@ -922,7 +922,7 @@ QString Method::copyTools(QString pathSource, QString pathTarget) {
   return strDatabase;
 }
 
-void Method::generateEFI() {
+void Method::generateEFI(QString file) {
   QDir dir;
   QString strDatabase;
 
@@ -967,15 +967,17 @@ void Method::generateEFI() {
   // OC/Config.plist
   mw_one->SavePlist(pathTarget + "OC/Config.plist");
 
+  QString strFrom = "\n\n" + tr("From") + " : " + file;
   QMessageBox box;
   if (strDatabase != "")
     box.setText(tr("Finished generating the EFI folder on the desktop.") +
                 "\n" +
                 tr("The following files do not exist in the database at the "
                    "moment, please add them yourself:") +
-                "\n" + strDatabase);
+                "\n" + strDatabase + strFrom);
   else
-    box.setText(tr("Finished generating the EFI folder on the desktop."));
+    box.setText(tr("Finished generating the EFI folder on the desktop.") +
+                strFrom);
 
   mw_one->setFocus();
   box.exec();

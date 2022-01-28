@@ -315,7 +315,7 @@ void MainWindow::openFile(QString PlistFileName) {
 
   undoStack->clear();
 
-  if (!RefreshAllDatabase) {
+  if (!isGetEFI) {
     OpenFileValidate = true;
     on_actionOcvalidate_triggered();
 
@@ -2624,10 +2624,11 @@ void MainWindow::SavePlist(QString FileName) {
     clear_temp_data();
   }
 
-  if (!RefreshAllDatabase) {
+  if (!isGetEFI) {
     OpenFileValidate = true;
     on_actionOcvalidate_triggered();
   }
+
   checkFiles();
 
   FileSystemWatcher::addWatchPath(SaveFileName);
@@ -10669,7 +10670,9 @@ void MainWindow::on_actionOcvalidate_triggered() {
 
 void MainWindow::on_actionMountEsp_triggered() { mount_esp(); }
 
-void MainWindow::on_actionGenerateEFI_triggered() { mymethod->generateEFI(); }
+void MainWindow::on_actionGenerateEFI_triggered() {
+  mymethod->generateEFI(SaveFileName);
+}
 
 void MainWindow::on_btnExportMaster_triggered() {
   mymethod->on_btnExportMaster();

@@ -149,26 +149,28 @@ void dlgDatabase::keyPressEvent(QKeyEvent *event) {
 }
 
 void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
-  Q_UNUSED(row);
-  Q_UNUSED(column);
-  if (column != 0) return;
-  mw_one->RefreshAllDatabase = true;
+  get_EFI(row, column, ui->tableDatabase);
+}
 
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
-  QString file = ui->tableDatabase->item(row, 0)->text();
+void dlgDatabase::get_EFI(int row, int column, QTableWidget *table) {
+  if (column != 0) return;
+
+  QString dirpath = mw_one->strAppExePath + "/Database/BaseConfigs/";
+  QString file = table->item(row, 0)->text();
 
   if (blDEV) {
     if (file == "SampleCustom.plist" || file == "Sample.plist") {
-      dirpath = appInfo.filePath() + "/devDatabase/BaseConfigs/";
+      dirpath = mw_one->strAppExePath + "/devDatabase/BaseConfigs/";
     }
   }
+
+  mw_one->isGetEFI = true;
   mw_one->openFile(dirpath + file);
+  mw_one->isGetEFI = false;
+
   close();
 
-  mw_one->RefreshAllDatabase = false;
-
-  mw_one->on_actionGenerateEFI_triggered();
+  mymethod->generateEFI(file);
 }
 
 void dlgDatabase::on_btnFind_clicked() {
@@ -223,28 +225,7 @@ void dlgDatabase::on_editFind_textChanged(const QString &arg1) {
 void dlgDatabase::on_editFind_returnPressed() { on_btnFind_clicked(); }
 
 void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column) {
-  Q_UNUSED(row);
-  Q_UNUSED(column);
-
-  mw_one->RefreshAllDatabase = true;
-
-  QFileInfo appInfo(qApp->applicationDirPath());
-
-  QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
-  QString file = ui->tableDatabaseFind->currentItem()->text();
-
-  if (blDEV) {
-    if (file == "SampleCustom.plist" || file == "Sample.plist") {
-      dirpath = appInfo.filePath() + "/devDatabase/BaseConfigs/";
-    }
-  }
-
-  mw_one->openFile(dirpath + file);
-  close();
-
-  mw_one->RefreshAllDatabase = false;
-
-  mymethod->generateEFI();
+  get_EFI(row, column, ui->tableDatabaseFind);
 }
 
 void dlgDatabase::refreshKextUrl() {
@@ -458,4 +439,18 @@ void dlgDatabase::on_btnAMDOnline_clicked() {
       QString("https://github.com/ic005k/QtOpenCoreConfig/blob/master/Database/"
               "BaseConfigs/Instructions_AMD_TRX40.md"));
   QDesktopServices::openUrl(url);
+}
+
+void dlgDatabase::on_btnGenerateEFI_clicked() {
+  if (ui->tableDatabase->hasFocus()) {
+    if (!ui->tableDatabase->currentIndex().isValid()) return;
+    int row = ui->tableDatabase->currentRow();
+    on_tableDatabase_cellDoubleClicked(row, 0);
+  }
+
+  if (ui->tableDatabaseFind->hasFocus()) {
+    if (!ui->tableDatabaseFind->currentIndex().isValid()) return;
+    int row = ui->tableDatabaseFind->currentRow();
+    on_tableDatabaseFind_cellDoubleClicked(row, 0);
+  }
 }
