@@ -393,7 +393,15 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
   ui->btnCheckUpdate->setEnabled(true);
 }
 
-void SyncOCDialog::on_btnStop_clicked() { mymethod->cancelKextUpdate(); }
+void SyncOCDialog::on_btnStop_clicked() {
+  mymethod->cancelKextUpdate();
+
+  if (isCheckOC) {
+    delete progBar;
+    isCheckOC = false;
+    ui->btnCheckOC->setEnabled(true);
+  }
+}
 
 void SyncOCDialog::on_btnUpdate_clicked() {
   writeCheckStateINI();
@@ -903,7 +911,6 @@ void SyncOCDialog::on_btnCheckOC_clicked() {
   progBar->show();
 
   QString test = "https://github.com/acidanthera/OpenCorePkg";
-
   if (mw_one->myDatabase->ui->rbtnAPI->isChecked())
     mymethod->getLastReleaseFromUrl(test);
   if (mw_one->myDatabase->ui->rbtnWeb->isChecked())

@@ -26,6 +26,8 @@ Method::Method(QWidget* parent) : QMainWindow(parent) {
 }
 
 QStringList Method::getDLUrlList(QString url) {
+  if (blBreak) return QStringList() << "";
+
   QString strLast = getHTMLSource(url, false);
   if (strLast == "") {
     blBreak = true;
@@ -59,6 +61,8 @@ QStringList Method::getDLUrlList(QString url) {
 }
 
 QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
+  if (blBreak) return "";
+
   const QString FILE_NAME = QDir::homePath() + "/.config/QtOCC/code.txt";
   QString strProxy =
       mw_one->myDatabase->ui->comboBoxWeb->currentText().trimmed();
@@ -264,6 +268,7 @@ void Method::kextUpdate() {
 }
 
 void Method::startDownload(QString strUrl) {
+  if (blBreak) return;
   QString strTokyo, strSeoul, strOriginal, strSet, strTemp, strUrlOrg;
   strUrlOrg = strUrl;
   strOriginal = "https://github.com/";
@@ -439,6 +444,7 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
 }
 
 void Method::getLastReleaseFromUrl(QString strUrl) {
+  if (blBreak) return;
   // https://github.com/ic005k/QtOpenCoreConfig
   // https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/latest
   QString strAPI =
@@ -510,6 +516,8 @@ void Method::parse_UpdateJSON(QString str) {
 }
 
 void Method::getLastReleaseFromHtml(QString url) {
+  if (blBreak) return;
+
   QStringList strDownloadUrlList = getDLUrlList(url);
   if (strDownloadUrlList.at(0) == "") {
     blBreak = true;
