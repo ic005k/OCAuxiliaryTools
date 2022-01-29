@@ -369,9 +369,8 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
       QString::fromLatin1("%1 %2").arg(speed, 3, 'f', 1).arg(unit);
 
   mw_one->dlgSyncOC->ui->labelShowDLInfo->setText(
-      kextName + "\n" + tr("Download Progress") + " : " +
-      GetFileSize(recv_total, 2) + " -> " + GetFileSize(all_total, 2) + "    " +
-      strSpeed);
+      tr("Download Progress") + " : " + GetFileSize(recv_total, 2) + " -> " +
+      GetFileSize(all_total, 2) + "    " + strSpeed);
 
   if (recv_total == all_total) {
     if (recv_total < 1000) {

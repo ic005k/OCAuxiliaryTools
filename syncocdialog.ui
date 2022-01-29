@@ -15,33 +15,31 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_8">
    <item row="0" column="0">
-    <widget class="QLabel" name="lblSource">
-     <property name="text">
-      <string>Kexts</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="lblSource">
+       <property name="text">
+        <string>Kexts</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelShowDLInfo">
+       <property name="text">
+        <string>DLInfo</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="0" column="1">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>387</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="0" column="2" rowspan="8">
+   <item row="0" column="1" rowspan="7">
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
    </item>
-   <item row="0" column="3" rowspan="7">
+   <item row="0" column="2" rowspan="6">
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="3" column="0">
       <widget class="QLabel" name="lblTargetLastModi_2">
@@ -180,7 +178,7 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0" colspan="2">
+   <item row="1" column="0">
     <widget class="QTableWidget" name="tableKexts">
      <column>
       <property name="text">
@@ -204,7 +202,7 @@
      </column>
     </widget>
    </item>
-   <item row="2" column="0" colspan="2">
+   <item row="2" column="0">
     <layout class="QGridLayout" name="gridLayout_9">
      <item row="0" column="3">
       <spacer name="horizontalSpacer">
@@ -250,13 +248,6 @@
     </widget>
    </item>
    <item row="5" column="0">
-    <widget class="QLabel" name="labelShowDLInfo">
-     <property name="text">
-      <string>DLInfo</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="0" colspan="2">
     <layout class="QGridLayout" name="gridLayout_2">
      <item row="0" column="2">
       <widget class="QPushButton" name="btnStop">
@@ -288,7 +279,7 @@
      </item>
     </layout>
    </item>
-   <item row="7" column="0" colspan="2">
+   <item row="6" column="0">
     <layout class="QGridLayout" name="gridLayout_11">
      <item row="2" column="0">
       <layout class="QGridLayout" name="gridLayout_5"/>
