@@ -20,6 +20,8 @@ class SyncOCDialog : public QDialog {
   ~SyncOCDialog();
   Ui::SyncOCDialog *ui;
 
+  void writeCheckStateINI();
+  bool isCheckOC = false;
   QStringList sourceKexts, targetKexts, sourceOpenCore, targetOpenCore;
   QString sourceResourcesDir;
   QString targetResourcesDir;
@@ -60,6 +62,10 @@ class SyncOCDialog : public QDialog {
 
   void on_tableKexts_itemSelectionChanged();
 
+  void on_btnCheckOC_clicked();
+
+  void on_btnStopCheckOC_clicked();
+
  private:
   void setListWidgetStyle();
   void setListWidgetColor(QString color);
@@ -70,8 +76,6 @@ class SyncOCDialog : public QDialog {
 
   void addVerWidget(int currentRow, QString strTV, QString strSV,
                     QString strShowFileName);
-
-  void writeCheckStateINI();
 
  protected:
   void closeEvent(QCloseEvent *event);

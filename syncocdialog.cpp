@@ -66,8 +66,6 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   }
 
   ui->listKexts->setHidden(true);
-  ui->label_3->setHidden(true);
-  ui->label_4->setHidden(true);
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
@@ -342,6 +340,7 @@ void SyncOCDialog::keyPressEvent(QKeyEvent* event) {
 }
 
 void SyncOCDialog::on_btnCheckUpdate_clicked() {
+  if (!ui->btnCheckOC->isEnabled()) return;
   if (sourceKexts.count() == 0) return;
   ui->btnUpdate->setEnabled(false);
   repaint();
@@ -390,6 +389,8 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
     ui->tableKexts->removeCellWidget(i, 3);
 
   ui->tableKexts->setFocus();
+
+  ui->btnCheckUpdate->setEnabled(true);
 }
 
 void SyncOCDialog::on_btnStop_clicked() { mymethod->cancelKextUpdate(); }
@@ -873,3 +874,42 @@ void SyncOCDialog::on_tableKexts_itemSelectionChanged() {
   ui->lblSourceLastModi->setText(tr("Available File: ") + strSV + "  md5    " +
                                  sourceHash);
 }
+
+void SyncOCDialog::on_btnCheckOC_clicked() {
+  if (!ui->btnCheckUpdate->isEnabled()) return;
+
+  isCheckOC = true;
+  mymethod->blBreak = false;
+  ui->btnCheckOC->setEnabled(false);
+  repaint();
+
+  progBar = new QProgressBar(this);
+  progBar->setTextVisible(false);
+  progBar->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  progBar->setStyleSheet(
+      "QProgressBar{border:0px solid #FFFFFF;"
+      "height:30;"
+      "background:rgba(25,255,25,0);"
+      "text-align:right;"
+      "color:rgb(255,255,255);"
+      "border-radius:0px;}"
+
+      "QProgressBar:chunk{"
+      "border-radius:0px;"
+      "background-color:rgba(25,255,0,100);"
+      "}");
+  progBar->setGeometry(ui->btnCheckOC->x(), ui->btnCheckOC->y(),
+                       ui->btnCheckOC->width(), ui->btnCheckOC->height());
+  progBar->show();
+
+  QString test = "https://github.com/acidanthera/OpenCorePkg";
+
+  if (mw_one->myDatabase->ui->rbtnAPI->isChecked())
+    mymethod->getLastReleaseFromUrl(test);
+  if (mw_one->myDatabase->ui->rbtnWeb->isChecked())
+    mymethod->getLastReleaseFromHtml(test + "/releases/latest");
+
+  qDebug() << mymethod->filename;
+}
+
+void SyncOCDialog::on_btnStopCheckOC_clicked() { on_btnStop_clicked(); }
