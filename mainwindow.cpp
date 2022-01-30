@@ -30,8 +30,16 @@ extern bool blDEV;
 extern QString strACPI, strKexts, strDrivers, strTools;
 
 void MainWindow::changeOpenCore(bool blDEV) {
-  if (blDEV) {
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  isUseDevOption = Reg.value("UseDevOption").toBool();
+  if (!isUseDevOption) {
+    if (blDEV) {
+      // Dev
+    } else {
+    }
   } else {
+    // Dev
   }
 
   QFileInfo appInfo(qApp->applicationDirPath());
@@ -50,8 +58,6 @@ void MainWindow::changeOpenCore(bool blDEV) {
                                       " for OpenCore " + ocVerDev);
     dlgSyncOC->ui->btnUpdateOC->setHidden(true);
   }
-
-  if (linuxOS) dlgSyncOC->ui->btnUpdateOC->setHidden(true);
 
   if (myDatabase->ui->chkHideToolbar->isChecked()) {
     title = lblVer->text() + "      ";

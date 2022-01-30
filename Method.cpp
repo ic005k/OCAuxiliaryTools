@@ -442,7 +442,10 @@ void Method::updateOpenCore() {
       if (ver > ocVer) {
         ocVer = ver;
         mw_one->lblVer->setText("  OpenCore " + ocVer);
-      }
+        mw_one->isUseDevOption = true;
+      } else
+        mw_one->isUseDevOption = false;
+      Reg.setValue("UseDevOption", mw_one->isUseDevOption);
 
       mw_one->dlgSyncOC->writeCheckStateINI();
       mw_one->dlgSyncOC->init_Sync_OC_Table();

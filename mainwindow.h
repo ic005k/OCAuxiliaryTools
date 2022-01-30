@@ -85,6 +85,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  bool isUseDevOption = false;
   dlgKernelPatch* myDlgKernelPatch;
   bool blOCValidateError = false;
   dlgMountESP* dlgMESP;
