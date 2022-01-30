@@ -6,7 +6,7 @@
 
 extern MainWindow* mw_one;
 QString CurVerison = "20220094";
-QString ocVer = "0.7.6";
+QString ocVer = "0.7.7";
 QString ocVerDev = "0.7.8";
 QString ocFrom, ocFromDev, strOCFrom, strOCFromDev;
 bool blDEV = false;
