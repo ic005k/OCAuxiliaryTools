@@ -359,65 +359,92 @@ void Method::doProcessFinished() {
 
 void Method::updateOpenCore() {
   if (mw_one->dlgSyncOC->isCheckOC) {
-    //开始处理文件
+    QList<bool> Results;
+
     QString strSEFI = tempDir + "X64/EFI/";
     QString strTEFI = mw_one->strAppExePath + "/Database/EFI/";
-    mw_one->copyDirectoryFiles(strSEFI, strTEFI, true);
+    Results.append(mw_one->copyDirectoryFiles(strSEFI, strTEFI, true));
 
     QString strSacpi = tempDir + "Docs/AcpiSamples/Binaries/";
     QString strTacpi = mw_one->strAppExePath + "/Database/EFI/OC/ACPI/";
-    mw_one->copyDirectoryFiles(strSacpi, strTacpi, true);
+    Results.append(mw_one->copyDirectoryFiles(strSacpi, strTacpi, true));
 
-    QFile::copy(tempDir + "Docs/Configuration.pdf",
-                mw_one->strAppExePath + "/Database/doc/Configuration.pdf");
-    QFile::copy(tempDir + "Docs/Differences.pdf",
-                mw_one->strAppExePath + "/Database/doc/Differences.pdf");
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Docs/Configuration.pdf",
+        mw_one->strAppExePath + "/Database/doc/Configuration.pdf", true));
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Docs/Differences.pdf",
+        mw_one->strAppExePath + "/Database/doc/Differences.pdf", true));
 
-    QFile::copy(tempDir + "Docs/Sample.plist",
-                mw_one->strAppExePath + "/Database/BaseConfigs/Sample.plist");
-    QFile::copy(
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Docs/Sample.plist",
+        mw_one->strAppExePath + "/Database/BaseConfigs/Sample.plist", true));
+    Results.append(mw_one->copyFileToPath(
         tempDir + "Docs/SampleCustom.plist",
-        mw_one->strAppExePath + "/Database/BaseConfigs/SampleCustom.plist");
+        mw_one->strAppExePath + "/Database/BaseConfigs/SampleCustom.plist",
+        true));
 
-    QFile::copy(tempDir + "Utilities/ocvalidate/ocvalidate",
-                mw_one->strAppExePath + "/Database/mac/ocvalidate");
-    QFile::copy(tempDir + "Utilities/ocvalidate/ocvalidate.exe",
-                mw_one->strAppExePath + "/Database/win/ocvalidate.exe");
-    QFile::copy(tempDir + "Utilities/ocvalidate/ocvalidate.linux",
-                mw_one->strAppExePath + "/Database/linux/ocvalidate");
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Utilities/ocvalidate/ocvalidate",
+        mw_one->strAppExePath + "/Database/mac/ocvalidate", true));
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Utilities/ocvalidate/ocvalidate.exe",
+        mw_one->strAppExePath + "/Database/win/ocvalidate.exe", true));
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Utilities/ocvalidate/ocvalidate.linux",
+        mw_one->strAppExePath + "/Database/linux/ocvalidate", true));
 
-    QFile::copy(tempDir + "Utilities/macserial/macserial",
-                mw_one->strAppExePath + "/Database/mac/macserial");
-    QFile::copy(tempDir + "Utilities/macserial/macserial.exe",
-                mw_one->strAppExePath + "/Database/win/macserial.exe");
-    QFile::copy(tempDir + "Utilities/macserial/macserial.linux",
-                mw_one->strAppExePath + "/Database/linux/macserial");
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Utilities/macserial/macserial",
+        mw_one->strAppExePath + "/Database/mac/macserial", true));
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Utilities/macserial/macserial.exe",
+        mw_one->strAppExePath + "/Database/win/macserial.exe", true));
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Utilities/macserial/macserial.linux",
+        mw_one->strAppExePath + "/Database/linux/macserial", true));
 
-    QFile::copy(tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
-                mw_one->strAppExePath + "/Database/mac/ocpasswordgen");
-    QFile::copy(tempDir + "Utilities/ocpasswordgen/ocpasswordgen.exe",
-                mw_one->strAppExePath + "/Database/win/ocpasswordgen.exe");
-    QFile::copy(tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
-                mw_one->strAppExePath + "/Database/linux/ocpasswordgen");
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
+        mw_one->strAppExePath + "/Database/mac/ocpasswordgen", true));
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Utilities/ocpasswordgen/ocpasswordgen.exe",
+        mw_one->strAppExePath + "/Database/win/ocpasswordgen.exe", true));
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
+        mw_one->strAppExePath + "/Database/linux/ocpasswordgen", true));
 
-    mw_one->copyDirectoryFiles(
+    Results.append(mw_one->copyDirectoryFiles(
         tempDir + "/Utilities/CreateVault/",
-        mw_one->strAppExePath + "/Database/mac/CreateVault/", true);
+        mw_one->strAppExePath + "/Database/mac/CreateVault/", true));
 
-    QString file = filename;
-    QStringList list = file.split("-");
-    QString ver;
-    if (list.count() == 3) {
-      ver = list.at(1);
+    bool isDo = true;
+    for (int i = 0; i < Results.count(); i++) {
+      if (Results.at(i) == false) isDo = false;
+      // qDebug() << Results.at(i);
     }
-    qDebug() << filename << ver;
+    if (isDo) {
+      QString file = filename;
+      QStringList list = file.split("-");
+      QString ver;
+      if (list.count() == 3) {
+        ver = list.at(1);
+      }
+      // qDebug() << filename << ver;
 
-    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-    QSettings Reg(qfile, QSettings::IniFormat);
-    Reg.setValue("ocVer", ver);
-    if (ver > ocVer) {
-      ocVer = ver;
-      mw_one->lblVer->setText("  OpenCore " + ocVer);
+      QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+      QSettings Reg(qfile, QSettings::IniFormat);
+      Reg.setValue("ocVer", ver);
+      if (ver > ocVer) {
+        ocVer = ver;
+        mw_one->lblVer->setText("  OpenCore " + ocVer);
+      }
+
+      QMessageBox box;
+      box.setText(
+          tr("The OpenCore database has been successfully upgraded to") + "  " +
+          ocVer);
+      box.exec();
     }
 
     mw_one->dlgSyncOC->writeCheckStateINI();
