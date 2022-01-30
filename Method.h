@@ -117,7 +117,8 @@ class Method : public QMainWindow {
   QStringList getVolListForPartition(QStringList listPartition);
   QString getVolForPartition(QString strPartition);
 
- public slots:
+  void updateOpenCore();
+public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();
   void on_btnImportMaster();

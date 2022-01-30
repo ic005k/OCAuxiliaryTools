@@ -9,7 +9,7 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-extern QString SaveFileName;
+extern QString SaveFileName, ocVer;
 
 QString strACPI;
 QString strKexts;
@@ -81,7 +81,7 @@ QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
     QMessageBox::critical(this, "", tr("Network error!"));
 
     mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
-    mw_one->dlgSyncOC->ui->btnCheckOC->setEnabled(true);
+    // mw_one->dlgSyncOC->ui->btnUpdateOC->setEnabled(true);
     blBreak = true;
     return "";
   }
@@ -337,63 +337,13 @@ void Method::doProcessFinished() {
       } else
         QProcess::execute("unzip", QStringList() << "-o" << tempDir + filename
                                                  << "-d" << tempDir);
-
-      if (mw_one->dlgSyncOC->isCheckOC) {
-        //开始处理文件
-        QString strSEFI = tempDir + "X64/EFI/";
-        QString strTEFI = mw_one->strAppExePath + "/Database/EFI/";
-        mw_one->copyDirectoryFiles(strSEFI, strTEFI, true);
-
-        QString strSacpi = tempDir + "Docs/AcpiSamples/Binaries/";
-        QString strTacpi = mw_one->strAppExePath + "/Database/EFI/OC/ACPI/";
-        mw_one->copyDirectoryFiles(strSacpi, strTacpi, true);
-
-        QFile::copy(tempDir + "Docs/Configuration.pdf",
-                    mw_one->strAppExePath + "/Database/doc/Configuration.pdf");
-        QFile::copy(tempDir + "Docs/Differences.pdf",
-                    mw_one->strAppExePath + "/Database/doc/Differences.pdf");
-
-        QFile::copy(
-            tempDir + "Docs/Sample.plist",
-            mw_one->strAppExePath + "/Database/BaseConfigs/Sample.plist");
-        QFile::copy(
-            tempDir + "Docs/SampleCustom.plist",
-            mw_one->strAppExePath + "/Database/BaseConfigs/SampleCustom.plist");
-
-        QFile::copy(tempDir + "Utilities/ocvalidate/ocvalidate",
-                    mw_one->strAppExePath + "/Database/mac/ocvalidate");
-        QFile::copy(tempDir + "Utilities/ocvalidate/ocvalidate.exe",
-                    mw_one->strAppExePath + "/Database/win/ocvalidate.exe");
-        QFile::copy(tempDir + "Utilities/ocvalidate/ocvalidate.linux",
-                    mw_one->strAppExePath + "/Database/linux/ocvalidate");
-
-        QFile::copy(tempDir + "Utilities/macserial/macserial",
-                    mw_one->strAppExePath + "/Database/mac/macserial");
-        QFile::copy(tempDir + "Utilities/macserial/macserial.exe",
-                    mw_one->strAppExePath + "/Database/win/macserial.exe");
-        QFile::copy(tempDir + "Utilities/macserial/macserial.linux",
-                    mw_one->strAppExePath + "/Database/linux/macserial");
-
-        QFile::copy(tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
-                    mw_one->strAppExePath + "/Database/mac/ocpasswordgen");
-        QFile::copy(tempDir + "Utilities/ocpasswordgen/ocpasswordgen.exe",
-                    mw_one->strAppExePath + "/Database/win/ocpasswordgen.exe");
-        QFile::copy(tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
-                    mw_one->strAppExePath + "/Database/linux/ocpasswordgen");
-
-        mw_one->copyDirectoryFiles(
-            tempDir + "/Utilities/CreateVault/",
-            mw_one->strAppExePath + "/Database/mac/CreateVault/", true);
-
-        mw_one->dlgSyncOC->writeCheckStateINI();
-        mw_one->dlgSyncOC->init_Sync_OC_Table();
-      }
+      updateOpenCore();
     }
     dlEnd = true;
 
   } else {
     mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
-    mw_one->dlgSyncOC->ui->btnCheckOC->setEnabled(true);
+    mw_one->dlgSyncOC->ui->btnUpdateOC->setEnabled(true);
     mw_one->repaint();
     myfile->close();
     QMessageBox::critical(NULL, "replyDL Error",
@@ -403,7 +353,75 @@ void Method::doProcessFinished() {
   if (mw_one->dlgSyncOC->isCheckOC) {
     delete mw_one->dlgSyncOC->progBar;
     mw_one->dlgSyncOC->isCheckOC = false;
-    mw_one->dlgSyncOC->ui->btnCheckOC->setEnabled(true);
+    mw_one->dlgSyncOC->ui->btnUpdateOC->setEnabled(true);
+  }
+}
+
+void Method::updateOpenCore() {
+  if (mw_one->dlgSyncOC->isCheckOC) {
+    //开始处理文件
+    QString strSEFI = tempDir + "X64/EFI/";
+    QString strTEFI = mw_one->strAppExePath + "/Database/EFI/";
+    mw_one->copyDirectoryFiles(strSEFI, strTEFI, true);
+
+    QString strSacpi = tempDir + "Docs/AcpiSamples/Binaries/";
+    QString strTacpi = mw_one->strAppExePath + "/Database/EFI/OC/ACPI/";
+    mw_one->copyDirectoryFiles(strSacpi, strTacpi, true);
+
+    QFile::copy(tempDir + "Docs/Configuration.pdf",
+                mw_one->strAppExePath + "/Database/doc/Configuration.pdf");
+    QFile::copy(tempDir + "Docs/Differences.pdf",
+                mw_one->strAppExePath + "/Database/doc/Differences.pdf");
+
+    QFile::copy(tempDir + "Docs/Sample.plist",
+                mw_one->strAppExePath + "/Database/BaseConfigs/Sample.plist");
+    QFile::copy(
+        tempDir + "Docs/SampleCustom.plist",
+        mw_one->strAppExePath + "/Database/BaseConfigs/SampleCustom.plist");
+
+    QFile::copy(tempDir + "Utilities/ocvalidate/ocvalidate",
+                mw_one->strAppExePath + "/Database/mac/ocvalidate");
+    QFile::copy(tempDir + "Utilities/ocvalidate/ocvalidate.exe",
+                mw_one->strAppExePath + "/Database/win/ocvalidate.exe");
+    QFile::copy(tempDir + "Utilities/ocvalidate/ocvalidate.linux",
+                mw_one->strAppExePath + "/Database/linux/ocvalidate");
+
+    QFile::copy(tempDir + "Utilities/macserial/macserial",
+                mw_one->strAppExePath + "/Database/mac/macserial");
+    QFile::copy(tempDir + "Utilities/macserial/macserial.exe",
+                mw_one->strAppExePath + "/Database/win/macserial.exe");
+    QFile::copy(tempDir + "Utilities/macserial/macserial.linux",
+                mw_one->strAppExePath + "/Database/linux/macserial");
+
+    QFile::copy(tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
+                mw_one->strAppExePath + "/Database/mac/ocpasswordgen");
+    QFile::copy(tempDir + "Utilities/ocpasswordgen/ocpasswordgen.exe",
+                mw_one->strAppExePath + "/Database/win/ocpasswordgen.exe");
+    QFile::copy(tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
+                mw_one->strAppExePath + "/Database/linux/ocpasswordgen");
+
+    mw_one->copyDirectoryFiles(
+        tempDir + "/Utilities/CreateVault/",
+        mw_one->strAppExePath + "/Database/mac/CreateVault/", true);
+
+    QString file = filename;
+    QStringList list = file.split("-");
+    QString ver;
+    if (list.count() == 3) {
+      ver = list.at(1);
+    }
+    qDebug() << filename << ver;
+
+    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+    QSettings Reg(qfile, QSettings::IniFormat);
+    Reg.setValue("ocVer", ver);
+    if (ver > ocVer) {
+      ocVer = ver;
+      mw_one->lblVer->setText("  OpenCore " + ocVer);
+    }
+
+    mw_one->dlgSyncOC->writeCheckStateINI();
+    mw_one->dlgSyncOC->init_Sync_OC_Table();
   }
 }
 
@@ -470,7 +488,7 @@ void Method::parse_UpdateJSON(QString str) {
     QMessageBox::critical(this, "", tr("Network error!"));
 
     mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
-    mw_one->dlgSyncOC->ui->btnCheckOC->setEnabled(true);
+    // mw_one->dlgSyncOC->ui->btnCheckOC->setEnabled(true);
 
     blBreak = true;
     return;
@@ -508,7 +526,7 @@ void Method::parse_UpdateJSON(QString str) {
     blBreak = true;
 
     mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
-    mw_one->dlgSyncOC->ui->btnCheckOC->setEnabled(true);
+    // mw_one->dlgSyncOC->ui->btnCheckOC->setEnabled(true);
     return;
   }
   kextDLUrlList.append(kextName + "|" + strDLUrl);
@@ -1420,11 +1438,7 @@ QString Method::getFileName(QString file) {
   return list.at(list.count() - 1);
 }
 
-void Method::cancelKextUpdate() {
-  blBreak = true;
-
-  mw_one->dlgSyncOC->ui->btnCheckOC->setEnabled(true);
-}
+void Method::cancelKextUpdate() { blBreak = true; }
 
 void Method::writeLeftTable(QTableWidget* t0, QTableWidget* t) {
   if (!t0->currentIndex().isValid()) return;

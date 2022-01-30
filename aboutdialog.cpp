@@ -6,7 +6,7 @@
 
 extern MainWindow* mw_one;
 QString CurVerison = "20220093";
-QString ocVer = "0.7.7";
+QString ocVer = "0.7.6";
 QString ocVerDev = "0.7.8";
 QString ocFrom, ocFromDev, strOCFrom, strOCFromDev;
 bool blDEV = false;
@@ -14,6 +14,13 @@ bool blDEV = false;
 aboutDialog::aboutDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::aboutDialog) {
   ui->setupUi(this);
+
+  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
+  QSettings Reg(qfile, QSettings::IniFormat);
+  QString ver = Reg.value("ocVer").toString();
+  if (ver > ocVer) {
+    ocVer = ver;
+  }
 
   strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/tag/0.7.7";
   strOCFromDev =

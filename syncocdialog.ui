@@ -156,9 +156,9 @@
    <item row="1" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QPushButton" name="btnCheckOC">
+      <widget class="QPushButton" name="btnUpdateOC">
        <property name="text">
-        <string>Update OpenCore database</string>
+        <string>Update OpenCore database to the latest version</string>
        </property>
       </widget>
      </item>

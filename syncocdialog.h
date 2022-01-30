@@ -62,9 +62,7 @@ class SyncOCDialog : public QDialog {
 
   void on_tableKexts_itemSelectionChanged();
 
-  void on_btnCheckOC_clicked();
-
-  void on_btnStopCheckOC_clicked();
+  void on_btnUpdateOC_clicked();
 
  private:
   void setListWidgetStyle();

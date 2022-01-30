@@ -92,8 +92,8 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   }
   ui->chkShowVolName->setChecked(Reg.value("ShowVolName", 0).toBool());
 
-  ui->chkRecentOpen->setChecked(Reg.value("chkRecentOpen", 0).toBool());
-  ui->chkOpenDir->setChecked(Reg.value("chkOpenDir", 0).toBool());
+  ui->chkRecentOpen->setChecked(Reg.value("chkRecentOpen", 1).toBool());
+  ui->chkOpenDir->setChecked(Reg.value("chkOpenDir", 1).toBool());
   ui->chkMountESP->setChecked(Reg.value("chkMountESP", 1).toBool());
   ui->chkBackupEFI->setChecked(Reg.value("chkBackupEFI", 1).toBool());
   ui->chkDatabase->setChecked(Reg.value("chkDatabase", 1).toBool());

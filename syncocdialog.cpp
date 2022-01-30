@@ -340,7 +340,7 @@ void SyncOCDialog::keyPressEvent(QKeyEvent* event) {
 }
 
 void SyncOCDialog::on_btnCheckUpdate_clicked() {
-  if (!ui->btnCheckOC->isEnabled()) return;
+  if (!ui->btnUpdateOC->isEnabled()) return;
   if (sourceKexts.count() == 0) return;
   ui->btnUpdate->setEnabled(false);
   repaint();
@@ -397,9 +397,9 @@ void SyncOCDialog::on_btnStop_clicked() {
   mymethod->cancelKextUpdate();
 
   if (isCheckOC) {
-    delete progBar;
     isCheckOC = false;
-    ui->btnCheckOC->setEnabled(true);
+    ui->btnUpdateOC->setEnabled(true);
+    delete progBar;
   }
 }
 
@@ -760,7 +760,6 @@ void SyncOCDialog::init_Sync_OC_Table() {
   for (int i = 0; i < sourceKexts.count(); i++) {
     QString f = sourceKexts.at(i);
     QString str_name = mymethod->getFileName(f);
-    // ui->listKexts->addItem(str_name);
     ui->tableKexts->setRowCount(ui->tableKexts->rowCount() + 1);
     QTableWidgetItem* item = new QTableWidgetItem(str_name);
     ui->tableKexts->setItem(i, 3, item);
@@ -883,12 +882,12 @@ void SyncOCDialog::on_tableKexts_itemSelectionChanged() {
                                  sourceHash);
 }
 
-void SyncOCDialog::on_btnCheckOC_clicked() {
+void SyncOCDialog::on_btnUpdateOC_clicked() {
   if (!ui->btnCheckUpdate->isEnabled()) return;
 
   isCheckOC = true;
   mymethod->blBreak = false;
-  ui->btnCheckOC->setEnabled(false);
+  ui->btnUpdateOC->setEnabled(false);
   repaint();
 
   progBar = new QProgressBar(this);
@@ -906,8 +905,8 @@ void SyncOCDialog::on_btnCheckOC_clicked() {
       "border-radius:0px;"
       "background-color:rgba(25,255,0,100);"
       "}");
-  progBar->setGeometry(ui->btnCheckOC->x(), ui->btnCheckOC->y(),
-                       ui->btnCheckOC->width(), ui->btnCheckOC->height());
+  progBar->setGeometry(ui->btnUpdateOC->x(), ui->btnUpdateOC->y(),
+                       ui->btnUpdateOC->width(), ui->btnUpdateOC->height());
   progBar->show();
 
   QString test = "https://github.com/acidanthera/OpenCorePkg";
@@ -915,8 +914,4 @@ void SyncOCDialog::on_btnCheckOC_clicked() {
     mymethod->getLastReleaseFromUrl(test);
   if (mw_one->myDatabase->ui->rbtnWeb->isChecked())
     mymethod->getLastReleaseFromHtml(test + "/releases/latest");
-
-  qDebug() << mymethod->filename;
 }
-
-void SyncOCDialog::on_btnStopCheckOC_clicked() { on_btnStop_clicked(); }

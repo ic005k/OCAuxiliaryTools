@@ -41,17 +41,17 @@ void MainWindow::changeOpenCore(bool blDEV) {
     lblVer->setText("  OpenCore " + ocVer);
     aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                       " for OpenCore " + ocVer);
-    dlgSyncOC->ui->btnCheckOC->setHidden(false);
+    dlgSyncOC->ui->btnUpdateOC->setHidden(false);
   } else {
     dataBaseDir = appInfo.filePath() + "/devDatabase/";
     pathSource = dataBaseDir;
     lblVer->setText("  OpenCore " + ocVerDev);
     aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                       " for OpenCore " + ocVerDev);
-    dlgSyncOC->ui->btnCheckOC->setHidden(true);
+    dlgSyncOC->ui->btnUpdateOC->setHidden(true);
   }
 
-  if (linuxOS) dlgSyncOC->ui->btnCheckOC->setHidden(true);
+  if (linuxOS) dlgSyncOC->ui->btnUpdateOC->setHidden(true);
 
   if (myDatabase->ui->chkHideToolbar->isChecked()) {
     title = lblVer->text() + "      ";
