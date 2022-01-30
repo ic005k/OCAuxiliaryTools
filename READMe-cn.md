@@ -42,10 +42,6 @@ OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用�
 
 ### OCAT获取OpenCore的途径？
 * OCAT目前只从OC官方获取OpenCore，它来自这里：https://github.com/acidanthera/OpenCorePkg/actions 也就是OCAT“帮助“菜单中的”OpenCore工厂“。除此之外，OCAT不从任何其它途径获取OpenCore的任何文件。
-* 请注意：OCAT使用的所有原材料，均来自OpenCore官方，OCAT不从任何第三方获取任何内容，现在不会，将来也不会。
-
-### OCAT为什么不自动在线获取OC？
-* 因为OC几乎是每月才发布一次稳定版，而且OC更新的时候必然会伴随着OCAT的更新，此时OCAT有足够的时间将OC放入OCAT中，完全没有必要采用在线获取的方式。
 
 ---
 
