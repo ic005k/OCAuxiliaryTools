@@ -43,10 +43,6 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for OC that 
 
 ### How does OCAT get OpenCore?
 * OCAT currently only gets OpenCore officially from OC, it comes from here: https://github.com/acidanthera/OpenCorePkg/actions which is the "OpenCore Factory" in the "Help" menu of OCAT. Other than that, OCAT does not get any files for OpenCore from any other source.
-* Please note: All raw materials used by OCAT come from official OpenCore sources, OCAT does not get any content from any third party, not now, not ever.
-
-### Why doesn't OCAT use an online approach to automatically obtain OC?
-* Because OC is only released in stable version almost once a month, and the OC update is inevitably accompanied by an OCAT update, when OCAT has enough time to put the OC into OCAT, there is absolutely no need to use the online fetching method.
 
 ---
 
