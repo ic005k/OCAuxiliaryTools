@@ -22,7 +22,7 @@ aboutDialog::aboutDialog(QWidget* parent)
     ocVer = ver;
   }
 
-  strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/tag/0.7.7";
+  strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/latest";
   strOCFromDev =
       "https://github.com/acidanthera/OpenCorePkg/actions/runs/1753209747/";
 

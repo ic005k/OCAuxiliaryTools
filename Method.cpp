@@ -163,11 +163,11 @@ void Method::finishKextUpdate(bool blDatabase) {
       QString Name = getFileName(dirSource);
       dirTargetDatabase =
           mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
-      dirTargetLinux = QDir::homePath() + "/Kexts/" + Name;
+      dirTargetLinux = QDir::homePath() + "/Database/EFI/OC/Kexts/" + Name;
 
       if (!mw_one->linuxOS)
         mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
-      if (mw_one->linuxOS)
+      else
         mw_one->copyDirectoryFiles(dirSource, dirTargetLinux, true);
     }
   } else {
@@ -176,14 +176,15 @@ void Method::finishKextUpdate(bool blDatabase) {
       list = DirToFileList(mw_one->strAppExePath + "/Database/EFI/OC/Kexts/",
                            "*.kext");
     else
-      list = DirToFileList(QDir::homePath() + "/Kexts/", "*.kext");
+      list =
+          DirToFileList(QDir::homePath() + "/Database/EFI/OC/Kexts/", "*.kext");
     for (int i = 0; i < list.count(); i++) {
       QString dirSource, dirTarget;
       if (!mw_one->linuxOS)
         dirSource =
             mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + list.at(i);
       else
-        dirSource = QDir::homePath() + "/Kexts/" + list.at(i);
+        dirSource = QDir::homePath() + "/Database/EFI/OC/Kexts/" + list.at(i);
       QString Name = getFileName(dirSource);
       dirTarget = strKexts + Name;
 
@@ -360,6 +361,11 @@ void Method::doProcessFinished() {
 void Method::updateOpenCore() {
   if (mw_one->dlgSyncOC->isCheckOC) {
     QList<bool> Results;
+    QString appPathBak = mw_one->strAppExePath;
+    if (mw_one->linuxOS)
+      mw_one->strAppExePath = QDir::homePath();
+    else
+      mw_one->strAppExePath = appPathBak;
 
     QString strSEFI = tempDir + "X64/EFI/";
     QString strTEFI = mw_one->strAppExePath + "/Database/EFI/";
@@ -421,7 +427,6 @@ void Method::updateOpenCore() {
     bool isDo = true;
     for (int i = 0; i < Results.count(); i++) {
       if (Results.at(i) == false) isDo = false;
-      // qDebug() << Results.at(i);
     }
     if (isDo) {
       QString file = filename;
@@ -430,7 +435,6 @@ void Method::updateOpenCore() {
       if (list.count() == 3) {
         ver = list.at(1);
       }
-      // qDebug() << filename << ver;
 
       QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
       QSettings Reg(qfile, QSettings::IniFormat);

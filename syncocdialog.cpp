@@ -680,10 +680,17 @@ void SyncOCDialog::init_Sync_OC_Table() {
 
   QString file1, file2, file3, file4;
   QString targetFile1, targetFile2, targetFile3, targetFile4;
-  file1 = mw_one->pathSource + "EFI/OC/OpenCore.efi";
-  file2 = mw_one->pathSource + "EFI/BOOT/BOOTx64.efi";
-  file3 = mw_one->pathSource + "EFI/OC/Drivers/OpenRuntime.efi";
-  file4 = mw_one->pathSource + "EFI/OC/Drivers/OpenCanopy.efi";
+  if (!mw_one->linuxOS) {
+    file1 = mw_one->pathSource + "EFI/OC/OpenCore.efi";
+    file2 = mw_one->pathSource + "EFI/BOOT/BOOTx64.efi";
+    file3 = mw_one->pathSource + "EFI/OC/Drivers/OpenRuntime.efi";
+    file4 = mw_one->pathSource + "EFI/OC/Drivers/OpenCanopy.efi";
+  } else {
+    file1 = QDir::homePath() + "/Database/EFI/OC/OpenCore.efi";
+    file2 = QDir::homePath() + "/Database/EFI/BOOT/BOOTx64.efi";
+    file3 = QDir::homePath() + "/Database/EFI/OC/Drivers/OpenRuntime.efi";
+    file4 = QDir::homePath() + "/Database/EFI/OC/Drivers/OpenCanopy.efi";
+  }
   sourceOpenCore.append(file1);
   sourceOpenCore.append(file2);
   sourceOpenCore.append(file3);
@@ -699,9 +706,13 @@ void SyncOCDialog::init_Sync_OC_Table() {
   targetOpenCore.append(targetFile4);
 
   // Drivers
+  QString str1, str2;
   for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
-    QString str1 = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
-    QString str2 = mw_one->pathSource + "EFI/OC/Drivers/" + str1;
+    str1 = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
+    if (!mw_one->linuxOS)
+      str2 = mw_one->pathSource + "EFI/OC/Drivers/" + str1;
+    else
+      str2 = QDir::homePath() + "/Database/EFI/OC/Drivers/" + str1;
     bool re = false;
     for (int j = 0; j < sourceOpenCore.count(); j++) {
       if (sourceOpenCore.at(j) == str2) re = true;
@@ -713,16 +724,18 @@ void SyncOCDialog::init_Sync_OC_Table() {
   }
 
   // Kexts
+
   if (mw_one->linuxOS) {
-    mw_one->copyDirectoryFiles(pathOldSource + "EFI/OC/Kexts/",
-                               QDir::homePath() + "/Kexts/", false);
+    mw_one->copyDirectoryFiles(pathOldSource, QDir::homePath() + "/Database/",
+                               false);
   }
   for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
     QString strKextName =
         mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
     if (!strKextName.contains("/Contents/PlugIns/")) {
       if (mw_one->linuxOS)
-        sourceKexts.append(QDir::homePath() + "/Kexts/" + strKextName);
+        sourceKexts.append(QDir::homePath() + "/Database/EFI/OC/Kexts/" +
+                           strKextName);
       else
         sourceKexts.append(pathOldSource + "EFI/OC/Kexts/" + strKextName);
       targetKexts.append(DirName + "/OC/Kexts/" + strKextName);
@@ -730,8 +743,13 @@ void SyncOCDialog::init_Sync_OC_Table() {
   }
 
   // Tools
-  QStringList dbToolsFileList =
-      mymethod->DirToFileList(mw_one->pathSource + "EFI/OC/Tools/", "*.efi");
+  QStringList dbToolsFileList;
+  if (!mw_one->linuxOS)
+    dbToolsFileList =
+        mymethod->DirToFileList(mw_one->pathSource + "EFI/OC/Tools/", "*.efi");
+  else
+    dbToolsFileList = mymethod->DirToFileList(
+        QDir::homePath() + "/Database/EFI/OC/Tools/", "*.efi");
   for (int i = 0; i < mw_one->ui->tableTools->rowCount(); i++) {
     QString strName = mw_one->ui->tableTools->item(i, 0)->text().trimmed();
     if (mymethod->isEqualInList(strName, dbToolsFileList)) {
