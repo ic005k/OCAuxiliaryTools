@@ -440,15 +440,15 @@ void Method::updateOpenCore() {
         mw_one->lblVer->setText("  OpenCore " + ocVer);
       }
 
+      mw_one->dlgSyncOC->writeCheckStateINI();
+      mw_one->dlgSyncOC->init_Sync_OC_Table();
+
       QMessageBox box;
       box.setText(
           tr("The OpenCore database has been successfully upgraded to") + "  " +
           ocVer);
       box.exec();
     }
-
-    mw_one->dlgSyncOC->writeCheckStateINI();
-    mw_one->dlgSyncOC->init_Sync_OC_Table();
   }
 }
 
