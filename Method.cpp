@@ -1746,7 +1746,15 @@ QStringList Method::getDiskList() {
 }
 
 void Method::backupEFI() {
-  if (!mw_one->ui->actionUpgrade_OC->isEnabled()) return;
+  if (!mw_one->ui->actionUpgrade_OC->isEnabled()) {
+    QMessageBox box;
+    box.setText(
+        tr("The EFI directory is incomplete and the backup cannot be "
+           "completed. Please check if the [EFI/OC] and [EFI/OC/Drivers] "
+           "directories exist?"));
+    box.exec();
+    return;
+  }
   QString strEFI = QDir::fromNativeSeparators(SaveFileName);
   QString strZipName, strBakTargetDir, str;
   strEFI.replace("/OC/" + QFileInfo(SaveFileName).fileName(), "");

@@ -901,8 +901,13 @@ void SyncOCDialog::on_tableKexts_itemSelectionChanged() {
 }
 
 void SyncOCDialog::on_btnUpdateOC_clicked() {
-  if (!ui->btnCheckUpdate->isEnabled()) return;
-
+  if (!ui->btnCheckUpdate->isEnabled()) {
+    QMessageBox box;
+    box.setText(tr(
+        "Kexts update check is in progress, please wait for it to complete."));
+    box.exec();
+    return;
+  }
   isCheckOC = true;
   mymethod->blBreak = false;
   ui->btnUpdateOC->setEnabled(false);

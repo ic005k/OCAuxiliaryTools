@@ -337,9 +337,9 @@ void MainWindow::openFile(QString PlistFileName) {
 
     QString strEFI = fi.path().mid(0, fi.path().count() - 3);
     QFileInfo f1(strEFI + "/OC");
-    QFileInfo f2(strEFI + "/BOOT");
+    // QFileInfo f2(strEFI + "/BOOT");
     QFileInfo f3(strEFI + "/OC/Drivers");
-    if (f1.isDir() && f2.isDir() && f3.isDir())
+    if (f1.isDir() && f3.isDir())
       ui->actionUpgrade_OC->setEnabled(true);
     else
       ui->actionUpgrade_OC->setEnabled(false);
