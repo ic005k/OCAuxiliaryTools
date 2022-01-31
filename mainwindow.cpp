@@ -1818,7 +1818,6 @@ void MainWindow::on_table_dp_add0_cellClicked(int row, int column) {
   Q_UNUSED(row);
   Q_UNUSED(column);
 
-  // loadRightTable(ui->table_dp_add0, ui->table_dp_add);
   readLeftTable(ui->table_dp_add0, ui->table_dp_add);
 
   setStatusBarText(ui->table_dp_add0);
