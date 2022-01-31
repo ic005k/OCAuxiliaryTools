@@ -26,8 +26,6 @@ Method::Method(QWidget* parent) : QMainWindow(parent) {
 }
 
 QStringList Method::getDLUrlList(QString url) {
-  if (blBreak) return QStringList() << "";
-
   QString strLast = getHTMLSource(url, false);
   if (strLast == "") {
     blBreak = true;
@@ -61,8 +59,6 @@ QStringList Method::getDLUrlList(QString url) {
 }
 
 QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
-  if (blBreak) return "";
-
   const QString FILE_NAME = QDir::homePath() + "/.config/QtOCC/code.txt";
   QString strProxy =
       mw_one->myDatabase->ui->comboBoxWeb->currentText().trimmed();
@@ -70,18 +66,19 @@ QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
   QUrl url(URLSTR);
   QNetworkAccessManager manager;
   QEventLoop loop;
-  // qDebug() << "Reading code form " << URLSTR;
-
-  QNetworkReply* reply = manager.get(QNetworkRequest(url));
+  qDebug() << "Reading code form " << URLSTR;
+  reply = manager.get(QNetworkRequest(url));
+  isReply = true;
   QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
   loop.exec();
+  isReply = false;
+
+  if (blBreak) return "";
 
   QString code = reply->readAll();
   if (code == "") {
     QMessageBox::critical(this, "", tr("Network error!"));
 
-    mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
-    // mw_one->dlgSyncOC->ui->btnUpdateOC->setEnabled(true);
     blBreak = true;
     return "";
   }
@@ -521,9 +518,6 @@ void Method::parse_UpdateJSON(QString str) {
   if (err_rpt.error != QJsonParseError::NoError) {
     QMessageBox::critical(this, "", tr("Network error!"));
 
-    mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
-    // mw_one->dlgSyncOC->ui->btnCheckOC->setEnabled(true);
-
     blBreak = true;
     return;
   }
@@ -559,8 +553,6 @@ void Method::parse_UpdateJSON(QString str) {
   if (strDLUrl == "") {
     blBreak = true;
 
-    mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
-    // mw_one->dlgSyncOC->ui->btnCheckOC->setEnabled(true);
     return;
   }
   kextDLUrlList.append(kextName + "|" + strDLUrl);
@@ -568,8 +560,6 @@ void Method::parse_UpdateJSON(QString str) {
 }
 
 void Method::getLastReleaseFromHtml(QString url) {
-  if (blBreak) return;
-
   QStringList strDownloadUrlList = getDLUrlList(url);
   if (strDownloadUrlList.at(0) == "") {
     blBreak = true;
@@ -1472,7 +1462,17 @@ QString Method::getFileName(QString file) {
   return list.at(list.count() - 1);
 }
 
-void Method::cancelKextUpdate() { blBreak = true; }
+void Method::cancelKextUpdate() {
+  if (mw_one->myDatabase->ui->rbtnWeb->isChecked() &&
+      !mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled()) {
+    if (isReply) {
+      emit reply->finished();
+      isReply = false;
+    }
+  }
+
+  blBreak = true;
+}
 
 void Method::writeLeftTable(QTableWidget* t0, QTableWidget* t) {
   if (!t0->currentIndex().isValid()) return;

@@ -71,7 +71,15 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
 SyncOCDialog::~SyncOCDialog() { delete ui; }
 
 void SyncOCDialog::on_btnStartSync_clicked() {
-  if (!ui->btnCheckUpdate->isEnabled()) return;
+  if (!ui->btnCheckUpdate->isEnabled() || !ui->btnUpdateOC->isEnabled()) {
+    QMessageBox box;
+    box.setText(
+        tr("Kexts update check or OpenCore database upgrade is in progress, "
+           "please wait for it to finish."));
+    box.exec();
+    return;
+  }
+
   bool ok = true;
   // Kexts
   for (int i = 0; i < sourceKexts.count(); i++) {
@@ -340,7 +348,14 @@ void SyncOCDialog::keyPressEvent(QKeyEvent* event) {
 }
 
 void SyncOCDialog::on_btnCheckUpdate_clicked() {
-  if (!ui->btnUpdateOC->isEnabled()) return;
+  if (!ui->btnUpdateOC->isEnabled()) {
+    QMessageBox box;
+    box.setText(
+        tr("The OpenCore database upgrade is in progress, please wait for it "
+           "to finish."));
+    box.exec();
+    return;
+  }
   if (sourceKexts.count() == 0) return;
   ui->btnUpdate->setEnabled(false);
   repaint();

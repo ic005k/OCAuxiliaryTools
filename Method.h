@@ -19,6 +19,7 @@ class Method : public QMainWindow {
  public:
   explicit Method(QWidget *parent = nullptr);
 
+  bool isReply = false;
   QStringList kextDLUrlList;
   bool blBreak = false;
   QString kextName;
@@ -118,7 +119,7 @@ class Method : public QMainWindow {
   QString getVolForPartition(QString strPartition);
 
   void updateOpenCore();
-public slots:
+ public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();
   void on_btnImportMaster();
