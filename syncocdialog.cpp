@@ -925,6 +925,7 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
   }
   isCheckOC = true;
   mymethod->blBreak = false;
+  mymethod->isReply = false;
   ui->btnUpdateOC->setEnabled(false);
   repaint();
 

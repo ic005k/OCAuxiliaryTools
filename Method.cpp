@@ -207,6 +207,7 @@ void Method::kextUpdate() {
   if (mw_one->ui->table_kernel_add->rowCount() == 0) return;
   mw_one->myDatabase->refreshKextUrl();
   blBreak = false;
+  isReply = false;
 
   mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(false);
   mw_one->repaint();
@@ -1463,12 +1464,9 @@ QString Method::getFileName(QString file) {
 }
 
 void Method::cancelKextUpdate() {
-  if (mw_one->myDatabase->ui->rbtnWeb->isChecked() &&
-      !mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled()) {
-    if (isReply) {
-      emit reply->finished();
-      isReply = false;
-    }
+  if (isReply) {
+    emit reply->finished();
+    isReply = false;
   }
 
   blBreak = true;
