@@ -171,6 +171,8 @@ MainWindow::MainWindow(QWidget* parent)
     }
   }
 
+  Method::init_MacVerInfo(CurVerison + "-OC" + ocVer);
+
   loading = false;
   Initialization = false;
 }

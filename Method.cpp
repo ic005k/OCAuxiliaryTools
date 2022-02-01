@@ -611,10 +611,9 @@ QString Method::loadText(QString textFile) {
   if (fi.exists()) {
     QFile file(textFile);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
-      QMessageBox::warning(
-          this, tr("Application"),
+      qDebug() << tr("Application"),
           tr("Cannot read file %1:\n%2.")
-              .arg(QDir::toNativeSeparators(textFile), file.errorString()));
+              .arg(QDir::toNativeSeparators(textFile), file.errorString());
 
     } else {
       QTextStream in(&file);
@@ -2061,4 +2060,37 @@ void Method::writePlistComment(QString plistFile, QString strComment) {
     }
   }
   TextEditToFile(txtEdit, plistFile);
+}
+
+void Method::init_MacVerInfo(QString ver) {
+#ifdef Q_OS_MAC
+  QString str1 = qApp->applicationDirPath();
+  QString infoFile = str1.replace("MacOS", "Info.plist");
+
+  QTextEdit* edit = new QTextEdit;
+  edit->setPlainText(loadText(infoFile));
+
+  bool write = false;
+
+  for (int i = 0; i < edit->document()->lineCount(); i++) {
+    QString lineTxt = getTextEditLineText(edit, i).trimmed();
+    if (lineTxt == "<key>CFBundleShortVersionString</key>" ||
+        lineTxt == "<key>CFBundleVersion</key>") {
+      QString nextTxt = getTextEditLineText(edit, i + 1).trimmed();
+      if (nextTxt != "<string>" + ver + "</string>") {
+        QTextBlock block = edit->document()->findBlockByNumber(i + 1);
+        QTextCursor cursor(block);
+        block = block.next();
+        cursor.select(QTextCursor::BlockUnderCursor);
+        cursor.removeSelectedText();
+        cursor.insertText("\n    <string>" + ver + "</string>");
+
+        write = true;
+      }
+    }
+  }
+
+  if (write) TextEditToFile(edit, infoFile);
+
+#endif
 }

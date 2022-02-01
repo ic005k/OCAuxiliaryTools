@@ -71,9 +71,9 @@ class Method : public QMainWindow {
 
   bool isKext(QString kextName);
   QString getKextBin(QString kextName);
-  QString loadText(QString textFile);
+  static QString loadText(QString textFile);
   QString getKextVersion(QString kextFile);
-  QString getTextEditLineText(QTextEdit *txtEdit, int i);
+  static QString getTextEditLineText(QTextEdit *txtEdit, int i);
 
   QObjectList getAllToolButton(QObjectList lstUIControls);
   void delRightTableItem(QTableWidget *t0, QTableWidget *t);
@@ -90,7 +90,7 @@ class Method : public QMainWindow {
   void getAllFolds(const QString &foldPath, QStringList &folds);
   void getAllFiles(const QString &foldPath, QStringList &folds,
                    const QStringList &formats);
-  void TextEditToFile(QTextEdit *txtEdit, QString fileName);
+  static void TextEditToFile(QTextEdit *txtEdit, QString fileName);
   QString getFileName(QString file);
   void cancelKextUpdate();
 
@@ -120,6 +120,7 @@ class Method : public QMainWindow {
   QString getVolForPartition(QString strPartition);
 
   void updateOpenCore();
+  static void init_MacVerInfo(QString ver);
  public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();

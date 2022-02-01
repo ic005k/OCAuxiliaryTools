@@ -1,5 +1,6 @@
 #include "aboutdialog.h"
 
+#include "Method.h"
 #include "mainwindow.h"
 #include "ui_aboutdialog.h"
 #include "ui_mainwindow.h"
