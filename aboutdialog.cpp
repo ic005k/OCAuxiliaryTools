@@ -25,7 +25,7 @@ aboutDialog::aboutDialog(QWidget* parent)
 
   strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/latest";
   strOCFromDev =
-      "https://github.com/acidanthera/OpenCorePkg/actions/runs/1753209747/";
+      "https://github.com/acidanthera/OpenCorePkg/actions/runs/1776690457/";
 
   setMaximumWidth(this->width());
   setMaximumHeight(this->height());
