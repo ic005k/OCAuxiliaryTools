@@ -37,6 +37,10 @@ class SyncOCDialog : public QDialog {
   void readCheckStateINI();
   void init_Sync_OC();
   void init_Sync_OC_Table();
+
+ public slots:
+  void on_btnStop_clicked();
+
  private slots:
   void on_btnStartSync_clicked();
 
@@ -49,8 +53,6 @@ class SyncOCDialog : public QDialog {
   void on_listOpenCore_currentRowChanged(int currentRow);
 
   void on_btnCheckUpdate_clicked();
-
-  void on_btnStop_clicked();
 
   void on_btnUpdate_clicked();
 

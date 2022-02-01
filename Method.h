@@ -19,6 +19,7 @@ class Method : public QMainWindow {
  public:
   explicit Method(QWidget *parent = nullptr);
 
+  bool isReplyDL = false;
   bool isReply = false;
   QStringList kextDLUrlList;
   bool blBreak = false;

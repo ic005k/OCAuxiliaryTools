@@ -77,9 +77,9 @@ QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
 
   QString code = reply->readAll();
   if (code == "") {
+    mw_one->dlgSyncOC->on_btnStop_clicked();
     QMessageBox::critical(this, "", tr("Network error!"));
 
-    blBreak = true;
     return "";
   }
   if (writeFile) {
@@ -287,12 +287,15 @@ void Method::startDownload(QString strUrl) {
   request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 
   replyDL = managerDownLoad->get(request);
+  isReplyDL = true;
 
   connect(replyDL, &QNetworkReply::readyRead, this,
           &Method::doProcessReadyRead);
   connect(replyDL, &QNetworkReply::finished, this, &Method::doProcessFinished);
   connect(replyDL, &QNetworkReply::downloadProgress, this,
           &Method::doProcessDownloadProgress);
+  QObject::connect(replyDL, SIGNAL(error(QNetworkReply::NetworkError)), this,
+                   SLOT(quit()));
 
   QStringList list = strUrl.split("/");
   filename = list.at(list.length() - 1);
@@ -341,12 +344,8 @@ void Method::doProcessFinished() {
     dlEnd = true;
 
   } else {
-    mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(true);
-    mw_one->dlgSyncOC->ui->btnUpdateOC->setEnabled(true);
-    mw_one->repaint();
     myfile->close();
-    QMessageBox::critical(NULL, "replyDL Error",
-                          "There is an error in the network answer!");
+    qDebug() << "There is an error in the network answer!";
   }
 
   if (mw_one->dlgSyncOC->isCheckOC) {
@@ -354,6 +353,7 @@ void Method::doProcessFinished() {
     mw_one->dlgSyncOC->isCheckOC = false;
     mw_one->dlgSyncOC->ui->btnUpdateOC->setEnabled(true);
   }
+  isReplyDL = false;
 }
 
 void Method::updateOpenCore() {
@@ -460,6 +460,7 @@ void Method::updateOpenCore() {
 void Method::doProcessDownloadProgress(qint64 recv_total,
                                        qint64 all_total)  //显示
 {
+  qDebug() << isReplyDL;
   if (blBreak) return;
 
   mw_one->dlgSyncOC->progBar->setMaximum(all_total);
@@ -517,9 +518,9 @@ void Method::parse_UpdateJSON(QString str) {
   QJsonDocument root_Doc = QJsonDocument::fromJson(str.toUtf8(), &err_rpt);
 
   if (err_rpt.error != QJsonParseError::NoError) {
+    mw_one->dlgSyncOC->on_btnStop_clicked();
     QMessageBox::critical(this, "", tr("Network error!"));
 
-    blBreak = true;
     return;
   }
 
@@ -1467,6 +1468,12 @@ void Method::cancelKextUpdate() {
   if (isReply) {
     emit reply->finished();
     isReply = false;
+  }
+
+  if (isReplyDL) {
+    emit replyDL->error();
+    replyDL->abort();
+    isReplyDL = false;
   }
 
   blBreak = true;
