@@ -2083,7 +2083,7 @@ void Method::init_MacVerInfo(QString ver) {
         block = block.next();
         cursor.select(QTextCursor::BlockUnderCursor);
         cursor.removeSelectedText();
-        cursor.insertText("\n    <string>" + ver + "</string>");
+        cursor.insertText("\n        <string>" + ver + "</string>");
 
         write = true;
       }
