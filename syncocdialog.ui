@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>880</width>
+    <width>884</width>
     <height>510</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="lblSource">
+        <widget class="QLabel" name="lblKexts">
          <property name="text">
           <string>Kexts</string>
          </property>
@@ -229,7 +229,7 @@
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QLabel" name="lblTarget">
+      <widget class="QLabel" name="lblOpenCore">
        <property name="text">
         <string>OpenCore</string>
        </property>

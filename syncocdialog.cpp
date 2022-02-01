@@ -18,6 +18,11 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {
   ui->setupUi(this);
 
+  QFont font;
+  font.setBold(true);
+  ui->lblKexts->setFont(font);
+  ui->lblOpenCore->setFont(font);
+
   ui->lblResourcesFrom->setText(
       "<a href=\"https://github.com/acidanthera/OcBinaryData/\">" +
       tr("Source"));
