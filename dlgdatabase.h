@@ -20,16 +20,14 @@ class dlgDatabase : public QDialog {
   QList<bool> listItemModi;
   QProcess *processPing;
   void refreshKextUrl();
-
+  void on_btnFind_clicked();
   void saveKextUrl();
 
   void get_EFI(int row, int column, QTableWidget *table);
-public slots:
+ public slots:
 
  private slots:
   void on_tableDatabase_cellDoubleClicked(int row, int column);
-
-  void on_btnFind_clicked();
 
   void on_editFind_textChanged(const QString &arg1);
 

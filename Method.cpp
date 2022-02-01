@@ -2110,7 +2110,9 @@ void Method::init_MacVerInfo(QString ver) {
 #endif
   }
 
-  if (write) TextEditToFile(edit, infoFile);
+  if (write) {
+    TextEditToFile(edit, infoFile);
+  }
 
 #endif
 }
