@@ -611,9 +611,9 @@ QString Method::loadText(QString textFile) {
   if (fi.exists()) {
     QFile file(textFile);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
-      qDebug() << tr("Application"),
-          tr("Cannot read file %1:\n%2.")
-              .arg(QDir::toNativeSeparators(textFile), file.errorString());
+      qDebug() << tr("Cannot read file %1:\n%2.")
+                      .arg(QDir::toNativeSeparators(textFile),
+                           file.errorString());
 
     } else {
       QTextStream in(&file);

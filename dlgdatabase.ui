@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>810</width>
-    <height>463</height>
+    <height>517</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -311,17 +311,17 @@
              <item row="0" column="0">
               <widget class="QRadioButton" name="rbtnAPI">
                <property name="text">
-                <string>Accessing the GitHub API</string>
+                <string>Accessing the GitHub API (There is a limit to the number of visits per hour)</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
+             <item row="1" column="0">
               <widget class="QRadioButton" name="rbtnWeb">
                <property name="text">
-                <string>Crawl web source code</string>
+                <string>Crawl web source code (No limit on the number of visits)</string>
                </property>
               </widget>
              </item>
@@ -344,7 +344,7 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
+          <item row="1" column="0">
            <widget class="QCheckBox" name="chkShowVolName">
             <property name="text">
              <string>Show all volume names when mounting ESP</string>
@@ -366,10 +366,10 @@
              <string>Toolbar button</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_7">
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="chkMountESP">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="chkRecentOpen">
                <property name="text">
-                <string>Mount ESP</string>
+                <string>Recently Open</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
@@ -386,7 +386,17 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="4">
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="chkMountESP">
+               <property name="text">
+                <string>Mount ESP</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
               <widget class="QCheckBox" name="chkBackupEFI">
                <property name="text">
                 <string>Backup EFI</string>
@@ -396,20 +406,10 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="5">
+             <item row="1" column="1">
               <widget class="QCheckBox" name="chkDatabase">
                <property name="text">
                 <string>Database</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="chkRecentOpen">
-               <property name="text">
-                <string>Recently Open</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
