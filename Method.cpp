@@ -2074,6 +2074,8 @@ void Method::init_MacVerInfo(QString ver) {
 
   for (int i = 0; i < edit->document()->lineCount(); i++) {
     QString lineTxt = getTextEditLineText(edit, i).trimmed();
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
     if (lineTxt == "<key>CFBundleShortVersionString</key>" ||
         lineTxt == "<key>CFBundleVersion</key>") {
       QString nextTxt = getTextEditLineText(edit, i + 1).trimmed();
@@ -2088,6 +2090,24 @@ void Method::init_MacVerInfo(QString ver) {
         write = true;
       }
     }
+#endif
+
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+    if (lineTxt == "<key>CFBundleGetInfoString</key>") {
+      QString nextTxt = getTextEditLineText(edit, i + 1).trimmed();
+      if (nextTxt != "<string>" + ver + "</string>") {
+        QTextBlock block = edit->document()->findBlockByNumber(i + 1);
+        QTextCursor cursor(block);
+        block = block.next();
+        cursor.select(QTextCursor::BlockUnderCursor);
+        cursor.removeSelectedText();
+        cursor.insertText("\n        <string>" + ver + "</string>");
+
+        write = true;
+      }
+    }
+
+#endif
   }
 
   if (write) TextEditToFile(edit, infoFile);
