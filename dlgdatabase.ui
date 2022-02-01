@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -73,6 +73,9 @@
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
            </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
            <property name="columnCount">
             <number>1</number>
            </property>
@@ -83,6 +86,9 @@
           <widget class="QTableWidget" name="tableDatabaseFind">
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
            </property>
            <property name="columnCount">
             <number>1</number>
@@ -465,6 +471,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QTableWidget" name="tableKextUrl">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
          </property>
          <column>
           <property name="text">

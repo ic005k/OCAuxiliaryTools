@@ -184,10 +184,6 @@ void SyncOCDialog::on_listKexts_currentRowChanged(int currentRow) {
   strSV = mymethod->getKextVersion(sourceFile);
   strTV = mymethod->getKextVersion(targetFile);
 
-  ui->lblTargetLastModi->setText(strShowFileName + "\n" + tr("Current File: ") +
-                                 "\n" + strTV + "  md5    " + targetHash);
-  ui->lblSourceLastModi->setText(tr("Available File: ") + "\n" + strSV +
-                                 "  md5    " + sourceHash);
   bool defUS = false;
   mw_one->myDatabase->refreshKextUrl();
   for (int i = 0; i < mw_one->myDatabase->ui->tableKextUrl->rowCount(); i++) {
@@ -283,10 +279,9 @@ void SyncOCDialog::on_listOpenCore_currentRowChanged(int currentRow) {
 
   QString strShowFileName;
   strShowFileName = fiSource.fileName();
-  ui->lblTargetLastModi_2->setText(
-      strShowFileName + "\n" + tr("Current File: ") + "md5    " + targetHash);
-  ui->lblSourceLastModi_2->setText(tr("Available File: ") + "md5    " +
-                                   sourceHash);
+  ui->lblShowInfo->setText(strShowFileName + "\n" + tr("Current File: ") +
+                           "md5    " + targetHash + "  " +
+                           tr("Available File: ") + "md5    " + sourceHash);
 
   if (sourceHash != targetHash) {
     ui->listOpenCore->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
@@ -909,10 +904,10 @@ void SyncOCDialog::on_tableKexts_itemSelectionChanged() {
   QString targetHash =
       mw_one->getMD5(mymethod->getKextBin(targetKexts.at(row)));
 
-  ui->lblTargetLastModi->setText(strShowFileName + "\n" + tr("Current File: ") +
-                                 strTV + "  md5    " + targetHash);
-  ui->lblSourceLastModi->setText(tr("Available File: ") + strSV + "  md5    " +
-                                 sourceHash);
+  ui->lblShowInfo->setText(strShowFileName + "\n" + tr("Current File: ") +
+                           strTV + "  md5    " + targetHash + "  " +
+                           tr("Available File: ") + strSV + "  md5    " +
+                           sourceHash);
 }
 
 void SyncOCDialog::on_btnUpdateOC_clicked() {
