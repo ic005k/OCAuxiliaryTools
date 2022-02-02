@@ -10181,7 +10181,7 @@ QVariantMap MainWindow::setComboBoxValue(QVariantMap map, QWidget* tab) {
       if (w != ui->cboxFind && w != ui->cboxTextColor &&
           w != ui->cboxBackColor && w != ui->comboBoxACPI &&
           w != ui->comboBoxBooter && w != ui->comboBoxKernel &&
-          w != ui->comboBoxUEFI) {
+          w != ui->comboBoxUEFI && w != ui->cboxEmulate) {
         if (name != "SystemProductName") {
           map.insert(name, w->currentText().trimmed());
 
@@ -11388,4 +11388,53 @@ void MainWindow::checkSystemAudioVolume() {
     }
     ui->table_nv_add0->setCurrentCell(old, 0);
   }
+}
+
+void MainWindow::on_cboxEmulate_currentTextChanged(const QString& arg1) {
+  if (arg1 == "None") {
+    ui->editDatCpuid1Data->setText("");
+    ui->editDatCpuid1Mask->setText("");
+  }
+
+  if (arg1 == "Emulate Haswell (0x0306C3)") {
+    ui->editDatCpuid1Data->setText(
+        "C3 06 03 00 00 00 00 00 00 00 00 00 00 00 00 00");
+    ui->editDatCpuid1Mask->setText(
+        "FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00");
+  }
+
+  if (arg1 == "Emulate Broadwell (0x0306D4)") {
+    ui->editDatCpuid1Data->setText(
+        "D4 06 03 00 00 00 00 00 00 00 00 00 00 00 00 00");
+    ui->editDatCpuid1Mask->setText(
+        "FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00");
+  }
+
+  if (arg1 == "Emulate Coffe Lake") {
+    ui->editDatCpuid1Data->setText(
+        "EA 06 09 00 00 00 00 00 00 00 00 00 00 00 00 00");
+    ui->editDatCpuid1Mask->setText(
+        "FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00");
+  }
+
+  if (arg1 == "Emulate Comet Lake U42 (0x0806EC)") {
+    ui->editDatCpuid1Data->setText(
+        "EC 06 08 00 00 00 00 00 00 00 00 00 00 00 00 00");
+    ui->editDatCpuid1Mask->setText(
+        "FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00");
+  }
+
+  if (arg1 == "Emulatte Comet Lake (0x0A0655)") {
+    ui->editDatCpuid1Data->setText(
+        "55 06 0A 00 00 00 00 00 00 00 00 00 00 00 00 00");
+    ui->editDatCpuid1Mask->setText(
+        "FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00");
+  }
+
+  QString str1 = ui->editDatCpuid1Data->text().trimmed();
+  QString str2 = ui->editDatCpuid1Mask->text().trimmed();
+  str1 = str1.replace(" ", "");
+  str2 = str2.replace(" ", "");
+  ui->editDatCpuid1Data->setText(str1);
+  ui->editDatCpuid1Mask->setText(str2);
 }

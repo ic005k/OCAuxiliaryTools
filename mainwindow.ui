@@ -2425,7 +2425,7 @@ This is a security option that restricts the activation of single user mode by i
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2996,6 +2996,47 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
                 </property>
                 <property name="text">
                  <string>DummyPowerManagement</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="cboxEmulate">
+                <item>
+                 <property name="text">
+                  <string>None</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Emulate Haswell (0x0306C3)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Emulate Broadwell (0x0306D4)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Emulate Coffe Lake</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Emulate Comet Lake U42 (0x0806EC)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Emulatte Comet Lake (0x0A0655)</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_126">
+                <property name="text">
+                 <string>Preselection</string>
                 </property>
                </widget>
               </item>

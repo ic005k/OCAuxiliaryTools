@@ -963,6 +963,8 @@ class MainWindow : public QMainWindow {
 
   void on_actionDelete_triggered();
 
+  void on_cboxEmulate_currentTextChanged(const QString& arg1);
+
  private:
   bool isDrag;
   QPoint m_position;
