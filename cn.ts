@@ -2538,13 +2538,15 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="6451"/>
-        <source>Import from Clover configuration file</source>
-        <translation>从Clover配置文件导入</translation>
+        <source>Import SMBIOS from Clover configuration file</source>
+        <oldsource>Import from Clover configuration file</oldsource>
+        <translation>从Clover配置文件导入SMBIOS信息</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="6458"/>
-        <source>Export to a Clover configuration file</source>
-        <translation>导出到Clover配置文件</translation>
+        <source>Export SMBIOS to a Clover configuration file</source>
+        <oldsource>Export to a Clover configuration file</oldsource>
+        <translation>导出SMBIOS信息到Clover配置文件</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8599"/>
