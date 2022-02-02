@@ -11437,3 +11437,51 @@ void MainWindow::on_cboxEmulate_currentTextChanged(const QString& arg1) {
         "FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00");
   }
 }
+
+void MainWindow::on_btnImport_clicked() {
+  QFileDialog fd;
+  QString plistFile =
+      fd.getOpenFileName(this, "Clover Config file", "",
+                         "Clover Config file(*.plist);;All files(*.*)");
+
+  if (!QFile(plistFile).exists()) return;
+
+  ui->editSystemUUID->setText(mymethod->readPlist(plistFile, "SmUUID"));
+  ui->editSystemSerialNumber->setText(
+      mymethod->readPlist(plistFile, "BoardSerialNumber"));
+  ui->editMLB->setText(mymethod->readPlist(plistFile, "MLB"));
+  ui->editDatROM->setText(mymethod->readPlist(plistFile, "ROM"));
+
+  QString pname = mymethod->readPlist(plistFile, "ProductName");
+  for (int i = 0; i < ui->cboxSystemProductName->count(); i++) {
+    if (ui->cboxSystemProductName->itemText(i).contains(pname)) {
+      ui->cboxSystemProductName->setCurrentIndex(i);
+      break;
+    }
+  }
+}
+
+void MainWindow::on_btnExport_clicked() {
+  QFileDialog fd;
+  QString plistFile =
+      fd.getOpenFileName(this, "Clover Config file", "",
+                         "Clover Config file(*.plist);;All files(*.*)");
+
+  if (!QFile(plistFile).exists()) return;
+
+  QString uuid = ui->editSystemUUID->text().trimmed();
+  mymethod->writePlist(plistFile, "SmUUID", uuid);
+
+  QString serial = ui->editSystemSerialNumber->text().trimmed();
+  mymethod->writePlist(plistFile, "BoardSerialNumber", serial);
+
+  QString mlb = ui->editMLB->text().trimmed();
+  mymethod->writePlist(plistFile, "MLB", mlb);
+
+  QString rom = ui->editDatROM->text().trimmed();
+  mymethod->writePlist(plistFile, "ROM", rom);
+
+  QString pname = ui->cboxSystemProductName->currentText();
+  pname = pname.split(" ").at(0);
+  mymethod->writePlist(plistFile, "ProductName", pname);
+}

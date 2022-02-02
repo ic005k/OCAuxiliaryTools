@@ -965,6 +965,10 @@ class MainWindow : public QMainWindow {
 
   void on_cboxEmulate_currentTextChanged(const QString& arg1);
 
+  void on_btnImport_clicked();
+
+  void on_btnExport_clicked();
+
  private:
   bool isDrag;
   QPoint m_position;

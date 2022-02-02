@@ -121,7 +121,9 @@ class Method : public QMainWindow {
 
   void updateOpenCore();
   static void init_MacVerInfo(QString ver);
- public slots:
+  QString readPlist(QString plistFile, QString key);
+  void writePlist(QString plistFile, QString key, QString value);
+public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();
   void on_btnImportMaster();

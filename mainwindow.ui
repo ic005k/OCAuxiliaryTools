@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -6443,22 +6443,25 @@ A continuously updated variable list can be found in a corresponding document: N
                <string>Generic</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_50">
-               <property name="leftMargin">
-                <number>5</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>5</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="editSystemUUID"/>
+               <item row="0" column="0" colspan="4">
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QPushButton" name="btnImport">
+                   <property name="text">
+                    <string>Import from Clover</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btnExport">
+                   <property name="text">
+                    <string>Export to Clover</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
-               <item row="0" column="0">
+               <item row="1" column="0">
                 <widget class="QLabel" name="label_18">
                  <property name="toolTip">
                   <string notr="true">Refer to SMBIOS SystemProductName.</string>
@@ -6471,7 +6474,7 @@ A continuously updated variable list can be found in a corresponding document: N
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
+               <item row="1" column="1">
                 <widget class="QComboBox" name="cboxSystemProductName">
                  <property name="minimumSize">
                   <size>
@@ -6490,37 +6493,50 @@ A continuously updated variable list can be found in a corresponding document: N
                  </property>
                 </widget>
                </item>
-               <item row="3" column="3">
-                <widget class="QLineEdit" name="editMLB"/>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_19">
-                 <property name="toolTip">
-                  <string notr="true"> Refer to SMBIOS SystemSerialNumber.</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> Refer to SMBIOS SystemSerialNumber.</string>
-                 </property>
-                 <property name="text">
-                  <string>SystemSerialNumber</string>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="2">
-                <widget class="QToolButton" name="btnSystemUUID">
-                 <property name="text">
-                  <string>Generate</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="2">
                 <widget class="QToolButton" name="btnGenerate">
                  <property name="text">
                   <string>Generate</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
+               <item row="1" column="3">
+                <widget class="QCheckBox" name="chkAdviseFeatures">
+                 <property name="toolTip">
+                  <string notr="true">Type: plist boolean
+
+Description: Updates FirmwareFeatures with supported bits.
+
+Added bits to FirmwareFeatures: • FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - Without this bit, it is not possible to reboot to Windows installed on a drive with an EFI partition that is not the first partition on the disk.
+
+• FW_FEATURE_SUPPORTS_UEFI_WINDOWS_BOOT (0x20000000) - Without this bit, it is not possible to reboot to Windows installed on a drive with an EFI partition that is the first partition on the disk.
+
+• FW_FEATURE_SUPPORTS_APFS (0x00080000) - Without this bit, it is not possible to install macOS on an APFS disk.
+
+Note: On most newer firmwares these bits are already set, the option may be necessary when &quot;upgrading&quot; the firmware with new features.
+----
+类型：plist布尔值
+
+描述：用支持的位更新FirmwareFeatures。
+
+添加到FirmwareFeatures的位：
+- FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - 没有这个位，不可能重新启动安装在EFI分区不是磁盘上第一个分区的驱动器上的Windows。
+
+- FW_FEATURE_SUPPORTS_UEFI_WINDOWS_BOOT (0x20000000) - 没有这个位，不可能重新启动安装在EFI分区是磁盘上第一个分区的驱动器上的Windows。
+
+- FW_FEATURE_SUPPORTS_APFS (0x00080000) - 没有这个位，不可能在APFS磁盘上安装macOS。
+
+注意：在大多数较新的固件上，这些位已经被设置了，当用新功能 &quot;升级 &quot;固件时，这个选项可能是必要的。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Forces Windows support in FirmwareFeatures.</string>
+                 </property>
+                 <property name="text">
+                  <string>AdviseFeatures</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
                 <widget class="QLabel" name="label_21">
                  <property name="toolTip">
                   <string notr="true">Refer to SMBIOS SystemUUID.</string>
@@ -6533,23 +6549,37 @@ A continuously updated variable list can be found in a corresponding document: N
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="QLineEdit" name="editSystemSerialNumber"/>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="editSystemUUID"/>
                </item>
-               <item row="3" column="2">
-                <widget class="QLabel" name="label_17">
-                 <property name="toolTip">
-                  <string>Refer to SMBIOS BoardSerialNumber.</string>
-                 </property>
-                 <property name="statusTip">
-                  <string>Refer to SMBIOS BoardSerialNumber.</string>
-                 </property>
+               <item row="2" column="2">
+                <widget class="QToolButton" name="btnSystemUUID">
                  <property name="text">
-                  <string>MLB</string>
+                  <string>Generate</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
+               <item row="2" column="3">
+                <widget class="QCheckBox" name="chkMaxBIOSVersion">
+                 <property name="toolTip">
+                  <string notr="true"> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.
+
+----
+
+ 将 BIOSVersion 设置为 9999.999.999.999.999，建议老旧硬件的机器选择 Automatic平台信息时使用，以避免在非官方支持的 macOS 版本中进行 BIOS 更新。
+
+</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic
+ PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</string>
+                 </property>
+                 <property name="text">
+                  <string>MaxBIOSVersion</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
                 <widget class="QLabel" name="label_20">
                  <property name="toolTip">
                   <string notr="true">Refer to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
@@ -6562,17 +6592,66 @@ A continuously updated variable list can be found in a corresponding document: N
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
+               <item row="3" column="1">
                 <widget class="QLineEdit" name="editDatROM"/>
                </item>
-               <item row="2" column="2">
+               <item row="3" column="2">
                 <widget class="QToolButton" name="btnROM">
                  <property name="text">
                   <string>Generate</string>
                  </property>
                 </widget>
                </item>
+               <item row="3" column="3">
+                <widget class="QCheckBox" name="chkSpoofVendor">
+                 <property name="toolTip">
+                  <string notr="true">Sets SMBIOS vendor fields to Acidanthera.
+
+----
+
+将SMBIOS供应商字段设置为Acidanthera。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Sets SMBIOS vendor fields to Acidanthera.</string>
+                 </property>
+                 <property name="text">
+                  <string>SpoofVendor</string>
+                 </property>
+                </widget>
+               </item>
                <item row="4" column="0">
+                <widget class="QLabel" name="label_19">
+                 <property name="toolTip">
+                  <string notr="true"> Refer to SMBIOS SystemSerialNumber.</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Refer to SMBIOS SystemSerialNumber.</string>
+                 </property>
+                 <property name="text">
+                  <string>SystemSerialNumber</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QLineEdit" name="editSystemSerialNumber"/>
+               </item>
+               <item row="4" column="2">
+                <widget class="QLabel" name="label_17">
+                 <property name="toolTip">
+                  <string>Refer to SMBIOS BoardSerialNumber.</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Refer to SMBIOS BoardSerialNumber.</string>
+                 </property>
+                 <property name="text">
+                  <string>MLB</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="3">
+                <widget class="QLineEdit" name="editMLB"/>
+               </item>
+               <item row="5" column="0">
                 <widget class="QLabel" name="label_96">
                  <property name="toolTip">
                   <string notr="true">Valid values:
@@ -6607,14 +6686,14 @@ Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemory
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1">
+               <item row="5" column="1">
                 <widget class="QComboBox" name="cboxSystemMemoryStatus">
                  <property name="editable">
                   <bool>true</bool>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="2">
+               <item row="5" column="2">
                 <widget class="QLabel" name="label_95">
                  <property name="toolTip">
                   <string> Combined of Processor Major and Minor types.</string>
@@ -6627,83 +6706,10 @@ Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemory
                  </property>
                 </widget>
                </item>
-               <item row="4" column="3">
+               <item row="5" column="3">
                 <widget class="QLineEdit" name="editIntProcessorType_Generic">
                  <property name="text">
                   <string>0</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3">
-                <widget class="QCheckBox" name="chkSpoofVendor">
-                 <property name="toolTip">
-                  <string notr="true">Sets SMBIOS vendor fields to Acidanthera.
-
-----
-
-将SMBIOS供应商字段设置为Acidanthera。</string>
-                 </property>
-                 <property name="statusTip">
-                  <string>Sets SMBIOS vendor fields to Acidanthera.</string>
-                 </property>
-                 <property name="text">
-                  <string>SpoofVendor</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3">
-                <widget class="QCheckBox" name="chkMaxBIOSVersion">
-                 <property name="toolTip">
-                  <string notr="true"> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.
-
-----
-
- 将 BIOSVersion 设置为 9999.999.999.999.999，建议老旧硬件的机器选择 Automatic平台信息时使用，以避免在非官方支持的 macOS 版本中进行 BIOS 更新。
-
-</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic
- PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.</string>
-                 </property>
-                 <property name="text">
-                  <string>MaxBIOSVersion</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3">
-                <widget class="QCheckBox" name="chkAdviseFeatures">
-                 <property name="toolTip">
-                  <string notr="true">Type: plist boolean
-
-Description: Updates FirmwareFeatures with supported bits.
-
-Added bits to FirmwareFeatures: • FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - Without this bit, it is not possible to reboot to Windows installed on a drive with an EFI partition that is not the first partition on the disk.
-
-• FW_FEATURE_SUPPORTS_UEFI_WINDOWS_BOOT (0x20000000) - Without this bit, it is not possible to reboot to Windows installed on a drive with an EFI partition that is the first partition on the disk.
-
-• FW_FEATURE_SUPPORTS_APFS (0x00080000) - Without this bit, it is not possible to install macOS on an APFS disk.
-
-Note: On most newer firmwares these bits are already set, the option may be necessary when &quot;upgrading&quot; the firmware with new features.
-----
-类型：plist布尔值
-
-描述：用支持的位更新FirmwareFeatures。
-
-添加到FirmwareFeatures的位：
-- FW_FEATURE_SUPPORTS_CSM_LEGACY_MODE (0x1) - 没有这个位，不可能重新启动安装在EFI分区不是磁盘上第一个分区的驱动器上的Windows。
-
-- FW_FEATURE_SUPPORTS_UEFI_WINDOWS_BOOT (0x20000000) - 没有这个位，不可能重新启动安装在EFI分区是磁盘上第一个分区的驱动器上的Windows。
-
-- FW_FEATURE_SUPPORTS_APFS (0x00080000) - 没有这个位，不可能在APFS磁盘上安装macOS。
-
-注意：在大多数较新的固件上，这些位已经被设置了，当用新功能 &quot;升级 &quot;固件时，这个选项可能是必要的。</string>
-                 </property>
-                 <property name="statusTip">
-                  <string>Forces Windows support in FirmwareFeatures.</string>
-                 </property>
-                 <property name="text">
-                  <string>AdviseFeatures</string>
                  </property>
                 </widget>
                </item>
