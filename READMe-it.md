@@ -22,7 +22,7 @@
 
 
 
-OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per OC, ricca di funzionalita' e facile da usare. OCAT mantiene la sua natura strutturale di essere completamente trasparente a livello utente, con un design completamente aperto, e' ancora in evoluzione e accoglie qualsiasi domanda o suggerimento.
+OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per [OpenCore](https://github.com/acidanthera/OpenCorePkg).
 
 * [Inglese: Aggiornare OpenCore e i Kexts con OCAT (da @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
