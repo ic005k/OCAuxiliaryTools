@@ -18,7 +18,7 @@ using namespace std;
 
 QString PlistFileName, SaveFileName;
 QVector<QString> openFileLists;
-QRegExp regx("[A-Fa-f0-9]{0,1024}");
+QRegExp regx("[A-Fa-f0-9- ]{0,1024}");
 QRegExp regxNumber("^-?\[0-9]*$");
 Method* mymethod;
 QVector<QCheckBox*> chkDisplayLevel, chk_ScanPolicy, chk_PickerAttributes,
@@ -289,6 +289,7 @@ void MainWindow::openFile(QString PlistFileName) {
   ui->editSystemUUID->setText("");
   ui->editMLB->setText("");
   ui->editSystemSerialNumber->setText("");
+  ui->cboxEmulate->setCurrentIndex(0);
 
   QFile file(PlistFileName);
   QVariantMap map = PListParser::parsePList(&file).toMap();
@@ -6763,6 +6764,11 @@ void MainWindow::LineEditDataCheck() {
       QValidator* validator = new QRegExpValidator(regx, w);
       w->setValidator(validator);
       w->setPlaceholderText(tr("Hexadecimal"));
+
+      connect(w, &QLineEdit::textChanged, [=]() {
+        w->setToolTip(QString::number(w->text().replace(" ", "").length() / 2) +
+                      " Bytes");
+      });
     }
   }
 }
@@ -10112,9 +10118,9 @@ QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab) {
 
         if (str0.mid(0, 3) == "Dat") {
           if (strList.count() > 0)
-            map.insert(strList.at(0), HexStrToByte(w->text().trimmed()));
+            map.insert(strList.at(0), HexStrToByte(w->text().replace(" ", "")));
           else
-            map.insert(name, HexStrToByte(w->text().trimmed()));
+            map.insert(name, HexStrToByte(w->text().replace(" ", "")));
         }
 
         else if (str0.mid(0, 3) == "Int") {
@@ -11430,11 +11436,4 @@ void MainWindow::on_cboxEmulate_currentTextChanged(const QString& arg1) {
     ui->editDatCpuid1Mask->setText(
         "FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00");
   }
-
-  QString str1 = ui->editDatCpuid1Data->text().trimmed();
-  QString str2 = ui->editDatCpuid1Mask->text().trimmed();
-  str1 = str1.replace(" ", "");
-  str2 = str2.replace(" ", "");
-  ui->editDatCpuid1Data->setText(str1);
-  ui->editDatCpuid1Mask->setText(str2);
 }
