@@ -2152,3 +2152,16 @@ void Method::writePlist(QString plistFile, QString key, QString value) {
     }
   }
 }
+
+bool Method::isKeyExists(QString plistFile, QString key) {
+  QTextEdit* edit = new QTextEdit;
+  edit->setPlainText(loadText(plistFile));
+  for (int i = 0; i < edit->document()->lineCount(); i++) {
+    QString lineTxt = getTextEditLineText(edit, i).trimmed();
+    if (lineTxt == "<key>" + key + "</key>") {
+      return true;
+    }
+  }
+
+  return false;
+}

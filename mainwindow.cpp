@@ -11446,7 +11446,7 @@ void MainWindow::on_btnImport_clicked() {
 
   if (!QFile(plistFile).exists()) return;
 
-  if (mymethod->readPlist(plistFile, "SMBIOS") != "<dict>") {
+  if (!mymethod->isKeyExists(plistFile, "SmUUID")) {
     QMessageBox box;
     box.setText(tr("This is not a valid Clover configuration file."));
     box.exec();
@@ -11476,7 +11476,7 @@ void MainWindow::on_btnExport_clicked() {
 
   if (!QFile(plistFile).exists()) return;
 
-  if (mymethod->readPlist(plistFile, "SMBIOS") != "<dict>") {
+  if (!mymethod->isKeyExists(plistFile, "SmUUID")) {
     QMessageBox box;
     box.setText(tr("This is not a valid Clover configuration file."));
     box.exec();

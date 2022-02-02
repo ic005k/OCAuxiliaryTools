@@ -123,7 +123,8 @@ class Method : public QMainWindow {
   static void init_MacVerInfo(QString ver);
   QString readPlist(QString plistFile, QString key);
   void writePlist(QString plistFile, QString key, QString value);
-public slots:
+  bool isKeyExists(QString plistFile, QString key);
+ public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();
   void on_btnImportMaster();
