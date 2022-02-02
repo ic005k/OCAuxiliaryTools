@@ -38,11 +38,6 @@ OC辅助工具（简称OCAT或ocat） 是一个针对OC的非常简单的实用�
 * [@fabiosun](https://github.com/fabiosun) 提供AMD的相关内容。
 ---
 
-### OCAT获取OpenCore的途径？
-* OCAT目前只从OC官方获取OpenCore，它来自这里：https://github.com/acidanthera/OpenCorePkg/actions 也就是OCAT“帮助“菜单中的”OpenCore工厂“。除此之外，OCAT不从任何其它途径获取OpenCore的任何文件。
-
----
-
 ### 感谢以下开源软件的支持！
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
