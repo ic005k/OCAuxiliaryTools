@@ -11446,9 +11446,16 @@ void MainWindow::on_btnImport_clicked() {
 
   if (!QFile(plistFile).exists()) return;
 
+  if (mymethod->readPlist(plistFile, "SMBIOS") != "<dict>") {
+    QMessageBox box;
+    box.setText(tr("This is not a valid Clover configuration file."));
+    box.exec();
+    return;
+  }
+
   ui->editSystemUUID->setText(mymethod->readPlist(plistFile, "SmUUID"));
   ui->editSystemSerialNumber->setText(
-      mymethod->readPlist(plistFile, "BoardSerialNumber"));
+      mymethod->readPlist(plistFile, "SerialNumber"));
   ui->editMLB->setText(mymethod->readPlist(plistFile, "MLB"));
   ui->editDatROM->setText(mymethod->readPlist(plistFile, "ROM"));
 
@@ -11469,11 +11476,18 @@ void MainWindow::on_btnExport_clicked() {
 
   if (!QFile(plistFile).exists()) return;
 
+  if (mymethod->readPlist(plistFile, "SMBIOS") != "<dict>") {
+    QMessageBox box;
+    box.setText(tr("This is not a valid Clover configuration file."));
+    box.exec();
+    return;
+  }
+
   QString uuid = ui->editSystemUUID->text().trimmed();
   mymethod->writePlist(plistFile, "SmUUID", uuid);
 
   QString serial = ui->editSystemSerialNumber->text().trimmed();
-  mymethod->writePlist(plistFile, "BoardSerialNumber", serial);
+  mymethod->writePlist(plistFile, "SerialNumber", serial);
 
   QString mlb = ui->editMLB->text().trimmed();
   mymethod->writePlist(plistFile, "MLB", mlb);

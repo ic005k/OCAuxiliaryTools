@@ -4283,6 +4283,12 @@ Speed</translation>
         <translation></translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="11451"/>
+        <location filename="mainwindow.cpp" line="11481"/>
+        <source>This is not a valid Clover configuration file.</source>
+        <translation>这不是一个有效的Clover配置文件。</translation>
+    </message>
+    <message>
         <location filename="mainwindow.ui" line="11714"/>
         <location filename="mainwindow.cpp" line="9678"/>
         <source>Add Item</source>
