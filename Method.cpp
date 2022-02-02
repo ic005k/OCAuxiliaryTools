@@ -2139,11 +2139,7 @@ void Method::writePlist(QString plistFile, QString key, QString value) {
   for (int i = 0; i < edit->document()->lineCount(); i++) {
     QString lineTxt = getTextEditLineText(edit, i).trimmed();
     if (lineTxt == "<key>" + key + "</key>") {
-      QString nextTxt = getTextEditLineText(edit, i + 1);
-      QStringList list = nextTxt.split("<");
-      QString strSpace;
-      if (list.count() > 0) strSpace = list.at(0);
-      qDebug() << strSpace << strSpace.length();
+      QString strSpace = "            ";
       QTextBlock block = edit->document()->findBlockByNumber(i + 1);
       QTextCursor cursor(block);
       block = block.next();

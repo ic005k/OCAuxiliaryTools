@@ -6448,14 +6448,14 @@ A continuously updated variable list can be found in a corresponding document: N
                  <item>
                   <widget class="QPushButton" name="btnImport">
                    <property name="text">
-                    <string>Import from Clover</string>
+                    <string>Import from Clover configuration file</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QPushButton" name="btnExport">
                    <property name="text">
-                    <string>Export to Clover</string>
+                    <string>Export to a Clover configuration file</string>
                    </property>
                   </widget>
                  </item>
