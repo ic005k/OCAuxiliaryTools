@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -3028,7 +3028,7 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
                 </item>
                 <item>
                  <property name="text">
-                  <string>Emulatte Comet Lake (0x0A0655)</string>
+                  <string>Emulate Comet Lake (0x0A0655)</string>
                  </property>
                 </item>
                </widget>
