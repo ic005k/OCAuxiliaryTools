@@ -23,6 +23,9 @@
    </item>
    <item row="0" column="0">
     <widget class="QListWidget" name="listPreset">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
      <item>
       <property name="text">
        <string>PciRoot(0x0)/Pci(0x1b,0x0)  ｜  HDA</string>
