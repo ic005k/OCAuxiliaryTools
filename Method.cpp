@@ -1645,12 +1645,11 @@ QStringList Method::getVolListForPartition(QStringList listPartition) {
 
 QString Method::getVolForPartition(QString strPartition) {
   QString str, str1;
-  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
   QTextEdit* textEdit = new QTextEdit;
   QProcess* processDriverInfo = new QProcess;
   processDriverInfo->start("diskutil", QStringList() << "info" << strPartition);
   processDriverInfo->waitForFinished();
-  QString result = gbkCodec->toUnicode(processDriverInfo->readAll());
+  QString result = processDriverInfo->readAll();
   textEdit->append(result);
   int count = textEdit->document()->lineCount();
   for (int j = 0; j < count; j++) {
@@ -1678,8 +1677,7 @@ QStringList Method::getPartitionList(QString strDisk) {
   processDriverInfo->start("diskutil", QStringList() << "list");
   processDriverInfo->waitForFinished();
   QTextEdit* textEdit = new QTextEdit;
-  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
-  QString result = gbkCodec->toUnicode(processDriverInfo->readAll());
+  QString result = processDriverInfo->readAll();
   textEdit->append(result);
   int count = textEdit->document()->lineCount();
   QStringList listPartition;
@@ -1703,8 +1701,7 @@ QString Method::getDriverName(QString strDisk) {
   processDriverInfo->waitForFinished();
 
   QTextEdit* textEdit = new QTextEdit;
-  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
-  QString result = gbkCodec->toUnicode(processDriverInfo->readAll());
+  QString result = processDriverInfo->readAll();
   textEdit->append(result);
 
   QString str0, str1;
@@ -1731,8 +1728,7 @@ QStringList Method::getDiskList() {
   processDriverInfo->start("diskutil", QStringList() << "list");
   processDriverInfo->waitForFinished();
   QTextEdit* textEdit = new QTextEdit;
-  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
-  QString result = gbkCodec->toUnicode(processDriverInfo->readAll());
+  QString result = processDriverInfo->readAll();
   textEdit->append(result);
   int count = textEdit->document()->lineCount();
   QStringList listPartition;

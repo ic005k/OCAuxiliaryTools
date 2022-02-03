@@ -23,7 +23,6 @@
 #include <QStyledItemDelegate>
 #include <QTableWidget>
 #include <QTextBlock>
-#include <QTextCodec>
 #include <QToolButton>
 #include <QToolTip>
 #include <QTranslator>

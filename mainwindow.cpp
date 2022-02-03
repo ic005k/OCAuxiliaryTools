@@ -4967,9 +4967,8 @@ void MainWindow::on_cboxSystemProductName_currentIndexChanged(
 
 void MainWindow::readResult() {
   QTextEdit* textMacInfo = new QTextEdit;
-  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
   textMacInfo->clear();
-  QString result = gbkCodec->toUnicode(gs->readAll());
+  QString result = gs->readAll();
   textMacInfo->append(result);
   //取第三行的数据，第一行留给提示用
   QString str = textMacInfo->document()->findBlockByNumber(2).text().trimmed();
@@ -4995,8 +4994,7 @@ void MainWindow::readResult() {
 
 void MainWindow::readResultSystemInfo() {
   ui->textMacInfo->clear();
-  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
-  QString result = gbkCodec->toUnicode(si->readAll());
+  QString result = si->readAll();
   ui->textMacInfo->append(result);
 }
 
@@ -5258,8 +5256,7 @@ void MainWindow::readResultDiskInfo() {
 
   QTextEdit* textDiskInfo = new QTextEdit;
   textDiskInfo->clear();
-  QTextCodec* gbkCodec = QTextCodec::codecForName("UTF-8");
-  QString result = gbkCodec->toUnicode(di->readAll());
+  QString result = di->readAll();
   textDiskInfo->append(result);
 
   QString str0, str1;
@@ -5374,9 +5371,6 @@ void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(
 }
 
 void MainWindow::loadLocal() {
-  QTextCodec* codec = QTextCodec::codecForName("System");
-  QTextCodec::setCodecForLocale(codec);
-
   static QTranslator translator;  //该对象要一直存在，注意用static
   static QTranslator translator1;
   static QTranslator translator2;
