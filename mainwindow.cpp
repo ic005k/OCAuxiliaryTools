@@ -184,54 +184,13 @@ MainWindow::~MainWindow() { delete ui; }
 void MainWindow::setUIMargin() {
   int m = 1;
 
-  ui->gridLayout->setContentsMargins(m, m, m, m);
-  ui->centralwidget->layout()->setContentsMargins(m, m, m, m);
+  QObjectList list = getAllGridLayout(getAllUIControls(this));
+  for (int i = 0; i < list.count(); i++) {
+    QGridLayout* w = (QGridLayout*)list.at(i);
+    w->setContentsMargins(m, m, m, m);
+  }
+
   ui->centralwidget->layout()->setSpacing(m);
-
-  ui->gridLayout_43->setContentsMargins(m, m, m, m);
-  ui->gridLayout_3->setContentsMargins(m, m, m, m);
-  ui->gridLayout_4->setContentsMargins(m, m, m, m);
-  ui->gridLayout_5->setContentsMargins(m, m, m, m);
-  ui->gridLayout_28->setContentsMargins(m, m, m, m);
-
-  ui->gridLayout_53->setContentsMargins(m, m, m, m);
-  ui->gridLayout_7->setContentsMargins(m, m, m, m);
-  ui->gridLayout_38->setContentsMargins(m, m, m, m);
-
-  ui->gridLayout_8->setContentsMargins(m, m, m, m);
-  ui->gridLayout_9->setContentsMargins(m, m, m, m);
-  ui->gridLayout_10->setContentsMargins(m, m, m, m);
-
-  ui->gridLayout_11->setContentsMargins(m, m, m, m);
-  ui->gridLayout_12->setContentsMargins(m, m, m, m);
-  ui->gridLayout_13->setContentsMargins(m, m, m, m);
-  ui->gridLayout_42->setContentsMargins(m, m, m, m);
-  ui->gridLayout_14->setContentsMargins(m, m, m, m);
-
-  ui->gridLayout_16->setContentsMargins(m, m, m, m);
-
-  ui->gridLayout_20->setContentsMargins(m, m, m, m);
-  ui->gridLayout_21->setContentsMargins(m, m, m, m);
-  ui->gridLayout_22->setContentsMargins(m, m, m, m);
-
-  ui->gridLayout_23->setContentsMargins(m, m, m, m);
-  ui->gridLayout_17->setContentsMargins(m, m, m, m);
-  ui->gridLayout_18->setContentsMargins(m, m, m, m);
-  ui->gridLayout_19->setContentsMargins(m, m, m, m);
-
-  ui->gridLayout_32->setContentsMargins(m, m, m, m);
-
-  ui->gridLayout_37->setContentsMargins(m, m, m, m);
-
-  ui->gridLayout_29->setContentsMargins(m, m, m, m);
-  ui->gridLayout_30->setContentsMargins(m, m, m, m);
-  ui->gridLayout_59->setContentsMargins(m, m, m, m);
-
-  ui->gridLayout_69->setContentsMargins(m, m, m, m);
-  ui->gridLayout_71->setContentsMargins(m, m, m, m);
-  ui->gridLayout_47->setContentsMargins(m, m, m, m);
-  ui->gridLayout_62->setContentsMargins(m, m, m, m);
-  ui->horizontalLayout_3->setContentsMargins(m, m, m, m);
 }
 
 void MainWindow::recentOpen(QString filename) { openFile(filename); }
@@ -8162,6 +8121,16 @@ QObjectList MainWindow::getAllLineEdit(QObjectList lstUIControls) {
   return lstOfLineEdit;
 }
 
+QObjectList MainWindow::getAllGridLayout(QObjectList lstUIControls) {
+  QObjectList lstOfGridLayout;
+  foreach (QObject* obj, lstUIControls) {
+    if (obj->metaObject()->className() == QStringLiteral("QGridLayout")) {
+      lstOfGridLayout.append(obj);
+    }
+  }
+  return lstOfGridLayout;
+}
+
 QObjectList MainWindow::getAllComboBox(QObjectList lstUIControls) {
   QObjectList lstOfComboBox;
   foreach (QObject* obj, lstUIControls) {
@@ -10740,7 +10709,7 @@ void MainWindow::on_txtEditHex_textChanged(const QString& arg1) {
   txtEditHexTextChanged = true;
   QString str0, str;
   str0 = arg1;
-  str = str0.remove(QRegExp("\\s"));  // 16进制去除所有空格
+  str = str0.remove(QRegularExpression("\\s"));  // 16进制去除所有空格
 
   if (str.length() % 2 == 0)
     ui->txtEditASCII->setText(HexStrToByte(str));
@@ -10843,8 +10812,8 @@ void MainWindow::on_btnUpdateHex_clicked() {
       new QKeyEvent(QEvent::KeyPress, Qt::Key_Return, Qt::NoModifier);
   QCoreApplication::sendEvent(this, tabKey);
 
-  lineEdit->setText(
-      ui->txtEditHex->text().remove(QRegExp("\\s")));  // 16进制去除所有空格);
+  lineEdit->setText(ui->txtEditHex->text().remove(
+      QRegularExpression("\\s")));  // 16进制去除所有空格);
 
   QCoreApplication::sendEvent(lineEdit, tabKey);
 
