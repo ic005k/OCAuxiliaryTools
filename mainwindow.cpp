@@ -342,10 +342,17 @@ void MainWindow::openFile(QString PlistFileName) {
     QFileInfo f1(strEFI + "/OC");
     // QFileInfo f2(strEFI + "/BOOT");
     QFileInfo f3(strEFI + "/OC/Drivers");
-    if (f1.isDir() && f3.isDir())
+    if (f1.isDir() && f3.isDir()) {
       ui->actionUpgrade_OC->setEnabled(true);
-    else
+      ui->actionUpgrade_OC->setToolTip(
+          tr("Sync OC main program (upgrade OC and Kexts)"));
+    } else {
       ui->actionUpgrade_OC->setEnabled(false);
+      ui->actionUpgrade_OC->setToolTip(
+          tr("The synchronous OC main program is not available, please check "
+             "the integrity of the EFI directory structure, mainly the "
+             "existence of the EFI/OC and EFI/OC/Drivers directories."));
+    }
   }
 
   openFileAfter();

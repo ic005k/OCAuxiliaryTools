@@ -3018,7 +3018,7 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
                 </item>
                 <item>
                  <property name="text">
-                  <string>Emulate Coffe Lake</string>
+                  <string>Emulate Coffee Lake</string>
                  </property>
                 </item>
                 <item>
