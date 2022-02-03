@@ -900,8 +900,6 @@ class MainWindow : public QMainWindow {
 
   void on_listMain_currentRowChanged(int currentRow);
 
-  void on_btnUpdateHex_triggered(QAction* arg1);
-
   void on_btnUpdateHex_clicked();
 
   void on_actionOpen_Directory_triggered();

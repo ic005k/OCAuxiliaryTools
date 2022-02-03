@@ -119,7 +119,11 @@ QString PListSerializer::toPList(const QVariant& variant, QString FileName) {
     if (file.open(QIODevice::WriteOnly | QIODevice::Truncate |
                   QIODevice::Text)) {
       QTextStream out(&file);
+
+#if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
       out.setCodec("UTF-8");
+#endif
+
       // document.save(out, 4, QDomNode::EncodingFromTextStream);
       document.save(out, 4, QDomNode::EncodingFromDocument);
       file.close();

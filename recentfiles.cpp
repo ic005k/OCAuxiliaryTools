@@ -6,7 +6,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QMenu>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSettings>
 #include <QString>
 #include <QStringList>
@@ -15,7 +15,7 @@ extern bool zh_cn;
 
 QString sanitizedFileName(const QString& name) {
   QString clean = name;
-  return clean.replace(QRegExp("[^A-Za-z0-9]"), QString("_"));
+  return clean.replace(QRegularExpression("[^A-Za-z0-9]"), QString("_"));
 }
 
 RecentFiles::RecentFiles(QMainWindow* parent)

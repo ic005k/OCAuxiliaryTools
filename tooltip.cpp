@@ -31,7 +31,7 @@ Tooltip::Tooltip(QWidget* parent) : QDialog(parent) {
   edit->setFrameStyle(QFrame::NoFrame);
 
   QHBoxLayout* mLayout = new QHBoxLayout(this);
-  mLayout->setMargin(0);
+  mLayout->setContentsMargins(0, 0, 0, 0);
   lblTitle = new QLabel();
   QFont font;
   font.setBold(true);

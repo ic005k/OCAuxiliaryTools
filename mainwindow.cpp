@@ -483,7 +483,6 @@ QString MainWindow::loadText(QString textFile) {
 
     } else {
       QTextStream in(&file);
-      in.setCodec("UTF-8");
       QString text = in.readAll();
       return text;
     }
@@ -1271,7 +1270,7 @@ void MainWindow::initui_misc() {
 
   QPalette pe;
   pe = ui->lblColorEffect->palette();
-  pe.setColor(QPalette::Background, Qt::black);
+  pe.setColor(QPalette::Base, Qt::black);
   ui->lblColorEffect->setAutoFillBackground(true);
   pe.setColor(QPalette::WindowText, Qt::white);
   ui->lblColorEffect->setPalette(pe);
@@ -10248,7 +10247,7 @@ void MainWindow::on_cboxTextColor_currentIndexChanged(int index) {
   if (bcIndex >= 0 && tcIndex >= 0 && !Initialization) {
     QPalette pe;
     pe = ui->lblColorEffect->palette();
-    pe.setColor(QPalette::Background, QColor(backColor.at(bcIndex)));
+    pe.setColor(QPalette::Base, QColor(backColor.at(bcIndex)));
     ui->lblColorEffect->setAutoFillBackground(true);
     if (total != 0)
       pe.setColor(QPalette::WindowText, QColor(textColor.at(tcIndex)));
@@ -10784,10 +10783,10 @@ void MainWindow::setConversionWidgetVisible(bool v) {
   }
 }
 
-void MainWindow::on_btnUpdateHex_triggered(QAction* arg1) { Q_UNUSED(arg1); }
-
 void MainWindow::on_btnUpdateHex_clicked() {
-  if (ui->txtEditHex->text().length() % 2 != 0) return;
+  QString str = ui->txtEditHex->text().trimmed();
+  str = str.replace(" ", "");
+  if (str.length() % 2 != 0) return;
 
   QObjectList listTable;
   QTableWidget* t;
@@ -10812,7 +10811,7 @@ void MainWindow::on_btnUpdateHex_clicked() {
       new QKeyEvent(QEvent::KeyPress, Qt::Key_Return, Qt::NoModifier);
   QCoreApplication::sendEvent(this, tabKey);
 
-  lineEdit->setText(ui->txtEditHex->text().replace(" ", ""));
+  lineEdit->setText(str);
 
   QCoreApplication::sendEvent(lineEdit, tabKey);
 

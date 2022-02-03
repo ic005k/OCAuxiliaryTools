@@ -448,7 +448,7 @@ void SyncOCDialog::initKextList() {
   for (int i = 0; i < ui->listKexts->count(); i++) {
     QWidget* w = new QWidget(this);
     QHBoxLayout* layout = new QHBoxLayout(w);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->setDirection(QBoxLayout::LeftToRight);
 
     checkBox = new QCheckBox(w);
