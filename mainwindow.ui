@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -224,7 +224,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -872,6 +872,9 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
                   </property>
+                  <property name="editable">
+                   <bool>false</bool>
+                  </property>
                  </widget>
                 </item>
                 <item row="1" column="0">
@@ -1141,7 +1144,7 @@ This works around patched tables becoming incompatible with the SLIC table causi
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1381,6 +1384,9 @@ Description: Exclude MMIO address from the devirtualisation procedure.
                <widget class="QComboBox" name="comboBoxBooter">
                 <property name="focusPolicy">
                  <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="editable">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -2425,7 +2431,7 @@ This is a security option that restricts the activation of single user mode by i
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -3001,6 +3007,9 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
               </item>
               <item row="0" column="1">
                <widget class="QComboBox" name="cboxEmulate">
+                <property name="editable">
+                 <bool>false</bool>
+                </property>
                 <item>
                  <property name="text">
                   <string>None</string>
@@ -3068,6 +3077,9 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
                <widget class="QComboBox" name="comboBoxKernel">
                 <property name="focusPolicy">
                  <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="editable">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -8496,7 +8508,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>7</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -10621,6 +10633,9 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
                <widget class="QComboBox" name="comboBoxUEFI">
                 <property name="focusPolicy">
                  <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="editable">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>

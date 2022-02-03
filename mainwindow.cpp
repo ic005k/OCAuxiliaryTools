@@ -1270,7 +1270,7 @@ void MainWindow::initui_misc() {
 
   QPalette pe;
   pe = ui->lblColorEffect->palette();
-  pe.setColor(QPalette::Base, Qt::black);
+  pe.setColor(QPalette::Window, Qt::black);
   ui->lblColorEffect->setAutoFillBackground(true);
   pe.setColor(QPalette::WindowText, Qt::white);
   ui->lblColorEffect->setPalette(pe);
@@ -8228,7 +8228,9 @@ void MainWindow::findComboBox(QString findText) {
   for (int i = 0; i < listOfComboBox.count(); i++) {
     QComboBox* cbox = (QComboBox*)listOfComboBox.at(i);
     if (cbox != ui->cboxFind && cbox != ui->cboxTextColor &&
-        cbox != ui->cboxBackColor) {
+        cbox != ui->cboxBackColor && cbox != ui->cboxEmulate &&
+        cbox != ui->comboBoxACPI && cbox != ui->comboBoxBooter &&
+        cbox != ui->comboBoxKernel && cbox != ui->comboBoxUEFI) {
       if (cbox->currentText().toLower().contains(
               findText.trimmed().toLower()) &&
           !cbox->isHidden()) {
@@ -10247,7 +10249,7 @@ void MainWindow::on_cboxTextColor_currentIndexChanged(int index) {
   if (bcIndex >= 0 && tcIndex >= 0 && !Initialization) {
     QPalette pe;
     pe = ui->lblColorEffect->palette();
-    pe.setColor(QPalette::Base, QColor(backColor.at(bcIndex)));
+    pe.setColor(QPalette::Window, QColor(backColor.at(bcIndex)));
     ui->lblColorEffect->setAutoFillBackground(true);
     if (total != 0)
       pe.setColor(QPalette::WindowText, QColor(textColor.at(tcIndex)));
