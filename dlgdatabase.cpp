@@ -202,12 +202,6 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column) {
   get_EFI(row, column, ui->tableDatabaseFind);
 }
 
-void dlgDatabase::on_comboBoxNet_currentTextChanged(const QString &arg1) {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
-  Reg.setValue("Net", arg1);
-}
-
 void dlgDatabase::on_readoutput() {
   // QString str = processPing->readAllStandardOutput();
 }
@@ -263,5 +257,16 @@ void dlgDatabase::on_btnGenerateEFI_clicked() {
     if (!ui->tableDatabaseFind->currentIndex().isValid()) return;
     int row = ui->tableDatabaseFind->currentRow();
     on_tableDatabaseFind_cellDoubleClicked(row, 0);
+  }
+}
+
+void dlgDatabase::on_tableDatabase_currentItemChanged(
+    QTableWidgetItem *current, QTableWidgetItem *previous) {
+  Q_UNUSED(current);
+  Q_UNUSED(previous);
+  if (ui->tableDatabase->currentColumn() == 1) {
+    int row = ui->tableDatabase->currentRow();
+    listItemModi.removeAt(row);
+    listItemModi.insert(row, true);
   }
 }

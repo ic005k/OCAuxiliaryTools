@@ -36,8 +36,6 @@ class dlgDatabase : public QDialog {
 
   void on_tableDatabaseFind_cellDoubleClicked(int row, int column);
 
-  void on_comboBoxNet_currentTextChanged(const QString &arg1);
-
   void on_readoutput();
   void on_readerror();
 
@@ -54,6 +52,9 @@ class dlgDatabase : public QDialog {
   void on_btnAMDOnline_clicked();
 
   void on_btnGenerateEFI_clicked();
+
+  void on_tableDatabase_currentItemChanged(QTableWidgetItem *current,
+                                           QTableWidgetItem *previous);
 
  private:
  protected:
