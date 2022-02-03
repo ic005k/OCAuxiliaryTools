@@ -33,8 +33,7 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   ui->tableDatabase->setHorizontalHeaderItem(1, id0);
 
   ui->tableDatabase->setAlternatingRowColors(true);
-  ui->tableDatabase->horizontalHeader()->setStretchLastSection(
-      false);  //设置充满表宽度
+  ui->tableDatabase->horizontalHeader()->setStretchLastSection(true);
   ui->tableDatabase->horizontalHeader()->setHidden(false);
   ui->tableDatabase->setSelectionBehavior(
       QAbstractItemView::SelectItems);  //设置选择行为时每次选择一行或单个条目
@@ -52,7 +51,7 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   // Find Table
   ui->tableDatabaseFind->horizontalHeader()->setHidden(true);
   ui->tableDatabaseFind->setHidden(true);
-  ui->tableDatabaseFind->horizontalHeader()->setStretchLastSection(false);
+  ui->tableDatabaseFind->horizontalHeader()->setStretchLastSection(true);
   ui->tableDatabaseFind->setEditTriggers(QAbstractItemView::NoEditTriggers);
   ui->tableDatabaseFind->horizontalHeader()->setSectionResizeMode(
       0, QHeaderView::ResizeToContents);
