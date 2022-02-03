@@ -11388,7 +11388,7 @@ void MainWindow::on_cboxEmulate_currentTextChanged(const QString& arg1) {
         "FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00");
   }
 
-  if (arg1 == "Emulate Coffe Lake") {
+  if (arg1 == "Emulate Coffee Lake") {
     ui->editDatCpuid1Data->setText(
         "EA 06 09 00 00 00 00 00 00 00 00 00 00 00 00 00");
     ui->editDatCpuid1Mask->setText(
@@ -11402,7 +11402,7 @@ void MainWindow::on_cboxEmulate_currentTextChanged(const QString& arg1) {
         "FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00");
   }
 
-  if (arg1 == "Emulatte Comet Lake (0x0A0655)") {
+  if (arg1 == "Emulate Comet Lake (0x0A0655)") {
     ui->editDatCpuid1Data->setText(
         "55 06 0A 00 00 00 00 00 00 00 00 00 00 00 00 00");
     ui->editDatCpuid1Mask->setText(
