@@ -10709,7 +10709,7 @@ void MainWindow::on_txtEditHex_textChanged(const QString& arg1) {
   txtEditHexTextChanged = true;
   QString str0, str;
   str0 = arg1;
-  str = str0.remove(QRegularExpression("\\s"));  // 16进制去除所有空格
+  str = str0.replace(" ", "");
 
   if (str.length() % 2 == 0)
     ui->txtEditASCII->setText(HexStrToByte(str));
@@ -10812,8 +10812,7 @@ void MainWindow::on_btnUpdateHex_clicked() {
       new QKeyEvent(QEvent::KeyPress, Qt::Key_Return, Qt::NoModifier);
   QCoreApplication::sendEvent(this, tabKey);
 
-  lineEdit->setText(ui->txtEditHex->text().remove(
-      QRegularExpression("\\s")));  // 16进制去除所有空格);
+  lineEdit->setText(ui->txtEditHex->text().replace(" ", ""));
 
   QCoreApplication::sendEvent(lineEdit, tabKey);
 

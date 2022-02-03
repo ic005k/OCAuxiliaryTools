@@ -1088,6 +1088,7 @@ class MainWindow : public QMainWindow {
   QToolButton* btn0;
   QToolButton* btnClear;
   void checkSystemAudioVolume();
+  QObjectList getAllGridLayout(QObjectList lstUIControls);
 };
 
 #endif  // MAINWINDOW_H
