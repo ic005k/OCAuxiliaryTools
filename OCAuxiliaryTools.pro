@@ -47,6 +47,7 @@ SOURCES += \
     dlgdatabase.cpp \
     dlgkernelpatch.cpp \
     dlgmisc.cpp \
+    dlgpreference.cpp \
     filesystemwatcher.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -73,6 +74,7 @@ HEADERS += \
     dlgdatabase.h \
     dlgkernelpatch.h \
     dlgmisc.h \
+    dlgpreference.h \
     filesystemwatcher.h \
     mainwindow.h \
     myapp.h \
@@ -94,6 +96,7 @@ FORMS += \
     dlgdatabase.ui \
     dlgkernelpatch.ui \
     dlgmisc.ui \
+    dlgpreference.ui \
     mainwindow.ui \
     syncocdialog.ui
 

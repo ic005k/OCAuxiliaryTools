@@ -385,7 +385,7 @@ void AutoUpdateDialog::startWgetDownload() {
   strSeoul = "https://ghproxy.com/https://github.com/";
   strTest = "https://gh.api.99988866.xyz/https://github.com/";
   // if (mw_one->zh_cn) strUrl.replace("https://github.com/", strTokyo);
-  strSet = mw_one->myDatabase->ui->comboBoxNet->currentText().trimmed();
+  strSet = mw_one->myDlgPreference->ui->comboBoxNet->currentText().trimmed();
   strTemp = strUrlOrg;
   strUrl = strTemp.replace("https://github.com/", strSet);
   // qDebug() << strUrl << strSet;

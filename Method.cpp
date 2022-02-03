@@ -61,7 +61,7 @@ QStringList Method::getDLUrlList(QString url) {
 QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
   const QString FILE_NAME = QDir::homePath() + "/.config/QtOCC/code.txt";
   QString strProxy =
-      mw_one->myDatabase->ui->comboBoxWeb->currentText().trimmed();
+      mw_one->myDlgPreference->ui->comboBoxWeb->currentText().trimmed();
   URLSTR.replace("https://github.com/", strProxy);
   QUrl url(URLSTR);
   QNetworkAccessManager manager;
@@ -205,7 +205,7 @@ void Method::finishKextUpdate(bool blDatabase) {
 void Method::kextUpdate() {
   if (!mw_one->ui->actionUpgrade_OC->isEnabled()) return;
   if (mw_one->ui->table_kernel_add->rowCount() == 0) return;
-  mw_one->myDatabase->refreshKextUrl();
+  mw_one->myDlgPreference->refreshKextUrl();
   blBreak = false;
   isReply = false;
 
@@ -224,13 +224,15 @@ void Method::kextUpdate() {
           i, 3, mw_one->dlgSyncOC->progBar);
 
       kextName = name;
-      for (int j = 0; j < mw_one->myDatabase->ui->tableKextUrl->rowCount();
+      for (int j = 0; j < mw_one->myDlgPreference->ui->tableKextUrl->rowCount();
            j++) {
         if (blBreak) break;
-        QString txt =
-            mw_one->myDatabase->ui->tableKextUrl->item(j, 0)->text().trimmed();
-        test =
-            mw_one->myDatabase->ui->tableKextUrl->item(j, 1)->text().trimmed();
+        QString txt = mw_one->myDlgPreference->ui->tableKextUrl->item(j, 0)
+                          ->text()
+                          .trimmed();
+        test = mw_one->myDlgPreference->ui->tableKextUrl->item(j, 1)
+                   ->text()
+                   .trimmed();
         if (txt == name && test != "") {
           bool reGetUrl = true;
           QString strUrl;
@@ -243,9 +245,9 @@ void Method::kextUpdate() {
             }
           }
           if (reGetUrl) {
-            if (mw_one->myDatabase->ui->rbtnAPI->isChecked())
+            if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
               getLastReleaseFromUrl(test);
-            if (mw_one->myDatabase->ui->rbtnWeb->isChecked())
+            if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
               getLastReleaseFromHtml(test + "/releases/latest");
           } else {
             startDownload(strUrl);
@@ -273,7 +275,7 @@ void Method::startDownload(QString strUrl) {
   strOriginal = "https://github.com/";
   strTokyo = "https://download.fastgit.org/";
   strSeoul = "https://ghproxy.com/https://github.com/";
-  strSet = mw_one->myDatabase->ui->comboBoxNet->currentText().trimmed();
+  strSet = mw_one->myDlgPreference->ui->comboBoxNet->currentText().trimmed();
   strTemp = strUrlOrg;
   strUrl = strTemp.replace("https://github.com/", strSet);
 

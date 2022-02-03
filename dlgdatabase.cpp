@@ -43,11 +43,6 @@ dlgDatabase::dlgDatabase(QWidget *parent)
         i, QHeaderView::ResizeToContents);
   }
 
-  for (int i = 0; i < ui->tableKextUrl->columnCount(); i++) {
-    ui->tableKextUrl->horizontalHeader()->setSectionResizeMode(
-        i, QHeaderView::ResizeToContents);
-  }
-
   // Find Table
   ui->tableDatabaseFind->horizontalHeader()->setHidden(true);
   ui->tableDatabaseFind->setHidden(true);
@@ -55,58 +50,36 @@ dlgDatabase::dlgDatabase(QWidget *parent)
   ui->tableDatabaseFind->setEditTriggers(QAbstractItemView::NoEditTriggers);
   ui->tableDatabaseFind->horizontalHeader()->setSectionResizeMode(
       0, QHeaderView::ResizeToContents);
-
-  ui->tabWidget->setCurrentIndex(0);
-
-  // Kexts Urls
-  ui->tableKextUrl->horizontalHeader()->setStretchLastSection(true);
-  ui->tableKextUrl->setColumnWidth(0, 200);
-  ui->tableKextUrl->setColumnWidth(1, 400);
-  ui->textEdit->setHidden(true);
-
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
-  QFileInfo fi(qfile);
-  QString strDef = "https://ghproxy.com/https://github.com/";
-  QLocale locale;
-  if (fi.exists()) {
-    if (locale.language() == QLocale::Chinese) {
-      ui->comboBoxNet->setCurrentText(Reg.value("Net", strDef).toString());
-    } else {
-      ui->comboBoxNet->setCurrentText(
-          Reg.value("Net", "https://github.com/").toString());
-    }
-
-    ui->comboBoxWeb->setCurrentText(
-        Reg.value("Web", "https://github.com/").toString());
-    ui->rbtnAPI->setChecked(Reg.value("rbtnAPI").toBool());
-    ui->rbtnWeb->setChecked(Reg.value("rbtnWeb").toBool());
-    ui->chkBoxLastFile->setChecked(Reg.value("LastFile").toBool());
-
-  } else {
-    if (locale.language() == QLocale::Chinese) {
-      ui->comboBoxNet->setCurrentText(strDef);
-
-    } else {
-      ui->comboBoxNet->setCurrentText("https://github.com/");
-    }
-  }
-  ui->chkShowVolName->setChecked(Reg.value("ShowVolName", 0).toBool());
-
-  ui->chkRecentOpen->setChecked(Reg.value("chkRecentOpen", 1).toBool());
-  ui->chkOpenDir->setChecked(Reg.value("chkOpenDir", 1).toBool());
-  ui->chkMountESP->setChecked(Reg.value("chkMountESP", 1).toBool());
-  ui->chkBackupEFI->setChecked(Reg.value("chkBackupEFI", 1).toBool());
-  ui->chkDatabase->setChecked(Reg.value("chkDatabase", 1).toBool());
-  ui->chkHideToolbar->setChecked(Reg.value("chkHideToolbar", 0).toBool());
 }
 
 dlgDatabase::~dlgDatabase() { delete ui; }
+
+void dlgDatabase::init_Database(QStringList files) {
+  ui->tableDatabase->setRowCount(0);
+  ui->tableDatabase->setRowCount(files.count());
+
+  QString dirpath = mw_one->strAppExePath + "/Database/BaseConfigs/";
+  for (int i = 0; i < files.count(); i++) {
+    QTableWidgetItem *newItem1;
+    newItem1 = new QTableWidgetItem(files.at(i));
+    ui->tableDatabase->setItem(i, 0, newItem1);
+
+    newItem1 =
+        new QTableWidgetItem(mymethod->readPlistComment(dirpath + files.at(i)));
+    ui->tableDatabase->setItem(i, 1, newItem1);
+  }
+
+  listItemModi.clear();
+  for (int i = 0; i < files.count(); i++) {
+    listItemModi.append(false);
+  }
+
+  setWindowTitle(tr("Configuration file database") + " : " +
+                 mw_one->getDatabaseVer());
+}
+
 void dlgDatabase::closeEvent(QCloseEvent *event) {
   Q_UNUSED(event);
-  saveKextUrl();
-  processPing->kill();
-  ui->btnPing->setText(tr("Testing"));
 
   QFileInfo appInfo(qApp->applicationDirPath());
   QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
@@ -229,111 +202,10 @@ void dlgDatabase::on_tableDatabaseFind_cellDoubleClicked(int row, int column) {
   get_EFI(row, column, ui->tableDatabaseFind);
 }
 
-void dlgDatabase::refreshKextUrl() {
-  QString file = mw_one->strAppExePath + "/Database/preset/KextUrl.txt";
-  ui->textEdit->clear();
-  ui->textEdit->setPlainText(mymethod->loadText(file));
-
-  QTextEdit *txtEdit = new QTextEdit;
-  QString txt = mymethod->loadText(mw_one->strConfigPath + "KextUrl.txt");
-  txtEdit->setPlainText(txt);
-  for (int i = 0; i < txtEdit->document()->lineCount(); i++) {
-    QString line = mymethod->getTextEditLineText(txtEdit, i).trimmed();
-    bool re = false;
-    for (int j = 0; j < ui->textEdit->document()->lineCount(); j++) {
-      QString line2 = mymethod->getTextEditLineText(ui->textEdit, j).trimmed();
-      if (line == line2) {
-        re = true;
-      }
-    }
-    if (!re) ui->textEdit->append(line);
-  }
-
-  ui->tableKextUrl->setRowCount(0);
-  for (int i = 0; i < ui->textEdit->document()->lineCount(); i++) {
-    QStringList list =
-        mymethod->getTextEditLineText(ui->textEdit, i).split("|");
-    QString str0, str1;
-    if (list.count() == 2) {
-      str0 = list.at(0);
-      str1 = list.at(1);
-      int n = ui->tableKextUrl->rowCount();
-      ui->tableKextUrl->setRowCount(n + 1);
-      ui->tableKextUrl->setCurrentCell(i, 0);
-      ui->tableKextUrl->setItem(i, 0, new QTableWidgetItem(str0.trimmed()));
-      ui->tableKextUrl->setItem(i, 1, new QTableWidgetItem(str1.trimmed()));
-    }
-  }
-
-  ui->tableKextUrl->setFocus();
-}
-
-void dlgDatabase::on_btnAdd_clicked() {
-  int n = ui->tableKextUrl->rowCount();
-  ui->tableKextUrl->setRowCount(n + 1);
-  ui->tableKextUrl->setCurrentCell(n, 0);
-  ui->tableKextUrl->setItem(n, 0, new QTableWidgetItem(""));
-  ui->tableKextUrl->setItem(n, 1, new QTableWidgetItem(""));
-}
-
-void dlgDatabase::on_btnDel_clicked() {
-  if (ui->tableKextUrl->rowCount() == 0) return;
-  int n = ui->tableKextUrl->currentRow();
-  ui->tableKextUrl->removeRow(n);
-  if (n - 1 == -1) n = 1;
-  ui->tableKextUrl->setCurrentCell(n - 1, 0);
-  ui->tableKextUrl->setFocus();
-}
-
-void dlgDatabase::saveKextUrl() {
-  ui->textEdit->clear();
-  QString str0, str1;
-  for (int i = 0; i < ui->tableKextUrl->rowCount(); i++) {
-    str0 = ui->tableKextUrl->item(i, 0)->text().trimmed();
-    str1 = ui->tableKextUrl->item(i, 1)->text().trimmed();
-    if (str0 != "" || str1 != "") ui->textEdit->append(str0 + " | " + str1);
-  }
-  mymethod->TextEditToFile(ui->textEdit, mw_one->strConfigPath + "KextUrl.txt");
-}
-
-void dlgDatabase::on_btnTest_clicked() {
-  mw_one->on_actionOnline_Download_Updates_triggered();
-  mw_one->dlgAutoUpdate->ui->btnStartUpdate->setHidden(true);
-}
-
 void dlgDatabase::on_comboBoxNet_currentTextChanged(const QString &arg1) {
   QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("Net", arg1);
-}
-
-void dlgDatabase::on_btnOpenUrl_clicked() {
-  if (!ui->tableKextUrl->currentIndex().isValid()) return;
-  int n = ui->tableKextUrl->currentRow();
-  QString strurl = ui->tableKextUrl->item(n, 1)->text().trimmed();
-  QUrl url(strurl);
-  QDesktopServices::openUrl(url);
-}
-
-void dlgDatabase::on_btnPing_clicked() {
-  QString url = ui->comboBoxWeb->currentText().trimmed();
-  QUrl urlTest(url);
-  QDesktopServices::openUrl(urlTest);
-  return;
-
-  if (ui->btnPing->text() == tr("Testing"))
-    ui->btnPing->setText(tr("Stop"));
-  else if (ui->btnPing->text() == tr("Stop"))
-    ui->btnPing->setText(tr("Testing"));
-
-  QStringList list = url.split("/");
-  QString s1;
-  if (list.count() == 4) s1 = list.at(2);
-  processPing->kill();
-  if (mw_one->win) {
-    processPing->start("ping", QStringList() << "-t" << s1);
-  } else
-    processPing->start("ping", QStringList() << s1);
 }
 
 void dlgDatabase::on_readoutput() {
@@ -342,68 +214,6 @@ void dlgDatabase::on_readoutput() {
 
 void dlgDatabase::on_readerror() {
   QMessageBox::information(0, "Error", processPing->readAllStandardError());
-}
-
-void dlgDatabase::on_comboBoxWeb_currentTextChanged(const QString &arg1) {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
-  Reg.setValue("Web", arg1);
-}
-
-void dlgDatabase::on_rbtnAPI_clicked() {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
-  Reg.setValue("rbtnAPI", ui->rbtnAPI->isChecked());
-  Reg.setValue("rbtnWeb", ui->rbtnWeb->isChecked());
-}
-
-void dlgDatabase::on_rbtnWeb_clicked() { on_rbtnAPI_clicked(); }
-
-void dlgDatabase::on_chkBoxLastFile_clicked(bool checked) {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
-  Reg.setValue("LastFile", checked);
-}
-
-void dlgDatabase::writeIni(QString key, int arg1) {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
-  Reg.setValue(key, arg1);
-}
-
-void dlgDatabase::on_chkOpenDir_stateChanged(int arg1) {
-  writeIni("chkOpenDir", arg1);
-}
-
-void dlgDatabase::on_chkRecentOpen_stateChanged(int arg1) {
-  writeIni("chkRecentOpen", arg1);
-}
-
-void dlgDatabase::on_chkMountESP_stateChanged(int arg1) {
-  writeIni("chkMountESP", arg1);
-}
-
-void dlgDatabase::on_chkBackupEFI_stateChanged(int arg1) {
-  writeIni("chkBackupEFI", arg1);
-}
-
-void dlgDatabase::on_chkDatabase_stateChanged(int arg1) {
-  writeIni("chkDatabase", arg1);
-}
-
-void dlgDatabase::on_tableDatabase_itemChanged(QTableWidgetItem *item) {
-  listItemModi.removeAt(item->row());
-  listItemModi.insert(item->row(), true);
-}
-
-void dlgDatabase::on_chkHideToolbar_stateChanged(int arg1) {
-  writeIni("chkHideToolbar", arg1);
-}
-
-void dlgDatabase::on_chkShowVolName_clicked(bool checked) {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
-  Reg.setValue("ShowVolName", checked);
 }
 
 void dlgDatabase::on_tableDatabase_itemDoubleClicked(QTableWidgetItem *item) {

@@ -61,7 +61,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
     dlgSyncOC->ui->btnUpdateOC->setHidden(true);
   }
 
-  if (myDatabase->ui->chkHideToolbar->isChecked()) {
+  if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
     title = lblVer->text() + "      ";
     setWindowTitle(title + SaveFileName);
   } else
@@ -115,6 +115,7 @@ MainWindow::MainWindow(QWidget* parent)
   dlgPresetValues = new dlgPreset(this);
   dlgMiscBootArgs = new dlgMisc(this);
   myDlgKernelPatch = new dlgKernelPatch(this);
+  myDlgPreference = new dlgPreference(this);
   strAppExePath = qApp->applicationDirPath();
 
   timer = new QTimer(this);
@@ -164,7 +165,7 @@ MainWindow::MainWindow(QWidget* parent)
   this->setWindowModified(false);
   updateIconStatus();
 
-  if (myDatabase->ui->chkBoxLastFile->isChecked()) {
+  if (myDlgPreference->ui->chkBoxLastFile->isChecked()) {
     QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
     QSettings Reg(qfile, QSettings::IniFormat);
     QString file = Reg.value("LastFileName").toString();
@@ -232,7 +233,7 @@ void MainWindow::openFile(QString PlistFileName) {
   } else
     return;
 
-  if (myDatabase->ui->chkBoxLastFile->isChecked()) {
+  if (myDlgPreference->ui->chkBoxLastFile->isChecked()) {
     QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
     QSettings Reg(qfile, QSettings::IniFormat);
     Reg.setValue("LastFileName", SaveFileName);
@@ -5228,7 +5229,7 @@ void MainWindow::readResultDiskInfo() {
         QString strIDENTIFIER = strList.at(strList.count() - 1);
         str1 = strList.at(strList.count() - 1);
         str1 = str1.trimmed();
-        if (myDatabase->ui->chkShowVolName->isChecked()) {
+        if (myDlgPreference->ui->chkShowVolName->isChecked()) {
           str1 = str1 + " | " + mymethod->getVolForPartition(strIDENTIFIER) +
                  " | " + mymethod->getDriverName(strDisk) + " | " +
                  mymethod->getDriverVolInfo(strDisk);
@@ -5259,7 +5260,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   QSettings Reg(qfile, QSettings::IniFormat);
   Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
   Reg.setValue("AutoChkUpdate", ui->actionAutoChkUpdate->isChecked());
-  Reg.setValue("Net", myDatabase->ui->comboBoxNet->currentText());
+  Reg.setValue("Net", myDlgPreference->ui->comboBoxNet->currentText());
   Reg.setValue("LastFileName", SaveFileName);
 
   int textTotal = ui->cboxFind->count();
@@ -6474,8 +6475,8 @@ void MainWindow::init_UndoRedo() {
 void MainWindow::init_ToolButtonStyle() {
   QObjectList list, list1, list2;
   list = mymethod->getAllToolButton(getAllUIControls(ui->tabTotal));
-  list1 =
-      mymethod->getAllToolButton(getAllUIControls(myDatabase->ui->tabWidget));
+  list1 = mymethod->getAllToolButton(
+      getAllUIControls(myDlgPreference->ui->tabWidget));
   list2 = mymethod->getAllToolButton(getAllUIControls(dlgSyncOC));
   QString strStyle;
   strStyle =
@@ -6534,9 +6535,9 @@ void MainWindow::init_MainUI() {
 
   ui->frameToolBar->setHidden(true);
   ui->statusbar->setHidden(true);
-  myDatabase->ui->chkHideToolbar->setChecked(
+  myDlgPreference->ui->chkHideToolbar->setChecked(
       Reg.value("chkHideToolbar", 0).toBool());
-  if (myDatabase->ui->chkHideToolbar->isChecked()) {
+  if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
     ui->toolBar->setHidden(true);
     ui->frameToolBar->setFixedHeight(ui->cboxFind->height() + 4);
 
@@ -7081,7 +7082,7 @@ void MainWindow::readResultCheckData() {
 
     dlgOCV->setGoEnabled(false);
 
-    if (myDatabase->ui->chkHideToolbar->isChecked()) {
+    if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
       ui->lblOCVTip->setStyleSheet(
           "QLabel{"
           "border-image:url(:/icon/temp.png) 4 4 4 4 stretch stretch;"
@@ -7098,7 +7099,7 @@ void MainWindow::readResultCheckData() {
     ui->actionOcvalidate->setToolTip(
         tr("There is a issue with the configuration file."));
 
-    if (myDatabase->ui->chkHideToolbar->isChecked()) {
+    if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
       ui->lblOCVTip->setStyleSheet(
           "QLabel{"
           "border-image:url(:/icon/overror.png) 4 4 4 4 stretch stretch;"
@@ -8291,7 +8292,8 @@ void MainWindow::findTabText(QString findText) {
 
 void MainWindow::on_actionFind_triggered() {
   ui->cboxFind->lineEdit()->selectAll();
-  if (myDatabase->ui->chkHideToolbar->isChecked() && ui->toolBar->isHidden()) {
+  if (myDlgPreference->ui->chkHideToolbar->isChecked() &&
+      ui->toolBar->isHidden()) {
     ui->frameToolBar->setHidden(false);
     ui->cboxFind->setFocus();
   }
@@ -10424,27 +10426,6 @@ void MainWindow::on_editPassInput_returnPressed() {
 }
 
 void MainWindow::on_actionDatabase_triggered() {
-  if (osx1012)
-    myDatabase->ui->tabWidget->setDocumentMode(true);
-  else
-    myDatabase->ui->tabWidget->setDocumentMode(false);
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
-  {
-    myDatabase->ui->tabWidget->setTabVisible(0, true);
-    myDatabase->ui->tabWidget->setTabVisible(1, false);
-    myDatabase->ui->tabWidget->setTabVisible(2, false);
-  }
-#endif
-
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  {
-    myDatabase->ui->tabWidget->setTabEnabled(0, true);
-    myDatabase->ui->tabWidget->setTabEnabled(1, false);
-    myDatabase->ui->tabWidget->setTabEnabled(2, false);
-  }
-#endif
-
   myDatabase->setModal(true);
   myDatabase->show();
 
@@ -10465,27 +10446,7 @@ void MainWindow::on_actionDatabase_triggered() {
     if (filesTemp.at(j).mid(0, 1) != ".") files.append(filesTemp.at(j));
   }
 
-  myDatabase->ui->tableDatabase->setRowCount(0);
-  myDatabase->ui->tableDatabase->setRowCount(files.count());
-  for (int i = 0; i < files.count(); i++) {
-    QTableWidgetItem* newItem1;
-    newItem1 = new QTableWidgetItem(files.at(i));
-    myDatabase->ui->tableDatabase->setItem(i, 0, newItem1);
-
-    newItem1 =
-        new QTableWidgetItem(mymethod->readPlistComment(dirpath + files.at(i)));
-    myDatabase->ui->tableDatabase->setItem(i, 1, newItem1);
-  }
-
-  myDatabase->listItemModi.clear();
-  for (int i = 0; i < files.count(); i++) {
-    myDatabase->listItemModi.append(false);
-  }
-
-  myDatabase->setWindowTitle(tr("Configuration file database") + " : " +
-                             getDatabaseVer());
-
-  myDatabase->refreshKextUrl();
+  myDatabase->init_Database(files);
 }
 
 void MainWindow::on_actionOcvalidate_triggered() {
@@ -11169,33 +11130,12 @@ void MainWindow::mouseMoveEvent(QMouseEvent* e) {
 void MainWindow::mouseReleaseEvent(QMouseEvent*) { isDrag = false; }
 
 void MainWindow::on_actionPreferences_triggered() {
-  if (osx1012)
-    myDatabase->ui->tabWidget->setDocumentMode(true);
-  else
-    myDatabase->ui->tabWidget->setDocumentMode(false);
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
-  {
-    myDatabase->ui->tabWidget->setTabVisible(0, false);
-    myDatabase->ui->tabWidget->setTabVisible(1, true);
-    myDatabase->ui->tabWidget->setTabVisible(2, true);
-  }
-#endif
-
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  {
-    myDatabase->ui->tabWidget->setTabEnabled(0, false);
-    myDatabase->ui->tabWidget->setTabEnabled(1, true);
-    myDatabase->ui->tabWidget->setTabEnabled(2, true);
-  }
-#endif
-
-  myDatabase->setWindowTitle(tr("Preferences"));
-  myDatabase->refreshKextUrl();
-  myDatabase->setModal(true);
-  myDatabase->show();
-  if (myDatabase->ui->tableKextUrl->rowCount() > 0) {
-    myDatabase->ui->tableKextUrl->clearSelection();
+  myDlgPreference->setWindowTitle(tr("Preferences"));
+  myDlgPreference->refreshKextUrl();
+  myDlgPreference->setModal(true);
+  myDlgPreference->show();
+  if (myDlgPreference->ui->tableKextUrl->rowCount() > 0) {
+    myDlgPreference->ui->tableKextUrl->clearSelection();
   }
 }
 

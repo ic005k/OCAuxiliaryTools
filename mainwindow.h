@@ -48,6 +48,7 @@
 #include "dlgdatabase.h"
 #include "dlgkernelpatch.h"
 #include "dlgmisc.h"
+#include "dlgpreference.h"
 #include "filesystemwatcher.h"
 #include "plistparser.h"
 #include "plistserializer.h"
@@ -62,6 +63,7 @@
 #include "ui_dlgPreset.h"
 #include "ui_dlgdatabase.h"
 #include "ui_dlgkernelpatch.h"
+#include "ui_dlgpreference.h"
 #include "ui_syncocdialog.h"
 
 #ifdef Q_OS_WIN32
@@ -84,6 +86,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  dlgPreference* myDlgPreference;
   bool isUseDevOption = false;
   dlgKernelPatch* myDlgKernelPatch;
   bool blOCValidateError = false;

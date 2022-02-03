@@ -190,10 +190,11 @@ void SyncOCDialog::on_listKexts_currentRowChanged(int currentRow) {
   strTV = mymethod->getKextVersion(targetFile);
 
   bool defUS = false;
-  mw_one->myDatabase->refreshKextUrl();
-  for (int i = 0; i < mw_one->myDatabase->ui->tableKextUrl->rowCount(); i++) {
+  mw_one->myDlgPreference->refreshKextUrl();
+  for (int i = 0; i < mw_one->myDlgPreference->ui->tableKextUrl->rowCount();
+       i++) {
     QString str =
-        mw_one->myDatabase->ui->tableKextUrl->item(i, 0)->text().trimmed();
+        mw_one->myDlgPreference->ui->tableKextUrl->item(i, 0)->text().trimmed();
     QString str1 = QFileInfo(targetFile).fileName();
     if (str1 == str || str1.mid(0, 3) == "SMC" || str1.contains("AppleALC") ||
         str1.contains("BlueTool") || str1.contains("VoodooPS2Controller") ||
@@ -515,7 +516,7 @@ void SyncOCDialog::readCheckStateINI() {
 void SyncOCDialog::on_btnSettings_clicked() {
   mw_one->myDatabase->close();
   mw_one->on_actionPreferences_triggered();
-  mw_one->myDatabase->ui->tabWidget->setCurrentIndex(1);
+  mw_one->myDlgPreference->ui->tabWidget->setCurrentIndex(0);
 }
 
 void SyncOCDialog::init_Sync_OC() {
@@ -834,13 +835,15 @@ void SyncOCDialog::init_Sync_OC_Table() {
     }
   }
 
-  mw_one->myDatabase->refreshKextUrl();
+  mw_one->myDlgPreference->refreshKextUrl();
   for (int j = 0; j < sourceKexts.count(); j++) {
     QString str1 = QFileInfo(sourceKexts.at(j)).fileName();
     bool defUS = false;
-    for (int i = 0; i < mw_one->myDatabase->ui->tableKextUrl->rowCount(); i++) {
-      QString str =
-          mw_one->myDatabase->ui->tableKextUrl->item(i, 0)->text().trimmed();
+    for (int i = 0; i < mw_one->myDlgPreference->ui->tableKextUrl->rowCount();
+         i++) {
+      QString str = mw_one->myDlgPreference->ui->tableKextUrl->item(i, 0)
+                        ->text()
+                        .trimmed();
 
       if (str1 == str || str1.mid(0, 3) == "SMC" || str1.contains("AppleALC") ||
           str1.contains("BlueTool") || str1.contains("VoodooPS2Controller") ||
@@ -949,8 +952,8 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
   progBar->show();
 
   QString test = "https://github.com/acidanthera/OpenCorePkg";
-  if (mw_one->myDatabase->ui->rbtnAPI->isChecked())
+  if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
     mymethod->getLastReleaseFromUrl(test);
-  if (mw_one->myDatabase->ui->rbtnWeb->isChecked())
+  if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
     mymethod->getLastReleaseFromHtml(test + "/releases/latest");
 }
