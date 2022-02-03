@@ -11130,6 +11130,11 @@ void MainWindow::mouseMoveEvent(QMouseEvent* e) {
 void MainWindow::mouseReleaseEvent(QMouseEvent*) { isDrag = false; }
 
 void MainWindow::on_actionPreferences_triggered() {
+  if (osx1012)
+    myDlgPreference->ui->tabWidget->setDocumentMode(true);
+  else
+    myDlgPreference->ui->tabWidget->setDocumentMode(false);
+
   myDlgPreference->setWindowTitle(tr("Preferences"));
   myDlgPreference->refreshKextUrl();
   myDlgPreference->setModal(true);
