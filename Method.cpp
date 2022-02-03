@@ -2020,7 +2020,7 @@ QString Method::readPlistComment(QString plistFile) {
 }
 
 void Method::writePlistComment(QString plistFile, QString strComment) {
-  if (strComment.trimmed().length() == 0) return;
+  // if (strComment.trimmed().length() == 0) return;
   QTextEdit* txtEdit = new QTextEdit;
   txtEdit->setPlainText(loadText(plistFile));
   bool yes = false;
