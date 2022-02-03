@@ -58,6 +58,8 @@ dlgDatabase::dlgDatabase(QWidget *parent)
 
   ui->tabWidget->setCurrentIndex(0);
 
+  // Kexts Urls
+  ui->tableKextUrl->horizontalHeader()->setStretchLastSection(true);
   ui->tableKextUrl->setColumnWidth(0, 200);
   ui->tableKextUrl->setColumnWidth(1, 400);
   ui->textEdit->setHidden(true);
