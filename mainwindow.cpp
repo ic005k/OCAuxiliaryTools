@@ -18,8 +18,10 @@ using namespace std;
 
 QString PlistFileName, SaveFileName;
 QVector<QString> openFileLists;
-QRegExp regx("[A-Fa-f0-9- ]{0,1024}");
-QRegExp regxNumber("^-?\[0-9]*$");
+
+QRegularExpression regxData("[A-Fa-f0-9- ]{0,1024}");
+QRegularExpression regxNumber("^-?\[0-9]*$");
+
 Method* mymethod;
 QVector<QCheckBox*> chkDisplayLevel, chk_ScanPolicy, chk_PickerAttributes,
     chk_ExposeSensitiveData, chk_Target;
@@ -4756,14 +4758,16 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow,
 
     lineEdit->setToolTip("");
     if (getTableFieldDataType(myTable) == "Int") {
-      QValidator* validator = new QRegExpValidator(regxNumber, lineEdit);
+      QValidator* validator =
+          new QRegularExpressionValidator(regxNumber, lineEdit);
       lineEdit->setValidator(validator);
       lineEdit->setPlaceholderText(tr("Integer"));
       lineEdit->setToolTip(tr("Integer"));
     }
 
     if (getTableFieldDataType(myTable) == "Data") {
-      QValidator* validator = new QRegExpValidator(regx, lineEdit);
+      QValidator* validator =
+          new QRegularExpressionValidator(regxData, lineEdit);
       lineEdit->setValidator(validator);
       lineEdit->setPlaceholderText(tr("Hexadecimal"));
       lineEdit->setToolTip(tr("Hexadecimal"));
@@ -6762,13 +6766,13 @@ void MainWindow::LineEditDataCheck() {
     QLineEdit* w = (QLineEdit*)listOfLineEdit.at(i);
 
     if (w->objectName().mid(0, 7) == "editInt") {
-      QValidator* validator = new QRegExpValidator(regxNumber, w);
+      QValidator* validator = new QRegularExpressionValidator(regxNumber, w);
       w->setValidator(validator);
       w->setPlaceholderText(tr("Integer"));
     }
 
     if (w->objectName().mid(0, 7) == "editDat") {
-      QValidator* validator = new QRegExpValidator(regx, w);
+      QValidator* validator = new QRegularExpressionValidator(regxData, w);
       w->setValidator(validator);
       w->setPlaceholderText(tr("Hexadecimal"));
 

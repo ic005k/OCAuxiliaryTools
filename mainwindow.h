@@ -14,7 +14,7 @@
 #include <QPainter>
 #include <QProcess>
 #include <QProxyStyle>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSaveFile>
 #include <QShortcut>
 #include <QSpacerItem>
