@@ -184,54 +184,54 @@ MainWindow::~MainWindow() { delete ui; }
 void MainWindow::setUIMargin() {
   int m = 1;
 
-  ui->gridLayout->setMargin(m);
-  ui->centralwidget->layout()->setMargin(m);
+  ui->gridLayout->setContentsMargins(m, m, m, m);
+  ui->centralwidget->layout()->setContentsMargins(m, m, m, m);
   ui->centralwidget->layout()->setSpacing(m);
 
-  ui->gridLayout_43->setMargin(m);
-  ui->gridLayout_3->setMargin(m);
-  ui->gridLayout_4->setMargin(m);
-  ui->gridLayout_5->setMargin(m);
-  ui->gridLayout_28->setMargin(m);
+  ui->gridLayout_43->setContentsMargins(m, m, m, m);
+  ui->gridLayout_3->setContentsMargins(m, m, m, m);
+  ui->gridLayout_4->setContentsMargins(m, m, m, m);
+  ui->gridLayout_5->setContentsMargins(m, m, m, m);
+  ui->gridLayout_28->setContentsMargins(m, m, m, m);
 
-  ui->gridLayout_53->setMargin(m);
-  ui->gridLayout_7->setMargin(m);
-  ui->gridLayout_38->setMargin(m);
+  ui->gridLayout_53->setContentsMargins(m, m, m, m);
+  ui->gridLayout_7->setContentsMargins(m, m, m, m);
+  ui->gridLayout_38->setContentsMargins(m, m, m, m);
 
-  ui->gridLayout_8->setMargin(m);
-  ui->gridLayout_9->setMargin(m);
-  ui->gridLayout_10->setMargin(m);
+  ui->gridLayout_8->setContentsMargins(m, m, m, m);
+  ui->gridLayout_9->setContentsMargins(m, m, m, m);
+  ui->gridLayout_10->setContentsMargins(m, m, m, m);
 
-  ui->gridLayout_11->setMargin(m);
-  ui->gridLayout_12->setMargin(m);
-  ui->gridLayout_13->setMargin(m);
-  ui->gridLayout_42->setMargin(m);
-  ui->gridLayout_14->setMargin(m);
+  ui->gridLayout_11->setContentsMargins(m, m, m, m);
+  ui->gridLayout_12->setContentsMargins(m, m, m, m);
+  ui->gridLayout_13->setContentsMargins(m, m, m, m);
+  ui->gridLayout_42->setContentsMargins(m, m, m, m);
+  ui->gridLayout_14->setContentsMargins(m, m, m, m);
 
-  ui->gridLayout_16->setMargin(m);
+  ui->gridLayout_16->setContentsMargins(m, m, m, m);
 
-  ui->gridLayout_20->setMargin(m);
-  ui->gridLayout_21->setMargin(m);
-  ui->gridLayout_22->setMargin(m);
+  ui->gridLayout_20->setContentsMargins(m, m, m, m);
+  ui->gridLayout_21->setContentsMargins(m, m, m, m);
+  ui->gridLayout_22->setContentsMargins(m, m, m, m);
 
-  ui->gridLayout_23->setMargin(m);
-  ui->gridLayout_17->setMargin(m);
-  ui->gridLayout_18->setMargin(m);
-  ui->gridLayout_19->setMargin(m);
+  ui->gridLayout_23->setContentsMargins(m, m, m, m);
+  ui->gridLayout_17->setContentsMargins(m, m, m, m);
+  ui->gridLayout_18->setContentsMargins(m, m, m, m);
+  ui->gridLayout_19->setContentsMargins(m, m, m, m);
 
-  ui->gridLayout_32->setMargin(m);
+  ui->gridLayout_32->setContentsMargins(m, m, m, m);
 
-  ui->gridLayout_37->setMargin(m);
+  ui->gridLayout_37->setContentsMargins(m, m, m, m);
 
-  ui->gridLayout_29->setMargin(m);
-  ui->gridLayout_30->setMargin(m);
-  ui->gridLayout_59->setMargin(m);
+  ui->gridLayout_29->setContentsMargins(m, m, m, m);
+  ui->gridLayout_30->setContentsMargins(m, m, m, m);
+  ui->gridLayout_59->setContentsMargins(m, m, m, m);
 
-  ui->gridLayout_69->setMargin(m);
-  ui->gridLayout_71->setMargin(m);
-  ui->gridLayout_47->setMargin(m);
-  ui->gridLayout_62->setMargin(m);
-  ui->horizontalLayout_3->setMargin(m);
+  ui->gridLayout_69->setContentsMargins(m, m, m, m);
+  ui->gridLayout_71->setContentsMargins(m, m, m, m);
+  ui->gridLayout_47->setContentsMargins(m, m, m, m);
+  ui->gridLayout_62->setContentsMargins(m, m, m, m);
+  ui->horizontalLayout_3->setContentsMargins(m, m, m, m);
 }
 
 void MainWindow::recentOpen(QString filename) { openFile(filename); }
