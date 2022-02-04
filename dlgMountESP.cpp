@@ -6,6 +6,7 @@
 
 extern MainWindow* mw_one;
 extern Method* mymethod;
+extern QString strIniFile;
 
 dlgMountESP::dlgMountESP(QWidget* parent)
     : QDialog(parent), ui(new Ui::dlgMountESP) {
@@ -22,8 +23,7 @@ void dlgMountESP::on_btnMountOpenConfig_clicked() { mountESP(true); }
 void dlgMountESP::mountESP(bool openConfig) {
   if (ui->listWidget->count() == 0) return;
 
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("mesp", ui->listWidget->currentRow());
 
   QString str = ui->listWidget->currentItem()->text().trimmed();

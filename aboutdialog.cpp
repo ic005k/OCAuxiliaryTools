@@ -6,7 +6,8 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-QString CurVerison = "20220113";
+extern QString strAppName, strIniFile;
+QString CurVerison = "20220114";
 QString ocVer = "0.7.7";
 QString ocVerDev = "0.7.8";
 QString ocFrom, ocFromDev, strOCFrom, strOCFromDev;
@@ -16,8 +17,10 @@ aboutDialog::aboutDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::aboutDialog) {
   ui->setupUi(this);
 
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  strIniFile =
+      QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
+
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   QString ver = Reg.value("ocVer").toString();
   if (ver > ocVer) {
     ocVer = ver;

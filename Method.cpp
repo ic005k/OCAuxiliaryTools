@@ -9,7 +9,7 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-extern QString SaveFileName, ocVer;
+extern QString SaveFileName, ocVer, strIniFile, strAppName;
 
 QString strACPI;
 QString strKexts;
@@ -59,7 +59,7 @@ QStringList Method::getDLUrlList(QString url) {
 }
 
 QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
-  const QString FILE_NAME = QDir::homePath() + "/.config/QtOCC/code.txt";
+  const QString FILE_NAME = mw_one->strConfigPath + "code.txt";
   QString strProxy =
       mw_one->myDlgPreference->ui->comboBoxWeb->currentText().trimmed();
   URLSTR.replace("https://github.com/", strProxy);
@@ -439,8 +439,7 @@ void Method::updateOpenCore() {
         ver = list.at(1);
       }
 
-      QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-      QSettings Reg(qfile, QSettings::IniFormat);
+      QSettings Reg(strIniFile, QSettings::IniFormat);
       Reg.setValue("ocVer", ver);
       if (ver > ocVer) {
         ocVer = ver;
@@ -501,8 +500,8 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
 
 void Method::getLastReleaseFromUrl(QString strUrl) {
   if (blBreak) return;
-  // https://github.com/ic005k/QtOpenCoreConfig
-  // https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/latest
+  // https://github.com/ic005k/" + strAppName;
+  // https://api.github.com/repos/ic005k/" + strAppName + "/releases/latest
   QString strAPI =
       strUrl.replace("https://github.com/", "https://api.github.com/repos/") +
       "/releases/latest";
@@ -1581,7 +1580,7 @@ void Method::mount_esp_mac(QString strEfiDisk) {
                    QString::fromLatin1("\"%1\"").arg(str5) +
                    " with administrator privileges";
 
-  QString fileName = QDir::homePath() + "/.config/QtOCC/qtocc.applescript";
+  QString fileName = mw_one->strConfigPath + "qtocc.applescript";
   QFile fi(fileName);
   if (fi.exists()) fi.remove();
 

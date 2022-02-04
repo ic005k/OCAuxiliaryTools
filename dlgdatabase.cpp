@@ -6,7 +6,7 @@
 
 extern MainWindow *mw_one;
 extern Method *mymethod;
-extern QString SaveFileName;
+extern QString SaveFileName, strIniFile, strAppName;
 extern bool blDEV;
 
 dlgDatabase::dlgDatabase(QWidget *parent)
@@ -233,16 +233,16 @@ void dlgDatabase::on_btnOpenDir_clicked() {
 }
 
 void dlgDatabase::on_btnIntelOnline_clicked() {
-  QUrl url(
-      QString("https://github.com/ic005k/QtOpenCoreConfig/blob/master/Database/"
-              "BaseConfigs/Instructions_Intel.md"));
+  QUrl url(QString("https://github.com/ic005k/" + strAppName +
+                   "/blob/master/Database/"
+                   "BaseConfigs/Instructions_Intel.md"));
   QDesktopServices::openUrl(url);
 }
 
 void dlgDatabase::on_btnAMDOnline_clicked() {
-  QUrl url(
-      QString("https://github.com/ic005k/QtOpenCoreConfig/blob/master/Database/"
-              "BaseConfigs/Instructions_AMD_TRX40.md"));
+  QUrl url(QString("https://github.com/ic005k/" + strAppName +
+                   "/blob/master/Database/"
+                   "BaseConfigs/Instructions_AMD_TRX40.md"));
   QDesktopServices::openUrl(url);
 }
 

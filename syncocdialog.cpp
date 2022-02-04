@@ -6,7 +6,7 @@
 #include "ui_syncocdialog.h"
 
 extern MainWindow* mw_one;
-extern QString ocVer;
+extern QString ocVer, strIniFile, strAppName;
 extern QString ocVerDev;
 extern QString ocFrom;
 extern QString ocFromDev;
@@ -303,7 +303,7 @@ void SyncOCDialog::closeEvent(QCloseEvent* event) {
 }
 
 void SyncOCDialog::writeCheckStateINI() {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/chk.ini";
+  QString qfile = mw_one->strConfigPath + "chk.ini";
   // QString strTag = QDir::fromNativeSeparators(SaveFileName);
   QString strTag = SaveFileName;
   strTag.replace("/", "-");
@@ -476,9 +476,9 @@ void SyncOCDialog::initKextList() {
 }
 
 void SyncOCDialog::readCheckStateINI() {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/chk.ini";
   QString strTag = SaveFileName;
   strTag.replace("/", "-");
+  QString qfile = mw_one->strConfigPath + "chk.ini";
   QSettings Reg(qfile, QSettings::IniFormat);
   for (int i = 0; i < sourceKexts.count(); i++) {
     QString str_0 = ui->tableKexts->item(i, 3)->text();

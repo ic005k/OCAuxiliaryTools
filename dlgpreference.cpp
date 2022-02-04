@@ -11,7 +11,7 @@
 
 extern MainWindow *mw_one;
 extern Method *mymethod;
-extern QString SaveFileName;
+extern QString SaveFileName, strIniFile, strAppName;
 extern bool blDEV;
 
 dlgPreference::dlgPreference(QWidget *parent)
@@ -29,9 +29,11 @@ dlgPreference::dlgPreference(QWidget *parent)
   ui->tableKextUrl->setColumnWidth(1, 400);
   ui->textEdit->setHidden(true);
 
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
-  QFileInfo fi(qfile);
+  strIniFile =
+      QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
+
+  QSettings Reg(strIniFile, QSettings::IniFormat);
+  QFileInfo fi(strIniFile);
   QString strDef = "https://ghproxy.com/https://github.com/";
   QLocale locale;
   if (fi.exists()) {
@@ -179,8 +181,7 @@ void dlgPreference::on_btnOpenUrl_clicked() {
 }
 
 void dlgPreference::on_rbtnAPI_clicked() {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("rbtnAPI", ui->rbtnAPI->isChecked());
   Reg.setValue("rbtnWeb", ui->rbtnWeb->isChecked());
 }
@@ -193,26 +194,22 @@ void dlgPreference::on_btnTest_clicked() {
 }
 
 void dlgPreference::on_comboBoxNet_currentTextChanged(const QString &arg1) {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("Net", arg1);
 }
 
 void dlgPreference::on_comboBoxWeb_currentTextChanged(const QString &arg1) {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("Web", arg1);
 }
 
 void dlgPreference::writeIni(QString key, int arg1) {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue(key, arg1);
 }
 
 void dlgPreference::on_chkBoxLastFile_clicked(bool checked) {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("LastFile", checked);
 }
 
@@ -246,8 +243,7 @@ void dlgPreference::on_tableDatabase_itemChanged(QTableWidgetItem *item) {
 }
 
 void dlgPreference::on_chkShowVolName_clicked(bool checked) {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("ShowVolName", checked);
 }
 

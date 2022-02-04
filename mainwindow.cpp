@@ -16,6 +16,10 @@ using namespace std;
 #include <QMessageBox>
 #include <QSettings>
 
+QString strAppName = "OCAuxiliaryTools";
+QString strIniFile =
+    QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
+
 QString PlistFileName, SaveFileName;
 QVector<QString> openFileLists;
 
@@ -32,8 +36,7 @@ extern bool blDEV;
 extern QString strACPI, strKexts, strDrivers, strTools;
 
 void MainWindow::changeOpenCore(bool blDEV) {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   isUseDevOption = Reg.value("UseDevOption").toBool();
   if (!isUseDevOption) {
     if (blDEV) {
@@ -77,6 +80,7 @@ MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
 
+  strConfigPath = QDir::homePath() + "/.config/" + strAppName + "/";
   Initialization = true;
   loading = true;
 
@@ -121,11 +125,6 @@ MainWindow::MainWindow(QWidget* parent)
   timer = new QTimer(this);
   connect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
 
-  strConfigPath = QDir::homePath() + "/.config/QtOCC/";
-  QDir dir;
-  if (dir.mkpath(strConfigPath)) {
-  }
-
   setUIMargin();
   init_MainUI();
   init_setWindowModified();
@@ -166,8 +165,7 @@ MainWindow::MainWindow(QWidget* parent)
   updateIconStatus();
 
   if (myDlgPreference->ui->chkBoxLastFile->isChecked()) {
-    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-    QSettings Reg(qfile, QSettings::IniFormat);
+    QSettings Reg(strIniFile, QSettings::IniFormat);
     QString file = Reg.value("LastFileName").toString();
     if (QFile(file).exists()) {
       openFile(file);
@@ -234,8 +232,7 @@ void MainWindow::openFile(QString PlistFileName) {
     return;
 
   if (myDlgPreference->ui->chkBoxLastFile->isChecked()) {
-    QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-    QSettings Reg(qfile, QSettings::IniFormat);
+    QSettings Reg(strIniFile, QSettings::IniFormat);
     Reg.setValue("LastFileName", SaveFileName);
   }
 
@@ -1685,8 +1682,8 @@ void MainWindow::write_ini(QTableWidget* table, QTableWidget* mytable, int i) {
 
   name = name.replace("/", "-");
 
-  QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime +
-                      table->objectName() + name + ".ini";
+  QString plistPath =
+      strConfigPath + CurrentDateTime + table->objectName() + name + ".ini";
 
   QFile file(plistPath);
   if (file.exists()) file.remove();
@@ -1712,8 +1709,8 @@ void MainWindow::read_ini(QTableWidget* table, QTableWidget* mytable, int i) {
 
   name = name.replace("/", "-");
 
-  QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime +
-                      table->objectName() + name + ".ini";
+  QString plistPath =
+      strConfigPath + CurrentDateTime + table->objectName() + name + ".ini";
 
   QFile file(plistPath);
   if (file.exists()) {
@@ -1744,8 +1741,8 @@ void MainWindow::write_value_ini(QTableWidget* table, QTableWidget* subtable,
   if (name == "") name = "Item" + QString::number(i + 1);
   name = name.replace("/", "-");
 
-  QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime +
-                      table->objectName() + name + ".ini";
+  QString plistPath =
+      strConfigPath + CurrentDateTime + table->objectName() + name + ".ini";
 
   QFile file(plistPath);
   if (file.exists()) file.remove();
@@ -1768,8 +1765,8 @@ void MainWindow::read_value_ini(QTableWidget* table, QTableWidget* mytable,
 
   name = name.replace("/", "-");
 
-  QString plistPath = QDir::homePath() + "/.config/QtOCC/" + CurrentDateTime +
-                      table->objectName() + name + ".ini";
+  QString plistPath =
+      strConfigPath + CurrentDateTime + table->objectName() + name + ".ini";
 
   QFile file(plistPath);
   if (file.exists()) {
@@ -2011,8 +2008,6 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item) {
   Q_UNUSED(item);
 
   if (writeINI) {
-    // write_value_ini(ui->table_dp_del0, ui->table_dp_del,
-    //               ui->table_dp_del0->currentRow());
     mymethod->writeLeftTableOnlyValue(ui->table_dp_del0, ui->table_dp_del);
 
     this->setWindowModified(true);
@@ -2021,16 +2016,14 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item) {
 }
 
 void MainWindow::initui_PlatformInfo() {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QFileInfo fi(qfile);
+  QFileInfo fi(strIniFile);
   if (fi.exists()) {
-    QSettings Reg(qfile, QSettings::IniFormat);
+    QSettings Reg(strIniFile, QSettings::IniFormat);
     ui->chkSaveDataHub->setChecked(Reg.value("SaveDataHub").toBool());
     ui->actionAutoChkUpdate->setChecked(
         Reg.value("AutoChkUpdate", true).toBool());
   }
-  // ui->chkSaveDataHub->setStyleSheet(
-  //    "QCheckBox { background-color : yellow; color : black; }");
+
   QFont font;
   font.setBold(true);
   ui->chkSaveDataHub->setFont(font);
@@ -4845,9 +4838,9 @@ void MainWindow::reg_win() {
       new QSettings("HKEY_CLASSES_ROOT\\.plist", QSettings::NativeFormat);
   QSettings* regIcon = new QSettings("HKEY_CLASSES_ROOT\\.plist\\DefaultIcon",
                                      QSettings::NativeFormat);
-  QSettings* regShell =
-      new QSettings("HKEY_CLASSES_ROOT\\QtOpenCoreConfig\\shell\\open\\command",
-                    QSettings::NativeFormat);
+  QSettings* regShell = new QSettings(
+      "HKEY_CLASSES_ROOT\\" + strAppName + "\\shell\\open\\command",
+      QSettings::NativeFormat);
 
   regType->remove("Default");
   regType->setValue("Default", type);
@@ -5207,8 +5200,8 @@ void MainWindow::mount_esp() {
 
 void MainWindow::readResultDiskInfo() {
   dlgMESP->setModal(true);
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   int row = Reg.value("mesp", 0).toInt();
 
   dlgMESP->ui->listWidget->clear();
@@ -5256,8 +5249,7 @@ void MainWindow::readResultDiskInfo() {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-  QString qfile = strConfigPath + "QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
   Reg.setValue("AutoChkUpdate", ui->actionAutoChkUpdate->isChecked());
   Reg.setValue("Net", myDlgPreference->ui->comboBoxNet->currentText());
@@ -6274,8 +6266,7 @@ void MainWindow::init_FileMenu() {
   spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   ui->toolBar->addWidget(spacer);
 
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
 
   // Recent Open
   reFileMenu = new QMenu(this);
@@ -6326,8 +6317,7 @@ void MainWindow::init_FileMenu() {
 }
 
 void MainWindow::init_EditMenu() {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   ui->actionPlist_editor->setVisible(true);
   ui->actionDSDT_SSDT_editor->setVisible(true);
 
@@ -6516,8 +6506,7 @@ void MainWindow::init_ToolButtonStyle() {
 }
 
 void MainWindow::init_MainUI() {
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
   orgLineEditStyle = ui->editBID->styleSheet();
   orgLabelStyle = ui->label->styleSheet();
@@ -7189,9 +7178,9 @@ void MainWindow::on_table_Booter_patch_currentCellChanged(int currentRow,
 
 void MainWindow::on_btnCheckUpdate() {
   QNetworkRequest quest;
-  quest.setUrl(
-      QUrl("https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/"
-           "latest"));
+  quest.setUrl(QUrl("https://api.github.com/repos/ic005k/" + strAppName +
+                    "/releases/"
+                    "latest"));
   quest.setHeader(QNetworkRequest::UserAgentHeader, "RT-Thread ART");
   manager->get(quest);
 }
@@ -8422,8 +8411,7 @@ void MainWindow::findTable(QTableWidget* t, QString text) {
         QString name =
             QString::number(listNameResults.count() - 1) + t->objectName();
 
-        QString plistPath = QDir::homePath() + "/.config/QtOCC/" +
-                            CurrentDateTime + name + ".ini";
+        QString plistPath = strConfigPath + CurrentDateTime + name + ".ini";
         // qDebug() << plistPath;
 
         QFile file(plistPath);
@@ -8568,8 +8556,8 @@ void MainWindow::goResultsTable(QString objName, int index) {
           if (listOfTableWidget.at(k)->objectName() == name) {
             QString nameINI = QString::number(index) + name;
 
-            QString plistPath = QDir::homePath() + "/.config/QtOCC/" +
-                                CurrentDateTime + nameINI + ".ini";
+            QString plistPath =
+                strConfigPath + CurrentDateTime + nameINI + ".ini";
 
             QFile file(plistPath);
             if (file.exists()) {
@@ -9362,7 +9350,7 @@ QString MainWindow::getReReCount(QTableWidget* w, QString text) {
 void MainWindow::pasteLine(QTableWidget* w, QAction* pasteAction) {
   connect(pasteAction, &QAction::triggered, [=]() {
     QString name = w->objectName();
-    QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
+    QString qfile = strConfigPath + name + ".ini";
     QSettings Reg(qfile, QSettings::IniFormat);
 
     QFile file(qfile);
@@ -9437,8 +9425,7 @@ void MainWindow::copyLine(QTableWidget* w, QAction* copyAction) {
     if (w->rowCount() == 0) return;
 
     QString name = w->objectName();
-    QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
-    QFile file(qfile);
+    QString qfile = strConfigPath + name + ".ini";
 
     QItemSelectionModel* selections = w->selectionModel();  //返回当前的选择模式
     QModelIndexList selectedsList =
@@ -9468,7 +9455,6 @@ void MainWindow::copyLine(QTableWidget* w, QAction* copyAction) {
       if (w == ui->table_dp_del0)
         write_value_ini(ui->table_dp_del0, ui->table_dp_del, curRow);
     }
-    file.close();
   });
 }
 
@@ -9517,15 +9503,13 @@ void MainWindow::setPopMenuEnabled(QString qfile, QTableWidget* w,
   if (w == ui->table_dp_add0 || w == ui->table_dp_del0 ||
       w == ui->table_nv_add0 || w == ui->table_nv_del0 ||
       w == ui->table_nv_ls0) {
-    QString dirpath = QDir::homePath() + "/.config/QtOCC/";
-
     QSettings Reg(qfile, QSettings::IniFormat);
     QString text = Reg.value("0/col" + QString::number(0)).toString().trimmed();
 
     text = text.replace("/", "-");
     QString oldRightTable = Reg.value("CurrentDateTime").toString() +
                             w->objectName() + text + ".ini";
-    QFileInfo fi(dirpath + oldRightTable);
+    QFileInfo fi(strConfigPath + oldRightTable);
 
     if (!fi.exists())
       pasteAction->setEnabled(false);
@@ -9533,10 +9517,16 @@ void MainWindow::setPopMenuEnabled(QString qfile, QTableWidget* w,
       copyAction->setEnabled(true);
       cutAction->setEnabled(true);
     }
+  } else {
+    if (w->rowCount() > 0) {
+      copyAction->setEnabled(true);
+      cutAction->setEnabled(true);
+    }
   }
 }
 
-void MainWindow::setPopMenuEnabled(QTableWidget* w, QAction* pasteAction) {
+void MainWindow::setPopMenuEnabledForDP_NVRAM(QTableWidget* w,
+                                              QAction* pasteAction) {
   for (int i = 0; i < tableList.count(); i++) {
     if (w == tableList.at(i)) {
       if (tableList0.at(i)->rowCount() > 0)
@@ -9555,14 +9545,14 @@ void MainWindow::tablePopMenu(QTableWidget* w, QAction* cutAction,
 
     QString name = w->objectName();
 
-    QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
+    QString qfile = strConfigPath + name + ".ini";
     QFile file(qfile);
     if (file.exists()) {
       pasteAction->setEnabled(true);
 
       setPopMenuEnabled(qfile, w, cutAction, pasteAction, copyAction);
 
-      setPopMenuEnabled(w, pasteAction);
+      setPopMenuEnabledForDP_NVRAM(w, pasteAction);
 
     } else
       pasteAction->setEnabled(false);
@@ -9579,18 +9569,6 @@ void MainWindow::tablePopMenu(QTableWidget* w, QAction* cutAction,
       showtipAction->setVisible(false);
     else
       showtipAction->setVisible(true);
-
-    if (ui->listMain->currentRow() == 0 && ui->listSub->currentRow() == 0) {
-      copyAction->setEnabled(false);
-      cutAction->setEnabled(false);
-      pasteAction->setEnabled(false);
-    }
-
-    if (ui->listMain->currentRow() == 3 && ui->listSub->currentRow() == 0) {
-      copyAction->setEnabled(false);
-      cutAction->setEnabled(false);
-      pasteAction->setEnabled(false);
-    }
 
     popMenu->exec(QCursor::pos());
   });
@@ -9777,10 +9755,8 @@ void MainWindow::endPasteLine(QTableWidget* w, int row, QString colText0) {
       w == ui->table_nv_add0 || w == ui->table_nv_del0 ||
       w == ui->table_nv_ls0) {
     QString name = w->objectName();
-    QString qfile = QDir::homePath() + "/.config/QtOCC/" + name + ".ini";
+    QString qfile = strConfigPath + name + ".ini";
     QSettings Reg(qfile, QSettings::IniFormat);
-
-    QString dirpath = QDir::homePath() + "/.config/QtOCC/";
 
     colText0 = colText0.replace("/", "-");
     QString oldRightTable = Reg.value("CurrentDateTime").toString() +
@@ -9791,10 +9767,10 @@ void MainWindow::endPasteLine(QTableWidget* w, int row, QString colText0) {
     QString newReghtTable =
         CurrentDateTime + w->objectName() + newText + ".ini";
 
-    QFileInfo fi(dirpath + oldRightTable);
+    QFileInfo fi(strConfigPath + oldRightTable);
     if (fi.exists()) {
-      QFile::copy(dirpath + oldRightTable, dirpath + newReghtTable);
-      IniFile.push_back(dirpath + newReghtTable);
+      QFile::copy(strConfigPath + oldRightTable, strConfigPath + newReghtTable);
+      IniFile.push_back(strConfigPath + newReghtTable);
     }
 
     if (w == ui->table_dp_add0) {
@@ -9976,7 +9952,7 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
 }
 
 void MainWindow::on_actionBug_Report_triggered() {
-  QUrl url(QString("https://github.com/ic005k/QtOpenCoreConfig/issues"));
+  QUrl url(QString("https://github.com/ic005k/" + strAppName + "/issues"));
   QDesktopServices::openUrl(url);
 }
 
@@ -10628,7 +10604,7 @@ void MainWindow::on_btnDown_UEFI_Drivers_clicked() {
 
 void MainWindow::on_actionLatest_Release_triggered() {
   QUrl url(
-      QString("https://github.com/ic005k/QtOpenCoreConfig/releases/latest"));
+      QString("https://github.com/ic005k/" + strAppName + "/releases/latest"));
   QDesktopServices::openUrl(url);
 }
 
@@ -11111,8 +11087,8 @@ void MainWindow::on_comboBoxUEFI_currentIndexChanged(const QString& arg1) {
 void MainWindow::on_actionOpenCore_DEV_triggered() {
   blDEV = ui->actionOpenCore_DEV->isChecked();
   changeOpenCore(blDEV);
-  QString qfile = QDir::homePath() + "/.config/QtOCC/QtOCC.ini";
-  QSettings Reg(qfile, QSettings::IniFormat);
+
+  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("OpenCoreDEV", blDEV);
 }
 
@@ -11150,12 +11126,12 @@ void MainWindow::on_actionPreferences_triggered() {
 
 void MainWindow::on_actionDocumentation_triggered() {
   if (!zh_cn) {
-    QUrl url_en(QString(
-        "https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md"));
+    QUrl url_en(QString("https://github.com/ic005k/" + strAppName +
+                        "/blob/master/READMe.md"));
     QDesktopServices::openUrl(url_en);
   } else {
-    QUrl url_cn(QString(
-        "https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-cn.md"));
+    QUrl url_cn(QString("https://github.com/ic005k/" + strAppName +
+                        "/blob/master/READMe-cn.md"));
     QDesktopServices::openUrl(url_cn);
   }
 }
