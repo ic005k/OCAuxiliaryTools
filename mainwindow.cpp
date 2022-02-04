@@ -19,7 +19,7 @@ using namespace std;
 QString PlistFileName, SaveFileName;
 QVector<QString> openFileLists;
 
-QRegularExpression regxData("[A-Fa-f0-9- ]{0,1024}");
+QRegularExpression regxData("[A-Fa-f0-9 ]{0,1024}");
 QRegularExpression regxNumber("^-?\[0-9]*$");
 
 Method* mymethod;
