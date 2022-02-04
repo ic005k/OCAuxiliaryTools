@@ -446,44 +446,17 @@ void MainWindow::markColor(QTableWidget* table, QString path, int col) {
 QString MainWindow::getKextVersion(QString kextFile) {
   QString strInfo = kextFile + "/Contents/Info.plist";
   QTextEdit* txtEdit = new QTextEdit;
-  txtEdit->setPlainText(loadText(strInfo));
+  txtEdit->setPlainText(Method::loadText(strInfo));
   for (int i = 0; i < txtEdit->document()->lineCount(); i++) {
-    QString str0 = getTextEditLineText(txtEdit, i).trimmed();
-    str0.replace("</key>", "");
-    str0.replace("<key>", "");
-    if (str0 == "CFBundleVersion") {
-      QString str1 = getTextEditLineText(txtEdit, i + 1).trimmed();
-      str1.replace("<string>", "");
-      str1.replace("</string>", "");
-      return str1;
-    }
-  }
-
-  return "";
-}
-
-QString MainWindow::getTextEditLineText(QTextEdit* txtEdit, int i) {
-  QTextBlock block = txtEdit->document()->findBlockByNumber(i);
-  txtEdit->setTextCursor(QTextCursor(block));
-  QString lineText = txtEdit->document()->findBlockByNumber(i).text().trimmed();
-  return lineText;
-}
-
-QString MainWindow::loadText(QString textFile) {
-  QFileInfo fi(textFile);
-  if (fi.exists()) {
-    QFile file(textFile);
-    if (!file.open(QFile::ReadOnly | QFile::Text)) {
-      QMessageBox::warning(
-          this, tr("Application"),
-          tr("Cannot read file %1:\n%2.")
-              .arg(QDir::toNativeSeparators(textFile), file.errorString()));
-
-    } else {
-      QTextStream in(&file);
-      QString text = in.readAll();
-      return text;
-    }
+      QString str0 = Method::getTextEditLineText(txtEdit, i).trimmed();
+      str0.replace("</key>", "");
+      str0.replace("<key>", "");
+      if (str0 == "CFBundleVersion") {
+          QString str1 = Method::getTextEditLineText(txtEdit, i + 1).trimmed();
+          str1.replace("<string>", "");
+          str1.replace("</string>", "");
+          return str1;
+      }
   }
 
   return "";

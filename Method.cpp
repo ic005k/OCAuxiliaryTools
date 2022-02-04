@@ -621,7 +621,7 @@ QString Method::loadText(QString textFile) {
 
     } else {
       QTextStream in(&file);
-      // in.setCodec("UTF-8");
+      in.setCodec("UTF-8");
       QString text = in.readAll();
       return text;
     }

@@ -363,8 +363,7 @@ class MainWindow : public QMainWindow {
   bool IsProcessExist(QString processName);
   void markColor(QTableWidget* table, QString path, int col);
   QString getKextVersion(QString kextFile);
-  QString loadText(QString textFile);
-  QString getTextEditLineText(QTextEdit* txtEdit, int i);
+
   QString getDriverInfo(QString strDisk);
   void changeOpenCore(bool blDEV);
   QObjectList getAllToolButton(QObjectList lstUIControls);
