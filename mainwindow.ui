@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -6445,7 +6445,7 @@ A continuously updated variable list can be found in a corresponding document: N
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>5</number>
+              <number>1</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -6731,10 +6731,7 @@ Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemory
               <attribute name="title">
                <string>DataHub</string>
               </attribute>
-              <layout class="QHBoxLayout" name="horizontalLayout_2">
-               <property name="spacing">
-                <number>9</number>
-               </property>
+              <layout class="QGridLayout" name="gridLayout_77">
                <property name="leftMargin">
                 <number>5</number>
                </property>
@@ -6747,7 +6744,7 @@ Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemory
                <property name="bottomMargin">
                 <number>5</number>
                </property>
-               <item>
+               <item row="0" column="0">
                 <layout class="QGridLayout" name="gridLayout_39">
                  <item row="0" column="2">
                   <widget class="QLabel" name="label_47">
@@ -7430,35 +7427,31 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               <attribute name="title">
                <string>PlatformNVRAM</string>
               </attribute>
-              <widget class="QWidget" name="layoutWidget">
-               <property name="geometry">
-                <rect>
-                 <x>20</x>
-                 <y>12</y>
-                 <width>732</width>
-                 <height>258</height>
-                </rect>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_40">
-                <property name="leftMargin">
-                 <number>5</number>
-                </property>
-                <property name="topMargin">
-                 <number>5</number>
-                </property>
-                <property name="rightMargin">
-                 <number>5</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>5</number>
-                </property>
-                <item row="4" column="1">
-                 <widget class="QLineEdit" name="editDatROM_PNVRAM"/>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="label_61">
-                  <property name="toolTip">
-                   <string notr="true">Specifies the values of NVRAM variables:
+              <layout class="QGridLayout" name="gridLayout_66">
+               <item row="0" column="0">
+                <layout class="QGridLayout" name="gridLayout_40">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>-1</number>
+                 </property>
+                 <item row="4" column="1">
+                  <widget class="QLineEdit" name="editDatROM_PNVRAM"/>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_61">
+                   <property name="toolTip">
+                    <string notr="true">Specifies the values of NVRAM variables:
 
 • 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:FirmwareFeatures
 • 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ExtendedFirmwareFeatures
@@ -7467,106 +7460,106 @@ If there are no error-correction bits, this value should be equal to DataWidth.
 
 • 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:FirmwareFeatures
 • 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ExtendedFirmwareFeatures</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> This variable comes in pair with FirmwareFeaturesMask.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">FirmwareFeatures</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_60">
-                  <property name="toolTip">
-                   <string notr="true">Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_BID.
+                   </property>
+                   <property name="statusTip">
+                    <string> This variable comes in pair with FirmwareFeaturesMask.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">FirmwareFeatures</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_60">
+                   <property name="toolTip">
+                    <string notr="true">Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_BID.
 
 ----
 
 指定NVRAM变量4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_BID的值。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_BID.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">BID</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="6" column="0">
-                 <widget class="QLabel" name="label_106">
-                  <property name="toolTip">
-                   <string notr="true">Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id for boot services only. Value found on Macs is equal to SMBIOS SystemUUID.
+                   </property>
+                   <property name="statusTip">
+                    <string>Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_BID.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">BID</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="0">
+                  <widget class="QLabel" name="label_106">
+                   <property name="toolTip">
+                    <string notr="true">Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id for boot services only. Value found on Macs is equal to SMBIOS SystemUUID.
 ----
 指定 NVRAM 变量 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id 的值，仅用于启动服务。在Mac上找到的值等于SMBIOS SystemUUID。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id
+                   </property>
+                   <property name="statusTip">
+                    <string>Specifies the value of NVRAM variable 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:system-id
  for boot services only. The value found on Macs is equal to SMBIOS SystemUUID.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">SystemUUID</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QLineEdit" name="editDatFirmwareFeatures"/>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="label_63">
-                  <property name="toolTip">
-                   <string notr="true"> Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_MLB and 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:MLB.
+                   </property>
+                   <property name="text">
+                    <string notr="true">SystemUUID</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLineEdit" name="editDatFirmwareFeatures"/>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_63">
+                   <property name="toolTip">
+                    <string notr="true"> Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_MLB and 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:MLB.
 ----
  指定NVRAM变量4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_MLB和4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:MLB的值。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_MLB and
+                   </property>
+                   <property name="statusTip">
+                    <string> Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_MLB and
  4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:MLB.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">MLB</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QLineEdit" name="editMLB_PNVRAM"/>
-                </item>
-                <item row="6" column="1">
-                 <widget class="QLineEdit" name="editSystemUUID_PNVRAM"/>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QLabel" name="label_64">
-                  <property name="toolTip">
-                   <string notr="true">Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_ROM and 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.
+                   </property>
+                   <property name="text">
+                    <string notr="true">MLB</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QLineEdit" name="editMLB_PNVRAM"/>
+                 </item>
+                 <item row="6" column="1">
+                  <widget class="QLineEdit" name="editSystemUUID_PNVRAM"/>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_64">
+                   <property name="toolTip">
+                    <string notr="true">Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_ROM and 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.
 ----
 指定NVRAM变量4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_ROM和4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM的值。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_ROM and
+                   </property>
+                   <property name="statusTip">
+                    <string>Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_ROM and
  4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">ROM</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLineEdit" name="editBID">
-                  <property name="minimumSize">
-                   <size>
-                    <width>500</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QLineEdit" name="editDatFirmwareFeaturesMask"/>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label_62">
-                  <property name="toolTip">
-                   <string notr="true"> Specifies the values of NVRAM variables:
+                   </property>
+                   <property name="text">
+                    <string notr="true">ROM</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="editBID">
+                   <property name="minimumSize">
+                    <size>
+                     <width>500</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLineEdit" name="editDatFirmwareFeaturesMask"/>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_62">
+                   <property name="toolTip">
+                    <string notr="true"> Specifies the values of NVRAM variables:
 
 • 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:FirmwareFeaturesMask
 • 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ExtendedFirmwareFeaturesMask
@@ -7575,43 +7568,44 @@ If there are no error-correction bits, this value should be equal to DataWidth.
 
 • 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:FirmwareFeaturesMask
 • 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ExtendedFirmwareFeaturesMask</string>
-                  </property>
-                  <property name="statusTip">
-                   <string> This variable comes in pair with FirmwareFeatures.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">FirmwareFeaturesMask</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="0">
-                 <widget class="QLabel" name="label_109">
-                  <property name="toolTip">
-                   <string notr="true">Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_SSN and  4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:SSN.
+                   </property>
+                   <property name="statusTip">
+                    <string> This variable comes in pair with FirmwareFeatures.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">FirmwareFeaturesMask</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="0">
+                  <widget class="QLabel" name="label_109">
+                   <property name="toolTip">
+                    <string notr="true">Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_SSN and  4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:SSN.
 ----
 指定NVRAM变量4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_SSN和4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:SSN的值。</string>
-                  </property>
-                  <property name="statusTip">
-                   <string>Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_SSN and
+                   </property>
+                   <property name="statusTip">
+                    <string>Specifies the values of NVRAM variables 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:HW_SSN and
  4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:SSN.</string>
-                  </property>
-                  <property name="text">
-                   <string notr="true">SystemSerialNumber</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="1">
-                 <widget class="QLineEdit" name="editSystemSerialNumber_PNVRAM">
-                  <property name="toolTip">
-                   <string/>
-                  </property>
-                  <property name="statusTip">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
+                   </property>
+                   <property name="text">
+                    <string notr="true">SystemSerialNumber</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1">
+                  <widget class="QLineEdit" name="editSystemSerialNumber_PNVRAM">
+                   <property name="toolTip">
+                    <string/>
+                   </property>
+                   <property name="statusTip">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </widget>
              <widget class="QWidget" name="tabPlatformInfo5">
               <attribute name="title">

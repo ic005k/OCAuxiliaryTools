@@ -7,7 +7,7 @@
 
 extern MainWindow* mw_one;
 extern QString strAppName, strIniFile;
-QString CurVerison = "20220114";
+QString CurVerison = "20220115";
 QString ocVer = "0.7.7";
 QString ocVerDev = "0.7.8";
 QString ocFrom, ocFromDev, strOCFrom, strOCFromDev;

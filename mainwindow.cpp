@@ -6544,8 +6544,7 @@ void MainWindow::init_MainUI() {
   connect(ui->cboxFind->lineEdit(), &QLineEdit::returnPressed, this,
           &MainWindow::on_actionFind_triggered);
 
-  // if (mac || osx1012) ui->lblCount->setFont(QFont("Menlo"));
-  // if (win) ui->lblCount->setFont(QFont("consolas"));
+  ui->listFind->setAlternatingRowColors(true);
 
   clearTextsAction = new QAction(this);
   clearTextsAction->setToolTip(tr("Clear search history"));
@@ -8281,6 +8280,7 @@ void MainWindow::findTabText(QString findText) {
 
 void MainWindow::on_actionFind_triggered() {
   ui->cboxFind->lineEdit()->selectAll();
+  ui->cboxFind->setFocus();
   if (myDlgPreference->ui->chkHideToolbar->isChecked() &&
       ui->toolBar->isHidden()) {
     ui->frameToolBar->setHidden(false);
