@@ -10668,6 +10668,10 @@ void MainWindow::on_txtEditHex_textChanged(const QString& arg1) {
     return;
   }
 
+  QValidator* validator =
+      new QRegularExpressionValidator(regxData, ui->txtEditHex);
+  ui->txtEditHex->setValidator(validator);
+
   txtEditHexTextChanged = true;
   QString str0, str;
   str0 = arg1;
