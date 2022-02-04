@@ -38,7 +38,7 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for [OpenCor
 * [@5T33Z0](https://github.com/5T33Z0) Provide and maintain OCAT's Intel CPU plug-in package, user interaction and feature suggestions, etc.
 * [@LucasMucGH](https://github.com/LucasMucGH) Native UI design suggestions based on Mac version, etc.
 * [@fabiosun](https://github.com/fabiosun) Provides AMD-related content.
-
+* APP Icon Design: Mirone (from Brazil)
 ---
 
 ### Thanks for the support of the following open source software!
