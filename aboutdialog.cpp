@@ -7,7 +7,7 @@
 
 extern MainWindow* mw_one;
 extern QString strAppName, strIniFile;
-QString CurVerison = "20220116";
+QString CurVerison = "20220117";
 QString ocVer = "0.7.7";
 QString ocVerDev = "0.7.8";
 QString ocFrom, ocFromDev, strOCFrom, strOCFromDev;
@@ -16,6 +16,10 @@ bool blDEV = false;
 aboutDialog::aboutDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::aboutDialog) {
   ui->setupUi(this);
+
+  strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/latest";
+  strOCFromDev =
+      "https://github.com/acidanthera/OpenCorePkg/actions/runs/1797540408/";
 
   strIniFile =
       QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
@@ -26,16 +30,12 @@ aboutDialog::aboutDialog(QWidget* parent)
     ocVer = ver;
   }
 
-  strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/latest";
-  strOCFromDev =
-      "https://github.com/acidanthera/OpenCorePkg/actions/runs/1776690457/";
-
   setMaximumWidth(this->width());
   setMaximumHeight(this->height());
   setMinimumWidth(this->width());
   setMinimumHeight(this->height());
 
-  ocVerDev = ocVerDev + " [" + tr("DEV") + "]";
+  ocVerDev = ocVerDev + " DEBUG [" + tr("DEV") + "]";
   ocFromDev = "<a href=\"" + strOCFromDev + "\"" + "> " + tr(" Source ");
   ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
 
