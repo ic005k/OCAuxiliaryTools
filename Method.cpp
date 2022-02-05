@@ -2168,6 +2168,7 @@ bool Method::isKeyExists(QString plistFile, QString key) {
 }
 
 void Method::show_Tip(QString strText, QString strTip) {
+  if (strTip.trimmed().length() == 0) return;
   QString str = strTip;
   QStringList list = str.split("----");
   if (list.count() == 2) {
