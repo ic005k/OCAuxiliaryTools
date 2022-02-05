@@ -12,7 +12,9 @@
 #include <QPushButton>
 #include <QStyle>
 
-//#include <QWidgetTextControl>
+#include "mainwindow.h"
+
+extern MainWindow *mw_one;
 
 static BalloonTip *theSolitaryBalloonTip = 0;
 
@@ -147,19 +149,22 @@ BalloonTip::BalloonTip(QMessageBox::Icon icon, const QString &title,
   setLayout(layout);
 
   QPalette pal = palette();
-  // pal.setColor(QPalette::Window, QColor(0xff, 0xff, 0xe1));
-  pal.setColor(QPalette::Window, QColor(236, 236, 236, 255));
+
+  if (mw_one->mac || mw_one->osx1012)
+      pal.setColor(QPalette::Window, QColor(236, 236, 236, 255));
+  else
+      pal.setColor(QPalette::Window, QColor(0xff, 0xff, 0xe1));
   pal.setColor(QPalette::WindowText, Qt::black);
   setPalette(pal);
 }
 
 BalloonTip::~BalloonTip() { theSolitaryBalloonTip = 0; }
 
-void BalloonTip::paintEvent(QPaintEvent *p) {
-  Q_UNUSED(p);
-  QPainter painter(this);
-
-  painter.drawPixmap(rect(), pixmap);
+void BalloonTip::paintEvent(QPaintEvent *p)
+{
+    Q_UNUSED(p);
+    QPainter painter(this);
+    painter.drawPixmap(rect(), pixmap);
 }
 
 void BalloonTip::resizeEvent(QResizeEvent *ev) { QWidget::resizeEvent(ev); }

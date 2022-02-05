@@ -8,14 +8,17 @@ QWidgetList wdlist;
 extern QString PlistFileName;
 MainWindow *mw_one;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
-  {
-    qputenv("QT_ENABLE_HIGHDPI_SCALING", "1");
-    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
-        Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
-    QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-  }
+    {
+        // qputenv("QT_ENABLE_HIGHDPI_SCALING", "1");
+        qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
+        QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
+            Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
+        // QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+        QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    }
 #endif
 
   // QApplication a(argc, argv);
