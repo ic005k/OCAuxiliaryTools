@@ -41,6 +41,7 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per [Open
 * [@5T33Z0](https://github.com/5T33Z0) I pacchetti di plug-in OCAT sono forniti e mantenuti.
 * [@LucasMucGH](https://github.com/LucasMucGH) Suggerimenti per la progettazione dell'interfaccia utente nativa basati sulla versione per Mac.
 * [@fabiosun (macOS86.it)](https://github.com/macos86/QtOpenCoreConfig) per i contenuti relativi a CPU AMD.
+- Icona della app: Mirone (Brasile)
 
 ---
 
