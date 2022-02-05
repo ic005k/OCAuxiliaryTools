@@ -150,21 +150,28 @@ BalloonTip::BalloonTip(QMessageBox::Icon icon, const QString &title,
 
   QPalette pal = palette();
 
-  if (mw_one->mac || mw_one->osx1012)
+  if (mw_one->mac || mw_one->osx1012) {
+    if (mw_one->red > 55) {
       pal.setColor(QPalette::Window, QColor(236, 236, 236, 255));
-  else
-      pal.setColor(QPalette::Window, QColor(0xff, 0xff, 0xe1));
-  pal.setColor(QPalette::WindowText, Qt::black);
+      pal.setColor(QPalette::WindowText, Qt::black);
+    } else {
+      pal.setColor(QPalette::Window, QColor(55, 55, 55, 255));
+      pal.setColor(QPalette::WindowText, QColor(245, 245, 245, 255));
+    }
+  } else {
+    pal.setColor(QPalette::Window, QColor(0xff, 0xff, 0xe1));
+    pal.setColor(QPalette::WindowText, Qt::black);
+  }
+
   setPalette(pal);
 }
 
 BalloonTip::~BalloonTip() { theSolitaryBalloonTip = 0; }
 
-void BalloonTip::paintEvent(QPaintEvent *p)
-{
-    Q_UNUSED(p);
-    QPainter painter(this);
-    painter.drawPixmap(rect(), pixmap);
+void BalloonTip::paintEvent(QPaintEvent *p) {
+  Q_UNUSED(p);
+  QPainter painter(this);
+  painter.drawPixmap(rect(), pixmap);
 }
 
 void BalloonTip::resizeEvent(QResizeEvent *ev) { QWidget::resizeEvent(ev); }
