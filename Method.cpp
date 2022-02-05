@@ -2179,7 +2179,7 @@ void Method::show_Tip(QString strText, QString strTip) {
   } else
     strTip = str;
   strTip = strTip.trimmed();
-  int ms = strTip.length() * 150;
+  int ms = strTip.length() * 135;
 
   int dir = 10;
   QScreen* screen = QGuiApplication::primaryScreen();

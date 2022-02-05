@@ -323,7 +323,7 @@ void BalloonTip::balloon(const QPoint &pos, int msecs, bool showArrow,
   setMask(bitmap);
 
   // Draw the border
-  QColor penColor = palette().color(QPalette::Window).darker(160);
+  /*QColor penColor = palette().color(QPalette::Window).darker(160);
   QPen pen = QPen(penColor, border);
   pixmap = QPixmap(sh);
   pixmap.fill(penColor);
@@ -331,9 +331,9 @@ void BalloonTip::balloon(const QPoint &pos, int msecs, bool showArrow,
   painter2.setRenderHint(QPainter::Antialiasing, true);
   painter2.setPen(pen);
   painter2.setBrush(palette().color(QPalette::Window));
-  painter2.drawPath(path);
+  painter2.drawPath(path);*/
 
-  //    setMask(pixmap.mask());
+  // setMask(pixmap.mask());
 
   // if (msecs > 0) timerId = startTimer(msecs);
   timer->start(msecs);
@@ -344,7 +344,7 @@ void BalloonTip::balloon(const QPoint &pos, int msecs, bool showArrow,
 
 void BalloonTip::mousePressEvent(QMouseEvent *e) {
   Q_UNUSED(e);
-  //    if (enablePressEvent)
+  // if (enablePressEvent)
   close();
 }
 
@@ -354,8 +354,8 @@ void BalloonTip::timerEvent(QTimerEvent *e) {
     if (!underMouse()) close();
     return;
   }
-  //    if (e->timerId() == eventTimerId)
-  //        enablePressEvent = true;
+  // if (e->timerId() == eventTimerId)
+  //    enablePressEvent = true;
   QWidget::timerEvent(e);
 }
 
