@@ -1,5 +1,6 @@
 #include "Method.h"
 
+#include "BalloonTip.h"
 #include "dlgdatabase.h"
 #include "filesystemwatcher.h"
 #include "mainwindow.h"
@@ -2164,4 +2165,45 @@ bool Method::isKeyExists(QString plistFile, QString key) {
   }
 
   return false;
+}
+
+void Method::show_Tip(QString strText, QString strTip) {
+  QString str = strTip;
+  QStringList list = str.split("----");
+  if (list.count() == 2) {
+    if (!mw_one->zh_cn)
+      strTip = list.at(0);
+    else
+      strTip = list.at(1);
+  } else
+    strTip = str;
+  strTip = strTip.trimmed();
+  int ms = strTip.length() * 150;
+  qDebug() << ms / 1000;
+
+  int dir = 10;
+  QScreen* screen = QGuiApplication::primaryScreen();
+  QRect screenRect = screen->availableVirtualGeometry();
+  int w0 = screenRect.width();
+  int h0 = screenRect.height();
+  int w1, w2, h1, h2;
+  w1 = w0 * 0.33;
+  w2 = w0 * 0.66;
+  h1 = h0 * 0.33;
+  h2 = h0 * 0.66;
+
+  int x1 = QCursor::pos().x();
+  int y1 = QCursor::pos().y();
+
+  if (x1 < w1 && y1 < h1) dir = 10;
+  if (x1 > w1 && y1 < h1) dir = 2;
+  if (x1 < w1 && y1 > h2) dir = 7;
+  if (x1 > w2 && y1 > h2) dir = 4;
+  if (x1 < w1 && y1 > h1 && y1 < h2) dir = 9;
+  if (x1 > w1 && x1 < w2 & y1 < h1) dir = 12;
+  if (x1 > w2 && y1 > h1 && y1 < h2) dir = 3;
+  if (x1 > w1 && x1 < w2 && y1 > h2) dir = 6;
+
+  BalloonTip::showBalloon(QMessageBox::Information, strText, strTip,
+                          QCursor::pos(), ms, true, dir);
 }

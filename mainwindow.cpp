@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iterator>
 
+#include "BalloonTip.h"
 #include "Method.h"
 #include "Plist.hpp"
 #include "commands.h"
@@ -448,15 +449,15 @@ QString MainWindow::getKextVersion(QString kextFile) {
   QTextEdit* txtEdit = new QTextEdit;
   txtEdit->setPlainText(Method::loadText(strInfo));
   for (int i = 0; i < txtEdit->document()->lineCount(); i++) {
-      QString str0 = Method::getTextEditLineText(txtEdit, i).trimmed();
-      str0.replace("</key>", "");
-      str0.replace("<key>", "");
-      if (str0 == "CFBundleVersion") {
-          QString str1 = Method::getTextEditLineText(txtEdit, i + 1).trimmed();
-          str1.replace("<string>", "");
-          str1.replace("</string>", "");
-          return str1;
-      }
+    QString str0 = Method::getTextEditLineText(txtEdit, i).trimmed();
+    str0.replace("</key>", "");
+    str0.replace("<key>", "");
+    if (str0 == "CFBundleVersion") {
+      QString str1 = Method::getTextEditLineText(txtEdit, i + 1).trimmed();
+      str1.replace("<string>", "");
+      str1.replace("</string>", "");
+      return str1;
+    }
   }
 
   return "";
@@ -9883,12 +9884,15 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
 
       if (obj->metaObject()->className() == QStringLiteral("QLabel")) {
         QLabel* w = (QLabel*)obj;
-        myToolTip->popup(QCursor::pos(), w->text(), w->toolTip());
+
+        // myToolTip->popup(QCursor::pos(), w->text(), w->toolTip());
+        mymethod->show_Tip(w->text(), w->toolTip());
       }
 
       if (obj->metaObject()->className() == QStringLiteral("QCheckBox")) {
         QCheckBox* w = (QCheckBox*)obj;
-        myToolTip->popup(QCursor::pos(), w->text(), w->toolTip());
+        // myToolTip->popup(QCursor::pos(), w->text(), w->toolTip());
+        mymethod->show_Tip(w->text(), w->toolTip());
       }
 
       return true;  //不让事件继续传播

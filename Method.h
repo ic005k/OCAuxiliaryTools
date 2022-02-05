@@ -124,7 +124,8 @@ class Method : public QMainWindow {
   QString readPlist(QString plistFile, QString key);
   void writePlist(QString plistFile, QString key, QString value);
   bool isKeyExists(QString plistFile, QString key);
- public slots:
+  void show_Tip(QString strText, QString strTip);
+public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();
   void on_btnImportMaster();

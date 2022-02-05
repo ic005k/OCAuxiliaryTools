@@ -34,6 +34,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    BalloonTip.cpp \
     Method.cpp \
     Plist.cpp \
     PlistDate.cpp \
@@ -60,6 +61,7 @@ SOURCES += \
     tooltip.cpp
 
 HEADERS += \
+    BalloonTip.h \
     Method.h \
     Plist.hpp \
     PlistDate.hpp \
