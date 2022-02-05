@@ -29,6 +29,8 @@ OC辅助工具（简称OCAT或ocat） 是一个针对[OpenCore](https://github.c
 
 * AMD CPU BaseConfigs插件包和Quirks的预选，AMD内核补丁包，意大利语说明文档由 [@fabiosun](https://github.com/fabiosun) 提供并维护。
 
+* [OpenCore Auxiliary Tools使用指南(by @chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
+
 ---
 
 ### 特别感谢
