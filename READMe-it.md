@@ -34,6 +34,8 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per [Open
 
 * I contenuti dei Preset, quirk, BaseConfigs, AMD kernel patch preset per tutte le CPU AMD e la traduzione in Italiano di questo README sono forniti e mantenuti da [@fabiosun (macOS86.it)](https://github.com/macos86/QtOpenCoreConfig).
 
+* [Guida Utente OpenCore Auxiliary Tools (@chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
+* 
 ---
 
 ### Ringraziamenti speciali
