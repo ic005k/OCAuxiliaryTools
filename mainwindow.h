@@ -971,6 +971,8 @@ class MainWindow : public QMainWindow {
 
   void on_btnExport_clicked();
 
+  void on_actionDEBUG_triggered();
+
  private:
   bool isDrag;
   QPoint m_position;

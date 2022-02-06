@@ -48,21 +48,36 @@ void MainWindow::changeOpenCore(bool blDEV) {
     // Dev
   }
 
-  QFileInfo appInfo(qApp->applicationDirPath());
   if (!blDEV) {
-    dataBaseDir = appInfo.filePath() + "/Database/";
-    pathSource = dataBaseDir;
-    lblVer->setText("  OpenCore " + ocVer);
-    aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
-                                      " for OpenCore " + ocVer);
-    dlgSyncOC->ui->btnUpdateOC->setHidden(false);
+    dataBaseDir = strAppExePath + "/Database/";
+    if (!ui->actionDEBUG->isChecked()) {
+      pathSource = dataBaseDir;
+      lblVer->setText("  OpenCore " + ocVer);
+      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+                                        " for OpenCore " + ocVer);
+      dlgSyncOC->ui->btnUpdateOC->setHidden(false);
+    } else {
+      pathSource = dataBaseDir + "DEBUG/";
+      lblVer->setText("  OpenCore " + ocVer + " DEBUG");
+      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+                                        " for OpenCore " + ocVer + " DEBUG");
+      dlgSyncOC->ui->btnUpdateOC->setHidden(true);
+    }
   } else {
-    dataBaseDir = appInfo.filePath() + "/devDatabase/";
-    pathSource = dataBaseDir;
-    lblVer->setText("  OpenCore " + ocVerDev);
-    aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
-                                      " for OpenCore " + ocVerDev);
-    dlgSyncOC->ui->btnUpdateOC->setHidden(true);
+    dataBaseDir = strAppExePath + "/devDatabase/";
+    if (!ui->actionDEBUG->isChecked()) {
+      pathSource = dataBaseDir;
+      lblVer->setText("  OpenCore " + ocVerDev);
+      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+                                        " for OpenCore " + ocVerDev);
+      dlgSyncOC->ui->btnUpdateOC->setHidden(true);
+    } else {
+      pathSource = dataBaseDir + "DEBUG/";
+      lblVer->setText("  OpenCore " + ocVerDev + " DEBUG");
+      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+                                        " for OpenCore " + ocVerDev + " DEBUG");
+      dlgSyncOC->ui->btnUpdateOC->setHidden(true);
+    }
   }
 
   if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
@@ -6560,6 +6575,7 @@ void MainWindow::init_MainUI() {
   }
 
   ui->actionOpenCore_DEV->setChecked(Reg.value("OpenCoreDEV", 0).toBool());
+  ui->actionDEBUG->setChecked(Reg.value("DEBUG", 0).toBool());
   on_actionOpenCore_DEV_triggered();
 
   // Get windows position
@@ -8009,14 +8025,13 @@ void MainWindow::on_table_dp_del_cellDoubleClicked(int row, int column) {
 }
 
 void MainWindow::on_actionNewWindow_triggered() {
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString pathSource = appInfo.filePath() + "/OCAuxiliaryTools";
+  QString path = strAppExePath + "/OCAuxiliaryTools";
   QStringList arguments;
   QString fn = "";
   arguments << fn;
   QProcess* process = new QProcess;
   process->setEnvironment(process->environment());
-  process->start(pathSource, arguments);
+  process->start(path, arguments);
 }
 
 /* 获取所有控件 */
@@ -11067,6 +11082,7 @@ void MainWindow::on_actionOpenCore_DEV_triggered() {
 
   QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("OpenCoreDEV", blDEV);
+  Reg.setValue("DEBUG", ui->actionDEBUG->isChecked());
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* e) {
@@ -11374,4 +11390,8 @@ void MainWindow::on_btnExport_clicked() {
   QString pname = ui->cboxSystemProductName->currentText();
   pname = pname.split(" ").at(0);
   mymethod->writePlist(plistFile, "ProductName", pname);
+}
+
+void MainWindow::on_actionDEBUG_triggered() {
+  on_actionOpenCore_DEV_triggered();
 }

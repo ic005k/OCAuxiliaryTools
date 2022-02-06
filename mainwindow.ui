@@ -11360,6 +11360,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionOcvalidate"/>
     <addaction name="actionUpgrade_OC"/>
     <addaction name="actionOpenCore_DEV"/>
+    <addaction name="actionDEBUG"/>
     <addaction name="separator"/>
     <addaction name="actionDatabase"/>
     <addaction name="actionOpen_database_directory"/>
@@ -11735,6 +11736,14 @@ QToolBar {border:none;}</string>
    </property>
    <property name="shortcut">
     <string>Del</string>
+   </property>
+  </action>
+  <action name="actionDEBUG">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>OpenCore DEBUG</string>
    </property>
   </action>
  </widget>

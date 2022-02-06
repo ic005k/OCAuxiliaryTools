@@ -7,7 +7,7 @@
 
 extern MainWindow* mw_one;
 extern QString strAppName, strIniFile;
-QString CurVerison = "20220120";
+QString CurVerison = "20220121";
 QString ocVer = "0.7.7";
 QString ocVerDev = "0.7.8";
 QString ocFrom, ocFromDev, strOCFrom, strOCFromDev;
@@ -35,7 +35,7 @@ aboutDialog::aboutDialog(QWidget* parent)
   setMinimumWidth(this->width());
   setMinimumHeight(this->height());
 
-  ocVerDev = ocVerDev + " DEBUG [" + tr("DEV") + "]";
+  ocVerDev = ocVerDev + " [" + tr("DEV") + "]";
   ocFromDev = "<a href=\"" + strOCFromDev + "\"" + "> " + tr(" Source ");
   ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
 

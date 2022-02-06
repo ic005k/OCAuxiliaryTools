@@ -35,7 +35,7 @@ class SyncOCDialog : public QDialog {
   bool eventFilter(QObject *o, QEvent *e);
   void initKextList();
   void readCheckStateINI();
-  void init_Sync_OC();
+
   void init_Sync_OC_Table();
 
  public slots:
