@@ -9938,8 +9938,13 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
       QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
       if (mouseEvent->button() == Qt::LeftButton) {
         if (blDEV) {
-          QUrl url(strOCFromDev);
-          QDesktopServices::openUrl(url);
+          if (myDlgPreference->ui->editOCDevSource->text().trimmed() == "") {
+            QUrl url(strOCFromDev);
+            QDesktopServices::openUrl(url);
+          } else {
+            QUrl url(myDlgPreference->ui->editOCDevSource->text().trimmed());
+            QDesktopServices::openUrl(url);
+          }
         } else {
           QUrl url(strOCFrom);
           QDesktopServices::openUrl(url);
