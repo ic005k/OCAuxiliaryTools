@@ -11353,8 +11353,8 @@ Enable this option to be able to see all the boot options when having multiple d
     <property name="title">
      <string>Edit</string>
     </property>
-    <addaction name="actionOpenCore_DEV"/>
     <addaction name="actionDEBUG"/>
+    <addaction name="actionOpenCore_DEV"/>
     <addaction name="separator"/>
     <addaction name="actionOcvalidate"/>
     <addaction name="actionUpgrade_OC"/>
