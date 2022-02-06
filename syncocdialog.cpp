@@ -735,7 +735,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
   repaint();
 
   // Resources
-  sourceResourcesDir = mw_one->pathSource + "EFI/OC/Resources/";
+  sourceResourcesDir = pathOldSource + "EFI/OC/Resources/";
   targetResourcesDir = DirName + "/OC/Resources/";
 
   // Read check status
