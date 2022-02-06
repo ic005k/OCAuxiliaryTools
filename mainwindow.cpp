@@ -52,15 +52,15 @@ void MainWindow::changeOpenCore(bool blDEV) {
     dataBaseDir = strAppExePath + "/Database/";
     if (!ui->actionDEBUG->isChecked()) {
       pathSource = dataBaseDir;
-      ocVer = ocVer.replace(" DEBUG", "");
+      ocVer = ocVer.replace(" " + tr("DEBUG"), "");
       lblVer->setText("  OpenCore " + ocVer);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVer);
       dlgSyncOC->ui->btnUpdateOC->setHidden(false);
     } else {
       pathSource = dataBaseDir + "DEBUG/";
-      ocVer = ocVer.replace(" DEBUG", "");
-      ocVer = ocVer + " DEBUG";
+      ocVer = ocVer.replace(" " + tr("DEBUG"), "");
+      ocVer = ocVer + " " + tr("DEBUG");
       lblVer->setText("  OpenCore " + ocVer);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVer);
@@ -70,15 +70,15 @@ void MainWindow::changeOpenCore(bool blDEV) {
     dataBaseDir = strAppExePath + "/devDatabase/";
     if (!ui->actionDEBUG->isChecked()) {
       pathSource = dataBaseDir;
-      ocVerDev = ocVerDev.replace(" DEBUG", "");
+      ocVerDev = ocVerDev.replace(" " + tr("DEBUG"), "");
       lblVer->setText("  OpenCore " + ocVerDev);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVerDev);
       dlgSyncOC->ui->btnUpdateOC->setHidden(true);
     } else {
       pathSource = dataBaseDir + "DEBUG/";
-      ocVerDev = ocVerDev.replace(" DEBUG", "");
-      ocVerDev = ocVerDev + " DEBUG";
+      ocVerDev = ocVerDev.replace(" " + tr("DEBUG"), "");
+      ocVerDev = ocVerDev + " " + tr("DEBUG");
       lblVer->setText("  OpenCore " + ocVerDev);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVerDev);

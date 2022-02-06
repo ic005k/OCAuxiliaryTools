@@ -11353,20 +11353,20 @@ Enable this option to be able to see all the boot options when having multiple d
     <property name="title">
      <string>Edit</string>
     </property>
-    <addaction name="separator"/>
-    <addaction name="actionMountEsp"/>
-    <addaction name="actionBackup_EFI"/>
+    <addaction name="actionOpenCore_DEV"/>
+    <addaction name="actionDEBUG"/>
     <addaction name="separator"/>
     <addaction name="actionOcvalidate"/>
     <addaction name="actionUpgrade_OC"/>
-    <addaction name="actionOpenCore_DEV"/>
-    <addaction name="actionDEBUG"/>
     <addaction name="separator"/>
     <addaction name="actionDatabase"/>
     <addaction name="actionOpen_database_directory"/>
     <addaction name="actionUpgrade_Database"/>
     <addaction name="actionGenerateEFI"/>
     <addaction name="actionEdit_Presets"/>
+    <addaction name="separator"/>
+    <addaction name="actionMountEsp"/>
+    <addaction name="actionBackup_EFI"/>
     <addaction name="separator"/>
     <addaction name="btnExportMaster"/>
     <addaction name="btnImportMaster"/>
@@ -11528,7 +11528,7 @@ QToolBar {border:none;}</string>
   </action>
   <action name="actionMountEsp">
    <property name="text">
-    <string>MountESP</string>
+    <string>Mount ESP</string>
    </property>
   </action>
   <action name="actionOcvalidate">
@@ -11563,7 +11563,7 @@ QToolBar {border:none;}</string>
   </action>
   <action name="actionGenerateEFI">
    <property name="text">
-    <string>Generate EFI on the desktop</string>
+    <string>Generate EFI on the Desktop</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+E</string>
@@ -11576,7 +11576,7 @@ QToolBar {border:none;}</string>
   </action>
   <action name="actionOpen_database_directory">
    <property name="text">
-    <string>Open database directory</string>
+    <string>Open Database Directory</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+5</string>
@@ -11597,12 +11597,12 @@ QToolBar {border:none;}</string>
   </action>
   <action name="actionGo_to_the_previous">
    <property name="text">
-    <string>Go to the previous</string>
+    <string>Previous</string>
    </property>
   </action>
   <action name="actionGo_to_the_next">
    <property name="text">
-    <string>Go to the next</string>
+    <string>Next</string>
    </property>
   </action>
   <action name="actionBug_Report">
@@ -11628,7 +11628,7 @@ QToolBar {border:none;}</string>
   </action>
   <action name="actionUpgrade_OC">
    <property name="text">
-    <string>Synchronize OC main program</string>
+    <string>Synchronize OC Main Program</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+6</string>
@@ -11670,7 +11670,7 @@ QToolBar {border:none;}</string>
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Automatically check for updates</string>
+    <string>Automatically Check for Updates</string>
    </property>
   </action>
   <action name="actionEdit_Presets">
