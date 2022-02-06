@@ -11,7 +11,7 @@
 
 extern MainWindow *mw_one;
 extern Method *mymethod;
-extern QString SaveFileName, strIniFile, strAppName;
+extern QString SaveFileName, strIniFile, strAppName, ocFromDev, strOCFromDev;
 extern bool blDEV;
 
 dlgPreference::dlgPreference(QWidget *parent)
@@ -33,6 +33,7 @@ dlgPreference::dlgPreference(QWidget *parent)
       QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
 
   QSettings Reg(strIniFile, QSettings::IniFormat);
+  ui->editOCDevSource->setText(Reg.value("DevSource").toString());
   QFileInfo fi(strIniFile);
   QString strDef = "https://ghproxy.com/https://github.com/";
   QLocale locale;
@@ -73,6 +74,15 @@ dlgPreference::~dlgPreference() { delete ui; }
 void dlgPreference::closeEvent(QCloseEvent *event) {
   Q_UNUSED(event);
   saveKextUrl();
+
+  QString txt = ui->editOCDevSource->text().trimmed();
+  QSettings Reg(strIniFile, QSettings::IniFormat);
+  Reg.setValue("DevSource", txt);
+  if (txt != "")
+    ocFromDev = "<a href=\"" + txt + "\"" + "> " + tr(" Source ");
+  else
+    ocFromDev = "<a href=\"" + strOCFromDev + "\"" + "> " + tr(" Source ");
+  if (blDEV) mw_one->dlgSyncOC->ui->lblOCFrom->setText(ocFromDev);
 }
 
 void dlgPreference::keyPressEvent(QKeyEvent *event) {

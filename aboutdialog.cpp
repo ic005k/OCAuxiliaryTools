@@ -17,27 +17,36 @@ aboutDialog::aboutDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::aboutDialog) {
   ui->setupUi(this);
 
-  strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/latest";
   strOCFromDev =
       "https://github.com/acidanthera/OpenCorePkg/actions/runs/1797540408/";
 
+  strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/latest";
+  ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
+
   strIniFile =
       QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
-
   QSettings Reg(strIniFile, QSettings::IniFormat);
   QString ver = Reg.value("ocVer").toString();
   if (ver > ocVer) {
     ocVer = ver;
+  }
+  ver = Reg.value("ocVerDev").toString();
+  if (ver > ocVerDev) {
+    ocVerDev = ver;
+  }
+
+  QString DevSource = Reg.value("DevSource").toString();
+  if (DevSource.trimmed() == "") {
+    ocFromDev = "<a href=\"" + strOCFromDev + "\"" + "> " + tr(" Source ");
+  } else {
+    ocFromDev =
+        "<a href=\"" + DevSource.trimmed() + "\"" + "> " + tr(" Source ");
   }
 
   setMaximumWidth(this->width());
   setMaximumHeight(this->height());
   setMinimumWidth(this->width());
   setMinimumHeight(this->height());
-
-  ocVerDev = ocVerDev + " [" + tr("DEV") + "]";
-  ocFromDev = "<a href=\"" + strOCFromDev + "\"" + "> " + tr(" Source ");
-  ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
 
   ui->label->setFixedHeight(85);
   ui->label->setFixedWidth(85);

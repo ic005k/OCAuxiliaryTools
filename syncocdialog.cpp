@@ -715,8 +715,6 @@ void SyncOCDialog::init_Sync_OC_Table() {
     setWindowTitle(tr("Sync OC") + " -> " + ocVerDev);
   }
 
-  // dlgSyncOC->setWindowFlags(dlgAutoUpdate->windowFlags() |
-  //                           Qt::WindowStaysOnTopHint);
   setModal(true);
   show();
   ui->listKexts->setFocus();
@@ -763,6 +761,18 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
     box.exec();
     return;
   }
+
+  QString DevSource =
+      mw_one->myDlgPreference->ui->editOCDevSource->text().trimmed();
+  if (DevSource == "") {
+    QMessageBox box;
+    box.setText(
+        tr("Please enter the OpenCore development version update source in the "
+           "preferences."));
+    box.exec();
+    return;
+  }
+
   isCheckOC = true;
   mymethod->blBreak = false;
   mymethod->isReply = false;
@@ -788,9 +798,13 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
                        ui->btnUpdateOC->width(), ui->btnUpdateOC->height());
   progBar->show();
 
-  QString test = "https://github.com/acidanthera/OpenCorePkg";
+  QString ocUrl;
+  if (!blDEV)
+    ocUrl = "https://github.com/acidanthera/OpenCorePkg";
+  else
+    ocUrl = DevSource;
   if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
-    mymethod->getLastReleaseFromUrl(test);
+    mymethod->getLastReleaseFromUrl(ocUrl);
   if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
-    mymethod->getLastReleaseFromHtml(test + "/releases/latest");
+    mymethod->getLastReleaseFromHtml(ocUrl + "/releases/latest");
 }

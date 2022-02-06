@@ -10,7 +10,10 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-extern QString SaveFileName, ocVer, strIniFile, strAppName;
+extern QString SaveFileName, strIniFile, strAppName;
+extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
+    strOCFromDev;
+extern bool blDEV;
 
 QString strACPI;
 QString strKexts;
@@ -381,10 +384,12 @@ void Method::updateOpenCore() {
     Results.append(mw_one->copyDirectoryFiles(strSEFI, strTEFI, true));
 
     if (!mw_one->ui->actionDEBUG->isChecked()) {
+      // ACPI
       QString strSacpi = tempDir + "Docs/AcpiSamples/Binaries/";
       QString strTacpi = mw_one->dataBaseDir + "EFI/OC/ACPI/";
       Results.append(mw_one->copyDirectoryFiles(strSacpi, strTacpi, true));
 
+      // Doc
       Results.append(mw_one->copyFileToPath(
           tempDir + "Docs/Configuration.pdf",
           mw_one->dataBaseDir + "doc/Configuration.pdf", true));
@@ -392,6 +397,7 @@ void Method::updateOpenCore() {
           tempDir + "Docs/Differences.pdf",
           mw_one->dataBaseDir + "doc/Differences.pdf", true));
 
+      // Sample-plist
       Results.append(mw_one->copyFileToPath(
           tempDir + "Docs/Sample.plist",
           mw_one->dataBaseDir + "BaseConfigs/Sample.plist", true));
@@ -399,36 +405,57 @@ void Method::updateOpenCore() {
           tempDir + "Docs/SampleCustom.plist",
           mw_one->dataBaseDir + "BaseConfigs/SampleCustom.plist", true));
 
+      // OC Validate
       Results.append(
           mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate",
                                  mw_one->dataBaseDir + "mac/ocvalidate", true));
       Results.append(mw_one->copyFileToPath(
           tempDir + "Utilities/ocvalidate/ocvalidate.exe",
           mw_one->dataBaseDir + "win/ocvalidate.exe", true));
-      Results.append(mw_one->copyFileToPath(
-          tempDir + "Utilities/ocvalidate/ocvalidate.linux",
-          mw_one->dataBaseDir + "linux/ocvalidate", true));
 
+      if (!blDEV)
+        Results.append(mw_one->copyFileToPath(
+            tempDir + "Utilities/ocvalidate/ocvalidate.linux",
+            mw_one->dataBaseDir + "linux/ocvalidate", true));
+      else
+        mw_one->copyFileToPath(
+            tempDir + "Utilities/ocvalidate/ocvalidate.linux",
+            mw_one->dataBaseDir + "linux/ocvalidate", true);
+
+      // Mac Serial
       Results.append(
           mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial",
                                  mw_one->dataBaseDir + "mac/macserial", true));
       Results.append(mw_one->copyFileToPath(
           tempDir + "Utilities/macserial/macserial.exe",
           mw_one->dataBaseDir + "win/macserial.exe", true));
-      Results.append(mw_one->copyFileToPath(
-          tempDir + "Utilities/macserial/macserial.linux",
-          mw_one->dataBaseDir + "linux/macserial", true));
 
+      if (!blDEV)
+        Results.append(mw_one->copyFileToPath(
+            tempDir + "Utilities/macserial/macserial.linux",
+            mw_one->dataBaseDir + "linux/macserial", true));
+      else
+        mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial.linux",
+                               mw_one->dataBaseDir + "linux/macserial", true);
+
+      // OC Password Gen
       Results.append(mw_one->copyFileToPath(
           tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
           mw_one->dataBaseDir + "mac/ocpasswordgen", true));
       Results.append(mw_one->copyFileToPath(
           tempDir + "Utilities/ocpasswordgen/ocpasswordgen.exe",
           mw_one->dataBaseDir + "win/ocpasswordgen.exe", true));
-      Results.append(mw_one->copyFileToPath(
-          tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
-          mw_one->dataBaseDir + "linux/ocpasswordgen", true));
 
+      if (!blDEV)
+        Results.append(mw_one->copyFileToPath(
+            tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
+            mw_one->dataBaseDir + "linux/ocpasswordgen", true));
+      else
+        mw_one->copyFileToPath(
+            tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
+            mw_one->dataBaseDir + "linux/ocpasswordgen", true);
+
+      // Create Vault
       Results.append(mw_one->copyDirectoryFiles(
           tempDir + "/Utilities/CreateVault/",
           mw_one->dataBaseDir + "mac/CreateVault/", true));
@@ -438,6 +465,7 @@ void Method::updateOpenCore() {
     for (int i = 0; i < Results.count(); i++) {
       if (Results.at(i) == false) isDo = false;
     }
+
     if (isDo) {
       QString file = filename;
       QStringList list = file.split("-");
@@ -447,22 +475,34 @@ void Method::updateOpenCore() {
       }
 
       QSettings Reg(strIniFile, QSettings::IniFormat);
-      Reg.setValue("ocVer", ver);
-      if (ver > ocVer) {
+      if (!blDEV) {
+        Reg.setValue("ocVer", ver);
+
         ocVer = ver;
-        mw_one->lblVer->setText("  OpenCore " + ocVer);
-        mw_one->isUseDevOption = true;
-      } else
-        mw_one->isUseDevOption = false;
-      Reg.setValue("UseDevOption", mw_one->isUseDevOption);
+        if (ver > ocVer) {
+          mw_one->isUseDevOption = true;
+        } else
+          mw_one->isUseDevOption = false;
+        Reg.setValue("UseDevOption", mw_one->isUseDevOption);
+      } else {
+        Reg.setValue("ocVerDev", ver);
+        ocVerDev = ver;
+      }
 
       mw_one->dlgSyncOC->writeCheckStateINI();
       mw_one->dlgSyncOC->init_Sync_OC_Table();
 
+      mw_one->changeOpenCore(blDEV);
+
       QMessageBox box;
-      box.setText(
-          tr("The OpenCore database has been successfully upgraded to") + "  " +
-          ocVer);
+      if (!blDEV)
+        box.setText(
+            tr("The OpenCore database has been successfully upgraded to") +
+            "  " + ocVer);
+      else
+        box.setText(
+            tr("The OpenCore database has been successfully upgraded to") +
+            "  " + ocVerDev);
       box.exec();
     }
   }

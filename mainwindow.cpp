@@ -76,13 +76,16 @@ void MainWindow::changeOpenCore(bool blDEV) {
     else
       dataBaseDir = QDir::homePath() + +"/devDatabase/";
 
+    ocVerDev = ocVerDev.replace(" [" + tr("DEV") + "]", "");
+    ocVerDev = ocVerDev + " [" + tr("DEV") + "]";
+
     if (!ui->actionDEBUG->isChecked()) {
       pathSource = dataBaseDir;
       ocVerDev = ocVerDev.replace(" " + tr("DEBUG"), "");
       lblVer->setText("  OpenCore " + ocVerDev);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVerDev);
-      dlgSyncOC->ui->btnUpdateOC->setHidden(true);
+      dlgSyncOC->ui->btnUpdateOC->setHidden(false);
     } else {
       pathSource = dataBaseDir + "DEBUG/";
       ocVerDev = ocVerDev.replace(" " + tr("DEBUG"), "");
@@ -90,7 +93,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
       lblVer->setText("  OpenCore " + ocVerDev);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVerDev);
-      dlgSyncOC->ui->btnUpdateOC->setHidden(true);
+      dlgSyncOC->ui->btnUpdateOC->setHidden(false);
     }
   }
 
