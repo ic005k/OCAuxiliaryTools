@@ -1950,7 +1950,7 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
     </message>
     <message>
         <location filename="mainwindow.ui" line="11707"/>
-        <location filename="mainwindow.cpp" line="11128"/>
+        <location filename="mainwindow.cpp" line="11133"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
@@ -2556,8 +2556,8 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8608"/>
-        <location filename="mainwindow.cpp" line="10364"/>
         <location filename="mainwindow.cpp" line="10369"/>
+        <location filename="mainwindow.cpp" line="10374"/>
         <source>Select date</source>
         <translation>选择日期</translation>
     </message>
@@ -4311,8 +4311,8 @@ Speed</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="11360"/>
-        <location filename="mainwindow.cpp" line="11390"/>
+        <location filename="mainwindow.cpp" line="11365"/>
+        <location filename="mainwindow.cpp" line="11395"/>
         <source>This is not a valid Clover configuration file.</source>
         <translation>这不是一个有效的Clover配置文件。</translation>
     </message>
@@ -4455,8 +4455,8 @@ Speed</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="90"/>
-        <location filename="mainwindow.cpp" line="10366"/>
-        <location filename="mainwindow.cpp" line="10367"/>
+        <location filename="mainwindow.cpp" line="10371"/>
+        <location filename="mainwindow.cpp" line="10372"/>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
@@ -4671,79 +4671,80 @@ Type</translation>
 <context>
     <name>Method</name>
     <message>
-        <location filename="Method.cpp" line="537"/>
+        <location filename="Method.cpp" line="535"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
     </message>
     <message>
         <location filename="Method.cpp" line="85"/>
-        <location filename="Method.cpp" line="573"/>
-        <source>Network error!</source>
-        <translation>网络错误！</translation>
+        <location filename="Method.cpp" line="571"/>
+        <source>Network or URL error!</source>
+        <oldsource>Network error!</oldsource>
+        <translation>网络或网址错误！</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="500"/>
-        <location filename="Method.cpp" line="504"/>
+        <location filename="Method.cpp" line="498"/>
+        <location filename="Method.cpp" line="502"/>
         <source>The OpenCore database has been successfully upgraded to</source>
         <translation>OpenCore数据库已成功升级到</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="685"/>
+        <location filename="Method.cpp" line="683"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="701"/>
+        <location filename="Method.cpp" line="699"/>
         <source>None</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1147"/>
+        <location filename="Method.cpp" line="1145"/>
         <source>From</source>
         <translation>来自</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1150"/>
-        <location filename="Method.cpp" line="1156"/>
+        <location filename="Method.cpp" line="1148"/>
+        <location filename="Method.cpp" line="1154"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1152"/>
+        <location filename="Method.cpp" line="1150"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1174"/>
+        <location filename="Method.cpp" line="1172"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1175"/>
-        <location filename="Method.cpp" line="1237"/>
+        <location filename="Method.cpp" line="1173"/>
+        <location filename="Method.cpp" line="1235"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1236"/>
+        <location filename="Method.cpp" line="1234"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1661"/>
+        <location filename="Method.cpp" line="1659"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1666"/>
+        <location filename="Method.cpp" line="1664"/>
         <source>Cannot open file %1 for writing:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1823"/>
+        <location filename="Method.cpp" line="1821"/>
         <source>The EFI directory is incomplete and the backup cannot be completed. Please check if the [EFI/OC] and [EFI/OC/Drivers] directories exist?</source>
         <translation>EFI目录不完整，无法完成备份。请检查“EFI/OC”和“EFI/OC/Drivers”目录是否存在？</translation>
     </message>
@@ -4751,55 +4752,55 @@ Type</translation>
 <context>
     <name>QInstaller</name>
     <message>
-        <location filename="Method.cpp" line="1499"/>
+        <location filename="Method.cpp" line="1497"/>
         <location filename="autoupdatedialog.cpp" line="321"/>
         <source>bytes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1500"/>
+        <location filename="Method.cpp" line="1498"/>
         <location filename="autoupdatedialog.cpp" line="322"/>
         <source>KiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1501"/>
+        <location filename="Method.cpp" line="1499"/>
         <location filename="autoupdatedialog.cpp" line="323"/>
         <source>MiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1502"/>
+        <location filename="Method.cpp" line="1500"/>
         <location filename="autoupdatedialog.cpp" line="324"/>
         <source>GiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1503"/>
+        <location filename="Method.cpp" line="1501"/>
         <location filename="autoupdatedialog.cpp" line="325"/>
         <source>TiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1504"/>
+        <location filename="Method.cpp" line="1502"/>
         <location filename="autoupdatedialog.cpp" line="326"/>
         <source>PiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1505"/>
+        <location filename="Method.cpp" line="1503"/>
         <location filename="autoupdatedialog.cpp" line="327"/>
         <source>EiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1506"/>
+        <location filename="Method.cpp" line="1504"/>
         <location filename="autoupdatedialog.cpp" line="328"/>
         <source>ZiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1507"/>
+        <location filename="Method.cpp" line="1505"/>
         <location filename="autoupdatedialog.cpp" line="329"/>
         <source>YiB</source>
         <translation></translation>
@@ -4968,13 +4969,13 @@ Type</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="288"/>
-        <location filename="syncocdialog.cpp" line="752"/>
+        <location filename="syncocdialog.cpp" line="750"/>
         <source>Current File: </source>
         <translation>当前文件：</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="290"/>
-        <location filename="syncocdialog.cpp" line="754"/>
+        <location filename="syncocdialog.cpp" line="752"/>
         <source>Available File: </source>
         <translation>可用文件：</translation>
     </message>
@@ -4989,14 +4990,14 @@ Type</translation>
         <translation>数据库文件不完整，无法完成升级。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="761"/>
+        <location filename="syncocdialog.cpp" line="759"/>
         <source>Kexts update check is in progress, please wait for it to complete.</source>
         <translation>Kexts更新检查正在进行中，请等待它完成。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="772"/>
+        <location filename="syncocdialog.cpp" line="770"/>
         <source>Please enter the OpenCore development version update source in the preferences.</source>
-        <translation type="unfinished">请在偏好设置中输入OpenCore开发版的更新源。</translation>
+        <translation>请在偏好设置中输入OpenCore开发版的更新源。</translation>
     </message>
 </context>
 <context>
@@ -5018,14 +5019,15 @@ Type</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="60"/>
-        <location filename="aboutdialog.cpp" line="63"/>
+        <location filename="aboutdialog.cpp" line="61"/>
+        <location filename="aboutdialog.cpp" line="64"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="aboutdialog.cpp" line="47"/>
-        <location filename="aboutdialog.cpp" line="48"/>
+        <location filename="aboutdialog.cpp" line="24"/>
+        <location filename="aboutdialog.cpp" line="40"/>
+        <location filename="aboutdialog.cpp" line="43"/>
         <source> Source </source>
         <oldsource>Source</oldsource>
         <translation>来源</translation>
@@ -5571,77 +5573,82 @@ Type</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="249"/>
+        <location filename="dlgpreference.ui" line="253"/>
         <source>Additional Options</source>
         <translation>附加选项</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="255"/>
+        <location filename="dlgpreference.ui" line="259"/>
         <source>Automatically open the last opened file</source>
         <translation>自动打开上次打开的文件</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="262"/>
+        <location filename="dlgpreference.ui" line="266"/>
         <source>Show all volume names when mounting ESP</source>
         <translation>挂载ESP时显示所有的卷标名称</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="174"/>
+        <location filename="dlgpreference.ui" line="178"/>
         <source>UI Appearance (effective after the next app opening)</source>
         <translation>UI外观（下次打开APP时生效）</translation>
     </message>
     <message>
         <location filename="dlgpreference.ui" line="161"/>
         <source>OpenCore development version update source</source>
-        <translation type="unfinished">OpenCore开发版的更新源</translation>
+        <translation>OpenCore开发版的更新源</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="180"/>
+        <location filename="dlgpreference.ui" line="168"/>
+        <source>For example: https://github.com/dortania/build-repo</source>
+        <translation>例如：https://github.com/dortania/build-repo</translation>
+    </message>
+    <message>
+        <location filename="dlgpreference.ui" line="184"/>
         <source>Toolbar button</source>
         <translation>工具栏按钮</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="186"/>
+        <location filename="dlgpreference.ui" line="190"/>
         <source>Recently Open</source>
         <translation>最近打开</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="196"/>
+        <location filename="dlgpreference.ui" line="200"/>
         <source>Browse Catalog</source>
         <translation>浏览目录</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="206"/>
+        <location filename="dlgpreference.ui" line="210"/>
         <source>Mount ESP</source>
         <translation>挂载ESP</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="216"/>
+        <location filename="dlgpreference.ui" line="220"/>
         <source>Backup EFI</source>
         <translation>备份EFI</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="226"/>
+        <location filename="dlgpreference.ui" line="230"/>
         <source>Database</source>
         <translation>数据库</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="239"/>
+        <location filename="dlgpreference.ui" line="243"/>
         <source>Hide Toolbar</source>
         <translation>隐藏工具栏</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="273"/>
+        <location filename="dlgpreference.ui" line="277"/>
         <source>Kext Upgrade URL</source>
         <translation>Kext升级网址</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="279"/>
+        <location filename="dlgpreference.ui" line="283"/>
         <source>+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="289"/>
+        <location filename="dlgpreference.ui" line="293"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -5650,27 +5657,28 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="320"/>
+        <location filename="dlgpreference.ui" line="324"/>
         <source>Kext Name</source>
         <translation>Kext名称</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="325"/>
+        <location filename="dlgpreference.ui" line="329"/>
         <source>Source URL</source>
         <translation>网址</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="333"/>
+        <location filename="dlgpreference.ui" line="337"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="340"/>
+        <location filename="dlgpreference.ui" line="344"/>
         <source>Open URL in browser</source>
         <translation>打开网址</translation>
     </message>
     <message>
         <location filename="dlgpreference.cpp" line="82"/>
+        <location filename="dlgpreference.cpp" line="84"/>
         <source> Source </source>
         <translation>来源</translation>
     </message>

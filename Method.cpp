@@ -82,7 +82,7 @@ QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
   QString code = reply->readAll();
   if (code == "") {
     mw_one->dlgSyncOC->on_btnStop_clicked();
-    QMessageBox::critical(this, "", tr("Network error!"));
+    QMessageBox::critical(this, "", tr("Network or URL error!"));
 
     return "";
   }
@@ -568,7 +568,7 @@ void Method::parse_UpdateJSON(QString str) {
 
   if (err_rpt.error != QJsonParseError::NoError) {
     mw_one->dlgSyncOC->on_btnStop_clicked();
-    QMessageBox::critical(this, "", tr("Network error!"));
+    QMessageBox::critical(this, "", tr("Network or URL error!"));
 
     return;
   }
@@ -612,7 +612,8 @@ void Method::parse_UpdateJSON(QString str) {
   strDLInfoList = QStringList() << Verison << strDLUrl;
   qDebug() << strDLInfoList.at(0) << strDLInfoList.at(1);
   if (strDLUrl == "") {
-    blBreak = true;
+    mw_one->dlgSyncOC->on_btnStop_clicked();
+    QMessageBox::critical(this, "", tr("Network or URL error!"));
 
     return;
   }

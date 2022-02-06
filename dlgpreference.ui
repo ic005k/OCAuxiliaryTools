@@ -163,7 +163,11 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="editOCDevSource"/>
+           <widget class="QLineEdit" name="editOCDevSource">
+            <property name="placeholderText">
+             <string>For example: https://github.com/dortania/build-repo</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
