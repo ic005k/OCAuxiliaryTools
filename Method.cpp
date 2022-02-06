@@ -372,61 +372,67 @@ void Method::updateOpenCore() {
       mw_one->strAppExePath = appPathBak;
 
     QString strSEFI = tempDir + "X64/EFI/";
-    QString strTEFI = mw_one->strAppExePath + "/Database/EFI/";
+    QString strTEFI;
+    if (!mw_one->ui->actionDEBUG->isChecked())
+      strTEFI = mw_one->dataBaseDir + "EFI/";
+    else
+      strTEFI = mw_one->dataBaseDir + "DEBUG/EFI/";
+
     Results.append(mw_one->copyDirectoryFiles(strSEFI, strTEFI, true));
 
-    QString strSacpi = tempDir + "Docs/AcpiSamples/Binaries/";
-    QString strTacpi = mw_one->strAppExePath + "/Database/EFI/OC/ACPI/";
-    Results.append(mw_one->copyDirectoryFiles(strSacpi, strTacpi, true));
+    if (!mw_one->ui->actionDEBUG->isChecked()) {
+      QString strSacpi = tempDir + "Docs/AcpiSamples/Binaries/";
+      QString strTacpi = mw_one->dataBaseDir + "EFI/OC/ACPI/";
+      Results.append(mw_one->copyDirectoryFiles(strSacpi, strTacpi, true));
 
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Docs/Configuration.pdf",
-        mw_one->strAppExePath + "/Database/doc/Configuration.pdf", true));
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Docs/Differences.pdf",
-        mw_one->strAppExePath + "/Database/doc/Differences.pdf", true));
+      Results.append(mw_one->copyFileToPath(
+          tempDir + "Docs/Configuration.pdf",
+          mw_one->dataBaseDir + "doc/Configuration.pdf", true));
+      Results.append(mw_one->copyFileToPath(
+          tempDir + "Docs/Differences.pdf",
+          mw_one->dataBaseDir + "doc/Differences.pdf", true));
 
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Docs/Sample.plist",
-        mw_one->strAppExePath + "/Database/BaseConfigs/Sample.plist", true));
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Docs/SampleCustom.plist",
-        mw_one->strAppExePath + "/Database/BaseConfigs/SampleCustom.plist",
-        true));
+      Results.append(mw_one->copyFileToPath(
+          tempDir + "Docs/Sample.plist",
+          mw_one->dataBaseDir + "BaseConfigs/Sample.plist", true));
+      Results.append(mw_one->copyFileToPath(
+          tempDir + "Docs/SampleCustom.plist",
+          mw_one->dataBaseDir + "BaseConfigs/SampleCustom.plist", true));
 
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/ocvalidate/ocvalidate",
-        mw_one->strAppExePath + "/Database/mac/ocvalidate", true));
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/ocvalidate/ocvalidate.exe",
-        mw_one->strAppExePath + "/Database/win/ocvalidate.exe", true));
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/ocvalidate/ocvalidate.linux",
-        mw_one->strAppExePath + "/Database/linux/ocvalidate", true));
+      Results.append(
+          mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate",
+                                 mw_one->dataBaseDir + "mac/ocvalidate", true));
+      Results.append(mw_one->copyFileToPath(
+          tempDir + "Utilities/ocvalidate/ocvalidate.exe",
+          mw_one->dataBaseDir + "win/ocvalidate.exe", true));
+      Results.append(mw_one->copyFileToPath(
+          tempDir + "Utilities/ocvalidate/ocvalidate.linux",
+          mw_one->dataBaseDir + "linux/ocvalidate", true));
 
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/macserial/macserial",
-        mw_one->strAppExePath + "/Database/mac/macserial", true));
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/macserial/macserial.exe",
-        mw_one->strAppExePath + "/Database/win/macserial.exe", true));
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/macserial/macserial.linux",
-        mw_one->strAppExePath + "/Database/linux/macserial", true));
+      Results.append(
+          mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial",
+                                 mw_one->dataBaseDir + "mac/macserial", true));
+      Results.append(mw_one->copyFileToPath(
+          tempDir + "Utilities/macserial/macserial.exe",
+          mw_one->dataBaseDir + "win/macserial.exe", true));
+      Results.append(mw_one->copyFileToPath(
+          tempDir + "Utilities/macserial/macserial.linux",
+          mw_one->dataBaseDir + "linux/macserial", true));
 
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
-        mw_one->strAppExePath + "/Database/mac/ocpasswordgen", true));
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/ocpasswordgen/ocpasswordgen.exe",
-        mw_one->strAppExePath + "/Database/win/ocpasswordgen.exe", true));
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
-        mw_one->strAppExePath + "/Database/linux/ocpasswordgen", true));
+      Results.append(mw_one->copyFileToPath(
+          tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
+          mw_one->dataBaseDir + "mac/ocpasswordgen", true));
+      Results.append(mw_one->copyFileToPath(
+          tempDir + "Utilities/ocpasswordgen/ocpasswordgen.exe",
+          mw_one->dataBaseDir + "win/ocpasswordgen.exe", true));
+      Results.append(mw_one->copyFileToPath(
+          tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
+          mw_one->dataBaseDir + "linux/ocpasswordgen", true));
 
-    Results.append(mw_one->copyDirectoryFiles(
-        tempDir + "/Utilities/CreateVault/",
-        mw_one->strAppExePath + "/Database/mac/CreateVault/", true));
+      Results.append(mw_one->copyDirectoryFiles(
+          tempDir + "/Utilities/CreateVault/",
+          mw_one->dataBaseDir + "mac/CreateVault/", true));
+    }
 
     bool isDo = true;
     for (int i = 0; i < Results.count(); i++) {
@@ -544,11 +550,21 @@ void Method::parse_UpdateJSON(QString str) {
     for (int i = 0; i < strDownloadUrlList.count(); i++) {
       if (strDownloadUrlList.count() > 1) {
         QString str = strDownloadUrlList.at(i);
-        if (str.contains("RELEASE"))
-          strDLUrl = str;
-        else {
-          QString str_n = kextName;
-          if (str.contains(str_n.replace(".kext", ""))) strDLUrl = str;
+        if (!mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled()) {
+          if (str.contains("RELEASE"))
+            strDLUrl = str;
+          else {
+            QString str_n = kextName;
+            if (str.contains(str_n.replace(".kext", ""))) strDLUrl = str;
+          }
+        }
+
+        if (!mw_one->dlgSyncOC->ui->btnUpdateOC->isEnabled()) {
+          if (mw_one->ui->actionDEBUG->isChecked()) {
+            if (str.contains("DEBUG")) strDLUrl = str;
+          } else {
+            if (str.contains("RELEASE")) strDLUrl = str;
+          }
         }
       } else
         strDLUrl = strDownloadUrlList.at(0);
@@ -576,11 +592,21 @@ void Method::getLastReleaseFromHtml(QString url) {
   for (int i = 0; i < strDownloadUrlList.count(); i++) {
     if (strDownloadUrlList.count() > 1) {
       QString str = strDownloadUrlList.at(i);
-      if (str.contains("RELEASE"))
-        strDLUrl = str;
-      else {
-        QString str_n = kextName;
-        if (str.contains(str_n.replace(".kext", ""))) strDLUrl = str;
+      if (!mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled()) {
+        if (str.contains("RELEASE"))
+          strDLUrl = str;
+        else {
+          QString str_n = kextName;
+          if (str.contains(str_n.replace(".kext", ""))) strDLUrl = str;
+        }
+      }
+
+      if (!mw_one->dlgSyncOC->ui->btnUpdateOC->isEnabled()) {
+        if (mw_one->ui->actionDEBUG->isChecked()) {
+          if (str.contains("DEBUG")) strDLUrl = str;
+        } else {
+          if (str.contains("RELEASE")) strDLUrl = str;
+        }
       }
     } else
       strDLUrl = strDownloadUrlList.at(0);

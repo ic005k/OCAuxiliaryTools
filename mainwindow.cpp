@@ -64,7 +64,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
       lblVer->setText("  OpenCore " + ocVer);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVer);
-      dlgSyncOC->ui->btnUpdateOC->setHidden(true);
+      dlgSyncOC->ui->btnUpdateOC->setHidden(false);
     }
   } else {
     dataBaseDir = strAppExePath + "/devDatabase/";
