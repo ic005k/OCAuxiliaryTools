@@ -49,7 +49,11 @@ void MainWindow::changeOpenCore(bool blDEV) {
   }
 
   if (!blDEV) {
-    dataBaseDir = strAppExePath + "/Database/";
+    if (!linuxOS)
+      dataBaseDir = strAppExePath + "/Database/";
+    else
+      dataBaseDir = QDir::homePath() + +"/Database/";
+
     if (!ui->actionDEBUG->isChecked()) {
       pathSource = dataBaseDir;
       ocVer = ocVer.replace(" " + tr("DEBUG"), "");
@@ -67,7 +71,11 @@ void MainWindow::changeOpenCore(bool blDEV) {
       dlgSyncOC->ui->btnUpdateOC->setHidden(false);
     }
   } else {
-    dataBaseDir = strAppExePath + "/devDatabase/";
+    if (!linuxOS)
+      dataBaseDir = strAppExePath + "/devDatabase/";
+    else
+      dataBaseDir = QDir::homePath() + +"/devDatabase/";
+
     if (!ui->actionDEBUG->isChecked()) {
       pathSource = dataBaseDir;
       ocVerDev = ocVerDev.replace(" " + tr("DEBUG"), "");
