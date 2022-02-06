@@ -488,11 +488,9 @@ void Method::updateOpenCore() {
         Reg.setValue("ocVerDev", ver);
         ocVerDev = ver;
       }
-
+      mw_one->changeOpenCore(blDEV);
       mw_one->dlgSyncOC->writeCheckStateINI();
       mw_one->dlgSyncOC->init_Sync_OC_Table();
-
-      mw_one->changeOpenCore(blDEV);
 
       QMessageBox box;
       if (!blDEV)
