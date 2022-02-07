@@ -6328,6 +6328,12 @@ void MainWindow::init_EditMenu() {
   ui->actionDSDT_SSDT_editor->setVisible(true);
 
   // Edit
+  // Init Database for Linux
+  if (linuxOS)
+    ui->actionInitDatabaseLinux->setEnabled(true);
+  else
+    ui->actionInitDatabaseLinux->setEnabled(false);
+
   // OC Validate
   if (mac || osx1012) ui->actionOcvalidate->setIconVisibleInMenu(false);
 
@@ -6523,7 +6529,6 @@ void MainWindow::init_MainUI() {
   ui->btnNo->setDefault(true);
   ui->frameTip->setHidden(true);
 
-  // init_ToolButtonStyle();
   init_FileMenu();
   init_EditMenu();
   init_UndoRedo();
@@ -11416,4 +11421,14 @@ void MainWindow::on_btnExport_clicked() {
 
 void MainWindow::on_actionDEBUG_triggered() {
   on_actionOpenCore_DEV_triggered();
+}
+
+void MainWindow::on_actionInitDatabaseLinux_triggered() {
+  // Init Linux Database
+  if (linuxOS) {
+    copyDirectoryFiles(strAppExePath + "/Database/",
+                       QDir::homePath() + "/Database/", true);
+    copyDirectoryFiles(strAppExePath + "/devDatabase/",
+                       QDir::homePath() + "/devDatabase/", true);
+  }
 }

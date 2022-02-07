@@ -973,6 +973,8 @@ class MainWindow : public QMainWindow {
 
   void on_actionDEBUG_triggered();
 
+  void on_actionInitDatabaseLinux_triggered();
+
  private:
   bool isDrag;
   QPoint m_position;

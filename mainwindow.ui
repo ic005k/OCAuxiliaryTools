@@ -11359,6 +11359,7 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionOcvalidate"/>
     <addaction name="actionUpgrade_OC"/>
     <addaction name="separator"/>
+    <addaction name="actionInitDatabaseLinux"/>
     <addaction name="actionDatabase"/>
     <addaction name="actionOpen_database_directory"/>
     <addaction name="actionUpgrade_Database"/>
@@ -11744,6 +11745,11 @@ QToolBar {border:none;}</string>
    </property>
    <property name="text">
     <string>OpenCore DEBUG</string>
+   </property>
+  </action>
+  <action name="actionInitDatabaseLinux">
+   <property name="text">
+    <string>Initialize Database for Linux</string>
    </property>
   </action>
  </widget>
