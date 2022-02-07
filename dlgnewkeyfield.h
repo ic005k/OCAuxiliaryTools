@@ -24,8 +24,6 @@ class dlgNewKeyField : public QDialog {
  private slots:
   void on_btnAdd_clicked();
 
-  void on_btnRead_clicked();
-
  private:
 };
 

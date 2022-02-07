@@ -26,7 +26,7 @@ void dlgNewKeyField::on_btnAdd_clicked() {
 
   int main = mw_one->ui->listMain->currentRow();
   int sub = mw_one->ui->listSub->currentRow();
-  if (ui->cboxKeyType->currentText() == "bool") {
+  if (ui->cboxKeyType->currentText() == tr("bool")) {
     QString text = ui->editKeyName->text().trimmed();
     QString ObjectName = "chk" + text;
 
@@ -38,12 +38,14 @@ void dlgNewKeyField::on_btnAdd_clicked() {
   } else {
     QString ObjectName, text;
     text = ui->editKeyName->text().trimmed();
-    if (ui->cboxKeyType->currentText() == "string") ObjectName = "edit" + text;
+    if (ui->cboxKeyType->currentText() == tr("string"))
+      ObjectName = "edit" + text;
 
-    if (ui->cboxKeyType->currentText() == "integer")
+    if (ui->cboxKeyType->currentText() == tr("integer"))
       ObjectName = "editInt" + text;
 
-    if (ui->cboxKeyType->currentText() == "data") ObjectName = "editDat" + text;
+    if (ui->cboxKeyType->currentText() == tr("data"))
+      ObjectName = "editDat" + text;
     QWidget* tab = mymethod->getSubTabWidget(main, sub);
     add_LineEdit(tab, ObjectName, text);
     saveNewKey(ObjectName, main, sub);
@@ -187,8 +189,4 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   });
 
   tab->layout()->addWidget(frame);
-}
-
-void dlgNewKeyField::on_btnRead_clicked() {
-  // dlgNewKeyField::readNewKey();
 }
