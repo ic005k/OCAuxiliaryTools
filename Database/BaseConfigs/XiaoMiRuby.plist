@@ -211,7 +211,7 @@
                     <key>Arch</key>
                     <string>x86_64</string>
                     <key>BundlePath</key>
-                    <string>AirportItlwm-Monterey.kext</string>
+                    <string>AirportItlwm.kext</string>
                     <key>Comment</key>
                     <string>V2.2.0</string>
                     <key>Enabled</key>

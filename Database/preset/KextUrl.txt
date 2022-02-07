@@ -33,3 +33,5 @@ FeatureUnlock.kext | https://github.com/acidanthera/FeatureUnlock
 AMDRyzenCPUPowerManagement.kext | https://github.com/trulyspinach/SMCAMDProcessor
 SMCAMDProcessor.kext | https://github.com/trulyspinach/SMCAMDProcessor
 USBInjectAll.kext | https://github.com/daliansky/OS-X-USB-Inject-All
+IntelBluetoothFirmware.kext | https://github.com/OpenIntelWireless/IntelBluetoothFirmware
+AirportItlwm.kext | https://github.com/OpenIntelWireless/itlwm
