@@ -762,6 +762,9 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
     return;
   }
 
+  QString tempDir = QDir::homePath() + "/tempocat/";
+  mw_one->deleteDirfile(tempDir);
+
   QString DevSource =
       mw_one->myDlgPreference->ui->editOCDevSource->text().trimmed();
   if (DevSource == "") {

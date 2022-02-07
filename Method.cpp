@@ -502,6 +502,11 @@ void Method::updateOpenCore() {
             tr("The OpenCore database has been successfully upgraded to") +
             "  " + ocVerDev);
       box.exec();
+    } else {
+      QMessageBox::information(
+          this, "",
+          tr("No update is currently available, or please check the update "
+             "source for the OpenCore development version."));
     }
   }
 }
