@@ -503,10 +503,12 @@ void Method::updateOpenCore() {
             "  " + ocVerDev);
       box.exec();
     } else {
-      QMessageBox::information(
-          this, "",
-          tr("No update is currently available, or please check the update "
-             "source for the OpenCore development version."));
+      if (blDEV) {
+        QMessageBox::information(
+            this, "",
+            tr("No update is currently available, or please check the update "
+               "source for the OpenCore development version."));
+      }
     }
   }
 }

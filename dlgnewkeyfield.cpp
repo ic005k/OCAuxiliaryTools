@@ -161,6 +161,7 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   QAction* act = new QAction(tr("Delete"));
   menu->addAction(act);
   connect(act, &QAction::triggered, [=]() {
+    mw_one->ui->cboxFind->lineEdit()->clear();
     tab->layout()->removeWidget(frame);
     delete (frame);
 
@@ -220,6 +221,7 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   QAction* act = new QAction(tr("Delete"));
   menu->addAction(act);
   connect(act, &QAction::triggered, [=]() {
+    mw_one->ui->cboxFind->lineEdit()->clear();
     tab->layout()->removeWidget(frame);
     delete (frame);
 
