@@ -417,7 +417,6 @@ class MainWindow : public QMainWindow {
 
  private slots:
   void Target();
-
   void readResultPassHash();
   void clearFindTexts();
   void copyText(QListWidget* listW);

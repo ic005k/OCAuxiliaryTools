@@ -155,7 +155,6 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   QCheckBox* chk = new QCheckBox();
   chk->setText(text);
   chk->setObjectName(ObjectName);
-  hbox->addWidget(chk);
 
   chk->setContextMenuPolicy(Qt::CustomContextMenu);
   QMenu* menu = new QMenu();
@@ -164,6 +163,7 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   connect(act, &QAction::triggered, [=]() {
     tab->layout()->removeWidget(frame);
     delete (frame);
+
     QSettings Reg(strIniFile, QSettings::IniFormat);
     Reg.setValue("key" + ObjectName, "");
     mw_one->setWM();
@@ -173,6 +173,12 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
     Q_UNUSED(pos);
     menu->exec(QCursor::pos());
   });
+
+  QSpacerItem* hi =
+      new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+  // hbox->addItem(hi);
+  hbox->addWidget(chk);
+  // hbox->addItem(hi);
 
   tab->layout()->addWidget(frame);
 }
@@ -202,9 +208,12 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
     edit->setValidator(validator);
     edit->setPlaceholderText(tr("Hexadecimal"));
   }
-
+  QSpacerItem* hi =
+      new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+  // hbox->addItem(hi);
   hbox->addWidget(lbl);
   hbox->addWidget(edit);
+  // hbox->addItem(hi);
 
   lbl->setContextMenuPolicy(Qt::CustomContextMenu);
   QMenu* menu = new QMenu();
@@ -213,6 +222,7 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   connect(act, &QAction::triggered, [=]() {
     tab->layout()->removeWidget(frame);
     delete (frame);
+
     QSettings Reg(strIniFile, QSettings::IniFormat);
     Reg.setValue("key" + ObjectName, "");
     mw_one->setWM();
@@ -224,4 +234,5 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   });
 
   tab->layout()->addWidget(frame);
+  qDebug() << tab->layout();
 }
