@@ -51,6 +51,7 @@
 #include "dlgdatabase.h"
 #include "dlgkernelpatch.h"
 #include "dlgmisc.h"
+#include "dlgnewkeyfield.h"
 #include "dlgpreference.h"
 #include "filesystemwatcher.h"
 #include "plistparser.h"
@@ -66,6 +67,7 @@
 #include "ui_dlgPreset.h"
 #include "ui_dlgdatabase.h"
 #include "ui_dlgkernelpatch.h"
+#include "ui_dlgnewkeyfield.h"
 #include "ui_dlgpreference.h"
 #include "ui_syncocdialog.h"
 
@@ -89,6 +91,7 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
   Ui::MainWindow* ui;
 
+  dlgNewKeyField* myDlgNewKeyField;
   dlgPreference* myDlgPreference;
   bool isUseDevOption = false;
   dlgKernelPatch* myDlgKernelPatch;
@@ -370,6 +373,7 @@ class MainWindow : public QMainWindow {
   QString getDriverInfo(QString strDisk);
   void changeOpenCore(bool blDEV);
   QObjectList getAllToolButton(QObjectList lstUIControls);
+  QWidget* getSubTabWidget(int m, int s);
  public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -974,6 +978,8 @@ class MainWindow : public QMainWindow {
   void on_actionDEBUG_triggered();
 
   void on_actionInitDatabaseLinux_triggered();
+
+  void on_actionNew_Key_Field_triggered();
 
  private:
   bool isDrag;

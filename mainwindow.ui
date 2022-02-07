@@ -11345,6 +11345,8 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
     <addaction name="separator"/>
+    <addaction name="actionNew_Key_Field"/>
+    <addaction name="separator"/>
     <addaction name="actionPreferences"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
@@ -11359,7 +11361,6 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionOcvalidate"/>
     <addaction name="actionUpgrade_OC"/>
     <addaction name="separator"/>
-    <addaction name="actionInitDatabaseLinux"/>
     <addaction name="actionDatabase"/>
     <addaction name="actionOpen_database_directory"/>
     <addaction name="actionUpgrade_Database"/>
@@ -11750,6 +11751,14 @@ QToolBar {border:none;}</string>
   <action name="actionInitDatabaseLinux">
    <property name="text">
     <string>Initialize Database for Linux</string>
+   </property>
+  </action>
+  <action name="actionNew_Key_Field">
+   <property name="text">
+    <string>New Key Field</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+K</string>
    </property>
   </action>
  </widget>

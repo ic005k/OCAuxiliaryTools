@@ -38,7 +38,7 @@ class Method : public QMainWindow {
   QStringList strDLInfoList;
 
   void goTable(QTableWidget *table);
-  QWidget *getSubTabWidget(int m, int s);
+  static QWidget *getSubTabWidget(int m, int s);
   void goACPITable(QTableWidget *table);
   void goBooterTable(QTableWidget *table);
   void goDPTable(QTableWidget *table);
@@ -125,7 +125,7 @@ class Method : public QMainWindow {
   void writePlist(QString plistFile, QString key, QString value);
   bool isKeyExists(QString plistFile, QString key);
   void show_Tip(QString strText, QString strTip);
-public slots:
+ public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();
   void on_btnImportMaster();

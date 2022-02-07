@@ -48,6 +48,7 @@ SOURCES += \
     dlgdatabase.cpp \
     dlgkernelpatch.cpp \
     dlgmisc.cpp \
+    dlgnewkeyfield.cpp \
     dlgpreference.cpp \
     filesystemwatcher.cpp \
     main.cpp \
@@ -76,6 +77,7 @@ HEADERS += \
     dlgdatabase.h \
     dlgkernelpatch.h \
     dlgmisc.h \
+    dlgnewkeyfield.h \
     dlgpreference.h \
     filesystemwatcher.h \
     mainwindow.h \
@@ -98,6 +100,7 @@ FORMS += \
     dlgdatabase.ui \
     dlgkernelpatch.ui \
     dlgmisc.ui \
+    dlgnewkeyfield.ui \
     dlgpreference.ui \
     mainwindow.ui \
     syncocdialog.ui

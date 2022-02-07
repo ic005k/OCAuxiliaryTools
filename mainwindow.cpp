@@ -153,6 +153,7 @@ MainWindow::MainWindow(QWidget* parent)
   dlgMiscBootArgs = new dlgMisc(this);
   myDlgKernelPatch = new dlgKernelPatch(this);
   myDlgPreference = new dlgPreference(this);
+  myDlgNewKeyField = new dlgNewKeyField(this);
   strAppExePath = qApp->applicationDirPath();
 
   timer = new QTimer(this);
@@ -170,6 +171,18 @@ MainWindow::MainWindow(QWidget* parent)
   initui_PlatformInfo();
   initui_UEFI();
   initui_acpi();
+
+  QStringList list = dlgNewKeyField::getAllNewKey();
+
+  for (int i = 0; i < list.count(); i++) {
+    int m, s;
+    QString Key = list.at(i);
+    m = dlgNewKeyField::getKeyMainSub(Key).at(0);
+    s = dlgNewKeyField::getKeyMainSub(Key).at(1);
+
+    QWidget* tab = getSubTabWidget(m, s);
+    dlgNewKeyField::readNewKey(tab, list.at(i));
+  }
 
   init_CopyPasteLine();
 
@@ -212,6 +225,18 @@ MainWindow::MainWindow(QWidget* parent)
 }
 
 MainWindow::~MainWindow() { delete ui; }
+
+QWidget* MainWindow::getSubTabWidget(int m, int s) {
+  for (int j = 0; j < mainTabList.count(); j++) {
+    if (j == m) {
+      for (int i = 0; i < mainTabList.at(j)->tabBar()->count(); i++) {
+        if (i == s) return mainTabList.at(j)->widget(i);
+      }
+    }
+  }
+
+  return NULL;
+}
 
 void MainWindow::setUIMargin() {
   int m = 1;
@@ -11431,4 +11456,18 @@ void MainWindow::on_actionInitDatabaseLinux_triggered() {
     copyDirectoryFiles(strAppExePath + "/devDatabase/",
                        QDir::homePath() + "/devDatabase/", true);
   }
+}
+
+void MainWindow::on_actionNew_Key_Field_triggered() {
+  QWidget* tab = mymethod->getSubTabWidget(ui->listMain->currentRow(),
+                                           ui->listSub->currentRow());
+  QObjectList list = getAllTableWidget(getAllUIControls(tab));
+  if (list.count() > 0) {
+    QMessageBox::critical(this, "",
+                          tr("You cannot add a new key field to a page where a "
+                             "data table exists."));
+    return;
+  }
+  myDlgNewKeyField->setModal(true);
+  myDlgNewKeyField->show();
 }
