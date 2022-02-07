@@ -2,6 +2,7 @@
 #define DLGNEWKEYFIELD_H
 
 #include <QDialog>
+#include <QRegularExpression>
 
 namespace Ui {
 class dlgNewKeyField;

@@ -113,7 +113,6 @@ MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
 
-  strConfigPath = QDir::homePath() + "/.config/" + strAppName + "/";
   Initialization = true;
   loading = true;
 
@@ -140,24 +139,7 @@ MainWindow::MainWindow(QWidget* parent)
   linuxOS = true;
 #endif
 
-  mymethod = new Method(this);
-  aboutDlg = new aboutDialog(this);
-  myDatabase = new dlgDatabase(this);
-  myToolTip = new Tooltip(this);
-  dlgMESP = new dlgMountESP(this);
-  dlgOCV = new dlgOCValidate(this);
-  dlgPar = new dlgParameters(this);
-  dlgAutoUpdate = new AutoUpdateDialog(this);
-  dlgSyncOC = new SyncOCDialog(this);
-  dlgPresetValues = new dlgPreset(this);
-  dlgMiscBootArgs = new dlgMisc(this);
-  myDlgKernelPatch = new dlgKernelPatch(this);
-  myDlgPreference = new dlgPreference(this);
-  myDlgNewKeyField = new dlgNewKeyField(this);
-  strAppExePath = qApp->applicationDirPath();
-
-  timer = new QTimer(this);
-  connect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
+  init_Widgets();
 
   setUIMargin();
   init_MainUI();
@@ -171,18 +153,6 @@ MainWindow::MainWindow(QWidget* parent)
   initui_PlatformInfo();
   initui_UEFI();
   initui_acpi();
-
-  QStringList list = dlgNewKeyField::getAllNewKey();
-
-  for (int i = 0; i < list.count(); i++) {
-    int m, s;
-    QString Key = list.at(i);
-    m = dlgNewKeyField::getKeyMainSub(Key).at(0);
-    s = dlgNewKeyField::getKeyMainSub(Key).at(1);
-
-    QWidget* tab = getSubTabWidget(m, s);
-    dlgNewKeyField::readNewKey(tab, list.at(i));
-  }
 
   init_CopyPasteLine();
 
@@ -6681,6 +6651,40 @@ void MainWindow::init_MainUI() {
   init_InitialValue();
   init_TableStyle();
   init_ToolBarIcon();
+
+  // Read and add new key fields
+  QStringList list = dlgNewKeyField::getAllNewKey();
+  for (int i = 0; i < list.count(); i++) {
+    int m, s;
+    QString Key = list.at(i);
+    m = dlgNewKeyField::getKeyMainSub(Key).at(0);
+    s = dlgNewKeyField::getKeyMainSub(Key).at(1);
+
+    QWidget* tab = getSubTabWidget(m, s);
+    dlgNewKeyField::readNewKey(tab, list.at(i));
+  }
+}
+
+void MainWindow::init_Widgets() {
+  strConfigPath = QDir::homePath() + "/.config/" + strAppName + "/";
+  mymethod = new Method(this);
+  aboutDlg = new aboutDialog(this);
+  myDatabase = new dlgDatabase(this);
+  myToolTip = new Tooltip(this);
+  dlgMESP = new dlgMountESP(this);
+  dlgOCV = new dlgOCValidate(this);
+  dlgPar = new dlgParameters(this);
+  dlgAutoUpdate = new AutoUpdateDialog(this);
+  dlgSyncOC = new SyncOCDialog(this);
+  dlgPresetValues = new dlgPreset(this);
+  dlgMiscBootArgs = new dlgMisc(this);
+  myDlgKernelPatch = new dlgKernelPatch(this);
+  myDlgPreference = new dlgPreference(this);
+  myDlgNewKeyField = new dlgNewKeyField(this);
+  strAppExePath = qApp->applicationDirPath();
+
+  timer = new QTimer(this);
+  connect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
 }
 
 void MainWindow::init_TableStyle() {

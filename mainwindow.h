@@ -374,6 +374,8 @@ class MainWindow : public QMainWindow {
   void changeOpenCore(bool blDEV);
   QObjectList getAllToolButton(QObjectList lstUIControls);
   QWidget* getSubTabWidget(int m, int s);
+  void init_setWindowModified();
+  void setWM();
  public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -399,8 +401,8 @@ class MainWindow : public QMainWindow {
   void dropEvent(QDropEvent* e) override;
   void closeEvent(QCloseEvent* event) override;
   virtual void resizeEvent(QResizeEvent* event) override;
-  void keyPressEvent(QKeyEvent* event) override;    //键盘按下事件
-  void keyReleaseEvent(QKeyEvent* event) override;  //键盘松开事件
+  void keyPressEvent(QKeyEvent* event) override;
+  void keyReleaseEvent(QKeyEvent* event) override;
   void paintEvent(QPaintEvent* event) override;
   bool eventFilter(QObject* obj, QEvent* event) override;
   void mousePressEvent(QMouseEvent*) override;
@@ -825,8 +827,6 @@ class MainWindow : public QMainWindow {
 
   void on_listFind_itemClicked(QListWidgetItem* item);
 
-  void setWM();
-
   void on_actionBug_Report_triggered();
 
   void on_actionQuit_triggered();
@@ -1061,8 +1061,6 @@ class MainWindow : public QMainWindow {
 
   void init_MainUI();
 
-  void init_setWindowModified();
-
   void init_hardware_info();
 
   bool closeSave = false;
@@ -1102,6 +1100,7 @@ class MainWindow : public QMainWindow {
   QToolButton* btnClear;
   void checkSystemAudioVolume();
   QObjectList getAllGridLayout(QObjectList lstUIControls);
+  void init_Widgets();
 };
 
 #endif  // MAINWINDOW_H

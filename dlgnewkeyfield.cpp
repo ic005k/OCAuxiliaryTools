@@ -26,14 +26,24 @@ void dlgNewKeyField::on_btnAdd_clicked() {
 
   int main = mw_one->ui->listMain->currentRow();
   int sub = mw_one->ui->listSub->currentRow();
+  QWidget* tab = mymethod->getSubTabWidget(main, sub);
+
   if (ui->cboxKeyType->currentText() == tr("bool")) {
     QString text = ui->editKeyName->text().trimmed();
     QString ObjectName = "chk" + text;
-
-    QWidget* tab = mymethod->getSubTabWidget(main, sub);
-    add_CheckBox(tab, ObjectName, text);
-
-    saveNewKey(ObjectName, main, sub);
+    bool re = false;
+    QObjectList listOfCheckBox =
+        mw_one->getAllCheckBox(mw_one->getAllUIControls(tab));
+    for (int i = 0; i < listOfCheckBox.count(); i++) {
+      QCheckBox* w = (QCheckBox*)listOfCheckBox.at(i);
+      if (w->objectName() == ObjectName) re = true;
+    }
+    if (!re) {
+      add_CheckBox(tab, ObjectName, text);
+      saveNewKey(ObjectName, main, sub);
+    } else
+      QMessageBox::critical(
+          this, "", tr("The key field already exists and cannot be added."));
 
   } else {
     QString ObjectName, text;
@@ -46,10 +56,23 @@ void dlgNewKeyField::on_btnAdd_clicked() {
 
     if (ui->cboxKeyType->currentText() == tr("data"))
       ObjectName = "editDat" + text;
-    QWidget* tab = mymethod->getSubTabWidget(main, sub);
-    add_LineEdit(tab, ObjectName, text);
-    saveNewKey(ObjectName, main, sub);
+
+    bool re = false;
+    QObjectList listOfEdit =
+        mw_one->getAllLineEdit(mw_one->getAllUIControls(tab));
+    for (int i = 0; i < listOfEdit.count(); i++) {
+      QLineEdit* w = (QLineEdit*)listOfEdit.at(i);
+      if (w->objectName() == ObjectName) re = true;
+    }
+    if (!re) {
+      add_LineEdit(tab, ObjectName, text);
+      saveNewKey(ObjectName, main, sub);
+    } else
+      QMessageBox::critical(
+          this, "", tr("The key field already exists and cannot be added."));
   }
+
+  mw_one->init_setWindowModified();
 }
 
 void dlgNewKeyField::saveNewKey(QString ObjectName, int main, int sub) {
@@ -67,7 +90,7 @@ QStringList dlgNewKeyField::getAllNewKey() {
       list.append(str);
     }
   }
-  qDebug() << list;
+
   return list;
 }
 
@@ -88,6 +111,7 @@ QList<int> dlgNewKeyField::getKeyMainSub(QString Key) {
 
     return list;
   }
+  return list;
 }
 
 void dlgNewKeyField::readNewKey(QWidget* tab, QString Key) {
@@ -142,6 +166,7 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
     delete (frame);
     QSettings Reg(strIniFile, QSettings::IniFormat);
     Reg.setValue("key" + ObjectName, "");
+    mw_one->setWM();
   });
 
   connect(chk, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
@@ -163,11 +188,20 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   QLabel* lbl = new QLabel();
   lbl->setText(text);
   QLineEdit* edit = new QLineEdit();
-  if (ObjectName.mid(0, 7) == "editInt")
-    edit->setPlaceholderText(tr("Integer"));
-  if (ObjectName.mid(0, 7) == "editDat")
-    edit->setPlaceholderText(tr("Hexadecimal"));
   edit->setObjectName(ObjectName);
+
+  QRegularExpression regxData("[A-Fa-f0-9 ]{0,1024}");
+  QRegularExpression regxNumber("^-?\[0-9]*$");
+  if (ObjectName.mid(0, 7) == "editInt") {
+    QValidator* validator = new QRegularExpressionValidator(regxNumber, edit);
+    edit->setValidator(validator);
+    edit->setPlaceholderText(tr("Integer"));
+  }
+  if (ObjectName.mid(0, 7) == "editDat") {
+    QValidator* validator = new QRegularExpressionValidator(regxData, edit);
+    edit->setValidator(validator);
+    edit->setPlaceholderText(tr("Hexadecimal"));
+  }
 
   hbox->addWidget(lbl);
   hbox->addWidget(edit);
@@ -181,6 +215,7 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
     delete (frame);
     QSettings Reg(strIniFile, QSettings::IniFormat);
     Reg.setValue("key" + ObjectName, "");
+    mw_one->setWM();
   });
 
   connect(lbl, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
