@@ -18,7 +18,7 @@ aboutDialog::aboutDialog(QWidget* parent)
   ui->setupUi(this);
 
   strOCFromDev =
-      "https://github.com/acidanthera/OpenCorePkg/actions/runs/1797540408/";
+      "https://github.com/acidanthera/OpenCorePkg/actions/runs/1808597752/";
 
   strOCFrom = "https://github.com/acidanthera/OpenCorePkg/releases/latest";
   ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
