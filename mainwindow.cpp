@@ -135,7 +135,6 @@ MainWindow::MainWindow(QWidget* parent)
 
 #ifdef Q_OS_LINUX
   ui->actionMountEsp->setEnabled(false);
-  ui->actionUpgrade_Database->setEnabled(false);
   linuxOS = true;
 #endif
 
