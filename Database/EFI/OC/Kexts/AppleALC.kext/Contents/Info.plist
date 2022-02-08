@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>19H1615</string>
+	<string>20G415</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.6.8</string>
+	<string>1.6.9</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,7 +25,7 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.6.8</string>
+	<string>1.6.9</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -7282,6 +7282,33 @@
 					AwAAAA==
 					</data>
 					<key>Codec</key>
+					<string>narcyzzo - Realtek ALC294 for ASUS UX534FAC</string>
+					<key>CodecID</key>
+					<integer>283902612</integer>
+					<key>ConfigData</key>
+					<data>
+					ASccEAEnHQEBJx6gAScfkAF3HCABdx0BAXce
+					EwF3H5ABdwwCAZccMAGXHRABlx6BAZcfBAIX
+					HEACFx0QAhceIQIXHwQCFwwCAgUADwIEd3QC
+					BQBFAgRSiQIFABACBAQgAgUAGwIETks=
+					</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>44</integer>
+					<key>WakeConfigData</key>
+					<data>
+					AXcMAgIXDAI=
+					</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>
+					AwAAAA==
+					</data>
+					<key>Codec</key>
 					<string>KKKIIINNN - ALC294 ASUS X542UQR</string>
 					<key>CodecID</key>
 					<integer>283902612</integer>
@@ -11221,7 +11248,7 @@
 					HUABRx4hAUcfAgFHDAIBVxxwAVcdEAFXHgEB
 					Vx8BAWccgAFnHWABZx4BAWcfAQGnHJABpx0w
 					AacegQGnHwEBtxygAbcdQAG3HhEBtx+RAbcM
-					Ag==
+					AgIFAAcCBAPAAgUAGgIEAcE=
 					</data>
 					<key>FuncGroup</key>
 					<integer>1</integer>
@@ -11965,6 +11992,34 @@
 					<integer>1</integer>
 					<key>LayoutID</key>
 					<integer>11</integer>
+					<key>WakeConfigData</key>
+					<data>
+					AUcMAg==
+					</data>
+					<key>WakeVerbReinit</key>
+					<true/>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>
+					AwAAAA==
+					</data>
+					<key>CodecID</key>
+					<integer>283906408</integer>
+					<key>CodecName</key>
+					<string>Realtek ALC S1220A for Asus ProArt Z690-Creator WiFi (CaseySJ)</string>
+					<key>ConfigData</key>
+					<data>
+					AUccEAFHHUABRx4BAUcfAAFHDAIBVxwgAVcd
+					EAFXHgEBVx8BAWccMAFnHWABZx4BAWcfAQGH
+					HEABhx2QAYceoAGHH5ABlxxQAZcdkAGXHoEB
+					hx8CAaccYAGnHTABpx6BAacfAQG3HHABtx1A
+					AbceIQG3HwIBtwwC
+					</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>13</integer>
 					<key>WakeConfigData</key>
 					<data>
 					AUcMAg==
@@ -14079,13 +14134,13 @@
 					<integer>283904151</integer>
 					<key>ConfigData</key>
 					<data>
-					IUccECFHHUAhRx4RIUcfASFHDAIhVxwgIVcd
-					ECFXHgEhVx8BIWccMCFnHWAhZx4BIWcfASF3
-					HPAhdx0AIXceACF3H0AhhxxAIYcdkCGHHqAh
-					hx+QIZccYCGXHZAhlx6BIZcfAiGnHFAhpx0w
-					IacegSGnHwEhtxxwIbcdQCG3HiEhtx8CIbcM
-					AiEXHJAhFx1hIRceSyEXHwEh9xzwIfcdACH3
-					HgAh9x9AIecc8CHnHQAh5x4AIecfQA==
+					AUccEAFHHUABRx4RAUcfAQFHDAIBVxwgAVcd
+					EAFXHgEBVx8BAWccMAFnHWABZx4BAWcfAQF3
+					HPABdx0AAXceAAF3H0ABhxxAAYcdkAGHHqAB
+					hx+QAZccYAGXHZABlx6BAZcfAgGnHFABpx0w
+					AacegQGnHwEBtxxwAbcdQAG3HiEBtx8CAbcM
+					AgEXHJABFx1hARceSwEXHwEB9xzwAfcdAAH3
+					HgAB9x9AAecc8AHnHQAB5x4AAecfQA==
 					</data>
 					<key>FuncGroup</key>
 					<integer>1</integer>
