@@ -7288,6 +7288,13 @@ Note: On most newer firmwares these bits are already set, the option may be nece
                     <item>
                      <widget class="QLineEdit" name="editSystemSerialNumber"/>
                     </item>
+                    <item>
+                     <widget class="QToolButton" name="btnCheckSN">
+                      <property name="text">
+                       <string>Query Serial Number</string>
+                      </property>
+                     </widget>
+                    </item>
                    </layout>
                   </item>
                   <item row="3" column="0" colspan="2">

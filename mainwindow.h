@@ -978,6 +978,8 @@ class MainWindow : public QMainWindow {
 
   void on_actionNew_Key_Field_triggered();
 
+  void on_btnCheckSN_clicked();
+
  private:
   bool isDrag;
   QPoint m_position;

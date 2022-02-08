@@ -11491,3 +11491,10 @@ void MainWindow::on_actionNew_Key_Field_triggered() {
   myDlgNewKeyField->setModal(true);
   myDlgNewKeyField->show();
 }
+
+void MainWindow::on_btnCheckSN_clicked() {
+  QString str = "https://checkcoverage.apple.com/?sn=" +
+                ui->editSystemSerialNumber->text().trimmed();
+  QUrl url(str);
+  QDesktopServices::openUrl(url);
+}
