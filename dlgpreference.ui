@@ -96,7 +96,7 @@
             </layout>
            </widget>
           </item>
-          <item row="1" column="0" colspan="2">
+          <item row="1" column="0">
            <widget class="QGroupBox" name="groupBox_7">
             <property name="title">
              <string>Select the mirror server for web access</string>
@@ -163,10 +163,20 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="editOCDevSource">
-            <property name="placeholderText">
-             <string>For example: https://github.com/dortania/build-repo</string>
+           <widget class="QComboBox" name="editOCDevSource">
+            <property name="editable">
+             <bool>true</bool>
             </property>
+            <item>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>https://github.com/dortania/build-repo</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>

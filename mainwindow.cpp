@@ -8530,7 +8530,7 @@ void MainWindow::goResultsCheckbox(QString objName) {
         if (end) break;
 
         ui->listSub->setCurrentRow(j);
-        currentTabWidget = mymethod->getSubTabWidget(i, j);
+        currentTabWidget = getSubTabWidget(i, j);
         listOfCheckBox.clear();
         listOfCheckBox = getAllCheckBox(getAllUIControls(currentTabWidget));
         for (int k = 0; k < listOfCheckBox.count(); k++) {
@@ -8588,7 +8588,7 @@ void MainWindow::goResultsTable(QString objName, int index) {
         if (end) break;
 
         ui->listSub->setCurrentRow(j);
-        currentTabWidget = mymethod->getSubTabWidget(i, j);
+        currentTabWidget = getSubTabWidget(i, j);
         listOfTableWidget.clear();
         listOfTableWidget =
             getAllTableWidget(getAllUIControls(currentTabWidget));
@@ -8665,7 +8665,7 @@ void MainWindow::goResultsLabel(QString objName) {
         if (end) break;
 
         ui->listSub->setCurrentRow(j);
-        currentTabWidget = mymethod->getSubTabWidget(i, j);
+        currentTabWidget = getSubTabWidget(i, j);
         listOfLabel.clear();
         listOfLabel = getAllLabel(getAllUIControls(currentTabWidget));
         for (int k = 0; k < listOfLabel.count(); k++) {
@@ -8720,7 +8720,7 @@ void MainWindow::goResultsLineEdit(QString objName) {
         if (end) break;
 
         ui->listSub->setCurrentRow(j);
-        currentTabWidget = mymethod->getSubTabWidget(i, j);
+        currentTabWidget = getSubTabWidget(i, j);
         listOfLineEdit.clear();
         listOfLineEdit = getAllLineEdit(getAllUIControls(currentTabWidget));
         for (int k = 0; k < listOfLineEdit.count(); k++) {
@@ -8776,7 +8776,7 @@ void MainWindow::goResultsComboBox(QString objName) {
         if (end) break;
 
         ui->listSub->setCurrentRow(j);
-        currentTabWidget = mymethod->getSubTabWidget(i, j);
+        currentTabWidget = getSubTabWidget(i, j);
         listOfComboBox.clear();
         listOfComboBox = getAllComboBox(getAllUIControls(currentTabWidget));
         for (int k = 0; k < listOfComboBox.count(); k++) {
@@ -8838,7 +8838,7 @@ void MainWindow::goResultsTableHeader(QString objName) {
         if (end) break;
 
         ui->listSub->setCurrentRow(j);
-        currentTabWidget = mymethod->getSubTabWidget(i, j);
+        currentTabWidget = getSubTabWidget(i, j);
         listOfTableWidget.clear();
         listOfTableWidget =
             getAllTableWidget(getAllUIControls(currentTabWidget));
@@ -9972,11 +9972,15 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
       QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
       if (mouseEvent->button() == Qt::LeftButton) {
         if (blDEV) {
-          if (myDlgPreference->ui->editOCDevSource->text().trimmed() == "") {
+          if (myDlgPreference->ui->editOCDevSource->lineEdit()
+                  ->text()
+                  .trimmed() == "") {
             QUrl url(strOCFromDev);
             QDesktopServices::openUrl(url);
           } else {
-            QUrl url(myDlgPreference->ui->editOCDevSource->text().trimmed());
+            QUrl url(myDlgPreference->ui->editOCDevSource->lineEdit()
+                         ->text()
+                         .trimmed());
             QDesktopServices::openUrl(url);
           }
         } else {
@@ -10724,7 +10728,7 @@ void MainWindow::on_listSub_currentRowChanged(int currentRow) {
 
   if (!Initialization) {
     QObjectList list = getAllTableWidget(getAllUIControls(
-        mymethod->getSubTabWidget(ui->listMain->currentRow(), currentRow)));
+        getSubTabWidget(ui->listMain->currentRow(), currentRow)));
     if (list.count() >= 1) {
       // QTableWidget* w = (QTableWidget*)list.at(0);
       // w->setFocus();
@@ -10778,8 +10782,8 @@ void MainWindow::on_btnUpdateHex_clicked() {
   bool txtHexFocus = ui->txtEditHex->hasFocus();
   bool txtASCIIFocus = ui->txtEditASCII->hasFocus();
 
-  QWidget* w = mymethod->getSubTabWidget(ui->listMain->currentRow(),
-                                         ui->listSub->currentRow());
+  QWidget* w =
+      getSubTabWidget(ui->listMain->currentRow(), ui->listSub->currentRow());
   listTable = getAllTableWidget(getAllUIControls(w));
 
   if (listTable.count() > 1) {
@@ -11186,9 +11190,8 @@ void MainWindow::on_btnHide_clicked() {
 
 void MainWindow::on_actionMove_Up_triggered() {
   if (!Initialization) {
-    QObjectList list =
-        getAllTableWidget(getAllUIControls(mymethod->getSubTabWidget(
-            ui->listMain->currentRow(), ui->listSub->currentRow())));
+    QObjectList list = getAllTableWidget(getAllUIControls(getSubTabWidget(
+        ui->listMain->currentRow(), ui->listSub->currentRow())));
     if (list.count() >= 1) {
       QTableWidget* w = (QTableWidget*)list.at(0);
 
@@ -11207,9 +11210,8 @@ void MainWindow::on_actionMove_Up_triggered() {
 
 void MainWindow::on_actionMove_Down_triggered() {
   if (!Initialization) {
-    QObjectList list =
-        getAllTableWidget(getAllUIControls(mymethod->getSubTabWidget(
-            ui->listMain->currentRow(), ui->listSub->currentRow())));
+    QObjectList list = getAllTableWidget(getAllUIControls(getSubTabWidget(
+        ui->listMain->currentRow(), ui->listSub->currentRow())));
     if (list.count() >= 1) {
       QTableWidget* w = (QTableWidget*)list.at(0);
 
@@ -11457,8 +11459,8 @@ void MainWindow::on_actionInitDatabaseLinux_triggered() {
 }
 
 void MainWindow::on_actionNew_Key_Field_triggered() {
-  QWidget* tab = mymethod->getSubTabWidget(ui->listMain->currentRow(),
-                                           ui->listSub->currentRow());
+  QWidget* tab =
+      getSubTabWidget(ui->listMain->currentRow(), ui->listSub->currentRow());
   QObjectList list = getAllTableWidget(getAllUIControls(tab));
   if (list.count() > 0) {
     QMessageBox::critical(this, "",

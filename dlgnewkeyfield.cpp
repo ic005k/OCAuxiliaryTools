@@ -26,7 +26,7 @@ void dlgNewKeyField::on_btnAdd_clicked() {
 
   int main = mw_one->ui->listMain->currentRow();
   int sub = mw_one->ui->listSub->currentRow();
-  QWidget* tab = mymethod->getSubTabWidget(main, sub);
+  QWidget* tab = mw_one->getSubTabWidget(main, sub);
 
   if (ui->cboxKeyType->currentText() == tr("bool")) {
     QString text = ui->editKeyName->text().trimmed();
@@ -168,8 +168,7 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
     tab->layout()->removeWidget(frame);
     delete (frame);
 
-    QSettings Reg(strIniFile, QSettings::IniFormat);
-    Reg.setValue("key" + ObjectName, "");
+    removeKey(ObjectName);
     mw_one->setWM();
   });
 
@@ -231,8 +230,7 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
     tab->layout()->removeWidget(frame);
     delete (frame);
 
-    QSettings Reg(strIniFile, QSettings::IniFormat);
-    Reg.setValue("key" + ObjectName, "");
+    removeKey(ObjectName);
     mw_one->setWM();
   });
 
@@ -242,5 +240,9 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   });
 
   tab->layout()->addWidget(frame);
-  qDebug() << tab->layout();
+}
+
+void dlgNewKeyField::removeKey(QString ObjectName) {
+  QSettings Reg(strIniFile, QSettings::IniFormat);
+  Reg.remove("key" + ObjectName);
 }

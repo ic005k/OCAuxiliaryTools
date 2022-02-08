@@ -38,7 +38,6 @@ class Method : public QMainWindow {
   QStringList strDLInfoList;
 
   void goTable(QTableWidget *table);
-  static QWidget *getSubTabWidget(int m, int s);
   void goACPITable(QTableWidget *table);
   void goBooterTable(QTableWidget *table);
   void goDPTable(QTableWidget *table);

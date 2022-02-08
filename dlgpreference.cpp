@@ -33,7 +33,7 @@ dlgPreference::dlgPreference(QWidget *parent)
       QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
 
   QSettings Reg(strIniFile, QSettings::IniFormat);
-  ui->editOCDevSource->setText(Reg.value("DevSource").toString());
+  ui->editOCDevSource->lineEdit()->setText(Reg.value("DevSource").toString());
   QFileInfo fi(strIniFile);
   QString strDef = "https://ghproxy.com/https://github.com/";
   QLocale locale;
@@ -75,7 +75,7 @@ void dlgPreference::closeEvent(QCloseEvent *event) {
   Q_UNUSED(event);
   saveKextUrl();
 
-  QString txt = ui->editOCDevSource->text().trimmed();
+  QString txt = ui->editOCDevSource->lineEdit()->text().trimmed();
   QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("DevSource", txt);
   if (txt != "")

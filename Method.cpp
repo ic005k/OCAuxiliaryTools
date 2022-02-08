@@ -381,8 +381,7 @@ void Method::updateOpenCore() {
     else
       strTEFI = mw_one->dataBaseDir + "DEBUG/EFI/";
 
-    if (!QDir(strSEFI).exists())
-        Results.append(false);
+    if (!QDir(strSEFI).exists()) Results.append(false);
     Results.append(mw_one->copyDirectoryFiles(strSEFI, strTEFI, true));
 
     if (!mw_one->ui->actionDEBUG->isChecked()) {
@@ -846,18 +845,6 @@ void Method::set_nv_key(QString key, QString dataType) {
     mw_one->write_ini(mw_one->ui->table_nv_add0, mw_one->ui->table_nv_add,
                       mw_one->ui->table_nv_add0->currentRow());
   }
-}
-
-QWidget* Method::getSubTabWidget(int m, int s) {
-  for (int j = 0; j < mw_one->mainTabList.count(); j++) {
-    if (j == m) {
-      for (int i = 0; i < mw_one->mainTabList.at(j)->tabBar()->count(); i++) {
-        if (i == s) return mw_one->mainTabList.at(j)->widget(i);
-      }
-    }
-  }
-
-  return NULL;
 }
 
 void Method::goACPITable(QTableWidget* table) {
@@ -1421,8 +1408,8 @@ void Method::UpdateStatusBarInfo() {
   QObjectList listTable;
   QTableWidget* t;
 
-  QWidget* w = getSubTabWidget(mw_one->ui->listMain->currentRow(),
-                               mw_one->ui->listSub->currentRow());
+  QWidget* w = mw_one->getSubTabWidget(mw_one->ui->listMain->currentRow(),
+                                       mw_one->ui->listSub->currentRow());
   listTable = mw_one->getAllTableWidget(mw_one->getAllUIControls(w));
 
   if (listTable.count() > 1) {
@@ -2010,7 +1997,7 @@ void Method::setToolTip(QWidget* w, QString strTitle) {
 void Method::autoTip() {
   int m = mw_one->ui->listMain->currentRow();
   int s = mw_one->ui->listSub->currentRow();
-  QWidget* tab = getSubTabWidget(m, s);
+  QWidget* tab = mw_one->getSubTabWidget(m, s);
   mw_one->listUICheckBox.clear();
   QObjectList listOfCheckBox =
       mw_one->getAllCheckBox(mw_one->getAllUIControls(tab));
@@ -2272,8 +2259,7 @@ void Method::show_Tip(QString strText, QString strTip) {
   if (x1 < w1 && y1 > h2) dir = 7;
   if (x1 > w2 && y1 > h2) dir = 4;
   if (x1 < w1 && y1 > h1 && y1 < h2) dir = 9;
-  if (x1 > w1 && x1 < w2 && y1 < h1)
-      dir = 12;
+  if (x1 > w1 && x1 < w2 && y1 < h1) dir = 12;
   if (x1 > w2 && y1 > h1 && y1 < h2) dir = 3;
   if (x1 > w1 && x1 < w2 && y1 > h2) dir = 6;
 

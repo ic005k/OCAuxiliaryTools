@@ -767,7 +767,9 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
 
   QString DevSource;
   if (blDEV) {
-    DevSource = mw_one->myDlgPreference->ui->editOCDevSource->text().trimmed();
+    DevSource = mw_one->myDlgPreference->ui->editOCDevSource->lineEdit()
+                    ->text()
+                    .trimmed();
     if (DevSource == "") {
       QMessageBox box;
       box.setText(tr(

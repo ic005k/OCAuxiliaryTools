@@ -26,6 +26,7 @@ class dlgNewKeyField : public QDialog {
   void on_btnAdd_clicked();
 
  private:
+  static void removeKey(QString ObjectName);
 };
 
 #endif  // DLGNEWKEYFIELD_H
