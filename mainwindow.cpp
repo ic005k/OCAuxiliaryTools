@@ -6916,6 +6916,10 @@ void MainWindow::copyText(QListWidget* listW) {
 }
 
 void MainWindow::clearFindTexts() {
+  for (int i = 0; i < ui->cboxFind->count(); i++) {
+    QSettings Reg(strIniFile, QSettings::IniFormat);
+    Reg.remove(QString::number(i));
+  }
   ui->cboxFind->clear();
   clearTextsAction->setEnabled(false);
 }
