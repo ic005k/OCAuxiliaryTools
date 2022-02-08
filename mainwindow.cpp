@@ -6363,7 +6363,6 @@ void MainWindow::init_EditMenu() {
   // Open DataBase Dir
   if (mac || osx1012)
     ui->actionOpen_database_directory->setIconVisibleInMenu(false);
-  ui->actionUpgrade_Database->setVisible(false);
 
   // Move Up(Down)
   ui->actionMove_Up->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Up));
@@ -10658,12 +10657,6 @@ void MainWindow::on_actionLatest_Release_triggered() {
 
 void MainWindow::on_actionOnline_Download_Updates_triggered() {
   ShowAutoUpdateDlg(false);
-}
-
-void MainWindow::on_actionUpgrade_Database_triggered() {
-  if (mac || win || osx1012) {
-    ShowAutoUpdateDlg(true);
-  }
 }
 
 void MainWindow::ShowAutoUpdateDlg(bool Database) {

@@ -898,8 +898,6 @@ class MainWindow : public QMainWindow {
 
   void on_actionLatest_Release_triggered();
 
-  void on_actionUpgrade_Database_triggered();
-
   void on_txtEditHex_textChanged(const QString& arg1);
 
   void on_txtEditASCII_textChanged(const QString& arg1);
