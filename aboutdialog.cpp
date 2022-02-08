@@ -7,9 +7,9 @@
 
 extern MainWindow* mw_one;
 extern QString strAppName, strIniFile;
-QString CurVerison = "20220135";
-QString ocVer = "0.7.7";
-QString ocVerDev = "0.7.8";
+QString CurVerison = "20220136";
+QString ocVer = "0.7.8";
+QString ocVerDev = "0.7.9";
 QString ocFrom, ocFromDev, strOCFrom, strOCFromDev;
 bool blDEV = false;
 
@@ -30,7 +30,10 @@ aboutDialog::aboutDialog(QWidget* parent)
   if (ver > ocVer) {
     ocVer = ver;
   }
-  ocVerDev = Reg.value("ocVerDev", ocVerDev).toString();
+  ver = Reg.value("ocVerDev").toString();
+  if (ver > ocVerDev) {
+    ocVerDev = ver;
+  }
 
   QString DevSource = Reg.value("DevSource").toString();
   if (DevSource.trimmed() == "") {
