@@ -12884,8 +12884,8 @@ Enable this option to be able to see all the boot options when having multiple d
     <addaction name="actionDEBUG"/>
     <addaction name="actionOpenCore_DEV"/>
     <addaction name="separator"/>
-    <addaction name="actionOcvalidate"/>
     <addaction name="actionUpgrade_OC"/>
+    <addaction name="actionOcvalidate"/>
     <addaction name="separator"/>
     <addaction name="actionInitDatabaseLinux"/>
     <addaction name="actionDatabase"/>
@@ -13146,7 +13146,7 @@ QToolBar {border:none;}</string>
   </action>
   <action name="actionUpgrade_OC">
    <property name="text">
-    <string>Synchronize OC Main Program</string>
+    <string>Upgrade OpenCore and Kexts</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+6</string>

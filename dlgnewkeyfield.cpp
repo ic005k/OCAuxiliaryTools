@@ -182,6 +182,7 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
         QInputDialog::getText(tab, tr("Rename"), tr("Key Name:"),
                               QLineEdit::Normal, chk->text(), &ok);
     if (ok && !newText.isEmpty()) {
+      if (newText == chk->text()) return;
       chk->setText(newText);
       newObjName = "chk" + newText;
       chk->setObjectName(newObjName);
@@ -269,6 +270,7 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
         QInputDialog::getText(tab, tr("Rename"), tr("Key Name:"),
                               QLineEdit::Normal, lbl->text(), &ok);
     if (ok && !newText.isEmpty()) {
+      if (newText == lbl->text()) return;
       lbl->setText(newText);
       if (ObjectName.mid(0, 4) == "edit" && ObjectName.mid(0, 7) != "editInt" &&
           ObjectName.mid(0, 7) != "editDat")

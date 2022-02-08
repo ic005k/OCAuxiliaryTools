@@ -332,12 +332,11 @@ void MainWindow::openFile(QString PlistFileName) {
     QFileInfo f3(strEFI + "/OC/Drivers");
     if (f1.isDir() && f3.isDir()) {
       ui->actionUpgrade_OC->setEnabled(true);
-      ui->actionUpgrade_OC->setToolTip(
-          tr("Sync OC main program (upgrade OC and Kexts)"));
+      ui->actionUpgrade_OC->setToolTip(tr("Upgrade OpenCore and Kexts"));
     } else {
       ui->actionUpgrade_OC->setEnabled(false);
       ui->actionUpgrade_OC->setToolTip(
-          tr("The synchronous OC main program is not available, please check "
+          tr("The Upgrade OpenCore and Kexts is not available, please check "
              "the integrity of the EFI directory structure, mainly the "
              "existence of the EFI/OC and EFI/OC/Drivers directories."));
     }
@@ -6326,9 +6325,9 @@ void MainWindow::init_EditMenu() {
   // Edit
   // Init Database for Linux
   if (linuxOS)
-    ui->actionInitDatabaseLinux->setEnabled(true);
+    ui->actionInitDatabaseLinux->setVisible(true);
   else
-    ui->actionInitDatabaseLinux->setEnabled(false);
+    ui->actionInitDatabaseLinux->setVisible(false);
 
   // OC Validate
   if (mac || osx1012) ui->actionOcvalidate->setIconVisibleInMenu(false);
