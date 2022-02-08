@@ -765,15 +765,17 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
   QString tempDir = QDir::homePath() + "/tempocat/";
   mw_one->deleteDirfile(tempDir);
 
-  QString DevSource =
-      mw_one->myDlgPreference->ui->editOCDevSource->text().trimmed();
-  if (DevSource == "") {
-    QMessageBox box;
-    box.setText(
-        tr("Please enter the OpenCore development version update source in the "
-           "preferences."));
-    box.exec();
-    return;
+  QString DevSource;
+  if (blDEV) {
+    DevSource = mw_one->myDlgPreference->ui->editOCDevSource->text().trimmed();
+    if (DevSource == "") {
+      QMessageBox box;
+      box.setText(tr(
+          "Please enter the OpenCore development version update source in the "
+          "preferences."));
+      box.exec();
+      return;
+    }
   }
 
   isCheckOC = true;
