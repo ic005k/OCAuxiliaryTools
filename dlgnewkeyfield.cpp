@@ -162,13 +162,37 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   chk->setContextMenuPolicy(Qt::CustomContextMenu);
   QMenu* menu = new QMenu();
   QAction* act = new QAction(tr("Delete"));
+  QAction* actRename = new QAction(tr("Rename"));
   menu->addAction(act);
+  menu->addAction(actRename);
   connect(act, &QAction::triggered, [=]() {
     mw_one->ui->cboxFind->lineEdit()->clear();
     tab->layout()->removeWidget(frame);
     delete (frame);
 
     removeKey(ObjectName);
+    mw_one->setWM();
+  });
+
+  connect(actRename, &QAction::triggered, [=]() {
+    QString oldObjectName = ObjectName;
+    QString newObjName;
+    bool ok;
+    QString newText =
+        QInputDialog::getText(tab, tr("Rename"), tr("Key Name:"),
+                              QLineEdit::Normal, chk->text(), &ok);
+    if (ok && !newText.isEmpty()) {
+      chk->setText(newText);
+      newObjName = "chk" + newText;
+      chk->setObjectName(newObjName);
+
+      int main, sub;
+      main = getKeyMainSub("key" + ObjectName).at(0);
+      sub = getKeyMainSub("key" + ObjectName).at(1);
+      saveNewKey(newObjName, main, sub);
+      removeKey(oldObjectName);
+    }
+
     mw_one->setWM();
   });
 
@@ -224,13 +248,42 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   lbl->setContextMenuPolicy(Qt::CustomContextMenu);
   QMenu* menu = new QMenu();
   QAction* act = new QAction(tr("Delete"));
+  QAction* actRename = new QAction(tr("Rename"));
   menu->addAction(act);
+  menu->addAction(actRename);
+
   connect(act, &QAction::triggered, [=]() {
     mw_one->ui->cboxFind->lineEdit()->clear();
     tab->layout()->removeWidget(frame);
     delete (frame);
 
     removeKey(ObjectName);
+    mw_one->setWM();
+  });
+
+  connect(actRename, &QAction::triggered, [=]() {
+    QString oldObjectName = ObjectName;
+    QString newObjName;
+    bool ok;
+    QString newText =
+        QInputDialog::getText(tab, tr("Rename"), tr("Key Name:"),
+                              QLineEdit::Normal, lbl->text(), &ok);
+    if (ok && !newText.isEmpty()) {
+      lbl->setText(newText);
+      if (ObjectName.mid(0, 4) == "edit" && ObjectName.mid(0, 7) != "editInt" &&
+          ObjectName.mid(0, 7) != "editDat")
+        newObjName = "edit" + newText;
+      if (ObjectName.mid(0, 7) == "editInt") newObjName = "editInt" + newText;
+      if (ObjectName.mid(0, 7) == "editDat") newObjName = "editDat" + newText;
+      edit->setObjectName(newObjName);
+
+      int main, sub;
+      main = getKeyMainSub("key" + ObjectName).at(0);
+      sub = getKeyMainSub("key" + ObjectName).at(1);
+      saveNewKey(newObjName, main, sub);
+      removeKey(oldObjectName);
+    }
+
     mw_one->setWM();
   });
 

@@ -6657,11 +6657,28 @@ void MainWindow::init_MainUI() {
   for (int i = 0; i < list.count(); i++) {
     int m, s;
     QString Key = list.at(i);
+    QString KeyBak = Key;
+    QString ObjectName = KeyBak.replace("key", "");
     m = dlgNewKeyField::getKeyMainSub(Key).at(0);
     s = dlgNewKeyField::getKeyMainSub(Key).at(1);
 
     QWidget* tab = getSubTabWidget(m, s);
-    dlgNewKeyField::readNewKey(tab, list.at(i));
+    bool re = false;
+    if (Key.mid(0, 6) == "keychk") {
+      QObjectList listOfCheckBox = getAllCheckBox(getAllUIControls(tab));
+      for (int i = 0; i < listOfCheckBox.count(); i++) {
+        QCheckBox* w = (QCheckBox*)listOfCheckBox.at(i);
+        if (w->objectName() == ObjectName) re = true;
+      }
+    }
+    if (Key.mid(0, 7) == "keyedit") {
+      QObjectList listOfEdit = getAllLineEdit(getAllUIControls(tab));
+      for (int i = 0; i < listOfEdit.count(); i++) {
+        QLineEdit* w = (QLineEdit*)listOfEdit.at(i);
+        if (w->objectName() == ObjectName) re = true;
+      }
+    }
+    if (!re) dlgNewKeyField::readNewKey(tab, Key);
   }
 }
 
