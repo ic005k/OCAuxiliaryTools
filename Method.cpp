@@ -381,6 +381,8 @@ void Method::updateOpenCore() {
     else
       strTEFI = mw_one->dataBaseDir + "DEBUG/EFI/";
 
+    if (!QDir(strSEFI).exists())
+        Results.append(false);
     Results.append(mw_one->copyDirectoryFiles(strSEFI, strTEFI, true));
 
     if (!mw_one->ui->actionDEBUG->isChecked()) {
@@ -516,7 +518,6 @@ void Method::updateOpenCore() {
 void Method::doProcessDownloadProgress(qint64 recv_total,
                                        qint64 all_total)  //显示
 {
-  qDebug() << isReplyDL;
   if (blBreak) return;
 
   mw_one->dlgSyncOC->progBar->setMaximum(all_total);
@@ -776,7 +777,7 @@ QString Method::getKextBin(QString kextName) {
   QStringList tempList = str0.split("/");
   QString str1 = tempList.at(tempList.count() - 1);
   QString str2 = kextName + "/Contents/MacOS/" + str1;
-  // qDebug() << str0 << str1 << str2;
+
   return str2;
 }
 
@@ -2135,8 +2136,8 @@ void Method::writePlistComment(QString plistFile, QString strComment) {
   TextEditToFile(txtEdit, plistFile);
 }
 
-void Method::init_MacVerInfo(QString ver) {
 #ifdef Q_OS_MAC
+void Method::init_MacVerInfo(QString ver) {
   QString str1 = qApp->applicationDirPath();
   QString infoFile = str1.replace("MacOS", "Info.plist");
 
@@ -2186,9 +2187,8 @@ void Method::init_MacVerInfo(QString ver) {
   if (write) {
     TextEditToFile(edit, infoFile);
   }
-
-#endif
 }
+#endif
 
 QString Method::readPlist(QString plistFile, QString key) {
   QTextEdit* edit = new QTextEdit;
@@ -2272,7 +2272,8 @@ void Method::show_Tip(QString strText, QString strTip) {
   if (x1 < w1 && y1 > h2) dir = 7;
   if (x1 > w2 && y1 > h2) dir = 4;
   if (x1 < w1 && y1 > h1 && y1 < h2) dir = 9;
-  if (x1 > w1 && x1 < w2 & y1 < h1) dir = 12;
+  if (x1 > w1 && x1 < w2 && y1 < h1)
+      dir = 12;
   if (x1 > w2 && y1 > h1 && y1 < h2) dir = 3;
   if (x1 > w1 && x1 < w2 && y1 > h2) dir = 6;
 
