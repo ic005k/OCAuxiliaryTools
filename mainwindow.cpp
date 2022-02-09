@@ -6517,7 +6517,7 @@ void MainWindow::init_MainUI() {
   ui->frameTip->setPalette(QPalette(QColor(255, 204, 204)));
   ui->btnNo->setDefault(true);
   ui->frameTip->setHidden(true);
-  ui->btnCheckSN->setHidden(true);
+  ui->btnCheckSN->setHidden(false);
 
   init_FileMenu();
   init_EditMenu();
