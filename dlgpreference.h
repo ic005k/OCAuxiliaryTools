@@ -49,6 +49,7 @@ class dlgPreference : public QDialog {
   void on_chkOpenDir_stateChanged(int arg1);
   void on_chkBoxLastFile_clicked(bool checked);
   void on_btnPing_clicked();
+  void on_chkSmartKey_clicked(bool checked);
 };
 
 #endif  // DLGPREFERENCE_H

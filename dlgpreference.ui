@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>783</width>
-    <height>528</height>
+    <height>531</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -263,6 +263,13 @@
           <string>Additional Options</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="chkShowVolName">
+            <property name="text">
+             <string>Show all volume names when mounting ESP</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
            <widget class="QCheckBox" name="chkBoxLastFile">
             <property name="text">
@@ -270,10 +277,13 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="chkShowVolName">
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="chkSmartKey">
+            <property name="toolTip">
+             <string>If a new version of OC adds some new key fields, this option can intelligently add those key fields.</string>
+            </property>
             <property name="text">
-             <string>Show all volume names when mounting ESP</string>
+             <string>Smart Update Key Field</string>
             </property>
            </widget>
           </item>

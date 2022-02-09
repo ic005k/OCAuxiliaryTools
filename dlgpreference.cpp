@@ -263,3 +263,8 @@ void dlgPreference::on_btnPing_clicked() {
   QUrl url(strurl);
   QDesktopServices::openUrl(url);
 }
+
+void dlgPreference::on_chkSmartKey_clicked(bool checked) {
+  QSettings Reg(strIniFile, QSettings::IniFormat);
+  Reg.setValue("SmartKey", checked);
+}

@@ -13,6 +13,7 @@ extern QString ocFromDev;
 extern bool blDEV;
 extern Method* mymethod;
 extern QString SaveFileName;
+bool isSmartKey;
 
 dlgNewKeyField::dlgNewKeyField(QWidget* parent)
     : QDialog(parent), ui(new Ui::dlgNewKeyField) {
@@ -161,7 +162,7 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   chk->setText(text);
   chk->setObjectName(ObjectName);
 
-  chk->setContextMenuPolicy(Qt::CustomContextMenu);
+  if (!isSmartKey) chk->setContextMenuPolicy(Qt::CustomContextMenu);
   QMenu* menu = new QMenu();
   QAction* act = new QAction(tr("Delete"));
   QAction* actRename = new QAction(tr("Rename"));
@@ -248,7 +249,7 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   hbox->addWidget(edit);
   // hbox->addItem(hi);
 
-  lbl->setContextMenuPolicy(Qt::CustomContextMenu);
+  if (!isSmartKey) lbl->setContextMenuPolicy(Qt::CustomContextMenu);
   QMenu* menu = new QMenu();
   QAction* act = new QAction(tr("Delete"));
   QAction* actRename = new QAction(tr("Rename"));
@@ -307,6 +308,7 @@ void dlgNewKeyField::removeKey(QString ObjectName) {
 QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
                                              QString MainName,
                                              QString SubName) {
+  isSmartKey = true;
   QStringList ResultsList;
 
   QStringList listOCATKey, listSample, listSampleKey;
@@ -407,6 +409,7 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
     }
   }
 
+  isSmartKey = false;
   return ResultsList;
 }
 
