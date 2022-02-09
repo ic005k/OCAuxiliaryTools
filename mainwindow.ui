@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5290,41 +5290,200 @@ Console logging prints less than all the other variants. Depending on the build 
            <attribute name="title">
             <string>Security</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_47">
-            <item row="0" column="0">
-             <widget class="QFrame" name="frame">
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_22">
-               <item row="0" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout">
-                 <item>
-                  <widget class="QGroupBox" name="groupBox_4">
-                   <property name="title">
-                    <string/>
+           <layout class="QGridLayout" name="gridLayout_22">
+            <item row="4" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <widget class="QLabel" name="label_93">
+                <property name="toolTip">
+                 <string notr="true">Password hash used when EnabledPassword is set.
+
+----
+
+设置EnabledPassword时使用的密码哈希值。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Password hash used when EnabledPassword is set.</string>
+                </property>
+                <property name="text">
+                 <string>PasswordHash</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="editDatPasswordHash"/>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QGroupBox" name="groupBox_4">
+                <property name="title">
+                 <string/>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_48">
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item row="1" column="0">
+                  <spacer name="verticalSpacer_109">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
                    </property>
-                   <layout class="QGridLayout" name="gridLayout_48">
-                    <property name="topMargin">
-                     <number>0</number>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QComboBox" name="cboxSecureBootModel">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>Disabled</string>
                     </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Default</string>
                     </property>
-                    <item row="0" column="1">
-                     <widget class="QComboBox" name="cboxDmgLoading">
-                      <property name="editable">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="2" column="0">
-                     <widget class="QLabel" name="label_45">
-                      <property name="toolTip">
-                       <string notr="true">Sets Apple Secure Boot hardware model and policy. 
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j137-10.13.2 (17C2111)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j680-10.13.6 (17G2112)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j132-10.13.6 (17G2112)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j174-10.14 (18A2063)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j140k-10.14.1 (18B2084)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j780-10.14.5 (18F132)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j213-10.14.5 (18F2058)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j140a-10.14.5 (18F2058)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j152f-10.15.1 (19B2093)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j160- 10.15.1 (19B88)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j230k-10.15.3 (19D2064)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j214k-10.15.4 (19E2269)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j223-10.15.4 (19E2265)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j215-10.15.5 (19F96)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j185-10.15.6 (19G2005)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>j185f- 10.15.6 (19G2005)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>x86legacy-11.0.1 (20B29)</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QComboBox" name="cboxDmgLoading">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_16">
+                   <property name="toolTip">
+                    <string notr="true">Valid values:
+
+• Optional — require nothing, no vault is enforced, insecure.
+
+• Basic — require vault.plist file present in OC directory. This provides basic filesystem integrity verification and may protect from unintentional filesystem corruption.
+
+• Secure — require vault.sig signature file for vault.plist in OC directory. This includes Basic integrity checking but also attempts to build a trusted bootchain.
+
+----
+
+有效值：
+
+- Optional--不需要任何东西，不强制执行vault，不安全。
+
+- Basic -- 要求在OC目录中存在vault.plist文件。这提供了基本的文件系统完整性验证，可以防止无意中的文件系统损坏。
+
+- Secure--需要OC目录下vault.sig签名文件。这包括基本的完整性检查，但也试图建立一个可信的引导链。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string> Enables vaulting mechanism in OpenCore.</string>
+                   </property>
+                   <property name="text">
+                    <string>Vault</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_45">
+                   <property name="toolTip">
+                    <string notr="true">Sets Apple Secure Boot hardware model and policy. 
 
 Specifying this value defines which operating systems will be bootable. Operating systems shipped before the specified model was released will not boot. 
 
@@ -5373,157 +5532,26 @@ Valid values:
 - j215 - MacBookPro16.4 (2020年6月)最低macOS 10.15.5 (19F96)
 - j185 - iMac20.1(2020年8月)最低macOS 10.15.6(19G2005)
 - j185f - iMac20.2(2020年8月)最低macOS 10.15.6(19G2005)</string>
-                      </property>
-                      <property name="statusTip">
-                       <string> Apple Secure Boot hardware model.</string>
-                      </property>
-                      <property name="text">
-                       <string>SecureBootModel</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="2" column="1">
-                     <widget class="QComboBox" name="cboxSecureBootModel">
-                      <property name="editable">
-                       <bool>true</bool>
-                      </property>
-                      <item>
-                       <property name="text">
-                        <string>Disabled</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>Default</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j137-10.13.2 (17C2111)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j680-10.13.6 (17G2112)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j132-10.13.6 (17G2112)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j174-10.14 (18A2063)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j140k-10.14.1 (18B2084)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j780-10.14.5 (18F132)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j213-10.14.5 (18F2058)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j140a-10.14.5 (18F2058)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j152f-10.15.1 (19B2093)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j160- 10.15.1 (19B88)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j230k-10.15.3 (19D2064)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j214k-10.15.4 (19E2269)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j223-10.15.4 (19E2265)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j215-10.15.5 (19F96)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j185-10.15.6 (19G2005)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>j185f- 10.15.6 (19G2005)</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>x86legacy-11.0.1 (20B29)</string>
-                       </property>
-                      </item>
-                     </widget>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QLabel" name="label_16">
-                      <property name="toolTip">
-                       <string notr="true">Valid values:
-
-• Optional — require nothing, no vault is enforced, insecure.
-
-• Basic — require vault.plist file present in OC directory. This provides basic filesystem integrity verification and may protect from unintentional filesystem corruption.
-
-• Secure — require vault.sig signature file for vault.plist in OC directory. This includes Basic integrity checking but also attempts to build a trusted bootchain.
-
-----
-
-有效值：
-
-- Optional--不需要任何东西，不强制执行vault，不安全。
-
-- Basic -- 要求在OC目录中存在vault.plist文件。这提供了基本的文件系统完整性验证，可以防止无意中的文件系统损坏。
-
-- Secure--需要OC目录下vault.sig签名文件。这包括基本的完整性检查，但也试图建立一个可信的引导链。</string>
-                      </property>
-                      <property name="statusTip">
-                       <string> Enables vaulting mechanism in OpenCore.</string>
-                      </property>
-                      <property name="text">
-                       <string>Vault</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="1">
-                     <widget class="QComboBox" name="cboxVault">
-                      <property name="editable">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="0">
-                     <widget class="QLabel" name="label_27">
-                      <property name="toolTip">
-                       <string notr="true">Valid values:
+                   </property>
+                   <property name="statusTip">
+                    <string> Apple Secure Boot hardware model.</string>
+                   </property>
+                   <property name="text">
+                    <string>SecureBootModel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QComboBox" name="cboxVault">
+                   <property name="editable">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_27">
+                   <property name="toolTip">
+                    <string notr="true">Valid values:
 
 • Disabled — loading DMG images will fail. Disabled policy will still let macOS Recovery to load in most cases as there usually are boot.efi files compatible with Apple Secure Boot. Manually downloaded DMG images stored in com.apple.recovery.boot directories will not load, however.
 
@@ -5540,64 +5568,77 @@ Valid values:
 - Signed - 仅加载苹果签名的DMG映像。由于苹果安全引导设计，签名策略将允许任何苹果签名的macOS恢复加载，而不管苹果安全引导状态如何，这可能并不总是理想的。
 
 - Any - 任何DMG映像都将作为普通文件系统加载。强烈不建议使用“Any”策略，并且在激活Apple Secure Boot时将导致启动失败。</string>
-                      </property>
-                      <property name="statusTip">
-                       <string>Define Disk Image (DMG) loading policy used for macOS Recovery.</string>
-                      </property>
-                      <property name="text">
-                       <string>DmgLoading</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
+                   </property>
+                   <property name="statusTip">
+                    <string>Define Disk Image (DMG) loading policy used for macOS Recovery.</string>
+                   </property>
+                   <property name="text">
+                    <string>DmgLoading</string>
+                   </property>
                   </widget>
                  </item>
-                 <item>
-                  <widget class="QGroupBox" name="groupBox_7">
-                   <property name="title">
-                    <string/>
+                 <item row="3" column="0">
+                  <spacer name="verticalSpacer_110">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
                    </property>
-                   <layout class="QGridLayout" name="gridLayout_51">
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item row="2" column="1">
-                     <widget class="QLineEdit" name="editIntExposeSensitiveData">
-                      <property name="minimumSize">
-                       <size>
-                        <width>150</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="2" column="3">
-                     <widget class="QToolButton" name="btnExposeSensitiveData">
-                      <property name="text">
-                       <string>Select</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="2" column="2">
-                     <widget class="QLabel" name="lblExposeSensitiveData">
-                      <property name="text">
-                       <string>0x00</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="0">
-                     <widget class="QLabel" name="label_44">
-                      <property name="toolTip">
-                       <string notr="true">Setting this value to any non-zero 64-bit integer will allow using personalised Apple Secure Boot identifiers. 
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="groupBox_7">
+                <property name="title">
+                 <string/>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_51">
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item row="2" column="1">
+                  <widget class="QLineEdit" name="editIntExposeSensitiveData">
+                   <property name="minimumSize">
+                    <size>
+                     <width>150</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="3">
+                  <widget class="QToolButton" name="btnExposeSensitiveData">
+                   <property name="text">
+                    <string>Select</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="2">
+                  <widget class="QLabel" name="lblExposeSensitiveData">
+                   <property name="text">
+                    <string>0x00</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_44">
+                   <property name="toolTip">
+                    <string notr="true">Setting this value to any non-zero 64-bit integer will allow using personalised Apple Secure Boot identifiers. 
 
 If you want to use this setting, make sure to generate a random 64-bit number with a cryptographically secure random number generator. With this value set and SecureBootModel valid and not Disabled it is possible to achieve Full Security of Apple Secure Boot.
 
@@ -5614,19 +5655,19 @@ Until your operating system is personalised you will only be able to load macOS 
 要开始使用个性化的Apple Secure Boot，您必须重新安装操作系统或对其进行个性化设置。
 
 在您的操作系统被个性化之前，您只能加载macOS DMG恢复。如果你没有DMG恢复，你可以随时用macrecovery工具下载它，然后放到com.apple.recovery.boot，如提示和技巧部分所述。请记住，DMG加载需要设置为签名，以使用任何DMG与苹果安全启动。</string>
-                      </property>
-                      <property name="statusTip">
-                       <string>Apple Enclave Identifier.</string>
-                      </property>
-                      <property name="text">
-                       <string>ApECID</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="2" column="0">
-                     <widget class="QLabel" name="label_110">
-                      <property name="toolTip">
-                       <string notr="true">Type: plist integer
+                   </property>
+                   <property name="statusTip">
+                    <string>Apple Enclave Identifier.</string>
+                   </property>
+                   <property name="text">
+                    <string>ApECID</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_110">
+                   <property name="toolTip">
+                    <string notr="true">Type: plist integer
 
 Description: Sensitive data exposure bitmask (sum) to operating system.
 • 0x01 — Expose the printable booter path as an UEFI variable.
@@ -5641,64 +5682,64 @@ Description: Sensitive data exposure bitmask (sum) to operating system.
 - 0x02 - 将OpenCore版本作为一个UEFI变量公开。
 - 0x04 - 在OpenCore选取器菜单标题中显示OpenCore版本。
 - 0x08 - 将OEM信息显示为一组UEFI变量。</string>
-                      </property>
-                      <property name="statusTip">
-                       <string> Sensitive data exposure bitmask (sum) to operating system.</string>
-                      </property>
-                      <property name="text">
-                       <string>ExposeSensitiveData</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="1">
-                     <widget class="QLineEdit" name="editIntApECID">
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="1">
-                     <widget class="QLineEdit" name="editIntHaltLevel">
-                      <property name="minimumSize">
-                       <size>
-                        <width>150</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QLabel" name="label_14">
-                      <property name="toolTip">
-                       <string notr="true"> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message of HaltLevel. Possible values match DisplayLevel values.
+                   </property>
+                   <property name="statusTip">
+                    <string> Sensitive data exposure bitmask (sum) to operating system.</string>
+                   </property>
+                   <property name="text">
+                    <string>ExposeSensitiveData</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="editIntApECID">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLineEdit" name="editIntHaltLevel">
+                   <property name="minimumSize">
+                    <size>
+                     <width>150</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_14">
+                   <property name="toolTip">
+                    <string notr="true"> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message of HaltLevel. Possible values match DisplayLevel values.
 
 ----
 
  EDK II调试级别位掩码(sum)，使CPU在获得HaltLevel的消息后停止（停止执行）。可能的值与DisplayLevel值相匹配。</string>
-                      </property>
-                      <property name="statusTip">
-                       <string> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message
+                   </property>
+                   <property name="statusTip">
+                    <string> EDK II debug level bitmask (sum) causing CPU to halt (stop execution) after obtaining a message
  of HaltLevel. Possible values match DisplayLevel values.</string>
-                      </property>
-                      <property name="text">
-                       <string>HaltLevel</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="2">
-                     <widget class="QLabel" name="lblHaltLevel">
-                      <property name="text">
-                       <string>0x00000000</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="3" column="0">
-                     <widget class="QLabel" name="label_111">
-                      <property name="toolTip">
-                       <string notr="true">Type: plist integer, 32 bit
+                   </property>
+                   <property name="text">
+                    <string>HaltLevel</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QLabel" name="lblHaltLevel">
+                   <property name="text">
+                    <string>0x00000000</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_111">
+                   <property name="toolTip">
+                    <string notr="true">Type: plist integer, 32 bit
 
 Description: Define operating system detection policy.
 
@@ -5717,134 +5758,80 @@ Third party drivers may introduce additional security (and performance) consider
 由于不可能可靠地检测每个文件系统或设备类型，在开放的环境中不能完全依赖这个功能，要采用额外的措施。
 
 第三方驱动可能会在提供的扫描策略之后引入额外的安全（和性能）考虑。活动的扫描策略在4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102 GUID的scan-policy变量中暴露，仅用于UEFI启动服务。</string>
-                      </property>
-                      <property name="statusTip">
-                       <string> Define operating system detection policy.</string>
-                      </property>
-                      <property name="text">
-                       <string>ScanPolicy</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="3" column="1">
-                     <widget class="QLineEdit" name="editIntScanPolicy">
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="3" column="2">
-                     <widget class="QLabel" name="lblScanPolicy">
-                      <property name="text">
-                       <string>0x00000000</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="3" column="3">
-                     <widget class="QToolButton" name="btnScanPolicy">
-                      <property name="text">
-                       <string>Select</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="1" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_3">
-                 <item>
-                  <widget class="QToolButton" name="btnGetPassHash">
+                   </property>
+                   <property name="statusTip">
+                    <string> Define operating system detection policy.</string>
+                   </property>
                    <property name="text">
-                    <string>Generate password hash and password salt</string>
+                    <string>ScanPolicy</string>
                    </property>
                   </widget>
                  </item>
-                 <item>
-                  <widget class="QLineEdit" name="editPassInput">
+                 <item row="3" column="1">
+                  <widget class="QLineEdit" name="editIntScanPolicy">
                    <property name="maximumSize">
                     <size>
                      <width>16777215</width>
                      <height>16777215</height>
                     </size>
                    </property>
-                   <property name="placeholderText">
-                    <string>Please enter a password value</string>
-                   </property>
                   </widget>
                  </item>
-                 <item>
-                  <widget class="QProgressBar" name="progressBar">
-                   <property name="maximumSize">
-                    <size>
-                     <width>280</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="value">
-                    <number>0</number>
-                   </property>
-                   <property name="textVisible">
-                    <bool>false</bool>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="2" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_4">
-                 <item>
-                  <widget class="QLabel" name="label_93">
-                   <property name="toolTip">
-                    <string notr="true">Password hash used when EnabledPassword is set.
-
-----
-
-设置EnabledPassword时使用的密码哈希值。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Password hash used when EnabledPassword is set.</string>
-                   </property>
+                 <item row="3" column="2">
+                  <widget class="QLabel" name="lblScanPolicy">
                    <property name="text">
-                    <string>PasswordHash</string>
+                    <string>0x00000000</string>
                    </property>
                   </widget>
                  </item>
-                 <item>
-                  <widget class="QLineEdit" name="editDatPasswordHash"/>
+                 <item row="3" column="3">
+                  <widget class="QToolButton" name="btnScanPolicy">
+                   <property name="text">
+                    <string>Select</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
-               </item>
-               <item row="3" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_5">
-                 <item>
-                  <widget class="QLabel" name="label_94">
-                   <property name="toolTip">
-                    <string notr="true"> Password salt used when EnabledPassword is set.
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="6" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <widget class="QLabel" name="label_94">
+                <property name="toolTip">
+                 <string notr="true"> Password salt used when EnabledPassword is set.
 ----
  设置EnabledPassword时使用的密码盐。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Password salt used when EnabledPassword is set.</string>
-                   </property>
-                   <property name="text">
-                    <string>PasswordSalt</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="editDatPasswordSalt"/>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
+                </property>
+                <property name="statusTip">
+                 <string> Password salt used when EnabledPassword is set.</string>
+                </property>
+                <property name="text">
+                 <string>PasswordSalt</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="editDatPasswordSalt"/>
+              </item>
+             </layout>
             </item>
-            <item row="1" column="0">
+            <item row="8" column="0">
+             <spacer name="verticalSpacer_161">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="7" column="0">
              <layout class="QGridLayout" name="gridLayout_46">
               <item row="3" column="0">
                <widget class="QCheckBox" name="chkAllowNvramReset">
@@ -6015,20 +6002,86 @@ Note: This functionality is still under development and is not ready for product
                 </property>
                </widget>
               </item>
-              <item row="4" column="0">
-               <spacer name="verticalSpacer_161">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+             </layout>
+            </item>
+            <item row="3" column="0">
+             <spacer name="verticalSpacer_111">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="0">
+             <spacer name="verticalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QToolButton" name="btnGetPassHash">
+                <property name="text">
+                 <string>Generate password hash and password salt</string>
                 </property>
-                <property name="sizeHint" stdset="0">
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="editPassInput">
+                <property name="maximumSize">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>16777215</width>
+                  <height>16777215</height>
                  </size>
                 </property>
-               </spacer>
+                <property name="placeholderText">
+                 <string>Please enter a password value</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QProgressBar" name="progressBar">
+                <property name="maximumSize">
+                 <size>
+                  <width>280</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="value">
+                 <number>0</number>
+                </property>
+                <property name="textVisible">
+                 <bool>false</bool>
+                </property>
+               </widget>
               </item>
              </layout>
+            </item>
+            <item row="5" column="0">
+             <spacer name="verticalSpacer_112">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -9408,7 +9461,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -11099,6 +11152,12 @@ Note: This field is best to be left empty on most firmwares.
               </item>
               <item>
                <widget class="QComboBox" name="cboxConsoleMode">
+                <property name="minimumSize">
+                 <size>
+                  <width>200</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>400</width>
@@ -11156,6 +11215,12 @@ Note: This will fail when console handle has no GOP protocol. When the firmware 
               </item>
               <item>
                <widget class="QComboBox" name="cboxResolution">
+                <property name="minimumSize">
+                 <size>
+                  <width>200</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>400</width>
@@ -11346,6 +11411,12 @@ BuiltinGraphics的使用一般都很简单。对于大多数平台来说，有�
               </item>
               <item>
                <widget class="QComboBox" name="cboxTextRenderer">
+                <property name="minimumSize">
+                 <size>
+                  <width>200</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>400</width>
@@ -11405,6 +11476,12 @@ Note: This option requires ProvideConsoleGop to be enabled.
               </item>
               <item>
                <widget class="QComboBox" name="cboxGopPassThrough">
+                <property name="minimumSize">
+                 <size>
+                  <width>200</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>400</width>
