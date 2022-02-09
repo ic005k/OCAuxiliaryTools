@@ -1512,7 +1512,7 @@ This works around patched tables becoming incompatible with the SLIC table causi
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9691"/>
+        <location filename="mainwindow.cpp" line="9711"/>
         <source>Preset</source>
         <translation>预置</translation>
     </message>
@@ -1630,7 +1630,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9693"/>
+        <location filename="mainwindow.cpp" line="9713"/>
         <source>Add boot-args</source>
         <translation>添加引导参数</translation>
     </message>
@@ -1939,7 +1939,7 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
     </message>
     <message>
         <location filename="mainwindow.ui" line="13386"/>
-        <location filename="mainwindow.cpp" line="11179"/>
+        <location filename="mainwindow.cpp" line="11212"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
@@ -2560,8 +2560,8 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9598"/>
-        <location filename="mainwindow.cpp" line="10421"/>
-        <location filename="mainwindow.cpp" line="10426"/>
+        <location filename="mainwindow.cpp" line="10454"/>
+        <location filename="mainwindow.cpp" line="10459"/>
         <source>Select date</source>
         <translation>选择日期</translation>
     </message>
@@ -3891,7 +3891,8 @@ Mask</translation>
         <location filename="mainwindow.cpp" line="2384"/>
         <location filename="mainwindow.cpp" line="2433"/>
         <location filename="mainwindow.cpp" line="4420"/>
-        <location filename="mainwindow.cpp" line="9651"/>
+        <location filename="mainwindow.cpp" line="9635"/>
+        <location filename="mainwindow.cpp" line="9646"/>
         <source>Enabled</source>
         <translation>是否启用
 Enabled</translation>
@@ -3983,7 +3984,8 @@ MaxKernel</translation>
         <location filename="mainwindow.cpp" line="977"/>
         <location filename="mainwindow.cpp" line="1018"/>
         <location filename="mainwindow.cpp" line="1077"/>
-        <location filename="mainwindow.cpp" line="9651"/>
+        <location filename="mainwindow.cpp" line="9635"/>
+        <location filename="mainwindow.cpp" line="9646"/>
         <source>Arch</source>
         <translation>Kext架构
 Arch</translation>
@@ -4070,7 +4072,8 @@ TableLength</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="589"/>
-        <location filename="mainwindow.cpp" line="9651"/>
+        <location filename="mainwindow.cpp" line="9635"/>
+        <location filename="mainwindow.cpp" line="9646"/>
         <source>All</source>
         <translation>全部
 All</translation>
@@ -4133,7 +4136,8 @@ Value</translation>
     <message>
         <location filename="mainwindow.cpp" line="820"/>
         <location filename="mainwindow.cpp" line="1557"/>
-        <location filename="mainwindow.cpp" line="9654"/>
+        <location filename="mainwindow.cpp" line="9638"/>
+        <location filename="mainwindow.cpp" line="9649"/>
         <source>Class</source>
         <translation>数据类型
 Class</translation>
@@ -4200,7 +4204,8 @@ Name</translation>
     <message>
         <location filename="mainwindow.cpp" line="1369"/>
         <location filename="mainwindow.cpp" line="1400"/>
-        <location filename="mainwindow.cpp" line="9653"/>
+        <location filename="mainwindow.cpp" line="9637"/>
+        <location filename="mainwindow.cpp" line="9648"/>
         <source>Auxiliary</source>
         <translation>辅助
 Auxiliary</translation>
@@ -4208,7 +4213,8 @@ Auxiliary</translation>
     <message>
         <location filename="mainwindow.cpp" line="1375"/>
         <location filename="mainwindow.cpp" line="1409"/>
-        <location filename="mainwindow.cpp" line="9652"/>
+        <location filename="mainwindow.cpp" line="9636"/>
+        <location filename="mainwindow.cpp" line="9647"/>
         <source>TextMode</source>
         <translation>文本模式
 TextMode</translation>
@@ -4222,7 +4228,8 @@ Flavour</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1406"/>
-        <location filename="mainwindow.cpp" line="9653"/>
+        <location filename="mainwindow.cpp" line="9637"/>
+        <location filename="mainwindow.cpp" line="9648"/>
         <source>RealPath</source>
         <translation>实际路径
 RealPath</translation>
@@ -4313,42 +4320,47 @@ Speed</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="11409"/>
-        <location filename="mainwindow.cpp" line="11439"/>
+        <location filename="mainwindow.cpp" line="9714"/>
+        <source>Auto Column Width</source>
+        <translation>自动列宽度</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="11442"/>
+        <location filename="mainwindow.cpp" line="11472"/>
         <source>This is not a valid Clover configuration file.</source>
         <translation>这不是一个有效的Clover配置文件。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="11481"/>
+        <location filename="mainwindow.cpp" line="11514"/>
         <source>You cannot add a new key field to a page where a data table exists.</source>
         <translation>不能在存在数据表的页面上添加一个新的键字段。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="13406"/>
-        <location filename="mainwindow.cpp" line="9687"/>
+        <location filename="mainwindow.cpp" line="9707"/>
         <source>Add Item</source>
         <translation>增加条目</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="13414"/>
-        <location filename="mainwindow.cpp" line="9688"/>
+        <location filename="mainwindow.cpp" line="9708"/>
         <source>Delete Item</source>
         <translation>删除条目</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="13396"/>
-        <location filename="mainwindow.cpp" line="9689"/>
+        <location filename="mainwindow.cpp" line="9709"/>
         <source>Move Up</source>
         <translation>上移</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="13401"/>
-        <location filename="mainwindow.cpp" line="9690"/>
+        <location filename="mainwindow.cpp" line="9710"/>
         <source>Move Down</source>
         <translation>下移</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9692"/>
+        <location filename="mainwindow.cpp" line="9712"/>
         <source>Browse Database</source>
         <translation>浏览数据库</translation>
     </message>
@@ -4462,8 +4474,8 @@ Speed</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="90"/>
-        <location filename="mainwindow.cpp" line="10423"/>
-        <location filename="mainwindow.cpp" line="10424"/>
+        <location filename="mainwindow.cpp" line="10456"/>
+        <location filename="mainwindow.cpp" line="10457"/>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
@@ -4576,14 +4588,14 @@ BaseSkip</translation>
         <location filename="mainwindow.cpp" line="6860"/>
         <location filename="mainwindow.cpp" line="6868"/>
         <location filename="mainwindow.cpp" line="6913"/>
-        <location filename="mainwindow.cpp" line="9666"/>
+        <location filename="mainwindow.cpp" line="9686"/>
         <source>CopyText</source>
         <translation>复制文本</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="6796"/>
         <location filename="mainwindow.cpp" line="6852"/>
-        <location filename="mainwindow.cpp" line="9686"/>
+        <location filename="mainwindow.cpp" line="9706"/>
         <source>Show Tips</source>
         <translation>显示提示</translation>
     </message>
@@ -4624,17 +4636,17 @@ BaseSkip</translation>
         <translation>有新版本</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9683"/>
+        <location filename="mainwindow.cpp" line="9703"/>
         <source>Cut Line</source>
         <translation>剪切行</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9684"/>
+        <location filename="mainwindow.cpp" line="9704"/>
         <source>Copy Line</source>
         <translation>复制行</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9685"/>
+        <location filename="mainwindow.cpp" line="9705"/>
         <source>Paste Line</source>
         <translation>粘贴行</translation>
     </message>
@@ -4664,7 +4676,8 @@ BaseSkip</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2430"/>
-        <location filename="mainwindow.cpp" line="9652"/>
+        <location filename="mainwindow.cpp" line="9636"/>
+        <location filename="mainwindow.cpp" line="9647"/>
         <source>Type</source>
         <translation>类型
 Type</translation>
@@ -5187,25 +5200,25 @@ Type</translation>
     </message>
     <message>
         <location filename="dlgnewkeyfield.ui" line="40"/>
-        <location filename="dlgnewkeyfield.cpp" line="52"/>
+        <location filename="dlgnewkeyfield.cpp" line="53"/>
         <source>string</source>
         <translation>字串</translation>
     </message>
     <message>
         <location filename="dlgnewkeyfield.ui" line="45"/>
-        <location filename="dlgnewkeyfield.cpp" line="55"/>
+        <location filename="dlgnewkeyfield.cpp" line="56"/>
         <source>integer</source>
         <translation>整数</translation>
     </message>
     <message>
         <location filename="dlgnewkeyfield.ui" line="50"/>
-        <location filename="dlgnewkeyfield.cpp" line="58"/>
+        <location filename="dlgnewkeyfield.cpp" line="59"/>
         <source>data</source>
         <translation>数据（16进制）</translation>
     </message>
     <message>
         <location filename="dlgnewkeyfield.ui" line="55"/>
-        <location filename="dlgnewkeyfield.cpp" line="31"/>
+        <location filename="dlgnewkeyfield.cpp" line="32"/>
         <source>bool</source>
         <translation>布尔</translation>
     </message>
@@ -5215,38 +5228,38 @@ Type</translation>
         <translation>添加</translation>
     </message>
     <message>
-        <location filename="dlgnewkeyfield.cpp" line="47"/>
-        <location filename="dlgnewkeyfield.cpp" line="74"/>
+        <location filename="dlgnewkeyfield.cpp" line="48"/>
+        <location filename="dlgnewkeyfield.cpp" line="75"/>
         <source>The key field already exists and cannot be added.</source>
         <translation>这个键字段已存在，不能添加。</translation>
     </message>
     <message>
-        <location filename="dlgnewkeyfield.cpp" line="166"/>
-        <location filename="dlgnewkeyfield.cpp" line="253"/>
+        <location filename="dlgnewkeyfield.cpp" line="167"/>
+        <location filename="dlgnewkeyfield.cpp" line="254"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="dlgnewkeyfield.cpp" line="167"/>
-        <location filename="dlgnewkeyfield.cpp" line="184"/>
-        <location filename="dlgnewkeyfield.cpp" line="254"/>
-        <location filename="dlgnewkeyfield.cpp" line="272"/>
+        <location filename="dlgnewkeyfield.cpp" line="168"/>
+        <location filename="dlgnewkeyfield.cpp" line="185"/>
+        <location filename="dlgnewkeyfield.cpp" line="255"/>
+        <location filename="dlgnewkeyfield.cpp" line="273"/>
         <source>Rename</source>
         <translation>重命名</translation>
     </message>
     <message>
-        <location filename="dlgnewkeyfield.cpp" line="184"/>
-        <location filename="dlgnewkeyfield.cpp" line="272"/>
+        <location filename="dlgnewkeyfield.cpp" line="185"/>
+        <location filename="dlgnewkeyfield.cpp" line="273"/>
         <source>Key Name:</source>
         <translation>键名称</translation>
     </message>
     <message>
-        <location filename="dlgnewkeyfield.cpp" line="237"/>
+        <location filename="dlgnewkeyfield.cpp" line="238"/>
         <source>Integer</source>
         <translation>整数</translation>
     </message>
     <message>
-        <location filename="dlgnewkeyfield.cpp" line="242"/>
+        <location filename="dlgnewkeyfield.cpp" line="243"/>
         <source>Hexadecimal</source>
         <translation>十六进制</translation>
     </message>
@@ -5783,8 +5796,8 @@ p, li { white-space: pre-wrap; }
         <translation>打开网址</translation>
     </message>
     <message>
-        <location filename="dlgpreference.cpp" line="83"/>
-        <location filename="dlgpreference.cpp" line="85"/>
+        <location filename="dlgpreference.cpp" line="84"/>
+        <location filename="dlgpreference.cpp" line="86"/>
         <source> Source </source>
         <translation>来源</translation>
     </message>

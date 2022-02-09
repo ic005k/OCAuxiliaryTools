@@ -9628,6 +9628,31 @@ void MainWindow::tablePopMenu(QTableWidget* w, QAction* cutAction,
   });
 }
 
+void MainWindow::set_AutoColWidth(QTableWidget* w, bool autoColWidth) {
+  if (autoColWidth) {
+    for (int y = 0; y < w->columnCount(); y++) {
+      QString item = w->horizontalHeaderItem(y)->text();
+      if (item != tr("Enabled") && item != tr("Arch") && item != tr("All") &&
+          item != tr("Type") && item != tr("TextMode") &&
+          item != tr("Auxiliary") && item != tr("RealPath") &&
+          item != tr("Class")) {
+        w->horizontalHeader()->setSectionResizeMode(
+            y, QHeaderView::ResizeToContents);
+      }
+    }
+  } else {
+    for (int y = 0; y < w->columnCount(); y++) {
+      QString item = w->horizontalHeaderItem(y)->text();
+      if (item != tr("Enabled") && item != tr("Arch") && item != tr("All") &&
+          item != tr("Type") && item != tr("TextMode") &&
+          item != tr("Auxiliary") && item != tr("RealPath") &&
+          item != tr("Class")) {
+        w->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
+      }
+    }
+  }
+}
+
 void MainWindow::init_CopyPasteLine() {
   QObjectList listBtn = getAllToolButton(getAllUIControls(ui->tabTotal));
   for (int i = 0; i < listBtn.count(); i++) {
@@ -9646,17 +9671,12 @@ void MainWindow::init_CopyPasteLine() {
   listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
   for (int i = 0; i < listOfTableWidget.count(); i++) {
     QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
-    for (int y = 0; y < w->columnCount(); y++) {
-      QString item = w->horizontalHeaderItem(y)->text();
-      if (item != tr("Enabled") && item != tr("Arch") && item != tr("All") &&
-          item != tr("Type") && item != tr("TextMode") &&
-          item != tr("Auxiliary") && item != tr("RealPath") &&
-          item != tr("Class")) {
-        w->horizontalHeader()->setSectionResizeMode(
-            y, QHeaderView::ResizeToContents);
-      }
-    }
-    // w->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
+
+    // Auto Col Width
+    QSettings Reg(strIniFile, QSettings::IniFormat);
+    bool isAutoColWidth =
+        Reg.value(w->objectName() + "AutoColWidth", true).toBool();
+    set_AutoColWidth(w, isAutoColWidth);
 
     w->setContextMenuPolicy(Qt::CustomContextMenu);
     w->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -9691,6 +9711,9 @@ void MainWindow::init_CopyPasteLine() {
     QAction* preset = new QAction(tr("Preset"));
     QAction* browdatabase = new QAction(tr("Browse Database"));
     QAction* bootargs = new QAction(tr("Add boot-args"));
+    QAction* autoColWidth = new QAction(tr("Auto Column Width"));
+    autoColWidth->setCheckable(true);
+    autoColWidth->setChecked(isAutoColWidth);
     QMenu* popMenu = new QMenu(this);
 
     popMenu->addAction(up);
@@ -9704,6 +9727,8 @@ void MainWindow::init_CopyPasteLine() {
     popMenu->addAction(cutAction);
     popMenu->addAction(copyAction);
     popMenu->addAction(pasteAction);
+    popMenu->addSeparator();
+    popMenu->addAction(autoColWidth);
     popMenu->addSeparator();
     popMenu->addAction(showtipAction);
 
@@ -9770,7 +9795,15 @@ void MainWindow::init_CopyPasteLine() {
       if (w == ui->table_nv_ls0) ui->btnPresetNVLegacy->click();
     });
 
-    // 显示提示
+    // Auto Col Width
+    connect(autoColWidth, &QAction::triggered, [=]() {
+      QSettings Reg(strIniFile, QSettings::IniFormat);
+      bool isAutoColWidth = autoColWidth->isChecked();
+      Reg.setValue(w->objectName() + "AutoColWidth", isAutoColWidth);
+      set_AutoColWidth(w, isAutoColWidth);
+    });
+
+    // Show Tip
     connect(showtipAction, &QAction::triggered,
             [=]() { myToolTip->popup(QCursor::pos(), "", w->toolTip()); });
 
