@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -9421,7 +9421,7 @@ New entries are added to the end of the Data Hub instead, with macOS ignoring ol
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>7</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -9710,392 +9710,56 @@ APFS驱动版本连接APFS驱动与macOS版本。旧版macOS的APFS驱动程序�
            <attribute name="title">
             <string>AppleInput</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_81">
-            <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_24">
-              <item row="6" column="1">
-               <widget class="QLineEdit" name="editIntKeyInitialDelay">
-                <property name="text">
-                 <string>0</string>
-                </property>
-               </widget>
-              </item>
-              <item row="10" column="1">
-               <widget class="QLineEdit" name="editIntPointerPollMask">
-                <property name="text">
-                 <string>-1</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <spacer name="verticalSpacer_121">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="label_116">
-                <property name="toolTip">
-                 <string notr="true">Type: plist integer
-
-Description: Configure initial keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
-
-When not using KeySupport, this option will configure the initial delay before key repeat as expected. The Apple OEM default value is 50 (500ms).
-When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, your initial key repeat delay is being driven by your BIOS firmware and cannot be overriden by OC. To avoid this minor undesired effect, set KeyInitialDelay to 0. If doing this, to avoid multiple reponses to single key presses, you should set KeySubsequentDelay to at least the value of your KeyForgetThreshold setting.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现Apple Event协议中配置初始键盘重复延迟，单位为10ms。
-
-当不使用 KeySupport 时，该选项将按预期配置按键重复前的初始延迟。Apple OEM默认值为50（500ms）。
-使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，您的初始按键重复延迟是由BIOS固件驱动的，不能由OC覆盖。如果这样做，为了避免单一按键的多次响应，您应该将KeySubsequentDelay至少设置为KeyForgetThreshold设置的值。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Configures the initial delay before keyboard key repeats in OpenCore implementation of Apple
- Event protocol, in units of 10ms.</string>
-                </property>
-                <property name="text">
-                 <string notr="true">KeyInitialDelay</string>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="0">
-               <widget class="QLabel" name="label_113">
-                <property name="toolTip">
-                 <string notr="true">Type: plist integer
-
-Description: Configure subsequent keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
-
-Configures the gap between key repeats. The Apple OEM default value is 5 (50ms). 0 is an invalid value for this option.
-When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, set KeyInitialDelay to 0 and set this option to at least the value of your KeyForgetThreshold setting. (In the unlikely event that you still get frequent, or occasional, double key responses after doing this,proceed to set this value to one or two greater than KeyForgetThreshold - use the lowest value which works.)
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现Apple Event协议中配置后续键盘重复延迟，单位为10ms。
-
-配置按键重复之间的间隙。Apple OEM的默认值是5（50ms）。0是该选项的无效值。
-使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，请将KeyInitialDelay设置为0，并将此选项设置为至少与您的KeyForgetThreshold设置值相同。(如果在这样做之后，你仍然得到频繁的或偶尔的双键响应，则继续将此值设置为比KeyForgetThreshold大一到两个的值--使用有效的最低值。)</string>
-                </property>
-                <property name="statusTip">
-                 <string>Configures the gap between keyboard key repeats in OpenCore implementation of Apple Event
- protocol, in units of 10ms.</string>
-                </property>
-                <property name="text">
-                 <string notr="true">KeySubsequentDelay</string>
-                </property>
-               </widget>
-              </item>
-              <item row="18" column="1">
-               <widget class="QLineEdit" name="editIntPointerSpeedMul">
-                <property name="text">
-                 <string>1</string>
-                </property>
-               </widget>
-              </item>
-              <item row="14" column="1">
-               <widget class="QLineEdit" name="editIntPointerPollMin">
-                <property name="text">
-                 <string>10</string>
-                </property>
-               </widget>
-              </item>
-              <item row="18" column="0">
-               <widget class="QLabel" name="label_117">
-                <property name="toolTip">
-                 <string notr="true">Type: plist integer
-
-Description: Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol.
-
-Configures the multiplier for pointer movements. The Apple OEM default value is 1.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现的Apple Event协议中配置指针速度乘数。
-
-配置指针移动的乘数。Apple OEM的默认值是1。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol. Has no
- effect when using the OEM Apple implementation (see AppleEvent setting).</string>
-                </property>
-                <property name="text">
-                 <string notr="true">PointerSpeedMul</string>
-                </property>
-               </widget>
-              </item>
-              <item row="13" column="0">
-               <spacer name="verticalSpacer_126">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="19" column="0">
-               <spacer name="verticalSpacer_129">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="10" column="0">
+           <layout class="QGridLayout" name="gridLayout_24">
+            <item row="5" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_29">
+              <item>
                <widget class="QLabel" name="lblPointerPollMask">
                 <property name="text">
                  <string>PointerPollMask</string>
                 </property>
                </widget>
               </item>
-              <item row="16" column="1">
-               <widget class="QLineEdit" name="editIntPointerSpeedDiv">
+              <item>
+               <widget class="QLineEdit" name="editIntPointerPollMask">
                 <property name="text">
-                 <string>1</string>
+                 <string>-1</string>
                 </property>
                </widget>
               </item>
-              <item row="12" column="1">
-               <widget class="QLineEdit" name="editIntPointerPollMax">
-                <property name="text">
-                 <string>80</string>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="0">
-               <spacer name="verticalSpacer_124">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="16" column="0">
-               <widget class="QLabel" name="label_112">
-                <property name="toolTip">
-                 <string notr="true">Type: plist integer
-
-Description: Configure pointer speed divisor in OpenCore implementation of Apple Event protocol.
-
-Configures the divisor for pointer movements. The Apple OEM default value is 1. 0 is an invalid value for this option.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现的Apple Event协议中配置指针速度分位器。
-
-配置指针移动的分度。Apple OEM的默认值是1，0是这个选项的无效值。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Configure pointer speed divisor in OpenCore implementation of Apple Event protocol. Has no
- effect when using the OEM Apple implementation (see AppleEvent setting).</string>
-                </property>
-                <property name="text">
-                 <string notr="true">PointerSpeedDiv</string>
-                </property>
-               </widget>
-              </item>
-              <item row="17" column="0">
-               <spacer name="verticalSpacer_128">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="8" column="1">
-               <widget class="QLineEdit" name="editIntKeySubsequentDelay">
-                <property name="text">
-                 <string>5</string>
-                </property>
-               </widget>
-              </item>
-              <item row="12" column="0">
+              <item>
                <widget class="QLabel" name="lblPointerPollMax">
                 <property name="text">
                  <string>PointerPollMax</string>
                 </property>
                </widget>
               </item>
-              <item row="14" column="0">
+              <item>
+               <widget class="QLineEdit" name="editIntPointerPollMax">
+                <property name="text">
+                 <string>80</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLabel" name="lblPointerPollMin">
                 <property name="text">
                  <string>PointerPollMin</string>
                 </property>
                </widget>
               </item>
-              <item row="20" column="0">
-               <widget class="QCheckBox" name="chkGraphicsInputMirroring">
-                <property name="toolTip">
-                 <string>Type: plist boolean
-
-Description: Apple’s own implementation of AppleEvent prevents keyboard input during graphics applications from appearing on the basic console input stream.
-
-With the default setting of false, OC’s builtin implementation of AppleEvent replicates this behaviour.
-On non-Apple hardware this can stop keyboard input working in graphics-based applications such as Windows BitLocker which use non-Apple key input methods.
-The recommended setting on all hardware is true.
-
-Note: AppleEvent’s default behaviour is intended to prevent unwanted queued keystrokes from appearing after exiting graphics-based UEFI applications; this issue is already handled separately within OpenCore.
-
-• true — Allow keyboard input to reach graphics mode apps which are not using Apple input protocols.
-• false — Prevent key input mirroring to non-Apple protocols when in graphics mode.
-----
-类型：plist布尔值
-
-描述：苹果公司自己实现的AppleEvent防止图形应用程序中的键盘输入出现在基本控制台输入流中。
-
-默认设置为false，OC对AppleEvent的内置实现复制了这种行为。
-在非苹果硬件上，这可能会阻止键盘输入在基于图形的应用程序中工作，如使用非苹果按键输入方法的Windows BitLocker。
-在所有硬件上的推荐设置是true。
-
-注意：AppleEvent的默认行为旨在防止退出基于图形的UEFI应用程序后出现不需要的排队按键；这个问题已经在OpenCore中单独处理。
-
-- true - 允许键盘输入到达不使用苹果输入协议的图形模式应用程序。
-- false - 防止在图形模式下将按键输入镜像到非苹果协议。</string>
-                </property>
+              <item>
+               <widget class="QLineEdit" name="editIntPointerPollMin">
                 <property name="text">
-                 <string>GraphicsInputMirroring</string>
+                 <string>10</string>
                 </property>
                </widget>
               </item>
-              <item row="7" column="0">
-               <spacer name="verticalSpacer_123">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="15" column="0">
-               <spacer name="verticalSpacer_127">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="5" column="0">
-               <spacer name="verticalSpacer_122">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="11" column="0">
-               <spacer name="verticalSpacer_125">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="3" column="0">
-               <widget class="QCheckBox" name="chkCustomDelays">
-                <property name="toolTip">
-                 <string notr="true">Type: plist boolean
-
-Description: Enable custom key repeat delays when using the OpenCore implementation of the Apple Event protocol. Has no effect when using the OEM Apple implementation (see AppleEvent setting).
-
-• true — The values of KeyInitialDelay and KeySubsequentDelay are used.
-• false — Apple default values of 500ms (50) and 50ms (5) are used.
-
-----
-
-类型：plist boolean
-
-说明：当使用 Apple Event 协议的 OpenCore 实现时，启用自定义键重复延迟。使用 OEM Apple 实现时没有影响（请参见 AppleEvent 设置）。
-
-- true - 使用 KeyInitialDelay 和 KeySubsequentDelay 的值。
-- false - 使用 500ms (50) 和 50ms (5) 的 Apple 默认值。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Enable custom key repeat delays when using the OpenCore implementation of the Apple Event
- protocol. Has no effect when using the OEM Apple implementation (see AppleEvent setting).</string>
-                </property>
-                <property name="text">
-                 <string>CustomDelays</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="cboxAppleEvent">
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-                <property name="currentText">
-                 <string notr="true">Auto</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string notr="true">Auto</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Builtin</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">OEM</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="1" column="0">
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_27">
+              <item>
                <widget class="QLabel" name="label_114">
                 <property name="toolTip">
                  <string notr="true">Type: plist string
@@ -10132,33 +9796,329 @@ This option determines whether Apple’s OEM Apple Event protocol is used (where
                 </property>
                </widget>
               </item>
-              <item row="0" column="0">
-               <spacer name="verticalSpacer_120">
+              <item>
+               <widget class="QComboBox" name="cboxAppleEvent">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+                <property name="currentText">
+                 <string notr="true">Auto</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string notr="true">Auto</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string notr="true">Builtin</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string notr="true">OEM</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_12">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
-              <item row="21" column="0">
-               <spacer name="verticalSpacer_130">
+              <item>
+               <widget class="QCheckBox" name="chkGraphicsInputMirroring">
+                <property name="toolTip">
+                 <string>Type: plist boolean
+
+Description: Apple’s own implementation of AppleEvent prevents keyboard input during graphics applications from appearing on the basic console input stream.
+
+With the default setting of false, OC’s builtin implementation of AppleEvent replicates this behaviour.
+On non-Apple hardware this can stop keyboard input working in graphics-based applications such as Windows BitLocker which use non-Apple key input methods.
+The recommended setting on all hardware is true.
+
+Note: AppleEvent’s default behaviour is intended to prevent unwanted queued keystrokes from appearing after exiting graphics-based UEFI applications; this issue is already handled separately within OpenCore.
+
+• true — Allow keyboard input to reach graphics mode apps which are not using Apple input protocols.
+• false — Prevent key input mirroring to non-Apple protocols when in graphics mode.
+----
+类型：plist布尔值
+
+描述：苹果公司自己实现的AppleEvent防止图形应用程序中的键盘输入出现在基本控制台输入流中。
+
+默认设置为false，OC对AppleEvent的内置实现复制了这种行为。
+在非苹果硬件上，这可能会阻止键盘输入在基于图形的应用程序中工作，如使用非苹果按键输入方法的Windows BitLocker。
+在所有硬件上的推荐设置是true。
+
+注意：AppleEvent的默认行为旨在防止退出基于图形的UEFI应用程序后出现不需要的排队按键；这个问题已经在OpenCore中单独处理。
+
+- true - 允许键盘输入到达不使用苹果输入协议的图形模式应用程序。
+- false - 防止在图形模式下将按键输入镜像到非苹果协议。</string>
+                </property>
+                <property name="text">
+                 <string>GraphicsInputMirroring</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_13">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
              </layout>
+            </item>
+            <item row="2" column="0">
+             <spacer name="verticalSpacer_121">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_28">
+              <item>
+               <widget class="QLabel" name="label_116">
+                <property name="toolTip">
+                 <string notr="true">Type: plist integer
+
+Description: Configure initial keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
+
+When not using KeySupport, this option will configure the initial delay before key repeat as expected. The Apple OEM default value is 50 (500ms).
+When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, your initial key repeat delay is being driven by your BIOS firmware and cannot be overriden by OC. To avoid this minor undesired effect, set KeyInitialDelay to 0. If doing this, to avoid multiple reponses to single key presses, you should set KeySubsequentDelay to at least the value of your KeyForgetThreshold setting.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现Apple Event协议中配置初始键盘重复延迟，单位为10ms。
+
+当不使用 KeySupport 时，该选项将按预期配置按键重复前的初始延迟。Apple OEM默认值为50（500ms）。
+使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，您的初始按键重复延迟是由BIOS固件驱动的，不能由OC覆盖。如果这样做，为了避免单一按键的多次响应，您应该将KeySubsequentDelay至少设置为KeyForgetThreshold设置的值。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Configures the initial delay before keyboard key repeats in OpenCore implementation of Apple
+ Event protocol, in units of 10ms.</string>
+                </property>
+                <property name="text">
+                 <string notr="true">KeyInitialDelay</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="editIntKeyInitialDelay">
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_113">
+                <property name="toolTip">
+                 <string notr="true">Type: plist integer
+
+Description: Configure subsequent keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
+
+Configures the gap between key repeats. The Apple OEM default value is 5 (50ms). 0 is an invalid value for this option.
+When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, set KeyInitialDelay to 0 and set this option to at least the value of your KeyForgetThreshold setting. (In the unlikely event that you still get frequent, or occasional, double key responses after doing this,proceed to set this value to one or two greater than KeyForgetThreshold - use the lowest value which works.)
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现Apple Event协议中配置后续键盘重复延迟，单位为10ms。
+
+配置按键重复之间的间隙。Apple OEM的默认值是5（50ms）。0是该选项的无效值。
+使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，请将KeyInitialDelay设置为0，并将此选项设置为至少与您的KeyForgetThreshold设置值相同。(如果在这样做之后，你仍然得到频繁的或偶尔的双键响应，则继续将此值设置为比KeyForgetThreshold大一到两个的值--使用有效的最低值。)</string>
+                </property>
+                <property name="statusTip">
+                 <string>Configures the gap between keyboard key repeats in OpenCore implementation of Apple Event
+ protocol, in units of 10ms.</string>
+                </property>
+                <property name="text">
+                 <string notr="true">KeySubsequentDelay</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="editIntKeySubsequentDelay">
+                <property name="text">
+                 <string>5</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="chkCustomDelays">
+                <property name="toolTip">
+                 <string notr="true">Type: plist boolean
+
+Description: Enable custom key repeat delays when using the OpenCore implementation of the Apple Event protocol. Has no effect when using the OEM Apple implementation (see AppleEvent setting).
+
+• true — The values of KeyInitialDelay and KeySubsequentDelay are used.
+• false — Apple default values of 500ms (50) and 50ms (5) are used.
+
+----
+
+类型：plist boolean
+
+说明：当使用 Apple Event 协议的 OpenCore 实现时，启用自定义键重复延迟。使用 OEM Apple 实现时没有影响（请参见 AppleEvent 设置）。
+
+- true - 使用 KeyInitialDelay 和 KeySubsequentDelay 的值。
+- false - 使用 500ms (50) 和 50ms (5) 的 Apple 默认值。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Enable custom key repeat delays when using the OpenCore implementation of the Apple Event
+ protocol. Has no effect when using the OEM Apple implementation (see AppleEvent setting).</string>
+                </property>
+                <property name="text">
+                 <string>CustomDelays</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="4" column="0">
+             <spacer name="verticalSpacer_122">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="6" column="0">
+             <spacer name="verticalSpacer_123">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="0">
+             <spacer name="verticalSpacer_120">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="7" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_30">
+              <item>
+               <widget class="QLabel" name="label_112">
+                <property name="toolTip">
+                 <string notr="true">Type: plist integer
+
+Description: Configure pointer speed divisor in OpenCore implementation of Apple Event protocol.
+
+Configures the divisor for pointer movements. The Apple OEM default value is 1. 0 is an invalid value for this option.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现的Apple Event协议中配置指针速度分位器。
+
+配置指针移动的分度。Apple OEM的默认值是1，0是这个选项的无效值。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Configure pointer speed divisor in OpenCore implementation of Apple Event protocol. Has no
+ effect when using the OEM Apple implementation (see AppleEvent setting).</string>
+                </property>
+                <property name="text">
+                 <string notr="true">PointerSpeedDiv</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="editIntPointerSpeedDiv">
+                <property name="text">
+                 <string>1</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_117">
+                <property name="toolTip">
+                 <string notr="true">Type: plist integer
+
+Description: Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol.
+
+Configures the multiplier for pointer movements. The Apple OEM default value is 1.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现的Apple Event协议中配置指针速度乘数。
+
+配置指针移动的乘数。Apple OEM的默认值是1。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol. Has no
+ effect when using the OEM Apple implementation (see AppleEvent setting).</string>
+                </property>
+                <property name="text">
+                 <string notr="true">PointerSpeedMul</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="editIntPointerSpeedMul">
+                <property name="text">
+                 <string>1</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="8" column="0">
+             <spacer name="verticalSpacer_124">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -10166,27 +10126,36 @@ This option determines whether Apple’s OEM Apple Event protocol is used (where
            <attribute name="title">
             <string>Audio</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_78">
-            <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_61">
-              <item row="19" column="0">
-               <widget class="QCheckBox" name="chkAudioSupport">
-                <property name="toolTip">
-                 <string notr="true">Enabling this setting routes audio playback from builtin protocols to a dedicated audio port (AudioOut) of the specified codec (AudioCodec) located on the audio controller (AudioDevice).
-
-----
-
-启用此设置可将内置协议的音频播放路由到位于音频控制器（AudioDevice）上的指定编解码器（AudioCodec）的专用音频端口（AudioOut）。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Activate audio support by connecting to a backend driver.</string>
-                </property>
-                <property name="text">
-                 <string>AudioSupport</string>
-                </property>
-               </widget>
-              </item>
-              <item row="11" column="0">
+           <layout class="QGridLayout" name="gridLayout_61">
+            <item row="8" column="0">
+             <spacer name="verticalSpacer_44">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="14" column="0">
+             <spacer name="verticalSpacer_47">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="13" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_24">
+              <item>
                <widget class="QLabel" name="label_70">
                 <property name="toolTip">
                  <string notr="true">Enabling this setting plays boot chime through builtin audio support. Volume level is determined by MinimumVolume and VolumeAmplifier settings and SystemAudioVolume NVRAM variable. Possible values include:
@@ -10215,118 +10184,44 @@ Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid c
                 </property>
                </widget>
               </item>
-              <item row="16" column="0">
-               <spacer name="verticalSpacer_46">
+              <item>
+               <widget class="QComboBox" name="cboxPlayChime">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_11">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
-              <item row="2" column="2">
-               <widget class="QLineEdit" name="editAudioDevice"/>
-              </item>
-              <item row="8" column="2">
-               <widget class="QLineEdit" name="editIntMinimumAssistGain">
-                <property name="text">
-                 <string>-30</string>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="0">
-               <widget class="QLabel" name="label_36">
-                <property name="toolTip">
-                 <string notr="true">Volume level range read from SystemAudioVolume varies depending on the codec. To transform read value in [0, 127] range into raw volume range [0, 100] the read value is scaled to VolumeAmplifier percents:
-
-RawV olume = MIN(SystemAudioV olume ∗ V olumeAmplifier 100 , 100)
-
-Note: the transformation used in macOS is not linear, but it is very close and this nuance is thus ignored.
-
-----
-
-从SystemAudioVolume读取的音量范围根据编解码器的不同而不同。为了将[0，127]范围内的读取值转换为原始音量范围[0，100]，读取值将被缩放为音量放大器的百分数。
-
-RawV olume = MIN(SystemAudioV olume ∗ V olumeAmplifier 100 , 100)
-
-注意：macOS中使用的变换不是线性的，但非常接近，因此忽略了这种细微差别。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Multiplication coefficient for system volume to raw volume linear translation from 0 to 1000.</string>
-                </property>
-                <property name="text">
-                 <string>MinimumAssistGain</string>
-                </property>
-               </widget>
-              </item>
-              <item row="13" column="0">
-               <widget class="QLabel" name="label_107">
-                <property name="toolTip">
-                 <string notr="true">Some codecs require a vendor-specific delay after the reconfiguration (e.g. volume setting). This option makes it  configurable. In general the necessary delay may be as long as 0.5 seconds.
-
-----
-
-某些编解码器在重新配置后需要特定于供应商的延迟（例如音量设置）。此选项可对其进行配置。一般来说，必要的延迟时间可能长达 0.5 秒。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Audio codec reconfiguration delay in microseconds.</string>
-                </property>
-                <property name="text">
-                 <string>SetupDelay</string>
-                </property>
-               </widget>
-              </item>
-              <item row="10" column="0">
-               <widget class="QLabel" name="label_34">
-                <property name="text">
-                 <string>MinimumAudibleGain</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="2">
-               <layout class="QHBoxLayout" name="horizontalLayout_6">
-                <item>
-                 <widget class="QLineEdit" name="editIntMaximumGain">
-                  <property name="text">
-                   <string>-15</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="lblSystemAudioVolume">
-                  <property name="text">
-                   <string>SystemAudioVolume</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item row="22" column="0">
-               <widget class="QCheckBox" name="chkResetTrafficClass">
-                <property name="toolTip">
-                 <string notr="true">AppleHDA kext will function correctly only if TCSEL register is configured to use TC0 traffic class. Refer to Intel I/O Controller Hub 9 (ICH9) Family Datasheet (or any other ICH datasheet) for more details about this register.
-
-Note: This option is independent from AudioSupport. If AppleALC is used it is preferred to use AppleALC alctsel property instead.
-
-----
-
-AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能正常工作。请参阅Intel I/O控制器集线器9（ICH9）系列数据表（或任何其他ICH数据表），了解该寄存器的更多细节。
-
-注意：该选项与AudioSupport无关。如果使用AppleALC，最好使用AppleALC alctsel属性代替。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Set HDA Traffic Class Select Register to TC0.</string>
-                </property>
-                <property name="text">
-                 <string>ResetTrafficClass</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
+             </layout>
+            </item>
+            <item row="10" column="0">
+             <spacer name="verticalSpacer_45">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <item>
                <widget class="QLabel" name="label_32">
                 <property name="toolTip">
                  <string notr="true">Normally this contains first audio codec address on the builtin analog audio controller (HDEF). 
@@ -10359,80 +10254,14 @@ OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出
                 </property>
                </widget>
               </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="label_35">
-                <property name="toolTip">
-                 <string notr="true">Description: Minimal heard volume level from 0 to 100.
-
-The screen reader will use this volume level when the calculated volume level is lower than MinimumVolume and the boot chime will not play if the calculated volume level is lower than MinimumVolume.
-
-----
-
-说明： 最小听到的音量值，从0到100。
-
-当计算出的音量低于MinimumVolume时，屏幕阅读器将使用这个音量，如果计算出的音量低于MinimumVolume，则不会播放开机声。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Minimal heard volume level from 0 to 100.</string>
-                </property>
-                <property name="text">
-                 <string>MaximumGain</string>
-                </property>
-               </widget>
+              <item>
+               <widget class="QLineEdit" name="editIntAudioCodec"/>
               </item>
-              <item row="5" column="0">
-               <spacer name="verticalSpacer_42">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="18" column="0">
-               <spacer name="verticalSpacer_63">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="7" column="0">
-               <spacer name="verticalSpacer_43">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="20" column="0">
-               <spacer name="verticalSpacer_47">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="2" column="0">
+             </layout>
+            </item>
+            <item row="3" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_11">
+              <item>
                <widget class="QLabel" name="label_33">
                 <property name="toolTip">
                  <string notr="true">Normally this contains builtin analog audio controller (HDEF) device path, e.g. PciRoot(0x0)/Pci(0x1b,0x0).
@@ -10465,126 +10294,285 @@ OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出
                 </property>
                </widget>
               </item>
-              <item row="12" column="0">
-               <spacer name="verticalSpacer_44">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
+              <item>
+               <widget class="QLineEdit" name="editAudioDevice"/>
               </item>
-              <item row="1" column="0">
-               <spacer name="verticalSpacer_40">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+             </layout>
+            </item>
+            <item row="0" column="0">
+             <spacer name="verticalSpacer_40">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="11" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_23">
+              <item>
+               <widget class="QLabel" name="label_34">
+                <property name="text">
+                 <string>MinimumAudibleGain</string>
                 </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
+               </widget>
               </item>
-              <item row="0" column="2">
-               <widget class="QLineEdit" name="editIntAudioCodec"/>
-              </item>
-              <item row="10" column="2">
+              <item>
                <widget class="QLineEdit" name="editIntMinimumAudibleGain">
                 <property name="text">
                  <string>-55</string>
                 </property>
                </widget>
               </item>
-              <item row="13" column="2">
-               <widget class="QLineEdit" name="editIntSetupDelay"/>
-              </item>
-              <item row="14" column="0">
-               <spacer name="verticalSpacer_45">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="4" column="2">
-               <widget class="QLineEdit" name="editIntAudioOutMask">
-                <property name="text">
-                 <string>1</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
+             </layout>
+            </item>
+            <item row="5" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_13">
+              <item>
                <widget class="QLabel" name="lblAudioOutMask">
                 <property name="text">
                  <string>AudioOutMask</string>
                 </property>
                </widget>
               </item>
-              <item row="24" column="0">
+              <item>
+               <widget class="QLineEdit" name="editIntAudioOutMask">
+                <property name="text">
+                 <string>1</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="12" column="0">
+             <spacer name="verticalSpacer_46">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="7" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <item>
+               <widget class="QLabel" name="label_35">
+                <property name="toolTip">
+                 <string notr="true">Description: Minimal heard volume level from 0 to 100.
+
+The screen reader will use this volume level when the calculated volume level is lower than MinimumVolume and the boot chime will not play if the calculated volume level is lower than MinimumVolume.
+
+----
+
+说明： 最小听到的音量值，从0到100。
+
+当计算出的音量低于MinimumVolume时，屏幕阅读器将使用这个音量，如果计算出的音量低于MinimumVolume，则不会播放开机声。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Minimal heard volume level from 0 to 100.</string>
+                </property>
+                <property name="text">
+                 <string>MaximumGain</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="editIntMaximumGain">
+                <property name="text">
+                 <string>-15</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lblSystemAudioVolume">
+                <property name="text">
+                 <string>SystemAudioVolume</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="2" column="0">
+             <spacer name="verticalSpacer_41">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="9" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_14">
+              <item>
+               <widget class="QLabel" name="label_36">
+                <property name="toolTip">
+                 <string notr="true">Volume level range read from SystemAudioVolume varies depending on the codec. To transform read value in [0, 127] range into raw volume range [0, 100] the read value is scaled to VolumeAmplifier percents:
+
+RawV olume = MIN(SystemAudioV olume ∗ V olumeAmplifier 100 , 100)
+
+Note: the transformation used in macOS is not linear, but it is very close and this nuance is thus ignored.
+
+----
+
+从SystemAudioVolume读取的音量范围根据编解码器的不同而不同。为了将[0，127]范围内的读取值转换为原始音量范围[0，100]，读取值将被缩放为音量放大器的百分数。
+
+RawV olume = MIN(SystemAudioV olume ∗ V olumeAmplifier 100 , 100)
+
+注意：macOS中使用的变换不是线性的，但非常接近，因此忽略了这种细微差别。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Multiplication coefficient for system volume to raw volume linear translation from 0 to 1000.</string>
+                </property>
+                <property name="text">
+                 <string>MinimumAssistGain</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="editIntMinimumAssistGain">
+                <property name="text">
+                 <string>-30</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="16" column="0">
+             <spacer name="verticalSpacer_62">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="4" column="0">
+             <spacer name="verticalSpacer_42">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="15" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_25">
+              <item>
+               <widget class="QLabel" name="label_107">
+                <property name="toolTip">
+                 <string notr="true">Some codecs require a vendor-specific delay after the reconfiguration (e.g. volume setting). This option makes it  configurable. In general the necessary delay may be as long as 0.5 seconds.
+
+----
+
+某些编解码器在重新配置后需要特定于供应商的延迟（例如音量设置）。此选项可对其进行配置。一般来说，必要的延迟时间可能长达 0.5 秒。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Audio codec reconfiguration delay in microseconds.</string>
+                </property>
+                <property name="text">
+                 <string>SetupDelay</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="editIntSetupDelay"/>
+              </item>
+             </layout>
+            </item>
+            <item row="17" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_26">
+              <item>
+               <widget class="QCheckBox" name="chkAudioSupport">
+                <property name="toolTip">
+                 <string notr="true">Enabling this setting routes audio playback from builtin protocols to a dedicated audio port (AudioOut) of the specified codec (AudioCodec) located on the audio controller (AudioDevice).
+
+----
+
+启用此设置可将内置协议的音频播放路由到位于音频控制器（AudioDevice）上的指定编解码器（AudioCodec）的专用音频端口（AudioOut）。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Activate audio support by connecting to a backend driver.</string>
+                </property>
+                <property name="text">
+                 <string>AudioSupport</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QCheckBox" name="chkDisconnectHda">
                 <property name="text">
                  <string>DisconnectHda</string>
                 </property>
                </widget>
               </item>
-              <item row="23" column="0">
-               <spacer name="verticalSpacer_62">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+              <item>
+               <widget class="QCheckBox" name="chkResetTrafficClass">
+                <property name="toolTip">
+                 <string notr="true">AppleHDA kext will function correctly only if TCSEL register is configured to use TC0 traffic class. Refer to Intel I/O Controller Hub 9 (ICH9) Family Datasheet (or any other ICH datasheet) for more details about this register.
+
+Note: This option is independent from AudioSupport. If AppleALC is used it is preferred to use AppleALC alctsel property instead.
+
+----
+
+AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能正常工作。请参阅Intel I/O控制器集线器9（ICH9）系列数据表（或任何其他ICH数据表），了解该寄存器的更多细节。
+
+注意：该选项与AudioSupport无关。如果使用AppleALC，最好使用AppleALC alctsel属性代替。</string>
                 </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
+                <property name="statusTip">
+                 <string> Set HDA Traffic Class Select Register to TC0.</string>
                 </property>
-               </spacer>
-              </item>
-              <item row="11" column="2">
-               <widget class="QComboBox" name="cboxPlayChime">
-                <property name="editable">
-                 <bool>true</bool>
+                <property name="text">
+                 <string>ResetTrafficClass</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
-               <spacer name="verticalSpacer_41">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="9" column="0">
-               <spacer name="verticalSpacer_131">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
              </layout>
+            </item>
+            <item row="6" column="0">
+             <spacer name="verticalSpacer_43">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="18" column="0">
+             <spacer name="verticalSpacer_63">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -10724,130 +10712,23 @@ OCAU：3/3 PciRoot(0x0)/Pci(0x1B,0x0)/VenMsg(&lt;redacted&gt;,020000)(7个输出
            <attribute name="title">
             <string>Input</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_82">
+           <layout class="QGridLayout" name="gridLayout_33">
             <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_33">
-              <item row="9" column="1">
-               <widget class="QCheckBox" name="chkKeySwap">
-                <property name="toolTip">
-                 <string notr="true">This option may be useful for keyboard layouts with Option key situated to the right of Command key.
-
-----
-
-这个选项可能对命令键右边的选项键的键盘布局有用。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Swap Command and Option keys during submission.</string>
-                </property>
-                <property name="text">
-                 <string>KeySwap</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QComboBox" name="cboxKeySupportMode">
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_37">
-                <property name="toolTip">
-                 <string notr="true">AppleKeyMapAggregator protocol is supposed to contain a fixed length buffer of currently pressed keys. 
-
-However,the majority of the drivers only report key presses as interrupts and pressing and holding the key on the keyboard results in subsequent submissions of this key with some defined time interval. As a result we use a timeout to remove once pressed keys from the buffer once the timeout expires and no new submission of this key happened.
-
-This option allows to set this timeout based on your platform. The recommended value that works on the majority of the platforms is 5 milliseconds. For reference, holding one key on VMware will repeat it roughly every 2 milliseconds and the same value for APTIO V is 3-4 milliseconds. Thus it is possible to set a slightly lower value on faster platforms and slightly higher value on slower platforms for more responsive input.
-
-Note: Some platforms may require different values, higher or lower. For example, when detecting key misses in OpenCanopy try increasing this value (e.g. to 10), and when detecting key stall, try decreasing this value. Since every platform is different it may be reasonable to check every value from 1 to 25.
-
-----
-
-AppleKeyMapAggregator协议应该包含一个固定长度的当前按键缓冲区。
-
-然而，大多数的驱动程序只将按键的按压报告为中断，并且在键盘上按住该键会导致该键在某些定义的时间间隔内的后续提交。因此，我们使用超时来从缓冲区中删除曾经按下的键，一旦超时结束，没有新的键提交发生。
-
-这个选项允许根据你的平台来设置这个超时。在大多数平台上工作的推荐值是5毫秒。作为参考，在VMware上按住一个键，大概每2毫秒就会重复一次，APTIO V的相同值是3-4毫秒。因此可以在速度较快的平台上设置稍低的值，在速度较慢的平台上设置稍高的值，以提高输入的响应速度。
-
-注意：有些平台可能需要不同的值，高一点或低一点。例如，当检测OpenCanopy中的键失误时，尝试增加这个值(如10)，而当检测键停顿时，尝试减少这个值。由于每个平台都是不同的，所以检查1到25的每个值可能是合理的。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Remove key unless it was submitted during this timeout in milliseconds.</string>
-                </property>
-                <property name="text">
-                 <string>KeyForgetThreshold</string>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="0">
-               <widget class="QCheckBox" name="chkKeyFiltering">
-                <property name="toolTip">
-                 <string notr="true">Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
-
-This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and 108 in version 2.8).
-
-----
-
-显然，有些板子，如GA Z77P-D3，可能会在EFI_INPUT_KEY中返回所有输入协议的未初始化数据。
-
-这个选项会丢弃那些既不是ASCII码，也不是在UEFI规范中定义的键(见2.8版本的表107和108)。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Enable keyboard input sanity checking.</string>
-                </property>
-                <property name="text">
-                 <string>KeyFiltering</string>
-                </property>
-               </widget>
-              </item>
-              <item row="10" column="0">
-               <spacer name="verticalSpacer_102">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="5" column="1">
-               <widget class="QLineEdit" name="editPointerSupportMode"/>
-              </item>
-              <item row="11" column="1">
-               <widget class="QCheckBox" name="chkPointerSupport">
-                <property name="toolTip">
-                 <string notr="true">This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER_PROTOCOL is broken.
-
-----
-
-这个选项通过选定的OEM协议实现了标准的UEFI指针协议(EFI_SIMPLE_POINTER_PROTOCOL)。该选项可能对Z87华硕板卡有用，因为在这些板卡上EFI_SIMPLE_POINTER_PROTOCOL被破坏了。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Enable internal pointer driver.</string>
-                </property>
-                <property name="text">
-                 <string>PointerSupport</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <spacer name="verticalSpacer_99">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="3" column="0">
+             <spacer name="verticalSpacer_97">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_32">
+              <item>
                <widget class="QLabel" name="label_23">
                 <property name="toolTip">
                  <string notr="true">• Auto — Performs automatic choice as available with the following preference: AMI, V2, V1. 
@@ -10876,39 +10757,183 @@ Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular 
                 </property>
                </widget>
               </item>
-              <item row="7" column="1">
-               <widget class="QLineEdit" name="editIntTimerResolution"/>
+              <item>
+               <widget class="QComboBox" name="cboxKeySupportMode">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
               </item>
-              <item row="2" column="0">
-               <spacer name="verticalSpacer_98">
+              <item>
+               <spacer name="horizontalSpacer_7">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
-              <item row="6" column="0">
-               <spacer name="verticalSpacer_100">
+              <item>
+               <widget class="QCheckBox" name="chkKeySupport">
+                <property name="toolTip">
+                 <string notr="true">This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as OpenUsbKbDxe, this option should never be enabled.
+
+----
+
+这个选项可以激活基于AppleGenericInput又名(AptioInputFix)的内部键盘拦截器驱动，以填充AppleKeyMapAggregator数据库的输入功能。如果使用了单独的驱动程序，比如OpenUsbKbDxe，这个选项绝对不能启用。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
+                </property>
+                <property name="text">
+                 <string>KeySupport</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_22">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
-              <item row="1" column="1">
+              <item>
+               <widget class="QCheckBox" name="chkKeySwap">
+                <property name="toolTip">
+                 <string notr="true">This option may be useful for keyboard layouts with Option key situated to the right of Command key.
+
+----
+
+这个选项可能对命令键右边的选项键的键盘布局有用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Swap Command and Option keys during submission.</string>
+                </property>
+                <property name="text">
+                 <string>KeySwap</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_24">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="chkKeyFiltering">
+                <property name="toolTip">
+                 <string notr="true">Apparently some boards like GA Z77P-D3 may return uninitialised data in EFI_INPUT_KEY with all input protocols.
+
+This option discards keys that are neither ASCII, nor are defined in the UEFI specification (see tables 107 and 108 in version 2.8).
+
+----
+
+显然，有些板子，如GA Z77P-D3，可能会在EFI_INPUT_KEY中返回所有输入协议的未初始化数据。
+
+这个选项会丢弃那些既不是ASCII码，也不是在UEFI规范中定义的键(见2.8版本的表107和108)。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Enable keyboard input sanity checking.</string>
+                </property>
+                <property name="text">
+                 <string>KeyFiltering</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_15">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item row="2" column="0">
+             <spacer name="verticalSpacer_99">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_31">
+              <item>
+               <widget class="QLabel" name="label_37">
+                <property name="toolTip">
+                 <string notr="true">AppleKeyMapAggregator protocol is supposed to contain a fixed length buffer of currently pressed keys. 
+
+However,the majority of the drivers only report key presses as interrupts and pressing and holding the key on the keyboard results in subsequent submissions of this key with some defined time interval. As a result we use a timeout to remove once pressed keys from the buffer once the timeout expires and no new submission of this key happened.
+
+This option allows to set this timeout based on your platform. The recommended value that works on the majority of the platforms is 5 milliseconds. For reference, holding one key on VMware will repeat it roughly every 2 milliseconds and the same value for APTIO V is 3-4 milliseconds. Thus it is possible to set a slightly lower value on faster platforms and slightly higher value on slower platforms for more responsive input.
+
+Note: Some platforms may require different values, higher or lower. For example, when detecting key misses in OpenCanopy try increasing this value (e.g. to 10), and when detecting key stall, try decreasing this value. Since every platform is different it may be reasonable to check every value from 1 to 25.
+
+----
+
+AppleKeyMapAggregator协议应该包含一个固定长度的当前按键缓冲区。
+
+然而，大多数的驱动程序只将按键的按压报告为中断，并且在键盘上按住该键会导致该键在某些定义的时间间隔内的后续提交。因此，我们使用超时来从缓冲区中删除曾经按下的键，一旦超时结束，没有新的键提交发生。
+
+这个选项允许根据你的平台来设置这个超时。在大多数平台上工作的推荐值是5毫秒。作为参考，在VMware上按住一个键，大概每2毫秒就会重复一次，APTIO V的相同值是3-4毫秒。因此可以在速度较快的平台上设置稍低的值，在速度较慢的平台上设置稍高的值，以提高输入的响应速度。
+
+注意：有些平台可能需要不同的值，高一点或低一点。例如，当检测OpenCanopy中的键失误时，尝试增加这个值(如10)，而当检测键停顿时，尝试减少这个值。由于每个平台都是不同的，所以检查1到25的每个值可能是合理的。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Remove key unless it was submitted during this timeout in milliseconds.</string>
+                </property>
+                <property name="text">
+                 <string>KeyForgetThreshold</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLineEdit" name="editIntKeyForgetThreshold"/>
               </item>
-              <item row="7" column="0">
+              <item>
+               <spacer name="horizontalSpacer_38">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
                <widget class="QLabel" name="label_40">
                 <property name="toolTip">
                  <string notr="true">This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
@@ -10933,50 +10958,40 @@ The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS 
                 </property>
                </widget>
               </item>
-              <item row="8" column="0">
-               <spacer name="verticalSpacer_101">
+              <item>
+               <widget class="QLineEdit" name="editIntTimerResolution"/>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_17">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
-              <item row="11" column="0">
-               <widget class="QCheckBox" name="chkKeySupport">
-                <property name="toolTip">
-                 <string notr="true">This option activates the internal keyboard interceptor driver, based on AppleGenericInput aka (AptioInputFix),to fill AppleKeyMapAggregator database for input functioning. In case a separate driver is used, such as OpenUsbKbDxe, this option should never be enabled.
-
-----
-
-这个选项可以激活基于AppleGenericInput又名(AptioInputFix)的内部键盘拦截器驱动，以填充AppleKeyMapAggregator数据库的输入功能。如果使用了单独的驱动程序，比如OpenUsbKbDxe，这个选项绝对不能启用。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Enable internal keyboard input translation to AppleKeyMapAggregator protocol.</string>
-                </property>
-                <property name="text">
-                 <string>KeySupport</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <spacer name="verticalSpacer_97">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="5" column="0">
+             </layout>
+            </item>
+            <item row="4" column="0">
+             <spacer name="verticalSpacer_100">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="5" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_34">
+              <item>
                <widget class="QLabel" name="label_38">
                 <property name="toolTip">
                  <string notr="true">Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS boards. More details can be found in LongSoft/UefiTool#116.
@@ -10993,20 +11008,66 @@ The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS 
                 </property>
                </widget>
               </item>
-              <item row="12" column="0">
-               <spacer name="verticalSpacer_103">
+              <item>
+               <widget class="QLineEdit" name="editPointerSupportMode"/>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_41">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="chkPointerSupport">
+                <property name="toolTip">
+                 <string notr="true">This option implements standard UEFI pointer protocol (EFI_SIMPLE_POINTER_PROTOCOL) through select OEM protocols. The option may be useful on Z87 ASUS boards, where EFI_SIMPLE_POINTER_PROTOCOL is broken.
+
+----
+
+这个选项通过选定的OEM协议实现了标准的UEFI指针协议(EFI_SIMPLE_POINTER_PROTOCOL)。该选项可能对Z87华硕板卡有用，因为在这些板卡上EFI_SIMPLE_POINTER_PROTOCOL被破坏了。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Enable internal pointer driver.</string>
+                </property>
+                <property name="text">
+                 <string>PointerSupport</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_16">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
              </layout>
+            </item>
+            <item row="6" column="0">
+             <spacer name="verticalSpacer_98">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -11014,275 +11075,23 @@ The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS 
            <attribute name="title">
             <string>Output</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_83">
-            <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_34">
-              <item row="6" column="1">
-               <spacer name="verticalSpacer_107">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="1" column="5">
-               <widget class="QCheckBox" name="chkForceResolution">
-                <property name="toolTip">
-                 <string notr="true">Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max will try to pull the largest available resolution from the connected display’s EDID.
-
-Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel iGPUs.
-----
-说明：在默认情况下无法获得所需分辨率的情况下，强制设置分辨率，例如在传统的英特尔GMA和第一代英特尔高清图形(Ironlake/Arrandale)上。将 &quot;分辨率 &quot;设置为 &quot;最大 &quot;将尝试从所连接的显示器的EDID中提取最大的可用分辨率。
-
-注意：这个选项取决于OC_FORCE_RESOLUTION_PROTOCOL协议是否存在。这个协议目前只被OpenDuetPkg支持。OpenDuetPkg的实现目前只支持Intel iGPU。</string>
-                </property>
-                <property name="text">
-                 <string>ForceResolution</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <spacer name="verticalSpacer_104">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="1" column="1">
-               <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
-                <property name="toolTip">
-                 <string notr="true">Some firmwares clear only part of screen when switching from graphics to text mode, leaving a fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before switching to text mode.
-
-Note: This option only applies to System renderer.
-
-----
-
-有些固件在从图形模式切换到文本模式时，只清除了屏幕的一部分，留下了之前绘制的图像的一部分。这个选项可以在切换到文本模式前用黑色填充整个图形屏幕。
-
-注：该选项仅适用于系统渲染器。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
- fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
- switching to text mode.
- Note: This option only applies to System renderer.</string>
-                </property>
-                <property name="text">
-                 <string>ClearScreenOnModeSwitch</string>
-                </property>
-               </widget>
-              </item>
-              <item row="13" column="1">
-               <widget class="QLabel" name="label_12">
-                <property name="toolTip">
-                 <string notr="true">Type: plist string
-
-Description: Provide GOP protocol instances on top of UGA protocol instances.
-
-This option provides the GOP protocol via a UGA-based proxy for firmware that do not implement the protocol.
-The supported values for the option are as follows:
-• Enabled — provide GOP for all UGA protocols.
-• Apple — provide GOP for AppleFramebufferInfo-enabled protocols.
-• Disabled — do not provide GOP.
-Note: This option requires ProvideConsoleGop to be enabled.
-----
-类型：plist字符串
-
-描述：在UGA协议实例的基础上提供GOP协议实例。
-
-这个选项通过一个基于UGA的代理为没有实现GOP协议的固件提供GOP协议。
-该选项的支持值如下：
-- Enabled - 为所有UGA协议提供GOP。
-- Apple - 为AppleFramebufferInfo启用的协议提供GOP。
-- Disabled - 不提供GOP。
-注意：这个选项需要ProvideConsoleGop被启用。</string>
-                </property>
-                <property name="statusTip">
-                 <string notr="true"/>
-                </property>
-                <property name="text">
-                 <string>GopPassThrough</string>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="3">
-               <widget class="QComboBox" name="cboxResolution">
-                <property name="maximumSize">
-                 <size>
-                  <width>400</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="14" column="1">
-               <spacer name="verticalSpacer_111">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="15" column="3">
-               <widget class="QLineEdit" name="editIntUIScale">
-                <property name="maximumSize">
-                 <size>
-                  <width>400</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="13" column="3">
-               <widget class="QComboBox" name="cboxGopPassThrough">
-                <property name="maximumSize">
-                 <size>
-                  <width>400</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-                <item>
-                 <property name="text">
-                  <string notr="true">Disabled</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Enabled</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string notr="true">Apple</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="12" column="1">
-               <spacer name="verticalSpacer_110">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="5" column="3">
-               <widget class="QCheckBox" name="chkSanitiseClearScreen">
-                <property name="toolTip">
-                 <string notr="true"> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
-
-Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to empty string for this to work.
-----
- 当使用大屏幕（如2K或4K）时，一些固件在尝试清除屏幕内容时，会将屏幕分辨率重置为故障安全值（如1024x768）。这个选项试图应用一个变通方法。
-
-注意：这个选项只适用于系统渲染器。在所有已知受影响的系统中，ConsoleMode必须设置为空字符串才行。</string>
-                </property>
-                <property name="text">
-                 <string>SanitiseClearScreen</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="6">
-               <spacer name="horizontalSpacer_32">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="3" column="7">
-               <widget class="QCheckBox" name="chkReconnectOnResChange">
-                <property name="toolTip">
-                 <string notr="true">On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
-
-Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless required.
-----
-在某些固件上，当通过GOP改变屏幕分辨率时，需要重新连接产生控制台协议（简单文本输出）的控制器。否则它们将不会根据新的分辨率产生文本。
-
-注意：在一些板卡上，当从Shell启动OpenCore时，这个逻辑可能会导致黑屏，因此它是可选的。在 0.5.2 之前的版本中，该选项是强制性的，不可配置。除非需要，否则请不要使用该选项。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Reconnect console controllers after changing screen resolution.</string>
-                </property>
-                <property name="text">
-                 <string>ReconnectOnResChange</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="4">
-               <spacer name="horizontalSpacer_33">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="1" column="0">
-               <spacer name="horizontalSpacer_35">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="1" column="3">
-               <widget class="QCheckBox" name="chkDirectGopRendering">
-                <property name="toolTip">
-                 <string notr="true">On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.
-----
-在某些固件上，这可能会提供更好的性能，甚至修复渲染问题，比如在MacPro5,1上。然而，建议不要使用这个选项，除非有明显的好处，因为它甚至可能导致滚动速度变慢。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Use builtin graphics output protocol renderer for console.</string>
-                </property>
-                <property name="text">
-                 <string>DirectGopRendering</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="1">
+           <layout class="QGridLayout" name="gridLayout_63">
+            <item row="2" column="0" colspan="2">
+             <spacer name="verticalSpacer_107">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_36">
+              <item>
                <widget class="QLabel" name="label_24">
                 <property name="toolTip">
                  <string notr="true">Set to empty string not to change console mode. Set to Max to try to use largest available console mode. Currently Builtin text renderer supports only one console mode, so this option is ignored.
@@ -11301,39 +11110,21 @@ Note: This field is best to be left empty on most firmwares.
                 </property>
                </widget>
               </item>
-              <item row="15" column="1">
-               <widget class="QLabel" name="label_121">
-                <property name="toolTip">
-                 <string notr="true">Type: plist integer, 8 bit 
-Description: User interface scaling factor. 
-Corresponds to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:UIScale variable. 
-• 1 — 1x scaling, corresponds to normal displays. 
-• 2 — 2x scaling, corresponds to HiDPI displays. 
-• -1 — leaves the current variable unchanged. 
-• 0 — automatically chooses scaling based on the current resolution. 
-Note 1 : Automatic scale factor detection works on the basis of total pixel area and may fail on small HiDPI displays, in which case the value may be manually managed using the NVRAM section. 
-Note 2 : When switching from manually specifified NVRAM variable to this preference an NVRAM reset may be needed.
-----
-类型：plist整数，8位 
-描述：用户界面的缩放系数。
-对应于4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14：UIScale变量。
-1 -- 1倍缩放，对应于正常显示。
-2 -- 2x缩放，对应于HiDPI显示器。
--1 -- 保持当前变量不变。
-0 -- 根据当前分辨率自动选择缩放比例。
-注1：自动比例系数检测是在总像素面积的基础上进行的，在小的HiDPI显示器上可能会失败，在这种情况下，可以使用NVRAM部分手动管理该值。
-注2：当从手动指定的NVRAM变量切换到该首选项时，可能需要对NVRAM进行重置。</string>
+              <item>
+               <widget class="QComboBox" name="cboxConsoleMode">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
                 </property>
-                <property name="statusTip">
-                 <string notr="true"/>
-                </property>
-                <property name="text">
-                 <string>UIScale</string>
+                <property name="editable">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
-              <item row="1" column="2">
-               <spacer name="horizontalSpacer_31">
+              <item>
+               <spacer name="horizontalSpacer_14">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -11345,38 +11136,7 @@ Note 2 : When switching from manually specifified NVRAM variable to this prefere
                 </property>
                </spacer>
               </item>
-              <item row="8" column="1">
-               <spacer name="verticalSpacer_108">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="3" column="1">
-               <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
-                <property name="toolTip">
-                 <string notr="true"> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,because random text may appear over graphical images and cause UI corruption. Setting this option to true will discard all text output when console control is in mode different from Text.
-
-Note: This option only applies to System renderer.
-
-----
-
- 选择固件在图形和文本模式下在屏幕上输出文本。这通常是出乎意料的，因为随机的文本可能会出现在图形图像上，并导致用户界面损坏。将此选项设置为 &quot;true&quot;，当控制台控制模式与文本模式不同时，将丢弃所有文本输出。
-
-注意：这个选项只适用于系统渲染器。</string>
-                </property>
-                <property name="text">
-                 <string>IgnoreTextInGraphics</string>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="1">
+              <item>
                <widget class="QLabel" name="label_25">
                 <property name="toolTip">
                  <string notr="true">• Set to WxH@Bpp (e.g. 1920x1080@32) or WxH (e.g. 1920x1080) formatted string to request custom resolution from GOP if available.
@@ -11407,54 +11167,21 @@ Note: This will fail when console handle has no GOP protocol. When the firmware 
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
-               <spacer name="verticalSpacer_105">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
+              <item>
+               <widget class="QComboBox" name="cboxResolution">
+                <property name="maximumSize">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>400</width>
+                  <height>16777215</height>
                  </size>
                 </property>
-               </spacer>
-              </item>
-              <item row="4" column="1">
-               <spacer name="verticalSpacer_106">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="5" column="1">
-               <widget class="QCheckBox" name="chkReplaceTabWithSpace">
-                <property name="toolTip">
-                 <string notr="true">Some firmwares do not print tab characters or even everything that follows them, causing difficulties or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. 
-
-This option makes the console output spaces instead of tabs.
-
-Note: This option only applies to System renderer.
-----
-有些固件不打印制表符，甚至不打印制表符后面的所有内容，导致难以或无法使用UEFI Shell内置的文本编辑器来编辑属性列表和其他文档。
-
-这个选项使控制台输出的是空格而不是制表符。
-
-注意：该选项只适用于系统渲染器。</string>
-                </property>
-                <property name="text">
-                 <string>ReplaceTabWithSpace</string>
+                <property name="editable">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
-              <item row="1" column="8">
-               <spacer name="horizontalSpacer_34">
+              <item>
+               <spacer name="horizontalSpacer_20">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -11466,22 +11193,108 @@ Note: This option only applies to System renderer.
                 </property>
                </spacer>
               </item>
-              <item row="1" column="7">
-               <widget class="QCheckBox" name="chkUgaPassThrough">
+             </layout>
+            </item>
+            <item row="6" column="1">
+             <spacer name="verticalSpacer_102">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="8" column="1">
+             <spacer name="verticalSpacer_101">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="4" column="1">
+             <spacer name="verticalSpacer_103">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="7" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_38">
+              <item>
+               <widget class="QLabel" name="label_121">
                 <property name="toolTip">
-                 <string notr="true">Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI applications like EfiBoot from 10.4.
+                 <string notr="true">Type: plist integer, 8 bit 
+Description: User interface scaling factor. 
+Corresponds to 4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:UIScale variable. 
+• 1 — 1x scaling, corresponds to normal displays. 
+• 2 — 2x scaling, corresponds to HiDPI displays. 
+• -1 — leaves the current variable unchanged. 
+• 0 — automatically chooses scaling based on the current resolution. 
+Note 1 : Automatic scale factor detection works on the basis of total pixel area and may fail on small HiDPI displays, in which case the value may be manually managed using the NVRAM section. 
+Note 2 : When switching from manually specifified NVRAM variable to this preference an NVRAM reset may be needed.
 ----
-有些固件没有实现传统旧式的UGA协议，但旧的EFI应用程序（如10.4的EfiBoot）可能需要它来进行屏幕输出。</string>
+类型：plist整数，8位 
+描述：用户界面的缩放系数。
+对应于4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14：UIScale变量。
+1 -- 1倍缩放，对应于正常显示。
+2 -- 2x缩放，对应于HiDPI显示器。
+-1 -- 保持当前变量不变。
+0 -- 根据当前分辨率自动选择缩放比例。
+注1：自动比例系数检测是在总像素面积的基础上进行的，在小的HiDPI显示器上可能会失败，在这种情况下，可以使用NVRAM部分手动管理该值。
+注2：当从手动指定的NVRAM变量切换到该首选项时，可能需要对NVRAM进行重置。</string>
                 </property>
                 <property name="statusTip">
-                 <string> Provide UGA protocol instances on top of GOP protocol.</string>
+                 <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>UgaPassThrough</string>
+                 <string>UIScale</string>
                 </property>
                </widget>
               </item>
-              <item row="11" column="1">
+              <item>
+               <widget class="QLineEdit" name="editIntUIScale">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_32">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item row="5" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_37">
+              <item>
                <widget class="QLabel" name="label_26">
                 <property name="toolTip">
                  <string notr="true">Currently two renderers are supported: Builtin and System. System renderer uses firmware services for text rendering. 
@@ -11544,7 +11357,148 @@ BuiltinGraphics的使用一般都很简单。对于大多数平台来说，有�
                 </property>
                </widget>
               </item>
-              <item row="3" column="3">
+              <item>
+               <widget class="QComboBox" name="cboxTextRenderer">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_31">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_12">
+                <property name="toolTip">
+                 <string notr="true">Type: plist string
+
+Description: Provide GOP protocol instances on top of UGA protocol instances.
+
+This option provides the GOP protocol via a UGA-based proxy for firmware that do not implement the protocol.
+The supported values for the option are as follows:
+• Enabled — provide GOP for all UGA protocols.
+• Apple — provide GOP for AppleFramebufferInfo-enabled protocols.
+• Disabled — do not provide GOP.
+Note: This option requires ProvideConsoleGop to be enabled.
+----
+类型：plist字符串
+
+描述：在UGA协议实例的基础上提供GOP协议实例。
+
+这个选项通过一个基于UGA的代理为没有实现GOP协议的固件提供GOP协议。
+该选项的支持值如下：
+- Enabled - 为所有UGA协议提供GOP。
+- Apple - 为AppleFramebufferInfo启用的协议提供GOP。
+- Disabled - 不提供GOP。
+注意：这个选项需要ProvideConsoleGop被启用。</string>
+                </property>
+                <property name="statusTip">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>GopPassThrough</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cboxGopPassThrough">
+                <property name="maximumSize">
+                 <size>
+                  <width>400</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+                <item>
+                 <property name="text">
+                  <string notr="true">Disabled</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string notr="true">Enabled</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string notr="true">Apple</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_23">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <layout class="QGridLayout" name="gridLayout_34">
+              <item row="0" column="3">
+               <spacer name="horizontalSpacer_34">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="chkClearScreenOnModeSwitch">
+                <property name="toolTip">
+                 <string notr="true">Some firmwares clear only part of screen when switching from graphics to text mode, leaving a fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before switching to text mode.
+
+Note: This option only applies to System renderer.
+
+----
+
+有些固件在从图形模式切换到文本模式时，只清除了屏幕的一部分，留下了之前绘制的图像的一部分。这个选项可以在切换到文本模式前用黑色填充整个图形屏幕。
+
+注：该选项仅适用于系统渲染器。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Some firmwares clear only part of screen when switching from graphics to text mode, leaving a
+ fragment of previously drawn image visible. This option fills the entire graphics screen with black colour before
+ switching to text mode.
+ Note: This option only applies to System renderer.</string>
+                </property>
+                <property name="text">
+                 <string>ClearScreenOnModeSwitch</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
                <widget class="QCheckBox" name="chkProvideConsoleGop">
                 <property name="toolTip">
                  <string notr="true">macOS bootloader requires GOP or UGA (for 10.4 EfiBoot) to be present on console handle, yet the exact location of the graphics protocol is not covered by the UEFI specification. This option will ensure GOP and UGA, if present, are available on the console handle.
@@ -11563,21 +11517,52 @@ macOS bootloader 要求控制台手柄上必须有 GOP 或 UGA（适用于 10.4 
                 </property>
                </widget>
               </item>
-              <item row="7" column="3">
-               <widget class="QComboBox" name="cboxConsoleMode">
-                <property name="maximumSize">
-                 <size>
-                  <width>400</width>
-                  <height>16777215</height>
-                 </size>
+              <item row="4" column="0">
+               <widget class="QCheckBox" name="chkSanitiseClearScreen">
+                <property name="toolTip">
+                 <string notr="true"> Some firmwares reset screen resolution to a failsafe value (like 1024x768) on the attempts to clear screen contents when large display (e.g. 2K or 4K) is used. This option attempts to apply a workaround.
+
+Note: This option only applies to System renderer. On all known affected systems ConsoleMode had to be set to empty string for this to work.
+----
+ 当使用大屏幕（如2K或4K）时，一些固件在尝试清除屏幕内容时，会将屏幕分辨率重置为故障安全值（如1024x768）。这个选项试图应用一个变通方法。
+
+注意：这个选项只适用于系统渲染器。在所有已知受影响的系统中，ConsoleMode必须设置为空字符串才行。</string>
                 </property>
-                <property name="editable">
-                 <bool>true</bool>
+                <property name="text">
+                 <string>SanitiseClearScreen</string>
                 </property>
                </widget>
               </item>
-              <item row="10" column="1">
-               <spacer name="verticalSpacer_109">
+              <item row="0" column="1">
+               <spacer name="horizontalSpacer_33">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="chkDirectGopRendering">
+                <property name="toolTip">
+                 <string notr="true">On some firmwares this may provide better performance or even fix rendering issues, like on MacPro5,1. However,it is recommended not to use this option unless there is an obvious benefit as it may even result in slower scrolling.
+----
+在某些固件上，这可能会提供更好的性能，甚至修复渲染问题，比如在MacPro5,1上。然而，建议不要使用这个选项，除非有明显的好处，因为它甚至可能导致滚动速度变慢。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Use builtin graphics output protocol renderer for console.</string>
+                </property>
+                <property name="text">
+                 <string>DirectGopRendering</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <spacer name="verticalSpacer_105">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
@@ -11589,7 +11574,106 @@ macOS bootloader 要求控制台手柄上必须有 GOP 或 UGA（适用于 10.4 
                 </property>
                </spacer>
               </item>
-              <item row="3" column="5">
+              <item row="0" column="5">
+               <spacer name="horizontalSpacer_35">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="2" column="2">
+               <widget class="QCheckBox" name="chkReplaceTabWithSpace">
+                <property name="toolTip">
+                 <string notr="true">Some firmwares do not print tab characters or even everything that follows them, causing difficulties or inability to use the UEFI Shell builtin text editor to edit property lists and other documents. 
+
+This option makes the console output spaces instead of tabs.
+
+Note: This option only applies to System renderer.
+----
+有些固件不打印制表符，甚至不打印制表符后面的所有内容，导致难以或无法使用UEFI Shell内置的文本编辑器来编辑属性列表和其他文档。
+
+这个选项使控制台输出的是空格而不是制表符。
+
+注意：该选项只适用于系统渲染器。</string>
+                </property>
+                <property name="text">
+                 <string>ReplaceTabWithSpace</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <widget class="QCheckBox" name="chkForceResolution">
+                <property name="toolTip">
+                 <string notr="true">Description: Forces Resolution to be set in cases where the desired resolution is not available by default, such as on legacy Intel GMA and first generation Intel HD Graphics (Ironlake/Arrandale). Setting Resolution to Max will try to pull the largest available resolution from the connected display’s EDID.
+
+Note: This option depends on the OC_FORCE_RESOLUTION_PROTOCOL protocol being present. This protocol is currently only supported by OpenDuetPkg. The OpenDuetPkg implementation currently only supports Intel iGPUs.
+----
+说明：在默认情况下无法获得所需分辨率的情况下，强制设置分辨率，例如在传统的英特尔GMA和第一代英特尔高清图形(Ironlake/Arrandale)上。将 &quot;分辨率 &quot;设置为 &quot;最大 &quot;将尝试从所连接的显示器的EDID中提取最大的可用分辨率。
+
+注意：这个选项取决于OC_FORCE_RESOLUTION_PROTOCOL协议是否存在。这个协议目前只被OpenDuetPkg支持。OpenDuetPkg的实现目前只支持Intel iGPU。</string>
+                </property>
+                <property name="text">
+                 <string>ForceResolution</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="6">
+               <widget class="QCheckBox" name="chkIgnoreTextInGraphics">
+                <property name="toolTip">
+                 <string notr="true"> Select firmwares output text onscreen in both graphics and text mode. This is normally unexpected,because random text may appear over graphical images and cause UI corruption. Setting this option to true will discard all text output when console control is in mode different from Text.
+
+Note: This option only applies to System renderer.
+
+----
+
+ 选择固件在图形和文本模式下在屏幕上输出文本。这通常是出乎意料的，因为随机的文本可能会出现在图形图像上，并导致用户界面损坏。将此选项设置为 &quot;true&quot;，当控制台控制模式与文本模式不同时，将丢弃所有文本输出。
+
+注意：这个选项只适用于系统渲染器。</string>
+                </property>
+                <property name="text">
+                 <string>IgnoreTextInGraphics</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="6">
+               <widget class="QCheckBox" name="chkReconnectOnResChange">
+                <property name="toolTip">
+                 <string notr="true">On some firmwares when screen resolution is changed via GOP, it is required to reconnect the controllers, which produce the console protocols (simple text out). Otherwise they will not produce text based on the new resolution.
+
+Note: On several boards this logic may result in black screen when launching OpenCore from Shell and thus it is optional. In versions prior to 0.5.2 this option was mandatory and not configurable. Please do not use this unless required.
+----
+在某些固件上，当通过GOP改变屏幕分辨率时，需要重新连接产生控制台协议（简单文本输出）的控制器。否则它们将不会根据新的分辨率产生文本。
+
+注意：在一些板卡上，当从Shell启动OpenCore时，这个逻辑可能会导致黑屏，因此它是可选的。在 0.5.2 之前的版本中，该选项是强制性的，不可配置。除非需要，否则请不要使用该选项。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Reconnect console controllers after changing screen resolution.</string>
+                </property>
+                <property name="text">
+                 <string>ReconnectOnResChange</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <spacer name="verticalSpacer_106">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="2" column="4">
                <widget class="QCheckBox" name="chkReconnectGraphicsOnConnect">
                 <property name="toolTip">
                  <string>Type: plist boolean
@@ -11615,36 +11699,38 @@ Note: This option requires ConnectDrivers to be enabled.
                 </property>
                </widget>
               </item>
-              <item row="11" column="3">
-               <widget class="QComboBox" name="cboxTextRenderer">
-                <property name="maximumSize">
-                 <size>
-                  <width>400</width>
-                  <height>16777215</height>
-                 </size>
+              <item row="4" column="2">
+               <widget class="QCheckBox" name="chkUgaPassThrough">
+                <property name="toolTip">
+                 <string notr="true">Some firmwares do not implement legacy UGA protocol, but it may be required for screen output by older EFI applications like EfiBoot from 10.4.
+----
+有些固件没有实现传统旧式的UGA协议，但旧的EFI应用程序（如10.4的EfiBoot）可能需要它来进行屏幕输出。</string>
                 </property>
-                <property name="editable">
-                 <bool>true</bool>
+                <property name="statusTip">
+                 <string> Provide UGA protocol instances on top of GOP protocol.</string>
+                </property>
+                <property name="text">
+                 <string>UgaPassThrough</string>
                 </property>
                </widget>
               </item>
-              <item row="16" column="1">
-               <spacer name="verticalSpacer_113">
+              <item row="0" column="7">
+               <spacer name="horizontalSpacer_36">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
              </layout>
             </item>
-            <item row="1" column="0">
-             <spacer name="verticalSpacer_112">
+            <item row="0" column="0">
+             <spacer name="verticalSpacer_104">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
               </property>
@@ -12125,7 +12211,20 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
             <string>Quirks</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_73">
-            <item row="0" column="0">
+            <item row="2" column="0">
+             <spacer name="verticalSpacer_22">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0">
              <layout class="QGridLayout" name="gridLayout_72">
               <item row="0" column="0">
                <spacer name="horizontalSpacer_25">
@@ -12178,10 +12277,10 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
               </item>
              </layout>
             </item>
-            <item row="1" column="0">
+            <item row="3" column="0">
              <layout class="QGridLayout" name="gridLayout_31">
-              <item row="13" column="1">
-               <spacer name="verticalSpacer_19">
+              <item row="7" column="0">
+               <spacer name="verticalSpacer_18">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
@@ -12193,26 +12292,131 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                 </property>
                </spacer>
               </item>
-              <item row="18" column="3">
-               <widget class="QLineEdit" name="editIntResizeGpuBars">
-                <property name="minimumSize">
-                 <size>
-                  <width>200</width>
-                  <height>0</height>
-                 </size>
+              <item row="6" column="2">
+               <widget class="QCheckBox" name="chkUnblockFsConnect">
+                <property name="toolTip">
+                 <string notr="true">Note: The quirk is mostly relevant for select HP laptops with no drives listed.
+----
+注意:该选项主要与未列出驱动器的部分惠普笔记本电脑有关。</string>
                 </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>150</width>
-                  <height>16777215</height>
-                 </size>
+                <property name="statusTip">
+                 <string>Some firmwares block partition handles by opening them in By Driver mode, which results in File
+ System protocols being unable to install.</string>
                 </property>
                 <property name="text">
-                 <string>-1</string>
+                 <string>UnblockFsConnect</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
+              <item row="4" column="0">
+               <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
+                <property name="toolTip">
+                 <string notr="true">Note: While the option is not expected to harm unaffected firmware, its use is recommended only when specifically required.
+----
+注意：虽然预计该选项不会损害未受影响的固件，但只建议在特别需要时使用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
+ register. These values may cause macOS boot failure on Intel platforms.</string>
+                </property>
+                <property name="text">
+                 <string>IgnoreInvalidFlexRatio</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QCheckBox" name="chkReloadOptionRoms">
+                <property name="toolTip">
+                 <string notr="true">Type: plist boolean
+
+Description: Query PCI devices and reload their Option ROMs if available.
+
+For example, this option allows reloading NVIDIA GOP Option ROM on older Macs after the firmware version is upgraded via ForgeUefiSupport.
+
+----
+
+类型：plist boolean
+
+描述：查询PCI设备并重新加载其可用的Option ROM。
+
+例如，在通过ForgeUefiSupport升级固件版本后，该选项允许在旧的Mac上重新加载NVIDIA GOP Option ROM。</string>
+                </property>
+                <property name="text">
+                 <string>ReloadOptionRoms</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="4">
+               <widget class="QCheckBox" name="chkForceOcWriteFlash">
+                <property name="toolTip">
+                 <string>Type: plist boolean
+
+Description: Enables writing to flash memory for all OpenCore system variables.
+
+Note: This value should be disabled on most types of firmware but is left configurable to account for firmware that may have issues with volatile variable storage overflows or similar. Boot issues across multiple OSes can be observed on e.g. Lenovo Thinkpad T430 and T530 without this quirk. Apple variables related to Secure Boot and hibernation are exempt from this for security reasons. Furthermore, some OpenCore variables are exempt for different reasons, such as the boot log due to an available user option, and the TSC frequency due to timing issues. When toggling this option, a NVRAM reset may be required to ensure full functionality.
+----
+类型：plist布尔值
+
+描述：启用所有OpenCore系统变量对闪存的写入。
+
+注意：这个值在大多数类型的固件上应该是禁用的，但为了考虑到可能有易失性变量存储溢出或类似问题的固件，这个值是可配置的。在例如联想Thinkpad T430和T530上可以观察到跨多个操作系统的启动问题，没有这个选项。出于安全原因，与安全启动和休眠有关的苹果变量不在此列。此外，一些OpenCore变量由于不同的原因被豁免，例如由于一个可用的用户选项，启动日志，以及由于时间问题，TSC频率。在切换该选项时，可能需要对NVRAM进行重置，以确保完整的功能。</string>
+                </property>
+                <property name="text">
+                 <string>ForceOcWriteFlash</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QCheckBox" name="chkForgeUefiSupport">
+                <property name="toolTip">
+                 <string notr="true">Type: plist boolean
+
+Description: Implement partial UEFI 2.x support on EFI 1.x firmware.
+
+This setting allows running some software written for UEFI 2.x firmware like NVIDIA GOP Option ROMs on hardware with older EFI 1.x firmware like MacPro5,1.
+
+----
+
+类型：plist boolean
+
+描述：在EFI 1.x固件上实现部分UEFI 2.x支持。
+
+此项设置允许在MacPro5,1等旧的EFI 1.x固件上运行一些为UEFI 2.x固件编写的软件，如NVIDIA GOP Option ROM。</string>
+                </property>
+                <property name="text">
+                 <string>ForgeUefiSupport</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="chkDisableSecurityPolicy">
+                <property name="toolTip">
+                 <string notr="true">Note: This setting disables various security features of the firmware, defeating the purpose of any kind of Secure Boot. Do NOT enable if you use UEFI Secure Boot.
+----
+注意：此设置会禁用固件的各种安全功能，从而失去任何一种安全启动的目的。如果您使用UEFI安全启动，请勿启用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Disable platform security policy.</string>
+                </property>
+                <property name="text">
+                 <string>DisableSecurityPolicy</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <spacer name="horizontalSpacer_39">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="0">
                <widget class="QCheckBox" name="chkActivateHpetSupport">
                 <property name="toolTip">
                  <string notr="true">Older boards like ICH6 may not always have HPET setting in the firmware preferences, this option tries to force enable it.
@@ -12227,7 +12431,33 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
+              <item row="3" column="0">
+               <spacer name="verticalSpacer_16">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="0">
+               <spacer name="verticalSpacer_14">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="5" column="0">
                <spacer name="verticalSpacer_17">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -12240,20 +12470,80 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                 </property>
                </spacer>
               </item>
-              <item row="19" column="1">
-               <spacer name="verticalSpacer_22">
+              <item row="4" column="4">
+               <widget class="QCheckBox" name="chkRequestBootVarRouting">
+                <property name="toolTip">
+                 <string notr="true">This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible with macOS boot entries by design.
+----
+该选项需要OC_FIRMWARE_RUNTIME协议在OpenRuntime.efi中实现。当固件删除不兼容的启动项时，该选项可以让默认的启动项保存。简单的说，你需要启用这个选项，才能在设计上与macOS启动项不兼容的固件中可靠的使用启动盘偏好面板。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
+ OC_VENDOR_VARIABLE_GUID.</string>
+                </property>
+                <property name="text">
+                 <string>RequestBootVarRouting</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <widget class="QCheckBox" name="chkEnableVectorAcceleration">
+                <property name="toolTip">
+                 <string notr="true">Type: plist boolean
+
+Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algorithms.
+----
+类型：plist布尔值
+
+说明：启用SHA-512和SHA-384哈希算法的AVX矢量加速。</string>
+                </property>
+                <property name="text">
+                 <string>EnableVectorAcceleration</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <spacer name="horizontalSpacer_40">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
-              <item row="20" column="1">
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="chkEnableVmx">
+                <property name="text">
+                 <string>EnableVmx</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QCheckBox" name="chkReleaseUsbOwnership">
+                <property name="toolTip">
+                 <string notr="true">Attempt to detach USB controller ownership from the firmware driver. While most firmwares manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system may freeze upon boot. Not recommended unless required.
+----
+尝试将USB控制器的所有权从固件驱动程序中分离出来。虽然大多数固件都能正确地做到这一点，或者至少有一个选项，但有些固件却做不到。因此，操作系统可能在启动时冻结。除非需要，否则不建议使用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
+ manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
+ may freeze upon boot. Not recommended unless required.</string>
+                </property>
+                <property name="text">
+                 <string>ReleaseUsbOwnership</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="8" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_39">
+              <item>
                <widget class="QLabel" name="label_29">
                 <property name="toolTip">
                  <string notr="true">The primary purpose of this quirk is to enable early bootstrap TSC synchronisation on some server and laptop models when running a debug XNU kernel. For the debug kernel the TSC needs to be kept in sync across the cores before any kext could kick in rendering all other solutions problematic. The timeout is specified in microseconds and depends on the amount of cores present on the platform, the recommended starting value is 500000.
@@ -12276,8 +12566,8 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                 </property>
                </widget>
               </item>
-              <item row="16" column="3">
-               <widget class="QLineEdit" name="editIntExitBootServicesDelay">
+              <item>
+               <widget class="QLineEdit" name="editIntTscSyncTimeout">
                 <property name="minimumSize">
                  <size>
                   <width>200</width>
@@ -12286,59 +12576,56 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>150</width>
+                  <width>16777215</width>
                   <height>16777215</height>
                  </size>
                 </property>
                </widget>
               </item>
-              <item row="12" column="3">
-               <widget class="QCheckBox" name="chkForceOcWriteFlash">
-                <property name="toolTip">
-                 <string>Type: plist boolean
-
-Description: Enables writing to flash memory for all OpenCore system variables.
-
-Note: This value should be disabled on most types of firmware but is left configurable to account for firmware that may have issues with volatile variable storage overflows or similar. Boot issues across multiple OSes can be observed on e.g. Lenovo Thinkpad T430 and T530 without this quirk. Apple variables related to Secure Boot and hibernation are exempt from this for security reasons. Furthermore, some OpenCore variables are exempt for different reasons, such as the boot log due to an available user option, and the TSC frequency due to timing issues. When toggling this option, a NVRAM reset may be required to ensure full functionality.
-----
-类型：plist布尔值
-
-描述：启用所有OpenCore系统变量对闪存的写入。
-
-注意：这个值在大多数类型的固件上应该是禁用的，但为了考虑到可能有易失性变量存储溢出或类似问题的固件，这个值是可配置的。在例如联想Thinkpad T430和T530上可以观察到跨多个操作系统的启动问题，没有这个选项。出于安全原因，与安全启动和休眠有关的苹果变量不在此列。此外，一些OpenCore变量由于不同的原因被豁免，例如由于一个可用的用户选项，启动日志，以及由于时间问题，TSC频率。在切换该选项时，可能需要对NVRAM进行重置，以确保完整的功能。</string>
-                </property>
-                <property name="text">
-                 <string>ForceOcWriteFlash</string>
-                </property>
-               </widget>
-              </item>
-              <item row="17" column="1">
-               <spacer name="verticalSpacer_21">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="0" column="4">
-               <spacer name="horizontalSpacer_22">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="16" column="1">
+             </layout>
+            </item>
+            <item row="7" column="0">
+             <spacer name="verticalSpacer_20">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="9" column="0">
+             <spacer name="verticalSpacer_21">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="5" column="0">
+             <spacer name="verticalSpacer_19">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="4" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_33">
+              <item>
                <widget class="QLabel" name="label_28">
                 <property name="toolTip">
                  <string notr="true">This is a very ugly quirk to circumvent &quot;Still waiting for root device&quot; message on select APTIO IV firmwares,namely ASUS Z87-Pro, when using FileVault 2 in particular. 
@@ -12361,7 +12648,27 @@ A better approach should be found in some future. Expect 3-5 seconds to be enoug
                 </property>
                </widget>
               </item>
-              <item row="18" column="1">
+              <item>
+               <widget class="QLineEdit" name="editIntExitBootServicesDelay">
+                <property name="minimumSize">
+                 <size>
+                  <width>200</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="6" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_35">
+              <item>
                <widget class="QLabel" name="label_115">
                 <property name="toolTip">
                  <string>Type: plist integer
@@ -12394,185 +12701,8 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
                 </property>
                </widget>
               </item>
-              <item row="14" column="1">
-               <widget class="QCheckBox" name="chkEnableVmx">
-                <property name="text">
-                 <string>EnableVmx</string>
-                </property>
-               </widget>
-              </item>
-              <item row="11" column="1">
-               <spacer name="verticalSpacer_18">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="5" column="3">
-               <widget class="QCheckBox" name="chkUnblockFsConnect">
-                <property name="toolTip">
-                 <string notr="true">Note: The quirk is mostly relevant for select HP laptops with no drives listed.
-----
-注意:该选项主要与未列出驱动器的部分惠普笔记本电脑有关。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Some firmwares block partition handles by opening them in By Driver mode, which results in File
- System protocols being unable to install.</string>
-                </property>
-                <property name="text">
-                 <string>UnblockFsConnect</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QCheckBox" name="chkIgnoreInvalidFlexRatio">
-                <property name="toolTip">
-                 <string notr="true">Note: While the option is not expected to harm unaffected firmware, its use is recommended only when specifically required.
-----
-注意：虽然预计该选项不会损害未受影响的固件，但只建议在特别需要时使用。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Select firmwares, namely APTIO IV, may contain invalid values in MSR_FLEX_RATIO (0x194) MSR
- register. These values may cause macOS boot failure on Intel platforms.</string>
-                </property>
-                <property name="text">
-                 <string>IgnoreInvalidFlexRatio</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="3">
-               <widget class="QCheckBox" name="chkReleaseUsbOwnership">
-                <property name="toolTip">
-                 <string notr="true">Attempt to detach USB controller ownership from the firmware driver. While most firmwares manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system may freeze upon boot. Not recommended unless required.
-----
-尝试将USB控制器的所有权从固件驱动程序中分离出来。虽然大多数固件都能正确地做到这一点，或者至少有一个选项，但有些固件却做不到。因此，操作系统可能在启动时冻结。除非需要，否则不建议使用。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Attempt to detach USB controller ownership from the firmware driver. While most firmwares
- manage to properly do that, or at least have an option for, select firmwares do not. As a result, operating system
- may freeze upon boot. Not recommended unless required.</string>
-                </property>
-                <property name="text">
-                 <string>ReleaseUsbOwnership</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <spacer name="verticalSpacer_14">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="0" column="3">
-               <widget class="QCheckBox" name="chkDisableSecurityPolicy">
-                <property name="toolTip">
-                 <string notr="true">Note: This setting disables various security features of the firmware, defeating the purpose of any kind of Secure Boot. Do NOT enable if you use UEFI Secure Boot.
-----
-注意：此设置会禁用固件的各种安全功能，从而失去任何一种安全启动的目的。如果您使用UEFI安全启动，请勿启用。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Disable platform security policy.</string>
-                </property>
-                <property name="text">
-                 <string>DisableSecurityPolicy</string>
-                </property>
-               </widget>
-              </item>
-              <item row="15" column="1">
-               <spacer name="verticalSpacer_20">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="12" column="1">
-               <widget class="QCheckBox" name="chkEnableVectorAcceleration">
-                <property name="toolTip">
-                 <string notr="true">Type: plist boolean
-
-Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algorithms.
-----
-类型：plist布尔值
-
-说明：启用SHA-512和SHA-384哈希算法的AVX矢量加速。</string>
-                </property>
-                <property name="text">
-                 <string>EnableVectorAcceleration</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QCheckBox" name="chkRequestBootVarRouting">
-                <property name="toolTip">
-                 <string notr="true">This quirk requires OC_FIRMWARE_RUNTIME protocol implemented in OpenRuntime.efi. The quirk lets default boot entry preservation at times when firmwares delete incompatible boot entries. Simply said, you are required to enable this quirk to be able to reliably use Startup Disk preference pane in a firmware that is not compatible with macOS boot entries by design.
-----
-该选项需要OC_FIRMWARE_RUNTIME协议在OpenRuntime.efi中实现。当固件删除不兼容的启动项时，该选项可以让默认的启动项保存。简单的说，你需要启用这个选项，才能在设计上与macOS启动项不兼容的固件中可靠的使用启动盘偏好面板。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Request redirect of all Boot prefixed variables from EFI_GLOBAL_VARIABLE_GUID to
- OC_VENDOR_VARIABLE_GUID.</string>
-                </property>
-                <property name="text">
-                 <string>RequestBootVarRouting</string>
-                </property>
-               </widget>
-              </item>
-              <item row="10" column="3">
-               <widget class="QCheckBox" name="chkReloadOptionRoms">
-                <property name="toolTip">
-                 <string notr="true">Type: plist boolean
-
-Description: Query PCI devices and reload their Option ROMs if available.
-
-For example, this option allows reloading NVIDIA GOP Option ROM on older Macs after the firmware version is upgraded via ForgeUefiSupport.
-
-----
-
-类型：plist boolean
-
-描述：查询PCI设备并重新加载其可用的Option ROM。
-
-例如，在通过ForgeUefiSupport升级固件版本后，该选项允许在旧的Mac上重新加载NVIDIA GOP Option ROM。</string>
-                </property>
-                <property name="text">
-                 <string>ReloadOptionRoms</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <spacer name="verticalSpacer_16">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="20" column="3">
-               <widget class="QLineEdit" name="editIntTscSyncTimeout">
+              <item>
+               <widget class="QLineEdit" name="editIntResizeGpuBars">
                 <property name="minimumSize">
                  <size>
                   <width>200</width>
@@ -12581,61 +12711,29 @@ For example, this option allows reloading NVIDIA GOP Option ROM on older Macs af
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>150</width>
+                  <width>16777215</width>
                   <height>16777215</height>
                  </size>
                 </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <spacer name="horizontalSpacer_7">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="10" column="1">
-               <widget class="QCheckBox" name="chkForgeUefiSupport">
-                <property name="toolTip">
-                 <string notr="true">Type: plist boolean
-
-Description: Implement partial UEFI 2.x support on EFI 1.x firmware.
-
-This setting allows running some software written for UEFI 2.x firmware like NVIDIA GOP Option ROMs on hardware with older EFI 1.x firmware like MacPro5,1.
-
-----
-
-类型：plist boolean
-
-描述：在EFI 1.x固件上实现部分UEFI 2.x支持。
-
-此项设置允许在MacPro5,1等旧的EFI 1.x固件上运行一些为UEFI 2.x固件编写的软件，如NVIDIA GOP Option ROM。</string>
-                </property>
                 <property name="text">
-                 <string>ForgeUefiSupport</string>
+                 <string>-1</string>
                 </property>
                </widget>
-              </item>
-              <item row="0" column="0">
-               <spacer name="horizontalSpacer_24">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
               </item>
              </layout>
+            </item>
+            <item row="0" column="0">
+             <spacer name="verticalSpacer_108">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>

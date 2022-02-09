@@ -41,6 +41,7 @@ void dlgNewKeyField::on_btnAdd_clicked() {
     if (!re) {
       add_CheckBox(tab, ObjectName, text);
       saveNewKey(ObjectName, main, sub);
+      mw_one->setWM();
     } else
       QMessageBox::critical(
           this, "", tr("The key field already exists and cannot be added."));
@@ -67,6 +68,7 @@ void dlgNewKeyField::on_btnAdd_clicked() {
     if (!re) {
       add_LineEdit(tab, ObjectName, text);
       saveNewKey(ObjectName, main, sub);
+      mw_one->setWM();
     } else
       QMessageBox::critical(
           this, "", tr("The key field already exists and cannot be added."));
