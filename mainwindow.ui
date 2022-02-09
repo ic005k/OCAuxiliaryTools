@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -856,110 +856,76 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
            <attribute name="title">
             <string>Quirks</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_28">
+           <layout class="QGridLayout" name="gridLayout_43">
             <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_43">
-              <item row="0" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayout_2">
-                <item>
-                 <widget class="QLabel" name="label_122">
-                  <property name="text">
-                   <string>Preselection</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QComboBox" name="comboBoxACPI">
-                  <property name="minimumSize">
-                   <size>
-                    <width>280</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="focusPolicy">
-                   <enum>Qt::NoFocus</enum>
-                  </property>
-                  <property name="editable">
-                   <bool>false</bool>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item row="1" column="1">
-               <spacer name="verticalSpacer">
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <spacer name="horizontalSpacer_3">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>45</height>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
-              <item row="3" column="1">
-               <spacer name="verticalSpacer_6">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>44</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="9" column="1">
-               <spacer name="verticalSpacer_4">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>44</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="10" column="1">
-               <widget class="QCheckBox" name="chkResetHwSig">
-                <property name="toolTip">
-                 <string notr="true">Description: Reset FACS table HardwareSignature value to 0.
-
-This works around firmware that fail to maintain hardware signature across the reboots and cause issues with waking from hibernation.
-
-----
-
-描述：将FACS表HardwareSignature值重置为0。
-
-这可以解决固件在重启过程中无法保持硬件签名而导致休眠唤醒的问题。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Reset FACS table HardwareSignature value to 0.</string>
-                </property>
+              <item>
+               <widget class="QLabel" name="label_122">
                 <property name="text">
-                 <string>ResetHwSig</string>
+                 <string>Preselection</string>
                 </property>
                </widget>
               </item>
-              <item row="5" column="1">
-               <spacer name="verticalSpacer_2">
+              <item>
+               <widget class="QComboBox" name="comboBoxACPI">
+                <property name="minimumSize">
+                 <size>
+                  <width>280</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="editable">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_4">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>20</width>
-                  <height>44</height>
+                  <width>40</width>
+                  <height>20</height>
                  </size>
                 </property>
                </spacer>
               </item>
-              <item row="12" column="1">
+             </layout>
+            </item>
+            <item row="2" column="0">
+             <layout class="QGridLayout" name="gridLayout_28">
+              <item row="5" column="1">
                <widget class="QCheckBox" name="chkSyncTableIds">
                 <property name="toolTip">
                  <string>Type: plist boolean
@@ -979,79 +945,20 @@ This works around patched tables becoming incompatible with the SLIC table causi
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
-               <widget class="QCheckBox" name="chkNormalizeHeaders">
-                <property name="statusTip">
-                 <string> Cleanup ACPI header fields to workaround macOS ACPI implementation bug causing boot crashes.</string>
-                </property>
-                <property name="text">
-                 <string>NormalizeHeaders</string>
-                </property>
-               </widget>
-              </item>
               <item row="2" column="0">
-               <spacer name="horizontalSpacer_3">
+               <spacer name="verticalSpacer_3">
                 <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+                 <enum>Qt::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>40</width>
-                  <height>20</height>
+                  <width>20</width>
+                  <height>40</height>
                  </size>
                 </property>
                </spacer>
               </item>
-              <item row="6" column="1">
-               <widget class="QCheckBox" name="chkResetLogoStatus">
-                <property name="toolTip">
-                 <string notr="true">Description: Reset BGRT table Displayed status field to false.
-
-This works around firmware that provide a BGRT table but fail to handle screen updates afterwards.
-
-----
-
-说明：将BGRT表显示状态字段重置为false。
-
-这可以解决提供BGRT表的固件，但之后无法处理屏幕更新的问题。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Reset BGRT table Displayed status field to false.</string>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
-                </property>
-                <property name="text">
-                 <string>ResetLogoStatus</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QCheckBox" name="chkFadtEnableReset">
-                <property name="toolTip">
-                 <string notr="true">Type: plist boolean
-
-Description: Provide reset register and flag in FADT table to enable reboot and shutdown.
-
-Mainly required on legacy hardware and a few newer laptops. Can also fix power-button shortcuts. Not recommended unless required.
-
-----
-
-类型：plist布尔值
-
-描述：在FADT表中提供复位寄存器和标志，以实现重启和关机。
-
-主要是在传统硬件和一些较新的笔记本上需要。也可以修复电源按钮的快捷方式。除非需要，否则不建议使用。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Provide reset register and flag in FADT table to enable reboot and shutdown.</string>
-                </property>
-                <property name="text">
-                 <string>FadtEnableReset</string>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="1">
+              <item row="5" column="0">
                <widget class="QCheckBox" name="chkRebaseRegions">
                 <property name="toolTip">
                  <string notr="true">Description: Attempt to heuristically relocate ACPI memory regions. Not recommended.
@@ -1080,46 +987,126 @@ ACPI表通常由底层固件实现动态生成。在与位置无关的代码中�
                 </property>
                </widget>
               </item>
-              <item row="7" column="1">
-               <spacer name="verticalSpacer_3">
+              <item row="1" column="1">
+               <widget class="QCheckBox" name="chkNormalizeHeaders">
+                <property name="statusTip">
+                 <string> Cleanup ACPI header fields to workaround macOS ACPI implementation bug causing boot crashes.</string>
+                </property>
+                <property name="text">
+                 <string>NormalizeHeaders</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QCheckBox" name="chkResetLogoStatus">
+                <property name="toolTip">
+                 <string notr="true">Description: Reset BGRT table Displayed status field to false.
+
+This works around firmware that provide a BGRT table but fail to handle screen updates afterwards.
+
+----
+
+说明：将BGRT表显示状态字段重置为false。
+
+这可以解决提供BGRT表的固件，但之后无法处理屏幕更新的问题。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Reset BGRT table Displayed status field to false.</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>ResetLogoStatus</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QCheckBox" name="chkResetHwSig">
+                <property name="toolTip">
+                 <string notr="true">Description: Reset FACS table HardwareSignature value to 0.
+
+This works around firmware that fail to maintain hardware signature across the reboots and cause issues with waking from hibernation.
+
+----
+
+描述：将FACS表HardwareSignature值重置为0。
+
+这可以解决固件在重启过程中无法保持硬件签名而导致休眠唤醒的问题。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Reset FACS table HardwareSignature value to 0.</string>
+                </property>
+                <property name="text">
+                 <string>ResetHwSig</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <spacer name="verticalSpacer_2">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>45</height>
+                  <height>40</height>
                  </size>
                 </property>
                </spacer>
               </item>
-              <item row="11" column="1">
-               <spacer name="verticalSpacer_5">
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="chkFadtEnableReset">
+                <property name="toolTip">
+                 <string notr="true">Type: plist boolean
+
+Description: Provide reset register and flag in FADT table to enable reboot and shutdown.
+
+Mainly required on legacy hardware and a few newer laptops. Can also fix power-button shortcuts. Not recommended unless required.
+
+----
+
+类型：plist布尔值
+
+描述：在FADT表中提供复位寄存器和标志，以实现重启和关机。
+
+主要是在传统硬件和一些较新的笔记本上需要。也可以修复电源按钮的快捷方式。除非需要，否则不建议使用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Provide reset register and flag in FADT table to enable reboot and shutdown.</string>
+                </property>
+                <property name="text">
+                 <string>FadtEnableReset</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <spacer name="verticalSpacer_4">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>45</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="2" column="2">
-               <spacer name="horizontalSpacer_4">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
+                  <height>40</height>
                  </size>
                 </property>
                </spacer>
               </item>
              </layout>
+            </item>
+            <item row="3" column="0">
+             <spacer name="verticalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
