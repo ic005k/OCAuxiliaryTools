@@ -45,34 +45,6 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per [Open
 * [@chriswayg](https://github.com/chriswayg) Guida per l'utente di OpenCore Auxiliary Tools.
 * Icona della app: Mirone (Brasile)
 
----
-
-### Come configurare una nuova EFI?
-* Il processo e' molto semplice, clicca sulla barra menu "Database", doppio click sul modello che corrisponde al tuo nella lista del database (grazie a @5T33Z0 per fornire e mantenere questi file), una cartella EFI sara' automaticamente creata sul desktop ed il processo e' cosi' completato.
-
-### Come aggiornare automaticamente OC? (facile, sono necessari solo due passi)
-* Trascina e rilascia il file di configurazione nell'interfaccia di OCAT e scegli "salva" dal menu.
-* Successivamente seleziona "Upgrade OC Main Program" sulla toolbar, una interfaccia "Synchronize OC" comparirà, Premi il bottone in basso "Start Sync" per completare l'aggiornamento.
-
-### Perche' l'icona di verifica di OC diventa rossa quando apro o salvo il file di configurazione?
-* Perche' c'e' un problema con il file di configurazione, di solito diventa normale dopo il salvataggio del file di configurazione. Se viene mostrato ancora un problema dopo il salvataggio del file, e' molto semplice il processo per risolvere il problema , seguendo i messaggi di verifica che compaiono.
-
-### Quali sono le operazioni convenienti da fare in OCAT?
-* Tutti I files che necessitano di essere aperti possono essere aperti trascinandoli e rilasciandoli nella corrispondente interfaccia (supportata la selezione singola e multipla).
-* La ricerca nella barra degli strumenti (si consiglia vivamente di utilizzare il portale di ricerca quando si modificano i file di configurazione invece di fare clic sulle schede una per una, supporta il matching fuzzy ed e' molto potente).
-* Premi sinistro e trascina il mouse all'interno della tabella dati per effettuare selezioni multiple.
-* Apri due o piu' profili per confrontare, copiare o incollare righe tra tabelle di dati (supporta la selezione singola o multipla).
-* ...
-
-### Come scarica OCAT OpenCore?
-* OCAT correntemente prende OpenCore da OC, da questo indirizzo: https://github.com/acidanthera/OpenCorePkg/actions che e' "OpenCore Factory" nel menu "Help" di OCAT. Oltre a questo, OCAT non prende nessun files per OpenCore da altre fonti.
-* Nota bene: tutti i materiali raw usati in OCAT provengono da fonti ufficiali di OpenCore, OCAT non prende contenuti da terze parti, ne ora, ne mai!.
-
-### Perche' OCAT non usa un approccio online per ottenere automaticamente OC?
-* Perche' OC e' rilasciato in versione stabile una volta al mese, un update di OC e' accompagnato inevitabilmente da un update di OCAT, non e' necessario in quanto c'e' tutto il tempo per aggiornare senza usare il metodo fetch.
-
----
-
 ### Grazie per il supporto ai seguenti software open source!
 
 [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
