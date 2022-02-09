@@ -11,7 +11,8 @@
 
 extern MainWindow *mw_one;
 extern Method *mymethod;
-extern QString SaveFileName, strIniFile, strAppName, ocFromDev, strOCFromDev;
+extern QString SaveFileName, strIniFile, strAppName, ocFromDev, strOCFromDev,
+    strAppExePath;
 extern bool blDEV;
 
 dlgPreference::dlgPreference(QWidget *parent)
@@ -127,7 +128,7 @@ void dlgPreference::saveKextUrl() {
 }
 
 void dlgPreference::refreshKextUrl() {
-  QString file = mw_one->strAppExePath + "/Database/preset/KextUrl.txt";
+  QString file = strAppExePath + "/Database/preset/KextUrl.txt";
   ui->textEdit->clear();
   ui->textEdit->setPlainText(mymethod->loadText(file));
 

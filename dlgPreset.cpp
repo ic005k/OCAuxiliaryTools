@@ -6,6 +6,7 @@
 #include "ui_mainwindow.h"
 extern MainWindow* mw_one;
 extern Method* mymethod;
+extern QString strAppExePath;
 dlgPreset::dlgPreset(QWidget* parent) : QDialog(parent), ui(new Ui::dlgPreset) {
   ui->setupUi(this);
 
@@ -239,7 +240,7 @@ void dlgPreset::on_btnAdd_clicked() {
 void dlgPreset::addKextPresets() {
   if (blKext) {
     QStringList list;
-    QString strPath = mw_one->strAppExePath + "/Database/EFI/OC/Kexts/";
+    QString strPath = strAppExePath + "/Database/EFI/OC/Kexts/";
     for (int i = 0; i < ui->listPreset->count(); i++) {
       if (ui->listPreset->item(i)->checkState() == Qt::Checked) {
         list.append(strPath + ui->listPreset->item(i)->text());

@@ -119,7 +119,6 @@ class MainWindow : public QMainWindow {
   QStringList strIconListSel;
   QString strOrgMd5;
   QString strByModiMd5;
-  QString strAppExePath;
   QAction* cutAction;
   QAction* copyAction;
   QAction* pasteAction;
@@ -201,8 +200,8 @@ class MainWindow : public QMainWindow {
 
   QAction* clearTextsAction;
 
-  QObjectList getAllUIControls(QObject* parent);
-  QObjectList getAllCheckBox(QObjectList lstUIControls);
+  static QObjectList getAllUIControls(QObject* parent);
+  static QObjectList getAllCheckBox(QObjectList lstUIControls);
   QObjectList getAllTableWidget(QObjectList lstUIControls);
   QObjectList getAllLineEdit(QObjectList lstUIControls);
   QObjectList getAllLabel(QObjectList lstUIControls);

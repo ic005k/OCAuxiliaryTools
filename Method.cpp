@@ -10,7 +10,7 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-extern QString SaveFileName, strIniFile, strAppName;
+extern QString SaveFileName, strIniFile, strAppName, strAppExePath;
 extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
     strOCFromDev;
 extern bool blDEV;
@@ -162,8 +162,7 @@ void Method::finishKextUpdate(bool blDatabase) {
       QString dirSource, dirTargetDatabase, dirTargetLinux;
       dirSource = kextList.at(i);
       QString Name = getFileName(dirSource);
-      dirTargetDatabase =
-          mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
+      dirTargetDatabase = strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
       dirTargetLinux = QDir::homePath() + "/Database/EFI/OC/Kexts/" + Name;
 
       if (!mw_one->linuxOS)
@@ -174,16 +173,14 @@ void Method::finishKextUpdate(bool blDatabase) {
   } else {
     QStringList list;
     if (!mw_one->linuxOS)
-      list = DirToFileList(mw_one->strAppExePath + "/Database/EFI/OC/Kexts/",
-                           "*.kext");
+      list = DirToFileList(strAppExePath + "/Database/EFI/OC/Kexts/", "*.kext");
     else
       list =
           DirToFileList(QDir::homePath() + "/Database/EFI/OC/Kexts/", "*.kext");
     for (int i = 0; i < list.count(); i++) {
       QString dirSource, dirTarget;
       if (!mw_one->linuxOS)
-        dirSource =
-            mw_one->strAppExePath + "/Database/EFI/OC/Kexts/" + list.at(i);
+        dirSource = strAppExePath + "/Database/EFI/OC/Kexts/" + list.at(i);
       else
         dirSource = QDir::homePath() + "/Database/EFI/OC/Kexts/" + list.at(i);
       QString Name = getFileName(dirSource);
@@ -342,7 +339,7 @@ void Method::doProcessFinished() {
     myfile->close();
     if (QFile(tempDir + filename).exists()) {
       if (mw_one->win) {
-        QProcess::execute(mw_one->strAppExePath + "/unzip.exe",
+        QProcess::execute(strAppExePath + "/unzip.exe",
                           QStringList()
                               << "-o" << tempDir + filename << "-d" << tempDir);
       } else
@@ -368,11 +365,11 @@ void Method::doProcessFinished() {
 void Method::updateOpenCore() {
   if (mw_one->dlgSyncOC->isCheckOC) {
     QList<bool> Results;
-    QString appPathBak = mw_one->strAppExePath;
+    QString appPathBak = strAppExePath;
     if (mw_one->linuxOS)
-      mw_one->strAppExePath = QDir::homePath();
+      strAppExePath = QDir::homePath();
     else
-      mw_one->strAppExePath = appPathBak;
+      strAppExePath = appPathBak;
 
     QString strSEFI = tempDir + "X64/EFI/";
     QString strTEFI;
@@ -1614,8 +1611,8 @@ void Method::kextPreset() {
   mw_one->dlgPresetValues->blNVLegacy = false;
   mw_one->dlgPresetValues->blNVAdd = false;
 
-  mw_one->dlgPresetValues->listKextPreset = DirToFileList(
-      mw_one->strAppExePath + "/Database/EFI/OC/Kexts/", "*.kext");
+  mw_one->dlgPresetValues->listKextPreset =
+      DirToFileList(strAppExePath + "/Database/EFI/OC/Kexts/", "*.kext");
   mw_one->dlgPresetValues->ui->listPreset->clear();
   mw_one->dlgPresetValues->ui->listPreset->addItems(
       mw_one->dlgPresetValues->listKextPreset);
@@ -1853,11 +1850,11 @@ void Method::backupEFI() {
   }
 
   if (mw_one->win) {
-    QString strZipExe = mw_one->strAppExePath + "/zip.exe";
+    QString strZipExe = strAppExePath + "/zip.exe";
     strZipExe = "\"" + strZipExe + "\"";
     QTextEdit* txtEdit = new QTextEdit;
     txtEdit->append(strZipExe + " -q -r " + strTargetName + " " + strZipName);
-    QString fileName = mw_one->strAppExePath + "/bak.bat";
+    QString fileName = strAppExePath + "/bak.bat";
     TextEditToFile(txtEdit, fileName);
     QProcess::execute("cmd.exe", QStringList() << "/c" << fileName);
   } else {

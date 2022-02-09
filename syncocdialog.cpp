@@ -6,13 +6,10 @@
 #include "ui_syncocdialog.h"
 
 extern MainWindow* mw_one;
-extern QString ocVer, strIniFile, strAppName;
-extern QString ocVerDev;
-extern QString ocFrom;
-extern QString ocFromDev;
+extern QString ocVer, ocVerDev, ocFrom, ocFromDev, strIniFile, strAppName,
+    SaveFileName, strAppExePath;
 extern bool blDEV;
 extern Method* mymethod;
-extern QString SaveFileName;
 
 SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {
@@ -539,15 +536,15 @@ void SyncOCDialog::init_Sync_OC_Table() {
 
   // Init Linux Database
   if (mw_one->linuxOS) {
-    mw_one->copyDirectoryFiles(mw_one->strAppExePath + "/Database/",
+    mw_one->copyDirectoryFiles(strAppExePath + "/Database/",
                                QDir::homePath() + "/Database/", false);
-    mw_one->copyDirectoryFiles(mw_one->strAppExePath + "/devDatabase/",
+    mw_one->copyDirectoryFiles(strAppExePath + "/devDatabase/",
                                QDir::homePath() + "/devDatabase/", false);
   }
 
   QString pathOldSource;
   if (!mw_one->linuxOS)
-    pathOldSource = mw_one->strAppExePath + "/Database/";
+    pathOldSource = strAppExePath + "/Database/";
   else
     pathOldSource = QDir::homePath() + "/Database/";
 

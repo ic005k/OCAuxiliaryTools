@@ -6,7 +6,7 @@
 
 extern MainWindow *mw_one;
 extern Method *mymethod;
-extern QString SaveFileName, strIniFile, strAppName;
+extern QString SaveFileName, strIniFile, strAppName, strAppExePath;
 extern bool blDEV;
 
 dlgDatabase::dlgDatabase(QWidget *parent)
@@ -58,7 +58,7 @@ void dlgDatabase::init_Database(QStringList files) {
   ui->tableDatabase->setRowCount(0);
   ui->tableDatabase->setRowCount(files.count());
 
-  QString dirpath = mw_one->strAppExePath + "/Database/BaseConfigs/";
+  QString dirpath = strAppExePath + "/Database/BaseConfigs/";
   for (int i = 0; i < files.count(); i++) {
     QTableWidgetItem *newItem1;
     newItem1 = new QTableWidgetItem(files.at(i));
@@ -129,12 +129,12 @@ void dlgDatabase::on_tableDatabase_cellDoubleClicked(int row, int column) {
 void dlgDatabase::get_EFI(int row, int column, QTableWidget *table) {
   if (column != 0) return;
 
-  QString dirpath = mw_one->strAppExePath + "/Database/BaseConfigs/";
+  QString dirpath = strAppExePath + "/Database/BaseConfigs/";
   QString file = table->item(row, 0)->text();
 
   if (blDEV) {
     if (file == "SampleCustom.plist" || file == "Sample.plist") {
-      dirpath = mw_one->strAppExePath + "/devDatabase/BaseConfigs/";
+      dirpath = strAppExePath + "/devDatabase/BaseConfigs/";
     }
   }
 
@@ -216,18 +216,18 @@ void dlgDatabase::on_tableDatabase_itemDoubleClicked(QTableWidgetItem *item) {
 
 void dlgDatabase::on_btnIntel_clicked() {
   QString qtManulFile =
-      mw_one->strAppExePath + "/Database/BaseConfigs/Instructions_Intel.md";
+      strAppExePath + "/Database/BaseConfigs/Instructions_Intel.md";
   QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
 }
 
 void dlgDatabase::on_btnAMD_clicked() {
   QString qtManulFile =
-      mw_one->strAppExePath + "/Database/BaseConfigs/Instructions_AMD_TRX40.md";
+      strAppExePath + "/Database/BaseConfigs/Instructions_AMD_TRX40.md";
   QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
 }
 
 void dlgDatabase::on_btnOpenDir_clicked() {
-  QString dirpath = mw_one->strAppExePath + "/Database/BaseConfigs/";
+  QString dirpath = strAppExePath + "/Database/BaseConfigs/";
   QString dir = "file:" + dirpath;
   QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
 }

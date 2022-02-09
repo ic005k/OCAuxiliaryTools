@@ -20,13 +20,10 @@ using namespace std;
 QString strAppName = "OCAuxiliaryTools";
 QString strIniFile =
     QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
-
-QString PlistFileName, SaveFileName;
+QString PlistFileName, SaveFileName, strAppExePath;
 QVector<QString> openFileLists;
-
 QRegularExpression regxData("[A-Fa-f0-9 ]{0,1024}");
 QRegularExpression regxNumber("^-?\[0-9]*$");
-
 Method* mymethod;
 QVector<QCheckBox*> chkDisplayLevel, chk_ScanPolicy, chk_PickerAttributes,
     chk_ExposeSensitiveData, chk_Target;
@@ -142,6 +139,7 @@ MainWindow::MainWindow(QWidget* parent)
 
   setUIMargin();
   init_MainUI();
+  dlgNewKeyField::check_SampleFile(ui->tabACPI4);
   init_setWindowModified();
   init_hardware_info();
   initui_booter();
@@ -8106,7 +8104,6 @@ void MainWindow::on_actionNewWindow_triggered() {
   process->start(path, arguments);
 }
 
-/* 获取所有控件 */
 QObjectList MainWindow::getAllUIControls(QObject* parent) {
   QObjectList lstOfChildren, lstTemp;
   if (parent) {
@@ -8129,7 +8126,6 @@ QObjectList MainWindow::getAllUIControls(QObject* parent) {
   return lstOfChildren;
 }
 
-// 获取所有的chkbox
 QObjectList MainWindow::getAllCheckBox(QObjectList lstUIControls) {
   QObjectList lstOfCheckBox;
   foreach (QObject* obj, lstUIControls) {

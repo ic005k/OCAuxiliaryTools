@@ -23,6 +23,9 @@ class dlgNewKeyField : public QDialog {
   static void add_CheckBox(QWidget* tab, QString ObjectName, QString text);
   static QStringList getAllNewKey();
   static QList<int> getKeyMainSub(QString Key);
+  static QStringList check_SampleFile(QWidget* tab);
+  static QStringList get_KeyTypeValue(QString fileSample, QString MainName,
+                                      QString SubName);
  private slots:
   void on_btnAdd_clicked();
 

@@ -4,6 +4,7 @@
 #include "ui_autoupdatedialog.h"
 
 extern MainWindow* mw_one;
+extern QString strAppExePath;
 
 AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::AutoUpdateDialog) {
@@ -396,7 +397,7 @@ void AutoUpdateDialog::startWgetDownload() {
 
   QString strExec;
   if (mw_one->mac || mw_one->osx1012 || mw_one->win) {
-    strExec = mw_one->strAppExePath + "/aria2c";
+    strExec = strAppExePath + "/aria2c";
     connect(processWget, SIGNAL(readyReadStandardOutput()), this,
             SLOT(onReadData()));
     processWget->setReadChannel(QProcess::StandardOutput);
@@ -412,7 +413,7 @@ void AutoUpdateDialog::startWgetDownload() {
                                               << "--log-level=info" << strUrl);
 
   } else {
-    // if (mw_one->win) strExec = mw_one->strAppExePath + "/wget.exe";
+    // if (mw_one->win) strExec = strAppExePath + "/wget.exe";
     if (mw_one->linuxOS) strExec = "wget";
 
     processWget->start(strExec, QStringList()

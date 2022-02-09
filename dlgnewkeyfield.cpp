@@ -6,7 +6,7 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-extern QString ocVer, strIniFile, strAppName;
+extern QString ocVer, strIniFile, strAppName, strAppExePath;
 extern QString ocVerDev;
 extern QString ocFrom;
 extern QString ocFromDev;
@@ -302,4 +302,57 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
 void dlgNewKeyField::removeKey(QString ObjectName) {
   QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.remove("key" + ObjectName);
+}
+
+QStringList dlgNewKeyField::check_SampleFile(QWidget* tab) {
+  QStringList ResultsList;
+  QString fileSample;
+  if (blDEV)
+    fileSample = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
+  else
+    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
+
+  QStringList list0;
+  list0 = get_KeyTypeValue(fileSample, "ACPI", "Quirks");
+  QObjectList listCheckBox;
+  listCheckBox = MainWindow::getAllCheckBox(MainWindow::getAllUIControls(tab));
+  for (int i = 0; i < list0.count(); i++) {
+    qDebug() << list0.at(i);
+  }
+  for (int j = 0; j < list0.count(); j++) {
+    QString strSample = list0.at(j);
+    for (int i = 0; i < listCheckBox.count(); i++) {
+      QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
+      QString text = chkbox->text();
+      if (strSample.split("|").at(0) == text) {
+        list0.removeAt(j);
+        j--;
+      }
+    }
+  }
+
+  qDebug() << list0;
+
+  return ResultsList;
+}
+
+QStringList dlgNewKeyField::get_KeyTypeValue(QString fileSample,
+                                             QString MainName,
+                                             QString SubName) {
+  QStringList list0;
+  QFile file(fileSample);
+  QVariantMap mapTatol = PListParser::parsePList(&file).toMap();
+  QVariantMap mapMain;
+  mapMain = mapTatol[MainName].toMap();
+  QVariantMap mapSub = mapMain[SubName].toMap();
+  QStringList keyList = mapSub.keys();
+  for (int i = 0; i < keyList.count(); i++) {
+    QString name = keyList.at(i);
+    QString type = mapSub[name].typeName();
+    list0.append(name + "|" + type);
+    if (type == "bool") {
+      // qDebug() << name << type << mapSub[name].toBool();
+    }
+  }
+  return list0;
 }
