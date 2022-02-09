@@ -203,9 +203,9 @@ class MainWindow : public QMainWindow {
   static QObjectList getAllUIControls(QObject* parent);
   static QObjectList getAllCheckBox(QObjectList lstUIControls);
   QObjectList getAllTableWidget(QObjectList lstUIControls);
-  QObjectList getAllLineEdit(QObjectList lstUIControls);
+  static QObjectList getAllLineEdit(QObjectList lstUIControls);
   QObjectList getAllLabel(QObjectList lstUIControls);
-  QObjectList getAllComboBox(QObjectList lstUIControls);
+  static QObjectList getAllComboBox(QObjectList lstUIControls);
   QObjectList listOfCheckBox;
   QObjectList listOfTableWidget;
   QObjectList listOfLabel;
@@ -375,6 +375,7 @@ class MainWindow : public QMainWindow {
   QWidget* getSubTabWidget(int m, int s);
   void init_setWindowModified();
   void setWM();
+  void smart_UpdateKeyField();
  public slots:
   void DisplayLevel();
   void ScanPolicy();

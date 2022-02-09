@@ -136,20 +136,9 @@ MainWindow::MainWindow(QWidget* parent)
 #endif
 
   init_Widgets();
-
   setUIMargin();
   init_MainUI();
-
-  QString fileSample;
-  if (blDEV)
-    fileSample = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
-  else
-    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
-
-  QFile file(fileSample);
-  QVariantMap mapTatol = PListParser::parsePList(&file).toMap();
-  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabACPI4, "ACPI", "Quirks");
-
+  smart_UpdateKeyField();
   init_setWindowModified();
   init_hardware_info();
   initui_booter();
@@ -160,9 +149,7 @@ MainWindow::MainWindow(QWidget* parent)
   initui_PlatformInfo();
   initui_UEFI();
   initui_acpi();
-
   init_CopyPasteLine();
-
   setTableEditTriggers();
 
   this->setAcceptDrops(true);
@@ -11504,4 +11491,49 @@ void MainWindow::on_btnCheckSN_clicked() {
                 ui->editSystemSerialNumber->text().trimmed();
   QUrl url(str);
   QDesktopServices::openUrl(url);
+}
+
+void MainWindow::smart_UpdateKeyField() {
+  QString fileSample;
+  if (blDEV)
+    fileSample = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
+  else
+    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
+
+  QFile file(fileSample);
+  QVariantMap mapTatol = PListParser::parsePList(&file).toMap();
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabACPI4, "ACPI", "Quirks");
+
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabBooter3, "Booter",
+                                   "Quirks");
+
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabKernel5, "Kernel",
+                                   "Emulate");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabKernel6, "Kernel",
+                                   "Quirks");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabKernel7, "Kernel",
+                                   "Scheme");
+
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabMisc1, "Misc", "Boot");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabMisc2, "Misc", "Debug");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabMisc3, "Misc", "Security");
+
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabPlatformInfo1,
+                                   "PlatformInfo", "Generic");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabPlatformInfo2,
+                                   "PlatformInfo", "DataHub");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabPlatformInfo4,
+                                   "PlatformInfo", "PlatformNVRAM");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabPlatformInfo5,
+                                   "PlatformInfo", "SMBIOS");
+
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI1, "UEFI", "APFS");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI2, "UEFI",
+                                   "AppleInput");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI3, "UEFI", "Audio");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI5, "UEFI", "Input");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI6, "UEFI", "Output");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI7, "UEFI",
+                                   "ProtocolOverrides");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI8, "UEFI", "Quirks");
 }

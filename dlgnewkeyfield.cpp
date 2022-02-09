@@ -315,14 +315,52 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
     QString str = listSample.at(i);
     listSampleKey.append(str.split("|").at(0));
   }
-  QObjectList listCheckBox;
-  listCheckBox = MainWindow::getAllCheckBox(MainWindow::getAllUIControls(tab));
   for (int i = 0; i < listSample.count(); i++) {
     qDebug() << listSample.at(i);
   }
-  for (int i = 0; i < listCheckBox.count(); i++) {
-    QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
+
+  QObjectList listObj;
+  listObj = MainWindow::getAllCheckBox(MainWindow::getAllUIControls(tab));
+  for (int i = 0; i < listObj.count(); i++) {
+    QCheckBox* chkbox = (QCheckBox*)listObj.at(i);
     QString text = chkbox->text();
+    listOCATKey.append(text);
+  }
+  listObj.clear();
+  listObj = MainWindow::getAllComboBox(MainWindow::getAllUIControls(tab));
+  for (int i = 0; i < listObj.count(); i++) {
+    QComboBox* w = (QComboBox*)listObj.at(i);
+    QString ObjName = w->objectName();
+    if (ObjName.mid(0, 4) == "cbox") {
+      QString text = ObjName.replace("cbox", "");
+      listOCATKey.append(text);
+    }
+  }
+  listObj.clear();
+  listObj = MainWindow::getAllLineEdit(MainWindow::getAllUIControls(tab));
+  for (int i = 0; i < listObj.count(); i++) {
+    QLineEdit* w = (QLineEdit*)listObj.at(i);
+    QString ObjName = w->objectName();
+    if (ObjName.contains("_")) {
+      QStringList strList = ObjName.split("_");
+      ObjName = strList.at(0);
+    }
+    QString obj1, obj2, obj3;
+    obj1 = ObjName;
+    obj2 = ObjName;
+    obj3 = ObjName;
+    QString text;
+    if (ObjName.mid(0, 4) == "edit" && ObjName.mid(0, 7) != "editInt" &&
+        ObjName.mid(0, 7) != "editDat") {
+      text = obj1.replace("edit", "");
+    }
+    if (ObjName.mid(0, 7) == "editDat") {
+      text = obj2.replace("editDat", "");
+    }
+    if (ObjName.mid(0, 7) == "editInt") {
+      text = obj3.replace("editInt", "");
+    }
+
     listOCATKey.append(text);
   }
   if (listOCATKey == listSampleKey) {
@@ -345,14 +383,23 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
     if (listSampleKey.count() > 0) {
       qDebug() << listSampleKey;
       for (int i = 0; i < listSampleKey.count(); i++) {
-        QString str = listSampleKey.at(i);
+        QString Key = listSampleKey.at(i);
         for (int j = 0; j < listSample.count(); j++) {
           QString str1 = listSample.at(j);
           QStringList list = str1.split("|");
-          if (str == list.at(0)) {
+          if (Key == list.at(0)) {
             // Add Widget
             if (list.at(1) == "bool") {
-              add_CheckBox(tab, "chk" + list.at(0), list.at(0));
+              add_CheckBox(tab, "chk" + Key, Key);
+            }
+            if (list.at(1) == "qlonglong") {
+              add_LineEdit(tab, "editInt" + Key, Key);
+            }
+            if (list.at(1) == "QString") {
+              add_LineEdit(tab, "edit" + Key, Key);
+            }
+            if (list.at(1) == "QByteArray") {
+              add_LineEdit(tab, "editDat" + Key, Key);
             }
           }
         }
