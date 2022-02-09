@@ -139,7 +139,17 @@ MainWindow::MainWindow(QWidget* parent)
 
   setUIMargin();
   init_MainUI();
-  dlgNewKeyField::check_SampleFile(ui->tabACPI4);
+
+  QString fileSample;
+  if (blDEV)
+    fileSample = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
+  else
+    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
+
+  QFile file(fileSample);
+  QVariantMap mapTatol = PListParser::parsePList(&file).toMap();
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabACPI4, "ACPI", "Quirks");
+
   init_setWindowModified();
   init_hardware_info();
   initui_booter();

@@ -304,44 +304,69 @@ void dlgNewKeyField::removeKey(QString ObjectName) {
   Reg.remove("key" + ObjectName);
 }
 
-QStringList dlgNewKeyField::check_SampleFile(QWidget* tab) {
+QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
+                                             QString MainName,
+                                             QString SubName) {
   QStringList ResultsList;
-  QString fileSample;
-  if (blDEV)
-    fileSample = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
-  else
-    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
 
-  QStringList list0;
-  list0 = get_KeyTypeValue(fileSample, "ACPI", "Quirks");
+  QStringList listOCATKey, listSample, listSampleKey;
+  listSample = get_KeyTypeValue(mapTatol, MainName, SubName);
+  for (int i = 0; i < listSample.count(); i++) {
+    QString str = listSample.at(i);
+    listSampleKey.append(str.split("|").at(0));
+  }
   QObjectList listCheckBox;
   listCheckBox = MainWindow::getAllCheckBox(MainWindow::getAllUIControls(tab));
-  for (int i = 0; i < list0.count(); i++) {
-    qDebug() << list0.at(i);
+  for (int i = 0; i < listSample.count(); i++) {
+    qDebug() << listSample.at(i);
   }
-  for (int j = 0; j < list0.count(); j++) {
-    QString strSample = list0.at(j);
-    for (int i = 0; i < listCheckBox.count(); i++) {
-      QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
-      QString text = chkbox->text();
-      if (strSample.split("|").at(0) == text) {
-        list0.removeAt(j);
-        j--;
+  for (int i = 0; i < listCheckBox.count(); i++) {
+    QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
+    QString text = chkbox->text();
+    listOCATKey.append(text);
+  }
+  if (listOCATKey == listSampleKey) {
+    qDebug() << MainName << "-->" << SubName << "Ok...";
+  } else {
+    for (int i = 0; i < listSampleKey.count(); i++) {
+      QString strSampleKey = listSampleKey.at(i);
+      for (int j = 0; j < listOCATKey.count(); j++) {
+        if (strSampleKey == listOCATKey.at(j)) {
+          listSampleKey.removeAt(i);
+          i--;
+          listOCATKey.removeAt(j);
+          j--;
+        }
+      }
+    }
+    if (listOCATKey.count() > 0) {
+      qDebug() << listOCATKey;
+    }
+    if (listSampleKey.count() > 0) {
+      qDebug() << listSampleKey;
+      for (int i = 0; i < listSampleKey.count(); i++) {
+        QString str = listSampleKey.at(i);
+        for (int j = 0; j < listSample.count(); j++) {
+          QString str1 = listSample.at(j);
+          QStringList list = str1.split("|");
+          if (str == list.at(0)) {
+            // Add Widget
+            if (list.at(1) == "bool") {
+              add_CheckBox(tab, "chk" + list.at(0), list.at(0));
+            }
+          }
+        }
       }
     }
   }
 
-  qDebug() << list0;
-
   return ResultsList;
 }
 
-QStringList dlgNewKeyField::get_KeyTypeValue(QString fileSample,
+QStringList dlgNewKeyField::get_KeyTypeValue(QVariantMap mapTatol,
                                              QString MainName,
                                              QString SubName) {
   QStringList list0;
-  QFile file(fileSample);
-  QVariantMap mapTatol = PListParser::parsePList(&file).toMap();
   QVariantMap mapMain;
   mapMain = mapTatol[MainName].toMap();
   QVariantMap mapSub = mapMain[SubName].toMap();
