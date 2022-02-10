@@ -124,6 +124,10 @@ class Method : public QMainWindow {
   void writePlist(QString plistFile, QString key, QString value);
   bool isKeyExists(QString plistFile, QString key);
   void show_Tip(QString strText, QString strTip);
+  static QVariantList get_TableData(QTableWidget *t);
+  static bool isInt(QString strCol);
+  static bool isData(QString strCol);
+  static bool isBool(QString strCol);
  public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();

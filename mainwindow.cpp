@@ -2632,9 +2632,6 @@ QVariantMap MainWindow::SaveACPI() {
   // Add
   QVariantMap acpiMap;
 
-  QVariantList acpiAdd;
-  QVariantMap acpiAddSub;
-
   for (int i = 0; i < ui->table_acpi_add->rowCount(); i++) {
     QFileInfo fi(SaveFileName);
     QString str0, oldFile, newFile;
@@ -2648,82 +2645,15 @@ QVariantMap MainWindow::SaveACPI() {
       QFileInfo fiReName(oldFile);
       if (fiReName.exists()) QFile::rename(oldFile, newFile);
     }
-
-    acpiAddSub["Path"] = str0;
-
-    acpiAddSub["Enabled"] = getBool(ui->table_acpi_add, i, 1);
-
-    acpiAddSub["Comment"] = ui->table_acpi_add->item(i, 2)->text();
-
-    acpiAdd.append(acpiAddSub);  //最后一层
   }
 
-  acpiMap["Add"] = acpiAdd;  //第二层
+  acpiMap["Add"] = Method::get_TableData(ui->table_acpi_add);
 
   // Delete
-
-  QVariantList acpiDel;
-  QVariantMap acpiDelSub;
-  QString str;
-
-  for (int i = 0; i < ui->table_acpi_del->rowCount(); i++) {
-    str = ui->table_acpi_del->item(i, 0)->text();
-    acpiDelSub["TableSignature"] = HexStrToByte(str);
-
-    str = ui->table_acpi_del->item(i, 1)->text();
-    acpiDelSub["OemTableId"] = HexStrToByte(str);
-
-    acpiDelSub["TableLength"] =
-        ui->table_acpi_del->item(i, 2)->text().toLongLong();
-
-    acpiDelSub["All"] = getBool(ui->table_acpi_del, i, 3);
-    acpiDelSub["Enabled"] = getBool(ui->table_acpi_del, i, 4);
-    acpiDelSub["Comment"] = ui->table_acpi_del->item(i, 5)->text();
-
-    acpiDel.append(acpiDelSub);  //最后一层
-  }
-
-  acpiMap["Delete"] = acpiDel;  //第二层
+  acpiMap["Delete"] = Method::get_TableData(ui->table_acpi_del);
 
   // Patch
-
-  QVariantList acpiPatch;
-  QVariantMap acpiPatchSub;
-
-  for (int i = 0; i < ui->table_acpi_patch->rowCount(); i++) {
-    str = ui->table_acpi_patch->item(i, 0)->text();
-    acpiPatchSub["TableSignature"] = HexStrToByte(str);
-
-    str = ui->table_acpi_patch->item(i, 1)->text();
-    acpiPatchSub["OemTableId"] = HexStrToByte(str);
-
-    acpiPatchSub["TableLength"] =
-        ui->table_acpi_patch->item(i, 2)->text().toLongLong();
-    acpiPatchSub["Find"] =
-        HexStrToByte(ui->table_acpi_patch->item(i, 3)->text());
-    acpiPatchSub["Replace"] =
-        HexStrToByte(ui->table_acpi_patch->item(i, 4)->text());
-    acpiPatchSub["Comment"] = ui->table_acpi_patch->item(i, 5)->text();
-    acpiPatchSub["Mask"] =
-        HexStrToByte(ui->table_acpi_patch->item(i, 6)->text());
-    acpiPatchSub["ReplaceMask"] =
-        HexStrToByte(ui->table_acpi_patch->item(i, 7)->text());
-    acpiPatchSub["Count"] =
-        ui->table_acpi_patch->item(i, 8)->text().toLongLong();
-    acpiPatchSub["Limit"] =
-        ui->table_acpi_patch->item(i, 9)->text().toLongLong();
-    acpiPatchSub["Skip"] =
-        ui->table_acpi_patch->item(i, 10)->text().toLongLong();
-    acpiPatchSub["Enabled"] = getBool(ui->table_acpi_patch, i, 11);
-
-    acpiPatchSub["Base"] = ui->table_acpi_patch->item(i, 12)->text();
-    acpiPatchSub["BaseSkip"] =
-        ui->table_acpi_patch->item(i, 13)->text().toLongLong();
-
-    acpiPatch.append(acpiPatchSub);  //最后一层
-  }
-
-  acpiMap["Patch"] = acpiPatch;  //第二层
+  acpiMap["Patch"] = Method::get_TableData(ui->table_acpi_patch);
 
   // Quirks
   QVariantMap acpiQuirks;
@@ -3232,8 +3162,6 @@ QVariantMap MainWindow::SavePlatformInfo() {
 QVariantMap MainWindow::SaveUEFI() {
   QVariantMap subMap;
   QVariantMap dictList;
-  QVariantList arrayList;
-  QVariantMap valueList;
 
   // 1. APFS
   subMap["APFS"] = setValue(dictList, ui->tabUEFI1);
@@ -3246,23 +3174,7 @@ QVariantMap MainWindow::SaveUEFI() {
   subMap["Audio"] = setValue(dictList, ui->tabUEFI3);
 
   // 4. Drivers
-  arrayList.clear();
-  QVariantMap uefiAddSub;
-  for (int i = 0; i < ui->table_uefi_drivers->rowCount(); i++) {
-    // arrayList.append(ui->table_uefi_drivers->item(i, 0)->text());
-    // //之前只有一条记录的情况
-
-    uefiAddSub["Path"] = ui->table_uefi_drivers->item(i, 0)->text();
-
-    uefiAddSub["Enabled"] = getBool(ui->table_uefi_drivers, i, 1);
-
-    uefiAddSub["Arguments"] = ui->table_uefi_drivers->item(i, 2)->text();
-
-    uefiAddSub["Comment"] = ui->table_uefi_drivers->item(i, 3)->text();
-
-    arrayList.append(uefiAddSub);  //最后一层
-  }
-  subMap["Drivers"] = arrayList;
+  subMap["Drivers"] = Method::get_TableData(ui->table_uefi_drivers);
   subMap["ConnectDrivers"] = getChkBool(ui->chkConnectDrivers);
 
   // 5. Input
@@ -3282,20 +3194,8 @@ QVariantMap MainWindow::SaveUEFI() {
   subMap["Quirks"] = setValue(dictList, ui->tabUEFI8);
 
   // 9. ReservedMemory
-  arrayList.clear();
-  valueList.clear();
-  for (int i = 0; i < ui->table_uefi_ReservedMemory->rowCount(); i++) {
-    valueList["Address"] =
-        ui->table_uefi_ReservedMemory->item(i, 0)->text().toLongLong();
-    valueList["Comment"] = ui->table_uefi_ReservedMemory->item(i, 1)->text();
-    valueList["Size"] =
-        ui->table_uefi_ReservedMemory->item(i, 2)->text().toLongLong();
-    valueList["Type"] = ui->table_uefi_ReservedMemory->item(i, 3)->text();
-    valueList["Enabled"] = getBool(ui->table_uefi_ReservedMemory, i, 4);
-
-    arrayList.append(valueList);
-  }
-  subMap["ReservedMemory"] = arrayList;
+  subMap["ReservedMemory"] =
+      Method::get_TableData(ui->table_uefi_ReservedMemory);
 
   return subMap;
 }

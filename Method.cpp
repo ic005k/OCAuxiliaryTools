@@ -2263,3 +2263,65 @@ void Method::show_Tip(QString strText, QString strTip) {
   BalloonTip::showBalloon(QMessageBox::Information, strText, strTip,
                           QCursor::pos(), ms, true, dir);
 }
+
+QVariantList Method::get_TableData(QTableWidget* t) {
+  QVariantList arrayList;
+  QVariantMap AddSub;
+  for (int i = 0; i < t->rowCount(); i++) {
+    for (int j = 0; j < t->columnCount(); j++) {
+      QString strCol = t->horizontalHeaderItem(j)->text();
+      QStringList list = strCol.split("\n");
+      if (list.count() == 2) strCol = list.at(1);
+      if (isBool(strCol))
+        AddSub[strCol] = mw_one->getBool(t, i, j);
+      else if (isInt(strCol))
+        AddSub[strCol] = t->item(i, j)->text().toLongLong();
+      else if (isData(strCol))
+        AddSub[strCol] = mw_one->HexStrToByte(t->item(i, j)->text());
+      else
+        AddSub[strCol] = t->item(i, j)->text();
+    }
+    arrayList.append(AddSub);
+  }
+  return arrayList;
+}
+
+bool Method::isInt(QString strCol) {
+  QStringList list = QStringList() << "TableLength"
+                                   << "Count"
+                                   << "Limit"
+                                   << "Skip"
+                                   << "BaseSkip"
+                                   << "Address"
+                                   << "Size"
+                                   << "Speed";
+  for (int i = 0; i < list.count(); i++) {
+    if (strCol == list.at(i)) return true;
+  }
+  return false;
+}
+
+bool Method::isData(QString strCol) {
+  QStringList list = QStringList() << "TableSignature"
+                                   << "OemTableId"
+                                   << "Find"
+                                   << "Replace"
+                                   << "Mask"
+                                   << "ReplaceMask";
+  for (int i = 0; i < list.count(); i++) {
+    if (strCol == list.at(i)) return true;
+  }
+  return false;
+}
+
+bool Method::isBool(QString strCol) {
+  QStringList list = QStringList() << "Enabled"
+                                   << "All"
+                                   << "Auxiliary"
+                                   << "TextMode"
+                                   << "RealPath";
+  for (int i = 0; i < list.count(); i++) {
+    if (strCol == list.at(i)) return true;
+  }
+  return false;
+}
