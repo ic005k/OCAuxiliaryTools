@@ -2664,54 +2664,12 @@ QVariantMap MainWindow::SaveACPI() {
 
 QVariantMap MainWindow::SaveBooter() {
   QVariantMap subMap;
-  QVariantList arrayList;
-  QVariantMap valueList;
-
-  // Patch
-  arrayList.clear();
-  valueList.clear();
-  for (int i = 0; i < ui->table_Booter_patch->rowCount(); i++) {
-    valueList["Identifier"] = ui->table_Booter_patch->item(i, 0)->text();
-
-    valueList["Comment"] = ui->table_Booter_patch->item(i, 1)->text();
-    valueList["Find"] =
-        HexStrToByte(ui->table_Booter_patch->item(i, 2)->text());
-    valueList["Replace"] =
-        HexStrToByte(ui->table_Booter_patch->item(i, 3)->text());
-    valueList["Mask"] =
-        HexStrToByte(ui->table_Booter_patch->item(i, 4)->text());
-    valueList["ReplaceMask"] =
-        HexStrToByte(ui->table_Booter_patch->item(i, 5)->text());
-
-    valueList["Count"] =
-        ui->table_Booter_patch->item(i, 6)->text().toLongLong();
-    valueList["Limit"] =
-        ui->table_Booter_patch->item(i, 7)->text().toLongLong();
-    valueList["Skip"] = ui->table_Booter_patch->item(i, 8)->text().toLongLong();
-    valueList["Enabled"] = getBool(ui->table_Booter_patch, i, 9);
-    valueList["Arch"] = ui->table_Booter_patch->item(i, 10)->text();
-
-    arrayList.append(valueList);
-  }
-
-  subMap["Patch"] = arrayList;
 
   // MmioWhitelist
-  arrayList.clear();
-  valueList.clear();
+  subMap["MmioWhitelist"] = Method::get_TableData(ui->table_booter);
 
-  for (int i = 0; i < ui->table_booter->rowCount(); i++) {
-    QString str = ui->table_booter->item(i, 0)->text().trimmed();
-    valueList["Address"] = str.toLongLong();
-
-    valueList["Enabled"] = getBool(ui->table_booter, i, 1);
-
-    valueList["Comment"] = ui->table_booter->item(i, 2)->text();
-
-    arrayList.append(valueList);  //最后一层
-  }
-
-  subMap["MmioWhitelist"] = arrayList;  //第二层
+  // Patch
+  subMap["Patch"] = Method::get_TableData(ui->table_Booter_patch);
 
   // Quirks
   QVariantMap mapQuirks;
@@ -2784,8 +2742,7 @@ QVariantMap MainWindow::SaveDeviceProperties() {
 QVariantMap MainWindow::SaveKernel() {
   // Add
   QVariantMap subMap;
-  QVariantList dictList;
-  QVariantMap valueList;
+
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QFileInfo fi(SaveFileName);
     QString str0, oldFile, newFile;
@@ -2801,86 +2758,18 @@ QVariantMap MainWindow::SaveKernel() {
         fiReName.rename(oldFile, newFile);
       }
     }
-
-    valueList["BundlePath"] = str0;
-    valueList["Comment"] = ui->table_kernel_add->item(i, 1)->text();
-    valueList["ExecutablePath"] = ui->table_kernel_add->item(i, 2)->text();
-    valueList["PlistPath"] = ui->table_kernel_add->item(i, 3)->text();
-    valueList["MinKernel"] = ui->table_kernel_add->item(i, 4)->text();
-    valueList["MaxKernel"] = ui->table_kernel_add->item(i, 5)->text();
-    valueList["Enabled"] = getBool(ui->table_kernel_add, i, 6);
-    valueList["Arch"] = ui->table_kernel_add->item(i, 7)->text();
-
-    dictList.append(valueList);
   }
 
-  subMap["Add"] = dictList;
+  subMap["Add"] = Method::get_TableData(ui->table_kernel_add);
 
   // Block
-  dictList.clear();  //必须先清理之前的数据，否则之前的数据会加到当前数据里面来
-  valueList.clear();
-  for (int i = 0; i < ui->table_kernel_block->rowCount(); i++) {
-    valueList["Identifier"] = ui->table_kernel_block->item(i, 0)->text();
-    valueList["Comment"] = ui->table_kernel_block->item(i, 1)->text();
-    valueList["MinKernel"] = ui->table_kernel_block->item(i, 2)->text();
-    valueList["MaxKernel"] = ui->table_kernel_block->item(i, 3)->text();
-    valueList["Enabled"] = getBool(ui->table_kernel_block, i, 4);
-    valueList["Arch"] = ui->table_kernel_block->item(i, 5)->text();
-
-    dictList.append(valueList);
-  }
-
-  subMap["Block"] = dictList;
+  subMap["Block"] = Method::get_TableData(ui->table_kernel_block);
 
   // Force
-  dictList.clear();
-  valueList.clear();
-  for (int i = 0; i < ui->table_kernel_Force->rowCount(); i++) {
-    valueList["BundlePath"] = ui->table_kernel_Force->item(i, 0)->text();
-    valueList["Comment"] = ui->table_kernel_Force->item(i, 1)->text();
-    valueList["ExecutablePath"] = ui->table_kernel_Force->item(i, 2)->text();
-    valueList["Identifier"] = ui->table_kernel_Force->item(i, 3)->text();
-    valueList["PlistPath"] = ui->table_kernel_Force->item(i, 4)->text();
-    valueList["MinKernel"] = ui->table_kernel_Force->item(i, 5)->text();
-    valueList["MaxKernel"] = ui->table_kernel_Force->item(i, 6)->text();
-    valueList["Enabled"] = getBool(ui->table_kernel_Force, i, 7);
-    valueList["Arch"] = ui->table_kernel_Force->item(i, 8)->text();
-
-    dictList.append(valueList);
-  }
-
-  subMap["Force"] = dictList;
+  subMap["Force"] = Method::get_TableData(ui->table_kernel_Force);
 
   // Patch
-  dictList.clear();
-  valueList.clear();
-  for (int i = 0; i < ui->table_kernel_patch->rowCount(); i++) {
-    valueList["Identifier"] = ui->table_kernel_patch->item(i, 0)->text();
-    valueList["Base"] = ui->table_kernel_patch->item(i, 1)->text();
-    valueList["Comment"] = ui->table_kernel_patch->item(i, 2)->text();
-    valueList["Find"] =
-        HexStrToByte(ui->table_kernel_patch->item(i, 3)->text());
-    valueList["Replace"] =
-        HexStrToByte(ui->table_kernel_patch->item(i, 4)->text());
-    valueList["Mask"] =
-        HexStrToByte(ui->table_kernel_patch->item(i, 5)->text());
-    valueList["ReplaceMask"] =
-        HexStrToByte(ui->table_kernel_patch->item(i, 6)->text());
-    valueList["MinKernel"] = ui->table_kernel_patch->item(i, 7)->text();
-    valueList["MaxKernel"] = ui->table_kernel_patch->item(i, 8)->text();
-    valueList["Count"] =
-        ui->table_kernel_patch->item(i, 9)->text().toLongLong();
-    valueList["Limit"] =
-        ui->table_kernel_patch->item(i, 10)->text().toLongLong();
-    valueList["Skip"] =
-        ui->table_kernel_patch->item(i, 11)->text().toLongLong();
-    valueList["Enabled"] = getBool(ui->table_kernel_patch, i, 12);
-    valueList["Arch"] = ui->table_kernel_patch->item(i, 13)->text();
-
-    dictList.append(valueList);
-  }
-
-  subMap["Patch"] = dictList;
+  subMap["Patch"] = Method::get_TableData(ui->table_kernel_patch);
 
   // Emulate
   QVariantMap mapValue;
@@ -2942,45 +2831,13 @@ QVariantMap MainWindow::SaveMisc() {
   valueList["SecureBootModel"] = hm;
 
   // BlessOverride
-  for (int i = 0; i < ui->tableBlessOverride->rowCount(); i++) {
-    dictList.append(ui->tableBlessOverride->item(i, 0)->text());
-  }
-  subMap["BlessOverride"] = dictList;
+  subMap["BlessOverride"] = Method::get_TableData(ui->tableBlessOverride);
 
   // Entries
-  valueList.clear();
-  dictList.clear();
-  for (int i = 0; i < ui->tableEntries->rowCount(); i++) {
-    valueList["Path"] = ui->tableEntries->item(i, 0)->text();
-    valueList["Arguments"] = ui->tableEntries->item(i, 1)->text();
-    valueList["Name"] = ui->tableEntries->item(i, 2)->text();
-    valueList["Comment"] = ui->tableEntries->item(i, 3)->text();
-    valueList["Auxiliary"] = getBool(ui->tableEntries, i, 4);
-    valueList["Enabled"] = getBool(ui->tableEntries, i, 5);
-    valueList["TextMode"] = getBool(ui->tableEntries, i, 6);
-    valueList["Flavour"] = ui->tableEntries->item(i, 7)->text();
-
-    dictList.append(valueList);
-  }
-  subMap["Entries"] = dictList;
+  subMap["Entries"] = Method::get_TableData(ui->tableEntries);
 
   // Tools
-  valueList.clear();
-  dictList.clear();
-  for (int i = 0; i < ui->tableTools->rowCount(); i++) {
-    valueList["Path"] = ui->tableTools->item(i, 0)->text();
-    valueList["Arguments"] = ui->tableTools->item(i, 1)->text();
-    valueList["Name"] = ui->tableTools->item(i, 2)->text();
-    valueList["Comment"] = ui->tableTools->item(i, 3)->text();
-    valueList["Auxiliary"] = getBool(ui->tableTools, i, 4);
-    valueList["Enabled"] = getBool(ui->tableTools, i, 5);
-    valueList["RealPath"] = getBool(ui->tableTools, i, 6);
-    valueList["TextMode"] = getBool(ui->tableTools, i, 7);
-    valueList["Flavour"] = ui->tableTools->item(i, 8)->text();
-
-    dictList.append(valueList);
-  }
-  subMap["Tools"] = dictList;
+  subMap["Tools"] = Method::get_TableData(ui->tableTools);
 
   return subMap;
 }
@@ -3107,32 +2964,11 @@ QVariantMap MainWindow::SavePlatformInfo() {
   valueList["Type"] = ui->editIntType->text().toLongLong();
   valueList["TypeDetail"] = ui->editIntTypeDetail->text().toLongLong();
 
-  // Memory-Devices
+  // Devices Memory
   QVariantMap Map;
-  QVariantList Array;
-  QVariantMap AddSub;
-
-  for (int i = 0; i < ui->tableDevices->rowCount(); i++) {
-    AddSub["AssetTag"] = ui->tableDevices->item(i, 0)->text();
-    AddSub["BankLocator"] = ui->tableDevices->item(i, 1)->text();
-    AddSub["DeviceLocator"] = ui->tableDevices->item(i, 2)->text();
-    AddSub["Manufacturer"] = ui->tableDevices->item(i, 3)->text();
-    AddSub["PartNumber"] = ui->tableDevices->item(i, 4)->text();
-    AddSub["SerialNumber"] = ui->tableDevices->item(i, 5)->text();
-    AddSub["Size"] = ui->tableDevices->item(i, 6)->text().toLongLong();
-    AddSub["Speed"] = ui->tableDevices->item(i, 7)->text().toLongLong();
-
-    Array.append(AddSub);  //最后一层
-  }
-
-  Map["Devices"] = Array;  //第二层
-
+  Map["Devices"] = Method::get_TableData(ui->tableDevices);
   valueList["Devices"] = Map["Devices"];
-
-  // if (ui->chkCustomMemory->isChecked()) {
-  // if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
   if (ui->tableDevices->rowCount() > 0) subMap["Memory"] = valueList;
-  //}
 
   // PlatformNVRAM
   valueList.clear();
