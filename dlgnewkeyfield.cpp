@@ -6,13 +6,10 @@
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
-extern QString ocVer, strIniFile, strAppName, strAppExePath;
-extern QString ocVerDev;
-extern QString ocFrom;
-extern QString ocFromDev;
-extern bool blDEV;
 extern Method* mymethod;
-extern QString SaveFileName;
+extern QString ocVer, strIniFile, strAppName, strAppExePath, ocVerDev, ocFrom,
+    ocFromDev, SaveFileName;
+extern bool blDEV;
 bool isSmartKey;
 QWidgetList listOCATWidgetHideList;
 
@@ -319,9 +316,6 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
   for (int i = 0; i < listSample.count(); i++) {
     QString str = listSample.at(i);
     listSampleKey.append(str.split("|").at(0));
-  }
-  for (int i = 0; i < listSample.count(); i++) {
-    // qDebug() << listSample.at(i);
   }
 
   QObjectList listObj;
