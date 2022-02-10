@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -9498,7 +9498,7 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>7</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -9507,166 +9507,10 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
            <attribute name="title">
             <string>APFS</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_80">
-            <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_55">
-              <item row="12" column="1">
-               <widget class="QLineEdit" name="editIntMinDate">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>-1</string>
-                </property>
-               </widget>
-              </item>
-              <item row="17" column="1">
-               <widget class="QLineEdit" name="editIntMinVersion">
-                <property name="text">
-                 <string>-1</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="0">
-               <widget class="QCheckBox" name="chkJumpstartHotPlug">
-                <property name="toolTip">
-                 <string notr="true">Performs APFS driver loading not only at OpenCore startup but also during boot picker. This permits APFS USB hot plug. Disable if not required.
-
-----
-
-不仅在OpenCore启动时执行APFS驱动加载，而且在boot picker期间也执行。这允许APFS USB热插拔。如果不需要，请禁用。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Load APFS drivers for newly connected devices.</string>
-                </property>
-                <property name="text">
-                 <string notr="true">JumpstartHotPlug</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="0">
-               <spacer name="verticalSpacer_93">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="3" column="0">
-               <widget class="QCheckBox" name="chkGlobalConnect">
-                <property name="toolTip">
-                 <string notr="true">Instead of partition handle connection normally used for APFS driver loading every handle is connected recursively.
-
-This may take more time than usual but can be the only way to access APFS partitions on some firmwares like those found on older HP laptops.
-
-----
-
-在 APFS 加载期间执行完整的设备连接。
-
-代替通常情况下用于 APFS 驱动程序加载的分区句柄连接，每一个句柄都是递归连接的。这可能会比平时花费更多的时间，但是是某些固件访问 APFS 分区的唯一方法，比如在旧的惠普笔记本电脑上发现的那样。</string>
-                </property>
-                <property name="statusTip">
-                 <string> Perform full device connection during APFS loading.</string>
-                </property>
-                <property name="text">
-                 <string notr="true">GlobalConnect</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QCheckBox" name="chkEnableJumpstart">
-                <property name="toolTip">
-                 <string notr="true">Description: Load embedded APFS drivers from APFS containers.
-
-An APFS EFI driver is bundled in all bootable APFS containers. This option performs the loading of signed APFS drivers (consistent with the ScanPolicy). Refer to the “EFI Jumpstart” section of the Apple File System Reference for more details.
-
-----
-
-描述：从APFS容器中加载嵌入式APFS驱动程序。
-
-所有可启动的 APFS 容器中都捆绑了一个 APFS EFI 驱动程序。此选项将执行加载已签名的 APFS 驱动程序（与 ScanPolicy 一致）。有关详细信息，请参考 Apple File System Reference 的 &quot;EFI Jumpstart&quot; 部分。
-</string>
-                </property>
-                <property name="statusTip">
-                 <string> Load embedded APFS drivers from APFS containers.</string>
-                </property>
-                <property name="text">
-                 <string notr="true">EnableJumpstart</string>
-                </property>
-               </widget>
-              </item>
-              <item row="13" column="0">
-               <spacer name="verticalSpacer_95">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="4" column="0">
-               <spacer name="verticalSpacer_92">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="12" column="2">
-               <widget class="QToolButton" name="toolButton">
-                <property name="text">
-                 <string>Select date</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <spacer name="verticalSpacer_91">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="5" column="0">
-               <widget class="QCheckBox" name="chkHideVerbose">
-                <property name="toolTip">
-                 <string notr="true">APFS verbose output can be useful for debugging.
-
-----
-
-APFS verbose输出对调试很有用。</string>
-                </property>
-                <property name="statusTip">
-                 <string>Hide verbose output from APFS driver.</string>
-                </property>
-                <property name="text">
-                 <string notr="true">HideVerbose</string>
-                </property>
-               </widget>
-              </item>
-              <item row="12" column="0">
+           <layout class="QGridLayout" name="gridLayout_50">
+            <item row="3" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_42">
+              <item>
                <widget class="QLabel" name="label_31">
                 <property name="toolTip">
                  <string notr="true">APFS driver date connects APFS driver with the calendar release date. Older versions of APFS drivers may contain unpatched vulnerabilities, which can be used to inflict harm on your computer. This option permits restricting APFS drivers to only recent releases.
@@ -9696,20 +9540,125 @@ APFS驱动日期将APFS驱动与发布日期连接起来。旧版本的APFS驱�
                 </property>
                </widget>
               </item>
-              <item row="0" column="0">
-               <spacer name="verticalSpacer_90">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
+              <item>
+               <widget class="QLineEdit" name="editIntMinDate">
+                <property name="maximumSize">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>16777215</width>
+                  <height>16777215</height>
                  </size>
                 </property>
-               </spacer>
+                <property name="text">
+                 <string>-1</string>
+                </property>
+               </widget>
               </item>
-              <item row="17" column="0">
+              <item>
+               <widget class="QToolButton" name="toolButton">
+                <property name="text">
+                 <string>Select date</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="6" column="0">
+             <spacer name="verticalSpacer_90">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_41">
+              <item>
+               <widget class="QCheckBox" name="chkEnableJumpstart">
+                <property name="toolTip">
+                 <string notr="true">Description: Load embedded APFS drivers from APFS containers.
+
+An APFS EFI driver is bundled in all bootable APFS containers. This option performs the loading of signed APFS drivers (consistent with the ScanPolicy). Refer to the “EFI Jumpstart” section of the Apple File System Reference for more details.
+
+----
+
+描述：从APFS容器中加载嵌入式APFS驱动程序。
+
+所有可启动的 APFS 容器中都捆绑了一个 APFS EFI 驱动程序。此选项将执行加载已签名的 APFS 驱动程序（与 ScanPolicy 一致）。有关详细信息，请参考 Apple File System Reference 的 &quot;EFI Jumpstart&quot; 部分。
+</string>
+                </property>
+                <property name="statusTip">
+                 <string> Load embedded APFS drivers from APFS containers.</string>
+                </property>
+                <property name="text">
+                 <string notr="true">EnableJumpstart</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="chkGlobalConnect">
+                <property name="toolTip">
+                 <string notr="true">Instead of partition handle connection normally used for APFS driver loading every handle is connected recursively.
+
+This may take more time than usual but can be the only way to access APFS partitions on some firmwares like those found on older HP laptops.
+
+----
+
+在 APFS 加载期间执行完整的设备连接。
+
+代替通常情况下用于 APFS 驱动程序加载的分区句柄连接，每一个句柄都是递归连接的。这可能会比平时花费更多的时间，但是是某些固件访问 APFS 分区的唯一方法，比如在旧的惠普笔记本电脑上发现的那样。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Perform full device connection during APFS loading.</string>
+                </property>
+                <property name="text">
+                 <string notr="true">GlobalConnect</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="chkHideVerbose">
+                <property name="toolTip">
+                 <string notr="true">APFS verbose output can be useful for debugging.
+
+----
+
+APFS verbose输出对调试很有用。</string>
+                </property>
+                <property name="statusTip">
+                 <string>Hide verbose output from APFS driver.</string>
+                </property>
+                <property name="text">
+                 <string notr="true">HideVerbose</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="chkJumpstartHotPlug">
+                <property name="toolTip">
+                 <string notr="true">Performs APFS driver loading not only at OpenCore startup but also during boot picker. This permits APFS USB hot plug. Disable if not required.
+
+----
+
+不仅在OpenCore启动时执行APFS驱动加载，而且在boot picker期间也执行。这允许APFS USB热插拔。如果不需要，请禁用。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Load APFS drivers for newly connected devices.</string>
+                </property>
+                <property name="text">
+                 <string notr="true">JumpstartHotPlug</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="5" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_43">
+              <item>
                <widget class="QLabel" name="label_30">
                 <property name="toolTip">
                  <string notr="true">APFS driver version connects APFS driver with the macOS release. APFS drivers from older macOS releases will become unsupported and thus may contain unpatched vulnerabilities, which can be used to inflict harm on your computer. This option permits restricting APFS drivers to only modern macOS versions.
@@ -9738,35 +9687,16 @@ APFS驱动版本连接APFS驱动与macOS版本。旧版macOS的APFS驱动程序�
                 </property>
                </widget>
               </item>
-              <item row="8" column="0">
-               <spacer name="verticalSpacer_94">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+              <item>
+               <widget class="QLineEdit" name="editIntMinVersion">
+                <property name="text">
+                 <string>-1</string>
                 </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="18" column="0">
-               <spacer name="verticalSpacer_96">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
+               </widget>
               </item>
              </layout>
             </item>
-            <item row="0" column="1">
+            <item row="1" column="1" rowspan="5">
              <layout class="QGridLayout" name="gridLayout_57">
               <item row="0" column="0">
                <widget class="QCalendarWidget" name="calendarWidget">
@@ -9780,6 +9710,45 @@ APFS驱动版本连接APFS驱动与macOS版本。旧版macOS的APFS驱动程序�
                </widget>
               </item>
              </layout>
+            </item>
+            <item row="0" column="0">
+             <spacer name="verticalSpacer_91">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="0">
+             <spacer name="verticalSpacer_92">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="4" column="0">
+             <spacer name="verticalSpacer_93">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>

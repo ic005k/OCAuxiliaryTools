@@ -400,6 +400,23 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
           if (w == listOCATWidgetHideList.at(n)) re = true;
         }
         if (!re) listOCATWidgetHideList.append(w);
+
+        QString obj = w->objectName();
+        if (obj.mid(0, 4) == "edit" || obj.mid(0, 4) == "cbox") {
+          QString txt = get_WidgetText(w);
+          QWidgetList wl = get_AllLabelList(tab);
+          for (int m = 0; m < wl.count(); m++) {
+            QLabel* lbl = (QLabel*)wl.at(m);
+            if (lbl->text() == txt) {
+              lbl->setHidden(true);
+              bool re = false;
+              for (int n = 0; n < listOCATWidgetHideList.count(); n++) {
+                if (lbl == listOCATWidgetHideList.at(n)) re = true;
+              }
+              if (!re) listOCATWidgetHideList.append(lbl);
+            }
+          }
+        }
       }
     }
     if (listSampleKey.count() > 0) {
@@ -445,9 +462,29 @@ QStringList dlgNewKeyField::get_KeyTypeValue(QVariantMap mapTatol,
     QString name = keyList.at(i);
     QString type = mapSub[name].typeName();
     list0.append(name + "|" + type);
-    if (type == "bool") {
-      // qDebug() << name << type << mapSub[name].toBool();
-    }
   }
   return list0;
+}
+
+QWidgetList dlgNewKeyField::get_AllLabelList(QWidget* tab) {
+  QObjectList listObj;
+  QWidgetList wl;
+  listObj = MainWindow::getAllLabel(MainWindow::getAllUIControls(tab));
+  for (int i = 0; i < listObj.count(); i++) {
+    QLabel* w = (QLabel*)listObj.at(i);
+    wl.append(w);
+  }
+  return wl;
+}
+
+QString dlgNewKeyField::get_WidgetText(QWidget* w) {
+  QString obj = w->objectName();
+  if (obj.mid(0, 3) == "chk") return obj.replace("chk", "");
+  if (obj.mid(0, 4) == "cbox") return obj.replace("cbox", "");
+  if (obj.mid(0, 7) == "editInt") return obj.replace("editInt", "");
+  if (obj.mid(0, 7) == "editDat") return obj.replace("editDat", "");
+  if (obj.mid(0, 4) == "edit" && obj.mid(0, 7) != "editInt" &&
+      obj.mid(0, 7) != "editDat")
+    return obj.replace("edit", "");
+  return "";
 }

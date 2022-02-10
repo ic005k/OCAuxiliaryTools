@@ -202,9 +202,9 @@ class MainWindow : public QMainWindow {
 
   static QObjectList getAllUIControls(QObject* parent);
   static QObjectList getAllCheckBox(QObjectList lstUIControls);
-  QObjectList getAllTableWidget(QObjectList lstUIControls);
+  static QObjectList getAllTableWidget(QObjectList lstUIControls);
   static QObjectList getAllLineEdit(QObjectList lstUIControls);
-  QObjectList getAllLabel(QObjectList lstUIControls);
+  static QObjectList getAllLabel(QObjectList lstUIControls);
   static QObjectList getAllComboBox(QObjectList lstUIControls);
   QObjectList listOfCheckBox;
   QObjectList listOfTableWidget;

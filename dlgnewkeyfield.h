@@ -27,6 +27,8 @@ class dlgNewKeyField : public QDialog {
                                       QString MainName, QString SubName);
   static QStringList get_KeyTypeValue(QVariantMap mapTatol, QString MainName,
                                       QString SubName);
+  static QWidgetList get_AllLabelList(QWidget* tab);
+  static QString get_WidgetText(QWidget* w);
  private slots:
   void on_btnAdd_clicked();
 
