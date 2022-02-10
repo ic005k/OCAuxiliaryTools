@@ -10184,16 +10184,6 @@ QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab) {
   return map;
 }
 
-bool MainWindow::ExclusionCheckBox(QCheckBox* chkbox) {
-  if (chkbox->text().trimmed().mid(0, 3) != "OC_" &&
-      chkbox->text().trimmed().mid(0, 5) != "DEBUG" &&
-      chkbox->objectName().mid(0, 3) != "chk")
-
-    return true;
-
-  return false;
-}
-
 QVariantMap MainWindow::setCheckBoxValue(QVariantMap map, QWidget* tab) {
   // chk
   QObjectList listCheckBox;

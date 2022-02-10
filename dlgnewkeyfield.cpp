@@ -160,13 +160,15 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   chk->setText(text);
   chk->setObjectName(ObjectName);
 
-  if (!isSmartKey) chk->setContextMenuPolicy(Qt::CustomContextMenu);
+  chk->setContextMenuPolicy(Qt::CustomContextMenu);
   QMenu* menu = new QMenu();
-  QAction* act = new QAction(tr("Delete"));
+  QAction* actDelete = new QAction(tr("Delete"));
   QAction* actRename = new QAction(tr("Rename"));
-  menu->addAction(act);
-  menu->addAction(actRename);
-  connect(act, &QAction::triggered, [=]() {
+  if (!isSmartKey) {
+    menu->addAction(actDelete);
+    menu->addAction(actRename);
+  }
+  connect(actDelete, &QAction::triggered, [=]() {
     mw_one->ui->mycboxFind->lineEdit()->clear();
     tab->layout()->removeWidget(frame);
     delete (frame);
@@ -198,16 +200,16 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
     mw_one->setWM();
   });
 
-  connect(chk, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
-    Q_UNUSED(pos);
-    menu->exec(QCursor::pos());
-  });
+  if (!isSmartKey) {
+    connect(chk, &QCheckBox::customContextMenuRequested,
+            [=](const QPoint& pos) {
+              Q_UNUSED(pos);
+              menu->exec(QCursor::pos());
+            });
+  }
 
-  QSpacerItem* hi =
-      new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-  // hbox->addItem(hi);
   hbox->addWidget(chk);
-  // hbox->addItem(hi);
+  hbox->addStretch();
 
   tab->layout()->addWidget(frame);
 }
@@ -240,21 +242,20 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
     edit->setValidator(validator);
     edit->setPlaceholderText(tr("Hexadecimal"));
   }
-  QSpacerItem* hi =
-      new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-  // hbox->addItem(hi);
+
   hbox->addWidget(lbl);
   hbox->addWidget(edit);
-  // hbox->addItem(hi);
 
-  if (!isSmartKey) lbl->setContextMenuPolicy(Qt::CustomContextMenu);
+  lbl->setContextMenuPolicy(Qt::CustomContextMenu);
   QMenu* menu = new QMenu();
-  QAction* act = new QAction(tr("Delete"));
+  QAction* actDelete = new QAction(tr("Delete"));
   QAction* actRename = new QAction(tr("Rename"));
-  menu->addAction(act);
-  menu->addAction(actRename);
+  if (!isSmartKey) {
+    menu->addAction(actDelete);
+    menu->addAction(actRename);
+  }
 
-  connect(act, &QAction::triggered, [=]() {
+  connect(actDelete, &QAction::triggered, [=]() {
     mw_one->ui->mycboxFind->lineEdit()->clear();
     tab->layout()->removeWidget(frame);
     delete (frame);
@@ -290,10 +291,13 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
     mw_one->setWM();
   });
 
-  connect(lbl, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
-    Q_UNUSED(pos);
-    menu->exec(QCursor::pos());
-  });
+  if (!isSmartKey) {
+    connect(lbl, &QCheckBox::customContextMenuRequested,
+            [=](const QPoint& pos) {
+              Q_UNUSED(pos);
+              menu->exec(QCursor::pos());
+            });
+  }
 
   tab->layout()->addWidget(frame);
 }

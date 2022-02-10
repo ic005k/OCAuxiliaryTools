@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>783</width>
+    <width>767</width>
     <height>531</height>
    </rect>
   </property>
@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -279,11 +279,8 @@
           </item>
           <item row="2" column="0">
            <widget class="QCheckBox" name="chkSmartKey">
-            <property name="toolTip">
-             <string>If a new version of OC adds some new key fields, this option can intelligently add those key fields.</string>
-            </property>
             <property name="text">
-             <string>Smart Update Key Field</string>
+             <string>Smart adaptation to OpenCore upgrades.</string>
             </property>
            </widget>
           </item>

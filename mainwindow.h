@@ -1088,7 +1088,6 @@ class MainWindow : public QMainWindow {
   QString getUrl(QVariantList list);
   void init_InitialValue();
   void setUIMargin();
-  bool ExclusionCheckBox(QCheckBox* chkbox);
   bool One = false;
   void openFileAfter();
   bool FindTextChange = false;
