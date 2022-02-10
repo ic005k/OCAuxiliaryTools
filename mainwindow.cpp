@@ -989,6 +989,7 @@ void MainWindow::initui_kernel() {
 
 void MainWindow::ParserKernel(QVariantMap map, QString subitem,
                               int tableIndex) {
+  Q_UNUSED(tableIndex);
   map = map["Kernel"].toMap();
   if (map.isEmpty()) return;
 
@@ -1210,7 +1211,7 @@ void MainWindow::ParserMisc(QVariantMap map) {
   map = map["Misc"].toMap();
   if (map.isEmpty()) return;
 
-  //分析"Boot"
+  // Boot
   QVariantMap map_boot = map["Boot"].toMap();
   getValue(map_boot, ui->tabMisc1);
 
@@ -1236,15 +1237,8 @@ void MainWindow::ParserMisc(QVariantMap map) {
   }
 
   // BlessOverride
-  QVariantList map_BlessOverride = map["BlessOverride"].toList();
-  // Method::set_TableData(ui->tableBlessOverride, map_BlessOverride);
-
-  ui->tableBlessOverride->setRowCount(map_BlessOverride.count());
-  for (int i = 0; i < map_BlessOverride.count(); i++) {
-    QTableWidgetItem* newItem1;
-    newItem1 = new QTableWidgetItem(map_BlessOverride.at(i).toString());
-    ui->tableBlessOverride->setItem(i, 0, newItem1);
-  }
+  QVariantList map_bo = map["BlessOverride"].toList();
+  Method::set_TableData(ui->tableBlessOverride, map_bo);
 
   // Entries
   QVariantList map_Entries = map["Entries"].toList();

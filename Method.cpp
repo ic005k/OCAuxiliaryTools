@@ -2296,13 +2296,13 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
   for (int i = 0; i < mapList.count(); i++) {
     QVariantMap map = mapList.at(i).toMap();
 
-    if (map.count() == 1) {
+    if (map.count() == 0) {  //代表列，从0开始
       QTableWidgetItem* newItem1;
       newItem1 = new QTableWidgetItem(mapList.at(i).toString());
       t->setItem(i, 0, newItem1);
     }
 
-    if (map.count() > 1) {
+    if (map.count() > 0) {
       for (int j = 0; j < t->columnCount(); j++) {
         QString strCol = t->horizontalHeaderItem(j)->text();
         QStringList list = strCol.split("\n");
