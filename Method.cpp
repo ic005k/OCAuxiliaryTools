@@ -2290,6 +2290,43 @@ QVariantList Method::get_TableData(QTableWidget* t) {
   return arrayList;
 }
 
+void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
+  t->setRowCount(mapList.count());
+
+  for (int i = 0; i < mapList.count(); i++) {
+    QVariantMap map = mapList.at(i).toMap();
+
+    if (map.count() == 1) {
+      QTableWidgetItem* newItem1;
+      newItem1 = new QTableWidgetItem(mapList.at(i).toString());
+      t->setItem(i, 0, newItem1);
+    }
+
+    if (map.count() > 1) {
+      for (int j = 0; j < t->columnCount(); j++) {
+        QString strCol = t->horizontalHeaderItem(j)->text();
+        QStringList list = strCol.split("\n");
+        if (list.count() == 2) strCol = list.at(1);
+
+        if (isBool(strCol)) {
+          mw_one->init_enabled_data(t, i, j, map[strCol].toString());
+        } else if (isData(strCol)) {
+          QTableWidgetItem* newItem1 = new QTableWidgetItem(
+              mw_one->ByteToHexStr(map[strCol].toByteArray()));
+          t->setItem(i, j, newItem1);
+        } else {
+          QTableWidgetItem* newItem1 =
+              new QTableWidgetItem(map[strCol].toString());
+          if (strCol == "Arch" || strCol == "Count" || strCol == "Limit" ||
+              strCol == "Skip")
+            newItem1->setTextAlignment(Qt::AlignCenter);
+          t->setItem(i, j, newItem1);
+        }
+      }
+    }
+  }
+}
+
 bool Method::isInt(QString strCol) {
   QStringList list = QStringList() << "TableLength"
                                    << "Count"

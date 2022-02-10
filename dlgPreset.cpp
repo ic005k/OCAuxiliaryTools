@@ -114,9 +114,6 @@ void dlgPreset::on_btnAdd_clicked() {
         mw_one->ui->table_dp_add->setItem(j, 2, newItem1);
       }
 
-      //保存子条目里面的数据，以便以后加载
-      // mw_one->write_ini(mw_one->ui->table_dp_add0, mw_one->ui->table_dp_add,
-      //                  table_row);
       mymethod->writeLeftTable(mw_one->ui->table_dp_add0,
                                mw_one->ui->table_dp_add);
     }

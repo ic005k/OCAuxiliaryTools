@@ -502,54 +502,15 @@ void MainWindow::ParserACPI(QVariantMap map) {
 
   //分析"Add"
   QVariantList map_add = map["Add"].toList();
-  // qDebug() << map_add;
-  ui->table_acpi_add->setRowCount(map_add.count());
-  for (int i = 0; i < map_add.count(); i++) {
-    QVariantMap map3 = map_add.at(i).toMap();
-
-    QTableWidgetItem* newItem1;
-    newItem1 = new QTableWidgetItem(map3["Path"].toString());
-    ui->table_acpi_add->setItem(i, 0, newItem1);
-
-    init_enabled_data(ui->table_acpi_add, i, 1, map3["Enabled"].toString());
-
-    newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-    ui->table_acpi_add->setItem(i, 2, newItem1);
-  }
+  Method::set_TableData(ui->table_acpi_add, map_add);
 
   //分析Delete
   QVariantList map_del = map["Delete"].toList();
-
-  ui->table_acpi_del->setRowCount(map_del.count());
-  for (int i = 0; i < map_del.count(); i++) {
-    QVariantMap map3 = map_del.at(i).toMap();
-
-    QTableWidgetItem* newItem1;
-    newItem1 = new QTableWidgetItem(
-        ByteToHexStr(map3["TableSignature"].toByteArray()));
-    ui->table_acpi_del->setItem(i, 0, newItem1);
-
-    newItem1 =
-        new QTableWidgetItem(ByteToHexStr(map3["OemTableId"].toByteArray()));
-    ui->table_acpi_del->setItem(i, 1, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["TableLength"].toString());
-    ui->table_acpi_del->setItem(i, 2, newItem1);
-
-    init_enabled_data(ui->table_acpi_del, i, 3, map3["All"].toString());
-
-    init_enabled_data(ui->table_acpi_del, i, 4, map3["Enabled"].toString());
-
-    newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-    ui->table_acpi_del->setItem(i, 5, newItem1);
-  }
+  Method::set_TableData(ui->table_acpi_del, map_del);
 
   //分析Patch
   QVariantList map_patch = map["Patch"].toList();
-  ui->table_acpi_patch->setRowCount(map_patch.count());
-  for (int i = 0; i < map_patch.count(); i++) {
-    AddACPIPatch(map_patch, i, i);
-  }
+  Method::set_TableData(ui->table_acpi_patch, map_patch);
 
   //分析Quirks
   QVariantMap map_quirks = map["Quirks"].toMap();
@@ -722,78 +683,11 @@ void MainWindow::ParserBooter(QVariantMap map) {
 
   // Patch
   QVariantList map_patch = map["Patch"].toList();
-
-  ui->table_Booter_patch->setRowCount(map_patch.count());
-  for (int i = 0; i < map_patch.count(); i++) {
-    QVariantMap map3 = map_patch.at(i).toMap();
-
-    QByteArray ba = map3["Find"].toByteArray();
-
-    QTableWidgetItem* newItem1;
-
-    newItem1 = new QTableWidgetItem(map3["Identifier"].toString());
-    ui->table_Booter_patch->setItem(i, 0, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-    ui->table_Booter_patch->setItem(i, 1, newItem1);
-
-    //此时需要将ASCII转换成HEX
-    QByteArray tohex = map3["Find"].toByteArray();
-    QString va = tohex.toHex().toUpper();
-    newItem1 = new QTableWidgetItem(va);
-    ui->table_Booter_patch->setItem(i, 2, newItem1);
-
-    tohex = map3["Replace"].toByteArray();
-    va = tohex.toHex().toUpper();
-    newItem1 = new QTableWidgetItem(va);
-    ui->table_Booter_patch->setItem(i, 3, newItem1);
-
-    tohex = map3["Mask"].toByteArray();
-    va = tohex.toHex().toUpper();
-    newItem1 = new QTableWidgetItem(va);
-    ui->table_Booter_patch->setItem(i, 4, newItem1);
-
-    tohex = map3["ReplaceMask"].toByteArray();
-    va = tohex.toHex().toUpper();
-    newItem1 = new QTableWidgetItem(va);
-    ui->table_Booter_patch->setItem(i, 5, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Count"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_Booter_patch->setItem(i, 6, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Limit"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_Booter_patch->setItem(i, 7, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Skip"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_Booter_patch->setItem(i, 8, newItem1);
-
-    init_enabled_data(ui->table_Booter_patch, i, 9, map3["Enabled"].toString());
-
-    newItem1 = new QTableWidgetItem(map3["Arch"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->table_Booter_patch->setItem(i, 10, newItem1);
-  }
+  Method::set_TableData(ui->table_Booter_patch, map_patch);
 
   // MmioWhitelist
-
-  QVariantList map_add = map["MmioWhitelist"].toList();
-
-  ui->table_booter->setRowCount(map_add.count());
-  for (int i = 0; i < map_add.count(); i++) {
-    QVariantMap map3 = map_add.at(i).toMap();
-
-    QTableWidgetItem* newItem1;
-    newItem1 = new QTableWidgetItem(map3["Address"].toString());
-    ui->table_booter->setItem(i, 0, newItem1);
-
-    init_enabled_data(ui->table_booter, i, 1, map3["Enabled"].toString());
-
-    newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-    ui->table_booter->setItem(i, 2, newItem1);
-  }
+  QVariantList map_mwl = map["MmioWhitelist"].toList();
+  Method::set_TableData(ui->table_booter, map_mwl);
 
   // Quirks
   QVariantMap map_quirks = map["Quirks"].toMap();
@@ -1101,130 +995,25 @@ void MainWindow::ParserKernel(QVariantMap map, QString subitem,
   //分析"Add"
   if (subitem == "Add") {
     QVariantList map_add = map["Add"].toList();
-
-    ui->table_kernel_add->setRowCount(map_add.count());
-    for (int i = 0; i < map_add.count(); i++) {
-      QVariantMap map3 = map_add.at(i).toMap();
-
-      QTableWidgetItem* newItem1;
-
-      newItem1 = new QTableWidgetItem(map3["BundlePath"].toString());
-      ui->table_kernel_add->setItem(i, 0, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-      ui->table_kernel_add->setItem(i, 1, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["ExecutablePath"].toString());
-      ui->table_kernel_add->setItem(i, 2, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["PlistPath"].toString());
-      ui->table_kernel_add->setItem(i, 3, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
-      newItem1->setTextAlignment(Qt::AlignCenter);
-      ui->table_kernel_add->setItem(i, 4, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
-      newItem1->setTextAlignment(Qt::AlignCenter);
-      ui->table_kernel_add->setItem(i, 5, newItem1);
-
-      init_enabled_data(ui->table_kernel_add, i, 6, map3["Enabled"].toString());
-
-      newItem1 = new QTableWidgetItem(map3["Arch"].toString());
-      if (map3["Arch"].toString().trimmed() == "")
-        newItem1 = new QTableWidgetItem("Any");
-      newItem1->setTextAlignment(Qt::AlignCenter);
-      ui->table_kernel_add->setItem(i, 7, newItem1);
-    }
+    Method::set_TableData(ui->table_kernel_add, map_add);
   }
 
   // Block
   if (subitem == "Block") {
     QVariantList map_block = map["Block"].toList();
-
-    ui->table_kernel_block->setRowCount(map_block.count());
-    for (int i = 0; i < map_block.count(); i++) {
-      QVariantMap map3 = map_block.at(i).toMap();
-
-      QTableWidgetItem* newItem1;
-
-      newItem1 = new QTableWidgetItem(map3["Identifier"].toString());
-      ui->table_kernel_block->setItem(i, 0, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-      ui->table_kernel_block->setItem(i, 1, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
-      newItem1->setTextAlignment(Qt::AlignCenter);
-      ui->table_kernel_block->setItem(i, 2, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
-      newItem1->setTextAlignment(Qt::AlignCenter);
-      ui->table_kernel_block->setItem(i, 3, newItem1);
-
-      init_enabled_data(ui->table_kernel_block, i, 4,
-                        map3["Enabled"].toString());
-
-      newItem1 = new QTableWidgetItem(map3["Arch"].toString());
-      if (map3["Arch"].toString().trimmed() == "")
-        newItem1 = new QTableWidgetItem("Any");
-      newItem1->setTextAlignment(Qt::AlignCenter);
-      ui->table_kernel_block->setItem(i, 5, newItem1);
-    }
+    Method::set_TableData(ui->table_kernel_block, map_block);
   }
 
   //分析"Force"
   if (subitem == "Force") {
     QVariantList map_Force = map["Force"].toList();
-
-    ui->table_kernel_Force->setRowCount(map_Force.count());
-    for (int i = 0; i < map_Force.count(); i++) {
-      QVariantMap map3 = map_Force.at(i).toMap();
-
-      QTableWidgetItem* newItem1;
-
-      newItem1 = new QTableWidgetItem(map3["BundlePath"].toString());
-      ui->table_kernel_Force->setItem(i, 0, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-      ui->table_kernel_Force->setItem(i, 1, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["ExecutablePath"].toString());
-      ui->table_kernel_Force->setItem(i, 2, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["Identifier"].toString());
-      ui->table_kernel_Force->setItem(i, 3, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["PlistPath"].toString());
-      ui->table_kernel_Force->setItem(i, 4, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
-      newItem1->setTextAlignment(Qt::AlignCenter);
-      ui->table_kernel_Force->setItem(i, 5, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
-      newItem1->setTextAlignment(Qt::AlignCenter);
-      ui->table_kernel_Force->setItem(i, 6, newItem1);
-
-      init_enabled_data(ui->table_kernel_Force, i, 7,
-                        map3["Enabled"].toString());
-
-      newItem1 = new QTableWidgetItem(map3["Arch"].toString());
-      if (map3["Arch"].toString().trimmed() == "")
-        newItem1 = new QTableWidgetItem("Any");
-      newItem1->setTextAlignment(Qt::AlignCenter);
-      ui->table_kernel_Force->setItem(i, 8, newItem1);
-    }
+    Method::set_TableData(ui->table_kernel_Force, map_Force);
   }
 
   // Patch
   if (subitem == "Patch") {
     QVariantList map_patch = map["Patch"].toList();
-    for (int i = 0; i < map_patch.count(); i++) {
-      int rowCount = ui->table_kernel_patch->rowCount();
-      ui->table_kernel_patch->setRowCount(rowCount + 1);
-      AddKernelPatch(map_patch, i, i + tableIndex);
-    }
+    Method::set_TableData(ui->table_kernel_patch, map_patch);
   }
 
   // Emulate
@@ -1446,8 +1235,10 @@ void MainWindow::ParserMisc(QVariantMap map) {
     if (str.contains(hm)) ui->cboxSecureBootModel->setCurrentIndex(i);
   }
 
-  // BlessOverride(数组)
+  // BlessOverride
   QVariantList map_BlessOverride = map["BlessOverride"].toList();
+  // Method::set_TableData(ui->tableBlessOverride, map_BlessOverride);
+
   ui->tableBlessOverride->setRowCount(map_BlessOverride.count());
   for (int i = 0; i < map_BlessOverride.count(); i++) {
     QTableWidgetItem* newItem1;
@@ -1457,69 +1248,11 @@ void MainWindow::ParserMisc(QVariantMap map) {
 
   // Entries
   QVariantList map_Entries = map["Entries"].toList();
-  ui->tableEntries->setRowCount(map_Entries.count());
-  for (int i = 0; i < map_Entries.count(); i++) {
-    QVariantMap map3 = map_Entries.at(i).toMap();
-
-    QTableWidgetItem* newItem1;
-
-    newItem1 = new QTableWidgetItem(map3["Path"].toString());
-    ui->tableEntries->setItem(i, 0, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Arguments"].toString());
-    ui->tableEntries->setItem(i, 1, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Name"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->tableEntries->setItem(i, 2, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-    ui->tableEntries->setItem(i, 3, newItem1);
-
-    init_enabled_data(ui->tableEntries, i, 4, map3["Auxiliary"].toString());
-    init_enabled_data(ui->tableEntries, i, 5, map3["Enabled"].toString());
-    init_enabled_data(ui->tableEntries, i, 6, map3["TextMode"].toString());
-
-    newItem1 = new QTableWidgetItem(map3["Flavour"].toString());
-    if (map3["Flavour"].toString().trimmed() == "")
-      newItem1 = new QTableWidgetItem("Auto");
-    ui->tableEntries->setItem(i, 7, newItem1);
-  }
+  Method::set_TableData(ui->tableEntries, map_Entries);
 
   // Tools
   QVariantList map_Tools = map["Tools"].toList();
-  ui->tableTools->setRowCount(map_Tools.count());
-  for (int i = 0; i < map_Tools.count(); i++) {
-    QVariantMap map3 = map_Tools.at(i).toMap();
-
-    QTableWidgetItem* newItem1;
-
-    newItem1 = new QTableWidgetItem(map3["Path"].toString());
-    ui->tableTools->setItem(i, 0, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Arguments"].toString());
-    ui->tableTools->setItem(i, 1, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Name"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->tableTools->setItem(i, 2, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-    ui->tableTools->setItem(i, 3, newItem1);
-
-    init_enabled_data(ui->tableTools, i, 4, map3["Auxiliary"].toString());
-
-    init_enabled_data(ui->tableTools, i, 5, map3["Enabled"].toString());
-
-    init_enabled_data(ui->tableTools, i, 6, map3["RealPath"].toString());
-
-    init_enabled_data(ui->tableTools, i, 7, map3["TextMode"].toString());
-
-    newItem1 = new QTableWidgetItem(map3["Flavour"].toString());
-    if (map3["Flavour"].toString().trimmed() == "")
-      newItem1 = new QTableWidgetItem("Auto");
-    ui->tableTools->setItem(i, 8, newItem1);
-  }
+  Method::set_TableData(ui->tableTools, map_Tools);
 }
 
 void MainWindow::initui_nvram() {
@@ -2301,45 +2034,7 @@ void MainWindow::ParserPlatformInfo(QVariantMap map) {
 
   // Memory-Devices
   QVariantList mapMemoryDevices = mapMemory["Devices"].toList();
-
-  ui->tableDevices->setRowCount(mapMemoryDevices.count());
-  for (int i = 0; i < mapMemoryDevices.count(); i++) {
-    QVariantMap map3 = mapMemoryDevices.at(i).toMap();
-
-    QTableWidgetItem* newItem1;
-
-    newItem1 = new QTableWidgetItem(map3["AssetTag"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->tableDevices->setItem(i, 0, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["BankLocator"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->tableDevices->setItem(i, 1, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["DeviceLocator"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->tableDevices->setItem(i, 2, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Manufacturer"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->tableDevices->setItem(i, 3, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["PartNumber"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->tableDevices->setItem(i, 4, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["SerialNumber"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->tableDevices->setItem(i, 5, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Size"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->tableDevices->setItem(i, 6, newItem1);
-
-    newItem1 = new QTableWidgetItem(map3["Speed"].toString());
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    ui->tableDevices->setItem(i, 7, newItem1);
-  }
+  Method::set_TableData(ui->tableDevices, mapMemoryDevices);
 
   // PlatformNVRAM
   QVariantMap mapPlatformNVRAM = map["PlatformNVRAM"].toMap();
@@ -2465,50 +2160,8 @@ void MainWindow::ParserUEFI(QVariantMap map) {
   getValue(map_audio, ui->tabUEFI3);
 
   // 4. Drivers
-  QVariantList map_Drivers = map["Drivers"].toList();  //数组
-  ui->table_uefi_drivers->setRowCount(map_Drivers.count());
-  for (int i = 0; i < map_Drivers.count(); i++) {
-    // QTableWidgetItem* id0;
-    // id0 = new QTableWidgetItem(map_Drivers.at(i).toString());
-    // //老版本OC（0.7.3之前）只有一列记录的情况
-    // ui->table_uefi_drivers->setItem(i, 0, id0);
-
-    QVariantMap map3 = map_Drivers.at(i).toMap();
-
-    if (map3.count() > 1) {
-      QTableWidgetItem* newItem1;
-      newItem1 = new QTableWidgetItem(map3["Path"].toString());
-      ui->table_uefi_drivers->setItem(i, 0, newItem1);
-
-      init_enabled_data(ui->table_uefi_drivers, i, 1,
-                        map3["Enabled"].toString());
-
-      newItem1 = new QTableWidgetItem(map3["Arguments"].toString());
-      ui->table_uefi_drivers->setItem(i, 2, newItem1);
-
-      newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-      ui->table_uefi_drivers->setItem(i, 3, newItem1);
-
-    } else {
-      QString strEnabled = "true";
-      QTableWidgetItem* newItem1;
-      QString strPath = map_Drivers.at(i).toString();
-      if (strPath.mid(0, 1) == "#") {
-        strEnabled = "false";
-        strPath = strPath.replace("#", "");
-      }
-      newItem1 = new QTableWidgetItem(strPath);
-      ui->table_uefi_drivers->setItem(i, 0, newItem1);
-
-      init_enabled_data(ui->table_uefi_drivers, i, 1, strEnabled);
-
-      newItem1 = new QTableWidgetItem("");
-      ui->table_uefi_drivers->setItem(i, 2, newItem1);
-
-      newItem1 = new QTableWidgetItem("");
-      ui->table_uefi_drivers->setItem(i, 3, newItem1);
-    }
-  }
+  QVariantList map_Drivers = map["Drivers"].toList();
+  Method::set_TableData(ui->table_uefi_drivers, map_Drivers);
 
   ui->chkConnectDrivers->setChecked(map["ConnectDrivers"].toBool());
 
@@ -2534,30 +2187,8 @@ void MainWindow::ParserUEFI(QVariantMap map) {
     ui->editIntResizeGpuBars->setText("-1");
 
   // 9. ReservedMemory
-  QTableWidgetItem* newItem1;
-  QVariantList map3 = map["ReservedMemory"].toList();
-  ui->table_uefi_ReservedMemory->setRowCount(map3.count());
-  for (int i = 0; i < map3.count(); i++) {
-    QVariantMap map_sub = map3.at(i).toMap();
-    newItem1 = new QTableWidgetItem(map_sub["Address"].toString());
-    ui->table_uefi_ReservedMemory->setItem(i, 0, newItem1);
-
-    newItem1 = new QTableWidgetItem(map_sub["Comment"].toString());
-    ui->table_uefi_ReservedMemory->setItem(i, 1, newItem1);
-
-    newItem1 = new QTableWidgetItem(map_sub["Size"].toString());
-    ui->table_uefi_ReservedMemory->setItem(i, 2, newItem1);
-
-    QString strType = map_sub["Type"].toString();
-    if (strType != "")
-      newItem1 = new QTableWidgetItem(strType);
-    else
-      newItem1 = new QTableWidgetItem("Reserved");
-    ui->table_uefi_ReservedMemory->setItem(i, 3, newItem1);
-
-    init_enabled_data(ui->table_uefi_ReservedMemory, i, 4,
-                      map_sub["Enabled"].toString());
-  }
+  QVariantList mapRM = map["ReservedMemory"].toList();
+  Method::set_TableData(ui->table_uefi_ReservedMemory, mapRM);
 }
 
 void MainWindow::on_btnSave() { SavePlist(SaveFileName); }
