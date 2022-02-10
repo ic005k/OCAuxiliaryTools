@@ -249,11 +249,6 @@ void dlgPreference::on_chkHideToolbar_stateChanged(int arg1) {
   writeIni("chkHideToolbar", arg1);
 }
 
-void dlgPreference::on_tableDatabase_itemChanged(QTableWidgetItem *item) {
-  listItemModi.removeAt(item->row());
-  listItemModi.insert(item->row(), true);
-}
-
 void dlgPreference::on_chkShowVolName_clicked(bool checked) {
   QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("ShowVolName", checked);

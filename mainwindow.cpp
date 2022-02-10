@@ -272,7 +272,7 @@ void MainWindow::openFile(QString PlistFileName) {
   ui->editSystemUUID->setText("");
   ui->editMLB->setText("");
   ui->editSystemSerialNumber->setText("");
-  ui->cboxEmulate->setCurrentIndex(0);
+  ui->mycboxEmulate->setCurrentIndex(0);
 
   QFile file(PlistFileName);
   QVariantMap map = PListParser::parsePList(&file).toMap();
@@ -1297,32 +1297,32 @@ void MainWindow::initui_misc() {
 
   //添加颜色下拉框,字色
   QStringList itemList;
-  for (int i = 0; i < ui->cboxTextColor->count(); i++) {
-    itemList.append(ui->cboxTextColor->itemText(i));
+  for (int i = 0; i < ui->mycboxTextColor->count(); i++) {
+    itemList.append(ui->mycboxTextColor->itemText(i));
   }
-  ui->cboxTextColor->clear();
+  ui->mycboxTextColor->clear();
 
   for (int i = 0; i < textColor.count(); i++) {
     QPixmap pix(QSize(100, 20));
     pix.fill(QColor(textColor.at(i)));
-    ui->cboxTextColor->addItem(QIcon(pix), itemList.at(i));
-    ui->cboxTextColor->setIconSize(QSize(70, 20));
-    ui->cboxTextColor->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    ui->mycboxTextColor->addItem(QIcon(pix), itemList.at(i));
+    ui->mycboxTextColor->setIconSize(QSize(70, 20));
+    ui->mycboxTextColor->setSizeAdjustPolicy(QComboBox::AdjustToContents);
   }
 
   // 背景色
   itemList.clear();
-  for (int i = 0; i < ui->cboxBackColor->count(); i++) {
-    itemList.append(ui->cboxBackColor->itemText(i));
+  for (int i = 0; i < ui->mycboxBackColor->count(); i++) {
+    itemList.append(ui->mycboxBackColor->itemText(i));
   }
-  ui->cboxBackColor->clear();
+  ui->mycboxBackColor->clear();
 
   for (int i = 0; i < backColor.count(); i++) {
     QPixmap pix(QSize(100, 20));
     pix.fill(QColor(backColor.at(i)));
-    ui->cboxBackColor->addItem(QIcon(pix), itemList.at(i));
-    ui->cboxBackColor->setIconSize(QSize(70, 20));
-    ui->cboxBackColor->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    ui->mycboxBackColor->addItem(QIcon(pix), itemList.at(i));
+    ui->mycboxBackColor->setIconSize(QSize(70, 20));
+    ui->mycboxBackColor->setSizeAdjustPolicy(QComboBox::AdjustToContents);
   }
 
   // Debug
@@ -2200,33 +2200,29 @@ void MainWindow::initui_PlatformInfo() {
   ui->cboxSystemProductName->addItems(pi);
 
   //获取当前Mac信息
-  QFileInfo appInfo(qApp->applicationDirPath());
   si = new QProcess;
-
 #ifdef Q_OS_WIN32
-  QFile file(appInfo.filePath() + "/Database/win/macserial.exe");
+  QFile file(strAppExePath + "/Database/win/macserial.exe");
   if (file.exists())
-    gs->execute(appInfo.filePath() + "/Database/win/macserial.exe",
-                QStringList() << "-s");  //阻塞execute
-
+    gs->execute(strAppExePath + "/Database/win/macserial.exe", QStringList()
+                                                                   << "-s");
   ui->tabPlatformInfo->removeTab(5);
-
 #endif
 
 #ifdef Q_OS_LINUX
-  gs->execute(appInfo.filePath() + "/Database/linux/macserial", QStringList()
-                                                                    << "-s");
-
+  gs->execute(strAppExePath + "/Database/linux/macserial", QStringList()
+                                                               << "-s");
   ui->tabPlatformInfo->removeTab(5);
-
 #endif
 
 #ifdef Q_OS_MAC
-  si->start(appInfo.filePath() + "/Database/mac/macserial", QStringList()
-                                                                << "-s");
+  si->start(strAppExePath + "/Database/mac/macserial", QStringList() << "-s");
 #endif
 
-  connect(si, SIGNAL(finished(int)), this, SLOT(readResultSystemInfo()));
+  si->waitForFinished();
+  ui->textMacInfo->clear();
+  QString result = si->readAll();
+  ui->textMacInfo->append(result);
 }
 
 void MainWindow::ParserPlatformInfo(QVariantMap map) {
@@ -4940,12 +4936,6 @@ void MainWindow::readResult() {
   on_btnSystemUUID_clicked();
 }
 
-void MainWindow::readResultSystemInfo() {
-  ui->textMacInfo->clear();
-  QString result = si->readAll();
-  ui->textMacInfo->append(result);
-}
-
 void MainWindow::on_btnGenerate_clicked() {
   QString arg1 = ui->cboxSystemProductName->currentText();
   if (!loading && arg1 != "") {
@@ -4975,7 +4965,6 @@ void MainWindow::on_btnGenerate_clicked() {
 #endif
 
     connect(gs, SIGNAL(finished(int)), this, SLOT(readResult()));
-    // connect(gs , SIGNAL(readyRead()) , this , SLOT(readResult()));
   }
 }
 
@@ -5251,10 +5240,10 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   Reg.setValue("Net", myDlgPreference->ui->comboBoxNet->currentText());
   Reg.setValue("LastFileName", SaveFileName);
 
-  int textTotal = ui->cboxFind->count();
+  int textTotal = ui->mycboxFind->count();
   Reg.setValue("textTotal", textTotal);
   for (int i = 0; i < textTotal; i++) {
-    Reg.setValue(QString::number(i), ui->cboxFind->itemText(i));
+    Reg.setValue(QString::number(i), ui->mycboxFind->itemText(i));
   }
 
   Reg.setValue("x", this->x());
@@ -5300,7 +5289,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
         ui->listMain->setFocus();
         event->ignore();
 
-        ui->cboxFind->setFocus();
+        ui->mycboxFind->setFocus();
         break;
     }
   } else {
@@ -6031,7 +6020,7 @@ void MainWindow::on_listMain_itemSelectionChanged() {
     strList << tr("Generic") << tr("DataHub") << tr("Memory")
             << tr("PlatformNVRAM") << tr("SMBIOS");
 
-    if (mac || osx1012) strList.append(tr("SystemInfo"));
+    if (mac || osx1012) strList.append(tr("SerialInfo"));
   }
 
   if (ui->listMain->currentRow() == 7) {
@@ -6529,20 +6518,20 @@ void MainWindow::init_MainUI() {
       Reg.value("chkHideToolbar", 0).toBool());
   if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
     ui->toolBar->setHidden(true);
-    ui->frameToolBar->setFixedHeight(ui->cboxFind->height() + 4);
+    ui->frameToolBar->setFixedHeight(ui->mycboxFind->height() + 4);
 
   } else {
-    ui->toolBar->addWidget(ui->cboxFind);
+    ui->toolBar->addWidget(ui->mycboxFind);
     ui->toolBar->addAction(ui->actionFind);
-    ui->cboxFind->setMaximumWidth(320);
+    ui->mycboxFind->setMaximumWidth(320);
   }
 
   init_HelpMenu();
 
   // Search
-  ui->cboxFind->lineEdit()->setClearButtonEnabled(false);
-  ui->cboxFind->lineEdit()->setPlaceholderText(tr("Search"));
-  connect(ui->cboxFind->lineEdit(), &QLineEdit::returnPressed, this,
+  ui->mycboxFind->lineEdit()->setClearButtonEnabled(false);
+  ui->mycboxFind->lineEdit()->setPlaceholderText(tr("Search"));
+  connect(ui->mycboxFind->lineEdit(), &QLineEdit::returnPressed, this,
           &MainWindow::on_actionFind_triggered);
 
   ui->listFind->setAlternatingRowColors(true);
@@ -6550,11 +6539,11 @@ void MainWindow::init_MainUI() {
   clearTextsAction = new QAction(this);
   clearTextsAction->setToolTip(tr("Clear search history"));
   clearTextsAction->setIcon(QIcon(":/icon/clear.png"));
-  ui->cboxFind->lineEdit()->addAction(clearTextsAction,
-                                      QLineEdit::LeadingPosition);
+  ui->mycboxFind->lineEdit()->addAction(clearTextsAction,
+                                        QLineEdit::LeadingPosition);
   connect(clearTextsAction, SIGNAL(triggered()), this, SLOT(clearFindTexts()));
 
-  QSize size = QSize(85, ui->cboxFind->lineEdit()->sizeHint().height());
+  QSize size = QSize(85, ui->mycboxFind->lineEdit()->sizeHint().height());
   ui->lblCount->setMinimumSize(size);
   ui->lblCount->setMaximumSize(size);
   QHBoxLayout* buttonLayout = new QHBoxLayout();
@@ -6564,7 +6553,7 @@ void MainWindow::init_MainUI() {
   buttonLayout->addWidget(ui->lblCount);
 
   btnClear = new QToolButton(this);
-  int b_w = ui->cboxFind->lineEdit()->height() - 2;
+  int b_w = ui->mycboxFind->lineEdit()->height() - 2;
   btnClear->setMaximumWidth(b_w);
   btnClear->setMaximumHeight(b_w);
   btnClear->setStyleSheet("QToolButton{border:none;}");
@@ -6573,17 +6562,17 @@ void MainWindow::init_MainUI() {
   buttonLayout->addWidget(btnClear);
 
   ui->lblCount->setAlignment(Qt::AlignRight);
-  ui->cboxFind->lineEdit()->setLayout(buttonLayout);
+  ui->mycboxFind->lineEdit()->setLayout(buttonLayout);
   // 设置输入区，不让输入的文字被隐藏在lblCount下
-  ui->cboxFind->lineEdit()->setTextMargins(0, 1, size.width(), 1);
+  ui->mycboxFind->lineEdit()->setTextMargins(0, 1, size.width(), 1);
   connect(btnClear, &QToolButton::clicked, [=]() {
-    ui->cboxFind->lineEdit()->clear();
+    ui->mycboxFind->lineEdit()->clear();
     init_ToolBarIcon();
   });
 
   int textTotal = Reg.value("textTotal").toInt();
   for (int i = 0; i < textTotal; i++) {
-    ui->cboxFind->addItem(Reg.value(QString::number(i)).toString());
+    ui->mycboxFind->addItem(Reg.value(QString::number(i)).toString());
   }
 
   ui->actionOpenCore_DEV->setChecked(Reg.value("OpenCoreDEV", 0).toBool());
@@ -6608,7 +6597,7 @@ void MainWindow::init_MainUI() {
   move(rect.topLeft());
   resize(rect.size());
 
-  ui->cboxFind->setCurrentText("");
+  ui->mycboxFind->setCurrentText("");
   if (textTotal > 0)
     clearTextsAction->setEnabled(true);
   else
@@ -6740,13 +6729,13 @@ void MainWindow::init_InitialValue() {
   mainTabList.append(ui->tabUEFI);
 
   chk_Target.clear();
-  chk_Target.append(ui->chkT1);
-  chk_Target.append(ui->chkT2);
-  chk_Target.append(ui->chkT3);
-  chk_Target.append(ui->chkT4);
-  chk_Target.append(ui->chkT5);
-  chk_Target.append(ui->chkT6);
-  chk_Target.append(ui->chkT7);
+  chk_Target.append(ui->mychkT1);
+  chk_Target.append(ui->mychkT2);
+  chk_Target.append(ui->mychkT3);
+  chk_Target.append(ui->mychkT4);
+  chk_Target.append(ui->mychkT5);
+  chk_Target.append(ui->mychkT6);
+  chk_Target.append(ui->mychkT7);
   for (int i = 0; i < chk_Target.count(); i++) {
     connect(chk_Target.at(i), &QCheckBox::clicked, this, &MainWindow::Target);
   }
@@ -6928,11 +6917,11 @@ void MainWindow::copyText(QListWidget* listW) {
 }
 
 void MainWindow::clearFindTexts() {
-  for (int i = 0; i < ui->cboxFind->count(); i++) {
+  for (int i = 0; i < ui->mycboxFind->count(); i++) {
     QSettings Reg(strIniFile, QSettings::IniFormat);
     Reg.remove(QString::number(i));
   }
-  ui->cboxFind->clear();
+  ui->mycboxFind->clear();
   clearTextsAction->setEnabled(false);
 }
 
@@ -7342,7 +7331,7 @@ int MainWindow::parse_UpdateJSON(QString str) {
       }
     }
 
-    ui->cboxFind->setFocus();
+    ui->mycboxFind->setFocus();
   }
   autoCheckUpdate = false;
   return 0;
@@ -8270,10 +8259,8 @@ void MainWindow::findComboBox(QString findText) {
   listOfComboBoxResults.clear();
   for (int i = 0; i < listOfComboBox.count(); i++) {
     QComboBox* cbox = (QComboBox*)listOfComboBox.at(i);
-    if (cbox != ui->cboxFind && cbox != ui->cboxTextColor &&
-        cbox != ui->cboxBackColor && cbox != ui->cboxEmulate &&
-        cbox != ui->comboBoxACPI && cbox != ui->comboBoxBooter &&
-        cbox != ui->comboBoxKernel && cbox != ui->comboBoxUEFI) {
+    QString objname = cbox->objectName();
+    if (objname.mid(0, 4) == "cbox") {
       if (cbox->currentText().toLower().contains(
               findText.trimmed().toLower()) &&
           !cbox->isHidden()) {
@@ -8333,12 +8320,12 @@ void MainWindow::findTabText(QString findText) {
 }
 
 void MainWindow::on_actionFind_triggered() {
-  ui->cboxFind->lineEdit()->selectAll();
-  ui->cboxFind->setFocus();
+  ui->mycboxFind->lineEdit()->selectAll();
+  ui->mycboxFind->setFocus();
   if (myDlgPreference->ui->chkHideToolbar->isChecked() &&
       ui->toolBar->isHidden()) {
     ui->frameToolBar->setHidden(false);
-    ui->cboxFind->setFocus();
+    ui->mycboxFind->setFocus();
   }
 
   find = true;
@@ -8351,11 +8338,11 @@ void MainWindow::on_actionFind_triggered() {
 
   bool curWinModi = this->isWindowModified();
 
-  QString findText = ui->cboxFind->currentText().trimmed().toLower();
+  QString findText = ui->mycboxFind->currentText().trimmed().toLower();
 
   if (findText == "") return;
 
-  if (ui->cboxFind->count() > 0) clearTextsAction->setEnabled(true);
+  if (ui->mycboxFind->count() > 0) clearTextsAction->setEnabled(true);
 
   findCount = 0;
   listNameResults.clear();
@@ -8403,8 +8390,8 @@ void MainWindow::on_actionFind_triggered() {
     ui->listMain->setCurrentRow(index);
 
     QStringList strList;
-    for (int i = 0; i < ui->cboxFind->count(); i++) {
-      strList.append(ui->cboxFind->itemText(i));
+    for (int i = 0; i < ui->mycboxFind->count(); i++) {
+      strList.append(ui->mycboxFind->itemText(i));
     }
 
     for (int i = 0; i < strList.count(); i++) {
@@ -8415,22 +8402,22 @@ void MainWindow::on_actionFind_triggered() {
 
     strList.insert(0, findText);
     AddCboxFindItem = true;
-    ui->cboxFind->clear();
-    ui->cboxFind->addItems(strList);
+    ui->mycboxFind->clear();
+    ui->mycboxFind->addItems(strList);
     AddCboxFindItem = false;
 
     if (red < 55) {
-      setPalette(ui->cboxFind, QColor(50, 50, 50), Qt::white);
+      setPalette(ui->mycboxFind, QColor(50, 50, 50), Qt::white);
 
     } else {
-      setPalette(ui->cboxFind, Qt::white, Qt::black);
+      setPalette(ui->mycboxFind, Qt::white, Qt::black);
     }
 
     FindTextChange = false;
     init_ToolBarIcon();
 
   } else {
-    setPalette(ui->cboxFind, QColor(255, 70, 70), Qt::white);
+    setPalette(ui->mycboxFind, QColor(255, 70, 70), Qt::white);
     btnClear->setIcon(QIcon(":/icon/c0.png"));
   }
 
@@ -8439,7 +8426,7 @@ void MainWindow::on_actionFind_triggered() {
 
   find = false;
 
-  ui->cboxFind->lineEdit()->selectAll();
+  ui->mycboxFind->lineEdit()->selectAll();
 }
 
 void MainWindow::setPalette(QWidget* w, QColor backColor, QColor textColor) {
@@ -8944,7 +8931,7 @@ void MainWindow::goResults(int index) {
   find = false;
 }
 
-void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1) {
+void MainWindow::on_mycboxFind_currentTextChanged(const QString& arg1) {
   if (AddCboxFindItem) {
     return;
   }
@@ -8971,10 +8958,10 @@ void MainWindow::on_cboxFind_currentTextChanged(const QString& arg1) {
     red = brush.color().red();
 
     if (red < 55) {
-      setPalette(ui->cboxFind, QColor(50, 50, 50), Qt::white);
+      setPalette(ui->mycboxFind, QColor(50, 50, 50), Qt::white);
 
     } else {
-      setPalette(ui->cboxFind, Qt::white, Qt::black);
+      setPalette(ui->mycboxFind, Qt::white, Qt::black);
     }
   }
 }
@@ -9971,10 +9958,10 @@ void MainWindow::paintEvent(QPaintEvent* event) {
     red = c_red;
 
     if (red < 55) {
-      setPalette(ui->cboxFind, QColor(50, 50, 50), Qt::white);
+      setPalette(ui->mycboxFind, QColor(50, 50, 50), Qt::white);
 
     } else {
-      setPalette(ui->cboxFind, Qt::white, Qt::black);
+      setPalette(ui->mycboxFind, Qt::white, Qt::black);
     }
 
     init_ToolBarIcon();
@@ -10090,7 +10077,7 @@ void MainWindow::getComboBoxValue(QVariantMap map, QWidget* tab) {
     QString name = w->objectName().mid(4, w->objectName().count() - 3);
 
     QString cu_text = map[name].toString().trimmed();
-    if (w != ui->cboxFind) {
+    if (w != ui->mycboxFind) {
       if (cu_text != "")
         w->setCurrentText(cu_text);
       else
@@ -10144,7 +10131,7 @@ void MainWindow::getValue(QVariantMap map, QWidget* tab) {
 
 bool MainWindow::editExclusion(QLineEdit* w, QString name) {
   // 用name ！= “”过滤掉获取的ComBox里面的edit
-  if (name != "" && w != ui->editPassInput && name != "pinbox_lineedit")
+  if (name != "" && w != ui->myeditPassInput && name != "pinbox_lineedit")
     return true;
 
   return false;
@@ -10156,7 +10143,7 @@ QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab) {
   listLineEdit = getAllLineEdit(getAllUIControls(tab));
   for (int i = 0; i < listLineEdit.count(); i++) {
     QLineEdit* w = (QLineEdit*)listLineEdit.at(i);
-    if (!w->isHidden()) {
+    if (!w->isHidden() && w->objectName().mid(0, 4) == "edit") {
       QString str0, name;
       str0 = w->objectName().mid(4, w->objectName().count() - 3);  // 去edit
 
@@ -10197,11 +10184,8 @@ QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab) {
 
 bool MainWindow::ExclusionCheckBox(QCheckBox* chkbox) {
   if (chkbox->text().trimmed().mid(0, 3) != "OC_" &&
-      chkbox->text().trimmed().mid(0, 5) != "DEBUG"
-
-      && chkbox != ui->chkT1 && chkbox != ui->chkT2 && chkbox != ui->chkT3 &&
-      chkbox != ui->chkT4 && chkbox != ui->chkT5 && chkbox != ui->chkT6 &&
-      chkbox != ui->chkT7)
+      chkbox->text().trimmed().mid(0, 5) != "DEBUG" &&
+      chkbox->objectName().mid(0, 3) != "chk")
 
     return true;
 
@@ -10214,13 +10198,10 @@ QVariantMap MainWindow::setCheckBoxValue(QVariantMap map, QWidget* tab) {
   listCheckBox = getAllCheckBox(getAllUIControls(tab));
   for (int i = 0; i < listCheckBox.count(); i++) {
     QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
-    if (!chkbox->isHidden()) {
-      QString strObjName = chkbox->objectName();
+    QString strObjName = chkbox->objectName();
+    if (!chkbox->isHidden() && strObjName.mid(0, 3) == "chk") {
       QString name = strObjName.mid(3, strObjName.count() - 2);
-
-      if (ExclusionCheckBox(chkbox)) {
-        map.insert(name, getChkBool(chkbox));
-      }
+      map.insert(name, getChkBool(chkbox));
     }
   }
 
@@ -10233,13 +10214,10 @@ QVariantMap MainWindow::setComboBoxValue(QVariantMap map, QWidget* tab) {
   listComboBox = getAllComboBox(getAllUIControls(tab));
   for (int i = 0; i < listComboBox.count(); i++) {
     QComboBox* w = (QComboBox*)listComboBox.at(i);
-    if (!w->isHidden()) {
+    if (!w->isHidden() && w->objectName().mid(0, 4) == "cbox") {
       QString name = w->objectName().mid(4, w->objectName().count() - 3);
 
-      if (w != ui->cboxFind && w != ui->cboxTextColor &&
-          w != ui->cboxBackColor && w != ui->comboBoxACPI &&
-          w != ui->comboBoxBooter && w != ui->comboBoxKernel &&
-          w != ui->comboBoxUEFI && w != ui->cboxEmulate) {
+      if (w->objectName().mid(0, 4) == "cbox") {
         if (name != "SystemProductName") {
           map.insert(name, w->currentText().trimmed());
 
@@ -10309,13 +10287,13 @@ void MainWindow::initColorValue() {
   backColorInt.append(112);
 }
 
-void MainWindow::on_cboxTextColor_currentIndexChanged(int index) {
+void MainWindow::on_mycboxTextColor_currentIndexChanged(int index) {
   Q_UNUSED(index);
 
   initColorValue();
 
-  int bcIndex = ui->cboxBackColor->currentIndex();
-  int tcIndex = ui->cboxTextColor->currentIndex();
+  int bcIndex = ui->mycboxBackColor->currentIndex();
+  int tcIndex = ui->mycboxTextColor->currentIndex();
 
   int total = 0;
   if (bcIndex >= 0 && tcIndex >= 0)
@@ -10336,8 +10314,8 @@ void MainWindow::on_cboxTextColor_currentIndexChanged(int index) {
   }
 }
 
-void MainWindow::on_cboxBackColor_currentIndexChanged(int index) {
-  on_cboxTextColor_currentIndexChanged(index);
+void MainWindow::on_mycboxBackColor_currentIndexChanged(int index) {
+  on_mycboxTextColor_currentIndexChanged(index);
 }
 
 void MainWindow::on_editIntConsoleAttributes_textChanged(const QString& arg1) {
@@ -10348,8 +10326,8 @@ void MainWindow::on_editIntConsoleAttributes_textChanged(const QString& arg1) {
   for (int i = 0; i < textColorInt.count(); i++) {
     for (int j = 0; j < backColorInt.count(); j++) {
       if (total == textColorInt.at(i) + backColorInt.at(j)) {
-        ui->cboxTextColor->setCurrentIndex(i);
-        ui->cboxBackColor->setCurrentIndex(j);
+        ui->mycboxTextColor->setCurrentIndex(i);
+        ui->mycboxBackColor->setCurrentIndex(j);
         break;
       }
     }
@@ -10412,7 +10390,7 @@ void MainWindow::on_btnGetPassHash_clicked() {
 #endif
 
   chkdataPassHash->waitForStarted();  //等待启动完成
-  QString strData = ui->editPassInput->text().trimmed() + "\n";
+  QString strData = ui->myeditPassInput->text().trimmed() + "\n";
   const char* cstr;  // = strData.toLocal8Bit().constData();
   strData = strData.toLocal8Bit();
   string strStd = strData.toStdString();
@@ -10484,7 +10462,7 @@ void MainWindow::on_btnROM_clicked() {
   ui->editDatROM_PNVRAM->setText(ui->editDatROM->text());
 }
 
-void MainWindow::on_editPassInput_textChanged(const QString& arg1) {
+void MainWindow::on_myeditPassInput_textChanged(const QString& arg1) {
   if (ui->progressBar->maximum() == 0) return;
 
   if (arg1.trimmed().count() > 0) {
@@ -10496,7 +10474,7 @@ void MainWindow::on_editPassInput_textChanged(const QString& arg1) {
   }
 }
 
-void MainWindow::on_editPassInput_returnPressed() {
+void MainWindow::on_myeditPassInput_returnPressed() {
   if (ui->btnGetPassHash->isEnabled()) on_btnGetPassHash_clicked();
 }
 
@@ -11232,7 +11210,7 @@ void MainWindow::on_actionDocumentation_triggered() {
 
 void MainWindow::on_btnHide_clicked() {
   ui->frameToolBar->setHidden(true);
-  ui->cboxFind->lineEdit()->clear();
+  ui->mycboxFind->lineEdit()->clear();
 }
 
 void MainWindow::on_actionMove_Up_triggered() {
@@ -11387,7 +11365,7 @@ void MainWindow::checkSystemAudioVolume() {
   }
 }
 
-void MainWindow::on_cboxEmulate_currentTextChanged(const QString& arg1) {
+void MainWindow::on_mycboxEmulate_currentTextChanged(const QString& arg1) {
   if (arg1 == "None") {
     ui->editDatCpuid1Data->setText("");
     ui->editDatCpuid1Mask->setText("");
@@ -11572,4 +11550,18 @@ void MainWindow::smart_UpdateKeyField() {
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI7, "UEFI",
                                    "ProtocolOverrides");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI8, "UEFI", "Quirks");
+}
+
+void MainWindow::on_editSystemSerialNumber_textChanged(const QString& arg1) {
+#ifdef Q_OS_MAC
+  QProcess* p = new QProcess;
+  p->start(strAppExePath + "/Database/mac/macserial", QStringList()
+                                                          << "-i" << arg1);
+  p->waitForFinished();
+  ui->textMacInfo->clear();
+  QString result = p->readAll();
+  ui->textMacInfo->append(arg1 + " :");
+  ui->textMacInfo->append("");
+  ui->textMacInfo->append(result);
+#endif
 }

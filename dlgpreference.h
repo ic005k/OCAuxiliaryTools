@@ -40,7 +40,6 @@ class dlgPreference : public QDialog {
   void on_comboBoxNet_currentTextChanged(const QString &arg1);
   void on_comboBoxWeb_currentTextChanged(const QString &arg1);
   void on_chkShowVolName_clicked(bool checked);
-  void on_tableDatabase_itemChanged(QTableWidgetItem *item);
   void on_chkHideToolbar_stateChanged(int arg1);
   void on_chkDatabase_stateChanged(int arg1);
   void on_chkBackupEFI_stateChanged(int arg1);

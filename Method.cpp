@@ -1149,7 +1149,7 @@ void Method::generateEFI(QString file) {
 
   mw_one->setFocus();
   box.exec();
-  mw_one->ui->cboxFind->setFocus();
+  mw_one->ui->mycboxFind->setFocus();
   mw_one->openFile(pathTarget + "OC/Config.plist");
   mw_one->ui->actionUpgrade_OC->setEnabled(true);
 }

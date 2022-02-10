@@ -169,7 +169,7 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   menu->addAction(act);
   menu->addAction(actRename);
   connect(act, &QAction::triggered, [=]() {
-    mw_one->ui->cboxFind->lineEdit()->clear();
+    mw_one->ui->mycboxFind->lineEdit()->clear();
     tab->layout()->removeWidget(frame);
     delete (frame);
 
@@ -257,7 +257,7 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   menu->addAction(actRename);
 
   connect(act, &QAction::triggered, [=]() {
-    mw_one->ui->cboxFind->lineEdit()->clear();
+    mw_one->ui->mycboxFind->lineEdit()->clear();
     tab->layout()->removeWidget(frame);
     delete (frame);
 
@@ -311,22 +311,27 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
   isSmartKey = true;
   QStringList ResultsList;
 
-  QStringList listOCATKey, listSample, listSampleKey;
+  QStringList listOCAT, listOCATKey, listSample, listSampleKey;
+  QWidgetList listOCATWidget;
   listSample = get_KeyTypeValue(mapTatol, MainName, SubName);
   for (int i = 0; i < listSample.count(); i++) {
     QString str = listSample.at(i);
     listSampleKey.append(str.split("|").at(0));
   }
   for (int i = 0; i < listSample.count(); i++) {
-    qDebug() << listSample.at(i);
+    // qDebug() << listSample.at(i);
   }
 
   QObjectList listObj;
   listObj = MainWindow::getAllCheckBox(MainWindow::getAllUIControls(tab));
   for (int i = 0; i < listObj.count(); i++) {
     QCheckBox* chkbox = (QCheckBox*)listObj.at(i);
-    QString text = chkbox->text();
-    listOCATKey.append(text);
+    if (chkbox->objectName().mid(0, 3) == "chk") {
+      QString text = chkbox->text();
+      listOCAT.append(text + "|" + chkbox->objectName());
+      listOCATKey.append(text);
+      listOCATWidget.append(chkbox);
+    }
   }
   listObj.clear();
   listObj = MainWindow::getAllComboBox(MainWindow::getAllUIControls(tab));
@@ -335,7 +340,9 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
     QString ObjName = w->objectName();
     if (ObjName.mid(0, 4) == "cbox") {
       QString text = ObjName.replace("cbox", "");
+      listOCAT.append(text + "|" + w->objectName());
       listOCATKey.append(text);
+      listOCATWidget.append(w);
     }
   }
   listObj.clear();
@@ -347,24 +354,30 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
       QStringList strList = ObjName.split("_");
       ObjName = strList.at(0);
     }
-    QString obj1, obj2, obj3;
-    obj1 = ObjName;
-    obj2 = ObjName;
-    obj3 = ObjName;
-    QString text;
-    if (ObjName.mid(0, 4) == "edit" && ObjName.mid(0, 7) != "editInt" &&
-        ObjName.mid(0, 7) != "editDat") {
-      text = obj1.replace("edit", "");
-    }
-    if (ObjName.mid(0, 7) == "editDat") {
-      text = obj2.replace("editDat", "");
-    }
-    if (ObjName.mid(0, 7) == "editInt") {
-      text = obj3.replace("editInt", "");
-    }
+    if (ObjName.mid(0, 4) == "edit") {
+      QString obj, obj1, obj2, obj3;
+      obj = ObjName;
+      obj1 = ObjName;
+      obj2 = ObjName;
+      obj3 = ObjName;
+      QString text;
+      if (ObjName.mid(0, 4) == "edit" && ObjName.mid(0, 7) != "editInt" &&
+          ObjName.mid(0, 7) != "editDat") {
+        text = obj1.replace("edit", "");
+      }
+      if (ObjName.mid(0, 7) == "editDat") {
+        text = obj2.replace("editDat", "");
+      }
+      if (ObjName.mid(0, 7) == "editInt") {
+        text = obj3.replace("editInt", "");
+      }
 
-    listOCATKey.append(text);
+      listOCAT.append(text + "|" + obj);
+      listOCATKey.append(text);
+      listOCATWidget.append(w);
+    }
   }
+
   if (listOCATKey == listSampleKey) {
     qDebug() << MainName << "-->" << SubName << "Ok...";
   } else {
@@ -375,12 +388,19 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
           listSampleKey.removeAt(i);
           i--;
           listOCATKey.removeAt(j);
+          listOCAT.removeAt(j);
+          listOCATWidget.removeAt(j);
           j--;
         }
       }
     }
     if (listOCATKey.count() > 0) {
-      qDebug() << listOCATKey;
+      qDebug() << listOCATKey << listOCAT;
+      for (int i = 0; i < listOCAT.count(); i++) {
+        QString str = listOCAT.at(i);
+        QString obj = str.split("|").at(1);
+        QWidget* w = listOCATWidget.at(i);
+      }
     }
     if (listSampleKey.count() > 0) {
       qDebug() << listSampleKey;

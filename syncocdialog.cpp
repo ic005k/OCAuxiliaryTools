@@ -619,7 +619,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
         tr("The database file is incomplete and the upgrade cannot be "
            "completed."));
     box.exec();
-    mw_one->ui->cboxFind->setFocus();
+    mw_one->ui->mycboxFind->setFocus();
     return;
   }
 

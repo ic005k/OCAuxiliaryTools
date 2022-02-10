@@ -450,7 +450,6 @@ class MainWindow : public QMainWindow {
   void dataClassChange_dp();
   void dataClassChange_nv();
   void readResult();
-  void readResultSystemInfo();
   void readResultDiskInfo();
   void arch_addChange();
   void arch_ForceChange();
@@ -821,7 +820,7 @@ class MainWindow : public QMainWindow {
 
   void on_actionGo_to_the_next_triggered();
 
-  void on_cboxFind_currentTextChanged(const QString& arg1);
+  void on_mycboxFind_currentTextChanged(const QString& arg1);
 
   void on_listFind_currentRowChanged(int currentRow);
 
@@ -835,9 +834,9 @@ class MainWindow : public QMainWindow {
 
   void on_actionDiscussion_Forum_triggered();
 
-  void on_cboxTextColor_currentIndexChanged(int index);
+  void on_mycboxTextColor_currentIndexChanged(int index);
 
-  void on_cboxBackColor_currentIndexChanged(int index);
+  void on_mycboxBackColor_currentIndexChanged(int index);
 
   void on_editIntConsoleAttributes_textChanged(const QString& arg1);
 
@@ -849,9 +848,9 @@ class MainWindow : public QMainWindow {
 
   void on_btnROM_clicked();
 
-  void on_editPassInput_textChanged(const QString& arg1);
+  void on_myeditPassInput_textChanged(const QString& arg1);
 
-  void on_editPassInput_returnPressed();
+  void on_myeditPassInput_returnPressed();
 
   void on_actionOcvalidate_triggered();
 
@@ -967,7 +966,7 @@ class MainWindow : public QMainWindow {
 
   void on_actionDelete_triggered();
 
-  void on_cboxEmulate_currentTextChanged(const QString& arg1);
+  void on_mycboxEmulate_currentTextChanged(const QString& arg1);
 
   void on_btnImport_clicked();
 
@@ -980,6 +979,8 @@ class MainWindow : public QMainWindow {
   void on_actionNew_Key_Field_triggered();
 
   void on_btnCheckSN_clicked();
+
+  void on_editSystemSerialNumber_textChanged(const QString& arg1);
 
  private:
   bool isDrag;

@@ -72,7 +72,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="cboxFind">
+        <widget class="QComboBox" name="mycboxFind">
          <property name="minimumSize">
           <size>
            <width>260</width>
@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -2441,7 +2441,7 @@ Note: This quirk can also be used as an ugly workaround to buggy UEFI runtime se
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2882,7 +2882,7 @@ Note: This quirk can also be used as an ugly workaround to buggy UEFI runtime se
             <item row="0" column="0">
              <layout class="QGridLayout" name="gridLayout_36">
               <item row="1" column="1">
-               <widget class="QComboBox" name="cboxEmulate">
+               <widget class="QComboBox" name="mycboxEmulate">
                 <property name="editable">
                  <bool>false</bool>
                 </property>
@@ -4150,7 +4150,7 @@ Note: This option may not work well with System text renderer. Setting a backgro
                   </widget>
                  </item>
                  <item row="6" column="0">
-                  <widget class="QComboBox" name="cboxBackColor">
+                  <widget class="QComboBox" name="mycboxBackColor">
                    <item>
                     <property name="text">
                      <string>EFI_BACKGROUND_BLACK</string>
@@ -4194,7 +4194,7 @@ Note: This option may not work well with System text renderer. Setting a backgro
                   </widget>
                  </item>
                  <item row="4" column="0">
-                  <widget class="QComboBox" name="cboxTextColor">
+                  <widget class="QComboBox" name="mycboxTextColor">
                    <item>
                     <property name="text">
                      <string>EFI_BLACK</string>
@@ -5233,49 +5233,49 @@ Console logging prints less than all the other variants. Depending on the build 
                 </widget>
                </item>
                <item row="1" column="0" colspan="2">
-                <widget class="QCheckBox" name="chkT1">
+                <widget class="QCheckBox" name="mychkT1">
                  <property name="text">
                   <string>Enable logging, otherwise all log is discarded</string>
                  </property>
                 </widget>
                </item>
                <item row="2" column="0">
-                <widget class="QCheckBox" name="chkT2">
+                <widget class="QCheckBox" name="mychkT2">
                  <property name="text">
                   <string>Enable basic console (onscreen) logging</string>
                  </property>
                 </widget>
                </item>
                <item row="3" column="0">
-                <widget class="QCheckBox" name="chkT5">
+                <widget class="QCheckBox" name="mychkT5">
                  <property name="text">
                   <string>Enable UEFI variable logging</string>
                  </property>
                 </widget>
                </item>
                <item row="4" column="0">
-                <widget class="QCheckBox" name="chkT6">
+                <widget class="QCheckBox" name="mychkT6">
                  <property name="text">
                   <string>Enable non-volatile UEFI variable logging</string>
                  </property>
                 </widget>
                </item>
                <item row="5" column="0">
-                <widget class="QCheckBox" name="chkT4">
+                <widget class="QCheckBox" name="mychkT4">
                  <property name="text">
                   <string>Enable serial port logging</string>
                  </property>
                 </widget>
                </item>
                <item row="6" column="0">
-                <widget class="QCheckBox" name="chkT3">
+                <widget class="QCheckBox" name="mychkT3">
                  <property name="text">
                   <string>Enable logging to Data Hub</string>
                  </property>
                 </widget>
                </item>
                <item row="7" column="0">
-                <widget class="QCheckBox" name="chkT7">
+                <widget class="QCheckBox" name="mychkT7">
                  <property name="text">
                   <string>Enable logging to file</string>
                  </property>
@@ -6040,7 +6040,7 @@ Note: This functionality is still under development and is not ready for product
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="editPassInput">
+               <widget class="QLineEdit" name="myeditPassInput">
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -9453,7 +9453,7 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
              </widget>
              <widget class="QWidget" name="tabPlatformInfo6">
               <attribute name="title">
-               <string>Serialnfo</string>
+               <string>Seriallnfo</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_37">
                <property name="leftMargin">
@@ -9498,7 +9498,7 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>7</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>

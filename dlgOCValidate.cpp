@@ -36,7 +36,7 @@ dlgOCValidate::dlgOCValidate(QWidget* parent)
   connect(searchAction, &QAction::triggered, [=]() {
     QString str = ui->textEdit->textCursor().selectedText().trimmed();
 
-    mw_one->ui->cboxFind->setCurrentText(str);
+    mw_one->ui->mycboxFind->setCurrentText(str);
     mw_one->on_actionFind_triggered();
   });
 
