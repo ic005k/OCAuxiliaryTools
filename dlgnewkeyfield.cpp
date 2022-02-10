@@ -14,6 +14,7 @@ extern bool blDEV;
 extern Method* mymethod;
 extern QString SaveFileName;
 bool isSmartKey;
+QWidgetList listOCATWidgetHideList;
 
 dlgNewKeyField::dlgNewKeyField(QWidget* parent)
     : QDialog(parent), ui(new Ui::dlgNewKeyField) {
@@ -313,6 +314,7 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
 
   QStringList listOCAT, listOCATKey, listSample, listSampleKey;
   QWidgetList listOCATWidget;
+
   listSample = get_KeyTypeValue(mapTatol, MainName, SubName);
   for (int i = 0; i < listSample.count(); i++) {
     QString str = listSample.at(i);
@@ -397,9 +399,13 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
     if (listOCATKey.count() > 0) {
       qDebug() << listOCATKey << listOCAT;
       for (int i = 0; i < listOCAT.count(); i++) {
-        QString str = listOCAT.at(i);
-        QString obj = str.split("|").at(1);
         QWidget* w = listOCATWidget.at(i);
+        w->setHidden(true);
+        bool re = false;
+        for (int n = 0; n < listOCATWidgetHideList.count(); n++) {
+          if (w == listOCATWidgetHideList.at(n)) re = true;
+        }
+        if (!re) listOCATWidgetHideList.append(w);
       }
     }
     if (listSampleKey.count() > 0) {

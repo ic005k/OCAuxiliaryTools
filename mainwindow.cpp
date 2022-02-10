@@ -29,9 +29,9 @@ QVector<QCheckBox*> chkDisplayLevel, chk_ScanPolicy, chk_PickerAttributes,
     chk_ExposeSensitiveData, chk_Target;
 
 extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
-    strOCFromDev;
+    strACPI, strKexts, strDrivers, strTools, strOCFromDev;
 extern bool blDEV;
-extern QString strACPI, strKexts, strDrivers, strTools;
+extern QWidgetList listOCATWidgetHideList;
 
 void MainWindow::changeOpenCore(bool blDEV) {
   QSettings Reg(strIniFile, QSettings::IniFormat);
@@ -57,7 +57,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
       lblVer->setText("  OpenCore " + ocVer);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVer);
-      dlgSyncOC->ui->btnUpdateOC->setHidden(false);
+
     } else {
       pathSource = dataBaseDir + "DEBUG/";
       ocVer = ocVer.replace(" " + tr("DEBUG"), "");
@@ -65,7 +65,6 @@ void MainWindow::changeOpenCore(bool blDEV) {
       lblVer->setText("  OpenCore " + ocVer);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVer);
-      dlgSyncOC->ui->btnUpdateOC->setHidden(false);
     }
   } else {
     if (!linuxOS)
@@ -82,7 +81,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
       lblVer->setText("  OpenCore " + ocVerDev);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVerDev);
-      dlgSyncOC->ui->btnUpdateOC->setHidden(false);
+
     } else {
       pathSource = dataBaseDir + "DEBUG/";
       ocVerDev = ocVerDev.replace(" " + tr("DEBUG"), "");
@@ -90,9 +89,13 @@ void MainWindow::changeOpenCore(bool blDEV) {
       lblVer->setText("  OpenCore " + ocVerDev);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVerDev);
-      dlgSyncOC->ui->btnUpdateOC->setHidden(false);
     }
   }
+
+  for (int i = 0; i < listOCATWidgetHideList.count(); i++) {
+    listOCATWidgetHideList.at(i)->setHidden(false);
+  }
+  smart_UpdateKeyField();
 
   if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
     title = lblVer->text() + "      ";
@@ -138,7 +141,6 @@ MainWindow::MainWindow(QWidget* parent)
   init_Widgets();
   setUIMargin();
   init_MainUI();
-  smart_UpdateKeyField();
   init_setWindowModified();
   init_hardware_info();
   initui_booter();
