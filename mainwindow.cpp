@@ -1694,10 +1694,8 @@ void MainWindow::initui_UEFI() {
   ui->lblSystemAudioVolume->setText("");
 
   // Drivers
-  Method::init_Table(ui->table_uefi_drivers,
-                     Method::get_HorizontalHeaderList("UEFI", "Drivers"));
   QStringList list1 = Method::get_HorizontalHeaderList("UEFI", "Drivers");
-  qDebug() << list1;
+  Method::init_Table(ui->table_uefi_drivers, list1);
 
   // Input
   ui->cboxKeySupportMode->addItem("Auto");
@@ -3314,9 +3312,31 @@ void MainWindow::addEFIDrivers(QStringList FileName) {
       mymethod->delDuplication(FileName, ui->table_uefi_drivers, 0);
   FileName.clear();
   FileName = tempList;
-
+  int colCount = ui->table_uefi_drivers->columnCount();
   for (int i = 0; i < FileName.count(); i++) {
     int row = ui->table_uefi_drivers->rowCount() + 1;
+    QString strBaseName = QFileInfo(FileName.at(i)).fileName();
+    if (colCount == 1) {
+      ui->table_uefi_drivers->setRowCount(row);
+      ui->table_uefi_drivers->setItem(row - 1, 0,
+                                      new QTableWidgetItem(strBaseName));
+    }
+    if (colCount > 1) {
+      ui->table_uefi_drivers->setRowCount(row);
+      for (int n = 0; n < colCount; n++) {
+        QString txt = ui->table_uefi_drivers->horizontalHeaderItem(n)->text();
+        if (txt == "Path") {
+          ui->table_uefi_drivers->setItem(row - 1, n,
+                                          new QTableWidgetItem(strBaseName));
+        } else if (Method::isBool(txt)) {
+          init_enabled_data(ui->table_uefi_drivers, row - 1, n, "true");
+        } else {
+          ui->table_uefi_drivers->setItem(row - 1, n, new QTableWidgetItem(""));
+        }
+      }
+    }
+
+    /*int row = ui->table_uefi_drivers->rowCount() + 1;
     QString strBaseName = QFileInfo(FileName.at(i)).fileName();
     ui->table_uefi_drivers->setRowCount(row);
     ui->table_uefi_drivers->setItem(row - 1, 0,
@@ -3324,7 +3344,7 @@ void MainWindow::addEFIDrivers(QStringList FileName) {
     init_enabled_data(ui->table_uefi_drivers, row - 1, 1, "true");
     ui->table_uefi_drivers->setItem(row - 1, 2, new QTableWidgetItem(""));
 
-    ui->table_uefi_drivers->setItem(row - 1, 3, new QTableWidgetItem(""));
+    ui->table_uefi_drivers->setItem(row - 1, 3, new QTableWidgetItem(""));*/
 
     ui->table_uefi_drivers->setFocus();
     ui->table_uefi_drivers->setCurrentCell(row - 1, 0);
@@ -5570,7 +5590,14 @@ void MainWindow::init_MainUI() {
     }
     if (!re) dlgNewKeyField::readNewKey(tab, Key);
   }
+}
 
+void MainWindow::init_Widgets() {
+  strAppExePath = qApp->applicationDirPath();
+  strConfigPath = QDir::homePath() + "/.config/" + strAppName + "/";
+
+  QSettings Reg(strIniFile, QSettings::IniFormat);
+  blDEV = Reg.value("OpenCoreDEV", false).toBool();
   QString fileSample;
   if (blDEV)
     fileSample = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
@@ -5586,11 +5613,6 @@ void MainWindow::init_MainUI() {
                                  "integrity of the app."));
     close();
   }
-}
-
-void MainWindow::init_Widgets() {
-  strAppExePath = qApp->applicationDirPath();
-  strConfigPath = QDir::homePath() + "/.config/" + strAppName + "/";
 
   mymethod = new Method(this);
   aboutDlg = new aboutDialog(this);
