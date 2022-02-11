@@ -522,157 +522,72 @@ void MainWindow::initui_acpi() {
   mymethod->init_PresetQuirks(ui->comboBoxACPI, "ACPI-Quirks.txt");
 
   QTableWidgetItem* id0;
-  QStringList fieldList;
+  QStringList listHeaders;
 
   // ACPI-Add
-  ui->table_acpi_add->setColumnCount(3);
-
-  fieldList.clear();
-  fieldList.append(tr("Path"));
-  fieldList.append(tr("Enabled"));
-  fieldList.append(tr("Comment"));
-  ui->table_acpi_add->setHorizontalHeaderLabels(fieldList);
-  ui->table_acpi_add->setAlternatingRowColors(true);  //底色交替显示
-  ui->btnUp->setVisible(true);
-  ui->btnDown->setVisible(true);
+  listHeaders.clear();
+  listHeaders = QStringList() << "Path"
+                              << "Enabled"
+                              << "Comment";
+  Method::init_Table(ui->table_acpi_add, listHeaders);
 
   // ACPI-Delete
-  id0 = new QTableWidgetItem(tr("TableSignature"));
-  ui->table_acpi_del->setHorizontalHeaderItem(0, id0);
-
-  // ui->table_acpi_del->setColumnWidth(1, 350);
-  id0 = new QTableWidgetItem(tr("OemTableId"));
-  ui->table_acpi_del->setHorizontalHeaderItem(1, id0);
-
-  id0 = new QTableWidgetItem(tr("TableLength"));
-  ui->table_acpi_del->setHorizontalHeaderItem(2, id0);
-
-  id0 = new QTableWidgetItem(tr("All"));
-  ui->table_acpi_del->setHorizontalHeaderItem(3, id0);
-
-  id0 = new QTableWidgetItem(tr("Enabled"));
-  ui->table_acpi_del->setHorizontalHeaderItem(4, id0);
-
-  id0 = new QTableWidgetItem(tr("Comment"));
-  ui->table_acpi_del->setHorizontalHeaderItem(5, id0);
-
-  ui->table_acpi_del->setAlternatingRowColors(true);
+  listHeaders.clear();
+  listHeaders = QStringList() << "Enabled"
+                              << "All"
+                              << "TableSignature"
+                              << "OemTableId"
+                              << "TableLength"
+                              << "Comment";
+  Method::init_Table(ui->table_acpi_del, listHeaders);
 
   // ACPI-Patch
-  ui->table_acpi_patch->setColumnCount(14);
-
-  id0 = new QTableWidgetItem(tr("TableSignature"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(0, id0);
-
-  id0 = new QTableWidgetItem(tr("OemTableId"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(1, id0);
-
-  id0 = new QTableWidgetItem(tr("TableLength"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(2, id0);
-
-  id0 = new QTableWidgetItem(tr("Find"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(3, id0);
-
-  id0 = new QTableWidgetItem(tr("Replace"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(4, id0);
-
-  id0 = new QTableWidgetItem(tr("Comment"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(5, id0);
-
-  id0 = new QTableWidgetItem(tr("Mask"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(6, id0);
-
-  id0 = new QTableWidgetItem(tr("ReplaceMask"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(7, id0);
-
-  id0 = new QTableWidgetItem(tr("Count"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(8, id0);
-
-  id0 = new QTableWidgetItem(tr("Limit"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(9, id0);
-
-  id0 = new QTableWidgetItem(tr("Skip"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(10, id0);
-
-  id0 = new QTableWidgetItem(tr("Enabled"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(11, id0);
-
-  id0 = new QTableWidgetItem(tr("Base"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(12, id0);
-
-  id0 = new QTableWidgetItem(tr("BaseSkip"));
-  ui->table_acpi_patch->setHorizontalHeaderItem(13, id0);
-
-  ui->table_acpi_patch->setAlternatingRowColors(true);
+  listHeaders.clear();
+  listHeaders = QStringList() << "Enabled"
+                              << "TableSignature"
+                              << "TableLength"
+                              << "OemTableId"
+                              << "Find"
+                              << "Replace"
+                              << "Count"
+                              << "Skip"
+                              << "Base"
+                              << "BaseSkip"
+                              << "Mask"
+                              << "ReplaceMask"
+                              << "Limit"
+                              << "Comment";
+  Method::init_Table(ui->table_acpi_patch, listHeaders);
 }
 
 void MainWindow::initui_booter() {
-  QTableWidgetItem* id0;
+  QStringList listHeaders;
 
   mymethod->init_PresetQuirks(ui->comboBoxBooter, "Booter-Quirks.txt");
 
-  // Patch
-
-  ui->table_Booter_patch->setColumnCount(11);
-
-  ui->table_Booter_patch->setColumnWidth(0, 300);
-  id0 = new QTableWidgetItem(tr("Identifier"));
-  ui->table_Booter_patch->setHorizontalHeaderItem(0, id0);
-
-  ui->table_Booter_patch->setColumnWidth(1, 350);
-  id0 = new QTableWidgetItem(tr("Comment"));
-  ui->table_Booter_patch->setHorizontalHeaderItem(1, id0);
-
-  ui->table_Booter_patch->setColumnWidth(2, 300);
-  id0 = new QTableWidgetItem(tr("Find"));
-  ui->table_Booter_patch->setHorizontalHeaderItem(2, id0);
-
-  ui->table_Booter_patch->setColumnWidth(3, 300);
-  id0 = new QTableWidgetItem(tr("Replace"));
-  ui->table_Booter_patch->setHorizontalHeaderItem(3, id0);
-
-  ui->table_Booter_patch->setColumnWidth(4, 350);
-  id0 = new QTableWidgetItem(tr("Mask"));
-  ui->table_Booter_patch->setHorizontalHeaderItem(4, id0);
-
-  ui->table_Booter_patch->setColumnWidth(5, 350);
-  id0 = new QTableWidgetItem(tr("ReplaceMask"));
-  ui->table_Booter_patch->setHorizontalHeaderItem(5, id0);
-
-  ui->table_Booter_patch->setColumnWidth(0, 350);
-  id0 = new QTableWidgetItem(tr("Count"));
-  ui->table_Booter_patch->setHorizontalHeaderItem(6, id0);
-
-  ui->table_Booter_patch->setColumnWidth(0, 350);
-  id0 = new QTableWidgetItem(tr("Limit"));
-  ui->table_Booter_patch->setHorizontalHeaderItem(7, id0);
-
-  ui->table_Booter_patch->setColumnWidth(0, 350);
-  id0 = new QTableWidgetItem(tr("Skip"));
-  ui->table_Booter_patch->setHorizontalHeaderItem(8, id0);
-
-  ui->table_Booter_patch->setColumnWidth(0, 350);
-  id0 = new QTableWidgetItem(tr("Enabled"));
-  ui->table_Booter_patch->setHorizontalHeaderItem(9, id0);
-
-  id0 = new QTableWidgetItem(tr("Arch"));
-  ui->table_Booter_patch->setHorizontalHeaderItem(10, id0);
-
-  ui->table_Booter_patch->setAlternatingRowColors(true);
-
   // MmioWhitelist
+  listHeaders.clear();
+  listHeaders = QStringList() << "Address"
+                              << "Enabled"
+                              << "Comment";
 
-  ui->table_booter->setColumnWidth(0, 450);
-  id0 = new QTableWidgetItem(tr("Address"));
-  ui->table_booter->setHorizontalHeaderItem(0, id0);
+  Method::init_Table(ui->table_booter, listHeaders);
 
-  id0 = new QTableWidgetItem(tr("Enabled"));
-  ui->table_booter->setHorizontalHeaderItem(1, id0);
+  // Patch
+  listHeaders.clear();
+  listHeaders = QStringList() << "Arch"
+                              << "Comment"
+                              << "Count"
+                              << "Enabled"
+                              << "Find"
+                              << "Identifier"
+                              << "Limit"
+                              << "Mask"
+                              << "Replace"
+                              << "ReplaceMask"
+                              << "Skip";
 
-  id0 = new QTableWidgetItem(tr("Comment"));
-  ui->table_booter->setHorizontalHeaderItem(2, id0);
-
-  ui->table_booter->setAlternatingRowColors(true);
+  Method::init_Table(ui->table_Booter_patch, listHeaders);
 }
 
 void MainWindow::ParserBooter(QVariantMap map) {
@@ -6499,9 +6414,13 @@ void MainWindow::on_btnBooterPatchDel_clicked() {
 void MainWindow::on_table_Booter_patch_cellClicked(int row, int column) {
   if (!ui->table_Booter_patch->currentIndex().isValid()) return;
 
-  enabled_change(ui->table_Booter_patch, row, column, 9);
+  if (ui->table_Booter_patch->horizontalHeaderItem(column)->text() ==
+      "Enabled") {
+    int cc = column;
+    enabled_change(ui->table_Booter_patch, row, column, cc);
+  }
 
-  if (column == 10) {
+  if (ui->table_Booter_patch->horizontalHeaderItem(column)->text() == "Arch") {
     cboxArch = new QComboBox;
     cboxArch->setEditable(true);
     cboxArch->addItem("Any");
@@ -6514,7 +6433,7 @@ void MainWindow::on_table_Booter_patch_cellClicked(int row, int column) {
     c_row = row;
 
     ui->table_Booter_patch->setCellWidget(row, column, cboxArch);
-    cboxArch->setCurrentText(ui->table_Booter_patch->item(row, 10)->text());
+    cboxArch->setCurrentText(ui->table_Booter_patch->item(row, column)->text());
   }
 
   setStatusBarText(ui->table_Booter_patch);
@@ -8928,10 +8847,9 @@ void MainWindow::set_AutoColWidth(QTableWidget* w, bool autoColWidth) {
   if (autoColWidth) {
     for (int y = 0; y < w->columnCount(); y++) {
       QString item = w->horizontalHeaderItem(y)->text();
-      if (item != tr("Enabled") && item != tr("Arch") && item != tr("All") &&
-          item != tr("Type") && item != tr("TextMode") &&
-          item != tr("Auxiliary") && item != tr("RealPath") &&
-          item != tr("Class")) {
+      if (item != "Enabled" && item != "Arch" && item != "All" &&
+          item != "Type" && item != "TextMode" && item != "Auxiliary" &&
+          item != "RealPath" && item != "Class") {
         w->horizontalHeader()->setSectionResizeMode(
             y, QHeaderView::ResizeToContents);
       }

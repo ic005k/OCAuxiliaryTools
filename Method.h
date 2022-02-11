@@ -129,6 +129,7 @@ class Method : public QMainWindow {
   static bool isData(QString strCol);
   static bool isBool(QString strCol);
   static void set_TableData(QTableWidget *t, QVariantList mapList);
+  static void init_Table(QTableWidget *t, QStringList listHeaders);
  public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();

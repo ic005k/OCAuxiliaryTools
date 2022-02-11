@@ -2366,3 +2366,16 @@ bool Method::isBool(QString strCol) {
   }
   return false;
 }
+
+void Method::init_Table(QTableWidget* t, QStringList listHeaders) {
+  t->setColumnCount(listHeaders.count());
+  t->setHorizontalHeaderLabels(listHeaders);
+  t->setAlternatingRowColors(true);
+
+  for (int i = 0; i < listHeaders.count(); i++) {
+    QString txt = t->horizontalHeaderItem(i)->text();
+    if (txt == "Arch" || txt == "Enabled") {
+      // t->setColumnWidth(i, 150);
+    }
+  }
+}
