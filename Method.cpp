@@ -14,6 +14,7 @@ extern QString SaveFileName, strIniFile, strAppName, strAppExePath;
 extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
     strOCFromDev;
 extern bool blDEV;
+extern QVariantMap mapTatol;
 
 QString strACPI;
 QString strKexts;
@@ -2368,14 +2369,47 @@ bool Method::isBool(QString strCol) {
 }
 
 void Method::init_Table(QTableWidget* t, QStringList listHeaders) {
-  t->setColumnCount(listHeaders.count());
-  t->setHorizontalHeaderLabels(listHeaders);
+  if (listHeaders.count() == 0) {
+    t->setColumnCount(1);
+    t->setHorizontalHeaderLabels(QStringList() << "");
+    t->horizontalHeader()->setStretchLastSection(true);
+  } else {
+    t->setColumnCount(listHeaders.count());
+
+    if (listHeaders.removeOne("MinKernel")) listHeaders.append("MinKernel");
+    if (listHeaders.removeOne("MaxKernel")) listHeaders.append("MaxKernel");
+    if (listHeaders.removeOne("TableSignature"))
+      listHeaders.append("TableSignature");
+    if (listHeaders.removeOne("Arch")) listHeaders.append("Arch");
+    if (listHeaders.removeOne("All")) listHeaders.append("All");
+
+    if (listHeaders.removeOne("Path")) listHeaders.insert(0, "Path");
+    if (listHeaders.removeOne("Identifier"))
+      listHeaders.insert(0, "Identifier");
+    if (listHeaders.removeOne("Name")) listHeaders.insert(0, "Name");
+
+    t->setHorizontalHeaderLabels(listHeaders);
+  }
   t->setAlternatingRowColors(true);
 
   for (int i = 0; i < listHeaders.count(); i++) {
     QString txt = t->horizontalHeaderItem(i)->text();
-    if (txt == "Arch" || txt == "Enabled") {
-      // t->setColumnWidth(i, 150);
+    if (txt == "Type") {
+      t->setColumnWidth(i, 150);
     }
   }
+}
+
+QStringList Method::get_HorizontalHeaderList(QString main, QString sub) {
+  QStringList list;
+  QVariantMap mapMain, mapSub;
+  QVariantList maplist;
+  mapMain = mapTatol[main].toMap();
+  maplist = mapMain[sub].toList();
+  if (maplist.count() > 0) {
+    mapSub = maplist.at(0).toMap();
+    list = mapSub.keys();
+    return list;
+  }
+  return list;
 }

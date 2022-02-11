@@ -130,6 +130,7 @@ class Method : public QMainWindow {
   static bool isBool(QString strCol);
   static void set_TableData(QTableWidget *t, QVariantList mapList);
   static void init_Table(QTableWidget *t, QStringList listHeaders);
+  static QStringList get_HorizontalHeaderList(QString main, QString sub);
  public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();
