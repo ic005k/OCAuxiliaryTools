@@ -44,15 +44,7 @@
                     <key>Enabled</key>
                     <true/>
                     <key>Path</key>
-                    <string>SSDT-TPD0-XiaoMiRuby.aml</string>
-                </dict>
-                <dict>
-                    <key>Comment</key>
-                    <string></string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Path</key>
-                    <string>SSDT-DDGPU.aml</string>
+                    <string>SSDT-TPD0-XiaomiRuby.aml</string>
                 </dict>
             </array>
             <key>Delete</key>
@@ -895,7 +887,7 @@
                     <key>SystemAudioVolumeDB</key>
                     <data>4g==</data>
                     <key>boot-args</key>
-                    <string>debug=0x100 alcid=69</string>
+                    <string>debug=0x100 alcid=69 -wegnoegpu</string>
                     <key>prev-lang:kbd</key>
                     <data>emgtSGFuczoyNTI=</data>
                     <key>run-efi-updater</key>
