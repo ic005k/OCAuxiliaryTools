@@ -521,42 +521,42 @@ void MainWindow::initui_acpi() {
 
   mymethod->init_PresetQuirks(ui->comboBoxACPI, "ACPI-Quirks.txt");
 
-  QTableWidgetItem* id0;
   QStringList listHeaders;
-
+  QVariantMap map = mapTatol["ACPI"].toMap();
+  QVariantList map_list;
+  QVariantMap mapSub;
   // ACPI-Add
   listHeaders.clear();
-  listHeaders = QStringList() << "Path"
-                              << "Enabled"
-                              << "Comment";
+  map_list.clear();
+  mapSub.clear();
+  map_list = map["Add"].toList();
+  if (map_list.count() > 0) {
+    mapSub = map_list.at(0).toMap();
+    listHeaders = mapSub.keys();
+  }
   Method::init_Table(ui->table_acpi_add, listHeaders);
 
   // ACPI-Delete
   listHeaders.clear();
-  listHeaders = QStringList() << "Enabled"
-                              << "All"
-                              << "TableSignature"
-                              << "OemTableId"
-                              << "TableLength"
-                              << "Comment";
+  map_list.clear();
+  mapSub.clear();
+  map_list = map["Delete"].toList();
+  if (map_list.count() > 0) {
+    mapSub = map_list.at(0).toMap();
+    listHeaders = mapSub.keys();
+  }
   Method::init_Table(ui->table_acpi_del, listHeaders);
 
   // ACPI-Patch
   listHeaders.clear();
-  listHeaders = QStringList() << "Enabled"
-                              << "TableSignature"
-                              << "TableLength"
-                              << "OemTableId"
-                              << "Find"
-                              << "Replace"
-                              << "Count"
-                              << "Skip"
-                              << "Base"
-                              << "BaseSkip"
-                              << "Mask"
-                              << "ReplaceMask"
-                              << "Limit"
-                              << "Comment";
+  map_list.clear();
+  mapSub.clear();
+  map_list = map["Patch"].toList();
+  if (map_list.count() > 0) {
+    mapSub = map_list.at(0).toMap();
+    listHeaders = mapSub.keys();
+  }
+
   Method::init_Table(ui->table_acpi_patch, listHeaders);
 }
 
@@ -2628,7 +2628,8 @@ QByteArray MainWindow::HexStringToByteArray(QString HexString) {
 void MainWindow::on_table_acpi_add_cellClicked(int row, int column) {
   if (!ui->table_acpi_add->currentIndex().isValid()) return;
 
-  enabled_change(ui->table_acpi_add, row, column, 1);
+  QString txt = ui->table_acpi_add->horizontalHeaderItem(column)->text();
+  if (txt == "Enabled") enabled_change(ui->table_acpi_add, row, column, column);
 
   setStatusBarText(ui->table_acpi_add);
 }
@@ -2668,8 +2669,11 @@ void MainWindow::enabled_change(QTableWidget* table, int row, int column,
 void MainWindow::on_table_acpi_del_cellClicked(int row, int column) {
   if (!ui->table_acpi_del->currentIndex().isValid()) return;
 
-  enabled_change(ui->table_acpi_del, row, column, 3);
-  enabled_change(ui->table_acpi_del, row, column, 4);
+  QString txt = ui->table_acpi_del->horizontalHeaderItem(column)->text();
+  if (txt == "All" || txt == "Enabled") {
+    enabled_change(ui->table_acpi_del, row, column, column);
+    // enabled_change(ui->table_acpi_del, row, column, 4);
+  }
 
   setStatusBarText(ui->table_acpi_del);
 }
@@ -2708,7 +2712,9 @@ void MainWindow::setStatusBarText(QTableWidget* table) {
 void MainWindow::on_table_acpi_patch_cellClicked(int row, int column) {
   if (!ui->table_acpi_patch->currentIndex().isValid()) return;
 
-  enabled_change(ui->table_acpi_patch, row, column, 11);
+  QString txt = ui->table_acpi_patch->horizontalHeaderItem(column)->text();
+  if (txt == "Enabled")
+    enabled_change(ui->table_acpi_patch, row, column, column);
 
   setStatusBarText(ui->table_acpi_patch);
 }
@@ -5891,7 +5897,25 @@ void MainWindow::init_MainUI() {
 }
 
 void MainWindow::init_Widgets() {
+  strAppExePath = qApp->applicationDirPath();
   strConfigPath = QDir::homePath() + "/.config/" + strAppName + "/";
+
+  QString fileSample;
+  if (blDEV)
+    fileSample = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
+  else
+    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
+  QFile file(fileSample);
+  if (file.exists())
+    mapTatol = PListParser::parsePList(&file).toMap();
+  else {
+    QMessageBox::critical(this, "",
+                          fileSample + "\n\n" +
+                              tr("The file does not exist, please check the "
+                                 "integrity of the app."));
+    close();
+  }
+
   mymethod = new Method(this);
   aboutDlg = new aboutDialog(this);
   myDatabase = new dlgDatabase(this);
@@ -5906,7 +5930,6 @@ void MainWindow::init_Widgets() {
   myDlgKernelPatch = new dlgKernelPatch(this);
   myDlgPreference = new dlgPreference(this);
   myDlgNewKeyField = new dlgNewKeyField(this);
-  strAppExePath = qApp->applicationDirPath();
 
   timer = new QTimer(this);
   connect(timer, SIGNAL(timeout()), this, SLOT(updateStatus()));
@@ -7134,10 +7157,10 @@ void MainWindow::on_table_dp_del0_cellDoubleClicked(int row, int column) {
 }
 
 void MainWindow::on_table_acpi_add_cellDoubleClicked(int row, int column) {
-  if (column != 1) {
+  QString txt = ui->table_acpi_add->horizontalHeaderItem(column)->text();
+  if (txt != "Enabled") {
     myTable = new QTableWidget;
     myTable = ui->table_acpi_add;
-
     initLineEdit(myTable, row, column, row, column);
   }
 }
@@ -7155,7 +7178,8 @@ void MainWindow::on_table_acpi_del_cellDoubleClicked(int row, int column) {
   myTable = new QTableWidget;
   myTable = ui->table_acpi_del;
 
-  if (column != 3 && column != 4)
+  QString txt = ui->table_acpi_del->horizontalHeaderItem(column)->text();
+  if (txt != "All" && txt != "Enabled")
     initLineEdit(myTable, row, column, row, column);
 }
 
@@ -7163,7 +7187,8 @@ void MainWindow::on_table_acpi_patch_cellDoubleClicked(int row, int column) {
   myTable = new QTableWidget;
   myTable = ui->table_acpi_patch;
 
-  if (column != 11) initLineEdit(myTable, row, column, row, column);
+  QString txt = ui->table_acpi_patch->horizontalHeaderItem(column)->text();
+  if (txt != "Enabled") initLineEdit(myTable, row, column, row, column);
 }
 
 void MainWindow::on_table_booter_cellDoubleClicked(int row, int column) {
@@ -10600,14 +10625,6 @@ void MainWindow::smart_UpdateKeyField() {
   QSettings Reg(strIniFile, QSettings::IniFormat);
   if (!Reg.value("SmartKey").toBool()) return;
 
-  QString fileSample;
-  if (blDEV)
-    fileSample = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
-  else
-    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
-
-  QFile file(fileSample);
-  QVariantMap mapTatol = PListParser::parsePList(&file).toMap();
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabACPI4, "ACPI", "Quirks");
 
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabBooter3, "Booter",

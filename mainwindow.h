@@ -108,7 +108,7 @@ class MainWindow : public QMainWindow {
   QStringList listNVRAMLs;
   QStringList listDPAdd;
   QStringList listDPDel;
-
+  QVariantMap mapTatol;
   QString strConfigPath;
   void updateIconStatus();
   QTimer* timer;
