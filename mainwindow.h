@@ -374,7 +374,8 @@ class MainWindow : public QMainWindow {
   void setWM();
   void smart_UpdateKeyField();
   void set_AutoColWidth(QTableWidget* w, bool autoColWidth);
- public slots:
+  void set_InitLineEdit(QTableWidget *t, int row, int column);
+public slots:
   void DisplayLevel();
   void ScanPolicy();
   void PickerAttributes();

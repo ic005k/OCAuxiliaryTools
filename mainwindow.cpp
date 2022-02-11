@@ -2722,7 +2722,10 @@ void MainWindow::on_table_acpi_patch_cellClicked(int row, int column) {
 void MainWindow::on_table_booter_cellClicked(int row, int column) {
   if (!ui->table_booter->currentIndex().isValid()) return;
 
-  enabled_change(ui->table_booter, row, column, 1);
+  QString txt = ui->table_booter->horizontalHeaderItem(column)->text();
+  if (txt == "Enabled") {
+    enabled_change(ui->table_booter, row, column, 1);
+  }
 
   setStatusBarText(ui->table_booter);
 }
@@ -6439,8 +6442,7 @@ void MainWindow::on_table_Booter_patch_cellClicked(int row, int column) {
 
   if (ui->table_Booter_patch->horizontalHeaderItem(column)->text() ==
       "Enabled") {
-    int cc = column;
-    enabled_change(ui->table_Booter_patch, row, column, cc);
+    enabled_change(ui->table_Booter_patch, row, column, column);
   }
 
   if (ui->table_Booter_patch->horizontalHeaderItem(column)->text() == "Arch") {
@@ -7157,12 +7159,7 @@ void MainWindow::on_table_dp_del0_cellDoubleClicked(int row, int column) {
 }
 
 void MainWindow::on_table_acpi_add_cellDoubleClicked(int row, int column) {
-  QString txt = ui->table_acpi_add->horizontalHeaderItem(column)->text();
-  if (txt != "Enabled") {
-    myTable = new QTableWidget;
-    myTable = ui->table_acpi_add;
-    initLineEdit(myTable, row, column, row, column);
-  }
+  set_InitLineEdit(ui->table_acpi_add, row, column);
 }
 
 void MainWindow::setTableEditTriggers() {
@@ -7175,162 +7172,97 @@ void MainWindow::setTableEditTriggers() {
 }
 
 void MainWindow::on_table_acpi_del_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_acpi_del;
-
-  QString txt = ui->table_acpi_del->horizontalHeaderItem(column)->text();
-  if (txt != "All" && txt != "Enabled")
-    initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_acpi_del, row, column);
 }
 
 void MainWindow::on_table_acpi_patch_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_acpi_patch;
-
-  QString txt = ui->table_acpi_patch->horizontalHeaderItem(column)->text();
-  if (txt != "Enabled") initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_acpi_patch, row, column);
 }
 
 void MainWindow::on_table_booter_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_booter;
-
-  if (column != 1) initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_booter, row, column);
 }
 
 void MainWindow::on_table_Booter_patch_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_Booter_patch;
+  set_InitLineEdit(ui->table_Booter_patch, row, column);
+}
 
-  if (column != 9 && column != 10)
+void MainWindow::set_InitLineEdit(QTableWidget* t, int row, int column) {
+  QString txt = t->horizontalHeaderItem(column)->text();
+  if (txt != "Enabled" && txt != "Arch" && txt != "All") {
+    myTable = new QTableWidget;
+    myTable = t;
     initLineEdit(myTable, row, column, row, column);
+  }
 }
 
 void MainWindow::on_table_kernel_add_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_kernel_add;
-
-  if (column != 6 && column != 7)
-    initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_kernel_add, row, column);
 }
 
 void MainWindow::on_table_kernel_block_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_kernel_block;
-
-  if (column != 4 && column != 5)
-    initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_kernel_block, row, column);
 }
 
 void MainWindow::on_table_kernel_Force_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_kernel_Force;
-
-  if (column != 7 && column != 8)
-    initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_kernel_Force, row, column);
 }
 
 void MainWindow::on_table_kernel_patch_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_kernel_patch;
-
-  if (column != 12 && column != 13)
-    initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_kernel_patch, row, column);
 }
 
 void MainWindow::on_tableBlessOverride_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->tableBlessOverride;
-
-  initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->tableBlessOverride, row, column);
 }
 
 void MainWindow::on_tableEntries_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->tableEntries;
-
-  if (column != 4 && column != 5 && column != 6)
-    initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->tableEntries, row, column);
 }
 
 void MainWindow::on_tableTools_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->tableTools;
-
-  if (column != 4 && column != 5 && column != 6 && column != 7)
-    initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->tableTools, row, column);
 }
 
 void MainWindow::on_table_nv_add0_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_nv_add0;
-
-  initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_nv_add0, row, column);
 }
 
 void MainWindow::on_table_nv_add_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_nv_add;
-
-  if (column != 1) initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_nv_add, row, column);
 }
 
 void MainWindow::on_table_nv_del0_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_nv_del0;
-
-  initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_nv_del0, row, column);
 }
 
 void MainWindow::on_table_nv_del_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_nv_del;
-
-  initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_nv_del, row, column);
 }
 
 void MainWindow::on_table_nv_ls0_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_nv_ls0;
-
-  initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_nv_ls0, row, column);
 }
 
 void MainWindow::on_table_nv_ls_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_nv_ls;
-
-  initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_nv_ls, row, column);
 }
 
 void MainWindow::on_tableDevices_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->tableDevices;
-
-  initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->tableDevices, row, column);
 }
 
 void MainWindow::on_table_uefi_drivers_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_uefi_drivers;
-
-  initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_uefi_drivers, row, column);
 }
 
 void MainWindow::on_table_uefi_ReservedMemory_cellDoubleClicked(int row,
                                                                 int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_uefi_ReservedMemory;
-
-  if (column != 3 && column != 4)
-    initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_uefi_ReservedMemory, row, column);
 }
 
 void MainWindow::on_table_dp_del_cellDoubleClicked(int row, int column) {
-  myTable = new QTableWidget;
-  myTable = ui->table_dp_del;
-
-  initLineEdit(myTable, row, column, row, column);
+  set_InitLineEdit(ui->table_dp_del, row, column);
 }
 
 void MainWindow::on_actionNewWindow_triggered() {
