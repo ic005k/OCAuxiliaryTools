@@ -2381,8 +2381,8 @@ void Method::init_Table(QTableWidget* t, QStringList listHeaders) {
 
   for (int i = 0; i < listHeaders.count(); i++) {
     QString txt = t->horizontalHeaderItem(i)->text();
-    if (txt == "Arch" || txt == "Enabled") {
-      // t->setColumnWidth(i, 150);
+    if (txt == "Type") {
+      t->setColumnWidth(i, 150);
     }
   }
 }
