@@ -28,7 +28,7 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per [Open
 
 * [Italiano: Aggiornare OpenCore e i Kexts con OCAT (da @antuneddu)](https://www.macos86.it/topic/5238-aggiornare%C2%A0-opencore-e-kexts-con-ocat/)
 
-* I contenuti nei Preset per i Quirks sono forniti e mantenuti by @5T33Z0.  [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
+* I contenuti Preset nei Quirks per configurazioni Intel sono forniti e mantenuti by @5T33Z0.  [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
 
 * Il pacchetto plugin Intel BaseConfigs e' fornito e mantenuto da @5T33Z0. [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
 
