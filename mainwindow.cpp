@@ -851,8 +851,8 @@ void MainWindow::initui_misc() {
   ui->cboxSecureBootModel->setEditable(true);
 
   // BlessOverride
-  Method::init_Table(ui->tableBlessOverride,
-                     Method::get_HorizontalHeaderList("Misc", "BlessOverride"));
+  QStringList list1 = Method::get_HorizontalHeaderList("Misc", "BlessOverride");
+  Method::init_Table(ui->tableBlessOverride, list1);
 
   // Entries
   Method::init_Table(ui->tableEntries,
@@ -1696,6 +1696,8 @@ void MainWindow::initui_UEFI() {
   // Drivers
   Method::init_Table(ui->table_uefi_drivers,
                      Method::get_HorizontalHeaderList("UEFI", "Drivers"));
+  QStringList list1 = Method::get_HorizontalHeaderList("UEFI", "Drivers");
+  qDebug() << list1;
 
   // Input
   ui->cboxKeySupportMode->addItem("Auto");
@@ -5568,11 +5570,6 @@ void MainWindow::init_MainUI() {
     }
     if (!re) dlgNewKeyField::readNewKey(tab, Key);
   }
-}
-
-void MainWindow::init_Widgets() {
-  strAppExePath = qApp->applicationDirPath();
-  strConfigPath = QDir::homePath() + "/.config/" + strAppName + "/";
 
   QString fileSample;
   if (blDEV)
@@ -5589,6 +5586,11 @@ void MainWindow::init_Widgets() {
                                  "integrity of the app."));
     close();
   }
+}
+
+void MainWindow::init_Widgets() {
+  strAppExePath = qApp->applicationDirPath();
+  strConfigPath = QDir::homePath() + "/.config/" + strAppName + "/";
 
   mymethod = new Method(this);
   aboutDlg = new aboutDialog(this);
@@ -6858,7 +6860,7 @@ void MainWindow::on_table_Booter_patch_cellDoubleClicked(int row, int column) {
 void MainWindow::set_InitLineEdit(QTableWidget* t, int row, int column) {
   QString txt = t->horizontalHeaderItem(column)->text();
   if (txt != "Enabled" && txt != "Arch" && txt != "All" && txt != "Auxiliary" &&
-      txt != "TextMode") {
+      txt != "TextMode" && txt != "RealPath") {
     myTable = new QTableWidget;
     myTable = t;
     initLineEdit(myTable, row, column, row, column);
@@ -6867,9 +6869,9 @@ void MainWindow::set_InitLineEdit(QTableWidget* t, int row, int column) {
 
 void MainWindow::set_InitCheckBox(QTableWidget* t, int row, int column) {
   QString txt = t->horizontalHeaderItem(column)->text();
-  if (txt == "Enabled" && txt == "Arch" && txt == "All" && txt == "Auxiliary" &&
-      txt == "TextMode") {
-    enabled_change(ui->tableEntries, row, column, column);
+  if (txt == "Enabled" || txt == "Arch" || txt == "All" || txt == "Auxiliary" ||
+      txt == "TextMode" || txt == "RealPath") {
+    enabled_change(t, row, column, column);
   }
 }
 

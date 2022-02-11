@@ -2375,6 +2375,19 @@ void Method::init_Table(QTableWidget* t, QStringList listHeaders) {
     t->horizontalHeader()->setStretchLastSection(true);
   } else {
     t->setColumnCount(listHeaders.count());
+
+    if (listHeaders.removeOne("MinKernel")) listHeaders.append("MinKernel");
+    if (listHeaders.removeOne("MaxKernel")) listHeaders.append("MaxKernel");
+    if (listHeaders.removeOne("TableSignature"))
+      listHeaders.append("TableSignature");
+    if (listHeaders.removeOne("Arch")) listHeaders.append("Arch");
+    if (listHeaders.removeOne("All")) listHeaders.append("All");
+
+    if (listHeaders.removeOne("Path")) listHeaders.insert(0, "Path");
+    if (listHeaders.removeOne("Identifier"))
+      listHeaders.insert(0, "Identifier");
+    if (listHeaders.removeOne("Name")) listHeaders.insert(0, "Name");
+
     t->setHorizontalHeaderLabels(listHeaders);
   }
   t->setAlternatingRowColors(true);
