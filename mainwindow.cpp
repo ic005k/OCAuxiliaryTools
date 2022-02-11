@@ -293,13 +293,13 @@ void MainWindow::openFile(QString PlistFileName) {
   ParserBooter(map);
   ParserDP(map);
 
-  ParserKernel(map, "Add", 0);
-  ParserKernel(map, "Block", 0);
-  ParserKernel(map, "Emulate", 0);
-  ParserKernel(map, "Force", 0);
-  ParserKernel(map, "Patch", 0);
-  ParserKernel(map, "Quirks", 0);
-  ParserKernel(map, "Scheme", 0);
+  ParserKernel(map, "Add");
+  ParserKernel(map, "Block");
+  ParserKernel(map, "Emulate");
+  ParserKernel(map, "Force");
+  ParserKernel(map, "Patch");
+  ParserKernel(map, "Quirks");
+  ParserKernel(map, "Scheme");
 
   ParserMisc(map);
   ParserNvram(map);
@@ -387,7 +387,6 @@ void MainWindow::init_Table(int index) {
     listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
     for (int i = 0; i < listOfTableWidget.count(); i++) {
       QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
-
       w->setRowCount(0);
     }
   } else {
@@ -398,7 +397,6 @@ void MainWindow::init_Table(int index) {
             getAllTableWidget(getAllUIControls(ui->tabTotal->widget(i)));
         for (int j = 0; j < listOfTableWidget.count(); j++) {
           QTableWidget* w = (QTableWidget*)listOfTableWidget.at(j);
-
           w->setRowCount(0);
         }
       }
@@ -987,13 +985,11 @@ void MainWindow::initui_kernel() {
   ui->cboxKernelCache->addItem("Prelinked");
 }
 
-void MainWindow::ParserKernel(QVariantMap map, QString subitem,
-                              int tableIndex) {
-  Q_UNUSED(tableIndex);
+void MainWindow::ParserKernel(QVariantMap map, QString subitem) {
   map = map["Kernel"].toMap();
   if (map.isEmpty()) return;
 
-  //分析"Add"
+  // Add
   if (subitem == "Add") {
     QVariantList map_add = map["Add"].toList();
     Method::set_TableData(ui->table_kernel_add, map_add);
@@ -1005,7 +1001,7 @@ void MainWindow::ParserKernel(QVariantMap map, QString subitem,
     Method::set_TableData(ui->table_kernel_block, map_block);
   }
 
-  //分析"Force"
+  // Force
   if (subitem == "Force") {
     QVariantList map_Force = map["Force"].toList();
     Method::set_TableData(ui->table_kernel_Force, map_Force);
@@ -5473,56 +5469,6 @@ void MainWindow::init_ToolBarIcon() {
   else
     iSize = 23;
   ui->toolBar->setIconSize(QSize(iSize, iSize));
-  /*if (red < 55)
-    ui->toolBar->setStyleSheet(
-
-        "QToolButton:hover{ "
-        "color:rgb(255, 255, 255); "
-        "border-style:solid; "
-        "border-top-left-radius:2px;  "
-        "border-top-right-radius:2px; "
-        "background:#707070; "
-        "border:1px;"
-        "border-radius:5px;padding:2px 4px; }"
-
-        "QToolButton:pressed{ "
-        "color:rgb(255, 255, 255); "
-        "border-style:solid; "
-        "border-top-left-radius:2px;  "
-        "border-top-right-radius:2px; "
-        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 "
-        "rgb(226,236,241),"
-        "stop: 0.3 rgb(190,190,190),"
-        "stop: 1 rgb(160,160,160));"
-        "border:1px;"
-        "border-radius:5px;padding:2px 4px; }"
-
-    );
-  else
-    ui->toolBar->setStyleSheet(
-
-        "QToolButton:hover{ "
-        "color:rgb(255, 255, 255); "
-        "border-style:solid; "
-        "border-top-left-radius:2px;  "
-        "border-top-right-radius:2px; "
-        "background:#bfbfbf; "
-        "border:1px;"
-        "border-radius:5px;padding:2px 4px; }"
-
-        "QToolButton:pressed{ "
-        "color:rgb(255, 255, 255); "
-        "border-style:solid; "
-        "border-top-left-radius:2px;  "
-        "border-top-right-radius:2px; "
-        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 "
-        "rgb(226,236,241),"
-        "stop: 0.3 rgb(190,190,190),"
-        "stop: 1 rgb(160,160,160));"
-        "border:1px;"
-        "border-radius:5px;padding:2px 4px; }"
-
-    );*/
 
   if (red < 55) {
     btn0->setIcon(QIcon(":/icon/rp0.png"));
@@ -10256,134 +10202,9 @@ void MainWindow::on_btnPresetKernelPatch_clicked() {
   dlgPresetValues->blNVAdd = false;
   dlgPresetValues->blKext = false;
 
-  // dlgPresetValues->setModal(true);
-  // dlgPresetValues->loadPreset("Kernel", "Patch", "Comment",
-  //                            dlgPresetValues->ui->listPreset);
-  // dlgPresetValues->show();
   myDlgKernelPatch->setModal(true);
   myDlgKernelPatch->loadFiles();
   myDlgKernelPatch->show();
-}
-
-void MainWindow::AddACPIPatch(QVariantList map_patch, int mapIndex,
-                              int tableIndex) {
-  QVariantMap map3 = map_patch.at(mapIndex).toMap();
-
-  int i = tableIndex;
-  QTableWidgetItem* newItem1;
-  newItem1 =
-      new QTableWidgetItem(ByteToHexStr(map3["TableSignature"].toByteArray()));
-  ui->table_acpi_patch->setItem(i, 0, newItem1);
-
-  newItem1 =
-      new QTableWidgetItem(ByteToHexStr(map3["OemTableId"].toByteArray()));
-  ui->table_acpi_patch->setItem(i, 1, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["TableLength"].toString());
-  ui->table_acpi_patch->setItem(i, 2, newItem1);
-
-  ui->table_acpi_patch->setItem(
-      i, 3, new QTableWidgetItem(ByteToHexStr(map3["Find"].toByteArray())));
-
-  newItem1 = new QTableWidgetItem(ByteToHexStr(map3["Replace"].toByteArray()));
-  ui->table_acpi_patch->setItem(i, 4, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-  ui->table_acpi_patch->setItem(i, 5, newItem1);
-
-  newItem1 = new QTableWidgetItem(ByteToHexStr(map3["Mask"].toByteArray()));
-  ui->table_acpi_patch->setItem(i, 6, newItem1);
-
-  newItem1 =
-      new QTableWidgetItem(ByteToHexStr(map3["ReplaceMask"].toByteArray()));
-  ui->table_acpi_patch->setItem(i, 7, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["Count"].toString());
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_acpi_patch->setItem(i, 8, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["Limit"].toString());
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_acpi_patch->setItem(i, 9, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["Skip"].toString());
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_acpi_patch->setItem(i, 10, newItem1);
-
-  init_enabled_data(ui->table_acpi_patch, i, 11, map3["Enabled"].toString());
-
-  ui->table_acpi_patch->setItem(i, 12,
-                                new QTableWidgetItem(map3["Base"].toString()));
-
-  newItem1 = new QTableWidgetItem(map3["BaseSkip"].toString());
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_acpi_patch->setItem(i, 13, newItem1);
-}
-
-void MainWindow::AddKernelPatch(QVariantList map_patch, int mapIndex,
-                                int tableIndex) {
-  QVariantMap map3 = map_patch.at(mapIndex).toMap();
-
-  int i = tableIndex;
-  QTableWidgetItem* newItem1;
-
-  newItem1 = new QTableWidgetItem(map3["Identifier"].toString());
-  ui->table_kernel_patch->setItem(i, 0, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["Base"].toString());
-  ui->table_kernel_patch->setItem(i, 1, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["Comment"].toString());
-  ui->table_kernel_patch->setItem(i, 2, newItem1);
-
-  //此时需要将ASCII转换成HEX
-  QByteArray tohex = map3["Find"].toByteArray();
-  QString va = tohex.toHex().toUpper();
-  newItem1 = new QTableWidgetItem(va);
-  ui->table_kernel_patch->setItem(i, 3, newItem1);
-
-  tohex = map3["Replace"].toByteArray();
-  va = tohex.toHex().toUpper();
-  newItem1 = new QTableWidgetItem(va);
-  ui->table_kernel_patch->setItem(i, 4, newItem1);
-
-  tohex = map3["Mask"].toByteArray();
-  va = tohex.toHex().toUpper();
-  newItem1 = new QTableWidgetItem(va);
-  ui->table_kernel_patch->setItem(i, 5, newItem1);
-
-  tohex = map3["ReplaceMask"].toByteArray();
-  va = tohex.toHex().toUpper();
-  newItem1 = new QTableWidgetItem(va);
-  ui->table_kernel_patch->setItem(i, 6, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["MinKernel"].toString());
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_kernel_patch->setItem(i, 7, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["MaxKernel"].toString());
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_kernel_patch->setItem(i, 8, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["Count"].toString());
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_kernel_patch->setItem(i, 9, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["Limit"].toString());
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_kernel_patch->setItem(i, 10, newItem1);
-
-  newItem1 = new QTableWidgetItem(map3["Skip"].toString());
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_kernel_patch->setItem(i, 11, newItem1);
-
-  init_enabled_data(ui->table_kernel_patch, i, 12, map3["Enabled"].toString());
-
-  newItem1 = new QTableWidgetItem(map3["Arch"].toString());
-  if (map3["Arch"].toString().trimmed() == "")
-    newItem1 = new QTableWidgetItem("Any");
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_kernel_patch->setItem(i, 13, newItem1);
 }
 
 void MainWindow::on_btnPresetNVAdd_clicked() {

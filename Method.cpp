@@ -1260,13 +1260,13 @@ void Method::on_btnImportMaster() {
       // Kernel
       init_Table(3);
 
-      mw_one->ParserKernel(map, "Add", 0);
-      mw_one->ParserKernel(map, "Block", 0);
-      mw_one->ParserKernel(map, "Emulate", 0);
-      mw_one->ParserKernel(map, "Force", 0);
-      mw_one->ParserKernel(map, "Patch", 0);
-      mw_one->ParserKernel(map, "Quirks", 0);
-      mw_one->ParserKernel(map, "Scheme", 0);
+      mw_one->ParserKernel(map, "Add");
+      mw_one->ParserKernel(map, "Block");
+      mw_one->ParserKernel(map, "Emulate");
+      mw_one->ParserKernel(map, "Force");
+      mw_one->ParserKernel(map, "Patch");
+      mw_one->ParserKernel(map, "Quirks");
+      mw_one->ParserKernel(map, "Scheme");
       break;
 
     case 4:
@@ -2291,15 +2291,15 @@ QVariantList Method::get_TableData(QTableWidget* t) {
 }
 
 void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
-  t->setRowCount(mapList.count());
-
+  int rowTotal = t->rowCount();
   for (int i = 0; i < mapList.count(); i++) {
+    t->setRowCount(t->rowCount() + 1);
     QVariantMap map = mapList.at(i).toMap();
 
     if (map.count() == 0) {  //代表列，从0开始
-      QTableWidgetItem* newItem1;
-      newItem1 = new QTableWidgetItem(mapList.at(i).toString());
-      t->setItem(i, 0, newItem1);
+      QTableWidgetItem* newItem1 =
+          new QTableWidgetItem(mapList.at(i).toString());
+      t->setItem(i + rowTotal, 0, newItem1);
     }
 
     if (map.count() > 0) {
@@ -2309,18 +2309,18 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
         if (list.count() == 2) strCol = list.at(1);
 
         if (isBool(strCol)) {
-          mw_one->init_enabled_data(t, i, j, map[strCol].toString());
+          mw_one->init_enabled_data(t, i + rowTotal, j, map[strCol].toString());
         } else if (isData(strCol)) {
           QTableWidgetItem* newItem1 = new QTableWidgetItem(
               mw_one->ByteToHexStr(map[strCol].toByteArray()));
-          t->setItem(i, j, newItem1);
+          t->setItem(i + rowTotal, j, newItem1);
         } else {
           QTableWidgetItem* newItem1 =
               new QTableWidgetItem(map[strCol].toString());
           if (strCol == "Arch" || strCol == "Count" || strCol == "Limit" ||
               strCol == "Skip")
             newItem1->setTextAlignment(Qt::AlignCenter);
-          t->setItem(i, j, newItem1);
+          t->setItem(i + rowTotal, j, newItem1);
         }
       }
     }

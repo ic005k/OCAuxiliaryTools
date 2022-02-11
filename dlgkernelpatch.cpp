@@ -1,5 +1,6 @@
 #include "dlgkernelpatch.h"
 
+#include "Method.h"
 #include "mainwindow.h"
 #include "ui_dlgkernelpatch.h"
 #include "ui_mainwindow.h"
@@ -42,15 +43,20 @@ void dlgKernelPatch::appendKernelPatch(QString PlistFileName) {
 
   QFile file(PlistFileName);
   QVariantMap map = PListParser::parsePList(&file).toMap();
-  int tableIndex = mw_one->ui->table_kernel_patch->rowCount();
-  mw_one->ParserKernel(map, "Patch", tableIndex);
+  if (map.isEmpty()) return;
   file.close();
+  int tableIndex = mw_one->ui->table_kernel_patch->rowCount();
+  // mw_one->ParserKernel(map, "Patch", tableIndex);
+  map = map["Kernel"].toMap();
+  QVariantList listKP = map["Patch"].toList();
+  Method::set_TableData(mw_one->ui->table_kernel_patch, listKP);
 }
 
 void dlgKernelPatch::on_btnAdd_clicked() {
   int row = ui->listWidget->currentRow();
   if (row < 0) return;
   appendKernelPatch(dirpath + ui->listWidget->item(row)->text());
+
   int total = mw_one->ui->table_kernel_patch->rowCount();
   mw_one->ui->table_kernel_patch->setCurrentCell(total - 1, 0);
 }

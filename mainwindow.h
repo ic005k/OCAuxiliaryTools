@@ -246,7 +246,7 @@ class MainWindow : public QMainWindow {
   void ParserACPI(QVariantMap map);
   void ParserBooter(QVariantMap map);
   void ParserDP(QVariantMap map);
-  void ParserKernel(QVariantMap map, QString subitem, int tableIndex);
+  void ParserKernel(QVariantMap map, QString subitem);
   void ParserMisc(QVariantMap map);
   void ParserNvram(QVariantMap map);
   void ParserPlatformInfo(QVariantMap map);
@@ -351,9 +351,6 @@ class MainWindow : public QMainWindow {
   void ShowAutoUpdateDlg(bool Database);
   void setConversionWidgetVisible(bool v);
   void EnterPress();
-
-  void AddACPIPatch(QVariantList map_patch, int mapIndex, int tableIndex);
-  void AddKernelPatch(QVariantList map_patch, int mapIndex, int tableIndex);
 
   void init_value(QVariantMap map_fun, QTableWidget* table,
                   QTableWidget* subtable, int currentRow);

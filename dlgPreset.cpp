@@ -135,10 +135,9 @@ void dlgPreset::on_btnAdd_clicked() {
       }
     }
     if (!re) {
-      mw_one->on_btnACPIPatch_Add_clicked();
-
-      mw_one->AddACPIPatch(map_patch, ui->listPreset->currentRow(),
-                           mw_one->ui->table_acpi_patch->rowCount() - 1);
+      QVariantList mapList;
+      mapList.append(map_patch.at(ui->listPreset->currentRow()));
+      Method::set_TableData(mw_one->ui->table_acpi_patch, mapList);
     }
   }
 
@@ -160,10 +159,6 @@ void dlgPreset::on_btnAdd_clicked() {
       }
     }
     if (!re) {
-      mw_one->on_btnKernelPatchAdd_clicked();
-
-      mw_one->AddKernelPatch(map_patch, ui->listPreset->currentRow(),
-                             mw_one->ui->table_kernel_patch->rowCount() - 1);
     }
   }
 
