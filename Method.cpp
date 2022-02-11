@@ -14,6 +14,7 @@ extern QString SaveFileName, strIniFile, strAppName, strAppExePath;
 extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
     strOCFromDev;
 extern bool blDEV;
+extern QVariantMap mapTatol;
 
 QString strACPI;
 QString strKexts;
@@ -2368,8 +2369,14 @@ bool Method::isBool(QString strCol) {
 }
 
 void Method::init_Table(QTableWidget* t, QStringList listHeaders) {
-  t->setColumnCount(listHeaders.count());
-  t->setHorizontalHeaderLabels(listHeaders);
+  if (listHeaders.count() == 0) {
+    t->setColumnCount(1);
+    t->setHorizontalHeaderLabels(QStringList() << "");
+    t->horizontalHeader()->setStretchLastSection(true);
+  } else {
+    t->setColumnCount(listHeaders.count());
+    t->setHorizontalHeaderLabels(listHeaders);
+  }
   t->setAlternatingRowColors(true);
 
   for (int i = 0; i < listHeaders.count(); i++) {
@@ -2378,4 +2385,18 @@ void Method::init_Table(QTableWidget* t, QStringList listHeaders) {
       // t->setColumnWidth(i, 150);
     }
   }
+}
+
+QStringList Method::get_HorizontalHeaderList(QString main, QString sub) {
+  QStringList list;
+  QVariantMap mapMain, mapSub;
+  QVariantList maplist;
+  mapMain = mapTatol[main].toMap();
+  maplist = mapMain[sub].toList();
+  if (maplist.count() > 0) {
+    mapSub = maplist.at(0).toMap();
+    list = mapSub.keys();
+    return list;
+  }
+  return list;
 }

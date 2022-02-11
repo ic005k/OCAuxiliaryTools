@@ -108,7 +108,6 @@ class MainWindow : public QMainWindow {
   QStringList listNVRAMLs;
   QStringList listDPAdd;
   QStringList listDPDel;
-  QVariantMap mapTatol;
   QString strConfigPath;
   void updateIconStatus();
   QTimer* timer;
@@ -374,7 +373,9 @@ class MainWindow : public QMainWindow {
   void setWM();
   void smart_UpdateKeyField();
   void set_AutoColWidth(QTableWidget* w, bool autoColWidth);
-  void set_InitLineEdit(QTableWidget *t, int row, int column);
+  void set_InitLineEdit(QTableWidget* t, int row, int column);
+
+  void set_InitCheckBox(QTableWidget *t, int row, int column);
 public slots:
   void DisplayLevel();
   void ScanPolicy();

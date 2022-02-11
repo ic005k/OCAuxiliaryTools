@@ -45,8 +45,7 @@ void dlgKernelPatch::appendKernelPatch(QString PlistFileName) {
   QVariantMap map = PListParser::parsePList(&file).toMap();
   if (map.isEmpty()) return;
   file.close();
-  int tableIndex = mw_one->ui->table_kernel_patch->rowCount();
-  // mw_one->ParserKernel(map, "Patch", tableIndex);
+
   map = map["Kernel"].toMap();
   QVariantList listKP = map["Patch"].toList();
   Method::set_TableData(mw_one->ui->table_kernel_patch, listKP);
