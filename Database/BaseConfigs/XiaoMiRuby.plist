@@ -46,6 +46,14 @@
                     <key>Path</key>
                     <string>SSDT-TPD0-XiaoMiRuby.aml</string>
                 </dict>
+                <dict>
+                    <key>Comment</key>
+                    <string></string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Path</key>
+                    <string>SSDT-DDGPU.aml</string>
+                </dict>
             </array>
             <key>Delete</key>
             <array/>
@@ -251,7 +259,7 @@
                     <key>Comment</key>
                     <string>V1.0.4 | NVMeFix.kext</string>
                     <key>Enabled</key>
-                    <true/>
+                    <false/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/NVMeFix</string>
                     <key>MaxKernel</key>
@@ -721,7 +729,7 @@
                 <key>PickerVariant</key>
                 <string>Acidanthera\Syrah</string>
                 <key>PollAppleHotKeys</key>
-                <false/>
+                <true/>
                 <key>ShowPicker</key>
                 <true/>
                 <key>TakeoffDelay</key>
@@ -887,7 +895,7 @@
                     <key>SystemAudioVolumeDB</key>
                     <data>4g==</data>
                     <key>boot-args</key>
-                    <string>debug=0x100 alcid=69 -wegnoegpu</string>
+                    <string>debug=0x100 alcid=69</string>
                     <key>prev-lang:kbd</key>
                     <data>emgtSGFuczoyNTI=</data>
                     <key>run-efi-updater</key>
