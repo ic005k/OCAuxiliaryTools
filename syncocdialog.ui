@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>895</width>
+    <width>856</width>
     <height>498</height>
    </rect>
   </property>
@@ -353,7 +353,7 @@
    <item row="5" column="3">
     <widget class="QPushButton" name="btnUpdateOC">
      <property name="text">
-      <string>Update OpenCore database to the latest version</string>
+      <string>Get OpenCore</string>
      </property>
     </widget>
    </item>

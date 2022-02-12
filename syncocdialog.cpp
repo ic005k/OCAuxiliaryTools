@@ -70,8 +70,7 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
 
   ui->listKexts->setHidden(true);
 
-  ui->comboOCVersions->addItems(QStringList() << "Latest Version"
-                                              << "0.7.7"
+  ui->comboOCVersions->addItems(QStringList() << tr("Latest Version") << "0.7.7"
                                               << "0.7.6"
                                               << "0.7.5"
                                               << "0.7.4");
@@ -530,6 +529,9 @@ void SyncOCDialog::init_Sync_OC_Table() {
   } else {
     ui->lblOCVersions->setHidden(false);
     ui->comboOCVersions->setHidden(false);
+    ui->comboOCVersions->setCurrentText("");
+    ui->comboOCVersions->setCurrentText(ocVer);
+    ui->lblOCFrom->setText(ocFrom);
   }
   sourceKexts.clear();
   targetKexts.clear();
@@ -837,16 +839,23 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
 
 void SyncOCDialog::on_comboOCVersions_currentTextChanged(const QString& arg1) {
   if (Initialization) return;
+
   QString str = "https://github.com/acidanthera/OpenCorePkg/releases/tag/";
   QString url = str + arg1;
-  if (arg1 == tr("Latest Version"))
+  if (arg1 == tr("Latest Version")) {
     url = "https://github.com/acidanthera/OpenCorePkg/releases/latest";
-  strOCFrom = url;
-
-  if (mw_one->ui->actionDEBUG->isChecked())
-    downLink = "https://github.com/acidanthera/OpenCorePkg/releases/download/" +
-               arg1 + "/OpenCore-" + arg1 + "-DEBUG.zip";
-  else
-    downLink = "https://github.com/acidanthera/OpenCorePkg/releases/download/" +
-               arg1 + "/OpenCore-" + arg1 + "-RELEASE.zip";
+    strOCFrom = url;
+  } else {
+    strOCFrom = str + arg1;
+    if (mw_one->ui->actionDEBUG->isChecked())
+      downLink =
+          "https://github.com/acidanthera/OpenCorePkg/releases/download/" +
+          arg1 + "/OpenCore-" + arg1 + "-DEBUG.zip";
+    else
+      downLink =
+          "https://github.com/acidanthera/OpenCorePkg/releases/download/" +
+          arg1 + "/OpenCore-" + arg1 + "-RELEASE.zip";
+  }
+  ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
+  ui->lblOCFrom->setText(ocFrom);
 }

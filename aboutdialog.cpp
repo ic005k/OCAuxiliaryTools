@@ -27,7 +27,7 @@ aboutDialog::aboutDialog(QWidget* parent)
       QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
   QSettings Reg(strIniFile, QSettings::IniFormat);
   QString ver = Reg.value("ocVer").toString();
-  if (ver > ocVer) {
+  if (ver != "") {
     ocVer = ver;
   }
   ver = Reg.value("ocVerDev").toString();
