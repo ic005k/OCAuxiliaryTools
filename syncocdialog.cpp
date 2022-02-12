@@ -530,12 +530,12 @@ void SyncOCDialog::init_Sync_OC_Table() {
   if (blDEV) {
     ui->lblOCVersions->setHidden(true);
     ui->comboOCVersions->setHidden(true);
+    ui->comboOCVersions->setCurrentIndex(0);
   } else {
     ui->lblOCVersions->setHidden(false);
     ui->comboOCVersions->setHidden(false);
     ui->comboOCVersions->setCurrentText("");
     ui->comboOCVersions->setCurrentText(ocVer);
-    ui->lblOCFrom->setText(ocFrom);
   }
   sourceKexts.clear();
   targetKexts.clear();

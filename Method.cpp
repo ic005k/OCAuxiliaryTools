@@ -500,13 +500,11 @@ void Method::updateOpenCore() {
 
       QMessageBox box;
       if (!blDEV)
-        box.setText(
-            tr("The OpenCore database has been successfully upgraded to") +
-            "  " + ocVer);
+        box.setText(tr("OpenCore Database has been successfully updated to") +
+                    "  " + ocVer);
       else
-        box.setText(
-            tr("The OpenCore database has been successfully upgraded to") +
-            "  " + ocVerDev);
+        box.setText(tr("OpenCore Database has been successfully updated to") +
+                    "  " + ocVerDev);
       box.exec();
     } else {
       if (blDEV) {
