@@ -2501,7 +2501,7 @@ void MainWindow::on_table_kernel_patch_cellClicked(int row, int column) {
     c_row = row;
 
     ui->table_kernel_patch->setCellWidget(row, column, cboxArch);
-    cboxArch->setCurrentText(ui->table_kernel_patch->item(row, 13)->text());
+    cboxArch->setCurrentText(ui->table_kernel_patch->item(row, column)->text());
   }
 
   setStatusBarText(ui->table_kernel_patch);
