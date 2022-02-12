@@ -37,7 +37,8 @@ aboutDialog::aboutDialog(QWidget* parent)
 
   QString DevSource = Reg.value("DevSource").toString();
   if (DevSource.trimmed() == "") {
-    ocFromDev = "<a href=\"" + strOCFromDev + "\"" + "> " + tr(" Source ");
+    ocFromDev =
+        "";  // "<a href=\"" + strOCFromDev + "\"" + "> " + tr(" Source ");
   } else {
     ocFromDev =
         "<a href=\"" + DevSource.trimmed() + "\"" + "> " + tr(" Source ");

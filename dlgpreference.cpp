@@ -86,7 +86,7 @@ void dlgPreference::closeEvent(QCloseEvent *event) {
   if (txt != "")
     ocFromDev = "<a href=\"" + txt + "\"" + "> " + tr(" Source ");
   else
-    ocFromDev = "<a href=\"" + strOCFromDev + "\"" + "> " + tr(" Source ");
+    ocFromDev = "";
   if (blDEV) mw_one->dlgSyncOC->ui->lblOCFrom->setText(ocFromDev);
 }
 
