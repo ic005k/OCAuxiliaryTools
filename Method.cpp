@@ -2326,12 +2326,31 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
               mw_one->ByteToHexStr(map[strCol].toByteArray()));
           t->setItem(i + rowTotal, j, newItem1);
         } else {
-          QTableWidgetItem* newItem1 =
-              new QTableWidgetItem(map[strCol].toString());
+          QTableWidgetItem* newItem1;
+          newItem1 = new QTableWidgetItem(map[strCol].toString());
           if (strCol == "Arch" || strCol == "Count" || strCol == "Limit" ||
               strCol == "Skip" || strCol == "Strategy" || strCol == "Flavour")
             newItem1->setTextAlignment(Qt::AlignCenter);
+
           t->setItem(i + rowTotal, j, newItem1);
+
+          if (t->item(i + rowTotal, j)->text() == "") {
+            if (strCol == "Arch") {
+              newItem1 = new QTableWidgetItem("Any");
+              newItem1->setTextAlignment(Qt::AlignCenter);
+              t->setItem(i + rowTotal, j, newItem1);
+            }
+            if (strCol == "Strategy") {
+              newItem1 = new QTableWidgetItem("Disable");
+              newItem1->setTextAlignment(Qt::AlignCenter);
+              t->setItem(i + rowTotal, j, newItem1);
+            }
+            if (strCol == "Flavour") {
+              newItem1 = new QTableWidgetItem("Auto");
+              newItem1->setTextAlignment(Qt::AlignCenter);
+              t->setItem(i + rowTotal, j, newItem1);
+            }
+          }
         }
       }
     }

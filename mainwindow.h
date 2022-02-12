@@ -265,12 +265,12 @@ class MainWindow : public QMainWindow {
   QVariantMap SavePlatformInfo();
   QVariantMap SaveUEFI();
 
-  void initui_acpi();
-  void initui_booter();
-  void initui_dp();
-  void initui_kernel();
-  void initui_misc();
-  void initui_nvram();
+  void initui_ACPI();
+  void initui_Booter();
+  void initui_DP();
+  void initui_Kernel();
+  void initui_Misc();
+  void initui_NVRAM();
   void initui_PlatformInfo();
   void initui_UEFI();
   void init_enabled_data(QTableWidget* table, int row, int column, QString str);
@@ -375,7 +375,9 @@ class MainWindow : public QMainWindow {
   void set_AutoColWidth(QTableWidget* w, bool autoColWidth);
   void set_InitLineEdit(QTableWidget* t, int row, int column);
 
-  void set_InitCheckBox(QTableWidget *t, int row, int column);
+  void set_InitCheckBox(QTableWidget* t, int row, int column);
+  void oc_Validate(bool show);
+  void init_AutoColumnWidth();
 public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -662,8 +664,6 @@ public slots:
   void on_tableDevices_cellClicked(int row, int column);
 
   void on_table_uefi_drivers_cellClicked(int row, int column);
-
-  void readResultCheckData();
 
   void on_btnBooterPatchAdd_clicked();
 
@@ -1008,7 +1008,6 @@ public slots:
   void goResultsLineEdit(QString objName);
   void goResultsComboBox(QString objName);
   bool autoCheckUpdate = false;
-  bool OpenFileValidate = false;
 
   QString orgComboBoxStyle;
   QString orgLineEditStyle;

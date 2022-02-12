@@ -105,8 +105,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
     title = "";
 
   if (QFile(SaveFileName).exists()) {
-    OpenFileValidate = true;
-    on_actionOcvalidate_triggered();
+    oc_Validate(false);
   }
 }
 
@@ -144,14 +143,14 @@ MainWindow::MainWindow(QWidget* parent)
   init_MainUI();
   init_setWindowModified();
   init_hardware_info();
-  initui_booter();
-  initui_dp();
-  initui_kernel();
-  initui_misc();
-  initui_nvram();
+  initui_Booter();
+  initui_DP();
+  initui_Kernel();
+  initui_Misc();
+  initui_NVRAM();
   initui_PlatformInfo();
   initui_UEFI();
-  initui_acpi();
+  initui_ACPI();
   init_CopyPasteLine();
   setTableEditTriggers();
 
@@ -311,13 +310,9 @@ void MainWindow::openFile(QString PlistFileName) {
   loading = false;
 
   ui->actionSave->setEnabled(true);
-
   undoStack->clear();
-
+  oc_Validate(false);
   if (!isGetEFI) {
-    OpenFileValidate = true;
-    on_actionOcvalidate_triggered();
-
     QSettings settings;
     QFileInfo fi(PlistFileName);
     settings.setValue("currentDirectory", fi.absolutePath());
@@ -521,7 +516,7 @@ void MainWindow::ParserACPI(QVariantMap map) {
   getValue(map_quirks, ui->tabACPI4);
 }
 
-void MainWindow::initui_acpi() {
+void MainWindow::initui_ACPI() {
   ui->btnExportMaster->setText(tr("Export") + "  ACPI");
   ui->btnImportMaster->setText(tr("Import") + "  ACPI");
 
@@ -540,7 +535,7 @@ void MainWindow::initui_acpi() {
                      Method::get_HorizontalHeaderList("ACPI", "Patch"));
 }
 
-void MainWindow::initui_booter() {
+void MainWindow::initui_Booter() {
   mymethod->init_PresetQuirks(ui->comboBoxBooter, "Booter-Quirks.txt");
 
   // MmioWhitelist
@@ -571,7 +566,7 @@ void MainWindow::ParserBooter(QVariantMap map) {
     ui->editIntResizeAppleGpuBars->setText("-1");
 }
 
-void MainWindow::initui_dp() {
+void MainWindow::initui_DP() {
   QTableWidgetItem* id0;
 
   // Add
@@ -680,7 +675,7 @@ void MainWindow::ParserDP(QVariantMap map) {
   init_value(map["Delete"].toMap(), ui->table_dp_del0, ui->table_dp_del, -1);
 }
 
-void MainWindow::initui_kernel() {
+void MainWindow::initui_Kernel() {
   mymethod->init_PresetQuirks(ui->comboBoxKernel, "Kernel-Quirks.txt");
 
   // Add
@@ -758,7 +753,7 @@ void MainWindow::ParserKernel(QVariantMap map, QString subitem) {
   }
 }
 
-void MainWindow::initui_misc() {
+void MainWindow::initui_Misc() {
   // Boot
   ui->cboxHibernateMode->addItem("None");
   ui->cboxHibernateMode->addItem("Auto");
@@ -910,7 +905,7 @@ void MainWindow::ParserMisc(QVariantMap map) {
   Method::set_TableData(ui->tableTools, map_Tools);
 }
 
-void MainWindow::initui_nvram() {
+void MainWindow::initui_NVRAM() {
   QString y = QString::number(QDate::currentDate().year());
   QString m = QString::number(QDate::currentDate().month());
   QString d = QString::number(QDate::currentDate().day());
@@ -1829,8 +1824,7 @@ void MainWindow::SavePlist(QString FileName) {
   }
 
   if (!isGetEFI) {
-    OpenFileValidate = true;
-    on_actionOcvalidate_triggered();
+    oc_Validate(false);
   }
 
   checkFiles(ui->table_acpi_add);
@@ -2444,12 +2438,6 @@ void MainWindow::on_table_kernel_block_cellClicked(int row, int column) {
   set_InitCheckBox(t, row, column);
 
   QString txt = t->horizontalHeaderItem(column)->text();
-  int ArchCol = 0;
-  int StrategyCol = 0;
-  for (int i = 0; i < t->columnCount(); i++) {
-    if (t->horizontalHeaderItem(i)->text() == "Arch") ArchCol = i;
-    if (t->horizontalHeaderItem(i)->text() == "Strategy") StrategyCol = i;
-  }
   if (txt == "Arch") {
     cboxArch = new QComboBox;
     cboxArch->setEditable(true);
@@ -2457,13 +2445,11 @@ void MainWindow::on_table_kernel_block_cellClicked(int row, int column) {
     cboxArch->addItem("i386");
     cboxArch->addItem("x86_64");
     cboxArch->addItem("");
-
     connect(cboxArch, SIGNAL(currentTextChanged(QString)), this,
             SLOT(arch_blockChange()));
     c_row = row;
-
     t->setCellWidget(row, column, cboxArch);
-    cboxArch->setCurrentText(t->item(row, ArchCol)->text());
+    cboxArch->setCurrentText(t->item(row, column)->text());
   }
   if (txt == "Strategy") {
     cboxArch = new QComboBox;
@@ -2471,13 +2457,11 @@ void MainWindow::on_table_kernel_block_cellClicked(int row, int column) {
     cboxArch->addItem("Disable");
     cboxArch->addItem("Exclude");
     cboxArch->addItem("");
-
     connect(cboxArch, SIGNAL(currentTextChanged(QString)), this,
             SLOT(arch_blockChange()));
     c_row = row;
-
     t->setCellWidget(row, column, cboxArch);
-    cboxArch->setCurrentText(t->item(row, StrategyCol)->text());
+    cboxArch->setCurrentText(t->item(row, column)->text());
   }
 
   setStatusBarText(t);
@@ -5996,83 +5980,6 @@ void MainWindow::on_table_uefi_drivers_cellClicked(int row, int column) {
   setStatusBarText(ui->table_uefi_drivers);
 }
 
-void MainWindow::readResultCheckData() {
-  QString result =
-      QString::fromLocal8Bit(chkdata->readAll());  //与保存文件的格式一致
-  QString str;
-  QString strMsg;
-  ui->lblOCVTip->setFixedHeight(16);
-  ui->lblOCVTip->setFixedWidth(16);
-  ui->lblOCVTip->setText("");
-
-  if (result.trimmed() == "Failed to read") return;
-
-  if (result.contains("No issues found") || result.contains("No is")) {
-    blOCValidateError = false;
-    str = tr("OK !");
-    strMsg = result + "\n\n" + str;
-
-    if (red < 55)
-      ui->actionOcvalidate->setIcon(QIcon(":/icon/ov0.png"));
-    else
-      ui->actionOcvalidate->setIcon(QIcon(":/icon/ov.png"));
-    ui->actionOcvalidate->setToolTip(ui->actionOcvalidate->text());
-
-    dlgOCV->setGoEnabled(false);
-
-    if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
-      ui->lblOCVTip->setStyleSheet(
-          "QLabel{"
-          "border-image:url(:/icon/temp.png) 4 4 4 4 stretch stretch;"
-          "}");
-      ui->lblOCVTip->setToolTip("");
-    }
-
-  } else {
-    blOCValidateError = true;
-    strMsg = result;
-    dlgOCV->setGoEnabled(true);
-
-    ui->actionOcvalidate->setIcon(QIcon(":/icon/overror.png"));
-    ui->actionOcvalidate->setToolTip(
-        tr("There is a issue with the configuration file."));
-
-    if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
-      ui->lblOCVTip->setStyleSheet(
-          "QLabel{"
-          "border-image:url(:/icon/overror.png) 4 4 4 4 stretch stretch;"
-          "}");
-      ui->lblOCVTip->setToolTip(ui->actionOcvalidate->toolTip());
-    }
-  }
-
-  if (OpenFileValidate && !dlgOCV->isVisible()) {
-    OpenFileValidate = false;
-    return;
-  }
-
-  dlgOCV->setTextOCV(strMsg);
-  dlgOCV->setWindowFlags(dlgOCV->windowFlags() | Qt::WindowStaysOnTopHint);
-  if (mac || osx1012) dlgOCV->ui->textEdit->setFont(QFont("Menlo"));
-  if (win) dlgOCV->ui->textEdit->setFont(QFont("consolas"));
-  if (win || linuxOS) {
-    dlgOCV->ui->btnCreateVault->setVisible(false);
-    dlgOCV->ui->chkSignature->setVisible(false);
-  }
-  if (ui->cboxVault->currentText().trimmed() == "Optional") {
-    dlgOCV->ui->btnCreateVault->setEnabled(false);
-    dlgOCV->ui->chkSignature->setEnabled(false);
-  } else {
-    dlgOCV->ui->btnCreateVault->setEnabled(true);
-    dlgOCV->ui->chkSignature->setEnabled(true);
-  }
-  if (ui->cboxVault->currentText().trimmed() == "Secure")
-    dlgOCV->ui->chkSignature->setChecked(true);
-  if (ui->cboxVault->currentText().trimmed() == "Basic")
-    dlgOCV->ui->chkSignature->setChecked(false);
-  dlgOCV->show();
-}
-
 void MainWindow::on_btnBooterPatchAdd_clicked() {
   Method::add_OneLine(ui->table_Booter_patch);
 }
@@ -8458,26 +8365,27 @@ void MainWindow::tablePopMenu(QTableWidget* w, QAction* cutAction,
 }
 
 void MainWindow::set_AutoColWidth(QTableWidget* w, bool autoColWidth) {
+  QStringList keyList;
+  keyList = QStringList() << "Enabled"
+                          << "Arch"
+                          << "All"
+                          << "Type"
+                          << "TextMode"
+                          << "Auxiliary"
+                          << "RealPath"
+                          << "Class"
+                          << "Strategy";
+
   if (autoColWidth) {
     for (int y = 0; y < w->columnCount(); y++) {
       QString item = w->horizontalHeaderItem(y)->text();
-      if (item != "Enabled" && item != "Arch" && item != "All" &&
-          item != "Type" && item != "TextMode" && item != "Auxiliary" &&
-          item != "RealPath" && item != "Class" && item != "Strategy") {
+      if (!keyList.removeOne(item)) {
         w->horizontalHeader()->setSectionResizeMode(
             y, QHeaderView::ResizeToContents);
       }
     }
   } else {
-    for (int y = 0; y < w->columnCount(); y++) {
-      QString item = w->horizontalHeaderItem(y)->text();
-      if (item != tr("Enabled") && item != tr("Arch") && item != tr("All") &&
-          item != tr("Type") && item != tr("TextMode") &&
-          item != tr("Auxiliary") && item != tr("RealPath") &&
-          item != tr("Class")) {
-        w->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
-      }
-    }
+    w->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
   }
 }
 
@@ -9333,7 +9241,7 @@ void MainWindow::on_actionDatabase_triggered() {
   myDatabase->init_Database(files);
 }
 
-void MainWindow::on_actionOcvalidate_triggered() {
+void MainWindow::oc_Validate(bool show) {
   chkdata = new QProcess;
 
 #ifdef Q_OS_WIN32
@@ -9350,8 +9258,80 @@ void MainWindow::on_actionOcvalidate_triggered() {
   chkdata->start(dataBaseDir + "mac/ocvalidate", QStringList() << SaveFileName);
 #endif
 
-  connect(chkdata, SIGNAL(finished(int)), this, SLOT(readResultCheckData()));
+  chkdata->waitForFinished();
+  QString result =
+      QString::fromLocal8Bit(chkdata->readAll());  //与保存文件的格式一致
+  QString str;
+  QString strMsg;
+  ui->lblOCVTip->setFixedHeight(16);
+  ui->lblOCVTip->setFixedWidth(16);
+  ui->lblOCVTip->setText("");
+
+  if (result.trimmed() == "Failed to read") return;
+
+  if (result.contains("No issues found") || result.contains("No is")) {
+    blOCValidateError = false;
+    str = tr("OK !");
+    strMsg = result + "\n\n" + str;
+
+    if (red < 55)
+      ui->actionOcvalidate->setIcon(QIcon(":/icon/ov0.png"));
+    else
+      ui->actionOcvalidate->setIcon(QIcon(":/icon/ov.png"));
+    ui->actionOcvalidate->setToolTip(ui->actionOcvalidate->text());
+
+    dlgOCV->setGoEnabled(false);
+
+    if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
+      ui->lblOCVTip->setStyleSheet(
+          "QLabel{"
+          "border-image:url(:/icon/temp.png) 4 4 4 4 stretch stretch;"
+          "}");
+      ui->lblOCVTip->setToolTip("");
+    }
+
+  } else {
+    blOCValidateError = true;
+    strMsg = result;
+    dlgOCV->setGoEnabled(true);
+
+    ui->actionOcvalidate->setIcon(QIcon(":/icon/overror.png"));
+    ui->actionOcvalidate->setToolTip(
+        tr("There is a issue with the configuration file."));
+
+    if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
+      ui->lblOCVTip->setStyleSheet(
+          "QLabel{"
+          "border-image:url(:/icon/overror.png) 4 4 4 4 stretch stretch;"
+          "}");
+      ui->lblOCVTip->setToolTip(ui->actionOcvalidate->toolTip());
+    }
+  }
+
+  dlgOCV->setTextOCV(strMsg);
+  dlgOCV->setWindowFlags(dlgOCV->windowFlags() | Qt::WindowStaysOnTopHint);
+  if (mac || osx1012) dlgOCV->ui->textEdit->setFont(QFont("Menlo"));
+  if (win) dlgOCV->ui->textEdit->setFont(QFont("consolas"));
+  if (win || linuxOS) {
+    dlgOCV->ui->btnCreateVault->setVisible(false);
+    dlgOCV->ui->chkSignature->setVisible(false);
+  }
+  if (ui->cboxVault->currentText().trimmed() == "Optional") {
+    dlgOCV->ui->btnCreateVault->setEnabled(false);
+    dlgOCV->ui->chkSignature->setEnabled(false);
+  } else {
+    dlgOCV->ui->btnCreateVault->setEnabled(true);
+    dlgOCV->ui->chkSignature->setEnabled(true);
+  }
+  if (ui->cboxVault->currentText().trimmed() == "Secure")
+    dlgOCV->ui->chkSignature->setChecked(true);
+  if (ui->cboxVault->currentText().trimmed() == "Basic")
+    dlgOCV->ui->chkSignature->setChecked(false);
+
+  if (show) dlgOCV->show();
 }
+
+void MainWindow::on_actionOcvalidate_triggered() { oc_Validate(true); }
 
 void MainWindow::on_actionMountEsp_triggered() { mount_esp(); }
 
@@ -10260,9 +10240,93 @@ void MainWindow::smart_UpdateKeyField() {
                                    "ProtocolOverrides");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI8, "UEFI", "Quirks");
 
+  // ACPI-Add
+  Method::init_Table(ui->table_acpi_add,
+                     Method::get_HorizontalHeaderList("ACPI", "Add"));
+
+  // ACPI-Delete
+  Method::init_Table(ui->table_acpi_del,
+                     Method::get_HorizontalHeaderList("ACPI", "Delete"));
+
+  // ACPI-Patch
+  Method::init_Table(ui->table_acpi_patch,
+                     Method::get_HorizontalHeaderList("ACPI", "Patch"));
+  // MmioWhitelist
+  Method::init_Table(ui->table_booter, Method::get_HorizontalHeaderList(
+                                           "Booter", "MmioWhitelist"));
+
+  // Patch
+  Method::init_Table(ui->table_Booter_patch,
+                     Method::get_HorizontalHeaderList("Booter", "Patch"));
+
+  // Add
+  Method::init_Table(ui->table_kernel_add,
+                     Method::get_HorizontalHeaderList("Kernel", "Add"));
+
+  // Block
+  Method::init_Table(ui->table_kernel_block,
+                     Method::get_HorizontalHeaderList("Kernel", "Block"));
+
+  // Force
+  Method::init_Table(ui->table_kernel_Force,
+                     Method::get_HorizontalHeaderList("Kernel", "Force"));
+
+  // Patch
+  Method::init_Table(ui->table_kernel_patch,
+                     Method::get_HorizontalHeaderList("Kernel", "Patch"));
+
+  // BlessOverride
+  QStringList list1 = Method::get_HorizontalHeaderList("Misc", "BlessOverride");
+  Method::init_Table(ui->tableBlessOverride, list1);
+
+  // Entries
+  Method::init_Table(ui->tableEntries,
+                     Method::get_HorizontalHeaderList("Misc", "Entries"));
+
+  // Tools
+  Method::init_Table(ui->tableTools,
+                     Method::get_HorizontalHeaderList("Misc", "Tools"));
+
+  // Memory-Devices
+  QVariantMap mapMain = mapTatol["PlatformInfo"].toMap();
+  QVariantMap mapSub = mapMain["Memory"].toMap();
+  QVariantList maplist = mapSub["Devices"].toList();
+  QVariantMap map;
+  QStringList list;
+  if (maplist.count() > 0) {
+    map = maplist.at(0).toMap();
+    list = map.keys();
+  }
+  Method::init_Table(ui->tableDevices, list);
+
   // Drivers
-  // QStringList list1 = Method::get_HorizontalHeaderList("UEFI", "Drivers");
-  // Method::init_Table(ui->table_uefi_drivers, list1);
+  QStringList listDrivers = Method::get_HorizontalHeaderList("UEFI", "Drivers");
+  Method::init_Table(ui->table_uefi_drivers, listDrivers);
+
+  // ReservedMemory
+  Method::init_Table(
+      ui->table_uefi_ReservedMemory,
+      Method::get_HorizontalHeaderList("UEFI", "ReservedMemory"));
+
+  if (!loading) {
+    if (QFile(SaveFileName).exists()) {
+      openFile(SaveFileName);
+    }
+    init_AutoColumnWidth();
+  }
+}
+
+void MainWindow::init_AutoColumnWidth() {
+  QObjectList listOfTableWidget =
+      getAllTableWidget(getAllUIControls(ui->tabTotal));
+  for (int i = 0; i < listOfTableWidget.count(); i++) {
+    QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
+    // Auto Col Width
+    QSettings Reg(strIniFile, QSettings::IniFormat);
+    bool isAutoColWidth =
+        Reg.value(w->objectName() + "AutoColWidth", true).toBool();
+    set_AutoColWidth(w, isAutoColWidth);
+  }
 }
 
 void MainWindow::on_editSystemSerialNumber_textChanged(const QString& arg1) {

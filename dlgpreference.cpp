@@ -68,7 +68,7 @@ dlgPreference::dlgPreference(QWidget *parent)
   ui->chkBackupEFI->setChecked(Reg.value("chkBackupEFI", 1).toBool());
   ui->chkDatabase->setChecked(Reg.value("chkDatabase", 1).toBool());
   ui->chkHideToolbar->setChecked(Reg.value("chkHideToolbar", 0).toBool());
-  ui->chkSmartKey->setChecked(Reg.value("SmartKey", 0).toBool());
+  ui->chkSmartKey->setChecked(Reg.value("SmartKey", 1).toBool());
 }
 
 dlgPreference::~dlgPreference() { delete ui; }
