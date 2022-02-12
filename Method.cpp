@@ -2329,7 +2329,7 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
           QTableWidgetItem* newItem1 =
               new QTableWidgetItem(map[strCol].toString());
           if (strCol == "Arch" || strCol == "Count" || strCol == "Limit" ||
-              strCol == "Skip")
+              strCol == "Skip" || strCol == "Strategy" || strCol == "Flavour")
             newItem1->setTextAlignment(Qt::AlignCenter);
           t->setItem(i + rowTotal, j, newItem1);
         }
@@ -2443,6 +2443,9 @@ void Method::add_OneLine(QTableWidget* t) {
       t->setItem(t->rowCount() - 1, k, newItem1);
     } else if (strCol == "Type") {
       QTableWidgetItem* newItem1 = new QTableWidgetItem("Reserved");
+      t->setItem(t->rowCount() - 1, k, newItem1);
+    } else if (strCol == "Strategy") {
+      QTableWidgetItem* newItem1 = new QTableWidgetItem("Disable");
       t->setItem(t->rowCount() - 1, k, newItem1);
     } else {
       QTableWidgetItem* newItem1 = new QTableWidgetItem("");

@@ -2438,11 +2438,19 @@ void MainWindow::on_table_kernel_add_cellClicked(int row, int column) {
 }
 
 void MainWindow::on_table_kernel_block_cellClicked(int row, int column) {
-  if (!ui->table_kernel_block->currentIndex().isValid()) return;
+  QTableWidget* t = ui->table_kernel_block;
+  if (!t->currentIndex().isValid()) return;
 
-  set_InitCheckBox(ui->table_kernel_block, row, column);
+  set_InitCheckBox(t, row, column);
 
-  if (ui->table_kernel_block->horizontalHeaderItem(column)->text() == "Arch") {
+  QString txt = t->horizontalHeaderItem(column)->text();
+  int ArchCol = 0;
+  int StrategyCol = 0;
+  for (int i = 0; i < t->columnCount(); i++) {
+    if (t->horizontalHeaderItem(i)->text() == "Arch") ArchCol = i;
+    if (t->horizontalHeaderItem(i)->text() == "Strategy") StrategyCol = i;
+  }
+  if (txt == "Arch") {
     cboxArch = new QComboBox;
     cboxArch->setEditable(true);
     cboxArch->addItem("Any");
@@ -2454,11 +2462,25 @@ void MainWindow::on_table_kernel_block_cellClicked(int row, int column) {
             SLOT(arch_blockChange()));
     c_row = row;
 
-    ui->table_kernel_block->setCellWidget(row, column, cboxArch);
-    cboxArch->setCurrentText(ui->table_kernel_block->item(row, 5)->text());
+    t->setCellWidget(row, column, cboxArch);
+    cboxArch->setCurrentText(t->item(row, ArchCol)->text());
+  }
+  if (txt == "Strategy") {
+    cboxArch = new QComboBox;
+    cboxArch->setEditable(true);
+    cboxArch->addItem("Disable");
+    cboxArch->addItem("Exclude");
+    cboxArch->addItem("");
+
+    connect(cboxArch, SIGNAL(currentTextChanged(QString)), this,
+            SLOT(arch_blockChange()));
+    c_row = row;
+
+    t->setCellWidget(row, column, cboxArch);
+    cboxArch->setCurrentText(t->item(row, StrategyCol)->text());
   }
 
-  setStatusBarText(ui->table_kernel_block);
+  setStatusBarText(t);
 }
 
 void MainWindow::on_table_kernel_patch_cellClicked(int row, int column) {
@@ -2863,7 +2885,7 @@ void MainWindow::on_btnKernelAdd_Add_clicked() {
 
 void MainWindow::addKexts(QStringList FileName) {
   QTableWidget* t = ui->table_kernel_add;
-  // 去重
+
   int pathCol = 0;
   for (int n = 0; n < t->columnCount(); n++) {
     QString txt = t->horizontalHeaderItem(n)->text();
@@ -2896,7 +2918,6 @@ void MainWindow::addKexts(QStringList FileName) {
       }
     }
 
-    // int row = t->rowCount() + 1;
     QString strBaseName = QFileInfo(FileName[j]).fileName();
     Method::add_OneLine(t);
     for (int n = 0; n < t->columnCount(); n++) {
@@ -2913,25 +2934,6 @@ void MainWindow::addKexts(QStringList FileName) {
           t->setItem(t->rowCount() - 1, n, new QTableWidgetItem(""));
       }
     }
-
-    /*t->setItem(row - 1, 0, new QTableWidgetItem(strBaseName));
-    t->setItem(row - 1, 1, new QTableWidgetItem(""));
-
-    if (fileInfoList.fileName() != "")
-      t->setItem(
-          row - 1, 2,
-          new QTableWidgetItem("Contents/MacOS/" + fileInfoList.fileName()));
-    else
-      t->setItem(row - 1, 2, new QTableWidgetItem(""));
-
-    t->setItem(row - 1, 3, new QTableWidgetItem("Contents/Info.plist"));
-    t->setItem(row - 1, 4, new QTableWidgetItem(""));
-    t->setItem(row - 1, 5, new QTableWidgetItem(""));
-    init_enabled_data(t, row - 1, 6, "true");
-
-    QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
-    newItem1->setTextAlignment(Qt::AlignCenter);
-    t->setItem(row - 1, 7, newItem1);*/
 
     QDir dir(strKexts);
     if (dir.exists()) {
@@ -2995,28 +2997,6 @@ void MainWindow::addKexts(QStringList FileName) {
               }
             }
 
-            /*int row = t->rowCount() + 1;
-
-            t->setRowCount(row);
-            t->setItem(
-                row - 1, 0,
-                new QTableWidgetItem(QFileInfo(FileName[j]).fileName() +
-                                     "/Contents/PlugIns/" + kext_file[i]));
-            t->setItem(row - 1, 1, new QTableWidgetItem(""));
-
-            t->setItem(row - 1, 2,
-                       new QTableWidgetItem("Contents/MacOS/" +
-                                            fileInfoList.fileName()));
-
-            t->setItem(row - 1, 3, new QTableWidgetItem("Contents/Info.plist"));
-            t->setItem(row - 1, 4, new QTableWidgetItem(""));
-            t->setItem(row - 1, 5, new QTableWidgetItem(""));
-            init_enabled_data(t, row - 1, 6, "true");
-
-            QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
-            newItem1->setTextAlignment(Qt::AlignCenter);
-            t->setItem(row - 1, 7, newItem1);*/
-
           } else {  //不存在二进制文件，只存在一个Info.plist文件的情况
 
             QDir fileDir(filePath + "/" + fileInfo.fileName() +
@@ -3036,40 +3016,17 @@ void MainWindow::addKexts(QStringList FileName) {
                   t->setItem(t->rowCount() - 1, n, new QTableWidgetItem(""));
                 }
               }
-
-              /*int row = t->rowCount() + 1;
-
-              t->setRowCount(row);
-              t->setItem(
-                  row - 1, 0,
-                  new QTableWidgetItem(QFileInfo(FileName[j]).fileName() +
-                                       "/Contents/PlugIns/" + kext_file[i]));
-              t->setItem(row - 1, 1, new QTableWidgetItem(""));
-              t->setItem(row - 1, 2, new QTableWidgetItem(""));
-              t->setItem(row - 1, 3,
-                         new QTableWidgetItem("Contents/Info.plist"));
-              t->setItem(row - 1, 4, new QTableWidgetItem(""));
-              t->setItem(row - 1, 5, new QTableWidgetItem(""));
-              init_enabled_data(t, row - 1, 6, "true");
-
-              QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
-              newItem1->setTextAlignment(Qt::AlignCenter);
-              t->setItem(row - 1, 7, newItem1);*/
             }
           }
         }
       }
     }
 
-    // t->setFocus();
-    // t->setCurrentCell(row - 1, 0);
   }  // for (int j = 0; j < file_count; j++)
 
   // Sort
   sortForKexts();
 
-  // this->setWindowModified(true);
-  // updateIconStatus();
   checkFiles(t);
 }
 
@@ -3562,7 +3519,17 @@ void MainWindow::arch_ForceChange() {
 }
 
 void MainWindow::arch_blockChange() {
-  ui->table_kernel_block->item(c_row, 5)->setText(cboxArch->currentText());
+  QTableWidget* t = ui->table_kernel_block;
+  int ArchCol = 0;
+  int StrategyCol = 0;
+  QString txt = t->horizontalHeaderItem(t->currentColumn())->text();
+  for (int i = 0; i < t->columnCount(); i++) {
+    if (t->horizontalHeaderItem(i)->text() == "Arch") ArchCol = i;
+    if (t->horizontalHeaderItem(i)->text() == "Strategy") StrategyCol = i;
+  }
+  if (txt == "Arch") t->item(c_row, ArchCol)->setText(cboxArch->currentText());
+  if (txt == "Strategy")
+    t->item(c_row, StrategyCol)->setText(cboxArch->currentText());
 }
 
 void MainWindow::arch_patchChange() {
@@ -8496,7 +8463,7 @@ void MainWindow::set_AutoColWidth(QTableWidget* w, bool autoColWidth) {
       QString item = w->horizontalHeaderItem(y)->text();
       if (item != "Enabled" && item != "Arch" && item != "All" &&
           item != "Type" && item != "TextMode" && item != "Auxiliary" &&
-          item != "RealPath" && item != "Class") {
+          item != "RealPath" && item != "Class" && item != "Strategy") {
         w->horizontalHeader()->setSectionResizeMode(
             y, QHeaderView::ResizeToContents);
       }
