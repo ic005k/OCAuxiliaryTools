@@ -419,13 +419,18 @@ void MainWindow::openFileAfter() {
 }
 
 void MainWindow::checkFiles(QTableWidget* table) {
-  if (table == ui->table_acpi_add) markColor(table, strACPI, 0);
-
-  if (table == ui->table_kernel_add) markColor(table, strKexts, 0);
-
-  if (table == ui->table_uefi_drivers) markColor(table, strDrivers, 0);
-
-  if (table == ui->tableTools) markColor(table, strTools, 0);
+  int fileCol = 0;
+  for (int n = 0; n < ui->tableTools->columnCount(); n++) {
+    QString txt = table->horizontalHeaderItem(n)->text();
+    if (txt == "Path" || txt == "BundlePath") {
+      fileCol = n;
+      break;
+    }
+  }
+  if (table == ui->table_acpi_add) markColor(table, strACPI, fileCol);
+  if (table == ui->table_kernel_add) markColor(table, strKexts, fileCol);
+  if (table == ui->table_uefi_drivers) markColor(table, strDrivers, fileCol);
+  if (table == ui->tableTools) markColor(table, strTools, fileCol);
 }
 
 void MainWindow::markColor(QTableWidget* table, QString path, int col) {
@@ -2762,22 +2767,29 @@ void MainWindow::on_btnACPIAdd_Add_clicked() {
 
 void MainWindow::addACPIItem(QStringList FileName) {
   if (FileName.isEmpty()) return;
-
+  int pathCol = 0;
+  for (int n = 0; n < ui->table_acpi_add->columnCount(); n++) {
+    QString txt = ui->table_acpi_add->horizontalHeaderItem(n)->text();
+    if (txt == "Path") {
+      pathCol = n;
+      break;
+    }
+  }
   QStringList tempList =
-      mymethod->delDuplication(FileName, ui->table_acpi_add, 0);
+      mymethod->delDuplication(FileName, ui->table_acpi_add, pathCol);
   FileName.clear();
   FileName = tempList;
 
   for (int i = 0; i < FileName.count(); i++) {
-    int row = ui->table_acpi_add->rowCount();
     QString strBaseName = QFileInfo(FileName.at(i)).fileName();
-    ui->table_acpi_add->setRowCount(row + 1);
-    ui->table_acpi_add->setItem(row, 0, new QTableWidgetItem(strBaseName));
-    init_enabled_data(ui->table_acpi_add, row, 1, "true");
-    ui->table_acpi_add->setItem(row, 2, new QTableWidgetItem(""));
-
-    ui->table_acpi_add->setFocus();
-    ui->table_acpi_add->setCurrentCell(row, 0);
+    Method::add_OneLine(ui->table_acpi_add);
+    for (int n = 0; n < ui->table_acpi_add->columnCount(); n++) {
+      QString txt = ui->table_acpi_add->horizontalHeaderItem(n)->text();
+      if (txt == "Path") {
+        ui->table_acpi_add->setItem(ui->table_acpi_add->rowCount() - 1, n,
+                                    new QTableWidgetItem(strBaseName));
+      }
+    }
 
     QDir dir(strACPI);
     if (dir.exists()) {
@@ -2785,8 +2797,6 @@ void MainWindow::addACPIItem(QStringList FileName) {
     }
   }
 
-  this->setWindowModified(true);
-  updateIconStatus();
   checkFiles(ui->table_acpi_add);
 }
 
@@ -2852,18 +2862,21 @@ void MainWindow::on_btnKernelAdd_Add_clicked() {
 }
 
 void MainWindow::addKexts(QStringList FileName) {
+  QTableWidget* t = ui->table_kernel_add;
   // 去重
-  QStringList tempList =
-      mymethod->delDuplication(FileName, ui->table_kernel_add, 0);
+  int pathCol = 0;
+  for (int n = 0; n < t->columnCount(); n++) {
+    QString txt = t->horizontalHeaderItem(n)->text();
+    if (txt == "Path") {
+      pathCol = n;
+      break;
+    }
+  }
+  QStringList tempList = mymethod->delDuplication(FileName, t, pathCol);
   FileName.clear();
   FileName = tempList;
-
   int file_count = FileName.count();
-
   if (file_count == 0 || FileName[0] == "") return;
-
-  QTableWidget* t = ui->table_kernel_add;
-
   for (int j = 0; j < file_count; j++) {
     QFileInfo fileInfo(FileName[j]);
 
@@ -2883,10 +2896,25 @@ void MainWindow::addKexts(QStringList FileName) {
       }
     }
 
-    int row = t->rowCount() + 1;
+    // int row = t->rowCount() + 1;
     QString strBaseName = QFileInfo(FileName[j]).fileName();
-    t->setRowCount(row);
-    t->setItem(row - 1, 0, new QTableWidgetItem(strBaseName));
+    Method::add_OneLine(t);
+    for (int n = 0; n < t->columnCount(); n++) {
+      QString txt = t->horizontalHeaderItem(n)->text();
+      if (txt == "BundlePath") {
+        t->setItem(t->rowCount() - 1, n, new QTableWidgetItem(strBaseName));
+      }
+      if (txt == "ExecutablePath") {
+        if (fileInfoList.fileName() != "")
+          t->setItem(t->rowCount() - 1, n,
+                     new QTableWidgetItem("Contents/MacOS/" +
+                                          fileInfoList.fileName()));
+        else
+          t->setItem(t->rowCount() - 1, n, new QTableWidgetItem(""));
+      }
+    }
+
+    /*t->setItem(row - 1, 0, new QTableWidgetItem(strBaseName));
     t->setItem(row - 1, 1, new QTableWidgetItem(""));
 
     if (fileInfoList.fileName() != "")
@@ -2903,7 +2931,7 @@ void MainWindow::addKexts(QStringList FileName) {
 
     QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
     newItem1->setTextAlignment(Qt::AlignCenter);
-    t->setItem(row - 1, 7, newItem1);
+    t->setItem(row - 1, 7, newItem1);*/
 
     QDir dir(strKexts);
     if (dir.exists()) {
@@ -2951,7 +2979,23 @@ void MainWindow::addKexts(QStringList FileName) {
             }
 
             //写入到表里
-            int row = t->rowCount() + 1;
+            Method::add_OneLine(t);
+            for (int n = 0; n < t->columnCount(); n++) {
+              QString txt = t->horizontalHeaderItem(n)->text();
+              if (txt == "BundlePath") {
+                t->setItem(
+                    t->rowCount() - 1, n,
+                    new QTableWidgetItem(QFileInfo(FileName[j]).fileName() +
+                                         "/Contents/PlugIns/" + kext_file[i]));
+              }
+              if (txt == "ExecutablePath") {
+                t->setItem(t->rowCount() - 1, n,
+                           new QTableWidgetItem("Contents/MacOS/" +
+                                                fileInfoList.fileName()));
+              }
+            }
+
+            /*int row = t->rowCount() + 1;
 
             t->setRowCount(row);
             t->setItem(
@@ -2971,7 +3015,7 @@ void MainWindow::addKexts(QStringList FileName) {
 
             QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
             newItem1->setTextAlignment(Qt::AlignCenter);
-            t->setItem(row - 1, 7, newItem1);
+            t->setItem(row - 1, 7, newItem1);*/
 
           } else {  //不存在二进制文件，只存在一个Info.plist文件的情况
 
@@ -2979,7 +3023,21 @@ void MainWindow::addKexts(QStringList FileName) {
                          "/Contents/PlugIns/" + kext_file[i] + "/Contents/");
             if (fileDir.exists()) {
               //写入到表里
-              int row = t->rowCount() + 1;
+              Method::add_OneLine(t);
+              for (int n = 0; n < t->columnCount(); n++) {
+                QString txt = t->horizontalHeaderItem(n)->text();
+                if (txt == "BundlePath") {
+                  t->setItem(t->rowCount() - 1, n,
+                             new QTableWidgetItem(
+                                 QFileInfo(FileName[j]).fileName() +
+                                 "/Contents/PlugIns/" + kext_file[i]));
+                }
+                if (txt == "ExecutablePath") {
+                  t->setItem(t->rowCount() - 1, n, new QTableWidgetItem(""));
+                }
+              }
+
+              /*int row = t->rowCount() + 1;
 
               t->setRowCount(row);
               t->setItem(
@@ -2996,22 +3054,22 @@ void MainWindow::addKexts(QStringList FileName) {
 
               QTableWidgetItem* newItem1 = new QTableWidgetItem("x86_64");
               newItem1->setTextAlignment(Qt::AlignCenter);
-              t->setItem(row - 1, 7, newItem1);
+              t->setItem(row - 1, 7, newItem1);*/
             }
           }
         }
       }
     }
 
-    t->setFocus();
-    t->setCurrentCell(row - 1, 0);
+    // t->setFocus();
+    // t->setCurrentCell(row - 1, 0);
   }  // for (int j = 0; j < file_count; j++)
 
   // Sort
   sortForKexts();
 
-  this->setWindowModified(true);
-  updateIconStatus();
+  // this->setWindowModified(true);
+  // updateIconStatus();
   checkFiles(t);
 }
 
@@ -3074,28 +3132,34 @@ void MainWindow::on_btnMiscTools_Add_clicked() {
 void MainWindow::addEFITools(QStringList FileName) {
   if (FileName.isEmpty()) return;
 
-  QStringList tempList = mymethod->delDuplication(FileName, ui->tableTools, 0);
+  int pathCol = 0;
+  for (int n = 0; n < ui->tableTools->columnCount(); n++) {
+    QString txt = ui->tableTools->horizontalHeaderItem(n)->text();
+    if (txt == "Path") {
+      pathCol = n;
+      break;
+    }
+  }
+  QStringList tempList =
+      mymethod->delDuplication(FileName, ui->tableTools, pathCol);
   FileName.clear();
   FileName = tempList;
 
   for (int i = 0; i < FileName.count(); i++) {
-    add_item(ui->tableTools, 9);
-
-    int row = ui->tableTools->rowCount() - 1;
     QString strBaseName = QFileInfo(FileName.at(i)).fileName();
-    ui->tableTools->setItem(row, 0, new QTableWidgetItem(strBaseName));
-
-    ui->tableTools->setItem(row, 2, new QTableWidgetItem(strBaseName));
-
-    ui->tableTools->setFocus();
-    ui->tableTools->setCurrentCell(row, 0);
-
-    init_enabled_data(ui->tableTools, row, 4, "false");
-    init_enabled_data(ui->tableTools, row, 5, "true");
-    init_enabled_data(ui->tableTools, row, 6, "false");
-    init_enabled_data(ui->tableTools, row, 7, "false");
-
-    ui->tableTools->setItem(row, 8, new QTableWidgetItem("Auto"));
+    Method::add_OneLine(ui->tableTools);
+    for (int n = 0; n < ui->tableTools->columnCount(); n++) {
+      QString txt = ui->tableTools->horizontalHeaderItem(n)->text();
+      if (txt == "Path") {
+        ui->tableTools->setItem(ui->tableTools->rowCount() - 1, n,
+                                new QTableWidgetItem(strBaseName));
+      }
+      if (txt == "Name") {
+        QString str = strBaseName;
+        ui->tableTools->setItem(ui->tableTools->rowCount() - 1, n,
+                                new QTableWidgetItem(str.replace(".efi", "")));
+      }
+    }
 
     QDir dir(strTools);
     if (dir.exists()) {
@@ -3103,8 +3167,6 @@ void MainWindow::addEFITools(QStringList FileName) {
     }
   }
 
-  this->setWindowModified(true);
-  updateIconStatus();
   checkFiles(ui->tableTools);
 }
 
@@ -3245,9 +3307,16 @@ void MainWindow::on_btnUEFIDrivers_Add_clicked() {
 
 void MainWindow::addEFIDrivers(QStringList FileName) {
   if (FileName.isEmpty()) return;
-
+  int pathCol = 0;
+  for (int n = 0; n < ui->table_uefi_drivers->columnCount(); n++) {
+    QString txt = ui->tableTools->horizontalHeaderItem(n)->text();
+    if (txt == "Path") {
+      pathCol = n;
+      break;
+    }
+  }
   QStringList tempList =
-      mymethod->delDuplication(FileName, ui->table_uefi_drivers, 0);
+      mymethod->delDuplication(FileName, ui->table_uefi_drivers, pathCol);
   FileName.clear();
   FileName = tempList;
   int colCount = ui->table_uefi_drivers->columnCount();
@@ -5046,7 +5115,8 @@ void MainWindow::init_ToolBarIcon() {
   if (red < 55)
     listStyleMain =
 
-        "QListWidget::item:hover{background-color:rgba(190,190,190,50);margin:"
+        "QListWidget::item:hover{background-color:rgba(190,190,190,50);"
+        "margin:"
         "1px,1px,1px,"
         "1px;border-radius:6;"
         "color:#e6e6e6}"
