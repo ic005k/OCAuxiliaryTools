@@ -40,7 +40,7 @@ function Main() {
     Copy-Item Database $archiveName\Database -recurse
     
     #$devDatabase=devDatabase -f
-    Copy-Item devDatabase $archiveName\devDatabase -recurse
+    #Copy-Item devDatabase $archiveName\devDatabase -recurse
     
     # 拷贝依赖
     windeployqt --qmldir . --plugindir $archiveName\plugins --no-translations --compiler-runtime $archiveName\$targetName
