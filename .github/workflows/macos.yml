@@ -59,9 +59,9 @@ jobs:
           #chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/ocvalidate
           #chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/ocpasswordgen
           
-          chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/CreateVault/create_vault.sh
-          chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/CreateVault/RsaTool
-          chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/CreateVault/sign.command
+          #chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/CreateVault/create_vault.sh
+          #chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/CreateVault/RsaTool
+          #chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/CreateVault/sign.command
           
           cp -f Info.plist bin/release/${targetName}.app/Contents/Info.plist
           
