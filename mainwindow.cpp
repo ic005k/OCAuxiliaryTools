@@ -3336,7 +3336,7 @@ void MainWindow::MoveItem(QTableWidget* t, bool up) {
   int cols = t->columnCount();
   QList<int> enabledList;
   for (int i = 0; i < cols; i++) {
-    if (t->horizontalHeaderItem(i)->text() == tr("Enabled"))
+    if (Method::isBool(t->horizontalHeaderItem(i)->text()))
       enabledList.append(i);
   }
 
