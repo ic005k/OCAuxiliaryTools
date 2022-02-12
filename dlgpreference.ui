@@ -169,12 +169,12 @@
             </property>
             <item>
              <property name="text">
-              <string/>
+              <string>https://github.com/dortania/build-repo</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>https://github.com/dortania/build-repo</string>
+              <string/>
              </property>
             </item>
            </widget>

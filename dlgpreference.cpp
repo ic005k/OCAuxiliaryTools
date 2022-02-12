@@ -34,7 +34,9 @@ dlgPreference::dlgPreference(QWidget *parent)
       QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
 
   QSettings Reg(strIniFile, QSettings::IniFormat);
-  ui->editOCDevSource->lineEdit()->setText(Reg.value("DevSource").toString());
+  ui->editOCDevSource->lineEdit()->setText(
+      Reg.value("DevSource", "https://github.com/dortania/build-repo")
+          .toString());
   QFileInfo fi(strIniFile);
   QString strDef = "https://ghproxy.com/https://github.com/";
   QLocale locale;

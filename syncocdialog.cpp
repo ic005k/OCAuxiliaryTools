@@ -614,13 +614,15 @@ void SyncOCDialog::init_Sync_OC_Table() {
   QFileInfo f4(file4);
 
   this->setFocus();
-  if (!f1.exists() || !f2.exists() || !f3.exists() || !f4.exists()) {
-    box.setText(
-        tr("The database file is incomplete and the upgrade cannot be "
-           "completed."));
-    box.exec();
-    mw_one->ui->mycboxFind->setFocus();
-    return;
+  if (!blDEV) {
+    if (!f1.exists() || !f2.exists() || !f3.exists() || !f4.exists()) {
+      box.setText(
+          tr("The database file is incomplete and the upgrade cannot be "
+             "completed."));
+      box.exec();
+      mw_one->ui->mycboxFind->setFocus();
+      return;
+    }
   }
 
   // Init Kexts

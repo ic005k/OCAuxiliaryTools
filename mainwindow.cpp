@@ -72,6 +72,12 @@ void MainWindow::changeOpenCore(bool blDEV) {
       dataBaseDir = strAppExePath + "/devDatabase/";
     else
       dataBaseDir = QDir::homePath() + +"/devDatabase/";
+    if (!QDir(dataBaseDir).exists()) {
+      QMessageBox::critical(
+          this, "",
+          tr("The development version database does not exist, please "
+             "update it online in the  Upgrade OpenCore and Kexts UI."));
+    }
 
     ocVerDev = ocVerDev.replace(" [" + tr("DEV") + "]", "");
     ocVerDev = ocVerDev + " [" + tr("DEV") + "]";
@@ -5541,20 +5547,25 @@ void MainWindow::init_Widgets() {
 
   QSettings Reg(strIniFile, QSettings::IniFormat);
   blDEV = Reg.value("OpenCoreDEV", false).toBool();
-  QString fileSample;
-  if (blDEV)
-    fileSample = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
-  else
-    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
+  QString fileSample, fileSampleDev;
+  fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
+  fileSampleDev = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
   QFile file(fileSample);
-  if (file.exists())
-    mapTatol = PListParser::parsePList(&file).toMap();
-  else {
+  QFile fileDev(fileSampleDev);
+  if (!file.exists()) {
     QMessageBox::critical(this, "",
                           fileSample + "\n\n" +
                               tr("The file does not exist, please check the "
                                  "integrity of the app."));
     close();
+  }
+  if (blDEV) {
+    if (fileDev.exists())
+      mapTatol = PListParser::parsePList(&fileDev).toMap();
+    else
+      mapTatol = PListParser::parsePList(&file).toMap();
+  } else {
+    mapTatol = PListParser::parsePList(&file).toMap();
   }
 
   mymethod = new Method(this);
