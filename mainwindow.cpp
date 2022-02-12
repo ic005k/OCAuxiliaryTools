@@ -10192,7 +10192,8 @@ void MainWindow::on_btnCheckSN_clicked() {
 
 void MainWindow::smart_UpdateKeyField() {
   QSettings Reg(strIniFile, QSettings::IniFormat);
-  if (!Reg.value("SmartKey").toBool()) return;
+  if (!Reg.value("SmartKey").toBool()) {
+  };
 
   QString fileSample;
   if (blDEV)

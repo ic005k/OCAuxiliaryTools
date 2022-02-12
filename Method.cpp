@@ -2398,6 +2398,7 @@ bool Method::isBool(QString strCol) {
 }
 
 void Method::init_Table(QTableWidget* t, QStringList listHeaders) {
+  t->setColumnCount(0);
   if (listHeaders.count() == 0) {
     t->setColumnCount(1);
     t->setHorizontalHeaderLabels(QStringList() << "");
