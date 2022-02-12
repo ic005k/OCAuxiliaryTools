@@ -415,7 +415,7 @@ void MainWindow::openFileAfter() {
 
 void MainWindow::checkFiles(QTableWidget* table) {
   int fileCol = 0;
-  for (int n = 0; n < ui->tableTools->columnCount(); n++) {
+  for (int n = 0; n < table->columnCount(); n++) {
     QString txt = table->horizontalHeaderItem(n)->text();
     if (txt == "Path" || txt == "BundlePath") {
       fileCol = n;
@@ -2587,7 +2587,7 @@ QString MainWindow::getSubTabStr(int tabIndex) {
 }
 
 void MainWindow::del_item(QTableWidget* table) {
-  if (table->rowCount() == 0) return;
+  if (!table->currentIndex().isValid()) return;
 
   int row = table->currentRow();
 

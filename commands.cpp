@@ -64,10 +64,8 @@ void DeleteCommand::undo() {
 
   if (m_table0 != NULL && !m_loadINI) {
     if (m_writeINI)
-      // mw_one->write_ini(m_table0, m_table, m_table0CurrentRow);
       mymethod->writeLeftTable(m_table0, m_table);
     else
-      // mw_one->write_value_ini(m_table0, m_table, m_table0CurrentRow);
       mymethod->writeLeftTableOnlyValue(m_table0, m_table);
   }
 
@@ -97,7 +95,6 @@ void DeleteCommand::redo() {
 
   if (m_table0 != NULL && !m_loadINI) {
     if (m_writeINI)
-
       mymethod->writeLeftTable(m_table0, m_table);
     else
       mymethod->writeLeftTableOnlyValue(m_table0, m_table);
