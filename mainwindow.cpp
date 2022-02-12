@@ -106,9 +106,9 @@ void MainWindow::changeOpenCore(bool blDEV) {
 
   if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
     title = lblVer->text() + "      ";
-    setWindowTitle(title + SaveFileName);
+    setWindowTitle(title + "[*]" + SaveFileName);
   } else
-    title = "";
+      title = "[*]";
 
   if (QFile(SaveFileName).exists()) {
     oc_Validate(false);
@@ -10341,8 +10341,8 @@ void MainWindow::init_AutoColumnWidth() {
   }
 }
 
-void MainWindow::on_editSystemSerialNumber_textChanged(const QString& arg1) {
 #ifdef Q_OS_MAC
+void MainWindow::on_editSystemSerialNumber_textChanged(const QString& arg1) {
   QProcess* p = new QProcess;
   p->start(strAppExePath + "/Database/mac/macserial", QStringList()
                                                           << "-i" << arg1);
@@ -10352,5 +10352,5 @@ void MainWindow::on_editSystemSerialNumber_textChanged(const QString& arg1) {
   ui->textMacInfo->append(arg1 + " :");
   ui->textMacInfo->append("");
   ui->textMacInfo->append(result);
-#endif
 }
+#endif

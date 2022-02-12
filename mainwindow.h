@@ -378,7 +378,7 @@ class MainWindow : public QMainWindow {
   void set_InitCheckBox(QTableWidget* t, int row, int column);
   void oc_Validate(bool show);
   void init_AutoColumnWidth();
-public slots:
+  public slots:
   void DisplayLevel();
   void ScanPolicy();
   void PickerAttributes();
@@ -979,9 +979,11 @@ public slots:
 
   void on_btnCheckSN_clicked();
 
-  void on_editSystemSerialNumber_textChanged(const QString& arg1);
+#ifdef Q_OS_MAC
+  void on_editSystemSerialNumber_textChanged(const QString &arg1);
+#endif
 
- private:
+  private:
   bool isDrag;
   QPoint m_position;
   bool LoadRightTable = false;
