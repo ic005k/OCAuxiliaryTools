@@ -1480,6 +1480,7 @@ QStringList Method::delDuplication(QStringList FileName, QTableWidget* table,
 }
 
 void Method::OCValidationProcessing() {
+  return;
   if (mw_one->ui->chkPickerAudioAssist->isChecked())
     mw_one->ui->chkAudioSupport->setChecked(true);
 
@@ -2320,7 +2321,15 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
       t->setItem(i + rowTotal, 0, newItem1);
     }
 
-    if (map.count() > 0) {
+    if (map.count() > 0 && t->columnCount() == 1) {
+      if (map.keys().contains("Path")) {
+        QTableWidgetItem* newItem1;
+        newItem1 = new QTableWidgetItem(map["Path"].toString());
+        t->setItem(i + rowTotal, 0, newItem1);
+      }
+    }
+
+    if (map.count() > 0 && t->columnCount() > 1) {
       for (int j = 0; j < t->columnCount(); j++) {
         QString strCol = t->horizontalHeaderItem(j)->text();
         QStringList list = strCol.split("\n");

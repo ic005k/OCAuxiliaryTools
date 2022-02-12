@@ -2025,30 +2025,6 @@ QVariantMap MainWindow::SaveMisc() {
   // Boot
   subMap["Boot"] = setValue(valueList, ui->tabMisc1);
 
-  if (ui->cboxPickerMode->currentText().trimmed() == "External") {
-    for (int i = 0; i < ui->table_uefi_drivers->rowCount(); i++) {
-      if (ui->table_uefi_drivers->item(i, 0)->text().trimmed() ==
-          "OpenCanopy.efi") {
-        if (ui->table_uefi_drivers->item(i, 1)->checkState() == Qt::Unchecked) {
-          ui->table_uefi_drivers->item(i, 1)->setTextAlignment(Qt::AlignCenter);
-          ui->table_uefi_drivers->item(i, 1)->setText("true");
-          ui->table_uefi_drivers->item(i, 1)->setCheckState(Qt::Checked);
-        }
-      }
-    }
-  } else {
-    for (int i = 0; i < ui->table_uefi_drivers->rowCount(); i++) {
-      if (ui->table_uefi_drivers->item(i, 0)->text().trimmed() ==
-          "OpenCanopy.efi") {
-        if (ui->table_uefi_drivers->item(i, 1)->checkState() == Qt::Checked) {
-          ui->table_uefi_drivers->item(i, 1)->setTextAlignment(Qt::AlignCenter);
-          ui->table_uefi_drivers->item(i, 1)->setText("false");
-          ui->table_uefi_drivers->item(i, 1)->setCheckState(Qt::Unchecked);
-        }
-      }
-    }
-  }
-
   // Debug
   valueList.clear();
   subMap["Debug"] = setValue(valueList, ui->tabMisc2);
@@ -3256,51 +3232,39 @@ void MainWindow::on_btnUEFIDrivers_Add_clicked() {
 
 void MainWindow::addEFIDrivers(QStringList FileName) {
   if (FileName.isEmpty()) return;
+  QTableWidget* t = ui->table_uefi_drivers;
   int pathCol = 0;
-  for (int n = 0; n < ui->table_uefi_drivers->columnCount(); n++) {
-    QString txt = ui->tableTools->horizontalHeaderItem(n)->text();
+  for (int n = 0; n < t->columnCount(); n++) {
+    QString txt = t->horizontalHeaderItem(n)->text();
     if (txt == "Path") {
       pathCol = n;
       break;
     }
   }
-  QStringList tempList =
-      mymethod->delDuplication(FileName, ui->table_uefi_drivers, pathCol);
+  QStringList tempList = mymethod->delDuplication(FileName, t, pathCol);
   FileName.clear();
   FileName = tempList;
-  int colCount = ui->table_uefi_drivers->columnCount();
+  int colCount = t->columnCount();
   for (int i = 0; i < FileName.count(); i++) {
-    int row = ui->table_uefi_drivers->rowCount() + 1;
+    int row = t->rowCount() + 1;
     QString strBaseName = QFileInfo(FileName.at(i)).fileName();
     if (colCount == 1) {
-      ui->table_uefi_drivers->setRowCount(row);
-      ui->table_uefi_drivers->setItem(row - 1, 0,
-                                      new QTableWidgetItem(strBaseName));
+      t->setRowCount(row);
+      t->setItem(row - 1, 0, new QTableWidgetItem(strBaseName));
     }
     if (colCount > 1) {
-      ui->table_uefi_drivers->setRowCount(row);
+      t->setRowCount(row);
       for (int n = 0; n < colCount; n++) {
-        QString txt = ui->table_uefi_drivers->horizontalHeaderItem(n)->text();
+        QString txt = t->horizontalHeaderItem(n)->text();
         if (txt == "Path") {
-          ui->table_uefi_drivers->setItem(row - 1, n,
-                                          new QTableWidgetItem(strBaseName));
+          t->setItem(row - 1, n, new QTableWidgetItem(strBaseName));
         } else if (Method::isBool(txt)) {
-          init_enabled_data(ui->table_uefi_drivers, row - 1, n, "true");
+          init_enabled_data(t, row - 1, n, "true");
         } else {
-          ui->table_uefi_drivers->setItem(row - 1, n, new QTableWidgetItem(""));
+          t->setItem(row - 1, n, new QTableWidgetItem(""));
         }
       }
     }
-
-    /*int row = ui->table_uefi_drivers->rowCount() + 1;
-    QString strBaseName = QFileInfo(FileName.at(i)).fileName();
-    ui->table_uefi_drivers->setRowCount(row);
-    ui->table_uefi_drivers->setItem(row - 1, 0,
-                                    new QTableWidgetItem(strBaseName));
-    init_enabled_data(ui->table_uefi_drivers, row - 1, 1, "true");
-    ui->table_uefi_drivers->setItem(row - 1, 2, new QTableWidgetItem(""));
-
-    ui->table_uefi_drivers->setItem(row - 1, 3, new QTableWidgetItem(""));*/
 
     ui->table_uefi_drivers->setFocus();
     ui->table_uefi_drivers->setCurrentCell(row - 1, 0);
