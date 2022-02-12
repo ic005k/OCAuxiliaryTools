@@ -2297,6 +2297,16 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
     t->setRowCount(t->rowCount() + 1);
     QVariantMap map = mapList.at(i).toMap();
 
+    for (int k = 0; k < t->columnCount(); k++) {
+      QString strCol = t->horizontalHeaderItem(k)->text();
+      if (isBool(strCol)) {
+        mw_one->init_enabled_data(t, i + rowTotal, k, "false");
+      } else {
+        QTableWidgetItem* newItem1 = new QTableWidgetItem("");
+        t->setItem(i + rowTotal, k, newItem1);
+      }
+    }
+
     if (map.count() == 0) {  //代表列，从0开始
       QTableWidgetItem* newItem1 =
           new QTableWidgetItem(mapList.at(i).toString());
@@ -2389,6 +2399,7 @@ void Method::init_Table(QTableWidget* t, QStringList listHeaders) {
     if (listHeaders.removeOne("Name")) listHeaders.insert(0, "Name");
 
     t->setHorizontalHeaderLabels(listHeaders);
+    t->horizontalHeader()->setStretchLastSection(false);
   }
   t->setAlternatingRowColors(true);
 
@@ -2412,4 +2423,33 @@ QStringList Method::get_HorizontalHeaderList(QString main, QString sub) {
     return list;
   }
   return list;
+}
+
+void Method::add_OneLine(QTableWidget* t) {
+  t->setRowCount(t->rowCount() + 1);
+  for (int k = 0; k < t->columnCount(); k++) {
+    QString strCol = t->horizontalHeaderItem(k)->text();
+    if (isBool(strCol)) {
+      mw_one->init_enabled_data(t, t->rowCount() - 1, k, "true");
+    } else if (strCol == "Arch") {
+      QTableWidgetItem* newItem1 = new QTableWidgetItem("Any");
+      newItem1->setTextAlignment(Qt::AlignCenter);
+      t->setItem(t->rowCount() - 1, k, newItem1);
+    } else if (strCol == "PlistPath") {
+      QTableWidgetItem* newItem1 = new QTableWidgetItem("Contents/Info.plist");
+      t->setItem(t->rowCount() - 1, k, newItem1);
+    } else if (strCol == "Flavour") {
+      QTableWidgetItem* newItem1 = new QTableWidgetItem("Auto");
+      t->setItem(t->rowCount() - 1, k, newItem1);
+    } else if (strCol == "Type") {
+      QTableWidgetItem* newItem1 = new QTableWidgetItem("Reserved");
+      t->setItem(t->rowCount() - 1, k, newItem1);
+    } else {
+      QTableWidgetItem* newItem1 = new QTableWidgetItem("");
+      t->setItem(t->rowCount() - 1, k, newItem1);
+    }
+  }
+  t->setFocus();
+  t->setCurrentCell(t->rowCount() - 1, 0);
+  mw_one->setWM();
 }

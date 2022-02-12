@@ -131,6 +131,7 @@ class Method : public QMainWindow {
   static void set_TableData(QTableWidget *t, QVariantList mapList);
   static void init_Table(QTableWidget *t, QStringList listHeaders);
   static QStringList get_HorizontalHeaderList(QString main, QString sub);
+  static void add_OneLine(QTableWidget *t);
  public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();

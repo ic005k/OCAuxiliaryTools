@@ -2539,17 +2539,7 @@ void MainWindow::on_table_uefi_ReservedMemory_cellClicked(int row, int column) {
 }
 
 void MainWindow::on_btnKernelPatchAdd_clicked() {
-  add_item(ui->table_kernel_patch, 12);
-  init_enabled_data(ui->table_kernel_patch,
-                    ui->table_kernel_patch->rowCount() - 1, 12, "true");
-
-  QTableWidgetItem* newItem1 = new QTableWidgetItem("Any");
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_kernel_patch->setItem(ui->table_kernel_patch->currentRow(), 13,
-                                  newItem1);
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  Method::add_OneLine(ui->table_kernel_patch);
 }
 
 void MainWindow::on_btnKernelPatchDel_clicked() {
@@ -2703,26 +2693,13 @@ void MainWindow::del_item(QTableWidget* table) {
 void MainWindow::on_btnACPIAdd_Del_clicked() { del_item(ui->table_acpi_add); }
 
 void MainWindow::on_btnACPIDel_Add_clicked() {
-  add_item(ui->table_acpi_del, 6);
-
-  init_enabled_data(ui->table_acpi_del, ui->table_acpi_del->rowCount() - 1, 3,
-                    "false");
-  init_enabled_data(ui->table_acpi_del, ui->table_acpi_del->rowCount() - 1, 4,
-                    "true");
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  Method::add_OneLine(ui->table_acpi_del);
 }
 
 void MainWindow::on_btnACPIDel_Del_clicked() { del_item(ui->table_acpi_del); }
 
 void MainWindow::on_btnACPIPatch_Add_clicked() {
-  add_item(ui->table_acpi_patch, 14);
-  init_enabled_data(ui->table_acpi_patch, ui->table_acpi_patch->rowCount() - 1,
-                    11, "true");
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  Method::add_OneLine(ui->table_acpi_patch);
 }
 
 void MainWindow::on_btnACPIPatch_Del_clicked() {
@@ -2730,12 +2707,7 @@ void MainWindow::on_btnACPIPatch_Del_clicked() {
 }
 
 void MainWindow::on_btnBooter_Add_clicked() {
-  add_item(ui->table_booter, 3);
-  init_enabled_data(ui->table_booter, ui->table_booter->rowCount() - 1, 1,
-                    "true");
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  Method::add_OneLine(ui->table_booter);
 }
 
 void MainWindow::on_btnBooter_Del_clicked() { del_item(ui->table_booter); }
@@ -3071,17 +3043,7 @@ void MainWindow::sortForKexts() {
 }
 
 void MainWindow::on_btnKernelBlock_Add_clicked() {
-  add_item(ui->table_kernel_block, 4);
-  init_enabled_data(ui->table_kernel_block,
-                    ui->table_kernel_block->currentRow(), 4, "true");
-
-  QTableWidgetItem* newItem1 = new QTableWidgetItem("Any");
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_kernel_block->setItem(ui->table_kernel_block->currentRow(), 5,
-                                  newItem1);
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  Method::add_OneLine(ui->table_kernel_block);
 }
 
 void MainWindow::on_btnKernelBlock_Del_clicked() {
@@ -3089,12 +3051,7 @@ void MainWindow::on_btnKernelBlock_Del_clicked() {
 }
 
 void MainWindow::on_btnMiscBO_Add_clicked() {
-  add_item(ui->tableBlessOverride, 1);
-  ui->tableBlessOverride->setItem(ui->tableBlessOverride->currentRow(), 0,
-                                  new QTableWidgetItem(""));
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  Method::add_OneLine(ui->tableBlessOverride);
 }
 
 void MainWindow::on_btnMiscBO_Del_clicked() {
@@ -3102,18 +3059,7 @@ void MainWindow::on_btnMiscBO_Del_clicked() {
 }
 
 void MainWindow::on_btnMiscEntries_Add_clicked() {
-  add_item(ui->tableEntries, 7);
-
-  int row = ui->tableEntries->rowCount() - 1;
-
-  init_enabled_data(ui->tableEntries, row, 4, "false");
-  init_enabled_data(ui->tableEntries, row, 5, "true");
-  init_enabled_data(ui->tableEntries, row, 6, "false");
-
-  ui->tableEntries->setItem(row, 7, new QTableWidgetItem("Auto"));
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  Method::add_OneLine(ui->tableEntries);
 }
 
 void MainWindow::on_btnMiscTools_Add_clicked() {
@@ -3281,15 +3227,7 @@ void MainWindow::on_btnNVRAMLS_Del_clicked() {
 }
 
 void MainWindow::on_btnUEFIRM_Add_clicked() {
-  add_item(ui->table_uefi_ReservedMemory, 5);
-
-  int row = ui->table_uefi_ReservedMemory->currentRow();
-  ui->table_uefi_ReservedMemory->item(row, 3)->setText("Reserved");
-  init_enabled_data(ui->table_uefi_ReservedMemory,
-                    ui->table_uefi_ReservedMemory->rowCount() - 1, 4, "true");
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  Method::add_OneLine(ui->table_uefi_ReservedMemory);
 }
 
 void MainWindow::on_btnUEFIRM_Del_clicked() {
@@ -3543,11 +3481,15 @@ void MainWindow::on_table_dp_add_currentCellChanged(int currentRow,
 }
 
 void MainWindow::arch_addChange() {
-  ui->table_kernel_add->item(c_row, 7)->setText(cboxArch->currentText());
+  int cc = ui->table_kernel_add->currentColumn();
+  if (ui->table_kernel_add->horizontalHeaderItem(cc)->text() == "Arch")
+    ui->table_kernel_add->item(c_row, cc)->setText(cboxArch->currentText());
 }
 
 void MainWindow::arch_ForceChange() {
-  ui->table_kernel_Force->item(c_row, 8)->setText(cboxArch->currentText());
+  int cc = ui->table_kernel_Force->currentColumn();
+  if (ui->table_kernel_Force->horizontalHeaderItem(cc)->text() == "Arch")
+    ui->table_kernel_Force->item(c_row, cc)->setText(cboxArch->currentText());
 }
 
 void MainWindow::arch_blockChange() {
@@ -3555,16 +3497,22 @@ void MainWindow::arch_blockChange() {
 }
 
 void MainWindow::arch_patchChange() {
-  ui->table_kernel_patch->item(c_row, 13)->setText(cboxArch->currentText());
+  int cc = ui->table_kernel_patch->currentColumn();
+  if (ui->table_kernel_patch->horizontalHeaderItem(cc)->text() == "Arch")
+    ui->table_kernel_patch->item(c_row, cc)->setText(cboxArch->currentText());
 }
 
 void MainWindow::arch_Booter_patchChange() {
-  ui->table_Booter_patch->item(c_row, 10)->setText(cboxArch->currentText());
+  int cc = ui->table_Booter_patch->currentColumn();
+  if (ui->table_Booter_patch->horizontalHeaderItem(cc)->text() == "Arch")
+    ui->table_Booter_patch->item(c_row, cc)->setText(cboxArch->currentText());
 }
 
 void MainWindow::ReservedMemoryTypeChange() {
-  ui->table_uefi_ReservedMemory->item(c_row, 3)->setText(
-      cboxReservedMemoryType->currentText());
+  int cc = ui->table_uefi_ReservedMemory->currentColumn();
+  if (ui->table_uefi_ReservedMemory->horizontalHeaderItem(cc)->text() == "Type")
+    ui->table_uefi_ReservedMemory->item(c_row, cc)->setText(
+        cboxReservedMemoryType->currentText());
 }
 
 void MainWindow::dataClassChange_dp() {
@@ -3990,30 +3938,7 @@ void MainWindow::on_table_kernel_Force_currentCellChanged(int currentRow,
 }
 
 void MainWindow::on_btnKernelForce_Add_clicked() {
-  QTableWidget* t = new QTableWidget;
-  t = ui->table_kernel_Force;
-  t->setSelectionMode(QAbstractItemView::SingleSelection);
-  int row = t->rowCount() + 1;
-
-  t->setRowCount(row);
-  t->setItem(row - 1, 0, new QTableWidgetItem(""));
-  t->setItem(row - 1, 1, new QTableWidgetItem(""));
-  t->setItem(row - 1, 2, new QTableWidgetItem(""));
-  t->setItem(row - 1, 3, new QTableWidgetItem(""));
-  t->setItem(row - 1, 4, new QTableWidgetItem("Contents/Info.plist"));
-  t->setItem(row - 1, 5, new QTableWidgetItem(""));
-  t->setItem(row - 1, 6, new QTableWidgetItem(""));
-  init_enabled_data(t, row - 1, 7, "false");
-
-  QTableWidgetItem* newItem1 = new QTableWidgetItem("Any");
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  t->setItem(row - 1, 8, newItem1);
-
-  t->setFocus();
-  t->setCurrentCell(row - 1, 0);
-  t->setSelectionMode(QAbstractItemView::ExtendedSelection);
-  this->setWindowModified(true);
-  updateIconStatus();
+  Method::add_OneLine(ui->table_kernel_Force);
 }
 
 void MainWindow::on_btnKernelForce_Del_clicked() {
@@ -4374,10 +4299,7 @@ void MainWindow::on_tabTotal_currentChanged(int index) {
 }
 
 void MainWindow::on_btnDevices_add_clicked() {
-  add_item(ui->tableDevices, 8);
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  Method::add_OneLine(ui->tableDevices);
 }
 
 void MainWindow::on_btnDevices_del_clicked() { del_item(ui->tableDevices); }
@@ -6115,17 +6037,7 @@ void MainWindow::readResultCheckData() {
 }
 
 void MainWindow::on_btnBooterPatchAdd_clicked() {
-  add_item(ui->table_Booter_patch, 10);
-  init_enabled_data(ui->table_Booter_patch,
-                    ui->table_Booter_patch->rowCount() - 1, 9, "true");
-
-  QTableWidgetItem* newItem1 = new QTableWidgetItem("Any");
-  newItem1->setTextAlignment(Qt::AlignCenter);
-  ui->table_Booter_patch->setItem(ui->table_Booter_patch->currentRow(), 10,
-                                  newItem1);
-
-  this->setWindowModified(true);
-  updateIconStatus();
+  Method::add_OneLine(ui->table_Booter_patch);
 }
 
 void MainWindow::on_btnBooterPatchDel_clicked() {
@@ -6137,7 +6049,8 @@ void MainWindow::on_table_Booter_patch_cellClicked(int row, int column) {
 
   set_InitCheckBox(ui->table_Booter_patch, row, column);
 
-  if (ui->table_Booter_patch->horizontalHeaderItem(column)->text() == "Arch") {
+  int cc = ui->table_Booter_patch->currentColumn();
+  if (ui->table_Booter_patch->horizontalHeaderItem(cc)->text() == "Arch") {
     cboxArch = new QComboBox;
     cboxArch->setEditable(true);
     cboxArch->addItem("Any");
@@ -6149,8 +6062,8 @@ void MainWindow::on_table_Booter_patch_cellClicked(int row, int column) {
             SLOT(arch_Booter_patchChange()));
     c_row = row;
 
-    ui->table_Booter_patch->setCellWidget(row, column, cboxArch);
-    cboxArch->setCurrentText(ui->table_Booter_patch->item(row, column)->text());
+    ui->table_Booter_patch->setCellWidget(row, cc, cboxArch);
+    cboxArch->setCurrentText(ui->table_Booter_patch->item(row, cc)->text());
   }
 
   setStatusBarText(ui->table_Booter_patch);
@@ -6160,7 +6073,14 @@ void MainWindow::on_table_Booter_patch_currentCellChanged(int currentRow,
                                                           int currentColumn,
                                                           int previousRow,
                                                           int previousColumn) {
-  ui->table_Booter_patch->removeCellWidget(previousRow, 10);
+  int colCount = ui->table_Booter_patch->columnCount();
+  for (int i = 0; i < colCount; i++) {
+    QString txt = ui->table_Booter_patch->horizontalHeaderItem(i)->text();
+    if (txt == "Arch") {
+      ui->table_Booter_patch->removeCellWidget(previousRow, i);
+      break;
+    }
+  }
 
   currentCellChanged(ui->table_Booter_patch, previousRow, previousColumn,
                      currentRow, currentColumn);
@@ -6891,8 +6811,7 @@ void MainWindow::set_InitLineEdit(QTableWidget* t, int row, int column) {
 
 void MainWindow::set_InitCheckBox(QTableWidget* t, int row, int column) {
   QString txt = t->horizontalHeaderItem(column)->text();
-  if (txt == "Enabled" || txt == "Arch" || txt == "All" || txt == "Auxiliary" ||
-      txt == "TextMode" || txt == "RealPath") {
+  if (Method::isBool(txt)) {
     enabled_change(t, row, column, column);
   }
 }
@@ -10258,6 +10177,17 @@ void MainWindow::smart_UpdateKeyField() {
   QSettings Reg(strIniFile, QSettings::IniFormat);
   if (!Reg.value("SmartKey").toBool()) return;
 
+  QString fileSample;
+  if (blDEV)
+    fileSample = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
+  else
+    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
+  QFile file(fileSample);
+  if (file.exists()) {
+    mapTatol.clear();
+    mapTatol = PListParser::parsePList(&file).toMap();
+  }
+
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabACPI4, "ACPI", "Quirks");
 
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabBooter3, "Booter",
@@ -10292,6 +10222,10 @@ void MainWindow::smart_UpdateKeyField() {
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI7, "UEFI",
                                    "ProtocolOverrides");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI8, "UEFI", "Quirks");
+
+  // Drivers
+  // QStringList list1 = Method::get_HorizontalHeaderList("UEFI", "Drivers");
+  // Method::init_Table(ui->table_uefi_drivers, list1);
 }
 
 void MainWindow::on_editSystemSerialNumber_textChanged(const QString& arg1) {
