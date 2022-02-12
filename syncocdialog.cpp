@@ -7,8 +7,9 @@
 
 extern MainWindow* mw_one;
 extern QString ocVer, ocVerDev, ocFrom, ocFromDev, strIniFile, strAppName,
-    SaveFileName, strAppExePath;
+    SaveFileName, strAppExePath, strOCFrom;
 extern bool blDEV;
+extern bool Initialization;
 extern Method* mymethod;
 
 SyncOCDialog::SyncOCDialog(QWidget* parent)
@@ -68,6 +69,12 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   }
 
   ui->listKexts->setHidden(true);
+
+  ui->comboOCVersions->addItems(QStringList() << "Latest Version"
+                                              << "0.7.7"
+                                              << "0.7.6"
+                                              << "0.7.5"
+                                              << "0.7.4");
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
@@ -517,6 +524,13 @@ void SyncOCDialog::on_btnSettings_clicked() {
 }
 
 void SyncOCDialog::init_Sync_OC_Table() {
+  if (blDEV) {
+    ui->lblOCVersions->setHidden(true);
+    ui->comboOCVersions->setHidden(true);
+  } else {
+    ui->lblOCVersions->setHidden(false);
+    ui->comboOCVersions->setHidden(false);
+  }
   sourceKexts.clear();
   targetKexts.clear();
   sourceOpenCore.clear();
@@ -805,12 +819,34 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
   progBar->show();
 
   QString ocUrl;
-  if (!blDEV)
-    ocUrl = "https://github.com/acidanthera/OpenCorePkg";
+  if (ui->comboOCVersions->currentText() == tr("Latest Version")) {
+    if (!blDEV)
+      ocUrl = "https://github.com/acidanthera/OpenCorePkg";
+    else
+      ocUrl = DevSource;
+    if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
+      mymethod->getLastReleaseFromUrl(ocUrl);
+    if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
+      mymethod->getLastReleaseFromHtml(ocUrl + "/releases/latest");
+  } else {
+    if (!blDEV) {
+      mymethod->startDownload(downLink);
+    }
+  }
+}
+
+void SyncOCDialog::on_comboOCVersions_currentTextChanged(const QString& arg1) {
+  if (Initialization) return;
+  QString str = "https://github.com/acidanthera/OpenCorePkg/releases/tag/";
+  QString url = str + arg1;
+  if (arg1 == tr("Latest Version"))
+    url = "https://github.com/acidanthera/OpenCorePkg/releases/latest";
+  strOCFrom = url;
+
+  if (mw_one->ui->actionDEBUG->isChecked())
+    downLink = "https://github.com/acidanthera/OpenCorePkg/releases/download/" +
+               arg1 + "/OpenCore-" + arg1 + "-DEBUG.zip";
   else
-    ocUrl = DevSource;
-  if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
-    mymethod->getLastReleaseFromUrl(ocUrl);
-  if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
-    mymethod->getLastReleaseFromHtml(ocUrl + "/releases/latest");
+    downLink = "https://github.com/acidanthera/OpenCorePkg/releases/download/" +
+               arg1 + "/OpenCore-" + arg1 + "-RELEASE.zip";
 }

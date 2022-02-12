@@ -28,6 +28,7 @@ Method* mymethod;
 QVector<QCheckBox*> chkDisplayLevel, chk_ScanPolicy, chk_PickerAttributes,
     chk_ExposeSensitiveData, chk_Target;
 QVariantMap mapTatol;
+bool Initialization = false;
 
 extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
     strACPI, strKexts, strDrivers, strTools, strOCFromDev;
@@ -67,6 +68,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVer);
     }
+
   } else {
     if (!linuxOS)
       dataBaseDir = strAppExePath + "/devDatabase/";
@@ -108,7 +110,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
     title = lblVer->text() + "      ";
     setWindowTitle(title + "[*]" + SaveFileName);
   } else
-      title = "[*]";
+    title = "[*]";
 
   if (QFile(SaveFileName).exists()) {
     oc_Validate(false);

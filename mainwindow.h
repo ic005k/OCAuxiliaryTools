@@ -150,7 +150,7 @@ class MainWindow : public QMainWindow {
   void getEditValue(QVariantMap map, QWidget* tab);
   void getComboBoxValue(QVariantMap map, QWidget* tab);
   void setPalette(QWidget* w, QColor backColor, QColor textColor);
-  bool Initialization = false;
+
   void setCheckBoxWidth(QCheckBox* cbox);
   QString getDatabaseVer();
   QIntValidator* IntValidator = new QIntValidator;
@@ -292,7 +292,6 @@ class MainWindow : public QMainWindow {
 
   QString title;
   bool loading = false;
-
   void about();
 
   void loadLocal();
@@ -378,7 +377,7 @@ class MainWindow : public QMainWindow {
   void set_InitCheckBox(QTableWidget* t, int row, int column);
   void oc_Validate(bool show);
   void init_AutoColumnWidth();
-  public slots:
+ public slots:
   void DisplayLevel();
   void ScanPolicy();
   void PickerAttributes();
@@ -980,10 +979,10 @@ class MainWindow : public QMainWindow {
   void on_btnCheckSN_clicked();
 
 #ifdef Q_OS_MAC
-  void on_editSystemSerialNumber_textChanged(const QString &arg1);
+  void on_editSystemSerialNumber_textChanged(const QString& arg1);
 #endif
 
-  private:
+ private:
   bool isDrag;
   QPoint m_position;
   bool LoadRightTable = false;

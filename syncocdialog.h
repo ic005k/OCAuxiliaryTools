@@ -20,6 +20,7 @@ class SyncOCDialog : public QDialog {
   ~SyncOCDialog();
   Ui::SyncOCDialog *ui;
 
+  QString downLink;
   void writeCheckStateINI();
   bool isCheckOC = false;
   QStringList sourceKexts, targetKexts, sourceOpenCore, targetOpenCore;
@@ -65,6 +66,8 @@ class SyncOCDialog : public QDialog {
   void on_tableKexts_itemSelectionChanged();
 
   void on_btnUpdateOC_clicked();
+
+  void on_comboOCVersions_currentTextChanged(const QString &arg1);
 
  private:
   void setListWidgetStyle();

@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>884</width>
-    <height>510</height>
+    <width>895</width>
+    <height>498</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Sync OC</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0" rowspan="6">
+   <item row="0" column="0" rowspan="7">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -209,14 +209,14 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="1" rowspan="6">
+   <item row="0" column="1" rowspan="7" colspan="2">
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
    </item>
-   <item row="0" column="2">
+   <item row="0" column="3">
     <layout class="QGridLayout" name="gridLayout_6">
      <item row="0" column="2">
       <widget class="QLabel" name="lblOCFrom">
@@ -250,7 +250,7 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="2">
+   <item row="1" column="3">
     <widget class="QListWidget" name="listOpenCore">
      <property name="minimumSize">
       <size>
@@ -278,7 +278,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="2">
+   <item row="2" column="2" colspan="2">
     <layout class="QGridLayout" name="gridLayout_7">
      <item row="0" column="0">
       <widget class="QCheckBox" name="chkIncludeResource">
@@ -315,7 +315,7 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="2">
+   <item row="3" column="2" colspan="2">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QLabel" name="label">
@@ -336,21 +336,35 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="2">
+   <item row="4" column="3">
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="lblOCVersions">
+       <property name="text">
+        <string>OpenCore Versions</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboOCVersions"/>
+     </item>
+    </layout>
+   </item>
+   <item row="5" column="3">
     <widget class="QPushButton" name="btnUpdateOC">
      <property name="text">
       <string>Update OpenCore database to the latest version</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="2">
+   <item row="6" column="3">
     <widget class="QPushButton" name="btnStartSync">
      <property name="text">
       <string>Start Sync</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="0" colspan="3">
+   <item row="7" column="0" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QLabel" name="lblShowInfo">
