@@ -217,8 +217,8 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   listOCATWidgetDelList.append(frame);
 }
 
-void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
-                                  QString text) {
+QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
+                                        QString text) {
   QHBoxLayout* hbox = new QHBoxLayout();
   QFrame* frame = new QFrame();
   frame->setLayout(hbox);
@@ -303,9 +303,10 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   }
 
   tab->layout()->addWidget(frame);
-
   listOCATWidgetDelList.removeOne(frame);
   listOCATWidgetDelList.append(frame);
+
+  return edit;
 }
 
 void dlgNewKeyField::removeKey(QString ObjectName) {
@@ -417,40 +418,20 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
             Key = list.at(0);
             qDebug() << str << str1;
             if (list.at(1) == "bool") {
-              for (int m = 0; m < listOCATWidget.count(); m++) {
-                QWidget* w = listOCATWidget.at(m);
-                QString txt = w->objectName();
-                qDebug() << "objName:" << txt;
-                if (txt.contains(Key)) {
-                  w->setHidden(true);
-                  bool re = false;
-                  for (int n1 = 0; n1 < listOCATWidgetHideList.count(); n1++) {
-                    if (w == listOCATWidgetHideList.at(n1)) re = true;
-                  }
-                  if (!re) listOCATWidgetHideList.append(w);
-                  listOCATWidgetHideList.append(w);
-                }
-              }
-              QWidgetList wl = get_AllLabelList(tab);
-              for (int m = 0; m < wl.count(); m++) {
-                QLabel* lbl = (QLabel*)wl.at(m);
-                if (lbl->text() == Key) {
-                  lbl->setHidden(true);
-                  bool re = false;
-                  for (int n = 0; n < listOCATWidgetHideList.count(); n++) {
-                    if (lbl == listOCATWidgetHideList.at(n)) re = true;
-                  }
-                  if (!re) listOCATWidgetHideList.append(lbl);
-                }
-              }
+              set_WidgetHide(listOCATWidget, Key);
+              set_LblHide(tab, Key);
               add_CheckBox(tab, "chk" + Key, Key);
+            }
+            if (list.at(1) == "QString") {
+              set_WidgetHide(listOCATWidget, Key);
+              set_LblHide(tab, Key);
+              add_LineEdit(tab, "edit" + Key, Key);
             }
           }
         }
       }
     }
   }
-  // qDebug() << "OCAT:" << listOCATType << "Sample:" << listSampleType;
 
   if (listOCATKey == listSampleKey) {
     qDebug() << MainName << "-->" << SubName << "Ok...";
@@ -473,27 +454,13 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
       for (int i = 0; i < listOCAT.count(); i++) {
         QWidget* w = listOCATWidget.at(i);
         w->setHidden(true);
-        bool re = false;
-        for (int n = 0; n < listOCATWidgetHideList.count(); n++) {
-          if (w == listOCATWidgetHideList.at(n)) re = true;
-        }
-        if (!re) listOCATWidgetHideList.append(w);
+        listOCATWidgetHideList.removeOne(w);
+        listOCATWidgetHideList.append(w);
 
         QString obj = w->objectName();
         if (obj.mid(0, 4) == "edit" || obj.mid(0, 4) == "cbox") {
           QString txt = get_WidgetText(w);
-          QWidgetList wl = get_AllLabelList(tab);
-          for (int m = 0; m < wl.count(); m++) {
-            QLabel* lbl = (QLabel*)wl.at(m);
-            if (lbl->text() == txt) {
-              lbl->setHidden(true);
-              bool re = false;
-              for (int n = 0; n < listOCATWidgetHideList.count(); n++) {
-                if (lbl == listOCATWidgetHideList.at(n)) re = true;
-              }
-              if (!re) listOCATWidgetHideList.append(lbl);
-            }
-          }
+          set_LblHide(tab, txt);
         }
       }
     }
@@ -526,6 +493,30 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
 
   isSmartKey = false;
   return ResultsList;
+}
+
+void dlgNewKeyField::set_LblHide(QWidget* tab, QString Key) {
+  QWidgetList wl = get_AllLabelList(tab);
+  for (int m = 0; m < wl.count(); m++) {
+    QLabel* lbl = (QLabel*)wl.at(m);
+    if (lbl->text() == Key) {
+      lbl->setHidden(true);
+      listOCATWidgetHideList.removeOne(lbl);
+      listOCATWidgetHideList.append(lbl);
+    }
+  }
+}
+
+void dlgNewKeyField::set_WidgetHide(QWidgetList listOCATWidget, QString Key) {
+  for (int m = 0; m < listOCATWidget.count(); m++) {
+    QWidget* w = listOCATWidget.at(m);
+    QString txt = w->objectName();
+    if (txt.contains(Key)) {
+      w->setHidden(true);
+      listOCATWidgetHideList.removeOne(w);
+      listOCATWidgetHideList.append(w);
+    }
+  }
 }
 
 QStringList dlgNewKeyField::get_KeyTypeValue(QVariantMap mapTatol,

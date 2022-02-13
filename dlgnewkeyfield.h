@@ -19,7 +19,8 @@ class dlgNewKeyField : public QDialog {
 
   static void saveNewKey(QString ObjectName, int main, int sub);
   static void readNewKey(QWidget* tab, QString Key);
-  static void add_LineEdit(QWidget* tab, QString ObjectName, QString text);
+  static QLineEdit* add_LineEdit(QWidget* tab, QString ObjectName,
+                                 QString text);
   static void add_CheckBox(QWidget* tab, QString ObjectName, QString text);
   static QStringList getAllNewKey();
   static QList<int> getKeyMainSub(QString Key);
@@ -34,6 +35,8 @@ class dlgNewKeyField : public QDialog {
 
  private:
   static void removeKey(QString ObjectName);
+  static void set_WidgetHide(QWidgetList listOCATWidget, QString Key);
+  static void set_LblHide(QWidget* tab, QString Key);
 };
 
 #endif  // DLGNEWKEYFIELD_H

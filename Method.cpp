@@ -2289,7 +2289,7 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
     for (int k = 0; k < t->columnCount(); k++) {
       QString strCol = t->horizontalHeaderItem(k)->text();
       if (isBool(strCol)) {
-        mw_one->init_enabled_data(t, i + rowTotal, k, "false");
+        mw_one->init_enabled_data(t, i + rowTotal, k, "true");
       } else {
         QTableWidgetItem* newItem1 = new QTableWidgetItem("");
         t->setItem(i + rowTotal, k, newItem1);
