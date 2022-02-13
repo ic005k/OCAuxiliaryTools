@@ -55,6 +55,7 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for [OpenCor
 [aria2](https://github.com/aria2/aria2)&nbsp; &nbsp; &nbsp;&nbsp;
 [wget](http://wget.addictivecode.org/)&nbsp; &nbsp; &nbsp;&nbsp;
 [DirectionalToolTip](https://github.com/scondratev/DirectionalToolTip)&nbsp; &nbsp; &nbsp;&nbsp;
+[dortania build-repo](https://github.com/dortania/build-repo)&nbsp; &nbsp; &nbsp;&nbsp;
 
 ### Finally, a big thank you to all the contributors together, not to be listed here, for your participation and support!
 
