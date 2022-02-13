@@ -382,6 +382,7 @@ void Method::updateOpenCore() {
     dir.mkpath(mw_one->dataBaseDir + "linux/");
 
     QString strSEFI = tempDir + "X64/EFI/";
+    if (!QDir(strSEFI).exists()) return;
     QString strTEFI;
     if (!mw_one->ui->actionDEBUG->isChecked())
       strTEFI = mw_one->dataBaseDir + "EFI/";
