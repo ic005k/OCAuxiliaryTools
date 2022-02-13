@@ -70,7 +70,8 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
 
   ui->listKexts->setHidden(true);
 
-  ui->comboOCVersions->addItems(QStringList() << tr("Latest Version") << "0.7.7"
+  ui->comboOCVersions->addItems(QStringList() << tr("Latest Version") << "0.7.8"
+                                              << "0.7.7"
                                               << "0.7.6"
                                               << "0.7.5"
                                               << "0.7.4"
@@ -545,7 +546,10 @@ void SyncOCDialog::init_Sync_OC_Table() {
     ui->lblOCVersions->setHidden(false);
     ui->comboOCVersions->setHidden(false);
     ui->comboOCVersions->setCurrentText("");
-    ui->comboOCVersions->setCurrentText(ocVer);
+    QString str = ocVer;
+    ui->comboOCVersions->setCurrentText(str.split(" ").at(0));
+    qDebug() << ui->comboOCVersions->currentText()
+             << str.replace(tr("DEBUG"), "").trimmed();
   }
   sourceKexts.clear();
   targetKexts.clear();
@@ -834,18 +838,19 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
                        ui->btnUpdateOC->width(), ui->btnUpdateOC->height());
   progBar->show();
 
-  QString ocUrl;
-  if (ui->comboOCVersions->currentText() == tr("Latest Version")) {
-    if (!blDEV)
-      ocUrl = "https://github.com/acidanthera/OpenCorePkg";
-    else
-      ocUrl = DevSource;
+  if (blDEV) {
     if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
-      mymethod->getLastReleaseFromUrl(ocUrl);
+      mymethod->getLastReleaseFromUrl(DevSource);
     if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
-      mymethod->getLastReleaseFromHtml(ocUrl + "/releases/latest");
+      mymethod->getLastReleaseFromHtml(DevSource + "/releases/latest");
   } else {
-    if (!blDEV) {
+    if (ui->comboOCVersions->currentText() == tr("Latest Version")) {
+      QString ocUrl = "https://github.com/acidanthera/OpenCorePkg";
+      if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
+        mymethod->getLastReleaseFromUrl(ocUrl);
+      if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
+        mymethod->getLastReleaseFromHtml(ocUrl + "/releases/latest");
+    } else {
       mymethod->startDownload(downLink);
     }
   }
