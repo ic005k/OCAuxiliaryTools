@@ -33,7 +33,7 @@ bool Initialization = false;
 extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
     strACPI, strKexts, strDrivers, strTools, strOCFromDev;
 extern bool blDEV;
-extern QWidgetList listOCATWidgetHideList;
+extern QWidgetList listOCATWidgetHideList, listOCATWidgetDelList;
 
 void MainWindow::changeOpenCore(bool blDEV) {
   QSettings Reg(strIniFile, QSettings::IniFormat);
@@ -104,6 +104,14 @@ void MainWindow::changeOpenCore(bool blDEV) {
   for (int i = 0; i < listOCATWidgetHideList.count(); i++) {
     listOCATWidgetHideList.at(i)->setHidden(false);
   }
+
+  for (int i = 0; i < listOCATWidgetDelList.count(); i++) {
+    QWidget* frame = listOCATWidgetDelList.at(i);
+    frame->parentWidget()->layout()->removeWidget(frame);
+    delete (frame);
+  }
+  listOCATWidgetDelList.clear();
+
   smart_UpdateKeyField();
 
   if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
@@ -1405,14 +1413,14 @@ void MainWindow::initui_PlatformInfo() {
   QFileInfo fi(strIniFile);
   if (fi.exists()) {
     QSettings Reg(strIniFile, QSettings::IniFormat);
-    ui->chkSaveDataHub->setChecked(Reg.value("SaveDataHub").toBool());
+    ui->mychkSaveDataHub->setChecked(Reg.value("SaveDataHub").toBool());
     ui->actionAutoChkUpdate->setChecked(
         Reg.value("AutoChkUpdate", true).toBool());
   }
 
   QFont font;
   font.setBold(true);
-  ui->chkSaveDataHub->setFont(font);
+  ui->mychkSaveDataHub->setFont(font);
 
   ui->cboxUpdateSMBIOSMode->addItem("TryOverwrite");
   ui->cboxUpdateSMBIOSMode->addItem("Create");
@@ -2160,7 +2168,7 @@ QVariantMap MainWindow::SavePlatformInfo() {
   // DataHub
   valueList.clear();
 
-  if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+  if (ui->mychkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
     subMap["DataHub"] = setValue(valueList, ui->tabPlatformInfo2);
 
   // Memory
@@ -2183,13 +2191,13 @@ QVariantMap MainWindow::SavePlatformInfo() {
   // PlatformNVRAM
   valueList.clear();
 
-  if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+  if (ui->mychkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
     subMap["PlatformNVRAM"] = setValue(valueList, ui->tabPlatformInfo4);
 
   // SMBIOS
   valueList.clear();
 
-  if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+  if (ui->mychkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
     subMap["SMBIOS"] = setValue(valueList, ui->tabPlatformInfo5);
 
   /*subMap["Automatic"] = getChkBool(ui->chkAutomatic);
@@ -4130,7 +4138,7 @@ void MainWindow::readResultDiskInfo() {
 
 void MainWindow::closeEvent(QCloseEvent* event) {
   QSettings Reg(strIniFile, QSettings::IniFormat);
-  Reg.setValue("SaveDataHub", ui->chkSaveDataHub->isChecked());
+  Reg.setValue("SaveDataHub", ui->mychkSaveDataHub->isChecked());
   Reg.setValue("AutoChkUpdate", ui->actionAutoChkUpdate->isChecked());
   Reg.setValue("Net", myDlgPreference->ui->comboBoxNet->currentText());
   Reg.setValue("LastFileName", SaveFileName);

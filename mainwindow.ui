@@ -7123,7 +7123,7 @@ If UpdateNVRAM is set to true the behaviour is undefined when any of the fields 
                  </widget>
                 </item>
                 <item row="1" column="0">
-                 <widget class="QCheckBox" name="chkSaveDataHub">
+                 <widget class="QCheckBox" name="mychkSaveDataHub">
                   <property name="toolTip">
                    <string notr="true">Description: When &quot;Automatic&quot; is selected, does it retain data such as &quot;DataHub&quot;, &quot;Memory&quot;, &quot;PlatformNVRAM&quot;, and “SMBIOS”.
 

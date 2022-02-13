@@ -11,7 +11,7 @@ extern QString ocVer, strIniFile, strAppName, strAppExePath, ocVerDev, ocFrom,
     ocFromDev, SaveFileName;
 extern bool blDEV;
 bool isSmartKey;
-QWidgetList listOCATWidgetHideList;
+QWidgetList listOCATWidgetHideList, listOCATWidgetDelList;
 
 dlgNewKeyField::dlgNewKeyField(QWidget* parent)
     : QDialog(parent), ui(new Ui::dlgNewKeyField) {
@@ -212,6 +212,9 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   hbox->addStretch();
 
   tab->layout()->addWidget(frame);
+
+  listOCATWidgetDelList.removeOne(frame);
+  listOCATWidgetDelList.append(frame);
 }
 
 void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
@@ -300,6 +303,9 @@ void dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   }
 
   tab->layout()->addWidget(frame);
+
+  listOCATWidgetDelList.removeOne(frame);
+  listOCATWidgetDelList.append(frame);
 }
 
 void dlgNewKeyField::removeKey(QString ObjectName) {
@@ -313,13 +319,24 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
   isSmartKey = true;
   QStringList ResultsList;
 
-  QStringList listOCAT, listOCATKey, listSample, listSampleKey;
+  QStringList listOCAT, listOCATKey, listOCATType, listSample, listSampleKey,
+      listSampleType, listSampleValue;
   QWidgetList listOCATWidget;
 
   listSample = get_KeyTypeValue(mapTatol, MainName, SubName);
   for (int i = 0; i < listSample.count(); i++) {
     QString str = listSample.at(i);
-    listSampleKey.append(str.split("|").at(0));
+    QStringList list0 = str.split("|");
+    if (list0.count() == 2) {
+      listSampleKey.append(list0.at(0));
+      listSampleType.append(list0.at(0) + "|" + list0.at(1));
+      listSampleValue.append("");
+    }
+    if (list0.count() == 3) {
+      listSampleKey.append(list0.at(0));
+      listSampleType.append(list0.at(0) + "|" + list0.at(1));
+      listSampleValue.append(list0.at(2));
+    }
   }
 
   QObjectList listObj;
@@ -331,6 +348,7 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
       listOCAT.append(text + "|" + chkbox->objectName());
       listOCATKey.append(text);
       listOCATWidget.append(chkbox);
+      listOCATType.append(text + "|bool");
     }
   }
   listObj.clear();
@@ -342,6 +360,7 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
       QString text = ObjName.replace("cbox", "");
       listOCAT.append(text + "|" + w->objectName());
       listOCATKey.append(text);
+      listOCATType.append(text + "|QString");
       listOCATWidget.append(w);
     }
   }
@@ -364,12 +383,15 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
       if (ObjName.mid(0, 4) == "edit" && ObjName.mid(0, 7) != "editInt" &&
           ObjName.mid(0, 7) != "editDat") {
         text = obj1.replace("edit", "");
+        listOCATType.append(text + "|QString");
       }
       if (ObjName.mid(0, 7) == "editDat") {
         text = obj2.replace("editDat", "");
+        listOCATType.append(text + "|QByteArray");
       }
       if (ObjName.mid(0, 7) == "editInt") {
         text = obj3.replace("editInt", "");
+        listOCATType.append(text + "|qlonglong");
       }
 
       listOCAT.append(text + "|" + obj);
@@ -377,6 +399,58 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
       listOCATWidget.append(w);
     }
   }
+
+  for (int i = 0; i < listSampleType.count(); i++) {
+    QString str = listSampleType.at(i);
+    if (listOCATType.removeOne(str) && listSampleType.removeOne(str)) i--;
+  }
+  if (listOCATType.count() > 0 && listSampleType.count() > 0) {
+    for (int i = 0; i < listSampleType.count(); i++) {
+      QString str = listSampleType.at(i);
+      QStringList list = str.split("|");
+      QString Key;
+      for (int n = 0; n < listOCATType.count(); n++) {
+        QString str1 = listOCATType.at(n);
+        QStringList list1 = str1.split("|");
+        if (list.count() == 2 && list1.count() == 2) {
+          if (list.at(0) == list1.at(0) && list.at(1) != list1.at(1)) {
+            Key = list.at(0);
+            qDebug() << str << str1;
+            if (list.at(1) == "bool") {
+              for (int m = 0; m < listOCATWidget.count(); m++) {
+                QWidget* w = listOCATWidget.at(m);
+                QString txt = w->objectName();
+                qDebug() << "objName:" << txt;
+                if (txt.contains(Key)) {
+                  w->setHidden(true);
+                  bool re = false;
+                  for (int n1 = 0; n1 < listOCATWidgetHideList.count(); n1++) {
+                    if (w == listOCATWidgetHideList.at(n1)) re = true;
+                  }
+                  if (!re) listOCATWidgetHideList.append(w);
+                  listOCATWidgetHideList.append(w);
+                }
+              }
+              QWidgetList wl = get_AllLabelList(tab);
+              for (int m = 0; m < wl.count(); m++) {
+                QLabel* lbl = (QLabel*)wl.at(m);
+                if (lbl->text() == Key) {
+                  lbl->setHidden(true);
+                  bool re = false;
+                  for (int n = 0; n < listOCATWidgetHideList.count(); n++) {
+                    if (lbl == listOCATWidgetHideList.at(n)) re = true;
+                  }
+                  if (!re) listOCATWidgetHideList.append(lbl);
+                }
+              }
+              add_CheckBox(tab, "chk" + Key, Key);
+            }
+          }
+        }
+      }
+    }
+  }
+  // qDebug() << "OCAT:" << listOCATType << "Sample:" << listSampleType;
 
   if (listOCATKey == listSampleKey) {
     qDebug() << MainName << "-->" << SubName << "Ok...";
@@ -395,7 +469,7 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
       }
     }
     if (listOCATKey.count() > 0) {
-      qDebug() << listOCATKey << listOCAT;
+      // qDebug() << listOCATKey << listOCAT;
       for (int i = 0; i < listOCAT.count(); i++) {
         QWidget* w = listOCATWidget.at(i);
         w->setHidden(true);
