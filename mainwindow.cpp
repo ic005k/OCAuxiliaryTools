@@ -577,41 +577,27 @@ void MainWindow::initui_DP() {
   // Add
   ui->table_dp_add0->setMinimumWidth(200);
   ui->table_dp_add0->setMaximumWidth(550);
-
-  id0 = new QTableWidgetItem(tr("PCILists"));
+  id0 = new QTableWidgetItem("PCILists");
   ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
   ui->table_dp_add0->setAlternatingRowColors(true);
   ui->table_dp_add0->horizontalHeader()->setStretchLastSection(true);
 
-  ui->table_dp_add->setColumnWidth(0, 300);
-
-  id0 = new QTableWidgetItem(tr("Key"));
-  ui->table_dp_add->setHorizontalHeaderItem(0, id0);
-
-  id0 = new QTableWidgetItem(tr("Class"));
-  ui->table_dp_add->setHorizontalHeaderItem(1, id0);
-
-  ui->table_dp_add->setColumnWidth(2, 260);
-  id0 = new QTableWidgetItem(tr("Value"));
-  ui->table_dp_add->setHorizontalHeaderItem(2, id0);
-
-  ui->table_dp_add->setAlternatingRowColors(true);
-
+  Method::init_Table(ui->table_dp_add, QStringList() << "Key"
+                                                     << "Data Type"
+                                                     << "Value");
   // QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
   // splitterMain->addWidget(ui->table_dp_add0);
   // splitterMain->addWidget(ui->table_dp_add);
   // ui->gridLayout_dp_add->addWidget(splitterMain);
-  ui->table_dp_add0->setMaximumWidth(450);
 
   // Delete
-
-  id0 = new QTableWidgetItem(tr("PCILists"));
+  id0 = new QTableWidgetItem("PCILists");
   ui->table_dp_del0->setHorizontalHeaderItem(0, id0);
 
   ui->table_dp_del0->setAlternatingRowColors(true);
   ui->table_dp_del0->horizontalHeader()->setStretchLastSection(true);
 
-  id0 = new QTableWidgetItem(tr("Value"));
+  id0 = new QTableWidgetItem("Value");
   ui->table_dp_del->setHorizontalHeaderItem(0, id0);
 
   ui->table_dp_del->setAlternatingRowColors(true);
@@ -927,7 +913,7 @@ void MainWindow::initui_NVRAM() {
   ui->table_nv_add0->setMinimumWidth(300);
   ui->table_nv_add0->setMaximumWidth(400);
 
-  id0 = new QTableWidgetItem(tr("UUID"));
+  id0 = new QTableWidgetItem("UUID");
   ui->table_nv_add0->setHorizontalHeaderItem(0, id0);
   ui->table_nv_add0->setAlternatingRowColors(true);
   ui->table_nv_add0->horizontalHeader()->setStretchLastSection(true);
@@ -936,18 +922,9 @@ void MainWindow::initui_NVRAM() {
   connect(ui->btnNVRAMAdd_Add0, SIGNAL(customContextMenuRequested(QPoint)),
           this, SLOT(show_menu0(QPoint)));
 
-  ui->table_nv_add->setColumnWidth(0, 200);
-  id0 = new QTableWidgetItem(tr("Key"));
-  ui->table_nv_add->setHorizontalHeaderItem(0, id0);
-
-  ui->table_nv_add->setColumnWidth(2, 350);
-  id0 = new QTableWidgetItem(tr("Value"));
-  ui->table_nv_add->setHorizontalHeaderItem(2, id0);
-
-  id0 = new QTableWidgetItem(tr("Class"));
-  ui->table_nv_add->setHorizontalHeaderItem(1, id0);
-
-  ui->table_nv_add->setAlternatingRowColors(true);
+  Method::init_Table(ui->table_nv_add, QStringList() << "Key"
+                                                     << "Data Type"
+                                                     << "Value");
 
   ui->btnNVRAMAdd_Add->setContextMenuPolicy(Qt::CustomContextMenu);
   connect(ui->btnNVRAMAdd_Add, SIGNAL(customContextMenuRequested(QPoint)), this,
@@ -961,25 +938,25 @@ void MainWindow::initui_NVRAM() {
   ui->table_nv_add0->setMaximumWidth(400);
 
   // Delete
-  id0 = new QTableWidgetItem(tr("UUID"));
+  id0 = new QTableWidgetItem("UUID");
   ui->table_nv_del0->setHorizontalHeaderItem(0, id0);
 
   ui->table_nv_del0->setAlternatingRowColors(true);
   ui->table_nv_del0->horizontalHeader()->setStretchLastSection(true);
 
-  id0 = new QTableWidgetItem(tr("Value"));
+  id0 = new QTableWidgetItem("Value");
   ui->table_nv_del->setHorizontalHeaderItem(0, id0);
 
   ui->table_nv_del->setAlternatingRowColors(true);
   ui->table_nv_del->horizontalHeader()->setStretchLastSection(true);
 
   // LegacySchema
-  id0 = new QTableWidgetItem(tr("UUID"));
+  id0 = new QTableWidgetItem("UUID");
   ui->table_nv_ls0->setHorizontalHeaderItem(0, id0);
   ui->table_nv_ls0->setAlternatingRowColors(true);
   ui->table_nv_ls0->horizontalHeader()->setStretchLastSection(true);
 
-  id0 = new QTableWidgetItem(tr("Value"));
+  id0 = new QTableWidgetItem("Value");
   ui->table_nv_ls->setHorizontalHeaderItem(0, id0);
   ui->table_nv_ls->setAlternatingRowColors(true);
   ui->table_nv_ls->horizontalHeader()->setStretchLastSection(true);
@@ -3709,6 +3686,15 @@ QString MainWindow::getTableFieldDataType(QTableWidget* table) {
 
   if (Method::isInt(strHeader)) return "Int";
   if (Method::isData(strHeader)) return "Data";
+
+  if (table == ui->table_dp_add || table == ui->table_nv_add) {
+    int row, col;
+    row = table->currentRow();
+    col = table->currentColumn();
+
+    if (table->item(row, 1)->text() == "Number" && col == 2) return "Int";
+    if (table->item(row, 1)->text() == "Data" && col == 2) return "Data";
+  }
 
   return "";
 }
@@ -8326,10 +8312,10 @@ void MainWindow::set_AutoColWidth(QTableWidget* w, bool autoColWidth) {
                           << "Arch"
                           << "All"
                           << "Type"
+                          << "Data Type"
                           << "TextMode"
                           << "Auxiliary"
                           << "RealPath"
-                          << "Class"
                           << "Strategy";
 
   if (autoColWidth) {
