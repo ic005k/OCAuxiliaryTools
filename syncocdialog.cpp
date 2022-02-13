@@ -502,13 +502,6 @@ void SyncOCDialog::readCheckStateINI() {
     QString str_0 = ui->tableKexts->item(i, 3)->text();
     QString strValue = strTag + str_0;
 
-    /*bool yes = false;
-    for (int m = 0; m < Reg.allKeys().count(); m++) {
-      if (Reg.allKeys().at(m).contains(strValue)) {
-        yes = true;
-      }
-    }*/
-
     bool strCheck = Reg.value(strValue).toBool();
     chkList.at(i)->setChecked(strCheck);
   }
@@ -639,23 +632,6 @@ void SyncOCDialog::init_Sync_OC_Table() {
     if (mymethod->isEqualInList(strName, dbToolsFileList)) {
       sourceOpenCore.append(mw_one->pathSource + "EFI/OC/Tools/" + strName);
       targetOpenCore.append(DirName + "/OC/Tools/" + strName);
-    }
-  }
-
-  QFileInfo f1(file1);
-  QFileInfo f2(file2);
-  QFileInfo f3(file3);
-  QFileInfo f4(file4);
-
-  this->setFocus();
-  if (!blDEV) {
-    if (!f1.exists() || !f2.exists() || !f3.exists() || !f4.exists()) {
-      box.setText(
-          tr("The database file is incomplete and the upgrade cannot be "
-             "completed."));
-      box.exec();
-      mw_one->ui->mycboxFind->setFocus();
-      return;
     }
   }
 
