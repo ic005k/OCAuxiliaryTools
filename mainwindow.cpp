@@ -2142,6 +2142,9 @@ QVariantMap MainWindow::SavePlatformInfo() {
   QVariantMap subMap;
   QVariantMap valueList;
 
+  // Tatol
+  subMap = setValue(valueList, ui->gbox01);
+
   // Generic
   valueList.clear();
   if (ui->editDatROM->text().count() > 12) ui->btnROM->clicked();
@@ -2189,15 +2192,13 @@ QVariantMap MainWindow::SavePlatformInfo() {
   if (ui->chkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
     subMap["SMBIOS"] = setValue(valueList, ui->tabPlatformInfo5);
 
-  subMap["Automatic"] = getChkBool(ui->chkAutomatic);
+  /*subMap["Automatic"] = getChkBool(ui->chkAutomatic);
   subMap["CustomMemory"] = getChkBool(ui->chkCustomMemory);
   subMap["UpdateDataHub"] = getChkBool(ui->chkUpdateDataHub);
   subMap["UpdateNVRAM"] = getChkBool(ui->chkUpdateNVRAM);
   subMap["UpdateSMBIOS"] = getChkBool(ui->chkUpdateSMBIOS);
-
   subMap["UseRawUuidEncoding"] = getChkBool(ui->chkUseRawUuidEncoding);
-
-  subMap["UpdateSMBIOSMode"] = ui->cboxUpdateSMBIOSMode->currentText();
+  subMap["UpdateSMBIOSMode"] = ui->cboxUpdateSMBIOSMode->currentText();*/
 
   return subMap;
 }
@@ -2210,7 +2211,8 @@ QVariantMap MainWindow::SaveUEFI() {
   subMap["APFS"] = setValue(dictList, ui->tabUEFI1);
 
   // 2. AppleInput
-  subMap["AppleInput"] = setValue(dictList, ui->tabUEFI2);
+  QVariantMap mapAI = setValue(dictList, ui->tabUEFI2);
+  if (mapAI.count() > 0) subMap["AppleInput"] = mapAI;
 
   // 3. Audio
   dictList.clear();
@@ -9246,7 +9248,8 @@ void MainWindow::oc_Validate(bool show) {
 
   if (result.trimmed() == "Failed to read") return;
 
-  if (result.contains("No issues found") || result.contains("No is")) {
+  if (result.contains("No issues found") || result.contains("No is") ||
+      result.trimmed().mid(0, 4) == "Done") {
     blOCValidateError = false;
     str = tr("OK !");
     strMsg = result + "\n\n" + str;
@@ -10207,6 +10210,7 @@ void MainWindow::smart_UpdateKeyField() {
                                    "PlatformInfo", "PlatformNVRAM");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabPlatformInfo5,
                                    "PlatformInfo", "SMBIOS");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->gbox01, "PlatformInfo", "");
 
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI1, "UEFI", "APFS");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI2, "UEFI",

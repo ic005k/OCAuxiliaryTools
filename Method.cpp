@@ -420,13 +420,8 @@ void Method::updateOpenCore() {
         tempDir + "Utilities/ocvalidate/ocvalidate.exe",
         mw_one->dataBaseDir + "win/ocvalidate.exe", true));
 
-    if (!blDEV)
-      Results.append(mw_one->copyFileToPath(
-          tempDir + "Utilities/ocvalidate/ocvalidate.linux",
-          mw_one->dataBaseDir + "linux/ocvalidate", true));
-    else
-      mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.linux",
-                             mw_one->dataBaseDir + "linux/ocvalidate", true);
+    mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.linux",
+                           mw_one->dataBaseDir + "linux/ocvalidate", true);
 
     // Mac Serial
     Results.append(
@@ -436,30 +431,18 @@ void Method::updateOpenCore() {
         tempDir + "Utilities/macserial/macserial.exe",
         mw_one->dataBaseDir + "win/macserial.exe", true));
 
-    if (!blDEV)
-      Results.append(mw_one->copyFileToPath(
-          tempDir + "Utilities/macserial/macserial.linux",
-          mw_one->dataBaseDir + "linux/macserial", true));
-    else
-      mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial.linux",
-                             mw_one->dataBaseDir + "linux/macserial", true);
+    mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial.linux",
+                           mw_one->dataBaseDir + "linux/macserial", true);
 
     // OC Password Gen
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
-        mw_one->dataBaseDir + "mac/ocpasswordgen", true));
-    Results.append(mw_one->copyFileToPath(
+    mw_one->copyFileToPath(tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
+                           mw_one->dataBaseDir + "mac/ocpasswordgen", true);
+    mw_one->copyFileToPath(
         tempDir + "Utilities/ocpasswordgen/ocpasswordgen.exe",
-        mw_one->dataBaseDir + "win/ocpasswordgen.exe", true));
-
-    if (!blDEV)
-      Results.append(mw_one->copyFileToPath(
-          tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
-          mw_one->dataBaseDir + "linux/ocpasswordgen", true));
-    else
-      mw_one->copyFileToPath(
-          tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
-          mw_one->dataBaseDir + "linux/ocpasswordgen", true);
+        mw_one->dataBaseDir + "win/ocpasswordgen.exe", true);
+    mw_one->copyFileToPath(
+        tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
+        mw_one->dataBaseDir + "linux/ocpasswordgen", true);
 
     // Create Vault
     Results.append(mw_one->copyDirectoryFiles(
@@ -469,7 +452,7 @@ void Method::updateOpenCore() {
     bool isDo = true;
     for (int i = 0; i < Results.count(); i++) {
       if (Results.at(i) == false) isDo = false;
-      // qDebug() << Results.at(i);
+      qDebug() << Results.at(i) << QString::number(i + 1);
     }
 
     if (isDo) {

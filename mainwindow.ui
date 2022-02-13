@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -6952,7 +6952,7 @@ A continuously updated variable list can be found in a corresponding document: N
          <number>0</number>
         </property>
         <item row="1" column="0">
-         <widget class="QGroupBox" name="groupBox_12">
+         <widget class="QGroupBox" name="gbox00">
           <property name="title">
            <string/>
           </property>
@@ -6970,7 +6970,7 @@ A continuously updated variable list can be found in a corresponding document: N
             <number>0</number>
            </property>
            <item row="1" column="0">
-            <widget class="QGroupBox" name="groupBox_13">
+            <widget class="QGroupBox" name="gbox01">
              <property name="title">
               <string/>
              </property>
@@ -6988,7 +6988,7 @@ A continuously updated variable list can be found in a corresponding document: N
                <number>0</number>
               </property>
               <item row="0" column="0">
-               <layout class="QGridLayout" name="gridLayout_27">
+               <layout class="QGridLayout" name="gboxPI">
                 <item row="0" column="0">
                  <widget class="QCheckBox" name="chkAutomatic">
                   <property name="toolTip">

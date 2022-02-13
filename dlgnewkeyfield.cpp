@@ -458,13 +458,21 @@ QStringList dlgNewKeyField::get_KeyTypeValue(QVariantMap mapTatol,
                                              QString MainName,
                                              QString SubName) {
   QStringList list0;
-  QVariantMap mapMain;
+  QVariantMap mapMain, map;
+  QStringList keyList;
   mapMain = mapTatol[MainName].toMap();
-  QVariantMap mapSub = mapMain[SubName].toMap();
-  QStringList keyList = mapSub.keys();
+  if (SubName != "") {
+    QVariantMap mapSub = mapMain[SubName].toMap();
+    keyList = mapSub.keys();
+    map = mapSub;
+  } else {
+    keyList = mapMain.keys();
+    map = mapMain;
+  }
+
   for (int i = 0; i < keyList.count(); i++) {
     QString name = keyList.at(i);
-    QString type = mapSub[name].typeName();
+    QString type = map[name].typeName();
     list0.append(name + "|" + type);
   }
   return list0;

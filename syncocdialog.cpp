@@ -77,7 +77,12 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
                                               << "0.7.3"
                                               << "0.7.2"
                                               << "0.7.1"
-                                              << "0.7.0");
+                                              << "0.7.0"
+                                              << "0.6.9"
+                                              << "0.6.8"
+                                              << "0.6.7"
+                                              << "0.6.6"
+                                              << "0.6.5");
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
