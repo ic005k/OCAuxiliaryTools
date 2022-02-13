@@ -36,17 +36,6 @@ extern bool blDEV;
 extern QWidgetList listOCATWidgetHideList, listOCATWidgetDelList;
 
 void MainWindow::changeOpenCore(bool blDEV) {
-  QSettings Reg(strIniFile, QSettings::IniFormat);
-  isUseDevOption = Reg.value("UseDevOption").toBool();
-  if (!isUseDevOption) {
-    if (blDEV) {
-      // Dev
-    } else {
-    }
-  } else {
-    // Dev
-  }
-
   if (!blDEV) {
     if (!linuxOS)
       dataBaseDir = strAppExePath + "/Database/";

@@ -467,13 +467,7 @@ void Method::updateOpenCore() {
       QSettings Reg(strIniFile, QSettings::IniFormat);
       if (!blDEV) {
         Reg.setValue("ocVer", ver);
-
         ocVer = ver;
-        if (ver > ocVer) {
-          mw_one->isUseDevOption = true;
-        } else
-          mw_one->isUseDevOption = false;
-        Reg.setValue("UseDevOption", mw_one->isUseDevOption);
       } else {
         Reg.setValue("ocVerDev", ver);
         ocVerDev = ver;

@@ -93,7 +93,6 @@ class MainWindow : public QMainWindow {
 
   dlgNewKeyField* myDlgNewKeyField;
   dlgPreference* myDlgPreference;
-  bool isUseDevOption = false;
   dlgKernelPatch* myDlgKernelPatch;
   bool blOCValidateError = false;
   dlgMountESP* dlgMESP;
