@@ -1908,7 +1908,10 @@ QVariantMap MainWindow::SaveBooter() {
   subMap["MmioWhitelist"] = Method::get_TableData(ui->table_booter);
 
   // Patch
-  subMap["Patch"] = Method::get_TableData(ui->table_Booter_patch);
+  QVariantMap mapMain = mapTatol["Booter"].toMap();
+  QStringList list = mapMain.keys();
+  if (list.removeOne("Patch"))
+    subMap["Patch"] = Method::get_TableData(ui->table_Booter_patch);
 
   // Quirks
   QVariantMap mapQuirks;
@@ -2183,10 +2186,14 @@ QVariantMap MainWindow::SavePlatformInfo() {
   valueList["TypeDetail"] = ui->editIntTypeDetail->text().toLongLong();
 
   // Devices Memory
-  QVariantMap Map;
-  Map["Devices"] = Method::get_TableData(ui->tableDevices);
-  valueList["Devices"] = Map["Devices"];
-  if (ui->tableDevices->rowCount() > 0) subMap["Memory"] = valueList;
+  QVariantMap mapMain = mapTatol["PlatformInfo"].toMap();
+  QStringList list = mapMain.keys();
+  if (list.removeOne("Memory")) {
+    QVariantMap Map;
+    Map["Devices"] = Method::get_TableData(ui->tableDevices);
+    valueList["Devices"] = Map["Devices"];
+    if (ui->tableDevices->rowCount() > 0) subMap["Memory"] = valueList;
+  }
 
   // PlatformNVRAM
   valueList.clear();
@@ -10230,6 +10237,8 @@ void MainWindow::smart_UpdateKeyField() {
                                    "ProtocolOverrides");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI8, "UEFI", "Quirks");
 
+  QVariantMap mapMain;
+  QVariantMap mapSub;
   // ACPI-Add
   Method::init_Table(ui->table_acpi_add,
                      Method::get_HorizontalHeaderList("ACPI", "Add"));
@@ -10278,8 +10287,10 @@ void MainWindow::smart_UpdateKeyField() {
                      Method::get_HorizontalHeaderList("Misc", "Tools"));
 
   // Memory-Devices
-  QVariantMap mapMain = mapTatol["PlatformInfo"].toMap();
-  QVariantMap mapSub = mapMain["Memory"].toMap();
+  mapMain.clear();
+  mapSub.clear();
+  mapMain = mapTatol["PlatformInfo"].toMap();
+  mapSub = mapMain["Memory"].toMap();
   QVariantList maplist = mapSub["Devices"].toList();
   QVariantMap map;
   QStringList list;
