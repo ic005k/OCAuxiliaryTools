@@ -3706,36 +3706,9 @@ void MainWindow::initLineEdit(QTableWidget* Table, int previousRow,
 QString MainWindow::getTableFieldDataType(QTableWidget* table) {
   int col = table->currentColumn();
   QString strHeader = table->horizontalHeaderItem(col)->text();
-  QStringList strHeaderList = strHeader.split("\n");
 
-  if (strHeaderList.count() == 2 && strHeaderList.at(1) != "Base") {
-    if (stringInt.contains(strHeaderList.at(1))) {
-      return "Int";
-    }
-
-    if (stringData.contains(strHeaderList.at(1))) {
-      return "Data";
-    }
-  }
-
-  if (strHeaderList.count() == 1 && strHeaderList.at(0) != "Base") {
-    if (stringInt.contains(strHeaderList.at(0))) {
-      return "Int";
-    }
-
-    if (stringData.contains(strHeaderList.at(0))) {
-      return "Data";
-    }
-  }
-
-  if (table == ui->table_dp_add || table == ui->table_nv_add) {
-    int row, col;
-    row = table->currentRow();
-    col = table->currentColumn();
-
-    if (table->item(row, 1)->text() == "Number" && col == 2) return "Int";
-    if (table->item(row, 1)->text() == "Data" && col == 2) return "Data";
-  }
+  if (Method::isInt(strHeader)) return "Int";
+  if (Method::isData(strHeader)) return "Data";
 
   return "";
 }
