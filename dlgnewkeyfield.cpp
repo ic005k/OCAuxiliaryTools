@@ -427,6 +427,16 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
               set_LblHide(tab, Key);
               add_LineEdit(tab, "edit" + Key, Key);
             }
+            if (list.at(1) == "QByteArray") {
+              set_WidgetHide(listOCATWidget, Key);
+              set_LblHide(tab, Key);
+              add_LineEdit(tab, "editDat" + Key, Key);
+            }
+            if (list.at(1) == "qlonglong") {
+              set_WidgetHide(listOCATWidget, Key);
+              set_LblHide(tab, Key);
+              add_LineEdit(tab, "editInt" + Key, Key);
+            }
           }
         }
       }

@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -220,11 +220,14 @@
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabACPI">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="tabShape">
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1128,7 +1131,7 @@ Mainly required on legacy hardware and a few newer laptops. Can also fix power-b
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
