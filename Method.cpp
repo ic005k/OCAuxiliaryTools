@@ -2390,6 +2390,10 @@ bool Method::isBool(QString strCol) {
 }
 
 void Method::init_Table(QTableWidget* t, QStringList listHeaders) {
+  t->horizontalHeader()->setFixedHeight(30);
+  QFont font;
+  font.setBold(true);
+  t->horizontalHeader()->setFont(font);
   t->setColumnCount(0);
   if (listHeaders.count() == 0) {
     t->setColumnCount(1);

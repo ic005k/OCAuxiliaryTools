@@ -572,14 +572,10 @@ void MainWindow::ParserBooter(QVariantMap map) {
 }
 
 void MainWindow::initui_DP() {
-  QTableWidgetItem* id0;
-
   // Add
   ui->table_dp_add0->setMinimumWidth(200);
   ui->table_dp_add0->setMaximumWidth(550);
-  id0 = new QTableWidgetItem("PCILists");
-  ui->table_dp_add0->setHorizontalHeaderItem(0, id0);
-  ui->table_dp_add0->setAlternatingRowColors(true);
+  Method::init_Table(ui->table_dp_add0, QStringList() << "PCILists");
   ui->table_dp_add0->horizontalHeader()->setStretchLastSection(true);
 
   Method::init_Table(ui->table_dp_add, QStringList() << "Key"
@@ -591,16 +587,10 @@ void MainWindow::initui_DP() {
   // ui->gridLayout_dp_add->addWidget(splitterMain);
 
   // Delete
-  id0 = new QTableWidgetItem("PCILists");
-  ui->table_dp_del0->setHorizontalHeaderItem(0, id0);
-
-  ui->table_dp_del0->setAlternatingRowColors(true);
+  Method::init_Table(ui->table_dp_del0, QStringList() << "PCILists");
   ui->table_dp_del0->horizontalHeader()->setStretchLastSection(true);
 
-  id0 = new QTableWidgetItem("Value");
-  ui->table_dp_del->setHorizontalHeaderItem(0, id0);
-
-  ui->table_dp_del->setAlternatingRowColors(true);
+  Method::init_Table(ui->table_dp_del, QStringList() << "Value");
   ui->table_dp_del->horizontalHeader()->setStretchLastSection(true);
 }
 
@@ -842,8 +832,9 @@ void MainWindow::initui_Misc() {
   ui->cboxSecureBootModel->setEditable(true);
 
   // BlessOverride
-  QStringList list1 = Method::get_HorizontalHeaderList("Misc", "BlessOverride");
+  QStringList list1 = QStringList() << "BlessOverride";
   Method::init_Table(ui->tableBlessOverride, list1);
+  ui->tableBlessOverride->horizontalHeader()->setStretchLastSection(true);
 
   // Entries
   Method::init_Table(ui->tableEntries,
@@ -907,15 +898,10 @@ void MainWindow::initui_NVRAM() {
 
   CurrentDateTime = y + m + d + h + mm + s;
 
-  QTableWidgetItem* id0;
-
   // Add
   ui->table_nv_add0->setMinimumWidth(300);
   ui->table_nv_add0->setMaximumWidth(400);
-
-  id0 = new QTableWidgetItem("UUID");
-  ui->table_nv_add0->setHorizontalHeaderItem(0, id0);
-  ui->table_nv_add0->setAlternatingRowColors(true);
+  Method::init_Table(ui->table_nv_add0, QStringList() << "UUID");
   ui->table_nv_add0->horizontalHeader()->setStretchLastSection(true);
 
   ui->btnNVRAMAdd_Add0->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -925,7 +911,6 @@ void MainWindow::initui_NVRAM() {
   Method::init_Table(ui->table_nv_add, QStringList() << "Key"
                                                      << "Data Type"
                                                      << "Value");
-
   ui->btnNVRAMAdd_Add->setContextMenuPolicy(Qt::CustomContextMenu);
   connect(ui->btnNVRAMAdd_Add, SIGNAL(customContextMenuRequested(QPoint)), this,
           SLOT(show_menu(QPoint)));
@@ -935,30 +920,19 @@ void MainWindow::initui_NVRAM() {
   // splitterMain->addWidget(ui->table_nv_add0);
   // splitterMain->addWidget(ui->table_nv_add);
   // ui->gridLayout_nv_add->addWidget(splitterMain);
-  ui->table_nv_add0->setMaximumWidth(400);
 
   // Delete
-  id0 = new QTableWidgetItem("UUID");
-  ui->table_nv_del0->setHorizontalHeaderItem(0, id0);
-
-  ui->table_nv_del0->setAlternatingRowColors(true);
+  Method::init_Table(ui->table_nv_del0, QStringList() << "UUID");
   ui->table_nv_del0->horizontalHeader()->setStretchLastSection(true);
 
-  id0 = new QTableWidgetItem("Value");
-  ui->table_nv_del->setHorizontalHeaderItem(0, id0);
-
-  ui->table_nv_del->setAlternatingRowColors(true);
+  Method::init_Table(ui->table_nv_del, QStringList() << "Value");
   ui->table_nv_del->horizontalHeader()->setStretchLastSection(true);
 
   // LegacySchema
-  id0 = new QTableWidgetItem("UUID");
-  ui->table_nv_ls0->setHorizontalHeaderItem(0, id0);
-  ui->table_nv_ls0->setAlternatingRowColors(true);
+  Method::init_Table(ui->table_nv_ls0, QStringList() << "UUID");
   ui->table_nv_ls0->horizontalHeader()->setStretchLastSection(true);
 
-  id0 = new QTableWidgetItem("Value");
-  ui->table_nv_ls->setHorizontalHeaderItem(0, id0);
-  ui->table_nv_ls->setAlternatingRowColors(true);
+  Method::init_Table(ui->table_nv_ls, QStringList() << "Value");
   ui->table_nv_ls->horizontalHeader()->setStretchLastSection(true);
 }
 

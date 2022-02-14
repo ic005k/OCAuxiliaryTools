@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7274,7 +7274,7 @@ OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>2</number>
+              <number>0</number>
              </property>
              <property name="documentMode">
               <bool>true</bool>
@@ -7481,6 +7481,19 @@ OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本
                   </widget>
                  </item>
                  <item>
+                  <spacer name="horizontalSpacer_44">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
                   <widget class="QCheckBox" name="chkMaxBIOSVersion">
                    <property name="toolTip">
                     <string notr="true"> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.
@@ -7499,6 +7512,19 @@ OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本
                     <string>MaxBIOSVersion</string>
                    </property>
                   </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_43">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                  <item>
                   <widget class="QCheckBox" name="chkAdviseFeatures">
