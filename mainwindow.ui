@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1498</width>
-    <height>894</height>
+    <height>990</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -7284,24 +7284,6 @@ OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本
                <string>Generic</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_73">
-               <item row="0" column="0" colspan="2">
-                <layout class="QHBoxLayout" name="horizontalLayout_7">
-                 <item>
-                  <widget class="QPushButton" name="btnImport">
-                   <property name="text">
-                    <string>Import SMBIOS from Clover configuration file</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="btnExport">
-                   <property name="text">
-                    <string>Export SMBIOS to a Clover configuration file</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
                <item row="1" column="0">
                 <widget class="QFrame" name="frame_chk_9">
                  <property name="maximumSize">
@@ -7314,7 +7296,10 @@ OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本
                   <enum>QFrame::StyledPanel</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                 <property name="midLineWidth">
+                  <number>0</number>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_47">
                   <item row="4" column="0">
@@ -7451,7 +7436,7 @@ Note: On most newer firmwares these bits are already set, the option may be nece
                   <enum>QFrame::StyledPanel</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
+                  <enum>QFrame::Plain</enum>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_28">
                   <item>
@@ -7684,6 +7669,24 @@ Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemory
                   </item>
                  </layout>
                 </widget>
+               </item>
+               <item row="0" column="0" colspan="2">
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QPushButton" name="btnImport">
+                   <property name="text">
+                    <string>Import SMBIOS from Clover configuration file</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btnExport">
+                   <property name="text">
+                    <string>Export SMBIOS to a Clover configuration file</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
               </layout>
              </widget>
@@ -9510,7 +9513,7 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_31">
                <item>
@@ -9599,7 +9602,7 @@ APFS verbose输出对调试很有用。</string>
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QGridLayout" name="gridLayout_50">
                <item row="0" column="0">
@@ -9727,7 +9730,7 @@ APFS驱动版本连接APFS驱动与macOS版本。旧版macOS的APFS驱动程序�
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_33">
                <item>
@@ -9801,7 +9804,7 @@ Description: Enable custom key repeat delays when using the OpenCore implementat
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QGridLayout" name="gridLayout_24">
                <item row="0" column="0">
@@ -10092,7 +10095,7 @@ Configures the multiplier for pointer movements. The Apple OEM default value is 
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_34">
                <item>
@@ -10149,7 +10152,7 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QGridLayout" name="gridLayout_61">
                <item row="0" column="0">
@@ -10567,7 +10570,7 @@ Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid c
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_32">
                <item>
@@ -10651,7 +10654,7 @@ This option discards keys that are neither ASCII, nor are defined in the UEFI sp
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QGridLayout" name="gridLayout_31">
                <item row="8" column="0">
@@ -10867,7 +10870,7 @@ AppleKeyMapAggregator协议应该包含一个固定长度的当前按键缓冲�
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_29">
                <item>
@@ -11067,7 +11070,7 @@ Note: This option only applies to System renderer. On all known affected systems
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_30">
                <item>
@@ -11384,7 +11387,7 @@ Note 2 : When switching from manually specifified NVRAM variable to this prefere
                <enum>QFrame::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_26">
                <item>
@@ -11595,7 +11598,7 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                <enum>QFrame::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_27">
                <item>
@@ -11707,7 +11710,7 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
                <enum>QFrame::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_35">
                <item>
@@ -11846,72 +11849,78 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
             <string>Quirks</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_27">
-            <item row="0" column="0">
-             <widget class="QFrame" name="frame_chk_6">
+            <item row="0" column="0" colspan="2">
+             <widget class="QFrame" name="frame">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>45</height>
+               </size>
+              </property>
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::NoFrame</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Raised</enum>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout">
-               <item>
-                <widget class="QFrame" name="frame">
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>45</height>
-                  </size>
-                 </property>
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout_2">
-                  <property name="leftMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>0</number>
-                  </property>
-                  <item row="0" column="0">
-                   <layout class="QHBoxLayout" name="horizontalLayout_47">
-                    <item>
-                     <widget class="QLabel" name="label_125">
-                      <property name="maximumSize">
-                       <size>
-                        <width>150</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string>Preselection</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QComboBox" name="comboBoxUEFI">
-                      <property name="focusPolicy">
-                       <enum>Qt::NoFocus</enum>
-                      </property>
-                      <property name="editable">
-                       <bool>false</bool>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </widget>
+              <layout class="QGridLayout" name="gridLayout_2">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item row="0" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_47">
+                 <item>
+                  <widget class="QLabel" name="label_125">
+                   <property name="maximumSize">
+                    <size>
+                     <width>150</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Preselection</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxUEFI">
+                   <property name="focusPolicy">
+                    <enum>Qt::NoFocus</enum>
+                   </property>
+                   <property name="editable">
+                    <bool>false</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QFrame" name="frame_chk_6">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout">
                <item>
                 <spacer name="verticalSpacer_22">
                  <property name="orientation">
@@ -12253,13 +12262,13 @@ For example, this option allows reloading NVIDIA GOP Option ROM on older Macs af
               </layout>
              </widget>
             </item>
-            <item row="0" column="1">
+            <item row="1" column="1">
              <widget class="QFrame" name="frame_edit_5">
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_25">
                <item>
@@ -12610,7 +12619,7 @@ Enable this option to be able to see all the boot options when having multiple d
      <x>0</x>
      <y>0</y>
      <width>1498</width>
-     <height>24</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
