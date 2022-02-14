@@ -34,6 +34,9 @@ extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
     strACPI, strKexts, strDrivers, strTools, strOCFromDev;
 extern bool blDEV;
 extern QWidgetList listOCATWidgetHideList, listOCATWidgetDelList;
+extern QStringList boolTypeList, intTypeList, dataTypeList, listKey, listType,
+    listValue;
+;
 
 void MainWindow::changeOpenCore(bool blDEV) {
   if (!blDEV) {
@@ -92,7 +95,11 @@ void MainWindow::changeOpenCore(bool blDEV) {
 
   for (int i = 0; i < listOCATWidgetHideList.count(); i++) {
     listOCATWidgetHideList.at(i)->setHidden(false);
+    // QWidget* w = listOCATWidgetHideList.at(i);
+    // w->parentWidget()->layout()->removeWidget(w);
+    // delete (w);
   }
+  // listOCATWidgetHideList.clear();
 
   for (int i = 0; i < listOCATWidgetDelList.count(); i++) {
     QWidget* frame = listOCATWidgetDelList.at(i);
@@ -102,6 +109,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
   listOCATWidgetDelList.clear();
 
   smart_UpdateKeyField();
+  init_LineEditDataCheck();
 
   if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
     title = lblVer->text() + "      ";
@@ -384,7 +392,7 @@ void MainWindow::init_Table(int index) {
     listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
     for (int i = 0; i < listOfTableWidget.count(); i++) {
       QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
-      w->setRowCount(0);
+      if (w->objectName().mid(0, 5) == "table") w->setRowCount(0);
     }
   } else {
     for (int i = 0; i < ui->tabTotal->tabBar()->count(); i++) {
@@ -394,7 +402,7 @@ void MainWindow::init_Table(int index) {
             getAllTableWidget(getAllUIControls(ui->tabTotal->widget(i)));
         for (int j = 0; j < listOfTableWidget.count(); j++) {
           QTableWidget* w = (QTableWidget*)listOfTableWidget.at(j);
-          w->setRowCount(0);
+          if (w->objectName().mid(0, 5) == "table") w->setRowCount(0);
         }
       }
     }
@@ -2063,14 +2071,7 @@ QVariantMap MainWindow::SavePlatformInfo() {
 
   // Memory
   valueList.clear();
-  valueList["DataWidth"] = ui->editIntDataWidth->text().toLongLong();
-  valueList["ErrorCorrection"] =
-      ui->editIntErrorCorrection->text().toLongLong();
-  valueList["FormFactor"] = ui->editIntFormFactor->text().toLongLong();
-  valueList["MaxCapacity"] = ui->editIntMaxCapacity->text().toLongLong();
-  valueList["TotalWidth"] = ui->editIntTotalWidth->text().toLongLong();
-  valueList["Type"] = ui->editIntType->text().toLongLong();
-  valueList["TypeDetail"] = ui->editIntTypeDetail->text().toLongLong();
+  valueList = setValue(valueList, ui->tabPlatformInfo3);
 
   // Devices Memory
   QVariantMap mapMain = mapTatol["PlatformInfo"].toMap();
@@ -5352,7 +5353,7 @@ void MainWindow::init_MainUI() {
 
   CopyCheckbox();
 
-  LineEditDataCheck();
+  init_LineEditDataCheck();
 
   // Copy list
   copyText(ui->listFind);
@@ -5507,7 +5508,7 @@ void MainWindow::init_InitialValue() {
   }
 }
 
-void MainWindow::LineEditDataCheck() {
+void MainWindow::init_LineEditDataCheck() {
   // LineEdit data check
   listOfLineEdit.clear();
   listOfLineEdit = getAllLineEdit(getAllUIControls(ui->tabTotal));
@@ -8295,6 +8296,13 @@ void MainWindow::init_CopyPasteLine() {
   listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
   for (int i = 0; i < listOfTableWidget.count(); i++) {
     QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
+    if (w->objectName().mid(0, 5) != "table") {
+      listOfTableWidget.removeOne(w);
+      i--;
+    }
+  }
+  for (int i = 0; i < listOfTableWidget.count(); i++) {
+    QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
 
     // Auto Col Width
     QSettings Reg(strIniFile, QSettings::IniFormat);
@@ -10115,6 +10123,8 @@ void MainWindow::smart_UpdateKeyField() {
                                    "PlatformInfo", "Generic");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabPlatformInfo2,
                                    "PlatformInfo", "DataHub");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabPlatformInfo3,
+                                   "PlatformInfo", "Memory");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabPlatformInfo4,
                                    "PlatformInfo", "PlatformNVRAM");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabPlatformInfo5,
@@ -10129,6 +10139,7 @@ void MainWindow::smart_UpdateKeyField() {
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI6, "UEFI", "Output");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI7, "UEFI",
                                    "ProtocolOverrides");
+
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI8, "UEFI", "Quirks");
 
   QVariantMap mapMain;
@@ -10174,6 +10185,23 @@ void MainWindow::smart_UpdateKeyField() {
   if (maplist.count() > 0) {
     map = maplist.at(0).toMap();
     list = map.keys();
+
+    for (int i = 0; i < list.count(); i++) {
+      QString name = list.at(i);
+      QString type = map[name].typeName();
+      if (type == "bool") {
+        boolTypeList.removeOne(name);
+        boolTypeList.append(name);
+      }
+      if (type == "qlonglong") {
+        intTypeList.removeOne(name);
+        intTypeList.append(name);
+      }
+      if (type == "QByteArray") {
+        dataTypeList.removeOne(name);
+        dataTypeList.append(name);
+      }
+    }
   }
   Method::init_Table(ui->tableDevices, list);
 

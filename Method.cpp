@@ -1221,7 +1221,7 @@ void Method::on_btnImportMaster() {
   switch (index) {
     case 0:
       // ACPI
-      init_Table(0);
+      mw_one->init_Table(0);
 
       mw_one->ParserACPI(map);
 
@@ -1229,21 +1229,21 @@ void Method::on_btnImportMaster() {
 
     case 1:
       // Booter
-      init_Table(1);
+      mw_one->init_Table(1);
 
       mw_one->ParserBooter(map);
       break;
 
     case 2:
       // DP
-      init_Table(2);
+      mw_one->init_Table(2);
 
       mw_one->ParserDP(map);
       break;
 
     case 3:
       // Kernel
-      init_Table(3);
+      mw_one->init_Table(3);
 
       mw_one->ParserKernel(map, "Add");
       mw_one->ParserKernel(map, "Block");
@@ -1256,60 +1256,34 @@ void Method::on_btnImportMaster() {
 
     case 4:
       // Misc
-      init_Table(4);
+      mw_one->init_Table(4);
 
       mw_one->ParserMisc(map);
       break;
 
     case 5:
       // NVRAM
-      init_Table(5);
+      mw_one->init_Table(5);
 
       mw_one->ParserNvram(map);
       break;
 
     case 6:
       // PI
-      init_Table(6);
+      mw_one->init_Table(6);
 
       mw_one->ParserPlatformInfo(map);
       break;
 
     case 7:
       // UEFI
-      init_Table(7);
+      mw_one->init_Table(7);
 
       mw_one->ParserUEFI(map);
       break;
   }
 
   mw_one->loading = false;
-}
-
-void Method::init_Table(int index) {
-  if (index == -1) {
-    mw_one->listOfTableWidget.clear();
-    mw_one->listOfTableWidget = mw_one->getAllTableWidget(
-        mw_one->getAllUIControls(mw_one->ui->tabTotal));
-    for (int i = 0; i < mw_one->listOfTableWidget.count(); i++) {
-      QTableWidget* w = (QTableWidget*)mw_one->listOfTableWidget.at(i);
-
-      w->setRowCount(0);
-    }
-  } else {
-    for (int i = 0; i < mw_one->ui->tabTotal->tabBar()->count(); i++) {
-      if (index == i) {
-        mw_one->listOfTableWidget.clear();
-        mw_one->listOfTableWidget = mw_one->getAllTableWidget(
-            mw_one->getAllUIControls(mw_one->ui->tabTotal->widget(i)));
-        for (int j = 0; j < mw_one->listOfTableWidget.count(); j++) {
-          QTableWidget* w = (QTableWidget*)mw_one->listOfTableWidget.at(j);
-
-          w->setRowCount(0);
-        }
-      }
-    }
-  }
 }
 
 void Method::findDP(QTableWidget* t, QString findText) {

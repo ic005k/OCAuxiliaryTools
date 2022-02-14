@@ -377,6 +377,7 @@ class MainWindow : public QMainWindow {
   void oc_Validate(bool show);
   void init_AutoColumnWidth();
   static QObjectList getAllFrame(QObjectList lstUIControls);
+  void init_Table(int index);
  public slots:
   void DisplayLevel();
   void ScanPolicy();
@@ -998,7 +999,7 @@ class MainWindow : public QMainWindow {
   void init_listMainSub();
   void CopyCheckbox();
   void CopyLabel();
-  void LineEditDataCheck();
+  void init_LineEditDataCheck();
   void init_FileMenu();
   void init_EditMenu();
   void init_HelpMenu();
@@ -1093,7 +1094,7 @@ class MainWindow : public QMainWindow {
   void showDlgPar(bool b1, bool b2, bool b3, bool b4);
 
   void init_ToolButtonStyle();
-  void init_Table(int index);
+
   void init_ToolBarIcon();
   QToolButton* btn0;
   QToolButton* btnClear;

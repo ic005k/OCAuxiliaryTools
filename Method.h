@@ -46,7 +46,7 @@ class Method : public QMainWindow {
   void goNVRAMTable(QTableWidget *table);
 
   void findTable(QString findText);
-  void init_Table(int index);
+
   QString getTabTextName(int index);
 
   QString copyTools(QString pathSource, QString pathTarget);

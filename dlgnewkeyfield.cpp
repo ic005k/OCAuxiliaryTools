@@ -12,6 +12,7 @@ extern QString ocVer, strIniFile, strAppName, strAppExePath, ocVerDev, ocFrom,
 extern bool blDEV;
 bool isSmartKey;
 QWidgetList listOCATWidgetHideList, listOCATWidgetDelList;
+QStringList listKey, listType, listValue;
 
 dlgNewKeyField::dlgNewKeyField(QWidget* parent)
     : QDialog(parent), ui(new Ui::dlgNewKeyField) {
@@ -344,9 +345,12 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
                                              QString SubName) {
   isSmartKey = true;
   QStringList ResultsList;
-
+  listType.clear();
+  listValue.clear();
+  listKey.clear();
   QStringList listOCAT, listOCATKey, listOCATType, listSample, listSampleKey,
-      listSampleType, listSampleValue;
+      listSampleValue, listSampleType;
+
   QWidgetList listOCATWidget;
 
   listSample = get_KeyTypeValue(mapTatol, MainName, SubName);
@@ -364,6 +368,9 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
       listSampleValue.append(list0.at(2));
     }
   }
+  listKey = listSampleKey;
+  listType = listSampleType;
+  listValue = listSampleValue;
 
   QObjectList listObj;
   listObj = MainWindow::getAllCheckBox(MainWindow::getAllUIControls(tab));
