@@ -376,6 +376,7 @@ class MainWindow : public QMainWindow {
   void set_InitCheckBox(QTableWidget* t, int row, int column);
   void oc_Validate(bool show);
   void init_AutoColumnWidth();
+  static QObjectList getAllFrame(QObjectList lstUIControls);
  public slots:
   void DisplayLevel();
   void ScanPolicy();

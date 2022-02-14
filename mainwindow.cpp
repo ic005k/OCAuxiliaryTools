@@ -148,14 +148,10 @@ MainWindow::MainWindow(QWidget* parent)
   init_MainUI();
   init_setWindowModified();
   init_hardware_info();
-  initui_Booter();
-  initui_DP();
-  initui_Kernel();
   initui_Misc();
-  initui_NVRAM();
   initui_PlatformInfo();
   initui_UEFI();
-  initui_ACPI();
+
   init_CopyPasteLine();
   setTableEditTriggers();
 
@@ -676,11 +672,12 @@ void MainWindow::initui_Kernel() {
                      Method::get_HorizontalHeaderList("Kernel", "Patch"));
 
   // Scheme
+  ui->cboxKernelArch->clear();
   ui->cboxKernelArch->addItem("Auto");
   ui->cboxKernelArch->addItem("i386");
   ui->cboxKernelArch->addItem("i386-user32");
   ui->cboxKernelArch->addItem("x86_64");
-
+  ui->cboxKernelCache->clear();
   ui->cboxKernelCache->addItem("Auto");
   ui->cboxKernelCache->addItem("Cacheless");
   ui->cboxKernelCache->addItem("Mkext");
@@ -830,19 +827,6 @@ void MainWindow::initui_Misc() {
   ui->cboxVault->addItem("Secure");
 
   ui->cboxSecureBootModel->setEditable(true);
-
-  // BlessOverride
-  QStringList list1 = QStringList() << "BlessOverride";
-  Method::init_Table(ui->tableBlessOverride, list1);
-  ui->tableBlessOverride->horizontalHeader()->setStretchLastSection(true);
-
-  // Entries
-  Method::init_Table(ui->tableEntries,
-                     Method::get_HorizontalHeaderList("Misc", "Entries"));
-
-  // Tools
-  Method::init_Table(ui->tableTools,
-                     Method::get_HorizontalHeaderList("Misc", "Tools"));
 }
 
 void MainWindow::ParserMisc(QVariantMap map) {
@@ -888,32 +872,15 @@ void MainWindow::ParserMisc(QVariantMap map) {
 }
 
 void MainWindow::initui_NVRAM() {
-  QString y = QString::number(QDate::currentDate().year());
-  QString m = QString::number(QDate::currentDate().month());
-  QString d = QString::number(QDate::currentDate().day());
-
-  QString h = QString::number(QTime::currentTime().hour());
-  QString mm = QString::number(QTime::currentTime().minute());
-  QString s = QString::number(QTime::currentTime().second());
-
-  CurrentDateTime = y + m + d + h + mm + s;
-
   // Add
   ui->table_nv_add0->setMinimumWidth(300);
   ui->table_nv_add0->setMaximumWidth(400);
   Method::init_Table(ui->table_nv_add0, QStringList() << "UUID");
   ui->table_nv_add0->horizontalHeader()->setStretchLastSection(true);
 
-  ui->btnNVRAMAdd_Add0->setContextMenuPolicy(Qt::CustomContextMenu);
-  connect(ui->btnNVRAMAdd_Add0, SIGNAL(customContextMenuRequested(QPoint)),
-          this, SLOT(show_menu0(QPoint)));
-
   Method::init_Table(ui->table_nv_add, QStringList() << "Key"
                                                      << "Data Type"
                                                      << "Value");
-  ui->btnNVRAMAdd_Add->setContextMenuPolicy(Qt::CustomContextMenu);
-  connect(ui->btnNVRAMAdd_Add, SIGNAL(customContextMenuRequested(QPoint)), this,
-          SLOT(show_menu(QPoint)));
 
   // 分割窗口
   // QSplitter* splitterMain = new QSplitter(Qt::Horizontal, this);
@@ -1371,18 +1338,6 @@ void MainWindow::initui_PlatformInfo() {
   ui->cboxSystemMemoryStatus->addItem("Upgradable");
   ui->cboxSystemMemoryStatus->addItem("Soldered");
 
-  // Memory-Devices
-  QVariantMap mapMain = mapTatol["PlatformInfo"].toMap();
-  QVariantMap mapSub = mapMain["Memory"].toMap();
-  QVariantList maplist = mapSub["Devices"].toList();
-  QVariantMap map;
-  QStringList list;
-  if (maplist.count() > 0) {
-    map = maplist.at(0).toMap();
-    list = map.keys();
-  }
-  Method::init_Table(ui->tableDevices, list);
-
   // SystemProductName
   QStringList pi;
   pi.push_back("");
@@ -1649,11 +1604,8 @@ void MainWindow::initui_UEFI() {
   ui->cboxPlayChime->addItems(list);
   ui->lblSystemAudioVolume->setText("");
 
-  // Drivers
-  QStringList list1 = Method::get_HorizontalHeaderList("UEFI", "Drivers");
-  Method::init_Table(ui->table_uefi_drivers, list1);
-
   // Input
+  ui->cboxKeySupportMode->clear();
   ui->cboxKeySupportMode->addItem("Auto");
   ui->cboxKeySupportMode->addItem("V1");
   ui->cboxKeySupportMode->addItem("V2");
@@ -1671,11 +1623,6 @@ void MainWindow::initui_UEFI() {
   ui->cboxTextRenderer->addItem("SystemGraphics");
   ui->cboxTextRenderer->addItem("SystemText");
   ui->cboxTextRenderer->addItem("SystemGeneric");
-
-  // ReservedMemory
-  Method::init_Table(
-      ui->table_uefi_ReservedMemory,
-      Method::get_HorizontalHeaderList("UEFI", "ReservedMemory"));
 }
 
 void MainWindow::ParserUEFI(QVariantMap map) {
@@ -5416,6 +5363,13 @@ void MainWindow::init_MainUI() {
   init_TableStyle();
   init_ToolBarIcon();
 
+  ui->btnNVRAMAdd_Add0->setContextMenuPolicy(Qt::CustomContextMenu);
+  connect(ui->btnNVRAMAdd_Add0, SIGNAL(customContextMenuRequested(QPoint)),
+          this, SLOT(show_menu0(QPoint)));
+  ui->btnNVRAMAdd_Add->setContextMenuPolicy(Qt::CustomContextMenu);
+  connect(ui->btnNVRAMAdd_Add, SIGNAL(customContextMenuRequested(QPoint)), this,
+          SLOT(show_menu(QPoint)));
+
   // Read and add new key fields
   QStringList list = dlgNewKeyField::getAllNewKey();
   for (int i = 0; i < list.count(); i++) {
@@ -5449,6 +5403,14 @@ void MainWindow::init_MainUI() {
 void MainWindow::init_Widgets() {
   strAppExePath = qApp->applicationDirPath();
   strConfigPath = QDir::homePath() + "/.config/" + strAppName + "/";
+
+  QString y = QString::number(QDate::currentDate().year());
+  QString m = QString::number(QDate::currentDate().month());
+  QString d = QString::number(QDate::currentDate().day());
+  QString h = QString::number(QTime::currentTime().hour());
+  QString mm = QString::number(QTime::currentTime().minute());
+  QString s = QString::number(QTime::currentTime().second());
+  CurrentDateTime = y + m + d + h + mm + s;
 
   QSettings Reg(strIniFile, QSettings::IniFormat);
   blDEV = Reg.value("OpenCoreDEV", false).toBool();
@@ -6815,6 +6777,16 @@ QObjectList MainWindow::getAllLineEdit(QObjectList lstUIControls) {
     }
   }
   return lstOfLineEdit;
+}
+
+QObjectList MainWindow::getAllFrame(QObjectList lstUIControls) {
+  QObjectList lstOfWidget;
+  foreach (QObject* obj, lstUIControls) {
+    if (obj->metaObject()->className() == QStringLiteral("QFrame")) {
+      lstOfWidget.append(obj);
+    }
+  }
+  return lstOfWidget;
 }
 
 QObjectList MainWindow::getAllGridLayout(QObjectList lstUIControls) {
@@ -10161,44 +10133,23 @@ void MainWindow::smart_UpdateKeyField() {
 
   QVariantMap mapMain;
   QVariantMap mapSub;
-  // ACPI-Add
-  Method::init_Table(ui->table_acpi_add,
-                     Method::get_HorizontalHeaderList("ACPI", "Add"));
+  // ACPI
+  initui_ACPI();
 
-  // ACPI-Delete
-  Method::init_Table(ui->table_acpi_del,
-                     Method::get_HorizontalHeaderList("ACPI", "Delete"));
+  // Booter
+  initui_Booter();
 
-  // ACPI-Patch
-  Method::init_Table(ui->table_acpi_patch,
-                     Method::get_HorizontalHeaderList("ACPI", "Patch"));
-  // MmioWhitelist
-  Method::init_Table(ui->table_booter, Method::get_HorizontalHeaderList(
-                                           "Booter", "MmioWhitelist"));
+  // DeviceProperties
+  initui_DP();
 
-  // Patch
-  Method::init_Table(ui->table_Booter_patch,
-                     Method::get_HorizontalHeaderList("Booter", "Patch"));
+  // Kernel
+  initui_Kernel();
 
-  // Add
-  Method::init_Table(ui->table_kernel_add,
-                     Method::get_HorizontalHeaderList("Kernel", "Add"));
-
-  // Block
-  Method::init_Table(ui->table_kernel_block,
-                     Method::get_HorizontalHeaderList("Kernel", "Block"));
-
-  // Force
-  Method::init_Table(ui->table_kernel_Force,
-                     Method::get_HorizontalHeaderList("Kernel", "Force"));
-
-  // Patch
-  Method::init_Table(ui->table_kernel_patch,
-                     Method::get_HorizontalHeaderList("Kernel", "Patch"));
-
+  // Misc
   // BlessOverride
-  QStringList list1 = Method::get_HorizontalHeaderList("Misc", "BlessOverride");
+  QStringList list1 = QStringList() << "BlessOverride";
   Method::init_Table(ui->tableBlessOverride, list1);
+  ui->tableBlessOverride->horizontalHeader()->setStretchLastSection(true);
 
   // Entries
   Method::init_Table(ui->tableEntries,
@@ -10208,6 +10159,10 @@ void MainWindow::smart_UpdateKeyField() {
   Method::init_Table(ui->tableTools,
                      Method::get_HorizontalHeaderList("Misc", "Tools"));
 
+  // NVRAM
+  initui_NVRAM();
+
+  // PlatformInfo
   // Memory-Devices
   mapMain.clear();
   mapSub.clear();
@@ -10222,6 +10177,7 @@ void MainWindow::smart_UpdateKeyField() {
   }
   Method::init_Table(ui->tableDevices, list);
 
+  // UEFI
   // Drivers
   QStringList listDrivers = Method::get_HorizontalHeaderList("UEFI", "Drivers");
   Method::init_Table(ui->table_uefi_drivers, listDrivers);

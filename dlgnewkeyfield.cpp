@@ -211,7 +211,19 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   hbox->addWidget(chk);
   hbox->addStretch();
 
-  tab->layout()->addWidget(frame);
+  QObjectList listObj;
+  listObj = MainWindow::getAllFrame(MainWindow::getAllUIControls(tab));
+  bool isDo = false;
+  for (int i = 0; i < listObj.count(); i++) {
+    QFrame* w = (QFrame*)listObj.at(i);
+    if (w->objectName().contains("chk")) {
+      w->layout()->addWidget(frame);
+      isDo = true;
+      break;
+    }
+  }
+
+  if (!isDo) tab->layout()->addWidget(frame);
 
   listOCATWidgetDelList.removeOne(frame);
   listOCATWidgetDelList.append(frame);
@@ -302,7 +314,20 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
             });
   }
 
-  tab->layout()->addWidget(frame);
+  QObjectList listObj;
+  listObj = MainWindow::getAllFrame(MainWindow::getAllUIControls(tab));
+  bool isDo = false;
+  for (int i = 0; i < listObj.count(); i++) {
+    QFrame* w = (QFrame*)listObj.at(i);
+    if (w->objectName().contains("edit")) {
+      w->layout()->addWidget(frame);
+      isDo = true;
+      break;
+    }
+  }
+
+  if (!isDo) tab->layout()->addWidget(frame);
+
   listOCATWidgetDelList.removeOne(frame);
   listOCATWidgetDelList.append(frame);
 
