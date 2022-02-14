@@ -20,6 +20,7 @@ QString strACPI;
 QString strKexts;
 QString strDrivers;
 QString strTools;
+QStringList boolTypeList, intTypeList, dataTypeList;
 
 Method::Method(QWidget* parent) : QMainWindow(parent) {
   manager = new QNetworkAccessManager(this);
@@ -1855,6 +1856,7 @@ void Method::init_PresetQuirks(QComboBox* comboBox, QString quirksFile) {
   QFileInfo appInfo(qApp->applicationDirPath());
   QString strPresetQuirks =
       appInfo.filePath() + "/Database/preset/" + quirksFile;
+  comboBox->clear();
   comboBox->addItem("None");
   if (QFile(strPresetQuirks).exists()) {
     QTextEdit* txtEdit = new QTextEdit;
@@ -2358,6 +2360,7 @@ bool Method::isInt(QString strCol) {
                                    << "Address"
                                    << "Size"
                                    << "Speed";
+  list = intTypeList;
   for (int i = 0; i < list.count(); i++) {
     if (strCol == list.at(i)) return true;
   }
@@ -2371,6 +2374,7 @@ bool Method::isData(QString strCol) {
                                    << "Replace"
                                    << "Mask"
                                    << "ReplaceMask";
+  list = dataTypeList;
   for (int i = 0; i < list.count(); i++) {
     if (strCol == list.at(i)) return true;
   }
@@ -2383,6 +2387,7 @@ bool Method::isBool(QString strCol) {
                                    << "Auxiliary"
                                    << "TextMode"
                                    << "RealPath";
+  list = boolTypeList;
   for (int i = 0; i < list.count(); i++) {
     if (strCol == list.at(i)) return true;
   }
@@ -2436,6 +2441,24 @@ QStringList Method::get_HorizontalHeaderList(QString main, QString sub) {
   if (maplist.count() > 0) {
     mapSub = maplist.at(0).toMap();
     list = mapSub.keys();
+
+    for (int i = 0; i < list.count(); i++) {
+      QString name = list.at(i);
+      QString type = mapSub[name].typeName();
+      if (type == "bool") {
+        boolTypeList.removeOne(name);
+        boolTypeList.append(name);
+      }
+      if (type == "qlonglong") {
+        intTypeList.removeOne(name);
+        intTypeList.append(name);
+      }
+      if (type == "QByteArray") {
+        dataTypeList.removeOne(name);
+        dataTypeList.append(name);
+      }
+    }
+
     return list;
   }
   return list;
