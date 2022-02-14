@@ -55,6 +55,8 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per [Open
 [pugixml](https://github.com/zeux/pugixml)&nbsp;&nbsp; &nbsp; &nbsp;
 [aria2](https://github.com/aria2/aria2)&nbsp; &nbsp; &nbsp;&nbsp;
 [wget](http://wget.addictivecode.org/)&nbsp; &nbsp; &nbsp;&nbsp;
+[DirectionalToolTip](https://github.com/scondratev/DirectionalToolTip)&nbsp; &nbsp; &nbsp;&nbsp;
+[dortania build-repo](https://github.com/dortania/build-repo)&nbsp; &nbsp; &nbsp;&nbsp;
 
 ### E alla fine , un grande ringraziamento alle persone che hanno contribuito, anche se non menzionate qui, per il vostro supporto e partecipazione!
 
