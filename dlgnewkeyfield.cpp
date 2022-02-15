@@ -210,7 +210,8 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   }
 
   hbox->addWidget(chk);
-  hbox->addStretch();
+  // hbox->addStretch();
+  frame->setFixedHeight(18);
 
   QObjectList listObj;
   listObj = MainWindow::getAllFrame(MainWindow::getAllUIControls(tab));
@@ -258,9 +259,6 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
     edit->setValidator(validator);
     edit->setPlaceholderText(tr("Hexadecimal"));
   }
-
-  hbox->addWidget(lbl);
-  hbox->addWidget(edit);
 
   lbl->setContextMenuPolicy(Qt::CustomContextMenu);
   QMenu* menu = new QMenu();
@@ -314,6 +312,10 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
               menu->exec(QCursor::pos());
             });
   }
+
+  hbox->addWidget(lbl);
+  hbox->addWidget(edit);
+  frame->setFixedHeight(18);
 
   QObjectList listObj;
   listObj = MainWindow::getAllFrame(MainWindow::getAllUIControls(tab));
