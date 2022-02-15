@@ -540,9 +540,49 @@ void SyncOCDialog::init_Sync_OC_Table() {
     ui->comboOCVersions->setHidden(false);
     ui->comboOCVersions->setCurrentText("");
     QString str = ocVer;
-    ui->comboOCVersions->setCurrentText(str.split(" ").at(0));
-    qDebug() << ui->comboOCVersions->currentText()
-             << str.replace(tr("DEBUG"), "").trimmed();
+    str = str.split(" ").at(0);
+    if (str > ui->comboOCVersions->itemText(1)) {
+      ui->comboOCVersions->clear();
+      QString a0, b0, c0;
+      QStringList list = str.split(".");
+      if (list.count() == 3) {
+        a0 = list.at(0);
+        b0 = list.at(1);
+        c0 = list.at(2);
+        QStringList lver;
+
+        int a, b, c;
+        a = 0;
+        b = 6;
+        c = 1;
+        for (int i = 0; i < 200; i++) {
+          c++;
+          qDebug() << a << b << c;
+          lver.insert(0, QString::number(a) + "." + QString::number(b) + "." +
+                             QString::number(c));
+          if (a0.toInt() == a && b0.toInt() == b && c0.toInt() == c) break;
+          if (c == 9) {
+            b++;
+            c = 0;
+            qDebug() << a << b << c;
+            lver.insert(0, QString::number(a) + "." + QString::number(b) + "." +
+                               QString::number(c));
+            if (a0.toInt() == a && b0.toInt() == b && c0.toInt() == c) break;
+            if (b == 9) {
+              a++;
+              b = 0;
+              qDebug() << a << b << c;
+              lver.insert(0, QString::number(a) + "." + QString::number(b) +
+                                 "." + QString::number(c));
+              if (a0.toInt() == a && b0.toInt() == b && c0.toInt() == c) break;
+            }
+          }
+        }
+        lver.insert(0, tr("Latest Version"));
+        ui->comboOCVersions->addItems(lver);
+      }
+    }
+    ui->comboOCVersions->setCurrentText(str);
   }
   sourceKexts.clear();
   targetKexts.clear();
