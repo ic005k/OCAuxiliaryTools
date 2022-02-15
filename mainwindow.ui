@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -860,7 +860,7 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
             <string>Quirks</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_28">
-            <item row="0" column="0">
+            <item row="0" column="0" colspan="3">
              <widget class="QFrame" name="frame_2">
               <property name="maximumSize">
                <size>
@@ -878,7 +878,7 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
                <item row="0" column="0">
                 <layout class="QHBoxLayout" name="horizontalLayout_2">
                  <item>
-                  <spacer name="horizontalSpacer_3">
+                  <spacer name="horizontalSpacer_10">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -914,7 +914,7 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
                   </widget>
                  </item>
                  <item>
-                  <spacer name="horizontalSpacer_4">
+                  <spacer name="horizontalSpacer_3">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -932,6 +932,19 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
              </widget>
             </item>
             <item row="1" column="0">
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>381</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="1" rowspan="2">
              <widget class="QFrame" name="frame_chk_10">
               <property name="frameShape">
                <enum>QFrame::NoFrame</enum>
@@ -1136,6 +1149,19 @@ This works around patched tables becoming incompatible with the SLIC table causi
                </item>
               </layout>
              </widget>
+            </item>
+            <item row="2" column="2">
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>380</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -11459,7 +11485,7 @@ Note 2 : When switching from manually specifified NVRAM variable to this prefere
             <string>ProtocolOverrides</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_81">
-            <item row="0" column="0">
+            <item row="0" column="1">
              <widget class="QFrame" name="frame_chk_5">
               <property name="frameShape">
                <enum>QFrame::NoFrame</enum>
@@ -11468,6 +11494,34 @@ Note 2 : When switching from manually specifified NVRAM variable to this prefere
                <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_26">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="verticalSpacer_20">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
                <item>
                 <widget class="QCheckBox" name="chkAppleAudio">
                  <property name="toolTip">
@@ -11496,6 +11550,19 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                 </widget>
                </item>
                <item>
+                <spacer name="verticalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
                 <widget class="QCheckBox" name="chkAppleBootPolicy">
                  <property name="toolTip">
                   <string notr="true">Note: Some Macs, namely MacPro5,1, do have APFS compatibility, but their Apple Boot Policy protocol contains recovery detection issues, thus using this option is advised on them as well.
@@ -11512,6 +11579,19 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                 </widget>
                </item>
                <item>
+                <spacer name="verticalSpacer_14">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
                 <widget class="QCheckBox" name="chkAppleDebugLog">
                  <property name="toolTip">
                   <string notr="true">Reinstalls Apple Debug Log protocol with a builtin version.
@@ -11525,6 +11605,19 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                   <string>AppleDebugLog</string>
                  </property>
                 </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_16">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
                <item>
                 <widget class="QCheckBox" name="chkAppleFramebufferInfo">
@@ -11544,6 +11637,19 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                 </widget>
                </item>
                <item>
+                <spacer name="verticalSpacer_17">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
                 <widget class="QCheckBox" name="chkAppleImageConversion">
                  <property name="toolTip">
                   <string notr="true">Reinstalls Apple Image Conversion protocol with a builtin version.
@@ -11561,6 +11667,19 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                 </widget>
                </item>
                <item>
+                <spacer name="verticalSpacer_18">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
                 <widget class="QCheckBox" name="chkAppleImg4Verification">
                  <property name="toolTip">
                   <string notr="true"> Reinstalls Apple IMG4 Verification protocol with a builtin version. This protocol is used to verify im4m manifest files used by Apple Secure Boot.
@@ -11576,10 +11695,189 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                  </property>
                 </widget>
                </item>
+               <item>
+                <spacer name="verticalSpacer_19">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
               </layout>
              </widget>
             </item>
-            <item row="0" column="1">
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="4">
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="5">
+             <widget class="QFrame" name="frame_chk_8">
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_35">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QCheckBox" name="chkDataHub">
+                 <property name="toolTip">
+                  <string notr="true"> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the protocol was already installed.
+
+----
+
+ 使用内置版本重新安装Data Hub协议。如果协议已经安装，这将删除所有以前的属性。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the
+ protocol was already installed.</string>
+                 </property>
+                 <property name="text">
+                  <string notr="true">DataHub</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="chkFirmwareVolume">
+                 <property name="toolTip">
+                  <string notr="true">Note: Several virtual machines including VMware may have corrupted cursor image in HiDPI mode and thus may also require this setting to be enabled.
+----
+注意：包括VMware在内的一些虚拟机在HiDPI模式下可能会损坏光标图像，因此也需要启用此设置。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Forcibly wraps Firmware Volume protocols or installs new to support custom cursor images for
+ File Vault 2. Should be set to true to ensure File Vault 2 compatibility on everything but VMs and legacy Macs.</string>
+                 </property>
+                 <property name="text">
+                  <string>FirmwareVolume</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="chkDeviceProperties">
+                 <property name="toolTip">
+                  <string notr="true"> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.
+----
+ 使用内置版本重新安装设备属性协议。如果已经安装，这将删除所有以前的属性。这可用于确保在虚拟机或旧版 Mac 上完全兼容。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties
+ if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.</string>
+                 </property>
+                 <property name="text">
+                  <string notr="true">DeviceProperties</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="chkHashServices">
+                 <property name="toolTip">
+                  <string notr="true">Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.
+----
+强制重新安装内置版本的哈希服务协议。应该设置为 &quot;true&quot;，以确保File Vault 2在提供破损的SHA-1哈希的平台上的兼容性。在UIScale设置为02的情况下，可以通过无效的光标大小进行诊断，一般APTIO V之前的平台（Haswell及以上）都会受到影响。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure
+ File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size
+ with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.</string>
+                 </property>
+                 <property name="text">
+                  <string>HashServices</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="chkOSInfo">
+                 <property name="toolTip">
+                  <string notr="true">Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive notifications from macOS bootloader, by the firmware or by other applications.
+----
+强制重新安装内置版本的OS Info协议。该协议通常用于接收来自macOS引导程序、固件或其他应用程序的通知。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive
+ notifications from macOS bootloader, by the firmware or by other applications.</string>
+                 </property>
+                 <property name="text">
+                  <string>OSInfo</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="chkUnicodeCollation">
+                 <property name="toolTip">
+                  <string notr="true"> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.
+
+----
+
+ 强制重新安装内置版本的unicode整理服务。应设为true，以确保UEFI Shell在提供破损的unicode collation平台上的相容性。一般而言，Ivy Bridge或更早版本的Insyde和APTIO平台会受到影响。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.</string>
+                 </property>
+                 <property name="text">
+                  <string>UnicodeCollation</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="3">
              <widget class="QFrame" name="frame_chk_7">
               <property name="frameShape">
                <enum>QFrame::NoFrame</enum>
@@ -11588,6 +11886,21 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
                <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_27">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
                <item>
                 <widget class="QCheckBox" name="chkAppleKeyMap">
                  <property name="toolTip">
@@ -11691,117 +12004,18 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
               </layout>
              </widget>
             </item>
-            <item row="0" column="2">
-             <widget class="QFrame" name="frame_chk_8">
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+            <item row="0" column="6">
+             <spacer name="horizontalSpacer_8">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
               </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_35">
-               <item>
-                <widget class="QCheckBox" name="chkDataHub">
-                 <property name="toolTip">
-                  <string notr="true"> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the protocol was already installed.
-
-----
-
- 使用内置版本重新安装Data Hub协议。如果协议已经安装，这将删除所有以前的属性。</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> Reinstalls Data Hub protocol with a builtin version. This will delete all previous properties if the
- protocol was already installed.</string>
-                 </property>
-                 <property name="text">
-                  <string notr="true">DataHub</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="chkFirmwareVolume">
-                 <property name="toolTip">
-                  <string notr="true">Note: Several virtual machines including VMware may have corrupted cursor image in HiDPI mode and thus may also require this setting to be enabled.
-----
-注意：包括VMware在内的一些虚拟机在HiDPI模式下可能会损坏光标图像，因此也需要启用此设置。</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> Forcibly wraps Firmware Volume protocols or installs new to support custom cursor images for
- File Vault 2. Should be set to true to ensure File Vault 2 compatibility on everything but VMs and legacy Macs.</string>
-                 </property>
-                 <property name="text">
-                  <string>FirmwareVolume</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="chkDeviceProperties">
-                 <property name="toolTip">
-                  <string notr="true"> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.
-----
- 使用内置版本重新安装设备属性协议。如果已经安装，这将删除所有以前的属性。这可用于确保在虚拟机或旧版 Mac 上完全兼容。</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> Reinstalls Device Property protocol with a builtin version. This will delete all previous properties
- if it was already installed. This may be used to ensure full compatibility on VMs or legacy Macs.</string>
-                 </property>
-                 <property name="text">
-                  <string notr="true">DeviceProperties</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="chkHashServices">
-                 <property name="toolTip">
-                  <string notr="true">Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.
-----
-强制重新安装内置版本的哈希服务协议。应该设置为 &quot;true&quot;，以确保File Vault 2在提供破损的SHA-1哈希的平台上的兼容性。在UIScale设置为02的情况下，可以通过无效的光标大小进行诊断，一般APTIO V之前的平台（Haswell及以上）都会受到影响。</string>
-                 </property>
-                 <property name="statusTip">
-                  <string>Forcibly reinstalls Hash Services protocols with builtin versions. Should be set to true to ensure
- File Vault 2 compatibility on platforms providing broken SHA-1 hashing. Can be diagnosed by invalid cursor size
- with UIScale set to 02, in general platforms prior to APTIO V (Haswell and older) are affected.</string>
-                 </property>
-                 <property name="text">
-                  <string>HashServices</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="chkOSInfo">
-                 <property name="toolTip">
-                  <string notr="true">Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive notifications from macOS bootloader, by the firmware or by other applications.
-----
-强制重新安装内置版本的OS Info协议。该协议通常用于接收来自macOS引导程序、固件或其他应用程序的通知。</string>
-                 </property>
-                 <property name="statusTip">
-                  <string>Forcibly reinstalls OS Info protocol with builtin versions. This protocol is generally used to receive
- notifications from macOS bootloader, by the firmware or by other applications.</string>
-                 </property>
-                 <property name="text">
-                  <string>OSInfo</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="chkUnicodeCollation">
-                 <property name="toolTip">
-                  <string notr="true"> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.
-
-----
-
- 强制重新安装内置版本的unicode整理服务。应设为true，以确保UEFI Shell在提供破损的unicode collation平台上的相容性。一般而言，Ivy Bridge或更早版本的Insyde和APTIO平台会受到影响。</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> Forcibly reinstalls unicode collation services with builtin version. Should be set to true to ensure UEFI Shell compatibility on platforms providing broken unicode collation. In general legacy Insyde and APTIO platforms on Ivy Bridge and earlier are affected.</string>
-                 </property>
-                 <property name="text">
-                  <string>UnicodeCollation</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
+             </spacer>
             </item>
            </layout>
           </widget>
