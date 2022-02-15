@@ -539,12 +539,13 @@ void SyncOCDialog::init_Sync_OC_Table() {
     ui->lblOCVersions->setHidden(false);
     ui->comboOCVersions->setHidden(false);
     ui->comboOCVersions->setCurrentText("");
-    QString str = ocVer;
-    str = str.split(" ").at(0);
-    if (str > ui->comboOCVersions->itemText(1)) {
+
+    QString strDev = ocVerDev;
+    strDev = strDev.split(" ").at(0);
+    if (strDev > ui->comboOCVersions->itemText(1)) {
       ui->comboOCVersions->clear();
       QString a0, b0, c0;
-      QStringList list = str.split(".");
+      QStringList list = strDev.split(".");
       if (list.count() == 3) {
         a0 = list.at(0);
         b0 = list.at(1);
@@ -578,10 +579,13 @@ void SyncOCDialog::init_Sync_OC_Table() {
             }
           }
         }
+        lver.removeAt(0);
         lver.insert(0, tr("Latest Version"));
         ui->comboOCVersions->addItems(lver);
       }
     }
+    QString str = ocVer;
+    str = str.split(" ").at(0);
     ui->comboOCVersions->setCurrentText(str);
   }
   sourceKexts.clear();
