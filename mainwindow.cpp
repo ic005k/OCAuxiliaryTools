@@ -43,7 +43,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
     if (!linuxOS)
       dataBaseDir = strAppExePath + "/Database/";
     else
-      dataBaseDir = QDir::homePath() + +"/Database/";
+      dataBaseDir = QDir::homePath() + "/Database/";
 
     if (!ui->actionDEBUG->isChecked()) {
       pathSource = dataBaseDir;
@@ -65,7 +65,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
     if (!linuxOS)
       dataBaseDir = strAppExePath + "/devDatabase/";
     else
-      dataBaseDir = QDir::homePath() + +"/devDatabase/";
+      dataBaseDir = QDir::homePath() + "/devDatabase/";
     if (!QDir(dataBaseDir).exists()) {
       QMessageBox::critical(
           this, "",
@@ -95,11 +95,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
 
   for (int i = 0; i < listOCATWidgetHideList.count(); i++) {
     listOCATWidgetHideList.at(i)->setHidden(false);
-    // QWidget* w = listOCATWidgetHideList.at(i);
-    // w->parentWidget()->layout()->removeWidget(w);
-    // delete (w);
   }
-  // listOCATWidgetHideList.clear();
 
   for (int i = 0; i < listOCATWidgetDelList.count(); i++) {
     QWidget* frame = listOCATWidgetDelList.at(i);
@@ -128,7 +124,6 @@ MainWindow::MainWindow(QWidget* parent)
 
   Initialization = true;
   loading = true;
-
   loadLocal();
 
 #ifdef Q_OS_MAC
@@ -5417,8 +5412,15 @@ void MainWindow::init_Widgets() {
   QSettings Reg(strIniFile, QSettings::IniFormat);
   blDEV = Reg.value("OpenCoreDEV", false).toBool();
   QString fileSample, fileSampleDev;
-  fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
-  fileSampleDev = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
+  if (!linuxOS) {
+    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
+    fileSampleDev =
+        strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
+  } else {
+    fileSample = QDir::homePath() + "/Database/BaseConfigs/SampleCustom.plist";
+    fileSampleDev =
+        QDir::homePath() + "/devDatabase/BaseConfigs/SampleCustom.plist";
+  }
   QFile file(fileSample);
   QFile fileDev(fileSampleDev);
   if (!file.exists()) {
@@ -10091,10 +10093,7 @@ void MainWindow::smart_UpdateKeyField() {
   };
 
   QString fileSample;
-  if (blDEV)
-    fileSample = strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
-  else
-    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
+  fileSample = dataBaseDir + "BaseConfigs/SampleCustom.plist";
   QFile file(fileSample);
   if (file.exists()) {
     mapTatol.clear();
