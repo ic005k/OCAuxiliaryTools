@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>4</number>
       </property>
       <property name="iconSize">
        <size>
@@ -3754,7 +3754,7 @@ This setting allows to prevent using faster kernel caching variants if slower va
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -7022,8 +7022,25 @@ OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本
                  <property name="midLineWidth">
                   <number>0</number>
                  </property>
-                 <layout class="QGridLayout" name="gridLayout_47">
-                  <item row="1" column="0">
+                 <layout class="QVBoxLayout" name="verticalLayout_47">
+                  <item>
+                   <widget class="QCheckBox" name="chkSpoofVendor">
+                    <property name="toolTip">
+                     <string notr="true">Sets SMBIOS vendor fields to Acidanthera.
+
+----
+
+将SMBIOS供应商字段设置为Acidanthera。</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Sets SMBIOS vendor fields to Acidanthera.</string>
+                    </property>
+                    <property name="text">
+                     <string>SpoofVendor</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
                    <widget class="QCheckBox" name="chkMaxBIOSVersion">
                     <property name="toolTip">
                      <string notr="true"> Sets BIOSVersion to 9999.999.999.999.999, recommended for legacy Macs when using Automatic PlatformInfo to avoid BIOS updates in unofficially supported macOS versions.
@@ -7043,7 +7060,7 @@ OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="0">
+                  <item>
                    <widget class="QCheckBox" name="chkAdviseFeatures">
                     <property name="toolTip">
                      <string notr="true">Type: plist boolean
@@ -7076,23 +7093,6 @@ Note: On most newer firmwares these bits are already set, the option may be nece
                     </property>
                     <property name="text">
                      <string>AdviseFeatures</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QCheckBox" name="chkSpoofVendor">
-                    <property name="toolTip">
-                     <string notr="true">Sets SMBIOS vendor fields to Acidanthera.
-
-----
-
-将SMBIOS供应商字段设置为Acidanthera。</string>
-                    </property>
-                    <property name="statusTip">
-                     <string>Sets SMBIOS vendor fields to Acidanthera.</string>
-                    </property>
-                    <property name="text">
-                     <string>SpoofVendor</string>
                     </property>
                    </widget>
                   </item>

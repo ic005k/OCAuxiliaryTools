@@ -5240,6 +5240,7 @@ void MainWindow::init_MainUI() {
   init_EditMenu();
   init_UndoRedo();
 
+  // Hide ToolBar
   ui->frameToolBar->setHidden(true);
   ui->statusbar->setHidden(true);
   myDlgPreference->ui->chkHideToolbar->setChecked(
@@ -8999,32 +9000,31 @@ void MainWindow::Target() {
 }
 
 void MainWindow::on_btnGetPassHash_clicked() {
-  ui->btnGetPassHash->setEnabled(false);
-  ui->progressBar->setMaximum(0);
-  this->repaint();
-
   QString strPass = "";
   chkdataPassHash = new QProcess;
 
 #ifdef Q_OS_WIN32
+  if (!QFile(dataBaseDir + "win/ocpasswordgen.exe").exists()) return;
   chkdataPassHash->start(dataBaseDir + "win/ocpasswordgen.exe", QStringList()
                                                                     << strPass);
-
 #endif
 
 #ifdef Q_OS_LINUX
+  if (!QFile(dataBaseDir + "linux/ocpasswordgen").exists()) return;
   chkdataPassHash->start(dataBaseDir + "linux/ocpasswordgen", QStringList()
                                                                   << strPass);
-
 #endif
 
 #ifdef Q_OS_MAC
-
+  if (!QFile(dataBaseDir + "mac/ocpasswordgen").exists()) return;
   chkdataPassHash->start(dataBaseDir + "mac/ocpasswordgen", QStringList()
                                                                 << strPass);
 #endif
 
-  chkdataPassHash->waitForStarted();  //等待启动完成
+  ui->btnGetPassHash->setEnabled(false);
+  this->repaint();
+  ui->progressBar->setMaximum(0);
+  chkdataPassHash->waitForStarted();
   QString strData = ui->myeditPassInput->text().trimmed() + "\n";
   const char* cstr;  // = strData.toLocal8Bit().constData();
   strData = strData.toLocal8Bit();
@@ -9566,9 +9566,7 @@ void MainWindow::on_actionOpen_Directory_triggered() {
 }
 
 void MainWindow::on_actionOpen_database_directory_triggered() {
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString dirpath = appInfo.filePath() + "/Database/";
-  QString dir = "file:" + dirpath;
+  QString dir = "file:" + dataBaseDir;
   QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
 }
 

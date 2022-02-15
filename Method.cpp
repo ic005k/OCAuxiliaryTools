@@ -380,10 +380,11 @@ void Method::updateOpenCore() {
     dir.mkpath(mw_one->dataBaseDir + "BaseConfigs/");
     dir.mkpath(mw_one->dataBaseDir + "mac/");
     dir.mkpath(mw_one->dataBaseDir + "win/");
+    mw_one->deleteDirfile(mw_one->dataBaseDir + "linux/");
     dir.mkpath(mw_one->dataBaseDir + "linux/");
 
     QString strSEFI = tempDir + "X64/EFI/";
-    if (!QDir(strSEFI).exists()) {
+    if (!QDir(strSEFI).exists() && blDEV) {
       QMessageBox::information(
           this, "",
           tr("No update is currently available, or please check the update "
@@ -427,6 +428,13 @@ void Method::updateOpenCore() {
     Results.append(mw_one->copyFileToPath(
         tempDir + "Utilities/ocvalidate/ocvalidate.exe",
         mw_one->dataBaseDir + "win/ocvalidate.exe", true));
+
+    if (!QFile(tempDir + "Utilities/ocvalidate/ocvalidate.linux").exists()) {
+      QMessageBox::information(this, "",
+                               tr("Note: This version or update source does "
+                                  "not contain Linux related files. This will "
+                                  "affect the use of the APP under Linux."));
+    }
 
     mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.linux",
                            mw_one->dataBaseDir + "linux/ocvalidate", true);
