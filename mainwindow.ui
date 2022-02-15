@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1118,7 +1118,7 @@ This works around patched tables becoming incompatible with the SLIC table causi
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -1924,7 +1924,7 @@ Note: The necessity of this quirk is determined by random boot failure when Prov
                   <widget class="QLineEdit" name="editIntProvideMaxSlide">
                    <property name="maximumSize">
                     <size>
-                     <width>180</width>
+                     <width>16777215</width>
                      <height>16777215</height>
                     </size>
                    </property>
@@ -1969,7 +1969,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
                   <widget class="QLineEdit" name="editIntResizeAppleGpuBars">
                    <property name="maximumSize">
                     <size>
-                     <width>180</width>
+                     <width>16777215</width>
                      <height>16777215</height>
                     </size>
                    </property>
