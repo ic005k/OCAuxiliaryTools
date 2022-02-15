@@ -383,7 +383,13 @@ void Method::updateOpenCore() {
     dir.mkpath(mw_one->dataBaseDir + "linux/");
 
     QString strSEFI = tempDir + "X64/EFI/";
-    if (!QDir(strSEFI).exists()) return;
+    if (!QDir(strSEFI).exists()) {
+      QMessageBox::information(
+          this, "",
+          tr("No update is currently available, or please check the update "
+             "source for the OpenCore development version."));
+      return;
+    }
     QString strTEFI;
     if (!mw_one->ui->actionDEBUG->isChecked())
       strTEFI = mw_one->dataBaseDir + "EFI/";
