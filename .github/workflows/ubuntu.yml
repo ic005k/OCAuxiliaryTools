@@ -65,10 +65,10 @@ jobs:
          chmod +x bin/release/Database/linux/ocvalidate
          chmod +x bin/release/Database/linux/ocpasswordgen
          
-         cp -r devDatabase bin/release/devDatabase
-         chmod +x bin/release/devDatabase/linux/macserial
-         chmod +x bin/release/devDatabase/linux/ocvalidate
-         chmod +x bin/release/devDatabase/linux/ocpasswordgen
+         #cp -r devDatabase bin/release/devDatabase
+         #chmod +x bin/release/devDatabase/linux/macserial
+         #chmod +x bin/release/devDatabase/linux/ocvalidate
+         #chmod +x bin/release/devDatabase/linux/ocpasswordgen
          
          export VERSION # linuxdeployqt uses this for naming the file
          ./linuxdeployqt-continuous-x86_64.AppImage bin/release/${targetName} -unsupported-allow-new-glibc -appimage
