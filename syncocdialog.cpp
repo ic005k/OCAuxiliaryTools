@@ -265,7 +265,7 @@ void SyncOCDialog::setListWidgetStyle() {
     setListWidgetColor("#FFEFDB");
   }
   if (mymethod->isWhatFile(fileName, "efi") && fileName.contains("/Drivers/")) {
-    setListWidgetColor("#BFEFFF");
+    setListWidgetColor("#CAE1FF");
   }
 }
 
@@ -651,8 +651,6 @@ void SyncOCDialog::init_Sync_OC_Table() {
   }
 
   // Kexts
-  // t->clear();
-  // t = mw_one->ui->table_kernel_add;
   pathCol = get_PathCol(mw_one->ui->table_kernel_add, "BundlePath");
   for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
     QString strKextName =
@@ -665,8 +663,6 @@ void SyncOCDialog::init_Sync_OC_Table() {
 
   // Tools
   QStringList dbToolsFileList;
-  // t->clear();
-  // t = mw_one->ui->tableTools;
   pathCol = get_PathCol(mw_one->ui->tableTools, "Path");
   dbToolsFileList =
       mymethod->DirToFileList(mw_one->pathSource + "EFI/OC/Tools/", "*.efi");
