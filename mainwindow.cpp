@@ -62,7 +62,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
   } else {  // blDEV
     dataBaseDir = strAppExePath + "/Database/";
     userDataBaseDir = QDir::homePath() + "/devDatabase/";
-    if (!QDir(userDataBaseDir).exists()) {
+    if (!QFile(userDataBaseDir + "EFI/OC/OpenCore.efi").exists()) {
       QMessageBox::critical(
           this, "",
           tr("The development version database does not exist, please "

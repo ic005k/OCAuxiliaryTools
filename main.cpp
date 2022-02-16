@@ -25,6 +25,15 @@ int main(int argc, char *argv[]) {
   QString strAppExePath = qApp->applicationDirPath();
   mw_one->copyDirectoryFiles(strAppExePath + "/Database/",
                              QDir::homePath() + "/Database/", false);
+  QDir dir;
+  dir.mkpath(QDir::homePath() + "/devDatabase/EFI/OC/Drivers/");
+  dir.mkpath(QDir::homePath() + "/devDatabase/EFI/OC/Tools/");
+  mw_one->copyDirectoryFiles(strAppExePath + "/Database/EFI/OC/Drivers/",
+                             QDir::homePath() + "/devDatabase/EFI/OC/Drivers/",
+                             false);
+  mw_one->copyDirectoryFiles(strAppExePath + "/Database/EFI/OC/Tools/",
+                             QDir::homePath() + "/devDatabase/EFI/OC/Tools/",
+                             false);
   QString fileSample =
       QDir::homePath() + "/Database/BaseConfigs/SampleCustom.plist";
   if (!QFile(fileSample).exists()) {
