@@ -1129,9 +1129,8 @@ void Method::generateEFI(QString file) {
   QDir dir;
   QString strDatabase;
 
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString pathOldSource = appInfo.filePath() + "/Database/";
-  QString pathSource = mw_one->dataBaseDir;
+  QString str = QDir::homePath() + "/Database/";
+  QString pathSource = mw_one->userDataBaseDir;
 
   QString pathTarget = QDir::homePath() + "/Desktop/EFI/";
 
@@ -1147,13 +1146,13 @@ void Method::generateEFI(QString file) {
   QFile::copy(pathSource + "EFI/BOOT/BOOTx64.efi", pathBoot + "BOOTx64.efi");
 
   // ACPI
-  strDatabase = copyACPI(pathOldSource, pathTarget) + strDatabase;
+  strDatabase = copyACPI(str, pathTarget) + strDatabase;
 
   // Drivers
   strDatabase = copyDrivers(pathSource, pathTarget) + strDatabase;
 
   // Kexts
-  strDatabase = copyKexts(pathOldSource, pathTarget) + strDatabase;
+  strDatabase = copyKexts(str, pathTarget) + strDatabase;
 
   // OC/Resources
   QString pathOCResources = pathTarget + "OC/Resources/";

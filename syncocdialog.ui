@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>856</width>
+    <width>859</width>
     <height>498</height>
    </rect>
   </property>
@@ -320,7 +320,7 @@
      <item>
       <widget class="QLabel" name="lblOCVersions">
        <property name="text">
-        <string>OpenCore Versions</string>
+        <string>Choose OpenCore Version</string>
        </property>
       </widget>
      </item>
