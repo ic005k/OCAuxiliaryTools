@@ -1506,12 +1506,6 @@ void MainWindow::ParserPlatformInfo(QVariantMap map) {
   if (map.isEmpty()) return;
 
   getValue(map, ui->gbox01);
-  /*ui->chkAutomatic->setChecked(map["Automatic"].toBool());
-  ui->chkCustomMemory->setChecked(map["CustomMemory"].toBool());
-  ui->chkUpdateDataHub->setChecked(map["UpdateDataHub"].toBool());
-  ui->chkUpdateNVRAM->setChecked(map["UpdateNVRAM"].toBool());
-  ui->chkUpdateSMBIOS->setChecked(map["UpdateSMBIOS"].toBool());
-  ui->chkUseRawUuidEncoding->setChecked(map["UseRawUuidEncoding"].toBool());*/
 
   QString usm = map["UpdateSMBIOSMode"].toString();
   ui->cboxUpdateSMBIOSMode->setCurrentText(usm.trimmed());
@@ -1633,6 +1627,9 @@ void MainWindow::ParserUEFI(QVariantMap map) {
   map = map["UEFI"].toMap();
   if (map.isEmpty()) return;
 
+  getValue(map, ui->gboxUEFI);
+  // ui->chkConnectDrivers->setChecked(map["ConnectDrivers"].toBool());
+
   // 1. APFS
   QVariantMap map_apfs = map["APFS"].toMap();
   getValue(map_apfs, ui->tabUEFI1);
@@ -1662,8 +1659,6 @@ void MainWindow::ParserUEFI(QVariantMap map) {
   // 4. Drivers
   QVariantList map_Drivers = map["Drivers"].toList();
   Method::set_TableData(ui->table_uefi_drivers, map_Drivers);
-
-  ui->chkConnectDrivers->setChecked(map["ConnectDrivers"].toBool());
 
   // 5. Input
   QVariantMap map_input = map["Input"].toMap();
@@ -2106,6 +2101,10 @@ QVariantMap MainWindow::SaveUEFI() {
   QVariantMap subMap;
   QVariantMap dictList;
 
+  // 0.Tatol
+  subMap = setValue(subMap, ui->gboxUEFI);
+  // subMap["ConnectDrivers"] = getChkBool(ui->chkConnectDrivers);
+
   // 1. APFS
   subMap["APFS"] = setValue(dictList, ui->tabUEFI1);
 
@@ -2119,7 +2118,6 @@ QVariantMap MainWindow::SaveUEFI() {
 
   // 4. Drivers
   subMap["Drivers"] = Method::get_TableData(ui->table_uefi_drivers);
-  subMap["ConnectDrivers"] = getChkBool(ui->chkConnectDrivers);
 
   // 5. Input
   dictList.clear();
@@ -10131,6 +10129,7 @@ void MainWindow::smart_UpdateKeyField() {
                                    "PlatformInfo", "SMBIOS");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->gbox01, "PlatformInfo", "");
 
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->gboxUEFI, "UEFI", "");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI1, "UEFI", "APFS");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabUEFI2, "UEFI",
                                    "AppleInput");

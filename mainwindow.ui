@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -9188,7 +9188,7 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
        <attribute name="title">
         <string notr="true">UEFI</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_55">
+       <layout class="QGridLayout" name="gridLayout_47">
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabUEFI">
           <property name="tabShape">
@@ -11961,9 +11961,24 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QCheckBox" name="chkConnectDrivers">
-          <property name="toolTip">
-           <string notr="true">This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
+         <widget class="QGroupBox" name="gboxUEFI">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_35">
+           <item row="0" column="0">
+            <widget class="QFrame" name="frame_chk_20">
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_56">
+              <item>
+               <widget class="QCheckBox" name="chkConnectDrivers">
+                <property name="toolTip">
+                 <string notr="true">This option is useful for loading drivers following UEFI driver model as they may not start by themselves.
 
 Examples of such drivers are filesystem or audio drivers. While effective, this option may not be necessary for drivers performing automatic connection, and may slightly  slowdown the boot.
 
@@ -11980,13 +11995,34 @@ Enable this option to be able to see all the boot options when having multiple d
 注意：一些固件，特别是苹果公司制造的固件，只连接启动驱动器以加快启动过程。
 
 启用此选项，以便在有多个驱动器时能够看到所有的启动选项。</string>
-          </property>
-          <property name="statusTip">
-           <string> Perform UEFI controller connection after driver loading.</string>
-          </property>
-          <property name="text">
-           <string>ConnectDrivers</string>
-          </property>
+                </property>
+                <property name="statusTip">
+                 <string> Perform UEFI controller connection after driver loading.</string>
+                </property>
+                <property name="text">
+                 <string>ConnectDrivers</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QFrame" name="frame_edit_13">
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_58">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_57"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>

@@ -154,6 +154,7 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   chk->setFont(font);
   chk->setText(text);
   chk->setObjectName(ObjectName);
+  chk->setFixedHeight(18);
 
   chk->setContextMenuPolicy(Qt::CustomContextMenu);
   QMenu* menu = new QMenu();
@@ -202,8 +203,6 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
               menu->exec(QCursor::pos());
             });
   }
-
-  chk->setFixedHeight(18);
 
   QObjectList listObj;
   listObj = MainWindow::getAllFrame(MainWindow::getAllUIControls(tab));
