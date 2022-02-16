@@ -265,7 +265,7 @@ void SyncOCDialog::setListWidgetStyle() {
     setListWidgetColor("#FFEFDB");
   }
   if (mymethod->isWhatFile(fileName, "efi") && fileName.contains("/Drivers/")) {
-    setListWidgetColor("#CAE1FF");
+    setListWidgetColor("#E6E6FA");
   }
 }
 
