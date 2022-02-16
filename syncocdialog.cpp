@@ -259,13 +259,13 @@ void SyncOCDialog::on_listOpenCore_itemClicked(QListWidgetItem* item) {
 void SyncOCDialog::setListWidgetStyle() {
   QString fileName = sourceOpenCore.at(ui->listOpenCore->currentRow());
   if (mymethod->isWhatFile(fileName, "efi")) {
-    setListWidgetColor("#E0EEEE");
+    setListWidgetColor("#FFF8DC");
   }
   if (mymethod->isWhatFile(fileName, "efi") && fileName.contains("/Tools/")) {
     setListWidgetColor("#FFEFDB");
   }
   if (mymethod->isWhatFile(fileName, "efi") && fileName.contains("/Drivers/")) {
-    setListWidgetColor("#F5F5DC");
+    setListWidgetColor("#BFEFFF");
   }
 }
 
@@ -597,7 +597,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
   chkList.clear();
 
   QString DirName;
-  QMessageBox box;
+  int pathCol = 0;
   QIcon icon;
 
   QFileInfo fi(SaveFileName);
@@ -635,8 +635,9 @@ void SyncOCDialog::init_Sync_OC_Table() {
 
   // Drivers
   QString str1, str2;
+  pathCol = get_PathCol(mw_one->ui->table_uefi_drivers, "Path");
   for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
-    str1 = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
+    str1 = mw_one->ui->table_uefi_drivers->item(i, pathCol)->text();
     str2 = mw_one->pathSource + "EFI/OC/Drivers/" + str1;
 
     bool re = false;
@@ -650,9 +651,12 @@ void SyncOCDialog::init_Sync_OC_Table() {
   }
 
   // Kexts
+  // t->clear();
+  // t = mw_one->ui->table_kernel_add;
+  pathCol = get_PathCol(mw_one->ui->table_kernel_add, "BundlePath");
   for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
     QString strKextName =
-        mw_one->ui->table_kernel_add->item(i, 0)->text().trimmed();
+        mw_one->ui->table_kernel_add->item(i, pathCol)->text().trimmed();
     if (!strKextName.contains("/Contents/PlugIns/")) {
       sourceKexts.append(pathOldSource + "EFI/OC/Kexts/" + strKextName);
       targetKexts.append(DirName + "/OC/Kexts/" + strKextName);
@@ -661,10 +665,14 @@ void SyncOCDialog::init_Sync_OC_Table() {
 
   // Tools
   QStringList dbToolsFileList;
+  // t->clear();
+  // t = mw_one->ui->tableTools;
+  pathCol = get_PathCol(mw_one->ui->tableTools, "Path");
   dbToolsFileList =
       mymethod->DirToFileList(mw_one->pathSource + "EFI/OC/Tools/", "*.efi");
   for (int i = 0; i < mw_one->ui->tableTools->rowCount(); i++) {
-    QString strName = mw_one->ui->tableTools->item(i, 0)->text().trimmed();
+    QString strName =
+        mw_one->ui->tableTools->item(i, pathCol)->text().trimmed();
     if (mymethod->isEqualInList(strName, dbToolsFileList)) {
       sourceOpenCore.append(mw_one->pathSource + "EFI/OC/Tools/" + strName);
       targetOpenCore.append(DirName + "/OC/Tools/" + strName);
@@ -775,6 +783,17 @@ void SyncOCDialog::init_Sync_OC_Table() {
 
   // Read check status
   readCheckStateINI();
+}
+
+int SyncOCDialog::get_PathCol(QTableWidget* t, QString pathText) {
+  for (int i = 0; i < t->horizontalHeader()->count(); i++) {
+    QString strCol = t->horizontalHeaderItem(i)->text();
+    if (strCol == pathText) {
+      return i;
+    }
+  }
+  if (t->horizontalHeader()->count() == 1) return 0;
+  return 0;
 }
 
 void SyncOCDialog::on_tableKexts_itemSelectionChanged() {

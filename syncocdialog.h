@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QProgressBar>
 #include <QScrollBar>
+#include <QTableWidget>
 
 namespace Ui {
 class SyncOCDialog;
@@ -39,6 +40,7 @@ class SyncOCDialog : public QDialog {
 
   void init_Sync_OC_Table();
 
+  int get_PathCol(QTableWidget *t, QString pathText);
  public slots:
   void on_btnStop_clicked();
 

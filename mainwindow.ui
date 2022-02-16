@@ -202,7 +202,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1619,8 +1619,8 @@ Note: The necessity of this quirk is determined by early boot crashes of the fir
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QGridLayout" name="gridLayout_35">
-               <item row="1" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_48">
+               <item>
                 <widget class="QCheckBox" name="chkForceBooterSignature">
                  <property name="toolTip">
                   <string notr="true">Booter signature, essentially a SHA-1 hash of the loaded image, is used by Mac EFI to verify the authenticity of the bootloader when waking from hibernation. 
@@ -1645,7 +1645,7 @@ Booter签名，本质上是加载的映像的SHA-1哈希值，Mac EFI在从休�
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
+               <item>
                 <widget class="QCheckBox" name="chkProtectSecureBoot">
                  <property name="toolTip">
                   <string notr="true">Reports security violation during attempts to write to db, dbx, PK, and KEK variables from the operating system.
@@ -1666,7 +1666,7 @@ Note: This quirk mainly attempts to avoid issues with NVRAM implementations with
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0">
+               <item>
                 <widget class="QCheckBox" name="chkProtectUefiServices">
                  <property name="toolTip">
                   <string notr="true">Some modern firmwares including both hardware and virtual machines, like VMware, may update pointers to UEFI services during driver loading and related actions. 
@@ -1691,7 +1691,7 @@ Note: On VMware the need for this quirk may be diagnosed by “Your Mac OS guest
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0">
+               <item>
                 <widget class="QCheckBox" name="chkProvideCustomSlide">
                  <property name="toolTip">
                   <string notr="true">This option performs memory map analysis of your firmware and checks whether all slides (from 1 to 255) can be used. 
@@ -1720,28 +1720,7 @@ Note: The necessity of this quirk is determined by OCABC: Only N/256 slide value
                  </property>
                 </widget>
                </item>
-               <item row="6" column="0">
-                <widget class="QCheckBox" name="chkSetupVirtualMap">
-                 <property name="toolTip">
-                  <string notr="true">Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot crashes. This quirk workarounds the problem by performing early boot identity mapping of assigned virtual addresses to physical memory.
-
-Note: The necessity of this quirk is determined by early boot failures. Currently new firmwares with memory protection support (like OVMF) do not support this quirk due to acidanthera/bugtracker#719.
-
-----
-
-选择固件在调用SetVirtualAddresses后按虚拟地址访问内存，导致早期启动崩溃。该选项通过对分配的虚拟地址和物理内存进行早期启动身份映射来解决这个问题。
-
-注意：该选项的必要性是由早期启动失败决定的。目前，由于 acidanthera/bugtracker#719，支持内存保护的新固件（如 OVMF）不支持该选项。</string>
-                 </property>
-                 <property name="statusTip">
-                  <string> Setup virtual memory at SetVirtualAddresses.</string>
-                 </property>
-                 <property name="text">
-                  <string>SetupVirtualMap</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="0">
+               <item>
                 <widget class="QCheckBox" name="chkProtectMemoryRegions">
                  <property name="toolTip">
                   <string notr="true">Some firmwares incorrectly map select memory regions:
@@ -1774,28 +1753,28 @@ Note: The necessity of this quirk is determined by artifacts, sleep wake issues,
                  </property>
                 </widget>
                </item>
-               <item row="8" column="0">
-                <widget class="QCheckBox" name="chkSignalAppleOS">
+               <item>
+                <widget class="QCheckBox" name="chkSetupVirtualMap">
                  <property name="toolTip">
-                  <string notr="true">This quirk is useful on Mac firmwares, which behave differently in different OS. 
+                  <string notr="true">Select firmwares access memory by virtual addresses after SetVirtualAddresses call, which results in early boot crashes. This quirk workarounds the problem by performing early boot identity mapping of assigned virtual addresses to physical memory.
 
-For example, it is supposed to enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.
+Note: The necessity of this quirk is determined by early boot failures. Currently new firmwares with memory protection support (like OVMF) do not support this quirk due to acidanthera/bugtracker#719.
 
 ----
 
-该选项在Mac固件上很有用，在不同的操作系统中表现不同。
+选择固件在调用SetVirtualAddresses后按虚拟地址访问内存，导致早期启动崩溃。该选项通过对分配的虚拟地址和物理内存进行早期启动身份映射来解决这个问题。
 
-例如，在某些双GPU的MacBook机型中，它应该可以在Windows和Linux中启用Intel GPU。</string>
+注意：该选项的必要性是由早期启动失败决定的。目前，由于 acidanthera/bugtracker#719，支持内存保护的新固件（如 OVMF）不支持该选项。</string>
                  </property>
                  <property name="statusTip">
-                  <string> Report macOS being loaded through OS Info for any OS.</string>
+                  <string> Setup virtual memory at SetVirtualAddresses.</string>
                  </property>
                  <property name="text">
-                  <string>SignalAppleOS</string>
+                  <string>SetupVirtualMap</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="0">
+               <item>
                 <widget class="QCheckBox" name="chkRebuildAppleMemoryMap">
                  <property name="toolTip">
                   <string notr="true">Apple kernel has several limitations in parsing UEFI memory map:
@@ -1832,7 +1811,28 @@ Note 2 : The necessity of this quirk is determined by early boot failures. This 
                  </property>
                 </widget>
                </item>
-               <item row="9" column="0">
+               <item>
+                <widget class="QCheckBox" name="chkSignalAppleOS">
+                 <property name="toolTip">
+                  <string notr="true">This quirk is useful on Mac firmwares, which behave differently in different OS. 
+
+For example, it is supposed to enable Intel GPU in Windows and Linux in some dual-GPU MacBook models.
+
+----
+
+该选项在Mac固件上很有用，在不同的操作系统中表现不同。
+
+例如，在某些双GPU的MacBook机型中，它应该可以在Windows和Linux中启用Intel GPU。</string>
+                 </property>
+                 <property name="statusTip">
+                  <string> Report macOS being loaded through OS Info for any OS.</string>
+                 </property>
+                 <property name="text">
+                  <string>SignalAppleOS</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QCheckBox" name="chkSyncRuntimePermissions">
                  <property name="toolTip">
                   <string notr="true">Some firmwares either fail to properly handle runtime permissions:
@@ -9218,7 +9218,7 @@ Lower 32 bits match FirmwareFeaturesMask. Upper 64 bits match ExtendedFirmwareFe
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -9325,8 +9325,8 @@ APFS verbose输出对调试很有用。</string>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QGridLayout" name="gridLayout_50">
-               <item row="0" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_50">
+               <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_42">
                  <item>
                   <widget class="QLabel" name="label_31">
@@ -9380,7 +9380,7 @@ APFS驱动日期将APFS驱动与发布日期连接起来。旧版本的APFS驱�
                  </item>
                 </layout>
                </item>
-               <item row="1" column="0">
+               <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_43">
                  <item>
                   <widget class="QLabel" name="label_30">
@@ -9527,196 +9527,8 @@ Description: Enable custom key repeat delays when using the OpenCore implementat
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QGridLayout" name="gridLayout_24">
-               <item row="6" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_51">
-                 <item>
-                  <widget class="QLabel" name="label_112">
-                   <property name="toolTip">
-                    <string notr="true">Type: plist integer
-
-Description: Configure pointer speed divisor in OpenCore implementation of Apple Event protocol.
-
-Configures the divisor for pointer movements. The Apple OEM default value is 1. 0 is an invalid value for this option.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现的Apple Event协议中配置指针速度分位器。
-
-配置指针移动的分度。Apple OEM的默认值是1，0是这个选项的无效值。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Configure pointer speed divisor in OpenCore implementation of Apple Event protocol. Has no
- effect when using the OEM Apple implementation (see AppleEvent setting).</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true">PointerSpeedDiv</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="editIntPointerSpeedDiv">
-                   <property name="text">
-                    <string>1</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="2" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_28">
-                 <item>
-                  <widget class="QLabel" name="label_113">
-                   <property name="toolTip">
-                    <string notr="true">Type: plist integer
-
-Description: Configure subsequent keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
-
-Configures the gap between key repeats. The Apple OEM default value is 5 (50ms). 0 is an invalid value for this option.
-When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, set KeyInitialDelay to 0 and set this option to at least the value of your KeyForgetThreshold setting. (In the unlikely event that you still get frequent, or occasional, double key responses after doing this,proceed to set this value to one or two greater than KeyForgetThreshold - use the lowest value which works.)
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现Apple Event协议中配置后续键盘重复延迟，单位为10ms。
-
-配置按键重复之间的间隙。Apple OEM的默认值是5（50ms）。0是该选项的无效值。
-使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，请将KeyInitialDelay设置为0，并将此选项设置为至少与您的KeyForgetThreshold设置值相同。(如果在这样做之后，你仍然得到频繁的或偶尔的双键响应，则继续将此值设置为比KeyForgetThreshold大一到两个的值--使用有效的最低值。)</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Configures the gap between keyboard key repeats in OpenCore implementation of Apple Event
- protocol, in units of 10ms.</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true">KeySubsequentDelay</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="editIntKeySubsequentDelay">
-                   <property name="text">
-                    <string>5</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="1" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_41">
-                 <item>
-                  <widget class="QLabel" name="label_116">
-                   <property name="toolTip">
-                    <string notr="true">Type: plist integer
-
-Description: Configure initial keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
-
-When not using KeySupport, this option will configure the initial delay before key repeat as expected. The Apple OEM default value is 50 (500ms).
-When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, your initial key repeat delay is being driven by your BIOS firmware and cannot be overriden by OC. To avoid this minor undesired effect, set KeyInitialDelay to 0. If doing this, to avoid multiple reponses to single key presses, you should set KeySubsequentDelay to at least the value of your KeyForgetThreshold setting.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现Apple Event协议中配置初始键盘重复延迟，单位为10ms。
-
-当不使用 KeySupport 时，该选项将按预期配置按键重复前的初始延迟。Apple OEM默认值为50（500ms）。
-使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，您的初始按键重复延迟是由BIOS固件驱动的，不能由OC覆盖。如果这样做，为了避免单一按键的多次响应，您应该将KeySubsequentDelay至少设置为KeyForgetThreshold设置的值。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Configures the initial delay before keyboard key repeats in OpenCore implementation of Apple
- Event protocol, in units of 10ms.</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true">KeyInitialDelay</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="editIntKeyInitialDelay">
-                   <property name="text">
-                    <string>0</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="3" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_49">
-                 <item>
-                  <widget class="QLabel" name="lblPointerPollMask">
-                   <property name="text">
-                    <string>PointerPollMask</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="editIntPointerPollMask">
-                   <property name="text">
-                    <string>-1</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="4" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_50">
-                 <item>
-                  <widget class="QLabel" name="lblPointerPollMax">
-                   <property name="text">
-                    <string>PointerPollMax</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="editIntPointerPollMax">
-                   <property name="text">
-                    <string>80</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="7" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_30">
-                 <item>
-                  <widget class="QLabel" name="label_117">
-                   <property name="toolTip">
-                    <string notr="true">Type: plist integer
-
-Description: Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol.
-
-Configures the multiplier for pointer movements. The Apple OEM default value is 1.
-
-----
-
-类型：plist整数
-
-说明：在OpenCore实现的Apple Event协议中配置指针速度乘数。
-
-配置指针移动的乘数。Apple OEM的默认值是1。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol. Has no
- effect when using the OEM Apple implementation (see AppleEvent setting).</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true">PointerSpeedMul</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="editIntPointerSpeedMul">
-                   <property name="text">
-                    <string>1</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="0" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_51">
+               <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_27">
                  <item>
                   <widget class="QLabel" name="label_114">
@@ -9782,7 +9594,121 @@ This option determines whether Apple’s OEM Apple Event protocol is used (where
                  </item>
                 </layout>
                </item>
-               <item row="5" column="0">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_41">
+                 <item>
+                  <widget class="QLabel" name="label_116">
+                   <property name="toolTip">
+                    <string notr="true">Type: plist integer
+
+Description: Configure initial keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
+
+When not using KeySupport, this option will configure the initial delay before key repeat as expected. The Apple OEM default value is 50 (500ms).
+When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, your initial key repeat delay is being driven by your BIOS firmware and cannot be overriden by OC. To avoid this minor undesired effect, set KeyInitialDelay to 0. If doing this, to avoid multiple reponses to single key presses, you should set KeySubsequentDelay to at least the value of your KeyForgetThreshold setting.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现Apple Event协议中配置初始键盘重复延迟，单位为10ms。
+
+当不使用 KeySupport 时，该选项将按预期配置按键重复前的初始延迟。Apple OEM默认值为50（500ms）。
+使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，您的初始按键重复延迟是由BIOS固件驱动的，不能由OC覆盖。如果这样做，为了避免单一按键的多次响应，您应该将KeySubsequentDelay至少设置为KeyForgetThreshold设置的值。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Configures the initial delay before keyboard key repeats in OpenCore implementation of Apple
+ Event protocol, in units of 10ms.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">KeyInitialDelay</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="editIntKeyInitialDelay">
+                   <property name="text">
+                    <string>0</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_28">
+                 <item>
+                  <widget class="QLabel" name="label_113">
+                   <property name="toolTip">
+                    <string notr="true">Type: plist integer
+
+Description: Configure subsequent keyboard repeat delay in OpenCore implementation of Apple Event protocol, in units of 10ms.
+
+Configures the gap between key repeats. The Apple OEM default value is 5 (50ms). 0 is an invalid value for this option.
+When using KeySupport, you may find that you get one additional slow key repeat before normal speed key repeat starts. If so, set KeyInitialDelay to 0 and set this option to at least the value of your KeyForgetThreshold setting. (In the unlikely event that you still get frequent, or occasional, double key responses after doing this,proceed to set this value to one or two greater than KeyForgetThreshold - use the lowest value which works.)
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现Apple Event协议中配置后续键盘重复延迟，单位为10ms。
+
+配置按键重复之间的间隙。Apple OEM的默认值是5（50ms）。0是该选项的无效值。
+使用KeySupport时，您可能会发现在正常速度的按键重复开始之前，您会得到一个额外的慢速按键重复。如果是这样，请将KeyInitialDelay设置为0，并将此选项设置为至少与您的KeyForgetThreshold设置值相同。(如果在这样做之后，你仍然得到频繁的或偶尔的双键响应，则继续将此值设置为比KeyForgetThreshold大一到两个的值--使用有效的最低值。)</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Configures the gap between keyboard key repeats in OpenCore implementation of Apple Event
+ protocol, in units of 10ms.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">KeySubsequentDelay</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="editIntKeySubsequentDelay">
+                   <property name="text">
+                    <string>5</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_49">
+                 <item>
+                  <widget class="QLabel" name="lblPointerPollMask">
+                   <property name="text">
+                    <string>PointerPollMask</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="editIntPointerPollMask">
+                   <property name="text">
+                    <string>-1</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_50">
+                 <item>
+                  <widget class="QLabel" name="lblPointerPollMax">
+                   <property name="text">
+                    <string>PointerPollMax</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="editIntPointerPollMax">
+                   <property name="text">
+                    <string>80</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_29">
                  <item>
                   <widget class="QLabel" name="lblPointerPollMin">
@@ -9795,6 +9721,80 @@ This option determines whether Apple’s OEM Apple Event protocol is used (where
                   <widget class="QLineEdit" name="editIntPointerPollMin">
                    <property name="text">
                     <string>10</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_51">
+                 <item>
+                  <widget class="QLabel" name="label_112">
+                   <property name="toolTip">
+                    <string notr="true">Type: plist integer
+
+Description: Configure pointer speed divisor in OpenCore implementation of Apple Event protocol.
+
+Configures the divisor for pointer movements. The Apple OEM default value is 1. 0 is an invalid value for this option.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现的Apple Event协议中配置指针速度分位器。
+
+配置指针移动的分度。Apple OEM的默认值是1，0是这个选项的无效值。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Configure pointer speed divisor in OpenCore implementation of Apple Event protocol. Has no
+ effect when using the OEM Apple implementation (see AppleEvent setting).</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">PointerSpeedDiv</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="editIntPointerSpeedDiv">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_30">
+                 <item>
+                  <widget class="QLabel" name="label_117">
+                   <property name="toolTip">
+                    <string notr="true">Type: plist integer
+
+Description: Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol.
+
+Configures the multiplier for pointer movements. The Apple OEM default value is 1.
+
+----
+
+类型：plist整数
+
+说明：在OpenCore实现的Apple Event协议中配置指针速度乘数。
+
+配置指针移动的乘数。Apple OEM的默认值是1。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string> Configure pointer speed multiplier in OpenCore implementation of Apple Event protocol. Has no
+ effect when using the OEM Apple implementation (see AppleEvent setting).</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true">PointerSpeedMul</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="editIntPointerSpeedMul">
+                   <property name="text">
+                    <string>1</string>
                    </property>
                   </widget>
                  </item>
@@ -10383,100 +10383,8 @@ This option discards keys that are neither ASCII, nor are defined in the UEFI sp
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <layout class="QGridLayout" name="gridLayout_31">
-               <item row="2" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_31">
-                 <item>
-                  <widget class="QLabel" name="label_40">
-                   <property name="toolTip">
-                    <string notr="true">This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
-
-Setting a lower value generally improves performance and responsiveness of the interface and input handling.
-
-The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS Z87 boards use 60000 for the interface. Apple boards use 100000. You may leave it as 0 in case there are issues.
-
-----
-
-该选项允许以100纳秒为单位，用指定的值更新固件架构的定时器周期。
-
-设置一个较低的值通常可以提高接口和输入处理的性能和响应速度。
-
-推荐值为50000（5毫秒）或稍高。选择华硕Z87板使用60000作为接口。苹果板使用100000。您可以将其设为0，以防出现问题。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Set architecture timer resolution.</string>
-                   </property>
-                   <property name="text">
-                    <string>TimerResolution</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="editIntTimerResolution"/>
-                 </item>
-                </layout>
-               </item>
-               <item row="3" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_34">
-                 <item>
-                  <widget class="QLabel" name="label_38">
-                   <property name="toolTip">
-                    <string notr="true">Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS boards. More details can be found in LongSoft/UefiTool#116.
-
-----
-
-目前唯一支持的版本是华硕，使用华硕Z87和Z97板卡上的专用协议。更多细节可以在LongSoft/UefiTool#116中找到。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string> Set OEM protocol used for internal pointer driver.</string>
-                   </property>
-                   <property name="text">
-                    <string>PointerSupportMode</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="editPointerSupportMode"/>
-                 </item>
-                </layout>
-               </item>
-               <item row="1" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_48">
-                 <item>
-                  <widget class="QLabel" name="label_37">
-                   <property name="toolTip">
-                    <string notr="true">AppleKeyMapAggregator protocol is supposed to contain a fixed length buffer of currently pressed keys. 
-
-However,the majority of the drivers only report key presses as interrupts and pressing and holding the key on the keyboard results in subsequent submissions of this key with some defined time interval. As a result we use a timeout to remove once pressed keys from the buffer once the timeout expires and no new submission of this key happened.
-
-This option allows to set this timeout based on your platform. The recommended value that works on the majority of the platforms is 5 milliseconds. For reference, holding one key on VMware will repeat it roughly every 2 milliseconds and the same value for APTIO V is 3-4 milliseconds. Thus it is possible to set a slightly lower value on faster platforms and slightly higher value on slower platforms for more responsive input.
-
-Note: Some platforms may require different values, higher or lower. For example, when detecting key misses in OpenCanopy try increasing this value (e.g. to 10), and when detecting key stall, try decreasing this value. Since every platform is different it may be reasonable to check every value from 1 to 25.
-
-----
-
-AppleKeyMapAggregator协议应该包含一个固定长度的当前按键缓冲区。
-
-然而，大多数的驱动程序只将按键的按压报告为中断，并且在键盘上按住该键会导致该键在某些定义的时间间隔内的后续提交。因此，我们使用超时来从缓冲区中删除曾经按下的键，一旦超时结束，没有新的键提交发生。
-
-这个选项允许根据你的平台来设置这个超时。在大多数平台上工作的推荐值是5毫秒。作为参考，在VMware上按住一个键，大概每2毫秒就会重复一次，APTIO V的相同值是3-4毫秒。因此可以在速度较快的平台上设置稍低的值，在速度较慢的平台上设置稍高的值，以提高输入的响应速度。
-
-注意：有些平台可能需要不同的值，高一点或低一点。例如，当检测OpenCanopy中的键失误时，尝试增加这个值(如10)，而当检测键停顿时，尝试减少这个值。由于每个平台都是不同的，所以检查1到25的每个值可能是合理的。</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Remove key unless it was submitted during this timeout in milliseconds.</string>
-                   </property>
-                   <property name="text">
-                    <string>KeyForgetThreshold</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="editIntKeyForgetThreshold"/>
-                 </item>
-                </layout>
-               </item>
-               <item row="0" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_49">
+               <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_32">
                  <item>
                   <widget class="QLabel" name="label_23">
@@ -10513,6 +10421,98 @@ Note: Currently V1, V2, and AMI unlike Auto only do filtering of the particular 
                     <bool>true</bool>
                    </property>
                   </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_48">
+                 <item>
+                  <widget class="QLabel" name="label_37">
+                   <property name="toolTip">
+                    <string notr="true">AppleKeyMapAggregator protocol is supposed to contain a fixed length buffer of currently pressed keys. 
+
+However,the majority of the drivers only report key presses as interrupts and pressing and holding the key on the keyboard results in subsequent submissions of this key with some defined time interval. As a result we use a timeout to remove once pressed keys from the buffer once the timeout expires and no new submission of this key happened.
+
+This option allows to set this timeout based on your platform. The recommended value that works on the majority of the platforms is 5 milliseconds. For reference, holding one key on VMware will repeat it roughly every 2 milliseconds and the same value for APTIO V is 3-4 milliseconds. Thus it is possible to set a slightly lower value on faster platforms and slightly higher value on slower platforms for more responsive input.
+
+Note: Some platforms may require different values, higher or lower. For example, when detecting key misses in OpenCanopy try increasing this value (e.g. to 10), and when detecting key stall, try decreasing this value. Since every platform is different it may be reasonable to check every value from 1 to 25.
+
+----
+
+AppleKeyMapAggregator协议应该包含一个固定长度的当前按键缓冲区。
+
+然而，大多数的驱动程序只将按键的按压报告为中断，并且在键盘上按住该键会导致该键在某些定义的时间间隔内的后续提交。因此，我们使用超时来从缓冲区中删除曾经按下的键，一旦超时结束，没有新的键提交发生。
+
+这个选项允许根据你的平台来设置这个超时。在大多数平台上工作的推荐值是5毫秒。作为参考，在VMware上按住一个键，大概每2毫秒就会重复一次，APTIO V的相同值是3-4毫秒。因此可以在速度较快的平台上设置稍低的值，在速度较慢的平台上设置稍高的值，以提高输入的响应速度。
+
+注意：有些平台可能需要不同的值，高一点或低一点。例如，当检测OpenCanopy中的键失误时，尝试增加这个值(如10)，而当检测键停顿时，尝试减少这个值。由于每个平台都是不同的，所以检查1到25的每个值可能是合理的。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Remove key unless it was submitted during this timeout in milliseconds.</string>
+                   </property>
+                   <property name="text">
+                    <string>KeyForgetThreshold</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="editIntKeyForgetThreshold"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_31">
+                 <item>
+                  <widget class="QLabel" name="label_40">
+                   <property name="toolTip">
+                    <string notr="true">This option allows to update firmware architecture timer period with the specified value in 100 nanosecond units.
+
+Setting a lower value generally improves performance and responsiveness of the interface and input handling.
+
+The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS Z87 boards use 60000 for the interface. Apple boards use 100000. You may leave it as 0 in case there are issues.
+
+----
+
+该选项允许以100纳秒为单位，用指定的值更新固件架构的定时器周期。
+
+设置一个较低的值通常可以提高接口和输入处理的性能和响应速度。
+
+推荐值为50000（5毫秒）或稍高。选择华硕Z87板使用60000作为接口。苹果板使用100000。您可以将其设为0，以防出现问题。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Set architecture timer resolution.</string>
+                   </property>
+                   <property name="text">
+                    <string>TimerResolution</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="editIntTimerResolution"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_34">
+                 <item>
+                  <widget class="QLabel" name="label_38">
+                   <property name="toolTip">
+                    <string notr="true">Currently the only supported variant is ASUS, using specialised protocol available on select Z87 and Z97 ASUS boards. More details can be found in LongSoft/UefiTool#116.
+
+----
+
+目前唯一支持的版本是华硕，使用华硕Z87和Z97板卡上的专用协议。更多细节可以在LongSoft/UefiTool#116中找到。</string>
+                   </property>
+                   <property name="statusTip">
+                    <string> Set OEM protocol used for internal pointer driver.</string>
+                   </property>
+                   <property name="text">
+                    <string>PointerSupportMode</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="editPointerSupportMode"/>
                  </item>
                 </layout>
                </item>
