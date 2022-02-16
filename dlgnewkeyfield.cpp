@@ -155,7 +155,6 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   chk->setText(text);
   chk->setObjectName(ObjectName);
   chk->setFixedHeight(18);
-
   chk->setContextMenuPolicy(Qt::CustomContextMenu);
   QMenu* menu = new QMenu();
   QAction* actDelete = new QAction(tr("Delete"));

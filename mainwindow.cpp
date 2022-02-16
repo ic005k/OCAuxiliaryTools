@@ -10215,6 +10215,17 @@ void MainWindow::smart_UpdateKeyField() {
       Method::get_HorizontalHeaderList("UEFI", "ReservedMemory"));
 
   if (!loading) {
+    for (int i = 0; i < listOCATWidgetDelList.count(); i++) {
+      QWidget* w0 = listOCATWidgetDelList.at(i);
+      if (w0->objectName().mid(0, 3) == "chk") {
+        QCheckBox* w = (QCheckBox*)listOCATWidgetDelList.at(i);
+        connect(w, &QCheckBox::stateChanged, this, &MainWindow::setWM);
+      } else {
+        QLineEdit* w = (QLineEdit*)w0->children().at(2);
+        connect(w, &QLineEdit::textChanged, this, &MainWindow::setWM);
+      }
+    }
+
     if (QFile(SaveFileName).exists()) {
       openFile(SaveFileName);
     }
