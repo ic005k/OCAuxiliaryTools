@@ -10,6 +10,7 @@
 #include "mainwindow.h"
 
 extern MainWindow* mw_one;
+extern bool zh_cn;
 
 Tooltip::Tooltip(QWidget* parent) : QDialog(parent) {
   setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);
@@ -69,7 +70,7 @@ void Tooltip::setMyText(QString strHead, const QString& text) {
 
   if (text.contains("----")) {
     strList = text.split("----");
-    if (mw_one->zh_cn) {
+    if (zh_cn) {
       str = strList.at(1);
     } else
       str = strList.at(0);

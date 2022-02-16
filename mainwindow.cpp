@@ -29,6 +29,7 @@ QVector<QCheckBox*> chkDisplayLevel, chk_ScanPolicy, chk_PickerAttributes,
     chk_ExposeSensitiveData, chk_Target;
 QVariantMap mapTatol;
 bool Initialization = false;
+bool zh_cn = false;
 
 extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
     strACPI, strKexts, strDrivers, strTools, strOCFromDev;
@@ -119,7 +120,6 @@ MainWindow::MainWindow(QWidget* parent)
 
   Initialization = true;
   loading = true;
-  loadLocal();
 
 #ifdef Q_OS_MAC
 #if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
@@ -4062,41 +4062,6 @@ void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(
                      currentRow, currentColumn);
 }
 
-void MainWindow::loadLocal() {
-  static QTranslator translator;  //该对象要一直存在，注意用static
-  static QTranslator translator1;
-  static QTranslator translator2;
-
-  QLocale locale;
-  if (locale.language() == QLocale::English) {
-    zh_cn = false;
-
-  } else if (locale.language() == QLocale::Chinese) {
-    bool tr = false;
-    tr = translator.load(":/cn.qm");
-    if (tr) {
-      qApp->installTranslator(&translator);
-      zh_cn = true;
-    }
-
-    bool tr1 = false;
-    tr1 = translator1.load(":/qt_zh_CN.qm");
-    if (tr1) {
-      qApp->installTranslator(&translator1);
-      zh_cn = true;
-    }
-
-    bool tr2 = false;
-    tr2 = translator2.load(":/widgets_zh_cn.qm");
-    if (tr2) {
-      qApp->installTranslator(&translator2);
-      zh_cn = true;
-    }
-
-    ui->retranslateUi(this);
-  }
-}
-
 void MainWindow::on_btnHelp() {
   QString qtManulFile = userDataBaseDir + "doc/Configuration.pdf";
   QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
@@ -5393,21 +5358,11 @@ void MainWindow::init_Widgets() {
   QSettings Reg(strIniFile, QSettings::IniFormat);
   blDEV = Reg.value("OpenCoreDEV", false).toBool();
   QString fileSample, fileSampleDev;
-  copyDirectoryFiles(strAppExePath + "/Database/",
-                     QDir::homePath() + "/Database/", false);
   fileSample = QDir::homePath() + "/Database/BaseConfigs/SampleCustom.plist";
   fileSampleDev =
       QDir::homePath() + "/devDatabase/BaseConfigs/SampleCustom.plist";
-
   QFile file(fileSample);
   QFile fileDev(fileSampleDev);
-  if (!file.exists()) {
-    QMessageBox::critical(this, "",
-                          fileSample + "\n\n" +
-                              tr("The file does not exist, please check the "
-                                 "integrity of the app."));
-    close();
-  }
   if (blDEV) {
     if (fileDev.exists())
       mapTatol = PListParser::parsePList(&fileDev).toMap();

@@ -293,9 +293,6 @@ class MainWindow : public QMainWindow {
   bool loading = false;
   void about();
 
-  void loadLocal();
-  bool zh_cn = false;
-
   QComboBox* cboxDataClass;
   int c_row = 0;
 
@@ -1037,12 +1034,9 @@ class MainWindow : public QMainWindow {
   QString getSystemProductName(QString arg1);
 
   QProcess* gs;
-
   QProcess* di;
-
   QProcess* chkdata;
   QProcess* chkdataPassHash;
-
   QVector<QString> IniFile;
 
   QVector<int> textColorInt;

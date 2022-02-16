@@ -14,6 +14,7 @@ extern QString SaveFileName, strIniFile, strAppName, strAppExePath;
 extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
     strOCFromDev;
 extern bool blDEV;
+extern bool zh_cn;
 extern QVariantMap mapTatol;
 
 QString strACPI;
@@ -2238,7 +2239,7 @@ void Method::show_Tip(QString strText, QString strTip) {
   QString str = strTip;
   QStringList list = str.split("----");
   if (list.count() == 2) {
-    if (!mw_one->zh_cn)
+    if (!zh_cn)
       strTip = list.at(0);
     else
       strTip = list.at(1);
