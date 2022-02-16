@@ -217,8 +217,10 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
 
   if (!isDo) tab->layout()->addWidget(chk);
 
-  listOCATWidgetDelList.removeOne(chk);
-  listOCATWidgetDelList.append(chk);
+  if (isSmartKey) {
+    listOCATWidgetDelList.removeOne(chk);
+    listOCATWidgetDelList.append(chk);
+  }
 }
 
 QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
@@ -321,8 +323,10 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
 
   if (!isDo) tab->layout()->addWidget(frame);
 
-  listOCATWidgetDelList.removeOne(frame);
-  listOCATWidgetDelList.append(frame);
+  if (isSmartKey) {
+    listOCATWidgetDelList.removeOne(frame);
+    listOCATWidgetDelList.append(frame);
+  }
 
   return edit;
 }
