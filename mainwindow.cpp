@@ -5412,11 +5412,15 @@ void MainWindow::init_Widgets() {
   QSettings Reg(strIniFile, QSettings::IniFormat);
   blDEV = Reg.value("OpenCoreDEV", false).toBool();
   QString fileSample, fileSampleDev;
+
   if (!linuxOS) {
     fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
     fileSampleDev =
         strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
   } else {
+    copyDirectoryFiles(strAppExePath + "/Database/",
+                       QDir::homePath() + "/Database/", false);
+
     fileSample = QDir::homePath() + "/Database/BaseConfigs/SampleCustom.plist";
     fileSampleDev =
         QDir::homePath() + "/devDatabase/BaseConfigs/SampleCustom.plist";
@@ -10061,8 +10065,6 @@ void MainWindow::on_actionInitDatabaseLinux_triggered() {
   if (linuxOS) {
     copyDirectoryFiles(strAppExePath + "/Database/",
                        QDir::homePath() + "/Database/", true);
-    copyDirectoryFiles(strAppExePath + "/devDatabase/",
-                       QDir::homePath() + "/devDatabase/", true);
   }
 }
 

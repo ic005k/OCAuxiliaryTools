@@ -605,14 +605,6 @@ void SyncOCDialog::init_Sync_OC_Table() {
 
   if (DirName.isEmpty()) return;
 
-  // Init Linux Database
-  if (mw_one->linuxOS) {
-    mw_one->copyDirectoryFiles(strAppExePath + "/Database/",
-                               QDir::homePath() + "/Database/", false);
-    mw_one->copyDirectoryFiles(strAppExePath + "/devDatabase/",
-                               QDir::homePath() + "/devDatabase/", false);
-  }
-
   QString pathOldSource;
   if (!mw_one->linuxOS)
     pathOldSource = strAppExePath + "/Database/";
