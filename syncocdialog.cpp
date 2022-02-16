@@ -606,10 +606,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
   if (DirName.isEmpty()) return;
 
   QString pathOldSource;
-  if (!mw_one->linuxOS)
-    pathOldSource = strAppExePath + "/Database/";
-  else
-    pathOldSource = QDir::homePath() + "/Database/";
+  pathOldSource = QDir::homePath() + "/Database/";
 
   QString file1, file2, file3, file4;
   QString targetFile1, targetFile2, targetFile3, targetFile4;

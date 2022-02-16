@@ -161,30 +161,19 @@ void Method::finishKextUpdate(bool blDatabase) {
 
   if (blDatabase) {
     for (int i = 0; i < kextList.count(); i++) {
-      QString dirSource, dirTargetDatabase, dirTargetLinux;
+      QString dirSource, dirTargetDatabase;
       dirSource = kextList.at(i);
       QString Name = getFileName(dirSource);
-      dirTargetDatabase = strAppExePath + "/Database/EFI/OC/Kexts/" + Name;
-      dirTargetLinux = QDir::homePath() + "/Database/EFI/OC/Kexts/" + Name;
-
-      if (!mw_one->linuxOS)
-        mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
-      else
-        mw_one->copyDirectoryFiles(dirSource, dirTargetLinux, true);
+      dirTargetDatabase = QDir::homePath() + "/Database/EFI/OC/Kexts/" + Name;
+      mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
     }
   } else {
     QStringList list;
-    if (!mw_one->linuxOS)
-      list = DirToFileList(strAppExePath + "/Database/EFI/OC/Kexts/", "*.kext");
-    else
-      list =
-          DirToFileList(QDir::homePath() + "/Database/EFI/OC/Kexts/", "*.kext");
+    list =
+        DirToFileList(QDir::homePath() + "/Database/EFI/OC/Kexts/", "*.kext");
     for (int i = 0; i < list.count(); i++) {
       QString dirSource, dirTarget;
-      if (!mw_one->linuxOS)
-        dirSource = strAppExePath + "/Database/EFI/OC/Kexts/" + list.at(i);
-      else
-        dirSource = QDir::homePath() + "/Database/EFI/OC/Kexts/" + list.at(i);
+      dirSource = QDir::homePath() + "/Database/EFI/OC/Kexts/" + list.at(i);
       QString Name = getFileName(dirSource);
       dirTarget = strKexts + Name;
 
@@ -406,14 +395,14 @@ void Method::updateOpenCore() {
       strAppExePath = appPathBak;
 
     QDir dir;
-    dir.mkpath(mw_one->dataBaseDir);
-    dir.mkpath(mw_one->dataBaseDir + "DEBUG/");
-    dir.mkpath(mw_one->dataBaseDir + "doc/");
-    dir.mkpath(mw_one->dataBaseDir + "BaseConfigs/");
-    dir.mkpath(mw_one->dataBaseDir + "mac/");
-    dir.mkpath(mw_one->dataBaseDir + "win/");
-    mw_one->deleteDirfile(mw_one->dataBaseDir + "linux/");
-    dir.mkpath(mw_one->dataBaseDir + "linux/");
+    dir.mkpath(mw_one->userDataBaseDir);
+    dir.mkpath(mw_one->userDataBaseDir + "DEBUG/");
+    dir.mkpath(mw_one->userDataBaseDir + "doc/");
+    dir.mkpath(mw_one->userDataBaseDir + "BaseConfigs/");
+    dir.mkpath(mw_one->userDataBaseDir + "mac/");
+    dir.mkpath(mw_one->userDataBaseDir + "win/");
+    mw_one->deleteDirfile(mw_one->userDataBaseDir + "linux/");
+    dir.mkpath(mw_one->userDataBaseDir + "linux/");
 
     QString strSEFI = tempDir + "X64/EFI/";
     if (!QDir(strSEFI).exists() && blDEV) {
@@ -425,38 +414,38 @@ void Method::updateOpenCore() {
     }
     QString strTEFI;
     if (!mw_one->ui->actionDEBUG->isChecked())
-      strTEFI = mw_one->dataBaseDir + "EFI/";
+      strTEFI = mw_one->userDataBaseDir + "EFI/";
     else
-      strTEFI = mw_one->dataBaseDir + "DEBUG/EFI/";
+      strTEFI = mw_one->userDataBaseDir + "DEBUG/EFI/";
 
     if (!QDir(strSEFI).exists()) Results.append(false);
     Results.append(mw_one->copyDirectoryFiles(strSEFI, strTEFI, true));
 
     // ACPI
     QString strSacpi = tempDir + "Docs/AcpiSamples/Binaries/";
-    QString strTacpi = mw_one->dataBaseDir + "EFI/OC/ACPI/";
+    QString strTacpi = mw_one->userDataBaseDir + "EFI/OC/ACPI/";
     mw_one->copyDirectoryFiles(strSacpi, strTacpi, true);
 
     // Doc
     Results.append(mw_one->copyFileToPath(
         tempDir + "Docs/Configuration.pdf",
-        mw_one->dataBaseDir + "doc/Configuration.pdf", true));
+        mw_one->userDataBaseDir + "doc/Configuration.pdf", true));
     Results.append(mw_one->copyFileToPath(
         tempDir + "Docs/Differences.pdf",
-        mw_one->dataBaseDir + "doc/Differences.pdf", true));
+        mw_one->userDataBaseDir + "doc/Differences.pdf", true));
 
     // Sample-plist
     Results.append(mw_one->copyFileToPath(
         tempDir + "Docs/Sample.plist",
-        mw_one->dataBaseDir + "BaseConfigs/Sample.plist", true));
+        mw_one->userDataBaseDir + "BaseConfigs/Sample.plist", true));
     Results.append(mw_one->copyFileToPath(
         tempDir + "Docs/SampleCustom.plist",
-        mw_one->dataBaseDir + "BaseConfigs/SampleCustom.plist", true));
+        mw_one->userDataBaseDir + "BaseConfigs/SampleCustom.plist", true));
 
     // OC Validate
-    Results.append(
-        mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate",
-                               mw_one->dataBaseDir + "mac/ocvalidate", true));
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Utilities/ocvalidate/ocvalidate",
+        mw_one->userDataBaseDir + "mac/ocvalidate", true));
 
     if (!QFile(tempDir + "Utilities/ocvalidate/ocvalidate.exe").exists()) {
       QMessageBox::information(
@@ -466,7 +455,8 @@ void Method::updateOpenCore() {
              "affect the use of the APP under Windows."));
     }
     mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.exe",
-                           mw_one->dataBaseDir + "win/ocvalidate.exe", true);
+                           mw_one->userDataBaseDir + "win/ocvalidate.exe",
+                           true);
 
     if (!QFile(tempDir + "Utilities/ocvalidate/ocvalidate.linux").exists()) {
       QMessageBox::information(this, "",
@@ -476,32 +466,32 @@ void Method::updateOpenCore() {
     }
 
     mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.linux",
-                           mw_one->dataBaseDir + "linux/ocvalidate", true);
+                           mw_one->userDataBaseDir + "linux/ocvalidate", true);
 
     // Mac Serial
-    Results.append(
-        mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial",
-                               mw_one->dataBaseDir + "mac/macserial", true));
+    Results.append(mw_one->copyFileToPath(
+        tempDir + "Utilities/macserial/macserial",
+        mw_one->userDataBaseDir + "mac/macserial", true));
     mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial.exe",
-                           mw_one->dataBaseDir + "win/macserial.exe", true);
+                           mw_one->userDataBaseDir + "win/macserial.exe", true);
 
     mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial.linux",
-                           mw_one->dataBaseDir + "linux/macserial", true);
+                           mw_one->userDataBaseDir + "linux/macserial", true);
 
     // OC Password Gen
     mw_one->copyFileToPath(tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
-                           mw_one->dataBaseDir + "mac/ocpasswordgen", true);
+                           mw_one->userDataBaseDir + "mac/ocpasswordgen", true);
     mw_one->copyFileToPath(
         tempDir + "Utilities/ocpasswordgen/ocpasswordgen.exe",
-        mw_one->dataBaseDir + "win/ocpasswordgen.exe", true);
+        mw_one->userDataBaseDir + "win/ocpasswordgen.exe", true);
     mw_one->copyFileToPath(
         tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
-        mw_one->dataBaseDir + "linux/ocpasswordgen", true);
+        mw_one->userDataBaseDir + "linux/ocpasswordgen", true);
 
     // Create Vault
     Results.append(mw_one->copyDirectoryFiles(
         tempDir + "/Utilities/CreateVault/",
-        mw_one->dataBaseDir + "mac/CreateVault/", true));
+        mw_one->userDataBaseDir + "mac/CreateVault/", true));
 
     bool isDo = true;
     for (int i = 0; i < Results.count(); i++) {
@@ -1044,8 +1034,10 @@ QString Method::copyDrivers(QString pathSource, QString pathTarget) {
   QString pathOCDrivers = pathTarget + "OC/Drivers/";
   if (dir.mkpath(pathOCDrivers)) {
   }
+  int pathCol =
+      mw_one->dlgSyncOC->get_PathCol(mw_one->ui->table_uefi_drivers, "Path");
   for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
-    QString file = mw_one->ui->table_uefi_drivers->item(i, 0)->text();
+    QString file = mw_one->ui->table_uefi_drivers->item(i, pathCol)->text();
     QString str0 = pathSource + "EFI/OC/Drivers/" + file;
     if (!str0.contains("#")) {
       QFileInfo fi(str0);
@@ -1067,8 +1059,10 @@ QString Method::copyKexts(QString pathSource, QString pathTarget) {
   QString pathOCKexts = pathTarget + "OC/Kexts/";
   if (dir.mkpath(pathOCKexts)) {
   }
+  int pathCol = mw_one->dlgSyncOC->get_PathCol(mw_one->ui->table_kernel_add,
+                                               "BundlePath");
   for (int i = 0; i < mw_one->ui->table_kernel_add->rowCount(); i++) {
-    QString file = mw_one->ui->table_kernel_add->item(i, 0)->text();
+    QString file = mw_one->ui->table_kernel_add->item(i, pathCol)->text();
     QString str0 = pathSource + "EFI/OC/Kexts/" + file;
     QDir kextDir(str0);
 
@@ -1092,8 +1086,10 @@ QString Method::copyACPI(QString pathSource, QString pathTarget) {
   if (dir.mkpath(pathOCACPI)) {
   }
 
+  int pathCol =
+      mw_one->dlgSyncOC->get_PathCol(mw_one->ui->table_acpi_add, "Path");
   for (int i = 0; i < mw_one->ui->table_acpi_add->rowCount(); i++) {
-    QString file = mw_one->ui->table_acpi_add->item(i, 0)->text();
+    QString file = mw_one->ui->table_acpi_add->item(i, pathCol)->text();
     QString file1 = pathSource + "EFI/OC/ACPI/" + file;
     if (QFile(file1).exists())
       QFile::copy(pathSource + "EFI/OC/ACPI/" + file, pathOCACPI + file);
@@ -1112,8 +1108,9 @@ QString Method::copyTools(QString pathSource, QString pathTarget) {
   QString pathOCTools = pathTarget + "OC/Tools/";
   if (dir.mkpath(pathOCTools)) {
   }
+  int pathCol = mw_one->dlgSyncOC->get_PathCol(mw_one->ui->tableTools, "Path");
   for (int i = 0; i < mw_one->ui->tableTools->rowCount(); i++) {
-    QString file = mw_one->ui->tableTools->item(i, 0)->text();
+    QString file = mw_one->ui->tableTools->item(i, pathCol)->text();
     QString str0 = pathSource + "EFI/OC/Tools/" + file;
     if (!str0.contains("#")) {
       QFileInfo fi(str0);

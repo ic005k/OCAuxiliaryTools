@@ -97,7 +97,7 @@ class MainWindow : public QMainWindow {
   bool blOCValidateError = false;
   dlgMountESP* dlgMESP;
   QString pathSource;
-  QString dataBaseDir;
+  QString dataBaseDir, userDataBaseDir;
   QLabel* lblVer;
   QToolButton* btnBak;
   bool blReadLeftTable;
@@ -1037,8 +1037,6 @@ class MainWindow : public QMainWindow {
   QString getSystemProductName(QString arg1);
 
   QProcess* gs;
-
-  QProcess* si;
 
   QProcess* di;
 

@@ -134,7 +134,7 @@ void dlgDatabase::get_EFI(int row, int column, QTableWidget *table) {
 
   if (blDEV) {
     if (file == "SampleCustom.plist" || file == "Sample.plist") {
-      dirpath = strAppExePath + "/devDatabase/BaseConfigs/";
+      dirpath = mw_one->userDataBaseDir + "BaseConfigs/";
     }
   }
 

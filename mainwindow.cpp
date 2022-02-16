@@ -40,20 +40,17 @@ extern QStringList boolTypeList, intTypeList, dataTypeList, listKey, listType,
 
 void MainWindow::changeOpenCore(bool blDEV) {
   if (!blDEV) {
-    if (!linuxOS)
-      dataBaseDir = strAppExePath + "/Database/";
-    else
-      dataBaseDir = QDir::homePath() + "/Database/";
-
+    dataBaseDir = strAppExePath + "/Database/";
+    userDataBaseDir = QDir::homePath() + "/Database/";
     if (!ui->actionDEBUG->isChecked()) {
-      pathSource = dataBaseDir;
+      pathSource = userDataBaseDir;
       ocVer = ocVer.replace(" " + tr("DEBUG"), "");
       lblVer->setText("  OpenCore " + ocVer);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVer);
 
     } else {
-      pathSource = dataBaseDir + "DEBUG/";
+      pathSource = userDataBaseDir + "DEBUG/";
       ocVer = ocVer.replace(" " + tr("DEBUG"), "");
       ocVer = ocVer + " " + tr("DEBUG");
       lblVer->setText("  OpenCore " + ocVer);
@@ -61,12 +58,10 @@ void MainWindow::changeOpenCore(bool blDEV) {
                                         " for OpenCore " + ocVer);
     }
 
-  } else {
-    if (!linuxOS)
-      dataBaseDir = strAppExePath + "/devDatabase/";
-    else
-      dataBaseDir = QDir::homePath() + "/devDatabase/";
-    if (!QDir(dataBaseDir).exists()) {
+  } else {  // blDEV
+    dataBaseDir = strAppExePath + "/Database/";
+    userDataBaseDir = QDir::homePath() + "/devDatabase/";
+    if (!QDir(userDataBaseDir).exists()) {
       QMessageBox::critical(
           this, "",
           tr("The development version database does not exist, please "
@@ -77,14 +72,14 @@ void MainWindow::changeOpenCore(bool blDEV) {
     ocVerDev = ocVerDev + " [" + tr("DEV") + "]";
 
     if (!ui->actionDEBUG->isChecked()) {
-      pathSource = dataBaseDir;
+      pathSource = userDataBaseDir;
       ocVerDev = ocVerDev.replace(" " + tr("DEBUG"), "");
       lblVer->setText("  OpenCore " + ocVerDev);
       aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
                                         " for OpenCore " + ocVerDev);
 
     } else {
-      pathSource = dataBaseDir + "DEBUG/";
+      pathSource = userDataBaseDir + "DEBUG/";
       ocVerDev = ocVerDev.replace(" " + tr("DEBUG"), "");
       ocVerDev = ocVerDev + " " + tr("DEBUG");
       lblVer->setText("  OpenCore " + ocVerDev);
@@ -1476,29 +1471,15 @@ void MainWindow::initui_PlatformInfo() {
   ui->cboxSystemProductName->addItems(pi);
 
   //获取当前Mac信息
-  si = new QProcess;
-#ifdef Q_OS_WIN32
-  QFile file(strAppExePath + "/Database/win/macserial.exe");
-  if (file.exists())
-    gs->execute(strAppExePath + "/Database/win/macserial.exe", QStringList()
-                                                                   << "-s");
-  ui->tabPlatformInfo->removeTab(5);
-#endif
-
-#ifdef Q_OS_LINUX
-  gs->execute(strAppExePath + "/Database/linux/macserial", QStringList()
-                                                               << "-s");
-  ui->tabPlatformInfo->removeTab(5);
-#endif
 
 #ifdef Q_OS_MAC
+  QProcess* si = new QProcess;
   si->start(strAppExePath + "/Database/mac/macserial", QStringList() << "-s");
-#endif
-
   si->waitForFinished();
   ui->textMacInfo->clear();
   QString result = si->readAll();
   ui->textMacInfo->append(result);
+#endif
 }
 
 void MainWindow::ParserPlatformInfo(QVariantMap map) {
@@ -3743,20 +3724,21 @@ void MainWindow::on_btnGenerate_clicked() {
 
 #ifdef Q_OS_WIN32
 
-    gs->start(dataBaseDir + "win/macserial.exe",
+    gs->start(userDataBaseDir + "win/macserial.exe",
               QStringList() << "-m" << str);  //阻塞为execute
 
 #endif
 
 #ifdef Q_OS_LINUX
 
-    gs->start(dataBaseDir + "linux/macserial", QStringList() << "-m" << str);
+    gs->start(userDataBaseDir + "linux/macserial", QStringList()
+                                                       << "-m" << str);
 
 #endif
 
 #ifdef Q_OS_MAC
 
-    gs->start(dataBaseDir + "mac/macserial", QStringList() << "-m" << str);
+    gs->start(userDataBaseDir + "mac/macserial", QStringList() << "-m" << str);
 
 #endif
 
@@ -4116,7 +4098,7 @@ void MainWindow::loadLocal() {
 }
 
 void MainWindow::on_btnHelp() {
-  QString qtManulFile = dataBaseDir + "doc/Configuration.pdf";
+  QString qtManulFile = userDataBaseDir + "doc/Configuration.pdf";
   QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
 }
 
@@ -5411,19 +5393,12 @@ void MainWindow::init_Widgets() {
   QSettings Reg(strIniFile, QSettings::IniFormat);
   blDEV = Reg.value("OpenCoreDEV", false).toBool();
   QString fileSample, fileSampleDev;
+  copyDirectoryFiles(strAppExePath + "/Database/",
+                     QDir::homePath() + "/Database/", false);
+  fileSample = QDir::homePath() + "/Database/BaseConfigs/SampleCustom.plist";
+  fileSampleDev =
+      QDir::homePath() + "/devDatabase/BaseConfigs/SampleCustom.plist";
 
-  if (!linuxOS) {
-    fileSample = strAppExePath + "/Database/BaseConfigs/SampleCustom.plist";
-    fileSampleDev =
-        strAppExePath + "/devDatabase/BaseConfigs/SampleCustom.plist";
-  } else {
-    copyDirectoryFiles(strAppExePath + "/Database/",
-                       QDir::homePath() + "/Database/", false);
-
-    fileSample = QDir::homePath() + "/Database/BaseConfigs/SampleCustom.plist";
-    fileSampleDev =
-        QDir::homePath() + "/devDatabase/BaseConfigs/SampleCustom.plist";
-  }
   QFile file(fileSample);
   QFile fileDev(fileSampleDev);
   if (!file.exists()) {
@@ -9009,21 +8984,21 @@ void MainWindow::on_btnGetPassHash_clicked() {
   chkdataPassHash = new QProcess;
 
 #ifdef Q_OS_WIN32
-  if (!QFile(dataBaseDir + "win/ocpasswordgen.exe").exists()) return;
-  chkdataPassHash->start(dataBaseDir + "win/ocpasswordgen.exe", QStringList()
-                                                                    << strPass);
+  if (!QFile(userDataBaseDir + "win/ocpasswordgen.exe").exists()) return;
+  chkdataPassHash->start(userDataBaseDir + "win/ocpasswordgen.exe",
+                         QStringList() << strPass);
 #endif
 
 #ifdef Q_OS_LINUX
-  if (!QFile(dataBaseDir + "linux/ocpasswordgen").exists()) return;
-  chkdataPassHash->start(dataBaseDir + "linux/ocpasswordgen", QStringList()
-                                                                  << strPass);
+  if (!QFile(userDataBaseDir + "linux/ocpasswordgen").exists()) return;
+  chkdataPassHash->start(userDataBaseDir + "linux/ocpasswordgen",
+                         QStringList() << strPass);
 #endif
 
 #ifdef Q_OS_MAC
-  if (!QFile(dataBaseDir + "mac/ocpasswordgen").exists()) return;
-  chkdataPassHash->start(dataBaseDir + "mac/ocpasswordgen", QStringList()
-                                                                << strPass);
+  if (!QFile(userDataBaseDir + "mac/ocpasswordgen").exists()) return;
+  chkdataPassHash->start(userDataBaseDir + "mac/ocpasswordgen", QStringList()
+                                                                    << strPass);
 #endif
 
   ui->btnGetPassHash->setEnabled(false);
@@ -9146,17 +9121,18 @@ void MainWindow::oc_Validate(bool show) {
   chkdata = new QProcess;
 
 #ifdef Q_OS_WIN32
-  chkdata->start(dataBaseDir + "win/ocvalidate.exe", QStringList()
-                                                         << SaveFileName);
+  chkdata->start(userDataBaseDir + "win/ocvalidate.exe", QStringList()
+                                                             << SaveFileName);
 #endif
 
 #ifdef Q_OS_LINUX
-  chkdata->start(dataBaseDir + "linux/ocvalidate", QStringList()
-                                                       << SaveFileName);
+  chkdata->start(userDataBaseDir + "linux/ocvalidate", QStringList()
+                                                           << SaveFileName);
 #endif
 
 #ifdef Q_OS_MAC
-  chkdata->start(dataBaseDir + "mac/ocvalidate", QStringList() << SaveFileName);
+  chkdata->start(userDataBaseDir + "mac/ocvalidate", QStringList()
+                                                         << SaveFileName);
 #endif
 
   chkdata->waitForFinished();
@@ -9319,7 +9295,7 @@ void MainWindow::on_actionDSDT_SSDT_editor_triggered() {
 }
 
 void MainWindow::on_actionDifferences_triggered() {
-  QString qtManulFile = dataBaseDir + "doc/Differences.pdf";
+  QString qtManulFile = userDataBaseDir + "doc/Differences.pdf";
   QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
 }
 
@@ -9571,7 +9547,11 @@ void MainWindow::on_actionOpen_Directory_triggered() {
 }
 
 void MainWindow::on_actionOpen_database_directory_triggered() {
-  QString dir = "file:" + dataBaseDir;
+  QString dir;
+  if (blDEV)
+    dir = "file:" + userDataBaseDir;
+  else
+    dir = "file:" + dataBaseDir;
   QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
 }
 
@@ -10094,7 +10074,7 @@ void MainWindow::smart_UpdateKeyField() {
   };
 
   QString fileSample;
-  fileSample = dataBaseDir + "BaseConfigs/SampleCustom.plist";
+  fileSample = userDataBaseDir + "BaseConfigs/SampleCustom.plist";
   QFile file(fileSample);
   if (file.exists()) {
     mapTatol.clear();
