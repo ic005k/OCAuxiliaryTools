@@ -635,7 +635,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
   pathCol = get_PathCol(mw_one->ui->table_uefi_drivers, "Path");
   for (int i = 0; i < mw_one->ui->table_uefi_drivers->rowCount(); i++) {
     str1 = mw_one->ui->table_uefi_drivers->item(i, pathCol)->text();
-    str2 = pathOldSource + "EFI/OC/Drivers/" + str1;
+    str2 = mw_one->pathSource + "EFI/OC/Drivers/" + str1;
 
     bool re = false;
     for (int j = 0; j < sourceOpenCore.count(); j++) {
@@ -662,12 +662,12 @@ void SyncOCDialog::init_Sync_OC_Table() {
   QStringList dbToolsFileList;
   pathCol = get_PathCol(mw_one->ui->tableTools, "Path");
   dbToolsFileList =
-      mymethod->DirToFileList(pathOldSource + "EFI/OC/Tools/", "*.efi");
+      mymethod->DirToFileList(mw_one->pathSource + "EFI/OC/Tools/", "*.efi");
   for (int i = 0; i < mw_one->ui->tableTools->rowCount(); i++) {
     QString strName =
         mw_one->ui->tableTools->item(i, pathCol)->text().trimmed();
     if (mymethod->isEqualInList(strName, dbToolsFileList)) {
-      sourceOpenCore.append(pathOldSource + "EFI/OC/Tools/" + strName);
+      sourceOpenCore.append(mw_one->pathSource + "EFI/OC/Tools/" + strName);
       targetOpenCore.append(DirName + "/OC/Tools/" + strName);
     }
   }
