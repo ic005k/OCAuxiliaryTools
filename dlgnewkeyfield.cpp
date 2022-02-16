@@ -148,12 +148,6 @@ void dlgNewKeyField::readNewKey(QWidget* tab, QString Key) {
 
 void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
                                   QString text) {
-  QHBoxLayout* hbox = new QHBoxLayout();
-  QFrame* frame = new QFrame();
-  frame->setLayout(hbox);
-  frame->layout()->setContentsMargins(0, 0, 0, 0);
-  frame->layout()->setSpacing(1);
-
   QCheckBox* chk = new QCheckBox();
   QFont font;
   font.setBold(true);
@@ -171,8 +165,8 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   }
   connect(actDelete, &QAction::triggered, [=]() {
     mw_one->ui->mycboxFind->lineEdit()->clear();
-    tab->layout()->removeWidget(frame);
-    delete (frame);
+    tab->layout()->removeWidget(chk);
+    delete (chk);
 
     removeKey(ObjectName);
     mw_one->setWM();
@@ -209,9 +203,7 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
             });
   }
 
-  hbox->addWidget(chk);
-  // hbox->addStretch();
-  frame->setFixedHeight(18);
+  chk->setFixedHeight(18);
 
   QObjectList listObj;
   listObj = MainWindow::getAllFrame(MainWindow::getAllUIControls(tab));
@@ -219,16 +211,16 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
   for (int i = 0; i < listObj.count(); i++) {
     QFrame* w = (QFrame*)listObj.at(i);
     if (w->objectName().contains("chk")) {
-      w->layout()->addWidget(frame);
+      w->layout()->addWidget(chk);
       isDo = true;
       break;
     }
   }
 
-  if (!isDo) tab->layout()->addWidget(frame);
+  if (!isDo) tab->layout()->addWidget(chk);
 
-  listOCATWidgetDelList.removeOne(frame);
-  listOCATWidgetDelList.append(frame);
+  listOCATWidgetDelList.removeOne(chk);
+  listOCATWidgetDelList.append(chk);
 }
 
 QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,

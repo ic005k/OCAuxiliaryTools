@@ -1505,12 +1505,13 @@ void MainWindow::ParserPlatformInfo(QVariantMap map) {
   map = map["PlatformInfo"].toMap();
   if (map.isEmpty()) return;
 
-  ui->chkAutomatic->setChecked(map["Automatic"].toBool());
+  getValue(map, ui->gbox01);
+  /*ui->chkAutomatic->setChecked(map["Automatic"].toBool());
   ui->chkCustomMemory->setChecked(map["CustomMemory"].toBool());
   ui->chkUpdateDataHub->setChecked(map["UpdateDataHub"].toBool());
   ui->chkUpdateNVRAM->setChecked(map["UpdateNVRAM"].toBool());
   ui->chkUpdateSMBIOS->setChecked(map["UpdateSMBIOS"].toBool());
-  ui->chkUseRawUuidEncoding->setChecked(map["UseRawUuidEncoding"].toBool());
+  ui->chkUseRawUuidEncoding->setChecked(map["UseRawUuidEncoding"].toBool());*/
 
   QString usm = map["UpdateSMBIOSMode"].toString();
   ui->cboxUpdateSMBIOSMode->setCurrentText(usm.trimmed());
