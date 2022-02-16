@@ -347,10 +347,42 @@ void Method::doProcessFinished() {
       } else
         QProcess::execute("unzip", QStringList() << "-o" << tempDir + filename
                                                  << "-d" << tempDir);
-      updateOpenCore();
+      if (mw_one->dlgSyncOC->isCheckOC) {
+        QString strSEFI = tempDir + "X64/EFI/";
+        if (!QDir(strSEFI).exists() && blDEV) {
+          QStringList files = DirToFileList(tempDir, "*.zip");
+          qDebug() << files;
+          for (int i = 0; i < files.count(); i++) {
+            if (!files.at(i).contains("OpenCore")) {
+              files.removeAt(i);
+              i--;
+            }
+          }
+          qDebug() << "OpenCore Files:" << files;
+
+          if (mw_one->ui->actionDEBUG->isChecked()) {
+            for (int i = 0; i < files.count(); i++) {
+              if (files.at(i).contains("DEBUG")) filename = files.at(i);
+            }
+          } else {
+            for (int i = 0; i < files.count(); i++) {
+              if (files.at(i).contains("RELEASE")) filename = files.at(i);
+            }
+          }
+
+          if (mw_one->win) {
+            QProcess::execute(
+                strAppExePath + "/unzip.exe",
+                QStringList() << "-o" << tempDir + filename << "-d" << tempDir);
+          } else
+            QProcess::execute("unzip", QStringList()
+                                           << "-o" << tempDir + filename << "-d"
+                                           << tempDir);
+        }
+        updateOpenCore();
+      }
     }
     dlEnd = true;
-
   } else {
     myfile->close();
     qDebug() << "There is an error in the network answer!";
@@ -425,9 +457,16 @@ void Method::updateOpenCore() {
     Results.append(
         mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate",
                                mw_one->dataBaseDir + "mac/ocvalidate", true));
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/ocvalidate/ocvalidate.exe",
-        mw_one->dataBaseDir + "win/ocvalidate.exe", true));
+
+    if (!QFile(tempDir + "Utilities/ocvalidate/ocvalidate.exe").exists()) {
+      QMessageBox::information(
+          this, "",
+          tr("Note: This version or update source does "
+             "not contain Windows related files. This will "
+             "affect the use of the APP under Windows."));
+    }
+    mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.exe",
+                           mw_one->dataBaseDir + "win/ocvalidate.exe", true);
 
     if (!QFile(tempDir + "Utilities/ocvalidate/ocvalidate.linux").exists()) {
       QMessageBox::information(this, "",
@@ -443,9 +482,8 @@ void Method::updateOpenCore() {
     Results.append(
         mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial",
                                mw_one->dataBaseDir + "mac/macserial", true));
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/macserial/macserial.exe",
-        mw_one->dataBaseDir + "win/macserial.exe", true));
+    mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial.exe",
+                           mw_one->dataBaseDir + "win/macserial.exe", true);
 
     mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial.linux",
                            mw_one->dataBaseDir + "linux/macserial", true);
