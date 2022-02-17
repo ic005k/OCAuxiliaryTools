@@ -401,6 +401,7 @@ void Method::updateOpenCore() {
     dir.mkpath(mw_one->userDataBaseDir + "doc/");
     dir.mkpath(mw_one->userDataBaseDir + "BaseConfigs/");
     dir.mkpath(mw_one->userDataBaseDir + "mac/");
+    mw_one->deleteDirfile(mw_one->userDataBaseDir + "win/");
     dir.mkpath(mw_one->userDataBaseDir + "win/");
     mw_one->deleteDirfile(mw_one->userDataBaseDir + "linux/");
     dir.mkpath(mw_one->userDataBaseDir + "linux/");
@@ -453,17 +454,20 @@ void Method::updateOpenCore() {
           this, "",
           tr("Note: This version or update source does "
              "not contain Windows related files. This will "
-             "affect the use of the APP under Windows."));
+             "affect the use of the APP under Windows.") +
+              "\n\nocvalidate.exe\nmacserial.exe\nocpasswordgen.exe");
     }
     mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.exe",
                            mw_one->userDataBaseDir + "win/ocvalidate.exe",
                            true);
 
     if (!QFile(tempDir + "Utilities/ocvalidate/ocvalidate.linux").exists()) {
-      QMessageBox::information(this, "",
-                               tr("Note: This version or update source does "
-                                  "not contain Linux related files. This will "
-                                  "affect the use of the APP under Linux."));
+      QMessageBox::information(
+          this, "",
+          tr("Note: This version or update source does "
+             "not contain Linux related files. This will "
+             "affect the use of the APP under Linux.") +
+              "\n\nocvalidate.linux\nmacserial.linux\nocpasswordgen.linux");
     }
 
     mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.linux",
