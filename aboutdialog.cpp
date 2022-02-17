@@ -7,7 +7,7 @@
 
 extern MainWindow* mw_one;
 extern QString strAppName, strIniFile;
-QString CurVerison = "20220165";
+QString CurVersion = "20220166";
 QString ocVer = "0.7.8";
 QString ocVerDev = "0.7.9";
 QString ocFrom, ocFromDev, strOCFrom, strOCFromDev;
@@ -59,10 +59,10 @@ aboutDialog::aboutDialog(QWidget* parent)
       "}");
 
   if (!blDEV)
-    ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+    ui->lblVersion->setText(tr("Version") + "  " + CurVersion +
                             " for OpenCore " + ocVer);
   else
-    ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+    ui->lblVersion->setText(tr("Version") + "  " + CurVersion +
                             " for OpenCore " + ocVerDev);
   QFont font;
   font.setBold(true);

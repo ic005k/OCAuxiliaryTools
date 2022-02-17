@@ -31,7 +31,7 @@ QVariantMap mapTatol;
 bool Initialization = false;
 bool zh_cn = false;
 
-extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
+extern QString CurVersion, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
     strACPI, strKexts, strDrivers, strTools, strOCFromDev;
 extern bool blDEV;
 extern QWidgetList listOCATWidgetHideList, listOCATWidgetDelList;
@@ -47,7 +47,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
       pathSource = userDataBaseDir;
       ocVer = ocVer.replace(" " + tr("DEBUG"), "");
       lblVer->setText("  OpenCore " + ocVer);
-      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVersion +
                                         " for OpenCore " + ocVer);
 
     } else {
@@ -61,7 +61,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
       ocVer = ocVer.replace(" " + tr("DEBUG"), "");
       ocVer = ocVer + " " + tr("DEBUG");
       lblVer->setText("  OpenCore " + ocVer);
-      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVersion +
                                         " for OpenCore " + ocVer);
     }
 
@@ -82,7 +82,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
       pathSource = userDataBaseDir;
       ocVerDev = ocVerDev.replace(" " + tr("DEBUG"), "");
       lblVer->setText("  OpenCore " + ocVerDev);
-      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVersion +
                                         " for OpenCore " + ocVerDev);
 
     } else {
@@ -96,7 +96,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
       ocVerDev = ocVerDev.replace(" " + tr("DEBUG"), "");
       ocVerDev = ocVerDev + " " + tr("DEBUG");
       lblVer->setText("  OpenCore " + ocVerDev);
-      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVerison +
+      aboutDlg->ui->lblVersion->setText(tr("Version") + "  " + CurVersion +
                                         " for OpenCore " + ocVerDev);
     }
   }
@@ -194,10 +194,6 @@ MainWindow::MainWindow(QWidget* parent)
       openFile(file);
     }
   }
-
-#ifdef Q_OS_MAC
-  Method::init_MacVerInfo(CurVerison + "-OC" + ocVer);
-#endif
 
   loading = false;
   Initialization = false;
@@ -361,7 +357,7 @@ void MainWindow::openFile(QString PlistFileName) {
 
   this->setWindowModified(false);
   updateIconStatus();
-  ui->lblStatusShow->setText("V" + CurVerison);
+  ui->lblStatusShow->setText("V" + CurVersion);
 }
 
 bool MainWindow::IsProcessExist(QString processName) {
@@ -5935,7 +5931,7 @@ int MainWindow::parse_UpdateJSON(QString str) {
         ReleaseNote = noteList.at(0) + noteList.at(2);
     }
 
-    if (Verison > CurVerison && Url != "") {
+    if (Verison > CurVersion && Url != "") {
       QString warningStr = tr("New version detected!") + "\n" +
                            tr("Version: ") + "V" + Verison + "\n" +
                            tr("Published at: ") + UpdateTime + "\n" +
@@ -9398,7 +9394,7 @@ void MainWindow::on_txtEditASCII_textChanged(const QString& arg1) {
 }
 
 void MainWindow::on_listSub_currentRowChanged(int currentRow) {
-  ui->lblStatusShow->setText("V" + CurVerison);
+  ui->lblStatusShow->setText("V" + CurVersion);
 
   if (find) {
     return;

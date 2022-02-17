@@ -7,7 +7,7 @@
 void loadLocal();
 extern QVector<QString> filelist;
 QWidgetList wdlist;
-extern QString PlistFileName;
+extern QString PlistFileName, CurVersion, ocVer;
 extern bool zh_cn;
 MainWindow *mw_one;
 
@@ -22,7 +22,11 @@ int main(int argc, char *argv[]) {
 #endif
 
   MyApplication *a = new MyApplication(argc, argv);
+#ifdef Q_OS_MAC
+  Method::init_MacVerInfo(CurVersion);
+#endif
   loadLocal();
+
   QString strAppExePath = qApp->applicationDirPath();
   mw_one->copyDirectoryFiles(strAppExePath + "/Database/",
                              QDir::homePath() + "/Database/", false);
