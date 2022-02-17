@@ -65,6 +65,10 @@ void MainWindow::changeOpenCore(bool blDEV) {
                                         " for OpenCore " + ocVer);
     }
 
+    QString str = "https://github.com/acidanthera/OpenCorePkg/releases/tag/";
+    QString str1 = ocVer;
+    strOCFrom = str + str1.replace(" " + tr("DEBUG"), "");
+
   } else {  // blDEV
     dataBaseDir = strAppExePath + "/Database/";
     userDataBaseDir = QDir::homePath() + "/devDatabase/";
@@ -8595,17 +8599,11 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
       QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
       if (mouseEvent->button() == Qt::LeftButton) {
         if (blDEV) {
-          if (myDlgPreference->ui->editOCDevSource->lineEdit()
-                  ->text()
-                  .trimmed() == "") {
-            QUrl url(strOCFromDev);
-            QDesktopServices::openUrl(url);
-          } else {
-            QUrl url(myDlgPreference->ui->editOCDevSource->lineEdit()
-                         ->text()
-                         .trimmed());
-            QDesktopServices::openUrl(url);
-          }
+          QUrl url(myDlgPreference->ui->editOCDevSource->lineEdit()
+                       ->text()
+                       .trimmed());
+          QDesktopServices::openUrl(url);
+
         } else {
           QUrl url(strOCFrom);
           QDesktopServices::openUrl(url);
