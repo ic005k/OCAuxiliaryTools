@@ -149,9 +149,11 @@ void dlgNewKeyField::readNewKey(QWidget* tab, QString Key) {
 void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
                                   QString text) {
   QCheckBox* chk = new QCheckBox();
-  QFont font;
-  font.setBold(true);
-  chk->setFont(font);
+  if (!isSmartKey) {
+    QFont font;
+    font.setBold(true);
+    chk->setFont(font);
+  }
   chk->setText(text);
   chk->setObjectName(ObjectName);
   chk->setFixedHeight(18);
@@ -232,9 +234,11 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   frame->layout()->setSpacing(1);
 
   QLabel* lbl = new QLabel();
-  QFont font;
-  font.setBold(true);
-  lbl->setFont(font);
+  if (!isSmartKey) {
+    QFont font;
+    font.setBold(true);
+    lbl->setFont(font);
+  }
   lbl->setText(text);
   QLineEdit* edit = new QLineEdit();
   edit->setObjectName(ObjectName);
