@@ -1130,7 +1130,11 @@ void Method::generateEFI(QString file) {
   QString strDatabase;
 
   QString str = QDir::homePath() + "/Database/";
-  QString pathSource = mw_one->userDataBaseDir;
+  QString pathSource;
+  if (!mw_one->ui->actionDEBUG->isChecked())
+    pathSource = mw_one->userDataBaseDir;
+  else
+    pathSource = mw_one->userDataBaseDir + "DEBUG/";
 
   QString pathTarget = QDir::homePath() + "/Desktop/EFI/";
 
@@ -1156,8 +1160,7 @@ void Method::generateEFI(QString file) {
 
   // OC/Resources
   QString pathOCResources = pathTarget + "OC/Resources/";
-  mw_one->copyDirectoryFiles(pathSource + "EFI/OC/Resources/", pathOCResources,
-                             true);
+  mw_one->copyDirectoryFiles(str + "EFI/OC/Resources/", pathOCResources, true);
 
   // Tools
   strDatabase = copyTools(pathSource, pathTarget) + strDatabase;

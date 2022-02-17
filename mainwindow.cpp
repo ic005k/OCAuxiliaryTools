@@ -52,6 +52,12 @@ void MainWindow::changeOpenCore(bool blDEV) {
 
     } else {
       pathSource = userDataBaseDir + "DEBUG/";
+      if (!QFile(pathSource + "EFI/OC/OpenCore.efi").exists()) {
+        QMessageBox::critical(
+            this, "",
+            tr("The debug database does not exist, please "
+               "update it in the UI of  Upgrade OC and Kexts."));
+      }
       ocVer = ocVer.replace(" " + tr("DEBUG"), "");
       ocVer = ocVer + " " + tr("DEBUG");
       lblVer->setText("  OpenCore " + ocVer);
@@ -81,6 +87,12 @@ void MainWindow::changeOpenCore(bool blDEV) {
 
     } else {
       pathSource = userDataBaseDir + "DEBUG/";
+      if (!QFile(pathSource + "EFI/OC/OpenCore.efi").exists()) {
+        QMessageBox::critical(
+            this, "",
+            tr("The debug database does not exist, please "
+               "update it in the UI of  Upgrade OC and Kexts."));
+      }
       ocVerDev = ocVerDev.replace(" " + tr("DEBUG"), "");
       ocVerDev = ocVerDev + " " + tr("DEBUG");
       lblVer->setText("  OpenCore " + ocVerDev);

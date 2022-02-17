@@ -33,10 +33,18 @@ int main(int argc, char *argv[]) {
   QString strTools1 = QDir::homePath() + "/Database/EFI/OC/Tools/";
   QString strDrivers2 = QDir::homePath() + "/devDatabase/EFI/OC/Drivers/";
   QString strTools2 = QDir::homePath() + "/devDatabase/EFI/OC/Tools/";
+  QString strDrivers3 = QDir::homePath() + "/Database/DEBUG/EFI/OC/Drivers/";
+  QString strTools3 = QDir::homePath() + "/Database/DEBUG/EFI/OC/Tools/";
+  QString strDrivers4 = QDir::homePath() + "/devDatabase/DEBUG/EFI/OC/Drivers/";
+  QString strTools4 = QDir::homePath() + "/devDatabase/DEBUG/EFI/OC/Tools/";
   dir.mkpath(strDrivers1);
   dir.mkpath(strTools1);
   dir.mkpath(strDrivers2);
   dir.mkpath(strTools2);
+  dir.mkpath(strDrivers3);
+  dir.mkpath(strTools3);
+  dir.mkpath(strDrivers4);
+  dir.mkpath(strTools4);
   QStringList listDrivers, listTools;
   listDrivers = Method::DirToFileList(strDrivers0, "*.efi");
   listTools = Method::DirToFileList(strTools0, "*.efi");
@@ -45,12 +53,20 @@ int main(int argc, char *argv[]) {
                            strDrivers1 + listDrivers.at(i), false);
     mw_one->copyFileToPath(strDrivers0 + listDrivers.at(i),
                            strDrivers2 + listDrivers.at(i), false);
+    mw_one->copyFileToPath(strDrivers0 + listDrivers.at(i),
+                           strDrivers3 + listDrivers.at(i), false);
+    mw_one->copyFileToPath(strDrivers0 + listDrivers.at(i),
+                           strDrivers4 + listDrivers.at(i), false);
   }
   for (int i = 0; i < listTools.count(); i++) {
     mw_one->copyFileToPath(strTools0 + listTools.at(i),
                            strTools1 + listTools.at(i), false);
     mw_one->copyFileToPath(strTools0 + listTools.at(i),
                            strTools2 + listTools.at(i), false);
+    mw_one->copyFileToPath(strTools0 + listTools.at(i),
+                           strTools3 + listTools.at(i), false);
+    mw_one->copyFileToPath(strTools0 + listTools.at(i),
+                           strTools4 + listTools.at(i), false);
   }
 
   QString fileSample =
