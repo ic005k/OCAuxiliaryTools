@@ -77,7 +77,7 @@ class Method : public QMainWindow {
   QObjectList getAllToolButton(QObjectList lstUIControls);
   void delRightTableItem(QTableWidget *t0, QTableWidget *t);
   bool isEqualInList(QString str, QStringList list);
-  QStringList DirToFileList(QString strDir, QString strFilter);
+  static QStringList DirToFileList(QString strDir, QString strFilter);
   bool isWhatFile(QString File, QString filter);
   void getLastReleaseFromUrl(QString strUrl);
   void parse_UpdateJSON(QString str);

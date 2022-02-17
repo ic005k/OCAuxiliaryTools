@@ -1,5 +1,6 @@
 #include <QApplication>
 
+#include "Method.h"
 #include "mainwindow.h"
 #include "myapp.h"
 
@@ -26,14 +27,32 @@ int main(int argc, char *argv[]) {
   mw_one->copyDirectoryFiles(strAppExePath + "/Database/",
                              QDir::homePath() + "/Database/", false);
   QDir dir;
-  dir.mkpath(QDir::homePath() + "/devDatabase/EFI/OC/Drivers/");
-  dir.mkpath(QDir::homePath() + "/devDatabase/EFI/OC/Tools/");
-  mw_one->copyDirectoryFiles(strAppExePath + "/Database/EFI/OC/Drivers/",
-                             QDir::homePath() + "/devDatabase/EFI/OC/Drivers/",
-                             false);
-  mw_one->copyDirectoryFiles(strAppExePath + "/Database/EFI/OC/Tools/",
-                             QDir::homePath() + "/devDatabase/EFI/OC/Tools/",
-                             false);
+  QString strDrivers0 = strAppExePath + "/Database/EFI/OC/Drivers/";
+  QString strTools0 = strAppExePath + "/Database/EFI/OC/Tools/";
+  QString strDrivers1 = QDir::homePath() + "/Database/EFI/OC/Drivers/";
+  QString strTools1 = QDir::homePath() + "/Database/EFI/OC/Tools/";
+  QString strDrivers2 = QDir::homePath() + "/devDatabase/EFI/OC/Drivers/";
+  QString strTools2 = QDir::homePath() + "/devDatabase/EFI/OC/Tools/";
+  dir.mkpath(strDrivers1);
+  dir.mkpath(strTools1);
+  dir.mkpath(strDrivers2);
+  dir.mkpath(strTools2);
+  QStringList listDrivers, listTools;
+  listDrivers = Method::DirToFileList(strDrivers0, "*.efi");
+  listTools = Method::DirToFileList(strTools0, "*.efi");
+  for (int i = 0; i < listDrivers.count(); i++) {
+    mw_one->copyFileToPath(strDrivers0 + listDrivers.at(i),
+                           strDrivers1 + listDrivers.at(i), false);
+    mw_one->copyFileToPath(strDrivers0 + listDrivers.at(i),
+                           strDrivers2 + listDrivers.at(i), false);
+  }
+  for (int i = 0; i < listTools.count(); i++) {
+    mw_one->copyFileToPath(strTools0 + listTools.at(i),
+                           strTools1 + listTools.at(i), false);
+    mw_one->copyFileToPath(strTools0 + listTools.at(i),
+                           strTools2 + listTools.at(i), false);
+  }
+
   QString fileSample =
       QDir::homePath() + "/Database/BaseConfigs/SampleCustom.plist";
   if (!QFile(fileSample).exists()) {
