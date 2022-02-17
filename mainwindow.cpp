@@ -2031,25 +2031,28 @@ QVariantMap MainWindow::SaveNVRAM() {
 QVariantMap MainWindow::SavePlatformInfo() {
   QVariantMap subMap;
   QVariantMap valueList;
+  QVariantMap mapMain = mapTatol["PlatformInfo"].toMap();
+  QStringList list = mapMain.keys();
 
   // Tatol
   subMap = setValue(valueList, ui->gbox01);
 
   // Generic
-  valueList.clear();
-  if (ui->editDatROM->text().count() > 12) ui->btnROM->clicked();
+  if (list.removeOne("Generic")) {
+    valueList.clear();
+    if (ui->editDatROM->text().count() > 12) ui->btnROM->clicked();
 
-  subMap["Generic"] = setValue(valueList, ui->tabPlatformInfo1);
+    subMap["Generic"] = setValue(valueList, ui->tabPlatformInfo1);
 
-  if (getSystemProductName(ui->cboxSystemProductName->currentText()) != "")
-    valueList["SystemProductName"] =
-        getSystemProductName(ui->cboxSystemProductName->currentText());
-  else
-    valueList["SystemProductName"] = ui->cboxSystemProductName->currentText();
+    if (getSystemProductName(ui->cboxSystemProductName->currentText()) != "")
+      valueList["SystemProductName"] =
+          getSystemProductName(ui->cboxSystemProductName->currentText());
+    else
+      valueList["SystemProductName"] = ui->cboxSystemProductName->currentText();
+  }
 
   // DataHub
   valueList.clear();
-
   if (ui->mychkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
     subMap["DataHub"] = setValue(valueList, ui->tabPlatformInfo2);
 
@@ -2058,8 +2061,6 @@ QVariantMap MainWindow::SavePlatformInfo() {
   valueList = setValue(valueList, ui->tabPlatformInfo3);
 
   // Devices Memory
-  QVariantMap mapMain = mapTatol["PlatformInfo"].toMap();
-  QStringList list = mapMain.keys();
   if (list.removeOne("Memory")) {
     QVariantMap Map;
     Map["Devices"] = Method::get_TableData(ui->tableDevices);
@@ -3725,7 +3726,7 @@ void MainWindow::readResult() {
   on_btnSystemUUID_clicked();
 }
 
-void MainWindow::on_btnGenerate_clicked() {
+void MainWindow::on_btnSystemProductName_clicked() {
   QString arg1 = ui->cboxSystemProductName->currentText();
   if (!loading && arg1 != "") {
     gs = new QProcess;
@@ -5187,7 +5188,6 @@ void MainWindow::init_MainUI() {
   ui->frameTip->setPalette(QPalette(QColor(255, 204, 204)));
   ui->btnNo->setDefault(true);
   ui->frameTip->setHidden(true);
-  ui->btnCheckSN->setHidden(false);
 
   init_FileMenu();
   init_EditMenu();
@@ -8227,19 +8227,6 @@ void MainWindow::set_AutoColWidth(QTableWidget* w, bool autoColWidth) {
 }
 
 void MainWindow::init_CopyPasteLine() {
-  QObjectList listBtn = getAllToolButton(getAllUIControls(ui->tabTotal));
-  for (int i = 0; i < listBtn.count(); i++) {
-    QToolButton* w = (QToolButton*)listBtn.at(i);
-    if (w != ui->btnGenerate && w != ui->btnSystemUUID && w != ui->btnROM &&
-        w != ui->btnPickerAttributes && w != ui->btnDisplayLevel &&
-        w != ui->btnExposeSensitiveData && w != ui->btnScanPolicy &&
-        w != ui->btnUpdateHex && w != ui->btnUp && w != ui->btnDown) {
-      if (w->text().trimmed().length() == 1 || w->text().trimmed() == "...") {
-      } else {
-      }
-    }
-  }
-
   listOfTableWidget.clear();
   listOfTableWidget = getAllTableWidget(getAllUIControls(ui->tabTotal));
   for (int i = 0; i < listOfTableWidget.count(); i++) {
@@ -10022,7 +10009,7 @@ void MainWindow::on_actionNew_Key_Field_triggered() {
   myDlgNewKeyField->show();
 }
 
-void MainWindow::on_btnCheckSN_clicked() {
+void MainWindow::on_btnSystemSerialNumber_clicked() {
   QString str = "https://checkcoverage.apple.com/?sn=" +
                 ui->editSystemSerialNumber->text().trimmed();
   QUrl url(str);

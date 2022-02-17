@@ -362,7 +362,7 @@ class MainWindow : public QMainWindow {
 
   QString getDriverInfo(QString strDisk);
   void changeOpenCore(bool blDEV);
-  QObjectList getAllToolButton(QObjectList lstUIControls);
+  static QObjectList getAllToolButton(QObjectList lstUIControls);
   QWidget* getSubTabWidget(int m, int s);
   void init_setWindowModified();
   void setWM();
@@ -608,7 +608,7 @@ class MainWindow : public QMainWindow {
   void on_editIntDisplayLevel_textChanged(const QString& arg1);
   void on_editIntPickerAttributes_textChanged(const QString& arg1);
 
-  void on_btnGenerate_clicked();
+  void on_btnSystemProductName_clicked();
 
   void on_btnSystemUUID_clicked();
 
@@ -974,7 +974,7 @@ class MainWindow : public QMainWindow {
 
   void on_actionNew_Key_Field_triggered();
 
-  void on_btnCheckSN_clicked();
+  void on_btnSystemSerialNumber_clicked();
 
 #ifdef Q_OS_MAC
   void on_editSystemSerialNumber_textChanged(const QString& arg1);

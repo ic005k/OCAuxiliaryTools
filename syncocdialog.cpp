@@ -552,7 +552,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
         c0 = list.at(2);
         QStringList lver;
 
-        int a, b, c;
+        int a, b, c;  // 0 6 1
         a = 0;
         b = 6;
         c = 1;

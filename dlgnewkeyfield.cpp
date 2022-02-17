@@ -502,7 +502,11 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
         QString obj = w->objectName();
         if (obj.mid(0, 4) == "edit" || obj.mid(0, 4) == "cbox") {
           QString txt = get_WidgetText(w);
+          if (txt.contains("_")) {
+            txt = txt.split("_").at(0);
+          }
           set_LblHide(tab, txt);
+          set_BtnHide(tab, txt);
         }
       }
     }
@@ -535,6 +539,19 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
 
   isSmartKey = false;
   return ResultsList;
+}
+
+void dlgNewKeyField::set_BtnHide(QWidget* tab, QString Key) {
+  QObjectList wl =
+      MainWindow::getAllToolButton(MainWindow::getAllUIControls(tab));
+  for (int m = 0; m < wl.count(); m++) {
+    QToolButton* lbl = (QToolButton*)wl.at(m);
+    if (lbl->objectName().replace("btn", "") == Key) {
+      lbl->setHidden(true);
+      listOCATWidgetHideList.removeOne(lbl);
+      listOCATWidgetHideList.append(lbl);
+    }
+  }
 }
 
 void dlgNewKeyField::set_LblHide(QWidget* tab, QString Key) {

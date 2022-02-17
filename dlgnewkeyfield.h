@@ -30,6 +30,7 @@ class dlgNewKeyField : public QDialog {
                                       QString SubName);
   static QWidgetList get_AllLabelList(QWidget* tab);
   static QString get_WidgetText(QWidget* w);
+  static void set_BtnHide(QWidget* tab, QString Key);
  private slots:
   void on_btnAdd_clicked();
 
