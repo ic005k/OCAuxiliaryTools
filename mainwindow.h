@@ -976,9 +976,7 @@ class MainWindow : public QMainWindow {
 
   void on_btnSystemSerialNumber_clicked();
 
-#ifdef Q_OS_MAC
   void on_editSystemSerialNumber_textChanged(const QString& arg1);
-#endif
 
   void on_editSystemUUID_textChanged(const QString& arg1);
 
