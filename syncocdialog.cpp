@@ -39,14 +39,6 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   ui->listKexts->setGridSize(QSize(size, size));
   ui->listOpenCore->setGridSize(QSize(size, size));
 
-  ui->label->setFixedHeight(40);
-  ui->label->setFixedWidth(40);
-  ui->label->setText("");
-
-  ui->label->setStyleSheet(
-      "QLabel{"
-      "border-image:url(:/icon/tip.png) 4 4 4 4 stretch stretch;"
-      "}");
   ui->btnStartSync->setDefault(true);
   ui->labelShowDLInfo->setVisible(false);
   ui->labelShowDLInfo->setText("");
