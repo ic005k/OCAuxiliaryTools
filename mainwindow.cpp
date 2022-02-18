@@ -966,6 +966,9 @@ void MainWindow::ParserNvram(QVariantMap map) {
   map = map["NVRAM"].toMap();
   if (map.isEmpty()) return;
 
+  // Root
+  getValue(map, ui->gboxNVRAM);
+
   // Add
   QVariantMap map_add;
   map_add = map["Add"].toMap();
@@ -983,11 +986,6 @@ void MainWindow::ParserNvram(QVariantMap map) {
   // LegacySchema
   init_value(map["LegacySchema"].toMap(), ui->table_nv_ls0, ui->table_nv_ls,
              -1);
-
-  //分析Quirks
-  ui->chkLegacyEnable->setChecked(map["LegacyEnable"].toBool());
-  ui->chkLegacyOverwrite->setChecked(map["LegacyOverwrite"].toBool());
-  ui->chkWriteFlash->setChecked(map["WriteFlash"].toBool());
 }
 
 void MainWindow::write_ini(QTableWidget* table, QTableWidget* mytable, int i) {
@@ -1907,6 +1905,9 @@ QVariantMap MainWindow::SaveNVRAM() {
   QVariantList arrayList;
   QVariantMap valueList;
 
+  // Root
+  subMap = setValue(subMap, ui->gboxNVRAM);
+
   int currentRow = ui->table_nv_add0->currentRow();
   int currentRowAdd = ui->table_nv_add->currentRow();
   int currentColAdd = ui->table_nv_add->currentColumn();
@@ -1981,10 +1982,6 @@ QVariantMap MainWindow::SaveNVRAM() {
   ui->table_nv_ls0->clearSelection();
   ui->table_nv_ls0->setCurrentCell(currentRow, 0);
   subMap["LegacySchema"] = dictList;
-
-  subMap["LegacyEnable"] = getChkBool(ui->chkLegacyEnable);
-  subMap["LegacyOverwrite"] = getChkBool(ui->chkLegacyOverwrite);
-  subMap["WriteFlash"] = getChkBool(ui->chkWriteFlash);
 
   return subMap;
 }
@@ -9991,6 +9988,8 @@ void MainWindow::smart_UpdateKeyField() {
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabMisc1, "Misc", "Boot");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabMisc2, "Misc", "Debug");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabMisc3, "Misc", "Security");
+
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->gboxNVRAM, "NVRAM", "");
 
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabPlatformInfo1,
                                    "PlatformInfo", "Generic");

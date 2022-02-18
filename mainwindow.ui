@@ -25,6 +25,73 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_31">
+    <item row="1" column="1">
+     <widget class="QFrame" name="frameTip">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_64">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblFileName">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="btnNo">
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>No</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btnYes">
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Yes</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="3">
+     <widget class="QListWidget" name="listMain">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="movement">
+       <enum>QListView::Static</enum>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0" colspan="2">
      <widget class="QFrame" name="frameToolBar">
       <property name="minimumSize">
@@ -110,73 +177,6 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0" rowspan="3">
-     <widget class="QListWidget" name="listMain">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="movement">
-       <enum>QListView::Static</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QFrame" name="frameTip">
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Plain</enum>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_64">
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item row="0" column="0">
-        <widget class="QLabel" name="lblFileName">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="btnNo">
-         <property name="maximumSize">
-          <size>
-           <width>75</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>No</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QPushButton" name="btnYes">
-         <property name="maximumSize">
-          <size>
-           <width>75</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Yes</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
     <item row="2" column="1">
      <widget class="QListWidget" name="listSub">
       <property name="maximumSize">
@@ -190,6 +190,70 @@
       </property>
      </widget>
     </item>
+    <item row="4" column="0" colspan="2">
+     <layout class="QGridLayout" name="gridLayout_StatusBar">
+      <item row="0" column="5">
+       <widget class="QLineEdit" name="txtEditHex"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblTemp1">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
+       <widget class="QLineEdit" name="txtEditASCII"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="lblStatusShow">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QToolButton" name="btnUpdateHex">
+        <property name="toolTip">
+         <string>Update</string>
+        </property>
+        <property name="text">
+         <string>^</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="8">
+       <widget class="QLabel" name="lblTemp2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QLabel" name="lblHexASCII">
+        <property name="text">
+         <string>Hex &lt;==&gt; ASCII</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <spacer name="horizontalSpacer_37">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="lblOCVTip"/>
+      </item>
+     </layout>
+    </item>
     <item row="3" column="1">
      <widget class="QTabWidget" name="tabTotal">
       <property name="toolTip">
@@ -202,7 +266,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>5</number>
       </property>
       <property name="iconSize">
        <size>
@@ -5860,7 +5924,7 @@ Third party drivers may introduce additional security (and performance) consider
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -6358,15 +6422,24 @@ Third party drivers may introduce additional security (and performance) consider
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QGroupBox" name="groupBox_11">
+         <widget class="QGroupBox" name="gboxNVRAM">
           <property name="title">
            <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_15">
            <item row="0" column="0">
-            <widget class="QCheckBox" name="chkLegacyEnable">
-             <property name="toolTip">
-              <string>This file must have root plist dictionary type and contain two fields:
+            <widget class="QFrame" name="frame_chk_24">
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_69">
+              <item>
+               <widget class="QCheckBox" name="chkLegacyEnable">
+                <property name="toolTip">
+                 <string>This file must have root plist dictionary type and contain two fields:
 
 • Version — plist integer, file version, must be set to 1.
 
@@ -6387,36 +6460,60 @@ Warning: This feature is very dangerous as it passes unprotected data to your fi
 变量加载发生在删除（和添加）阶段之前。除非启用LegacyOverwrite，否则不会覆盖任何现有变量。允许设置的变量必须在LegacySchema中指定。第三方脚本可以用来创建nvram.plist文件。这种脚本的例子可以在Utilities中找到。使用第三方脚本可能需要将ExposeSensitiveData设置为0x3，以提供带有OpenCore EFI分区UUID的引导路径变量。
 
 警告：此功能非常危险，因为它会将未受保护的数据传递给您的固件变量服务。只有在固件没有提供硬件NVRAM实现或不兼容的情况下才使用该功能。</string>
-             </property>
-             <property name="statusTip">
-              <string>Enables loading of NVRAM variable file named nvram.plist from EFI volume root.</string>
-             </property>
-             <property name="text">
-              <string>LegacyEnable</string>
-             </property>
+                </property>
+                <property name="statusTip">
+                 <string>Enables loading of NVRAM variable file named nvram.plist from EFI volume root.</string>
+                </property>
+                <property name="text">
+                 <string>LegacyEnable</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QCheckBox" name="chkLegacyOverwrite">
-             <property name="toolTip">
-              <string>Note: Only variables accessible from the operating system will be overwritten.
+            <widget class="QFrame" name="frame_chk_25">
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_72">
+              <item>
+               <widget class="QCheckBox" name="chkLegacyOverwrite">
+                <property name="toolTip">
+                 <string>Note: Only variables accessible from the operating system will be overwritten.
 
 ----
 
 注意：只有从操作系统访问的变量才会被覆盖。</string>
-             </property>
-             <property name="statusTip">
-              <string> Permits overwriting firmware variables from nvram.plist.</string>
-             </property>
-             <property name="text">
-              <string>LegacyOverwrite</string>
-             </property>
+                </property>
+                <property name="statusTip">
+                 <string> Permits overwriting firmware variables from nvram.plist.</string>
+                </property>
+                <property name="text">
+                 <string>LegacyOverwrite</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
            <item row="0" column="2">
-            <widget class="QCheckBox" name="chkWriteFlash">
-             <property name="toolTip">
-              <string>Note: This value is recommended to be enabled on most firmwares, but is left configurable for firmwares that may have issues with NVRAM variable storage garbage collection or alike.
+            <widget class="QFrame" name="frame_chk_26">
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_73">
+              <item>
+               <widget class="QCheckBox" name="chkWriteFlash">
+                <property name="toolTip">
+                 <string>Note: This value is recommended to be enabled on most firmwares, but is left configurable for firmwares that may have issues with NVRAM variable storage garbage collection or alike.
 
 To read NVRAM variable value from macOS one could use nvram by concatenating variable GUID and name separated by : symbol. For example, nvram 7C436110-AB2A-4BBB-A880-FE41995C9F82:boot-args.
 
@@ -6429,13 +6526,31 @@ A continuously updated variable list can be found in a corresponding document: N
 要从macOS中读取nvram变量值，可以通过连接变量GUID和由:符号分隔的名称来使用NVRAM。例如，NVRAM 7c 436110-AB2A-4BBB-A880-Fe 41995 c 9f 82:boot-args。
 
 不断更新的变量列表可以在相应的文档中找到:NVRAM变量。</string>
+                </property>
+                <property name="statusTip">
+                 <string> Enables writing to flash memory for all added variables.</string>
+                </property>
+                <property name="text">
+                 <string>WriteFlash</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QFrame" name="frame_edit_21">
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
              </property>
-             <property name="statusTip">
-              <string> Enables writing to flash memory for all added variables.</string>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
              </property>
-             <property name="text">
-              <string>WriteFlash</string>
-             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_71">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_70"/>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>
@@ -11610,70 +11725,6 @@ Enable this option to be able to see all the boot options when having multiple d
        </layout>
       </widget>
      </widget>
-    </item>
-    <item row="4" column="0" colspan="2">
-     <layout class="QGridLayout" name="gridLayout_StatusBar">
-      <item row="0" column="5">
-       <widget class="QLineEdit" name="txtEditHex"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="lblTemp1">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="7">
-       <widget class="QLineEdit" name="txtEditASCII"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLabel" name="lblStatusShow">
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <widget class="QToolButton" name="btnUpdateHex">
-        <property name="toolTip">
-         <string>Update</string>
-        </property>
-        <property name="text">
-         <string>^</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="8">
-       <widget class="QLabel" name="lblTemp2">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="6">
-       <widget class="QLabel" name="lblHexASCII">
-        <property name="text">
-         <string>Hex &lt;==&gt; ASCII</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <spacer name="horizontalSpacer_37">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="lblOCVTip"/>
-      </item>
-     </layout>
     </item>
    </layout>
   </widget>
