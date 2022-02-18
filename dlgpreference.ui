@@ -33,6 +33,65 @@
           <string>Network</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_9">
+          <item row="2" column="0" colspan="2">
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="title">
+             <string>The way to get the download link for Kext upgrade</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_5">
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="rbtnAPI">
+               <property name="text">
+                <string>Accessing the GitHub API (There is a limit to the number of visits per hour)</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="rbtnWeb">
+               <property name="text">
+                <string>Crawl web source code (No limit on the number of visits)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QGroupBox" name="groupBox_7">
+            <property name="title">
+             <string>Select the mirror server for web access</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="0" column="0">
+              <widget class="QComboBox" name="comboBoxWeb">
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+               <item>
+                <property name="text">
+                 <string>https://github.com/</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>https://hub.fastgit.org/</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QToolButton" name="btnPing">
+               <property name="text">
+                <string>Testing</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
           <item row="0" column="0" colspan="2">
            <widget class="QGroupBox" name="groupBox_6">
             <property name="title">
@@ -94,89 +153,6 @@
               </widget>
              </item>
             </layout>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QGroupBox" name="groupBox_7">
-            <property name="title">
-             <string>Select the mirror server for web access</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_6">
-             <item row="0" column="0">
-              <widget class="QComboBox" name="comboBoxWeb">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-               <item>
-                <property name="text">
-                 <string>https://github.com/</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>https://hub.fastgit.org/</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QToolButton" name="btnPing">
-               <property name="text">
-                <string>Testing</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="2" column="0" colspan="2">
-           <widget class="QGroupBox" name="groupBox_2">
-            <property name="title">
-             <string>The way to get the download link for Kext upgrade</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_5">
-             <item row="0" column="0">
-              <widget class="QRadioButton" name="rbtnAPI">
-               <property name="text">
-                <string>Accessing the GitHub API (There is a limit to the number of visits per hour)</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QRadioButton" name="rbtnWeb">
-               <property name="text">
-                <string>Crawl web source code (No limit on the number of visits)</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>OpenCore development version update source</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QComboBox" name="editOCDevSource">
-            <property name="editable">
-             <bool>true</bool>
-            </property>
-            <item>
-             <property name="text">
-              <string>https://github.com/dortania/build-repo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string/>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>

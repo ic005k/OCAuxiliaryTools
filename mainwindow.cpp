@@ -8589,9 +8589,8 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
       QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
       if (mouseEvent->button() == Qt::LeftButton) {
         if (blDEV) {
-          QUrl url(myDlgPreference->ui->editOCDevSource->lineEdit()
-                       ->text()
-                       .trimmed());
+          QUrl url(
+              dlgSyncOC->ui->editOCDevSource->lineEdit()->text().trimmed());
           QDesktopServices::openUrl(url);
 
         } else {

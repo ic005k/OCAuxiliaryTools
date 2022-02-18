@@ -89,6 +89,12 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
                                               << "0.6.2"
 
   );
+  strIniFile =
+      QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
+  QSettings Reg(strIniFile, QSettings::IniFormat);
+  ui->editOCDevSource->lineEdit()->setText(
+      Reg.value("DevSource", "https://github.com/dortania/build-repo")
+          .toString());
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
@@ -318,6 +324,15 @@ void SyncOCDialog::on_listOpenCore_currentRowChanged(int currentRow) {
 void SyncOCDialog::closeEvent(QCloseEvent* event) {
   if (!ui->btnCheckUpdate->isEnabled()) event->ignore();
   writeCheckStateINI();
+
+  QString txt = ui->editOCDevSource->lineEdit()->text().trimmed();
+  QSettings Reg(strIniFile, QSettings::IniFormat);
+  Reg.setValue("DevSource", txt);
+  if (txt != "")
+    ocFromDev = "<a href=\"" + txt + "\"" + "> " + tr(" Source ");
+  else
+    ocFromDev = "";
+  if (blDEV) mw_one->dlgSyncOC->ui->lblOCFrom->setText(ocFromDev);
 }
 
 void SyncOCDialog::writeCheckStateINI() {
@@ -535,10 +550,16 @@ void SyncOCDialog::init_Sync_OC_Table() {
     ui->lblOCVersions->setHidden(true);
     ui->comboOCVersions->setHidden(true);
     ui->comboOCVersions->setCurrentIndex(0);
+
+    ui->lblDevSource->setHidden(false);
+    ui->editOCDevSource->setHidden(false);
   } else {
     ui->lblOCVersions->setHidden(false);
     ui->comboOCVersions->setHidden(false);
     ui->comboOCVersions->setCurrentText("");
+
+    ui->lblDevSource->setHidden(true);
+    ui->editOCDevSource->setHidden(true);
 
     QString strDev = ocVerDev;
     strDev = strDev.split(" ").at(0);
@@ -824,9 +845,7 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
 
   QString DevSource;
   if (blDEV) {
-    DevSource = mw_one->myDlgPreference->ui->editOCDevSource->lineEdit()
-                    ->text()
-                    .trimmed();
+    DevSource = ui->editOCDevSource->lineEdit()->text().trimmed();
     if (DevSource == "") {
       QMessageBox box;
       box.setText(tr(

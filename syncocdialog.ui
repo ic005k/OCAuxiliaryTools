@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>859</width>
+    <width>861</width>
     <height>498</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>Sync OC</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0" rowspan="7">
+   <item row="0" column="0" rowspan="8">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -209,14 +209,14 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="1" rowspan="7">
+   <item row="0" column="1" rowspan="8" colspan="2">
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
    </item>
-   <item row="0" column="2">
+   <item row="0" column="3">
     <layout class="QGridLayout" name="gridLayout_6">
      <item row="0" column="2">
       <widget class="QLabel" name="lblOCFrom">
@@ -250,7 +250,7 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="2">
+   <item row="1" column="3">
     <widget class="QListWidget" name="listOpenCore">
      <property name="minimumSize">
       <size>
@@ -278,28 +278,8 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="2">
+   <item row="2" column="2" colspan="2">
     <layout class="QGridLayout" name="gridLayout_7">
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="chkIncludeResource">
-       <property name="text">
-        <string>Include Resource Directory</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="lblResourcesFrom">
-       <property name="text">
-        <string>Resources from</string>
-       </property>
-       <property name="openExternalLinks">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="1">
       <spacer name="horizontalSpacer_3">
        <property name="orientation">
@@ -313,9 +293,62 @@
        </property>
       </spacer>
      </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="lblResourcesFrom">
+       <property name="text">
+        <string>Resources from</string>
+       </property>
+       <property name="openExternalLinks">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="chkIncludeResource">
+       <property name="text">
+        <string>Include Resource Directory</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
-   <item row="3" column="2">
+   <item row="3" column="3">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QLabel" name="lblDevSource">
+       <property name="text">
+        <string>OpenCore development version update source</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="editOCDevSource">
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>https://github.com/dortania/build-repo</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>https://github.com/bugprogrammer/HackinPlugins</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
       <widget class="QLabel" name="lblOCVersions">
@@ -329,14 +362,14 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="2">
+   <item row="5" column="3">
     <widget class="QPushButton" name="btnUpdateOC">
      <property name="text">
       <string>Get OpenCore</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="2">
+   <item row="6" column="3">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QLabel" name="label">
@@ -357,14 +390,14 @@
      </item>
     </layout>
    </item>
-   <item row="6" column="2">
+   <item row="7" column="3">
     <widget class="QPushButton" name="btnStartSync">
      <property name="text">
       <string>Start Sync</string>
      </property>
     </widget>
    </item>
-   <item row="7" column="0" colspan="3">
+   <item row="8" column="0" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QLabel" name="lblShowInfo">
