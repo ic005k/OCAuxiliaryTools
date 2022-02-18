@@ -840,9 +840,9 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
     DevSource = ui->editOCDevSource->lineEdit()->text().trimmed();
     if (DevSource == "") {
       QMessageBox box;
-      box.setText(tr(
-          "Please enter the OpenCore development version update source in the "
-          "preferences."));
+      box.setText(
+          tr("Please enter an available OpenCore development version update "
+             "source."));
       box.exec();
       return;
     }

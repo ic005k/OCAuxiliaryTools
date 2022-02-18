@@ -4990,10 +4990,7 @@ void MainWindow::init_EditMenu() {
 
   // Edit
   // Init Database for Linux
-  if (linuxOS)
-    ui->actionInitDatabaseLinux->setVisible(true);
-  else
-    ui->actionInitDatabaseLinux->setVisible(false);
+  ui->actionInitDatabaseLinux->setVisible(false);
 
   // OC Validate
   if (mac || osx1012) ui->actionOcvalidate->setIconVisibleInMenu(false);
