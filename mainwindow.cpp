@@ -1327,13 +1327,10 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item) {
 }
 
 void MainWindow::initui_PlatformInfo() {
-  QFileInfo fi(strIniFile);
-  if (fi.exists()) {
-    QSettings Reg(strIniFile, QSettings::IniFormat);
-    ui->mychkSaveDataHub->setChecked(Reg.value("SaveDataHub").toBool());
-    ui->actionAutoChkUpdate->setChecked(
-        Reg.value("AutoChkUpdate", true).toBool());
-  }
+  QSettings Reg(strIniFile, QSettings::IniFormat);
+  ui->mychkSaveDataHub->setChecked(Reg.value("SaveDataHub", false).toBool());
+  ui->actionAutoChkUpdate->setChecked(
+      Reg.value("AutoChkUpdate", true).toBool());
 
   QFont font;
   font.setBold(true);
@@ -1505,7 +1502,7 @@ void MainWindow::ParserPlatformInfo(QVariantMap map) {
 
   if (usm.trimmed() == "Custom") {
     ui->cboxUpdateSMBIOSMode->setCurrentText(usm.trimmed());
-    ui->chkCustomSMBIOSGuid->setChecked(true);  //联动
+    ui->chkCustomSMBIOSGuid->setChecked(true);
   } else
     ui->chkCustomSMBIOSGuid->setChecked(false);
 
@@ -1516,16 +1513,6 @@ void MainWindow::ParserPlatformInfo(QVariantMap map) {
   if (ui->cboxSystemMemoryStatus->currentText() == "")
     ui->cboxSystemMemoryStatus->setCurrentIndex(0);
 
-  if (ui->editMLB_PNVRAM->text().trimmed() == "")
-    ui->editMLB_PNVRAM->setText(mapGeneric["MLB"].toString());
-
-  QByteArray ba = mapGeneric["ROM"].toByteArray();
-  QString va = ba.toHex().toUpper();
-
-  if (ui->editDatROM_PNVRAM->text().trimmed() == "")
-    ui->editDatROM_PNVRAM->setText(va);
-
-  //机型
   QString spn = mapGeneric["SystemProductName"].toString();
   ui->cboxSystemProductName->setCurrentText(spn);
   for (int i = 0; i < ui->cboxSystemProductName->count(); i++) {
@@ -1540,23 +1527,6 @@ void MainWindow::ParserPlatformInfo(QVariantMap map) {
   QVariantMap mapDataHub = map["DataHub"].toMap();
   getValue(mapDataHub, ui->tabPlatformInfo2);
 
-  if (ui->cboxSystemProductName->currentText() == "") {
-    for (int i = 0; i < ui->cboxSystemProductName->count(); i++) {
-      if (getSystemProductName(ui->cboxSystemProductName->itemText(i)) ==
-          mapDataHub["SystemProductName"].toString()) {
-        ui->cboxSystemProductName->setCurrentIndex(i);
-        break;
-      }
-    }
-  }
-
-  if (ui->editSystemSerialNumber->text().trimmed() == "")
-    ui->editSystemSerialNumber->setText(
-        mapDataHub["SystemSerialNumber"].toString());
-
-  if (ui->editSystemUUID->text().trimmed() == "")
-    ui->editSystemUUID->setText(mapDataHub["SystemUUID"].toString());
-
   // Memory
   QVariantMap mapMemory = map["Memory"].toMap();
   getValue(mapMemory, ui->tabPlatformInfo3);
@@ -1568,13 +1538,6 @@ void MainWindow::ParserPlatformInfo(QVariantMap map) {
   // PlatformNVRAM
   QVariantMap mapPlatformNVRAM = map["PlatformNVRAM"].toMap();
   getValue(mapPlatformNVRAM, ui->tabPlatformInfo4);
-
-  if (ui->editMLB->text().trimmed() == "")
-    ui->editMLB->setText(mapPlatformNVRAM["MLB"].toString());
-
-  if (ui->editDatROM->text().trimmed() == "")
-    ui->editDatROM->setText(
-        ByteToHexStr(mapPlatformNVRAM["ROM"].toByteArray()));
 
   // SMBIOS
   QVariantMap mapSMBIOS = map["SMBIOS"].toMap();
@@ -3763,11 +3726,7 @@ void MainWindow::on_btnSystemUUID_clicked() {
   QUuid id = QUuid::createUuid();
   QString strTemp = id.toString();
   QString strId = strTemp.mid(1, strTemp.count() - 2).toUpper();
-
   ui->editSystemUUID->setText(strId);
-  ui->editSystemUUID_data->setText(strId);
-  ui->editSystemUUID_2->setText(strId);
-  ui->editSystemUUID_PNVRAM->setText(strId);
 }
 
 void MainWindow::on_table_kernel_Force_cellClicked(int row, int column) {
@@ -8629,16 +8588,7 @@ void MainWindow::getCheckBoxValue(QVariantMap map, QWidget* tab) {
     QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
     QString strObjName = chkbox->objectName();
     QString name = strObjName.mid(3, strObjName.count() - 2);
-
-    bool t = false;
-    for (int j = 0; j < chk_Target.count(); j++) {
-      if (chkbox == chk_Target.at(j)) t = true;
-    }
-    if (chkbox->text().mid(0, 3) != "OC_" && chkbox->text().mid(0, 5) != "DEBUG"
-
-        && !t)
-
-      chkbox->setChecked(map[name].toBool());
+    if (strObjName.mid(0, 3) == "chk") chkbox->setChecked(map[name].toBool());
   }
 }
 
@@ -10173,8 +10123,8 @@ void MainWindow::init_AutoColumnWidth() {
   }
 }
 
-#ifdef Q_OS_MAC
 void MainWindow::on_editSystemSerialNumber_textChanged(const QString& arg1) {
+#ifdef Q_OS_MAC
   QProcess* p = new QProcess;
   p->start(strAppExePath + "/Database/mac/macserial", QStringList()
                                                           << "-i" << arg1);
@@ -10184,5 +10134,23 @@ void MainWindow::on_editSystemSerialNumber_textChanged(const QString& arg1) {
   ui->textMacInfo->append(arg1 + " :");
   ui->textMacInfo->append("");
   ui->textMacInfo->append(result);
-}
 #endif
+
+  ui->editSystemSerialNumber_2->setText(arg1);
+  ui->editSystemSerialNumber_data->setText(arg1);
+  ui->editSystemSerialNumber_PNVRAM->setText(arg1);
+}
+
+void MainWindow::on_editSystemUUID_textChanged(const QString& arg1) {
+  ui->editSystemUUID_DataHub->setText(arg1);
+  ui->editSystemUUID_PlatformNVRAM->setText(arg1);
+  ui->editSystemUUID_SMBIOS->setText(arg1);
+}
+
+void MainWindow::on_editMLB_textChanged(const QString& arg1) {
+  ui->editMLB_PNVRAM->setText(arg1);
+}
+
+void MainWindow::on_editDatROM_textChanged(const QString& arg1) {
+  ui->editDatROM_PNVRAM->setText(arg1);
+}

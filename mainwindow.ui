@@ -3754,7 +3754,7 @@ This setting allows to prevent using faster kernel caching variants if slower va
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -6454,7 +6454,7 @@ A continuously updated variable list can be found in a corresponding document: N
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -7247,7 +7247,7 @@ X86PlatformPlugin.kext读取的已知位：
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="editSystemUUID_data"/>
+                  <widget class="QLineEdit" name="editSystemUUID_DataHub"/>
                  </item>
                 </layout>
                </item>
@@ -7826,7 +7826,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="editSystemUUID_PNVRAM"/>
+                  <widget class="QLineEdit" name="editSystemUUID_PlatformNVRAM"/>
                  </item>
                 </layout>
                </item>
@@ -8204,7 +8204,7 @@ UUID是一种标识符，设计为在时间和空间上都是唯一的。它不�
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="editSystemUUID_2"/>
+                  <widget class="QLineEdit" name="editSystemUUID_SMBIOS"/>
                  </item>
                  <item>
                   <widget class="QLabel" name="label_68">
@@ -8486,14 +8486,9 @@ This value gets updated and takes part in update delivery configuration and macO
               <item>
                <widget class="QCheckBox" name="mychkSaveDataHub">
                 <property name="toolTip">
-                 <string notr="true">Description: When &quot;Automatic&quot; is selected, does it retain data such as &quot;DataHub&quot;, &quot;Memory&quot;, &quot;PlatformNVRAM&quot;, and “SMBIOS”.
-
+                 <string>Description: When &quot;Automatic&quot; is selected, does it retain data such as &quot;DataHub&quot; , &quot;PlatformNVRAM&quot;, and “SMBIOS”.
 ----
-
-描述：选择“Automatic“时，是否保留“DataHub”、“Memory”、“PlatformNVRAM”、“SMBIOS”之类的数据。</string>
-                </property>
-                <property name="statusTip">
-                 <string>When &quot;Automatic&quot; is selected, does it retain data such as &quot;DataHub&quot;, &quot;Memory&quot;, &quot;PlatformNVRAM&quot;, and “SMBIOS”.</string>
+描述：选择“Automatic“时，是否保留“DataHub”、“PlatformNVRAM”、“SMBIOS”之类的数据。</string>
                 </property>
                 <property name="text">
                  <string>Keep data such as &quot;Datahub&quot;</string>

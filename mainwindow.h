@@ -980,6 +980,12 @@ class MainWindow : public QMainWindow {
   void on_editSystemSerialNumber_textChanged(const QString& arg1);
 #endif
 
+  void on_editSystemUUID_textChanged(const QString& arg1);
+
+  void on_editMLB_textChanged(const QString& arg1);
+
+  void on_editDatROM_textChanged(const QString& arg1);
+
  private:
   bool isDrag;
   QPoint m_position;
