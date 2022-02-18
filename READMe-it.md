@@ -57,6 +57,7 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto semplice per [Open
 [wget](http://wget.addictivecode.org/)&nbsp; &nbsp; &nbsp;&nbsp;
 [DirectionalToolTip](https://github.com/scondratev/DirectionalToolTip)&nbsp; &nbsp; &nbsp;&nbsp;
 [dortania build-repo](https://github.com/dortania/build-repo)&nbsp; &nbsp; &nbsp;&nbsp;
+[HackinPlugins](https://github.com/bugprogrammer/HackinPlugins)&nbsp; &nbsp; &nbsp;&nbsp;
 
 ### E alla fine , un grande ringraziamento alle persone che hanno contribuito, anche se non menzionate qui, per il vostro supporto e partecipazione!
 
