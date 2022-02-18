@@ -1479,11 +1479,9 @@ void MainWindow::initui_PlatformInfo() {
 
   ui->cboxSystemProductName->addItems(pi);
 
-  //获取当前Mac信息
-
 #ifdef Q_OS_MAC
   QProcess* si = new QProcess;
-  si->start(strAppExePath + "/Database/mac/macserial", QStringList() << "-s");
+  si->start(userDataBaseDir + "mac/macserial", QStringList() << "-s");
   si->waitForFinished();
   ui->textMacInfo->clear();
   QString result = si->readAll();
@@ -10126,8 +10124,7 @@ void MainWindow::init_AutoColumnWidth() {
 void MainWindow::on_editSystemSerialNumber_textChanged(const QString& arg1) {
 #ifdef Q_OS_MAC
   QProcess* p = new QProcess;
-  p->start(strAppExePath + "/Database/mac/macserial", QStringList()
-                                                          << "-i" << arg1);
+  p->start(userDataBaseDir + "mac/macserial", QStringList() << "-i" << arg1);
   p->waitForFinished();
   ui->textMacInfo->clear();
   QString result = p->readAll();
