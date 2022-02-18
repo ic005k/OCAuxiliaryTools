@@ -54,6 +54,7 @@ OC辅助工具（简称OCAT或ocat） 是一个针对[OpenCore](https://github.c
 [wget](http://wget.addictivecode.org/)&nbsp; &nbsp; &nbsp;&nbsp;
 [DirectionalToolTip](https://github.com/scondratev/DirectionalToolTip)&nbsp; &nbsp; &nbsp;&nbsp;
 [dortania build-repo](https://github.com/dortania/build-repo)&nbsp; &nbsp; &nbsp;&nbsp;
+[HackinPlugins](https://github.com/bugprogrammer/HackinPlugins)&nbsp; &nbsp; &nbsp;&nbsp;
 
 ### 最后，对所有的贡献者一并表示感谢，在此不再一一列出，谢谢你们的参与和支持！
 
