@@ -5257,7 +5257,7 @@ void MainWindow::init_MainUI() {
     ui->mycboxFind->addItem(Reg.value(QString::number(i)).toString());
   }
 
-  ui->actionOpenCore_DEV->setChecked(Reg.value("OpenCoreDEV", 0).toBool());
+  ui->actionOpenCore_DEV->setChecked(blDEV);
   ui->actionDEBUG->setChecked(Reg.value("DEBUG", 0).toBool());
   on_actionOpenCore_DEV_triggered();
 
@@ -5369,6 +5369,9 @@ void MainWindow::init_Widgets() {
 
   QSettings Reg(strIniFile, QSettings::IniFormat);
   blDEV = Reg.value("OpenCoreDEV", false).toBool();
+  if (!QFile(QDir::homePath() + "/devDatabase/EFI/OC/OpenCore.efi").exists()) {
+    blDEV = false;
+  }
   QString fileSample, fileSampleDev;
   fileSample = QDir::homePath() + "/Database/BaseConfigs/SampleCustom.plist";
   fileSampleDev =
