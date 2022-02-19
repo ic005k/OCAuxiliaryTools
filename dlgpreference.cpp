@@ -124,7 +124,6 @@ void dlgPreference::refreshKextUrl() {
   QString file = strAppExePath + "/Database/preset/KextUrl.txt";
   ui->textEdit->clear();
   ui->textEdit->setPlainText(mymethod->loadText(file));
-
   QTextEdit *txtEdit = new QTextEdit;
   QString txt = mymethod->loadText(mw_one->strConfigPath + "KextUrl.txt");
   txtEdit->setPlainText(txt);
