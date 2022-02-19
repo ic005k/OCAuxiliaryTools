@@ -998,8 +998,8 @@ class MainWindow : public QMainWindow {
   void pi_cellDoubleClicked();
   void uefi_cellDoubleClicked();
   void init_listMainSub();
-  void CopyCheckbox();
-  void CopyLabel();
+  void init_CopyCheckbox();
+  void init_CopyLabel();
   void init_LineEditDataCheck();
   void init_FileMenu();
   void init_EditMenu();

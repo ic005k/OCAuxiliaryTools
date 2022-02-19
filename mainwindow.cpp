@@ -5306,9 +5306,9 @@ void MainWindow::init_MainUI() {
   ui->btnUpdateHex->setFixedWidth(ui->btnUpdateHex->height());
   setConversionWidgetVisible(false);
 
-  CopyLabel();
+  init_CopyLabel();
 
-  CopyCheckbox();
+  init_CopyCheckbox();
 
   init_LineEditDataCheck();
 
@@ -5488,7 +5488,7 @@ void MainWindow::init_LineEditDataCheck() {
   }
 }
 
-void MainWindow::CopyCheckbox() {
+void MainWindow::init_CopyCheckbox() {
   // Copy CheckBox
   listOfCheckBox.clear();
   listOfCheckBox = getAllCheckBox(getAllUIControls(ui->tabTotal));
@@ -5539,7 +5539,7 @@ void MainWindow::CopyCheckbox() {
   }
 }
 
-void MainWindow::CopyLabel() {
+void MainWindow::init_CopyLabel() {
   // Copy Label
   listOfLabel.clear();
   listOfLabel = getAllLabel(getAllUIControls(ui->tabTotal));
