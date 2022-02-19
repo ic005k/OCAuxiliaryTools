@@ -4,6 +4,7 @@ VoodooPS2Controller.kext | https://github.com/acidanthera/VoodooPS2
 WhateverGreen.kext | https://github.com/acidanthera/WhateverGreen
 VirtualSMC.kext | https://github.com/acidanthera/VirtualSMC
 VoodooI2C.kext | https://github.com/VoodooI2C/VoodooI2C
+VoodooI2CHID.kext | https://github.com/VoodooI2C/VoodooI2C
 RestrictEvents.kext | https://github.com/acidanthera/RestrictEvents
 HibernationFixup.kext | https://github.com/acidanthera/HibernationFixup
 BrcmPatchRAM.kext | https://github.com/acidanthera/BrcmPatchRAM
@@ -39,3 +40,4 @@ AirportItlwm.kext | https://github.com/OpenIntelWireless/itlwm
 HoRNDIS9.2.kext | https://github.com/w19996/HoRNDIS
 EFICheckDisabler.kext | https://github.com/w19996/EFICheckDisabler
 USBPorts-XiaoMiRuby.kext | https://github.com/w19996/USBPorts-XiaoMiRuby
+BlueToolFixup.kext | https://github.com/acidanthera/BrcmPatchRAM
