@@ -692,7 +692,9 @@ void Method::parse_UpdateJSON(QString str) {
             strDLUrl = str;
           else {
             QString str_n = kextName;
-            if (str.contains(str_n.replace(".kext", ""))) strDLUrl = str;
+            if (str.contains(str_n.replace(".kext", "")) &&
+                !str.toLower().contains("debug"))
+              strDLUrl = str;
           }
         }
 
@@ -736,7 +738,9 @@ void Method::getLastReleaseFromHtml(QString url) {
           strDLUrl = str;
         else {
           QString str_n = kextName;
-          if (str.contains(str_n.replace(".kext", ""))) strDLUrl = str;
+          if (str.contains(str_n.replace(".kext", "")) &&
+              !str.toLower().contains("debug"))
+            strDLUrl = str;
         }
       }
 
