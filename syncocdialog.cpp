@@ -11,6 +11,7 @@ extern QString ocVer, ocVerDev, ocFrom, ocFromDev, strIniFile, strAppName,
 extern bool blDEV;
 extern bool Initialization;
 extern Method* mymethod;
+QProgressBar* progBar;
 
 SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {

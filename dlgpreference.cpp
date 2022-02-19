@@ -14,6 +14,7 @@ extern Method *mymethod;
 extern QString SaveFileName, strIniFile, strAppName, ocFromDev, strOCFromDev,
     strAppExePath;
 extern bool blDEV;
+extern QProgressBar *progBar;
 
 dlgPreference::dlgPreference(QWidget *parent)
     : QDialog(parent), ui(new Ui::dlgPreference) {
@@ -75,7 +76,7 @@ dlgPreference::dlgPreference(QWidget *parent)
 dlgPreference::~dlgPreference() { delete ui; }
 
 void dlgPreference::closeEvent(QCloseEvent *event) {
-  Q_UNUSED(event);
+  if (!ui->btnDownloadKexts->isEnabled()) event->ignore();
   saveKextUrl();
 }
 
@@ -262,4 +263,40 @@ void dlgPreference::on_btnPing_clicked() {
 void dlgPreference::on_chkSmartKey_clicked(bool checked) {
   QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("SmartKey", checked);
+}
+
+void dlgPreference::on_btnDownloadKexts_clicked() {
+  if (!mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled()) return;
+  if (!mw_one->dlgSyncOC->ui->btnUpdateOC->isEnabled()) return;
+  ui->btnDownloadKexts->setEnabled(false);
+  repaint();
+  // mw_one->dlgSyncOC->isCheckOC = true;
+  progBar = new QProgressBar(this);
+  progBar->setTextVisible(false);
+  progBar->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  progBar->setStyleSheet(
+      "QProgressBar{border:0px solid #FFFFFF;"
+      "height:30;"
+      "background:rgba(25,255,25,0);"
+      "text-align:right;"
+      "color:rgb(255,255,255);"
+      "border-radius:0px;}"
+
+      "QProgressBar:chunk{"
+      "border-radius:0px;"
+      "background-color:rgba(25,255,0,100);"
+      "}");
+
+  mymethod->downloadAllKexts();
+
+  for (int i = 0; i < ui->tableKextUrl->rowCount(); i++)
+    ui->tableKextUrl->removeCellWidget(i, 0);
+  ui->btnDownloadKexts->setEnabled(true);
+  repaint();
+}
+
+void dlgPreference::on_btnStop_clicked() {
+  if (!mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled()) return;
+  if (!mw_one->dlgSyncOC->ui->btnUpdateOC->isEnabled()) return;
+  mymethod->cancelKextUpdate();
 }

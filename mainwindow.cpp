@@ -9180,8 +9180,7 @@ void MainWindow::on_editDatPasswordSalt_textChanged(const QString& arg1) {
 }
 
 void MainWindow::openDir(QString strDir) {
-  QFileInfo appInfo(qApp->applicationDirPath());
-  QString dirpath = appInfo.filePath() + strDir;
+  QString dirpath = QDir::homePath() + strDir;
   QString dir = "file:" + dirpath;
   QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
 }

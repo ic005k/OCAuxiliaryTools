@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QProcess>
+#include <QProgressBar>
 #include <QTableWidgetItem>
 
 namespace Ui {
@@ -49,6 +50,8 @@ class dlgPreference : public QDialog {
   void on_chkBoxLastFile_clicked(bool checked);
   void on_btnPing_clicked();
   void on_chkSmartKey_clicked(bool checked);
+  void on_btnDownloadKexts_clicked();
+  void on_btnStop_clicked();
 };
 
 #endif  // DLGPREFERENCE_H

@@ -16,6 +16,7 @@ extern QString CurVerison, ocVer, ocVerDev, ocFrom, ocFromDev, strOCFrom,
 extern bool blDEV;
 extern bool zh_cn;
 extern QVariantMap mapTatol;
+extern QProgressBar* progBar;
 
 QString strACPI;
 QString strKexts;
@@ -213,8 +214,7 @@ void Method::kextUpdate() {
           mw_one->dlgSyncOC->ui->tableKexts->item(i, 3)->text().trimmed();
       mw_one->dlgSyncOC->ui->tableKexts->setCurrentCell(i, 0);
       mw_one->dlgSyncOC->ui->tableKexts->setFocus();
-      mw_one->dlgSyncOC->ui->tableKexts->setCellWidget(
-          i, 3, mw_one->dlgSyncOC->progBar);
+      mw_one->dlgSyncOC->ui->tableKexts->setCellWidget(i, 3, progBar);
 
       kextName = name;
       for (int j = 0; j < mw_one->myDlgPreference->ui->tableKextUrl->rowCount();
@@ -254,6 +254,65 @@ void Method::kextUpdate() {
           }
         }
       }
+    }
+  }
+
+  if (blBreak) return;
+  finishKextUpdate(true);
+}
+
+void Method::downloadAllKexts() {
+  if (!mw_one->ui->actionUpgrade_OC->isEnabled()) return;
+  if (mw_one->ui->table_kernel_add->rowCount() == 0) return;
+  mw_one->myDlgPreference->refreshKextUrl();
+  blBreak = false;
+  isReply = false;
+
+  mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(false);
+  mw_one->repaint();
+  QString test = "https://github.com/acidanthera/Lilu";
+
+  for (int i = 0; i < mw_one->myDlgPreference->ui->tableKextUrl->rowCount();
+       i++) {
+    if (blBreak) break;
+
+    QString name =
+        mw_one->myDlgPreference->ui->tableKextUrl->item(i, 0)->text().trimmed();
+    mw_one->myDlgPreference->ui->tableKextUrl->setCurrentCell(i, 1);
+    mw_one->myDlgPreference->ui->tableKextUrl->setFocus();
+    mw_one->myDlgPreference->ui->tableKextUrl->setCellWidget(i, 0, progBar);
+
+    kextName = name;
+
+    if (blBreak) break;
+
+    test =
+        mw_one->myDlgPreference->ui->tableKextUrl->item(i, 1)->text().trimmed();
+
+    bool reGetUrl = true;
+    QString strUrl;
+    for (int m = 0; m < kextDLUrlList.count(); m++) {
+      QString str_m = kextDLUrlList.at(m);
+      QStringList list_m = str_m.split("|");
+      if (list_m.at(0) == name) {
+        reGetUrl = false;
+        strUrl = list_m.at(1);
+      }
+    }
+    if (reGetUrl) {
+      if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
+        getLastReleaseFromUrl(test);
+      if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
+        getLastReleaseFromHtml(test + "/releases/latest");
+    } else {
+      startDownload(strUrl);
+    }
+
+    QElapsedTimer t;
+    t.start();
+    dlEnd = false;
+    while (!dlEnd && !blBreak) {
+      QCoreApplication::processEvents();
     }
   }
 
@@ -311,8 +370,8 @@ void Method::startDownload(QString strUrl) {
     QMessageBox::warning(this, "warning", "File creation failed!\n" + file);
     return;
   }
-  mw_one->dlgSyncOC->progBar->setValue(0);
-  mw_one->dlgSyncOC->progBar->setMinimum(0);
+  progBar->setValue(0);
+  progBar->setMinimum(0);
 
   downloadTimer.start();
 }
@@ -379,7 +438,7 @@ void Method::doProcessFinished() {
   }
 
   if (mw_one->dlgSyncOC->isCheckOC) {
-    delete mw_one->dlgSyncOC->progBar;
+    delete progBar;
     mw_one->dlgSyncOC->isCheckOC = false;
     mw_one->dlgSyncOC->ui->btnUpdateOC->setEnabled(true);
   }
@@ -556,8 +615,8 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
 {
   if (blBreak) return;
 
-  mw_one->dlgSyncOC->progBar->setMaximum(all_total);
-  mw_one->dlgSyncOC->progBar->setValue(recv_total);
+  progBar->setMaximum(all_total);
+  progBar->setValue(recv_total);
 
   // calculate the download speed
   double speed = recv_total * 1000.0 / downloadTimer.elapsed();
@@ -1636,7 +1695,7 @@ void Method::kextPreset() {
   mw_one->dlgPresetValues->blNVAdd = false;
 
   mw_one->dlgPresetValues->listKextPreset =
-      DirToFileList(strAppExePath + "/Database/EFI/OC/Kexts/", "*.kext");
+      DirToFileList(QDir::homePath() + "/Database/EFI/OC/Kexts/", "*.kext");
   mw_one->dlgPresetValues->ui->listPreset->clear();
   mw_one->dlgPresetValues->ui->listPreset->addItems(
       mw_one->dlgPresetValues->listKextPreset);

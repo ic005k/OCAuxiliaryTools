@@ -29,7 +29,7 @@ class SyncOCDialog : public QDialog {
   QString targetResourcesDir;
   QStringList sourceFileList;
   QStringList targetFileList;
-  QProgressBar *progBar;
+
   QList<QLabel *> textList;
   QList<QLabel *> verList;
   QList<QCheckBox *> chkList;

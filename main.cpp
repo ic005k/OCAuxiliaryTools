@@ -41,17 +41,20 @@ int main(int argc, char *argv[]) {
   QString strTools3 = QDir::homePath() + "/Database/DEBUG/EFI/OC/Tools/";
   QString strDrivers4 = QDir::homePath() + "/devDatabase/DEBUG/EFI/OC/Drivers/";
   QString strTools4 = QDir::homePath() + "/devDatabase/DEBUG/EFI/OC/Tools/";
+
   dir.mkpath(strDrivers1);
-  dir.mkpath(strTools1);
   dir.mkpath(strDrivers2);
-  dir.mkpath(strTools2);
   dir.mkpath(strDrivers3);
-  dir.mkpath(strTools3);
   dir.mkpath(strDrivers4);
+  dir.mkpath(strTools1);
+  dir.mkpath(strTools2);
+  dir.mkpath(strTools3);
   dir.mkpath(strTools4);
-  QStringList listDrivers, listTools;
+
+  QStringList listDrivers, listTools, listACPI;
   listDrivers = Method::DirToFileList(strDrivers0, "*.efi");
   listTools = Method::DirToFileList(strTools0, "*.efi");
+
   for (int i = 0; i < listDrivers.count(); i++) {
     mw_one->copyFileToPath(strDrivers0 + listDrivers.at(i),
                            strDrivers1 + listDrivers.at(i), false);
@@ -71,6 +74,28 @@ int main(int argc, char *argv[]) {
                            strTools3 + listTools.at(i), false);
     mw_one->copyFileToPath(strTools0 + listTools.at(i),
                            strTools4 + listTools.at(i), false);
+  }
+
+  // ACPI Files
+  QString strACPI0 = strAppExePath + "/Database/EFI/OC/ACPI/";
+  QString strACPI1 = QDir::homePath() + "/Database/EFI/OC/ACPI/";
+  QString strACPI2 = QDir::homePath() + "/devDatabase/EFI/OC/ACPI/";
+  QString strACPI3 = QDir::homePath() + "/Database/DEBUG/EFI/OC/ACPI/";
+  QString strACPI4 = QDir::homePath() + "/devDatabase/DEBUG/EFI/OC/ACPI/";
+  dir.mkpath(strACPI1);
+  dir.mkpath(strACPI2);
+  dir.mkpath(strACPI3);
+  dir.mkpath(strACPI4);
+  listACPI = Method::DirToFileList(strACPI0, "*.aml");
+  for (int i = 0; i < listACPI.count(); i++) {
+    mw_one->copyFileToPath(strACPI0 + listACPI.at(i), strACPI1 + listACPI.at(i),
+                           false);
+    mw_one->copyFileToPath(strACPI0 + listACPI.at(i), strACPI2 + listACPI.at(i),
+                           false);
+    mw_one->copyFileToPath(strACPI0 + listACPI.at(i), strACPI3 + listACPI.at(i),
+                           false);
+    mw_one->copyFileToPath(strACPI0 + listACPI.at(i), strACPI4 + listACPI.at(i),
+                           false);
   }
 
   QString fileSample =
