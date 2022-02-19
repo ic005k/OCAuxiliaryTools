@@ -1523,6 +1523,24 @@ void MainWindow::ParserPlatformInfo(QVariantMap map) {
   QVariantMap mapDataHub = map["DataHub"].toMap();
   getValue(mapDataHub, ui->tabPlatformInfo2);
 
+  if (ui->cboxSystemProductName->currentText() == "") {
+    spn = mapDataHub["SystemProductName"].toString();
+    ui->cboxSystemProductName->setCurrentText(spn);
+    for (int i = 0; i < ui->cboxSystemProductName->count(); i++) {
+      if (getSystemProductName(ui->cboxSystemProductName->itemText(i)) == spn) {
+        ui->cboxSystemProductName->setCurrentIndex(i);
+
+        break;
+      }
+    }
+  }
+
+  if (ui->editSystemSerialNumber->text() == "")
+    ui->editSystemSerialNumber->setText(
+        ui->editSystemSerialNumber_data->text());
+  if (ui->editSystemUUID->text() == "")
+    ui->editSystemUUID->setText(ui->editSystemUUID_DataHub->text());
+
   // Memory
   QVariantMap mapMemory = map["Memory"].toMap();
   getValue(mapMemory, ui->tabPlatformInfo3);
@@ -1534,6 +1552,11 @@ void MainWindow::ParserPlatformInfo(QVariantMap map) {
   // PlatformNVRAM
   QVariantMap mapPlatformNVRAM = map["PlatformNVRAM"].toMap();
   getValue(mapPlatformNVRAM, ui->tabPlatformInfo4);
+
+  if (ui->editMLB->text() == "")
+    ui->editMLB->setText(ui->editMLB_PNVRAM->text());
+  if (ui->editDatROM->text() == "")
+    ui->editDatROM->setText(ui->editDatROM_PNVRAM->text());
 
   // SMBIOS
   QVariantMap mapSMBIOS = map["SMBIOS"].toMap();
