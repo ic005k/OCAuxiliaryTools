@@ -40,11 +40,11 @@
                 </dict>
                 <dict>
                     <key>Comment</key>
-                    <string>TouchPad</string>
+                    <string>Touchpad</string>
                     <key>Enabled</key>
                     <true/>
                     <key>Path</key>
-                    <string>SSDT-TPD0-XiaomiRuby.aml</string>
+                    <string>SSDT-TPD0-XiaoMiRuby.aml</string>
                 </dict>
             </array>
             <key>Delete</key>
