@@ -262,13 +262,9 @@ void Method::kextUpdate() {
 }
 
 void Method::downloadAllKexts() {
-  if (!mw_one->ui->actionUpgrade_OC->isEnabled()) return;
-  if (mw_one->ui->table_kernel_add->rowCount() == 0) return;
-  mw_one->myDlgPreference->refreshKextUrl();
   blBreak = false;
   isReply = false;
 
-  mw_one->dlgSyncOC->ui->btnCheckUpdate->setEnabled(false);
   mw_one->repaint();
   QString test = "https://github.com/acidanthera/Lilu";
 
@@ -734,7 +730,8 @@ void Method::getLastReleaseFromHtml(QString url) {
   for (int i = 0; i < strDownloadUrlList.count(); i++) {
     if (strDownloadUrlList.count() > 1) {
       QString str = strDownloadUrlList.at(i);
-      if (!mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled()) {
+      if (!mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled() ||
+          !mw_one->myDlgPreference->ui->btnDownloadKexts->isEnabled()) {
         if (str.contains("RELEASE"))
           strDLUrl = str;
         else {

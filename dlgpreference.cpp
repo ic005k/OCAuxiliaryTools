@@ -140,15 +140,17 @@ void dlgPreference::refreshKextUrl() {
     if (!re) ui->textEdit->append(line);
   }
 
-  ui->tableKextUrl->setRowCount(0);
   QStringList listKexts;
   for (int i = 0; i < ui->textEdit->document()->lineCount(); i++) {
     QString line = mymethod->getTextEditLineText(ui->textEdit, i).trimmed();
-    listKexts.append(line);
+    if (line != "") listKexts.append(line);
   }
 
   std::sort(listKexts.begin(), listKexts.end(),
             [](const QString &s1, const QString &s2) { return s1 < s2; });
+
+  ui->tableKextUrl->setRowCount(0);
+  ui->tableKextUrl->setRowCount(listKexts.count());
   for (int i = 0; i < listKexts.count(); i++) {
     QString line = listKexts.at(i);
     QStringList list = line.split("|");
@@ -156,8 +158,6 @@ void dlgPreference::refreshKextUrl() {
     if (list.count() == 2) {
       str0 = list.at(0);
       str1 = list.at(1);
-      int n = ui->tableKextUrl->rowCount();
-      ui->tableKextUrl->setRowCount(n + 1);
       ui->tableKextUrl->setCurrentCell(i, 0);
       ui->tableKextUrl->setItem(i, 0, new QTableWidgetItem(str0.trimmed()));
       ui->tableKextUrl->setItem(i, 1, new QTableWidgetItem(str1.trimmed()));
@@ -296,7 +296,7 @@ void dlgPreference::on_btnDownloadKexts_clicked() {
 }
 
 void dlgPreference::on_btnStop_clicked() {
-  if (!mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled()) return;
-  if (!mw_one->dlgSyncOC->ui->btnUpdateOC->isEnabled()) return;
+  if (ui->btnDownloadKexts->isEnabled()) return;
+
   mymethod->cancelKextUpdate();
 }

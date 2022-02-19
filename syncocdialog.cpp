@@ -555,7 +555,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
     ui->editOCDevSource->setHidden(true);
 
     QString strDev = ocVerDev;
-    strDev = strDev.split(" ").at(0);
+    if (strDev.contains(" ")) strDev = strDev.split(" ").at(0);
     if (strDev > ui->comboOCVersions->itemText(1)) {
       ui->comboOCVersions->clear();
       QString a0, b0, c0;
@@ -594,9 +594,11 @@ void SyncOCDialog::init_Sync_OC_Table() {
       }
     }
     QString str = ocVer;
-    str = str.split(" ").at(0);
+    if (str.contains(" ")) str = str.split(" ").at(0);
+
     ui->comboOCVersions->setCurrentText(str);
   }
+
   sourceKexts.clear();
   targetKexts.clear();
   sourceOpenCore.clear();
