@@ -5262,6 +5262,16 @@ void MainWindow::init_MainUI() {
 
   ui->actionOpenCore_DEV->setChecked(blDEV);
   ui->actionDEBUG->setChecked(Reg.value("DEBUG", 0).toBool());
+  if (ui->actionDEBUG->isChecked()) {
+    if (!blDEV) {
+      if (!QFile(QDir::homePath() + "/Database/DEBUG/EFI/OC/OpenCore.efi")
+               .exists())
+        ui->actionDEBUG->setChecked(false);
+    } else if (!QFile(QDir::homePath() +
+                      "/devDatabase/DEBUG/EFI/OC/OpenCore.efi")
+                    .exists())
+      ui->actionDEBUG->setChecked(false);
+  }
   on_actionOpenCore_DEV_triggered();
 
   // Get windows position
@@ -5375,6 +5385,7 @@ void MainWindow::init_Widgets() {
   if (!QFile(QDir::homePath() + "/devDatabase/EFI/OC/OpenCore.efi").exists()) {
     blDEV = false;
   }
+
   QString fileSample, fileSampleDev;
   fileSample = QDir::homePath() + "/Database/BaseConfigs/SampleCustom.plist";
   fileSampleDev =
