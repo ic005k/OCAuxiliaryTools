@@ -565,32 +565,27 @@ void SyncOCDialog::init_Sync_OC_Table() {
         c0 = list.at(2);
         QStringList lver;
 
-        int a, b, c;  // 0 6 1
-        a = 0;
-        b = 6;
-        c = 1;
+        QString str0 = "061";
+        QString str1 = a0 + b0 + c0;
+        int start = str0.toInt();
+        int end = str1.toInt();
+        QString a, b, c;
+
         for (int i = 0; i < 200; i++) {
-          c++;
-          qDebug() << a << b << c;
-          lver.insert(0, QString::number(a) + "." + QString::number(b) + "." +
-                             QString::number(c));
-          if (a0.toInt() == a && b0.toInt() == b && c0.toInt() == c) break;
-          if (c == 9) {
-            b++;
-            c = 0;
-            qDebug() << a << b << c;
-            lver.insert(0, QString::number(a) + "." + QString::number(b) + "." +
-                               QString::number(c));
-            if (a0.toInt() == a && b0.toInt() == b && c0.toInt() == c) break;
-            if (b == 9) {
-              a++;
-              b = 0;
-              qDebug() << a << b << c;
-              lver.insert(0, QString::number(a) + "." + QString::number(b) +
-                                 "." + QString::number(c));
-              if (a0.toInt() == a && b0.toInt() == b && c0.toInt() == c) break;
-            }
+          start++;
+          QString str00 = QString::number(start);
+          if (str00.length() == 2) {
+            a = "0";
+            b = str00.mid(0, 1);
+            c = str00.mid(1, 1);
           }
+          if (str00.length() == 3) {
+            a = str00.mid(0, 1);
+            b = str00.mid(1, 1);
+            c = str00.mid(2, 1);
+          }
+          lver.insert(0, a + "." + b + "." + c);
+          if (start == end) break;
         }
         lver.removeAt(0);
         lver.insert(0, tr("Latest Version"));
