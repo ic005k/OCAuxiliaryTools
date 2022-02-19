@@ -140,9 +140,17 @@ void dlgPreference::refreshKextUrl() {
   }
 
   ui->tableKextUrl->setRowCount(0);
+  QStringList listKexts;
   for (int i = 0; i < ui->textEdit->document()->lineCount(); i++) {
-    QStringList list =
-        mymethod->getTextEditLineText(ui->textEdit, i).split("|");
+    QString line = mymethod->getTextEditLineText(ui->textEdit, i).trimmed();
+    listKexts.append(line);
+  }
+
+  std::sort(listKexts.begin(), listKexts.end(),
+            [](const QString &s1, const QString &s2) { return s1 < s2; });
+  for (int i = 0; i < listKexts.count(); i++) {
+    QString line = listKexts.at(i);
+    QStringList list = line.split("|");
     QString str0, str1;
     if (list.count() == 2) {
       str0 = list.at(0);
