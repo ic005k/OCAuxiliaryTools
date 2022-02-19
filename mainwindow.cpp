@@ -1704,10 +1704,10 @@ void MainWindow::SavePlist(QString FileName) {
 }
 
 QVariantMap MainWindow::SaveACPI() {
-  // ACPI
-
   // Add
   QVariantMap acpiMap;
+  QVariantMap mapMain = mapTatol["ACPI"].toMap();
+  QStringList list = mapMain.keys();
 
   for (int i = 0; i < ui->table_acpi_add->rowCount(); i++) {
     QFileInfo fi(SaveFileName);
@@ -1724,36 +1724,45 @@ QVariantMap MainWindow::SaveACPI() {
     }
   }
 
-  acpiMap["Add"] = Method::get_TableData(ui->table_acpi_add);
+  if (list.removeOne("Add"))
+    acpiMap["Add"] = Method::get_TableData(ui->table_acpi_add);
 
   // Delete
-  acpiMap["Delete"] = Method::get_TableData(ui->table_acpi_del);
+  if (list.removeOne("Delete"))
+    acpiMap["Delete"] = Method::get_TableData(ui->table_acpi_del);
 
   // Patch
-  acpiMap["Patch"] = Method::get_TableData(ui->table_acpi_patch);
+  if (list.removeOne("Patch"))
+    acpiMap["Patch"] = Method::get_TableData(ui->table_acpi_patch);
 
   // Quirks
-  QVariantMap acpiQuirks;
-  acpiMap["Quirks"] = setValue(acpiQuirks, ui->tabACPI4);
+  if (list.removeOne("Quirks")) {
+    QVariantMap acpiQuirks;
+    acpiMap["Quirks"] = setValue(acpiQuirks, ui->tabACPI4);
+  }
 
   return acpiMap;
 }
 
 QVariantMap MainWindow::SaveBooter() {
   QVariantMap subMap;
-
-  // MmioWhitelist
-  subMap["MmioWhitelist"] = Method::get_TableData(ui->table_booter);
-
-  // Patch
   QVariantMap mapMain = mapTatol["Booter"].toMap();
   QStringList list = mapMain.keys();
-  if (list.removeOne("Patch"))
+
+  // MmioWhitelist
+  if (list.removeOne("MmioWhitelist"))
+    subMap["MmioWhitelist"] = Method::get_TableData(ui->table_booter);
+
+  // Patch
+  if (list.removeOne("Patch")) {
     subMap["Patch"] = Method::get_TableData(ui->table_Booter_patch);
+  }
 
   // Quirks
-  QVariantMap mapQuirks;
-  subMap["Quirks"] = setValue(mapQuirks, ui->tabBooter3);
+  if (list.removeOne("Quirks")) {
+    QVariantMap mapQuirks;
+    subMap["Quirks"] = setValue(mapQuirks, ui->tabBooter3);
+  }
 
   return subMap;
 }
@@ -1822,6 +1831,8 @@ QVariantMap MainWindow::SaveDeviceProperties() {
 QVariantMap MainWindow::SaveKernel() {
   // Add
   QVariantMap subMap;
+  QVariantMap mapMain = mapTatol["Kernel"].toMap();
+  QStringList list = mapMain.keys();
 
   for (int i = 0; i < ui->table_kernel_add->rowCount(); i++) {
     QFileInfo fi(SaveFileName);
@@ -1840,60 +1851,79 @@ QVariantMap MainWindow::SaveKernel() {
     }
   }
 
-  subMap["Add"] = Method::get_TableData(ui->table_kernel_add);
+  if (list.removeOne("Add"))
+    subMap["Add"] = Method::get_TableData(ui->table_kernel_add);
 
   // Block
-  subMap["Block"] = Method::get_TableData(ui->table_kernel_block);
+  if (list.removeOne("Block"))
+    subMap["Block"] = Method::get_TableData(ui->table_kernel_block);
 
   // Force
-  subMap["Force"] = Method::get_TableData(ui->table_kernel_Force);
+  if (list.removeOne("Force"))
+    subMap["Force"] = Method::get_TableData(ui->table_kernel_Force);
 
   // Patch
-  subMap["Patch"] = Method::get_TableData(ui->table_kernel_patch);
+  if (list.removeOne("Patch"))
+    subMap["Patch"] = Method::get_TableData(ui->table_kernel_patch);
 
   // Emulate
-  QVariantMap mapValue;
-  subMap["Emulate"] = setValue(mapValue, ui->tabKernel5);
+  if (list.removeOne("Emulate")) {
+    QVariantMap mapValue;
+    subMap["Emulate"] = setValue(mapValue, ui->tabKernel5);
+  }
 
   // Quirks
-  QVariantMap mapQuirks;
-  subMap["Quirks"] = setValue(mapQuirks, ui->tabKernel6);
+  if (list.removeOne("Quirks")) {
+    QVariantMap mapQuirks;
+    subMap["Quirks"] = setValue(mapQuirks, ui->tabKernel6);
+  }
 
   // Scheme
-  QVariantMap mapScheme;
-  subMap["Scheme"] = setValue(mapScheme, ui->tabKernel7);
+  if (list.removeOne("Scheme")) {
+    QVariantMap mapScheme;
+    subMap["Scheme"] = setValue(mapScheme, ui->tabKernel7);
+  }
 
   return subMap;
 }
 
 QVariantMap MainWindow::SaveMisc() {
   QVariantMap subMap;
-  QVariantList dictList;
   QVariantMap valueList;
+  QVariantMap mapMain = mapTatol["Misc"].toMap();
+  QStringList list = mapMain.keys();
 
   // Boot
-  subMap["Boot"] = setValue(valueList, ui->tabMisc1);
+  if (list.removeOne("Boot"))
+    subMap["Boot"] = setValue(valueList, ui->tabMisc1);
 
   // Debug
-  valueList.clear();
-  subMap["Debug"] = setValue(valueList, ui->tabMisc2);
+  if (list.removeOne("Debug")) {
+    valueList.clear();
+    subMap["Debug"] = setValue(valueList, ui->tabMisc2);
+  }
 
   // Security
-  valueList.clear();
-  subMap["Security"] = setValue(valueList, ui->tabMisc3);
+  if (list.removeOne("Security")) {
+    valueList.clear();
+    subMap["Security"] = setValue(valueList, ui->tabMisc3);
+  }
 
   QString hm = ui->cboxSecureBootModel->currentText().trimmed();
   if (hm == "") hm = "Disabled";
   valueList["SecureBootModel"] = hm;
 
   // BlessOverride
-  subMap["BlessOverride"] = Method::get_TableData(ui->tableBlessOverride);
+  if (list.removeOne("BlessOverride"))
+    subMap["BlessOverride"] = Method::get_TableData(ui->tableBlessOverride);
 
   // Entries
-  subMap["Entries"] = Method::get_TableData(ui->tableEntries);
+  if (list.removeOne("Entries"))
+    subMap["Entries"] = Method::get_TableData(ui->tableEntries);
 
   // Tools
-  subMap["Tools"] = Method::get_TableData(ui->tableTools);
+  if (list.removeOne("Tools"))
+    subMap["Tools"] = Method::get_TableData(ui->tableTools);
 
   return subMap;
 }
@@ -2010,13 +2040,18 @@ QVariantMap MainWindow::SavePlatformInfo() {
   }
 
   // DataHub
-  valueList.clear();
-  if (ui->mychkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
-    subMap["DataHub"] = setValue(valueList, ui->tabPlatformInfo2);
+  if (list.removeOne("DataHub")) {
+    valueList.clear();
+    if (ui->mychkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+      subMap["DataHub"] = setValue(valueList, ui->tabPlatformInfo2);
+  }
 
   // Memory
-  valueList.clear();
-  valueList = setValue(valueList, ui->tabPlatformInfo3);
+  if (list.removeOne("Memory")) {
+    list.append("Memory");
+    valueList.clear();
+    valueList = setValue(valueList, ui->tabPlatformInfo3);
+  }
 
   // Devices Memory
   if (list.removeOne("Memory")) {
@@ -2027,24 +2062,18 @@ QVariantMap MainWindow::SavePlatformInfo() {
   }
 
   // PlatformNVRAM
-  valueList.clear();
-
-  if (ui->mychkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
-    subMap["PlatformNVRAM"] = setValue(valueList, ui->tabPlatformInfo4);
+  if (list.removeOne("PlatformNVRAM")) {
+    valueList.clear();
+    if (ui->mychkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+      subMap["PlatformNVRAM"] = setValue(valueList, ui->tabPlatformInfo4);
+  }
 
   // SMBIOS
-  valueList.clear();
-
-  if (ui->mychkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
-    subMap["SMBIOS"] = setValue(valueList, ui->tabPlatformInfo5);
-
-  /*subMap["Automatic"] = getChkBool(ui->chkAutomatic);
-  subMap["CustomMemory"] = getChkBool(ui->chkCustomMemory);
-  subMap["UpdateDataHub"] = getChkBool(ui->chkUpdateDataHub);
-  subMap["UpdateNVRAM"] = getChkBool(ui->chkUpdateNVRAM);
-  subMap["UpdateSMBIOS"] = getChkBool(ui->chkUpdateSMBIOS);
-  subMap["UseRawUuidEncoding"] = getChkBool(ui->chkUseRawUuidEncoding);
-  subMap["UpdateSMBIOSMode"] = ui->cboxUpdateSMBIOSMode->currentText();*/
+  if (list.removeOne("SMBIOS")) {
+    valueList.clear();
+    if (ui->mychkSaveDataHub->isChecked() || !ui->chkAutomatic->isChecked())
+      subMap["SMBIOS"] = setValue(valueList, ui->tabPlatformInfo5);
+  }
 
   return subMap;
 }

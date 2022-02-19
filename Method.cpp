@@ -400,6 +400,7 @@ void Method::updateOpenCore() {
     dir.mkpath(mw_one->userDataBaseDir + "DEBUG/");
     dir.mkpath(mw_one->userDataBaseDir + "doc/");
     dir.mkpath(mw_one->userDataBaseDir + "BaseConfigs/");
+    mw_one->deleteDirfile(mw_one->userDataBaseDir + "mac/");
     dir.mkpath(mw_one->userDataBaseDir + "mac/");
     mw_one->deleteDirfile(mw_one->userDataBaseDir + "win/");
     dir.mkpath(mw_one->userDataBaseDir + "win/");
@@ -414,6 +415,7 @@ void Method::updateOpenCore() {
              "source for the OpenCore development version."));
       return;
     }
+    if (!QDir(strSEFI).exists()) strSEFI = tempDir + "EFI/";
     QString strTEFI;
     if (!mw_one->ui->actionDEBUG->isChecked())
       strTEFI = mw_one->userDataBaseDir + "EFI/";
@@ -440,14 +442,21 @@ void Method::updateOpenCore() {
     Results.append(mw_one->copyFileToPath(
         tempDir + "Docs/Sample.plist",
         mw_one->userDataBaseDir + "BaseConfigs/Sample.plist", true));
+    QString sa = tempDir + "Docs/SampleCustom.plist";
+    if (!QFile(sa).exists()) sa = tempDir + "Docs/SampleFull.plist";
     Results.append(mw_one->copyFileToPath(
-        tempDir + "Docs/SampleCustom.plist",
-        mw_one->userDataBaseDir + "BaseConfigs/SampleCustom.plist", true));
+        sa, mw_one->userDataBaseDir + "BaseConfigs/SampleCustom.plist", true));
 
     // OC Validate
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/ocvalidate/ocvalidate",
-        mw_one->userDataBaseDir + "mac/ocvalidate", true));
+    if (!QFile(tempDir + "Utilities/ocvalidate/ocvalidate").exists()) {
+      QMessageBox::information(this, "",
+                               tr("Note: This version or update source does "
+                                  "not contain Mac related files. This will "
+                                  "affect the use of the APP under Mac.") +
+                                   "\n\nocvalidate\nmacserial\nocpasswordgen");
+    }
+    mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate",
+                           mw_one->userDataBaseDir + "mac/ocvalidate", true);
 
     if (!QFile(tempDir + "Utilities/ocvalidate/ocvalidate.exe").exists()) {
       QMessageBox::information(
@@ -474,9 +483,8 @@ void Method::updateOpenCore() {
                            mw_one->userDataBaseDir + "linux/ocvalidate", true);
 
     // Mac Serial
-    Results.append(mw_one->copyFileToPath(
-        tempDir + "Utilities/macserial/macserial",
-        mw_one->userDataBaseDir + "mac/macserial", true));
+    mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial",
+                           mw_one->userDataBaseDir + "mac/macserial", true);
     mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial.exe",
                            mw_one->userDataBaseDir + "win/macserial.exe", true);
 
