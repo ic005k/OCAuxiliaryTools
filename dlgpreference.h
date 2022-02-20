@@ -26,8 +26,15 @@ class dlgPreference : public QDialog {
 
  private:
   void writeIni(QString key, int arg1);
+  QStringList listKexts;
+  QStringList listFind;
+  bool isRefresh = false;
+  QString CurrentText;
 
- protected:
+  void find(QString arg1);
+
+  void writeTable(QStringList listFind);
+protected:
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
@@ -52,6 +59,11 @@ class dlgPreference : public QDialog {
   void on_chkSmartKey_clicked(bool checked);
   void on_btnDownloadKexts_clicked();
   void on_btnStop_clicked();
+  void on_myeditFind_textChanged(const QString &arg1);
+
+  void on_tableKextUrl_itemChanged(QTableWidgetItem *item);
+  void on_tableKextUrl_cellClicked(int row, int column);
+  void on_myeditFind_returnPressed();
 };
 
 #endif  // DLGPREFERENCE_H

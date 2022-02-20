@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -273,24 +273,17 @@
        <string>Kext Upgrade URL</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="2" column="3">
-        <widget class="QToolButton" name="btnDownloadKexts">
-         <property name="text">
-          <string>Download Kexts to the user database</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QToolButton" name="btnOpenUrl">
-         <property name="text">
-          <string>Open URL in browser</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
+       <item row="3" column="0">
         <widget class="QToolButton" name="btnAdd">
          <property name="text">
           <string>+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4">
+        <widget class="QToolButton" name="btnStop">
+         <property name="text">
+          <string>Stop</string>
          </property>
         </widget>
        </item>
@@ -308,7 +301,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="2" column="5">
+       <item row="3" column="5">
         <spacer name="horizontalSpacer">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -321,7 +314,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </spacer>
        </item>
-       <item row="1" column="0" colspan="6">
+       <item row="2" column="0" colspan="6">
         <widget class="QTableWidget" name="tableKextUrl">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -341,17 +334,34 @@ p, li { white-space: pre-wrap; }
          </column>
         </widget>
        </item>
-       <item row="2" column="1">
+       <item row="3" column="2">
+        <widget class="QToolButton" name="btnOpenUrl">
+         <property name="text">
+          <string>Open URL in browser</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
         <widget class="QToolButton" name="btnDel">
          <property name="text">
           <string>-</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="4">
-        <widget class="QToolButton" name="btnStop">
+       <item row="3" column="3">
+        <widget class="QToolButton" name="btnDownloadKexts">
          <property name="text">
-          <string>Stop</string>
+          <string>Download Kexts to the user database</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="6">
+        <widget class="QLineEdit" name="myeditFind">
+         <property name="placeholderText">
+          <string>Find</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
          </property>
         </widget>
        </item>

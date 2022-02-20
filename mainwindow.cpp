@@ -9711,6 +9711,7 @@ void MainWindow::on_actionPreferences_triggered() {
   myDlgPreference->refreshKextUrl();
   myDlgPreference->setModal(true);
   myDlgPreference->show();
+  myDlgPreference->ui->myeditFind->setFocus();
   if (myDlgPreference->ui->tableKextUrl->rowCount() > 0) {
     myDlgPreference->ui->tableKextUrl->clearSelection();
   }

@@ -77,6 +77,7 @@ dlgPreference::~dlgPreference() { delete ui; }
 
 void dlgPreference::closeEvent(QCloseEvent *event) {
   if (!ui->btnDownloadKexts->isEnabled()) event->ignore();
+  ui->myeditFind->clear();
   saveKextUrl();
 }
 
@@ -122,6 +123,7 @@ void dlgPreference::saveKextUrl() {
 }
 
 void dlgPreference::refreshKextUrl() {
+  isRefresh = true;
   QString file = strAppExePath + "/Database/preset/KextUrl.txt";
   ui->textEdit->clear();
   ui->textEdit->setPlainText(mymethod->loadText(file));
@@ -140,7 +142,7 @@ void dlgPreference::refreshKextUrl() {
     if (!re) ui->textEdit->append(line);
   }
 
-  QStringList listKexts;
+  listKexts.clear();
   for (int i = 0; i < ui->textEdit->document()->lineCount(); i++) {
     QString line = mymethod->getTextEditLineText(ui->textEdit, i).trimmed();
     if (line != "") listKexts.append(line);
@@ -151,6 +153,7 @@ void dlgPreference::refreshKextUrl() {
 
   ui->tableKextUrl->setRowCount(0);
   ui->tableKextUrl->setRowCount(listKexts.count());
+  listFind.clear();
   for (int i = 0; i < listKexts.count(); i++) {
     QString line = listKexts.at(i);
     QStringList list = line.split("|");
@@ -161,23 +164,30 @@ void dlgPreference::refreshKextUrl() {
       ui->tableKextUrl->setCurrentCell(i, 0);
       ui->tableKextUrl->setItem(i, 0, new QTableWidgetItem(str0.trimmed()));
       ui->tableKextUrl->setItem(i, 1, new QTableWidgetItem(str1.trimmed()));
+      listFind.append(str0.trimmed() + "|" + str1.trimmed());
     }
   }
-
   ui->tableKextUrl->setFocus();
+  isRefresh = false;
 }
 
 void dlgPreference::on_btnAdd_clicked() {
+  isRefresh = true;
   int n = ui->tableKextUrl->rowCount();
   ui->tableKextUrl->setRowCount(n + 1);
   ui->tableKextUrl->setCurrentCell(n, 0);
   ui->tableKextUrl->setItem(n, 0, new QTableWidgetItem(""));
   ui->tableKextUrl->setItem(n, 1, new QTableWidgetItem(""));
+  ui->tableKextUrl->setFocus();
+  isRefresh = false;
 }
 
 void dlgPreference::on_btnDel_clicked() {
   if (ui->tableKextUrl->rowCount() == 0) return;
   int n = ui->tableKextUrl->currentRow();
+  QString str = ui->tableKextUrl->item(n, 0)->text().trimmed() + "|" +
+                ui->tableKextUrl->item(n, 1)->text().trimmed();
+  listFind.removeOne(str);
   ui->tableKextUrl->removeRow(n);
   if (n - 1 == -1) n = 1;
   ui->tableKextUrl->setCurrentCell(n - 1, 0);
@@ -299,4 +309,72 @@ void dlgPreference::on_btnStop_clicked() {
   if (ui->btnDownloadKexts->isEnabled()) return;
 
   mymethod->cancelKextUpdate();
+}
+
+void dlgPreference::find(QString arg1) {
+  isRefresh = true;
+  QStringList list;
+  for (int i = 0; i < listFind.count(); i++) {
+    QString str = listFind.at(i);
+    if (str.toLower().contains(arg1.toLower())) {
+      list.append(str.trimmed());
+    }
+  }
+
+  ui->tableKextUrl->setRowCount(list.count());
+  for (int i = 0; i < list.count(); i++) {
+    QString str = list.at(i);
+    str = str.trimmed();
+    QStringList list0 = str.split("|");
+    QString str1, str2;
+    str1 = list0.at(0);
+    str2 = list0.at(1);
+    ui->tableKextUrl->setItem(i, 0, new QTableWidgetItem(str1.trimmed()));
+    ui->tableKextUrl->setItem(i, 1, new QTableWidgetItem(str2.trimmed()));
+  }
+
+  if (arg1.trimmed() == "") {
+    writeTable(listFind);
+  }
+  isRefresh = false;
+}
+
+void dlgPreference::writeTable(QStringList listFind) {
+  ui->tableKextUrl->setRowCount(listFind.count());
+  for (int i = 0; i < listFind.count(); i++) {
+    QString str = listFind.at(i);
+    str = str.trimmed();
+    QStringList list0 = str.split("|");
+    QString str1, str2;
+    str1 = list0.at(0);
+    str2 = list0.at(1);
+    ui->tableKextUrl->setItem(i, 0, new QTableWidgetItem(str1.trimmed()));
+    ui->tableKextUrl->setItem(i, 1, new QTableWidgetItem(str2.trimmed()));
+  }
+}
+
+void dlgPreference::on_myeditFind_textChanged(const QString &arg1) {
+  find(arg1);
+}
+
+void dlgPreference::on_tableKextUrl_itemChanged(QTableWidgetItem *item) {
+  Q_UNUSED(item);
+  if (isRefresh) return;
+
+  listFind.removeOne(CurrentText);
+  int row = ui->tableKextUrl->currentRow();
+  QString str = ui->tableKextUrl->item(row, 0)->text().trimmed() + "|" +
+                ui->tableKextUrl->item(row, 1)->text().trimmed();
+  listFind.append(str);
+}
+
+void dlgPreference::on_tableKextUrl_cellClicked(int row, int column) {
+  Q_UNUSED(column);
+  CurrentText = ui->tableKextUrl->item(row, 0)->text().trimmed() + "|" +
+                ui->tableKextUrl->item(row, 1)->text().trimmed();
+}
+
+void dlgPreference::on_myeditFind_returnPressed() {
+  find(ui->myeditFind->text().trimmed());
+  ui->myeditFind->selectAll();
 }
