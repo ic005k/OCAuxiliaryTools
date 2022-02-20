@@ -929,5 +929,6 @@ void SyncOCDialog::on_btnImport_clicked() {
     mw_one->copyFileToPath(FileName, tar, true);
     isCheckOC = true;
     mymethod->unZip(fi.fileName());
+    isCheckOC = false;
   }
 }
