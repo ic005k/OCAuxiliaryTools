@@ -11,5 +11,5 @@ This Section is more relevant to the used macOS version and ACPI files rather th
 
 Thanks to @5T33Z0 for providing the above content.
 
-CPU:AMD ThreadRipper (TRX40) and AMD Ryzen (X570-X370)
+CPU:AMD ThreadRipper (TRX40) and AMD Ryzen (X570-X370-B450M)
 ACPI:
