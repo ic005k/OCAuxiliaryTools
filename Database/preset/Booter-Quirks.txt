@@ -36,7 +36,7 @@ Thanks to @5T33Z0 for providing the above content.
 CPU:AMD ThreadRipper (TRX40)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap ResizeAppleGpuBars SyncRuntimePermissions
 
-CPU:AMD Ryzen (X570)
+CPU:AMD Ryzen (X570-B450M)
 Booter:AvoidRuntimeDefrag EnableSafeModeSlide ProvideCustomSlide RebuildAppleMemoryMap ResizeAppleGpuBars SyncRuntimePermissions
 
 CPU:AMD Ryzen (X370)
