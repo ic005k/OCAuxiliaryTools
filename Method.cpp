@@ -687,7 +687,8 @@ void Method::parse_UpdateJSON(QString str) {
     for (int i = 0; i < strDownloadUrlList.count(); i++) {
       if (strDownloadUrlList.count() > 1) {
         QString str = strDownloadUrlList.at(i);
-        if (!mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled()) {
+        if (!mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled() ||
+            !mw_one->myDlgPreference->ui->btnDownloadKexts->isEnabled()) {
           if (str.contains("RELEASE"))
             strDLUrl = str;
           else {
