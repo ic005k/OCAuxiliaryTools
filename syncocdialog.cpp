@@ -207,7 +207,7 @@ void SyncOCDialog::on_listKexts_currentRowChanged(int currentRow) {
   strTV = mymethod->getKextVersion(targetFile);
 
   bool defUS = false;
-  mw_one->myDlgPreference->refreshKextUrl();
+  mw_one->myDlgPreference->refreshKextUrl(true);
   for (int i = 0; i < mw_one->myDlgPreference->ui->tableKextUrl->rowCount();
        i++) {
     QString str =
@@ -729,7 +729,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
     }
   }
 
-  mw_one->myDlgPreference->refreshKextUrl();
+  mw_one->myDlgPreference->refreshKextUrl(true);
   for (int j = 0; j < sourceKexts.count(); j++) {
     QString str1 = QFileInfo(sourceKexts.at(j)).fileName();
     bool defUS = false;

@@ -199,7 +199,7 @@ void Method::finishKextUpdate(bool blDatabase) {
 void Method::kextUpdate() {
   if (!mw_one->ui->actionUpgrade_OC->isEnabled()) return;
   if (mw_one->ui->table_kernel_add->rowCount() == 0) return;
-  mw_one->myDlgPreference->refreshKextUrl();
+  mw_one->myDlgPreference->refreshKextUrl(true);
   blBreak = false;
   isReply = false;
 

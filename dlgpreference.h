@@ -20,7 +20,7 @@ class dlgPreference : public QDialog {
 
   QList<bool> listItemModi;
   QProcess *processPing;
-  void refreshKextUrl();
+  void refreshKextUrl(bool writeTable);
   void on_btnFind_clicked();
   void saveKextUrl();
 
@@ -34,7 +34,8 @@ class dlgPreference : public QDialog {
   void find(QString arg1);
 
   void writeTable(QStringList listFind);
-protected:
+
+ protected:
  protected:
   void closeEvent(QCloseEvent *event);
   void keyPressEvent(QKeyEvent *event);
@@ -62,7 +63,6 @@ protected:
   void on_myeditFind_textChanged(const QString &arg1);
 
   void on_tableKextUrl_itemChanged(QTableWidgetItem *item);
-  void on_tableKextUrl_cellClicked(int row, int column);
   void on_myeditFind_returnPressed();
 };
 

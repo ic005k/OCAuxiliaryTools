@@ -122,7 +122,7 @@ void dlgPreference::saveKextUrl() {
   mymethod->TextEditToFile(ui->textEdit, mw_one->strConfigPath + "KextUrl.txt");
 }
 
-void dlgPreference::refreshKextUrl() {
+void dlgPreference::refreshKextUrl(bool writeTable) {
   isRefresh = true;
   QString file = strAppExePath + "/Database/preset/KextUrl.txt";
   ui->textEdit->clear();
@@ -151,8 +151,10 @@ void dlgPreference::refreshKextUrl() {
   std::sort(listKexts.begin(), listKexts.end(),
             [](const QString &s1, const QString &s2) { return s1 < s2; });
 
-  ui->tableKextUrl->setRowCount(0);
-  ui->tableKextUrl->setRowCount(listKexts.count());
+  if (writeTable) {
+    ui->tableKextUrl->setRowCount(0);
+    ui->tableKextUrl->setRowCount(listKexts.count());
+  }
   listFind.clear();
   for (int i = 0; i < listKexts.count(); i++) {
     QString line = listKexts.at(i);
@@ -161,9 +163,11 @@ void dlgPreference::refreshKextUrl() {
     if (list.count() == 2) {
       str0 = list.at(0);
       str1 = list.at(1);
-      ui->tableKextUrl->setCurrentCell(i, 0);
-      ui->tableKextUrl->setItem(i, 0, new QTableWidgetItem(str0.trimmed()));
-      ui->tableKextUrl->setItem(i, 1, new QTableWidgetItem(str1.trimmed()));
+      if (writeTable) {
+        ui->tableKextUrl->setCurrentCell(i, 0);
+        ui->tableKextUrl->setItem(i, 0, new QTableWidgetItem(str0.trimmed()));
+        ui->tableKextUrl->setItem(i, 1, new QTableWidgetItem(str1.trimmed()));
+      }
       listFind.append(str0.trimmed() + "|" + str1.trimmed());
     }
   }
@@ -361,17 +365,8 @@ void dlgPreference::on_tableKextUrl_itemChanged(QTableWidgetItem *item) {
   Q_UNUSED(item);
   if (isRefresh) return;
 
-  listFind.removeOne(CurrentText);
-  int row = ui->tableKextUrl->currentRow();
-  QString str = ui->tableKextUrl->item(row, 0)->text().trimmed() + "|" +
-                ui->tableKextUrl->item(row, 1)->text().trimmed();
-  listFind.append(str);
-}
-
-void dlgPreference::on_tableKextUrl_cellClicked(int row, int column) {
-  Q_UNUSED(column);
-  CurrentText = ui->tableKextUrl->item(row, 0)->text().trimmed() + "|" +
-                ui->tableKextUrl->item(row, 1)->text().trimmed();
+  saveKextUrl();
+  refreshKextUrl(false);
 }
 
 void dlgPreference::on_myeditFind_returnPressed() {

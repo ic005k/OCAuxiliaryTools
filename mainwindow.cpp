@@ -9708,7 +9708,7 @@ void MainWindow::on_actionPreferences_triggered() {
     myDlgPreference->ui->tabWidget->setDocumentMode(false);
 
   myDlgPreference->setWindowTitle(tr("Preferences"));
-  myDlgPreference->refreshKextUrl();
+  myDlgPreference->refreshKextUrl(true);
   myDlgPreference->setModal(true);
   myDlgPreference->show();
   myDlgPreference->ui->myeditFind->setFocus();
