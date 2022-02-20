@@ -76,7 +76,7 @@ UEFI:IgnoreInvalidFlexRatio RequestBootVarRouting UnblockFsConnect
 
 Thanks to @5T33Z0 for providing the above content.
 
-CPU:AMD ThreadRipper (TRX40) and AMD Ryzen (X570)
+CPU:AMD ThreadRipper (TRX40) and AMD Ryzen (X570-B450M)
 UEFI:EnableVectorAcceleration RequestBootVarRouting ResizeGpuBars
 
 CPU:AMD ThreadRipper (TRX40) and AMD Ryzen (X370)
