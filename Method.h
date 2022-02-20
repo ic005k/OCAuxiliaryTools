@@ -133,7 +133,8 @@ class Method : public QMainWindow {
   static QStringList get_HorizontalHeaderList(QString main, QString sub);
   static void add_OneLine(QTableWidget *t);
   void downloadAllKexts();
-public slots:
+  void unZip(QString zipfile);
+ public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();
   void on_btnImportMaster();

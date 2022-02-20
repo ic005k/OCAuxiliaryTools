@@ -62,7 +62,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="11870"/>
-        <location filename="mainwindow.cpp" line="4042"/>
+        <location filename="mainwindow.cpp" line="4041"/>
         <source>Save</source>
         <oldsource>保存-Save</oldsource>
         <translation>保存</translation>
@@ -127,9 +127,9 @@
         <location filename="mainwindow.ui" line="485"/>
         <location filename="mainwindow.ui" line="2262"/>
         <location filename="mainwindow.ui" line="6108"/>
-        <location filename="mainwindow.cpp" line="4731"/>
-        <location filename="mainwindow.cpp" line="4739"/>
-        <location filename="mainwindow.cpp" line="4753"/>
+        <location filename="mainwindow.cpp" line="4730"/>
+        <location filename="mainwindow.cpp" line="4738"/>
+        <location filename="mainwindow.cpp" line="4752"/>
         <source>Delete</source>
         <oldsource>删除条目-Delete</oldsource>
         <translation>Delete
@@ -140,10 +140,10 @@
         <location filename="mainwindow.ui" line="2101"/>
         <location filename="mainwindow.ui" line="2421"/>
         <location filename="mainwindow.ui" line="5934"/>
-        <location filename="mainwindow.cpp" line="4731"/>
-        <location filename="mainwindow.cpp" line="4739"/>
-        <location filename="mainwindow.cpp" line="4743"/>
-        <location filename="mainwindow.cpp" line="4753"/>
+        <location filename="mainwindow.cpp" line="4730"/>
+        <location filename="mainwindow.cpp" line="4738"/>
+        <location filename="mainwindow.cpp" line="4742"/>
+        <location filename="mainwindow.cpp" line="4752"/>
         <source>Add</source>
         <translation>Add
 增加</translation>
@@ -152,22 +152,22 @@
         <location filename="mainwindow.ui" line="633"/>
         <location filename="mainwindow.ui" line="1302"/>
         <location filename="mainwindow.ui" line="2747"/>
-        <location filename="mainwindow.cpp" line="4731"/>
-        <location filename="mainwindow.cpp" line="4735"/>
-        <location filename="mainwindow.cpp" line="4743"/>
+        <location filename="mainwindow.cpp" line="4730"/>
+        <location filename="mainwindow.cpp" line="4734"/>
+        <location filename="mainwindow.cpp" line="4742"/>
         <source>Patch</source>
         <oldsource>补丁-Patch</oldsource>
         <translation>Patch
 补丁</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4683"/>
+        <location filename="mainwindow.cpp" line="4682"/>
         <source>Booter</source>
         <oldsource>启动设置-Booter</oldsource>
         <translation>Booter 引导器</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4683"/>
+        <location filename="mainwindow.cpp" line="4682"/>
         <source>ACPI</source>
         <translation>ACPI 电源管理</translation>
     </message>
@@ -178,7 +178,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="1192"/>
-        <location filename="mainwindow.cpp" line="4735"/>
+        <location filename="mainwindow.cpp" line="4734"/>
         <source>MmioWhitelist</source>
         <oldsource>内存映射白名单-MmioWhitelist</oldsource>
         <translation>MmioWhitelist
@@ -360,20 +360,20 @@ Mmio白名单</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4683"/>
+        <location filename="mainwindow.cpp" line="4682"/>
         <source>DeviceProperties</source>
         <oldsource>设备属性配置-DeviceProperties</oldsource>
         <translation>DeviceProperties 设备属性</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4684"/>
+        <location filename="mainwindow.cpp" line="4683"/>
         <source>Kernel</source>
         <oldsource>内核设置-Kernel</oldsource>
         <translation>Kernel 内核</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2582"/>
-        <location filename="mainwindow.cpp" line="4743"/>
+        <location filename="mainwindow.cpp" line="4742"/>
         <source>Block</source>
         <oldsource>阻止-Block</oldsource>
         <translation>Block
@@ -381,7 +381,7 @@ Mmio白名单</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2663"/>
-        <location filename="mainwindow.cpp" line="4743"/>
+        <location filename="mainwindow.cpp" line="4742"/>
         <source>Force</source>
         <oldsource>强制-Force</oldsource>
         <translation>Force
@@ -389,7 +389,7 @@ Mmio白名单</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2849"/>
-        <location filename="mainwindow.cpp" line="4744"/>
+        <location filename="mainwindow.cpp" line="4743"/>
         <source>Emulate</source>
         <oldsource>Quirks + Emulate</oldsource>
         <translation>Emulate
@@ -430,10 +430,10 @@ Mmio白名单</translation>
         <location filename="mainwindow.ui" line="1390"/>
         <location filename="mainwindow.ui" line="3078"/>
         <location filename="mainwindow.ui" line="11148"/>
-        <location filename="mainwindow.cpp" line="4731"/>
-        <location filename="mainwindow.cpp" line="4735"/>
-        <location filename="mainwindow.cpp" line="4744"/>
-        <location filename="mainwindow.cpp" line="4771"/>
+        <location filename="mainwindow.cpp" line="4730"/>
+        <location filename="mainwindow.cpp" line="4734"/>
+        <location filename="mainwindow.cpp" line="4743"/>
+        <location filename="mainwindow.cpp" line="4770"/>
         <source>Quirks</source>
         <translation>Quirks
 选项</translation>
@@ -599,7 +599,7 @@ Mmio白名单</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="3641"/>
-        <location filename="mainwindow.cpp" line="4744"/>
+        <location filename="mainwindow.cpp" line="4743"/>
         <source>Scheme</source>
         <translation>Scheme
 老旧系统方案</translation>
@@ -636,7 +636,7 @@ Mmio白名单</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="3828"/>
-        <location filename="mainwindow.cpp" line="4748"/>
+        <location filename="mainwindow.cpp" line="4747"/>
         <source>Boot</source>
         <oldsource>Boot-引导</oldsource>
         <translation>Boot
@@ -745,7 +745,7 @@ Mmio白名单</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="4571"/>
-        <location filename="mainwindow.cpp" line="4748"/>
+        <location filename="mainwindow.cpp" line="4747"/>
         <source>Debug</source>
         <oldsource>Debug-调试</oldsource>
         <translation>Debug
@@ -832,7 +832,7 @@ Mmio白名单</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="4918"/>
-        <location filename="mainwindow.cpp" line="4748"/>
+        <location filename="mainwindow.cpp" line="4747"/>
         <source>Security</source>
         <oldsource>Security-安全</oldsource>
         <translation>Security
@@ -941,28 +941,28 @@ Mmio白名单</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="5663"/>
-        <location filename="mainwindow.cpp" line="4749"/>
+        <location filename="mainwindow.cpp" line="4748"/>
         <source>BlessOverride</source>
         <translation>BlessOverride
 定制引导加载程序</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="5736"/>
-        <location filename="mainwindow.cpp" line="4749"/>
+        <location filename="mainwindow.cpp" line="4748"/>
         <source>Entries</source>
         <translation>Entries
 添加启动项</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="5815"/>
-        <location filename="mainwindow.cpp" line="4749"/>
+        <location filename="mainwindow.cpp" line="4748"/>
         <source>Tools</source>
         <oldsource>Tools-工具</oldsource>
         <translation>Tools
 工具</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4684"/>
+        <location filename="mainwindow.cpp" line="4683"/>
         <source>NVRAM</source>
         <translation>NVRAM 变量</translation>
     </message>
@@ -998,14 +998,14 @@ Mmio白名单</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="6266"/>
-        <location filename="mainwindow.cpp" line="4753"/>
+        <location filename="mainwindow.cpp" line="4752"/>
         <source>LegacySchema</source>
         <oldsource>LegacySchema-传统BIOS</oldsource>
         <translation>LegacySchema
 传统BIOS</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4684"/>
+        <location filename="mainwindow.cpp" line="4683"/>
         <source>PlatformInfo</source>
         <oldsource>机型配置-PlatformInfo</oldsource>
         <translation>PlatformInfo 机型</translation>
@@ -1174,7 +1174,7 @@ Console logging prints less than all the other variants. Depending on the build 
     </message>
     <message>
         <location filename="mainwindow.ui" line="6579"/>
-        <location filename="mainwindow.cpp" line="4757"/>
+        <location filename="mainwindow.cpp" line="4756"/>
         <source>Generic</source>
         <translation>Generic
 通用</translation>
@@ -1316,7 +1316,7 @@ Console logging prints less than all the other variants. Depending on the build 
     </message>
     <message>
         <location filename="mainwindow.ui" line="6938"/>
-        <location filename="mainwindow.cpp" line="4757"/>
+        <location filename="mainwindow.cpp" line="4756"/>
         <source>DataHub</source>
         <translation>DataHub
 数据Hub</translation>
@@ -1511,7 +1511,7 @@ This works around patched tables becoming incompatible with the SLIC table causi
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8284"/>
+        <location filename="mainwindow.cpp" line="8294"/>
         <source>Preset</source>
         <translation>预置</translation>
     </message>
@@ -1629,7 +1629,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8286"/>
+        <location filename="mainwindow.cpp" line="8296"/>
         <source>Add boot-args</source>
         <translation>添加引导参数</translation>
     </message>
@@ -1679,7 +1679,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
     </message>
     <message>
         <location filename="mainwindow.ui" line="7376"/>
-        <location filename="mainwindow.cpp" line="4757"/>
+        <location filename="mainwindow.cpp" line="4756"/>
         <source>Memory</source>
         <translation>Memory
 自定义内存</translation>
@@ -1723,7 +1723,7 @@ Unsupported platforms including Atom and AMD require modified versions of XNU ke
     </message>
     <message>
         <location filename="mainwindow.ui" line="7750"/>
-        <location filename="mainwindow.cpp" line="4758"/>
+        <location filename="mainwindow.cpp" line="4757"/>
         <source>PlatformNVRAM</source>
         <translation>PlatformNVRAM
 平台NVRAM</translation>
@@ -1943,7 +1943,7 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
     </message>
     <message>
         <location filename="mainwindow.ui" line="12096"/>
-        <location filename="mainwindow.cpp" line="9699"/>
+        <location filename="mainwindow.cpp" line="9709"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
@@ -2098,7 +2098,7 @@ Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algor
     </message>
     <message>
         <location filename="mainwindow.ui" line="11989"/>
-        <location filename="mainwindow.cpp" line="5218"/>
+        <location filename="mainwindow.cpp" line="5217"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
@@ -2173,7 +2173,7 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="7955"/>
-        <location filename="mainwindow.cpp" line="4758"/>
+        <location filename="mainwindow.cpp" line="4757"/>
         <source>SMBIOS</source>
         <translation>SMBIOS
 系统管理BIOS</translation>
@@ -2566,14 +2566,14 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9034"/>
-        <location filename="mainwindow.cpp" line="8991"/>
-        <location filename="mainwindow.cpp" line="8996"/>
+        <location filename="mainwindow.cpp" line="9001"/>
+        <location filename="mainwindow.cpp" line="9006"/>
         <source>Select date</source>
         <translation>选择日期</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9102"/>
-        <location filename="mainwindow.cpp" line="4765"/>
+        <location filename="mainwindow.cpp" line="4764"/>
         <source>AppleInput</source>
         <translation>AppleInput
 Apple输入</translation>
@@ -2973,7 +2973,7 @@ Note: This value should be disabled on most types of firmware but is left config
     </message>
     <message>
         <location filename="mainwindow.ui" line="9467"/>
-        <location filename="mainwindow.cpp" line="4766"/>
+        <location filename="mainwindow.cpp" line="4765"/>
         <source>Audio</source>
         <oldsource>Audio设置-Audio</oldsource>
         <translation>Audio
@@ -3026,7 +3026,7 @@ Note: This value should be disabled on most types of firmware but is left config
     </message>
     <message>
         <location filename="mainwindow.ui" line="9817"/>
-        <location filename="mainwindow.cpp" line="4767"/>
+        <location filename="mainwindow.cpp" line="4766"/>
         <source>Drivers</source>
         <oldsource>UEFI驱动-Drivers</oldsource>
         <translation>Drivers
@@ -3060,7 +3060,7 @@ Note: This value should be disabled on most types of firmware but is left config
     </message>
     <message>
         <location filename="mainwindow.ui" line="9948"/>
-        <location filename="mainwindow.cpp" line="4768"/>
+        <location filename="mainwindow.cpp" line="4767"/>
         <source>Input</source>
         <oldsource>键盘设置-Input</oldsource>
         <translation>Input
@@ -3244,7 +3244,7 @@ Note: This value should be disabled on most types of firmware but is left config
     </message>
     <message>
         <location filename="mainwindow.ui" line="10700"/>
-        <location filename="mainwindow.cpp" line="4770"/>
+        <location filename="mainwindow.cpp" line="4769"/>
         <source>ProtocolOverrides</source>
         <oldsource>协议覆盖-ProtocolOverrides</oldsource>
         <translation>ProtocolOverrides
@@ -3386,7 +3386,7 @@ Note: This value should be disabled on most types of firmware but is left config
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4684"/>
+        <location filename="mainwindow.cpp" line="4683"/>
         <source>Misc</source>
         <translation>Misc 杂项</translation>
     </message>
@@ -3662,13 +3662,13 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4685"/>
+        <location filename="mainwindow.cpp" line="4684"/>
         <source>UEFI</source>
         <translation>UEFI 固件接口</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="8885"/>
-        <location filename="mainwindow.cpp" line="4764"/>
+        <location filename="mainwindow.cpp" line="4763"/>
         <source>APFS</source>
         <translation>APFS
 文件系统</translation>
@@ -3707,7 +3707,7 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="mainwindow.ui" line="10183"/>
-        <location filename="mainwindow.cpp" line="4769"/>
+        <location filename="mainwindow.cpp" line="4768"/>
         <source>Output</source>
         <translation>Output
 输出</translation>
@@ -3766,7 +3766,7 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="mainwindow.ui" line="11566"/>
-        <location filename="mainwindow.cpp" line="4772"/>
+        <location filename="mainwindow.cpp" line="4771"/>
         <source>ReservedMemory</source>
         <oldsource>保留内存-ReservedMemory</oldsource>
         <translation>ReservedMemory
@@ -3846,7 +3846,7 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4777"/>
+        <location filename="mainwindow.cpp" line="4776"/>
         <source>Hardware Information</source>
         <translation>硬件信息</translation>
     </message>
@@ -3868,6 +3868,19 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="mainwindow.cpp" line="531"/>
+        <location filename="mainwindow.cpp" line="4091"/>
+        <location filename="mainwindow.cpp" line="4097"/>
+        <location filename="mainwindow.cpp" line="4102"/>
+        <location filename="mainwindow.cpp" line="4107"/>
+        <location filename="mainwindow.cpp" line="4112"/>
+        <location filename="mainwindow.cpp" line="4117"/>
+        <location filename="mainwindow.cpp" line="4122"/>
+        <location filename="mainwindow.cpp" line="4127"/>
+        <source>Export</source>
+        <translation>导出</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="532"/>
         <location filename="mainwindow.cpp" line="4092"/>
         <location filename="mainwindow.cpp" line="4098"/>
         <location filename="mainwindow.cpp" line="4103"/>
@@ -3876,19 +3889,6 @@ A continuously updated variable list can be found in a corresponding document: N
         <location filename="mainwindow.cpp" line="4118"/>
         <location filename="mainwindow.cpp" line="4123"/>
         <location filename="mainwindow.cpp" line="4128"/>
-        <source>Export</source>
-        <translation>导出</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="532"/>
-        <location filename="mainwindow.cpp" line="4093"/>
-        <location filename="mainwindow.cpp" line="4099"/>
-        <location filename="mainwindow.cpp" line="4104"/>
-        <location filename="mainwindow.cpp" line="4109"/>
-        <location filename="mainwindow.cpp" line="4114"/>
-        <location filename="mainwindow.cpp" line="4119"/>
-        <location filename="mainwindow.cpp" line="4124"/>
-        <location filename="mainwindow.cpp" line="4129"/>
         <source>Import</source>
         <translation>导入</translation>
     </message>
@@ -3948,79 +3948,79 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>重新保存</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="3489"/>
+        <location filename="mainwindow.cpp" line="3488"/>
         <source>Copy</source>
         <translation>拷贝</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="3491"/>
+        <location filename="mainwindow.cpp" line="3490"/>
         <source>Cut</source>
         <translation>剪切</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="3493"/>
+        <location filename="mainwindow.cpp" line="3492"/>
         <source>Paste</source>
         <translation>粘贴</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="3495"/>
+        <location filename="mainwindow.cpp" line="3494"/>
         <source>Select All</source>
         <translation>全选</translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="3540"/>
         <location filename="mainwindow.cpp" line="3541"/>
-        <location filename="mainwindow.cpp" line="3542"/>
         <source>true or false</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4760"/>
+        <location filename="mainwindow.cpp" line="4759"/>
         <source>SerialInfo</source>
         <translation>SerialInfo
 序列号信息</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8287"/>
+        <location filename="mainwindow.cpp" line="8297"/>
         <source>Auto Column Width</source>
         <translation>自动列宽度</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9929"/>
-        <location filename="mainwindow.cpp" line="9959"/>
+        <location filename="mainwindow.cpp" line="9940"/>
+        <location filename="mainwindow.cpp" line="9970"/>
         <source>This is not a valid Clover configuration file.</source>
         <translation>这不是一个有效的Clover配置文件。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9999"/>
+        <location filename="mainwindow.cpp" line="10010"/>
         <source>You cannot add a new key field to a page where a data table exists.</source>
         <translation>不能在存在数据表的页面上添加一个新的键字段。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="12116"/>
-        <location filename="mainwindow.cpp" line="8280"/>
+        <location filename="mainwindow.cpp" line="8290"/>
         <source>Add Item</source>
         <translation>增加条目</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="12124"/>
-        <location filename="mainwindow.cpp" line="8281"/>
+        <location filename="mainwindow.cpp" line="8291"/>
         <source>Delete Item</source>
         <translation>删除条目</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="12106"/>
-        <location filename="mainwindow.cpp" line="8282"/>
+        <location filename="mainwindow.cpp" line="8292"/>
         <source>Move Up</source>
         <translation>上移</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="12111"/>
-        <location filename="mainwindow.cpp" line="8283"/>
+        <location filename="mainwindow.cpp" line="8293"/>
         <source>Move Down</source>
         <translation>下移</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8285"/>
+        <location filename="mainwindow.cpp" line="8295"/>
         <source>Browse Database</source>
         <translation>浏览数据库</translation>
     </message>
@@ -4044,297 +4044,297 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>开发版数据库不存在，请在“升级OpenCore和Kexts”UI中在线更新它。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4037"/>
+        <location filename="mainwindow.cpp" line="4036"/>
         <source>Application</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4617"/>
+        <location filename="mainwindow.cpp" line="4616"/>
         <source>CpuName</source>
         <translation>CPU名称</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4618"/>
+        <location filename="mainwindow.cpp" line="4617"/>
         <source>CpuId</source>
         <translation>CPU ID</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4619"/>
+        <location filename="mainwindow.cpp" line="4618"/>
         <source>CpuCoresNum</source>
         <translation>CPU核心数量</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4621"/>
+        <location filename="mainwindow.cpp" line="4620"/>
         <source>CpuCpuLogicalProcessorsNum</source>
         <translation>CPU逻辑处理器数量</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4626"/>
+        <location filename="mainwindow.cpp" line="4625"/>
         <source>MainboardName</source>
         <translation>主板名称</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4628"/>
+        <location filename="mainwindow.cpp" line="4627"/>
         <source>BaseBordNum</source>
         <translation>主板序列号</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4630"/>
+        <location filename="mainwindow.cpp" line="4629"/>
         <source>MainboardUUID</source>
         <translation>主板UUID</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4632"/>
+        <location filename="mainwindow.cpp" line="4631"/>
         <source>BiosNum</source>
         <translation>BIOS序列号</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4633"/>
+        <location filename="mainwindow.cpp" line="4632"/>
         <source>MainboardVendor</source>
         <translation>主板供应商</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4638"/>
+        <location filename="mainwindow.cpp" line="4637"/>
         <source>DiskNum</source>
         <translation>磁盘序列号</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4642"/>
+        <location filename="mainwindow.cpp" line="4641"/>
         <source>Physical Memory</source>
         <translation>物理内存</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4648"/>
+        <location filename="mainwindow.cpp" line="4647"/>
         <source>CPU</source>
         <translation>CPU</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4929"/>
+        <location filename="mainwindow.cpp" line="4928"/>
         <source>ctrl+o</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4946"/>
+        <location filename="mainwindow.cpp" line="4945"/>
         <source>Recently Open</source>
         <translation>最近打开</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4974"/>
+        <location filename="mainwindow.cpp" line="4973"/>
         <source>ctrl+s</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4983"/>
+        <location filename="mainwindow.cpp" line="4982"/>
         <source>ctrl+shift+s</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5012"/>
+        <location filename="mainwindow.cpp" line="5011"/>
         <source>ctrl+m</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5049"/>
+        <location filename="mainwindow.cpp" line="5048"/>
         <source>Open backup directory</source>
         <translation>打开备份目录</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5304"/>
+        <location filename="mainwindow.cpp" line="5313"/>
         <source>ASCII</source>
         <translation></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="157"/>
-        <location filename="mainwindow.cpp" line="8993"/>
-        <location filename="mainwindow.cpp" line="8994"/>
+        <location filename="mainwindow.cpp" line="9003"/>
+        <location filename="mainwindow.cpp" line="9004"/>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5004"/>
+        <location filename="mainwindow.cpp" line="5003"/>
         <source>ctrl+l</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5080"/>
+        <location filename="mainwindow.cpp" line="5079"/>
         <source>ctrl+p</source>
         <oldsource>ctrl+h</oldsource>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5084"/>
+        <location filename="mainwindow.cpp" line="5083"/>
         <source>ctrl+u</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5029"/>
+        <location filename="mainwindow.cpp" line="5028"/>
         <source>ctrl+d</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4038"/>
+        <location filename="mainwindow.cpp" line="4037"/>
         <source>The document has been modified.</source>
         <translation>文件已修改。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4039"/>
+        <location filename="mainwindow.cpp" line="4038"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存？</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4044"/>
+        <location filename="mainwindow.cpp" line="4043"/>
         <source>Discard</source>
         <translation>不保存</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="4950"/>
+        <location filename="mainwindow.cpp" line="4949"/>
         <source>Open Recent...</source>
         <translation>最近打开...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5113"/>
+        <location filename="mainwindow.cpp" line="5112"/>
         <source>Command List</source>
         <translation>命令列表</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="3487"/>
-        <location filename="mainwindow.cpp" line="5117"/>
+        <location filename="mainwindow.cpp" line="3486"/>
+        <location filename="mainwindow.cpp" line="5116"/>
         <source>Undo</source>
         <oldsource>&amp;Undo</oldsource>
         <translation>撤消</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="3488"/>
-        <location filename="mainwindow.cpp" line="5121"/>
+        <location filename="mainwindow.cpp" line="3487"/>
+        <location filename="mainwindow.cpp" line="5120"/>
         <source>Redo</source>
         <oldsource>&amp;Redo</oldsource>
         <translation>恢复</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5225"/>
+        <location filename="mainwindow.cpp" line="5224"/>
         <source>Clear search history</source>
         <translation>清除搜索历史记录</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5294"/>
+        <location filename="mainwindow.cpp" line="5303"/>
         <source>ctrl+f</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5298"/>
+        <location filename="mainwindow.cpp" line="5307"/>
         <source>ctrl+3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5301"/>
+        <location filename="mainwindow.cpp" line="5310"/>
         <source>ctrl+4</source>
         <translation></translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="3525"/>
         <location filename="mainwindow.cpp" line="3526"/>
-        <location filename="mainwindow.cpp" line="3527"/>
-        <location filename="mainwindow.cpp" line="5475"/>
+        <location filename="mainwindow.cpp" line="5485"/>
         <source>Integer</source>
         <translation>整数</translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="3533"/>
         <location filename="mainwindow.cpp" line="3534"/>
-        <location filename="mainwindow.cpp" line="3535"/>
-        <location filename="mainwindow.cpp" line="5303"/>
-        <location filename="mainwindow.cpp" line="5481"/>
+        <location filename="mainwindow.cpp" line="5312"/>
+        <location filename="mainwindow.cpp" line="5491"/>
         <source>Hexadecimal</source>
         <translation>十六进制</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5505"/>
-        <location filename="mainwindow.cpp" line="5514"/>
-        <location filename="mainwindow.cpp" line="5522"/>
-        <location filename="mainwindow.cpp" line="5561"/>
-        <location filename="mainwindow.cpp" line="5570"/>
-        <location filename="mainwindow.cpp" line="5578"/>
-        <location filename="mainwindow.cpp" line="5623"/>
-        <location filename="mainwindow.cpp" line="8259"/>
+        <location filename="mainwindow.cpp" line="5515"/>
+        <location filename="mainwindow.cpp" line="5524"/>
+        <location filename="mainwindow.cpp" line="5532"/>
+        <location filename="mainwindow.cpp" line="5571"/>
+        <location filename="mainwindow.cpp" line="5580"/>
+        <location filename="mainwindow.cpp" line="5588"/>
+        <location filename="mainwindow.cpp" line="5633"/>
+        <location filename="mainwindow.cpp" line="8269"/>
         <source>CopyText</source>
         <translation>复制文本</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5506"/>
-        <location filename="mainwindow.cpp" line="5562"/>
-        <location filename="mainwindow.cpp" line="8279"/>
+        <location filename="mainwindow.cpp" line="5516"/>
+        <location filename="mainwindow.cpp" line="5572"/>
+        <location filename="mainwindow.cpp" line="8289"/>
         <source>Show Tips</source>
         <translation>显示提示</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5917"/>
+        <location filename="mainwindow.cpp" line="5927"/>
         <source>Network error!</source>
         <translation>网络错误！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5945"/>
+        <location filename="mainwindow.cpp" line="5955"/>
         <source>New version detected!</source>
         <translation>检测到新版本！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5946"/>
+        <location filename="mainwindow.cpp" line="5956"/>
         <source>Version: </source>
         <translation>版本：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5947"/>
+        <location filename="mainwindow.cpp" line="5957"/>
         <source>Published at: </source>
         <translation>更新时间：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5948"/>
+        <location filename="mainwindow.cpp" line="5958"/>
         <source>Release Notes: </source>
         <translation>更新说明：</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5954"/>
-        <location filename="mainwindow.cpp" line="5961"/>
+        <location filename="mainwindow.cpp" line="5964"/>
+        <location filename="mainwindow.cpp" line="5971"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5952"/>
+        <location filename="mainwindow.cpp" line="5962"/>
         <source>There is a new version</source>
         <translation>有新版本</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8276"/>
+        <location filename="mainwindow.cpp" line="8286"/>
         <source>Cut Line</source>
         <translation>剪切行</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8277"/>
+        <location filename="mainwindow.cpp" line="8287"/>
         <source>Copy Line</source>
         <translation>复制行</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="8278"/>
+        <location filename="mainwindow.cpp" line="8288"/>
         <source>Paste Line</source>
         <translation>粘贴行</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1719"/>
-        <location filename="mainwindow.cpp" line="4043"/>
-        <location filename="mainwindow.cpp" line="5955"/>
-        <location filename="mainwindow.cpp" line="5962"/>
+        <location filename="mainwindow.cpp" line="4042"/>
+        <location filename="mainwindow.cpp" line="5965"/>
+        <location filename="mainwindow.cpp" line="5972"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9096"/>
+        <location filename="mainwindow.cpp" line="9106"/>
         <source>OK !</source>
         <translation>验证通过！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9122"/>
+        <location filename="mainwindow.cpp" line="9132"/>
         <source>There is a issue with the configuration file.</source>
         <translation>配置文件有问题</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="5972"/>
+        <location filename="mainwindow.cpp" line="5982"/>
         <source>You are currently using the latest version!</source>
         <oldsource>It is currently the latest version!</oldsource>
         <translation>您目前使用的是最新版本！</translation>
@@ -4355,7 +4355,7 @@ A continuously updated variable list can be found in a corresponding document: N
     <message>
         <location filename="Method.cpp" line="89"/>
         <location filename="Method.cpp" line="674"/>
-        <location filename="Method.cpp" line="719"/>
+        <location filename="Method.cpp" line="722"/>
         <source>Network or URL error!</source>
         <oldsource>Network error!</oldsource>
         <translation>网络或网址错误！</translation>
@@ -4388,62 +4388,62 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>注意：这个版本或更新源不包含Linux的相关文件。这将影响APP在Linux下的使用。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="787"/>
+        <location filename="Method.cpp" line="793"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="803"/>
+        <location filename="Method.cpp" line="809"/>
         <source>None</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1246"/>
+        <location filename="Method.cpp" line="1252"/>
         <source>From</source>
         <translation>来自</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1249"/>
         <location filename="Method.cpp" line="1255"/>
+        <location filename="Method.cpp" line="1261"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1251"/>
+        <location filename="Method.cpp" line="1257"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1273"/>
+        <location filename="Method.cpp" line="1279"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1274"/>
-        <location filename="Method.cpp" line="1336"/>
+        <location filename="Method.cpp" line="1280"/>
+        <location filename="Method.cpp" line="1342"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1335"/>
+        <location filename="Method.cpp" line="1341"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1735"/>
+        <location filename="Method.cpp" line="1741"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1740"/>
+        <location filename="Method.cpp" line="1746"/>
         <source>Cannot open file %1 for writing:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1897"/>
+        <location filename="Method.cpp" line="1903"/>
         <source>The EFI directory is incomplete and the backup cannot be completed. Please check if the [EFI/OC] and [EFI/OC/Drivers] directories exist?</source>
         <translation>EFI目录不完整，无法完成备份。请检查“EFI/OC”和“EFI/OC/Drivers”目录是否存在？</translation>
     </message>
@@ -4451,55 +4451,55 @@ A continuously updated variable list can be found in a corresponding document: N
 <context>
     <name>QInstaller</name>
     <message>
-        <location filename="Method.cpp" line="1573"/>
+        <location filename="Method.cpp" line="1579"/>
         <location filename="autoupdatedialog.cpp" line="322"/>
         <source>bytes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1574"/>
+        <location filename="Method.cpp" line="1580"/>
         <location filename="autoupdatedialog.cpp" line="323"/>
         <source>KiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1575"/>
+        <location filename="Method.cpp" line="1581"/>
         <location filename="autoupdatedialog.cpp" line="324"/>
         <source>MiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1576"/>
+        <location filename="Method.cpp" line="1582"/>
         <location filename="autoupdatedialog.cpp" line="325"/>
         <source>GiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1577"/>
+        <location filename="Method.cpp" line="1583"/>
         <location filename="autoupdatedialog.cpp" line="326"/>
         <source>TiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1578"/>
+        <location filename="Method.cpp" line="1584"/>
         <location filename="autoupdatedialog.cpp" line="327"/>
         <source>PiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1579"/>
+        <location filename="Method.cpp" line="1585"/>
         <location filename="autoupdatedialog.cpp" line="328"/>
         <source>EiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1580"/>
+        <location filename="Method.cpp" line="1586"/>
         <location filename="autoupdatedialog.cpp" line="329"/>
         <source>ZiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1581"/>
+        <location filename="Method.cpp" line="1587"/>
         <location filename="autoupdatedialog.cpp" line="330"/>
         <source>YiB</source>
         <translation></translation>
@@ -4545,8 +4545,8 @@ A continuously updated variable list can be found in a corresponding document: N
     <name>SyncOCDialog</name>
     <message>
         <location filename="syncocdialog.ui" line="14"/>
-        <location filename="syncocdialog.cpp" line="769"/>
-        <location filename="syncocdialog.cpp" line="772"/>
+        <location filename="syncocdialog.cpp" line="771"/>
+        <location filename="syncocdialog.cpp" line="774"/>
         <source>Sync OC</source>
         <translation>同步OC</translation>
     </message>
@@ -4616,33 +4616,43 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="323"/>
+        <location filename="syncocdialog.ui" line="342"/>
         <source>OpenCore development version update source</source>
         <translation>OpenCore开发版的更新源</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="334"/>
+        <location filename="syncocdialog.ui" line="355"/>
         <source>https://github.com/dortania/build-repo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="339"/>
+        <location filename="syncocdialog.ui" line="360"/>
         <source>https://github.com/bugprogrammer/HackinPlugins</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="356"/>
+        <location filename="syncocdialog.ui" line="373"/>
+        <source>Import a local OpenCore Development Edition Zip file.</source>
+        <translation>导入本地OpenCore开发版Zip文件</translation>
+    </message>
+    <message>
+        <location filename="syncocdialog.ui" line="376"/>
+        <source>Import</source>
+        <translation>导入</translation>
+    </message>
+    <message>
+        <location filename="syncocdialog.ui" line="387"/>
         <source>Choose OpenCore Version</source>
         <oldsource>OpenCore Versions</oldsource>
         <translation>选择OpenCore 版本</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="368"/>
+        <location filename="syncocdialog.ui" line="399"/>
         <source>Get OpenCore</source>
         <translation>获取 OpenCore</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="384"/>
+        <location filename="syncocdialog.ui" line="418"/>
         <source>ShowInfo</source>
         <translation></translation>
     </message>
@@ -4657,7 +4667,7 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>当前版本</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="375"/>
+        <location filename="syncocdialog.ui" line="409"/>
         <source>Start Sync</source>
         <translation>开始同步</translation>
     </message>
@@ -4684,13 +4694,13 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="305"/>
-        <location filename="syncocdialog.cpp" line="818"/>
+        <location filename="syncocdialog.cpp" line="820"/>
         <source>Current File: </source>
         <translation>当前文件：</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="307"/>
-        <location filename="syncocdialog.cpp" line="820"/>
+        <location filename="syncocdialog.cpp" line="822"/>
         <source>Available File: </source>
         <translation>可用文件：</translation>
     </message>
@@ -4700,26 +4710,26 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>OpenCore数据库升级正在进行中，请等待它结束。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="827"/>
+        <location filename="syncocdialog.cpp" line="829"/>
         <source>Kexts update check is in progress, please wait for it to complete.</source>
         <translation>Kexts更新检查正在进行中，请等待它完成。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="842"/>
+        <location filename="syncocdialog.cpp" line="844"/>
         <source>Please enter an available OpenCore development version update source.</source>
         <translation>请输入一个可用的OpenCore开发版更新源。</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="325"/>
-        <location filename="syncocdialog.cpp" line="911"/>
+        <location filename="syncocdialog.cpp" line="913"/>
         <source> Source </source>
         <translation>来源</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="66"/>
-        <location filename="syncocdialog.cpp" line="592"/>
-        <location filename="syncocdialog.cpp" line="880"/>
-        <location filename="syncocdialog.cpp" line="897"/>
+        <location filename="syncocdialog.cpp" line="594"/>
+        <location filename="syncocdialog.cpp" line="882"/>
+        <location filename="syncocdialog.cpp" line="899"/>
         <source>Latest Version</source>
         <translation>最新版</translation>
     </message>
@@ -5303,50 +5313,55 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="dlgpreference.ui" line="75"/>
-        <location filename="dlgpreference.ui" line="108"/>
+        <location filename="dlgpreference.ui" line="138"/>
         <source>https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="113"/>
+        <location filename="dlgpreference.ui" line="80"/>
         <source>https://download.fastgit.org/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="118"/>
+        <location filename="dlgpreference.ui" line="85"/>
         <source>https://ghproxy.com/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="123"/>
+        <location filename="dlgpreference.ui" line="90"/>
         <source>https://gh.api.99988866.xyz/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="128"/>
+        <location filename="dlgpreference.ui" line="95"/>
         <source>https://gh.msx.workers.dev/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="133"/>
+        <location filename="dlgpreference.ui" line="100"/>
         <source>https://gh.xiu2.xyz/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="138"/>
+        <location filename="dlgpreference.ui" line="105"/>
         <source>https://git.yumenaka.net/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="143"/>
+        <location filename="dlgpreference.ui" line="110"/>
         <source>https://pd.zwc365.com/seturl/https://github.com/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="88"/>
+        <location filename="dlgpreference.ui" line="118"/>
         <location filename="dlgpreference.ui" line="151"/>
         <source>Testing</source>
         <translation>测试</translation>
+    </message>
+    <message>
+        <location filename="dlgpreference.ui" line="361"/>
+        <source>Find</source>
+        <translation>查找</translation>
     </message>
     <message>
         <location filename="dlgpreference.ui" line="39"/>
@@ -5369,17 +5384,17 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>智能适应OpenCore的升级</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="65"/>
+        <location filename="dlgpreference.ui" line="128"/>
         <source>Select the mirror server for web access</source>
         <translation>选择网页访问的镜像服务器</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="98"/>
+        <location filename="dlgpreference.ui" line="65"/>
         <source>Select the mirror server for upgrade download</source>
         <translation>选择升级下载的镜像服务器</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="80"/>
+        <location filename="dlgpreference.ui" line="143"/>
         <source>https://hub.fastgit.org/</source>
         <translation></translation>
     </message>
@@ -5444,17 +5459,17 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>Kext升级网址</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="279"/>
+        <location filename="dlgpreference.ui" line="354"/>
         <source>Download Kexts to the user database</source>
         <translation>下载所有的Kext到用户数据库</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="293"/>
+        <location filename="dlgpreference.ui" line="279"/>
         <source>+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="303"/>
+        <location filename="dlgpreference.ui" line="296"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -5463,12 +5478,12 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="334"/>
+        <location filename="dlgpreference.ui" line="327"/>
         <source>Kext Name</source>
         <translation>Kext名称</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="339"/>
+        <location filename="dlgpreference.ui" line="332"/>
         <source>Source URL</source>
         <translation>网址</translation>
     </message>
@@ -5478,12 +5493,12 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="354"/>
+        <location filename="dlgpreference.ui" line="286"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="286"/>
+        <location filename="dlgpreference.ui" line="340"/>
         <source>Open URL in browser</source>
         <translation>打开网址</translation>
     </message>

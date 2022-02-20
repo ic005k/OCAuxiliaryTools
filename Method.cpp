@@ -379,12 +379,38 @@ void Method::doProcessReadyRead() {
   }
 }
 
-void Method::doProcessFinished() {
-  if (!blCanBeUpdate) return;
-  if (replyDL->error() == QNetworkReply::NoError) {
-    myfile->flush();
-    myfile->close();
-    if (QFile(tempDir + filename).exists()) {
+void Method::unZip(QString zipfile) {
+  filename = zipfile;
+  if (mw_one->win) {
+    QProcess::execute(strAppExePath + "/unzip.exe",
+                      QStringList()
+                          << "-o" << tempDir + filename << "-d" << tempDir);
+  } else
+    QProcess::execute("unzip", QStringList() << "-o" << tempDir + filename
+                                             << "-d" << tempDir);
+  if (mw_one->dlgSyncOC->isCheckOC) {
+    QString strSEFI = tempDir + "X64/EFI/";
+    if (!QDir(strSEFI).exists() && blDEV) {
+      QStringList files = DirToFileList(tempDir, "*.zip");
+      qDebug() << files;
+      for (int i = 0; i < files.count(); i++) {
+        if (!files.at(i).contains("OpenCore")) {
+          files.removeAt(i);
+          i--;
+        }
+      }
+      qDebug() << "OpenCore Files:" << files;
+
+      if (mw_one->ui->actionDEBUG->isChecked()) {
+        for (int i = 0; i < files.count(); i++) {
+          if (files.at(i).contains("DEBUG")) filename = files.at(i);
+        }
+      } else {
+        for (int i = 0; i < files.count(); i++) {
+          if (files.at(i).contains("RELEASE")) filename = files.at(i);
+        }
+      }
+
       if (mw_one->win) {
         QProcess::execute(strAppExePath + "/unzip.exe",
                           QStringList()
@@ -392,40 +418,18 @@ void Method::doProcessFinished() {
       } else
         QProcess::execute("unzip", QStringList() << "-o" << tempDir + filename
                                                  << "-d" << tempDir);
-      if (mw_one->dlgSyncOC->isCheckOC) {
-        QString strSEFI = tempDir + "X64/EFI/";
-        if (!QDir(strSEFI).exists() && blDEV) {
-          QStringList files = DirToFileList(tempDir, "*.zip");
-          qDebug() << files;
-          for (int i = 0; i < files.count(); i++) {
-            if (!files.at(i).contains("OpenCore")) {
-              files.removeAt(i);
-              i--;
-            }
-          }
-          qDebug() << "OpenCore Files:" << files;
+    }
+    updateOpenCore();
+  }
+}
 
-          if (mw_one->ui->actionDEBUG->isChecked()) {
-            for (int i = 0; i < files.count(); i++) {
-              if (files.at(i).contains("DEBUG")) filename = files.at(i);
-            }
-          } else {
-            for (int i = 0; i < files.count(); i++) {
-              if (files.at(i).contains("RELEASE")) filename = files.at(i);
-            }
-          }
-
-          if (mw_one->win) {
-            QProcess::execute(
-                strAppExePath + "/unzip.exe",
-                QStringList() << "-o" << tempDir + filename << "-d" << tempDir);
-          } else
-            QProcess::execute("unzip", QStringList()
-                                           << "-o" << tempDir + filename << "-d"
-                                           << tempDir);
-        }
-        updateOpenCore();
-      }
+void Method::doProcessFinished() {
+  if (!blCanBeUpdate) return;
+  if (replyDL->error() == QNetworkReply::NoError) {
+    myfile->flush();
+    myfile->close();
+    if (QFile(tempDir + filename).exists()) {
+      unZip(filename);
     }
     dlEnd = true;
   } else {

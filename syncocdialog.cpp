@@ -546,6 +546,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
 
     ui->lblDevSource->setHidden(false);
     ui->editOCDevSource->setHidden(false);
+    ui->btnImport->setHidden(false);
   } else {
     ui->lblOCVersions->setHidden(false);
     ui->comboOCVersions->setHidden(false);
@@ -553,6 +554,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
 
     ui->lblDevSource->setHidden(true);
     ui->editOCDevSource->setHidden(true);
+    ui->btnImport->setHidden(true);
 
     QString strDev = ocVerDev;
     if (strDev.contains(" ")) strDev = strDev.split(" ").at(0);
@@ -867,8 +869,9 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
       "border-radius:0px;"
       "background-color:rgba(25,255,0,100);"
       "}");
-  progBar->setGeometry(ui->btnUpdateOC->x(), ui->btnUpdateOC->y(),
-                       ui->btnUpdateOC->width(), ui->btnUpdateOC->height());
+
+  progBar->setGeometry(ui->frame->x(), ui->frame->y(), ui->frame->width(),
+                       ui->frame->height());
   progBar->show();
 
   if (blDEV) {
@@ -910,4 +913,21 @@ void SyncOCDialog::on_comboOCVersions_currentTextChanged(const QString& arg1) {
   }
   ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
   ui->lblOCFrom->setText(ocFrom);
+}
+
+void SyncOCDialog::on_btnImport_clicked() {
+  QFileDialog fd;
+  QString FileName =
+      fd.getOpenFileName(this, "file", "", "zip file(*.zip);;all(*.*)");
+  if (QFile(FileName).exists()) {
+    QString path = QDir::homePath() + "/tempocat/";
+    mw_one->deleteDirfile(path);
+    QDir dir;
+    dir.mkpath(path);
+    QFileInfo fi(FileName);
+    QString tar = path + fi.fileName();
+    mw_one->copyFileToPath(FileName, tar, true);
+    isCheckOC = true;
+    mymethod->unZip(fi.fileName());
+  }
 }

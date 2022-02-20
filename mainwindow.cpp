@@ -2651,7 +2651,6 @@ void MainWindow::on_btnDPDel_Del_clicked() {
 
 void MainWindow::on_btnACPIAdd_Add_clicked() {
   QFileDialog fd;
-
   QStringList FileName =
       fd.getOpenFileNames(this, "file", "", "acpi file(*.aml);;all(*.*)");
 
