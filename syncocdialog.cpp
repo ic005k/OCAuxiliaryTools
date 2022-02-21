@@ -619,7 +619,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
   if (DirName.isEmpty()) return;
 
   QString pathOldSource;
-  pathOldSource = QDir::homePath() + "/Database/";
+  pathOldSource = QDir::homePath() + "/.ocat/Database/";
 
   QString file1, file2, file3, file4;
   QString targetFile1, targetFile2, targetFile3, targetFile4;

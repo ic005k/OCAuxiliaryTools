@@ -27,20 +27,25 @@ int main(int argc, char *argv[]) {
 #endif
   loadLocal();
 
+  QDir dir;
+  dir.mkpath(QDir::homePath() + "/.ocat/");
   QString strAppExePath = qApp->applicationDirPath();
   mw_one->copyDirectoryFiles(strAppExePath + "/Database/",
-                             QDir::homePath() + "/Database/", false);
-  QDir dir;
+                             QDir::homePath() + "/.ocat/Database/", false);
+
   QString strDrivers0 = strAppExePath + "/Database/EFI/OC/Drivers/";
   QString strTools0 = strAppExePath + "/Database/EFI/OC/Tools/";
-  QString strDrivers1 = QDir::homePath() + "/Database/EFI/OC/Drivers/";
-  QString strTools1 = QDir::homePath() + "/Database/EFI/OC/Tools/";
-  QString strDrivers2 = QDir::homePath() + "/devDatabase/EFI/OC/Drivers/";
-  QString strTools2 = QDir::homePath() + "/devDatabase/EFI/OC/Tools/";
-  QString strDrivers3 = QDir::homePath() + "/Database/DEBUG/EFI/OC/Drivers/";
-  QString strTools3 = QDir::homePath() + "/Database/DEBUG/EFI/OC/Tools/";
-  QString strDrivers4 = QDir::homePath() + "/devDatabase/DEBUG/EFI/OC/Drivers/";
-  QString strTools4 = QDir::homePath() + "/devDatabase/DEBUG/EFI/OC/Tools/";
+  QString strDrivers1 = QDir::homePath() + "/.ocat/Database/EFI/OC/Drivers/";
+  QString strTools1 = QDir::homePath() + "/.ocat/Database/EFI/OC/Tools/";
+  QString strDrivers2 = QDir::homePath() + "/.ocat/devDatabase/EFI/OC/Drivers/";
+  QString strTools2 = QDir::homePath() + "/.ocat/devDatabase/EFI/OC/Tools/";
+  QString strDrivers3 =
+      QDir::homePath() + "/.ocat/Database/DEBUG/EFI/OC/Drivers/";
+  QString strTools3 = QDir::homePath() + "/.ocat/Database/DEBUG/EFI/OC/Tools/";
+  QString strDrivers4 =
+      QDir::homePath() + "/.ocat/devDatabase/DEBUG/EFI/OC/Drivers/";
+  QString strTools4 =
+      QDir::homePath() + "/.ocat/devDatabase/DEBUG/EFI/OC/Tools/";
 
   dir.mkpath(strDrivers1);
   dir.mkpath(strDrivers2);
@@ -78,10 +83,10 @@ int main(int argc, char *argv[]) {
 
   // ACPI Files
   QString strACPI0 = strAppExePath + "/Database/EFI/OC/ACPI/";
-  QString strACPI1 = QDir::homePath() + "/Database/EFI/OC/ACPI/";
-  QString strACPI2 = QDir::homePath() + "/devDatabase/EFI/OC/ACPI/";
-  QString strACPI3 = QDir::homePath() + "/Database/DEBUG/EFI/OC/ACPI/";
-  QString strACPI4 = QDir::homePath() + "/devDatabase/DEBUG/EFI/OC/ACPI/";
+  QString strACPI1 = QDir::homePath() + "/.ocat/Database/EFI/OC/ACPI/";
+  QString strACPI2 = QDir::homePath() + "/.ocat/devDatabase/EFI/OC/ACPI/";
+  QString strACPI3 = QDir::homePath() + "/.ocat/Database/DEBUG/EFI/OC/ACPI/";
+  QString strACPI4 = QDir::homePath() + "/.ocat/devDatabase/DEBUG/EFI/OC/ACPI/";
   dir.mkpath(strACPI1);
   dir.mkpath(strACPI2);
   dir.mkpath(strACPI3);
@@ -99,7 +104,7 @@ int main(int argc, char *argv[]) {
   }
 
   QString fileSample =
-      QDir::homePath() + "/Database/BaseConfigs/SampleCustom.plist";
+      QDir::homePath() + "/.ocat/Database/BaseConfigs/SampleCustom.plist";
   if (!QFile(fileSample).exists()) {
     QMessageBox::critical(
         NULL, "",

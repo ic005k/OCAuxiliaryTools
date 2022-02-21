@@ -42,7 +42,7 @@ extern QStringList boolTypeList, intTypeList, dataTypeList, listKey, listType,
 void MainWindow::changeOpenCore(bool blDEV) {
   if (!blDEV) {
     dataBaseDir = strAppExePath + "/Database/";
-    userDataBaseDir = QDir::homePath() + "/Database/";
+    userDataBaseDir = QDir::homePath() + "/.ocat/Database/";
     if (!ui->actionDEBUG->isChecked()) {
       pathSource = userDataBaseDir;
       ocVer = ocVer.replace(" " + tr("DEBUG"), "");
@@ -71,7 +71,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
 
   } else {  // blDEV
     dataBaseDir = strAppExePath + "/Database/";
-    userDataBaseDir = QDir::homePath() + "/devDatabase/";
+    userDataBaseDir = QDir::homePath() + "/.ocat/devDatabase/";
     if (!QFile(userDataBaseDir + "EFI/OC/OpenCore.efi").exists()) {
       QMessageBox::critical(
           this, "",
@@ -5263,11 +5263,11 @@ void MainWindow::init_MainUI() {
   ui->actionDEBUG->setChecked(Reg.value("DEBUG", 0).toBool());
   if (ui->actionDEBUG->isChecked()) {
     if (!blDEV) {
-      if (!QFile(QDir::homePath() + "/Database/DEBUG/EFI/OC/OpenCore.efi")
+      if (!QFile(QDir::homePath() + "/.ocat/Database/DEBUG/EFI/OC/OpenCore.efi")
                .exists())
         ui->actionDEBUG->setChecked(false);
     } else if (!QFile(QDir::homePath() +
-                      "/devDatabase/DEBUG/EFI/OC/OpenCore.efi")
+                      "/.ocat/devDatabase/DEBUG/EFI/OC/OpenCore.efi")
                     .exists())
       ui->actionDEBUG->setChecked(false);
   }
@@ -5381,14 +5381,16 @@ void MainWindow::init_Widgets() {
 
   QSettings Reg(strIniFile, QSettings::IniFormat);
   blDEV = Reg.value("OpenCoreDEV", false).toBool();
-  if (!QFile(QDir::homePath() + "/devDatabase/EFI/OC/OpenCore.efi").exists()) {
+  if (!QFile(QDir::homePath() + "/.ocat/devDatabase/EFI/OC/OpenCore.efi")
+           .exists()) {
     blDEV = false;
   }
 
   QString fileSample, fileSampleDev;
-  fileSample = QDir::homePath() + "/Database/BaseConfigs/SampleCustom.plist";
+  fileSample =
+      QDir::homePath() + "/.ocat/Database/BaseConfigs/SampleCustom.plist";
   fileSampleDev =
-      QDir::homePath() + "/devDatabase/BaseConfigs/SampleCustom.plist";
+      QDir::homePath() + "/.ocat/devDatabase/BaseConfigs/SampleCustom.plist";
   QFile file(fileSample);
   QFile fileDev(fileSampleDev);
   if (blDEV) {
@@ -9997,7 +9999,7 @@ void MainWindow::on_actionInitDatabaseLinux_triggered() {
   // Init Linux Database
   if (linuxOS) {
     copyDirectoryFiles(strAppExePath + "/Database/",
-                       QDir::homePath() + "/Database/", true);
+                       QDir::homePath() + "/.ocat/Database/", true);
   }
 }
 

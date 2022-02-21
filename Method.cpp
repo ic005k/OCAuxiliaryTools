@@ -166,16 +166,18 @@ void Method::finishKextUpdate(bool blDatabase) {
       QString dirSource, dirTargetDatabase;
       dirSource = kextList.at(i);
       QString Name = getFileName(dirSource);
-      dirTargetDatabase = QDir::homePath() + "/Database/EFI/OC/Kexts/" + Name;
+      dirTargetDatabase =
+          QDir::homePath() + "/.ocat/Database/EFI/OC/Kexts/" + Name;
       mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
     }
   } else {
     QStringList list;
-    list =
-        DirToFileList(QDir::homePath() + "/Database/EFI/OC/Kexts/", "*.kext");
+    list = DirToFileList(QDir::homePath() + "/.ocat/Database/EFI/OC/Kexts/",
+                         "*.kext");
     for (int i = 0; i < list.count(); i++) {
       QString dirSource, dirTarget;
-      dirSource = QDir::homePath() + "/Database/EFI/OC/Kexts/" + list.at(i);
+      dirSource =
+          QDir::homePath() + "/.ocat/Database/EFI/OC/Kexts/" + list.at(i);
       QString Name = getFileName(dirSource);
       dirTarget = strKexts + Name;
 
@@ -448,11 +450,6 @@ void Method::doProcessFinished() {
 void Method::updateOpenCore() {
   if (mw_one->dlgSyncOC->isCheckOC) {
     QList<bool> Results;
-    QString appPathBak = strAppExePath;
-    if (mw_one->linuxOS)
-      strAppExePath = QDir::homePath();
-    else
-      strAppExePath = appPathBak;
 
     QDir dir;
     dir.mkpath(mw_one->userDataBaseDir);
@@ -1206,7 +1203,7 @@ void Method::generateEFI(QString file) {
   QDir dir;
   QString strDatabase;
 
-  QString str = QDir::homePath() + "/Database/";
+  QString str = QDir::homePath() + "/.ocat/Database/";
   QString pathSource;
   if (!mw_one->ui->actionDEBUG->isChecked())
     pathSource = mw_one->userDataBaseDir;
@@ -1700,8 +1697,8 @@ void Method::kextPreset() {
   mw_one->dlgPresetValues->blNVLegacy = false;
   mw_one->dlgPresetValues->blNVAdd = false;
 
-  mw_one->dlgPresetValues->listKextPreset =
-      DirToFileList(QDir::homePath() + "/Database/EFI/OC/Kexts/", "*.kext");
+  mw_one->dlgPresetValues->listKextPreset = DirToFileList(
+      QDir::homePath() + "/.ocat/Database/EFI/OC/Kexts/", "*.kext");
   mw_one->dlgPresetValues->ui->listPreset->clear();
   mw_one->dlgPresetValues->ui->listPreset->addItems(
       mw_one->dlgPresetValues->listKextPreset);
