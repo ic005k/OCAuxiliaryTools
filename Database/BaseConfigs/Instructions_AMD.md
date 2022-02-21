@@ -19,7 +19,13 @@ After the base EFI has been generated, `config.plist` must be modified according
 
 Important section are **Kernel > Patch** and **Booter > MMIOWhitelist**
 
-**X370_generic.plist** is configured by default for a 8 cores cpu, if you have an Amd Ryzen with 8 cores you can leave **Kernel > Patch** config.plist section unchanged.
+**AMD-X370_generic.plist** is configured by default for a 8 cores cpu, if you have an Amd Ryzen with 8 cores you can leave **Kernel > Patch** config.plist section unchanged.
+If you own an Amd Ryzen with different core number you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the presets adding correct plist for your core number in **Kernel > Patch**
+
+**AMD-B450M_generic.plist** is configured by default for a 8 cores cpu, if you have an Amd Ryzen with 8 cores you can leave **Kernel > Patch** config.plist section unchanged.
+If you own an Amd Ryzen with different core number you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the presets adding correct plist for your core number in **Kernel > Patch**
+
+**AMD-B550_generic.plist** is configured by default for a 12 cores cpu, if you have an Amd Ryzen with 8 cores you can leave **Kernel > Patch** config.plist section unchanged.
 If you own an Amd Ryzen with different core number you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the presets adding correct plist for your core number in **Kernel > Patch**
 
 **X570_generic.plist** is configured by default for a 16 cores cpu, if you have an Amd Ryzen with 16 cores you can leave **Kernel > Patch** config.plist section unchanged.
@@ -32,7 +38,7 @@ The creation of a valid MMIO Whitelist is certainly the most important part for 
 Complete information for **How to** create a proper `MMIO Whitelist` is available at the following link:
 https://www.macos86.it/topic/3307-discussion-trx40-bare-metal-vanilla-patches/?do=findComment&comment=85469
 
-#### 4. sTrx40 `adviced SMBIOS` and basic config.plist options
+#### 4. sTrx4 `adviced SMBIOS` and basic config.plist options
 
 - iMacPro1.1
 - MacPro7.1
@@ -53,7 +59,7 @@ Save the EFI folder (put it on a FAT32 formatted USB flash drive and try booting
 
 #### Additional
 
-#### Mandatory AMD_Ryzen-specific settings `(NOT for sTRX40 Users)`: _mtrr_update_action fix PAT
+#### Mandatory AMD_Ryzen-specific settings `(NOT for sTRX4 Users)`: _mtrr_update_action fix PAT
 In config.plist, search for `algrey - _mtrr_update_action fix PAT - 10.13/10.14/10.15/11.0/12.0` or for `Shaneee - _mtrr_update_action fix PAT - 10.13/10.14/10.15/11.0/12.0`
 
 **Only one of these should be enabled.**
