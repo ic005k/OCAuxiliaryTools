@@ -375,7 +375,8 @@ class MainWindow : public QMainWindow {
   void init_AutoColumnWidth();
   static QObjectList getAllFrame(QObjectList lstUIControls);
   void init_Table(int index);
- public slots:
+  void init_FindResults();
+public slots:
   void DisplayLevel();
   void ScanPolicy();
   void PickerAttributes();

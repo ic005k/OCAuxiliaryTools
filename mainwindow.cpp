@@ -40,6 +40,7 @@ extern QStringList boolTypeList, intTypeList, dataTypeList, listKey, listType,
 ;
 
 void MainWindow::changeOpenCore(bool blDEV) {
+  init_FindResults();
   if (!blDEV) {
     dataBaseDir = strAppExePath + "/Database/";
     userDataBaseDir = QDir::homePath() + "/.ocat/Database/";
@@ -6938,7 +6939,6 @@ void MainWindow::on_actionFind_triggered() {
 
   if (!FindTextChange) {
     on_actionGo_to_the_next_triggered();
-
     return;
   }
 
@@ -6957,18 +6957,7 @@ void MainWindow::on_actionFind_triggered() {
   loading = false;
   indexOfResults = -1;
 
-  clearCheckBoxMarker();
-  clearComboBoxMarker();
-  clearLabelMarker();
-  clearLineEditMarker();
-  clearTableHeaderMarker();
-
-  listOfCheckBoxResults.clear();
-  listOfLabelResults.clear();
-  listOfLineEditResults.clear();
-  listOfComboBoxResults.clear();
-  listOfTableWidgetResults.clear();
-  listOfTableWidgetHeaderResults.clear();
+  init_FindResults();
 
   findCheckBox(findText);
 
@@ -7033,6 +7022,21 @@ void MainWindow::on_actionFind_triggered() {
   find = false;
 
   ui->mycboxFind->lineEdit()->selectAll();
+}
+
+void MainWindow::init_FindResults() {
+  clearCheckBoxMarker();
+  clearComboBoxMarker();
+  clearLabelMarker();
+  clearLineEditMarker();
+  clearTableHeaderMarker();
+
+  listOfCheckBoxResults.clear();
+  listOfLabelResults.clear();
+  listOfLineEditResults.clear();
+  listOfComboBoxResults.clear();
+  listOfTableWidgetResults.clear();
+  listOfTableWidgetHeaderResults.clear();
 }
 
 void MainWindow::setPalette(QWidget* w, QColor backColor, QColor textColor) {
@@ -7114,8 +7118,8 @@ void MainWindow::on_actionGo_to_the_previous_triggered() {
 
 void MainWindow::on_actionGo_to_the_next_triggered() {
   if (listNameResults.count() == 0) return;
-
   int row = ui->listFind->currentRow();
+  if (row < 0) return;
   row = row + 1;
   if (row == ui->listFind->count()) row = 0;
 
