@@ -22,7 +22,7 @@
 
 
 
-OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto facile da usare per [OpenCore](https://github.com/acidanthera/OpenCorePkg). Puo' adattarsi automaticamente ad ogni versione di OpenCore, sia a quella corrente che alle versioni future. Puoi utilizzarlo per passare la tua EFi da una vesione all'altra del bootloader senza doverti preoccupare di nuove opzioni o contenuti eventualmente aggiunti.Utilizzalo per gestire OC, e' facile e comodo...
+OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto facile da usare per [OpenCore](https://github.com/acidanthera/OpenCorePkg). Puo' adattarsi automaticamente ad ogni versione di OpenCore, sia a quella corrente che alle versioni future. Puoi utilizzarlo per passare la tua EFi da una versione all'altra del bootloader senza doverti preoccupare di nuove opzioni o contenuti eventualmente aggiunti.Utilizzalo per gestire OC, e' facile e comodo...
 
 * [Inglese: Aggiornare OpenCore e i Kexts con OCAT (da @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
