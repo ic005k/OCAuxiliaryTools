@@ -283,8 +283,9 @@ void dlgPreference::on_btnDownloadKexts_clicked() {
   if (!mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled()) return;
   if (!mw_one->dlgSyncOC->ui->btnUpdateOC->isEnabled()) return;
   ui->btnDownloadKexts->setEnabled(false);
+  ui->myeditFind->setEnabled(false);
   repaint();
-  // mw_one->dlgSyncOC->isCheckOC = true;
+
   progBar = new QProgressBar(this);
   progBar->setTextVisible(false);
   progBar->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -306,6 +307,7 @@ void dlgPreference::on_btnDownloadKexts_clicked() {
   for (int i = 0; i < ui->tableKextUrl->rowCount(); i++)
     ui->tableKextUrl->removeCellWidget(i, 0);
   ui->btnDownloadKexts->setEnabled(true);
+  ui->myeditFind->setEnabled(true);
   repaint();
 }
 

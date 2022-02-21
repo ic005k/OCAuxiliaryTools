@@ -232,7 +232,7 @@ void dlgPreset::on_btnAdd_clicked() {
 void dlgPreset::addKextPresets() {
   if (blKext) {
     QStringList list;
-    QString strPath = strAppExePath + "/Database/EFI/OC/Kexts/";
+    QString strPath = QDir::homePath() + "/.ocat/Database/EFI/OC/Kexts/";
     for (int i = 0; i < ui->listPreset->count(); i++) {
       if (ui->listPreset->item(i)->checkState() == Qt::Checked) {
         list.append(strPath + ui->listPreset->item(i)->text());
