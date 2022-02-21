@@ -9192,7 +9192,7 @@ void MainWindow::on_editDatPasswordSalt_textChanged(const QString& arg1) {
 }
 
 void MainWindow::openDir(QString strDir) {
-  QString dirpath = QDir::homePath() + strDir;
+  QString dirpath = QDir::homePath() + "/.ocat" + strDir;
   QString dir = "file:" + dirpath;
   QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
 }
