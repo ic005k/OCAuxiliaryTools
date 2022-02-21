@@ -41,6 +41,7 @@ extern QStringList boolTypeList, intTypeList, dataTypeList, listKey, listType,
 
 void MainWindow::changeOpenCore(bool blDEV) {
   init_FindResults();
+  ui->mycboxFind->lineEdit()->clear();
   if (!blDEV) {
     dataBaseDir = strAppExePath + "/Database/";
     userDataBaseDir = QDir::homePath() + "/.ocat/Database/";
@@ -6815,13 +6816,14 @@ void MainWindow::findLabel(QString findText) {
   listOfLabelResults.clear();
   for (int i = 0; i < listOfLabel.count(); i++) {
     QLabel* lbl = (QLabel*)listOfLabel.at(i);
-    if (lbl->text().toLower().contains(findText.trimmed().toLower()) &&
-        !lbl->isHidden()) {
-      findCount++;
-      listOfLabelResults.append(lbl);
-      listNameResults.append("3" + lbl->objectName());
+    if (lbl->text().toLower().contains(findText.trimmed().toLower())) {
+      if (!lbl->isHidden()) {
+        findCount++;
+        listOfLabelResults.append(lbl);
+        listNameResults.append("3" + lbl->objectName());
 
-      ui->listFind->addItem(lbl->text());
+        ui->listFind->addItem(lbl->text());
+      }
     }
   }
 }

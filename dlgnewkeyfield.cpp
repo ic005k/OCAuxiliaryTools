@@ -240,6 +240,7 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
     lbl->setFont(font);
   }
   lbl->setText(text);
+  lbl->setObjectName("lbl" + text);
   QLineEdit* edit = new QLineEdit();
   edit->setObjectName(ObjectName);
 
