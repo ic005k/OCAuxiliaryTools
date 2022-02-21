@@ -242,7 +242,7 @@ void dlgDatabase::on_btnIntelOnline_clicked() {
 void dlgDatabase::on_btnAMDOnline_clicked() {
   QUrl url(QString("https://github.com/ic005k/" + strAppName +
                    "/blob/master/Database/"
-                   "BaseConfigs/Instructions_AMD_TRX40.md"));
+                   "BaseConfigs/Instructions_AMD.md"));
   QDesktopServices::openUrl(url);
 }
 
