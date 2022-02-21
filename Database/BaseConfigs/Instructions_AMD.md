@@ -28,8 +28,11 @@ If you own an Amd Ryzen with different core number you will have to modify **Ker
 **AMD-B550_generic.plist** is configured by default for a 12 cores cpu, if you have an Amd Ryzen with 8 cores you can leave **Kernel > Patch** config.plist section unchanged.
 If you own an Amd Ryzen with different core number you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the presets adding correct plist for your core number in **Kernel > Patch**
 
-**X570_generic.plist** is configured by default for a 16 cores cpu, if you have an Amd Ryzen with 16 cores you can leave **Kernel > Patch** config.plist section unchanged.
+**AMD-X570_generic.plist** is configured by default for a 16 cores cpu, if you have an Amd Ryzen with 16 cores you can leave **Kernel > Patch** config.plist section unchanged.
 If you own an Amd Ryzen with different core number you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the presets adding correct plist for your core number in **Kernel > Patch**
+
+**AMD-X399_generic.plist** is configured by default for a 24 cores cpu, if you have an Amd Threadripper with 24 cores you can leave **Kernel > Patch** config.plist section unchanged.
+If you own an Amd ThreadRipper with different core number you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the presets adding correct plist for your core number in **Kernel > Patch**
 
 **generic_trx40.plist** is configured by default for a 32 cores cpu, if you have an Amd ThreadRipper 3970x or a Amd ThreadRipper 3990x you can leave **Kernel > Patch** config.plist section unchanged.
 If you own an Amd ThreadRipper 3960x you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the preset sTRX4-AMD 3960x adding in **Kernel > Patch**
