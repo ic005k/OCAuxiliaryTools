@@ -73,6 +73,8 @@ class SyncOCDialog : public QDialog {
 
   void on_btnImport_clicked();
 
+  void on_editOCDevSource_currentTextChanged(const QString &arg1);
+
  private:
   void setListWidgetStyle();
   void setListWidgetColor(QString color);

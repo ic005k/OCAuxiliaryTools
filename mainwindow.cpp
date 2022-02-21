@@ -1630,6 +1630,8 @@ void MainWindow::ParserUEFI(QVariantMap map) {
   // 3. Audio
   QVariantMap map_audio = map["Audio"].toMap();
   getValue(map_audio, ui->tabUEFI3);
+  if (ui->cboxPlayChime->currentText() == "true")
+    ui->cboxPlayChime->setCurrentText("Auto");
 
   // 4. Drivers
   QVariantList map_Drivers = map["Drivers"].toList();

@@ -911,6 +911,7 @@ void SyncOCDialog::on_comboOCVersions_currentTextChanged(const QString& arg1) {
           "https://github.com/acidanthera/OpenCorePkg/releases/download/" +
           arg1 + "/OpenCore-" + arg1 + "-RELEASE.zip";
   }
+
   ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
   ui->lblOCFrom->setText(ocFrom);
 }
@@ -931,4 +932,10 @@ void SyncOCDialog::on_btnImport_clicked() {
     mymethod->unZip(fi.fileName());
     isCheckOC = false;
   }
+}
+
+void SyncOCDialog::on_editOCDevSource_currentTextChanged(const QString& arg1) {
+  strOCFrom = arg1;
+  ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
+  ui->lblOCFrom->setText(ocFrom);
 }
