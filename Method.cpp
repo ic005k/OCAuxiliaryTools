@@ -450,6 +450,14 @@ void Method::doProcessFinished() {
 void Method::updateOpenCore() {
   if (mw_one->dlgSyncOC->isCheckOC) {
     QList<bool> Results;
+    QString strSEFI = tempDir + "X64/EFI/";
+    if (!QDir(strSEFI).exists() && blDEV) {
+      QMessageBox::information(
+          this, "",
+          tr("No update is currently available, or please check the update "
+             "source for the OpenCore development version."));
+      return;
+    }
 
     QDir dir;
     dir.mkpath(mw_one->userDataBaseDir);
@@ -463,14 +471,6 @@ void Method::updateOpenCore() {
     mw_one->deleteDirfile(mw_one->userDataBaseDir + "linux/");
     dir.mkpath(mw_one->userDataBaseDir + "linux/");
 
-    QString strSEFI = tempDir + "X64/EFI/";
-    if (!QDir(strSEFI).exists() && blDEV) {
-      QMessageBox::information(
-          this, "",
-          tr("No update is currently available, or please check the update "
-             "source for the OpenCore development version."));
-      return;
-    }
     if (!QDir(strSEFI).exists()) strSEFI = tempDir + "EFI/";
     QString strTEFI;
     if (!mw_one->ui->actionDEBUG->isChecked())
