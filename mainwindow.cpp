@@ -148,9 +148,7 @@ MainWindow::MainWindow(QWidget* parent)
   init_CopyPasteLine();
   setTableEditTriggers();
   initRecentFilesForToolBar();
-
   load_LastFile();
-
   loading = false;
   Initialization = false;
 }
