@@ -15,18 +15,15 @@ OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for [OpenCor
 
 ---
 
-### Special thanks to
+### Credits
 * [@vit9696](https://github.com/vit9696) Provide advice on OCAT features, etc.
 * [@5T33Z0](https://github.com/5T33Z0) Provide and maintain OCAT's Intel CPU plug-in package, user interaction and feature suggestions, etc.
 * [@LucasMucGH](https://github.com/LucasMucGH) Native UI design suggestions based on Mac version, etc.
 * [@fabiosun](https://github.com/fabiosun) Provides AMD-related content.
 * [@chriswayg](https://github.com/chriswayg) OpenCore Auxiliary Tools User's Guide.
-* APP Icon Design: Mirone (from Brazil)
----
+* APP Icon Design: Mirone (Brazil)
 
-### Thanks for the support of the following open source software!
-
-[OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
+* [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
 [qtplist](https://github.com/reillywatson/qtplist)&nbsp; &nbsp; &nbsp; &nbsp;
 [FindESP](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp;
 [winfile](https://github.com/microsoft/winfile)&nbsp; &nbsp; &nbsp; &nbsp;
