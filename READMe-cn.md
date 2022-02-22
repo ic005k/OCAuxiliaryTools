@@ -1,5 +1,5 @@
 [English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-cn.md) | [Italiano](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-it.md)
-## OC Auxiliary Tools-开源跨平台的OpenCore辅助工具
+### OC Auxiliary Tools-开源跨平台的OpenCore辅助工具
 
 OC辅助工具（简称OCAT或ocat） 是一个针对[OpenCore](https://github.com/acidanthera/OpenCorePkg)的非常简单的实用工具。它能自适应几乎所有不同版本的OC，无论是当前的OC版本还是未来的OC版本，使用它可以在不同OC版本之间进行切换，你完全不用担心未来OC升级会增加什么新的内容，用它来管理OC，总是显得轻松自如...
 
@@ -15,7 +15,7 @@ OC辅助工具（简称OCAT或ocat） 是一个针对[OpenCore](https://github.c
 
 ---
 
-### Credits
+#### Credits
 * [@vit9696](https://github.com/vit9696) 提供OCAT功能上的建议等。
 * [@5T33Z0](https://github.com/5T33Z0) 提供和维护OCAT的Intel CPU插件包，用户交互及功能建议等。
 * [@LucasMucGH](https://github.com/LucasMucGH) 基于Mac版本的原生UI设计建议等。
@@ -35,9 +35,9 @@ OC辅助工具（简称OCAT或ocat） 是一个针对[OpenCore](https://github.c
 [dortania build-repo](https://github.com/dortania/build-repo)&nbsp; &nbsp; &nbsp;&nbsp;
 [HackinPlugins](https://github.com/bugprogrammer/HackinPlugins)&nbsp; &nbsp; &nbsp;&nbsp;
 
-### 最后，对所有的贡献者一并表示感谢，在此不再一一列出，谢谢你们的参与和支持！
+#### 最后，对所有的贡献者一并表示感谢，在此不再一一列出，谢谢你们的参与和支持！
 
 ---
 
-### 备注：此项目开始于2020年8月
+#### 备注：此项目开始于2020年8月
 API: https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/latest
