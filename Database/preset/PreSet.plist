@@ -164,32 +164,6 @@
                 </dict>
                 <dict>
                     <key>Comment</key>
-                    <string>change Method(_WAK,1,N) to ZWAK, pair with SSDT-PTSWAK.aml</string>
-                    <key>Count</key>
-                    <integer>0</integer>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Find</key>
-                    <data>X1dBSwE=</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>WldBSwE=</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data>RFNEVA==</data>
-                </dict>
-                <dict>
-                    <key>Comment</key>
                     <string>change _STA to XSTA in device GPI0 (TouchPad I2C)</string>
                     <key>Count</key>
                     <integer>0</integer>
@@ -265,84 +239,6 @@
                     <integer>0</integer>
                     <key>TableSignature</key>
                     <data>RFNEVA==</data>
-                </dict>
-                <dict>
-                    <key>Comment</key>
-                    <string>Rename _RMV to XRMV in RP01.PXSX and use with SSDT-TYPC.aml for USB-C hot plug support</string>
-                    <key>Count</key>
-                    <integer>1</integer>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Find</key>
-                    <data>FCRfUk1WAA==</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>FCRYUk1WAA==</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>5</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data>RFNEVA==</data>
-                </dict>
-                <dict>
-                    <key>Comment</key>
-                    <string>Rename XTBT to YTBT and use with SSDT-YTBT.aml for USB-C hot plug</string>
-                    <key>Count</key>
-                    <integer>0</integer>
-                    <key>Enabled</key>
-                    <false/>
-                    <key>Find</key>
-                    <data>pABYVEJU</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>pABZVEJU</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data>RFNEVA==</data>
-                </dict>
-                <dict>
-                    <key>Comment</key>
-                    <string>Rename RP15.PXSX._RMV to XRMV, pair with SSDT-BCKM</string>
-                    <key>Count</key>
-                    <integer>0</integer>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Find</key>
-                    <data>X1JNVgCkABQGX1BTMAAUSwVfUFMzAHJNTVRCC0gFYFuAUFhWRABgCghbgRBQWFZEA1RCMlAgUDJUQiCgLpCTVEJUUwGTU0JOUlRCVVNBREJHDXNlbmRpbmcgU1hfU1RBUlQAcAodUDJUQhQtSFBNRQigJpCSk1ZESUQM</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>WFJNVgCkABQGX1BTMAAUSwVfUFMzAHJNTVRCC0gFYFuAUFhWRABgCghbgRBQWFZEA1RCMlAgUDJUQiCgLpCTVEJUUwGTU0JOUlRCVVNBREJHDXNlbmRpbmcgU1hfU1RBUlQAcAodUDJUQhQtSFBNRQigJpCSk1ZESUQM</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data></data>
                 </dict>
                 <dict>
                     <key>Base</key>
