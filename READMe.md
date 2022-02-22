@@ -1,5 +1,5 @@
 [English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-cn.md) | [Italiano](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-it.md)
-### OC Auxiliary Tools-Open source cross-platform OpenCore auxiliary tools
+### OC Auxiliary Tools--Open source cross-platform OpenCore auxiliary tools
 
 OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for [OpenCore](https://github.com/acidanthera/OpenCorePkg). It can self-adapt to almost all different versions of OC, whether the current OC version or future OC versions, use it to switch between different OC versions, you do not have to worry about what new content will be added in future OC upgrades, use it to manage OC, it always seems easy and comfortable...
 
