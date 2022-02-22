@@ -3,24 +3,24 @@
 
 OC Auxiliary Tool (OCAT or ocat for short) is a very simple utility for [OpenCore](https://github.com/acidanthera/OpenCorePkg). It can self-adapt to almost all different versions of OC, whether the current OC version or future OC versions, use it to switch between different OC versions, you do not have to worry about what new content will be added in future OC upgrades, use it to manage OC, it always seems easy and comfortable...
 
-* [Updating OpenCore and Kexts with OCAT (by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
+* [Updating OpenCore and Kexts with OCAT (by 5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
-* Pre-selected plug-in content for Intel CPU Quirks is provided and maintained by @5T33Z0. [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
+* Pre-selected plug-in content for Intel CPU Quirks is provided and maintained by 5T33Z0. [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
  
-* Intel CPU BaseConfigs plug-in package provided and maintained by @5T33Z0. [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
+* Intel CPU BaseConfigs plug-in package provided and maintained by 5T33Z0. [Details](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
 
-* AMD CPU BaseConfigs plug-in package, pre-selected for AMD CPU Quirks, AMD kernel patch package, Italian description documentation provided and maintained by [@fabiosun](https://github.com/fabiosun).
+* AMD CPU BaseConfigs plug-in package, pre-selected for AMD CPU Quirks, AMD kernel patch package, Italian description documentation provided and maintained by [fabiosun](https://github.com/fabiosun).
 
-* [OpenCore Auxiliary Tools User's Guide (by @chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
+* [OpenCore Auxiliary Tools User's Guide (by chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
 
 ---
 
 #### Credits
-* [@vit9696](https://github.com/vit9696) Provide advice on OCAT features, etc.
-* [@5T33Z0](https://github.com/5T33Z0) Provide and maintain OCAT's Intel CPU plug-in package, user interaction and feature suggestions, etc.
-* [@LucasMucGH](https://github.com/LucasMucGH) Native UI design suggestions based on Mac version, etc.
-* [@fabiosun](https://github.com/fabiosun) Provides AMD-related content.
-* [@chriswayg](https://github.com/chriswayg) OpenCore Auxiliary Tools User's Guide.
+* [vit9696](https://github.com/vit9696) Provide advice on OCAT features, etc.
+* [5T33Z0](https://github.com/5T33Z0) Provide and maintain OCAT's Intel CPU plug-in package, user interaction and feature suggestions, etc.
+* [LucasMucGH](https://github.com/LucasMucGH) Native UI design suggestions based on Mac version, etc.
+* [fabiosun](https://github.com/fabiosun) Provides AMD-related content.
+* [chriswayg](https://github.com/chriswayg) OpenCore Auxiliary Tools User's Guide.
 * APP Icon Design: Mirone (Brazil)
 
 * [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
