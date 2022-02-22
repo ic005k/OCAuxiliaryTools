@@ -376,7 +376,7 @@ class MainWindow : public QMainWindow {
   static QObjectList getAllFrame(QObjectList lstUIControls);
   void init_Table(int index);
   void init_FindResults();
-public slots:
+ public slots:
   void DisplayLevel();
   void ScanPolicy();
   void PickerAttributes();
@@ -1098,6 +1098,7 @@ public slots:
   void checkSystemAudioVolume();
   QObjectList getAllGridLayout(QObjectList lstUIControls);
   void init_Widgets();
+  void load_LastFile();
 };
 
 #endif  // MAINWINDOW_H

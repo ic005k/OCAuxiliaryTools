@@ -135,30 +135,8 @@ void MainWindow::changeOpenCore(bool blDEV) {
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-
   Initialization = true;
   loading = true;
-
-#ifdef Q_OS_MAC
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  osx1012 = true;
-#endif
-  if (osx1012)
-    mac = false;
-  else
-    mac = true;
-#endif
-
-#ifdef Q_OS_WIN32
-  reg_win();
-  win = true;
-#endif
-
-#ifdef Q_OS_LINUX
-  ui->actionMountEsp->setEnabled(false);
-  linuxOS = true;
-#endif
-
   init_Widgets();
   setUIMargin();
   init_MainUI();
@@ -167,32 +145,19 @@ MainWindow::MainWindow(QWidget* parent)
   initui_Misc();
   initui_PlatformInfo();
   initui_UEFI();
-
   init_CopyPasteLine();
   setTableEditTriggers();
-
-  this->setAcceptDrops(true);
-
-  QCoreApplication::setOrganizationName("ic005k");
-  QCoreApplication::setOrganizationDomain("github.com/ic005k");
-  QCoreApplication::setApplicationName("OC Auxiliary Tools");
-
-  m_recentFiles = new RecentFiles(this);
-  // m_recentFiles->attachToMenuAfterItem(ui->menuFile, tr("Save As..."),
-  //                                     SLOT(recentOpen(QString)));
-  // m_recentFiles->setNumOfRecentFiles(10);
-
   initRecentFilesForToolBar();
 
-  manager = new QNetworkAccessManager(this);
-  connect(manager, SIGNAL(finished(QNetworkReply*)), this,
-          SLOT(replyFinished(QNetworkReply*)));
-  autoCheckUpdate = true;
-  on_btnCheckUpdate();
+  load_LastFile();
 
-  this->setWindowModified(false);
-  updateIconStatus();
+  loading = false;
+  Initialization = false;
+}
 
+MainWindow::~MainWindow() { delete ui; }
+
+void MainWindow::load_LastFile() {
   if (myDlgPreference->ui->chkBoxLastFile->isChecked()) {
     QSettings Reg(strIniFile, QSettings::IniFormat);
     QString file = Reg.value("LastFileName").toString();
@@ -200,12 +165,9 @@ MainWindow::MainWindow(QWidget* parent)
       openFile(file);
     }
   }
-
-  loading = false;
-  Initialization = false;
+  this->setWindowModified(false);
+  updateIconStatus();
 }
-
-MainWindow::~MainWindow() { delete ui; }
 
 QWidget* MainWindow::getSubTabWidget(int m, int s) {
   for (int j = 0; j < mainTabList.count(); j++) {
@@ -4945,6 +4907,13 @@ void MainWindow::init_FileMenu() {
   QSettings Reg(strIniFile, QSettings::IniFormat);
 
   // Recent Open
+  QCoreApplication::setOrganizationName("ic005k");
+  QCoreApplication::setOrganizationDomain("github.com/ic005k");
+  QCoreApplication::setApplicationName("OC Auxiliary Tools");
+  m_recentFiles = new RecentFiles(this);
+  // m_recentFiles->attachToMenuAfterItem(ui->menuFile, tr("Save As..."),
+  //                                     SLOT(recentOpen(QString)));
+  // m_recentFiles->setNumOfRecentFiles(10);
   reFileMenu = new QMenu(this);
   reFileMenu->setTitle(tr("Recently Open"));
   ui->menuFile->insertMenu(ui->actionOpen_Directory, reFileMenu);
@@ -5106,6 +5075,13 @@ void MainWindow::init_HelpMenu() {
   // Bug Report
   if (mac || osx1012) ui->actionBug_Report->setIconVisibleInMenu(false);
   ui->actionBug_Report->setIcon(QIcon(":/icon/about.png"));
+
+  // Auto check update
+  manager = new QNetworkAccessManager(this);
+  connect(manager, SIGNAL(finished(QNetworkReply*)), this,
+          SLOT(replyFinished(QNetworkReply*)));
+  autoCheckUpdate = true;
+  on_btnCheckUpdate();
 }
 
 void MainWindow::init_UndoRedo() {
@@ -5372,6 +5348,26 @@ void MainWindow::init_MainUI() {
 }
 
 void MainWindow::init_Widgets() {
+  this->setAcceptDrops(true);
+#ifdef Q_OS_MAC
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+  osx1012 = true;
+#endif
+  if (osx1012)
+    mac = false;
+  else
+    mac = true;
+#endif
+
+#ifdef Q_OS_WIN32
+  reg_win();
+  win = true;
+#endif
+
+#ifdef Q_OS_LINUX
+  ui->actionMountEsp->setEnabled(false);
+  linuxOS = true;
+#endif
   strAppExePath = qApp->applicationDirPath();
   strConfigPath = QDir::homePath() + "/.config/" + strAppName + "/";
 
