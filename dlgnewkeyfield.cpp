@@ -333,6 +333,13 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
     listOCATWidgetDelList.append(frame);
   }
 
+  if (edit->objectName() == "editBootProtect" && edit->text() == "") {
+    edit->setText("None");
+  }
+  if (edit->objectName() == "editCustomDelays" && edit->text() == "") {
+    edit->setText("Auto");
+  }
+
   return edit;
 }
 
