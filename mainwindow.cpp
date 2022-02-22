@@ -20,6 +20,7 @@ using namespace std;
 QString strAppName = "OCAuxiliaryTools";
 QString strIniFile =
     QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
+QSettings Reg(strIniFile, QSettings::IniFormat);
 QString PlistFileName, SaveFileName, strAppExePath;
 QVector<QString> openFileLists;
 QRegularExpression regxData("[A-Fa-f0-9 ]{0,1024}");
@@ -157,7 +158,6 @@ MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::load_LastFile() {
   if (myDlgPreference->ui->chkBoxLastFile->isChecked()) {
-    QSettings Reg(strIniFile, QSettings::IniFormat);
     QString file = Reg.value("LastFileName").toString();
     if (QFile(file).exists()) {
       openFile(file);
@@ -231,7 +231,6 @@ void MainWindow::openFile(QString PlistFileName) {
     return;
 
   if (myDlgPreference->ui->chkBoxLastFile->isChecked()) {
-    QSettings Reg(strIniFile, QSettings::IniFormat);
     Reg.setValue("LastFileName", SaveFileName);
   }
 
@@ -1287,7 +1286,6 @@ void MainWindow::on_table_dp_del_itemChanged(QTableWidgetItem* item) {
 }
 
 void MainWindow::initui_PlatformInfo() {
-  QSettings Reg(strIniFile, QSettings::IniFormat);
   ui->mychkSaveDataHub->setChecked(Reg.value("SaveDataHub", false).toBool());
   ui->actionAutoChkUpdate->setChecked(
       Reg.value("AutoChkUpdate", true).toBool());
@@ -3924,7 +3922,6 @@ void MainWindow::mount_esp() {
 void MainWindow::readResultDiskInfo() {
   dlgMESP->setModal(true);
 
-  QSettings Reg(strIniFile, QSettings::IniFormat);
   int row = Reg.value("mesp", 0).toInt();
 
   dlgMESP->ui->listWidget->clear();
@@ -3972,7 +3969,6 @@ void MainWindow::readResultDiskInfo() {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("SaveDataHub", ui->mychkSaveDataHub->isChecked());
   Reg.setValue("AutoChkUpdate", ui->actionAutoChkUpdate->isChecked());
   Reg.setValue("Net", myDlgPreference->ui->comboBoxNet->currentText());
@@ -4902,8 +4898,6 @@ void MainWindow::init_FileMenu() {
   spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   ui->toolBar->addWidget(spacer);
 
-  QSettings Reg(strIniFile, QSettings::IniFormat);
-
   // Recent Open
   QCoreApplication::setOrganizationName("ic005k");
   QCoreApplication::setOrganizationDomain("github.com/ic005k");
@@ -4960,13 +4954,22 @@ void MainWindow::init_FileMenu() {
 }
 
 void MainWindow::init_EditMenu() {
-  QSettings Reg(strIniFile, QSettings::IniFormat);
   ui->actionPlist_editor->setVisible(true);
   ui->actionDSDT_SSDT_editor->setVisible(true);
 
   // Edit
-  // Init Database for Linux
   ui->actionInitDatabaseLinux->setVisible(false);
+
+  // Find
+  if (mac || osx1012) ui->actionFind->setIconVisibleInMenu(false);
+  ui->actionFind->setShortcut(tr("ctrl+f"));
+  ui->actionFind->setIcon(QIcon(":/icon/find.png"));
+
+  if (mac || osx1012) ui->actionGo_to_the_previous->setIconVisibleInMenu(false);
+  ui->actionGo_to_the_previous->setShortcut(tr("ctrl+3"));
+
+  if (mac || osx1012) ui->actionGo_to_the_next->setIconVisibleInMenu(false);
+  ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
 
   // OC Validate
   if (mac || osx1012) ui->actionOcvalidate->setIconVisibleInMenu(false);
@@ -5157,23 +5160,9 @@ void MainWindow::init_ToolButtonStyle() {
   }
 }
 
-void MainWindow::init_MainUI() {
-  QSettings Reg(strIniFile, QSettings::IniFormat);
-  orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
-  orgLineEditStyle = ui->editBID->styleSheet();
-  orgLabelStyle = ui->label->styleSheet();
-  orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
-
-  ui->frameTip->setAutoFillBackground(true);
-  ui->frameTip->setPalette(QPalette(QColor(255, 204, 204)));
-  ui->btnNo->setDefault(true);
-  ui->frameTip->setHidden(true);
-
-  init_FileMenu();
-  init_EditMenu();
-  init_UndoRedo();
-
+void MainWindow::init_ToolBar() {
   // Hide ToolBar
+
   ui->frameToolBar->setHidden(true);
   ui->statusbar->setHidden(true);
   myDlgPreference->ui->chkHideToolbar->setChecked(
@@ -5187,9 +5176,9 @@ void MainWindow::init_MainUI() {
     ui->toolBar->addAction(ui->actionFind);
     ui->mycboxFind->setMaximumWidth(320);
   }
+}
 
-  init_HelpMenu();
-
+void MainWindow::init_SearchUI() {
   // Search
   ui->mycboxFind->lineEdit()->setClearButtonEnabled(false);
   ui->mycboxFind->lineEdit()->setPlaceholderText(tr("Search"));
@@ -5237,6 +5226,42 @@ void MainWindow::init_MainUI() {
     ui->mycboxFind->addItem(Reg.value(QString::number(i)).toString());
   }
 
+  ui->mycboxFind->setCurrentText("");
+  if (textTotal > 0)
+    clearTextsAction->setEnabled(true);
+  else
+    clearTextsAction->setEnabled(false);
+
+  ui->listFind->setHidden(true);
+}
+
+void MainWindow::init_MainUI() {
+  init_FileMenu();
+  init_EditMenu();
+  init_UndoRedo();
+  init_ToolBar();
+  init_HelpMenu();
+  init_SearchUI();
+  init_CopyLabel();
+  init_CopyCheckbox();
+  init_LineEditDataCheck();
+  copyText(ui->listFind);
+  copyText(ui->listMain);
+  copyText(ui->listSub);
+  init_InitialValue();
+  init_TableStyle();
+  init_ToolBarIcon();
+
+  orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
+  orgLineEditStyle = ui->editBID->styleSheet();
+  orgLabelStyle = ui->label->styleSheet();
+  orgCheckBoxStyle = ui->chkFadtEnableReset->styleSheet();
+
+  ui->frameTip->setAutoFillBackground(true);
+  ui->frameTip->setPalette(QPalette(QColor(255, 204, 204)));
+  ui->btnNo->setDefault(true);
+  ui->frameTip->setHidden(true);
+
   ui->actionOpenCore_DEV->setChecked(blDEV);
   ui->actionDEBUG->setChecked(Reg.value("DEBUG", 0).toBool());
   if (ui->actionDEBUG->isChecked()) {
@@ -5251,7 +5276,7 @@ void MainWindow::init_MainUI() {
   }
   on_actionOpenCore_DEV_triggered();
 
-  // Get windows position
+  // Resize Windows
   int x, y, w, h;
   x = Reg.value("x", "0").toInt();
   y = Reg.value("y", "0").toInt();
@@ -5269,44 +5294,11 @@ void MainWindow::init_MainUI() {
   move(rect.topLeft());
   resize(rect.size());
 
-  ui->mycboxFind->setCurrentText("");
-  if (textTotal > 0)
-    clearTextsAction->setEnabled(true);
-  else
-    clearTextsAction->setEnabled(false);
-
-  ui->listFind->setHidden(true);
-
-  if (mac || osx1012) ui->actionFind->setIconVisibleInMenu(false);
-  ui->actionFind->setShortcut(tr("ctrl+f"));
-  ui->actionFind->setIcon(QIcon(":/icon/find.png"));
-
-  if (mac || osx1012) ui->actionGo_to_the_previous->setIconVisibleInMenu(false);
-  ui->actionGo_to_the_previous->setShortcut(tr("ctrl+3"));
-
-  if (mac || osx1012) ui->actionGo_to_the_next->setIconVisibleInMenu(false);
-  ui->actionGo_to_the_next->setShortcut(tr("ctrl+4"));
-
   ui->txtEditHex->setPlaceholderText(tr("Hexadecimal"));
   ui->txtEditASCII->setPlaceholderText(tr("ASCII"));
   ui->btnUpdateHex->setFixedHeight(ui->txtEditHex->height() - 12);
   ui->btnUpdateHex->setFixedWidth(ui->btnUpdateHex->height());
   setConversionWidgetVisible(false);
-
-  init_CopyLabel();
-
-  init_CopyCheckbox();
-
-  init_LineEditDataCheck();
-
-  // Copy list
-  copyText(ui->listFind);
-  copyText(ui->listMain);
-  copyText(ui->listSub);
-
-  init_InitialValue();
-  init_TableStyle();
-  init_ToolBarIcon();
 
   ui->btnNVRAMAdd_Add0->setContextMenuPolicy(Qt::CustomContextMenu);
   connect(ui->btnNVRAMAdd_Add0, SIGNAL(customContextMenuRequested(QPoint)),
@@ -5377,7 +5369,6 @@ void MainWindow::init_Widgets() {
   QString s = QString::number(QTime::currentTime().second());
   CurrentDateTime = y + m + d + h + mm + s;
 
-  QSettings Reg(strIniFile, QSettings::IniFormat);
   blDEV = Reg.value("OpenCoreDEV", false).toBool();
   if (!QFile(QDir::homePath() + "/.ocat/devDatabase/EFI/OC/OpenCore.efi")
            .exists()) {
@@ -5649,7 +5640,6 @@ void MainWindow::copyText(QListWidget* listW) {
 
 void MainWindow::clearFindTexts() {
   for (int i = 0; i < ui->mycboxFind->count(); i++) {
-    QSettings Reg(strIniFile, QSettings::IniFormat);
     Reg.remove(QString::number(i));
   }
   ui->mycboxFind->clear();
@@ -8260,7 +8250,7 @@ void MainWindow::init_CopyPasteLine() {
     QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
 
     // Auto Col Width
-    QSettings Reg(strIniFile, QSettings::IniFormat);
+
     bool isAutoColWidth =
         Reg.value(w->objectName() + "AutoColWidth", true).toBool();
     set_AutoColWidth(w, isAutoColWidth);
@@ -8384,7 +8374,6 @@ void MainWindow::init_CopyPasteLine() {
 
     // Auto Col Width
     connect(autoColWidth, &QAction::triggered, [=]() {
-      QSettings Reg(strIniFile, QSettings::IniFormat);
       bool isAutoColWidth = autoColWidth->isChecked();
       Reg.setValue(w->objectName() + "AutoColWidth", isAutoColWidth);
       set_AutoColWidth(w, isAutoColWidth);
@@ -9682,7 +9671,6 @@ void MainWindow::on_actionOpenCore_DEV_triggered() {
   blDEV = ui->actionOpenCore_DEV->isChecked();
   changeOpenCore(blDEV);
 
-  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("OpenCoreDEV", blDEV);
   Reg.setValue("DEBUG", ui->actionDEBUG->isChecked());
 }
@@ -10027,7 +10015,6 @@ void MainWindow::on_btnSystemSerialNumber_clicked() {
 }
 
 void MainWindow::smart_UpdateKeyField() {
-  QSettings Reg(strIniFile, QSettings::IniFormat);
   if (!Reg.value("SmartKey").toBool()) {
   };
 
@@ -10179,7 +10166,7 @@ void MainWindow::init_AutoColumnWidth() {
   for (int i = 0; i < listOfTableWidget.count(); i++) {
     QTableWidget* w = (QTableWidget*)listOfTableWidget.at(i);
     // Auto Col Width
-    QSettings Reg(strIniFile, QSettings::IniFormat);
+
     bool isAutoColWidth =
         Reg.value(w->objectName() + "AutoColWidth", true).toBool();
     set_AutoColWidth(w, isAutoColWidth);

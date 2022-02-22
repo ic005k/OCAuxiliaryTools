@@ -1099,6 +1099,8 @@ class MainWindow : public QMainWindow {
   QObjectList getAllGridLayout(QObjectList lstUIControls);
   void init_Widgets();
   void load_LastFile();
+  void init_ToolBar();
+  void init_SearchUI();
 };
 
 #endif  // MAINWINDOW_H
