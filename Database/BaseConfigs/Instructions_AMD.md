@@ -11,7 +11,7 @@
 #### 1. Generate a base EFI Folder for the CPU of your choice (sTRX4, X570 and X370 for now, others will be added in a near future)
 - Run OCAuxiliaryTools (OCAT)
 - Open the **Database**
-- Double-click on generic_trx40.plist
+- Double-click on an AMD plist
 - An EFI Folder will be generated and placed on your Desktop including SSDTs, Kexts, Drivers, Themes and the `config.plist`.
 
 #### 2. Modifying the `config.plist`
@@ -20,6 +20,9 @@ After the base EFI has been generated, `config.plist` must be modified according
 Important section are **Kernel > Patch** and **Booter > MMIOWhitelist**
 
 **AMD-X370_generic.plist** is configured by default for a 8 cores cpu, if you have an Amd Ryzen with 8 cores you can leave **Kernel > Patch** config.plist section unchanged.
+If you own an Amd Ryzen with different core number you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the presets adding correct plist for your core number in **Kernel > Patch**
+
+**AMD-X470_generic.plist** is configured by default for a 8 cores cpu, if you have an Amd Ryzen with 8 cores you can leave **Kernel > Patch** config.plist section unchanged.
 If you own an Amd Ryzen with different core number you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the presets adding correct plist for your core number in **Kernel > Patch**
 
 **AMD-B450M_generic.plist** is configured by default for a 8 cores cpu, if you have an Amd Ryzen with 8 cores you can leave **Kernel > Patch** config.plist section unchanged.
