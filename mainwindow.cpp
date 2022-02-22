@@ -1517,6 +1517,8 @@ void MainWindow::ParserPlatformInfo(QVariantMap map) {
     ui->editMLB->setText(ui->editMLB_PNVRAM->text());
   if (ui->editDatROM->text() == "")
     ui->editDatROM->setText(ui->editDatROM_PNVRAM->text());
+  else
+    ui->editDatROM_PNVRAM->setText(ui->editDatROM->text());
 
   // SMBIOS
   QVariantMap mapSMBIOS = map["SMBIOS"].toMap();
@@ -8680,7 +8682,7 @@ void MainWindow::getEditValue(QVariantMap map, QWidget* tab) {
         if (strList.count() > 0)
           w->setText(ByteToHexStr(map[strList.at(0)].toByteArray()));
         else
-          w->setText(ByteToHexStr(map[name].toByteArray()));  // 为data类型
+          w->setText(ByteToHexStr(map[name].toByteArray()));
       } else {
         if (strList.count() > 0) {
           QString t0 = map[strList.at(0)].toString();
