@@ -3,24 +3,24 @@
 
 OC辅助工具（简称OCAT或ocat） 是一个针对[OpenCore](https://github.com/acidanthera/OpenCorePkg)的非常简单的实用工具。它能自适应几乎所有不同版本的OC，无论是当前的OC版本还是未来的OC版本，使用它可以在不同OC版本之间进行切换，你完全不用担心未来OC升级会增加什么新的内容，用它来管理OC，总是显得轻松自如...
 
-* [如何使用OCAT升级OpenCore和Kexts(by @5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
+* [如何使用OCAT升级OpenCore和Kexts(by 5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
-* Intel CPU Quirks的预选插件内容由 @5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
+* Intel CPU Quirks的预选插件内容由 5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
  
-* Intel CPU BaseConfigs 插件包由 @5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
+* Intel CPU BaseConfigs 插件包由 5T33Z0 提供并维护。[详情](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
 
-* AMD CPU BaseConfigs插件包和Quirks的预选，AMD内核补丁包，意大利语说明文档由 [@fabiosun](https://github.com/fabiosun) 提供并维护。
+* AMD CPU BaseConfigs插件包和Quirks的预选，AMD内核补丁包，意大利语说明文档由 [fabiosun](https://github.com/fabiosun) 提供并维护。
 
-* [OpenCore Auxiliary Tools使用指南(by @chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
+* [OpenCore Auxiliary Tools使用指南(by chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
 
 ---
 
 #### Credits
-* [@vit9696](https://github.com/vit9696) 提供OCAT功能上的建议等。
-* [@5T33Z0](https://github.com/5T33Z0) 提供和维护OCAT的Intel CPU插件包，用户交互及功能建议等。
-* [@LucasMucGH](https://github.com/LucasMucGH) 基于Mac版本的原生UI设计建议等。
-* [@fabiosun](https://github.com/fabiosun) 提供AMD的相关内容。
-* [@chriswayg](https://github.com/chriswayg) OpenCore Auxiliary Tools 用户指南。
+* [vit9696](https://github.com/vit9696) 提供OCAT功能上的建议等。
+* [5T33Z0](https://github.com/5T33Z0) 提供和维护OCAT的Intel CPU插件包，用户交互及功能建议等。
+* [LucasMucGH](https://github.com/LucasMucGH) 基于Mac版本的原生UI设计建议等。
+* [fabiosun](https://github.com/fabiosun) 提供AMD的相关内容。
+* [chriswayg](https://github.com/chriswayg) OpenCore Auxiliary Tools 用户指南。
 * APP图标设计：Mirone（巴西）。
 
 * [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
