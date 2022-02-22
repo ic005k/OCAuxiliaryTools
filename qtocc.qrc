@@ -75,5 +75,6 @@
         <file>icon/espicon0.png</file>
         <file>icon/c.png</file>
         <file>icon/c0.png</file>
+        <file>icon/add_bottom.png</file>
     </qresource>
 </RCC>

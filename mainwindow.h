@@ -376,6 +376,7 @@ class MainWindow : public QMainWindow {
   static QObjectList getAllFrame(QObjectList lstUIControls);
   void init_Table(int index);
   void init_FindResults();
+
  public slots:
   void DisplayLevel();
   void ScanPolicy();

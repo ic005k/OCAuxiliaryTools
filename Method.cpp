@@ -2595,3 +2595,48 @@ void Method::add_OneLine(QTableWidget* t) {
   t->setCurrentCell(t->rowCount() - 1, 0);
   mw_one->setWM();
 }
+
+QString Method::setLineEditQss(QLineEdit* txt, int radius, int borderWidth,
+                               const QString& normalColor,
+                               const QString& focusColor) {
+  QStringList list;
+  list.append(QString("QLineEdit{border-style:none;padding:3px;border-radius:%"
+                      "1px;border:%2px solid %3;}")
+                  .arg(radius)
+                  .arg(borderWidth)
+                  .arg(normalColor));
+  list.append(QString("QLineEdit:focus{border:%1px solid %2;}")
+                  .arg(borderWidth)
+                  .arg(focusColor));
+
+  QString qss = list.join("");
+  txt->setStyleSheet(qss);
+  return qss;
+}
+
+QString Method::setComboBoxQss(QComboBox* txt, int radius, int borderWidth,
+                               const QString& normalColor,
+                               const QString& focusColor) {
+  QStringList list;
+  list.append(QString("QComboBox{border-style:none;padding:3px;border-radius:%"
+                      "1px;border:%2px solid %3;}")
+                  .arg(radius)
+                  .arg(borderWidth)
+                  .arg(normalColor));
+  list.append(QString("QComboBox:focus{border:%1px solid %2;}")
+                  .arg(borderWidth)
+                  .arg(focusColor));
+  list.append(
+      QString("QComboBox::down-arrow{image:url(:/icon/"
+              "add_bottom.png);width:10px;height:10px;right:2px;}"));
+  list.append(QString(
+      "QComboBox::drop-down{subcontrol-origin:padding;subcontrol-position:top "
+      "right;width:15px;border-left-width:0px;border-left-style:solid;border-"
+      "top-right-radius:3px;border-bottom-right-radius:3px;border-left-color:#"
+      "B6B6B6;}"));
+  list.append(QString("QComboBox::drop-down:on{top:1px;}"));
+
+  QString qss = list.join("");
+  txt->setStyleSheet(qss);
+  return qss;
+}

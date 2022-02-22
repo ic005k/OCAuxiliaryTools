@@ -134,6 +134,12 @@ class Method : public QMainWindow {
   static void add_OneLine(QTableWidget *t);
   void downloadAllKexts();
   void unZip(QString zipfile);
+  static QString setLineEditQss(QLineEdit *txt, int radius, int borderWidth,
+                                const QString &normalColor,
+                                const QString &focusColor);
+  static QString setComboBoxQss(QComboBox *txt, int radius, int borderWidth,
+                                const QString &normalColor,
+                                const QString &focusColor);
  public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();

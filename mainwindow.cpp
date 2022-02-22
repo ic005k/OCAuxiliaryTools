@@ -5182,6 +5182,9 @@ void MainWindow::init_ToolBar() {
 
 void MainWindow::init_SearchUI() {
   // Search
+  ui->mycboxFind->setAttribute(Qt::WA_MacShowFocusRect, false);
+  Method::setComboBoxQss(ui->mycboxFind, 8, 1, "#DCDCDC", "#D3D3D3");
+
   ui->mycboxFind->lineEdit()->setClearButtonEnabled(false);
   ui->mycboxFind->lineEdit()->setPlaceholderText(tr("Search"));
   connect(ui->mycboxFind->lineEdit(), &QLineEdit::returnPressed, this,
@@ -6988,20 +6991,12 @@ void MainWindow::on_actionFind_triggered() {
     ui->mycboxFind->clear();
     ui->mycboxFind->addItems(strList);
     AddCboxFindItem = false;
-
-    if (red < 55) {
-      setPalette(ui->mycboxFind, QColor(50, 50, 50), Qt::white);
-
-    } else {
-      setPalette(ui->mycboxFind, Qt::white, Qt::black);
-    }
-
     FindTextChange = false;
+    Method::setComboBoxQss(ui->mycboxFind, 8, 1, "#DCDCDC", "#D3D3D3");
     init_ToolBarIcon();
 
   } else {
-    setPalette(ui->mycboxFind, QColor(255, 70, 70), Qt::white);
-    btnClear->setIcon(QIcon(":/icon/c0.png"));
+    Method::setComboBoxQss(ui->mycboxFind, 8, 2, "#FF0000", "#FF0000");
   }
 
   this->setWindowModified(curWinModi);
@@ -7555,12 +7550,7 @@ void MainWindow::on_mycboxFind_currentTextChanged(const QString& arg1) {
     QBrush brush = pal.window();
     red = brush.color().red();
 
-    if (red < 55) {
-      setPalette(ui->mycboxFind, QColor(50, 50, 50), Qt::white);
-
-    } else {
-      setPalette(ui->mycboxFind, Qt::white, Qt::black);
-    }
+    Method::setComboBoxQss(ui->mycboxFind, 8, 1, "#DCDCDC", "#D3D3D3");
   }
 }
 
@@ -8547,14 +8537,7 @@ void MainWindow::paintEvent(QPaintEvent* event) {
 
   if (c_red != red) {
     red = c_red;
-
-    if (red < 55) {
-      setPalette(ui->mycboxFind, QColor(50, 50, 50), Qt::white);
-
-    } else {
-      setPalette(ui->mycboxFind, Qt::white, Qt::black);
-    }
-
+    Method::setComboBoxQss(ui->mycboxFind, 8, 1, "#DCDCDC", "#D3D3D3");
     init_ToolBarIcon();
   }
 
