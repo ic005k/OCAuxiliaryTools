@@ -5552,6 +5552,7 @@ void MainWindow::init_CopyLabel() {
   for (int i = 0; i < listOfLabel.count(); i++) {
     QLabel* w = (QLabel*)listOfLabel.at(i);
     listUILabel.append(w);
+    w->setFixedWidth(getTextWidth(w->text(), w));
 
     if (w == ui->lblPickerAttributes || w == ui->lblDisplayLevel ||
         w == ui->lblExposeSensitiveData || w == ui->lblHaltLevel ||
