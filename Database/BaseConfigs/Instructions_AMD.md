@@ -11,7 +11,7 @@
 #### 1. Generate a base EFI Folder for the CPU of your choice (sTRX4, X570 and X370 for now, others will be added in a near future)
 - Run OCAuxiliaryTools (OCAT)
 - Open the **Database**
-- Double-click on generic_trx40.plist
+- Double-click on an AMD plist
 - An EFI Folder will be generated and placed on your Desktop including SSDTs, Kexts, Drivers, Themes and the `config.plist`.
 
 #### 2. Modifying the `config.plist`
@@ -36,12 +36,13 @@ If you own an Amd ThreadRipper with different core number you will have to modif
 
 **generic_trx40.plist** is configured by default for a 32 cores cpu, if you have an Amd ThreadRipper 3970x or a Amd ThreadRipper 3990x you can leave **Kernel > Patch** config.plist section unchanged.
 If you own an Amd ThreadRipper 3960x you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the preset sTRX4-AMD 3960x adding in **Kernel > Patch**
+
 #### 3. Create a  proper `MMIO Whitelist`
 The creation of a valid MMIO Whitelist is certainly the most important part for the correct functioning of an AMD ThreadRipper sTRX4 solution.
 Complete information for **How to** create a proper `MMIO Whitelist` is available at the following link:
 https://www.macos86.it/topic/3307-discussion-trx40-bare-metal-vanilla-patches/?do=findComment&comment=85469
 
-#### 4. sTrx4 `adviced SMBIOS` and basic config.plist options
+#### 4. sTrx4/Ryzen `adviced SMBIOS` and basic config.plist options
 
 - iMacPro1.1
 - MacPro7.1
