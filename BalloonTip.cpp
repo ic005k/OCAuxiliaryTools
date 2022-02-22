@@ -15,7 +15,7 @@
 #include "mainwindow.h"
 
 extern MainWindow *mw_one;
-
+extern int red;
 static BalloonTip *theSolitaryBalloonTip = 0;
 
 void BalloonTip::showBalloon(QMessageBox::Icon icon, const QString &title,
@@ -151,7 +151,7 @@ BalloonTip::BalloonTip(QMessageBox::Icon icon, const QString &title,
   QPalette pal = palette();
 
   if (mw_one->mac || mw_one->osx1012) {
-    if (mw_one->red > 55) {
+    if (red > 55) {
       pal.setColor(QPalette::Window, QColor(236, 236, 236, 255));
       pal.setColor(QPalette::WindowText, Qt::black);
     } else {

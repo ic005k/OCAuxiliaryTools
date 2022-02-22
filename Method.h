@@ -140,6 +140,7 @@ class Method : public QMainWindow {
   static QString setComboBoxQss(QComboBox *txt, int radius, int borderWidth,
                                 const QString &normalColor,
                                 const QString &focusColor);
+  static void init_UIWidget(QWidget *w, int red);
  public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();

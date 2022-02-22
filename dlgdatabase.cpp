@@ -8,11 +8,13 @@ extern MainWindow *mw_one;
 extern Method *mymethod;
 extern QString SaveFileName, strIniFile, strAppName, strAppExePath;
 extern bool blDEV;
+extern int red;
 
 dlgDatabase::dlgDatabase(QWidget *parent)
     : QDialog(parent), ui(new Ui::dlgDatabase) {
   ui->setupUi(this);
 
+  Method::init_UIWidget(this, red);
   processPing = new QProcess;
   connect(processPing, SIGNAL(readyReadStandardOutput()), this,
           SLOT(on_readoutput()));

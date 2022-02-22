@@ -11,12 +11,14 @@ extern QString ocVer, ocVerDev, ocFrom, ocFromDev, strIniFile, strAppName,
 extern bool blDEV;
 extern bool Initialization;
 extern Method* mymethod;
+extern int red;
 QProgressBar* progBar;
 
 SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {
   ui->setupUi(this);
 
+  Method::init_UIWidget(this, red);
   QFont font;
   font.setBold(true);
   ui->lblKexts->setFont(font);

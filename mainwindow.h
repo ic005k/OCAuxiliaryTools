@@ -225,7 +225,7 @@ class MainWindow : public QMainWindow {
   QWidget* currentTabWidget;
 
   QWidget* currentMainTabWidget;
-  int red = 0;
+
   void clearCheckBoxMarker();
   void clearLabelMarker();
   void clearComboBoxMarker();

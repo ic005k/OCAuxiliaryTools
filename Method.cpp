@@ -2640,3 +2640,31 @@ QString Method::setComboBoxQss(QComboBox* txt, int radius, int borderWidth,
   txt->setStyleSheet(qss);
   return qss;
 }
+
+void Method::init_UIWidget(QWidget* uiw, int red) {
+  QObjectList listObject;
+  listObject = MainWindow::getAllLineEdit(MainWindow::getAllUIControls(uiw));
+  for (int i = 0; i < listObject.count(); i++) {
+    QLineEdit* w1 = (QLineEdit*)listObject.at(i);
+    if (w1->objectName() != "") {
+      w1->setAttribute(Qt::WA_MacShowFocusRect, 0);
+      if (red > 55)
+        setLineEditQss(w1, 6, 1, "#C0C0C0", "#4169E1");
+      else
+        setLineEditQss(w1, 6, 1, "#2A2A2A", "#4169E1");
+    }
+  }
+
+  listObject.clear();
+  listObject = MainWindow::getAllComboBox(MainWindow::getAllUIControls(uiw));
+  for (int i = 0; i < listObject.count(); i++) {
+    QComboBox* w1 = (QComboBox*)listObject.at(i);
+    if (w1->objectName() != "") {
+      w1->setAttribute(Qt::WA_MacShowFocusRect, 0);
+      if (red > 55)
+        setComboBoxQss(w1, 6, 1, "#C0C0C0", "#4169E1");
+      else
+        setComboBoxQss(w1, 6, 1, "#2A2A2A", "#4169E1");
+    }
+  }
+}

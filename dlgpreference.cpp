@@ -15,11 +15,13 @@ extern QString SaveFileName, strIniFile, strAppName, ocFromDev, strOCFromDev,
     strAppExePath;
 extern bool blDEV;
 extern QProgressBar *progBar;
+extern int red;
 
 dlgPreference::dlgPreference(QWidget *parent)
     : QDialog(parent), ui(new Ui::dlgPreference) {
   ui->setupUi(this);
 
+  Method::init_UIWidget(this, red);
   for (int i = 0; i < ui->tableKextUrl->columnCount(); i++) {
     ui->tableKextUrl->horizontalHeader()->setSectionResizeMode(
         i, QHeaderView::ResizeToContents);
