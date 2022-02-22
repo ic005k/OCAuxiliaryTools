@@ -3,7 +3,7 @@
 <plist version="1.0">
     <dict>
         <key>#ConfigComment</key>
-        <string>7472 DELL Laptop</string>
+        <string></string>
         <key>ACPI</key>
         <dict>
             <key>Add</key>
@@ -650,6 +650,8 @@
                     <string></string>
                     <key>MinKernel</key>
                     <string></string>
+                    <key>Strategy</key>
+                    <string>Disable</string>
                 </dict>
                 <dict>
                     <key>Arch</key>
@@ -664,6 +666,8 @@
                     <string></string>
                     <key>MinKernel</key>
                     <string></string>
+                    <key>Strategy</key>
+                    <string>Disable</string>
                 </dict>
             </array>
             <key>Emulate</key>
@@ -844,6 +848,8 @@
                 <integer>0</integer>
                 <key>DisplayLevel</key>
                 <integer>0</integer>
+                <key>LogModule</key>
+                <string></string>
                 <key>SerialInit</key>
                 <false/>
                 <key>SysReport</key>
@@ -995,7 +1001,7 @@
                 <key>AdviseFeatures</key>
                 <false/>
                 <key>MLB</key>
-                <string>C02544500QXGPF7JA</string>
+                <string>C02502403CDGPF71M</string>
                 <key>MaxBIOSVersion</key>
                 <false/>
                 <key>ProcessorType</key>
@@ -1009,9 +1015,9 @@
                 <key>SystemProductName</key>
                 <string>iMac17,1</string>
                 <key>SystemSerialNumber</key>
-                <string>C02QM0AWGG7L</string>
+                <string>C02P3RYMGG7L</string>
                 <key>SystemUUID</key>
-                <string>642EE90E-DC85-4A68-B4E1-B825C0D652BD</string>
+                <string>73EF819F-4357-404C-9AC9-64E6987E564F</string>
             </dict>
             <key>Memory</key>
             <dict>
