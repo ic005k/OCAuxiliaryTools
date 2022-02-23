@@ -266,7 +266,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -291,7 +291,7 @@
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2437,7 +2437,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2876,7 +2876,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
            </attribute>
            <layout class="QGridLayout" name="gridLayout_36">
             <item row="0" column="0">
-             <widget class="QFrame" name="frame_3">
+             <widget class="QFrame" name="frame_chk_27">
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -2909,7 +2909,7 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QFrame" name="frame_4">
+             <widget class="QFrame" name="frame_edit_22">
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -3870,7 +3870,7 @@ This setting allows to prevent using faster kernel caching variants if slower va
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>5</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -6595,7 +6595,7 @@ A continuously updated variable list can be found in a corresponding document: N
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -7401,7 +7401,7 @@ X86PlatformPlugin.kext读取的已知位：
            <attribute name="title">
             <string>Memory</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_78">
+           <layout class="QGridLayout" name="gridLayout_46">
             <item row="0" column="0">
              <widget class="QFrame" name="frame_edit_7">
               <property name="frameShape">
@@ -7709,6 +7709,33 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               <column/>
               <column/>
               <column/>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QFrame" name="frame_chk_28">
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_105">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_104"/>
+               </item>
+              </layout>
              </widget>
             </item>
             <item row="0" column="1" rowspan="2">
