@@ -2,13 +2,13 @@
 
 **macOS Monterey 12.3 new beta may need to install this kext AppleMCEReporterDisabler.kext**
 
-**AMD** platform is not currently supported by Apple, there is no official support not even from the developers of the main bootloader (OpenCore), but despite this it is possible to have a hackintosh based on the **AMD** platform and OSX from **macOS High Sierra till Monterey 12.2.x** thanks to the unofficial support of the developers and to the strong commitment of the **AMD** community.
+**AMD** platform is not currently supported by Apple, there is no official support not even from the developers of the main bootloader (OpenCore), but despite this it is possible to have a hackintosh based on the **AMD** platform and OSX from **macOS High Sierra till Monterey 12.3.x** thanks to the unofficial support of the developers and to the strong commitment of the **AMD** community.
 
 # Instructions
 
 #### Generate EFI Folder using OpenCore Auxiliary Tools
 
-#### 1. Generate a base EFI Folder for the CPU of your choice (sTRX4, X570 and X370 for now, others will be added in a near future)
+#### 1. Generate a base EFI Folder for the CPU of your choice
 - Run OCAuxiliaryTools (OCAT)
 - Open the **Database**
 - Double-click on an AMD plist
@@ -50,7 +50,7 @@ https://www.macos86.it/topic/3307-discussion-trx40-bare-metal-vanilla-patches/?d
 - iMacPro1.1
 - MacPro7.1
 - Check the following Settings:
-	- **ACPI > Add**: 3rd Gen Threadripper does not require any particular add in this section,  you could add in post install stage `SSDT-PLUG`,  and others SSDT to have proper USB power or GFX0 for GPU
+	- **ACPI > Add**: 3rd Gen Threadripper and new AMD chipset does not require any particular add in this section,  you could add in post install stage `SSDT-PLUG`,  and others SSDT to have proper USB power or GFX0 for GPU
 	Some manufactured motherboard as ASUS may have the need of a fake EC device (use a proper `SSDT-EC` if you need to boot)
 	Gigabyte users may have the need to disable `Wake on lan`on their BIOS.
 	- **DeviceProperties**:
@@ -58,7 +58,7 @@ https://www.macos86.it/topic/3307-discussion-trx40-bare-metal-vanilla-patches/?d
 	- **Kernel > Add**: Add additional kexts required for your hardware and features (base-set required for the selected system is already included and it includes Lilu.kext and VirtualSMC.kext or only FakeSMC.kext)
 	-  **Kernel > Patch**: AMD-only. Use included OCAT preset according to the number of cores of your CPU.
 	- **PlatformInfo > Generic**: Generate `SMBIOS` Data for the selected Mac model
-	- **Quirks > All Quirks config.plist sections**: Generate `SMBIOS` Data for the selected Mac model
+	- **Quirks > All Quirks config.plist sections**: Used include OCAT presets
 
 Save the EFI folder (put it on a FAT32 formatted USB flash drive and try booting from it)
 
