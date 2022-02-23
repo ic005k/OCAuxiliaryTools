@@ -259,6 +259,7 @@ void SyncOCDialog::on_listOpenCore_itemClicked(QListWidgetItem* item) {
 
 void SyncOCDialog::init_ItemColor() {
   int row = ui->listOpenCore->currentRow();
+  if (row < 0) return;
   for (int i = 0; i < ui->listOpenCore->count(); i++) {
     ui->listOpenCore->setCurrentRow(i);
   }
