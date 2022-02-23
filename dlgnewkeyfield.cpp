@@ -10,6 +10,7 @@ extern Method* mymethod;
 extern QString ocVer, strIniFile, strAppName, strAppExePath, ocVerDev, ocFrom,
     ocFromDev, SaveFileName;
 extern bool blDEV;
+extern int red;
 bool isSmartKey;
 QWidgetList listOCATWidgetHideList, listOCATWidgetDelList;
 QStringList listKey, listType, listValue;
@@ -312,7 +313,7 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
 
   hbox->addWidget(lbl);
   hbox->addWidget(edit);
-  frame->setFixedHeight(18);
+  frame->setMaximumHeight(25);
 
   QObjectList listObj;
   listObj = MainWindow::getAllFrame(MainWindow::getAllUIControls(tab));
@@ -339,6 +340,12 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   if (edit->objectName() == "editCustomDelays" && edit->text() == "") {
     edit->setText("Auto");
   }
+
+  edit->setAttribute(Qt::WA_MacShowFocusRect, 0);
+  if (red > 55)
+    Method::setLineEditQss(edit, 6, 1, "#C0C0C0", "#4169E1");
+  else
+    Method::setLineEditQss(edit, 6, 1, "#2A2A2A", "#4169E1");
 
   return edit;
 }

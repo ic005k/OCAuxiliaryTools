@@ -5253,7 +5253,7 @@ void MainWindow::init_MainUI() {
   init_InitialValue();
   init_TableStyle();
   init_ToolBarIcon();
-  Method::init_UIWidget(ui->tabTotal, red);
+  Method::init_UIWidget(this, red);
 
   orgComboBoxStyle = ui->cboxKernelArch->styleSheet();
   orgLineEditStyle = ui->editBID->styleSheet();
@@ -8541,7 +8541,7 @@ void MainWindow::paintEvent(QPaintEvent* event) {
     red = c_red;
     Method::setComboBoxQss(ui->mycboxFind, 6, 1, "#DCDCDC", "#D3D3D3");
     init_ToolBarIcon();
-    Method::init_UIWidget(ui->tabTotal, red);
+    Method::init_UIWidget(this, red);
     Method::init_UIWidget(myDlgPreference, red);
     Method::init_UIWidget(dlgSyncOC, red);
     Method::init_UIWidget(myDatabase, red);

@@ -2659,7 +2659,7 @@ void Method::init_UIWidget(QWidget* uiw, int red) {
   listObject = MainWindow::getAllComboBox(MainWindow::getAllUIControls(uiw));
   for (int i = 0; i < listObject.count(); i++) {
     QComboBox* w1 = (QComboBox*)listObject.at(i);
-    if (w1->objectName() != "") {
+    if (!w1->objectName().contains("mycboxFind")) {
       w1->setAttribute(Qt::WA_MacShowFocusRect, 0);
       if (red > 55)
         setComboBoxQss(w1, 6, 1, "#C0C0C0", "#4169E1");
