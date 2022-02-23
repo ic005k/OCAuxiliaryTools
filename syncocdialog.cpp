@@ -257,22 +257,41 @@ void SyncOCDialog::on_listOpenCore_itemClicked(QListWidgetItem* item) {
   Q_UNUSED(item);
 }
 
+void SyncOCDialog::init_ItemColor() {
+  for (int i = 0; i < ui->listOpenCore->count(); i++) {
+    ui->listOpenCore->setCurrentRow(i);
+  }
+}
+
 void SyncOCDialog::setListWidgetStyle() {
   QString fileName = sourceOpenCore.at(ui->listOpenCore->currentRow());
   if (mymethod->isWhatFile(fileName, "efi")) {
-    setListWidgetColor("#FFF8DC");
+    if (red > 55)
+      setListWidgetColor("#FFF8DC");
+    else
+      setListWidgetColor("#8B4513");
   }
   if (mymethod->isWhatFile(fileName, "efi") && fileName.contains("/Tools/")) {
-    setListWidgetColor("#FFEFDB");
+    if (red > 55)
+      setListWidgetColor("#FFEFDB");
+    else
+      setListWidgetColor("#2F4F4F");
   }
   if (mymethod->isWhatFile(fileName, "efi") && fileName.contains("/Drivers/")) {
-    setListWidgetColor("#E6E6FA");
+    if (red > 55)
+      setListWidgetColor("#E6E6FA");
+    else
+      setListWidgetColor("#473C8B");
   }
 }
 
 void SyncOCDialog::setListWidgetColor(QString color) {
-  ui->listOpenCore->item(ui->listOpenCore->currentRow())
-      ->setForeground(QBrush(Qt::black));
+  if (red > 55)
+    ui->listOpenCore->item(ui->listOpenCore->currentRow())
+        ->setForeground(QBrush(Qt::black));
+  else
+    ui->listOpenCore->item(ui->listOpenCore->currentRow())
+        ->setForeground(QBrush(Qt::white));
   ui->listOpenCore->item(ui->listOpenCore->currentRow())
       ->setBackground(QBrush(QColor(color)));
 }

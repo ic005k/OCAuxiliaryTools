@@ -8544,6 +8544,7 @@ void MainWindow::paintEvent(QPaintEvent* event) {
     Method::init_UIWidget(myDlgPreference, red);
     Method::init_UIWidget(dlgSyncOC, red);
     Method::init_UIWidget(myDatabase, red);
+    dlgSyncOC->init_ItemColor();
   }
 
   if (!One) {

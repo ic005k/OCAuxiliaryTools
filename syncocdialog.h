@@ -37,12 +37,14 @@ class SyncOCDialog : public QDialog {
   bool eventFilter(QObject *o, QEvent *e);
   void initKextList();
   void readCheckStateINI();
-
+  void setListWidgetStyle();
   void init_Sync_OC_Table();
 
   int get_PathCol(QTableWidget *t, QString pathText);
- public slots:
+  void init_ItemColor();
+public slots:
   void on_btnStop_clicked();
+  void on_listOpenCore_currentRowChanged(int currentRow);
 
  private slots:
   void on_btnStartSync_clicked();
@@ -52,8 +54,6 @@ class SyncOCDialog : public QDialog {
   void on_listKexts_itemClicked(QListWidgetItem *item);
 
   void on_listOpenCore_itemClicked(QListWidgetItem *item);
-
-  void on_listOpenCore_currentRowChanged(int currentRow);
 
   void on_btnCheckUpdate_clicked();
 
@@ -76,7 +76,6 @@ class SyncOCDialog : public QDialog {
   void on_editOCDevSource_currentTextChanged(const QString &arg1);
 
  private:
-  void setListWidgetStyle();
   void setListWidgetColor(QString color);
 
   QLabel *lblVer;
