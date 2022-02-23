@@ -182,7 +182,6 @@ QWidget* MainWindow::getSubTabWidget(int m, int s) {
 
 void MainWindow::setUIMargin() {
   int m = 1;
-
   QObjectList list = getAllGridLayout(getAllUIControls(this));
   for (int i = 0; i < list.count(); i++) {
     QGridLayout* w = (QGridLayout*)list.at(i);
