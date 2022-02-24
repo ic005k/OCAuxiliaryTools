@@ -22,15 +22,15 @@
 
 
 
-OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto facile da usare per [OpenCore](https://github.com/acidanthera/OpenCorePkg). Puo' adattarsi automaticamente ad ogni versione di OpenCore, sia a quella corrente che alle versioni future. Puoi utilizzarlo per passare la tua EFi da una versione all'altra del bootloader senza doverti preoccupare di nuove opzioni o contenuti eventualmente aggiunti.Utilizzalo per gestire OC, e' facile e comodo...
+OC Auxiliary Tool (OCAT o ocat in breve) e' uno strumento molto facile da usare per [OpenCore](https://github.com/acidanthera/OpenCorePkg). Si adatta automaticamente ad ogni versione di OpenCore, sia a quella corrente che alle versioni future. E' possibile utilizzarlo per passare la tua EFi da una versione all'altra del bootloader senza la preoccupazione di nuove opzioni o contenuti eventualmente aggiunti.Utilizzalo per gestire OC, e' facile e comodo...
 
 * [Inglese: Aggiornare OpenCore e i Kexts con OCAT (da 5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
 
 * [Italiano: Aggiornare OpenCore e i Kexts con OCAT (da antuneddu)](https://www.macos86.it/topic/5238-aggiornare%C2%A0-opencore-e-kexts-con-ocat/)
 
-* I contenuti Preset nei Quirks per configurazioni Intel sono forniti e mantenuti by 5T33Z0.  [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
+* Per fornire e mantenere i contenuti Preset nei Quirks di configurazioni Intel e per suggerimenti su interfaccia e funzionalità.  [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
 
-* Il pacchetto plugin Intel BaseConfigs e' fornito e mantenuto da 5T33Z0. [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
+* Per fornire e mantenere il pacchetto plugin Intel BaseConfigs. [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
 
 * I contenuti dei Preset, quirk, BaseConfigs, AMD kernel patch preset per tutte le CPU AMD e la traduzione in Italiano di questo README sono forniti e mantenuti da [fabiosun (macOS86.it)](https://github.com/macos86/QtOpenCoreConfig).
 * [Guida Utente OpenCore Auxiliary Tools (@chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
@@ -38,12 +38,12 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' un'utilita' molto facile da usare pe
 ---
 
 ### Ringraziamenti speciali
-* [vit9696](https://github.com/vit9696) Suggerimenti per la funzionalità' di OCAT.
-* [5T33Z0](https://github.com/5T33Z0) I pacchetti di plug-in OCAT sono forniti e mantenuti.
+* [vit9696](https://github.com/vit9696) Suggerimenti per la funzionalità.
+* [5T33Z0](https://github.com/5T33Z0) I pacchetti di plug-in e suggerimenti per l'interfaccia.
 * [LucasMucGH](https://github.com/LucasMucGH) Suggerimenti per la progettazione dell'interfaccia utente nativa basati sulla versione per Mac.
 * [fabiosun (macOS86.it)](https://github.com/macos86/QtOpenCoreConfig) per i contenuti relativi a CPU AMD.
 * [chriswayg](https://github.com/chriswayg) Guida per l'utente di OpenCore Auxiliary Tools.
-* Icona della app: Mirone (Brasile)
+* Icona della app: Mirone (Brasile).
 
 ### Grazie per il supporto ai seguenti software open source!
 
