@@ -328,3 +328,35 @@ Note 2 : See MaximumGain for an explanation of decibel volume levels.
 注1：这个设置是为了避免在听不见的音量水平上进行音频设置而导致的不必要的停顿，因为无论如何都不会听到声音。是否有听不见的音量水平取决于硬件。在一些硬件上（包括苹果），最低的音量音频值与硬件匹配得很好，而在其他一些硬件组合上，音量范围的最低部分可能根本就听不到。
 注2：请看MaximumGain对分贝音量级别的解释。
 
+
+***LogModules
+LogModules
+----
+待更新
+
+
+
+***LegacyEnable
+Type: plist boolean
+Failsafe: false
+Description: Enables loading a NVRAM variable file named nvram.plist from EFI volume root.
+This file must have a root plist dictionary type and contain two fields:
+• Version — plist integer, file version, must be set to 1.
+• Add — plist dictionary, equivalent to Add from config.plist.
+Variable loading happens prior to the Delete (and Add) phases. Unless LegacyOverwrite is enabled, it will not overwrite any existing variable. Variables allowed to be set must be specified in LegacySchema.
+Third-party scripts may be used to create nvram.plist file. An example of such script can be found in Utilities.
+The use of third-party scripts may require ExposeSensitiveData set to 0x3 to provide boot-path variable with the OpenCore EFI partition UUID.
+Warning: This feature can be dangerous, as it passes unprotected data to firmware variable services. Only use
+when no hardware NVRAM implementation is provided by the firmware or when the NVRAM implementation is incompatible.
+----
+类型：plist布尔值
+失败保护: false
+描述：启用从EFI卷根加载一个名为nvram.plist的NVRAM变量文件。
+这个文件必须有一个根plist字典类型，并包含两个字段：
+- Version - plist整数，文件版本，必须设置为1。
+- Add - plist字典，等同于config.plist中的Add。
+变量加载发生在删除（和添加）阶段之前。除非启用LegacyOverwrite，否则它不会覆盖任何现有的变量。允许设置的变量必须在LegacySchema中指定。
+第三方脚本可用于创建nvram.plist文件。这种脚本的例子可以在Utilities中找到。
+使用第三方脚本可能需要将ExposeSensitiveData设置为0x3，以提供带有OpenCore EFI分区UUID的启动路径变量。
+警告：该功能可能是危险的，因为它将未受保护的数据传递给固件变量服务，只有在固件没有提供硬件NVRAM实现或NVRAM实现不兼容时才使用。
+
