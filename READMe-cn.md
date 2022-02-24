@@ -16,10 +16,10 @@ OC辅助工具（简称OCAT或ocat） 是一个针对[OpenCore](https://github.c
 ---
 
 #### Credits
-* [vit9696](https://github.com/vit9696) 提供OCAT功能上的建议等。
-* [5T33Z0](https://github.com/5T33Z0) 提供和维护OCAT的Intel CPU插件包，用户交互及功能建议等。
+* [vit9696](https://github.com/vit9696) OCAT功能上的建议等。
+* [5T33Z0](https://github.com/5T33Z0) OCAT的Intel CPU插件包，用户交互及功能建议等。
 * [LucasMucGH](https://github.com/LucasMucGH) 基于Mac版本的原生UI设计建议等。
-* [fabiosun](https://github.com/fabiosun) 提供AMD的相关内容。
+* [fabiosun](https://github.com/fabiosun) AMD的相关内容。
 * [chriswayg](https://github.com/chriswayg) OpenCore Auxiliary Tools 用户指南。
 * APP图标设计：Mirone（巴西）。
 
