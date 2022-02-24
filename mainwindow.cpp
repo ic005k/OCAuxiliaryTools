@@ -5192,7 +5192,7 @@ void MainWindow::init_ToolBar() {
 void MainWindow::init_SearchUI() {
   // Search
   ui->mycboxFind->setAttribute(Qt::WA_MacShowFocusRect, false);
-  Method::setComboBoxQss(ui->mycboxFind, 6, 1, "#DCDCDC", "#D3D3D3");
+  Method::setComboBoxQss(ui->mycboxFind, 6, 1, "#C0C0C0", "#4169E1");
 
   ui->mycboxFind->lineEdit()->setClearButtonEnabled(false);
   ui->mycboxFind->lineEdit()->setPlaceholderText(tr("Search"));
@@ -6990,7 +6990,7 @@ void MainWindow::on_actionFind_triggered() {
     ui->mycboxFind->addItems(strList);
     AddCboxFindItem = false;
     FindTextChange = false;
-    Method::setComboBoxQss(ui->mycboxFind, 6, 1, "#DCDCDC", "#D3D3D3");
+    Method::setComboBoxQss(ui->mycboxFind, 6, 1, "#C0C0C0", "#4169E1");
     init_ToolBarIcon();
 
   } else {
@@ -7547,7 +7547,7 @@ void MainWindow::on_mycboxFind_currentTextChanged(const QString& arg1) {
     QBrush brush = pal.window();
     red = brush.color().red();
 
-    Method::setComboBoxQss(ui->mycboxFind, 6, 1, "#DCDCDC", "#D3D3D3");
+    Method::setComboBoxQss(ui->mycboxFind, 6, 1, "#C0C0C0", "#4169E1");
   }
 }
 
@@ -8534,7 +8534,7 @@ void MainWindow::paintEvent(QPaintEvent* event) {
 
   if (c_red != red) {
     red = c_red;
-    Method::setComboBoxQss(ui->mycboxFind, 6, 1, "#DCDCDC", "#D3D3D3");
+    Method::setComboBoxQss(ui->mycboxFind, 6, 1, "#C0C0C0", "#4169E1");
     init_ToolBarIcon();
     Method::init_UIWidget(this, red);
     Method::init_UIWidget(myDlgPreference, red);
