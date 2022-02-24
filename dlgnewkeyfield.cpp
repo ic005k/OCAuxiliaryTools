@@ -512,8 +512,8 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
       }
     }
     if (listOCATKey.count() > 0) {
-      if (MainName == "NVRAM")
-        qDebug() << listOCATKey << listOCAT << listSampleKey;
+      // if (MainName == "NVRAM")
+      //  qDebug() << listOCATKey << listOCAT << listSampleKey;
       for (int i = 0; i < listOCAT.count(); i++) {
         QWidget* w = listOCATWidget.at(i);
         w->setHidden(true);
