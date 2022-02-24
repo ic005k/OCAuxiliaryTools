@@ -2323,6 +2323,7 @@ void Method::show_Tip(QString strText, QString strTip) {
     strTip = str;
   strTip = strTip.trimmed();
   int ms = strTip.length() * 135;
+  if (ms < 2000) ms = 2000;
 
   int dir = 10;
   QScreen* screen = QGuiApplication::primaryScreen();

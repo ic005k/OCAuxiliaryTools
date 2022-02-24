@@ -377,7 +377,9 @@ class MainWindow : public QMainWindow {
   void init_Table(int index);
   void init_FindResults();
 
- public slots:
+  void init_Label(QLabel* w);
+  void init_CheckBox(QCheckBox *w);
+public slots:
   void DisplayLevel();
   void ScanPolicy();
   void PickerAttributes();

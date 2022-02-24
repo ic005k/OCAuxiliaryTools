@@ -141,6 +141,7 @@ class Method : public QMainWindow {
                                 const QString &normalColor,
                                 const QString &focusColor);
   static void init_UIWidget(QWidget *w, int red);
+
  public slots:
   void generateEFI(QString file);
   void on_btnExportMaster();

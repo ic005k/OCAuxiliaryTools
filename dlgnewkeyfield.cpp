@@ -242,6 +242,7 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   }
   lbl->setText(text);
   lbl->setObjectName("lbl" + text);
+  frame->setObjectName("frame" + text);
   QLineEdit* edit = new QLineEdit();
   edit->setObjectName(ObjectName);
 

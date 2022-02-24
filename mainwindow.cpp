@@ -122,6 +122,19 @@ void MainWindow::changeOpenCore(bool blDEV) {
 
   smart_UpdateKeyField();
   init_LineEditDataCheck();
+  for (int i = 0; i < listOCATWidgetDelList.count(); i++) {
+    QWidget* w = listOCATWidgetDelList.at(i);
+    if (w->objectName().mid(0, 5) == "frame") {
+      if (w->children().at(1)->objectName().mid(0, 3) == "lbl") {
+        QLabel* lbl = (QLabel*)w->children().at(1);
+        init_Label(lbl);
+      }
+    }
+    if (w->objectName().mid(0, 3) == "chk") {
+      QCheckBox* chk = (QCheckBox*)w;
+      init_CheckBox(chk);
+    }
+  }
 
   if (myDlgPreference->ui->chkHideToolbar->isChecked()) {
     title = lblVer->text() + "      ";
@@ -142,8 +155,6 @@ MainWindow::MainWindow(QWidget* parent)
   init_Widgets();
   setUIMargin();
   init_MainUI();
-  init_CopyLabel();
-  init_CopyCheckbox();
   init_setWindowModified();
   init_hardware_info();
   initui_Misc();
@@ -5246,6 +5257,8 @@ void MainWindow::init_MainUI() {
   init_HelpMenu();
   init_SearchUI();
   init_LineEditDataCheck();
+  init_CopyLabel();
+  init_CopyCheckbox();
   copyText(ui->listFind);
   copyText(ui->listMain);
   copyText(ui->listSub);
@@ -5501,48 +5514,40 @@ void MainWindow::init_CopyCheckbox() {
   for (int i = 0; i < listOfCheckBox.count(); i++) {
     QCheckBox* w = (QCheckBox*)listOfCheckBox.at(i);
     listUICheckBox.append(w);
-    setCheckBoxWidth(w);
-    w->setContextMenuPolicy(Qt::CustomContextMenu);
-
-    w->installEventFilter(this);
-
-    mymethod->setToolTip(w, w->text());
-
-    QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
-    QAction* showTipsAction = new QAction(tr("Show Tips"));
-
-    QMenu* copyMenu = new QMenu(this);
-    copyMenu->addAction(copyAction);
-    copyMenu->addAction(showTipsAction);
-
-    connect(copyAction, &QAction::triggered, [=]() {
-      QString str = copyAction->text().trimmed();
-      QString str1 = str.replace(tr("CopyText"), "");
-
-      QClipboard* clipboard = QApplication::clipboard();
-      clipboard->setText(str1.trimmed());
-    });
-
-    connect(showTipsAction, &QAction::triggered, [=]() {
-      QString str = copyAction->text().trimmed();
-      QString str1 = str.replace(tr("CopyText"), "").trimmed();
-
-      myToolTip->popup(QCursor::pos(), str1 + "\n\n", w->toolTip());
-    });
-
-    mymethod->setStatusBarTip(w);
-
-    connect(w, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
-      Q_UNUSED(pos);
-
-      if (w->toolTip().trimmed() == "")
-        showTipsAction->setVisible(true);
-      else
-        showTipsAction->setVisible(true);
-
-      copyMenu->exec(QCursor::pos());
-    });
+    init_CheckBox(w);
   }
+}
+
+void MainWindow::init_CheckBox(QCheckBox* w) {
+  setCheckBoxWidth(w);
+  w->setContextMenuPolicy(Qt::CustomContextMenu);
+  w->installEventFilter(this);
+  mymethod->setToolTip(w, w->text());
+  QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
+  QAction* showTipsAction = new QAction(tr("Show Tips"));
+  QMenu* copyMenu = new QMenu(this);
+  copyMenu->addAction(copyAction);
+  copyMenu->addAction(showTipsAction);
+  connect(copyAction, &QAction::triggered, [=]() {
+    QString str = copyAction->text().trimmed();
+    QString str1 = str.replace(tr("CopyText"), "");
+    QClipboard* clipboard = QApplication::clipboard();
+    clipboard->setText(str1.trimmed());
+  });
+  connect(showTipsAction, &QAction::triggered, [=]() {
+    QString str = copyAction->text().trimmed();
+    QString str1 = str.replace(tr("CopyText"), "").trimmed();
+    myToolTip->popup(QCursor::pos(), str1 + "\n\n", w->toolTip());
+  });
+  mymethod->setStatusBarTip(w);
+  connect(w, &QCheckBox::customContextMenuRequested, [=](const QPoint& pos) {
+    Q_UNUSED(pos);
+    if (w->toolTip().trimmed() == "")
+      showTipsAction->setVisible(true);
+    else
+      showTipsAction->setVisible(true);
+    copyMenu->exec(QCursor::pos());
+  });
 }
 
 void MainWindow::init_CopyLabel() {
@@ -5559,48 +5564,40 @@ void MainWindow::init_CopyLabel() {
         w == ui->lblScanPolicy || w == ui->lblTargetHex) {
       w->setTextInteractionFlags(Qt::TextSelectableByMouse);
     } else {
-      w->setContextMenuPolicy(Qt::CustomContextMenu);
-
-      w->installEventFilter(this);
-
-      mymethod->setToolTip(w, w->text());
-
-      QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
-      QAction* showTipsAction = new QAction(tr("Show Tips"));
-
-      QMenu* copyMenu = new QMenu(this);
-      copyMenu->addAction(copyAction);
-      copyMenu->addAction(showTipsAction);
-
-      connect(copyAction, &QAction::triggered, [=]() {
-        QString str = copyAction->text().trimmed();
-        QString str1 = str.replace(tr("CopyText"), "");
-
-        QClipboard* clipboard = QApplication::clipboard();
-        clipboard->setText(str1.trimmed());
-      });
-
-      connect(showTipsAction, &QAction::triggered, [=]() {
-        QString str = copyAction->text().trimmed();
-        QString str1 = str.replace(tr("CopyText"), "").trimmed();
-
-        myToolTip->popup(QCursor::pos(), str1 + "\n\n", w->toolTip());
-      });
-
-      mymethod->setStatusBarTip(w);
-
-      connect(w, &QLabel::customContextMenuRequested, [=](const QPoint& pos) {
-        Q_UNUSED(pos);
-
-        if (w->toolTip().trimmed() == "")
-          showTipsAction->setVisible(false);
-        else
-          showTipsAction->setVisible(true);
-
-        copyMenu->exec(QCursor::pos());
-      });
+      init_Label(w);
     }
   }
+}
+
+void MainWindow::init_Label(QLabel* w) {
+  w->setContextMenuPolicy(Qt::CustomContextMenu);
+  w->installEventFilter(this);
+  mymethod->setToolTip(w, w->text());
+  QAction* copyAction = new QAction(tr("CopyText") + "  " + w->text());
+  QAction* showTipsAction = new QAction(tr("Show Tips"));
+  QMenu* copyMenu = new QMenu(this);
+  copyMenu->addAction(copyAction);
+  copyMenu->addAction(showTipsAction);
+  connect(copyAction, &QAction::triggered, [=]() {
+    QString str = copyAction->text().trimmed();
+    QString str1 = str.replace(tr("CopyText"), "");
+    QClipboard* clipboard = QApplication::clipboard();
+    clipboard->setText(str1.trimmed());
+  });
+  connect(showTipsAction, &QAction::triggered, [=]() {
+    QString str = copyAction->text().trimmed();
+    QString str1 = str.replace(tr("CopyText"), "").trimmed();
+    myToolTip->popup(QCursor::pos(), str1 + "\n\n", w->toolTip());
+  });
+  mymethod->setStatusBarTip(w);
+  connect(w, &QLabel::customContextMenuRequested, [=](const QPoint& pos) {
+    Q_UNUSED(pos);
+    if (w->toolTip().trimmed() == "")
+      showTipsAction->setVisible(false);
+    else
+      showTipsAction->setVisible(true);
+    copyMenu->exec(QCursor::pos());
+  });
 }
 
 void MainWindow::setCheckBoxWidth(QCheckBox* cbox) {
