@@ -7145,17 +7145,16 @@ void MainWindow::goResultsCheckbox(QString objName) {
     if (!end) {
       for (int i = 0; i < ui->listMain->count(); i++) {
         if (end) break;
-
         ui->listMain->setCurrentRow(i);
         listOfCheckBox.clear();
         listOfCheckBox = getAllCheckBox(getAllUIControls(currentMainTabWidget));
         for (int k = 0; k < listOfCheckBox.count(); k++) {
-          if (listOfCheckBox.at(k)->objectName() == name) {
+          QCheckBox* w = (QCheckBox*)listOfCheckBox.at(k);
+          if (w->objectName() == name) {
             QString style =
                 "QCheckBox{background-color:rgb(255,0,0);color:rgb(255,255,"
                 "255)"
                 ";}";
-            QCheckBox* w = (QCheckBox*)listOfCheckBox.at(k);
             w->setStyleSheet(style);
             end = true;
             break;

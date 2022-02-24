@@ -224,6 +224,9 @@ void dlgNewKeyField::add_CheckBox(QWidget* tab, QString ObjectName,
     listOCATWidgetDelList.removeOne(chk);
     listOCATWidgetDelList.append(chk);
   }
+
+  qDebug() << "Added Widget: " << tab->objectName() << "=>"
+           << chk->objectName();
 }
 
 QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
@@ -348,6 +351,8 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   else
     Method::setLineEditQss(edit, 6, 1, "#2A2A2A", "#4169E1");
 
+  qDebug() << "Added Widget: " << tab->objectName() << "=>"
+           << edit->objectName();
   return edit;
 }
 
@@ -464,7 +469,6 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
         if (list.count() == 2 && list1.count() == 2) {
           if (list.at(0) == list1.at(0) && list.at(1) != list1.at(1)) {
             Key = list.at(0);
-            qDebug() << str << str1;
             if (list.at(1) == "bool") {
               set_WidgetHide(listOCATWidget, Key);
               set_LblHide(tab, Key);
@@ -508,7 +512,8 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
       }
     }
     if (listOCATKey.count() > 0) {
-      // qDebug() << listOCATKey << listOCAT;
+      if (MainName == "NVRAM")
+        qDebug() << listOCATKey << listOCAT << listSampleKey;
       for (int i = 0; i < listOCAT.count(); i++) {
         QWidget* w = listOCATWidget.at(i);
         w->setHidden(true);
@@ -527,7 +532,7 @@ QStringList dlgNewKeyField::check_SampleFile(QVariantMap mapTatol, QWidget* tab,
       }
     }
     if (listSampleKey.count() > 0) {
-      qDebug() << listSampleKey;
+      // qDebug() << listSampleKey;
       for (int i = 0; i < listSampleKey.count(); i++) {
         QString Key = listSampleKey.at(i);
         for (int j = 0; j < listSample.count(); j++) {
@@ -615,6 +620,17 @@ QStringList dlgNewKeyField::get_KeyTypeValue(QVariantMap mapTatol,
     QString type = map[name].typeName();
     list0.append(name + "|" + type);
   }
+  // if (MainName == "NVRAM") qDebug() << list0;
+  if (SubName == "") {
+    for (int i = 0; i < list0.count(); i++) {
+      QString str = list0.at(i);
+      if (str.contains("QVariantMap")) {
+        list0.removeAt(i);
+        i--;
+      }
+    }
+  }
+  // if (MainName == "NVRAM") qDebug() << list0;
   return list0;
 }
 
