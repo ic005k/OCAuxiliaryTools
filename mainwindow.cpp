@@ -142,6 +142,7 @@ MainWindow::MainWindow(QWidget* parent)
   init_Widgets();
   setUIMargin();
   init_MainUI();
+  init_CopyLabel();
   init_setWindowModified();
   init_hardware_info();
   initui_Misc();
@@ -5243,7 +5244,6 @@ void MainWindow::init_MainUI() {
   init_ToolBar();
   init_HelpMenu();
   init_SearchUI();
-  init_CopyLabel();
   init_CopyCheckbox();
   init_LineEditDataCheck();
   copyText(ui->listFind);
