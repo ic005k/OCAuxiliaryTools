@@ -33,8 +33,6 @@
 [dortania build-repo](https://github.com/dortania/build-repo)&nbsp; &nbsp; &nbsp;&nbsp;
 [HackinPlugins](https://github.com/bugprogrammer/HackinPlugins)&nbsp; &nbsp; &nbsp;&nbsp;
 
-#### 最后，对所有的贡献者一并表示感谢，在此不再一一列出，谢谢你们的参与和支持！
-
 ---
 
 #### 备注：此项目开始于2020年8月
