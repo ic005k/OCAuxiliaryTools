@@ -9913,6 +9913,13 @@ void MainWindow::on_mycboxEmulate_currentTextChanged(const QString& arg1) {
     ui->editDatCpuid1Mask->setText(
         "FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00");
   }
+
+  if (arg1 == "Emulate Cascade Lake") {
+    ui->editDatCpuid1Data->setText(
+        "57 06 05 00 00 00 00 00 00 00 00 00 00 00 00 00");
+    ui->editDatCpuid1Mask->setText(
+        "FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00");
+  }
 }
 
 void MainWindow::on_btnImport_clicked() {

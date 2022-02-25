@@ -266,7 +266,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -2437,7 +2437,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2972,6 +2972,11 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
                    <item>
                     <property name="text">
                      <string>Emulate Comet Lake (0x0A0655)</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Emulate Cascade Lake</string>
                     </property>
                    </item>
                   </widget>
@@ -11793,7 +11798,7 @@ Enable this option to be able to see all the boot options when having multiple d
      <x>0</x>
      <y>0</y>
      <width>1498</width>
-     <height>24</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
