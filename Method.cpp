@@ -580,6 +580,9 @@ void Method::updateOpenCore() {
       if (!blDEV) {
         Reg.setValue("ocVer", ver);
         ocVer = ver;
+        if (mw_one->dlgSyncOC->ui->comboOCVersions->currentIndex() == 0) {
+          Reg.setValue("maxVer", ver);
+        }
       } else {
         Reg.setValue("ocVerDev", ver);
         ocVerDev = ver;

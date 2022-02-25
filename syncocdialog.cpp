@@ -13,6 +13,7 @@ extern bool Initialization;
 extern Method* mymethod;
 extern int red;
 QProgressBar* progBar;
+extern QSettings Reg;
 
 SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {
@@ -84,9 +85,7 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
                                               << "0.6.2"
 
   );
-  strIniFile =
-      QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
-  QSettings Reg(strIniFile, QSettings::IniFormat);
+  ui->comboOCVersions->clear();
   ui->editOCDevSource->lineEdit()->setText(
       Reg.value("DevSource", "https://github.com/dortania/build-repo")
           .toString());
@@ -343,7 +342,6 @@ void SyncOCDialog::closeEvent(QCloseEvent* event) {
   writeCheckStateINI();
 
   QString txt = ui->editOCDevSource->lineEdit()->text().trimmed();
-  QSettings Reg(strIniFile, QSettings::IniFormat);
   Reg.setValue("DevSource", txt);
   if (txt != "")
     ocFromDev = "<a href=\"" + txt + "\"" + "> " + tr(" Source ");
@@ -580,7 +578,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
     ui->editOCDevSource->setHidden(true);
     ui->btnImport->setHidden(true);
 
-    QString strDev = ocVerDev;
+    QString strDev = Reg.value("maxVer", "0.7.8").toString();
     if (strDev.contains(" ")) strDev = strDev.split(" ").at(0);
     if (strDev > ui->comboOCVersions->itemText(1)) {
       ui->comboOCVersions->clear();
@@ -595,7 +593,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
         QString str0 = "061";
         QString str1 = a0 + b0 + c0;
         int start = str0.toInt();
-        int end = str1.toInt();
+        int end = str1.toInt() + 1;
         QString a, b, c;
 
         for (int i = 0; i < 200; i++) {
