@@ -28,9 +28,9 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' uno strumento molto facile da usare 
 
 * [Italiano: Aggiornare OpenCore e i Kexts con OCAT (da antuneddu)](https://www.macos86.it/topic/5238-aggiornare%C2%A0-opencore-e-kexts-con-ocat/)
 
-* Per fornire e mantenere i contenuti Preset nei Quirks di configurazioni Intel e per suggerimenti su interfaccia e funzionalità.  [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
+* 5T33Z0 per la fornitura e aggiornamento dei contenuti Preset nei Quirks di configurazioni Intel e per suggerimenti su interfaccia e funzionalità.  [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
 
-* Per fornire e mantenere il pacchetto plugin Intel BaseConfigs. [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
+* 5T33Z0 per la fornitura e aggiornamento del pacchetto plugin Intel BaseConfigs. [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
 
 * I contenuti dei Preset, quirk, BaseConfigs, AMD kernel patch preset per tutte le CPU AMD e la traduzione in Italiano di questo README sono forniti e mantenuti da [fabiosun (macOS86.it)](https://github.com/macos86/QtOpenCoreConfig).
 * [Guida Utente OpenCore Auxiliary Tools (@chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
@@ -58,8 +58,6 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' uno strumento molto facile da usare 
 [DirectionalToolTip](https://github.com/scondratev/DirectionalToolTip)&nbsp; &nbsp; &nbsp;&nbsp;
 [dortania build-repo](https://github.com/dortania/build-repo)&nbsp; &nbsp; &nbsp;&nbsp;
 [HackinPlugins](https://github.com/bugprogrammer/HackinPlugins)&nbsp; &nbsp; &nbsp;&nbsp;
-
-### Per concludere, un grande ringraziamento alle persone che hanno contribuito, anche se non menzionate qui, grazie per il vostro supporto e partecipazione!
 
 ---
 
