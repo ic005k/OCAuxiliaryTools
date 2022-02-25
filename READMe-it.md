@@ -59,8 +59,6 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' uno strumento molto facile da usare 
 [dortania build-repo](https://github.com/dortania/build-repo)&nbsp; &nbsp; &nbsp;&nbsp;
 [HackinPlugins](https://github.com/bugprogrammer/HackinPlugins)&nbsp; &nbsp; &nbsp;&nbsp;
 
-### Per concludere, un grande ringraziamento alle persone che hanno contribuito, anche se non menzionate qui, grazie per il vostro supporto e partecipazione!
-
 ---
 
 ### Nota: Questo progetto e' iniziato ad Agosto 2020
