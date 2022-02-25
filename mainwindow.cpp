@@ -1590,6 +1590,15 @@ void MainWindow::ParserUEFI(QVariantMap map) {
   QVariantMap map_AppleInput = map["AppleInput"].toMap();
   getValue(map_AppleInput, ui->tabUEFI2);
 
+  QObjectList listObj = getAllLineEdit(getAllUIControls(ui->tabUEFI2));
+  for (int i = 0; i < listObj.count(); i++) {
+    QLineEdit* w = (QLineEdit*)listObj.at(i);
+    if (w->objectName() == "editCustomDelays") {
+      if (w->text() == "true" || w->text() == "false") w->setText("Auto");
+      break;
+    }
+  }
+
   if (ui->editIntKeyInitialDelay->text() == "")
     ui->editIntKeyInitialDelay->setText("0");
 

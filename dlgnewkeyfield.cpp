@@ -341,8 +341,9 @@ QLineEdit* dlgNewKeyField::add_LineEdit(QWidget* tab, QString ObjectName,
   if (edit->objectName() == "editBootProtect" && edit->text() == "") {
     edit->setText("None");
   }
-  if (edit->objectName() == "editCustomDelays" && edit->text() == "") {
-    edit->setText("Auto");
+  if (edit->objectName() == "editCustomDelays") {
+    if (edit->text() == "" || edit->text() == "true" || edit->text() == "false")
+      edit->setText("Auto");
   }
 
   edit->setAttribute(Qt::WA_MacShowFocusRect, 0);
