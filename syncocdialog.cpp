@@ -961,3 +961,34 @@ void SyncOCDialog::on_editOCDevSource_currentTextChanged(const QString& arg1) {
   ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
   ui->lblOCFrom->setText(ocFrom);
 }
+
+void SyncOCDialog::on_valueChanged(QProgressBar* m_bar) {
+  int value = m_bar->value();
+  QImage m_image(":/icon/prog.png");
+  QString qss =
+      "QProgressBar{"
+      "border: 0px solid rgb(16, 135, 209);"
+      "background: rgba(24,24,255,100);"
+      "border-radius: 0px; }"
+      "QProgressBar::chunk:enabled {"
+      "border-radius: 0px; "
+      "background: qlineargradient(x1:0, y1:0, x2:1, y2:0";
+
+  double v = m_bar->maximum();
+  double EndColor = static_cast<double>(value) / v;
+
+  for (int i = 0; i < 100; i++) {
+    double Current = EndColor * i / 100;
+    QRgb rgb =
+        m_image.pixel((m_image.width() - 1) * Current, m_image.height() / 2);
+    QColor c(rgb);
+    qss.append(QString(",stop:%1  rgb(%2,%3,%4)")
+                   .arg(i / 100.0)
+                   .arg(c.red())
+                   .arg(c.green())
+                   .arg(c.blue()));
+  }
+
+  qss.append(");}");
+  m_bar->setStyleSheet(qss);
+}

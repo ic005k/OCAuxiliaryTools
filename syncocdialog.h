@@ -42,7 +42,9 @@ class SyncOCDialog : public QDialog {
 
   int get_PathCol(QTableWidget *t, QString pathText);
   void init_ItemColor();
-public slots:
+
+  void on_valueChanged(QProgressBar *m_bar);
+ public slots:
   void on_btnStop_clicked();
   void on_listOpenCore_currentRowChanged(int currentRow);
 
