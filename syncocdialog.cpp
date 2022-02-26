@@ -962,7 +962,7 @@ void SyncOCDialog::on_editOCDevSource_currentTextChanged(const QString& arg1) {
   ui->lblOCFrom->setText(ocFrom);
 }
 
-void SyncOCDialog::on_valueChanged(QProgressBar* m_bar) {
+void SyncOCDialog::on_ProgBarvalueChanged(QProgressBar* m_bar) {
   int value = m_bar->value();
   QImage m_image(":/icon/prog.png");
   QString qss =
