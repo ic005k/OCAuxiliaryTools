@@ -9226,13 +9226,12 @@ void MainWindow::on_btnExposeSensitiveData_clicked() {
 }
 
 void MainWindow::on_actionPlist_editor_triggered() {
-  QUrl url(
-      QString("https://github.com/ic005k/PlistEDPlus/blob/main/README.md"));
+  QUrl url(QString("https://github.com/ic005k/Xplist/blob/main/README.md"));
   QDesktopServices::openUrl(url);
 }
 
 void MainWindow::on_actionDSDT_SSDT_editor_triggered() {
-  QUrl url(QString("https://github.com/ic005k/QtiASL/blob/master/README.md"));
+  QUrl url(QString("https://github.com/ic005k/Xiasl/blob/master/README.md"));
   QDesktopServices::openUrl(url);
 }
 

@@ -47,6 +47,7 @@ dlgDatabase::dlgDatabase(QWidget *parent)
 
   // Find Table
   ui->tableDatabaseFind->horizontalHeader()->setHidden(true);
+  ui->tableDatabaseFind->setAlternatingRowColors(true);
   ui->tableDatabaseFind->setHidden(true);
   ui->tableDatabaseFind->horizontalHeader()->setStretchLastSection(true);
   ui->tableDatabaseFind->setEditTriggers(QAbstractItemView::NoEditTriggers);

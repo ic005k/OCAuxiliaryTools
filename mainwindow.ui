@@ -11798,7 +11798,7 @@ Enable this option to be able to see all the boot options when having multiple d
      <x>0</x>
      <y>0</y>
      <width>1498</width>
-     <height>29</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -11973,7 +11973,7 @@ QToolBar {border:none;}</string>
   </action>
   <action name="actionPlist_editor">
    <property name="text">
-    <string>PlistEDPlus</string>
+    <string>Xplist</string>
    </property>
   </action>
   <action name="actionDSDT_SSDT_editor">
@@ -12001,12 +12001,12 @@ QToolBar {border:none;}</string>
   </action>
   <action name="btnExportMaster">
    <property name="text">
-    <string>ExportMaster</string>
+    <string>Export Master</string>
    </property>
   </action>
   <action name="btnImportMaster">
    <property name="text">
-    <string>ImportMaster</string>
+    <string>Import Master</string>
    </property>
   </action>
   <action name="btnHelp">

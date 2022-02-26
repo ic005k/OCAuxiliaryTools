@@ -28,6 +28,7 @@ dlgPreference::dlgPreference(QWidget *parent)
   }
 
   // Kexts Urls
+  ui->tableKextUrl->setAlternatingRowColors(true);
   ui->tableKextUrl->horizontalHeader()->setStretchLastSection(true);
   ui->tableKextUrl->setColumnWidth(0, 200);
   ui->tableKextUrl->setColumnWidth(1, 400);
