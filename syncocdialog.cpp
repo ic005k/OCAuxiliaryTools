@@ -35,21 +35,15 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
       "blue;margin:1px,1px,1px,1px;border-radius:6;"
       "color:white}";
 
-  ui->listKexts->setStyleSheet(listStyleMain);
   ui->listOpenCore->setStyleSheet(listStyleMain);
   int size = 25;
-  ui->listKexts->setIconSize(QSize(15, 15));
   ui->listOpenCore->setIconSize(QSize(15, 15));
-  ui->listKexts->setGridSize(QSize(size, size));
   ui->listOpenCore->setGridSize(QSize(size, size));
 
   ui->btnStartSync->setDefault(true);
   ui->labelShowDLInfo->setVisible(false);
   ui->labelShowDLInfo->setText("");
   ui->btnUpdate->setEnabled(false);
-
-  ui->listKexts->setViewMode(QListView::ListMode);
-  ui->listKexts->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
   ui->listOpenCore->setViewMode(QListView::ListMode);
   ui->listOpenCore->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -63,8 +57,6 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
     ui->tableKexts->horizontalHeader()->setSectionResizeMode(
         i, QHeaderView::ResizeToContents);
   }
-
-  ui->listKexts->setHidden(true);
 
   ui->comboOCVersions->addItems(QStringList() << tr("Latest Version") << "0.7.8"
                                               << "0.7.7"
@@ -159,97 +151,6 @@ bool SyncOCDialog::eventFilter(QObject* o, QEvent* e) {
   }
 
   return QWidget::eventFilter(o, e);
-}
-
-void SyncOCDialog::addVerWidget(int currentRow, QString strTV, QString strSV,
-                                QString strShowFileName) {
-  if (mw_one->mac || mw_one->osx1012)
-    verList.at(currentRow)->setFont(QFont("Menlo", 12));
-  if (mw_one->win) verList.at(currentRow)->setFont(QFont("consolas"));
-
-  ui->listKexts->item(currentRow)->setText("        " + strShowFileName);
-  verList.at(currentRow)->setText(strTV + "    " + strSV + " ");
-
-  QString strStyleSel = "QLabel {color: #e6e6e6;background-color: none;}";
-  QString strStyle = "QLabel {color: #2c2c2c;background-color: none;}";
-  for (int i = 0; i < ui->listKexts->count(); i++) {
-    if (i == currentRow)
-      verList.at(currentRow)->setStyleSheet(strStyleSel);
-    else
-      verList.at(i)->setStyleSheet(strStyle);
-  }
-}
-
-void SyncOCDialog::on_listKexts_currentRowChanged(int currentRow) {
-  if (currentRow < 0) return;
-
-  ui->listKexts->item(ui->listKexts->currentRow())
-      ->setForeground(QBrush(Qt::black));
-  ui->listKexts->item(ui->listKexts->currentRow())
-      ->setBackground(QBrush(QColor("#FFD39B")));
-
-  QString sourceModi, targetModi, sourceFile, targetFile, sourceHash,
-      targetHash;
-
-  sourceFile = sourceKexts.at(currentRow);
-  targetFile = targetKexts.at(currentRow);
-
-  sourceHash = mw_one->getMD5(mymethod->getKextBin(sourceFile));
-  targetHash = mw_one->getMD5(mymethod->getKextBin(targetFile));
-
-  QFileInfo fiSource(sourceFile);
-  QFileInfo fiTarget(targetFile);
-  sourceModi = fiSource.lastModified().toString();
-  targetModi = fiTarget.lastModified().toString();
-
-  QString strShowFileName, strSV, strTV;
-  strShowFileName = fiSource.fileName();
-  strSV = mymethod->getKextVersion(sourceFile);
-  strTV = mymethod->getKextVersion(targetFile);
-
-  bool defUS = false;
-  mw_one->myDlgPreference->refreshKextUrl(true);
-  for (int i = 0; i < mw_one->myDlgPreference->ui->tableKextUrl->rowCount();
-       i++) {
-    QString str =
-        mw_one->myDlgPreference->ui->tableKextUrl->item(i, 0)->text().trimmed();
-    QString str1 = QFileInfo(targetFile).fileName();
-    if (str1 == str || str1.mid(0, 3) == "SMC" || str1.contains("AppleALC") ||
-        str1.contains("BlueTool") || str1.contains("VoodooPS2Controller") ||
-        str1.contains("VoodooI2C") || str1.contains("Brcm") ||
-        str1.contains("IntelSnowMausi"))
-      defUS = true;
-  }
-
-  if (!defUS) {
-    ui->listKexts->item(currentRow)->setIcon(QIcon(":/icon/nous.png"));
-
-  } else {
-    if (!QFile(sourceFile).exists()) {
-      ui->listKexts->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
-    }
-    if (!QFile(targetFile).exists()) {
-      ui->listKexts->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
-    }
-    if (QFile(sourceFile).exists() && QFile(targetFile).exists()) {
-      if (strSV > strTV) {
-        ui->listKexts->item(currentRow)->setIcon(QIcon(":/icon/no.png"));
-
-      } else {
-        ui->listKexts->item(currentRow)->setIcon(QIcon(":/icon/ok.png"));
-      }
-    }
-  }
-
-  addVerWidget(currentRow, strTV, strSV, strShowFileName);
-
-  if (sourceHash != targetHash) {
-  } else {
-  }
-}
-
-void SyncOCDialog::on_listKexts_itemClicked(QListWidgetItem* item) {
-  Q_UNUSED(item);
 }
 
 void SyncOCDialog::on_listOpenCore_itemClicked(QListWidgetItem* item) {
@@ -487,42 +388,6 @@ void SyncOCDialog::on_btnClearAll_clicked() {
 
 void SyncOCDialog::resizeEvent(QResizeEvent* event) { Q_UNUSED(event); }
 
-void SyncOCDialog::initKextList() {
-  chkList.clear();
-  textList.clear();
-  verList.clear();
-
-  QString strStyle = "QLabel {color: #2c2c2c;background-color: none;}";
-
-  for (int i = 0; i < ui->listKexts->count(); i++) {
-    QWidget* w = new QWidget(this);
-    QHBoxLayout* layout = new QHBoxLayout(w);
-    layout->setContentsMargins(0, 0, 0, 0);
-    layout->setDirection(QBoxLayout::LeftToRight);
-
-    checkBox = new QCheckBox(w);
-    chkList.append(checkBox);
-
-    lblTxt = new QLabel(w);
-    lblTxt->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    textList.append(lblTxt);
-
-    lblVer = new QLabel(w);
-    lblVer->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    lblVer->setStyleSheet(strStyle);
-    verList.append(lblVer);
-
-    layout->addSpacing(4);
-    layout->addWidget(checkBox, 0, Qt::AlignLeft | Qt::AlignAbsolute);
-    layout->addSpacing(4);
-    layout->addWidget(lblTxt, 0, Qt::AlignLeft | Qt::AlignAbsolute);
-    layout->addWidget(lblVer, 0, Qt::AlignRight | Qt::AlignAbsolute);
-
-    w->setLayout(layout);
-    ui->listKexts->setItemWidget(ui->listKexts->item(i), w);
-  }
-}
-
 void SyncOCDialog::readCheckStateINI() {
   QString strTag = SaveFileName;
   strTag.replace("/", "-");
@@ -552,12 +417,6 @@ void SyncOCDialog::readCheckStateINI() {
         ui->listOpenCore->item(i)->setCheckState(Qt::Unchecked);
     }
   }
-}
-
-void SyncOCDialog::on_btnSettings_clicked() {
-  mw_one->myDatabase->close();
-  mw_one->on_actionPreferences_triggered();
-  mw_one->myDlgPreference->ui->tabWidget->setCurrentIndex(0);
 }
 
 void SyncOCDialog::init_Sync_OC_Table() {
@@ -627,7 +486,6 @@ void SyncOCDialog::init_Sync_OC_Table() {
   targetKexts.clear();
   sourceOpenCore.clear();
   targetOpenCore.clear();
-  ui->listKexts->clear();
   ui->listOpenCore->clear();
   chkList.clear();
 
@@ -798,7 +656,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
 
   setModal(true);
   show();
-  ui->listKexts->setFocus();
+  ui->tableKexts->setFocus();
 
   for (int i = 0; i < ui->listOpenCore->count(); i++) {
     ui->listOpenCore->setCurrentRow(i);
@@ -992,4 +850,10 @@ void SyncOCDialog::on_ProgBarvalueChanged(QProgressBar* m_bar) {
 
   qss.append(");}");
   m_bar->setStyleSheet(qss);
+}
+
+void SyncOCDialog::on_btnSet_clicked() {
+  mw_one->myDatabase->close();
+  mw_one->on_actionPreferences_triggered();
+  mw_one->myDlgPreference->ui->tabWidget->setCurrentIndex(0);
 }

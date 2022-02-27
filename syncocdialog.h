@@ -35,7 +35,7 @@ class SyncOCDialog : public QDialog {
   QList<QCheckBox *> chkList;
 
   bool eventFilter(QObject *o, QEvent *e);
-  void initKextList();
+
   void readCheckStateINI();
   void setListWidgetStyle();
   void init_Sync_OC_Table();
@@ -51,10 +51,6 @@ class SyncOCDialog : public QDialog {
  private slots:
   void on_btnStartSync_clicked();
 
-  void on_listKexts_currentRowChanged(int currentRow);
-
-  void on_listKexts_itemClicked(QListWidgetItem *item);
-
   void on_listOpenCore_itemClicked(QListWidgetItem *item);
 
   void on_btnCheckUpdate_clicked();
@@ -64,8 +60,6 @@ class SyncOCDialog : public QDialog {
   void on_btnSelectAll_clicked();
 
   void on_btnClearAll_clicked();
-
-  void on_btnSettings_clicked();
 
   void on_tableKexts_itemSelectionChanged();
 
@@ -77,15 +71,14 @@ class SyncOCDialog : public QDialog {
 
   void on_editOCDevSource_currentTextChanged(const QString &arg1);
 
+  void on_btnSet_clicked();
+
  private:
   void setListWidgetColor(QString color);
 
   QLabel *lblVer;
   QLabel *lblTxt;
   QCheckBox *checkBox;
-
-  void addVerWidget(int currentRow, QString strTV, QString strSV,
-                    QString strShowFileName);
 
  protected:
   void closeEvent(QCloseEvent *event);
