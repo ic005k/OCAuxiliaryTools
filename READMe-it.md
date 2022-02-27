@@ -44,10 +44,7 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' uno strumento molto facile da usare 
 * [fabiosun (macOS86.it)](https://github.com/macos86/QtOpenCoreConfig) per i contenuti relativi a CPU AMD.
 * [chriswayg](https://github.com/chriswayg) Guida per l'utente di OpenCore Auxiliary Tools.
 * Icona della app: Mirone (Brasile).
-
-### Grazie per il supporto ai seguenti software open source!
-
-[OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
+* [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
 [qtplist](https://github.com/reillywatson/qtplist)&nbsp; &nbsp; &nbsp; &nbsp;
 [FindESP](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp;
 [winfile](https://github.com/microsoft/winfile)&nbsp; &nbsp; &nbsp; &nbsp;
