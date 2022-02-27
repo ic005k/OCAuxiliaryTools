@@ -773,7 +773,7 @@ void Method::delRightTableItem(QTableWidget* t0, QTableWidget* t) {
   if (t0->rowCount() == 0) {
     t->setRowCount(0);
   }
-  if (t0->rowCount() > 0) t0->cellClicked(t0->currentRow(), 0);
+  if (t0->rowCount() > 0) emit t0->cellClicked(t0->currentRow(), 0);
   mw_one->setWindowModified(true);
   mw_one->updateIconStatus();
 }
@@ -1504,12 +1504,13 @@ void Method::UpdateStatusBarInfo() {
     for (int i = 0; i < listTable.count(); i++) {
       t = (QTableWidget*)listTable.at(i);
       if (!t->currentIndex().isValid()) return;
-      if (t->hasFocus()) t->cellClicked(t->currentRow(), t->currentColumn());
+      if (t->hasFocus())
+        emit t->cellClicked(t->currentRow(), t->currentColumn());
     }
   } else if (listTable.count() == 1) {
     t = (QTableWidget*)listTable.at(0);
     if (!t->currentIndex().isValid()) return;
-    t->cellClicked(t->currentRow(), t->currentColumn());
+    emit t->cellClicked(t->currentRow(), t->currentColumn());
   }
 }
 
@@ -1624,7 +1625,7 @@ void Method::cancelKextUpdate() {
   }
 
   if (isReplyDL) {
-    emit replyDL->error();
+    replyDL->error();
     replyDL->abort();
     isReplyDL = false;
   }
@@ -1752,6 +1753,7 @@ void Method::mount_esp_mac(QString strEfiDisk) {
 
   QProcess* dm = new QProcess;
   dm->execute("osascript", QStringList() << fileName);
+  delete dm;
 }
 
 QString Method::getDriverVolInfo(QString strDisk) {
