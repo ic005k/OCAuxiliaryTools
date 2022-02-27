@@ -425,7 +425,7 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
       "background-color:rgba(25,255,0,100);"
       "}");
 
-  ui->labelShowDLInfo->setVisible(true);
+  ui->labelShowDLInfo->setVisible(false);
 
   mymethod->kextUpdate();
 
