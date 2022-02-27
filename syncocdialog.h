@@ -69,7 +69,7 @@ class SyncOCDialog : public QDialog {
 
   void on_tableKexts_itemSelectionChanged();
 
-  void on_btnUpdateOC_clicked();
+  void on_btnGetOC_clicked();
 
   void on_comboOCVersions_currentTextChanged(const QString &arg1);
 

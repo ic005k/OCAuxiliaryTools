@@ -394,7 +394,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="btnUpdateOC">
+       <widget class="QPushButton" name="btnGetOC">
         <property name="text">
          <string>Get OpenCore</string>
         </property>

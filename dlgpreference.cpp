@@ -284,7 +284,7 @@ void dlgPreference::on_chkSmartKey_clicked(bool checked) {
 
 void dlgPreference::on_btnDownloadKexts_clicked() {
   if (!mw_one->dlgSyncOC->ui->btnCheckUpdate->isEnabled()) return;
-  if (!mw_one->dlgSyncOC->ui->btnUpdateOC->isEnabled()) return;
+  if (!mw_one->dlgSyncOC->ui->btnGetOC->isEnabled()) return;
   ui->btnDownloadKexts->setEnabled(false);
   ui->myeditFind->setEnabled(false);
   repaint();
@@ -308,7 +308,7 @@ void dlgPreference::on_btnDownloadKexts_clicked() {
   mymethod->downloadAllKexts();
 
   for (int i = 0; i < ui->tableKextUrl->rowCount(); i++)
-    ui->tableKextUrl->removeCellWidget(i, 0);
+    ui->tableKextUrl->removeCellWidget(i, 1);
   ui->btnDownloadKexts->setEnabled(true);
   ui->myeditFind->setEnabled(true);
   repaint();

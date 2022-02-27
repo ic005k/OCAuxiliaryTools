@@ -278,7 +278,9 @@ void Method::downloadAllKexts() {
         mw_one->myDlgPreference->ui->tableKextUrl->item(i, 0)->text().trimmed();
     mw_one->myDlgPreference->ui->tableKextUrl->setCurrentCell(i, 1);
     mw_one->myDlgPreference->ui->tableKextUrl->setFocus();
-    mw_one->myDlgPreference->ui->tableKextUrl->setCellWidget(i, 0, progBar);
+    if (i > 0)
+      mw_one->myDlgPreference->ui->tableKextUrl->removeCellWidget(i - 1, 1);
+    mw_one->myDlgPreference->ui->tableKextUrl->setCellWidget(i, 1, progBar);
 
     kextName = name;
 
@@ -442,7 +444,7 @@ void Method::doProcessFinished() {
   if (mw_one->dlgSyncOC->isCheckOC) {
     delete progBar;
     mw_one->dlgSyncOC->isCheckOC = false;
-    mw_one->dlgSyncOC->ui->btnUpdateOC->setEnabled(true);
+    mw_one->dlgSyncOC->ui->btnGetOC->setEnabled(true);
   }
   isReplyDL = false;
 }
@@ -617,6 +619,7 @@ void Method::doProcessDownloadProgress(qint64 recv_total,
 
   progBar->setMaximum(all_total);
   progBar->setValue(recv_total);
+  mw_one->dlgSyncOC->on_ProgBarvalueChanged(progBar);
 
   // calculate the download speed
   double speed = recv_total * 1000.0 / downloadTimer.elapsed();
@@ -703,7 +706,7 @@ void Method::parse_UpdateJSON(QString str) {
           }
         }
 
-        if (!mw_one->dlgSyncOC->ui->btnUpdateOC->isEnabled()) {
+        if (!mw_one->dlgSyncOC->ui->btnGetOC->isEnabled()) {
           if (mw_one->ui->actionDEBUG->isChecked()) {
             if (str.contains("DEBUG")) strDLUrl = str;
           } else {
@@ -749,7 +752,7 @@ void Method::getLastReleaseFromHtml(QString url) {
         }
       }
 
-      if (!mw_one->dlgSyncOC->ui->btnUpdateOC->isEnabled()) {
+      if (!mw_one->dlgSyncOC->ui->btnGetOC->isEnabled()) {
         if (mw_one->ui->actionDEBUG->isChecked()) {
           if (str.contains("DEBUG")) strDLUrl = str;
         } else {

@@ -94,7 +94,7 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
 SyncOCDialog::~SyncOCDialog() { delete ui; }
 
 void SyncOCDialog::on_btnStartSync_clicked() {
-  if (!ui->btnCheckUpdate->isEnabled() || !ui->btnUpdateOC->isEnabled()) {
+  if (!ui->btnCheckUpdate->isEnabled() || !ui->btnGetOC->isEnabled()) {
     QMessageBox box;
     box.setText(
         tr("Kexts update check or OpenCore database upgrade is in progress, "
@@ -397,7 +397,7 @@ void SyncOCDialog::keyPressEvent(QKeyEvent* event) {
 }
 
 void SyncOCDialog::on_btnCheckUpdate_clicked() {
-  if (!ui->btnUpdateOC->isEnabled()) {
+  if (!ui->btnGetOC->isEnabled()) {
     QMessageBox box;
     box.setText(
         tr("The OpenCore database upgrade is in progress, please wait for it "
@@ -462,7 +462,7 @@ void SyncOCDialog::on_btnStop_clicked() {
 
   if (isCheckOC) {
     isCheckOC = false;
-    ui->btnUpdateOC->setEnabled(true);
+    ui->btnGetOC->setEnabled(true);
     delete progBar;
   }
 }
@@ -845,7 +845,7 @@ void SyncOCDialog::on_tableKexts_itemSelectionChanged() {
                            sourceHash);
 }
 
-void SyncOCDialog::on_btnUpdateOC_clicked() {
+void SyncOCDialog::on_btnGetOC_clicked() {
   if (!ui->btnCheckUpdate->isEnabled()) {
     QMessageBox box;
     box.setText(tr(
@@ -873,7 +873,7 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
   isCheckOC = true;
   mymethod->blBreak = false;
   mymethod->isReply = false;
-  ui->btnUpdateOC->setEnabled(false);
+  ui->btnGetOC->setEnabled(false);
   repaint();
 
   progBar = new QProgressBar(this);
@@ -892,7 +892,7 @@ void SyncOCDialog::on_btnUpdateOC_clicked() {
       "background-color:rgba(25,255,0,100);"
       "}");
 
-  progBar->setGeometry(ui->frame->x(), ui->frame->y(), ui->frame->width(),
+  progBar->setGeometry(ui->frame->x(), ui->frame->y() - 8, ui->frame->width(),
                        ui->frame->height());
   progBar->show();
 
@@ -964,11 +964,12 @@ void SyncOCDialog::on_editOCDevSource_currentTextChanged(const QString& arg1) {
 
 void SyncOCDialog::on_ProgBarvalueChanged(QProgressBar* m_bar) {
   int value = m_bar->value();
+  m_bar->setFixedHeight(5);
   QImage m_image(":/icon/prog.png");
   QString qss =
       "QProgressBar{"
       "border: 0px solid rgb(16, 135, 209);"
-      "background: rgba(24,24,255,100);"
+      "background: rgba(24,24,255,255);"
       "border-radius: 0px; }"
       "QProgressBar::chunk:enabled {"
       "border-radius: 0px; "
