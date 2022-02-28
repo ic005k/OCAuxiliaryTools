@@ -842,7 +842,7 @@ void SyncOCDialog::on_ProgBarvalueChanged(QProgressBar* m_bar) {
 
       "QProgressBar:chunk{"
       "border-radius:0px;"
-      "background-color:rgba(25,255,0,100);"
+      "background-color:rgba(255,127,36,255);"
       "}";
 
   double v = m_bar->maximum();
