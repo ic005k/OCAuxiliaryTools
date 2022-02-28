@@ -832,6 +832,18 @@ void SyncOCDialog::on_ProgBarvalueChanged(QProgressBar* m_bar) {
       "QProgressBar::chunk:enabled {"
       "border-radius: 0px; "
       "background: qlineargradient(x1:0, y1:0, x2:1, y2:0";
+  QString qss0 =
+      "QProgressBar{border:0px solid #FFFFFF;"
+      "height:30;"
+      "background:rgba(25,255,25,0);"
+      "text-align:right;"
+      "color:rgb(255,255,255);"
+      "border-radius:0px;}"
+
+      "QProgressBar:chunk{"
+      "border-radius:0px;"
+      "background-color:rgba(25,255,0,100);"
+      "}";
 
   double v = m_bar->maximum();
   double EndColor = static_cast<double>(value) / v;
@@ -849,7 +861,10 @@ void SyncOCDialog::on_ProgBarvalueChanged(QProgressBar* m_bar) {
   }
 
   qss.append(");}");
-  m_bar->setStyleSheet(qss);
+  if (m_bar->maximum() == 0)
+    m_bar->setStyleSheet(qss0);
+  else
+    m_bar->setStyleSheet(qss);
 }
 
 void SyncOCDialog::on_btnSet_clicked() {

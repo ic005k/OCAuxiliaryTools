@@ -73,11 +73,25 @@ QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
   URLSTR.replace("https://github.com/", strProxy);
   QUrl url(URLSTR);
   QNetworkAccessManager manager;
+
+  if (mw_one->myDlgPreference->ui->chkProxy->isChecked()) {
+    QNetworkProxy proxy;
+    proxy.setType(QNetworkProxy::HttpProxy);
+    proxy.setHostName(
+        mw_one->myDlgPreference->ui->txtHostName->text().trimmed());
+    int port = mw_one->myDlgPreference->ui->txtPort->text().trimmed().toInt();
+    proxy.setPort(port);
+    manager.setProxy(proxy);
+    // QNetworkProxy::setApplicationProxy(proxy);
+  }
+
   QEventLoop loop;
   qDebug() << "Reading code form " << URLSTR;
   reply = manager.get(QNetworkRequest(url));
   isReply = true;
   QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+  progBar->setMaximum(0);
+  mw_one->dlgSyncOC->on_ProgBarvalueChanged(progBar);
   loop.exec();
   isReply = false;
 

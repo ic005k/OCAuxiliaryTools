@@ -8,6 +8,7 @@
 #include <QFileDialog>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QNetworkProxy>
 #include <QNetworkReply>
 #include <QObject>
 #include <QTableWidget>

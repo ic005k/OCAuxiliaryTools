@@ -16,6 +16,7 @@ extern QString SaveFileName, strIniFile, strAppName, ocFromDev, strOCFromDev,
 extern bool blDEV;
 extern QProgressBar *progBar;
 extern int red;
+extern QSettings Reg;
 
 dlgPreference::dlgPreference(QWidget *parent)
     : QDialog(parent), ui(new Ui::dlgPreference) {
@@ -34,36 +35,21 @@ dlgPreference::dlgPreference(QWidget *parent)
   ui->tableKextUrl->setColumnWidth(1, 400);
   ui->textEdit->setHidden(true);
 
-  strIniFile =
-      QDir::homePath() + "/.config/" + strAppName + "/" + strAppName + ".ini";
-
-  QSettings Reg(strIniFile, QSettings::IniFormat);
-
-  QFileInfo fi(strIniFile);
   QString strDef = "https://ghproxy.com/https://github.com/";
   QLocale locale;
-  if (fi.exists()) {
-    if (locale.language() == QLocale::Chinese) {
-      ui->comboBoxNet->setCurrentText(Reg.value("Net", strDef).toString());
-    } else {
-      ui->comboBoxNet->setCurrentText(
-          Reg.value("Net", "https://github.com/").toString());
-    }
-
-    ui->comboBoxWeb->setCurrentText(
-        Reg.value("Web", "https://github.com/").toString());
-    ui->rbtnAPI->setChecked(Reg.value("rbtnAPI").toBool());
-    ui->rbtnWeb->setChecked(Reg.value("rbtnWeb").toBool());
-    ui->chkBoxLastFile->setChecked(Reg.value("LastFile").toBool());
-
+  if (locale.language() == QLocale::Chinese) {
+    ui->comboBoxNet->setCurrentText(Reg.value("Net", strDef).toString());
   } else {
-    if (locale.language() == QLocale::Chinese) {
-      ui->comboBoxNet->setCurrentText(strDef);
-
-    } else {
-      ui->comboBoxNet->setCurrentText("https://github.com/");
-    }
+    ui->comboBoxNet->setCurrentText(
+        Reg.value("Net", "https://github.com/").toString());
   }
+
+  ui->comboBoxWeb->setCurrentText(
+      Reg.value("Web", "https://github.com/").toString());
+  ui->rbtnAPI->setChecked(Reg.value("rbtnAPI").toBool());
+  ui->rbtnWeb->setChecked(Reg.value("rbtnWeb").toBool());
+  ui->chkBoxLastFile->setChecked(Reg.value("LastFile").toBool());
+
   ui->chkShowVolName->setChecked(Reg.value("ShowVolName", 0).toBool());
 
   ui->chkRecentOpen->setChecked(Reg.value("chkRecentOpen", 1).toBool());
@@ -73,6 +59,9 @@ dlgPreference::dlgPreference(QWidget *parent)
   ui->chkDatabase->setChecked(Reg.value("chkDatabase", 1).toBool());
   ui->chkHideToolbar->setChecked(Reg.value("chkHideToolbar", 0).toBool());
   ui->chkSmartKey->setChecked(Reg.value("SmartKey", 1).toBool());
+  ui->chkProxy->setChecked(Reg.value("Proxy", 0).toBool());
+  ui->txtHostName->setText(Reg.value("HostName", "127.0.0.1").toString());
+  ui->txtPort->setText(Reg.value("Port", "38457").toString());
   ui->chkSmartKey->setHidden(true);
 }
 
@@ -82,6 +71,9 @@ void dlgPreference::closeEvent(QCloseEvent *event) {
   if (!ui->btnDownloadKexts->isEnabled()) event->ignore();
   ui->myeditFind->clear();
   saveKextUrl();
+  Reg.setValue("Proxy", ui->chkProxy->isChecked());
+  Reg.setValue("HostName", ui->txtHostName->text().trimmed());
+  Reg.setValue("Port", ui->txtPort->text().trimmed());
 }
 
 void dlgPreference::keyPressEvent(QKeyEvent *event) {
