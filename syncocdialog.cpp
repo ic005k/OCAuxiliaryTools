@@ -32,13 +32,12 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   QString listStyleMain =
       "QListWidget{outline:0px;}"
       "QListWidget::item:selected{background:rgb(0,124,221); border:0px "
-      "blue;margin:1px,1px,1px,1px;border-radius:6;"
+      "blue;margin:0px,0px,0px,0px;border-radius:5;"
       "color:white}";
-
   ui->listOpenCore->setStyleSheet(listStyleMain);
-  int size = 25;
-  ui->listOpenCore->setIconSize(QSize(15, 15));
-  ui->listOpenCore->setGridSize(QSize(size, size));
+  ui->listOpenCore->setAlternatingRowColors(true);
+  ui->listOpenCore->setIconSize(QSize(16, 16));
+  // ui->listOpenCore->setGridSize(QSize(24, 24));
 
   ui->btnStartSync->setDefault(true);
   ui->labelShowDLInfo->setVisible(false);
@@ -172,19 +171,19 @@ void SyncOCDialog::setListWidgetStyle() {
     if (red > 55)
       setListWidgetColor("#FFF8DC");
     else
-      setListWidgetColor("#8B4513");
+      setListWidgetColor("#3d243a");
   }
   if (mymethod->isWhatFile(fileName, "efi") && fileName.contains("/Tools/")) {
     if (red > 55)
       setListWidgetColor("#FFEFDB");
     else
-      setListWidgetColor("#2F4F4F");
+      setListWidgetColor("#12270c");
   }
   if (mymethod->isWhatFile(fileName, "efi") && fileName.contains("/Drivers/")) {
     if (red > 55)
       setListWidgetColor("#E6E6FA");
     else
-      setListWidgetColor("#473C8B");
+      setListWidgetColor("#24293d");
   }
 }
 
@@ -835,7 +834,7 @@ void SyncOCDialog::on_ProgBarvalueChanged(QProgressBar* m_bar) {
   QString qss0 =
       "QProgressBar{border:0px solid #FFFFFF;"
       "height:30;"
-      "background:rgba(25,255,25,0);"
+      "background:rgba(24,24,255,255);"
       "text-align:right;"
       "color:rgb(255,255,255);"
       "border-radius:0px;}"

@@ -82,7 +82,6 @@ QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
     int port = mw_one->myDlgPreference->ui->txtPort->text().trimmed().toInt();
     proxy.setPort(port);
     manager.setProxy(proxy);
-    // QNetworkProxy::setApplicationProxy(proxy);
   }
 
   QEventLoop loop;
