@@ -58,5 +58,4 @@ OC Auxiliary Tool (OCAT o ocat in breve) e' uno strumento molto facile da usare 
 
 ---
 
-### Nota: Questo progetto e' iniziato ad Agosto 2020
-API: https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/latest
+API: https://api.github.com/repos/ic005k/OCAuxiliaryTools/releases/latest
