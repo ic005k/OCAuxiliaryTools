@@ -35,5 +35,4 @@
 
 ---
 
-#### Note: This project started in August 2020
-API: https://api.github.com/repos/ic005k/QtOpenCoreConfig/releases/latest
+API: https://api.github.com/repos/ic005k/OCAuxiliaryTools/releases/latest
