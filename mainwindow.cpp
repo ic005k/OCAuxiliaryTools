@@ -9090,7 +9090,6 @@ void MainWindow::oc_Validate(bool show) {
   if (result.trimmed() == "Failed to read") return;
 
   dlgOCV->setTextOCV(result.trimmed());
-
   if (dlgOCV->ui->textEdit->document()->lineCount() <= 2) {
     blOCValidateError = false;
     str = tr("OK !");
