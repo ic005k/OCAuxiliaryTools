@@ -1953,7 +1953,7 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
     </message>
     <message>
         <location filename="mainwindow.ui" line="12160"/>
-        <location filename="mainwindow.cpp" line="9696"/>
+        <location filename="mainwindow.cpp" line="9698"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
@@ -3966,18 +3966,23 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>自动列宽度</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9092"/>
-        <source>No issues found</source>
-        <translation>未发现问题</translation>
+        <location filename="mainwindow.cpp" line="9095"/>
+        <source>errors</source>
+        <translation>错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9934"/>
-        <location filename="mainwindow.cpp" line="9964"/>
+        <location filename="mainwindow.cpp" line="9095"/>
+        <source>error</source>
+        <translation>错误</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="9936"/>
+        <location filename="mainwindow.cpp" line="9966"/>
         <source>This is not a valid Clover configuration file.</source>
         <translation>这不是一个有效的Clover配置文件。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10004"/>
+        <location filename="mainwindow.cpp" line="10006"/>
         <source>You cannot add a new key field to a page where a data table exists.</source>
         <translation>不能在存在数据表的页面上添加一个新的键字段。</translation>
     </message>
@@ -4310,12 +4315,12 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9095"/>
+        <location filename="mainwindow.cpp" line="9097"/>
         <source>OK !</source>
         <translation>验证通过！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9121"/>
+        <location filename="mainwindow.cpp" line="9123"/>
         <source>There is a issue with the configuration file.</source>
         <translation>配置文件有问题</translation>
     </message>
@@ -4334,102 +4339,102 @@ A continuously updated variable list can be found in a corresponding document: N
 <context>
     <name>Method</name>
     <message>
-        <location filename="Method.cpp" line="663"/>
+        <location filename="Method.cpp" line="668"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
     </message>
     <message>
         <location filename="Method.cpp" line="102"/>
-        <location filename="Method.cpp" line="699"/>
-        <location filename="Method.cpp" line="747"/>
+        <location filename="Method.cpp" line="704"/>
+        <location filename="Method.cpp" line="752"/>
         <source>Network or URL error!</source>
         <oldsource>Network error!</oldsource>
         <translation>网络或网址错误！</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="619"/>
-        <location filename="Method.cpp" line="622"/>
+        <location filename="Method.cpp" line="624"/>
+        <location filename="Method.cpp" line="627"/>
         <source>OpenCore Database has been successfully updated to</source>
         <translation>OpenCore数据库已成功更新到</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="478"/>
-        <location filename="Method.cpp" line="629"/>
+        <location filename="Method.cpp" line="482"/>
+        <location filename="Method.cpp" line="634"/>
         <source>No update is currently available, or please check the update source for the OpenCore development version.</source>
         <translation>目前没有更新可用，或者请检查OpenCore开发版的更新源。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="532"/>
+        <location filename="Method.cpp" line="534"/>
         <source>Note: This version or update source does not contain Mac related files. This will affect the use of the APP under Mac.</source>
         <translation>注意：这个版本或更新源不包含Mac的相关文件。这将影响APP在Mac下的使用。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="543"/>
+        <location filename="Method.cpp" line="545"/>
         <source>Note: This version or update source does not contain Windows related files. This will affect the use of the APP under Windows.</source>
         <translation>注意：这个版本或更新源不包含Windows的相关文件。这将影响APP在Windows下的使用。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="555"/>
+        <location filename="Method.cpp" line="557"/>
         <source>Note: This version or update source does not contain Linux related files. This will affect the use of the APP under Linux.</source>
         <translation>注意：这个版本或更新源不包含Linux的相关文件。这将影响APP在Linux下的使用。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="818"/>
+        <location filename="Method.cpp" line="823"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="834"/>
+        <location filename="Method.cpp" line="839"/>
         <source>None</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1277"/>
+        <location filename="Method.cpp" line="1282"/>
         <source>From</source>
         <translation>来自</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1280"/>
-        <location filename="Method.cpp" line="1286"/>
+        <location filename="Method.cpp" line="1285"/>
+        <location filename="Method.cpp" line="1291"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1282"/>
+        <location filename="Method.cpp" line="1287"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1304"/>
+        <location filename="Method.cpp" line="1309"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1305"/>
-        <location filename="Method.cpp" line="1367"/>
+        <location filename="Method.cpp" line="1310"/>
+        <location filename="Method.cpp" line="1372"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1366"/>
+        <location filename="Method.cpp" line="1371"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1767"/>
+        <location filename="Method.cpp" line="1772"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1772"/>
+        <location filename="Method.cpp" line="1777"/>
         <source>Cannot open file %1 for writing:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1930"/>
+        <location filename="Method.cpp" line="1935"/>
         <source>The EFI directory is incomplete and the backup cannot be completed. Please check if the [EFI/OC] and [EFI/OC/Drivers] directories exist?</source>
         <translation>EFI目录不完整，无法完成备份。请检查“EFI/OC”和“EFI/OC/Drivers”目录是否存在？</translation>
     </message>
@@ -4437,55 +4442,55 @@ A continuously updated variable list can be found in a corresponding document: N
 <context>
     <name>QInstaller</name>
     <message>
-        <location filename="Method.cpp" line="1605"/>
+        <location filename="Method.cpp" line="1610"/>
         <location filename="autoupdatedialog.cpp" line="322"/>
         <source>bytes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1606"/>
+        <location filename="Method.cpp" line="1611"/>
         <location filename="autoupdatedialog.cpp" line="323"/>
         <source>KiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1607"/>
+        <location filename="Method.cpp" line="1612"/>
         <location filename="autoupdatedialog.cpp" line="324"/>
         <source>MiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1608"/>
+        <location filename="Method.cpp" line="1613"/>
         <location filename="autoupdatedialog.cpp" line="325"/>
         <source>GiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1609"/>
+        <location filename="Method.cpp" line="1614"/>
         <location filename="autoupdatedialog.cpp" line="326"/>
         <source>TiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1610"/>
+        <location filename="Method.cpp" line="1615"/>
         <location filename="autoupdatedialog.cpp" line="327"/>
         <source>PiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1611"/>
+        <location filename="Method.cpp" line="1616"/>
         <location filename="autoupdatedialog.cpp" line="328"/>
         <source>EiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1612"/>
+        <location filename="Method.cpp" line="1617"/>
         <location filename="autoupdatedialog.cpp" line="329"/>
         <source>ZiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1613"/>
+        <location filename="Method.cpp" line="1618"/>
         <location filename="autoupdatedialog.cpp" line="330"/>
         <source>YiB</source>
         <translation></translation>

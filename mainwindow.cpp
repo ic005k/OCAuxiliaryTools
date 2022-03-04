@@ -9089,8 +9089,9 @@ void MainWindow::oc_Validate(bool show) {
 
   if (result.trimmed() == "Failed to read") return;
 
-  if (result.contains(tr("No issues found")) || result.contains("No is") ||
-      result.trimmed().mid(0, 4) == "Done") {
+  dlgOCV->setTextOCV(result.trimmed());
+
+  if (dlgOCV->ui->textEdit->document()->lineCount() <= 2) {
     blOCValidateError = false;
     str = tr("OK !");
     strMsg = result + "\n\n" + str;
