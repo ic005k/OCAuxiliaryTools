@@ -598,6 +598,9 @@ void Method::updateOpenCore() {
       if (list.count() == 3) {
         ver = list.at(1);
       }
+      if (list.count() == 4) {
+        ver = list.at(1) + list.at(2);
+      }
 
       QSettings Reg(strIniFile, QSettings::IniFormat);
       if (!blDEV) {
