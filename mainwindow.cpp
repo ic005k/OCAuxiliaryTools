@@ -9089,7 +9089,7 @@ void MainWindow::oc_Validate(bool show) {
 
   if (result.trimmed() == "Failed to read") return;
 
-  if (result.contains("No issues found") || result.contains("No is") ||
+  if (result.contains(tr("No issues found")) || result.contains("No is") ||
       result.trimmed().mid(0, 4) == "Done") {
     blOCValidateError = false;
     str = tr("OK !");

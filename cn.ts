@@ -3966,6 +3966,11 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>自动列宽度</translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="9092"/>
+        <source>No issues found</source>
+        <translation>未发现问题</translation>
+    </message>
+    <message>
         <location filename="mainwindow.cpp" line="9934"/>
         <location filename="mainwindow.cpp" line="9964"/>
         <source>This is not a valid Clover configuration file.</source>
@@ -4329,102 +4334,102 @@ A continuously updated variable list can be found in a corresponding document: N
 <context>
     <name>Method</name>
     <message>
-        <location filename="Method.cpp" line="655"/>
+        <location filename="Method.cpp" line="663"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="103"/>
-        <location filename="Method.cpp" line="691"/>
-        <location filename="Method.cpp" line="739"/>
+        <location filename="Method.cpp" line="102"/>
+        <location filename="Method.cpp" line="699"/>
+        <location filename="Method.cpp" line="747"/>
         <source>Network or URL error!</source>
         <oldsource>Network error!</oldsource>
         <translation>网络或网址错误！</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="612"/>
-        <location filename="Method.cpp" line="615"/>
+        <location filename="Method.cpp" line="619"/>
+        <location filename="Method.cpp" line="622"/>
         <source>OpenCore Database has been successfully updated to</source>
         <translation>OpenCore数据库已成功更新到</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="473"/>
-        <location filename="Method.cpp" line="622"/>
+        <location filename="Method.cpp" line="478"/>
+        <location filename="Method.cpp" line="629"/>
         <source>No update is currently available, or please check the update source for the OpenCore development version.</source>
         <translation>目前没有更新可用，或者请检查OpenCore开发版的更新源。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="525"/>
+        <location filename="Method.cpp" line="532"/>
         <source>Note: This version or update source does not contain Mac related files. This will affect the use of the APP under Mac.</source>
         <translation>注意：这个版本或更新源不包含Mac的相关文件。这将影响APP在Mac下的使用。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="536"/>
+        <location filename="Method.cpp" line="543"/>
         <source>Note: This version or update source does not contain Windows related files. This will affect the use of the APP under Windows.</source>
         <translation>注意：这个版本或更新源不包含Windows的相关文件。这将影响APP在Windows下的使用。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="548"/>
+        <location filename="Method.cpp" line="555"/>
         <source>Note: This version or update source does not contain Linux related files. This will affect the use of the APP under Linux.</source>
         <translation>注意：这个版本或更新源不包含Linux的相关文件。这将影响APP在Linux下的使用。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="810"/>
+        <location filename="Method.cpp" line="818"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="826"/>
+        <location filename="Method.cpp" line="834"/>
         <source>None</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1269"/>
+        <location filename="Method.cpp" line="1277"/>
         <source>From</source>
         <translation>来自</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1272"/>
-        <location filename="Method.cpp" line="1278"/>
+        <location filename="Method.cpp" line="1280"/>
+        <location filename="Method.cpp" line="1286"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1274"/>
+        <location filename="Method.cpp" line="1282"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1296"/>
+        <location filename="Method.cpp" line="1304"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1297"/>
-        <location filename="Method.cpp" line="1359"/>
+        <location filename="Method.cpp" line="1305"/>
+        <location filename="Method.cpp" line="1367"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1358"/>
+        <location filename="Method.cpp" line="1366"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1759"/>
+        <location filename="Method.cpp" line="1767"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1764"/>
+        <location filename="Method.cpp" line="1772"/>
         <source>Cannot open file %1 for writing:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1922"/>
+        <location filename="Method.cpp" line="1930"/>
         <source>The EFI directory is incomplete and the backup cannot be completed. Please check if the [EFI/OC] and [EFI/OC/Drivers] directories exist?</source>
         <translation>EFI目录不完整，无法完成备份。请检查“EFI/OC”和“EFI/OC/Drivers”目录是否存在？</translation>
     </message>
@@ -4432,55 +4437,55 @@ A continuously updated variable list can be found in a corresponding document: N
 <context>
     <name>QInstaller</name>
     <message>
-        <location filename="Method.cpp" line="1597"/>
+        <location filename="Method.cpp" line="1605"/>
         <location filename="autoupdatedialog.cpp" line="322"/>
         <source>bytes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1598"/>
+        <location filename="Method.cpp" line="1606"/>
         <location filename="autoupdatedialog.cpp" line="323"/>
         <source>KiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1599"/>
+        <location filename="Method.cpp" line="1607"/>
         <location filename="autoupdatedialog.cpp" line="324"/>
         <source>MiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1600"/>
+        <location filename="Method.cpp" line="1608"/>
         <location filename="autoupdatedialog.cpp" line="325"/>
         <source>GiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1601"/>
+        <location filename="Method.cpp" line="1609"/>
         <location filename="autoupdatedialog.cpp" line="326"/>
         <source>TiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1602"/>
+        <location filename="Method.cpp" line="1610"/>
         <location filename="autoupdatedialog.cpp" line="327"/>
         <source>PiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1603"/>
+        <location filename="Method.cpp" line="1611"/>
         <location filename="autoupdatedialog.cpp" line="328"/>
         <source>EiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1604"/>
+        <location filename="Method.cpp" line="1612"/>
         <location filename="autoupdatedialog.cpp" line="329"/>
         <source>ZiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1605"/>
+        <location filename="Method.cpp" line="1613"/>
         <location filename="autoupdatedialog.cpp" line="330"/>
         <source>YiB</source>
         <translation></translation>
@@ -4526,8 +4531,8 @@ A continuously updated variable list can be found in a corresponding document: N
     <name>SyncOCDialog</name>
     <message>
         <location filename="syncocdialog.ui" line="14"/>
-        <location filename="syncocdialog.cpp" line="651"/>
-        <location filename="syncocdialog.cpp" line="654"/>
+        <location filename="syncocdialog.cpp" line="650"/>
+        <location filename="syncocdialog.cpp" line="653"/>
         <source>Sync OC</source>
         <translation>同步OC</translation>
     </message>
@@ -4663,55 +4668,55 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>来源</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="92"/>
+        <location filename="syncocdialog.cpp" line="91"/>
         <source>Kexts update check or OpenCore database upgrade is in progress, please wait for it to finish.</source>
         <translation>Kexts更新检查或者OpenCore数据库升级正在进行中，请等待它结束。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="134"/>
-        <location filename="syncocdialog.cpp" line="137"/>
+        <location filename="syncocdialog.cpp" line="133"/>
+        <location filename="syncocdialog.cpp" line="136"/>
         <source>Successfully synced to OpenCore: </source>
         <translation>成功同步到OpenCore：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="229"/>
-        <location filename="syncocdialog.cpp" line="700"/>
+        <location filename="syncocdialog.cpp" line="228"/>
+        <location filename="syncocdialog.cpp" line="699"/>
         <source>Current File: </source>
         <translation>当前文件：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="231"/>
-        <location filename="syncocdialog.cpp" line="702"/>
+        <location filename="syncocdialog.cpp" line="230"/>
+        <location filename="syncocdialog.cpp" line="701"/>
         <source>Available File: </source>
         <translation>可用文件：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="304"/>
+        <location filename="syncocdialog.cpp" line="303"/>
         <source>The OpenCore database upgrade is in progress, please wait for it to finish.</source>
         <translation>OpenCore数据库升级正在进行中，请等待它结束。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="709"/>
+        <location filename="syncocdialog.cpp" line="708"/>
         <source>Kexts update check is in progress, please wait for it to complete.</source>
         <translation>Kexts更新检查正在进行中，请等待它完成。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="724"/>
+        <location filename="syncocdialog.cpp" line="723"/>
         <source>Please enter an available OpenCore development version update source.</source>
         <translation>请输入一个可用的OpenCore开发版更新源。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="248"/>
-        <location filename="syncocdialog.cpp" line="795"/>
-        <location filename="syncocdialog.cpp" line="819"/>
+        <location filename="syncocdialog.cpp" line="247"/>
+        <location filename="syncocdialog.cpp" line="794"/>
+        <location filename="syncocdialog.cpp" line="818"/>
         <source> Source </source>
         <translation>来源</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="61"/>
-        <location filename="syncocdialog.cpp" line="475"/>
-        <location filename="syncocdialog.cpp" line="763"/>
-        <location filename="syncocdialog.cpp" line="780"/>
+        <location filename="syncocdialog.cpp" line="60"/>
+        <location filename="syncocdialog.cpp" line="474"/>
+        <location filename="syncocdialog.cpp" line="762"/>
+        <location filename="syncocdialog.cpp" line="779"/>
         <source>Latest Version</source>
         <translation>最新版</translation>
     </message>

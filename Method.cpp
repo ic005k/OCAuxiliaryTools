@@ -465,13 +465,21 @@ void Method::doProcessFinished() {
 void Method::updateOpenCore() {
   if (mw_one->dlgSyncOC->isCheckOC) {
     QList<bool> Results;
+    QString tempDirBak = tempDir;
     QString strSEFI = tempDir + "X64/EFI/";
-    if (!QDir(strSEFI).exists() && blDEV) {
-      QMessageBox::information(
-          this, "",
-          tr("No update is currently available, or please check the update "
-             "source for the OpenCore development version."));
-      return;
+    QString fn = filename;
+    QString dirName = fn.replace(".zip", "");
+    if (blDEV) {
+      if (!QDir(strSEFI).exists()) strSEFI = tempDir + dirName + "/X64/EFI/";
+
+      if (!QDir(strSEFI).exists()) {
+        QMessageBox::information(
+            this, "",
+            tr("No update is currently available, or please check the update "
+               "source for the OpenCore development version."));
+        return;
+      } else
+        tempDir = tempDirBak + dirName + "/";
     }
 
     QDir dir;
@@ -622,6 +630,7 @@ void Method::updateOpenCore() {
                "source for the OpenCore development version."));
       }
     }
+    tempDir = tempDirBak;
   }
 }
 
