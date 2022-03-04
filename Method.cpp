@@ -601,7 +601,7 @@ void Method::updateOpenCore() {
         ver = list.at(1);
       }
       if (list.count() == 4) {
-        ver = list.at(1) + list.at(2);
+        ver = list.at(1) + " " + list.at(2);
       }
 
       QSettings Reg(strIniFile, QSettings::IniFormat);
