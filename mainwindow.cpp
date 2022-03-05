@@ -312,7 +312,7 @@ void MainWindow::openFile(QString PlistFileName) {
       ui->actionUpgrade_OC->setEnabled(true);
       ui->actionUpgrade_OC->setToolTip(tr("Upgrade OpenCore and Kexts"));
     } else {
-      ui->actionUpgrade_OC->setEnabled(false);
+      // ui->actionUpgrade_OC->setEnabled(false);
       ui->actionUpgrade_OC->setToolTip(
           tr("The Upgrade OpenCore and Kexts is not available, please check "
              "the integrity of the EFI directory structure, mainly the "
@@ -5015,7 +5015,7 @@ void MainWindow::init_EditMenu() {
   if (mac || osx1012) ui->actionUpgrade_OC->setIconVisibleInMenu(false);
 
   ui->actionUpgrade_OC->setIcon(QIcon(":/icon/um.png"));
-  ui->actionUpgrade_OC->setEnabled(false);
+  // ui->actionUpgrade_OC->setEnabled(false);
 
   // Open DataBase
   if (mac || osx1012) ui->actionDatabase->setIconVisibleInMenu(false);

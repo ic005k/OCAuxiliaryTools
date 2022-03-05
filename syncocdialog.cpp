@@ -94,6 +94,14 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     return;
   }
 
+  int chkCount = 0;
+  for (int i = 0; i < ui->listOpenCore->count(); i++) {
+    if (ui->listOpenCore->item(i)->checkState() == Qt::Checked) {
+      chkCount++;
+    }
+  }
+  if (chkCount == 0) return;
+
   bool ok = true;
   // Kexts
   for (int i = 0; i < sourceKexts.count(); i++) {
@@ -139,6 +147,7 @@ void SyncOCDialog::on_btnStartSync_clicked() {
 
     mw_one->checkFiles(mw_one->ui->table_kernel_add);
     mw_one->checkFiles(mw_one->ui->table_uefi_drivers);
+    mw_one->checkFiles(mw_one->ui->tableTools);
   }
 }
 
@@ -495,7 +504,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
   QFileInfo fi(SaveFileName);
   DirName = fi.path().mid(0, fi.path().count() - 3);
 
-  if (DirName.isEmpty()) return;
+  // if (DirName.isEmpty()) return;
 
   QString pathOldSource;
   pathOldSource = QDir::homePath() + "/.ocat/Database/";
