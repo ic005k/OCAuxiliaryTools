@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
   QDir dir;
   dir.mkpath(QDir::homePath() + "/.ocat/");
   QString strAppExePath = qApp->applicationDirPath();
-  mw_one->copyDirectoryFiles(strAppExePath + "/Database/",
+  MainWindow::copyDirectoryFiles(strAppExePath + "/Database/",
                              QDir::homePath() + "/.ocat/Database/", false);
 
   QString strDrivers0 = strAppExePath + "/Database/EFI/OC/Drivers/";

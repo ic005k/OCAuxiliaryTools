@@ -314,7 +314,7 @@ class MainWindow : public QMainWindow {
 
   bool DeleteDirectory(const QString& path);
 
-  bool copyDirectoryFiles(const QString& fromDir, const QString& toDir,
+  static bool copyDirectoryFiles(const QString& fromDir, const QString& toDir,
                           bool coverFileIfExist);
 
   bool copyFileToPath(QString sourceDir, QString toDir, bool coverFileIfExist);
