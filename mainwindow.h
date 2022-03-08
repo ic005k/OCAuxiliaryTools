@@ -360,7 +360,6 @@ class MainWindow : public QMainWindow {
   void markColor(QTableWidget* table, QString path, int col);
   QString getKextVersion(QString kextFile);
 
-  QString getDriverInfo(QString strDisk);
   void changeOpenCore(bool blDEV);
   static QObjectList getAllToolButton(QObjectList lstUIControls);
   QWidget* getSubTabWidget(int m, int s);
