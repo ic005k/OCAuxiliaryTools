@@ -80,6 +80,7 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   ui->editOCDevSource->lineEdit()->setText(
       Reg.value("DevSource", "https://github.com/dortania/build-repo")
           .toString());
+  ui->chkIncludeResource->setChecked(Reg.value("IncludeResource", 1).toBool());
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
@@ -249,7 +250,7 @@ void SyncOCDialog::on_listOpenCore_currentRowChanged(int currentRow) {
 void SyncOCDialog::closeEvent(QCloseEvent* event) {
   if (!ui->btnCheckUpdate->isEnabled()) event->ignore();
   writeCheckStateINI();
-
+  Reg.setValue("IncludeResource", ui->chkIncludeResource->isChecked());
   QString txt = ui->editOCDevSource->lineEdit()->text().trimmed();
   Reg.setValue("DevSource", txt);
   if (txt != "")
