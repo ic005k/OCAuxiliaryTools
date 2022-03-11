@@ -376,3 +376,35 @@ when no hardware NVRAM implementation is provided by the firmware or when the NV
 使用第三方脚本可能需要将ExposeSensitiveData设置为0x3，以提供带有OpenCore EFI分区UUID的启动路径变量。
 警告：该功能可能是危险的，因为它将未受保护的数据传递给固件变量服务，只有在固件没有提供硬件NVRAM实现或NVRAM实现不兼容时才使用。
 
+
+***SetApfsTrimTimeout
+Type: plist integer
+Failsafe: -1
+Requirement: 10.14 (not required for older)
+Description: Set trim timeout in microseconds for APFS filesystems on SSDs.
+	
+The APFS filesystem is designed in a way that the space controlled via the spaceman structure is either used or free. This may be different in other filesystems where the areas can be marked as used, free, and unmapped. All free space is trimmed (unmapped/deallocated) at macOS startup. The trimming procedure for NVMe drives happens in LBA ranges due to the nature of the DSM command with up to 256 ranges per command. The more fragmented the memory on the drive is, the more commands are necessary to trim all the free space.
+	
+Depending on the SSD controller and the level of drive fragmenation, the trim procedure may take a considerable amount of time, causing noticeable boot slowdown. The APFS driver explicitly ignores previously unmapped areas and repeatedly trims them on boot. To mitigate against such boot slowdowns, the macOS driver introduced a timeout (9.999999 seconds) that stops the trim operation when not finished in time.
+
+On several controllers, such as Samsung, where the deallocation process is relatively slow, this timeout can be reached very quickly. Essentially, it means that the level of fragmentation is high, thus macOS will attempt to trim the same lower blocks that have previously been deallocated, but never have enough time to deallocate higher blocks. The outcome is that trimming on such SSDs will be non-functional soon after installation, resulting in additional wear on the flash.
+
+One way to workaround the problem is to increase the timeout to an extremely high value, which at the cost of slow boot times (extra minutes) will ensure that all the blocks are trimmed. Set this option to a high value,such as 4294967295, to ensure that all blocks are trimmed. Alternatively, use over-provisioning, if supported, or create a dedicated unmapped partition where the reserve blocks can be found by the controller. Conversely, the trim operation can be disabled by setting a very low timeout value. e.g. 999. Refer to this article for details.
+	
+On macOS 12+, it is no longer possible to set trim timeout for APFS filesystems. However, trim can be disabled when the timeout value is set to 0.
+----
+类型：plist整数
+失效保护：-1
+要求：10.14 (旧版不需要)
+描述：为SSD上的APFS文件系统设置修剪超时，单位是微秒。
+	
+APFS文件系统的设计方式是，通过spaceman结构控制的空间要么被使用，要么被释放。这可能与其他文件系统不同，在其他文件系统中，空间可以被标记为已使用、空闲和未映射的区域。所有自由空间在macOS启动时被修剪（未映射/去分配）。由于DSM命令的性质，NVMe驱动器的修剪过程是在LBA范围内进行的，每个命令最多有256个范围。驱动器上的存储越分散，就需要更多的命令来修剪所有的自由空间。
+	
+根据SSD控制器和硬盘碎片的程度，修剪过程可能需要相当长的时间，导致明显的启动速度下降。APFS驱动明确地忽略了以前未映射的区域，并在启动时反复修剪它们。为了减轻这种启动速度，macOS驱动程序引入了一个超时（9.999999秒），在没有及时完成修剪操作时停止修剪。
+
+在一些控制器上，例如三星，其去分配过程相对较慢，这个超时可以很快达到。从本质上讲，这意味着碎片化程度很高，因此macOS会试图修剪之前已经被取消分配的相同的较低块，但永远没有足够的时间去取消较高块的分配。其结果是，在这种固态硬盘上的修剪在安装后不久就会失去功能，导致闪存的额外磨损。
+
+解决这个问题的一个方法是把超时时间增加到一个非常高的值，这样做的代价是启动时间变慢（额外的几分钟），这将确保所有的块都被修剪。把这个选项设置为一个高值，比如4294967295，以确保所有的块都被修剪。另外，如果支持的话，使用超额配置，或者创建一个专用的未映射分区，控制器可以在那里找到保留的块。反之，可以通过设置一个非常低的超时值来禁用修剪操作，例如999。详情请参考这篇文章。
+	
+在macOS 12+上，已经不可能为APFS文件系统设置修剪超时了。然而，当超时值被设置为0时，修剪可以被禁用。
+	
