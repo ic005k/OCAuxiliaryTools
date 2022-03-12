@@ -28,7 +28,7 @@ If you own an Amd Ryzen with different core number you will have to modify **Ker
 **AMD-B450M_generic.plist** is configured by default for a 8 cores cpu, if you have an Amd Ryzen with 8 cores you can leave **Kernel > Patch** config.plist section unchanged.
 If you own an Amd Ryzen with different core number you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the presets adding correct plist for your core number in **Kernel > Patch**
 
-**AMD-B550_generic.plist** is configured by default for a 12 cores cpu, if you have an Amd Ryzen with 8 cores you can leave **Kernel > Patch** config.plist section unchanged.
+**AMD-B550_generic.plist** is configured by default for a 12 cores cpu, if you have an Amd Ryzen with 12 cores you can leave **Kernel > Patch** config.plist section unchanged.
 If you own an Amd Ryzen with different core number you will have to modify **Kernel > Patch** config.plist section, an easy way is to delete the patches present here and get the correct ones from the presets adding correct plist for your core number in **Kernel > Patch**
 
 **AMD-X570_generic.plist** is configured by default for a 16 cores cpu, if you have an Amd Ryzen with 16 cores you can leave **Kernel > Patch** config.plist section unchanged.
