@@ -8287,6 +8287,7 @@ void MainWindow::init_CopyPasteLine() {
     QAction* browdatabase = new QAction(tr("Browse Database"));
     QAction* bootargs = new QAction(tr("Add boot-args"));
     QAction* autoColWidth = new QAction(tr("Auto Column Width"));
+    QAction* actCopyLineToText = new QAction(tr("Copy Line to Text"));
     autoColWidth->setCheckable(true);
     autoColWidth->setChecked(isAutoColWidth);
     QMenu* popMenu = new QMenu(this);
@@ -8304,6 +8305,8 @@ void MainWindow::init_CopyPasteLine() {
     popMenu->addAction(pasteAction);
     popMenu->addSeparator();
     popMenu->addAction(autoColWidth);
+    popMenu->addSeparator();
+    popMenu->addAction(actCopyLineToText);
     popMenu->addSeparator();
     popMenu->addAction(showtipAction);
 
@@ -8375,6 +8378,21 @@ void MainWindow::init_CopyPasteLine() {
       bool isAutoColWidth = autoColWidth->isChecked();
       Reg.setValue(w->objectName() + "AutoColWidth", isAutoColWidth);
       set_AutoColWidth(w, isAutoColWidth);
+    });
+
+    // Copy Lint to Text
+    connect(actCopyLineToText, &QAction::triggered, [=]() {
+      if (!w->currentIndex().isValid()) return;
+      int row = w->currentRow();
+      if (row < 0) return;
+      QClipboard* clipboard = QApplication::clipboard();
+      QString newText;
+
+      for (int x = 0; x < w->columnCount(); x++) {
+        newText = newText + " | " + w->item(row, x)->text().trimmed();
+      }
+      newText = newText + " | ";
+      clipboard->setText(newText);
     });
 
     // Show Tip
