@@ -1953,7 +1953,7 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
     </message>
     <message>
         <location filename="mainwindow.ui" line="12160"/>
-        <location filename="mainwindow.cpp" line="9698"/>
+        <location filename="mainwindow.cpp" line="9714"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
@@ -2576,8 +2576,8 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9072"/>
-        <location filename="mainwindow.cpp" line="8990"/>
-        <location filename="mainwindow.cpp" line="8995"/>
+        <location filename="mainwindow.cpp" line="9008"/>
+        <location filename="mainwindow.cpp" line="9013"/>
         <source>Select date</source>
         <translation>选择日期</translation>
     </message>
@@ -3966,23 +3966,21 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>自动列宽度</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9095"/>
         <source>errors</source>
-        <translation>错误</translation>
+        <translation type="vanished">错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9095"/>
         <source>error</source>
-        <translation>错误</translation>
+        <translation type="vanished">错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9936"/>
-        <location filename="mainwindow.cpp" line="9966"/>
+        <location filename="mainwindow.cpp" line="9952"/>
+        <location filename="mainwindow.cpp" line="9982"/>
         <source>This is not a valid Clover configuration file.</source>
         <translation>这不是一个有效的Clover配置文件。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10006"/>
+        <location filename="mainwindow.cpp" line="10022"/>
         <source>You cannot add a new key field to a page where a data table exists.</source>
         <translation>不能在存在数据表的页面上添加一个新的键字段。</translation>
     </message>
@@ -4136,8 +4134,8 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="mainwindow.ui" line="157"/>
-        <location filename="mainwindow.cpp" line="8992"/>
-        <location filename="mainwindow.cpp" line="8993"/>
+        <location filename="mainwindow.cpp" line="9010"/>
+        <location filename="mainwindow.cpp" line="9011"/>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
@@ -4315,12 +4313,17 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9097"/>
+        <location filename="mainwindow.cpp" line="8290"/>
+        <source>Copy Line to Text</source>
+        <translation>复制行到文本</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="9113"/>
         <source>OK !</source>
         <translation>验证通过！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9123"/>
+        <location filename="mainwindow.cpp" line="9139"/>
         <source>There is a issue with the configuration file.</source>
         <translation>配置文件有问题</translation>
     </message>
@@ -4536,8 +4539,8 @@ A continuously updated variable list can be found in a corresponding document: N
     <name>SyncOCDialog</name>
     <message>
         <location filename="syncocdialog.ui" line="14"/>
-        <location filename="syncocdialog.cpp" line="650"/>
-        <location filename="syncocdialog.cpp" line="653"/>
+        <location filename="syncocdialog.cpp" line="660"/>
+        <location filename="syncocdialog.cpp" line="663"/>
         <source>Sync OC</source>
         <translation>同步OC</translation>
     </message>
@@ -4673,55 +4676,55 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>来源</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="91"/>
+        <location filename="syncocdialog.cpp" line="92"/>
         <source>Kexts update check or OpenCore database upgrade is in progress, please wait for it to finish.</source>
         <translation>Kexts更新检查或者OpenCore数据库升级正在进行中，请等待它结束。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="133"/>
-        <location filename="syncocdialog.cpp" line="136"/>
+        <location filename="syncocdialog.cpp" line="142"/>
+        <location filename="syncocdialog.cpp" line="145"/>
         <source>Successfully synced to OpenCore: </source>
         <translation>成功同步到OpenCore：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="228"/>
-        <location filename="syncocdialog.cpp" line="699"/>
+        <location filename="syncocdialog.cpp" line="238"/>
+        <location filename="syncocdialog.cpp" line="709"/>
         <source>Current File: </source>
         <translation>当前文件：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="230"/>
-        <location filename="syncocdialog.cpp" line="701"/>
+        <location filename="syncocdialog.cpp" line="240"/>
+        <location filename="syncocdialog.cpp" line="711"/>
         <source>Available File: </source>
         <translation>可用文件：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="303"/>
+        <location filename="syncocdialog.cpp" line="313"/>
         <source>The OpenCore database upgrade is in progress, please wait for it to finish.</source>
         <translation>OpenCore数据库升级正在进行中，请等待它结束。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="708"/>
+        <location filename="syncocdialog.cpp" line="718"/>
         <source>Kexts update check is in progress, please wait for it to complete.</source>
         <translation>Kexts更新检查正在进行中，请等待它完成。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="723"/>
+        <location filename="syncocdialog.cpp" line="733"/>
         <source>Please enter an available OpenCore development version update source.</source>
         <translation>请输入一个可用的OpenCore开发版更新源。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="247"/>
-        <location filename="syncocdialog.cpp" line="794"/>
-        <location filename="syncocdialog.cpp" line="818"/>
+        <location filename="syncocdialog.cpp" line="257"/>
+        <location filename="syncocdialog.cpp" line="804"/>
+        <location filename="syncocdialog.cpp" line="828"/>
         <source> Source </source>
         <translation>来源</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="60"/>
-        <location filename="syncocdialog.cpp" line="474"/>
-        <location filename="syncocdialog.cpp" line="762"/>
-        <location filename="syncocdialog.cpp" line="779"/>
+        <location filename="syncocdialog.cpp" line="484"/>
+        <location filename="syncocdialog.cpp" line="772"/>
+        <location filename="syncocdialog.cpp" line="789"/>
         <source>Latest Version</source>
         <translation>最新版</translation>
     </message>
