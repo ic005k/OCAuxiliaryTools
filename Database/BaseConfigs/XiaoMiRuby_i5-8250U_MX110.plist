@@ -121,11 +121,6 @@
         <dict>
             <key>Add</key>
             <dict>
-                <key>PciRoot(0x0)/Pci(0x1b,0x0)</key>
-                <dict>
-                    <key>layout-id</key>
-                    <data>RQAAAA==</data>
-                </dict>
                 <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
                 <dict>
                     <key>AAPL,ig-platform-id</key>
@@ -652,7 +647,7 @@
                 <key>AppleXcpmForceBoost</key>
                 <false/>
                 <key>CustomSMBIOSGuid</key>
-                <false/>
+                <true/>
                 <key>DisableIoMapper</key>
                 <true/>
                 <key>DisableLinkeditJettison</key>
@@ -741,6 +736,8 @@
                 <integer>0</integer>
                 <key>DisplayLevel</key>
                 <integer>2147483650</integer>
+                <key>LogModules</key>
+                <string></string>
                 <key>SerialInit</key>
                 <false/>
                 <key>SysReport</key>
@@ -925,37 +922,6 @@
             <true/>
             <key>CustomMemory</key>
             <false/>
-            <key>DataHub</key>
-            <dict>
-                <key>ARTFrequency</key>
-                <integer>0</integer>
-                <key>BoardProduct</key>
-                <string></string>
-                <key>BoardRevision</key>
-                <data></data>
-                <key>DevicePathsSupported</key>
-                <integer>0</integer>
-                <key>FSBFrequency</key>
-                <integer>0</integer>
-                <key>InitialTSC</key>
-                <integer>0</integer>
-                <key>PlatformName</key>
-                <string></string>
-                <key>SmcBranch</key>
-                <data></data>
-                <key>SmcPlatform</key>
-                <data></data>
-                <key>SmcRevision</key>
-                <data></data>
-                <key>StartupPowerEvents</key>
-                <integer>0</integer>
-                <key>SystemProductName</key>
-                <string>MacBookPro14,2</string>
-                <key>SystemSerialNumber</key>
-                <string>C02VTSZ4HV2N</string>
-                <key>SystemUUID</key>
-                <string>DDA79A90-68BF-4A6C-8E68-4E07BC647B22</string>
-            </dict>
             <key>Generic</key>
             <dict>
                 <key>AdviseFeatures</key>
@@ -979,80 +945,6 @@
                 <key>SystemUUID</key>
                 <string>DDA79A90-68BF-4A6C-8E68-4E07BC647B22</string>
             </dict>
-            <key>PlatformNVRAM</key>
-            <dict>
-                <key>BID</key>
-                <string></string>
-                <key>FirmwareFeatures</key>
-                <data></data>
-                <key>FirmwareFeaturesMask</key>
-                <data></data>
-                <key>MLB</key>
-                <string>C02750600CDHRPC1H</string>
-                <key>ROM</key>
-                <data>LDNhnrVz</data>
-                <key>SystemSerialNumber</key>
-                <string>C02VTSZ4HV2N</string>
-                <key>SystemUUID</key>
-                <string>DDA79A90-68BF-4A6C-8E68-4E07BC647B22</string>
-            </dict>
-            <key>SMBIOS</key>
-            <dict>
-                <key>BIOSReleaseDate</key>
-                <string></string>
-                <key>BIOSVendor</key>
-                <string></string>
-                <key>BIOSVersion</key>
-                <string></string>
-                <key>BoardAssetTag</key>
-                <string></string>
-                <key>BoardLocationInChassis</key>
-                <string></string>
-                <key>BoardManufacturer</key>
-                <string></string>
-                <key>BoardProduct</key>
-                <string></string>
-                <key>BoardSerialNumber</key>
-                <string></string>
-                <key>BoardType</key>
-                <integer>0</integer>
-                <key>BoardVersion</key>
-                <string></string>
-                <key>ChassisAssetTag</key>
-                <string></string>
-                <key>ChassisManufacturer</key>
-                <string></string>
-                <key>ChassisSerialNumber</key>
-                <string></string>
-                <key>ChassisType</key>
-                <integer>0</integer>
-                <key>ChassisVersion</key>
-                <string></string>
-                <key>FirmwareFeatures</key>
-                <data></data>
-                <key>FirmwareFeaturesMask</key>
-                <data></data>
-                <key>PlatformFeature</key>
-                <integer>0</integer>
-                <key>ProcessorType</key>
-                <integer>0</integer>
-                <key>SmcVersion</key>
-                <data></data>
-                <key>SystemFamily</key>
-                <string></string>
-                <key>SystemManufacturer</key>
-                <string></string>
-                <key>SystemProductName</key>
-                <string>MacBookPro14,2</string>
-                <key>SystemSKUNumber</key>
-                <string></string>
-                <key>SystemSerialNumber</key>
-                <string>C02VTSZ4HV2N</string>
-                <key>SystemUUID</key>
-                <string>DDA79A90-68BF-4A6C-8E68-4E07BC647B22</string>
-                <key>SystemVersion</key>
-                <string></string>
-            </dict>
             <key>UpdateDataHub</key>
             <true/>
             <key>UpdateNVRAM</key>
@@ -1060,7 +952,7 @@
             <key>UpdateSMBIOS</key>
             <true/>
             <key>UpdateSMBIOSMode</key>
-            <string>Create</string>
+            <string>Custom</string>
             <key>UseRawUuidEncoding</key>
             <false/>
         </dict>
