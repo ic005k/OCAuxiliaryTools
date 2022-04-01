@@ -853,6 +853,10 @@ void MainWindow::ParserMisc(QVariantMap map) {
   // Tools
   QVariantList map_Tools = map["Tools"].toList();
   Method::set_TableData(ui->tableTools, map_Tools);
+
+  // Serial
+  QVariantMap map_Serial = map["Serial"].toMap();
+  getValue(map_Serial, ui->tabMisc7);
 }
 
 void MainWindow::initui_NVRAM() {
