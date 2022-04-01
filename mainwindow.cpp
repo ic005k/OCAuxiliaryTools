@@ -1934,6 +1934,12 @@ QVariantMap MainWindow::SaveMisc() {
   if (list.removeOne("Tools"))
     subMap["Tools"] = Method::get_TableData(ui->tableTools);
 
+  // Serial
+  if (list.removeOne("Serial")) {
+    valueList.clear();
+    subMap["Serial"] = setValue(valueList, ui->tabMisc7);
+  }
+
   return subMap;
 }
 
@@ -4729,7 +4735,7 @@ void MainWindow::on_listMain_itemSelectionChanged() {
 
   if (ui->listMain->currentRow() == 4) {
     strList << tr("Boot") << tr("Debug") << tr("Security")
-            << tr("BlessOverride") << tr("Entries") << tr("Tools");
+            << tr("BlessOverride") << tr("Entries") << tr("Tools")<<tr("Serial");
   }
 
   if (ui->listMain->currentRow() == 5) {
@@ -10061,6 +10067,7 @@ void MainWindow::smart_UpdateKeyField() {
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabMisc1, "Misc", "Boot");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabMisc2, "Misc", "Debug");
   dlgNewKeyField::check_SampleFile(mapTatol, ui->tabMisc3, "Misc", "Security");
+  dlgNewKeyField::check_SampleFile(mapTatol, ui->tabMisc7, "Misc", "Serial");
 
   dlgNewKeyField::check_SampleFile(mapTatol, ui->gboxNVRAM, "NVRAM", "");
 

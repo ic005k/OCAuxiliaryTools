@@ -3875,7 +3875,7 @@ This setting allows to prevent using faster kernel caching variants if slower va
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>4</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5937,6 +5937,43 @@ Third party drivers may introduce additional security (and performance) consider
                </widget>
               </item>
              </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tabMisc7">
+           <attribute name="title">
+            <string>Serial</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_50">
+            <item row="0" column="0">
+             <widget class="QFrame" name="frame_chk_29">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_48">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_74"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QFrame" name="frame_edit_23">
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_49">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_75"/>
+               </item>
+              </layout>
+             </widget>
             </item>
            </layout>
           </widget>
