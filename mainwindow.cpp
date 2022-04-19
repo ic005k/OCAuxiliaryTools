@@ -4739,7 +4739,8 @@ void MainWindow::on_listMain_itemSelectionChanged() {
 
   if (ui->listMain->currentRow() == 4) {
     strList << tr("Boot") << tr("Debug") << tr("Security")
-            << tr("BlessOverride") << tr("Entries") << tr("Tools")<<tr("Serial");
+            << tr("BlessOverride") << tr("Entries") << tr("Tools")
+            << tr("Serial");
   }
 
   if (ui->listMain->currentRow() == 5) {
@@ -9118,7 +9119,7 @@ void MainWindow::oc_Validate(bool show) {
   if (result.trimmed() == "Failed to read") return;
 
   dlgOCV->setTextOCV(result.trimmed());
-  if (dlgOCV->ui->textEdit->document()->lineCount() <= 2) {
+  if (dlgOCV->ui->textEdit->document()->lineCount() <= 4) {
     blOCValidateError = false;
     str = tr("OK !");
     strMsg = result + "\n\n" + str;
