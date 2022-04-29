@@ -18,7 +18,7 @@ Besides beeing a plist Configurator it can do much more:
 * Automatically performs config validatation and points to possible conflicts/configuration issues.
 * Sync Feature: check for and apply updates for OpenCore, Resources and Kext with a few clicks
 * Select between Official/Dev Release and Debug builds of OpenCore
-* Dropdown Menus with suggested for Quirks for Intel and AMD CPUs
+* Dropdown Menus with suggested Quirks for Intel and AMD CPUs
 * Preset Menus for ACPI, Kernel and other lists.
 * Editable list with URLs of Kext Repos
 * Integrated ASCII < > HEX Converter 
