@@ -38,7 +38,6 @@ Besides beeing a plist Configurator it can do much more:
 
 * [OpenCore Auxiliary Tools User's Guide (by chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
 
----
 
 ## Credits
 * [vit9696](https://github.com/vit9696) OCAT feature suggestions etc.
