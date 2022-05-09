@@ -1,49 +1,47 @@
 [English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) | [简体中文](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-cn.md) | [Italiano](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe-it.md)
-## Strumenti ausiliari OC: strumenti ausiliari OpenCore multipiattaforma open source
+
+# Strumenti ausiliari per OpenCore (OCAT)
+
+![GUI](https://user-images.githubusercontent.com/76865553/165901706-abbccb4a-89bc-4b03-b6e5-f52dcb10b53c.png)
+
+## About
+OpenCore Auxiliary Tools è un configuratore basato su GUI per la modifica del file `config.plist` per il bootmanager di acidanthera.
+
+A differenza di altre applicazioni, OCAT non rovina la configurazione se gli sviluppatori di OpenCore aggiungono nuove funzionalità/chiavi alla struttura del file di configurazione. Invece, adatta e integra automaticamente nell'interfaccia le nuove funzionalità.
+
+## Caratteristiche
+
+Oltre ad essere un configuratore di plist può fare molto di più:
+
+* Monta la partizione EFI e apri automaticamente config.plis
+* Aggiorna e migra le configurazioni alle specifiche più recenti semplicemente facendo clic sul pulsante "Salva". Non è più necessario copiare le chiavi e convalidare manualmente la configurazione (enorme risparmio di tempo).
+* Esegue automaticamente la convalida della configurazione e indica possibili conflitti/problemi di configurazione.
+* Funzione di sincronizzazione: verifica e applica gli aggiornamenti per OpenCore, Resources e Kext con pochi clic
+* Scegli tra la versione ufficiale/dev e le build di debug di OpenCore
+* Menu a discesa con quirk suggeriti per CPU Intel e AMD
+* Menu preimpostati per ACPI, kernel e altri elenchi.
+* Elenco modificabile con URL delle repo dei Kext
+* Convertitore HEX ASCII integrato
+* Database con configurazioni di base complete per CPU Intel e AMD basate sulla Guida all'installazione di OpenCore di Dortania
+* Possibilità di generare cartelle EFI da una configurazione con un solo clic
+* Possibilità di creare backup di cartelle EFI
+
+## Guide
+
+* [Aggiornare OpenCore e kext con OCAT (5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
+* Il contenuto del plug-in preselezionato per Intel CPU Quirks è fornito e gestito da 5T33Z0. [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
+* Pacchetto plug-in Intel CPU BaseConfigs fornito e gestito da 5T33Z0. [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
+* Pacchetto plug-in AMD CPU BaseConfigs, preselezionato per AMD CPU Quirks, pacchetto di patch del kernel AMD, documentazione descrittiva in italiano fornita e mantenuta da [fabiosun](https://github.com/fabiosun).
+* [Guida per gli strumenti ausiliari di OpenCore (chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
 
 
-| [Release][release-link]|[Download][download-link]|[Issues][issues-link]|
-|-----------------|-----------------|-----------------|
-|[![release-badge](https://img.shields.io/github/release/ic005k/QtOpenCoreConfig.svg?style=flat-square "Release status")](https://github.com/ic005k/QtOpenCoreConfig/releases "Release status") | [![download-badge](https://img.shields.io/github/downloads/ic005k/QtOpenCoreConfig/total.svg?style=flat-square "Download status")](https://github.com/ic005k/QtOpenCoreConfig/releases/latest "Download status")|[![issues-badge](https://img.shields.io/badge/github-issues-red.svg?maxAge=60 "Issues")](https://github.com/ic005k/QtOpenCoreConfig/issues "Issues")|
-
-[![Windows](https://github.com/ic005k/QtOpenCoreConfig/actions/workflows/windows.yml/badge.svg)](https://github.com/ic005k/QtOpenCoreConfig/actions/workflows/windows.yml)      [![MacOS](https://github.com/ic005k/QtOpenCoreConfig/actions/workflows/macos.yml/badge.svg)](https://github.com/ic005k/QtOpenCoreConfig/actions/workflows/macos.yml)       [![MacOS Classical](https://github.com/ic005k/QtOpenCoreConfig/actions/workflows/macos1012.yml/badge.svg)](https://github.com/ic005k/QtOpenCoreConfig/actions/workflows/macos1012.yml)  [![Ubuntu](https://github.com/ic005k/QtOpenCoreConfig/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/ic005k/QtOpenCoreConfig/actions/workflows/ubuntu.yml)    
-
-[download-link]: https://github.com/ic005k/QtOpenCoreConfig/releases/latest "Download status"
-[download-badge]: https://img.shields.io/github/downloads/ic005k/QtOpenCoreConfig/total.svg?style=flat-square "Download status"
-
-[release-link]: https://github.com/ic005k/QtOpenCoreConfig/releases "Release status"
-[release-badge]: https://img.shields.io/github/release/ic005k/QtOpenCoreConfig.svg?style=flat-square "Release status"
-
-[issues-link]: https://github.com/ic005k/QtOpenCoreConfig/issues "Issues"
-[issues-badge]: https://img.shields.io/badge/github-issues-red.svg?maxAge=60 "Issues"
-
-[discourse-link]: https://www.insanelymac.com/forum/topic/344752-open-source-cross-platform-opencore-auxiliary-tools/
-[discourse-link]: https://www.macos86.it/topic/5316-ocat-discussione-e-approfondimenti/
-
-
-
-OC Auxiliary Tool (OCAT o ocat in breve) e' uno strumento molto facile da usare per [OpenCore](https://github.com/acidanthera/OpenCorePkg). Si adatta automaticamente ad ogni versione di OpenCore, sia a quella corrente che alle versioni future. E' possibile utilizzarlo per passare la tua EFi da una versione all'altra del bootloader senza la preoccupazione di nuove opzioni o contenuti eventualmente aggiunti.Utilizzalo per gestire OC, e' facile e comodo...
-
-* [Inglese: Aggiornare OpenCore e i Kexts con OCAT (da 5T33Z0)](https://github.com/5T33Z0/OC-Little-Translated/blob/main/D_Updating_OpenCore/README.md)
-
-* [Italiano: Aggiornare OpenCore e i Kexts con OCAT (da antuneddu)](https://www.macos86.it/topic/5238-aggiornare%C2%A0-opencore-e-kexts-con-ocat/)
-
-* 5T33Z0 per la fornitura e aggiornamento dei contenuti Preset nei Quirks di configurazioni Intel e per suggerimenti su interfaccia e funzionalità.  [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/preset)
-
-* 5T33Z0 per la fornitura e aggiornamento del pacchetto plugin Intel BaseConfigs. [Dettagli](https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs)
-
-* I contenuti dei Preset, quirk, BaseConfigs, AMD kernel patch preset per tutte le CPU AMD e la traduzione in Italiano di questo README sono forniti e mantenuti da [fabiosun (macOS86.it)](https://github.com/macos86/OCAuxiliaryTools).
-* [Guida Utente OpenCore Auxiliary Tools (@chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
-
----
-
-### Ringraziamenti speciali
-* [vit9696](https://github.com/vit9696) Suggerimenti per la funzionalità.
-* [5T33Z0](https://github.com/5T33Z0) I pacchetti di plug-in e suggerimenti per l'interfaccia.
-* [LucasMucGH](https://github.com/LucasMucGH) Suggerimenti per la progettazione dell'interfaccia utente nativa basati sulla versione per Mac.
-* [fabiosun (macOS86.it)](https://github.com/macos86/QtOpenCoreConfig) per i contenuti relativi a CPU AMD.
-* [chriswayg](https://github.com/chriswayg) Guida per l'utente di OpenCore Auxiliary Tools.
-* Icona della app: Mirone (Brasile).
+## Credits
+* [vit9696](https://github.com/vit9696) Suggerimenti di funzionalità OCAT ecc.
+* [5T33Z0](https://github.com/5T33Z0) Pacchetto plug-in CPU Intel per OCAT, suggerimenti per l'interazione e la funzionalità dell'utente, ecc.
+* [LucasMucGH](https://github.com/LucasMucGH) Suggerimenti per la progettazione dell'interfaccia utente nativa per versioni basate su Mac, ecc.
+* [fabiosun](https://github.com/fabiosun) Contenuti relativi ad AMD.
+* [chriswayg](https://github.com/chriswayg) Guida per l'utente degli strumenti ausiliari OpenCore.
+* APP Icon Design: Mirone (Brasile).
 * [OpenCore](https://github.com/acidanthera/OpenCorePkg)&nbsp; &nbsp; &nbsp; &nbsp;
 [qtplist](https://github.com/reillywatson/qtplist)&nbsp; &nbsp; &nbsp; &nbsp;
 [FindESP](https://github.com/bluer007/FindESP)&nbsp; &nbsp; &nbsp; &nbsp;
