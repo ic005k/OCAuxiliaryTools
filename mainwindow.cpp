@@ -1665,7 +1665,7 @@ void MainWindow::SavePlist(QString FileName) {
   if (QFile(SaveFileName).exists()) {
     FileSystemWatcher::removeWatchPath(SaveFileName);
   }
-  lineEditSetText();  // 回车确认
+  lineEditSetText();
   removeAllLineEdit();
   mymethod->OCValidationProcessing();
 
@@ -3468,7 +3468,7 @@ void MainWindow::on_table_nv_add_currentCellChanged(int currentRow,
 void MainWindow::initLineEdit(QTableWidget* Table, int previousRow,
                               int previousColumn, int currentRow,
                               int currentColumn) {
-  if (!loading) {
+  if (!Initialization) {
     if (Table->rowCount() == 0) return;
 
     Table->removeCellWidget(previousRow, previousColumn);
@@ -7686,28 +7686,28 @@ void MainWindow::dp_cellDoubleClicked() {
 
   // DP
   t = ui->table_dp_add0;
-  if (t->hasFocus()) {
+  if (t->hasFocus() && t->currentIndex().isValid()) {
     row = t->currentRow();
     col = t->currentColumn();
     on_table_dp_add0_cellDoubleClicked(row, col);
   }
 
   t = ui->table_dp_add;
-  if (t->hasFocus()) {
+  if (t->hasFocus() && t->currentIndex().isValid()) {
     row = t->currentRow();
     col = t->currentColumn();
     on_table_dp_add_cellDoubleClicked(row, col);
   }
 
   t = ui->table_dp_del0;
-  if (t->hasFocus()) {
+  if (t->hasFocus() && t->currentIndex().isValid()) {
     row = t->currentRow();
     col = t->currentColumn();
     on_table_dp_del0_cellDoubleClicked(row, col);
   }
 
   t = ui->table_dp_del;
-  if (t->hasFocus()) {
+  if (t->hasFocus() && t->currentIndex().isValid()) {
     row = t->currentRow();
     col = t->currentColumn();
     on_table_dp_del_cellDoubleClicked(row, col);
@@ -7781,42 +7781,42 @@ void MainWindow::nvram_cellDoubleClicked() {
 
   // NVRAM
   t = ui->table_nv_add0;
-  if (t->hasFocus()) {
+  if (t->hasFocus() && t->currentIndex().isValid()) {
     row = t->currentRow();
     col = t->currentColumn();
     on_table_nv_add0_cellDoubleClicked(row, col);
   }
 
   t = ui->table_nv_add;
-  if (t->hasFocus()) {
+  if (t->hasFocus() && t->currentIndex().isValid()) {
     row = t->currentRow();
     col = t->currentColumn();
     on_table_nv_add_cellDoubleClicked(row, col);
   }
 
   t = ui->table_nv_del0;
-  if (t->hasFocus()) {
+  if (t->hasFocus() && t->currentIndex().isValid()) {
     row = t->currentRow();
     col = t->currentColumn();
     on_table_nv_del0_cellDoubleClicked(row, col);
   }
 
   t = ui->table_nv_del;
-  if (t->hasFocus()) {
+  if (t->hasFocus() && t->currentIndex().isValid()) {
     row = t->currentRow();
     col = t->currentColumn();
     on_table_nv_del_cellDoubleClicked(row, col);
   }
 
   t = ui->table_nv_ls0;
-  if (t->hasFocus()) {
+  if (t->hasFocus() && t->currentIndex().isValid()) {
     row = t->currentRow();
     col = t->currentColumn();
     on_table_nv_ls0_cellDoubleClicked(row, col);
   }
 
   t = ui->table_nv_ls;
-  if (t->hasFocus()) {
+  if (t->hasFocus() && t->currentIndex().isValid()) {
     row = t->currentRow();
     col = t->currentColumn();
     on_table_nv_ls_cellDoubleClicked(row, col);
@@ -7890,9 +7890,7 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
       break;
 
     case Qt::Key_Return:
-
       EnterPress();
-
       break;
 
     case Qt::Key_Backspace:
