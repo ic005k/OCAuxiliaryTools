@@ -6290,7 +6290,7 @@ void MainWindow::lineEdit_textChanged(const QString& arg1) {
 }
 
 void MainWindow::lineEditSetText() {
-  if (!loading) {
+  if (!Initialization) {
     lineEditEnter = true;
     InitEdit = false;
 
