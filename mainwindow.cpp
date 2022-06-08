@@ -3954,6 +3954,7 @@ void MainWindow::mount_esp() {
 }
 
 void MainWindow::readResultDiskInfo() {
+  dlgMESP = new dlgMountESP(this);
   dlgMESP->setModal(true);
 
   int row = Reg.value("mesp", 0).toInt();
@@ -5433,7 +5434,6 @@ void MainWindow::init_Widgets() {
   aboutDlg = new aboutDialog(this);
   myDatabase = new dlgDatabase(this);
   myToolTip = new Tooltip(this);
-  dlgMESP = new dlgMountESP(this);
   dlgOCV = new dlgOCValidate(this);
   dlgPar = new dlgParameters(this);
   dlgAutoUpdate = new AutoUpdateDialog(this);

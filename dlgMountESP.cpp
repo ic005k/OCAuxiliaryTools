@@ -48,4 +48,5 @@ void dlgMountESP::mountESP(bool openConfig) {
   }
 
   close();
+  delete this;
 }
