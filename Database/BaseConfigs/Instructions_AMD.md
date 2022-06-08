@@ -1,5 +1,15 @@
 **Introduction:**
 
+**macOS Ventura 13 new first beta has included multiple steps to have your system working**
+
+- Use again a deprecated patch : algrey - _cpuid_set_generic_info - Disable check to allow leaf7 - 10.13/10.14/10.15/11.0/12.0
+
+- It is mandatory to use latest OpenCore 082
+- Disable AvoidRuntimeDefrag Quirk (NOT ADViSABLE to do but mandatory for now)
+- Disable DummyPowermanagement (not for all)
+- Update all maxKernel kernel patches value to macOS Ventura Darwin (22.0.0)
+- -lilubetaall boot arg  
+
 **macOS Monterey 12.3 new beta may need to install this kext AppleMCEReporterDisabler.kext**
 
 **AMD** platform is not currently supported by Apple, there is no official support not even from the developers of the main bootloader (OpenCore), but despite this it is possible to have a hackintosh based on the **AMD** platform and OSX from **macOS High Sierra till Monterey 12.4.x** thanks to the unofficial support of the developers and to the strong commitment of the **AMD** community.
