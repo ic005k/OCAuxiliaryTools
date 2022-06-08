@@ -108,7 +108,7 @@
 				//3/AAAA
 				</data>
 				<key>MaxKernel</key>
-				<string>21.99.99</string>
+				<string>22.99.99</string>
 				<key>MinKernel</key>
 				<string>21.0.0</string>
 				<key>Replace</key>
@@ -145,7 +145,7 @@
 				<data>
 				</data>
 				<key>MaxKernel</key>
-				<string>21.99.99</string>
+				<string>22.99.99</string>
 				<key>MinKernel</key>
 				<string>17.0.0</string>
 				<key>Replace</key>
@@ -181,7 +181,7 @@
 				<data>
 				</data>
 				<key>MaxKernel</key>
-				<string>21.99.99</string>
+				<string>22.99.99</string>
 				<key>MinKernel</key>
 				<string>17.0.0</string>
 				<key>Replace</key>
@@ -217,7 +217,7 @@
 				<data>
 				</data>
 				<key>MaxKernel</key>
-				<string>21.99.99</string>
+				<string>22.99.99</string>
 				<key>MinKernel</key>
 				<string>17.0.0</string>
 				<key>Replace</key>
@@ -253,7 +253,7 @@
 				<data>
 				</data>
 				<key>MaxKernel</key>
-				<string>21.99.99</string>
+				<string>22.99.99</string>
 				<key>MinKernel</key>
 				<string>17.0.0</string>
 				<key>Replace</key>
@@ -289,9 +289,9 @@
 				<data>
 				</data>
 				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
 				<string>22.99.99</string>
+				<key>MinKernel</key>
+				<string>22.00.00</string>
 				<key>Replace</key>
 				<data>
 				AAAPgg==
@@ -362,7 +362,7 @@
 				/////////////wAAAAAAAA==
 				</data>
 				<key>MaxKernel</key>
-				<string>21.99.99</string>
+				<string>22.99.99</string>
 				<key>MinKernel</key>
 				<string>21.0.0</string>
 				<key>Replace</key>
@@ -436,7 +436,7 @@
 				//8AAAAA//8=
 				</data>
 				<key>MaxKernel</key>
-				<string>21.99.99</string>
+				<string>22.99.99</string>
 				<key>MinKernel</key>
 				<string>20.4.0</string>
 				<key>Replace</key>
@@ -473,7 +473,7 @@
 				<data>
 				</data>
 				<key>MaxKernel</key>
-				<string>21.99.99</string>
+				<string>22.99.99</string>
 				<key>MinKernel</key>
 				<string>17.0.0</string>
 				<key>Replace</key>
@@ -510,7 +510,7 @@
 				<data>
 				</data>
 				<key>MaxKernel</key>
-				<string>21.99.99</string>
+				<string>22.99.99</string>
 				<key>MinKernel</key>
 				<string>17.0.0</string>
 				<key>Replace</key>
