@@ -1709,16 +1709,6 @@ void MainWindow::SavePlist(QString FileName) {
   FileSystemWatcher::addWatchPath(SaveFileName);
   strOrgMd5 = getMD5(SaveFileName);
 
-  if (!PListSerializer::fileValidation(FileName)) {
-    int war = QMessageBox::warning(
-        this, "",
-        tr("There is a problem saving the file, please save it again!"),
-        tr("Resave"), tr("Cancel"));
-    if (war == 0) {
-      SavePlist(FileName);
-    }
-  }
-
   this->setWindowModified(false);
   updateIconStatus();
 }
