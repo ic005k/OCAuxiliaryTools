@@ -365,7 +365,7 @@ void Method::startDownload(QString strUrl) {
   connect(replyDL, &QNetworkReply::downloadProgress, this,
           &Method::doProcessDownloadProgress);
   QObject::connect(replyDL, SIGNAL(error(QNetworkReply::NetworkError)), this,
-                   SLOT(quit()));
+                   SLOT(Quit()));
 
   QStringList list = strUrl.split("/");
   filename = list.at(list.length() - 1);
@@ -2704,3 +2704,5 @@ void Method::init_UIWidget(QWidget* uiw, int red) {
     }
   }
 }
+
+void Method::Quit() { qDebug() << replyDL->error(); }

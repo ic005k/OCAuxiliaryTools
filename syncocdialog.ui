@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>829</width>
+    <width>864</width>
     <height>498</height>
    </rect>
   </property>
@@ -288,6 +288,13 @@
         <widget class="QToolButton" name="btnSet">
          <property name="text">
           <string>Settings</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="chkKextsDev">
+         <property name="text">
+          <string>DEV</string>
          </property>
         </widget>
        </item>

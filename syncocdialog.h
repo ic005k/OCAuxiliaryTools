@@ -3,8 +3,15 @@
 
 #include <QCryptographicHash>
 #include <QDialog>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
 #include <QListWidgetItem>
 #include <QMessageBox>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QPlainTextEdit>
 #include <QProgressBar>
 #include <QScrollBar>
 #include <QTableWidget>
@@ -44,10 +51,12 @@ class SyncOCDialog : public QDialog {
   void init_ItemColor();
 
   void on_ProgBarvalueChanged(QProgressBar *m_bar);
+  void getKextsDevInfo();
  public slots:
   void on_btnStop_clicked();
   void on_listOpenCore_currentRowChanged(int currentRow);
 
+  void query(QNetworkReply *reply);
  private slots:
   void on_btnStartSync_clicked();
 
@@ -75,10 +84,12 @@ class SyncOCDialog : public QDialog {
 
  private:
   void setListWidgetColor(QString color);
+  QNetworkAccessManager *mgr;
 
   QLabel *lblVer;
   QLabel *lblTxt;
   QCheckBox *checkBox;
+  bool dlEnd = false;
 
  protected:
   void closeEvent(QCloseEvent *event);

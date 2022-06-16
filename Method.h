@@ -150,7 +150,8 @@ class Method : public QMainWindow {
 
   void replyFinished(QNetworkReply *reply);
 
- private:
+  void Quit();
+private:
   QElapsedTimer downloadTimer;
   void cancelDownload();
 

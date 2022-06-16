@@ -81,6 +81,10 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
       Reg.value("DevSource", "https://github.com/dortania/build-repo")
           .toString());
   ui->chkIncludeResource->setChecked(Reg.value("IncludeResource", 1).toBool());
+
+  mgr = new QNetworkAccessManager(this);
+  connect(mgr, SIGNAL(finished(QNetworkReply*)), this,
+          SLOT(query(QNetworkReply*)));
 }
 
 SyncOCDialog::~SyncOCDialog() { delete ui; }
@@ -315,7 +319,13 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
     box.exec();
     return;
   }
+
+  if (ui->chkKextsDev->isChecked()) {
+    getKextsDevInfo();
+  }
+
   if (sourceKexts.count() == 0) return;
+
   ui->btnUpdate->setEnabled(false);
   repaint();
 
@@ -880,4 +890,52 @@ void SyncOCDialog::on_btnSet_clicked() {
   mw_one->myDatabase->close();
   mw_one->on_actionPreferences_triggered();
   mw_one->myDlgPreference->ui->tabWidget->setCurrentIndex(0);
+}
+
+void SyncOCDialog::query(QNetworkReply* reply) {
+  QString buffer = reply->readAll();
+
+  QJsonDocument jsonDoc;
+  QJsonParseError parseJsonErr;
+  jsonDoc = QJsonDocument::fromJson(buffer.toUtf8(), &parseJsonErr);
+  if (parseJsonErr.error != QJsonParseError::NoError) {
+    qDebug() << "json error:" << parseJsonErr.errorString();
+
+  } else {
+    QJsonObject res = jsonDoc.object();
+    qDebug() << res.count() << jsonDoc.isArray() << jsonDoc.isObject();
+    if (jsonDoc.isObject()) {
+      QStringList Keys = res.keys();
+      qDebug() << Keys;
+      QVariantList list, list1;
+
+      list = res.value(Keys.at(0))
+                 .toObject()
+                 .value("versions")
+                 .toArray()
+                 .toVariantList();
+
+      list1 = list.at(0)
+                  .toJsonDocument()
+                  .object()
+                  .value("links")
+                  .toArray()
+                  .toVariantList();
+
+      QVariantMap map = list[0].toMap();
+      QVariantMap map1 = map["links"].toMap();
+
+      qDebug() << map1["release"];
+    }
+  }
+
+  dlEnd = true;
+}
+
+void SyncOCDialog::getKextsDevInfo() {
+  QString url =
+      "https://raw.githubusercontent.com/dortania/build-repo/builds/"
+      "config.json";
+
+  mgr->get(QNetworkRequest(QUrl(url)));
 }
