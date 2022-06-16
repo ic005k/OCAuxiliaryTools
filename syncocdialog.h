@@ -52,6 +52,7 @@ class SyncOCDialog : public QDialog {
 
   void on_ProgBarvalueChanged(QProgressBar *m_bar);
   void getKextsDevInfo();
+  QString getKextDevDL(QString bufferJson, QString kextName);
  public slots:
   void on_btnStop_clicked();
   void on_listOpenCore_currentRowChanged(int currentRow);
@@ -90,6 +91,7 @@ class SyncOCDialog : public QDialog {
   QLabel *lblTxt;
   QCheckBox *checkBox;
   bool dlEnd = false;
+  QString bufferJson;
 
  protected:
   void closeEvent(QCloseEvent *event);

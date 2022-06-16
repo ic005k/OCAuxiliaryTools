@@ -893,11 +893,16 @@ void SyncOCDialog::on_btnSet_clicked() {
 }
 
 void SyncOCDialog::query(QNetworkReply* reply) {
-  QString buffer = reply->readAll();
+  bufferJson = reply->readAll();
+  getKextDevDL(bufferJson, "Lilu");
+  dlEnd = true;
+}
 
+QString SyncOCDialog::getKextDevDL(QString bufferJson, QString kextName) {
+  QString dl;
   QJsonDocument jsonDoc;
   QJsonParseError parseJsonErr;
-  jsonDoc = QJsonDocument::fromJson(buffer.toUtf8(), &parseJsonErr);
+  jsonDoc = QJsonDocument::fromJson(bufferJson.toUtf8(), &parseJsonErr);
   if (parseJsonErr.error != QJsonParseError::NoError) {
     qDebug() << "json error:" << parseJsonErr.errorString();
 
@@ -907,29 +912,37 @@ void SyncOCDialog::query(QNetworkReply* reply) {
     if (jsonDoc.isObject()) {
       QStringList Keys = res.keys();
       qDebug() << Keys;
+      int index = 0;
+      for (int i = 0; i < Keys.count(); i++) {
+        if (Keys.at(i) == kextName) index = i;
+      }
       QVariantList list, list1;
 
-      list = res.value(Keys.at(0))
+      list = res.value(Keys.at(index))
                  .toObject()
                  .value("versions")
                  .toArray()
                  .toVariantList();
 
-      list1 = list.at(0)
-                  .toJsonDocument()
-                  .object()
-                  .value("links")
-                  .toArray()
-                  .toVariantList();
+      if (list.count() > 0) {
+        list1 = list.at(0)
+                    .toJsonDocument()
+                    .object()
+                    .value("links")
+                    .toArray()
+                    .toVariantList();
 
-      QVariantMap map = list[0].toMap();
-      QVariantMap map1 = map["links"].toMap();
+        QVariantMap map = list[0].toMap();
+        QVariantMap map1 = map["links"].toMap();
 
-      qDebug() << map1["release"];
+        dl = map1["release"].toString();
+        qDebug() << dl;
+        return dl;
+      }
     }
   }
 
-  dlEnd = true;
+  return dl;
 }
 
 void SyncOCDialog::getKextsDevInfo() {
