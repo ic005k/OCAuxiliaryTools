@@ -1688,6 +1688,9 @@ void MainWindow::SavePlist(QString FileName) {
   OpenCore["PlatformInfo"] = SavePlatformInfo();
   OpenCore["UEFI"] = SaveUEFI();
 
+  QFile tempfile(FileName);
+  tempfile.remove();
+
   PListSerializer::toPList(OpenCore, FileName);
 
   if (closeSave) {
