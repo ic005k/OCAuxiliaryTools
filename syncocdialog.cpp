@@ -396,6 +396,7 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
   mymethod->kextUpdate();
 
   QString Current, Available;
+  QString curMd5, avaMd5;
 
   for (int i = 0; i < sourceKexts.count(); i++) {
     QString sourceFile = sourceKexts.at(i);
@@ -404,7 +405,9 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
     if (chkList.at(i)->isChecked()) {
       Available = mymethod->getKextVersion(sourceFile);
       Current = mymethod->getKextVersion(targetFile);
-      if ((Available > Current || Current == "None") &&
+      avaMd5 = mw_one->getMD5(mymethod->getKextBin(sourceFile));
+      curMd5 = mw_one->getMD5(mymethod->getKextBin(targetFile));
+      if ((curMd5 != avaMd5 || Current == "None") &&
           QDir(sourceFile).exists()) {
         ui->btnUpdate->setEnabled(true);
         repaint();
