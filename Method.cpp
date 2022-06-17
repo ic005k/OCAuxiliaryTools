@@ -261,6 +261,11 @@ void Method::kextUpdate() {
             } else {
               startDownload(strUrl);
             }
+
+            dlEnd = false;
+            while (!dlEnd && !blBreak) {
+              QCoreApplication::processEvents();
+            }
           }
         }  // end for j=0
       }    // end !isDev
@@ -270,13 +275,11 @@ void Method::kextUpdate() {
         QString url = mw_one->dlgSyncOC->getKextDevDL(
             mw_one->dlgSyncOC->bufferJson, strName.trimmed());
         startDownload(url);
-      }
 
-      QElapsedTimer t;
-      t.start();
-      dlEnd = false;
-      while (!dlEnd && !blBreak) {
-        QCoreApplication::processEvents();
+        dlEnd = false;
+        while (!dlEnd && !blBreak) {
+          QCoreApplication::processEvents();
+        }
       }
 
     }  // end isChecked
