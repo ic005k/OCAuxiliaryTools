@@ -299,6 +299,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="lblKextDevFrom">
+         <property name="text">
+          <string>From</string>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>

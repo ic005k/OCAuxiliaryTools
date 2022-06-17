@@ -25,6 +25,9 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
       "QLabel{background-color:rgb(255,25,25); color:rgb(255,255,255)}";
   ui->lblInfo->setStyleSheet(str);
   progInfo = new QProgressBar(this);
+  QString txt = "https://dortania.github.io/builds/";
+  QString kextsDevFrom = "<a href=\"" + txt + "\"" + "> " + tr(" Source ");
+  ui->lblKextDevFrom->setText(kextsDevFrom);
 
   Method::init_UIWidget(this, red);
   QFont font;
