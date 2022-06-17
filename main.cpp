@@ -3,7 +3,6 @@
 #include <QSplashScreen>
 
 #include "Method.h"
-#include "dlginfo.h"
 #include "mainwindow.h"
 #include "myapp.h"
 

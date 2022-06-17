@@ -16,9 +16,6 @@
 #include <QScrollBar>
 #include <QTableWidget>
 
-#include "dlginfo.h"
-#include "ui_dlginfo.h"
-
 namespace Ui {
 class SyncOCDialog;
 }
@@ -32,7 +29,6 @@ class SyncOCDialog : public QDialog {
   Ui::SyncOCDialog *ui;
 
   QProgressBar *progInfo;
-  dlgInfo *mydlgInfo;
   bool dlEnd = true;
   QString bufferJson;
   QString downLink;
