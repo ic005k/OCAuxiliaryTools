@@ -1,5 +1,7 @@
 #include "myapp.h"
 
+#include <QSplashScreen>
+
 #include "mainwindow.h"
 
 extern QString PlistFileName;

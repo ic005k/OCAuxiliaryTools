@@ -26,19 +26,6 @@ int main(int argc, char *argv[]) {
 
   MyApplication *a = new MyApplication(argc, argv);
 
-#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
-  QPixmap pixmap(":/icon.png");
-  QSplashScreen splash(pixmap);
-  splash.show();
-#endif
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
-  QScreen *screen = QGuiApplication::screens().at(0);
-  QPixmap pixmap(":/icon.png");
-  QSplashScreen splash(screen, pixmap);
-  splash.show();
-#endif
-
 #ifdef Q_OS_MAC
   Method::init_MacVerInfo(CurVersion);
 #endif
@@ -136,6 +123,10 @@ int main(int argc, char *argv[]) {
 #ifdef Q_OS_WIN32
   PlistFileName = QString::fromLocal8Bit(argv[1]);  //解决乱码
   f.setFamily("Microsoft YaHei UI");
+
+  QPixmap pixmap(":/icon.png");
+  QSplashScreen splash(pixmap);
+  splash.show();
 #endif
 
 #ifdef Q_OS_MAC
@@ -149,7 +140,9 @@ int main(int argc, char *argv[]) {
     mw_one->show();
   }
 
+#ifdef Q_OS_WIN32
   splash.finish(mw_one);
+#endif
 
   f.setPixelSize(12);
   a->setFont(f);
