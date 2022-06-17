@@ -320,14 +320,21 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
     return;
   }
 
-  if (ui->chkKextsDev->isChecked()) {
-    getKextsDevInfo();
-  }
-
   if (sourceKexts.count() == 0) return;
 
   ui->btnUpdate->setEnabled(false);
   repaint();
+
+  if (ui->chkKextsDev->isChecked()) {
+    getKextsDevInfo();
+
+    QElapsedTimer t;
+    t.start();
+    dlEnd = false;
+    while (!dlEnd && !mymethod->blBreak) {
+      QCoreApplication::processEvents();
+    }
+  }
 
   progBar = new QProgressBar(this);
   progBar->setTextVisible(false);
@@ -894,7 +901,7 @@ void SyncOCDialog::on_btnSet_clicked() {
 
 void SyncOCDialog::query(QNetworkReply* reply) {
   bufferJson = reply->readAll();
-  getKextDevDL(bufferJson, "Lilu");
+  // getKextDevDL(bufferJson, "Lilu");
   dlEnd = true;
 }
 

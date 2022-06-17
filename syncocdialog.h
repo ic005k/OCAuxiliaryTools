@@ -28,6 +28,7 @@ class SyncOCDialog : public QDialog {
   ~SyncOCDialog();
   Ui::SyncOCDialog *ui;
 
+  QString bufferJson;
   QString downLink;
   void writeCheckStateINI();
   bool isCheckOC = false;
@@ -91,7 +92,6 @@ class SyncOCDialog : public QDialog {
   QLabel *lblTxt;
   QCheckBox *checkBox;
   bool dlEnd = false;
-  QString bufferJson;
 
  protected:
   void closeEvent(QCloseEvent *event);

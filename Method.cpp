@@ -232,45 +232,56 @@ void Method::kextUpdate() {
       mw_one->dlgSyncOC->ui->tableKexts->setCellWidget(i, 3, progBar);
 
       kextName = name;
-      for (int j = 0; j < mw_one->myDlgPreference->ui->tableKextUrl->rowCount();
-           j++) {
-        if (blBreak) break;
-        QString txt = mw_one->myDlgPreference->ui->tableKextUrl->item(j, 0)
-                          ->text()
-                          .trimmed();
-        test = mw_one->myDlgPreference->ui->tableKextUrl->item(j, 1)
-                   ->text()
-                   .trimmed();
-        if (txt == name && test != "") {
-          bool reGetUrl = true;
-          QString strUrl;
-          for (int m = 0; m < kextDLUrlList.count(); m++) {
-            QString str_m = kextDLUrlList.at(m);
-            QStringList list_m = str_m.split("|");
-            if (list_m.at(0) == name) {
-              reGetUrl = false;
-              strUrl = list_m.at(1);
+      if (!mw_one->dlgSyncOC->ui->chkKextsDev->isChecked()) {
+        for (int j = 0;
+             j < mw_one->myDlgPreference->ui->tableKextUrl->rowCount(); j++) {
+          if (blBreak) break;
+          QString txt = mw_one->myDlgPreference->ui->tableKextUrl->item(j, 0)
+                            ->text()
+                            .trimmed();
+          test = mw_one->myDlgPreference->ui->tableKextUrl->item(j, 1)
+                     ->text()
+                     .trimmed();
+          if (txt == name && test != "") {
+            bool reGetUrl = true;
+            QString strUrl;
+            for (int m = 0; m < kextDLUrlList.count(); m++) {
+              QString str_m = kextDLUrlList.at(m);
+              QStringList list_m = str_m.split("|");
+              if (list_m.at(0) == name) {
+                reGetUrl = false;
+                strUrl = list_m.at(1);
+              }
+            }
+            if (reGetUrl) {
+              if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
+                getLastReleaseFromUrl(test);
+              if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
+                getLastReleaseFromHtml(test + "/releases/latest");
+            } else {
+              startDownload(strUrl);
             }
           }
-          if (reGetUrl) {
-            if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
-              getLastReleaseFromUrl(test);
-            if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
-              getLastReleaseFromHtml(test + "/releases/latest");
-          } else {
-            startDownload(strUrl);
-          }
-
-          QElapsedTimer t;
-          t.start();
-          dlEnd = false;
-          while (!dlEnd && !blBreak) {
-            QCoreApplication::processEvents();
-          }
-        }
+        }  // end for j=0
+      }    // end !isDev
+      else {
+        QString strName = name;
+        strName = strName.replace(".kext", 0);
+        QString url = mw_one->dlgSyncOC->getKextDevDL(
+            mw_one->dlgSyncOC->bufferJson, strName.trimmed());
+        startDownload(url);
       }
-    }
-  }
+
+      QElapsedTimer t;
+      t.start();
+      dlEnd = false;
+      while (!dlEnd && !blBreak) {
+        QCoreApplication::processEvents();
+      }
+
+    }  // end isChecked
+
+  }  // end for i=0
 
   if (blBreak) return;
   finishKextUpdate(true);
