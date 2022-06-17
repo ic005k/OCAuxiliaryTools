@@ -26,6 +26,7 @@ QVector<QString> openFileLists;
 QRegularExpression regxData("[A-Fa-f0-9 ]{0,1024}");
 QRegularExpression regxNumber("^-?\[0-9]*$");
 Method* mymethod;
+dlgInfo* mydlgInfo;
 QVector<QCheckBox*> chkDisplayLevel, chk_ScanPolicy, chk_PickerAttributes,
     chk_ExposeSensitiveData, chk_Target;
 QVariantMap mapTatol;
@@ -150,6 +151,7 @@ void MainWindow::changeOpenCore(bool blDEV) {
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
+
   Initialization = true;
   loading = true;
   init_Widgets();

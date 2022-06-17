@@ -46,6 +46,7 @@ SOURCES += \
     dlgParameters.cpp \
     dlgPreset.cpp \
     dlgdatabase.cpp \
+    dlginfo.cpp \
     dlgkernelpatch.cpp \
     dlgmisc.cpp \
     dlgnewkeyfield.cpp \
@@ -75,6 +76,7 @@ HEADERS += \
     dlgParameters.h \
     dlgPreset.h \
     dlgdatabase.h \
+    dlginfo.h \
     dlgkernelpatch.h \
     dlgmisc.h \
     dlgnewkeyfield.h \
@@ -98,6 +100,7 @@ FORMS += \
     dlgParameters.ui \
     dlgPreset.ui \
     dlgdatabase.ui \
+    dlginfo.ui \
     dlgkernelpatch.ui \
     dlgmisc.ui \
     dlgnewkeyfield.ui \

@@ -21,6 +21,7 @@
 #include <QScreen>
 #include <QShortcut>
 #include <QSpacerItem>
+#include <QSplashScreen>
 #include <QSplitter>
 #include <QStandardItemModel>
 #include <QStyledItemDelegate>
@@ -49,6 +50,7 @@
 #include "dlgParameters.h"
 #include "dlgPreset.h"
 #include "dlgdatabase.h"
+#include "dlginfo.h"
 #include "dlgkernelpatch.h"
 #include "dlgmisc.h"
 #include "dlgnewkeyfield.h"
@@ -66,6 +68,7 @@
 #include "ui_dlgParameters.h"
 #include "ui_dlgPreset.h"
 #include "ui_dlgdatabase.h"
+#include "ui_dlginfo.h"
 #include "ui_dlgkernelpatch.h"
 #include "ui_dlgnewkeyfield.h"
 #include "ui_dlgpreference.h"

@@ -1,6 +1,9 @@
 #include <QApplication>
+#include <QObject>
+#include <QSplashScreen>
 
 #include "Method.h"
+#include "dlginfo.h"
 #include "mainwindow.h"
 #include "myapp.h"
 
@@ -9,6 +12,7 @@ extern QVector<QString> filelist;
 QWidgetList wdlist;
 extern QString PlistFileName, CurVersion, ocVer;
 extern bool zh_cn;
+extern dlgInfo *mydlgInfo;
 MainWindow *mw_one;
 
 int main(int argc, char *argv[]) {
@@ -22,6 +26,11 @@ int main(int argc, char *argv[]) {
 #endif
 
   MyApplication *a = new MyApplication(argc, argv);
+
+  QPixmap pixmap(":/icon.png");
+  QSplashScreen splash(pixmap);
+  splash.show();
+
 #ifdef Q_OS_MAC
   Method::init_MacVerInfo(CurVersion);
 #endif
@@ -117,11 +126,8 @@ int main(int argc, char *argv[]) {
 
   QFont f;
 #ifdef Q_OS_WIN32
-
   PlistFileName = QString::fromLocal8Bit(argv[1]);  //解决乱码
-
   f.setFamily("Microsoft YaHei UI");
-
 #endif
 
 #ifdef Q_OS_MAC
@@ -134,6 +140,8 @@ int main(int argc, char *argv[]) {
     mw_one = new MainWindow();
     mw_one->show();
   }
+
+  splash.finish(mw_one);
 
   f.setPixelSize(12);
   a->setFont(f);

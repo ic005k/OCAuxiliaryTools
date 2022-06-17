@@ -81,6 +81,7 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
       Reg.value("DevSource", "https://github.com/dortania/build-repo")
           .toString());
   ui->chkIncludeResource->setChecked(Reg.value("IncludeResource", 1).toBool());
+  ui->chkKextsDev->setChecked(Reg.value("KextsDev", 0).toBool());
 
   mgr = new QNetworkAccessManager(this);
   connect(mgr, SIGNAL(finished(QNetworkReply*)), this,
@@ -255,6 +256,7 @@ void SyncOCDialog::closeEvent(QCloseEvent* event) {
   if (!ui->btnCheckUpdate->isEnabled()) event->ignore();
   writeCheckStateINI();
   Reg.setValue("IncludeResource", ui->chkIncludeResource->isChecked());
+  Reg.setValue("KextsDev", ui->chkKextsDev->isChecked());
   QString txt = ui->editOCDevSource->lineEdit()->text().trimmed();
   Reg.setValue("DevSource", txt);
   if (txt != "")
@@ -327,6 +329,14 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
 
   if (ui->chkKextsDev->isChecked()) {
     getKextsDevInfo();
+
+    mydlgInfo = new dlgInfo(this);
+    mydlgInfo->ui->lblTitle->setText(
+        tr("Please wait while we get the download information of Kexts "
+           "development version..."));
+    mydlgInfo->ui->progBar->setMaximum(0);
+    mydlgInfo->setModal(true);
+    mydlgInfo->show();
 
     QElapsedTimer t;
     t.start();
@@ -901,8 +911,12 @@ void SyncOCDialog::on_btnSet_clicked() {
 
 void SyncOCDialog::query(QNetworkReply* reply) {
   bufferJson = reply->readAll();
-  // getKextDevDL(bufferJson, "Lilu");
   dlEnd = true;
+
+  mydlgInfo->setModal(false);
+  mydlgInfo->setAttribute(Qt::WA_DeleteOnClose, true);
+  emit mydlgInfo->close();
+  delete mydlgInfo;
 }
 
 QString SyncOCDialog::getKextDevDL(QString bufferJson, QString kextName) {

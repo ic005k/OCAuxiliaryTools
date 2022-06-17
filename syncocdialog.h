@@ -16,6 +16,9 @@
 #include <QScrollBar>
 #include <QTableWidget>
 
+#include "dlginfo.h"
+#include "ui_dlginfo.h"
+
 namespace Ui {
 class SyncOCDialog;
 }
@@ -28,6 +31,8 @@ class SyncOCDialog : public QDialog {
   ~SyncOCDialog();
   Ui::SyncOCDialog *ui;
 
+  dlgInfo *mydlgInfo;
+  bool dlEnd = false;
   QString bufferJson;
   QString downLink;
   void writeCheckStateINI();
@@ -91,7 +96,6 @@ class SyncOCDialog : public QDialog {
   QLabel *lblVer;
   QLabel *lblTxt;
   QCheckBox *checkBox;
-  bool dlEnd = false;
 
  protected:
   void closeEvent(QCloseEvent *event);
