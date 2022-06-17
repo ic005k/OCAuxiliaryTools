@@ -26,9 +26,18 @@ int main(int argc, char *argv[]) {
 
   MyApplication *a = new MyApplication(argc, argv);
 
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
   QPixmap pixmap(":/icon.png");
   QSplashScreen splash(pixmap);
   splash.show();
+#endif
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+  QScreen *screen = QGuiApplication::screens().at(0);
+  QPixmap pixmap(":/icon.png");
+  QSplashScreen splash(screen, pixmap);
+  splash.show();
+#endif
 
 #ifdef Q_OS_MAC
   Method::init_MacVerInfo(CurVersion);
