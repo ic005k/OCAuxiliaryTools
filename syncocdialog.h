@@ -31,6 +31,7 @@ class SyncOCDialog : public QDialog {
   ~SyncOCDialog();
   Ui::SyncOCDialog *ui;
 
+  QProgressBar *progInfo;
   dlgInfo *mydlgInfo;
   bool dlEnd = false;
   QString bufferJson;

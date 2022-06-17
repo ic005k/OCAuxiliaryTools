@@ -12,7 +12,6 @@ extern QVector<QString> filelist;
 QWidgetList wdlist;
 extern QString PlistFileName, CurVersion, ocVer;
 extern bool zh_cn;
-extern dlgInfo *mydlgInfo;
 MainWindow *mw_one;
 
 int main(int argc, char *argv[]) {

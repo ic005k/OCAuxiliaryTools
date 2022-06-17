@@ -19,6 +19,7 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
     : QDialog(parent), ui(new Ui::SyncOCDialog) {
   ui->setupUi(this);
 
+  ui->lblInfo->hide();
   Method::init_UIWidget(this, red);
   QFont font;
   font.setBold(true);
@@ -254,6 +255,8 @@ void SyncOCDialog::on_listOpenCore_currentRowChanged(int currentRow) {
 
 void SyncOCDialog::closeEvent(QCloseEvent* event) {
   if (!ui->btnCheckUpdate->isEnabled()) event->ignore();
+  if (!dlEnd) event->ignore();
+
   writeCheckStateINI();
   Reg.setValue("IncludeResource", ui->chkIncludeResource->isChecked());
   Reg.setValue("KextsDev", ui->chkKextsDev->isChecked());
@@ -330,16 +333,35 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
   if (ui->chkKextsDev->isChecked()) {
     getKextsDevInfo();
 
-    mydlgInfo = new dlgInfo(this);
-    mydlgInfo->ui->lblTitle->setText(
+    ui->lblInfo->show();
+    ui->lblInfo->setText(
         tr("Please wait while we get the download information of Kexts "
            "development version..."));
-    mydlgInfo->ui->progBar->setMaximum(0);
-    mydlgInfo->setModal(true);
-    mydlgInfo->show();
+    progInfo = new QProgressBar(this);
+    progInfo = new QProgressBar(this);
+    progInfo->setTextVisible(false);
+    progInfo->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    progInfo->setStyleSheet(
+        "QProgressBar{border:0px solid #FFFFFF;"
+        "height:30;"
+        "background:rgba(25,255,25,0);"
+        "text-align:right;"
+        "color:rgb(255,255,255);"
+        "border-radius:0px;}"
 
-    QElapsedTimer t;
-    t.start();
+        "QProgressBar:chunk{"
+        "border-radius:0px;"
+        "background-color:rgba(25,255,0,100);"
+        "}");
+    progInfo->setGeometry(ui->btnCheckUpdate->x(), ui->btnCheckUpdate->y(),
+                          ui->btnCheckUpdate->width(),
+                          ui->btnCheckUpdate->height());
+    progInfo->setMaximum(0);
+    progInfo->setMinimum(0);
+    progInfo->show();
+
+    // QElapsedTimer t;
+    // t.start();
     dlEnd = false;
     while (!dlEnd && !mymethod->blBreak) {
       QCoreApplication::processEvents();
@@ -402,6 +424,8 @@ void SyncOCDialog::on_btnStop_clicked() {
     ui->btnGetOC->setEnabled(true);
     delete progBar;
   }
+
+  dlEnd = true;
 }
 
 void SyncOCDialog::on_btnUpdate_clicked() {
@@ -913,10 +937,9 @@ void SyncOCDialog::query(QNetworkReply* reply) {
   bufferJson = reply->readAll();
   dlEnd = true;
 
-  mydlgInfo->setModal(false);
-  mydlgInfo->setAttribute(Qt::WA_DeleteOnClose, true);
-  emit mydlgInfo->close();
-  delete mydlgInfo;
+  progInfo->close();
+  delete progInfo;
+  ui->lblInfo->hide();
 }
 
 QString SyncOCDialog::getKextDevDL(QString bufferJson, QString kextName) {

@@ -314,6 +314,13 @@
       </layout>
      </item>
      <item>
+      <widget class="QLabel" name="lblInfo">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
