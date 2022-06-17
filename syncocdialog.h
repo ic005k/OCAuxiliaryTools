@@ -33,7 +33,7 @@ class SyncOCDialog : public QDialog {
 
   QProgressBar *progInfo;
   dlgInfo *mydlgInfo;
-  bool dlEnd = false;
+  bool dlEnd = true;
   QString bufferJson;
   QString downLink;
   void writeCheckStateINI();

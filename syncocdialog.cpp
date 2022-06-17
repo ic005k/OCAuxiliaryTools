@@ -20,6 +20,12 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
   ui->setupUi(this);
 
   ui->lblInfo->hide();
+  ui->lblInfo->setWordWrap(true);
+  QString str =
+      "QLabel{background-color:rgb(255,25,25); color:rgb(255,255,255)}";
+  ui->lblInfo->setStyleSheet(str);
+  progInfo = new QProgressBar(this);
+
   Method::init_UIWidget(this, red);
   QFont font;
   font.setBold(true);
@@ -92,7 +98,8 @@ SyncOCDialog::SyncOCDialog(QWidget* parent)
 SyncOCDialog::~SyncOCDialog() { delete ui; }
 
 void SyncOCDialog::on_btnStartSync_clicked() {
-  if (!ui->btnCheckUpdate->isEnabled() || !ui->btnGetOC->isEnabled()) {
+  if (!ui->btnCheckUpdate->isEnabled() || !ui->btnGetOC->isEnabled() ||
+      !dlEnd) {
     QMessageBox box;
     box.setText(
         tr("Kexts update check or OpenCore database upgrade is in progress, "
@@ -330,6 +337,7 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
   ui->btnUpdate->setEnabled(false);
   repaint();
 
+  mymethod->blBreak = false;
   if (ui->chkKextsDev->isChecked()) {
     getKextsDevInfo();
 
@@ -337,8 +345,7 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
     ui->lblInfo->setText(
         tr("Please wait while we get the download information of Kexts "
            "development version..."));
-    progInfo = new QProgressBar(this);
-    progInfo = new QProgressBar(this);
+
     progInfo->setTextVisible(false);
     progInfo->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     progInfo->setStyleSheet(
@@ -360,13 +367,13 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
     progInfo->setMinimum(0);
     progInfo->show();
 
-    // QElapsedTimer t;
-    // t.start();
     dlEnd = false;
     while (!dlEnd && !mymethod->blBreak) {
       QCoreApplication::processEvents();
     }
   }
+
+  if (mymethod->blBreak) return;
 
   progBar = new QProgressBar(this);
   progBar->setTextVisible(false);
@@ -417,6 +424,14 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
 }
 
 void SyncOCDialog::on_btnStop_clicked() {
+  if (ui->chkKextsDev->isChecked()) {
+    if (!dlEnd) {
+      dlEnd = true;
+      progInfo->close();
+      ui->lblInfo->hide();
+    }
+  }
+
   mymethod->cancelKextUpdate();
 
   if (isCheckOC) {
@@ -424,8 +439,6 @@ void SyncOCDialog::on_btnStop_clicked() {
     ui->btnGetOC->setEnabled(true);
     delete progBar;
   }
-
-  dlEnd = true;
 }
 
 void SyncOCDialog::on_btnUpdate_clicked() {
@@ -764,7 +777,7 @@ void SyncOCDialog::on_tableKexts_itemSelectionChanged() {
 }
 
 void SyncOCDialog::on_btnGetOC_clicked() {
-  if (!ui->btnCheckUpdate->isEnabled()) {
+  if (!ui->btnCheckUpdate->isEnabled() || !dlEnd) {
     QMessageBox box;
     box.setText(tr(
         "Kexts update check is in progress, please wait for it to complete."));
@@ -857,6 +870,16 @@ void SyncOCDialog::on_comboOCVersions_currentTextChanged(const QString& arg1) {
 }
 
 void SyncOCDialog::on_btnImport_clicked() {
+  if (!ui->btnCheckUpdate->isEnabled() || !ui->btnGetOC->isEnabled() ||
+      !dlEnd) {
+    QMessageBox box;
+    box.setText(
+        tr("Kexts update check or OpenCore database upgrade is in progress, "
+           "please wait for it to finish."));
+    box.exec();
+    return;
+  }
+
   QFileDialog fd;
   QString FileName =
       fd.getOpenFileName(this, "file", "", "zip file(*.zip);;all(*.*)");
@@ -938,7 +961,6 @@ void SyncOCDialog::query(QNetworkReply* reply) {
   dlEnd = true;
 
   progInfo->close();
-  delete progInfo;
   ui->lblInfo->hide();
 }
 
