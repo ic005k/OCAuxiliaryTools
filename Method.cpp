@@ -34,16 +34,7 @@ Method::Method(QWidget* parent) : QMainWindow(parent) {
 }
 
 QStringList Method::getDLUrlList(QString url) {
-  QString strLast = getHTMLSource(url, false);
-  if (strLast == "") {
-    blBreak = true;
-    return QStringList() << "";
-  }
-  QStringList list0 = strLast.split("\"");
-  QString str_url;
-  if (list0.count() > 2) str_url = list0.at(1);
-
-  QString str_html = getHTMLSource(str_url, false);
+  QString str_html = mw_one->dlgSyncOC->getKextHtmlInfo(url, false);
   if (str_html == "") {
     blBreak = true;
     return QStringList() << "";
@@ -51,12 +42,35 @@ QStringList Method::getDLUrlList(QString url) {
   QTextEdit* htmlEdit = new QTextEdit;
   htmlEdit->setPlainText(str_html);
   QStringList list1, list2;
+  bool isRelease = false;
   for (int i = 0; i < htmlEdit->document()->lineCount(); i++) {
     QString strLine = getTextEditLineText(htmlEdit, i);
-    if (strLine.trimmed().contains("/releases/download/")) {
-      list1 = strLine.split("\"");
-      if (list1.count() > 1) {
-        list2.append("https://github.com" + list1.at(1));
+    if (strLine.trimmed().contains("RELEASE")) {
+      isRelease = true;
+      break;
+    }
+  }
+  if (isRelease) {
+    for (int i = 0; i < htmlEdit->document()->lineCount(); i++) {
+      QString strLine = getTextEditLineText(htmlEdit, i);
+      if (strLine.trimmed().contains("/releases/download/") &&
+          strLine.trimmed().contains("RELEASE")) {
+        list1 = strLine.split("\"");
+        if (list1.count() > 1) {
+          list2.append("https://github.com" + list1.at(1));
+        }
+        break;
+      }
+    }
+  } else {
+    for (int i = 0; i < htmlEdit->document()->lineCount(); i++) {
+      QString strLine = getTextEditLineText(htmlEdit, i);
+      if (strLine.trimmed().contains("/releases/download/")) {
+        list1 = strLine.split("\"");
+        if (list1.count() > 1) {
+          list2.append("https://github.com" + list1.at(1));
+        }
+        break;
       }
     }
   }
@@ -257,7 +271,7 @@ void Method::kextUpdate() {
               if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
                 getLastReleaseFromUrl(test);
               if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
-                getLastReleaseFromHtml(test + "/releases/latest");
+                getLastReleaseFromHtml(test + "/releases");
             } else {
               startDownload(strUrl);
             }
@@ -330,7 +344,7 @@ void Method::downloadAllKexts() {
       if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
         getLastReleaseFromUrl(test);
       if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
-        getLastReleaseFromHtml(test + "/releases/latest");
+        getLastReleaseFromHtml(test + "/releases");
     } else {
       startDownload(strUrl);
     }

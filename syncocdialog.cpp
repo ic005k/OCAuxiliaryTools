@@ -343,38 +343,11 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
 
   mymethod->blBreak = false;
   if (ui->chkKextsDev->isChecked()) {
-    getKextsDevInfo();
+    QString url =
+        "https://raw.githubusercontent.com/dortania/build-repo/builds/"
+        "config.json";
 
-    ui->lblInfo->show();
-    ui->lblInfo->setText(
-        tr("Please wait while we get the download information of Kexts "
-           "development version..."));
-
-    progInfo->setTextVisible(false);
-    progInfo->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    progInfo->setStyleSheet(
-        "QProgressBar{border:0px solid #FFFFFF;"
-        "height:30;"
-        "background:rgba(25,255,25,0);"
-        "text-align:right;"
-        "color:rgb(255,255,255);"
-        "border-radius:0px;}"
-
-        "QProgressBar:chunk{"
-        "border-radius:0px;"
-        "background-color:rgba(25,255,0,100);"
-        "}");
-    progInfo->setGeometry(ui->btnCheckUpdate->x(), ui->btnCheckUpdate->y(),
-                          ui->btnCheckUpdate->width(),
-                          ui->btnCheckUpdate->height());
-    progInfo->setMaximum(0);
-    progInfo->setMinimum(0);
-    progInfo->show();
-
-    dlEnd = false;
-    while (!dlEnd && !mymethod->blBreak) {
-      QCoreApplication::processEvents();
-    }
+    getKextHtmlInfo(url, false);
   }
 
   if (mymethod->blBreak) return;
@@ -970,7 +943,16 @@ void SyncOCDialog::on_btnSet_clicked() {
 void SyncOCDialog::query(QNetworkReply* reply) {
   bufferJson = reply->readAll();
   dlEnd = true;
-
+  // qDebug() << bufferJson;
+  if (writefile) {
+    QString FILE_NAME = mw_one->strConfigPath + "code.txt";
+    QFile file(FILE_NAME);
+    if (file.exists()) file.remove();
+    file.open(QIODevice::WriteOnly);
+    QTextStream out(&file);
+    out << bufferJson;
+    file.close();
+  }
   progInfo->close();
   ui->lblInfo->hide();
 }
@@ -1022,10 +1004,43 @@ QString SyncOCDialog::getKextDevDL(QString bufferJson, QString kextName) {
   return dl;
 }
 
-void SyncOCDialog::getKextsDevInfo() {
-  QString url =
-      "https://raw.githubusercontent.com/dortania/build-repo/builds/"
-      "config.json";
-
+QString SyncOCDialog::getKextHtmlInfo(QString url, bool writeFile) {
+  init_InfoShow();
+  writefile = writeFile;
   mgr->get(QNetworkRequest(QUrl(url)));
+
+  dlEnd = false;
+  while (!dlEnd && !mymethod->blBreak) {
+    QCoreApplication::processEvents();
+  }
+
+  return bufferJson;
+}
+
+void SyncOCDialog::init_InfoShow() {
+  if (ui->chkKextsDev->isChecked()) ui->lblInfo->show();
+  ui->lblInfo->setText(
+      tr("Please wait while we get the download information of Kexts "
+         "development version..."));
+
+  progInfo->setTextVisible(false);
+  progInfo->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  progInfo->setStyleSheet(
+      "QProgressBar{border:0px solid #FFFFFF;"
+      "height:30;"
+      "background:rgba(25,255,25,0);"
+      "text-align:right;"
+      "color:rgb(255,255,255);"
+      "border-radius:0px;}"
+
+      "QProgressBar:chunk{"
+      "border-radius:0px;"
+      "background-color:rgba(25,255,0,100);"
+      "}");
+  progInfo->setGeometry(ui->btnCheckUpdate->x(), ui->btnCheckUpdate->y(),
+                        ui->btnCheckUpdate->width(),
+                        ui->btnCheckUpdate->height());
+  progInfo->setMaximum(0);
+  progInfo->setMinimum(0);
+  progInfo->show();
 }

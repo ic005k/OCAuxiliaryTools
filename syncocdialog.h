@@ -28,6 +28,7 @@ class SyncOCDialog : public QDialog {
   ~SyncOCDialog();
   Ui::SyncOCDialog *ui;
 
+  bool writefile = false;
   QProgressBar *progInfo;
   bool dlEnd = true;
   QString bufferJson;
@@ -54,7 +55,7 @@ class SyncOCDialog : public QDialog {
   void init_ItemColor();
 
   void on_ProgBarvalueChanged(QProgressBar *m_bar);
-  void getKextsDevInfo();
+  QString getKextHtmlInfo(QString url, bool writeFile);
   QString getKextDevDL(QString bufferJson, QString kextName);
  public slots:
   void on_btnStop_clicked();
@@ -94,7 +95,8 @@ class SyncOCDialog : public QDialog {
   QLabel *lblTxt;
   QCheckBox *checkBox;
 
- protected:
+  void init_InfoShow();
+protected:
   void closeEvent(QCloseEvent *event);
   void resizeEvent(QResizeEvent *event);
   void keyPressEvent(QKeyEvent *event);
