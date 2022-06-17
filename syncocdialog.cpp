@@ -662,6 +662,9 @@ void SyncOCDialog::init_Sync_OC_Table() {
     QString Current = mymethod->getKextVersion(strF2);
     QString Available = mymethod->getKextVersion(strF1);
 
+    QString curMd5 = mw_one->getMD5(mymethod->getKextBin(strF2));
+    QString avaMd5 = mw_one->getMD5(mymethod->getKextBin(strF1));
+
     item = new QTableWidgetItem(Current);
     ui->tableKexts->setItem(i, 1, item);
 
@@ -669,7 +672,8 @@ void SyncOCDialog::init_Sync_OC_Table() {
     ui->tableKexts->setItem(i, 2, item);
 
     if (Available != "None") {
-      if (Available > Current) {
+      // if (Available > Current) {
+      if (curMd5 != avaMd5) {
         chk->setChecked(true);
 
         icon.addFile(":/icon/no.png", QSize(10, 10));
