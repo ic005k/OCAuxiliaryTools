@@ -51,15 +51,43 @@ QStringList Method::getDLUrlList(QString url) {
     }
   }
   if (isRelease) {
-    for (int i = 0; i < htmlEdit->document()->lineCount(); i++) {
-      QString strLine = getTextEditLineText(htmlEdit, i);
-      if (strLine.trimmed().contains("/releases/download/") &&
-          strLine.trimmed().contains("RELEASE")) {
-        list1 = strLine.split("\"");
-        if (list1.count() > 1) {
-          list2.append("https://github.com" + list1.at(1));
+    if (mw_one->dlgSyncOC->ui->btnGetOC->isEnabled()) {
+      for (int i = 0; i < htmlEdit->document()->lineCount(); i++) {
+        QString strLine = getTextEditLineText(htmlEdit, i);
+        if (strLine.trimmed().contains("/releases/download/") &&
+            strLine.trimmed().contains("RELEASE")) {
+          list1 = strLine.split("\"");
+          if (list1.count() > 1) {
+            list2.append("https://github.com" + list1.at(1));
+          }
+          break;
         }
-        break;
+      }
+    } else {
+      if (mw_one->ui->actionDEBUG->isChecked()) {
+        for (int i = 0; i < htmlEdit->document()->lineCount(); i++) {
+          QString strLine = getTextEditLineText(htmlEdit, i);
+          if (strLine.trimmed().contains("/releases/download/") &&
+              strLine.trimmed().contains("DEBUG")) {
+            list1 = strLine.split("\"");
+            if (list1.count() > 1) {
+              list2.append("https://github.com" + list1.at(1));
+            }
+            break;
+          }
+        }
+      } else {
+        for (int i = 0; i < htmlEdit->document()->lineCount(); i++) {
+          QString strLine = getTextEditLineText(htmlEdit, i);
+          if (strLine.trimmed().contains("/releases/download/") &&
+              strLine.trimmed().contains("RELEASE")) {
+            list1 = strLine.split("\"");
+            if (list1.count() > 1) {
+              list2.append("https://github.com" + list1.at(1));
+            }
+            break;
+          }
+        }
       }
     }
   } else {

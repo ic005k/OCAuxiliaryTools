@@ -342,6 +342,11 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
   repaint();
 
   mymethod->blBreak = false;
+  if (ui->chkKextsDev->isChecked() ||
+      mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
+    progInfo->setGeometry(ui->btnCheckUpdate->x(), ui->btnCheckUpdate->y(),
+                          ui->btnCheckUpdate->width(),
+                          ui->btnCheckUpdate->height());
   if (ui->chkKextsDev->isChecked()) {
     QString url =
         "https://raw.githubusercontent.com/dortania/build-repo/builds/"
@@ -815,14 +820,14 @@ void SyncOCDialog::on_btnGetOC_clicked() {
     if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
       mymethod->getLastReleaseFromUrl(DevSource);
     if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
-      mymethod->getLastReleaseFromHtml(DevSource + "/releases/latest");
+      mymethod->getLastReleaseFromHtml(DevSource + "/releases");
   } else {
     if (ui->comboOCVersions->currentText() == tr("Latest Version")) {
       QString ocUrl = "https://github.com/acidanthera/OpenCorePkg";
       if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
         mymethod->getLastReleaseFromUrl(ocUrl);
       if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
-        mymethod->getLastReleaseFromHtml(ocUrl + "/releases/latest");
+        mymethod->getLastReleaseFromHtml(ocUrl + "/releases");
     } else {
       mymethod->startDownload(downLink);
     }
@@ -1018,7 +1023,8 @@ QString SyncOCDialog::getKextHtmlInfo(QString url, bool writeFile) {
 }
 
 void SyncOCDialog::init_InfoShow() {
-  if (ui->chkKextsDev->isChecked()) ui->lblInfo->show();
+  if (ui->chkKextsDev->isChecked() && ui->btnGetOC->isEnabled())
+    ui->lblInfo->show();
   ui->lblInfo->setText(
       tr("Please wait while we get the download information of Kexts "
          "development version..."));
@@ -1037,10 +1043,8 @@ void SyncOCDialog::init_InfoShow() {
       "border-radius:0px;"
       "background-color:rgba(25,255,0,100);"
       "}");
-  progInfo->setGeometry(ui->btnCheckUpdate->x(), ui->btnCheckUpdate->y(),
-                        ui->btnCheckUpdate->width(),
-                        ui->btnCheckUpdate->height());
+
   progInfo->setMaximum(0);
   progInfo->setMinimum(0);
-  progInfo->show();
+  if (ui->btnGetOC->isEnabled()) progInfo->show();
 }
