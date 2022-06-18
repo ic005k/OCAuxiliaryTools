@@ -1023,7 +1023,8 @@ QString SyncOCDialog::getKextHtmlInfo(QString url, bool writeFile) {
 }
 
 void SyncOCDialog::init_InfoShow() {
-  if (ui->chkKextsDev->isChecked() && ui->btnGetOC->isEnabled())
+  if (ui->chkKextsDev->isChecked() && ui->btnGetOC->isEnabled() &&
+      mw_one->myDlgPreference->ui->btnDownloadKexts->isEnabled())
     ui->lblInfo->show();
   ui->lblInfo->setText(
       tr("Please wait while we get the download information of Kexts "
@@ -1046,5 +1047,7 @@ void SyncOCDialog::init_InfoShow() {
 
   progInfo->setMaximum(0);
   progInfo->setMinimum(0);
-  if (ui->btnGetOC->isEnabled()) progInfo->show();
+  if (ui->btnGetOC->isEnabled() &&
+      mw_one->myDlgPreference->ui->btnDownloadKexts->isEnabled())
+    progInfo->show();
 }
