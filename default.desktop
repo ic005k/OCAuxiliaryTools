@@ -2,7 +2,7 @@
 Type=Application
 Name=OCAuxiliaryTools
 Exec=OCAuxiliaryTools
-Icon=icon
+Icon=icon/icon.png
 Comment=OCAuxiliaryTools
 Categories=Application;
 Terminal=true

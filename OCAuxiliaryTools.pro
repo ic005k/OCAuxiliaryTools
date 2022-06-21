@@ -1,18 +1,12 @@
-QT       += core gui
-QT       += xml
-QT       += network
-
-ICON = Icon.icns
-RC_FILE += myapp.rc
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui xml network
 
+ICON = src/Icon.icns
 
 CONFIG += c++11
 TARGET= OCAuxiliaryTools
 
 unix:!macx:{
-
     QMAKE_RPATHDIR=$ORIGIN
     QMAKE_LFLAGS += -no-pie
     QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN/lib\'"
@@ -21,89 +15,87 @@ unix:!macx:{
 }
 
 TRANSLATIONS += cn.ts
-
-# The following define makes your compiler emit warnings if you use
-# any Qt feature that has been marked deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-# You can also make your code fail to compile if it uses deprecated APIs.
-# In order to do so, uncomment the following line.
-# You can also select to disable deprecated APIs only up to a certain version of Qt.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+INCLUDEPATH += \
+               src/views/ \
+               src/watcher \
+               src/utils \
+               src/app
+
+RC_FILE += myapp.rc
 
 SOURCES += \
-    BalloonTip.cpp \
-    Method.cpp \
-    Plist.cpp \
-    PlistDate.cpp \
-    aboutdialog.cpp \
-    autoupdatedialog.cpp \
-    commands.cpp \
-    dlgMountESP.cpp \
-    dlgOCValidate.cpp \
-    dlgParameters.cpp \
-    dlgPreset.cpp \
-    dlgdatabase.cpp \
-    dlgkernelpatch.cpp \
-    dlgmisc.cpp \
-    dlgnewkeyfield.cpp \
-    dlgpreference.cpp \
-    filesystemwatcher.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    myapp.cpp \
-    plistparser.cpp \
-    plistserializer.cpp \
-    pugixml.cpp \
-    recentfiles.cpp \
-    syncocdialog.cpp \
-    tooltip.cpp
+    src/views/aboutdialog.cpp \
+    src/views/autoupdatedialog.cpp \
+    src/views/dlgMountESP.cpp \
+    src/views/dlgOCValidate.cpp \
+    src/views/dlgParameters.cpp \
+    src/views/dlgPreset.cpp \
+    src/views/dlgdatabase.cpp \
+    src/views/dlgkernelpatch.cpp \
+    src/views/dlgmisc.cpp \
+    src/views/dlgnewkeyfield.cpp \
+    src/views/dlgpreference.cpp \
+    src/views/mainwindow.cpp \
+    src/views/syncocdialog.cpp \
+    src/views/BalloonTip.cpp \
+    src/views/tooltip.cpp \
+    src/watcher/filesystemwatcher.cpp \
+    src/utils/Method.cpp \
+    src/utils/Plist.cpp \
+    src/utils/PlistDate.cpp \
+    src/utils/commands.cpp \
+    src/utils/plistparser.cpp \
+    src/utils/plistserializer.cpp \
+    src/utils/pugixml.cpp \
+    src/utils/recentfiles.cpp \
+    src/app/myapp.cpp \
+    src/main.cpp
 
 HEADERS += \
-    BalloonTip.h \
-    Method.h \
-    Plist.hpp \
-    PlistDate.hpp \
-    aboutdialog.h \
-    autoupdatedialog.h \
-    base64.hpp \
-    commands.h \
-    dlgMountESP.h \
-    dlgOCValidate.h \
-    dlgParameters.h \
-    dlgPreset.h \
-    dlgdatabase.h \
-    dlgkernelpatch.h \
-    dlgmisc.h \
-    dlgnewkeyfield.h \
-    dlgpreference.h \
-    filesystemwatcher.h \
-    mainwindow.h \
-    myapp.h \
-    plistparser.h \
-    plistserializer.h \
-    pugiconfig.hpp \
-    pugixml.hpp \
-    recentfiles.h \
-    syncocdialog.h \
-    tooltip.h
+    src/views/aboutdialog.h \
+    src/views/autoupdatedialog.h \
+    src/views/dlgMountESP.h \
+    src/views/dlgOCValidate.h \
+    src/views/dlgParameters.h \
+    src/views/dlgPreset.h \
+    src/views/dlgdatabase.h \
+    src/views/dlgkernelpatch.h \
+    src/views/dlgmisc.h \
+    src/views/dlgnewkeyfield.h \
+    src/views/dlgpreference.h \
+    src/views/mainwindow.h \
+    src/views/syncocdialog.h \
+    src/views/BalloonTip.h \
+    src/views/tooltip.h \
+    src/watcher/filesystemwatcher.h \
+    src/utils/Method.h \
+    src/utils/Plist.hpp \
+    src/utils/PlistDate.hpp \
+    src/utils/base64.hpp \
+    src/utils/commands.h \
+    src/utils/plistparser.h \
+    src/utils/plistserializer.h \
+    src/utils/pugiconfig.hpp \
+    src/utils/pugixml.hpp \
+    src/utils/recentfiles.h
+    src/app/myapp.h \
 
 FORMS += \
-    aboutdialog.ui \
-    autoupdatedialog.ui \
-    dlgMountESP.ui \
-    dlgOCValidate.ui \
-    dlgParameters.ui \
-    dlgPreset.ui \
-    dlgdatabase.ui \
-    dlgkernelpatch.ui \
-    dlgmisc.ui \
-    dlgnewkeyfield.ui \
-    dlgpreference.ui \
-    mainwindow.ui \
-    syncocdialog.ui
+    src/views/aboutdialog.ui \
+    src/views/autoupdatedialog.ui \
+    src/views/dlgMountESP.ui \
+    src/views/dlgOCValidate.ui \
+    src/views/dlgParameters.ui \
+    src/views/dlgPreset.ui \
+    src/views/dlgdatabase.ui \
+    src/views/dlgkernelpatch.ui \
+    src/views/dlgmisc.ui \
+    src/views/dlgnewkeyfield.ui \
+    src/views/dlgpreference.ui \
+    src/views/mainwindow.ui \
+    src/views/syncocdialog.ui
 
 # Default rules for deployment.
 # qnx: target.path = /tmp/$${TARGET}/bin
@@ -111,8 +103,8 @@ FORMS += \
 # !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    Info.plist \
-    myapp.rc
+    src/Info.plist \
+    src/myapp.rc
 
 RESOURCES += \
     qtocc.qrc
