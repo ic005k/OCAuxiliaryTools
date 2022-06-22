@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dlgParameters</class>
+ <widget class="QDialog" name="dlgParameters">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>820</width>
+    <height>644</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string/>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_5">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="gDisplayLevel">
+     <property name="title">
+      <string>DisplayLevel</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="chkD1">
+        <property name="text">
+         <string>DEBUG_INIT</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="chkD6">
+        <property name="text">
+         <string>DEBUG_PAGE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QCheckBox" name="chkD11">
+        <property name="text">
+         <string>DEBUG_BLKIO</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="chkD2">
+        <property name="text">
+         <string>DEBUG_WARN</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="chkD7">
+        <property name="text">
+         <string>DEBUG_INFO</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QCheckBox" name="chkD12">
+        <property name="text">
+         <string>DEBUG_NET</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="chkD3">
+        <property name="text">
+         <string>DEBUG_LOAD</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="chkD8">
+        <property name="text">
+         <string>DEBUG_DISPATCH</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QCheckBox" name="chkD13">
+        <property name="text">
+         <string>DEBUG_UNDI</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="chkD4">
+        <property name="text">
+         <string>DEBUG_FS</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="chkD9">
+        <property name="text">
+         <string>DEBUG_VARIABLE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QCheckBox" name="chkD14">
+        <property name="text">
+         <string>DEBUG_LOADFILE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="chkD5">
+        <property name="text">
+         <string>DEBUG_POOL</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="chkD10">
+        <property name="text">
+         <string>DEBUG_BM</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QCheckBox" name="chkD15">
+        <property name="text">
+         <string>DEBUG_EVENT</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QCheckBox" name="chkD19">
+        <property name="text">
+         <string>DEBUG_ERROR</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="chkD18">
+        <property name="text">
+         <string>DEBUG_VERBOSE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QCheckBox" name="chkD17">
+        <property name="text">
+         <string>DEBUG_CACHE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QCheckBox" name="chkD16">
+        <property name="text">
+         <string>DEBUG_GCD</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="gScanPolicy">
+     <property name="title">
+      <string>ScanPolicy</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="chk1">
+        <property name="text">
+         <string>OC_SCAN_FILE_SYSTEM_LOCK</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="chk5">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_FS_ESP</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QCheckBox" name="chk11">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_DEVICE_SASEX</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="chk2">
+        <property name="text">
+         <string>OC_SCAN_DEVICE_LOCK</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="chk6">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_FS_NTFS</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QCheckBox" name="chk12">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_DEVICE_SCSI</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="chk3">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_FS_APFS</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="chk9">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_FS_XBOOTLDR</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QCheckBox" name="chk13">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_DEVICE_NVME</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="chk4">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_FS_HFS</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="chk10">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_DEVICE_SATA</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QCheckBox" name="chk14">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_DEVICE_ATAPI</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="chk18">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_DEVICE_PCI</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="chk17">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_DEVICE_SDCARD</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QCheckBox" name="chk16">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_DEVICE_FIREWIRE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QCheckBox" name="chk15">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_DEVICE_USB</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="chk7">
+        <property name="text">
+         <string> OC_SCAN_ALLOW_FS_LINUX_ROOT</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QCheckBox" name="chk8">
+        <property name="text">
+         <string>OC_SCAN_ALLOW_FS_LINUX_DATA</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QGroupBox" name="gPickerAttributes">
+     <property name="title">
+      <string>PickerAttributes</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="chkPA1">
+        <property name="text">
+         <string>OC_ATTR_USE_VOLUME_ICON</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="chkPA2">
+        <property name="text">
+         <string>OC_ATTR_USE_DISK_LABEL_FILE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="chkPA3">
+        <property name="text">
+         <string>OC_ATTR_USE_GENERIC_LABEL_IMAGE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="chkPA4">
+        <property name="text">
+         <string>OC_ATTR_HIDE_THEMED_ICONS</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="chkPA5">
+        <property name="text">
+         <string>OC_ATTR_USE_POINTER_CONTROL</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="chkPA6">
+        <property name="text">
+         <string>OC_ATTR_DEBUG_DISPLAY</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="chkPA7">
+        <property name="text">
+         <string>OC_ATTR_USE_MINIMAL_UI</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="chkPA8">
+        <property name="text">
+         <string>OC_ATTR_USE_FLAVOUR_ICON</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QGroupBox" name="gExposeSensitiveData">
+     <property name="title">
+      <string>ExposeSensitiveData</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="chk01">
+        <property name="text">
+         <string>Expose printable booter path as an UEFI variable</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="chk02">
+        <property name="text">
+         <string>Expose OpenCore version as an UEFI variable</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="chk04">
+        <property name="text">
+         <string>Expose OpenCore version in boot picker menu title</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="chk08">
+        <property name="text">
+         <string>Expose OEM information as a set of UEFI variables</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
