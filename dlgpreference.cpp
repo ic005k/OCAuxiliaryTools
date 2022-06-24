@@ -303,6 +303,11 @@ void dlgPreference::on_btnDownloadKexts_clicked() {
       "background-color:rgba(25,255,0,100);"
       "}");
 
+  mw_one->dlgSyncOC->progInfo->setGeometry(
+      ui->btnDownloadKexts->x(), ui->btnDownloadKexts->y(),
+      ui->btnDownloadKexts->width(), ui->btnDownloadKexts->height());
+  mw_one->dlgSyncOC->progInfo->show();
+
   mymethod->downloadAllKexts();
 
   for (int i = 0; i < ui->tableKextUrl->rowCount(); i++)

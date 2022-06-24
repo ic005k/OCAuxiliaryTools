@@ -347,6 +347,7 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
     progInfo->setGeometry(ui->btnCheckUpdate->x(), ui->btnCheckUpdate->y(),
                           ui->btnCheckUpdate->width(),
                           ui->btnCheckUpdate->height());
+
   if (ui->chkKextsDev->isChecked()) {
     QString url =
         "https://raw.githubusercontent.com/dortania/build-repo/builds/"
@@ -818,7 +819,6 @@ void SyncOCDialog::on_btnGetOC_clicked() {
 
   progInfo->setGeometry(ui->btnGetOC->x(), ui->btnGetOC->y(),
                         ui->btnGetOC->width(), ui->btnGetOC->height());
-  progInfo->show();
 
   if (blDEV) {
     if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
@@ -1052,7 +1052,5 @@ void SyncOCDialog::init_InfoShow() {
 
   progInfo->setMaximum(0);
   progInfo->setMinimum(0);
-  if (ui->btnGetOC->isEnabled() &&
-      mw_one->myDlgPreference->ui->btnDownloadKexts->isEnabled())
-    progInfo->show();
+  progInfo->show();
 }

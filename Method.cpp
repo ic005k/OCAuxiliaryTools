@@ -297,6 +297,7 @@ void Method::kextUpdate() {
                 strUrl = list_m.at(1);
               }
             }
+            reGetUrl = true;
             if (reGetUrl) {
               if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
                 getLastReleaseFromUrl(test);
@@ -370,6 +371,7 @@ void Method::downloadAllKexts() {
         strUrl = list_m.at(1);
       }
     }
+    reGetUrl = true;
     if (reGetUrl) {
       if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
         getLastReleaseFromUrl(test);
