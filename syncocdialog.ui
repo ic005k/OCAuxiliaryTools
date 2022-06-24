@@ -14,7 +14,51 @@
    <string>Sync OC</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="1" rowspan="5">
+   <item row="2" column="2">
+    <layout class="QGridLayout" name="gridLayout_7">
+     <item row="0" column="1">
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="lblResourcesFrom">
+       <property name="text">
+        <string>Resources from</string>
+       </property>
+       <property name="openExternalLinks">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="chkIncludeResource">
+       <property name="text">
+        <string>Include Resource Directory</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="5" column="2">
+    <widget class="QPushButton" name="btnStartSync">
+     <property name="text">
+      <string>Start Sync</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" rowspan="6">
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -52,71 +96,6 @@
         </size>
        </property>
       </spacer>
-     </item>
-    </layout>
-   </item>
-   <item row="1" column="2">
-    <widget class="QListWidget" name="listOpenCore">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::StrongFocus</enum>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <property name="verticalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOn</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2">
-    <layout class="QGridLayout" name="gridLayout_7">
-     <item row="0" column="1">
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="lblResourcesFrom">
-       <property name="text">
-        <string>Resources from</string>
-       </property>
-       <property name="openExternalLinks">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="chkIncludeResource">
-       <property name="text">
-        <string>Include Resource Directory</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>
@@ -198,24 +177,10 @@
         </item>
        </layout>
       </item>
-      <item>
-       <widget class="QPushButton" name="btnGetOC">
-        <property name="text">
-         <string>Get OpenCore</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
-   <item row="4" column="2">
-    <widget class="QPushButton" name="btnStartSync">
-     <property name="text">
-      <string>Start Sync</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" rowspan="5">
+   <item row="0" column="0" rowspan="6">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -387,7 +352,35 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="0" colspan="3">
+   <item row="1" column="2">
+    <widget class="QListWidget" name="listOpenCore">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::StrongFocus</enum>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="3">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QLabel" name="lblShowInfo">
@@ -397,6 +390,13 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item row="4" column="2">
+    <widget class="QPushButton" name="btnGetOC">
+     <property name="text">
+      <string>Get OpenCore</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

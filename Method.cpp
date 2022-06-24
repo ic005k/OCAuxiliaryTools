@@ -68,6 +68,7 @@ QStringList Method::getDLUrlList(QString url) {
         for (int i = 0; i < htmlEdit->document()->lineCount(); i++) {
           QString strLine = getTextEditLineText(htmlEdit, i);
           if (strLine.trimmed().contains("/releases/download/") &&
+              strLine.trimmed().contains("OpenCore") &&
               strLine.trimmed().contains("DEBUG")) {
             list1 = strLine.split("\"");
             if (list1.count() > 1) {
@@ -80,6 +81,7 @@ QStringList Method::getDLUrlList(QString url) {
         for (int i = 0; i < htmlEdit->document()->lineCount(); i++) {
           QString strLine = getTextEditLineText(htmlEdit, i);
           if (strLine.trimmed().contains("/releases/download/") &&
+              strLine.trimmed().contains("OpenCore") &&
               strLine.trimmed().contains("RELEASE")) {
             list1 = strLine.split("\"");
             if (list1.count() > 1) {

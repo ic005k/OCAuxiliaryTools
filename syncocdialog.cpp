@@ -816,6 +816,10 @@ void SyncOCDialog::on_btnGetOC_clicked() {
                        ui->frame->height());
   progBar->show();
 
+  progInfo->setGeometry(ui->btnGetOC->x(), ui->btnGetOC->y(),
+                        ui->btnGetOC->width(), ui->btnGetOC->height());
+  progInfo->show();
+
   if (blDEV) {
     if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
       mymethod->getLastReleaseFromUrl(DevSource);
@@ -829,6 +833,7 @@ void SyncOCDialog::on_btnGetOC_clicked() {
       if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
         mymethod->getLastReleaseFromHtml(ocUrl + "/releases");
     } else {
+      progInfo->hide();
       mymethod->startDownload(downLink);
     }
   }

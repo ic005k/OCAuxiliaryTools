@@ -63,6 +63,12 @@ dlgPreference::dlgPreference(QWidget *parent)
   ui->txtHostName->setText(Reg.value("HostName", "127.0.0.1").toString());
   ui->txtPort->setText(Reg.value("Port", "38457").toString());
   ui->chkSmartKey->setHidden(true);
+
+  ui->gbox3->hide();
+  ui->rbtnAPI->hide();
+  ui->rbtnWeb->hide();
+  ui->rbtnWeb->setChecked(true);
+  ui->chkProxy->setChecked(false);
 }
 
 dlgPreference::~dlgPreference() { delete ui; }
