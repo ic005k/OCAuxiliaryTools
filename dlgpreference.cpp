@@ -69,6 +69,7 @@ dlgPreference::dlgPreference(QWidget *parent)
   ui->rbtnWeb->hide();
   ui->rbtnWeb->setChecked(true);
   ui->chkProxy->setChecked(false);
+  ui->tabWidget->setCurrentIndex(0);
 }
 
 dlgPreference::~dlgPreference() { delete ui; }
