@@ -1052,5 +1052,6 @@ void SyncOCDialog::init_InfoShow() {
 
   progInfo->setMaximum(0);
   progInfo->setMinimum(0);
-  progInfo->show();
+  if (mw_one->myDlgPreference->ui->btnDownloadKexts->isEnabled())
+    progInfo->show();
 }
