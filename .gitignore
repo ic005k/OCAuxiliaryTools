@@ -1,0 +1,6 @@
+#temp file
+*.pro.user
+*.pro.user*
+*.autosave
+
+bin
