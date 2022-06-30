@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>icon.png</file>
-        <file>cn.qm</file>
         <file>icon/m1.png</file>
         <file>icon/m2.png</file>
         <file>icon/m3.png</file>
@@ -25,13 +24,11 @@
         <file>icon/ocf.png</file>
         <file>icon/doc.png</file>
         <file>icon/new.png</file>
-        <file>qt_zh_CN.qm</file>
         <file>icon/find.png</file>
         <file>icon/ok.png</file>
         <file>icon/clear.png</file>
         <file>icon/about.png</file>
         <file>icon/rp.png</file>
-        <file>widgets_zh_cn.qm</file>
         <file>icon/newver.png</file>
         <file>icon/overror.png</file>
         <file>icon/um.png</file>
@@ -75,5 +72,8 @@
         <file>icon/c0.png</file>
         <file>icon/add_bottom.png</file>
         <file>icon/prog.png</file>
+        <file>src/cn.qm</file>
+        <file>src/qt_zh_CN.qm</file>
+        <file>src/widgets_zh_cn.qm</file>
     </qresource>
 </RCC>

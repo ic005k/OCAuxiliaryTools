@@ -33,78 +33,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-    BalloonTip.cpp \
-    Method.cpp \
-    Plist.cpp \
-    PlistDate.cpp \
-    aboutdialog.cpp \
-    autoupdatedialog.cpp \
-    commands.cpp \
-    dlgMountESP.cpp \
-    dlgOCValidate.cpp \
-    dlgParameters.cpp \
-    dlgPreset.cpp \
-    dlgdatabase.cpp \
-    dlgkernelpatch.cpp \
-    dlgmisc.cpp \
-    dlgnewkeyfield.cpp \
-    dlgpreference.cpp \
-    filesystemwatcher.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    myapp.cpp \
-    plistparser.cpp \
-    plistserializer.cpp \
-    pugixml.cpp \
-    recentfiles.cpp \
-    syncocdialog.cpp \
-    tooltip.cpp
-
-HEADERS += \
-    BalloonTip.h \
-    Method.h \
-    Plist.hpp \
-    PlistDate.hpp \
-    aboutdialog.h \
-    autoupdatedialog.h \
-    base64.hpp \
-    commands.h \
-    dlgMountESP.h \
-    dlgOCValidate.h \
-    dlgParameters.h \
-    dlgPreset.h \
-    dlgdatabase.h \
-    dlgkernelpatch.h \
-    dlgmisc.h \
-    dlgnewkeyfield.h \
-    dlgpreference.h \
-    filesystemwatcher.h \
-    mainwindow.h \
-    myapp.h \
-    plistparser.h \
-    plistserializer.h \
-    pugiconfig.hpp \
-    pugixml.hpp \
-    recentfiles.h \
-    syncocdialog.h \
-    tooltip.h
-
-FORMS += \
-    aboutdialog.ui \
-    autoupdatedialog.ui \
-    dlgMountESP.ui \
-    dlgOCValidate.ui \
-    dlgParameters.ui \
-    dlgPreset.ui \
-    dlgdatabase.ui \
-    dlgkernelpatch.ui \
-    dlgmisc.ui \
-    dlgnewkeyfield.ui \
-    dlgpreference.ui \
-    mainwindow.ui \
-    syncocdialog.ui
-
 # Default rules for deployment.
 # qnx: target.path = /tmp/$${TARGET}/bin
 # else: unix:!android: target.path = /opt/$${TARGET}/bin
@@ -122,6 +50,79 @@ CONFIG(debug,debug|release) {
 } else {
     DESTDIR = $$absolute_path($${_PRO_FILE_PWD_}/bin/release)
 }
+
+SOURCES += \
+    src/BalloonTip.cpp \
+    src/Method.cpp \
+    src/Plist.cpp \
+    src/PlistDate.cpp \
+    src/aboutdialog.cpp \
+    src/autoupdatedialog.cpp \
+    src/commands.cpp \
+    src/dlgMountESP.cpp \
+    src/dlgOCValidate.cpp \
+    src/dlgParameters.cpp \
+    src/dlgPreset.cpp \
+    src/dlgdatabase.cpp \
+    src/dlgkernelpatch.cpp \
+    src/dlgmisc.cpp \
+    src/dlgnewkeyfield.cpp \
+    src/dlgpreference.cpp \
+    src/exampleusage.cpp \
+    src/filesystemwatcher.cpp \
+    src/main.cpp \
+    src/mainwindow.cpp \
+    src/myapp.cpp \
+    src/plistparser.cpp \
+    src/plistserializer.cpp \
+    src/pugixml.cpp \
+    src/recentfiles.cpp \
+    src/syncocdialog.cpp \
+    src/tooltip.cpp
+
+FORMS += \
+    src/aboutdialog.ui \
+    src/autoupdatedialog.ui \
+    src/dlgMountESP.ui \
+    src/dlgOCValidate.ui \
+    src/dlgParameters.ui \
+    src/dlgPreset.ui \
+    src/dlgdatabase.ui \
+    src/dlgkernelpatch.ui \
+    src/dlgmisc.ui \
+    src/dlgnewkeyfield.ui \
+    src/dlgpreference.ui \
+    src/mainwindow.ui \
+    src/syncocdialog.ui
+
+HEADERS += \
+    src/BalloonTip.h \
+    src/Method.h \
+    src/Plist.hpp \
+    src/PlistDate.hpp \
+    src/aboutdialog.h \
+    src/autoupdatedialog.h \
+    src/base64.hpp \
+    src/commands.h \
+    src/dlgMountESP.h \
+    src/dlgOCValidate.h \
+    src/dlgParameters.h \
+    src/dlgPreset.h \
+    src/dlgdatabase.h \
+    src/dlgkernelpatch.h \
+    src/dlgmisc.h \
+    src/dlgnewkeyfield.h \
+    src/dlgpreference.h \
+    src/filesystemwatcher.h \
+    src/mainwindow.h \
+    src/myapp.h \
+    src/plistparser.h \
+    src/plistserializer.h \
+    src/pugiconfig.hpp \
+    src/pugixml.hpp \
+    src/recentfiles.h \
+    src/syncocdialog.h \
+    src/tooltip.h
 
 
 
