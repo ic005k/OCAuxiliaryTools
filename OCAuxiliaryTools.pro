@@ -68,7 +68,6 @@ SOURCES += \
     src/dlgmisc.cpp \
     src/dlgnewkeyfield.cpp \
     src/dlgpreference.cpp \
-    src/exampleusage.cpp \
     src/filesystemwatcher.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
