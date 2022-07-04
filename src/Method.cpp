@@ -105,7 +105,10 @@ QStringList Method::getDLUrlList(QString url) {
     }
   }
 
-  if (list1.isEmpty() || list2.isEmpty()) return QStringList() << "";
+  if (list1.isEmpty() || list2.isEmpty()) {
+    blBreak = true;
+    return QStringList() << "";
+  }
 
   return list2;
 }
@@ -821,6 +824,7 @@ void Method::getLastReleaseFromHtml(QString url) {
   QStringList strDownloadUrlList = getDLUrlList(url);
   if (strDownloadUrlList.at(0) == "") {
     blBreak = true;
+    mw_one->dlgSyncOC->on_btnStop_clicked();
     return;
   }
   QString strDLUrl;
