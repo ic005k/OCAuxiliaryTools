@@ -1340,8 +1340,8 @@ void Method::generateEFI(QString file) {
   QFile::copy(pathSource + "EFI/OC/OpenCore.efi",
               pathTarget + "OC/OpenCore.efi");
 
-  // OC/Config.plist
-  mw_one->SavePlist(pathTarget + "OC/Config.plist");
+  // OC/config.plist
+  mw_one->SavePlist(pathTarget + "OC/config.plist");
 
   QString strFrom = "\n\n" + tr("From") + " : " + file;
   QMessageBox box;
@@ -1358,7 +1358,7 @@ void Method::generateEFI(QString file) {
   mw_one->setFocus();
   box.exec();
   mw_one->ui->mycboxFind->setFocus();
-  mw_one->openFile(pathTarget + "OC/Config.plist");
+  mw_one->openFile(pathTarget + "OC/config.plist");
   mw_one->ui->actionUpgrade_OC->setEnabled(true);
 }
 
