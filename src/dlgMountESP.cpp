@@ -41,7 +41,7 @@ void dlgMountESP::mountESP(bool openConfig) {
   QString dir = "file:" + dirpath;
 
   if (openConfig) {
-    QString strConfig = dirpath + "OC/Config.plist";
+    QString strConfig = dirpath + "OC/config.plist";
     QFileInfo fi(strConfig.toLower());
     if (fi.exists()) mw_one->openFile(strConfig);
   } else if (QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode))) {
