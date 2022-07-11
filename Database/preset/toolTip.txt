@@ -407,4 +407,30 @@ APFS文件系统的设计方式是，通过spaceman结构控制的空间要么�
 解决这个问题的一个方法是把超时时间增加到一个非常高的值，这样做的代价是启动时间变慢（额外的几分钟），这将确保所有的块都被修剪。把这个选项设置为一个高值，比如4294967295，以确保所有的块都被修剪。另外，如果支持的话，使用超额配置，或者创建一个专用的未映射分区，控制器可以在那里找到保留的块。反之，可以通过设置一个非常低的超时值来禁用修剪操作，例如999。详情请参考这篇文章。
 	
 在macOS 12+上，已经不可能为APFS文件系统设置修剪超时了。然而，当超时值被设置为0时，修剪可以被禁用。
+
+
+***Init
+Type: plist boolean
+Failsafe: false
+Description: Perform serial port initialisation.
+This option will perform serial port initialisation within OpenCore prior to enabling (any) debug logging.
+Refer to the Debugging section for details.
+----
+类型：plist布尔值
+失败保护: false
+描述：执行串口初始化。
+该选项将在启用（任何）调试日志之前，在OpenCore内执行串行端口初始化。
+详情请参考调试部分。
+
+
+***Override
+Type: plist boolean
+Failsafe: false
+Description: Override serial port properties. When this option is set to false, no keys from Custom will be overridden.
+This option will override serial port properties listed in the Serial Custom Properties section below.
+----
+类型：plist布尔值
+失败保护： false
+描述：覆盖串行端口属性。当这个选项被设置为false时，自定义的任何键都不会被覆盖。
+这个选项将覆盖串行自定义属性部分中列出的串行端口属性。
 	
