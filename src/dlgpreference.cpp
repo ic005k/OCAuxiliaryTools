@@ -58,11 +58,10 @@ dlgPreference::dlgPreference(QWidget *parent)
   ui->chkBackupEFI->setChecked(Reg.value("chkBackupEFI", 1).toBool());
   ui->chkDatabase->setChecked(Reg.value("chkDatabase", 1).toBool());
   ui->chkHideToolbar->setChecked(Reg.value("chkHideToolbar", 0).toBool());
-  ui->chkSmartKey->setChecked(Reg.value("SmartKey", 1).toBool());
+  ui->chkHoverTips->setChecked(Reg.value("HoverTips", 0).toBool());
   ui->chkProxy->setChecked(Reg.value("Proxy", 0).toBool());
   ui->txtHostName->setText(Reg.value("HostName", "127.0.0.1").toString());
   ui->txtPort->setText(Reg.value("Port", "38457").toString());
-  ui->chkSmartKey->setHidden(true);
 
   ui->gbox3->hide();
   ui->rbtnAPI->hide();
@@ -81,6 +80,7 @@ void dlgPreference::closeEvent(QCloseEvent *event) {
   Reg.setValue("Proxy", ui->chkProxy->isChecked());
   Reg.setValue("HostName", ui->txtHostName->text().trimmed());
   Reg.setValue("Port", ui->txtPort->text().trimmed());
+  Reg.setValue("HoverTips", ui->chkHoverTips->isChecked());
 }
 
 void dlgPreference::keyPressEvent(QKeyEvent *event) {

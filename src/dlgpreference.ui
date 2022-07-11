@@ -303,12 +303,12 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QCheckBox" name="chkSmartKey">
+           <widget class="QCheckBox" name="chkHoverTips">
             <property name="text">
-             <string>Smart adaptation to OpenCore upgrades.</string>
+             <string>Hover Tips</string>
             </property>
             <property name="checked">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>

@@ -8592,17 +8592,19 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* event) {
       QToolTip::hideText();
       event->ignore();
 
-      if (obj->metaObject()->className() == QStringLiteral("QLabel")) {
-        QLabel* w = (QLabel*)obj;
+      if (myDlgPreference->ui->chkHoverTips->isChecked()) {
+        if (obj->metaObject()->className() == QStringLiteral("QLabel")) {
+          QLabel* w = (QLabel*)obj;
 
-        // myToolTip->popup(QCursor::pos(), w->text(), w->toolTip());
-        mymethod->show_Tip(w->text(), w->toolTip());
-      }
+          // myToolTip->popup(QCursor::pos(), w->text(), w->toolTip());
+          mymethod->show_Tip(w->text(), w->toolTip());
+        }
 
-      if (obj->metaObject()->className() == QStringLiteral("QCheckBox")) {
-        QCheckBox* w = (QCheckBox*)obj;
-        // myToolTip->popup(QCursor::pos(), w->text(), w->toolTip());
-        mymethod->show_Tip(w->text(), w->toolTip());
+        if (obj->metaObject()->className() == QStringLiteral("QCheckBox")) {
+          QCheckBox* w = (QCheckBox*)obj;
+          // myToolTip->popup(QCursor::pos(), w->text(), w->toolTip());
+          mymethod->show_Tip(w->text(), w->toolTip());
+        }
       }
 
       return true;  //不让事件继续传播

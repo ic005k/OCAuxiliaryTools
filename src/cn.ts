@@ -1953,7 +1953,7 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
     </message>
     <message>
         <location filename="mainwindow.ui" line="12197"/>
-        <location filename="mainwindow.cpp" line="9721"/>
+        <location filename="mainwindow.cpp" line="9723"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
@@ -2583,8 +2583,8 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9109"/>
-        <location filename="mainwindow.cpp" line="9015"/>
-        <location filename="mainwindow.cpp" line="9020"/>
+        <location filename="mainwindow.cpp" line="9017"/>
+        <location filename="mainwindow.cpp" line="9022"/>
         <source>Select date</source>
         <translation>选择日期</translation>
     </message>
@@ -3979,13 +3979,13 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation type="vanished">错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9959"/>
-        <location filename="mainwindow.cpp" line="9989"/>
+        <location filename="mainwindow.cpp" line="9961"/>
+        <location filename="mainwindow.cpp" line="9991"/>
         <source>This is not a valid Clover configuration file.</source>
         <translation>这不是一个有效的Clover配置文件。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10029"/>
+        <location filename="mainwindow.cpp" line="10031"/>
         <source>You cannot add a new key field to a page where a data table exists.</source>
         <translation>不能在存在数据表的页面上添加一个新的键字段。</translation>
     </message>
@@ -4139,8 +4139,8 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="mainwindow.ui" line="157"/>
-        <location filename="mainwindow.cpp" line="9017"/>
-        <location filename="mainwindow.cpp" line="9018"/>
+        <location filename="mainwindow.cpp" line="9019"/>
+        <location filename="mainwindow.cpp" line="9020"/>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
@@ -4322,12 +4322,12 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>复制行到文本</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9120"/>
+        <location filename="mainwindow.cpp" line="9122"/>
         <source>OK !</source>
         <translation>验证通过！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9146"/>
+        <location filename="mainwindow.cpp" line="9148"/>
         <source>There is a issue with the configuration file.</source>
         <translation>配置文件有问题</translation>
     </message>
@@ -4346,102 +4346,102 @@ A continuously updated variable list can be found in a corresponding document: N
 <context>
     <name>Method</name>
     <message>
-        <location filename="Method.cpp" line="679"/>
+        <location filename="Method.cpp" line="731"/>
         <source>Download Progress</source>
         <translation>下载进度</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="102"/>
-        <location filename="Method.cpp" line="715"/>
-        <location filename="Method.cpp" line="763"/>
+        <location filename="Method.cpp" line="149"/>
+        <location filename="Method.cpp" line="767"/>
+        <location filename="Method.cpp" line="815"/>
         <source>Network or URL error!</source>
         <oldsource>Network error!</oldsource>
         <translation>网络或网址错误！</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="635"/>
-        <location filename="Method.cpp" line="638"/>
+        <location filename="Method.cpp" line="687"/>
+        <location filename="Method.cpp" line="690"/>
         <source>OpenCore Database has been successfully updated to</source>
         <translation>OpenCore数据库已成功更新到</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="493"/>
-        <location filename="Method.cpp" line="645"/>
+        <location filename="Method.cpp" line="545"/>
+        <location filename="Method.cpp" line="697"/>
         <source>No update is currently available, or please check the update source for the OpenCore development version.</source>
         <translation>目前没有更新可用，或者请检查OpenCore开发版的更新源。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="545"/>
+        <location filename="Method.cpp" line="597"/>
         <source>Note: This version or update source does not contain Mac related files. This will affect the use of the APP under Mac.</source>
         <translation>注意：这个版本或更新源不包含Mac的相关文件。这将影响APP在Mac下的使用。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="556"/>
+        <location filename="Method.cpp" line="608"/>
         <source>Note: This version or update source does not contain Windows related files. This will affect the use of the APP under Windows.</source>
         <translation>注意：这个版本或更新源不包含Windows的相关文件。这将影响APP在Windows下的使用。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="568"/>
+        <location filename="Method.cpp" line="620"/>
         <source>Note: This version or update source does not contain Linux related files. This will affect the use of the APP under Linux.</source>
         <translation>注意：这个版本或更新源不包含Linux的相关文件。这将影响APP在Linux下的使用。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="834"/>
+        <location filename="Method.cpp" line="887"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="850"/>
+        <location filename="Method.cpp" line="903"/>
         <source>None</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1293"/>
+        <location filename="Method.cpp" line="1346"/>
         <source>From</source>
         <translation>来自</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1296"/>
-        <location filename="Method.cpp" line="1302"/>
+        <location filename="Method.cpp" line="1349"/>
+        <location filename="Method.cpp" line="1355"/>
         <source>Finished generating the EFI folder on the desktop.</source>
         <translation>已完成在桌面上生成EFI文件夹。</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1298"/>
+        <location filename="Method.cpp" line="1351"/>
         <source>The following files do not exist in the database at the moment, please add them yourself:</source>
         <translation>下面的文件在数据库中目前不存在，请自行添加：</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1320"/>
+        <location filename="Method.cpp" line="1373"/>
         <source>Save File</source>
         <translation>保存文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1321"/>
-        <location filename="Method.cpp" line="1383"/>
+        <location filename="Method.cpp" line="1374"/>
+        <location filename="Method.cpp" line="1436"/>
         <source>Config file(*.plist);;All files(*.*)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1382"/>
+        <location filename="Method.cpp" line="1435"/>
         <source>Open File</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1783"/>
+        <location filename="Method.cpp" line="1836"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1788"/>
+        <location filename="Method.cpp" line="1841"/>
         <source>Cannot open file %1 for writing:
 %2.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1946"/>
+        <location filename="Method.cpp" line="1999"/>
         <source>The EFI directory is incomplete and the backup cannot be completed. Please check if the [EFI/OC] and [EFI/OC/Drivers] directories exist?</source>
         <translation>EFI目录不完整，无法完成备份。请检查“EFI/OC”和“EFI/OC/Drivers”目录是否存在？</translation>
     </message>
@@ -4449,55 +4449,55 @@ A continuously updated variable list can be found in a corresponding document: N
 <context>
     <name>QInstaller</name>
     <message>
-        <location filename="Method.cpp" line="1621"/>
+        <location filename="Method.cpp" line="1674"/>
         <location filename="autoupdatedialog.cpp" line="322"/>
         <source>bytes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1622"/>
+        <location filename="Method.cpp" line="1675"/>
         <location filename="autoupdatedialog.cpp" line="323"/>
         <source>KiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1623"/>
+        <location filename="Method.cpp" line="1676"/>
         <location filename="autoupdatedialog.cpp" line="324"/>
         <source>MiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1624"/>
+        <location filename="Method.cpp" line="1677"/>
         <location filename="autoupdatedialog.cpp" line="325"/>
         <source>GiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1625"/>
+        <location filename="Method.cpp" line="1678"/>
         <location filename="autoupdatedialog.cpp" line="326"/>
         <source>TiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1626"/>
+        <location filename="Method.cpp" line="1679"/>
         <location filename="autoupdatedialog.cpp" line="327"/>
         <source>PiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1627"/>
+        <location filename="Method.cpp" line="1680"/>
         <location filename="autoupdatedialog.cpp" line="328"/>
         <source>EiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1628"/>
+        <location filename="Method.cpp" line="1681"/>
         <location filename="autoupdatedialog.cpp" line="329"/>
         <source>ZiB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="Method.cpp" line="1629"/>
+        <location filename="Method.cpp" line="1682"/>
         <location filename="autoupdatedialog.cpp" line="330"/>
         <source>YiB</source>
         <translation></translation>
@@ -4526,7 +4526,7 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>粘贴行</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="120"/>
+        <location filename="main.cpp" line="115"/>
         <source>The file does not exist, please check the integrity of the app.</source>
         <translation>文件不存在，请检查APP的完整性。</translation>
     </message>
@@ -4543,203 +4543,209 @@ A continuously updated variable list can be found in a corresponding document: N
     <name>SyncOCDialog</name>
     <message>
         <location filename="syncocdialog.ui" line="14"/>
-        <location filename="syncocdialog.cpp" line="724"/>
-        <location filename="syncocdialog.cpp" line="727"/>
+        <location filename="syncocdialog.cpp" line="714"/>
+        <location filename="syncocdialog.cpp" line="717"/>
         <source>Sync OC</source>
         <translation>同步OC</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="114"/>
+        <location filename="syncocdialog.ui" line="45"/>
         <source>Include Resource Directory</source>
         <translation>包含Resources目录</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="232"/>
+        <location filename="syncocdialog.ui" line="197"/>
         <source>DLInfo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="225"/>
+        <location filename="syncocdialog.ui" line="190"/>
         <source>Kexts</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="29"/>
+        <location filename="syncocdialog.ui" line="73"/>
         <source>OpenCore is from</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="39"/>
+        <location filename="syncocdialog.ui" line="83"/>
         <source>OpenCore</source>
         <translation>OpenCore</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="251"/>
+        <location filename="syncocdialog.ui" line="216"/>
         <source>#</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="266"/>
+        <location filename="syncocdialog.ui" line="231"/>
         <source>Kext Files</source>
         <translation>Kext文件</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="276"/>
+        <location filename="syncocdialog.ui" line="241"/>
         <source>Clear</source>
         <translation>清除</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="283"/>
+        <location filename="syncocdialog.ui" line="248"/>
         <source>Select All</source>
         <translation>全选</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="297"/>
+        <location filename="syncocdialog.ui" line="262"/>
         <source>DEV</source>
         <translation>开发版</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="330"/>
+        <location filename="syncocdialog.ui" line="269"/>
+        <source>From</source>
+        <translation>来自</translation>
+    </message>
+    <message>
+        <location filename="syncocdialog.ui" line="305"/>
         <source>Check for Kexts updates</source>
         <translation>检查Kexts更新</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="350"/>
+        <location filename="syncocdialog.ui" line="325"/>
         <source>Update Kexts</source>
         <translation>更新Kexts</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="370"/>
+        <location filename="syncocdialog.ui" line="345"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="290"/>
+        <location filename="syncocdialog.ui" line="255"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="147"/>
+        <location filename="syncocdialog.ui" line="126"/>
         <source>OpenCore development version update source</source>
         <translation>OpenCore开发版的更新源</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="160"/>
+        <location filename="syncocdialog.ui" line="139"/>
         <source>https://github.com/dortania/build-repo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="165"/>
+        <location filename="syncocdialog.ui" line="144"/>
         <source>https://github.com/bugprogrammer/HackinPlugins</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="178"/>
+        <location filename="syncocdialog.ui" line="157"/>
         <source>Import a local OpenCore Development Edition Zip file.</source>
         <translation>导入本地OpenCore开发版Zip文件</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="181"/>
+        <location filename="syncocdialog.ui" line="160"/>
         <source>Import</source>
         <translation>导入</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="192"/>
+        <location filename="syncocdialog.ui" line="171"/>
         <source>Choose OpenCore Version</source>
         <oldsource>OpenCore Versions</oldsource>
         <translation>选择OpenCore 版本</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="204"/>
+        <location filename="syncocdialog.ui" line="397"/>
         <source>Get OpenCore</source>
         <translation>获取 OpenCore</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="385"/>
+        <location filename="syncocdialog.ui" line="388"/>
         <source>ShowInfo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="261"/>
+        <location filename="syncocdialog.ui" line="226"/>
         <source>Available</source>
         <translation>可用版本</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="256"/>
+        <location filename="syncocdialog.ui" line="221"/>
         <source>Current</source>
         <translation>当前版本</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="214"/>
+        <location filename="syncocdialog.ui" line="57"/>
         <source>Start Sync</source>
         <translation>开始同步</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="104"/>
+        <location filename="syncocdialog.ui" line="35"/>
         <source>Resources from</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="37"/>
+        <location filename="syncocdialog.cpp" line="41"/>
         <source>Source</source>
         <translation>来源</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="105"/>
-        <location filename="syncocdialog.cpp" line="877"/>
+        <location filename="syncocdialog.cpp" line="109"/>
+        <location filename="syncocdialog.cpp" line="871"/>
         <source>Kexts update check or OpenCore database upgrade is in progress, please wait for it to finish.</source>
         <translation>Kexts更新检查或者OpenCore数据库升级正在进行中，请等待它结束。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="155"/>
-        <location filename="syncocdialog.cpp" line="158"/>
+        <location filename="syncocdialog.cpp" line="159"/>
+        <location filename="syncocdialog.cpp" line="162"/>
         <source>Successfully synced to OpenCore: </source>
         <translation>成功同步到OpenCore：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="251"/>
-        <location filename="syncocdialog.cpp" line="773"/>
+        <location filename="syncocdialog.cpp" line="255"/>
+        <location filename="syncocdialog.cpp" line="763"/>
         <source>Current File: </source>
         <translation>当前文件：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="253"/>
-        <location filename="syncocdialog.cpp" line="775"/>
+        <location filename="syncocdialog.cpp" line="257"/>
+        <location filename="syncocdialog.cpp" line="765"/>
         <source>Available File: </source>
         <translation>可用文件：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="329"/>
+        <location filename="syncocdialog.cpp" line="333"/>
         <source>The OpenCore database upgrade is in progress, please wait for it to finish.</source>
         <translation>OpenCore数据库升级正在进行中，请等待它结束。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="346"/>
+        <location filename="syncocdialog.cpp" line="1035"/>
         <source>Please wait while we get the download information of Kexts development version...</source>
         <translation>正在获取Kexts开发版的下载信息，请稍等...</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="782"/>
+        <location filename="syncocdialog.cpp" line="772"/>
         <source>Kexts update check is in progress, please wait for it to complete.</source>
         <translation>Kexts更新检查正在进行中，请等待它完成。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="797"/>
+        <location filename="syncocdialog.cpp" line="787"/>
         <source>Please enter an available OpenCore development version update source.</source>
         <translation>请输入一个可用的OpenCore开发版更新源。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="273"/>
-        <location filename="syncocdialog.cpp" line="868"/>
-        <location filename="syncocdialog.cpp" line="902"/>
+        <location filename="syncocdialog.cpp" line="30"/>
+        <location filename="syncocdialog.cpp" line="277"/>
+        <location filename="syncocdialog.cpp" line="862"/>
+        <location filename="syncocdialog.cpp" line="896"/>
         <source> Source </source>
         <translation>来源</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="67"/>
-        <location filename="syncocdialog.cpp" line="548"/>
-        <location filename="syncocdialog.cpp" line="836"/>
-        <location filename="syncocdialog.cpp" line="853"/>
+        <location filename="syncocdialog.cpp" line="71"/>
+        <location filename="syncocdialog.cpp" line="534"/>
+        <location filename="syncocdialog.cpp" line="829"/>
+        <location filename="syncocdialog.cpp" line="847"/>
         <source>Latest Version</source>
         <translation>最新版</translation>
     </message>
@@ -5341,7 +5347,7 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="dlgpreference.ui" line="139"/>
-        <location filename="dlgpreference.ui" line="202"/>
+        <location filename="dlgpreference.ui" line="187"/>
         <source>https://github.com/</source>
         <translation></translation>
     </message>
@@ -5361,33 +5367,13 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="159"/>
-        <source>https://gh.msx.workers.dev/https://github.com/</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="dlgpreference.ui" line="164"/>
-        <source>https://gh.xiu2.xyz/https://github.com/</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="dlgpreference.ui" line="169"/>
-        <source>https://git.yumenaka.net/https://github.com/</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="dlgpreference.ui" line="174"/>
-        <source>https://pd.zwc365.com/seturl/https://github.com/</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="dlgpreference.ui" line="182"/>
-        <location filename="dlgpreference.ui" line="215"/>
+        <location filename="dlgpreference.ui" line="167"/>
+        <location filename="dlgpreference.ui" line="200"/>
         <source>Testing</source>
         <translation>测试</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="425"/>
+        <location filename="dlgpreference.ui" line="410"/>
         <source>Find</source>
         <translation>查找</translation>
     </message>
@@ -5407,12 +5393,11 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>爬取网页源代码 （无访问次数限制）</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="323"/>
         <source>Smart adaptation to OpenCore upgrades.</source>
-        <translation>智能适应OpenCore的升级</translation>
+        <translation type="vanished">智能适应OpenCore的升级</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="192"/>
+        <location filename="dlgpreference.ui" line="177"/>
         <source>Select the mirror server for web access</source>
         <translation>选择网页访问的镜像服务器</translation>
     </message>
@@ -5422,82 +5407,92 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>选择升级下载的镜像服务器</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="207"/>
+        <location filename="dlgpreference.ui" line="192"/>
         <source>https://hub.fastgit.org/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="303"/>
+        <location filename="dlgpreference.ui" line="288"/>
         <source>Additional Options</source>
         <translation>附加选项</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="316"/>
+        <location filename="dlgpreference.ui" line="301"/>
         <source>Automatically open the last opened file</source>
         <translation>自动打开上次打开的文件</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="309"/>
+        <location filename="dlgpreference.ui" line="294"/>
         <source>Show all volume names when mounting ESP</source>
         <translation>挂载ESP时显示所有的卷标名称</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="228"/>
+        <location filename="dlgpreference.ui" line="159"/>
+        <source>https://archive.fastgit.org/</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="dlgpreference.ui" line="213"/>
         <source>UI Appearance (effective after the next app opening)</source>
         <translation>UI外观（下次打开APP时生效）</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="234"/>
+        <location filename="dlgpreference.ui" line="219"/>
         <source>Toolbar button</source>
         <translation>工具栏按钮</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="240"/>
+        <location filename="dlgpreference.ui" line="225"/>
         <source>Recently Open</source>
         <translation>最近打开</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="250"/>
+        <location filename="dlgpreference.ui" line="235"/>
         <source>Browse Catalog</source>
         <translation>浏览目录</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="260"/>
+        <location filename="dlgpreference.ui" line="245"/>
         <source>Mount ESP</source>
         <translation>挂载ESP</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="270"/>
+        <location filename="dlgpreference.ui" line="255"/>
         <source>Backup EFI</source>
         <translation>备份EFI</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="280"/>
+        <location filename="dlgpreference.ui" line="265"/>
         <source>Database</source>
         <translation>数据库</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="293"/>
+        <location filename="dlgpreference.ui" line="278"/>
         <source>Hide Toolbar</source>
         <translation>隐藏工具栏</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="337"/>
+        <location filename="dlgpreference.ui" line="308"/>
+        <source>Hover Tips</source>
+        <translation>悬浮提示</translation>
+    </message>
+    <message>
+        <location filename="dlgpreference.ui" line="322"/>
         <source>Kext Upgrade URL</source>
         <translation>Kext升级网址</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="418"/>
+        <location filename="dlgpreference.ui" line="403"/>
         <source>Download Kexts to the user database</source>
         <translation>下载所有的Kext到用户数据库</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="343"/>
+        <location filename="dlgpreference.ui" line="328"/>
         <source>+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="360"/>
+        <location filename="dlgpreference.ui" line="345"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -5506,27 +5501,27 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="391"/>
+        <location filename="dlgpreference.ui" line="376"/>
         <source>Kext Name</source>
         <translation>Kext名称</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="396"/>
+        <location filename="dlgpreference.ui" line="381"/>
         <source>Source URL</source>
         <translation>网址</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="411"/>
+        <location filename="dlgpreference.ui" line="396"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="350"/>
+        <location filename="dlgpreference.ui" line="335"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="dlgpreference.ui" line="404"/>
+        <location filename="dlgpreference.ui" line="389"/>
         <source>Open URL in browser</source>
         <translation>打开网址</translation>
     </message>
