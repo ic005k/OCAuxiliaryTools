@@ -10,7 +10,7 @@ Mainly required on legacy hardware and a few newer laptops. Can also fix power-b
 
 描述：在FADT表中提供复位寄存器和标志，以实现重启和关机。
 
-主要是在传统硬件和一些较新的笔记本上需要。也可以修复电源按钮的快捷方式。除非需要，否则不建议使用。
+主要是在传统硬件和一些较新的笔记本上需要。也可以修复电源按钮的快捷方式。除非需要，否则不建议使用。如果关机变重启可以尝试使用。
 
 
 ***NormalizeHeaders
@@ -20,7 +20,7 @@ Reference: Debugging AppleACPIPlatform on 10.13 by Alex James (also known as the
 
 The issue was fixed in macOS Mojave (10.14).
 ----
-描述：清理 ACPI 头部字段，以解决 macOS ACPI 实施缺陷导致的启动崩溃问题。
+描述：清理 ACPI 头部字段，以解决 macOS ACPI 实施缺陷导致的启动崩溃问题。一般在 10.13 系统上的某些主板会出现这种情况。
 
 参考文献: Debugging AppleACPIPlatform on 10.13 by Alex James (other known as theracermaster). 
 
@@ -34,7 +34,7 @@ Description: Refer to SMBIOS SystemProductName.
 ----
 类型：plist字符串
 失效保护：空(OEM指定或未安装)
-描述：参考SMBIOS SystemProductName。
+描述：参考 SMBIOS SystemProductName。
 
 ***HibernateMode
 Type: plist string
@@ -71,7 +71,7 @@ Note 2 : This option will not protect areas from being overwritten at firmware s
 失败保护: false
 要求：10.4
 
-描述：禁用AppleRTC中的主校验和（0x58-0x59）写入。
+描述：禁用AppleRTC中的主校验和（0x58-0x59）写入。关于 RTC 建议使用 RTCMemoryFixup.kext。
 
 注1：该选项不会保护其他区域被覆盖，如果需要，请看RTCMemoryFixup内核扩展。
 注2 : 该选项不会保护在固件阶段(如macOS bootloader)被覆盖的区域，如果需要，请看AppleRtcRam协议描述。
@@ -106,9 +106,9 @@ Note: This option should be avoided whenever possible. Modern firmware typically
 失败保护: false
 要求：10.4
 
-描述：对AppleAHCIPort.kext应用图标类型补丁，强制所有AHCI磁盘的内部磁盘图标。
+描述：对AppleAHCIPort.kext应用图标类型补丁，强制所有AHCI磁盘的图标显示为内部磁盘图标。一般用在macos把内部硬盘识别为外置硬盘时。
 
-注意：应该尽可能避免使用这个选项。现代固件通常有兼容的AHCI控制器。
+注意：应该尽可能避免使用这个选项。主流的硬件对AHCI支持都很好。
 
 ***ForceSecureBootScheme
 Type: plist boolean
@@ -121,7 +121,7 @@ Note: This option is required on virtual machines when using SecureBootModel dif
 类型：plist布尔值
 失败保护: false
 要求：11
-描述：为IMG4验证强制使用x86方案。
+描述：为IMG4验证强制使用x86方案。macos安装在虚拟机并开启SecurebootModel时可以考虑开启。
 	
 注意: 当使用不同于x86legacy的SecureBootModel时，在虚拟机上需要这个选项。
 
@@ -237,7 +237,7 @@ Note: The OEM Apple implementation uses a polling rate of 2 ms.
 失败保护：0
 描述：配置最小的指针轮询周期（ms）。
 这是OpenCore内置的AppleEvent驱动程序对指针设备（例如鼠标、触控板）进行运动事件轮询的最小周期。目前的实施方法默认为10毫秒。设置为0将使这一默认值保持不变。
-注意：OEM苹果公司的实现使用2毫秒的轮询率。
+注意：OEM苹果公司的实现使用2毫秒的轮询率。这个值保持默认就足够了，简单来说，就是cpu问鼠标位置变化的时间，默认10毫秒问一次。
 
 
 ***PointerPollMax
@@ -253,7 +253,7 @@ Note: The OEM Apple implementation uses a polling rate of 2 ms.
 描述：配置最大的指针轮询周期，单位是ms。
 这是OpenCore内置的AppleEvent驱动程序对指针设备（如鼠标、触控板）进行运动事件轮询的最长时间。只要设备没有及时响应，该周期就会增加到这个值。目前的实现默认为80ms。设置为0会使这个默认值保持不变。
 戴尔笔记本电脑中经常发现的某些触控板驱动程序在没有物理运动发生时可能反应非常慢。这可能会影响OpenCanopy和FileVault 2用户界面的响应能力和加载时间。增加轮询周期可以减少影响。
-注意：OEM苹果公司的实现使用2毫秒的轮询率。
+注意：OEM苹果公司的实现使用2毫秒的轮询率。这个值保持默认就足够了，简单来说，就是cpu问鼠标位置变化的时间，默认10毫秒问一次。
 
 
 ***PointerPollMask
@@ -419,7 +419,7 @@ Refer to the Debugging section for details.
 类型：plist布尔值
 失败保护: false
 描述：执行串口初始化。
-该选项将在启用（任何）调试日志之前，在OpenCore内执行串行端口初始化。
+该选项将在启用（任何）调试日志之前，在OpenCore内执行串行端口初始化。一般人用不上，保持默认就好。
 详情请参考调试部分。
 
 
@@ -431,6 +431,6 @@ This option will override serial port properties listed in the Serial Custom Pro
 ----
 类型：plist布尔值
 失败保护： false
-描述：覆盖串行端口属性。当这个选项被设置为false时，自定义的任何键都不会被覆盖。
+描述：覆盖串行端口属性。当这个选项被设置为false时，自定义的任何键都不会被覆盖。一般人用不上，保持默认就好。
 这个选项将覆盖串行自定义属性部分中列出的串行端口属性。
 	
