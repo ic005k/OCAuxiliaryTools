@@ -862,6 +862,8 @@ void MainWindow::ParserMisc(QVariantMap map) {
   // Serial-Custom
   QVariantMap mapSerialCustom = map_Serial["Custom"].toMap();
   getValue(mapSerialCustom, ui->gboxCustom);
+  if (ui->editDatPciDeviceInfo->text().trimmed() == "")
+    ui->editDatPciDeviceInfo->setText("FF");
 }
 
 void MainWindow::initui_NVRAM() {
