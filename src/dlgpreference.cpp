@@ -59,6 +59,7 @@ dlgPreference::dlgPreference(QWidget *parent)
   ui->chkDatabase->setChecked(Reg.value("chkDatabase", 1).toBool());
   ui->chkHideToolbar->setChecked(Reg.value("chkHideToolbar", 0).toBool());
   ui->chkHoverTips->setChecked(Reg.value("HoverTips", 0).toBool());
+  ui->chkTabIndent->setChecked(Reg.value("TabIndent", 0).toBool());
   ui->chkProxy->setChecked(Reg.value("Proxy", 0).toBool());
   ui->txtHostName->setText(Reg.value("HostName", "127.0.0.1").toString());
   ui->txtPort->setText(Reg.value("Port", "38457").toString());
@@ -81,6 +82,7 @@ void dlgPreference::closeEvent(QCloseEvent *event) {
   Reg.setValue("HostName", ui->txtHostName->text().trimmed());
   Reg.setValue("Port", ui->txtPort->text().trimmed());
   Reg.setValue("HoverTips", ui->chkHoverTips->isChecked());
+  Reg.setValue("TabIndent", ui->chkTabIndent->isChecked());
 }
 
 void dlgPreference::keyPressEvent(QKeyEvent *event) {

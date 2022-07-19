@@ -20,7 +20,7 @@
    <string/>
   </property>
   <property name="windowIcon">
-   <iconset resource="qtocc.qrc">
+   <iconset resource="../qtocc.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -3875,7 +3875,7 @@ This setting allows to prevent using faster kernel caching variants if slower va
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -5947,6 +5947,12 @@ Third party drivers may introduce additional security (and performance) consider
            <layout class="QGridLayout" name="gridLayout_50">
             <item row="0" column="0">
              <widget class="QFrame" name="frame_chk_29">
+              <property name="minimumSize">
+               <size>
+                <width>300</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
               </property>
@@ -5968,9 +5974,166 @@ Third party drivers may introduce additional security (and performance) consider
               <property name="frameShadow">
                <enum>QFrame::Raised</enum>
               </property>
-              <layout class="QGridLayout" name="gridLayout_49">
-               <item row="0" column="0">
-                <layout class="QVBoxLayout" name="verticalLayout_75"/>
+              <layout class="QVBoxLayout" name="verticalLayout_75">
+               <item>
+                <widget class="QGroupBox" name="gboxCustom">
+                 <property name="title">
+                  <string>Custom</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_51">
+                  <item row="0" column="0">
+                   <layout class="QGridLayout" name="gridLayout_49">
+                    <item row="3" column="1">
+                     <widget class="QLineEdit" name="editIntFifoControl">
+                      <property name="text">
+                       <string>7</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="0">
+                     <widget class="QLabel" name="label_130">
+                      <property name="text">
+                       <string>FifoControl</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="label_131">
+                      <property name="text">
+                       <string>LineControl</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="QLineEdit" name="editIntBaudRate">
+                      <property name="text">
+                       <string>115200</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="1">
+                     <widget class="QLineEdit" name="editIntRegisterAccessWidth">
+                      <property name="text">
+                       <string>8</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="8" column="1">
+                     <widget class="QLineEdit" name="editIntRegisterStride">
+                      <property name="text">
+                       <string>1</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="1">
+                     <widget class="QLineEdit" name="editIntLineControl">
+                      <property name="text">
+                       <string>3</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_128">
+                      <property name="text">
+                       <string>BaudRate</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="7" column="0">
+                     <widget class="QLabel" name="label_134">
+                      <property name="text">
+                       <string>RegisterBase</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="label_127">
+                      <property name="text">
+                       <string>ClockRate</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="7" column="1">
+                     <widget class="QLineEdit" name="editIntRegisterBase">
+                      <property name="text">
+                       <string>1016</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_129">
+                      <property name="text">
+                       <string>ExtendedTxFifoSize</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="1">
+                     <widget class="QLineEdit" name="editDatPciDeviceInfo">
+                      <property name="text">
+                       <string>FF</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="0">
+                     <widget class="QLabel" name="label_133">
+                      <property name="text">
+                       <string>RegisterAccessWidth</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="0">
+                     <widget class="QLabel" name="label_132">
+                      <property name="text">
+                       <string>PciDeviceInfo</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="8" column="0">
+                     <widget class="QLabel" name="label_135">
+                      <property name="text">
+                       <string>RegisterStride</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="QLineEdit" name="editIntClockRate">
+                      <property name="text">
+                       <string>1843200</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="10" column="0">
+                     <widget class="QCheckBox" name="chkUseHardwareFlowControl">
+                      <property name="text">
+                       <string>UseHardwareFlowControl</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="9" column="0">
+                     <widget class="QCheckBox" name="chkDetectCable">
+                      <property name="text">
+                       <string>DetectCable</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="QLineEdit" name="editIntExtendedTxFifoSize">
+                      <property name="text">
+                       <string>64</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="11" column="0">
+                     <widget class="QCheckBox" name="chkUseMmio">
+                      <property name="text">
+                       <string>UseMmio</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -12251,7 +12414,7 @@ QToolBar {border:none;}</string>
   </action>
  </widget>
  <resources>
-  <include location="qtocc.qrc"/>
+  <include location="../qtocc.qrc"/>
  </resources>
  <connections/>
 </ui>

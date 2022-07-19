@@ -611,6 +611,15 @@ QStringList dlgNewKeyField::get_KeyTypeValue(QVariantMap mapTatol,
     QVariantMap mapSub = mapMain[SubName].toMap();
     keyList = mapSub.keys();
     map = mapSub;
+
+    if (SubName == "Serial") {
+      QVariantMap mapMisc = mapTatol["Misc"].toMap();
+      QVariantMap mapSerial = mapMisc["Serial"].toMap();
+      QVariantMap mapCustom = mapSerial["Custom"].toMap();
+      for (int i = 0; i < mapCustom.count(); i++) {
+        keyList.append(mapCustom.keys().at(i));
+      }
+    }
   } else {
     keyList = mapMain.keys();
     map = mapMain;

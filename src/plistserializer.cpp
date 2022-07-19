@@ -20,10 +20,12 @@ using namespace std;
 #include <QFile>
 #include <QTextStream>
 
+#include "Method.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 extern MainWindow* mw_one;
+extern Method* mymethod;
 
 static QDomElement textElement(QDomDocument& doc, const char* tagName,
                                QString contents) {
@@ -124,9 +126,17 @@ QString PListSerializer::toPList(const QVariant& variant, QString FileName) {
       out.setCodec("UTF-8");
 #endif
 
-      // document.save(out, 4, QDomNode::EncodingFromTextStream);
       document.save(out, 4, QDomNode::EncodingFromDocument);
       file.close();
+
+      if (mw_one->myDlgPreference->ui->chkTabIndent->isChecked()) {
+        QString str1 = mymethod->loadText(FileName);
+        str1.replace("    ", "\t");
+        QTextEdit* edit = new QTextEdit;
+        edit->setPlainText(str1);
+        QFile(FileName).remove();
+        mymethod->TextEditToFile(edit, FileName);
+      }
     }
   } else {
     QFileInfo fi(FileName);

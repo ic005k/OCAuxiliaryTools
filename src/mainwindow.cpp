@@ -857,7 +857,11 @@ void MainWindow::ParserMisc(QVariantMap map) {
 
   // Serial
   QVariantMap map_Serial = map["Serial"].toMap();
-  getValue(map_Serial, ui->tabMisc7);
+  getValue(map_Serial, ui->frame_chk_29);
+
+  // Serial-Custom
+  QVariantMap mapSerialCustom = map_Serial["Custom"].toMap();
+  getValue(mapSerialCustom, ui->gboxCustom);
 }
 
 void MainWindow::initui_NVRAM() {
@@ -1939,7 +1943,13 @@ QVariantMap MainWindow::SaveMisc() {
   // Serial
   if (list.removeOne("Serial")) {
     valueList.clear();
-    subMap["Serial"] = setValue(valueList, ui->tabMisc7);
+    // subMap["Serial"] = setValue(valueList, ui->tabMisc7);
+    valueList = setValue(valueList, ui->frame_chk_29);
+
+    QVariantMap Map, vlist;
+    Map["Custom"] = setValue(vlist, ui->gboxCustom);
+    valueList["Custom"] = Map["Custom"];
+    subMap["Serial"] = valueList;
   }
 
   return subMap;
@@ -10125,6 +10135,16 @@ void MainWindow::smart_UpdateKeyField() {
   // Tools
   Method::init_Table(ui->tableTools,
                      Method::get_HorizontalHeaderList("Misc", "Tools"));
+
+  // Misc-Serial-Custom
+  ui->gboxCustom->hide();
+  QVariantMap mapMisc = mapTatol["Misc"].toMap();
+  QVariantMap mapSerial = mapMisc["Serial"].toMap();
+  QVariantMap mapCustom = mapSerial["Custom"].toMap();
+  qDebug() << "Serial-Custom" << mapCustom.count();
+  if (mapCustom.count() > 0) {
+    ui->gboxCustom->show();
+  }
 
   // NVRAM
   initui_NVRAM();
