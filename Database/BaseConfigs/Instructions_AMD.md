@@ -4,11 +4,9 @@
 
 - Use again a deprecated patch : algrey - _cpuid_set_generic_info - Disable check to allow leaf7 - 10.13/10.14/10.15/11.0/12.0
 
-- It is mandatory to use latest OpenCore 082
-- Disable AvoidRuntimeDefrag Quirk (NOT ADViSABLE to do but mandatory for now)
+- It is mandatory to use latest OpenCore 083 (from beta3)
 - Disable DummyPowermanagement (not for all)
-- Update all maxKernel kernel patches value to macOS Ventura Darwin (22.0.0)
-- -lilubetaall boot arg  
+- Update all maxKernel kernel patches value to macOS Ventura Darwin (22.0.0)  
 
 **macOS Monterey 12.3 new beta may need to install this kext AppleMCEReporterDisabler.kext**
 
