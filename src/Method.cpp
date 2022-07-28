@@ -2514,16 +2514,28 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
         if (list.count() == 2) strCol = list.at(1);
 
         if (isBool(strCol)) {
-          mw_one->init_enabled_data(t, i + rowTotal, j, map[strCol].toString());
+          QString str = map[strCol].toString();
+          mw_one->init_enabled_data(t, i + rowTotal, j, str);
+
+          if (t->item(i + rowTotal, j)->text() == "") {
+            str = map["Load"].toString();
+            if (str == "Enabled") str = "true";
+            if (str == "Disabled") str = "false";
+            if (str == "") str = "true";
+            mw_one->init_enabled_data(t, i + rowTotal, j, str);
+          }
         } else if (isData(strCol)) {
           QTableWidgetItem* newItem1 = new QTableWidgetItem(
               mw_one->ByteToHexStr(map[strCol].toByteArray()));
           t->setItem(i + rowTotal, j, newItem1);
         } else {
+          QString str = map[strCol].toString();
+
           QTableWidgetItem* newItem1;
-          newItem1 = new QTableWidgetItem(map[strCol].toString());
+          newItem1 = new QTableWidgetItem(str);
           if (strCol == "Arch" || strCol == "Count" || strCol == "Limit" ||
-              strCol == "Skip" || strCol == "Strategy" || strCol == "Flavour")
+              strCol == "Skip" || strCol == "Strategy" || strCol == "Flavour" ||
+              strCol == "Load")
             newItem1->setTextAlignment(Qt::AlignCenter);
 
           t->setItem(i + rowTotal, j, newItem1);
@@ -2541,6 +2553,17 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
             }
             if (strCol == "Flavour") {
               newItem1 = new QTableWidgetItem("Auto");
+              newItem1->setTextAlignment(Qt::AlignCenter);
+              t->setItem(i + rowTotal, j, newItem1);
+            }
+
+            if (strCol == "Load") {
+              str = map["Enabled"].toString();
+              if (str == "true") str = "Enabled";
+              if (str == "false") str = "Disabled";
+              if (str == "") str = "Enabled";
+
+              newItem1 = new QTableWidgetItem(str);
               newItem1->setTextAlignment(Qt::AlignCenter);
               t->setItem(i + rowTotal, j, newItem1);
             }

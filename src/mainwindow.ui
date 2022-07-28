@@ -266,7 +266,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -9113,7 +9113,7 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>7</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -12057,8 +12057,10 @@ Enable this option to be able to see all the boot options when having multiple d
     </property>
     <addaction name="actionOCAuxiliaryToolsDoc"/>
     <addaction name="actionDocumentation"/>
+    <addaction name="separator"/>
     <addaction name="btnHelp"/>
     <addaction name="actionDifferences"/>
+    <addaction name="actionOpenCoreChineseDoc"/>
     <addaction name="separator"/>
     <addaction name="actionOpenCore"/>
     <addaction name="actionOpenCore_Factory"/>
@@ -12410,6 +12412,11 @@ QToolBar {border:none;}</string>
   <action name="actionInitDatabaseLinux">
    <property name="text">
     <string>Initialize Database for Linux</string>
+   </property>
+  </action>
+  <action name="actionOpenCoreChineseDoc">
+   <property name="text">
+    <string>OpenCore Online Chinese Documentation</string>
    </property>
   </action>
  </widget>

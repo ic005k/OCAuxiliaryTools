@@ -3131,10 +3131,8 @@ void MainWindow::on_btnUEFIRM_Del_clicked() {
 
 void MainWindow::on_btnUEFIDrivers_Add_clicked() {
   QFileDialog fd;
-
   QStringList FileName =
       fd.getOpenFileNames(this, "file", "", "efi file(*.efi);;all(*.*)");
-
   addEFIDrivers(FileName);
 }
 
@@ -3168,6 +3166,10 @@ void MainWindow::addEFIDrivers(QStringList FileName) {
           t->setItem(row - 1, n, new QTableWidgetItem(strBaseName));
         } else if (Method::isBool(txt)) {
           init_enabled_data(t, row - 1, n, "true");
+        } else if (txt == "Load") {
+          QTableWidgetItem* item = new QTableWidgetItem("Enabled");
+          item->setTextAlignment(Qt::AlignCenter);
+          t->setItem(row - 1, n, item);
         } else {
           t->setItem(row - 1, n, new QTableWidgetItem(""));
         }
@@ -5091,6 +5093,11 @@ void MainWindow::init_EditMenu() {
 
 void MainWindow::init_HelpMenu() {
   // Help
+  if (zh_cn)
+    ui->actionOpenCoreChineseDoc->setVisible(true);
+  else
+    ui->actionOpenCoreChineseDoc->setVisible(false);
+
   connect(ui->btnHelp, &QAction::triggered, this, &MainWindow::on_btnHelp);
   ui->btnHelp->setShortcut(tr("ctrl+p"));
 
@@ -5104,10 +5111,6 @@ void MainWindow::init_HelpMenu() {
   connect(ui->actionOpenCore, &QAction::triggered, this, &MainWindow::on_line1);
   connect(ui->actionOpenCore_Factory, &QAction::triggered, this,
           &MainWindow::on_line2);
-  connect(ui->actionOpenCore_Forum, &QAction::triggered, this,
-          &MainWindow::on_line3);
-  connect(ui->actionOpenCanopyIcons, &QAction::triggered, this,
-          &MainWindow::on_line5);
 
   if (mac || osx1012) ui->actionOpenCore_Factory->setIconVisibleInMenu(false);
 
@@ -5706,17 +5709,6 @@ void MainWindow::on_line2() {
   QDesktopServices::openUrl(url);
 }
 
-void MainWindow::on_line3() {
-  QUrl url(QString(
-      "https://www.insanelymac.com/forum/topic/338516-opencore-discussion/"));
-  QDesktopServices::openUrl(url);
-}
-
-void MainWindow::on_line5() {
-  QUrl url(QString("https://github.com/blackosx/OpenCanopyIcons"));
-  QDesktopServices::openUrl(url);
-}
-
 void MainWindow::on_table_dp_add0_itemChanged(QTableWidgetItem* item) {
   Q_UNUSED(item);
 
@@ -5841,7 +5833,25 @@ void MainWindow::on_tableDevices_cellClicked(int row, int column) {
 void MainWindow::on_table_uefi_drivers_cellClicked(int row, int column) {
   if (!ui->table_uefi_drivers->currentIndex().isValid()) return;
 
-  set_InitCheckBox(ui->table_uefi_drivers, row, column);
+  if (column == 3 &&
+      ui->table_uefi_drivers->horizontalHeaderItem(3)->text() == tr("Enabled"))
+    set_InitCheckBox(ui->table_uefi_drivers, row, column);
+
+  if (column == 3 &&
+      ui->table_uefi_drivers->horizontalHeaderItem(3)->text() == tr("Load")) {
+    cboxDataClass = new QComboBox;
+    cboxDataClass->setEditable(true);
+    cboxDataClass->addItem("Enabled");
+    cboxDataClass->addItem("Disabled");
+    cboxDataClass->addItem("Early");
+    cboxDataClass->addItem("");
+    connect(cboxDataClass, SIGNAL(currentTextChanged(QString)), this,
+            SLOT(dataClassChange_uefi_drivers()));
+    c_row = row;
+
+    ui->table_uefi_drivers->setCellWidget(row, column, cboxDataClass);
+    cboxDataClass->setCurrentText(ui->table_uefi_drivers->item(row, 3)->text());
+  }
 
   setStatusBarText(ui->table_uefi_drivers);
 }
@@ -8231,6 +8241,7 @@ void MainWindow::tablePopMenu(QTableWidget* w, QAction* cutAction,
 void MainWindow::set_AutoColWidth(QTableWidget* w, bool autoColWidth) {
   QStringList keyList;
   keyList = QStringList() << "Enabled"
+                          << "Load"
                           << "Arch"
                           << "All"
                           << "Type"
@@ -10254,4 +10265,14 @@ void MainWindow::on_editMLB_textChanged(const QString& arg1) {
 
 void MainWindow::on_editDatROM_textChanged(const QString& arg1) {
   ui->editDatROM_PNVRAM->setText(arg1);
+}
+
+void MainWindow::on_actionOpenCoreChineseDoc_triggered() {
+  QUrl url(QString("https://oc.skk.moe/"));
+  QDesktopServices::openUrl(url);
+}
+
+void MainWindow::dataClassChange_uefi_drivers() {
+  ui->table_uefi_drivers->item(c_row, 3)->setTextAlignment(Qt::AlignCenter);
+  ui->table_uefi_drivers->item(c_row, 3)->setText(cboxDataClass->currentText());
 }

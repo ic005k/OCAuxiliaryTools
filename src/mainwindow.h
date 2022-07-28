@@ -425,8 +425,6 @@ class MainWindow : public QMainWindow {
   void copyText(QListWidget* listW);
   void on_line1();
   void on_line2();
-  void on_line3();
-  void on_line5();
   void recentOpen(QString filename);
   void on_nv1();
   void on_nv2();
@@ -988,7 +986,10 @@ class MainWindow : public QMainWindow {
 
   void on_editDatROM_textChanged(const QString& arg1);
 
- private:
+  void on_actionOpenCoreChineseDoc_triggered();
+
+  void dataClassChange_uefi_drivers();
+  private:
   bool isDrag;
   QPoint m_position;
   bool LoadRightTable = false;
