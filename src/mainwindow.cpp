@@ -5837,6 +5837,10 @@ void MainWindow::on_table_uefi_drivers_cellClicked(int row, int column) {
       ui->table_uefi_drivers->horizontalHeaderItem(3)->text() == tr("Enabled"))
     set_InitCheckBox(ui->table_uefi_drivers, row, column);
 
+  if (column == 4 && ui->table_uefi_drivers->horizontalHeaderItem(3)->text() ==
+                         tr("LoadEarly"))
+    set_InitCheckBox(ui->table_uefi_drivers, row, column);
+
   if (column == 3 &&
       ui->table_uefi_drivers->horizontalHeaderItem(3)->text() == tr("Load")) {
     cboxDataClass = new QComboBox;
