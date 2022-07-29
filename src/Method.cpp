@@ -2606,6 +2606,7 @@ bool Method::isData(QString strCol) {
 
 bool Method::isBool(QString strCol) {
   QStringList list = QStringList() << "Enabled"
+                                   << "LoadEarly"
                                    << "All"
                                    << "Auxiliary"
                                    << "TextMode"

@@ -5833,13 +5833,7 @@ void MainWindow::on_tableDevices_cellClicked(int row, int column) {
 void MainWindow::on_table_uefi_drivers_cellClicked(int row, int column) {
   if (!ui->table_uefi_drivers->currentIndex().isValid()) return;
 
-  if (column == 3 &&
-      ui->table_uefi_drivers->horizontalHeaderItem(3)->text() == tr("Enabled"))
-    set_InitCheckBox(ui->table_uefi_drivers, row, column);
-
-  if (column == 4 && ui->table_uefi_drivers->horizontalHeaderItem(3)->text() ==
-                         tr("LoadEarly"))
-    set_InitCheckBox(ui->table_uefi_drivers, row, column);
+  set_InitCheckBox(ui->table_uefi_drivers, row, column);
 
   if (column == 3 &&
       ui->table_uefi_drivers->horizontalHeaderItem(3)->text() == tr("Load")) {
