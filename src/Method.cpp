@@ -2518,11 +2518,17 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
           mw_one->init_enabled_data(t, i + rowTotal, j, str);
 
           if (t->item(i + rowTotal, j)->text() == "") {
-            str = map["Load"].toString();
-            if (str == "Enabled") str = "true";
-            if (str == "Disabled") str = "false";
-            if (str == "") str = "true";
-            mw_one->init_enabled_data(t, i + rowTotal, j, str);
+            if (strCol == "Load") {
+              str = map["Load"].toString();
+              if (str == "Enabled") str = "true";
+              if (str == "Disabled") str = "false";
+              if (str == "") str = "true";
+              mw_one->init_enabled_data(t, i + rowTotal, j, str);
+            }
+
+            if (strCol == "LoadEarly") {
+              mw_one->init_enabled_data(t, i + rowTotal, j, "false");
+            }
           }
         } else if (isData(strCol)) {
           QTableWidgetItem* newItem1 = new QTableWidgetItem(
