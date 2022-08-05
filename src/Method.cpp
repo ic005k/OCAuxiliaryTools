@@ -2524,11 +2524,11 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
               if (str == "Disabled") str = "false";
               if (str == "") str = "true";
               mw_one->init_enabled_data(t, i + rowTotal, j, str);
-            }
-
-            if (strCol == "LoadEarly") {
+            } else if (strCol == "LoadEarly") {
               mw_one->init_enabled_data(t, i + rowTotal, j, "false");
-            }
+            } else
+
+              mw_one->init_enabled_data(t, i + rowTotal, j, "false");
           }
         } else if (isData(strCol)) {
           QTableWidgetItem* newItem1 = new QTableWidgetItem(
