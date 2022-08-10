@@ -6056,13 +6056,11 @@ bool MainWindow::copyFileToPath(QString sourceDir, QString toDir,
   if (!QFile::exists(sourceDir)) {
     return false;
   }
-  QDir* createfile = new QDir;
-  bool exist = createfile->exists(toDir);
+  bool exist = QFile::exists(toDir);
   if (exist) {
-    if (coverFileIfExist) {
-      createfile->remove(toDir);
-    }
-  }  // end if
+      if (coverFileIfExist)
+          QFile::remove(toDir);
+  }
 
   if (!QFile::copy(sourceDir, toDir)) {
     return false;
