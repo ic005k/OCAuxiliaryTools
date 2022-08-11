@@ -3,6 +3,7 @@
 #include "Method.h"
 #include "mainwindow.h"
 #include "myapp.h"
+#include "fileoperation.h"
 
 void loadLocal();
 extern QVector<QString> filelist;
@@ -30,8 +31,8 @@ int main(int argc, char *argv[]) {
   QDir dir;
   dir.mkpath(QDir::homePath() + "/.ocat/");
   QString strAppExePath = qApp->applicationDirPath();
-  mw_one->copyDirectoryFiles(strAppExePath + "/Database/",
-                             QDir::homePath() + "/.ocat/Database/", false);
+  FileOperation::copyDirectoryFiles(strAppExePath + "/Database/",
+                                      QDir::homePath() + "/.ocat/Database/", false);
 
   QString strDrivers0 = strAppExePath + "/Database/EFI/OC/Drivers/";
   QString strTools0 = strAppExePath + "/Database/EFI/OC/Tools/";
@@ -61,24 +62,24 @@ int main(int argc, char *argv[]) {
   listTools = Method::DirToFileList(strTools0, "*.efi");
 
   for (int i = 0; i < listDrivers.count(); i++) {
-    mw_one->copyFileToPath(strDrivers0 + listDrivers.at(i),
-                           strDrivers1 + listDrivers.at(i), false);
-    mw_one->copyFileToPath(strDrivers0 + listDrivers.at(i),
-                           strDrivers2 + listDrivers.at(i), false);
-    mw_one->copyFileToPath(strDrivers0 + listDrivers.at(i),
-                           strDrivers3 + listDrivers.at(i), false);
-    mw_one->copyFileToPath(strDrivers0 + listDrivers.at(i),
-                           strDrivers4 + listDrivers.at(i), false);
+      FileOperation::copyFileToPath(strDrivers0 + listDrivers.at(i),
+                                    strDrivers1 + listDrivers.at(i), false);
+      FileOperation::copyFileToPath(strDrivers0 + listDrivers.at(i),
+                                    strDrivers2 + listDrivers.at(i), false);
+      FileOperation::copyFileToPath(strDrivers0 + listDrivers.at(i),
+                                    strDrivers3 + listDrivers.at(i), false);
+      FileOperation::copyFileToPath(strDrivers0 + listDrivers.at(i),
+                                    strDrivers4 + listDrivers.at(i), false);
   }
   for (int i = 0; i < listTools.count(); i++) {
-    mw_one->copyFileToPath(strTools0 + listTools.at(i),
-                           strTools1 + listTools.at(i), false);
-    mw_one->copyFileToPath(strTools0 + listTools.at(i),
-                           strTools2 + listTools.at(i), false);
-    mw_one->copyFileToPath(strTools0 + listTools.at(i),
-                           strTools3 + listTools.at(i), false);
-    mw_one->copyFileToPath(strTools0 + listTools.at(i),
-                           strTools4 + listTools.at(i), false);
+      FileOperation::copyFileToPath(strTools0 + listTools.at(i),
+                                    strTools1 + listTools.at(i), false);
+      FileOperation::copyFileToPath(strTools0 + listTools.at(i),
+                                    strTools2 + listTools.at(i), false);
+      FileOperation::copyFileToPath(strTools0 + listTools.at(i),
+                                    strTools3 + listTools.at(i), false);
+      FileOperation::copyFileToPath(strTools0 + listTools.at(i),
+                                    strTools4 + listTools.at(i), false);
   }
 
   // ACPI Files
