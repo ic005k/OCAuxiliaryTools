@@ -65,7 +65,8 @@ SOURCES += \
     src/utils/pugixml.cpp \
     src/widgets/recentfiles.cpp \
     src/widgets/syncocdialog.cpp \
-    src/widgets/tooltip.cpp
+    src/widgets/tooltip.cpp \
+    src/utils/fileoperation.cpp
 
 HEADERS += \
     src/widgets/BalloonTip.h \
@@ -94,7 +95,8 @@ HEADERS += \
     src/utils/pugixml.hpp \
     src/widgets/recentfiles.h \
     src/widgets/syncocdialog.h \
-    src/widgets/tooltip.h
+    src/widgets/tooltip.h \
+    src/utils/fileoperation.h
 
 FORMS += \
     src/widgets/aboutdialog.ui \
