@@ -983,7 +983,10 @@ QString SyncOCDialog::getKextDevDL(QString bufferJson, QString kextName) {
       qDebug() << Keys;
       int index = 0;
       for (int i = 0; i < Keys.count(); i++) {
-        if (Keys.at(i) == kextName) index = i;
+        // if (Keys.at(i) == kextName)
+        if (kextName.contains(Keys.at(i))) {
+          index = i;
+        }
       }
       QVariantList list, list1;
 
