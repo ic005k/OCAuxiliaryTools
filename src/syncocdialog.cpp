@@ -1027,6 +1027,7 @@ QString SyncOCDialog::getKextHtmlInfo(QString url, bool writeFile) {
     QCoreApplication::processEvents();
   }
 
+  qDebug() << "bufferJson=" << bufferJson << "url=" << url;
   return bufferJson;
 }
 
