@@ -349,10 +349,17 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
                           ui->btnCheckUpdate->height());
 
   if (ui->chkKextsDev->isChecked()) {
+    QString strMirror =
+        mw_one->myDlgPreference->ui->comboBoxNet->currentText().trimmed();
+    if (strMirror == "https://download.fastgit.org/" ||
+        strMirror == "https://archive.fastgit.org/")
+      strMirror = "https://ghproxy.com/https://github.com/";
+    strMirror.replace("https://github.com/", "");
     QString url =
+        strMirror +
         "https://raw.githubusercontent.com/dortania/build-repo/builds/"
         "config.json";
-
+    qDebug() << "json url=" << url;
     getKextHtmlInfo(url, false);
   }
 
@@ -1027,7 +1034,6 @@ QString SyncOCDialog::getKextHtmlInfo(QString url, bool writeFile) {
     QCoreApplication::processEvents();
   }
 
-  qDebug() << "bufferJson=" << bufferJson << "url=" << url;
   return bufferJson;
 }
 
