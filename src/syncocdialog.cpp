@@ -349,18 +349,7 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
                           ui->btnCheckUpdate->height());
 
   if (ui->chkKextsDev->isChecked()) {
-    QString strMirror =
-        mw_one->myDlgPreference->ui->comboBoxNet->currentText().trimmed();
-    if (strMirror == "https://download.fastgit.org/" ||
-        strMirror == "https://archive.fastgit.org/")
-      strMirror = "https://ghproxy.com/https://github.com/";
-    strMirror.replace("https://github.com/", "");
-    QString url =
-        strMirror +
-        "https://raw.githubusercontent.com/dortania/build-repo/builds/"
-        "config.json";
-    qDebug() << "json url=" << url;
-    getKextHtmlInfo(url, false);
+    getKextHtmlInfo(getJsonUrl(), false);
   }
 
   if (mymethod->blBreak) return;
@@ -414,6 +403,20 @@ void SyncOCDialog::on_btnCheckUpdate_clicked() {
   ui->tableKexts->setFocus();
 
   ui->btnCheckUpdate->setEnabled(true);
+}
+
+QString SyncOCDialog::getJsonUrl() {
+  QString strMirror =
+      mw_one->myDlgPreference->ui->comboBoxNet->currentText().trimmed();
+  if (strMirror == "https://download.fastgit.org/" ||
+      strMirror == "https://archive.fastgit.org/")
+    strMirror = "https://ghproxy.com/https://github.com/";
+  strMirror.replace("https://github.com/", "");
+  QString url = strMirror +
+                "https://raw.githubusercontent.com/dortania/build-repo/builds/"
+                "config.json";
+  qDebug() << "json url=" << url;
+  return url;
 }
 
 void SyncOCDialog::on_btnStop_clicked() {
@@ -828,10 +831,17 @@ void SyncOCDialog::on_btnGetOC_clicked() {
                         ui->btnGetOC->width(), ui->btnGetOC->height());
 
   if (blDEV) {
-    if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
-      mymethod->getLastReleaseFromUrl(DevSource);
-    if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
-      mymethod->getLastReleaseFromHtml(DevSource + "/releases");
+    if (ui->editOCDevSource->currentIndex() == 0) {
+      getKextHtmlInfo(getJsonUrl(), false);
+      QString url = getKextDevDL(bufferJson, "OpenCorePkg");
+      mymethod->startDownload(url);
+    } else {
+      if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
+        mymethod->getLastReleaseFromUrl(DevSource);
+      if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
+        mymethod->getLastReleaseFromHtml(DevSource + "/releases");
+    }
+
   } else {
     if (ui->comboOCVersions->currentText() == tr("Latest Version")) {
       QString ocUrl = "https://github.com/acidanthera/OpenCorePkg";
@@ -1014,7 +1024,10 @@ QString SyncOCDialog::getKextDevDL(QString bufferJson, QString kextName) {
         QVariantMap map = list[0].toMap();
         QVariantMap map1 = map["links"].toMap();
 
-        dl = map1["release"].toString();
+        if (!mw_one->ui->actionDEBUG->isChecked())
+          dl = map1["release"].toString();
+        else
+          dl = map1["debug"].toString();
         qDebug() << dl;
         return dl;
       }

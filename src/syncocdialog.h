@@ -96,7 +96,8 @@ class SyncOCDialog : public QDialog {
   QCheckBox *checkBox;
 
   void init_InfoShow();
-protected:
+  QString getJsonUrl();
+  protected:
   void closeEvent(QCloseEvent *event);
   void resizeEvent(QResizeEvent *event);
   void keyPressEvent(QKeyEvent *event);
