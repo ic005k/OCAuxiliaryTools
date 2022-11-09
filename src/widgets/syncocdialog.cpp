@@ -816,7 +816,7 @@ void SyncOCDialog::on_btnImport_clicked() {
     dir.mkpath(path);
     QFileInfo fi(FileName);
     QString tar = path + fi.fileName();
-    mw_one->copyFileToPath(FileName, tar, true);
+    FileOperation::copyFileToPath(FileName, tar, true);
     isCheckOC = true;
     mymethod->unZip(fi.fileName());
     isCheckOC = false;
