@@ -6046,28 +6046,6 @@ bool MainWindow::DeleteDirectory(const QString& path) {
   return dir.rmpath(dir.absolutePath());
 }
 
-//拷贝文件：
-bool MainWindow::copyFileToPath(QString sourceDir, QString toDir,
-                                bool coverFileIfExist) {
-  toDir.replace("\\", "/");
-  if (sourceDir == toDir) {
-    return true;
-  }
-  if (!QFile::exists(sourceDir)) {
-    return false;
-  }
-  bool exist = QFile::exists(toDir);
-  if (exist) {
-      if (coverFileIfExist)
-          QFile::remove(toDir);
-  }
-
-  if (!QFile::copy(sourceDir, toDir)) {
-    return false;
-  }
-  return true;
-}
-
 //拷贝文件夹：
 bool MainWindow::copyDirectoryFiles(const QString& fromDir,
                                     const QString& toDir,

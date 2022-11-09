@@ -4,6 +4,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "ui_syncocdialog.h"
+#include "fileoperation.h"
 
 extern MainWindow* mw_one;
 extern QString ocVer, ocVerDev, ocFrom, ocFromDev, strIniFile, strAppName,
@@ -815,7 +816,7 @@ void SyncOCDialog::on_btnImport_clicked() {
     dir.mkpath(path);
     QFileInfo fi(FileName);
     QString tar = path + fi.fileName();
-    mw_one->copyFileToPath(FileName, tar, true);
+    FileOperation::copyFileToPath(FileName, tar, true);
     isCheckOC = true;
     mymethod->unZip(fi.fileName());
     isCheckOC = false;

@@ -94,14 +94,14 @@ int main(int argc, char *argv[]) {
   dir.mkpath(strACPI4);
   listACPI = Method::DirToFileList(strACPI0, "*.aml");
   for (int i = 0; i < listACPI.count(); i++) {
-    mw_one->copyFileToPath(strACPI0 + listACPI.at(i), strACPI1 + listACPI.at(i),
-                           false);
-    mw_one->copyFileToPath(strACPI0 + listACPI.at(i), strACPI2 + listACPI.at(i),
-                           false);
-    mw_one->copyFileToPath(strACPI0 + listACPI.at(i), strACPI3 + listACPI.at(i),
-                           false);
-    mw_one->copyFileToPath(strACPI0 + listACPI.at(i), strACPI4 + listACPI.at(i),
-                           false);
+      FileOperation::copyFileToPath(strACPI0 + listACPI.at(i), strACPI1 + listACPI.at(i),
+                                    false);
+      FileOperation::copyFileToPath(strACPI0 + listACPI.at(i), strACPI2 + listACPI.at(i),
+                                    false);
+      FileOperation::copyFileToPath(strACPI0 + listACPI.at(i), strACPI3 + listACPI.at(i),
+                                    false);
+      FileOperation::copyFileToPath(strACPI0 + listACPI.at(i), strACPI4 + listACPI.at(i),
+                                    false);
   }
 
   QString fileSample =
