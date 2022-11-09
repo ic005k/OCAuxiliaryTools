@@ -114,7 +114,7 @@ void SyncOCDialog::on_btnStartSync_clicked() {
     if (QDir(strSou).exists()) {
       if (chkList.at(i)->isChecked()) {
         if (strSV >= strTV || strTV == "None") {
-          mw_one->copyDirectoryFiles(strSou, strTar, true);
+          FileOperation::copyDirectoryFiles(strSou, strTar, true);
         }
       }
     }
@@ -133,7 +133,7 @@ void SyncOCDialog::on_btnStartSync_clicked() {
   }
 
   if (ui->chkIncludeResource->isChecked())
-    mw_one->copyDirectoryFiles(sourceResourcesDir, targetResourcesDir, true);
+    FileOperation::copyDirectoryFiles(sourceResourcesDir, targetResourcesDir, true);
 
   QMessageBox box;
   if (ok) {

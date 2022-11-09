@@ -9,6 +9,7 @@
 #include "Plist.hpp"
 #include "commands.h"
 #include "ui_mainwindow.h"
+#include "fileoperation.h"
 
 using namespace std;
 
@@ -2793,7 +2794,7 @@ void MainWindow::addKexts(QStringList FileName) {
 
     QDir dir(strKexts);
     if (dir.exists()) {
-      copyDirectoryFiles(FileName.at(j), strKexts + strBaseName, false);
+      FileOperation::copyDirectoryFiles(FileName.at(j), strKexts + strBaseName, false);
     }
 
     //如果里面还有PlugIns目录，则需要继续遍历插件目录
@@ -6046,6 +6047,26 @@ bool MainWindow::DeleteDirectory(const QString& path) {
   return dir.rmpath(dir.absolutePath());
 }
 
+
+//拷贝文件：
+bool MainWindow::copyFileToPath(QString sourceDir, QString toDir,
+                                bool coverFileIfExist) {
+  toDir.replace("\\", "/");
+  if (sourceDir == toDir) {
+    return true;
+  }
+  if (!QFile::exists(sourceDir)) {
+    return false;
+  }
+  bool exist = QFile::exists(toDir);
+  if (exist) {
+      if (coverFileIfExist)
+          QFile::remove(toDir);
+  }
+
+  if (!QFile::copy(sourceDir, toDir)) {
+    return false;
+=======
 //拷贝文件夹：
 bool MainWindow::copyDirectoryFiles(const QString& fromDir,
                                     const QString& toDir,
@@ -6076,6 +6097,7 @@ bool MainWindow::copyDirectoryFiles(const QString& fromDir,
         return false;
       }
     }
+
   }
   return true;
 }
@@ -9966,7 +9988,7 @@ void MainWindow::on_actionDEBUG_triggered() {
 void MainWindow::on_actionInitDatabaseLinux_triggered() {
   // Init Linux Database
   if (linuxOS) {
-    copyDirectoryFiles(strAppExePath + "/Database/",
+    FileOperation::copyDirectoryFiles(strAppExePath + "/Database/",
                        QDir::homePath() + "/.ocat/Database/", true);
   }
 }
