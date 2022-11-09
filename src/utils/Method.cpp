@@ -8,6 +8,7 @@
 #include "plistserializer.h"
 #include "ui_dlgdatabase.h"
 #include "ui_mainwindow.h"
+#include "fileoperation.h"
 
 extern MainWindow* mw_one;
 extern QString SaveFileName, strIniFile, strAppName, strAppExePath;
@@ -512,20 +513,20 @@ void Method::updateOpenCore() {
     mw_one->copyDirectoryFiles(strSacpi, strTacpi, true);
 
     // Doc
-    Results.append(mw_one->copyFileToPath(
+    Results.append(FileOperation::copyFileToPath(
         tempDir + "Docs/Configuration.pdf",
         mw_one->userDataBaseDir + "doc/Configuration.pdf", true));
-    Results.append(mw_one->copyFileToPath(
+    Results.append(FileOperation::copyFileToPath(
         tempDir + "Docs/Differences.pdf",
         mw_one->userDataBaseDir + "doc/Differences.pdf", true));
 
     // Sample-plist
-    Results.append(mw_one->copyFileToPath(
+    Results.append(FileOperation::copyFileToPath(
         tempDir + "Docs/Sample.plist",
         mw_one->userDataBaseDir + "BaseConfigs/Sample.plist", true));
     QString sa = tempDir + "Docs/SampleCustom.plist";
     if (!QFile(sa).exists()) sa = tempDir + "Docs/SampleFull.plist";
-    Results.append(mw_one->copyFileToPath(
+    Results.append(FileOperation::copyFileToPath(
         sa, mw_one->userDataBaseDir + "BaseConfigs/SampleCustom.plist", true));
 
     // OC Validate
@@ -536,7 +537,7 @@ void Method::updateOpenCore() {
                                   "affect the use of the APP under Mac.") +
                                    "\n\nocvalidate\nmacserial\nocpasswordgen");
     }
-    mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate",
+    FileOperation::copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate",
                            mw_one->userDataBaseDir + "mac/ocvalidate", true);
 
     if (!QFile(tempDir + "Utilities/ocvalidate/ocvalidate.exe").exists()) {
@@ -547,7 +548,7 @@ void Method::updateOpenCore() {
              "affect the use of the APP under Windows.") +
               "\n\nocvalidate.exe\nmacserial.exe\nocpasswordgen.exe");
     }
-    mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.exe",
+    FileOperation::copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.exe",
                            mw_one->userDataBaseDir + "win/ocvalidate.exe",
                            true);
 
@@ -560,25 +561,25 @@ void Method::updateOpenCore() {
               "\n\nocvalidate.linux\nmacserial.linux\nocpasswordgen.linux");
     }
 
-    mw_one->copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.linux",
+    FileOperation::copyFileToPath(tempDir + "Utilities/ocvalidate/ocvalidate.linux",
                            mw_one->userDataBaseDir + "linux/ocvalidate", true);
 
     // Mac Serial
-    mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial",
+    FileOperation::copyFileToPath(tempDir + "Utilities/macserial/macserial",
                            mw_one->userDataBaseDir + "mac/macserial", true);
-    mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial.exe",
+    FileOperation::copyFileToPath(tempDir + "Utilities/macserial/macserial.exe",
                            mw_one->userDataBaseDir + "win/macserial.exe", true);
 
-    mw_one->copyFileToPath(tempDir + "Utilities/macserial/macserial.linux",
+    FileOperation::copyFileToPath(tempDir + "Utilities/macserial/macserial.linux",
                            mw_one->userDataBaseDir + "linux/macserial", true);
 
     // OC Password Gen
-    mw_one->copyFileToPath(tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
+    FileOperation::copyFileToPath(tempDir + "Utilities/ocpasswordgen/ocpasswordgen",
                            mw_one->userDataBaseDir + "mac/ocpasswordgen", true);
-    mw_one->copyFileToPath(
+    FileOperation::copyFileToPath(
         tempDir + "Utilities/ocpasswordgen/ocpasswordgen.exe",
         mw_one->userDataBaseDir + "win/ocpasswordgen.exe", true);
-    mw_one->copyFileToPath(
+    FileOperation::copyFileToPath(
         tempDir + "Utilities/ocpasswordgen/ocpasswordgen.linux",
         mw_one->userDataBaseDir + "linux/ocpasswordgen", true);
 

@@ -317,8 +317,6 @@ class MainWindow : public QMainWindow {
   bool copyDirectoryFiles(const QString& fromDir, const QString& toDir,
                           bool coverFileIfExist);
 
-  bool copyFileToPath(QString sourceDir, QString toDir, bool coverFileIfExist);
-
   QString getWMIC(const QString& cmd);
   QString getCpuName();
   QString getCpuId();
