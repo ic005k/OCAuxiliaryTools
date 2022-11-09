@@ -14,7 +14,7 @@ bool FileOperation::copyDirectoryFiles(const QString &fromDir, const QString &to
         }
     }
 
-    QFileInfoList fileInfoList = sourceDir.entryInfoList(QDir::NoDotAndDotDot);
+    QFileInfoList fileInfoList = sourceDir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot);
     foreach (QFileInfo fileInfo, fileInfoList) {
         if (fileInfo.isDir()) { /**< 当为目录时，递归的进行copy */
             if (!copyDirectoryFiles(fileInfo.filePath(),

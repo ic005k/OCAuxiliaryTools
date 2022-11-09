@@ -8,6 +8,7 @@
 #include "plistserializer.h"
 #include "ui_dlgdatabase.h"
 #include "ui_mainwindow.h"
+#include "fileoperation.h"
 
 extern MainWindow* mw_one;
 extern QString SaveFileName, strIniFile, strAppName, strAppExePath;
@@ -181,7 +182,7 @@ void Method::finishKextUpdate(bool blDatabase) {
       QString Name = getFileName(dirSource);
       dirTargetDatabase =
           QDir::homePath() + "/.ocat/Database/EFI/OC/Kexts/" + Name;
-      mw_one->copyDirectoryFiles(dirSource, dirTargetDatabase, true);
+      FileOperation::copyDirectoryFiles(dirSource, dirTargetDatabase, true);
     }
   } else {
     QStringList list;
@@ -197,7 +198,7 @@ void Method::finishKextUpdate(bool blDatabase) {
       for (int j = 0; j < mw_one->dlgSyncOC->sourceKexts.count(); j++) {
         QString str_1 = mw_one->dlgSyncOC->ui->tableKexts->item(j, 3)->text();
         if (Name == str_1 && mw_one->dlgSyncOC->chkList.at(j)->isChecked())
-          mw_one->copyDirectoryFiles(dirSource, dirTarget, true);
+          FileOperation::copyDirectoryFiles(dirSource, dirTarget, true);
 
         qDebug() << dirSource << dirTarget;
       }
@@ -504,12 +505,12 @@ void Method::updateOpenCore() {
       strTEFI = mw_one->userDataBaseDir + "DEBUG/EFI/";
 
     if (!QDir(strSEFI).exists()) Results.append(false);
-    Results.append(mw_one->copyDirectoryFiles(strSEFI, strTEFI, true));
+    Results.append(FileOperation::copyDirectoryFiles(strSEFI, strTEFI, true));
 
     // ACPI
     QString strSacpi = tempDir + "Docs/AcpiSamples/Binaries/";
     QString strTacpi = mw_one->userDataBaseDir + "EFI/OC/ACPI/";
-    mw_one->copyDirectoryFiles(strSacpi, strTacpi, true);
+    FileOperation::copyDirectoryFiles(strSacpi, strTacpi, true);
 
     // Doc
     Results.append(mw_one->copyFileToPath(
@@ -583,7 +584,7 @@ void Method::updateOpenCore() {
         mw_one->userDataBaseDir + "linux/ocpasswordgen", true);
 
     // Create Vault
-    Results.append(mw_one->copyDirectoryFiles(
+    Results.append(FileOperation::copyDirectoryFiles(
         tempDir + "/Utilities/CreateVault/",
         mw_one->userDataBaseDir + "mac/CreateVault/", true));
 
@@ -1176,7 +1177,7 @@ QString Method::copyKexts(QString pathSource, QString pathTarget) {
 
     if (!str0.contains("#")) {
       if (kextDir.exists())
-        mw_one->copyDirectoryFiles(str0, pathOCKexts + file, true);
+        FileOperation::copyDirectoryFiles(str0, pathOCKexts + file, true);
       else
         strDatabase = strDatabase + "EFI/OC/Kexts/" + file + "\n";
     }
@@ -1267,7 +1268,7 @@ void Method::generateEFI(QString file) {
 
   // OC/Resources
   QString pathOCResources = pathTarget + "OC/Resources/";
-  mw_one->copyDirectoryFiles(str + "EFI/OC/Resources/", pathOCResources, true);
+  FileOperation::copyDirectoryFiles(str + "EFI/OC/Resources/", pathOCResources, true);
 
   // Tools
   strDatabase = copyTools(pathSource, pathTarget) + strDatabase;
