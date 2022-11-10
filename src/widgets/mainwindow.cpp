@@ -9,6 +9,7 @@
 #include "Plist.hpp"
 #include "commands.h"
 #include "ui_mainwindow.h"
+#include "fileoperation.h"
 
 using namespace std;
 
@@ -2793,7 +2794,7 @@ void MainWindow::addKexts(QStringList FileName) {
 
     QDir dir(strKexts);
     if (dir.exists()) {
-      copyDirectoryFiles(FileName.at(j), strKexts + strBaseName, false);
+      FileOperation::copyDirectoryFiles(FileName.at(j), strKexts + strBaseName, false);
     }
 
     //如果里面还有PlugIns目录，则需要继续遍历插件目录
@@ -6044,40 +6045,6 @@ bool MainWindow::DeleteDirectory(const QString& path) {
     }
   }
   return dir.rmpath(dir.absolutePath());
-}
-
-//拷贝文件夹：
-bool MainWindow::copyDirectoryFiles(const QString& fromDir,
-                                    const QString& toDir,
-                                    bool coverFileIfExist) {
-  QDir sourceDir(fromDir);
-  QDir targetDir(toDir);
-  if (!targetDir.exists()) { /**< 如果目标目录不存在，则进行创建 */
-    if (!targetDir.mkdir(targetDir.absolutePath())) return false;
-  }
-
-  QFileInfoList fileInfoList = sourceDir.entryInfoList();
-  foreach (QFileInfo fileInfo, fileInfoList) {
-    if (fileInfo.fileName() == "." || fileInfo.fileName() == "..") continue;
-
-    if (fileInfo.isDir()) { /**< 当为目录时，递归的进行copy */
-      if (!copyDirectoryFiles(fileInfo.filePath(),
-                              targetDir.filePath(fileInfo.fileName()),
-                              coverFileIfExist))
-        return false;
-    } else { /**< 当允许覆盖操作时，将旧文件进行删除操作 */
-      if (coverFileIfExist && targetDir.exists(fileInfo.fileName())) {
-        targetDir.remove(fileInfo.fileName());
-      }
-
-      /// 进行文件copy
-      if (!QFile::copy(fileInfo.filePath(),
-                       targetDir.filePath(fileInfo.fileName()))) {
-        return false;
-      }
-    }
-  }
-  return true;
 }
 
 int MainWindow::getTextWidth(QString str, QWidget* w) {
@@ -9966,7 +9933,7 @@ void MainWindow::on_actionDEBUG_triggered() {
 void MainWindow::on_actionInitDatabaseLinux_triggered() {
   // Init Linux Database
   if (linuxOS) {
-    copyDirectoryFiles(strAppExePath + "/Database/",
+    FileOperation::copyDirectoryFiles(strAppExePath + "/Database/",
                        QDir::homePath() + "/.ocat/Database/", true);
   }
 }
