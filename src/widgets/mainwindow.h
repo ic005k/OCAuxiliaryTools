@@ -313,14 +313,7 @@ class MainWindow : public QMainWindow {
   int deleteDirfile(QString dirName);
 
   bool DeleteDirectory(const QString& path);
-
-
-  bool copyFileToPath(QString sourceDir, QString toDir, bool coverFileIfExist);
-
-  bool copyDirectoryFiles(const QString& fromDir, const QString& toDir,
-                          bool coverFileIfExist);
-
-
+  
   QString getWMIC(const QString& cmd);
   QString getCpuName();
   QString getCpuId();
