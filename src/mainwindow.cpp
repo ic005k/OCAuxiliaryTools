@@ -2756,6 +2756,16 @@ void MainWindow::on_btnKernelAdd_Add_clicked() {
   FileName = fd.getOpenFileNames(this, "kext", "", "kext(*.kext);;all(*.*)");
 #endif
 
+  for (int i = 0; i < FileName.count(); i++) {
+    QString str = FileName.at(i);
+    if (!str.toLower().contains(".kext")) {
+      FileName.removeAt(i);
+      i--;
+    }
+  }
+
+  if (FileName.count() == 0) return;
+
   addKexts(FileName);
 }
 
