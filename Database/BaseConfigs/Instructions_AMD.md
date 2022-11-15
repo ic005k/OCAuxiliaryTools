@@ -1,5 +1,7 @@
 **Introduction:**
 
+**Added kernel preset to support latest AMD 7XXX series CPUs**
+
 **macOS Ventura 13 new first beta has included multiple steps to have your system working**
 
 - Use again a deprecated patch : algrey - _cpuid_set_generic_info - Disable check to allow leaf7 - 10.13/10.14/10.15/11.0/12.0
