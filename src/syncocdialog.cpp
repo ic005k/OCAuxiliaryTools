@@ -831,7 +831,7 @@ void SyncOCDialog::on_btnGetOC_clicked() {
                         ui->btnGetOC->width(), ui->btnGetOC->height());
 
   if (blDEV) {
-    if (ui->editOCDevSource->currentIndex() == 0) {
+    if (DevSource == "https://github.com/dortania/build-repo") {
       getKextHtmlInfo(getJsonUrl(), false);
       QString url = getKextDevDL(bufferJson, "OpenCorePkg");
       mymethod->startDownload(url);

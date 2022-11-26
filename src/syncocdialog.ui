@@ -146,6 +146,11 @@
           </item>
           <item>
            <property name="text">
+            <string>https://github.com/wjz304/OpenCore_NO_ACPI_Build</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
             <string/>
            </property>
           </item>
