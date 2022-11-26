@@ -822,6 +822,14 @@ void MainWindow::ParserMisc(QVariantMap map) {
   QVariantMap map_boot = map["Boot"].toMap();
   getValue(map_boot, ui->tabMisc1);
 
+  QObjectList listOfLineEdit = getAllLineEdit(getAllUIControls(ui->tabMisc1));
+  for (int i = 0; i < listOfLineEdit.count(); i++) {
+    QLineEdit* w = (QLineEdit*)listOfLineEdit.at(i);
+    if (w->objectName() == "editShowPicker") {
+      if (w->text() == "true" || w->text() == "false") w->setText("Always");
+    }
+  }
+
   ui->editIntConsoleAttributes->setText(
       map_boot["ConsoleAttributes"].toString());
 
