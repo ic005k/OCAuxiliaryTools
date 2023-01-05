@@ -40,3 +40,4 @@ HoRNDIS9.2.kext | https://github.com/w19996/HoRNDIS
 EFICheckDisabler.kext | https://github.com/w19996/EFICheckDisabler
 USBPorts-XiaoMiRuby.kext | https://github.com/w19996/USBPorts-XiaoMiRuby
 BlueToolFixup.kext | https://github.com/acidanthera/BrcmPatchRAM
+CryptexFixup.kext | https://github.com/acidanthera/CryptexFixup
