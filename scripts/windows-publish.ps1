@@ -32,6 +32,7 @@ function Main() {
     # 拷贝额外的文件：主要用于网络访问
     Copy-Item ExtBin\*.dll $archiveName\
     Copy-Item ExtBin\*.exe $archiveName\
+    Copy-Item ExtBin\OCAT.bat $archiveName\OCAT.bat
     # libcrypto-1_1-x64.dll
     # cp ExtBin/libssl-1_1-x64.dll libssl-1_1-x64.dll
     # cp ExtBin/msvcr100.dll msvcr100.dll  win7 64位使用
