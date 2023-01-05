@@ -5016,8 +5016,8 @@ void MainWindow::init_FileMenu() {
 }
 
 void MainWindow::init_EditMenu() {
-  ui->actionPlist_editor->setVisible(true);
-  ui->actionDSDT_SSDT_editor->setVisible(true);
+  ui->actionPlist_editor->setVisible(false);
+  ui->actionDSDT_SSDT_editor->setVisible(false);
 
   // Edit
   ui->actionInitDatabaseLinux->setVisible(false);
@@ -9558,7 +9558,7 @@ void MainWindow::on_actionOpen_database_directory_triggered() {
   if (blDEV)
     dir = "file:" + userDataBaseDir;
   else
-    dir = "file:" + dataBaseDir;
+    dir = "file:" + userDataBaseDir;
   QDesktopServices::openUrl(QUrl(dir, QUrl::TolerantMode));
 }
 
