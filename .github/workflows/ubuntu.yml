@@ -40,7 +40,10 @@ jobs:
           cached: 'false'
       
       - name: ubuntu install GL library
-        run: sudo apt-get install -y libglew-dev libglfw3-dev libxcb*
+        run:  |
+          sudo apt-get install -y libglew-dev libglfw3-dev libxcb*
+          sudo add-apt-repository universe
+          sudo apt install libfuse2
                    
       - uses: actions/checkout@v2
         with:
