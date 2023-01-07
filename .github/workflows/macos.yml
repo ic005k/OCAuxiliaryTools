@@ -16,7 +16,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-10.15]
+        os: [macos-12]
         # qt_ver: [5.9.9,5.12.10,5.15.2]
         qt_ver: [5.15.2]
         #qt_ver: [6.0.0]
@@ -29,11 +29,11 @@ jobs:
       
     steps:
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2.13.0
+        uses: jurplel/install-qt-action@v3.0.0
         with:
           version: ${{ matrix.qt_ver }}
           cached: 'false'
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.3.0
         with:
           fetch-depth: 1
       - name: build macos
@@ -76,7 +76,7 @@ jobs:
           cp ${targetName}.dmg bin/release/${targetName}.dmg 
           
       # 上传artifacts          
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3.1.2
         with:
           #name: ${{ env.targetName }}_${{ matrix.os }}_${{matrix.qt_ver}} # .zip
           name: ${{ env.orgName }}_${{ env.VERSION }}
@@ -85,7 +85,7 @@ jobs:
       # tag 上传Release
       - name: uploadRelease
         if: startsWith(github.event.ref, 'refs/tags/')
-        uses: svenstaro/upload-release-action@v2
+        uses: svenstaro/upload-release-action@2.3.0
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: bin/release/${{ env.targetName }}.dmg
