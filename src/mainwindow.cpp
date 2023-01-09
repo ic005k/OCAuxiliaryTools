@@ -4941,6 +4941,7 @@ void MainWindow::init_ToolBarIcon() {
 }
 
 void MainWindow::init_FileMenu() {
+  ui->actionNew_Key_Field->setVisible(false);
   // New
   if (mac || osx1012) ui->actionNewWindow->setIconVisibleInMenu(false);
 

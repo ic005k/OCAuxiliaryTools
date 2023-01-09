@@ -141,6 +141,11 @@
                </item>
                <item>
                 <property name="text">
+                 <string>https://gh.flyinbug.top/gh/https://github.com/</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
                  <string>https://download.fastgit.org/</string>
                 </property>
                </item>

@@ -7,3 +7,8 @@ bin/debug/OCAuxiliaryTools.app/Contents/Resources/Icon.icns
 OCAuxiliaryTools.pro.user
 .github/.DS_Store
 .DS_Store
+bin/release/OCAuxiliaryTools.app/Contents/Info.plist
+bin/release/OCAuxiliaryTools.app/Contents/MacOS/OCAuxiliaryTools
+bin/release/OCAuxiliaryTools.app/Contents/PkgInfo
+bin/release/OCAuxiliaryTools.app/Contents/Resources/empty.lproj
+bin/release/OCAuxiliaryTools.app/Contents/Resources/Icon.icns

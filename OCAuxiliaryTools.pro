@@ -1,6 +1,7 @@
-QT       += core gui
-QT       += xml
-QT       += network
+QT     += core gui
+QT     += xml
+QT     += network
+CONFIG +=sdk_no_version_check
 
 ICON = Icon.icns
 RC_FILE += myapp.rc

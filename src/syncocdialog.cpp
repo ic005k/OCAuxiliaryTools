@@ -410,7 +410,7 @@ QString SyncOCDialog::getJsonUrl() {
       mw_one->myDlgPreference->ui->comboBoxNet->currentText().trimmed();
   if (strMirror == "https://download.fastgit.org/" ||
       strMirror == "https://archive.fastgit.org/")
-    strMirror = "https://ghproxy.com/https://github.com/";
+    strMirror = "https://gh.flyinbug.top/gh/https://github.com/";
   strMirror.replace("https://github.com/", "");
   QString url = strMirror +
                 "https://raw.githubusercontent.com/dortania/build-repo/builds/"

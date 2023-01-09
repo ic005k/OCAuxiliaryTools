@@ -35,7 +35,7 @@ dlgPreference::dlgPreference(QWidget *parent)
   ui->tableKextUrl->setColumnWidth(1, 400);
   ui->textEdit->setHidden(true);
 
-  QString strDef = "https://ghproxy.com/https://github.com/";
+  QString strDef = "https://gh.flyinbug.top/gh/https://github.com/";
   QLocale locale;
   if (locale.language() == QLocale::Chinese) {
     ui->comboBoxNet->setCurrentText(Reg.value("Net", strDef).toString());
