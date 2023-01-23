@@ -94,17 +94,14 @@ Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs CustomSMBIOSGuid DisableIoMapper Dis
 CPU:Intel Nehalem and Westmere (HP HEDT)
 Kernel:AppleCpuPmCfgLock AppleXcpmExtraMsrs DisableIoMapper DisableLinkeditJettison LapicKernelPanic PanicNoKextDump PowerTimeoutKernelPanic XhciPortLimit
 
+CPU:AMD Ryzen (17h), Threadripper (19h), Bulldozer (15h), Jaguar (16h)
+Kernel: PanicNoKextDump PowerTimeoutKernelPanic ProvideCurrentCpuInfo
 
 **NOTES**
 
 - `AppleXcpmCfgLock`: Not needed if you can disable CFGLock in BIOS 
 - `XhciPortLimit`: Disable for macOS 11.3 and newer – create a custom USB Port Map instead!
+- AMD CPUs require `Kernel` > `Emulate`: `DummyPowerManagement`
+- AMD CPUs also require additional [**Kernel patches**](https://github.com/AMD-OSX/AMD_Vanilla/tree/master) to run macOS.
 
 Thanks to @5T33Z0 for providing the above content.
-
-CPU:AMD ThreadRipper (TRX40) and AMD Ryzen (X570-B450M)
-Kernel:DisableLinkeditJettison ExternalDiskIcons ProvideCurrentCpuInfo
-
-CPU:AMD ThreadRipper (TRX40) and AMD Ryzen (X370)
-Kernel:DisableLinkeditJettison ProvideCurrentCpuInfo XhciPortLimit
-

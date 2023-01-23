@@ -6,12 +6,33 @@
         <string>https://github.com/5T33Z0</string>
         <key>#ConfigComment</key>
         <string></string>
-        <key>#SMBIOS: MacPro6,1</key>
-        <string>For macOS Catalina and newer.</string>
+        <key>#Notes</key>
+        <string>Use CPUFriendFriend to generate a custom CPUFriendDataProvider.kext. Check enabled kexts before deployment!</string>
+        <key>#SMBIOS: iMac18,3</key>
+        <string>For computers using a dGPU for displaying, and an iGPU for computing tasks only</string>
+        <key>#macOS Compatibility</key>
+        <string>macOS Sierra and newer. Adjust csr-config-accordingly!</string>
         <key>ACPI</key>
         <dict>
             <key>Add</key>
-            <array/>
+            <array>
+                <dict>
+                    <key>Comment</key>
+                    <string>Enables CPU Power Management </string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Path</key>
+                    <string>SSDT-PLUG.aml</string>
+                </dict>
+                <dict>
+                    <key>Comment</key>
+                    <string>Fake EC and USB Power</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Path</key>
+                    <string>SSDT-EC-USBX.aml</string>
+                </dict>
+            </array>
             <key>Delete</key>
             <array/>
             <key>Patch</key>
@@ -86,12 +107,27 @@
         <dict>
             <key>Add</key>
             <dict>
-                <key># PciRoot(0x0)/Pci(0x1,0x1)/Pci(0x0,0x0)</key>
+                <key>#PciRoot(0x0)/Pci(0x2,0x0)</key>
                 <dict>
-                    <key>device-id</key>
-                    <data>MxUAAA==</data>
+                    <key>AAPL,ig-platform-id</key>
+                    <data>AAASWQ==</data>
+                    <key>AAPL,slot-name</key>
+                    <string>Built-In</string>
+                    <key>device_type</key>
+                    <string>Display Controller</string>
+                    <key>framebuffer-patch-enable</key>
+                    <data>AQAAAA==</data>
+                    <key>framebuffer-stolenmem</key>
+                    <data>AAAwAQ==</data>
                     <key>model</key>
-                    <string>Intel I350 Ethernet Server Adapter</string>
+                    <string>Intel HD 630</string>
+                </dict>
+                <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+                <dict>
+                    <key>AAPL,ig-platform-id</key>
+                    <data>AwASWQ==</data>
+                    <key>model</key>
+                    <string>Intel HD 630 (for computing only)</string>
                 </dict>
             </dict>
             <key>Delete</key>
@@ -148,24 +184,6 @@
                     <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/WhateverGreen</string>
-                    <key>MaxKernel</key>
-                    <string></string>
-                    <key>MinKernel</key>
-                    <string></string>
-                    <key>PlistPath</key>
-                    <string>Contents/Info.plist</string>
-                </dict>
-                <dict>
-                    <key>Arch</key>
-                    <string>Any</string>
-                    <key>BundlePath</key>
-                    <string>CpuTscSync.kext</string>
-                    <key>Comment</key>
-                    <string>V1.0.5 | CpuTscSync.kext</string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>ExecutablePath</key>
-                    <string>Contents/MacOS/CpuTscSync</string>
                     <key>MaxKernel</key>
                     <string></string>
                     <key>MinKernel</key>
@@ -250,11 +268,11 @@
             <key>Quirks</key>
             <dict>
                 <key>AppleCpuPmCfgLock</key>
-                <true/>
+                <false/>
                 <key>AppleXcpmCfgLock</key>
                 <true/>
                 <key>AppleXcpmExtraMsrs</key>
-                <true/>
+                <false/>
                 <key>AppleXcpmForceBoost</key>
                 <false/>
                 <key>CustomPciSerialDevice</key>
@@ -292,7 +310,7 @@
                 <key>ThirdPartyDrives</key>
                 <false/>
                 <key>XhciPortLimit</key>
-                <false/>
+                <true/>
             </dict>
             <key>Scheme</key>
             <dict>
@@ -520,7 +538,7 @@
                 <key>SystemMemoryStatus</key>
                 <string>Auto</string>
                 <key>SystemProductName</key>
-                <string>MacPro6,1</string>
+                <string>iMac18,3</string>
                 <key>SystemSerialNumber</key>
                 <string></string>
                 <key>SystemUUID</key>
@@ -745,7 +763,7 @@
                 <key>ForgeUefiSupport</key>
                 <false/>
                 <key>IgnoreInvalidFlexRatio</key>
-                <true/>
+                <false/>
                 <key>ReleaseUsbOwnership</key>
                 <false/>
                 <key>ReloadOptionRoms</key>

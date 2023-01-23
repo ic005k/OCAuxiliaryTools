@@ -6,12 +6,25 @@
         <string>https://github.com/5T33Z0</string>
         <key>#ConfigComment</key>
         <string></string>
-        <key>#SMBIOS: MacPro6,1</key>
-        <string>For macOS Catalina and newer.</string>
+        <key>#Notes</key>
+        <string>Generate a SSDT-PM using ssdtPRGen in Post-Install to enable proper CPU Power Management</string>
+        <key>#SMBIOS:iMac11,1</key>
+        <string>For 1st Gen Intel Core i5/i7 CPUs. dGPU required.</string>
+        <key>#macOS Compatibility</key>
+        <string>macOS Snow Leopard to Catalina</string>
         <key>ACPI</key>
         <dict>
             <key>Add</key>
-            <array/>
+            <array>
+                <dict>
+                    <key>Comment</key>
+                    <string>Fake EC</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Path</key>
+                    <string>SSDT-EC.aml</string>
+                </dict>
+            </array>
             <key>Delete</key>
             <array/>
             <key>Patch</key>
@@ -43,7 +56,7 @@
                 <key>AllowRelocationBlock</key>
                 <false/>
                 <key>AvoidRuntimeDefrag</key>
-                <true/>
+                <false/>
                 <key>DevirtualiseMmio</key>
                 <false/>
                 <key>DisableSingleUser</key>
@@ -53,9 +66,9 @@
                 <key>DiscardHibernateMap</key>
                 <false/>
                 <key>EnableSafeModeSlide</key>
-                <true/>
+                <false/>
                 <key>EnableWriteUnprotector</key>
-                <true/>
+                <false/>
                 <key>ForceBooterSignature</key>
                 <false/>
                 <key>ForceExitBootServices</key>
@@ -67,15 +80,15 @@
                 <key>ProtectUefiServices</key>
                 <false/>
                 <key>ProvideCustomSlide</key>
-                <true/>
+                <false/>
                 <key>ProvideMaxSlide</key>
                 <integer>0</integer>
                 <key>RebuildAppleMemoryMap</key>
-                <false/>
+                <true/>
                 <key>ResizeAppleGpuBars</key>
                 <integer>-1</integer>
                 <key>SetupVirtualMap</key>
-                <true/>
+                <false/>
                 <key>SignalAppleOS</key>
                 <false/>
                 <key>SyncRuntimePermissions</key>
@@ -85,15 +98,7 @@
         <key>DeviceProperties</key>
         <dict>
             <key>Add</key>
-            <dict>
-                <key># PciRoot(0x0)/Pci(0x1,0x1)/Pci(0x0,0x0)</key>
-                <dict>
-                    <key>device-id</key>
-                    <data>MxUAAA==</data>
-                    <key>model</key>
-                    <string>Intel I350 Ethernet Server Adapter</string>
-                </dict>
-            </dict>
+            <dict/>
             <key>Delete</key>
             <dict/>
         </dict>
@@ -148,24 +153,6 @@
                     <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/WhateverGreen</string>
-                    <key>MaxKernel</key>
-                    <string></string>
-                    <key>MinKernel</key>
-                    <string></string>
-                    <key>PlistPath</key>
-                    <string>Contents/Info.plist</string>
-                </dict>
-                <dict>
-                    <key>Arch</key>
-                    <string>Any</string>
-                    <key>BundlePath</key>
-                    <string>CpuTscSync.kext</string>
-                    <key>Comment</key>
-                    <string>V1.0.5 | CpuTscSync.kext</string>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>ExecutablePath</key>
-                    <string>Contents/MacOS/CpuTscSync</string>
                     <key>MaxKernel</key>
                     <string></string>
                     <key>MinKernel</key>
@@ -252,9 +239,9 @@
                 <key>AppleCpuPmCfgLock</key>
                 <true/>
                 <key>AppleXcpmCfgLock</key>
-                <true/>
+                <false/>
                 <key>AppleXcpmExtraMsrs</key>
-                <true/>
+                <false/>
                 <key>AppleXcpmForceBoost</key>
                 <false/>
                 <key>CustomPciSerialDevice</key>
@@ -520,7 +507,7 @@
                 <key>SystemMemoryStatus</key>
                 <string>Auto</string>
                 <key>SystemProductName</key>
-                <string>MacPro6,1</string>
+                <string>iMac11,1</string>
                 <key>SystemSerialNumber</key>
                 <string></string>
                 <key>SystemUUID</key>
@@ -610,11 +597,11 @@
                     <key>Arguments</key>
                     <string></string>
                     <key>Comment</key>
-                    <string>HfsPlus.efi</string>
+                    <string>HfsPlusLegacy.efi</string>
                     <key>Enabled</key>
                     <true/>
                     <key>Path</key>
-                    <string>HfsPlus.efi</string>
+                    <string>HfsPlusLegacy.efi</string>
                 </dict>
                 <dict>
                     <key>Arguments</key>
@@ -635,6 +622,16 @@
                     <true/>
                     <key>Path</key>
                     <string>OpenRuntime.efi</string>
+                </dict>
+                <dict>
+                    <key>Arguments</key>
+                    <string></string>
+                    <key>Comment</key>
+                    <string>OpenUsbKbDxe.efi</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>Path</key>
+                    <string>OpenUsbKbDxe.efi</string>
                 </dict>
             </array>
             <key>Input</key>
@@ -644,7 +641,7 @@
                 <key>KeyForgetThreshold</key>
                 <integer>5</integer>
                 <key>KeySupport</key>
-                <true/>
+                <false/>
                 <key>KeySupportMode</key>
                 <string>Auto</string>
                 <key>KeySwap</key>
