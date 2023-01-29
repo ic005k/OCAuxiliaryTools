@@ -76,37 +76,7 @@
                     <key>BaseSkip</key>
                     <integer>0</integer>
                     <key>Comment</key>
-                    <string>change SAT0 to SATA, optionally pair with SSDT-SATA.aml</string>
-                    <key>Count</key>
-                    <integer>0</integer>
-                    <key>Enabled</key>
-                    <false/>
-                    <key>Find</key>
-                    <data>U0FUMA==</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>U0FUQQ==</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data></data>
-                </dict>
-                <dict>
-                    <key>Base</key>
-                    <string></string>
-                    <key>BaseSkip</key>
-                    <integer>0</integer>
-                    <key>Comment</key>
-                    <string>change Method(GPRW,2,N) to XPRW, pair with SSDT-PRW.aml</string>
+                    <string>change Method(GPRW,2,N) to XPRW</string>
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
@@ -121,36 +91,6 @@
                     <data></data>
                     <key>Replace</key>
                     <data>WFBSVwI=</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data></data>
-                </dict>
-                <dict>
-                    <key>Base</key>
-                    <string></string>
-                    <key>BaseSkip</key>
-                    <integer>0</integer>
-                    <key>Comment</key>
-                    <string>change ECDV to EC (EC device recognition)</string>
-                    <key>Count</key>
-                    <integer>0</integer>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Find</key>
-                    <data>RUNEVg==</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>RUNfXw==</data>
                     <key>ReplaceMask</key>
                     <data></data>
                     <key>Skip</key>
@@ -189,246 +129,6 @@
                     <integer>0</integer>
                     <key>TableSignature</key>
                     <data>RFNEVA==</data>
-                </dict>
-                <dict>
-                    <key>Base</key>
-                    <string></string>
-                    <key>BaseSkip</key>
-                    <integer>0</integer>
-                    <key>Comment</key>
-                    <string>change _STA to XSTA in device GPI0 (TouchPad I2C)</string>
-                    <key>Count</key>
-                    <integer>0</integer>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Find</key>
-                    <data>FB1fU1RBAKAJk1M=</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>FB1YU1RBAKAJk1M=</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data>RFNEVA==</data>
-                </dict>
-                <dict>
-                    <key>Base</key>
-                    <string></string>
-                    <key>BaseSkip</key>
-                    <integer>0</integer>
-                    <key>Comment</key>
-                    <string>change _CRS to XCRS in device TPD1 (TouchPad I2C)</string>
-                    <key>Count</key>
-                    <integer>1</integer>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Find</key>
-                    <data>FDNfQ1JTAA==</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>FDNYQ1JTAA==</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>1</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data>RFNEVA==</data>
-                </dict>
-                <dict>
-                    <key>Base</key>
-                    <string></string>
-                    <key>BaseSkip</key>
-                    <integer>0</integer>
-                    <key>Comment</key>
-                    <string>change _DSM to XDSM (TPD1/Touchpad I2C)</string>
-                    <key>Count</key>
-                    <integer>1</integer>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Find</key>
-                    <data>FDlfRFNNDA==</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>FDlYRFNNDA==</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>1</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data>RFNEVA==</data>
-                </dict>
-                <dict>
-                    <key>Base</key>
-                    <string>\_SB.PCI0.LPCB.HPET</string>
-                    <key>BaseSkip</key>
-                    <integer>0</integer>
-                    <key>Comment</key>
-                    <string>HPET _CRS to XCRS</string>
-                    <key>Count</key>
-                    <integer>1</integer>
-                    <key>Enabled</key>
-                    <false/>
-                    <key>Find</key>
-                    <data>X0NSUw==</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>WENSUw==</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data></data>
-                </dict>
-                <dict>
-                    <key>Base</key>
-                    <string></string>
-                    <key>BaseSkip</key>
-                    <integer>0</integer>
-                    <key>Comment</key>
-                    <string>GPRW to XPRW</string>
-                    <key>Count</key>
-                    <integer>0</integer>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Find</key>
-                    <data>R1BSVwI=</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>WFBSVwI=</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data></data>
-                </dict>
-                <dict>
-                    <key>Base</key>
-                    <string></string>
-                    <key>BaseSkip</key>
-                    <integer>0</integer>
-                    <key>Comment</key>
-                    <string>Rename BRT6 to BRTX</string>
-                    <key>Count</key>
-                    <integer>0</integer>
-                    <key>Enabled</key>
-                    <true/>
-                    <key>Find</key>
-                    <data>FCBCUlQ2Ag==</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>FCBCUlRYAg==</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data></data>
-                </dict>
-                <dict>
-                    <key>Base</key>
-                    <string></string>
-                    <key>BaseSkip</key>
-                    <integer>0</integer>
-                    <key>Comment</key>
-                    <string>OSID to XSID</string>
-                    <key>Count</key>
-                    <integer>0</integer>
-                    <key>Enabled</key>
-                    <false/>
-                    <key>Find</key>
-                    <data>T1NJRA==</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>WFNJRA==</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data></data>
-                </dict>
-                <dict>
-                    <key>Base</key>
-                    <string></string>
-                    <key>BaseSkip</key>
-                    <integer>0</integer>
-                    <key>Comment</key>
-                    <string>Device AC rename to ADP1  pair with SSDT-ADP1 - credit syscl</string>
-                    <key>Count</key>
-                    <integer>0</integer>
-                    <key>Enabled</key>
-                    <false/>
-                    <key>Find</key>
-                    <data>QUNfXw==</data>
-                    <key>Limit</key>
-                    <integer>0</integer>
-                    <key>Mask</key>
-                    <data></data>
-                    <key>OemTableId</key>
-                    <data></data>
-                    <key>Replace</key>
-                    <data>QURQMQ==</data>
-                    <key>ReplaceMask</key>
-                    <data></data>
-                    <key>Skip</key>
-                    <integer>0</integer>
-                    <key>TableLength</key>
-                    <integer>0</integer>
-                    <key>TableSignature</key>
-                    <data></data>
                 </dict>
             </array>
             <key>Quirks</key>
@@ -501,10 +201,49 @@
         <dict>
             <key>Add</key>
             <dict>
-                <key>PciRoot(0x0)/Pci(0x1f,0x3)  |  DELL ALC256</key>
-                <dict/>
-                <key>PciRoot(0x0)/Pci(0x2,0x0)  |  UHD620 (i5-8250U)</key>
-                <dict/>
+                <key>PciRoot(0x0)/Pci(0x1B,0x0) - Audio Brodwell or never</key>
+                <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal</string>
+                    <key>device_type</key>
+                    <string>Audio device</string>
+                    <key>layout-id</key>
+                    <integer>86</integer>
+                    <key>model</key>
+                    <string>HD Audio</string>
+                </dict>
+                <key>PciRoot(0x0)/Pci(0x1F,0x3) - Audio Skylake or +</key>
+                <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal</string>
+                    <key>device_type</key>
+                    <string>Audio device</string>
+                    <key>layout-id</key>
+                    <integer>86</integer>
+                    <key>model</key>
+                    <string>HD Audio</string>
+                </dict>
+                <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+                <dict>
+                    <key>AAPL,GfxYTile</key>
+                    <data>AQAAAA==</data>
+                    <key>AAPL,ig-platform-id</key>
+                    <data>AADAhw==</data>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal</string>
+                    <key>device-id</key>
+                    <data>FlkAAA==</data>
+                    <key>device_type</key>
+                    <string>VGA compatible controller</string>
+                    <key>framebuffer-fbmem</key>
+                    <data>AACQAA==</data>
+                    <key>framebuffer-patch-enable</key>
+                    <data>AQAAAA==</data>
+                    <key>framebuffer-stolenmem</key>
+                    <data>AAAwAQ==</data>
+                    <key>model</key>
+                    <string>Intel UHD Graphics 620</string>
+                </dict>
             </dict>
             <key>Delete</key>
             <dict/>
@@ -783,6 +522,8 @@
                 <false/>
                 <key>AppleXcpmForceBoost</key>
                 <false/>
+                <key>CustomPciSerialDevice</key>
+                <false/>
                 <key>CustomSMBIOSGuid</key>
                 <false/>
                 <key>DisableIoMapper</key>
@@ -794,6 +535,8 @@
                 <key>ExtendBTFeatureFlags</key>
                 <false/>
                 <key>ExternalDiskIcons</key>
+                <false/>
+                <key>ForceAquantiaEthernet</key>
                 <false/>
                 <key>ForceSecureBootScheme</key>
                 <false/>
@@ -838,6 +581,8 @@
                 <integer>0</integer>
                 <key>HibernateMode</key>
                 <string>None</string>
+                <key>HibernateSkipsPicker</key>
+                <false/>
                 <key>HideAuxiliary</key>
                 <false/>
                 <key>LauncherOption</key>
@@ -873,8 +618,8 @@
                 <integer>0</integer>
                 <key>DisplayLevel</key>
                 <integer>0</integer>
-                <key>SerialInit</key>
-                <false/>
+                <key>LogModules</key>
+                <string></string>
                 <key>SysReport</key>
                 <false/>
                 <key>Target</key>
@@ -884,11 +629,7 @@
             <array/>
             <key>Security</key>
             <dict>
-                <key>AllowNvramReset</key>
-                <false/>
                 <key>AllowSetDefault</key>
-                <false/>
-                <key>AllowToggleSip</key>
                 <false/>
                 <key>ApECID</key>
                 <integer>0</integer>
@@ -915,6 +656,40 @@
                 <key>Vault</key>
                 <string>Optional</string>
             </dict>
+            <key>Serial</key>
+            <dict>
+                <key>Custom</key>
+                <dict>
+                    <key>BaudRate</key>
+                    <integer>115200</integer>
+                    <key>ClockRate</key>
+                    <integer>1843200</integer>
+                    <key>DetectCable</key>
+                    <false/>
+                    <key>ExtendedTxFifoSize</key>
+                    <integer>64</integer>
+                    <key>FifoControl</key>
+                    <integer>7</integer>
+                    <key>LineControl</key>
+                    <integer>3</integer>
+                    <key>PciDeviceInfo</key>
+                    <data>/w==</data>
+                    <key>RegisterAccessWidth</key>
+                    <integer>8</integer>
+                    <key>RegisterBase</key>
+                    <integer>1016</integer>
+                    <key>RegisterStride</key>
+                    <integer>1</integer>
+                    <key>UseHardwareFlowControl</key>
+                    <false/>
+                    <key>UseMmio</key>
+                    <false/>
+                </dict>
+                <key>Init</key>
+                <false/>
+                <key>Override</key>
+                <false/>
+            </dict>
             <key>Tools</key>
             <array/>
         </dict>
@@ -937,7 +712,7 @@
                     <key>SystemAudioVolume</key>
                     <data>Rg==</data>
                     <key>boot-args</key>
-                    <string>-v keepsyms=1</string>
+                    <string>-v keepsyms=1 debug=0x100</string>
                     <key>csr-active-config</key>
                     <data>AAAAAA==</data>
                     <key>prev-lang:kbd</key>
@@ -962,8 +737,6 @@
                     <string>boot-args</string>
                 </array>
             </dict>
-            <key>LegacyEnable</key>
-            <false/>
             <key>LegacyOverwrite</key>
             <false/>
             <key>LegacySchema</key>
@@ -1171,6 +944,12 @@
                 <integer>0</integer>
                 <key>KeySubsequentDelay</key>
                 <integer>5</integer>
+                <key>PointerDwellClickTimeout</key>
+                <integer>0</integer>
+                <key>PointerDwellDoubleClickTimeout</key>
+                <integer>0</integer>
+                <key>PointerDwellRadius</key>
+                <integer>0</integer>
                 <key>PointerPollMask</key>
                 <integer>-1</integer>
                 <key>PointerPollMax</key>
