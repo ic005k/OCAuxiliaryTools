@@ -433,6 +433,7 @@ void SyncOCDialog::on_btnStop_clicked() {
   if (isCheckOC) {
     isCheckOC = false;
     ui->btnGetOC->setEnabled(true);
+    ui->btnGetLastOC->setEnabled(true);
     delete progBar;
   }
 }
