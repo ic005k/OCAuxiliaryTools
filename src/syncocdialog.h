@@ -87,6 +87,8 @@ class SyncOCDialog : public QDialog {
 
   void on_btnSet_clicked();
 
+  void on_btnGetLastOC_clicked();
+
  private:
   void setListWidgetColor(QString color);
   QNetworkAccessManager *mgr;
@@ -97,7 +99,8 @@ class SyncOCDialog : public QDialog {
 
   void init_InfoShow();
   QString getJsonUrl();
-  protected:
+
+ protected:
   void closeEvent(QCloseEvent *event);
   void resizeEvent(QResizeEvent *event);
   void keyPressEvent(QKeyEvent *event);

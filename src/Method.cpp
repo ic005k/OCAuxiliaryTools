@@ -529,6 +529,7 @@ void Method::doProcessFinished() {
     delete progBar;
     mw_one->dlgSyncOC->isCheckOC = false;
     mw_one->dlgSyncOC->ui->btnGetOC->setEnabled(true);
+    mw_one->dlgSyncOC->ui->btnGetLastOC->setEnabled(true);
   }
   isReplyDL = false;
 }

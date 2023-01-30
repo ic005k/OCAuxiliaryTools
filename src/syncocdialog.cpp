@@ -253,7 +253,7 @@ void SyncOCDialog::on_listOpenCore_currentRowChanged(int currentRow) {
   QString strShowFileName;
   strShowFileName = fiSource.fileName();
   ui->lblShowInfo->setText(strShowFileName + "\n" + tr("Current File: ") +
-                           "md5    " + targetHash + "  " +
+                           "md5    " + targetHash + "    " +
                            tr("Available File: ") + "md5    " + sourceHash);
 
   if (sourceHash != targetHash) {
@@ -490,6 +490,8 @@ void SyncOCDialog::readCheckStateINI() {
 
 void SyncOCDialog::init_Sync_OC_Table() {
   if (blDEV) {
+    ui->btnGetLastOC->hide();
+    ui->btnGetOC->setText(tr("Get OpenCore"));
     ui->lblOCVersions->setHidden(true);
     ui->comboOCVersions->setHidden(true);
     ui->comboOCVersions->setCurrentIndex(0);
@@ -498,6 +500,7 @@ void SyncOCDialog::init_Sync_OC_Table() {
     ui->editOCDevSource->setHidden(false);
     ui->btnImport->setHidden(false);
   } else {
+    ui->btnGetLastOC->show();
     ui->lblOCVersions->setHidden(false);
     ui->comboOCVersions->setHidden(false);
     ui->comboOCVersions->setCurrentText("");
@@ -771,7 +774,7 @@ void SyncOCDialog::on_tableKexts_itemSelectionChanged() {
       mw_one->getMD5(mymethod->getKextBin(targetKexts.at(row)));
 
   ui->lblShowInfo->setText(strShowFileName + "\n" + tr("Current File: ") +
-                           strTV + "  md5    " + targetHash + "  " +
+                           strTV + "  md5    " + targetHash + "    " +
                            tr("Available File: ") + strSV + "  md5    " +
                            sourceHash);
 }
@@ -874,6 +877,8 @@ void SyncOCDialog::on_comboOCVersions_currentTextChanged(const QString& arg1) {
       downLink =
           "https://github.com/acidanthera/OpenCorePkg/releases/download/" +
           arg1 + "/OpenCore-" + arg1 + "-RELEASE.zip";
+
+    ui->btnGetOC->setText(tr("Get OpenCore") + "  " + arg1);
   }
 
   ocFrom = "<a href=\"" + strOCFrom + "\"" + "> " + tr(" Source ");
@@ -1077,4 +1082,10 @@ void SyncOCDialog::init_InfoShow() {
   progInfo->setMinimum(0);
   if (mw_one->myDlgPreference->ui->btnDownloadKexts->isEnabled())
     progInfo->show();
+}
+
+void SyncOCDialog::on_btnGetLastOC_clicked() {
+  ui->btnGetLastOC->setEnabled(false);
+  ui->comboOCVersions->setCurrentIndex(0);
+  ui->btnGetOC->click();
 }
