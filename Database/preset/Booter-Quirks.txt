@@ -1,3 +1,6 @@
+CPU:Intel Core 13th Gen Raptor Lake (Requires Fake CPU-ID)
+Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProvideCustomSlide SetupVirtualMap RebuildAppleMemoryMap SyncRuntimePermissions
+
 CPU:Intel Core 12th Gen Alder Lake (Requires Fake CPU-ID)
 Booter:AvoidRuntimeDefrag DevirtualiseMmio EnableSafeModeSlide ProtectUefiServices ProvideCustomSlide RebuildAppleMemoryMap SyncRuntimePermissions
 

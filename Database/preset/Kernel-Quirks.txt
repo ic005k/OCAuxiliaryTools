@@ -1,3 +1,6 @@
+CPU:Intel Core 13th Gen Raptor Lake (Requires Fake CPU-ID)
+Kernel:AppleXcpmCfgLock DisableLinkeditJettison PanicNoKextDump PowerTimeoutKernelPanic ProvideCurrentCpuInfo
+
 CPU:Intel Core 12th Gen Alder Lake (Requires Fake CPU-ID)
 Kernel:AppleXcpmCfgLock DisableIoMapper DisableLinkeditJettison DisableRtcChecksum PanicNoKextDump PowerTimeoutKernelPanic ProvideCurrentCpuInfo
 
