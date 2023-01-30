@@ -648,6 +648,8 @@
 				<string></string>
 				<key>MinKernel</key>
 				<string></string>
+				<key>Strategy</key>
+				<string>Disable</string>
 			</dict>
 		</array>
 		<key>Emulate</key>
@@ -842,6 +844,36 @@
 				<key>Arch</key>
 				<string>x86_64</string>
 				<key>Base</key>
+				<string>_disable_serial_output</string>
+				<key>Comment</key>
+				<string>Enable early serial output on RELEASE kernel</string>
+				<key>Count</key>
+				<integer>1</integer>
+				<key>Enabled</key>
+				<false/>
+				<key>Find</key>
+				<data></data>
+				<key>Identifier</key>
+				<string>kernel</string>
+				<key>Limit</key>
+				<integer>0</integer>
+				<key>Mask</key>
+				<data></data>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string></string>
+				<key>Replace</key>
+				<data>AA==</data>
+				<key>ReplaceMask</key>
+				<data></data>
+				<key>Skip</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>x86_64</string>
+				<key>Base</key>
 				<string>_vstart</string>
 				<key>Comment</key>
 				<string>Print K and dead loop</string>
@@ -969,6 +1001,8 @@
 			<false/>
 			<key>AppleXcpmForceBoost</key>
 			<false/>
+			<key>CustomPciSerialDevice</key>
+			<false/>
 			<key>CustomSMBIOSGuid</key>
 			<false/>
 			<key>DisableIoMapper</key>
@@ -980,6 +1014,8 @@
 			<key>ExtendBTFeatureFlags</key>
 			<false/>
 			<key>ExternalDiskIcons</key>
+			<false/>
+			<key>ForceAquantiaEthernet</key>
 			<false/>
 			<key>ForceSecureBootScheme</key>
 			<false/>
@@ -1024,6 +1060,8 @@
 			<integer>0</integer>
 			<key>HibernateMode</key>
 			<string>None</string>
+			<key>HibernateSkipsPicker</key>
+			<false/>
 			<key>HideAuxiliary</key>
 			<true/>
 			<key>LauncherOption</key>
@@ -1059,8 +1097,8 @@
 			<integer>0</integer>
 			<key>DisplayLevel</key>
 			<integer>2147483650</integer>
-			<key>SerialInit</key>
-			<false/>
+			<key>LogModules</key>
+			<string>*</string>
 			<key>SysReport</key>
 			<false/>
 			<key>Target</key>
@@ -1089,11 +1127,7 @@
 		</array>
 		<key>Security</key>
 		<dict>
-			<key>AllowNvramReset</key>
-			<false/>
 			<key>AllowSetDefault</key>
-			<false/>
-			<key>AllowToggleSip</key>
 			<false/>
 			<key>ApECID</key>
 			<integer>0</integer>
@@ -1120,6 +1154,13 @@
 			<key>Vault</key>
 			<string>Secure</string>
 		</dict>
+		<key>Serial</key>
+		<dict>
+			<key>Init</key>
+			<false/>
+			<key>Override</key>
+			<false/>
+		</dict>
 		<key>Tools</key>
 		<array>
 			<dict>
@@ -1133,6 +1174,8 @@
 				<false/>
 				<key>Flavour</key>
 				<string>OpenShell:UEFIShell:Shell</string>
+				<key>FullNvramAccess</key>
+				<false/>
 				<key>Name</key>
 				<string>UEFI Shell</string>
 				<key>Path</key>
@@ -1153,6 +1196,8 @@
 				<false/>
 				<key>Flavour</key>
 				<string>MemTest</string>
+				<key>FullNvramAccess</key>
+				<false/>
 				<key>Name</key>
 				<string>memtest86</string>
 				<key>Path</key>
@@ -1173,6 +1218,8 @@
 				<false/>
 				<key>Flavour</key>
 				<string>Auto</string>
+				<key>FullNvramAccess</key>
+				<false/>
 				<key>Name</key>
 				<string>Shutdown</string>
 				<key>Path</key>
@@ -1200,6 +1247,8 @@
 			</dict>
 			<key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
 			<dict>
+				<key>#INFO (prev-lang:kbd)</key>
+				<string>en:252 (ABC), set 656e3a323532</string>
 				<key>ForceDisplayRotationInEFI</key>
 				<integer>0</integer>
 				<key>SystemAudioVolume</key>
@@ -1230,8 +1279,6 @@
 				<string>ForceDisplayRotationInEFI</string>
 			</array>
 		</dict>
-		<key>LegacyEnable</key>
-		<false/>
 		<key>LegacyOverwrite</key>
 		<false/>
 		<key>LegacySchema</key>
@@ -1334,6 +1381,12 @@
 			<integer>50</integer>
 			<key>KeySubsequentDelay</key>
 			<integer>5</integer>
+			<key>PointerDwellClickTimeout</key>
+			<integer>0</integer>
+			<key>PointerDwellDoubleClickTimeout</key>
+			<integer>0</integer>
+			<key>PointerDwellRadius</key>
+			<integer>0</integer>
 			<key>PointerPollMask</key>
 			<integer>-1</integer>
 			<key>PointerPollMax</key>
@@ -1378,9 +1431,35 @@
 				<key>Arguments</key>
 				<string></string>
 				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<true/>
+				<key>Path</key>
+				<string>OpenVariableRuntimeDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<true/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>OpenRuntime.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
 				<string>HFS+ Driver</string>
 				<key>Enabled</key>
 				<true/>
+				<key>LoadEarly</key>
+				<false/>
 				<key>Path</key>
 				<string>HfsPlus.efi</string>
 			</dict>
@@ -1390,16 +1469,8 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
-				<true/>
-				<key>Path</key>
-				<string>OpenRuntime.efi</string>
-			</dict>
-			<dict>
-				<key>Arguments</key>
-				<string></string>
-				<key>Comment</key>
-				<string></string>
-				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
 				<false/>
 				<key>Path</key>
 				<string>OpenCanopy.efi</string>
@@ -1411,6 +1482,8 @@
 				<string></string>
 				<key>Enabled</key>
 				<false/>
+				<key>LoadEarly</key>
+				<false/>
 				<key>Path</key>
 				<string>AudioDxe.efi</string>
 			</dict>
@@ -1420,6 +1493,8 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
 				<false/>
 				<key>Path</key>
 				<string>OpenPartitionDxe.efi</string>
@@ -1431,6 +1506,8 @@
 				<string></string>
 				<key>Enabled</key>
 				<false/>
+				<key>LoadEarly</key>
+				<false/>
 				<key>Path</key>
 				<string>OpenUsbKbDxe.efi</string>
 			</dict>
@@ -1440,6 +1517,8 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
 				<false/>
 				<key>Path</key>
 				<string>UsbMouseDxe.efi</string>
@@ -1451,6 +1530,8 @@
 				<string></string>
 				<key>Enabled</key>
 				<false/>
+				<key>LoadEarly</key>
+				<false/>
 				<key>Path</key>
 				<string>Ps2KeyboardDxe.efi</string>
 			</dict>
@@ -1460,6 +1541,8 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
 				<false/>
 				<key>Path</key>
 				<string>Ps2MouseDxe.efi</string>
@@ -1471,6 +1554,8 @@
 				<string></string>
 				<key>Enabled</key>
 				<false/>
+				<key>LoadEarly</key>
+				<false/>
 				<key>Path</key>
 				<string>HiiDatabase.efi</string>
 			</dict>
@@ -1480,6 +1565,8 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
 				<false/>
 				<key>Path</key>
 				<string>NvmExpressDxe.efi</string>
@@ -1491,6 +1578,8 @@
 				<string></string>
 				<key>Enabled</key>
 				<false/>
+				<key>LoadEarly</key>
+				<false/>
 				<key>Path</key>
 				<string>XhciDxe.efi</string>
 			</dict>
@@ -1500,6 +1589,8 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
 				<false/>
 				<key>Path</key>
 				<string>ExFatDxe.efi</string>
@@ -1511,6 +1602,8 @@
 				<string></string>
 				<key>Enabled</key>
 				<false/>
+				<key>LoadEarly</key>
+				<false/>
 				<key>Path</key>
 				<string>CrScreenshotDxe.efi</string>
 			</dict>
@@ -1521,8 +1614,10 @@
 				<string></string>
 				<key>Enabled</key>
 				<false/>
+				<key>LoadEarly</key>
+				<false/>
 				<key>Path</key>
-				<string>ext4_x64.efi</string>
+				<string>Ext4Dxe.efi</string>
 			</dict>
 			<dict>
 				<key>Arguments</key>
@@ -1531,8 +1626,178 @@
 				<string></string>
 				<key>Enabled</key>
 				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>DpcDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>SnpDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>MnpDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>ArpDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>Dhcp4Dxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>Ip4Dxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>Udp4Dxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>TcpDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>DnsDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>HttpDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>HttpUtilitiesDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>HttpBootDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
 				<key>Path</key>
 				<string>OpenLinuxBoot.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>ResetNvramEntry.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>ToggleSipEntry.efi</string>
 			</dict>
 		</array>
 		<key>Input</key>
