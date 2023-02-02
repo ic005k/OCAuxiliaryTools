@@ -13,6 +13,8 @@ extern int red;
 dlgDatabase::dlgDatabase(QWidget *parent)
     : QDialog(parent), ui(new Ui::dlgDatabase) {
   ui->setupUi(this);
+  ui->btnAMD->hide();
+  ui->btnAMDOnline->hide();
 
   Method::init_UIWidget(this, red);
   processPing = new QProcess;
