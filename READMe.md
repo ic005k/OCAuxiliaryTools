@@ -1,4 +1,3 @@
-[English](https://github.com/ic005k/QtOpenCoreConfig/blob/master/READMe.md) 
 
 # OpenCore Auxiliary Tools (OCAT)
 
