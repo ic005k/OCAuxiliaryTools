@@ -278,6 +278,11 @@ void SyncOCDialog::closeEvent(QCloseEvent* event) {
   else
     ocFromDev = "";
   if (blDEV) mw_one->dlgSyncOC->ui->lblOCFrom->setText(ocFromDev);
+
+  Reg.setValue("sync-x", this->x());
+  Reg.setValue("sync-y", this->y());
+  Reg.setValue("sync-width", this->width());
+  Reg.setValue("sync-height", this->height());
 }
 
 void SyncOCDialog::writeCheckStateINI() {

@@ -8881,6 +8881,24 @@ void MainWindow::on_actionQuit_triggered() { this->close(); }
 
 void MainWindow::on_actionUpgrade_OC_triggered() {
   dlgSyncOC->init_Sync_OC_Table();
+
+  // Resize Sync Windows
+  int x, y, w, h;
+  x = Reg.value("sync-x", "0").toInt();
+  y = Reg.value("sync-y", "0").toInt();
+  w = Reg.value("sync-width", "900").toInt();
+  h = Reg.value("sync-height", "500").toInt();
+  if (x < 0) {
+    w = w + x;
+    x = 0;
+  }
+  if (y < 0) {
+    h = h + y;
+    y = 0;
+  }
+  QRect rect(x, y, w, h);
+  dlgSyncOC->move(rect.topLeft());
+  dlgSyncOC->resize(rect.size());
 }
 
 void MainWindow::initColorValue() {
