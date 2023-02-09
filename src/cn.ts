@@ -2708,7 +2708,7 @@ Apple输入</translation>
         <location filename="mainwindow.ui" line="12362"/>
         <source>Settings...</source>
         <oldsource>Settings</oldsource>
-        <translation>设置</translation>
+        <translation type="unfinished">设置...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="12419"/>
