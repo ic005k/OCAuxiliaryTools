@@ -4768,10 +4768,6 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>停止</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation type="vanished">设置</translation>
-    </message>
-    <message>
         <location filename="syncocdialog.ui" line="325"/>
         <source>OpenCore development version update source</source>
         <translation>OpenCore开发版的更新源</translation>
