@@ -12359,7 +12359,7 @@ QToolBar {border:none;}</string>
   </action>
   <action name="actionPreferences">
    <property name="text">
-    <string>Settings</string>
+    <string>Settings...</string>
    </property>
   </action>
   <action name="actionDocumentation">

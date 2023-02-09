@@ -5010,7 +5010,7 @@ void MainWindow::init_FileMenu() {
   ui->actionSave_As->setShortcut(tr("ctrl+shift+s"));
 
   // Preferences
-  ui->actionPreferences->setMenuRole(QAction::PreferencesRole);
+  // ui->actionPreferences->setMenuRole(QAction::PreferencesRole);
 
   // Quit
   ui->actionQuit->setMenuRole(QAction::QuitRole);
