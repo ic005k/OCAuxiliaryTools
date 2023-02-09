@@ -1952,8 +1952,7 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
         <translation>OpenCore 开发版</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12362"/>
-        <location filename="mainwindow.cpp" line="9763"/>
+        <location filename="mainwindow.cpp" line="9781"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
@@ -2688,8 +2687,8 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9272"/>
-        <location filename="mainwindow.cpp" line="9057"/>
-        <location filename="mainwindow.cpp" line="9062"/>
+        <location filename="mainwindow.cpp" line="9075"/>
+        <location filename="mainwindow.cpp" line="9080"/>
         <source>Select date</source>
         <translation>选择日期</translation>
     </message>
@@ -2704,6 +2703,11 @@ Apple输入</translation>
         <location filename="mainwindow.ui" line="9593"/>
         <source>PointerPollMax</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="12362"/>
+        <source>Settings</source>
+        <translation>设置</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="12419"/>
@@ -4091,13 +4095,13 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation type="vanished">错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10001"/>
-        <location filename="mainwindow.cpp" line="10031"/>
+        <location filename="mainwindow.cpp" line="10019"/>
+        <location filename="mainwindow.cpp" line="10049"/>
         <source>This is not a valid Clover configuration file.</source>
         <translation>这不是一个有效的Clover配置文件。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10071"/>
+        <location filename="mainwindow.cpp" line="10089"/>
         <source>You cannot add a new key field to a page where a data table exists.</source>
         <translation>不能在存在数据表的页面上添加一个新的键字段。</translation>
     </message>
@@ -4251,8 +4255,8 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="mainwindow.ui" line="157"/>
-        <location filename="mainwindow.cpp" line="9059"/>
-        <location filename="mainwindow.cpp" line="9060"/>
+        <location filename="mainwindow.cpp" line="9077"/>
+        <location filename="mainwindow.cpp" line="9078"/>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
@@ -4439,12 +4443,12 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>复制行到文本</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9162"/>
+        <location filename="mainwindow.cpp" line="9180"/>
         <source>OK !</source>
         <translation>验证通过！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9188"/>
+        <location filename="mainwindow.cpp" line="9206"/>
         <source>There is a issue with the configuration file.</source>
         <translation>配置文件有问题</translation>
     </message>
@@ -4682,8 +4686,8 @@ A continuously updated variable list can be found in a corresponding document: N
     <name>SyncOCDialog</name>
     <message>
         <location filename="syncocdialog.ui" line="14"/>
-        <location filename="syncocdialog.cpp" line="726"/>
-        <location filename="syncocdialog.cpp" line="729"/>
+        <location filename="syncocdialog.cpp" line="733"/>
+        <location filename="syncocdialog.cpp" line="736"/>
         <source>Sync OC</source>
         <translation>同步OC</translation>
     </message>
@@ -4701,6 +4705,11 @@ A continuously updated variable list can be found in a corresponding document: N
         <location filename="syncocdialog.ui" line="24"/>
         <source>Kexts</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="syncocdialog.ui" line="95"/>
+        <source>Settings</source>
+        <translation>设置</translation>
     </message>
     <message>
         <location filename="syncocdialog.ui" line="207"/>
@@ -4738,9 +4747,8 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>全选</translation>
     </message>
     <message>
-        <location filename="syncocdialog.ui" line="95"/>
         <source>Preferences</source>
-        <translation>偏好设置</translation>
+        <translation type="vanished">偏好设置</translation>
     </message>
     <message>
         <location filename="syncocdialog.ui" line="102"/>
@@ -4805,7 +4813,8 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="syncocdialog.ui" line="399"/>
-        <location filename="syncocdialog.cpp" line="880"/>
+        <location filename="syncocdialog.cpp" line="500"/>
+        <location filename="syncocdialog.cpp" line="887"/>
         <source>Get OpenCore</source>
         <translation>获取 OpenCore</translation>
     </message>
@@ -4841,7 +4850,7 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="109"/>
-        <location filename="syncocdialog.cpp" line="892"/>
+        <location filename="syncocdialog.cpp" line="899"/>
         <source>Kexts update check or OpenCore database upgrade is in progress, please wait for it to finish.</source>
         <translation>Kexts更新检查或者OpenCore数据库升级正在进行中，请等待它结束。</translation>
     </message>
@@ -4853,49 +4862,49 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="255"/>
-        <location filename="syncocdialog.cpp" line="775"/>
+        <location filename="syncocdialog.cpp" line="782"/>
         <source>Current File: </source>
         <translation>当前文件：</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="257"/>
-        <location filename="syncocdialog.cpp" line="777"/>
+        <location filename="syncocdialog.cpp" line="784"/>
         <source>Available File: </source>
         <translation>可用文件：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="333"/>
+        <location filename="syncocdialog.cpp" line="338"/>
         <source>The OpenCore database upgrade is in progress, please wait for it to finish.</source>
         <translation>OpenCore数据库升级正在进行中，请等待它结束。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="1062"/>
+        <location filename="syncocdialog.cpp" line="1069"/>
         <source>Please wait while we get the download information of Kexts development version...</source>
         <translation>正在获取Kexts开发版的下载信息，请稍等...</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="784"/>
+        <location filename="syncocdialog.cpp" line="791"/>
         <source>Kexts update check is in progress, please wait for it to complete.</source>
         <translation>Kexts更新检查正在进行中，请等待它完成。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="799"/>
+        <location filename="syncocdialog.cpp" line="806"/>
         <source>Please enter an available OpenCore development version update source.</source>
         <translation>请输入一个可用的OpenCore开发版更新源。</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="30"/>
         <location filename="syncocdialog.cpp" line="277"/>
-        <location filename="syncocdialog.cpp" line="883"/>
-        <location filename="syncocdialog.cpp" line="917"/>
+        <location filename="syncocdialog.cpp" line="890"/>
+        <location filename="syncocdialog.cpp" line="924"/>
         <source> Source </source>
         <translation>来源</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="71"/>
-        <location filename="syncocdialog.cpp" line="546"/>
-        <location filename="syncocdialog.cpp" line="848"/>
-        <location filename="syncocdialog.cpp" line="866"/>
+        <location filename="syncocdialog.cpp" line="553"/>
+        <location filename="syncocdialog.cpp" line="855"/>
+        <location filename="syncocdialog.cpp" line="873"/>
         <source>Latest Version</source>
         <translation>最新版</translation>
     </message>
@@ -4936,7 +4945,7 @@ A continuously updated variable list can be found in a corresponding document: N
     <name>dlgDatabase</name>
     <message>
         <location filename="dlgdatabase.ui" line="14"/>
-        <location filename="dlgdatabase.cpp" line="80"/>
+        <location filename="dlgdatabase.cpp" line="82"/>
         <source>Configuration file database</source>
         <translation>配置文件数据库</translation>
     </message>
@@ -4977,13 +4986,13 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>打开配置文件目录</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.cpp" line="31"/>
+        <location filename="dlgdatabase.cpp" line="33"/>
         <source>Configs</source>
         <oldsource>Config Database</oldsource>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="dlgdatabase.cpp" line="34"/>
+        <location filename="dlgdatabase.cpp" line="36"/>
         <source>Comment</source>
         <translation>说明</translation>
     </message>

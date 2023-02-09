@@ -92,7 +92,7 @@
        <item>
         <widget class="QToolButton" name="btnSet">
          <property name="text">
-          <string>Preferences</string>
+          <string>Settings</string>
          </property>
         </widget>
        </item>
