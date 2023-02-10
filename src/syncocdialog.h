@@ -57,7 +57,9 @@ class SyncOCDialog : public QDialog {
   void on_ProgBarvalueChanged(QProgressBar *m_bar);
   QString getKextHtmlInfo(QString url, bool writeFile);
   QString getKextDevDL(QString bufferJson, QString kextName);
- public slots:
+  void saveWindowsPos();
+  void resizeWindowsPos();
+  public slots:
   void on_btnStop_clicked();
   void on_listOpenCore_currentRowChanged(int currentRow);
 

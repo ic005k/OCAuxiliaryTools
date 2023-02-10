@@ -279,10 +279,34 @@ void SyncOCDialog::closeEvent(QCloseEvent* event) {
     ocFromDev = "";
   if (blDEV) mw_one->dlgSyncOC->ui->lblOCFrom->setText(ocFromDev);
 
+  saveWindowsPos();
+}
+
+void SyncOCDialog::saveWindowsPos() {
   Reg.setValue("sync-x", this->x());
   Reg.setValue("sync-y", this->y());
   Reg.setValue("sync-width", this->width());
   Reg.setValue("sync-height", this->height());
+}
+
+void SyncOCDialog::resizeWindowsPos() {
+  // Resize Sync Windows
+  int x, y, w, h;
+  x = Reg.value("sync-x", "0").toInt();
+  y = Reg.value("sync-y", "0").toInt();
+  w = Reg.value("sync-width", "900").toInt();
+  h = Reg.value("sync-height", "500").toInt();
+  if (x < 0) {
+    w = w + x;
+    x = 0;
+  }
+  if (y < 0) {
+    h = h + y;
+    y = 0;
+  }
+  QRect rect(x, y, w, h);
+  move(rect.topLeft());
+  resize(rect.size());
 }
 
 void SyncOCDialog::writeCheckStateINI() {
