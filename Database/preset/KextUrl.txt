@@ -41,3 +41,4 @@ EFICheckDisabler.kext | https://github.com/w19996/EFICheckDisabler
 GenericCardReaderFriend.kext | https://github.com/0xFireWolf/GenericCardReaderFriend
 BlueToolFixup.kext | https://github.com/acidanthera/BrcmPatchRAM
 CryptexFixup.kext | https://github.com/acidanthera/CryptexFixup
+EmeraldSDHC.kext | https://github.com/acidanthera/EmeraldSDHC
