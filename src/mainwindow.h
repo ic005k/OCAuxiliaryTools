@@ -989,7 +989,8 @@ class MainWindow : public QMainWindow {
   void on_actionOpenCoreChineseDoc_triggered();
 
   void dataClassChange_uefi_drivers();
-  private:
+
+ private:
   bool isDrag;
   QPoint m_position;
   bool LoadRightTable = false;

@@ -8882,7 +8882,8 @@ void MainWindow::on_actionQuit_triggered() { this->close(); }
 void MainWindow::on_actionUpgrade_OC_triggered() {
   dlgSyncOC->init_Sync_OC_Table();
   dlgSyncOC->resizeWindowsPos();
-  dlgSyncOC->saveWindowsPos();
+
+  myDlgPreference->ui->rbtnAPI->click();
 }
 
 void MainWindow::initColorValue() {
