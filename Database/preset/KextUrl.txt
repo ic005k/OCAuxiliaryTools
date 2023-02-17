@@ -35,6 +35,7 @@ SMCAMDProcessor.kext | https://github.com/trulyspinach/SMCAMDProcessor
 USBInjectAll.kext | https://github.com/daliansky/OS-X-USB-Inject-All
 IntelBluetoothFirmware.kext | https://github.com/OpenIntelWireless/IntelBluetoothFirmware
 IntelBluetoothInjector.kext | https://github.com/OpenIntelWireless/IntelBluetoothFirmware
+IntelBTPatcher.kext | https://github.com/OpenIntelWireless/IntelBluetoothFirmware
 AirportItlwm.kext | https://github.com/OpenIntelWireless/itlwm
 HoRNDIS9.2.kext | https://github.com/w19996/HoRNDIS
 EFICheckDisabler.kext | https://github.com/w19996/EFICheckDisabler
