@@ -43,3 +43,4 @@ GenericCardReaderFriend.kext | https://github.com/0xFireWolf/GenericCardReaderFr
 BlueToolFixup.kext | https://github.com/acidanthera/BrcmPatchRAM
 CryptexFixup.kext | https://github.com/acidanthera/CryptexFixup
 EmeraldSDHC.kext | https://github.com/acidanthera/EmeraldSDHC
+CpuTopologyRebuild.kext | https://github.com/b00t0x/CpuTopologyRebuild
