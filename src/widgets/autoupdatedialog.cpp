@@ -1,5 +1,5 @@
 #include "autoupdatedialog.h"
-
+#include "fileoperation.h"
 #include "mainwindow.h"
 #include "ui_autoupdatedialog.h"
 
@@ -21,8 +21,7 @@ AutoUpdateDialog::AutoUpdateDialog(QWidget* parent)
   Init();
 
   tempDir = QDir::homePath() + "/tempocat/";
-  MainWindow* mainWindow = qobject_cast<MainWindow*>(parent);
-  if (mainWindow) mainWindow->deleteDirfile(tempDir);
+  FileOperation::deleteDir(tempDir);
 
   ui->textEdit->setVisible(false);
 }

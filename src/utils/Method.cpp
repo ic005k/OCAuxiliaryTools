@@ -490,11 +490,11 @@ void Method::updateOpenCore() {
     dir.mkpath(mw_one->userDataBaseDir + "DEBUG/");
     dir.mkpath(mw_one->userDataBaseDir + "doc/");
     dir.mkpath(mw_one->userDataBaseDir + "BaseConfigs/");
-    mw_one->deleteDirfile(mw_one->userDataBaseDir + "mac/");
+    FileOperation::deleteDir(mw_one->userDataBaseDir + "mac/");
     dir.mkpath(mw_one->userDataBaseDir + "mac/");
-    mw_one->deleteDirfile(mw_one->userDataBaseDir + "win/");
+    FileOperation::deleteDir(mw_one->userDataBaseDir + "win/");
     dir.mkpath(mw_one->userDataBaseDir + "win/");
-    mw_one->deleteDirfile(mw_one->userDataBaseDir + "linux/");
+    FileOperation::deleteDir(mw_one->userDataBaseDir + "linux/");
     dir.mkpath(mw_one->userDataBaseDir + "linux/");
 
     if (!QDir(strSEFI).exists()) strSEFI = tempDir + "EFI/";
@@ -1244,9 +1244,8 @@ void Method::generateEFI(QString file) {
   else
     pathSource = mw_one->userDataBaseDir + "DEBUG/";
 
-  QString pathTarget = QDir::homePath() + "/Desktop/EFI/";
-
-  mw_one->deleteDirfile(pathTarget);
+  const QString &pathTarget = QDir::homePath() + "/Desktop/EFI/";
+  FileOperation::deleteDir(pathTarget);
 
   if (dir.mkpath(pathTarget)) {
   }
