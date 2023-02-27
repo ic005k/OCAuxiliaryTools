@@ -24,9 +24,16 @@ public:
      * @param coverFileIfExist 是否覆盖已存在文件
      * @return 拷贝成功与否
      */
-    static bool copyFileToPath(QString sourceFile,
+    static bool copyFileToPath(const QString &sourceFile,
                                QString toFile,
                                bool coverFileIfExist);
+
+    /**
+     * @brief deleteDir
+     * @param dirPath
+     * @return
+     */
+    static bool deleteDir(const QString &dirPath);
 
 };
 

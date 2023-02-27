@@ -309,10 +309,6 @@ class MainWindow : public QMainWindow {
   void addEFITools(QStringList FileName);
 
   void addEFIDrivers(QStringList FileName);
-
-  int deleteDirfile(QString dirName);
-
-  bool DeleteDirectory(const QString& path);
   
   QString getWMIC(const QString& cmd);
   QString getCpuName();

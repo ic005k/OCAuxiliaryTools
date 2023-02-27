@@ -5992,61 +5992,6 @@ int MainWindow::parse_UpdateJSON(QString str) {
   return 0;
 }
 
-int MainWindow::deleteDirfile(QString dirName) {
-  QDir directory(dirName);
-  if (!directory.exists()) {
-    return true;
-  }
-
-  QString srcPath = QDir::toNativeSeparators(dirName);
-  if (!srcPath.endsWith(QDir::separator())) srcPath += QDir::separator();
-
-  QStringList fileNames = directory.entryList(
-      QDir::AllEntries | QDir::NoDotAndDotDot | QDir::Hidden);
-  bool error = false;
-  for (QStringList::size_type i = 0; i != fileNames.size(); ++i) {
-    QString filePath = srcPath + fileNames.at(i);
-    QFileInfo fileInfo(filePath);
-    if (fileInfo.isFile() || fileInfo.isSymLink()) {
-      QFile::setPermissions(filePath, QFile::WriteOwner);
-      if (!QFile::remove(filePath)) {
-        error = true;
-      }
-    } else if (fileInfo.isDir()) {
-      if (!deleteDirfile(filePath)) {
-        error = true;
-      }
-    }
-  }
-
-  if (!directory.rmdir(QDir::toNativeSeparators(directory.path()))) {
-    error = true;
-  }
-  return !error;
-}
-
-bool MainWindow::DeleteDirectory(const QString& path) {
-  if (path.isEmpty()) {
-    return false;
-  }
-
-  QDir dir(path);
-  if (!dir.exists()) {
-    return true;
-  }
-
-  dir.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot);
-  QFileInfoList fileList = dir.entryInfoList();
-  foreach (QFileInfo fi, fileList) {
-    if (fi.isFile()) {
-      fi.dir().remove(fi.fileName());
-    } else {
-      DeleteDirectory(fi.absoluteFilePath());
-    }
-  }
-  return dir.rmpath(dir.absolutePath());
-}
-
 int MainWindow::getTextWidth(QString str, QWidget* w) {
   str = str.trimmed();
   str = str + "    ";

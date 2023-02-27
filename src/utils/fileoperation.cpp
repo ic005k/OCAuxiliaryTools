@@ -36,7 +36,7 @@ bool FileOperation::copyDirectoryFiles(const QString &fromDir, const QString &to
     return true;
 }
 
-bool FileOperation::copyFileToPath(QString sourceFile, QString toFile, bool coverFileIfExist)
+bool FileOperation::copyFileToPath(const QString &sourceFile, QString toFile, bool coverFileIfExist)
 {
     toFile.replace("\\", "/");
     if (sourceFile == toFile) {
@@ -56,4 +56,16 @@ bool FileOperation::copyFileToPath(QString sourceFile, QString toFile, bool cove
         return false;
     }
     return true;
+}
+
+bool FileOperation::deleteDir(const QString &dirPath)
+{
+    const QString &nativePath = QDir::toNativeSeparators(dirPath);
+
+    QDir directory(nativePath);
+    if (!directory.exists()) {
+        return true;
+    }
+
+    return directory.removeRecursively();
 }
