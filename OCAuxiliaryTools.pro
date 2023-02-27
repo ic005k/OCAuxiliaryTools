@@ -20,7 +20,7 @@ unix:!macx:{
     QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN/platforms\'"
 }
 
-TRANSLATIONS += cn.ts
+TRANSLATIONS += $$PWD/translations/cn.ts
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
