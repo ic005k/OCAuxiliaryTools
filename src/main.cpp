@@ -142,36 +142,26 @@ int main(int argc, char *argv[]) {
 }
 
 void loadLocal() {
-  static QTranslator translator;
-  static QTranslator translator1;
-  static QTranslator translator2;
+    static QTranslator translator;
+    static QTranslator translator1;
 
-  QLocale locale;
-  if (locale.language() == QLocale::English) {
-    zh_cn = false;
-
-  } else if (locale.language() == QLocale::Chinese) {
-    bool tr = false;
-    tr = translator.load(":/cn.qm");
-    if (tr) {
-      qApp->installTranslator(&translator);
-      zh_cn = true;
+    QLocale locale;
+    QLocale::Language type = locale.language();
+    switch (type) {
+    case QLocale::English:
+        zh_cn = false;
+        break;
+    case QLocale::Chinese:
+        if (translator.load(":/translations/cn.qm")) {
+            qApp->installTranslator(&translator);
+            zh_cn = true;
+        }
+        if (translator1.load(":/translations/qt_zh_CN.qm")) {
+            qApp->installTranslator(&translator1);
+            zh_cn = true;
+        }
+        break;
+    default:
+        break;
     }
-
-    bool tr1 = false;
-    tr1 = translator1.load(":/qt_zh_CN.qm");
-    if (tr1) {
-      qApp->installTranslator(&translator1);
-      zh_cn = true;
-    }
-
-    bool tr2 = false;
-    tr2 = translator2.load(":/widgets_zh_cn.qm");
-    if (tr2) {
-      qApp->installTranslator(&translator2);
-      zh_cn = true;
-    }
-
-    // ui->retranslateUi(this);
-  }
 }

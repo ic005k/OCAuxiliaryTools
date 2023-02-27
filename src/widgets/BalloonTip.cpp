@@ -99,14 +99,6 @@ BalloonTip::BalloonTip(QMessageBox::Icon icon, const QString &title,
 
   if (msgLabel->sizeHint().width() > limit) {
     msgLabel->setWordWrap(true);
-    /*if (msgLabel->sizeHint().width() > limit) {
-        msgLabel->d_func()->ensureTextControl();
-        if (QWidgetTextControl *control = msgLabel->d_func()->control) {
-            QTextOption opt = control->document()->defaultTextOption();
-            opt.setWrapMode(QTextOption::WrapAnywhere);
-            control->document()->setDefaultTextOption(opt);
-        }
-    }*/
 
     // Here we allow the text being much smaller than the balloon widget
     // to emulate the weird standard windows behavior.
