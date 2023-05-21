@@ -55,20 +55,20 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="12131"/>
+        <location filename="mainwindow.ui" line="12132"/>
         <source>Open</source>
         <oldsource>打开-Open</oldsource>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12136"/>
+        <location filename="mainwindow.ui" line="12137"/>
         <location filename="mainwindow.cpp" line="4066"/>
         <source>Save</source>
         <oldsource>保存-Save</oldsource>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12141"/>
+        <location filename="mainwindow.ui" line="12142"/>
         <source>Save As...</source>
         <oldsource>另存-Save As...</oldsource>
         <translation>另存...</translation>
@@ -172,7 +172,7 @@
         <translation>ACPI 电源管理</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12056"/>
+        <location filename="mainwindow.ui" line="12057"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
@@ -1180,12 +1180,12 @@ Console logging prints less than all the other variants. Depending on the build 
 通用</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12092"/>
+        <location filename="mainwindow.ui" line="12093"/>
         <source>toolBar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12221"/>
+        <location filename="mainwindow.ui" line="12222"/>
         <source>Update Check</source>
         <oldsource>CheckUpdate</oldsource>
         <translation>检查更新</translation>
@@ -1467,7 +1467,7 @@ Console logging prints less than all the other variants. Depending on the build 
         <location filename="mainwindow.ui" line="7978"/>
         <location filename="mainwindow.ui" line="10119"/>
         <location filename="mainwindow.ui" line="11897"/>
-        <location filename="mainwindow.ui" line="12393"/>
+        <location filename="mainwindow.ui" line="12397"/>
         <source>Del</source>
         <translation></translation>
     </message>
@@ -1867,117 +1867,117 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12178"/>
+        <location filename="mainwindow.ui" line="12179"/>
         <source>Xplist</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12196"/>
+        <location filename="mainwindow.ui" line="12197"/>
         <source>Mount ESP</source>
         <translation>挂载ESP</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12211"/>
+        <location filename="mainwindow.ui" line="12212"/>
         <source>Import Master</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12216"/>
+        <location filename="mainwindow.ui" line="12217"/>
         <source>OpenCore Documentation</source>
         <translation>OpenCore文档</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12231"/>
+        <location filename="mainwindow.ui" line="12232"/>
         <source>Generate EFI on the Desktop</source>
         <translation>在桌面上生成EFI文件夹</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12239"/>
+        <location filename="mainwindow.ui" line="12240"/>
         <source>Open Database Directory</source>
         <translation>打开数据库目录</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12260"/>
+        <location filename="mainwindow.ui" line="12261"/>
         <source>Previous</source>
         <translation>上一个</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12265"/>
+        <location filename="mainwindow.ui" line="12266"/>
         <source>Next</source>
         <translation>下一个</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12294"/>
+        <location filename="mainwindow.ui" line="12295"/>
         <source>Ctrl+6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12299"/>
+        <location filename="mainwindow.ui" line="12300"/>
         <source>OpenCore Differences</source>
         <translation>OpenCore版本差异说明</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12304"/>
+        <location filename="mainwindow.ui" line="12305"/>
         <source>Latest Release</source>
         <translation>最新版本</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12309"/>
+        <location filename="mainwindow.ui" line="12310"/>
         <source>Download Upgrade Packages</source>
         <translation>下载升级包</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12314"/>
+        <location filename="mainwindow.ui" line="12315"/>
         <source>Browse Catalog</source>
         <translation>浏览目录</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12317"/>
+        <location filename="mainwindow.ui" line="12318"/>
         <source>Ctrl+8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12328"/>
+        <location filename="mainwindow.ui" line="12329"/>
         <source>Automatically Check for Updates</source>
         <translation>自动检查更新</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12349"/>
+        <location filename="mainwindow.ui" line="12350"/>
         <source>Ctrl+7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12357"/>
+        <location filename="mainwindow.ui" line="12358"/>
         <source>OpenCore DEV</source>
         <translation>OpenCore 开发版</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9781"/>
+        <location filename="mainwindow.cpp" line="9773"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12367"/>
+        <location filename="mainwindow.ui" line="12371"/>
         <source>OCAuxiliaryTools Documentation</source>
         <translation>OCAuxiliaryTools 文档</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12401"/>
+        <location filename="mainwindow.ui" line="12405"/>
         <source>OpenCore DEBUG</source>
         <translation>OpenCore 调试版</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12414"/>
+        <location filename="mainwindow.ui" line="12418"/>
         <source>Initialize Database for Linux</source>
         <translation>初始化Linux数据库</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12406"/>
+        <location filename="mainwindow.ui" line="12410"/>
         <source>New Key Field</source>
         <translation>新建 键 字段</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12409"/>
+        <location filename="mainwindow.ui" line="12413"/>
         <source>Ctrl+K</source>
         <translation></translation>
     </message>
@@ -2007,22 +2007,22 @@ Note 2 : While this quirk can increase GPU PCI BAR sizes, this will not work on 
         <location filename="mainwindow.ui" line="7950"/>
         <location filename="mainwindow.ui" line="10091"/>
         <location filename="mainwindow.ui" line="11869"/>
-        <location filename="mainwindow.ui" line="12385"/>
+        <location filename="mainwindow.ui" line="12389"/>
         <source>+</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12333"/>
+        <location filename="mainwindow.ui" line="12334"/>
         <source>Edit Preset</source>
         <translation>编辑预置文件</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12338"/>
+        <location filename="mainwindow.ui" line="12339"/>
         <source>OCAuxiliaryTools  Documentation</source>
         <translation>OCAuxiliaryTools 文档</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12346"/>
+        <location filename="mainwindow.ui" line="12347"/>
         <source>Backup EFI to Desktop &quot;Backup EFI&quot;</source>
         <translation>备份EFI到桌面&quot;Backup EFI&quot;目录</translation>
     </message>
@@ -2076,37 +2076,37 @@ Description: Enable AVX vector acceleration of SHA-512 and SHA-384 hashing algor
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12162"/>
+        <location filename="mainwindow.ui" line="12163"/>
         <source>Ctrl+T</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12170"/>
+        <location filename="mainwindow.ui" line="12171"/>
         <source>Ctrl+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12234"/>
+        <location filename="mainwindow.ui" line="12235"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12242"/>
+        <location filename="mainwindow.ui" line="12243"/>
         <source>Ctrl+5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12247"/>
+        <location filename="mainwindow.ui" line="12248"/>
         <source>New Window</source>
         <translation>新建窗口</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12250"/>
+        <location filename="mainwindow.ui" line="12251"/>
         <source>Ctrl+N</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12255"/>
+        <location filename="mainwindow.ui" line="12256"/>
         <location filename="mainwindow.cpp" line="5251"/>
         <source>Search</source>
         <translation>搜索</translation>
@@ -2293,17 +2293,16 @@ trim.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12201"/>
+        <location filename="mainwindow.ui" line="12202"/>
         <source>OC Validate</source>
         <translation>OC验证</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12226"/>
         <source>Database</source>
-        <translation>数据库</translation>
+        <translation type="vanished">数据库</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12151"/>
+        <location filename="mainwindow.ui" line="12152"/>
         <source>OpenCore Forum</source>
         <translation>OpenCore讨论区（国际）</translation>
     </message>
@@ -2687,8 +2686,8 @@ trim.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="9272"/>
-        <location filename="mainwindow.cpp" line="9075"/>
-        <location filename="mainwindow.cpp" line="9080"/>
+        <location filename="mainwindow.cpp" line="9060"/>
+        <location filename="mainwindow.cpp" line="9065"/>
         <source>Select date</source>
         <translation>选择日期</translation>
     </message>
@@ -2705,13 +2704,23 @@ Apple输入</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12362"/>
-        <source>Settings...</source>
-        <oldsource>Settings</oldsource>
-        <translation type="unfinished">设置...</translation>
+        <location filename="mainwindow.ui" line="12227"/>
+        <source>Configuration Template</source>
+        <translation>配置文件模板</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12419"/>
+        <location filename="mainwindow.ui" line="12363"/>
+        <source>Settings...</source>
+        <oldsource>Settings</oldsource>
+        <translation>设置...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="12366"/>
+        <source>Ctrl+,</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="12423"/>
         <source>OpenCore Online Chinese Documentation</source>
         <translation>OpenCore 简体中文参考手册</translation>
     </message>
@@ -2827,32 +2836,32 @@ Note: This value should be disabled on most types of firmware but is left config
         <translation>编辑</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12159"/>
+        <location filename="mainwindow.ui" line="12160"/>
         <source>OpenCore Factory</source>
         <translation>OpenCore工厂</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12167"/>
+        <location filename="mainwindow.ui" line="12168"/>
         <source>OpenCore</source>
         <translation>OpenCore官方</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12183"/>
+        <location filename="mainwindow.ui" line="12184"/>
         <source>Xiasl</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12188"/>
+        <location filename="mainwindow.ui" line="12189"/>
         <source>OpenCanopyIcons</source>
         <translation>OC图标合集</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12283"/>
+        <location filename="mainwindow.ui" line="12284"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12286"/>
+        <location filename="mainwindow.ui" line="12287"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
@@ -2895,7 +2904,7 @@ Note: This value should be disabled on most types of firmware but is left config
         <translation>处理器主要和次要类型的组合。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12206"/>
+        <location filename="mainwindow.ui" line="12207"/>
         <source>Export Master</source>
         <oldsource>ImportMaster</oldsource>
         <translation></translation>
@@ -3791,12 +3800,12 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12270"/>
+        <location filename="mainwindow.ui" line="12271"/>
         <source>Bug Report</source>
         <translation>报告问题</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12275"/>
+        <location filename="mainwindow.ui" line="12276"/>
         <source>Discussion Forum</source>
         <translation>讨论区</translation>
     </message>
@@ -3967,7 +3976,7 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12146"/>
+        <location filename="mainwindow.ui" line="12147"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -4030,7 +4039,7 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12291"/>
+        <location filename="mainwindow.ui" line="12292"/>
         <location filename="mainwindow.cpp" line="314"/>
         <source>Upgrade OpenCore and Kexts</source>
         <oldsource>Sync OC main program (upgrade OC and Kexts)</oldsource>
@@ -4096,36 +4105,36 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation type="vanished">错误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10019"/>
-        <location filename="mainwindow.cpp" line="10049"/>
+        <location filename="mainwindow.cpp" line="10011"/>
+        <location filename="mainwindow.cpp" line="10041"/>
         <source>This is not a valid Clover configuration file.</source>
         <translation>这不是一个有效的Clover配置文件。</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="10089"/>
+        <location filename="mainwindow.cpp" line="10081"/>
         <source>You cannot add a new key field to a page where a data table exists.</source>
         <translation>不能在存在数据表的页面上添加一个新的键字段。</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12382"/>
+        <location filename="mainwindow.ui" line="12386"/>
         <location filename="mainwindow.cpp" line="8329"/>
         <source>Add Item</source>
         <translation>增加条目</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12390"/>
+        <location filename="mainwindow.ui" line="12394"/>
         <location filename="mainwindow.cpp" line="8330"/>
         <source>Delete Item</source>
         <translation>删除条目</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12372"/>
+        <location filename="mainwindow.ui" line="12376"/>
         <location filename="mainwindow.cpp" line="8331"/>
         <source>Move Up</source>
         <translation>上移</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="12377"/>
+        <location filename="mainwindow.ui" line="12381"/>
         <location filename="mainwindow.cpp" line="8332"/>
         <source>Move Down</source>
         <translation>下移</translation>
@@ -4256,8 +4265,8 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="mainwindow.ui" line="157"/>
-        <location filename="mainwindow.cpp" line="9077"/>
-        <location filename="mainwindow.cpp" line="9078"/>
+        <location filename="mainwindow.cpp" line="9062"/>
+        <location filename="mainwindow.cpp" line="9063"/>
         <source>Hide</source>
         <translation>隐藏</translation>
     </message>
@@ -4444,12 +4453,17 @@ A continuously updated variable list can be found in a corresponding document: N
         <translation>复制行到文本</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9180"/>
+        <location filename="mainwindow.cpp" line="9114"/>
+        <source> Intel CPU configuration template </source>
+        <translation>Intel CPU 配置文件模板</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="9172"/>
         <source>OK !</source>
         <translation>验证通过！</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="9206"/>
+        <location filename="mainwindow.cpp" line="9198"/>
         <source>There is a issue with the configuration file.</source>
         <translation>配置文件有问题</translation>
     </message>
@@ -4687,8 +4701,8 @@ A continuously updated variable list can be found in a corresponding document: N
     <name>SyncOCDialog</name>
     <message>
         <location filename="syncocdialog.ui" line="14"/>
-        <location filename="syncocdialog.cpp" line="733"/>
-        <location filename="syncocdialog.cpp" line="736"/>
+        <location filename="syncocdialog.cpp" line="757"/>
+        <location filename="syncocdialog.cpp" line="760"/>
         <source>Sync OC</source>
         <translation>同步OC</translation>
     </message>
@@ -4814,8 +4828,8 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="syncocdialog.ui" line="399"/>
-        <location filename="syncocdialog.cpp" line="500"/>
-        <location filename="syncocdialog.cpp" line="887"/>
+        <location filename="syncocdialog.cpp" line="524"/>
+        <location filename="syncocdialog.cpp" line="911"/>
         <source>Get OpenCore</source>
         <translation>获取 OpenCore</translation>
     </message>
@@ -4851,7 +4865,7 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="109"/>
-        <location filename="syncocdialog.cpp" line="899"/>
+        <location filename="syncocdialog.cpp" line="923"/>
         <source>Kexts update check or OpenCore database upgrade is in progress, please wait for it to finish.</source>
         <translation>Kexts更新检查或者OpenCore数据库升级正在进行中，请等待它结束。</translation>
     </message>
@@ -4863,49 +4877,49 @@ A continuously updated variable list can be found in a corresponding document: N
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="255"/>
-        <location filename="syncocdialog.cpp" line="782"/>
+        <location filename="syncocdialog.cpp" line="806"/>
         <source>Current File: </source>
         <translation>当前文件：</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="257"/>
-        <location filename="syncocdialog.cpp" line="784"/>
+        <location filename="syncocdialog.cpp" line="808"/>
         <source>Available File: </source>
         <translation>可用文件：</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="338"/>
+        <location filename="syncocdialog.cpp" line="362"/>
         <source>The OpenCore database upgrade is in progress, please wait for it to finish.</source>
         <translation>OpenCore数据库升级正在进行中，请等待它结束。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="1069"/>
+        <location filename="syncocdialog.cpp" line="1093"/>
         <source>Please wait while we get the download information of Kexts development version...</source>
         <translation>正在获取Kexts开发版的下载信息，请稍等...</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="791"/>
+        <location filename="syncocdialog.cpp" line="815"/>
         <source>Kexts update check is in progress, please wait for it to complete.</source>
         <translation>Kexts更新检查正在进行中，请等待它完成。</translation>
     </message>
     <message>
-        <location filename="syncocdialog.cpp" line="806"/>
+        <location filename="syncocdialog.cpp" line="830"/>
         <source>Please enter an available OpenCore development version update source.</source>
         <translation>请输入一个可用的OpenCore开发版更新源。</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="30"/>
         <location filename="syncocdialog.cpp" line="277"/>
-        <location filename="syncocdialog.cpp" line="890"/>
-        <location filename="syncocdialog.cpp" line="924"/>
+        <location filename="syncocdialog.cpp" line="914"/>
+        <location filename="syncocdialog.cpp" line="948"/>
         <source> Source </source>
         <translation>来源</translation>
     </message>
     <message>
         <location filename="syncocdialog.cpp" line="71"/>
-        <location filename="syncocdialog.cpp" line="553"/>
-        <location filename="syncocdialog.cpp" line="855"/>
-        <location filename="syncocdialog.cpp" line="873"/>
+        <location filename="syncocdialog.cpp" line="577"/>
+        <location filename="syncocdialog.cpp" line="879"/>
+        <location filename="syncocdialog.cpp" line="897"/>
         <source>Latest Version</source>
         <translation>最新版</translation>
     </message>

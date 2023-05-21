@@ -9107,19 +9107,26 @@ void MainWindow::on_myeditPassInput_returnPressed() {
 }
 
 void MainWindow::on_actionDatabase_triggered() {
+  QString url =
+      "https://github.com/5T33Z0/OC-Little-Translated/tree/main/F_Desktop_EFIs/"
+      "Config_Templates";
+  QString txt = "<a href=\"" + url + "\"" + "> " +
+                tr(" Intel CPU configuration template ");
+  QMessageBox box;
+  box.setText(txt);
+  box.exec();
+
+  return;
+
   myDatabase->setModal(true);
   myDatabase->show();
 
   QFileInfo appInfo(qApp->applicationDirPath());
 
   QString dirpath = appInfo.filePath() + "/Database/BaseConfigs/";
-  //设置要遍历的目录
   QDir dir(dirpath);
-  //设置文件过滤器
   QStringList nameFilters;
-  //设置文件过滤格式
   nameFilters << "*.plist";
-  //将过滤后的文件名称存入到files列表中
   QStringList filesTemp =
       dir.entryList(nameFilters, QDir::Files | QDir::Readable, QDir::Name);
   QStringList files;
