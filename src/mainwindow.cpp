@@ -10066,6 +10066,7 @@ void MainWindow::on_actionDEBUG_triggered() {
 
 void MainWindow::on_actionInitDatabaseLinux_triggered() {
   // Init Linux Database
+
   if (linuxOS) {
     copyDirectoryFiles(strAppExePath + "/Database/",
                        QDir::homePath() + "/.ocat/Database/", true);
