@@ -30,7 +30,7 @@ Method::Method(QWidget* parent) : QMainWindow(parent) {
           SLOT(replyFinished(QNetworkReply*)));
   managerDownLoad = new QNetworkAccessManager(this);
   myfile = new QFile(this);
-  tempDir = QDir::homePath() + "/tempocat/";
+  tempDir = QDir::homePath() + "/.ocat/tempocat/";
 }
 
 QStringList Method::getDLUrlList(QString url) {
