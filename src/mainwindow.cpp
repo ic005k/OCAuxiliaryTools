@@ -428,7 +428,7 @@ void MainWindow::markColor(QTableWidget* table, QString path, int col) {
         QString text = table->item(i, 1)->text();
         if (text.trimmed().length() > 0) {
           if (text.mid(0, 1) == "V") {
-            QStringList strList = text.split("*|*");
+            QStringList strList = text.split("|");
             if (strList.count() >= 2) {
               text.replace(strList.at(0), "");
               text = "V" + strVer + " " + text;
