@@ -4090,6 +4090,8 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   }
 
   mymethod->cancelKextUpdate();
+  QString tempDir = QDir::homePath() + "/tempocat/";
+  deleteDirfile(tempDir);
 }
 
 void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(
