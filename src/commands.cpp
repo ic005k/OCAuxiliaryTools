@@ -51,7 +51,6 @@ void DeleteCommand::undo() {
   m_table->setCurrentCell(m_row, 0);
 
   if (m_loadINI) {
-    // mw_one->read_ini(m_table, m_table0, m_table0CurrentRow);
     if (m_table == mw_one->ui->table_dp_add0 ||
         m_table == mw_one->ui->table_nv_add0)
       mw_one->readLeftTable(m_table, m_table0);

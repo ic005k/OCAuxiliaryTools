@@ -1752,7 +1752,7 @@ void Method::writeLeftTable(QTableWidget* t0, QTableWidget* t) {
   QString strLeft = t0->currentItem()->text().trimmed();
   for (int i = 0; i < listAdd.count(); i++) {
     QString str = listAdd.at(i);
-    QStringList list = str.split("|");
+    QStringList list = str.split("*|*");
     if (list.count() == 4) {
       if (strLeft == list.at(0)) {
         listAdd.removeAt(i);
@@ -1762,8 +1762,8 @@ void Method::writeLeftTable(QTableWidget* t0, QTableWidget* t) {
   }
 
   for (int i = 0; i < t->rowCount(); i++) {
-    listAdd.append(strLeft + "|" + t->item(i, 0)->text().trimmed() + "|" +
-                   t->item(i, 1)->text().trimmed() + "|" +
+    listAdd.append(strLeft + "*|*" + t->item(i, 0)->text().trimmed() + "*|*" +
+                   t->item(i, 1)->text().trimmed() + "*|*" +
                    t->item(i, 2)->text().trimmed());
   }
 
@@ -1783,7 +1783,7 @@ void Method::writeLeftTableOnlyValue(QTableWidget* t0, QTableWidget* t) {
   QString strLeft = t0->currentItem()->text().trimmed();
   for (int i = 0; i < listAdd.count(); i++) {
     QString str = listAdd.at(i);
-    QStringList list = str.split("|");
+    QStringList list = str.split("*|*");
     if (list.count() == 3) {
       if (strLeft == list.at(1) && t0->objectName() == list.at(0)) {
         listAdd.removeAt(i);
@@ -1793,7 +1793,7 @@ void Method::writeLeftTableOnlyValue(QTableWidget* t0, QTableWidget* t) {
   }
 
   for (int i = 0; i < t->rowCount(); i++) {
-    listAdd.append(t0->objectName() + "|" + strLeft + "|" +
+    listAdd.append(t0->objectName() + "*|*" + strLeft + "*|*" +
                    t->item(i, 0)->text().trimmed());
   }
 

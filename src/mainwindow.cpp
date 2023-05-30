@@ -307,13 +307,11 @@ void MainWindow::openFile(QString PlistFileName) {
 
     QString strEFI = fi.path().mid(0, fi.path().count() - 3);
     QFileInfo f1(strEFI + "/OC");
-    // QFileInfo f2(strEFI + "/BOOT");
     QFileInfo f3(strEFI + "/OC/Drivers");
     if (f1.isDir() && f3.isDir()) {
       ui->actionUpgrade_OC->setEnabled(true);
       ui->actionUpgrade_OC->setToolTip(tr("Upgrade OpenCore and Kexts"));
     } else {
-      // ui->actionUpgrade_OC->setEnabled(false);
       ui->actionUpgrade_OC->setToolTip(
           tr("The Upgrade OpenCore and Kexts is not available, please check "
              "the integrity of the EFI directory structure, mainly the "
@@ -430,7 +428,7 @@ void MainWindow::markColor(QTableWidget* table, QString path, int col) {
         QString text = table->item(i, 1)->text();
         if (text.trimmed().length() > 0) {
           if (text.mid(0, 1) == "V") {
-            QStringList strList = text.split("|");
+            QStringList strList = text.split("*|*");
             if (strList.count() >= 2) {
               text.replace(strList.at(0), "");
               text = "V" + strVer + " " + text;
@@ -621,11 +619,10 @@ void MainWindow::ParserDP(QVariantMap map) {
     }
 
     //保存子条目里面的数据，以便以后加载
-    // write_ini(ui->table_dp_add0, ui->table_dp_add, i);
     for (int n = 0; n < ui->table_dp_add->rowCount(); n++) {
-      listDPAdd.append(strAdd0 + "|" +
-                       ui->table_dp_add->item(n, 0)->text().trimmed() + "|" +
-                       ui->table_dp_add->item(n, 1)->text().trimmed() + "|" +
+      listDPAdd.append(strAdd0 + "*|*" +
+                       ui->table_dp_add->item(n, 0)->text().trimmed() + "*|*" +
+                       ui->table_dp_add->item(n, 1)->text().trimmed() + "*|*" +
                        ui->table_dp_add->item(n, 2)->text().trimmed());
     }
   }
@@ -948,9 +945,9 @@ void MainWindow::AddNvramAdd(QVariantMap map_add, int currentRow,
   }
 
   for (int n = 0; n < ui->table_nv_add->rowCount(); n++) {
-    listNVRAMAdd.append(strAdd0 + "|" +
-                        ui->table_nv_add->item(n, 0)->text().trimmed() + "|" +
-                        ui->table_nv_add->item(n, 1)->text().trimmed() + "|" +
+    listNVRAMAdd.append(strAdd0 + "*|*" +
+                        ui->table_nv_add->item(n, 0)->text().trimmed() + "*|*" +
+                        ui->table_nv_add->item(n, 1)->text().trimmed() + "*|*" +
                         ui->table_nv_add->item(n, 2)->text().trimmed());
   }
 }
@@ -1108,7 +1105,7 @@ void MainWindow::readLeftTable(QTableWidget* t0, QTableWidget* t) {
   t->setRowCount(0);
   for (int i = 0; i < listAdd.count(); i++) {
     QString str = listAdd.at(i);
-    QStringList list = str.split("|");
+    QStringList list = str.split("*|*");
     if (list.count() == 4) {
       if (strLeft == list.at(0)) {
         int count = t->rowCount();
@@ -1130,8 +1127,6 @@ void MainWindow::on_table_dp_add_itemChanged(QTableWidgetItem* item) {
   Q_UNUSED(item);
 
   if (writeINI) {
-    // write_ini(ui->table_dp_add0, ui->table_dp_add,
-    //          ui->table_dp_add0->currentRow());
     mymethod->writeLeftTable(ui->table_dp_add0, ui->table_dp_add);
 
     this->setWindowModified(true);
@@ -1193,10 +1188,8 @@ void MainWindow::init_value(QVariantMap map_fun, QTableWidget* table,
       }
 
       //保存子条目里面的数据，以便以后加载
-      // write_value_ini(table, subtable, i);
-
       for (int n = 0; n < subtable->rowCount(); n++) {
-        list.append(table->objectName() + "|" + str0 + "|" +
+        list.append(table->objectName() + "*|*" + str0 + "*|*" +
                     subtable->item(n, 0)->text().trimmed());
       }
     }
@@ -1292,7 +1285,7 @@ void MainWindow::readLeftTableOnlyValue(QTableWidget* t0, QTableWidget* t) {
   t->setRowCount(0);
   for (int i = 0; i < listAdd.count(); i++) {
     QString str = listAdd.at(i);
-    QStringList list = str.split("|");
+    QStringList list = str.split("*|*");
     if (list.count() == 3) {
       if (strLeft == list.at(1) && t0->objectName() == list.at(0)) {
         int count = t->rowCount();
@@ -3744,7 +3737,7 @@ void MainWindow::readResult() {
 
   QString str1, str2;
   for (int i = 0; i < str.count(); i++) {
-    if (str.mid(i, 1) == "|") {
+    if (str.mid(i, 1) == "*|*") {
       str1 = str.mid(0, i).trimmed();
       str2 = str.mid(i + 1, str.count() - i + 1).trimmed();
     }
