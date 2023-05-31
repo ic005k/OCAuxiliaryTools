@@ -3737,7 +3737,7 @@ void MainWindow::readResult() {
 
   QString str1, str2;
   for (int i = 0; i < str.count(); i++) {
-    if (str.mid(i, 1) == "*|*") {
+    if (str.mid(i, 1) == "|") {
       str1 = str.mid(0, i).trimmed();
       str2 = str.mid(i + 1, str.count() - i + 1).trimmed();
     }
