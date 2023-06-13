@@ -49,7 +49,7 @@ jobs:
           arch: ${{ matrix.qt_arch }}
           cached: 'false'
       # 拉取代码
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       # msvc编译
@@ -79,7 +79,7 @@ jobs:
            echo "::set-output name=packageName::$name"       
       # tag 查询github-Release
       # 上传artifacts          
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.package.outputs.packageName }}
           path: ${{ steps.package.outputs.packageName }}.zip
