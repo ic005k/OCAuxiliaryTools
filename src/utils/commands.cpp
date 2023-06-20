@@ -8,18 +8,18 @@ extern Method* mymethod;
 
 DeleteCommand::DeleteCommand(bool writeINI, bool loadINI, QTableWidget* table0,
                              int table0CurrentRow, QTableWidget* table, int row,
-                             QString text, QStringList fieldList,
-                             QUndoCommand* parent) {
+                             const QString &text, const QStringList &fieldList,
+                             QUndoCommand* parent)
+    : m_table(table)
+    , m_table0(table0)
+    , m_row(row)
+    , m_table0CurrentRow(table0CurrentRow)
+    , m_text(text)
+    , m_fieldList(fieldList)
+    , m_loadINI(loadINI)
+    , m_writeINI(writeINI)
+{
   Q_UNUSED(parent);
-  m_table = table;
-  m_table0 = table0;
-  m_row = row;
-  m_table0CurrentRow = table0CurrentRow;
-  m_text = text;
-
-  m_fieldList = fieldList;
-  m_loadINI = loadINI;
-  m_writeINI = writeINI;
 
   setText(QObject::tr("Delete") + "  " + text);
 }
@@ -105,43 +105,21 @@ void DeleteCommand::redo() {
   mw_one->checkFiles(m_table);
 }
 
-AddCommand::AddCommand(QTableWidget* table, int row, int col, QString text,
-                       QUndoCommand* parent) {
-  Q_UNUSED(parent);
-  m_table = table;
-  m_row = row;
-  m_col = col;
-  m_text = text;
-
-  setText(QObject::tr("Add") + "  " + text);
-}
-
-AddCommand::~AddCommand() {}
-
-void AddCommand::undo() {
-  m_table->setItem(m_row, m_col, new QTableWidgetItem(""));
-}
-
-void AddCommand::redo() {
-  m_table->setItem(m_row, m_col, new QTableWidgetItem(m_text));
-}
-
 // Edit
-EditCommand::EditCommand(bool textAlignCenter, QString oldText,
-                         QTableWidget* table, int row, int col, QString text,
-                         QUndoCommand* parent) {
+EditCommand::EditCommand(bool textAlignCenter, const QString &oldText,
+                         QTableWidget* table, int row, int col, const QString &text,
+                         QUndoCommand* parent)
+    : m_table(table)
+    , m_row(row)
+    , m_col(col)
+    , m_text(text)
+    , m_oldText(oldText)
+    , m_textAlignCenter(textAlignCenter)
+{
   Q_UNUSED(parent);
-  m_table = table;
-  m_row = row;
-  m_col = col;
-  m_text = text;
-  m_oldText = oldText;
-  m_textAlignCenter = textAlignCenter;
 
   setText(QObject::tr("Edit") + "  " + oldText);
 }
-
-EditCommand::~EditCommand() {}
 
 void EditCommand::undo() {
   mymethod->goTable(m_table);
@@ -193,24 +171,23 @@ void EditCommand::redo() {
 
 // CopyPasteLine
 CopyPasteLineCommand::CopyPasteLineCommand(
-    QTableWidget* table, int row, int col, QString text,
-    QStringList colTextList, QString oldColText0, bool writeini,
-    bool writevalueini, int leftTableCurrentRow, QUndoCommand* parent) {
+    QTableWidget* table, int row, int col, const QString &text,
+    const QStringList &colTextList, const QString &oldColText0, bool writeini,
+    bool writevalueini, int leftTableCurrentRow, QUndoCommand* parent)
+    : m_table(table)
+    , m_row(row)
+    , m_col(col)
+    , m_text(text)
+    , m_colTextList(colTextList)
+    , m_oldColText0(oldColText0)
+    , m_writeini(writeini)
+    , m_writevalueini(writevalueini)
+    , m_leftTableCurrentRow(leftTableCurrentRow)
+{
   Q_UNUSED(parent);
-  m_table = table;
-  m_row = row;
-  m_col = col;
-  m_text = text;
-  m_colTextList = colTextList;
-  m_oldColText0 = oldColText0;
-  m_writeini = writeini;
-  m_writevalueini = writevalueini;
-  m_leftTableCurrentRow = leftTableCurrentRow;
 
   setText(QObject::tr("Paste Line") + "  " + text);
 }
-
-CopyPasteLineCommand::~CopyPasteLineCommand() {}
 
 void CopyPasteLineCommand::undo() {
   if (m_writeini || m_writevalueini)
@@ -263,5 +240,3 @@ void CopyPasteLineCommand::redo() {
 
   mw_one->checkFiles(m_table);
 }
-
-QString createCommandString(QString cmdStr) { return cmdStr; }

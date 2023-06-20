@@ -61,7 +61,7 @@ class DeleteCommand : public QUndoCommand {
  public:
   explicit DeleteCommand(bool writeINI, bool loadINI, QTableWidget* table0,
                          int table0CurrentRow, QTableWidget* table, int row,
-                         QString text, QStringList fieldList,
+                         const QString &text, const QStringList &fieldList,
                          QUndoCommand* parent = nullptr);
 
   void undo() override;
@@ -80,27 +80,10 @@ class DeleteCommand : public QUndoCommand {
   bool m_writeINI;
 };
 
-class AddCommand : public QUndoCommand {
- public:
-  AddCommand(QTableWidget* table, int row, int col, QString text,
-             QUndoCommand* parent = nullptr);
-  ~AddCommand();
-
-  void undo() override;
-  void redo() override;
-
- private:
-  QTableWidget* m_table;
-  int m_row;
-  int m_col;
-  QString m_text;
-};
-
 class EditCommand : public QUndoCommand {
  public:
-  EditCommand(bool textAlignCenter, QString oldText, QTableWidget* table,
-              int row, int col, QString text, QUndoCommand* parent = nullptr);
-  ~EditCommand();
+  EditCommand(bool textAlignCenter, const QString &oldText, QTableWidget* table,
+              int row, int col, const QString &text, QUndoCommand* parent = nullptr);
 
   void undo() override;
   void redo() override;
@@ -116,11 +99,10 @@ class EditCommand : public QUndoCommand {
 
 class CopyPasteLineCommand : public QUndoCommand {
  public:
-  CopyPasteLineCommand(QTableWidget* table, int row, int col, QString text,
-                       QStringList colTextList, QString oldColText0,
+  CopyPasteLineCommand(QTableWidget* table, int row, int col, const QString &text,
+                       const QStringList &colTextList, const QString &oldColText0,
                        bool writeini, bool writevalueini,
                        int leftTableCurrentRow, QUndoCommand* parent = nullptr);
-  ~CopyPasteLineCommand();
 
   void undo() override;
   void redo() override;
@@ -136,7 +118,5 @@ class CopyPasteLineCommand : public QUndoCommand {
   bool m_writevalueini;
   int m_leftTableCurrentRow;
 };
-
-QString createCommandString(QString cmdStr);
 
 #endif
