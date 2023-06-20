@@ -6001,14 +6001,10 @@ int MainWindow::getTextWidth(QString str, QWidget* w) {
   QFontMetrics fm(myFont);
   int mw;
 
-#if (QT_VERSION <= QT_VERSION_CHECK(5, 9, 9))
+#if (QT_VERSION < QT_VERSION_CHECK(5, 11, 0))
   mw = fm.width(str);
-
-#endif
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+#else
   mw = fm.horizontalAdvance(str);
-
 #endif
 
   return mw;
