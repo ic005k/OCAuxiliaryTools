@@ -1,5 +1,5 @@
 name: Windows
-on: 
+on:
   # push代码时触发workflow
   push:
     paths:
@@ -10,31 +10,31 @@ on:
     paths:
       - '*.pro'
       - '**'
-      - '.github/workflows/windows.yml' 
+      - '.github/workflows/windows.yml'
 jobs:
   build:
     name: Build
-    # 运行平台， windows-latest目前是windows server 2019 
+    # 运行平台， windows-latest目前是windows server 2019
     # 参考文档 https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
     runs-on: windows-2019
     strategy:
       # 矩阵配置
       matrix:
         include:
-         
-         
+
+
           # 5.15.2 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
-         
-          - qt_ver: 5.15.2          
+
+          - qt_ver: 5.15.2
             qt_arch: win64_msvc2019_64
             msvc_arch: x64
-            qt_arch_install: msvc2019_64          
-          
+            qt_arch_install: msvc2019_64
+
     env:
       targetName: OCAuxiliaryTools.exe
       VERSION: Win64
       orgName: OCAT
-      
+
     # 步骤
     steps:
       # 安装Qt
@@ -49,7 +49,7 @@ jobs:
           arch: ${{ matrix.qt_arch }}
           cached: 'false'
       # 拉取代码
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
       # msvc编译
@@ -64,26 +64,26 @@ jobs:
           echo winSdkVer=%WindowsSdkVersion% >> %GITHUB_ENV%
           echo vcToolsInstallDir=%VCToolsInstallDir% >> %GITHUB_ENV%
           echo vcToolsRedistDir=%VCToolsRedistDir% >> %GITHUB_ENV%
-      # 打包 
+      # 打包
       - name: package
-        id: package      
+        id: package
         env:
           #archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
           archiveName: ${{ env.orgName }}-${{ env.VERSION }}
-          msvcArch: ${{ matrix.msvc_arch }}          
+          msvcArch: ${{ matrix.msvc_arch }}
         shell: pwsh
         run: |
           & scripts\windows-publish.ps1 ${env:archiveName} ${env:targetName}
           # 记录packageName给后续step
            $name = ${env:archiveName}
-           echo "::set-output name=packageName::$name"       
+           echo "::set-output name=packageName::$name"
       # tag 查询github-Release
-      # 上传artifacts          
+      # 上传artifacts
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.package.outputs.packageName }}
           path: ${{ steps.package.outputs.packageName }}.zip
-          
+
       # tag 上传Release
       - name: uploadRelease
         if: startsWith(github.event.ref, 'refs/tags/')
@@ -93,4 +93,4 @@ jobs:
           file: ${{ steps.package.outputs.packageName }}.zip
           asset_name: ${{ steps.package.outputs.packageName }}.zip
           tag: ${{ github.ref }}
-          overwrite: true 
+          overwrite: true
