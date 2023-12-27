@@ -27,7 +27,7 @@ IntelMausi.kext | https://github.com/acidanthera/IntelMausi
 ALC256.kext | https://github.com/ic005k/ALC256
 NightShiftEnabler.kext | https://github.com/cdf/NightShiftEnabler
 NoTouchID.kext | https://github.com/al3xtjames/NoTouchID
-RadeonSensor.kext | https://github.com/aluveitie/RadeonSensor
+RadeonSensor.kext | https://github.com/ChefKissInc/RadeonSensor
 FakeSMC.kext | https://github.com/CloverHackyColor/FakeSMC3_with_plugins
 FeatureUnlock.kext | https://github.com/acidanthera/FeatureUnlock
 AMDRyzenCPUPowerManagement.kext | https://github.com/trulyspinach/SMCAMDProcessor
