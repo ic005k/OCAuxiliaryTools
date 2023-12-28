@@ -33,6 +33,23 @@ Besides beeing a plist Configurator it can do much more:
 * [OpenCore Auxiliary Tools User's Guide (by chriswayg)](https://chriswayg.gitbook.io/opencore-visual-beginners-guide/oc_auxiliary_tools)
 
 
+## About adapt OpenCore version  （关于OCAT支持的OpenCore版本的问题）
+[#311](https://github.com/ic005k/OCAuxiliaryTools/issues/311) [#361](https://github.com/ic005k/OCAuxiliaryTools/issues/361)
+
+OCAT is Smart adapt to openCore version,if you need update  openCore version，you can get new OpenCore like this 
+（OCAT 是智能适应OC的新版本的，如果你需要更新OC版本,你可以按照下图操作）
+
+First,  click this button （第一步，点击这个按钮）
+![image](https://github.com/ic005k/OCAuxiliaryTools/assets/7905253/b4c94679-cd8c-4243-a85f-c70c1c304665)
+
+Second, select the latest version or the other version from the drop-down list（第二步，在下拉列表里选择最新的版本或者其他的OC版本）
+
+![image](https://github.com/ic005k/OCAuxiliaryTools/assets/7905253/240a7831-fcb5-411e-842d-bffd22cc2982)
+
+Third, click to get the latest version, or get the OC version of your choice（第三步，点击获取最新版，或者获取你选择的OC版本）
+![image](https://github.com/ic005k/OCAuxiliaryTools/assets/7905253/e3331a23-4744-4075-b820-e58878c36dc8)
+
+
 ## Credits
 * [vit9696](https://github.com/vit9696) OCAT feature suggestions etc.
 * [5T33Z0](https://github.com/5T33Z0) Intel CPU plug-in package for OCAT, suggestions for user interaction and functionality, Write Readme, etc.
