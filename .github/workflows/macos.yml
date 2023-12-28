@@ -1,5 +1,5 @@
 name: MacOS
-on: 
+on:
   push:
     paths:
       - '*.pro'
@@ -9,7 +9,7 @@ on:
     paths:
       - '*.pro'
       - '**'
-      - '.github/workflows/macos.yml' 
+      - '.github/workflows/macos.yml'
 jobs:
   build:
     name: Build
@@ -21,26 +21,26 @@ jobs:
         qt_ver: [5.15.2]
         #qt_ver: [6.0.0]
         qt_arch: [clang_64]
-        
+
     env:
       targetName: OCAuxiliaryTools
       VERSION: Mac
       orgName: OCAT
-      
+
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2.13.0
         with:
           version: ${{ matrix.qt_ver }}
           cached: 'false'
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
       - name: build macos
         run: |
           qmake
           make
-          
+
       # 打包
       - name: package
         run: |
@@ -49,39 +49,39 @@ jobs:
           chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/macserial
           chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/ocvalidate
           chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/ocpasswordgen
-          
+
           chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/CreateVault/create_vault.sh
           chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/CreateVault/RsaTool
           chmod +x bin/release/${targetName}.app/Contents/MacOS/Database/mac/CreateVault/sign.command
-          
+
           #cp -r devDatabase bin/release/${targetName}.app/Contents/MacOS/devDatabase
           #chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/macserial
           #chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/ocvalidate
           #chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/ocpasswordgen
-          
+
           #chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/CreateVault/create_vault.sh
           #chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/CreateVault/RsaTool
           #chmod +x bin/release/${targetName}.app/Contents/MacOS/devDatabase/mac/CreateVault/sign.command
-          
+
           cp -f Info.plist bin/release/${targetName}.app/Contents/Info.plist
-          
+
           cp -f Database/mac/aria2c bin/release/${targetName}.app/Contents/MacOS/aria2c
           chmod +x bin/release/${targetName}.app/Contents/MacOS/aria2c
           rm bin/release/${targetName}.app/Contents/MacOS/Database/mac/aria2c
-          
+
           # macdeployqt bin/release/${targetName}.app -qmldir=. -verbose=1 -dmg
-          
+
           cp -R -p -f bin/release/${targetName}.app ${targetName}.app
           macdeployqt ${targetName}.app -qmldir=. -verbose=1 -dmg
-          cp ${targetName}.dmg bin/release/${targetName}.dmg 
-          
-      # 上传artifacts          
-      - uses: actions/upload-artifact@v2
+          cp ${targetName}.dmg bin/release/${targetName}.dmg
+
+      # 上传artifacts
+      - uses: actions/upload-artifact@v3
         with:
           #name: ${{ env.targetName }}_${{ matrix.os }}_${{matrix.qt_ver}} # .zip
           name: ${{ env.orgName }}_${{ env.VERSION }}
           path: bin/release/${{ env.targetName }}.dmg
-          
+
       # tag 上传Release
       - name: uploadRelease
         if: startsWith(github.event.ref, 'refs/tags/')
@@ -89,9 +89,9 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: bin/release/${{ env.targetName }}.dmg
-          
+
           #asset_name: ${{ env.targetName }}_${{ matrix.os }}_${{ matrix.qt_ver }}.dmg
           asset_name: ${{ env.orgName }}_${{ env.VERSION }}.dmg
-          
+
           tag: ${{ github.ref }}
           overwrite: true
