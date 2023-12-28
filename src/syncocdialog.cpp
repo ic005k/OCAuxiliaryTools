@@ -818,7 +818,7 @@ void SyncOCDialog::on_btnGetOC_clicked() {
     return;
   }
 
-  QString tempDir = QDir::homePath() + "/tempocat/";
+  QString tempDir = QDir::homePath() + "/.ocat/tempocat/";
   mw_one->deleteDirfile(tempDir);
 
   QString DevSource;
@@ -930,7 +930,7 @@ void SyncOCDialog::on_btnImport_clicked() {
   QString FileName =
       fd.getOpenFileName(this, "file", "", "zip file(*.zip);;all(*.*)");
   if (QFile(FileName).exists()) {
-    QString path = QDir::homePath() + "/tempocat/";
+    QString path = QDir::homePath() + "/.ocat/tempocat/";
     mw_one->deleteDirfile(path);
     QDir dir;
     dir.mkpath(path);
