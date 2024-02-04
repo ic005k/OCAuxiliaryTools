@@ -35,7 +35,11 @@ void dlgKernelPatch::loadFiles() {
 void dlgKernelPatch::appendKernelPatch(QString PlistFileName) {
   if (!PlistFileName.isEmpty()) {
     if (!PListSerializer::fileValidation(PlistFileName)) {
+#if QT_VERSION_MAJOR >= 6
+      QMessageBox::warning(this, "", tr("Invalid plist file."), QMessageBox::Ok);
+#else
       QMessageBox::warning(this, "", tr("Invalid plist file."), tr("OK"));
+#endif
       return;
     }
   } else

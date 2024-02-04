@@ -7,7 +7,13 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QDesktopServices>
+
+#if QT_VERSION_MAJOR < 6
 #include <QDesktopWidget>
+#else
+#include <QScreen>
+#endif
+
 #include <QGuiApplication>
 #include <QLatin1Char>
 #include <QListWidgetItem>

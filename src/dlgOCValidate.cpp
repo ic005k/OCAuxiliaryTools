@@ -45,7 +45,11 @@ dlgOCValidate::dlgOCValidate(QWidget* parent)
             Q_UNUSED(pos);
 
             QString str = ui->textEdit->textCursor().selectedText().trimmed();
+#if QT_VERSION_MAJOR < 6
             if (str.count() > 0) {
+#else
+            if (str.length() > 0) {
+#endif
               searchAction->setEnabled(true);
               copyAction->setEnabled(true);
             } else {
@@ -116,15 +120,24 @@ void dlgOCValidate::goMainList(QString value, QString subValue) {
 
 void dlgOCValidate::on_btnCreateVault_clicked() {
   QFileInfo fi(SaveFileName);
+#if QT_VERSION_MAJOR < 6
   QString DirName = fi.path().mid(0, fi.path().count() - 3);
+#else
+  QString DirName = fi.path().mid(0, fi.path().length() - 3);
+#endif
   QString strTar = DirName + "/OC";
   if (!QDir(strTar).exists()) return;
 
   QString warningStr =
       tr("Please make sure you know the Vault completely and that you have "
          "backed up the EFI beforehand, otherwise the OC may not boot!");
+#if QT_VERSION_MAJOR >= 6
+  int ret =
+      QMessageBox::warning(this, "", warningStr, QMessageBox::Cancel, QMessageBox::Ok);
+#else
   int ret =
       QMessageBox::warning(this, "", warningStr, tr("Cancel"), tr("Sure"));
+#endif
   if (ret != 1) {
     return;
   }

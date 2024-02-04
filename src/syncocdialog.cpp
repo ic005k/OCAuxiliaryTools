@@ -596,7 +596,12 @@ void SyncOCDialog::init_Sync_OC_Table() {
   QIcon icon;
 
   QFileInfo fi(SaveFileName);
+
+#if QT_VERSION_MAJOR < 6
   DirName = fi.path().mid(0, fi.path().count() - 3);
+#else
+  DirName = fi.path().mid(0, fi.path().length() - 3);
+#endif
 
   // if (DirName.isEmpty()) return;
 

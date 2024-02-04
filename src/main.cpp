@@ -19,7 +19,10 @@ int main(int argc, char *argv[]) {
     qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
         Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
+
+#if QT_VERSION_MAJOR < 6
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
   }
 #endif
 
