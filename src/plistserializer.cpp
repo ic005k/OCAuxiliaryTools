@@ -1,6 +1,10 @@
 // Own includes
 #include "plistserializer.h"
 
+#if defined(_WIN32)
+#include <Windows.h>
+#endif
+
 #include <QObject>
 #include <fstream>
 #include <iostream>
