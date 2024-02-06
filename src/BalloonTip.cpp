@@ -2,7 +2,13 @@
 
 #include <QApplication>
 #include <QBitmap>
+
+#if QT_VERSION_MAJOR < 6
 #include <QDesktopWidget>
+#else
+#include <QScreen>
+#endif
+
 #include <QGridLayout>
 #include <QLabel>
 #include <QMessageBox>
@@ -94,8 +100,15 @@ BalloonTip::BalloonTip(QMessageBox::Icon icon, const QString &title,
   msgLabel->setAlignment(Qt::AlignTop | Qt::AlignLeft);
 
   // smart size for the message label
+  
+#if QT_VERSION_MAJOR < 6
   int limit =
-      QApplication::desktop()->availableGeometry(msgLabel).size().width() / 3;
+          QApplication::desktop()->availableGeometry(msgLabel).size().width() / 3;
+#else
+  QScreen *screen =  QGuiApplication::primaryScreen();
+  QRect screenGeometry = screen->geometry();
+  int limit = screenGeometry.width() / 3;
+#endif
 
   if (msgLabel->sizeHint().width() > limit) {
     msgLabel->setWordWrap(true);
@@ -145,7 +158,11 @@ BalloonTip::BalloonTip(QMessageBox::Icon icon, const QString &title,
   // layout->addWidget(closeButton, 0, 2);
   layout->addWidget(msgLabel, 1, 0, 1, 3);
   layout->setSizeConstraint(QLayout::SetFixedSize);
+
+#if QT_VERSION_MAJOR < 6
   layout->setMargin(3);
+#endif
+
   setLayout(layout);
 
   QPalette pal = palette();

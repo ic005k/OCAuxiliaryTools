@@ -26,7 +26,13 @@ void MyApplication::new_win() {
     for (int i = 0; i < openFileLists.count(); i++) {
       if (openFileLists.at(i) == PlistFileName) {
         newfile = false;
+
+#if QT_VERSION_MAJOR < 6
         setActiveWindow(wdlist.at(i));
+#else
+        wdlist.at(i)->activateWindow();
+#endif
+
         wdlist.at(i)->raise();
 
         break;

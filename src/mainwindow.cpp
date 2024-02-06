@@ -232,7 +232,12 @@ void MainWindow::initRecentFilesForToolBar() {
 void MainWindow::openFile(QString PlistFileName) {
   if (!PlistFileName.isEmpty()) {
     if (!PListSerializer::fileValidation(PlistFileName)) {
+#if QT_VERSION_MAJOR < 6
       QMessageBox::warning(this, "", tr("Invalid plist file."), tr("OK"));
+#else
+      QMessageBox::warning(this, "", tr("Invalid plist file."), QMessageBox::Ok);
+#endif
+
       return;
     }
 
@@ -305,7 +310,12 @@ void MainWindow::openFile(QString PlistFileName) {
     m_recentFiles->setMostRecentFile(PlistFileName);
     initRecentFilesForToolBar();
 
+#if QT_VERSION_MAJOR < 6
     QString strEFI = fi.path().mid(0, fi.path().count() - 3);
+#else
+    QString strEFI = fi.path().mid(0, fi.path().length() - 3);
+#endif
+
     QFileInfo f1(strEFI + "/OC");
     QFileInfo f3(strEFI + "/OC/Drivers");
     if (f1.isDir() && f3.isDir()) {
@@ -2058,7 +2068,12 @@ QVariantMap MainWindow::SavePlatformInfo() {
   // Generic
   if (list.removeOne("Generic")) {
     valueList.clear();
+
+#if QT_VERSION_MAJOR < 6
     if (ui->editDatROM->text().count() > 12) ui->btnROM->clicked();
+#else
+    if (ui->editDatROM->text().length() > 12) ui->btnROM->clicked();
+#endif
 
     subMap["Generic"] = setValue(valueList, ui->tabPlatformInfo1);
 
@@ -2263,7 +2278,11 @@ void MainWindow::setStatusBarText(QTableWidget* table) {
   QString str;
 
   if (getTableFieldDataType(table) == "Data")
+#if QT_VERSION_MAJOR < 6
     str = QString::number(text.count() / 2) + " Bytes  " + text;
+#else
+    str = QString::number(text.length() / 2) + " Bytes  " + text;
+#endif
   else
     str = text;
 
@@ -2838,7 +2857,11 @@ void MainWindow::addKexts(QStringList FileName) {
       for (int z = 0; z < List.count(); z++) {
         QString str = List.at(z).fileName();
 
+#if QT_VERSION_MAJOR < 6
         if (str.mid(str.count() - 4, 4) == "kext") {
+#else
+        if (str.mid(str.length() - 4, 4) == "kext") {
+#endif
           fileList.push_back(List.at(z));
         }
       }
@@ -3708,7 +3731,11 @@ void MainWindow::on_table_kernel_patch_currentCellChanged(int currentRow,
 
 QString MainWindow::getSystemProductName(QString arg1) {
   QString str;
+#if QT_VERSION_MAJOR < 6
   for (int i = 0; i < arg1.count(); i++) {
+#else
+  for (int i = 0; i < arg1.length(); i++) {
+#endif
     if (arg1.mid(i, 1) == " ") {
       str = arg1.mid(0, i).trimmed();
       return str;
@@ -3736,10 +3763,18 @@ void MainWindow::readResult() {
   QString str = textMacInfo->document()->findBlockByNumber(2).text().trimmed();
 
   QString str1, str2;
+#if QT_VERSION_MAJOR < 6
   for (int i = 0; i < str.count(); i++) {
+#else
+  for (int i = 0; i < str.length(); i++) {
+#endif
     if (str.mid(i, 1) == "|") {
       str1 = str.mid(0, i).trimmed();
+#if QT_VERSION_MAJOR < 6
       str2 = str.mid(i + 1, str.count() - i + 1).trimmed();
+#else
+      str2 = str.mid(i + 1, str.length() - i + 1).trimmed();
+#endif
     }
   }
 
@@ -3790,7 +3825,11 @@ void MainWindow::on_btnSystemProductName_clicked() {
 void MainWindow::on_btnSystemUUID_clicked() {
   QUuid id = QUuid::createUuid();
   QString strTemp = id.toString();
+#if QT_VERSION_MAJOR < 6
   QString strId = strTemp.mid(1, strTemp.count() - 2).toUpper();
+#else
+  QString strId = strTemp.mid(1, strTemp.length() - 2).toUpper();
+#endif
   ui->editSystemUUID->setText(strId);
 }
 
@@ -4056,9 +4095,12 @@ void MainWindow::closeEvent(QCloseEvent* event) {
             tr("Do you want to save your changes?") + "\n\n" + SaveFileName,
         QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
 
+#if QT_VERSION_MAJOR < 6
     message.setButtonText(QMessageBox::Save, QString(tr("Save")));
     message.setButtonText(QMessageBox::Cancel, QString(tr("Cancel")));
     message.setButtonText(QMessageBox::Discard, QString(tr("Discard")));
+#endif
+
     message.setDefaultButton(QMessageBox::Save);
     choice = message.exec();
 
@@ -5065,8 +5107,13 @@ void MainWindow::init_EditMenu() {
     ui->actionOpen_database_directory->setIconVisibleInMenu(false);
 
   // Move Up(Down)
+#if QT_VERSION_MAJOR < 6
   ui->actionMove_Up->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Up));
   ui->actionMove_Down->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Down));
+#else
+  ui->actionMove_Up->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Up));
+  ui->actionMove_Down->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Down));
+#endif
 
   // Backup EFI
   if (mac || osx1012) ui->actionBackup_EFI->setIconVisibleInMenu(false);
@@ -6006,15 +6053,27 @@ int MainWindow::parse_UpdateJSON(QString str) {
         ui->btnCheckUpdate->setIcon(QIcon(":/icon/newver.png"));
         ui->btnCheckUpdate->setToolTip(tr("There is a new version"));
 
+#if QT_VERSION_MAJOR < 6
         int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
                                        tr("Cancel"));
+#else
+        int ret = QMessageBox::warning(this, "", warningStr, QMessageBox::Ok,
+                                        QMessageBox::Cancel);
+#endif
+
         if (ret == 0) {
           on_actionOnline_Download_Updates_triggered();
         }
       } else {
         if (!autoCheckUpdate) {
+#if QT_VERSION_MAJOR < 6
           int ret = QMessageBox::warning(this, "", warningStr, tr("Download"),
                                          tr("Cancel"));
+#else
+          int ret = QMessageBox::warning(this, "", warningStr, QMessageBox::Ok,
+                                         QMessageBox::Cancel);
+#endif
+
           if (ret == 0) {
             on_actionOnline_Download_Updates_triggered();
           }
@@ -6341,7 +6400,11 @@ void MainWindow::lineEditSetText() {
     }
 
     if (getTableFieldDataType(myTable) == "Data") {
+#if QT_VERSION_MAJOR < 6
       int count = lineEdit->text().trimmed().count();
+#else
+      int count = lineEdit->text().trimmed().length();
+#endif
 
       if (count % 2 != 0) return;
 
@@ -8695,7 +8758,13 @@ void MainWindow::getCheckBoxValue(QVariantMap map, QWidget* tab) {
   for (int i = 0; i < listCheckBox.count(); i++) {
     QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
     QString strObjName = chkbox->objectName();
+
+#if QT_VERSION_MAJOR < 6
     QString name = strObjName.mid(3, strObjName.count() - 2);
+#else
+    QString name = strObjName.mid(3, strObjName.length() - 2);
+#endif
+
     if (strObjName.mid(0, 3) == "chk") chkbox->setChecked(map[name].toBool());
   }
 }
@@ -8705,7 +8774,12 @@ void MainWindow::getComboBoxValue(QVariantMap map, QWidget* tab) {
   listComboBox = getAllComboBox(getAllUIControls(tab));
   for (int i = 0; i < listComboBox.count(); i++) {
     QComboBox* w = (QComboBox*)listComboBox.at(i);
+
+#if QT_VERSION_MAJOR < 6
     QString name = w->objectName().mid(4, w->objectName().count() - 3);
+#else
+    QString name = w->objectName().mid(4, w->objectName().length() - 3);
+#endif
 
     QString cu_text = map[name].toString().trimmed();
     if (w != ui->mycboxFind) {
@@ -8724,10 +8798,18 @@ void MainWindow::getEditValue(QVariantMap map, QWidget* tab) {
     QLineEdit* w = (QLineEdit*)listLineEdit.at(i);
 
     QString str0, name;
+#if QT_VERSION_MAJOR < 6
     str0 = w->objectName().mid(4, w->objectName().count() - 3);  // 去edit
+#else
+    str0 = w->objectName().mid(4, w->objectName().length() - 3);  // 去edit
+#endif
 
     if (str0.mid(0, 3) == "Dat" || str0.mid(0, 3) == "Int")
+#if QT_VERSION_MAJOR < 6
       name = str0.mid(3, str0.count() - 2);
+#else
+      name = str0.mid(3, str0.length() - 2);
+#endif
     else
       name = str0;
 
@@ -8776,10 +8858,19 @@ QVariantMap MainWindow::setEditValue(QVariantMap map, QWidget* tab) {
     QLineEdit* w = (QLineEdit*)listLineEdit.at(i);
     if (!w->isHidden() && w->objectName().mid(0, 4) == "edit") {
       QString str0, name;
+
+#if QT_VERSION_MAJOR < 6
       str0 = w->objectName().mid(4, w->objectName().count() - 3);  // 去edit
+#else
+      str0 = w->objectName().mid(4, w->objectName().length() - 3);  // 去edit
+#endif
 
       if (str0.mid(0, 3) == "Dat" || str0.mid(0, 3) == "Int")
+#if QT_VERSION_MAJOR < 6
         name = str0.mid(3, str0.count() - 2);
+#else
+        name = str0.mid(3, str0.length() - 2);
+#endif
       else
         name = str0;
 
@@ -8821,7 +8912,11 @@ QVariantMap MainWindow::setCheckBoxValue(QVariantMap map, QWidget* tab) {
     QCheckBox* chkbox = (QCheckBox*)listCheckBox.at(i);
     QString strObjName = chkbox->objectName();
     if (!chkbox->isHidden() && strObjName.mid(0, 3) == "chk") {
+#if QT_VERSION_MAJOR < 6
       QString name = strObjName.mid(3, strObjName.count() - 2);
+#else
+      QString name = strObjName.mid(3, strObjName.length() - 2);
+#endif
       map.insert(name, getChkBool(chkbox));
     }
   }
@@ -8836,7 +8931,11 @@ QVariantMap MainWindow::setComboBoxValue(QVariantMap map, QWidget* tab) {
   for (int i = 0; i < listComboBox.count(); i++) {
     QComboBox* w = (QComboBox*)listComboBox.at(i);
     if (!w->isHidden() && w->objectName().mid(0, 4) == "cbox") {
+#if QT_VERSION_MAJOR < 6
       QString name = w->objectName().mid(4, w->objectName().count() - 3);
+#else
+      QString name = w->objectName().mid(4, w->objectName().length() - 3);
+#endif
 
       if (w->objectName().mid(0, 4) == "cbox") {
         if (name != "SystemProductName") {
@@ -9067,9 +9166,15 @@ void MainWindow::on_calendarWidget_selectionChanged() {
   m = QString::number(ui->calendarWidget->selectedDate().month());
   d = QString::number(ui->calendarWidget->selectedDate().day());
 
+#if QT_VERSION_MAJOR < 6
   if (m.count() == 1) m = "0" + m;
 
   if (d.count() == 1) d = "0" + d;
+#else
+  if (m.length() == 1) m = "0" + m;
+
+  if (d.length() == 1) d = "0" + d;
+#endif
 
   QString str = y + m + d;
   ui->editIntMinDate->setText(str);
@@ -9078,7 +9183,13 @@ void MainWindow::on_calendarWidget_selectionChanged() {
 void MainWindow::on_btnROM_clicked() {
   QUuid id = QUuid::createUuid();
   QString strTemp = id.toString();
+
+#if QT_VERSION_MAJOR < 6
   QString strId = strTemp.mid(1, strTemp.count() - 2).toUpper();
+#else
+  QString strId = strTemp.mid(1, strTemp.length() - 2).toUpper();
+#endif
+
   QStringList strList = strId.split("-");
   ui->editDatROM->setText(strList.at(4));
 
@@ -9088,7 +9199,11 @@ void MainWindow::on_btnROM_clicked() {
 void MainWindow::on_myeditPassInput_textChanged(const QString& arg1) {
   if (ui->progressBar->maximum() == 0) return;
 
+#if QT_VERSION_MAJOR < 6
   if (arg1.trimmed().count() > 0) {
+#else
+  if (arg1.trimmed().length() > 0) {
+#endif
     ui->btnGetPassHash->setEnabled(true);
     this->repaint();
   } else {
@@ -9241,13 +9356,23 @@ void MainWindow::on_btnImportMaster_triggered() {
 }
 
 void MainWindow::on_editDatPasswordHash_textChanged(const QString& arg1) {
+#if QT_VERSION_MAJOR < 6
   ui->editDatPasswordHash->setToolTip(QString::number(arg1.count() / 2) +
                                       " Bytes");
+#else
+  ui->editDatPasswordHash->setToolTip(QString::number(arg1.length() / 2) +
+                                      " Bytes");
+#endif
 }
 
 void MainWindow::on_editDatPasswordSalt_textChanged(const QString& arg1) {
+#if QT_VERSION_MAJOR < 6
   ui->editDatPasswordSalt->setToolTip(QString::number(arg1.count() / 2) +
                                       " Bytes");
+#else
+  ui->editDatPasswordSalt->setToolTip(QString::number(arg1.length() / 2) +
+                                      " Bytes");
+#endif
 }
 
 void MainWindow::openDir(QString strDir) {
@@ -9745,14 +9870,27 @@ void MainWindow::on_actionOpenCore_DEV_triggered() {
 void MainWindow::mousePressEvent(QMouseEvent* e) {
   if (e->button() == Qt::LeftButton) {
     isDrag = true;
+
+#if QT_VERSION_MAJOR >= 6
+    QPointF pos = e->globalPosition();
+    m_position = pos.toPoint() - this->pos();
+#else
     m_position = e->globalPos() - this->pos();
+#endif
+
     e->accept();
   }
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent* e) {
   if (isDrag & (e->buttons() & Qt::LeftButton)) {
+#if QT_VERSION_MAJOR >= 6
+    QPointF pos = e->globalPosition();
+    move(pos.toPoint() - m_position);
+#else
     move(e->globalPos() - m_position);
+#endif
+
     e->accept();
   }
 }
