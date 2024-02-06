@@ -1,4 +1,3 @@
-
 ***FadtEnableReset
 Type: plist boolean
 
@@ -433,4 +432,72 @@ This option will override serial port properties listed in the Serial Custom Pro
 失败保护： false
 描述：覆盖串行端口属性。当这个选项被设置为false时，自定义的任何键都不会被覆盖。一般人用不上，保持默认就好。
 这个选项将覆盖串行自定义属性部分中列出的串行端口属性。
+
+***ResizeUsePciRbIo
+Type: plist boolean
+Failsafe: false
+It makes ResizeGpuBars and ResizeAppleGpuBars use PciRootBridgeIo instead of PciIo to avoid errors on older systems which use ReBarUefi by xCuri0 to configure Resizable BAR. If you don't use ReBarUefi or enabling Resizable BAR works fine, keep it False.
 	
+***ShimRetainProtocol
+Type: plist boolean
+Failsafe: false
+Added Allowing OpenCore chained from shim to verify Linux using shim's certificates. It requests Linux shim to keep protocol installed for subsequent image loads. This option is only required if chaining OpenCore from shim. It must be set in order to allow OpenCore to launch items which are verified by certificates present in shim, but not in the system Secure Boot database.
+
+***PciIo
+Type: plist boolean
+Failsafe: false
+Fix Above 4G in BIOS of Aptio IV firmwares.
+
+***FixupAppleEfiImages
+Type: plist boolean
+Failsafe: false
+Fix errors in boot.efi images of early Mac OS X (10.4 and 10.5). The quirk is never applied during the Apple secure boot path for newer macOS and is only needed for loading Mac OS X 10.4 and 10.5, and even then only if the firmware itself includes a modern image loader as current builds of OpenDuet.
+
+***CustomPciSerialDevice
+Type: plist boolean
+Failsafe: false
+For XNU to correctly recognise customised external PCI serial devices. By default, serial logging is disabled. For this patch to be correctly applied, the new option Misc >> Serial >> Override must be enabled with all keys properly set in the optional Misc >> Serial >> Custom dictionary. Default is False.
+
+***ForceAquantiaEthernet
+Type: plist boolean
+Failsafe: false
+Enables Aquantia AQtion based 10GbE network cards support, which used to work natively before macOS 10.15.4. Note: When this option is enabled, DisableIoMapper must be disabled and VT-d must be enabled in BIOS.
+
+***InstanceIdentifier
+Type: plist boolean
+Failsafe: Empty
+Identify OC instance; added the ability to target .contentVisibility files to specific OC instances. Most of us are not going to use this new feature.
+
+***GopBurstMode
+Type: plist boolean
+Failsafe: false
+For faster GOP operation on older firmwares (e.g. EFI-era Macs).
+
+***InitialMode
+Type: plist boolean
+Failsafe: Auto
+Selects the internal ConsoleControl mode in which TextRenderer will operate. Available values are Auto, Text and Graphics. 
+Text and Graphics specify the named mode.
+Auto uses the current mode of the system ConsoleControl protocol when one exists, defaulting to Text mode otherwise.
+
+***ConsoleFont
+Type: plist boolean
+Failsafe: Empty
+Load custom console font for OpenCore Builtin text renderer. Failsafe value is Empty (use OpenCore builtin console font). The font file must be located in \FI/OC/Resources/Font/font-name.hex and must be 8x16 resolution. There is often no need to change console font, the main use-case being to provide an extended character set for those relatively rare EFI applications which have multi-lingual support (e.g. memtest86). OCBinaryData repository includes Terminus and TerminusCore fonts.
+
+***DisableIoMapperMapping
+Type: plist boolean
+Failsafe: false
+Requirement: 13.3+
+Fix WiFi, Thunderbolt and Ethernet issues on systems where the following conditions are present (all must be true):
+- Apple VTD is enabled (VT-d enabled in BIOS):
+- One or more Reserved Memory Regions exist in System DMAR
+- More than 16GB memory installed.
+On some systems, this quirk is only needed when iGPU is enabled.
+On Comet Lake and older Intel Core processors, this quirk is needed when all of the above conditions are true. Motherboards such as Asus Z690 and Z790 do not have Reserved Memory Regions and the iGPU on these processors is not compatible with macOS, so the are not affected by the issue. But many Z370, Z390, Z490... boards are affected.
+Not needed on AMD systems.
+
+***HibernateSkipsPicker
+Type: plist boolean
+Failsafe: false
+Not to show picker if waking from macOS hibernation.
