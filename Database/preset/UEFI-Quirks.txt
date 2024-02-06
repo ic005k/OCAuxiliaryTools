@@ -1,3 +1,6 @@
+CPU:Intel Core 13th Gen Raptor Lake (Requires Fake CPU-ID)
+UEFI:EnableVectorAcceleration RequestBootVarRouting DisableSecurityPolicy
+
 CPU:Intel Core 12th Gen Alder Lake (Requires Fake CPU-ID)
 UEFI:EnableVectorAcceleration RequestBootVarRouting
 
