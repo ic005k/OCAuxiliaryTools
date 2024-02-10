@@ -263,6 +263,17 @@
         <dict>
             <key>Add</key>
             <dict>
+                <key>PciRoot(0x0)/Pci(0x1B,0x0)</key>
+                <dict>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal</string>
+                    <key>device_type</key>
+                    <string>Audio device</string>
+                    <key>layout-id</key>
+                    <integer>86</integer>
+                    <key>model</key>
+                    <string>HD Audio</string>
+                </dict>
                 <key>PciRoot(0x0)/Pci(0x1F,0x3)</key>
                 <dict>
                     <key>AAPL,slot-name</key>
@@ -967,7 +978,7 @@
                 <key>PasswordSalt</key>
                 <data></data>
                 <key>ScanPolicy</key>
-                <integer>17760515</integer>
+                <integer>0</integer>
                 <key>SecureBootModel</key>
                 <string>Default</string>
                 <key>Vault</key>
