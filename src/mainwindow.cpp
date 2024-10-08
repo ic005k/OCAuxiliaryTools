@@ -8103,7 +8103,8 @@ void MainWindow::copyLine(QTableWidget* w, QAction* copyAction) {
     QString name = w->objectName();
     QString qfile = strConfigPath + name + ".ini";
 
-    QItemSelectionModel* selections = w->selectionModel();  // 返回当前的选择模式
+    QItemSelectionModel* selections =
+        w->selectionModel();  // 返回当前的选择模式
     QModelIndexList selectedsList =
         selections->selectedIndexes();  // 返回所有选定的模型项目索引列表
 
@@ -9782,7 +9783,7 @@ void MainWindow::on_actionDocumentation_triggered() {
     QDesktopServices::openUrl(url_en);
   } else {
     QUrl url_cn(QString("https://github.com/ic005k/" + strAppName +
-                        "/blob/master/READMe-cn.md"));
+                        "/blob/master/READMe.md"));
     QDesktopServices::openUrl(url_cn);
   }
 }

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1210</width>
+    <width>1121</width>
     <height>801</height>
    </rect>
   </property>
@@ -28,10 +28,10 @@
     <item row="1" column="1">
      <widget class="QFrame" name="frameTip">
       <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
       <property name="frameShadow">
-       <enum>QFrame::Plain</enum>
+       <enum>QFrame::Shadow::Plain</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_64">
        <property name="topMargin">
@@ -85,10 +85,10 @@
        </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
       <property name="movement">
-       <enum>QListView::Static</enum>
+       <enum>QListView::Movement::Static</enum>
       </property>
      </widget>
     </item>
@@ -107,10 +107,10 @@
        </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
       <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
+       <enum>QFrame::Shadow::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_76">
        <property name="leftMargin">
@@ -170,10 +170,10 @@
        </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
       <property name="frameShadow">
-       <enum>QFrame::Plain</enum>
+       <enum>QFrame::Shadow::Plain</enum>
       </property>
      </widget>
     </item>
@@ -186,7 +186,7 @@
        </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
      </widget>
     </item>
@@ -239,7 +239,7 @@
       <item row="0" column="3">
        <spacer name="horizontalSpacer_37">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -260,13 +260,13 @@
        <string/>
       </property>
       <property name="tabPosition">
-       <enum>QTabWidget::North</enum>
+       <enum>QTabWidget::TabPosition::North</enum>
       </property>
       <property name="tabShape">
-       <enum>QTabWidget::Rounded</enum>
+       <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -288,10 +288,10 @@
            <string notr="true"/>
           </property>
           <property name="tabShape">
-           <enum>QTabWidget::Rounded</enum>
+           <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -300,9 +300,15 @@
            <attribute name="title">
             <string>Add</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_3">
-            <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_106">
+            <item>
              <widget class="QTableWidget" name="table_acpi_add">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="toolTip">
                <string notr="true">ACPI (Advanced Configuration and Power Interface) is an open standard to discover and configure computer hardware.
 
@@ -341,10 +347,10 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
                <string/>
               </property>
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="selectionMode">
-               <enum>QAbstractItemView::ExtendedSelection</enum>
+               <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
               </property>
               <property name="rowCount">
                <number>0</number>
@@ -357,12 +363,15 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               <column/>
              </widget>
             </item>
-            <item row="0" column="1">
+            <item>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
-               <spacer name="verticalSpacer_29">
+               <spacer name="verticalSpacer">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Policy::Expanding</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -459,6 +468,12 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
               </item>
               <item>
                <widget class="QToolButton" name="btnOpenACPIDir">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>20</width>
@@ -573,7 +588,7 @@ relevant when performing different types of renames.
               <item>
                <spacer name="verticalSpacer_32">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -851,7 +866,7 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
               <item>
                <spacer name="verticalSpacer_31">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -933,10 +948,10 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
                </size>
               </property>
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QGridLayout" name="gridLayout_43">
                <item row="0" column="0">
@@ -944,7 +959,7 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
                  <item>
                   <spacer name="horizontalSpacer_10">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -970,7 +985,7 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
                     </size>
                    </property>
                    <property name="focusPolicy">
-                    <enum>Qt::NoFocus</enum>
+                    <enum>Qt::FocusPolicy::NoFocus</enum>
                    </property>
                    <property name="editable">
                     <bool>false</bool>
@@ -980,7 +995,7 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
                  <item>
                   <spacer name="horizontalSpacer_3">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -998,7 +1013,7 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
             <item row="1" column="0">
              <spacer name="horizontalSpacer_4">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -1011,10 +1026,10 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
             <item row="1" column="1" rowspan="2">
              <widget class="QFrame" name="frame_chk_10">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_36">
                <item>
@@ -1152,7 +1167,7 @@ This works around patched tables becoming incompatible with the SLIC table causi
             <item row="2" column="2">
              <spacer name="horizontalSpacer_9">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -1179,7 +1194,7 @@ This works around patched tables becoming incompatible with the SLIC table causi
            <string/>
           </property>
           <property name="tabShape">
-           <enum>QTabWidget::Rounded</enum>
+           <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
            <number>2</number>
@@ -1242,7 +1257,7 @@ Description: Exclude MMIO address from the devirtualisation procedure.
               <item>
                <spacer name="verticalSpacer_60">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -1330,7 +1345,7 @@ Description: Exclude MMIO address from the devirtualisation procedure.
               <item>
                <spacer name="verticalSpacer_61">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -1399,10 +1414,10 @@ Description: Exclude MMIO address from the devirtualisation procedure.
                </size>
               </property>
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_38">
                <item>
@@ -1678,10 +1693,10 @@ Note: The necessity of this quirk is determined by early boot crashes of the fir
             <item row="1" column="1">
              <widget class="QFrame" name="frame_chk_13">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_48">
                <item>
@@ -1943,10 +1958,10 @@ Note: The necessity of this quirk is determined by early boot failures either in
             <item row="1" column="2">
              <widget class="QFrame" name="frame_edit_9">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_39">
                <item>
@@ -2052,7 +2067,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               <item row="0" column="0">
                <spacer name="horizontalSpacer_12">
                 <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+                 <enum>Qt::Orientation::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -2065,7 +2080,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               <item row="0" column="2">
                <widget class="QComboBox" name="comboBoxBooter">
                 <property name="focusPolicy">
-                 <enum>Qt::NoFocus</enum>
+                 <enum>Qt::FocusPolicy::NoFocus</enum>
                 </property>
                 <property name="editable">
                  <bool>false</bool>
@@ -2088,7 +2103,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               <item row="0" column="3">
                <spacer name="horizontalSpacer_13">
                 <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+                 <enum>Qt::Orientation::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -2114,7 +2129,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabDP">
           <property name="tabShape">
-           <enum>QTabWidget::Rounded</enum>
+           <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
            <number>0</number>
@@ -2152,7 +2167,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
                 <item>
                  <spacer name="verticalSpacer_36">
                   <property name="orientation">
-                   <enum>Qt::Vertical</enum>
+                   <enum>Qt::Orientation::Vertical</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -2213,7 +2228,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
                 <item>
                  <spacer name="verticalSpacer_37">
                   <property name="orientation">
-                   <enum>Qt::Vertical</enum>
+                   <enum>Qt::Orientation::Vertical</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -2301,7 +2316,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               <item>
                <spacer name="verticalSpacer_38">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -2367,7 +2382,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               <item>
                <spacer name="verticalSpacer_39">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -2434,7 +2449,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabKernel">
           <property name="tabShape">
-           <enum>QTabWidget::Rounded</enum>
+           <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
            <number>0</number>
@@ -2452,7 +2467,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               <item>
                <spacer name="verticalSpacer_30">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -2629,7 +2644,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               <item>
                <spacer name="verticalSpacer_33">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -2713,7 +2728,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               <item>
                <spacer name="verticalSpacer_34">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -2802,7 +2817,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               <item>
                <spacer name="verticalSpacer_35">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -2878,10 +2893,10 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
             <item row="0" column="0">
              <widget class="QFrame" name="frame_chk_27">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_40">
                <item>
@@ -2911,10 +2926,10 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit_22">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_41">
                <item>
@@ -2922,7 +2937,7 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
                  <item>
                   <spacer name="horizontalSpacer_14">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -2984,7 +2999,7 @@ Note 2 : While this option is usually needed to disable AppleIntelCpuPowerManage
                  <item>
                   <spacer name="horizontalSpacer_15">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -3138,10 +3153,10 @@ Cpuid1Mask: FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
             <item row="1" column="0">
              <widget class="QFrame" name="frame_chk_14">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_42">
                <item>
@@ -3346,10 +3361,10 @@ Note 2 : This option will not protect areas from being overwritten at firmware s
             <item row="1" column="1">
              <widget class="QFrame" name="frame_chk_15">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_43">
                <item>
@@ -3578,10 +3593,10 @@ The only valid solution is to limit the amount of used ports to 15 (discarding s
             <item row="1" column="2">
              <widget class="QFrame" name="frame_edit_10">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_44">
                <item>
@@ -3643,7 +3658,7 @@ trim.</string>
               <item row="0" column="3">
                <spacer name="horizontalSpacer_30">
                 <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+                 <enum>Qt::Orientation::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -3656,7 +3671,7 @@ trim.</string>
               <item row="0" column="2">
                <widget class="QComboBox" name="comboBoxKernel">
                 <property name="focusPolicy">
-                 <enum>Qt::NoFocus</enum>
+                 <enum>Qt::FocusPolicy::NoFocus</enum>
                 </property>
                 <property name="editable">
                  <bool>false</bool>
@@ -3679,7 +3694,7 @@ trim.</string>
               <item row="0" column="0">
                <spacer name="horizontalSpacer_29">
                 <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+                 <enum>Qt::Orientation::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -3701,10 +3716,10 @@ trim.</string>
             <item row="0" column="0">
              <widget class="QFrame" name="frame_chk_16">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_45">
                <item>
@@ -3760,10 +3775,10 @@ This setting allows matching the latest kernelcache with a suitable architecture
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit_11">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_46">
                <item>
@@ -3872,7 +3887,7 @@ This setting allows to prevent using faster kernel caching variants if slower va
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabMisc">
           <property name="tabShape">
-           <enum>QTabWidget::Rounded</enum>
+           <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
            <number>6</number>
@@ -3888,10 +3903,10 @@ This setting allows to prevent using faster kernel caching variants if slower va
             <item row="0" column="0">
              <widget class="QFrame" name="frame_chk_23">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_63">
                <item>
@@ -4020,10 +4035,10 @@ Note: The screen reader requires working audio support. Refer to the UEFI Audio 
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit_16">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_64">
                <item>
@@ -4631,10 +4646,10 @@ Note: This option may not work well with System text renderer. Setting a backgro
             <item row="0" column="0">
              <widget class="QFrame" name="frame_chk_22">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_61">
                <item>
@@ -4759,10 +4774,10 @@ Note: For security reasons SysReport option is not available in RELEASE builds. 
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit_15">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_62">
                <item>
@@ -4978,10 +4993,10 @@ Console logging prints less than all the other variants. Depending on the build 
             <item row="0" column="0">
              <widget class="QFrame" name="frame_chk_21">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_59">
                <item>
@@ -5133,10 +5148,10 @@ Note: This functionality is still under development and is not ready for product
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit_14">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_60">
                <item>
@@ -5707,7 +5722,7 @@ Third party drivers may introduce additional security (and performance) consider
               <item>
                <spacer name="verticalSpacer_57">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -5786,7 +5801,7 @@ Third party drivers may introduce additional security (and performance) consider
               <item>
                <spacer name="verticalSpacer_58">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -5866,7 +5881,7 @@ Third party drivers may introduce additional security (and performance) consider
               <item>
                <spacer name="verticalSpacer_59">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -5954,10 +5969,10 @@ Third party drivers may introduce additional security (and performance) consider
                </size>
               </property>
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Shadow::Raised</enum>
               </property>
               <layout class="QGridLayout" name="gridLayout_48">
                <item row="0" column="0">
@@ -5969,10 +5984,10 @@ Third party drivers may introduce additional security (and performance) consider
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit_23">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Shadow::Raised</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_75">
                <item>
@@ -6152,7 +6167,7 @@ Third party drivers may introduce additional security (and performance) consider
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabNVRAM">
           <property name="tabShape">
-           <enum>QTabWidget::Rounded</enum>
+           <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
            <number>0</number>
@@ -6180,7 +6195,7 @@ Third party drivers may introduce additional security (and performance) consider
                 <item>
                  <spacer name="verticalSpacer_48">
                   <property name="orientation">
-                   <enum>Qt::Vertical</enum>
+                   <enum>Qt::Orientation::Vertical</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -6261,7 +6276,7 @@ Third party drivers may introduce additional security (and performance) consider
                 <item>
                  <spacer name="verticalSpacer_49">
                   <property name="orientation">
-                   <enum>Qt::Vertical</enum>
+                   <enum>Qt::Orientation::Vertical</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -6358,7 +6373,7 @@ Third party drivers may introduce additional security (and performance) consider
               <item>
                <spacer name="verticalSpacer_50">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -6437,7 +6452,7 @@ Third party drivers may introduce additional security (and performance) consider
               <item>
                <spacer name="verticalSpacer_51">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -6516,7 +6531,7 @@ Third party drivers may introduce additional security (and performance) consider
               <item>
                <spacer name="verticalSpacer_52">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -6595,7 +6610,7 @@ Third party drivers may introduce additional security (and performance) consider
               <item>
                <spacer name="verticalSpacer_53">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -6661,10 +6676,10 @@ Third party drivers may introduce additional security (and performance) consider
            <item row="0" column="0">
             <widget class="QFrame" name="frame_chk_24">
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_69">
               <item>
@@ -6686,10 +6701,10 @@ Third party drivers may introduce additional security (and performance) consider
            <item row="0" column="1">
             <widget class="QFrame" name="frame_chk_25">
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_72">
               <item>
@@ -6715,10 +6730,10 @@ Third party drivers may introduce additional security (and performance) consider
            <item row="0" column="2">
             <widget class="QFrame" name="frame_chk_26">
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_73">
               <item>
@@ -6752,10 +6767,10 @@ A continuously updated variable list can be found in a corresponding document: N
            <item row="0" column="3">
             <widget class="QFrame" name="frame_edit_21">
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_71">
               <item>
@@ -6777,7 +6792,7 @@ A continuously updated variable list can be found in a corresponding document: N
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabPlatformInfo">
           <property name="tabShape">
-           <enum>QTabWidget::Rounded</enum>
+           <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
            <number>0</number>
@@ -6799,10 +6814,10 @@ A continuously updated variable list can be found in a corresponding document: N
                </size>
               </property>
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <property name="midLineWidth">
                <number>0</number>
@@ -6887,10 +6902,10 @@ Note: On most newer firmwares these bits are already set, the option may be nece
             <item row="1" column="1">
              <widget class="QFrame" name="frame_edit_6">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_28">
                <item>
@@ -6937,7 +6952,7 @@ Note: On most newer firmwares these bits are already set, the option may be nece
                  <item>
                   <spacer name="horizontalSpacer_42">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -7152,10 +7167,10 @@ Note: On certain Mac models (namely MacBookPro10,x and any MacBookAir), SPMemory
             <item row="0" column="0">
              <widget class="QFrame" name="frame_edit_17">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_65">
                <item>
@@ -7341,10 +7356,10 @@ AppleACPIPlatform.kext 必须设置为 1，以便将 SATA 设备路径附加到 
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit_18">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_66">
                <item>
@@ -7590,10 +7605,10 @@ X86PlatformPlugin.kext读取的已知位：
             <item row="0" column="0">
              <widget class="QFrame" name="frame_edit_7">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QGridLayout" name="gridLayout_32">
                <property name="leftMargin">
@@ -7899,10 +7914,10 @@ If there are no error-correction bits, this value should be equal to DataWidth.
             <item row="2" column="0">
              <widget class="QFrame" name="frame_chk_28">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_105">
                <property name="leftMargin">
@@ -7928,7 +7943,7 @@ If there are no error-correction bits, this value should be equal to DataWidth.
               <item>
                <spacer name="verticalSpacer_54">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -7991,10 +8006,10 @@ If there are no error-correction bits, this value should be equal to DataWidth.
             <item row="0" column="0">
              <widget class="QFrame" name="frame_edit_19">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_67">
                <item>
@@ -8196,10 +8211,10 @@ If there are no error-correction bits, this value should be equal to DataWidth.
             <item row="0" column="0">
              <widget class="QFrame" name="frame_edit_20">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_68">
                <item>
@@ -8788,7 +8803,7 @@ This value gets updated and takes part in update delivery configuration and macO
             <item row="0" column="0">
              <widget class="QTextEdit" name="textMacInfo">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="readOnly">
                <bool>true</bool>
@@ -8808,10 +8823,10 @@ This value gets updated and takes part in update delivery configuration and macO
            <item row="0" column="0">
             <widget class="QFrame" name="frame_chk_17">
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_52">
               <item>
@@ -8854,10 +8869,10 @@ This value gets updated and takes part in update delivery configuration and macO
            <item row="0" column="1">
             <widget class="QFrame" name="frame_chk_18">
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_53">
               <item>
@@ -8977,10 +8992,10 @@ OpenCore在生成修改后的DMI表时，总是设置一个最新的SMBIOS版本
            <item row="0" column="2">
             <widget class="QFrame" name="frame_chk_19">
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_55">
               <item>
@@ -9039,10 +9054,10 @@ If UpdateNVRAM is set to true the behaviour is undefined when any of the fields 
            <item row="0" column="3">
             <widget class="QFrame" name="frame_edit_12">
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_54">
               <item>
@@ -9110,7 +9125,7 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabUEFI">
           <property name="tabShape">
-           <enum>QTabWidget::Rounded</enum>
+           <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
            <number>2</number>
@@ -9126,10 +9141,10 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
             <item row="0" column="0">
              <widget class="QFrame" name="frame_chk_2">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_31">
                <item>
@@ -9215,10 +9230,10 @@ APFS verbose输出对调试很有用。</string>
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit_2">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_50">
                <item>
@@ -9343,10 +9358,10 @@ APFS驱动版本连接APFS驱动与macOS版本。旧版macOS的APFS驱动程序�
             <item row="0" column="0">
              <widget class="QFrame" name="frame_chk_3">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_33">
                <item>
@@ -9417,10 +9432,10 @@ Description: Enable custom key repeat delays when using the OpenCore implementat
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit_3">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_51">
                <item>
@@ -9708,10 +9723,10 @@ Configures the multiplier for pointer movements. The Apple OEM default value is 
             <item row="0" column="0">
              <widget class="QFrame" name="frame_chk">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_34">
                <item>
@@ -9765,10 +9780,10 @@ AppleHDA kext只有在TCSEL寄存器被配置为使用TC0流的情况下才能�
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_37">
                <item>
@@ -10009,7 +10024,7 @@ Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid c
                  <item>
                   <spacer name="horizontalSpacer_11">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -10069,7 +10084,7 @@ Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid c
               <item>
                <spacer name="verticalSpacer_55">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -10189,10 +10204,10 @@ Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid c
             <item row="0" column="0">
              <widget class="QFrame" name="frame_chk_4">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_32">
                <item>
@@ -10273,10 +10288,10 @@ This option discards keys that are neither ASCII, nor are defined in the UEFI sp
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit_4">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_49">
                <item>
@@ -10424,10 +10439,10 @@ The recommended value is 50000 (5 milliseconds) or slightly higher. Select ASUS 
             <item row="0" column="0">
              <widget class="QFrame" name="frame_chk_11">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_29">
                <item>
@@ -10624,10 +10639,10 @@ Note: This option only applies to System renderer. On all known affected systems
             <item row="0" column="1">
              <widget class="QFrame" name="frame_edit_8">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_30">
                <item>
@@ -10941,10 +10956,10 @@ Note 2 : When switching from manually specifified NVRAM variable to this prefere
             <item row="0" column="1">
              <widget class="QFrame" name="frame_chk_5">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_26">
                <property name="spacing">
@@ -11076,7 +11091,7 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
             <item row="0" column="2">
              <spacer name="horizontalSpacer_5">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -11089,7 +11104,7 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
             <item row="0" column="4">
              <spacer name="horizontalSpacer_6">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -11102,7 +11117,7 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
             <item row="0" column="0">
              <spacer name="horizontalSpacer_7">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -11115,10 +11130,10 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
             <item row="0" column="5">
              <widget class="QFrame" name="frame_chk_8">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_35">
                <property name="spacing">
@@ -11242,10 +11257,10 @@ VoiceOver协议是直布罗陀机（T2）特有的，在macOS High Sierra（10.1
             <item row="0" column="3">
              <widget class="QFrame" name="frame_chk_7">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_27">
                <property name="spacing">
@@ -11369,7 +11384,7 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
             <item row="0" column="6">
              <spacer name="horizontalSpacer_8">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -11395,10 +11410,10 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
                </size>
               </property>
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
+               <enum>QFrame::Shadow::Raised</enum>
               </property>
               <layout class="QGridLayout" name="gridLayout_2">
                <property name="leftMargin">
@@ -11418,7 +11433,7 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
                  <item>
                   <spacer name="horizontalSpacer_16">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -11444,7 +11459,7 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
                  <item>
                   <widget class="QComboBox" name="comboBoxUEFI">
                    <property name="focusPolicy">
-                    <enum>Qt::NoFocus</enum>
+                    <enum>Qt::FocusPolicy::NoFocus</enum>
                    </property>
                    <property name="editable">
                     <bool>false</bool>
@@ -11454,7 +11469,7 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
                  <item>
                   <spacer name="horizontalSpacer_17">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -11478,10 +11493,10 @@ Note: This protocol allows newer EfiBoot versions (at least 10.15) to expose scr
                </size>
               </property>
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout">
                <item>
@@ -11672,10 +11687,10 @@ For example, this option allows reloading NVIDIA GOP Option ROM on older Macs af
             <item row="1" column="1">
              <widget class="QFrame" name="frame_edit_5">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::Shape::StyledPanel</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_25">
                <item>
@@ -11847,7 +11862,7 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
               <item>
                <spacer name="verticalSpacer_56">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -11913,10 +11928,10 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
            <item row="0" column="0">
             <widget class="QFrame" name="frame_chk_20">
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_56">
               <item>
@@ -11954,10 +11969,10 @@ Enable this option to be able to see all the boot options when having multiple d
            <item row="0" column="1">
             <widget class="QFrame" name="frame_edit_13">
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+              <enum>QFrame::Shadow::Plain</enum>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_58">
               <item>
@@ -11997,8 +12012,8 @@ Enable this option to be able to see all the boot options when having multiple d
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1210</width>
-     <height>24</height>
+     <width>1121</width>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -12112,10 +12127,10 @@ QToolBar {border:none;}</string>
     <bool>false</bool>
    </property>
    <property name="allowedAreas">
-    <set>Qt::NoToolBarArea</set>
+    <set>Qt::ToolBarArea::NoToolBarArea</set>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonIconOnly</enum>
+    <enum>Qt::ToolButtonStyle::ToolButtonIconOnly</enum>
    </property>
    <property name="floatable">
     <bool>false</bool>
