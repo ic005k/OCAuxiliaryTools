@@ -1657,6 +1657,10 @@ void MainWindow::ParserUEFI(QVariantMap map) {
   // 9. ReservedMemory
   QVariantList mapRM = map["ReservedMemory"].toList();
   Method::set_TableData(ui->table_uefi_ReservedMemory, mapRM);
+
+  // 10. Unload
+  QVariantList mapUnload = map["Unload"].toList();
+  Method::set_TableData(ui->table_uefi_Unload, mapUnload);
 }
 
 void MainWindow::on_btnSave() { SavePlist(SaveFileName); }
@@ -2149,6 +2153,9 @@ QVariantMap MainWindow::SaveUEFI() {
   // 9. ReservedMemory
   subMap["ReservedMemory"] =
       Method::get_TableData(ui->table_uefi_ReservedMemory);
+
+  // 10. Unload
+  subMap["Unload"] = Method::get_TableData(ui->table_uefi_Unload);
 
   return subMap;
 }
@@ -10227,6 +10234,10 @@ void MainWindow::smart_UpdateKeyField() {
   Method::init_Table(
       ui->table_uefi_ReservedMemory,
       Method::get_HorizontalHeaderList("UEFI", "ReservedMemory"));
+
+  // Unload
+  Method::init_Table(ui->table_uefi_Unload,
+                     Method::get_HorizontalHeaderList("UEFI", "Unload"));
 
   if (!loading) {
     for (int i = 0; i < listOCATWidgetDelList.count(); i++) {

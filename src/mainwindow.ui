@@ -266,7 +266,7 @@
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -291,7 +291,7 @@
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -11572,6 +11572,70 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
               </item>
               <item>
                <widget class="QToolButton" name="btnUEFIRM_Del">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>-</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="shortcut">
+                 <string>Del</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tabUEFI10">
+           <attribute name="title">
+            <string>Unload</string>
+           </attribute>
+           <layout class="QHBoxLayout" name="horizontalLayout_108">
+            <item>
+             <widget class="QTableWidget" name="table_uefi_Unload">
+              <property name="columnCount">
+               <number>5</number>
+              </property>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_76">
+              <item>
+               <widget class="QToolButton" name="btnUEFIUnload_Add">
+                <property name="maximumSize">
+                 <size>
+                  <width>20</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>+</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="btnUEFIUnload_Del">
                 <property name="maximumSize">
                  <size>
                   <width>20</width>

@@ -183,7 +183,7 @@ void Method::getAllFiles(const QString& foldPath, QStringList& folds,
   while (it.hasNext()) {
     it.next();
     QFileInfo fileInfo = it.fileInfo();
-    if (formats.contains(fileInfo.suffix())) {  //检测格式，按需保存
+    if (formats.contains(fileInfo.suffix())) {  // 检测格式，按需保存
       folds << fileInfo.absoluteFilePath();
     }
   }
@@ -320,7 +320,7 @@ void Method::kextUpdate() {
             }
           }
         }  // end for j=0
-      }    // end !isDev
+      }  // end !isDev
       else {
         QString strName = name;
         strName = strName.replace(".kext", 0);
@@ -444,7 +444,7 @@ void Method::startDownload(QString strUrl) {
 
   myfile->setFileName(file);
   bool ret =
-      myfile->open(QIODevice::WriteOnly | QIODevice::Truncate);  //创建文件
+      myfile->open(QIODevice::WriteOnly | QIODevice::Truncate);  // 创建文件
   if (!ret) {
     mw_one->dlgSyncOC->ui->btnStop->click();
     QMessageBox::warning(this, tr("Warning"),
@@ -712,7 +712,7 @@ void Method::updateOpenCore() {
 }
 
 void Method::doProcessDownloadProgress(qint64 recv_total,
-                                       qint64 all_total)  //显示
+                                       qint64 all_total)  // 显示
 {
   if (blBreak) return;
 
@@ -1054,7 +1054,7 @@ void Method::set_nv_key(QString key, QString dataType) {
     mw_one->ui->table_nv_add->setItem(mw_one->ui->table_nv_add->rowCount() - 1,
                                       1, newItem1);
 
-    //保存数据
+    // 保存数据
     mw_one->write_ini(mw_one->ui->table_nv_add0, mw_one->ui->table_nv_add,
                       mw_one->ui->table_nv_add0->currentRow());
   }
@@ -1212,6 +1212,11 @@ void Method::goTable(QTableWidget* table) {
   if (table == mw_one->ui->table_uefi_ReservedMemory) {
     mw_one->ui->listMain->setCurrentRow(7);
     mw_one->ui->listSub->setCurrentRow(8);
+  }
+
+  if (table == mw_one->ui->table_uefi_Unload) {
+    mw_one->ui->listMain->setCurrentRow(7);
+    mw_one->ui->listSub->setCurrentRow(9);
   }
 }
 
@@ -2510,7 +2515,7 @@ void Method::set_TableData(QTableWidget* t, QVariantList mapList) {
       }
     }
 
-    if (map.count() == 0) {  //代表列，从0开始
+    if (map.count() == 0) {  // 代表列，从0开始
       QTableWidgetItem* newItem1 =
           new QTableWidgetItem(mapList.at(i).toString());
       t->setItem(i + rowTotal, 0, newItem1);
