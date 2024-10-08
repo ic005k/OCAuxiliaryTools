@@ -266,7 +266,7 @@
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -291,7 +291,7 @@
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -365,22 +365,9 @@ ACPI表的加载顺序遵循数组中的项目顺序。ACPI表从OC/ACPI目录�
             </item>
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_2">
-              <item>
-               <spacer name="verticalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Policy::Expanding</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
+              <property name="sizeConstraint">
+               <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+              </property>
               <item>
                <widget class="QToolButton" name="btnACPIAdd_Add">
                 <property name="minimumSize">
@@ -585,19 +572,6 @@ relevant when performing different types of renames.
             </item>
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_5">
-              <item>
-               <spacer name="verticalSpacer_32">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnACPIDel_Add">
                 <property name="maximumSize">
@@ -863,19 +837,6 @@ Tianocore AcpiAml.h源文件可能有助于更好地理解ACPI操作码。
             </item>
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_4">
-              <item>
-               <spacer name="verticalSpacer_31">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnACPIPatch_Add">
                 <property name="maximumSize">
@@ -1255,19 +1216,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_23">
               <item>
-               <spacer name="verticalSpacer_60">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
                <widget class="QToolButton" name="btnBooter_Add">
                 <property name="maximumSize">
                  <size>
@@ -1342,19 +1290,6 @@ Description: Exclude MMIO address from the devirtualisation procedure.
             </item>
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_24">
-              <item>
-               <spacer name="verticalSpacer_61">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnBooterPatchAdd">
                 <property name="maximumSize">
@@ -2132,7 +2067,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2164,19 +2099,6 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               </item>
               <item row="0" column="3">
                <layout class="QVBoxLayout" name="vlDPAdd">
-                <item>
-                 <spacer name="verticalSpacer_36">
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
                 <item>
                  <widget class="QToolButton" name="btnDPAdd_Add">
                   <property name="maximumSize">
@@ -2225,19 +2147,6 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
               </item>
               <item row="0" column="1">
                <layout class="QVBoxLayout" name="vlDPAdd0">
-                <item>
-                 <spacer name="verticalSpacer_37">
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
                 <item>
                  <widget class="QToolButton" name="btnDPAdd_Add0">
                   <property name="maximumSize">
@@ -2314,19 +2223,6 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_11">
               <item>
-               <spacer name="verticalSpacer_38">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
                <widget class="QToolButton" name="btnDPDel_Add0">
                 <property name="maximumSize">
                  <size>
@@ -2379,19 +2275,6 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
             </item>
             <item row="0" column="3">
              <layout class="QVBoxLayout" name="verticalLayout_12">
-              <item>
-               <spacer name="verticalSpacer_39">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnDPDel_Add">
                 <property name="maximumSize">
@@ -2452,7 +2335,7 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>6</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -2464,19 +2347,6 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
            <layout class="QGridLayout" name="gridLayout_12">
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_3">
-              <item>
-               <spacer name="verticalSpacer_30">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnKernelAdd_Add">
                 <property name="maximumSize">
@@ -2642,19 +2512,6 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_6">
               <item>
-               <spacer name="verticalSpacer_33">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
                <widget class="QToolButton" name="btnKernelBlock_Add">
                 <property name="maximumSize">
                  <size>
@@ -2725,19 +2582,6 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
             </item>
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_7">
-              <item>
-               <spacer name="verticalSpacer_34">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnKernelForce_Add">
                 <property name="maximumSize">
@@ -2814,19 +2658,6 @@ Note: See ResizeGpuBars quirk for general GPU PCI BAR size configuration and mor
             </item>
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_8">
-              <item>
-               <spacer name="verticalSpacer_35">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnKernelPatchAdd">
                 <property name="maximumSize">
@@ -5720,19 +5551,6 @@ Third party drivers may introduce additional security (and performance) consider
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_20">
               <item>
-               <spacer name="verticalSpacer_57">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
                <widget class="QToolButton" name="btnMiscBO_Add">
                 <property name="maximumSize">
                  <size>
@@ -5798,19 +5616,6 @@ Third party drivers may introduce additional security (and performance) consider
             </item>
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_21">
-              <item>
-               <spacer name="verticalSpacer_58">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnMiscEntries_Add">
                 <property name="maximumSize">
@@ -5878,19 +5683,6 @@ Third party drivers may introduce additional security (and performance) consider
             </item>
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_22">
-              <item>
-               <spacer name="verticalSpacer_59">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnMiscTools_Add">
                 <property name="maximumSize">
@@ -6170,7 +5962,7 @@ Third party drivers may introduce additional security (and performance) consider
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -6192,19 +5984,6 @@ Third party drivers may introduce additional security (and performance) consider
               </item>
               <item row="0" column="1">
                <layout class="QVBoxLayout" name="verticalLayout_9">
-                <item>
-                 <spacer name="verticalSpacer_48">
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
                 <item>
                  <widget class="QToolButton" name="btnNVRAMAdd_Add0">
                   <property name="maximumSize">
@@ -6273,19 +6052,6 @@ Third party drivers may introduce additional security (and performance) consider
               </item>
               <item row="0" column="3">
                <layout class="QVBoxLayout" name="verticalLayout_10">
-                <item>
-                 <spacer name="verticalSpacer_49">
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
                 <item>
                  <widget class="QToolButton" name="btnNVRAMAdd_Add">
                   <property name="maximumSize">
@@ -6371,19 +6137,6 @@ Third party drivers may introduce additional security (and performance) consider
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_13">
               <item>
-               <spacer name="verticalSpacer_50">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
                <widget class="QToolButton" name="btnNVRAMDel_Add0">
                 <property name="maximumSize">
                  <size>
@@ -6449,19 +6202,6 @@ Third party drivers may introduce additional security (and performance) consider
             </item>
             <item row="0" column="3">
              <layout class="QVBoxLayout" name="verticalLayout_14">
-              <item>
-               <spacer name="verticalSpacer_51">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnNVRAMDel_Add">
                 <property name="maximumSize">
@@ -6529,19 +6269,6 @@ Third party drivers may introduce additional security (and performance) consider
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_15">
               <item>
-               <spacer name="verticalSpacer_52">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
                <widget class="QToolButton" name="btnNVRAMLS_Add0">
                 <property name="maximumSize">
                  <size>
@@ -6607,19 +6334,6 @@ Third party drivers may introduce additional security (and performance) consider
             </item>
             <item row="0" column="3">
              <layout class="QVBoxLayout" name="verticalLayout_16">
-              <item>
-               <spacer name="verticalSpacer_53">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnNVRAMLS_Add">
                 <property name="maximumSize">
@@ -6795,7 +6509,7 @@ A continuously updated variable list can be found in a corresponding document: N
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -7601,7 +7315,7 @@ X86PlatformPlugin.kext读取的已知位：
            <attribute name="title">
             <string>Memory</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_46">
+           <layout class="QGridLayout" name="gridLayout_3">
             <item row="0" column="0">
              <widget class="QFrame" name="frame_edit_7">
               <property name="frameShape">
@@ -7897,19 +7611,68 @@ If there are no error-correction bits, this value should be equal to DataWidth.
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QTableWidget" name="tableDevices">
-              <property name="columnCount">
-               <number>8</number>
-              </property>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-             </widget>
+             <layout class="QHBoxLayout" name="horizontalLayout_107">
+              <item>
+               <widget class="QTableWidget" name="tableDevices">
+                <property name="columnCount">
+                 <number>8</number>
+                </property>
+                <column/>
+                <column/>
+                <column/>
+                <column/>
+                <column/>
+                <column/>
+                <column/>
+                <column/>
+               </widget>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_17">
+                <item>
+                 <widget class="QToolButton" name="btnDevices_add">
+                  <property name="maximumSize">
+                   <size>
+                    <width>20</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>+</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="btnDevices_del">
+                  <property name="maximumSize">
+                   <size>
+                    <width>20</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                  <property name="shortcut">
+                   <string>Del</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
             </item>
             <item row="2" column="0">
              <widget class="QFrame" name="frame_chk_28">
@@ -7937,64 +7700,6 @@ If there are no error-correction bits, this value should be equal to DataWidth.
                </item>
               </layout>
              </widget>
-            </item>
-            <item row="0" column="1" rowspan="2">
-             <layout class="QVBoxLayout" name="verticalLayout_17">
-              <item>
-               <spacer name="verticalSpacer_54">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QToolButton" name="btnDevices_add">
-                <property name="maximumSize">
-                 <size>
-                  <width>20</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>+</string>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>20</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QToolButton" name="btnDevices_del">
-                <property name="maximumSize">
-                 <size>
-                  <width>20</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>-</string>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>20</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="shortcut">
-                 <string>Del</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
             </item>
            </layout>
           </widget>
@@ -9128,7 +8833,7 @@ Note: A side effect of using Custom approach is making SMBIOS updates exclusive 
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>8</number>
           </property>
           <property name="documentMode">
            <bool>true</bool>
@@ -10081,19 +9786,6 @@ Note: Enabled can be used in separate from StartupMute NVRAM variable to avoid c
             </item>
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_18">
-              <item>
-               <spacer name="verticalSpacer_55">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnUEFIDrivers_Add">
                 <property name="maximumSize">
@@ -11859,19 +11551,6 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
             </item>
             <item row="0" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_19">
-              <item>
-               <spacer name="verticalSpacer_56">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item>
                <widget class="QToolButton" name="btnUEFIRM_Add">
                 <property name="maximumSize">
