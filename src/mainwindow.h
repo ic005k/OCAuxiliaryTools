@@ -34,7 +34,7 @@
 #include <QUndoView>
 #include <QUuid>
 
-//网络相关头文件
+// 网络相关头文件
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
@@ -989,6 +989,10 @@ class MainWindow : public QMainWindow {
   void on_actionOpenCoreChineseDoc_triggered();
 
   void dataClassChange_uefi_drivers();
+
+  void on_btnUEFIUnload_Add_clicked();
+
+  void on_btnUEFIUnload_Del_clicked();
 
  private:
   bool isDrag;

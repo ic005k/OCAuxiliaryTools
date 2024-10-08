@@ -10311,3 +10311,11 @@ void MainWindow::dataClassChange_uefi_drivers() {
   ui->table_uefi_drivers->item(c_row, 3)->setTextAlignment(Qt::AlignCenter);
   ui->table_uefi_drivers->item(c_row, 3)->setText(cboxDataClass->currentText());
 }
+
+void MainWindow::on_btnUEFIUnload_Add_clicked() {
+  Method::add_OneLine(ui->table_uefi_Unload);
+}
+
+void MainWindow::on_btnUEFIUnload_Del_clicked() {
+  del_item(ui->table_uefi_Unload);
+}
