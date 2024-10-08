@@ -21,7 +21,7 @@ jobs:
         #os: [ubuntu-18.04,ubuntu-20.04]
         # qt_ver: [5.9.9,5.12.10,5.15.2]
         
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
         qt_ver: [5.15.2]
         
         qt_arch: [gcc_64]
