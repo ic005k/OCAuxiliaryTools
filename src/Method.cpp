@@ -669,6 +669,7 @@ void Method::updateOpenCore() {
       QString file = filename;
       QStringList list = file.split("-");
       QString ver;
+
       if (list.count() == 3) {
         ver = list.at(1);
       }
@@ -687,6 +688,7 @@ void Method::updateOpenCore() {
         Reg.setValue("ocVerDev", ver);
         ocVerDev = ver;
       }
+
       mw_one->changeOpenCore(blDEV);
       mw_one->dlgSyncOC->writeCheckStateINI();
       mw_one->dlgSyncOC->init_Sync_OC_Table();

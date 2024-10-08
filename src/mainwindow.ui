@@ -11604,12 +11604,8 @@ Note: The reason this quirk cannot replace the kernel driver is because it canno
             <item>
              <widget class="QTableWidget" name="table_uefi_Unload">
               <property name="columnCount">
-               <number>5</number>
+               <number>1</number>
               </property>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
               <column/>
              </widget>
             </item>
