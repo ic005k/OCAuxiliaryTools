@@ -2155,7 +2155,16 @@ QVariantMap MainWindow::SaveUEFI() {
       Method::get_TableData(ui->table_uefi_ReservedMemory);
 
   // 10. Unload
-  subMap["Unload"] = Method::get_TableData(ui->table_uefi_Unload);
+  QString ver = lblVer->text();
+  ver = ver.replace("OpenCore", "");
+  QStringList list = ver.split("[");
+  if (list.count() > 0) {
+    ver = list.at(0);
+  }
+  ver = ver.trimmed();
+  qDebug() << "ver=" << ver;
+  if (ver > "1.0.1")
+    subMap["Unload"] = Method::get_TableData(ui->table_uefi_Unload);
 
   return subMap;
 }
@@ -2203,9 +2212,9 @@ QByteArray MainWindow::HexStringToByteArray(QString HexString) {
       if (ok) {
         ret.append(c);
       } else {
-        qDebug() << "非法的16进制字符：" << s;
-        QMessageBox::warning(0, tr("错误："),
-                             QString("非法的16进制字符: \"%1\"").arg(s));
+        // qDebug() << "非法的16进制字符：" << s;
+        // QMessageBox::warning(0, tr("错误："),
+        //                      QString("非法的16进制字符: \"%1\"").arg(s));
       }
     }
   }
