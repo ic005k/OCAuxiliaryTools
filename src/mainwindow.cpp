@@ -2163,8 +2163,9 @@ QVariantMap MainWindow::SaveUEFI() {
   }
   ver = ver.trimmed();
   qDebug() << "ver=" << ver;
-  if (ver > "1.0.1")
+  if (isUnload) {
     subMap["Unload"] = Method::get_TableData(ui->table_uefi_Unload);
+  }
 
   return subMap;
 }
@@ -4116,6 +4117,14 @@ void MainWindow::on_table_uefi_ReservedMemory_currentCellChanged(
                      currentRow, currentColumn);
 }
 
+void MainWindow::on_table_uefi_Unload_currentCellChanged(int currentRow,
+                                                         int currentColumn,
+                                                         int previousRow,
+                                                         int previousColumn) {
+  currentCellChanged(ui->table_uefi_Unload, previousRow, previousColumn,
+                     currentRow, currentColumn);
+}
+
 void MainWindow::on_btnHelp() {
   QString qtManulFile = userDataBaseDir + "doc/Configuration.pdf";
   QDesktopServices::openUrl(QUrl::fromLocalFile(qtManulFile));
@@ -4806,6 +4815,12 @@ void MainWindow::on_listMain_itemSelectionChanged() {
     strList.append(tr("ProtocolOverrides"));
     strList.append(tr("Quirks"));
     strList.append(tr("ReservedMemory"));
+
+    if (isUnload) {
+      strList.append(tr("Unload"));
+    } else {
+      strList.removeOne("Unload");
+    }
   }
 
   if (ui->listMain->currentRow() == 8) {
@@ -6729,6 +6744,10 @@ void MainWindow::on_table_uefi_ReservedMemory_cellDoubleClicked(int row,
   set_InitLineEdit(ui->table_uefi_ReservedMemory, row, column);
 }
 
+void MainWindow::on_table_uefi_Unload_cellDoubleClicked(int row, int column) {
+  set_InitLineEdit(ui->table_uefi_Unload, row, column);
+}
+
 void MainWindow::on_table_dp_del_cellDoubleClicked(int row, int column) {
   set_InitLineEdit(ui->table_dp_del, row, column);
 }
@@ -7901,6 +7920,13 @@ void MainWindow::uefi_cellDoubleClicked() {
     row = t->currentRow();
     col = t->currentColumn();
     on_table_uefi_ReservedMemory_cellDoubleClicked(row, col);
+  }
+
+  t = ui->table_uefi_Unload;
+  if (t->hasFocus()) {
+    row = t->currentRow();
+    col = t->currentColumn();
+    on_table_uefi_Unload_cellDoubleClicked(row, col);
   }
 }
 
@@ -9892,6 +9918,8 @@ void MainWindow::on_actionAdd_triggered() {
     ui->btnUEFIDrivers_Add->click();
 
   if (ui->table_uefi_ReservedMemory->hasFocus()) ui->btnUEFIRM_Add->click();
+
+  if (ui->table_uefi_Unload->hasFocus()) ui->btnUEFIUnload_Add->click();
 }
 
 void MainWindow::on_actionDelete_triggered() {
@@ -9931,6 +9959,8 @@ void MainWindow::on_actionDelete_triggered() {
   if (ui->table_uefi_drivers->hasFocus()) ui->btnUEFIDrivers_Del->click();
 
   if (ui->table_uefi_ReservedMemory->hasFocus()) ui->btnUEFIRM_Del->click();
+
+  if (ui->table_uefi_Unload->hasFocus()) ui->btnUEFIUnload_Del->click();
 }
 
 void MainWindow::checkSystemAudioVolume() {
@@ -10245,6 +10275,17 @@ void MainWindow::smart_UpdateKeyField() {
       Method::get_HorizontalHeaderList("UEFI", "ReservedMemory"));
 
   // Unload
+  mapMain.clear();
+  mapSub.clear();
+  mapMain = mapTatol["UEFI"].toMap();
+  if (mapMain.keys().contains("Unload")) {
+    isUnload = true;
+  } else {
+    isUnload = false;
+  }
+  if (ui->listMain->currentRow() == 7) {
+    on_listMain_itemSelectionChanged();
+  }
   Method::init_Table(ui->table_uefi_Unload,
                      Method::get_HorizontalHeaderList("UEFI", "Unload"));
 

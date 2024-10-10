@@ -994,7 +994,15 @@ class MainWindow : public QMainWindow {
 
   void on_btnUEFIUnload_Del_clicked();
 
+  void on_table_uefi_Unload_currentCellChanged(int currentRow,
+                                               int currentColumn,
+                                               int previousRow,
+                                               int previousColumn);
+
+  void on_table_uefi_Unload_cellDoubleClicked(int row, int column);
+
  private:
+  bool isUnload = false;
   bool isDrag;
   QPoint m_position;
   bool LoadRightTable = false;
