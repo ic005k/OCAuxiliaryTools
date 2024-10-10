@@ -47,4 +47,4 @@ CpuTopologyRebuild.kext | https://github.com/b00t0x/CpuTopologyRebuild
 VoodooRMI.kext | https://github.com/VoodooSMBus/VoodooRMI
 VoodooSMBus.kext | https://github.com/VoodooSMBus/VoodooRMI
 YogaSMC.kext | https://github.com/zhen-zen/YogaSMC
-
+USBToolBox.kext | https://github.com/USBToolBox/kext
