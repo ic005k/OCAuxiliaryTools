@@ -38,25 +38,46 @@
             <property name="title">
              <string>The way to get the download link for Kext upgrade</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_5">
-             <item row="0" column="0">
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
               <widget class="QRadioButton" name="rbtnAPI">
                <property name="text">
-                <string>Accessing the GitHub API (There is a limit to the number of visits per hour)</string>
+                <string>Accessing the GitHub API (A limit of 60 visits per hour).</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QRadioButton" name="rbtnToken">
+                 <property name="text">
+                  <string>Access the GitHub API using a Token (A limit of 5000 visits per hour).</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lblToken">
+                 <property name="text">
+                  <string>Your personal access tokens : </string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="editToken"/>
+               </item>
+              </layout>
+             </item>
+             <item>
               <widget class="QRadioButton" name="rbtnWeb">
                <property name="text">
                 <string>Crawl web source code (No limit on the number of visits)</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item>
               <layout class="QHBoxLayout" name="horizontalLayout">
                <item>
                 <widget class="QCheckBox" name="chkProxy">

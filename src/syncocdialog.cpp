@@ -869,7 +869,8 @@ void SyncOCDialog::on_btnGetOC_clicked() {
       QString url = getKextDevDL(bufferJson, "OpenCorePkg");
       mymethod->startDownload(url);
     } else {
-      if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
+      if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked() ||
+          mw_one->myDlgPreference->ui->rbtnToken->isChecked())
         mymethod->getLastReleaseFromUrl(DevSource);
       if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
         mymethod->getLastReleaseFromHtml(DevSource + "/releases");
@@ -878,7 +879,8 @@ void SyncOCDialog::on_btnGetOC_clicked() {
   } else {
     if (ui->comboOCVersions->currentText() == tr("Latest Version")) {
       QString ocUrl = "https://github.com/acidanthera/OpenCorePkg";
-      if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
+      if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked() ||
+          mw_one->myDlgPreference->ui->rbtnToken->isChecked())
         mymethod->getLastReleaseFromUrl(ocUrl);
       if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
         mymethod->getLastReleaseFromHtml(ocUrl + "/releases");

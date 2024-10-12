@@ -151,9 +151,11 @@ class Method : public QMainWindow {
   void replyFinished(QNetworkReply *reply);
 
   void Quit();
-private:
+
+ private:
   QElapsedTimer downloadTimer;
   void cancelDownload();
+  QString errorInfo;
 
  signals:
  private slots:

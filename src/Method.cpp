@@ -31,6 +31,14 @@ Method::Method(QWidget* parent) : QMainWindow(parent) {
   managerDownLoad = new QNetworkAccessManager(this);
   myfile = new QFile(this);
   tempDir = QDir::homePath() + "/tempocat/";
+
+  errorInfo = tr("Possible reasons:") + "\n\n" + tr("1.Network or URL error!") +
+              "\n\n" +
+              tr("2.The Github API is not accessed by token.(A limit of 60 "
+                 "visits per hour). ") +
+              "\n\n" +
+              tr("3.Access the Github API via a token, but the token has a "
+                 "problem (expired or incorrect).");
 }
 
 QStringList Method::getDLUrlList(QString url) {
@@ -146,11 +154,7 @@ QString Method::getHTMLSource(QString URLSTR, bool writeFile) {
   QString code = reply->readAll();
   if (code == "") {
     mw_one->dlgSyncOC->on_btnStop_clicked();
-    QMessageBox::critical(
-        this, "",
-        tr("Network or URL error!") + "\n\n" +
-            tr("Or if the GitHub API has reached the number of accesses per "
-               "hour (typically 60 per hour), please try again later."));
+    QMessageBox::critical(this, "", errorInfo);
 
     return "";
   }
@@ -306,7 +310,8 @@ void Method::kextUpdate() {
             }
             reGetUrl = true;
             if (reGetUrl) {
-              if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
+              if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked() ||
+                  mw_one->myDlgPreference->ui->rbtnToken->isChecked())
                 getLastReleaseFromUrl(test);
               if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
                 getLastReleaseFromHtml(test + "/releases");
@@ -380,7 +385,8 @@ void Method::downloadAllKexts() {
     }
     reGetUrl = true;
     if (reGetUrl) {
-      if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked())
+      if (mw_one->myDlgPreference->ui->rbtnAPI->isChecked() ||
+          mw_one->myDlgPreference->ui->rbtnToken->isChecked())
         getLastReleaseFromUrl(test);
       if (mw_one->myDlgPreference->ui->rbtnWeb->isChecked())
         getLastReleaseFromHtml(test + "/releases");
@@ -760,6 +766,16 @@ void Method::getLastReleaseFromUrl(QString strUrl) {
   QNetworkRequest quest;
   quest.setUrl(QUrl(strAPI));
   quest.setHeader(QNetworkRequest::UserAgentHeader, "RT-Thread ART");
+
+  if (mw_one->myDlgPreference->ui->rbtnToken->isChecked()) {
+    QString strToken = mw_one->myDlgPreference->ui->editToken->text().trimmed();
+    if (strToken != "") {
+      quest.setRawHeader("Authorization",
+                         QString("token %1").arg(strToken).toUtf8());
+      qDebug() << "strAPI=" << strAPI;
+    }
+  }
+
   manager->get(quest);
 }
 
@@ -775,11 +791,7 @@ void Method::parse_UpdateJSON(QString str) {
 
   if (err_rpt.error != QJsonParseError::NoError) {
     mw_one->dlgSyncOC->on_btnStop_clicked();
-    QMessageBox::critical(
-        this, "",
-        tr("Network or URL error!") + "\n\n" +
-            tr("Or if the GitHub API has reached the number of accesses per "
-               "hour (typically 60 per hour), please try again later."));
+    QMessageBox::critical(this, "", errorInfo);
 
     return;
   }
@@ -827,11 +839,7 @@ void Method::parse_UpdateJSON(QString str) {
   qDebug() << strDLInfoList.at(0) << strDLInfoList.at(1);
   if (strDLUrl == "") {
     mw_one->dlgSyncOC->on_btnStop_clicked();
-    QMessageBox::critical(
-        this, "",
-        tr("Network or URL error!") + "\n\n" +
-            tr("Or if the GitHub API has reached the number of accesses per "
-               "hour (typically 60 per hour), please try again later."));
+    QMessageBox::critical(this, "", errorInfo);
 
     return;
   }
