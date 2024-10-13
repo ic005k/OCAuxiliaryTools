@@ -134,8 +134,8 @@ void dlgPreference::saveKextUrl() {
 void dlgPreference::refreshKextUrl(bool writeTable) {
   isRefresh = true;
   // strAppExePath app exe path
-  // mw_one->strConfigPath .ocat path
-  QString file = mw_one->strConfigPath + "/Database/preset/KextUrl.txt";
+  // mw_one->strConfigPath .config path
+  QString file = strAppExePath + "/Database/preset/KextUrl.txt";
   ui->textEdit->clear();
   ui->textEdit->setPlainText(mymethod->loadText(file));
   QTextEdit *txtEdit = new QTextEdit;

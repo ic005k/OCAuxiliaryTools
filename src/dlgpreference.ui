@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>767</width>
-    <height>544</height>
+    <height>575</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -370,21 +370,27 @@
        <string>Kext Upgrade URL</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="3" column="0">
-        <widget class="QToolButton" name="btnAdd">
+       <item row="3" column="6">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>458</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="3">
+        <widget class="QToolButton" name="btnDownloadKexts">
          <property name="text">
-          <string>+</string>
+          <string>Download Kexts to the user database</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="4">
-        <widget class="QToolButton" name="btnStop">
-         <property name="text">
-          <string>Stop</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="6">
+       <item row="0" column="0" colspan="7">
         <widget class="QTextEdit" name="textEdit">
          <property name="frameShape">
           <enum>QFrame::Shape::NoFrame</enum>
@@ -401,20 +407,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
          </property>
         </widget>
        </item>
-       <item row="3" column="5">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
+       <item row="3" column="2">
+        <widget class="QToolButton" name="btnOpenUrl">
+         <property name="text">
+          <string>Open URL in browser</string>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>458</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
+        </widget>
        </item>
-       <item row="2" column="0" colspan="6">
+       <item row="2" column="0" colspan="7">
         <widget class="QTableWidget" name="tableKextUrl">
          <property name="frameShape">
           <enum>QFrame::Shape::NoFrame</enum>
@@ -434,10 +434,13 @@ li.checked::marker { content: &quot;\2612&quot;; }
          </column>
         </widget>
        </item>
-       <item row="3" column="2">
-        <widget class="QToolButton" name="btnOpenUrl">
-         <property name="text">
-          <string>Open URL in browser</string>
+       <item row="1" column="0" colspan="7">
+        <widget class="QLineEdit" name="myeditFind">
+         <property name="placeholderText">
+          <string>Find</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -448,20 +451,24 @@ li.checked::marker { content: &quot;\2612&quot;; }
          </property>
         </widget>
        </item>
-       <item row="3" column="3">
-        <widget class="QToolButton" name="btnDownloadKexts">
+       <item row="3" column="0">
+        <widget class="QToolButton" name="btnAdd">
          <property name="text">
-          <string>Download Kexts to the user database</string>
+          <string>+</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0" colspan="6">
-        <widget class="QLineEdit" name="myeditFind">
-         <property name="placeholderText">
-          <string>Find</string>
+       <item row="3" column="4">
+        <widget class="QToolButton" name="btnStop">
+         <property name="text">
+          <string>Stop</string>
          </property>
-         <property name="clearButtonEnabled">
-          <bool>true</bool>
+        </widget>
+       </item>
+       <item row="3" column="5">
+        <widget class="QLabel" name="lblPath">
+         <property name="text">
+          <string>~\.config\OCAuxiliaryTools\KextUrl.txt</string>
          </property>
         </widget>
        </item>
