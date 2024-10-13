@@ -390,3 +390,10 @@ void dlgPreference::on_myeditFind_returnPressed() {
   find(ui->myeditFind->text().trimmed());
   ui->myeditFind->selectAll();
 }
+
+void dlgPreference::on_btnTokenHelp_clicked() {
+  QUrl url_en(QString(
+      "https://www.howtogeek.com/devops/"
+      "how-to-set-up-https-personal-access-tokens-for-github-authentication/"));
+  QDesktopServices::openUrl(url_en);
+}

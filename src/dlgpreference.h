@@ -65,6 +65,7 @@ class dlgPreference : public QDialog {
   void on_tableKextUrl_itemChanged(QTableWidgetItem *item);
   void on_myeditFind_returnPressed();
   void on_rbtnToken_clicked();
+  void on_btnTokenHelp_clicked();
 };
 
 #endif  // DLGPREFERENCE_H
