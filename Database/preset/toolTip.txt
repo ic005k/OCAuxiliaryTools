@@ -76,6 +76,7 @@ Note 2 : This option will not protect areas from being overwritten at firmware s
 注1：该选项不会保护其他区域被覆盖，如果需要，请看RTCMemoryFixup内核扩展。
 注2 : 该选项不会保护在固件阶段(如macOS bootloader)被覆盖的区域，如果需要，请看AppleRtcRam协议描述。
 
+
 ***ExtendBTFeatureFlags
 Type: plist boolean
 Failsafe: false
@@ -93,6 +94,7 @@ Note: This option is a substitution for BT4LEContinuityFixup.kext, which does no
 	
 注意: 这个选项是BT4LEContinuityFixup.kext的替代品，由于补丁进度较晚，它不能正常工作。
 
+
 ***ExternalDiskIcons
 Type: plist boolean
 Failsafe: false
@@ -109,6 +111,7 @@ Note: This option should be avoided whenever possible. Modern firmware typically
 描述：对AppleAHCIPort.kext应用图标类型补丁，强制所有AHCI磁盘的图标显示为内部磁盘图标。一般用在macos把内部硬盘识别为外置硬盘时。
 
 注意：应该尽可能避免使用这个选项。主流的硬件对AHCI支持都很好。
+
 
 ***ForceSecureBootScheme
 Type: plist boolean
@@ -184,6 +187,7 @@ Note: Required to allow virtualization in Windows on some Mac hardware. VMX is e
 失败保护：false
 描述：启用英特尔虚拟机扩展。
 注意：需要在某些Mac硬件上允许在Windows中进行虚拟化。在大多数固件的OpenCore启动之前，VMX被BIOS启用或禁用并锁定。在可能的情况下使用BIOS来启用虚拟化。
+
 
 ***AudioOutMask
 Type: plist integer
@@ -432,5 +436,109 @@ This option will override serial port properties listed in the Serial Custom Pro
 类型：plist布尔值
 失败保护： false
 描述：覆盖串行端口属性。当这个选项被设置为false时，自定义的任何键都不会被覆盖。一般人用不上，保持默认就好。
-这个选项将覆盖串行自定义属性部分中列出的串行端口属性。
+这个选项将覆盖串行自定义属性部分中列出的串行端口属性.
+
+
+
+
+***ResizeUsePciRbIo
+Type: plist boolean
+Failsafe: false
+It makes ResizeGpuBars and ResizeAppleGpuBars use PciRootBridgeIo instead of PciIo to avoid errors on older systems which use ReBarUefi by xCuri0 to configure Resizable BAR. If you don't use ReBarUefi or enabling Resizable BAR works fine, keep it False.
+
+
+***ShimRetainProtocol
+Type: plist boolean
+Failsafe: false
+Added Allowing OpenCore chained from shim to verify Linux using shim's certificates. It requests Linux shim to keep protocol installed for subsequent image loads. This option is only required if chaining OpenCore from shim. It must be set in order to allow OpenCore to launch items which are verified by certificates present in shim, but not in the system Secure Boot database.
+
+
+***PciIo
+Type: plist boolean
+Failsafe: false
+Fix Above 4G in BIOS of Aptio IV firmwares.
+
+
+***FixupAppleEfiImages
+Type: plist boolean
+Failsafe: false
+Fix errors in boot.efi images of early Mac OS X (10.4 and 10.5). The quirk is never applied during the Apple secure boot path for newer macOS and is only needed for loading Mac OS X 10.4 and 10.5, and even then only if the firmware itself includes a modern image loader as current builds of OpenDuet.
+
+
+***CustomPciSerialDevice
+Type: plist boolean
+Failsafe: false
+For XNU to correctly recognise customised external PCI serial devices. By default, serial logging is disabled. For this patch to be correctly applied, the new option Misc >> Serial >> Override must be enabled with all keys properly set in the optional Misc >> Serial >> Custom dictionary. Default is False.
+
+
+***ForceAquantiaEthernet
+Type: plist boolean
+Failsafe: false
+Enables Aquantia AQtion based 10GbE network cards support, which used to work natively before macOS 10.15.4. Note: When this option is enabled, DisableIoMapper must be disabled and VT-d must be enabled in BIOS.
+
+
+***InstanceIdentifier
+Type: plist boolean
+Failsafe: Empty
+Identify OC instance; added the ability to target .contentVisibility files to specific OC instances. Most of us are not going to use this new feature.
+
+
+***GopBurstMode
+Type: plist boolean
+Failsafe: false
+For faster GOP operation on older firmwares (e.g. EFI-era Macs).
+
+
+***InitialMode
+Type: plist boolean
+Failsafe: Auto
+Selects the internal ConsoleControl mode in which TextRenderer will operate. Available values are Auto, Text and Graphics. 
+Text and Graphics specify the named mode.
+Auto uses the current mode of the system ConsoleControl protocol when one exists, defaulting to Text mode otherwise.
+
+
+***ConsoleFont
+Type: plist boolean
+Failsafe: Empty
+Load custom console font for OpenCore Builtin text renderer. Failsafe value is Empty (use OpenCore builtin console font). The font file must be located in \FI/OC/Resources/Font/font-name.hex and must be 8x16 resolution. There is often no need to change console font, the main use-case being to provide an extended character set for those relatively rare EFI applications which have multi-lingual support (e.g. memtest86). OCBinaryData repository includes Terminus and TerminusCore fonts.
+
+
+***DisableIoMapperMapping
+Type: plist boolean
+Failsafe: false
+Requirement: 13.3+
+Fix WiFi, Thunderbolt and Ethernet issues on systems where the following conditions are present (all must be true):
+- Apple VTD is enabled (VT-d enabled in BIOS):
+- One or more Reserved Memory Regions exist in System DMAR
+- More than 16GB memory installed.
+On some systems, this quirk is only needed when iGPU is enabled.
+On Comet Lake and older Intel Core processors, this quirk is needed when all of the above conditions are true. Motherboards such as Asus Z690 and Z790 do not have Reserved Memory Regions and the iGPU on these processors is not compatible with macOS, so the are not affected by the issue. But many Z370, Z390, Z490... boards are affected.
+Not needed on AMD systems.
+
+
+***HibernateSkipsPicker
+Type: plist boolean
+Failsafe: false
+Not to show picker if waking from macOS hibernation.
+
+
+***AllowRelocationBlock
+Type: plist boolean
+Failsafe: false
+(support for 32-bit OpenCore): this quirk is needed to boot macOS 10.6 and older with 32-bit kernel in 32-bit OVMF. Hibernation wake is not compatible with this quirk.
+
+
+***FixupAppleEfiImages
+Type: plist boolean
+Failsafe: false
+Note : Mac OS X boot.efi images contain WˆX permissions errors (in all versions) and in very old versions additionally contain illegal overlapping sections (affects 10.4 and 10.5 32-bit versions only). Modern, strict PE loaders will refuse to load these images unless additional mitigations are applied. Image loaders which enforce these stricter rules include the loader provided with current versions of OpenDuet, the loader in OVMF if compiled from Acidanthera and possibly the image loaders of some very recent 3rd party firmware (e.g. Microsoft).
+This quirk detects these issues and pre-processes such images in memory so that a strict loader will accept them. On a system with such a modern, stricter loader this quirk is required to load Mac OS X 10.4 to macOS 10.12, and is required for all newer macOS when SecureBootModel is set to Disabled because pre-processing in memory is incompatible with UEFI Secure Boot, as the image loaded is not the image on disk, so you cannot sign files which are loaded in this way based on their original disk image contents.
+This quirk is never applied during Apple Secure Boot for newer macOS. The Apple Secure Boot path in OpenCore includes its own separate mitigations for boot.efi WˆX issues.
+
+
+***ClearTaskSwitchBit
+Type: plist boolean
+Failsafe: false
+Fix crashes when using 32-bit versions of macOS on Hyper-V Gen2 VMs.
+
 	
