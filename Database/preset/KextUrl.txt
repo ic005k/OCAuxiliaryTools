@@ -14,7 +14,7 @@ RTCMemoryFixup.kext | https://github.com/acidanthera/RTCMemoryFixup
 MacHyperVSupport.kext | https://github.com/acidanthera/MacHyperVSupport
 NVMeFix.kext | https://github.com/acidanthera/NVMeFix
 RealtekCardReader.kext | https://github.com/0xFireWolf/RealtekCardReader
-RealtekCardReaderFriend.kext | https://github.com/0xFireWolf/RealtekCardReaderFriend
+RealtekCardReaderFriend.kext | https://github.com/Baio1977/RealtekCardReaderFriend
 ECEnabler.kext | https://github.com/1Revenger1/ECEnabler
 RealtekRTL8111.kext | https://github.com/Mieze/RTL8111_driver_for_OS_X
 CPUFriend.kext | https://github.com/acidanthera/CPUFriend
@@ -39,7 +39,7 @@ IntelBTPatcher.kext | https://github.com/OpenIntelWireless/IntelBluetoothFirmwar
 AirportItlwm.kext | https://github.com/OpenIntelWireless/itlwm
 HoRNDIS9.2.kext | https://github.com/w19996/HoRNDIS
 EFICheckDisabler.kext | https://github.com/w19996/EFICheckDisabler
-GenericCardReaderFriend.kext | https://github.com/0xFireWolf/GenericCardReaderFriend
+GenericCardReaderFriend.kext | https://github.com/Baio1977/GenericCardReaderFriend
 BlueToolFixup.kext | https://github.com/acidanthera/BrcmPatchRAM
 CryptexFixup.kext | https://github.com/acidanthera/CryptexFixup
 EmeraldSDHC.kext | https://github.com/acidanthera/EmeraldSDHC
@@ -48,3 +48,4 @@ VoodooRMI.kext | https://github.com/VoodooSMBus/VoodooRMI
 VoodooSMBus.kext | https://github.com/VoodooSMBus/VoodooRMI
 YogaSMC.kext | https://github.com/zhen-zen/YogaSMC
 USBToolBox.kext | https://github.com/USBToolBox/kext
+Polaris22Fixup.kext | https://github.com/Baio1977/Polaris22Fixup
