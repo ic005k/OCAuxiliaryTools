@@ -16,7 +16,7 @@ jobs:
     name: Build
     # 运行平台， windows-latest目前是windows server 2019 
     # 参考文档 https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
-    runs-on: windows-2019
+    runs-on: windows-2022
     strategy:
       # 矩阵配置
       matrix:
@@ -52,12 +52,19 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
+
+      # 动态获取VS路径
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.msvc_arch }}
+
       # msvc编译
       - name: msvc-build
         id: build
         shell: cmd
         run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+          #call "C:\Program Files (x86)\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake
           nmake
           echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
