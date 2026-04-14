@@ -19,7 +19,7 @@ jobs:
       matrix:
         os: [macos-latest]
         # qt_ver: [5.9.9,5.12.10,5.15.2]
-        qt_ver: [5.15.2]
+        qt_ver: [5.15.19]
         #qt_ver: [6.0.0]
         qt_arch: [clang_64]
 
