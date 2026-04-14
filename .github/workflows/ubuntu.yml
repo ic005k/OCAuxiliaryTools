@@ -105,3 +105,16 @@ jobs:
 
           tag: ${{ github.ref }}
           overwrite: true
+
+      - name: uploadPrerelease
+        if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'workflow_dispatch'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+
+          file: ${{ env.targetName }}-${{ env.VERSION }}-x86_64.AppImage
+          asset_name: ${{ env.orgName }}-${{ env.VERSION }}-x86_64.AppImage
+
+          tag: prerelease
+          prerelease: true
+          overwrite: true
