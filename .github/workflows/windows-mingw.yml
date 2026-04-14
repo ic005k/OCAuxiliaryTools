@@ -34,13 +34,13 @@ jobs:
 
     steps:
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           version: ${{ matrix.qt_ver }}
           arch: ${{ matrix.qt_arch }}
           tools: ${{ matrix.qt_tools }}
           cached: "false"
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 1
       - name: Qt 5 environment configuration
@@ -79,17 +79,17 @@ jobs:
            $name = ${env:archiveName}
            echo "::set-output name=packageName::$name"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.package.outputs.packageName }}
           path: ${{ steps.package.outputs.packageName }}.zip
 
-      #- name: uploadRelease
-      #  if: startsWith(github.event.ref, 'refs/tags/')
-      #  uses: svenstaro/upload-release-action@v2
-      #  with:
-      #    repo_token: ${{ secrets.GITHUB_TOKEN }}
-      #    file: ${{ steps.package.outputs.packageName }}.zip
-      #    asset_name: ${{ steps.package.outputs.packageName }}.zip
-      #    tag: ${{ github.ref }}
-      #    overwrite: true
+      - name: uploadRelease
+        if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ steps.package.outputs.packageName }}.zip
+          asset_name: ${{ steps.package.outputs.packageName }}.zip
+          tag: ${{ github.ref }}
+          overwrite: true
