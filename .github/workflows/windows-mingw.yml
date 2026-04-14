@@ -47,14 +47,14 @@ jobs:
         if: ${{ startsWith( matrix.qt_ver, 5 ) }}
         shell: pwsh
         run: |
-          Write-Output "${{ env.Qt5_DIR }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          Write-Output "${{ env.Qt5_DIR }}/../../Tools/${{ matrix.qt_tools_mingw_install }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          Write-Output "$env:Qt5_DIR/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          Write-Output "$env:Qt5_DIR/../../Tools/${{ matrix.qt_tools_mingw_install }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       - name: Qt 6 environment configuration
         if: ${{ startsWith( matrix.qt_ver, 6 ) }}
         shell: pwsh
         run: |
-          Write-Output "${{ env.Qt6_DIR }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          Write-Output "${{ env.Qt6_DIR }}/../../Tools/${{ matrix.qt_tools_mingw_install }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          Write-Output "$env:Qt6_DIR/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          Write-Output "$env:Qt6_DIR/../../Tools/${{ matrix.qt_tools_mingw_install }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       - name: where is qmake & where is mingw32-make
         shell: pwsh
         run: |
@@ -71,7 +71,7 @@ jobs:
         id: package
         env:
           #archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
-          archiveName: ${{ env.orgName }}-${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
+          archiveName: ${{ env.orgName }}-${{ matrix.qt_ver }}-${{ matrix.qt_arch }}
 
         shell: pwsh
         run: |
