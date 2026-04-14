@@ -11,6 +11,11 @@ on:
       - "*.pro"
       - "**"
       - ".github/workflows/macos.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: false
+
 jobs:
   build:
     name: Build
