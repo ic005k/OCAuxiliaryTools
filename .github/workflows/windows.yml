@@ -15,8 +15,7 @@ on:
 jobs:
   build:
     name: Build
-    # 运行平台， windows-latest目前是windows server 2019
-    # 参考文档 https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
+    # 运行平台，使用 GitHub Actions 提供的最新 Windows runner 镜像
     runs-on: windows-latest
     strategy:
       # 矩阵配置
@@ -82,7 +81,7 @@ jobs:
           & scripts\windows-publish.ps1 ${env:archiveName} ${env:targetName}
           # 记录packageName给后续step
            $name = ${env:archiveName}
-           echo "::set-output name=packageName::$name"
+           "packageName=$name" >> $env:GITHUB_OUTPUT
       # tag 查询github-Release
       # 上传artifacts
       - uses: actions/upload-artifact@v7
