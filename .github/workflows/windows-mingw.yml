@@ -1,19 +1,20 @@
 name: Windows MinGW
-on: 
+on:
+  workflow_dispatch:
   push:
     paths:
-      - '*.pro'
-      - '**'
-      - '.github/workflows/windows-mingw.yml'
+      - "*.pro"
+      - "**"
+      - ".github/workflows/windows-mingw.yml"
   pull_request:
     paths:
-      - '*.pro'
-      - '**'
-      - '.github/workflows/windows-mingw.yml' 
+      - "*.pro"
+      - "**"
+      - ".github/workflows/windows-mingw.yml"
 jobs:
   build:
     name: Build
-    runs-on: windows-2019
+    runs-on: windows-latest
     strategy:
       matrix:
         include:
@@ -21,16 +22,16 @@ jobs:
           #  qt_ver: 5.15.2
           #  qt_tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win32_mingw810"
           #  qt_tools_mingw_install: mingw810_32
-            
+
           - qt_arch: win64_mingw81
             qt_ver: 5.15.2
             qt_tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win64_mingw810"
             qt_tools_mingw_install: mingw810_64
-          
+
     env:
       targetName: OCAuxiliaryTools.exe
       orgName: OCAT
-      
+
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
@@ -38,7 +39,7 @@ jobs:
           version: ${{ matrix.qt_ver }}
           arch: ${{ matrix.qt_arch }}
           tools: ${{ matrix.qt_tools }}
-          cached: 'false'
+          cached: "false"
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
@@ -65,25 +66,24 @@ jobs:
         run: |
           qmake
           mingw32-make
-          
-           
+
       - name: package
-        id: package      
+        id: package
         env:
           #archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
           archiveName: ${{ env.orgName }}-${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
-          
+
         shell: pwsh
         run: |
           & scripts\windows-mingw-publish.ps1 ${env:archiveName} ${env:targetName}
            $name = ${env:archiveName}
-           echo "::set-output name=packageName::$name"       
-           
+           echo "::set-output name=packageName::$name"
+
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ steps.package.outputs.packageName }}
           path: ${{ steps.package.outputs.packageName }}.zip
-          
+
       #- name: uploadRelease
       #  if: startsWith(github.event.ref, 'refs/tags/')
       #  uses: svenstaro/upload-release-action@v2
@@ -92,4 +92,4 @@ jobs:
       #    file: ${{ steps.package.outputs.packageName }}.zip
       #    asset_name: ${{ steps.package.outputs.packageName }}.zip
       #    tag: ${{ github.ref }}
-      #    overwrite: true 
+      #    overwrite: true
