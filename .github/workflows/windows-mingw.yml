@@ -77,7 +77,7 @@ jobs:
         run: |
           & scripts\windows-mingw-publish.ps1 ${env:archiveName} ${env:targetName}
            $name = ${env:archiveName}
-           echo "::set-output name=packageName::$name"
+           "packageName=$name" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
       - uses: actions/upload-artifact@v7
         with:
