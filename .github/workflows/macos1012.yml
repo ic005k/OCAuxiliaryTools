@@ -26,7 +26,7 @@ jobs:
 
     env:
       targetName: OCAuxiliaryTools
-      VERSION: Mac1012_and_below
+      VERSION: Mac10.12_and_below
       orgName: OCAT
 
     steps:

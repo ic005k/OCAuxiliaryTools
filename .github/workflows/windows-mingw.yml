@@ -72,7 +72,7 @@ jobs:
         id: package
         env:
           #archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
-          archiveName: ${{ env.orgName }}-${{ matrix.qt_ver }}-${{ matrix.qt_arch }}
+          archiveName: ${{ env.orgName }}-${{ matrix.qt_arch }}
 
         shell: pwsh
         run: |
