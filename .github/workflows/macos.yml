@@ -1,6 +1,5 @@
 name: MacOS
 on:
-  workflow_dispatch:
   push:
     paths:
       - "*.pro"
@@ -11,6 +10,7 @@ on:
       - "*.pro"
       - "**"
       - ".github/workflows/macos.yml"
+  workflow_dispatch:
 
 jobs:
   build:

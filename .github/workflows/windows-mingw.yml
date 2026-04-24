@@ -1,6 +1,5 @@
 name: Windows MinGW
 on:
-  workflow_dispatch:
   push:
     paths:
       - "*.pro"
@@ -11,6 +10,7 @@ on:
       - "*.pro"
       - "**"
       - ".github/workflows/windows-mingw.yml"
+  workflow_dispatch:
 
 jobs:
   build:

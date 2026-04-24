@@ -2,7 +2,6 @@ name: Linux
 
 # Qt官方没有linux平台的x86包
 on:
-  workflow_dispatch:
   push:
     paths:
       - "*.pro"
@@ -13,6 +12,7 @@ on:
       - "*.pro"
       - "**"
       - ".github/workflows/ubuntu.yml"
+  workflow_dispatch:
 
 jobs:
   build:
