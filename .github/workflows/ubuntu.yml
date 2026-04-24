@@ -117,5 +117,6 @@ jobs:
           asset_name: ${{ env.orgName }}-${{ env.VERSION }}-x86_64.AppImage
 
           tag: prerelease
+          release_name: Pre-release
           prerelease: true
           overwrite: true

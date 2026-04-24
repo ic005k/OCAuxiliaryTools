@@ -107,5 +107,6 @@ jobs:
 
           asset_name: ${{ env.orgName }}_${{ env.VERSION }}.dmg
           tag: prerelease
+          release_name: Pre-release
           prerelease: true
           overwrite: true

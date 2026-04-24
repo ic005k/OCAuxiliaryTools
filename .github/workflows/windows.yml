@@ -109,5 +109,6 @@ jobs:
           file: ${{ steps.package.outputs.packageName }}.zip
           asset_name: ${{ steps.package.outputs.packageName }}.zip
           tag: prerelease
+          release_name: Pre-release
           prerelease: true
           overwrite: true
